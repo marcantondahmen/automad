@@ -32,16 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { create } from '../../core';
+import { create, FormDataProviders } from '../../core';
 import { KeyValueMap } from '../../types';
-import { FieldComponent } from './Field';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * A block editor field.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-class EditorComponent extends FieldComponent {
+class EditorComponent extends BaseFieldComponent {
 	/**
 	 * The editor value that serves a input value for the parent form.
 	 */
@@ -64,4 +64,5 @@ class EditorComponent extends FieldComponent {
 	}
 }
 
+FormDataProviders.add('am-editor');
 customElements.define('am-editor', EditorComponent);

@@ -76,7 +76,7 @@ const createLabel = (key: string): string => {
  *
  * @extends BaseComponent
  */
-export class FieldComponent extends BaseComponent {
+export abstract class BaseFieldComponent extends BaseComponent {
 	/**
 	 * If true the field data is sanitized.
 	 */
@@ -92,13 +92,6 @@ export class FieldComponent extends BaseComponent {
 	 */
 	get input(): InputElement {
 		return query('[name]', this) as InputElement;
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.classList.add(classes.field);
 	}
 
 	/**
@@ -133,7 +126,23 @@ export class FieldComponent extends BaseComponent {
 			placeholder,
 		};
 
-		this.init();
+		this.create();
+	}
+
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		this.classList.add(classes.field);
+	}
+
+	/**
+	 * Render field when data is set.
+	 */
+	protected create(): void {
+		this.createLabel();
+		this.createInput();
+		this.applyAttributes();
 	}
 
 	/**
@@ -153,24 +162,7 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Create an input field.
 	 */
-	protected createInput(): void {
-		const { name, id, value, placeholder } = this._data;
-		create(
-			'input',
-			[classes.input],
-			{ id, name, value, type: 'text', placeholder },
-			this
-		);
-	}
-
-	/**
-	 * Render the field.
-	 */
-	protected init(): void {
-		this.createLabel();
-		this.createInput();
-		this.applyAttributes();
-	}
+	protected abstract createInput(): void;
 
 	/**
 	 * Apply field attributes to actual input elements.
@@ -193,5 +185,3 @@ export class FieldComponent extends BaseComponent {
 		});
 	}
 }
-
-customElements.define('am-field', FieldComponent);

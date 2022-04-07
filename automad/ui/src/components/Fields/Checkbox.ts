@@ -33,14 +33,14 @@
  */
 
 import { classes, create, html } from '../../core';
-import { FieldComponent } from './Field';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * A checkbox field.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-export class CheckboxComponent extends FieldComponent {
+export class CheckboxComponent extends BaseFieldComponent {
 	/**
 	 * Checkbox styles.
 	 */

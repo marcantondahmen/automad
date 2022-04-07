@@ -33,14 +33,14 @@
  */
 
 import { classes, create } from '../../core';
-import { FieldComponent } from './Field';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * A date field.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-class DateComponent extends FieldComponent {
+class DateComponent extends BaseFieldComponent {
 	/**
 	 * Create an input field.
 	 */

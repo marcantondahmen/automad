@@ -35,14 +35,14 @@
 import Tagify from '@yaireo/tagify';
 import { App, classes, create } from '../../core';
 import { PageDataComponent } from '../Forms/PageData';
-import { FieldComponent } from './Field';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * A tags input field.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-class PageTagsComponent extends FieldComponent {
+class PageTagsComponent extends BaseFieldComponent {
 	/**
 	 * Create the input field.
 	 *

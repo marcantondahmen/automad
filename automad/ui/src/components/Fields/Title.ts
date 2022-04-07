@@ -33,14 +33,14 @@
  */
 
 import { classes, create } from '../../core';
-import { FieldComponent } from './Field';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * An URL field.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-class TitleComponent extends FieldComponent {
+class TitleComponent extends BaseFieldComponent {
 	/**
 	 * Render the field.
 	 */

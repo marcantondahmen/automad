@@ -36,23 +36,23 @@ import { classes, create } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
- * A color field.
+ * A standard input field with a label.
  *
  * @extends BaseFieldComponent
  */
-class ColorComponent extends BaseFieldComponent {
+export class InputComponent extends BaseFieldComponent {
 	/**
 	 * Create an input field.
 	 */
-	createInput(): void {
-		const { name, id, value } = this._data;
+	protected createInput(): void {
+		const { name, id, value, placeholder } = this._data;
 		create(
 			'input',
 			[classes.input],
-			{ id, name, value, type: 'color' },
+			{ id, name, value, type: 'text', placeholder },
 			this
 		);
 	}
 }
 
-customElements.define('am-color', ColorComponent);
+customElements.define('am-input', InputComponent);

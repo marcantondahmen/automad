@@ -32,13 +32,27 @@
  * Licensed under the MIT license.
  */
 
-import { FieldComponent } from './Field';
+import { classes, create } from '../../core';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * An image field.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-class ImageComponent extends FieldComponent {}
+class ImageComponent extends BaseFieldComponent {
+	/**
+	 * Create an input field.
+	 */
+	protected createInput(): void {
+		const { name, id, value, placeholder } = this._data;
+		create(
+			'input',
+			[classes.input],
+			{ id, name, value, type: 'text', placeholder },
+			this
+		);
+	}
+}
 
 customElements.define('am-image', ImageComponent);

@@ -126,7 +126,7 @@ const themeStatus = ({
  * Create a set of options for the a optgroup.
  *
  * @param templates - the templates array
- * @param section - the section element
+ * @param element - the section element
  * @param value - the currently used template
  * @param [themeName] - the optional theme name for the current group
  * @param [themePath] - the optional theme path
@@ -153,18 +153,25 @@ const createOptions = (
 /**
  * Create a template select element.
  *
- * @param mainTheme
  * @param selectedTemplate
  * @returns the rendered element
  */
-export const createTemplateSelect = (
-	selectedTemplate: string
-): HTMLSelectElement => {
+export const createTemplateSelect = (selectedTemplate: string): HTMLElement => {
 	const mainTheme = App.themes[App.mainTheme];
 	const themes = App.themes;
-	const select = create('select', [classes.select], {
-		name: 'theme_template',
-	});
+	const wrapper = create('am-select', [classes.button, classes.flex], {});
+
+	create('span', [], {}, wrapper);
+
+	const select = create(
+		'select',
+		[],
+		{
+			name: 'theme_template',
+		},
+		wrapper
+	);
+
 	const mainGroup = create('optgroup', [], { label: '*' }, select);
 
 	createOptions(mainTheme.templates, mainGroup, selectedTemplate);
@@ -181,7 +188,7 @@ export const createTemplateSelect = (
 		);
 	});
 
-	return select;
+	return wrapper;
 };
 
 /**
@@ -232,7 +239,6 @@ export class PageTemplateComponent extends BaseComponent {
 			{ id: 'am-page-template-modal' },
 			this
 		);
-		const select = createTemplateSelect(selectedTemplate);
 
 		button.innerHTML = html`
 			<label class="${classes.fieldLabel}"
@@ -259,7 +265,7 @@ export class PageTemplateComponent extends BaseComponent {
 						class="${classes.modalClose}"
 					></am-modal-close>
 				</div>
-				${select.outerHTML}
+				${createTemplateSelect(selectedTemplate).outerHTML}
 				<div class="${classes.modalFooter}">
 					<am-modal-close class="${classes.button}">
 						${App.text('close')}

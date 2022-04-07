@@ -33,14 +33,14 @@
  */
 
 import { App, classes, create, html, listen, query } from '../../core';
-import { FieldComponent } from './Field';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * A checkbox field that can have a default global value.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-class CheckboxSelectComponent extends FieldComponent {
+class CheckboxSelectComponent extends BaseFieldComponent {
 	/**
 	 * Render the input field.
 	 */

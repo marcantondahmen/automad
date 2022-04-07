@@ -33,14 +33,14 @@
  */
 
 import { classes, create } from '../../core';
-import { FieldComponent } from './Field';
+import { BaseFieldComponent } from './BaseField';
 
 /**
  * A multiline text field.
  *
- * @extends FieldComponent
+ * @extends BaseFieldComponent
  */
-class TextareaComponent extends FieldComponent {
+class TextareaComponent extends BaseFieldComponent {
 	/**
 	 * Create an input field.
 	 */

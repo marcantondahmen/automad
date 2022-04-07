@@ -38,7 +38,7 @@ import { CheckboxComponent } from './Checkbox';
 /**
  * A large checkbox field.
  *
- * @extends FieldComponent
+ * @extends CheckboxComponent
  */
 class CheckboxLargeComponent extends CheckboxComponent {
 	/**
