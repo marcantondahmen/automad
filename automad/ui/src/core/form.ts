@@ -34,11 +34,40 @@
 
 import { query, queryAll } from '.';
 import { InputElement, KeyValueMap } from '../types';
+import { html } from './utils';
 
 /**
- * The array of valied field selectors that are used to collect the form data.
+ * A class to register elements to be used to generate form data.
  */
-const formDataControls: string[] = ['input', 'textarea', 'select', 'am-editor'];
+export class FormDataProviders {
+	/**
+	 * The list of controls that generate form data.
+	 *
+	 * @static
+	 */
+	private static _controls: string[] = ['input', 'textarea', 'select'];
+
+	/**
+	 * Get the registered controls as selector.
+	 *
+	 * @static
+	 */
+	static get selector() {
+		return this._controls.join(', ');
+	}
+
+	/**
+	 * Add a new type of form control to the list of controls that generate form data.
+	 *
+	 * @param name
+	 * @static
+	 */
+	static add(name: string): void {
+		if (!this._controls.includes('name')) {
+			this._controls.push(name);
+		}
+	}
+}
 
 /**
  * Collect all the form data to be submitted. Note that excludes all values of unchecked checkboxes and radios.
@@ -49,14 +78,20 @@ const formDataControls: string[] = ['input', 'textarea', 'select', 'am-editor'];
 export const getFormData = (container: HTMLElement): KeyValueMap => {
 	const data: KeyValueMap = {};
 
-	queryAll(formDataControls.join(','), container).filter(
+	queryAll(FormDataProviders.selector, container).filter(
 		(input: HTMLInputElement) => {
 			const type = input.getAttribute('type');
 			const name = input.getAttribute('name');
 			const isCheckbox = ['checkbox', 'radio'].includes(type);
 
 			if ((!isCheckbox || input.checked) && name) {
-				data[name] = input.value.trim();
+				let value = input.value;
+
+				if (typeof value == 'string') {
+					value = value.trim();
+				}
+
+				data[name] = value;
 			}
 		}
 	);
@@ -93,4 +128,22 @@ export const setFormData = (
 			}
 		}
 	});
+};
+
+/**
+ * Render the select options markup.
+ *
+ * @param options
+ * @returns the rendered options
+ */
+export const renderOptions = (options: KeyValueMap[]): string => {
+	let output = '';
+
+	options.forEach((option) => {
+		output += html`
+			<option value="${option.value}">${option.text}</option>
+		`;
+	});
+
+	return output;
 };

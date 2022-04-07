@@ -73,7 +73,7 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	private isHighlightedOnInit(page: PageMetaData): boolean {
 		if (this.hideCurrent) {
 			const parentOfActive = getPageURL()
-				.replace(/[^\/]+$/, '')
+				?.replace(/[^\/]+$/, '')
 				.replace(/(.)\/$/, '$1');
 			return parentOfActive === page.url;
 		}

@@ -57,7 +57,7 @@ export const fire = (
 	name: string,
 	element: HTMLElement | Document | Window = window
 ): void => {
-	element.dispatchEvent(new Event(name));
+	element.dispatchEvent(new Event(name, { bubbles: true }));
 };
 
 /**

@@ -104,6 +104,7 @@ export const sidebarLayout = ({ main }: Partials) => {
 					<am-jumpbar placeholder="jumpbarPlaceholder"></am-jumpbar>
 				</div>
 				<div class="am-l-navbar__buttons">
+					<am-state-debug></am-state-debug>
 					<am-modal-toggle
 						modal="#am-add-page-modal"
 						title="$${App.text('addPage')}"

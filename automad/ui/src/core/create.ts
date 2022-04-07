@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { FieldComponent } from '../components/Fields/Field';
+import { InputComponent } from '../components/Fields/Input';
 import { FieldInitData, KeyValueMap } from '../types';
 
 /**
@@ -46,7 +46,7 @@ import { FieldInitData, KeyValueMap } from '../types';
  */
 export const create = (
 	tag: string,
-	classes: Array<any> = [],
+	classes: string[] = [],
 	attributes: object = {},
 	parent: HTMLElement | null = null
 ): any => {
@@ -83,7 +83,7 @@ export const createField = (
 	data: FieldInitData,
 	cls: string[] = [],
 	attributes: KeyValueMap = {}
-): FieldComponent => {
+): InputComponent => {
 	const field = create(fieldType, cls, attributes, parent);
 
 	field.data = data;

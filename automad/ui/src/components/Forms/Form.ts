@@ -38,6 +38,7 @@ import {
 	confirm,
 	debounce,
 	fire,
+	FormDataProviders,
 	getFormData,
 	getPageURL,
 	listen,
@@ -306,7 +307,7 @@ export class FormComponent extends BaseComponent {
 			this,
 			'change keydown cut paste drop input',
 			this.onChange.bind(this),
-			'input, textarea, select, am-editor'
+			FormDataProviders.selector
 		);
 	}
 

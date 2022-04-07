@@ -41,7 +41,7 @@ import {
 	PageSectionCollection,
 	PageSectionName,
 } from '../../types';
-import { FieldComponent } from '../Fields/Field';
+import { InputComponent } from '../Fields/Input';
 import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
 import {
@@ -317,7 +317,7 @@ export class PageDataComponent extends FormComponent {
 			key: string,
 			label: string = '',
 			attributes: KeyValueMap = {}
-		): FieldComponent => {
+		): InputComponent => {
 			const data = {
 				key,
 				value: fields[key],
@@ -383,7 +383,7 @@ export class PageDataComponent extends FormComponent {
 
 		if (url != '/') {
 			createField(
-				'am-field',
+				'am-input',
 				section,
 				{
 					key: 'slug',

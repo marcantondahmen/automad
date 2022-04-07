@@ -110,7 +110,7 @@ export class FileInfoComponent extends BaseComponent {
 				</div>
 				<input type="hidden" name="old-name" value="${file.basename}" />
 				${createField(
-					'am-field',
+					'am-input',
 					null,
 					{
 						key: 'new-name',
