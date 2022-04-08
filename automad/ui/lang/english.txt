@@ -294,6 +294,10 @@ invalidImageError: Invalid image provided.
 
 -
 
+invalidJsonError: Invalid JSON! The contents of the configuration file is not formatted correctly.
+
+-
+
 invalidFormError: Incomplete or incorrect data!<br />All fields are required and have to be completed as described!
 
 -

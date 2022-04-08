@@ -36,9 +36,7 @@ import { App, html } from '../../../../core';
 
 export const renderConfigFileSection = (): string => {
 	return html`
-		<am-form>
-			<p>$${App.text('systemConfigFileInfo')}</p>
-			<p>$${App.text('systemConfigFileEdit')}</p>
-		</am-form>
+		<p>$${App.text('systemConfigFileInfo')}</p>
+		<am-config-file api="Config/file"></am-config-file>
 	`;
 };

@@ -79,6 +79,7 @@ export enum classes {
 	field = 'am-c-field',
 	fieldLabel = 'am-c-field__label',
 	flex = 'am-u-flex',
+	flexAlignCenter = 'am-u-flex--align-center',
 	flexColumn = 'am-u-flex--column',
 	flexBetween = 'am-u-flex--between',
 	flexItemGrow = 'am-u-flex__item-grow',

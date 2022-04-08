@@ -61,6 +61,7 @@ import './components/File/Upload';
 
 import './components/Forms/FileCollection/List';
 import './components/Forms/FileCollection/Submit';
+import './components/Forms/ConfigFile';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 import './components/Forms/Submit';
