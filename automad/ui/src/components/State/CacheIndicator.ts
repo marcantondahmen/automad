@@ -32,36 +32,35 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, html, Routes } from '../../core';
-import { Sections } from '../Switcher/Switcher';
-import { BaseStateComponent } from './BaseState';
+import { App } from '../../core';
+import { BaseIndicatorComponent } from './BaseIndicator';
 
 /**
- * A debug state component.
+ * A cache state indicator component.
  *
- * @extends BaseComponent
+ * @extends BaseIndicatorComponent
  */
-class StateDebugComponent extends BaseStateComponent {
+class CacheIndicatorComponent extends BaseIndicatorComponent {
 	/**
-	 * Render the state element.
+	 * The enabled text.
 	 */
-	render(): void {
-		if (App.system.debug) {
-			this.innerHTML = html`
-				<am-link
-					class="${classes.button}"
-					target="${Routes.system}?section=${Sections.debug}"
-				>
-					<am-icon-text
-						icon="bug"
-						text="${App.text('systemDebug')}"
-					></am-icon-text>
-				</am-link>
-			`;
-		} else {
-			this.innerHTML = '';
-		}
+	protected get textOn(): string {
+		return App.text('cacheEnabled');
+	}
+
+	/**
+	 * The disabled text.
+	 */
+	protected get textOff(): string {
+		return App.text('cacheDisabled');
+	}
+
+	/**
+	 * The state getter.
+	 */
+	protected get state(): boolean | number {
+		return App.system.cache.enabled;
 	}
 }
 
-customElements.define('am-state-debug', StateDebugComponent);
+customElements.define('am-cache-indicator', CacheIndicatorComponent);

@@ -59,7 +59,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.cache,
 				icon: 'stack',
 				title: App.text('systemCache'),
-				info: 'info here',
+				info: '<am-cache-indicator></am-cache-indicator>',
 				render: renderCacheSection,
 			},
 			{
@@ -80,7 +80,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.feed,
 				icon: 'rss',
 				title: App.text('systemRssFeed'),
-				info: 'info here',
+				info: '<am-feed-indicator></am-feed-indicator>',
 				render: renderFeedSection,
 			},
 			{
@@ -94,7 +94,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.debug,
 				icon: 'bug',
 				title: App.text('systemDebug'),
-				info: 'info here',
+				info: '<am-debug-indicator></am-debug-indicator>',
 				render: renderDebugSection,
 			},
 			{

@@ -62,6 +62,14 @@ cacheClearedSuccess: The cache got cleared successfully!
 
 -
 
+cacheDisabled: Caching is disabled 
+
+-
+
+cacheEnabled: Caching is enabled 
+
+-
+
 cachePurgedError: The cache directory could not be purged!
 
 -
@@ -154,6 +162,14 @@ date: Date
 
 -
 
+debugEnabled: Debugging is enabled 
+
+-
+
+debugDisabled: Debugging is disabled 
+
+-
+
 deletePage: Delete Page
 
 -
@@ -203,6 +219,14 @@ enable: Enable
 -
 
 extension: Extension
+
+-
+
+feedEnabled: The RSS feed is enabled
+
+-
+
+feedDisabled: The RSS feed is disabled
 
 -
 

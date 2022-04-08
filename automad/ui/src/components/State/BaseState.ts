@@ -55,5 +55,5 @@ export abstract class BaseStateComponent extends BaseComponent {
 	/**
 	 * Render the state element.
 	 */
-	abstract render(): void;
+	protected abstract render(): void;
 }

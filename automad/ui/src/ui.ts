@@ -81,7 +81,10 @@ import './components/Pages/Setup';
 import './components/Pages/Shared';
 import './components/Pages/System';
 
-import './components/State/Debug';
+import './components/State/CacheIndicator';
+import './components/State/DebugButton';
+import './components/State/DebugIndicator';
+import './components/State/FeedIndicator';
 
 import './components/Switcher/Switcher';
 import './components/Switcher/SwitcherLabel';

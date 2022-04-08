@@ -22,25 +22,46 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-icon-text {
-	display: inline-flex;
-	align-items: center;
-	gap: var(--am-flex-gap);
-	max-width: 100%;
+import { App, classes, html, Routes } from '../../core';
+import { Sections } from '../Switcher/Switcher';
+import { BaseStateComponent } from './BaseState';
 
-	& > span {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+/**
+ * A debug state component.
+ *
+ * @extends BaseComponent
+ */
+class DebugButtonComponent extends BaseStateComponent {
+	/**
+	 * Render the state element.
+	 */
+	render(): void {
+		if (App.system.debug) {
+			this.innerHTML = html`
+				<am-link
+					class="${classes.button}"
+					target="${Routes.system}?section=${Sections.debug}"
+				>
+					<am-icon-text
+						icon="bug"
+						text="${App.text('systemDebug')}"
+					></am-icon-text>
+				</am-link>
+			`;
+		} else {
+			this.innerHTML = '';
+		}
 	}
 }
+
+customElements.define('am-debug-button', DebugButtonComponent);

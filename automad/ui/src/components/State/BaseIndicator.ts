@@ -22,25 +22,60 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-icon-text {
-	display: inline-flex;
-	align-items: center;
-	gap: var(--am-flex-gap);
-	max-width: 100%;
+import { App, classes, html } from '../../core';
+import { BaseStateComponent } from './BaseState';
 
-	& > span {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+/**
+ * A state indicator component.
+ *
+ * @extends BaseComponent
+ */
+export abstract class BaseIndicatorComponent extends BaseStateComponent {
+	/**
+	 * The enabled text.
+	 */
+	protected abstract get textOn(): string;
+
+	/**
+	 * The disabled text.
+	 */
+	protected abstract get textOff(): string;
+
+	/**
+	 * The state getter.
+	 */
+	protected abstract get state(): boolean | number;
+
+	/**
+	 * Render the state element.
+	 */
+	protected render(): void {
+		if (this.state) {
+			this.innerHTML = html`
+				<am-icon-text
+					class="${classes.textSuccess}"
+					icon="check-circle-fill"
+					text="${this.textOn}"
+				></am-icon-text>
+			`;
+		} else {
+			this.innerHTML = html`
+				<am-icon-text
+					class="${classes.textMuted}"
+					icon="slash-circle-fill"
+					text="${this.textOff}"
+				></am-icon-text>
+			`;
+		}
 	}
 }
