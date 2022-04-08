@@ -283,7 +283,7 @@ class JumpbarComponent extends AutocompleteComponent {
 		return html`
 			<i class="bi bi-${icon}"></i>
 			<span>$${title}</span>
-			<span class="${classes.muted}">$${subtitle || ''}</span>
+			<span class="${classes.textMuted}">$${subtitle || ''}</span>
 		`;
 	}
 
