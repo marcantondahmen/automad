@@ -3,7 +3,6 @@ node_modules
 sitemap.xml
 cache/trash
 config/accounts.php
-config/headless.json
 /vendor
 /composer.lock
 packages/automad

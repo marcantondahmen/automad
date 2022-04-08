@@ -36,6 +36,7 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Admin\UI\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\FileUtils;
@@ -46,7 +47,6 @@ use Automad\Core\Str;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
 use Automad\Engine\Runtime;
-use Automad\Admin\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -64,11 +64,6 @@ class ContentProcessor {
 	private $Automad;
 
 	/**
-	 * A boolean variable that contains the headless state
-	 */
-	private $headless;
-
-	/**
 	 * The InPage instance.
 	 */
 	private $InPage;
@@ -84,18 +79,15 @@ class ContentProcessor {
 	 * @param Automad $Automad
 	 * @param Runtime $Runtime
 	 * @param InPage $InPage
-	 * @param bool $headless
 	 */
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
-		InPage $InPage,
-		bool $headless
+		InPage $InPage
 	) {
 		$this->Automad = $Automad;
 		$this->Runtime = $Runtime;
 		$this->InPage = $InPage;
-		$this->headless = $headless;
 	}
 
 	/**
@@ -148,8 +140,7 @@ class ContentProcessor {
 			new ContentProcessor(
 				$this->Automad,
 				$this->Runtime,
-				$this->InPage,
-				$this->headless
+				$this->InPage
 			)
 		);
 
@@ -252,14 +243,14 @@ class ContentProcessor {
 				// Modify $value by processing all matched string functions.
 				$value = Pipe::process($value, $functions);
 
-				// Escape values to be used in headless mode and option strings.
-				if ($this->headless || $isOptionString) {
+				// Escape values to be used in option strings.
+				if ($isOptionString) {
 					$value = Str::escape($value);
 				}
 
 				// Inject "in-page edit" button in case varName starts with a word-char and an user is logged in.
 				// The button needs to be wrapped in delimiters to enable a secondary cleanup step to remove buttons within HTML tags.
-				if ($inPageEdit && !$this->headless) {
+				if ($inPageEdit) {
 					$value = $this->InPage->injectTemporaryEditButton(
 						$value,
 						$matches['varName'],

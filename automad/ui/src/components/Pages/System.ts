@@ -91,13 +91,6 @@ export class SystemComponent extends SidebarLayoutComponent {
 				render: renderLanguageSection,
 			},
 			{
-				section: Sections.headless,
-				icon: 'braces',
-				title: App.text('systemHeadless'),
-				info: 'info here',
-				render: () => '',
-			},
-			{
 				section: Sections.debug,
 				icon: 'bug',
 				title: App.text('systemDebug'),

@@ -36,13 +36,13 @@
 
 namespace Automad\Engine;
 
+use Automad\Admin\UI\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\Resolve;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\PostProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
-use Automad\Admin\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -60,19 +60,12 @@ class View {
 	private $Automad;
 
 	/**
-	 * A boolean variable that contains the headless state
-	 */
-	private $headless;
-
-	/**
 	 * The view constructor.
 	 *
 	 * @param Automad $Automad
-	 * @param bool $headless
 	 */
-	public function __construct(Automad $Automad, bool $headless = false) {
+	public function __construct(Automad $Automad) {
 		$this->Automad = $Automad;
-		$this->headless = $headless;
 
 		$Page = $Automad->Context->get();
 
@@ -83,12 +76,7 @@ class View {
 			exit();
 		}
 
-		// Set template.
-		if ($this->headless) {
-			$this->template = Headless::getTemplate();
-		} else {
-			$this->template = $Page->getTemplate();
-		}
+		$this->template = $Page->getTemplate();
 
 		Debug::log($Page, 'New instance created for the current page');
 	}
@@ -107,8 +95,7 @@ class View {
 		$ContentProcessor = new ContentProcessor(
 			$this->Automad,
 			$Runtime,
-			$InPage,
-			$this->headless
+			$InPage
 		);
 
 		$TemplateProcessor = new TemplateProcessor(
@@ -130,7 +117,7 @@ class View {
 		// are registered in this step.
 		$output = $TemplateProcessor->process($output, $directory, false);
 
-		$PostProcessor = new PostProcessor($this->Automad, $InPage, $this->headless);
+		$PostProcessor = new PostProcessor($this->Automad, $InPage);
 
 		$output = $PostProcessor->process($output);
 

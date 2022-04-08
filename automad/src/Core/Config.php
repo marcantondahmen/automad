@@ -115,7 +115,6 @@ class Config {
 		self::set('AM_FILE_EXT_CAPTION', 'caption');
 		self::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 		self::set('AM_FILE_EXT_PAGE_CACHE', 'html');
-		self::set('AM_FILE_EXT_HEADLESS_CACHE', 'json');
 		self::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_FILE_EXT_DATA);
 		self::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 		self::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
@@ -216,13 +215,6 @@ class Config {
 		self::set('AM_KEY_PAGELIST_DISPLAY_COUNT', ':pagelistDisplayCount');
 		self::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 		self::set('AM_KEY_NOW', ':now');
-
-		// HEADLESS
-		self::set('AM_HEADLESS_ENABLED', false);
-		self::set('AM_HEADLESS_TEMPLATE', '/automad/headless/json.php');
-
-		// For security reasons, the custom template should not have the .php extension.
-		self::set('AM_HEADLESS_TEMPLATE_CUSTOM', '/config/headless.json');
 
 		// UPDATE
 		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');

@@ -658,10 +658,6 @@ systemDebugInfo: When debugging is enabled, all of Automad's processes will be l
 
 -
 
-systemHeadless: Headless
-
--
-
 systemLanguage: Language
 
 -

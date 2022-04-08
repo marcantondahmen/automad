@@ -113,7 +113,6 @@ class Str {
 	 * @return string The escaped string
 	 */
 	public static function escape(string $str) {
-		// Escape values to be used in headless mode.
 		// The json_encode() function is used to create a valid JSON string
 		// with only one temporary key.
 		// After getting that JSON string, the key, the brackets and quotes

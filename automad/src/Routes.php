@@ -184,10 +184,6 @@ class Routes {
 		$Router->register(
 			'/.*',
 			function () {
-				if (AM_HEADLESS_ENABLED) {
-					header('Content-Type: application/json; charset=utf-8');
-				}
-
 				$Cache = new Cache();
 
 				if ($Cache->pageCacheIsApproved()) {
@@ -195,7 +191,7 @@ class Routes {
 				}
 
 				$Automad = $Cache->getAutomad($Cache);
-				$View = new View($Automad, AM_HEADLESS_ENABLED);
+				$View = new View($Automad);
 				$output = $View->render();
 
 				if ($Automad->currentPageExists()) {

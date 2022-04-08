@@ -97,7 +97,6 @@ const settingsData = (): JumpbarItemData[] => {
 		item(Sections.update, 'systemUpdate', 'arrow-repeat'),
 		item(Sections.feed, 'systemRssFeed', 'rss'),
 		item(Sections.language, 'systemLanguage', 'translate'),
-		item(Sections.headless, 'systemHeadless', 'braces'),
 		item(Sections.debug, 'systemDebug', 'bug'),
 		item(Sections.config, 'systemConfigFile', 'file-earmark-code', [
 			classes.dropdownItemDivider,

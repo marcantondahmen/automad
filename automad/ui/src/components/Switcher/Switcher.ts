@@ -45,7 +45,6 @@ export enum Sections {
 	update = 'update',
 	feed = 'feed',
 	language = 'language',
-	headless = 'headless',
 	debug = 'debug',
 	config = 'config',
 	settings = 'settings',

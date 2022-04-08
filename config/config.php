@@ -7,7 +7,6 @@
     "AM_DEBUG_ENABLED": false,
     "AM_FEED_ENABLED": true,
     "AM_FEED_FIELDS": "+hero, +main",
-    "AM_FILE_UI_TRANSLATION": "",
-    "AM_HEADLESS_ENABLED": false
+    "AM_FILE_UI_TRANSLATION": ""
 }
 JSON;

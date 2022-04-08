@@ -36,6 +36,7 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Admin\UI\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
@@ -43,7 +44,6 @@ use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\System\Server;
-use Automad\Admin\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,11 +61,6 @@ class PostProcessor {
 	private $Automad;
 
 	/**
-	 * A boolean variable that contains the headless state
-	 */
-	private $headless;
-
-	/**
 	 * The InPage instance.
 	 */
 	private $InPage;
@@ -75,16 +70,13 @@ class PostProcessor {
 	 *
 	 * @param Automad $Automad
 	 * @param InPage $InPage
-	 * @param bool $headless
 	 */
 	public function __construct(
 		Automad $Automad,
 		InPage $InPage,
-		bool $headless
 	) {
 		$this->Automad = $Automad;
 		$this->InPage = $InPage;
-		$this->headless = $headless;
 	}
 
 	/**
@@ -179,16 +171,12 @@ class PostProcessor {
 
 	/**
 	 * Obfuscate all stand-alone eMail addresses matched in $str.
-	 * Addresses in links are ignored. In headless mode, obfuscation is disabled.
+	 * Addresses in links are ignored.
 	 *
 	 * @param string $str
 	 * @return string The processed string
 	 */
 	private function obfuscateEmails(string $str) {
-		if ($this->headless) {
-			return $str;
-		}
-
 		$regexEmail = '[\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,}';
 
 		// The following regex matches all email links or just an email address.
