@@ -37,11 +37,13 @@ import {
 	App,
 	classes,
 	create,
+	createLabelFromField,
 	eventNames,
 	fire,
 	html,
 	listen,
 	query,
+	titleCase,
 } from '../../core';
 import { FormComponent } from '../Forms/Form';
 import { BaseFieldComponent } from './BaseField';
@@ -180,7 +182,7 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 			);
 
 			element.innerHTML = html`
-				<span>${field}</span>
+				<span>${createLabelFromField(field)}</span>
 				<i class="bi bi-grip-vertical"></i>
 			`;
 		});

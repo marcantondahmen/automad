@@ -36,6 +36,8 @@ import {
 	App,
 	classes,
 	create,
+	createIdFromField,
+	createLabelFromField,
 	html,
 	htmlSpecialChars,
 	query,
@@ -44,29 +46,6 @@ import {
 } from '../../core';
 import { FieldInitData, FieldRenderData, InputElement } from '../../types';
 import { BaseComponent } from '../Base';
-
-/**
- * Create an ID from a field key.
- *
- * @param key
- * @returns the generated ID
- */
-const createId = (key: string): string => {
-	return `am-id-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
-};
-
-/**
- * Create a label text from a field key.
- *
- * @param key
- * @returns the generated label
- */
-const createLabel = (key: string): string => {
-	return titleCase(key.replace(/\+(.)/, '+ $1'))
-		.replace('+ ', '+')
-		.replace('Color ', '')
-		.replace('Checkbox ', '');
-};
 
 /**
  * A standard input field with a label.
@@ -106,11 +85,11 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	 * @param params.placeholder
 	 */
 	set data({ key, value, name, tooltip, label, placeholder }: FieldInitData) {
-		const id = createId(key);
+		const id = createIdFromField(key);
 
 		value = value || '';
 		tooltip = tooltip || '';
-		label = label || createLabel(key);
+		label = label || createLabelFromField(key);
 		placeholder = placeholder || '';
 
 		if (typeof value === 'string' && this.sanitize) {
