@@ -6,10 +6,10 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const minifyHTML = (html) => {
 	return html
 		.replace(/\s+/g, ' ')
-		.replace(/\s+\</g, '<')
 		.replace(/\<\s+/g, '<')
 		.replace(/\s+\>/g, '>')
-		.replace(/\>\s+/g, '>');
+		.replace(/\>\s+\</g, '><')
+		.replace(/(^`\s|\s`$)/g, '`');
 };
 
 module.exports = (env, argv) => {
