@@ -337,10 +337,13 @@ class Update {
 	private static function permissionsGranted(array $items) {
 		foreach ($items as $item) {
 			$item = AM_BASE_DIR . $item;
+			$temp = $item . '.' . crc32($item);
 
-			if ((file_exists($item) && !is_writable($item)) || !is_writable(dirname($item))) {
+			if (!@rename($item, $temp)) {
 				return false;
 			}
+
+			rename($temp, $item);
 		}
 
 		return true;
