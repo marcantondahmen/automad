@@ -66,14 +66,14 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.users,
 				icon: 'people',
 				title: App.text('systemUsers'),
-				info: 'info here',
+				info: '',
 				render: renderUsersSection,
 			},
 			{
 				section: Sections.update,
 				icon: 'arrow-repeat',
 				title: App.text('systemUpdate'),
-				info: 'info here',
+				info: '',
 				render: renderUpdateSection,
 			},
 			{
@@ -87,7 +87,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.language,
 				icon: 'translate',
 				title: App.text('systemLanguage'),
-				info: 'info here',
+				info: '',
 				render: renderLanguageSection,
 			},
 			{
@@ -101,7 +101,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.config,
 				icon: 'file-earmark-code',
 				title: App.text('systemConfigFile'),
-				info: 'info here',
+				info: '',
 				render: renderConfigFileSection,
 			},
 		];

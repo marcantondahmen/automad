@@ -99,6 +99,8 @@ class Debug {
 	public static function errorReporting() {
 		if (AM_DEBUG_ENABLED) {
 			error_reporting(E_ALL);
+		} else {
+			error_reporting(E_ERROR);
 		}
 	}
 

@@ -85,12 +85,12 @@ export class SystemUpdateComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		super.processResponse(response);
 
-		if (!response.data) {
-			return;
-		}
-
 		if (this.progressModal) {
 			this.progressModal.close();
+		}
+
+		if (!response.data) {
+			return;
 		}
 
 		const data: SystemUpdateResponse = response.data;
