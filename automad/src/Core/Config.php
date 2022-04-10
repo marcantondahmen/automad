@@ -217,7 +217,7 @@ class Config {
 		self::set('AM_KEY_NOW', ':now');
 
 		// UPDATE
-		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');
+		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard');
 		self::set('AM_UPDATE_BRANCH', 'master');
 		self::set('AM_UPDATE_REPO_DOWNLOAD_URL', 'https://github.com/marcantondahmen/automad/archive');
 		self::set('AM_UPDATE_REPO_RAW_URL', 'https://raw.githubusercontent.com/marcantondahmen/automad');

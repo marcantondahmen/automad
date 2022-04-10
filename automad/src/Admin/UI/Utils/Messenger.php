@@ -47,6 +47,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Messenger {
 	/**
+	 * Misc data array.
+	 */
+	private $data = array();
+
+	/**
 	 * The last pushed error.
 	 */
 	private $error = '';
@@ -60,6 +65,15 @@ class Messenger {
 	 * The messenger constructor.
 	 */
 	public function __construct() {
+	}
+
+	/**
+	 * Return the stored data array.
+	 *
+	 * @return array the data array
+	 */
+	public function getData() {
+		return $this->data;
 	}
 
 	/**
@@ -78,6 +92,15 @@ class Messenger {
 	 */
 	public function getSuccess() {
 		return $this->success;
+	}
+
+	/**
+	 * Set the data array.
+	 *
+	 * @param array $data
+	 */
+	public function setData(array $data) {
+		$this->data = $data;
 	}
 
 	/**

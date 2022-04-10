@@ -64,3 +64,10 @@ export interface SystemSettings {
 	users: UserSettings[];
 	tempDirectory: string;
 }
+
+export interface SystemUpdateResponse {
+	state: string;
+	current: string;
+	latest: string;
+	items: string[];
+}

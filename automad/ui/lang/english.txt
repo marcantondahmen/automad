@@ -730,7 +730,11 @@ systemUpdate: Update
 
 -
 
-systemUpdateAvailable: A newer version of Automad is available and ready to be installed. Please backup your current installation before updating!
+systemUpdateAvailable: A newer version of Automad is available and ready to be installed.<br>Please backup your current installation before updating!
+
+-
+
+systemUpdateConnectionError: Can't connect to the update server! This could typically be caused by a wrong update configuration (config/config.php), a SSL certificate error or a missing cURL library.
 
 -
 
@@ -738,11 +742,47 @@ systemUpdateCurrentVersion: Your currently installed version is
 
 -
 
+systemUpdateDownloadError: Download of update failed! 
+
+-
+
+systemUpdateDisabled: Can't run updates within the development repository!
+
+-
+
+systemUpdateFailedError: Update failed! Please restore your installation from a backup. 
+
+-
+
 systemUpdateItems: Note that the following files and directories are affected by the update:
 
 -
 
+systemUpdateItemsError: Invalid list of items to be updated! 
+
+-
+
+systemUpdateNotSupportedError: Updates are not supported by your server! The updater requires cURL and ZIP libraries to be installed.
+
+-
+
+systemUpdatePhpVersionError: Your PHP version doesn't support the latest Automad version. Please upgrade PHP to version
+
+-
+
+systemUpdatePermissionError: Can't run update! Permissions denied! 
+
+-
+
 systemUpdateProgress: Please wait and don't close the window while updating ...
+
+-
+
+systemUpdateSuccess: Successfully updated Automad!
+
+-
+
+systemUpdateSuccessReload: Reload Dashboard
 
 -
 
@@ -823,10 +863,6 @@ unFlipY: Un-Flip Y
 -
 
 unsupportedFileTypeError: Unsupported file type
-
--
-
-updatedAutomadSuccess: Successfully updated Automad!
 
 -
 

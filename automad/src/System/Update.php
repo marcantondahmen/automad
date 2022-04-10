@@ -36,14 +36,11 @@
 
 namespace Automad\System;
 
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;
 use Automad\Core\Str;
-use Automad\Admin\UI\Components\Alert\Alert;
-use Automad\Admin\UI\Components\Alert\Danger;
-use Automad\Admin\UI\Components\Alert\Success;
-use Automad\Admin\UI\Response;
-use Automad\Admin\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -90,90 +87,93 @@ class Update {
 	}
 
 	/**
+	 * Get items to be updated from config.
+	 *
+	 * @return array The array of items to be updated or false on error
+	 */
+	public static function items() {
+		$items = Parse::csv(AM_UPDATE_ITEMS);
+
+		if (is_array($items)) {
+			$items = array_filter($items);
+
+			if (!empty($items)) {
+				return $items;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Run the actual update.
 	 *
-	 * @return Response the response object
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public static function run() {
+	public static function run(Messenger $Messenger) {
 		self::$timestamp = date('Ymd-His');
 		self::log('Starting update ' . date('c'));
-
-		$Response = new Response();
+		self::preloadClasses();
 		$items = self::items();
 
 		if (!$items) {
-			$Response->setHtml(Danger::render(Text::get('error_update_items')));
-			$Response->setCli('Invalid list of items to be updated!');
+			$Messenger->setError(Text::get('systemUpdateItemsError'));
 
-			return $Response;
+			return false;
 		}
 
 		if ($phpVersion = self::higherPHPVersionRequired()) {
-			$Response->setHtml(Danger::render(Text::get('error_update_php_version') . " $phpVersion+."));
-			$Response->setCli("Your PHP version doesn't support the latest Automad version. Please upgrade PHP to version $phpVersion+.");
+			$Messenger->setError(Text::get('systemUpdatePhpVersionError') . " $phpVersion+.");
 
-			return $Response;
+			return false;
 		}
 
 		if (!self::permissionsGranted($items)) {
-			$Response->setHtml(Danger::render(Text::get('error_update_permission')));
-			$Response->setCli('Permission denied!');
+			$Messenger->setError(Text::get('systemUpdatePermissionError'));
 
-			return $Response;
+			return false;
 		}
 
 		self::log('Version to be updated: ' . AM_VERSION);
 		self::log('Updating items: ' . implode(', ', $items));
 
-		if ($archive = self::getArchive()) {
-			if (self::backupCurrent($items)) {
-				if (self::unpack($archive, $items)) {
-					$success = true;
+		$archive = self::getArchive();
 
-					// Clear cache.
-					if (file_exists(AM_FILE_SITE_MTIME)) {
-						unlink(AM_FILE_SITE_MTIME);
-					}
-				} else {
-					$success = false;
-				}
-			} else {
-				$success = false;
-			}
+		if (!$archive) {
+			$Messenger->setError(Text::get('systemUpdateDownloadError'));
 
-			if ($success) {
-				$version = '';
-				$versionFile = AM_BASE_DIR . '/automad/version.php';
-
-				if (is_readable($versionFile)) {
-					$version = self::extractVersion(file_get_contents($versionFile));
-				}
-
-				$log = self::log('Successfully updated Automad to version ' . $version);
-				$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
-
-				$Response->setHtml(
-					Success::render(
-						Text::get('systemUpToDate') . ' ' .
-						Text::get('systemUpdateCurrentVersion') . ' ' .
-						$version . '.'
-					) .
-					'<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
-						'<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' .
-						Text::get('btn_open_log') .
-					'</a>'
-				);
-
-				$Response->setSuccess(Text::get('updatedAutomadSuccess'));
-				$Response->setCli('Successfully updated to version ' . $version);
-			} else {
-				$Response->setHtml(Danger::render(Text::get('error_update_failed')));
-			}
-		} else {
-			$Response->setHtml(Danger::render(Text::get('error_update_download')));
+			return false;
 		}
 
-		return $Response;
+		if (!self::backupCurrent($items)) {
+			$Messenger->setError(Text::get('systemUpdateFailedError'));
+
+			return false;
+		}
+
+		if (!self::unpack($archive, $items)) {
+			$Messenger->setError(Text::get('systemUpdateFailedError'));
+
+			return false;
+		}
+
+		if (file_exists(AM_FILE_SITE_MTIME)) {
+			unlink(AM_FILE_SITE_MTIME);
+		}
+
+		$version = '';
+		$versionFile = AM_BASE_DIR . '/automad/version.php';
+
+		if (is_readable($versionFile)) {
+			$version = self::extractVersion(file_get_contents($versionFile));
+		}
+
+		self::log('Successfully updated Automad to version ' . $version);
+		$Messenger->setData(array('current' => $version, 'state' => 'success'));
+		$Messenger->setSuccess(Text::get('systemUpdateSuccess'));
+
+		return true;
 	}
 
 	/**
@@ -189,11 +189,10 @@ class Update {
 	 * Move currently installed items to /cache/update/backup.
 	 *
 	 * @param array $items
+	 * @param string $str
 	 * @return bool True on success, false on error
 	 */
 	private static function backupCurrent(array $items) {
-		self::preloadClasses();
-
 		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
 
 		FileSystem::makeDir($backup);
@@ -316,25 +315,6 @@ class Update {
 	}
 
 	/**
-	 * Get items to be updated from config.
-	 *
-	 * @return array The array of items to be updated or false on error
-	 */
-	private static function items() {
-		$items = Parse::csv(AM_UPDATE_ITEMS);
-
-		if (is_array($items)) {
-			$items = array_filter($items);
-
-			if (!empty($items)) {
-				return $items;
-			}
-		}
-
-		return false;
-	}
-
-	/**
 	 * Log events to the update log file.
 	 *
 	 * @param string $data
@@ -370,9 +350,6 @@ class Update {
 	 * Preload required classes before removing old installation.
 	 */
 	private static function preloadClasses() {
-		Alert::render('');
-		Danger::render('');
-		Success::render('');
 		Text::getObject();
 	}
 

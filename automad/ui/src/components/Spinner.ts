@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { classes } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -44,7 +45,7 @@ class SpinnerComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add('am-c-spinner');
+		this.classList.add(classes.spinner);
 	}
 }
 

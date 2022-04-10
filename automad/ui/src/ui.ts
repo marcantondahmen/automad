@@ -65,6 +65,7 @@ import './components/Forms/ConfigFile';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 import './components/Forms/Submit';
+import './components/Forms/SystemUpdate';
 
 import './components/Modal/Modal';
 import './components/Modal/ModalClose';

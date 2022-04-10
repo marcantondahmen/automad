@@ -110,6 +110,7 @@ export enum classes {
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',
 	select = 'am-f-select',
+	spinner = 'am-c-spinner',
 	switcherSection = 'am-c-switcher-section',
 	switcherSectionFields = 'am-c-switcher-section--fields',
 	switcherSectionActive = 'am-c-switcher-section--active',
