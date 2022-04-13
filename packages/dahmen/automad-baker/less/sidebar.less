@@ -1,0 +1,82 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+.baker-sidebar {
+
+	&-scroll {
+		
+		position: relative;
+		max-height: 100vh;
+		margin-left: -@utility-container-padding-horizontal;
+		
+		& .mCSB_container {
+			padding-left: @utility-container-padding-horizontal;
+		}
+
+		& .mCSB_container,
+		& .mCustomScrollBox {
+			overflow: visible;
+		}
+		
+	}
+
+	&.uk-modal {
+		background-color: fade(@am-bg, 70%);
+	}
+	
+	& > .uk-modal-dialog {
+		
+		width: 380px;
+		// Always keep 60px free space at right to close sidebar.
+		max-width: ~"calc(100vw - 60px)";
+		height: 100vh;
+		max-height: 100%;
+		padding: 0 0 @utility-margin @utility-container-padding-horizontal;
+		border-right: @am-hairline;
+		-webkit-transform: translateX(-15%);
+		transform: translateX(-15%);
+		.transition(opacity 0.2s linear, transform 0.2s ease-out;);
+		
+		.uk-open& {
+			-webkit-transform: translateX(0);
+			transform: translateX(0);	
+		}
+		
+		@media (max-width: @breakpoint-small-max) {
+			padding-left: @baker-container-padding-mobile;
+		}
+
+	}
+	
+	& a.brand {
+
+		position: absolute;
+		top: 2.55rem;
+		padding: 0;
+		height: 2.57rem;
+		min-height: 2.57rem;
+		color: @am-text;
+		font-size: @baker-nav-large-font-size;
+		font-weight: 640;
+		line-height: inherit;
+		
+		@media (min-width: @breakpoint-large) {
+			height: 3.6rem;
+		}
+
+		& svg {
+			color: inherit;
+		}
+
+	}
+	
+}

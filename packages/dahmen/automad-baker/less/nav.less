@@ -1,0 +1,174 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@nav-dropdown-hover-background:	@button-primary-background;
+@nav-dropdown-hover-color:		@button-primary-color;
+
+@baker-nav-padding:				0.48rem;
+@baker-nav-large-padding:		0.52rem;
+
+@baker-nav-font-size:			1rem;
+@baker-nav-line-height:			@base-body-line-height - @am-border-width;
+@baker-nav-large-font-size: 		1.14rem;
+@baker-nav-large-line-height:	1.95rem;
+
+[data-baker-nav] {
+	
+	padding-bottom: @utility-margin-large;
+
+	.uk-modal & {
+		padding-top: @utility-margin;
+	}
+
+}
+
+.baker-nav {
+	
+	margin: 0;
+    padding: 0;
+	list-style: none;
+	font-size: @baker-nav-font-size;
+	line-height: @baker-nav-line-height;
+
+	& li {
+		position: relative;
+		margin: 0 0 @am-border-width -@baker-nav-padding;
+	}
+	
+	& a {
+		
+		display: inline-block;
+		padding: 0 @baker-nav-padding;
+		color: @am-text;
+		border-radius: @am-radius;
+		
+		&:hover,
+		&:active,
+		&:focus {
+			color: @button-hover-color;
+			background-color: @nav-side-hover-background;
+		}
+			
+	}
+	
+	&-breadcrumbs {
+		
+		& li:not(:last-child) a:not(.baker-nav-arrow):not(.baker-nav-loading):after {
+			content: '⁄';
+			padding-left: 0.2rem;
+		}
+		
+	}
+	
+	// Make sure the first item of the breadcrumbs is never active when 
+	// using AJAX calls to update the navigation to avoid having a top-level
+	// navigation item highlighted twice (top & breadcrumbs).
+	&:not(&-breadcrumbs) a,
+	&-breadcrumbs > li:not(:first-child) a {
+		
+		&.uk-active {
+			color: #FFFFFF;
+			background-color: @am-primary;
+		}
+		
+	}
+	
+	& li > &-arrow,
+	& li > &-loading {
+		
+		position: absolute;
+		box-sizing: border-box;
+		right: 0.85rem;
+		top: -0.07rem;
+		min-width: 1.57rem;
+		max-width: 1.57rem;
+		max-height: 1.57rem;
+		padding: 0;
+		line-height: 1.57rem;
+		text-align: center;
+		border-radius: 3.57rem;
+		
+		& > * {
+			vertical-align: middle;
+		}
+		
+	}
+	
+	&-top {
+		
+		& &-active {
+			box-shadow: inset 0 0 0 @am-border-width @am-border-color;
+		}
+		
+	}
+	
+	&-large {
+		
+		font-size: @baker-nav-large-font-size;
+		line-height: @baker-nav-large-line-height;
+		
+		& > li {
+	
+			margin: 0 0 @am-border-width -@baker-nav-large-padding;
+			
+			& > a {
+				padding: 0 @baker-nav-large-padding;
+			}
+			
+			& > .baker-nav-arrow,
+			& > .baker-nav-loading {
+				top: 0.07rem;
+			}
+			
+		}
+	
+	}
+	
+	&-top + &:before {
+		content: '';
+		display: block;
+		position: relative;
+		margin: @utility-margin 0 @utility-margin -@utility-container-padding-horizontal;
+		border-top: @am-hairline;
+	}
+	
+	@media (max-width: @breakpoint-medium-max) {
+		
+		font-size: @baker-nav-large-font-size;
+		line-height: @baker-nav-large-line-height;
+		
+		& > li {
+	
+			margin: 0 0 @am-border-width -@baker-nav-large-padding;
+			
+			& > a {
+				padding: 0 @baker-nav-large-padding;
+			}
+			
+			& > .baker-nav-arrow,
+			& > .baker-nav-loading {
+				top: 0.07rem;
+			}
+			
+		}
+		
+		& + &:before {
+			content: '';
+			display: block;
+			position: relative;
+			margin: @utility-margin 0 @utility-margin -@utility-container-padding-horizontal;
+			border-top: @am-hairline;
+		}
+		
+	}
+	
+}

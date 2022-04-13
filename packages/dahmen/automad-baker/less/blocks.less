@@ -1,0 +1,24 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2018-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@block-max-width: 52rem;
+
+.baker-sidebar + li .am-block {
+	max-width: none;
+}
+
+.full-width {
+	width: ~"calc(100% + (2 * @{grid-gutter-horizontal}))" !important;
+	min-width: ~"calc(100% + (2 * @{grid-gutter-horizontal}))" !important;
+	max-width: ~"calc(100% + (2 * @{grid-gutter-horizontal}))" !important;
+	margin: @utility-margin -@grid-gutter-horizontal;
+}

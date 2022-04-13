@@ -1,0 +1,53 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@pagination-margin-left: 		0.5rem;
+@pagination-padding-vertical:   0;
+@pagination-padding-horizontal: 0;
+@pagination-font-size:          1rem;
+@pagination-line-height: 		1.72rem;
+
+@pagination-background: 		@button-background;
+@pagination-color:  			@button-color;
+@pagination-hover-background: 	@button-hover-background;
+@pagination-hover-color: 		@button-hover-color;
+@pagination-onclick-background: @button-active-background;
+@pagination-onclick-color: 		@button-active-color;
+
+@pagination-active-background:	@am-primary;
+@pagination-active-color:		#FFFFFF;
+@pagination-disabled-background:@syn-background;
+@pagination-disabled-color:    	@am-muted;
+
+
+.hook-pagination-item() {
+	box-sizing: content-box;
+	min-width: @pagination-line-height;
+	max-width: @pagination-line-height;
+	min-height: @pagination-line-height;
+	max-height: @pagination-line-height;
+	border-radius: 50px;
+	font-weight: 580;
+	border: @am-border-width solid transparent;
+}
+
+.hook-pagination-link() {
+	border-color: @am-border-color;
+}
+
+.hook-pagination-misc() {
+	
+	.uk-pagination + .uk-pagination {
+		margin-left: @pagination-margin-left;
+	}
+	
+}

@@ -1,0 +1,37 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2018-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@dropdown-padding:              0;
+@dropdown-background:           @am-bg;
+@dropdown-scrollable-height:    ~"calc(100vh - 220px)";
+
+.hook-dropdown() {
+	border-radius: @am-radius-large;
+	box-shadow: 0 0.21rem 1.79rem rgba(0,0,0,0.08), 0 0.43rem 2.86rem rgba(0,0,0,0.08);
+}
+
+.hook-dropdown-misc() {
+
+	.uk-dropdown .uk-nav li > a {
+		line-height: @base-body-line-height;
+		padding: 0.45rem 0.9rem;
+	}
+
+	.uk-dropdown-scrollable .uk-nav li a {
+		padding-right: ~"calc(@{nav-padding-horizontal} + 15px)";
+	}
+	
+	.uk-dropdown:empty {
+		display: none;
+	}
+	
+}

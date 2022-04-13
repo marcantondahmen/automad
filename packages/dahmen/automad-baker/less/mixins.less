@@ -1,0 +1,31 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2018-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+.shadow-large() {
+
+	box-shadow+: 0 0.22rem (@grid-gutter-horizontal / 1.7) rgba(0,0,0,0.07), 
+				 0 0.44rem @grid-gutter-horizontal rgba(0,0,0,0.09),
+				 0 3.6rem 5rem -2.85rem rgba(0,0,0,0.07);	
+
+}
+
+// Since scroll-margin-top is not supported so well, the can be used as a fallback.
+.scroll-margin(@space) {
+
+	&:target:before {
+		content: '';
+		display: block;
+		margin-top: -@space;
+		height: @space;
+		visibility: hidden;
+	}
+	
+}

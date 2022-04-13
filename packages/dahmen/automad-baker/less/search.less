@@ -1,0 +1,73 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+.baker-search {
+	
+	box-sizing: border-box;
+	width: 100%;
+	padding-right: @utility-margin-small;
+	
+	.uk-modal & {
+		min-width: ~"calc(100% + @{utility-container-padding-horizontal})";
+		margin-left: -@utility-container-padding-horizontal;
+		padding-left: @utility-container-padding-horizontal;
+		border-bottom: @am-hairline;
+	}
+	
+	& > .uk-autocomplete {
+		
+		width: 100%;
+		
+		& .uk-dropdown {
+			margin-top: @navbar-dropdown-margin-top;
+		}
+		
+		& .uk-form-controls[type="search"] {
+			
+			height: @navbar-nav-height;
+			width: 100%;
+			padding: 0;
+			font-size: @baker-nav-large-font-size;
+			line-height: 1.5;
+			border: none;
+			outline: 0;
+			background-color: transparent;
+			
+			.baker-navbar & {
+				height: ~"calc(@{navbar-nav-height} - 1px)";
+			}
+			
+			&:hover {
+				cursor: pointer;	
+			}
+			
+		}
+
+	}
+	
+	&.uk-form {
+		
+		& :-ms-input-placeholder { 
+			color: @form-color !important; 
+		}
+		
+		& ::-moz-placeholder { 
+			color: @form-color; 
+		}
+		
+		& ::-webkit-input-placeholder { 
+			color: @form-color; 
+		}
+		
+	}
+		
+}

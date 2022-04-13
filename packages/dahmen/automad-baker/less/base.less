@@ -1,0 +1,126 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@am-muted: 					#D2D2D2;
+
+@base-body-font-size:		16px;
+@base-body-line-height: 	1.72rem;
+@base-heading-font-weight: 	700;
+@base-h1-font-size:  		2.4rem;
+@base-h1-line-height: 		1.2;
+@base-h2-font-size:  		1.65rem;
+@base-h2-line-height: 		1.325;
+@base-h3-font-size:  		1.4rem;
+@base-h3-line-height: 		1.4;
+@base-h4-font-size:  		1.2rem;
+@base-h4-line-height: 		1.5;
+
+@base-margin-vertical: 		1.07rem;
+
+@base-link-color: 			@am-muted;
+@base-link-hover-color: 	@am-text;
+
+
+@media (max-width: 350px) {
+	html,
+	body {
+		font-size: 14px;
+	}
+}
+
+@media (min-width: 1400px) {
+	html,
+	body {
+		font-size: 17px;
+	}
+}
+
+@media (min-width: 1640px) {
+	html,
+	body {
+		font-size: 18px;
+	}
+}
+
+@media (min-width: 1820px) {
+	html,
+	body {
+		font-size: 19px;
+	}
+}
+
+h1 {
+	margin: -0.14rem 0 @utility-margin -0.07rem;
+	font-weight: 720;
+	letter-spacing: -0.02em;
+}
+
+h2 {
+	margin: @utility-margin 0 @base-margin-vertical 0;
+	font-weight: 680;
+	letter-spacing: -0.015em;
+}
+
+h3 {
+	margin: (@base-margin-vertical * 2.25) 0 @base-margin-vertical 0;
+	font-weight: 620;
+	letter-spacing: -0.01em;
+}
+
+h4 {
+	margin: (@base-margin-vertical * 2.25) 0 @base-margin-vertical 0;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+b,
+strong {
+	font-weight: 640;
+}
+
+* {
+	font-variant-ligatures: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+& a,
+& button,
+& label,
+& textarea,
+& input,
+& .uk-button,
+& .uk-badge {
+	.transition(color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.2s;);
+}
+
+hr {
+	
+	margin: @utility-margin -@grid-gutter-horizontal;
+	border-top: @am-hairline;
+	
+	& + * {
+		margin-top: 0;
+	} 
+	
+}
+
+[id] {
+	.scroll-margin(6.32rem);
+}
+
+img {
+	min-width: 100%;
+}

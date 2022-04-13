@@ -1,0 +1,181 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+.baker-content {
+	
+	& [id] {
+		
+		& > a {
+			
+			position: relative;
+			color: @am-text;
+			
+			&:hover {
+				color: @am-text;
+			}
+			
+			&:before {
+				content: '\f0c1';
+				position: absolute;
+				left: -1.25em;
+				vertical-align: baseline;
+				font-family: FontAwesome;
+				display: inline-block;
+				padding-top: 0.275em;
+	    		font-weight: normal;
+	    		font-style: normal;
+				font-size: 0.75em;
+	    		line-height: inherit;
+				color: @am-bg;
+				.smooth-fonts;
+				.transition(color 0.2s;);
+			}
+			
+			&:hover:before {
+				color: @am-muted;
+			}
+			
+		}
+		
+	}
+	
+	& p,
+	& dd,
+	& ol:not([class]),
+	& ul:not([class]) {
+		
+		& a:not([class]) {
+			
+			box-sizing: border-box;
+			display: inline;
+			padding-bottom: 0.07em;
+			white-space: nowrap;
+			color: inherit;
+			background-color: transparent;
+			font-weight: 620;
+			border-bottom: @am-border-width solid @am-muted;
+
+			&[href^="http"]:after {
+				content: '↗';
+				padding-left: 0.15em;
+				color: @am-muted;
+				.transition(color 0.2s;);
+			}
+
+			&:hover,
+			&:active,
+			&:focus {
+
+				border-bottom-color: @am-text;
+
+				&:after {
+					color: @am-text;
+				}
+
+			}
+			
+		}	
+		
+	}
+	
+	& em {
+		color: inherit;
+	}
+
+	// Use em units for lists to scale correctly whit larger font sizes on home page.
+	& ul:not([class]) {
+		
+		list-style-type: none;
+		padding: 0;
+		
+		& > li {
+			
+			position: relative;
+			padding: 0 0 0 2em;
+			
+			& > :last-child {
+				margin-bottom: 0;
+			}	
+				
+			&:before {
+				content: '•';
+				position: absolute;
+				top: 0;
+				left: 0.75em;
+				display: inline-block;
+			}
+			
+		}
+		
+	}
+
+	& table {
+
+		box-sizing: content-box;
+		width: 100%;
+		border-collapse: collapse;
+		text-align: left;
+
+		& th,
+		& td {
+			padding: 0.5rem;
+			padding-left: 0;
+			font-weight: inherit;
+			border-bottom: 1px solid @am-border-color;
+			vertical-align: top;
+		}
+
+		& th {
+			font-weight: 640;
+			border-width: 2px;
+			white-space: nowrap !important;
+		}
+
+		& tr:last-child td {
+			border: none;
+		}
+
+	}
+
+	& blockquote {
+
+		border: none;
+		padding: 0;
+		margin: 0;
+		line-height: inherit;
+		font-style: inherit;
+	
+		&:before {
+			content: '„';
+		}
+
+		&:after {
+			content: '“';
+		}
+
+		& + figcaption {
+			font-style: italic;
+			font-size: 0.8rem;
+		}
+
+		& + figcaption:before {
+			content: '\2014';
+			padding-right: 0.75rem;
+		} 
+
+	}
+
+	& textarea {
+		min-height: 10rem;
+	}
+
+}

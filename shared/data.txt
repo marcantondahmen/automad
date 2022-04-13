@@ -2,17 +2,23 @@ sitename: My Site
 
 -
 
-theme: standard/light
+theme: dahmen/automad-baker
 
 -
 
-brand: <svg width="1.65em" height="1.65em" viewBox="0 0 16 16" class="bi bi-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="8" cy="8" r="8"/>
-</svg>
+brand: HELMUT MARK
 
 -
 
-imageAppleTouchIcon: /shared/apple-touch-icon.png
+checkboxHideDate: on
+
+-
+
+checkboxHideFilters: on
+
+-
+
+checkboxHideRelatedPages: on
 
 -
 

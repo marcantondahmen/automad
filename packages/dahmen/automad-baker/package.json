@@ -1,0 +1,25 @@
+{
+  "name": "automad-baker",
+  "version": "1.0.0",
+  "description": "An elegant documentation and blogging theme for Automad",
+  "main": "gulpfile.js",
+  "private": true,
+  "author": "Marc Anton Dahmen",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^2.0.9",
+    "gulp-less": "^3.3.2",
+    "gulp-remote-src": "^0.4.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify-es": "^2.0.0",
+    "gulp-util": "^3.0.8",
+    "imagesloaded": "^4.1.4",
+    "jquery": "^2.2.4",
+    "malihu-custom-scrollbar-plugin": "^3.1.5",
+    "merge2": "^1.1.0"
+  }
+}

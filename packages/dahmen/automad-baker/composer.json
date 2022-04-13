@@ -1,0 +1,21 @@
+{
+	"name": "dahmen/automad-baker",
+	"description": "An elegant documentation and blogging theme for Automad based on the official Automad documentation theme",
+	"type": "automad-package",
+	"keywords": [
+		"theme",
+		"documentation",
+		"blog"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Marc Anton Dahmen",
+			"homepage": "https://marcdahmen.de"
+		}
+	],
+	"require": {
+		"automad/package-installer": "^1.1 || dev-master",
+		"automad/meta-tags": "^1.1 || dev-master"
+	}
+}

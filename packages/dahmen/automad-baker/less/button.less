@@ -1,0 +1,53 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@baker-button-stacked-margin: 		0.3rem;
+
+@baker-scroll-down-width:			1.8rem;
+@baker-scroll-down-height:			3.2rem;
+
+@button-height:						2.6rem;
+@button-line-height:				@button-height - 0.14rem;
+@button-padding-horizontal:			0.82rem;
+
+@button-mini-height: 				1.4rem;
+@button-mini-font-size:				0.75rem;
+@button-mini-padding-horizontal: 	0.4rem;
+
+.hook-button {
+	
+	font-weight: 520;
+
+	&:not(.uk-button-mini) {
+		border: 0.14rem solid @am-primary;
+	}
+
+}
+
+.hook-button-misc() {
+	
+	.baker-buttons-stacked {
+		
+		margin-top: -@baker-button-stacked-margin;
+		padding-bottom: @baker-button-stacked-margin;
+		font-size: 0.01px;
+		line-height: 1;
+		
+		& .uk-button {
+			margin-right: @baker-button-stacked-margin !important;
+			margin-left: 0 !important;
+			margin-top: @baker-button-stacked-margin;
+		}
+		
+	}
+	
+}

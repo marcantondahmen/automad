@@ -1,0 +1,38 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@grid-gutter-horizontal:        3rem;
+@grid-gutter-vertical:          @utility-margin;
+ 
+@grid-gutter-large-horizontal:  @grid-gutter-horizontal;
+@grid-gutter-large-vertical:    @utility-margin;
+
+
+.hook-grid-misc() {
+	
+	.uk-container > .uk-grid {
+	    
+		& > li {
+			
+			position: relative;
+			box-sizing: border-box;
+			min-height: 100vh;
+			
+			&:not(:last-child) {
+				border-right: @am-hairline;
+			}
+			
+		}
+		
+	}
+	
+}

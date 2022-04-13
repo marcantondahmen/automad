@@ -122,7 +122,7 @@ class Gallery extends AbstractBlock {
 				>
 					<img src="$Image->file" />
 				</a>
-				<caption>$caption</caption>
+				<span>$caption</span>
 			HTML;
 		}
 
@@ -163,7 +163,8 @@ class Gallery extends AbstractBlock {
 
 		foreach ($files as $file) {
 			$Image = new Image($file, 2 * $pixelWidth);
-			$caption = Str::stripTags(FileUtils::caption($file));
+			// $caption = Str::stripTags(FileUtils::caption($file));
+			$caption = FileUtils::caption($file);
 			$file = Str::stripStart($file, AM_BASE_DIR);
 			$span = round($Image->height / ($masonryRowHeight * 2));
 
@@ -174,8 +175,9 @@ class Gallery extends AbstractBlock {
 				>
 					<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
 						<img src="$Image->file" />
+					
+					<span>$caption</span>
 					</a>
-					<caption>$caption</caption>
 				</div>
 			HTML;
 		}

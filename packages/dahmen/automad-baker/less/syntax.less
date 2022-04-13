@@ -1,0 +1,53 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+ 
+@syn-font:                  'Fira Mono', monospace;
+@syn-size:                  0.86rem;
+@syn-line-height:           1.5rem;
+@syn-padding-vertical: 	    0.7rem;
+@syn-padding-horizontal:    1.1rem;
+@syn-color:                 #404040;
+@syn-background:            #F9F9F9;
+@syn-border:                1px solid @am-border-color;
+
+
+pre {
+	
+	position: relative;
+	background-color: @syn-background;
+	margin: @utility-margin-small 0;
+	padding: @syn-padding-vertical @syn-padding-horizontal;
+	border-radius: @am-radius-large;
+	border: @am-hairline;
+	
+	& code {
+	 	font-family: @syn-font;
+		font-size: @syn-size;
+		font-weight: 400;
+		line-height: @syn-line-height;
+		color: @syn-color;
+	}
+	
+}
+
+:not(pre) > code {
+	display: inline-block;
+	padding: 0 0.35em;
+ 	font-family: @syn-font;
+	font-size: 0.86em;
+	font-weight: 500;
+	line-height: @base-body-line-height * 0.9;
+	color: @syn-color;
+	background-color: @syn-background;
+	box-shadow: 0 0 0 1px @am-border-color;
+	border-radius: @am-radius-small;
+}

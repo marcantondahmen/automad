@@ -1,0 +1,40 @@
+title: work
+
+-
+
++main: {
+    "time": 1649153899070,
+    "blocks": [
+        {
+            "id": "eO5Ym1kUli",
+            "type": "gallery",
+            "data": {
+                "globs": "img-20210324-163008.jpg, img-20210324-163211.jpg, img-20210509-153935.jpg, img-20210516-101538.jpg, img-20210531-114358.jpg, img-20210531-120726.jpg, img-20210602-122852-01.jpeg, rom-2021-architektur-collos.jpg, img-20210607-151951-01.jpeg, img-20210807-090124.jpg",
+                "layout": "vertical",
+                "width": "300px",
+                "height": "10rem",
+                "gap": "150px",
+                "cleanBottom": false
+            },
+            "tunes": {
+                "layout": {
+                    "stretched": false
+                }
+            }
+        }
+    ],
+    "version": "2.22.2",
+    "automadVersion": "1.10.7"
+}
+
+-
+
+checkboxHideThumbnails: 0
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+theme: dahmen/automad-baker

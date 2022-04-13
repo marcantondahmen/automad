@@ -1,0 +1,49 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@breakpoint-small:      480px;
+@breakpoint-medium:     768px;
+@breakpoint-large:      1170px;
+@breakpoint-xlarge:     1350px;
+
+@breakpoint-mini-max:   (@breakpoint-small - 1);
+@breakpoint-small-max:  (@breakpoint-medium - 1);
+@breakpoint-medium-max: (@breakpoint-large - 1);
+@breakpoint-large-max:  (@breakpoint-xlarge - 1);
+
+
+:root {
+
+	// Container
+	--am-block-max-width: @block-max-width;
+	--am-block-margin-top: 2em;
+	--am-container-padding: @utility-container-padding-horizontal;
+
+	// Flex
+	--am-flex-gap: 2rem;
+	--am-flex-min-block-width: 18rem;
+
+	// Gallery
+	--am-gallery-gap: 2px;
+	--am-gallery-item-width: 200px;
+	--am-gallery-z-index: 9999;
+	--am-gallery-max-height: 100%;
+	--am-gallery-max-width: 100%;
+	--am-gallery-background: #FFFFFF;
+	--am-gallery-controls-color: @base-body-color;
+	--am-gallery-controls-background: rgba(255,255,255,0.3);
+
+	// Slider
+	--am-slider-controls-color: var(--am-gallery-controls-color);
+	--am-slider-controls-background: var(--am-gallery-controls-background);
+
+}

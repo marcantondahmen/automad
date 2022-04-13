@@ -1,0 +1,94 @@
+title: vita
+
+-
+
+date: 2022-04-07 14:34:34
+
+-
+
++main: {
+    "time": 1649335335509,
+    "blocks": [
+        {
+            "id": "Kb6MzaO9CT",
+            "type": "paragraph",
+            "data": {
+                "text": "1958 geboren in Österreich",
+                "large": false,
+                "alignment": "left"
+            },
+            "tunes": {
+                "layout": {}
+            }
+        },
+        {
+            "id": "_JhKy6gLfr",
+            "type": "header",
+            "data": {
+                "text": "Ausstellungen (Auswahl)",
+                "level": 4,
+                "alignment": "left"
+            },
+            "tunes": {
+                "layout": {}
+            }
+        },
+        {
+            "id": "YrGMX8C74E",
+            "type": "table",
+            "data": {
+                "withHeadings": false,
+                "content": [
+                    [
+                        "2008",
+                        "„Skulptur“, Kunstverein Medienturm, Graz"
+                    ],
+                    [
+                        "2002",
+                        "Laden für Nichts, Leipzig"
+                    ],
+                    [
+                        "2000",
+                        "„Helmut Mark : Heimo Zobernig. Snapshots : de nada“, Galerie Kunstbüro, Wien"
+                    ],
+                    [
+                        "1993",
+                        "Galerie Waßermann, München Galerie Orms, Innsbruck"
+                    ],
+                    [
+                        "1990",
+                        "Insam-Gleicher Gallery, Chicago (mit Robert Adrian) Galerie Arcade, Mödling, Galerie Orms, Innsbruck"
+                    ],
+                    [
+                        "1989",
+                        "Galerie Grita Insam, Wien"
+                    ],
+                    [
+                        "1987",
+                        "Galerie Amer, Wien"
+                    ],
+                    [
+                        "1986",
+                        "Galerie Maria Bonk, Köln"
+                    ],
+                    [
+                        "1985",
+                        "Galerie Amer, Wien"
+                    ],
+                    [
+                        "",
+                        "Galerie Aufbau-Abbau, Berlin"
+                    ]
+                ]
+            },
+            "tunes": {
+                "layout": {
+                    "stretched": false,
+                    "width": false
+                }
+            }
+        }
+    ],
+    "version": "2.22.2",
+    "automadVersion": "1.10.7"
+}

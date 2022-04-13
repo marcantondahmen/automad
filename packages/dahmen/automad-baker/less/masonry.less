@@ -1,0 +1,104 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@card-width: 30rem;
+@card-width-small: 24rem;
+@cards-gap: 0;
+@cards-column-gap: @cards-gap;
+@cards-row-gap: @cards-gap;
+@cards-masonry-auto-rows: 25px;
+@cards-margin-vertical: @grid-gutter-vertical;
+
+.cards {
+
+	display: grid;
+	column-gap: @cards-column-gap;
+	row-gap: @cards-row-gap;
+	grid-template-columns: repeat(auto-fill, minmax(@card-width, 1fr));
+	position: relative;
+	z-index: 10;
+	margin: @cards-margin-vertical -@grid-gutter-horizontal;
+	overflow: hidden;
+	border-bottom: @am-hairline;
+	background-color: @am-bg;
+	
+	@media (max-width: (@card-width * 1.75)) {
+		grid-template-columns: 1fr;
+	}
+
+	&.masonry {
+		grid-auto-rows: @cards-masonry-auto-rows;
+	}
+
+	am-stretched & {
+		margin-top: 0;
+		margin-bottom: -@am-border-width;
+	}
+
+	&.small:not(.single) {
+		grid-template-columns: repeat(auto-fill, minmax(@card-width-small, 1fr));
+	}
+
+	& .card {
+
+		overflow: hidden;
+		border-top: @am-hairline;
+		border-left: @am-hairline;
+		margin-left: -@am-border-width;
+		padding: @grid-gutter-vertical @grid-gutter-horizontal;
+
+		& h2 {
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+		}
+
+		& img,
+		& .full-width {
+			margin-top: 0.2rem;
+		}
+
+		& .panel-body {
+			padding: @base-margin-vertical 0;
+		}
+
+		&-more {
+			display: inline-block;
+			border: none;
+			font-weight: 400;
+			font-size: 1.2rem !important;
+		}
+
+	}
+
+	&.grid,
+	&.masonry-clean-bottom {
+
+		& .card-content {
+		
+			display: flex;
+			box-sizing: border-box;
+			flex-direction: column;
+			justify-content: flex-start;
+			height: 100%;
+
+			& > .panel-body {
+				flex-grow: 1;
+			}
+		
+		}
+
+	}
+
+}

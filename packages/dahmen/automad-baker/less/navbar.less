@@ -1,0 +1,208 @@
+/*
+ *	Baker
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@navbar-nav-height: 			4.29rem;
+@navbar-nav-padding-horizontal: 2.14rem;
+@navbar-toggle-width: 			1.28rem;
+@navbar-dropdown-margin-top: 	-0.5rem;
+
+
+.baker-navbar {
+	
+	position: absolute;
+	z-index: 1000;
+	box-sizing: border-box;
+	width: ~"calc(100% + @{grid-gutter-horizontal})";
+	padding: 0;
+	margin: 0 -@grid-gutter-horizontal !important;
+	top: 1.29rem;
+	background-color: @am-bg;
+	
+	&-push {
+		padding-top: 9.64rem;
+	}
+	
+	&-nav {
+		
+		display: table;
+		box-sizing: border-box;
+		height: auto;
+		width: 100%;
+		margin: 0;
+		padding: 0 @grid-gutter-horizontal;
+		background-color: @am-bg;
+		
+		// Hairline.
+		border-bottom: @am-hairline;
+		border-color: @am-bg;
+		.transition(border-color 0.2s;);
+		
+		&.uk-active,
+		&.baker-focus {
+			border-bottom: @am-hairline;
+		}
+		
+		& > * {
+			position: relative;
+			display: table-cell;
+			width: auto;
+			vertical-align: middle;
+		}
+			
+	}
+	
+	&-brand {
+		
+		min-width: 2.5rem;
+		padding-right: @navbar-nav-padding-horizontal;
+		
+		& a.brand {
+
+			color: @am-text;
+			font-size: @baker-nav-large-font-size;
+			font-weight: 640;
+
+			& svg {
+				height: 2.72rem;
+				min-height: 2.72rem;
+				color: inherit;
+			}
+
+		}
+
+	}
+	
+	&-items {
+		
+		margin: 0 (@navbar-nav-padding-horizontal / 2) 0 (-@navbar-nav-padding-horizontal / 2);
+		z-index: 10;
+		white-space: nowrap;
+		font-size: 0.01px;
+		
+		&-button {
+			
+			display: inline-block;
+			margin: 0;
+			padding: 0 (@navbar-nav-padding-horizontal / 2);
+			outline: 0;
+			font-size: @button-large-font-size;
+			max-height: @navbar-nav-height;
+			line-height: @navbar-nav-height;
+			color: @am-text;
+			background-color: transparent;
+			
+			&:hover {
+				cursor: pointer;	
+			}
+			
+			&:hover,
+			&:focus,
+			&:active {
+				color: @am-muted;
+			}
+			
+		}
+		
+	}
+	
+	&-search {
+		
+		width: 100%;
+		min-width: 100%;
+		
+		& form {
+			@media (max-width: @breakpoint-medium-max) {
+				display: none;
+			}
+		}
+		
+	}
+	
+	&-icons {
+		
+		margin-right: -0.86rem;
+
+		& > a {
+			padding: 0 0.86rem;
+			line-height: @navbar-nav-height;
+			font-size: 1.29rem;
+			color: @am-text;	
+		}
+
+	}
+
+	&-toggle {
+		
+		cursor: pointer;
+		display: block;
+		position: relative;
+		height: @navbar-nav-height;
+		width: 2.14rem;	
+		margin: 0 -0.43rem;
+		padding-left: @navbar-nav-padding-horizontal;
+		background-color: transparent;
+		-webkit-appearance: none;
+		border: none;
+		outline: 0;
+		
+		& span {
+			background-color: @navbar-color;
+			display: block;
+			height: 2px;
+			left: @navbar-nav-padding-horizontal;
+			position: absolute;
+			width: @navbar-toggle-width;
+			-webkit-transform-origin: center;
+			transform-origin: center;
+			transition-duration: 0.2s;
+			transition-property: background-color, opacity, -webkit-transform;
+			transition-property: background-color, opacity, transform;
+			transition-property: background-color, opacity, transform, -webkit-transform;
+			transition-timing-function: ease-out;
+		}
+		
+		& span:nth-child(1) {
+			top: ~"calc(50% - 0.43rem)";
+			width: 0.85 * @navbar-toggle-width;
+		}
+		
+		& span:nth-child(2) {
+			top: ~"calc(50% - 0.07rem)";
+			width: 0.65 * @navbar-toggle-width;
+		}
+		
+		& span:nth-child(3) {
+			top: ~"calc(50% + 0.29rem)";
+		}
+		
+		.uk-modal-page & {
+			
+			& span:nth-child(1) {
+				width: @navbar-toggle-width;
+				-webkit-transform: translateY(0.36rem) rotate(45deg);
+				transform: translateY(0.36rem) rotate(45deg);
+			}
+			
+			& span:nth-child(2) {
+				opacity: 0;
+			}
+			
+			& span:nth-child(3) {
+				-webkit-transform: translateY(-0.36rem) rotate(-45deg);
+				transform: translateY(-0.36rem) rotate(-45deg);
+			}
+			
+		}
+	
+	}
+
+}
