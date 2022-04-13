@@ -34,18 +34,15 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Admin\Controllers;
 
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\UserCollectionModel;
+use Automad\Admin\Session;
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Request;
-use Automad\UI\Components\Layout\PasswordReset\ResetForm;
-use Automad\UI\Components\Layout\PasswordReset\ResetSuccess;
-use Automad\UI\Components\Layout\PasswordReset\TokenRequestForm;
-use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Models\UserModel;
-use Automad\UI\Response;
-use Automad\UI\Utils\Messenger;
-use Automad\UI\Utils\Session;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -105,7 +102,7 @@ class UserController {
 
 		if ($UserCollectionModel->editCurrentUserInfo($username, $email, $Messenger)) {
 			if ($UserCollectionModel->save($Messenger)) {
-				$Response->setReload(true);
+				$Response->setSuccess(Text::get('savedSuccess'));
 			}
 		}
 

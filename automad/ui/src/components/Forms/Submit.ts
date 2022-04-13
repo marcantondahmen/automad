@@ -35,7 +35,6 @@
 import { listen, queryAll, queryParents } from '../../core';
 import { BaseComponent } from '../Base';
 import { FormComponent } from './Form';
-import { ModalComponent } from '../Modal/Modal';
 
 /**
  * A submit button element. Submit buttons are connected to a form by the "form" attribute.

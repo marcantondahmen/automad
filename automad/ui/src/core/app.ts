@@ -34,7 +34,13 @@
 
 import { RootComponent } from '../components/Root';
 import { eventNames, fire, request, requestAPI } from '.';
-import { KeyValueMap, Pages, SystemSettings, ThemeCollection } from '../types';
+import {
+	KeyValueMap,
+	Pages,
+	SystemSettings,
+	ThemeCollection,
+	User,
+} from '../types';
 import { listen } from './events';
 
 /**
@@ -184,6 +190,15 @@ export class App {
 	 */
 	static get system(): SystemSettings {
 		return this._state.system;
+	}
+
+	/**
+	 * The current user.
+	 *
+	 * @static
+	 */
+	static get user(): User {
+		return this._state.user;
 	}
 
 	/**

@@ -71,3 +71,8 @@ export interface SystemUpdateResponse {
 	latest: string;
 	items: string[];
 }
+
+export interface User {
+	name: string;
+	email: string;
+}

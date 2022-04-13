@@ -39,6 +39,7 @@ namespace Automad\Admin\Controllers;
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\AppModel;
 use Automad\Admin\Models\UserCollectionModel;
+use Automad\Admin\Session;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
@@ -101,6 +102,7 @@ class AppController {
 			'pages' => AppModel::pages($Automad),
 			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
 			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME),
+			'user' => $UserCollectionModel->getUser(Session::getUsername()),
 			'system' => array(
 				'cache' => array(
 					'enabled' => AM_CACHE_ENABLED,

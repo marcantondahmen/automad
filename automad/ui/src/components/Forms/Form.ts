@@ -51,6 +51,7 @@ import {
 import { InputElement, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
 import { ModalComponent } from '../Modal/Modal';
+import { SubmitComponent } from './Submit';
 
 export const autoSubmitTimeout = 750;
 
@@ -68,6 +69,7 @@ const debounced = debounce(async (callback: Function): Promise<void> => {
  * - `confirm` - require confirmation before submitting
  * - `event` - fire event when receiving the API response
  * - `auto` - automatically submit form on change
+ * - `watch` - disable submit buttons until changes are made
  *
  * Focus the first input of a for when being connected:
  *
@@ -117,6 +119,13 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected get confirm(): string {
 		return this.getAttribute('confirm');
+	}
+
+	/**
+	 * Only enable submit button when input values have changed.
+	 */
+	protected get watch(): boolean {
+		return this.hasAttribute('watch');
 	}
 
 	/**
@@ -181,6 +190,14 @@ export class FormComponent extends BaseComponent {
 			this.submit(true);
 		}
 
+		if (this.watch) {
+			setTimeout(() => {
+				this.submitButtons.forEach((button: SubmitComponent) => {
+					button.setAttribute('disabled', '');
+				});
+			}, 0);
+		}
+
 		if (this.hasAttribute('focus')) {
 			setTimeout(() => {
 				(query('input') as InputElement).focus();
@@ -201,7 +218,7 @@ export class FormComponent extends BaseComponent {
 			);
 		}
 
-		this.watch();
+		this.watchChanges();
 	}
 
 	/**
@@ -297,12 +314,18 @@ export class FormComponent extends BaseComponent {
 				App.removeNavigationLock(lockId);
 			}, autoSubmitTimeout + 10);
 		}
+
+		if (this.watch) {
+			this.submitButtons.forEach((button: SubmitComponent) => {
+				button.removeAttribute('disabled');
+			});
+		}
 	}
 
 	/**
 	 * Watch the form for changes.
 	 */
-	protected watch(): void {
+	private watchChanges(): void {
 		listen(
 			this,
 			'change keydown cut paste drop input',

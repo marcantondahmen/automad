@@ -214,6 +214,10 @@ ellipseTool: Ellipse
 
 -
 
+email: Email address
+
+-
+
 enable: Enable 
 
 -
@@ -547,6 +551,10 @@ saveAs: Save as
 -
 
 saveAsModalLabel: Save the image as
+
+-
+
+savedSuccess: Saved changes successfully!
 
 -
 
