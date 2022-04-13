@@ -161,6 +161,13 @@ export class Bindings {
 							(element as HTMLInputElement).checked =
 								binding.value;
 							break;
+						case 'disabled':
+							if (binding.value) {
+								element.setAttribute('disabled', '');
+							} else {
+								element.removeAttribute('disabled');
+							}
+							break;
 						case 'value':
 							(element as InputElement).value = binding.value;
 							break;
