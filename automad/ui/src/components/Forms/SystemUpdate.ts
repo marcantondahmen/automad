@@ -210,12 +210,21 @@ export class SystemUpdateComponent extends FormComponent {
 						<br />
 						${App.text('systemUpdateAvailable')}
 					</p>
-					<am-submit
-						class="${classes.button} ${classes.buttonSuccess}"
-					>
-						${App.text('systemUpdateTo')}
-						<strong>${data.latest} </strong>
-					</am-submit>
+					<div class="${classes.flex} ${classes.flexGap}">
+						<am-submit
+							class="${classes.button} ${classes.buttonSuccess}"
+						>
+							${App.text('systemUpdateTo')}
+							<strong>${data.latest} </strong>
+						</am-submit>
+						<a
+							href="https://automad.org/release-notes"
+							class="${classes.button}"
+							target="_blank"
+						>
+							Release Notes
+						</a>
+					</div>
 				</div>
 			</div>
 			<p>${App.text('systemUpdateItems')}:</p>

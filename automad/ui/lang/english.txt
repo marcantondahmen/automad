@@ -730,7 +730,7 @@ systemUpdate: Update
 
 -
 
-systemUpdateAvailable: A newer version of Automad is available and ready to be installed.<br>Please backup your current installation before updating!
+systemUpdateAvailable: A newer version of Automad is available and ready to be installed. <br>Please carefully read the release notes before upgrading and backup your current installation!
 
 -
 
@@ -790,11 +790,7 @@ systemUpdateTo: Update to version
 
 -
 
-systemUpdateWindowsWarning: Make sure that all files of your installation are closed in external programs before running the update to avoid permissions issues!
-
--
-
-systemUpToDate: Automad is up to date.
+systemUpToDate: Automad is up to date
 
 -
 
