@@ -51,6 +51,27 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class SystemController {
 	/**
+	 * Check whether a system update is available.
+	 *
+	 * @return Response the response object
+	 */
+	public static function checkForUpdate() {
+		$Response = new Response();
+		$latest = Update::getVersion();
+		$data = array(
+			'latest' => $latest,
+			'pending' => false
+		);
+
+		if (version_compare(AM_VERSION, $latest, '<')) {
+			$data['pending'] = true;
+		}
+
+		$Response->setData($data);
+
+		return $Response;
+	}
+	/**
 	 * System updates.
 	 *
 	 * @return Response the response object

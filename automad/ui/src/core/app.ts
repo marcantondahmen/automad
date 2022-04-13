@@ -283,4 +283,18 @@ export class App {
 	static text(key: string): string {
 		return this._state.text[key] || '';
 	}
+
+	/**
+	 * Check for system updates.
+	 */
+	static async checkForSystemUpdate(): Promise<void> {
+		const response = await requestAPI('System/checkForUpdate');
+
+		if (!response.data) {
+			return;
+		}
+
+		this._state.systemUpdate = response.data;
+		fire(eventNames.systemUpdateCheck, window);
+	}
 }

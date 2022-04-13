@@ -97,6 +97,8 @@ export class RootComponent extends BaseComponent {
 				App.root.update();
 			})
 		);
+
+		App.checkForSystemUpdate();
 	}
 
 	/**

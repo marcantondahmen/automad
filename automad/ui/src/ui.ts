@@ -86,6 +86,8 @@ import './components/State/CacheIndicator';
 import './components/State/DebugButton';
 import './components/State/DebugIndicator';
 import './components/State/FeedIndicator';
+import './components/State/SystemUpdateButton';
+import './components/State/SystemUpdateIndicator';
 
 import './components/Switcher/Switcher';
 import './components/Switcher/SwitcherLabel';

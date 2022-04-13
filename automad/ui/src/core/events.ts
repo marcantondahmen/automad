@@ -46,6 +46,7 @@ export enum eventNames {
 	modalClose = 'AutomadModalClose',
 	modalOpen = 'AutomadModalOpen',
 	switcherChange = 'AutomadSwitcherChange',
+	systemUpdateCheck = 'AutomadSystemUpdateCheck',
 }
 
 /**

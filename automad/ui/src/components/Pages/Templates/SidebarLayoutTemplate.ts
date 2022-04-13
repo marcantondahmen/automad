@@ -104,12 +104,16 @@ export const sidebarLayout = ({ main }: Partials) => {
 					<am-jumpbar placeholder="jumpbarPlaceholder"></am-jumpbar>
 				</div>
 				<div class="am-l-navbar__buttons">
+					<am-system-update-button></am-system-update-button>
 					<am-debug-button></am-debug-button>
 					<am-modal-toggle
+						class="${classes.button}"
 						modal="#am-add-page-modal"
-						title="$${App.text('addPage')}"
 					>
-						<i class="bi bi-plus"></i>
+						<am-icon-text
+							icon="file-earmark-text"
+							text="${App.text('addPage')}"
+						></am-icon-text>
 					</am-modal-toggle>
 					<am-toggle
 						target="body"

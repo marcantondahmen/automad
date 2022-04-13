@@ -73,7 +73,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.update,
 				icon: 'arrow-repeat',
 				title: App.text('systemUpdate'),
-				info: '',
+				info: '<am-system-update-indicator></am-system-update-indicator>',
 				render: renderUpdateSection,
 			},
 			{
