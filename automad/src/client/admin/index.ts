@@ -35,7 +35,7 @@
 import 'modern-normalize/modern-normalize.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import './styles/ui.less';
+import './styles/styles.less';
 
 import './components/Fields/Checkbox';
 import './components/Fields/CheckboxLarge';

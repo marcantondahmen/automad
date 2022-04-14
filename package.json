@@ -6,13 +6,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev:ui": "webpack --config automad/ui/webpack.config.js --mode development",
+    "dev:admin": "webpack --config automad/src/client/admin/webpack.config.js --mode development",
     "dev:blocks": "",
     "dev:themes": "",
-    "build:ui": "webpack --config automad/ui/webpack.config.js --mode production",
+    "build:admin": "webpack --config automad/src/client/admin/webpack.config.js --mode production",
     "build:blocks": "",
     "build:themes": "",
-    "build": "npm run build:ui && npm run build:blocks && npm run build:themes"
+    "build": "npm run build:admin && npm run build:blocks && npm run build:themes"
   },
   "devDependencies": {
     "@types/dropzone": "^5.7.4",

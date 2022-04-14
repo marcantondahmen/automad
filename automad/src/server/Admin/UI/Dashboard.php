@@ -65,11 +65,11 @@ class Dashboard {
 					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				>
 				<title>Automad</title>
-				{$fn(Asset::icon('ui/dist/favicon.ico'))}
-				{$fn(Asset::css('ui/dist/vendor.bundle.css'))}
-				{$fn(Asset::css('ui/dist/ui.bundle.css'))}
-				{$fn(Asset::js('ui/dist/vendor.bundle.js'))}
-				{$fn(Asset::js('ui/dist/ui.bundle.js'))}
+				{$fn(Asset::icon('dist/admin/favicon.ico'))}
+				{$fn(Asset::css('dist/admin/vendor.bundle.css'))}
+				{$fn(Asset::css('dist/admin/main.bundle.css'))}
+				{$fn(Asset::js('dist/admin/vendor.bundle.js'))}
+				{$fn(Asset::js('dist/admin/main.bundle.js'))}
 			</head>
 			<body>
 				<am-root base="{$fn(AM_BASE_INDEX)}"></am-root>

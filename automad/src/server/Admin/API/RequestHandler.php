@@ -91,7 +91,7 @@ class RequestHandler {
 	 */
 	private static function classFileExists(string $className) {
 		$prefix = 'Automad\\';
-		$file = AM_BASE_DIR . '/automad/src/' . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
+		$file = AM_BASE_DIR . '/automad/src/server/' . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
 
 		return is_readable($file);
 	}

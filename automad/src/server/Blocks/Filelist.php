@@ -70,7 +70,7 @@ class Filelist extends AbstractBlock {
 		$options['file'] = AM_DIR_PACKAGES . $options['file'];
 
 		if (!is_readable(AM_BASE_DIR . $options['file'])) {
-			$options['file'] = '/automad/blocks/templates/filelist.php';
+			$options['file'] = '/automad/src/server/Blocks/Templates/Filelist.php';
 		}
 
 		$html = Snippet::render((object) $options, $Automad);

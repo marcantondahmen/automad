@@ -52,7 +52,7 @@ module.exports = (env, argv) => {
 								pathData.module.resourceResolveData.relativePath
 							);
 
-							return `./fonts/${name
+							return `../fonts/${name
 								.replace('.var', '-var')
 								.toLowerCase()}`;
 						},

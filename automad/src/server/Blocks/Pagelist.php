@@ -87,7 +87,7 @@ class Pagelist extends AbstractBlock {
 		$options['file'] = AM_DIR_PACKAGES . $options['file'];
 
 		if (!is_readable(AM_BASE_DIR . $options['file'])) {
-			$options['file'] = '/automad/blocks/templates/pagelist.php';
+			$options['file'] = '/automad/src/server/Blocks/Templates/Pagelist.php';
 		}
 
 		$html = Snippet::render((object) $options, $Automad);

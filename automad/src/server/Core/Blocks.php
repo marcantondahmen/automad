@@ -55,8 +55,8 @@ class Blocks {
 	 * @return string the processed HTML
 	 */
 	public static function injectAssets(string $str) {
-		$assets = Asset::css('dist/blocks.min.css', '') .
-				  Asset::js('dist/blocks.min.js', '');
+		$assets = Asset::css('dist/blocks/blocks.min.css', '') .
+				  Asset::js('dist/blocks/blocks.min.js', '');
 
 		// Check if there is already any other script tag and try to prepend all assets as first items.
 		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {

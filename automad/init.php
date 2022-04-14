@@ -36,5 +36,5 @@
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-require_once __DIR__ . '/src/App.php';
+require_once __DIR__ . '/src/server/App.php';
 new Automad\App();

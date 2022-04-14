@@ -69,7 +69,7 @@ class App {
 		date_default_timezone_set(@date_default_timezone_get());
 
 		require_once __DIR__ . '/Core/FileSystem.php';
-		define('AM_BASE_DIR', FileSystem::normalizeSlashes(dirname(dirname(__DIR__))));
+		define('AM_BASE_DIR', FileSystem::normalizeSlashes(dirname(dirname(dirname(__DIR__)))));
 
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
