@@ -33,14 +33,14 @@
  */
 
 import { App } from '../../core';
-import { BaseIndicatorComponent } from './BaseIndicator';
+import { BaseActivationIndicatorComponent } from './BaseActivationIndicator';
 
 /**
  * A debug state indicator component.
  *
- * @extends BaseIndicatorComponent
+ * @extends BaseActivationIndicatorComponent
  */
-class DebugIndicatorComponent extends BaseIndicatorComponent {
+class DebugIndicatorComponent extends BaseActivationIndicatorComponent {
 	/**
 	 * The enabled text.
 	 */

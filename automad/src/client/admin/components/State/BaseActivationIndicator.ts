@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, html } from '../../core';
+import { classes, html } from '../../core';
 import { BaseStateComponent } from './BaseState';
 
 /**
@@ -40,7 +40,7 @@ import { BaseStateComponent } from './BaseState';
  *
  * @extends BaseComponent
  */
-export abstract class BaseIndicatorComponent extends BaseStateComponent {
+export abstract class BaseActivationIndicatorComponent extends BaseStateComponent {
 	/**
 	 * The enabled text.
 	 */

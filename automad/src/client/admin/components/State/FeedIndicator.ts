@@ -33,14 +33,14 @@
  */
 
 import { App } from '../../core';
-import { BaseIndicatorComponent } from './BaseIndicator';
+import { BaseActivationIndicatorComponent } from './BaseActivationIndicator';
 
 /**
  * A feed state indicator component.
  *
- * @extends BaseIndicatorComponent
+ * @extends BaseActivationIndicatorComponent
  */
-class FeedIndicatorComponent extends BaseIndicatorComponent {
+class FeedIndicatorComponent extends BaseActivationIndicatorComponent {
 	/**
 	 * The enabled text.
 	 */

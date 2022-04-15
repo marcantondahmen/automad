@@ -33,14 +33,14 @@
  */
 
 import { App } from '../../core';
-import { BaseIndicatorComponent } from './BaseIndicator';
+import { BaseActivationIndicatorComponent } from './BaseActivationIndicator';
 
 /**
  * A cache state indicator component.
  *
- * @extends BaseIndicatorComponent
+ * @extends BaseActivationIndicatorComponent
  */
-class CacheIndicatorComponent extends BaseIndicatorComponent {
+class CacheIndicatorComponent extends BaseActivationIndicatorComponent {
 	/**
 	 * The enabled text.
 	 */
