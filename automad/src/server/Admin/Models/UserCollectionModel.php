@@ -40,9 +40,9 @@ use Automad\Admin\Session;
 use Automad\Admin\UI\Templates\InvitationEmail;
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Admin\UI\Utils\Text;
+use Automad\Admin\User;
 use Automad\Core\FileSystem;
 use Automad\System\Server;
-use Automad\System\User;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

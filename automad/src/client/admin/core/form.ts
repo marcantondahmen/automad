@@ -109,6 +109,10 @@ export const setFormData = (
 	formData: KeyValueMap,
 	container: HTMLElement
 ): void => {
+	if (!formData) {
+		return;
+	}
+
 	queryAll('[type="radio"], [type="input"]').forEach(
 		(input: HTMLInputElement) => {
 			input.checked = false;

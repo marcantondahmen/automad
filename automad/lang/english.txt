@@ -1,3 +1,7 @@
+addedSuccess: Successfully added
+
+-
+
 addImage: Add image
 
 -
@@ -150,6 +154,10 @@ currentPassword: Current Password
 
 -
 
+currentPasswordError: The current password is wrong!
+
+-
+
 custom: Custom
 
 -
@@ -215,6 +223,22 @@ ellipseTool: Ellipse
 -
 
 email: Email address
+
+-
+
+emailAutomatic: This email has been sent automatically. Please do not reply to this email.
+
+-
+
+emailHello: Hello
+
+-
+
+emailInviteButton: Create Password Now
+
+-
+
+emailInviteText: a new user account on {} has been created for you. You can use the button below to create your password.
 
 -
 
@@ -454,6 +478,18 @@ password: Password
 
 -
 
+passwordChangedSuccess: Your password has been changed successfully!
+
+-
+
+passwordRepeatError: Please enter twice the same new password!
+
+-
+
+passwordReuseError: Don't reuse your old password!
+
+-
+
 penTool: Pen
 
 -
@@ -490,7 +526,7 @@ redoTitle: Redo last operation
 
 -
 
-repeatPassword: Please enter twice the same new password!
+repeatPassword: Repeat the password
 
 -
 
@@ -827,6 +863,14 @@ systemUsersRegistered: Registered Users
 -
 
 systemUsersRegisteredInfo: It is also possible to register other users in order to allow them to edit content. 
+
+-
+
+systemUsersSendInvitation: Send Invitation 
+
+-
+
+systemUsersSendInvitationSuccess: The invitation has been sent successfully.
 
 -
 

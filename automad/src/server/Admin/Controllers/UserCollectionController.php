@@ -34,14 +34,13 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Admin\Controllers;
 
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\UserCollectionModel;
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Request;
-use Automad\UI\Components\Grid\Users;
-use Automad\UI\Models\UserCollectionModel;
-use Automad\UI\Response;
-use Automad\UI\Utils\Messenger;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -81,7 +80,7 @@ class UserCollectionController {
 			return $Response;
 		}
 
-		$Response->setSuccess(Text::get('success_added') . ' "' . $username . '"');
+		$Response->setSuccess(Text::get('addedSuccess') . ' "' . $username . '"');
 
 		return $Response;
 	}
@@ -98,14 +97,14 @@ class UserCollectionController {
 		$UserCollectionModel = new UserCollectionModel();
 
 		if ($users = Request::post('delete')) {
+			$users = array_keys($users);
+
 			if ($UserCollectionModel->delete($users, $Messenger)) {
-				$Response->setSuccess(Text::get('success_remove') . ' "' . implode('", "', $users) . '"');
+				$Response->setSuccess(Text::get('deteledSuccess') . ' "' . implode('", "', $users) . '"');
 			} else {
 				$Response->setError($Messenger->getError());
 			}
 		}
-
-		$Response->setHtml(Users::render($UserCollectionModel->getCollection()));
 
 		return $Response;
 	}
@@ -115,7 +114,7 @@ class UserCollectionController {
 	 *
 	 * @return string Error message in case of an error
 	 */
-	public static function install() {
+	/* public static function install() {
 		if (empty($_POST)) {
 			return '';
 		}
@@ -142,7 +141,7 @@ class UserCollectionController {
 		ob_end_flush();
 
 		exit($UserCollectionModel->generatePHP());
-	}
+	} */
 
 	/**
 	 * Invite a new user by email.
@@ -176,7 +175,7 @@ class UserCollectionController {
 			return $Response;
 		}
 
-		$Response->setSuccess(Text::get('success_user_invite'));
+		$Response->setSuccess(Text::get('systemUsersSendInvitationSuccess'));
 
 		return $Response;
 	}

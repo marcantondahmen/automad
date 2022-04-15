@@ -66,7 +66,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.users,
 				icon: 'people',
 				title: App.text('systemUsers'),
-				info: '',
+				info: '<am-user-count-indicator></am-user-count-indicator>',
 				render: renderUsersSection,
 			},
 			{

@@ -51,6 +51,7 @@ export enum eventNames {
 
 /**
  * Fires an event on an element or the window.
+ *
  * @param name
  * @param [element]
  */

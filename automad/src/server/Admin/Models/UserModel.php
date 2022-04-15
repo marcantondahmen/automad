@@ -34,14 +34,11 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\Admin\Models;
 
-use Automad\Types\User;
-use Automad\UI\Components\Email\PasswordResetEmail;
-use Automad\UI\Response;
-use Automad\UI\Utils\Messenger;
-use Automad\UI\Utils\Session;
-use Automad\UI\Utils\Text;
+use Automad\Admin\API\Response;
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Admin\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -71,12 +68,12 @@ class UserModel {
 			$User->setPasswordHash($newPassword);
 
 			if ($UserCollectionModel->save($Messenger)) {
-				$Response->setSuccess(Text::get('success_password_changed'));
+				$Response->setSuccess(Text::get('passwordChangedSuccess'));
 			} else {
 				$Response->setError($Messenger->getError());
 			}
 		} else {
-			$Response->setError(Text::get('error_password_current'));
+			$Response->setError(Text::get('currentPasswordError'));
 		}
 
 		return $Response;
@@ -91,7 +88,7 @@ class UserModel {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function resetPassword(string $username, string $newPassword1, string $newPassword2, Messenger $Messenger) {
+	/* public function resetPassword(string $username, string $newPassword1, string $newPassword2, Messenger $Messenger) {
 		if ($newPassword1 !== $newPassword2) {
 			$Messenger->setError(Text::get('error_password_repeat'));
 
@@ -109,7 +106,7 @@ class UserModel {
 		Session::clearResetTokenHash();
 
 		return true;
-	}
+	} */
 
 	/**
 	 * Send password reset token and store it in session.
@@ -118,7 +115,7 @@ class UserModel {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function sendPasswordResetToken(User $User, Messenger $Messenger) {
+	/* public function sendPasswordResetToken(User $User, Messenger $Messenger) {
 		$email = $User->email;
 
 		if (!$email) {
@@ -144,7 +141,7 @@ class UserModel {
 		}
 
 		return true;
-	}
+	} */
 
 	/**
 	 * Verify if the passed username/toke combination matches a token hash in the session data array.
@@ -153,11 +150,11 @@ class UserModel {
 	 * @param string $token
 	 * @return bool true if verified
 	 */
-	public function verifyPasswordResetToken(string $username, string $token) {
+	/* public function verifyPasswordResetToken(string $username, string $token) {
 		$tokenHash = Session::getResetTokenHash($username);
 
 		if ($tokenHash) {
 			return password_verify($token, $tokenHash);
 		}
-	}
+	} */
 }

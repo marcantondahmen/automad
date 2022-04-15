@@ -103,7 +103,7 @@ abstract class AbstractEmailBody {
 								<td width="400px" style="min-width: 400px; max-width: 400px;">
 									$content
 									<p $pStyle>
-										$Text->email_automatic
+										$Text->emailAutomatic
 										<br>
 										<br>
 										<b>Automad</b>

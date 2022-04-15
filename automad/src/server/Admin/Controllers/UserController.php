@@ -38,11 +38,11 @@ namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\UserCollectionModel;
+use Automad\Admin\Models\UserModel;
 use Automad\Admin\Session;
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Request;
-use Automad\UI\Models\UserModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,9 +61,9 @@ class UserController {
 	 */
 	public static function changePassword() {
 		$Response = new Response();
-		$currentPassword = Request::post('current-password');
-		$newPassword1 = Request::post('new-password1');
-		$newPassword2 = Request::post('new-password2');
+		$currentPassword = Request::post('currentPassword');
+		$newPassword1 = Request::post('newPassword1');
+		$newPassword2 = Request::post('newPassword2');
 
 		if ($currentPassword && $newPassword1 && $newPassword2) {
 			if ($newPassword1 == $newPassword2) {
@@ -75,13 +75,13 @@ class UserController {
 						$newPassword1
 					);
 				} else {
-					$Response->setError(Text::get('error_password_reuse'));
+					$Response->setError(Text::get('passwordReuseError'));
 				}
 			} else {
-				$Response->setError(Text::get('error_password_repeat'));
+				$Response->setError(Text::get('passwordRepeatError'));
 			}
 		} else {
-			$Response->setError(Text::get('error_form'));
+			$Response->setError(Text::get('invalidFormError'));
 		}
 
 		return $Response;
@@ -116,7 +116,7 @@ class UserController {
 	 *
 	 * @return string the form HTML
 	 */
-	public static function resetPassword() {
+	/* public static function resetPassword() {
 		$UserModel = new UserModel();
 		$UserCollectionModel = new UserCollectionModel();
 		$Messenger = new Messenger();
@@ -155,5 +155,5 @@ class UserController {
 		}
 
 		return TokenRequestForm::render();
-	}
+	} */
 }

@@ -33,8 +33,15 @@
  */
 
 import { App, html } from '../../../../core';
+import { Listener } from '../../../../types';
 
-export const renderConfigFileSection = (): string => {
+/**
+ * Render the config file section.
+ *
+ * @param listeners
+ * @returns the rendered HTML
+ */
+export const renderConfigFileSection = (listeners: Listener[]): string => {
 	return html`
 		<p>$${App.text('systemConfigFileInfo')}</p>
 		<am-config-file api="Config/file"></am-config-file>

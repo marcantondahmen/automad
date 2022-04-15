@@ -35,9 +35,9 @@
 import { InputComponent } from './Input';
 
 /**
- * A standard input field with a label.
+ * A email field with a label.
  *
- * @extends BaseFieldComponent
+ * @extends InputComponent
  */
 export class EmailComponent extends InputComponent {
 	/**

@@ -61,10 +61,10 @@ class InvitationEmail extends AbstractEmailBody {
 		$pStyle = self::$paragraphStyle;
 		$codeStyle = self::$codeStyle;
 		$Text = Text::getObject();
-		$inviteText = str_replace('{}', "<b>$website</b>", Text::get('email_invite_text'));
+		$inviteText = str_replace('{}', "<b>$website</b>", Text::get('emailInviteText'));
 
 		$content = <<< HTML
-			<h1 $h1Style>$Text->email_hello $username,</h1>
+			<h1 $h1Style>$Text->emailHello $username,</h1>
 			<p $pStyle>
 				$inviteText
 			</p>
@@ -85,7 +85,7 @@ class InvitationEmail extends AbstractEmailBody {
 					font-size: 18px; 
 					line-height: 48px;
 				">
-					$Text->email_invite_button
+					$Text->emailInviteButton
 				</a>
 			</p>
 		HTML;

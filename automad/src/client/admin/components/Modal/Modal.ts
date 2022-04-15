@@ -51,6 +51,7 @@ import { BaseComponent } from '../Base';
  * - `noesc` - Disable the ESC key
  * - `noclick` - Disable closing the modal by clicking on the overlay
  * - `destroy` - Self destroy on close
+ * - `nofocus` - don't focus first input
  *
  * @example
  * <am-modal-toggle modal="#modal">
@@ -152,10 +153,12 @@ export class ModalComponent extends BaseComponent {
 
 		fire(eventNames.modalOpen, this);
 
-		const input = query('input, textarea', this);
+		if (!this.hasAttribute('nofocus')) {
+			const input = query('input, textarea', this);
 
-		if (input) {
-			input.focus();
+			if (input) {
+				input.focus();
+			}
 		}
 	}
 

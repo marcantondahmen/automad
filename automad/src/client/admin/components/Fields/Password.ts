@@ -32,15 +32,20 @@
  * Licensed under the MIT license.
  */
 
-import { html } from '../../../../core';
-import { Listener } from '../../../../types';
+import { InputComponent } from './Input';
 
 /**
- * Render the update section.
+ * A password field with a label.
  *
- * @param listeners
- * @returns the rendered HTML
+ * @extends InputComponent
  */
-export const renderUpdateSection = (listeners: Listener[]): string => {
-	return html`<am-system-update api="System/update"></am-system-update>`;
-};
+export class PasswordComponent extends InputComponent {
+	/**
+	 * The input type.
+	 */
+	protected get inputType(): string {
+		return 'password';
+	}
+}
+
+customElements.define('am-password', PasswordComponent);

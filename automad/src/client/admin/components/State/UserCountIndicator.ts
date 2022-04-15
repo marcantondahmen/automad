@@ -26,21 +26,29 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { html } from '../../../../core';
-import { Listener } from '../../../../types';
+import { App, html } from '../../core';
+import { BaseStateComponent } from './BaseState';
 
 /**
- * Render the update section.
+ * A debug state component.
  *
- * @param listeners
- * @returns the rendered HTML
+ * @extends BaseComponent
  */
-export const renderUpdateSection = (listeners: Listener[]): string => {
-	return html`<am-system-update api="System/update"></am-system-update>`;
-};
+class UserCountIndicatorComponent extends BaseStateComponent {
+	/**
+	 * Render the state element.
+	 */
+	render(): void {
+		this.innerHTML = html`
+			${App.text('systemUsersRegistered')}: ${App.system.users.length}
+		`;
+	}
+}
+
+customElements.define('am-user-count-indicator', UserCountIndicatorComponent);
