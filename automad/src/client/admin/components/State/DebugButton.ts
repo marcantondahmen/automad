@@ -46,6 +46,8 @@ class DebugButtonComponent extends BaseStateComponent {
 	 * Render the state element.
 	 */
 	render(): void {
+		this.classList.toggle(classes.displayNone, !App.system.debug);
+
 		if (App.system.debug) {
 			this.innerHTML = html`
 				<am-link

@@ -56,6 +56,11 @@ class SystemUpdateButtonComponent extends BaseComponent {
 	 * Render the state element.
 	 */
 	render(): void {
+		this.classList.toggle(
+			classes.displayNone,
+			!App.state.systemUpdate?.pending
+		);
+
 		if (App.state.systemUpdate?.pending) {
 			this.innerHTML = html`
 				<am-link

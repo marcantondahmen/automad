@@ -271,27 +271,28 @@ export class FormComponent extends BaseComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		if (response.redirect) {
-			App.root.setView(response.redirect);
+		const { redirect, reload, error, success, debug } = response;
+
+		if (redirect) {
+			App.root.setView(redirect);
 		}
 
-		if (response.reload) {
+		if (reload) {
 			window.location.reload();
 		}
 
-		if (response.error) {
-			notifyError(response.error);
+		if (error) {
+			notifyError(error);
 		}
 
-		if (response.success) {
-			notifySuccess(response.success);
+		if (success) {
+			notifySuccess(success);
 		}
 
-		if (response.debug) {
-			const log: KeyValueMap = {};
-
-			log[`API: ${this.api}`] = response.debug;
-			console.log(log);
+		if (debug && debug instanceof Array) {
+			debug.forEach((item) => {
+				console.log(this.api, item);
+			});
 		}
 	}
 
