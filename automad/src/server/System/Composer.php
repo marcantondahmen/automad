@@ -60,6 +60,11 @@ class Composer {
 	private $autoloader = '/vendor/autoload.php';
 
 	/**
+	 * The path to the composer.json file.
+	 */
+	private $composerFile = AM_BASE_DIR . '/composer.json';
+
+	/**
 	 * The Composer version to be used.
 	 */
 	private $composerVersion = '2.1.6';
@@ -135,6 +140,10 @@ class Composer {
 
 		Debug::log($autoloader, 'Require Composer autoloader');
 		require_once($autoloader);
+
+		$decoded = json_decode(file_get_contents($this->composerFile), true);
+		$decoded['config'] = array('allow-plugins' => array('automad/package-installer' => true));
+		FileSystem::write($this->composerFile, json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
 		if ($updatePackageInstaller) {
 			$this->run('require automad/package-installer');

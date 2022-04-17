@@ -1,7 +1,9 @@
 {
     "name": "automad/automad",
     "description": "A flat-file content management system and template engine",
-    "keywords": ["cms"],
+    "keywords": [
+        "cms"
+    ],
     "type": "project",
     "homepage": "https://automad.org",
     "license": "MIT",
