@@ -62,7 +62,7 @@ class Composer {
 	/**
 	 * The Composer version to be used.
 	 */
-	private $composerVersion = '2.1.6';
+	private $composerVersion = '2.3.5';
 
 	/**
 	 * Composer extraction directory within temporary directory.
@@ -197,13 +197,14 @@ class Composer {
 			}
 		}
 
-		$bufferNoWarning = preg_replace('/\<warning\>.*?\<\/warning\>\s*/is', '', $buffer);
+		$bufferJsonOnly = preg_replace('/^[^\{]*(\{.*\})[^\}]*$/is', '$1', $buffer);
+		$bufferJsonOnly = preg_replace('/\s+/is', ' ', $bufferJsonOnly);
 
 		Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
-		Debug::log($bufferNoWarning, 'Buffer without warning');
+		Debug::log($bufferJsonOnly, 'Buffer JSON only');
 
 		if ($getBuffer) {
-			return $bufferNoWarning;
+			return $bufferJsonOnly;
 		}
 
 		return '';

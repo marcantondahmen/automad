@@ -434,7 +434,47 @@ original: Original
 
 -
 
+packagesFilter: Filter packages
+
+-
+
 packagesTitle: Packages
+
+-
+
+packageInstall: Install
+
+-
+
+packageInstalling: Installing package ...
+
+-
+
+packageInstalledSuccess: Successfully installed
+
+-
+
+packageRemove: Remove
+
+-
+
+packageRemoving: Removing package ...
+
+-
+
+packageUpdate: Update
+
+-
+
+packageUpdating: Updating package ...
+
+-
+
+packageUpdatedSuccess: Successfully updated
+
+-
+
+packagistConnectionError: Can't connect to the Packagist API
 
 -
 

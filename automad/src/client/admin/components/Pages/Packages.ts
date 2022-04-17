@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, Routes } from '../../core';
+import { App, classes, getTagFromRoute, html, Routes } from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
@@ -54,7 +54,33 @@ export class PackagesComponent extends SidebarLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return 'Packages';
+		return html`
+			<section class="am-l-main__row">
+				<nav class="am-l-main__content">
+					<div class="${classes.breadcrumbs}">
+						<am-link
+							class="${classes.breadcrumbsItem}"
+							target="system"
+						>
+							<am-icon-text
+								icon="sliders"
+								text="$${App.text('systemTitle')}"
+							></am-icon-text>
+						</am-link>
+					</div>
+				</nav>
+			</section>
+			<am-system-menu class="am-l-main__row am-l-main__row--sticky">
+				<menu class="am-l-main__content">
+					<am-filter placeholder="packagesFilter"></am-filter>
+				</menu>
+			</am-system-menu>
+			<section class="am-l-main__row">
+				<div class="am-l-main__content">
+					<am-package-list></am-package-list>
+				</div>
+			</section>
+		`;
 	}
 }
 

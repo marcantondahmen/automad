@@ -34,16 +34,18 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Admin\Controllers;
 
+use Automad\Admin\API\Response;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
-use Automad\Core\Debug;
+use Automad\Core\FileSystem;
+use Automad\Core\Image;
+use Automad\Core\RemoteFile;
 use Automad\Core\Request;
-use Automad\UI\Components\Layout\Packages;
-use Automad\UI\Utils\Text;
+use Automad\Core\Str;
 use Automad\System\Composer;
-use Automad\System\Packagist;
-use Automad\UI\Response;
+use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,56 +63,81 @@ class PackageManagerController {
 	private static $composerFile = AM_BASE_DIR . '/composer.json';
 
 	/**
-	 * Get a list of outdated packages.
+	 * Get the array of installed packages.
 	 *
-	 * @return Response the response object
+	 * @return array The array with all installed packages.
 	 */
-	public static function getOutdatedPackages() {
+	public static function getInstalled() {
 		$Response = new Response();
 
-		$Composer = new Composer();
-		$Response->setBuffer($Composer->run('show -oD -f json', true));
+		if (is_readable(self::$composerFile)) {
+			$decoded = json_decode(file_get_contents(self::$composerFile), true);
+
+			if (is_array($decoded) && !empty($decoded['require'])) {
+				$Response->setData(array('installed' => $decoded['require']));
+			}
+		}
 
 		return $Response;
 	}
 
 	/**
-	 * Get a list of theme packages available on Packagist
-	 * where the installed ones are at the beginning.
+	 * Get a list of outdated packages.
 	 *
 	 * @return Response the response object
 	 */
-	public static function getPackages() {
+	public static function getOutdated() {
 		$Response = new Response();
 
-		// For now only get theme packages and therefore set the tags
-		// parameter to 'theme'.
-		$packages = Packagist::getPackages('automad-package');
-		$installed = array();
-		$available = array();
-		$installedPackages = self::getInstalled();
+		$Composer = new Composer();
+		$buffer = $Composer->run('show -oD -f json', true);
+		$decoded = json_decode($buffer, true);
 
-		Debug::log($packages, 'Packages on Packagist');
-		Debug::log($installedPackages, 'Installed packages');
+		if ($decoded) {
+			$Response->setData(array('outdated' => $decoded['installed']));
+		}
 
-		if ($packages) {
-			foreach ($packages as $package) {
-				$package->info = 'https://packages.automad.org/' . $package->name;
+		return $Response;
+	}
 
-				if (array_key_exists($package->name, $installedPackages)) {
-					$package->installed = true;
-					$installed[] = $package;
-				} else {
-					$package->installed = false;
-					$available[] = $package;
-				}
+	/**
+	 * Get the thumbnail for a given package repository.
+	 *
+	 * @return Response the response object
+	 */
+	public static function getThumbnail() {
+		$Response = new Response();
+		$repository = Request::post('repository');
+		$repositorySlug = Str::stripStart($repository, 'https://github.com/');
+		$thumbnail = '';
+		$lifetime = 216000;
+
+		if (!preg_match('#\w+/\w+#', $repositorySlug)) {
+			return $Response;
+		}
+
+		$cachePath = AM_BASE_DIR . AM_DIR_CACHE . "/packages/$repositorySlug/thumbnail";
+
+		if (is_readable($cachePath) && filemtime($cachePath) > time() - $lifetime) {
+			$thumbnail = file_get_contents($cachePath);
+		} else {
+			$readme = self::getReadme($repository);
+			$imageUrl = Str::findFirstImage($readme);
+
+			if (!$imageUrl) {
+				return $Response;
 			}
 
-			$packages = array_merge($installed, $available);
-			$Response->setHtml(Packages::render($packages));
-		} else {
-			$Response->setError(Text::get('error_packages'));
+			$RemoteFile = new RemoteFile($imageUrl);
+			$download = $RemoteFile->getLocalCopy();
+
+			$Image = new Image($download, 800, 600, true);
+			$thumbnail = AM_BASE_URL . $Image->file;
+
+			FileSystem::write($cachePath, $thumbnail);
 		}
+
+		$Response->setData(array('thumbnail' => $thumbnail));
 
 		return $Response;
 	}
@@ -125,10 +152,10 @@ class PackageManagerController {
 
 		if ($package = Request::post('package')) {
 			$Composer = new Composer();
-			$Response->setError($Composer->run('require ' . $package));
-			$Response->setTrigger('composerDone');
 
-			if (!$Response->getError()) {
+			if ($error = $Composer->run('require ' . $package)) {
+				$Response->setError($error);
+			} else {
 				$Response->setSuccess(Text::get('success_installed') . '<br>' . $package);
 			}
 		}
@@ -146,11 +173,11 @@ class PackageManagerController {
 
 		if ($package = Request::post('package')) {
 			$Composer = new Composer();
-			$Response->setError($Composer->run('remove ' . $package));
-			$Response->setTrigger('composerDone');
 
-			if (!$Response->getError()) {
-				$Response->setSuccess(Text::get('success_remove') . '<br>' . $package);
+			if ($error = $Composer->run('remove ' . $package)) {
+				$Response->setError($error);
+			} else {
+				$Response->setSuccess(Text::get('deteledSuccess') . '<br>' . $package);
 			}
 		}
 
@@ -167,11 +194,12 @@ class PackageManagerController {
 
 		if ($package = Request::post('package')) {
 			$Composer = new Composer();
-			$Response->setError($Composer->run('update --with-dependencies ' . $package));
-			$Response->setTrigger('composerDone');
 
-			if (!$Response->getError()) {
-				$Response->setSuccess(Text::get('success_package_updated') . '<br>' . $package);
+			if ($error = $Composer->run('update --with-dependencies ' . $package)) {
+				$Response->setError($error);
+			} else {
+				$Response->setSuccess(Text::get('packageUpdatedSuccess') . '<br>' . $package);
+
 				Cache::clear();
 			}
 		}
@@ -180,39 +208,27 @@ class PackageManagerController {
 	}
 
 	/**
-	 * Update all packages.
+	 * Get the rendered README for a given package repository.
 	 *
-	 * @return Response the response object
+	 * @param string $repository
+	 * @return string the thumbnail URL
 	 */
-	public static function updateAll() {
-		$Response = new Response();
+	private static function getReadme(string $repository) {
+		$repositorySlug = Str::stripStart($repository, 'https://github.com/');
 
-		$Composer = new Composer();
-		$Response->setError($Composer->run('update'));
-		$Response->setTrigger('composerDone');
+		preg_match(
+			'#href="/' . $repositorySlug . '/blob/(\w+)/(readme[\w\.]*)"#i',
+			Fetch::get($repository),
+			$matches
+		);
 
-		if (!$Response->getError()) {
-			$Response->setSuccess(Text::get('success_packages_updated_all'));
-			Cache::clear();
+		if (empty($matches) || empty($matches[1]) || empty($matches[2])) {
+			return '';
 		}
 
-		return $Response;
-	}
+		$blob = 'https://raw.githubusercontent.com/' . $repositorySlug . '/' . $matches[1] . '/' . $matches[2];
+		$raw = Fetch::get($blob);
 
-	/**
-	 * Get the array of installed packages.
-	 *
-	 * @return array The array with all installed packages.
-	 */
-	private static function getInstalled() {
-		if (is_readable(self::$composerFile)) {
-			$composerArray = json_decode(file_get_contents(self::$composerFile), true);
-
-			if (is_array($composerArray) && !empty($composerArray['require'])) {
-				return $composerArray['require'];
-			}
-		}
-
-		return array();
+		return Str::markdown($raw);
 	}
 }

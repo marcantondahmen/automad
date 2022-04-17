@@ -22,29 +22,22 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@l-sidebar-width: 22rem;
-@l-main-width: 72rem;
-@l-center-width: 24rem;
-
-@l-breakpoint-large: ((2 * @l-sidebar-width) + @l-main-width);
-@l-breakpoint-large-max: @l-breakpoint-large - 0.01;
-@l-breakpoint-medium: (@l-sidebar-width + @l-main-width);
-@l-breakpoint-medium-max: @l-breakpoint-medium - 0.01;
-@l-breakpoint-small: 36rem;
-@l-breakpoint-small-max: @l-breakpoint-small - 0.01;
-
-@import 'footer.less';
-@import 'main.less';
-@import 'navbar.less';
-@import 'page.less';
-@import 'sidebar.less';
+export interface Package {
+	name: string;
+	description: string;
+	url: string;
+	repository: string;
+	downloads: number;
+	outdated?: boolean;
+	installed?: boolean;
+}

@@ -74,6 +74,9 @@ import './components/Modal/Modal';
 import './components/Modal/ModalClose';
 import './components/Modal/ModalToggle';
 
+import './components/PackageManager/PackageCard';
+import './components/PackageManager/PackageList';
+
 import './components/Pages/Home';
 import './components/Pages/Login';
 import './components/Pages/Logout';

@@ -63,7 +63,7 @@ class FilterComponent extends BaseComponent {
 	 * The target selector.
 	 */
 	protected get targetSelector() {
-		return `[api] .${classes.field}:not(am-title), [api] .${classes.card}`;
+		return `[api] .${classes.field}:not(am-title), .${classes.card}`;
 	}
 
 	/**

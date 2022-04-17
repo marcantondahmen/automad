@@ -33,6 +33,7 @@
  */
 
 export * from './form';
+export * from './packages';
 export * from './page';
 export * from './system';
 import { PageMetaData } from '.';

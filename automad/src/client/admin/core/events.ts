@@ -45,6 +45,7 @@ export enum eventNames {
 	filesChangeOnServer = 'AutomadFilesChangeOnServer',
 	modalClose = 'AutomadModalClose',
 	modalOpen = 'AutomadModalOpen',
+	packagesChange = 'AutomadPackagesChange',
 	switcherChange = 'AutomadSwitcherChange',
 	systemUpdateCheck = 'AutomadSystemUpdateCheck',
 }
