@@ -47,6 +47,7 @@ export enum classes {
 	button = 'am-e-button',
 	buttonSuccess = 'am-e-button--success',
 	card = 'am-c-card',
+	cardActive = 'am-c-card--active',
 	cardLink = 'am-c-card--link',
 	cardImage = 'am-c-card__image',
 	cardBody = 'am-c-card__body',

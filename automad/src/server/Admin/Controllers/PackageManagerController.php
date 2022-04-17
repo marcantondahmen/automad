@@ -156,7 +156,7 @@ class PackageManagerController {
 			if ($error = $Composer->run('require ' . $package)) {
 				$Response->setError($error);
 			} else {
-				$Response->setSuccess(Text::get('success_installed') . '<br>' . $package);
+				$Response->setSuccess(Text::get('packageInstalledSuccess') . '<br>' . $package);
 			}
 		}
 

@@ -202,6 +202,7 @@ class PackageCardComponent extends BaseComponent {
 	 */
 	private async render(pkg: Package): Promise<void> {
 		this.classList.add(classes.card);
+		this.classList.toggle(classes.cardActive, pkg.installed);
 
 		const href = `${packageBrowser}/${pkg.name}`;
 		const preview = create(
