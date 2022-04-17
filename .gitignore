@@ -5,6 +5,7 @@ config/accounts.php
 /vendor
 /composer.lock
 packages/automad
+packages/dahmen
 pages/test
 lib/vendor/michelf/php-markdown/test
 lib/vendor/michelf/php-markdown/.editorconfig

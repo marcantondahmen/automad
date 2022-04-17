@@ -50,7 +50,7 @@ class NavItemComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['page', 'icon', 'text'];
+		return ['page', 'icon', 'text', 'badge'];
 	}
 
 	/**
@@ -64,6 +64,10 @@ class NavItemComponent extends BaseComponent {
 		);
 
 		this.innerHTML = this.render();
+
+		NavItemComponent.observedAttributes.forEach((item) => {
+			this.removeAttribute(item);
+		});
 	}
 
 	/**
@@ -72,15 +76,15 @@ class NavItemComponent extends BaseComponent {
 	 * @returns the rendered HTML
 	 */
 	render(): string {
+		const { page, icon, text, badge } = this.elementAttributes;
+
 		return html`
-			<am-link
-				target="${this.elementAttributes.page}"
-				class="${classes.navLink}"
-			>
-				<am-icon-text
-					icon="${this.elementAttributes.icon}"
-					text="${App.text(this.elementAttributes.text)}"
-				></am-icon-text>
+			<am-link target="${page}" class="${classes.navLink}">
+				<span class="${classes.iconText}">
+					<i class="bi bi-${icon}"></i>
+					<span>${App.text(text)}</span>
+					${badge ? `<${badge}></${badge}>` : ''}
+				</span>
 			</am-link>
 		`;
 	}
