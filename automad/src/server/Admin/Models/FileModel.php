@@ -43,6 +43,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Core\Str;
+use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -151,21 +152,12 @@ class FileModel {
 			Debug::log($importUrl, 'Local URL');
 		}
 
-		$curl = curl_init();
+		$data = Fetch::get($importUrl);
 
-		curl_setopt($curl, CURLOPT_HEADER, 0);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl, CURLOPT_URL, $importUrl);
-
-		$data = curl_exec($curl);
-
-		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
+		if (empty($data)) {
 			$Messenger->setError(Text::get('importFailedError'));
-			curl_close($curl);
 
 			return false;
-		} else {
-			curl_close($curl);
 		}
 
 		$fileName = Str::slug(preg_replace('/\?.*/', '', basename($importUrl)));

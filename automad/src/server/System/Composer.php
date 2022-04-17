@@ -225,29 +225,7 @@ class Composer {
 				unlink($phar);
 			}
 
-			set_time_limit(0);
-
-			$fp = fopen($phar, 'w+');
-
-			$options = array(
-				CURLOPT_TIMEOUT => 120,
-				CURLOPT_FILE => $fp,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_FRESH_CONNECT => 1,
-				CURLOPT_URL => $this->pharUrl
-			);
-
-			$curl = curl_init();
-			curl_setopt_array($curl, $options);
-			curl_exec($curl);
-
-			if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
-				$phar = false;
-			}
-
-			curl_close($curl);
-			fclose($fp);
-
+			Fetch::download($this->pharUrl, $phar);
 			Debug::log($phar, 'Downloaded Composer PHAR');
 		}
 

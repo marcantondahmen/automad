@@ -36,6 +36,8 @@
 
 namespace Automad\Core;
 
+use Automad\System\Fetch;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -89,30 +91,7 @@ class RemoteFile {
 			return $file;
 		}
 
-		set_time_limit(0);
-
-		$fp = fopen($file, 'w+');
-
-		$options = array(
-			CURLOPT_TIMEOUT => 120,
-			CURLOPT_FILE => $fp,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_FRESH_CONNECT => 1,
-			CURLOPT_URL => $url
-		);
-
-		$curl = curl_init();
-		curl_setopt_array($curl, $options);
-		curl_exec($curl);
-
-		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
-			$file = false;
-		}
-
-		curl_close($curl);
-		fclose($fp);
-
-		if (!$file) {
+		if (!Fetch::download($url, $file)) {
 			Debug::log($url, 'File not found');
 
 			return false;

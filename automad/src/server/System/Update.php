@@ -38,6 +38,7 @@ namespace Automad\System;
 
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Admin\UI\Utils\Text;
+use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;
 use Automad\Core\Str;
@@ -64,24 +65,11 @@ class Update {
 	 */
 	public static function getVersion() {
 		$version = false;
+		$versionFileUrl = AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . AM_UPDATE_REPO_VERSION_FILE;
 
-		$options = array(
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_TIMEOUT => 30,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_FRESH_CONNECT => 1,
-			CURLOPT_URL => AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . AM_UPDATE_REPO_VERSION_FILE
-		);
-
-		$curl = curl_init();
-		curl_setopt_array($curl, $options);
-		$output = curl_exec($curl);
-
-		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {
-			$version = self::extractVersion($output);
+		if ($content = Fetch::get($versionFileUrl)) {
+			$version = self::extractVersion($content);
 		}
-
-		curl_close($curl);
 
 		return $version;
 	}
@@ -136,6 +124,7 @@ class Update {
 		}
 
 		self::log('Version to be updated: ' . AM_VERSION);
+		Debug::log('Version to be updated: ' . AM_VERSION);
 		self::log('Updating items: ' . implode(', ', $items));
 
 		$archive = self::getArchive();
@@ -170,6 +159,7 @@ class Update {
 		}
 
 		self::log('Successfully updated Automad to version ' . $version);
+		Debug::log('Successfully updated Automad to version ' . $version);
 		$Messenger->setData(array('current' => $version, 'state' => 'success'));
 		$Messenger->setSuccess(Text::get('systemUpdateSuccess'));
 
@@ -240,35 +230,15 @@ class Update {
 	 * @return string Path to the downloaded archive or false on error
 	 */
 	private static function getArchive() {
+		$downloadUrl = AM_UPDATE_REPO_DOWNLOAD_URL . '/' . AM_UPDATE_BRANCH . '.zip';
 		$archive = AM_BASE_DIR . AM_UPDATE_TEMP . '/download/' . self::$timestamp . '.zip';
 
 		FileSystem::makeDir(dirname($archive));
 
-		set_time_limit(0);
-
-		$fp = fopen($archive, 'w+');
-
-		$options = array(
-			CURLOPT_TIMEOUT => 120,
-			CURLOPT_FILE => $fp,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_FRESH_CONNECT => 1,
-			CURLOPT_URL => AM_UPDATE_REPO_DOWNLOAD_URL . '/' . AM_UPDATE_BRANCH . '.zip'
-		);
-
-		$curl = curl_init();
-		curl_setopt_array($curl, $options);
-		curl_exec($curl);
-
-		self::log('Downloading branch "' . AM_UPDATE_BRANCH . '" form ' . AM_UPDATE_REPO_DOWNLOAD_URL);
-
-		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
+		if (!Fetch::download($downloadUrl, $archive)) {
 			$archive = false;
 			self::log('Download failed!');
 		}
-
-		curl_close($curl);
-		fclose($fp);
 
 		return $archive;
 	}
@@ -280,36 +250,28 @@ class Update {
 	 */
 	private static function higherPHPVersionRequired() {
 		$requiredVersion = '';
+		$composerFileUrl = AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . '/composer.json';
 
-		$options = array(
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_TIMEOUT => 30,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_FRESH_CONNECT => 1,
-			CURLOPT_URL => AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . '/composer.json'
-		);
+		$composerJson = Fetch::get($composerFileUrl);
 
-		$curl = curl_init();
-		curl_setopt_array($curl, $options);
-		$output = curl_exec($curl);
-
-		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {
-			try {
-				$data = json_decode($output);
-				$composerRequiredVersion = preg_replace('/[^\d\.]*/', '', $data->require->php);
-
-				self::log("The required PHP version is $composerRequiredVersion");
-
-				if (version_compare(PHP_VERSION, $composerRequiredVersion, '<')) {
-					$requiredVersion = $composerRequiredVersion;
-					self::log("The server's PHP version in outdated!");
-				}
-			} catch (\Exception $e) {
-				self::log($e->getMessage());
-			}
+		if (!$composerJson) {
+			return $requiredVersion;
 		}
 
-		curl_close($curl);
+		try {
+			$data = json_decode($composerJson);
+			$composerRequiredVersion = preg_replace('/[^\d\.]*/', '', $data->require->php);
+
+			self::log("The required PHP version is $composerRequiredVersion");
+			Debug::log("The required PHP version is $composerRequiredVersion");
+
+			if (version_compare(PHP_VERSION, $composerRequiredVersion, '<')) {
+				$requiredVersion = $composerRequiredVersion;
+				self::log("The server's PHP version in outdated!");
+			}
+		} catch (\Exception $e) {
+			self::log($e->getMessage());
+		}
 
 		return $requiredVersion;
 	}
