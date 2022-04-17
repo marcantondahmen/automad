@@ -63,8 +63,8 @@ export class PackagesComponent extends SidebarLayoutComponent {
 							target="system"
 						>
 							<am-icon-text
-								icon="sliders"
-								text="$${App.text('systemTitle')}"
+								icon="box-seam"
+								text="${App.text('packagesTitle')}"
 							></am-icon-text>
 						</am-link>
 					</div>

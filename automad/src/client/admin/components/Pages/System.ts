@@ -195,7 +195,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 
 		return html`
 			<am-switcher-section name="${Sections.overview}">
-				<div class="${classes.grid}" style="--min: 15rem;">
+				<div class="${classes.grid}" style="--min: 18rem;">
 					${this.renderOverviewCards()}
 				</div>
 			</am-switcher-section>
