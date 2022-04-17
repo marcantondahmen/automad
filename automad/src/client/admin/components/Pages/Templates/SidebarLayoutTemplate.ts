@@ -92,6 +92,7 @@ export const sidebarLayout = ({ main }: Partials) => {
 								page="packages"
 								icon="box-seam"
 								text="packagesTitle"
+								badge="am-outdated-packages-badge"
 							></am-nav-item>
 						</nav>
 						<am-nav-tree></am-nav-tree>
