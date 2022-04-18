@@ -36,7 +36,7 @@ import { App, classes, getTagFromRoute, html, Routes } from '../../core';
 import { CenteredLayoutComponent } from './CenteredLayout';
 
 /**
- * The page view.
+ * The login view.
  *
  * @extends CenteredLayoutComponent
  */

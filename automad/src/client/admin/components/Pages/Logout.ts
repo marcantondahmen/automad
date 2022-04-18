@@ -36,7 +36,7 @@ import { App, getTagFromRoute, Routes } from '../../core';
 import { CenteredLayoutComponent } from './CenteredLayout';
 
 /**
- * The page view.
+ * The logout view.
  *
  * @extends CenteredLayoutComponent
  */

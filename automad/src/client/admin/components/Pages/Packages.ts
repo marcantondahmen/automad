@@ -36,7 +36,7 @@ import { App, classes, getTagFromRoute, html, Routes } from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
- * The page view.
+ * The packages view.
  *
  * @extends SidebarLayoutComponent
  */

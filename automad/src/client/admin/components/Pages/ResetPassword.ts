@@ -36,7 +36,7 @@ import { App, getTagFromRoute, html, Routes } from '../../core';
 import { CenteredLayoutComponent } from './CenteredLayout';
 
 /**
- * The page view.
+ * The password reset view.
  *
  * @extends CenteredLayoutComponent
  */

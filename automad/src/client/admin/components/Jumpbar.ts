@@ -295,7 +295,9 @@ class JumpbarComponent extends AutocompleteComponent {
 
 		search.element.setAttribute(
 			'target',
-			`${Routes.search}?search=${encodeURIComponent(this.input.value)}`
+			`${Routes.search}?search=${encodeURIComponent(
+				this.input.value
+			).replace(/%20/g, '+')}`
 		);
 
 		search.value = `${search.value} ${this.input.value.toLowerCase()}`;

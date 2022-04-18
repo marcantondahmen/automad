@@ -45,7 +45,7 @@ import { renderUsersSection } from './Partials/System/Users';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
- * The page view.
+ * The system view.
  *
  * @extends SidebarLayoutComponent
  */
