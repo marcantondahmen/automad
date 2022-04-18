@@ -126,7 +126,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 					<div class="${classes.breadcrumbs}">
 						<am-link
 							class="${classes.breadcrumbsItem}"
-							target="system"
+							target="${Routes.system}"
 						>
 							<am-icon-text
 								icon="sliders"

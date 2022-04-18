@@ -60,7 +60,7 @@ export class PackagesComponent extends SidebarLayoutComponent {
 					<div class="${classes.breadcrumbs}">
 						<am-link
 							class="${classes.breadcrumbsItem}"
-							target="system"
+							target="${Routes.packages}"
 						>
 							<am-icon-text
 								icon="box-seam"

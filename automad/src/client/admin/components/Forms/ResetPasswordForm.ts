@@ -69,8 +69,6 @@ export class ResetPasswordFormComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		super.processResponse(response);
 
-		console.log(response);
-
 		if (!response.data) {
 			return;
 		}
