@@ -294,8 +294,8 @@ class JumpbarComponent extends AutocompleteComponent {
 		const search = this.itemsFiltered[0];
 
 		search.element.setAttribute(
-			'href',
-			`${search.item.url}&search=${encodeURIComponent(this.input.value)}`
+			'target',
+			`${Routes.search}?search=${encodeURIComponent(this.input.value)}`
 		);
 
 		search.value = `${search.value} ${this.input.value.toLowerCase()}`;
