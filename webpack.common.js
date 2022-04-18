@@ -12,6 +12,18 @@ const minifyHTML = (html) => {
 		.replace(/(^`\s|\s`$)/g, '`');
 };
 
+class SystemBellPlugin {
+	pluginName = 'SystemBellPlugin';
+
+	apply(compiler) {
+		compiler.hooks.done.tap(this.pluginName, (stats) => {
+			if (stats.compilation.errors.length > 0) {
+				process.stdout.write('\x07');
+			}
+		});
+	}
+}
+
 module.exports = (env, argv) => {
 	const config = {
 		module: {
@@ -102,6 +114,7 @@ module.exports = (env, argv) => {
 			new MiniCssExtractPlugin({
 				filename: '[name].bundle.css',
 			}),
+			new SystemBellPlugin(),
 		],
 	};
 
