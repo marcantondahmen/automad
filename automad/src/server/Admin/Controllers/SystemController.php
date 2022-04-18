@@ -67,9 +67,7 @@ class SystemController {
 			$data['pending'] = true;
 		}
 
-		$Response->setData($data);
-
-		return $Response;
+		return $Response->setData($data);
 	}
 	/**
 	 * System updates.
@@ -87,16 +85,14 @@ class SystemController {
 
 		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 			$data['state'] = 'disabled';
-			$Response->setData($data);
 
-			return $Response;
+			return $Response->setData($data);
 		}
 
 		if (!Update::supported()) {
 			$data['state'] = 'notSupported';
-			$Response->setData($data);
 
-			return $Response;
+			return $Response->setData($data);
 		}
 
 		if (!empty($_POST['update'])) {
@@ -106,19 +102,17 @@ class SystemController {
 				$Response->setData($Messenger->getData());
 			}
 
-			$Response->setError($Messenger->getError());
-			$Response->setSuccess($Messenger->getSuccess());
-
-			return $Response;
+			return $Response
+				->setError($Messenger->getError())
+				->setSuccess($Messenger->getSuccess());
 		}
 
 		$latest = Update::getVersion();
 
 		if (empty($latest)) {
 			$data['state'] = 'connectionError';
-			$Response->setData($data);
 
-			return $Response;
+			return $Response->setData($data);
 		}
 
 		$data['latest'] = $latest;
@@ -127,8 +121,6 @@ class SystemController {
 			$data['state'] = 'pending';
 		}
 
-		$Response->setData($data);
-
-		return $Response;
+		return $Response->setData($data);
 	}
 }

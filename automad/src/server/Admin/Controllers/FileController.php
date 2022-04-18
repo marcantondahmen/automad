@@ -67,9 +67,7 @@ class FileController {
 			$Messenger
 		);
 
-		$Response->setError($Messenger->getError());
-
-		return $Response;
+		return $Response->setError($Messenger->getError());
 	}
 
 	/**
@@ -87,8 +85,6 @@ class FileController {
 			$Messenger
 		);
 
-		$Response->setError($Messenger->getError());
-
-		return $Response;
+		return $Response->setError($Messenger->getError());
 	}
 }

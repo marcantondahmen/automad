@@ -69,22 +69,21 @@ class UserController {
 			if ($newPassword1 == $newPassword2) {
 				if ($currentPassword != $newPassword1) {
 					$UserModel = new UserModel();
-					$Response = $UserModel->changePassword(
+
+					return $UserModel->changePassword(
 						Session::getUsername(),
 						$currentPassword,
 						$newPassword1
 					);
-				} else {
-					$Response->setError(Text::get('passwordReuseError'));
 				}
-			} else {
-				$Response->setError(Text::get('passwordRepeatError'));
+
+				return $Response->setError(Text::get('passwordReuseError'));
 			}
-		} else {
-			$Response->setError(Text::get('invalidFormError'));
+
+			return $Response->setError(Text::get('passwordRepeatError'));
 		}
 
-		return $Response;
+		return $Response->setError(Text::get('invalidFormError'));
 	}
 
 	/**
@@ -102,13 +101,11 @@ class UserController {
 
 		if ($UserCollectionModel->editCurrentUserInfo($username, $email, $Messenger)) {
 			if ($UserCollectionModel->save($Messenger)) {
-				$Response->setSuccess(Text::get('savedSuccess'));
+				return $Response->setSuccess(Text::get('savedSuccess'));
 			}
 		}
 
-		$Response->setError($Messenger->getError());
-
-		return $Response;
+		return $Response->setError($Messenger->getError());
 	}
 
 	/**

@@ -69,20 +69,14 @@ class UserCollectionController {
 		$UserCollectionModel = new UserCollectionModel();
 
 		if (!$UserCollectionModel->createUser($username, $password1, $password2, $email, $Messenger)) {
-			$Response->setError($Messenger->getError());
-
-			return $Response;
+			return $Response->setError($Messenger->getError());
 		}
 
 		if (!$UserCollectionModel->save($Messenger)) {
-			$Response->setError($Messenger->getError());
-
-			return $Response;
+			return $Response->setError($Messenger->getError());
 		}
 
-		$Response->setSuccess(Text::get('addedSuccess') . ' "' . $username . '"');
-
-		return $Response;
+		return $Response->setSuccess(Text::get('addedSuccess') . ' "' . $username . '"');
 	}
 
 	/**
@@ -114,7 +108,10 @@ class UserCollectionController {
 	 *
 	 * @return string Error message in case of an error
 	 */
-	/* public static function install() {
+	/*
+
+
+	public static function install() {
 		if (empty($_POST)) {
 			return '';
 		}
@@ -141,7 +138,10 @@ class UserCollectionController {
 		ob_end_flush();
 
 		exit($UserCollectionModel->generatePHP());
-	} */
+	}
+
+
+	 */
 
 	/**
 	 * Invite a new user by email.
@@ -158,25 +158,17 @@ class UserCollectionController {
 		$password = str_shuffle(sha1(microtime()));
 
 		if (!$UserCollectionModel->createUser($username, $password, $password, $email, $Messenger)) {
-			$Response->setError($Messenger->getError());
-
-			return $Response;
+			return $Response->setError($Messenger->getError());
 		}
 
 		if (!$UserCollectionModel->save($Messenger)) {
-			$Response->setError($Messenger->getError());
-
-			return $Response;
+			return $Response->setError($Messenger->getError());
 		}
 
 		if (!$UserCollectionModel->sendInvitation($username, $email, $Messenger)) {
-			$Response->setError($Messenger->getError());
-
-			return $Response;
+			return $Response->setError($Messenger->getError());
 		}
 
-		$Response->setSuccess(Text::get('systemUsersSendInvitationSuccess'));
-
-		return $Response;
+		return $Response->setSuccess(Text::get('systemUsersSendInvitationSuccess'));
 	}
 }

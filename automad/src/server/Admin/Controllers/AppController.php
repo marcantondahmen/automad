@@ -69,7 +69,7 @@ class AppController {
 		$Response = new Response;
 		$ThemeCollection = new ThemeCollection();
 
-		$Response->setData(array(
+		return $Response->setData(array(
 			'version' => AM_VERSION,
 			'text' => Text::getObject(),
 			'themes' => $ThemeCollection->getThemes(),
@@ -82,8 +82,6 @@ class AppController {
 			'languages' => self::getLanguages(),
 			'contentFields' => self::getContentFields()
 		));
-
-		return $Response;
 	}
 
 	/**
@@ -97,7 +95,7 @@ class AppController {
 		$Automad = $Cache->getAutomad();
 		$UserCollectionModel = new UserCollectionModel();
 
-		$Response->setData(array(
+		return $Response->setData(array(
 			'tags' => $Automad->getPagelist()->getTags(),
 			'pages' => AppModel::pages($Automad),
 			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
@@ -119,8 +117,6 @@ class AppController {
 				'tempDirectory' => FileSystem::getTmpDir()
 			)
 		));
-
-		return $Response;
 	}
 
 	/**

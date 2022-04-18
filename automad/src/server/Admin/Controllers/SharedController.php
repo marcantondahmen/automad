@@ -65,15 +65,14 @@ class SharedController {
 
 		if ($data = Request::post('data')) {
 			// Save changes.
-			$Response = self::save($Automad, $data);
-		} else {
-			// If there is no data, just get the form ready.
-			$SharedData = new SharedData($Automad);
-			$Response = new Response();
-			$Response->setHtml($SharedData->render());
+			return self::save($Automad, $data);
 		}
 
-		return $Response;
+		// If there is no data, just get the form ready.
+		$SharedData = new SharedData($Automad);
+		$Response = new Response();
+
+		return $Response->setHtml($SharedData->render());
 	}
 
 	/**

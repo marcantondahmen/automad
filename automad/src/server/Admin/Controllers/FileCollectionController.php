@@ -75,11 +75,11 @@ class FileCollectionController {
 		}
 
 		$data = array('files' => FileCollectionModel::list($path));
-		$Response->setData($data);
-		$Response->setError($Messenger->getError());
-		$Response->setSuccess($Messenger->getSuccess());
 
-		return $Response;
+		return $Response
+			->setData($data)
+			->setError($Messenger->getError())
+			->setSuccess($Messenger->getSuccess());
 	}
 
 	/**
@@ -115,9 +115,8 @@ class FileCollectionController {
 			);
 
 			$Response = new Response();
-			$Response->setError($Messenger->getError());
 
-			return $Response;
+			return $Response->setError($Messenger->getError());
 		}
 	}
 }

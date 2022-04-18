@@ -60,9 +60,8 @@ class CacheController {
 	public static function clear() {
 		$Response = new Response();
 		Cache::clear();
-		$Response->setSuccess(Text::get('cacheClearedSuccess'));
 
-		return $Response;
+		return $Response->setSuccess(Text::get('cacheClearedSuccess'));
 	}
 
 	/**
@@ -75,12 +74,11 @@ class CacheController {
 		$tempDir = FileSystem::purgeCache();
 
 		if ($tempDir) {
-			$Response->setSuccess(Text::get('cachePurgedSuccess'));
 			Debug::log($tempDir, 'temp directory');
-		} else {
-			$Response->setError(Text::get('cachePurgedError'));
+
+			return $Response->setSuccess(Text::get('cachePurgedSuccess'));
 		}
 
-		return $Response;
+		return $Response->setError(Text::get('cachePurgedError'));
 	}
 }

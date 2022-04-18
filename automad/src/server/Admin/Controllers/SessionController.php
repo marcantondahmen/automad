@@ -60,12 +60,10 @@ class SessionController {
 		$Response = new Response();
 
 		if (Session::login(Request::post('name-or-email'), Request::post('password'))) {
-			$Response->setRedirect('/home');
-		} else {
-			$Response->setError(Text::get('signInError'));
+			return $Response->setRedirect('/home');
 		}
 
-		return $Response;
+		return $Response->setError(Text::get('signInError'));
 	}
 
 	/**
