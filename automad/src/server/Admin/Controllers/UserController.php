@@ -114,9 +114,10 @@ class UserController {
 	/**
 	 * Reset a user password by email.
 	 *
-	 * @return string the form HTML
+	 * @return Response the Response object
 	 */
-	/* public static function resetPassword() {
+	public static function resetPassword() {
+		$Response = new Response();
 		$UserModel = new UserModel();
 		$UserCollectionModel = new UserCollectionModel();
 		$Messenger = new Messenger();
@@ -130,30 +131,45 @@ class UserController {
 
 		$User = $UserCollectionModel->getUser($nameOrEmail);
 
+		$responseData = array(
+			'username' => $User->name,
+			'state' => 'requestToken'
+		);
+
+		$Response->setData($responseData);
+
 		if ($nameOrEmail && !$User) {
-			return TokenRequestForm::render(Text::get('error_user_not_found'));
+			return $Response->setError(Text::get('userNotFoundError'));
 		}
 
 		if ($User && $token && $newPassword1 && $newPassword2) {
 			if ($UserModel->verifyPasswordResetToken($User->name, $token)) {
 				if ($UserModel->resetPassword($User->name, $newPassword1, $newPassword2, $Messenger)) {
-					return ResetSuccess::render();
-				} else {
-					return ResetForm::render($User->name, $Messenger->getError());
+					$responseData['state'] = 'success';
+
+					return $Response->setData($responseData);
 				}
-			} else {
-				return ResetForm::render($User->name, Text::get('error_password_reset_verification'));
+
+				$responseData['state'] = 'setPassword';
+
+				return $Response->setData($responseData)->setError($Messenger->getError());
 			}
+
+			$responseData['state'] = 'setPassword';
+
+			return $Response->setData($responseData)->setError(Text::get('passwordResetVerificationError'));
 		}
 
 		if ($User) {
 			if ($UserModel->sendPasswordResetToken($User, $Messenger)) {
-				return ResetForm::render($User->name);
+				$responseData['state'] = 'setPassword';
+
+				return $Response->setData($responseData);
 			}
 
-			return TokenRequestForm::render($Messenger->getError());
+			$Response->setError($Messenger->getError());
 		}
 
-		return TokenRequestForm::render();
-	} */
+		return $Response;
+	}
 }

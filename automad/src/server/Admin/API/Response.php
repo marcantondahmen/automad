@@ -106,11 +106,15 @@ class Response {
 	/**
 	 * Set the response code.
 	 *
+	 * @see $code
 	 * @param int $code
+	 * @return Response
 	 */
 	public function setCode(int $code) {
 		$this->code = $code;
 		http_response_code($code);
+
+		return $this;
 	}
 
 	/**
@@ -118,9 +122,12 @@ class Response {
 	 *
 	 * @see $data
 	 * @param array $data
+	 * @return Response
 	 */
 	public function setData(array $data) {
 		$this->data = $data;
+
+		return $this;
 	}
 
 	/**
@@ -128,9 +135,12 @@ class Response {
 	 *
 	 * @see $debug
 	 * @param array $log
+	 * @return Response
 	 */
 	public function setDebug(array $log) {
 		$this->debug = $log;
+
+		return $this;
 	}
 
 	/**
@@ -138,9 +148,12 @@ class Response {
 	 *
 	 * @see $error
 	 * @param string $value
+	 * @return Response
 	 */
 	public function setError(string $value = '') {
 		$this->error = $value;
+
+		return $this;
 	}
 
 	/**
@@ -148,9 +161,12 @@ class Response {
 	 *
 	 * @see $redirect
 	 * @param string $url
+	 * @return Response
 	 */
 	public function setRedirect(string $url = '') {
 		$this->redirect = $url;
+
+		return $this;
 	}
 
 	/**
@@ -158,9 +174,12 @@ class Response {
 	 *
 	 * @see $reload
 	 * @param bool $value
+	 * @return Response
 	 */
 	public function setReload(bool $value) {
 		$this->reload = $value;
+
+		return $this;
 	}
 
 	/**
@@ -168,8 +187,11 @@ class Response {
 	 *
 	 * @see $success
 	 * @param string $value
+	 * @return Response
 	 */
 	public function setSuccess(string $value = '') {
 		$this->success = $value;
+
+		return $this;
 	}
 }

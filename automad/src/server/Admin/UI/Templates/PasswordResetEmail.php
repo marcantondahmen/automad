@@ -61,10 +61,10 @@ class PasswordResetEmail extends AbstractEmailBody {
 		$pStyle = self::$paragraphStyle;
 		$codeStyle = self::$codeStyle;
 		$Text = Text::getObject();
-		$textTop = str_replace('{}', "<b>$website</b>", Text::get('email_reset_password_text_top'));
+		$textTop = str_replace('{}', "<b>$website</b>", Text::get('emailResetPasswordTextTop'));
 
 		$content = <<< HTML
-			<h1 $h1Style>$Text->email_hello $username,</h1>
+			<h1 $h1Style>$Text->emailHello $username,</h1>
 			<p $pStyle>
 				$textTop
 			</p>
@@ -72,7 +72,7 @@ class PasswordResetEmail extends AbstractEmailBody {
 				$token
 			</p>
 			<p $pStyle>
-				$Text->email_reset_password_text_bottom
+				$Text->emailResetPasswordTextBottom
 			</p>
 		HTML;
 

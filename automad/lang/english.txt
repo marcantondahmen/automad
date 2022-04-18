@@ -238,7 +238,24 @@ emailInviteButton: Create Password Now
 
 -
 
+emailInviteSubject: You have been added as a new user!
+
+-
+
 emailInviteText: a new user account on {} has been created for you. You can use the button below to create your password.
+
+-
+
+emailResetPasswordSubject: Your authentication token
+
+-
+
+
+emailResetPasswordTextTop: the requested authentication token for your account on {} can be found below. You can use that token in order to create a new password for you now.
+
+-
+
+emailResetPasswordTextBottom: In case you did not initiate this request yourself, you can safely ignore this message.
 
 -
 
@@ -530,6 +547,26 @@ passwordReuseError: Don't reuse your old password!
 
 -
 
+passwordResetVerificationError: The authentication token is invalid or has expired already!
+
+-
+
+passwordResetEnterNameOrEmail: Please enter your username or email address in order to request an authentication token to create a new password for your account.
+
+-
+
+passwordResetEnterNewPassword: An email including an authentication token just has been send to you. Please enter that token now below along with a new password.
+
+-
+
+passwordResetSave: Save Password 
+
+-
+
+passwordResetToken: Authentication Token
+
+-
+
 penTool: Pen
 
 -
@@ -582,7 +619,7 @@ resetOperations: Reset/delete all operations
 
 -
 
-resetPassword: Reset password 
+resetPassword: Create new password 
 
 -
 
@@ -699,6 +736,10 @@ square: Square
 -
 
 stroke: Stroke
+
+-
+
+submit: Submit 
 
 -
 
@@ -987,6 +1028,10 @@ username: Username
 -
 
 usernameOrEmail: Username or Email
+
+-
+
+userNotFoundError: Invalid username or email address.
 
 -
 

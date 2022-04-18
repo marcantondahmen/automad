@@ -81,7 +81,7 @@ class Routes {
 		);
 
 		$Router->register(
-			"$apiBase/(Session/login|App/(bootstrap|updateState))",
+			"$apiBase/(Session/login|App/(bootstrap|updateState)|User/resetPassword)",
 			function () {
 				return RequestHandler::getResponse();
 			},
