@@ -65,9 +65,9 @@ class Pipe {
 	/**
 	 * Processes an array of functions applied to a given value.
 	 *
-	 * 	$functions is an array of associative arrays with function name and parameters.
-	 * 	In case the function name is a mathematical operator,
-	 * 	the value is just the numeric value instead of an array.
+	 * $functions is an array of associative arrays with function name and parameters.
+	 * In case the function name is a mathematical operator,
+	 * the value is just the numeric value instead of an array.
 	 *
 	 * @param string $value
 	 * @param array $functions
@@ -111,7 +111,7 @@ class Pipe {
 			$method = basename($function);
 
 			if (method_exists($class, $method)) {
-				$value = call_user_func_array(array($object, $method), $parameters);
+				$value = strval(call_user_func_array(array($object, $method), $parameters));
 				Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call ' . $function);
 			}
 		}
@@ -125,7 +125,7 @@ class Pipe {
 	 * @param string $operator
 	 * @param string $number
 	 * @param string $value
-	 * @return number $value
+	 * @return string $value
 	 */
 	private static function math(string $operator, string $number, string $value) {
 		$number = floatval($number);
@@ -152,7 +152,7 @@ class Pipe {
 
 		Debug::log($result, $value . $operator . $number);
 
-		return $result;
+		return strval($result);
 	}
 
 	/**
@@ -181,7 +181,7 @@ class Pipe {
 
 		// Call standard PHP string function.
 		if (in_array(strtolower($function), Pipe::$phpFunctions)) {
-			$value = call_user_func_array($function, $parameters);
+			$value = strval(call_user_func_array($function, $parameters));
 			Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call ' . $function);
 
 			return $value;
