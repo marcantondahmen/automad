@@ -8,6 +8,26 @@
  *
  *  based on UIkit 2
  */
+
+ /*evij-override*/
+
+ .am-gallery-lightbox img{
+	min-width:auto;
+ }
+
+ .am-gallery-img-small img{
+	 height:auto;
+ }
+ .hide-element{
+	 display:none;
+ }
+
+ .am-gallery-masonry{
+	 grid-auto-rows:auto!important;
+	 margin-bottom:auto!important;
+ }
+
+ /*-----------------------*/
 html {
 	font: 430 16px/1.72rem Inter, sans-serif;
 	-webkit-text-size-adjust: 100%;
