@@ -187,7 +187,7 @@ export class PageComponent extends SidebarLayoutComponent {
 			</section>
 			<section class="am-l-main__row">
 				<div class="am-l-main__content">
-					<am-page-data api="Page/data"></am-page-data>
+					<am-page-data-form api="Page/data"></am-page-data-form>
 					<am-switcher-section name="${Sections.files}">
 						<am-upload></am-upload>
 						<am-modal-toggle
@@ -202,10 +202,10 @@ export class PageComponent extends SidebarLayoutComponent {
 						>
 							$${App.text('deleteSelected')}
 						</am-file-collection-submit>
-						<am-file-collection-list
+						<am-file-collection-list-form
 							confirm="$${App.text('confirmDeleteSelectedFiles')}"
 							api="FileCollection/list"
-						></am-file-collection-list>
+						></am-file-collection-list-form>
 					</am-switcher-section>
 				</div>
 			</section>

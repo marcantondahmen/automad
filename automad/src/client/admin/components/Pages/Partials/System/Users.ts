@@ -208,10 +208,10 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 							class="${classes.modalClose}"
 						></am-modal-close>
 					</div>
-					<am-delete-users
+					<am-delete-users-form
 						api="UserCollection/edit"
 						event="${eventNames.appStateRequireUpdate}"
-					></am-delete-users>
+					></am-delete-users-form>
 					<div class="${classes.modalFooter}">
 						<am-modal-close class="${classes.button}">
 							${App.text('close')}

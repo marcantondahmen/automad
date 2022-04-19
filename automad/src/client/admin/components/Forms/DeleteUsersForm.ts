@@ -69,7 +69,7 @@ const renderRegisteredUsers = (): string => {
  *
  * @extends FormComponent
  */
-export class DeleteUsersComponent extends FormComponent {
+export class DeleteUsersFormComponent extends FormComponent {
 	/**
 	 * Initialize the form.
 	 */
@@ -88,4 +88,4 @@ export class DeleteUsersComponent extends FormComponent {
 	}
 }
 
-customElements.define('am-delete-users', DeleteUsersComponent);
+customElements.define('am-delete-users-form', DeleteUsersFormComponent);

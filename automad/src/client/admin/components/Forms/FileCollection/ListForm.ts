@@ -47,12 +47,12 @@ import { FormComponent } from '../Form';
  * The file collection form component.
  *
  * @example
- * <am-file-collection-list api="FileCollection/list"></am-file-collection-list>
+ * <am-file-collection-list-form api="FileCollection/list"></am-file-collection-list-form>
  * <am-submit form="FileCollection/list">Submit</am-submit>
  *
  * @extends FormComponent
  */
-export class FileCollectionListComponent extends FormComponent {
+export class FileCollectionListFormComponent extends FormComponent {
 	/**
 	 * Enable self init.
 	 */
@@ -119,4 +119,7 @@ export class FileCollectionListComponent extends FormComponent {
 	}
 }
 
-customElements.define('am-file-collection-list', FileCollectionListComponent);
+customElements.define(
+	'am-file-collection-list-form',
+	FileCollectionListFormComponent
+);

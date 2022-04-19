@@ -42,7 +42,7 @@ import { FormComponent } from './Form';
  *
  * @extends FormComponent
  */
-export class SystemUpdateComponent extends FormComponent {
+export class SystemUpdateFormComponent extends FormComponent {
 	/**
 	 * The progress modal.
 	 */
@@ -266,4 +266,4 @@ export class SystemUpdateComponent extends FormComponent {
 	}
 }
 
-customElements.define('am-system-update', SystemUpdateComponent);
+customElements.define('am-system-update-form', SystemUpdateFormComponent);

@@ -41,7 +41,7 @@ import { FormComponent } from './Form';
  *
  * @extends FormComponent
  */
-export class ConfigFileComponent extends FormComponent {
+export class ConfigFileFormComponent extends FormComponent {
 	/**
 	 * Allow parallel requests.
 	 */
@@ -93,14 +93,14 @@ export class ConfigFileComponent extends FormComponent {
 		this.innerHTML = html`
 			<am-modal-toggle
 				class="${classes.button}"
-				modal="#am-config-file-modal"
+				modal="#am-config-file-form-modal"
 			>
 				<am-icon-text
 					icon="pencil"
 					text="${App.text('systemConfigFileEdit')}"
 				></am-icon-text>
 			</am-modal-toggle>
-			<am-modal id="am-config-file-modal">
+			<am-modal id="am-config-file-form-modal">
 				<div class="${classes.modalDialog}">
 					<div
 						class="${classes.modalHeader} ${classes.flex} ${classes.flexAlignCenter}"
@@ -127,4 +127,4 @@ export class ConfigFileComponent extends FormComponent {
 	}
 }
 
-customElements.define('am-config-file', ConfigFileComponent);
+customElements.define('am-config-file-form', ConfigFileFormComponent);

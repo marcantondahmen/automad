@@ -42,5 +42,7 @@ import { Listener } from '../../../../types';
  * @returns the rendered HTML
  */
 export const renderUpdateSection = (listeners: Listener[]): string => {
-	return html`<am-system-update api="System/update"></am-system-update>`;
+	return html`<am-system-update-form
+		api="System/update"
+	></am-system-update-form>`;
 };

@@ -44,7 +44,7 @@ import {
 	query,
 } from '../../core';
 import { BaseComponent } from '../Base';
-import { FileCollectionListComponent } from '../Forms/FileCollection/List';
+import { FileCollectionListFormComponent } from '../Forms/FileCollection/ListForm';
 import { ModalComponent } from '../Modal/Modal';
 
 /**
@@ -155,8 +155,8 @@ class UploadComponent extends BaseComponent {
 	 */
 	private onSuccess(file: DropzoneFile): void {
 		const fileCollection = query(
-			'am-file-collection-list'
-		) as FileCollectionListComponent;
+			'am-file-collection-list-form'
+		) as FileCollectionListFormComponent;
 
 		notifySuccess(
 			html`$${App.text('uploadedSuccess')}:<br />$${file.name}`

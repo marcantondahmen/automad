@@ -44,6 +44,6 @@ import { Listener } from '../../../../types';
 export const renderConfigFileSection = (listeners: Listener[]): string => {
 	return html`
 		<p>$${App.text('systemConfigFileInfo')}</p>
-		<am-config-file api="Config/file"></am-config-file>
+		<am-config-file-form api="Config/file"></am-config-file-form>
 	`;
 };

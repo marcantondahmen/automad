@@ -111,7 +111,7 @@ const fieldGroup = ({
  * @param form - the main page data form that serves as wrapper
  * @returns the switcher section collection
  */
-const createSections = (form: PageDataComponent): PageSectionCollection => {
+const createSections = (form: PageDataFormComponent): PageSectionCollection => {
 	const createSection = (section: string): SwitcherSectionComponent => {
 		return create(
 			'am-switcher-section',
@@ -240,12 +240,12 @@ const updateUI = async (
  * A page data form element.
  *
  * @example
- * <am-page-data api="Page/data"></am-page-data>
+ * <am-page-data-form api="Page/data"></am-page-data-form>
  * <am-submit form="Page/data">Submit</am-submit>
  *
  * @extends FormComponent
  */
-export class PageDataComponent extends FormComponent {
+export class PageDataFormComponent extends FormComponent {
 	/**
 	 * The section collection object.
 	 */
@@ -492,4 +492,4 @@ export class PageDataComponent extends FormComponent {
 	}
 }
 
-customElements.define('am-page-data', PageDataComponent);
+customElements.define('am-page-data-form', PageDataFormComponent);

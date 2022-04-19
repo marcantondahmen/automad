@@ -34,7 +34,7 @@
 
 import Tagify from '@yaireo/tagify';
 import { App, classes, create } from '../../core';
-import { PageDataComponent } from '../Forms/PageData';
+import { PageDataFormComponent } from '../Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -69,7 +69,8 @@ class PageTagsComponent extends BaseFieldComponent {
 		});
 
 		tagify.on('change', (event: Event) => {
-			const form: PageDataComponent = this.closest('am-page-data');
+			const form: PageDataFormComponent =
+				this.closest('am-page-data-form');
 
 			form.onChange();
 		});
