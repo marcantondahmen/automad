@@ -108,9 +108,8 @@ class Gallery extends AbstractBlock {
 
 		foreach ($files as $file) {
 			$Image = new Image($file, false, 2 * $pixelHeight);
-			// $caption = Str::stripTags(FileUtils::caption($file));
-			$caption = FileUtils::caption($file);
-			$caption = nl2br($caption); //evij
+			$caption = Str::stripTags(FileUtils::caption($file));
+			$caption = nl2br($caption); //add html line break tags
 
 			$file = Str::stripStart($file, AM_BASE_DIR);
 			$width = round($Image->width / 2);
@@ -169,7 +168,7 @@ class Gallery extends AbstractBlock {
 		foreach ($files as $file) {
 			$Image = new Image($file, 2 * $pixelWidth);
 			$caption = Str::stripTags(FileUtils::caption($file));
-			$caption = nl2br($caption);
+			$caption = nl2br($caption); //add html line break tags
 
 			$file = Str::stripStart($file, AM_BASE_DIR);
 			$span = round($Image->height / ($masonryRowHeight * 2));
