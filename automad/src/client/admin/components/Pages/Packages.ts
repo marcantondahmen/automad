@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, getTagFromRoute, html, Routes } from '../../core';
+import {
+	App,
+	classes,
+	eventNames,
+	getTagFromRoute,
+	html,
+	Routes,
+} from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
@@ -72,7 +79,13 @@ export class PackagesComponent extends SidebarLayoutComponent {
 			</section>
 			<am-system-menu class="am-l-main__row am-l-main__row--sticky">
 				<menu class="am-l-main__content">
-					<am-filter placeholder="packagesFilter"></am-filter>
+					<div class="${classes.flex}">
+						<am-filter
+							class="${classes.flexItemGrow}"
+							placeholder="packagesFilter"
+						></am-filter>
+						<am-update-all-packages></am-update-all-packages>
+					</div>
 				</menu>
 			</am-system-menu>
 			<section class="am-l-main__row">

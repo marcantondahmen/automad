@@ -36,6 +36,7 @@ import {
 	App,
 	classes,
 	create,
+	createProgressModal,
 	eventNames,
 	fire,
 	html,
@@ -62,33 +63,6 @@ const getThumbnail = async (repository: string): Promise<string> => {
 	});
 
 	return response.data?.thumbnail;
-};
-
-/**
- * Create a blocking progress modal.
- *
- * @param text
- */
-const createProgressModal = (text: string): ModalComponent => {
-	const modal = create(
-		'am-modal',
-		[],
-		{
-			noesc: '',
-			noclick: '',
-			destroy: '',
-		},
-		App.root
-	);
-
-	modal.innerHTML = html`
-		<div class="${classes.modalDialog}">
-			<span class="${classes.spinner}"></span>
-			${text}
-		</div>
-	`;
-
-	return modal;
 };
 
 /**

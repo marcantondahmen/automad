@@ -33,7 +33,11 @@
  */
 
 import { InputComponent } from '../components/Fields/Input';
+import { ModalComponent } from '../components/Modal/Modal';
 import { FieldInitData, KeyValueMap } from '../types';
+import { App } from './app';
+import { classes } from './classes';
+import { html } from './utils';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -89,4 +93,31 @@ export const createField = (
 	field.data = data;
 
 	return field;
+};
+
+/**
+ * Create a blocking progress modal.
+ *
+ * @param text
+ */
+export const createProgressModal = (text: string): ModalComponent => {
+	const modal = create(
+		'am-modal',
+		[],
+		{
+			noesc: '',
+			noclick: '',
+			destroy: '',
+		},
+		App.root
+	);
+
+	modal.innerHTML = html`
+		<div class="${classes.modalDialog}">
+			<span class="${classes.spinner}"></span>
+			${text}
+		</div>
+	`;
+
+	return modal;
 };

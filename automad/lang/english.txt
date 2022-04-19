@@ -491,6 +491,18 @@ packageUpdatedSuccess: Successfully updated
 
 -
 
+packagesUpdateAll: Update All
+
+-
+
+packagesUpdatingAll: Updating packages ...
+
+-
+
+packageUpdatedAllSuccess: Successfully updated all packages
+
+-
+
 packagistConnectionError: Can't connect to the Packagist API
 
 -

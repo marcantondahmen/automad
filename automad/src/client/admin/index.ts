@@ -77,6 +77,7 @@ import './components/Modal/ModalToggle';
 
 import './components/PackageManager/PackageCard';
 import './components/PackageManager/PackageList';
+import './components/PackageManager/UpdateAllPackages';
 
 import './components/Pages/Home';
 import './components/Pages/Login';

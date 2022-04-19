@@ -196,15 +196,33 @@ class PackageManagerController {
 			$Composer = new Composer();
 
 			if ($error = $Composer->run('update --with-dependencies ' . $package)) {
-				$Response->setError($error);
-			} else {
-				$Response->setSuccess(Text::get('packageUpdatedSuccess') . '<br>' . $package);
-
-				Cache::clear();
+				return $Response->setError($error);
 			}
+
+			Cache::clear();
+
+			return $Response->setSuccess(Text::get('packageUpdatedSuccess') . '<br>' . $package);
 		}
 
 		return $Response;
+	}
+
+	/**
+	 * Update all packages.
+	 *
+	 * @return Response the response object
+	 */
+	public static function updateAll() {
+		$Response = new Response();
+		$Composer = new Composer();
+
+		if ($error = $Composer->run('update')) {
+			return $Response->setError($error);
+		}
+
+		Cache::clear();
+
+		return $Response->setSuccess(Text::get('packageUpdatedAllSuccess'));
 	}
 
 	/**
