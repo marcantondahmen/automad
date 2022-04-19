@@ -8,7 +8,7 @@
 <# Children nav for small devices. #>
 <@ newPagelist { type: 'children' } @>
 <@ if @{ :pagelistCount } @>
-	<div class="uk-hidden-large">
+	<div class="uk-hidden-large hide-element">
 		<hr />
 		<h2 class="uk-margin-top uk-margin-bottom">
 			More in @{ title }
