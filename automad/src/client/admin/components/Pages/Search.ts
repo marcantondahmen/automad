@@ -32,11 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, Routes } from '../../core';
+import { App, classes, getTagFromRoute, html, Routes } from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
- * The page view.
+ * The search and replace view.
  *
  * @extends SidebarLayoutComponent
  */
@@ -54,7 +54,28 @@ export class SearchComponent extends SidebarLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return 'Search';
+		return html`
+			<section class="am-l-main__row">
+				<nav class="am-l-main__content">
+					<div class="${classes.breadcrumbs}">
+						<am-link
+							class="${classes.breadcrumbsItem}"
+							target="${Routes.search}"
+						>
+							<am-icon-text
+								icon="search"
+								text="${App.text('searchTitle')}"
+							></am-icon-text>
+						</am-link>
+					</div>
+				</nav>
+			</section>
+			<section class="am-l-main__row">
+				<div class="am-l-main__content">
+					<am-search-form></am-search-form>
+				</div>
+			</section>
+		`;
 	}
 }
 

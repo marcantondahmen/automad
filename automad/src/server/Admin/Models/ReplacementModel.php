@@ -92,21 +92,20 @@ class ReplacementModel {
 	/**
 	 * Replace matches with a given string in a given list of files.
 	 *
-	 * @see \Automad\Admin\UI\Models\Search\FileKeysModel
-	 * @param array $fileKeysArray
+	 * @param array $fileFieldsArray
 	 * @return bool true on success
 	 */
-	public function replaceInFiles(array $fileKeysArray) {
-		if (!$this->replaceValue || empty($fileKeysArray)) {
+	public function replaceInFiles(array $fileFieldsArray) {
+		if (!$this->replaceValue || empty($fileFieldsArray)) {
 			Debug::log('No files or replacement string');
 
 			return false;
 		}
 
-		foreach ($fileKeysArray as $FileKeysModel) {
-			$file = AM_BASE_DIR . $FileKeysModel->path;
+		foreach ($fileFieldsArray as $FileFieldsModel) {
+			$file = AM_BASE_DIR . $FileFieldsModel->path;
 			$data = Parse::dataFile($file);
-			$data = $this->replaceInData($data, $FileKeysModel->keys);
+			$data = $this->replaceInData($data, $FileFieldsModel->fields);
 
 			FileSystem::writeData($data, $file);
 		}

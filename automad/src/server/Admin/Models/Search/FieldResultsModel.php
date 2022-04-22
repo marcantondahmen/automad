@@ -54,7 +54,7 @@ class FieldResultsModel {
 	/**
 	 * The field name.
 	 */
-	public $key;
+	public $field;
 
 	/**
 	 * An array with all found matches in the field value.
@@ -65,12 +65,12 @@ class FieldResultsModel {
 	/**
 	 * Initialize a new field results instance.
 	 *
-	 * @param string $key
+	 * @param string $field
 	 * @param array $matches
 	 * @param string $context
 	 */
-	public function __construct(string $key, array $matches, string $context) {
-		$this->key = $key;
+	public function __construct(string $field, array $matches, string $context) {
+		$this->field = $field;
 		$this->matches = $matches;
 		$this->context = $context;
 	}

@@ -35,6 +35,7 @@
 export * from './form';
 export * from './packages';
 export * from './page';
+export * from './search';
 export * from './system';
 import { PageMetaData } from '.';
 

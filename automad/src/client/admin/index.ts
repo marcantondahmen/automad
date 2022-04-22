@@ -68,6 +68,7 @@ import './components/Forms/DeleteUsersForm';
 import './components/Forms/Form';
 import './components/Forms/PageDataForm';
 import './components/Forms/ResetPasswordForm';
+import './components/Forms/SearchForm';
 import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';
 

@@ -34,53 +34,36 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Models;
-
-use Automad\Admin\Models\Search\FileFieldsModel;
-use Automad\Core\Automad;
+namespace Automad\Admin\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The links model.
+ * A data class to store file => field associations.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class LinksModel {
+class FileFieldsModel {
 	/**
-	 * Update all links to a page or file after renaming or moving content.
-	 *
-	 * @param Automad $Automad
-	 * @param string $old
-	 * @param string $new
-	 * @param string|null $dataFilePath
-	 * @return bool true on success
+	 * The fields array.
 	 */
-	public static function update(Automad $Automad, string $old, string $new, ?string $dataFilePath = null) {
-		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
-		$replaceValue = $new;
+	public $fields;
 
-		$SearchModel = new SearchModel($Automad, $searchValue, true, false);
-		$fileResultsArray = $SearchModel->searchPerFile();
-		$fileFieldsArray = array();
+	/**
+	 * The file path.
+	 */
+	public $path;
 
-		foreach ($fileResultsArray as $FileResultsModel) {
-			if ($dataFilePath === $FileResultsModel->path || empty($dataFilePath)) {
-				$fields = array();
-
-				foreach ($FileResultsModel->fieldResults as $FieldResultsModel) {
-					$fields[] = $FieldResultsModel->field;
-				}
-
-				$fileFieldsArray[] = new FileFieldsModel($FileResultsModel->path, $fields);
-			}
-		}
-
-		$ReplacementModel = new ReplacementModel($searchValue, $replaceValue, true, false);
-		$ReplacementModel->replaceInFiles($fileFieldsArray);
-
-		return true;
+	/**
+	 * Initialize a new FileFieldsModel instance.
+	 *
+	 * @param string $path
+	 * @param array $fields
+	 */
+	public function __construct(string $path, array $fields) {
+		$this->path = $path;
+		$this->fields = $fields;
 	}
 }

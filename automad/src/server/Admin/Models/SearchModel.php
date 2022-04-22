@@ -160,11 +160,11 @@ class SearchModel {
 	/**
 	 * Merge an array of `FieldResultsModel` into a single results.
 	 *
-	 * @param string $key
+	 * @param string $field
 	 * @param array $results
 	 * @return FieldResultsModel|null a field results results
 	 */
-	private function mergeFieldResults(string $key, array $results) {
+	private function mergeFieldResults(string $field, array $results) {
 		$matches = array();
 		$contextArray = array();
 
@@ -177,7 +177,7 @@ class SearchModel {
 
 		if (!empty($matches)) {
 			return new FieldResultsModel(
-				$key,
+				$field,
 				$matches,
 				join(' ... ', $contextArray)
 			);
@@ -189,59 +189,59 @@ class SearchModel {
 	/**
 	 * Search an array of values recursively.
 	 *
-	 * @param string $key
+	 * @param string $field
 	 * @param array $array
 	 * @return FieldResultsModel a field results results
 	 */
-	private function searchArrayRecursively(string $key, array $array) {
+	private function searchArrayRecursively(string $field, array $array) {
 		$results = array();
 
 		foreach ($array as $item) {
 			if (is_array($item) || is_object($item)) {
-				$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, (array) $item));
+				$results = $this->appendFieldResults($results, $this->searchArrayRecursively($field, (array) $item));
 			}
 
 			if (is_string($item)) {
-				$results = $this->appendFieldResults($results, $this->searchTextField($key, $item));
+				$results = $this->appendFieldResults($results, $this->searchTextField($field, $item));
 			}
 		}
 
-		return $this->mergeFieldResults($key, $results);
+		return $this->mergeFieldResults($field, $results);
 	}
 
 	/**
 	 * Perform a search in a block field recursively and return a
 	 * `FieldResultsModel` results for a given search value.
 	 *
-	 * @param string $key
+	 * @param string $field
 	 * @param array $blocks
 	 * @return FieldResultsModel|null a field results results
 	 */
-	private function searchBlocksRecursively(string $key, array $blocks) {
+	private function searchBlocksRecursively(string $field, array $blocks) {
 		$results = array();
 
 		foreach ($blocks as $block) {
 			if ($block->type == 'section') {
 				$results = $this->appendFieldResults(
 					$results,
-					$this->searchBlocksRecursively($key, $block->data->content->blocks)
+					$this->searchBlocksRecursively($field, $block->data->content->blocks)
 				);
 			} else {
 				foreach ($block->data as $blockProperty => $value) {
 					if ($this->isValidBlockProperty($blockProperty)) {
 						if (is_array($value) || is_object($value)) {
-							$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, (array) $value));
+							$results = $this->appendFieldResults($results, $this->searchArrayRecursively($field, (array) $value));
 						}
 
 						if (is_string($value)) {
-							$results = $this->appendFieldResults($results, $this->searchTextField($key, $value));
+							$results = $this->appendFieldResults($results, $this->searchTextField($field, $value));
 						}
 					}
 				}
 			}
 		}
 
-		return $this->mergeFieldResults($key, $results);
+		return $this->mergeFieldResults($field, $results);
 	}
 
 	/**
@@ -253,37 +253,37 @@ class SearchModel {
 	 * @return array an array of `FieldResultsModel` resultss
 	 */
 	private function searchData(array $data) {
-		$fieldResultsArray = array();
+		$fieldResults = array();
 
-		foreach ($data as $key => $value) {
-			if (strpos($key, '+') === 0) {
+		foreach ($data as $field => $value) {
+			if (strpos($field, '+') === 0) {
 				try {
 					$data = json_decode($value);
-					$FieldResultsModel = $this->searchBlocksRecursively($key, $data->blocks);
+					$FieldResultsModel = $this->searchBlocksRecursively($field, $data->blocks);
 				} catch (Exception $error) {
 					$FieldResultsModel = false;
 				}
 			} else {
-				$FieldResultsModel = $this->searchTextField($key, $value);
+				$FieldResultsModel = $this->searchTextField($field, $value);
 			}
 
 			if (!empty($FieldResultsModel)) {
-				$fieldResultsArray[] = $FieldResultsModel;
+				$fieldResults[] = $FieldResultsModel;
 			}
 		}
 
-		return $fieldResultsArray;
+		return $fieldResults;
 	}
 
 	/**
 	 * Perform a search in a single data field and return a
 	 * `FieldResultsModel` results for a given search value.
 	 *
-	 * @param string $key
+	 * @param string $field
 	 * @param string $value
 	 * @return FieldResultsModel the field results
 	 */
-	private function searchTextField(string $key, string $value) {
+	private function searchTextField(string $field, string $value) {
 		$ignoredKeys = array(
 			AM_KEY_HIDDEN,
 			AM_KEY_PRIVATE,
@@ -292,7 +292,7 @@ class SearchModel {
 			AM_KEY_TITLE
 		);
 
-		if (preg_match('/^(:|date|checkbox|tags|color)/', $key) || in_array($key, $ignoredKeys)) {
+		if (preg_match('/^(:|date|checkbox|tags|color)/', $field) || in_array($field, $ignoredKeys)) {
 			return false;
 		}
 
@@ -329,7 +329,7 @@ class SearchModel {
 
 		if ($fieldMatches) {
 			return new FieldResultsModel(
-				$key,
+				$field,
 				$fieldMatches,
 				$context
 			);

@@ -687,6 +687,38 @@ searchTitle: Search
 
 -
 
+searchPlaceholder: Search
+
+-
+
+searchReplacePlaceholder: Replace
+
+-
+
+searchReplaceSelected: Replace Selected
+
+-
+
+searchReplaceCheckAll: Choose All
+
+-
+
+searchReplaceUncheckAll: Deselect All
+
+-
+
+searchIsCaseSensitive: Upper / Lower Case
+
+-
+
+searchIsRegex: Regex
+
+-
+
+searchNoResults: Your search did not return any results.
+
+-
+
 selectTargetMovePage: Select a destination for moving
 
 -

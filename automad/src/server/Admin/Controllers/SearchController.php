@@ -34,18 +34,16 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Admin\Controllers;
 
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\ReplacementModel;
+use Automad\Admin\Models\Search\FileFieldsModel;
+use Automad\Admin\Models\SearchModel;
+use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\Parse;
 use Automad\Core\Request;
-use Automad\UI\Components\Alert\Alert;
-use Automad\UI\Components\Layout\SearchResults;
-use Automad\UI\Models\ReplacementModel;
-use Automad\UI\Models\SearchModel;
-use Automad\UI\Models\Search\FileKeysModel;
-use Automad\UI\Response;
-use Automad\UI\Utils\Text;
-use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -62,46 +60,42 @@ class SearchController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function searchAndReplace() {
+	public static function searchReplace() {
 		$Response = new Response();
 
-		if (Request::post('replaceSelected')) {
-			$files = Request::post('files');
+		$isRegex = filter_var(Request::post('isRegex'), FILTER_VALIDATE_BOOL);
+		$isCaseSensitive = filter_var(Request::post('isCaseSensitive'), FILTER_VALIDATE_BOOL);
 
-			if (!empty($files)) {
-				$fileKeysArray = array();
-				$ReplacementModel = new ReplacementModel(
-					Request::post('searchValue'),
-					Request::post('replaceValue'),
-					Request::post('isRegex'),
-					Request::post('isCaseSensitive')
-				);
+		$files = json_decode(Request::post('files'));
+		$replaceSelected = filter_var(Request::post('replaceSelected'), FILTER_VALIDATE_BOOL) && !empty($files);
 
-				foreach ($files as $path => $keysJson) {
-					$fileKeysArray[] = new FileKeysModel($path, json_decode($keysJson, true));
-				}
+		if ($replaceSelected) {
+			$fileFieldsArray = array();
+			$ReplacementModel = new ReplacementModel(
+				Request::post('searchValue'),
+				Request::post('replaceValue'),
+				$isRegex,
+				$isCaseSensitive
+			);
 
-				$ReplacementModel->replaceInFiles($fileKeysArray);
+			foreach ($files as $path => $fieldsCsv) {
+				$fileFieldsArray[] = new FileFieldsModel($path, Parse::csv($fieldsCsv));
 			}
+
+			$ReplacementModel->replaceInFiles($fileFieldsArray);
 		}
 
+		$Cache = new Cache();
 		$Search = new SearchModel(
-			UICache::get(),
+			$Cache->getAutomad(),
 			Request::post('searchValue'),
-			Request::post('isRegex'),
-			Request::post('isCaseSensitive')
+			$isRegex,
+			$isCaseSensitive
 		);
 
 		$fileResultsArray = $Search->searchPerFile();
-
 		Debug::log($fileResultsArray, 'Results per file');
 
-		if (!$html = SearchResults::render($fileResultsArray)) {
-			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');
-		}
-
-		$Response->setHtml($html);
-
-		return $Response;
+		return $Response->setData($fileResultsArray);
 	}
 }
