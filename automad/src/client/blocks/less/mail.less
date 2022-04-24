@@ -32,45 +32,42 @@
  * Licensed under the MIT license.
  */
 
-
-input[name="human"] {
+input[name='human'] {
 	display: none !important;
 }
 
 .am-input {
-
 	box-sizing: border-box;
 	width: 100%;
-	margin: var(--am-input-margin);
-	padding: var(--am-input-padding);
+	margin: var(--am-form-margin);
+	padding: var(--am-form-padding);
 	font-family: inherit;
 	font-weight: inherit;
 	font-size: inherit;
 	line-height: inherit;
-	color: var(--am-input-color);
-	background-color: var(--am-input-background);
-	border-radius: var(--am-input-border-radius);
-	border: var(--am-input-border);
+	color: var(--am-form-color);
+	background-color: var(--am-form-background);
+	border-radius: var(--am-form-border-radius);
+	border: var(--am-form-border);
 
 	&:hover {
-		color: var(--am-input-hover-color);
-		background-color: var(--am-input-hover-background);
-		border: var(--am-input-hover-border);
+		color: var(--am-form-hover-color);
+		background-color: var(--am-form-hover-background);
+		border: var(--am-form-hover-border);
 	}
 
 	&:focus {
-		color: var(--am-input-focus-color);
-		background-color: var(--am-input-focus-background);
-		border: var(--am-input-focus-border);
+		color: var(--am-form-focus-color);
+		background-color: var(--am-form-focus-background);
+		border: var(--am-form-focus-border);
 		outline: none;
 	}
 
-	&::-webkit-input-placeholder { 
-		color: var(--am-input-placeholder-color);
+	&::-webkit-input-placeholder {
+		color: var(--am-form-placeholder-color);
 	}
 
-	&::-moz-placeholder { 
-		color: var(--am-input-placeholder-color);
+	&::-moz-placeholder {
+		color: var(--am-form-placeholder-color);
 	}
-
 }

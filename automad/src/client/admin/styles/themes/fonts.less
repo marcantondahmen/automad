@@ -22,48 +22,32 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, create, html } from '../../core';
-import { BaseFieldComponent } from './BaseField';
+@inter: '../../../../../../node_modules/typeface-inter/Inter Web';
 
-/**
- * A checkbox field.
- *
- * @extends BaseFieldComponent
- */
-export class CheckboxComponent extends BaseFieldComponent {
-	/**
-	 * Checkbox styles.
-	 */
-	protected classes = [classes.checkbox, classes.checkboxInput];
-
-	/**
-	 * Render the input field.
-	 */
-	createInput(): void {
-		const { name, id, value, label } = this._data;
-		const wrapper = create('div', this.classes, {}, this);
-
-		wrapper.innerHTML = html`
-			<input
-				type="checkbox"
-				name="${name}"
-				id="${id}"
-				value="1"
-				${value ? 'checked' : ''}
-			/>
-			<label for="${id}"><span></span>${label}</label>
-		`;
-	}
+@font-face {
+	font-family: 'Inter';
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: normal;
+	font-named-instance: 'Regular';
+	src: url('@{inter}/Inter-roman.var.woff2?v=3.18.1') format('woff2');
 }
 
-customElements.define('am-checkbox', CheckboxComponent);
+@font-face {
+	font-family: 'Inter';
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: italic;
+	font-named-instance: 'Italic';
+	src: url('@{inter}/Inter-italic.var.woff2?v=3.18.1') format('woff2');
+}

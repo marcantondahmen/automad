@@ -40,7 +40,7 @@ import { BaseFieldComponent } from './BaseField';
  *
  * @extends BaseFieldComponent
  */
-class CheckboxSelectComponent extends BaseFieldComponent {
+class ToggleSelectComponent extends BaseFieldComponent {
 	/**
 	 * Render the input field.
 	 */
@@ -49,17 +49,17 @@ class CheckboxSelectComponent extends BaseFieldComponent {
 
 		const wrapper = create(
 			'div',
-			[classes.checkbox, classes.checkboxSelect, classes.select],
+			[classes.toggle, classes.toggleSelect, classes.select],
 			{},
 			this
 		);
 
 		const toggle = () => {
-			wrapper.classList.toggle(classes.checkboxOff, select.value === '0');
-			wrapper.classList.toggle(classes.checkboxOn, select.value === '1');
+			wrapper.classList.toggle(classes.toggleOff, select.value === '0');
+			wrapper.classList.toggle(classes.toggleOn, select.value === '1');
 		};
 
-		wrapper.classList.toggle(classes.checkboxDefaultOn, placeholder != '');
+		wrapper.classList.toggle(classes.toggleDefaultOn, placeholder != '');
 
 		wrapper.innerHTML = html`
 			<label for="${id}"><span></span>${label}</label>
@@ -78,4 +78,4 @@ class CheckboxSelectComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-checkbox-select', CheckboxSelectComponent);
+customElements.define('am-toggle-select', ToggleSelectComponent);

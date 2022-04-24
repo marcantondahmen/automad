@@ -32,24 +32,25 @@
  * Licensed under the MIT license.
  */
 
-import { classes } from '../../core';
-import { CheckboxComponent } from './Checkbox';
+import { BaseComponent } from '../Base';
+import { listen } from '../../core';
 
 /**
- * A large checkbox field.
+ * A simple sidebar toggle component.
  *
- * @extends CheckboxComponent
+ * @extends BaseComponent
  */
-class CheckboxLargeComponent extends CheckboxComponent {
+class SidebarToggleComponent extends BaseComponent {
 	/**
-	 * Checkbox styles.
+	 * The callback function used when an element is created in the DOM.
 	 */
-	protected classes = [classes.checkbox, classes.checkboxLarge];
-
-	/**
-	 * Remove label fpr large checkboxes.
-	 */
-	protected createLabel(): void {}
+	connectedCallback(): void {
+		this.listeners.push(
+			listen(this, 'click', () => {
+				document.body.classList.toggle('am-l-page--sidebar-open');
+			})
+		);
+	}
 }
 
-customElements.define('am-checkbox-large', CheckboxLargeComponent);
+customElements.define('am-sidebar-toggle', SidebarToggleComponent);

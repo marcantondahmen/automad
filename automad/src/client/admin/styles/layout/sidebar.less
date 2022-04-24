@@ -34,16 +34,16 @@
 
 .am-l-sidebar {
 	padding: 0;
-	background-color: var(--am-bg-base);
-	border-right: var(--am-hairline);
+	background-color: var(--am-bg);
+	border-right: var(--am-border);
 
-	@media (max-width: @l-breakpoint-medium-max) {
+	@media (max-width: @am-breakpoint-medium-max) {
 		position: fixed;
 		z-index: 110;
 		top: 0;
 		height: 100%;
-		width: @l-sidebar-width;
-		transform: translate3d(-@l-sidebar-width, 0, 0);
+		width: @am-sidebar-width;
+		transform: translate3d(-@am-sidebar-width, 0, 0);
 		transition: transform 0.2s ease-out;
 
 		.am-l-page--sidebar-open & {
@@ -51,7 +51,7 @@
 		}
 	}
 
-	@media (min-width: @l-breakpoint-medium) {
+	@media (min-width: @am-breakpoint-medium) {
 		position: sticky;
 		top: 0;
 		grid-column: 1 / span 1;
@@ -61,7 +61,7 @@
 	&__overlay {
 		display: none;
 
-		@media (max-width: @l-breakpoint-medium-max) {
+		@media (max-width: @am-breakpoint-medium-max) {
 			display: block;
 			position: fixed;
 			z-index: 100;
@@ -82,7 +82,7 @@
 
 	&__content {
 		display: grid;
-		grid-template-columns: ~'calc(@{l-sidebar-width} - var(--am-border-width))';
+		grid-template-columns: ~'calc(@{am-sidebar-width} - var(--am-border-width))';
 		grid-template-rows: var(--am-navbar-height) var(--am-space-top) auto;
 		overflow: auto;
 	}
@@ -91,7 +91,7 @@
 		grid-row: 1 / span 2;
 		padding: 0 var(--am-body-padding-horizontal);
 
-		@media (max-width: @l-breakpoint-medium-max) {
+		@media (max-width: @am-breakpoint-medium-max) {
 			display: none;
 		}
 	}
@@ -99,13 +99,13 @@
 	&__nav {
 		grid-row: 1 / span 3;
 
-		@media (min-width: @l-breakpoint-medium) {
+		@media (min-width: @am-breakpoint-medium) {
 			grid-row: 3 / span 1;
 		}
 	}
 
 	&__jump {
-		@media (min-width: @l-breakpoint-small) {
+		@media (min-width: @am-breakpoint-small) {
 			display: none;
 		}
 	}

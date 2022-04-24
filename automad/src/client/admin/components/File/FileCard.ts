@@ -141,7 +141,14 @@ class FileCardComponent extends BaseComponent {
 			`;
 		}
 
-		return html`<am-file-info></am-file-info>`;
+		return html`
+			<am-file-info
+				class="${classes.cardImage}"
+				title="$${file.basename}"
+			>
+				<i class="bi bi-filetype-${file.extension}"></i>
+			</am-file-info>
+		`;
 	}
 
 	/**

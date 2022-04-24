@@ -37,10 +37,10 @@
 	grid-row: footer-top / bottom;
 	align-self: end;
 
-	@media (min-width: @l-breakpoint-medium) {
-		grid-template-columns: minmax(@l-main-width, auto) minmax(
+	@media (min-width: @am-breakpoint-medium) {
+		grid-template-columns: minmax(@am-main-width, auto) minmax(
 				0,
-				@l-sidebar-width
+				@am-sidebar-width
 			);
 	}
 
@@ -48,7 +48,7 @@
 		grid-column: 1 / span 1;
 		justify-self: center;
 		width: 100%;
-		max-width: @l-main-width;
+		max-width: @am-main-width;
 		padding: var(--am-space-large) var(--am-body-padding-horizontal)
 			var(--am-space-medium) var(--am-body-padding-horizontal);
 	}

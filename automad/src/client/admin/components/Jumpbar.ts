@@ -233,6 +233,36 @@ class JumpbarComponent extends AutocompleteComponent {
 	}
 
 	/**
+	 * Create the main input element.
+	 *
+	 * @returns the input element
+	 */
+	protected createInput(): HTMLInputElement {
+		const placeholder: string = App.text(
+			this.elementAttributes.placeholder
+		);
+
+		const wrapper = create('div', [classes.inputKeyCombo], {}, this);
+
+		const input = create(
+			'input',
+			[classes.input],
+			{ type: 'text', placeholder },
+			wrapper
+		);
+
+		let meta = 'Ctrl';
+
+		if (navigator.userAgent.toLowerCase().indexOf('mac') != -1) {
+			meta = '⌘';
+		}
+
+		create('span', [], {}, wrapper).textContent = `${meta} + J`;
+
+		return input;
+	}
+
+	/**
 	 * Create a dropdown item.
 	 *
 	 * @param item

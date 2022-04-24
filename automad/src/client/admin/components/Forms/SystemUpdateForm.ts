@@ -153,7 +153,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 				<div class="${classes.modalFooter}">
 					<a
 						href="${App.dashboardURL}"
-						class="${classes.button} ${classes.buttonSuccess}"
+						class="${classes.button} ${classes.buttonPrimary}"
 					>
 						${App.text('systemUpdateSuccessReload')}
 					</a>
@@ -199,7 +199,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 
 		this.innerHTML = html`
 			<input type="hidden" name="update" value="run" />
-			<div class="${classes.alert} ${classes.alertSuccess}">
+			<div class="${classes.alert} ${classes.alertPrimary}">
 				<div class="${classes.alertIcon}">
 					<i class="bi bi-arrow-repeat"></i>
 				</div>
@@ -212,7 +212,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 					</p>
 					<div class="${classes.flex} ${classes.flexGap}">
 						<am-submit
-							class="${classes.button} ${classes.buttonSuccess}"
+							class="${classes.button} ${classes.buttonPrimary}"
 						>
 							${App.text('systemUpdateTo')}
 							<strong>${data.latest} </strong>

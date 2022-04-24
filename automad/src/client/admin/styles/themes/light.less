@@ -32,156 +32,39 @@
  * Licensed under the MIT license.
  */
 
-@inter: '../../../../../../node_modules/typeface-inter/Inter Web';
-
-@font-face {
-	font-family: 'Inter';
-	font-weight: 100 900;
-	font-display: swap;
-	font-style: normal;
-	font-named-instance: 'Regular';
-	src: url('@{inter}/Inter-roman.var.woff2?v=3.18.1') format('woff2');
-}
-
-@font-face {
-	font-family: 'Inter';
-	font-weight: 100 900;
-	font-display: swap;
-	font-style: italic;
-	font-named-instance: 'Italic';
-	src: url('@{inter}/Inter-italic.var.woff2?v=3.18.1') format('woff2');
-}
-
 :root {
-	--am-base-font-family: 'Inter';
-	--am-base-font-weight: '430';
-	--am-base-line-height: 1.5;
-	--am-base-font-size: 15px;
+	@am-light-bg: #ffffff;
+	@am-light-clr: @nord1;
+	@am-light-primary-clr: lighten(saturate(@nord10, 32%), 8%);
+	@am-light-danger-clr: lighten(saturate(@nord11, 28%), 8%);
+	@am-light-border: @nord6;
+	@am-light-muted: darken(@nord4, 5%);
 
-	@media (min-width: 400px) {
-		--am-base-font-size: 15px;
-	}
+	--am-clr: @am-light-clr;
+	--am-clr-active: mix(@am-light-clr, @am-light-bg, 85%);
 
-	@media (min-width: 1950px) {
-		--am-base-font-size: 16px;
-	}
+	--am-bg: @am-light-bg;
+	--am-bg-active: mix(@am-light-border, @am-light-bg, 40%);
 
-	@media (min-width: 2250px) {
-		--am-base-font-size: 17px;
-	}
+	--am-primary-clr: @am-light-primary-clr;
+	--am-primary-clr-active: lighten(@am-light-primary-clr, 4%);
 
-	@media (min-width: 2500px) {
-		--am-base-font-size: 18px;
-	}
+	--am-primary-bg: @am-light-bg;
+	--am-primary-bg-active: saturate(lighten(@am-light-primary-clr, 32%), 26%);
 
-	--am-clr-base: #121212;
-	--am-clr-muted: #cfcfcf;
-	--am-clr-primary: #121212;
-	--am-clr-success: #1070ff;
-	--am-clr-danger: #ff2f2f;
+	--am-danger-clr: @am-light-danger-clr;
+	--am-danger-clr-active: lighten(@am-light-danger-clr, 4%);
 
-	--am-bg-base: #ffffff;
-	--am-bg-light: #f2f2f2;
+	--am-danger-bg: @am-light-bg;
+	--am-danger-bg-active: saturate(lighten(@am-light-danger-clr, 32%), 26%);
 
-	--am-border-width: 1px;
-	--am-border-clr: #e2e2e2;
-	--am-hairline: var(--am-border-width) solid var(--am-border-clr);
+	--am-border-clr: @am-light-border;
+	--am-muted-clr: @am-light-muted;
 
-	--am-radius: 0.4rem;
-	--am-radius-large: 0.6rem;
-	--am-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1),
-		0 1rem 1rem -0.7rem rgba(0, 0, 0, 0.1);
+	--am-form-clr: @am-light-clr;
+	--am-form-bg: mix(@am-light-border, @am-light-bg, 40%);
 
-	// Typography
-	--am-font-size-small: 0.75rem;
-
-	// Layout
-	--am-body-padding-horizontal: 1.25rem;
-	--am-space-top: 4rem;
-
-	@media (min-width: @l-breakpoint-medium) {
-		--am-space-top: 6rem;
-		--am-body-padding-horizontal: 1.75rem;
-	}
-
-	--am-space-small: 0.75rem;
-	--am-space-medium: 1.5rem;
-	--am-space-large: 3rem;
-
-	// Grid
-	--am-grid-gap: 1rem;
-	--am-grid-item-min-width: 10rem;
-
-	// Card
-	--am-card-padding: 1rem;
-
-	// Navbar
-	--am-navbar-height: 4rem;
-	--am-navbar-gap: 1rem;
-
-	// Footer
-	--am-footer-height: 4rem;
-
-	// Flex
-	--am-flex-gap: 0.4em;
-
-	// Alert
-	--am-alert-padding: 1rem;
-	--am-alert-icon-size: 1.5rem;
-	--am-alert-gap: 0.75rem;
-
-	// Buttons
-	--am-button-clr: var(--am-clr-base);
-	--am-button-bg: var(--am-bg-base);
-
-	--am-button-active-clr: var(--am-clr-base);
-	--am-button-active-bg: var(--am-bg-light);
-
-	--am-button-padding: 0.75em;
-	--am-button-line-height: 2.6em;
-
-	--am-button-primary-clr: var(--am-bg-base);
-	--am-button-primary-bg: var(--am-clr-base);
-	--am-button-primary-border: var(--am-clr-base);
-
-	--am-button-success-clr: var(--am-bg-base);
-	--am-button-success-bg: var(--am-clr-success);
-	--am-button-success-border: var(--am-clr-success);
-
-	--am-button-danger-clr: var(--am-bg-base);
-	--am-button-danger-bg: var(--am-clr-danger);
-	--am-button-danger-border: var(--am-clr-danger);
-
-	// Modal
-	--am-modal-overlay-bg: rgba(0, 0, 0, 0.05);
-	--am-modal-overlay-padding: 1rem;
-
-	@media (min-width: @l-breakpoint-medium) {
-		--am-modal-overlay-padding: 4rem 1rem;
-	}
-
-	--am-modal-dialog-padding: 1rem;
-	--am-modal-dialog-width: 36rem;
-
-	// Dropdown
-	--am-dropdown-clr: var(--am-clr-base);
-	--am-dropdown-bg: var(--am-bg-base);
-	--am-dropdown-active-clr: var(--am-bg-base);
-	--am-dropdown-active-bg: var(--am-clr-success);
-
-	// Input
-	--am-input-bg: #fafafa;
-	--am-input-height: 2.85rem;
-	--am-input-padding: 0.29rem 0.86rem;
-	--am-input-large-font-size: 1.2rem;
-	--am-input-large-height: 3.15rem;
-	--am-input-large-padding: 0.43rem 0.86rem;
-
-	// Sidebar nav
-	--am-nav-padding-horizontal: 0.45rem;
-	--am-nav-item-line-height: 2rem;
-	--am-nav-item-active-clr: var(--am-bg-base);
-	--am-nav-item-active-bg: var(--am-clr-base);
-	--am-nav-link-hover-clr: var(--am-clr-base);
-	--am-nav-link-hover-bg: #f2f2f2;
+	--am-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.06),
+		0 1.5rem 1.9rem -1.2rem rgba(0, 0, 0, 0.24);
+	--am-shadow-inset: inset 0 0.15rem 0.5rem rgba(0, 0, 0, 0.1);
 }

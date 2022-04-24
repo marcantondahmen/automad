@@ -36,7 +36,7 @@
 	position: relative;
 
 	&--form input:focus {
-		border: var(--am-hairline);
+		border: var(--am-border);
 	}
 
 	&--form&--open input {
@@ -50,11 +50,11 @@
 		z-index: 100;
 		display: none;
 		flex-direction: column;
-		max-height: ~'calc(100vh - 1.5rem)';
+		max-height: calc(100vh - 5rem);
 		font-size: 1rem;
-		background-color: var(--am-bg-base);
+		background-color: var(--am-bg);
 		border-radius: var(--am-radius);
-		border: var(--am-hairline);
+		border: var(--am-border);
 		box-shadow: var(--am-shadow);
 		overflow: auto;
 
@@ -69,7 +69,7 @@
 
 	&--form > &__items {
 		top: 0;
-		padding-top: var(--am-input-height) !important;
+		padding-top: var(--am-form-height) !important;
 		border-top: 0;
 	}
 
@@ -87,14 +87,16 @@
 		color: var(--am-dropdown-clr);
 		background-color: var(--am-dropdown-bg);
 		cursor: pointer;
+		transition: background 0.2s, color 0.2s;
 
+		&:hover,
 		&--active {
 			color: var(--am-dropdown-active-clr);
 			background-color: var(--am-dropdown-active-bg);
 		}
 
 		&--divider:not(:last-child) {
-			border-bottom: var(--am-hairline);
+			border-bottom: var(--am-border);
 		}
 
 		& > * {

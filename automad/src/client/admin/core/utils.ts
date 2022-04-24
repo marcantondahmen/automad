@@ -74,7 +74,7 @@ export const confirm = async (text: string): Promise<any> => {
 				</am-modal-close>
 				<am-modal-close
 					confirm
-					class="${classes.button} ${classes.buttonSuccess}"
+					class="${classes.button} ${classes.buttonPrimary}"
 				>
 					<am-icon-text
 						icon="check"

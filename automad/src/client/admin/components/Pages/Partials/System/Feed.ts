@@ -89,7 +89,7 @@ export const renderFeedSection = (listeners: Listener[]): string => {
 			<input type="hidden" name="type" value="feed" />
 			<p>$${App.text('systemRssFeedInfo')}</p>
 			${createField(
-				'am-checkbox-large',
+				'am-toggle-large',
 				null,
 				{
 					key: 'feedEnabled',

@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -32,12 +32,24 @@
  * Licensed under the MIT license.
  */
 
-.am-u-text {
-	&-muted {
-		color: var(--am-muted-clr);
-	}
+import { classes } from '../../core';
+import { ToggleComponent } from './Toggle';
 
-	&-success {
-		color: var(--am-primary-clr);
-	}
+/**
+ * A large checkbox field.
+ *
+ * @extends ToggleComponent
+ */
+class ToggleLargeComponent extends ToggleComponent {
+	/**
+	 * Checkbox styles.
+	 */
+	protected classes = [classes.toggle, classes.toggleLarge];
+
+	/**
+	 * Remove label fpr large checkboxes.
+	 */
+	protected createLabel(): void {}
 }
+
+customElements.define('am-toggle-large', ToggleLargeComponent);

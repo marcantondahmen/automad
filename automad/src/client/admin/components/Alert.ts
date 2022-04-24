@@ -64,7 +64,7 @@ class AlertComponent extends BaseComponent {
 	connectedCallback(): void {
 		const types: KeyValueMap = {
 			danger: classes.alertDanger,
-			success: classes.alertSuccess,
+			success: classes.alertPrimary,
 		};
 
 		this.classList.add(classes.alert);

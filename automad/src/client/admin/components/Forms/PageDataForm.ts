@@ -75,7 +75,7 @@ const fieldGroup = ({
 }: FieldGroupData): void => {
 	const prefixMap = {
 		'+': 'am-editor',
-		checkbox: 'am-checkbox-select',
+		checkbox: 'am-toggle-select',
 		color: 'am-color',
 		date: 'am-date',
 		text: 'am-markdown',
@@ -351,7 +351,7 @@ export class PageDataFormComponent extends FormComponent {
 		).innerHTML = fields[App.reservedFields.AM_KEY_URL] || url;
 
 		createMainField(
-			'am-checkbox-large',
+			'am-toggle-large',
 			App.reservedFields.AM_KEY_PRIVATE,
 			App.text('keepPagePrivate')
 		);
@@ -370,7 +370,7 @@ export class PageDataFormComponent extends FormComponent {
 		};
 
 		createMainField(
-			'am-checkbox',
+			'am-toggle',
 			App.reservedFields.AM_KEY_HIDDEN,
 			App.text('hidePage')
 		);

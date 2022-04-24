@@ -33,9 +33,22 @@
  */
 
 .am-e-badge {
-	font-size: 0.75em;
-	line-height: 1.7;
-	padding: 0 0.7em;
-	border: var(--am-hairline);
-	border-radius: 2em;
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	font-size: 0.625rem;
+	line-height: 1.3rem;
+	height: 1.3rem;
+	padding: 0 0.5rem;
+	font-weight: 560;
+	color: var(--am-bg);
+	background-color: var(--am-clr);
+	border-radius: 2rem;
+
+	& .bi {
+		display: flex;
+		align-items: center;
+		font-size: 0.75rem;
+		height: 100%;
+	}
 }

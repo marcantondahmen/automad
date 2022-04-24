@@ -80,7 +80,7 @@ export const renderDebugSection = (listeners: Listener[]): string => {
 			<input type="hidden" name="type" value="debug" />
 			<p>$${App.text('systemDebugInfo')}</p>
 			${createField(
-				'am-checkbox-large',
+				'am-toggle-large',
 				null,
 				{
 					key: 'debugEnabled',

@@ -39,11 +39,9 @@ import { createTemplateSelect } from '../../Fields/PageTemplate';
 export const sidebarLayout = ({ main }: Partials) => {
 	return html`
 		<div class="am-l-page am-l-page--sidebar">
-			<am-toggle
+			<am-sidebar-toggle
 				class="am-l-sidebar__overlay"
-				target="body"
-				cls="am-l-page--sidebar-open"
-			></am-toggle>
+			></am-sidebar-toggle>
 			<nav class="am-l-sidebar">
 				<am-sidebar class="am-l-sidebar__content">
 					<div class="am-l-sidebar__logo">Logo</div>
@@ -116,13 +114,9 @@ export const sidebarLayout = ({ main }: Partials) => {
 							text="${App.text('addPage')}"
 						></am-icon-text>
 					</am-modal-toggle>
-					<am-toggle
-						target="body"
-						cls="am-l-page--sidebar-open"
-						class="am-u-display-small"
-					>
+					<am-sidebar-toggle class="am-u-display-small">
 						<i class="bi bi-list"></i>
-					</am-toggle>
+					</am-sidebar-toggle>
 				</div>
 			</nav>
 			<main class="am-l-main am-l-main--sidebar">${main}</main>
@@ -151,7 +145,7 @@ export const sidebarLayout = ({ main }: Partials) => {
 						[],
 						{ required: '' }
 					).outerHTML}
-					${createField('am-checkbox-large', null, {
+					${createField('am-toggle-large', null, {
 						key: App.reservedFields.AM_KEY_PRIVATE,
 						name: App.reservedFields.AM_KEY_PRIVATE,
 						value: false,
@@ -170,7 +164,7 @@ export const sidebarLayout = ({ main }: Partials) => {
 					</div>
 					<div class="${classes.modalFooter}">
 						<am-submit
-							class="${classes.button} ${classes.buttonSuccess}"
+							class="${classes.button} ${classes.buttonPrimary}"
 						>
 							$${App.text('addPage')}
 						</am-submit>

@@ -37,9 +37,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import './styles/styles.less';
 
-import './components/Fields/Checkbox';
-import './components/Fields/CheckboxLarge';
-import './components/Fields/CheckboxSelect';
 import './components/Fields/Color';
 import './components/Fields/Date';
 import './components/Fields/Editor';
@@ -53,6 +50,9 @@ import './components/Fields/PageTemplate';
 import './components/Fields/Password';
 import './components/Fields/Textarea';
 import './components/Fields/Title';
+import './components/Fields/Toggle';
+import './components/Fields/ToggleLarge';
+import './components/Fields/ToggleSelect';
 import './components/Fields/Url';
 
 import './components/File/FileCard';
@@ -91,6 +91,9 @@ import './components/Pages/Setup';
 import './components/Pages/Shared';
 import './components/Pages/System';
 
+import './components/Sidebar/Sidebar';
+import './components/Sidebar/SidebarToggle';
+
 import './components/State/CacheIndicator';
 import './components/State/DebugButton';
 import './components/State/DebugIndicator';
@@ -108,6 +111,7 @@ import './components/Switcher/SystemMenu';
 
 import './components/Alert';
 import './components/Autocomplete';
+import './components/Checkbox';
 import './components/Copy';
 import './components/Dropdown';
 import './components/Filter';
@@ -121,6 +125,4 @@ import './components/PageSelectTree';
 import './components/PrivateIndicator';
 import './components/Root';
 import './components/Select';
-import './components/Sidebar';
 import './components/Spinner';
-import './components/Toggle';

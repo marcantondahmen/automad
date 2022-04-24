@@ -26,49 +26,68 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
+import { classes, create, html, listen, query } from '../core';
 import { BaseComponent } from './Base';
-import { listen, queryAll } from '../core';
 
 /**
- * A simple toggle link component.
+ * A simple checkbox component.
  *
  * @example
- * <am-toggle target="body" cls="am-l-page--sidebar-open">
- *     Menu
- * </am-toggle>
+ * <am-checkbox name="..." checked></am-checkbox>
  *
  * @extends BaseComponent
  */
-class ToggleComponent extends BaseComponent {
+class CheckboxComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['target', 'cls'];
+		return ['name', 'checked'];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.listeners.push(
-			listen(this, 'click', () => {
-				const elements = queryAll(this.elementAttributes.target);
+		this.render();
 
-				elements.forEach((element) => {
-					element.classList.toggle(this.elementAttributes.cls);
-				});
-			})
-		);
+		this.removeAttribute('name');
+		this.removeAttribute('checkbox');
+
+		const toggleParent = () => {
+			this.closest(`.${classes.card}`).classList.toggle(
+				classes.cardActive,
+				(query('input', this) as HTMLInputElement).checked
+			);
+		};
+
+		listen(this, 'input', toggleParent, 'input');
+		toggleParent();
+	}
+
+	/**
+	 * Render the checkbox.
+	 */
+	render(): void {
+		const label = create('label', [classes.checkbox], {}, this);
+
+		label.innerHTML = html`
+			<input
+				type="checkbox"
+				name="${this.elementAttributes.name}"
+				${this.hasAttribute('checked') ? 'checked' : ''}
+			/>
+			<i class="bi"></i>
+		`;
 	}
 }
 
-customElements.define('am-toggle', ToggleComponent);
+customElements.define('am-checkbox', CheckboxComponent);

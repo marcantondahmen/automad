@@ -152,19 +152,10 @@ export class AutocompleteComponent extends BaseComponent {
 	 */
 	private init(): void {
 		if (typeof this.data !== 'undefined') {
-			const placeholder: string = App.text(
-				this.elementAttributes.placeholder
-			);
-
 			this.innerHTML = '';
 			this.items = [];
 
-			this.input = create(
-				'input',
-				[classes.input],
-				{ type: 'text', placeholder },
-				this
-			);
+			this.input = this.createInput();
 
 			this.dropdown = create(
 				'div',
@@ -187,6 +178,24 @@ export class AutocompleteComponent extends BaseComponent {
 			this.registerInputEvents();
 			this.update();
 		}
+	}
+
+	/**
+	 * Create the main input element.
+	 *
+	 * @returns the input element
+	 */
+	protected createInput(): HTMLInputElement {
+		const placeholder: string = App.text(
+			this.elementAttributes.placeholder
+		);
+
+		return create(
+			'input',
+			[classes.input],
+			{ type: 'text', placeholder },
+			this
+		);
 	}
 
 	/**

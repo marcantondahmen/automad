@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" class="am-ui">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Automd UI Mockup</title>
+	<link rel="stylesheet" href="../../../../dist/admin/main.bundle.css">
+	<link rel="stylesheet" href="../../../../dist/admin/vendor.bundle.css">
+</head>
+<body>
+	<main style="display: flex; flex-direction: column; gap: 2rem; width: 76rem; max-width: 90%; margin: 5rem auto;">
+		<section>
+			<span class="am-e-button">
+				<span>Button</span>
+			</span>
+			<span class="am-e-button am-e-button--inverted">
+				<span>Button</span>
+			</span>
+			<span class="am-e-button am-e-button--primary">
+				<span>Button</span>
+			</span>
+			<span class="am-e-button am-e-button--primary-inverted">
+				<span>Button</span>
+			</span>
+			<span class="am-e-button am-e-button--danger">
+				<span>Button</span>
+			</span>
+			<span class="am-e-button am-e-button--danger-inverted">
+				<span>Button</span>
+			</span>
+			<span class="am-e-button am-e-button--primary" disabled>
+				<span>Button</span>
+			</span>
+			<span class="am-e-button am-e-button--link">
+				<span>Button</span>
+			</span>
+		</section>
+		<section style="padding-bottom: 36rem">
+			<div class="am-c-dropdown am-c-dropdown--form am-c-dropdown--open">
+				<span class="am-f-input-key-combo">
+					<input class="am-f-input" type="text" placeholder="Jump to ...">
+					<span>⌘ + J</span>
+				</span>
+				<div class="am-c-dropdown__items am-c-dropdown__items--full-width">
+					<am-link class="am-c-dropdown__item" target="search?search="><i class="bi bi-search"></i><span>Search</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item--divider am-c-dropdown__item" external="/automad-development"><i class="bi bi-window-desktop"></i><span>In-Page Edit Mode</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item" target="system?section=cache"><i class="bi bi-stack"></i><span>Cache</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item am-c-dropdown__item--active" target="system?section=users"><i class="bi bi-people"></i><span>Users</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item" target="system?section=update"><i class="bi bi-arrow-repeat"></i><span>Update</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item" target="system?section=feed"><i class="bi bi-rss"></i><span>RSS Feed</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item" target="system?section=language"><i class="bi bi-translate"></i><span>Language</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item" target="system?section=debug"><i class="bi bi-bug"></i><span>Debug</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item--divider am-c-dropdown__item" target="system?section=config"><i class="bi bi-file-earmark-code"></i><span>Configuration File</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item--divider am-c-dropdown__item" target="shared"><i class="bi bi-file-earmark-medical"></i><span>General Data and Files</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item--divider am-c-dropdown__item" target="packages"><i class="bi bi-box-seam"></i><span>Packages</span><span class="am-u-text-muted"></span></am-link>
+					<am-link class="am-c-dropdown__item" target="page?url=/test/test-xxx"><i class="bi bi-file-earmark-text"></i><span>Test xxx</span><span class="am-u-text-muted">/test/test-xxx</span></am-link>
+					<am-link class="am-c-dropdown__item" target="page?url=/"><i class="bi bi-file-earmark-text"></i><span>Home</span><span class="am-u-text-muted">/</span></am-link>
+					<am-link class="am-c-dropdown__item" target="page?url=/blocks"><i class="bi bi-file-earmark-text"></i><span>Blocks</span><span class="am-u-text-muted">/blocks</span></am-link>
+					<am-link class="am-c-dropdown__item" target="page?url=/sections"><i class="bi bi-file-earmark-text"></i><span>Sections</span><span class="am-u-text-muted">/sections</span></am-link>
+					<am-link class="am-c-dropdown__item" target="page?url=/pagelists"><i class="bi bi-file-earmark-text"></i><span>Pagelists</span><span class="am-u-text-muted">/pagelists</span></am-link>
+					<am-link class="am-c-dropdown__item" target="page?url=/how-to-use-this-theme"><i class="bi bi-file-earmark-text"></i><span>How to use this theme</span><span class="am-u-text-muted">/how-to-use-this-theme</span></am-link>
+				</div>
+			</div>
+		</section>
+		<section class="am-c-grid" style="--min: 14rem;">
+			<div class="am-c-card">
+				<div class="am-c-card__image">
+					<img src="https://images.unsplash.com/photo-1537251503603-4bd46030115f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
+				</div>
+				<div class="am-c-card__body">
+					<div class="am-c-card__title">Card Title</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer">
+					<span>
+						<i class="bi bi-list"></i>
+					</span>
+					<am-checkbox name="mockup" checked></am-checkbox>
+				</div>
+			</div>
+			<div class="am-c-card">
+				<div class="am-c-card__image">
+					<img src="https://images.unsplash.com/photo-1537251503603-4bd46030115f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
+				</div>
+				<div class="am-c-card__body">
+					<div class="am-c-card__title">Card Title</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer am-c-card__footer--right">
+					<small>
+						<span class="am-e-button am-e-button--primary">Button</span>
+					</small>
+				</div>
+			</div>
+			<div class="am-c-card">
+				<a href="" class="am-c-card__image">
+					<i class="bi bi-filetype-pdf"></i>
+				</a>
+				<div class="am-c-card__body">
+					<div class="am-c-card__title">Card Title</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer am-c-card__footer--right">
+					<am-checkbox name="mockup"></am-checkbox>
+				</div>
+			</div>
+			<div class="am-c-card">
+				<a href="" class="am-c-card__image">
+					<i class="bi bi-filetype-xyz"></i>
+				</a>
+				<div class="am-c-card__body">
+					<div class="am-c-card__title">Card Title</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer am-c-card__footer--right">
+					<am-checkbox name="mockup"></am-checkbox>
+				</div>
+			</div>
+		</section>
+		<section class="am-c-grid" style="--min: 20rem;">
+			<div class="am-c-card am-c-card--active">
+				<div class="am-c-card__badge">
+					<i class="bi bi-arrow-repeat"></i>
+					<span>1.2.4</span>
+				</div>
+				<div class="am-c-card__body">
+					<div class="am-c-card__title">vendor / <br>package-name</div>
+				</div>
+				<div class="am-c-card__image am-c-card__image--4-3">
+					<img src="https://raw.githubusercontent.com/marcantondahmen/media-files/master/themes/revitron/default.png" alt="">
+				</div>
+				<div class="am-c-card__body">
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer">
+					<div>
+						<span class="am-e-badge">
+							<i class="bi bi-arrow-down-circle-fill"></i>
+							<span>924</span>
+						</span>
+						<i class="am-u-text-muted bi bi-github"></i>
+						<i class="am-u-text-muted bi bi-file-earmark-text-fill"></i>
+					</div>
+					<small>
+						<span class="am-e-button am-e-button--link___">Remove</span>
+						<span class="am-e-button am-e-button--inverted">Update</span>
+					</small>
+				</div>
+			</div>
+			<div class="am-c-card">
+				<div class="am-c-card__body">
+					<div class="am-c-card__title">vendor / <br>package-name</div>
+				</div>
+				<div class="am-c-card__image am-c-card__image--4-3">
+					<img src="https://raw.githubusercontent.com/marcantondahmen/media-files/master/themes/revitron/landing.png" alt="">
+				</div>
+				<div class="am-c-card__body">
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer">
+					<div>
+						<span class="am-e-badge">
+							<i class="bi bi-arrow-down-circle-fill"></i>
+							<span>924</span>
+						</span>
+						<i class="am-u-text-muted bi bi-github"></i>
+						<i class="am-u-text-muted bi bi-file-earmark-text-fill"></i>
+					</div>
+					<small>
+						<span class="am-e-button am-e-button--primary">Install</span>
+					</small>
+				</div>
+			</div>
+		</section>
+		<section class="am-c-grid" style="--min: 14rem;">
+			<div class="am-c-card">
+				<div class="am-c-card__body">
+					<span href="" class="am-c-card__icon am-c-card__icon--narrow">
+						<i class="bi bi-file-earmark-richtext"></i>
+					</span>
+					<div class="am-c-card__title">Card Title</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer">
+					<div class="am-u-flex__item-grow">
+						<span class="am-e-badge">Badge Text</span>
+					</div>
+					<am-checkbox name="mockup" checked></am-checkbox>
+				</div>
+			</div>
+			<div class="am-c-card">
+				<div class="am-c-card__body">
+					<span href="" class="am-c-card__icon">
+						<i class="bi bi-cpu"></i>
+					</span>
+					<div class="am-c-card__title">Card Title</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer">
+					<div class="am-u-flex__item-grow">
+						<span class="am-e-badge">1.2.3</span>
+					</div>
+					<am-checkbox name="mockup"></am-checkbox>
+				</div>
+			</div>
+			<div class="am-c-card am-c-card--link">
+				<div class="am-c-card__body">
+					<span class="am-c-card__icon am-c-alert__icon--narrow">
+						<i class="bi bi-device-ssd"></i>
+					</span>
+					<div class="am-c-card__title">Caching</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer">
+					<small>
+						<am-cache-indicator>
+							<am-icon-text class="am-u-text-success am-c-icon-text">
+								<i class="bi bi-check-circle-fill"></i>
+								<span>Caching is enabled</span>
+							</am-icon-text>
+						</am-cache-indicator>
+					</small>
+				</div>
+			</div>
+			<div class="am-c-card am-c-card--link">
+				<div class="am-c-card__body">
+					<span class="am-c-card__icon">
+						<i class="bi bi-bug"></i>
+					</span>
+					<div class="am-c-card__title">Debugging</div>
+					Some random text<br>on multiple lines
+				</div>
+				<div class="am-c-card__footer">
+					<small>
+						<am-cache-indicator>
+							<am-icon-text class="am-u-text-muted am-c-icon-text">
+								<i class="bi bi-slash-circle-fill"></i>
+								<span>Debugging is disabled</span>
+							</am-icon-text>
+						</am-cache-indicator>
+					</small>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div class="am-c-alert">
+				<span class="am-c-alert__icon"><i class="bi bi-slash-circle"></i></span>
+				<span class="am-c-alert__text">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo quaerat nobis temporibus possimus assumenda eum consequatur, et deleniti unde repellat. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo quaerat nobis temporibus possimus assumenda eum consequatur, et deleniti unde repellat. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+				</span>
+			</div>
+			<div class="am-c-alert am-c-alert--primary">
+				<span class="am-c-alert__icon"><i class="bi bi-slash-circle"></i></span>
+				<div class="am-c-alert__text">
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo quaerat nobis temporibus possimus assumenda eum consequatur, et deleniti unde repellat. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo quaerat nobis temporibus possimus assumenda eum consequatur, et deleniti unde repellat. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+						
+					</p>
+					<span class="am-e-button am-e-button--primary-inverted">Primary Button</span>
+					<span class="am-e-button am-e-button--link">Secondary Button</span>
+				</div>
+			</div>
+			<div class="am-c-alert am-c-alert--danger">
+				<span class="am-c-alert__icon"><i class="bi bi-slash-circle"></i></span>
+				<span class="am-c-alert__text">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+				</span>
+			</div>
+			<div class="am-c-grid" style="--min: 20rem;">
+				<div class="am-c-alert">
+					<span class="am-c-alert__icon"><i class="bi bi-slash-circle"></i></span>
+					<span class="am-c-alert__text">
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo quaerat nobis temporibus possimus assumenda eum consequatur, et deleniti unde repellat. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+						</p>
+						<span class="am-e-button am-e-button--inverted">Primary Button</span>
+					</span>
+				</div>
+				<div class="am-c-alert am-c-alert--primary">
+					<span class="am-c-alert__icon"><i class="bi bi-slash-circle"></i></span>
+					<span class="am-c-alert__text">
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo quaerat nobis temporibus possimus assumenda eum consequatur, et deleniti unde repellat. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+						</p>
+						<span class="am-e-button am-e-button--primary-inverted">Primary Button</span>
+					</span>
+				</div>
+				<div class="am-c-alert am-c-alert--danger">
+					<span class="am-c-alert__icon"><i class="bi bi-slash-circle"></i></span>
+					<span class="am-c-alert__text">
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo quaerat nobis temporibus possimus assumenda eum consequatur, et deleniti unde repellat. Rerum possimus modi aut eaque, nesciunt delectus fugiat vero.
+						</p>
+						<span class="am-e-button am-e-button--danger-inverted">Primary Button</span>
+					</span>
+				</div>
+			</div>
+		</section>
+	</main>
+	<script src="../../../../dist/admin/main.bundle.js"></script>
+	<script src="../../../../dist/admin/vendor.bundle.js"></script>
+</body>
+</html>

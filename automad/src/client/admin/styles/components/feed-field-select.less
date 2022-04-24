@@ -36,7 +36,7 @@
 	--gap: 3px;
 	--clr: var(--am-button-clr);
 	--bg: var(--am-button-bg);
-	--border: var(--am-clr-base);
+	--border: var(--am-clr);
 	display: flex;
 	flex-direction: column;
 	gap: var(--gap);
@@ -49,7 +49,7 @@
 		content: attr(data-text);
 		padding: 0.5rem;
 		text-align: center;
-		color: var(--am-clr-muted);
+		color: var(--am-muted-clr);
 	}
 
 	&__arrows {
@@ -70,7 +70,7 @@
 
 		&--ghost {
 			--clr: transparent;
-			--border: var(--am-clr-success);
+			--border: var(--am-primary-clr);
 			border-style: dashed;
 		}
 
@@ -85,7 +85,7 @@
 	}
 
 	&--muted {
-		--clr: var(--am-clr-muted);
+		--clr: var(--am-muted-clr);
 		--bg: var(--am-button-bg);
 		--border: var(--am-border-clr);
 	}

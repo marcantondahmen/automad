@@ -143,7 +143,7 @@ export class PageComponent extends SidebarLayoutComponent {
 							</div>
 							<div class="${classes.modalFooter}">
 								<am-submit
-									class="${classes.button} ${classes.buttonSuccess}"
+									class="${classes.button} ${classes.buttonPrimary}"
 								>
 									$${App.text('movePage')}
 									<i class="bi bi-arrows-move"></i>
@@ -232,7 +232,7 @@ export class PageComponent extends SidebarLayoutComponent {
 						</div>
 						<div class="${classes.modalFooter}">
 							<am-submit
-								class="${classes.button} ${classes.buttonSuccess}"
+								class="${classes.button} ${classes.buttonPrimary}"
 							>
 								$${App.text('importFromUrl')}
 								<i class="bi bi-cloud-download"></i>

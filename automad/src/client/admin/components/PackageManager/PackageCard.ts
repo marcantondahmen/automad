@@ -39,7 +39,6 @@ import {
 	createProgressModal,
 	eventNames,
 	fire,
-	html,
 	listen,
 	notifyError,
 	notifySuccess,
@@ -47,7 +46,6 @@ import {
 } from '../../core';
 import { Package } from '../../types';
 import { BaseComponent } from '../Base';
-import { ModalComponent } from '../Modal/Modal';
 
 const packageBrowser = 'https://packages.automad.org';
 
@@ -181,7 +179,7 @@ class PackageCardComponent extends BaseComponent {
 		const href = `${packageBrowser}/${pkg.name}`;
 		const preview = create(
 			'a',
-			[classes.cardImage],
+			[classes.cardImage, classes.cardImage43],
 			{ href, target: '_blank' },
 			this
 		);

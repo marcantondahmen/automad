@@ -48,7 +48,7 @@
 		text-align: center;
 		font-size: 1.25rem;
 		color: var(--am-border-clr);
-		background-color: var(--am-input-bg);
+		background-color: var(--am-form-bg);
 		border-radius: var(--am-radius-large);
 		border: 2px dashed var(--am-border-clr);
 
@@ -81,7 +81,7 @@
 		font-size: var(--am-font-size-small);
 
 		& + .dz-preview {
-			border-top: var(--am-hairline);
+			border-top: var(--am-border);
 		}
 
 		& .dz-image {
@@ -90,8 +90,8 @@
 			height: @c-upload-thumbnail-size;
 			border-radius: var(--am-radius);
 			overflow: hidden;
-			background-color: var(--am-input-bg);
-			border: var(--am-hairline);
+			background-color: var(--am-form-bg);
+			border: var(--am-border);
 
 			& > img {
 				width: 100%;
@@ -124,12 +124,12 @@
 			inset: 42% 10%;
 			overflow: hidden;
 			border-radius: 2rem;
-			border: 2px solid var(--am-clr-base);
-			background-color: var(--am-clr-base);
+			border: 2px solid var(--am-clr);
+			background-color: var(--am-clr);
 			opacity: 0.5;
 
 			& .dz-upload {
-				background-color: var(--am-bg-base);
+				background-color: var(--am-bg);
 				display: block;
 				position: relative;
 				height: 100%;
@@ -143,11 +143,11 @@
 			grid-row: 3 / 4;
 			align-self: end;
 			text-decoration: none;
-			color: var(--am-clr-muted);
+			color: var(--am-muted-clr);
 			transition: color 0.2s;
 
 			&:hover {
-				color: var(--am-clr-base);
+				color: var(--am-clr);
 			}
 		}
 

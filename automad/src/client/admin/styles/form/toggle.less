@@ -1,0 +1,119 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-f-toggle {
+	--size: 1.25rem;
+	--border: 0.11em;
+	--width-factor: 1.6;
+	--clr-on: var(--am-clr);
+
+	&--large {
+		--size: 1.85rem;
+		--border: 0.105em;
+	}
+
+	&--input,
+	&--select {
+		position: relative;
+		display: block;
+
+		& label {
+			width: 100%;
+			padding: var(--am-form-padding);
+			height: var(--am-form-height);
+			border: var(--am-border);
+			border-radius: var(--am-radius);
+		}
+	}
+
+	&--select {
+		color: var(--am-muted-clr);
+		--clr-on: var(--am-muted-clr);
+	}
+
+	&--select&--on,
+	&--select&--off {
+		color: var(--am-clr);
+		--clr-on: var(--am-clr);
+	}
+
+	& input {
+		display: none;
+	}
+
+	& label {
+		display: flex;
+		align-items: center;
+		gap: ~'calc(var(--size) * 0.55)';
+		cursor: pointer;
+
+		& span {
+			position: relative;
+			display: inline-block;
+			width: ~'calc(var(--size) * var(--width-factor))';
+			height: var(--size);
+			font-size: var(--size);
+			border: var(--border) solid;
+			border-radius: 1rem;
+			transition: background-color 0.2s, border 0.2s;
+
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: ~'calc(-1 * var(--border))';
+				left: ~'calc(-1 * var(--border))';
+				transform: translateX(0);
+				width: var(--size);
+				height: var(--size);
+				border-radius: var(--size);
+				border: var(--border) solid;
+				background-color: var(--am-bg);
+				transition: transform 0.2s;
+			}
+		}
+	}
+
+	&--on label span,
+	&--default-on label span,
+	& input:checked + label span {
+		background-color: var(--clr-on);
+
+		&:before {
+			transform: translateX(
+				~'calc(var(--size) * (var(--width-factor) - 1))'
+			);
+		}
+	}
+}

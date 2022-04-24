@@ -98,7 +98,7 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 			<input type="hidden" name="type" value="cache" />
 			<p>$${App.text('systemCacheInfo')}</p>
 			${createField(
-				'am-checkbox-large',
+				'am-toggle-large',
 				null,
 				{
 					key: 'cacheEnabled',
