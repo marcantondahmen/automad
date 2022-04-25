@@ -113,6 +113,7 @@ import './components/Alert';
 import './components/Autocomplete';
 import './components/Checkbox';
 import './components/Copy';
+import './components/DarkModeToggle';
 import './components/Dropdown';
 import './components/Filter';
 import './components/IconText';

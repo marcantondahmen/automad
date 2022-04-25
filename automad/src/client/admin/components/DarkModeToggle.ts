@@ -32,64 +32,74 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, html, listen, query } from '../core';
+import { html, listen, query } from '../core';
 import { BaseComponent } from './Base';
 
 /**
- * A simple checkbox component.
- *
- * @example
- * <am-checkbox name="..." checked></am-checkbox>
+ * A spinner component.
  *
  * @extends BaseComponent
  */
-class CheckboxComponent extends BaseComponent {
+class DarkModeToggleComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['name', 'checked'];
+		return ['text'];
 	}
+
+	/**
+	 * The saved dark mode state.
+	 */
+	private darkMode: boolean = false;
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.render();
+		const localScheme = localStorage.getItem('color-scheme');
+		this.darkMode = localScheme === 'dark';
 
-		this.removeAttribute('name');
-		this.removeAttribute('checkbox');
+		if (!localScheme) {
+			this.darkMode =
+				window.matchMedia &&
+				window.matchMedia('(prefers-color-scheme: dark)').matches;
+		}
 
-		const toggleParent = () => {
-			this.closest(`.${classes.card}`).classList.toggle(
-				classes.cardActive,
-				(query('input', this) as HTMLInputElement).checked
+		query('.am-ui, html').classList.toggle('dark', this.darkMode);
+
+		listen(this, 'click', () => {
+			this.darkMode = !this.darkMode;
+
+			localStorage.setItem(
+				'color-scheme',
+				this.darkMode ? 'dark' : 'light'
 			);
-		};
 
-		listen(this, 'input', toggleParent, 'input');
-		toggleParent();
+			document.documentElement.classList.add('am-u-no-transition');
+			query('.am-ui, html').classList.toggle('dark', this.darkMode);
+
+			this.render();
+
+			setTimeout(() => {
+				document.documentElement.classList.remove('am-u-no-transition');
+			}, 500);
+		});
+
+		this.render();
 	}
 
 	/**
-	 * Render the checkbox.
+	 * Render the toggle content.
 	 */
-	render(): void {
-		this.classList.add(classes.checkbox);
-
-		const label = create('label', [], {}, this);
-
-		label.innerHTML = html`
-			<input
-				type="checkbox"
-				name="${this.elementAttributes.name}"
-				${this.hasAttribute('checked') ? 'checked' : ''}
-			/>
-			<i class="bi"></i>
+	private render(): void {
+		this.innerHTML = html`
+			<i class="bi bi-${this.darkMode ? 'moon' : 'sun'}"></i>
+			<span>${this.elementAttributes.text}</span>
 		`;
 	}
 }
 
-customElements.define('am-checkbox', CheckboxComponent);
+customElements.define('am-dark-mode-toggle', DarkModeToggleComponent);

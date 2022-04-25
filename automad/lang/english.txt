@@ -1019,6 +1019,10 @@ toBeUploaded: to be uploaded
 
 -
 
+toggleDarkMode: Toggle Dark Mode
+
+-
+
 toggleRatioLockTitle: Toggle ratio lock
 
 -

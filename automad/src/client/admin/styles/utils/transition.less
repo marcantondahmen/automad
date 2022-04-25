@@ -26,66 +26,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-ui {
-	html&,
-	& body {
-		height: 100%;
-		min-height: 100%;
-		font-family: var(--am-base-font-family);
-		font-size: var(--am-base-font-size);
-		line-height: var(--am-base-line-height);
-		color: var(--am-clr);
-		background-color: var(--am-bg);
-	}
-
-	html& {
-		@media screen and (min-width: 960px) {
-			margin-right: ~'calc((100vw - 100%) * -1)';
-			margin-left: 0;
-		}
-	}
-
-	& body {
-		overflow-x: hidden;
-	}
-
-	& body * {
-		scrollbar-width: none !important;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
-	}
-
-	& a,
-	& button {
-		transition: color 0.2s, background-color 0.2s, border 0.2s;
-	}
-
-	& hr {
-		margin: var(--am-space-large) 0;
-		border: none;
-		border-bottom: 1px solid var(--am-border-clr);
-	}
-
-	& img {
-		max-width: 100%;
-		height: auto;
-	}
-
-	& small {
-		font-size: var(--am-font-size-small);
-		font-weight: var(--am-font-weight-small);
-	}
-
-	& mark {
-		color: var(--am-badge-clr);
-		background-color: var(--am-badge-bg);
+.am-u-no-transition {
+	& * {
+		transition: none !important;
 	}
 }

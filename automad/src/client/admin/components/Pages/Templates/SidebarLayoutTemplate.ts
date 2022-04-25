@@ -114,6 +114,10 @@ export const sidebarLayout = ({ main }: Partials) => {
 							text="${App.text('addPage')}"
 						></am-icon-text>
 					</am-modal-toggle>
+					<am-dark-mode-toggle
+						class="am-e-button"
+						text="$${App.text('toggleDarkMode')}"
+					></am-dark-mode-toggle>
 					<am-sidebar-toggle class="am-u-display-small">
 						<i class="bi bi-list"></i>
 					</am-sidebar-toggle>

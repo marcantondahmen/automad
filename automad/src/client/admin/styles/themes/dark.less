@@ -33,4 +33,66 @@
  */
 
 .dark {
+	color-scheme: dark;
+
+	@am-dark-bg: @nord0;
+	@am-dark-clr: @nord4;
+	@am-dark-primary-clr: @nord9;
+	@am-dark-danger-clr: @nord11;
+	@am-dark-border: @nord1;
+	@am-dark-muted: lighten(@nord3, 3%);
+
+	--am-clr: @am-dark-clr;
+	--am-clr-active: @nord5;
+
+	--am-bg: @am-dark-bg;
+	--am-bg-active: mix(@am-dark-border, @am-dark-bg, 50%);
+
+	--am-inverted-clr: @nord4;
+	--am-inverted-clr-active: @nord4;
+
+	--am-inverted-bg: @nord3;
+	--am-inverted-bg-active: @nord2;
+
+	--am-border-clr: @am-dark-border;
+	--am-border-clr-active: @am-dark-muted;
+
+	--am-muted-clr: @am-dark-muted;
+
+	--am-form-clr: @am-dark-clr;
+	--am-form-bg: mix(@am-dark-border, @am-dark-bg, 40%);
+
+	--am-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.07),
+		0 1.5rem 1.9rem -1.2rem rgba(0, 0, 0, 0.28);
+	--am-shadow-inset: inset 0 0.15rem 0.5rem rgba(0, 0, 0, 0.18);
+
+	// Primary
+	--am-primary-clr: @am-dark-primary-clr;
+	--am-primary-clr-active: lighten(@am-dark-primary-clr, 4%);
+
+	--am-primary-bg: @am-dark-bg;
+	--am-primary-bg-active: mix(@am-dark-bg, @am-dark-primary-clr, 70%);
+
+	--am-primary-inverted-clr: @am-dark-clr;
+	--am-primary-inverted-clr-active: @am-dark-clr;
+
+	--am-primary-inverted-bg: var(--am-primary-clr);
+	--am-primary-inverted-bg-active: var(--am-primary-clr-active);
+
+	// Danger
+	--am-danger-clr: @am-dark-danger-clr;
+	--am-danger-clr-active: lighten(@am-dark-danger-clr, 4%);
+
+	--am-danger-bg: @am-dark-bg;
+	--am-danger-bg-active: mix(@am-dark-bg, @am-dark-danger-clr, 70%);
+
+	--am-danger-inverted-clr: @am-dark-clr;
+	--am-danger-inverted-clr-active: @am-dark-clr;
+
+	--am-danger-inverted-bg: var(--am-danger-clr);
+	--am-danger-inverted-bg-active: var(--am-danger-clr-active);
+
+	// Badges
+	--am-badge-clr: @nord6;
+	--am-badge-bg: @nord3;
 }

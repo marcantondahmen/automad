@@ -32,37 +32,33 @@
  * Licensed under the MIT license.
  */
 
-@am-sidebar-width: 22rem;
-@am-main-width: 68rem;
+@am-sidebar-width: 19rem;
+@am-main-width: 72rem;
 @am-center-width: 24rem;
 
-@am-breakpoint-large: ((2 * @am-sidebar-width) + @am-main-width);
-@am-breakpoint-large-max: @am-breakpoint-large - 0.01;
-@am-breakpoint-medium: (@am-sidebar-width + @am-main-width);
-@am-breakpoint-medium-max: @am-breakpoint-medium - 0.01;
-@am-breakpoint-small: 36rem;
-@am-breakpoint-small-max: @am-breakpoint-small - 0.01;
+@am-breakpoint-large: unit((2 * @am-sidebar-width) + @am-main-width) * 14px;
+@am-breakpoint-large-max: @am-breakpoint-large - 1;
+@am-breakpoint-medium: unit(@am-sidebar-width + @am-main-width) * 14px;
+@am-breakpoint-medium-max: @am-breakpoint-medium - 1;
+@am-breakpoint-small: 780px;
+@am-breakpoint-small-max: @am-breakpoint-small - 1;
 
 :root {
 	--am-base-font-family: 'Inter';
 	--am-base-font-weight: '430';
 	--am-base-line-height: 1.45;
-	--am-base-font-size: 15px;
+	--am-base-font-size: 14px;
 
-	@media (min-width: 400px) {
+	@media (min-width: 1600px) {
 		--am-base-font-size: 15px;
 	}
 
-	@media (min-width: 1950px) {
+	@media (min-width: 2000px) {
 		--am-base-font-size: 16px;
 	}
 
-	@media (min-width: 2250px) {
+	@media (min-width: 2400px) {
 		--am-base-font-size: 17px;
-	}
-
-	@media (min-width: 2500px) {
-		--am-base-font-size: 18px;
 	}
 
 	--am-border-width: 2px;
@@ -84,7 +80,7 @@
 	);
 
 	// Alert
-	--am-alert-padding: 0.9rem 0.7rem;
+	--am-alert-padding: 0.8rem 0.6rem;
 	--am-alert-icon-size: 1.85rem;
 	--am-alert-gap: 0.7rem;
 	--am-alert-radius: var(--am-card-radius);
@@ -92,8 +88,8 @@
 	// Dropdown
 	--am-dropdown-clr: var(--am-clr);
 	--am-dropdown-bg: var(--am-bg);
-	--am-dropdown-active-clr: var(--am-bg);
-	--am-dropdown-active-bg: var(--am-clr);
+	--am-dropdown-active-clr: var(--am-clr-active);
+	--am-dropdown-active-bg: var(--am-bg-active);
 
 	// Typography
 	--am-font-size-small: 0.8rem;
@@ -141,8 +137,8 @@
 	// Sidebar nav
 	--am-nav-padding-horizontal: 0.45rem;
 	--am-nav-item-line-height: 2rem;
-	--am-nav-item-active-clr: var(--am-bg);
-	--am-nav-item-active-bg: var(--am-clr);
-	--am-nav-link-hover-clr: var(--am-clr);
-	--am-nav-link-hover-bg: #f2f2f2;
+	--am-nav-item-active-clr: var(--am-inverted-clr);
+	--am-nav-item-active-bg: var(--am-inverted-bg);
+	--am-nav-link-hover-clr: var(--am-clr-active);
+	--am-nav-link-hover-bg: var(--am-bg-active);
 }

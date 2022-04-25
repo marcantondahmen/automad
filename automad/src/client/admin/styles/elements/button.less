@@ -35,7 +35,6 @@
 .button(@param: --default) {
 	@type: replace(@param, '--default', '');
 	@var: replace(@type, '--', '-');
-	@inverted: replace(~'-@{type}-inverted', '---', '--');
 
 	&@{type} {
 		--am-btn-clr: ~'var(--am@{var}-clr)';
@@ -57,15 +56,15 @@
 	@inverted: replace(~'-@{type}-inverted', '---', '--');
 
 	&@{inverted} {
-		--am-btn-clr: ~'var(--am@{var}-bg)';
-		--am-btn-bg: ~'var(--am@{var}-clr)';
-		--am-btn-border-clr: ~'var(--am@{var}-clr)';
+		--am-btn-clr: ~'var(--am@{var}-inverted-clr)';
+		--am-btn-bg: ~'var(--am@{var}-inverted-bg)';
+		--am-btn-border-clr: ~'var(--am@{var}-inverted-bg)';
 
 		&:hover,
 		&:active {
-			--am-btn-clr: ~'var(--am@{var}-bg-active)';
-			--am-btn-bg: ~'var(--am@{var}-clr-active)';
-			--am-btn-border-clr: ~'var(--am@{var}-clr-active)';
+			--am-btn-clr: ~'var(--am@{var}-inverted-clr-active)';
+			--am-btn-bg: ~'var(--am@{var}-inverted-bg-active)';
+			--am-btn-border-clr: ~'var(--am@{var}-inverted-bg-active)';
 		}
 	}
 }
@@ -89,6 +88,11 @@
 	--am-btn-clr: var(--am-clr);
 	--am-btn-bg: var(--am-bg);
 	--am-btn-border-clr: var(--am-border-clr);
+
+	&,
+	& * {
+		white-space: nowrap;
+	}
 
 	&:active {
 		box-shadow: var(--am-shadow-inset);
