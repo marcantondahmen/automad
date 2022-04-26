@@ -51,52 +51,52 @@ class DarkModeToggleComponent extends BaseComponent {
 	}
 
 	/**
-	 * The saved dark mode state.
+	 * Get the dark mode state.
 	 */
-	private darkMode: boolean = false;
+	private get darkMode(): boolean {
+		const localScheme = localStorage.getItem('color-scheme');
+
+		if (localScheme) {
+			return localScheme === 'dark';
+		}
+
+		return (
+			window.matchMedia &&
+			window.matchMedia('(prefers-color-scheme: dark)').matches
+		);
+	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const localScheme = localStorage.getItem('color-scheme');
-		this.darkMode = localScheme === 'dark';
-
-		if (!localScheme) {
-			this.darkMode =
-				window.matchMedia &&
-				window.matchMedia('(prefers-color-scheme: dark)').matches;
-		}
-
-		query('.am-ui, html').classList.toggle('dark', this.darkMode);
+		this.render();
 
 		listen(this, 'click', () => {
-			this.darkMode = !this.darkMode;
-
 			localStorage.setItem(
 				'color-scheme',
-				this.darkMode ? 'dark' : 'light'
+				!this.darkMode ? 'dark' : 'light'
 			);
 
 			document.documentElement.classList.add('am-u-no-transition');
-			query('.am-ui, html').classList.toggle('dark', this.darkMode);
-
 			this.render();
 
 			setTimeout(() => {
 				document.documentElement.classList.remove('am-u-no-transition');
 			}, 500);
 		});
-
-		this.render();
 	}
 
 	/**
 	 * Render the toggle content.
 	 */
 	private render(): void {
+		const darkMode = this.darkMode;
+
+		query('.am-ui').classList.toggle('dark', darkMode);
+
 		this.innerHTML = html`
-			<i class="bi bi-${this.darkMode ? 'moon' : 'sun'}"></i>
+			<i class="bi bi-${darkMode ? 'moon' : 'sun'}"></i>
 			<span>${this.elementAttributes.text}</span>
 		`;
 	}

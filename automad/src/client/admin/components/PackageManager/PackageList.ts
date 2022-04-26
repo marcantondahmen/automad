@@ -117,7 +117,7 @@ class PackageListComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.classList.add(classes.grid);
-		this.setAttribute('style', '--min: 16rem;');
+		this.setAttribute('style', '--min: 19rem;');
 		this.init();
 
 		this.listeners.push(

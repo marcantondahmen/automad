@@ -68,8 +68,11 @@ export class PageComponent extends SidebarLayoutComponent {
 
 		if (getPageURL() !== '/') {
 			more = html`
-				<am-dropdown>
-					$${App.text('more')}
+				<am-dropdown
+					class="${classes.menuItem} ${classes.menuItemLast} ${classes.button}"
+				>
+					<span>${App.text('more')}</span>
+					<i class="bi bi-chevron-down"></i>
 					<div class="${classes.dropdownItems}">
 						<a
 							bind="pageUrlWithBase"
@@ -163,24 +166,43 @@ export class PageComponent extends SidebarLayoutComponent {
 			</section>
 			<section class="am-l-main__row am-l-main__row--sticky">
 				<menu class="am-l-main__content">
-					<div class="am-u-flex">
-						<am-switcher class="am-u-flex__item-grow">
-							<am-switcher-link section="${Sections.settings}">
-								$${App.text('pageSettings')}
+					<div class="${classes.menu}">
+						<am-switcher class="am-u-flex">
+							<am-switcher-link
+								class="${classes.menuItem} ${classes.menuItemFirst} ${classes.button}"
+								section="${Sections.settings}"
+							>
+								${App.text('pageSettings')}
 							</am-switcher-link>
-							<am-switcher-link section="${Sections.text}">
-								$${App.text('pageContent')}
+							<am-switcher-link
+								class="${classes.menuItem} ${classes.button}"
+								section="${Sections.text}"
+							>
+								${App.text('pageContent')}
 							</am-switcher-link>
-							<am-switcher-link section="${Sections.colors}">
-								$${App.text('pageColors')}
+							<am-switcher-link
+								class="${classes.menuItem} ${classes.button}"
+								section="${Sections.colors}"
+							>
+								${App.text('pageColors')}
 							</am-switcher-link>
-							<am-switcher-link section="${Sections.files}">
-								$${App.text('uploadedFiles')}
-								<am-file-count></am-file-count>
+							<am-switcher-link
+								class="${classes.menuItem} ${classes.button}"
+								section="${Sections.files}"
+							>
+								${App.text('uploadedFiles')}
+								<span class="am-e-badge">
+									<am-file-count></am-file-count>
+								</span>
 							</am-switcher-link>
 						</am-switcher>
-						<am-filter placeholder="filterContent"></am-filter>
-						<am-private-indicator></am-private-indicator>
+						<am-filter
+							class="${classes.menuItem} am-u-flex__item-grow"
+							placeholder="filterContent"
+						></am-filter>
+						<am-private-indicator
+							class="${classes.menuItem}"
+						></am-private-indicator>
 						${more}
 					</div>
 				</menu>

@@ -36,7 +36,7 @@ import { BaseComponent } from '../Base';
 import { eventNames, listen } from '../../core';
 
 /**
- * A debug state component.
+ * The abstract base state component.
  *
  * @extends BaseComponent
  */

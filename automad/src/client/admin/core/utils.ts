@@ -208,7 +208,7 @@ export const html = (strings: any, ...values: any[]): string => {
  * @param value
  * @returns the converted string
  */
-export const htmlSpecialChars = (value: string): string => {
+export const htmlSpecialChars = (value: string | number): string => {
 	const chars: KeyValueMap = {
 		'&': '&amp;',
 		'<': '&lt;',
@@ -217,7 +217,7 @@ export const htmlSpecialChars = (value: string): string => {
 		"'": '&#039;',
 	};
 
-	return value.replace(/[&<>"']/g, (char: string) => {
+	return value.toString().replace(/[&<>"']/g, (char: string) => {
 		return chars[char];
 	});
 };

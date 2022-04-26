@@ -146,7 +146,7 @@ class FileCardComponent extends BaseComponent {
 				class="${classes.cardImage}"
 				title="$${file.basename}"
 			>
-				<i class="bi bi-filetype-${file.extension}"></i>
+				<i class="bi bi-file-earmark bi-filetype-${file.extension}"></i>
 			</am-file-info>
 		`;
 	}

@@ -183,7 +183,7 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 
 			element.innerHTML = html`
 				<span>${createLabelFromField(field)}</span>
-				<i class="bi bi-grip-vertical"></i>
+				<i class="bi bi-grip-vertical ${classes.textMuted}"></i>
 			`;
 		});
 

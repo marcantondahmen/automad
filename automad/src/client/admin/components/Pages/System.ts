@@ -57,10 +57,11 @@ export class SystemComponent extends SidebarLayoutComponent {
 		return [
 			{
 				section: Sections.cache,
-				icon: 'stack',
+				icon: 'device-ssd',
 				title: App.text('systemCache'),
 				info: '<am-cache-indicator></am-cache-indicator>',
 				render: renderCacheSection,
+				narrowIcon: true,
 			},
 			{
 				section: Sections.users,
@@ -78,7 +79,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 			},
 			{
 				section: Sections.feed,
-				icon: 'rss',
+				icon: 'card-text',
 				title: App.text('systemRssFeed'),
 				info: '<am-feed-indicator></am-feed-indicator>',
 				render: renderFeedSection,
@@ -103,6 +104,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 				title: App.text('systemConfigFile'),
 				info: '',
 				render: renderConfigFileSection,
+				narrowIcon: true,
 			},
 		];
 	}
@@ -195,7 +197,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 
 		return html`
 			<am-switcher-section name="${Sections.overview}">
-				<div class="${classes.grid}" style="--min: 18rem;">
+				<div class="${classes.grid}" style="--min: 12rem;">
 					${this.renderOverviewCards()}
 				</div>
 			</am-switcher-section>
@@ -217,12 +219,18 @@ export class SystemComponent extends SidebarLayoutComponent {
 					class="${classes.card} ${classes.cardLink}"
 					section="${item.section}"
 				>
-					<div class="${classes.cardBody}">
-						<div class="${classes.cardIcon}">
+					<div class="${classes.cardBody} ${classes.flexItemGrow}">
+						<span
+							class="${classes.cardIcon} ${item.narrowIcon
+								? classes.cardIconNarrow
+								: ''}"
+						>
 							<i class="bi bi-${item.icon}"></i>
-						</div>
+						</span>
 						<div class="${classes.cardTitle}">${item.title}</div>
-						<p>${item.info}</p>
+					</div>
+					<div class="am-c-card__footer">
+						<small>${item.info}</small>
 					</div>
 				</am-switcher-link>
 			`;

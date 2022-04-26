@@ -58,7 +58,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 	connectedCallback(): void {
 		const button = create(
 			'am-icon-text',
-			[classes.button],
+			[],
 			{ icon: 'arrow-repeat', text: App.text('packagesUpdateAll') },
 			this
 		);

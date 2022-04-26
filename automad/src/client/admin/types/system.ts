@@ -38,6 +38,7 @@ export interface SystemSectionData {
 	title: string;
 	info: string;
 	render: Function;
+	narrowIcon?: boolean;
 }
 
 interface CacheSettings {

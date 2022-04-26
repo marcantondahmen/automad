@@ -39,6 +39,7 @@ import {
 	createProgressModal,
 	eventNames,
 	fire,
+	html,
 	listen,
 	notifyError,
 	notifySuccess,
@@ -141,7 +142,12 @@ const createInstallButton = (pkg: Package, container: HTMLElement): void => {
  * @param container
  */
 const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create('span', [classes.button], {}, container);
+	const button = create(
+		'span',
+		[classes.button, classes.buttonInverted],
+		{},
+		container
+	);
 
 	button.textContent = App.text('packageRemove');
 
@@ -171,50 +177,75 @@ class PackageCardComponent extends BaseComponent {
 	 * Render the card content for the provided package.
 	 *
 	 * @param pkg
+	 * @async
 	 */
 	private async render(pkg: Package): Promise<void> {
 		this.classList.add(classes.card);
 		this.classList.toggle(classes.cardActive, pkg.installed);
 
 		const href = `${packageBrowser}/${pkg.name}`;
+		const bodyTitle = create('div', [classes.cardBody], {}, this);
 		const preview = create(
 			'a',
-			[classes.cardImage, classes.cardImage43],
+			[
+				classes.cardImage,
+				classes.cardImage43,
+				classes.cardImageIconLarge,
+			],
 			{ href, target: '_blank' },
 			this
 		);
-		const body = create('div', [classes.cardBody], {}, this);
+		const description = create(
+			'div',
+			[classes.cardBody, classes.flexItemGrow],
+			{},
+			this
+		);
 		const footer = create('div', [classes.cardFooter], {}, this);
 
-		const title = create('div', [classes.cardTitle], {}, body);
-		const description = create('span', [], {}, body);
+		const title = create('div', [classes.cardTitle], {}, bodyTitle);
 
-		title.textContent = pkg.name;
+		title.innerHTML = html`
+			$${pkg.name.split('/')[0]} /
+			<br />
+			$${pkg.name.split('/')[1]}
+		`;
+
+		create('i', ['bi', 'bi-box-seam', classes.textMuted], {}, preview);
+
 		description.textContent = pkg.description;
 
-		const button = create(
-			'a',
-			[classes.button],
-			{ href, target: '_blank' },
-			footer
-		);
+		footer.innerHTML = html`
+			<div>
+				<span class="am-e-badge">
+					<span>↓ $${pkg.downloads}</span>
+				</span>
+				<a href="$${pkg.repository}" target="_blank">
+					<i class="am-u-text-muted bi bi-github"></i>
+				</a>
+				<a href="${href}" target="_blank">
+					<i class="am-u-text-muted bi bi-file-earmark-text-fill"></i>
+				</a>
+			</div>
+		`;
 
-		button.textContent = 'Readme';
+		const buttons = create('small', [], {}, footer);
+
+		if (pkg.outdated) {
+			createUpdateButton(pkg, buttons);
+		}
+
+		if (pkg.installed) {
+			createRemoveButton(pkg, buttons);
+		} else {
+			createInstallButton(pkg, buttons);
+		}
 
 		const thumbnail = await getThumbnail(pkg.repository);
 
 		if (thumbnail) {
+			preview.innerHTML = '';
 			create('img', [], { src: thumbnail }, preview);
-		}
-
-		if (pkg.outdated) {
-			createUpdateButton(pkg, footer);
-		}
-
-		if (pkg.installed) {
-			createRemoveButton(pkg, footer);
-		} else {
-			createInstallButton(pkg, footer);
 		}
 	}
 }

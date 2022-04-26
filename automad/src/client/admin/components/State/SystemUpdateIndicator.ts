@@ -36,7 +36,7 @@ import { App, classes, eventNames, html, listen } from '../../core';
 import { BaseComponent } from '../Base';
 
 /**
- * A debug state component.
+ * A system update state component.
  *
  * @extends BaseComponent
  */

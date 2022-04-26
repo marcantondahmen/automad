@@ -32,11 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import { App, html } from '../../core';
+import { App, classes, html } from '../../core';
 import { BaseStateComponent } from './BaseState';
 
 /**
- * A debug state component.
+ * A user count component.
  *
  * @extends BaseStateComponent
  */
@@ -45,8 +45,10 @@ class UserCountIndicatorComponent extends BaseStateComponent {
 	 * Render the state element.
 	 */
 	render(): void {
+		this.classList.add(classes.textSuccess);
+
 		this.innerHTML = html`
-			${App.text('systemUsersRegistered')}: ${App.system.users.length}
+			${App.system.users.length} ${App.text('systemUsersRegistered')}
 		`;
 	}
 }

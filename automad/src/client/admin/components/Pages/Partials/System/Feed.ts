@@ -105,18 +105,25 @@ export const renderFeedSection = (listeners: Listener[]): string => {
 				}
 			).outerHTML}
 			<div id="am-feed-settings">
-				<p>$${App.text('systemRssFeedUrl')}</p>
-				<div class="${classes.flex}">
-					<input
-						class="${classes.input}"
+				<p>${App.text('systemRssFeedUrl')}</p>
+				<div class="${classes.menu}">
+					<span
+						class="${classes.menuItem} ${classes.menuItemFirst} ${classes.flexItemGrow}"
+					>
+						<input
+							class="${classes.input}"
+							value="${App.feedURL}"
+							disabled
+						/>
+					</span>
+					<am-copy
+						class="${classes.menuItem} ${classes.menuItemLast} ${classes.button} ${classes.buttonInverted}"
 						value="${App.feedURL}"
-						disabled
-					/>
-					<am-copy class="${classes.button}" value="${App.feedURL}">
+					>
 						<i class="bi bi-clipboard"></i>
 					</am-copy>
 				</div>
-				<p>$${App.text('systemRssFeedFields')}</p>
+				<p>${App.text('systemRssFeedFields')}</p>
 				${createField(
 					'am-feed-field-select',
 					null,

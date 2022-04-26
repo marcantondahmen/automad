@@ -79,12 +79,14 @@ export class PackagesComponent extends SidebarLayoutComponent {
 			</section>
 			<am-system-menu class="am-l-main__row am-l-main__row--sticky">
 				<menu class="am-l-main__content">
-					<div class="${classes.flex}">
+					<div class="${classes.menu}">
 						<am-filter
-							class="${classes.flexItemGrow}"
+							class="${classes.menuItem} ${classes.menuItemFirst} ${classes.flexItemGrow}"
 							placeholder="packagesFilter"
 						></am-filter>
-						<am-update-all-packages></am-update-all-packages>
+						<am-update-all-packages
+							class="${classes.menuItem} ${classes.menuItemLast} ${classes.button} ${classes.buttonInverted}"
+						></am-update-all-packages>
 					</div>
 				</menu>
 			</am-system-menu>
