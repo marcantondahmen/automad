@@ -39,28 +39,30 @@
 	@am-dark-clr: @nord4;
 	@am-dark-primary-clr: @nord9;
 	@am-dark-danger-clr: @nord11;
-	@am-dark-border: @nord1;
-	@am-dark-muted: lighten(@nord3, 3%);
+	@am-dark-border: @nord2;
+	@am-dark-muted: lighten(@nord3, 2%);
 
 	--am-clr: @am-dark-clr;
 	--am-clr-active: @nord5;
 
 	--am-bg: @am-dark-bg;
-	--am-bg-active: mix(@am-dark-border, @am-dark-bg, 50%);
+	--am-bg-active: @nord1;
 
 	--am-inverted-clr: @nord4;
 	--am-inverted-clr-active: @nord4;
 
-	--am-inverted-bg: @nord3;
+	--am-inverted-bg: @nord2;
 	--am-inverted-bg-active: @nord2;
 
 	--am-border-clr: @am-dark-border;
-	--am-border-clr-active: @am-dark-muted;
+	--am-border-clr-active: lighten(@nord3, 8%);
 
 	--am-muted-clr: @am-dark-muted;
 
 	--am-form-clr: @am-dark-clr;
-	--am-form-bg: mix(@am-dark-border, @am-dark-bg, 40%);
+	--am-form-bg: mix(@nord0, @nord1, 80%);
+
+	--am-highlight-bg: @nord3;
 
 	--am-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.07),
 		0 1.5rem 1.9rem -1.2rem rgba(0, 0, 0, 0.28);
@@ -94,5 +96,5 @@
 
 	// Badges
 	--am-badge-clr: @nord6;
-	--am-badge-bg: @nord3;
+	--am-badge-bg: @nord9;
 }

@@ -61,14 +61,16 @@
 		--am-base-font-size: 17px;
 	}
 
-	--am-border-width: 2px;
+	--am-border-width: 1px;
 	--am-border: var(--am-border-width) solid var(--am-border-clr);
 
-	--am-radius: 0.32rem;
+	--am-radius: 0.24rem;
 
 	// Buttons
-	--am-btn-padding: 1em;
+	--am-btn-padding: 0.9em;
 	--am-btn-height: 2.725em;
+	--am-btn-border-width: var(--am-border-width);
+	--am-btn-radius: var(--am-radius);
 
 	// Flex
 	--am-flex-gap: 0.5em;
@@ -76,13 +78,14 @@
 	// Card
 	--am-card-padding: 0.54rem;
 	--am-card-radius: calc(
-		var(--am-radius) + var(--am-card-padding) - var(--am-border-width)
+		var(--am-radius) + var(--am-card-padding) - var(--am-border-width) -
+			0.05rem
 	);
 
 	// Alert
-	--am-alert-padding: 0.8rem 0.6rem;
-	--am-alert-icon-size: 1.85rem;
-	--am-alert-gap: 0.7rem;
+	--am-alert-padding: 0.9rem;
+	--am-alert-icon-size: 1.7rem;
+	--am-alert-gap: 0.8rem;
 	--am-alert-radius: var(--am-card-radius);
 
 	// Dropdown

@@ -69,6 +69,7 @@
 	&__image {
 		--radius: ~'calc(var(--am-card-radius) - var(--am-border-width))';
 		--aspect: 1 / 1;
+		--icon-size: 2.75rem;
 		position: relative;
 		display: flex;
 		justify-content: center;
@@ -89,6 +90,10 @@
 			--aspect: 4 / 3;
 		}
 
+		&--icon-large {
+			--icon-size: 4rem;
+		}
+
 		& .bi,
 		& img {
 			display: block;
@@ -98,12 +103,7 @@
 
 		& .bi {
 			align-items: center;
-			font-size: 2.75rem;
-		}
-
-		// Provide fallback for non-existing filetypes.
-		& :where(.bi):before {
-			content: '\f392';
+			font-size: var(--icon-size);
 		}
 	}
 
@@ -130,7 +130,6 @@
 	}
 
 	&__body {
-		flex-grow: 1;
 		gap: var(--am-card-padding);
 		padding: var(--am-card-padding);
 		font-size: var(--am-font-size-small);
@@ -139,7 +138,7 @@
 
 	&__icon {
 		display: flex;
-		font-size: 2rem;
+		font-size: 1.8rem;
 		line-height: 2.4rem;
 		padding-bottom: var(--am-card-padding);
 
@@ -163,7 +162,6 @@
 		gap: var(--am-flex-gap);
 		padding: var(--am-card-padding);
 		padding-top: calc(var(--am-card-padding) / 2);
-		//color: var(--am-muted-clr);
 
 		&--right {
 			justify-content: end;
@@ -175,15 +173,4 @@
 			gap: var(--am-flex-gap);
 		}
 	}
-
-	/* &__footer-icons {
-		display: flex;
-		align-items: flex-end;
-		font-size: 1.1rem;
-		margin: 0 -0.3rem;
-
-		& > * {
-			padding: 0 0.3rem;
-		}
-	} */
 }

@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="../../../../dist/admin/vendor.bundle.css">
 </head>
 <body>
-	<main style="display: flex; flex-direction: column; gap: 2rem; width: 76rem; max-width: 90%; margin: 5rem auto;">
+	<main style="display: flex; flex-direction: column; gap: 3rem; width: 76rem; max-width: 90%; margin: 5rem auto;">
 		<am-dark-mode-toggle class="am-e-button" text="Toggle Dark Mode"></am-dark-mode-toggle>
 		<section>
 			<span class="am-e-button">
@@ -36,6 +36,66 @@
 			<span class="am-e-button am-e-button--link">
 				<span>Button</span>
 			</span>
+		</section>
+		<section>
+			<div class="am-c-menu">
+				<am-switcher class="am-u-flex">
+					<am-switcher-link section="settings" class="am-c-menu__item am-c-menu__item--first am-e-button am-c-switcher-link--active">Settings</am-switcher-link>
+					<am-switcher-link section="text" class="am-c-menu__item am-e-button">Content</am-switcher-link>
+					<am-switcher-link section="colors" class="am-c-menu__item am-e-button">Colors</am-switcher-link>
+					<am-switcher-link section="files" class="am-c-menu__item am-e-button">
+						<span>Uploaded Files</span>
+						<span class="am-e-badge">
+							<am-file-count></am-file-count>
+						</span>
+					</am-switcher-link>
+				</am-switcher>
+				<div class="am-c-menu__item am-u-flex__item-grow" placeholder="filterContent">
+					<input class="am-f-input" placeholder="Filter Content">
+				</div>
+				<div class="am-c-menu__item">
+					<i class="bi bi-eye"></i>
+				</div>
+				<am-dropdown class="am-c-dropdown am-e-button am-c-menu__item am-c-menu__item--last"> 
+					More 
+					<div class="am-c-dropdown__items">
+						<a class="am-c-dropdown__item" target="_blank" href="/automad-development/test">
+							<am-icon-text class="am-c-icon-text">
+								<i class="bi bi-pencil"></i>
+								<span>In-Page Edit Mode</span>
+							</am-icon-text>
+						</a>
+						<am-form api="Page/duplicate">
+							<am-submit class="am-c-dropdown__item">
+								<am-icon-text class="am-c-icon-text">
+									<i class="bi bi-files"></i>
+									<span>Duplicate Page</span>
+								</am-icon-text>
+							</am-submit>
+						</am-form>
+						<am-modal-toggle class="am-c-dropdown__item" modal="#am-move-page-modal">
+							<am-icon-text class="am-c-icon-text">
+								<i class="bi bi-arrows-move"></i>
+								<span>Move Page</span>
+							</am-icon-text>
+						</am-modal-toggle>
+						<am-form api="Page/delete" confirm="Do you want to delete the current page?">
+							<am-submit class="am-c-dropdown__item">
+								<am-icon-text class="am-c-icon-text">
+									<i class="bi bi-trash2"></i>
+									<span>Delete Page</span>
+								</am-icon-text>
+							</am-submit>
+						</am-form>
+						<am-copy class="am-c-dropdown__item" value="/test">
+							<am-icon-text class="am-c-icon-text">
+								<i class="bi bi-clipboard-plus"></i>
+								<span>Copy URL to Clipboard</span>
+							</am-icon-text>
+						</am-copy>
+					</div>
+				</am-dropdown>
+			</div>
 		</section>
 		<section style="padding-bottom: 36rem">
 			<div class="am-c-dropdown am-c-dropdown--form am-c-dropdown--open">
@@ -69,7 +129,7 @@
 				<div class="am-c-card__image">
 					<img src="https://images.unsplash.com/photo-1537251503603-4bd46030115f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
 				</div>
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					<div class="am-c-card__title">Card Title</div>
 					Some random text<br>on multiple lines
 				</div>
@@ -84,21 +144,21 @@
 				<div class="am-c-card__image">
 					<img src="https://images.unsplash.com/photo-1537251503603-4bd46030115f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
 				</div>
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					<div class="am-c-card__title">Card Title</div>
 					Some random text<br>on multiple lines
 				</div>
 				<div class="am-c-card__footer am-c-card__footer--right">
 					<small>
-						<span class="am-e-button am-e-button--primary-inverted">Button</span>
+						<span class="am-e-button am-e-button--inverted">Button</span>
 					</small>
 				</div>
 			</div>
 			<div class="am-c-card">
 				<a href="" class="am-c-card__image">
-					<i class="bi bi-filetype-pdf"></i>
+					<i class="bi bi-file-earmark bi-filetype-pdf"></i>
 				</a>
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					<div class="am-c-card__title">Card Title</div>
 					Some random text<br>on multiple lines
 				</div>
@@ -108,9 +168,9 @@
 			</div>
 			<div class="am-c-card">
 				<a href="" class="am-c-card__image">
-					<i class="bi bi-filetype-xyz"></i>
+					<i class="bi bi-file-earmark bi-filetype-xyz"></i>
 				</a>
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					<div class="am-c-card__title">Card Title</div>
 					Some random text<br>on multiple lines
 				</div>
@@ -131,7 +191,7 @@
 				<div class="am-c-card__image am-c-card__image--4-3">
 					<img src="https://raw.githubusercontent.com/marcantondahmen/media-files/master/themes/revitron/default.png" alt="">
 				</div>
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					Some random text<br>on multiple lines
 				</div>
 				<div class="am-c-card__footer">
@@ -155,7 +215,7 @@
 				<div class="am-c-card__image am-c-card__image--4-3">
 					<img src="https://raw.githubusercontent.com/marcantondahmen/media-files/master/themes/revitron/landing.png" alt="">
 				</div>
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					Some random text<br>on multiple lines
 				</div>
 				<div class="am-c-card__footer">
@@ -174,7 +234,7 @@
 		</section>
 		<section class="am-c-grid" style="--min: 14rem;">
 			<div class="am-c-card">
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					<span href="" class="am-c-card__icon am-c-card__icon--narrow">
 						<i class="bi bi-file-earmark-richtext"></i>
 					</span>
@@ -189,7 +249,7 @@
 				</div>
 			</div>
 			<div class="am-c-card">
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					<span href="" class="am-c-card__icon">
 						<i class="bi bi-cpu"></i>
 					</span>
@@ -204,8 +264,8 @@
 				</div>
 			</div>
 			<div class="am-c-card am-c-card--link">
-				<div class="am-c-card__body">
-					<span class="am-c-card__icon am-c-alert__icon--narrow">
+				<div class="am-c-card__body am-u-flex__item-grow">
+					<span class="am-c-card__icon am-c-card__icon--narrow">
 						<i class="bi bi-device-ssd"></i>
 					</span>
 					<div class="am-c-card__title">Caching</div>
@@ -223,7 +283,7 @@
 				</div>
 			</div>
 			<div class="am-c-card am-c-card--link">
-				<div class="am-c-card__body">
+				<div class="am-c-card__body am-u-flex__item-grow">
 					<span class="am-c-card__icon">
 						<i class="bi bi-bug"></i>
 					</span>

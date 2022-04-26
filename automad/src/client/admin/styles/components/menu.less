@@ -26,62 +26,54 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-alert {
+.am-c-menu {
+	position: relative;
 	display: flex;
-	flex-wrap: wrap;
-	gap: var(--am-alert-gap);
-	margin: var(--am-space-medium) 0;
-	padding: var(--am-alert-padding);
-	border: var(--am-border);
-	border-radius: var(--am-alert-radius);
-	box-shadow: var(--am-shadow);
-	--multiplier: ~'calc(30rem - 100%)';
+	align-items: center;
 
-	&--primary {
-		color: var(--am-primary-clr);
-		background-color: var(--am-primary-bg);
-		border-color: var(--am-primary-clr);
-	}
+	& &__item {
+		border-radius: 0;
 
-	&--danger {
-		color: var(--am-danger-clr);
-		background-color: var(--am-danger-bg);
-		border-color: var(--am-danger-clr);
-	}
-
-	& > * {
-		flex-basis: ~'calc(var(--multiplier) * 999)';
-		max-width: 100%;
-	}
-
-	&__icon {
-		display: flex;
-		width: min-content;
-		color: inherit;
-
-		& i {
-			font-size: var(--am-alert-icon-size);
-			line-height: 1;
+		&[class='am-c-menu__item'] {
+			display: flex;
+			align-self: stretch;
+			align-items: center;
+			padding: 0 1rem;
+			border-top: var(--am-border);
+			border-bottom: var(--am-border);
 		}
-	}
 
-	&__text {
-		flex-grow: 1;
-		align-self: center;
-		color: inherit;
+		&:not(input):not(&--first) {
+			border-left: none;
+		}
 
-		& > * {
-			margin: 0;
+		&:not(input):not(&--last) {
+			border-right: none;
+		}
 
-			& + * {
-				margin-top: var(--am-space-medium);
-			}
+		& > input {
+			border-radius: 0;
+		}
+
+		&--first,
+		&--first > input {
+			border-radius: var(--am-btn-radius) 0 0 var(--am-btn-radius);
+		}
+
+		&--last {
+			border-radius: 0 var(--am-btn-radius) var(--am-btn-radius) 0;
+		}
+
+		&.am-c-switcher-link--active {
+			color: var(--am-inverted-clr);
+			background-color: var(--am-inverted-bg);
+			border-color: var(--am-inverted-bg);
 		}
 	}
 }

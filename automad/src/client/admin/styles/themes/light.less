@@ -34,17 +34,17 @@
 
 :root {
 	@am-light-bg: #ffffff;
-	@am-light-clr: @nord1;
+	@am-light-clr: @nord3;
 	@am-light-primary-clr: @nord9;
 	@am-light-danger-clr: @nord11;
-	@am-light-border: @nord6;
+	@am-light-border: @nord4;
 	@am-light-muted: saturate(darken(@nord4, 5%), -5%);
 
 	--am-clr: @am-light-clr;
 	--am-clr-active: @nord0;
 
 	--am-bg: @am-light-bg;
-	--am-bg-active: mix(@am-light-border, @am-light-bg, 70%);
+	--am-bg-active: mix(@nord6, @am-light-bg, 70%);
 
 	--am-inverted-clr: var(--am-bg);
 	--am-inverted-clr-active: var(--am-bg-active);
@@ -53,12 +53,14 @@
 	--am-inverted-bg-active: var(--am-clr-active);
 
 	--am-border-clr: @am-light-border;
-	--am-border-clr-active: saturate(darken(@nord4, 5%), -8%);
+	--am-border-clr-active: saturate(darken(@nord4, 12%), -8%);
 
 	--am-muted-clr: @am-light-muted;
 
 	--am-form-clr: @am-light-clr;
-	--am-form-bg: mix(@am-light-border, @am-light-bg, 40%);
+	--am-form-bg: mix(@nord6, @am-light-bg, 40%);
+
+	--am-highlight-bg: @nord5;
 
 	--am-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.06),
 		0 1.5rem 1.9rem -1.2rem rgba(0, 0, 0, 0.24);
