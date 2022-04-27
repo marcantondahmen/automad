@@ -33,66 +33,65 @@
  */
 
 :root {
-	@am-light-bg: #ffffff;
-	@am-light-clr: @nord3;
-	@am-light-primary-clr: @nord9;
-	@am-light-danger-clr: @nord11;
-	@am-light-border: @nord4;
-	@am-light-muted: saturate(darken(@nord4, 5%), -5%);
+	@am-light-hue: 214;
+	@am-light-primary-hue: 220;
+	@am-light-danger-hue: 6;
 
-	--am-clr: @am-light-clr;
-	--am-clr-active: @nord0;
+	--am-clr: hsl(@am-light-hue, 10%, 18%);
+	--am-clr-active: var(--am-clr);
 
-	--am-bg: @am-light-bg;
-	--am-bg-active: mix(@nord6, @am-light-bg, 70%);
+	--am-bg: #ffffff;
+	--am-bg-active: hsl(@am-light-hue, 10%, 94%);
 
-	--am-inverted-clr: var(--am-bg);
-	--am-inverted-clr-active: var(--am-bg-active);
+	--am-inverted-clr: hsl(@am-light-hue, 10%, 94%);
+	--am-inverted-clr-active: var(--am-inverted-clr);
 
-	--am-inverted-bg: var(--am-clr);
-	--am-inverted-bg-active: var(--am-clr-active);
+	--am-inverted-bg: hsl(@am-light-hue, 10%, 20%);
+	--am-inverted-bg-active: hsl(@am-light-hue, 10%, 26%);
 
-	--am-border-clr: @am-light-border;
-	--am-border-clr-active: saturate(darken(@nord4, 12%), -8%);
+	--am-border-clr: hsl(@am-light-hue, 10%, 88%);
+	--am-border-clr-active: hsl(@am-light-hue, 10%, 40%);
 
-	--am-muted-clr: @am-light-muted;
+	--am-muted-clr: hsl(@am-light-hue, 10%, 76%);
 
-	--am-form-clr: @am-light-clr;
-	--am-form-bg: mix(@nord6, @am-light-bg, 40%);
+	--am-form-clr: var(--am-clr);
+	--am-form-bg: hsl(@am-light-hue, 10%, 97%);
 
-	--am-highlight-bg: @nord5;
-
-	--am-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.06),
-		0 1.5rem 1.9rem -1.2rem rgba(0, 0, 0, 0.24);
-	--am-shadow-inset: inset 0 0.15rem 0.5rem rgba(0, 0, 0, 0.1);
+	--am-highlight-clr: hsl(48, 82%, 28%);
+	--am-highlight-bg: hsl(48, 76%, 78%);
 
 	// Primary
-	--am-primary-clr: @am-light-primary-clr;
-	--am-primary-clr-active: darken(@am-light-primary-clr, 4%);
+	--am-primary-clr: hsl(@am-light-primary-hue, 76%, 48%);
+	--am-primary-clr-active: hsl(@am-light-primary-hue, 76%, 44%);
 
-	--am-primary-bg: @am-light-bg;
-	--am-primary-bg-active: saturate(lighten(@am-light-primary-clr, 30%), 26%);
+	--am-primary-bg: hsl(@am-light-primary-hue, 76%, 88%);
+	--am-primary-bg-active: hsl(@am-light-primary-hue, 76%, 84%);
 
-	--am-primary-inverted-clr: var(--am-primary-bg);
-	--am-primary-inverted-clr-active: var(--am-primary-bg-active);
+	--am-primary-inverted-clr: var(--am-bg);
+	--am-primary-inverted-clr-active: var(--am-bg);
 
 	--am-primary-inverted-bg: var(--am-primary-clr);
 	--am-primary-inverted-bg-active: var(--am-primary-clr-active);
 
 	// Danger
-	--am-danger-clr: @am-light-danger-clr;
-	--am-danger-clr-active: darken(@am-light-danger-clr, 4%);
+	--am-danger-clr: hsl(@am-light-danger-hue, 70%, 48%);
+	--am-danger-clr-active: hsl(@am-light-danger-hue, 70%, 44%);
 
-	--am-danger-bg: @am-light-bg;
-	--am-danger-bg-active: saturate(lighten(@am-light-danger-clr, 36%), 26%);
+	--am-danger-bg: hsl(@am-light-danger-hue, 70%, 88%);
+	--am-danger-bg-active: hsl(@am-light-danger-hue, 70%, 84%);
 
-	--am-danger-inverted-clr: var(--am-danger-bg);
-	--am-danger-inverted-clr-active: var(--am-danger-bg-active);
+	--am-danger-inverted-clr: var(--am-bg);
+	--am-danger-inverted-clr-active: var(--am-bg);
 
 	--am-danger-inverted-bg: var(--am-danger-clr);
 	--am-danger-inverted-bg-active: var(--am-danger-clr-active);
 
 	// Badges
-	--am-badge-clr: @am-light-bg;
-	--am-badge-bg: @nord9;
+	--am-badge-clr: var(--am-primary-clr);
+	--am-badge-bg: var(--am-primary-bg);
+
+	// Shadow
+	--am-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.07),
+		0 1.5rem 1.9rem -1.2rem rgba(0, 0, 0, 0.28);
+	--am-shadow-inset: inset 0 0.15rem 0.5rem rgba(0, 0, 0, 0.18);
 }
