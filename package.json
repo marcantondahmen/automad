@@ -32,7 +32,6 @@
     "less-loader": "^10.2.0",
     "mini-css-extract-plugin": "^2.5.2",
     "modern-normalize": "^1.1.0",
-    "nord": "^0.2.1",
     "sortablejs": "^1.14.0",
     "string-replace-loader": "^3.1.0",
     "toastify-js": "^1.11.2",
