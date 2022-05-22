@@ -54,6 +54,10 @@ module.exports = (env, argv) => {
 						'less-loader',
 					],
 				},
+				{
+					test: /\.svg$/,
+					loader: 'html-loader',
+				},
 				// Fix file name of inter font.
 				{
 					test: /\.woff2?$/i,

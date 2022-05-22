@@ -119,6 +119,7 @@ import './components/Filter';
 import './components/IconText';
 import './components/Jumpbar';
 import './components/Link';
+import './components/Logo';
 import './components/NavItem';
 import './components/NavTree';
 import './components/PageBreadcrumbs';

@@ -26,13 +26,18 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'badge.less';
-@import 'base.less';
-@import 'button.less';
-@import 'logo.less';
+am-logo {
+	color: var(--am-clr);
+
+	& svg {
+		fill: currentColor;
+		height: 3.4rem;
+		max-height: 100%;
+	}
+}
