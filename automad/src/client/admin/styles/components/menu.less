@@ -36,44 +36,24 @@
 	position: relative;
 	display: flex;
 	align-items: center;
+	gap: 1.2rem;
+	height: 3.6rem;
 
-	& &__item {
-		border-radius: 0;
+	&__item {
+		display: flex;
+		align-self: stretch;
+		align-items: center;
+		gap: var(--am-flex-gap);
+		color: var(--am-clr);
+		cursor: pointer;
 
-		&[class='am-c-menu__item'] {
-			display: flex;
-			align-self: stretch;
-			align-items: center;
-			padding: 0 1rem;
-			border-top: var(--am-border);
-			border-bottom: var(--am-border);
-		}
-
-		&:not(input):not(&--first) {
-			border-left: none;
-		}
-
-		&:not(input):not(&--last) {
-			border-right: none;
-		}
-
-		& > input {
-			border-radius: 0;
-		}
-
-		&--first,
-		&--first > input {
-			border-radius: var(--am-btn-radius) 0 0 var(--am-btn-radius);
-		}
-
-		&--last {
-			border-radius: 0 var(--am-btn-radius) var(--am-btn-radius) 0;
+		&:hover {
+			color: var(--am-clr-active);
 		}
 
 		&.am-c-switcher-link--active {
-			color: var(--am-inverted-clr);
-			background-color: var(--am-inverted-bg);
-			border-color: var(--am-inverted-bg);
+			color: var(--am-primary-clr);
+			box-shadow: inset 0 -3px 0 0 var(--am-primary-clr);
 		}
 	}
 }

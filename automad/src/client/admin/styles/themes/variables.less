@@ -33,7 +33,7 @@
  */
 
 @am-sidebar-width: 19rem;
-@am-main-width: 72rem;
+@am-main-width: 76rem;
 @am-center-width: 24rem;
 
 @am-breakpoint-large: unit((2 * @am-sidebar-width) + @am-main-width) * 14px;
@@ -45,8 +45,8 @@
 
 :root {
 	--am-base-font-family: 'Inter';
-	--am-base-font-weight: '430';
-	--am-base-line-height: 1.45;
+	--am-base-font-weight: 410;
+	--am-base-line-height: 1.4;
 	--am-base-font-size: 14px;
 
 	@media (min-width: 1600px) {
@@ -64,47 +64,45 @@
 	--am-border-width: 1px;
 	--am-border: var(--am-border-width) solid var(--am-border-clr);
 
-	--am-radius: 0.24rem;
+	--am-radius: 0.3rem;
 
 	// Buttons
-	--am-btn-padding: 0.9em;
-	--am-btn-height: 2.725em;
+	--am-btn-padding: 1em;
+	--am-btn-height: 2.75em;
 	--am-btn-border-width: var(--am-border-width);
 	--am-btn-radius: var(--am-radius);
+	--am-btn-font-weight: 540;
 
 	// Flex
-	--am-flex-gap: 0.5em;
+	--am-flex-gap: 0.55em;
 
 	// Card
-	--am-card-padding: 0.54rem;
-	--am-card-radius: calc(
-		var(--am-radius) + var(--am-card-padding) - var(--am-border-width) -
-			0.05rem
-	);
+	--am-card-padding: 0.64rem;
+	--am-card-radius: 0.68rem;
 
 	// Alert
 	--am-alert-padding: 0.9rem;
-	--am-alert-icon-size: 1.7rem;
-	--am-alert-gap: 0.8rem;
+	--am-alert-icon-size: 1.75rem;
+	--am-alert-gap: 0.9rem;
 	--am-alert-radius: var(--am-card-radius);
 
 	// Dropdown
 	--am-dropdown-clr: var(--am-clr);
 	--am-dropdown-bg: var(--am-bg);
-	--am-dropdown-active-clr: var(--am-clr-active);
-	--am-dropdown-active-bg: var(--am-bg-active);
+	--am-dropdown-active-clr: var(--am-primary-inverted-clr);
+	--am-dropdown-active-bg: var(--am-primary-inverted-bg);
 
 	// Typography
-	--am-font-size-small: 0.8rem;
-	--am-font-weight-small: 470;
+	--am-small-font-size: 0.8rem;
+	--am-small-font-weight: 430;
 
 	// Layout
-	--am-body-padding-horizontal: 1.25rem;
+	--am-body-padding-horizontal: 1.15rem;
 	--am-space-top: 4rem;
 
 	@media (min-width: @am-breakpoint-medium) {
 		--am-space-top: 6rem;
-		--am-body-padding-horizontal: 1.75rem;
+		--am-body-padding-horizontal: 1.5rem;
 	}
 
 	--am-space-small: 0.75rem;
@@ -112,7 +110,7 @@
 	--am-space-large: 3rem;
 
 	// Grid
-	--am-grid-gap: 1rem;
+	--am-grid-gap: 1.6rem;
 	--am-grid-item-min-width: 12rem;
 
 	// Navbar
@@ -123,7 +121,7 @@
 	--am-footer-height: 4rem;
 
 	// Modal
-	--am-modal-overlay-bg: rgba(0, 0, 0, 0.05);
+	--am-modal-overlay-bg: rgba(0, 0, 0, 0.4);
 	--am-modal-overlay-padding: 1rem;
 
 	@media (min-width: @am-breakpoint-medium) {
@@ -132,6 +130,7 @@
 
 	--am-modal-dialog-padding: 1rem;
 	--am-modal-dialog-width: 36rem;
+	--am-modal-dialog-radius: var(--am-card-radius);
 
 	// Form
 	--am-form-height: var(--am-btn-height);
@@ -140,8 +139,9 @@
 	// Sidebar nav
 	--am-nav-padding-horizontal: 0.45rem;
 	--am-nav-item-line-height: 2rem;
-	--am-nav-item-active-clr: var(--am-inverted-clr);
-	--am-nav-item-active-bg: var(--am-inverted-bg);
+	--am-nav-item-clr: var(--am-clr);
+	--am-nav-item-active-clr: var(--am-clr-active);
+	--am-nav-item-active-bg: var(--am-bg-active);
 	--am-nav-link-hover-clr: var(--am-clr-active);
 	--am-nav-link-hover-bg: var(--am-bg-active);
 }

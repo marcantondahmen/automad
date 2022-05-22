@@ -34,11 +34,13 @@
 
 .am-l-navbar {
 	position: sticky;
+	box-sizing: content-box;
 	z-index: 60;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	height: var(--am-navbar-height);
+	padding-top: 0.4rem;
 	top: 0;
 	border-bottom: var(--am-border);
 	background-color: var(--am-bg);
@@ -87,6 +89,7 @@
 	&__buttons {
 		display: flex;
 		justify-content: right;
+		align-items: center;
 		gap: var(--am-navbar-gap);
 		min-width: ~'calc((100% - @{am-main-width}) / 2)';
 		padding-right: var(--am-body-padding-horizontal);

@@ -43,15 +43,11 @@
 	padding: var(--am-form-padding);
 	line-height: var(--am-base-line-height);
 	outline: none !important;
-	transition: border-color 0.2s;
+	transition: box-shadow 0.2s;
 
 	&:focus {
-		border-color: var(--am-primary-clr);
-	}
-
-	&:invalid:not(:focus),
-	&:invalid:focus:not(:placeholder-shown) {
-		border-color: var(--am-danger-clr);
+		border-color: var(--am-focus-border-clr);
+		box-shadow: var(--am-focus-shadow);
 	}
 
 	&--title {

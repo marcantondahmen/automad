@@ -39,6 +39,7 @@
 		min-height: 100%;
 		font-family: var(--am-base-font-family);
 		font-size: var(--am-base-font-size);
+		font-weight: var(--am-base-font-weight);
 		line-height: var(--am-base-line-height);
 		color: var(--am-clr);
 		background-color: var(--am-bg);
@@ -48,6 +49,7 @@
 		@media screen and (min-width: 960px) {
 			margin-right: ~'calc((100vw - 100%) * -1)';
 			margin-left: 0;
+			padding-right: 15px;
 		}
 	}
 
@@ -65,6 +67,7 @@
 
 	& a,
 	& button {
+		text-decoration: none;
 		transition: color 0.2s, background-color 0.2s, border 0.2s;
 	}
 
@@ -80,15 +83,14 @@
 	}
 
 	& small {
-		font-size: var(--am-font-size-small);
-		font-weight: var(--am-font-weight-small);
+		font-size: var(--am-small-font-size);
+		font-weight: var(--am-small-font-weight);
 	}
 
 	& mark {
-		padding: 0 0.2em;
-		font-weight: 560;
-		color: var(--am-clr);
+		padding: 0 0.15em;
+		color: var(--am-highlight-clr);
 		background-color: var(--am-highlight-bg);
-		border-radius: 0.16em;
+		border-radius: 0.2em;
 	}
 }

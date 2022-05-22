@@ -43,7 +43,7 @@
 	}
 
 	&__label {
-		padding: 0 ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal))';
+		padding: 0.5rem ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal))';
 	}
 
 	&__item {
@@ -121,10 +121,11 @@
 		margin-bottom: var(--am-border-width);
 		padding: 0 1rem;
 		padding-left: var(--padding-left);
-		color: var(--am-clr);
+		color: var(--am-nav-item-clr);
 		text-decoration: none;
 		border-radius: var(--am-radius);
 		cursor: pointer;
+		transition: background-color 0.2s, color 0.2s;
 
 		& > span {
 			min-width: 0;

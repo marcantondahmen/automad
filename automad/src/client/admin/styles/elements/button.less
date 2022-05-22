@@ -71,6 +71,7 @@
 
 .am-e-button {
 	display: inline-flex;
+	justify-content: center;
 	align-items: center;
 	gap: var(--am-flex-gap);
 	height: var(--am-btn-height);
@@ -79,15 +80,17 @@
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
+	font-weight: var(--am-btn-font-weight);
 	border-radius: var(--am-btn-radius);
 	color: var(--am-btn-clr);
 	background-color: var(--am-btn-bg);
-	border: var(--am-btn-border-width) solid var(--am-btn-border-clr);
+	border: var(--am-border-width) solid var(--am-btn-border-clr);
 	transition: color 0.2s, background 0.2s, border-color 0.2s;
 
 	--am-btn-clr: var(--am-clr);
-	--am-btn-bg: var(--am-bg);
+	--am-btn-bg: transparent;
 	--am-btn-border-clr: var(--am-border-clr);
+	--am-btn-border-clr: var(--am-border-strong-clr);
 
 	&,
 	& * {
@@ -102,7 +105,6 @@
 	&:active {
 		--am-btn-clr: var(--am-clr-active);
 		--am-btn-bg: var(--am-bg-active);
-		--am-btn-border-clr: var(--am-border-clr);
 	}
 
 	&[disabled],
@@ -117,14 +119,26 @@
 
 	&--link {
 		--am-btn-clr: var(--am-primary-clr);
-		--am-btn-bg: var(--am-bg);
+		--am-btn-bg: transparent;
 		--am-btn-border-clr: transparent;
 
 		&:hover,
 		&:active {
 			--am-btn-clr: var(--am-primary-clr-active);
-			--am-btn-bg: var(--am-bg-active);
-			--am-btn-border-clr: transparent;
+			--am-btn-bg: var(--am-primary-bg-active);
+		}
+	}
+
+	&--icon {
+		--size: calc(var(--am-btn-height) * 0.8);
+		justify-content: center;
+		padding: 0;
+		height: var(--size);
+		width: var(--size);
+		border-radius: 100px;
+
+		& .bi {
+			font-size: 120%;
 		}
 	}
 
