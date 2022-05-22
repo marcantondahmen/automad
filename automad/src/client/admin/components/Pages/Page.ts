@@ -68,9 +68,7 @@ export class PageComponent extends SidebarLayoutComponent {
 
 		if (getPageURL() !== '/') {
 			more = html`
-				<am-dropdown
-					class="${classes.menuItem} ${classes.menuItemLast} ${classes.button}"
-				>
+				<am-dropdown class="${classes.menuItem}" right>
 					<span>${App.text('more')}</span>
 					<i class="bi bi-chevron-down"></i>
 					<div class="${classes.dropdownItems}">
@@ -165,29 +163,29 @@ export class PageComponent extends SidebarLayoutComponent {
 				</nav>
 			</section>
 			<section class="am-l-main__row am-l-main__row--sticky">
-				<menu class="am-l-main__content">
+				<div class="am-l-main__content">
 					<div class="${classes.menu}">
-						<am-switcher class="am-u-flex">
+						<am-switcher class="${classes.menu}">
 							<am-switcher-link
-								class="${classes.menuItem} ${classes.menuItemFirst} ${classes.button}"
+								class="${classes.menuItem}"
 								section="${Sections.settings}"
 							>
 								${App.text('pageSettings')}
 							</am-switcher-link>
 							<am-switcher-link
-								class="${classes.menuItem} ${classes.button}"
+								class="${classes.menuItem}"
 								section="${Sections.text}"
 							>
 								${App.text('pageContent')}
 							</am-switcher-link>
 							<am-switcher-link
-								class="${classes.menuItem} ${classes.button}"
+								class="${classes.menuItem}"
 								section="${Sections.colors}"
 							>
 								${App.text('pageColors')}
 							</am-switcher-link>
 							<am-switcher-link
-								class="${classes.menuItem} ${classes.button}"
+								class="${classes.menuItem}"
 								section="${Sections.files}"
 							>
 								${App.text('uploadedFiles')}
@@ -197,15 +195,13 @@ export class PageComponent extends SidebarLayoutComponent {
 							</am-switcher-link>
 						</am-switcher>
 						<am-filter
-							class="${classes.menuItem} am-u-flex__item-grow"
+							class="am-u-flex__item-grow"
 							placeholder="filterContent"
 						></am-filter>
-						<am-private-indicator
-							class="${classes.menuItem}"
-						></am-private-indicator>
+						<am-private-indicator></am-private-indicator>
 						${more}
 					</div>
-				</menu>
+				</div>
 			</section>
 			<section class="am-l-main__row">
 				<div class="am-l-main__content">

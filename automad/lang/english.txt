@@ -751,10 +751,6 @@ showImageTitle: Show original image
 
 -
 
-sidebarGlobal: Global
-
--
-
 sidebarPages: Pages
 
 -
@@ -796,6 +792,10 @@ systemCache: Cache
 -
 
 systemCacheInfo: Caching is essential to speed up your site and should generally be enabled. However under some circumstances you might want to disable or clear your cache.
+
+-
+
+systemCacheCardInfo: Clear the cache, purge cached items or change caching settings
 
 -
 
@@ -843,6 +843,10 @@ systemConfigFileInfo: Advanced settings can be managed by directly editing the c
 
 -
 
+systemConfigFileCardInfo: Add additional settings directly to the Automad configuration file
+
+-
+
 systemConfigFileEdit: Edit Configuration File
 
 -
@@ -859,11 +863,19 @@ systemDebugInfo: When debugging is enabled, all of Automad's processes will be l
 
 -
 
+systemDebugCardInfo: Enable debugging in order to identify issues with your installation
+
+-
+
 systemLanguage: Language
 
 -
 
 systemLanguageInfo: There are several languages available for the Dashboard. The translations are created automatically. This feature is still in an experimental phase and therefore some translations might not be accurate.
+
+-
+
+systemLanguageCardInfo: Change the language for the Automad dashboard
 
 -
 
@@ -891,6 +903,10 @@ systemRssFeedInfo: When the RSS feed option is enabled, Automad will automatical
 
 -
 
+systemRssFeedCardInfo: Enable and configure the RSS feed for your site 
+
+-
+
 systemRssFeedUrl: The RSS feed will be available under the following link. You can add it to your navigation by adding a new page and using the URL below as value for the redirect field. 
 
 -
@@ -900,6 +916,10 @@ systemTitle: System Settings
 -
 
 systemUpdate: Update
+
+-
+
+systemUpdateCardInfo: Update Automad to the latest available version
 
 -
 
@@ -980,6 +1000,10 @@ systemUsersChangePassword: Change Your Password
 -
 
 systemUsersInfo: Here you can find all information related to your account and change your username, password or email. In order to be able to reset your password by email, please make sure that you have entered a vaild and active email address below.
+
+-
+
+systemUsersCardInfo: Edit your profile information, change your password or invite other users
 
 -
 

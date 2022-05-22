@@ -72,10 +72,13 @@ class PackageManagerController {
 
 		if (is_readable(self::$composerFile)) {
 			$decoded = json_decode(file_get_contents(self::$composerFile), true);
+			$installed = array();
 
 			if (is_array($decoded) && !empty($decoded['require'])) {
-				$Response->setData(array('installed' => $decoded['require']));
+				$installed = $decoded['require'];
 			}
+
+			$Response->setData(array('installed' => $installed));
 		}
 
 		return $Response;

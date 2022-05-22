@@ -276,7 +276,12 @@ const createPreview = (href: string, container: HTMLElement): HTMLElement => {
  * @param container
  */
 const createDescription = (pkg: Package, container: HTMLElement): void => {
-	const description = create('div', [classes.flexItemGrow], {}, container);
+	const description = create(
+		'div',
+		[classes.flexItemGrow, classes.cardText],
+		{},
+		container
+	);
 
 	description.textContent = pkg.description;
 

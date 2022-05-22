@@ -50,7 +50,7 @@ class CheckboxComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['name', 'checked'];
+		return ['name'];
 	}
 
 	/**
@@ -86,9 +86,15 @@ class CheckboxComponent extends BaseComponent {
 				type="checkbox"
 				name="${this.elementAttributes.name}"
 				${this.hasAttribute('checked') ? 'checked' : ''}
+				${this.hasAttribute('value')
+					? `value="${this.getAttribute('value')}"`
+					: ''}
 			/>
 			<i class="bi"></i>
 		`;
+
+		this.removeAttribute('checked');
+		this.removeAttribute('value');
 	}
 }
 

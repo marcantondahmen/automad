@@ -89,20 +89,12 @@ class PageBreadcrumbsComponent extends BaseComponent {
 			);
 
 			if (index == data.length - 1) {
-				link.innerHTML = html`
-					<i class="bi bi-chevron-right"></i>
-					<span bind="title"></span>
-				`;
-
 				link.setAttribute('bind', 'pageLinkUI');
 				link.setAttribute('bindto', 'target');
+
+				link.innerHTML = html`<span bind="title"></span>`;
 			} else {
-				link.innerHTML = html`
-					<am-icon-text
-						icon="chevron-right"
-						text="$${page.title}"
-					></am-icon-text>
-				`;
+				link.textContent = page.title;
 			}
 		});
 	}

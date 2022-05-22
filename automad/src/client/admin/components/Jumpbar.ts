@@ -92,8 +92,8 @@ const settingsData = (): JumpbarItemData[] => {
 	};
 
 	const data: JumpbarItemData[] = [
-		item(Sections.cache, 'systemCache', 'stack'),
-		item(Sections.users, 'systemUsers', 'people'),
+		item(Sections.cache, 'systemCache', 'device-ssd'),
+		item(Sections.users, 'systemUsers', 'person-badge'),
 		item(Sections.update, 'systemUpdate', 'arrow-repeat'),
 		item(Sections.feed, 'systemRssFeed', 'rss'),
 		item(Sections.language, 'systemLanguage', 'translate'),

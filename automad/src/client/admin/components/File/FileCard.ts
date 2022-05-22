@@ -89,16 +89,16 @@ class FileCardComponent extends BaseComponent {
 		this.innerHTML = html`
 			${this.renderPreview(file)}
 			<am-file-info
-				class="${classes.cardBody} ${classes.flex} ${classes.flexColumn}"
+				class="${classes.flexItemGrow} ${classes.flex} ${classes.flexColumn} ${classes.flexGap} ${classes.cursorPointer}"
 			>
-				<div
-					class="${classes.cardTitle} ${classes.flexItemGrow}"
-					title="$${file.basename}"
-				>
+				<div class="${classes.cardTitle}" title="$${file.basename}">
 					${file.basename}
 				</div>
-				<div>
-					${caption} ${dimensions}
+				<div
+					class="${classes.cardText} ${classes.flexItemGrow} ${classes.flex} ${classes.flexColumn}"
+				>
+					<span>${caption}</span>
+					<span>${dimensions}</span>
 					<am-icon-text
 						icon="calendar2-date"
 						text="${file.mtime || '-'}"
@@ -110,10 +110,10 @@ class FileCardComponent extends BaseComponent {
 				</div>
 			</am-file-info>
 			<div class="${classes.cardFooter} ${classes.flexBetween}">
-				${this.renderDropdown(file)}
-				<span>
-					<input type="checkbox" name="delete[${file.basename}]" />
+				<span class="${classes.cardIconButtons}">
+					${this.renderDropdown(file)}
 				</span>
+				<am-checkbox name="delete[${file.basename}]"></am-checkbox>
 			</div>
 		`;
 
@@ -133,7 +133,7 @@ class FileCardComponent extends BaseComponent {
 			return html`
 				<am-file-robot
 					file="${file.url}"
-					class="${classes.cardImage}"
+					class="${classes.cardImage} ${classes.cursorPointer}"
 					title="$${file.basename}"
 				>
 					<img src="${file.thumbnail}" />
@@ -143,7 +143,7 @@ class FileCardComponent extends BaseComponent {
 
 		return html`
 			<am-file-info
-				class="${classes.cardImage}"
+				class="${classes.cardImage} ${classes.cursorPointer}"
 				title="$${file.basename}"
 			>
 				<i class="bi bi-file-earmark bi-filetype-${file.extension}"></i>
@@ -176,7 +176,7 @@ class FileCardComponent extends BaseComponent {
 
 		return html`
 			<am-dropdown>
-				<i class="bi bi-three-dots-vertical"></i>
+				<i class="bi bi-three-dots"></i>
 				<div class="${classes.dropdownItems}">
 					${editImage}
 					<am-file-info class="${classes.dropdownItem}">

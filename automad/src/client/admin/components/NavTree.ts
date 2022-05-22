@@ -100,11 +100,11 @@ export class NavTreeComponent extends BaseComponent {
 		this.innerHTML = '';
 		this.tree = {};
 
-		this.renderLabel();
-
 		const pages: PageMetaData[] = this.filterPages(
 			Object.values(App.pages) as PageMetaData[]
 		);
+
+		this.renderLabel(pages.length);
 
 		let parent: HTMLElement;
 
@@ -149,8 +149,8 @@ export class NavTreeComponent extends BaseComponent {
 				}
 
 				enterTimeout = setTimeout(() => {
-					details.toggleAttribute('open');
-				}, 750);
+					details.setAttribute('open', '');
+				}, 500);
 			});
 
 			listen(details, 'dragleave', (event: MouseEvent) => {
@@ -233,10 +233,19 @@ export class NavTreeComponent extends BaseComponent {
 
 	/**
 	 * Render the tree label.
+	 *
+	 * @param count
 	 */
-	protected renderLabel(): void {
-		create('span', [classes.navLabel], {}, this).innerHTML =
-			App.text('sidebarPages');
+	protected renderLabel(count: number): void {
+		create('span', [classes.navLabel], {}, this).innerHTML = html`
+			<span
+				class="${classes.flex} ${classes.flexGap} ${classes.flexAlignCenter}"
+			>
+				<i class="bi bi-files"></i>
+				${App.text('sidebarPages')}
+				<span class="${classes.badge}">${count}</span>
+			</span>
+		`;
 	}
 
 	/**

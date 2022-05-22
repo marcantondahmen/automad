@@ -38,11 +38,13 @@ import {
 	classes,
 	create,
 	debounce,
+	fire,
 	getFormData,
 	html,
 	listen,
 	queryAll,
 	requestAPI,
+	Routes,
 } from '../../core';
 import { FieldResults, FileResults, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
@@ -57,8 +59,12 @@ const renderFieldResults = (fieldResultsArray: FieldResults[]) => {
 	return fieldResultsArray.reduce((output, fieldResults): string => {
 		return html`
 			${output}
-			<div>
-				<label>${fieldResults.field}</label>
+			<div
+				class="${classes.flex} ${classes.flexColumn} ${classes.flexGap}"
+			>
+				<small class="${classes.textMuted}">
+					${fieldResults.field}
+				</small>
 				<div>${fieldResults.context}</div>
 			</div>
 		`;
@@ -72,7 +78,7 @@ const renderFieldResults = (fieldResultsArray: FieldResults[]) => {
  * @returns the rendered file card
  */
 const renderFileCard = (fileResults: FileResults) => {
-	const { path, fieldResultsArray } = fileResults;
+	const { path, fieldResultsArray, url } = fileResults;
 	const fields: string[] = fieldResultsArray.reduce(
 		(fields, fieldResults): string[] => {
 			return fields.concat([fieldResults.field]);
@@ -81,19 +87,26 @@ const renderFileCard = (fileResults: FileResults) => {
 	);
 
 	return html`
-		<div class="${classes.card}">
-			<div class="${classes.cardBody}">
-				<div class="${classes.flex} ${classes.flexBetween}">
-					<span>${path}</span>
-					<input
-						type="checkbox"
-						name="${path}"
-						value="${fields.join()}"
-						checked
-					/>
-				</div>
-				${renderFieldResults(fieldResultsArray)}
+		<div class="${classes.card} ${classes.cardList}">
+			<div
+				class="${classes.flex} ${classes.flexBetween} ${classes.flexAlignCenter}"
+			>
+				<am-link
+					target="${path.match(/^\/shared\//i)
+						? Routes.shared
+						: `${Routes.page}?url=${url}`}"
+					class="${classes.textPrimary} ${classes.iconText}"
+				>
+					<i class="bi bi-file-earmark-text"></i>
+					<span>${url || App.text('sharedTitle')}</span>
+				</am-link>
+				<am-checkbox
+					name="${path}"
+					value="${fields.join()}"
+					checked
+				></am-checkbox>
 			</div>
+			${renderFieldResults(fieldResultsArray)}
 		</div>
 	`;
 };
@@ -120,7 +133,12 @@ export class SearchFormComponent extends BaseComponent {
 		const { searchBar, search, isRegex, isCaseSensitive, replace } =
 			this.createForm();
 		const { replaceButton, checkAll, unCheckAll } = this.createButtons();
-		const resultsContainer = create('section', [], {}, this);
+		const resultsContainer = create(
+			'section',
+			[classes.flex, classes.flexColumn, classes.flexGap],
+			{},
+			this
+		);
 
 		const performRequest = async (replaceData: KeyValueMap = {}) => {
 			const data: KeyValueMap = Object.assign(
@@ -163,6 +181,7 @@ export class SearchFormComponent extends BaseComponent {
 			queryAll('input', resultsContainer).forEach(
 				(checkbox: HTMLInputElement) => {
 					checkbox.checked = state;
+					fire('input', checkbox);
 				}
 			);
 		};
@@ -284,7 +303,13 @@ export class SearchFormComponent extends BaseComponent {
 			this
 		);
 
-		const replaceButton = create('span', [classes.button], {}, wrapper);
+		const replaceButton = create(
+			'span',
+			[classes.button, classes.buttonPrimary],
+			{},
+			wrapper
+		);
+
 		replaceButton.innerHTML = App.text('searchReplaceSelected');
 
 		const toggles = create(
@@ -295,9 +320,22 @@ export class SearchFormComponent extends BaseComponent {
 		);
 
 		const checkAll = create('span', [classes.button], {}, toggles);
-		checkAll.innerHTML = App.text('searchReplaceCheckAll');
+
+		checkAll.innerHTML = html`
+			<am-icon-text
+				icon="check-circle"
+				text="${App.text('searchReplaceCheckAll')}"
+			></am-icon-text>
+		`;
+
 		const unCheckAll = create('span', [classes.button], {}, toggles);
-		unCheckAll.innerHTML = App.text('searchReplaceUncheckAll');
+
+		unCheckAll.innerHTML = html`
+			<am-icon-text
+				icon="circle"
+				text="${App.text('searchReplaceUncheckAll')}"
+			></am-icon-text>
+		`;
 
 		return {
 			replaceButton,

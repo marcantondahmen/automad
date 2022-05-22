@@ -44,7 +44,11 @@ export const sidebarLayout = ({ main }: Partials) => {
 			></am-sidebar-toggle>
 			<nav class="am-l-sidebar">
 				<am-sidebar class="am-l-sidebar__content">
-					<div class="am-l-sidebar__logo"><am-logo></am-logo></div>
+					<div class="am-l-sidebar__logo">
+						<am-link target="home">
+							<am-logo></am-logo>
+						</am-link>
+					</div>
 					<div class="am-l-sidebar__nav">
 						<div class="am-l-sidebar__jump">
 							<am-jumpbar
@@ -52,9 +56,6 @@ export const sidebarLayout = ({ main }: Partials) => {
 							></am-jumpbar>
 						</div>
 						<nav class="${classes.nav}">
-							<span class="${classes.navLabel}">
-								$${App.text('sidebarGlobal')}
-							</span>
 							<span class="${classes.navItem}">
 								<a
 									href="${App.baseURL}"
@@ -72,18 +73,13 @@ export const sidebarLayout = ({ main }: Partials) => {
 								text="searchTitle"
 							></am-nav-item>
 							<am-nav-item
-								page="home"
-								icon="window-sidebar"
-								text="dashboardTitle"
-							></am-nav-item>
-							<am-nav-item
 								page="system"
 								icon="sliders"
 								text="systemTitle"
 							></am-nav-item>
 							<am-nav-item
 								page="shared"
-								icon="file-earmark-medical"
+								icon="file-medical"
 								text="sharedTitle"
 							></am-nav-item>
 							<am-nav-item
@@ -98,7 +94,11 @@ export const sidebarLayout = ({ main }: Partials) => {
 				</am-sidebar>
 			</nav>
 			<nav class="am-l-navbar am-l-navbar--sidebar">
-				<div class="am-l-navbar__logo"><am-logo></am-logo></div>
+				<div class="am-l-navbar__logo">
+					<am-link target="home">
+						<am-logo></am-logo>
+					</am-link>
+				</div>
 				<div class="am-l-navbar__jump">
 					<am-jumpbar placeholder="jumpbarPlaceholder"></am-jumpbar>
 				</div>
@@ -106,18 +106,21 @@ export const sidebarLayout = ({ main }: Partials) => {
 					<am-system-update-button></am-system-update-button>
 					<am-debug-button></am-debug-button>
 					<am-modal-toggle
-						class="${classes.button}"
+						class="${classes.button} ${classes.buttonInverted} ${classes.buttonIcon}"
+						title="$${App.text('addPage')}"
 						modal="#am-add-page-modal"
 					>
-						<am-icon-text
-							icon="file-earmark-text"
-							text="${App.text('addPage')}"
-						></am-icon-text>
+						<i class="bi bi-plus-lg"></i>
 					</am-modal-toggle>
-					<am-dark-mode-toggle
-						class="am-e-button"
-						text="$${App.text('toggleDarkMode')}"
-					></am-dark-mode-toggle>
+					<am-dropdown right>
+						<i class="bi bi-three-dots-vertical"></i>
+						<div class="${classes.dropdownItems}">
+							<am-dark-mode-toggle
+								class="${classes.dropdownItem}"
+								text="$${App.text('toggleDarkMode')}"
+							></am-dark-mode-toggle>
+						</div>
+					</am-dropdown>
 					<am-sidebar-toggle class="am-u-display-small">
 						<i class="bi bi-list"></i>
 					</am-sidebar-toggle>

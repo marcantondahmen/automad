@@ -35,9 +35,61 @@
 .am-c-breadcrumbs {
 	display: flex;
 	gap: var(--am-flex-gap);
+	flex-wrap: nowrap;
+	max-width: 100%;
+	overflow: hidden;
 
 	&__item {
-		padding: 0.5rem 0;
+		display: none;
+		gap: var(--am-flex-gap);
+		flex-wrap: nowrap;
+		line-height: var(--am-nav-item-line-height);
+		max-width: 33%;
+		color: var(--am-muted-clr);
+		transition: color 0.2s;
 		cursor: pointer;
+
+		&:nth-last-child(3),
+		&:nth-last-child(2),
+		&:nth-last-child(1) {
+			display: flex;
+		}
+
+		& > * {
+			max-width: 100%;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		&:not(:last-child):after {
+			content: '/';
+		}
+
+		@media (max-width: @am-breakpoint-small-max) {
+			& + &:nth-last-child(3):before {
+				content: '…';
+			}
+		}
+
+		@media (min-width: @am-breakpoint-small) {
+			max-width: 20%;
+
+			& + &:nth-last-child(5):before {
+				content: '…';
+			}
+
+			&:nth-last-child(5),
+			&:nth-last-child(4),
+			&:nth-last-child(3),
+			&:nth-last-child(2),
+			&:nth-last-child(1) {
+				display: flex;
+			}
+		}
+
+		&:hover {
+			color: var(--am-clr);
+		}
 	}
 }

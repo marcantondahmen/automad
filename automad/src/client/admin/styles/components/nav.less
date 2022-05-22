@@ -44,6 +44,7 @@
 
 	&__label {
 		padding: 0.5rem ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal))';
+		user-select: none;
 	}
 
 	&__item {
@@ -149,10 +150,11 @@
 
 			&:before {
 				content: '';
-				font-size: 0.45rem;
+				font-size: 0.5rem;
 				line-height: 1;
 				width: 0.55rem;
 				min-width: 0.55rem;
+				text-align: center;
 			}
 
 			.am-c-nav--dragging &:before,

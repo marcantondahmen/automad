@@ -59,50 +59,58 @@ export class SystemComponent extends SidebarLayoutComponent {
 				section: Sections.cache,
 				icon: 'device-ssd',
 				title: App.text('systemCache'),
-				info: '<am-cache-indicator></am-cache-indicator>',
+				info: App.text('systemCacheCardInfo'),
+				state: '<am-cache-indicator></am-cache-indicator>',
 				render: renderCacheSection,
 				narrowIcon: true,
 			},
 			{
 				section: Sections.users,
-				icon: 'people',
+				icon: 'person-badge',
 				title: App.text('systemUsers'),
-				info: '<am-user-count-indicator></am-user-count-indicator>',
+				info: App.text('systemUsersCardInfo'),
+				state: '<am-user-count-indicator></am-user-count-indicator>',
 				render: renderUsersSection,
+				narrowIcon: true,
 			},
 			{
 				section: Sections.update,
 				icon: 'arrow-repeat',
 				title: App.text('systemUpdate'),
-				info: '<am-system-update-indicator></am-system-update-indicator>',
+				info: App.text('systemUpdateCardInfo'),
+				state: '<am-system-update-indicator></am-system-update-indicator>',
 				render: renderUpdateSection,
 			},
 			{
 				section: Sections.feed,
-				icon: 'card-text',
+				icon: 'rss',
 				title: App.text('systemRssFeed'),
-				info: '<am-feed-indicator></am-feed-indicator>',
+				info: App.text('systemRssFeedCardInfo'),
+				state: '<am-feed-indicator></am-feed-indicator>',
 				render: renderFeedSection,
 			},
 			{
 				section: Sections.language,
 				icon: 'translate',
 				title: App.text('systemLanguage'),
-				info: '',
+				info: App.text('systemLanguageCardInfo'),
+				state: '',
 				render: renderLanguageSection,
 			},
 			{
 				section: Sections.debug,
 				icon: 'bug',
 				title: App.text('systemDebug'),
-				info: '<am-debug-indicator></am-debug-indicator>',
+				info: App.text('systemDebugCardInfo'),
+				state: '<am-debug-indicator></am-debug-indicator>',
 				render: renderDebugSection,
 			},
 			{
 				section: Sections.config,
 				icon: 'file-earmark-code',
 				title: App.text('systemConfigFile'),
-				info: '',
+				info: App.text('systemConfigFileCardInfo'),
+				state: '',
 				render: renderConfigFileSection,
 				narrowIcon: true,
 			},
@@ -197,7 +205,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 
 		return html`
 			<am-switcher-section name="${Sections.overview}">
-				<div class="${classes.grid}" style="--min: 12rem;">
+				<div class="${classes.grid}" style="--min: 15rem;">
 					${this.renderOverviewCards()}
 				</div>
 			</am-switcher-section>
@@ -219,7 +227,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 					class="${classes.card} ${classes.cardLink}"
 					section="${item.section}"
 				>
-					<div class="${classes.cardBody} ${classes.flexItemGrow}">
+					<div class="${classes.flexItemGrow}">
 						<span
 							class="${classes.cardIcon} ${item.narrowIcon
 								? classes.cardIconNarrow
@@ -228,9 +236,10 @@ export class SystemComponent extends SidebarLayoutComponent {
 							<i class="bi bi-${item.icon}"></i>
 						</span>
 						<div class="${classes.cardTitle}">${item.title}</div>
+						<div class="${classes.cardText}">${item.info}</div>
 					</div>
 					<div class="am-c-card__footer">
-						<small>${item.info}</small>
+						<small>${item.state}</small>
 					</div>
 				</am-switcher-link>
 			`;

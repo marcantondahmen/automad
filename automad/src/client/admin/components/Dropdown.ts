@@ -39,7 +39,7 @@ import { BaseComponent } from './Base';
  * A simple dropdown menu component.
  *
  * @example
- * <am-dropdown>
+ * <am-dropdown right>
  *     Menu
  *     <div class="am-c-dropdown__items">
  *         ...
@@ -54,6 +54,10 @@ class DropdownComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.classList.add(classes.dropdown);
+		this.classList.toggle(
+			classes.dropdownRight,
+			this.hasAttribute('right')
+		);
 
 		this.listeners.push(
 			listen(window, 'click', (event: MouseEvent) => {
