@@ -35,7 +35,6 @@
 import {
 	App,
 	classes,
-	create,
 	createProgressModal,
 	eventNames,
 	fire,
@@ -56,14 +55,16 @@ class UpdateAllPackagesComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const button = create(
-			'am-icon-text',
-			[],
-			{ icon: 'arrow-repeat', text: App.text('packagesUpdateAll') },
-			this
+		this.classList.add(classes.displayNone);
+		this.textContent = App.text('packagesUpdateAll');
+
+		this.init();
+
+		this.listeners.push(
+			listen(window, eventNames.packagesChange, this.init.bind(this))
 		);
 
-		listen(button, 'click', async () => {
+		listen(this, 'click', async () => {
 			const modal = createProgressModal(App.text('packagesUpdatingAll'));
 
 			modal.open();
@@ -84,6 +85,16 @@ class UpdateAllPackagesComponent extends BaseComponent {
 
 			fire(eventNames.packagesChange);
 		});
+	}
+
+	/**
+	 * Check if the button should be displayed.
+	 */
+	private async init(): Promise<void> {
+		const { data } = await requestAPI('PackageManager/getOutdated');
+		const hasUpdates = data?.outdated?.length > 0;
+
+		this.classList.toggle(classes.displayNone, !hasUpdates);
 	}
 }
 

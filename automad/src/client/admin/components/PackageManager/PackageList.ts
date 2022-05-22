@@ -50,7 +50,7 @@ import { BaseComponent } from '../Base';
  */
 const getPackagistPackages = async (): Promise<Package[]> => {
 	const response = await request(
-		'https://packagist.org/search.json?&type=automad-package'
+		'https://packagist.org/search.json?&type=automad-package&per_page=100'
 	);
 	const { results } = await response.json();
 
@@ -97,6 +97,7 @@ const getPackages = async (): Promise<Package[]> => {
 	packages.forEach((pkg) => {
 		pkg.outdated = typeof outdated[pkg.name] !== 'undefined';
 		pkg.installed = typeof installed[pkg.name] !== 'undefined';
+		pkg.latest = outdated[pkg.name]?.latest || '';
 	});
 
 	packages.sort((a: KeyValueMap, b: KeyValueMap) =>
@@ -117,7 +118,7 @@ class PackageListComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.classList.add(classes.grid);
-		this.setAttribute('style', '--min: 19rem;');
+		this.setAttribute('style', '--min: 15rem;');
 		this.init();
 
 		this.listeners.push(

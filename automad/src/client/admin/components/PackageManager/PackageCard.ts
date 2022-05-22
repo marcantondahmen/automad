@@ -102,7 +102,12 @@ const performAction = async (
  * @param container
  */
 const createUpdateButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create('span', [classes.button], {}, container);
+	const button = create(
+		'span',
+		[classes.button, classes.buttonPrimary, classes.flexItemGrow],
+		{},
+		container
+	);
 
 	button.textContent = App.text('packageUpdate');
 
@@ -122,7 +127,12 @@ const createUpdateButton = (pkg: Package, container: HTMLElement): void => {
  * @param container
  */
 const createInstallButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create('span', [classes.button], {}, container);
+	const button = create(
+		'span',
+		[classes.button, classes.flexItemGrow],
+		{},
+		container
+	);
 
 	button.textContent = App.text('packageInstall');
 
@@ -144,7 +154,7 @@ const createInstallButton = (pkg: Package, container: HTMLElement): void => {
 const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
 	const button = create(
 		'span',
-		[classes.button, classes.buttonInverted],
+		[classes.button, classes.flexItemGrow],
 		{},
 		container
 	);
@@ -158,6 +168,145 @@ const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
 			App.text('packageRemoving')
 		);
 	});
+};
+
+/**
+ * Create a card header with dropdown.
+ *
+ * @param pkg
+ * @param href
+ * @param container
+ */
+const createHeader = (
+	pkg: Package,
+	href: string,
+	container: HTMLElement
+): void => {
+	const header = create(
+		'span',
+		[classes.flex, classes.flexGap],
+		{},
+		container
+	);
+
+	const title = create(
+		'a',
+		[classes.cardTitle, classes.flexItemGrow],
+		{ href, target: '_blank' },
+		header
+	);
+
+	title.innerHTML = html`
+		$${pkg.name.split('/')[0]} ⁄
+		<br />
+		$${pkg.name.split('/')[1]}
+	`;
+
+	const dropdown = create('span', [classes.cardIconButtons], {}, header);
+	dropdown.innerHTML = html`
+		<span>
+			<am-dropdown right>
+				<i class="bi bi-three-dots"></i>
+				<span class="${classes.dropdownItems}">
+					<a
+						href="${pkg.repository}"
+						class="${classes.dropdownItem}"
+						target="_blank"
+					>
+						<am-icon-text
+							icon="git"
+							text="Repository"
+						></am-icon-text>
+					</a>
+					<a
+						href="${pkg.url}"
+						class="${classes.dropdownItem}"
+						target="_blank"
+					>
+						<am-icon-text
+							icon="box-seam"
+							text="Packagist"
+						></am-icon-text>
+					</a>
+					<a
+						href="${href}"
+						class="${classes.dropdownItem}"
+						target="_blank"
+					>
+						<am-icon-text
+							icon="file-text"
+							text="Readme"
+						></am-icon-text>
+					</a>
+				</span>
+			</am-dropdown>
+		</span>
+	`;
+};
+
+/**
+ * Create a preview container.
+ *
+ * @param href
+ * @param container
+ * @returns the preview element
+ */
+const createPreview = (href: string, container: HTMLElement): HTMLElement => {
+	const preview = create(
+		'a',
+		[
+			classes.cardImage,
+			classes.cardImage43,
+			classes.cardImageIconLarge,
+			classes.cardImageBlend,
+		],
+		{ href, target: '_blank' },
+		container
+	);
+
+	create('i', ['bi', 'bi-box-seam'], {}, preview);
+
+	return preview;
+};
+
+/**
+ * Create the description section.
+ *
+ * @param pkg
+ * @param container
+ */
+const createDescription = (pkg: Package, container: HTMLElement): void => {
+	const description = create('div', [classes.flexItemGrow], {}, container);
+
+	description.textContent = pkg.description;
+
+	return description;
+};
+
+/**
+ * Create the card footer.
+ *
+ * @param pkg
+ * @param container
+ */
+const createFooter = (pkg: Package, container: HTMLElement): void => {
+	const footer = create('span', [classes.cardFooter], {}, container);
+	const buttons = create(
+		'span',
+		[classes.flex, classes.flexGap, classes.flexItemGrow],
+		{},
+		footer
+	);
+
+	if (pkg.installed) {
+		createRemoveButton(pkg, buttons);
+
+		if (pkg.outdated) {
+			createUpdateButton(pkg, buttons);
+		}
+	} else {
+		createInstallButton(pkg, buttons);
+	}
 };
 
 /**
@@ -184,62 +333,13 @@ class PackageCardComponent extends BaseComponent {
 		this.classList.toggle(classes.cardActive, pkg.installed);
 
 		const href = `${packageBrowser}/${pkg.name}`;
-		const bodyTitle = create('div', [classes.cardBody], {}, this);
-		const preview = create(
-			'a',
-			[
-				classes.cardImage,
-				classes.cardImage43,
-				classes.cardImageIconLarge,
-			],
-			{ href, target: '_blank' },
-			this
-		);
-		const description = create(
-			'div',
-			[classes.cardBody, classes.flexItemGrow],
-			{},
-			this
-		);
-		const footer = create('div', [classes.cardFooter], {}, this);
 
-		const title = create('div', [classes.cardTitle], {}, bodyTitle);
+		createHeader(pkg, href, this);
 
-		title.innerHTML = html`
-			$${pkg.name.split('/')[0]} /
-			<br />
-			$${pkg.name.split('/')[1]}
-		`;
+		const preview = createPreview(href, this);
 
-		create('i', ['bi', 'bi-box-seam', classes.textMuted], {}, preview);
-
-		description.textContent = pkg.description;
-
-		footer.innerHTML = html`
-			<div>
-				<span class="am-e-badge">
-					<span>↓ $${pkg.downloads}</span>
-				</span>
-				<a href="$${pkg.repository}" target="_blank">
-					<i class="am-u-text-muted bi bi-github"></i>
-				</a>
-				<a href="${href}" target="_blank">
-					<i class="am-u-text-muted bi bi-file-earmark-text-fill"></i>
-				</a>
-			</div>
-		`;
-
-		const buttons = create('small', [], {}, footer);
-
-		if (pkg.outdated) {
-			createUpdateButton(pkg, buttons);
-		}
-
-		if (pkg.installed) {
-			createRemoveButton(pkg, buttons);
-		} else {
-			createInstallButton(pkg, buttons);
-		}
+		createDescription(pkg, this);
+		createFooter(pkg, this);
 
 		const thumbnail = await getThumbnail(pkg.repository);
 

@@ -63,7 +63,7 @@ export abstract class BaseActivationIndicatorComponent extends BaseStateComponen
 		if (this.state) {
 			this.innerHTML = html`
 				<am-icon-text
-					class="${classes.textSuccess}"
+					class="${classes.textPrimary}"
 					icon="check-circle-fill"
 					text="${this.textOn}"
 				></am-icon-text>

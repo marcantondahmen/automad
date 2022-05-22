@@ -75,7 +75,7 @@ class OutdatedPackagesBadgeComponent extends BaseComponent {
 				<span
 					class="${classes.flex} ${classes.flexGap} ${classes.flexAlignCenter}"
 				>
-					<i class="bi bi-arrow-down-circle"></i>
+					<i class="bi bi-arrow-repeat"></i>
 					<span>${count}</span>
 				</span>
 			`;
