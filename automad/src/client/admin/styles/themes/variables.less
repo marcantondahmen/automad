@@ -33,7 +33,7 @@
  */
 
 @am-sidebar-width: 20rem;
-@am-main-width: 76rem;
+@am-main-width: 74rem;
 @am-center-width: 24rem;
 
 @am-breakpoint-large: unit((2 * @am-sidebar-width) + @am-main-width) * 14px;
@@ -43,10 +43,57 @@
 @am-breakpoint-small: 780px;
 @am-breakpoint-small-max: @am-breakpoint-small - 1;
 
+@am-base-font-family: 'Inter';
+@am-base-font-weight: 470;
+@am-base-line-height: 1.38;
+
+@am-code-font-family: 'SFMono-Regular', Menlo, Monaco, Consolas,
+	'Liberation Mono', 'Courier New', monospace;
+
+@am-small-font-size: 0.8rem;
+@am-small-line-height: 1.45;
+@am-small-font-weight: 470;
+
+@am-border-width: 1px;
+@am-border: @am-border-width solid var(--am-clr-border);
+
+@am-flex-gap: 0.58em;
+
+@am-outline: transparent solid 4px;
+@am-outline-active: var(--am-clr-outline-active) solid 4px;
+
+@am-navbar-height: 4.57rem;
+@am-navbar-item-padding-x: 0.75rem;
+@am-navbar-font-size: 1.143rem;
+
+@am-nav-padding-x: 4px;
+@am-nav-item-line-height: 2.36rem;
+@am-nav-item-radius: 4px;
+@am-nav-item-clr: var(--am-clr-text-sidebar);
+@am-nav-item-active-clr: var(--am-clr-primary-text);
+@am-nav-item-active-bg: var(--am-clr-primary-background);
+@am-nav-item-hover-clr: @am-nav-item-active-clr;
+@am-nav-item-hover-bg: @am-nav-item-active-bg;
+
+@am-breadcrumbs-clr: var(--am-clr-text-muted);
+@am-breadcrumbs-hover-clr: var(--am-clr-text);
+
+@am-menu-height: 3.72rem;
+@am-menu-item-clr: var(--am-clr-text);
+@am-menu-item-hover-clr: var(--am-clr-text-hover);
+
+@am-footer-height: 4rem;
+
+@am-card-padding: 0.65rem;
+@am-card-radius: 0.65rem;
+
+@am-form-background: var(--am-clr-background-faded);
+@am-form-height: 2.57rem;
+@am-form-padding-x: 0.8rem;
+
+@am-modal-padding: 1.28rem;
+
 :root {
-	--am-base-font-family: 'Inter';
-	--am-base-font-weight: 410;
-	--am-base-line-height: 1.4;
 	--am-base-font-size: 14px;
 
 	@media (min-width: 1600px) {
@@ -61,87 +108,6 @@
 		--am-base-font-size: 17px;
 	}
 
-	--am-border-width: 1px;
-	--am-border: var(--am-border-width) solid var(--am-border-clr);
-
-	--am-radius: 0.3rem;
-
-	// Buttons
-	--am-btn-padding: 1em;
-	--am-btn-height: 2.75em;
-	--am-btn-border-width: var(--am-border-width);
-	--am-btn-radius: var(--am-radius);
-	--am-btn-font-weight: 540;
-
-	// Flex
-	--am-flex-gap: 0.55em;
-
-	// Card
-	--am-card-padding: 0.64rem;
-	--am-card-radius: 0.68rem;
-
-	// Alert
-	--am-alert-padding: 0.9rem;
-	--am-alert-icon-size: 1.75rem;
-	--am-alert-gap: 0.9rem;
-	--am-alert-radius: var(--am-card-radius);
-
-	// Dropdown
-	--am-dropdown-clr: var(--am-clr);
-	--am-dropdown-bg: var(--am-bg);
-	--am-dropdown-active-clr: var(--am-primary-inverted-clr);
-	--am-dropdown-active-bg: var(--am-primary-inverted-bg);
-
-	// Typography
-	--am-small-font-size: 0.8rem;
-	--am-small-font-weight: 430;
-
-	// Layout
-	--am-body-padding-horizontal: 1.15rem;
-	--am-space-top: 4rem;
-
-	@media (min-width: @am-breakpoint-medium) {
-		--am-space-top: 6rem;
-		--am-body-padding-horizontal: 1.5rem;
-	}
-
-	--am-space-small: 0.75rem;
-	--am-space-medium: 1.5rem;
-	--am-space-large: 3rem;
-
-	// Grid
-	--am-grid-gap: 1.6rem;
-	--am-grid-item-min-width: 12.5rem;
-
-	// Navbar
-	--am-navbar-height: 4rem;
-	--am-navbar-gap: 1rem;
-
-	// Footer
-	--am-footer-height: 4rem;
-
-	// Modal
-	--am-modal-overlay-bg: rgba(0, 0, 0, 0.4);
-	--am-modal-overlay-padding: 1rem;
-
-	@media (min-width: @am-breakpoint-medium) {
-		--am-modal-overlay-padding: 4rem 1rem;
-	}
-
-	--am-modal-dialog-padding: 1rem;
-	--am-modal-dialog-width: 36rem;
-	--am-modal-dialog-radius: var(--am-card-radius);
-
-	// Form
-	--am-form-height: var(--am-btn-height);
-	--am-form-padding: 0.29rem 0.86rem;
-
-	// Sidebar nav
-	--am-nav-padding-horizontal: 0.45rem;
-	--am-nav-item-line-height: 2rem;
-	--am-nav-item-clr: var(--am-clr);
-	--am-nav-item-active-clr: var(--am-inverted-clr);
-	--am-nav-item-active-bg: var(--am-inverted-bg);
-	--am-nav-link-hover-clr: var(--am-clr-active);
-	--am-nav-link-hover-bg: var(--am-bg-active);
+	--am-body-padding-x: 1.5rem;
+	--am-navbar-space-bottom: 2rem;
 }

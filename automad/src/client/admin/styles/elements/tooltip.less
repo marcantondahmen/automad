@@ -32,15 +32,35 @@
  * Licensed under the MIT license.
  */
 
-.am-c-icon-text {
-	display: inline-flex;
-	align-items: center;
-	gap: @am-flex-gap;
-	max-width: 100%;
+.am-ui .ct {
+	z-index: 9999;
+	box-shadow: 0 8px 12px 0 var(--am-shadow), 0 4px 5px -3px var(--am-shadow);
+	border-radius: 0.25rem;
+	transition: opacity 0.1s, transform 0.1s;
 
-	& > span {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	&::before {
+		border-radius: 0.25rem;
+		-webkit-mask-box-image: none;
+	}
+
+	&:before,
+	&:after {
+		background-color: var(--am-clr-primary-background);
+	}
+
+	&__content {
+		padding: 0.25rem 0.65rem;
+		font-size: 0.75rem;
+		font-weight: 560;
+		line-height: 1.6;
+		color: var(--am-clr-primary-text);
+
+		& kbd {
+			display: block;
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			opacity: 0.5;
+		}
 	}
 }

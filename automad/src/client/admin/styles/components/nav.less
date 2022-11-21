@@ -36,24 +36,24 @@
 	display: flex;
 	flex-direction: column;
 	max-width: 100%;
-	padding: 0 var(--am-nav-padding-horizontal);
+	padding: 0 @am-nav-padding-x;
 
 	& + & {
 		margin-top: 2rem;
 	}
 
 	&__label {
-		padding: 0.5rem ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal))';
+		padding: 0.5rem ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
 		user-select: none;
 	}
 
 	&__item {
 		display: flex;
 		flex-direction: column;
-		line-height: var(--am-nav-item-line-height);
+		line-height: @am-nav-item-line-height;
 
 		--level: 0;
-		--padding-left: ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal) + (1rem * var(--level)))';
+		--padding-left: ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x} + (1rem * var(--level)))';
 		.navTreeLevel(12);
 
 		&--chosen {
@@ -68,8 +68,8 @@
 
 		&--ghost {
 			&:not(.am-c-nav__item--active) {
-				box-shadow: inset 0 0 0 1px var(--am-border-clr);
-				border-radius: var(--am-radius);
+				box-shadow: inset 0 0 0 1px var(--am-clr-border);
+				border-radius: @am-nav-item-radius;
 			}
 
 			& summary:before {
@@ -85,7 +85,7 @@
 	}
 
 	&--dragging &__children {
-		padding-bottom: var(--am-border-width);
+		padding-bottom: @am-border-width;
 
 		& * {
 			cursor: grabbing !important;
@@ -98,7 +98,7 @@
 			margin-left: ~'calc(var(--padding-left) + 2rem)';
 			height: 3px;
 			border-radius: 3px;
-			background-color: var(--am-border-clr);
+			background-color: var(--am-clr-border);
 		}
 	}
 
@@ -118,13 +118,13 @@
 	&__link {
 		display: flex;
 		align-items: center;
-		gap: var(--am-flex-gap);
-		margin-bottom: var(--am-border-width);
+		gap: @am-flex-gap;
+		margin-bottom: @am-border-width;
 		padding: 0 1rem;
 		padding-left: var(--padding-left);
-		color: var(--am-nav-item-clr);
+		color: @am-nav-item-clr;
 		text-decoration: none;
-		border-radius: var(--am-radius);
+		border-radius: @am-nav-item-radius;
 		cursor: pointer;
 		transition: background-color 0.2s, color 0.2s;
 
@@ -182,14 +182,14 @@
 		}
 
 		&:hover {
-			color: var(--am-nav-link-hover-clr);
-			background-color: var(--am-nav-link-hover-bg);
+			color: @am-nav-item-hover-clr;
+			background-color: @am-nav-item-hover-bg;
 		}
 	}
 
 	&__item--active > &__link {
-		color: var(--am-nav-item-active-clr);
-		background-color: var(--am-nav-item-active-bg);
+		color: @am-nav-item-active-clr;
+		background-color: @am-nav-item-active-bg;
 	}
 }
 

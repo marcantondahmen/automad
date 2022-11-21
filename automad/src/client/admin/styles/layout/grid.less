@@ -32,13 +32,15 @@
  * Licensed under the MIT license.
  */
 
-.am-c-grid {
+.am-l-grid {
 	display: grid;
-	grid-template-columns: repeat(
-		auto-fill,
-		minmax(var(--min, var(--am-grid-item-min-width)), 1fr)
-	);
-	gap: var(--gap, var(--am-grid-gap));
-	margin-top: var(--gap, var(--am-grid-gap));
-	margin-bottom: var(--gap, var(--am-grid-gap));
+	grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr));
+	gap: var(--gap);
+	margin-bottom: var(--gap);
+	--gap: 1.72rem;
+	--min: 15rem;
+
+	* + & {
+		margin-top: var(--gap);
+	}
 }

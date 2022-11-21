@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -35,26 +35,14 @@
 .am-c-alert {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--am-alert-gap);
-	margin: var(--am-space-medium) 0;
-	padding: var(--am-alert-padding);
-	border: var(--am-border);
-	border-color: var(--am-border-strong-clr);
-	border-radius: var(--am-alert-radius);
-	box-shadow: var(--am-shadow);
+	gap: 1.25rem;
+	margin: 1rem 0;
+	padding: 1.25rem;
+	border: @am-border;
+	border-radius: 0.5rem;
+	color: var(--am-clr-text-paragraph);
+	background-color: var(--am-clr-background-faded);
 	--multiplier: ~'calc(30rem - 100%)';
-
-	&--primary {
-		color: var(--am-primary-clr);
-		background-color: var(--am-primary-bg);
-		border-color: var(--am-primary-clr);
-	}
-
-	&--danger {
-		color: var(--am-danger-clr);
-		background-color: var(--am-danger-bg);
-		border-color: var(--am-danger-clr);
-	}
 
 	& > * {
 		flex-basis: ~'calc(var(--multiplier) * 999)';
@@ -64,10 +52,10 @@
 	&__icon {
 		display: flex;
 		width: min-content;
-		color: inherit;
+		color: var(--am-clr-accent-text);
 
-		& i {
-			font-size: var(--am-alert-icon-size);
+		& > .bi {
+			font-size: 2.1rem;
 			line-height: 1;
 		}
 	}
@@ -76,12 +64,13 @@
 		flex-grow: 1;
 		align-self: center;
 		color: inherit;
+		max-width: 50rem;
 
 		& > * {
 			margin: 0;
 
 			& + * {
-				margin-top: var(--am-space-medium);
+				margin-top: 1.25rem;
 			}
 		}
 	}

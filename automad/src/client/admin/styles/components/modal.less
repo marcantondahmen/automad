@@ -26,15 +26,11 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
-
-am-modal {
-	display: none;
-}
 
 .am-c-modal {
 	display: block;
@@ -44,56 +40,158 @@ am-modal {
 	height: 100vh;
 	max-height: 100vh;
 	inset: 0;
-	padding: var(--am-modal-overlay-padding);
-	background-color: var(--am-modal-overlay-bg);
+	padding: 4.75rem var(--am-body-padding-x) 2rem var(--am-body-padding-x);
+	background-color: var(--am-clr-modal-backdrop);
 	transform: translateY(-100%);
 	opacity: 0;
 	transition: transform 0s linear 0.2s, opacity 0.2s;
 	overflow: auto;
 
+	&__dialog {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		top: -2%;
+		width: 100%;
+		max-width: 34rem;
+		margin: 0 auto;
+		padding: 0;
+		background-color: var(--am-clr-background);
+		border-radius: 0.7rem;
+		border: @am-border;
+		box-shadow: 0 0.4rem 2.1rem var(--am-shadow),
+			0 5.2rem 5rem -4.7rem var(--am-shadow);
+		transition: top 0.2s;
+		overflow: hidden;
+	}
+
 	&--open {
 		transform: translateY(0);
 		opacity: 1;
 		transition: transform 0s linear, opacity 0.2s;
-	}
 
-	&__dialog {
-		position: relative;
-		display: block;
-		width: 100%;
-		max-width: var(--am-modal-dialog-width);
-		margin: 0 auto;
-		padding: var(--am-modal-dialog-padding);
-		background-color: var(--am-bg);
-		border-radius: var(--am-modal-dialog-radius);
-		box-shadow: var(--am-shadow);
-		top: -2%;
-		transition: top 0.2s;
-
-		&--fullscreen {
-			position: fixed;
-			padding: 0;
-			inset: 0;
-			width: 100%;
-			max-width: 100%;
-			margin: 0;
-			border-radius: 0;
-			box-shadow: none;
+		& > &__dialog {
+			top: 0;
 		}
 	}
 
-	&--open > &__dialog {
-		top: 0;
+	&__header,
+	&__body,
+	&__spinner,
+	&__footer {
+		padding: @am-modal-padding;
 	}
 
 	&__header {
 		display: flex;
 		justify-content: space-between;
-		margin: ~'calc(var(--am-modal-dialog-padding) * -1)';
-		margin-bottom: var(--am-space-small);
-		padding: var(--am-modal-dialog-padding);
-		padding-bottom: var(--am-space-small);
-		border-bottom: var(--am-border);
+		align-items: center;
+		border-bottom: @am-border;
+	}
+
+	&__body {
+		color: var(--am-clr-text-paragraph);
+	}
+
+	&__footer {
+		display: flex;
+		justify-content: end;
+		align-items: center;
+		gap: @am-flex-gap;
+	}
+
+	&__spinner {
+		display: flex;
+		align-items: center;
+		gap: @am-modal-padding;
+
+		&-icon {
+			@size: 1.8rem;
+			position: relative;
+			width: @size;
+			height: @size;
+
+			&:before {
+				content: '';
+				box-sizing: border-box;
+				display: flex;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: @size;
+				height: @size;
+				border-radius: @size;
+				border: 0.2rem solid var(--am-clr-accent-text);
+				border-left-color: transparent;
+				animation: 1.5s linear 0s infinite modal-spinner;
+			}
+		}
+
+		&-text {
+			flex-grow: 1;
+		}
+	}
+
+	&__jumpbar {
+		&-input {
+			box-sizing: border-box;
+			width: 100%;
+			padding: 0 0.92rem;
+			height: 3.4rem;
+			font-size: @am-navbar-font-size;
+			font-weight: 490;
+			border: none;
+			color: var(--am-clr-text);
+			background-color: @am-form-background;
+			transition: all 0.2s;
+			outline: @am-outline;
+
+			&::placeholder {
+				color: var(--am-clr-text-muted);
+			}
+		}
+
+		&-items {
+			display: flex;
+			flex-direction: column;
+			border-top: @am-border;
+			max-height: ~'calc(100vh - 11.5rem)';
+			overflow: auto;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		&-item {
+			display: flex;
+			align-items: center;
+			gap: @am-flex-gap;
+			padding: 0 0.92rem;
+			font-size: 1rem;
+			line-height: 2.6;
+			text-decoration: none;
+			cursor: pointer;
+			color: var(--am-clr-text);
+			background-color: var(--am-clr-background);
+			transition: background 0.2s;
+
+			&:hover,
+			&--active {
+				color: @am-nav-item-hover-clr;
+				background-color: @am-nav-item-hover-bg;
+			}
+
+			&--divider:not(:last-child) {
+				border-bottom: @am-border;
+			}
+
+			& > * {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
 	}
 
 	&__close {
@@ -102,20 +200,25 @@ am-modal {
 
 		&:before {
 			content: '✗';
+			font-size: 1.25rem;
+			line-height: 1.2rem;
+			font-weight: 250;
 			margin: 0 -0.5rem;
 			padding: 0 0.5rem;
 		}
 
 		&:hover {
-			color: var(--am-muted-clr);
+			color: var(--am-clr-text-hover);
 		}
 	}
+}
 
-	&__footer {
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-		gap: var(--am-flex-gap);
-		margin-top: var(--am-space-medium);
+@keyframes modal-spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
 	}
 }

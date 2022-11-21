@@ -33,7 +33,24 @@
  */
 
 .am-f-select {
+	&:extend(.am-f-input);
+
 	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: @am-flex-gap;
+	padding: 0 @am-form-padding-x;
+
+	&:after {
+		content: '⌃';
+		margin-top: -0.38em;
+		margin-right: -0.08em;
+		font-size: 1.2em;
+		font-weight: 540;
+		color: var(--am-clr-text-muted);
+		transform: rotateZ(180deg);
+	}
 
 	& select {
 		position: absolute;

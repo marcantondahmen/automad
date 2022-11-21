@@ -33,20 +33,33 @@
  */
 
 .am-e-badge {
+	box-sizing: border-box;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	gap: 0.4rem;
-	min-width: 1.75rem;
-	font-size: 0.625rem;
-	line-height: 1.3rem;
-	height: 1.3rem;
-	padding: 0 0.54rem;
-	font-weight: 560;
-	color: var(--am-badge-clr);
-	background-color: var(--am-badge-bg);
-	border-radius: 2rem;
-	transition: background-color 0.2s, color 0.2s;
+	font-size: 0.74rem;
+	line-height: 1.5em;
+	min-width: 2em;
+	padding: 0 0.65em;
+	border: 1px solid;
+	border-radius: 100px;
+	color: var(--am-clr-text-badge);
+	background-color: var(--am-clr-background-badge);
+	font-weight: 740;
+
+	&:empty {
+		position: absolute;
+		display: block;
+		min-width: 0;
+		padding: 0;
+		width: 0.5rem;
+		height: 0.5rem;
+		top: 0.2rem;
+		right: 0.4rem;
+		border-radius: 100%;
+		background-color: var(--am-clr-accent-text);
+	}
 
 	& .bi {
 		display: flex;

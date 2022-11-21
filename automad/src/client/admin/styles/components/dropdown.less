@@ -34,74 +34,70 @@
 
 .am-c-dropdown {
 	position: relative;
+	cursor: pointer;
+	--space: 0.3rem;
 
-	&--form input:focus {
-		border: var(--am-border);
-		box-shadow: none;
-	}
-
-	&--form&--open input {
-		position: relative;
-		z-index: 110;
-		border-radius: var(--am-radius) var(--am-radius) 0 0;
+	// Add this invisible block when hovering to keep hover status
+	// while moving cursor to dropdown items that have gap to the actual button.
+	&:hover:before {
+		content: '';
+		position: absolute;
+		display: block;
+		top: 100%;
+		height: var(--space);
+		width: 100%;
 	}
 
 	&__items {
 		position: absolute;
 		z-index: 100;
-		display: none;
-		top: calc(100% + 0.2rem);
+		display: flex;
 		flex-direction: column;
-		max-height: calc(100vh - 5rem);
-		font-size: 1rem;
-		border-radius: var(--am-radius);
-		border: var(--am-border);
-		box-shadow: var(--am-shadow);
-		overflow: auto;
+		top: ~'calc(100% + var(--space))';
+		opacity: 0;
+		pointer-events: none;
+		transform: translateY(-0.5rem);
+		transition: all 0.2s 0.4s;
+		background-color: var(--am-clr-background);
+		border-radius: 0.3rem;
+		box-shadow: 0 0.4rem 1.2rem var(--am-shadow),
+			0 3.7rem 3.5rem -3.2rem var(--am-shadow);
+		border: @am-border;
+		overflow: hidden;
 
-		&:empty {
-			display: none;
-		}
-
-		&--full-width {
+		&--stretch {
 			width: 100%;
 		}
+	}
+
+	&--hover:hover &__items,
+	&--open &__items {
+		opacity: 1;
+		pointer-events: all;
+		transform: translateY(0);
 	}
 
 	&--right &__items {
 		right: 0;
 	}
 
-	&--form > &__items {
-		top: 0;
-		padding-top: var(--am-form-height) !important;
-		border-top: none;
-	}
-
-	&--open &__items {
-		display: flex;
-	}
-
 	&__item {
 		display: flex;
 		align-items: center;
-		gap: var(--am-flex-gap);
-		padding: 0.2rem 0.6rem;
-		line-height: 1.6;
+		gap: @am-flex-gap;
+		padding: 0 0.65rem;
+		font-size: 1rem;
+		line-height: 2.2;
 		text-decoration: none;
-		color: var(--am-dropdown-clr);
-		background-color: var(--am-dropdown-bg);
 		cursor: pointer;
-		transition: background 0.2s, color 0.2s;
+		color: var(--am-clr-text);
+		background-color: var(--am-clr-background);
+		transition: background 0.2s;
 
 		&:hover,
 		&--active {
-			color: var(--am-dropdown-active-clr);
-			background-color: var(--am-dropdown-active-bg);
-		}
-
-		&--divider:not(:last-child) {
-			border-bottom: 1px solid var(--am-border-clr);
+			color: @am-nav-item-hover-clr;
+			background-color: @am-nav-item-hover-bg;
 		}
 
 		& > * {

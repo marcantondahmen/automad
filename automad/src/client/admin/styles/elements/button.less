@@ -26,125 +26,85 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.button(@param: --default) {
-	@type: replace(@param, '--default', '');
-	@var: replace(@type, '--', '-');
-
-	&@{type} {
-		--am-btn-clr: ~'var(--am@{var}-clr)';
-		--am-btn-bg: ~'var(--am@{var}-bg)';
-		--am-btn-border-clr: ~'var(--am@{var}-clr)';
-
-		&:hover,
-		&:active {
-			--am-btn-clr: ~'var(--am@{var}-clr-active)';
-			--am-btn-bg: ~'var(--am@{var}-bg-active)';
-			--am-btn-border-clr: ~'var(--am@{var}-clr-active)';
-		}
-	}
-}
-
-.button-inverted(@param: --default) {
-	@type: replace(@param, '--default', '');
-	@var: replace(@type, '--', '-');
-	@inverted: replace(~'-@{type}-inverted', '---', '--');
-
-	&@{inverted} {
-		--am-btn-clr: ~'var(--am@{var}-inverted-clr)';
-		--am-btn-bg: ~'var(--am@{var}-inverted-bg)';
-		--am-btn-border-clr: ~'var(--am@{var}-inverted-bg)';
-
-		&:hover,
-		&:active {
-			--am-btn-clr: ~'var(--am@{var}-inverted-clr-active)';
-			--am-btn-bg: ~'var(--am@{var}-inverted-bg-active)';
-			--am-btn-border-clr: ~'var(--am@{var}-inverted-bg-active)';
-		}
-	}
-}
-
 .am-e-button {
+	box-sizing: border-box;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	gap: var(--am-flex-gap);
-	height: var(--am-btn-height);
-	line-height: 1.4;
-	padding: 0 var(--am-btn-padding);
+	gap: @am-flex-gap;
+	height: @am-form-height;
+	padding: 0 1.15rem;
+	font-size: 1rem;
+	font-weight: 590;
+	border-radius: 0.3rem;
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
-	font-weight: var(--am-btn-font-weight);
-	border-radius: var(--am-btn-radius);
-	color: var(--am-btn-clr);
-	background-color: var(--am-btn-bg);
-	border: var(--am-border-width) solid var(--am-btn-border-clr);
-	transition: color 0.2s, background 0.2s, border-color 0.2s;
-
-	--am-btn-clr: var(--am-clr);
-	--am-btn-bg: transparent;
-	--am-btn-border-clr: var(--am-border-clr);
-	--am-btn-border-clr: var(--am-border-strong-clr);
-
-	&,
-	& * {
-		white-space: nowrap;
-	}
-
-	&:active {
-		box-shadow: var(--am-shadow-inset);
-	}
+	color: var(--am-clr-text);
+	background-color: var(--am-clr-background);
+	border: 1px solid var(--am-clr-border-button);
+	outline: @am-outline;
+	transition: color 0.2s, background 0.2s, border-color 0.2s, outline 0.2s;
 
 	&:hover,
 	&:active {
-		--am-btn-clr: var(--am-clr-active);
-		--am-btn-bg: var(--am-bg-active);
+		background-color: var(--am-clr-background-faded);
 	}
 
-	&[disabled],
-	&[disabled]:hover,
-	&[disabled]:active {
-		--am-btn-clr: var(--am-muted-clr);
-		--am-btn-bg: var(--am-bg);
-		--am-btn-border-clr: var(--am-border-clr);
-		cursor: not-allowed;
-		box-shadow: none;
-	}
-
-	&--link {
-		--am-btn-clr: var(--am-primary-clr);
-		--am-btn-bg: transparent;
-		--am-btn-border-clr: transparent;
+	&--primary {
+		color: var(--am-clr-primary-text);
+		background-color: var(--am-clr-primary-background);
+		border: 1px solid var(--am-clr-primary-background);
 
 		&:hover,
 		&:active {
-			--am-btn-clr: var(--am-primary-clr-active);
-			--am-btn-bg: var(--am-primary-bg-active);
+			background-color: var(--am-clr-primary-background-faded);
+			border: 1px solid var(--am-clr-primary-background-faded);
+		}
+	}
+
+	&--accent {
+		color: var(--am-clr-accent-text);
+		background-color: transparent;
+		border: 1px solid;
+
+		&:hover,
+		&:active {
+			color: var(--am-clr-accent-text-hover);
+		}
+	}
+
+	&--link {
+		color: var(--am-clr-accent-text);
+		background-color: transparent;
+		border: none;
+
+		&:hover,
+		&:active {
+			color: var(--am-clr-accent-text-hover);
 		}
 	}
 
 	&--icon {
-		--size: calc(var(--am-btn-height) * 0.8);
-		justify-content: center;
+		width: @am-form-height;
 		padding: 0;
-		height: var(--size);
-		width: var(--size);
-		border-radius: 100px;
-
-		& .bi {
-			font-size: 120%;
-		}
 	}
 
-	.button-inverted();
-	.button(--primary);
-	.button-inverted(--primary);
-	.button(--danger);
-	.button-inverted(--danger);
+	&:focus {
+		outline: @am-outline-active;
+		border: 1px solid var(--am-clr-border-active);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		color: var(--am-clr-text-muted);
+		border: 1px solid var(--am-clr-border-button);
+		background-color: transparent;
+	}
 }

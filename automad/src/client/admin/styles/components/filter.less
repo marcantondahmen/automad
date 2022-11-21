@@ -32,15 +32,27 @@
  * Licensed under the MIT license.
  */
 
-.am-c-icon-text {
-	display: inline-flex;
-	align-items: center;
-	gap: @am-flex-gap;
-	max-width: 100%;
+.am-c-filter {
+	display: grid;
+	flex-grow: 1;
 
-	& > span {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	&__input,
+	&__key-combo {
+		grid-column: 1 / -1;
+		grid-row: 1 / -1;
+	}
+
+	&__key-combo {
+		display: flex;
+		justify-content: end;
+		align-items: center;
+		padding: 0 0.6rem;
+		pointer-events: none;
+		opacity: 1;
+		transition: opacity 0.2s;
+
+		:focus + & {
+			opacity: 0;
+		}
 	}
 }

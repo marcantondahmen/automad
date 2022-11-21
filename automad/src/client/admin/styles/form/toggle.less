@@ -33,87 +33,52 @@
  */
 
 .am-f-toggle {
-	--size: 1.25rem;
-	--border: 0.11em;
-	--width-factor: 1.6;
-	--clr-on: var(--am-clr);
-
-	&--large {
-		--size: 1.85rem;
-		--border: 0.105em;
-	}
-
-	&--input,
-	&--select {
-		position: relative;
-		display: block;
-
-		& label {
-			width: 100%;
-			padding: var(--am-form-padding);
-			height: var(--am-form-height);
-			border: var(--am-border);
-			border-radius: var(--am-radius);
-		}
-	}
-
-	&--select {
-		color: var(--am-muted-clr);
-		--clr-on: var(--am-muted-clr);
-	}
-
-	&--select&--on,
-	&--select&--off {
-		color: var(--am-clr);
-		--clr-on: var(--am-clr);
-	}
+	display: flex;
 
 	& input {
 		display: none;
 	}
 
-	& label {
-		display: flex;
-		align-items: center;
-		gap: ~'calc(var(--size) * 0.55)';
-		cursor: pointer;
+	&--large {
+		& label {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			cursor: pointer;
+		}
 
-		& span {
-			position: relative;
-			display: inline-block;
-			width: ~'calc(var(--size) * var(--width-factor))';
-			height: var(--size);
-			font-size: var(--size);
-			border: var(--border) solid;
-			border-radius: 1rem;
-			transition: background-color 0.2s, border 0.2s;
-
-			&:before {
-				content: '';
-				display: block;
-				position: absolute;
-				top: ~'calc(-1 * var(--border))';
-				left: ~'calc(-1 * var(--border))';
-				transform: translateX(0);
-				width: var(--size);
-				height: var(--size);
-				border-radius: var(--size);
-				border: var(--border) solid;
-				background-color: var(--am-bg);
-				transition: transform 0.2s;
-			}
+		& .bi {
+			font-size: 2.5rem;
 		}
 	}
 
-	&--on label span,
-	&--default-on label span,
-	& input:checked + label span {
-		background-color: var(--clr-on);
+	&--button {
+		& label {
+			&:extend(.am-e-button all);
 
-		&:before {
-			transform: translateX(
-				~'calc(var(--size) * (var(--width-factor) - 1))'
-			);
+			justify-content: flex-start;
+			gap: 0.8rem;
+			width: 100%;
+			padding: 0 @am-form-padding-x;
+			font-weight: @am-base-font-weight;
+			background-color: var(--am-clr-background-faded);
 		}
+
+		& :checked + label {
+			color: var(--am-clr-accent-text);
+			border-color: var(--am-clr-border-active);
+		}
+
+		& .bi {
+			font-size: 1.25rem;
+		}
+	}
+
+	& .bi:before {
+		content: '\f5d5';
+	}
+
+	& :checked + * .bi:before {
+		content: '\f5d6';
 	}
 }

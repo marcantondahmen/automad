@@ -26,81 +26,39 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-:root {
-	@am-light-hue: 214;
-	@am-light-primary-hue: 209;
-	@am-light-danger-hue: 8;
-	@am-light-sat: 8%;
+.am-ui {
+	--am-clr-text: hsl(210, 7%, 18%);
+	--am-clr-text-paragraph: var(--am-clr-text);
+	--am-clr-text-sidebar: var(--am-clr-text);
+	--am-clr-text-badge: var(--am-clr-accent-text);
+	--am-clr-text-muted: hsl(210, 7%, 74%);
+	--am-clr-text-hover: hsl(210, 7%, 52%);
 
-	--am-clr: hsl(@am-light-hue, @am-light-sat, 12%);
-	--am-clr-active: hsl(@am-light-hue, @am-light-sat, 22%);
+	--am-clr-primary-text: var(--am-clr-background);
+	--am-clr-primary-background: var(--am-clr-text);
+	--am-clr-primary-background-faded: hsl(210, 7%, 23%);
 
-	--am-bg: #ffffff;
-	--am-bg-active: hsl(@am-light-hue, @am-light-sat, 95%);
-	--am-bg-img: hsl(@am-light-hue, @am-light-sat, 97%);
+	--am-clr-accent-text: hsl(210, 91%, 48%);
+	--am-clr-accent-text-hover: hsl(210, 91%, 42%);
+	--am-clr-accent-background: hsl(210, 91%, 87%);
 
-	--am-inverted-clr: var(--am-bg);
-	--am-inverted-clr-active: var(--am-bg-active);
+	--am-clr-border: hsl(210, 7%, 87%);
+	--am-clr-border-button: var(--am-clr-border);
+	--am-clr-border-active: var(--am-clr-accent-text);
 
-	--am-inverted-bg: var(--am-clr);
-	--am-inverted-bg-active: var(--am-clr-active);
+	--am-clr-outline-active: var(--am-clr-accent-background);
 
-	--am-border-clr: hsl(@am-light-hue, @am-light-sat, 89%);
-	--am-border-strong-clr: hsl(@am-light-hue, @am-light-sat, 78%);
+	--am-clr-background: #ffffff;
+	--am-clr-background-faded: hsl(210, 7%, 97%);
+	--am-clr-background-badge: var(--am-clr-accent-background);
 
-	--am-muted-clr: hsl(@am-light-hue, @am-light-sat, 74%);
+	--am-clr-modal-backdrop: rgba(0, 0, 0, 0.05);
 
-	--am-form-clr: var(--am-clr);
-	--am-form-bg: hsl(@am-light-hue, @am-light-sat, 97%);
-
-	--am-highlight-clr: hsl(48, 82%, 22%);
-	--am-highlight-bg: hsl(48, 86%, 86%);
-
-	// Primary
-	--am-primary-clr: hsl(@am-light-primary-hue, 86%, 44%);
-	--am-primary-clr-active: hsl(@am-light-primary-hue, 86%, 40%);
-
-	--am-primary-bg: hsl(@am-light-primary-hue, 50%, 96%);
-	--am-primary-bg-active: hsl(@am-light-primary-hue, 50%, 92%);
-
-	--am-primary-inverted-clr: var(--am-bg);
-	--am-primary-inverted-clr-active: var(--am-bg);
-
-	--am-primary-inverted-bg: var(--am-primary-clr);
-	--am-primary-inverted-bg-active: var(--am-primary-clr-active);
-
-	// Danger
-	--am-danger-clr: hsl(@am-light-danger-hue, 84%, 48%);
-	--am-danger-clr-active: hsl(@am-light-danger-hue, 84%, 44%);
-
-	--am-danger-bg: hsl(@am-light-danger-hue, 50%, 96%);
-	--am-danger-bg-active: hsl(@am-light-danger-hue, 50%, 92%);
-
-	--am-danger-inverted-clr: var(--am-bg);
-	--am-danger-inverted-clr-active: var(--am-bg);
-
-	--am-danger-inverted-bg: var(--am-danger-clr);
-	--am-danger-inverted-bg-active: var(--am-danger-clr-active);
-
-	// Badges
-	--am-badge-clr: var(--am-inverted-clr);
-	--am-badge-bg: var(--am-inverted-bg);
-
-	// Shadow
-	--am-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.12),
-		0 2.2rem 1.9rem -1.9rem rgba(0, 0, 0, 0.16);
-	--am-shadow-inset: inset 0 0.15rem 0.5rem rgba(0, 0, 0, 0.18);
-
-	--am-shadow-small: 0 1px 4px rgba(0, 0, 0, 0.05),
-		0 12px 12px -12px rgba(0, 0, 0, 0.06);
-
-	// Focus
-	--am-focus-border-clr: hsl(@am-light-primary-hue, 72%, 89%);
-	--am-focus-shadow: 0 0 0 4px hsla(@am-light-primary-hue, 80%, 85%, 50%);
+	--am-shadow: rgba(0, 0, 0, 0.14);
 }

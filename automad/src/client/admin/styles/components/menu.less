@@ -33,27 +33,25 @@
  */
 
 .am-c-menu {
-	position: relative;
 	display: flex;
-	align-items: center;
-	gap: 1.2rem;
-	height: 3.6rem;
+	align-items: stretch;
+	gap: 1.285rem;
 
 	&__item {
 		display: flex;
-		align-self: stretch;
 		align-items: center;
-		gap: var(--am-flex-gap);
-		color: var(--am-clr);
+		gap: 0.6rem;
+		line-height: @am-menu-height;
+		color: @am-menu-item-clr;
+		transition: color 0.2s;
 		cursor: pointer;
 
 		&:hover {
-			color: var(--am-clr-active);
+			color: @am-menu-item-hover-clr;
 		}
 
-		&.am-c-switcher-link--active {
-			color: var(--am-primary-clr);
-			box-shadow: inset 0 -3px 0 0 var(--am-primary-clr);
+		&--active {
+			border-bottom: 2px solid;
 		}
 	}
 }

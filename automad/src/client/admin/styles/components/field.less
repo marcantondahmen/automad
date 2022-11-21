@@ -26,20 +26,23 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
 .am-c-field {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	gap: @am-flex-gap;
 
 	& + & {
-		margin-top: var(--am-space-medium);
+		margin-top: 1.1rem;
 	}
 
 	&__label {
-		font-size: var(--am-small-font-size);
+		font-size: @am-small-font-size;
+		color: var(--am-clr-text-paragraph);
 	}
 }

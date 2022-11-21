@@ -32,15 +32,42 @@
  * Licensed under the MIT license.
  */
 
-.am-c-icon-text {
-	display: inline-flex;
+.am-c-navbar {
+	display: flex;
+	justify-content: space-between;
 	align-items: center;
-	gap: @am-flex-gap;
-	max-width: 100%;
+	height: 100%;
+	width: 100%;
+	padding: 1rem ~'calc(var(--am-body-padding-x) - @{am-navbar-item-padding-x})';
 
-	& > span {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	&__group {
+		display: flex;
+	}
+
+	&__item {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: @am-flex-gap;
+		padding: 0 @am-navbar-item-padding-x;
+		height: 100%;
+		font-size: @am-navbar-font-size;
+		font-weight: 520;
+		line-height: 1.8;
+		color: var(--am-clr-text);
+		transition: color 0.2s;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--am-clr-text-hover);
+		}
+
+		& .bi {
+			font-size: 1.425rem;
+		}
+
+		am-logo& {
+			width: 5rem;
+		}
 	}
 }
