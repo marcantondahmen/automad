@@ -130,7 +130,7 @@ module.exports = (env, argv) => {
 				host: 'localhost',
 				port: 3000,
 				proxy: 'http://localhost:8080/automad-development',
-				files: ['**/*.php', '**/mockup/index.html'],
+				files: ['**/*.php', '**/src/**/*.html'],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
 			})
 		);
