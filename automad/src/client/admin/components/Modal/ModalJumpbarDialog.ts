@@ -32,10 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { AutocompleteComponent } from './Autocomplete';
-import { JumpbarItemData, KeyValueMap, PageMetaData } from '../types';
-import { App, keyCombo, create, classes, html, Routes } from '../core';
-import { Sections } from './Switcher/Switcher';
+import { AutocompleteComponent } from '../Autocomplete';
+import { JumpbarItemData, KeyValueMap, PageMetaData } from '../../types';
+import { App, create, CSS, html, Routes } from '../../core';
+import { Sections } from '../Switcher/Switcher';
 
 /**
  * Return the jumpbar autocompletion data for the search.
@@ -65,7 +65,7 @@ const inPageData = (): JumpbarItemData[] => {
 			value: App.text('inPageEdit'),
 			title: App.text('inPageEdit'),
 			icon: 'window-desktop',
-			cls: [classes.dropdownItemDivider],
+			cls: [CSS.modalJumpbarDivider],
 		},
 	];
 };
@@ -86,6 +86,7 @@ const settingsData = (): JumpbarItemData[] => {
 			target: `${Routes.system}?section=${section}`,
 			value: `${App.text('systemTitle')} ${App.text(title)}`,
 			title: App.text(title),
+			subtitle: App.text('systemTitle'),
 			icon,
 			cls,
 		};
@@ -99,7 +100,7 @@ const settingsData = (): JumpbarItemData[] => {
 		item(Sections.language, 'systemLanguage', 'translate'),
 		item(Sections.debug, 'systemDebug', 'bug'),
 		item(Sections.config, 'systemConfigFile', 'file-earmark-code', [
-			classes.dropdownItemDivider,
+			CSS.modalJumpbarDivider,
 		]),
 	];
 
@@ -118,7 +119,7 @@ const sharedData = (): JumpbarItemData[] => {
 			value: App.text('sharedTitle'),
 			title: App.text('sharedTitle'),
 			icon: 'file-earmark-medical',
-			cls: [classes.dropdownItemDivider],
+			cls: [CSS.modalJumpbarDivider],
 		},
 	];
 };
@@ -135,7 +136,7 @@ const packagesData = (): JumpbarItemData[] => {
 			value: App.text('packagesTitle'),
 			title: App.text('packagesTitle'),
 			icon: 'box-seam',
-			cls: [classes.dropdownItemDivider],
+			cls: [CSS.modalJumpbarDivider],
 		},
 	];
 };
@@ -185,14 +186,11 @@ const jumpbarData = (): JumpbarItemData[] => {
 };
 
 /**
- * The Jumpbar field element.
- *
- * @example
- * <am-jumpbar></am-jumpbar>
+ * The jumpbar dialog component.
  *
  * @extends AutocompleteComponent
  */
-class JumpbarComponent extends AutocompleteComponent {
+class ModalJumpbarDialogComponent extends AutocompleteComponent {
 	/**
 	 * The autocomplete data.
 	 */
@@ -211,56 +209,29 @@ class JumpbarComponent extends AutocompleteComponent {
 	protected minInputLength = 0;
 
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The dropdown items CSS class.
 	 */
-	connectedCallback(): void {
-		super.connectedCallback();
-
-		this.listeners.push(
-			keyCombo('j', () => {
-				if (App.navigationIsLocked) {
-					return;
-				}
-
-				if (this.input === document.activeElement) {
-					this.input.blur();
-					this.close();
-				} else {
-					this.input.focus();
-				}
-			})
-		);
-	}
+	protected elementClasses = [CSS.modalDialog];
 
 	/**
-	 * Create the main input element.
-	 *
-	 * @returns the input element
+	 * The dropdown input CSS class.
 	 */
-	protected createInput(): HTMLInputElement {
-		const placeholder: string = App.text(
-			this.elementAttributes.placeholder
-		);
+	protected inputClasses = [CSS.modalJumpbarInput];
 
-		const wrapper = create('div', [classes.inputKeyCombo], {}, this);
+	/**
+	 * The dropdown items CSS class.
+	 */
+	protected itemsClasses = [CSS.modalJumpbarItems];
 
-		const input = create(
-			'input',
-			[classes.input],
-			{ type: 'text', placeholder },
-			wrapper
-		);
+	/**
+	 * The link class.
+	 */
+	protected linkClass = CSS.modalJumpbarLink;
 
-		let meta = 'Ctrl';
-
-		if (navigator.userAgent.toLowerCase().indexOf('mac') != -1) {
-			meta = '⌘';
-		}
-
-		create('span', [], {}, wrapper).textContent = `${meta} + J`;
-
-		return input;
-	}
+	/**
+	 * The active link class.
+	 */
+	protected linkActiveClass = CSS.modalJumpbarLinkActive;
 
 	/**
 	 * Create a dropdown item.
@@ -282,7 +253,7 @@ class JumpbarComponent extends AutocompleteComponent {
 		const cls = item.cls || [];
 		const element = create(
 			'am-link',
-			cls.concat(classes.dropdownItem),
+			cls.concat(CSS.modalJumpbarLink),
 			attributes
 		);
 
@@ -313,7 +284,7 @@ class JumpbarComponent extends AutocompleteComponent {
 		return html`
 			<i class="bi bi-${icon}"></i>
 			<span>$${title}</span>
-			<span class="${classes.textMuted}">$${subtitle || ''}</span>
+			<span class="${CSS.textMuted}">$${subtitle || ''}</span>
 		`;
 	}
 
@@ -337,8 +308,23 @@ class JumpbarComponent extends AutocompleteComponent {
 			this.input.value
 		);
 
+		this.maxItems = Math.floor((window.innerHeight - 150) / 40);
+
 		super.update();
 	}
+
+	/**
+	 * Close the dropdown.
+	 */
+	close(): void {
+		this.selectedIndex = this.initialIndex;
+		this.toggleActiveItemStyle();
+	}
+
+	/**
+	 * Open the dropdown.
+	 */
+	open(): void {}
 
 	/**
 	 * Select an item and use the item value as the input value.
@@ -346,6 +332,8 @@ class JumpbarComponent extends AutocompleteComponent {
 	 * @param event
 	 */
 	select(event: Event) {
+		event.preventDefault();
+
 		if (this.selectedIndex !== null) {
 			this.itemsFiltered[this.selectedIndex].element.click();
 		}
@@ -354,4 +342,4 @@ class JumpbarComponent extends AutocompleteComponent {
 	}
 }
 
-customElements.define('am-jumpbar', JumpbarComponent);
+customElements.define('am-modal-jumpbar-dialog', ModalJumpbarDialogComponent);

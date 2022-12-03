@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -34,15 +34,14 @@
 
 import {
 	App,
-	classes,
 	create,
 	createIdFromField,
 	createLabelFromField,
+	CSS,
 	html,
 	htmlSpecialChars,
 	query,
 	queryAll,
-	titleCase,
 } from '../../core';
 import { FieldInitData, FieldRenderData, InputElement } from '../../types';
 import { BaseComponent } from '../Base';
@@ -112,7 +111,7 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.field);
+		this.classList.add(CSS.field);
 	}
 
 	/**
@@ -132,7 +131,7 @@ export abstract class BaseFieldComponent extends BaseComponent {
 		const wrapper = create('div', [], {}, this);
 
 		wrapper.innerHTML = html`
-			<label class="${classes.fieldLabel}" for="${id}" title="${tooltip}">
+			<label class="${CSS.fieldLabel}" for="${id}" title="${tooltip}">
 				${label}
 			</label>
 		`;

@@ -229,6 +229,15 @@ export class App {
 	}
 
 	/**
+	 * The Automad version.
+	 *
+	 * @static
+	 */
+	static get version() {
+		return this._state.version;
+	}
+
+	/**
 	 * The bootstrap method that requested the basic state data.
 	 *
 	 * @static
@@ -310,6 +319,16 @@ export class App {
 		}
 
 		this._state.systemUpdate = response.data;
+		fire(eventNames.systemUpdateCheck, window);
+	}
+
+	/**
+	 * Check for outdated packages.
+	 */
+	static async checkForOutdatedPackages(): Promise<void> {
+		const { data } = await requestAPI('PackageManager/getOutdated');
+
+		this._state.outdatedPackages = data?.outdated?.length || 0;
 		fire(eventNames.systemUpdateCheck, window);
 	}
 }

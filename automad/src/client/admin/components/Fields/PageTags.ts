@@ -26,14 +26,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
 import Tagify from '@yaireo/tagify';
-import { App, classes, create } from '../../core';
+import { App, create, CSS } from '../../core';
 import { PageDataFormComponent } from '../Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';
 
@@ -52,7 +52,7 @@ class PageTagsComponent extends BaseFieldComponent {
 		const { name, id, value } = this._data;
 		const textarea = create(
 			'textarea',
-			[classes.input],
+			[CSS.input],
 			{
 				name,
 				id,

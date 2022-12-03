@@ -33,9 +33,10 @@
  */
 
 .am-c-modal {
+	@jumpbar-padding-y: 0.4rem;
 	display: block;
 	position: fixed;
-	z-index: 200;
+	z-index: 500;
 	width: 100vw;
 	height: 100vh;
 	max-height: 100vh;
@@ -46,6 +47,7 @@
 	opacity: 0;
 	transition: transform 0s linear 0.2s, opacity 0.2s;
 	overflow: auto;
+	cursor: default;
 
 	&__dialog {
 		position: relative;
@@ -63,6 +65,17 @@
 			0 5.2rem 5rem -4.7rem var(--am-shadow);
 		transition: top 0.2s;
 		overflow: hidden;
+
+		&--fullscreen {
+			position: fixed;
+			padding: 0;
+			inset: 0;
+			width: 100%;
+			max-width: 100%;
+			margin: 0;
+			border-radius: 0;
+			box-shadow: none;
+		}
 	}
 
 	&--open {
@@ -154,16 +167,15 @@
 		&-items {
 			display: flex;
 			flex-direction: column;
+			padding: @jumpbar-padding-y 0;
 			border-top: @am-border;
-			max-height: ~'calc(100vh - 11.5rem)';
-			overflow: auto;
 
 			&:empty {
 				display: none;
 			}
 		}
 
-		&-item {
+		&-link {
 			display: flex;
 			align-items: center;
 			gap: @am-flex-gap;
@@ -182,14 +194,25 @@
 				background-color: @am-nav-item-hover-bg;
 			}
 
-			&--divider:not(:last-child) {
-				border-bottom: @am-border;
-			}
-
 			& > * {
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
+			}
+		}
+
+		&-divider:not(:last-child) {
+			position: relative;
+			margin-bottom: 2 * @jumpbar-padding-y;
+
+			&:after {
+				content: '';
+				position: absolute;
+				display: block;
+				width: 100%;
+				left: 0;
+				bottom: -@jumpbar-padding-y;
+				border-bottom: @am-border;
 			}
 		}
 	}

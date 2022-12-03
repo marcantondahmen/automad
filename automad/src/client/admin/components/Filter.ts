@@ -34,10 +34,11 @@
 
 import {
 	App,
-	classes,
 	create,
+	CSS,
 	debounce,
 	eventNames,
+	keyCombo,
 	listen,
 	queryAll,
 } from '../core';
@@ -62,8 +63,8 @@ class FilterComponent extends BaseComponent {
 	/**
 	 * The target selector.
 	 */
-	protected get targetSelector() {
-		return `[api] .${classes.field}:not(am-title), .${classes.card}`;
+	protected get targetSelector(): string {
+		return `[api] .${CSS.field}:not(am-title), .${CSS.card}`;
 	}
 
 	/**
@@ -71,6 +72,8 @@ class FilterComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		const input = this.render();
+
+		this.classList.add(CSS.filter);
 
 		listen(
 			input,
@@ -86,6 +89,18 @@ class FilterComponent extends BaseComponent {
 				this.filter(input);
 			})
 		);
+
+		this.listeners.push(
+			keyCombo('k', () => {
+				input.focus();
+			})
+		);
+
+		listen(input, 'keydown', (event: KeyboardEvent) => {
+			if (event.keyCode == 27) {
+				input.blur();
+			}
+		});
 	}
 
 	/**
@@ -107,7 +122,7 @@ class FilterComponent extends BaseComponent {
 				}
 			}
 
-			item.classList.toggle(classes.displayNone, hide);
+			item.classList.toggle(CSS.displayNone, hide);
 		});
 	}
 
@@ -118,7 +133,14 @@ class FilterComponent extends BaseComponent {
 	 */
 	private render(): InputElement {
 		const placeholder = App.text(this.elementAttributes.placeholder);
-		const input = create('input', [classes.input], { placeholder }, this);
+		const input = create(
+			'input',
+			[CSS.filterInput, CSS.input],
+			{ placeholder },
+			this
+		);
+		const keyComboBadge = create('span', [CSS.filterKeyCombo], {}, this);
+		create('am-key-combo-badge', [], { key: 'K' }, keyComboBadge);
 
 		return input;
 	}

@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -34,8 +34,8 @@
 
 import {
 	App,
-	classes,
 	confirm,
+	CSS,
 	debounce,
 	fire,
 	FormDataProviders,
@@ -214,7 +214,7 @@ export class FormComponent extends BaseComponent {
 						this.submit();
 					}
 				},
-				`.${classes.input}`
+				`.${CSS.input}`
 			);
 		}
 

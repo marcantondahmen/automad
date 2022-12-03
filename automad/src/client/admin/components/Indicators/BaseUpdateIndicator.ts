@@ -26,44 +26,33 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, classes, html, Routes } from '../../core';
-import { Sections } from '../Switcher/Switcher';
-import { BaseStateComponent } from './BaseState';
+import { eventNames, listen } from '../../core';
+import { BaseComponent } from '../Base';
 
 /**
- * A debug state component.
+ * A base update indicator component.
  *
  * @extends BaseComponent
  */
-class DebugButtonComponent extends BaseStateComponent {
+export abstract class BaseUpdateIndicatorComponent extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		this.render();
+		this.listeners.push(
+			listen(window, eventNames.systemUpdateCheck, this.render.bind(this))
+		);
+	}
+
 	/**
 	 * Render the state element.
 	 */
-	render(): void {
-		this.classList.toggle(classes.displayNone, !App.system.debug);
-
-		if (App.system.debug) {
-			this.innerHTML = html`
-				<am-link
-					class="${classes.button}"
-					target="${Routes.system}?section=${Sections.debug}"
-				>
-					<am-icon-text
-						icon="bug"
-						text="${App.text('systemDebug')}"
-					></am-icon-text>
-				</am-link>
-			`;
-		} else {
-			this.innerHTML = '';
-		}
-	}
+	abstract render(): void;
 }
-
-customElements.define('am-debug-button', DebugButtonComponent);

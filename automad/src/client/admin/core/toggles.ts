@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes } from './classes';
+import { CSS } from './css';
 import { eventNames, listen } from './events';
 import { queryAll } from './utils';
 
@@ -46,7 +46,7 @@ export const initCheckboxToggles = (container: HTMLElement) => {
 		const targets = queryAll(checkbox.getAttribute('toggle'));
 		const toggleTargets = () => {
 			targets.forEach((target) => {
-				target.classList.toggle(classes.displayNone, !checkbox.checked);
+				target.classList.toggle(CSS.displayNone, !checkbox.checked);
 			});
 		};
 

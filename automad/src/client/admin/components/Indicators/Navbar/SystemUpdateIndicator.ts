@@ -26,36 +26,49 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, Routes } from '../../core';
-import { CenteredLayoutComponent } from './CenteredLayout';
+import { App, CSS, html, Routes } from '../../../core';
+import { Sections } from '../../Switcher/Switcher';
+import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
 
 /**
- * The logout view.
+ * A system update state button component.
  *
- * @extends CenteredLayoutComponent
+ * @extends BaseUpdateIndicatorComponent
  */
-export class LogoutComponent extends CenteredLayoutComponent {
+class NavbarSystemUpdateIndicatorComponent extends BaseUpdateIndicatorComponent {
 	/**
-	 * Set the page title that is used a document title suffix.
+	 * Render the state element.
 	 */
-	protected get pageTitle(): string {
-		return App.text('signedOut');
-	}
+	render(): void {
+		this.classList.toggle(
+			CSS.displayNone,
+			!App.state.systemUpdate?.pending
+		);
 
-	/**
-	 * Render the main partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderMainPartial(): string {
-		return 'Logut';
+		if (App.state.systemUpdate?.pending) {
+			this.innerHTML = html`
+				<am-link
+					class="${CSS.navbarItem}"
+					target="${Routes.system}?section=${Sections.update}"
+					am-tooltip="${App.text('systemUpdateTooltip')}"
+				>
+					<i class="bi bi-download"></i>
+					<span class="am-e-badge"></span>
+				</am-link>
+			`;
+		} else {
+			this.innerHTML = '';
+		}
 	}
 }
 
-customElements.define(getTagFromRoute(Routes.logout), LogoutComponent);
+customElements.define(
+	'am-navbar-system-update-indicator',
+	NavbarSystemUpdateIndicatorComponent
+);

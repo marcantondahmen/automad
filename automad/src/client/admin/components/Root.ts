@@ -26,14 +26,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
 import {
-	classes,
+	CSS,
 	App,
 	getValidRouteOrRedirect,
 	create,
@@ -43,7 +43,10 @@ import {
 	Bindings,
 	initCheckboxToggles,
 	queryAll,
+	initTooltips,
+	requestAPI,
 } from '../core';
+import { applyTheme, getTheme } from '../core/theme';
 import { BaseComponent } from './Base';
 import { ModalComponent } from './Modal/Modal';
 
@@ -85,12 +88,14 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async init(): Promise<void> {
-		this.classList.add(classes.root);
+		this.classList.add(CSS.root);
+		applyTheme(getTheme());
 		this.progressBar(10);
 
 		await App.bootstrap(this);
+		await this.update();
 
-		this.update();
+		initTooltips();
 
 		this.listeners.push(
 			listen(window, 'popstate', () => {
@@ -98,7 +103,7 @@ export class RootComponent extends BaseComponent {
 			})
 		);
 
-		App.checkForSystemUpdate();
+		this.verifyCsrfToken();
 	}
 
 	/**
@@ -107,7 +112,7 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async update(): Promise<void> {
-		const openModal = queryAll(`.${classes.modalOpen}`) as ModalComponent[];
+		const openModal = queryAll(`.${CSS.modalOpen}`) as ModalComponent[];
 
 		if (openModal) {
 			openModal.forEach((modal) => {
@@ -139,11 +144,50 @@ export class RootComponent extends BaseComponent {
 		Bindings.connectElements(this);
 		initCheckboxToggles(this);
 
-		this.progressBar(100);
+		App.checkForSystemUpdate();
+		App.checkForOutdatedPackages();
 
-		setTimeout(async () => {
-			this.progressBar(0);
-		}, 0);
+		this.progressBar(100);
+	}
+
+	/**
+	 * Verify CSRF token on visiblity state change (change tab).
+	 */
+	private async verifyCsrfToken(): Promise<void> {
+		const bodyScrollYKey = 'bodyScrollY';
+		const bodyScrollY = localStorage.getItem(bodyScrollYKey);
+		const stateChangeHandler = async (): Promise<void> => {
+			if (document.visibilityState === 'visible') {
+				const data = await requestAPI('Session/validateCsrfToken', {
+					// Send a random key/value pair in order to provide a valid POST request.
+					csrfTokenValidation: 1,
+				});
+
+				const code = data.code || 403;
+
+				if (code === 403) {
+					localStorage.setItem(
+						bodyScrollYKey,
+						String(window.scrollY)
+					);
+
+					window.location.reload();
+				}
+			}
+		};
+
+		if (bodyScrollY) {
+			window.scrollTo(0, parseInt(bodyScrollY));
+			localStorage.removeItem(bodyScrollYKey);
+		}
+
+		this.listeners.push(
+			listen(document, 'visibilitychange', stateChangeHandler.bind(this))
+		);
+
+		this.listeners.push(
+			listen(window, 'focus', stateChangeHandler.bind(this))
+		);
 	}
 
 	/**
@@ -152,7 +196,7 @@ export class RootComponent extends BaseComponent {
 	 * @param progress
 	 */
 	private progressBar(progress: number): void {
-		this.classList.toggle(classes.rootLoading, progress > 0);
+		this.classList.toggle(CSS.rootLoading, progress > 0 && progress < 100);
 
 		if (progress > 0) {
 			this.style.setProperty('--progress', `${progress}%`);

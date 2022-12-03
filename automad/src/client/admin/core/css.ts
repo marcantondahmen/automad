@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -35,49 +35,43 @@
 /**
  * The enum with all classes used for HTML elements that are used by components.
  */
-export enum classes {
-	alert = 'am-c-alert',
-	alertDanger = 'am-c-alert--danger',
-	alertPrimary = 'am-c-alert--primary',
-	alertIcon = 'am-c-alert__icon',
-	alertText = 'am-c-alert__text',
+export enum CSS {
 	badge = 'am-e-badge',
+	badgeMuted = 'am-e-badge--muted',
+
 	breadcrumbs = 'am-c-breadcrumbs',
 	breadcrumbsItem = 'am-c-breadcrumbs__item',
+
 	button = 'am-e-button',
-	buttonLink = 'am-e-button--link',
-	buttonIcon = 'am-e-button--icon',
+	buttonAccent = 'am-e-button--accent',
 	buttonPrimary = 'am-e-button--primary',
-	buttonPrimaryInverted = 'am-e-button--primary-inverted',
-	buttonDanger = 'am-e-button--danger',
-	buttonInverted = 'am-e-button--inverted',
+	buttonLink = 'am-e-button--link',
+
 	card = 'am-c-card',
 	cardActive = 'am-c-card--active',
-	cardLink = 'am-c-card--link',
-	cardList = 'am-c-card--list',
-	cardBadge = 'am-c-card__badge',
-	cardImage = 'am-c-card__image',
-	cardImageBlend = 'am-c-card__image--blend',
-	cardImage43 = 'am-c-card__image--4-3',
-	cardImageIconLarge = 'am-c-card__image--icon-large',
-	cardText = 'am-c-card__text',
-	cardFooter = 'am-c-card__footer',
-	cardIcon = 'am-c-card__icon',
-	cardIconButtons = 'am-c-card__icon-buttons',
-	cardIconNarrow = 'am-c-card__icon--narrow',
+	cardTeaser = 'am-c-card__teaser',
 	cardTitle = 'am-c-card__title',
+	cardBody = 'am-c-card__body',
+	cardBodyLarge = 'am-c-card__body--large',
+	cardForm = 'am-c-card__form',
+	cardFormButtons = 'am-c-card__form-buttons',
+	cardFooter = 'am-c-card__footer',
+
 	checkbox = 'am-f-checkbox',
+
 	cursorPointer = 'am-u-cursor-pointer',
+
 	displayNone = 'am-u-display-none',
-	dropdownItems = 'am-c-dropdown__items',
-	dropdownItemsFullWidth = 'am-c-dropdown__items--full-width',
-	dropdownItem = 'am-c-dropdown__item',
-	dropdownItemDivider = 'am-c-dropdown__item--divider',
-	dropdownItemActive = 'am-c-dropdown__item--active',
+
 	dropdown = 'am-c-dropdown',
 	dropdownRight = 'am-c-dropdown--right',
 	dropdownOpen = 'am-c-dropdown--open',
-	dropdownForm = 'am-c-dropdown--form',
+	dropdownContent = 'am-c-dropdown__content',
+	dropdownDivider = 'am-c-dropdown__divider',
+	dropdownItems = 'am-c-dropdown__items',
+	dropdownLink = 'am-c-dropdown__link',
+	dropdownLinkActive = 'am-c-dropdown__link--active',
+
 	feedFieldSelect = 'am-c-feed-field-select',
 	feedFieldSelectMuted = 'am-c-feed-field-select--muted',
 	feedFieldSelectArrows = 'am-c-feed-field-select__arrows',
@@ -85,58 +79,94 @@ export enum classes {
 	feedFieldSelectItemGhost = 'am-c-feed-field-select__item--ghost',
 	feedFieldSelectItemChosen = 'am-c-feed-field-select__item--chosen',
 	feedFieldSelectItemDrag = 'am-c-feed-field-select__item--drag',
+
 	field = 'am-c-field',
 	fieldLabel = 'am-c-field__label',
+
+	filter = 'am-c-filter',
+	filterInput = 'am-c-filter__input',
+	filterKeyCombo = 'am-c-filter__key-combo',
+
 	flex = 'am-u-flex',
-	flexGap = 'am-u-flex--gap',
 	flexAlignCenter = 'am-u-flex--align-center',
 	flexColumn = 'am-u-flex--column',
+	flexGap = 'am-u-flex--gap',
 	flexBetween = 'am-u-flex--between',
 	flexItemGrow = 'am-u-flex__item-grow',
-	grid = 'am-c-grid',
+
+	grid = 'am-l-grid',
+
 	iconText = 'am-c-icon-text',
+
 	input = 'am-f-input',
 	inputTitle = 'am-f-input--title',
-	inputKeyCombo = 'am-f-input-key-combo',
+	inputCombo = 'am-f-input-combo',
+	inputComboColor = 'am-f-input-combo__color',
+
+	keyCombo = 'am-e-key-combo',
+
 	menu = 'am-c-menu',
 	menuItem = 'am-c-menu__item',
+	menuItemActive = 'am-c-menu__item--active',
+
 	modal = 'am-c-modal',
 	modalOpen = 'am-c-modal--open',
 	modalDialog = 'am-c-modal__dialog',
 	modalDialogFullscreen = 'am-c-modal__dialog--fullscreen',
 	modalHeader = 'am-c-modal__header',
 	modalClose = 'am-c-modal__close',
+	modalBody = 'am-c-modal__body',
 	modalFooter = 'am-c-modal__footer',
+
+	modalJumpbarInput = 'am-c-modal__jumpbar-input',
+	modalJumpbarItems = 'am-c-modal__jumpbar-items',
+	modalJumpbarLink = 'am-c-modal__jumpbar-link',
+	modalJumpbarLinkActive = 'am-c-modal__jumpbar-link--active',
+	modalJumpbarDivider = 'am-c-modal__jumpbar-divider',
+
 	nav = 'am-c-nav',
+	navSelectForm = 'am-c-nav--select',
 	navDragging = 'am-c-nav--dragging',
+	navChildren = 'am-c-nav__children',
+	navGrip = 'am-c-nav__grip',
 	navItem = 'am-c-nav__item',
+	navItemActive = 'am-c-nav__item--active',
 	navItemGhost = 'am-c-nav__item--ghost',
 	navItemChosen = 'am-c-nav__item--chosen',
 	navItemDrag = 'am-c-nav__item--drag',
-	navItemActive = 'am-c-nav__item--active',
-	navGrip = 'am-c-nav__grip',
 	navLabel = 'am-c-nav__label',
 	navLink = 'am-c-nav__link',
 	navLinkHasChildren = 'am-c-nav__link--has-children',
-	navChildren = 'am-c-nav__children',
+
+	navbar = 'am-c-navbar',
+	navbarItem = 'am-c-navbar__item',
+	navbarGroup = 'am-c-navbar__group',
+
 	overflowHidden = 'am-u-overflow-hidden',
+
+	privacyIndicator = 'am-c-privacy-indicator',
+
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',
+
 	select = 'am-f-select',
+
 	spinner = 'am-c-spinner',
+
 	switcherSection = 'am-c-switcher-section',
-	switcherSectionFields = 'am-c-switcher-section--fields',
 	switcherSectionActive = 'am-c-switcher-section--active',
-	switcherLinkActive = 'am-c-switcher-link--active',
+
 	textMuted = 'am-u-text-muted',
-	textPrimary = 'am-u-text-primary',
+	textMono = 'am-u-text-mono',
+
 	toggle = 'am-f-toggle',
+	toggleButton = 'am-f-toggle--button',
 	toggleLarge = 'am-f-toggle--large',
-	toggleInput = 'am-f-toggle--input',
 	toggleSelect = 'am-f-toggle--select',
 	toggleOn = 'am-f-toggle--on',
 	toggleOff = 'am-f-toggle--off',
 	toggleDefaultOn = 'am-f-toggle--default-on',
+
 	upload = 'am-c-upload',
 	uploadDropzone = 'am-c-upload__dropzone',
 	uploadPreviews = 'am-c-upload__previews',

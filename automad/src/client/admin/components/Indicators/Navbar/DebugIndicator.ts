@@ -26,34 +26,45 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '../Base';
-import { eventNames, listen } from '../../core';
+import { App, CSS, html, Routes } from '../../../core';
+import { Sections } from '../../Switcher/Switcher';
+import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
 
 /**
- * The abstract base state component.
+ * A debug state component.
  *
- * @extends BaseComponent
+ * @extends BaseStateIndicatorComponent
  */
-export abstract class BaseStateComponent extends BaseComponent {
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.render();
-
-		this.listeners.push(
-			listen(window, eventNames.appStateChange, this.render.bind(this))
-		);
-	}
-
+class NavbarDebugIndicatorComponent extends BaseStateIndicatorComponent {
 	/**
 	 * Render the state element.
 	 */
-	protected abstract render(): void;
+	render(): void {
+		this.classList.toggle(CSS.displayNone, !App.system.debug);
+
+		if (App.system.debug) {
+			this.innerHTML = html`
+				<am-link
+					class="${CSS.navbarItem}"
+					target="${Routes.system}?section=${Sections.debug}"
+					am-tooltip="${App.text('debugEnabled')}"
+				>
+					<i class="bi bi-bug"></i>
+				</am-link>
+			`;
+		} else {
+			this.innerHTML = '';
+		}
+	}
 }
+
+customElements.define(
+	'am-navbar-debug-indicator',
+	NavbarDebugIndicatorComponent
+);

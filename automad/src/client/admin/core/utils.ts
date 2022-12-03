@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, listen } from '.';
+import { App, CSS, create, listen } from '.';
 import { KeyValueMap, Listener } from '../types';
 
 declare global {
@@ -60,26 +60,17 @@ export const confirm = async (text: string): Promise<any> => {
 	);
 
 	modal.innerHTML = html`
-		<div class="${classes.modalDialog}">
-			<am-icon-text
-				icon="exclamation-circle"
-				text="$${text}"
-			></am-icon-text>
-			<div class="${classes.modalFooter}">
-				<am-modal-close class="${classes.button}">
-					<am-icon-text
-						icon="x"
-						text="$${App.text('cancel')}"
-					></am-icon-text>
+		<div class="${CSS.modalDialog}">
+			<div class="${CSS.modalBody}">$${text}</div>
+			<div class="${CSS.modalFooter}">
+				<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+					$${App.text('cancel')}
 				</am-modal-close>
 				<am-modal-close
 					confirm
-					class="${classes.button} ${classes.buttonPrimary}"
+					class="${CSS.button} ${CSS.buttonAccent}"
 				>
-					<am-icon-text
-						icon="check"
-						text="$${App.text('ok')}"
-					></am-icon-text>
+					$${App.text('ok')}
 				</am-modal-close>
 			</div>
 		</div>

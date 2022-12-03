@@ -39,11 +39,16 @@
 	padding: 0 @am-nav-padding-x;
 
 	& + & {
-		margin-top: 2rem;
+		margin-top: 1rem;
+		padding-top: 1rem;
+		border-top: @am-border;
 	}
 
 	&__label {
+		font-size: @am-small-font-size;
 		padding: 0.5rem ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
+		padding-bottom: 0.7rem;
+		color: var(--am-clr-text-sidebar);
 		user-select: none;
 	}
 
@@ -190,6 +195,17 @@
 	&__item--active > &__link {
 		color: @am-nav-item-active-clr;
 		background-color: @am-nav-item-active-bg;
+	}
+
+	&--select {
+		padding: @am-nav-padding-x;
+		background-color: var(--am-clr-background-faded);
+		border: @am-border;
+		border-radius: 0.3rem;
+	}
+
+	&--select &__item {
+		--padding-left: ~'calc(0.75rem + (1rem * var(--level)))';
 	}
 }
 

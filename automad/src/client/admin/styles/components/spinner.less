@@ -33,11 +33,12 @@
  */
 
 .am-c-spinner {
+	@size: 1.25rem;
 	position: relative;
 	display: inline-block;
 	margin-right: 1rem;
-	width: 1rem;
-	height: 1rem;
+	width: @size;
+	height: @size;
 
 	&:before {
 		content: '';
@@ -45,10 +46,10 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 1rem;
-		height: 1rem;
-		border-radius: 1rem;
-		border: 1px solid var(--am-clr);
+		width: @size;
+		height: @size;
+		border-radius: @size;
+		border: 2px solid var(--am-clr-accent-text);
 		border-left-color: transparent;
 		animation: 0.8s linear 0s infinite spinner;
 	}

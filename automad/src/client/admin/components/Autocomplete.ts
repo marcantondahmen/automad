@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -39,15 +39,7 @@ import {
 	KeyValueMap,
 	PageMetaData,
 } from '../types';
-import {
-	App,
-	classes,
-	create,
-	listen,
-	debounce,
-	html,
-	eventNames,
-} from '../core';
+import { App, create, listen, debounce, html, eventNames, CSS } from '../core';
 
 /**
  * Compile the autocompletion data.
@@ -123,6 +115,11 @@ export class AutocompleteComponent extends BaseComponent {
 	protected minInputLength = 1;
 
 	/**
+	 * The maximum number of displayed items.
+	 */
+	protected maxItems = 8;
+
+	/**
 	 * The input element.
 	 */
 	protected input: HTMLInputElement;
@@ -133,10 +130,35 @@ export class AutocompleteComponent extends BaseComponent {
 	protected dropdown: HTMLDivElement;
 
 	/**
+	 * The dropdown items CSS class.
+	 */
+	protected elementClasses = [CSS.dropdown];
+
+	/**
+	 * The dropdown input CSS class.
+	 */
+	protected inputClasses = [CSS.input];
+
+	/**
+	 * The dropdown items CSS class.
+	 */
+	protected itemsClasses = [CSS.dropdownItems];
+
+	/**
+	 * The link class.
+	 */
+	protected linkClass = CSS.dropdownLink;
+
+	/**
+	 * The active link class.
+	 */
+	protected linkActiveClass = CSS.dropdownLinkActive;
+
+	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.dropdown, classes.dropdownForm);
+		this.classList.add(...this.elementClasses);
 
 		this.listeners.push(
 			listen(window, eventNames.appStateChange, this.init.bind(this))
@@ -157,12 +179,7 @@ export class AutocompleteComponent extends BaseComponent {
 
 			this.input = this.createInput();
 
-			this.dropdown = create(
-				'div',
-				[classes.dropdownItems, classes.dropdownItemsFullWidth],
-				{},
-				this
-			);
+			this.dropdown = create('div', this.itemsClasses, {}, this);
 
 			this.data.forEach((item: KeyValueMap) => {
 				this.items.push({
@@ -192,7 +209,7 @@ export class AutocompleteComponent extends BaseComponent {
 
 		return create(
 			'input',
-			[classes.input],
+			this.inputClasses,
 			{ type: 'text', placeholder },
 			this
 		);
@@ -205,7 +222,7 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @returns the created element
 	 */
 	protected createItemElement(item: KeyValueMap): HTMLElement {
-		const element = create('a', [classes.dropdownItem], {});
+		const element = create('a', [this.linkClass], {});
 
 		element.innerHTML = html`
 			<am-icon-text icon="link" text="${item.title}"></am-icon-text>
@@ -240,21 +257,25 @@ export class AutocompleteComponent extends BaseComponent {
 	 */
 	protected update(): void {
 		const filters = this.input.value.toLowerCase().split(' ');
+		let numIncluded = 0;
 
 		this.itemsFiltered = [];
 
 		this.items.forEach((item) => {
 			var include = true;
 
-			for (var i = 0; i < filters.length; i++) {
-				if (item.value.indexOf(filters[i]) == -1) {
-					include = false;
-					break;
+			if (numIncluded < this.maxItems) {
+				for (var i = 0; i < filters.length; i++) {
+					if (item.value.indexOf(filters[i]) == -1) {
+						include = false;
+						break;
+					}
 				}
-			}
 
-			if (include) {
-				this.itemsFiltered.push(item);
+				if (include) {
+					this.itemsFiltered.push(item);
+					numIncluded++;
+				}
 			}
 		});
 
@@ -307,8 +328,8 @@ export class AutocompleteComponent extends BaseComponent {
 	protected onMouseOverEvent(event: MouseEvent): void {
 		let target = event.target as HTMLElement;
 
-		if (!target.matches(`.${classes.dropdownItem}`)) {
-			target = target.closest(`.${classes.dropdownItem}`);
+		if (!target.matches(`.${this.linkClass}`)) {
+			target = target.closest(`.${this.linkClass}`);
 		}
 
 		this.selectedIndex = Array.from(this.dropdown.children).indexOf(target);
@@ -341,7 +362,7 @@ export class AutocompleteComponent extends BaseComponent {
 			(event: MouseEvent) => {
 				this.onMouseOverEvent(event);
 			},
-			`.${classes.dropdownItem}`
+			`.${this.linkClass}`
 		);
 
 		listen(
@@ -350,7 +371,7 @@ export class AutocompleteComponent extends BaseComponent {
 			(event: MouseEvent) => {
 				this.select(event);
 			},
-			`.${classes.dropdownItem}`
+			`.${this.linkClass}`
 		);
 	}
 
@@ -360,7 +381,7 @@ export class AutocompleteComponent extends BaseComponent {
 	protected toggleActiveItemStyle(): void {
 		this.itemsFiltered.forEach((item, index) => {
 			item.element.classList.toggle(
-				classes.dropdownItemActive,
+				this.linkActiveClass,
 				index == this.selectedIndex
 			);
 		});
@@ -372,7 +393,7 @@ export class AutocompleteComponent extends BaseComponent {
 	close(): void {
 		this.selectedIndex = this.initialIndex;
 		this.toggleActiveItemStyle();
-		this.classList.remove(classes.dropdownOpen);
+		this.classList.remove(CSS.dropdownOpen);
 	}
 
 	/**
@@ -381,7 +402,7 @@ export class AutocompleteComponent extends BaseComponent {
 	open(): void {
 		if (this.input.value.length >= this.minInputLength) {
 			this.update();
-			this.classList.add(classes.dropdownOpen);
+			this.classList.add(CSS.dropdownOpen);
 		}
 	}
 

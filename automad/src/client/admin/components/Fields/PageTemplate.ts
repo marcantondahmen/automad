@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, html, titleCase } from '../../core';
+import { App, create, CSS, html, titleCase } from '../../core';
 import {
 	KeyValueMap,
 	TemplateButtonStatus,
@@ -98,8 +98,7 @@ const themeStatus = ({
 	let appliedTheme = mainTheme;
 	let selectedTemplate = templatePath(template);
 	let buttonLabel = titleCase(selectedTemplate);
-	let buttonIcon = 'file-earmark-code';
-	let buttonClass = 'success';
+	let buttonIcon = 'code-slash';
 
 	if (typeof themes[fields[themeKey]] != 'undefined') {
 		appliedTheme = themes[fields[themeKey]];
@@ -111,12 +110,10 @@ const themeStatus = ({
 
 	if (!templateExists) {
 		buttonIcon = 'question-circle';
-		buttonClass = 'danger';
 	}
 
 	return {
 		buttonLabel,
-		buttonClass,
 		buttonIcon,
 		selectedTemplate,
 	};
@@ -159,7 +156,7 @@ const createOptions = (
 export const createTemplateSelect = (selectedTemplate: string): HTMLElement => {
 	const mainTheme = App.themes[App.mainTheme];
 	const themes = App.themes;
-	const wrapper = create('am-select', [classes.button, classes.flex], {});
+	const wrapper = create('am-select', [CSS.button], {});
 
 	create('span', [], {}, wrapper);
 
@@ -213,7 +210,7 @@ export class PageTemplateComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.field);
+		this.classList.add(CSS.field);
 	}
 
 	/**
@@ -225,14 +222,13 @@ export class PageTemplateComponent extends BaseComponent {
 	 * @param params.themeKey
 	 */
 	private render({ fields, template, themeKey }: TemplateFieldData): void {
-		const { buttonLabel, buttonIcon, buttonClass, selectedTemplate } =
-			themeStatus({
-				fields,
-				template,
-				themeKey,
-			});
+		const { buttonLabel, buttonIcon, selectedTemplate } = themeStatus({
+			fields,
+			template,
+			themeKey,
+		});
 
-		const button = create('div', [classes.field], {}, this);
+		const button = create('div', [CSS.field], {}, this);
 		const modal = create(
 			'am-modal',
 			[],
@@ -241,15 +237,12 @@ export class PageTemplateComponent extends BaseComponent {
 		);
 
 		button.innerHTML = html`
-			<label class="${classes.fieldLabel}"
-				>${App.text('pageTemplate')}</label
-			>
+			<label class="${CSS.fieldLabel}">${App.text('pageTemplate')}</label>
 			<am-modal-toggle
 				modal="#am-page-template-modal"
-				class="${classes.button} ${classes.button}--${buttonClass} ${classes.flex}"
+				class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.cursorPointer}"
 			>
 				<am-icon-text
-					class="${classes.flexItemGrow}"
 					icon="${buttonIcon}"
 					text="${buttonLabel}"
 				></am-icon-text>
@@ -258,18 +251,13 @@ export class PageTemplateComponent extends BaseComponent {
 		`;
 
 		modal.innerHTML = html`
-			<div class="${classes.modalDialog}">
-				<div class="${classes.modalHeader}">
-					<span>${App.text('pageTemplate')}</span>
-					<am-modal-close
-						class="${classes.modalClose}"
-					></am-modal-close>
+			<div class="${CSS.modalDialog}">
+				<div class="${CSS.modalHeader}">
+					<span>$${App.text('pageTemplate')}</span>
+					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
 				</div>
-				${createTemplateSelect(selectedTemplate).outerHTML}
-				<div class="${classes.modalFooter}">
-					<am-modal-close class="${classes.button}">
-						${App.text('close')}
-					</am-modal-close>
+				<div class="${CSS.modalBody}">
+					${createTemplateSelect(selectedTemplate).outerHTML}
 				</div>
 			</div>
 		`;

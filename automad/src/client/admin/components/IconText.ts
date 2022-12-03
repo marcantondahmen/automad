@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create } from '../core';
+import { create, CSS } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -55,7 +55,7 @@ class IconTextComponent extends BaseComponent {
 		this.removeAttribute('text');
 
 		if (icon && text) {
-			this.classList.add(classes.iconText);
+			this.classList.add(CSS.iconText);
 			create('i', ['bi', `bi-${icon}`], {}, this);
 			create('span', [], {}, this).textContent = text;
 		}

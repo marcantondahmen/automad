@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -35,17 +35,15 @@
 import Sortable, { SortableEvent, SortableOptions } from 'sortablejs';
 import {
 	App,
-	classes,
 	create,
 	createLabelFromField,
+	CSS,
 	eventNames,
 	fire,
 	html,
 	listen,
 	query,
-	titleCase,
 } from '../../core';
-import { FormComponent } from '../Forms/Form';
 import { BaseFieldComponent } from './BaseField';
 
 const options: SortableOptions = {
@@ -53,11 +51,11 @@ const options: SortableOptions = {
 	direction: 'vertical',
 	animation: 200,
 	dataIdAttr: 'data-field',
-	draggable: `.${classes.feedFieldSelectItem}`,
-	handle: `.${classes.feedFieldSelectItem}`,
-	ghostClass: classes.feedFieldSelectItemGhost,
-	chosenClass: classes.feedFieldSelectItemChosen,
-	dragClass: classes.feedFieldSelectItemDrag,
+	draggable: `.${CSS.feedFieldSelectItem}`,
+	handle: `.${CSS.feedFieldSelectItem}`,
+	ghostClass: CSS.feedFieldSelectItemGhost,
+	chosenClass: CSS.feedFieldSelectItemChosen,
+	dragClass: CSS.feedFieldSelectItemDrag,
 };
 
 /**
@@ -128,13 +126,13 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 			section
 		);
 
-		create('div', [classes.feedFieldSelectArrows], {}, section).innerHTML =
+		create('div', [CSS.feedFieldSelectArrows], {}, section).innerHTML =
 			'<i class="bi bi-arrow-down-up"></i>';
 
 		const unusedContainer = this.createSortable(
 			unusedFields,
 			App.text('systemRssFeedFieldsInfoUnused'),
-			[classes.feedFieldSelectMuted],
+			[CSS.feedFieldSelectMuted],
 			section
 		);
 
@@ -168,7 +166,7 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 	): HTMLElement {
 		const sortable = create(
 			'div',
-			[].concat(cls, [classes.feedFieldSelect]),
+			[].concat(cls, [CSS.feedFieldSelect]),
 			{ 'data-text': text },
 			container
 		);
@@ -176,14 +174,14 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 		fields.forEach((field) => {
 			const element = create(
 				'div',
-				[classes.feedFieldSelectItem],
+				[CSS.feedFieldSelectItem],
 				{ [options.dataIdAttr]: field },
 				sortable
 			);
 
 			element.innerHTML = html`
 				<span>${createLabelFromField(field)}</span>
-				<i class="bi bi-grip-vertical ${classes.textMuted}"></i>
+				<i class="bi bi-grip-vertical ${CSS.textMuted}"></i>
 			`;
 		});
 

@@ -34,9 +34,9 @@
 
 import {
 	App,
-	classes,
 	create,
 	createField,
+	CSS,
 	eventNames,
 	html,
 	listen,
@@ -100,50 +100,51 @@ export class FileInfoComponent extends BaseComponent {
 			<am-form
 				api="File/editInfo"
 				event="${eventNames.filesChangeOnServer}"
-				class="${classes.modalDialog}"
+				class="${CSS.modalDialog}"
 			>
-				<div class="${classes.modalHeader}">
+				<div class="${CSS.modalHeader}">
 					<span>${App.text('editFileInfo')}</span>
-					<am-modal-close
-						class="${classes.modalClose}"
-					></am-modal-close>
+					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
 				</div>
-				<input type="hidden" name="old-name" value="${file.basename}" />
-				${createField(
-					'am-input',
-					null,
-					{
-						key: 'new-name',
-						value: file.basename,
-						name: 'new-name',
-						label: App.text('fileName'),
-					},
-					[]
-				).outerHTML}
-				${createField(
-					'am-textarea',
-					null,
-					{
-						key: 'caption',
-						value: file.caption,
-						name: 'caption',
-						label: App.text('fileCaption'),
-					},
-					[]
-				).outerHTML}
-				<div class="${classes.modalFooter}">
-					<am-modal-close class="${classes.button}">
-						${App.text('close')}
-					</am-modal-close>
+				<div class="${CSS.modalBody}">
+					<input
+						type="hidden"
+						name="old-name"
+						value="${file.basename}"
+					/>
+					${createField(
+						'am-input',
+						null,
+						{
+							key: 'new-name',
+							value: file.basename,
+							name: 'new-name',
+							label: App.text('fileName'),
+						},
+						[]
+					).outerHTML}
+					${createField(
+						'am-textarea',
+						null,
+						{
+							key: 'caption',
+							value: file.caption,
+							name: 'caption',
+							label: App.text('fileCaption'),
+						},
+						[]
+					).outerHTML}
+				</div>
+				<div class="${CSS.modalFooter}">
 					<a
-						href="${file.url}"
-						class="${classes.button}"
-						download="${file.basename}"
+						href="$${file.url}"
+						class="${CSS.button} ${CSS.buttonLink}"
+						download="$${file.basename}"
 					>
-						${App.text('downloadFile')}
+						$${App.text('downloadFile')}
 					</a>
-					<am-submit class="${classes.button}">
-						${App.text('save')}
+					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+						$${App.text('save')}
 					</am-submit>
 				</div>
 			</am-form>

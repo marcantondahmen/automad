@@ -33,13 +33,14 @@
  */
 
 .am-c-dropdown {
+	@padding-y: 0.3rem;
 	position: relative;
 	cursor: pointer;
 	--space: 0.3rem;
 
 	// Add this invisible block when hovering to keep hover status
 	// while moving cursor to dropdown items that have gap to the actual button.
-	&:hover:before {
+	&--hover:hover:before {
 		content: '';
 		position: absolute;
 		display: block;
@@ -50,14 +51,15 @@
 
 	&__items {
 		position: absolute;
-		z-index: 100;
+		z-index: 1000;
 		display: flex;
 		flex-direction: column;
+		padding: @padding-y 0;
 		top: ~'calc(100% + var(--space))';
 		opacity: 0;
 		pointer-events: none;
 		transform: translateY(-0.5rem);
-		transition: all 0.2s 0.4s;
+		transition: all 0.2s;
 		background-color: var(--am-clr-background);
 		border-radius: 0.3rem;
 		box-shadow: 0 0.4rem 1.2rem var(--am-shadow),
@@ -68,6 +70,10 @@
 		&--stretch {
 			width: 100%;
 		}
+	}
+
+	&--hover &__items {
+		transition: all 0.2s 0.4s;
 	}
 
 	&--hover:hover &__items,
@@ -81,11 +87,11 @@
 		right: 0;
 	}
 
-	&__item {
+	&__link {
 		display: flex;
 		align-items: center;
 		gap: @am-flex-gap;
-		padding: 0 0.65rem;
+		padding: 0 0.8rem;
 		font-size: 1rem;
 		line-height: 2.2;
 		text-decoration: none;
@@ -105,5 +111,26 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+	}
+
+	&__divider:not(:last-child) {
+		position: relative;
+		margin-bottom: 2 * @padding-y;
+
+		&:after {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 100%;
+			left: 0;
+			bottom: -@padding-y;
+			border-bottom: @am-border;
+		}
+	}
+
+	&__content {
+		padding: 0 0.65rem;
+		line-height: 2.2;
+		cursor: default;
 	}
 }

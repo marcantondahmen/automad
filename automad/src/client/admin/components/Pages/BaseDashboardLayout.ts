@@ -34,25 +34,24 @@
 
 import { Partials } from '../../types';
 import { BaseLayoutComponent } from './BaseLayout';
-import { centered } from './Templates/CenteredLayoutTemplate';
+import { dashboardLayout } from './Templates/DashboardLayoutTemplate';
 
 /**
  * The Automad base component. All Automad components are based on this class.
  *
  * @extends BaseLayoutComponent
  */
-export abstract class CenteredLayoutComponent extends BaseLayoutComponent {
+export abstract class BaseDashboardLayoutComponent extends BaseLayoutComponent {
 	/**
 	 * The template render function used to render the view.
 	 */
-	protected render: Function = centered;
+	protected render: Function = dashboardLayout;
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.
 	 */
 	protected partials: Partials = {
 		main: this.renderMainPartial(),
-		title: this.renderTitlePartial(),
 	};
 
 	/**
@@ -61,13 +60,4 @@ export abstract class CenteredLayoutComponent extends BaseLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected abstract renderMainPartial(): string;
-
-	/**
-	 * Render the navbar title partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderTitlePartial(): string {
-		return this.pageTitle;
-	}
 }

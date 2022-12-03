@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, create } from '../../core';
+import { create, CSS } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -48,7 +48,7 @@ class TextareaComponent extends BaseFieldComponent {
 		const { name, id, value, placeholder } = this._data;
 		const textarea = create(
 			'textarea',
-			[classes.input],
+			[CSS.input],
 			{ id, name, placeholder },
 			this
 		);

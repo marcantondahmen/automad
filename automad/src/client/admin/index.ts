@@ -72,8 +72,21 @@ import './components/Forms/SearchForm';
 import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';
 
+import './components/Indicators/Menu/PrivateIndicator';
+import './components/Indicators/Navbar/DebugIndicator';
+import './components/Indicators/Navbar/OutdatedPackagesIndicator';
+import './components/Indicators/Navbar/SystemUpdateIndicator';
+import './components/Indicators/Settings/CacheIndicator';
+import './components/Indicators/Settings/DebugIndicator';
+import './components/Indicators/Settings/FeedIndicator';
+import './components/Indicators/Settings/SystemUpdateIndicator';
+import './components/Indicators/Settings/UserCountIndicator';
+import './components/Indicators/Sidebar/OutdatedPackagesIndicator';
+
 import './components/Modal/Modal';
 import './components/Modal/ModalClose';
+import './components/Modal/ModalJumpbar';
+import './components/Modal/ModalJumpbarDialog';
 import './components/Modal/ModalToggle';
 
 import './components/PackageManager/PackageCard';
@@ -82,7 +95,6 @@ import './components/PackageManager/UpdateAllPackages';
 
 import './components/Pages/Home';
 import './components/Pages/Login';
-import './components/Pages/Logout';
 import './components/Pages/Packages';
 import './components/Pages/Page';
 import './components/Pages/ResetPassword';
@@ -94,15 +106,6 @@ import './components/Pages/System';
 import './components/Sidebar/Sidebar';
 import './components/Sidebar/SidebarToggle';
 
-import './components/State/CacheIndicator';
-import './components/State/DebugButton';
-import './components/State/DebugIndicator';
-import './components/State/FeedIndicator';
-import './components/State/OutdatedPackagesBadge';
-import './components/State/SystemUpdateButton';
-import './components/State/SystemUpdateIndicator';
-import './components/State/UserCountIndicator';
-
 import './components/Switcher/Switcher';
 import './components/Switcher/SwitcherLabel';
 import './components/Switcher/SwitcherLink';
@@ -113,18 +116,17 @@ import './components/Alert';
 import './components/Autocomplete';
 import './components/Checkbox';
 import './components/Copy';
-import './components/DarkModeToggle';
+import './components/DashboardThemeToggle';
 import './components/Dropdown';
 import './components/Filter';
 import './components/IconText';
-import './components/Jumpbar';
+import './components/KeyComboBadge';
 import './components/Link';
 import './components/Logo';
 import './components/NavItem';
 import './components/NavTree';
 import './components/PageBreadcrumbs';
 import './components/PageSelectTree';
-import './components/PrivateIndicator';
 import './components/Root';
 import './components/Select';
 import './components/Spinner';

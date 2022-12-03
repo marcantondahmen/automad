@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -34,7 +34,7 @@
 
 import {
 	App,
-	classes,
+	CSS,
 	eventNames,
 	getPageURL,
 	getTagFromRoute,
@@ -42,14 +42,200 @@ import {
 	Routes,
 } from '../../core';
 import { Sections } from '../Switcher/Switcher';
-import { SidebarLayoutComponent } from './SidebarLayout';
+import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
+
+const renderBreadcrumbs = (): string => {
+	return html`
+		<section class="am-l-dashboard__section">
+			<div class="am-l-dashboard__content">
+				<am-page-breadcrumbs></am-page-breadcrumbs>
+			</div>
+		</section>
+	`;
+};
+
+const renderMovePageModal = (): string => {
+	if (getPageURL() === '/') {
+		return '';
+	}
+
+	return html`
+		<am-modal id="am-move-page-modal">
+			<div class="${CSS.modalDialog}">
+				<am-form api="Page/move">
+					<div class="${CSS.modalHeader}">
+						<span>$${App.text('movePage')}</span>
+						<am-modal-close
+							class="${CSS.modalClose}"
+						></am-modal-close>
+					</div>
+					<div class="${CSS.modalBody}">
+						<div class="${CSS.field}">
+							<label class="${CSS.fieldLabel}">
+								${App.text('selectTargetMovePage')}
+							</label>
+							<am-page-select-tree
+								hidecurrent
+							></am-page-select-tree>
+						</div>
+					</div>
+					<div class="${CSS.modalFooter}">
+						<am-modal-close class="${CSS.button}">
+							$${App.text('cancel')}
+						</am-modal-close>
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+							$${App.text('movePage')}
+						</am-submit>
+					</div>
+				</am-form>
+			</div>
+		</am-modal>
+	`;
+};
+
+const renderDropdown = (): string => {
+	if (getPageURL() === '/') {
+		return '';
+	}
+
+	return html`
+		<am-dropdown right>
+			<span class="${CSS.menuItem}">
+				<span>${App.text('more')}</span>
+				<i class="bi bi-chevron-down"></i>
+			</span>
+			<div class="${CSS.dropdownItems}">
+				<a
+					bind="pageUrlWithBase"
+					bindto="href"
+					class="${CSS.dropdownLink}"
+					target="_blank"
+				>
+					<am-icon-text
+						icon="pencil"
+						text="${App.text('inPageEdit')}"
+					></am-icon-text>
+				</a>
+				<am-form api="Page/duplicate">
+					<am-submit class="${CSS.dropdownLink}">
+						<am-icon-text
+							icon="files"
+							text="${App.text('duplicatePage')}"
+						></am-icon-text>
+					</am-submit>
+				</am-form>
+				<am-modal-toggle
+					class="${CSS.dropdownLink}"
+					modal="#am-move-page-modal"
+				>
+					<am-icon-text
+						icon="arrows-move"
+						text="${App.text('movePage')}"
+					></am-icon-text>
+				</am-modal-toggle>
+				<am-form
+					api="Page/delete"
+					confirm="$${App.text('confirmDeletePage')}"
+				>
+					<am-submit class="${CSS.dropdownLink}">
+						<am-icon-text
+							icon="trash2"
+							text="${App.text('deletePage')}"
+						></am-icon-text>
+					</am-submit>
+				</am-form>
+				<am-copy class="${CSS.dropdownLink}" value="${getPageURL()}">
+					<am-icon-text
+						icon="clipboard-plus"
+						text="${App.text('copyUrlClipboard')}"
+					></am-icon-text>
+				</am-copy>
+			</div>
+		</am-dropdown>
+	`;
+};
+
+const renderMenu = (): string => {
+	return html`
+		<section
+			class="am-l-dashboard__section am-l-dashboard__section--sticky"
+		>
+			<div class="am-l-dashboard__content am-l-dashboard__content--row">
+				<am-switcher class="${CSS.menu}">
+					<am-switcher-link
+						class="${CSS.menuItem}"
+						section="${Sections.settings}"
+					>
+						${App.text('pageSettings')}
+					</am-switcher-link>
+					<am-switcher-link
+						class="${CSS.menuItem}"
+						section="${Sections.text}"
+					>
+						${App.text('pageContent')}
+					</am-switcher-link>
+					<am-switcher-link
+						class="${CSS.menuItem}"
+						section="${Sections.colors}"
+					>
+						${App.text('pageColors')}
+					</am-switcher-link>
+					<am-switcher-link
+						class="${CSS.menuItem}"
+						section="${Sections.files}"
+					>
+						${App.text('uploadedFiles')}
+						<span class="am-e-badge">
+							<am-file-count></am-file-count>
+						</span>
+					</am-switcher-link>
+				</am-switcher>
+				<am-filter placeholder="filterContent"></am-filter>
+				<am-private-indicator></am-private-indicator>
+				${renderDropdown()}
+			</div>
+		</section>
+	`;
+};
+
+const renderFileImportModal = (): string => {
+	return html`
+		<am-modal id="am-file-import-modal">
+			<div class="${CSS.modalDialog}">
+				<am-form
+					api="File/import"
+					event="${eventNames.filesChangeOnServer}"
+				>
+					<div class="${CSS.modalBody}">
+						<div class="${CSS.field}">
+							<input
+								class="${CSS.input}"
+								name="importUrl"
+								type="text"
+								placeholder="URL"
+							/>
+						</div>
+					</div>
+					<div class="${CSS.modalFooter}">
+						<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+							$${App.text('cancel')}
+						</am-modal-close>
+						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+							$${App.text('importFromUrl')}
+						</am-submit>
+					</div>
+				</am-form>
+			</div>
+		</am-modal>
+	`;
+};
 
 /**
  * The page view.
  *
- * @extends SidebarLayoutComponent
+ * @extends BaseDashboardLayoutComponent
  */
-export class PageComponent extends SidebarLayoutComponent {
+export class PageComponent extends BaseDashboardLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -63,163 +249,27 @@ export class PageComponent extends SidebarLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		let more = '';
-		let movePageModal = '';
-
-		if (getPageURL() !== '/') {
-			more = html`
-				<am-dropdown class="${classes.menuItem}" right>
-					<span>${App.text('more')}</span>
-					<i class="bi bi-chevron-down"></i>
-					<div class="${classes.dropdownItems}">
-						<a
-							bind="pageUrlWithBase"
-							bindto="href"
-							class="${classes.dropdownItem}"
-							target="_blank"
-						>
-							<am-icon-text
-								icon="pencil"
-								text="${App.text('inPageEdit')}"
-							></am-icon-text>
-						</a>
-						<am-form api="Page/duplicate">
-							<am-submit class="${classes.dropdownItem}">
-								<am-icon-text
-									icon="files"
-									text="${App.text('duplicatePage')}"
-								></am-icon-text>
-							</am-submit>
-						</am-form>
-						<am-modal-toggle
-							class="${classes.dropdownItem}"
-							modal="#am-move-page-modal"
-						>
-							<am-icon-text
-								icon="arrows-move"
-								text="${App.text('movePage')}"
-							></am-icon-text>
-						</am-modal-toggle>
-						<am-form
-							api="Page/delete"
-							confirm="$${App.text('confirmDeletePage')}"
-						>
-							<am-submit class="${classes.dropdownItem}">
-								<am-icon-text
-									icon="trash2"
-									text="${App.text('deletePage')}"
-								></am-icon-text>
-							</am-submit>
-						</am-form>
-						<am-copy
-							class="${classes.dropdownItem}"
-							value="${getPageURL()}"
-						>
-							<am-icon-text
-								icon="clipboard-plus"
-								text="${App.text('copyUrlClipboard')}"
-							></am-icon-text>
-						</am-copy>
-					</div>
-				</am-dropdown>
-			`;
-
-			movePageModal = html`
-				<am-modal id="am-move-page-modal">
-					<div class="${classes.modalDialog}">
-						<am-form api="Page/move">
-							<div class="${classes.modalHeader}">
-								<span>$${App.text('movePage')}</span>
-								<am-modal-close
-									class="${classes.modalClose}"
-								></am-modal-close>
-							</div>
-							<div class="${classes.field}">
-								<label class="${classes.fieldLabel}">
-									${App.text('selectTargetMovePage')}
-								</label>
-								<am-page-select-tree
-									hidecurrent
-								></am-page-select-tree>
-							</div>
-							<div class="${classes.modalFooter}">
-								<am-submit
-									class="${classes.button} ${classes.buttonPrimary}"
-								>
-									$${App.text('movePage')}
-									<i class="bi bi-arrows-move"></i>
-								</am-submit>
-							</div>
-						</am-form>
-					</div>
-				</am-modal>
-			`;
-		}
-
 		return html`
-			<section class="am-l-main__row">
-				<nav class="am-l-main__content">
-					<am-page-breadcrumbs></am-page-breadcrumbs>
-				</nav>
-			</section>
-			<section class="am-l-main__row am-l-main__row--sticky">
-				<div class="am-l-main__content">
-					<div class="${classes.menu}">
-						<am-switcher class="${classes.menu}">
-							<am-switcher-link
-								class="${classes.menuItem}"
-								section="${Sections.settings}"
-							>
-								${App.text('pageSettings')}
-							</am-switcher-link>
-							<am-switcher-link
-								class="${classes.menuItem}"
-								section="${Sections.text}"
-							>
-								${App.text('pageContent')}
-							</am-switcher-link>
-							<am-switcher-link
-								class="${classes.menuItem}"
-								section="${Sections.colors}"
-							>
-								${App.text('pageColors')}
-							</am-switcher-link>
-							<am-switcher-link
-								class="${classes.menuItem}"
-								section="${Sections.files}"
-							>
-								${App.text('uploadedFiles')}
-								<span class="am-e-badge">
-									<am-file-count></am-file-count>
-								</span>
-							</am-switcher-link>
-						</am-switcher>
-						<am-filter
-							class="am-u-flex__item-grow"
-							placeholder="filterContent"
-						></am-filter>
-						<am-private-indicator></am-private-indicator>
-						${more}
-					</div>
-				</div>
-			</section>
-			<section class="am-l-main__row">
-				<div class="am-l-main__content">
+			${renderBreadcrumbs()}${renderMenu()}
+			<section class="am-l-dashboard__section">
+				<div class="am-l-dashboard__content">
 					<am-page-data-form api="Page/data"></am-page-data-form>
 					<am-switcher-section name="${Sections.files}">
 						<am-upload></am-upload>
-						<am-modal-toggle
-							class="${classes.button}"
-							modal="#am-file-import-modal"
-						>
-							${App.text('importFromUrl')}
-						</am-modal-toggle>
-						<am-file-collection-submit
-							class="${classes.button}"
-							form="FileCollection/list"
-						>
-							$${App.text('deleteSelected')}
-						</am-file-collection-submit>
+						<div class="${CSS.flex} ${CSS.flexGap}">
+							<am-modal-toggle
+								class="${CSS.button} ${CSS.buttonAccent}"
+								modal="#am-file-import-modal"
+							>
+								${App.text('importFromUrl')}
+							</am-modal-toggle>
+							<am-file-collection-submit
+								class="${CSS.button}"
+								form="FileCollection/list"
+							>
+								$${App.text('deleteSelected')}
+							</am-file-collection-submit>
+						</div>
 						<am-file-collection-list-form
 							confirm="$${App.text('confirmDeleteSelectedFiles')}"
 							api="FileCollection/list"
@@ -227,38 +277,7 @@ export class PageComponent extends SidebarLayoutComponent {
 					</am-switcher-section>
 				</div>
 			</section>
-			${movePageModal}
-			<am-modal id="am-file-import-modal">
-				<div class="${classes.modalDialog}">
-					<am-form
-						api="File/import"
-						event="${eventNames.filesChangeOnServer}"
-					>
-						<div class="${classes.modalHeader}">
-							<span>$${App.text('importFromUrl')}</span>
-							<am-modal-close
-								class="${classes.modalClose}"
-							></am-modal-close>
-						</div>
-						<div class="${classes.field}">
-							<input
-								class="${classes.input}"
-								name="importUrl"
-								type="text"
-								placeholder="URL"
-							/>
-						</div>
-						<div class="${classes.modalFooter}">
-							<am-submit
-								class="${classes.button} ${classes.buttonPrimary}"
-							>
-								$${App.text('importFromUrl')}
-								<i class="bi bi-cloud-download"></i>
-							</am-submit>
-						</div>
-					</am-form>
-				</div>
-			</am-modal>
+			${renderMovePageModal()}${renderFileImportModal()}
 		`;
 	}
 }

@@ -32,14 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	classes,
-	create,
-	eventNames,
-	fire,
-	listen,
-	queryAll,
-} from '../../../core';
+import { create, CSS, eventNames, fire, listen, queryAll } from '../../../core';
 import { File, KeyValueMap } from '../../../types';
 import { FormComponent } from '../Form';
 
@@ -65,6 +58,9 @@ export class FileCollectionListFormComponent extends FormComponent {
 	 */
 	protected init(): void {
 		super.init();
+
+		this.classList.add(CSS.grid);
+		this.setAttribute('style', '--min: 12rem; --aspect: 1.25;');
 
 		this.listeners.push(
 			listen(
@@ -94,10 +90,8 @@ export class FileCollectionListFormComponent extends FormComponent {
 			return;
 		}
 
-		const grid = create('div', [classes.grid], {}, this);
-
 		response.data.files.forEach((file: File[]) => {
-			const card = create('am-file-card', [], {}, grid);
+			const card = create('am-file-card', [], {}, this);
 
 			card.data = file;
 		});

@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -35,8 +35,10 @@
 import Dropzone, { DropzoneFile, DropzoneOptions } from 'dropzone';
 import {
 	App,
-	classes,
 	create,
+	csrfTokenKey,
+	CSS,
+	getCsrfToken,
 	getPageURL,
 	html,
 	notifyError,
@@ -114,13 +116,18 @@ class UploadComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.upload);
+		this.classList.add(CSS.upload);
 
 		this.form = this.createForm();
-		this.modal = create('am-modal', [], { noclick: '', noesc: '' }, this);
+		this.modal = create(
+			'am-modal',
+			[],
+			{ noclick: '', noesc: '' },
+			this.form
+		);
 		this.queue = create(
 			'div',
-			[classes.uploadPreviews, classes.modalDialog],
+			[CSS.uploadPreviews, CSS.modalDialog],
 			{},
 			this.modal
 		);
@@ -188,7 +195,7 @@ class UploadComponent extends BaseComponent {
 	private createForm(): HTMLFormElement {
 		const form = create(
 			'form',
-			[classes.uploadDropzone],
+			[CSS.uploadDropzone],
 			{ action: `${App.baseURL}/api/FileCollection/upload` },
 			this
 		);
@@ -210,6 +217,17 @@ class UploadComponent extends BaseComponent {
 				form
 			);
 		}
+
+		create(
+			'input',
+			[],
+			{
+				type: 'hidden',
+				name: csrfTokenKey,
+				value: getCsrfToken(),
+			},
+			form
+		);
 
 		return form;
 	}

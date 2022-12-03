@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, html } from '../../core';
+import { create, CSS, html } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -44,7 +44,7 @@ export class ToggleComponent extends BaseFieldComponent {
 	/**
 	 * Checkbox styles.
 	 */
-	protected classes = [classes.toggle, classes.toggleInput];
+	protected classes = [CSS.toggle, CSS.toggleButton];
 
 	/**
 	 * Render the input field.
@@ -61,7 +61,10 @@ export class ToggleComponent extends BaseFieldComponent {
 				value="1"
 				${value ? 'checked' : ''}
 			/>
-			<label for="${id}"><span></span>${label}</label>
+			<label for="${id}">
+				<i class="bi"></i>
+				<span>${label}</span>
+			</label>
 		`;
 	}
 }

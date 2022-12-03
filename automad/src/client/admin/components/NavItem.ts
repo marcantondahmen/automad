@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, isActivePage, App, html } from '../core';
+import { isActivePage, App, html, CSS } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -57,9 +57,9 @@ class NavItemComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.navItem);
+		this.classList.add(CSS.navItem);
 		this.classList.toggle(
-			classes.navItemActive,
+			CSS.navItemActive,
 			isActivePage(this.elementAttributes.page)
 		);
 
@@ -79,8 +79,8 @@ class NavItemComponent extends BaseComponent {
 		const { page, icon, text, badge } = this.elementAttributes;
 
 		return html`
-			<am-link target="${page}" class="${classes.navLink}">
-				<span class="${classes.iconText}">
+			<am-link target="${page}" class="${CSS.navLink}">
+				<span class="${CSS.iconText}">
 					<i class="bi bi-${icon}"></i>
 					<span>${App.text(text)}</span>
 					${badge ? `<${badge}></${badge}>` : ''}

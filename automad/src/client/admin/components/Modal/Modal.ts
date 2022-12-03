@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -34,7 +34,7 @@
 
 import {
 	App,
-	classes,
+	CSS,
 	eventNames,
 	fire,
 	getFormData,
@@ -83,14 +83,14 @@ export class ModalComponent extends BaseComponent {
 	 * True if the modal dialog is open.
 	 */
 	get isOpen(): boolean {
-		return this.matches(`.${classes.modalOpen}`);
+		return this.matches(`.${CSS.modalOpen}`);
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.modal);
+		this.classList.add(CSS.modal);
 
 		if (!this.hasAttribute('noclick')) {
 			listen(this, 'click', (event: MouseEvent) => {
@@ -123,10 +123,24 @@ export class ModalComponent extends BaseComponent {
 	}
 
 	/**
+	 * Lock the navigation.
+	 */
+	protected lockNavigation(): void {
+		this.lockId = App.addNavigationLock();
+	}
+
+	/**
+	 * Unlock the navigation.
+	 */
+	protected unlockNavigation(): void {
+		App.removeNavigationLock(this.lockId);
+	}
+
+	/**
 	 * Close the modal.
 	 */
 	close(): void {
-		this.classList.remove(classes.modalOpen);
+		this.classList.remove(CSS.modalOpen);
 		this.toggleBodyOverflow();
 		this.restoreInitialFormData();
 
@@ -138,16 +152,16 @@ export class ModalComponent extends BaseComponent {
 			}, 400);
 		}
 
-		App.removeNavigationLock(this.lockId);
+		this.unlockNavigation();
 	}
 
 	/**
 	 * Open the modal.
 	 */
 	open(): void {
-		this.lockId = App.addNavigationLock();
+		this.lockNavigation();
 
-		this.classList.add(classes.modalOpen);
+		this.classList.add(CSS.modalOpen);
 		this.toggleBodyOverflow();
 		this.saveInitialFormData();
 
@@ -165,26 +179,26 @@ export class ModalComponent extends BaseComponent {
 	/**
 	 * Toggle the body overflow class when the modal is open.
 	 */
-	private toggleBodyOverflow(): void {
+	protected toggleBodyOverflow(): void {
 		const body = query('body');
 
 		body.classList.toggle(
-			classes.overflowHidden,
-			query(`.${classes.modalOpen}`) != null
+			CSS.overflowHidden,
+			query(`.${CSS.modalOpen}`) != null
 		);
 	}
 
 	/**
 	 * Save the initial form values on opening.
 	 */
-	private saveInitialFormData(): void {
+	protected saveInitialFormData(): void {
 		this.formData = getFormData(this);
 	}
 
 	/**
 	 * Restore the initial form data when modal was opened.
 	 */
-	private restoreInitialFormData(): void {
+	protected restoreInitialFormData(): void {
 		setFormData(this.formData, this);
 	}
 }

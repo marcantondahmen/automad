@@ -34,6 +34,7 @@
 
 .am-f-toggle {
 	display: flex;
+	color: var(--am-clr-text);
 
 	& input {
 		display: none;
@@ -48,11 +49,12 @@
 		}
 
 		& .bi {
-			font-size: 2.5rem;
+			font-size: 2.65rem;
 		}
 	}
 
-	&--button {
+	&--button,
+	&--select {
 		& label {
 			&:extend(.am-e-button all);
 
@@ -64,20 +66,44 @@
 			background-color: var(--am-clr-background-faded);
 		}
 
-		& :checked + label {
-			color: var(--am-clr-accent-text);
-			border-color: var(--am-clr-border-active);
-		}
-
 		& .bi {
 			font-size: 1.25rem;
 		}
 	}
 
-	& .bi:before {
+	&--select {
+		position: relative;
+
+		& label {
+			color: var(--am-clr-text-muted);
+		}
+
+		& select {
+			position: absolute;
+			inset: 0;
+			opacity: 0;
+			cursor: pointer;
+		}
+	}
+
+	&--on label,
+	&--button :checked + label {
+		color: var(--am-clr-accent-text);
+		border-color: var(--am-clr-border-active);
+	}
+
+	&--off label {
+		color: var(--am-clr-text);
+	}
+
+	& .bi:before,
+	&--off .bi:before,
+	&--default-on&--off .bi:before {
 		content: '\f5d5';
 	}
 
+	&--on .bi:before,
+	&--default-on .bi:before,
 	& :checked + * .bi:before {
 		content: '\f5d6';
 	}

@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, App, html } from '../core';
+import { App, html } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 
@@ -62,7 +62,7 @@ class AlertComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const types: KeyValueMap = {
+		/* const types: KeyValueMap = {
 			danger: classes.alertDanger,
 			success: classes.alertPrimary,
 		};
@@ -80,7 +80,7 @@ class AlertComponent extends BaseComponent {
 			<div class="${classes.alertText}">
 				${App.text(this.elementAttributes.text)}
 			</div>
-		`;
+		`; */
 	}
 }
 

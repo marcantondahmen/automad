@@ -33,14 +33,14 @@
  */
 
 import { App, getTagFromRoute, html, Routes } from '../../core';
-import { CenteredLayoutComponent } from './CenteredLayout';
+import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
  * The password reset view.
  *
- * @extends CenteredLayoutComponent
+ * @extends BaseCenteredLayoutComponent
  */
-export class ResetPasswordComponent extends CenteredLayoutComponent {
+export class ResetPasswordComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */

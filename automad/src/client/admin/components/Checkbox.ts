@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, html, listen, query } from '../core';
+import { create, CSS, html, listen, query } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -63,8 +63,8 @@ class CheckboxComponent extends BaseComponent {
 		this.removeAttribute('checkbox');
 
 		const toggleParent = () => {
-			this.closest(`.${classes.card}`).classList.toggle(
-				classes.cardActive,
+			this.closest(`.${CSS.card}`).classList.toggle(
+				CSS.cardActive,
 				(query('input', this) as HTMLInputElement).checked
 			);
 		};
@@ -77,7 +77,7 @@ class CheckboxComponent extends BaseComponent {
 	 * Render the checkbox.
 	 */
 	render(): void {
-		this.classList.add(classes.checkbox);
+		this.classList.add(CSS.checkbox);
 
 		const label = create('label', [], {}, this);
 

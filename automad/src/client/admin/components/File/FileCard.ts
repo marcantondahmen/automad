@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, html, queryAll } from '../../core';
+import { App, CSS, html, queryAll } from '../../core';
 import { File } from '../../types';
 import { BaseComponent } from '../Base';
 import { FileInfoComponent } from './FileInfo';
@@ -56,7 +56,7 @@ class FileCardComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.card);
+		this.classList.add(CSS.card);
 	}
 
 	/**
@@ -80,8 +80,8 @@ class FileCardComponent extends BaseComponent {
 		if (file.caption) {
 			caption = html`
 				<am-icon-text
-					icon="text-left"
-					text="${file.caption}"
+					icon="chat-square-text"
+					text="$${file.caption}"
 				></am-icon-text>
 			`;
 		}
@@ -89,16 +89,13 @@ class FileCardComponent extends BaseComponent {
 		this.innerHTML = html`
 			${this.renderPreview(file)}
 			<am-file-info
-				class="${classes.flexItemGrow} ${classes.flex} ${classes.flexColumn} ${classes.flexGap} ${classes.cursorPointer}"
+				class="${CSS.flexItemGrow} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap} ${CSS.cursorPointer}"
 			>
-				<div class="${classes.cardTitle}" title="$${file.basename}">
-					${file.basename}
+				<div class="${CSS.cardTitle}" am-tooltip="$${file.basename}">
+					$${file.basename}
 				</div>
-				<div
-					class="${classes.cardText} ${classes.flexItemGrow} ${classes.flex} ${classes.flexColumn}"
-				>
-					<span>${caption}</span>
-					<span>${dimensions}</span>
+				<div class="${CSS.cardBody}">
+					${caption} ${dimensions}
 					<am-icon-text
 						icon="calendar2-date"
 						text="${file.mtime || '-'}"
@@ -109,11 +106,9 @@ class FileCardComponent extends BaseComponent {
 					></am-icon-text>
 				</div>
 			</am-file-info>
-			<div class="${classes.cardFooter} ${classes.flexBetween}">
-				<span class="${classes.cardIconButtons}">
-					${this.renderDropdown(file)}
-				</span>
-				<am-checkbox name="delete[${file.basename}]"></am-checkbox>
+			<div class="${CSS.cardFooter}">
+				${this.renderDropdown(file)}
+				<am-checkbox name="delete[$${file.basename}]"></am-checkbox>
 			</div>
 		`;
 
@@ -133,22 +128,24 @@ class FileCardComponent extends BaseComponent {
 			return html`
 				<am-file-robot
 					file="${file.url}"
-					class="${classes.cardImage} ${classes.cursorPointer}"
-					title="$${file.basename}"
+					class="${CSS.cardTeaser} ${CSS.cursorPointer}"
+					am-tooltip="$${file.basename}"
 				>
-					<img src="${file.thumbnail}" />
+					<img src="$${file.thumbnail}" />
 				</am-file-robot>
 			`;
 		}
 
 		return html`
 			<am-file-info
-				class="${classes.cardImage} ${classes.cursorPointer}"
-				title="$${file.basename}"
+				class="${CSS.cardTeaser} ${CSS.cursorPointer}"
+				am-tooltip="$${file.basename}"
 			>
 				<i class="bi bi-file-earmark bi-filetype-${file.extension}"></i>
 			</am-file-info>
 		`;
+
+		return '';
 	}
 
 	/**
@@ -162,13 +159,10 @@ class FileCardComponent extends BaseComponent {
 
 		if (file.thumbnail) {
 			editImage = html`
-				<am-file-robot
-					file="${file.url}"
-					class="${classes.dropdownItem}"
-				>
+				<am-file-robot file="${file.url}" class="${CSS.dropdownLink}">
 					<am-icon-text
 						icon="pencil"
-						text="${App.text('editImage')}"
+						text="$${App.text('editImage')}"
 					></am-icon-text>
 				</am-file-robot>
 			`;
@@ -177,21 +171,18 @@ class FileCardComponent extends BaseComponent {
 		return html`
 			<am-dropdown>
 				<i class="bi bi-three-dots"></i>
-				<div class="${classes.dropdownItems}">
+				<div class="${CSS.dropdownItems}">
 					${editImage}
-					<am-file-info class="${classes.dropdownItem}">
+					<am-file-info class="${CSS.dropdownLink}">
 						<am-icon-text
 							icon="card-heading"
-							text="${App.text('editFileInfo')}"
+							text="$${App.text('editFileInfo')}"
 						></am-icon-text>
 					</am-file-info>
-					<am-copy
-						class="${classes.dropdownItem}"
-						value="${file.url}"
-					>
+					<am-copy class="${CSS.dropdownLink}" value="${file.url}">
 						<am-icon-text
 							icon="clipboard-plus"
-							text="${App.text('copyUrlClipboard')}"
+							text="$${App.text('copyUrlClipboard')}"
 						></am-icon-text>
 					</am-copy>
 				</div>

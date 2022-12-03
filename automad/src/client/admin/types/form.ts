@@ -39,7 +39,6 @@ export type InputElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface TemplateButtonStatus {
 	buttonLabel: string;
-	buttonClass: string;
 	buttonIcon: string;
 	selectedTemplate: string;
 }

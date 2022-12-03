@@ -26,14 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
 import {
-	classes,
 	create,
 	App,
 	getPageURL,
@@ -46,6 +45,7 @@ import {
 	listen,
 	requestAPI,
 	eventNames,
+	CSS,
 } from '../core';
 import { KeyValueMap, NavTreeItem, PageMetaData } from '../types';
 import { BaseComponent } from './Base';
@@ -66,6 +66,11 @@ export class NavTreeComponent extends BaseComponent {
 	protected api = 'UI/navTree';
 
 	/**
+	 * The main CSS classes.
+	 */
+	protected elementClasses = [CSS.nav];
+
+	/**
 	 * The pages tree structure.
 	 */
 	protected tree: KeyValueMap;
@@ -84,7 +89,7 @@ export class NavTreeComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.nav);
+		this.classList.add(...this.elementClasses);
 
 		this.listeners.push(
 			listen(window, eventNames.appStateChange, this.init.bind(this))
@@ -128,6 +133,7 @@ export class NavTreeComponent extends BaseComponent {
 		this.unfoldToActive();
 		this.toggleChildrenIcons();
 		this.initSortable();
+		this.scrollToActive();
 	}
 
 	/**
@@ -161,7 +167,7 @@ export class NavTreeComponent extends BaseComponent {
 		});
 
 		const childrenContainers = queryAll(
-			`.${classes.navChildren}`,
+			`.${CSS.navChildren}`,
 			this
 		) as HTMLElement[];
 
@@ -179,16 +185,16 @@ export class NavTreeComponent extends BaseComponent {
 					invertedSwapThreshold: 0.5,
 					invertSwap: true,
 
-					ghostClass: classes.navItemGhost,
-					chosenClass: classes.navItemChosen,
-					dragClass: classes.navItemDrag,
+					ghostClass: CSS.navItemGhost,
+					chosenClass: CSS.navItemChosen,
+					dragClass: CSS.navItemDrag,
 
 					onStart: () => {
-						this.classList.add(classes.navDragging);
+						this.classList.add(CSS.navDragging);
 					},
 
 					onEnd: async (event: SortableEvent) => {
-						this.classList.remove(classes.navDragging);
+						this.classList.remove(CSS.navDragging);
 
 						const { item, from, to } = event;
 
@@ -237,13 +243,9 @@ export class NavTreeComponent extends BaseComponent {
 	 * @param count
 	 */
 	protected renderLabel(count: number): void {
-		create('span', [classes.navLabel], {}, this).innerHTML = html`
-			<span
-				class="${classes.flex} ${classes.flexGap} ${classes.flexAlignCenter}"
-			>
-				<i class="bi bi-files"></i>
-				${App.text('sidebarPages')}
-				<span class="${classes.badge}">${count}</span>
+		create('span', [CSS.navLabel], {}, this).innerHTML = html`
+			<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}">
+				$${App.text('sidebarPages')} &mdash; ${count}
 			</span>
 		`;
 	}
@@ -269,19 +271,21 @@ export class NavTreeComponent extends BaseComponent {
 		const level = (page.path.match(/\/./g) || []).length;
 		const wrapper = create(
 			'details',
-			[classes.navItem],
+			[CSS.navItem],
 			{
 				path: page.path,
 				url: page.url,
-				title: page.path,
 			},
 			parent
 		);
-		const summary = create('summary', [classes.navLink], {}, wrapper);
+		const summary = create('summary', [CSS.navLink], {}, wrapper);
 		const children = create(
 			'div',
-			[classes.navChildren],
-			{ url: page.url, path: page.path },
+			[CSS.navChildren],
+			{
+				path: page.path,
+				url: page.url,
+			},
 			wrapper
 		);
 
@@ -314,6 +318,9 @@ export class NavTreeComponent extends BaseComponent {
 			[],
 			{
 				target: `${Routes.page}?url=${encodeURIComponent(page.url)}`,
+				'am-tooltip': page.path,
+				'am-tooltip-options':
+					'placement: right, delay: 10, marginRight: 10',
 			},
 			summary
 		);
@@ -331,7 +338,7 @@ export class NavTreeComponent extends BaseComponent {
 
 		link.innerHTML = html`
 			<am-icon-text icon="${icon}" text="${page.title}"></am-icon-text>
-			<span class="${classes.navGrip}">${grabIcon}</span>
+			<span class="${CSS.navGrip}">${grabIcon}</span>
 		`;
 
 		return link;
@@ -345,7 +352,7 @@ export class NavTreeComponent extends BaseComponent {
 	 */
 	protected toggleItem(item: NavTreeItem, url: string): void {
 		item.wrapper.classList.toggle(
-			classes.navItemActive,
+			CSS.navItemActive,
 			item.page.url == url && isActivePage(Routes.page)
 		);
 	}
@@ -354,10 +361,7 @@ export class NavTreeComponent extends BaseComponent {
 	 * Unfold the tree to reveal the active item.
 	 */
 	private unfoldToActive(): void {
-		const activeItem = query(
-			`.${classes.navItemActive}`,
-			this
-		) as HTMLElement;
+		const activeItem = query(`.${CSS.navItemActive}`, this) as HTMLElement;
 
 		if (activeItem) {
 			queryParents('details', activeItem).forEach((item: HTMLElement) => {
@@ -367,14 +371,27 @@ export class NavTreeComponent extends BaseComponent {
 	}
 
 	/**
+	 * Scroll parent container until active element is active.
+	 */
+	private scrollToActive(): void {
+		const activeItem = query(`.${CSS.navItemActive}`, this) as HTMLElement;
+
+		if (activeItem) {
+			activeItem.scrollIntoView({
+				block: 'end',
+			});
+		}
+	}
+
+	/**
 	 * Toggle visibility of the children arrow indicators depending on the existance of children.
 	 */
 	private toggleChildrenIcons(): void {
-		const childrenContainers = queryAll(`.${classes.navChildren}`, this);
+		const childrenContainers = queryAll(`.${CSS.navChildren}`, this);
 
 		childrenContainers.forEach((item: Element) => {
 			(item.previousSibling as Element).classList.toggle(
-				classes.navLinkHasChildren,
+				CSS.navLinkHasChildren,
 				item.childElementCount > 0
 			);
 		});

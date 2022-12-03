@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, eventNames, listen, query } from '../core';
+import { create, CSS, eventNames, listen, query } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -47,7 +47,6 @@ import { BaseComponent } from './Base';
  *         <option>...</option>
  *         <option>...</option>
  *     </select>
- *     Some suffix or icon here
  * </am-select>
  *
  * @extends BaseComponent
@@ -57,8 +56,7 @@ class SelectComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.select);
-		create('i', ['bi', 'bi-chevron-down'], {}, this);
+		this.classList.add(CSS.select);
 
 		setTimeout(this.init.bind(this), 0);
 	}

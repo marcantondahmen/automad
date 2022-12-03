@@ -26,14 +26,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
 import { BaseComponent } from '../Base';
-import { App, classes, eventNames, listen } from '../../core';
+import { App, CSS, eventNames, listen } from '../../core';
 import {
 	getActiveSection,
 	setActiveSection,
@@ -74,7 +74,7 @@ export class SwitcherLinkComponent extends BaseComponent {
 	 */
 	toggle(): void {
 		this.classList.toggle(
-			classes.switcherLinkActive,
+			CSS.menuItemActive,
 			this.elementAttributes.section == getActiveSection()
 		);
 	}
@@ -91,4 +91,4 @@ export class SwitcherLinkComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-switcher-link', SwitcherLinkComponent);
+customElements.define(linkTag, SwitcherLinkComponent);

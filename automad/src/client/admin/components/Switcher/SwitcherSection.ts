@@ -26,14 +26,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
 import { BaseComponent } from '../Base';
-import { classes, eventNames, listen, query } from '../../core';
+import { CSS, eventNames, listen, query } from '../../core';
 import { getActiveSection, SwitcherComponent } from './Switcher';
 
 /**
@@ -60,7 +60,7 @@ export class SwitcherSectionComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.switcherSection);
+		this.classList.add(CSS.switcherSection);
 		this.toggle();
 
 		this.listeners.push(
@@ -73,7 +73,7 @@ export class SwitcherSectionComponent extends BaseComponent {
 	 */
 	toggle(): void {
 		this.classList.toggle(
-			classes.switcherSectionActive,
+			CSS.switcherSectionActive,
 			this.elementAttributes.name == getActiveSection()
 		);
 

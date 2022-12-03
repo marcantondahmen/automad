@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, createField, html, Routes } from '../../core';
+import { App, createField, CSS, html, Routes } from '../../core';
 import { KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
 
@@ -89,22 +89,29 @@ export class ResetPasswordFormComponent extends FormComponent {
 		const searchParams = new URLSearchParams(window.location.search);
 
 		this.innerHTML = html`
-			<p>${App.text('passwordResetEnterNameOrEmail')}</p>
-			${createField(
-				'am-input',
-				null,
-				{
-					key: 'name-or-email',
-					name: 'name-or-email',
-					value: searchParams.get('username') || '',
-					label: App.text('usernameOrEmail'),
-				},
-				[],
-				{}
-			).outerHTML}
-			<am-submit class="${classes.button}">
-				${App.text('submit')}
-			</am-submit>
+			<h1>$${App.text('resetPassword')}</h1>
+			<div class="${CSS.card}">
+				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					$${App.text('passwordResetEnterNameOrEmail')}
+				</div>
+				<div class="${CSS.cardForm}">
+					<input
+						type="text"
+						class="${CSS.input}"
+						name="name-or-email"
+						value="$${searchParams.get('username') || ''}"
+						placeholder="$${App.text('usernameOrEmail')}"
+					/>
+					<div class="${CSS.cardFormButtons}">
+						<am-link class="${CSS.button}" target="${Routes.login}">
+							$${App.text('cancel')}
+						</am-link>
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+							$${App.text('submit')}
+						</am-submit>
+					</div>
+				</div>
+			</div>
 		`;
 	}
 
@@ -115,47 +122,49 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSetPassword(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<p>${App.text('passwordResetEnterNewPassword')}</p>
-			<input type="hidden" name="username" value="${data.username}" />
-			${createField(
-				'am-input',
-				null,
-				{
-					key: 'token',
-					name: 'token',
-					value: '',
-					label: App.text('passwordResetToken'),
-				},
-				[],
-				{ required: '' }
-			).outerHTML}
-			${createField(
-				'am-password',
-				null,
-				{
-					key: 'password1',
-					name: 'password1',
-					value: '',
-					label: App.text('password'),
-				},
-				[],
-				{ required: '' }
-			).outerHTML}
-			${createField(
-				'am-password',
-				null,
-				{
-					key: 'password2',
-					name: 'password2',
-					value: '',
-					label: App.text('repeatPassword'),
-				},
-				[],
-				{ required: '' }
-			).outerHTML}
-			<am-submit class="${classes.button}">
-				${App.text('passwordResetSave')}
-			</am-submit>
+			<h1>$${App.text('resetPassword')}</h1>
+			<div class="${CSS.card}">
+				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					$${App.text('passwordResetEnterNewPassword')}
+				</div>
+				<div class="${CSS.cardForm}">
+					<input
+						type="text"
+						class="${CSS.input}"
+						name="token"
+						placeholder="$${App.text('passwordResetToken')}"
+						am-tooltip="$${App.text('passwordResetToken')}"
+						am-tooltip-options="placement: top"
+						required
+					/>
+					<input
+						type="password"
+						class="${CSS.input}"
+						name="password1"
+						placeholder="$${App.text('password')}"
+						am-tooltip="$${App.text('password')}"
+						am-tooltip-options="placement: top"
+						required
+					/>
+					<input
+						type="password"
+						class="${CSS.input}"
+						name="password2"
+						placeholder="$${App.text('repeatPassword')}"
+						am-tooltip="$${App.text('repeatPassword')}"
+						am-tooltip-options="placement: top"
+						required
+					/>
+					<div class="${CSS.cardFormButtons}">
+						<am-link class="${CSS.button}" target="${Routes.login}">
+							$${App.text('cancel')}
+						</am-link>
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+							$${App.text('passwordResetSave')}
+						</am-submit>
+					</div>
+				</div>
+			</div>
 		`;
 	}
 
@@ -166,10 +175,17 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSuccess(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<p>${App.text('passwordChangedSuccess')}</p>
-			<am-link class="${classes.button}" target="${Routes.login}">
-				$${App.text('signIn')}
-			</am-link>
+			<h1>$${App.text('resetPassword')}</h1>
+			<div class="${CSS.card}">
+				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					$${App.text('passwordChangedSuccess')}
+				</div>
+				<div class="${CSS.cardForm}">
+					<am-link class="${CSS.button}" target="${Routes.login}">
+						$${App.text('signIn')}
+					</am-link>
+				</div>
+			</div>
 		`;
 	}
 }

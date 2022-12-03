@@ -35,7 +35,7 @@
 import FilerobotImageEditor from 'filerobot-image-editor';
 import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
 import { KeyValueMap } from '../../types';
-import { App, classes, create, eventNames, fire, listen } from '../../core';
+import { App, create, CSS, eventNames, fire, listen } from '../../core';
 import { ModalComponent } from '../Modal/Modal';
 import { BaseComponent } from '../Base';
 import { FormComponent } from '../Forms/Form';
@@ -87,7 +87,7 @@ class FileRobotComponent extends BaseComponent {
 		);
 		const dialog = create(
 			'am-form',
-			[classes.modalDialog, classes.modalDialogFullscreen],
+			[CSS.modalDialog, CSS.modalDialogFullscreen],
 			{ api: 'Image/save' },
 			modal
 		);

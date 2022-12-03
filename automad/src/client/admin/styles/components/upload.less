@@ -32,37 +32,54 @@
  * Licensed under the MIT license.
  */
 
-@c-upload-preview-padding: 0.6rem;
-@c-upload-thumbnail-size: 4rem;
-
 .am-c-upload {
+	@upload-preview-padding: 0.6rem;
+	@upload-thumbnail-size: 4rem;
 	display: block;
 
 	&__dropzone {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		gap: @am-flex-gap * 1.3;
 		padding: 1rem;
 		width: 100%;
 		height: 5rem;
+		margin-bottom: 1.25rem;
 		text-align: center;
 		font-size: 1.25rem;
-		color: var(--am-border-clr);
-		background-color: var(--am-form-bg);
-		border-radius: var(--am-radius-large);
-		border: 2px dashed var(--am-border-clr);
+		color: var(--am-clr-text-muted);
+		background-color: var(--am-clr-background-faded);
+		border-radius: @am-card-radius;
+		border: 1px dashed var(--am-clr-border);
+		cursor: pointer;
+		transition: color 0.2s, background-color 0.2s, border 0.2s, outline 0.2s;
 
-		& > * {
+		&:hover {
+			color: var(--am-clr-text-paragraph);
+		}
+
+		&.dz-drag-hover {
+			color: var(--am-clr-accent-text);
+			background-color: var(--am-clr-accent-background);
+			border: 1px solid var(--am-clr-accent-text);
+			outline: @am-outline-active;
+		}
+
+		& > span {
+			user-select: none;
 			pointer-events: none;
+		}
+
+		& .bi {
+			font-size: 1.5rem;
 		}
 	}
 
 	&__previews.am-c-modal__dialog {
 		display: flex;
 		flex-direction: column;
-		min-height: (
-			@c-upload-thumbnail-size + (2 * @c-upload-preview-padding)
-		);
+		min-height: (@upload-thumbnail-size + (2 * @upload-preview-padding));
 		padding: 0;
 	}
 
@@ -72,26 +89,27 @@
 
 	& .dz-preview {
 		display: grid;
-		grid-template-columns: @c-upload-thumbnail-size ~'calc(100% - @{c-upload-thumbnail-size} - @{c-upload-preview-padding})';
-		grid-template-rows: repeat(3, (@c-upload-thumbnail-size / 3));
-		column-gap: @c-upload-preview-padding;
+		grid-template-columns: @upload-thumbnail-size ~'calc(100% - @{upload-thumbnail-size} - @{upload-preview-padding})';
+		grid-template-rows: repeat(3, (@upload-thumbnail-size / 3));
+		column-gap: @upload-preview-padding;
 		box-sizing: content-box;
-		padding: @c-upload-preview-padding;
-		height: @c-upload-thumbnail-size;
-		font-size: var(--am-small-font-size);
+		padding: @upload-preview-padding;
+		height: @upload-thumbnail-size;
+		font-size: @am-small-font-size;
+		text-align: left;
 
 		& + .dz-preview {
-			border-top: var(--am-border);
+			border-top: @am-border;
 		}
 
 		& .dz-image {
 			grid-column: 1 / 2;
 			grid-row: 1 / 4;
-			height: @c-upload-thumbnail-size;
-			border-radius: var(--am-radius);
+			height: @upload-thumbnail-size;
+			border-radius: 0.3rem;
 			overflow: hidden;
-			background-color: var(--am-form-bg);
-			border: var(--am-border);
+			background-color: var(--am-clr-background-faded);
+			border: @am-border;
 
 			& > img {
 				width: 100%;
@@ -106,11 +124,16 @@
 
 			display: flex;
 			flex-direction: column-reverse;
+			color: var(--am-clr-text-paragraph);
 
 			& > .dz-filename {
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
+			}
+
+			& > .dz-size {
+				color: var(--am-clr-text-muted);
 			}
 		}
 
@@ -119,17 +142,17 @@
 			grid-row: 1 / 4;
 
 			position: relative;
-			height: 16%;
+			height: 14%;
 			width: 80%;
 			inset: 42% 10%;
 			overflow: hidden;
 			border-radius: 2rem;
-			border: 2px solid var(--am-clr);
-			background-color: var(--am-clr);
-			opacity: 0.5;
+			border: 2px solid var(--am-clr-text);
+			background-color: var(--am-clr-text);
+			opacity: 0.75;
 
 			& .dz-upload {
-				background-color: var(--am-bg);
+				background-color: var(--am-clr-accent-text);
 				display: block;
 				position: relative;
 				height: 100%;
@@ -143,11 +166,11 @@
 			grid-row: 3 / 4;
 			align-self: end;
 			text-decoration: none;
-			color: var(--am-muted-clr);
+			color: var(--am-clr-accent-text);
 			transition: color 0.2s;
 
 			&:hover {
-				color: var(--am-clr);
+				color: var(--am-clr-accent-text-hover);
 			}
 		}
 

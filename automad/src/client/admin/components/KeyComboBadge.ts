@@ -32,74 +32,40 @@
  * Licensed under the MIT license.
  */
 
-import { html, listen, query } from '../core';
+import { CSS } from '../core';
 import { BaseComponent } from './Base';
 
 /**
- * A spinner component.
+ * A key combo badge that automatically displays the correct meta key.
  *
  * @extends BaseComponent
  */
-class DarkModeToggleComponent extends BaseComponent {
+class KeyComboComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['text'];
-	}
-
-	/**
-	 * Get the dark mode state.
-	 */
-	private get darkMode(): boolean {
-		const localScheme = localStorage.getItem('color-scheme');
-
-		if (localScheme) {
-			return localScheme === 'dark';
-		}
-
-		return (
-			window.matchMedia &&
-			window.matchMedia('(prefers-color-scheme: dark)').matches
-		);
+		return ['key'];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.render();
+		this.classList.add(CSS.keyCombo);
 
-		listen(this, 'click', () => {
-			localStorage.setItem(
-				'color-scheme',
-				!this.darkMode ? 'dark' : 'light'
-			);
+		let meta = 'Ctrl';
 
-			document.documentElement.classList.add('am-u-no-transition');
-			this.render();
+		if (navigator.userAgent.toLowerCase().indexOf('mac') != -1) {
+			meta = '⌘';
+		}
 
-			setTimeout(() => {
-				document.documentElement.classList.remove('am-u-no-transition');
-			}, 500);
-		});
-	}
+		this.textContent = `${meta} + ${this.elementAttributes.key}`;
 
-	/**
-	 * Render the toggle content.
-	 */
-	private render(): void {
-		const darkMode = this.darkMode;
-
-		query('.am-ui').classList.toggle('dark', darkMode);
-
-		this.innerHTML = html`
-			<i class="bi bi-${darkMode ? 'moon' : 'sun'}"></i>
-			<span>${this.elementAttributes.text}</span>
-		`;
+		this.removeAttribute('key');
 	}
 }
 
-customElements.define('am-dark-mode-toggle', DarkModeToggleComponent);
+customElements.define('am-key-combo-badge', KeyComboComponent);

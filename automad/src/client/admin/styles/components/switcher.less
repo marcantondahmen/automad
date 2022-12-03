@@ -39,35 +39,5 @@
 		&--active {
 			display: block;
 		}
-
-		&--fields&--active {
-			display: flex;
-		}
-
-		&--fields {
-			flex-wrap: wrap;
-			column-gap: var(--am-space-medium);
-
-			& > div {
-				min-width: 100%;
-			}
-
-			& > .am-c-field {
-				flex-grow: 1;
-				width: 40%;
-				min-width: 24rem;
-			}
-
-			& > am-title,
-			& > am-toggle-large,
-			& > am-page-template,
-			& > am-page-tags,
-			& > am-textarea,
-			& > am-editor {
-				&.am-c-field {
-					min-width: 100%;
-				}
-			}
-		}
 	}
 }

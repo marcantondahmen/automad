@@ -32,32 +32,53 @@
  * Licensed under the MIT license.
  */
 
-import { Partials } from '../../types';
-import { BaseLayoutComponent } from './BaseLayout';
-import { sidebarLayout } from './Templates/SidebarLayoutTemplate';
+import { query } from './utils';
+
+export enum DashboardThemes {
+	light = 'light',
+	lowContrast = 'low-contrast',
+	dark = 'dark',
+}
 
 /**
- * The Automad base component. All Automad components are based on this class.
+ * Get the color scheme from local storage or system preferences.
  *
- * @extends BaseLayoutComponent
+ * @returns The current color scheme in use
  */
-export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
-	/**
-	 * The template render function used to render the view.
-	 */
-	protected render: Function = sidebarLayout;
+export const getTheme = (): DashboardThemes => {
+	const localScheme = localStorage.getItem('dashboard-theme');
 
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {
-		main: this.renderMainPartial(),
-	};
+	if (localScheme) {
+		return localScheme as DashboardThemes;
+	}
 
-	/**
-	 * Render the main partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected abstract renderMainPartial(): string;
-}
+	if (
+		window.matchMedia &&
+		window.matchMedia('(prefers-color-scheme: dark)').matches
+	) {
+		return DashboardThemes.dark;
+	}
+};
+
+/**
+ * Set the color scheme and apply it to the current page.
+ *
+ * @param theme
+ */
+export const setTheme = (theme: DashboardThemes): void => {
+	localStorage.setItem('dashboard-theme', theme);
+	applyTheme(theme);
+};
+
+/**
+ * Apply a color scheme'
+ *
+ * @param theme
+ */
+export const applyTheme = (theme: DashboardThemes): void => {
+	const ui = query('.am-ui');
+
+	Object.values(DashboardThemes).forEach((item) => {
+		ui.classList.toggle(item, theme === item);
+	});
+};

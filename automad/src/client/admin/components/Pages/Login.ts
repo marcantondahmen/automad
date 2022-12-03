@@ -26,21 +26,21 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, classes, getTagFromRoute, html, Routes } from '../../core';
-import { CenteredLayoutComponent } from './CenteredLayout';
+import { App, CSS, getTagFromRoute, html, Routes } from '../../core';
+import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
  * The login view.
  *
- * @extends CenteredLayoutComponent
+ * @extends BaseCenteredLayoutComponent
  */
-export class LoginComponent extends CenteredLayoutComponent {
+export class LoginComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -55,28 +55,44 @@ export class LoginComponent extends CenteredLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<am-form api="Session/login" focus enter>
-				<input
-					class="${classes.input}"
-					type="text"
-					name="name-or-email"
-					placeholder="$${App.text('usernameOrEmail')}"
-					required
-				/>
-				<input
-					class="${classes.input}"
-					type="password"
-					name="password"
-					placeholder="$${App.text('password')}"
-					required
-				/>
-				<a href="./resetpassword" class="am-e-button">
-					$${App.text('forgotPassword')}
-				</a>
-				<am-submit class="am-e-button" form="Session/login">
-					$${App.text('signIn')}
-				</am-submit>
-			</am-form>
+			<h1>$${App.sitename} &mdash; $${App.text('signIn')}</h1>
+			<div class="am-c-card">
+				<am-form
+					class="am-c-card__form"
+					api="Session/login"
+					focus
+					enter
+				>
+					<input
+						class="${CSS.input}"
+						type="text"
+						name="name-or-email"
+						placeholder="$${App.text('usernameOrEmail')}"
+						required
+					/>
+					<input
+						class="${CSS.input}"
+						type="password"
+						name="password"
+						placeholder="$${App.text('password')}"
+						required
+					/>
+					<div class="am-c-card__form-buttons">
+						<a
+							href="./${Routes.resetpassword}"
+							class="${CSS.button}"
+						>
+							$${App.text('forgotPassword')}
+						</a>
+						<am-submit
+							class="${CSS.button} ${CSS.buttonPrimary}"
+							form="Session/login"
+						>
+							$${App.text('signIn')}
+						</am-submit>
+					</div>
+				</am-form>
+			</div>
 		`;
 	}
 }

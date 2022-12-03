@@ -47,9 +47,9 @@ import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
 import {
 	App,
 	Binding,
-	classes,
 	create,
 	createField,
+	CSS,
 	html,
 	Routes,
 	setDocumentTitle,
@@ -113,12 +113,7 @@ const fieldGroup = ({
  */
 const createSections = (form: PageDataFormComponent): PageSectionCollection => {
 	const createSection = (section: string): SwitcherSectionComponent => {
-		return create(
-			'am-switcher-section',
-			[classes.switcherSectionFields],
-			{ name: section },
-			form
-		);
+		return create('am-switcher-section', [], { name: section }, form);
 	};
 
 	const sections: PageSectionCollection = {
@@ -344,11 +339,17 @@ export class PageDataFormComponent extends FormComponent {
 			[],
 			{
 				href: `${App.baseURL}${fields[App.reservedFields.AM_KEY_URL]}`,
+				target: '_blank',
 				bind: 'pageUrlWithBase',
-				bindto: 'textContent href',
+				bindto: 'href',
 			},
-			create('div', [], {}, section)
-		).innerHTML = fields[App.reservedFields.AM_KEY_URL] || url;
+			titleField
+		).innerHTML = html`
+			<span class="${CSS.iconText}">
+				<i class="bi bi-link"></i>
+				<span bind="pageUrlWithBase" bindto="textContent"></span>
+			</span>
+		`;
 
 		createMainField(
 			'am-toggle-large',

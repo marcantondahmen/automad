@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, html, listen, query } from '../../core';
+import { App, create, CSS, html, listen, query } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -47,22 +47,20 @@ class ToggleSelectComponent extends BaseFieldComponent {
 	createInput(): void {
 		const { name, id, value, label, placeholder } = this._data;
 
-		const wrapper = create(
-			'div',
-			[classes.toggle, classes.toggleSelect, classes.select],
-			{},
-			this
-		);
+		const wrapper = create('div', [CSS.toggle, CSS.toggleSelect], {}, this);
 
 		const toggle = () => {
-			wrapper.classList.toggle(classes.toggleOff, select.value === '0');
-			wrapper.classList.toggle(classes.toggleOn, select.value === '1');
+			wrapper.classList.toggle(CSS.toggleOff, select.value === '0');
+			wrapper.classList.toggle(CSS.toggleOn, select.value === '1');
 		};
 
-		wrapper.classList.toggle(classes.toggleDefaultOn, placeholder != '');
+		wrapper.classList.toggle(CSS.toggleDefaultOn, placeholder != '');
 
 		wrapper.innerHTML = html`
-			<label for="${id}"><span></span>${label}</label>
+			<label for="${id}">
+				<i class="bi"></i>
+				<span>${label}</span>
+			</label>
 			<select name="${name}" id="${id}">
 				<option value="">${App.text('useSharedDefault')}</option>
 				<option value="0">${App.text('disable')}</option>

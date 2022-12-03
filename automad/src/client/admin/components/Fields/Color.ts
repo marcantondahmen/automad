@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, create } from '../../core';
+import { create, CSS, listen } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -46,12 +46,27 @@ class ColorComponent extends BaseFieldComponent {
 	 */
 	createInput(): void {
 		const { name, id, value } = this._data;
-		create(
+		const combo = create('div', [CSS.inputCombo], {}, this);
+		const input = create(
 			'input',
-			[classes.input],
-			{ id, name, value, type: 'color' },
-			this
+			[CSS.input, CSS.textMono],
+			{ id, name, value, type: 'text' },
+			combo
 		);
+		const picker = create(
+			'input',
+			[],
+			{ type: 'color' },
+			create('span', [CSS.inputComboColor], {}, combo)
+		);
+
+		listen(picker, 'change', () => {
+			input.value = picker.value;
+		});
+
+		listen(input, 'keyup', () => {
+			picker.value = input.value;
+		});
 	}
 }
 

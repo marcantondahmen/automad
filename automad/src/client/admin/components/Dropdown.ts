@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, listen, queryParents } from '../core';
+import { CSS, listen, queryParents } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -53,11 +53,8 @@ class DropdownComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.dropdown);
-		this.classList.toggle(
-			classes.dropdownRight,
-			this.hasAttribute('right')
-		);
+		this.classList.add(CSS.dropdown);
+		this.classList.toggle(CSS.dropdownRight, this.hasAttribute('right'));
 
 		this.listeners.push(
 			listen(window, 'click', (event: MouseEvent) => {
@@ -68,9 +65,9 @@ class DropdownComponent extends BaseComponent {
 						event.target as HTMLElement
 					).includes(this)
 				) {
-					this.classList.toggle(classes.dropdownOpen);
+					this.classList.toggle(CSS.dropdownOpen);
 				} else {
-					this.classList.remove(classes.dropdownOpen);
+					this.classList.remove(CSS.dropdownOpen);
 				}
 			})
 		);

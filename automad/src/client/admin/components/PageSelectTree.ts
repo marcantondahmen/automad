@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, getPageURL, html, listen, query } from '../core';
+import { create, CSS, getPageURL, html, listen, query } from '../core';
 import { NavTreeItem, PageMetaData } from '../types';
 import { NavTreeComponent } from './NavTree';
 
@@ -45,6 +45,11 @@ import { NavTreeComponent } from './NavTree';
  * @extends BaseComponent
  */
 class PageSelectTreeComponent extends NavTreeComponent {
+	/**
+	 * The main CSS classes.
+	 */
+	protected elementClasses = [CSS.nav, CSS.navSelectForm];
+
 	/**
 	 * True if the current page should be excluded.
 	 */
@@ -71,14 +76,16 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	 * @returns true if the page should be highlighted initially
 	 */
 	private isHighlightedOnInit(page: PageMetaData): boolean {
+		const current = getPageURL() || '/';
+
 		if (this.hideCurrent) {
-			const parentOfActive = getPageURL()
+			const parentOfActive = current
 				?.replace(/[^\/]+$/, '')
 				.replace(/(.)\/$/, '$1');
 			return parentOfActive === page.url;
 		}
 
-		return getPageURL() == page.url;
+		return current === page.url;
 	}
 
 	/**
@@ -110,16 +117,16 @@ class PageSelectTreeComponent extends NavTreeComponent {
 		const { page, summary } = item;
 		const label = create('label', [], {}, summary);
 
-		let icon = 'folder';
+		let icon = 'folder2';
 
 		if (page.private) {
-			icon = 'folder-fill';
+			icon = 'eye-slash-fill';
 		}
 
 		label.innerHTML = html`
 			<am-icon-text icon="${icon}" text="${page.title}"></am-icon-text>
 			<input
-				class="${classes.displayNone}"
+				class="${CSS.displayNone}"
 				type="radio"
 				name="targetPage"
 				value="${page.url}"
@@ -147,10 +154,7 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	protected toggleItem(item: NavTreeItem, url: string): void {
 		const radioInput = query('input', item.summary) as HTMLInputElement;
 
-		item.wrapper.classList.toggle(
-			classes.navItemActive,
-			radioInput.checked
-		);
+		item.wrapper.classList.toggle(CSS.navItemActive, radioInput.checked);
 	}
 }
 
