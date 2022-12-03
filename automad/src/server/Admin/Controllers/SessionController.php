@@ -60,7 +60,7 @@ class SessionController {
 		$Response = new Response();
 
 		if (Session::login(Request::post('name-or-email'), Request::post('password'))) {
-			return $Response->setRedirect('/home');
+			return $Response->setRedirect('home');
 		}
 
 		return $Response->setError(Text::get('signInError'));
@@ -69,10 +69,17 @@ class SessionController {
 	/**
 	 * Log out user.
 	 *
-	 * @return bool true on success
+	 * @return Response the Response object
 	 */
 	public static function logout() {
-		return Session::logout();
+		$Response = new Response();
+
+		if (Session::logout()) {
+			$Response->setSuccess(Text::get('signedOutSuccess'));
+
+			return $Response->setRedirect('login');
+		}
+	}
 
 	/**
 	 * A simple testing endpoint to verify if an browser window or tab has a valid CSRF token.
