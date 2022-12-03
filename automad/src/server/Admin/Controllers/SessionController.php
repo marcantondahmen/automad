@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Session controller class provides all methods related to a user session.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class SessionController {
@@ -73,5 +73,16 @@ class SessionController {
 	 */
 	public static function logout() {
 		return Session::logout();
+
+	/**
+	 * A simple testing endpoint to verify if an browser window or tab has a valid CSRF token.
+	 *
+	 * @return Response the Response object
+	 */
+	public static function validateCsrfToken() {
+		$Response = new Response();
+		$Response->setSuccess('OK');
+
+		return $Response;
 	}
 }

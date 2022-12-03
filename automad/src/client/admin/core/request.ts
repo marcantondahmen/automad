@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -35,6 +35,20 @@
 import { App, create, fire, notifyError, query } from '.';
 import { FormComponent } from '../components/Forms/Form';
 import { KeyValueMap } from '../types';
+
+/**
+ * The name of the token field that is submitted along with post requests.
+ */
+export const csrfTokenKey = '__csrf__';
+
+/**
+ * Get the current CSRF token that is stored in the meta tag.
+ *
+ * @returns the csrf token stored in the meta tag
+ */
+export const getCsrfToken = (): string => {
+	return (query('meta[name="csrf"]') as HTMLMetaElement).content || '';
+};
 
 /**
  * Request a given URL and optionally post an object as data.
@@ -53,6 +67,8 @@ export const request = async (
 
 	if (data !== null) {
 		const formData = new FormData();
+
+		formData.append(csrfTokenKey, getCsrfToken());
 
 		Object.keys(data).forEach((key) => {
 			formData.append(key, data[key]);

@@ -36,6 +36,7 @@
 
 namespace Automad\Admin\API;
 
+use Automad\Admin\Session;
 use Automad\Core\Debug;
 use Automad\Core\Str;
 
@@ -60,6 +61,16 @@ class RequestHandler {
 	 * @return string the JSON formatted response
 	 */
 	public static function getResponse() {
+		header('Content-Type: application/json; charset=utf-8');
+
+		if (!self::validate()) {
+			$Response = new Response();
+			$Response->setCode(403);
+			$Response->setError('CSRF token mismatch');
+
+			return $Response->json();
+		}
+
 		$apiRoute = trim(Str::stripStart(AM_REQUEST, self::$apiBase), '/');
 
 		Debug::log($apiRoute);
@@ -67,8 +78,6 @@ class RequestHandler {
 		$method = '\\Automad\\Admin\\Controllers\\' . str_replace('/', 'Controller::', $apiRoute);
 		$parts = explode('::', $method);
 		$class = $parts[0];
-
-		header('Content-Type: application/json; charset=utf-8');
 
 		if (!empty($parts[1]) && self::classFileExists($class) && method_exists($class, $parts[1])) {
 			self::registerControllerErrorHandler();
@@ -110,5 +119,18 @@ class RequestHandler {
 				exit(json_encode($error, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 			}
 		});
+	}
+
+	/**
+	 * Validate request by checking the CSRF token in case of a post request.
+	 *
+	 * @return bool true if the request is valid
+	 */
+	private static function validate() {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			return Session::verifyCsrfToken($_POST['__csrf__'] ?? '');
+		}
+
+		return true;
 	}
 }

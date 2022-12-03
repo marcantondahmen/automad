@@ -56,6 +56,18 @@ class Session {
 	}
 
 	/**
+	 * Create a CSRF protection token.
+	 *
+	 * @return string the created token
+	 */
+	public static function createCsrfToken() {
+		$token = bin2hex(random_bytes(32));
+		$_SESSION['csrf'] = $token;
+
+		return $token;
+	}
+
+	/**
 	 * Return the reset token hash for a given user.
 	 *
 	 * @param string $username
@@ -133,5 +145,19 @@ class Session {
 	 */
 	public static function setResetTokenHash(string $username, string $tokenHash) {
 		$_SESSION['reset'] = array($username => $tokenHash);
+	}
+
+	/**
+	 * Verify a given CSRF token.
+	 *
+	 * @param string $token
+	 * @return bool true if the token is valid
+	 */
+	public static function verifyCsrfToken(string $token) {
+		if (empty($_SESSION['csrf'])) {
+			return false;
+		}
+
+		return $token === $_SESSION['csrf'];
 	}
 }
