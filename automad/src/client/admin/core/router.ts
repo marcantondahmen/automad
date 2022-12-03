@@ -38,7 +38,6 @@ export enum Routes {
 	setup = 'setup',
 	login = 'login',
 	resetpassword = 'resetpassword',
-	logout = 'logout',
 	search = 'search',
 	home = 'home',
 	system = 'system',

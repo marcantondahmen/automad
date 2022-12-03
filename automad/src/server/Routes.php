@@ -127,7 +127,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(login|resetpassword|logout)',
+			AM_PAGE_DASHBOARD . '/(login|resetpassword)',
 			function () {
 				self::redirectDashboard('/home');
 			},
@@ -143,7 +143,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(login|resetpassword|logout)',
+			AM_PAGE_DASHBOARD . '/(login|resetpassword)',
 			function () {
 				return Dashboard::render();
 			},
