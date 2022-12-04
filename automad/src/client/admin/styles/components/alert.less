@@ -36,7 +36,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.1rem;
-	margin: 1rem 0;
+	margin: 0;
+	margin-bottom: @am-base-margin-y;
 	padding: 1.25rem 1.1rem;
 	border: @am-border;
 	border-radius: 0.5rem;
@@ -47,6 +48,10 @@
 	& > * {
 		flex-basis: ~'calc(var(--multiplier) * 999)';
 		max-width: 100%;
+	}
+
+	* + & {
+		margin-top: @am-base-margin-y;
 	}
 
 	&__icon {

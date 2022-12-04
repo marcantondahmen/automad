@@ -7,35 +7,35 @@
 			<div class="am-c-modal__dialog">
 				<input type="text" class="am-c-modal__jumpbar-input" placeholder="Search">
 				<div class="am-c-modal__jumpbar-items">
-					<span class="am-c-modal__jumpbar-item">
+					<span class="am-c-modal__jumpbar-link">
 						<span class="am-c-icon-text">
 							<i class="bi bi-device-ssd"></i>
 							<span>Cache</span>
 							<span class="am-u-text-muted">System Settings</span>
 						</span>
 					</span>
-					<span class="am-c-modal__jumpbar-item">
+					<span class="am-c-modal__jumpbar-link">
 						<span class="am-c-icon-text">
 							<i class="bi bi-bug"></i>
 							<span>Debug Mode</span>
 							<span class="am-u-text-muted">System Settings</span>
 						</span>
 					</span>
-					<span class="am-c-modal__jumpbar-item am-c-modal__jumpbar-item--divider">
+					<span class="am-c-modal__jumpbar-link am-c-modal__jumpbar-divider">
 						<span class="am-c-icon-text">
 							<i class="bi bi-cloud-download"></i>
 							<span>Update</span>
 							<span class="am-u-text-muted">System Settings</span>
 						</span>
 					</span>
-					<span class="am-c-modal__jumpbar-item">
+					<span class="am-c-modal__jumpbar-link">
 						<span class="am-c-icon-text">
 							<i class="bi bi-file-text"></i>
 							<span>Page Title</span>
 							<span class="am-u-text-muted">/page-title</span>
 						</span>
 					</span>
-					<span class="am-c-modal__jumpbar-item">
+					<span class="am-c-modal__jumpbar-link">
 						<span class="am-c-icon-text">
 							<i class="bi bi-file-text"></i>
 							<span>Another Page</span>

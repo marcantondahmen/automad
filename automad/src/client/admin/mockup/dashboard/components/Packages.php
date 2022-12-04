@@ -9,11 +9,11 @@
 					<div class="am-c-card__header-dropdown am-c-dropdown am-c-dropdown--hover am-c-dropdown--right">
 						<i class="bi bi-three-dots"></i>
 						<div class="am-c-dropdown__items">
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-file-richtext"></i>
 								<span>Readme</span>
 							</a>
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-git"></i>
 								<span>Repository</span>
 							</a>
@@ -43,11 +43,11 @@
 					<div class="am-c-card__header-dropdown am-c-dropdown am-c-dropdown--hover am-c-dropdown--right">
 						<i class="bi bi-three-dots"></i>
 						<div class="am-c-dropdown__items">
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-file-richtext"></i>
 								<span>Readme</span>
 							</a>
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-git"></i>
 								<span>Repository</span>
 							</a>
@@ -75,11 +75,11 @@
 					<div class="am-c-card__header-dropdown am-c-dropdown am-c-dropdown--hover am-c-dropdown--right">
 						<i class="bi bi-three-dots"></i>
 						<div class="am-c-dropdown__items">
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-file-richtext"></i>
 								<span>Readme</span>
 							</a>
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-git"></i>
 								<span>Repository</span>
 							</a>
@@ -107,11 +107,11 @@
 					<div class="am-c-card__header-dropdown am-c-dropdown am-c-dropdown--hover am-c-dropdown--right">
 						<i class="bi bi-three-dots"></i>
 						<div class="am-c-dropdown__items">
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-file-richtext"></i>
 								<span>Readme</span>
 							</a>
-							<a class="am-c-dropdown__item">
+							<a class="am-c-dropdown__link">
 								<i class="bi bi-git"></i>
 								<span>Repository</span>
 							</a>

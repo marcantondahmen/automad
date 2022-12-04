@@ -30,11 +30,11 @@
 				<i class="bi bi-chevron-down"></i>
 			</span>
 			<div class="am-c-dropdown__items">
-				<a class="am-c-dropdown__item">
+				<a class="am-c-dropdown__link">
 					<i class="bi bi-pencil"></i>
 					<span>Edit Page</span>
 				</a>
-				<a class="am-c-dropdown__item">
+				<a class="am-c-dropdown__link">
 					<i class="bi bi-trash3"></i>
 					<span>Delete Page</span>
 				</a>

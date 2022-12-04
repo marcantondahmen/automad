@@ -19,7 +19,7 @@
 		</p>
 		<div class="am-c-alert">
 			<div class="am-c-alert__icon">
-				<i class="bi bi-chat-left-text"></i>
+				<i class="bi bi-fire"></i>
 			</div>
 			<div class="am-c-alert__text">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dicta quibusdam facere ducimus quae porro consectetur dignissimos, eaque delectus laborum rerum, commodi voluptate, minus tempora eligendi non repellat assumenda quo?

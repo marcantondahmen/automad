@@ -18,11 +18,11 @@
 					Caching
 				</span>
 				<div class="am-c-dropdown__items am-c-dropdown__items--stretch">
-					<a class="am-c-dropdown__item">
+					<a class="am-c-dropdown__link">
 						<i class="bi bi-pencil"></i>
 						<span>Edit Page</span>
 					</a>
-					<a class="am-c-dropdown__item">
+					<a class="am-c-dropdown__link">
 						<i class="bi bi-trash3"></i>
 						<span>Delete Page</span>
 					</a>
