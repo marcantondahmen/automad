@@ -64,8 +64,9 @@ export enum CSS {
 	displayNone = 'am-u-display-none',
 
 	dropdown = 'am-c-dropdown',
-	dropdownRight = 'am-c-dropdown--right',
+	dropdownForm = 'am-c-dropdown--form',
 	dropdownOpen = 'am-c-dropdown--open',
+	dropdownRight = 'am-c-dropdown--right',
 	dropdownContent = 'am-c-dropdown__content',
 	dropdownDivider = 'am-c-dropdown__divider',
 	dropdownItems = 'am-c-dropdown__items',
