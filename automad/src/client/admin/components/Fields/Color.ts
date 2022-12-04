@@ -56,7 +56,7 @@ class ColorComponent extends BaseFieldComponent {
 		const picker = create(
 			'input',
 			[],
-			{ type: 'color' },
+			{ type: 'color', value },
 			create('span', [CSS.inputComboColor], {}, combo)
 		);
 
