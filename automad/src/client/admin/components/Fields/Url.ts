@@ -58,12 +58,7 @@ class URLComponent extends BaseFieldComponent {
 			combo
 		);
 
-		const button = create(
-			'span',
-			[],
-			{},
-			create('span', [CSS.inputComboButton], {}, combo)
-		);
+		const button = create('span', [CSS.inputComboButton], {}, combo);
 
 		button.innerHTML = html`<i class="bi bi-link"></i>`;
 
