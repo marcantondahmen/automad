@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS } from '../../core';
+import { create, CSS, debounce, listen } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -41,6 +41,11 @@ import { BaseFieldComponent } from './BaseField';
  * @extends BaseFieldComponent
  */
 class TextareaComponent extends BaseFieldComponent {
+	/**
+	 * If true the field data is sanitized.
+	 */
+	protected sanitize = false;
+
 	/**
 	 * Create an input field.
 	 */
@@ -54,6 +59,71 @@ class TextareaComponent extends BaseFieldComponent {
 		);
 
 		textarea.textContent = value;
+
+		this.initAutoResize(textarea);
+		this.initTabHandler(textarea);
+	}
+
+	/**
+	 * Initialize the automatic resizing.
+	 *
+	 * @param textarea
+	 */
+	private initAutoResize(textarea: HTMLTextAreaElement) {
+		const fit = debounce(() => {
+			this.fitContent(textarea);
+		}, 50);
+
+		listen(textarea, 'keyup focus focusout drop paste', fit);
+		this.listeners.push(listen(window, 'resize', fit));
+
+		fit();
+	}
+
+	/**
+	 * Fit the textarea to the content.
+	 *
+	 * @param textarea
+	 */
+	private fitContent(textarea: HTMLTextAreaElement) {
+		const clone = create(
+			'div',
+			[CSS.input],
+			{
+				style: `position: absolute; height: auto; width: ${textarea.offsetWidth}; white-space: pre-line; opacity: 0;`,
+			},
+			this
+		);
+
+		// Add a random character here to actually make new lines work at the end of the content.
+		clone.textContent = textarea.value + '-';
+		textarea.style.height = `${clone.offsetHeight}px`;
+		clone.remove();
+	}
+
+	/**
+	 * Initialize handling of the tab key.
+	 * @param textarea
+	 */
+	private initTabHandler(textarea: HTMLTextAreaElement) {
+		listen(textarea, 'keydown', (event: KeyboardEvent) => {
+			if (event.keyCode === 9) {
+				event.preventDefault();
+				event.stopPropagation();
+
+				const selectionStart = textarea.selectionStart;
+				const selectionEnd = textarea.selectionEnd;
+				const value = textarea.value;
+
+				textarea.value = `${value.substring(
+					0,
+					selectionStart
+				)}\t${value.substring(selectionEnd)}`;
+
+				textarea.selectionStart = selectionStart + 1;
+				textarea.selectionEnd = selectionStart + 1;
+			}
+		});
 	}
 }
 
