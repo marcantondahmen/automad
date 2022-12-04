@@ -40,6 +40,7 @@ import { Listener } from '../types';
 export enum eventNames {
 	appStateChange = 'AutomadAppStateChange',
 	appStateRequireUpdate = 'AutomadAppStateRequireUpdate',
+	autocompleteSelect = 'AutomadAutocompleteSelect',
 	changeByBinding = 'AutomadChangeByBinding',
 	fileCollectionRender = 'AutomadFileCollectionRender',
 	filesChangeOnServer = 'AutomadFilesChangeOnServer',

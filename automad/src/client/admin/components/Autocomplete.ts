@@ -39,7 +39,16 @@ import {
 	KeyValueMap,
 	PageMetaData,
 } from '../types';
-import { App, create, listen, debounce, html, eventNames, CSS } from '../core';
+import {
+	App,
+	create,
+	listen,
+	debounce,
+	html,
+	eventNames,
+	CSS,
+	fire,
+} from '../core';
 
 /**
  * Compile the autocompletion data.
@@ -122,7 +131,7 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * The input element.
 	 */
-	protected input: HTMLInputElement;
+	public input: HTMLInputElement;
 
 	/**
 	 * The dropdown element.
@@ -449,6 +458,8 @@ export class AutocompleteComponent extends BaseComponent {
 		}
 
 		this.close();
+
+		fire(eventNames.autocompleteSelect, this);
 	}
 }
 

@@ -102,6 +102,7 @@ export enum CSS {
 	inputTitle = 'am-f-input--title',
 	inputCombo = 'am-f-input-combo',
 	inputComboColor = 'am-f-input-combo__color',
+	inputComboButton = 'am-f-input-combo__button',
 
 	keyCombo = 'am-e-key-combo',
 
