@@ -44,18 +44,13 @@
 		pointer-events: none;
 		opacity: 0;
 		background-color: transparent;
-		transition: opacity 0.2s 0.2s, inset 0.8s;
+		transition: opacity 0.2s 0.3s, inset 0.3s;
 	}
 
 	&:after {
 		z-index: 9001;
 		inset: 0 ~'calc(100% - var(--progress, 0%))' auto 0;
 		background-color: var(--am-clr-accent-text);
-	}
-
-	& .am-l-main {
-		opacity: 1;
-		transition: opacity 0.2s;
 	}
 
 	&--loading {
@@ -66,10 +61,6 @@
 		&:before,
 		&:after {
 			opacity: 1;
-		}
-
-		& .am-l-main {
-			opacity: 0.6;
 		}
 	}
 }

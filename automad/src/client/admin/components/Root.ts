@@ -121,20 +121,22 @@ export class RootComponent extends BaseComponent {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}
 
-		this.progressBar(25);
+		this.progressBar(20);
 
 		Bindings.reset();
 
 		await App.updateState();
 
-		this.progressBar(50);
+		this.progressBar(40);
 
 		const route = getValidRouteOrRedirect();
 		const page = create(getTagFromRoute(route), [], {}).init();
 
-		this.progressBar(70);
+		this.progressBar(60);
 
 		await waitForPendingRequests();
+
+		this.progressBar(80);
 
 		this.innerHTML = '';
 		this.appendChild(page);
