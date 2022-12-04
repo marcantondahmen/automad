@@ -34,7 +34,6 @@
 
 import { CSS, create, html, listen, eventNames, App } from '../../core';
 import { AutocompleteComponent } from '../Autocomplete';
-import { ModalComponent } from '../Modal/Modal';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -48,7 +47,6 @@ class URLComponent extends BaseFieldComponent {
 	 */
 	protected createInput(): void {
 		const { name, id, value, placeholder } = this._data;
-		const modal = this.createModal();
 		const combo = create('div', [CSS.inputCombo], {}, this);
 
 		create(
@@ -59,12 +57,9 @@ class URLComponent extends BaseFieldComponent {
 		);
 
 		const button = create('span', [CSS.inputComboButton], {}, combo);
-
 		button.innerHTML = html`<i class="bi bi-link"></i>`;
 
-		listen(button, 'click', () => {
-			modal.open();
-		});
+		listen(button, 'click', this.createModal.bind(this));
 	}
 
 	/**
@@ -72,17 +67,12 @@ class URLComponent extends BaseFieldComponent {
 	 *
 	 * @returns the modal component
 	 */
-	private createModal(): ModalComponent {
-		const modal = create('am-modal', [], {}, this);
+	private createModal(): void {
+		const modal = create('am-modal', [], { destroy: '' }, this);
 		const dialog = create('div', [CSS.modalDialog], {}, modal);
 		const header = create('div', [CSS.modalHeader], {}, dialog);
 		const body = create('div', [CSS.modalBody], {}, dialog);
 		const footer = create('div', [CSS.modalFooter], {}, dialog);
-
-		const select = () => {
-			this.input.value = autocomplete.input.value;
-			modal.close();
-		};
 
 		const autocomplete = create(
 			'am-autocomplete',
@@ -116,10 +106,15 @@ class URLComponent extends BaseFieldComponent {
 			autocomplete.input.value = '';
 		});
 
+		const select = () => {
+			this.input.value = autocomplete.input.value;
+			modal.close();
+		};
+
 		listen(buttonOk, 'click', select.bind(this));
 		listen(autocomplete, eventNames.autocompleteSelect, select.bind(this));
 
-		return modal;
+		modal.open();
 	}
 }
 
