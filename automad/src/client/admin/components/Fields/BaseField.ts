@@ -51,6 +51,7 @@ import { BaseComponent } from '../Base';
  *
  * Fields can have several attributes:
  * - `required` - with and empty value, a form can't be submitted
+ * - `spellcheck` - enable spell checking
  *
  * @extends BaseComponent
  */
@@ -59,6 +60,13 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	 * If true the field data is sanitized.
 	 */
 	protected sanitize = true;
+
+	/**
+	 * If true the field data is spell checked while editing.
+	 */
+	protected get isSpellchecked(): boolean {
+		return this.hasAttribute('spellcheck');
+	}
 
 	/**
 	 * The internal field data.
@@ -153,6 +161,11 @@ export abstract class BaseFieldComponent extends BaseComponent {
 				input.setAttribute('required', '');
 				this.removeAttribute('required');
 			}
+
+			input.setAttribute(
+				'spellcheck',
+				this.isSpellchecked ? 'true' : 'false'
+			);
 
 			['bind', 'bindto', 'toggle'].forEach((attr) => {
 				if (this.hasAttribute(attr)) {
