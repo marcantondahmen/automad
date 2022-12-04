@@ -114,7 +114,9 @@ class URLComponent extends BaseFieldComponent {
 		listen(buttonOk, 'click', select.bind(this));
 		listen(autocomplete, eventNames.autocompleteSelect, select.bind(this));
 
-		modal.open();
+		setTimeout(() => {
+			modal.open();
+		}, 0);
 	}
 }
 

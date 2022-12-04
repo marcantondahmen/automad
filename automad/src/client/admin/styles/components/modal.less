@@ -41,7 +41,7 @@
 	height: 100vh;
 	max-height: 100vh;
 	inset: 0;
-	padding: 4.75rem var(--am-body-padding-x) 2rem var(--am-body-padding-x);
+	padding: 4rem var(--am-body-padding-x) 2rem var(--am-body-padding-x);
 	background-color: var(--am-clr-modal-backdrop);
 	transform: translateY(-100%);
 	opacity: 0;
@@ -59,7 +59,7 @@
 		margin: 0 auto;
 		padding: 0;
 		background-color: var(--am-clr-background);
-		border-radius: 0.7rem;
+		border-radius: @am-modal-radius;
 		border: @am-border;
 		box-shadow: 0 0.4rem 2.1rem var(--am-shadow),
 			0 5.2rem 5rem -4.7rem var(--am-shadow);
@@ -81,10 +81,10 @@
 		transform: translateY(0);
 		opacity: 1;
 		transition: transform 0s linear, opacity 0.2s;
+	}
 
-		& > &__dialog {
-			top: 0;
-		}
+	&--open > &__dialog {
+		top: 0;
 	}
 
 	&__header,
@@ -153,6 +153,8 @@
 			font-size: @am-navbar-font-size;
 			font-weight: 490;
 			border: none;
+			border-top-left-radius: ~'calc(@{am-modal-radius} - 1px)';
+			border-top-right-radius: ~'calc(@{am-modal-radius} - 1px)';
 			color: var(--am-clr-text);
 			background-color: @am-form-background;
 			transition: all 0.2s;
