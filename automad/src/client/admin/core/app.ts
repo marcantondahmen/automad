@@ -85,6 +85,15 @@ export class App {
 	}
 
 	/**
+	 * The unique app id that is used to identify a browser tab.
+	 *
+	 * @static
+	 */
+	static get id(): string {
+		return this._state.appId;
+	}
+
+	/**
 	 * The base URL for the website.
 	 *
 	 * @static

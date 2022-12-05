@@ -48,23 +48,25 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Session {
+	const APP_ID_KEY = 'app_id';
+	const CSRF_TOKEN_KEY = 'csrf';
+	const RESET_TOKEN_KEY = 'reset';
+	const USERNAME_KEY = 'username';
+
 	/**
 	 * Clears the reset token hash
 	 */
 	public static function clearResetTokenHash() {
-		unset($_SESSION['reset']);
+		unset($_SESSION[self::RESET_TOKEN_KEY]);
 	}
 
 	/**
-	 * Create a CSRF protection token.
+	 * Get the CSRF token for the current session.
 	 *
-	 * @return string the created token
+	 * @return string the CSRF token stored in the session
 	 */
-	public static function createCsrfToken() {
-		$token = bin2hex(random_bytes(32));
-		$_SESSION['csrf'] = $token;
-
-		return $token;
+	public static function getCsrfToken() {
+		return $_SESSION[self::CSRF_TOKEN_KEY] ?? '';
 	}
 
 	/**
@@ -74,10 +76,8 @@ class Session {
 	 * @return string the token hash
 	 */
 	public static function getResetTokenHash(string $username) {
-		if (isset($_SESSION['reset'])) {
-			if (isset($_SESSION['reset'][$username])) {
-				return $_SESSION['reset'][$username];
-			}
+		if (isset($_SESSION[self::RESET_TOKEN_KEY])) {
+			return $_SESSION[self::RESET_TOKEN_KEY][$username] ?? '';
 		}
 
 		return '';
@@ -89,11 +89,7 @@ class Session {
 	 * @return string Username
 	 */
 	public static function getUsername() {
-		if (isset($_SESSION['username'])) {
-			return $_SESSION['username'];
-		}
-
-		return '';
+		return $_SESSION[self::USERNAME_KEY] ?? '';
 	}
 
 	/**
@@ -113,7 +109,8 @@ class Session {
 
 		if ($User->verifyPassword($password)) {
 			session_regenerate_id(true);
-			$_SESSION['username'] = $User->name;
+			$_SESSION[self::USERNAME_KEY] = $User->name;
+			self::createCsrfToken();
 
 			return true;
 		}
@@ -138,13 +135,37 @@ class Session {
 	}
 
 	/**
+	 * Set and return a unique app id.
+	 *
+	 * @return string the app id
+	 */
+	public static function setAppId() {
+		$appId = bin2hex(random_bytes(32));
+		$_SESSION[self::APP_ID_KEY] = $appId;
+
+		return $appId;
+	}
+
+	/**
 	 * Set the reset token hash for a given user.
 	 *
 	 * @param string $username
 	 * @param string $tokenHash
 	 */
 	public static function setResetTokenHash(string $username, string $tokenHash) {
-		$_SESSION['reset'] = array($username => $tokenHash);
+		$_SESSION[self::RESET_TOKEN_KEY] = array($username => $tokenHash);
+	}
+
+	/**
+	 * Verify a given app id for the current session.
+	 *
+	 * @param string $appId
+	 * @return string the app id
+	 */
+	public static function verifyAppId(string $appId) {
+		$sessionAppId = $_SESSION[self::APP_ID_KEY] ?? '';
+
+		return $sessionAppId === $appId;
 	}
 
 	/**
@@ -154,10 +175,17 @@ class Session {
 	 * @return bool true if the token is valid
 	 */
 	public static function verifyCsrfToken(string $token) {
-		if (empty($_SESSION['csrf'])) {
+		if (empty($_SESSION[self::CSRF_TOKEN_KEY])) {
 			return false;
 		}
 
-		return $token === $_SESSION['csrf'];
+		return $token === $_SESSION[self::CSRF_TOKEN_KEY];
+	}
+
+	/**
+	 * Create a CSRF protection token.
+	 */
+	private static function createCsrfToken() {
+		$_SESSION[self::CSRF_TOKEN_KEY] = bin2hex(random_bytes(32));
 	}
 }

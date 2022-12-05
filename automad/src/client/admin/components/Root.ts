@@ -103,7 +103,7 @@ export class RootComponent extends BaseComponent {
 			})
 		);
 
-		this.verifyCsrfToken();
+		this.validateSession();
 	}
 
 	/**
@@ -153,14 +153,17 @@ export class RootComponent extends BaseComponent {
 	}
 
 	/**
-	 * Verify CSRF token on visiblity state change (change tab).
+	 * Verify the app id (browser tab id) and the CSRF token on visiblity state change (change tab) in order
+	 * to make sure that the token is updated also between mutliple sessions while a tab is still open.
+	 *
+	 * @async
 	 */
-	private async verifyCsrfToken(): Promise<void> {
+	private async validateSession(): Promise<void> {
 		const bodyScrollYKey = 'bodyScrollY';
 		const bodyScrollY = localStorage.getItem(bodyScrollYKey);
 		const stateChangeHandler = async (): Promise<void> => {
 			if (document.visibilityState === 'visible') {
-				const data = await requestAPI('Session/validateCsrfToken', {
+				const data = await requestAPI('Session/validate', {
 					// Send a random key/value pair in order to provide a valid POST request.
 					csrfTokenValidation: 1,
 				});

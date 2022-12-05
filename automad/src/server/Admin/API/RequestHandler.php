@@ -37,6 +37,7 @@
 namespace Automad\Admin\API;
 
 use Automad\Admin\Session;
+use Automad\Admin\UI\Utils\Messenger;
 use Automad\Core\Debug;
 use Automad\Core\Str;
 
@@ -56,20 +57,20 @@ class RequestHandler {
 	public static $apiBase = '/api';
 
 	/**
+	 * An array of routes that are excluded from CSRF token validation.
+	 */
+	private static $validationExcluded = array(
+		'Session/login',
+		'User/resetPassword'
+	);
+
+	/**
 	 * Get the JSON response for a requested route
 	 *
 	 * @return string the JSON formatted response
 	 */
 	public static function getResponse() {
 		header('Content-Type: application/json; charset=utf-8');
-
-		if (!self::validate()) {
-			$Response = new Response();
-			$Response->setCode(403);
-			$Response->setError('CSRF token mismatch');
-
-			return $Response->json();
-		}
 
 		$apiRoute = trim(Str::stripStart(AM_REQUEST, self::$apiBase), '/');
 
@@ -80,11 +81,20 @@ class RequestHandler {
 		$class = $parts[0];
 
 		if (!empty($parts[1]) && self::classFileExists($class) && method_exists($class, $parts[1])) {
-			self::registerControllerErrorHandler();
-			$Response = call_user_func($method);
+			$Messenger = new Messenger();
+
+			if (self::validate($apiRoute, $Messenger)) {
+				self::registerControllerErrorHandler();
+				$Response = call_user_func($method);
+			} else {
+				$Response = new Response();
+				$Response->setCode(403);
+				$Response->setError($Messenger->getError());
+			}
 		} else {
 			$Response = new Response();
 			$Response->setCode(404);
+			$Response->setError('Invalid API route: ' . $apiRoute);
 		}
 
 		$Response->setDebug(Debug::getLog());
@@ -124,11 +134,27 @@ class RequestHandler {
 	/**
 	 * Validate request by checking the CSRF token in case of a post request.
 	 *
+	 * @param string $route
+	 * @param Messenger $Messenger
 	 * @return bool true if the request is valid
 	 */
-	private static function validate() {
+	private static function validate(string $route, Messenger $Messenger) {
+		if (in_array($route, self::$validationExcluded)) {
+			return true;
+		}
+
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			return Session::verifyCsrfToken($_POST['__csrf__'] ?? '');
+			if (!Session::verifyCsrfToken($_POST['__csrf__'] ?? '')) {
+				$Messenger->setError('CSRF token mismatch');
+
+				return false;
+			}
+
+			if (!Session::verifyAppId($_POST['__app_id__'] ?? '')) {
+				$Messenger->setError('App ID mismatch');
+
+				return false;
+			}
 		}
 
 		return true;

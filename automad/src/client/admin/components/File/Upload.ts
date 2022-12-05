@@ -36,7 +36,6 @@ import Dropzone, { DropzoneFile, DropzoneOptions } from 'dropzone';
 import {
 	App,
 	create,
-	csrfTokenKey,
 	CSS,
 	getCsrfToken,
 	getPageURL,
@@ -44,6 +43,7 @@ import {
 	notifyError,
 	notifySuccess,
 	query,
+	RequestKeys,
 } from '../../core';
 import { BaseComponent } from '../Base';
 import { FileCollectionListFormComponent } from '../Forms/FileCollection/ListForm';
@@ -223,8 +223,19 @@ class UploadComponent extends BaseComponent {
 			[],
 			{
 				type: 'hidden',
-				name: csrfTokenKey,
+				name: RequestKeys.csrf,
 				value: getCsrfToken(),
+			},
+			form
+		);
+
+		create(
+			'input',
+			[],
+			{
+				type: 'hidden',
+				name: RequestKeys.appId,
+				value: App.id,
 			},
 			form
 		);

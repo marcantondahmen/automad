@@ -37,9 +37,12 @@ import { FormComponent } from '../components/Forms/Form';
 import { KeyValueMap } from '../types';
 
 /**
- * The name of the token field that is submitted along with post requests.
+ * The names of field that are submitted along with post requests.
  */
-export const csrfTokenKey = '__csrf__';
+export enum RequestKeys {
+	csrf = '__csrf__',
+	appId = '__app_id__',
+}
 
 /**
  * Get the current CSRF token that is stored in the meta tag.
@@ -68,7 +71,8 @@ export const request = async (
 	if (data !== null) {
 		const formData = new FormData();
 
-		formData.append(csrfTokenKey, getCsrfToken());
+		formData.append(RequestKeys.csrf, getCsrfToken());
+		formData.append(RequestKeys.appId, App.id);
 
 		Object.keys(data).forEach((key) => {
 			formData.append(key, data[key]);

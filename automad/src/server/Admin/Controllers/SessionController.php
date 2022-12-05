@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * Copyright (c) 2016-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -60,7 +60,7 @@ class SessionController {
 		$Response = new Response();
 
 		if (Session::login(Request::post('name-or-email'), Request::post('password'))) {
-			return $Response->setRedirect('home');
+			return $Response->setReload(true);
 		}
 
 		return $Response->setError(Text::get('signInError'));
@@ -82,11 +82,11 @@ class SessionController {
 	}
 
 	/**
-	 * A simple testing endpoint to verify if an browser window or tab has a valid CSRF token.
+	 * A simple testing endpoint to verify if a browser tab has a valid app id and CSRF token.
 	 *
 	 * @return Response the Response object
 	 */
-	public static function validateCsrfToken() {
+	public static function validate() {
 		$Response = new Response();
 		$Response->setSuccess('OK');
 

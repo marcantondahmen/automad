@@ -49,6 +49,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Dashboard {
+	/**
+	 * Render the dashboard HTML.
+	 *
+	 * @return string the rendered HTML
+	 */
 	public static function render() {
 		$fn = function ($expression) {
 			return $expression;
@@ -61,7 +66,7 @@ class Dashboard {
 				<meta charset="utf-8">
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<meta name="robots" content="noindex">
-				<meta name="csrf" content="{$fn(Session::createCsrfToken())}">
+				<meta name="csrf" content="{$fn(Session::getCsrfToken())}">
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
