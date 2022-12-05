@@ -66,6 +66,12 @@ class PageTagsComponent extends BaseFieldComponent {
 			whitelist: App.tags,
 			originalInputValueFormat: (tags) =>
 				tags.map((item) => item.value).join(', '),
+			dropdown: {
+				enabled: 0,
+				maxItems: 8,
+				position: 'text',
+				closeOnSelect: true,
+			},
 		});
 
 		tagify.on('change', (event: Event) => {
