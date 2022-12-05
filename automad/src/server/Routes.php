@@ -68,16 +68,41 @@ class Routes {
 	 * @param Router $Router
 	 */
 	public static function init(Router $Router) {
-		$isLoggedIn = AM_PAGE_DASHBOARD && Session::getUsername();
+		$isAuthenticatedUser = AM_PAGE_DASHBOARD && Session::getUsername();
+
+		self::registerAPIRoutes($Router, $isAuthenticatedUser);
+		self::registerDashboardRoutes($Router, $isAuthenticatedUser);
+		self::registerFeedRoute($Router);
+		self::registerPageRoutes($Router);
+
+		self::$registered = $Router->getRoutes();
+	}
+
+	/**
+	 * Redirect to a given route
+	 *
+	 * @param string $route
+	 */
+	private static function redirectDashboard(string $route) {
+		header('Location: ' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . $route, true, 301);
+		exit();
+	}
+
+	/**
+	 * Register API routes.
+	 *
+	 * @param Router $Router
+	 * @param bool $isAuthenticatedUser
+	 */
+	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser) {
 		$apiBase = RequestHandler::$apiBase;
 
-		// API
 		$Router->register(
 			"$apiBase/.*",
 			function () {
 				return RequestHandler::getResponse();
 			},
-			$isLoggedIn
+			$isAuthenticatedUser
 		);
 
 		$Router->register(
@@ -94,28 +119,29 @@ class Routes {
 				header('Content-Type: application/json; charset=utf-8');
 
 				$Response = new Response();
-				$Response->setRedirect('/login');
+				$Response->setRedirect('login');
 
 				exit($Response->json());
 			},
 			AM_PAGE_DASHBOARD
 		);
+	}
 
-		// Dashboard
-		$Router->register(
-			AM_PAGE_DASHBOARD . '/setup',
-			function () {
-				self::redirectDashboard('/login');
-			},
-			is_readable(AM_FILE_ACCOUNTS)
-		);
+	/**
+	 * Register dashboard routes.
+	 *
+	 * @param Router $Router
+	 * @param bool $isAuthenticatedUser
+	 */
+	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser) {
+		$hasAccounts = is_readable(AM_FILE_ACCOUNTS);
 
 		$Router->register(
 			AM_PAGE_DASHBOARD . '/setup',
 			function () {
 				return Dashboard::render();
 			},
-			!is_readable(AM_FILE_ACCOUNTS)
+			!$hasAccounts
 		);
 
 		$Router->register(
@@ -123,7 +149,15 @@ class Routes {
 			function () {
 				self::redirectDashboard('/setup');
 			},
-			!is_readable(AM_FILE_ACCOUNTS)
+			!$hasAccounts
+		);
+
+		$Router->register(
+			AM_PAGE_DASHBOARD . '/setup',
+			function () {
+				self::redirectDashboard('/login');
+			},
+			$hasAccounts
 		);
 
 		$Router->register(
@@ -131,15 +165,7 @@ class Routes {
 			function () {
 				self::redirectDashboard('/home');
 			},
-			$isLoggedIn
-		);
-
-		$Router->register(
-			AM_PAGE_DASHBOARD . '(/.*)?',
-			function () {
-				return Dashboard::render();
-			},
-			$isLoggedIn
+			$isAuthenticatedUser
 		);
 
 		$Router->register(
@@ -148,6 +174,14 @@ class Routes {
 				return Dashboard::render();
 			},
 			AM_PAGE_DASHBOARD
+		);
+
+		$Router->register(
+			AM_PAGE_DASHBOARD . '(/.*)?',
+			function () {
+				return Dashboard::render();
+			},
+			$isAuthenticatedUser
 		);
 
 		$Router->register(
@@ -157,8 +191,14 @@ class Routes {
 			},
 			AM_PAGE_DASHBOARD
 		);
+	}
 
-		// Feed
+	/**
+	 * Register the RSS feed route.
+	 *
+	 * @param Router $Router
+	 */
+	private static function registerFeedRoute(Router $Router) {
 		$Router->register(
 			AM_FEED_URL,
 			function () {
@@ -179,8 +219,14 @@ class Routes {
 			},
 			AM_FEED_ENABLED
 		);
+	}
 
-		// Pages
+	/**
+	 * Register all left-over routes as page routes.
+	 *
+	 * @param Router $Router
+	 */
+	private static function registerPageRoutes(Router $Router) {
 		$Router->register(
 			'/.*',
 			function () {
@@ -203,17 +249,5 @@ class Routes {
 				return $output;
 			}
 		);
-
-		self::$registered = $Router->getRoutes();
-	}
-
-	/**
-	 * Redirect to a given route
-	 *
-	 * @param string $route
-	 */
-	private static function redirectDashboard(string $route) {
-		header('Location: ' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . $route, true, 301);
-		exit();
 	}
 }
