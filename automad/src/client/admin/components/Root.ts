@@ -178,6 +178,10 @@ export class RootComponent extends BaseComponent {
 
 					window.location.reload();
 				}
+
+				if (data.redirect) {
+					this.setView(data.redirect);
+				}
 			}
 		};
 
