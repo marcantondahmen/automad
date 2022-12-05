@@ -38,7 +38,7 @@
 	padding: 0 @am-form-padding-x;
 	height: @am-form-height;
 	border: @am-border;
-	border-radius: 0.3rem;
+	border-radius: @am-form-radius;
 	color: var(--am-clr-text);
 	background-color: @am-form-background;
 	transition: all 0.2s;
@@ -131,104 +131,5 @@
 
 	&-combo > & {
 		padding-left: 3.4rem;
-	}
-
-	&.tagify {
-		display: flex;
-		gap: 0.5rem;
-		padding: 0.5rem;
-		height: auto;
-		font-size: 1rem;
-
-		--tags-border-color: var(--am-clr-border);
-		--tags-hover-border-color: var(--am-clr-border);
-		--tags-focus-border-color: var(--am-clr-accent-text);
-
-		--tag-border-radius: 100px;
-		--tag-pad: 0.2em 0.3em 0.2em 0.7em;
-		--tag-bg: var(--am-clr-accent-background);
-		--tag-hover: var(--am-clr-accent-background);
-		--tag-text-color: var(--am-clr-accent-text);
-		--tag-text-color--edit: var(--am-clr-text);
-
-		--tag-remove-bg: var(--am-clr-accent-background);
-		--tag-remove-btn-color: var(--am-clr-accent-text);
-		--tag-remove-btn-bg: var(--am-clr-accent-background);
-		--tag-remove-btn-bg--hover: var(--am-clr-accent-background);
-
-		--input-color: var(--am-clr-text);
-
-		--placeholder-color: var(--am-clr-text-muted);
-		--placeholder-color-focus: var(--am-clr-text-muted);
-
-		&--focus {
-			border-color: var(--am-clr-accent-text);
-			outline: @am-outline-active;
-		}
-	}
-
-	&.tagify > .tagify__tag {
-		margin: 0;
-
-		& > div {
-			font-size: 1em;
-			font-weight: 580;
-		}
-
-		&--editable .tagify__tag__removeBtn {
-			opacity: 0;
-			pointer-events: none;
-		}
-
-		& > div:before {
-			box-sizing: border-box;
-			border-radius: 100px;
-			border: 1px solid var(--am-clr-accent-text);
-		}
-	}
-
-	&.tagify > .tagify__input {
-		margin: 0;
-
-		&:after {
-			opacity: 0.8;
-		}
-	}
-
-	&.tagify .tagify__tag__removeBtn {
-		width: 1.2rem;
-		color: var(--am-clr-accent-text);
-
-		&:hover {
-			color: var(--am-clr-text);
-		}
-	}
-}
-
-.am-ui {
-	--tagify-dd-color-primary: @am-nav-item-hover-bg;
-	--tagify-dd-bg-color: var(--am-clr-background);
-	--tagify-dd-item-pad: 0 0.8rem;
-
-	& .tagify__dropdown {
-		&__wrapper {
-			padding: 0.3rem 0;
-			border-radius: 0.3rem;
-			border: @am-border;
-			box-shadow: 0 0.4rem 1.2rem var(--am-shadow),
-				0 3.7rem 3.5rem -3.2rem var(--am-shadow);
-			overflow: hidden;
-		}
-
-		&__item {
-			margin: 0;
-			line-height: 2.2;
-			border-radius: 0;
-			color: var(--am-clr-text);
-
-			&--active {
-				color: @am-nav-item-hover-clr;
-			}
-		}
 	}
 }

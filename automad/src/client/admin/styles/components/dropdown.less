@@ -62,7 +62,7 @@
 		transform: translateY(-0.5rem);
 		transition: all 0.2s;
 		background-color: var(--am-clr-background);
-		border-radius: 0.3rem;
+		border-radius: @am-form-radius;
 		box-shadow: 0 0.4rem 1.2rem var(--am-shadow),
 			0 3.7rem 3.5rem -3.2rem var(--am-shadow);
 		border: @am-border;
@@ -95,7 +95,7 @@
 	&--form&--open input {
 		position: relative;
 		z-index: 1100;
-		border-radius: 0.3rem 0.3rem 0 0;
+		border-radius: @am-form-radius @am-form-radius 0 0;
 		border-color: var(--am-clr-border-active);
 		border-bottom: @am-border;
 
