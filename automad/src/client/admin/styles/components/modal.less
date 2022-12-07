@@ -65,6 +65,10 @@
 			0 5.2rem 5rem -4.7rem var(--am-shadow);
 		transition: top 0.2s;
 
+		&--large {
+			max-width: 64rem;
+		}
+
 		&--fullscreen {
 			position: fixed;
 			padding: 0;
@@ -103,6 +107,10 @@
 
 	&__body {
 		color: var(--am-clr-text-paragraph);
+	}
+
+	& &__body hr {
+		margin: @am-modal-padding -@am-modal-padding;
 	}
 
 	&__footer {

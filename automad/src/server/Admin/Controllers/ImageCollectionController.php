@@ -1,3 +1,4 @@
+<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -26,33 +27,43 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-import { create, CSS } from '../../core';
-import { BaseFieldComponent } from './BaseField';
+namespace Automad\Admin\Controllers;
+
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\ImageCollectionModel;
+use Automad\Core\Cache;
+use Automad\Core\FileSystem;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * An image field.
+ * The image collection controller.
  *
- * @extends BaseFieldComponent
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2022 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-class ImageComponent extends BaseFieldComponent {
+class ImageCollectionController {
 	/**
-	 * Create an input field.
+	 * Get a list of shared or page image files
+	 *
+	 * @return Response the response object
 	 */
-	protected createInput(): void {
-		const { name, id, value, placeholder } = this._data;
-		create(
-			'input',
-			[CSS.input],
-			{ id, name, value, type: 'text', placeholder },
-			this
+	public static function list() {
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
+		$path = FileSystem::getPathByPostUrl($Automad);
+		$Response = new Response();
+
+		return $Response->setData(
+			array('images' => ImageCollectionModel::list($path))
 		);
 	}
 }
-
-customElements.define('am-image', ImageComponent);

@@ -1,3 +1,4 @@
+<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -22,7 +23,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -30,29 +31,47 @@
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-.am-f-group {
-	display: flex;
+namespace Automad\Admin\Models;
 
-	& > &__item:not(:first-child),
-	& > :not(:first-child) &__item {
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
-		margin-left: -1px;
-	}
+use Automad\Core\FileSystem;
+use Automad\Core\FileUtils;
+use Automad\Core\Image;
 
-	& > &__item:not(:last-child),
-	& > :not(:last-child) &__item {
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-	}
+defined('AUTOMAD') or die('Direct access not permitted!');
 
-	&__item {
-		&:focus,
-		&:active {
-			position: relative;
-			z-index: 2;
+/**
+ * The image collection model.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2022 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
+ */
+class ImageCollectionModel {
+	/**
+	 * List all images of a page or the shared data directory.
+	 *
+	 * @param string $path
+	 */
+	public static function list(string $path) {
+		$images = array();
+		$globGrep = FileSystem::globGrep(
+			$path . '*.*',
+			'/\.(' . implode('|', FileUtils::imageFileTypes()) . ')$/i'
+		);
+
+		foreach ($globGrep as $file) {
+			$image = new Image($file, 500, 500);
+
+			$item = array();
+			$item['name'] = basename($file);
+			$item['thumbnail'] = AM_BASE_URL . $image->file;
+
+			$images[] = $item;
 		}
+
+		return $images;
 	}
 }

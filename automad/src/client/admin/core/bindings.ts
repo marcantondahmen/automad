@@ -125,6 +125,17 @@ export class Bindings {
 	}
 
 	/**
+	 * Get a binding by name.
+	 *
+	 * @param name
+	 * @returns the binding
+	 * @static
+	 */
+	static get(name: string) {
+		return this._bindings[name];
+	}
+
+	/**
 	 * Connect all elements that have a bind attribute to the actual binding instance.
 	 *
 	 * @param container

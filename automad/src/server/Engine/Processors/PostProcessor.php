@@ -213,7 +213,7 @@ class PostProcessor {
 	 */
 	private function resizeImages(string $str) {
 		return preg_replace_callback(
-			'/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png))\?(\d+)x(\d+)/is',
+			'/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png|webp))\?(\d+)x(\d+)/is',
 			function ($match) {
 				$file = AM_BASE_DIR . $match[1];
 

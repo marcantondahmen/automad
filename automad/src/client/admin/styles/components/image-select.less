@@ -26,23 +26,62 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-field {
+.am-c-image-select {
 	display: flex;
-	flex-direction: column;
-	gap: @am-flex-gap;
+	height: 7rem;
+	overflow: hidden;
+	border: @am-border;
+	border-radius: @am-card-radius;
 
-	* + & {
-		margin-top: @am-base-margin-y;
+	&__preview {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		aspect-ratio: 1;
+		font-size: 2rem;
+		color: var(--am-clr-text-paragraph);
+		background-color: var(--am-clr-background-faded);
+		cursor: pointer;
+
+		& > img {
+			object-fit: cover;
+			min-width: 100%;
+			min-height: 100%;
+
+			&[src=''] {
+				display: none;
+			}
+		}
 	}
 
-	&__label {
-		font-size: @am-small-font-size;
-		color: var(--am-clr-text-paragraph);
+	&__combo {
+		display: flex;
+		justify-content: space-evenly;
+		flex-grow: 1;
+		flex-direction: column;
+		padding: 0 0.55rem;
+		border-left: @am-border;
+	}
+
+	&__move {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		aspect-ratio: 0.35;
+		border-left: @am-border;
+		color: var(--am-clr-text-muted);
+		background-color: var(--am-clr-background);
+		transition: background-color 0.2s;
+		cursor: grab;
+
+		&:hover {
+			background-color: var(--am-clr-background-faded);
+		}
 	}
 }

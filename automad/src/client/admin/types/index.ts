@@ -54,6 +54,11 @@ export interface AutocompleteItemData {
 	title: string;
 }
 
+export interface Image {
+	name: string;
+	thumbnail: string;
+}
+
 export interface JumpbarItemData {
 	value: string;
 	title: string;

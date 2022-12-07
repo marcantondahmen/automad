@@ -95,9 +95,20 @@ export enum CSS {
 	flexBetween = 'am-u-flex--between',
 	flexItemGrow = 'am-u-flex__item-grow',
 
+	formGroup = 'am-f-group',
+	formGroupItem = 'am-f-group__item',
+
 	grid = 'am-l-grid',
 
 	iconText = 'am-c-icon-text',
+
+	imagePicker = 'am-c-image-picker',
+	imagePickerImage = 'am-c-image-picker__image',
+
+	imageSelect = 'am-c-image-select',
+	imageSelectPreview = 'am-c-image-select__preview',
+	imageSelectCombo = 'am-c-image-select__combo',
+	imageSelectMove = 'am-c-image-select__move',
 
 	input = 'am-f-input',
 	inputTitle = 'am-f-input--title',
@@ -114,6 +125,7 @@ export enum CSS {
 	modal = 'am-c-modal',
 	modalOpen = 'am-c-modal--open',
 	modalDialog = 'am-c-modal__dialog',
+	modalDialogLarge = 'am-c-modal__dialog--large',
 	modalDialogFullscreen = 'am-c-modal__dialog--fullscreen',
 	modalHeader = 'am-c-modal__header',
 	modalClose = 'am-c-modal__close',
