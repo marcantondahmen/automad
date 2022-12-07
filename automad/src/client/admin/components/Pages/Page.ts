@@ -72,7 +72,7 @@ const renderMovePageModal = (): string => {
 					<div class="${CSS.modalBody}">
 						<div class="${CSS.field}">
 							<label class="${CSS.fieldLabel}">
-								${App.text('selectTargetMovePage')}
+								$${App.text('selectTargetMovePage')}
 							</label>
 							<am-page-select-tree
 								hidecurrent
@@ -80,10 +80,10 @@ const renderMovePageModal = (): string => {
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
-						<am-modal-close class="${CSS.button}">
+						<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
 							$${App.text('cancel')}
 						</am-modal-close>
-						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 							$${App.text('movePage')}
 						</am-submit>
 					</div>
@@ -101,7 +101,7 @@ const renderDropdown = (): string => {
 	return html`
 		<am-dropdown right>
 			<span class="${CSS.menuItem}">
-				<span>${App.text('more')}</span>
+				<span>$${App.text('more')}</span>
 				<i class="bi bi-chevron-down"></i>
 			</span>
 			<div class="${CSS.dropdownItems}">
@@ -113,14 +113,14 @@ const renderDropdown = (): string => {
 				>
 					<am-icon-text
 						icon="pencil"
-						text="${App.text('inPageEdit')}"
+						text="$${App.text('inPageEdit')}"
 					></am-icon-text>
 				</a>
 				<am-form api="Page/duplicate">
 					<am-submit class="${CSS.dropdownLink}">
 						<am-icon-text
 							icon="files"
-							text="${App.text('duplicatePage')}"
+							text="$${App.text('duplicatePage')}"
 						></am-icon-text>
 					</am-submit>
 				</am-form>
@@ -130,7 +130,7 @@ const renderDropdown = (): string => {
 				>
 					<am-icon-text
 						icon="arrows-move"
-						text="${App.text('movePage')}"
+						text="$${App.text('movePage')}"
 					></am-icon-text>
 				</am-modal-toggle>
 				<am-form
@@ -140,14 +140,14 @@ const renderDropdown = (): string => {
 					<am-submit class="${CSS.dropdownLink}">
 						<am-icon-text
 							icon="trash2"
-							text="${App.text('deletePage')}"
+							text="$${App.text('deletePage')}"
 						></am-icon-text>
 					</am-submit>
 				</am-form>
 				<am-copy class="${CSS.dropdownLink}" value="${getPageURL()}">
 					<am-icon-text
 						icon="clipboard-plus"
-						text="${App.text('copyUrlClipboard')}"
+						text="$${App.text('copyUrlClipboard')}"
 					></am-icon-text>
 				</am-copy>
 			</div>
@@ -166,25 +166,25 @@ const renderMenu = (): string => {
 						class="${CSS.menuItem}"
 						section="${Sections.settings}"
 					>
-						${App.text('pageSettings')}
+						$${App.text('pageSettings')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						section="${Sections.text}"
 					>
-						${App.text('pageContent')}
+						$${App.text('pageContent')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						section="${Sections.colors}"
 					>
-						${App.text('pageColors')}
+						$${App.text('pageColors')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						section="${Sections.files}"
 					>
-						${App.text('uploadedFiles')}
+						$${App.text('uploadedFiles')}
 						<span class="am-e-badge">
 							<am-file-count></am-file-count>
 						</span>
@@ -261,7 +261,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 								class="${CSS.button} ${CSS.buttonAccent}"
 								modal="#am-file-import-modal"
 							>
-								${App.text('importFromUrl')}
+								$${App.text('importFromUrl')}
 							</am-modal-toggle>
 							<am-file-collection-submit
 								class="${CSS.button}"

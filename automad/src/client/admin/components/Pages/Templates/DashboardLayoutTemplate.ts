@@ -92,7 +92,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 								>
 									<i class="bi bi-box-arrow-right"></i>
 									<span>
-										$${App.text('signOut')} ${App.user.name}
+										$${App.text('signOut')} $${App.user.name}
 									</span>
 								</am-submit>
 							</div>
@@ -139,11 +139,11 @@ export const dashboardLayout = ({ main }: Partials) => {
 				<div class="${CSS.flex} ${CSS.flexGap} ${CSS.textMuted}">
 					<span
 						class="${CSS.iconText}"
-						am-tooltip="${App.user.email}"
+						am-tooltip="$${App.user.email}"
 						am-tooltip-options="placement: top"
 					>
 						<i class="bi bi-person-square"></i>
-						<span>${App.user.name}</span>
+						<span>$${App.user.name}</span>
 					</span>
 					<span>&mdash;</span>
 					<span>Automad</span>
@@ -181,9 +181,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							).outerHTML
 						}
 						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}"
-								>${App.text('pageTemplate')}
-							</label>
+							<label class="${CSS.fieldLabel}">$${App.text('pageTemplate')}</label>
 							${createTemplateSelect('').outerHTML}
 						</div>
 						${
@@ -194,9 +192,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							}).outerHTML
 						}
 						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}"
-								>${App.text('selectTargetNewPage')}
-							</label>
+							<label class="${CSS.fieldLabel}">$${App.text('selectTargetNewPage')}</label>
 							<am-page-select-tree></am-page-select-tree>
 						</div>
 					</div>
