@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, create, html, listen, eventNames, App } from '../../core';
+import { CSS, create, html, listen, eventNames, App, Attr } from '../../core';
 import { AutocompleteComponent } from '../Autocomplete';
 import { BaseFieldComponent } from './BaseField';
 
@@ -68,7 +68,7 @@ class URLComponent extends BaseFieldComponent {
 	 * @returns the modal component
 	 */
 	private createModal(): void {
-		const modal = create('am-modal', [], { destroy: '' }, this);
+		const modal = create('am-modal', [], { [Attr.destroy]: '' }, this);
 		const dialog = create('div', [CSS.modalDialog], {}, modal);
 		const header = create('div', [CSS.modalHeader], {}, dialog);
 		const body = create('div', [CSS.modalBody], {}, dialog);

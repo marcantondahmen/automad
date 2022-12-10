@@ -32,14 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, listen, queryParents } from '../core';
+import { Attr, CSS, listen, queryParents } from '../core';
 import { BaseComponent } from './Base';
 
 /**
  * A simple dropdown menu component.
  *
  * @example
- * <am-dropdown right>
+ * <am-dropdown ${Attr.right}>
  *     Menu
  *     <div class="am-c-dropdown__items">
  *         ...
@@ -54,7 +54,7 @@ class DropdownComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.classList.add(CSS.dropdown);
-		this.classList.toggle(CSS.dropdownRight, this.hasAttribute('right'));
+		this.classList.toggle(CSS.dropdownRight, this.hasAttribute(Attr.right));
 
 		this.listeners.push(
 			listen(window, 'click', (event: MouseEvent) => {

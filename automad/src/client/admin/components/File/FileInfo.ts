@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	create,
 	createField,
 	CSS,
@@ -82,7 +83,12 @@ export class FileInfoComponent extends BaseComponent {
 	 * @returns the created modal component
 	 */
 	protected createModal(file: File): ModalComponent {
-		const modal = create('am-modal', [], { destroy: '' }, document.body);
+		const modal = create(
+			'am-modal',
+			[],
+			{ [Attr.destroy]: '' },
+			document.body
+		);
 
 		modal.innerHTML = this.renderModal(file);
 
@@ -98,8 +104,8 @@ export class FileInfoComponent extends BaseComponent {
 	protected renderModal(file: File): string {
 		return html`
 			<am-form
-				api="File/editInfo"
-				event="${eventNames.filesChangeOnServer}"
+				${Attr.api}="File/editInfo"
+				${Attr.event}="${eventNames.filesChangeOnServer}"
 				class="${CSS.modalDialog}"
 			>
 				<div class="${CSS.modalHeader}">

@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { eventNames, listen, query } from '../../core';
+import { Attr, eventNames, listen, query } from '../../core';
 import { getActiveSection, SwitcherComponent } from './Switcher';
 import { linkTag } from './SwitcherLink';
 
@@ -52,7 +52,7 @@ export class SwitcherLabelComponent extends BaseComponent {
 		this.listeners.push(
 			listen(window, eventNames.switcherChange, () => {
 				this.innerHTML = query(
-					`${linkTag}[section="${getActiveSection()}"]`
+					`${linkTag}[${Attr.section}="${getActiveSection()}"]`
 				).innerHTML;
 			})
 		);

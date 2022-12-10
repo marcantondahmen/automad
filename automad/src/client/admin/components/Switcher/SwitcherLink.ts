@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { App, CSS, eventNames, listen } from '../../core';
+import { App, Attr, CSS, eventNames, listen } from '../../core';
 import {
 	getActiveSection,
 	setActiveSection,
@@ -55,7 +55,7 @@ export class SwitcherLinkComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['section'];
+		return [Attr.section];
 	}
 
 	/**
@@ -75,7 +75,7 @@ export class SwitcherLinkComponent extends BaseComponent {
 	toggle(): void {
 		this.classList.toggle(
 			CSS.menuItemActive,
-			this.elementAttributes.section == getActiveSection()
+			this.elementAttributes[Attr.section] == getActiveSection()
 		);
 	}
 
@@ -87,7 +87,7 @@ export class SwitcherLinkComponent extends BaseComponent {
 			return;
 		}
 
-		setActiveSection(this.elementAttributes.section);
+		setActiveSection(this.elementAttributes[Attr.section]);
 	}
 }
 

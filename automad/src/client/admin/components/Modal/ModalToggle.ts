@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { listen, query } from '../../core';
+import { Attr, listen, query } from '../../core';
 import { BaseComponent } from '../Base';
 import { ModalComponent } from './Modal';
 
@@ -49,7 +49,7 @@ class ModalToggleComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['modal'];
+		return [Attr.modal];
 	}
 
 	/**
@@ -57,7 +57,9 @@ class ModalToggleComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		const toggle = () => {
-			const modal = query(this.elementAttributes.modal) as ModalComponent;
+			const modal = query(
+				this.elementAttributes[Attr.modal]
+			) as ModalComponent;
 
 			modal.toggle();
 		};

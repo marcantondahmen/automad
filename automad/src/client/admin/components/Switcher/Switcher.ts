@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { eventNames, listen, query, queryAll } from '../../core';
+import { Attr, eventNames, listen, query, queryAll } from '../../core';
 import { linkTag, SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
@@ -82,8 +82,8 @@ export const setActiveSection = (section: string): void => {
  *
  * @example
  * <am-switcher>
- *     <am-switcher-link section="text">Text</am-switcher-link>
- *     <am-switcher-link section="settings">Settings</am-switcher-link>
+ *     <am-switcher-link ${Attr.section}="text">Text</am-switcher-link>
+ *     <am-switcher-link ${Attr.section}="settings">Settings</am-switcher-link>
  * </am-switcher>
  *
  * @see {@link SwitcherLinkComponent}
@@ -114,7 +114,7 @@ export class SwitcherComponent extends BaseComponent {
 		const sections: string[] = [];
 
 		queryAll(linkTag, this).forEach((link: SwitcherLinkComponent) => {
-			sections.push(link.getAttribute('section'));
+			sections.push(link.getAttribute(Attr.section));
 		});
 
 		if (sections.indexOf(activeSection) == -1) {

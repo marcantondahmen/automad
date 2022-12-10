@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { listen, queryAll, queryParents } from '../../core';
+import { Attr, listen, queryAll, queryParents } from '../../core';
 import { BaseComponent } from '../Base';
 import { FormComponent } from './Form';
 
@@ -41,10 +41,10 @@ import { FormComponent } from './Form';
  * The "form" attribute uses the api of the related form to connect.
  *
  * @example
- * <am-form api="Class/method">
+ * <am-form ${Attr.api}="Class/method">
  *     <input name="title">
  * </am-form>
- * <am-submit form="Class/method">Submit</am-submit>
+ * <am-submit ${Attr.form}="Class/method">Submit</am-submit>
  *
  * @extends BaseComponent
  */
@@ -55,17 +55,19 @@ export class SubmitComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['form'];
+		return [Attr.form];
 	}
 
 	/**
 	 * The forms that are submitted by this button.
 	 */
 	get relatedForms(): Element[] {
-		let forms = queryAll(`[api="${this.elementAttributes.form}"]`);
+		let forms = queryAll(
+			`[${Attr.api}="${this.elementAttributes[Attr.form]}"]`
+		);
 
 		if (forms.length == 0) {
-			forms = queryParents('[api]', this);
+			forms = queryParents(`[${Attr.api}]`, this);
 		}
 
 		return forms;

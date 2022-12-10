@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, getPageURL, html, listen, query } from '../core';
+import { Attr, create, CSS, getPageURL, html, listen, query } from '../core';
 import { NavTreeItem, PageMetaData } from '../types';
 import { NavTreeComponent } from './NavTree';
 
@@ -40,7 +40,7 @@ import { NavTreeComponent } from './NavTree';
  * An page selection tree field.
  *
  * @example
- * <am-page-select hidecurrent></am-page-select>
+ * <am-page-select ${Attr.hideCurrent}></am-page-select>
  *
  * @extends BaseComponent
  */
@@ -54,7 +54,7 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	 * True if the current page should be excluded.
 	 */
 	private get hideCurrent(): boolean {
-		return this.hasAttribute('hidecurrent');
+		return this.hasAttribute(Attr.hideCurrent);
 	}
 
 	/**
@@ -124,7 +124,10 @@ class PageSelectTreeComponent extends NavTreeComponent {
 		}
 
 		label.innerHTML = html`
-			<am-icon-text icon="${icon}" text="${page.title}"></am-icon-text>
+			<am-icon-text
+				${Attr.icon}="${icon}"
+				${Attr.text}="${page.title}"
+			></am-icon-text>
 			<input
 				class="${CSS.displayNone}"
 				type="radio"

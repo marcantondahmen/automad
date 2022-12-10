@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	create,
 	createIdFromField,
 	createLabelFromField,
@@ -167,10 +168,10 @@ export abstract class BaseFieldComponent extends BaseComponent {
 				this.isSpellchecked ? 'true' : 'false'
 			);
 
-			['bind', 'bindto', 'toggle'].forEach((attr) => {
-				if (this.hasAttribute(attr)) {
-					input.setAttribute(attr, this.getAttribute(attr));
-					this.removeAttribute(attr);
+			[Attr.bind, Attr.bindTo, Attr.toggle].forEach((attribute) => {
+				if (this.hasAttribute(attribute)) {
+					input.setAttribute(attribute, this.getAttribute(attribute));
+					this.removeAttribute(attribute);
 				}
 			});
 		});

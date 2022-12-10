@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, getTagFromRoute, html, Routes } from '../../core';
+import { App, Attr, CSS, getTagFromRoute, html, Routes } from '../../core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
@@ -59,9 +59,9 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 			<div class="am-c-card">
 				<am-form
 					class="am-c-card__form"
-					api="Session/login"
-					focus
-					enter
+					${Attr.api}="Session/login"
+					${Attr.focus}
+					${Attr.enter}
 				>
 					<input
 						class="${CSS.input}"
@@ -86,7 +86,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 						</a>
 						<am-submit
 							class="${CSS.button} ${CSS.buttonPrimary}"
-							form="Session/login"
+							${Attr.form}="Session/login"
 						>
 							$${App.text('signIn')}
 						</am-submit>

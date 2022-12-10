@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, createField, CSS, html, Routes } from '../../core';
+import { App, Attr, createField, CSS, html, Routes } from '../../core';
 import { KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
 
@@ -103,7 +103,10 @@ export class ResetPasswordFormComponent extends FormComponent {
 						placeholder="$${App.text('usernameOrEmail')}"
 					/>
 					<div class="${CSS.cardFormButtons}">
-						<am-link class="${CSS.button}" target="${Routes.login}">
+						<am-link
+							class="${CSS.button}"
+							${Attr.target}="${Routes.login}"
+						>
 							$${App.text('cancel')}
 						</am-link>
 						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
@@ -133,8 +136,8 @@ export class ResetPasswordFormComponent extends FormComponent {
 						class="${CSS.input}"
 						name="token"
 						placeholder="$${App.text('passwordResetToken')}"
-						am-tooltip="$${App.text('passwordResetToken')}"
-						am-tooltip-options="placement: top"
+						${Attr.tooltip}="$${App.text('passwordResetToken')}"
+						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
 					<input
@@ -142,8 +145,8 @@ export class ResetPasswordFormComponent extends FormComponent {
 						class="${CSS.input}"
 						name="password1"
 						placeholder="$${App.text('password')}"
-						am-tooltip="$${App.text('password')}"
-						am-tooltip-options="placement: top"
+						${Attr.tooltip}="$${App.text('password')}"
+						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
 					<input
@@ -151,12 +154,15 @@ export class ResetPasswordFormComponent extends FormComponent {
 						class="${CSS.input}"
 						name="password2"
 						placeholder="$${App.text('repeatPassword')}"
-						am-tooltip="$${App.text('repeatPassword')}"
-						am-tooltip-options="placement: top"
+						${Attr.tooltip}="$${App.text('repeatPassword')}"
+						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
 					<div class="${CSS.cardFormButtons}">
-						<am-link class="${CSS.button}" target="${Routes.login}">
+						<am-link
+							class="${CSS.button}"
+							${Attr.target}="${Routes.login}"
+						>
 							$${App.text('cancel')}
 						</am-link>
 						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
@@ -181,7 +187,10 @@ export class ResetPasswordFormComponent extends FormComponent {
 					$${App.text('passwordChangedSuccess')}
 				</div>
 				<div class="${CSS.cardForm}">
-					<am-link class="${CSS.button}" target="${Routes.login}">
+					<am-link
+						class="${CSS.button}"
+						${Attr.target}="${Routes.login}"
+					>
 						$${App.text('signIn')}
 					</am-link>
 				</div>

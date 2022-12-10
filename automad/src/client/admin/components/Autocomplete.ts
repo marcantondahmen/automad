@@ -48,6 +48,7 @@ import {
 	eventNames,
 	CSS,
 	fire,
+	Attr,
 } from '../core';
 
 /**
@@ -234,7 +235,10 @@ export class AutocompleteComponent extends BaseComponent {
 		const element = create('a', [this.linkClass], {});
 
 		element.innerHTML = html`
-			<am-icon-text icon="link" text="${item.title}"></am-icon-text>
+			<am-icon-text
+				${Attr.icon}="link"
+				${Attr.text}="${item.title}"
+			></am-icon-text>
 		`;
 
 		return element;

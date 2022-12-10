@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	Binding,
 	Bindings,
 	create,
@@ -91,8 +92,8 @@ class ImageSelectComponent extends BaseFieldComponent {
 				name,
 				type: 'text',
 				placeholder,
-				bind: inputBindingName,
-				bindto: 'value',
+				[Attr.bind]: inputBindingName,
+				[Attr.bindTo]: 'value',
 			},
 			combo
 		);
@@ -133,7 +134,7 @@ class ImageSelectComponent extends BaseFieldComponent {
 		create(
 			'img',
 			[],
-			{ bind: previewBindingName, bindto: 'src' },
+			{ [Attr.bind]: previewBindingName, [Attr.bindTo]: 'src' },
 			container
 		);
 	}
@@ -159,7 +160,7 @@ class ImageSelectComponent extends BaseFieldComponent {
 	 * Create the picker modal.
 	 */
 	private createModal(inputBindingName: string): void {
-		const modal = create('am-modal', [], { destroy: '' }, this);
+		const modal = create('am-modal', [], { [Attr.destroy]: '' }, this);
 
 		modal.innerHTML = html`
 			<div class="${CSS.modalDialog} ${CSS.modalDialogLarge}">
@@ -206,13 +207,13 @@ class ImageSelectComponent extends BaseFieldComponent {
 						</div>
 					</div>
 					<am-image-picker
-						label="$${App.text('sharedImages')}"
-						binding="${inputBindingName}"
+						${Attr.label}="$${App.text('sharedImages')}"
+						${Attr.binding}="${inputBindingName}"
 					></am-image-picker>
 					<am-image-picker
-						page="${getPageURL()}"
-						label="$${App.text('pageImages')}"
-						binding="${inputBindingName}"
+						${Attr.page}="${getPageURL()}"
+						${Attr.label}="$${App.text('pageImages')}"
+						${Attr.binding}="${inputBindingName}"
 					></am-image-picker>
 				</div>
 			</div>

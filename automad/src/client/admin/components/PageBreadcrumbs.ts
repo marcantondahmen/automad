@@ -40,6 +40,7 @@ import {
 	html,
 	CSS,
 	App,
+	Attr,
 } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
@@ -89,7 +90,7 @@ class PageBreadcrumbsComponent extends BaseComponent {
 		const dashboard = create(
 			'am-link',
 			[CSS.breadcrumbsItem],
-			{ target: Routes.home },
+			{ [Attr.target]: Routes.home },
 			this
 		);
 
@@ -101,15 +102,17 @@ class PageBreadcrumbsComponent extends BaseComponent {
 			const link = create(
 				'am-link',
 				[CSS.breadcrumbsItem],
-				{ target },
+				{ [Attr.target]: target },
 				this
 			);
 
 			if (index == data.length - 1) {
-				link.setAttribute('bind', 'pageLinkUI');
-				link.setAttribute('bindto', 'target');
+				link.setAttribute(Attr.bind, 'pageLinkUI');
+				link.setAttribute(Attr.bindTo, Attr.target);
 
-				link.innerHTML = html`<span bind="title">${page.title}</span>`;
+				link.innerHTML = html`<span ${Attr.bind}="title">
+					$${page.title}
+				</span>`;
 			} else {
 				link.textContent = page.title;
 			}

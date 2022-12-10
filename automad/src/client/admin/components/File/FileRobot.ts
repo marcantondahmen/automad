@@ -35,7 +35,7 @@
 import FilerobotImageEditor from 'filerobot-image-editor';
 import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
 import { KeyValueMap } from '../../types';
-import { App, create, CSS, eventNames, fire, listen } from '../../core';
+import { App, Attr, create, CSS, eventNames, fire, listen } from '../../core';
 import { ModalComponent } from '../Modal/Modal';
 import { BaseComponent } from '../Base';
 import { FormComponent } from '../Forms/Form';
@@ -45,7 +45,7 @@ import { fileRobotTheme } from './FileRobotTheme';
  * A file robot wrapper component.
  *
  * @example
- * <am-file-robot file="url"></am-file-robot>
+ * <am-file-robot ${Attr.file}="url"></am-file-robot>
  *
  * @see {@link FileRobot https://github.com/scaleflex/filerobot-image-editor/tree/v4}
  * @extends BaseComponent
@@ -57,7 +57,7 @@ class FileRobotComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['file'];
+		return [Attr.file];
 	}
 
 	/**
@@ -82,13 +82,13 @@ class FileRobotComponent extends BaseComponent {
 		const modal = create(
 			'am-modal',
 			[],
-			{ destroy: '', noesc: '' },
+			{ [Attr.destroy]: '', [Attr.noEsc]: '' },
 			document.body
 		);
 		const dialog = create(
 			'am-form',
 			[CSS.modalDialog, CSS.modalDialogFullscreen],
-			{ api: 'Image/save' },
+			{ [Attr.api]: 'Image/save' },
 			modal
 		);
 
@@ -110,7 +110,7 @@ class FileRobotComponent extends BaseComponent {
 	 */
 	private initFileRobot(form: FormComponent, modal: ModalComponent): void {
 		const config = {
-			img: this.elementAttributes.file,
+			img: this.elementAttributes[Attr.file],
 			savingPixelRatio: 1,
 			previewPixelRatio: window.devicePixelRatio,
 			useBackendTranslations: false,

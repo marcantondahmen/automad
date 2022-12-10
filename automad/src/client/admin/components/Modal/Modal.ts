@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	CSS,
 	eventNames,
 	fire,
@@ -48,16 +49,16 @@ import { BaseComponent } from '../Base';
 /**
  * A modal component.
  * The following attributes can be added to a modal component:
- * - `noesc` - Disable the ESC key
- * - `noclick` - Disable closing the modal by clicking on the overlay
- * - `destroy` - Self destroy on close
- * - `nofocus` - don't focus first input
+ * - Attr.noEsc - Disable the ESC key
+ * - Attr.noClick - Disable closing the modal by clicking on the overlay
+ * - Attr.destroy - Self destroy on close
+ * - Attr.noFocus - don't focus first input
  *
  * @example
- * <am-modal-toggle modal="#modal">
+ * <am-modal-toggle ${Attr.modal}="#modal">
  *     Open
  * </am-modal-toggle>
- * <am-modal id="modal" noesc noclick>
+ * <am-modal id="modal" ${Attr.noEsc} ${Attr.noClick}>
  *     <div class="am-c-modal__dialog">
  *         <div class="am-c-modal__header">
  *             <span>Title</span>
@@ -92,7 +93,7 @@ export class ModalComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(CSS.modal);
 
-		if (!this.hasAttribute('noclick')) {
+		if (!this.hasAttribute(Attr.noClick)) {
 			listen(this, 'click', (event: MouseEvent) => {
 				if (this === event.target) {
 					this.close();
@@ -100,7 +101,7 @@ export class ModalComponent extends BaseComponent {
 			});
 		}
 
-		if (!this.hasAttribute('noesc')) {
+		if (!this.hasAttribute(Attr.noEsc)) {
 			this.listeners.push(
 				listen(window, 'keydown', (event: KeyboardEvent) => {
 					if (this.isOpen && event.keyCode == 27) {
@@ -146,7 +147,7 @@ export class ModalComponent extends BaseComponent {
 
 		fire(eventNames.modalClose, this);
 
-		if (this.hasAttribute('destroy')) {
+		if (this.hasAttribute(Attr.destroy)) {
 			setTimeout(() => {
 				this.remove();
 			}, 400);
@@ -167,7 +168,7 @@ export class ModalComponent extends BaseComponent {
 
 		fire(eventNames.modalOpen, this);
 
-		if (!this.hasAttribute('nofocus')) {
+		if (!this.hasAttribute(Attr.noFocus)) {
 			const input = query('input, textarea', this);
 
 			if (input) {

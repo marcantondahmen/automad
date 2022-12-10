@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, eventNames, listen, query } from '../core';
+import { CSS, eventNames, listen, query } from '../core';
 import { BaseComponent } from './Base';
 
 /**

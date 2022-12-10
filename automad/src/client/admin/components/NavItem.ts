@@ -32,14 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { isActivePage, App, html, CSS } from '../core';
+import { isActivePage, App, html, CSS, Attr } from '../core';
 import { BaseComponent } from './Base';
 
 /**
  * A simple link in the sidebar navigation.
  *
  * @example
- * <am-nav-item page="system" icon="sliders" text="System"></am-nav-item>
+ * <am-nav-item ${Attr.page}="system" ${Attr.icon}="sliders" ${Attr.text}="System"></am-nav-item>
  *
  * @extends BaseComponent
  */
@@ -50,7 +50,7 @@ class NavItemComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['page', 'icon', 'text', 'badge'];
+		return [Attr.page, Attr.icon, Attr.text, Attr.badge];
 	}
 
 	/**
@@ -60,7 +60,7 @@ class NavItemComponent extends BaseComponent {
 		this.classList.add(CSS.navItem);
 		this.classList.toggle(
 			CSS.navItemActive,
-			isActivePage(this.elementAttributes.page)
+			isActivePage(this.elementAttributes[Attr.page])
 		);
 
 		this.innerHTML = this.render();
@@ -76,10 +76,13 @@ class NavItemComponent extends BaseComponent {
 	 * @returns the rendered HTML
 	 */
 	render(): string {
-		const { page, icon, text, badge } = this.elementAttributes;
+		const badge = this.elementAttributes[Attr.badge];
+		const icon = this.elementAttributes[Attr.icon];
+		const page = this.elementAttributes[Attr.page];
+		const text = this.elementAttributes[Attr.text];
 
 		return html`
-			<am-link target="${page}" class="${CSS.navLink}">
+			<am-link ${Attr.target}="${page}" class="${CSS.navLink}">
 				<span class="${CSS.iconText}">
 					<i class="bi bi-${icon}"></i>
 					<span>${App.text(text)}</span>

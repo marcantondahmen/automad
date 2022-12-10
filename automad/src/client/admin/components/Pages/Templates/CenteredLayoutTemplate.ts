@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html } from '../../../core';
+import { App, Attr, CSS, html } from '../../../core';
 import { Partials } from '../../../types';
 
 export const centered = ({ title, main }: Partials): string => {
@@ -49,7 +49,7 @@ export const centered = ({ title, main }: Partials): string => {
 						<a
 							href="${App.baseURL}"
 							class="${CSS.navbarItem}"
-							am-tooltip="$${App.text('close')}"
+							${Attr.tooltip}="$${App.text('close')}"
 						>
 							<i class="bi bi-x"></i>
 						</a>

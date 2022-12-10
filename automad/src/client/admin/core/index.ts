@@ -38,6 +38,7 @@ export * from './css';
 export * from './create';
 export * from './events';
 export * from './form';
+export * from './html';
 export * from './notify';
 export * from './request';
 export * from './router';

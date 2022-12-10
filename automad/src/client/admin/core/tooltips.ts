@@ -32,19 +32,12 @@
  * Licensed under the MIT license.
  */
 
-import { listen } from './events';
-import { query } from './utils';
+import { Attr, create, listen, query } from '.';
 import Tooltip from 'codex-tooltip';
-import { create } from './create';
 import { KeyValueMap } from '../types';
 
-enum tooltipAttr {
-	content = 'am-tooltip',
-	options = 'am-tooltip-options',
-}
-
 const getTooltipOptions = (element: HTMLElement): KeyValueMap => {
-	const optionString = element.getAttribute(tooltipAttr.options) || '';
+	const optionString = element.getAttribute(Attr.tooltipOptions) || '';
 	const options: KeyValueMap = {};
 
 	if (optionString) {
@@ -79,7 +72,7 @@ export const initTooltips = () => {
 
 		path.forEach((element: any) => {
 			try {
-				if (element.matches(`[${tooltipAttr.content}]`)) {
+				if (element.matches(`[${Attr.tooltip}]`)) {
 					target = element;
 				}
 			} catch (error) {}
@@ -95,7 +88,7 @@ export const initTooltips = () => {
 				getTooltipOptions(target)
 			);
 
-			let content = target.getAttribute(tooltipAttr.content);
+			let content = target.getAttribute(Attr.tooltip);
 
 			if (content) {
 				const node = create('span');

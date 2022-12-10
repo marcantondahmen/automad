@@ -32,9 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { create, fire, listen, queryAll } from '.';
+import { Attr, create, eventNames, fire, listen, queryAll } from '.';
 import { InputElement, KeyValueMap } from '../types';
-import { eventNames } from './events';
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.
@@ -102,8 +101,8 @@ export class Binding {
  * The Bindings class connects elements to a data binding instance.
  *
  * @example
- * <span bind="title">Text</span>
- * <a bind="url" bindto="href" href="...">Text</a>
+ * <span ${Attr.bind}="title">Text</span>
+ * <a ${Attr.bind}="url" ${Attr.bindTo}="href" href="...">Text</a>
  */
 export class Bindings {
 	/**
@@ -142,25 +141,25 @@ export class Bindings {
 	 * @static
 	 */
 	static connectElements(container: HTMLElement): void {
-		queryAll('[bind]', container).forEach((element) => {
-			const key = element.getAttribute('bind');
+		queryAll(`[${Attr.bind}]`, container).forEach((element) => {
+			const key = element.getAttribute(Attr.bind);
 			const binding: Binding = this._bindings[key];
 
 			if (!binding) {
 				return;
 			}
 
-			const bindTo = element.getAttribute('bindto');
+			const bindTo = element.getAttribute(Attr.bindTo);
 			let targetProperties: string[] = [];
 
 			if (bindTo) {
 				targetProperties = bindTo.split(' ');
-				element.removeAttribute('bindto');
+				element.removeAttribute(Attr.bindTo);
 			} else {
 				targetProperties = ['textContent'];
 			}
 
-			element.removeAttribute('bind');
+			element.removeAttribute(Attr.bind);
 
 			const update = () => {
 				targetProperties.forEach((prop) => {

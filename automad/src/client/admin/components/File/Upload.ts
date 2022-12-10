@@ -35,6 +35,7 @@
 import Dropzone, { DropzoneFile, DropzoneOptions } from 'dropzone';
 import {
 	App,
+	Attr,
 	create,
 	CSS,
 	getCsrfToken,
@@ -122,7 +123,7 @@ class UploadComponent extends BaseComponent {
 		this.modal = create(
 			'am-modal',
 			[],
-			{ noclick: '', noesc: '' },
+			{ [Attr.noClick]: '', [Attr.noEsc]: '' },
 			this.form
 		);
 		this.queue = create(
@@ -211,8 +212,8 @@ class UploadComponent extends BaseComponent {
 				{
 					type: 'hidden',
 					name: 'url',
-					bind: 'pageUrl',
-					bindto: 'value',
+					[Attr.bind]: 'pageUrl',
+					[Attr.bindTo]: 'value',
 				},
 				form
 			);

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html, Routes } from '../../../core';
+import { App, Attr, CSS, html, Routes } from '../../../core';
 import { Sections } from '../../Switcher/Switcher';
 import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
 
@@ -52,8 +52,8 @@ class NavbarDebugIndicatorComponent extends BaseStateIndicatorComponent {
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					target="${Routes.system}?section=${Sections.debug}"
-					am-tooltip="${App.text('debugEnabled')}"
+					${Attr.target}="${Routes.system}?section=${Sections.debug}"
+					${Attr.tooltip}="${App.text('debugEnabled')}"
 				>
 					<i class="bi bi-bug"></i>
 				</am-link>

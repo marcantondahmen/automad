@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	create,
 	CSS,
 	debounce,
@@ -64,7 +65,7 @@ class FilterComponent extends BaseComponent {
 	 * The target selector.
 	 */
 	protected get targetSelector(): string {
-		return `[api] .${CSS.field}:not(am-title), .${CSS.card}`;
+		return `[${Attr.api}] .${CSS.field}:not(am-title), .${CSS.card}`;
 	}
 
 	/**
@@ -140,7 +141,7 @@ class FilterComponent extends BaseComponent {
 			this
 		);
 		const keyComboBadge = create('span', [CSS.filterKeyCombo], {}, this);
-		create('am-key-combo-badge', [], { key: 'K' }, keyComboBadge);
+		create('am-key-combo-badge', [], { [Attr.key]: 'K' }, keyComboBadge);
 
 		return input;
 	}

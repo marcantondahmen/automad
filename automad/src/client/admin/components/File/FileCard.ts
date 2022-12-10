@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html, queryAll } from '../../core';
+import { App, Attr, CSS, html, queryAll } from '../../core';
 import { File } from '../../types';
 import { BaseComponent } from '../Base';
 import { FileInfoComponent } from './FileInfo';
@@ -71,8 +71,8 @@ class FileCardComponent extends BaseComponent {
 		if (file.width && file.height) {
 			dimensions = html`
 				<am-icon-text
-					icon="aspect-ratio"
-					text="${file.width} ✗ ${file.height}"
+					${Attr.icon}="aspect-ratio"
+					${Attr.text}="${file.width} ✗ ${file.height}"
 				></am-icon-text>
 			`;
 		}
@@ -80,8 +80,8 @@ class FileCardComponent extends BaseComponent {
 		if (file.caption) {
 			caption = html`
 				<am-icon-text
-					icon="chat-square-text"
-					text="$${file.caption}"
+					${Attr.icon}="chat-square-text"
+					${Attr.text}="$${file.caption}"
 				></am-icon-text>
 			`;
 		}
@@ -91,18 +91,21 @@ class FileCardComponent extends BaseComponent {
 			<am-file-info
 				class="${CSS.flexItemGrow} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap} ${CSS.cursorPointer}"
 			>
-				<div class="${CSS.cardTitle}" am-tooltip="$${file.basename}">
+				<div
+					class="${CSS.cardTitle}"
+					${Attr.tooltip}="$${file.basename}"
+				>
 					$${file.basename}
 				</div>
 				<div class="${CSS.cardBody}">
 					${caption} ${dimensions}
 					<am-icon-text
-						icon="calendar2-date"
-						text="${file.mtime || '-'}"
+						${Attr.icon}="calendar2-date"
+						${Attr.text}="${file.mtime || '-'}"
 					></am-icon-text>
 					<am-icon-text
-						icon="hdd"
-						text="${file.size || '-'}"
+						${Attr.icon}="hdd"
+						${Attr.text}="${file.size || '-'}"
 					></am-icon-text>
 				</div>
 			</am-file-info>
@@ -127,9 +130,9 @@ class FileCardComponent extends BaseComponent {
 		if (file.thumbnail) {
 			return html`
 				<am-file-robot
-					file="${file.url}"
+					${Attr.file}="${file.url}"
 					class="${CSS.cardTeaser} ${CSS.cursorPointer}"
-					am-tooltip="$${file.basename}"
+					${Attr.tooltip}="$${file.basename}"
 				>
 					<img src="$${file.thumbnail}" />
 				</am-file-robot>
@@ -139,7 +142,7 @@ class FileCardComponent extends BaseComponent {
 		return html`
 			<am-file-info
 				class="${CSS.cardTeaser} ${CSS.cursorPointer}"
-				am-tooltip="$${file.basename}"
+				${Attr.tooltip}="$${file.basename}"
 			>
 				<i class="bi bi-file-earmark bi-filetype-${file.extension}"></i>
 			</am-file-info>
@@ -159,10 +162,13 @@ class FileCardComponent extends BaseComponent {
 
 		if (file.thumbnail) {
 			editImage = html`
-				<am-file-robot file="${file.url}" class="${CSS.dropdownLink}">
+				<am-file-robot
+					${Attr.file}="${file.url}"
+					class="${CSS.dropdownLink}"
+				>
 					<am-icon-text
-						icon="pencil"
-						text="$${App.text('editImage')}"
+						${Attr.icon}="pencil"
+						${Attr.text}="$${App.text('editImage')}"
 					></am-icon-text>
 				</am-file-robot>
 			`;
@@ -175,14 +181,14 @@ class FileCardComponent extends BaseComponent {
 					${editImage}
 					<am-file-info class="${CSS.dropdownLink}">
 						<am-icon-text
-							icon="card-heading"
-							text="$${App.text('editFileInfo')}"
+							${Attr.icon}="card-heading"
+							${Attr.text}="$${App.text('editFileInfo')}"
 						></am-icon-text>
 					</am-file-info>
 					<am-copy class="${CSS.dropdownLink}" value="${file.url}">
 						<am-icon-text
-							icon="clipboard-plus"
-							text="$${App.text('copyUrlClipboard')}"
+							${Attr.icon}="clipboard-plus"
+							${Attr.text}="$${App.text('copyUrlClipboard')}"
 						></am-icon-text>
 					</am-copy>
 				</div>

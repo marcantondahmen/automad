@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	confirm,
 	CSS,
 	debounce,
@@ -63,25 +64,25 @@ const debounced = debounce(async (callback: Function): Promise<void> => {
  * A basic form.
  *
  * The following options are available and can be passed as attributes:
- * - `api` (required) - the API endpoint
- * - `focus` - focus first input when connected
- * - `enter` - submit using enter key
- * - `confirm` - require confirmation before submitting
- * - `event` - fire event when receiving the API response
- * - `auto` - automatically submit form on change
- * - `watch` - disable submit buttons until changes are made
+ * - Attr.api (required) - the API endpoint
+ * - Attr.focus - focus first input when connected
+ * - Attr.enter - submit using enter key
+ * - Attr.confirm - require confirmation before submitting
+ * - Attr.event - fire event when receiving the API response
+ * - Attr.auto - automatically submit form on change
+ * - Attr.watch - disable submit buttons until changes are made
  *
  * Focus the first input of a for when being connected:
  *
  * @example
- * <am-form api="Class/method" focus>
+ * <am-form ${Attr.api}="Class/method" ${Attr.focus}>
  *     <input>
  * </am-form>
  *
  * Fire an event on the window after getting a response from the server:
  *
  * @example
- * <am-form api="File/import" event="FileCollectionUpdate">
+ * <am-form ${Attr.api}="File/import" ${Attr.event}="FileCollectionUpdate">
  *     <input>
  * </am-form>
  *
@@ -104,28 +105,28 @@ export class FormComponent extends BaseComponent {
 	 * Get the api attribute already before attributes are observed.
 	 */
 	protected get api(): string {
-		return this.getAttribute('api');
+		return this.getAttribute(Attr.api);
 	}
 
 	/**
 	 * Submit form data on changes.
 	 */
 	protected get auto(): boolean {
-		return this.hasAttribute('auto');
+		return this.hasAttribute(Attr.auto);
 	}
 
 	/**
 	 * The confirm modal message.
 	 */
 	protected get confirm(): string {
-		return this.getAttribute('confirm');
+		return this.getAttribute(Attr.confirm);
 	}
 
 	/**
 	 * Only enable submit button when input values have changed.
 	 */
 	protected get watch(): boolean {
-		return this.hasAttribute('watch');
+		return this.hasAttribute(Attr.watch);
 	}
 
 	/**
@@ -139,8 +140,8 @@ export class FormComponent extends BaseComponent {
 	 * All related submit buttons.
 	 */
 	protected get submitButtons(): HTMLElement[] {
-		const external = queryAll(`am-submit[form="${this.api}"]`);
-		const internal = queryAll('am-submit:not([form])', this);
+		const external = queryAll(`am-submit[${Attr.form}="${this.api}"]`);
+		const internal = queryAll(`am-submit:not([${Attr.form}])`, this);
 
 		return external.concat(internal);
 	}
@@ -198,13 +199,13 @@ export class FormComponent extends BaseComponent {
 			}, 0);
 		}
 
-		if (this.hasAttribute('focus')) {
+		if (this.hasAttribute(Attr.focus)) {
 			setTimeout(() => {
 				(query('input') as InputElement).focus();
 			}, 0);
 		}
 
-		if (this.hasAttribute('enter')) {
+		if (this.hasAttribute(Attr.enter)) {
 			listen(
 				this,
 				'keydown',
@@ -246,8 +247,8 @@ export class FormComponent extends BaseComponent {
 				async (data: KeyValueMap) => {
 					await this.processResponse(data);
 
-					if (this.hasAttribute('event')) {
-						fire(this.getAttribute('event'));
+					if (this.hasAttribute(Attr.event)) {
+						fire(this.getAttribute(Attr.event));
 					}
 
 					const modal = this.parentModal;

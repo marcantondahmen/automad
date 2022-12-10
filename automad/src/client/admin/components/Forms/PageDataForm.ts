@@ -46,6 +46,7 @@ import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
 import {
 	App,
+	Attr,
 	Binding,
 	create,
 	createField,
@@ -79,7 +80,7 @@ const fieldGroup = ({
 		color: 'am-color',
 		date: 'am-date',
 		text: 'am-markdown',
-		image: 'am-image',
+		image: 'am-image-select',
 		url: 'am-url',
 	};
 
@@ -235,8 +236,8 @@ const updateUI = async (
  * A page data form element.
  *
  * @example
- * <am-page-data-form api="Page/data"></am-page-data-form>
- * <am-submit form="Page/data">Submit</am-submit>
+ * <am-page-data-form ${Attr.api}="Page/data"></am-page-data-form>
+ * <am-submit ${Attr.form}="Page/data">Submit</am-submit>
  *
  * @extends FormComponent
  */
@@ -340,14 +341,17 @@ export class PageDataFormComponent extends FormComponent {
 			{
 				href: `${App.baseURL}${fields[App.reservedFields.AM_KEY_URL]}`,
 				target: '_blank',
-				bind: 'pageUrlWithBase',
-				bindto: 'href',
+				[Attr.bind]: 'pageUrlWithBase',
+				[Attr.bindTo]: 'href',
 			},
 			titleField
 		).innerHTML = html`
 			<span class="${CSS.iconText}">
 				<i class="bi bi-link"></i>
-				<span bind="pageUrlWithBase" bindto="textContent"></span>
+				<span
+					${Attr.bind}="pageUrlWithBase"
+					${Attr.bindTo}="textContent"
+				></span>
 			</span>
 		`;
 
@@ -393,7 +397,7 @@ export class PageDataFormComponent extends FormComponent {
 					label: App.text('pageSlug'),
 				},
 				[],
-				{ bind: 'pageSlug', bindto: 'value' }
+				{ [Attr.bind]: 'pageSlug', [Attr.bindTo]: 'value' }
 			);
 		}
 
@@ -416,8 +420,8 @@ export class PageDataFormComponent extends FormComponent {
 	private pageNotFound() {
 		this.innerHTML = html`
 			<am-alert
-				icon="question-circle"
-				text="pageNotFoundError"
+				${Attr.icon}="question-circle"
+				${Attr.text}="pageNotFoundError"
 				type="danger"
 			></am-alert>
 		`;

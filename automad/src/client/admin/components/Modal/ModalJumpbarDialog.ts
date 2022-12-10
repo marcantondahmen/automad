@@ -34,7 +34,7 @@
 
 import { AutocompleteComponent } from '../Autocomplete';
 import { JumpbarItemData, KeyValueMap, PageMetaData } from '../../types';
-import { App, create, CSS, html, Routes } from '../../core';
+import { App, Attr, create, CSS, html, Routes } from '../../core';
 import { Sections } from '../Switcher/Switcher';
 
 /**
@@ -242,13 +242,13 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 	protected createItemElement(item: JumpbarItemData): HTMLElement {
 		const attributes: KeyValueMap = {};
 
-		['external', 'target'].forEach(
-			(attribute: 'external' | 'target'): void => {
-				if (item[attribute]) {
-					attributes[attribute] = item[attribute];
-				}
-			}
-		);
+		if (item.external) {
+			attributes[Attr.external] = item.external;
+		}
+
+		if (item.target) {
+			attributes[Attr.target] = item.target;
+		}
 
 		const cls = item.cls || [];
 		const element = create(

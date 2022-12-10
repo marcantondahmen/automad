@@ -32,18 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { CSS } from './css';
-import { eventNames, listen } from './events';
-import { queryAll } from './utils';
+import { Attr, CSS, eventNames, listen, queryAll } from '.';
 
 export const initCheckboxToggles = (container: HTMLElement) => {
 	const checkboxes = queryAll(
-		'input[toggle]',
+		`input[${Attr.toggle}]`,
 		container
 	) as HTMLInputElement[];
 
 	checkboxes.forEach((checkbox) => {
-		const targets = queryAll(checkbox.getAttribute('toggle'));
+		const targets = queryAll(checkbox.getAttribute(Attr.toggle));
 		const toggleTargets = () => {
 			targets.forEach((target) => {
 				target.classList.toggle(CSS.displayNone, !checkbox.checked);

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, html, listen, titleCase } from '../core';
+import { Attr, create, html, listen, titleCase } from '../core';
 import { DashboardThemes, getTheme, setTheme } from '../core/theme';
 import { BaseComponent } from './Base';
 
@@ -84,7 +84,7 @@ class DashboardThemeToggleComponent extends BaseComponent {
 			'span',
 			cls,
 			{
-				'am-tooltip': tooltip,
+				[Attr.tooltip]: tooltip,
 			},
 			this
 		);

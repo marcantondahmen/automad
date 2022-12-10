@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS, html, titleCase } from '../../core';
+import { App, Attr, create, CSS, html, titleCase } from '../../core';
 import {
 	KeyValueMap,
 	TemplateButtonStatus,
@@ -239,12 +239,12 @@ export class PageTemplateComponent extends BaseComponent {
 		button.innerHTML = html`
 			<label class="${CSS.fieldLabel}">${App.text('pageTemplate')}</label>
 			<am-modal-toggle
-				modal="#am-page-template-modal"
+				${Attr.modal}="#am-page-template-modal"
 				class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.cursorPointer}"
 			>
 				<am-icon-text
-					icon="${buttonIcon}"
-					text="${buttonLabel}"
+					${Attr.icon}="${buttonIcon}"
+					${Attr.text}="${buttonLabel}"
 				></am-icon-text>
 				<i class="bi bi-pen"></i>
 			</am-modal-toggle>

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html, Routes } from '../../../core';
+import { App, Attr, CSS, html, Routes } from '../../../core';
 import { Sections } from '../../Switcher/Switcher';
 import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
 
@@ -55,8 +55,8 @@ class NavbarSystemUpdateIndicatorComponent extends BaseUpdateIndicatorComponent 
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					target="${Routes.system}?section=${Sections.update}"
-					am-tooltip="${App.text('systemUpdateTooltip')}"
+					${Attr.target}="${Routes.system}?section=${Sections.update}"
+					${Attr.tooltip}="${App.text('systemUpdateTooltip')}"
 				>
 					<i class="bi bi-download"></i>
 					<span class="am-e-badge"></span>

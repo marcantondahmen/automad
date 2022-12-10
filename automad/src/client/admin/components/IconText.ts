@@ -32,14 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS } from '../core';
+import { Attr, create, CSS } from '../core';
 import { BaseComponent } from './Base';
 
 /**
  * A simple icon with text component.
  *
  * @example
- * <am-icon-text icon="..." text="..."></am-icon-text>
+ * <am-icon-text ${Attr.icon}="..." ${Attr.text}="..."></am-icon-text>
  *
  * @extends BaseComponent
  */
@@ -48,11 +48,11 @@ class IconTextComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const icon = this.getAttribute('icon');
-		const text = this.getAttribute('text');
+		const icon = this.getAttribute(Attr.icon);
+		const text = this.getAttribute(Attr.text);
 
-		this.removeAttribute('icon');
-		this.removeAttribute('text');
+		this.removeAttribute(Attr.icon);
+		this.removeAttribute(Attr.text);
 
 		if (icon && text) {
 			this.classList.add(CSS.iconText);

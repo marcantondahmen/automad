@@ -46,6 +46,7 @@ import {
 	requestAPI,
 	eventNames,
 	CSS,
+	Attr,
 } from '../core';
 import { KeyValueMap, NavTreeItem, PageMetaData } from '../types';
 import { BaseComponent } from './Base';
@@ -55,7 +56,7 @@ import Sortable, { SortableEvent } from 'sortablejs';
  * The navigation tree component.
  *
  * @example
- * <am-nav-tree hidecurrent></am-nav-tree>
+ * <am-nav-tree ${Attr.hideCurrent}></am-nav-tree>
  *
  * @extends BaseComponent
  */
@@ -198,14 +199,14 @@ export class NavTreeComponent extends BaseComponent {
 
 						const { item, from, to } = event;
 
-						const fromUrl = from.getAttribute('url');
+						const fromUrl = from.getAttribute(Attr.url);
 
-						const toUrl = to.getAttribute('url');
-						const toPath = to.getAttribute('path');
+						const toUrl = to.getAttribute(Attr.url);
+						const toPath = to.getAttribute(Attr.path);
 						const toChildren: string[] = [];
 
 						Array.from(to.children).forEach((child) => {
-							toChildren.push(child.getAttribute('path'));
+							toChildren.push(child.getAttribute(Attr.path));
 						});
 
 						let redirect = null;
@@ -216,7 +217,7 @@ export class NavTreeComponent extends BaseComponent {
 							});
 
 							const data = await requestAPI('Page/move', {
-								url: item.getAttribute('url'),
+								url: item.getAttribute(Attr.url),
 								targetPage: toUrl,
 							});
 
@@ -273,8 +274,8 @@ export class NavTreeComponent extends BaseComponent {
 			'details',
 			[CSS.navItem],
 			{
-				path: page.path,
-				url: page.url,
+				[Attr.path]: page.path,
+				[Attr.url]: page.url,
 			},
 			parent
 		);
@@ -283,8 +284,8 @@ export class NavTreeComponent extends BaseComponent {
 			'div',
 			[CSS.navChildren],
 			{
-				path: page.path,
-				url: page.url,
+				[Attr.path]: page.path,
+				[Attr.url]: page.url,
 			},
 			wrapper
 		);
@@ -317,9 +318,11 @@ export class NavTreeComponent extends BaseComponent {
 			'am-link',
 			[],
 			{
-				target: `${Routes.page}?url=${encodeURIComponent(page.url)}`,
-				'am-tooltip': page.path,
-				'am-tooltip-options':
+				[Attr.target]: `${Routes.page}?url=${encodeURIComponent(
+					page.url
+				)}`,
+				[Attr.tooltip]: page.url,
+				[Attr.tooltipOptions]:
 					'placement: right, delay: 10, marginRight: 10',
 			},
 			summary
@@ -337,7 +340,10 @@ export class NavTreeComponent extends BaseComponent {
 		}
 
 		link.innerHTML = html`
-			<am-icon-text icon="${icon}" text="${page.title}"></am-icon-text>
+			<am-icon-text
+				${Attr.icon}="${icon}"
+				${Attr.text}="$${page.title}"
+			></am-icon-text>
 			<span class="${CSS.navGrip}">${grabIcon}</span>
 		`;
 

@@ -32,7 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { Binding, Bindings, create, CSS, listen, requestAPI } from '../core';
+import {
+	App,
+	Attr,
+	Binding,
+	Bindings,
+	create,
+	CSS,
+	html,
+	listen,
+	requestAPI,
+} from '../core';
 import { Image } from '../types';
 import { BaseComponent } from './Base';
 import { ModalComponent } from './Modal/Modal';
@@ -42,13 +52,13 @@ import { ModalComponent } from './Modal/Modal';
  *
  * @example
  * <am-image-picker
- *     label="Shared Files"
- *     binding="bindingName"
+ *     ${Attr.label}="Shared Files"
+ *     ${Attr.binding}="bindingName"
  * ></am-image-picker>
  * <am-image-picker
- *      page="url"
- *      label="Page Files"
- *      binding="bindingName"
+ *      ${Attr.page}="url"
+ *      ${Attr.label}="Page Files"
+ *      ${Attr.binding}="bindingName"
  * ></am-image-picker>
  *
  * @extends BaseComponent
@@ -65,14 +75,14 @@ class ImagePickerComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['page', 'label', 'binding'];
+		return [Attr.page, Attr.label, Attr.binding];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.binding = Bindings.get(this.elementAttributes.binding);
+		this.binding = Bindings.get(this.elementAttributes[Attr.binding]);
 		this.init();
 	}
 
@@ -84,23 +94,30 @@ class ImagePickerComponent extends BaseComponent {
 	private async init(): Promise<void> {
 		this.classList.add(CSS.field);
 
-		if (this.elementAttributes.label) {
+		if (this.elementAttributes[Attr.label]) {
 			create('label', [CSS.fieldLabel], {}, this).textContent =
-				this.elementAttributes.label;
+				this.elementAttributes[Attr.label];
 		}
 
 		const wrapper = create('div', [], {}, this);
 		wrapper.innerHTML = '<am-spinner></am-spinner>';
 
 		const { data } = await requestAPI('ImageCollection/list', {
-			url: this.elementAttributes.page || '',
+			url: this.elementAttributes[Attr.page] || '',
 		});
 
 		wrapper.innerHTML = '';
 
 		const { images } = data;
 
-		if (!images) {
+		if (!images.length) {
+			wrapper.innerHTML = html`
+				<am-icon-text
+					${Attr.icon}="folder-x"
+					${Attr.text}="${App.text('noImagesFound')}"
+				></am-icon-text>
+			`;
+
 			return;
 		}
 
@@ -114,7 +131,7 @@ class ImagePickerComponent extends BaseComponent {
 	 */
 	private renderGrid(images: Image[], wrapper: HTMLElement) {
 		const grid = create('div', [CSS.imagePicker], {}, wrapper);
-		const base = this.elementAttributes.page ? '' : '/shared/';
+		const base = this.elementAttributes[Attr.page] ? '' : '/shared/';
 		const modal = (this.closest('am-modal') as ModalComponent) || null;
 
 		images.forEach((image: Image) => {
@@ -124,7 +141,7 @@ class ImagePickerComponent extends BaseComponent {
 				{
 					src: image.thumbnail,
 					value: `${base}${image.name}`,
-					'am-tooltip': image.name,
+					[Attr.tooltip]: image.name,
 				},
 				grid
 			);

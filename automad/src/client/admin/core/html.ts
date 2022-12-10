@@ -1,0 +1,130 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+import { KeyValueMap } from '../types';
+
+/**
+ * A whitelist of custom component attributes.
+ */
+export const enum Attr {
+	api = 'am-api',
+	auto = 'am-auto',
+	badge = 'am-badge',
+	bind = 'am-bind',
+	bindTo = 'am-bind-to',
+	binding = 'am-binding-name',
+	confirm = 'am-confirm',
+	destroy = 'am-destroy',
+	enter = 'am-enter',
+	event = 'am-event',
+	external = 'am-external',
+	file = 'am-file',
+	focus = 'am-focus',
+	form = 'am-form',
+	hideCurrent = 'am-hide-current',
+	icon = 'am-icon',
+	key = 'am-key',
+	label = 'am-label',
+	modal = 'am-modal',
+	noClick = 'am-no-click',
+	noEsc = 'am-no-esc',
+	noFocus = 'am-no-focus',
+	page = 'am-page',
+	path = 'am-path',
+	right = 'am-right',
+	section = 'am-section',
+	target = 'am-target',
+	text = 'am-text',
+	toggle = 'am-toggle',
+	tooltip = 'am-tooltip',
+	tooltipOptions = 'am-tooltip-options',
+	url = 'am-url',
+	watch = 'am-watch',
+}
+
+/**
+ * Handle the rendering of template literals and optionally escape values
+ * that are preceeded with a `$`.
+ *
+ * @example
+ * return html`
+ *     <p>${ value }</p>
+ *     <p>$${ escapedValue }</p>
+ * `;
+ *
+ * @see {@link 2ality https://2ality.com/2015/01/template-strings-html.html#the-template-handler}
+ * @param strings
+ * @param values
+ * @returns the rendered template
+ */
+export const html = (strings: any, ...values: any[]): string => {
+	let raw = strings.raw;
+
+	let result = '';
+
+	values.forEach((value, i) => {
+		let section = raw[i];
+
+		if (section.endsWith('$')) {
+			value = htmlSpecialChars(value);
+			section = section.slice(0, -1);
+		}
+
+		result += section + value;
+	});
+
+	result += raw[raw.length - 1];
+
+	return result;
+};
+
+/**
+ * Convert all HTML special characters.
+ *
+ * @param value
+ * @returns the converted string
+ */
+export const htmlSpecialChars = (value: string | number): string => {
+	const chars: KeyValueMap = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		"'": '&#039;',
+	};
+
+	return value.toString().replace(/[&<>"']/g, (char: string) => {
+		return chars[char];
+	});
+};

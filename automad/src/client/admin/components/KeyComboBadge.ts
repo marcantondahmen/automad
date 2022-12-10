@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS } from '../core';
+import { Attr, CSS } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -47,7 +47,7 @@ class KeyComboComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['key'];
+		return [Attr.key];
 	}
 
 	/**
@@ -62,9 +62,9 @@ class KeyComboComponent extends BaseComponent {
 			meta = '⌘';
 		}
 
-		this.textContent = `${meta} + ${this.elementAttributes.key}`;
+		this.textContent = `${meta} + ${this.elementAttributes[Attr.key]}`;
 
-		this.removeAttribute('key');
+		this.removeAttribute(Attr.key);
 	}
 }
 

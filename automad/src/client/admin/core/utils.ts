@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, create, listen } from '.';
-import { KeyValueMap, Listener } from '../types';
+import { App, Attr, CSS, create, html, listen } from '.';
+import { Listener } from '../types';
 
 declare global {
 	interface Event {
@@ -55,7 +55,7 @@ export const confirm = async (text: string): Promise<any> => {
 	let modal = create(
 		'am-modal',
 		[],
-		{ destroy: '', noclick: '', noesc: '' },
+		{ [Attr.destroy]: '', [Attr.noClick]: '', [Attr.noEsc]: '' },
 		App.root
 	);
 
@@ -67,7 +67,7 @@ export const confirm = async (text: string): Promise<any> => {
 					$${App.text('cancel')}
 				</am-modal-close>
 				<am-modal-close
-					confirm
+					${Attr.confirm}
 					class="${CSS.button} ${CSS.buttonAccent}"
 				>
 					$${App.text('ok')}
@@ -91,8 +91,8 @@ export const confirm = async (text: string): Promise<any> => {
 				const element = event.target as HTMLElement;
 
 				isConfirmed =
-					element.matches('[confirm]') ||
-					element.closest('[confirm]') != null;
+					element.matches(`[${Attr.confirm}]`) ||
+					element.closest(`[${Attr.confirm}]`) != null;
 			} catch {}
 
 			resolve(isConfirmed);
@@ -155,62 +155,6 @@ export const getPageURL = (): string => {
 	const searchParams = new URLSearchParams(window.location.search);
 
 	return searchParams.get('url');
-};
-
-/**
- * Handle the rendering of template literals and optionally escape values
- * that are preceeded with a `$`.
- *
- * @example
- * return html`
- *     <p>${ value }</p>
- *     <p>$${ escapedValue }</p>
- * `;
- *
- * @see {@link 2ality https://2ality.com/2015/01/template-strings-html.html#the-template-handler}
- * @param strings
- * @param values
- * @returns the rendered template
- */
-export const html = (strings: any, ...values: any[]): string => {
-	let raw = strings.raw;
-
-	let result = '';
-
-	values.forEach((value, i) => {
-		let section = raw[i];
-
-		if (section.endsWith('$')) {
-			value = htmlSpecialChars(value);
-			section = section.slice(0, -1);
-		}
-
-		result += section + value;
-	});
-
-	result += raw[raw.length - 1];
-
-	return result;
-};
-
-/**
- * Convert all HTML special characters.
- *
- * @param value
- * @returns the converted string
- */
-export const htmlSpecialChars = (value: string | number): string => {
-	const chars: KeyValueMap = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		"'": '&#039;',
-	};
-
-	return value.toString().replace(/[&<>"']/g, (char: string) => {
-		return chars[char];
-	});
 };
 
 /**

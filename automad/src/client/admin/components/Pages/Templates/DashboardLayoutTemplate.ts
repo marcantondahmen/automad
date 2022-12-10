@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, createField, CSS, html, Routes, titleCase } from '../../../core';
+import {
+	App,
+	Attr,
+	createField,
+	CSS,
+	html,
+	Routes,
+	titleCase,
+} from '../../../core';
 import { Partials } from '../../../types';
 import { createTemplateSelect } from '../../Fields/PageTemplate';
 import { Sections } from '../../Switcher/Switcher';
@@ -42,13 +50,13 @@ export const dashboardLayout = ({ main }: Partials) => {
 		<div class="am-l-dashboard">
 			<div class="am-l-dashboard__navbar am-l-dashboard__navbar--left">
 				<div class="${CSS.navbar}">
-					<am-link target="${Routes.home}" class="${CSS.navbarItem}">
+					<am-link ${Attr.target}="${Routes.home}" class="${CSS.navbarItem}">
 						<am-logo></am-logo>
 					</am-link>
 					<am-modal-toggle
-						modal="#am-add-page-modal"
+						${Attr.modal}="#am-add-page-modal"
 						class="${CSS.navbarItem}"
-						am-tooltip="$${App.text('addPage')}"
+						${Attr.tooltip}="$${App.text('addPage')}"
 					>
 						<span>New</span>
 						<i class="bi bi-plus-lg"></i>
@@ -59,16 +67,16 @@ export const dashboardLayout = ({ main }: Partials) => {
 				<div class="${CSS.navbar}">
 					<am-modal-toggle
 						class="${CSS.navbarItem}"
-						modal="#am-jumpbar-modal"
+						${Attr.modal}="#am-jumpbar-modal"
 					>
 						<span>$${App.text('jumpbarButtonText')}</span>
-						<am-key-combo-badge key="J">
+						<am-key-combo-badge ${Attr.key}="J">
 					</am-modal-toggle>
 					<span class="${CSS.navbarGroup}">
 						<am-navbar-system-update-indicator></am-navbar-system-update-indicator>
 						<am-navbar-outdated-packages-indicator></am-navbar-outdated-packages-indicator>
 						<am-navbar-debug-indicator></am-navbar-debug-indicator>
-						<am-dropdown right>
+						<am-dropdown ${Attr.right}>
 							<span class="${CSS.navbarItem}">
 								<i class="bi bi-three-dots"></i>
 							</span>
@@ -80,15 +88,15 @@ export const dashboardLayout = ({ main }: Partials) => {
 								</span>
 								<am-link
 									class="${CSS.dropdownLink}"
-									target="${Routes.system}?section=${Sections.users}"
+									${Attr.target}="${Routes.system}?section=${Sections.users}"
 								>
 									<i class="bi bi-people"></i>
 									<span>$${App.text('systemUsers')}</span>
 								</am-link>
-								<am-form api="Session/logout"></am-form>
+								<am-form ${Attr.api}="Session/logout"></am-form>
 								<am-submit
 									class="${CSS.dropdownLink}"
-									form="Session/logout"
+									${Attr.form}="Session/logout"
 								>
 									<i class="bi bi-box-arrow-right"></i>
 									<span>
@@ -105,31 +113,31 @@ export const dashboardLayout = ({ main }: Partials) => {
 					<span class="${CSS.navItem}">
 						<a href="${App.baseURL}" class="${CSS.navLink}">
 							<am-icon-text
-								icon="window-desktop"
-								text="$${App.sitename}"
+								${Attr.icon}="window-desktop"
+								${Attr.text}="$${App.sitename}"
 							></am-icon-text>
 						</a>
 					</span>
 					<am-nav-item
-						page="search"
-						icon="search"
-						text="searchTitle"
+						${Attr.page}="search"
+						${Attr.icon}="search"
+						${Attr.text}="searchTitle"
 					></am-nav-item>
 					<am-nav-item
-						page="system"
-						icon="sliders"
-						text="systemTitle"
+						${Attr.page}="system"
+						${Attr.icon}="sliders"
+						${Attr.text}="systemTitle"
 					></am-nav-item>
 					<am-nav-item
-						page="shared"
-						icon="file-medical"
-						text="sharedTitle"
+						${Attr.page}="shared"
+						${Attr.icon}="file-medical"
+						${Attr.text}="sharedTitle"
 					></am-nav-item>
 					<am-nav-item
-						page="packages"
-						icon="box-seam"
-						text="packagesTitle"
-						badge="am-sidebar-outdated-packages-indicator"
+						${Attr.page}="packages"
+						${Attr.icon}="box-seam"
+						${Attr.text}="packagesTitle"
+						${Attr.badge}="am-sidebar-outdated-packages-indicator"
 					></am-nav-item>
 				</nav>
 				<am-nav-tree></am-nav-tree>
@@ -139,8 +147,8 @@ export const dashboardLayout = ({ main }: Partials) => {
 				<div class="${CSS.flex} ${CSS.flexGap} ${CSS.textMuted}">
 					<span
 						class="${CSS.iconText}"
-						am-tooltip="$${App.user.email}"
-						am-tooltip-options="placement: top"
+						${Attr.tooltip}="$${App.user.email}"
+						${Attr.tooltipOptions}="placement: top"
 					>
 						<i class="bi bi-person-square"></i>
 						<span>$${App.user.name}</span>
@@ -156,7 +164,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 		<!-- New Page Modal -->
 		<am-modal id="am-add-page-modal">
 			<div class="${CSS.modalDialog}">
-				<am-form api="Page/add">
+				<am-form ${Attr.api}="Page/add">
 					<div class="${CSS.modalHeader}">
 						<span>$${App.text('addPage')}</span>
 						<am-modal-close
