@@ -38,7 +38,7 @@ import { linkTag, SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
 
-export enum Sections {
+export enum Section {
 	overview = 'overview',
 	cache = 'cache',
 	users = 'users',

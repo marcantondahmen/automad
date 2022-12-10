@@ -43,7 +43,7 @@ import {
 } from '../../../core';
 import { Partials } from '../../../types';
 import { createTemplateSelect } from '../../Fields/PageTemplate';
-import { Sections } from '../../Switcher/Switcher';
+import { Section } from '../../Switcher/Switcher';
 
 export const dashboardLayout = ({ main }: Partials) => {
 	return html`
@@ -88,7 +88,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 								</span>
 								<am-link
 									class="${CSS.dropdownLink}"
-									${Attr.target}="${Route.system}?section=${Sections.users}"
+									${Attr.target}="${Route.system}?section=${Section.users}"
 								>
 									<i class="bi bi-people"></i>
 									<span>${App.text('systemUsers')}</span>

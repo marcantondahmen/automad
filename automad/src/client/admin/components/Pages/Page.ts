@@ -42,7 +42,7 @@ import {
 	html,
 	Route,
 } from '../../core';
-import { Sections } from '../Switcher/Switcher';
+import { Section } from '../Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 const renderBreadcrumbs = (): string => {
@@ -165,25 +165,25 @@ const renderMenu = (): string => {
 				<am-switcher class="${CSS.menu}">
 					<am-switcher-link
 						class="${CSS.menuItem}"
-						${Attr.section}="${Sections.settings}"
+						${Attr.section}="${Section.settings}"
 					>
 						${App.text('pageSettings')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
-						${Attr.section}="${Sections.text}"
+						${Attr.section}="${Section.text}"
 					>
 						${App.text('pageContent')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
-						${Attr.section}="${Sections.colors}"
+						${Attr.section}="${Section.colors}"
 					>
 						${App.text('pageColors')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
-						${Attr.section}="${Sections.files}"
+						${Attr.section}="${Section.files}"
 					>
 						${App.text('uploadedFiles')}
 						<span class="am-e-badge">
@@ -257,7 +257,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 					<am-page-data-form
 						${Attr.api}="Page/data"
 					></am-page-data-form>
-					<am-switcher-section name="${Sections.files}">
+					<am-switcher-section name="${Section.files}">
 						<am-upload></am-upload>
 						<div class="${CSS.flex} ${CSS.flexGap}">
 							<am-modal-toggle

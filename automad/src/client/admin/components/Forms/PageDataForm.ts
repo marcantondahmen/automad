@@ -56,7 +56,7 @@ import {
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
-import { Sections } from '../Switcher/Switcher';
+import { Section } from '../Switcher/Switcher';
 
 /**
  * Create a group of form fields within a given section element based on a set of keys.
@@ -118,9 +118,9 @@ const createSections = (form: PageDataFormComponent): PageSectionCollection => {
 	};
 
 	const sections: PageSectionCollection = {
-		settings: createSection(Sections.settings),
-		text: createSection(Sections.text),
-		colors: createSection(Sections.colors),
+		settings: createSection(Section.settings),
+		text: createSection(Section.text),
+		colors: createSection(Section.colors),
 	};
 
 	return sections;

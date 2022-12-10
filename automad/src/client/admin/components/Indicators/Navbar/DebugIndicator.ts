@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, CSS, html, Route } from '../../../core';
-import { Sections } from '../../Switcher/Switcher';
+import { Section } from '../../Switcher/Switcher';
 import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
 
 /**
@@ -52,7 +52,7 @@ class NavbarDebugIndicatorComponent extends BaseStateIndicatorComponent {
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					${Attr.target}="${Route.system}?section=${Sections.debug}"
+					${Attr.target}="${Route.system}?section=${Section.debug}"
 					${Attr.tooltip}="${App.text('debugEnabled')}"
 				>
 					<i class="bi bi-bug"></i>

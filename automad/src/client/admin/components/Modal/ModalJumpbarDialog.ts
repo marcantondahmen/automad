@@ -35,7 +35,7 @@
 import { AutocompleteComponent } from '../Autocomplete';
 import { JumpbarItemData, KeyValueMap, PageMetaData } from '../../types';
 import { App, Attr, create, CSS, html, Route } from '../../core';
-import { Sections } from '../Switcher/Switcher';
+import { Section } from '../Switcher/Switcher';
 
 /**
  * Return the jumpbar autocompletion data for the search.
@@ -93,13 +93,13 @@ const settingsData = (): JumpbarItemData[] => {
 	};
 
 	const data: JumpbarItemData[] = [
-		item(Sections.cache, 'systemCache', 'device-ssd'),
-		item(Sections.users, 'systemUsers', 'person-badge'),
-		item(Sections.update, 'systemUpdate', 'arrow-repeat'),
-		item(Sections.feed, 'systemRssFeed', 'rss'),
-		item(Sections.language, 'systemLanguage', 'translate'),
-		item(Sections.debug, 'systemDebug', 'bug'),
-		item(Sections.config, 'systemConfigFile', 'file-earmark-code', [
+		item(Section.cache, 'systemCache', 'device-ssd'),
+		item(Section.users, 'systemUsers', 'person-badge'),
+		item(Section.update, 'systemUpdate', 'arrow-repeat'),
+		item(Section.feed, 'systemRssFeed', 'rss'),
+		item(Section.language, 'systemLanguage', 'translate'),
+		item(Section.debug, 'systemDebug', 'bug'),
+		item(Section.config, 'systemConfigFile', 'file-earmark-code', [
 			CSS.modalJumpbarDivider,
 		]),
 	];

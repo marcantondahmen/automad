@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, CSS, html, Route } from '../../../core';
-import { Sections } from '../../Switcher/Switcher';
+import { Section } from '../../Switcher/Switcher';
 import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
 
 /**
@@ -55,7 +55,7 @@ class NavbarSystemUpdateIndicatorComponent extends BaseUpdateIndicatorComponent 
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					${Attr.target}="${Route.system}?section=${Sections.update}"
+					${Attr.target}="${Route.system}?section=${Section.update}"
 					${Attr.tooltip}="${App.text('systemUpdateTooltip')}"
 				>
 					<i class="bi bi-download"></i>
