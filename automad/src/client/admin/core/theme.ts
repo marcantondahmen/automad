@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { query } from './utils';
+import { query } from '.';
 
-export enum DashboardThemes {
+export enum DashboardTheme {
 	light = 'light',
 	lowContrast = 'low-contrast',
 	dark = 'dark',
@@ -45,18 +45,18 @@ export enum DashboardThemes {
  *
  * @returns The current color scheme in use
  */
-export const getTheme = (): DashboardThemes => {
+export const getTheme = (): DashboardTheme => {
 	const localScheme = localStorage.getItem('dashboard-theme');
 
 	if (localScheme) {
-		return localScheme as DashboardThemes;
+		return localScheme as DashboardTheme;
 	}
 
 	if (
 		window.matchMedia &&
 		window.matchMedia('(prefers-color-scheme: dark)').matches
 	) {
-		return DashboardThemes.dark;
+		return DashboardTheme.dark;
 	}
 };
 
@@ -65,7 +65,7 @@ export const getTheme = (): DashboardThemes => {
  *
  * @param theme
  */
-export const setTheme = (theme: DashboardThemes): void => {
+export const setTheme = (theme: DashboardTheme): void => {
 	localStorage.setItem('dashboard-theme', theme);
 	applyTheme(theme);
 };
@@ -75,10 +75,10 @@ export const setTheme = (theme: DashboardThemes): void => {
  *
  * @param theme
  */
-export const applyTheme = (theme: DashboardThemes): void => {
+export const applyTheme = (theme: DashboardTheme): void => {
 	const ui = query('.am-ui');
 
-	Object.values(DashboardThemes).forEach((item) => {
+	Object.values(DashboardTheme).forEach((item) => {
 		ui.classList.toggle(item, theme === item);
 	});
 };

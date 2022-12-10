@@ -33,7 +33,7 @@
  */
 
 import { Attr, create, html, listen, titleCase } from '../core';
-import { DashboardThemes, getTheme, setTheme } from '../core/theme';
+import { DashboardTheme, getTheme, setTheme } from '../core/theme';
 import { BaseComponent } from './Base';
 
 /**
@@ -57,9 +57,9 @@ class DashboardThemeToggleComponent extends BaseComponent {
 		document.documentElement.classList.add('am-u-no-transition');
 
 		this.innerHTML = '';
-		this.renderThemeToggle(DashboardThemes.light, 'sun');
-		this.renderThemeToggle(DashboardThemes.lowContrast, 'cloud-moon');
-		this.renderThemeToggle(DashboardThemes.dark, 'moon');
+		this.renderThemeToggle(DashboardTheme.light, 'sun');
+		this.renderThemeToggle(DashboardTheme.lowContrast, 'cloud-moon');
+		this.renderThemeToggle(DashboardTheme.dark, 'moon');
 
 		setTimeout(() => {
 			document.documentElement.classList.remove('am-u-no-transition');
@@ -72,7 +72,7 @@ class DashboardThemeToggleComponent extends BaseComponent {
 	 * @param theme
 	 * @param icon
 	 */
-	private renderThemeToggle = (theme: DashboardThemes, icon: string) => {
+	private renderThemeToggle = (theme: DashboardTheme, icon: string) => {
 		const cls: string[] = ['am-c-dashboard-theme-toggle__button'];
 
 		if (theme == getTheme()) {
