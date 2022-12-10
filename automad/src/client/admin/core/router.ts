@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -34,7 +34,7 @@
 
 import { App } from '.';
 
-export enum Routes {
+export enum Route {
 	setup = 'setup',
 	login = 'login',
 	resetpassword = 'resetpassword',
@@ -63,7 +63,7 @@ export const getSlug = (): string => {
  * @returns true if the route is a defined route
  */
 const isValidRoute = (route: string) => {
-	return route && route in Routes;
+	return route && route in Route;
 };
 
 /**
@@ -79,7 +79,7 @@ export const getValidRouteOrRedirect = (): string => {
 		return slug;
 	}
 
-	window.location.href = `${App.dashboardURL}/${Routes.home}`;
+	window.location.href = `${App.dashboardURL}/${Route.home}`;
 };
 
 /**
