@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { App, Attr, CSS, eventNames, listen } from '../../core';
+import { App, Attr, CSS, EventName, listen } from '../../core';
 import {
 	getActiveSection,
 	setActiveSection,
@@ -63,7 +63,7 @@ export class SwitcherLinkComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.listeners.push(
-			listen(window, eventNames.switcherChange, this.toggle.bind(this))
+			listen(window, EventName.switcherChange, this.toggle.bind(this))
 		);
 
 		this.listeners.push(listen(this, 'click', this.select.bind(this)));

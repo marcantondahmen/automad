@@ -35,7 +35,7 @@
 import FilerobotImageEditor from 'filerobot-image-editor';
 import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
 import { KeyValueMap } from '../../types';
-import { App, Attr, create, CSS, eventNames, fire, listen } from '../../core';
+import { App, Attr, create, CSS, EventName, fire, listen } from '../../core';
 import { ModalComponent } from '../Modal/Modal';
 import { BaseComponent } from '../Base';
 import { FormComponent } from '../Forms/Form';
@@ -133,7 +133,7 @@ class FileRobotComponent extends BaseComponent {
 
 		filerobotImageEditor.render();
 
-		listen(modal, eventNames.modalClose, () => {
+		listen(modal, EventName.modalClose, () => {
 			filerobotImageEditor.terminate();
 		});
 	}
@@ -151,7 +151,7 @@ class FileRobotComponent extends BaseComponent {
 	): Promise<void> {
 		form.additionalData = savedImageData;
 		await form.submit();
-		fire(eventNames.filesChangeOnServer);
+		fire(EventName.filesChangeOnServer);
 	}
 }
 

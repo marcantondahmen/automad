@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { create, eventNames, listen, queryAll } from '../../core';
+import { create, EventName, listen, queryAll } from '../../core';
 
 /**
  * A file count badge component that displays the total number of file card elements.
@@ -56,7 +56,7 @@ class FileCountComponent extends BaseComponent {
 		};
 
 		this.listeners.push(
-			listen(window, eventNames.fileCollectionRender, update.bind(this))
+			listen(window, EventName.fileCollectionRender, update.bind(this))
 		);
 
 		setTimeout(update.bind(this), 0);

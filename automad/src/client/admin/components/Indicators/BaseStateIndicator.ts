@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { eventNames, listen } from '../../core';
+import { EventName, listen } from '../../core';
 
 /**
  * The abstract base state component.
@@ -48,7 +48,7 @@ export abstract class BaseStateIndicatorComponent extends BaseComponent {
 		this.render();
 
 		this.listeners.push(
-			listen(window, eventNames.appStateChange, this.render.bind(this))
+			listen(window, EventName.appStateChange, this.render.bind(this))
 		);
 	}
 

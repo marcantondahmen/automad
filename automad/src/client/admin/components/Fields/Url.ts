@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, create, html, listen, eventNames, App, Attr } from '../../core';
+import { CSS, create, html, listen, EventName, App, Attr } from '../../core';
 import { AutocompleteComponent } from '../Autocomplete';
 import { BaseFieldComponent } from './BaseField';
 
@@ -102,7 +102,7 @@ class URLComponent extends BaseFieldComponent {
 
 		buttonOk.textContent = App.text('ok');
 
-		listen(modal, eventNames.modalOpen, () => {
+		listen(modal, EventName.modalOpen, () => {
 			autocomplete.input.value = '';
 		});
 
@@ -112,7 +112,7 @@ class URLComponent extends BaseFieldComponent {
 		};
 
 		listen(buttonOk, 'click', select.bind(this));
-		listen(autocomplete, eventNames.autocompleteSelect, select.bind(this));
+		listen(autocomplete, EventName.autocompleteSelect, select.bind(this));
 
 		setTimeout(() => {
 			modal.open();

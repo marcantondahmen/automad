@@ -39,7 +39,7 @@ import {
 	Bindings,
 	create,
 	CSS,
-	eventNames,
+	EventName,
 	fire,
 	getPageURL,
 	html,
@@ -98,7 +98,7 @@ class ImageSelectComponent extends BaseFieldComponent {
 			combo
 		);
 
-		listen(input, eventNames.changeByBinding, () => {
+		listen(input, EventName.changeByBinding, () => {
 			fire('input', input);
 		});
 

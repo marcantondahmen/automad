@@ -37,7 +37,7 @@ import { Listener } from '../types';
 /**
  * The object with all custom event that are used by the UI.
  */
-export enum eventNames {
+export enum EventName {
 	appStateChange = 'AutomadAppStateChange',
 	appStateRequireUpdate = 'AutomadAppStateRequireUpdate',
 	autocompleteSelect = 'AutomadAutocompleteSelect',

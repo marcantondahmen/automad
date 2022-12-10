@@ -36,7 +36,7 @@ import {
 	App,
 	Attr,
 	CSS,
-	eventNames,
+	EventName,
 	fire,
 	getFormData,
 	listen,
@@ -145,7 +145,7 @@ export class ModalComponent extends BaseComponent {
 		this.toggleBodyOverflow();
 		this.restoreInitialFormData();
 
-		fire(eventNames.modalClose, this);
+		fire(EventName.modalClose, this);
 
 		if (this.hasAttribute(Attr.destroy)) {
 			setTimeout(() => {
@@ -166,7 +166,7 @@ export class ModalComponent extends BaseComponent {
 		this.toggleBodyOverflow();
 		this.saveInitialFormData();
 
-		fire(eventNames.modalOpen, this);
+		fire(EventName.modalOpen, this);
 
 		if (!this.hasAttribute(Attr.noFocus)) {
 			const input = query('input, textarea', this);

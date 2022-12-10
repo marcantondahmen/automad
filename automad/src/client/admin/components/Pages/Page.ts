@@ -36,7 +36,7 @@ import {
 	App,
 	Attr,
 	CSS,
-	eventNames,
+	EventName,
 	getPageURL,
 	getTagFromRoute,
 	html,
@@ -205,7 +205,7 @@ const renderFileImportModal = (): string => {
 			<div class="${CSS.modalDialog}">
 				<am-form
 					${Attr.api}="File/import"
-					${Attr.event}="${eventNames.filesChangeOnServer}"
+					${Attr.event}="${EventName.filesChangeOnServer}"
 				>
 					<div class="${CSS.modalBody}">
 						<div class="${CSS.field}">

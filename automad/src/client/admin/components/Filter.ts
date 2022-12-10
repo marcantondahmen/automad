@@ -38,7 +38,7 @@ import {
 	create,
 	CSS,
 	debounce,
-	eventNames,
+	EventName,
 	keyCombo,
 	listen,
 	queryAll,
@@ -85,7 +85,7 @@ class FilterComponent extends BaseComponent {
 		);
 
 		this.listeners.push(
-			listen(window, eventNames.switcherChange, () => {
+			listen(window, EventName.switcherChange, () => {
 				input.value = '';
 				this.filter(input);
 			})

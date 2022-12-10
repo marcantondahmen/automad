@@ -44,7 +44,7 @@ import {
 	html,
 	listen,
 	requestAPI,
-	eventNames,
+	EventName,
 	CSS,
 	Attr,
 } from '../core';
@@ -93,7 +93,7 @@ export class NavTreeComponent extends BaseComponent {
 		this.classList.add(...this.elementClasses);
 
 		this.listeners.push(
-			listen(window, eventNames.appStateChange, this.init.bind(this))
+			listen(window, EventName.appStateChange, this.init.bind(this))
 		);
 
 		this.init();

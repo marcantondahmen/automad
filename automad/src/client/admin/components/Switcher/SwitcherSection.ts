@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { CSS, eventNames, listen, query } from '../../core';
+import { CSS, EventName, listen, query } from '../../core';
 import { getActiveSection, SwitcherComponent } from './Switcher';
 
 /**
@@ -64,7 +64,7 @@ export class SwitcherSectionComponent extends BaseComponent {
 		this.toggle();
 
 		this.listeners.push(
-			listen(window, eventNames.switcherChange, this.toggle.bind(this))
+			listen(window, EventName.switcherChange, this.toggle.bind(this))
 		);
 	}
 

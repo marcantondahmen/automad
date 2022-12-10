@@ -32,14 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	create,
-	CSS,
-	eventNames,
-	getPageURL,
-	listen,
-} from '../../../core';
+import { App, create, CSS, EventName, getPageURL, listen } from '../../../core';
 import { BaseComponent } from '../../Base';
 
 /**
@@ -55,7 +48,7 @@ class PrivateIndicatorComponent extends BaseComponent {
 		this.classList.add(CSS.privacyIndicator);
 
 		this.listeners.push(
-			listen(window, eventNames.appStateChange, this.render.bind(this))
+			listen(window, EventName.appStateChange, this.render.bind(this))
 		);
 
 		this.render();

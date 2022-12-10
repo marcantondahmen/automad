@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, eventNames, fire, listen, queryAll } from '.';
+import { Attr, create, EventName, fire, listen, queryAll } from '.';
 import { InputElement, KeyValueMap } from '../types';
 
 /**
@@ -185,7 +185,7 @@ export class Bindings {
 							element.setAttribute(prop, binding.value);
 					}
 
-					fire(eventNames.changeByBinding, element);
+					fire(EventName.changeByBinding, element);
 				});
 			};
 

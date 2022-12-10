@@ -45,7 +45,7 @@ import {
 	listen,
 	debounce,
 	html,
-	eventNames,
+	EventName,
 	CSS,
 	fire,
 	Attr,
@@ -171,7 +171,7 @@ export class AutocompleteComponent extends BaseComponent {
 		this.classList.add(...this.elementClasses);
 
 		this.listeners.push(
-			listen(window, eventNames.appStateChange, this.init.bind(this))
+			listen(window, EventName.appStateChange, this.init.bind(this))
 		);
 
 		this.init();
@@ -463,7 +463,7 @@ export class AutocompleteComponent extends BaseComponent {
 
 		this.close();
 
-		fire(eventNames.autocompleteSelect, this);
+		fire(EventName.autocompleteSelect, this);
 	}
 }
 

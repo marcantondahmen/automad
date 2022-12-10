@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { eventNames, listen } from '../../core';
+import { EventName, listen } from '../../core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -47,7 +47,7 @@ export abstract class BaseUpdateIndicatorComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.render();
 		this.listeners.push(
-			listen(window, eventNames.systemUpdateCheck, this.render.bind(this))
+			listen(window, EventName.systemUpdateCheck, this.render.bind(this))
 		);
 	}
 

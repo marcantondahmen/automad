@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, CSS, eventNames, listen, queryAll } from '.';
+import { Attr, CSS, EventName, listen, queryAll } from '.';
 
 export const initCheckboxToggles = (container: HTMLElement) => {
 	const checkboxes = queryAll(
@@ -48,7 +48,7 @@ export const initCheckboxToggles = (container: HTMLElement) => {
 			});
 		};
 
-		listen(checkbox, `change ${eventNames.changeByBinding}`, toggleTargets);
+		listen(checkbox, `change ${EventName.changeByBinding}`, toggleTargets);
 		toggleTargets();
 	});
 };
