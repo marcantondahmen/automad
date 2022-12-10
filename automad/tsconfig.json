@@ -5,6 +5,7 @@
 		"checkJs": false,
 		"moduleResolution": "node",
 		"noImplicitAny": true,
+		"preserveConstEnums": true,
 		"target": "es6",
 		"outDir": "dist"
 	},

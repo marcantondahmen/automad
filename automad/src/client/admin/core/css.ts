@@ -35,7 +35,7 @@
 /**
  * The enum with all classes used for HTML elements that are used by components.
  */
-export enum CSS {
+export const enum CSS {
 	badge = 'am-e-badge',
 	badgeMuted = 'am-e-badge--muted',
 

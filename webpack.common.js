@@ -3,8 +3,9 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const minifyHTML = (html) => {
+const optimizeTemplate = (html) => {
 	return html
+		.replace(/\$\{"([^"]+)"\s\/\*\s\w+\s\*\/\}/g, '$1')
 		.replace(/\s+/g, ' ')
 		.replace(/\<\s+/g, '<')
 		.replace(/\s+\>/g, '>')
@@ -36,7 +37,7 @@ module.exports = (env, argv) => {
 							options: {
 								search: /(`[^`]+`)/g,
 								replace(match, p1, offset, string) {
-									return minifyHTML(p1);
+									return optimizeTemplate(p1);
 								},
 							},
 						},
