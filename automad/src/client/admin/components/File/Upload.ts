@@ -44,7 +44,7 @@ import {
 	notifyError,
 	notifySuccess,
 	query,
-	RequestKeys,
+	RequestKey,
 } from '../../core';
 import { BaseComponent } from '../Base';
 import { FileCollectionListFormComponent } from '../Forms/FileCollection/ListForm';
@@ -222,7 +222,7 @@ class UploadComponent extends BaseComponent {
 			[],
 			{
 				type: 'hidden',
-				name: RequestKeys.csrf,
+				name: RequestKey.csrf,
 				value: getCsrfToken(),
 			},
 			form
@@ -233,7 +233,7 @@ class UploadComponent extends BaseComponent {
 			[],
 			{
 				type: 'hidden',
-				name: RequestKeys.appId,
+				name: RequestKey.appId,
 				value: App.id,
 			},
 			form

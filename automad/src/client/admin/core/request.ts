@@ -39,7 +39,7 @@ import { KeyValueMap } from '../types';
 /**
  * The names of field that are submitted along with post requests.
  */
-export enum RequestKeys {
+export enum RequestKey {
 	csrf = '__csrf__',
 	appId = '__app_id__',
 }
@@ -71,8 +71,8 @@ export const request = async (
 	if (data !== null) {
 		const formData = new FormData();
 
-		formData.append(RequestKeys.csrf, getCsrfToken());
-		formData.append(RequestKeys.appId, App.id);
+		formData.append(RequestKey.csrf, getCsrfToken());
+		formData.append(RequestKey.appId, App.id);
 
 		Object.keys(data).forEach((key) => {
 			formData.append(key, data[key]);
