@@ -38,7 +38,7 @@ import {
 	createField,
 	CSS,
 	html,
-	Routes,
+	Route,
 	titleCase,
 } from '../../../core';
 import { Partials } from '../../../types';
@@ -50,7 +50,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 		<div class="am-l-dashboard">
 			<div class="am-l-dashboard__navbar am-l-dashboard__navbar--left">
 				<div class="${CSS.navbar}">
-					<am-link ${Attr.target}="${Routes.home}" class="${CSS.navbarItem}">
+					<am-link ${Attr.target}="${Route.home}" class="${CSS.navbarItem}">
 						<am-logo></am-logo>
 					</am-link>
 					<am-modal-toggle
@@ -88,7 +88,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 								</span>
 								<am-link
 									class="${CSS.dropdownLink}"
-									${Attr.target}="${Routes.system}?section=${Sections.users}"
+									${Attr.target}="${Route.system}?section=${Sections.users}"
 								>
 									<i class="bi bi-people"></i>
 									<span>${App.text('systemUsers')}</span>

@@ -34,7 +34,7 @@
 
 import { AutocompleteComponent } from '../Autocomplete';
 import { JumpbarItemData, KeyValueMap, PageMetaData } from '../../types';
-import { App, Attr, create, CSS, html, Routes } from '../../core';
+import { App, Attr, create, CSS, html, Route } from '../../core';
 import { Sections } from '../Switcher/Switcher';
 
 /**
@@ -45,7 +45,7 @@ import { Sections } from '../Switcher/Switcher';
 const searchData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Routes.search,
+			target: Route.search,
 			value: App.text('searchTitle'),
 			title: App.text('searchTitle'),
 			icon: 'search',
@@ -83,7 +83,7 @@ const settingsData = (): JumpbarItemData[] => {
 		cls: string[] = []
 	): JumpbarItemData => {
 		return {
-			target: `${Routes.system}?section=${section}`,
+			target: `${Route.system}?section=${section}`,
 			value: `${App.text('systemTitle')} ${App.text(title)}`,
 			title: App.text(title),
 			subtitle: App.text('systemTitle'),
@@ -115,7 +115,7 @@ const settingsData = (): JumpbarItemData[] => {
 const sharedData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Routes.shared,
+			target: Route.shared,
 			value: App.text('sharedTitle'),
 			title: App.text('sharedTitle'),
 			icon: 'file-earmark-medical',
@@ -132,7 +132,7 @@ const sharedData = (): JumpbarItemData[] => {
 const packagesData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Routes.packages,
+			target: Route.packages,
 			value: App.text('packagesTitle'),
 			title: App.text('packagesTitle'),
 			icon: 'box-seam',
@@ -158,7 +158,7 @@ const pagesData = (): JumpbarItemData[] => {
 		const icon = page.private ? 'eye-slash-fill' : 'file-earmark-text';
 
 		data.push({
-			target: `${Routes.page}?url=${page.url}`,
+			target: `${Route.page}?url=${page.url}`,
 			value: `${page.title} ${page.url}`,
 			title: page.title,
 			subtitle: page.url,
@@ -296,7 +296,7 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 
 		search.element.setAttribute(
 			'target',
-			`${Routes.search}?search=${encodeURIComponent(
+			`${Route.search}?search=${encodeURIComponent(
 				this.input.value
 			).replace(/%20/g, '+')}`
 		);

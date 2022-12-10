@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, Routes } from '../../../core';
+import { App, Attr, CSS, html, Route } from '../../../core';
 import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
 
 /**
@@ -53,7 +53,7 @@ class NavbarOutdatedPackagesIndicatorComponent extends BaseUpdateIndicatorCompon
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					${Attr.target}="${Routes.packages}"
+					${Attr.target}="${Route.packages}"
 					${Attr.tooltip}="${App.text('packagesUpdatesAvailable')}"
 				>
 					<i class="bi bi-box-seam"></i>

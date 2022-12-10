@@ -40,7 +40,7 @@ import {
 	getPageURL,
 	getTagFromRoute,
 	html,
-	Routes,
+	Route,
 } from '../../core';
 import { Sections } from '../Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
@@ -287,4 +287,4 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes.page), PageComponent);
+customElements.define(getTagFromRoute(Route.page), PageComponent);

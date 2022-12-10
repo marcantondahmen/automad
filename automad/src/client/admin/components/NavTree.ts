@@ -40,7 +40,7 @@ import {
 	query,
 	queryParents,
 	queryAll,
-	Routes,
+	Route,
 	html,
 	listen,
 	requestAPI,
@@ -318,7 +318,7 @@ export class NavTreeComponent extends BaseComponent {
 			'am-link',
 			[],
 			{
-				[Attr.target]: `${Routes.page}?url=${encodeURIComponent(
+				[Attr.target]: `${Route.page}?url=${encodeURIComponent(
 					page.url
 				)}`,
 				[Attr.tooltip]: page.url,
@@ -359,7 +359,7 @@ export class NavTreeComponent extends BaseComponent {
 	protected toggleItem(item: NavTreeItem, url: string): void {
 		item.wrapper.classList.toggle(
 			CSS.navItemActive,
-			item.page.url == url && isActivePage(Routes.page)
+			item.page.url == url && isActivePage(Route.page)
 		);
 	}
 

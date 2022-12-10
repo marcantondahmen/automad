@@ -36,7 +36,7 @@ import {
 	requestAPI,
 	getPageURL,
 	create,
-	Routes,
+	Route,
 	html,
 	CSS,
 	App,
@@ -90,14 +90,14 @@ class PageBreadcrumbsComponent extends BaseComponent {
 		const dashboard = create(
 			'am-link',
 			[CSS.breadcrumbsItem],
-			{ [Attr.target]: Routes.home },
+			{ [Attr.target]: Route.home },
 			this
 		);
 
 		dashboard.textContent = App.text('dashboardTitle');
 
 		data.forEach((page: KeyValueMap, index: number) => {
-			const target = `${Routes.page}?url=${encodeURIComponent(page.url)}`;
+			const target = `${Route.page}?url=${encodeURIComponent(page.url)}`;
 
 			const link = create(
 				'am-link',

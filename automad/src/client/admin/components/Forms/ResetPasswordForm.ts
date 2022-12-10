@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, CSS, html, Routes } from '../../core';
+import { App, Attr, createField, CSS, html, Route } from '../../core';
 import { KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
 
@@ -105,7 +105,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 					<div class="${CSS.cardFormButtons}">
 						<am-link
 							class="${CSS.button}"
-							${Attr.target}="${Routes.login}"
+							${Attr.target}="${Route.login}"
 						>
 							${App.text('cancel')}
 						</am-link>
@@ -161,7 +161,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 					<div class="${CSS.cardFormButtons}">
 						<am-link
 							class="${CSS.button}"
-							${Attr.target}="${Routes.login}"
+							${Attr.target}="${Route.login}"
 						>
 							${App.text('cancel')}
 						</am-link>
@@ -189,7 +189,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 				<div class="${CSS.cardForm}">
 					<am-link
 						class="${CSS.button}"
-						${Attr.target}="${Routes.login}"
+						${Attr.target}="${Route.login}"
 					>
 						${App.text('signIn')}
 					</am-link>

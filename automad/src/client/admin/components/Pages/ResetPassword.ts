@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, getTagFromRoute, html, Routes } from '../../core';
+import { App, Attr, getTagFromRoute, html, Route } from '../../core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
@@ -63,6 +63,6 @@ export class ResetPasswordComponent extends BaseCenteredLayoutComponent {
 }
 
 customElements.define(
-	getTagFromRoute(Routes.resetpassword),
+	getTagFromRoute(Route.resetpassword),
 	ResetPasswordComponent
 );

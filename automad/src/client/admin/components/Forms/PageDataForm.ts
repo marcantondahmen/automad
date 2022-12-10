@@ -52,7 +52,7 @@ import {
 	createField,
 	CSS,
 	html,
-	Routes,
+	Route,
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
@@ -183,7 +183,7 @@ const createBindings = (data: KeyValueMap): PageBindings => {
 		'pageLinkUI',
 		null,
 		(url: string) => {
-			return `${Routes.page}?url=${encodeURIComponent(url)}`;
+			return `${Route.page}?url=${encodeURIComponent(url)}`;
 		},
 		url
 	);

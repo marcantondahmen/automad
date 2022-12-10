@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, getTagFromRoute, html, Routes } from '../../core';
+import { App, Attr, CSS, getTagFromRoute, html, Route } from '../../core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
@@ -79,7 +79,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 					/>
 					<div class="am-c-card__form-buttons">
 						<a
-							href="./${Routes.resetpassword}"
+							href="./${Route.resetpassword}"
 							class="${CSS.button}"
 						>
 							${App.text('forgotPassword')}
@@ -97,4 +97,4 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes.login), LoginComponent);
+customElements.define(getTagFromRoute(Route.login), LoginComponent);
