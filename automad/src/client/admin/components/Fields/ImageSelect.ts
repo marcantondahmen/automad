@@ -77,7 +77,9 @@ class ImageSelectComponent extends BaseFieldComponent {
 			(value: string) => {
 				const { width, height } = this.resize;
 				const querystring =
-					width && height ? `?${width}x${height}` : '';
+					width && height && !value.match(/\:\/\//)
+						? `?${width}x${height}`
+						: '';
 
 				return `${value}${querystring}`;
 			},
@@ -229,6 +231,8 @@ class ImageSelectComponent extends BaseFieldComponent {
 			binding.value = inputUrl.value;
 			modal.close();
 		});
+
+		this.resize = { width: '', height: '' };
 
 		listen(inputWidth, 'change', () => {
 			this.resize.width = inputWidth.value;
