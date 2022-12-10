@@ -153,7 +153,7 @@ class UploadComponent extends BaseComponent {
 			message = message.error;
 		}
 
-		notifyError(html`$${message}:<br />$${file.name}`);
+		notifyError(html`${message}:<br />$${file.name}`);
 	}
 
 	/**
@@ -166,9 +166,7 @@ class UploadComponent extends BaseComponent {
 			'am-file-collection-list-form'
 		) as FileCollectionListFormComponent;
 
-		notifySuccess(
-			html`$${App.text('uploadedSuccess')}:<br />$${file.name}`
-		);
+		notifySuccess(html`${App.text('uploadedSuccess')}:<br />$${file.name}`);
 
 		this.dropzone.removeFile(file);
 		fileCollection.refresh();

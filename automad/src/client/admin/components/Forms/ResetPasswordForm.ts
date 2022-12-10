@@ -89,10 +89,10 @@ export class ResetPasswordFormComponent extends FormComponent {
 		const searchParams = new URLSearchParams(window.location.search);
 
 		this.innerHTML = html`
-			<h1>$${App.text('resetPassword')}</h1>
+			<h1>${App.text('resetPassword')}</h1>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					$${App.text('passwordResetEnterNameOrEmail')}
+					${App.text('passwordResetEnterNameOrEmail')}
 				</div>
 				<div class="${CSS.cardForm}">
 					<input
@@ -100,17 +100,17 @@ export class ResetPasswordFormComponent extends FormComponent {
 						class="${CSS.input}"
 						name="name-or-email"
 						value="$${searchParams.get('username') || ''}"
-						placeholder="$${App.text('usernameOrEmail')}"
+						placeholder="${App.text('usernameOrEmail')}"
 					/>
 					<div class="${CSS.cardFormButtons}">
 						<am-link
 							class="${CSS.button}"
 							${Attr.target}="${Routes.login}"
 						>
-							$${App.text('cancel')}
+							${App.text('cancel')}
 						</am-link>
 						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
-							$${App.text('submit')}
+							${App.text('submit')}
 						</am-submit>
 					</div>
 				</div>
@@ -125,18 +125,18 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSetPassword(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<h1>$${App.text('resetPassword')}</h1>
+			<h1>${App.text('resetPassword')}</h1>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					$${App.text('passwordResetEnterNewPassword')}
+					${App.text('passwordResetEnterNewPassword')}
 				</div>
 				<div class="${CSS.cardForm}">
 					<input
 						type="text"
 						class="${CSS.input}"
 						name="token"
-						placeholder="$${App.text('passwordResetToken')}"
-						${Attr.tooltip}="$${App.text('passwordResetToken')}"
+						placeholder="${App.text('passwordResetToken')}"
+						${Attr.tooltip}="${App.text('passwordResetToken')}"
 						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
@@ -144,8 +144,8 @@ export class ResetPasswordFormComponent extends FormComponent {
 						type="password"
 						class="${CSS.input}"
 						name="password1"
-						placeholder="$${App.text('password')}"
-						${Attr.tooltip}="$${App.text('password')}"
+						placeholder="${App.text('password')}"
+						${Attr.tooltip}="${App.text('password')}"
 						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
@@ -153,8 +153,8 @@ export class ResetPasswordFormComponent extends FormComponent {
 						type="password"
 						class="${CSS.input}"
 						name="password2"
-						placeholder="$${App.text('repeatPassword')}"
-						${Attr.tooltip}="$${App.text('repeatPassword')}"
+						placeholder="${App.text('repeatPassword')}"
+						${Attr.tooltip}="${App.text('repeatPassword')}"
 						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
@@ -163,10 +163,10 @@ export class ResetPasswordFormComponent extends FormComponent {
 							class="${CSS.button}"
 							${Attr.target}="${Routes.login}"
 						>
-							$${App.text('cancel')}
+							${App.text('cancel')}
 						</am-link>
 						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
-							$${App.text('passwordResetSave')}
+							${App.text('passwordResetSave')}
 						</am-submit>
 					</div>
 				</div>
@@ -181,17 +181,17 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSuccess(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<h1>$${App.text('resetPassword')}</h1>
+			<h1>${App.text('resetPassword')}</h1>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					$${App.text('passwordChangedSuccess')}
+					${App.text('passwordChangedSuccess')}
 				</div>
 				<div class="${CSS.cardForm}">
 					<am-link
 						class="${CSS.button}"
 						${Attr.target}="${Routes.login}"
 					>
-						$${App.text('signIn')}
+						${App.text('signIn')}
 					</am-link>
 				</div>
 			</div>

@@ -143,14 +143,14 @@ export class FileInfoComponent extends BaseComponent {
 				</div>
 				<div class="${CSS.modalFooter}">
 					<a
-						href="$${file.url}"
+						href="${file.url}"
 						class="${CSS.button} ${CSS.buttonLink}"
 						download="$${file.basename}"
 					>
-						$${App.text('downloadFile')}
+						${App.text('downloadFile')}
 					</a>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
-						$${App.text('save')}
+						${App.text('save')}
 					</am-submit>
 				</div>
 			</am-form>

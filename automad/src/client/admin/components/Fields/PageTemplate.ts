@@ -253,7 +253,7 @@ export class PageTemplateComponent extends BaseComponent {
 		modal.innerHTML = html`
 			<div class="${CSS.modalDialog}">
 				<div class="${CSS.modalHeader}">
-					<span>$${App.text('pageTemplate')}</span>
+					<span>${App.text('pageTemplate')}</span>
 					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
 				</div>
 				<div class="${CSS.modalBody}">

@@ -246,7 +246,7 @@ export class NavTreeComponent extends BaseComponent {
 	protected renderLabel(count: number): void {
 		create('span', [CSS.navLabel], {}, this).innerHTML = html`
 			<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}">
-				$${App.text('sidebarPages')} &mdash; ${count}
+				${App.text('sidebarPages')} &mdash; ${count}
 			</span>
 		`;
 	}

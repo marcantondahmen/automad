@@ -150,7 +150,7 @@ class ImageSelectComponent extends BaseFieldComponent {
 
 		button.innerHTML = html`
 			<i class="bi bi-folder"></i>
-			<span>$${App.text('browseFiles')}</span>
+			<span>${App.text('browseFiles')}</span>
 		`;
 
 		return button;
@@ -165,7 +165,7 @@ class ImageSelectComponent extends BaseFieldComponent {
 		modal.innerHTML = html`
 			<div class="${CSS.modalDialog} ${CSS.modalDialogLarge}">
 				<div class="${CSS.modalHeader}">
-					<span>$${this._data.label}</span>
+					<span>${this._data.label}</span>
 					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
 				</div>
 				<div class="${CSS.modalBody}">
@@ -173,10 +173,10 @@ class ImageSelectComponent extends BaseFieldComponent {
 						<input
 							type="text"
 							class="${CSS.input} ${CSS.formGroupItem}"
-							placeholder="$${App.text('url')}"
+							placeholder="${App.text('url')}"
 						/>
 						<button class="${CSS.button} ${CSS.formGroupItem}">
-							$${App.text('ok')}
+							${App.text('ok')}
 						</button>
 					</span>
 					<hr />
@@ -207,12 +207,12 @@ class ImageSelectComponent extends BaseFieldComponent {
 						</div>
 					</div>
 					<am-image-picker
-						${Attr.label}="$${App.text('sharedImages')}"
+						${Attr.label}="${App.text('sharedImages')}"
 						${Attr.binding}="${inputBindingName}"
 					></am-image-picker>
 					<am-image-picker
 						${Attr.page}="${getPageURL()}"
-						${Attr.label}="$${App.text('pageImages')}"
+						${Attr.label}="${App.text('pageImages')}"
 						${Attr.binding}="${inputBindingName}"
 					></am-image-picker>
 				</div>

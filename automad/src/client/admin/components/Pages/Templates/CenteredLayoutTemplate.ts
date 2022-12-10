@@ -49,7 +49,7 @@ export const centered = ({ title, main }: Partials): string => {
 						<a
 							href="${App.baseURL}"
 							class="${CSS.navbarItem}"
-							${Attr.tooltip}="$${App.text('close')}"
+							${Attr.tooltip}="${App.text('close')}"
 						>
 							<i class="bi bi-x"></i>
 						</a>

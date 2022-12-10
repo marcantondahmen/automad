@@ -55,7 +55,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<h1>$${App.sitename} &mdash; $${App.text('signIn')}</h1>
+			<h1>$${App.sitename} &mdash; ${App.text('signIn')}</h1>
 			<div class="am-c-card">
 				<am-form
 					class="am-c-card__form"
@@ -67,14 +67,14 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 						class="${CSS.input}"
 						type="text"
 						name="name-or-email"
-						placeholder="$${App.text('usernameOrEmail')}"
+						placeholder="${App.text('usernameOrEmail')}"
 						required
 					/>
 					<input
 						class="${CSS.input}"
 						type="password"
 						name="password"
-						placeholder="$${App.text('password')}"
+						placeholder="${App.text('password')}"
 						required
 					/>
 					<div class="am-c-card__form-buttons">
@@ -82,13 +82,13 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 							href="./${Routes.resetpassword}"
 							class="${CSS.button}"
 						>
-							$${App.text('forgotPassword')}
+							${App.text('forgotPassword')}
 						</a>
 						<am-submit
 							class="${CSS.button} ${CSS.buttonPrimary}"
 							${Attr.form}="Session/login"
 						>
-							$${App.text('signIn')}
+							${App.text('signIn')}
 						</am-submit>
 					</div>
 				</am-form>

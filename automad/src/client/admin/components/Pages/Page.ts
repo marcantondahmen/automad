@@ -65,7 +65,7 @@ const renderMovePageModal = (): string => {
 			<div class="${CSS.modalDialog}">
 				<am-form ${Attr.api}="Page/move">
 					<div class="${CSS.modalHeader}">
-						<span>$${App.text('movePage')}</span>
+						<span>${App.text('movePage')}</span>
 						<am-modal-close
 							class="${CSS.modalClose}"
 						></am-modal-close>
@@ -73,7 +73,7 @@ const renderMovePageModal = (): string => {
 					<div class="${CSS.modalBody}">
 						<div class="${CSS.field}">
 							<label class="${CSS.fieldLabel}">
-								$${App.text('selectTargetMovePage')}
+								${App.text('selectTargetMovePage')}
 							</label>
 							<am-page-select-tree
 								${Attr.hideCurrent}
@@ -82,10 +82,10 @@ const renderMovePageModal = (): string => {
 					</div>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
-							$${App.text('cancel')}
+							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
-							$${App.text('movePage')}
+							${App.text('movePage')}
 						</am-submit>
 					</div>
 				</am-form>
@@ -102,7 +102,7 @@ const renderDropdown = (): string => {
 	return html`
 		<am-dropdown ${Attr.right}>
 			<span class="${CSS.menuItem}">
-				<span>$${App.text('more')}</span>
+				<span>${App.text('more')}</span>
 				<i class="bi bi-chevron-down"></i>
 			</span>
 			<div class="${CSS.dropdownItems}">
@@ -114,14 +114,14 @@ const renderDropdown = (): string => {
 				>
 					<am-icon-text
 						${Attr.icon}="pencil"
-						${Attr.text}="$${App.text('inPageEdit')}"
+						${Attr.text}="${App.text('inPageEdit')}"
 					></am-icon-text>
 				</a>
 				<am-form ${Attr.api}="Page/duplicate">
 					<am-submit class="${CSS.dropdownLink}">
 						<am-icon-text
 							${Attr.icon}="files"
-							${Attr.text}="$${App.text('duplicatePage')}"
+							${Attr.text}="${App.text('duplicatePage')}"
 						></am-icon-text>
 					</am-submit>
 				</am-form>
@@ -131,24 +131,24 @@ const renderDropdown = (): string => {
 				>
 					<am-icon-text
 						${Attr.icon}="arrows-move"
-						${Attr.text}="$${App.text('movePage')}"
+						${Attr.text}="${App.text('movePage')}"
 					></am-icon-text>
 				</am-modal-toggle>
 				<am-form
 					${Attr.api}="Page/delete"
-					${Attr.confirm}="$${App.text('confirmDeletePage')}"
+					${Attr.confirm}="${App.text('confirmDeletePage')}"
 				>
 					<am-submit class="${CSS.dropdownLink}">
 						<am-icon-text
 							${Attr.icon}="trash2"
-							${Attr.text}="$${App.text('deletePage')}"
+							${Attr.text}="${App.text('deletePage')}"
 						></am-icon-text>
 					</am-submit>
 				</am-form>
 				<am-copy class="${CSS.dropdownLink}" value="${getPageURL()}">
 					<am-icon-text
 						${Attr.icon}="clipboard-plus"
-						${Attr.text}="$${App.text('copyUrlClipboard')}"
+						${Attr.text}="${App.text('copyUrlClipboard')}"
 					></am-icon-text>
 				</am-copy>
 			</div>
@@ -167,25 +167,25 @@ const renderMenu = (): string => {
 						class="${CSS.menuItem}"
 						${Attr.section}="${Sections.settings}"
 					>
-						$${App.text('pageSettings')}
+						${App.text('pageSettings')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						${Attr.section}="${Sections.text}"
 					>
-						$${App.text('pageContent')}
+						${App.text('pageContent')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						${Attr.section}="${Sections.colors}"
 					>
-						$${App.text('pageColors')}
+						${App.text('pageColors')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						${Attr.section}="${Sections.files}"
 					>
-						$${App.text('uploadedFiles')}
+						${App.text('uploadedFiles')}
 						<span class="am-e-badge">
 							<am-file-count></am-file-count>
 						</span>
@@ -219,10 +219,10 @@ const renderFileImportModal = (): string => {
 					</div>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
-							$${App.text('cancel')}
+							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
-							$${App.text('importFromUrl')}
+							${App.text('importFromUrl')}
 						</am-submit>
 					</div>
 				</am-form>
@@ -264,17 +264,17 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 								class="${CSS.button} ${CSS.buttonAccent}"
 								${Attr.modal}="#am-file-import-modal"
 							>
-								$${App.text('importFromUrl')}
+								${App.text('importFromUrl')}
 							</am-modal-toggle>
 							<am-file-collection-submit
 								class="${CSS.button}"
 								${Attr.form}="FileCollection/list"
 							>
-								$${App.text('deleteSelected')}
+								${App.text('deleteSelected')}
 							</am-file-collection-submit>
 						</div>
 						<am-file-collection-list-form
-							${Attr.confirm}="$${App.text(
+							${Attr.confirm}="${App.text(
 								'confirmDeleteSelectedFiles'
 							)}"
 							${Attr.api}="FileCollection/list"

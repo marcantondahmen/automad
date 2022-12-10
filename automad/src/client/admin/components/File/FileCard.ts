@@ -134,7 +134,7 @@ class FileCardComponent extends BaseComponent {
 					class="${CSS.cardTeaser} ${CSS.cursorPointer}"
 					${Attr.tooltip}="$${file.basename}"
 				>
-					<img src="$${file.thumbnail}" />
+					<img src="${file.thumbnail}" />
 				</am-file-robot>
 			`;
 		}
@@ -168,7 +168,7 @@ class FileCardComponent extends BaseComponent {
 				>
 					<am-icon-text
 						${Attr.icon}="pencil"
-						${Attr.text}="$${App.text('editImage')}"
+						${Attr.text}="${App.text('editImage')}"
 					></am-icon-text>
 				</am-file-robot>
 			`;
@@ -182,13 +182,13 @@ class FileCardComponent extends BaseComponent {
 					<am-file-info class="${CSS.dropdownLink}">
 						<am-icon-text
 							${Attr.icon}="card-heading"
-							${Attr.text}="$${App.text('editFileInfo')}"
+							${Attr.text}="${App.text('editFileInfo')}"
 						></am-icon-text>
 					</am-file-info>
 					<am-copy class="${CSS.dropdownLink}" value="${file.url}">
 						<am-icon-text
 							${Attr.icon}="clipboard-plus"
-							${Attr.text}="$${App.text('copyUrlClipboard')}"
+							${Attr.text}="${App.text('copyUrlClipboard')}"
 						></am-icon-text>
 					</am-copy>
 				</div>

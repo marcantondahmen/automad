@@ -56,7 +56,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 					<am-modal-toggle
 						${Attr.modal}="#am-add-page-modal"
 						class="${CSS.navbarItem}"
-						${Attr.tooltip}="$${App.text('addPage')}"
+						${Attr.tooltip}="${App.text('addPage')}"
 					>
 						<span>New</span>
 						<i class="bi bi-plus-lg"></i>
@@ -69,7 +69,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						class="${CSS.navbarItem}"
 						${Attr.modal}="#am-jumpbar-modal"
 					>
-						<span>$${App.text('jumpbarButtonText')}</span>
+						<span>${App.text('jumpbarButtonText')}</span>
 						<am-key-combo-badge ${Attr.key}="J">
 					</am-modal-toggle>
 					<span class="${CSS.navbarGroup}">
@@ -91,7 +91,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 									${Attr.target}="${Routes.system}?section=${Sections.users}"
 								>
 									<i class="bi bi-people"></i>
-									<span>$${App.text('systemUsers')}</span>
+									<span>${App.text('systemUsers')}</span>
 								</am-link>
 								<am-form ${Attr.api}="Session/logout"></am-form>
 								<am-submit
@@ -100,7 +100,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 								>
 									<i class="bi bi-box-arrow-right"></i>
 									<span>
-										$${App.text('signOut')} $${App.user.name}
+										${App.text('signOut')} ${App.user.name}
 									</span>
 								</am-submit>
 							</div>
@@ -147,11 +147,11 @@ export const dashboardLayout = ({ main }: Partials) => {
 				<div class="${CSS.flex} ${CSS.flexGap} ${CSS.textMuted}">
 					<span
 						class="${CSS.iconText}"
-						${Attr.tooltip}="$${App.user.email}"
+						${Attr.tooltip}="${App.user.email}"
 						${Attr.tooltipOptions}="placement: top"
 					>
 						<i class="bi bi-person-square"></i>
-						<span>$${App.user.name}</span>
+						<span>${App.user.name}</span>
 					</span>
 					<span>&mdash;</span>
 					<span>Automad</span>
@@ -166,7 +166,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 			<div class="${CSS.modalDialog}">
 				<am-form ${Attr.api}="Page/add">
 					<div class="${CSS.modalHeader}">
-						<span>$${App.text('addPage')}</span>
+						<span>${App.text('addPage')}</span>
 						<am-modal-close
 							class="${CSS.modalClose}"
 						></am-modal-close>
@@ -189,7 +189,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							).outerHTML
 						}
 						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}">$${App.text('pageTemplate')}</label>
+							<label class="${CSS.fieldLabel}">${App.text('pageTemplate')}</label>
 							${createTemplateSelect('').outerHTML}
 						</div>
 						${
@@ -200,18 +200,18 @@ export const dashboardLayout = ({ main }: Partials) => {
 							}).outerHTML
 						}
 						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}">$${App.text('selectTargetNewPage')}</label>
+							<label class="${CSS.fieldLabel}">${App.text('selectTargetNewPage')}</label>
 							<am-page-select-tree></am-page-select-tree>
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
-							$${App.text('cancel')}
+							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit
 							class="${CSS.button} ${CSS.buttonAccent}"
 						>
-							$${App.text('addPage')}
+							${App.text('addPage')}
 						</am-submit>
 					</div>
 				</am-form>
