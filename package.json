@@ -15,6 +15,7 @@
     "build": "npm run build:admin && npm run build:blocks && npm run build:themes"
   },
   "devDependencies": {
+    "@types/dompurify": "^2.4.0",
     "@types/dropzone": "^5.7.4",
     "@types/sortablejs": "^1.10.7",
     "@types/toastify-js": "^1.11.0",
@@ -26,6 +27,7 @@
     "codex-tooltip": "^1.0.5",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
+    "dompurify": "^2.4.1",
     "dropzone": "^6.0.0-beta.2",
     "file-loader": "^6.2.0",
     "filerobot-image-editor": "^4.0.0-beta.32",

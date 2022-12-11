@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import DOMPurify from 'dompurify';
 import { KeyValueMap } from '../types';
 
 /**
@@ -74,6 +75,19 @@ export const enum Attr {
 }
 
 /**
+ * The DOMPurify options.
+ *
+ * @see {@link DOMPurify https://github.com/cure53/DOMPurify#can-i-configure-dompurify}
+ */
+const dompurifyOption = {
+	CUSTOM_ELEMENT_HANDLING: {
+		tagNameCheck: /^am-/,
+		attributeNameCheck: /^am-/,
+		allowCustomizedBuiltInElements: true,
+	},
+};
+
+/**
  * Handle the rendering of template literals and optionally escape values
  * that are preceeded with a `$`.
  *
@@ -84,6 +98,7 @@ export const enum Attr {
  * `;
  *
  * @see {@link 2ality https://2ality.com/2015/01/template-strings-html.html#the-template-handler}
+ * @see {@link DOMPurify https://github.com/cure53/DOMPurify}
  * @param strings
  * @param values
  * @returns the rendered template
@@ -106,7 +121,7 @@ export const html = (strings: any, ...values: any[]): string => {
 
 	result += raw[raw.length - 1];
 
-	return result;
+	return DOMPurify.sanitize(result, dompurifyOption);
 };
 
 /**
