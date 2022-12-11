@@ -33,7 +33,7 @@
  */
 
 import { RootComponent } from '../components/Root';
-import { eventNames, fire, request, requestAPI } from '.';
+import { EventName, fire, listen, request, requestAPI } from '.';
 import {
 	KeyValueMap,
 	Pages,
@@ -41,7 +41,6 @@ import {
 	ThemeCollection,
 	User,
 } from '../types';
-import { listen } from './events';
 
 /**
  * The static class that provides the app state and root element to be used across the application.
@@ -264,7 +263,7 @@ export class App {
 
 		listen(
 			window,
-			eventNames.appStateRequireUpdate,
+			EventName.appStateRequireUpdate,
 			this.updateState.bind(this)
 		);
 	}
@@ -279,7 +278,7 @@ export class App {
 		const response = await requestAPI('App/updateState', null, false);
 
 		this._state = Object.assign({}, this._state, response.data);
-		fire(eventNames.appStateChange);
+		fire(EventName.appStateChange);
 	}
 
 	/**
@@ -328,7 +327,7 @@ export class App {
 		}
 
 		this._state.systemUpdate = response.data;
-		fire(eventNames.systemUpdateCheck, window);
+		fire(EventName.systemUpdateCheck, window);
 	}
 
 	/**
@@ -338,6 +337,6 @@ export class App {
 		const { data } = await requestAPI('PackageManager/getOutdated');
 
 		this._state.outdatedPackages = data?.outdated?.length || 0;
-		fire(eventNames.systemUpdateCheck, window);
+		fire(EventName.systemUpdateCheck, window);
 	}
 }

@@ -85,6 +85,7 @@ const dompurifyOption = {
 		attributeNameCheck: /^am-/,
 		allowCustomizedBuiltInElements: true,
 	},
+	ADD_ATTR: [Attr.bind, Attr.bindTo, Attr.tooltip, Attr.tooltipOptions],
 };
 
 /**
@@ -137,9 +138,10 @@ export const htmlSpecialChars = (value: string | number): string => {
 		'>': '&gt;',
 		'"': '&quot;',
 		"'": '&#039;',
+		'/': '&#8203;/&#8203;',
 	};
 
-	return value.toString().replace(/[&<>"']/g, (char: string) => {
+	return value.toString().replace(/[&<>"'\/]/g, (char: string) => {
 		return chars[char];
 	});
 };

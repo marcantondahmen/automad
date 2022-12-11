@@ -61,16 +61,16 @@ export const confirm = async (text: string): Promise<any> => {
 
 	modal.innerHTML = html`
 		<div class="${CSS.modalDialog}">
-			<div class="${CSS.modalBody}">$${text}</div>
+			<div class="${CSS.modalBody}">${text}</div>
 			<div class="${CSS.modalFooter}">
 				<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
-					$${App.text('cancel')}
+					${App.text('cancel')}
 				</am-modal-close>
 				<am-modal-close
 					${Attr.confirm}
 					class="${CSS.button} ${CSS.buttonAccent}"
 				>
-					$${App.text('ok')}
+					${App.text('ok')}
 				</am-modal-close>
 			</div>
 		</div>
@@ -277,7 +277,7 @@ export const resolveFileUrl = (fileUrl: string): string => {
  * @param page
  */
 export const setDocumentTitle = (page: string): void => {
-	document.title = `${htmlSpecialChars(page)} — Automad`;
+	document.title = `${page} — Automad`;
 };
 
 /**

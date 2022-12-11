@@ -32,9 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { query, queryAll } from '.';
+import { html, query, queryAll } from '.';
 import { InputElement, KeyValueMap } from '../types';
-import { html } from './utils';
 
 /**
  * A class to register elements to be used to generate form data.
