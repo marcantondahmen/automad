@@ -40,7 +40,6 @@ import {
 	createLabelFromField,
 	CSS,
 	html,
-	htmlSpecialChars,
 	query,
 	queryAll,
 } from '../../core';
@@ -57,11 +56,6 @@ import { BaseComponent } from '../Base';
  * @extends BaseComponent
  */
 export abstract class BaseFieldComponent extends BaseComponent {
-	/**
-	 * If true the field data is sanitized.
-	 */
-	protected sanitize = true;
-
 	/**
 	 * If true the field data is spell checked while editing.
 	 */
@@ -99,10 +93,6 @@ export abstract class BaseFieldComponent extends BaseComponent {
 		tooltip = tooltip || '';
 		label = label || createLabelFromField(key);
 		placeholder = placeholder || '';
-
-		if (typeof value === 'string' && this.sanitize) {
-			value = htmlSpecialChars(value);
-		}
 
 		this._data = {
 			name,

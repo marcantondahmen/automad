@@ -38,7 +38,7 @@ import {
 	create,
 	createLabelFromField,
 	CSS,
-	eventNames,
+	EventName,
 	fire,
 	html,
 	listen,
@@ -65,11 +65,6 @@ const options: SortableOptions = {
  */
 class FeedFieldSelectComponent extends BaseFieldComponent {
 	/**
-	 * If true the field data is sanitized.
-	 */
-	protected sanitize = false;
-
-	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
@@ -78,11 +73,7 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 		setTimeout(() => {
 			this.init();
 
-			listen(
-				this.input,
-				eventNames.changeByBinding,
-				this.init.bind(this)
-			);
+			listen(this.input, EventName.changeByBinding, this.init.bind(this));
 		}, 0);
 	}
 

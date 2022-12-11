@@ -48,11 +48,6 @@ class EditorComponent extends BaseFieldComponent {
 	value: KeyValueMap;
 
 	/**
-	 * If true the field data is sanitized.
-	 */
-	protected sanitize = false;
-
-	/**
 	 * Render the field.
 	 */
 	createInput(): void {

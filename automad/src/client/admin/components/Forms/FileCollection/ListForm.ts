@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, eventNames, fire, listen, queryAll } from '../../../core';
+import { create, CSS, EventName, fire, listen, queryAll } from '../../../core';
 import { File, KeyValueMap } from '../../../types';
 import { FormComponent } from '../Form';
 
@@ -40,8 +40,8 @@ import { FormComponent } from '../Form';
  * The file collection form component.
  *
  * @example
- * <am-file-collection-list-form api="FileCollection/list"></am-file-collection-list-form>
- * <am-submit form="FileCollection/list">Submit</am-submit>
+ * <am-file-collection-list-form ${Attr.api}="FileCollection/list"></am-file-collection-list-form>
+ * <am-submit ${Attr.form}="FileCollection/list">Submit</am-submit>
  *
  * @extends FormComponent
  */
@@ -65,7 +65,7 @@ export class FileCollectionListFormComponent extends FormComponent {
 		this.listeners.push(
 			listen(
 				window,
-				`${eventNames.appStateChange} ${eventNames.filesChangeOnServer}`,
+				`${EventName.appStateChange} ${EventName.filesChangeOnServer}`,
 				this.refresh.bind(this)
 			)
 		);
@@ -96,7 +96,7 @@ export class FileCollectionListFormComponent extends FormComponent {
 			card.data = file;
 		});
 
-		fire(eventNames.fileCollectionRender);
+		fire(EventName.fileCollectionRender);
 	}
 
 	/**

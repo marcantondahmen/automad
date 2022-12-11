@@ -42,11 +42,6 @@ import { BaseFieldComponent } from './BaseField';
  */
 class TextareaComponent extends BaseFieldComponent {
 	/**
-	 * If true the field data is sanitized.
-	 */
-	protected sanitize = false;
-
-	/**
 	 * Create an input field.
 	 */
 	createInput(): void {
