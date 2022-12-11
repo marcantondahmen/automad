@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, html } from '../core';
+import { App, Attr, CSS, html } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 
@@ -41,9 +41,8 @@ import { BaseComponent } from './Base';
  *
  * @example
  * <am-alert
- * icon="exclamation-circle"
- * text="pageNotFoundError"
- * type="danger"
+ *     ${Attr.icon}="exclamation-circle"
+ *     ${Attr.text}="pageNotFoundError"
  * ></am-alert>
  *
  * @extends BaseComponent
@@ -55,32 +54,24 @@ class AlertComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['icon', 'text', 'type'];
+		return [Attr.icon, Attr.text];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		/* const types: KeyValueMap = {
-			danger: classes.alertDanger,
-			success: classes.alertPrimary,
-		};
+		const icon = this.elementAttributes[Attr.icon];
+		const text = this.elementAttributes[Attr.text];
 
-		this.classList.add(classes.alert);
-
-		if (this.elementAttributes.type) {
-			this.classList.add(types[this.elementAttributes.type]);
-		}
+		this.classList.add(CSS.alert);
 
 		this.innerHTML = html`
-			<div class="${classes.alertIcon}">
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
+			<div class="${CSS.alertIcon}">
+				<i class="bi bi-${icon || 'fire'}"></i>
 			</div>
-			<div class="${classes.alertText}">
-				${App.text(this.elementAttributes.text)}
-			</div>
-		`; */
+			<div class="${CSS.alertText}">${App.text(text) || text}</div>
+		`;
 	}
 }
 

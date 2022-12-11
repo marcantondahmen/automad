@@ -51,6 +51,7 @@ import {
 	create,
 	createField,
 	CSS,
+	getPageURL,
 	html,
 	Route,
 	setDocumentTitle,
@@ -420,9 +421,10 @@ export class PageDataFormComponent extends FormComponent {
 	private pageNotFound() {
 		this.innerHTML = html`
 			<am-alert
-				${Attr.icon}="question-circle"
-				${Attr.text}="pageNotFoundError"
-				type="danger"
+				${Attr.icon}="x-circle"
+				${Attr.text}="${App.text(
+					'pageNotFoundError'
+				)} ⟶ ${getPageURL()}"
 			></am-alert>
 		`;
 	}
