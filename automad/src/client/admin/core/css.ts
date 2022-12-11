@@ -36,6 +36,10 @@
  * The enum with all classes used for HTML elements that are used by components.
  */
 export const enum CSS {
+	alert = 'am-c-alert',
+	alertIcon = 'am-c-alert__icon',
+	alertText = 'am-c-alert__text',
+
 	badge = 'am-e-badge',
 	badgeMuted = 'am-e-badge--muted',
 
