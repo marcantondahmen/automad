@@ -59,7 +59,7 @@ class AppModel {
 
 		foreach ($Automad->getCollection() as $Page) {
 			$pages[$Page->origUrl] = array(
-				'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)),
+				'title' => $Page->get(AM_KEY_TITLE),
 				'index' => $Page->index,
 				'url' => $Page->origUrl,
 				'path' => $Page->path,
