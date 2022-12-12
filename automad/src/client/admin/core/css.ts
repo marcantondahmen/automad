@@ -128,6 +128,23 @@ export const enum CSS {
 
 	keyCombo = 'am-e-key-combo',
 
+	layoutCentered = 'am-l-centered',
+	layoutCenteredNavbar = 'am-l-centered__navbar',
+	layoutCenteredMain = 'am-l-centered__main',
+	layoutCenteredContent = 'am-l-centered__content',
+
+	layoutDashboard = 'am-l-dashboard',
+	layoutDashboardNavbar = 'am-l-dashboard__navbar',
+	layoutDashboardNavbarLeft = 'am-l-dashboard__navbar--left',
+	layoutDashboardNavbarRight = 'am-l-dashboard__navbar--right',
+	layoutDashboardSidebar = 'am-l-dashboard__sidebar',
+	layoutDashboardMain = 'am-l-dashboard__main',
+	layoutDashboardSection = 'am-l-dashboard__section',
+	layoutDashboardSectionSticky = 'am-l-dashboard__section--sticky',
+	layoutDashboardContent = 'am-l-dashboard__content',
+	layoutDashboardContentRow = 'am-l-dashboard__content--row',
+	layoutDashboardFooter = 'am-l-dashboard__footer',
+
 	menu = 'am-c-menu',
 	menuItem = 'am-c-menu__item',
 	menuItemActive = 'am-c-menu__item--active',

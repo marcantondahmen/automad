@@ -47,8 +47,8 @@ import { Section } from '../../Switcher/Switcher';
 
 export const dashboardLayout = ({ main }: Partials) => {
 	return html`
-		<div class="am-l-dashboard">
-			<div class="am-l-dashboard__navbar am-l-dashboard__navbar--left">
+		<div class="${CSS.layoutDashboard}">
+			<div class="${CSS.layoutDashboardNavbar} ${CSS.layoutDashboardNavbarLeft}">
 				<div class="${CSS.navbar}">
 					<am-link ${Attr.target}="${Route.home}" class="${CSS.navbarItem}">
 						<am-logo></am-logo>
@@ -63,7 +63,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 					</am-modal-toggle>
 				</div>
 			</div>
-			<div class="am-l-dashboard__navbar am-l-dashboard__navbar--right">
+			<div class="${CSS.layoutDashboardNavbar} ${CSS.layoutDashboardNavbarRight}">
 				<div class="${CSS.navbar}">
 					<am-modal-toggle
 						class="${CSS.navbarItem}"
@@ -108,7 +108,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 					</span>
 				</div>
 			</div>
-			<am-sidebar class="am-l-dashboard__sidebar">
+			<am-sidebar class="${CSS.layoutDashboardSidebar}">
 				<nav class="${CSS.nav}">
 					<span class="${CSS.navItem}">
 						<a href="${App.baseURL}" class="${CSS.navLink}">
@@ -142,8 +142,8 @@ export const dashboardLayout = ({ main }: Partials) => {
 				</nav>
 				<am-nav-tree></am-nav-tree>
 			</am-sidebar>
-			<div class="am-l-dashboard__main">${main}</div>
-			<footer class="am-l-dashboard__footer">
+			<div class="${CSS.layoutDashboardMain}">${main}</div>
+			<footer class="${CSS.layoutDashboardFooter}">
 				<div class="${CSS.flex} ${CSS.flexGap} ${CSS.textMuted}">
 					<span
 						class="${CSS.iconText}"

@@ -47,8 +47,8 @@ import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 const renderBreadcrumbs = (): string => {
 	return html`
-		<section class="am-l-dashboard__section">
-			<div class="am-l-dashboard__content">
+		<section class="${CSS.layoutDashboardSection}">
+			<div class="${CSS.layoutDashboardContent}">
 				<am-page-breadcrumbs></am-page-breadcrumbs>
 			</div>
 		</section>
@@ -159,9 +159,11 @@ const renderDropdown = (): string => {
 const renderMenu = (): string => {
 	return html`
 		<section
-			class="am-l-dashboard__section am-l-dashboard__section--sticky"
+			class="${CSS.layoutDashboardSection} ${CSS.layoutDashboardSectionSticky}"
 		>
-			<div class="am-l-dashboard__content am-l-dashboard__content--row">
+			<div
+				class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentRow}"
+			>
 				<am-switcher class="${CSS.menu}">
 					<am-switcher-link
 						class="${CSS.menuItem}"
@@ -252,8 +254,8 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 	protected renderMainPartial(): string {
 		return html`
 			${renderBreadcrumbs()}${renderMenu()}
-			<section class="am-l-dashboard__section">
-				<div class="am-l-dashboard__content">
+			<section class="${CSS.layoutDashboardSection}">
+				<div class="${CSS.layoutDashboardContent}">
 					<am-page-data-form
 						${Attr.api}="Page/data"
 					></am-page-data-form>

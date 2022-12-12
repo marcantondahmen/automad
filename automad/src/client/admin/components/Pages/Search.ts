@@ -55,8 +55,8 @@ export class SearchComponent extends BaseDashboardLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<section class="am-l-dashboard__section">
-				<nav class="am-l-dashboard__content">
+			<section class="${CSS.layoutDashboardSection}">
+				<nav class="${CSS.layoutDashboardContent}">
 					<div class="${CSS.breadcrumbs}">
 						<am-link
 							class="${CSS.breadcrumbsItem}"

@@ -37,8 +37,8 @@ import { Partials } from '../../../types';
 
 export const centered = ({ title, main }: Partials): string => {
 	return html`
-		<div class="am-l-centered">
-			<div class="am-l-centered__navbar">
+		<div class="${CSS.layoutCentered}">
+			<div class="${CSS.layoutCenteredNavbar}">
 				<nav class="${CSS.navbar}">
 					<span>
 						<a href="${App.baseURL}" class="${CSS.navbarItem}">
@@ -56,8 +56,8 @@ export const centered = ({ title, main }: Partials): string => {
 					</span>
 				</nav>
 			</div>
-			<div class="am-l-centered__main">
-				<div class="am-l-centered__content">${main}</div>
+			<div class="${CSS.layoutCenteredMain}">
+				<div class="${CSS.layoutCenteredContent}">${main}</div>
 			</div>
 		</div>
 	`;
