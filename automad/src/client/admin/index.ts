@@ -115,6 +115,7 @@ import './components/Switcher/SystemMenu';
 import './components/Alert';
 import './components/Autocomplete';
 import './components/Checkbox';
+import './components/CustomIconCheckbox';
 import './components/Copy';
 import './components/DashboardThemeToggle';
 import './components/Dropdown';

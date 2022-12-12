@@ -295,7 +295,7 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 		const search = this.itemsFiltered[0];
 
 		search.element.setAttribute(
-			'target',
+			Attr.target,
 			`${Route.search}?search=${encodeURIComponent(
 				this.input.value
 			).replace(/%20/g, '+')}`

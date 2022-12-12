@@ -26,21 +26,21 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, classes, getTagFromRoute, html, Routes } from '../../core';
-import { SidebarLayoutComponent } from './SidebarLayout';
+import { App, Attr, CSS, getTagFromRoute, html, Route } from '../../core';
+import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
  * The search and replace view.
  *
- * @extends SidebarLayoutComponent
+ * @extends BaseDashboardLayoutComponent
  */
-export class SearchComponent extends SidebarLayoutComponent {
+export class SearchComponent extends BaseDashboardLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -55,23 +55,19 @@ export class SearchComponent extends SidebarLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<section class="am-l-main__row">
-				<nav class="am-l-main__content">
-					<div class="${classes.breadcrumbs}">
+			<section class="am-l-dashboard__section">
+				<nav class="am-l-dashboard__content">
+					<div class="${CSS.breadcrumbs}">
 						<am-link
-							class="${classes.breadcrumbsItem}"
-							target="${Routes.search}"
+							class="${CSS.breadcrumbsItem}"
+							${Attr.target}="${Route.search}"
 						>
 							<am-icon-text
-								icon="search"
-								text="${App.text('searchTitle')}"
+								${Attr.icon}="search"
+								${Attr.text}="${App.text('searchTitle')}"
 							></am-icon-text>
 						</am-link>
 					</div>
-				</nav>
-			</section>
-			<section class="am-l-main__row">
-				<div class="am-l-main__content">
 					<am-search-form></am-search-form>
 				</div>
 			</section>
@@ -79,4 +75,4 @@ export class SearchComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes.search), SearchComponent);
+customElements.define(getTagFromRoute(Route.search), SearchComponent);

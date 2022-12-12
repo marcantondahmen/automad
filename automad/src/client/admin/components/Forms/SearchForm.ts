@@ -32,11 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { discover } from 'dropzone';
 import {
 	App,
-	classes,
+	Attr,
 	create,
+	createField,
+	createLabelFromField,
+	CSS,
 	debounce,
 	fire,
 	getFormData,
@@ -44,7 +46,7 @@ import {
 	listen,
 	queryAll,
 	requestAPI,
-	Routes,
+	Route,
 } from '../../core';
 import { FieldResults, FileResults, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
@@ -55,17 +57,19 @@ import { BaseComponent } from '../Base';
  * @param fieldResultsArray
  * @returns the rendered field result
  */
-const renderFieldResults = (fieldResultsArray: FieldResults[]) => {
+const renderFieldResults = (fieldResultsArray: FieldResults[]): string => {
 	return fieldResultsArray.reduce((output, fieldResults): string => {
 		return html`
 			${output}
 			<div
-				class="${classes.flex} ${classes.flexColumn} ${classes.flexGap}"
+				class="${CSS.cardListItem} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap}"
 			>
-				<small class="${classes.textMuted}">
-					${fieldResults.field}
-				</small>
-				<div>${fieldResults.context}</div>
+				<span>
+					<span class="${CSS.badge} ${CSS.badgeMuted}">
+						${createLabelFromField(fieldResults.field)}
+					</span>
+				</span>
+				<span>${fieldResults.context}</span>
 			</div>
 		`;
 	}, '');
@@ -77,7 +81,7 @@ const renderFieldResults = (fieldResultsArray: FieldResults[]) => {
  * @param fileResults
  * @returns the rendered file card
  */
-const renderFileCard = (fileResults: FileResults) => {
+const renderFileCard = (fileResults: FileResults): string => {
 	const { path, fieldResultsArray, url } = fileResults;
 	const fields: string[] = fieldResultsArray.reduce(
 		(fields, fieldResults): string[] => {
@@ -87,26 +91,27 @@ const renderFileCard = (fileResults: FileResults) => {
 	);
 
 	return html`
-		<div class="${classes.card} ${classes.cardList}">
-			<div
-				class="${classes.flex} ${classes.flexBetween} ${classes.flexAlignCenter}"
-			>
-				<am-link
-					target="${path.match(/^\/shared\//i)
-						? Routes.shared
-						: `${Routes.page}?url=${url}`}"
-					class="${classes.textPrimary} ${classes.iconText}"
+		<div class="${CSS.card}">
+			<div class="${CSS.cardList}">
+				<div
+					class="${CSS.cardListItem} ${CSS.cardListItemFaded} ${CSS.flex} ${CSS.flexBetween} ${CSS.flexAlignCenter}"
 				>
-					<i class="bi bi-file-earmark-text"></i>
-					<span>${url || App.text('sharedTitle')}</span>
-				</am-link>
-				<am-checkbox
-					name="${path}"
-					value="${fields.join()}"
-					checked
-				></am-checkbox>
+					<am-link
+						${Attr.target}="${path.match(/^\/shared\//i)
+							? Route.shared
+							: `${Route.page}?url=${url}`}"
+						class="${CSS.iconText} ${CSS.textLink}"
+					>
+						<i class="bi bi-file-earmark-text"></i>
+						<span>${url || App.text('sharedTitle')}</span>
+					</am-link>
+					<am-checkbox
+						name="${path}"
+						value="${fields.join()}"
+					></am-checkbox>
+				</div>
+				${renderFieldResults(fieldResultsArray)}
 			</div>
-			${renderFieldResults(fieldResultsArray)}
 		</div>
 	`;
 };
@@ -128,14 +133,21 @@ export class SearchFormComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.flex, classes.flexGap, classes.flexColumn);
+		this.classList.add(CSS.flex, CSS.flexGapLarge, CSS.flexColumn);
 
+		const formContainer = create(
+			'section',
+			[CSS.flex, CSS.flexColumn, CSS.flexGap],
+			{},
+			this
+		);
 		const { searchBar, search, isRegex, isCaseSensitive, replace } =
-			this.createForm();
-		const { replaceButton, checkAll, unCheckAll } = this.createButtons();
+			this.createForm(formContainer);
+		const { replaceButton, checkAll, unCheckAll } =
+			this.createButtons(formContainer);
 		const resultsContainer = create(
 			'section',
-			[classes.flex, classes.flexColumn, classes.flexGap],
+			[CSS.flex, CSS.flexColumn, CSS.flexGapLarge],
 			{},
 			this
 		);
@@ -218,9 +230,8 @@ export class SearchFormComponent extends BaseComponent {
 
 		container.innerHTML = html`
 			<am-alert
-				icon="slash-circle"
-				text="searchNoResults"
-				type="danger"
+				${Attr.icon}="slash-circle"
+				${Attr.text}="searchNoResults"
 			></am-alert>
 		`;
 	}
@@ -228,20 +239,16 @@ export class SearchFormComponent extends BaseComponent {
 	/**
 	 * Create all form inputs.
 	 *
+	 * @param container
 	 * @returns the created form input elements
 	 */
-	private createForm(): KeyValueMap {
+	private createForm(container: HTMLElement): KeyValueMap {
 		const searchParams = new URLSearchParams(window.location.search);
+		const searchBar = create('div', [CSS.flex, CSS.flexGap], {}, container);
 
-		const searchBar = create(
-			'div',
-			[classes.flex, classes.flexGap],
-			{},
-			this
-		);
 		const search = create(
 			'input',
-			[classes.input],
+			[CSS.input],
 			{
 				type: 'text',
 				name: 'searchValue',
@@ -250,35 +257,38 @@ export class SearchFormComponent extends BaseComponent {
 			},
 			searchBar
 		);
+
 		const isRegex = create(
-			'input',
+			'am-custom-icon-checkbox',
 			[],
 			{
-				type: 'checkbox',
 				name: 'isRegex',
-				title: App.text('searchIsRegex'),
+				[Attr.icon]: 'regex',
+				[Attr.tooltip]: App.text('searchIsRegex'),
 			},
 			searchBar
 		);
+
 		const isCaseSensitive = create(
-			'input',
+			'am-custom-icon-checkbox',
 			[],
 			{
-				type: 'checkbox',
 				name: 'isCaseSensitive',
-				title: App.text('searchIsCaseSensitive'),
+				[Attr.icon]: 'type',
+				[Attr.tooltip]: App.text('searchIsCaseSensitive'),
 			},
 			searchBar
 		);
+
 		const replace = create(
 			'input',
-			[classes.input],
+			[CSS.input],
 			{
 				type: 'text',
 				name: 'replaceValue',
 				placeholder: App.text('searchReplacePlaceholder'),
 			},
-			this
+			container
 		);
 
 		return {
@@ -293,49 +303,44 @@ export class SearchFormComponent extends BaseComponent {
 	/**
 	 * Create all button.
 	 *
+	 * @param container
 	 * @returns the created button elements
 	 */
-	private createButtons(): KeyValueMap {
+	private createButtons(container: HTMLElement): KeyValueMap {
 		const wrapper = create(
 			'div',
-			[classes.flex, classes.flexBetween],
+			[CSS.flex, CSS.flexBetween],
 			{},
-			this
+			container
 		);
 
 		const replaceButton = create(
 			'span',
-			[classes.button, classes.buttonPrimary],
+			[CSS.button, CSS.buttonAccent],
 			{},
 			wrapper
 		);
 
 		replaceButton.innerHTML = App.text('searchReplaceSelected');
 
-		const toggles = create(
-			'div',
-			[classes.flex, classes.flexGap],
+		const toggles = create('div', [CSS.formGroup], {}, wrapper);
+		const checkAll = create(
+			'span',
+			[CSS.button, CSS.formGroupItem],
 			{},
-			wrapper
+			toggles
 		);
 
-		const checkAll = create('span', [classes.button], {}, toggles);
+		checkAll.textContent = App.text('searchReplaceCheckAll');
 
-		checkAll.innerHTML = html`
-			<am-icon-text
-				icon="check-circle"
-				text="${App.text('searchReplaceCheckAll')}"
-			></am-icon-text>
-		`;
+		const unCheckAll = create(
+			'span',
+			[CSS.button, CSS.formGroupItem],
+			{},
+			toggles
+		);
 
-		const unCheckAll = create('span', [classes.button], {}, toggles);
-
-		unCheckAll.innerHTML = html`
-			<am-icon-text
-				icon="circle"
-				text="${App.text('searchReplaceUncheckAll')}"
-			></am-icon-text>
-		`;
+		unCheckAll.textContent = App.text('searchReplaceUncheckAll');
 
 		return {
 			replaceButton,

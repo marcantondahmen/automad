@@ -60,8 +60,13 @@ export const enum CSS {
 	cardForm = 'am-c-card__form',
 	cardFormButtons = 'am-c-card__form-buttons',
 	cardFooter = 'am-c-card__footer',
+	cardList = 'am-c-card__list',
+	cardListItem = 'am-c-card__list-item',
+	cardListItemFaded = 'am-c-card__list-item--faded',
 
 	checkbox = 'am-f-checkbox',
+
+	customIconCheckbox = 'am-f-custom-icon-checkbox',
 
 	cursorPointer = 'am-u-cursor-pointer',
 
@@ -96,6 +101,7 @@ export const enum CSS {
 	flexAlignCenter = 'am-u-flex--align-center',
 	flexColumn = 'am-u-flex--column',
 	flexGap = 'am-u-flex--gap',
+	flexGapLarge = 'am-u-flex--gap-large',
 	flexBetween = 'am-u-flex--between',
 	flexItemGrow = 'am-u-flex__item-grow',
 
@@ -174,8 +180,9 @@ export const enum CSS {
 	switcherSection = 'am-c-switcher-section',
 	switcherSectionActive = 'am-c-switcher-section--active',
 
-	textMuted = 'am-u-text-muted',
+	textLink = 'am-u-text-link',
 	textMono = 'am-u-text-mono',
+	textMuted = 'am-u-text-muted',
 
 	toggle = 'am-f-toggle',
 	toggleButton = 'am-f-toggle--button',
