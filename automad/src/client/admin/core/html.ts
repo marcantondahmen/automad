@@ -85,7 +85,14 @@ const dompurifyOption = {
 		attributeNameCheck: /^am-/,
 		allowCustomizedBuiltInElements: true,
 	},
-	ADD_ATTR: [Attr.bind, Attr.bindTo, Attr.tooltip, Attr.tooltipOptions],
+	ADD_ATTR: [
+		Attr.bind,
+		Attr.bindTo,
+		Attr.tooltip,
+		Attr.tooltipOptions,
+		Attr.toggle,
+	],
+	ADD_URI_SAFE_ATTR: [Attr.tooltipOptions],
 };
 
 /**
