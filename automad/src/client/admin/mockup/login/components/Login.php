@@ -5,7 +5,7 @@
 		<input type="password" class="am-f-input" placeholder="password">
 		<div class="am-c-card__form-buttons">
 			<button class="am-e-button">Forgot Password</button>
-			<button class="am-e-button am-e-button--primary">Login</button>
+			<button class="am-e-button am-e-button--accent">Login</button>
 		</div>
 	</div>
 </div>

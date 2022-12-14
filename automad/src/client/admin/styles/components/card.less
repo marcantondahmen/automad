@@ -38,7 +38,7 @@
 	flex-direction: column;
 	border-radius: @am-card-radius;
 	border: @am-border;
-	outline: transparent solid 2px;
+	outline: transparent solid 1px;
 	transition: border 0.2s, outline 0.2s;
 
 	&,
@@ -48,7 +48,7 @@
 
 	&--active {
 		border-color: var(--am-clr-border-active);
-		outline: var(--am-clr-border-active) solid 2px;
+		outline: var(--am-clr-border-active) solid 1px;
 	}
 
 	&--hover {
@@ -145,7 +145,7 @@
 		display: flex;
 		padding: @am-card-padding;
 		padding-bottom: 0.4rem;
-		font-size: 2rem;
+		font-size: 1.8rem;
 		line-height: 2.2rem;
 		color: var(--am-clr-text-paragraph);
 
@@ -154,7 +154,7 @@
 		}
 	}
 
-	&__status {
+	&__state {
 		display: flex;
 		align-items: center;
 		height: 2.72rem;
@@ -208,7 +208,10 @@
 		&-buttons {
 			display: flex;
 			gap: @am-card-padding;
-			margin-top: @am-card-padding;
+
+			* + & {
+				margin-top: @am-card-padding;
+			}
 
 			& > * {
 				flex: 1;

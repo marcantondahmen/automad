@@ -82,10 +82,10 @@
 	}
 
 	a:not([class]) {
-		color: var(--am-clr-accent-text);
+		color: var(--am-clr-text-link);
 
 		&:hover {
-			color: var(--am-clr-accent-text-hover);
+			color: var(--am-clr-text-link-hover);
 		}
 	}
 
@@ -101,10 +101,12 @@
 	}
 
 	p {
-		max-width: 52rem;
 		margin: 0;
-		margin-bottom: @am-base-margin-y;
 		color: var(--am-clr-text-paragraph);
+
+		&:not(:last-child) {
+			margin-bottom: @am-base-margin-y;
+		}
 	}
 
 	& * + p {
@@ -123,8 +125,8 @@
 	& mark {
 		display: inline-block;
 		padding: 0 0.3em;
-		color: var(--am-clr-accent-text);
-		background-color: var(--am-clr-accent-background);
+		color: var(--am-clr-selected-text);
+		background-color: var(--am-clr-selected-background);
 		border-radius: 0.3em;
 	}
 

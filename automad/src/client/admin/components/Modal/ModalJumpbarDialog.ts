@@ -49,6 +49,7 @@ const searchData = (): JumpbarItemData[] => {
 			value: App.text('searchTitle'),
 			title: App.text('searchTitle'),
 			icon: 'search',
+			cls: [CSS.modalJumpbarDivider],
 		},
 	];
 };
@@ -231,7 +232,7 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 	/**
 	 * The active link class.
 	 */
-	protected linkActiveClass = CSS.modalJumpbarLinkActive;
+	protected linkActiveClass = CSS.active;
 
 	/**
 	 * Create a dropdown item.

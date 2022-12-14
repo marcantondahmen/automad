@@ -60,9 +60,9 @@
 		}
 
 		&.dz-drag-hover {
-			color: var(--am-clr-accent-text);
-			background-color: var(--am-clr-accent-background);
-			border: 1px solid var(--am-clr-accent-text);
+			color: var(--am-clr-text-active);
+			background-color: var(--am-clr-outline-active);
+			border: 1px solid var(--am-clr-border-active);
 			outline: @am-outline-active;
 		}
 
@@ -147,12 +147,12 @@
 			inset: 42% 10%;
 			overflow: hidden;
 			border-radius: 2rem;
-			border: 2px solid var(--am-clr-text);
-			background-color: var(--am-clr-text);
-			opacity: 0.75;
+			border: 2px solid var(--am-clr-accent-text);
+			background-color: var(--am-clr-accent-text);
+			opacity: 1;
 
 			& .dz-upload {
-				background-color: var(--am-clr-accent-text);
+				background-color: var(--am-clr-accent-background);
 				display: block;
 				position: relative;
 				height: 100%;
@@ -166,11 +166,11 @@
 			grid-row: 3 / 4;
 			align-self: end;
 			text-decoration: none;
-			color: var(--am-clr-accent-text);
+			color: var(--am-clr-text-link);
 			transition: color 0.2s;
 
 			&:hover {
-				color: var(--am-clr-accent-text-hover);
+				color: var(--am-clr-text-link-hover);
 			}
 		}
 

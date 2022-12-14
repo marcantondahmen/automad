@@ -46,19 +46,19 @@
 
 		--tags-border-color: var(--am-clr-border);
 		--tags-hover-border-color: var(--am-clr-border);
-		--tags-focus-border-color: var(--am-clr-accent-text);
+		--tags-focus-border-color: var(--am-clr-border-active);
 
 		--tag-border-radius: 100px;
 		--tag-pad: 0.2em 0.3em 0.2em 0.7em;
 		--tag-bg: var(--am-clr-accent-background);
-		--tag-hover: var(--am-clr-accent-background);
+		--tag-hover: var(--am-clr-accent-background-hover);
 		--tag-text-color: var(--am-clr-accent-text);
-		--tag-text-color--edit: var(--am-clr-text);
+		--tag-text-color--edit: var(--am-clr-accent-text);
 
 		--tag-remove-bg: var(--am-clr-accent-background);
 		--tag-remove-btn-color: var(--am-clr-accent-text);
 		--tag-remove-btn-bg: var(--am-clr-accent-background);
-		--tag-remove-btn-bg--hover: var(--am-clr-accent-background);
+		--tag-remove-btn-bg--hover: var(--am-clr-accent-background-hover);
 
 		--input-color: var(--am-clr-text);
 
@@ -66,7 +66,7 @@
 		--placeholder-color-focus: var(--am-clr-text-muted);
 
 		&--focus {
-			border-color: var(--am-clr-accent-text);
+			border-color: var(--am-clr-border-active);
 			outline: @am-outline-active;
 		}
 
@@ -86,7 +86,7 @@
 			& > div:before {
 				box-sizing: border-box;
 				border-radius: 100px;
-				border: 1px solid var(--am-clr-accent-text);
+				border: 1px solid var(--am-clr-accent-background);
 			}
 
 			&__removeBtn {
@@ -103,7 +103,7 @@
 			margin: 0;
 
 			&:after {
-				opacity: 0.8;
+				opacity: 0.4;
 			}
 		}
 
@@ -112,8 +112,7 @@
 				padding: 0.3rem 0;
 				border-radius: @am-form-radius;
 				border: @am-border;
-				box-shadow: 0 0.4rem 1.2rem var(--am-shadow),
-					0 3.7rem 3.5rem -3.2rem var(--am-shadow);
+				box-shadow: @am-shadow;
 				overflow: hidden;
 			}
 

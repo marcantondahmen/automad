@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -34,7 +34,8 @@
 
 @am-sidebar-width: 20rem;
 @am-main-width: 74rem;
-@am-center-width: 24rem;
+@am-main-width-narrow: 54rem;
+@am-centered-width: 27rem;
 
 @am-breakpoint-large: unit((2 * @am-sidebar-width) + @am-main-width) * 14px;
 @am-breakpoint-large-max: @am-breakpoint-large - 1;
@@ -45,15 +46,15 @@
 
 @am-base-font-family: 'Inter';
 @am-base-font-weight: 470;
-@am-base-line-height: 1.38;
+@am-base-line-height: 1.5;
 
-@am-base-margin-y: 1.25rem;
+@am-base-margin-y: 1.35rem;
 
 @am-code-font-family: 'SFMono-Regular', Menlo, Monaco, Consolas,
 	'Liberation Mono', 'Courier New', monospace;
 
 @am-small-font-size: 0.8rem;
-@am-small-line-height: 1.45;
+@am-small-line-height: 1.6;
 @am-small-font-weight: 470;
 
 @am-border-width: 1px;
@@ -61,8 +62,11 @@
 
 @am-flex-gap: 0.58em;
 
-@am-outline: transparent solid 5px;
-@am-outline-active: var(--am-clr-outline-active) solid 5px;
+@am-outline: transparent solid 4px;
+@am-outline-active: var(--am-clr-outline-active) solid 4px;
+
+@am-shadow: 0 0.4rem 1.2rem var(--am-shadow),
+	0 3.7rem 3.5rem -3.2rem var(--am-shadow);
 
 @am-navbar-height: 4.57rem;
 @am-navbar-item-padding-x: 0.85rem;
@@ -74,8 +78,8 @@
 @am-nav-item-clr: var(--am-clr-text-sidebar);
 @am-nav-item-active-clr: var(--am-clr-primary-text);
 @am-nav-item-active-bg: var(--am-clr-primary-background);
-@am-nav-item-hover-clr: @am-nav-item-active-clr;
-@am-nav-item-hover-bg: @am-nav-item-active-bg;
+@am-nav-item-hover-clr: var(--am-clr-selected-text);
+@am-nav-item-hover-bg: var(--am-clr-selected-background);
 
 @am-breadcrumbs-clr: var(--am-clr-text-muted);
 @am-breadcrumbs-hover-clr: var(--am-clr-text);
@@ -87,7 +91,7 @@
 @am-footer-height: 4rem;
 
 @am-card-padding: 0.65rem;
-@am-card-radius: 0.65rem;
+@am-card-radius: 0.6rem;
 
 @am-form-background: var(--am-clr-background-faded);
 @am-form-height: 2.57rem;

@@ -36,6 +36,8 @@
  * The enum with all classes used for HTML elements that are used by components.
  */
 export const enum CSS {
+	active = 'am-active',
+
 	alert = 'am-c-alert',
 	alertIcon = 'am-c-alert__icon',
 	alertText = 'am-c-alert__text',
@@ -50,13 +52,18 @@ export const enum CSS {
 	buttonAccent = 'am-e-button--accent',
 	buttonPrimary = 'am-e-button--primary',
 	buttonLink = 'am-e-button--link',
+	buttonIcon = 'am-e-button--icon',
 
 	card = 'am-c-card',
+	cardHover = 'am-c-card--hover',
 	cardActive = 'am-c-card--active',
 	cardTeaser = 'am-c-card__teaser',
 	cardTitle = 'am-c-card__title',
 	cardBody = 'am-c-card__body',
 	cardBodyLarge = 'am-c-card__body--large',
+	cardIcon = 'am-c-card__icon',
+	cardIconNarrow = 'am-c-card__icon--narrow',
+	cardState = 'am-c-card__state',
 	cardForm = 'am-c-card__form',
 	cardFormButtons = 'am-c-card__form-buttons',
 	cardFooter = 'am-c-card__footer',
@@ -73,14 +80,14 @@ export const enum CSS {
 	displayNone = 'am-u-display-none',
 
 	dropdown = 'am-c-dropdown',
-	dropdownForm = 'am-c-dropdown--form',
 	dropdownOpen = 'am-c-dropdown--open',
 	dropdownRight = 'am-c-dropdown--right',
 	dropdownContent = 'am-c-dropdown__content',
 	dropdownDivider = 'am-c-dropdown__divider',
 	dropdownItems = 'am-c-dropdown__items',
+	dropdownItemsStretch = 'am-c-dropdown__items--stretch',
+	dropdownItemsAutocomplete = 'am-c-dropdown__items--autocomplete',
 	dropdownLink = 'am-c-dropdown__link',
-	dropdownLinkActive = 'am-c-dropdown__link--active',
 
 	feedFieldSelect = 'am-c-feed-field-select',
 	feedFieldSelectMuted = 'am-c-feed-field-select--muted',
@@ -142,12 +149,12 @@ export const enum CSS {
 	layoutDashboardSection = 'am-l-dashboard__section',
 	layoutDashboardSectionSticky = 'am-l-dashboard__section--sticky',
 	layoutDashboardContent = 'am-l-dashboard__content',
+	layoutDashboardContentNarrow = 'am-l-dashboard__content--narrow',
 	layoutDashboardContentRow = 'am-l-dashboard__content--row',
 	layoutDashboardFooter = 'am-l-dashboard__footer',
 
 	menu = 'am-c-menu',
 	menuItem = 'am-c-menu__item',
-	menuItemActive = 'am-c-menu__item--active',
 
 	modal = 'am-c-modal',
 	modalOpen = 'am-c-modal--open',
@@ -157,12 +164,15 @@ export const enum CSS {
 	modalHeader = 'am-c-modal__header',
 	modalClose = 'am-c-modal__close',
 	modalBody = 'am-c-modal__body',
+	modalCode = 'am-c-modal__code',
 	modalFooter = 'am-c-modal__footer',
+	modalSpinner = 'am-c-modal__spinner',
+	modalSpinnerIcon = 'am-c-modal__spinner-icon',
+	modalSpinnerText = 'am-c-modal__spinner-text',
 
 	modalJumpbarInput = 'am-c-modal__jumpbar-input',
 	modalJumpbarItems = 'am-c-modal__jumpbar-items',
 	modalJumpbarLink = 'am-c-modal__jumpbar-link',
-	modalJumpbarLinkActive = 'am-c-modal__jumpbar-link--active',
 	modalJumpbarDivider = 'am-c-modal__jumpbar-divider',
 
 	nav = 'am-c-nav',
@@ -191,15 +201,18 @@ export const enum CSS {
 	rootLoading = 'am-c-root--loading',
 
 	select = 'am-f-select',
+	selectInline = 'am-f-select--inline',
 
 	spinner = 'am-c-spinner',
 
 	switcherSection = 'am-c-switcher-section',
 	switcherSectionActive = 'am-c-switcher-section--active',
 
+	textActive = 'am-u-text-active',
 	textLink = 'am-u-text-link',
 	textMono = 'am-u-text-mono',
 	textMuted = 'am-u-text-muted',
+	textParagraph = 'am-u-text-paragraph',
 
 	toggle = 'am-f-toggle',
 	toggleButton = 'am-f-toggle--button',

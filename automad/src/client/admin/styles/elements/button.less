@@ -64,30 +64,32 @@
 
 		&:hover,
 		&:active {
-			background-color: var(--am-clr-primary-background-faded);
-			border: 1px solid var(--am-clr-primary-background-faded);
+			background-color: var(--am-clr-primary-background-hover);
+			border: 1px solid var(--am-clr-primary-background-hover);
 		}
 	}
 
 	&--accent {
 		color: var(--am-clr-accent-text);
-		background-color: transparent;
-		border: 1px solid;
+		background-color: var(--am-clr-accent-background);
+		border: 1px solid var(--am-clr-accent-background);
 
 		&:hover,
 		&:active {
-			color: var(--am-clr-accent-text-hover);
+			background-color: var(--am-clr-accent-background-hover);
+			border-color: var(--am-clr-accent-background-hover);
 		}
 	}
 
 	&--link {
-		color: var(--am-clr-accent-text);
+		color: var(--am-clr-text-link);
 		background-color: transparent;
 		border: none;
 
 		&:hover,
 		&:active {
-			color: var(--am-clr-accent-text-hover);
+			color: var(--am-clr-text-link-hover);
+			background-color: transparent;
 		}
 	}
 

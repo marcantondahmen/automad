@@ -34,6 +34,7 @@
 
 .am-c-modal {
 	@jumpbar-padding-y: 0.4rem;
+	@radius-inner: ~'calc(@{am-modal-radius} - 1px)';
 	display: block;
 	position: fixed;
 	z-index: 500;
@@ -102,6 +103,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		color: var(--am-clr-text);
 		border-bottom: @am-border;
 	}
 
@@ -111,6 +113,23 @@
 
 	& &__body hr {
 		margin: @am-modal-padding -@am-modal-padding;
+	}
+
+	&__code {
+		box-sizing: border-box;
+		width: 100%;
+		height: ~'calc(100vh - 15rem)';
+		padding: 0.5rem @am-form-padding-x;
+		font-family: @am-code-font-family;
+		line-height: 1.65;
+		color: var(--am-clr-text-paragraph);
+		background-color: @am-form-background;
+		outline: none;
+		border: none;
+		border-radius: 0;
+		border-bottom-left-radius: @radius-inner;
+		border-bottom-right-radius: @radius-inner;
+		resize: none;
 	}
 
 	&__footer {
@@ -141,7 +160,7 @@
 				width: @size;
 				height: @size;
 				border-radius: @size;
-				border: 0.2rem solid var(--am-clr-accent-text);
+				border: 0.2rem solid var(--am-clr-text-active);
 				border-left-color: transparent;
 				animation: 1.5s linear 0s infinite modal-spinner;
 			}
@@ -149,6 +168,7 @@
 
 		&-text {
 			flex-grow: 1;
+			color: var(--am-clr-text-paragraph);
 		}
 	}
 
@@ -161,8 +181,8 @@
 			font-size: @am-navbar-font-size;
 			font-weight: 490;
 			border: none;
-			border-top-left-radius: ~'calc(@{am-modal-radius} - 1px)';
-			border-top-right-radius: ~'calc(@{am-modal-radius} - 1px)';
+			border-top-left-radius: @radius-inner;
+			border-top-right-radius: @radius-inner;
 			color: var(--am-clr-text);
 			background-color: @am-form-background;
 			transition: all 0.2s;
@@ -195,12 +215,12 @@
 			cursor: pointer;
 			color: var(--am-clr-text);
 			background-color: var(--am-clr-background);
-			transition: background 0.2s;
+			transition: all 0.2s;
 
 			&:hover,
-			&--active {
-				color: @am-nav-item-hover-clr;
-				background-color: @am-nav-item-hover-bg;
+			&.am-active {
+				color: var(--am-clr-selected-text);
+				background-color: var(--am-clr-selected-background);
 			}
 
 			& > * {

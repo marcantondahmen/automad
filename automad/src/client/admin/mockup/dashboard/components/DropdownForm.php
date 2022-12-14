@@ -22,7 +22,7 @@
 		<p>
 			<span class="am-c-dropdown am-c-dropdown--form am-c-dropdown--open">
 				<input class="am-f-input" type="text" placeholder="">
-				<span class="am-c-dropdown__items">
+				<span class="am-c-dropdown__items am-c-dropdown__items--stretch">
 					<a class="am-c-dropdown__link">
 						<span class="am-c-icon-text"><i class="bi bi-link"></i><span>Some Page</span></span>
 					</a>

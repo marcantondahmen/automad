@@ -120,12 +120,13 @@
 		}
 
 		& + &:not(&--sticky) {
-			margin-top: 1.75rem;
+			margin-top: 0.6rem;
 		}
 
 		&--sticky {
 			position: sticky;
 			z-index: 50;
+			margin-bottom: 2.25rem;
 			top: @am-navbar-height;
 			border-bottom: @am-border;
 			background-color: var(--am-clr-background);
@@ -149,6 +150,10 @@
 			align-items: center;
 			gap: 1.725rem;
 			height: 3.715rem;
+		}
+
+		&--narrow {
+			max-width: @am-main-width-narrow;
 		}
 	}
 

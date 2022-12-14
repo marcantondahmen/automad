@@ -1,7 +1,7 @@
 <section class="am-l-dashboard__section">
 	<div class="am-l-dashboard__content">
 		<div class="am-u-flex am-u-flex--column am-u-flex--gap-large">
-			<div class="am-c-card">
+			<div class="am-c-card am-c-card--active">
 				<div class="am-c-card__list">
 					<span class="am-c-card__list-item am-c-card__list-item--faded am-u-flex am-u-flex--between am-u-flex--align-center">
 						<a href="">
@@ -10,8 +10,8 @@
 								<span>/some/page</span>
 							</span>
 						</a>
-						<label for="file-1" class="am-f-checkbox">
-							<input type="checkbox" name="file-1" id="file-1" checked>
+						<label for="results-1" class="am-f-checkbox">
+							<input type="checkbox" name="results-1" id="results-1" checked>
 							<i class="bi"></i>
 						</label>
 					</span>
@@ -32,8 +32,8 @@
 								<span>/some/page</span>
 							</span>
 						</a>
-						<label for="file-1" class="am-f-checkbox">
-							<input type="checkbox" name="file-1" id="file-1" checked>
+						<label for="results-2" class="am-f-checkbox">
+							<input type="checkbox" name="results-2" id="results-2">
 							<i class="bi"></i>
 						</label>
 					</span>

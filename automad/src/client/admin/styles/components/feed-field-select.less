@@ -31,25 +31,25 @@
  *
  * Licensed under the MIT license.
  */
-/* 
+
 .am-c-feed-field-select {
 	--gap: 3px;
-	--clr: var(--am-clr);
-	--bg: var(--am-bg);
-	--border: var(--am-border-clr);
+	--clr: var(--am-clr-text);
+	--bg: var(--am-clr-background);
+	--border: var(--am-clr-border);
 	display: flex;
 	flex-direction: column;
 	gap: var(--gap);
 	padding: var(--gap);
 
-	border-radius: ~'calc(var(--am-radius) + var(--gap))';
-	border: var(--am-border-width) dashed var(--am-border-clr);
+	border-radius: ~'calc(@{am-form-radius} + var(--gap))';
+	border: 1px dashed var(--am-clr-border);
 
 	&:after {
 		content: attr(data-text);
 		padding: 0.5rem;
 		text-align: center;
-		color: var(--am-muted-clr);
+		color: var(--am-clr-text-muted);
 	}
 
 	&__arrows {
@@ -61,34 +61,32 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 var(--am-btn-padding);
-		height: var(--am-btn-height);
+		padding: 0 @am-form-padding-x;
+		height: @am-form-height;
 		color: var(--clr);
 		background-color: var(--bg);
-		border: var(--am-btn-border-width) solid var(--border);
-		border-radius: var(--am-btn-radius);
+		border: 1px solid var(--border);
+		border-radius: @am-form-radius;
 		cursor: grab;
 
 		&--ghost {
 			--clr: transparent;
-			--border: var(--am-primary-clr);
-			border-style: dashed;
+			--border: var(--am-clr-border-active);
 		}
 
 		&--drag {
-			box-shadow: var(--am-shadow);
+			box-shadow: @am-shadow;
 			opacity: 1 !important;
 		}
 
 		&--chosen {
-			box-shadow: var(--am-shadow);
+			box-shadow: @am-shadow;
 		}
 	}
 
 	&--muted {
-		--clr: var(--am-muted-clr);
-		--bg: var(--am-bg);
-		--border: var(--am-border-clr);
+		--clr: var(--am-clr-text-muted);
+		--bg: var(--am-clr-background);
+		--border: var(--am-clr-border);
 	}
 }
- */

@@ -14,7 +14,7 @@
 				</div>
 				<div class="am-c-modal__footer">
 					<button class="am-e-button">Close</button>
-					<button class="am-e-button am-e-button--primary">Save</button>
+					<button class="am-e-button am-e-button--accent">Save</button>
 				</div>
 			</div>
 		</div>

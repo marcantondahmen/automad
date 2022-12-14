@@ -9,7 +9,7 @@
 				<div class="am-c-card__body">
 					Enim faucibus sem tristique porta viverra eu turpis vestibulum sed dui aliquet
 				</div>
-				<div class="am-c-card__status am-u-text-accent">
+				<div class="am-c-card__state am-u-text-accent">
 					<span class="am-c-icon-text">
 						<i class="bi bi-check-circle"></i>
 						<span>Caching is enabled</span>
@@ -24,7 +24,7 @@
 				<div class="am-c-card__body">
 					Ea harum ut odio rem magnam laudantium accusantium, odit, nulla, excepturi maiores possimus! Nisi architecto natus aspernatur?
 				</div>
-				<div class="am-c-card__status am-u-text-muted">
+				<div class="am-c-card__state am-u-text-muted">
 					<span class="am-c-icon-text">
 						<i class="bi bi-check-circle"></i>
 						<span>Automad is up to date</span>
@@ -39,7 +39,7 @@
 				<div class="am-c-card__body">
 					Enim faucibus sem tristique porta viverra eu turpis vestibulum sed dui aliquet
 				</div>
-				<div class="am-c-card__status am-u-text-muted">
+				<div class="am-c-card__state am-u-text-muted">
 					5 registered users
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 				<div class="am-c-card__body">
 					Enim faucibus sem tristique porta viverra eu turpis vestibulum sed dui aliquet
 				</div>
-				<div class="am-c-card__status">
+				<div class="am-c-card__state">
 					<span class="am-c-icon-text">
 						<i class="bi bi-check-circle"></i>
 						<span>Caching is enabled</span>
@@ -68,7 +68,7 @@
 				<div class="am-c-card__body">
 					Nisi architecto natus aspernatur?
 				</div>
-				<div class="am-c-card__status am-u-text-muted">
+				<div class="am-c-card__state am-u-text-muted">
 					<span class="am-c-icon-text">
 						<i class="bi bi-check-circle"></i>
 						<span>Automad is up to date</span>
@@ -83,7 +83,7 @@
 				<div class="am-c-card__body">
 					Enim faucibus sem tristique porta viverra eu turpis vestibulum sed dui aliquet
 				</div>
-				<div class="am-c-card__status am-u-text-muted">
+				<div class="am-c-card__state am-u-text-muted">
 					5 registered users
 				</div>
 			</div>
@@ -95,7 +95,7 @@
 				<div class="am-c-card__body">
 					Enim faucibus sem tristique porta viverra eu turpis vestibulum sed dui aliquet
 				</div>
-				<div class="am-c-card__status">
+				<div class="am-c-card__state">
 					<span class="am-c-icon-text">
 						<i class="bi bi-check-circle"></i>
 						<span>Caching is enabled</span>

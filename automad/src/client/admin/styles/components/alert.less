@@ -38,11 +38,12 @@
 	gap: 1.1rem;
 	margin: 0;
 	margin-bottom: @am-base-margin-y;
-	padding: 1.25rem 1.1rem;
+	padding: 1.1rem 1.1rem;
 	border: @am-border;
-	border-radius: 0.5rem;
+	border-radius: @am-card-radius;
 	color: var(--am-clr-text-paragraph);
 	background-color: var(--am-clr-background-faded);
+	box-shadow: @am-shadow;
 	--multiplier: ~'calc(30rem - 100%)';
 
 	& > * {
@@ -57,10 +58,10 @@
 	&__icon {
 		display: flex;
 		width: min-content;
-		color: var(--am-clr-accent-text);
+		color: var(--am-clr-text-active);
 
 		& > .bi {
-			font-size: 2.1rem;
+			font-size: 2rem;
 			line-height: 1;
 		}
 	}
@@ -75,7 +76,7 @@
 			margin: 0;
 
 			& + * {
-				margin-top: 1.25rem;
+				margin-top: @am-base-margin-y;
 			}
 		}
 	}

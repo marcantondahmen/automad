@@ -74,7 +74,7 @@ export class SwitcherLinkComponent extends BaseComponent {
 	 */
 	toggle(): void {
 		this.classList.toggle(
-			CSS.menuItemActive,
+			CSS.active,
 			this.elementAttributes[Attr.section] == getActiveSection()
 		);
 	}

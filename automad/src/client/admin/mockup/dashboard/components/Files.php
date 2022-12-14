@@ -6,7 +6,7 @@
 		</div>
 		<div class="am-u-flex am-u-flex--between">
 			<div class="am-u-flex am-u-flex--gap">
-				<button class="am-e-button am-e-button--primary">Upload</button>
+				<button class="am-e-button am-e-button--accent">Upload</button>
 				<button class="am-e-button">Import from URL</button>
 			</div>
 			<button class="am-e-button">Delete Selected</button>
@@ -20,23 +20,25 @@
 					filename.jpg
 				</div>
 				<div class="am-c-card__body">
-					<span class="am-c-icon-text">
-						<i class="bi bi-chat-square-text"></i>
-						<span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum quibusdam, culpa adipisci perferendis tempore ad, neque nemo ea incidunt non temporibus quia. Ea, laudantium iure. Maxime quibusdam quis odit incidunt!</span>
-					</span>
-					<span class="am-c-icon-text">
-						<i class="bi bi-clock-history"></i>
-						<span>Sat. June 4, 1978</span>
-					</span>
-					<br>
-					<span class="am-c-icon-text">
-						<i class="bi bi-hdd"></i>
-						<span>764 kb</span>
-					</span>
-					<br>
-					<span class="am-c-icon-text">
-						<i class="bi bi-aspect-ratio"></i>
-						<span>200 x 300</span>
+					<span>
+						<span class="am-c-icon-text">
+							<i class="bi bi-chat-square-text"></i>
+							<span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum quibusdam, culpa adipisci perferendis tempore ad, neque nemo ea incidunt non temporibus quia. Ea, laudantium iure. Maxime quibusdam quis odit incidunt!</span>
+						</span>
+						<span class="am-c-icon-text">
+							<i class="bi bi-clock-history"></i>
+							<span>Sat. June 4, 1978</span>
+						</span>
+						<br>
+						<span class="am-c-icon-text">
+							<i class="bi bi-hdd"></i>
+							<span>764 kb</span>
+						</span>
+						<br>
+						<span class="am-c-icon-text">
+							<i class="bi bi-aspect-ratio"></i>
+							<span>200 x 300</span>
+						</span>
 					</span>
 				</div>
 				<div class="am-c-card__footer">
@@ -114,23 +116,25 @@
 					filename.jpg
 				</div>
 				<div class="am-c-card__body">
-					<span class="am-c-icon-text">
-						<i class="bi bi-chat-square-text"></i>
-						<span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum quibusdam, culpa adipisci perferendis tempore ad, neque nemo ea incidunt non temporibus quia. Ea, laudantium iure. Maxime quibusdam quis odit incidunt!</span>
-					</span>
-					<span class="am-c-icon-text">
-						<i class="bi bi-clock-history"></i>
-						<span>Sat. June 4, 1978</span>
-					</span>
-					<br>
-					<span class="am-c-icon-text">
-						<i class="bi bi-hdd"></i>
-						<span>764 kb</span>
-					</span>
-					<br>
-					<span class="am-c-icon-text">
-						<i class="bi bi-aspect-ratio"></i>
-						<span>200 x 300</span>
+					<span>
+						<span class="am-c-icon-text">
+							<i class="bi bi-chat-square-text"></i>
+							<span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum quibusdam, culpa adipisci perferendis tempore ad, neque nemo ea incidunt non temporibus quia. Ea, laudantium iure. Maxime quibusdam quis odit incidunt!</span>
+						</span>
+						<span class="am-c-icon-text">
+							<i class="bi bi-clock-history"></i>
+							<span>Sat. June 4, 1978</span>
+						</span>
+						<br>
+						<span class="am-c-icon-text">
+							<i class="bi bi-hdd"></i>
+							<span>764 kb</span>
+						</span>
+						<br>
+						<span class="am-c-icon-text">
+							<i class="bi bi-aspect-ratio"></i>
+							<span>200 x 300</span>
+						</span>
 					</span>
 				</div>
 				<div class="am-c-card__footer">
