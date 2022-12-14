@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, eventNames, html, listen } from '../../core';
+import { App, CSS, EventName, html, listen } from '../../core';
 import { FormComponent } from './Form';
 
 /**
@@ -44,20 +44,22 @@ const renderRegisteredUsers = (): string => {
 	return App.system.users.reduce((output, user) => {
 		return html`
 			${output}
-			<span
-				class="${classes.flex} ${classes.flexGap} ${classes.flexAlignCenter}"
-			>
-				<span class="${classes.flexItemGrow}">
-					<i class="bi bi-person"></i>
-					${user.name} (${user.email})
-				</span>
-				<span>
-					${App.user.name == user.name
-						? App.text('systemUsersYou')
-						: html`<input
-								type="checkbox"
-								name="delete[${user.name}]"
-						  />`}
+			<span class="${CSS.card}">
+				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					<span
+						class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
+					>
+						<span class="${CSS.flexItemGrow}">
+							${user.name} (${user.email})
+						</span>
+						${App.user.name == user.name
+							? `<span class="${CSS.textMuted}">${App.text(
+									'systemUsersYou'
+							  )}</span>`
+							: html`<am-checkbox
+									name="delete[${user.name}]"
+							  ></am-checkbox>`}
+					</span>
 				</span>
 			</span>
 		`;
@@ -80,8 +82,10 @@ export class DeleteUsersFormComponent extends FormComponent {
 
 		super.init();
 
+		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
+
 		this.listeners.push(
-			listen(window, eventNames.appStateChange, render.bind(this))
+			listen(window, EventName.appStateChange, render.bind(this))
 		);
 
 		render();

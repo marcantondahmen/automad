@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,6 +36,7 @@ export * from './form';
 export * from './packages';
 export * from './page';
 export * from './search';
+export * from './switcher';
 export * from './system';
 import { PageMetaData } from '.';
 

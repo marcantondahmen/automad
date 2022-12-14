@@ -26,56 +26,44 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, html } from '../../core';
-import { BaseStateComponent } from './BaseState';
+import { App } from '../../../core';
+import { BaseActivationIndicatorComponent } from '../BaseActivationIndicator';
 
 /**
- * A state indicator component.
+ * A cache state indicator component.
  *
- * @extends BaseComponent
+ * @extends BaseActivationIndicatorComponent
  */
-export abstract class BaseActivationIndicatorComponent extends BaseStateComponent {
+class SystemCacheIndicatorComponent extends BaseActivationIndicatorComponent {
 	/**
 	 * The enabled text.
 	 */
-	protected abstract get textOn(): string;
+	protected get textOn(): string {
+		return App.text('cacheEnabled');
+	}
 
 	/**
 	 * The disabled text.
 	 */
-	protected abstract get textOff(): string;
+	protected get textOff(): string {
+		return App.text('cacheDisabled');
+	}
 
 	/**
 	 * The state getter.
 	 */
-	protected abstract get state(): boolean | number;
-
-	/**
-	 * Render the state element.
-	 */
-	protected render(): void {
-		if (this.state) {
-			this.innerHTML = html`
-				<am-icon-text
-					class="${classes.textPrimary}"
-					icon="check-circle-fill"
-					text="${this.textOn}"
-				></am-icon-text>
-			`;
-		} else {
-			this.innerHTML = html`
-				<am-icon-text
-					class="${classes.textMuted}"
-					icon="slash-circle-fill"
-					text="${this.textOff}"
-				></am-icon-text>
-			`;
-		}
+	protected get state(): boolean | number {
+		return App.system.cache.enabled;
 	}
 }
+
+customElements.define(
+	'am-system-cache-indicator',
+	SystemCacheIndicatorComponent
+);

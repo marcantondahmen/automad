@@ -32,8 +32,10 @@
  * Licensed under the MIT license.
  */
 
+import { Section } from '../components/Switcher/Switcher';
+
 export interface SystemSectionData {
-	section: string;
+	section: Section;
 	icon: string;
 	title: string;
 	info: string;

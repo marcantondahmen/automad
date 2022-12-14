@@ -26,41 +26,25 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App } from '../../core';
-import { BaseActivationIndicatorComponent } from './BaseActivationIndicator';
+import { Section } from '../components/Switcher/Switcher';
 
-/**
- * A debug state indicator component.
- *
- * @extends BaseActivationIndicatorComponent
- */
-class DebugIndicatorComponent extends BaseActivationIndicatorComponent {
-	/**
-	 * The enabled text.
-	 */
-	protected get textOn(): string {
-		return App.text('debugEnabled');
-	}
-
-	/**
-	 * The disabled text.
-	 */
-	protected get textOff(): string {
-		return App.text('debugDisabled');
-	}
-
-	/**
-	 * The state getter.
-	 */
-	protected get state(): boolean | number {
-		return App.system.debug;
-	}
+export interface SwitcherDropdownData {
+	overview: SwitcherDropdownOverview;
+	items: SwitcherDropdownItem[];
 }
 
-customElements.define('am-debug-indicator', DebugIndicatorComponent);
+export interface SwitcherDropdownItem {
+	title: string;
+	section: Section;
+}
+
+export interface SwitcherDropdownOverview {
+	icon: string;
+	section: Section;
+}

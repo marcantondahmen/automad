@@ -26,37 +26,56 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, eventNames, listen } from '../../core';
-import { BaseComponent } from '../Base';
-import { getActiveSection, Sections } from './Switcher';
+import { Attr, CSS, html } from '../../core';
+import { BaseStateIndicatorComponent } from './BaseStateIndicator';
 
 /**
- * The system menu switcher wrapper.
+ * A state indicator component.
  *
- * @extends BaseComponent
+ * @extends BaseStateIndicatorComponent
  */
-class SystemMenuComponent extends BaseComponent {
+export abstract class BaseActivationIndicatorComponent extends BaseStateIndicatorComponent {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The enabled text.
 	 */
-	connectedCallback(): void {
-		this.listeners.push(
-			listen(window, eventNames.switcherChange, () => {
-				const section = getActiveSection();
+	protected abstract get textOn(): string;
 
-				this.classList.toggle(
-					classes.displayNone,
-					section == Sections.overview
-				);
-			})
-		);
+	/**
+	 * The disabled text.
+	 */
+	protected abstract get textOff(): string;
+
+	/**
+	 * The state getter.
+	 */
+	protected abstract get state(): boolean | number;
+
+	/**
+	 * Render the state element.
+	 */
+	protected render(): void {
+		if (this.state) {
+			this.innerHTML = html`
+				<am-icon-text
+					class="${CSS.textActive}"
+					${Attr.icon}="check-circle"
+					${Attr.text}="${this.textOn}"
+				></am-icon-text>
+			`;
+		} else {
+			this.innerHTML = html`
+				<am-icon-text
+					class="${CSS.textMuted}"
+					${Attr.icon}="slash-circle"
+					${Attr.text}="${this.textOff}"
+				></am-icon-text>
+			`;
+		}
 	}
 }
-
-customElements.define('am-system-menu', SystemMenuComponent);

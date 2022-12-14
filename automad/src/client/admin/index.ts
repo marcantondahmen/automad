@@ -76,12 +76,11 @@ import './components/Indicators/Menu/PrivateIndicator';
 import './components/Indicators/Navbar/DebugIndicator';
 import './components/Indicators/Navbar/OutdatedPackagesIndicator';
 import './components/Indicators/Navbar/SystemUpdateIndicator';
-import './components/Indicators/Settings/CacheIndicator';
-import './components/Indicators/Settings/DebugIndicator';
-import './components/Indicators/Settings/FeedIndicator';
-import './components/Indicators/Settings/SystemUpdateIndicator';
-import './components/Indicators/Settings/UserCountIndicator';
 import './components/Indicators/Sidebar/OutdatedPackagesIndicator';
+import './components/Indicators/System/CacheIndicator';
+import './components/Indicators/System/DebugIndicator';
+import './components/Indicators/System/FeedIndicator';
+import './components/Indicators/System/SystemUpdateIndicator';
 
 import './components/Modal/Modal';
 import './components/Modal/ModalClose';
@@ -107,10 +106,10 @@ import './components/Sidebar/Sidebar';
 import './components/Sidebar/SidebarToggle';
 
 import './components/Switcher/Switcher';
+import './components/Switcher/SwitcherDropdown';
 import './components/Switcher/SwitcherLabel';
 import './components/Switcher/SwitcherLink';
 import './components/Switcher/SwitcherSection';
-import './components/Switcher/SystemMenu';
 
 import './components/Alert';
 import './components/Autocomplete';

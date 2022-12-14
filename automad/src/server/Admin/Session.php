@@ -66,7 +66,7 @@ class Session {
 	 * @return string the CSRF token stored in the session
 	 */
 	public static function getCsrfToken() {
-		return $_SESSION[self::CSRF_TOKEN_KEY] ?? '';
+		return $_SESSION[self::CSRF_TOKEN_KEY] ?? self::createCsrfToken();
 	}
 
 	/**
@@ -184,8 +184,12 @@ class Session {
 
 	/**
 	 * Create a CSRF protection token.
+	 *
+	 * @return string the created token
 	 */
 	private static function createCsrfToken() {
 		$_SESSION[self::CSRF_TOKEN_KEY] = bin2hex(random_bytes(32));
+
+		return $_SESSION[self::CSRF_TOKEN_KEY];
 	}
 }

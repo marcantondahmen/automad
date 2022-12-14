@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, eventNames, html, listen, query } from '../../core';
+import { App, Attr, CSS, EventName, html, listen, query } from '../../core';
 import { KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
 
@@ -63,7 +63,7 @@ export class ConfigFileFormComponent extends FormComponent {
 		super.init();
 
 		this.listeners.push(
-			listen(window, eventNames.appStateChange, () => {
+			listen(window, EventName.appStateChange, () => {
 				this.innerHTML = '';
 				this.submit();
 			})
@@ -92,31 +92,32 @@ export class ConfigFileFormComponent extends FormComponent {
 	private render(content: string): void {
 		this.innerHTML = html`
 			<am-modal-toggle
-				class="${classes.button}"
-				modal="#am-config-file-form-modal"
+				class="${CSS.button} ${CSS.buttonAccent}"
+				${Attr.modal}="#am-config-file-form-modal"
 			>
-				<am-icon-text
-					icon="pencil"
-					text="${App.text('systemConfigFileEdit')}"
-				></am-icon-text>
+				${App.text('systemConfigFileEdit')}
 			</am-modal-toggle>
 			<am-modal id="am-config-file-form-modal">
-				<div class="${classes.modalDialog}">
+				<div class="${CSS.modalDialog} ${CSS.modalDialogLarge}">
 					<div
-						class="${classes.modalHeader} ${classes.flex} ${classes.flexAlignCenter}"
+						class="${CSS.modalHeader} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
 					>
-						<div class="${classes.flexItemGrow}">
-							${App.text('systemConfigFileEdit')}
-						</div>
-						<am-modal-close class="${classes.button}">
-							${App.text('close')}
-						</am-modal-close>
-						<am-submit class="${classes.button}">
-							${App.text('save')}
-						</am-submit>
+						<span>${App.text('systemConfigFileEdit')}</span>
+						<span>
+							<am-modal-close
+								class="${CSS.button} ${CSS.buttonLink}"
+							>
+								${App.text('close')}
+							</am-modal-close>
+							<am-submit
+								class="${CSS.button} ${CSS.buttonAccent}"
+							>
+								${App.text('save')}
+							</am-submit>
+						</span>
 					</div>
 					<textarea
-						class="${classes.input}"
+						class="${CSS.modalCode}"
 						name="content"
 					></textarea>
 				</div>

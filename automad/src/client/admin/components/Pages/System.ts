@@ -32,9 +32,21 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, getTagFromRoute, html, Routes } from '../../core';
-import { SystemSectionData } from '../../types';
-import { Sections } from '../Switcher/Switcher';
+import {
+	App,
+	Attr,
+	create,
+	CSS,
+	getTagFromRoute,
+	html,
+	Route,
+} from '../../core';
+import {
+	SwitcherDropdownData,
+	SwitcherDropdownItem,
+	SystemSectionData,
+} from '../../types';
+import { Section } from '../Switcher/Switcher';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderConfigFileSection } from './Partials/System/ConfigFile';
 import { renderDebugSection } from './Partials/System/Debug';
@@ -42,80 +54,85 @@ import { renderFeedSection } from './Partials/System/Feed';
 import { renderLanguageSection } from './Partials/System/Language';
 import { renderUpdateSection } from './Partials/System/Update';
 import { renderUsersSection } from './Partials/System/Users';
-import { SidebarLayoutComponent } from './SidebarLayout';
+import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
+
+/**
+ * The system settings sections data.
+ */
+const getSystemSections = (): SystemSectionData[] => {
+	return [
+		{
+			section: Section.cache,
+			icon: 'device-ssd',
+			title: App.text('systemCache'),
+			info: App.text('systemCacheCardInfo'),
+			state: '<am-system-cache-indicator></am-system-cache-indicator>',
+			render: renderCacheSection,
+			narrowIcon: true,
+		},
+		{
+			section: Section.update,
+			icon: 'arrow-repeat',
+			title: App.text('systemUpdate'),
+			info: App.text('systemUpdateCardInfo'),
+			state: '<am-system-update-indicator></am-system-update-indicator>',
+			render: renderUpdateSection,
+		},
+		{
+			section: Section.feed,
+			icon: 'rss',
+			title: App.text('systemRssFeed'),
+			info: App.text('systemRssFeedCardInfo'),
+			state: '<am-system-feed-indicator></am-system-feed-indicator>',
+			render: renderFeedSection,
+		},
+		{
+			section: Section.debug,
+			icon: 'bug',
+			title: App.text('systemDebug'),
+			info: App.text('systemDebugCardInfo'),
+			state: '<am-system-debug-indicator></am-system-debug-indicator>',
+			render: renderDebugSection,
+		},
+		{
+			section: Section.users,
+			icon: 'person-badge',
+			title: App.text('systemUsers'),
+			info: App.text('systemUsersCardInfo'),
+			state: '',
+			render: renderUsersSection,
+			narrowIcon: true,
+		},
+		{
+			section: Section.language,
+			icon: 'translate',
+			title: App.text('systemLanguage'),
+			info: App.text('systemLanguageCardInfo'),
+			state: '',
+			render: renderLanguageSection,
+		},
+		{
+			section: Section.config,
+			icon: 'file-earmark-code',
+			title: App.text('systemConfigFile'),
+			info: App.text('systemConfigFileCardInfo'),
+			state: '',
+			render: renderConfigFileSection,
+			narrowIcon: true,
+		},
+	];
+};
 
 /**
  * The system view.
  *
- * @extends SidebarLayoutComponent
+ * @extends BaseDashboardLayoutComponent
  */
-export class SystemComponent extends SidebarLayoutComponent {
+export class SystemComponent extends BaseDashboardLayoutComponent {
 	/**
-	 * The array of system item properties.
+	 * The section data array.
 	 */
-	private get items(): SystemSectionData[] {
-		return [
-			{
-				section: Sections.cache,
-				icon: 'device-ssd',
-				title: App.text('systemCache'),
-				info: App.text('systemCacheCardInfo'),
-				state: '<am-cache-indicator></am-cache-indicator>',
-				render: renderCacheSection,
-				narrowIcon: true,
-			},
-			{
-				section: Sections.users,
-				icon: 'person-badge',
-				title: App.text('systemUsers'),
-				info: App.text('systemUsersCardInfo'),
-				state: '<am-user-count-indicator></am-user-count-indicator>',
-				render: renderUsersSection,
-				narrowIcon: true,
-			},
-			{
-				section: Sections.update,
-				icon: 'arrow-repeat',
-				title: App.text('systemUpdate'),
-				info: App.text('systemUpdateCardInfo'),
-				state: '<am-system-update-indicator></am-system-update-indicator>',
-				render: renderUpdateSection,
-			},
-			{
-				section: Sections.feed,
-				icon: 'rss',
-				title: App.text('systemRssFeed'),
-				info: App.text('systemRssFeedCardInfo'),
-				state: '<am-feed-indicator></am-feed-indicator>',
-				render: renderFeedSection,
-			},
-			{
-				section: Sections.language,
-				icon: 'translate',
-				title: App.text('systemLanguage'),
-				info: App.text('systemLanguageCardInfo'),
-				state: '',
-				render: renderLanguageSection,
-			},
-			{
-				section: Sections.debug,
-				icon: 'bug',
-				title: App.text('systemDebug'),
-				info: App.text('systemDebugCardInfo'),
-				state: '<am-debug-indicator></am-debug-indicator>',
-				render: renderDebugSection,
-			},
-			{
-				section: Sections.config,
-				icon: 'file-earmark-code',
-				title: App.text('systemConfigFile'),
-				info: App.text('systemConfigFileCardInfo'),
-				state: '',
-				render: renderConfigFileSection,
-				narrowIcon: true,
-			},
-		];
-	}
+	private sectionData: SystemSectionData[] = null;
 
 	/**
 	 * Set the page title that is used a document title suffix.
@@ -125,65 +142,57 @@ export class SystemComponent extends SidebarLayoutComponent {
 	}
 
 	/**
+	 * Create the switcher dropdown data.
+	 *
+	 * @returns the menu data
+	 */
+	private get menuData(): SwitcherDropdownData {
+		const items: SwitcherDropdownItem[] = [];
+
+		this.sectionData.forEach((item: SystemSectionData) => {
+			items.push({ title: item.title, section: item.section });
+		});
+
+		return { overview: { icon: 'grid', section: Section.overview }, items };
+	}
+
+	/**
 	 * Render the main partial.
 	 *
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
+		const menu = create('am-switcher-dropdown');
+
+		this.sectionData = getSystemSections();
+		menu.data = this.menuData;
+
 		return html`
-			<section class="am-l-main__row">
-				<nav class="am-l-main__content">
-					<div class="${classes.breadcrumbs}">
+			<section class="${CSS.layoutDashboardSection}">
+				<div
+					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentNarrow}"
+				>
+					<div class="${CSS.breadcrumbs}">
 						<am-link
-							class="${classes.breadcrumbsItem}"
-							target="${Routes.system}"
+							class="${CSS.breadcrumbsItem}"
+							${Attr.target}="${Route.system}"
 						>
 							<am-icon-text
-								icon="sliders"
-								text="$${App.text('systemTitle')}"
+								${Attr.icon}="sliders"
+								${Attr.text}="${App.text('systemTitle')}"
 							></am-icon-text>
 						</am-link>
 					</div>
-				</nav>
+				</div>
 			</section>
-			<am-system-menu class="am-l-main__row am-l-main__row--sticky">
-				<menu class="am-l-main__content">${this.renderMenu()}</menu>
-			</am-system-menu>
-			<section class="am-l-main__row">
-				<div class="am-l-main__content">${this.renderSections()}</div>
-			</section>
-		`;
-	}
-
-	/**
-	 * Render the menu.
-	 *
-	 * @returns the menu markup
-	 */
-	private renderMenu(): string {
-		let dropdownItems = '';
-
-		this.items.forEach((item: SystemSectionData) => {
-			dropdownItems += html`
-				<am-switcher-link
-					class="${classes.dropdownItem}"
-					section="${item.section}"
+			${menu.outerHTML}
+			<section class="${CSS.layoutDashboardSection}">
+				<div
+					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentNarrow}"
 				>
-					${item.title}
-				</am-switcher-link>
-			`;
-		});
-
-		return html`
-			<am-switcher class="${classes.flex}">
-				<am-switcher-link section="${Sections.overview}">
-					<i class="bi bi-grid"></i>
-				</am-switcher-link>
-				<am-dropdown class="${classes.flexItemGrow}">
-					<am-switcher-label></am-switcher-label>
-					<div class="${classes.dropdownItems}">${dropdownItems}</div>
-				</am-dropdown>
-			</am-switcher>
+					${this.renderSections()}${this.renderOverviewSection()}
+				</div>
+			</section>
 		`;
 	}
 
@@ -195,7 +204,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 	private renderSections(): string {
 		let sections = '';
 
-		this.items.forEach((item: SystemSectionData) => {
+		this.sectionData.forEach((item: SystemSectionData) => {
 			sections += html`
 				<am-switcher-section name="${item.section}">
 					${item.render(this.listeners)}
@@ -203,44 +212,56 @@ export class SystemComponent extends SidebarLayoutComponent {
 			`;
 		});
 
+		return sections;
+	}
+
+	/**
+	 * Render the overview section grid.
+	 *
+	 * @returns the rendered overview
+	 */
+	private renderOverviewSection(): string {
 		return html`
-			<am-switcher-section name="${Sections.overview}">
-				<div class="${classes.grid}" style="--min: 15rem;">
-					${this.renderOverviewCards()}
+			<am-switcher-section name="${Section.overview}">
+				<div class="${CSS.grid}" style="--min: 17rem;">
+					${this.renderOverviewCards(this.sectionData.slice(0, 4))}
+				</div>
+				<div class="${CSS.grid}" style="--min: 12rem;">
+					${this.renderOverviewCards(this.sectionData.slice(4, 7))}
 				</div>
 			</am-switcher-section>
-			${sections}
 		`;
 	}
 
 	/**
 	 * Render the main overview section menu.
 	 *
-	 * @returns the rendered overview
+	 * @param data
+	 * @returns the rendered overview cards
 	 */
-	private renderOverviewCards(): string {
+	private renderOverviewCards(data: SystemSectionData[]): string {
 		let cards = '';
 
-		this.items.forEach((item) => {
+		data.forEach((item) => {
 			cards += html`
 				<am-switcher-link
-					class="${classes.card} ${classes.cardLink}"
-					section="${item.section}"
+					class="${CSS.card} ${CSS.cardHover}"
+					${Attr.section}="${item.section}"
 				>
-					<div class="${classes.flexItemGrow}">
+					<div class="${CSS.flexItemGrow}">
 						<span
-							class="${classes.cardIcon} ${item.narrowIcon
-								? classes.cardIconNarrow
+							class="${CSS.cardIcon} ${item.narrowIcon
+								? CSS.cardIconNarrow
 								: ''}"
 						>
 							<i class="bi bi-${item.icon}"></i>
 						</span>
-						<div class="${classes.cardTitle}">${item.title}</div>
-						<div class="${classes.cardText}">${item.info}</div>
+						<div class="${CSS.cardTitle}">${item.title}</div>
+						<div class="${CSS.cardBody}">${item.info}</div>
 					</div>
-					<div class="am-c-card__footer">
-						<small>${item.state}</small>
-					</div>
+					${item.state
+						? `<div class="${CSS.cardState}">${item.state}</div>`
+						: ''}
 				</am-switcher-link>
 			`;
 		});
@@ -249,4 +270,4 @@ export class SystemComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes.system), SystemComponent);
+customElements.define(getTagFromRoute(Route.system), SystemComponent);

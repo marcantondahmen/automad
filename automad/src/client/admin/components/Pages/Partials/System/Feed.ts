@@ -34,10 +34,11 @@
 
 import {
 	App,
+	Attr,
 	Binding,
-	classes,
 	createField,
-	eventNames,
+	CSS,
+	EventName,
 	html,
 	listen,
 } from '../../../../core';
@@ -64,7 +65,7 @@ const createBindings = (listeners: Listener[]): void => {
 	);
 
 	listeners.push(
-		listen(window, eventNames.appStateChange, () => {
+		listen(window, EventName.appStateChange, () => {
 			feedEnabled.value = App.system.feed.enabled;
 			feedFields.value = JSON.stringify(App.system.feed.fields);
 		})
@@ -82,43 +83,43 @@ export const renderFeedSection = (listeners: Listener[]): string => {
 
 	return html`
 		<am-form
-			api="Config/update"
-			event="${eventNames.appStateRequireUpdate}"
-			auto
+			class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+			${Attr.api}="Config/update"
+			${Attr.event}="${EventName.appStateRequireUpdate}"
+			${Attr.auto}
 		>
 			<input type="hidden" name="type" value="feed" />
-			<p>$${App.text('systemRssFeedInfo')}</p>
-			${createField(
-				'am-toggle-large',
-				null,
-				{
-					key: 'feedEnabled',
-					value: App.system.feed.enabled,
-					name: 'feedEnabled',
-					label: App.text('systemRssFeedEnable'),
-				},
-				[],
-				{
-					bind: 'feedEnabled',
-					bindto: 'checked',
-					toggle: '#am-feed-settings',
-				}
-			).outerHTML}
+			<div>
+				<p>${App.text('systemRssFeedInfo')}</p>
+				${createField(
+					'am-toggle-large',
+					null,
+					{
+						key: 'feedEnabled',
+						value: App.system.feed.enabled,
+						name: 'feedEnabled',
+						label: App.text('systemRssFeedEnable'),
+					},
+					[],
+					{
+						[Attr.bind]: 'feedEnabled',
+						[Attr.bindTo]: 'checked',
+						[Attr.toggle]: '#am-feed-settings',
+					}
+				).outerHTML}
+			</div>
 			<div id="am-feed-settings">
 				<p>${App.text('systemRssFeedUrl')}</p>
-				<div class="${classes.menu}">
-					<span
-						class="${classes.menuItem} ${classes.menuItemFirst} ${classes.flexItemGrow}"
-					>
-						<input
-							class="${classes.input}"
-							value="${App.feedURL}"
-							disabled
-						/>
-					</span>
-					<am-copy
-						class="${classes.menuItem} ${classes.menuItemLast} ${classes.button} ${classes.buttonInverted}"
+				<div class="${CSS.formGroup}">
+					<input
+						class="${CSS.input} ${CSS.flexItemGrow} ${CSS.formGroupItem}"
 						value="${App.feedURL}"
+						disabled
+					/>
+					<am-copy
+						class="${CSS.button} ${CSS.buttonIcon} ${CSS.formGroupItem}"
+						value="${App.feedURL}"
+						${Attr.tooltip}="${App.text('copyUrlClipboard')}"
 					>
 						<i class="bi bi-clipboard"></i>
 					</am-copy>
@@ -134,8 +135,8 @@ export const renderFeedSection = (listeners: Listener[]): string => {
 					},
 					[],
 					{
-						bind: 'feedFields',
-						bindto: 'value',
+						[Attr.bind]: 'feedFields',
+						[Attr.bindTo]: 'value',
 					}
 				).outerHTML}
 			</div>

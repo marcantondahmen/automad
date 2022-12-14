@@ -41,7 +41,7 @@ import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
  *
  * @extends BaseUpdateIndicatorComponent
  */
-class NavbarSystemUpdateIndicatorComponent extends BaseUpdateIndicatorComponent {
+class NavbarUpdateIndicatorComponent extends BaseUpdateIndicatorComponent {
 	/**
 	 * Render the state element.
 	 */
@@ -69,6 +69,6 @@ class NavbarSystemUpdateIndicatorComponent extends BaseUpdateIndicatorComponent 
 }
 
 customElements.define(
-	'am-navbar-system-update-indicator',
-	NavbarSystemUpdateIndicatorComponent
+	'am-navbar-update-indicator',
+	NavbarUpdateIndicatorComponent
 );

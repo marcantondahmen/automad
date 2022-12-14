@@ -34,9 +34,10 @@
 
 import {
 	App,
+	Attr,
 	Binding,
-	classes,
-	eventNames,
+	CSS,
+	EventName,
 	html,
 	listen,
 	renderOptions,
@@ -57,7 +58,7 @@ const createBindings = (listeners: Listener[]): void => {
 	);
 
 	listeners.push(
-		listen(window, eventNames.appStateChange, () => {
+		listen(window, EventName.appStateChange, () => {
 			translation.value = App.system.translation;
 		})
 	);
@@ -80,24 +81,24 @@ export const renderLanguageSection = (listeners: Listener[]): string => {
 
 	return html`
 		<am-form
-			api="Config/update"
-			event="${eventNames.appStateRequireUpdate}"
-			auto
+			${Attr.api}="Config/update"
+			${Attr.event}="${EventName.appStateRequireUpdate}"
+			${Attr.auto}
 		>
 			<input type="hidden" name="type" value="translation" />
-			<p>$${App.text('systemLanguageInfo')}</p>
-			<p>
-				<am-select class="${classes.button}">
+			<div>
+				<p>${App.text('systemLanguageInfo')}</p>
+				<am-select class="${CSS.selectInline}">
 					<span></span>
 					<select
 						name="translation"
-						bind="translation"
-						bindto="value"
+						${Attr.bind}="translation"
+						${Attr.bindTo}="value"
 					>
 						${renderOptions(languages)}
 					</select>
 				</am-select>
-			</p>
+			</div>
 		</am-form>
 	`;
 };

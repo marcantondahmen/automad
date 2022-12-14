@@ -26,21 +26,21 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App } from '../../core';
-import { BaseActivationIndicatorComponent } from './BaseActivationIndicator';
+import { App } from '../../../core';
+import { BaseActivationIndicatorComponent } from '../BaseActivationIndicator';
 
 /**
  * A feed state indicator component.
  *
  * @extends BaseActivationIndicatorComponent
  */
-class FeedIndicatorComponent extends BaseActivationIndicatorComponent {
+class SystemFeedIndicatorComponent extends BaseActivationIndicatorComponent {
 	/**
 	 * The enabled text.
 	 */
@@ -63,4 +63,4 @@ class FeedIndicatorComponent extends BaseActivationIndicatorComponent {
 	}
 }
 
-customElements.define('am-feed-indicator', FeedIndicatorComponent);
+customElements.define('am-system-feed-indicator', SystemFeedIndicatorComponent);

@@ -34,10 +34,11 @@
 
 import {
 	App,
+	Attr,
 	Binding,
-	classes,
 	createField,
-	eventNames,
+	CSS,
+	EventName,
 	html,
 	listen,
 	renderOptions,
@@ -72,7 +73,7 @@ const createBindings = (listeners: Listener[]): void => {
 	);
 
 	listeners.push(
-		listen(window, eventNames.appStateChange, () => {
+		listen(window, EventName.appStateChange, () => {
 			cacheEnabled.value = App.system.cache.enabled;
 			cacheMonitorDelay.value = App.system.cache.monitorDelay;
 			cacheLifetime.value = App.system.cache.lifetime;
@@ -90,39 +91,42 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 	createBindings(listeners);
 
 	return html`
-		<am-form
-			api="Config/update"
-			event="${eventNames.appStateRequireUpdate}"
-			auto
-		>
-			<input type="hidden" name="type" value="cache" />
-			<p>$${App.text('systemCacheInfo')}</p>
-			${createField(
-				'am-toggle-large',
-				null,
-				{
-					key: 'cacheEnabled',
-					value: App.system.cache.enabled,
-					name: 'cacheEnabled',
-					label: App.text('systemCacheEnable'),
-				},
-				[],
-				{
-					toggle: '.am-cache-settings',
-					bind: 'cacheEnabled',
-					bindto: 'checked',
-				}
-			).outerHTML}
-			<div class="am-cache-settings">
-				<p>$${App.text('systemCacheMonitorInfo')}</p>
-				<p>
-					<am-select class="${classes.button}">
-						$${App.text('systemCacheMonitor')}
+		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
+			<am-form
+				class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+				${Attr.api}="Config/update"
+				${Attr.event}="${EventName.appStateRequireUpdate}"
+				${Attr.auto}
+			>
+				<input type="hidden" name="type" value="cache" />
+				<div>
+					<p>${App.text('systemCacheInfo')}</p>
+					${createField(
+						'am-toggle-large',
+						null,
+						{
+							key: 'cacheEnabled',
+							value: App.system.cache.enabled,
+							name: 'cacheEnabled',
+							label: App.text('systemCacheEnable'),
+						},
+						[],
+						{
+							[Attr.toggle]: '.am-cache-settings',
+							[Attr.bind]: 'cacheEnabled',
+							[Attr.bindTo]: 'checked',
+						}
+					).outerHTML}
+				</div>
+				<div class="am-cache-settings">
+					<p>${App.text('systemCacheMonitorInfo')}</p>
+					<am-select class="${CSS.selectInline}">
+						${App.text('systemCacheMonitor')}
 						<span></span>
 						<select
 							name="cacheMonitorDelay"
-							bind="cacheMonitorDelay"
-							bindto="value"
+							${Attr.bind}="cacheMonitorDelay"
+							${Attr.bindTo}="value"
 						>
 							${renderOptions([
 								{ value: 60, text: '1 min' },
@@ -132,16 +136,14 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 							])}
 						</select>
 					</am-select>
-				</p>
-				<p>$${App.text('systemCacheLifetimeInfo')}</p>
-				<p>
-					<am-select class="${classes.button}">
-						$${App.text('systemCacheLifetime')}
+					<p>${App.text('systemCacheLifetimeInfo')}</p>
+					<am-select class="${CSS.selectInline}">
+						${App.text('systemCacheLifetime')}
 						<span></span>
 						<select
 							name="cacheLifetime"
-							bind="cacheLifetime"
-							bindto="value"
+							${Attr.bind}="cacheLifetime"
+							${Attr.bindTo}="value"
 						>
 							${renderOptions([
 								{ value: 3600, text: '1 h' },
@@ -151,23 +153,23 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 							])}
 						</select>
 					</am-select>
-				</p>
-			</div>
-		</am-form>
-		<am-form class="am-cache-settings" api="Cache/clear">
-			<p>$${App.text('systemCacheClearInfo')}</p>
-			<am-submit class="${classes.button}">
-				$${App.text('systemCacheClear')}
-			</am-submit>
-		</am-form>
-		<am-form class="am-cache-settings" api="Cache/purge">
-			<p>$${App.text('systemCachePurgeInfo')}</p>
-			<am-submit class="${classes.button}">
-				$${App.text('systemCachePurge')}
-				<span class="${classes.badge}">
-					${App.system.tempDirectory}
-				</span>
-			</am-submit>
-		</am-form>
+				</div>
+			</am-form>
+			<am-form class="am-cache-settings" ${Attr.api}="Cache/clear">
+				<p>${App.text('systemCacheClearInfo')}</p>
+				<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+					${App.text('systemCacheClear')}
+				</am-submit>
+			</am-form>
+			<am-form class="am-cache-settings" ${Attr.api}="Cache/purge">
+				<p>${App.text('systemCachePurgeInfo')}</p>
+				<am-submit class="${CSS.button}">
+					${App.text('systemCachePurge')}
+					<span class="${CSS.badge} ${CSS.badgeMuted}">
+						${App.system.tempDirectory}
+					</span>
+				</am-submit>
+			</am-form>
+		</div>
 	`;
 };

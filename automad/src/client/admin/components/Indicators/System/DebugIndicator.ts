@@ -26,31 +26,44 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, classes, html } from '../../core';
-import { BaseStateComponent } from './BaseState';
+import { App } from '../../../core';
+import { BaseActivationIndicatorComponent } from '../BaseActivationIndicator';
 
 /**
- * A user count component.
+ * A debug state indicator component.
  *
- * @extends BaseStateComponent
+ * @extends BaseActivationIndicatorComponent
  */
-class UserCountIndicatorComponent extends BaseStateComponent {
+class SystemDebugIndicatorComponent extends BaseActivationIndicatorComponent {
 	/**
-	 * Render the state element.
+	 * The enabled text.
 	 */
-	render(): void {
-		this.classList.add(classes.textSuccess);
+	protected get textOn(): string {
+		return App.text('debugEnabled');
+	}
 
-		this.innerHTML = html`
-			${App.system.users.length} ${App.text('systemUsersRegistered')}
-		`;
+	/**
+	 * The disabled text.
+	 */
+	protected get textOff(): string {
+		return App.text('debugDisabled');
+	}
+
+	/**
+	 * The state getter.
+	 */
+	protected get state(): boolean | number {
+		return App.system.debug;
 	}
 }
 
-customElements.define('am-user-count-indicator', UserCountIndicatorComponent);
+customElements.define(
+	'am-system-debug-indicator',
+	SystemDebugIndicatorComponent
+);

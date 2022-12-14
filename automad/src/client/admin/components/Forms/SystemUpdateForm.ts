@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, html, listen, query } from '../../core';
+import { App, Attr, create, CSS, html, listen, query } from '../../core';
 import { KeyValueMap, SystemUpdateResponse } from '../../types';
 import { ModalComponent } from '../Modal/Modal';
 import { FormComponent } from './Form';
@@ -108,9 +108,8 @@ export class SystemUpdateFormComponent extends FormComponent {
 	private renderDisabled(data: SystemUpdateResponse): void {
 		this.innerHTML = html`
 			<am-alert
-				icon="slash-circle"
-				text="systemUpdateDisabled"
-				type="danger"
+				${Attr.icon}="slash-circle"
+				${Attr.text}="systemUpdateDisabled"
 			></am-alert>
 		`;
 	}
@@ -123,9 +122,8 @@ export class SystemUpdateFormComponent extends FormComponent {
 	private renderNotSupported(data: SystemUpdateResponse): void {
 		this.innerHTML = html`
 			<am-alert
-				icon="slash-circle"
-				text="systemUpdateNotSupportedError"
-				type="danger"
+				${Attr.icon}="slash-circle"
+				${Attr.text}="systemUpdateNotSupportedError"
 			></am-alert>
 		`;
 	}
@@ -141,19 +139,19 @@ export class SystemUpdateFormComponent extends FormComponent {
 		const modal = create(
 			'am-modal',
 			[],
-			{ noesc: '', noclick: '', destroy: '' },
+			{ [Attr.noEsc]: '', [Attr.noClick]: '', [Attr.destroy]: '' },
 			this
 		) as ModalComponent;
 
 		modal.innerHTML = html`
-			<div class="${classes.modalDialog}">
-				${App.text('systemUpdateSuccess')}
-				${App.text('systemUpdateCurrentVersion')}
-				<strong>${data.current}</strong>.
-				<div class="${classes.modalFooter}">
+			<div class="${CSS.modalDialog}">
+				<div class="${CSS.modalBody}">
+					${App.text('systemUpdateSuccess')}
+				</div>
+				<div class="${CSS.modalFooter}">
 					<a
 						href="${App.dashboardURL}"
-						class="${classes.button} ${classes.buttonPrimary}"
+						class="${CSS.button} ${CSS.buttonAccent}"
 					>
 						${App.text('systemUpdateSuccessReload')}
 					</a>
@@ -172,9 +170,8 @@ export class SystemUpdateFormComponent extends FormComponent {
 	private renderConnectionError(data: SystemUpdateResponse): void {
 		this.innerHTML = html`
 			<am-alert
-				icon="hdd-network"
-				text="systemUpdateConnectionError"
-				type="danger"
+				${Attr.icon}="hdd-network"
+				${Attr.text}="systemUpdateConnectionError"
 			></am-alert>
 		`;
 	}
@@ -192,34 +189,32 @@ export class SystemUpdateFormComponent extends FormComponent {
 				list += html`<li>${item}</li>`;
 			});
 
-			return html`<ul>
+			return html`<ul class="${CSS.textParagraph}">
 				${list}
 			</ul>`;
 		};
 
 		this.innerHTML = html`
-			<input type="hidden" name="update" value="run" />
-			<div class="${classes.alert} ${classes.alertPrimary}">
-				<div class="${classes.alertIcon}">
-					<i class="bi bi-arrow-repeat"></i>
+			<div class="${CSS.alert}">
+				<input type="hidden" name="update" value="run" />
+				<div class="${CSS.alertIcon}">
+					<i class="bi bi-download"></i>
 				</div>
-				<div class="${classes.alertText}">
-					<p>
+				<div class="${CSS.alertText}">
+					<div>
 						${App.text('systemUpdateCurrentVersion')}
 						<strong>${data.current}</strong>.
 						<br />
 						${App.text('systemUpdateAvailable')}
-					</p>
-					<div class="${classes.flex} ${classes.flexGap}">
-						<am-submit
-							class="${classes.button} ${classes.buttonPrimary}"
-						>
+					</div>
+					<div>
+						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('systemUpdateTo')}
-							<strong>${data.latest} </strong>
+							<span class="${CSS.badge}">${data.latest}</span>
 						</am-submit>
 						<a
 							href="https://automad.org/release-notes"
-							class="${classes.button}"
+							class="${CSS.button} ${CSS.buttonLink}"
 							target="_blank"
 						>
 							Release Notes
@@ -227,8 +222,10 @@ export class SystemUpdateFormComponent extends FormComponent {
 					</div>
 				</div>
 			</div>
-			<p>${App.text('systemUpdateItems')}:</p>
-			${renderItems(data.items)}
+			<div>
+				<p>${App.text('systemUpdateItems')}</p>
+				${renderItems(data.items)}
+			</div>
 		`;
 
 		const submit = query('am-submit', this);
@@ -237,14 +234,18 @@ export class SystemUpdateFormComponent extends FormComponent {
 			this.progressModal = create(
 				'am-modal',
 				[],
-				{ noesc: '', noclick: '', destroy: '' },
+				{ [Attr.noEsc]: '', [Attr.noClick]: '', [Attr.destroy]: '' },
 				App.root
 			) as ModalComponent;
 
 			this.progressModal.innerHTML = html`
-				<div class="${classes.modalDialog}">
-					<span class="${classes.spinner}"></span>
-					${App.text('systemUpdateProgress')}
+				<div class="${CSS.modalDialog}">
+					<div class="${CSS.modalSpinner}">
+						<span class="${CSS.modalSpinnerIcon}"></span>
+						<span class="${CSS.modalSpinnerText}">
+							${App.text('systemUpdateProgress')}
+						</span>
+					</div>
 				</div>
 			`;
 
@@ -258,9 +259,8 @@ export class SystemUpdateFormComponent extends FormComponent {
 	private renderUpToDate(data: SystemUpdateResponse): void {
 		this.innerHTML = html`
 			<am-alert
-				icon="check-circle"
-				text="systemUpToDate"
-				type="success"
+				${Attr.icon}="check-circle"
+				${Attr.text}="systemUpToDate"
 			></am-alert>
 		`;
 	}

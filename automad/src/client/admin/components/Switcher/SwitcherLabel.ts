@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { Attr, EventName, listen, query } from '../../core';
+import { Attr, CSS, EventName, listen, query } from '../../core';
 import { getActiveSection, SwitcherComponent } from './Switcher';
 import { linkTag } from './SwitcherLink';
 
@@ -49,10 +49,20 @@ export class SwitcherLabelComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		const dropdown = `.${CSS.dropdownItems}`;
+		const menu = `.${CSS.menu}`;
+		const getLink = () => {
+			return `${linkTag}[${Attr.section}="${getActiveSection()}"]`;
+		};
+
 		this.listeners.push(
 			listen(window, EventName.switcherChange, () => {
-				this.innerHTML = query(
-					`${linkTag}[${Attr.section}="${getActiveSection()}"]`
+				// Prefer links in menus and dropdowns before all other links
+				// in order to exclude overview cards as links.
+				this.innerHTML = (
+					query(`${menu} ${getLink()}`) ||
+					query(`${dropdown} ${getLink()}`) ||
+					query(getLink())
 				).innerHTML;
 			})
 		);

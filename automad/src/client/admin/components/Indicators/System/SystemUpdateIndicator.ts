@@ -26,41 +26,50 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App } from '../../core';
-import { BaseActivationIndicatorComponent } from './BaseActivationIndicator';
+import { App, Attr, CSS, EventName, html, listen } from '../../../core';
+import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
 
 /**
- * A cache state indicator component.
+ * A system update state component.
  *
- * @extends BaseActivationIndicatorComponent
+ * @extends BaseUpdateIndicatorComponent
  */
-class CacheIndicatorComponent extends BaseActivationIndicatorComponent {
+class SystemUpdateIndicatorComponent extends BaseUpdateIndicatorComponent {
 	/**
-	 * The enabled text.
+	 * Render the state element.
 	 */
-	protected get textOn(): string {
-		return App.text('cacheEnabled');
-	}
+	render(): void {
+		if (App.state.systemUpdate?.pending) {
+			this.innerHTML = html`
+				<span class="${CSS.textActive} ${CSS.iconText}">
+					<i class="bi bi-download"></i>
+					<span>
+						${App.text('systemUpdateTo')}
+						${App.state.systemUpdate?.latest}
+					</span>
+				</span>
+			`;
 
-	/**
-	 * The disabled text.
-	 */
-	protected get textOff(): string {
-		return App.text('cacheDisabled');
-	}
+			return;
+		}
 
-	/**
-	 * The state getter.
-	 */
-	protected get state(): boolean | number {
-		return App.system.cache.enabled;
+		this.innerHTML = html`
+			<am-icon-text
+				class="${CSS.textMuted}"
+				${Attr.icon}="check-circle"
+				${Attr.text}="${App.text('systemUpToDate')}"
+			></am-icon-text>
+		`;
 	}
 }
 
-customElements.define('am-cache-indicator', CacheIndicatorComponent);
+customElements.define(
+	'am-system-update-indicator',
+	SystemUpdateIndicatorComponent
+);

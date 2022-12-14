@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, html } from '../../../../core';
+import { App, Attr, CSS, html } from '../../../../core';
 import { Listener } from '../../../../types';
 
 /**
@@ -43,7 +43,18 @@ import { Listener } from '../../../../types';
  */
 export const renderConfigFileSection = (listeners: Listener[]): string => {
 	return html`
-		<p>$${App.text('systemConfigFileInfo')}</p>
-		<am-config-file-form api="Config/file"></am-config-file-form>
+		<div class="${CSS.alert}">
+			<div class="${CSS.alertIcon}">
+				<i class="bi bi-hand-index"></i>
+			</div>
+			<div class="${CSS.alertText}">
+				<div>${App.text('systemConfigFileInfo')}</div>
+				<div>
+					<am-config-file-form
+						${Attr.api}="Config/file"
+					></am-config-file-form>
+				</div>
+			</div>
+		</div>
 	`;
 };

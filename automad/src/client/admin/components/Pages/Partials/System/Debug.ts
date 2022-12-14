@@ -34,9 +34,11 @@
 
 import {
 	App,
+	Attr,
 	Binding,
 	createField,
-	eventNames,
+	CSS,
+	EventName,
 	html,
 	listen,
 } from '../../../../core';
@@ -56,7 +58,7 @@ const createBindings = (listeners: Listener[]): void => {
 	);
 
 	listeners.push(
-		listen(window, eventNames.appStateChange, () => {
+		listen(window, EventName.appStateChange, () => {
 			debugEnabled.value = App.system.debug;
 		})
 	);
@@ -73,27 +75,29 @@ export const renderDebugSection = (listeners: Listener[]): string => {
 
 	return html`
 		<am-form
-			api="Config/update"
-			event="${eventNames.appStateRequireUpdate}"
-			auto
+			${Attr.api}="Config/update"
+			${Attr.event}="${EventName.appStateRequireUpdate}"
+			${Attr.auto}
 		>
 			<input type="hidden" name="type" value="debug" />
-			<p>$${App.text('systemDebugInfo')}</p>
-			${createField(
-				'am-toggle-large',
-				null,
-				{
-					key: 'debugEnabled',
-					value: App.system.debug,
-					name: 'debugEnabled',
-					label: App.text('systemDebugEnable'),
-				},
-				[],
-				{
-					bind: 'debugEnabled',
-					bindto: 'checked',
-				}
-			).outerHTML}
+			<div>
+				<p>${App.text('systemDebugInfo')}</p>
+				${createField(
+					'am-toggle-large',
+					null,
+					{
+						key: 'debugEnabled',
+						value: App.system.debug,
+						name: 'debugEnabled',
+						label: App.text('systemDebugEnable'),
+					},
+					[],
+					{
+						[Attr.bind]: 'debugEnabled',
+						[Attr.bindTo]: 'checked',
+					}
+				).outerHTML}
+			</div>
 		</am-form>
 	`;
 };

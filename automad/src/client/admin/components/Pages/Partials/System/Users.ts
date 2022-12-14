@@ -34,10 +34,11 @@
 
 import {
 	App,
+	Attr,
 	Binding,
-	classes,
 	createField,
-	eventNames,
+	CSS,
+	EventName,
 	html,
 	listen,
 } from '../../../../core';
@@ -60,7 +61,7 @@ const createBindings = (listeners: Listener[]): void => {
 	);
 
 	listeners.push(
-		listen(window, eventNames.appStateChange, () => {
+		listen(window, EventName.appStateChange, () => {
 			username.value = App.user.name;
 			email.value = App.user.email;
 			userSubmit.value = true;
@@ -79,172 +80,209 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 	createBindings(listeners);
 
 	return html`
-		<am-form
-			api="User/edit"
-			event="${eventNames.appStateRequireUpdate}"
-			watch
-		>
-			<p>$${App.text('systemUsersInfo')}</p>
-			${createField(
-				'am-input',
-				null,
-				{
-					key: 'username',
-					value: App.user.name,
-					name: 'username',
-					label: App.text('username'),
-				},
-				[],
-				{ bind: 'username', bindto: 'value' }
-			).outerHTML}
-			${createField(
-				'am-email',
-				null,
-				{
-					key: 'email',
-					value: App.user.email,
-					name: 'email',
-					label: App.text('email'),
-				},
-				[],
-				{ bind: 'email', bindto: 'value' }
-			).outerHTML}
-			<am-submit
-				class="${classes.button}"
-				bind="userSubmitButton"
-				bindto="disabled"
+		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
+			<am-form
+				${Attr.api}="User/edit"
+				${Attr.event}="${EventName.appStateRequireUpdate}"
+				${Attr.watch}
 			>
-				<am-icon-text
-					icon="check"
-					text="${App.text('save')}"
-				></am-icon-text>
-			</am-submit>
-			<am-modal-toggle
-				class="${classes.button}"
-				modal="#am-change-password-modal"
-			>
-				${App.text('systemUsersChangePassword')}
-			</am-modal-toggle>
-		</am-form>
+				<span class="${CSS.card}">
+					<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+						${App.text('systemUsersInfo')}
+					</span>
+					<span
+						class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+					>
+						<span>
+							${createField(
+								'am-input',
+								null,
+								{
+									key: 'username',
+									value: App.user.name,
+									name: 'username',
+									label: App.text('username'),
+								},
+								[],
+								{
+									[Attr.bind]: 'username',
+									[Attr.bindTo]: 'value',
+								}
+							).outerHTML}
+							${createField(
+								'am-email',
+								null,
+								{
+									key: 'email',
+									value: App.user.email,
+									name: 'email',
+									label: App.text('email'),
+								},
+								[],
+								{ [Attr.bind]: 'email', [Attr.bindTo]: 'value' }
+							).outerHTML}
+						</span>
+						<span class="${CSS.cardFormButtons}">
+							<am-submit
+								class="${CSS.button}"
+								${Attr.bind}="userSubmitButton"
+								${Attr.bindTo}="disabled"
+							>
+								<span>${App.text('save')}</span>
+							</am-submit>
+							<am-modal-toggle
+								class="${CSS.button} ${CSS.buttonAccent}"
+								${Attr.modal}="#am-change-password-modal"
+							>
+								<span
+									>${App.text(
+										'systemUsersChangePassword'
+									)}</span
+								>
+							</am-modal-toggle>
+						</span>
+					</span>
+				</span>
+			</am-form>
+			<span class="${CSS.card}">
+				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					${App.text('systemUsersRegisteredInfo')}
+				</span>
+				<span class="${CSS.cardForm}">
+					<span class="${CSS.cardFormButtons}">
+						<am-modal-toggle
+							class="${CSS.button}"
+							${Attr.modal}="#am-registered-users-modal"
+						>
+							<span class="${CSS.iconText}">
+								<span
+									class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
+								>
+									<span
+										>${App.text(
+											'systemUsersRegistered'
+										)}</span
+									>
+									<span
+										class="${CSS.badge}"
+										${Attr.bind}="userCount"
+										${Attr.bindTo}="textContent"
+									></span>
+								</span>
+							</span>
+						</am-modal-toggle>
+					</span>
+					<span class="${CSS.cardFormButtons}">
+						<am-modal-toggle
+							class="${CSS.button}"
+							${Attr.modal}="#am-add-user-modal"
+						>
+							${App.text('systemUsersAdd')}
+						</am-modal-toggle>
+						<am-modal-toggle
+							class="${CSS.button}"
+							${Attr.modal}="#am-invite-user-modal"
+						>
+							${App.text('systemUsersInvite')}
+						</am-modal-toggle>
+					</span>
+				</span>
+			</span>
+		</div>
+		<!-- Modals -->
 		<am-modal id="am-change-password-modal">
-			<am-form class="${classes.modalDialog}" api="User/changePassword">
-				<div class="${classes.modalHeader}">
+			<am-form
+				class="${CSS.modalDialog}"
+				${Attr.api}="User/changePassword"
+			>
+				<div class="${CSS.modalHeader}">
 					<span>${App.text('systemUsersChangePassword')}</span>
-					<am-modal-close
-						class="${classes.modalClose}"
-					></am-modal-close>
+					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
 				</div>
-				${createField(
-					'am-password',
-					null,
-					{
-						key: 'currentPassword',
-						value: '',
-						name: 'currentPassword',
-						label: App.text('currentPassword'),
-					},
-					[],
-					{}
-				).outerHTML}
-				${createField(
-					'am-password',
-					null,
-					{
-						key: 'newPassword1',
-						value: '',
-						name: 'newPassword1',
-						label: App.text('newPassword'),
-					},
-					[],
-					{}
-				).outerHTML}
-				${createField(
-					'am-password',
-					null,
-					{
-						key: 'newPassword2',
-						value: '',
-						name: 'newPassword2',
-						label: App.text('repeatPassword'),
-					},
-					[],
-					{}
-				).outerHTML}
-				<div class="${classes.modalFooter}">
-					<am-submit class="${classes.button}">
-						<am-icon-text
-							icon="check"
-							text="${App.text('save')}"
-						></am-icon-text>
+				<div class="${CSS.modalBody}">
+					${createField(
+						'am-password',
+						null,
+						{
+							key: 'currentPassword',
+							value: '',
+							name: 'currentPassword',
+							label: App.text('currentPassword'),
+						},
+						[],
+						{}
+					).outerHTML}
+					${createField(
+						'am-password',
+						null,
+						{
+							key: 'newPassword1',
+							value: '',
+							name: 'newPassword1',
+							label: App.text('newPassword'),
+						},
+						[],
+						{}
+					).outerHTML}
+					${createField(
+						'am-password',
+						null,
+						{
+							key: 'newPassword2',
+							value: '',
+							name: 'newPassword2',
+							label: App.text('repeatPassword'),
+						},
+						[],
+						{}
+					).outerHTML}
+				</div>
+				<div class="${CSS.modalFooter}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+						${App.text('close')}
+					</am-modal-close>
+					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+						${App.text('save')}
 					</am-submit>
 				</div>
 			</am-form>
 		</am-modal>
-		<p>$${App.text('systemUsersRegisteredInfo')}</p>
-		<div>
-			<am-modal-toggle
-				class="${classes.button}"
-				modal="#am-registered-users-modal"
-			>
-				<span class="${classes.iconText}">
-					<i class="bi bi-people"></i>
-					<span
-						class="${classes.flex} ${classes.flexAlignCenter} ${classes.flexGap}"
-					>
-						<span>${App.text('systemUsersRegistered')}</span>
-						<span
-							class="${classes.badge}"
-							bind="userCount"
-							bindto="textContent"
-						></span>
-					</span>
-				</span>
-			</am-modal-toggle>
-			<am-modal id="am-registered-users-modal" nofocus>
-				<div class="${classes.modalDialog}">
-					<div class="${classes.modalHeader}">
-						<span>${App.text('systemUsersRegistered')}</span>
-						<am-modal-close
-							class="${classes.modalClose}"
-						></am-modal-close>
-					</div>
-					<am-delete-users-form
-						api="UserCollection/edit"
-						event="${eventNames.appStateRequireUpdate}"
-					></am-delete-users-form>
-					<div class="${classes.modalFooter}">
-						<am-modal-close class="${classes.button}">
-							${App.text('close')}
-						</am-modal-close>
-						<am-submit
-							class="${classes.button}"
-							form="UserCollection/edit"
-						>
-							${App.text('deleteSelected')}
-						</am-submit>
-					</div>
+		<am-modal id="am-registered-users-modal" nofocus>
+			<div class="${CSS.modalDialog}">
+				<div class="${CSS.modalHeader}">
+					<span>${App.text('systemUsersRegistered')}</span>
+					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
 				</div>
-			</am-modal>
-		</div>
-		<div>
-			<am-modal-toggle
-				class="${classes.button}"
-				modal="#am-add-user-modal"
+				<div class="${CSS.modalBody}">
+					<am-delete-users-form
+						${Attr.api}="UserCollection/edit"
+						${Attr.event}="${EventName.appStateRequireUpdate}"
+					></am-delete-users-form>
+				</div>
+				<div class="${CSS.modalFooter}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+						${App.text('close')}
+					</am-modal-close>
+					<am-submit
+						class="${CSS.button} ${CSS.buttonAccent}"
+						${Attr.form}="UserCollection/edit"
+					>
+						${App.text('deleteSelected')}
+					</am-submit>
+				</div>
+			</div>
+		</am-modal>
+		<am-modal id="am-add-user-modal">
+			<am-form
+				class="${CSS.modalDialog}"
+				${Attr.api}="UserCollection/createUser"
+				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
-				${App.text('systemUsersAdd')}
-			</am-modal-toggle>
-			<am-modal id="am-add-user-modal">
-				<am-form
-					class="${classes.modalDialog}"
-					api="UserCollection/createUser"
-					event="${eventNames.appStateRequireUpdate}"
-				>
-					<div class="${classes.modalHeader}">
-						<span>${App.text('systemUsersAdd')}</span>
-						<am-modal-close
-							class="${classes.modalClose}"
-						></am-modal-close>
-					</div>
+				<div class="${CSS.modalHeader}">
+					<span>${App.text('systemUsersAdd')}</span>
+					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
+				</div>
+				<div class="${CSS.modalBody}">
 					${createField(
 						'am-input',
 						null,
@@ -293,34 +331,28 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 						[],
 						{}
 					).outerHTML}
-					<div class="${classes.modalFooter}">
-						<am-modal-close class="${classes.button}">
-							${App.text('close')}
-						</am-modal-close>
-						<am-submit class="${classes.button}">
-							${App.text('systemUsersAdd')}
-						</am-submit>
-					</div>
-				</am-form>
-			</am-modal>
-			<am-modal-toggle
-				class="${classes.button}"
-				modal="#am-invite-user-modal"
+				</div>
+				<div class="${CSS.modalFooter}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+						${App.text('close')}
+					</am-modal-close>
+					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+						${App.text('systemUsersAdd')}
+					</am-submit>
+				</div>
+			</am-form>
+		</am-modal>
+		<am-modal id="am-invite-user-modal">
+			<am-form
+				class="${CSS.modalDialog}"
+				${Attr.api}="UserCollection/inviteUser"
+				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
-				${App.text('systemUsersInvite')}
-			</am-modal-toggle>
-			<am-modal id="am-invite-user-modal">
-				<am-form
-					class="${classes.modalDialog}"
-					api="UserCollection/inviteUser"
-					event="${eventNames.appStateRequireUpdate}"
-				>
-					<div class="${classes.modalHeader}">
-						<span>${App.text('systemUsersInvite')}</span>
-						<am-modal-close
-							class="${classes.modalClose}"
-						></am-modal-close>
-					</div>
+				<div class="${CSS.modalHeader}">
+					<span>${App.text('systemUsersInvite')}</span>
+					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
+				</div>
+				<div class="${CSS.modalBody}">
 					${createField(
 						'am-input',
 						null,
@@ -345,16 +377,16 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 						[],
 						{}
 					).outerHTML}
-					<div class="${classes.modalFooter}">
-						<am-modal-close class="${classes.button}">
-							${App.text('close')}
-						</am-modal-close>
-						<am-submit class="${classes.button}">
-							${App.text('systemUsersSendInvitation')}
-						</am-submit>
-					</div>
-				</am-form>
-			</am-modal>
-		</div>
+				</div>
+				<div class="${CSS.modalFooter}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+						${App.text('close')}
+					</am-modal-close>
+					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+						${App.text('systemUsersSendInvitation')}
+					</am-submit>
+				</div>
+			</am-form>
+		</am-modal>
 	`;
 };

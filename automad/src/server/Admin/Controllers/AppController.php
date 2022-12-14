@@ -114,7 +114,7 @@ class AppController {
 					'fields' => Parse::csv(AM_FEED_FIELDS)
 				),
 				'translation' => AM_FILE_UI_TRANSLATION,
-				'users'=> $UserCollectionModel->getCollection(),
+				'users'=> array_values($UserCollectionModel->getCollection()),
 				'tempDirectory' => FileSystem::getTmpDir()
 			)
 		));

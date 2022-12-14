@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { html } from '../../../../core';
+import { Attr, html } from '../../../../core';
 import { Listener } from '../../../../types';
 
 /**
@@ -43,6 +43,6 @@ import { Listener } from '../../../../types';
  */
 export const renderUpdateSection = (listeners: Listener[]): string => {
 	return html`<am-system-update-form
-		api="System/update"
+		${Attr.api}="System/update"
 	></am-system-update-form>`;
 };
