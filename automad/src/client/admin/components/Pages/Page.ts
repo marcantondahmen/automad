@@ -81,7 +81,7 @@ const renderMovePageModal = (): string => {
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
-						<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+						<am-modal-close class="${CSS.button}">
 							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
@@ -220,7 +220,7 @@ const renderFileImportModal = (): string => {
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
-						<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+						<am-modal-close class="${CSS.button}">
 							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">

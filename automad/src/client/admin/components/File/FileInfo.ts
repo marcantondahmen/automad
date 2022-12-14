@@ -112,12 +112,8 @@ export class FileInfoComponent extends BaseComponent {
 					<span>${App.text('editFileInfo')}</span>
 					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
 				</div>
+				<input type="hidden" name="old-name" value="${file.basename}" />
 				<div class="${CSS.modalBody}">
-					<input
-						type="hidden"
-						name="old-name"
-						value="${file.basename}"
-					/>
 					${createField(
 						'am-input',
 						null,
@@ -144,7 +140,7 @@ export class FileInfoComponent extends BaseComponent {
 				<div class="${CSS.modalFooter}">
 					<a
 						href="${file.url}"
-						class="${CSS.button} ${CSS.buttonLink}"
+						class="${CSS.button}"
 						download="$${file.basename}"
 					>
 						${App.text('downloadFile')}

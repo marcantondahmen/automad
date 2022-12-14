@@ -126,7 +126,7 @@ class PageSelectTreeComponent extends NavTreeComponent {
 		label.innerHTML = html`
 			<am-icon-text
 				${Attr.icon}="${icon}"
-				${Attr.text}="${page.title}"
+				${Attr.text}="$${page.title}"
 			></am-icon-text>
 			<input
 				class="${CSS.displayNone}"

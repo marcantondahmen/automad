@@ -103,11 +103,11 @@ export class ConfigFileFormComponent extends FormComponent {
 						class="${CSS.modalHeader} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
 					>
 						<span>${App.text('systemConfigFileEdit')}</span>
-						<span>
-							<am-modal-close
-								class="${CSS.button} ${CSS.buttonLink}"
-							>
-								${App.text('close')}
+						<span
+							class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
+						>
+							<am-modal-close class="${CSS.button}">
+								${App.text('cancel')}
 							</am-modal-close>
 							<am-submit
 								class="${CSS.button} ${CSS.buttonAccent}"

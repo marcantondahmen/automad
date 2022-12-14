@@ -238,7 +238,7 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 					).outerHTML}
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
@@ -260,7 +260,7 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 					></am-delete-users-form>
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit
@@ -333,7 +333,7 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 					).outerHTML}
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
@@ -379,7 +379,7 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 					).outerHTML}
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button} ${CSS.buttonLink}">
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">

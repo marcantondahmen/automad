@@ -189,7 +189,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 				list += html`<li>${item}</li>`;
 			});
 
-			return html`<ul class="${CSS.textParagraph}">
+			return html`<ul class="${CSS.textParagraph} ${CSS.textMono}">
 				${list}
 			</ul>`;
 		};
@@ -198,7 +198,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 			<div class="${CSS.alert}">
 				<input type="hidden" name="update" value="run" />
 				<div class="${CSS.alertIcon}">
-					<i class="bi bi-download"></i>
+					<i class="bi bi-tag"></i>
 				</div>
 				<div class="${CSS.alertText}">
 					<div>
@@ -207,7 +207,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 						<br />
 						${App.text('systemUpdateAvailable')}
 					</div>
-					<div>
+					<div class="${CSS.flex} ${CSS.flexGap}">
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('systemUpdateTo')}
 							<span class="${CSS.badge}">${data.latest}</span>

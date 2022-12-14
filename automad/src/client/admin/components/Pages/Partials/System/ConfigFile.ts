@@ -45,7 +45,7 @@ export const renderConfigFileSection = (listeners: Listener[]): string => {
 	return html`
 		<div class="${CSS.alert}">
 			<div class="${CSS.alertIcon}">
-				<i class="bi bi-hand-index"></i>
+				<i class="bi bi-braces-asterisk"></i>
 			</div>
 			<div class="${CSS.alertText}">
 				<div>${App.text('systemConfigFileInfo')}</div>
