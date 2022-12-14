@@ -83,10 +83,6 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	 * @param data
 	 */
 	private render(data: KeyValueMap): void {
-		if (!data) {
-			return;
-		}
-
 		const dashboard = create(
 			'am-link',
 			[CSS.breadcrumbsItem],
@@ -95,6 +91,10 @@ class PageBreadcrumbsComponent extends BaseComponent {
 		);
 
 		dashboard.textContent = App.text('dashboardTitle');
+
+		if (!data) {
+			return;
+		}
 
 		data.forEach((page: KeyValueMap, index: number) => {
 			const target = `${Route.page}?url=${encodeURIComponent(page.url)}`;
