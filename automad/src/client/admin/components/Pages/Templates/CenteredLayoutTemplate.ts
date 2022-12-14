@@ -40,20 +40,16 @@ export const centered = ({ title, main }: Partials): string => {
 		<div class="${CSS.layoutCentered}">
 			<div class="${CSS.layoutCenteredNavbar}">
 				<nav class="${CSS.navbar}">
-					<span>
-						<a href="${App.baseURL}" class="${CSS.navbarItem}">
-							$${App.sitename} &mdash; $${title}
-						</a>
-					</span>
-					<span>
-						<a
-							href="${App.baseURL}"
-							class="${CSS.navbarItem}"
-							${Attr.tooltip}="${App.text('close')}"
-						>
-							<i class="bi bi-x"></i>
-						</a>
-					</span>
+					<a href="${App.baseURL}" class="${CSS.navbarItem}">
+						<am-logo></am-logo>
+					</a>
+					<a
+						href="${App.baseURL}"
+						class="${CSS.navbarItem}"
+						${Attr.tooltip}="${App.text('close')}"
+					>
+						<i class="bi bi-x"></i>
+					</a>
 				</nav>
 			</div>
 			<div class="${CSS.layoutCenteredMain}">

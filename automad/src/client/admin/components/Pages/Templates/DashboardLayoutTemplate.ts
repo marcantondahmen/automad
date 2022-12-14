@@ -73,7 +73,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<am-key-combo-badge ${Attr.key}="J">
 					</am-modal-toggle>
 					<span class="${CSS.navbarGroup}">
-						<am-navbar-system-update-indicator></am-navbar-system-update-indicator>
+						<am-navbar-update-indicator></am-navbar-update-indicator>
 						<am-navbar-outdated-packages-indicator></am-navbar-outdated-packages-indicator>
 						<am-navbar-debug-indicator></am-navbar-debug-indicator>
 						<am-dropdown ${Attr.right}>

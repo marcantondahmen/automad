@@ -241,7 +241,7 @@ export class AutocompleteComponent extends BaseComponent {
 		element.innerHTML = html`
 			<am-icon-text
 				${Attr.icon}="link"
-				${Attr.text}="${item.title}"
+				${Attr.text}="$${item.title}"
 			></am-icon-text>
 		`;
 

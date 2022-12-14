@@ -46,12 +46,12 @@ import { BaseComponent } from '../Base';
  *             <span class="am-c-nav__item">
  *                 <a href="" class="am-c-nav__link">Home</a>
  *             </span>
- *             <am-nav-item view="" icon="window-sidebar" text="Dashboard"></am-nav-item>
+ *             <am-nav-item view="" ${Attr.icon}="window-sidebar" ${Attr.text}="Dashboard"></am-nav-item>
  *             ...
  *         </nav>
  *         <nav class="am-c-nav">
  *             <span class="am-c-nav__label">Pages</span>
- *             <am-nav-tree pages='[{ ... }]'></am-nav-tree>
+ *             <am-nav-tree></am-nav-tree>
  *         </nav>
  *     </div>
  * </am-sidebar>
