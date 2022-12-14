@@ -193,6 +193,12 @@ export const enum CSS {
 	navbarItem = 'am-c-navbar__item',
 	navbarGroup = 'am-c-navbar__group',
 
+	notify = 'am-c-notify',
+	notifyNode = 'am-c-notify__node',
+	notifyIcon = 'am-c-notify__icon',
+	notifyText = 'am-c-notify__text',
+	notifyClose = 'am-c-notify__close',
+
 	overflowHidden = 'am-u-overflow-hidden',
 
 	privacyIndicator = 'am-c-privacy-indicator',

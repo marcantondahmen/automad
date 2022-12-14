@@ -26,14 +26,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
 import Toastify from 'toastify-js';
-import { query, create } from '.';
+import { query, create, CSS } from '.';
 import { KeyValueMap } from '../types';
 
 const defaults: Toastify.Options = {
@@ -56,21 +56,19 @@ const defaults: Toastify.Options = {
  * @param params.duration
  * @param params.className
  */
-const notify = ({ message, icon, duration, className }: KeyValueMap) => {
+const notify = ({ message, icon, duration }: KeyValueMap) => {
 	const ui = query('html.am-ui > body, body .am-ui');
-	const node = create('div', ['am-c-notify__node'], {});
+	const node = create('div', [CSS.notifyNode], {});
 
-	create('i', ['am-c-notify__icon', 'bi', `bi-${icon}`], {}, node);
-	create('span', ['am-c-notify__text'], {}, node).innerHTML = message;
-	create('span', ['am-c-notify__close'], {}, node);
-
-	className = `am-c-notify ${className}`;
+	create('i', [CSS.notifyIcon, 'bi', `bi-${icon}`], {}, node);
+	create('span', [CSS.notifyText], {}, node).innerHTML = message;
+	create('span', [CSS.notifyClose], {}, node);
 
 	const toast: KeyValueMap = Toastify(
 		Object.assign(defaults, {
 			node,
 			duration,
-			className,
+			className: CSS.notify,
 			selector: ui,
 			onClick: function () {
 				toast.hideToast();
@@ -90,8 +88,7 @@ export const notifyError = (message: string): void => {
 	notify({
 		message,
 		duration: -1,
-		icon: 'exclamation-triangle',
-		className: 'am-c-notify--error',
+		icon: 'slash-circle',
 	});
 };
 
@@ -104,7 +101,6 @@ export const notifySuccess = (message: string): void => {
 	notify({
 		message,
 		duration: 3000,
-		icon: 'check',
-		className: '',
+		icon: 'check-circle',
 	});
 };
