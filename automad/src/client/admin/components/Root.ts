@@ -92,6 +92,8 @@ export class RootComponent extends BaseComponent {
 		applyTheme(getTheme());
 		this.progressBar(10);
 
+		this.initMissingImageErrorHandler();
+
 		await App.bootstrap(this);
 		await this.update();
 
@@ -216,6 +218,23 @@ export class RootComponent extends BaseComponent {
 		setTimeout(() => {
 			this.style.setProperty('--progress', `${progress}%`);
 		}, 0);
+	}
+
+	/**
+	 * Detect missing images and replace them with an icon.
+	 */
+	private initMissingImageErrorHandler(): void {
+		this.addEventListener(
+			'error',
+			(event: Event) => {
+				const target = event.target as HTMLElement;
+
+				if (target.tagName.toLowerCase() === 'img') {
+					target.replaceWith(create('i', ['bi', 'bi-slash-circle']));
+				}
+			},
+			true
+		);
 	}
 }
 
