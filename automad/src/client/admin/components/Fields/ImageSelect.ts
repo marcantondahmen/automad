@@ -209,12 +209,12 @@ class ImageSelectComponent extends BaseFieldComponent {
 						</div>
 					</div>
 					<am-image-picker
-						${Attr.label}="${App.text('sharedImages')}"
+						${Attr.page}="${getPageURL()}"
+						${Attr.label}="${App.text('pageImages')}"
 						${Attr.binding}="${inputBindingName}"
 					></am-image-picker>
 					<am-image-picker
-						${Attr.page}="${getPageURL()}"
-						${Attr.label}="${App.text('pageImages')}"
+						${Attr.label}="${App.text('sharedImages')}"
 						${Attr.binding}="${inputBindingName}"
 					></am-image-picker>
 				</div>

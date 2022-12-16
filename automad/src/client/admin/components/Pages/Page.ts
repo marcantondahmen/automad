@@ -81,7 +81,9 @@ const renderMovePageModal = (): string => {
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
-						<am-modal-close class="${CSS.button}">
+						<am-modal-close
+							class="${CSS.button} ${CSS.buttonPrimary}"
+						>
 							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
@@ -103,7 +105,7 @@ const renderDropdown = (): string => {
 		<am-dropdown ${Attr.right}>
 			<span class="${CSS.menuItem}">
 				<span>${App.text('more')}</span>
-				<i class="bi bi-chevron-down"></i>
+				<span class="${CSS.dropdownArrow}"></span>
 			</span>
 			<div class="${CSS.dropdownItems}">
 				<a
@@ -220,7 +222,9 @@ const renderFileImportModal = (): string => {
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
-						<am-modal-close class="${CSS.button}">
+						<am-modal-close
+							class="${CSS.button} ${CSS.buttonPrimary}"
+						>
 							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
@@ -269,7 +273,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 								${App.text('importFromUrl')}
 							</am-modal-toggle>
 							<am-file-collection-submit
-								class="${CSS.button}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 								${Attr.form}="FileCollection/list"
 							>
 								${App.text('deleteSelected')}

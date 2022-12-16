@@ -51,7 +51,6 @@ export const enum CSS {
 	button = 'am-e-button',
 	buttonAccent = 'am-e-button--accent',
 	buttonPrimary = 'am-e-button--primary',
-	buttonLink = 'am-e-button--link',
 	buttonIcon = 'am-e-button--icon',
 
 	card = 'am-c-card',
@@ -88,6 +87,8 @@ export const enum CSS {
 	dropdownItemsStretch = 'am-c-dropdown__items--stretch',
 	dropdownItemsAutocomplete = 'am-c-dropdown__items--autocomplete',
 	dropdownLink = 'am-c-dropdown__link',
+
+	dropdownArrow = 'am-e-dropdown-arrow',
 
 	feedFieldSelect = 'am-c-feed-field-select',
 	feedFieldSelectMuted = 'am-c-feed-field-select--muted',

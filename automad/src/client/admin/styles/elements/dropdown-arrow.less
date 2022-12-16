@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
@@ -32,28 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, CSS, EventName, listen, queryAll } from '.';
+.am-e-dropdown-arrow {
+	display: inline-flex;
 
-/**
- * Initialize all toggles within a given container and toggle the visibily of their targets accordingly.
- *
- * @param container
- */
-export const initCheckboxToggles = (container: HTMLElement) => {
-	const checkboxes = queryAll(
-		`input[${Attr.toggle}]`,
-		container
-	) as HTMLInputElement[];
-
-	checkboxes.forEach((checkbox) => {
-		const targets = queryAll(checkbox.getAttribute(Attr.toggle));
-		const toggleTargets = () => {
-			targets.forEach((target) => {
-				target.classList.toggle(CSS.displayNone, !checkbox.checked);
-			});
-		};
-
-		listen(checkbox, `change ${EventName.changeByBinding}`, toggleTargets);
-		toggleTargets();
-	});
-};
+	&:after {
+		content: '⌃';
+		margin-top: -0.43em;
+		margin-right: -0.08em;
+		font-size: 1.1em;
+		font-weight: 680;
+		color: var(--am-clr-text-paragraph);
+		transform: rotateZ(180deg);
+		pointer-events: none;
+	}
+}

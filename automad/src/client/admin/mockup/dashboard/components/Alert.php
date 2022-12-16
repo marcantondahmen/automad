@@ -8,9 +8,12 @@
 				<div>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dicta quibusdam facere ducimus quae porro consectetur dignissimos, eaque delectus laborum rerum, commodi voluptate, minus tempora eligendi non repellat assumenda quo?
 				</div>
-				<div>
-					<button class="am-e-button am-e-button--accent">Update Automad</button>
-					<button class="am-e-button am-e-button--link">Open Readme</button>
+				<div class="am-u-flex am-u-flex--gap">
+					<button class="am-e-button am-e-button--accent">
+						<span>Update</span>
+						<span class="am-e-badge">Badge</span>
+					</button>
+					<button class="am-e-button am-e-button--primary">Open Readme</button>
 				</div>
 			</div>
 		</div>

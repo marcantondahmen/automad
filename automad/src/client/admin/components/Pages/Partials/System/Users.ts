@@ -124,7 +124,7 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 						</span>
 						<span class="${CSS.cardFormButtons}">
 							<am-submit
-								class="${CSS.button}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 								${Attr.bind}="userSubmitButton"
 								${Attr.bindTo}="disabled"
 							>
@@ -151,7 +151,7 @@ export const renderUsersSection = (listeners: Listener[]): string => {
 				<span class="${CSS.cardForm}">
 					<span class="${CSS.cardFormButtons}">
 						<am-modal-toggle
-							class="${CSS.button}"
+							class="${CSS.button} ${CSS.buttonPrimary}"
 							${Attr.modal}="#am-registered-users-modal"
 						>
 							<span class="${CSS.iconText}">

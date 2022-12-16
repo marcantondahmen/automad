@@ -81,8 +81,12 @@ class URLComponent extends BaseFieldComponent {
 			body
 		) as AutocompleteComponent;
 
-		create('am-modal-close', [CSS.button], {}, footer).textContent =
-			App.text('cancel');
+		create(
+			'am-modal-close',
+			[CSS.button, CSS.buttonPrimary],
+			{},
+			footer
+		).textContent = App.text('cancel');
 
 		const buttonOk = create(
 			'button',

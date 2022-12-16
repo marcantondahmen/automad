@@ -34,6 +34,7 @@
 
 .am-f-select {
 	&:extend(.am-f-input);
+	&:extend(.am-e-dropdown-arrow all);
 
 	position: relative;
 	display: flex;
@@ -41,17 +42,6 @@
 	align-items: center;
 	gap: @am-flex-gap;
 	padding: 0 @am-form-padding-x;
-
-	&:after {
-		content: '⌃';
-		margin-top: -0.38em;
-		margin-right: -0.08em;
-		font-size: 1.2em;
-		font-weight: 540;
-		color: var(--am-clr-text-muted);
-		transform: rotateZ(180deg);
-		pointer-events: none;
-	}
 
 	&&--inline {
 		display: inline-flex;

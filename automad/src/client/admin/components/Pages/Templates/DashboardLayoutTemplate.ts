@@ -205,7 +205,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
-						<am-modal-close class="${CSS.button}">
+						<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('cancel')}
 						</am-modal-close>
 						<am-submit

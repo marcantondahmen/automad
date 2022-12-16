@@ -27,7 +27,7 @@
 		<div class="am-c-dropdown am-c-dropdown--hover am-c-dropdown--right">
 			<span class="am-c-menu__item">
 				<span>More</span>
-				<i class="bi bi-chevron-down"></i>
+				<span class="am-e-dropdown-arrow"></span>
 			</span>
 			<div class="am-c-dropdown__items">
 				<a class="am-c-dropdown__link">
