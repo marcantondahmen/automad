@@ -140,7 +140,7 @@ export class FileInfoComponent extends BaseComponent {
 				<div class="${CSS.modalFooter}">
 					<a
 						href="${file.url}"
-						class="${CSS.button}"
+						class="${CSS.button} ${CSS.buttonPrimary}"
 						download="$${file.basename}"
 					>
 						${App.text('downloadFile')}
