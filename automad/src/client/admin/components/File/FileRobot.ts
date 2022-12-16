@@ -85,6 +85,7 @@ class FileRobotComponent extends BaseComponent {
 			{ [Attr.destroy]: '', [Attr.noEsc]: '' },
 			document.body
 		);
+
 		const dialog = create(
 			'am-form',
 			[CSS.modalDialog, CSS.modalDialogFullscreen],
@@ -100,17 +101,17 @@ class FileRobotComponent extends BaseComponent {
 	/**
 	 * Init FileRobot.
 	 *
-	 * @see {@link Config https://github.com/scaleflex/filerobot-image-editor/tree/v4#vanillajs-example}
-	 * @see {@link Defaults https://github.com/scaleflex/filerobot-image-editor/blob/v4/packages/react-filerobot-image-editor/src/context/defaultConfig.js}
-	 * @see {@link Theme https://github.com/scaleflex/filerobot-image-editor/tree/v4#theme}
+	 * @see {@link Config https://github.com/scaleflex/filerobot-image-editor/#config}
+	 * @see {@link Example https://github.com/scaleflex/filerobot-image-editor/#vanillajs-example}
+	 * @see {@link Theme https://github.com/scaleflex/filerobot-image-editor/tree/master#theme}
 	 * @see {@link ThemeColors https://github.com/scaleflex/ui/blob/master/packages/ui/src/utils/types/palette/color.ts#L1}
-	 * @see {@link Translations https://github.com/scaleflex/filerobot-image-editor/blob/v4/packages/react-filerobot-image-editor/src/context/defaultTranslations.js}
+	 * @see {@link Translations https://github.com/scaleflex/filerobot-image-editor/blob/master/packages/react-filerobot-image-editor/src/context/defaultTranslations.js}
 	 * @param form
 	 * @param modal
 	 */
 	private initFileRobot(form: FormComponent, modal: ModalComponent): void {
 		const config = {
-			img: this.elementAttributes[Attr.file],
+			source: this.elementAttributes[Attr.file],
 			savingPixelRatio: 1,
 			previewPixelRatio: window.devicePixelRatio,
 			useBackendTranslations: false,
