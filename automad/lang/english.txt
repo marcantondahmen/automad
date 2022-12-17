@@ -62,6 +62,10 @@ brightnessTool: Brightness
 
 -
 
+browseFiles: Browse Files
+
+-
+
 cacheClearedSuccess: The cache got cleared successfully!
 
 -
@@ -339,6 +343,14 @@ imageTool: Image
 
 -
 
+import: Import
+
+-
+
+importUrl: Enter a file URL
+
+-
+
 importFailedError: The file import has failed!
 
 -
@@ -379,7 +391,7 @@ isNotImage: is not image
 
 -
 
-jumpbarPlaceholder: Jump to ...
+jumpbarButtonText: Search or open
 
 -
 
@@ -436,6 +448,10 @@ nameIsRequired: Name is required.
 -
 
 newPassword: New Password
+
+-
+
+noImagesFound: No images found 
 
 -
 
@@ -507,6 +523,10 @@ packageUpdatedAllSuccess: Successfully updated all packages
 
 -
 
+packagesUpdatesAvailable: There are package updates available
+
+-
+
 packagistConnectionError: Can't connect to the Packagist API
 
 -
@@ -520,6 +540,10 @@ pageColors: Colors
 -
 
 pageContent: Content
+
+-
+
+pageImages: Page Images 
 
 -
 
@@ -747,6 +771,10 @@ sharedTitle: General Data and Files
 
 -
 
+sharedImages: Shared images
+
+-
+
 showImageTitle: Show original image
 
 -
@@ -767,7 +795,15 @@ signInError: Invalid username or password
 
 -
 
+signOut: Sign out 
+
+-
+
 signedOut: Signed out 
+
+-
+
+signedOutSuccess: You have been successfully signed out.
 
 -
 
@@ -983,6 +1019,10 @@ systemUpdateTo: Update to version
 
 -
 
+systemUpdateTooltip: A system update is available
+
+-
+
 systemUpToDate: Automad is up to date
 
 -
@@ -1079,7 +1119,7 @@ uploadCancelled: The upload has been cancelled
 
 -
 
-uploadedFiles: Uploaded Files
+uploadedFiles: Files
 
 -
 
@@ -1092,6 +1132,10 @@ uploadImageError: Error while uploading the image.
 -
 
 uploadWatermark: Upload watermark
+
+-
+
+url: URL
 
 -
 
