@@ -49,11 +49,11 @@ import { BaseComponent } from './Base';
  * A breadcrumbs nav for a page.
  *
  * @example
- * <am-page-breadcrumbs></am-page-breadcrumbs>
+ * <am-breadcrumbs-page></am-breadcrumbs-page>
  *
  * @extends BaseComponent
  */
-class PageBreadcrumbsComponent extends BaseComponent {
+class BreadcrumbsPageComponent extends BaseComponent {
 	/**
 	 * The constructor.
 	 */
@@ -120,4 +120,4 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-page-breadcrumbs', PageBreadcrumbsComponent);
+customElements.define('am-breadcrumbs-page', BreadcrumbsPageComponent);

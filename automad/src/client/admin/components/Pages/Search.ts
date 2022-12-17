@@ -55,23 +55,11 @@ export class SearchComponent extends BaseDashboardLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<section class="${CSS.layoutDashboardSection}">
-				<div
-					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentNarrow}"
-				>
-					<div class="${CSS.breadcrumbs}">
-						<am-link
-							class="${CSS.breadcrumbsItem}"
-							${Attr.target}="${Route.search}"
-						>
-							<am-icon-text
-								${Attr.icon}="search"
-								${Attr.text}="${App.text('searchTitle')}"
-							></am-icon-text>
-						</am-link>
-					</div>
-				</div>
-			</section>
+			<am-breadcrumbs-route
+				${Attr.target}="${Route.search}"
+				${Attr.text}="${App.text('searchTitle')}"
+				${Attr.narrow}
+			></am-breadcrumbs-route>
 			<section class="${CSS.layoutDashboardSection}">
 				<div
 					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentNarrow}"

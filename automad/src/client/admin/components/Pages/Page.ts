@@ -49,7 +49,7 @@ const renderBreadcrumbs = (): string => {
 	return html`
 		<section class="${CSS.layoutDashboardSection}">
 			<div class="${CSS.layoutDashboardContent}">
-				<am-page-breadcrumbs></am-page-breadcrumbs>
+				<am-breadcrumbs-page></am-breadcrumbs-page>
 			</div>
 		</section>
 	`;

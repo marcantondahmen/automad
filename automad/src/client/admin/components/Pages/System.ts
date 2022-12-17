@@ -168,23 +168,11 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 		menu.data = this.menuData;
 
 		return html`
-			<section class="${CSS.layoutDashboardSection}">
-				<div
-					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentNarrow}"
-				>
-					<div class="${CSS.breadcrumbs}">
-						<am-link
-							class="${CSS.breadcrumbsItem}"
-							${Attr.target}="${Route.system}"
-						>
-							<am-icon-text
-								${Attr.icon}="sliders"
-								${Attr.text}="${App.text('systemTitle')}"
-							></am-icon-text>
-						</am-link>
-					</div>
-				</div>
-			</section>
+			<am-breadcrumbs-route
+				${Attr.target}="${Route.system}"
+				${Attr.text}="${App.text('systemTitle')}"
+				${Attr.narrow}
+			></am-breadcrumbs-route>
 			${menu.outerHTML}
 			<section class="${CSS.layoutDashboardSection}">
 				<div

@@ -113,6 +113,8 @@ import './components/Switcher/SwitcherSection';
 
 import './components/Alert';
 import './components/Autocomplete';
+import './components/BreadcrumbsPage';
+import './components/BreadcrumbsRoute';
 import './components/Checkbox';
 import './components/CustomIconCheckbox';
 import './components/Copy';
@@ -126,7 +128,6 @@ import './components/Link';
 import './components/Logo';
 import './components/NavItem';
 import './components/NavTree';
-import './components/PageBreadcrumbs';
 import './components/PageSelectTree';
 import './components/Root';
 import './components/Select';
