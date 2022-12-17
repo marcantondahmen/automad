@@ -37,11 +37,14 @@
 		&:extend(.am-e-button);
 		padding: 0;
 		width: @am-form-height;
-		font-size: 1.2rem;
-		line-height: 1.1rem;
 		color: var(--am-clr-text-muted);
 		border-color: var(--am-clr-border);
 		cursor: pointer;
+
+		& .bi {
+			font-size: 1.2rem;
+			line-height: 1.1rem;
+		}
 	}
 
 	& input:checked + * {
