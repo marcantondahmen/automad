@@ -31,19 +31,60 @@
  *
  * Licensed under the MIT license.
  */
-/* 
-@c-file-robot-tab-width: 7rem;
+
+.am-ui .SfxPopper-root *,
+.am-ui .FIE_root *,
+.am-ui .SfxModal-Wrapper .SfxModal-Overlay * {
+	font-family: @am-base-font-family !important;
+}
 
 .am-ui .am-c-modal .FIE_root {
 	& .FIE_topbar {
+		position: relative;
+		justify-content: flex-start;
 		font-size: 1rem;
 
 		&-buttons-wrapper {
-			width: ~'calc(@{c-file-robot-tab-width} + 20%)';
+			align-items: center;
+			gap: 0.5rem;
+			width: 30%;
+		}
+
+		&-save-wrapper {
+			width: auto !important;
+			height: 2rem !important;
+		}
+
+		&-history-buttons {
+			white-space: nowrap;
+			gap: 0.6rem;
+
+			& .SfxIconButton-root {
+				width: @am-form-height;
+				font-size: 1.15rem !important;
+				font-weight: 520;
+
+				& svg {
+					display: none;
+				}
+			}
+		}
+
+		&-reset-button:after {
+			content: '↺';
+		}
+
+		&-undo-button:after {
+			content: '↩';
+		}
+
+		&-redo-button:after {
+			content: '↪';
 		}
 
 		&-center-options {
-			width: 20%;
+			gap: 0.65rem;
+			width: 40%;
 			justify-content: center;
 
 			& > * {
@@ -61,107 +102,198 @@
 		}
 
 		&-close-button {
-			width: 20%;
-			justify-content: end;
-		}
+			position: absolute;
+			top: 0.6rem;
+			right: 1rem;
+			color: var(--am-clr-text);
 
-		&-save-wrapper {
-			width: auto !important;
-			height: 2rem !important;
-		}
+			&:hover {
+				color: var(--am-clr-text-hover);
+			}
 
-		&-history-buttons {
-			white-space: nowrap;
-		}
-	}
+			&:after {
+				content: '✗';
+				font-size: 1.5rem;
+				font-weight: 460;
+				padding: 0.5rem;
+			}
 
-	& .FIE_tabs {
+			& svg {
+				display: none;
+			}
+		}
 	}
 
 	& .FIE_tab {
-		border: var(--am-border);
-		border-radius: var(--am-radius);
+		border: @am-border;
+		border-radius: 0.3rem;
 		padding: 0 0.4em;
 
-		&[aria-selected='true'] {
-			background-color: var(--am-button-active-bg);
+		& > svg {
+			width: 16px !important;
+			height: 16px !important;
 		}
 
 		&-label {
 			display: block;
-			width: @c-file-robot-tab-width;
 			max-width: 100%;
+			font-size: 0.8rem;
+			font-weight: 580 !important;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			text-align: center;
 		}
+
+		&[aria-selected='true'] {
+			background-color: var(--am-clr-primary-background);
+
+			& * {
+				color: var(--am-clr-primary-text) !important;
+			}
+		}
+	}
+
+	& .FIE_editor-content {
+		& .FIE_carousel-prev-button,
+		& .FIE_carousel-next-button {
+			display: flex;
+			align-items: center;
+			background: none !important;
+
+			& > svg {
+				display: none;
+			}
+
+			&:after {
+				text-align: center;
+				width: 28px;
+				line-height: 28px;
+				font-size: 15px;
+				font-weight: 560;
+				border-radius: 28px;
+				color: var(--am-clr-accent-text);
+				background-color: var(--am-clr-accent-background);
+			}
+		}
+
+		& .FIE_carousel-prev-button:after {
+			content: '←';
+		}
+
+		& .FIE_carousel-next-button:after {
+			content: '→';
+		}
 	}
 }
 
-.am-ui .SfxModal-Wrapper .SfxModal-Overlay {
-}
+.am-ui .FIE_topbar-buttons-wrapper,
+.am-ui .SfxModalActions-root {
+	& .SfxButton-root {
+		&:extend(.am-e-button all);
+		margin: 0 !important;
+		border-color: var(--am-clr-border-button) !important;
+		outline: 0 !important;
 
-.am-ui > body .SfxButton-root {
-	font-size: 0.8rem !important;
-	height: ~'calc(var(--am-button-line-height) - var(--am-border-width))' !important;
-	line-height: var(--am-button-line-height);
-	padding: 0 var(--am-button-padding);
-	border-radius: var(--am-radius);
-	overflow: hidden;
+		&:hover,
+		&:focus,
+		&:active {
+			border-color: var(--am-clr-border-button) !important;
+			outline: 0 !important;
+		}
 
-	& > .SfxButton-Label {
-		font-family: @am-base-font-family;
-		font-size: inherit;
+		& > .SfxButton-Label {
+			font-family: @am-base-font-family !important;
+			font-size: inherit !important;
+			font-weight: inherit !important;
+			line-height: inherit !important;
+		}
+	}
+
+	& [color='primary'].SfxButton-root,
+	& [color='error'].SfxButton-root {
+		color: var(--am-clr-accent-text) !important;
+		background-color: var(--am-clr-accent-background) !important;
+		border: 1px solid var(--am-clr-accent-background) !important;
+
+		&:hover,
+		&:active {
+			background-color: var(--am-clr-accent-background-hover) !important;
+			border-color: var(--am-clr-accent-background-hover) !important;
+		}
 	}
 }
 
-.am-ui .SfxModal-Wrapper > .SfxModal-Container[open] {
-	border-radius: var(--am-radius-large);
+.am-ui .SfxModal-Container[open] {
+	top: 4rem !important;
+	transform: translate(-50%, 0) !important;
+	border-radius: @am-modal-radius;
 	overflow: hidden;
-	box-shadow: var(--am-shadow);
-	width: var(--am-modal-dialog-width) !important;
-	max-width: 100%;
-	padding: var(--am-modal-dialog-padding);
+	box-shadow: @am-shadow;
+	width: 520px !important;
+	max-width: 520px !important;
+	padding: 8px 2px;
 
 	& .SfxModalTitle-root {
-		padding: 0;
-		margin-bottom: var(--am-modal-dialog-padding);
+		flex-direction: row;
+		justify-content: space-between;
 	}
 
-	& .SfxModalContent-root {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+	& .SfxModalTitle-LabelSecondary,
+	& .SfxModalTitle-Icon {
+		display: none;
+	}
 
-		& > * {
-			flex-grow: 1;
-			width: 100%;
-		}
+	& .SfxInput-root {
+		height: 32px !important;
+		border-radius: 5px !important;
 	}
 
 	& .FIE_save-file-name-input {
-		width: 70%;
+		width: 400px !important;
 	}
 
-	& .SfxSelect-Container {
-		width: 20%;
-		display: flex;
+	& .FIE_save-extension-selector {
+		min-width: 80px;
+	}
 
-		& > div {
-			min-width: 100% !important;
-			max-width: 100% !important;
-		}
+	& .FIE_save-quality-wrapper,
+	& .FIE_save-resize-wrapper {
+		margin-top: 24px !important;
+	}
+
+	& .FIE_resize-height-option,
+	& .FIE_resize-width-option {
+		width: 90px !important;
+	}
+
+	& input {
+		padding: 0 0.35em;
+		line-height: 32px !important;
 	}
 
 	& .SfxModalActions-root {
-		padding: 0;
-		justify-content: end;
-		margin-top: var(--am-modal-dialog-padding);
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.4rem;
+		font-size: 0.9rem;
+
+		& [color='link'].SfxButton-root {
+			color: var(--am-clr-primary-text) !important;
+			background-color: var(--am-clr-primary-background) !important;
+			border: 1px solid var(--am-clr-primary-background) !important;
+
+			&:hover,
+			&:active {
+				background-color: var(
+					--am-clr-primary-background-hover
+				) !important;
+				border-color: var(--am-clr-primary-background-hover) !important;
+			}
+		}
 	}
 }
 
 .am-ui .Menu-open {
 	overflow: hidden !important;
 }
- */
