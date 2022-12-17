@@ -92,6 +92,7 @@ const dompurifyOption = {
 		Attr.tooltip,
 		Attr.tooltipOptions,
 		Attr.toggle,
+		'target',
 	],
 	ADD_URI_SAFE_ATTR: [Attr.tooltipOptions],
 };

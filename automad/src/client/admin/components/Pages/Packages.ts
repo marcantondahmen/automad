@@ -26,21 +26,21 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, classes, getTagFromRoute, html, Routes } from '../../core';
-import { SidebarLayoutComponent } from './SidebarLayout';
+import { App, Attr, CSS, getTagFromRoute, html, Route } from '../../core';
+import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
  * The packages view.
  *
- * @extends SidebarLayoutComponent
+ * @extends BaseDashboardLayoutComponent
  */
-export class PackagesComponent extends SidebarLayoutComponent {
+export class PackagesComponent extends BaseDashboardLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -55,36 +55,22 @@ export class PackagesComponent extends SidebarLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<section class="am-l-main__row">
-				<nav class="am-l-main__content">
-					<div class="${classes.breadcrumbs}">
-						<am-link
-							class="${classes.breadcrumbsItem}"
-							target="${Routes.packages}"
-						>
-							<am-icon-text
-								icon="box-seam"
-								text="${App.text('packagesTitle')}"
-							></am-icon-text>
-						</am-link>
-					</div>
-				</nav>
+			<am-breadcrumbs-route
+				${Attr.target}="${Route.packages}"
+				${Attr.text}="${this.pageTitle}"
+			></am-breadcrumbs-route>
+			<section
+				class="${CSS.layoutDashboardSection} ${CSS.layoutDashboardSectionSticky}"
+			>
+				<div
+					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentRow} ${CSS.flexGap}"
+				>
+					<am-update-all-packages></am-update-all-packages>
+					<am-filter placeholder="packagesFilter"></am-filter>
+				</div>
 			</section>
-			<am-system-menu class="am-l-main__row am-l-main__row--sticky">
-				<menu class="am-l-main__content">
-					<div class="${classes.flex} ${classes.flexGap}">
-						<am-update-all-packages
-							class="${classes.button} ${classes.buttonPrimary}"
-						></am-update-all-packages>
-						<am-filter
-							class="${classes.flexItemGrow}"
-							placeholder="packagesFilter"
-						></am-filter>
-					</div>
-				</menu>
-			</am-system-menu>
-			<section class="am-l-main__row">
-				<div class="am-l-main__content">
+			<section class="${CSS.layoutDashboardSection}">
+				<div class="${CSS.layoutDashboardContent}">
 					<am-package-list></am-package-list>
 				</div>
 			</section>
@@ -92,4 +78,4 @@ export class PackagesComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes.packages), PackagesComponent);
+customElements.define(getTagFromRoute(Route.packages), PackagesComponent);

@@ -34,9 +34,9 @@
 
 import {
 	App,
-	classes,
 	createProgressModal,
-	eventNames,
+	CSS,
+	EventName,
 	fire,
 	listen,
 	notifyError,
@@ -46,7 +46,7 @@ import {
 import { BaseComponent } from '../Base';
 
 /**
- * The package list component.
+ * The update all button component. It is only visible in case there are outdated packages.
  *
  * @extends BaseComponent
  */
@@ -55,13 +55,13 @@ class UpdateAllPackagesComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.displayNone);
+		this.classList.add(CSS.displayNone, CSS.button, CSS.buttonPrimary);
 		this.textContent = App.text('packagesUpdateAll');
 
 		this.init();
 
 		this.listeners.push(
-			listen(window, eventNames.packagesChange, this.init.bind(this))
+			listen(window, EventName.packagesChange, this.init.bind(this))
 		);
 
 		listen(this, 'click', async () => {
@@ -83,7 +83,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 
 			modal.close();
 
-			fire(eventNames.packagesChange);
+			fire(EventName.packagesChange);
 		});
 	}
 
@@ -94,7 +94,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 		const { data } = await requestAPI('PackageManager/getOutdated');
 		const hasUpdates = data?.outdated?.length > 0;
 
-		this.classList.toggle(classes.displayNone, !hasUpdates);
+		this.classList.toggle(CSS.displayNone, !hasUpdates);
 	}
 }
 

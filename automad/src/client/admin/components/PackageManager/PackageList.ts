@@ -33,9 +33,9 @@
  */
 
 import {
-	classes,
 	create,
-	eventNames,
+	CSS,
+	EventName,
 	listen,
 	request,
 	requestAPI,
@@ -117,12 +117,11 @@ class PackageListComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.grid);
-		this.setAttribute('style', '--min: 15rem;');
+		this.classList.add(CSS.grid);
 		this.init();
 
 		this.listeners.push(
-			listen(window, eventNames.packagesChange, this.init.bind(this))
+			listen(window, EventName.packagesChange, this.init.bind(this))
 		);
 	}
 
@@ -130,10 +129,12 @@ class PackageListComponent extends BaseComponent {
 	 * Init the component.
 	 */
 	private async init(): Promise<void> {
-		this.innerHTML = '';
+		this.innerHTML = '<am-spinner></am-spinner>';
 
 		try {
 			const packages = await getPackages();
+
+			this.innerHTML = '';
 
 			packages.forEach((pkg) => {
 				const card = create('am-package-card', [], {}, this);

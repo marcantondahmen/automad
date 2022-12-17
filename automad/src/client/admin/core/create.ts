@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -35,9 +35,7 @@
 import { InputComponent } from '../components/Fields/Input';
 import { ModalComponent } from '../components/Modal/Modal';
 import { FieldInitData, KeyValueMap } from '../types';
-import { App } from './app';
-import { classes } from './classes';
-import { html } from './utils';
+import { App, Attr, CSS, html } from '.';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -75,7 +73,7 @@ export const create = (
  * Create a form field and set its data.
  *
  * @param fieldType the field type name
- * @param section the section node where the field is created in
+ * @param parent the parent node where the field is created in
  * @param data the field data object
  * @param [cls] the array with optional class name
  * @param [attributes] additional attributes
@@ -105,17 +103,19 @@ export const createProgressModal = (text: string): ModalComponent => {
 		'am-modal',
 		[],
 		{
-			noesc: '',
-			noclick: '',
-			destroy: '',
+			[Attr.noEsc]: '',
+			[Attr.noClick]: '',
+			[Attr.destroy]: '',
 		},
 		App.root
 	);
 
 	modal.innerHTML = html`
-		<div class="${classes.modalDialog}">
-			<span class="${classes.spinner}"></span>
-			${text}
+		<div class="${CSS.modalDialog}">
+			<span class="${CSS.modalSpinner}">
+				<span class="${CSS.modalSpinnerIcon}"></span>
+				<span class="${CSS.modalSpinnerText}">${text}</span>
+			</span>
 		</div>
 	`;
 

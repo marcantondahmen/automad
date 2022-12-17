@@ -34,10 +34,11 @@
 
 import {
 	App,
-	classes,
+	Attr,
 	create,
 	createProgressModal,
-	eventNames,
+	CSS,
+	EventName,
 	fire,
 	html,
 	listen,
@@ -92,7 +93,7 @@ const performAction = async (
 
 	modal.close();
 
-	fire(eventNames.packagesChange);
+	fire(EventName.packagesChange);
 };
 
 /**
@@ -102,14 +103,9 @@ const performAction = async (
  * @param container
  */
 const createUpdateButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create(
-		'span',
-		[classes.button, classes.buttonPrimary, classes.flexItemGrow],
-		{},
-		container
-	);
+	const button = create('span', [], {}, container);
 
-	button.textContent = App.text('packageUpdate');
+	create('span', [], {}, button).textContent = App.text('packageUpdate');
 
 	listen(button, 'click', () => {
 		performAction(
@@ -127,14 +123,9 @@ const createUpdateButton = (pkg: Package, container: HTMLElement): void => {
  * @param container
  */
 const createInstallButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create(
-		'span',
-		[classes.button, classes.flexItemGrow],
-		{},
-		container
-	);
+	const button = create('span', [], {}, container);
 
-	button.textContent = App.text('packageInstall');
+	create('span', [], {}, button).textContent = App.text('packageInstall');
 
 	listen(button, 'click', () => {
 		performAction(
@@ -152,14 +143,9 @@ const createInstallButton = (pkg: Package, container: HTMLElement): void => {
  * @param container
  */
 const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create(
-		'span',
-		[classes.button, classes.flexItemGrow],
-		{},
-		container
-	);
+	const button = create('span', [], {}, container);
 
-	button.textContent = App.text('packageRemove');
+	create('span', [], {}, button).textContent = App.text('packageRemove');
 
 	listen(button, 'click', () => {
 		performAction(
@@ -182,65 +168,35 @@ const createHeader = (
 	href: string,
 	container: HTMLElement
 ): void => {
-	const header = create(
-		'span',
-		[classes.flex, classes.flexGap],
-		{},
-		container
-	);
+	const header = create('div', [CSS.cardHeader], {}, container);
 
-	const title = create(
-		'a',
-		[classes.cardTitle, classes.flexItemGrow],
-		{ href, target: '_blank' },
-		header
-	);
-
-	title.innerHTML = html`
-		$${pkg.name.split('/')[0]} ⁄
-		<br />
-		$${pkg.name.split('/')[1]}
+	const title = html`
+		$${pkg.name.split('/')[0]} /<br />$${pkg.name.split('/')[1]}
 	`;
 
-	const dropdown = create('span', [classes.cardIconButtons], {}, header);
-	dropdown.innerHTML = html`
-		<span>
-			<am-dropdown right>
-				<i class="bi bi-three-dots"></i>
-				<span class="${classes.dropdownItems}">
-					<a
-						href="${pkg.repository}"
-						class="${classes.dropdownItem}"
-						target="_blank"
-					>
-						<am-icon-text
-							icon="git"
-							text="Repository"
-						></am-icon-text>
-					</a>
-					<a
-						href="${pkg.url}"
-						class="${classes.dropdownItem}"
-						target="_blank"
-					>
-						<am-icon-text
-							icon="box-seam"
-							text="Packagist"
-						></am-icon-text>
-					</a>
-					<a
-						href="${href}"
-						class="${classes.dropdownItem}"
-						target="_blank"
-					>
-						<am-icon-text
-							icon="file-text"
-							text="Readme"
-						></am-icon-text>
-					</a>
-				</span>
-			</am-dropdown>
-		</span>
+	header.innerHTML = html`
+		<div class="${CSS.cardTitle}">${title}</div>
+		<am-dropdown class="${CSS.cardHeaderDropdown}" ${Attr.right}>
+			<i class="bi bi-three-dots"></i>
+			<div class="${CSS.dropdownItems}">
+				<a href="${href}" class="${CSS.dropdownLink}" target="_blank">
+					<am-icon-text
+						${Attr.icon}="file-richtext"
+						${Attr.text}="Readme"
+					></am-icon-text>
+				</a>
+				<a
+					href="${pkg.repository}"
+					class="${CSS.dropdownLink}"
+					target="_blank"
+				>
+					<am-icon-text
+						${Attr.icon}="git"
+						${Attr.text}="Repository"
+					></am-icon-text>
+				</a>
+			</div>
+		</am-dropdown>
 	`;
 };
 
@@ -254,16 +210,10 @@ const createHeader = (
 const createPreview = (href: string, container: HTMLElement): HTMLElement => {
 	const preview = create(
 		'a',
-		[
-			classes.cardImage,
-			classes.cardImage43,
-			classes.cardImageIconLarge,
-			classes.cardImageBlend,
-		],
+		[CSS.cardTeaser],
 		{ href, target: '_blank' },
 		container
 	);
-
 	create('i', ['bi', 'bi-box-seam'], {}, preview);
 
 	return preview;
@@ -276,16 +226,7 @@ const createPreview = (href: string, container: HTMLElement): HTMLElement => {
  * @param container
  */
 const createDescription = (pkg: Package, container: HTMLElement): void => {
-	const description = create(
-		'div',
-		[classes.flexItemGrow, classes.cardText],
-		{},
-		container
-	);
-
-	description.textContent = pkg.description;
-
-	return description;
+	create('div', [CSS.cardBody], {}, container).textContent = pkg.description;
 };
 
 /**
@@ -295,13 +236,7 @@ const createDescription = (pkg: Package, container: HTMLElement): void => {
  * @param container
  */
 const createFooter = (pkg: Package, container: HTMLElement): void => {
-	const footer = create('span', [classes.cardFooter], {}, container);
-	const buttons = create(
-		'span',
-		[classes.flex, classes.flexGap, classes.flexItemGrow],
-		{},
-		footer
-	);
+	const buttons = create('div', [CSS.cardButtons], {}, container);
 
 	if (pkg.installed) {
 		createRemoveButton(pkg, buttons);
@@ -334,13 +269,12 @@ class PackageCardComponent extends BaseComponent {
 	 * @async
 	 */
 	private async render(pkg: Package): Promise<void> {
-		this.classList.add(classes.card);
-		this.classList.toggle(classes.cardActive, pkg.installed);
+		this.classList.add(CSS.card);
+		this.classList.toggle(CSS.cardActive, pkg.installed);
 
 		const href = `${packageBrowser}/${pkg.name}`;
 
 		createHeader(pkg, href, this);
-
 		const preview = createPreview(href, this);
 
 		createDescription(pkg, this);
