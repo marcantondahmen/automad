@@ -170,7 +170,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 		return html`
 			<am-breadcrumbs-route
 				${Attr.target}="${Route.system}"
-				${Attr.text}="${App.text('systemTitle')}"
+				${Attr.text}="${this.pageTitle}"
 				${Attr.narrow}
 			></am-breadcrumbs-route>
 			${menu.outerHTML}

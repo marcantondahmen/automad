@@ -57,7 +57,7 @@ export class SearchComponent extends BaseDashboardLayoutComponent {
 		return html`
 			<am-breadcrumbs-route
 				${Attr.target}="${Route.search}"
-				${Attr.text}="${App.text('searchTitle')}"
+				${Attr.text}="${this.pageTitle}"
 				${Attr.narrow}
 			></am-breadcrumbs-route>
 			<section class="${CSS.layoutDashboardSection}">
