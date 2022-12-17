@@ -130,15 +130,22 @@ class ImageSelectComponent extends BaseFieldComponent {
 		const previewBindingName = `preview_${id}`;
 
 		new Binding(previewBindingName, input, (value: string): string => {
+			container.classList.remove(CSS.imageSelectPreviewError);
+
 			return resolveFileUrl(value).split('?')[0];
 		});
 
-		create(
+		const img = create(
 			'img',
 			[],
 			{ [Attr.bind]: previewBindingName, [Attr.bindTo]: 'src' },
 			container
 		);
+
+		listen(img, 'error', () => {
+			img.removeAttribute('src');
+			container.classList.add(CSS.imageSelectPreviewError);
+		});
 	}
 
 	/**
