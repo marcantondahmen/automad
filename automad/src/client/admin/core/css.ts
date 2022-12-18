@@ -224,6 +224,7 @@ export const enum CSS {
 	textMono = 'am-u-text-mono',
 	textMuted = 'am-u-text-muted',
 	textParagraph = 'am-u-text-paragraph',
+	textLimitRows = 'am-u-text-limit-rows',
 
 	toggle = 'am-f-toggle',
 	toggleButton = 'am-f-toggle--button',

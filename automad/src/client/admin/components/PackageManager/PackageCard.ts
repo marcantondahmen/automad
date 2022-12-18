@@ -226,7 +226,12 @@ const createPreview = (href: string, container: HTMLElement): HTMLElement => {
  * @param container
  */
 const createDescription = (pkg: Package, container: HTMLElement): void => {
-	create('div', [CSS.cardBody], {}, container).textContent = pkg.description;
+	create(
+		'span',
+		[CSS.textLimitRows],
+		{},
+		create('div', [CSS.cardBody], {}, container)
+	).textContent = pkg.description;
 };
 
 /**
