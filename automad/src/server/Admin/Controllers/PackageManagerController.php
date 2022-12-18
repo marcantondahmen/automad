@@ -134,7 +134,7 @@ class PackageManagerController {
 			$RemoteFile = new RemoteFile($imageUrl);
 			$download = $RemoteFile->getLocalCopy();
 
-			$Image = new Image($download, 800, 600, true);
+			$Image = new Image($download, 400, 300, true);
 			$thumbnail = AM_BASE_URL . $Image->file;
 
 			FileSystem::write($cachePath, $thumbnail);
