@@ -86,8 +86,12 @@ export const dashboardLayout = ({ main }: Partials) => {
 								>
 									<am-dashboard-theme-toggle></am-dashboard-theme-toggle>
 								</span>
+								<am-modal-toggle class="${CSS.dropdownLink}" ${Attr.modal}="#am-about-modal">
+									<i class="bi bi-info-circle"></i>
+									<span>${App.text('aboutAutomad')}</span>
+								</am-modal-toggle>
 								<am-link
-									class="${CSS.dropdownLink}"
+									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 									${Attr.target}="${Route.system}?section=${Section.users}"
 								>
 									<i class="bi bi-people"></i>
@@ -154,8 +158,10 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<span>${App.user.name}</span>
 					</span>
 					<span>&mdash;</span>
-					<span>Automad</span>
-					<span>${App.version}</span>
+					<am-modal-toggle class="${CSS.cursorPointer}" ${Attr.modal}="#am-about-modal">
+						Automad
+						${App.version}
+					</am-modal-toggle>
 				</div>
 			</footer>
 		</div>
@@ -215,6 +221,30 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</am-submit>
 					</div>
 				</am-form>
+			</div>
+		</am-modal>
+		<!-- About Automad Modal -->
+		<am-modal id="am-about-modal">
+			<div class="${CSS.modalDialog} ${CSS.modalDialogSmall}">
+				<div class="${CSS.modalBody}">
+					<am-logo></am-logo>
+					<hr>
+					<strong>Automad</strong>
+					is a modern flat-file content management system and templating engine
+					<hr>
+					<span class="${CSS.flex} ${CSS.flexBetween}">
+						<a href="https://automad.org" target="_blank" class="${
+							CSS.textLink
+						}">Open Website</a>
+						<a 
+							href="https://automad.org/release-notes" 
+							class="${CSS.badge}"
+							target="_blank"
+						>
+							${App.version}
+						</a> 
+					</span>
+				</div>
 			</div>
 		</am-modal>
 	`;

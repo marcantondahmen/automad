@@ -165,6 +165,7 @@ export const enum CSS {
 	modalOpen = 'am-c-modal--open',
 	modalDialog = 'am-c-modal__dialog',
 	modalDialogLarge = 'am-c-modal__dialog--large',
+	modalDialogSmall = 'am-c-modal__dialog--small',
 	modalDialogFullscreen = 'am-c-modal__dialog--fullscreen',
 	modalHeader = 'am-c-modal__header',
 	modalClose = 'am-c-modal__close',
