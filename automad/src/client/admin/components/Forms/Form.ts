@@ -301,6 +301,12 @@ export class FormComponent extends BaseComponent {
 	 * The callback that is called when a form input has changed.
 	 */
 	onChange(): void {
+		if (!App.isReady) {
+			// Return early here in case the app is not fully initialized yet and
+			// potential changes are triggered by initial values of connected bindings.
+			return;
+		}
+
 		if (this.auto) {
 			debounced(async () => {
 				const lockId = App.addNavigationLock();

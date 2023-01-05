@@ -75,21 +75,19 @@ export class App {
 	private static latestLockId: number = 0;
 
 	/**
+	 * The app initialization state.
+	 *
+	 * @static
+	 */
+	static isReady = false;
+
+	/**
 	 * The array of allowed file types.
 	 *
 	 * @static
 	 */
 	static get allowedFileTypes(): string[] {
 		return this._state.allowedFileTypes;
-	}
-
-	/**
-	 * The unique app id that is used to identify a browser tab.
-	 *
-	 * @static
-	 */
-	static get id(): string {
-		return this._state.appId;
 	}
 
 	/**

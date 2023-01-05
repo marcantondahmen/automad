@@ -45,16 +45,16 @@ export class Binding {
 	input: InputElement;
 
 	/**
-	 * The binding options.
+	 * The modifier function that can optionally be defined to compute the value.
 	 */
-	private options: BindingOptions = {};
+	private modifier: Function;
 
 	/**
 	 * The value getter.
 	 */
 	get value() {
-		if (this.options.modifier) {
-			return this.options.modifier(this.input.value);
+		if (this.modifier) {
+			return this.modifier(this.input.value);
 		} else {
 			return this.input.value;
 		}
@@ -75,7 +75,12 @@ export class Binding {
 	 * @param [options]
 	 */
 	constructor(name: string, options: BindingOptions = {}) {
-		this.options = options;
+		options = Object.assign(
+			{ initial: null, input: null, modifier: null },
+			options
+		);
+
+		this.modifier = options.modifier;
 
 		// In case no input is given, an empty input element will be create without
 		// appending it to the DOM.
@@ -183,8 +188,7 @@ export class Bindings {
 			};
 
 			listen(binding.input, 'input', update);
-
-			update();
+			fire('input', binding.input);
 		});
 	}
 

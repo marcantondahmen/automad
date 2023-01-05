@@ -39,6 +39,7 @@ export * from './search';
 export * from './switcher';
 export * from './system';
 import { PageMetaData } from '.';
+import { InputElement } from './form';
 
 export interface KeyValueMap {
 	[key: string | number]: any;

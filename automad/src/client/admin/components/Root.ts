@@ -123,6 +123,7 @@ export class RootComponent extends BaseComponent {
 
 		this.progressBar(20);
 
+		App.isReady = false;
 		Bindings.reset();
 
 		await App.updateState();
@@ -150,10 +151,12 @@ export class RootComponent extends BaseComponent {
 		App.checkForOutdatedPackages();
 
 		this.progressBar(100);
+
+		App.isReady = true;
 	}
 
 	/**
-	 * Verify the app id (browser tab id) and the CSRF token on visiblity state change (change tab) in order
+	 * Verify the CSRF token on visiblity state change (change tab) in order
 	 * to make sure that the token is updated also between mutliple sessions while a tab is still open.
 	 *
 	 * @async
