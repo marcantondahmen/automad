@@ -228,17 +228,6 @@ class UploadComponent extends BaseComponent {
 			form
 		);
 
-		create(
-			'input',
-			[],
-			{
-				type: 'hidden',
-				name: RequestKey.appId,
-				value: App.id,
-			},
-			form
-		);
-
 		return form;
 	}
 }

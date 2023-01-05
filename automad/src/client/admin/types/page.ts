@@ -70,5 +70,6 @@ export interface PageBindings {
 	pageUrlBinding: Binding;
 	pageUrlWithBaseBinding: Binding;
 	pageLinkUIBinding: Binding;
+	pageDataFetchTimeBinding: Binding;
 	slugBinding: Binding;
 }

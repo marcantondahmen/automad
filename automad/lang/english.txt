@@ -627,6 +627,10 @@ position: Position
 
 -
 
+preventDataOverwritingError: A newer version has been edited in another browser tab. Please reload this page in order to continue.
+
+-
+
 quality: Quality
 
 -

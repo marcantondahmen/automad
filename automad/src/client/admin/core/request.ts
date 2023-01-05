@@ -41,7 +41,6 @@ import { KeyValueMap } from '../types';
  */
 export enum RequestKey {
 	csrf = '__csrf__',
-	appId = '__app_id__',
 }
 
 /**
@@ -72,7 +71,6 @@ export const request = async (
 		const formData = new FormData();
 
 		formData.append(RequestKey.csrf, getCsrfToken());
-		formData.append(RequestKey.appId, App.id);
 
 		Object.keys(data).forEach((key) => {
 			formData.append(key, data[key]);

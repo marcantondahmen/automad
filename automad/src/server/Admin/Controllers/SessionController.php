@@ -82,7 +82,7 @@ class SessionController {
 	}
 
 	/**
-	 * A simple testing endpoint to verify if a browser tab has a valid app id and CSRF token.
+	 * A simple testing endpoint to verify if a browser tab has a valid CSRF token.
 	 *
 	 * @return Response the Response object
 	 */

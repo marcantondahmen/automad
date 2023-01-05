@@ -48,7 +48,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Session {
-	const APP_ID_KEY = 'app_id';
 	const CSRF_TOKEN_KEY = 'csrf';
 	const RESET_TOKEN_KEY = 'reset';
 	const USERNAME_KEY = 'username';
@@ -135,18 +134,6 @@ class Session {
 	}
 
 	/**
-	 * Set and return a unique app id.
-	 *
-	 * @return string the app id
-	 */
-	public static function setAppId() {
-		$appId = bin2hex(random_bytes(32));
-		$_SESSION[self::APP_ID_KEY] = $appId;
-
-		return $appId;
-	}
-
-	/**
 	 * Set the reset token hash for a given user.
 	 *
 	 * @param string $username
@@ -154,18 +141,6 @@ class Session {
 	 */
 	public static function setResetTokenHash(string $username, string $tokenHash) {
 		$_SESSION[self::RESET_TOKEN_KEY] = array($username => $tokenHash);
-	}
-
-	/**
-	 * Verify a given app id for the current session.
-	 *
-	 * @param string $appId
-	 * @return string the app id
-	 */
-	public static function verifyAppId(string $appId) {
-		$sessionAppId = $_SESSION[self::APP_ID_KEY] ?? '';
-
-		return $sessionAppId === $appId;
 	}
 
 	/**

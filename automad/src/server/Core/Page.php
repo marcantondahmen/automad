@@ -144,7 +144,16 @@ class Page {
 				return $this->getMtime();
 			default:
 				return '';
-			}
+		}
+	}
+
+	/**
+	 * Get the data file path.
+	 *
+	 * @return string the full file path
+	 */
+	public function getDataFile() {
+		return AM_BASE_DIR . AM_DIR_PAGES . $this->path . $this->template . '.' . AM_FILE_EXT_DATA;
 	}
 
 	/**
@@ -157,7 +166,7 @@ class Page {
 		$path = AM_BASE_DIR . AM_DIR_PAGES . $this->path;
 		$mtimes = array();
 
-		foreach (array($path, $path . $this->template . '.' . AM_FILE_EXT_DATA) as $item) {
+		foreach (array($path, $this->getDataFile()) as $item) {
 			if (file_exists($item)) {
 				$mtimes[] = date('Y-m-d H:i:s', filemtime($item));
 			}

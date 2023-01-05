@@ -136,47 +136,50 @@ class PageController {
 		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
+		$Page = $Automad->getPage($url);
 
-		if ($url && ($Page = $Automad->getPage($url))) {
-			// If the posted form contains any "data", save the form's data to the page file.
-			if ($data = Request::post('data')) {
-				// Save page and replace $Response with the returned $Response object (error or redirect).
-				$Response = self::save(
-					$Page,
-					$url,
-					$data,
-					Request::post('slug')
-				);
-			} else {
-				// If only the URL got submitted, just get the form ready.
-				$ThemeCollection = new ThemeCollection();
-				$Theme = $ThemeCollection->getThemeByKey($Page->get(AM_KEY_THEME));
-				$keys = Fields::inCurrentTemplate($Page, $Theme);
-				$data = Parse::dataFile(PageModel::getPageFilePath($Page));
-
-				$fields = array_merge(
-					array_fill_keys(Fields::$reserved, ''),
-					array_fill_keys($keys, ''),
-					$data
-				);
-
-				ksort($fields);
-
-				$Response->setData(
-					array(
-						'url' => $Page->origUrl,
-						'slug' => basename($Page->path),
-						'template' => $Page->getTemplate(),
-						'fields' => $fields,
-						'shared' => $Automad->Shared->data
-					)
-				);
-			}
-		} else {
-			$Response->setCode(404);
+		if (!$Page) {
+			return $Response->setCode(404);
 		}
 
-		return $Response;
+		// If the posted form contains any "data", save the form's data to the page file.
+		if ($data = Request::post('data')) {
+			if (filemtime($Page->getDataFile()) > Request::post('dataFetchTime')) {
+				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
+			}
+
+			// Save page and replace $Response with the returned $Response object (error or redirect).
+			return self::save(
+				$Page,
+				$url,
+				$data,
+				Request::post('slug')
+			);
+		}
+
+		// If only the URL got submitted, just get the form ready.
+		$ThemeCollection = new ThemeCollection();
+		$Theme = $ThemeCollection->getThemeByKey($Page->get(AM_KEY_THEME));
+		$keys = Fields::inCurrentTemplate($Page, $Theme);
+		$data = Parse::dataFile(PageModel::getPageFilePath($Page));
+
+		$fields = array_merge(
+			array_fill_keys(Fields::$reserved, ''),
+			array_fill_keys($keys, ''),
+			$data
+		);
+
+		ksort($fields);
+
+		return $Response->setData(
+			array(
+				'url' => $Page->origUrl,
+				'slug' => basename($Page->path),
+				'template' => $Page->getTemplate(),
+				'fields' => $fields,
+				'shared' => $Automad->Shared->data
+			)
+		);
 	}
 
 	/**

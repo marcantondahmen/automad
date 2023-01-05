@@ -162,38 +162,43 @@ const prepareFieldGroups = (fields: KeyValueMap): PageFieldGroups => {
 /**
  * Init all URL and slug related bindings.
  *
- * @param data
+ * @param response
  * @return the page bindings object
  */
-const createBindings = (data: KeyValueMap): PageBindings => {
-	const { slug, url } = data;
+const createBindings = (response: KeyValueMap): PageBindings => {
+	const { slug, url } = response.data;
 
-	const slugBinding = new Binding('pageSlug', null, null, slug);
-	const pageUrlBinding = new Binding('pageUrl', null, null, url);
+	const pageDataFetchTimeBinding = new Binding('pageDataFetchTime', {
+		initial: response.time,
+	});
 
-	const pageUrlWithBaseBinding = new Binding(
-		'pageUrlWithBase',
-		null,
-		(url: string) => {
+	const slugBinding = new Binding('pageSlug', {
+		initial: slug,
+	});
+	const pageUrlBinding = new Binding('pageUrl', {
+		initial: url,
+	});
+
+	const pageUrlWithBaseBinding = new Binding('pageUrlWithBase', {
+		modifier: (url: string) => {
 			return `${App.baseURL}${url}`;
 		},
-		url
-	);
+		initial: url,
+	});
 
-	const pageLinkUIBinding = new Binding(
-		'pageLinkUI',
-		null,
-		(url: string) => {
+	const pageLinkUIBinding = new Binding('pageLinkUI', {
+		modifier: (url: string) => {
 			return `${Route.page}?url=${encodeURIComponent(url)}`;
 		},
-		url
-	);
+		initial: url,
+	});
 
 	return {
 		slugBinding,
 		pageUrlBinding,
 		pageUrlWithBaseBinding,
 		pageLinkUIBinding,
+		pageDataFetchTimeBinding,
 	};
 };
 
@@ -207,30 +212,32 @@ const updateUI = async (
 	update: KeyValueMap,
 	pageBindings: PageBindings
 ): Promise<void> => {
-	if (update.slug && update.origUrl) {
-		const lockId = App.addNavigationLock();
-
-		const { slug, origUrl } = update;
-		const urlObject = new URL(window.location.href);
-		const {
-			pageUrlBinding,
-			pageUrlWithBaseBinding,
-			pageLinkUIBinding,
-			slugBinding,
-		} = pageBindings;
-
-		pageUrlBinding.value = origUrl;
-		pageUrlWithBaseBinding.value = origUrl;
-		pageLinkUIBinding.value = origUrl;
-		slugBinding.value = slug;
-
-		urlObject.searchParams.set('url', update.origUrl);
-		window.history.replaceState(null, null, urlObject);
-
-		await App.updateState();
-
-		App.removeNavigationLock(lockId);
+	if (!update.slug || !update.origUrl) {
+		return;
 	}
+
+	const lockId = App.addNavigationLock();
+
+	const { slug, origUrl } = update;
+	const urlObject = new URL(window.location.href);
+	const {
+		pageUrlBinding,
+		pageUrlWithBaseBinding,
+		pageLinkUIBinding,
+		slugBinding,
+	} = pageBindings;
+
+	pageUrlBinding.value = origUrl;
+	pageUrlWithBaseBinding.value = origUrl;
+	pageLinkUIBinding.value = origUrl;
+	slugBinding.value = slug;
+
+	urlObject.searchParams.set('url', update.origUrl);
+	window.history.replaceState(null, null, urlObject);
+
+	await App.updateState();
+
+	App.removeNavigationLock(lockId);
 };
 
 /**
@@ -334,7 +341,14 @@ export class PageDataFormComponent extends FormComponent {
 			}
 		);
 
-		new Binding('title', titleField.input);
+		new Binding('title', {
+			input: titleField.input,
+			modifier: (title: string) => {
+				setDocumentTitle(title);
+
+				return title;
+			},
+		});
 
 		create(
 			'a',
@@ -438,10 +452,18 @@ export class PageDataFormComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		await super.processResponse(response);
 
-		if (response.code != 200) {
+		if (response.code === 404) {
 			this.pageNotFound();
 
 			return;
+		}
+
+		if (response.code !== 200) {
+			return;
+		}
+
+		if (this.pageBindings) {
+			this.pageBindings.pageDataFetchTimeBinding.value = response.time;
 		}
 
 		if (!response.data) {
@@ -454,17 +476,29 @@ export class PageDataFormComponent extends FormComponent {
 			return;
 		}
 
-		this.pageBindings = createBindings(response.data);
-		this.render(response.data);
+		this.pageBindings = createBindings(response);
+		this.render(response);
 	}
 
 	/**
 	 * Create the actual form fields.
 	 *
-	 * @param data
+	 * @param response
 	 */
-	private render(data: KeyValueMap): void {
-		const { url, fields, shared, template } = data;
+	private render(response: KeyValueMap): void {
+		const { url, fields, shared, template } = response.data;
+
+		create(
+			'input',
+			[],
+			{
+				type: 'hidden',
+				[Attr.bind]: 'pageDataFetchTime',
+				[Attr.bindTo]: 'value',
+				name: 'dataFetchTime',
+			},
+			this
+		);
 
 		const themeKey = App.reservedFields.AM_KEY_THEME;
 		const themes = App.themes;

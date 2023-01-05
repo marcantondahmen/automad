@@ -149,12 +149,6 @@ class RequestHandler {
 
 				return false;
 			}
-
-			if (!Session::verifyAppId($_POST['__app_id__'] ?? '')) {
-				$Messenger->setError('App ID mismatch');
-
-				return false;
-			}
 		}
 
 		return true;

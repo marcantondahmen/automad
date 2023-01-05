@@ -70,7 +70,6 @@ class AppController {
 		$ThemeCollection = new ThemeCollection();
 
 		return $Response->setData(array(
-			'appId' => Session::setAppId(),
 			'version' => AM_VERSION,
 			'text' => Text::getObject(),
 			'themes' => $ThemeCollection->getThemes(),

@@ -84,12 +84,18 @@ class Response {
 	private $success = null;
 
 	/**
+	 * The response time.
+	 */
+	private $time = null;
+
+	/**
 	 * The output constructor.
 	 */
 	public function __construct() {
 		Debug::log('Instanciated new Response instance');
 
 		$this->setCode(200);
+		$this->time = time();
 	}
 
 	/**
