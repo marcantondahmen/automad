@@ -144,7 +144,7 @@ class PageController {
 
 		// If the posted form contains any "data", save the form's data to the page file.
 		if ($data = Request::post('data')) {
-			if (filemtime($Page->getDataFile()) > Request::post('dataFetchTime')) {
+			if (filemtime(PageModel::getPageFilePath($Page)) > Request::post('dataFetchTime')) {
 				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
 			}
 

@@ -148,15 +148,6 @@ class Page {
 	}
 
 	/**
-	 * Get the data file path.
-	 *
-	 * @return string the full file path
-	 */
-	public function getDataFile() {
-		return AM_BASE_DIR . AM_DIR_PAGES . $this->path . $this->template . '.' . AM_FILE_EXT_DATA;
-	}
-
-	/**
 	 * Get the modification time/date of the page.
 	 * To determine to correct mtime, the page directory mtime (to check if any files got added) and the page data file mtime will be checked and the highest value will be returned.
 	 *
@@ -166,7 +157,7 @@ class Page {
 		$path = AM_BASE_DIR . AM_DIR_PAGES . $this->path;
 		$mtimes = array();
 
-		foreach (array($path, $this->getDataFile()) as $item) {
+		foreach (array($path, $path . $this->template . '.' . AM_FILE_EXT_DATA) as $item) {
 			if (file_exists($item)) {
 				$mtimes[] = date('Y-m-d H:i:s', filemtime($item));
 			}
