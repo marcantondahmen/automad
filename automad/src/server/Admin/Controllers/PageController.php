@@ -256,48 +256,46 @@ class PageController {
 		$Response = new Response();
 		$url = Request::post('url');
 		$dest = Request::post('targetPage');
+		$Page = $Automad->getPage($url);
+		$dest = $Automad->getPage($dest);
 
-		// Validation of $_POST. To avoid all kinds of unexpected trouble,
-		// the URL and the destination must exist in the Automad's collection.
-		if ($url
-			&& $dest
-			&& ($Page = $Automad->getPage($url))
-			&& ($dest = $Automad->getPage($dest))) {
-			// The home page can't be moved!
-			if ($url != '/') {
-				// Check if new parent directory is writable.
-				if (is_writable(FileSystem::fullPagePath($dest->path))) {
-					// Check if the current page's directory and parent directory is writable.
-					if (is_writable(dirname(PageModel::getPageFilePath($Page)))
-						&& is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
-						// Move page
-						$newPagePath = PageModel::moveDirAndUpdateLinks(
-							$Page,
-							$dest->path,
-							basename($Page->path)
-						);
-
-						$Response->setRedirect(PageModel::contextUrlByPath($newPagePath));
-						Debug::log($Page->path, 'page');
-						Debug::log($dest->path, 'destination');
-
-						Cache::clear();
-					} else {
-						$Response->setError(
-							Text::get('permissionsDeniedError') .
-							'<p>' . dirname(dirname(PageModel::getPageFilePath($Page))) . '</p>'
-						);
-					}
-				} else {
-					$Response->setError(
-						Text::get('permissionsDeniedError') .
-						'<p>' . FileSystem::fullPagePath($dest->path) . '</p>'
-					);
-				}
-			}
-		} else {
-			$Response->setError(Text::get('missingTargetPageError'));
+		if ($url === '/') {
+			return $Response;
 		}
+
+		if (!$Page) {
+			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
+		}
+
+		if (!$dest) {
+			return $Response->setError(Text::get('missingTargetPageError'));
+		}
+
+		if (!is_writable(FileSystem::fullPagePath($dest->path))) {
+			return $Response->setError(
+				Text::get('permissionsDeniedError')
+			);
+		}
+
+		$pageFile = PageModel::getPageFilePath($Page);
+
+		if (!is_writable(dirname($pageFile)) || !is_writable(dirname(dirname($pageFile)))) {
+			return $Response->setError(
+				Text::get('permissionsDeniedError')
+			);
+		}
+
+		$newPagePath = PageModel::moveDirAndUpdateLinks(
+			$Page,
+			$dest->path,
+			basename($Page->path)
+		);
+
+		$Response->setRedirect(PageModel::contextUrlByPath($newPagePath));
+		Debug::log($Page->path, 'page');
+		Debug::log($dest->path, 'destination');
+
+		Cache::clear();
 
 		return $Response;
 	}
@@ -309,6 +307,14 @@ class PageController {
 	 */
 	public static function updateIndex() {
 		$Response = new Response();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
+		$url = Request::post('url');
+		$Page = $Automad->getPage($url);
+
+		if (!$Page) {
+			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
+		}
 
 		$parentPath = Request::post('parentPath');
 		$layout = json_decode(Request::post('layout'));

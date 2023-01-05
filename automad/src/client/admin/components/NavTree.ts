@@ -47,6 +47,7 @@ import {
 	EventName,
 	CSS,
 	Attr,
+	notifyError,
 } from '../core';
 import { KeyValueMap, NavTreeItem, PageMetaData } from '../types';
 import { BaseComponent } from './Base';
@@ -172,6 +173,16 @@ export class NavTreeComponent extends BaseComponent {
 			this
 		) as HTMLElement[];
 
+		const handleResponse = (data: KeyValueMap) => {
+			if (data.error) {
+				notifyError(data.error);
+			}
+
+			if (data.reload) {
+				window.location.reload();
+			}
+		};
+
 		childrenContainers.forEach((container) => {
 			this.sortables.push(
 				new Sortable(container, {
@@ -221,13 +232,19 @@ export class NavTreeComponent extends BaseComponent {
 								targetPage: toUrl,
 							});
 
+							handleResponse(data);
 							redirect = data.redirect;
+
+							return;
 						}
 
-						await requestAPI('Page/updateIndex', {
-							parentPath: toPath,
-							layout: JSON.stringify(toChildren),
-						});
+						handleResponse(
+							await requestAPI('Page/updateIndex', {
+								url: item.getAttribute(Attr.url),
+								parentPath: toPath,
+								layout: JSON.stringify(toChildren),
+							})
+						);
 
 						if (redirect) {
 							App.root.setView(redirect);
