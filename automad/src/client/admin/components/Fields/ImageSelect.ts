@@ -71,10 +71,8 @@ class ImageSelectComponent extends BaseFieldComponent {
 		const combo = create('div', [CSS.imageSelectCombo], {}, wrapper);
 
 		const inputBindingName = `input_${id}`;
-		new Binding(
-			inputBindingName,
-			null,
-			(value: string) => {
+		new Binding(inputBindingName, {
+			modifier: (value: string) => {
 				const { width, height } = this.resize;
 				const querystring =
 					width && height && !value.match(/\:\/\//)
@@ -83,8 +81,8 @@ class ImageSelectComponent extends BaseFieldComponent {
 
 				return `${value}${querystring}`;
 			},
-			value || ''
-		);
+			initial: value || '',
+		});
 
 		const input = create(
 			'input',
@@ -129,10 +127,13 @@ class ImageSelectComponent extends BaseFieldComponent {
 	) {
 		const previewBindingName = `preview_${id}`;
 
-		new Binding(previewBindingName, input, (value: string): string => {
-			container.classList.remove(CSS.imageSelectPreviewError);
+		new Binding(previewBindingName, {
+			input,
+			modifier: (value: string): string => {
+				container.classList.remove(CSS.imageSelectPreviewError);
 
-			return resolveFileUrl(value).split('?')[0];
+				return resolveFileUrl(value).split('?')[0];
+			},
 		});
 
 		const img = create(

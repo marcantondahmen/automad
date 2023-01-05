@@ -50,15 +50,12 @@ import { Listener } from '../../../../types';
  * @param listeners
  */
 const createBindings = (listeners: Listener[]): void => {
-	const username = new Binding('username', null, null, App.user.name);
-	const email = new Binding('email', null, null, App.user.email);
-	const userSubmit = new Binding('userSubmitButton', null, null, true);
-	const userCount = new Binding(
-		'userCount',
-		null,
-		null,
-		App.system.users.length
-	);
+	const username = new Binding('username', { initial: App.user.name });
+	const email = new Binding('email', { initial: App.user.email });
+	const userSubmit = new Binding('userSubmitButton', { initial: true });
+	const userCount = new Binding('userCount', {
+		initial: App.system.users.length,
+	});
 
 	listeners.push(
 		listen(window, EventName.appStateChange, () => {

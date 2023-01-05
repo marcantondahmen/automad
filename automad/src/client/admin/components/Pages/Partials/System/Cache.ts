@@ -51,26 +51,17 @@ import { Listener } from '../../../../types';
  * @param listeners
  */
 const createBindings = (listeners: Listener[]): void => {
-	const cacheEnabled = new Binding(
-		'cacheEnabled',
-		null,
-		null,
-		App.system.cache.enabled
-	);
+	const cacheEnabled = new Binding('cacheEnabled', {
+		initial: App.system.cache.enabled,
+	});
 
-	const cacheMonitorDelay = new Binding(
-		'cacheMonitorDelay',
-		null,
-		null,
-		App.system.cache.monitorDelay
-	);
+	const cacheMonitorDelay = new Binding('cacheMonitorDelay', {
+		initial: App.system.cache.monitorDelay,
+	});
 
-	const cacheLifetime = new Binding(
-		'cacheLifetime',
-		null,
-		null,
-		App.system.cache.lifetime
-	);
+	const cacheLifetime = new Binding('cacheLifetime', {
+		initial: App.system.cache.lifetime,
+	});
 
 	listeners.push(
 		listen(window, EventName.appStateChange, () => {

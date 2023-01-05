@@ -55,6 +55,12 @@ export interface AutocompleteItemData {
 	title: string;
 }
 
+export interface BindingOptions {
+	input?: InputElement;
+	modifier?: Function;
+	initial?: any;
+}
+
 export interface Image {
 	name: string;
 	thumbnail: string;

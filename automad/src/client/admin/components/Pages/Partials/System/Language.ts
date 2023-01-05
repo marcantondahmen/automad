@@ -50,12 +50,9 @@ import { Listener } from '../../../../types';
  * @param listeners
  */
 const createBindings = (listeners: Listener[]): void => {
-	const translation = new Binding(
-		'translation',
-		null,
-		null,
-		App.system.translation
-	);
+	const translation = new Binding('translation', {
+		initial: App.system.translation,
+	});
 
 	listeners.push(
 		listen(window, EventName.appStateChange, () => {

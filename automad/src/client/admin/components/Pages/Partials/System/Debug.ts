@@ -50,12 +50,9 @@ import { Listener } from '../../../../types';
  * @param listeners
  */
 const createBindings = (listeners: Listener[]): void => {
-	const debugEnabled = new Binding(
-		'debugEnabled',
-		null,
-		null,
-		App.system.debug
-	);
+	const debugEnabled = new Binding('debugEnabled', {
+		initial: App.system.debug,
+	});
 
 	listeners.push(
 		listen(window, EventName.appStateChange, () => {

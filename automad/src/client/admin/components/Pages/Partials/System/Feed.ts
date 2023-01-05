@@ -50,19 +50,13 @@ import { Listener } from '../../../../types';
  * @param listeners
  */
 const createBindings = (listeners: Listener[]): void => {
-	const feedEnabled = new Binding(
-		'feedEnabled',
-		null,
-		null,
-		App.system.feed.enabled
-	);
+	const feedEnabled = new Binding('feedEnabled', {
+		initial: App.system.feed.enabled,
+	});
 
-	const feedFields = new Binding(
-		'feedFields',
-		null,
-		null,
-		JSON.stringify(App.system.feed.fields)
-	);
+	const feedFields = new Binding('feedFields', {
+		initial: JSON.stringify(App.system.feed.fields),
+	});
 
 	listeners.push(
 		listen(window, EventName.appStateChange, () => {

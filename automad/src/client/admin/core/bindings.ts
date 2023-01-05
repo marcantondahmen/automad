@@ -33,7 +33,7 @@
  */
 
 import { Attr, create, EventName, fire, listen, queryAll } from '.';
-import { InputElement, KeyValueMap } from '../types';
+import { BindingOptions, InputElement, KeyValueMap } from '../types';
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.
@@ -45,16 +45,16 @@ export class Binding {
 	input: InputElement;
 
 	/**
-	 * The modifier function that can optionally be defined to compute the value.
+	 * The binding options.
 	 */
-	private modifier: Function;
+	private options: BindingOptions = {};
 
 	/**
 	 * The value getter.
 	 */
 	get value() {
-		if (this.modifier) {
-			return this.modifier(this.input.value);
+		if (this.options.modifier) {
+			return this.options.modifier(this.input.value);
 		} else {
 			return this.input.value;
 		}
@@ -72,27 +72,20 @@ export class Binding {
 	 * The constructor.
 	 *
 	 * @param name
-	 * @param [input]
-	 * @param [modifier]
-	 * @param [initial]
+	 * @param [options]
 	 */
-	constructor(
-		name: string,
-		input: InputElement = null,
-		modifier: Function = null,
-		initial: any = null
-	) {
-		this.modifier = modifier;
+	constructor(name: string, options: BindingOptions = {}) {
+		this.options = options;
 
 		// In case no input is given, an empty input element will be create without
 		// appending it to the DOM.
 		// It will then just serve to store the value and trigger events.
-		this.input = input || create('input', [], {});
+		this.input = options.input || create('input', [], {});
 
 		Bindings.add(name, this);
 
-		if (initial !== null) {
-			this.value = initial;
+		if (options.initial !== null) {
+			this.value = options.initial;
 		}
 	}
 }
@@ -190,7 +183,8 @@ export class Bindings {
 			};
 
 			listen(binding.input, 'input', update);
-			fire('input', binding.input);
+
+			update();
 		});
 	}
 
