@@ -74,19 +74,4 @@ class ImageController {
 
 		return $Response->setError($Messenger->getError());
 	}
-
-	/**
-	 * Select an image.
-	 *
-	 * @return Response the response object
-	 */
-	public static function select() {
-		$Response = new Response();
-
-		// Check if file from a specified page or the shared files will be listed and managed.
-		// To display a file list of a certain page, its URL has to be submitted along with the form data.
-		//$Response->setHtml(ImageModel::select(Request::post('url')));
-
-		return $Response;
-	}
 }

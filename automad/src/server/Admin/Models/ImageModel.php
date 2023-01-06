@@ -70,37 +70,4 @@ class ImageModel {
 			$Messenger->setError(Text::get('couldNotSaveError') . ' ' . $name);
 		}
 	}
-
-	/**
-	 * Select an image.
-	 *
-	 * @param string $url
-	 * @return string the rendered HTML
-	 */
-	public static function select(string $url) {
-		$Automad = UICache::get();
-		$pageImages = array();
-
-		if (!array_key_exists($url, $Automad->getCollection())) {
-			$url = '';
-		}
-
-		if ($url) {
-			$pageImages = FileSystem::globGrep(
-				FileSystem::getPathByPostUrl($Automad) . '*.*',
-				'/\.(jpg|jpeg|gif|png)$/i'
-			);
-
-			sort($pageImages);
-		}
-
-		$sharedImages = FileSystem::globGrep(
-			AM_BASE_DIR . AM_DIR_SHARED . '/*.*',
-			'/\.(jpg|jpeg|gif|png)$/i'
-		);
-
-		sort($sharedImages);
-
-		return SelectImage::render($pageImages, $sharedImages);
-	}
 }
