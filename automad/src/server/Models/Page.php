@@ -36,7 +36,11 @@
 
 namespace Automad\Models;
 
+use Automad\Admin\Models\LinksModel;
+use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\FileSystem;
+use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Str;
 
@@ -112,6 +116,120 @@ class Page {
 
 		// Trigger error for undefined properties.
 		trigger_error('Page property "' . $key . '" not defined!', E_USER_ERROR);
+	}
+
+	/**
+	 * Add page.
+	 *
+	 * @param Page $Parent
+	 * @param string $title
+	 * @param string $themeTemplate
+	 * @param bool $isPrivate
+	 * @return string the dashboard URL to the new page
+	 */
+	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate) {
+		$theme = dirname($themeTemplate);
+		$template = basename($themeTemplate);
+
+		// Save new subpage below the current page's path.
+		$subdir = Str::slug($title, true, AM_DIRNAME_MAX_LEN);
+
+		// Add trailing slash.
+		$subdir .= '/';
+
+		// Build path.
+		$newPagePath = $Parent->path . $subdir;
+		$suffix = FileSystem::uniquePathSuffix($newPagePath);
+		$newPagePath = FileSystem::appendSuffixToPath($newPagePath, $suffix);
+
+		// Data, also directly append possibly existing suffix to title here.
+		$data = array(
+			AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
+			AM_KEY_PRIVATE => $isPrivate
+		);
+
+		if ($theme != '.') {
+			$data[AM_KEY_THEME] = $theme;
+		}
+
+		// Set date.
+		$data[AM_KEY_DATE] = date('Y-m-d H:i:s');
+
+		// Build the file name and save the txt file.
+		$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
+		FileSystem::writeData($data, $file);
+
+		PageIndex::append($Parent->path, $newPagePath);
+		Cache::clear();
+
+		return Page::dashboardUrlByPath($newPagePath);
+	}
+
+	/**
+	 * Return updated view URL based on $path.
+	 *
+	 * @param string $path
+	 * @return string The view URL to the new page
+	 */
+	public static function dashboardUrlByPath(string $path) {
+		$Cache = new Cache();
+		$Cache->rebuild();
+
+		$Page = Page::findByPath($path);
+
+		return 'page?url=' . urlencode($Page->origUrl);
+	}
+
+	/**
+	 * Delete page.
+	 *
+	 * @return bool true on success
+	 */
+	public function delete() {
+		PageIndex::remove(dirname($this->path), $this->path);
+
+		return (bool) FileSystem::movePageDir(
+			$this->path,
+			'..' . AM_DIR_TRASH . dirname($this->path),
+			basename($this->path)
+		);
+	}
+
+	/**
+	 * Duplicate a page.
+	 *
+	 * @return string the new URL
+	 */
+	public function duplicate() {
+		// Build path and suffix.
+		$duplicatePath = $this->path;
+		$suffix = FileSystem::uniquePathSuffix($duplicatePath, '-copy');
+		$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);
+
+		FileSystem::copyPageFiles($this->path, $duplicatePath);
+		Page::appendSuffixToTitle($duplicatePath, $suffix);
+
+		PageIndex::append(dirname($duplicatePath), $duplicatePath);
+
+		Cache::clear();
+
+		return Page::dashboardUrlByPath($duplicatePath);
+	}
+
+	/**
+	 * Find a page by its path.
+	 *
+	 * @param string $path
+	 * @return Page|null
+	 */
+	public static function findByPath(string $path) {
+		$Automad = Automad::fromCache();
+
+		foreach ($Automad->getCollection() as $url => $Page) {
+			if ($Page->path == $path) {
+				return $Page;
+			}
+		}
 	}
 
 	/**
@@ -217,6 +335,15 @@ class Page {
 	}
 
 	/**
+	 * Return the full file system path of a page's data file.
+	 *
+	 * @return string The full file system path
+	 */
+	public function getFile() {
+		return FileSystem::fullPagePath($this->path) . $this->template . '.' . AM_FILE_EXT_DATA;
+	}
+
+	/**
 	 * Get the modification time/date of the page.
 	 * To determine to correct mtime, the page directory mtime (to check if any files got added) and the page data file mtime will be checked and the highest value will be returned.
 	 *
@@ -226,7 +353,7 @@ class Page {
 		$path = AM_BASE_DIR . AM_DIR_PAGES . $this->path;
 		$mtimes = array();
 
-		foreach (array($path, $path . $this->template . '.' . AM_FILE_EXT_DATA) as $item) {
+		foreach (array($path, $this->getFile()) as $item) {
 			if (file_exists($item)) {
 				$mtimes[] = date('Y-m-d H:i:s', filemtime($item));
 			}
@@ -276,6 +403,146 @@ class Page {
 	}
 
 	/**
+	 * Move a page directory and update all related links.
+	 *
+	 * @param string $destPath
+	 * @param string $slug
+	 * @return string the new page path
+	 */
+	public function moveDirAndUpdateLinks(string $destPath, string $slug) {
+		$oldPath = $this->path;
+
+		$newPagePath = FileSystem::movePageDir(
+			$this->path,
+			$destPath,
+			$slug
+		);
+
+		PageIndex::replace($destPath, $oldPath, $newPagePath);
+		$this->updatePageLinks($newPagePath);
+
+		return $newPagePath;
+	}
+
+	/**
+	 * Save page data.
+	 *
+	 * @param string $url
+	 * @param array $data
+	 * @param string $themeTemplate
+	 * @param string $slug
+	 * @return string a redirect URL in case the page was moved or its privacy has changed
+	 */
+	public function save(string $url, array $data, string $themeTemplate, string $slug) {
+		$data = array_map('trim', $data);
+		$data = array_filter($data, 'strlen');
+
+		if (!empty($data[AM_KEY_PRIVATE])) {
+			$private = true;
+		} else {
+			$private = false;
+		}
+
+		if (dirname($themeTemplate) != '.') {
+			$data[AM_KEY_THEME] = dirname($themeTemplate);
+		} else {
+			unset($data[AM_KEY_THEME]);
+		}
+
+		unlink($this->getFile());
+
+		$newTemplate = Str::stripEnd(basename($themeTemplate), '.php');
+		$newPageFile = FileSystem::fullPagePath($this->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
+
+		FileSystem::writeData($data, $newPageFile);
+
+		if ($url != '/') {
+			$newSlug = Page::updateSlug(
+				$this->get(AM_KEY_TITLE),
+				$data[AM_KEY_TITLE],
+				$slug
+			);
+
+			$newPagePath = $this->moveDirAndUpdateLinks(
+				dirname($this->path),
+				$newSlug
+			);
+
+			$newSlug = basename($newPagePath);
+		} else {
+			$newPagePath = '/';
+		}
+
+		$newTheme = '';
+
+		if (isset($data[AM_KEY_THEME])) {
+			$newTheme = $data[AM_KEY_THEME];
+		}
+
+		$currentTheme = '';
+
+		if (isset($this->data[AM_KEY_THEME])) {
+			$currentTheme = $this->data[AM_KEY_THEME];
+		}
+
+		Cache::clear();
+
+		if ($currentTheme != $newTheme || $this->template != $newTemplate) {
+			return array(
+				'redirect' => Page::dashboardUrlByPath($newPagePath)
+			);
+		}
+
+		if ($this->path != $newPagePath ||
+			$data[AM_KEY_TITLE] != $this->data[AM_KEY_TITLE] ||
+			$newSlug != $slug ||
+			$private != $this->private
+		) {
+			$Cache = new Cache();
+			$Automad = $Cache->rebuild();
+
+			$Page = Page::findByPath($newPagePath);
+
+			$newOrigUrl = $Page->origUrl;
+			$newUrl = $newOrigUrl;
+
+			if (!empty($data[AM_KEY_URL])) {
+				$newUrl = $data[AM_KEY_URL];
+			}
+
+			return array(
+				'slug' => $newSlug,
+				'url' => $newUrl,
+				'path' => $newPagePath,
+				'origUrl' => $newOrigUrl
+			);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Open a data text file under the given path, read the data,
+	 * append a suffix to the title variable and write back the data.
+	 *
+	 * @param string $path
+	 * @param string $suffix
+	 */
+	private static function appendSuffixToTitle(string $path, string $suffix) {
+		if ($suffix) {
+			$path = FileSystem::fullPagePath($path);
+			$files = FileSystem::glob($path . '*.' . AM_FILE_EXT_DATA);
+
+			if (!empty($files)) {
+				$file = reset($files);
+				$data = Parse::dataFile($file);
+				$data[AM_KEY_TITLE] .= ucwords(str_replace('-', ' ', $suffix));
+				FileSystem::writeData($data, $file);
+			}
+		}
+	}
+
+	/**
 	 * Extracts the tags string out of a given array and returns an array with these tags.
 	 *
 	 * @return array $tags
@@ -293,5 +560,54 @@ class Page {
 		}
 
 		return $tags;
+	}
+
+	/**
+	 * Update all file and page links based on a new path.
+	 *
+	 * @param string $newPath
+	 * @return bool true on success
+	 */
+	private function updatePageLinks(string $newPath) {
+		$Cache = new Cache();
+		$Automad = $Cache->rebuild();
+		$oldUrl = $this->origUrl;
+		$oldPath = $this->path;
+
+		if ($oldPath == $newPath) {
+			return false;
+		}
+
+		$Page = Page::findByPath($newPath);
+		$newUrl = $Page->origUrl;
+
+		$replace = array(
+			rtrim(AM_DIR_PAGES . $oldPath, '/') => rtrim(AM_DIR_PAGES . $newPath, '/'),
+			$oldUrl => $newUrl
+		);
+
+		foreach ($replace as $old => $new) {
+			LinksModel::update($Automad, $old, $new);
+		}
+
+		Cache::clear();
+
+		return true;
+	}
+
+	/**
+	 * Update slug in case it is not a custom one and just represents a sanitized version of the title.
+	 *
+	 * @param string $currentTitle
+	 * @param string $newTitle
+	 * @param string $slug
+	 * @return string the updated directory name slug
+	 */
+	private static function updateSlug(string $currentTitle, string $newTitle, string $slug) {
+		if (strlen($slug) === 0 || $slug === Str::slug($currentTitle, true, AM_DIRNAME_MAX_LEN)) {
+			return Str::slug($newTitle);
+		}
+
+		return Str::slug($slug);
 	}
 }

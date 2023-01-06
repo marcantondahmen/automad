@@ -80,7 +80,7 @@ class PageController {
 			return $Response->setError(Text::get('missingPageTitleError'));
 		}
 
-		if (!is_writable(dirname(PageModel::getPageFilePath($Parent)))) {
+		if (!is_writable(dirname($Parent->getFile()))) {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
@@ -89,7 +89,7 @@ class PageController {
 		$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 		$isPrivate = (bool) Request::post('private');
 
-		return $Response->setRedirect(PageModel::add($Parent, $title, $themeTemplate, $isPrivate));
+		return $Response->setRedirect(Page::add($Parent, $title, $themeTemplate, $isPrivate));
 	}
 
 	/**
@@ -138,7 +138,7 @@ class PageController {
 
 		// If the posted form contains any "data", save the form's data to the page file.
 		if ($data = Request::post('data')) {
-			if (filemtime(PageModel::getPageFilePath($Page)) > Request::post('dataFetchTime')) {
+			if (filemtime($Page->getFile()) > Request::post('dataFetchTime')) {
 				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
 			}
 
@@ -157,7 +157,7 @@ class PageController {
 		$ThemeCollection = new ThemeCollection();
 		$Theme = $ThemeCollection->getThemeByKey($Page->get(AM_KEY_THEME));
 		$keys = Fields::inCurrentTemplate($Page, $Theme);
-		$data = Parse::dataFile(PageModel::getPageFilePath($Page));
+		$data = Parse::dataFile($Page->getFile());
 
 		$fields = array_merge(
 			array_fill_keys(Fields::$reserved, ''),
@@ -196,13 +196,13 @@ class PageController {
 			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
 		}
 
-		$pageFile = PageModel::getPageFilePath($Page);
+		$pageFile = $Page->getFile();
 
 		if (!is_writable(dirname($pageFile)) || !is_writable(dirname(dirname($pageFile)))) {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
-		PageModel::delete($Page);
+		$Page->delete();
 
 		$Response->setSuccess(Text::get('deteledSuccess') . ' ' . $Page->origUrl);
 		$Response->setRedirect('page?url=' . urlencode($Page->parentUrl));
@@ -235,7 +235,7 @@ class PageController {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
-		return $Response->setRedirect(PageModel::duplicate($Page));
+		return $Response->setRedirect($Page->duplicate());
 	}
 
 	/**
@@ -267,28 +267,25 @@ class PageController {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
-		$pageFile = PageModel::getPageFilePath($Page);
+		$pageFile = $Page->getFile();
 
 		if (!is_writable(dirname($pageFile)) || !is_writable(dirname(dirname($pageFile)))) {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
-		$newPagePath = PageModel::moveDirAndUpdateLinks(
-			$Page,
+		$newPagePath = $Page->moveDirAndUpdateLinks(
 			$dest->path,
 			basename($Page->path)
 		);
 
-		$Response->setRedirect(PageModel::contextUrlByPath($newPagePath));
+		$Response->setRedirect(Page::dashboardUrlByPath($newPagePath));
 		Debug::log($Page->path, 'page');
 		Debug::log($dest->path, 'destination');
 
 		Cache::clear();
 
-		$Automad = Automad::fromCache();
-		$newUrl = PageModel::urlByPath($Automad, $newPagePath);
-
-		$Response->setData(array('url' => $newUrl));
+		$Page = Page::findByPath($newPagePath);
+		$Response->setData(array('url' => $Page->origUrl));
 
 		return $Response;
 	}
@@ -350,7 +347,7 @@ class PageController {
 	 */
 	private static function save(Page $Page, string $url, array $data, string $slug) {
 		$Response = new Response();
-		$pageFile = PageModel::getPageFilePath($Page);
+		$pageFile = $Page->getFile();
 
 		if (!$data[AM_KEY_TITLE]) {
 			return $Response->setError(Text::get('missingPageTitleError'));
@@ -368,7 +365,7 @@ class PageController {
 		// form $_POST['data']. That information has to be parsed first and "subdivided".
 		$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 
-		if ($result = PageModel::save($Page, $url, $data, $themeTemplate, $slug)) {
+		if ($result = $Page->save($url, $data, $themeTemplate, $slug)) {
 			if (!empty($result['redirect'])) {
 				return $Response->setRedirect($result['redirect']);
 			}

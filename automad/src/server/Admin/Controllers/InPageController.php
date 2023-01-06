@@ -80,10 +80,10 @@ class InPageController {
 				// Else send back form fields.
 				if ($postData && is_array($postData)) {
 					// Merge and save data.
-					$data = array_merge(Parse::dataFile(PageModel::getPageFilePath($Page)), $postData);
-					FileSystem::writeData($data, PageModel::getPageFilePath($Page));
+					$data = array_merge(Parse::dataFile($Page->getFile()), $postData);
+					FileSystem::writeData($data, $Page->getFile());
 					Debug::log($data, 'saved data');
-					Debug::log(PageModel::getPageFilePath($Page), 'data file');
+					Debug::log($Page->getFile(), 'data file');
 
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
 					if (!empty($postData[AM_KEY_TITLE]) && $Page->url != '/') {
