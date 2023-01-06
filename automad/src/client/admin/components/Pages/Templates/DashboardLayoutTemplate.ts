@@ -202,6 +202,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							createField('am-toggle-large', null, {
 								key: `new-${App.reservedFields.AM_KEY_PRIVATE}`,
 								name: App.reservedFields.AM_KEY_PRIVATE,
+								label: App.text('keepPagePrivate'),
 								value: true,
 							}).outerHTML
 						}
