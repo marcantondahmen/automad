@@ -137,6 +137,17 @@ class Automad {
 	}
 
 	/**
+	 * Load Automad instance from cache if possible.
+	 *
+	 * @return Automad
+	 */
+	public static function fromCache() {
+		$Cache = new Cache();
+
+		return $Cache->getAutomad();
+	}
+
+	/**
 	 * Return $collection array.
 	 *
 	 * @return array $this->collection

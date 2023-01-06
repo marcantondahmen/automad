@@ -39,7 +39,7 @@ namespace Automad\Admin\Controllers;
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\ImageModel;
 use Automad\Admin\UI\Utils\Messenger;
-use Automad\Core\Cache;
+use Automad\Core\Automad;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 
@@ -61,9 +61,7 @@ class ImageController {
 	public static function save() {
 		$Response = new Response();
 		$Messenger = new Messenger();
-
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$path = FileSystem::getPathByPostUrl($Automad);
 
 		ImageModel::save(

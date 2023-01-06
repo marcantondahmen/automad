@@ -38,7 +38,7 @@ namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\ImageCollectionModel;
-use Automad\Core\Cache;
+use Automad\Core\Automad;
 use Automad\Core\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -57,8 +57,7 @@ class ImageCollectionController {
 	 * @return Response the response object
 	 */
 	public static function list() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$path = FileSystem::getPathByPostUrl($Automad);
 		$Response = new Response();
 

@@ -38,6 +38,7 @@ namespace Automad\Admin\Models;
 
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Admin\UI\Utils\Text;
+use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
@@ -71,8 +72,7 @@ class FileModel {
 			return false;
 		}
 
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$path = FileSystem::getPathByPostUrl($Automad);
 		$oldFile = $path . basename($oldName);
 		$extension = FileSystem::getExtension($oldFile);
@@ -163,8 +163,7 @@ class FileModel {
 		$fileName = Str::slug(preg_replace('/\?.*/', '', basename($importUrl)));
 
 		if ($pageUrl) {
-			$Cache = new Cache();
-			$Automad = $Cache->getAutomad();
+			$Automad = Automad::fromCache();
 			$Page = $Automad->getPage($pageUrl);
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
 		} else {

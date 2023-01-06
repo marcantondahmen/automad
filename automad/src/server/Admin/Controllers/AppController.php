@@ -41,7 +41,7 @@ use Automad\Admin\Models\AppModel;
 use Automad\Admin\Models\UserCollectionModel;
 use Automad\Admin\Session;
 use Automad\Admin\UI\Utils\Text;
-use Automad\Core\Cache;
+use Automad\Core\Automad;
 use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
@@ -91,8 +91,7 @@ class AppController {
 	 */
 	public static function updateState() {
 		$Response = new Response;
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$UserCollectionModel = new UserCollectionModel();
 
 		return $Response->setData(array(

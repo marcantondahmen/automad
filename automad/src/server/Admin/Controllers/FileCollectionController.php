@@ -39,7 +39,7 @@ namespace Automad\Admin\Controllers;
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\FileCollectionModel;
 use Automad\Admin\UI\Utils\Messenger;
-use Automad\Core\Cache;
+use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
@@ -61,8 +61,7 @@ class FileCollectionController {
 	 * @return Response the response object
 	 */
 	public static function list() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$path = FileSystem::getPathByPostUrl($Automad);
 
 		$Response = new Response();
@@ -93,8 +92,7 @@ class FileCollectionController {
 		Debug::log($_POST + $_FILES, 'file');
 
 		if (!empty($_FILES['file']) && is_array($_FILES['file'])) {
-			$Cache = new Cache();
-			$Automad = $Cache->getAutomad();
+			$Automad = Automad::fromCache();
 			$Messenger = new Messenger();
 
 			$chunk = (object) array_merge(

@@ -36,6 +36,7 @@
 
 namespace Automad\Models;
 
+use Automad\Core\Cache;
 use Automad\Core\Parse;
 use Automad\Core\Str;
 
@@ -114,6 +115,19 @@ class Page {
 	}
 
 	/**
+	 * Get a page from the cache. In case the cache is outdated, create a new Automad object first.
+	 *
+	 * @param string $url
+	 * @return Page
+	 */
+	public static function fromCache(string $url) {
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
+
+		return $Automad->getPage($url);
+	}
+
+	/**
 	 * Create a new Page object by loading data from a given file.
 	 *
 	 * @param string $file
@@ -121,11 +135,11 @@ class Page {
 	 * @param string $path
 	 * @param string $index
 	 * @param Shared $Shared
-	 * @param string $parent
+	 * @param string $parentUrl
 	 * @param int $level
 	 * @return Page
 	 */
-	public static function fromFile(string $file, string $url, string $path, string $index, Shared $Shared, string $parent, int $level) {
+	public static function fromFile(string $file, string $url, string $path, string $index, Shared $Shared, string $parentUrl, int $level) {
 		$data = Parse::dataFile($file);
 
 		if (array_key_exists(AM_KEY_PRIVATE, $data)) {
@@ -159,7 +173,7 @@ class Page {
 		$data[AM_KEY_PAGE_INDEX] = $index;
 		$data[AM_KEY_PATH] = $path;
 		$data[AM_KEY_LEVEL] = $level;
-		$data[AM_KEY_PARENT] = $parent;
+		$data[AM_KEY_PARENT] = $parentUrl;
 		$data[AM_KEY_TEMPLATE] = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
 
 		return new Page($data, $Shared);

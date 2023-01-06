@@ -39,6 +39,7 @@ namespace Automad\Admin\Controllers;
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\PageModel;
 use Automad\Admin\UI\Utils\Text;
+use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
@@ -66,11 +67,9 @@ class PageController {
 	 * @return Response the response object
 	 */
 	public static function add() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$targetPage = Request::post('targetPage');
-		$Parent = $Automad->getPage($targetPage);
+		$Parent = Page::fromCache($targetPage);
 		$title = Request::post('title');
 
 		if (!$Parent) {
@@ -99,8 +98,7 @@ class PageController {
 	 * @return Response the response data
 	 */
 	public static function breadcrumbs() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$Response = new Response();
 		$url = Request::post('url');
 
@@ -129,8 +127,7 @@ class PageController {
 	 * @return Response the response object
 	 */
 	public static function data() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$Response = new Response();
 		$url = Request::post('url');
 		$Page = $Automad->getPage($url);
@@ -187,11 +184,9 @@ class PageController {
 	 * @return Response the response object
 	 */
 	public static function delete() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
-		$Page = $Automad->getPage($url);
+		$Page = Page::fromCache($url);
 
 		if ($url == '/') {
 			return $Response;
@@ -224,11 +219,9 @@ class PageController {
 	 * @return Response the response object
 	 */
 	public static function duplicate() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
-		$Page = $Automad->getPage($url);
+		$Page = Page::fromCache($url);
 
 		if ($url == '/') {
 			return $Response;
@@ -251,8 +244,7 @@ class PageController {
 	 * @return Response the response object
 	 */
 	public static function move() {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$Response = new Response();
 		$url = Request::post('url');
 		$dest = Request::post('targetPage');
@@ -293,7 +285,7 @@ class PageController {
 
 		Cache::clear();
 
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 		$newUrl = PageModel::urlByPath($Automad, $newPagePath);
 
 		$Response->setData(array('url' => $newUrl));
@@ -308,10 +300,8 @@ class PageController {
 	 */
 	public static function updateIndex() {
 		$Response = new Response();
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
 		$url = Request::post('url');
-		$Page = $Automad->getPage($url);
+		$Page = Page::fromCache($url);
 
 		if (!$Page) {
 			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
