@@ -111,8 +111,6 @@ class ReplacementModel {
 		}
 
 		Cache::clear();
-		$Cache = new Cache();
-		$Cache->rebuild();
 	}
 
 	/**

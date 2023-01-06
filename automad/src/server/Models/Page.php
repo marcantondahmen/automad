@@ -157,9 +157,7 @@ class Page {
 		// Build the file name and save the txt file.
 		$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
 		FileSystem::writeData($data, $file);
-
 		PageIndex::append($Parent->path, $newPagePath);
-		Cache::clear();
 
 		return Page::dashboardUrlByPath($newPagePath);
 	}
@@ -171,9 +169,7 @@ class Page {
 	 * @return string The view URL to the new page
 	 */
 	public static function dashboardUrlByPath(string $path) {
-		$Cache = new Cache();
-		$Cache->rebuild();
-
+		Cache::clear();
 		$Page = Page::findByPath($path);
 
 		return 'page?url=' . urlencode($Page->origUrl);
@@ -207,10 +203,7 @@ class Page {
 
 		FileSystem::copyPageFiles($this->path, $duplicatePath);
 		Page::appendSuffixToTitle($duplicatePath, $suffix);
-
 		PageIndex::append(dirname($duplicatePath), $duplicatePath);
-
-		Cache::clear();
 
 		return Page::dashboardUrlByPath($duplicatePath);
 	}
@@ -497,8 +490,7 @@ class Page {
 			$newSlug != $slug ||
 			$private != $this->private
 		) {
-			$Cache = new Cache();
-			$Automad = $Cache->rebuild();
+			Cache::clear();
 
 			$Page = Page::findByPath($newPagePath);
 
@@ -568,8 +560,9 @@ class Page {
 	 * @return bool true on success
 	 */
 	private function updatePageLinks(string $newPath) {
-		$Cache = new Cache();
-		$Automad = $Cache->rebuild();
+		Cache::clear();
+
+		$Automad = Automad::fromCache();
 		$oldUrl = $this->origUrl;
 		$oldPath = $this->path;
 
