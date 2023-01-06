@@ -36,7 +36,6 @@
 
 namespace Automad\Models;
 
-use Automad\Admin\Models\LinksModel;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
@@ -587,7 +586,7 @@ class Page {
 		);
 
 		foreach ($replace as $old => $new) {
-			LinksModel::update($Automad, $old, $new);
+			Links::update($Automad, $old, $new);
 		}
 
 		Cache::clear();

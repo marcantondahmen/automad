@@ -36,7 +36,6 @@
 
 namespace Automad\Models;
 
-use Automad\Admin\Models\LinksModel;
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Automad;
@@ -45,6 +44,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Core\Str;
+use Automad\Models\Links;
 use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -88,7 +88,7 @@ class File {
 		// Rename file and caption if needed and update all file links.
 		if ($newFile != $oldFile) {
 			if (FileSystem::renameMedia($oldFile, $newFile, $Messenger)) {
-				LinksModel::update(
+				Links::update(
 					$Automad,
 					Str::stripStart($oldFile, AM_BASE_DIR),
 					Str::stripStart($newFile, AM_BASE_DIR)
@@ -99,7 +99,7 @@ class File {
 					// basename since they belong to the same page.
 					$file = AM_DIR_PAGES . $Page->path . $Page->template . '.' . AM_FILE_EXT_DATA;
 
-					LinksModel::update(
+					Links::update(
 						$Automad,
 						basename($oldFile),
 						basename($newFile),

@@ -34,9 +34,11 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Models;
+namespace Automad\Models;
 
+use Automad\Admin\Models\ReplacementModel;
 use Automad\Admin\Models\Search\FileFieldsModel;
+use Automad\Admin\Models\SearchModel;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -48,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class LinksModel {
+class Links {
 	/**
 	 * Update all links to a page or file after renaming or moving content.
 	 *
@@ -70,7 +72,7 @@ class LinksModel {
 			if ($dataFilePath === $FileResultsModel->path || empty($dataFilePath)) {
 				$fields = array();
 
-				foreach ($FileResultsModel->fieldResults as $FieldResultsModel) {
+				foreach ($FileResultsModel->fieldResultsArray as $FieldResultsModel) {
 					$fields[] = $FieldResultsModel->field;
 				}
 
