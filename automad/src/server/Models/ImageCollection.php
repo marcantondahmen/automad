@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Models;
+namespace Automad\Models;
 
 use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ImageCollectionModel {
+class ImageCollection {
 	/**
 	 * List all images of a page or the shared data directory.
 	 *

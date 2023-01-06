@@ -37,9 +37,9 @@
 namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\Models\ImageCollectionModel;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem;
+use Automad\Models\ImageCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -62,7 +62,7 @@ class ImageCollectionController {
 		$Response = new Response();
 
 		return $Response->setData(
-			array('images' => ImageCollectionModel::list($path))
+			array('images' => ImageCollection::list($path))
 		);
 	}
 }
