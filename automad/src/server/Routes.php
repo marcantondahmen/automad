@@ -40,12 +40,11 @@ use Automad\Admin\API\RequestHandler;
 use Automad\Admin\API\Response;
 use Automad\Admin\Session;
 use Automad\Admin\UI\Dashboard;
+use Automad\Controllers\PageController;
 use Automad\Core\Cache;
-use Automad\Core\Debug;
 use Automad\Core\Feed;
 use Automad\Core\Parse;
 use Automad\Core\Router;
-use Automad\Engine\View;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -229,25 +228,7 @@ class Routes {
 	private static function registerPageRoutes(Router $Router) {
 		$Router->register(
 			'/.*',
-			function () {
-				$Cache = new Cache();
-
-				if ($Cache->pageCacheIsApproved()) {
-					return $Cache->readPageFromCache();
-				}
-
-				$Automad = $Cache->getAutomad();
-				$View = new View($Automad);
-				$output = $View->render();
-
-				if ($Automad->currentPageExists()) {
-					$Cache->writePageToCache($output);
-				} else {
-					Debug::log(AM_REQUEST, 'Page not found! Caching will be skipped!');
-				}
-
-				return $output;
-			}
+			array(PageController::class, 'render')
 		);
 	}
 }
