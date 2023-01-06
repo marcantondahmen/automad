@@ -34,44 +34,36 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Models\Search;
+namespace Automad\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A wrapper class for all results for a given data field.
+ * A data class to store file => field associations.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FieldResultsModel {
+class FileFields {
 	/**
-	 * A presenation string of all joined matches with wrapping context.
+	 * The fields array.
 	 */
-	public $context = '';
+	public $fields;
 
 	/**
-	 * The field name.
+	 * The file path.
 	 */
-	public $field;
+	public $path;
 
 	/**
-	 * An array with all found matches in the field value.
-	 * Note that the matches can differ in case the search value is an unescaped regex string.
-	 */
-	public $matches = false;
-
-	/**
-	 * Initialize a new field results instance.
+	 * Initialize a new FileFields instance.
 	 *
-	 * @param string $field
-	 * @param array $matches
-	 * @param string $context
+	 * @param string $path
+	 * @param array $fields
 	 */
-	public function __construct(string $field, array $matches, string $context) {
-		$this->field = $field;
-		$this->matches = $matches;
-		$this->context = $context;
+	public function __construct(string $path, array $fields) {
+		$this->path = $path;
+		$this->fields = $fields;
 	}
 }

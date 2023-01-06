@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Models;
+namespace Automad\Models\Search;
 
 use Automad\Core\Cache;
 use Automad\Core\Debug;
@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ReplacementModel {
+class Replacement {
 	/**
 	 * The search regex flags.
 	 */
@@ -102,10 +102,10 @@ class ReplacementModel {
 			return false;
 		}
 
-		foreach ($fileFieldsArray as $FileFieldsModel) {
-			$file = AM_BASE_DIR . $FileFieldsModel->path;
+		foreach ($fileFieldsArray as $FileFields) {
+			$file = AM_BASE_DIR . $FileFields->path;
 			$data = Parse::dataFile($file);
-			$data = $this->replaceInData($data, $FileFieldsModel->fields);
+			$data = $this->replaceInData($data, $FileFields->fields);
 
 			FileSystem::writeData($data, $file);
 		}

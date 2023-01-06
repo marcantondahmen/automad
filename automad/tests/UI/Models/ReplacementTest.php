@@ -6,7 +6,7 @@ use Automad\Core\Parse;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\UI\Models\ReplacementModel
+ * @testdox Automad\Models\Search\Replacement
  */
 class ReplacementTest extends TestCase {
 	public function dataForTestReplaceInDataIsSame() {
@@ -76,19 +76,19 @@ class ReplacementTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testReplaceInDataIsSame($searchValue, $replaceValue, $isRegex, $isCaseSensitive, $keys, $data, $expected) {
-		$ReplacementReflection = new \ReflectionClass('\Automad\UI\Models\ReplacementModel');
+		$ReplacementReflection = new \ReflectionClass('\Automad\Models\Search\Replacement');
 
 		$replaceInData = $ReplacementReflection->getMethod('replaceInData');
 		$replaceInData->setAccessible(true);
 
-		$ReplacementModel = new ReplacementModel(
+		$Replacement = new Replacement(
 			$searchValue,
 			$replaceValue,
 			$isRegex,
 			$isCaseSensitive
 		);
 
-		$replacedData = $replaceInData->invokeArgs($ReplacementModel, array($data, $keys));
+		$replacedData = $replaceInData->invokeArgs($Replacement, array($data, $keys));
 
 		$this->assertSame(
 			json_encode($replacedData, JSON_PRETTY_PRINT),

@@ -34,10 +34,8 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Models;
+namespace Automad\Models\Search;
 
-use Automad\Admin\Models\Search\FieldResultsModel;
-use Automad\Admin\Models\Search\FileResultsModel;
 use Automad\Core\Automad;
 use Automad\Core\Str;
 
@@ -50,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class SearchModel {
+class Search {
 	/**
 	 * The Automad results.
 	 */
@@ -89,10 +87,10 @@ class SearchModel {
 	}
 
 	/**
-	 * Perform a search in all data arrays and return an array with `FileResultsModel`.
+	 * Perform a search in all data arrays and return an array with `FileResults`.
 	 *
-	 * @see FileResultsModel
-	 * @return array an array of `FileResultsModel`
+	 * @see FileResults
+	 * @return array an array of `FileResults`
 	 */
 	public function searchPerFile() {
 		$resultsPerFile = array();
@@ -105,13 +103,13 @@ class SearchModel {
 
 		if ($fieldResultsArray = $this->searchData($sharedData)) {
 			$path = Str::stripStart(AM_FILE_SHARED_DATA, AM_BASE_DIR);
-			$resultsPerFile[] = new FileResultsModel($path, $fieldResultsArray);
+			$resultsPerFile[] = new FileResults($path, $fieldResultsArray);
 		}
 
 		foreach ($this->Automad->getCollection() as $Page) {
 			if ($fieldResultsArray = $this->searchData($Page->data)) {
 				$path = AM_DIR_PAGES . $Page->path . $Page->get(':template') . '.' . AM_FILE_EXT_DATA;
-				$resultsPerFile[] = new FileResultsModel($path, $fieldResultsArray, $Page->origUrl);
+				$resultsPerFile[] = new FileResults($path, $fieldResultsArray, $Page->origUrl);
 			}
 		}
 
@@ -122,11 +120,11 @@ class SearchModel {
 	 * Append an item to a given array only in case it is an results.
 	 *
 	 * @param array $resultsArray
-	 * @param FieldResultsModel|null $results
+	 * @param FieldResults|null $results
 	 * @return array the results array
 	 */
-	private function appendFieldResults(array $resultsArray, ?FieldResultsModel $results) {
-		if (is_a($results, '\Automad\Admin\Models\Search\FieldResultsModel')) {
+	private function appendFieldResults(array $resultsArray, ?FieldResults $results) {
+		if (is_a($results, '\Automad\Admin\Models\Search\FieldResults')) {
 			$resultsArray[] = $results;
 		}
 
@@ -158,25 +156,25 @@ class SearchModel {
 	}
 
 	/**
-	 * Merge an array of `FieldResultsModel` into a single results.
+	 * Merge an array of `FieldResults` into a single results.
 	 *
 	 * @param string $field
 	 * @param array $results
-	 * @return FieldResultsModel|null a field results results
+	 * @return FieldResults|null a field results results
 	 */
 	private function mergeFieldResults(string $field, array $results) {
 		$matches = array();
 		$contextArray = array();
 
 		foreach ($results as $result) {
-			if (is_a($result, '\Automad\Admin\Models\Search\FieldResultsModel')) {
+			if (is_a($result, '\Automad\Admin\Models\Search\FieldResults')) {
 				$matches = array_merge($matches, $result->matches);
 				$contextArray[] = $result->context;
 			}
 		}
 
 		if (!empty($matches)) {
-			return new FieldResultsModel(
+			return new FieldResults(
 				$field,
 				$matches,
 				join(' ... ', $contextArray)
@@ -191,7 +189,7 @@ class SearchModel {
 	 *
 	 * @param string $field
 	 * @param array $array
-	 * @return FieldResultsModel a field results results
+	 * @return FieldResults a field results results
 	 */
 	private function searchArrayRecursively(string $field, array $array) {
 		$results = array();
@@ -211,11 +209,11 @@ class SearchModel {
 
 	/**
 	 * Perform a search in a block field recursively and return a
-	 * `FieldResultsModel` results for a given search value.
+	 * `FieldResults` results for a given search value.
 	 *
 	 * @param string $field
 	 * @param array $blocks
-	 * @return FieldResultsModel|null a field results results
+	 * @return FieldResults|null a field results results
 	 */
 	private function searchBlocksRecursively(string $field, array $blocks) {
 		$results = array();
@@ -246,11 +244,11 @@ class SearchModel {
 
 	/**
 	 * Perform a search in a single data array and return an
-	 * array of `FieldResultsModel`.
+	 * array of `FieldResults`.
 	 *
-	 * @see FieldResultsModel
+	 * @see FieldResults
 	 * @param array $data
-	 * @return array an array of `FieldResultsModel` resultss
+	 * @return array an array of `FieldResults` resultss
 	 */
 	private function searchData(array $data) {
 		$fieldResults = array();
@@ -259,16 +257,16 @@ class SearchModel {
 			if (strpos($field, '+') === 0) {
 				try {
 					$data = json_decode($value);
-					$FieldResultsModel = $this->searchBlocksRecursively($field, $data->blocks);
+					$FieldResults = $this->searchBlocksRecursively($field, $data->blocks);
 				} catch (Exception $error) {
-					$FieldResultsModel = false;
+					$FieldResults = false;
 				}
 			} else {
-				$FieldResultsModel = $this->searchTextField($field, $value);
+				$FieldResults = $this->searchTextField($field, $value);
 			}
 
-			if (!empty($FieldResultsModel)) {
-				$fieldResults[] = $FieldResultsModel;
+			if (!empty($FieldResults)) {
+				$fieldResults[] = $FieldResults;
 			}
 		}
 
@@ -277,11 +275,11 @@ class SearchModel {
 
 	/**
 	 * Perform a search in a single data field and return a
-	 * `FieldResultsModel` results for a given search value.
+	 * `FieldResults` results for a given search value.
 	 *
 	 * @param string $field
 	 * @param string $value
-	 * @return FieldResultsModel|null the field results
+	 * @return FieldResults|null the field results
 	 */
 	private function searchTextField(string $field, string $value) {
 		$ignoredKeys = array(
@@ -328,7 +326,7 @@ class SearchModel {
 		}
 
 		if ($fieldMatches) {
-			return new FieldResultsModel(
+			return new FieldResults(
 				$field,
 				$fieldMatches,
 				$context

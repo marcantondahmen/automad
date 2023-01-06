@@ -36,10 +36,10 @@
 
 namespace Automad\Models;
 
-use Automad\Admin\Models\ReplacementModel;
-use Automad\Admin\Models\Search\FileFieldsModel;
-use Automad\Admin\Models\SearchModel;
 use Automad\Core\Automad;
+use Automad\Models\Search\FileFields;
+use Automad\Models\Search\Replacement;
+use Automad\Models\Search\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -64,24 +64,24 @@ class Links {
 		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
 		$replaceValue = $new;
 
-		$SearchModel = new SearchModel($Automad, $searchValue, true, false);
-		$fileResultsArray = $SearchModel->searchPerFile();
+		$Search = new Search($Automad, $searchValue, true, false);
+		$fileResultsArray = $Search->searchPerFile();
 		$fileFieldsArray = array();
 
-		foreach ($fileResultsArray as $FileResultsModel) {
-			if ($dataFilePath === $FileResultsModel->path || empty($dataFilePath)) {
+		foreach ($fileResultsArray as $FileResults) {
+			if ($dataFilePath === $FileResults->path || empty($dataFilePath)) {
 				$fields = array();
 
-				foreach ($FileResultsModel->fieldResultsArray as $FieldResultsModel) {
-					$fields[] = $FieldResultsModel->field;
+				foreach ($FileResults->fieldResultsArray as $FieldResults) {
+					$fields[] = $FieldResults->field;
 				}
 
-				$fileFieldsArray[] = new FileFieldsModel($FileResultsModel->path, $fields);
+				$fileFieldsArray[] = new FileFields($FileResults->path, $fields);
 			}
 		}
 
-		$ReplacementModel = new ReplacementModel($searchValue, $replaceValue, true, false);
-		$ReplacementModel->replaceInFiles($fileFieldsArray);
+		$Replacement = new Replacement($searchValue, $replaceValue, true, false);
+		$Replacement->replaceInFiles($fileFieldsArray);
 
 		return true;
 	}

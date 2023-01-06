@@ -37,13 +37,13 @@
 namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\Models\ReplacementModel;
-use Automad\Admin\Models\Search\FileFieldsModel;
-use Automad\Admin\Models\SearchModel;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Core\Request;
+use Automad\Models\Search\FileFields;
+use Automad\Models\Search\Replacement;
+use Automad\Models\Search\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -71,7 +71,7 @@ class SearchController {
 
 		if ($replaceSelected) {
 			$fileFieldsArray = array();
-			$ReplacementModel = new ReplacementModel(
+			$Replacement = new Replacement(
 				Request::post('searchValue'),
 				Request::post('replaceValue'),
 				$isRegex,
@@ -79,14 +79,14 @@ class SearchController {
 			);
 
 			foreach ($files as $path => $fieldsCsv) {
-				$fileFieldsArray[] = new FileFieldsModel($path, Parse::csv($fieldsCsv));
+				$fileFieldsArray[] = new FileFields($path, Parse::csv($fieldsCsv));
 			}
 
-			$ReplacementModel->replaceInFiles($fileFieldsArray);
+			$Replacement->replaceInFiles($fileFieldsArray);
 		}
 
 		$Cache = new Cache();
-		$Search = new SearchModel(
+		$Search = new Search(
 			$Cache->getAutomad(),
 			Request::post('searchValue'),
 			$isRegex,

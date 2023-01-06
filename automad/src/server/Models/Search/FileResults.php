@@ -34,22 +34,24 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Models\Search;
+namespace Automad\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A data class to store file => field associations.
+ * A wrapper class for all results for a given data file.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileFieldsModel {
+class FileResults {
 	/**
-	 * The fields array.
+	 * The array of `FieldResults`.
+	 *
+	 * @see FieldResults
 	 */
-	public $fields;
+	public $fieldResultsArray;
 
 	/**
 	 * The file path.
@@ -57,13 +59,21 @@ class FileFieldsModel {
 	public $path;
 
 	/**
-	 * Initialize a new FileFieldsModel instance.
-	 *
-	 * @param string $path
-	 * @param array $fields
+	 * The page URL or an empty string for shared data.
 	 */
-	public function __construct(string $path, array $fields) {
+	public $url;
+
+	/**
+	 * Initialize a new field results instance.
+	 *
+	 * @see FieldResults
+	 * @param string $path
+	 * @param array $fieldResultsArray
+	 * @param string $url
+	 */
+	public function __construct(string $path, array $fieldResultsArray, string $url = '') {
 		$this->path = $path;
-		$this->fields = $fields;
+		$this->fieldResultsArray = $fieldResultsArray;
+		$this->url = (string) $url;
 	}
 }
