@@ -36,6 +36,7 @@
 
 namespace Automad\Models;
 
+use Automad\Core\Parse;
 use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -110,6 +111,58 @@ class Page {
 
 		// Trigger error for undefined properties.
 		trigger_error('Page property "' . $key . '" not defined!', E_USER_ERROR);
+	}
+
+	/**
+	 * Create a new Page object by loading data from a given file.
+	 *
+	 * @param string $file
+	 * @param string $url
+	 * @param string $path
+	 * @param string $index
+	 * @param Shared $Shared
+	 * @param string $parent
+	 * @param int $level
+	 * @return Page
+	 */
+	public static function fromFile(string $file, string $url, string $path, string $index, Shared $Shared, string $parent, int $level) {
+		$data = Parse::dataFile($file);
+
+		if (array_key_exists(AM_KEY_PRIVATE, $data)) {
+			$private = ($data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] !== 'false');
+		} else {
+			$private = false;
+		}
+
+		$data[AM_KEY_PRIVATE] = $private;
+
+		if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
+			if (trim($url, '/')) {
+				$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
+			} else {
+				$data[AM_KEY_TITLE] = $Shared->get(AM_KEY_SITENAME);
+			}
+		}
+
+		if (empty($data[AM_KEY_URL])) {
+			$data[AM_KEY_URL] = $url;
+		}
+
+		if (array_key_exists(AM_KEY_HIDDEN, $data)) {
+			$data[AM_KEY_HIDDEN] = ($data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] !== 'false');
+		} else {
+			$data[AM_KEY_HIDDEN] = false;
+		}
+
+		$data[AM_KEY_ORIG_URL] = $url;
+
+		$data[AM_KEY_PAGE_INDEX] = $index;
+		$data[AM_KEY_PATH] = $path;
+		$data[AM_KEY_LEVEL] = $level;
+		$data[AM_KEY_PARENT] = $parent;
+		$data[AM_KEY_TEMPLATE] = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
+
+		return new Page($data, $Shared);
 	}
 
 	/**

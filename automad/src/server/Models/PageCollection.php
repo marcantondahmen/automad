@@ -40,7 +40,6 @@ use Automad\Admin\Session;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
-use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\Routes;
 
@@ -121,64 +120,14 @@ class PageCollection {
 
 			// Set URL.
 			$url = $this->makeUrl($parentUrl, basename($path));
-
-			// Get content from text file.
-			$data = Parse::dataFile($file);
-
-			// Check if page is private.
-			if (array_key_exists(AM_KEY_PRIVATE, $data)) {
-				$private = ($data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] !== 'false');
-			} else {
-				$private = false;
-			}
-
-			$data[AM_KEY_PRIVATE] = $private;
+			$Page = Page::fromFile($file, $url, $path, $index, $this->Shared, $parentUrl, $level);
 
 			// Stop processing of page data and subdirectories if page is private and nobody is logged in.
-			if (!$this->user && $private) {
+			if ($Page->private && !$this->user) {
 				return false;
 			}
 
-			// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-			// In case the title is missig for the home page, use the site name instead.
-			if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
-				if (trim($url, '/')) {
-					// If page is not the home page...
-					$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
-				} else {
-					// If page is home page...
-					$data[AM_KEY_TITLE] = $this->Shared->get(AM_KEY_SITENAME);
-				}
-			}
-
-			// Check for an URL override in $data and use that URL if existing. If no URL is defined as override, add the created $url above to $data to be used as a page variable.
-			if (empty($data[AM_KEY_URL])) {
-				$data[AM_KEY_URL] = $url;
-			}
-
-			// Convert hidden value to boolean.
-			if (array_key_exists(AM_KEY_HIDDEN, $data)) {
-				$data[AM_KEY_HIDDEN] = ($data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] !== 'false');
-			} else {
-				$data[AM_KEY_HIDDEN] = false;
-			}
-
-			// Save original URL.
-			// In case an URL for redirects is defined in the data file, the original URL will be used to resolve relative links.
-			$data[AM_KEY_ORIG_URL] = $url;
-
-			// Set read-only variables.
-			$data[AM_KEY_PAGE_INDEX] = $index;
-			$data[AM_KEY_PATH] = $path;
-			$data[AM_KEY_LEVEL] = $level;
-			$data[AM_KEY_PARENT] = $parentUrl;
-			$data[AM_KEY_TEMPLATE] = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
-
-			// The relative URL ($url) of the page becomes the key (in $collection).
-			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
-			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url and $data instead).
-			$this->collection[$url] = new Page($data, $this->Shared);
-
+			$this->collection[$url] = $Page;
 			$children = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR);
 
 			// Merge index file with glob array in order to restore the defined page order.
