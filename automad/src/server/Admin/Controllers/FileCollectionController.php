@@ -37,12 +37,12 @@
 namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\Models\FileCollectionModel;
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
+use Automad\Models\FileCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -71,11 +71,11 @@ class FileCollectionController {
 
 		if ($delete = Request::post('delete')) {
 			if (is_array($delete)) {
-				FileCollectionModel::deleteFiles(array_keys($delete), $path, $Messenger);
+				FileCollection::deleteFiles(array_keys($delete), $path, $Messenger);
 			}
 		}
 
-		$data = array('files' => FileCollectionModel::list($path));
+		$data = array('files' => FileCollection::list($path));
 
 		return $Response
 			->setData($data)
@@ -108,7 +108,7 @@ class FileCollectionController {
 				$_FILES['file'] + $_POST
 			);
 
-			FileCollectionModel::upload(
+			FileCollection::upload(
 				$chunk,
 				FileSystem::getPathByPostUrl($Automad),
 				$Messenger
