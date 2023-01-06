@@ -82,7 +82,7 @@ class ConfigController {
 					Cache::clear();
 					$Response->setReload(true);
 				} else {
-					$Response->setError(Text::get('permissionsDeniedError') . '<br>' . Config::$file);
+					$Response->setError(Text::get('permissionsDeniedError'));
 				}
 			} else {
 				$Response->setError(Text::get('invalidJsonError'));
@@ -143,7 +143,7 @@ class ConfigController {
 			$Response->setSuccess(Text::get('updateConfigSuccess'));
 			Cache::clear();
 		} else {
-			$Response->setError(Text::get('permissionsDeniedError') . '<br>' . Config::$file);
+			$Response->setError(Text::get('permissionsDeniedError'));
 		}
 
 		return $Response;

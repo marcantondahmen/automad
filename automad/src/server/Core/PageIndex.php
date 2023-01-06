@@ -108,13 +108,14 @@ class PageIndex {
 	 */
 	public static function replace(string $parentPath, string $old, string $new) {
 		$layout = self::read($parentPath);
+
 		if ($layout) {
 			$index = array_search(basename($old), $layout);
 
 			if ($index !== false) {
 				$layout[$index] = $new;
 
-				return self::write($parentPath, $layout);
+				return (bool) self::write($parentPath, $layout);
 			}
 		}
 	}
@@ -124,7 +125,7 @@ class PageIndex {
 	 *
 	 * @param string $parentPath
 	 * @param array $layout
-	 * @return bool true on success
+	 * @return array|null the new layout or null
 	 */
 	public static function write(string $parentPath, array $layout) {
 		$indexFile = self::getIndexFile($parentPath);

@@ -236,7 +236,7 @@ class Routes {
 					return $Cache->readPageFromCache();
 				}
 
-				$Automad = $Cache->getAutomad($Cache);
+				$Automad = $Cache->getAutomad();
 				$View = new View($Automad);
 				$output = $View->render();
 

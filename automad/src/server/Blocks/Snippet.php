@@ -36,11 +36,11 @@
 
 namespace Automad\Blocks;
 
+use Automad\Admin\UI\InPage;
 use Automad\Core\Automad;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
 use Automad\Engine\Runtime;
-use Automad\Admin\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -78,8 +78,7 @@ class Snippet {
 		$ContentProcessor = new ContentProcessor(
 			$Automad,
 			$Runtime,
-			$InPage,
-			false
+			$InPage
 		);
 
 		$TemplateProcessor = new TemplateProcessor(

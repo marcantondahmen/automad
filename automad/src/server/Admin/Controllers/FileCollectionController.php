@@ -71,7 +71,9 @@ class FileCollectionController {
 		Debug::log($_POST);
 
 		if ($delete = Request::post('delete')) {
-			FileCollectionModel::deleteFiles(array_keys($delete), $path, $Messenger);
+			if (is_array($delete)) {
+				FileCollectionModel::deleteFiles(array_keys($delete), $path, $Messenger);
+			}
 		}
 
 		$data = array('files' => FileCollectionModel::list($path));

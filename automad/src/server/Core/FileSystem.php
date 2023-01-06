@@ -113,7 +113,7 @@ class FileSystem {
 	 * @return bool true on success
 	 */
 	public static function deleteMedia(string $file, Messenger $Messenger) {
-		$fileError = Text::get('permissionsDeniedError') . ' "' . basename($file) . '"';
+		$fileError = Text::get('permissionsDeniedError');
 
 		if (!is_writable($file)) {
 			$Messenger->setError($fileError);
@@ -128,7 +128,7 @@ class FileSystem {
 		}
 
 		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
-		$captionError = Text::get('permissionsDeniedError') . ' "' . basename($captionFile) . '"';
+		$captionError = Text::get('permissionsDeniedError');
 
 		if (file_exists($captionFile)) {
 			if (!is_writable($captionFile)) {
@@ -500,13 +500,13 @@ class FileSystem {
 	 */
 	public static function renameMedia(string $oldFile, string $newFile, Messenger $Messenger) {
 		if (!is_writable(dirname($oldFile))) {
-			$Messenger->setError(Text::get('permissionsDeniedError') . ' "' . basename(dirname($oldFile)) . '"');
+			$Messenger->setError(Text::get('permissionsDeniedError'));
 
 			return false;
 		}
 
 		if (!is_writable($oldFile)) {
-			$Messenger->setError(Text::get('permissionsDeniedError') . ' "' . basename($oldFile) . '"');
+			$Messenger->setError(Text::get('permissionsDeniedError'));
 
 			return false;
 		}
@@ -518,7 +518,7 @@ class FileSystem {
 		}
 
 		if (!rename($oldFile, $newFile)) {
-			$Messenger->setError(Text::get('permissionsDeniedError') . ' "' . basename($oldFile) . '"');
+			$Messenger->setError(Text::get('permissionsDeniedError'));
 		}
 
 		// Set new mtime to force refresh of page cache in case the new name was belonging to a delete file before.
@@ -531,7 +531,7 @@ class FileSystem {
 			if (is_writable($oldCaptionFile) && (is_writable($newCaptionFile) || !file_exists($newCaptionFile))) {
 				rename($oldCaptionFile, $newCaptionFile);
 			} else {
-				$Messenger->setError(Text::get('permissionsDeniedError') . ' "' . basename($newCaptionFile) . '"');
+				$Messenger->setError(Text::get('permissionsDeniedError'));
 
 				return false;
 			}

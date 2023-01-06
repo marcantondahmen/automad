@@ -58,7 +58,7 @@ class ContextProcessor extends AbstractFeatureProcessor {
 	 * @param array $matches
 	 * @param string $directory
 	 * @param bool $collectSnippetDefinitions
-	 * @return sting the processed template string
+	 * @return string the processed template string
 	 */
 	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
 		if (!empty($matches['with'])) {

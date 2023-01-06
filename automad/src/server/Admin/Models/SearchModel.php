@@ -281,7 +281,7 @@ class SearchModel {
 	 *
 	 * @param string $field
 	 * @param string $value
-	 * @return FieldResultsModel the field results
+	 * @return FieldResultsModel|null the field results
 	 */
 	private function searchTextField(string $field, string $value) {
 		$ignoredKeys = array(
@@ -293,7 +293,7 @@ class SearchModel {
 		);
 
 		if (preg_match('/^(:|date|checkbox|tags|color)/', $field) || in_array($field, $ignoredKeys)) {
-			return false;
+			return null;
 		}
 
 		$fieldMatches = array();

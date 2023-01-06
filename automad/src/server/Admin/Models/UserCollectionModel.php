@@ -151,7 +151,7 @@ class UserCollectionModel {
 
 				return $this->save($Messenger);
 			} else {
-				$Messenger->setError(Text::get('permissionsDeniedError') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
+				$Messenger->setError(Text::get('permissionsDeniedError'));
 
 				return false;
 			}
@@ -277,7 +277,7 @@ class UserCollectionModel {
 	 */
 	public function save(Messenger $Messenger) {
 		if (!FileSystem::write(AM_FILE_ACCOUNTS, $this->generatePHP())) {
-			$Messenger->setError(Text::get('permissionsDeniedError') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
+			$Messenger->setError(Text::get('permissionsDeniedError'));
 
 			return false;
 		}
@@ -404,7 +404,7 @@ class UserCollectionModel {
 	private function validEmail(string $email = '') {
 		preg_match('/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/', $email, $matches);
 
-		return $matches;
+		return (bool) $matches;
 	}
 
 	/**

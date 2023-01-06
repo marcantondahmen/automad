@@ -70,30 +70,27 @@ class PageController {
 		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$targetPage = Request::post('targetPage');
+		$Parent = $Automad->getPage($targetPage);
+		$title = Request::post('title');
 
-		if ($targetPage && ($Parent = $Automad->getPage($targetPage))) {
-			if ($title = Request::post('title')) {
-				if (is_writable(dirname(PageModel::getPageFilePath($Parent)))) {
-					Debug::log($Parent->url, 'parent page');
-
-					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
-					$isPrivate = Request::post('private');
-
-					$Response->setRedirect(PageModel::add($Parent, $title, $themeTemplate, $isPrivate));
-				} else {
-					$Response->setError(
-						Text::get('permissionsDeniedError') .
-						'<p>' . dirname(PageModel::getPageFilePath($Parent)) . '</p>'
-					);
-				}
-			} else {
-				$Response->setError(Text::get('missingPageTitleError'));
-			}
-		} else {
-			$Response->setError(Text::get('missingTargetPageError'));
+		if (!$Parent) {
+			return $Response->setError(Text::get('missingTargetPageError'));
 		}
 
-		return $Response;
+		if (!$title) {
+			return $Response->setError(Text::get('missingPageTitleError'));
+		}
+
+		if (!is_writable(dirname(PageModel::getPageFilePath($Parent)))) {
+			return $Response->setError(Text::get('permissionsDeniedError'));
+		}
+
+		Debug::log($Parent->url, 'parent page');
+
+		$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
+		$isPrivate = (bool) Request::post('private');
+
+		return $Response->setRedirect(PageModel::add($Parent, $title, $themeTemplate, $isPrivate));
 	}
 
 	/**
@@ -148,13 +145,15 @@ class PageController {
 				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
 			}
 
-			// Save page and replace $Response with the returned $Response object (error or redirect).
-			return self::save(
-				$Page,
-				$url,
-				$data,
-				Request::post('slug')
-			);
+			if (is_array($data)) {
+				// Save page and replace $Response with the returned $Response object (error or redirect).
+				return self::save(
+					$Page,
+					$url,
+					$data,
+					Request::post('slug')
+				);
+			}
 		}
 
 		// If only the URL got submitted, just get the form ready.
@@ -192,28 +191,29 @@ class PageController {
 		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
+		$Page = $Automad->getPage($url);
 
-		// Validate $_POST.
-		if ($url && ($Page = $Automad->getPage($url)) && $url != '/') {
-			// Check if the page's directory and parent directory are wirtable.
-			if (is_writable(dirname(PageModel::getPageFilePath($Page)))
-				&& is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
-				PageModel::delete($Page);
-
-				$Response->setSuccess(Text::get('deteledSuccess') . ' ' . $Page->origUrl);
-				$Response->setRedirect('page?url=' . urlencode($Page->parentUrl));
-				Debug::log($Page->url, 'deleted');
-
-				Cache::clear();
-			} else {
-				$Response->setError(
-					Text::get('permissionsDeniedError') .
-					'<p>' . dirname(dirname(PageModel::getPageFilePath($Page))) . '</p>'
-				);
-			}
-		} else {
-			$Response->setError(Text::get('pageNotFoundError'));
+		if ($url == '/') {
+			return $Response;
 		}
+
+		if (!$Page) {
+			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
+		}
+
+		$pageFile = PageModel::getPageFilePath($Page);
+
+		if (!is_writable(dirname($pageFile)) || !is_writable(dirname(dirname($pageFile)))) {
+			return $Response->setError(Text::get('permissionsDeniedError'));
+		}
+
+		PageModel::delete($Page);
+
+		$Response->setSuccess(Text::get('deteledSuccess') . ' ' . $Page->origUrl);
+		$Response->setRedirect('page?url=' . urlencode($Page->parentUrl));
+		Debug::log($Page->url, 'deleted');
+
+		Cache::clear();
 
 		return $Response;
 	}
@@ -228,21 +228,21 @@ class PageController {
 		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
+		$Page = $Automad->getPage($url);
 
-		if ($url) {
-			if ($url != '/' && ($Page = $Automad->getPage($url))) {
-				// Check permissions.
-				if (is_writable(dirname(FileSystem::fullPagePath($Page->path)))) {
-					$Response->setRedirect(PageModel::duplicate($Page));
-				} else {
-					$Response->setError(Text::get('permissionsDeniedError'));
-				}
-			} else {
-				$Response->setError(Text::get('pageNotFoundError'));
-			}
+		if ($url == '/') {
+			return $Response;
 		}
 
-		return $Response;
+		if (!$Page) {
+			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
+		}
+
+		if (!is_writable(dirname(FileSystem::fullPagePath($Page->path)))) {
+			return $Response->setError(Text::get('permissionsDeniedError'));
+		}
+
+		return $Response->setRedirect(PageModel::duplicate($Page));
 	}
 
 	/**
@@ -272,17 +272,13 @@ class PageController {
 		}
 
 		if (!is_writable(FileSystem::fullPagePath($dest->path))) {
-			return $Response->setError(
-				Text::get('permissionsDeniedError')
-			);
+			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
 		$pageFile = PageModel::getPageFilePath($Page);
 
 		if (!is_writable(dirname($pageFile)) || !is_writable(dirname(dirname($pageFile)))) {
-			return $Response->setError(
-				Text::get('permissionsDeniedError')
-			);
+			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
 		$newPagePath = PageModel::moveDirAndUpdateLinks(
@@ -296,6 +292,11 @@ class PageController {
 		Debug::log($dest->path, 'destination');
 
 		Cache::clear();
+
+		$Automad = $Cache->getAutomad();
+		$newUrl = PageModel::urlByPath($Automad, $newPagePath);
+
+		$Response->setData(array('url' => $newUrl));
 
 		return $Response;
 	}
@@ -319,14 +320,12 @@ class PageController {
 		$parentPath = Request::post('parentPath');
 		$layout = json_decode(Request::post('layout'));
 
-		$Response->setData(
+		return $Response->setData(
 			array(
 				'index' => PageIndex::write($parentPath, $layout),
 				'path' => $parentPath
 			)
 		);
-
-		return $Response;
 	}
 
 	/**
@@ -361,38 +360,30 @@ class PageController {
 	 */
 	private static function save(Page $Page, string $url, array $data, string $slug) {
 		$Response = new Response();
+		$pageFile = PageModel::getPageFilePath($Page);
 
-		// A title is required for building the page's path.
-		// If there is no title provided, an error will be returned instead of saving and moving the page.
-		if ($data[AM_KEY_TITLE]) {
-			// Check if the parent directory is writable for all pages but the homepage.
-			// Since the directory of the homepage is just "pages" and its parent directory
-			// is the base directory, it should not be necessary to set the base directoy permissions
-			// to 777, since the homepage directory will never be renamed or moved.
-			if ($url =='/' || is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
-				// Check if the page's file and the page's directory is writable.
-				if (is_writable(PageModel::getPageFilePath($Page))
-					&& is_writable(dirname(PageModel::getPageFilePath($Page)))) {
-					// The theme and the template get passed as theme/template.php combination separate
-					// form $_POST['data']. That information has to be parsed first and "subdivided".
-					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
+		if (!$data[AM_KEY_TITLE]) {
+			return $Response->setError(Text::get('missingPageTitleError'));
+		}
 
-					if ($result = PageModel::save($Page, $url, $data, $themeTemplate, $slug)) {
-						if (!empty($result['redirect'])) {
-							$Response->setRedirect($result['redirect']);
-						} else {
-							$Response->setData(array('update' => $result));
-						}
-					}
-				} else {
-					$Response->setError(Text::get('permissionsDeniedError'));
-				}
-			} else {
-				$Response->setError(Text::get('permissionsDeniedError'));
+		if ($url != '/' && !is_writable(dirname(dirname($pageFile)))) {
+			return $Response->setError(Text::get('permissionsDeniedError'));
+		}
+
+		if (!is_writable($pageFile) || !is_writable(dirname($pageFile))) {
+			return $Response->setError(Text::get('permissionsDeniedError'));
+		}
+
+		// The theme and the template get passed as theme/template.php combination separate
+		// form $_POST['data']. That information has to be parsed first and "subdivided".
+		$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
+
+		if ($result = PageModel::save($Page, $url, $data, $themeTemplate, $slug)) {
+			if (!empty($result['redirect'])) {
+				return $Response->setRedirect($result['redirect']);
 			}
-		} else {
-			// If the title is missing, just return an error.
-			$Response->setError(Text::get('missingPageTitleError'));
+
+			$Response->setData(array('update' => $result));
 		}
 
 		return $Response;

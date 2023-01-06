@@ -77,7 +77,7 @@ class Update {
 	/**
 	 * Get items to be updated from config.
 	 *
-	 * @return array The array of items to be updated or false on error
+	 * @return array|null The array of items to be updated or false on error
 	 */
 	public static function items() {
 		$items = Parse::csv(AM_UPDATE_ITEMS);
@@ -89,8 +89,6 @@ class Update {
 				return $items;
 			}
 		}
-
-		return false;
 	}
 
 	/**

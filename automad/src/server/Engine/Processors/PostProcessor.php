@@ -73,7 +73,7 @@ class PostProcessor {
 	 */
 	public function __construct(
 		Automad $Automad,
-		InPage $InPage,
+		InPage $InPage
 	) {
 		$this->Automad = $Automad;
 		$this->InPage = $InPage;

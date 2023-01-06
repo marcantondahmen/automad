@@ -65,7 +65,9 @@ class SharedController {
 
 		if ($data = Request::post('data')) {
 			// Save changes.
-			return self::save($Automad, $data);
+			if (is_array($data)) {
+				return self::save($Automad, $data);
+			}
 		}
 
 		// If there is no data, just get the form ready.

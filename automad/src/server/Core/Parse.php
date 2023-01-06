@@ -54,7 +54,7 @@ class Parse {
 	 * @see FileUtils::caption()
 	 * @deprecated 1.9.0
 	 * @param string $file
-	 * @return array An array with resolved file paths
+	 * @return string the caption string
 	 */
 	public static function caption(string $file) {
 		return FileUtils::caption($file);

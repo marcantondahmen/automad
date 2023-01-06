@@ -65,7 +65,7 @@ class PackageManagerController {
 	/**
 	 * Get the array of installed packages.
 	 *
-	 * @return array The array with all installed packages.
+	 * @return Response The array with all installed packages.
 	 */
 	public static function getInstalled() {
 		$Response = new Response();

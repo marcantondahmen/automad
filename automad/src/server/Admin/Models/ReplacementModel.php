@@ -146,10 +146,7 @@ class ReplacementModel {
 		foreach ($keys as $key) {
 			if (strpos($key, '+') === 0) {
 				$fieldData = json_decode($data[$key]);
-				$fieldData->blocks = $this->replaceInBlocksRecursively(
-					$fieldData->blocks,
-					$this->replaceValue
-				);
+				$fieldData->blocks = $this->replaceInBlocksRecursively($fieldData->blocks);
 				$data[$key] = json_encode($fieldData, JSON_PRETTY_PRINT);
 
 				Debug::log($fieldData->blocks, 'Blocks');

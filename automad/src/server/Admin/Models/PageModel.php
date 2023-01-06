@@ -122,7 +122,7 @@ class PageModel {
 	public static function delete(Page $Page) {
 		PageIndex::remove(dirname($Page->path), $Page->path);
 
-		return FileSystem::movePageDir(
+		return (bool) FileSystem::movePageDir(
 			$Page->path,
 			'..' . AM_DIR_TRASH . dirname($Page->path),
 			basename($Page->path)
@@ -322,6 +322,22 @@ class PageModel {
 	}
 
 	/**
+	 * Return updated page URL based on $path.
+	 *
+	 * @param Automad $Automad
+	 * @param string $path
+	 * @return string The page URL
+	 */
+	public static function urlByPath(Automad $Automad, string $path) {
+		// Find new URL and return redirect query string.
+		foreach ($Automad->getCollection() as $url => $Page) {
+			if ($Page->path == $path) {
+				return $url;
+			}
+		}
+	}
+
+	/**
 	 * Open a data text file under the given path, read the data,
 	 * append a suffix to the title variable and write back the data.
 	 *
@@ -373,21 +389,5 @@ class PageModel {
 		Cache::clear();
 
 		return true;
-	}
-
-	/**
-	 * Return updated page URL based on $path.
-	 *
-	 * @param Automad $Automad
-	 * @param string $path
-	 * @return string The page URL
-	 */
-	private static function urlByPath(Automad $Automad, string $path) {
-		// Find new URL and return redirect query string.
-		foreach ($Automad->getCollection() as $url => $Page) {
-			if ($Page->path == $path) {
-				return $url;
-			}
-		}
 	}
 }

@@ -90,7 +90,7 @@ class FileCollectionModel {
 
 			$Messenger->setError(implode('<br />', $errors));
 		} else {
-			$Messenger->setError(Text::get('permissionsDeniedError') . ' "' . basename($path) . '"');
+			$Messenger->setError(Text::get('permissionsDeniedError'));
 		}
 
 		return !$Messenger->getError();
@@ -155,10 +155,7 @@ class FileCollectionModel {
 		}
 
 		if (!is_writable($path)) {
-			$Messenger->setError(
-				Text::get('permissionsDeniedError') .
-				' "' . basename($path) . '"'
-			);
+			$Messenger->setError(Text::get('permissionsDeniedError'));
 
 			return false;
 		}
