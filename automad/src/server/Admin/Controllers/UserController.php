@@ -37,12 +37,11 @@
 namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\Models\UserCollectionModel;
-use Automad\Admin\Models\UserModel;
 use Automad\Admin\Session;
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Request;
+use Automad\Models\UserCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -65,25 +64,27 @@ class UserController {
 		$newPassword1 = Request::post('newPassword1');
 		$newPassword2 = Request::post('newPassword2');
 
-		if ($currentPassword && $newPassword1 && $newPassword2) {
-			if ($newPassword1 == $newPassword2) {
-				if ($currentPassword != $newPassword1) {
-					$UserModel = new UserModel();
+		if (!$currentPassword || !$newPassword1 || !$newPassword2) {
+			return $Response->setError(Text::get('invalidFormError'));
+		}
 
-					return $UserModel->changePassword(
-						Session::getUsername(),
-						$currentPassword,
-						$newPassword1
-					);
-				}
-
-				return $Response->setError(Text::get('passwordReuseError'));
-			}
-
+		if ($newPassword1 !== $newPassword2) {
 			return $Response->setError(Text::get('passwordRepeatError'));
 		}
 
-		return $Response->setError(Text::get('invalidFormError'));
+		if ($currentPassword === $newPassword1) {
+			return $Response->setError(Text::get('passwordReuseError'));
+		}
+
+		$UserCollection = new UserCollection();
+		$User = $UserCollection->getUser(Session::getUsername());
+		$Messenger = new Messenger();
+
+		$User->changePassword($currentPassword, $newPassword1, $UserCollection, $Messenger);
+
+		return $Response
+				->setError($Messenger->getError())
+				->setSuccess($Messenger->getSuccess());
 	}
 
 	/**
@@ -94,13 +95,13 @@ class UserController {
 	public static function edit() {
 		$Response = new Response();
 		$Messenger = new Messenger();
-		$UserCollectionModel = new UserCollectionModel();
+		$UserCollection = new UserCollection();
 
 		$username = Request::post('username');
 		$email = Request::post('email');
 
-		if ($UserCollectionModel->editCurrentUserInfo($username, $email, $Messenger)) {
-			if ($UserCollectionModel->save($Messenger)) {
+		if ($UserCollection->editCurrentUserInfo($username, $email, $Messenger)) {
+			if ($UserCollection->save($Messenger)) {
 				return $Response->setSuccess(Text::get('savedSuccess'));
 			}
 		}
@@ -115,8 +116,7 @@ class UserController {
 	 */
 	public static function resetPassword() {
 		$Response = new Response();
-		$UserModel = new UserModel();
-		$UserCollectionModel = new UserCollectionModel();
+		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
 
 		// Only one field will be defined, so they can just be concatenated here.
@@ -126,7 +126,7 @@ class UserController {
 		$newPassword1 = Request::post('password1');
 		$newPassword2 = Request::post('password2');
 
-		$User = $UserCollectionModel->getUser($nameOrEmail);
+		$User = $UserCollection->getUser($nameOrEmail);
 
 		$responseData = array(
 			'username' => $User->name,
@@ -140,8 +140,8 @@ class UserController {
 		}
 
 		if ($User && $token && $newPassword1 && $newPassword2) {
-			if ($UserModel->verifyPasswordResetToken($User->name, $token)) {
-				if ($UserModel->resetPassword($User->name, $newPassword1, $newPassword2, $Messenger)) {
+			if ($User->verifyPasswordResetToken($token)) {
+				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
 					$responseData['state'] = 'success';
 
 					return $Response->setData($responseData);
@@ -158,7 +158,7 @@ class UserController {
 		}
 
 		if ($User) {
-			if ($UserModel->sendPasswordResetToken($User, $Messenger)) {
+			if ($User->sendPasswordResetToken($Messenger)) {
 				$responseData['state'] = 'setPassword';
 
 				return $Response->setData($responseData);

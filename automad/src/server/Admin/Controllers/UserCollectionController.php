@@ -37,10 +37,10 @@
 namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\Models\UserCollectionModel;
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Request;
+use Automad\Models\UserCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -66,13 +66,13 @@ class UserCollectionController {
 		$password2 = Request::post('password2');
 		$email = Request::post('email');
 
-		$UserCollectionModel = new UserCollectionModel();
+		$UserCollection = new UserCollection();
 
-		if (!$UserCollectionModel->createUser($username, $password1, $password2, $email, $Messenger)) {
+		if (!$UserCollection->createUser($username, $password1, $password2, $email, $Messenger)) {
 			return $Response->setError($Messenger->getError());
 		}
 
-		if (!$UserCollectionModel->save($Messenger)) {
+		if (!$UserCollection->save($Messenger)) {
 			return $Response->setError($Messenger->getError());
 		}
 
@@ -88,7 +88,7 @@ class UserCollectionController {
 	public static function edit() {
 		$Response = new Response();
 		$Messenger = new Messenger();
-		$UserCollectionModel = new UserCollectionModel();
+		$UserCollection = new UserCollection();
 
 		if ($users = Request::post('delete')) {
 			if (!is_array($users)) {
@@ -97,7 +97,7 @@ class UserCollectionController {
 
 			$users = array_keys($users);
 
-			if ($UserCollectionModel->delete($users, $Messenger)) {
+			if ($UserCollection->delete($users, $Messenger)) {
 				$Response->setSuccess(Text::get('deteledSuccess') . ' "' . implode('", "', $users) . '"');
 			} else {
 				$Response->setError($Messenger->getError());
@@ -120,10 +120,10 @@ class UserCollectionController {
 			return '';
 		}
 
-		$UserCollectionModel = new UserCollectionModel();
+		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
 
-		if (!$UserCollectionModel->createUser(
+		if (!$UserCollection->createUser(
 			Request::post('username'),
 			Request::post('password1'),
 			Request::post('password2'),
@@ -141,7 +141,7 @@ class UserCollectionController {
 		header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
 		ob_end_flush();
 
-		exit($UserCollectionModel->generatePHP());
+		exit($UserCollection->generatePHP());
 	}
 
 
@@ -154,22 +154,22 @@ class UserCollectionController {
 	 */
 	public static function inviteUser() {
 		$Response = new Response();
-		$UserCollectionModel = new UserCollectionModel();
+		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
 
 		$username = trim(Request::post('username'));
 		$email = trim(Request::post('email'));
 		$password = str_shuffle(sha1(microtime()));
 
-		if (!$UserCollectionModel->createUser($username, $password, $password, $email, $Messenger)) {
+		if (!$UserCollection->createUser($username, $password, $password, $email, $Messenger)) {
 			return $Response->setError($Messenger->getError());
 		}
 
-		if (!$UserCollectionModel->save($Messenger)) {
+		if (!$UserCollection->save($Messenger)) {
 			return $Response->setError($Messenger->getError());
 		}
 
-		if (!$UserCollectionModel->sendInvitation($username, $email, $Messenger)) {
+		if (!$UserCollection->sendInvitation($username, $email, $Messenger)) {
 			return $Response->setError($Messenger->getError());
 		}
 

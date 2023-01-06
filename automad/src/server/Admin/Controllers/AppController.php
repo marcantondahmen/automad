@@ -38,7 +38,6 @@ namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\AppModel;
-use Automad\Admin\Models\UserCollectionModel;
 use Automad\Admin\Session;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Automad;
@@ -46,6 +45,7 @@ use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\Models\UserCollection;
 use Automad\System\Fields;
 use Automad\System\Server;
 use Automad\System\ThemeCollection;
@@ -92,14 +92,14 @@ class AppController {
 	public static function updateState() {
 		$Response = new Response;
 		$Automad = Automad::fromCache();
-		$UserCollectionModel = new UserCollectionModel();
+		$UserCollection = new UserCollection();
 
 		return $Response->setData(array(
 			'tags' => $Automad->getPagelist()->getTags(),
 			'pages' => AppModel::pages($Automad),
 			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
 			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME),
-			'user' => $UserCollectionModel->getUser(Session::getUsername()),
+			'user' => $UserCollection->getUser(Session::getUsername()),
 			'system' => array(
 				'cache' => array(
 					'enabled' => AM_CACHE_ENABLED,
@@ -112,7 +112,7 @@ class AppController {
 					'fields' => Parse::csv(AM_FEED_FIELDS)
 				),
 				'translation' => AM_FILE_UI_TRANSLATION,
-				'users'=> array_values($UserCollectionModel->getCollection()),
+				'users'=> array_values($UserCollection->getCollection()),
 				'tempDirectory' => FileSystem::getTmpDir()
 			)
 		));

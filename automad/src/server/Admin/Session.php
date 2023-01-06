@@ -36,7 +36,7 @@
 
 namespace Automad\Admin;
 
-use Automad\Admin\Models\UserCollectionModel;
+use Automad\Models\UserCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -99,8 +99,8 @@ class Session {
 	 * @return bool false on error
 	 */
 	public static function login(string $nameOrEmail, string $password) {
-		$UserCollectionModel = new UserCollectionModel();
-		$User = $UserCollectionModel->getUser($nameOrEmail);
+		$UserCollection = new UserCollection();
+		$User = $UserCollection->getUser($nameOrEmail);
 
 		if (empty($User)) {
 			return false;
