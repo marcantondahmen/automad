@@ -158,6 +158,11 @@ export class ResetPasswordFormComponent extends FormComponent {
 						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
+					<input
+						type="hidden"
+						name="username"
+						value="${data.username}"
+					/>
 					<div class="${CSS.cardFormButtons}">
 						<am-link
 							class="${CSS.button}"
