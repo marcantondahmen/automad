@@ -170,6 +170,29 @@ class Automad {
 	}
 
 	/**
+	 * Build the pages array that is used to build a nav tree.
+	 *
+	 * @return array the rendered data array
+	 */
+	public function getNavigationMetaData() {
+		$pages = array();
+
+		foreach ($this->collection as $Page) {
+			$pages[$Page->origUrl] = array(
+				'title' => $Page->get(AM_KEY_TITLE),
+				'index' => $Page->index,
+				'url' => $Page->origUrl,
+				'path' => $Page->path,
+				'parentPath' => rtrim(dirname($Page->path), '/') . '/',
+				'private' => $Page->private,
+				'mTime' => $Page->get(AM_KEY_MTIME)
+			);
+		}
+
+		return $pages;
+	}
+
+	/**
 	 * If existing, return the page object for the passed relative URL.
 	 *
 	 * @param string $url

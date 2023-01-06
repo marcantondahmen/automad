@@ -96,7 +96,7 @@ class AppController {
 
 		return $Response->setData(array(
 			'tags' => $Automad->getPagelist()->getTags(),
-			'pages' => AppModel::pages($Automad),
+			'pages' => $Automad->getNavigationMetaData(),
 			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
 			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME),
 			'user' => $UserCollection->getUser(Session::getUsername()),
