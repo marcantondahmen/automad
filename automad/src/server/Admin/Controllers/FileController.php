@@ -37,9 +37,9 @@
 namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\Models\FileModel;
 use Automad\Admin\UI\Utils\Messenger;
 use Automad\Core\Request;
+use Automad\Models\File;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -60,7 +60,7 @@ class FileController {
 		$Response = new Response();
 		$Messenger = new Messenger();
 
-		FileModel::editInfo(
+		File::editInfo(
 			Request::post('new-name'),
 			Request::post('old-name'),
 			Request::post('caption'),
@@ -79,7 +79,7 @@ class FileController {
 		$Response = new Response();
 		$Messenger = new Messenger();
 
-		FileModel::import(
+		File::import(
 			Request::post('importUrl'),
 			Request::post('url'),
 			$Messenger
