@@ -34,76 +34,53 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Models;
+
+use Automad\Core\Debug;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Filelist object represents a set of files based on a file pattern depending on the current context.
+ * The Context represents the current page within statements (loops) or just the requested page.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2015-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Filelist {
+class Context {
 	/**
-	 * The Context.
+	 * The context Page.
 	 */
-	private $Context;
-
-	/**
-	 * The options array.
-	 */
-	private $options = 	array(
-		'glob' => '*.jpg, *.jpeg, *.png, *.gif',
-		'sort' => 'asc'
-	);
+	private $Page;
 
 	/**
 	 * The constructor.
 	 *
-	 * @param Context $Context
+	 * @param Page $Page
 	 */
-	public function __construct(Context $Context) {
-		$this->Context = $Context;
+	public function __construct(?Page $Page) {
+		$this->set($Page);
 	}
 
 	/**
-	 * Configure the filelist.
+	 * Return $Page.
 	 *
-	 * @param array $options
+	 * @return Page $Page
 	 */
-	public function config(array $options) {
-		$this->options = array_merge($this->options, $options);
+	public function get() {
+		return $this->Page;
 	}
 
 	/**
-	 * Return the files array.
+	 * Set the context.
 	 *
-	 * Note that the returned filelist depends on the current context.
-	 * Changing the context will change the filelist as long as the glob pattern is relative.
-	 *
-	 * @return array The array of matched files.
+	 * @param Page $Page
 	 */
-	public function getFiles() {
-		// Find files.
-		$files = FileUtils::fileDeclaration($this->options['glob'], $this->Context->get(), true);
-
-		// Sort files.
-		switch ($this->options['sort']) {
-			case 'asc':
-				sort($files);
-
-				break;
-
-			case 'desc':
-				rsort($files);
-
-				break;
+	public function set(?Page $Page) {
+		// Test whether $Page is empty - that can happen, when accessing the UI.
+		if (!empty($Page)) {
+			$this->Page = $Page;
+			Debug::log($Page, 'Set context to ' . $Page->url);
 		}
-
-		Debug::log($files);
-
-		return $files;
 	}
 }

@@ -34,7 +34,9 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Models;
+
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -91,11 +91,11 @@ class UserCollectionController {
 		$UserCollectionModel = new UserCollectionModel();
 
 		if ($users = Request::post('delete')) {
-			$users = array_keys($users);
-
 			if (!is_array($users)) {
 				return $Response;
 			}
+
+			$users = array_keys($users);
 
 			if ($UserCollectionModel->delete($users, $Messenger)) {
 				$Response->setSuccess(Text::get('deteledSuccess') . ' "' . implode('", "', $users) . '"');

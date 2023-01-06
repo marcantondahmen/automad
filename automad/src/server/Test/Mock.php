@@ -36,10 +36,10 @@
 
 namespace Automad\Test;
 
-use Automad\Core\Context;
-use Automad\Core\Page;
 use Automad\Core\Parse;
-use Automad\Core\Shared;
+use Automad\Models\Context;
+use Automad\Models\Page;
+use Automad\Models\Shared;
 use PHPUnit\Framework\TestCase;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

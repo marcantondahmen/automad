@@ -37,6 +37,7 @@
 namespace Automad\Core;
 
 use Automad\Engine\Processors\URLProcessor;
+use Automad\Models\Page;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

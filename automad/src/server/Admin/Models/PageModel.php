@@ -39,10 +39,10 @@ namespace Automad\Admin\Models;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
-use Automad\Core\Page;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\Models\Page;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

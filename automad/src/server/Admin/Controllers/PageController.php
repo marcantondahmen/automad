@@ -42,11 +42,11 @@ use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
-use Automad\Core\Page;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Request;
-use Automad\Core\Selection;
+use Automad\Models\Page;
+use Automad\Models\Selection;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
 

@@ -34,9 +34,14 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Models;
 
 use Automad\Admin\Session;
+use Automad\Core\Debug;
+use Automad\Core\FileSystem;
+use Automad\Core\PageIndex;
+use Automad\Core\Parse;
+use Automad\Core\Str;
 use Automad\Routes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

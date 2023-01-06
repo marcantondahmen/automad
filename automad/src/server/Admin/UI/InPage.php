@@ -40,8 +40,8 @@ use Automad\Admin\Session;
 use Automad\Admin\UI\Components\Modal\Link;
 use Automad\Admin\UI\Components\Modal\SelectImage;
 use Automad\Admin\UI\Utils\Text;
-use Automad\Core\Context;
 use Automad\Engine\PatternAssembly;
+use Automad\Models\Context;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

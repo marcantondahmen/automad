@@ -37,8 +37,12 @@
 namespace Automad\Core;
 
 use Automad\Admin\API\RequestHandler;
-use Automad\Admin\Session;
-use Automad\Routes;
+use Automad\Models\Context;
+use Automad\Models\Filelist;
+use Automad\Models\Page;
+use Automad\Models\PageCollection;
+use Automad\Models\Pagelist;
+use Automad\Models\Shared;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

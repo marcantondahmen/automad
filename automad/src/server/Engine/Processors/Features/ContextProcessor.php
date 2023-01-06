@@ -39,8 +39,8 @@ namespace Automad\Engine\Processors\Features;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
-use Automad\Core\Selection;
 use Automad\Engine\PatternAssembly;
+use Automad\Models\Selection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
