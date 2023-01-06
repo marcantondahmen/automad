@@ -188,6 +188,7 @@ export class NavTreeComponent extends BaseComponent {
 				new Sortable(container, {
 					group: 'navTree',
 					direction: 'vertical',
+					sort: false,
 
 					animation: 200,
 

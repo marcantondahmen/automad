@@ -200,7 +200,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</div>
 						${
 							createField('am-toggle-large', null, {
-								key: App.reservedFields.AM_KEY_PRIVATE,
+								key: `new-${App.reservedFields.AM_KEY_PRIVATE}`,
 								name: App.reservedFields.AM_KEY_PRIVATE,
 								value: true,
 							}).outerHTML

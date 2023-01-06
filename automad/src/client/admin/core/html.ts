@@ -95,6 +95,7 @@ const dompurifyOption = {
 		'target',
 	],
 	ADD_URI_SAFE_ATTR: [Attr.tooltipOptions],
+	SANITIZE_DOM: false,
 };
 
 /**
