@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI\Commands;
+namespace Automad\Console\Commands;
 
 use Automad\Core\Cache;
 

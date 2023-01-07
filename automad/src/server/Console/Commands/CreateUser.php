@@ -34,11 +34,10 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI\Commands;
+namespace Automad\Console\Commands;
 
-use Automad\Admin\UI\Models\UserCollection;
-use Automad\API\Messenger;
-use Automad\System\User;
+use Automad\Core\Messenger;
+use Automad\Models\UserCollection;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -88,8 +87,13 @@ class CreateUser extends AbstractCommand {
 			echo 'Name:     ' . $name . PHP_EOL;
 			echo 'Password: ' . $password . PHP_EOL;
 			echo '--------------------' . PHP_EOL;
-		} else {
-			echo 'Error! Creating of user account failed.' . PHP_EOL;
+
+			exit(0);
 		}
+
+		echo $Messenger->getError() . PHP_EOL;
+		echo 'Creating user account failed' . PHP_EOL;
+
+		exit(1);
 	}
 }

@@ -36,6 +36,8 @@
 
 namespace Automad\Console;
 
+use Automad\Core\FileSystem;
+
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
@@ -63,14 +65,14 @@ class Console {
 	 * @return array the list of command objects
 	 */
 	private function getCommands() {
-		$files = FileSystem::glob(AM_BASE_DIR . '/automad/src/UI/Commands/*.php');
+		$files = FileSystem::glob(AM_BASE_DIR . '/automad/src/server/Console/Commands/*.php');
 
 		foreach ($files as $file) {
 			require_once $file;
 		}
 
 		$classList = array_filter(get_declared_classes(), function ($cls) {
-			return (strpos($cls, 'Automad\Admin\UI\Commands') !== false && strpos($cls, 'Commands\AbstractCommand') === false);
+			return (strpos($cls, 'Automad\Console\Commands') !== false && strpos($cls, 'Commands\AbstractCommand') === false);
 		});
 
 		$commands = array();

@@ -34,9 +34,9 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI\Commands;
+namespace Automad\Console\Commands;
 
-use Automad\Admin\Utils\FileSystem;
+use Automad\Core\FileSystem;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 

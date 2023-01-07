@@ -34,9 +34,9 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI\Commands;
+namespace Automad\Console\Commands;
 
-use Automad\System\Update as SystemUpdate;
+use Automad\Core\Messenger;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -70,26 +70,31 @@ class Update extends AbstractCommand {
 	 * The actual command action.
 	 */
 	public static function run() {
-		/* if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
+		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 			exit('Can\'t run updates within the development repository!' . PHP_EOL . PHP_EOL);
 		}
 
 		echo 'Automad version ' . AM_VERSION . PHP_EOL;
 		echo 'Update branch is ' . AM_UPDATE_BRANCH . PHP_EOL;
 
-		$updateVersion = SystemUpdate::getVersion();
+		$updateVersion = \Automad\System\Update::getVersion();
+		$Messenger = new Messenger();
 
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
 			echo 'Updating to version ' . $updateVersion . PHP_EOL;
-			$Response = SystemUpdate::run();
 
-			if (!empty($Response->getCli())) {
-				echo $Response->getCli() . PHP_EOL;
-			} else {
-				echo 'Error! Update has failed!' . PHP_EOL;
+			if (\Automad\System\Update::run($Messenger)) {
+				echo $Messenger->getSuccess() . PHP_EOL;
+
+				exit(0);
 			}
-		} else {
-			echo 'Up to date!' . PHP_EOL;
-		} */
+
+			echo $Messenger->getError() . PHP_EOL;
+			echo 'Update has failed' . PHP_EOL;
+
+			exit(1);
+		}
+
+		echo 'Up to date' . PHP_EOL;
 	}
 }

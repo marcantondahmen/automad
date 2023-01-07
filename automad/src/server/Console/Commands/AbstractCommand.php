@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI\Commands;
+namespace Automad\Console\Commands;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
