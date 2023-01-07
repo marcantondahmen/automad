@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Controllers;
+namespace Automad\Controllers\API;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\UI\Utils\Messenger;

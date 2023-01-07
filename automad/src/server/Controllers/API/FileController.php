@@ -34,93 +34,57 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Controllers;
+namespace Automad\Controllers\API;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\UI\Utils\Messenger;
-use Automad\System\Update;
+use Automad\Core\Request;
+use Automad\Models\File;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The system controller.
+ * The file controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class SystemController {
+class FileController {
 	/**
-	 * Check whether a system update is available.
+	 * Edit file information (file name and caption).
 	 *
 	 * @return Response the response object
 	 */
-	public static function checkForUpdate() {
+	public static function editInfo() {
 		$Response = new Response();
-		$latest = Update::getVersion();
-		$data = array(
-			'latest' => $latest,
-			'pending' => false
+		$Messenger = new Messenger();
+
+		File::editInfo(
+			Request::post('new-name'),
+			Request::post('old-name'),
+			Request::post('caption'),
+			$Messenger
 		);
 
-		if (version_compare(AM_VERSION, $latest, '<')) {
-			$data['pending'] = true;
-		}
-
-		return $Response->setData($data);
+		return $Response->setError($Messenger->getError());
 	}
+
 	/**
-	 * System updates.
+	 * Import file from URL.
 	 *
 	 * @return Response the response object
 	 */
-	public static function update() {
+	public static function import() {
 		$Response = new Response();
-		$data = array(
-			'state' => 'upToDate',
-			'current' => AM_VERSION,
-			'latest' => '',
-			'items' => Update::items()
+		$Messenger = new Messenger();
+
+		File::import(
+			Request::post('importUrl'),
+			Request::post('url'),
+			$Messenger
 		);
 
-		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
-			$data['state'] = 'disabled';
-
-			return $Response->setData($data);
-		}
-
-		if (!Update::supported()) {
-			$data['state'] = 'notSupported';
-
-			return $Response->setData($data);
-		}
-
-		if (!empty($_POST['update'])) {
-			$Messenger = new Messenger();
-
-			if (Update::run($Messenger)) {
-				$Response->setData($Messenger->getData());
-			}
-
-			return $Response
-				->setError($Messenger->getError())
-				->setSuccess($Messenger->getSuccess());
-		}
-
-		$latest = Update::getVersion();
-
-		if (empty($latest)) {
-			$data['state'] = 'connectionError';
-
-			return $Response->setData($data);
-		}
-
-		$data['latest'] = $latest;
-
-		if (version_compare(AM_VERSION, $latest, '<')) {
-			$data['state'] = 'pending';
-		}
-
-		return $Response->setData($data);
+		return $Response->setError($Messenger->getError());
 	}
 }

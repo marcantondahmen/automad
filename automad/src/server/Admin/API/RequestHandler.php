@@ -57,6 +57,11 @@ class RequestHandler {
 	public static $apiBase = '/api';
 
 	/**
+	 * The controller namespace.
+	 */
+	private static $controllerNamespace = '\\Automad\\Controllers\\API\\';
+
+	/**
 	 * An array of routes that are excluded from CSRF token validation.
 	 */
 	private static $validationExcluded = array(
@@ -76,7 +81,7 @@ class RequestHandler {
 
 		Debug::log($apiRoute);
 
-		$method = '\\Automad\\Admin\\Controllers\\' . str_replace('/', 'Controller::', $apiRoute);
+		$method = self::$controllerNamespace . str_replace('/', 'Controller::', $apiRoute);
 		$parts = explode('::', $method);
 		$class = $parts[0];
 

@@ -27,64 +27,42 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Controllers;
+namespace Automad\Controllers\API;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\UI\Utils\Messenger;
-use Automad\Core\Request;
-use Automad\Models\File;
+use Automad\Core\Automad;
+use Automad\Core\FileSystem;
+use Automad\Models\ImageCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The file controller.
+ * The image collection controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileController {
+class ImageCollectionController {
 	/**
-	 * Edit file information (file name and caption).
+	 * Get a list of shared or page image files
 	 *
 	 * @return Response the response object
 	 */
-	public static function editInfo() {
+	public static function list() {
+		$Automad = Automad::fromCache();
+		$path = FileSystem::getPathByPostUrl($Automad);
 		$Response = new Response();
-		$Messenger = new Messenger();
 
-		File::editInfo(
-			Request::post('new-name'),
-			Request::post('old-name'),
-			Request::post('caption'),
-			$Messenger
+		return $Response->setData(
+			array('images' => ImageCollection::list($path))
 		);
-
-		return $Response->setError($Messenger->getError());
-	}
-
-	/**
-	 * Import file from URL.
-	 *
-	 * @return Response the response object
-	 */
-	public static function import() {
-		$Response = new Response();
-		$Messenger = new Messenger();
-
-		File::import(
-			Request::post('importUrl'),
-			Request::post('url'),
-			$Messenger
-		);
-
-		return $Response->setError($Messenger->getError());
 	}
 }

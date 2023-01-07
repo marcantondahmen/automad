@@ -34,89 +34,93 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Controllers;
+namespace Automad\Controllers\API;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\UI\Utils\Messenger;
-use Automad\Core\Automad;
-use Automad\Core\Debug;
-use Automad\Core\FileSystem;
-use Automad\Core\Request;
-use Automad\Models\FileCollection;
+use Automad\System\Update;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The file collection controller.
+ * The system controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileCollectionController {
+class SystemController {
 	/**
-	 * Remove selected files from the selection or
-	 * simply return the collection of uploaded files for a context.
+	 * Check whether a system update is available.
 	 *
 	 * @return Response the response object
 	 */
-	public static function list() {
-		$Automad = Automad::fromCache();
-		$path = FileSystem::getPathByPostUrl($Automad);
-
+	public static function checkForUpdate() {
 		$Response = new Response();
-		$Messenger = new Messenger();
+		$latest = Update::getVersion();
+		$data = array(
+			'latest' => $latest,
+			'pending' => false
+		);
 
-		Debug::log($_POST);
-
-		if ($delete = Request::post('delete')) {
-			if (is_array($delete)) {
-				FileCollection::deleteFiles(array_keys($delete), $path, $Messenger);
-			}
+		if (version_compare(AM_VERSION, $latest, '<')) {
+			$data['pending'] = true;
 		}
 
-		$data = array('files' => FileCollection::list($path));
-
-		return $Response
-			->setData($data)
-			->setError($Messenger->getError())
-			->setSuccess($Messenger->getSuccess());
+		return $Response->setData($data);
 	}
-
 	/**
-	 * Upload controller based on $_POST and $_FILES.
+	 * System updates.
 	 *
 	 * @return Response the response object
 	 */
-	public static function upload() {
-		Debug::log($_POST + $_FILES, 'file');
+	public static function update() {
+		$Response = new Response();
+		$data = array(
+			'state' => 'upToDate',
+			'current' => AM_VERSION,
+			'latest' => '',
+			'items' => Update::items()
+		);
 
-		if (!empty($_FILES['file']) && is_array($_FILES['file'])) {
-			$Automad = Automad::fromCache();
+		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
+			$data['state'] = 'disabled';
+
+			return $Response->setData($data);
+		}
+
+		if (!Update::supported()) {
+			$data['state'] = 'notSupported';
+
+			return $Response->setData($data);
+		}
+
+		if (!empty($_POST['update'])) {
 			$Messenger = new Messenger();
 
-			$chunk = (object) array_merge(
-				array(
-					'dzchunkindex' => '',
-					'dzchunkbyteoffset' => '',
-					'dzchunksize' => 0,
-					'dztotalchunkcount' => 0,
-					'dzuuid' => '',
-					'tmp_name' => '',
-					'name' => ''
-				),
-				$_FILES['file'] + $_POST
-			);
+			if (Update::run($Messenger)) {
+				$Response->setData($Messenger->getData());
+			}
 
-			FileCollection::upload(
-				$chunk,
-				FileSystem::getPathByPostUrl($Automad),
-				$Messenger
-			);
-
-			$Response = new Response();
-
-			return $Response->setError($Messenger->getError());
+			return $Response
+				->setError($Messenger->getError())
+				->setSuccess($Messenger->getSuccess());
 		}
+
+		$latest = Update::getVersion();
+
+		if (empty($latest)) {
+			$data['state'] = 'connectionError';
+
+			return $Response->setData($data);
+		}
+
+		$data['latest'] = $latest;
+
+		if (version_compare(AM_VERSION, $latest, '<')) {
+			$data['state'] = 'pending';
+		}
+
+		return $Response->setData($data);
 	}
 }

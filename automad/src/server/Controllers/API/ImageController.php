@@ -34,68 +34,44 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Controllers;
+namespace Automad\Controllers\API;
 
 use Automad\Admin\API\Response;
-use Automad\Core\Cache;
-use Automad\Core\Debug;
-use Automad\Core\Parse;
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Core\Automad;
+use Automad\Core\FileSystem;
 use Automad\Core\Request;
-use Automad\Models\Search\FileFields;
-use Automad\Models\Search\Replacement;
-use Automad\Models\Search\Search;
+use Automad\Models\Image;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Search controller.
+ * The Image controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class SearchController {
+class ImageController {
 	/**
-	 * Perform a search and replace.
+	 * Save an image that was modified in FileRobot.
 	 *
 	 * @return Response the response object
 	 */
-	public static function searchReplace() {
+	public static function save() {
 		$Response = new Response();
+		$Messenger = new Messenger();
+		$Automad = Automad::fromCache();
+		$path = FileSystem::getPathByPostUrl($Automad);
 
-		$isRegex = filter_var(Request::post('isRegex'), FILTER_VALIDATE_BOOL);
-		$isCaseSensitive = filter_var(Request::post('isCaseSensitive'), FILTER_VALIDATE_BOOL);
-
-		$files = json_decode(Request::post('files'));
-		$replaceSelected = filter_var(Request::post('replaceSelected'), FILTER_VALIDATE_BOOL) && !empty($files);
-
-		if ($replaceSelected) {
-			$fileFieldsArray = array();
-			$Replacement = new Replacement(
-				Request::post('searchValue'),
-				Request::post('replaceValue'),
-				$isRegex,
-				$isCaseSensitive
-			);
-
-			foreach ($files as $path => $fieldsCsv) {
-				$fileFieldsArray[] = new FileFields($path, Parse::csv($fieldsCsv));
-			}
-
-			$Replacement->replaceInFiles($fileFieldsArray);
-		}
-
-		$Cache = new Cache();
-		$Search = new Search(
-			$Cache->getAutomad(),
-			Request::post('searchValue'),
-			$isRegex,
-			$isCaseSensitive
+		Image::save(
+			$path,
+			Request::post('name'),
+			Request::post('extension'),
+			Request::post('imageBase64'),
+			$Messenger
 		);
 
-		$fileResultsArray = $Search->searchPerFile();
-		Debug::log($fileResultsArray, 'Results per file');
-
-		return $Response->setData($fileResultsArray);
+		return $Response->setError($Messenger->getError());
 	}
 }

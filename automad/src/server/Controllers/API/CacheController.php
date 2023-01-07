@@ -34,44 +34,51 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\Controllers;
+namespace Automad\Controllers\API;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\UI\Utils\Messenger;
-use Automad\Core\Automad;
+use Automad\Admin\UI\Utils\Text;
+use Automad\Core\Cache;
+use Automad\Core\Debug;
 use Automad\Core\FileSystem;
-use Automad\Core\Request;
-use Automad\Models\Image;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Image controller.
+ * The Cache controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ImageController {
+class CacheController {
 	/**
-	 * Save an image that was modified in FileRobot.
+	 * Clear the cache.
 	 *
 	 * @return Response the response object
 	 */
-	public static function save() {
+	public static function clear() {
 		$Response = new Response();
-		$Messenger = new Messenger();
-		$Automad = Automad::fromCache();
-		$path = FileSystem::getPathByPostUrl($Automad);
+		Cache::clear();
 
-		Image::save(
-			$path,
-			Request::post('name'),
-			Request::post('extension'),
-			Request::post('imageBase64'),
-			$Messenger
-		);
+		return $Response->setSuccess(Text::get('cacheClearedSuccess'));
+	}
 
-		return $Response->setError($Messenger->getError());
+	/**
+	 * Purge the cache directory.
+	 *
+	 * @return Response the response object
+	 */
+	public static function purge() {
+		$Response = new Response();
+		$tempDir = FileSystem::purgeCache();
+
+		if ($tempDir) {
+			Debug::log($tempDir, 'temp directory');
+
+			return $Response->setSuccess(Text::get('cachePurgedSuccess'));
+		}
+
+		return $Response->setError(Text::get('cachePurgedError'));
 	}
 }

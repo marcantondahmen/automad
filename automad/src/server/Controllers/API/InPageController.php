@@ -66,7 +66,7 @@ class InPageController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function edit() {
+	/* public static function edit() {
 		$Automad = UICache::get();
 		$Response = new Response();
 		$context = Request::post('context');
@@ -164,5 +164,5 @@ class InPageController {
 		}
 
 		return $Response;
-	}
+	} */
 }
