@@ -36,12 +36,12 @@
 
 namespace Automad\System;
 
-use Automad\Admin\Text;
-use Automad\API\Messenger;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
