@@ -27,42 +27,50 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\Admin\UI\Commands;
 
-use Automad\API\Response;
-use Automad\Core\Automad;
-use Automad\Core\FileSystem;
-use Automad\Models\ImageCollection;
+use Automad\Admin\Utils\FileSystem;
 
-defined('AUTOMAD') or die('Direct access not permitted!');
+defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The image collection controller.
+ * The purge command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ImageCollectionController {
+class Purge extends AbstractCommand {
 	/**
-	 * Get a list of shared or page image files
+	 * Get the command help.
 	 *
-	 * @return Response the response object
+	 * @return string the command help
 	 */
-	public static function list() {
-		$Automad = Automad::fromCache();
-		$path = FileSystem::getPathByPostUrl($Automad);
-		$Response = new Response();
+	public static function help() {
+		return 'Purge the cache directory including all cached images and deleted pages.';
+	}
 
-		return $Response->setData(
-			array('images' => ImageCollection::list($path))
-		);
+	/**
+	 * Get the command name.
+	 *
+	 * @return string the command name
+	 */
+	public static function name() {
+		return 'purge';
+	}
+
+	/**
+	 * The actual command action.
+	 */
+	public static function run() {
+		echo 'Purging cache directory ...' . PHP_EOL;
+		FileSystem::purgeCache();
 	}
 }

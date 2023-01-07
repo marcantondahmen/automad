@@ -34,43 +34,48 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI\Commands;
+namespace Automad\Admin\Templates;
 
-use Automad\Admin\UI\Utils\FileSystem;
+use Automad\Admin\Text;
 
-defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The purge command.
+ * A password reset email body.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Purge extends AbstractCommand {
+class PasswordResetEmail extends AbstractEmailBody {
 	/**
-	 * Get the command help.
+	 * Render a password reset email body.
 	 *
-	 * @return string the command help
+	 * @param string $website
+	 * @param string $username
+	 * @param string $token
+	 * @return string The rendered password reset email body
 	 */
-	public static function help() {
-		return 'Purge the cache directory including all cached images and deleted pages.';
-	}
+	public static function render(string $website, string $username, string $token) {
+		$h1Style = self::$h1Style;
+		$pStyle = self::$paragraphStyle;
+		$codeStyle = self::$codeStyle;
+		$Text = Text::getObject();
+		$textTop = str_replace('{}', "<b>$website</b>", Text::get('emailResetPasswordTextTop'));
 
-	/**
-	 * Get the command name.
-	 *
-	 * @return string the command name
-	 */
-	public static function name() {
-		return 'purge';
-	}
+		$content = <<< HTML
+			<h1 $h1Style>$Text->emailHello $username,</h1>
+			<p $pStyle>
+				$textTop
+			</p>
+			<p $codeStyle>
+				$token
+			</p>
+			<p $pStyle>
+				$Text->emailResetPasswordTextBottom
+			</p>
+		HTML;
 
-	/**
-	 * The actual command action.
-	 */
-	public static function run() {
-		echo 'Purging cache directory ...' . PHP_EOL;
-		FileSystem::purgeCache();
+		return self::body($content);
 	}
 }

@@ -36,9 +36,9 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Admin\API\Response;
 use Automad\Admin\Models\PageModel;
-use Automad\Admin\UI\Utils\Text;
+use Automad\Admin\Text;
+use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;

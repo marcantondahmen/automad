@@ -36,7 +36,7 @@
 
 namespace Automad\Core;
 
-use Automad\Admin\API\RequestHandler;
+use Automad\API\RequestHandler;
 use Automad\Models\Context;
 use Automad\Models\Filelist;
 use Automad\Models\Page;

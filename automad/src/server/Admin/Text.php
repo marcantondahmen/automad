@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI\Utils;
+namespace Automad\Admin;
 
 use Automad\Core\Debug;
 use Automad\Core\Parse;

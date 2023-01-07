@@ -36,7 +36,7 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Admin\API\Response;
+use Automad\API\Response;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Parse;

@@ -36,7 +36,7 @@
 
 namespace Automad\Engine\Processors;
 
-use Automad\Admin\UI\InPage;
+use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;

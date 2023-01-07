@@ -36,7 +36,7 @@
 
 namespace Automad\Blocks;
 
-use Automad\Admin\UI\InPage;
+use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\TemplateProcessor;

@@ -36,8 +36,8 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Admin\API\Response;
-use Automad\Admin\UI\Utils\Messenger;
+use Automad\API\Messenger;
+use Automad\API\Response;
 use Automad\System\Update;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

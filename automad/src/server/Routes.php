@@ -36,15 +36,15 @@
 
 namespace Automad;
 
-use Automad\Admin\API\RequestHandler;
-use Automad\Admin\API\Response;
-use Automad\Admin\Session;
-use Automad\Admin\UI\Dashboard;
+use Automad\Admin\Dashboard;
+use Automad\API\RequestHandler;
+use Automad\API\Response;
 use Automad\Controllers\PageController;
 use Automad\Core\Cache;
 use Automad\Core\Feed;
 use Automad\Core\Parse;
 use Automad\Core\Router;
+use Automad\Core\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

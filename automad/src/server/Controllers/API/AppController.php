@@ -36,13 +36,13 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Admin\API\Response;
-use Automad\Admin\Session;
-use Automad\Admin\UI\Utils\Text;
+use Automad\Admin\Text;
+use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
+use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Models\UserCollection;
 use Automad\System\Fields;

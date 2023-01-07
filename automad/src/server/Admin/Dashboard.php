@@ -34,9 +34,9 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI;
+namespace Automad\Admin;
 
-use Automad\Admin\Session;
+use Automad\Core\Session;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin;
+namespace Automad\Core;
 
 use Automad\Models\UserCollection;
 

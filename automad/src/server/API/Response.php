@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\API;
+namespace Automad\API;
 
 use Automad\Core\Debug;
 

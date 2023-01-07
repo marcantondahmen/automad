@@ -34,11 +34,10 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\API;
+namespace Automad\API;
 
-use Automad\Admin\Session;
-use Automad\Admin\UI\Utils\Messenger;
 use Automad\Core\Debug;
+use Automad\Core\Session;
 use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

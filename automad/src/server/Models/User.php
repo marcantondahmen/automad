@@ -36,10 +36,10 @@
 
 namespace Automad\Models;
 
-use Automad\Admin\Session;
-use Automad\Admin\UI\Templates\PasswordResetEmail;
-use Automad\Admin\UI\Utils\Messenger;
-use Automad\Admin\UI\Utils\Text;
+use Automad\Admin\Templates\PasswordResetEmail;
+use Automad\Admin\Text;
+use Automad\API\Messenger;
+use Automad\Core\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

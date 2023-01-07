@@ -34,12 +34,12 @@
  * https://automad.org/license
  */
 
-namespace Automad\Admin\UI;
+namespace Automad\Admin;
 
-use Automad\Admin\Session;
+use Automad\Admin\Text;
 use Automad\Admin\UI\Components\Modal\Link;
 use Automad\Admin\UI\Components\Modal\SelectImage;
-use Automad\Admin\UI\Utils\Text;
+use Automad\Core\Session;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Context;
 use Automad\System\Asset;

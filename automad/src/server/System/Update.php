@@ -36,8 +36,8 @@
 
 namespace Automad\System;
 
-use Automad\Admin\UI\Utils\Messenger;
-use Automad\Admin\UI\Utils\Text;
+use Automad\Admin\Text;
+use Automad\API\Messenger;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;

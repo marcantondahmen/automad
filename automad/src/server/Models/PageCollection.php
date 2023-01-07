@@ -36,10 +36,10 @@
 
 namespace Automad\Models;
 
-use Automad\Admin\Session;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
+use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Routes;
 
