@@ -36,7 +36,7 @@
 
 namespace Automad\Admin\Templates;
 
-use Automad\Admin\Text;
+use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

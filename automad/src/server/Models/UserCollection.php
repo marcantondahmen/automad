@@ -37,10 +37,10 @@
 namespace Automad\Models;
 
 use Automad\Admin\Templates\InvitationEmail;
-use Automad\Admin\Text;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Session;
+use Automad\Core\Text;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

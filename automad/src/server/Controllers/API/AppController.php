@@ -36,7 +36,6 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Admin\Text;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem;
@@ -44,6 +43,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Core\Session;
 use Automad\Core\Str;
+use Automad\Core\Text;
 use Automad\Models\UserCollection;
 use Automad\System\Fields;
 use Automad\System\Server;

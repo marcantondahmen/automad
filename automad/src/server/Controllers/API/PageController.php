@@ -37,7 +37,6 @@
 namespace Automad\Controllers\API;
 
 use Automad\Admin\Models\PageModel;
-use Automad\Admin\Text;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
@@ -46,6 +45,7 @@ use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Request;
+use Automad\Core\Text;
 use Automad\Models\Page;
 use Automad\Models\Selection;
 use Automad\System\Fields;

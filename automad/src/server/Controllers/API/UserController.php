@@ -36,11 +36,11 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Admin\Text;
 use Automad\API\Response;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Session;
+use Automad\Core\Text;
 use Automad\Models\UserCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

@@ -36,10 +36,10 @@
 
 namespace Automad\Admin;
 
-use Automad\Admin\Text;
 use Automad\Admin\UI\Components\Modal\Link;
 use Automad\Admin\UI\Components\Modal\SelectImage;
 use Automad\Core\Session;
+use Automad\Core\Text;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Context;
 use Automad\System\Asset;

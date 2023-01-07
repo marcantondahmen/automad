@@ -37,6 +37,7 @@
 namespace Automad\API;
 
 use Automad\Core\Debug;
+use Automad\Core\Messenger;
 use Automad\Core\Session;
 use Automad\Core\Str;
 

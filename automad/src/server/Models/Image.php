@@ -36,10 +36,10 @@
 
 namespace Automad\Models;
 
-use Automad\Admin\Text;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
+use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
