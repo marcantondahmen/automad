@@ -1,3 +1,7 @@
+aboutAutomad: About Automad 
+
+-
+
 addedSuccess: Successfully added
 
 -
@@ -611,7 +615,7 @@ penTool: Pen
 
 -
 
-permissionsDeniedError: Permissions denied:
+permissionsDeniedError: Permissions denied
 
 -
 

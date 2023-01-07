@@ -37,7 +37,6 @@
 namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
-use Automad\Admin\Models\AppModel;
 use Automad\Admin\Session;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Automad;
@@ -67,20 +66,17 @@ class AppController {
 	 */
 	public static function bootstrap() {
 		$Response = new Response;
-		$ThemeCollection = new ThemeCollection();
+		$Automad = Automad::fromCache();
 
 		return $Response->setData(array(
-			'version' => AM_VERSION,
-			'text' => Text::getObject(),
-			'themes' => $ThemeCollection->getThemes(),
 			'base' => AM_BASE_URL,
 			'baseIndex' => AM_BASE_INDEX,
 			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
-			'feed' => Server::url() . AM_BASE_INDEX . AM_FEED_URL,
-			'reservedFields' => Fields::$reserved,
-			'allowedFileTypes' => FileUtils::allowedFileTypes(),
 			'languages' => self::getLanguages(),
-			'contentFields' => self::getContentFields()
+			'reservedFields' => Fields::$reserved,
+			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
+			'text' => Text::getObject(),
+			'version' => AM_VERSION
 		));
 	}
 
@@ -93,13 +89,15 @@ class AppController {
 		$Response = new Response;
 		$Automad = Automad::fromCache();
 		$UserCollection = new UserCollection();
+		$ThemeCollection = new ThemeCollection();
 
 		return $Response->setData(array(
-			'tags' => $Automad->getPagelist()->getTags(),
+			'allowedFileTypes' => FileUtils::allowedFileTypes(),
+			'contentFields' => self::getContentFields(),
+			'feed' => Server::url() . AM_BASE_INDEX . AM_FEED_URL,
+			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME),
 			'pages' => $Automad->getNavigationMetaData(),
 			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
-			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME),
-			'user' => $UserCollection->getUser(Session::getUsername()),
 			'system' => array(
 				'cache' => array(
 					'enabled' => AM_CACHE_ENABLED,
@@ -114,7 +112,10 @@ class AppController {
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection()),
 				'tempDirectory' => FileSystem::getTmpDir()
-			)
+			),
+			'tags' => $Automad->getPagelist()->getTags(),
+			'themes' => $ThemeCollection->getThemes(),
+			'user' => $UserCollection->getUser(Session::getUsername())
 		));
 	}
 

@@ -124,7 +124,7 @@ class FileCollection {
 			$item['path'] = $file;
 			$item['basename'] = basename($file);
 			$item['caption'] = FileUtils::caption($file);
-			$item['url'] = AM_BASE_URL . Str::stripStart($path, AM_BASE_DIR) . basename($file);
+			$item['url'] = Str::stripStart($path, AM_BASE_DIR) . basename($file);
 			$item['extension'] = FileSystem::getExtension($file);
 
 			$files[] = $item;
