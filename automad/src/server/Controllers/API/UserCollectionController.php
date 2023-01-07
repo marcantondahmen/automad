@@ -37,8 +37,8 @@
 namespace Automad\Controllers\API;
 
 use Automad\Admin\Text;
-use Automad\API\Messenger;
 use Automad\API\Response;
+use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Models\UserCollection;
 

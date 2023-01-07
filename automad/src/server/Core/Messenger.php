@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\API;
+namespace Automad\Core;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

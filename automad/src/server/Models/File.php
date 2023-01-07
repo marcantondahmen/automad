@@ -37,11 +37,11 @@
 namespace Automad\Models;
 
 use Automad\Admin\Text;
-use Automad\API\Messenger;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Str;
 use Automad\Models\Links;

@@ -37,7 +37,7 @@
 namespace Automad\Core;
 
 use Automad\Admin\Text;
-use Automad\API\Messenger;
+use Automad\Core\Messenger;
 use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

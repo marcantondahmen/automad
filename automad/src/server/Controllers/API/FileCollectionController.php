@@ -36,11 +36,11 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\API\Messenger;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Models\FileCollection;
 

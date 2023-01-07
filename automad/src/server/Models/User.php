@@ -38,7 +38,7 @@ namespace Automad\Models;
 
 use Automad\Admin\Templates\PasswordResetEmail;
 use Automad\Admin\Text;
-use Automad\API\Messenger;
+use Automad\Core\Messenger;
 use Automad\Core\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

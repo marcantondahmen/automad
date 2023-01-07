@@ -38,8 +38,8 @@ namespace Automad\Models;
 
 use Automad\Admin\Templates\InvitationEmail;
 use Automad\Admin\Text;
-use Automad\API\Messenger;
 use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 use Automad\Core\Session;
 use Automad\System\Server;
 
