@@ -124,7 +124,7 @@ class Search {
 	 * @return array the results array
 	 */
 	private function appendFieldResults(array $resultsArray, ?FieldResults $results) {
-		if (is_a($results, '\Automad\Admin\Models\Search\FieldResults')) {
+		if (is_a($results, '\Automad\Models\Search\FieldResults')) {
 			$resultsArray[] = $results;
 		}
 
@@ -167,7 +167,7 @@ class Search {
 		$contextArray = array();
 
 		foreach ($results as $result) {
-			if (is_a($result, '\Automad\Admin\Models\Search\FieldResults')) {
+			if (is_a($result, '\Automad\Models\Search\FieldResults')) {
 				$matches = array_merge($matches, $result->matches);
 				$contextArray[] = $result->context;
 			}
