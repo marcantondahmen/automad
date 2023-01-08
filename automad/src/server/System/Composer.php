@@ -67,7 +67,7 @@ class Composer {
 	/**
 	 * The Composer version to be used.
 	 */
-	private $composerVersion = '2.3.5';
+	private $composerVersion = '2.5.1';
 
 	/**
 	 * Composer extraction directory within temporary directory.
