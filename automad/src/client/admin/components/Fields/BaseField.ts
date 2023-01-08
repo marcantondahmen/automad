@@ -40,6 +40,7 @@ import {
 	createLabelFromField,
 	CSS,
 	html,
+	htmlSpecialChars,
 	query,
 	queryAll,
 } from '../../core';
@@ -90,7 +91,7 @@ export abstract class BaseFieldComponent extends BaseComponent {
 		const id = createIdFromField(key);
 
 		value = value || '';
-		tooltip = tooltip || '';
+		tooltip = htmlSpecialChars(tooltip || '');
 		label = label || createLabelFromField(key);
 		placeholder = placeholder || '';
 
@@ -128,12 +129,15 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	protected createLabel(): void {
 		const { id, label, tooltip } = this._data;
 		const wrapper = create('div', [], {}, this);
+		const element = create('label', [CSS.fieldLabel], { for: id }, wrapper);
 
-		wrapper.innerHTML = html`
-			<label class="${CSS.fieldLabel}" for="${id}" title="${tooltip}">
-				${label}
-			</label>
-		`;
+		create('span', [], {}, element).textContent = label;
+
+		if (tooltip) {
+			create('i', ['bi', 'bi-lightbulb'], {}, element);
+
+			element.setAttribute(Attr.tooltip, tooltip);
+		}
 	}
 
 	/**
