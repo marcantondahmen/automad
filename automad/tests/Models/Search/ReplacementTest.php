@@ -1,6 +1,6 @@
 <?php
 
-namespace Automad\UI\Models;
+namespace Automad\Models\Search;
 
 use Automad\Core\Parse;
 use PHPUnit\Framework\TestCase;

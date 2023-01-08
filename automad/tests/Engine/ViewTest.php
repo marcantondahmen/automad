@@ -2,7 +2,6 @@
 
 namespace Automad\Engine;
 
-use Automad\Core\Str;
 use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
@@ -76,8 +75,12 @@ class ViewTest extends TestCase {
 			'extension_01' => 'Test',
 			'extension_02' => 	'<head>' .
 								'<meta name="Generator" content="Automad ' . AM_VERSION . '">' .
-								'<link rel="stylesheet" href="' . AM_BASE_URL . '/automad/dist/blocks.min.css?v=' . Str::sanitize(AM_VERSION) . '">' .
-								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . Str::sanitize(AM_VERSION) . '"></script>' .
+								'<link href="' . AM_BASE_URL . '/automad/dist/blocks/blocks.min.css?m=' .
+								filemtime(AM_BASE_DIR . '/automad/dist/blocks/blocks.min.css') .
+								'" rel="stylesheet">' .
+								'<script src="' . AM_BASE_URL . '/automad/dist/blocks/blocks.min.js?m=' .
+								filemtime(AM_BASE_DIR . '/automad/dist/blocks/blocks.min.js') .
+								'" type="text/javascript"></script>' .
 								'<link rel="stylesheet" href="' .
 								AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css?m=' .
 								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/styles.css') .

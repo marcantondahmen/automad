@@ -1,14 +1,12 @@
 <?php
 
-namespace Automad\UI\Models;
+namespace Automad\Models\Search;
 
 use Automad\Test\Mock;
-use Automad\UI\Models\Search\FieldResults;
-use Automad\UI\Models\Search\FileResults;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\UI\Models\Search
+ * @testdox Automad\Models\Search\Search
  */
 class SearchTest extends TestCase {
 	public function dataForTestSearchPerFileIsSame() {
@@ -168,8 +166,8 @@ class SearchTest extends TestCase {
 		$results = $Search->searchPerFile();
 
 		$this->assertSame(
-			json_encode($results, JSON_PRETTY_PRINT),
-			json_encode($expected, JSON_PRETTY_PRINT)
+			json_encode($expected, JSON_PRETTY_PRINT),
+			json_encode($results, JSON_PRETTY_PRINT)
 		);
 	}
 }
