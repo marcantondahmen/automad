@@ -83,7 +83,7 @@ RewriteRule ^(.*)$ %2index.php?/$1 [QSA,L]
 # Redirect blocked files to the 404 page. 
 
 # Redirect all non-image cache files.
-RewriteCond %{REQUEST_FILENAME} !\.(jpg|gif|png)$
+RewriteCond %{REQUEST_FILENAME} !\.(jpg|gif|png|webp|jpeg)$
 RewriteCond %{REQUEST_FILENAME} cached [OR]
 
 # Redirect all .txt files.
