@@ -196,7 +196,6 @@ class Page {
 	 * @return string the new URL
 	 */
 	public function duplicate() {
-		// Build path and suffix.
 		$duplicatePath = $this->path;
 		$suffix = FileSystem::uniquePathSuffix($duplicatePath, '-copy');
 		$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);

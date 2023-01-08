@@ -116,15 +116,18 @@ class Theme {
 			'version' => false,
 			'license' => false,
 			'masks' => array(),
-			'tooltips' => array()
+			'tooltips' => array(),
+			'readme' => 'https://github.com/marcantondahmen/automad/tree/master/packages/' . $path . '#readme'
 		);
 
 		// Get Composer version.
 		if (array_key_exists($path, $composerInstalled)) {
 			$package = array_intersect_key(
 				$composerInstalled[$path],
-				array_flip(array('version'))
+				array_flip(array('version', 'support'))
 			);
+
+			$package['readme'] = $package['support']['source'] . '#readme';
 		} else {
 			$package = array();
 		}
@@ -136,14 +139,6 @@ class Theme {
 
 		if (!is_array($json)) {
 			$json = array();
-		}
-
-		// Get readme files.
-		$readme = false;
-		$readmes = FileSystem::globGrep(dirname($themeJSON) . '/*.*', '/readme\.(md|txt)$/i');
-
-		if (is_array($readmes) && !empty($readmes)) {
-			$readme = reset($readmes);
 		}
 
 		// Get templates.
@@ -169,7 +164,7 @@ class Theme {
 		$this->masks = $data['masks'];
 		$this->name = $data['name'];
 		$this->path = $path;
-		$this->readme = $readme;
+		$this->readme = $data['readme'];
 		$this->templates = $templates;
 		$this->tooltips = $data['tooltips'];
 		$this->version = $data['version'];

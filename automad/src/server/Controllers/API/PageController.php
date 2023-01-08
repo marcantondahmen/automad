@@ -173,7 +173,8 @@ class PageController {
 				'slug' => basename($Page->path),
 				'template' => $Page->getTemplate(),
 				'fields' => $fields,
-				'shared' => $Automad->Shared->data
+				'shared' => $Automad->Shared->data,
+				'readme' => $Theme->readme
 			)
 		);
 	}

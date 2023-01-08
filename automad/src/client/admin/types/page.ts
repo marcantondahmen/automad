@@ -51,6 +51,7 @@ export interface PageMainSettingsData {
 	url: string;
 	fields: KeyValueMap;
 	template: string;
+	readme: string;
 }
 
 export interface PageMetaData {

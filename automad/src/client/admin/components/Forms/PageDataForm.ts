@@ -307,6 +307,7 @@ export class PageDataFormComponent extends FormComponent {
 		url,
 		fields,
 		template,
+		readme,
 	}: PageMainSettingsData): void {
 		/**
 		 * Create a field for one of the main settings.
@@ -388,6 +389,23 @@ export class PageDataFormComponent extends FormComponent {
 			template,
 			themeKey: App.reservedFields.AM_KEY_THEME,
 		};
+
+		const readmeLink = create(
+			'a',
+			[],
+			{ href: readme, target: '_blank' },
+			templateField
+		);
+
+		create(
+			'am-icon-text',
+			[],
+			{
+				[Attr.icon]: 'file-earmark-text',
+				[Attr.text]: App.text('pageThemeReadme'),
+			},
+			readmeLink
+		);
 
 		createMainField(
 			'am-toggle',
@@ -486,7 +504,7 @@ export class PageDataFormComponent extends FormComponent {
 	 * @param response
 	 */
 	private render(response: KeyValueMap): void {
-		const { url, fields, shared, template } = response.data;
+		const { url, fields, shared, template, readme } = response.data;
 
 		create(
 			'input',
@@ -520,6 +538,7 @@ export class PageDataFormComponent extends FormComponent {
 			url,
 			fields,
 			template,
+			readme,
 		});
 
 		Object.keys(this.sections).forEach((item: PageSectionName) => {

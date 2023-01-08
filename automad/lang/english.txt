@@ -575,6 +575,10 @@ pageTemplate: Template
 
 -
 
+pageThemeReadme: Open readme file 
+
+-
+
 password: Password
 
 -
