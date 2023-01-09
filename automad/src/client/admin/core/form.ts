@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { App, createField, html, query, queryAll, titleCase } from '.';
+import {
+	App,
+	Attr,
+	create,
+	createField,
+	html,
+	query,
+	queryAll,
+	titleCase,
+} from '.';
 import {
 	FieldGroupData,
 	FieldGroups,
@@ -106,6 +115,20 @@ export const fieldGroup = ({
 	tooltips,
 	shared,
 }: FieldGroupData): void => {
+	if (Object.values(fields).length == 0) {
+		create(
+			'am-alert',
+			[],
+			{
+				[Attr.icon]: 'slash-circle',
+				[Attr.text]: App.text('sectionHasNoFields'),
+			},
+			section
+		);
+
+		return;
+	}
+
 	const prefixMap = {
 		'+': 'am-editor',
 		checkbox: 'am-toggle',

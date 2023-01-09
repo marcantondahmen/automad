@@ -763,6 +763,10 @@ searchNoResults: Your search did not return any results.
 
 -
 
+sectionHasNoFields: There are no fields defined in this section.
+
+-
+
 selectTargetMovePage: Select a destination for moving
 
 -
