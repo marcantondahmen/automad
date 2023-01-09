@@ -49,7 +49,7 @@ class TextareaComponent extends BaseFieldComponent {
 		const textarea = create(
 			'textarea',
 			[CSS.input],
-			{ id, name, placeholder },
+			{ id, name, placeholder, wrap: 'off' },
 			this
 		);
 
@@ -92,7 +92,7 @@ class TextareaComponent extends BaseFieldComponent {
 
 		// Add a random character here to actually make new lines work at the end of the content.
 		clone.textContent = textarea.value + '-';
-		textarea.style.height = `${clone.offsetHeight}px`;
+		textarea.style.height = `${clone.offsetHeight + 15}px`;
 		clone.remove();
 	}
 

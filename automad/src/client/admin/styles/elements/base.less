@@ -58,9 +58,12 @@
 	}
 
 	& body * {
-		scrollbar-width: none !important;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+	}
+
+	& body :not(textarea) {
+		scrollbar-width: none !important;
 
 		&::-webkit-scrollbar {
 			display: none;
