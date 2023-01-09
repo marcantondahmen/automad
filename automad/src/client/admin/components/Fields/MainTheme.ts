@@ -68,21 +68,42 @@ export class MainThemeComponent extends BaseFieldComponent {
 		};
 
 		select.innerHTML = html`
-			<span>${selectedTheme.name}</span>
+			<i class="bi bi-box-seam"></i>
+			<span class="${CSS.flexItemGrow}">${selectedTheme.name}</span>
 			<select id=${id} name=${name}>
 				${options()}
 			</select>
 		`;
 
+		const links = create('div', [CSS.flex, CSS.flexColumn], {}, this);
+
 		create(
 			'am-icon-text',
 			[],
-			{ [Attr.icon]: 'box-seam', [Attr.text]: App.text('moreThemes') },
+			{
+				[Attr.icon]: 'file-earmark-text',
+				[Attr.text]: App.text('themeReadme'),
+			},
+			create(
+				'a',
+				[],
+				{ href: selectedTheme.readme, target: '_blank' },
+				links
+			)
+		);
+
+		create(
+			'am-icon-text',
+			[],
+			{
+				[Attr.icon]: 'cloud-download',
+				[Attr.text]: App.text('moreThemes'),
+			},
 			create(
 				'am-link',
 				[CSS.textLink],
 				{ [Attr.target]: Route.packages },
-				this
+				links
 			)
 		);
 	}

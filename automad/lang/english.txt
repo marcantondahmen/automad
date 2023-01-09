@@ -579,7 +579,7 @@ pageTemplate: Template
 
 -
 
-pageThemeReadme: Open readme file 
+themeReadme: Open readme file of current theme
 
 -
 

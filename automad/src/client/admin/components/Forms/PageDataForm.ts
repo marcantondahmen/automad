@@ -297,7 +297,7 @@ export class PageDataFormComponent extends FormComponent {
 			[],
 			{
 				[Attr.icon]: 'file-earmark-text',
-				[Attr.text]: App.text('pageThemeReadme'),
+				[Attr.text]: App.text('themeReadme'),
 			},
 			readmeLink
 		);
