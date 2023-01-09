@@ -36,7 +36,11 @@
 
 namespace Automad\Models;
 
+use Automad\API\RequestHandler;
+use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 use Automad\Core\Parse;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -68,8 +72,8 @@ class Shared {
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
 		// Check whether there is a theme defined in the Shared object data.
-		if (!$this->get(AM_KEY_THEME) && AM_REQUEST != AM_PAGE_DASHBOARD) {
-			exit('<h1>No main theme defined!</h1><h2>Please define a theme in "/shared/data.txt"!</h2>');
+		if (!$this->get(AM_KEY_THEME) && strpos(AM_REQUEST, RequestHandler::$apiBase) !== 0) {
+			exit('<h1>No main theme defined!</h1><h2>Please define a theme!</h2>');
 		}
 	}
 
@@ -85,6 +89,26 @@ class Shared {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Save shared data.
+	 *
+	 * @param array $data
+	 * @param Messenger $Messenger
+	 * @return bool true on success
+	 */
+	public function save(array $data, Messenger $Messenger) {
+		if (!is_writable(AM_FILE_SHARED_DATA)) {
+			$Messenger->setError(Text::get('error_permission'));
+
+			return false;
+		}
+
+		FileSystem::writeData($data, AM_FILE_SHARED_DATA);
+		Cache::clear();
+
+		return true;
 	}
 
 	/**

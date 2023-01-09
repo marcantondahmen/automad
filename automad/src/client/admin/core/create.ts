@@ -34,8 +34,12 @@
 
 import { InputComponent } from '../components/Fields/Input';
 import { ModalComponent } from '../components/Modal/Modal';
-import { FieldInitData, KeyValueMap } from '../types';
+import { FieldInitData, FieldSectionCollection, KeyValueMap } from '../types';
 import { App, Attr, CSS, html } from '.';
+import { PageDataFormComponent } from '../components/Forms/PageDataForm';
+import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
+import { Section } from '../components/Switcher/Switcher';
+import { SharedDataFormComponent } from '../components/Forms/SharedDataForm';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -91,6 +95,28 @@ export const createField = (
 	field.data = data;
 
 	return field;
+};
+
+/**
+ * Create switcher sections for the different kind of variable fields.
+ *
+ * @param form - the main page data form that serves as wrapper
+ * @returns the switcher section collection
+ */
+export const createFieldSections = (
+	form: PageDataFormComponent | SharedDataFormComponent
+): FieldSectionCollection => {
+	const createSection = (section: string): SwitcherSectionComponent => {
+		return create('am-switcher-section', [], { name: section }, form);
+	};
+
+	const sections: FieldSectionCollection = {
+		settings: createSection(Section.settings),
+		text: createSection(Section.text),
+		colors: createSection(Section.colors),
+	};
+
+	return sections;
 };
 
 /**

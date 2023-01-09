@@ -26,14 +26,19 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { html, query, queryAll } from '.';
-import { InputElement, KeyValueMap } from '../types';
+import { App, createField, html, query, queryAll, titleCase } from '.';
+import {
+	FieldGroupData,
+	FieldGroups,
+	InputElement,
+	KeyValueMap,
+} from '../types';
 
 /**
  * A class to register elements to be used to generate form data.
@@ -69,6 +74,80 @@ export class FormDataProviders {
 }
 
 /**
+ * Create an ID from a field key.
+ *
+ * @param key
+ * @returns the generated ID
+ */
+export const createIdFromField = (key: string): string => {
+	return `am-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
+};
+
+/**
+ * Create a label text from a field key.
+ *
+ * @param key
+ * @returns the generated label
+ */
+export const createLabelFromField = (key: string): string => {
+	return titleCase(key.replace('+', ''))
+		.replace('Color ', '')
+		.replace('Checkbox ', '');
+};
+
+/**
+ * Create a group of form fields within a given section element based on a set of keys.
+ *
+ * @param params
+ */
+export const fieldGroup = ({
+	section,
+	fields,
+	tooltips,
+	shared,
+}: FieldGroupData): void => {
+	const prefixMap = {
+		'+': 'am-editor',
+		checkbox: 'am-toggle',
+		color: 'am-color',
+		date: 'am-date',
+		text: 'am-markdown',
+		image: 'am-image-select',
+		url: 'am-url',
+	};
+
+	if (shared) {
+		prefixMap.checkbox = 'am-toggle-select';
+	}
+
+	Object.keys(fields).forEach((key) => {
+		if (!Object.values(App.reservedFields).includes(key)) {
+			let fieldType = 'am-textarea';
+			let placeholder = '';
+
+			for (const [prefix, value] of Object.entries(prefixMap)) {
+				if (key.startsWith(prefix)) {
+					fieldType = value;
+					break;
+				}
+			}
+
+			if (shared) {
+				placeholder = shared[key];
+			}
+
+			createField(fieldType, section, {
+				key: key,
+				value: fields[key],
+				tooltip: tooltips[key],
+				name: `data[${key}]`,
+				placeholder,
+			});
+		}
+	});
+};
+
+/**
  * Collect all the form data to be submitted. Note that excludes all values of unchecked checkboxes and radios.
  *
  * @param container
@@ -96,6 +175,38 @@ export const getFormData = (container: HTMLElement): KeyValueMap => {
 	);
 
 	return data;
+};
+
+/**
+ * Split the incoming fields into predifend groups.
+ *
+ * @param fields
+ * @returns the field groups
+ */
+export const prepareFieldGroups = (fields: KeyValueMap): FieldGroups => {
+	const groups: FieldGroups = {
+		settings: {},
+		text: {},
+		colors: {},
+	};
+
+	Object.keys(fields).forEach((name) => {
+		const match = name.match(/^(\+|text|color|.)/);
+
+		switch (match[1]) {
+			case '+':
+			case 'text':
+				groups.text[name] = fields[name];
+				break;
+			case 'color':
+				groups.colors[name] = fields[name];
+				break;
+			default:
+				groups.settings[name] = fields[name];
+		}
+	});
+
+	return groups;
 };
 
 /**

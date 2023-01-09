@@ -36,7 +36,6 @@ import {
 	App,
 	Attr,
 	CSS,
-	EventName,
 	getPageURL,
 	getTagFromRoute,
 	html,
@@ -44,6 +43,7 @@ import {
 } from '../../core';
 import { Section } from '../Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
+import { renderFileImportModal } from './Partials/FileImportModal';
 
 const renderBreadcrumbs = (): string => {
 	return html`
@@ -171,26 +171,26 @@ const renderMenu = (): string => {
 						class="${CSS.menuItem}"
 						${Attr.section}="${Section.settings}"
 					>
-						${App.text('pageSettings')}
+						${App.text('fieldsSettings')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						${Attr.section}="${Section.text}"
 					>
-						${App.text('pageContent')}
+						${App.text('fieldsContent')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						${Attr.section}="${Section.colors}"
 					>
-						${App.text('pageColors')}
+						${App.text('fieldsColors')}
 					</am-switcher-link>
 					<am-switcher-link
 						class="${CSS.menuItem}"
 						${Attr.section}="${Section.files}"
 					>
 						${App.text('uploadedFiles')}
-						<span class="am-e-badge">
+						<span class="${CSS.badge}">
 							<am-file-count></am-file-count>
 						</span>
 					</am-switcher-link>
@@ -200,40 +200,6 @@ const renderMenu = (): string => {
 				${renderDropdown()}
 			</div>
 		</section>
-	`;
-};
-
-const renderFileImportModal = (): string => {
-	return html`
-		<am-modal id="am-file-import-modal">
-			<div class="${CSS.modalDialog}">
-				<am-form
-					${Attr.api}="File/import"
-					${Attr.event}="${EventName.filesChangeOnServer}"
-				>
-					<div class="${CSS.modalBody}">
-						<div class="${CSS.field}">
-							<input
-								class="${CSS.input}"
-								name="importUrl"
-								type="text"
-								placeholder="URL"
-							/>
-						</div>
-					</div>
-					<div class="${CSS.modalFooter}">
-						<am-modal-close
-							class="${CSS.button} ${CSS.buttonPrimary}"
-						>
-							${App.text('cancel')}
-						</am-modal-close>
-						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
-							${App.text('importFromUrl')}
-						</am-submit>
-					</div>
-				</am-form>
-			</div>
-		</am-modal>
 	`;
 };
 

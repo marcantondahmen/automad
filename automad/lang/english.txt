@@ -439,6 +439,10 @@ more: More
 
 -
 
+moreThemes: Get more themes here
+
+-
+
 movePage: Move Page
 
 -
@@ -539,11 +543,11 @@ padding: Padding
 
 -
 
-pageColors: Colors
+fieldsColors: Colors
 
 -
 
-pageContent: Content
+fieldsContent: Content
 
 -
 
@@ -559,7 +563,7 @@ pagePrefix: Prefix (Order in Navigation)
 
 -
 
-pageSettings: Settings
+fieldsSettings: Settings
 
 -
 

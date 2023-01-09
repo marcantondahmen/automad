@@ -26,20 +26,21 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-export * from './form';
-export * from './packages';
+export * from './field';
+export * from './package';
 export * from './page';
 export * from './search';
+export * from './shared';
 export * from './switcher';
 export * from './system';
 import { PageMetaData } from '.';
-import { InputElement } from './form';
+import { InputElement } from './field';
 
 export interface KeyValueMap {
 	[key: string | number]: any;

@@ -44,6 +44,7 @@ import './components/Fields/Email';
 import './components/Fields/FeedFieldSelect';
 import './components/Fields/ImageSelect';
 import './components/Fields/Input';
+import './components/Fields/MainTheme';
 import './components/Fields/Markdown';
 import './components/Fields/PageTags';
 import './components/Fields/PageTemplate';
@@ -69,6 +70,7 @@ import './components/Forms/Form';
 import './components/Forms/PageDataForm';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';
+import './components/Forms/SharedDataForm';
 import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';
 

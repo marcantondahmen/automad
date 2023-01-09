@@ -34,130 +34,31 @@
 
 import {
 	FieldGroupData,
+	FieldGroups,
+	FieldSectionCollection,
+	FieldSectionName,
 	KeyValueMap,
 	PageBindings,
-	PageFieldGroups,
 	PageMainSettingsData,
-	PageSectionCollection,
-	PageSectionName,
 } from '../../types';
 import { InputComponent } from '../Fields/Input';
 import { FormComponent } from './Form';
-import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
 import {
 	App,
 	Attr,
 	Binding,
 	create,
 	createField,
+	createFieldSections,
 	CSS,
+	fieldGroup,
 	getPageURL,
 	html,
+	prepareFieldGroups,
 	Route,
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
-import { Section } from '../Switcher/Switcher';
-
-/**
- * Create a group of form fields within a given section element based on a set of keys.
- *
- * @param params
- * @param params.section - the section node where the field is created in
- * @param params.keys - the array of variable keys for the field group
- * @param params.pageData - the data object that was loaded from the page's data file
- * @param params.tooltips - the field tooltips
- * @param params.shared - the shared fallback data
- */
-const fieldGroup = ({
-	section,
-	fields,
-	tooltips,
-	shared,
-}: FieldGroupData): void => {
-	const prefixMap = {
-		'+': 'am-editor',
-		checkbox: 'am-toggle-select',
-		color: 'am-color',
-		date: 'am-date',
-		text: 'am-markdown',
-		image: 'am-image-select',
-		url: 'am-url',
-	};
-
-	Object.keys(fields).forEach((key) => {
-		if (!Object.values(App.reservedFields).includes(key)) {
-			let fieldType = 'am-textarea';
-
-			for (const [prefix, value] of Object.entries(prefixMap)) {
-				if (key.startsWith(prefix)) {
-					fieldType = value;
-					break;
-				}
-			}
-
-			createField(fieldType, section, {
-				key: key,
-				value: fields[key],
-				tooltip: tooltips[key],
-				name: `data[${key}]`,
-				placeholder: shared[key],
-			});
-		}
-	});
-};
-
-/**
- * Create switcher sections for the different kind of variable fields.
- *
- * @param form - the main page data form that serves as wrapper
- * @returns the switcher section collection
- */
-const createSections = (form: PageDataFormComponent): PageSectionCollection => {
-	const createSection = (section: string): SwitcherSectionComponent => {
-		return create('am-switcher-section', [], { name: section }, form);
-	};
-
-	const sections: PageSectionCollection = {
-		settings: createSection(Section.settings),
-		text: createSection(Section.text),
-		colors: createSection(Section.colors),
-	};
-
-	return sections;
-};
-
-/**
- * Split the incoming fields into predifend groups.
- *
- * @param fields
- * @returns the field groups
- */
-const prepareFieldGroups = (fields: KeyValueMap): PageFieldGroups => {
-	const groups: PageFieldGroups = {
-		settings: {},
-		text: {},
-		colors: {},
-	};
-
-	Object.keys(fields).forEach((name) => {
-		const match = name.match(/^(\+|text|color|.)/);
-
-		switch (match[1]) {
-			case '+':
-			case 'text':
-				groups.text[name] = fields[name];
-				break;
-			case 'color':
-				groups.colors[name] = fields[name];
-				break;
-			default:
-				groups.settings[name] = fields[name];
-		}
-	});
-
-	return groups;
-};
 
 /**
  * Init all URL and slug related bindings.
@@ -253,12 +154,12 @@ export class PageDataFormComponent extends FormComponent {
 	/**
 	 * The section collection object.
 	 */
-	private sections: PageSectionCollection;
+	private sections: FieldSectionCollection;
 
 	/**
 	 * The page bindings object.
 	 */
-	private pageBindings: PageBindings;
+	private bindings: PageBindings;
 
 	/**
 	 * Wait for pending requests.
@@ -285,7 +186,7 @@ export class PageDataFormComponent extends FormComponent {
 	 * Initialize the form.
 	 */
 	protected init(): void {
-		this.sections = createSections(this);
+		this.sections = createFieldSections(this);
 
 		super.init();
 	}
@@ -294,13 +195,6 @@ export class PageDataFormComponent extends FormComponent {
 	 * Create the main settings fields.
 	 *
 	 * @param params
-	 * @param params.section - the section element where the fields are created in
-	 * @param params.url - the page URL
-	 * @param params.slug - the page slug
-	 * @param params.pageData - the data that was loaded from the data file
-	 * @param params.shared - the shared data object
-	 * @param params.reserved - the reserved keys object
-	 * @param params.template - the page template path
 	 */
 	private mainSettings({
 		section,
@@ -315,6 +209,7 @@ export class PageDataFormComponent extends FormComponent {
 		 * @param fieldType
 		 * @param key
 		 * @param [label]
+		 * @param [attributes]
 		 * @returns the generated field
 		 */
 		const createMainField = (
@@ -480,21 +375,24 @@ export class PageDataFormComponent extends FormComponent {
 			return;
 		}
 
-		if (this.pageBindings) {
-			this.pageBindings.pageDataFetchTimeBinding.value = response.time;
+		if (this.bindings) {
+			this.bindings.pageDataFetchTimeBinding.value = response.time;
 		}
 
 		if (!response.data) {
 			return;
 		}
 
+		if (!this.bindings) {
+			this.bindings = createBindings(response);
+		}
+
 		if (response.data.update) {
-			await updateUI(response.data.update, this.pageBindings);
+			await updateUI(response.data.update, this.bindings);
 
 			return;
 		}
 
-		this.pageBindings = createBindings(response);
 		this.render(response);
 	}
 
@@ -541,7 +439,7 @@ export class PageDataFormComponent extends FormComponent {
 			readme,
 		});
 
-		Object.keys(this.sections).forEach((item: PageSectionName) => {
+		Object.keys(this.sections).forEach((item: FieldSectionName) => {
 			fieldGroup({
 				section: this.sections[item],
 				fields: fieldGroups[item],

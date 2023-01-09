@@ -422,7 +422,7 @@ class Page {
 	 * @param array $data
 	 * @param string $themeTemplate
 	 * @param string $slug
-	 * @return string a redirect URL in case the page was moved or its privacy has changed
+	 * @return array|bool a data array in case the page was moved or its privacy has changed
 	 */
 	public function save(string $url, array $data, string $themeTemplate, string $slug) {
 		$data = array_map('trim', $data);

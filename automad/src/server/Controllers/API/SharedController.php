@@ -27,23 +27,22 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Controllers\API;
 
+use Automad\API\Response;
 use Automad\Core\Automad;
-use Automad\Core\Cache;
+use Automad\Core\Messenger;
 use Automad\Core\Request;
-use Automad\UI\Components\Layout\SharedData;
-use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\Text;
-use Automad\UI\Utils\UICache;
+use Automad\Core\Text;
+use Automad\System\Fields;
+use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Shared data controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class SharedController {
@@ -61,45 +60,42 @@ class SharedController {
 	 * @return Response the response object
 	 */
 	public static function data() {
-		$Automad = UICache::get();
+		$Response = new Response();
+		$Automad = Automad::fromCache();
+		$Shared = $Automad->Shared;
+		$data = Request::post('data');
 
-		if ($data = Request::post('data')) {
-			// Save changes.
-			if (is_array($data)) {
-				return self::save($Automad, $data);
+		if (!empty($data) && is_array($data)) {
+			if (filemtime(AM_FILE_SHARED_DATA) > Request::post('dataFetchTime')) {
+				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
 			}
-		}
 
-		// If there is no data, just get the form ready.
-		$SharedData = new SharedData($Automad);
-		$Response = new Response();
+			$Messenger = new Messenger();
 
-		return $Response->setHtml($SharedData->render());
-	}
+			if (!$Shared->save($data, $Messenger)) {
+				return $Response->setError($Messenger->getError());
+			}
 
-	/**
-	 * Save shared data.
-	 *
-	 * @param Automad $Automad
-	 * @param array $data
-	 * @return Response the response object
-	 */
-	private static function save(Automad $Automad, array $data) {
-		$Response = new Response();
-
-		if (is_writable(AM_FILE_SHARED_DATA)) {
-			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
-			Cache::clear();
-
-			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $Automad->Shared->get(AM_KEY_THEME)) {
+			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $Shared->get(AM_KEY_THEME)) {
 				$Response->setReload(true);
-			} else {
-				$Response->setSuccess(Text::get('success_saved'));
 			}
-		} else {
-			$Response->setError(Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>');
+
+			return $Response;
 		}
 
-		return $Response;
+		$ThemeCollection = new ThemeCollection();
+		$mainThemeName = $Shared->get(AM_KEY_THEME) ? $Shared->get(AM_KEY_THEME) : array_keys($ThemeCollection->getThemes())[0];
+		$Theme = $ThemeCollection->getThemeByKey($mainThemeName);
+		$keys = Fields::inTheme($Theme);
+
+		$fields = array_merge(
+			array_fill_keys(Fields::$reserved, ''),
+			array_fill_keys($keys, ''),
+			$Shared->data
+		);
+
+		ksort($fields);
+
+		return $Response->setData(array('fields' => $fields));
 	}
 }

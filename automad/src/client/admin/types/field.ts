@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -34,6 +34,16 @@
 
 import { KeyValueMap } from '.';
 import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
+
+export type FieldSectionName = 'settings' | 'text' | 'colors';
+
+export type FieldSectionCollection = {
+	[name in FieldSectionName]: SwitcherSectionComponent;
+};
+
+export type FieldGroups = {
+	[name in FieldSectionName]: KeyValueMap;
+};
 
 export type InputElement = HTMLInputElement | HTMLTextAreaElement;
 
@@ -53,7 +63,7 @@ export interface FieldGroupData {
 	section: SwitcherSectionComponent;
 	fields: KeyValueMap;
 	tooltips: KeyValueMap;
-	shared: KeyValueMap;
+	shared?: KeyValueMap;
 }
 
 export interface FieldInitData {

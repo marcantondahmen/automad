@@ -154,7 +154,8 @@ const createOptions = (
  * @returns the rendered element
  */
 export const createTemplateSelect = (selectedTemplate: string): HTMLElement => {
-	const mainTheme = App.themes[App.mainTheme];
+	const mainTheme =
+		App.themes[App.mainTheme] || App.themes[Object.keys(App.themes)[0]];
 	const themes = App.themes;
 	const wrapper = create('am-select', [CSS.button], {});
 

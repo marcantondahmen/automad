@@ -103,28 +103,6 @@ export const confirm = async (text: string): Promise<any> => {
 };
 
 /**
- * Create an ID from a field key.
- *
- * @param key
- * @returns the generated ID
- */
-export const createIdFromField = (key: string): string => {
-	return `am-id-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
-};
-
-/**
- * Create a label text from a field key.
- *
- * @param key
- * @returns the generated label
- */
-export const createLabelFromField = (key: string): string => {
-	return titleCase(key.replace('+', ''))
-		.replace('Color ', '')
-		.replace('Checkbox ', '');
-};
-
-/**
  * Debounce a function.
  *
  * @param callback

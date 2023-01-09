@@ -26,41 +26,44 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap } from '.';
-import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
-import { Binding } from '../core';
+import { App, Attr, CSS, EventName, html } from '../../../core';
 
-export interface PageMainSettingsData {
-	section: SwitcherSectionComponent;
-	url: string;
-	fields: KeyValueMap;
-	template: string;
-	readme: string;
-}
-
-export interface PageMetaData {
-	title: string;
-	index: string;
-	url: string;
-	path: string;
-	parentPath: string;
-	private: boolean;
-}
-
-export interface Pages {
-	[key: string]: PageMetaData;
-}
-
-export interface PageBindings {
-	pageUrlBinding: Binding;
-	pageUrlWithBaseBinding: Binding;
-	pageLinkUIBinding: Binding;
-	pageDataFetchTimeBinding: Binding;
-	slugBinding: Binding;
-}
+export const renderFileImportModal = (): string => {
+	return html`
+		<am-modal id="am-file-import-modal">
+			<div class="${CSS.modalDialog}">
+				<am-form
+					${Attr.api}="File/import"
+					${Attr.event}="${EventName.filesChangeOnServer}"
+				>
+					<div class="${CSS.modalBody}">
+						<div class="${CSS.field}">
+							<input
+								class="${CSS.input}"
+								name="importUrl"
+								type="text"
+								placeholder="URL"
+							/>
+						</div>
+					</div>
+					<div class="${CSS.modalFooter}">
+						<am-modal-close
+							class="${CSS.button} ${CSS.buttonPrimary}"
+						>
+							${App.text('cancel')}
+						</am-modal-close>
+						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+							${App.text('importFromUrl')}
+						</am-submit>
+					</div>
+				</am-form>
+			</div>
+		</am-modal>
+	`;
+};
