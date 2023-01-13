@@ -50,11 +50,22 @@ export class Binding {
 	private modifier: Function;
 
 	/**
+	 * Set this to true in case there is no input passed in the options and the value
+	 * possibly is boolean or number.
+	 */
+	private storeValueAsObject: boolean;
+
+	/**
 	 * The value getter.
 	 */
 	get value() {
-		// Get value from JSON string in order to corecctly handle booleans and numbers.
-		const { value } = JSON.parse(this.input.value);
+		let value = this.input.value;
+
+		if (this.storeValueAsObject) {
+			// Get value from JSON string in order to corecctly handle booleans and numbers.
+			const data = JSON.parse(value);
+			value = data.value;
+		}
 
 		if (this.modifier) {
 			return this.modifier(value);
@@ -67,8 +78,12 @@ export class Binding {
 	 * Set the input value.
 	 */
 	set value(value) {
-		// Store value as stringified JSON in order to corecctly handle booleans and numbers.
-		this.input.value = JSON.stringify({ value });
+		if (this.storeValueAsObject) {
+			this.input.value = JSON.stringify({ value });
+		} else {
+			this.input.value = value;
+		}
+
 		fire('input', this.input);
 	}
 
@@ -85,6 +100,7 @@ export class Binding {
 		);
 
 		this.modifier = options.modifier;
+		this.storeValueAsObject = options.input === null;
 
 		// In case no input is given, an empty input element will be create without
 		// appending it to the DOM.
