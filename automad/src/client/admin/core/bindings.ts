@@ -53,10 +53,13 @@ export class Binding {
 	 * The value getter.
 	 */
 	get value() {
+		// Get value from JSON string in order to corecctly handle booleans and numbers.
+		const { value } = JSON.parse(this.input.value);
+
 		if (this.modifier) {
-			return this.modifier(this.input.value);
+			return this.modifier(value);
 		} else {
-			return this.input.value;
+			return value;
 		}
 	}
 
@@ -64,7 +67,8 @@ export class Binding {
 	 * Set the input value.
 	 */
 	set value(value) {
-		this.input.value = value;
+		// Store value as stringified JSON in order to corecctly handle booleans and numbers.
+		this.input.value = JSON.stringify({ value });
 		fire('input', this.input);
 	}
 
