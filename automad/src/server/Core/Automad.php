@@ -91,17 +91,17 @@ class Automad {
 	private $Pagelist = false;
 
 	/**
-	 * Parse sitewide settings, create $collection and set the context to the currently requested page.
+	 * Set collection and Shared properties and create the context object with the currently requested page.
+	 *
+	 * @param array $collection
+	 * @param Shared $Shared
 	 */
-	public function __construct() {
-		$this->Shared = new Shared();
-
-		$PageCollection = new PageCollection('/', $this->Shared);
-		$this->collection = $PageCollection->get();
+	public function __construct(array $collection, Shared $Shared) {
+		$this->collection = $collection;
+		$this->Shared = $Shared;
 
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 
-		// Set the context initially to the requested page.
 		$this->Context = new Context($this->getRequestedPage());
 	}
 
@@ -123,6 +123,18 @@ class Automad {
 	public function __wakeup() {
 		Debug::log(get_object_vars($this), 'Automad object got unserialized');
 		$this->Context = new Context($this->getRequestedPage());
+	}
+
+	/**
+	 * Create a new Automad instance including its required dependencies.
+	 *
+	 * @return Automad
+	 */
+	public static function create(): Automad {
+		$Shared = new Shared();
+		$PageCollection = new PageCollection('/', $Shared);
+
+		return new Automad($PageCollection->get(), $Shared);
 	}
 
 	/**

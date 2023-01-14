@@ -219,14 +219,15 @@ class Cache {
 	 *
 	 * @return Automad The Automad object
 	 */
-	public function getAutomad() {
+	public function getAutomad(): Automad {
 		if ($this->automadObjectCacheIsApproved()) {
-			$Automad = $this->readAutomadObjectFromCache();
-		} else {
-			$Automad = new Automad();
-			$this->writeAutomadObjectToCache($Automad);
-			new Sitemap($Automad->getCollection());
+			return $this->readAutomadObjectFromCache();
 		}
+
+		$Automad = Automad::create();
+
+		$this->writeAutomadObjectToCache($Automad);
+		new Sitemap($Automad->getCollection());
 
 		return $Automad;
 	}
