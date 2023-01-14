@@ -54,8 +54,9 @@ class ImageCollection {
 	 * List all images of a page or the shared data directory.
 	 *
 	 * @param string $path
+	 * @return array
 	 */
-	public static function list(string $path) {
+	public static function list(string $path): array {
 		$images = array();
 		$globGrep = FileSystem::globGrep(
 			$path . '*.*',

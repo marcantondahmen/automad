@@ -51,16 +51,16 @@ class Mail {
 	/**
 	 * Save status to avoid a second trigger for example in pagelists or teaser snippets.
 	 */
-	private static $sent = false;
+	private static bool $sent = false;
 
 	/**
 	 * Send mail.
 	 *
 	 * @param object $data
 	 * @param Automad $Automad
-	 * @return string the sendig status
+	 * @return bool|string the sendig status
 	 */
-	public static function send(object $data, Automad $Automad) {
+	public static function send(object $data, Automad $Automad): bool|string {
 		// Prevent a second call.
 		if (self::$sent) {
 			return $data->success;
@@ -84,6 +84,11 @@ class Mail {
 
 		// Check if form fields are not empty.
 		if (empty($_POST[$from]) || empty($_POST[$subject]) || empty($_POST[$message])) {
+			return $data->error;
+		}
+
+		// Check if form fields are actually strings.
+		if (!is_string($_POST[$from]) || !is_string($_POST[$subject]) || !is_string($_POST[$message])) {
 			return $data->error;
 		}
 

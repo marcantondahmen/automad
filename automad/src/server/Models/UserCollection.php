@@ -56,17 +56,17 @@ class UserCollection {
 	/**
 	 * The collection of existing user objects.
 	 */
-	private $users;
+	private array $users;
 
 	/**
 	 * The class name of the user type.
 	 */
-	private $userType = 'Automad\Models\User';
+	private string $userType = 'Automad\Models\User';
 
 	/**
 	 * The replacement for the user type class in a serialized string.
 	 */
-	private $userTypeSerialized = 'O:*:"~"';
+	private string $userTypeSerialized = 'O:*:"~"';
 
 	/**
 	 * The constructor.
@@ -85,7 +85,13 @@ class UserCollection {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function createUser(string $username, string $password1, string $password2, string $email, Messenger $Messenger) {
+	public function createUser(
+		string $username,
+		string $password1,
+		string $password2,
+		string $email,
+		Messenger $Messenger
+	): bool {
 		$username = trim($username);
 		$email = trim($email);
 
@@ -137,24 +143,24 @@ class UserCollection {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function delete(array $users, Messenger $Messenger) {
-		if (is_array($users)) {
-			// Only delete users from list, if accounts.php is writable.
-			// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
-			// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
-			// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
-			if (is_writable(AM_FILE_ACCOUNTS)) {
-				foreach ($users as $username) {
-					unset($this->users[$this->getUserId($username)]);
+	public function delete(array $users, Messenger $Messenger): bool {
+		// Only delete users from list, if accounts.php is writable.
+		// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
+		// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
+		// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
+		if (is_writable(AM_FILE_ACCOUNTS)) {
+			foreach ($users as $username) {
+				$id = $this->getUserId($username);
+
+				if (!is_null($id) && isset($this->users[$id])) {
+					unset($this->users[$id]);
 				}
-
-				return $this->save($Messenger);
-			} else {
-				$Messenger->setError(Text::get('permissionsDeniedError'));
-
-				return false;
 			}
+
+			return $this->save($Messenger);
 		}
+
+		$Messenger->setError(Text::get('permissionsDeniedError'));
 
 		return false;
 	}
@@ -167,14 +173,23 @@ class UserCollection {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function editCurrentUserInfo(string $username, string $email, Messenger $Messenger) {
+	public function editCurrentUserInfo(
+		string $username,
+		string $email,
+		Messenger $Messenger
+	): bool {
 		$id = $this->getUserId(Session::getUsername());
+
+		if (is_null($id) || empty($this->users[$id])) {
+			return false;
+		}
+
 		$User = $this->users[$id];
 
 		// Unset temporary the array item here in order to check easily for duplicate eamils or names.
 		unset($this->users[$id]);
 
-		if (!$User || !$username) {
+		if (!$username) {
 			$Messenger->setError(Text::get('invalidFormError'));
 
 			return false;
@@ -225,7 +240,7 @@ class UserCollection {
 	 *
 	 * @return string the PHP code
 	 */
-	public function generatePHP() {
+	public function generatePHP(): string {
 		ksort($this->users);
 
 		// The actual class name is replaced with a placeholder in order
@@ -244,7 +259,7 @@ class UserCollection {
 	 *
 	 * @return array the user collection array
 	 */
-	public function getCollection() {
+	public function getCollection(): array {
 		return $this->users;
 	}
 
@@ -254,7 +269,7 @@ class UserCollection {
 	 * @param string $nameOrEmail
 	 * @return User|null the requested user account
 	 */
-	public function getUser(string $nameOrEmail) {
+	public function getUser(string $nameOrEmail): ?User {
 		if (empty($nameOrEmail)) {
 			return null;
 		}
@@ -274,7 +289,7 @@ class UserCollection {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function save(Messenger $Messenger) {
+	public function save(Messenger $Messenger): bool {
 		if (!FileSystem::write(AM_FILE_ACCOUNTS, $this->generatePHP())) {
 			$Messenger->setError(Text::get('permissionsDeniedError'));
 
@@ -296,8 +311,8 @@ class UserCollection {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function sendInvitation(string $username, string $email, Messenger $Messenger) {
-		$website = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+	public function sendInvitation(string $username, string $email, Messenger $Messenger): bool {
+		$website = $_SERVER['SERVER_NAME'] ?? '' . AM_BASE_URL;
 		$link = Server::url() . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/resetpassword?username=' . urlencode($username);
 		$subject = 'Automad: ' . Text::get('emailInviteSubject');
 		$message = InvitationEmail::render($website, $username, $link);
@@ -319,7 +334,7 @@ class UserCollection {
 	 * @param array $contents
 	 * @return string the serialized accounts
 	 */
-	private function convertLegacyAccountsFile(array $contents) {
+	private function convertLegacyAccountsFile(array $contents): string {
 		$accounts = array();
 
 		foreach ($contents as $name => $passwordHash) {
@@ -339,7 +354,7 @@ class UserCollection {
 	 * @param string $nameOrEmail
 	 * @return int|null the requested user id
 	 */
-	private function getUserId(string $nameOrEmail) {
+	private function getUserId(string $nameOrEmail): ?int {
 		foreach ($this->users as $id => $User) {
 			if ($nameOrEmail === $User->name || $nameOrEmail === $User->email) {
 				return $id;
@@ -354,7 +369,7 @@ class UserCollection {
 	 *
 	 * @return string the error message
 	 */
-	private function invalidEmailError() {
+	private function invalidEmailError(): string {
 		return Text::get('invalidEmailError');
 	}
 
@@ -363,7 +378,7 @@ class UserCollection {
 	 *
 	 * @return string the error message
 	 */
-	private function invalidUsernameError() {
+	private function invalidUsernameError(): string {
 		return Text::get('invalidUsernameError') . ' "a-z", "A-Z", ".", "-", "_", "@"';
 	}
 
@@ -373,7 +388,7 @@ class UserCollection {
 	 * @see User
 	 * @return array The registered accounts
 	 */
-	private function load() {
+	private function load(): array {
 		if (!is_readable(AM_FILE_ACCOUNTS)) {
 			return array();
 		}
@@ -400,7 +415,7 @@ class UserCollection {
 	 * @param string $email
 	 * @return bool true in case the username is valid
 	 */
-	private function validEmail(string $email = '') {
+	private function validEmail(string $email = ''): bool {
 		preg_match('/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/', $email, $matches);
 
 		return (bool) $matches;
@@ -412,7 +427,7 @@ class UserCollection {
 	 * @param string $username
 	 * @return bool true in case the username is valid
 	 */
-	private function validUsername(string $username) {
+	private function validUsername(string $username): bool {
 		preg_match('/[^@\w\.\-]/', $username, $matches);
 
 		return empty($matches);

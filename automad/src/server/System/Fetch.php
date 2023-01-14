@@ -46,7 +46,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Fetch {
-	public static function download(string $url, string $file) {
+	/**
+	 * Download a file.
+	 *
+	 * @param string $url
+	 * @param string $file
+	 * @return bool
+	 */
+	public static function download(string $url, string $file): bool {
 		set_time_limit(0);
 
 		$fp = fopen($file, 'w+');
@@ -63,14 +70,16 @@ class Fetch {
 		curl_setopt_array($curl, $options);
 		curl_exec($curl);
 
+		$success = true;
+
 		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
-			$file = false;
+			$success = false;
 		}
 
 		curl_close($curl);
 		fclose($fp);
 
-		return true;
+		return $success;
 	}
 
 	/**
@@ -79,7 +88,7 @@ class Fetch {
 	 * @param string $url
 	 * @return string The output from the cURL get request
 	 */
-	public static function get(string $url) {
+	public static function get(string $url): string {
 		$data = '';
 
 		$options = array(
@@ -95,7 +104,7 @@ class Fetch {
 		curl_setopt_array($curl, $options);
 		$output = curl_exec($curl);
 
-		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {
+		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl) && is_string($output)) {
 			$data = $output;
 		}
 

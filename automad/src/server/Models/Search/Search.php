@@ -52,17 +52,17 @@ class Search {
 	/**
 	 * The Automad results.
 	 */
-	private $Automad;
+	private Automad $Automad;
 
 	/**
 	 * The search regex flags.
 	 */
-	private $regexFlags;
+	private string $regexFlags;
 
 	/**
 	 * The search value.
 	 */
-	private $searchValue;
+	private string $searchValue;
 
 	/**
 	 * Initialize a new search model for a search value, optionally used as a regular expression.
@@ -92,7 +92,7 @@ class Search {
 	 * @see FileResults
 	 * @return array an array of `FileResults`
 	 */
-	public function searchPerFile() {
+	public function searchPerFile(): array {
 		$resultsPerFile = array();
 
 		if (!trim($this->searchValue)) {
@@ -123,7 +123,7 @@ class Search {
 	 * @param FieldResults|null $results
 	 * @return array the results array
 	 */
-	private function appendFieldResults(array $resultsArray, ?FieldResults $results) {
+	private function appendFieldResults(array $resultsArray, ?FieldResults $results): array {
 		if (is_a($results, '\Automad\Models\Search\FieldResults')) {
 			$resultsArray[] = $results;
 		}
@@ -137,7 +137,7 @@ class Search {
 	 * @param string $property
 	 * @return bool true if the property name is in the whitelist
 	 */
-	private function isValidBlockProperty(string $property) {
+	private function isValidBlockProperty(string $property): bool {
 		$validProperties = array(
 			'text',
 			'items',
@@ -162,7 +162,7 @@ class Search {
 	 * @param array $results
 	 * @return FieldResults|null a field results results
 	 */
-	private function mergeFieldResults(string $field, array $results) {
+	private function mergeFieldResults(string $field, array $results): ?FieldResults {
 		$matches = array();
 		$contextArray = array();
 
@@ -189,9 +189,9 @@ class Search {
 	 *
 	 * @param string $field
 	 * @param array $array
-	 * @return FieldResults a field results results
+	 * @return FieldResults|null a field results results
 	 */
-	private function searchArrayRecursively(string $field, array $array) {
+	private function searchArrayRecursively(string $field, array $array): ?FieldResults {
 		$results = array();
 
 		foreach ($array as $item) {
@@ -215,7 +215,7 @@ class Search {
 	 * @param array $blocks
 	 * @return FieldResults|null a field results results
 	 */
-	private function searchBlocksRecursively(string $field, array $blocks) {
+	private function searchBlocksRecursively(string $field, array $blocks): ?FieldResults {
 		$results = array();
 
 		foreach ($blocks as $block) {
@@ -250,7 +250,7 @@ class Search {
 	 * @param array $data
 	 * @return array an array of `FieldResults` resultss
 	 */
-	private function searchData(array $data) {
+	private function searchData(array $data): array {
 		$fieldResults = array();
 
 		foreach ($data as $field => $value) {
@@ -281,7 +281,7 @@ class Search {
 	 * @param string $value
 	 * @return FieldResults|null the field results
 	 */
-	private function searchTextField(string $field, string $value) {
+	private function searchTextField(string $field, string $value): ?FieldResults {
 		$ignoredKeys = array(
 			AM_KEY_HIDDEN,
 			AM_KEY_PRIVATE,
@@ -323,9 +323,7 @@ class Search {
 			foreach ($matches as $match) {
 				$fieldMatches[] = $match['match'];
 			}
-		}
 
-		if ($fieldMatches) {
 			return new FieldResults(
 				$field,
 				$fieldMatches,

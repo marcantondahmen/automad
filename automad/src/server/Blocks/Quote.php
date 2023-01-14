@@ -55,7 +55,7 @@ class Quote extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		$classes = array();
 
 		if (!empty($data->alignment)) {

@@ -49,18 +49,18 @@ class FieldResults {
 	/**
 	 * A presenation string of all joined matches with wrapping context.
 	 */
-	public $context = '';
+	public string $context;
 
 	/**
 	 * The field name.
 	 */
-	public $field;
+	public string $field;
 
 	/**
 	 * An array with all found matches in the field value.
 	 * Note that the matches can differ in case the search value is an unescaped regex string.
 	 */
-	public $matches = false;
+	public array $matches;
 
 	/**
 	 * Initialize a new field results instance.

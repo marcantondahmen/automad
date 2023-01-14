@@ -54,17 +54,17 @@ class Replacement {
 	/**
 	 * The search regex flags.
 	 */
-	private $regexFlags;
+	private string $regexFlags;
 
 	/**
 	 * The replace value.
 	 */
-	private $replaceValue;
+	private string $replaceValue;
 
 	/**
 	 * The search value.
 	 */
-	private $searchValue;
+	private string $searchValue;
 
 	/**
 	 * Initialize a new replacement model.
@@ -95,7 +95,7 @@ class Replacement {
 	 * @param array $fileFieldsArray
 	 * @return bool true on success
 	 */
-	public function replaceInFiles(array $fileFieldsArray) {
+	public function replaceInFiles(array $fileFieldsArray): bool {
 		if (!$this->replaceValue || empty($fileFieldsArray)) {
 			Debug::log('No files or replacement string');
 
@@ -111,6 +111,8 @@ class Replacement {
 		}
 
 		Cache::clear();
+
+		return true;
 	}
 
 	/**
@@ -119,7 +121,7 @@ class Replacement {
 	 * @param array $blocks
 	 * @return array the processed blocks
 	 */
-	private function replaceInBlocksRecursively(array $blocks) {
+	private function replaceInBlocksRecursively(array $blocks): array {
 		foreach ($blocks as $block) {
 			if ($block->type == 'section') {
 				$block->data->content->blocks = $this->replaceInBlocksRecursively($block->data->content->blocks);
@@ -140,7 +142,7 @@ class Replacement {
 	 * @param array $keys
 	 * @return array the processed data array
 	 */
-	private function replaceInData(array $data, array $keys) {
+	private function replaceInData(array $data, array $keys): array {
 		foreach ($keys as $key) {
 			if (strpos($key, '+') === 0) {
 				$fieldData = json_decode($data[$key]);
@@ -163,10 +165,10 @@ class Replacement {
 	/**
 	 * Replace searched string in a value that is either a string or an multidimensional array of strings.
 	 *
-	 * @param array|object|string $value
+	 * @param mixed $value
 	 * @return mixed $value
 	 */
-	private function replaceInValueRecursively($value) {
+	private function replaceInValueRecursively(mixed $value): mixed {
 		if (is_array($value) || is_object($value)) {
 			$array = array();
 

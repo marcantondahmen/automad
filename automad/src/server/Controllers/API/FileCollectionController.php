@@ -60,7 +60,7 @@ class FileCollectionController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function list() {
+	public static function list(): Response {
 		$Automad = Automad::fromCache();
 		$path = FileSystem::getPathByPostUrl($Automad);
 
@@ -88,10 +88,12 @@ class FileCollectionController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function upload() {
+	public static function upload(): Response {
+		$Response = new Response();
+
 		Debug::log($_POST + $_FILES, 'file');
 
-		if (!empty($_FILES['file']) && is_array($_FILES['file'])) {
+		if (!empty($_FILES['file'])) {
 			$Automad = Automad::fromCache();
 			$Messenger = new Messenger();
 
@@ -114,9 +116,9 @@ class FileCollectionController {
 				$Messenger
 			);
 
-			$Response = new Response();
-
-			return $Response->setError($Messenger->getError());
+			$Response->setError($Messenger->getError());
 		}
+
+		return $Response;
 	}
 }

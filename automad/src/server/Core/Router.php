@@ -49,7 +49,7 @@ class Router {
 	/**
 	 * The routes array.
 	 */
-	private $routes = array();
+	private array $routes = array();
 
 	/**
 	 * The constructor.
@@ -64,8 +64,9 @@ class Router {
 	 * it is important that the most generic routes are registered last.
 	 *
 	 * @param string $url
+	 * @return callable
 	 */
-	public function get(string $url) {
+	public function get(string $url): callable {
 		foreach ($this->routes as $item) {
 			$route = $item['route'];
 			$callable = $item['callable'];
@@ -85,7 +86,7 @@ class Router {
 	 *
 	 * @return array the array of routes
 	 */
-	public function getRoutes() {
+	public function getRoutes(): array {
 		return $this->routes;
 	}
 
@@ -96,7 +97,7 @@ class Router {
 	 * @param callable $callable
 	 * @param mixed $condition
 	 */
-	public function register(string $route, callable $callable, $condition = true) {
+	public function register(string $route, callable $callable, $condition = true): void {
 		if ($condition && $route) {
 			$this->routes[] = array(
 				'route' => $route,

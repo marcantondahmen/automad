@@ -49,17 +49,17 @@ class Config {
 	/**
 	 * The configuration file.
 	 */
-	public static $file = AM_BASE_DIR . '/config/config.php';
+	public static string $file = AM_BASE_DIR . '/config/config.php';
 
 	/**
 	 * The legacy .json file.
 	 */
-	private static $legacy = AM_BASE_DIR . '/config/config.json';
+	private static string $legacy = AM_BASE_DIR . '/config/config.json';
 
 	/**
 	 * Define default values for all constants that are not overriden.
 	 */
-	public static function defaults() {
+	public static function defaults(): void {
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);
 
@@ -72,13 +72,13 @@ class Config {
 			Debug::log(getenv('HTTP_X_FORWARDED_SERVER'), 'Proxy');
 		} else {
 			// In case the site is not running behind a proxy server, just get the base URL from the script name.
-			self::set('AM_BASE_URL', str_replace('/index.php', '', getenv('SCRIPT_NAME')));
+			self::set('AM_BASE_URL', str_replace('/index.php', '', (string) getenv('SCRIPT_NAME')));
 		}
 
 		Debug::log(getenv('SERVER_SOFTWARE'), 'Server Software');
 
 		// Check whether pretty URLs are enabled.
-		if ((strpos(strtolower(getenv('SERVER_SOFTWARE')), 'apache') !== false && file_exists(AM_BASE_DIR . '/.htaccess')) || strpos(strtolower(getenv('SERVER_SOFTWARE')), 'nginx') !== false) {
+		if ((strpos(strtolower((string) getenv('SERVER_SOFTWARE')), 'apache') !== false && file_exists(AM_BASE_DIR . '/.htaccess')) || strpos(strtolower((string) getenv('SERVER_SOFTWARE')), 'nginx') !== false) {
 			// If .htaccess exists on Apache or the server software is Nginx, assume that pretty URLs are enabled and AM_INDEX is empty.
 			self::set('AM_INDEX', '');
 			Debug::log('Pretty URLs are enabled.');
@@ -231,7 +231,7 @@ class Config {
 	/**
 	 * Define constants based on the configuration array.
 	 */
-	public static function overrides() {
+	public static function overrides(): void {
 		foreach (self::read() as $name => $value) {
 			self::set($name, $value);
 		}
@@ -244,7 +244,7 @@ class Config {
 	 *
 	 * @return array The configuration array
 	 */
-	public static function read() {
+	public static function read(): array {
 		$json = false;
 		$config = array();
 
@@ -266,9 +266,9 @@ class Config {
 	 * Define constant, if not defined already.
 	 *
 	 * @param string $name
-	 * @param string $value
+	 * @param mixed $value
 	 */
-	public static function set(string $name, string $value) {
+	public static function set(string $name, mixed $value): void {
 		if (!defined($name)) {
 			define($name, $value);
 		}
@@ -280,7 +280,7 @@ class Config {
 	 * @param array $config
 	 * @return bool True on success
 	 */
-	public static function write(array $config) {
+	public static function write(array $config): bool {
 		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
 		$success = FileSystem::write(self::$file, $content);

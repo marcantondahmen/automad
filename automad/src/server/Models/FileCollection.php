@@ -63,7 +63,7 @@ class FileCollection {
 	 * @param Messenger $Messenger
 	 * @return bool false in case of errors
 	 */
-	public static function deleteFiles(array $files, string $path, Messenger $Messenger) {
+	public static function deleteFiles(array $files, string $path, Messenger $Messenger): bool {
 		// Check if directory is writable.
 		if (is_writable($path)) {
 			$success = array();
@@ -100,8 +100,9 @@ class FileCollection {
 	 * List all files of a page or the shared data directory.
 	 *
 	 * @param string $path
+	 * @return array
 	 */
-	public static function list(string $path) {
+	public static function list(string $path): array {
 		$files = array();
 		$globGrep = FileSystem::globGrep(
 			$path . '*.*',
@@ -140,9 +141,9 @@ class FileCollection {
 	 * @param string $path
 	 * @param Messenger $Messenger
 	 */
-	public static function upload(object $chunk, string $path, Messenger $Messenger) {
+	public static function upload(object $chunk, string $path, Messenger $Messenger): void {
 		if (empty($chunk->name) || empty($chunk->dzuuid) || empty($chunk->tmp_name)) {
-			return false;
+			return;
 		}
 
 		if (!FileSystem::isAllowedFileType($chunk->name)) {
@@ -151,13 +152,13 @@ class FileCollection {
 				FileSystem::getExtension($chunk->name) . '"'
 			);
 
-			return false;
+			return;
 		}
 
 		if (!is_writable($path)) {
 			$Messenger->setError(Text::get('permissionsDeniedError'));
 
-			return false;
+			return;
 		}
 
 		$cacheDir = AM_BASE_DIR . AM_DIR_CACHE . '/tmp';
@@ -194,11 +195,11 @@ class FileCollection {
 	 * @param string $dir
 	 * @param int $lifetime
 	 */
-	private static function clearChunks(string $dir, int $lifetime = 1200) {
+	private static function clearChunks(string $dir, int $lifetime = 1200): void {
 		$dir = rtrim($dir, '/');
 
 		if (!$dir) {
-			return false;
+			return;
 		}
 
 		$files = FileSystem::glob(rtrim($dir) . '/*.chunks');

@@ -60,35 +60,35 @@ class Automad {
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Context class for all objects using the Automad object as parameter.
 	 */
-	public $Context;
+	public Context $Context;
 
 	/**
 	 * Automad's Shared object.
 	 *
 	 * The Shared object is passed also to all Page objects to allow for access of global data from within a page without needing access to the full Automad object.
 	 */
-	public $Shared;
+	public Shared $Shared;
 
 	/**
 	 * Array holding all the site's pages and the related data.
 	 *
 	 * To access the data for a specific page, use the url as key: $this->collection['url'].
 	 */
-	private $collection = array();
+	private array $collection = array();
 
 	/**
 	 * Automad's Filelist object
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Filelist class for all objects using the Automad object as parameter.
 	 */
-	private $Filelist = false;
+	private ?Filelist $Filelist = null;
 
 	/**
 	 * Automad's Pagelist object.
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Pagelist class for all objects using the Automad object as parameter.
 	 */
-	private $Pagelist = false;
+	private ?Pagelist $Pagelist = null;
 
 	/**
 	 * Set collection and Shared properties and create the context object with the currently requested page.
@@ -110,7 +110,7 @@ class Automad {
 	 *
 	 * @return array $itemsToCache
 	 */
-	public function __sleep() {
+	public function __sleep(): array {
 		$itemsToCache = array('collection', 'Shared');
 		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
 
@@ -120,7 +120,7 @@ class Automad {
 	/**
 	 * Set new Context after being restored from cache.
 	 */
-	public function __wakeup() {
+	public function __wakeup(): void {
 		Debug::log(get_object_vars($this), 'Automad object got unserialized');
 		$this->Context = new Context($this->getRequestedPage());
 	}
@@ -142,7 +142,7 @@ class Automad {
 	 *
 	 * @return bool True if existing
 	 */
-	public function currentPageExists() {
+	public function currentPageExists(): bool {
 		$Page = $this->Context->get();
 
 		return ($Page->template != AM_PAGE_NOT_FOUND_TEMPLATE);
@@ -153,7 +153,7 @@ class Automad {
 	 *
 	 * @return Automad
 	 */
-	public static function fromCache() {
+	public static function fromCache(): Automad {
 		$Cache = new Cache();
 
 		return $Cache->getAutomad();
@@ -164,7 +164,7 @@ class Automad {
 	 *
 	 * @return array $this->collection
 	 */
-	public function getCollection() {
+	public function getCollection(): array {
 		return $this->collection;
 	}
 
@@ -173,7 +173,7 @@ class Automad {
 	 *
 	 * @return Filelist Filelist object
 	 */
-	public function getFilelist() {
+	public function getFilelist(): Filelist {
 		if (!$this->Filelist) {
 			$this->Filelist = new Filelist($this->Context);
 		}
@@ -186,7 +186,7 @@ class Automad {
 	 *
 	 * @return array the rendered data array
 	 */
-	public function getNavigationMetaData() {
+	public function getNavigationMetaData(): array {
 		$pages = array();
 
 		foreach ($this->collection as $Page) {
@@ -208,12 +208,14 @@ class Automad {
 	 * If existing, return the page object for the passed relative URL.
 	 *
 	 * @param string $url
-	 * @return Page|null Page or null
+	 * @return Page|null Page
 	 */
-	public function getPage(string $url) {
+	public function getPage(string $url): ?Page {
 		if (array_key_exists($url, $this->collection)) {
 			return $this->collection[$url];
 		}
+
+		return null;
 	}
 
 	/**
@@ -221,7 +223,7 @@ class Automad {
 	 *
 	 * @return Pagelist Pagelist object
 	 */
-	public function getPagelist() {
+	public function getPagelist(): Pagelist {
 		if (!$this->Pagelist) {
 			$this->Pagelist = new Pagelist($this->collection, $this->Context);
 		}
@@ -241,7 +243,7 @@ class Automad {
 	 * @param string $file
 	 * @return string The buffered output
 	 */
-	public function loadTemplate(string $file) {
+	public function loadTemplate(string $file): string {
 		$Automad = $this;
 
 		if (is_readable($file)) {
@@ -263,9 +265,9 @@ class Automad {
 	/**
 	 * Return the page object for the requested page.
 	 *
-	 * @return Page A page object
+	 * @return Page|null A page object
 	 */
-	private function getRequestedPage() {
+	private function getRequestedPage(): ?Page {
 		if (strpos(AM_REQUEST, RequestHandler::$apiBase) === 0) {
 			return $this->getPage(Request::post('url'));
 		}
@@ -276,9 +278,9 @@ class Automad {
 
 		if ($Page = $this->getPage(AM_REQUEST)) {
 			return $Page;
-		} else {
-			return $this->pageNotFound();
 		}
+
+		return $this->pageNotFound();
 	}
 
 	/**
@@ -286,17 +288,18 @@ class Automad {
 	 *
 	 * @return Page The error page
 	 */
-	private function pageNotFound() {
+	private function pageNotFound(): Page {
 		header('HTTP/1.0 404 Not Found');
 
 		if (file_exists(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->Shared->get(AM_KEY_THEME) . '/' . AM_PAGE_NOT_FOUND_TEMPLATE . '.php')) {
+			$data = array();
 			$data[AM_KEY_TEMPLATE] = AM_PAGE_NOT_FOUND_TEMPLATE;
 			$data[AM_KEY_LEVEL] = 0;
 			$data[AM_KEY_PARENT] = '';
 
 			return new Page($data, $this->Shared);
-		} else {
-			exit('<h1>Page not found!</h1>');
 		}
+
+		exit('<h1>Page not found!</h1>');
 	}
 }

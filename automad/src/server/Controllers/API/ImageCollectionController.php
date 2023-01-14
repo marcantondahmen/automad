@@ -56,7 +56,7 @@ class ImageCollectionController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function list() {
+	public static function list(): Response {
 		$Automad = Automad::fromCache();
 		$path = FileSystem::getPathByPostUrl($Automad);
 		$Response = new Response();

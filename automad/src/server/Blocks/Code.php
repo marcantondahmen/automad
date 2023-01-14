@@ -55,7 +55,7 @@ class Code extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		$code = htmlspecialchars($data->code);
 
 		return '<pre ' . self::classAttr() . '><code>' . $code . '</code></pre>';

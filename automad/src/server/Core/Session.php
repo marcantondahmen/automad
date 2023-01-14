@@ -55,7 +55,7 @@ class Session {
 	/**
 	 * Clears the reset token hash
 	 */
-	public static function clearResetTokenHash() {
+	public static function clearResetTokenHash(): void {
 		unset($_SESSION[self::RESET_TOKEN_KEY]);
 	}
 
@@ -64,7 +64,7 @@ class Session {
 	 *
 	 * @return string the CSRF token stored in the session
 	 */
-	public static function getCsrfToken() {
+	public static function getCsrfToken(): string {
 		return $_SESSION[self::CSRF_TOKEN_KEY] ?? self::createCsrfToken();
 	}
 
@@ -74,7 +74,7 @@ class Session {
 	 * @param string $username
 	 * @return string the token hash
 	 */
-	public static function getResetTokenHash(string $username) {
+	public static function getResetTokenHash(string $username): string {
 		if (isset($_SESSION[self::RESET_TOKEN_KEY])) {
 			return $_SESSION[self::RESET_TOKEN_KEY][$username] ?? '';
 		}
@@ -87,7 +87,7 @@ class Session {
 	 *
 	 * @return string Username
 	 */
-	public static function getUsername() {
+	public static function getUsername(): string {
 		return $_SESSION[self::USERNAME_KEY] ?? '';
 	}
 
@@ -98,7 +98,7 @@ class Session {
 	 * @param string $password
 	 * @return bool false on error
 	 */
-	public static function login(string $nameOrEmail, string $password) {
+	public static function login(string $nameOrEmail, string $password): bool {
 		$UserCollection = new UserCollection();
 		$User = $UserCollection->getUser($nameOrEmail);
 
@@ -122,15 +122,15 @@ class Session {
 	 *
 	 * @return bool true on success
 	 */
-	public static function logout() {
+	public static function logout(): bool {
 		unset($_SESSION);
 		$success = session_destroy();
 
 		if (!isset($_SESSION) && $success) {
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	/**
@@ -139,7 +139,7 @@ class Session {
 	 * @param string $username
 	 * @param string $tokenHash
 	 */
-	public static function setResetTokenHash(string $username, string $tokenHash) {
+	public static function setResetTokenHash(string $username, string $tokenHash): void {
 		$_SESSION[self::RESET_TOKEN_KEY] = array($username => $tokenHash);
 	}
 
@@ -149,7 +149,7 @@ class Session {
 	 * @param string $token
 	 * @return bool true if the token is valid
 	 */
-	public static function verifyCsrfToken(string $token) {
+	public static function verifyCsrfToken(string $token): bool {
 		if (empty($_SESSION[self::CSRF_TOKEN_KEY])) {
 			return false;
 		}
@@ -162,7 +162,7 @@ class Session {
 	 *
 	 * @return string the created token
 	 */
-	private static function createCsrfToken() {
+	private static function createCsrfToken(): string {
 		$_SESSION[self::CSRF_TOKEN_KEY] = bin2hex(random_bytes(32));
 
 		return $_SESSION[self::CSRF_TOKEN_KEY];

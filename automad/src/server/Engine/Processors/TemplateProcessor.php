@@ -54,17 +54,22 @@ class TemplateProcessor {
 	/**
 	 * The main Automad instance.
 	 */
-	private $Automad;
+	private Automad $Automad;
+
+	/**
+	 * The content processor instance.
+	 */
+	private ContentProcessor $ContentProcessor;
 
 	/**
 	 * An array of all existing feature processor instances.
 	 */
-	private $featureProcessors;
+	private array $featureProcessors;
 
 	/**
 	 * The Runtime instance.
 	 */
-	private $Runtime;
+	private Runtime $Runtime;
 
 	/**
 	 * The template processor constructor.
@@ -94,7 +99,7 @@ class TemplateProcessor {
 	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed template
 	 */
-	public function process(string $template, string $directory, bool $collectSnippetDefinitions) {
+	public function process(string $template, string $directory, bool $collectSnippetDefinitions): string {
 		$output = PreProcessor::stripWhitespace($template);
 		$output = PreProcessor::prepareWrappingStatements($output);
 
@@ -130,7 +135,7 @@ class TemplateProcessor {
 	 *
 	 * @return array the array of feature processor instances
 	 */
-	private function initFeatureProcessors() {
+	private function initFeatureProcessors(): array {
 		$processors = array();
 
 		foreach (FeatureProvider::getProcessorClasses() as $cls) {

@@ -56,7 +56,7 @@ class URLProcessor {
 	 * @param array $parameters
 	 * @return string the processed string
 	 */
-	public static function resolveUrls(string $str, string $method, array $parameters = array()) {
+	public static function resolveUrls(string $str, string $method, array $parameters = array()): string {
 		$method = '\Automad\Core\Resolve::' . $method;
 
 		// Find URLs in markdown like ![...](image.jpg?100x100).

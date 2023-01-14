@@ -49,7 +49,7 @@ class SnippetCollection {
 	/**
 	 * An array for collection snippet definitions.
 	 */
-	private static $snippets = array();
+	private static array $snippets = array();
 
 	/**
 	 * Add a snippet definition to the collection.
@@ -57,7 +57,7 @@ class SnippetCollection {
 	 * @param string $name
 	 * @param string $body
 	 */
-	public static function add(string $name, string $body) {
+	public static function add(string $name, string $body): void {
 		self::$snippets[$name] = $body;
 	}
 
@@ -67,7 +67,7 @@ class SnippetCollection {
 	 * @param string $name
 	 * @return string the snippet body
 	 */
-	public static function get(string $name) {
+	public static function get(string $name): string {
 		if (array_key_exists($name, self::$snippets)) {
 			return self::$snippets[$name];
 		}
@@ -80,7 +80,7 @@ class SnippetCollection {
 	 *
 	 * @return array the array of snippet definitions.
 	 */
-	public static function getCollection() {
+	public static function getCollection(): array {
 		return self::$snippets;
 	}
 }

@@ -55,7 +55,7 @@ class Pagelist extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		$Pagelist = $Automad->getPagelist();
 
 		// Reset pagelist.

@@ -46,7 +46,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Server {
-	public static function url() {
+	/**
+	 * Get the server URL.
+	 *
+	 * @return string
+	 */
+	public static function url(): string {
 		if (AM_SERVER) {
 			return AM_SERVER;
 		}
@@ -63,6 +68,6 @@ class Server {
 			$port = ":$serverPort";
 		}
 
-		return $protocol . '://' . $_SERVER['SERVER_NAME'] . $port;
+		return $protocol . '://' . ($_SERVER['SERVER_NAME'] ?? '') . $port;
 	}
 }

@@ -49,12 +49,12 @@ class LegacyData {
 	/**
 	 * The actual data object that has to be tested and converted.
 	 */
-	private $data;
+	private object $data;
 
 	/**
 	 * The target version that has to be supported.
 	 */
-	private $targetVersion = '1.9.0';
+	private string $targetVersion = '1.9.0';
 
 	/**
 	 * The legacy data converter constructor.
@@ -70,7 +70,7 @@ class LegacyData {
 	 *
 	 * @return object $data
 	 */
-	public function convert() {
+	public function convert(): object {
 		$dataVersion = '0.0.0';
 		$data = $this->data;
 
@@ -96,7 +96,7 @@ class LegacyData {
 	 * @param object $data
 	 * @return object $data
 	 */
-	private function convertLayout(object $data) {
+	private function convertLayout(object $data): object {
 		foreach ($data->blocks as $block) {
 			if (!isset($block->tunes)) {
 				$block->tunes = (object) array('layout' => (object) array());
@@ -120,7 +120,7 @@ class LegacyData {
 	 * @param object $data
 	 * @return object $data
 	 */
-	private function convertLists(object $data) {
+	private function convertLists(object $data): object {
 		foreach ($data->blocks as $block) {
 			if ($block->type == 'lists') {
 				$block->data->items = (object) array_map(function ($item) {

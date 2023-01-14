@@ -46,7 +46,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Autoload {
-	public static function init() {
+	/**
+	 * Init the autoloader.
+	 */
+	public static function init(): void {
 		require AM_BASE_DIR . '/lib/vendor/autoload.php';
 
 		$packagesAutoload = AM_BASE_DIR . '/vendor/autoload.php';

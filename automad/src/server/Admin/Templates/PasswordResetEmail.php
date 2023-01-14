@@ -56,7 +56,7 @@ class PasswordResetEmail extends AbstractEmailBody {
 	 * @param string $token
 	 * @return string The rendered password reset email body
 	 */
-	public static function render(string $website, string $username, string $token) {
+	public static function render(string $website, string $username, string $token): string {
 		$h1Style = self::$h1Style;
 		$pStyle = self::$paragraphStyle;
 		$codeStyle = self::$codeStyle;

@@ -58,7 +58,7 @@ class ConfigController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function file() {
+	public static function file(): Response {
 		$Response = new Response();
 
 		if ($json = Request::post('content')) {
@@ -102,7 +102,7 @@ class ConfigController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function update() {
+	public static function update(): Response {
 		$Response = new Response();
 
 		$config = Config::read();

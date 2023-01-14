@@ -58,7 +58,7 @@ class UserController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function changePassword() {
+	public static function changePassword(): Response {
 		$Response = new Response();
 		$currentPassword = Request::post('currentPassword');
 		$newPassword1 = Request::post('newPassword1');
@@ -80,6 +80,10 @@ class UserController {
 		$User = $UserCollection->getUser(Session::getUsername());
 		$Messenger = new Messenger();
 
+		if (!$User) {
+			return $Response->setError(Text::get('userNotFoundError'));
+		}
+
 		$User->changePassword($currentPassword, $newPassword1, $UserCollection, $Messenger);
 
 		return $Response
@@ -92,7 +96,7 @@ class UserController {
 	 *
 	 * @return Response the response
 	 */
-	public static function edit() {
+	public static function edit(): Response {
 		$Response = new Response();
 		$Messenger = new Messenger();
 		$UserCollection = new UserCollection();
@@ -114,7 +118,7 @@ class UserController {
 	 *
 	 * @return Response the Response object
 	 */
-	public static function resetPassword() {
+	public static function resetPassword(): Response {
 		$Response = new Response();
 		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
@@ -128,18 +132,17 @@ class UserController {
 
 		$User = $UserCollection->getUser($nameOrEmail);
 
-		$responseData = array(
-			'username' => $User->name,
-			'state' => 'requestToken'
-		);
-
-		$Response->setData($responseData);
-
 		if ($nameOrEmail && !$User) {
 			return $Response->setError(Text::get('userNotFoundError'));
 		}
 
-		if ($User && $token && $newPassword1 && $newPassword2) {
+		if (!$User) {
+			return $Response->setData(array('state' => 'requestToken'));
+		}
+
+		$responseData = array('username' => $User->name);
+
+		if ($token && $newPassword1 && $newPassword2) {
 			if ($User->verifyPasswordResetToken($token)) {
 				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
 					$responseData['state'] = 'success';
@@ -157,16 +160,12 @@ class UserController {
 			return $Response->setData($responseData)->setError(Text::get('passwordResetVerificationError'));
 		}
 
-		if ($User) {
-			if ($User->sendPasswordResetToken($Messenger)) {
-				$responseData['state'] = 'setPassword';
+		if ($User->sendPasswordResetToken($Messenger)) {
+			$responseData['state'] = 'setPassword';
 
-				return $Response->setData($responseData);
-			}
-
-			$Response->setError($Messenger->getError());
+			return $Response->setData($responseData);
 		}
 
-		return $Response;
+		return $Response->setError($Messenger->getError());
 	}
 }

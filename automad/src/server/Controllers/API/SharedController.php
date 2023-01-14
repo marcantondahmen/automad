@@ -59,7 +59,7 @@ class SharedController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function data() {
+	public static function data(): Response {
 		$Response = new Response();
 		$Automad = Automad::fromCache();
 		$Shared = $Automad->Shared;
@@ -86,7 +86,7 @@ class SharedController {
 		$ThemeCollection = new ThemeCollection();
 		$mainThemeName = $Shared->get(AM_KEY_THEME) ? $Shared->get(AM_KEY_THEME) : array_keys($ThemeCollection->getThemes())[0];
 		$Theme = $ThemeCollection->getThemeByKey($mainThemeName);
-		$keys = Fields::inTheme($Theme);
+		$keys = isset($Theme) ? Fields::inTheme($Theme) : array();
 
 		$fields = array_merge(
 			array_fill_keys(Fields::$reserved, ''),

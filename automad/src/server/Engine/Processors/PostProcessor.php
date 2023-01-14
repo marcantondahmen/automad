@@ -58,12 +58,12 @@ class PostProcessor {
 	/**
 	 * The Automad instance.
 	 */
-	private $Automad;
+	private Automad $Automad;
 
 	/**
 	 * The InPage instance.
 	 */
-	private $InPage;
+	private InPage $InPage;
 
 	/**
 	 * The post-processor constructor.
@@ -85,7 +85,7 @@ class PostProcessor {
 	 * @param string $output
 	 * @return string the final output
 	 */
-	public function process(string $output) {
+	public function process(string $output): string {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->obfuscateEmails($output);
@@ -104,7 +104,7 @@ class PostProcessor {
 	 * @param string $str
 	 * @return string the processed output
 	 */
-	private function addCacheBustingTimestamps(string $str) {
+	private function addCacheBustingTimestamps(string $str): string {
 		$extensions = implode('|', FileUtils::allowedFileTypes());
 
 		return preg_replace_callback(
@@ -128,7 +128,7 @@ class PostProcessor {
 	 * @param string $str
 	 * @return string The meta tag
 	 */
-	private function addMetaTags(string $str) {
+	private function addMetaTags(string $str): string {
 		$meta = '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
 
 		if (AM_FEED_ENABLED) {
@@ -145,7 +145,7 @@ class PostProcessor {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	private function createExtensionAssetTags(string $str) {
+	private function createExtensionAssetTags(string $str): string {
 		$assets = AssetCollection::get();
 		Debug::log($assets, 'Assets');
 
@@ -176,7 +176,7 @@ class PostProcessor {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	private function obfuscateEmails(string $str) {
+	private function obfuscateEmails(string $str): string {
 		$regexEmail = '[\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,}';
 
 		// The following regex matches all email links or just an email address.
@@ -211,14 +211,14 @@ class PostProcessor {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	private function resizeImages(string $str) {
+	private function resizeImages(string $str): string {
 		return preg_replace_callback(
 			'/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png|webp))\?(\d+)x(\d+)/is',
 			function ($match) {
 				$file = AM_BASE_DIR . $match[1];
 
 				if (is_readable($file)) {
-					$image = new Image($file, $match[2], $match[3], true);
+					$image = new Image($file, floatval($match[2]), floatval($match[3]), true);
 
 					return $image->file;
 				}

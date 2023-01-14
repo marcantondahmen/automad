@@ -65,56 +65,93 @@ class Page {
 	 * - "tags":  The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page
 	 *            The original string will remain in the $data array for seaching
 	 */
-	public $data = array();
+	public array $data;
+
+	/**
+	 * Page is hidden.
+	 */
+	public bool $hidden;
+
+	/**
+	 * The page index in the layout (sorting order).
+	 */
+	public string $index;
+
+	/**
+	 * The page level.
+	 */
+	public int $level;
+
+	/**
+	 * The internal URL.
+	 */
+	public string $origUrl;
+
+	/**
+	 * The parent URL.
+	 */
+	public string $parentUrl;
+
+	/**
+	 * The filesystem path of the page directory.
+	 */
+	public string $path;
+
+	/**
+	 * Page is private.
+	 */
+	public bool $private;
 
 	/**
 	 * The Shared data object.
 	 */
-	public $Shared;
+	public ?Shared $Shared;
 
 	/**
 	 * 	The $tags get also extracted from the text file (see $data).
 	 */
-	public $tags = array();
+	public array $tags;
+
+	/**
+	 * The page template.
+	 */
+	public string $template;
+
+	/**
+	 * The page URL.
+	 */
+	public string $url;
 
 	/**
 	 * Set main properties.
 	 *
 	 * @param array $data
-	 * @param Shared $Shared
+	 * @param Shared|null $Shared
 	 */
-	public function __construct(array $data, Shared $Shared) {
-		$this->data = $data;
+	public function __construct(array $data, ?Shared $Shared) {
 		$this->Shared = $Shared;
 		$this->tags = $this->extractTags();
-	}
+		$this->data = array_merge(array(
+			AM_KEY_HIDDEN => false,
+			AM_KEY_PRIVATE => false,
+			AM_KEY_LEVEL => 0,
+			AM_KEY_ORIG_URL => '',
+			AM_KEY_PARENT => '',
+			AM_KEY_PATH => '',
+			AM_KEY_TEMPLATE => '',
+			AM_KEY_URL => '',
+			AM_KEY_PAGE_INDEX => ''
+		), $data);
 
-	/**
-	 * Make basic data items accessible as page properties.
-	 *
-	 * @param string $key
-	 * @return string The returned value from the data array
-	 */
-	public function __get(string $key) {
-		// Map property names to the defined keys of the data array.
-		$keyMap = array(
-			'hidden' => AM_KEY_HIDDEN,
-			'private' => AM_KEY_PRIVATE,
-			'level' => AM_KEY_LEVEL,
-			'origUrl' => AM_KEY_ORIG_URL,
-			'parentUrl' => AM_KEY_PARENT,
-			'path' =>AM_KEY_PATH,
-			'template' => AM_KEY_TEMPLATE,
-			'url' => AM_KEY_URL,
-			'index' => AM_KEY_PAGE_INDEX
-		);
-
-		if (array_key_exists($key, $keyMap)) {
-			return $this->get($keyMap[$key]);
-		}
-
-		// Trigger error for undefined properties.
-		trigger_error('Page property "' . $key . '" not defined!', E_USER_ERROR);
+		$this->hidden = &$this->data[AM_KEY_HIDDEN];
+		$this->private = &$this->data[AM_KEY_PRIVATE];
+		$this->level = &$this->data[AM_KEY_LEVEL];
+		$this->origUrl = &$this->data[AM_KEY_ORIG_URL];
+		$this->parentUrl = &$this->data[AM_KEY_PARENT];
+		$this->path = &$this->data[AM_KEY_PATH];
+		$this->template = &$this->data[AM_KEY_TEMPLATE];
+		$this->url = &$this->data[AM_KEY_URL];
+		$this->index = &$this->data[AM_KEY_PAGE_INDEX];
 	}
 
 	/**
@@ -126,7 +163,7 @@ class Page {
 	 * @param bool $isPrivate
 	 * @return string the dashboard URL to the new page
 	 */
-	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate) {
+	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate): string {
 		$theme = dirname($themeTemplate);
 		$template = basename($themeTemplate);
 
@@ -168,9 +205,13 @@ class Page {
 	 * @param string $path
 	 * @return string The view URL to the new page
 	 */
-	public static function dashboardUrlByPath(string $path) {
+	public static function dashboardUrlByPath(string $path): string {
 		Cache::clear();
 		$Page = Page::findByPath($path);
+
+		if (!$Page) {
+			return '';
+		}
 
 		return 'page?url=' . urlencode($Page->origUrl);
 	}
@@ -180,7 +221,7 @@ class Page {
 	 *
 	 * @return bool true on success
 	 */
-	public function delete() {
+	public function delete(): bool {
 		PageIndex::remove(dirname($this->path), $this->path);
 
 		return (bool) FileSystem::movePageDir(
@@ -195,7 +236,7 @@ class Page {
 	 *
 	 * @return string the new URL
 	 */
-	public function duplicate() {
+	public function duplicate(): string {
 		$duplicatePath = $this->path;
 		$suffix = FileSystem::uniquePathSuffix($duplicatePath, '-copy');
 		$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);
@@ -213,23 +254,25 @@ class Page {
 	 * @param string $path
 	 * @return Page|null
 	 */
-	public static function findByPath(string $path) {
+	public static function findByPath(string $path): ?Page {
 		$Automad = Automad::fromCache();
 
-		foreach ($Automad->getCollection() as $url => $Page) {
+		foreach ($Automad->getCollection() as $Page) {
 			if ($Page->path == $path) {
 				return $Page;
 			}
 		}
+
+		return null;
 	}
 
 	/**
 	 * Get a page from the cache. In case the cache is outdated, create a new Automad object first.
 	 *
 	 * @param string $url
-	 * @return Page
+	 * @return Page|null
 	 */
-	public static function fromCache(string $url) {
+	public static function fromCache(string $url): ?Page {
 		$Cache = new Cache();
 		$Automad = $Cache->getAutomad();
 
@@ -248,16 +291,22 @@ class Page {
 	 * @param int $level
 	 * @return Page
 	 */
-	public static function fromFile(string $file, string $url, string $path, string $index, Shared $Shared, string $parentUrl, int $level) {
+	public static function fromFile(
+		string $file,
+		string $url,
+		string $path,
+		string $index,
+		Shared $Shared,
+		string $parentUrl,
+		int $level
+	): Page {
 		$data = Parse::dataFile($file);
 
 		if (array_key_exists(AM_KEY_PRIVATE, $data)) {
-			$private = ($data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] !== 'false');
+			$data[AM_KEY_PRIVATE] = ($data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] !== 'false');
 		} else {
-			$private = false;
+			$data[AM_KEY_PRIVATE] = false;
 		}
-
-		$data[AM_KEY_PRIVATE] = $private;
 
 		if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
 			if (trim($url, '/')) {
@@ -299,23 +348,23 @@ class Page {
 	 * @param string $key
 	 * @return string The requested value
 	 */
-	public function get(string $key) {
+	public function get(string $key): string {
 		// Return value from the data array.
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
 		}
 
 		// Return value from the Shared data array.
-		if (array_key_exists($key, $this->Shared->data)) {
+		if ($this->Shared && array_key_exists($key, $this->Shared->data)) {
 			return $this->Shared->data[$key];
 		}
 
 		// Generate system variable value or return an empty string.
 		switch ($key) {
 			case AM_KEY_CURRENT_PAGE:
-				return $this->isCurrent();
+				return $this->isCurrent() ? 'true' : '';
 			case AM_KEY_CURRENT_PATH:
-				return $this->isInCurrentPath();
+				return $this->isInCurrentPath() ? 'true' : '';
 			case AM_KEY_BASENAME:
 				return basename($this->path);
 			case AM_KEY_MTIME:
@@ -330,7 +379,7 @@ class Page {
 	 *
 	 * @return string The full file system path
 	 */
-	public function getFile() {
+	public function getFile(): string {
 		return FileSystem::fullPagePath($this->path) . $this->template . '.' . AM_FILE_EXT_DATA;
 	}
 
@@ -340,7 +389,7 @@ class Page {
 	 *
 	 * @return string The max mtime (directory and data file)
 	 */
-	public function getMtime() {
+	public function getMtime(): string {
 		$path = AM_BASE_DIR . AM_DIR_PAGES . $this->path;
 		$mtimes = array();
 
@@ -358,15 +407,15 @@ class Page {
 	 *
 	 * @return string The full file system path of the template file.
 	 */
-	public function getTemplate() {
+	public function getTemplate(): string {
 		$packages = AM_BASE_DIR . AM_DIR_PACKAGES . '/';
 		$templatePath = $packages . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
 
 		if (file_exists($templatePath)) {
 			return $templatePath;
-		} else {
-			return $packages . AM_FILE_DEFAULT_TEMPLATE;
 		}
+
+		return $packages . AM_FILE_DEFAULT_TEMPLATE;
 	}
 
 	/**
@@ -374,7 +423,7 @@ class Page {
 	 *
 	 * @return bool true if the the page is the currently requested page
 	 */
-	public function isCurrent() {
+	public function isCurrent(): bool {
 		return (AM_REQUEST == $this->origUrl);
 	}
 
@@ -383,7 +432,7 @@ class Page {
 	 *
 	 * @return bool true if the the page is a parent of the currently requested page or the requeste page itself
 	 */
-	public function isInCurrentPath() {
+	public function isInCurrentPath(): bool {
 		// Test if AM_REQUEST starts with or is equal to $this->url.
 		// The trailing slash in strpos() is very important (URL . /), since without that slash,
 		// /path/to/page and /path/to/page-1 would both match a current URL like /path/to/page-1/subpage,
@@ -400,7 +449,7 @@ class Page {
 	 * @param string $slug
 	 * @return string the new page path
 	 */
-	public function moveDirAndUpdateLinks(string $destPath, string $slug) {
+	public function moveDirAndUpdateLinks(string $destPath, string $slug): string {
 		$oldPath = $this->path;
 
 		$newPagePath = FileSystem::movePageDir(
@@ -424,7 +473,7 @@ class Page {
 	 * @param string $slug
 	 * @return array|bool a data array in case the page was moved or its privacy has changed
 	 */
-	public function save(string $url, array $data, string $themeTemplate, string $slug) {
+	public function save(string $url, array $data, string $themeTemplate, string $slug): array|bool {
 		$data = array_map('trim', $data);
 		$data = array_filter($data, 'strlen');
 
@@ -447,7 +496,9 @@ class Page {
 
 		FileSystem::writeData($data, $newPageFile);
 
-		if ($url != '/') {
+		$newSlug = $slug;
+
+		if ($url != '/' && is_string($data[AM_KEY_TITLE])) {
 			$newSlug = Page::updateSlug(
 				$this->get(AM_KEY_TITLE),
 				$data[AM_KEY_TITLE],
@@ -493,22 +544,33 @@ class Page {
 
 			$Page = Page::findByPath($newPagePath);
 
-			$newOrigUrl = $Page->origUrl;
-			$newUrl = $newOrigUrl;
+			if ($Page) {
+				$newOrigUrl = $Page->origUrl;
+				$newUrl = $newOrigUrl;
 
-			if (!empty($data[AM_KEY_URL])) {
-				$newUrl = $data[AM_KEY_URL];
+				if (!empty($data[AM_KEY_URL])) {
+					$newUrl = $data[AM_KEY_URL];
+				}
+
+				return array(
+					'slug' => $newSlug,
+					'url' => $newUrl,
+					'path' => $newPagePath,
+					'origUrl' => $newOrigUrl
+				);
 			}
-
-			return array(
-				'slug' => $newSlug,
-				'url' => $newUrl,
-				'path' => $newPagePath,
-				'origUrl' => $newOrigUrl
-			);
 		}
 
 		return false;
+	}
+
+	/**
+	 * Create an empty undefined Page object.
+	 *
+	 * @return Page
+	 */
+	public static function undefined(): Page {
+		return new Page(array(), null);
 	}
 
 	/**
@@ -518,7 +580,7 @@ class Page {
 	 * @param string $path
 	 * @param string $suffix
 	 */
-	private static function appendSuffixToTitle(string $path, string $suffix) {
+	private static function appendSuffixToTitle(string $path, string $suffix): void {
 		if ($suffix) {
 			$path = FileSystem::fullPagePath($path);
 			$files = FileSystem::glob($path . '*.' . AM_FILE_EXT_DATA);
@@ -537,14 +599,14 @@ class Page {
 	 *
 	 * @return array $tags
 	 */
-	private function extractTags() {
+	private function extractTags(): array {
 		$tags = array();
 
 		if (isset($this->data[AM_KEY_TAGS])) {
 			// All tags are splitted into an array
 			$tags = explode(AM_PARSE_STR_SEPARATOR, $this->data[AM_KEY_TAGS]);
 			// Trim & strip tags
-			$tags = array_map(function ($tag) {
+			$tags = array_map(function (string $tag) {
 				return trim(Str::stripTags($tag));
 			}, $tags);
 		}
@@ -558,7 +620,7 @@ class Page {
 	 * @param string $newPath
 	 * @return bool true on success
 	 */
-	private function updatePageLinks(string $newPath) {
+	private function updatePageLinks(string $newPath): bool {
 		Cache::clear();
 
 		$Automad = Automad::fromCache();
@@ -570,6 +632,11 @@ class Page {
 		}
 
 		$Page = Page::findByPath($newPath);
+
+		if (!$Page) {
+			return false;
+		}
+
 		$newUrl = $Page->origUrl;
 
 		$replace = array(
@@ -594,7 +661,7 @@ class Page {
 	 * @param string $slug
 	 * @return string the updated directory name slug
 	 */
-	private static function updateSlug(string $currentTitle, string $newTitle, string $slug) {
+	private static function updateSlug(string $currentTitle, string $newTitle, string $slug): string {
 		if (strlen($slug) === 0 || $slug === Str::slug($currentTitle, true, AM_DIRNAME_MAX_LEN)) {
 			return Str::slug($newTitle);
 		}

@@ -52,12 +52,12 @@ class Filelist {
 	/**
 	 * The Context.
 	 */
-	private $Context;
+	private Context $Context;
 
 	/**
 	 * The options array.
 	 */
-	private $options = 	array(
+	private array $options = array(
 		'glob' => '*.jpg, *.jpeg, *.png, *.gif',
 		'sort' => 'asc'
 	);
@@ -76,7 +76,7 @@ class Filelist {
 	 *
 	 * @param array $options
 	 */
-	public function config(array $options) {
+	public function config(array $options): void {
 		$this->options = array_merge($this->options, $options);
 	}
 
@@ -88,7 +88,7 @@ class Filelist {
 	 *
 	 * @return array The array of matched files.
 	 */
-	public function getFiles() {
+	public function getFiles(): array {
 		// Find files.
 		$files = FileUtils::fileDeclaration($this->options['glob'], $this->Context->get(), true);
 

@@ -57,129 +57,135 @@ class ConditionalProcessor extends AbstractFeatureProcessor {
 	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
-		if (!empty($matches['if'])) {
-			$ifSnippet = $matches['ifSnippet'];
-			$ifElseSnippet = '';
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+		if (empty($matches['if'])) {
+			return '';
+		}
 
-			if (!empty($matches['ifElseSnippet'])) {
-				$ifElseSnippet = $matches['ifElseSnippet'];
-			}
+		$ifSnippet = $matches['ifSnippet'];
+		$ifElseSnippet = '';
 
-			// Match each part of a logically combined expression separately.
-			preg_match_all(
-				'/(?P<operator>^|' . PatternAssembly::$logicalOperator . '\s+)' .
-				PatternAssembly::expression('expression') . '/is',
-				trim($matches['if']),
-				$parts,
-				PREG_SET_ORDER
-			);
+		if (!empty($matches['ifElseSnippet'])) {
+			$ifElseSnippet = $matches['ifElseSnippet'];
+		}
 
-			// Process each part and merge the partial result with the final result.
-			foreach ($parts as $part) {
-				// Separate comparisons from boolean expressions and get a partial result.
-				if (!empty($part['expressionOperator'])) {
-					// Comparison.
+		// Match each part of a logically combined expression separately.
+		preg_match_all(
+			'/(?P<operator>^|' . PatternAssembly::$logicalOperator . '\s+)' .
+			PatternAssembly::expression('expression') . '/is',
+			trim($matches['if']),
+			$parts,
+			PREG_SET_ORDER
+		);
 
-					// Merge default keys with $part to make sure each key exists in $part without testing.
-					$part = array_merge(
-						array(
-							'expressionLeftDoubleQuoted' => '',
-							'expressionLeftSingleQuoted' => '',
-							'expressionLeftNumber' => '',
-							'expressionLeftVar' => '',
-							'expressionRightDoubleQuoted' => '',
-							'expressionRightSingleQuoted' => '',
-							'expressionRightNumber' => '',
-							'expressionRightVar' => ''
-						),
-						$part
-					);
+		$result = true;
 
-					// Parse both sides of the expression. All possible matches for each side can get merged in to one string,
-					// since there will be only one item for left/right not empty.
-					$left = $this->ContentProcessor->processVariables(
-						stripslashes($part['expressionLeftDoubleQuoted']) .
-						stripslashes($part['expressionLeftSingleQuoted']) .
-						$part['expressionLeftNumber'] .
-						$part['expressionLeftVar']
-					);
+		// Process each part and merge the partial result with the final result.
+		foreach ($parts as $part) {
+			$partialResult = true;
 
-					$right = $this->ContentProcessor->processVariables(
-						stripslashes($part['expressionRightDoubleQuoted']) .
-						stripslashes($part['expressionRightSingleQuoted']) .
-						$part['expressionRightNumber'] .
-						$part['expressionRightVar']
-					);
+			// Separate comparisons from boolean expressions and get a partial result.
+			if (!empty($part['expressionOperator'])) {
+				// Comparison.
 
-					// Build and evaluate the expression.
-					switch ($part['expressionOperator']) {
-						case '=':
-							$partialResult = ($left == $right);
+				// Merge default keys with $part to make sure each key exists in $part without testing.
+				$part = array_merge(
+					array(
+						'expressionLeftDoubleQuoted' => '',
+						'expressionLeftSingleQuoted' => '',
+						'expressionLeftNumber' => '',
+						'expressionLeftVar' => '',
+						'expressionRightDoubleQuoted' => '',
+						'expressionRightSingleQuoted' => '',
+						'expressionRightNumber' => '',
+						'expressionRightVar' => ''
+					),
+					$part
+				);
 
-							break;
-						case '!=':
-							$partialResult = ($left != $right);
+				// Parse both sides of the expression. All possible matches for each side can get merged in to one string,
+				// since there will be only one item for left/right not empty.
+				$left = $this->ContentProcessor->processVariables(
+					stripslashes($part['expressionLeftDoubleQuoted']) .
+					stripslashes($part['expressionLeftSingleQuoted']) .
+					$part['expressionLeftNumber'] .
+					$part['expressionLeftVar']
+				);
 
-							break;
-						case '>':
-							$partialResult = ($left > $right);
+				$right = $this->ContentProcessor->processVariables(
+					stripslashes($part['expressionRightDoubleQuoted']) .
+					stripslashes($part['expressionRightSingleQuoted']) .
+					$part['expressionRightNumber'] .
+					$part['expressionRightVar']
+				);
 
-							break;
-						case '>=':
-							$partialResult = ($left >= $right);
-
-							break;
-						case '<':
-							$partialResult = ($left < $right);
-
-							break;
-						case '<=':
-							$partialResult = ($left <= $right);
-
-							break;
-					}
-				} else {
-					// Boolean.
-
-					// Get the value of the given variable.
-					$expressionVar = $this->ContentProcessor->processVariables($part['expressionVar']);
-
-					// If EMPTY NOT == NOT EMPTY Value.
-					$partialResult = (empty($part['expressionNot']) == !empty($expressionVar));
-				}
-
-				// Combine results based on logical operator - note that for the first part,
-				// the operator will be empty of course.
-				switch (strtolower(trim($part['operator']))) {
-					case '':
-						$result = $partialResult;
+				// Build and evaluate the expression.
+				switch ($part['expressionOperator']) {
+					case '=':
+						$partialResult = ($left == $right);
 
 						break;
-					case 'and':
-						$result = ($result && $partialResult);
+					case '!=':
+						$partialResult = ($left != $right);
 
 						break;
-					case 'or':
-						$result = ($result || $partialResult);
+					case '>':
+						$partialResult = ($left > $right);
+
+						break;
+					case '>=':
+						$partialResult = ($left >= $right);
+
+						break;
+					case '<':
+						$partialResult = ($left < $right);
+
+						break;
+					case '<=':
+						$partialResult = ($left <= $right);
 
 						break;
 				}
-			}
-
-			// Process snippet depending on $result.
-			$TemplateProcessor = $this->initTemplateProcessor();
-
-			if ($result) {
-				Debug::log('TRUE', 'Evaluating condition: if ' . $matches['if']);
-
-				return $TemplateProcessor->process($ifSnippet, $directory, $collectSnippetDefinitions);
 			} else {
-				Debug::log('FALSE', 'Evaluating condition: if ' . $matches['if']);
+				// Boolean.
 
-				return $TemplateProcessor->process($ifElseSnippet, $directory, $collectSnippetDefinitions);
+				// Get the value of the given variable.
+				$expressionVar = $this->ContentProcessor->processVariables($part['expressionVar']);
+
+				// If EMPTY NOT == NOT EMPTY Value.
+				$partialResult = (empty($part['expressionNot']) == !empty($expressionVar));
+			}
+
+			// Combine results based on logical operator - note that for the first part,
+			// the operator will be empty of course.
+			switch (strtolower(trim($part['operator']))) {
+				case '':
+					$result = $partialResult;
+
+					break;
+				case 'and':
+					$result = ($result && $partialResult);
+
+					break;
+				case 'or':
+					$result = ($result || $partialResult);
+
+					break;
 			}
 		}
+
+		// Process snippet depending on $result.
+		$TemplateProcessor = $this->initTemplateProcessor();
+
+		if ($result) {
+			Debug::log('TRUE', 'Evaluating condition: if ' . $matches['if']);
+
+			return $TemplateProcessor->process($ifSnippet, $directory, $collectSnippetDefinitions);
+		}
+
+		Debug::log('FALSE', 'Evaluating condition: if ' . $matches['if']);
+
+		return $TemplateProcessor->process($ifElseSnippet, $directory, $collectSnippetDefinitions);
 	}
 
 	/**
@@ -187,7 +193,7 @@ class ConditionalProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @return string the regex pattern for conditionals
 	 */
-	public static function syntaxPattern() {
+	public static function syntaxPattern(): string {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 

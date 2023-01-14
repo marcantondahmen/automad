@@ -51,14 +51,14 @@ class FeatureProvider {
 	/**
 	 * An array with names of all existing feature processor classes.
 	 */
-	private static $processorClasses = array();
+	private static array $processorClasses = array();
 
 	/**
 	 * Return the array of feature processor class names.
 	 *
 	 * @return array the class name array
 	 */
-	public static function getProcessorClasses() {
+	public static function getProcessorClasses(): array {
 		if (empty(self::$processorClasses)) {
 			self::$processorClasses = self::findProcessorClasses();
 		}
@@ -71,7 +71,7 @@ class FeatureProvider {
 	 *
 	 * @return array the class name array
 	 */
-	private static function findProcessorClasses() {
+	private static function findProcessorClasses(): array {
 		$files = FileSystem::glob(__DIR__ . '/Processors/Features/*.php');
 
 		foreach ($files as $file) {

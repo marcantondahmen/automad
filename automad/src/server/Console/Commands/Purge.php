@@ -53,7 +53,7 @@ class Purge extends AbstractCommand {
 	 *
 	 * @return string the command help
 	 */
-	public static function help() {
+	public static function help(): string {
 		return 'Purge the cache directory including all cached images and deleted pages.';
 	}
 
@@ -62,14 +62,14 @@ class Purge extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name() {
+	public static function name(): string {
 		return 'purge';
 	}
 
 	/**
 	 * The actual command action.
 	 */
-	public static function run() {
+	public static function run(): void {
 		echo 'Purging cache directory ...' . PHP_EOL;
 		FileSystem::purgeCache();
 	}

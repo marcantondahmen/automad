@@ -58,9 +58,8 @@ class Links {
 	 * @param string $old
 	 * @param string $new
 	 * @param string|null $dataFilePath
-	 * @return bool true on success
 	 */
-	public static function update(Automad $Automad, string $old, string $new, ?string $dataFilePath = null) {
+	public static function update(Automad $Automad, string $old, string $new, ?string $dataFilePath = null): void {
 		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
 		$replaceValue = $new;
 
@@ -82,7 +81,5 @@ class Links {
 
 		$Replacement = new Replacement($searchValue, $replaceValue, true, false);
 		$Replacement->replaceInFiles($fileFieldsArray);
-
-		return true;
 	}
 }

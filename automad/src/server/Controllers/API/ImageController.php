@@ -58,7 +58,7 @@ class ImageController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function save() {
+	public static function save(): Response {
 		$Response = new Response();
 		$Messenger = new Messenger();
 		$Automad = Automad::fromCache();

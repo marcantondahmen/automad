@@ -60,14 +60,14 @@ class PackageManagerController {
 	/**
 	 * The path to the composer.json file.
 	 */
-	private static $composerFile = AM_BASE_DIR . '/composer.json';
+	private static string $composerFile = AM_BASE_DIR . '/composer.json';
 
 	/**
 	 * Get the array of installed packages.
 	 *
 	 * @return Response The array with all installed packages.
 	 */
-	public static function getInstalled() {
+	public static function getInstalled(): Response {
 		$Response = new Response();
 
 		if (is_readable(self::$composerFile)) {
@@ -89,7 +89,7 @@ class PackageManagerController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function getOutdated() {
+	public static function getOutdated(): Response {
 		$Response = new Response();
 
 		$Composer = new Composer();
@@ -108,41 +108,38 @@ class PackageManagerController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function getThumbnail() {
+	public static function getThumbnail(): Response {
 		$Response = new Response();
 		$repository = Request::post('repository');
 		$repositorySlug = Str::stripStart($repository, 'https://github.com/');
-		$thumbnail = '';
-		$lifetime = 216000;
 
 		if (!preg_match('#\w+/\w+#', $repositorySlug)) {
 			return $Response;
 		}
 
+		$lifetime = 216000;
 		$cachePath = AM_BASE_DIR . AM_DIR_CACHE . "/packages/$repositorySlug/thumbnail";
 
 		if (is_readable($cachePath) && filemtime($cachePath) > time() - $lifetime) {
-			$thumbnail = file_get_contents($cachePath);
-		} else {
-			$readme = self::getReadme($repository);
-			$imageUrl = Str::findFirstImage($readme);
-
-			if (!$imageUrl) {
-				return $Response;
-			}
-
-			$RemoteFile = new RemoteFile($imageUrl);
-			$download = $RemoteFile->getLocalCopy();
-
-			$Image = new Image($download, 400, 300, true);
-			$thumbnail = AM_BASE_URL . $Image->file;
-
-			FileSystem::write($cachePath, $thumbnail);
+			return $Response->setData(array('thumbnail' => file_get_contents($cachePath)));
 		}
 
-		$Response->setData(array('thumbnail' => $thumbnail));
+		$readme = self::getReadme($repository);
+		$imageUrl = Str::findFirstImage($readme);
 
-		return $Response;
+		if (!$imageUrl) {
+			return $Response;
+		}
+
+		$RemoteFile = new RemoteFile($imageUrl);
+		$download = $RemoteFile->getLocalCopy();
+
+		$Image = new Image($download, 400, 300, true);
+		$thumbnail = AM_BASE_URL . $Image->file;
+
+		FileSystem::write($cachePath, $thumbnail);
+
+		return $Response->setData(array('thumbnail' => $thumbnail));
 	}
 
 	/**
@@ -150,7 +147,7 @@ class PackageManagerController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function install() {
+	public static function install(): Response {
 		$Response = new Response();
 
 		if ($package = Request::post('package')) {
@@ -171,7 +168,7 @@ class PackageManagerController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function remove() {
+	public static function remove(): Response {
 		$Response = new Response();
 
 		if ($package = Request::post('package')) {
@@ -192,7 +189,7 @@ class PackageManagerController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function update() {
+	public static function update(): Response {
 		$Response = new Response();
 
 		if ($package = Request::post('package')) {
@@ -215,7 +212,7 @@ class PackageManagerController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function updateAll() {
+	public static function updateAll(): Response {
 		$Response = new Response();
 		$Composer = new Composer();
 
@@ -234,7 +231,7 @@ class PackageManagerController {
 	 * @param string $repository
 	 * @return string the thumbnail URL
 	 */
-	private static function getReadme(string $repository) {
+	private static function getReadme(string $repository): string {
 		$repositorySlug = Str::stripStart($repository, 'https://github.com/');
 
 		preg_match(

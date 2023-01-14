@@ -36,7 +36,6 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Admin\Models\PageModel;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
@@ -66,7 +65,7 @@ class PageController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function add() {
+	public static function add(): Response {
 		$Response = new Response();
 		$targetPage = Request::post('targetPage');
 		$Parent = Page::fromCache($targetPage);
@@ -86,7 +85,7 @@ class PageController {
 
 		Debug::log($Parent->url, 'parent page');
 
-		$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
+		$themeTemplate = self::getTemplateNameFromArray();
 		$isPrivate = (bool) Request::post('private');
 
 		return $Response->setRedirect(Page::add($Parent, $title, $themeTemplate, $isPrivate));
@@ -97,12 +96,13 @@ class PageController {
 	 *
 	 * @return Response the response data
 	 */
-	public static function breadcrumbs() {
+	public static function breadcrumbs(): Response {
 		$Automad = Automad::fromCache();
 		$Response = new Response();
 		$url = Request::post('url');
+		$Page = $Automad->getPage($url);
 
-		if ($url && ($Page = $Automad->getPage($url))) {
+		if ($Page) {
 			$Selection = new Selection($Automad->getCollection());
 			$Selection->filterBreadcrumbs($url);
 
@@ -126,7 +126,7 @@ class PageController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function data() {
+	public static function data(): Response {
 		$Automad = Automad::fromCache();
 		$Response = new Response();
 		$url = Request::post('url');
@@ -174,7 +174,7 @@ class PageController {
 				'template' => $Page->getTemplate(),
 				'fields' => $fields,
 				'shared' => $Automad->Shared->data,
-				'readme' => $Theme->readme
+				'readme' => isset($Theme) ? $Theme->readme : ''
 			)
 		);
 	}
@@ -219,7 +219,7 @@ class PageController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function duplicate() {
+	public static function duplicate(): Response {
 		$Response = new Response();
 		$url = Request::post('url');
 		$Page = Page::fromCache($url);
@@ -244,7 +244,7 @@ class PageController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function move() {
+	public static function move(): Response {
 		$Automad = Automad::fromCache();
 		$Response = new Response();
 		$url = Request::post('url');
@@ -286,7 +286,10 @@ class PageController {
 		Cache::clear();
 
 		$Page = Page::findByPath($newPagePath);
-		$Response->setData(array('url' => $Page->origUrl));
+
+		if ($Page) {
+			$Response->setData(array('url' => $Page->origUrl));
+		}
 
 		return $Response;
 	}
@@ -296,7 +299,7 @@ class PageController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function updateIndex() {
+	public static function updateIndex(): Response {
 		$Response = new Response();
 		$url = Request::post('url');
 		$Page = Page::fromCache($url);
@@ -319,22 +322,10 @@ class PageController {
 	/**
 	 * Get the theme/template file from posted data or return a default template name.
 	 *
-	 * @param array|null $array
-	 * @param string|null $key
 	 * @return string The template filename
 	 */
-	private static function getTemplateNameFromArray(?array $array = null, ?string $key = null) {
-		$template = 'data.php';
-
-		if (is_array($array) && $key) {
-			if (!empty($array[$key])) {
-				$template = $array[$key];
-			}
-		}
-
-		Debug::log($template, 'Template');
-
-		return $template;
+	private static function getTemplateNameFromArray(): string {
+		return $_POST['theme_template'] ?? AM_FILE_DEFAULT_TEMPLATE;
 	}
 
 	/**
@@ -346,7 +337,7 @@ class PageController {
 	 * @param string $slug
 	 * @return Response the response object
 	 */
-	private static function save(Page $Page, string $url, array $data, string $slug) {
+	private static function save(Page $Page, string $url, array $data, string $slug): Response {
 		$Response = new Response();
 		$pageFile = $Page->getFile();
 
@@ -364,7 +355,7 @@ class PageController {
 
 		// The theme and the template get passed as theme/template.php combination separate
 		// form $_POST['data']. That information has to be parsed first and "subdivided".
-		$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
+		$themeTemplate = self::getTemplateNameFromArray();
 
 		if ($result = $Page->save($url, $data, $themeTemplate, $slug)) {
 			if (!empty($result['redirect'])) {

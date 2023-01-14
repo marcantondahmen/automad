@@ -55,7 +55,7 @@ class SystemController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function checkForUpdate() {
+	public static function checkForUpdate(): Response {
 		$Response = new Response();
 		$latest = Update::getVersion();
 		$data = array(
@@ -69,12 +69,13 @@ class SystemController {
 
 		return $Response->setData($data);
 	}
+
 	/**
 	 * System updates.
 	 *
 	 * @return Response the response object
 	 */
-	public static function update() {
+	public static function update(): Response {
 		$Response = new Response();
 		$data = array(
 			'state' => 'upToDate',

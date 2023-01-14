@@ -49,17 +49,17 @@ class Messenger {
 	/**
 	 * Misc data array.
 	 */
-	private $data = array();
+	private array $data = array();
 
 	/**
 	 * The last pushed error.
 	 */
-	private $error = '';
+	private string $error = '';
 
 	/**
 	 * The last pushed success.
 	 */
-	private $success = '';
+	private string $success = '';
 
 	/**
 	 * The messenger constructor.
@@ -72,7 +72,7 @@ class Messenger {
 	 *
 	 * @return array the data array
 	 */
-	public function getData() {
+	public function getData(): array {
 		return $this->data;
 	}
 
@@ -81,7 +81,7 @@ class Messenger {
 	 *
 	 * @return string the error message
 	 */
-	public function getError() {
+	public function getError(): string {
 		return $this->error;
 	}
 
@@ -90,7 +90,7 @@ class Messenger {
 	 *
 	 * @return string the success message
 	 */
-	public function getSuccess() {
+	public function getSuccess(): string {
 		return $this->success;
 	}
 
@@ -99,7 +99,7 @@ class Messenger {
 	 *
 	 * @param array $data
 	 */
-	public function setData(array $data) {
+	public function setData(array $data): void {
 		$this->data = $data;
 	}
 
@@ -108,7 +108,7 @@ class Messenger {
 	 *
 	 * @param string $message
 	 */
-	public function setError(string $message) {
+	public function setError(string $message): void {
 		$this->error = $message;
 	}
 
@@ -117,7 +117,7 @@ class Messenger {
 	 *
 	 * @param string $message
 	 */
-	public function setSuccess(string $message) {
+	public function setSuccess(string $message): void {
 		$this->success = $message;
 	}
 }

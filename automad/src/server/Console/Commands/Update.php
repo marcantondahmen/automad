@@ -53,7 +53,7 @@ class Update extends AbstractCommand {
 	 *
 	 * @return string the command help
 	 */
-	public static function help() {
+	public static function help(): string {
 		return 'Update Automad to the latest version.';
 	}
 
@@ -62,14 +62,14 @@ class Update extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name() {
+	public static function name(): string {
 		return 'update';
 	}
 
 	/**
 	 * The actual command action.
 	 */
-	public static function run() {
+	public static function run(): void {
 		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 			exit('Can\'t run updates within the development repository!' . PHP_EOL . PHP_EOL);
 		}

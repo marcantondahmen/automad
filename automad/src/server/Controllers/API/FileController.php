@@ -56,7 +56,7 @@ class FileController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function editInfo() {
+	public static function editInfo(): Response {
 		$Response = new Response();
 		$Messenger = new Messenger();
 
@@ -75,7 +75,7 @@ class FileController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function import() {
+	public static function import(): Response {
 		$Response = new Response();
 		$Messenger = new Messenger();
 

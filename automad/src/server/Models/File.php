@@ -66,7 +66,7 @@ class File {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public static function editInfo(string $newName, string $oldName, string $caption, Messenger $Messenger) {
+	public static function editInfo(string $newName, string $oldName, string $caption, Messenger $Messenger): bool {
 		if (!$oldName || !$newName) {
 			$Messenger->setError(Text::get('invalidFormError'));
 
@@ -134,7 +134,7 @@ class File {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public static function import(string $importUrl, string $pageUrl, Messenger $Messenger) {
+	public static function import(string $importUrl, string $pageUrl, Messenger $Messenger): bool {
 		if (!$importUrl) {
 			$Messenger->setError(Text::get('missingUrlError'));
 
@@ -149,7 +149,7 @@ class File {
 				$protocol = 'http://';
 			}
 
-			$importUrl = $protocol . getenv('HTTP_HOST') . AM_BASE_URL . $importUrl;
+			$importUrl = $protocol . (string) getenv('HTTP_HOST') . AM_BASE_URL . $importUrl;
 			Debug::log($importUrl, 'Local URL');
 		}
 
@@ -166,6 +166,11 @@ class File {
 		if ($pageUrl) {
 			$Automad = Automad::fromCache();
 			$Page = $Automad->getPage($pageUrl);
+
+			if (!$Page) {
+				return false;
+			}
+
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
 		} else {
 			$path = AM_BASE_DIR . AM_DIR_SHARED . '/' . $fileName;

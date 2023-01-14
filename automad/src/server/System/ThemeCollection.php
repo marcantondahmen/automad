@@ -54,12 +54,12 @@ class ThemeCollection {
 	/**
 	 * An array of installed Composer packages.
 	 */
-	private $composerInstalled;
+	private array $composerInstalled;
 
 	/**
 	 * The Theme objects array.
 	 */
-	private $themes;
+	private array $themes;
 
 	/**
 	 * The constructor.
@@ -75,12 +75,14 @@ class ThemeCollection {
 	 * 	corresponding to the AM_KEY_THEME variable.
 	 *
 	 * @param string $key
-	 * @return Theme The requested theme object
+	 * @return Theme|null The requested theme object
 	 */
-	public function getThemeByKey(string $key) {
+	public function getThemeByKey(string $key): ?Theme {
 		if ($key && array_key_exists($key, $this->themes)) {
 			return $this->themes[$key];
 		}
+
+		return null;
 	}
 
 	/**
@@ -89,7 +91,7 @@ class ThemeCollection {
 	 * @see Theme
 	 * @return array The array of Theme objects
 	 */
-	public function getThemes() {
+	public function getThemes(): array {
 		return $this->themes;
 	}
 
@@ -104,7 +106,7 @@ class ThemeCollection {
 	 * @param string|null $path
 	 * @return array An array containing all themes as objects.
 	 */
-	private function collectThemes(?string $path = null) {
+	private function collectThemes(?string $path = null): array {
 		if (!$path) {
 			$path = AM_BASE_DIR . AM_DIR_PACKAGES;
 		}
@@ -116,7 +118,7 @@ class ThemeCollection {
 				$themeJSON = $dir . '/theme.json';
 				$templates = FileSystem::glob($dir . '/*.php');
 
-				if (is_readable($themeJSON) && is_array($templates) && $templates) {
+				if (is_readable($themeJSON) && $templates) {
 					// If a theme.json file and at least one .php file exist, use that directoy as a theme.
 					$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
 					$themes[$path] = new Theme($themeJSON, $this->composerInstalled);
@@ -135,7 +137,7 @@ class ThemeCollection {
 	 *
 	 * @return array An associative array of installed Composer packages
 	 */
-	private function getComposerInstalled() {
+	private function getComposerInstalled(): array {
 		$installedJSON = AM_BASE_DIR . '/vendor/composer/installed.json';
 		$installed = array();
 

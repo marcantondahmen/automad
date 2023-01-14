@@ -57,7 +57,7 @@ class Slider extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		if (empty($data->globs) || empty($data->width) || empty($data->height)) {
 			return '';
 		}

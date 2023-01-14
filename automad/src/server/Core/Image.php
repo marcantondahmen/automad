@@ -49,118 +49,122 @@ class Image {
 	/**
 	 * The filename of generated image.
 	 */
-	public $file;
+	public string $file = '';
 
 	/**
 	 * The height of the generated image.
 	 */
-	public $height;
+	public int $height = 0;
 
 	/**
 	 * The height of the source image.
 	 */
-	public $originalHeight;
+	public float $originalHeight = 0;
 
 	/**
 	 * The width of the source image.
 	 */
-	public $originalWidth;
+	public float $originalWidth = 0;
 
 	/**
 	 * The width of the generated image.
 	 */
-	public $width;
+	public int $width = 0;
 
 	/**
 	 * Cropping parameter.
 	 */
-	private $crop;
+	private bool $crop = false;
 
 	/**
 	 * The pixels to crop the image on the X-axis on both sides.
 	 */
-	private $cropX;
+	private int $cropX = 0;
 
 	/**
 	 * The pixels to crop the image on the Y-axis on both sides.
 	 */
-	private $cropY;
+	private int $cropY = 0;
 
 	/**
 	 * The full file system path to the generated image.
 	 */
-	private $fileFullPath;
+	private string $fileFullPath = '';
 
 	/**
 	 * The filename of the source image
 	 */
-	private $originalFile;
+	private string $originalFile;
 
 	/**
 	 * The desired height of the new image. (May not be the resulting width, depending on cropping or original image size)
 	 */
-	private $requestedHeight;
+	private float $requestedHeight = 0;
 
 	/**
 	 * The disired width of the new image. (May not be the resulting width, depending on cropping or original image size)
 	 */
-	private $requestedWidth;
+	private float $requestedWidth = 0;
 
 	/**
 	 * The given image type.
 	 */
-	private $type;
+	private string $type = '';
 
 	/**
 	 * The constructor defines the main object properties from the given parameters and initiates the main methods.
 	 *
 	 * @param string $originalFile
-	 * @param ?float $requestedWidth
-	 * @param ?float $requestedHeight
+	 * @param float|string $requestedWidth
+	 * @param float|string $requestedHeight
 	 * @param bool $crop
 	 */
-	public function __construct(string $originalFile, ?float $requestedWidth = null, ?float $requestedHeight = null, bool $crop = false) {
-		if ($originalFile) {
-			ini_set('memory_limit', -1);
+	public function __construct(string $originalFile, float|string $requestedWidth = 0, float|string $requestedHeight = 0, bool $crop = false) {
+		$this->originalFile = $originalFile;
 
-			$getimagesize = @getimagesize($originalFile);
-
-			if ($getimagesize) {
-				$this->originalFile = $originalFile;
-				$this->originalWidth = $getimagesize[0];
-				$this->originalHeight = $getimagesize[1];
-				$this->type = $getimagesize['mime'];
-				$this->crop = $crop;
-
-				if ($requestedWidth) {
-					$this->requestedWidth = $requestedWidth;
-				} else {
-					$this->requestedWidth = $this->originalWidth;
-				}
-
-				if ($requestedHeight) {
-					$this->requestedHeight = $requestedHeight;
-				} else {
-					$this->requestedHeight = $this->originalHeight;
-				}
-
-				// Get the possible size for the generated image (based on crop and original size).
-				$this->calculateSize();
-
-				// Get the filename hash, based on the given settings, to check later, if the file exists.
-				$this->file = $this->getImageCacheFilePath();
-				$this->fileFullPath = AM_BASE_DIR . $this->file;
-
-				// Check if an image with the generated hash exists already and create the file, when neccassary.
-				$this->verifyCachedImage();
-			}
+		if (!$originalFile) {
+			return;
 		}
+
+		$requestedWidth = floatval($requestedWidth);
+		$requestedHeight = floatval($requestedHeight);
+
+		ini_set('memory_limit', '-1');
+
+		$getimagesize = @getimagesize($originalFile);
+
+		if (!$getimagesize) {
+			return;
+		}
+
+		$this->originalWidth = $getimagesize[0];
+		$this->originalHeight = $getimagesize[1];
+
+		$this->requestedWidth = $requestedWidth ? $requestedWidth : $this->originalWidth;
+		$this->requestedHeight = $requestedHeight ? $requestedHeight : $this->originalHeight;
+
+		$this->type = $getimagesize['mime'];
+		$this->crop = $crop;
+
+		// Get the possible size for the generated image (based on crop and original size).
+		$this->calculateSize();
+
+		// Get the filename hash, based on the given settings, to check later, if the file exists.
+		$this->file = $this->getImageCacheFilePath();
+		$this->fileFullPath = AM_BASE_DIR . $this->file;
+
+		// Check if an image with the generated hash exists already and create the file, when neccassary.
+		$this->verifyCachedImage();
 	}
 
 	/**
 	 * Calculate the size and pixels to crop for the generated image.
 	 */
-	private function calculateSize() {
+	private function calculateSize(): void {
+		if (!$this->originalWidth || !$this->originalHeight || !$this->requestedWidth || !$this->requestedHeight) {
+			return;
+		}
+
 		$originalAspect = $this->originalWidth / $this->originalHeight;
 		$requestedAspect = $this->requestedWidth / $this->requestedHeight;
 
@@ -227,16 +231,16 @@ class Image {
 			}
 		}
 
-		$this->width = round($w);
-		$this->height = round($h);
-		$this->cropX = round($x);
-		$this->cropY = round($y);
+		$this->width = (int) round($w);
+		$this->height = (int) round($h);
+		$this->cropX = (int) round($x);
+		$this->cropY = (int) round($y);
 	}
 
 	/**
 	 * Create a new (resized and cropped) image from the source image and save that image in AM_DIR_CACHE_IMAGES.
 	 */
-	private function createImage() {
+	private function createImage(): void {
 		switch ($this->type) {
 			case 'image/jpeg':
 				$src = imagecreatefromjpeg($this->originalFile);
@@ -260,6 +264,10 @@ class Image {
 				break;
 		}
 
+		if (!$src) {
+			return;
+		}
+
 		$dest = imagecreatetruecolor($this->width, $this->height);
 
 		imagealphablending($dest, false);
@@ -273,8 +281,8 @@ class Image {
 			$this->cropY,
 			$this->width,
 			$this->height,
-			$this->originalWidth - (2 * $this->cropX),
-			$this->originalHeight - (2 * $this->cropY)
+			(int) round($this->originalWidth - (2 * $this->cropX)),
+			(int) round($this->originalHeight - (2 * $this->cropY))
 		);
 
 		Debug::log($this, 'Saving "' . $this->fileFullPath . '"');
@@ -302,9 +310,6 @@ class Image {
 		}
 
 		chmod($this->fileFullPath, AM_PERM_FILE);
-
-		ImageDestroy($src);
-		ImageDestroy($dest);
 	}
 
 	/**
@@ -316,7 +321,7 @@ class Image {
 	 *
 	 * @return string The matching filename for the requested source image, based on its parameters
 	 */
-	private function getImageCacheFilePath() {
+	private function getImageCacheFilePath(): string {
 		$extension = strtolower(pathinfo($this->originalFile, PATHINFO_EXTENSION));
 
 		if ($extension == 'jpeg') {
@@ -341,7 +346,7 @@ class Image {
 	 * To verify, if the requested image is up to date, only the existence has to be tested,
 	 * since any changes in the source image will be reflected in the filename's hash.
 	 */
-	private function verifyCachedImage() {
+	private function verifyCachedImage(): void {
 		if (!file_exists($this->fileFullPath)) {
 			$this->createImage();
 		}

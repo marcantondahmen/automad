@@ -51,15 +51,15 @@ class Context {
 	/**
 	 * The context Page.
 	 */
-	private $Page;
+	private Page $Page;
 
 	/**
 	 * The constructor.
 	 *
-	 * @param Page $Page
+	 * @param Page|null $Page
 	 */
 	public function __construct(?Page $Page) {
-		$this->set($Page);
+		$this->setOrCreate($Page);
 	}
 
 	/**
@@ -67,20 +67,33 @@ class Context {
 	 *
 	 * @return Page $Page
 	 */
-	public function get() {
+	public function get(): Page {
 		return $this->Page;
 	}
 
 	/**
 	 * Set the context.
 	 *
-	 * @param Page $Page
+	 * @param Page|null $Page
 	 */
-	public function set(?Page $Page) {
-		// Test whether $Page is empty - that can happen, when accessing the UI.
-		if (!empty($Page)) {
-			$this->Page = $Page;
-			Debug::log($Page, 'Set context to ' . $Page->url);
+	public function set(?Page $Page): void {
+		$this->setOrCreate($Page);
+	}
+
+	/**
+	 * Set or create an undefined page.
+	 *
+	 * @param Page|null $Page
+	 */
+	private function setOrCreate(?Page $Page): void {
+		if ($Page === null) {
+			Debug::log('Create new undefined page object');
+			$this->Page = Page::undefined();
+
+			return;
 		}
+
+		$this->Page = $Page;
+		Debug::log($Page, $Page->origUrl);
 	}
 }

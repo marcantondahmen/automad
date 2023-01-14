@@ -61,17 +61,17 @@ class ContentProcessor {
 	/**
 	 * The main Automad instance.
 	 */
-	private $Automad;
+	private Automad $Automad;
 
 	/**
 	 * The InPage instance.
 	 */
-	private $InPage;
+	private InPage $InPage;
 
 	/**
 	 * The Runtime instance.
 	 */
-	private $Runtime;
+	private Runtime $Runtime;
 
 	/**
 	 * The content processor constructor.
@@ -100,7 +100,13 @@ class ContentProcessor {
 	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed file snippet
 	 */
-	public function processFileSnippet(string $file, array $options, string $snippet, string $directory, bool $collectSnippetDefinitions) {
+	public function processFileSnippet(
+		string $file,
+		array $options,
+		string $snippet,
+		string $directory,
+		bool $collectSnippetDefinitions
+	): string {
 		// Shelve runtime data.
 		$runtimeShelf = $this->Runtime->shelve();
 
@@ -119,8 +125,8 @@ class ContentProcessor {
 			if (!empty($options)) {
 				$options = 	array_merge(
 					array(
-						'width' => false,
-						'height' => false,
+						'width' => 0,
+						'height' => 0,
 						'crop' => false
 					),
 					$options
@@ -171,7 +177,7 @@ class ContentProcessor {
 	 * @param bool $inPageEdit
 	 * @return string The processed $str
 	 */
-	public function processVariables(string $str, bool $isOptionString = false, bool $inPageEdit = false) {
+	public function processVariables(string $str, bool $isOptionString = false, bool $inPageEdit = false): string {
 		// Prepare JSON strings by wrapping all stand-alone variables in quotes.
 		if ($isOptionString) {
 			$str = preg_replace_callback(
@@ -271,7 +277,7 @@ class ContentProcessor {
 	 * @param string $key
 	 * @return string The value
 	 */
-	private function getValue(string $key) {
+	private function getValue(string $key): string {
 		// Query string parameter.
 		if (strpos($key, '?') === 0) {
 			$key = substr($key, 1);

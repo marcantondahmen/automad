@@ -57,9 +57,9 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 	 * @param string $directory
 	 * @param bool $collectSnippetDefinitions
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
 		if (empty($matches['snippet'])) {
-			return null;
+			return '';
 		}
 
 		$name = $matches['snippet'];
@@ -74,7 +74,7 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 			SnippetCollection::add($name, $body);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 
-			return null;
+			return '';
 		}
 
 		// Now the point is that in the second run, when $collectSnippetDefinitions == false,
@@ -88,6 +88,8 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 			SnippetCollection::add($name, $body);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 		}
+
+		return '';
 	}
 
 	/**
@@ -95,7 +97,7 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @return string the snippet definition pattern
 	 */
-	public static function syntaxPattern() {
+	public static function syntaxPattern(): string {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 

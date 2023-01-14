@@ -49,27 +49,27 @@ class PatternAssembly {
 	/**
 	 * The character class to be used within a regex matching all allowed characters for all kine of variable names (content in .txt files, system variables ( :var ) and query string items ( ?var )).
 	 */
-	public static $charClassAllVariables = '[%:\?\+\w\.\-]';
+	public static string $charClassAllVariables = '[%:\?\+\w\.\-]';
 
 	/**
 	 * The character class to be used within a regex matching all allowed characters for variable names within .txt files.
 	 */
-	public static $charClassTextFileVariables = '[\+\w\.\-]';
+	public static string $charClassTextFileVariables = '[\+\w\.\-]';
 
 	/**
 	 * Logical operand "and" or "or".
 	 */
-	public static $logicalOperator = '(?:and|or)';
+	public static string $logicalOperator = '(?:and|or)';
 
 	/**
 	 * Number (integer and float).
 	 */
-	public static $number = '\d+(?:\.\d+)?';
+	public static string $number = '\d+(?:\.\d+)?';
 
 	/**
 	 * The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
 	 */
-	public static $outerStatementMarker = '#';
+	public static string $outerStatementMarker = '#';
 
 	/**
 	 * Return a regex to match a sequence of comma separated values or variables.
@@ -81,7 +81,7 @@ class PatternAssembly {
 	 * @param bool $isVariableSubpattern
 	 * @return string The regex matching a comma separated parameter string.
 	 */
-	public static function csv(bool $isVariableSubpattern = false) {
+	public static function csv(bool $isVariableSubpattern = false): string {
 		if ($isVariableSubpattern) {
 			return 	self::value('(?-7)') .
 					'(?:,' . self::value('(?-8)') . ')*?';
@@ -106,7 +106,7 @@ class PatternAssembly {
 	 * @param string|null $namedReferencePrefix
 	 * @return string The regex
 	 */
-	public static function expression(?string $namedReferencePrefix = null) {
+	public static function expression(?string $namedReferencePrefix = null): string {
 		if ($namedReferencePrefix) {
 			$left = $namedReferencePrefix . 'Left';
 			$operator = '?P<' . $namedReferencePrefix . 'Operator>';
@@ -114,9 +114,9 @@ class PatternAssembly {
 			$not = '?P<' . $namedReferencePrefix . 'Not>';
 			$var = '?P<' . $namedReferencePrefix . 'Var>';
 		} else {
-			$left = false;
+			$left = '';
 			$operator = '?:';
-			$right = false;
+			$right = '';
 			$not = '?:';
 			$var = '?:';
 		}
@@ -129,7 +129,7 @@ class PatternAssembly {
 	 *
 	 * @return string The regex
 	 */
-	public static function inPageEditButton() {
+	public static function inPageEditButton(): string {
 		return preg_quote(AM_DEL_INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
 	}
 
@@ -139,7 +139,7 @@ class PatternAssembly {
 	 *
 	 * @return string The generated pattern.
 	 */
-	public static function keyValue() {
+	public static function keyValue(): string {
 		$key = '(?P<key>' . self::$charClassAllVariables . '+|\"' . self::$charClassAllVariables . '+\")';
 		$value = '(?P<value>' . self::value(self::variable()) . ')';
 		$pair = '\s*' . $key . '\s*:\s*' . $value . '\s*';
@@ -162,7 +162,7 @@ class PatternAssembly {
 	 * @param string|null $namedReferencePrefix
 	 * @return string The regex
 	 */
-	public static function operand(?string $namedReferencePrefix = null) {
+	public static function operand(?string $namedReferencePrefix = null): string {
 		if ($namedReferencePrefix) {
 			$doubleQuoted = '?P<' . $namedReferencePrefix . 'DoubleQuoted>';
 			$singleQuoted = '?P<' . $namedReferencePrefix . 'SingleQuoted>';
@@ -193,7 +193,7 @@ class PatternAssembly {
 	 * @param bool $isVariableSubpattern
 	 * @return string The regex to match functions and their parameters or math operations
 	 */
-	public static function pipe(?string $namedReferencePrefix = null, bool $isVariableSubpattern = false) {
+	public static function pipe(?string $namedReferencePrefix = null, bool $isVariableSubpattern = false): string {
 		if ($namedReferencePrefix) {
 			$function = 	'?P<' . $namedReferencePrefix . 'Function>';
 			$parameters =	'?P<' . $namedReferencePrefix . 'Parameters>';
@@ -209,7 +209,7 @@ class PatternAssembly {
 		if ($isVariableSubpattern) {
 			$subpatternMathVar = '(?-10)';
 		} else {
-			$subpatternMathVar = self::variable(false, '(?R)');
+			$subpatternMathVar = self::variable(null, '(?R)');
 		}
 
 		return	'\|(' .
@@ -233,7 +233,7 @@ class PatternAssembly {
 	 *
 	 * @return string The template regex
 	 */
-	public static function template() {
+	public static function template(): string {
 		$statementPatterns = array();
 
 		foreach (FeatureProvider::getProcessorClasses() as $cls) {
@@ -252,7 +252,7 @@ class PatternAssembly {
 	 * @param string $subpatternVar
 	 * @return string The regex matching a function parameter.
 	 */
-	public static function value(string $subpatternVar) {
+	public static function value(string $subpatternVar): string {
 		// Any quoted string. Single and double quotes are allowed.
 		// Use possessive quantifiers to improve performance of very long values.
 		$string = '"(?:[^"\\\\]|\\\\.)*+"|\'(?:[^\'\\\\]|\\\\.)*+\'';
@@ -272,7 +272,7 @@ class PatternAssembly {
 	 * @param string|null $pipeReference
 	 * @return string The regex to match variables.
 	 */
-	public static function variable(?string $namedReferencePrefix = null, ?string $pipeReference = null) {
+	public static function variable(?string $namedReferencePrefix = null, ?string $pipeReference = null): string {
 		if ($namedReferencePrefix) {
 			$name = 		'?P<' . $namedReferencePrefix . 'Name>';
 			$functions =	'?P<' . $namedReferencePrefix . 'Functions>';
@@ -282,7 +282,7 @@ class PatternAssembly {
 		}
 
 		if (!$pipeReference) {
-			$pipeReference = self::pipe(false, true);
+			$pipeReference = self::pipe(null, true);
 		}
 
 		return 	'(' . preg_quote(AM_DEL_VAR_OPEN) .
@@ -296,7 +296,7 @@ class PatternAssembly {
 	 *
 	 * @return string The regex pattern.
 	 */
-	public static function variableKeyUI() {
+	public static function variableKeyUI(): string {
 		return preg_quote(AM_DEL_VAR_OPEN) . '\s*(?P<varName>' . self::$charClassTextFileVariables . '+)';
 	}
 }

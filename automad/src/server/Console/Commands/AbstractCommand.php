@@ -51,17 +51,17 @@ abstract class AbstractCommand {
 	 *
 	 * @return string the command help
 	 */
-	abstract public static function help();
+	abstract public static function help(): string;
 
 	/**
 	 * Get the command name.
 	 *
 	 * @return string the command name
 	 */
-	abstract public static function name();
+	abstract public static function name(): string;
 
 	/**
 	 * The actual command action.
 	 */
-	abstract public static function run();
+	abstract public static function run(): void;
 }

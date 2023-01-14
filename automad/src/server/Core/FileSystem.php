@@ -53,7 +53,7 @@ class FileSystem {
 	/**
 	 * The cached array of items in the packages directory.
 	 */
-	private static $packageDirectoryItems = array();
+	private static array $packageDirectoryItems = array();
 
 	/**
 	 * Append a suffix to a path just before the trailing slash.
@@ -62,7 +62,7 @@ class FileSystem {
 	 * @param string $suffix
 	 * @return string The path with appended suffix
 	 */
-	public static function appendSuffixToPath(string $path, string $suffix) {
+	public static function appendSuffixToPath(string $path, string $suffix): string {
 		return rtrim($path, '/') . $suffix . '/';
 	}
 
@@ -73,7 +73,7 @@ class FileSystem {
 	 * @param string $source
 	 * @param string $dest
 	 */
-	public static function copyPageFiles(string $source, string $dest) {
+	public static function copyPageFiles(string $source, string $dest): void {
 		// Sanatize dirs.
 		$source = self::fullPagePath($source);
 		$dest = self::fullPagePath($dest);
@@ -97,12 +97,12 @@ class FileSystem {
 	 * @param string $file
 	 * @return bool Return true if the file was deleted succsessfully
 	 */
-	public static function deleteFile(string $file) {
-		if (is_file($file)) {
-			if (is_writable($file) && is_writable(dirname($file))) {
-				return unlink($file);
-			}
+	public static function deleteFile(string $file): bool {
+		if (is_writable($file) && is_writable(dirname($file))) {
+			return unlink($file);
 		}
+
+		return false;
 	}
 
 	/**
@@ -112,7 +112,7 @@ class FileSystem {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public static function deleteMedia(string $file, Messenger $Messenger) {
+	public static function deleteMedia(string $file, Messenger $Messenger): bool {
 		$fileError = Text::get('permissionsDeniedError');
 
 		if (!is_writable($file)) {
@@ -153,7 +153,7 @@ class FileSystem {
 	 * @param string $path
 	 * @return string The full path
 	 */
-	public static function fullPagePath(string $path) {
+	public static function fullPagePath(string $path): string {
 		if (strpos($path, AM_BASE_DIR . AM_DIR_PAGES) !== 0) {
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $path;
 		}
@@ -167,7 +167,7 @@ class FileSystem {
 	 * @param string $file
 	 * @return string The extension
 	 */
-	public static function getExtension(string $file) {
+	public static function getExtension(string $file): string {
 		$pathInfo = pathinfo($file);
 
 		if (!empty($pathInfo['extension'])) {
@@ -183,11 +183,11 @@ class FileSystem {
 	 * @param string $file
 	 * @return string the file size string
 	 */
-	public static function getFileSize(string $file) {
+	public static function getFileSize(string $file): string {
 		$bytes = filesize($file);
 		$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
 
-		for ($i = 0; $bytes > 1024; $i++) {
+		for ($i = 0; $bytes > 1024 && $i <= 4; $i++) {
 			$bytes = $bytes / 1204;
 		}
 
@@ -198,9 +198,9 @@ class FileSystem {
 	 * 	Get file extension for images based on mime types.
 	 *
 	 * @param string $file
-	 * @return mixed The extension or false
+	 * @return string The extension or an empty string
 	 */
-	public static function getImageExtensionFromMimeType(string $file) {
+	public static function getImageExtensionFromMimeType(string $file): string {
 		try {
 			$getimagesize = getimagesize($file);
 			$type = $getimagesize['mime'];
@@ -226,7 +226,7 @@ class FileSystem {
 
 			return $extension;
 		} catch (\Exception $e) {
-			return false;
+			return '';
 		}
 	}
 
@@ -236,7 +236,7 @@ class FileSystem {
 	 * @param string $filter
 	 * @return array A filtered list with all items in the packages directory
 	 */
-	public static function getPackagesDirectoryItems(string $filter = '') {
+	public static function getPackagesDirectoryItems(string $filter = ''): array {
 		if (empty(self::$packageDirectoryItems)) {
 			self::$packageDirectoryItems = self::listDirectoryRecursively(AM_BASE_DIR . AM_DIR_PACKAGES, AM_BASE_DIR . AM_DIR_PACKAGES);
 		}
@@ -255,7 +255,7 @@ class FileSystem {
 	 * @param Automad $Automad
 	 * @return string The full path to the related directory
 	 */
-	public static function getPathByPostUrl(Automad $Automad) {
+	public static function getPathByPostUrl(Automad $Automad): string {
 		$url = Request::post('url');
 
 		if ($url && ($Page = $Automad->getPage($url))) {
@@ -274,16 +274,14 @@ class FileSystem {
 	 *
 	 * @return string The path to the temp dir
 	 */
-	public static function getTmpDir() {
+	public static function getTmpDir(): string {
 		$tmp = '/tmp';
 
 		if (is_writable($tmp)) {
 			return $tmp;
 		}
 
-		if (is_writable(sys_get_temp_dir())) {
-			return rtrim(sys_get_temp_dir(), '/');
-		}
+		return rtrim(sys_get_temp_dir(), '/');
 	}
 
 	/**
@@ -295,14 +293,14 @@ class FileSystem {
 	 * @param int $flags
 	 * @return array The list of matching files
 	 */
-	public static function glob(string $pattern, int $flags = 0) {
+	public static function glob(string $pattern, int $flags = 0): array {
 		$files = glob($pattern, $flags);
 
 		if (!$files) {
 			return array();
 		}
 
-		return	array_map(function ($path) {
+		return array_map(function ($path) {
 			return self::normalizeSlashes($path);
 		}, $files);
 	}
@@ -319,7 +317,7 @@ class FileSystem {
 	 * @param int $flags
 	 * @return array The filtered list of matching files
 	 */
-	public static function globGrep(string $pattern, string $regex, int $flags = 0) {
+	public static function globGrep(string $pattern, string $regex, int $flags = 0): array {
 		return array_values(preg_grep($regex, self::glob($pattern, $flags)));
 	}
 
@@ -333,7 +331,7 @@ class FileSystem {
 	 * @param string $str
 	 * @return bool
 	 */
-	public static function isAllowedFileType(string $str) {
+	public static function isAllowedFileType(string $str): bool {
 		// Remove possible query string
 		$str = preg_replace('/\?.*/', '', $str);
 
@@ -345,9 +343,9 @@ class FileSystem {
 
 		if (in_array($extension, FileUtils::allowedFileTypes())) {
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	/**
@@ -357,7 +355,7 @@ class FileSystem {
 	 * @param string $base
 	 * @return array The list of items
 	 */
-	public static function listDirectoryRecursively(string $directory, string $base = AM_BASE_DIR) {
+	public static function listDirectoryRecursively(string $directory, string $base = AM_BASE_DIR): array {
 		$items = array();
 		$exclude = array('node_modules', 'vendor');
 
@@ -389,6 +387,8 @@ class FileSystem {
 
 			return $return;
 		}
+
+		return true;
 	}
 
 	/**
@@ -399,7 +399,7 @@ class FileSystem {
 	 * @param string $slug
 	 * @return string $newPath
 	 */
-	public static function movePageDir(string $oldPath, string $newParentPath, string $slug) {
+	public static function movePageDir(string $oldPath, string $newParentPath, string $slug): string {
 		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
 		// Therefore it is needed to convert all backslashes.
 		$newParentPath = self::normalizeSlashes($newParentPath);
@@ -430,64 +430,70 @@ class FileSystem {
 	 * @param string $path
 	 * @return string The processed path with only forward slashes
 	 */
-	public static function normalizeSlashes(string $path) {
+	public static function normalizeSlashes(string $path): string {
 		return str_replace('\\', '/', $path);
 	}
 
 	/**
 	 * Move all items in /cache to the PHP temp directory.
 	 *
-	 * @return string $tmp
+	 * @return mixed $tmp
 	 */
-	public static function purgeCache() {
+	public static function purgeCache(): mixed {
+		$tmp = self::getTmpDir();
+
 		// Check if the temp dir is actually writable.
-		if ($tmp = self::getTmpDir()) {
-			$tmpSubDir = '/automad-trash';
-			$trash = $tmp . $tmpSubDir;
-			$n = 0;
+		if (!$tmp) {
+			return false;
+		}
 
-			// Create unique subdirectory in temp.
-			while (is_dir($trash)) {
-				$n++;
-				$trash = $tmp . $tmpSubDir . '-' . $n;
-			}
+		$tmpSubDir = '/automad-trash';
+		$trash = $tmp . $tmpSubDir;
+		$n = 0;
 
-			if (self::makeDir($trash)) {
-				// Collect items to be removed.
-				$cacheItems = array_merge(
-					self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
-					self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
-				);
+		// Create unique subdirectory in temp.
+		while (is_dir($trash)) {
+			$n++;
+			$trash = $tmp . $tmpSubDir . '-' . $n;
+		}
 
-				foreach ($cacheItems as $item) {
-					$dest = $trash . '/' . basename($item);
+		if (!self::makeDir($trash)) {
+			return false;
+		}
 
-					if (!@rename($item, $dest)) {
-						if (function_exists('exec')) {
-							if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-								$cmd = "move $item $dest";
-								$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
-							} else {
-								$cmd = "mv $item $dest";
-							}
+		// Collect items to be removed.
+		$cacheItems = array_merge(
+			self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
+			self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
+		);
 
-							$output = array();
-							$code = null;
-							@exec($cmd, $output, $code);
+		foreach ($cacheItems as $item) {
+			$dest = $trash . '/' . basename($item);
 
-							if ($code !== 0) {
-								return false;
-							}
-						} else {
-							return false;
-						}
+			if (!@rename($item, $dest)) {
+				if (function_exists('exec')) {
+					if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+						$cmd = "move $item $dest";
+						$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
+					} else {
+						$cmd = "mv $item $dest";
 					}
-				}
 
-				// Return $trash on success.
-				return $trash;
+					$output = array();
+					$code = null;
+					@exec($cmd, $output, $code);
+
+					if ($code !== 0) {
+						return false;
+					}
+				} else {
+					return false;
+				}
 			}
 		}
+
+		// Return $trash on success.
+		return $trash;
 	}
 
 	/**
@@ -498,7 +504,7 @@ class FileSystem {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public static function renameMedia(string $oldFile, string $newFile, Messenger $Messenger) {
+	public static function renameMedia(string $oldFile, string $newFile, Messenger $Messenger): bool {
 		if (!is_writable(dirname($oldFile))) {
 			$Messenger->setError(Text::get('permissionsDeniedError'));
 
@@ -547,7 +553,7 @@ class FileSystem {
 	 * @param string $suffixPrefix (prepended to the numerical suffix)
 	 * @return string The suffix
 	 */
-	public static function uniquePathSuffix(string $path, string $suffixPrefix = '') {
+	public static function uniquePathSuffix(string $path, string $suffixPrefix = ''): string {
 		$i = 1;
 		$suffix = $suffixPrefix;
 
@@ -565,7 +571,7 @@ class FileSystem {
 	 * @param string $content
 	 * @return bool True on success, else false
 	 */
-	public static function write(string $file, string $content) {
+	public static function write(string $file, string $content): bool {
 		self::makeDir(dirname($file));
 
 		if (!file_exists($file)) {
@@ -575,8 +581,10 @@ class FileSystem {
 		}
 
 		if (is_writable($file)) {
-			return @file_put_contents($file, $content, LOCK_EX);
+			return (bool) @file_put_contents($file, $content, LOCK_EX);
 		}
+
+		return false;
 	}
 
 	/**
@@ -585,7 +593,7 @@ class FileSystem {
 	 * @param array $data
 	 * @param string $file
 	 */
-	public static function writeData(array $data, string $file) {
+	public static function writeData(array $data, string $file): void {
 		$pairs = array();
 		$data = array_filter($data, 'strlen');
 

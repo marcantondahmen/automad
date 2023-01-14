@@ -49,7 +49,7 @@ class Text {
 	/**
 	 * Array of UI text modules.
 	 */
-	private static $modules = null;
+	private static ?array $modules = null;
 
 	/**
 	 * Return the requested text module.
@@ -57,7 +57,7 @@ class Text {
 	 * @param string $key
 	 * @return string The requested text module
 	 */
-	public static function get(string $key) {
+	public static function get(string $key): string {
 		self::parseModules();
 
 		if (isset(Text::$modules[$key])) {
@@ -72,7 +72,7 @@ class Text {
 	 *
 	 * @return object The modules array as object
 	 */
-	public static function getObject() {
+	public static function getObject(): object {
 		self::parseModules();
 
 		return (object) self::$modules;
@@ -83,9 +83,9 @@ class Text {
 	 * In case AM_FILE_UI_TRANSLATION is defined, the translated text modules
 	 * will be merged into Text:$modules.
 	 */
-	private static function parseModules() {
+	private static function parseModules(): void {
 		if (self::$modules) {
-			return false;
+			return;
 		}
 
 		Text::$modules = Parse::dataFile(AM_FILE_UI_TEXT_MODULES);
@@ -96,13 +96,11 @@ class Text {
 			if (is_readable($translationFile)) {
 				$translation = Parse::dataFile($translationFile);
 
-				if (is_array($translation)) {
-					Text::$modules = array_merge(Text::$modules, $translation);
-				}
+				Text::$modules = array_merge(Text::$modules, $translation);
 			}
 		}
 
-		array_walk(Text::$modules, function (&$item) {
+		array_walk(Text::$modules, function (string &$item) {
 			$item = Str::markdown($item, true);
 			// Remove all line breaks to avoid problems when using text modules in JS notify.
 			$item = str_replace(array("\n", "\r"), '', $item);

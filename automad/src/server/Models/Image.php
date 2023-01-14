@@ -60,7 +60,7 @@ class Image {
 	 * @param string $base64
 	 * @param Messenger $Messenger
 	 */
-	public static function save(string $path, string $name, string $extension, string $base64, Messenger $Messenger) {
+	public static function save(string $path, string $name, string $extension, string $base64, Messenger $Messenger): void {
 		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
 		$data = base64_decode($data);
 

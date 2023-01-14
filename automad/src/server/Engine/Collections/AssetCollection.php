@@ -49,14 +49,14 @@ class AssetCollection {
 	/**
 	 * A multidimensional array for .css and .js files.
 	 */
-	private static $assets = array();
+	private static array $assets = array();
 
 	/**
 	 * Return the asset array.
 	 *
 	 * @return array the collected assets.
 	 */
-	public static function get() {
+	public static function get(): array {
 		return self::$assets;
 	}
 
@@ -65,7 +65,7 @@ class AssetCollection {
 	 *
 	 * @param array $assets
 	 */
-	public static function merge(array $assets) {
+	public static function merge(array $assets): void {
 		// Make sure, $this->assets has a basic structure to enable merging new assets.
 		self::$assets = array_merge(array('.css' => array(), '.js' => array()), self::$assets);
 

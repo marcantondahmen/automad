@@ -52,20 +52,16 @@ class SessionData {
 	 * @param string|null $key
 	 * @return mixed The data array or a single value
 	 */
-	public static function get(?string $key = null) {
+	public static function get(?string $key = null): mixed {
 		if (!isset($_SESSION['data'])) {
 			$_SESSION['data'] = array();
 		}
 
 		if ($key) {
-			if (array_key_exists($key, $_SESSION['data'])) {
-				return $_SESSION['data'][$key];
-			} else {
-				return '';
-			}
-		} else {
-			return $_SESSION['data'];
+			return $_SESSION['data'][$key] ?? '';
 		}
+
+		return $_SESSION['data'];
 	}
 
 	/**
@@ -74,7 +70,7 @@ class SessionData {
 	 * @param string $key
 	 * @param mixed $value
 	 */
-	public static function set(string $key, $value) {
+	public static function set(string $key, $value): void {
 		if (!isset($_SESSION['data'])) {
 			$_SESSION['data'] = array();
 		}

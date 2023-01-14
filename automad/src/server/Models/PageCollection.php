@@ -56,27 +56,27 @@ class PageCollection {
 	/**
 	 * The collection array.
 	 */
-	private $collection = array();
+	private array $collection = array();
 
 	/**
 	 * An array of existing directories within the base directory (/automad, /config, /pages etc.)
 	 */
-	private $reservedUrls;
+	private array $reservedUrls;
 
 	/**
 	 * Automad's Shared object.
 	 */
-	private $Shared;
+	private Shared $Shared;
 
 	/**
 	 * An array of URLs that are already assigned to a page or are a reserved URL.
 	 */
-	private $takenUrls = array();
+	private array $takenUrls = array();
 
 	/**
-	 * The username of the currently logged in user or false.
+	 * The username of the currently logged in user or an empty string.
 	 */
-	private $user;
+	private string $user;
 
 	/**
 	 * The constructor.
@@ -96,7 +96,7 @@ class PageCollection {
 	 *
 	 * @return array the pages array
 	 */
-	public function get() {
+	public function get(): array {
 		return $this->collection;
 	}
 
@@ -112,7 +112,12 @@ class PageCollection {
 	 * @param string $parentUrl
 	 * @param string $index
 	 */
-	private function collectPages(string $path = '/', int $level = 0, string $parentUrl = '', string $index = '1') {
+	private function collectPages(
+		string $path = '/',
+		int $level = 0,
+		string $parentUrl = '',
+		string $index = '1'
+	): void {
 		// First check, if $path contains any data files.
 		// If more that one file matches the pattern, the first one will be used as the page's data file and the others will just be ignored.
 		if ($files = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA)) {
@@ -124,7 +129,7 @@ class PageCollection {
 
 			// Stop processing of page data and subdirectories if page is private and nobody is logged in.
 			if ($Page->private && !$this->user) {
-				return false;
+				return;
 			}
 
 			$this->collection[$url] = $Page;
@@ -148,12 +153,12 @@ class PageCollection {
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
 			if ($children) {
-				$pad = strlen(count($children));
+				$pad = strlen((string) count($children));
 				$i = 1;
 
 				// Scan each directory recursively.
 				foreach ($children as $child) {
-					$childIndex = $index . '.' . str_pad($i, $pad, '0', STR_PAD_LEFT);
+					$childIndex = $index . '.' . str_pad((string) $i, $pad, '0', STR_PAD_LEFT);
 
 					$this->collectPages($path . basename($child) . '/', $level + 1, $url, $childIndex);
 					$i++;
@@ -165,7 +170,7 @@ class PageCollection {
 	/**
 	 * Get the list of taken URLs that can't be used as page URLs.
 	 */
-	private function getReservedUrls() {
+	private function getReservedUrls(): array {
 		$reservedUrls = array();
 
 		foreach (Routes::$registered as $route) {
@@ -195,7 +200,7 @@ class PageCollection {
 	 * @param string $slug
 	 * @return string $url
 	 */
-	private function makeUrl(string $parentUrl, string $slug) {
+	private function makeUrl(string $parentUrl, string $slug): string {
 		$url = '/' . ltrim($parentUrl . '/' . Str::slug($slug), '/');
 
 		// Merge reserved URLs with already used URLs in the collection.

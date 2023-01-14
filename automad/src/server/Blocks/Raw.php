@@ -56,7 +56,7 @@ class Raw extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		$html = Str::markdown($data->code);
 		$class = self::classAttr();
 

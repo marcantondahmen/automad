@@ -53,7 +53,7 @@ class ClearCache extends AbstractCommand {
 	 *
 	 * @return string the command help
 	 */
-	public static function help() {
+	public static function help(): string {
 		return 'Clear the page cache.';
 	}
 
@@ -62,14 +62,14 @@ class ClearCache extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name() {
+	public static function name(): string {
 		return 'clearcache';
 	}
 
 	/**
 	 * The actual command action.
 	 */
-	public static function run() {
+	public static function run(): void {
 		echo 'Clearing page cache ...' . PHP_EOL;
 		Cache::clear();
 	}

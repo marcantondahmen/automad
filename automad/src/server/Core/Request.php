@@ -51,7 +51,7 @@ class Request {
 	 *
 	 * @return string The requested URL
 	 */
-	public static function page() {
+	public static function page(): string {
 		$request = '';
 
 		if (!isset($_SERVER['QUERY_STRING'])) {
@@ -125,9 +125,9 @@ class Request {
 	 * Note: Since this method always returns a string, it should not be used to test whether a key exists in $_POST.
 	 *
 	 * @param string $key
-	 * @return string The value for the requested key
+	 * @return mixed The value for the requested key
 	 */
-	public static function post(string $key) {
+	public static function post(string $key): mixed {
 		if (isset($_POST[$key])) {
 			return $_POST[$key];
 		}
@@ -141,10 +141,10 @@ class Request {
 	 * because a non-existing parameter and an empty string as a parameter's value will return the same.
 	 *
 	 * @param string $key
-	 * @return string The value for the requested query key
+	 * @return mixed The value for the requested query key
 	 */
-	public static function query(string $key) {
-		if (isset($_GET[$key])) {
+	public static function query(string $key): mixed {
+		if (isset($_GET[$key]) && is_string($_GET[$key])) {
 			return htmlspecialchars($_GET[$key]);
 		}
 

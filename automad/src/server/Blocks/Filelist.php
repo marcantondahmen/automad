@@ -55,7 +55,7 @@ class Filelist extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		$Filelist = $Automad->getFilelist();
 
 		$defaults = array(

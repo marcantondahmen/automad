@@ -57,7 +57,7 @@ class CacheController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function clear() {
+	public static function clear(): Response {
 		$Response = new Response();
 		Cache::clear();
 
@@ -69,7 +69,7 @@ class CacheController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function purge() {
+	public static function purge(): Response {
 		$Response = new Response();
 		$tempDir = FileSystem::purgeCache();
 

@@ -56,15 +56,15 @@ class Update {
 	/**
 	 * The update timestamp.
 	 */
-	private static $timestamp = null;
+	private static string $timestamp;
 
 	/**
 	 * Download version file and extract version number.
 	 *
 	 * @return string Version number or false on error.
 	 */
-	public static function getVersion() {
-		$version = false;
+	public static function getVersion(): string {
+		$version = '';
 		$versionFileUrl = AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . AM_UPDATE_REPO_VERSION_FILE;
 
 		if ($content = Fetch::get($versionFileUrl)) {
@@ -77,18 +77,10 @@ class Update {
 	/**
 	 * Get items to be updated from config.
 	 *
-	 * @return array|null The array of items to be updated or false on error
+	 * @return array The array of items to be updated or false on error
 	 */
-	public static function items() {
-		$items = Parse::csv(AM_UPDATE_ITEMS);
-
-		if (is_array($items)) {
-			$items = array_filter($items);
-
-			if (!empty($items)) {
-				return $items;
-			}
-		}
+	public static function items(): array {
+		return array_filter(Parse::csv(AM_UPDATE_ITEMS));
 	}
 
 	/**
@@ -97,7 +89,7 @@ class Update {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public static function run(Messenger $Messenger) {
+	public static function run(Messenger $Messenger): bool {
 		self::$timestamp = date('Ymd-His');
 		self::log('Starting update ' . date('c'));
 		self::preloadClasses();
@@ -169,7 +161,7 @@ class Update {
 	 *
 	 * @return bool True on success, false on error
 	 */
-	public static function supported() {
+	public static function supported(): bool {
 		return (function_exists('curl_version') && class_exists('ZipArchive'));
 	}
 
@@ -180,7 +172,7 @@ class Update {
 	 * @param string $str
 	 * @return bool True on success, false on error
 	 */
-	private static function backupCurrent(array $items) {
+	private static function backupCurrent(array $items): bool {
 		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
 
 		FileSystem::makeDir($backup);
@@ -214,7 +206,7 @@ class Update {
 	 * @param string $str
 	 * @return string The version number
 	 */
-	private static function extractVersion(string $str) {
+	private static function extractVersion(string $str): string {
 		if (preg_match('/\d[^\'"]+/', $str, $matches)) {
 			return $matches[0];
 		}
@@ -225,16 +217,16 @@ class Update {
 	/**
 	 * Download zip-archive to be installed.
 	 *
-	 * @return string Path to the downloaded archive or false on error
+	 * @return string|null Path to the downloaded archive or null on error
 	 */
-	private static function getArchive() {
+	private static function getArchive(): ?string {
 		$downloadUrl = AM_UPDATE_REPO_DOWNLOAD_URL . '/' . AM_UPDATE_BRANCH . '.zip';
 		$archive = AM_BASE_DIR . AM_UPDATE_TEMP . '/download/' . self::$timestamp . '.zip';
 
 		FileSystem::makeDir(dirname($archive));
 
 		if (!Fetch::download($downloadUrl, $archive)) {
-			$archive = false;
+			$archive = null;
 			self::log('Download failed!');
 		}
 
@@ -246,7 +238,7 @@ class Update {
 	 *
 	 * @return string a version number in case PHP is outdated or an empty string
 	 */
-	private static function higherPHPVersionRequired() {
+	private static function higherPHPVersionRequired(): string {
 		$requiredVersion = '';
 		$composerFileUrl = AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . '/composer.json';
 
@@ -280,7 +272,7 @@ class Update {
 	 * @param string $data
 	 * @return string The path to the log file
 	 */
-	private static function log(string $data) {
+	private static function log(string $data): string {
 		$file = AM_BASE_DIR . AM_UPDATE_TEMP . '/' . self::$timestamp . '.log';
 		FileSystem::makeDir(dirname($file));
 		file_put_contents($file, $data . "\r\n", FILE_APPEND);
@@ -294,7 +286,7 @@ class Update {
 	 * @param array $items
 	 * @return bool True on success, false on error
 	 */
-	private static function permissionsGranted(array $items) {
+	private static function permissionsGranted(array $items): bool {
 		foreach ($items as $item) {
 			$item = AM_BASE_DIR . $item;
 			$temp = $item . '.' . crc32($item);
@@ -312,7 +304,7 @@ class Update {
 	/**
 	 * Preload required classes before removing old installation.
 	 */
-	private static function preloadClasses() {
+	private static function preloadClasses(): void {
 		Text::getObject();
 	}
 
@@ -323,7 +315,7 @@ class Update {
 	 * @param array $items
 	 * @return bool True on success, false on error
 	 */
-	private static function unpack(string $archive, array $items) {
+	private static function unpack(string $archive, array $items): bool {
 		$success = true;
 		$zip = new \ZipArchive();
 		$itemsMatchRegex = '/^[\w\-]+(' . addcslashes(implode('|', $items), '/') . ')/';

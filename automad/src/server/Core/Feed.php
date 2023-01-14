@@ -38,6 +38,7 @@ namespace Automad\Core;
 
 use Automad\Engine\Processors\URLProcessor;
 use Automad\Models\Page;
+use Automad\Models\Selection;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -53,12 +54,12 @@ class Feed {
 	/**
 	 * The Automad object.
 	 */
-	private $Automad;
+	private Automad $Automad;
 
 	/**
 	 * The included fields.
 	 */
-	private $fields = array();
+	private array $fields = array();
 
 	/**
 	 * The constructor.
@@ -76,7 +77,7 @@ class Feed {
 	 *
 	 * @return string the rendered XML
 	 */
-	public function get() {
+	public function get(): string {
 		$fn = $this->fn();
 		$Selection = new Selection($this->Automad->getCollection());
 		$items = $this->getItems($Selection->getSelection());
@@ -108,8 +109,8 @@ class Feed {
 	 *
 	 * @return callable The function
 	 */
-	private function fn() {
-		return function ($expression) { return $expression; };
+	private function fn(): callable {
+		return function (mixed $expression): string { return $expression; };
 	}
 
 	/**
@@ -118,7 +119,7 @@ class Feed {
 	 * @param array $pages
 	 * @return string the rendered XML
 	 */
-	private function getItems(array $pages) {
+	private function getItems(array $pages): string {
 		$fn = $this->fn();
 		$output = '';
 
@@ -148,11 +149,15 @@ class Feed {
 	/**
 	 * Render item content.
 	 *
-	 * @param Page $Page
+	 * @param Page|null $Page
 	 * @return string the rendered content
 	 */
-	private function getPageContent(Page $Page) {
+	private function getPageContent(?Page $Page): string {
 		$output = '';
+
+		if (!$Page) {
+			return $output;
+		}
 
 		foreach ($this->fields as $field) {
 			if (strpos($field, '+') === 0) {

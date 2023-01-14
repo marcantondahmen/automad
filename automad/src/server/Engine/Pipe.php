@@ -52,7 +52,7 @@ class Pipe {
 	/**
 	 * Whitelist of standard PHP functions.
 	 */
-	private static $phpFunctions = 	array(
+	private static array $phpFunctions = 	array(
 		'ceil',
 		'floor',
 		'round',
@@ -73,7 +73,7 @@ class Pipe {
 	 * @param array $functions
 	 * @return string The modified $value
 	 */
-	public static function process(string $value, array $functions) {
+	public static function process(string $value, array $functions): string {
 		Debug::log($functions);
 
 		foreach ($functions as $function) {
@@ -95,7 +95,7 @@ class Pipe {
 	 * @param string $value
 	 * @return string $value
 	 */
-	private static function extension(string $function, array $parameters, string $value) {
+	private static function extension(string $function, array $parameters, string $value): string {
 		$class = '\\' . str_replace('/', '\\', $function);
 
 		if (!class_exists($class, false)) {
@@ -127,9 +127,10 @@ class Pipe {
 	 * @param string $value
 	 * @return string $value
 	 */
-	private static function math(string $operator, string $number, string $value) {
+	private static function math(string $operator, string $number, string $value): string {
 		$number = floatval($number);
 		$value = floatval($value);
+		$result = $value;
 
 		switch ($operator) {
 			case '+':
@@ -163,7 +164,7 @@ class Pipe {
 	 * @param string $value
 	 * @return string $value
 	 */
-	private static function stringFunction(string $function, array $parameters, string $value = '') {
+	private static function stringFunction(string $function, array $parameters, string $value = ''): string {
 		if (!$parameters) {
 			$parameters = array();
 		}
@@ -192,7 +193,7 @@ class Pipe {
 		if (is_numeric($function)) {
 			Debug::log($value, 'Shorten content to max ' . $function . ' characters');
 
-			return Str::shorten($value, $function);
+			return Str::shorten($value, (int) $function);
 		}
 
 		// Loading custom string functions as extensions.

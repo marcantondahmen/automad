@@ -51,12 +51,12 @@ class Debug {
 	/**
 	 * Log buffer.
 	 */
-	private static $buffer = array();
+	private static array $buffer = array();
 
 	/**
 	 * Timestamp when script started.
 	 */
-	private static $time = null;
+	private static ?float $time = null;
 
 	/**
 	 * Stop timer, calculate execution time, get user & server constants
@@ -64,7 +64,7 @@ class Debug {
 	 *
 	 * @return string The Javascript console log
 	 */
-	public static function consoleLog() {
+	public static function consoleLog(): string {
 		if (!AM_DEBUG_ENABLED) {
 			return '';
 		}
@@ -84,7 +84,7 @@ class Debug {
 
 		$html = '<script type="text/javascript">' . "\n";
 
-		foreach (self::$buffer as $key => $item) {
+		foreach (self::$buffer as $item) {
 			$html .= 'console.log(' . json_encode($item) . ');' . "\n";
 		}
 
@@ -96,7 +96,7 @@ class Debug {
 	/**
 	 * Enable full error reporting, when debugging is enabled.
 	 */
-	public static function errorReporting() {
+	public static function errorReporting(): void {
 		if (AM_DEBUG_ENABLED) {
 			error_reporting(E_ALL);
 		} else {
@@ -109,7 +109,7 @@ class Debug {
 	 *
 	 * @return array The log buffer array
 	 */
-	public static function getLog() {
+	public static function getLog(): array {
 		return self::$buffer;
 	}
 
@@ -119,7 +119,7 @@ class Debug {
 	 * @param mixed $element (The actual content to log)
 	 * @param string $description (Basic info, class, method etc.)
 	 */
-	public static function log($element, string $description = '') {
+	public static function log($element, string $description = ''): void {
 		if (AM_DEBUG_ENABLED) {
 			// Start timer. self::timerStart() only saves the time on the first call.
 			self::timerStart();
@@ -138,7 +138,7 @@ class Debug {
 			if (count($backtrace) > 0) {
 				// When the backtrace array got reduced to the actually relevant items in the backtrace, take the first element (the one calling Debug::log()).
 				$backtrace = array_shift($backtrace);
-				$prefix = basename(str_replace('\\', '/', $backtrace['class'])) . $backtrace['type'] . $backtrace['function'] . '(): ';
+				$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '(): ';
 			} else {
 				$prefix = basename($backtraceAll[0]['file']) . ': ';
 			}
@@ -153,14 +153,14 @@ class Debug {
 	/**
 	 * Provide info about memory usage.
 	 */
-	private static function memory() {
+	private static function memory(): void {
 		self::log((memory_get_peak_usage(true) / 1048576) . 'M of ' . ini_get('memory_limit'), 'Memory used');
 	}
 
 	/**
 	 * Start the timer on the first call to calculate the execution time when consoleLog() gets called.
 	 */
-	private static function timerStart() {
+	private static function timerStart(): void {
 		// Only save time on first call.
 		if (!self::$time) {
 			self::$time = microtime(true);
@@ -169,9 +169,9 @@ class Debug {
 	}
 
 	/**
-	 * 	Stop the timer and log the execution time.
+	 * Stop the timer and log the execution time.
 	 */
-	private static function timerStop() {
+	private static function timerStop(): void {
 		if (self::$time) {
 			$executionTime = microtime(true) - self::$time;
 			self::log($executionTime . ' seconds', 'Time for execution');
@@ -181,7 +181,7 @@ class Debug {
 	/**
 	 * Log all user constants for get_defined_constants().
 	 */
-	private static function uc() {
+	private static function uc(): void {
 		$definedConstants = get_defined_constants(true);
 		$userConstants = $definedConstants['user'];
 		self::log($userConstants, 'Automad constants');

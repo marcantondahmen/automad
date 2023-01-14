@@ -72,7 +72,7 @@ class Sitemap {
 	 * @param array $collection
 	 * @param string $sitemap
 	 */
-	private function generate(array $collection, string $sitemap) {
+	private function generate(array $collection, string $sitemap): void {
 		if (!$base = AM_BASE_SITEMAP) {
 			$base = Server::url() . AM_BASE_INDEX;
 		}

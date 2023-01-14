@@ -49,12 +49,12 @@ class FileFields {
 	/**
 	 * The fields array.
 	 */
-	public $fields;
+	public array $fields;
 
 	/**
 	 * The file path.
 	 */
-	public $path;
+	public string $path;
 
 	/**
 	 * Initialize a new FileFields instance.

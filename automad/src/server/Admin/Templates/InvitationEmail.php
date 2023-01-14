@@ -56,7 +56,7 @@ class InvitationEmail extends AbstractEmailBody {
 	 * @param string $link
 	 * @return string The rendered invitation email body
 	 */
-	public static function render(string $website, string $username, string $link) {
+	public static function render(string $website, string $username, string $link): string {
 		$h1Style = self::$h1Style;
 		$pStyle = self::$paragraphStyle;
 		$codeStyle = self::$codeStyle;

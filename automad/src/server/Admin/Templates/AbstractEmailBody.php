@@ -51,7 +51,7 @@ abstract class AbstractEmailBody {
 	/**
 	 * The code paragraph style.
 	 */
-	protected static $codeStyle = <<< HTML
+	protected static string $codeStyle = <<< HTML
 		style="
 			text-align: center; 
 			margin: 20px 0; 
@@ -66,12 +66,12 @@ abstract class AbstractEmailBody {
 	/**
 	 * The basic h1 style.
 	 */
-	protected static $h1Style = 'style="font-size: 27px; font-weight: 600;"';
+	protected static string $h1Style = 'style="font-size: 27px; font-weight: 600;"';
 
 	/**
 	 * The basic paragraph style.
 	 */
-	protected static $paragraphStyle = 'style="font-size: 16px; line-height: 22px;"';
+	protected static string $paragraphStyle = 'style="font-size: 16px; line-height: 22px;"';
 
 	/**
 	 * The wrapping body markup.
@@ -79,7 +79,7 @@ abstract class AbstractEmailBody {
 	 * @param string $content
 	 * @return string the rendered body
 	 */
-	protected static function body(string $content) {
+	protected static function body(string $content): string {
 		$pStyle = self::$paragraphStyle;
 		$Text = Text::getObject();
 

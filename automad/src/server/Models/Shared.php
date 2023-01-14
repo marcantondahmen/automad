@@ -56,7 +56,7 @@ class Shared {
 	/**
 	 * The shared data array.
 	 */
-	public $data = array();
+	public array $data = array();
 
 	/**
 	 * Parse the shared data file.
@@ -64,7 +64,7 @@ class Shared {
 	public function __construct() {
 		// Use the server name as default site name.
 		$defaults = array(
-			AM_KEY_SITENAME => $_SERVER['SERVER_NAME']
+			AM_KEY_SITENAME => $_SERVER['SERVER_NAME'] ?? 'Site'
 		);
 
 		// Merge defaults with settings from file.
@@ -83,7 +83,7 @@ class Shared {
 	 * @param string $key
 	 * @return string The requested value
 	 */
-	public function get(string $key) {
+	public function get(string $key): string {
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
 		}
@@ -98,7 +98,7 @@ class Shared {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function save(array $data, Messenger $Messenger) {
+	public function save(array $data, Messenger $Messenger): bool {
 		if (!is_writable(AM_FILE_SHARED_DATA)) {
 			$Messenger->setError(Text::get('error_permission'));
 
@@ -117,7 +117,7 @@ class Shared {
 	 * @param string $key
 	 * @param mixed $value
 	 */
-	public function set(string $key, $value) {
+	public function set(string $key, $value): void {
 		$this->data[$key] = $value;
 	}
 }

@@ -52,13 +52,13 @@ class PageIndex {
 	 * @param string $parentPath
 	 * @param string $path
 	 */
-	public static function append(string $parentPath, string $path) {
+	public static function append(string $parentPath, string $path): void {
 		$layout = self::read($parentPath);
 
 		if ($layout) {
 			$layout[] = basename($path);
 
-			return self::write($parentPath, $layout);
+			self::write($parentPath, $layout);
 		}
 	}
 
@@ -68,7 +68,7 @@ class PageIndex {
 	 * @param string $parentPath
 	 * @return array the index
 	 */
-	public static function read(string $parentPath) {
+	public static function read(string $parentPath): array {
 		$indexFile = self::getIndexFile($parentPath);
 
 		if (is_readable($indexFile)) {
@@ -84,7 +84,7 @@ class PageIndex {
 	 * @param string $parentPath
 	 * @param string $path
 	 */
-	public static function remove(string $parentPath, string $path) {
+	public static function remove(string $parentPath, string $path): void {
 		$layout = self::read($parentPath);
 
 		if ($layout) {
@@ -93,7 +93,7 @@ class PageIndex {
 			if ($index !== false) {
 				unset($layout[$index]);
 
-				return self::write($parentPath, $layout);
+				self::write($parentPath, $layout);
 			}
 		}
 	}
@@ -104,9 +104,8 @@ class PageIndex {
 	 * @param string $parentPath
 	 * @param string $old
 	 * @param string $new
-	 * @return bool true on success
 	 */
-	public static function replace(string $parentPath, string $old, string $new) {
+	public static function replace(string $parentPath, string $old, string $new): void {
 		$layout = self::read($parentPath);
 
 		if ($layout) {
@@ -115,7 +114,7 @@ class PageIndex {
 			if ($index !== false) {
 				$layout[$index] = $new;
 
-				return (bool) self::write($parentPath, $layout);
+				self::write($parentPath, $layout);
 			}
 		}
 	}
@@ -125,26 +124,29 @@ class PageIndex {
 	 *
 	 * @param string $parentPath
 	 * @param array $layout
-	 * @return array|null the new layout or null
+	 * @return array the new layout or null
 	 */
-	public static function write(string $parentPath, array $layout) {
+	public static function write(string $parentPath, array $layout): array {
 		$indexFile = self::getIndexFile($parentPath);
 
-		$layout = array_map(function ($item) {
+		$layout = array_map(function (string $item): string {
 			return basename($item);
 		}, $layout);
 
 		if (FileSystem::write($indexFile, implode("\r\n", $layout))) {
 			return $layout;
 		}
+
+		return array();
 	}
 
 	/**
 	 * Get the index file associated with a given parent directory.
 	 *
 	 * @param string $parentPath
+	 * @return string
 	 */
-	private static function getIndexFile(string $parentPath) {
+	private static function getIndexFile(string $parentPath): string {
 		$parentPath = rtrim($parentPath, '/') . '/';
 
 		return AM_BASE_DIR . AM_DIR_PAGES . $parentPath . AM_FILE_INDEX;

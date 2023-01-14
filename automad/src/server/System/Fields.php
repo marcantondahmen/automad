@@ -53,7 +53,7 @@ class Fields {
 	/**
 	 * Array with reserved variable fields.
 	 */
-	public static $reserved = array(
+	public static array $reserved = array(
 		'AM_KEY_DATE' => AM_KEY_DATE,
 		'AM_KEY_HIDDEN' => AM_KEY_HIDDEN,
 		'AM_KEY_PRIVATE' => AM_KEY_PRIVATE,
@@ -71,7 +71,7 @@ class Fields {
 	 * @param Theme|null $Theme
 	 * @return array fields in the currently used template (without reserved fields)
 	 */
-	public static function inCurrentTemplate(Page $Page, ?Theme $Theme = null) {
+	public static function inCurrentTemplate(Page $Page, ?Theme $Theme = null): array {
 		if (empty($Theme)) {
 			return array();
 		}
@@ -89,7 +89,7 @@ class Fields {
 	 * @param string $file
 	 * @return array fields in a given template (without reserved fields)
 	 */
-	public static function inTemplate(string $file) {
+	public static function inTemplate(string $file): array {
 		$fields = array();
 
 		if (is_readable($file)) {
@@ -130,7 +130,7 @@ class Fields {
 	 * @param Theme $Theme
 	 * @return array fields in all templates of the given Theme (without reserved fields)
 	 */
-	public static function inTheme(Theme $Theme) {
+	public static function inTheme(Theme $Theme): array {
 		$fields = array();
 
 		foreach ($Theme->templates as $file) {
@@ -148,7 +148,7 @@ class Fields {
 	 * @param array $mask
 	 * @return array The sorted and filtered fields array
 	 */
-	private static function cleanUp(array $fields, array $mask = array()) {
+	private static function cleanUp(array $fields, array $mask = array()): array {
 		if (empty($fields)) {
 			return array();
 		}

@@ -55,7 +55,7 @@ class Dashboard {
 	 * @return string the rendered HTML
 	 */
 	public static function render() {
-		$fn = function ($expression) {
+		$fn = function (mixed $expression): string {
 			return $expression;
 		};
 

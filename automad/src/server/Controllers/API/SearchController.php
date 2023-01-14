@@ -60,7 +60,7 @@ class SearchController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function searchReplace() {
+	public static function searchReplace(): Response {
 		$Response = new Response();
 
 		$isRegex = filter_var(Request::post('isRegex'), FILTER_VALIDATE_BOOL);

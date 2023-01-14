@@ -51,17 +51,17 @@ class FileResults {
 	 *
 	 * @see FieldResults
 	 */
-	public $fieldResultsArray;
+	public array $fieldResultsArray;
 
 	/**
 	 * The file path.
 	 */
-	public $path;
+	public string $path;
 
 	/**
 	 * The page URL or an empty string for shared data.
 	 */
-	public $url;
+	public string $url;
 
 	/**
 	 * Initialize a new field results instance.
@@ -74,6 +74,6 @@ class FileResults {
 	public function __construct(string $path, array $fieldResultsArray, string $url = '') {
 		$this->path = $path;
 		$this->fieldResultsArray = $fieldResultsArray;
-		$this->url = (string) $url;
+		$this->url = $url;
 	}
 }

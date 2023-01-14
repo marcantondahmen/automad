@@ -57,7 +57,12 @@ class View {
 	/**
 	 * The main Automad instance.
 	 */
-	private $Automad;
+	private Automad $Automad;
+
+	/**
+	 * The template for the currently rendered view.
+	 */
+	private string $template;
 
 	/**
 	 * The view constructor.
@@ -86,7 +91,7 @@ class View {
 	 *
 	 * @return string the rendered page
 	 */
-	public function render() {
+	public function render(): string {
 		Debug::log($this->template, 'Render template');
 
 		$Runtime = new Runtime($this->Automad);

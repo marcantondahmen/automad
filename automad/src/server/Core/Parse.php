@@ -57,7 +57,7 @@ class Parse {
 	 * @param string $file
 	 * @return string the caption string
 	 */
-	public static function caption(string $file) {
+	public static function caption(string $file): string {
 		return FileUtils::caption($file);
 	}
 
@@ -67,7 +67,7 @@ class Parse {
 	 * @param string $str
 	 * @return array The array of separate and trimmed strings
 	 */
-	public static function csv(string $str) {
+	public static function csv(string $str): array {
 		$array = explode(AM_PARSE_STR_SEPARATOR, $str);
 		$array = array_filter($array, 'strlen');
 
@@ -83,7 +83,7 @@ class Parse {
 	 * @param string $file
 	 * @return array $vars
 	 */
-	public static function dataFile(string $file) {
+	public static function dataFile(string $file): array {
 		$vars = array();
 
 		if (!file_exists($file)) {
@@ -123,7 +123,7 @@ class Parse {
 	 * @param bool $stripBaseDir
 	 * @return array An array with resolved file paths
 	 */
-	public static function fileDeclaration(string $str, Page $Page, bool $stripBaseDir = false) {
+	public static function fileDeclaration(string $str, Page $Page, bool $stripBaseDir = false): array {
 		return FileUtils::fileDeclaration($str, $Page, $stripBaseDir);
 	}
 
@@ -133,8 +133,9 @@ class Parse {
 	 * @param string $str
 	 * @return array $options - associative array
 	 */
-	public static function jsonOptions(string $str) {
+	public static function jsonOptions(string $str): array {
 		$options = array();
+		$debug = array();
 
 		if ($str) {
 			$debug['String'] = $str;

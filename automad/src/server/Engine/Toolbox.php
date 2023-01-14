@@ -57,12 +57,12 @@ class Toolbox {
 	/**
 	 * Automad object.
 	 */
-	private $Automad;
+	private Automad $Automad;
 
 	/**
 	 * The full collection of pages.
 	 */
-	private $collection;
+	private array $collection;
 
 	/**
 	 * The Automad object is passed as an argument. It shouldn't be created again (performance).
@@ -84,35 +84,37 @@ class Toolbox {
 	 * @param array $options
 	 * @return string The HTML of a breadcrumb navigation
 	 */
-	public function breadcrumbs(array $options = array()) {
-		if ($this->Automad->Context->get()->level > 0) {
-			$options = 	array_merge(
-				array(
-					'class' => false,
-					'excludeHidden' => false
-				),
-				$options
-			);
-
-			$Selection = new Selection($this->collection);
-			$Selection->filterBreadcrumbs($this->Automad->Context->get()->url);
-
-			if ($options['class']) {
-				$class = ' class="' . $options['class'] . '"';
-			} else {
-				$class= '';
-			}
-
-			$html = '<ul' . $class . '>';
-
-			foreach ($Selection->getSelection($options['excludeHidden']) as $Page) {
-				$html .= '<li><a href="' . $Page->url . '">' . Str::stripTags($Page->get(AM_KEY_TITLE)) . '</a></li> ';
-			}
-
-			$html .= '</ul>';
-
-			return $html;
+	public function breadcrumbs(array $options = array()): string {
+		if (!$this->Automad->Context->get()->level) {
+			return '';
 		}
+
+		$options = array_merge(
+			array(
+				'class' => false,
+				'excludeHidden' => false
+			),
+			$options
+		);
+
+		$Selection = new Selection($this->collection);
+		$Selection->filterBreadcrumbs($this->Automad->Context->get()->url);
+
+		if ($options['class']) {
+			$class = ' class="' . $options['class'] . '"';
+		} else {
+			$class= '';
+		}
+
+		$html = '<ul' . $class . '>';
+
+		foreach ($Selection->getSelection($options['excludeHidden']) as $Page) {
+			$html .= '<li><a href="' . $Page->url . '">' . Str::stripTags($Page->get(AM_KEY_TITLE)) . '</a></li> ';
+		}
+
+		$html .= '</ul>';
+
+		return $html;
 	}
 
 	/**
@@ -120,7 +122,7 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function filelist(array $options = array()) {
+	public function filelist(array $options = array()): void {
 		$this->Automad->getFilelist()->config($options);
 	}
 
@@ -137,12 +139,12 @@ class Toolbox {
 	 * @param array $options - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1)
 	 * @return string The HTML for the image output
 	 */
-	public function img(array $options = array()) {
+	public function img(array $options = array()): string {
 		// Default options
 		$defaults = array(
 			'file' => false,
-			'width' => false,
-			'height' => false,
+			'width' => 0,
+			'height' => 0,
 			'crop' => false,
 			'class' => false
 		);
@@ -165,6 +167,8 @@ class Toolbox {
 				return '<img' . $class . ' src="' . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
 			}
 		}
+
+		return '';
 	}
 
 	/**
@@ -180,7 +184,7 @@ class Toolbox {
 	 * @param array $options
 	 * @return string The HTML of a navigation list
 	 */
-	public function nav(array $options = array()) {
+	public function nav(array $options = array()): string {
 		$defaults = array(
 			'context' => '/',
 			'homepage' => false,
@@ -240,7 +244,7 @@ class Toolbox {
 	 * @param array $options
 	 * @return string The HTML of the navigation list
 	 */
-	public function navChildren(array $options = array()) {
+	public function navChildren(array $options = array()): string {
 		// Always set 'context' to the current page's URL by merging that parameter with the other specified options.
 		return $this->nav(array_merge($options, array('context' => $this->Automad->Context->get()->url)));
 	}
@@ -252,7 +256,7 @@ class Toolbox {
 	 * @param array $options
 	 * @return string The HTML of the navigation list
 	 */
-	public function navSiblings(array $options = array()) {
+	public function navSiblings(array $options = array()): string {
 		// Set context to current parentUrl and overwrite passed options
 		return $this->nav(array_merge($options, array('context' => $this->Automad->Context->get()->parentUrl)));
 	}
@@ -264,7 +268,7 @@ class Toolbox {
 	 * @param array $options
 	 * @return string The HTML of the navigation list
 	 */
-	public function navTop(array $options = array()) {
+	public function navTop(array $options = array()): string {
 		// Set context to '/' and overwrite passed options.
 		return $this->nav(array_merge($options, array('context' => '/')));
 	}
@@ -283,7 +287,7 @@ class Toolbox {
 	 * @param array $options - (all: expand all pages (boolean), context: "/parenturl", rootLevel: integer)
 	 * @return string The HTML of the tree
 	 */
-	public function navTree(array $options = array()) {
+	public function navTree(array $options = array()): string {
 		$defaults = array(
 			'all' => true,
 			'context' => '',
@@ -356,6 +360,8 @@ class Toolbox {
 				return $html;
 			}
 		}
+
+		return '';
 	}
 
 	/**
@@ -364,7 +370,7 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function newPagelist(array $options = array()) {
+	public function newPagelist(array $options = array()): void {
 		$this->pagelist(array_merge($this->Automad->getPagelist()->getDefaults(), $options));
 	}
 
@@ -387,7 +393,7 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function pagelist(array $options = array()) {
+	public function pagelist(array $options = array()): void {
 		$this->Automad->getPagelist()->config($options);
 	}
 
@@ -406,9 +412,9 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function redirect(array $options) {
+	public function redirect(array $options): void {
 		$options = array_merge(array(
-			'url' => false,
+			'url' => '',
 			'code' => 302
 		), $options);
 
@@ -423,7 +429,7 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function set(array $options) {
+	public function set(array $options): void {
 		foreach ($options as $key => $value) {
 			if (preg_match('/' . PatternAssembly::$charClassAllVariables . '/', $key)) {
 				if (strpos($key, '%') === 0) {

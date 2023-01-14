@@ -54,17 +54,17 @@ class User {
 	/**
 	 * The user's email.
 	 */
-	public $email;
+	public string $email;
 
 	/**
 	 * The username.
 	 */
-	public $name;
+	public string $name;
 
 	/**
 	 * The encrypted password.
 	 */
-	private $passwordHash;
+	private string $passwordHash = '';
 
 	/**
 	 * The constructor.
@@ -84,7 +84,7 @@ class User {
 	 *
 	 * @return array the associative array of properties
 	 */
-	public function __serialize() {
+	public function __serialize(): array {
 		return array(
 			'name' => $this->name,
 			'email' => $this->email,
@@ -97,7 +97,7 @@ class User {
 	 *
 	 * @param array $properties
 	 */
-	public function __unserialize(array $properties) {
+	public function __unserialize(array $properties): void {
 		$properties = array_merge(array('email' => ''), $properties);
 
 		$this->name = $properties['name'];
@@ -114,7 +114,12 @@ class User {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function changePassword(string $currentPassword, string $newPassword, UserCollection $UserCollection, Messenger $Messenger) {
+	public function changePassword(
+		string $currentPassword,
+		string $newPassword,
+		UserCollection $UserCollection,
+		Messenger $Messenger
+	): bool {
 		if ($this->verifyPassword($currentPassword)) {
 			$this->setPasswordHash($newPassword);
 
@@ -137,7 +142,7 @@ class User {
 	 *
 	 * @return string the hashed password
 	 */
-	public function getPasswordHash() {
+	public function getPasswordHash(): string {
 		return $this->passwordHash;
 	}
 
@@ -150,7 +155,12 @@ class User {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function resetPassword(string $newPassword1, string $newPassword2, UserCollection $UserCollection, Messenger $Messenger) {
+	public function resetPassword(
+		string $newPassword1,
+		string $newPassword2,
+		UserCollection $UserCollection,
+		Messenger $Messenger
+	): bool {
 		if ($newPassword1 !== $newPassword2) {
 			$Messenger->setError(Text::get('passwordRepeatError'));
 
@@ -174,7 +184,7 @@ class User {
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function sendPasswordResetToken(Messenger $Messenger) {
+	public function sendPasswordResetToken(Messenger $Messenger): bool {
 		$email = $this->email;
 
 		if (!$email) {
@@ -187,7 +197,7 @@ class User {
 		$tokenHash = password_hash($token, PASSWORD_DEFAULT);
 		Session::setResetTokenHash($this->name, $tokenHash);
 
-		$website = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+		$website = $_SERVER['SERVER_NAME'] ?? '' . AM_BASE_URL;
 		$subject = 'Automad: ' . Text::get('emailResetPasswordSubject');
 		$message = PasswordResetEmail::render($website, $this->name, $token);
 		$headers = "MIME-Version: 1.0\r\n";
@@ -207,7 +217,7 @@ class User {
 	 *
 	 * @param string $password
 	 */
-	public function setPasswordHash(string $password) {
+	public function setPasswordHash(string $password): void {
 		$this->passwordHash = $this->hash($password);
 	}
 
@@ -217,7 +227,7 @@ class User {
 	 * @param string $password
 	 * @return bool true if the password is verified
 	 */
-	public function verifyPassword(string $password) {
+	public function verifyPassword(string $password): bool {
 		$hash = $this->passwordHash;
 
 		return ($hash === crypt($password, $hash));
@@ -229,12 +239,14 @@ class User {
 	 * @param string $token
 	 * @return bool true if verified
 	 */
-	public function verifyPasswordResetToken(string $token) {
+	public function verifyPasswordResetToken(string $token): bool {
 		$tokenHash = Session::getResetTokenHash($this->name);
 
 		if ($tokenHash) {
 			return password_verify($token, $tokenHash);
 		}
+
+		return false;
 	}
 
 	/**
@@ -243,7 +255,7 @@ class User {
 	 * @param string $password
 	 * @return string Hashed/salted password
 	 */
-	private function hash(string $password) {
+	private function hash(string $password): string {
 		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
 
 		return crypt($password, $salt);

@@ -52,52 +52,52 @@ class Theme {
 	/**
 	 * The theme author.
 	 */
-	public $author;
+	public string $author;
 
 	/**
 	 * The theme description.
 	 */
-	public $description = '';
+	public string $description = '';
 
 	/**
 	 * The theme license.
 	 */
-	public $license = '';
+	public string $license = '';
 
 	/**
 	 * A multidimensional mask array.
 	 */
-	public $masks = array();
+	public array $masks = array();
 
 	/**
 	 * The theme name.
 	 */
-	public $name;
+	public string $name;
 
 	/**
 	 * The theme path.
 	 */
-	public $path;
+	public string $path;
 
 	/**
-	 * The theme readme path.
+	 * The theme readme url.
 	 */
-	public $readme = '';
+	public string $readme = '';
 
 	/**
 	 * The templates array.
 	 */
-	public $templates = array();
+	public array $templates = array();
 
 	/**
 	 * The tooltips array.
 	 */
-	public $tooltips = array();
+	public array $tooltips = array();
 
 	/**
 	 * The theme version.
 	 */
-	public $version = '';
+	public string $version = '';
 
 	/**
 	 * The constructor.

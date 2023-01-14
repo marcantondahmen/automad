@@ -56,7 +56,7 @@ class SessionController {
 	 *
 	 * @return Response the Response object
 	 */
-	public static function login() {
+	public static function login(): Response {
 		$Response = new Response();
 
 		if (Session::login(Request::post('name-or-email'), Request::post('password'))) {
@@ -71,14 +71,14 @@ class SessionController {
 	 *
 	 * @return Response the Response object
 	 */
-	public static function logout() {
+	public static function logout(): Response {
 		$Response = new Response();
 
 		if (Session::logout()) {
-			$Response->setSuccess(Text::get('signedOutSuccess'));
-
-			return $Response->setRedirect('login');
+			$Response->setSuccess(Text::get('signedOutSuccess'))->setRedirect('login');
 		}
+
+		return $Response;
 	}
 
 	/**

@@ -57,31 +57,33 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
-		if (!empty($matches['forSnippet'])) {
-			$start = intval($this->ContentProcessor->processVariables($matches['forStart']));
-			$end = intval($this->ContentProcessor->processVariables($matches['forEnd']));
-			$html = '';
-
-			$TemplateProcessor = $this->initTemplateProcessor();
-
-			// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
-			$runtimeShelf = $this->Runtime->shelve();
-
-			// The loop.
-			for ($i = $start; $i <= $end; $i++) {
-				// Set index variable. The index can be used as @{:i}.
-				$this->Runtime->set(AM_KEY_LOOP_INDEX, $i);
-				// Parse snippet.
-				Debug::log($i, 'Processing snippet in loop for index');
-				$html .= $TemplateProcessor->process($matches['forSnippet'], $directory, $collectSnippetDefinitions);
-			}
-
-			// Restore index.
-			$this->Runtime->unshelve($runtimeShelf);
-
-			return $html;
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+		if (empty($matches['forSnippet'])) {
+			return '';
 		}
+
+		$start = intval($this->ContentProcessor->processVariables($matches['forStart']));
+		$end = intval($this->ContentProcessor->processVariables($matches['forEnd']));
+		$html = '';
+
+		$TemplateProcessor = $this->initTemplateProcessor();
+
+		// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
+		$runtimeShelf = $this->Runtime->shelve();
+
+		// The loop.
+		for ($i = $start; $i <= $end; $i++) {
+			// Set index variable. The index can be used as @{:i}.
+			$this->Runtime->set(AM_KEY_LOOP_INDEX, $i);
+			// Parse snippet.
+			Debug::log($i, 'Processing snippet in loop for index');
+			$html .= $TemplateProcessor->process($matches['forSnippet'], $directory, $collectSnippetDefinitions);
+		}
+
+		// Restore index.
+		$this->Runtime->unshelve($runtimeShelf);
+
+		return $html;
 	}
 
 	/**
@@ -89,7 +91,7 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @return string the for loop pattern
 	 */
-	public static function syntaxPattern() {
+	public static function syntaxPattern(): string {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 

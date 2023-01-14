@@ -79,30 +79,30 @@ class Cache {
 	/**
 	 * The status of the Automad object cache.
 	 */
-	private $automadObjectCachingIsEnabled = false;
+	private bool $automadObjectCachingIsEnabled = false;
 
 	/**
 	 * The filename for the object cache.
 	 * Note that in order to correctly handle caching of private pages,
 	 * a separate cache file is used when a user is in.
 	 */
-	private $objectCacheFile;
+	private string $objectCacheFile = '';
 
 	/**
 	 * The determined matching file of the cached version of the currently visited page.
 	 */
-	private $pageCacheFile;
+	private string $pageCacheFile = '';
 
 	/**
 	 * In contrast to the AM_CACHE_ENABLED constant, this variable is only for
 	 * storing the status of the page cache, independent from the Automad object cache.
 	 */
-	private $pageCachingIsEnabled = false;
+	private bool $pageCachingIsEnabled = false;
 
 	/**
 	 * The latest modification time of the whole website (any file or directory).
 	 */
-	private $siteMTime;
+	private ?int $siteMTime = null;
 
 	/**
 	 * The constructor checks whether caching is enabled for the current request and
@@ -116,46 +116,48 @@ class Cache {
 	 * the template would not be parsed again.
 	 */
 	public function __construct() {
-		if (AM_CACHE_ENABLED) {
-			// Get the site's mTime.
-			$this->siteMTime = $this->getSiteMTime();
-
-			// Define boolean variable for the Automad object cache status.
-			$this->automadObjectCachingIsEnabled = true;
-
-			// Define boolean variable for page cache status only,
-			// independent from the Automad object cache.
-			$this->pageCachingIsEnabled = true;
-
-			// Define object cache file for visitors.
-			$this->objectCacheFile = AM_FILE_OBJECT_CACHE;
-
-			// Disable page caching for in-page edit mode and define ui cache file.
-			if (Session::getUsername()) {
-				$this->pageCachingIsEnabled = false;
-				Debug::log('Page cache is disabled during editing.');
-				$this->objectCacheFile = AM_FILE_OBJECT_API_CACHE;
-				Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
-			}
-
-			// Disable page caching $_GET is not empty.
-			if (!empty($_GET)) {
-				Debug::log($_GET, '$_GET is not empty! Disable page caching.');
-				$this->pageCachingIsEnabled = false;
-			}
-
-			// Disable page caching $_POST is not empty.
-			if (!empty($_POST)) {
-				Debug::log($_POST, '$_POST is not empty! Disable page caching.');
-				$this->pageCachingIsEnabled = false;
-			}
-
-			// Get page cache file path in case page caching is enabled.
-			if ($this->pageCachingIsEnabled) {
-				$this->pageCacheFile = $this->getPageCacheFilePath();
-			}
-		} else {
+		if (!AM_CACHE_ENABLED) {
 			Debug::log('Caching is disabled!');
+
+			return;
+		}
+
+		// Get the site's mTime.
+		$this->siteMTime = $this->getSiteMTime();
+
+		// Define boolean variable for the Automad object cache status.
+		$this->automadObjectCachingIsEnabled = true;
+
+		// Define boolean variable for page cache status only,
+		// independent from the Automad object cache.
+		$this->pageCachingIsEnabled = true;
+
+		// Define object cache file for visitors.
+		$this->objectCacheFile = AM_FILE_OBJECT_CACHE;
+
+		// Disable page caching for in-page edit mode and define ui cache file.
+		if (Session::getUsername()) {
+			$this->pageCachingIsEnabled = false;
+			Debug::log('Page cache is disabled during editing.');
+			$this->objectCacheFile = AM_FILE_OBJECT_API_CACHE;
+			Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
+		}
+
+		// Disable page caching $_GET is not empty.
+		if (!empty($_GET)) {
+			Debug::log($_GET, '$_GET is not empty! Disable page caching.');
+			$this->pageCachingIsEnabled = false;
+		}
+
+		// Disable page caching $_POST is not empty.
+		if (!empty($_POST)) {
+			Debug::log($_POST, '$_POST is not empty! Disable page caching.');
+			$this->pageCachingIsEnabled = false;
+		}
+
+		// Get page cache file path in case page caching is enabled.
+		if ($this->pageCachingIsEnabled) {
+			$this->pageCacheFile = $this->getPageCacheFilePath();
 		}
 	}
 
@@ -169,38 +171,45 @@ class Cache {
 	 *
 	 * @return bool
 	 */
-	public function automadObjectCacheIsApproved() {
-		if ($this->automadObjectCachingIsEnabled) {
-			if (file_exists($this->objectCacheFile)) {
-				$automadObjectMTime = filemtime($this->objectCacheFile);
+	public function automadObjectCacheIsApproved(): bool {
+		if (!$this->automadObjectCachingIsEnabled) {
+			Debug::log('Automad object caching is disabled! Not checking Automad object!');
 
-				// Check if object didn't reach the cache's lifetime yet.
-				if (($automadObjectMTime + AM_CACHE_LIFETIME) > time()) {
-					// Check if object is newer than the site's mTime.
-					if ($automadObjectMTime > $this->siteMTime) {
-						Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache got approved! Object cache mTime');
+			return false;
+		}
 
-						return true;
-					}
-
-					Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the site got modified! Object cache mTime');
-
-					return false;
-				}
-
-				Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the cached object reached maximum lifetime! Object cache mTime');
-
-				return false;
-			}
-
+		if (!file_exists($this->objectCacheFile)) {
 			Debug::log('Automad object cache does not exist!');
 
 			return false;
 		}
 
-		Debug::log('Automad object caching is disabled! Not checking Automad object!');
+		$automadObjectMTime = filemtime($this->objectCacheFile);
 
-		return false;
+		if (($automadObjectMTime + AM_CACHE_LIFETIME) <= time()) {
+			Debug::log(
+				date('d. M Y, H:i:s', $automadObjectMTime),
+				'Automad object cache has expired - maximum lifetime reached! Object cache mTime'
+			);
+
+			return false;
+		}
+
+		if ($automadObjectMTime <= $this->siteMTime) {
+			Debug::log(
+				date('d. M Y, H:i:s', $automadObjectMTime),
+				'Automad object cache has expired - content has changed! Object cache mTime'
+			);
+
+			return false;
+		}
+
+		Debug::log(
+			date('d. M Y, H:i:s', $automadObjectMTime),
+			'Automad object cache is approved! Object cache mTime'
+		);
+
+		return true;
 	}
 
 	/**
@@ -209,7 +218,7 @@ class Cache {
 	 * and doesn't require any cache instance. It therefore should be static in order to avoid unneeded
 	 * scanning of files when creating a new cache object.
 	 */
-	public static function clear() {
+	public static function clear(): void {
 		Debug::log('Resetting the site modification time');
 		Cache::writeSiteMTime(time());
 	}
@@ -238,9 +247,9 @@ class Cache {
 	 * That time basically represents the site's modification time, to find out the lastes edit/removal/add of a page.
 	 * To be efficient under heavy traffic, the Site-mTime only gets re-determined after a certain delay.
 	 *
-	 * @return number The latest found mtime, which equal basically the site's modification time.
+	 * @return int The latest found mtime, which equal basically the site's modification time.
 	 */
-	public function getSiteMTime() {
+	public function getSiteMTime(): int {
 		if ((@filemtime(AM_FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
 			// The modification times get only checked every AM_CACHE_MONITOR_DELAY seconds, since
 			// the process of collecting all mtimes itself takes some time too.
@@ -297,11 +306,13 @@ class Cache {
 			Debug::log($lastModifiedItem, 'Last modified item');
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime');
 			Cache::writeSiteMTime($siteMTime);
-		} else {
-			// In between this delay, it just gets loaded from a file.
-			$siteMTime = Cache::readSiteMTime();
-			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime is');
+
+			return $siteMTime;
 		}
+
+		// In between this delay, it just gets loaded from a file.
+		$siteMTime = Cache::readSiteMTime();
+		Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime is');
 
 		return $siteMTime;
 	}
@@ -316,49 +327,53 @@ class Cache {
 	 *
 	 * @return bool True, if the cached version is valid.
 	 */
-	public function pageCacheIsApproved() {
-		if ($this->pageCachingIsEnabled) {
-			if (file_exists($this->pageCacheFile)) {
-				$cacheMTime = filemtime($this->pageCacheFile);
+	public function pageCacheIsApproved(): bool {
+		if (!$this->pageCachingIsEnabled) {
+			Debug::log('Page caching is disabled! Not checking page cache!');
 
-				// Check if page didn't reach the cache's lifetime yet.
-				if (($cacheMTime + AM_CACHE_LIFETIME) > time()) {
-					// Check if page is newer than the site's mTime.
-					if ($cacheMTime > $this->siteMTime) {
-						// If the cached page is newer and didn't reach the cache's lifetime, it gets approved.
-						Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache got approved! Page cache mTime');
+			return false;
+		}
 
-						return true;
-					}
-
-					// If the cached page is older than the site's mTime,
-					// the cache gets no approval.
-					Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The site got modified! Page cache mTime');
-
-					return false;
-				}
-
-				Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The cached page reached maximum lifetime! Page cache mTime');
-
-				return false;
-			}
-
+		if (!file_exists($this->pageCacheFile)) {
 			Debug::log('Page cache does not exist!');
 
 			return false;
 		}
 
-		Debug::log('Page caching is disabled! Not checking page cache!');
+		$cacheMTime = filemtime($this->pageCacheFile);
 
-		return false;
+		if (($cacheMTime + AM_CACHE_LIFETIME) <= time()) {
+			Debug::log(
+				date('d. M Y, H:i:s', $cacheMTime),
+				'Page cache has expired - maximum lifetime reached! Page cache mTime'
+			);
+
+			return false;
+		}
+
+		if ($cacheMTime <= $this->siteMTime) {
+			Debug::log(
+				date('d. M Y, H:i:s', $cacheMTime),
+				'Page cache has expired - content has changed! Page cache mTime'
+			);
+
+			return false;
+		}
+
+		Debug::log(
+			date('d. M Y, H:i:s', $cacheMTime),
+			'Page cache is approved! Page cache mTime'
+		);
+
+		return true;
 	}
 
 	/**
 	 * Read (unserialize) the Automad object from $this->objectCacheFile and update the context to the requested page.
 	 *
-	 * @return object Automad object
+	 * @return Automad Automad object
 	 */
-	public function readAutomadObjectFromCache() {
+	public function readAutomadObjectFromCache(): Automad {
 		Debug::log($this->objectCacheFile, 'Reading cached Automad object from');
 
 		return unserialize(file_get_contents($this->objectCacheFile));
@@ -369,7 +384,7 @@ class Cache {
 	 *
 	 * @return string The full cached HTML of the page.
 	 */
-	public function readPageFromCache() {
+	public function readPageFromCache(): string {
 		Debug::log($this->pageCacheFile, 'Reading cached page from');
 
 		return file_get_contents($this->pageCacheFile);
@@ -381,7 +396,7 @@ class Cache {
 	 *
 	 * @return int The site's modification time.
 	 */
-	public static function readSiteMTime() {
+	public static function readSiteMTime(): int {
 		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
 
 		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
@@ -392,20 +407,22 @@ class Cache {
 	 *
 	 * @param Automad $Automad
 	 */
-	public function writeAutomadObjectToCache(Automad $Automad) {
-		if ($this->automadObjectCachingIsEnabled) {
-			FileSystem::write($this->objectCacheFile, serialize($Automad));
-			Debug::log($this->objectCacheFile, 'Automad object written to');
-
-			// Only non-forwarded (no proxy) sites.
-			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
-				$c = curl_init();
-				curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => getenv('SERVER_NAME') . AM_BASE_URL, 'version' => AM_VERSION, 'serverSoftware' => getenv('SERVER_SOFTWARE')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
-				curl_exec($c);
-				curl_close($c);
-			}
-		} else {
+	public function writeAutomadObjectToCache(Automad $Automad): void {
+		if (!$this->automadObjectCachingIsEnabled) {
 			Debug::log('Automad object caching is disabled! Not writing Automad object to cache!');
+
+			return;
+		}
+
+		FileSystem::write($this->objectCacheFile, serialize($Automad));
+		Debug::log($this->objectCacheFile, 'Automad object written to');
+
+		// Only non-forwarded (no proxy) sites.
+		if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+			$c = curl_init();
+			curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => getenv('SERVER_NAME') . AM_BASE_URL, 'version' => AM_VERSION, 'serverSoftware' => getenv('SERVER_SOFTWARE')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
+			curl_exec($c);
+			curl_close($c);
 		}
 	}
 
@@ -414,13 +431,15 @@ class Cache {
 	 *
 	 * @param string $output
 	 */
-	public function writePageToCache(string $output) {
-		if ($this->pageCachingIsEnabled) {
-			FileSystem::write($this->pageCacheFile, $output);
-			Debug::log($this->pageCacheFile, 'Page written to');
-		} else {
+	public function writePageToCache(string $output): void {
+		if (!$this->pageCachingIsEnabled) {
 			Debug::log('Page caching is disabled! Not writing page to cache!');
+
+			return;
 		}
+
+		FileSystem::write($this->pageCacheFile, $output);
+		Debug::log($this->pageCacheFile, 'Page written to');
 	}
 
 	/**
@@ -429,7 +448,7 @@ class Cache {
 	 * @param string $dir
 	 * @return array The array of directories including the given directory itself
 	 */
-	private function getDirectoriesRecursively(string $dir) {
+	private function getDirectoriesRecursively(string $dir): array {
 		$dirs = array($dir);
 
 		foreach (FileSystem::glob($dir . '/*', GLOB_ONLYDIR) as $d) {
@@ -450,7 +469,7 @@ class Cache {
 	 *
 	 * @return string The determined file name of the matching cached version of the visited page.
 	 */
-	private function getPageCacheFilePath() {
+	private function getPageCacheFilePath(): string {
 		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
 		$currentPath = rtrim(AM_REQUEST, '/');
 
@@ -475,6 +494,10 @@ class Cache {
 			$serverName = getenv('SERVER_NAME');
 		}
 
+		if (!$serverName) {
+			$serverName = '';
+		}
+
 		$pageCacheFile = 	AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' .
 							$serverName . AM_BASE_URL . $currentPath . '/' .
 							AM_FILE_PREFIX_CACHE . $sessionDataHash . '.' . AM_FILE_EXT_PAGE_CACHE;
@@ -491,7 +514,7 @@ class Cache {
 	 *
 	 * @param int $siteMTime
 	 */
-	private static function writeSiteMTime(int $siteMTime) {
+	private static function writeSiteMTime(int $siteMTime): void {
 		FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
 		Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
 	}

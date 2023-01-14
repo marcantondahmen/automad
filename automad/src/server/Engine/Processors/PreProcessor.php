@@ -54,7 +54,7 @@ class PreProcessor {
 	 * @param string $str
 	 * @return string The preprocessed string where all outer opening statement delimiters get an additional marker appended.
 	 */
-	public static function prepareWrappingStatements(string $str) {
+	public static function prepareWrappingStatements(string $str): string {
 		$depth = 0;
 		$regex = 	'/(' .
 					'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|for|foreach|with|snippet)\s.*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
@@ -93,7 +93,7 @@ class PreProcessor {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	public static function stripWhitespace(string $str) {
+	public static function stripWhitespace(string $str): string {
 		$str = preg_replace('/\s*(' . preg_quote(AM_DEL_STATEMENT_OPEN) . ')~/is', '$1', $str);
 		$str = preg_replace('/~(' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
 

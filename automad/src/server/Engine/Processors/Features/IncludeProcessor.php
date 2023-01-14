@@ -57,20 +57,24 @@ class IncludeProcessor extends AbstractFeatureProcessor {
 	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
-		if (!empty($matches['file'])) {
-			Debug::log($matches['file'], 'Matched include');
-			$file = $directory . '/' . $matches['file'];
-
-			if (file_exists($file)) {
-				Debug::log($file, 'Including');
-				$TemplateProcessor = $this->initTemplateProcessor();
-
-				return $TemplateProcessor->process($this->Automad->loadTemplate($file), dirname($file), $collectSnippetDefinitions);
-			} else {
-				Debug::log($file, 'File not found');
-			}
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+		if (empty($matches['file'])) {
+			return '';
 		}
+
+		Debug::log($matches['file'], 'Matched include');
+		$file = $directory . '/' . $matches['file'];
+
+		if (file_exists($file)) {
+			Debug::log($file, 'Including');
+			$TemplateProcessor = $this->initTemplateProcessor();
+
+			return $TemplateProcessor->process($this->Automad->loadTemplate($file), dirname($file), $collectSnippetDefinitions);
+		}
+
+		Debug::log($file, 'File not found');
+
+		return '';
 	}
 
 	/**
@@ -78,7 +82,7 @@ class IncludeProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @return string the regex pattern that matches include statements
 	 */
-	public static function syntaxPattern() {
+	public static function syntaxPattern(): string {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 

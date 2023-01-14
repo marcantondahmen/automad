@@ -87,12 +87,12 @@ class Extension {
 	/**
 	 * The array of found assets.
 	 */
-	private $assets = array();
+	private array $assets = array();
 
 	/**
-	 * The retured output of the extension.
+	 * The returned output of the extension.
 	 */
-	private $output = false;
+	private string $output = '';
 
 	/**
 	 * Create an instance of the given extension, call the extension method and look for all needed assets.
@@ -153,7 +153,7 @@ class Extension {
 	 *
 	 * @return array The array of files
 	 */
-	public function getAssets() {
+	public function getAssets(): array {
 		return $this->assets;
 	}
 
@@ -162,7 +162,7 @@ class Extension {
 	 *
 	 * @return string The output returned by the extension
 	 */
-	public function getOutput() {
+	public function getOutput(): string {
 		return $this->output;
 	}
 
@@ -171,7 +171,7 @@ class Extension {
 	 *
 	 * @param string $class
 	 */
-	private function collectAssets(string $class) {
+	private function collectAssets(string $class): void {
 		$Reflection = new \ReflectionClass($class);
 		$path = dirname($Reflection->getFileName());
 		Debug::log($path, 'Getting assets for ' . $class . ' in');

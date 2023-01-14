@@ -64,7 +64,7 @@ class Console {
 	 *
 	 * @return array the list of command objects
 	 */
-	private function getCommands() {
+	private function getCommands(): array {
 		$files = FileSystem::glob(AM_BASE_DIR . '/automad/src/server/Console/Commands/*.php');
 
 		foreach ($files as $file) {
@@ -93,7 +93,7 @@ class Console {
 	 *
 	 * @param array $commands
 	 */
-	private function help(array $commands) {
+	private function help(array $commands): void {
 		echo PHP_EOL . 'Commands: ' . PHP_EOL;
 
 		foreach ($commands as $name => $command) {
@@ -106,7 +106,7 @@ class Console {
 	 *
 	 * @param array $argv
 	 */
-	private function runCommand(array $argv) {
+	private function runCommand(array $argv): void {
 		$commands = $this->getCommands();
 
 		if (empty($argv[1])) {

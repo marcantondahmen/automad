@@ -55,7 +55,7 @@ class PageController {
 	 *
 	 * @return string
 	 */
-	public static function render() {
+	public static function render(): string {
 		$Cache = new Cache();
 
 		if ($Cache->pageCacheIsApproved()) {

@@ -63,7 +63,7 @@ class Selection {
 	 * $selection is basically the internal working copy of the collection array.
 	 * It can be sorted and filtered without hurting the original collection.
 	 */
-	private $selection = array();
+	private array $selection = array();
 
 	/**
 	 * Pass a set of pages to $this->selection excluding all hidden pages.
@@ -77,7 +77,7 @@ class Selection {
 	/**
 	 * Exclude the current page from the selection.
 	 */
-	public function excludeCurrent() {
+	public function excludeCurrent(): void {
 		$this->excludePage(AM_REQUEST);
 	}
 
@@ -86,7 +86,7 @@ class Selection {
 	 *
 	 * @param string $url
 	 */
-	public function excludePage(string $url) {
+	public function excludePage(string $url): void {
 		if ($url && array_key_exists($url, $this->selection)) {
 			unset($this->selection[$url]);
 		}
@@ -97,7 +97,7 @@ class Selection {
 	 *
 	 * @param string $url
 	 */
-	public function filterBreadcrumbs(string $url) {
+	public function filterBreadcrumbs(string $url): void {
 		// Test wheter $url is the URL of a real page.
 		// "Real" pages have a URL (not like search or error pages) and they exist in the selection array (not hidden).
 		// For all other $url, just the home page will be returned.
@@ -108,7 +108,7 @@ class Selection {
 			// add the corresponding Page object to $pages.
 			while ($url != '/') {
 				$pages[$url] = $this->selection[$url];
-				$url = '/' . trim(substr($url, 0, strrpos($url, '/')), '/');
+				$url = '/' . trim(substr($url, 0, (int) strrpos($url, '/')), '/');
 			}
 
 			// Add home page
@@ -129,7 +129,7 @@ class Selection {
 	 *
 	 * @param string $str
 	 */
-	public function filterByKeywords(string $str) {
+	public function filterByKeywords(string $str): void {
 		if ($str) {
 			$filtered = array();
 
@@ -165,7 +165,7 @@ class Selection {
 	 *
 	 * @param string $parent
 	 */
-	public function filterByParentUrl(string $parent) {
+	public function filterByParentUrl(string $parent): void {
 		$filtered = array();
 
 		foreach ($this->selection as $key => $Page) {
@@ -183,7 +183,7 @@ class Selection {
 	 *
 	 * @param string $tag
 	 */
-	public function filterByTag(string $tag) {
+	public function filterByTag(string $tag): void {
 		if ($tag) {
 			$filtered = array();
 
@@ -204,7 +204,7 @@ class Selection {
 	 *
 	 * @param string $regex
 	 */
-	public function filterByTemplate(string $regex) {
+	public function filterByTemplate(string $regex): void {
 		if ($regex) {
 			$filtered = array();
 
@@ -227,7 +227,7 @@ class Selection {
 	 *
 	 * @param string $url
 	 */
-	public function filterPrevAndNextToUrl(string $url) {
+	public function filterPrevAndNextToUrl(string $url): void {
 		if (array_key_exists($url, $this->selection)) {
 			// To be able to hide the hidden pages as neighbors and jump directly to the closest non-hidden pages (both sides),
 			// in case one or both neigbors is/are hidden, $this->excludeHidden() has to be called here already, because only excluding the hidden pages
@@ -251,7 +251,7 @@ class Selection {
 			if (sizeof($keys) > 1) {
 				if (sizeof($keys) > 2) {
 					// Previous
-					if (isset($keys[$keyIndexes[$url]-1])) {
+					if ($keyIndexes[$url] > 0 && isset($keys[$keyIndexes[$url]-1])) {
 						$neighbors['prev'] = $this->selection[$keys[$keyIndexes[$url]-1]];
 					} else {
 						$neighbors['prev'] = $this->selection[$keys[sizeof($keys)-1]];
@@ -276,7 +276,7 @@ class Selection {
 	 *
 	 * @param Page $Page
 	 */
-	public function filterRelated(Page $Page) {
+	public function filterRelated(Page $Page): void {
 		$tags = $Page->tags;
 
 		$filtered = array();
@@ -301,10 +301,15 @@ class Selection {
 	 * @param bool $excludeHidden
 	 * @param bool $excludeCurrent
 	 * @param int $offset
-	 * @param int $limit
+	 * @param int|null $limit
 	 * @return array $this->selection
 	 */
-	public function getSelection(bool $excludeHidden = true, bool $excludeCurrent = false, int $offset = 0, ?int $limit = null) {
+	public function getSelection(
+		bool $excludeHidden = true,
+		bool $excludeCurrent = false,
+		int $offset = 0,
+		?int $limit = null
+	): array {
 		if ($excludeHidden) {
 			$this->excludeHidden();
 		}
@@ -320,23 +325,21 @@ class Selection {
 	 * While iterating a set of variable/regex combinations in $options, all pages where
 	 * a given variable is not matching its assigned regex are removed from the selection.
 	 *
-	 * @param array $options
+	 * @param array|null $options
 	 */
-	public function match(?array $options) {
+	public function match(?array $options): void {
 		if (empty($options)) {
-			return false;
+			return;
 		}
 
-		if (is_array($options)) {
-			foreach ($options as $key => $regex) {
-				if (@preg_match($regex, null) !== false) {
-					$this->selection = array_filter(
-						$this->selection,
-						function ($Page) use ($key, $regex) {
-							return preg_match($regex, $Page->get($key));
-						}
-					);
-				}
+		foreach ($options as $key => $regex) {
+			if (@preg_match($regex, '') !== false) {
+				$this->selection = array_filter(
+					$this->selection,
+					function ($Page) use ($key, $regex) {
+						return preg_match($regex, $Page->get($key));
+					}
+				);
 			}
 		}
 	}
@@ -354,7 +357,7 @@ class Selection {
 	 *
 	 * @param string|null $options
 	 */
-	public function sortPages(?string $options = null) {
+	public function sortPages(?string $options = null): void {
 		$sort = array();
 		$parameters = array();
 
@@ -409,7 +412,7 @@ class Selection {
 	/**
 	 * Exclude all hidden pages from the selection.
 	 */
-	private function excludeHidden() {
+	private function excludeHidden(): void {
 		foreach ($this->selection as $url => $Page) {
 			if ($Page->hidden) {
 				unset($this->selection[$url]);

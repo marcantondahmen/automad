@@ -53,7 +53,7 @@ class FileUtils {
 	 *
 	 * @return array An array of file types
 	 */
-	public static function allowedFileTypes() {
+	public static function allowedFileTypes(): array {
 		return Parse::csv(AM_ALLOWED_FILE_TYPES);
 	}
 
@@ -65,7 +65,7 @@ class FileUtils {
 	 * @param string $file
 	 * @return string The caption string
 	 */
-	public static function caption(string $file) {
+	public static function caption(string $file): string {
 		// Build filename of the caption file.
 		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
 		Debug::log($captionFile);
@@ -88,7 +88,7 @@ class FileUtils {
 	 * @param bool $stripBaseDir
 	 * @return array An array with resolved file paths
 	 */
-	public static function fileDeclaration(string $str, Page $Page, bool $stripBaseDir = false) {
+	public static function fileDeclaration(string $str, Page $Page, bool $stripBaseDir = false): array {
 		$files = array();
 
 		if ($str) {
@@ -106,7 +106,7 @@ class FileUtils {
 			}
 
 			if ($stripBaseDir) {
-				array_walk($files, function (&$file) {
+				array_walk($files, function (string &$file) {
 					$file = Str::stripStart($file, AM_BASE_DIR);
 				});
 			}
@@ -121,7 +121,7 @@ class FileUtils {
 	 * @param string $file
 	 * @return bool True if $file is an image file
 	 */
-	public static function fileIsImage(string $file) {
+	public static function fileIsImage(string $file): bool {
 		return (in_array(FileSystem::getExtension($file), self::imageFileTypes()));
 	}
 
@@ -130,7 +130,7 @@ class FileUtils {
 	 *
 	 * @return array the valid image file types
 	 */
-	public static function imageFileTypes() {
+	public static function imageFileTypes(): array {
 		return array('jpg', 'jpeg', 'png', 'gif', 'webp');
 	}
 }

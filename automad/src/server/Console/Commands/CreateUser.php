@@ -54,7 +54,7 @@ class CreateUser extends AbstractCommand {
 	 *
 	 * @return string the command help
 	 */
-	public static function help() {
+	public static function help(): string {
 		return 'Create a new user with a random name and password.';
 	}
 
@@ -63,14 +63,14 @@ class CreateUser extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name() {
+	public static function name(): string {
 		return 'createuser';
 	}
 
 	/**
 	 * The actual command action.
 	 */
-	public static function run() {
+	public static function run(): void {
 		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
 
 		$UserCollection = new UserCollection();

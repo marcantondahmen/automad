@@ -68,7 +68,7 @@ class Str {
 	 * @param string|null $locale
 	 * @return string The formatted date
 	 */
-	public static function dateFormat(string $date, string $format = 'D, d M Y', ?string $locale = null) {
+	public static function dateFormat(string $date, string $format = 'D, d M Y', ?string $locale = null): string {
 		if (!$date || !$format) {
 			return '';
 		}
@@ -98,7 +98,7 @@ class Str {
 	 * @param string $defaultValue
 	 * @return string The default value
 	 */
-	public static function def(string $str, string $defaultValue = '') {
+	public static function def(string $str, string $defaultValue = ''): string {
 		if (trim($str) === '') {
 			$str = $defaultValue;
 		}
@@ -112,7 +112,7 @@ class Str {
 	 * @param string $str
 	 * @return string The escaped string
 	 */
-	public static function escape(string $str) {
+	public static function escape(string $str): string {
 		// The json_encode() function is used to create a valid JSON string
 		// with only one temporary key.
 		// After getting that JSON string, the key, the brackets and quotes
@@ -131,7 +131,7 @@ class Str {
 	 * @param string $str
 	 * @return string The URL of the first image or an empty string
 	 */
-	public static function findFirstImage(string $str) {
+	public static function findFirstImage(string $str): string {
 		if (!$str) {
 			return '';
 		}
@@ -151,7 +151,7 @@ class Str {
 	 * @param string $str
 	 * @return string The inner HTML of the first paragraph or an empty string
 	 */
-	public static function findFirstParagraph(string $str) {
+	public static function findFirstParagraph(string $str): string {
 		if (!$str) {
 			return '';
 		}
@@ -174,7 +174,7 @@ class Str {
 	 * @param bool $multilineOnly
 	 * @return string The parsed string
 	 */
-	public static function markdown(string $str, $multilineOnly = false) {
+	public static function markdown(string $str, $multilineOnly = false): string {
 		// In case $str has no line breaks and $multilineOnly is enabled, skip parsing.
 		if (strpos($str, "\n") === false && $multilineOnly) {
 			return $str;
@@ -196,7 +196,7 @@ class Str {
 	 * @param string $regex
 	 * @return int 1 or 0
 	 */
-	public static function match(string $str, string $regex = '') {
+	public static function match(string $str, string $regex = ''): int {
 		return preg_match($regex, $str);
 	}
 
@@ -208,7 +208,7 @@ class Str {
 	 * @param string $replace
 	 * @return string The processed string
 	 */
-	public static function replace(string $str, string $regex = '', string $replace = '') {
+	public static function replace(string $str, string $regex = '', string $replace = ''): string {
 		return preg_replace($regex, $replace, $str);
 	}
 
@@ -225,7 +225,7 @@ class Str {
 	 * @param int $maxChars
 	 * @return string The sanitized string
 	 */
-	public static function sanitize(string $str, $removeDots = false, $maxChars = 100) {
+	public static function sanitize(string $str, $removeDots = false, $maxChars = 100): string {
 		if (strlen($str) === 0) {
 			return '';
 		}
@@ -262,7 +262,7 @@ class Str {
 	 * @param string $ellipsis
 	 * @return string The shortened string
 	 */
-	public static function shorten(string $str, $maxChars, string $ellipsis = ' ...') {
+	public static function shorten(string $str, $maxChars, string $ellipsis = ' ...'): string {
 		if (strlen($str) === 0) {
 			return '';
 		}
@@ -277,9 +277,15 @@ class Str {
 			// where $maxChars is exactly an end of a word. +1 would than
 			// be a space.
 			$str = substr($str, 0, $maxChars + 1);
+
 			// Find last space and get position.
 			$pos = strrpos($str, ' ');
-			// Cut $str again at last space's position (< $maxChars).
+
+			// If there is no space left, use the original $maxChars (without +1) as $pos.
+			if (!$pos) {
+				$pos = $maxChars;
+			}
+
 			$str = substr($str, 0, $pos) . $ellipsis;
 		}
 
@@ -297,7 +303,7 @@ class Str {
 	 * @param int $maxChars
 	 * @return string the slug
 	 */
-	public static function slug(string $str, $removeDots = false, $maxChars = 100) {
+	public static function slug(string $str, $removeDots = false, $maxChars = 100): string {
 		if (strlen($str) === 0) {
 			return '';
 		}
@@ -318,7 +324,7 @@ class Str {
 	 * @param string $end
 	 * @return string The processed string
 	 */
-	public static function stripEnd(string $str, string $end = '') {
+	public static function stripEnd(string $str, string $end = ''): string {
 		return preg_replace('/' . preg_quote($end, '/') . '$/', '', $str);
 	}
 
@@ -329,7 +335,7 @@ class Str {
 	 * @param string $start
 	 * @return string The processed string
 	 */
-	public static function stripStart(string $str, string $start = '') {
+	public static function stripStart(string $str, string $start = ''): string {
 		return preg_replace('/^' . preg_quote($start, '/') . '/', '', $str);
 	}
 
@@ -339,7 +345,7 @@ class Str {
 	 * @param string $str
 	 * @return string The clean string
 	 */
-	public static function stripTags(string $str) {
+	public static function stripTags(string $str): string {
 		return trim(strip_tags(Str::markdown(strip_tags($str))));
 	}
 }

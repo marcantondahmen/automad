@@ -59,14 +59,14 @@ class Routes {
 	/**
 	 * An array of reserved routes that can't be used by any page.
 	 */
-	public static $registered = array();
+	public static array $registered = array();
 
 	/**
 	 * Register routes to a giver Router.
 	 *
 	 * @param Router $Router
 	 */
-	public static function init(Router $Router) {
+	public static function init(Router $Router): void {
 		$isAuthenticatedUser = AM_PAGE_DASHBOARD && Session::getUsername();
 
 		self::registerAPIRoutes($Router, $isAuthenticatedUser);
@@ -82,7 +82,7 @@ class Routes {
 	 *
 	 * @param string $route
 	 */
-	private static function redirectDashboard(string $route) {
+	private static function redirectDashboard(string $route): void {
 		header('Location: ' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . $route, true, 301);
 		exit();
 	}
@@ -93,7 +93,7 @@ class Routes {
 	 * @param Router $Router
 	 * @param bool $isAuthenticatedUser
 	 */
-	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser) {
+	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser): void {
 		$apiBase = RequestHandler::$apiBase;
 
 		$Router->register(
@@ -132,7 +132,7 @@ class Routes {
 	 * @param Router $Router
 	 * @param bool $isAuthenticatedUser
 	 */
-	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser) {
+	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser): void {
 		$hasAccounts = is_readable(AM_FILE_ACCOUNTS);
 
 		$Router->register(
@@ -197,7 +197,7 @@ class Routes {
 	 *
 	 * @param Router $Router
 	 */
-	private static function registerFeedRoute(Router $Router) {
+	private static function registerFeedRoute(Router $Router): void {
 		$Router->register(
 			AM_FEED_URL,
 			function () {
@@ -225,7 +225,7 @@ class Routes {
 	 *
 	 * @param Router $Router
 	 */
-	private static function registerPageRoutes(Router $Router) {
+	private static function registerPageRoutes(Router $Router): void {
 		$Router->register(
 			'/.*',
 			array(PageController::class, 'render')

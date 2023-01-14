@@ -57,38 +57,38 @@ class Composer {
 	/**
 	 * Composer autoloader within the temporary extraction directory.
 	 */
-	private $autoloader = '/vendor/autoload.php';
+	private string $autoloader = '/vendor/autoload.php';
 
 	/**
 	 * The path to the composer.json file.
 	 */
-	private $composerFile = AM_BASE_DIR . '/composer.json';
+	private string $composerFile = AM_BASE_DIR . '/composer.json';
 
 	/**
 	 * The Composer version to be used.
 	 */
-	private $composerVersion = '2.5.1';
+	private string $composerVersion = '2.5.1';
 
 	/**
 	 * Composer extraction directory within temporary directory.
 	 */
-	private $extractionDir = '/src';
+	private string $extractionDir = '/src';
 
 	/**
 	 * A chached file including the temporary Composer install directory.
 	 */
-	private $installDirCacheFile = false;
+	private string $installDirCacheFile;
 
 	/**
 	 * The download URL for the composer.phar file.
 	 */
-	private $pharUrl = false;
+	private string $pharUrl;
 
 	/**
 	 * A variable to reserve memory for running a shutdown function
 	 * when Composer reaches the allowd memory limit.
 	 */
-	private $reservedShutdownMemory = null;
+	private mixed $reservedShutdownMemory = null;
 
 	/**
 	 * The constructor runs the setup.
@@ -107,7 +107,7 @@ class Composer {
 	 * outside the document root, defining some environment variables, registering a shutdown
 	 * function and including the autoloader.
 	 */
-	private function setUp() {
+	private function setUp(): void {
 		$installDir = $this->getInstallDir();
 		$updatePackageInstaller = false;
 
@@ -116,10 +116,10 @@ class Composer {
 		if (!file_exists($srcDir)) {
 			$file = $this->downloadPhar($installDir);
 
-			if (!is_readable($file)) {
+			if (is_null($file) || !is_readable($file)) {
 				Debug::log($file, 'Download of composer.phar failed');
 
-				return false;
+				return;
 			}
 
 			$phar = new \Phar($file);
@@ -133,7 +133,7 @@ class Composer {
 		if (!is_readable($autoloader)) {
 			Debug::log($autoloader, 'Composer autoloader not found');
 
-			return false;
+			return;
 		}
 
 		putenv('COMPOSER_HOME=' . $installDir . '/home');
@@ -158,13 +158,13 @@ class Composer {
 	 * @param bool $getBuffer
 	 * @return string The command output on false or in case $getBuffer is true
 	 */
-	public function run(string $command, bool $getBuffer = false) {
+	public function run(string $command, bool $getBuffer = false): string {
 		$this->shutdownOnError();
 
 		chdir(AM_BASE_DIR);
 
-		set_time_limit(-1);
-		ini_set('memory_limit', -1);
+		set_time_limit(0);
+		ini_set('memory_limit', '-1');
 
 		$input = new StringInput($command);
 		$output = new BufferedOutput();
@@ -223,10 +223,10 @@ class Composer {
 	 * Download the composer.phar file to a given directory.
 	 *
 	 * @param string $dir
-	 * @return string The full path to the downloaded composer.phar file
+	 * @return string|null The full path to the downloaded composer.phar file
 	 */
-	private function downloadPhar(string $dir) {
-		$phar = false;
+	private function downloadPhar(string $dir): ?string {
+		$phar = null;
 
 		if (is_writable($dir)) {
 			$phar = $dir . '/composer.phar';
@@ -249,7 +249,7 @@ class Composer {
 	 *
 	 * @return string The path to the installation directory
 	 */
-	private function getInstallDir() {
+	private function getInstallDir(): string {
 		// Get Composer install directory from cache or create new path.
 		if (is_readable($this->installDirCacheFile)) {
 			$installDir = file_get_contents($this->installDirCacheFile);
@@ -273,7 +273,7 @@ class Composer {
 	 *
 	 * @return string The path to the directory
 	 */
-	private function newInstallDir() {
+	private function newInstallDir(): string {
 		$tmp = FileSystem::getTmpDir();
 		$installDir = $tmp . '/composer_' . time();
 		Debug::log($installDir, 'Generating new Composer installation path');
@@ -286,9 +286,9 @@ class Composer {
 	/**
 	 * A shutdown function to handle memory limit erros.
 	 */
-	private function shutdownOnError() {
-		ini_set('display_errors', false);
-		error_reporting(-1);
+	private function shutdownOnError(): void {
+		ini_set('display_errors', 'Off');
+		error_reporting(E_ALL);
 
 		// This memory is cleared on error (case of allowed memory exhausted)
 		// to use that memory to run the shutdown function.

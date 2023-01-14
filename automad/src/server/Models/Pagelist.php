@@ -51,22 +51,22 @@ class Pagelist {
 	/**
 	 * The collection of all existing pages.
 	 */
-	private $collection;
+	private array $collection;
 
 	/**
 	 * The context.
 	 */
-	private $Context;
+	private Context $Context;
 
 	/**
 	 * In case $type is set to "children", the $context URL can be used as well to change the context from the current page to any page.
 	 */
-	private $context;
+	private mixed $context;
 
 	/**
 	 * The default set of options.
 	 */
-	private $defaults = array(
+	private array $defaults = array(
 		'context' => false,
 		'excludeCurrent' => false,
 		'excludeHidden' => true,
@@ -84,57 +84,57 @@ class Pagelist {
 	/**
 	 * Defines whether the pagelist excludes the current page or not.
 	 */
-	private $excludeCurrent;
+	private mixed $excludeCurrent;
 
 	/**
 	 * Defines whether the pagelist excludes hidden pages or not.
 	 */
-	private $excludeHidden;
+	private mixed $excludeHidden;
 
 	/**
 	 * The current filter.
 	 */
-	private $filter;
+	private mixed $filter;
 
 	/**
 	 * Defines the maximum number of pages in the array returned by getPages().
 	 */
-	private $limit;
+	private mixed $limit;
 
 	/**
 	 * Defines a JSON string to be used as paramter for the $Selection->match() method.
 	 */
-	private $match;
+	private mixed $match;
 
 	/**
 	 * Defines the offset within the array of pages returned by getPages().
 	 */
-	private $offset;
+	private mixed $offset;
 
 	/**
 	 * The current page of the pagination.
 	 */
-	private $page;
+	private mixed $page;
 
 	/**
 	 * The search string to filter pages.
 	 */
-	private $search;
+	private mixed $search;
 
 	/**
 	 * The sort options string.
 	 */
-	private $sort;
+	private mixed $sort;
 
 	/**
 	 * The template to filter by the pagelist.
 	 */
-	private $template;
+	private mixed $template;
 
 	/**
 	 * The pagelist's type (all pages, children pages or related pages)
 	 */
-	private $type;
+	private mixed $type;
 
 	/**
 	 * Initialize the Pagelist.
@@ -170,14 +170,14 @@ class Pagelist {
 	 * @param array $options
 	 * @return array Updated $options
 	 */
-	public function config(array $options = array()) {
+	public function config(array $options = array()): array {
 		// Turn all (but only) array items also existing in $defaults into class properties.
 		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
 		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
 			$this->$key = $value;
 		}
 
-		$configArray = array_intersect_key((array)get_object_vars($this), $this->defaults);
+		$configArray = array_intersect_key(get_object_vars($this), $this->defaults);
 
 		// Only log debug info in case $options is not empty.
 		if (!empty($options)) {
@@ -192,7 +192,7 @@ class Pagelist {
 	 *
 	 * @return array Default options
 	 */
-	public function getDefaults() {
+	public function getDefaults(): array {
 		return $this->defaults;
 	}
 
@@ -206,7 +206,7 @@ class Pagelist {
 	 * @param bool $ignoreLimit
 	 * @return array The filtered and sorted array of Page objects
 	 */
-	public function getPages(bool $ignoreLimit = false) {
+	public function getPages(bool $ignoreLimit = false): array {
 		$offset = 0;
 		$limit = null;
 		$Selection = new Selection($this->getRelevant());
@@ -241,11 +241,11 @@ class Pagelist {
 	/**
 	 * Calculate the number of pages of the pagination.
 	 *
-	 * @return number The number of pages of the current pagelist.
+	 * @return int The number of pages of the current pagelist.
 	 */
-	public function getPaginationCount() {
+	public function getPaginationCount(): int {
 		if ($this->limit) {
-			return ceil(count($this->getPages(true)) / $this->limit);
+			return (int) ceil(count($this->getPages(true)) / $this->limit);
 		} else {
 			return 1;
 		}
@@ -256,7 +256,7 @@ class Pagelist {
 	 *
 	 * @return array A sorted array with the relevant tags.
 	 */
-	public function getTags() {
+	public function getTags(): array {
 		$tags = array();
 
 		foreach ($this->getRelevant() as $Page) {
@@ -277,7 +277,7 @@ class Pagelist {
 	 *
 	 * @return array An array of all Page objects matching $type & $template excludng the current page.
 	 */
-	private function getRelevant() {
+	private function getRelevant(): array {
 		$Selection = new Selection($this->collection);
 
 		// In case $this->context is an empty string or false, use the current context.
@@ -288,11 +288,7 @@ class Pagelist {
 		if ($this->context) {
 			$context = $this->context;
 		} else {
-			if ($Page = $this->Context->get()) {
-				$context = $Page->origUrl;
-			} else {
-				$context = '/';
-			}
+			$context = $this->Context->get()->origUrl;
 		}
 
 		// Filter by type.

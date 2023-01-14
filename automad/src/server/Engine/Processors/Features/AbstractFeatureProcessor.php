@@ -55,17 +55,17 @@ abstract class AbstractFeatureProcessor {
 	/**
 	 * The main Automad instance.
 	 */
-	protected $Automad;
+	protected Automad $Automad;
 
 	/**
 	 * The content processor instance.
 	 */
-	protected $ContentProcessor;
+	protected ContentProcessor $ContentProcessor;
 
 	/**
 	 * The Runtime instance.
 	 */
-	protected $Runtime;
+	protected Runtime $Runtime;
 
 	/**
 	 * The feature processor constructor.
@@ -91,20 +91,23 @@ abstract class AbstractFeatureProcessor {
 	 * @param array $matches
 	 * @param string $directory
 	 * @param bool $collectSnippetDefinitions
+	 * @return string
 	 */
-	abstract public function process(array $matches, string $directory, bool $collectSnippetDefinitions);
+	abstract public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string;
 
 	/**
 	 * The actual pattern that is used to trigger the processor.
+	 *
+	 * @return string
 	 */
-	abstract public static function syntaxPattern();
+	abstract public static function syntaxPattern(): string;
 
 	/**
 	 * Create a new instance of the template processor.
 	 *
 	 * @return TemplateProcessor the template processor instance
 	 */
-	protected function initTemplateProcessor() {
+	protected function initTemplateProcessor(): TemplateProcessor {
 		return new TemplateProcessor(
 			$this->Automad,
 			$this->Runtime,

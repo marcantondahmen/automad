@@ -54,7 +54,7 @@ class Blocks {
 	 * @param string $str
 	 * @return string the processed HTML
 	 */
-	public static function injectAssets(string $str) {
+	public static function injectAssets(string $str): string {
 		$assets = Asset::css('dist/blocks/blocks.min.css', false) .
 				  Asset::js('dist/blocks/blocks.min.js', false);
 
@@ -73,7 +73,7 @@ class Blocks {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(string $json, Automad $Automad) {
+	public static function render(string $json, Automad $Automad): string {
 		$flexOpen = false;
 		$data = json_decode($json);
 		$html = '';
@@ -137,7 +137,7 @@ class Blocks {
 	 * @param object $data
 	 * @return object $data
 	 */
-	private static function prepareData(object $data) {
+	private static function prepareData(object $data): object {
 		$LegacyData = new LegacyData($data);
 		$data = $LegacyData->convert();
 

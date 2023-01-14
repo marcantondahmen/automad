@@ -57,7 +57,7 @@ class UserCollectionController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function createUser() {
+	public static function createUser(): Response {
 		$Response = new Response();
 		$Messenger = new Messenger();
 
@@ -85,7 +85,7 @@ class UserCollectionController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function edit() {
+	public static function edit(): Response {
 		$Response = new Response();
 		$Messenger = new Messenger();
 		$UserCollection = new UserCollection();
@@ -152,7 +152,7 @@ class UserCollectionController {
 	 *
 	 * @return Response a response object
 	 */
-	public static function inviteUser() {
+	public static function inviteUser(): Response {
 		$Response = new Response();
 		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();

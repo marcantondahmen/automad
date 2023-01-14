@@ -55,7 +55,7 @@ class Snippet {
 	/**
 	 * This variable tracks whether a snippet is called by another snippet to prevent inifinte recursive loops.
 	 */
-	private static $snippetIsRendering = false;
+	private static bool $snippetIsRendering = false;
 
 	/**
 	 * Render a snippet block.
@@ -64,7 +64,7 @@ class Snippet {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		// Prevent infinite recursion.
 		if (self::$snippetIsRendering) {
 			return '';

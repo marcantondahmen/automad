@@ -51,42 +51,42 @@ class Response {
 	/**
 	 * The response code.
 	 */
-	private $code = null;
+	private ?int $code = null;
 
 	/**
 	 * The main response data object.
 	 */
-	private $data = null;
+	private ?array $data = null;
 
 	/**
-	 * The debug output buffer.
+	 * The debug log array.
 	 */
-	private $debug = null;
+	private ?array $debug = null;
 
 	/**
 	 * The output buffer used for error notifications.
 	 */
-	private $error = null;
+	private ?string $error = null;
 
 	/**
 	 * The output buffer used to store a redirect URL.
 	 */
-	private $redirect = null;
+	private ?string $redirect = null;
 
 	/**
 	 * The output buffer used to store the reload state.
 	 */
-	private $reload = null;
+	private ?bool $reload = null;
 
 	/**
 	 * The output buffer used for success notifications.
 	 */
-	private $success = null;
+	private ?string $success = null;
 
 	/**
 	 * The response time.
 	 */
-	private $time = null;
+	private ?int $time = null;
 
 	/**
 	 * The output constructor.
@@ -103,7 +103,7 @@ class Response {
 	 *
 	 * @return string the json encoded array of response properties
 	 */
-	public function json() {
+	public function json(): string {
 		$properties = array_filter(get_object_vars($this));
 
 		return json_encode($properties, JSON_UNESCAPED_SLASHES);
@@ -116,7 +116,7 @@ class Response {
 	 * @param int $code
 	 * @return Response
 	 */
-	public function setCode(int $code) {
+	public function setCode(int $code): Response {
 		$this->code = $code;
 		http_response_code($code);
 
@@ -130,7 +130,7 @@ class Response {
 	 * @param array $data
 	 * @return Response
 	 */
-	public function setData(array $data) {
+	public function setData(array $data): Response {
 		$this->data = $data;
 
 		return $this;
@@ -143,7 +143,7 @@ class Response {
 	 * @param array $log
 	 * @return Response
 	 */
-	public function setDebug(array $log) {
+	public function setDebug(array $log): Response {
 		$this->debug = $log;
 
 		return $this;
@@ -156,7 +156,7 @@ class Response {
 	 * @param string $value
 	 * @return Response
 	 */
-	public function setError(string $value = '') {
+	public function setError(string $value = ''): Response {
 		$this->error = $value;
 
 		return $this;
@@ -169,7 +169,7 @@ class Response {
 	 * @param string $url
 	 * @return Response
 	 */
-	public function setRedirect(string $url = '') {
+	public function setRedirect(string $url = ''): Response {
 		$this->redirect = $url;
 
 		return $this;
@@ -182,7 +182,7 @@ class Response {
 	 * @param bool $value
 	 * @return Response
 	 */
-	public function setReload(bool $value) {
+	public function setReload(bool $value): Response {
 		$this->reload = $value;
 
 		return $this;
@@ -195,7 +195,7 @@ class Response {
 	 * @param string $value
 	 * @return Response
 	 */
-	public function setSuccess(string $value = '') {
+	public function setSuccess(string $value = ''): Response {
 		$this->success = $value;
 
 		return $this;

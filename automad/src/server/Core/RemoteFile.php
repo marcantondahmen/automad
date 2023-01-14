@@ -51,7 +51,7 @@ class RemoteFile {
 	/**
 	 * The local copy in the downloads directory of the external file.
 	 */
-	private $localCopy = false;
+	private string $localCopy = '';
 
 	/**
 	 * The constructor.
@@ -67,7 +67,7 @@ class RemoteFile {
 	 *
 	 * @return string The local copy's path.
 	 */
-	public function getLocalCopy() {
+	public function getLocalCopy(): string {
 		return $this->localCopy;
 	}
 
@@ -77,7 +77,7 @@ class RemoteFile {
 	 * @param string $url
 	 * @return string The local copy's file path or false
 	 */
-	private function download(string $url) {
+	private function download(string $url): string {
 		$downloads = AM_BASE_DIR . AM_DIR_CACHE . '/downloads';
 		FileSystem::makeDir($downloads);
 		$file = $downloads . '/' . AM_FILE_PREFIX_CACHE . '_' . sha1($url);
@@ -94,7 +94,7 @@ class RemoteFile {
 		if (!Fetch::download($url, $file)) {
 			Debug::log($url, 'File not found');
 
-			return false;
+			return '';
 		}
 
 		if ($extension = FileSystem::getImageExtensionFromMimeType($file)) {

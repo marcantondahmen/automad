@@ -51,7 +51,7 @@ class Lists extends AbstractBlock {
 	/**
 	 * The list type tag
 	 */
-	private static $tag;
+	private static string $tag;
 
 	/**
 	 * Render a list block.
@@ -60,7 +60,7 @@ class Lists extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		if ($data->style == 'ordered') {
 			self::$tag = 'ol';
 		} else {
@@ -79,7 +79,7 @@ class Lists extends AbstractBlock {
 	 * @param array $items
 	 * @return string the rendered item
 	 */
-	private static function renderItems(array $items) {
+	private static function renderItems(array $items): string {
 		$tag = self::$tag;
 		$html = "<$tag>";
 

@@ -55,7 +55,7 @@ class Toc extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		$class = self::classAttr(array("am-toc-{$data->style}"));
 
 		return "<am-toc $class></am-toc>";

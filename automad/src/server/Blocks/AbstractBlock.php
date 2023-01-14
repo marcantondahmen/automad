@@ -55,7 +55,7 @@ abstract class AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	abstract public static function render(object $data, Automad $Automad);
+	abstract public static function render(object $data, Automad $Automad): string;
 
 	/**
 	 * Return a class attribute for the wrapping block element.
@@ -63,7 +63,7 @@ abstract class AbstractBlock {
 	 * @param array $custom
 	 * @return string the attribute string
 	 */
-	protected static function classAttr(array $custom = array()) {
+	protected static function classAttr(array $custom = array()): string {
 		$classes = array_merge(array('am-block'), $custom);
 
 		return 'class="' . join(' ', $classes) . '"';

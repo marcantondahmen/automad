@@ -38,6 +38,7 @@ namespace Automad\API;
 
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
+use Automad\Core\Request;
 use Automad\Core\Session;
 use Automad\Core\Str;
 
@@ -54,17 +55,17 @@ class RequestHandler {
 	/**
 	 * The API base route.
 	 */
-	public static $apiBase = '/api';
+	public static string $apiBase = '/api';
 
 	/**
 	 * The controller namespace.
 	 */
-	private static $controllerNamespace = '\\Automad\\Controllers\\API\\';
+	private static string $controllerNamespace = '\\Automad\\Controllers\\API\\';
 
 	/**
 	 * An array of routes that are excluded from CSRF token validation.
 	 */
-	private static $validationExcluded = array(
+	private static array $validationExcluded = array(
 		'Session/login',
 		'User/resetPassword'
 	);
@@ -74,7 +75,7 @@ class RequestHandler {
 	 *
 	 * @return string the JSON formatted response
 	 */
-	public static function getResponse() {
+	public static function getResponse(): string {
 		header('Content-Type: application/json; charset=utf-8');
 
 		$apiRoute = trim(Str::stripStart(AM_REQUEST, self::$apiBase), '/');
@@ -113,7 +114,7 @@ class RequestHandler {
 	 * @param string $className
 	 * @return bool true in case the file is readable.
 	 */
-	private static function classFileExists(string $className) {
+	private static function classFileExists(string $className): bool {
 		$prefix = 'Automad\\';
 		$file = AM_BASE_DIR . '/automad/src/server/' . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
 
@@ -123,7 +124,7 @@ class RequestHandler {
 	/**
 	 * Register a error handler that sends a 500 response code in case of a fatal error created by a controller.
 	 */
-	private static function registerControllerErrorHandler() {
+	private static function registerControllerErrorHandler(): void {
 		error_reporting(0);
 
 		register_shutdown_function(function () {
@@ -143,13 +144,15 @@ class RequestHandler {
 	 * @param Messenger $Messenger
 	 * @return bool true if the request is valid
 	 */
-	private static function validate(string $route, Messenger $Messenger) {
+	private static function validate(string $route, Messenger $Messenger): bool {
 		if (in_array($route, self::$validationExcluded)) {
 			return true;
 		}
 
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			if (!Session::verifyCsrfToken($_POST['__csrf__'] ?? '')) {
+		if (!empty($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+			$token = Request::post('__csrf__');
+
+			if (empty($token) || !Session::verifyCsrfToken($token)) {
 				$Messenger->setError('CSRF token mismatch');
 
 				return false;

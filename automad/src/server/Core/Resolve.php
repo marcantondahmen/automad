@@ -63,7 +63,7 @@ class Resolve {
 	 * @param string $url
 	 * @return string The resolved URL
 	 */
-	public static function absoluteUrlToDomain(string $url) {
+	public static function absoluteUrlToDomain(string $url): string {
 		return Server::url() . self::absoluteUrlToRoot($url);
 	}
 
@@ -77,7 +77,7 @@ class Resolve {
 	 * @param string $url
 	 * @return string The resolved URL
 	 */
-	public static function absoluteUrlToRoot(string $url) {
+	public static function absoluteUrlToRoot(string $url): string {
 		// Skip URLs starting with "//".
 		if (strpos($url, '//') === 0) {
 			return $url;
@@ -111,7 +111,7 @@ class Resolve {
 	 * @param string $filePath
 	 * @return string The resolved file path
 	 */
-	public static function filePath(string $pagePath, string $filePath) {
+	public static function filePath(string $pagePath, string $filePath): string {
 		if (strpos($filePath, '/') === 0) {
 			// Relative to root
 			return AM_BASE_DIR . $filePath;
@@ -134,7 +134,7 @@ class Resolve {
 	 * @param Page $Page
 	 * @return string The resolved URL
 	 */
-	public static function relativeUrlToBase(string $url, Page $Page) {
+	public static function relativeUrlToBase(string $url, Page $Page): string {
 		// Skip any protocol, mailto, tel and skype links.
 		if (preg_match('/(\:\/\/|^[a-z]+\:)/is', $url)) {
 			return $url;

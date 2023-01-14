@@ -58,7 +58,7 @@ class Gallery extends AbstractBlock {
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad) {
+	public static function render(object $data, Automad $Automad): string {
 		$defaults = array(
 			'globs' => '*.jpg, *.png, *.gif',
 			'layout' => 'vertical',
@@ -82,6 +82,8 @@ class Gallery extends AbstractBlock {
 				$html = self::flexbox($files, $data);
 			}
 
+			$style = '';
+
 			if (!empty($data->gap)) {
 				$style = " style='--am-gallery-gap: {$data->gap};'";
 			}
@@ -99,7 +101,7 @@ class Gallery extends AbstractBlock {
 	 * @param object $data
 	 * @return string The rendered HTML
 	 */
-	private static function flexbox($files, $data) {
+	private static function flexbox(array $files, object $data): string {
 		// Normalize unit in case unit is missing.
 		$data->height = preg_replace('/^([\.\d]*)$/sm', '$1px', trim($data->height));
 		$pixelHeight = self::pixelValue($data->height);
@@ -107,7 +109,7 @@ class Gallery extends AbstractBlock {
 		$html = "<div class='am-gallery-flex' style='--am-gallery-flex-item-height: {$data->height}'>";
 
 		foreach ($files as $file) {
-			$Image = new Image($file, false, 2 * $pixelHeight);
+			$Image = new Image($file, 0, 2 * $pixelHeight);
 			$caption = Str::stripTags(FileUtils::caption($file));
 			$file = Str::stripStart($file, AM_BASE_DIR);
 			$width = round($Image->width / 2);
@@ -137,7 +139,7 @@ class Gallery extends AbstractBlock {
 	 * @param object $data
 	 * @return string The rendered HTML
 	 */
-	private static function masonry($files, $data) {
+	private static function masonry(array $files, object $data): string {
 		// Use a factor of 0.85 to multiply with the row height of the grid to get a good
 		// result since the aspect ratio is dependent on the actual row width and not the
 		// minimum row width.
@@ -149,7 +151,7 @@ class Gallery extends AbstractBlock {
 
 		// Adding styles for devices smaller than width.
 		$maxWidth = $pixelWidth * 1.75;
-		$style = "<style scoped>@media (max-width: ${maxWidth}px) { .am-gallery-masonry { grid-template-columns: 1fr; } }</style>";
+		$style = "<style scoped>@media (max-width: {$maxWidth}px) { .am-gallery-masonry { grid-template-columns: 1fr; } }</style>";
 
 		$cleanBottom = '';
 
@@ -190,9 +192,9 @@ class Gallery extends AbstractBlock {
 	 * images.
 	 *
 	 * @param string $valueString
-	 * @return number The converted pixel value
+	 * @return float The converted pixel value
 	 */
-	private static function pixelValue($valueString) {
+	private static function pixelValue(string $valueString): float {
 		$pixel = floatval($valueString);
 
 		if (strpos($valueString, 'em') !== false) {
