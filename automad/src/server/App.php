@@ -57,7 +57,7 @@ class App {
 	/**
 	 * Required PHP version.
 	 */
-	private $requiredVersion = '7.4.0';
+	private string $requiredVersion = '8.0.0';
 
 	/**
 	 * The main app constructor takes care of running all required startup tests,
