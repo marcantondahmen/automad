@@ -8,7 +8,6 @@ There are some little scripts in this directory to keep the development workflow
 		- [Excluding Commits from the Changelog](#excluding-commits-from-the-changelog)
 	- [Finishing a Branch](#finishing-a-branch)
 - [Releases](#releases)
-- [Tests](#tests)
 
 ## Features, Bugfixes and Refactor Branches
 
@@ -58,8 +57,3 @@ This will start the release process and initiates the following sequence of task
 8. Create tag
 9. Push
 
-## Tests
-
-To make sure, tests are using the correct version of *PHPUnit* with the correct configuration, the following command can be used to run tests:
-
-    bash bin/phpunit.sh
