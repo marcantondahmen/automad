@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<psalm
+	errorLevel="3"
+	resolveFromConfigFile="true"
+	hoistConstants="true"
+	findUnusedVariablesAndParams="true"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://getpsalm.org/schema/config"
+	xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+	errorBaseline="psalm.baseline.xml"
+>
+	<projectFiles>
+		<directory name="automad/src/server" />
+	</projectFiles>
+	<issueHandlers>
+		<ArgumentTypeCoercion errorLevel="suppress" />
+		<UndefinedConstant errorLevel="suppress" />
+		<UndefinedClass errorLevel="suppress" />
+		<UnresolvableInclude errorLevel="suppress" />
+		<UnsupportedReferenceUsage errorLevel="suppress" />
+		<MoreSpecificReturnType errorLevel="suppress" />
+	</issueHandlers>
+</psalm>

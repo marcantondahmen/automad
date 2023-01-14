@@ -10,4 +10,5 @@ bin export-ignore
 package-lock.json export-ignore
 package.json export-ignore
 phpunit.xml export-ignore
+psalm.* export-ignore
 webpack.common.js export-ignore

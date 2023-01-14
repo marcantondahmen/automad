@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="dev-master@">
+  <file src="automad/src/server/Core/Automad.php">
+    <UnusedVariable occurrences="1">
+      <code>$Automad</code>
+    </UnusedVariable>
+  </file>
+  <file src="automad/src/server/Models/Selection.php">
+    <PossiblyUndefinedArrayOffset occurrences="1">
+      <code>$sortItem['values']</code>
+    </PossiblyUndefinedArrayOffset>
+    <UnusedVariable occurrences="1">
+      <code>$url</code>
+    </UnusedVariable>
+  </file>
+</files>

@@ -12,7 +12,8 @@
     "build:admin": "webpack --config automad/src/client/admin/webpack.config.js --mode production",
     "build:blocks": "",
     "build:themes": "",
-    "build": "npm run build:admin && npm run build:blocks && npm run build:themes"
+    "build": "npm run build:admin && npm run build:blocks && npm run build:themes",
+    "psalm": "psalm --no-cache"
   },
   "devDependencies": {
     "@types/dompurify": "^2.4.0",

@@ -19,6 +19,10 @@
 #	9. 	Push changes to origin
 
 
+# Exit on error.
+set -e
+
+
 # Change to the base directory of the repository.
 dir=$(dirname "$0")
 cd "$dir/.."
@@ -37,7 +41,8 @@ ps | grep "webpack" | grep -v grep | awk '{print $1}' | xargs kill
 
 
 # Run tests.
-bash bin/phpunit.sh
+phpunit
+npm run psalm
 echo
 
 
@@ -108,7 +113,7 @@ echo
 echo "Updating version numbers ..."
 echo "<?php define('AM_VERSION', '$tag'); ?>" > automad/version.php
 
-for json in {automad,packages/{*/*,*}}/{package,package-lock,theme}.json
+for json in {.,packages/{*/*,*}}/{package,package-lock,theme}.json
 do
 	if [[ -f $json ]]
 	then
