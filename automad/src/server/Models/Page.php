@@ -130,7 +130,7 @@ class Page {
 	 */
 	public function __construct(array $data, ?Shared $Shared) {
 		$this->Shared = $Shared;
-		$this->tags = $this->extractTags();
+
 		$this->data = array_merge(array(
 			AM_KEY_HIDDEN => false,
 			AM_KEY_PRIVATE => false,
@@ -142,6 +142,8 @@ class Page {
 			AM_KEY_URL => '',
 			AM_KEY_PAGE_INDEX => ''
 		), $data);
+
+		$this->tags = $this->extractTags();
 
 		$this->hidden = &$this->data[AM_KEY_HIDDEN];
 		$this->private = &$this->data[AM_KEY_PRIVATE];
