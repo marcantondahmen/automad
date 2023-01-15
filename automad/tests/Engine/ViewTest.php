@@ -16,9 +16,9 @@ class ViewTest extends TestCase {
 							"<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
 							'<a href="#">test</a>',
 			'email_02' => 	'<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
+			'resolve_01' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
+			'resolve_02' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>'
 		);
 
@@ -35,43 +35,10 @@ class ViewTest extends TestCase {
 	public function dataForTestRenderIsEqual() {
 		$data = array();
 		$templates = array(
-			'pipe_def_01' => 'Test String',
-			'pipe_def_02' => 'This is a "Test String"',
-			'pipe_def_03' => 'This is a "Test String"',
-			'pipe_def_04' => 'Test String',
-			'pipe_def_05' => 'Some text with a "key": "value", pair.',
-			'pipe_def_06' => '"Quoted" "Test" "String"',
-			'pipe_empty' => '',
-			'pipe_markdown_01' => '<p>A paragraph with <strong>bold</strong> text.</p>',
-			'pipe_dateformat_01' => '2019',
-			'pipe_dateformat_02' => 'Samstag, 21. Juli 2018',
-			'pipe_dateformat_03' => 'Sat, 21 Jul 2018',
-			'pipe_replace_01' => 'Some <div class="test">test</div> string',
-			'pipe_replace_02' => '<div class="test"><p>Test</p></div>',
-			'pipe_sanatize_01' => 'some-very-long-quoted-string-all-do',
-			'pipe_shorten_01' => 'This is ...',
-			'pipe_shorten_02' => 'This is another very >>>',
-			'pipe_math_01' => '15',
-			'pipe_math_02' => '50',
-			'pipe_math_03' => '10',
-			'pipe_math_04' => '17',
-			'for_01' => '1, 2, 3, 4, 5',
-			'if_01' => 'True',
-			'if_02' => 'False',
-			'if_03' => 'True',
-			'if_04' => 'True',
-			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
-			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
-			'set_01' => 'Test 1, Test 2',
-			'session_get_01' => 'Session Test',
 			'email_01' => '<a href="#">test</a>' .
 						  "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
 						  '<a href="#">test</a>',
 			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
 			'extension_01' => 'Test',
 			'extension_02' => 	'<head>' .
 								'<meta name="Generator" content="Automad ' . AM_VERSION . '">' .
@@ -90,11 +57,51 @@ class ViewTest extends TestCase {
 								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/script.js') .
 								'"></script>' .
 								'</head>Asset Test',
-			'snippet_01' => 'Snippet Test / Snippet Test',
+			'for_01' => '1, 2, 3, 4, 5',
+			'if_01' => 'True',
+			'if_02' => 'False',
+			'if_03' => 'True',
+			'if_04' => 'True',
 			'inheritance_01' => 'derived',
 			'inheritance_02' => 'derived by user',
 			'inheritance_03' => 'nested derived',
 			'inheritance_04' => 'nested derived override',
+			'pagelist_01' => 'Text Subpage Page Home Blocks',
+			'pagelist_02' => 'Blocks Text',
+			'pagelist_03' => 'Home Subpage',
+			'pipe_dateformat_01' => '2019',
+			'pipe_dateformat_02' => 'Samstag, 21. Juli 2018',
+			'pipe_dateformat_03' => 'Sat, 21 Jul 2018',
+			'pipe_def_01' => 'Test String',
+			'pipe_def_02' => 'This is a "Test String"',
+			'pipe_def_03' => 'This is a "Test String"',
+			'pipe_def_04' => 'Test String',
+			'pipe_def_05' => 'Some text with a "key": "value", pair.',
+			'pipe_def_06' => '"Quoted" "Test" "String"',
+			'pipe_empty' => '',
+			'pipe_markdown_01' => '<p>A paragraph with <strong>bold</strong> text.</p>',
+			'pipe_math_01' => '15',
+			'pipe_math_02' => '50',
+			'pipe_math_03' => '10',
+			'pipe_math_04' => '17',
+			'pipe_replace_01' => 'Some <div class="test">test</div> string',
+			'pipe_replace_02' => '<div class="test"><p>Test</p></div>',
+			'pipe_sanatize_01' => 'some-very-long-quoted-string-all-do',
+			'pipe_shorten_01' => 'This is ...',
+			'pipe_shorten_02' => 'This is another very >>>',
+			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
+			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
+			'resolve_01' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
+							'<a href="/index.php/page/test">Test</a>',
+			'resolve_02' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
+							'<a href="/index.php/page/test">Test</a>',
+			'session_get_01' => 'Session Test',
+			'set_01' => 'Test 1, Test 2',
+			'snippet_01' => 'Snippet Test / Snippet Test',
+			'toolbox_breadcrumbs_01' => '<ul><li><a href="/">Home</a></li> <li><a href="/index.php/page">Page</a></li> <li><a href="/index.php/page/subpage">Subpage</a></li> </ul>',
+			'toolbox_nav_01' => '<ul><li><a href="/">Home</a></li><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
+			'toolbox_nav_02' => '<ul><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
+			'with_01' => 'Text, Blocks'
 		);
 
 		foreach ($templates as $template => $expected) {

@@ -36,6 +36,7 @@
 
 namespace Automad\Test;
 
+use Automad\Core\Automad;
 use Automad\Core\Parse;
 use Automad\Models\Context;
 use Automad\Models\Page;
@@ -57,33 +58,16 @@ class Mock extends TestCase {
 	 * A template can be passed optionally to the page.
 	 *
 	 * @param string $template
-	 * @return object The Automad Mock
+	 * @return Automad
 	 */
-	public function createAutomad(string $template = '') {
+	public function createAutomad(string $template = ''): object {
 		$Shared = new Shared();
 		$Shared->data['shared'] = 'Shared default text content';
 		$collection = $this->createCollection($Shared, $template);
-		$methods = array_diff(
-			get_class_methods('\Automad\Core\Automad'),
-			array(
-				'getPage',
-				'getRequestedPage',
-				'getFilelist',
-				'getPagelist',
-				'loadTemplate'
-			)
-		);
+		$Automad = new Automad($collection, $Shared);
+		$Automad->Context = new Context($collection[AM_REQUEST]);
 
-		$AutomadMock = $this->getMockBuilder('\Automad\Core\Automad')
-							->setMethods($methods)
-							->disableOriginalConstructor()
-							->getMock();
-
-		$AutomadMock->method('getCollection')->willReturn($collection);
-		$AutomadMock->Shared = $Shared;
-		$AutomadMock->Context = new Context($collection['/page']);
-
-		return $AutomadMock;
+		return $Automad;
 	}
 
 	/**
@@ -93,7 +77,7 @@ class Mock extends TestCase {
 	 * @param string $template
 	 * @return array the collection
 	 */
-	private function createCollection(Shared $Shared, string $template) {
+	private function createCollection(Shared $Shared, string $template): array {
 		$theme = 'templates';
 		$testsDir = AM_BASE_DIR . '/automad/tests';
 
@@ -105,7 +89,10 @@ class Mock extends TestCase {
 					':path' => '/',
 					':origUrl' => '/',
 					'theme' => $theme,
-					':template' => $template
+					':template' => $template,
+					':level' => 0,
+					':index' => '1',
+					'tags' => 'test'
 				),
 				$Shared
 			),
@@ -113,13 +100,32 @@ class Mock extends TestCase {
 				array_merge(
 					array(
 						'url' => '/page',
-						':path' => '/01.page/',
+						':path' => '/page-slug/',
 						':origUrl' => '/page',
+						':parent' => '/',
 						'theme' => $theme,
-						':template' => $template
+						':template' => $template,
+						':level' => 1,
+						':index' => '1.1',
+						'tags' => 'test'
 					),
 					Parse::dataFile($testsDir . '/data/page.txt'),
 					Parse::dataFile($testsDir . '/data/inheritance.txt')
+				),
+				$Shared
+			),
+			'/page/subpage' => new Page(
+				array(
+					'title' => 'Subpage',
+					'url' => '/page/subpage',
+					':path' => '/page-slug/subpage/',
+					':origUrl' => '/page/subpage',
+					':parent' => '/page',
+					'theme' => $theme,
+					':template' => $template,
+					':level' => 2,
+					':index' => '1.1.1',
+					'tags' => 'test'
 				),
 				$Shared
 			),
@@ -127,10 +133,13 @@ class Mock extends TestCase {
 				array_merge(
 					array(
 						'url' => '/text',
-						':path' => '/01.text/',
+						':path' => '/text/',
 						':origUrl' => '/text',
+						':parent' => '/',
 						'theme' => $theme,
 						':template' => $template,
+						':level' => 1,
+						':index' => '1.2'
 					),
 					Parse::dataFile($testsDir . '/data/text.txt')
 				),
@@ -140,10 +149,13 @@ class Mock extends TestCase {
 				array_merge(
 					array(
 						'url' => '/blocks',
-						':path' => '/01.blocks/',
+						':path' => '/blocks-slug/',
 						':origUrl' => '/blocks',
+						':parent' => '/',
 						'theme' => $theme,
 						':template' => $template,
+						':level' => 1,
+						':index' => '1.3'
 					),
 					Parse::dataFile($testsDir . '/data/blocks.txt')
 				),

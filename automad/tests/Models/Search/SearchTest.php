@@ -17,7 +17,7 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/01.text/default.txt',
+						'/pages/text/default.txt',
 						array(
 							new FieldResults(
 								'text',
@@ -28,7 +28,7 @@ class SearchTest extends TestCase {
 						'/text'
 					),
 					new FileResults(
-						'/pages/01.blocks/default.txt',
+						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -46,7 +46,7 @@ class SearchTest extends TestCase {
 				true,
 				array(
 					new FileResults(
-						'/pages/01.blocks/default.txt',
+						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -64,7 +64,7 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/01.blocks/default.txt',
+						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -106,7 +106,7 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/01.blocks/default.txt',
+						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -129,7 +129,7 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/01.blocks/default.txt',
+						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
