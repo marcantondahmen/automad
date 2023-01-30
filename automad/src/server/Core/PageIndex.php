@@ -72,7 +72,7 @@ class PageIndex {
 		$indexFile = self::getIndexFile($parentPath);
 
 		if (is_readable($indexFile)) {
-			return preg_split('/\s+/', file_get_contents($indexFile));
+			return FileSystem::readJson($indexFile);
 		}
 
 		return array();
@@ -133,7 +133,7 @@ class PageIndex {
 			return basename($item);
 		}, $layout);
 
-		if (FileSystem::write($indexFile, implode("\r\n", $layout))) {
+		if (FileSystem::writeJson($indexFile, array_values($layout))) {
 			return $layout;
 		}
 

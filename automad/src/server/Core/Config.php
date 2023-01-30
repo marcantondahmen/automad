@@ -109,7 +109,7 @@ class Config {
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE
-		self::set('AM_FILE_INDEX', '.index');
+		self::set('AM_FILE_INDEX', '.index.json');
 		self::set('AM_FILE_DEFAULT_TEMPLATE', 'standard/light/sidebar_left.php');
 		self::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 		self::set('AM_FILE_EXT_CAPTION', 'caption');
@@ -120,7 +120,7 @@ class Config {
 		self::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 		self::set('AM_FILE_OBJECT_API_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object_api');
 		self::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
-		self::set('AM_FILE_UI_TEXT_MODULES', AM_BASE_DIR . '/automad/lang/english.txt');
+		self::set('AM_FILE_UI_TEXT_MODULES', AM_BASE_DIR . '/automad/lang/english.json');
 		self::set('AM_FILE_UI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
 		self::set(
 			'AM_ALLOWED_FILE_TYPES',
