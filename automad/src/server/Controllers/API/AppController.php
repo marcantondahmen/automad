@@ -147,17 +147,17 @@ class AppController {
 	 *
 	 * @return array the array of languages
 	 */
-	private static function getLanguages() {
+	private static function getLanguages(): array {
 		$languages = array();
 
-		foreach (glob(dirname(AM_FILE_UI_TEXT_MODULES) . '/*.txt') as $file) {
-			if (strpos($file, 'english.txt') !== false) {
+		foreach (glob(dirname(AM_FILE_UI_TEXT_MODULES) . '/*.json') as $file) {
+			if (strpos($file, 'english.json') !== false) {
 				$value = '';
 			} else {
 				$value = Str::stripStart($file, AM_BASE_DIR);
 			}
 
-			$key = ucfirst(str_replace(array('_', '.txt'), array(' ', ''), basename($file)));
+			$key = ucfirst(str_replace(array('_', '.json'), array(' ', ''), basename($file)));
 			$languages[$key] = $value;
 		}
 
