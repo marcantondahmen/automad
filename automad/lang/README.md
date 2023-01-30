@@ -1,11 +1,8 @@
 # Translations
 
-This directory contains all UI text modules and their translations. The keys that reference a text module can be found in the source of the
-backend being used by the `Automad\UI\Utis\Text` class or in the frontend being used by the `App.text()` method or by several components as 
-values for their attributes.
+This directory contains all UI text modules and their translations. The keys that reference a text module can be found in the source of the backend being used by the `Automad\Core\Text` class or in the frontend being used by the `App.text()` method or by several components as values for their attributes.
 
-Note that the text modules that are used by [FileRobot](https://github.com/scaleflex/filerobot-image-editor) are also part of the language files but can't be found in the Automad soure since FileRobot is
-an external dependency. The text modules object just gets passed to the FileRobot configuration as a whole.
+Note that the text modules that are used by [FileRobot](https://github.com/scaleflex/filerobot-image-editor) are also part of the language files but can't be found in the Automad soure since FileRobot is an external dependency. The text modules object just gets passed to the FileRobot configuration as a whole.
 
 ## FileRobot Keys
 

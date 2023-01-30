@@ -497,6 +497,16 @@ class FileSystem {
 	}
 
 	/**
+	 * Read a .json file.
+	 *
+	 * @param string $file
+	 * @return array
+	 */
+	public static function readJson(string $file): array {
+		return json_decode(file_get_contents($file), true);
+	}
+
+	/**
 	 * Renames a file and its caption (if existing).
 	 *
 	 * @param string $oldFile
@@ -607,5 +617,16 @@ class FileSystem {
 
 		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
 		self::write($file, $content);
+	}
+
+	/**
+	 * Write a .json file.
+	 *
+	 * @param string $file
+	 * @param array $data
+	 * @return bool
+	 */
+	public static function writeJson(string $file, array $data): bool {
+		return self::write($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 	}
 }

@@ -58,10 +58,10 @@ class Text {
 	 * @return string The requested text module
 	 */
 	public static function get(string $key): string {
-		self::parseModules();
+		self::loadModules();
 
-		if (isset(Text::$modules[$key])) {
-			return Text::$modules[$key];
+		if (isset(self::$modules[$key])) {
+			return self::$modules[$key];
 		}
 
 		return '';
@@ -73,34 +73,34 @@ class Text {
 	 * @return object The modules array as object
 	 */
 	public static function getObject(): object {
-		self::parseModules();
+		self::loadModules();
 
 		return (object) self::$modules;
 	}
 
 	/**
-	 * Parse the text modules file and store all modules in Text::$modules.
+	 * Parse the text modules file and store all modules in self::$modules.
 	 * In case AM_FILE_UI_TRANSLATION is defined, the translated text modules
 	 * will be merged into Text:$modules.
 	 */
-	private static function parseModules(): void {
+	private static function loadModules(): void {
 		if (self::$modules) {
 			return;
 		}
 
-		Text::$modules = Parse::dataFile(AM_FILE_UI_TEXT_MODULES);
+		self::$modules = FileSystem::readJson(AM_FILE_UI_TEXT_MODULES);
 
 		if (AM_FILE_UI_TRANSLATION) {
 			$translationFile = AM_BASE_DIR . AM_FILE_UI_TRANSLATION;
 
 			if (is_readable($translationFile)) {
-				$translation = Parse::dataFile($translationFile);
+				$translation = FileSystem::readJson($translationFile);
 
-				Text::$modules = array_merge(Text::$modules, $translation);
+				self::$modules = array_merge(self::$modules, $translation);
 			}
 		}
 
-		array_walk(Text::$modules, function (string &$item) {
+		array_walk(self::$modules, function (string &$item) {
 			$item = Str::markdown($item, true);
 			// Remove all line breaks to avoid problems when using text modules in JS notify.
 			$item = str_replace(array("\n", "\r"), '', $item);

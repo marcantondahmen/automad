@@ -1,5 +1,6 @@
 RewriteRule ^console$ - [F,L,NC]
 
-# Block all access to src files.
+# Block all access to src and lang files.
 # Note that this only works on Apache without using ProxyPassMatch for PHP-FPM.
 RewriteRule ^src\/.*$ - [F,L,NC]
+RewriteRule ^lang\/.*$ - [F,L,NC]
