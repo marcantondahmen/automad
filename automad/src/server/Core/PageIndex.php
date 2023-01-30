@@ -54,12 +54,9 @@ class PageIndex {
 	 */
 	public static function append(string $parentPath, string $path): void {
 		$layout = self::read($parentPath);
+		$layout[] = basename($path);
 
-		if ($layout) {
-			$layout[] = basename($path);
-
-			self::write($parentPath, $layout);
-		}
+		self::write($parentPath, $layout);
 	}
 
 	/**

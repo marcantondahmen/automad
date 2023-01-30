@@ -195,7 +195,7 @@ class Automad {
 				'index' => $Page->index,
 				'url' => $Page->origUrl,
 				'path' => $Page->path,
-				'parentPath' => rtrim(dirname($Page->path), '/') . '/',
+				'parentUrl' => $Page->parentUrl,
 				'private' => $Page->private,
 				'mTime' => $Page->get(AM_KEY_MTIME)
 			);

@@ -249,6 +249,7 @@ class PageController {
 		$Response = new Response();
 		$url = Request::post('url');
 		$dest = Request::post('targetPage');
+		$layout = Request::post('layout');
 		$Page = $Automad->getPage($url);
 		$dest = $Automad->getPage($dest);
 
@@ -274,9 +275,16 @@ class PageController {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
+		if ($layout) {
+			$layout = json_decode($layout);
+		} else {
+			$layout = null;
+		}
+
 		$newPagePath = $Page->moveDirAndUpdateLinks(
 			$dest->path,
-			basename($Page->path)
+			basename($Page->path),
+			$layout
 		);
 
 		$Response->setRedirect(Page::dashboardUrlByPath($newPagePath));
@@ -310,6 +318,8 @@ class PageController {
 
 		$parentPath = Request::post('parentPath');
 		$layout = json_decode(Request::post('layout'));
+
+		Cache::clear();
 
 		return $Response->setData(
 			array(

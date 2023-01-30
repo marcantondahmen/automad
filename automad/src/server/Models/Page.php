@@ -38,6 +38,7 @@ namespace Automad\Models;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
@@ -275,8 +276,7 @@ class Page {
 	 * @return Page|null
 	 */
 	public static function fromCache(string $url): ?Page {
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
+		$Automad = Automad::fromCache();
 
 		return $Automad->getPage($url);
 	}
@@ -447,23 +447,43 @@ class Page {
 	/**
 	 * Move a page directory and update all related links.
 	 *
-	 * @param string $destPath
+	 * @param string $destParentPath
 	 * @param string $slug
+	 * @param array|null $layout
 	 * @return string the new page path
 	 */
-	public function moveDirAndUpdateLinks(string $destPath, string $slug): string {
+	public function moveDirAndUpdateLinks(string $destParentPath, string $slug, ?array $layout = null): string {
 		$oldPath = $this->path;
 
-		$newPagePath = FileSystem::movePageDir(
+		$newPath = FileSystem::movePageDir(
 			$this->path,
-			$destPath,
+			$destParentPath,
 			$slug
 		);
 
-		PageIndex::replace($destPath, $oldPath, $newPagePath);
-		$this->updatePageLinks($newPagePath);
+		Debug::log(array($oldPath, $newPath, $layout));
 
-		return $newPagePath;
+		if (dirname($oldPath) !== dirname($newPath)) {
+			if ($layout) {
+				$index = array_search($oldPath, $layout);
+
+				if ($index !== false) {
+					$layout[$index] = $newPath;
+				}
+
+				PageIndex::write($destParentPath, $layout);
+			} else {
+				PageIndex::append($destParentPath, $newPath);
+			}
+
+			PageIndex::remove(dirname($oldPath), $oldPath);
+		} else {
+			PageIndex::replace($destParentPath, $oldPath, $newPath);
+		}
+
+		$this->updatePageLinks($newPath);
+
+		return $newPath;
 	}
 
 	/**
