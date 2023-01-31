@@ -34,6 +34,7 @@
 
 import 'modern-normalize/modern-normalize.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'sortable-tree/dist/sortable-tree.css';
 
 import './styles/styles.less';
 

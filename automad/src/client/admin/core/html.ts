@@ -82,7 +82,7 @@ export const enum Attr {
  */
 const dompurifyOption = {
 	CUSTOM_ELEMENT_HANDLING: {
-		tagNameCheck: /^am-/,
+		tagNameCheck: /^(am|sortable)-/,
 		attributeNameCheck: /^am-/,
 		allowCustomizedBuiltInElements: true,
 	},

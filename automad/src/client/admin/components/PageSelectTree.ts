@@ -32,9 +32,52 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS, getPageURL, html, listen, query } from '../core';
-import { NavTreeItem, PageMetaData } from '../types';
-import { NavTreeComponent } from './NavTree';
+import SortableTree, {
+	SortableTreeKeyValue,
+	SortableTreeRenderLabelFunction,
+} from 'sortable-tree';
+import {
+	App,
+	Attr,
+	CSS,
+	EventName,
+	getPageURL,
+	html,
+	listen,
+	query,
+} from '../core';
+import { createSortableTreeNodes, treeStyles } from '../core/tree';
+import { PageMetaData } from '../types';
+import { BaseComponent } from './Base';
+
+/**
+ * The render function that renders the label HTML.
+ *
+ * @param data
+ * @returns the rendered HTML
+ */
+const renderLabelFunction: SortableTreeRenderLabelFunction = (
+	data: SortableTreeKeyValue
+): string => {
+	const icon = data.private ? 'eye-slash-fill' : 'folder2';
+
+	return html`
+		<label class="${CSS.navItem}">
+			<input
+				class="${CSS.displayNone}"
+				type="radio"
+				name="targetPage"
+				value="${data.url}"
+			/>
+			<span class="${CSS.navLink}">
+				<am-icon-text
+					${Attr.icon}="${icon}"
+					${Attr.text}="$${data.title}"
+				></am-icon-text>
+			</span>
+		</label>
+	`;
+};
 
 /**
  * An page selection tree field.
@@ -44,12 +87,7 @@ import { NavTreeComponent } from './NavTree';
  *
  * @extends BaseComponent
  */
-class PageSelectTreeComponent extends NavTreeComponent {
-	/**
-	 * The main CSS classes.
-	 */
-	protected elementClasses = [CSS.nav, CSS.navSelectForm];
-
+class PageSelectTreeComponent extends BaseComponent {
 	/**
 	 * True if the current page should be excluded.
 	 */
@@ -58,34 +96,43 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	}
 
 	/**
-	 * Render the tree label.
+	 * The callback function used when an element is created in the DOM.
 	 */
-	protected renderLabel(): void {
-		return;
+	connectedCallback(): void {
+		this.listeners.push(
+			listen(window, EventName.appStateChange, this.init.bind(this))
+		);
+
+		this.init();
 	}
 
 	/**
-	 * True if the tree can be sorted.
+	 * Init the navTree.
 	 */
-	protected isSortable: boolean = false;
+	private init(): void {
+		this.innerHTML = '';
 
-	/**
-	 * True if a page should be highlighted on init.
-	 *
-	 * @param page
-	 * @returns true if the page should be highlighted initially
-	 */
-	private isHighlightedOnInit(page: PageMetaData): boolean {
-		const current = getPageURL() || '/';
+		const pages: PageMetaData[] = this.filterPages(
+			Object.values(App.pages) as PageMetaData[]
+		);
 
-		if (this.hideCurrent) {
-			const parentOfActive = current
-				?.replace(/[^\/]+$/, '')
-				.replace(/(.)\/$/, '$1');
-			return parentOfActive === page.url;
-		}
+		const nodes = createSortableTreeNodes(pages);
 
-		return current === page.url;
+		const tree = new SortableTree({
+			nodes,
+			element: this,
+			initCollapseLevel: 1,
+			disableSorting: true,
+			styles: treeStyles,
+			renderLabel: renderLabelFunction,
+		});
+
+		const currentNode =
+			tree.findNode('url', getPageURL()) || tree.findNode('url', '/');
+
+		currentNode.reveal();
+
+		(query('input', currentNode.label) as HTMLInputElement).checked = true;
 	}
 
 	/**
@@ -94,7 +141,7 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	 * @param pages
 	 * @returns the array of filtered pages
 	 */
-	protected filterPages(pages: PageMetaData[]): PageMetaData[] {
+	private filterPages(pages: PageMetaData[]): PageMetaData[] {
 		if (this.hideCurrent) {
 			const current = getPageURL();
 			const regex = new RegExp(`^${current}(\/|$)`);
@@ -105,59 +152,6 @@ class PageSelectTreeComponent extends NavTreeComponent {
 		}
 
 		return pages;
-	}
-
-	/**
-	 * Render the actual content of a summary as a link.
-	 *
-	 * @param item
-	 * @returns The actual tree item summery child
-	 */
-	protected createSummaryChild(item: NavTreeItem): string {
-		const { page, summary } = item;
-		const label = create('label', [], {}, summary);
-
-		let icon = 'folder2';
-
-		if (page.private) {
-			icon = 'eye-slash-fill';
-		}
-
-		label.innerHTML = html`
-			<am-icon-text
-				${Attr.icon}="${icon}"
-				${Attr.text}="$${page.title}"
-			></am-icon-text>
-			<input
-				class="${CSS.displayNone}"
-				type="radio"
-				name="targetPage"
-				value="${page.url}"
-				${this.isHighlightedOnInit(page) ? 'checked' : ''}
-			/>
-		`;
-
-		const radioInput = query('input', label) as HTMLInputElement;
-
-		listen(radioInput, 'change', (): void => {
-			Object.values(this.tree).forEach((_item: NavTreeItem) => {
-				this.toggleItem(_item, null);
-			});
-		});
-
-		return label;
-	}
-
-	/**
-	 * Toggle an item to be active or inactive.
-	 *
-	 * @param item
-	 * @param url
-	 */
-	protected toggleItem(item: NavTreeItem, url: string): void {
-		const radioInput = query('input', item.summary) as HTMLInputElement;
-
-		item.wrapper.classList.toggle(CSS.navItemActive, radioInput.checked);
 	}
 }
 

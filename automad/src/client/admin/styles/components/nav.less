@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -53,85 +53,31 @@
 	}
 
 	&__item {
-		display: flex;
-		flex-direction: column;
-		line-height: @am-nav-item-line-height;
-
-		--level: 0;
-		--padding-left: ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x} + (1rem * var(--level)))';
-		.navTreeLevel(12);
-
-		&--chosen {
-			& summary:before {
-				content: '' !important;
-			}
-
-			& > .am-c-nav__children {
-				display: none;
-			}
-		}
-
-		&--ghost {
-			&:not(.am-c-nav__item--active) {
-				box-shadow: inset 0 0 0 1px var(--am-clr-border);
-				border-radius: @am-nav-item-radius;
-			}
-
-			& summary:before {
-				content: '' !important;
-			}
-		}
-
-		&--drag {
-			& > * {
-				opacity: 0.25;
-			}
-		}
-	}
-
-	&--dragging &__children {
-		padding-bottom: @am-border-width;
-
-		& * {
-			cursor: grabbing !important;
-		}
-
-		&:after {
-			content: '';
-			display: block;
-			margin: 0.4rem 0;
-			margin-left: ~'calc(var(--padding-left) + 2rem)';
-			height: 3px;
-			border-radius: 3px;
-			background-color: var(--am-clr-border);
-		}
-	}
-
-	&__grip {
 		position: relative;
-		display: none;
-		flex-grow: 1;
-		text-align: right;
-		margin-right: -0.75rem;
-		opacity: 0.4;
-	}
-
-	:hover > &__grip {
-		display: block;
+		display: flex;
+		flex: 1 0 100%;
+		line-height: @am-nav-item-line-height;
+		transition: box-shadow 0.2;
+		border-radius: @am-nav-item-radius;
 	}
 
 	&__link {
+		box-sizing: border-box;
 		display: flex;
+		flex: 1 0 100%;
 		align-items: center;
 		gap: @am-flex-gap;
 		margin-bottom: @am-border-width;
 		padding: 0 1rem;
-		padding-left: var(--padding-left);
+		padding-left: ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
 		color: @am-nav-item-clr;
 		text-decoration: none;
 		border-radius: @am-nav-item-radius;
+		border: @am-border-width dashed transparent;
+		line-height: ~'calc(@{am-nav-item-line-height} - @{am-border-width} - @{am-border-width})';
+		height: @am-nav-item-line-height;
 		cursor: pointer;
-		transition: background-color 0.2s, color 0.2s;
+		transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 
 		& > span {
 			min-width: 0;
@@ -140,79 +86,15 @@
 			overflow: hidden;
 		}
 
-		summary& {
-			display: flex;
-			align-items: center;
-			list-style-type: none;
-			border: none !important;
-			outline: none !important;
-			cursor: default;
-
-			&::-webkit-details-marker,
-			&::marker {
-				display: none;
-			}
-
-			&:before {
-				content: '';
-				font-size: 0.5rem;
-				line-height: 1;
-				width: 0.55rem;
-				min-width: 0.55rem;
-				text-align: center;
-			}
-
-			.am-c-nav--dragging &:before,
-			&--has-children:before {
-				content: '▶';
-			}
-
-			.am-c-nav--dragging [open] > &:before,
-			[open] > &--has-children:before {
-				content: '▼';
-			}
-
-			& > label,
-			& > am-link {
-				display: inherit;
-				max-width: ~'calc(100% - 0.55rem)';
-				align-items: inherit;
-				gap: inherit;
-				flex-grow: 1;
-				user-select: none;
-				color: inherit;
-				text-decoration: none;
-				cursor: pointer;
-			}
-		}
-
 		&:hover {
 			color: @am-nav-item-hover-clr;
 			background-color: @am-nav-item-hover-bg;
 		}
 	}
 
-	&__item--active > &__link {
+	&__item--active > &__link,
+	input:checked + &__link {
 		color: @am-nav-item-active-clr;
 		background-color: @am-nav-item-active-bg;
-	}
-
-	&--select {
-		padding: @am-nav-padding-x;
-		background-color: var(--am-clr-background-faded);
-		border: @am-border;
-		border-radius: @am-nav-item-radius;
-	}
-
-	&--select &__item {
-		--padding-left: ~'calc(0.75rem + (1rem * var(--level)))';
-	}
-}
-
-.navTreeLevel(@n, @i: 1) when (@i <= @n) {
-	& .am-c-nav__item {
-		--level: @i;
-
-		.navTreeLevel(@n, (@i + 1));
 	}
 }
