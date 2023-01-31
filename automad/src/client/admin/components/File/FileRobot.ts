@@ -111,7 +111,7 @@ class FileRobotComponent extends BaseComponent {
 	 */
 	private initFileRobot(form: FormComponent, modal: ModalComponent): void {
 		const config = {
-			source: this.elementAttributes[Attr.file],
+			source: `${this.elementAttributes[Attr.file]}?${Date.now()}`,
 			savingPixelRatio: 1,
 			previewPixelRatio: window.devicePixelRatio,
 			useBackendTranslations: false,
