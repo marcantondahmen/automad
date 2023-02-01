@@ -33,8 +33,6 @@
  */
 
 import {
-	FieldGroupData,
-	FieldGroups,
 	FieldSectionCollection,
 	FieldSectionName,
 	KeyValueMap,

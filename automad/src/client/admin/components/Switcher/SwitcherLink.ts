@@ -40,8 +40,6 @@ import {
 	SwitcherComponent,
 } from './Switcher';
 
-export const linkTag = 'am-switcher-link';
-
 /**
  * A switcher link that is part of a switcher menu component.
  *
@@ -49,6 +47,14 @@ export const linkTag = 'am-switcher-link';
  * @extends BaseComponent
  */
 export class SwitcherLinkComponent extends BaseComponent {
+	/**
+	 * The tag name.
+	 *
+	 * @static
+	 * @readonly
+	 */
+	static readonly TAG_NAME = 'am-switcher-link';
+
 	/**
 	 * The array of observed attributes.
 	 *
@@ -91,4 +97,4 @@ export class SwitcherLinkComponent extends BaseComponent {
 	}
 }
 
-customElements.define(linkTag, SwitcherLinkComponent);
+customElements.define(SwitcherLinkComponent.TAG_NAME, SwitcherLinkComponent);

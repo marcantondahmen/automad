@@ -35,7 +35,7 @@
 import { BaseComponent } from '../Base';
 import { Attr, CSS, EventName, listen, query } from '../../core';
 import { getActiveSection, SwitcherComponent } from './Switcher';
-import { linkTag } from './SwitcherLink';
+import { SwitcherLinkComponent } from './SwitcherLink';
 
 /**
  * A label that reflects the active switcher link content.
@@ -52,7 +52,9 @@ export class SwitcherLabelComponent extends BaseComponent {
 		const dropdown = `.${CSS.dropdownItems}`;
 		const menu = `.${CSS.menu}`;
 		const getLink = () => {
-			return `${linkTag}[${Attr.section}="${getActiveSection()}"]`;
+			return `${SwitcherLinkComponent.TAG_NAME}[${
+				Attr.section
+			}="${getActiveSection()}"]`;
 		};
 
 		this.listeners.push(

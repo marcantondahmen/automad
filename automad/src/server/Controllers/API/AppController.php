@@ -64,7 +64,7 @@ class AppController {
 	 *
 	 * @return Response the Response object
 	 */
-	public static function bootstrap() {
+	public static function bootstrap(): Response {
 		$Response = new Response;
 		$Automad = Automad::fromCache();
 
@@ -85,7 +85,7 @@ class AppController {
 	 *
 	 * @return Response the Response object
 	 */
-	public static function updateState() {
+	public static function updateState(): Response {
 		$Response = new Response;
 		$Automad = Automad::fromCache();
 		$UserCollection = new UserCollection();
@@ -124,7 +124,7 @@ class AppController {
 	 *
 	 * @return array the fields array
 	 */
-	private static function getContentFields() {
+	private static function getContentFields(): array {
 		$ThemeCollection = new ThemeCollection();
 		$fields = array();
 

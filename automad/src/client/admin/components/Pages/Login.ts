@@ -55,7 +55,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<h1>$${App.sitename} &mdash; ${App.text('signIn')}</h1>
+			<h2>$${App.sitename} &mdash; ${App.text('signIn')}</h2>
 			<div class="am-c-card">
 				<am-form
 					class="am-c-card__form"

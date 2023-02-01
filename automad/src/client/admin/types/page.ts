@@ -49,7 +49,7 @@ export interface PageMetaData {
 	index: string;
 	url: string;
 	path: string;
-	parentPath: string;
+	parentUrl: string;
 	private: boolean;
 }
 

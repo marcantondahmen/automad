@@ -71,6 +71,14 @@ import { BaseComponent } from '../Base';
  */
 export class ModalComponent extends BaseComponent {
 	/**
+	 * The tag name for the component.
+	 *
+	 * @static
+	 * @readonly
+	 */
+	static readonly TAG_NAME = 'am-modal';
+
+	/**
 	 * The form data of the form controls included in the modal.
 	 */
 	private formData: KeyValueMap;
@@ -204,4 +212,4 @@ export class ModalComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-modal', ModalComponent);
+customElements.define(ModalComponent.TAG_NAME, ModalComponent);

@@ -89,7 +89,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 		const searchParams = new URLSearchParams(window.location.search);
 
 		this.innerHTML = html`
-			<h1>${App.text('resetPassword')}</h1>
+			<h2>${App.text('resetPassword')}</h2>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 					${App.text('passwordResetEnterNameOrEmail')}
@@ -125,7 +125,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSetPassword(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<h1>${App.text('resetPassword')}</h1>
+			<h2>${App.text('resetPassword')}</h2>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 					${App.text('passwordResetEnterNewPassword')}
@@ -186,7 +186,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSuccess(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<h1>${App.text('resetPassword')}</h1>
+			<h2>${App.text('resetPassword')}</h2>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 					${App.text('passwordChangedSuccess')}

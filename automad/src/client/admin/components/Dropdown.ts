@@ -50,6 +50,14 @@ import { BaseComponent } from './Base';
  */
 class DropdownComponent extends BaseComponent {
 	/**
+	 * The tag name.
+	 *
+	 * @static
+	 * @readonly
+	 */
+	static readonly TAG_NAME = 'am-dropdown';
+
+	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
@@ -61,7 +69,7 @@ class DropdownComponent extends BaseComponent {
 				if (
 					event.target === this ||
 					queryParents(
-						'am-dropdown',
+						DropdownComponent.TAG_NAME,
 						event.target as HTMLElement
 					).includes(this)
 				) {
@@ -74,4 +82,4 @@ class DropdownComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-dropdown', DropdownComponent);
+customElements.define(DropdownComponent.TAG_NAME, DropdownComponent);

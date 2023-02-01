@@ -33,7 +33,6 @@
  */
 
 import { App, Attr, CSS, html } from '../core';
-import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 
 /**

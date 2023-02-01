@@ -34,7 +34,7 @@
 
 import { BaseComponent } from '../Base';
 import { Attr, EventName, listen, query, queryAll } from '../../core';
-import { linkTag, SwitcherLinkComponent } from './SwitcherLink';
+import { SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
 
@@ -113,9 +113,11 @@ export class SwitcherComponent extends BaseComponent {
 		let activeSection = getActiveSection();
 		const sections: string[] = [];
 
-		queryAll(linkTag, this).forEach((link: SwitcherLinkComponent) => {
-			sections.push(link.getAttribute(Attr.section));
-		});
+		queryAll(SwitcherLinkComponent.TAG_NAME, this).forEach(
+			(link: SwitcherLinkComponent) => {
+				sections.push(link.getAttribute(Attr.section));
+			}
+		);
 
 		if (sections.indexOf(activeSection) == -1) {
 			setActiveSection(sections[0]);

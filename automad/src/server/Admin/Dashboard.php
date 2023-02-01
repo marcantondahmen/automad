@@ -72,7 +72,7 @@ class Dashboard {
 					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				>
 				<title>Automad</title>
-				{$fn(Asset::icon('dist/admin/favicon.ico'))}
+				{$fn(Asset::icon('dist/favicon.ico'))}
 				{$fn(Asset::css('dist/admin/vendor.bundle.css'))}
 				{$fn(Asset::css('dist/admin/main.bundle.css'))}
 				{$fn(Asset::js('dist/admin/vendor.bundle.js'))}

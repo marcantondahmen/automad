@@ -148,14 +148,14 @@ export const waitForPendingRequests = async (): Promise<any> => {
 				resolve(true);
 
 				window.removeEventListener(
-					PendingRequests.eventName,
+					PendingRequests.EVENT_NAME,
 					checkPendingRequests
 				);
 			}
 		};
 
 		window.addEventListener(
-			PendingRequests.eventName,
+			PendingRequests.EVENT_NAME,
 			checkPendingRequests
 		);
 
@@ -169,10 +169,13 @@ export const waitForPendingRequests = async (): Promise<any> => {
 class PendingRequests {
 	/**
 	 * The event name that is used when the count changes.
+	 * Note that this should be kept inside the class and not in the EventName enum,
+	 * sicne it is not shared between modules.
 	 *
 	 * @static
+	 * @readonly
 	 */
-	static eventName = 'AutomadPendingRequestsChange';
+	static readonly EVENT_NAME = 'AutomadPendingRequestsChange';
 
 	/**
 	 * The number of currently pending requests.
@@ -201,7 +204,7 @@ class PendingRequests {
 		}
 
 		this.count++;
-		fire(this.eventName);
+		fire(this.EVENT_NAME);
 	}
 
 	/**
@@ -218,6 +221,6 @@ class PendingRequests {
 			spinner.remove();
 		}
 
-		fire(this.eventName);
+		fire(this.EVENT_NAME);
 	}
 }

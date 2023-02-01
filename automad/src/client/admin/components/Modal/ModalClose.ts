@@ -48,7 +48,7 @@ class ModalCloseComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		const close = () => {
-			const modal = this.closest('am-modal');
+			const modal = this.closest(ModalComponent.TAG_NAME);
 
 			if (modal instanceof ModalComponent) {
 				modal.close();

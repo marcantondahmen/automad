@@ -99,7 +99,7 @@ class App {
 	 * @param string $request
 	 * @return string the rendered output
 	 */
-	private function render(string $request) {
+	private function render(string $request): string {
 		$Router = new Router();
 		Routes::init($Router);
 		$callable = $Router->get($request);
@@ -110,7 +110,7 @@ class App {
 	/**
 	 * Run a basic permission check on the cache directory.
 	 */
-	private function runPermissionCheck() {
+	private function runPermissionCheck(): void {
 		if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 			exit('<h1>Permission denied!</h1><h2>The "' . AM_DIR_CACHE . '" directory must be writable by the web server!</h2>');
 		}
@@ -119,7 +119,7 @@ class App {
 	/**
 	 * Run a basic PHP version check.
 	 */
-	private function runVersionCheck() {
+	private function runVersionCheck(): void {
 		if (version_compare(PHP_VERSION, $this->requiredVersion, '<')) {
 			exit("<h1>PHP out of date!</h1><h2>Please update your PHP version to $this->requiredVersion or newer!</h2>");
 		}
@@ -128,7 +128,7 @@ class App {
 	/**
 	 * Initialize a PHP session.
 	 */
-	private function startSession() {
+	private function startSession(): void {
 		session_name('Automad-' . md5(AM_BASE_DIR));
 		session_set_cookie_params(0, '/', '', false, true);
 		session_start();

@@ -58,7 +58,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						class="${CSS.navbarItem}"
 						${Attr.tooltip}="${App.text('addPage')}"
 					>
-						<span>New</span>
+						<span>${App.text('new')}</span>
 						<i class="bi bi-plus-lg"></i>
 					</am-modal-toggle>
 				</div>
