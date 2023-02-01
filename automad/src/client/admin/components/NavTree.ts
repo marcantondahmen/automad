@@ -51,6 +51,8 @@ import {
 	html,
 	listen,
 	notifyError,
+	query,
+	queryAll,
 	requestAPI,
 	Route,
 } from '../core';
@@ -117,6 +119,17 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 	const oldParent = srcParentNode.data as unknown as PageMetaData;
 	const url = movedNode.data.url;
 	const layout: string[] = [];
+	const draggables: SortableTreeNodeComponent[] = queryAll(
+		'sortable-tree-node',
+		query(NavTreeComponent.TAG_NAME)
+	) as SortableTreeNodeComponent[];
+	const toggleDraggable = (state: 'true' | 'false') => {
+		draggables.forEach((node) => {
+			node.setAttribute('draggable', state);
+		});
+	};
+
+	toggleDraggable('false');
 
 	targetParentNode.subnodesData.forEach((data) => {
 		layout.push(data.path as string);
@@ -132,6 +145,7 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 			layout: JSON.stringify(layout),
 		});
 
+		toggleDraggable('true');
 		App.removeNavigationLock(lockId);
 		handleResponse(data);
 
@@ -147,6 +161,7 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 		layout: JSON.stringify(layout),
 	});
 
+	toggleDraggable('true');
 	App.removeNavigationLock(lockId);
 	handleResponse(data);
 };
@@ -187,6 +202,14 @@ const showSubnodesOnDragover = debounce((event: MouseEvent): void => {
  * @extends BaseComponent
  */
 export class NavTreeComponent extends BaseComponent {
+	/**
+	 * The tag name that is used for the custom web component.
+	 *
+	 * @static
+	 * @readonly
+	 */
+	static readonly TAG_NAME = 'am-nav-tree';
+
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
@@ -231,12 +254,12 @@ export class NavTreeComponent extends BaseComponent {
 		if (current) {
 			const currentNode = tree.findNode('url', current);
 
-			currentNode.reveal();
-			currentNode.scrollIntoView({
+			currentNode?.reveal();
+			currentNode?.scrollIntoView({
 				block: 'end',
 			});
 		}
 	}
 }
 
-customElements.define('am-nav-tree', NavTreeComponent);
+customElements.define(NavTreeComponent.TAG_NAME, NavTreeComponent);
