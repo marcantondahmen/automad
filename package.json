@@ -6,10 +6,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "clean:admin": "rm -rf ./automad/dist/admin",
     "dev:admin": "webpack --config automad/src/client/admin/webpack.config.js --mode development",
     "dev:blocks": "",
     "dev:themes": "",
-    "build:admin": "webpack --config automad/src/client/admin/webpack.config.js --mode production",
+    "build:admin": "npm run clean:admin && webpack --config automad/src/client/admin/webpack.config.js --mode production",
     "build:blocks": "",
     "build:themes": "",
     "build": "npm run build:admin && npm run build:blocks && npm run build:themes",
