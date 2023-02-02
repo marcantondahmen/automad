@@ -42,6 +42,15 @@ import { FormComponent } from './Form';
  */
 const renderRegisteredUsers = (): string => {
 	return App.system.users.reduce((output, user) => {
+		const checkbox =
+			App.user.name == user.name
+				? html`
+						<span class="${CSS.textMuted}">
+							${App.text('systemUsersYou')}
+						</span>
+				  `
+				: html`<am-checkbox name="delete[${user.name}]"></am-checkbox>`;
+
 		return html`
 			${output}
 			<span class="${CSS.card}">
@@ -52,13 +61,7 @@ const renderRegisteredUsers = (): string => {
 						<span class="${CSS.flexItemGrow}">
 							${user.name} (${user.email})
 						</span>
-						${App.user.name == user.name
-							? `<span class="${CSS.textMuted}">${App.text(
-									'systemUsersYou'
-							  )}</span>`
-							: html`<am-checkbox
-									name="delete[${user.name}]"
-							  ></am-checkbox>`}
+						${checkbox}
 					</span>
 				</span>
 			</span>
