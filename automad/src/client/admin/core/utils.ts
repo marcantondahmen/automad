@@ -51,11 +51,16 @@ declare global {
  * @param text
  * @async
  */
-export const confirm = async (text: string): Promise<any> => {
+export const confirm = async (text: string): Promise<boolean> => {
 	let modal = create(
 		'am-modal',
 		[],
-		{ [Attr.destroy]: '', [Attr.noClick]: '', [Attr.noEsc]: '' },
+		{
+			[Attr.destroy]: '',
+			[Attr.noClick]: '',
+			[Attr.noEsc]: '',
+			style: 'z-index: 2000;',
+		},
 		App.root
 	);
 

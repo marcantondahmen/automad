@@ -49,6 +49,7 @@
 	"deleteSelected": "Delete Selected",
 	"deteledSuccess": "Successfully removed",
 	"disable": "Disable",
+	"discardImageChanges": "Discard changes and close the image editor?",
 	"downloadFile": "Download",
 	"dropFilesOrClick": "Drop files here or click to browse",
 	"duplicatePage": "Duplicate Page",

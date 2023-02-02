@@ -35,7 +35,7 @@
 import FilerobotImageEditor from 'filerobot-image-editor';
 import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
 import { KeyValueMap } from '../../types';
-import { App, Attr, create, CSS, EventName, fire, listen } from '../../core';
+import { App, Attr, confirm, create, CSS, listen } from '../../core';
 import { ModalComponent } from '../Modal/Modal';
 import { BaseComponent } from '../Base';
 import { FormComponent } from '../Forms/Form';
@@ -111,19 +111,29 @@ class FileRobotComponent extends BaseComponent {
 	 */
 	private initFileRobot(form: FormComponent, modal: ModalComponent): void {
 		const config = {
-			source: `${this.elementAttributes[Attr.file]}?${Date.now()}`,
+			source: this.elementAttributes[Attr.file],
 			savingPixelRatio: 1,
 			previewPixelRatio: window.devicePixelRatio,
 			useBackendTranslations: false,
 			theme: fileRobotTheme,
 			translations: App.state.text,
-			onSave: (savedImageData: KeyValueMap, designState: any) => {
-				delete savedImageData.imageCanvas;
-				this.save(form, savedImageData);
+			onSave: async (savedImageData: KeyValueMap, designState: any) => {
+				form.additionalData = savedImageData;
+				await form.submit();
+
+				App.reload();
 			},
-			onClose: (closingReason: string) => {
-				filerobotImageEditor.terminate();
-				modal.close();
+			onClose: async (
+				closingReason: string,
+				haveNotSavedChanges: boolean
+			) => {
+				if (haveNotSavedChanges) {
+					if (!(await confirm(App.text('discardImageChanges')))) {
+						return;
+					}
+				}
+
+				App.reload();
 			},
 		};
 
@@ -133,26 +143,6 @@ class FileRobotComponent extends BaseComponent {
 		);
 
 		filerobotImageEditor.render();
-
-		listen(modal, EventName.modalClose, () => {
-			filerobotImageEditor.terminate();
-		});
-	}
-
-	/**
-	 * Save the image.
-	 *
-	 * @param form
-	 * @param savedImageData
-	 * @async
-	 */
-	private async save(
-		form: FormComponent,
-		savedImageData: KeyValueMap
-	): Promise<void> {
-		form.additionalData = savedImageData;
-		await form.submit();
-		fire(EventName.filesChangeOnServer);
 	}
 }
 

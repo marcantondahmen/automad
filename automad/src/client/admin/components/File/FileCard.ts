@@ -130,7 +130,7 @@ class FileCardComponent extends BaseComponent {
 		if (file.thumbnail) {
 			return html`
 				<am-file-robot
-					${Attr.file}="${App.baseURL}${file.url}"
+					${Attr.file}="${App.baseURL}${file.url}?${Date.now()}"
 					class="${CSS.cardTeaser} ${CSS.cursorPointer}"
 					${Attr.tooltip}="$${file.basename}"
 				>
