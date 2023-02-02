@@ -1,7 +1,10 @@
 const path = require('path');
+const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const pkg = require('./package.json');
 
 const optimizeTemplate = (html) => {
 	return html
@@ -103,7 +106,13 @@ module.exports = (env, argv) => {
 			},
 		},
 		optimization: {
-			minimizer: [new CssMinimizerPlugin(), '...'],
+			minimizer: [
+				new CssMinimizerPlugin(),
+				new TerserPlugin({
+					extractComments: false,
+				}),
+				'...',
+			],
 			splitChunks: {
 				cacheGroups: {
 					vendor: {
@@ -120,6 +129,14 @@ module.exports = (env, argv) => {
 				filename: '[name].bundle.css',
 			}),
 			new SystemBellPlugin(),
+			new webpack.BannerPlugin({
+				banner: () => {
+					const year = new Date().getFullYear();
+
+					return `Automad ${pkg.version}, (c) ${year} ${pkg.author}, ${pkg.license} license`;
+				},
+				exclude: /vendor/,
+			}),
 		],
 	};
 
