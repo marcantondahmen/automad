@@ -65,7 +65,7 @@ class FilterComponent extends BaseComponent {
 	 * The target selector.
 	 */
 	protected get targetSelector(): string {
-		return `[${Attr.api}] .${CSS.field}:not(am-title), .${CSS.card}`;
+		return `section [${Attr.api}] .${CSS.field}:not(am-title), .${CSS.card}`;
 	}
 
 	/**
