@@ -279,7 +279,7 @@ export class FormComponent extends BaseComponent {
 		}
 
 		if (reload) {
-			window.location.reload();
+			App.reload();
 		}
 
 		if (error) {

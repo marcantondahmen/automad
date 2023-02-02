@@ -33,8 +33,19 @@
  */
 
 import { RootComponent } from '../components/Root';
-import { EventName, fire, listen, request, requestAPI } from '.';
 import {
+	deleteSearchParam,
+	EventName,
+	fire,
+	getSearchParam,
+	listen,
+	query,
+	request,
+	requestAPI,
+	setSearchParam,
+} from '.';
+import {
+	InputElement,
 	KeyValueMap,
 	Pages,
 	SystemSettings,
@@ -291,6 +302,50 @@ export class App {
 		this.navigationLocks[id] = true;
 
 		return id;
+	}
+
+	/**
+	 * Save the current filter and window scroll states to the query string and reload the page.
+	 *
+	 * @static
+	 */
+	static reload(): void {
+		const filter = query('am-filter input') as InputElement;
+
+		if (filter) {
+			setSearchParam('filter', filter.value);
+		}
+
+		setSearchParam('scroll', String(window.scrollY));
+
+		window.location.reload();
+	}
+
+	/**
+	 * Restore filter and scrollposition after reloading the page.
+	 *
+	 * @static
+	 */
+	static restoreFilterAndScroll(): void {
+		const filter = query('am-filter input') as InputElement;
+		const savedFilter = getSearchParam('filter');
+		const savedScrollY = getSearchParam('scroll');
+
+		if (savedFilter) {
+			if (filter) {
+				filter.value = savedFilter;
+
+				fire('input', filter);
+			}
+
+			deleteSearchParam('filter');
+		}
+
+		if (savedScrollY) {
+			window.scrollTo(0, parseInt(savedScrollY));
+
+			deleteSearchParam('scroll');
+		}
 	}
 
 	/**

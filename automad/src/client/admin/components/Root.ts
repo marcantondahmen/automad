@@ -45,8 +45,13 @@ import {
 	queryAll,
 	initTooltips,
 	requestAPI,
+	query,
+	setSearchParam,
+	deleteSearchParam,
+	getSearchParam,
 } from '../core';
 import { applyTheme, getTheme } from '../core/theme';
+import { InputElement } from '../types';
 import { BaseComponent } from './Base';
 import { ModalComponent } from './Modal/Modal';
 
@@ -149,6 +154,7 @@ export class RootComponent extends BaseComponent {
 
 		App.checkForSystemUpdate();
 		App.checkForOutdatedPackages();
+		App.restoreFilterAndScroll();
 
 		this.progressBar(100);
 
@@ -162,8 +168,6 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async validateSession(): Promise<void> {
-		const bodyScrollYKey = 'bodyScrollY';
-		const bodyScrollY = localStorage.getItem(bodyScrollYKey);
 		const stateChangeHandler = async (): Promise<void> => {
 			if (document.visibilityState === 'visible') {
 				const data = await requestAPI('Session/validate', {
@@ -174,12 +178,7 @@ export class RootComponent extends BaseComponent {
 				const code = data.code || 403;
 
 				if (code === 403) {
-					localStorage.setItem(
-						bodyScrollYKey,
-						String(window.scrollY)
-					);
-
-					window.location.reload();
+					App.reload();
 				}
 
 				if (data.redirect) {
@@ -187,11 +186,6 @@ export class RootComponent extends BaseComponent {
 				}
 			}
 		};
-
-		if (bodyScrollY) {
-			window.scrollTo(0, parseInt(bodyScrollY));
-			localStorage.removeItem(bodyScrollYKey);
-		}
 
 		this.listeners.push(
 			listen(document, 'visibilitychange', stateChangeHandler.bind(this))

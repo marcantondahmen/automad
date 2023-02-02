@@ -71,7 +71,7 @@ const handleResponse = (data: KeyValueMap): void => {
 	}
 
 	if (data.reload) {
-		window.location.reload();
+		App.reload();
 	}
 
 	if (data.redirect) {
