@@ -44,4 +44,5 @@ export * from './request';
 export * from './router';
 export * from './toggles';
 export * from './tooltips';
+export * from './url';
 export * from './utils';

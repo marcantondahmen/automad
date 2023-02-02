@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, CSS, html, Route } from '../../core';
+import {
+	App,
+	Attr,
+	createField,
+	CSS,
+	getSearchParam,
+	html,
+	Route,
+} from '../../core';
 import { KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
 
@@ -86,8 +94,6 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 * @param data
 	 */
 	private renderRequestToken(data: KeyValueMap): void {
-		const searchParams = new URLSearchParams(window.location.search);
-
 		this.innerHTML = html`
 			<h2>${App.text('resetPassword')}</h2>
 			<div class="${CSS.card}">
@@ -99,7 +105,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 						type="text"
 						class="${CSS.input}"
 						name="name-or-email"
-						value="$${searchParams.get('username') || ''}"
+						value="$${getSearchParam('username')}"
 						placeholder="${App.text('usernameOrEmail')}"
 					/>
 					<div class="${CSS.cardFormButtons}">

@@ -33,7 +33,16 @@
  */
 
 import { BaseComponent } from '../Base';
-import { Attr, EventName, listen, query, queryAll } from '../../core';
+import {
+	Attr,
+	EventName,
+	fire,
+	getSearchParam,
+	listen,
+	query,
+	queryAll,
+	setSearchParam,
+} from '../../core';
 import { SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
@@ -59,9 +68,7 @@ export enum Section {
  * @returns the section name that is used in the query string
  */
 export const getActiveSection = (): string => {
-	const searchParams = new URLSearchParams(window.location.search);
-
-	return searchParams.get('section') || '';
+	return getSearchParam('section');
 };
 
 /**
@@ -70,11 +77,9 @@ export const getActiveSection = (): string => {
  * @param section
  */
 export const setActiveSection = (section: string): void => {
-	const url = new URL(window.location.href);
+	setSearchParam('section', section);
 
-	url.searchParams.set('section', section);
-	window.history.replaceState(null, null, url);
-	window.dispatchEvent(new Event(EventName.switcherChange));
+	fire(EventName.switcherChange);
 };
 
 /**

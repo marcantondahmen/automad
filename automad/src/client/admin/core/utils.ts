@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, create, html, listen } from '.';
+import { App, Attr, CSS, create, html, listen, getPageURL } from '.';
 import { Listener } from '../types';
 
 declare global {
@@ -122,17 +122,6 @@ export const debounce = (
 			callback.apply(this, args);
 		}, timeout);
 	};
-};
-
-/**
- * Get the current page URL from the query string.
- *
- * @returns a page URL
- */
-export const getPageURL = (): string => {
-	const searchParams = new URLSearchParams(window.location.search);
-
-	return searchParams.get('url');
 };
 
 /**

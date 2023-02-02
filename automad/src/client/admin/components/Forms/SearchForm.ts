@@ -42,6 +42,7 @@ import {
 	debounce,
 	fire,
 	getFormData,
+	getSearchParam,
 	html,
 	listen,
 	queryAll,
@@ -243,7 +244,6 @@ export class SearchFormComponent extends BaseComponent {
 	 * @returns the created form input elements
 	 */
 	private createForm(container: HTMLElement): KeyValueMap {
-		const searchParams = new URLSearchParams(window.location.search);
 		const searchBar = create('div', [CSS.flex, CSS.flexGap], {}, container);
 
 		const search = create(
@@ -252,7 +252,7 @@ export class SearchFormComponent extends BaseComponent {
 			{
 				type: 'text',
 				name: 'searchValue',
-				value: searchParams.get('search') || '',
+				value: getSearchParam('search'),
 				placeholder: App.text('searchPlaceholder'),
 			},
 			searchBar
