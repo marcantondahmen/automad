@@ -46,6 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class PageIndex {
+	const INDEX_FILE = '.index.json';
+
 	/**
 	 * Append a new page to the index in case the index exists.
 	 *
@@ -146,6 +148,6 @@ class PageIndex {
 	private static function getIndexFile(string $parentPath): string {
 		$parentPath = rtrim($parentPath, '/') . '/';
 
-		return AM_BASE_DIR . AM_DIR_PAGES . $parentPath . AM_FILE_INDEX;
+		return AM_BASE_DIR . AM_DIR_PAGES . $parentPath . PageIndex::INDEX_FILE;
 	}
 }

@@ -109,7 +109,6 @@ class Config {
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE
-		self::set('AM_FILE_INDEX', '.index.json');
 		self::set('AM_FILE_DEFAULT_TEMPLATE', 'standard/light/sidebar_left.php');
 		self::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 		self::set('AM_FILE_EXT_CAPTION', 'caption');
