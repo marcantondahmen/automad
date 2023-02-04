@@ -150,7 +150,7 @@ export class SharedDataFormComponent extends FormComponent {
 	 */
 	private render(response: KeyValueMap): void {
 		const { fields } = response.data;
-		const themeKey = App.reservedFields.AM_KEY_THEME;
+		const themeKey = App.reservedFields.THEME;
 		const mainTheme = fields[themeKey] || Object.keys(App.themes)[0];
 		const tooltips = App.themes[mainTheme].tooltips;
 		const fieldGroups = prepareFieldGroups(fields);
@@ -171,9 +171,9 @@ export class SharedDataFormComponent extends FormComponent {
 			'am-title',
 			this.sections.settings,
 			{
-				key: App.reservedFields.AM_KEY_SITENAME,
-				value: fields[App.reservedFields.AM_KEY_SITENAME],
-				name: `data[${App.reservedFields.AM_KEY_SITENAME}]`,
+				key: App.reservedFields.SITENAME,
+				value: fields[App.reservedFields.SITENAME],
+				name: `data[${App.reservedFields.SITENAME}]`,
 			},
 			[],
 			{ required: '' }

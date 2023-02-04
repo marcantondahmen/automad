@@ -228,7 +228,7 @@ export class PageDataFormComponent extends FormComponent {
 
 		const titleField = createMainField(
 			'am-title',
-			App.reservedFields.AM_KEY_TITLE,
+			App.reservedFields.TITLE,
 			'',
 			{
 				required: '',
@@ -248,7 +248,7 @@ export class PageDataFormComponent extends FormComponent {
 			'a',
 			[],
 			{
-				href: `${App.baseURL}${fields[App.reservedFields.AM_KEY_URL]}`,
+				href: `${App.baseURL}${fields[App.reservedFields.URL]}`,
 				target: '_blank',
 				[Attr.bind]: 'pageUrlWithBase',
 				[Attr.bindTo]: 'href',
@@ -266,7 +266,7 @@ export class PageDataFormComponent extends FormComponent {
 
 		createMainField(
 			'am-toggle-large',
-			App.reservedFields.AM_KEY_PRIVATE,
+			App.reservedFields.PRIVATE,
 			App.text('keepPagePrivate')
 		);
 
@@ -280,7 +280,7 @@ export class PageDataFormComponent extends FormComponent {
 		templateField.data = {
 			fields,
 			template,
-			themeKey: App.reservedFields.AM_KEY_THEME,
+			themeKey: App.reservedFields.THEME,
 		};
 
 		const readmeLink = create(
@@ -302,15 +302,11 @@ export class PageDataFormComponent extends FormComponent {
 
 		createMainField(
 			'am-toggle',
-			App.reservedFields.AM_KEY_HIDDEN,
+			App.reservedFields.HIDDEN,
 			App.text('hidePage')
 		);
 
-		createMainField(
-			'am-date',
-			App.reservedFields.AM_KEY_DATE,
-			App.text('date')
-		);
+		createMainField('am-date', App.reservedFields.DATE, App.text('date'));
 
 		if (url != '/') {
 			createField(
@@ -329,13 +325,13 @@ export class PageDataFormComponent extends FormComponent {
 
 		createMainField(
 			'am-url',
-			App.reservedFields.AM_KEY_URL,
+			App.reservedFields.URL,
 			App.text('redirectPage')
 		);
 
 		createMainField(
 			'am-page-tags',
-			App.reservedFields.AM_KEY_TAGS,
+			App.reservedFields.TAGS,
 			App.text('pageTags')
 		);
 	}
@@ -414,7 +410,7 @@ export class PageDataFormComponent extends FormComponent {
 			this
 		);
 
-		const themeKey = App.reservedFields.AM_KEY_THEME;
+		const themeKey = App.reservedFields.THEME;
 		const themes = App.themes;
 
 		setDocumentTitle(fields.title);

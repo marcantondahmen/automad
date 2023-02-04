@@ -64,7 +64,7 @@ class Shared {
 	public function __construct() {
 		// Use the server name as default site name.
 		$defaults = array(
-			AM_KEY_SITENAME => $_SERVER['SERVER_NAME'] ?? 'Site'
+			Fields::SITENAME => $_SERVER['SERVER_NAME'] ?? 'Site'
 		);
 
 		// Merge defaults with settings from file.
@@ -72,7 +72,7 @@ class Shared {
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
 		// Check whether there is a theme defined in the Shared object data.
-		if (!$this->get(AM_KEY_THEME) && strpos(AM_REQUEST, RequestHandler::$apiBase) !== 0) {
+		if (!$this->get(Fields::THEME) && strpos(AM_REQUEST, RequestHandler::$apiBase) !== 0) {
 			exit('<h1>No main theme defined!</h1><h2>Please define a theme!</h2>');
 		}
 	}

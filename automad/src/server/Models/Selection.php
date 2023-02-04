@@ -363,7 +363,7 @@ class Selection {
 
 		// Define default option in case an empty string gets passed.
 		if (!$options) {
-			$options = AM_KEY_PAGE_INDEX . ' asc';
+			$options = Fields::PAGE_INDEX . ' asc';
 		}
 
 		// Parse options string.

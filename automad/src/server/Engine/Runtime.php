@@ -84,31 +84,31 @@ class Runtime {
 			return $this->data[$key];
 		} else {
 			switch ($key) {
-				case AM_KEY_NOW:
+				case Fields::NOW:
 					// The current date/time.
 					return date(DATE_ATOM);
 
-				case AM_KEY_FILELIST_COUNT:
+				case Fields::FILELIST_COUNT:
 					// The filelist count represents the number of files within the last defined filelist.
 					return count($this->Automad->getFilelist()->getFiles());
 
-				case AM_KEY_PAGELIST_COUNT:
+				case Fields::PAGELIST_COUNT:
 					// The pagelist count represents the number of pages within the last defined pagelist, ignoring limit and pagination.
 					return count($this->Automad->getPagelist()->getPages(true));
 
-				case AM_KEY_PAGELIST_DISPLAY_COUNT:
+				case Fields::PAGELIST_DISPLAY_COUNT:
 					// The pagelist display count represents the number of pages that will be displayed.
 					return count($this->Automad->getPagelist()->getPages(false));
 
-				case AM_KEY_PAGINATION_COUNT:
+				case Fields::PAGINATION_COUNT:
 					// The last page number of the pagination of the current pagelist.
 					return $this->Automad->getPagelist()->getPaginationCount();
 
-				case AM_KEY_CAPTION:
+				case Fields::CAPTION:
 					// Get the caption for the currently used ":file".
 					// In case ":file" is "image.jpg", the parsed caption file is "image.jpg.caption" and the returned value is stored in ":caption".
-					if (isset($this->data[AM_KEY_FILE])) {
-						return FileUtils::caption(AM_BASE_DIR . $this->data[AM_KEY_FILE]);
+					if (isset($this->data[Fields::FILE])) {
+						return FileUtils::caption(AM_BASE_DIR . $this->data[Fields::FILE]);
 					} else {
 						return false;
 					}

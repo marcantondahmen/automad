@@ -132,7 +132,7 @@ class PostProcessor {
 		$meta = '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
 
 		if (AM_FEED_ENABLED) {
-			$sitename = $this->Automad->Shared->get(AM_KEY_SITENAME);
+			$sitename = $this->Automad->Shared->get(Fields::SITENAME);
 			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . Server::url() . AM_BASE_INDEX . AM_FEED_URL . '">';
 		}
 

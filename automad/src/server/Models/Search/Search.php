@@ -108,7 +108,7 @@ class Search {
 
 		foreach ($this->Automad->getCollection() as $Page) {
 			if ($fieldResultsArray = $this->searchData($Page->data)) {
-				$path = AM_DIR_PAGES . $Page->path . $Page->get(':template') . '.' . AM_FILE_EXT_DATA;
+				$path = AM_DIR_PAGES . $Page->path . $Page->get(Fields::TEMPLATE) . '.' . AM_FILE_EXT_DATA;
 				$resultsPerFile[] = new FileResults($path, $fieldResultsArray, $Page->origUrl);
 			}
 		}
@@ -283,11 +283,11 @@ class Search {
 	 */
 	private function searchTextField(string $field, string $value): ?FieldResults {
 		$ignoredKeys = array(
-			AM_KEY_HIDDEN,
-			AM_KEY_PRIVATE,
-			AM_KEY_THEME,
-			AM_KEY_URL,
-			AM_KEY_TITLE
+			Fields::HIDDEN,
+			Fields::PRIVATE,
+			Fields::THEME,
+			Fields::URL,
+			Fields::TITLE
 		);
 
 		if (preg_match('/^(:|date|checkbox|tags|color)/', $field) || in_array($field, $ignoredKeys)) {

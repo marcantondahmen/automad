@@ -43,6 +43,7 @@ use Automad\Models\Page;
 use Automad\Models\PageCollection;
 use Automad\Models\Pagelist;
 use Automad\Models\Shared;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -191,13 +192,13 @@ class Automad {
 
 		foreach ($this->collection as $Page) {
 			$pages[$Page->origUrl] = array(
-				'title' => $Page->get(AM_KEY_TITLE),
+				'title' => $Page->get(Fields::TITLE),
 				'index' => $Page->index,
 				'url' => $Page->origUrl,
 				'path' => $Page->path,
 				'parentUrl' => $Page->parentUrl,
 				'private' => $Page->private,
-				'mTime' => $Page->get(AM_KEY_MTIME)
+				'mTime' => $Page->get(Fields::MTIME)
 			);
 		}
 
@@ -253,8 +254,8 @@ class Automad {
 			ob_end_clean();
 		} else {
 			$template = Str::stripStart($file, AM_BASE_DIR . AM_DIR_PACKAGES);
-			$title = $this->Context->get()->get(AM_KEY_TITLE);
-			$url = $this->Context->get()->get(AM_KEY_URL);
+			$title = $this->Context->get()->get(Fields::TITLE);
+			$url = $this->Context->get()->get(Fields::URL);
 			$output = "<h1>Template $template for page $title ($url) is missing!</h1><h2>Make sure you have selected an existing template for this page!</h2>";
 		}
 
@@ -291,11 +292,11 @@ class Automad {
 	private function pageNotFound(): Page {
 		header('HTTP/1.0 404 Not Found');
 
-		if (file_exists(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->Shared->get(AM_KEY_THEME) . '/' . AM_PAGE_NOT_FOUND_TEMPLATE . '.php')) {
+		if (file_exists(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->Shared->get(Fields::THEME) . '/' . AM_PAGE_NOT_FOUND_TEMPLATE . '.php')) {
 			$data = array();
-			$data[AM_KEY_TEMPLATE] = AM_PAGE_NOT_FOUND_TEMPLATE;
-			$data[AM_KEY_LEVEL] = 0;
-			$data[AM_KEY_PARENT] = '';
+			$data[Fields::TEMPLATE] = AM_PAGE_NOT_FOUND_TEMPLATE;
+			$data[Fields::LEVEL] = 0;
+			$data[Fields::PARENT] = '';
 
 			return new Page($data, $this->Shared);
 		}

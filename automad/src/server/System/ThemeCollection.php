@@ -72,7 +72,7 @@ class ThemeCollection {
 
 	/**
 	 * 	Get the theme object by the key in the themelist array
-	 * 	corresponding to the AM_KEY_THEME variable.
+	 * 	corresponding to the Fields::THEME variable.
 	 *
 	 * @param string $key
 	 * @return Theme|null The requested theme object

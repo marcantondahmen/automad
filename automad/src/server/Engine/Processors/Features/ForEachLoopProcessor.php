@@ -102,7 +102,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				// Set context to the current page in the loop.
 				$Context->set($Page);
 				// Set index for current page. The index can be used as @{:i}.
-				$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i + $offset);
+				$this->Runtime->set(Fields::LOOP_INDEX, ++$i + $offset);
 				// Parse snippet.
 				Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
@@ -122,9 +122,9 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			foreach ($this->Automad->getPagelist()->getTags() as $filter) {
 				Debug::log($filter, 'Processing snippet in loop for filter');
 				// Store current filter in the system variable buffer.
-				$this->Runtime->set(AM_KEY_FILTER, $filter);
+				$this->Runtime->set(Fields::FILTER, $filter);
 				// Set index. The index can be used as @{:i}.
-				$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i);
+				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
 				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
 			}
 		} elseif (strtolower($matches['foreach']) == 'tags') {
@@ -133,9 +133,9 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			foreach ($Context->get()->tags as $tag) {
 				Debug::log($tag, 'Processing snippet in loop for tag');
 				// Store current tag in the system variable buffer.
-				$this->Runtime->set(AM_KEY_TAG, $tag);
+				$this->Runtime->set(Fields::TAG, $tag);
 				// Set index. The index can be used as @{:i}.
-				$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i);
+				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
 				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
 			}
 		} else {
@@ -156,7 +156,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			foreach ($files as $file) {
 				Debug::log($file, 'Processing snippet in loop for file');
 				// Set index. The index can be used as @{:i}.
-				$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i);
+				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
 				$html .= $this->ContentProcessor->processFileSnippet(
 					$file,
 					Parse::jsonOptions(

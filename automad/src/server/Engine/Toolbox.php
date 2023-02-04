@@ -109,7 +109,7 @@ class Toolbox {
 		$html = '<ul' . $class . '>';
 
 		foreach ($Selection->getSelection($options['excludeHidden']) as $Page) {
-			$html .= '<li><a href="' . $Page->url . '">' . Str::stripTags($Page->get(AM_KEY_TITLE)) . '</a></li> ';
+			$html .= '<li><a href="' . $Page->url . '">' . Str::stripTags($Page->get(Fields::TITLE)) . '</a></li> ';
 		}
 
 		$html .= '</ul>';
@@ -229,7 +229,7 @@ class Toolbox {
 				$html .= $active;
 			}
 
-			$html .= '><a href="' . $Page->url . '">' . Str::stripTags($Page->get(AM_KEY_TITLE)) . '</a></li>';
+			$html .= '><a href="' . $Page->url . '">' . Str::stripTags($Page->get(Fields::TITLE)) . '</a></li>';
 		}
 
 		$html .= '</ul>';
@@ -340,7 +340,7 @@ class Toolbox {
 						$html .= ' class="' . $options['active'] . '"';
 					}
 
-					$html .= '><a href="' . $Page->url . '">' . Str::stripTags($Page->get(AM_KEY_TITLE)) . '</a>';
+					$html .= '><a href="' . $Page->url . '">' . Str::stripTags($Page->get(Fields::TITLE)) . '</a>';
 
 					if ($options['all'] || $Page->isCurrent() || $Page->isInCurrentPath()) {
 						$html .= 	$this->navTree(array_merge(

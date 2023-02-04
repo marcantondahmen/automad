@@ -93,7 +93,7 @@ class Mail {
 		}
 
 		// Prepare mail.
-		$subject = $Automad->Shared->get(AM_KEY_SITENAME) . ': ' . strip_tags($_POST[$subject]);
+		$subject = $Automad->Shared->get(Fields::SITENAME) . ': ' . strip_tags($_POST[$subject]);
 		$message = strip_tags($_POST[$message]);
 		$header = 'From: ' . preg_replace('/[^\w\d\.@\-]/', '', $_POST[$from]);
 

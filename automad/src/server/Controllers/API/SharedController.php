@@ -76,7 +76,7 @@ class SharedController {
 				return $Response->setError($Messenger->getError());
 			}
 
-			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $Shared->get(AM_KEY_THEME)) {
+			if (!empty($data[Fields::THEME]) && $data[Fields::THEME] != $Shared->get(Fields::THEME)) {
 				$Response->setReload(true);
 			}
 
@@ -84,7 +84,7 @@ class SharedController {
 		}
 
 		$ThemeCollection = new ThemeCollection();
-		$mainThemeName = $Shared->get(AM_KEY_THEME) ? $Shared->get(AM_KEY_THEME) : array_keys($ThemeCollection->getThemes())[0];
+		$mainThemeName = $Shared->get(Fields::THEME) ? $Shared->get(Fields::THEME) : array_keys($ThemeCollection->getThemes())[0];
 		$Theme = $ThemeCollection->getThemeByKey($mainThemeName);
 		$keys = isset($Theme) ? Fields::inTheme($Theme) : array();
 

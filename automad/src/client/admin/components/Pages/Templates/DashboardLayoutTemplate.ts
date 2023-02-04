@@ -183,11 +183,9 @@ export const dashboardLayout = ({ main }: Partials) => {
 								'am-input',
 								null,
 								{
-									key: `new-${App.reservedFields.AM_KEY_TITLE}`,
-									name: App.reservedFields.AM_KEY_TITLE,
-									label: titleCase(
-										App.reservedFields.AM_KEY_TITLE
-									),
+									key: `new-${App.reservedFields.TITLE}`,
+									name: App.reservedFields.TITLE,
+									label: titleCase(App.reservedFields.TITLE),
 									value: '',
 								},
 								[],
@@ -200,8 +198,8 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</div>
 						${
 							createField('am-toggle-large', null, {
-								key: `new-${App.reservedFields.AM_KEY_PRIVATE}`,
-								name: App.reservedFields.AM_KEY_PRIVATE,
+								key: `new-${App.reservedFields.PRIVATE}`,
+								name: App.reservedFields.PRIVATE,
 								label: App.text('keepPagePrivate'),
 								value: true,
 							}).outerHTML

@@ -43,6 +43,7 @@ use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -133,28 +134,28 @@ class Page {
 		$this->Shared = $Shared;
 
 		$this->data = array_merge(array(
-			AM_KEY_HIDDEN => false,
-			AM_KEY_PRIVATE => false,
-			AM_KEY_LEVEL => 0,
-			AM_KEY_ORIG_URL => '',
-			AM_KEY_PARENT => '',
-			AM_KEY_PATH => '',
-			AM_KEY_TEMPLATE => '',
-			AM_KEY_URL => '',
-			AM_KEY_PAGE_INDEX => ''
+			Fields::HIDDEN => false,
+			Fields::PRIVATE => false,
+			Fields::LEVEL => 0,
+			Fields::ORIG_URL => '',
+			Fields::PARENT => '',
+			Fields::PATH => '',
+			Fields::TEMPLATE => '',
+			Fields::URL => '',
+			Fields::PAGE_INDEX => ''
 		), $data);
 
 		$this->tags = $this->extractTags();
 
-		$this->hidden = &$this->data[AM_KEY_HIDDEN];
-		$this->private = &$this->data[AM_KEY_PRIVATE];
-		$this->level = &$this->data[AM_KEY_LEVEL];
-		$this->origUrl = &$this->data[AM_KEY_ORIG_URL];
-		$this->parentUrl = &$this->data[AM_KEY_PARENT];
-		$this->path = &$this->data[AM_KEY_PATH];
-		$this->template = &$this->data[AM_KEY_TEMPLATE];
-		$this->url = &$this->data[AM_KEY_URL];
-		$this->index = &$this->data[AM_KEY_PAGE_INDEX];
+		$this->hidden = &$this->data[Fields::HIDDEN];
+		$this->private = &$this->data[Fields::PRIVATE];
+		$this->level = &$this->data[Fields::LEVEL];
+		$this->origUrl = &$this->data[Fields::ORIG_URL];
+		$this->parentUrl = &$this->data[Fields::PARENT];
+		$this->path = &$this->data[Fields::PATH];
+		$this->template = &$this->data[Fields::TEMPLATE];
+		$this->url = &$this->data[Fields::URL];
+		$this->index = &$this->data[Fields::PAGE_INDEX];
 	}
 
 	/**
@@ -183,16 +184,16 @@ class Page {
 
 		// Data, also directly append possibly existing suffix to title here.
 		$data = array(
-			AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
-			AM_KEY_PRIVATE => $isPrivate
+			Fields::TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
+			Fields::PRIVATE => $isPrivate
 		);
 
 		if ($theme != '.') {
-			$data[AM_KEY_THEME] = $theme;
+			$data[Fields::THEME] = $theme;
 		}
 
 		// Set date.
-		$data[AM_KEY_DATE] = date('Y-m-d H:i:s');
+		$data[Fields::DATE] = date('Y-m-d H:i:s');
 
 		// Build the file name and save the txt file.
 		$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
@@ -304,37 +305,37 @@ class Page {
 	): Page {
 		$data = Parse::dataFile($file);
 
-		if (array_key_exists(AM_KEY_PRIVATE, $data)) {
-			$data[AM_KEY_PRIVATE] = ($data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] !== 'false');
+		if (array_key_exists(Fields::PRIVATE, $data)) {
+			$data[Fields::PRIVATE] = ($data[Fields::PRIVATE] && $data[Fields::PRIVATE] !== 'false');
 		} else {
-			$data[AM_KEY_PRIVATE] = false;
+			$data[Fields::PRIVATE] = false;
 		}
 
-		if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
+		if (!array_key_exists(Fields::TITLE, $data) || ($data[Fields::TITLE] == '')) {
 			if (trim($url, '/')) {
-				$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
+				$data[Fields::TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 			} else {
-				$data[AM_KEY_TITLE] = $Shared->get(AM_KEY_SITENAME);
+				$data[Fields::TITLE] = $Shared->get(Fields::SITENAME);
 			}
 		}
 
-		if (empty($data[AM_KEY_URL])) {
-			$data[AM_KEY_URL] = $url;
+		if (empty($data[Fields::URL])) {
+			$data[Fields::URL] = $url;
 		}
 
-		if (array_key_exists(AM_KEY_HIDDEN, $data)) {
-			$data[AM_KEY_HIDDEN] = ($data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] !== 'false');
+		if (array_key_exists(Fields::HIDDEN, $data)) {
+			$data[Fields::HIDDEN] = ($data[Fields::HIDDEN] && $data[Fields::HIDDEN] !== 'false');
 		} else {
-			$data[AM_KEY_HIDDEN] = false;
+			$data[Fields::HIDDEN] = false;
 		}
 
-		$data[AM_KEY_ORIG_URL] = $url;
+		$data[Fields::ORIG_URL] = $url;
 
-		$data[AM_KEY_PAGE_INDEX] = $index;
-		$data[AM_KEY_PATH] = $path;
-		$data[AM_KEY_LEVEL] = $level;
-		$data[AM_KEY_PARENT] = $parentUrl;
-		$data[AM_KEY_TEMPLATE] = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
+		$data[Fields::PAGE_INDEX] = $index;
+		$data[Fields::PATH] = $path;
+		$data[Fields::LEVEL] = $level;
+		$data[Fields::PARENT] = $parentUrl;
+		$data[Fields::TEMPLATE] = str_replace('.txt', '', basename($file));
 
 		return new Page($data, $Shared);
 	}
@@ -363,13 +364,13 @@ class Page {
 
 		// Generate system variable value or return an empty string.
 		switch ($key) {
-			case AM_KEY_CURRENT_PAGE:
+			case Fields::CURRENT_PAGE:
 				return $this->isCurrent() ? 'true' : '';
-			case AM_KEY_CURRENT_PATH:
+			case Fields::CURRENT_PATH:
 				return $this->isInCurrentPath() ? 'true' : '';
-			case AM_KEY_BASENAME:
+			case Fields::BASENAME:
 				return basename($this->path);
-			case AM_KEY_MTIME:
+			case Fields::MTIME:
 				return $this->getMtime();
 			default:
 				return '';
@@ -411,7 +412,7 @@ class Page {
 	 */
 	public function getTemplate(): string {
 		$packages = AM_BASE_DIR . AM_DIR_PACKAGES . '/';
-		$templatePath = $packages . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
+		$templatePath = $packages . $this->get(Fields::THEME) . '/' . $this->template . '.php';
 
 		if (file_exists($templatePath)) {
 			return $templatePath;
@@ -499,16 +500,16 @@ class Page {
 		$data = array_map('trim', $data);
 		$data = array_filter($data, 'strlen');
 
-		if (!empty($data[AM_KEY_PRIVATE])) {
+		if (!empty($data[Fields::PRIVATE])) {
 			$private = true;
 		} else {
 			$private = false;
 		}
 
 		if (dirname($themeTemplate) != '.') {
-			$data[AM_KEY_THEME] = dirname($themeTemplate);
+			$data[Fields::THEME] = dirname($themeTemplate);
 		} else {
-			unset($data[AM_KEY_THEME]);
+			unset($data[Fields::THEME]);
 		}
 
 		unlink($this->getFile());
@@ -520,10 +521,10 @@ class Page {
 
 		$newSlug = $slug;
 
-		if ($url != '/' && is_string($data[AM_KEY_TITLE])) {
+		if ($url != '/' && $data[Fields::TITLE]) {
 			$newSlug = Page::updateSlug(
-				$this->get(AM_KEY_TITLE),
-				$data[AM_KEY_TITLE],
+				$this->get(Fields::TITLE),
+				$data[Fields::TITLE],
 				$slug
 			);
 
@@ -539,14 +540,14 @@ class Page {
 
 		$newTheme = '';
 
-		if (isset($data[AM_KEY_THEME])) {
-			$newTheme = $data[AM_KEY_THEME];
+		if (isset($data[Fields::THEME])) {
+			$newTheme = $data[Fields::THEME];
 		}
 
 		$currentTheme = '';
 
-		if (isset($this->data[AM_KEY_THEME])) {
-			$currentTheme = $this->data[AM_KEY_THEME];
+		if (isset($this->data[Fields::THEME])) {
+			$currentTheme = $this->data[Fields::THEME];
 		}
 
 		Cache::clear();
@@ -558,7 +559,7 @@ class Page {
 		}
 
 		if ($this->path != $newPagePath ||
-			$data[AM_KEY_TITLE] != $this->data[AM_KEY_TITLE] ||
+			$data[Fields::TITLE] != $this->data[Fields::TITLE] ||
 			$newSlug != $slug ||
 			$private != $this->private
 		) {
@@ -570,8 +571,8 @@ class Page {
 				$newOrigUrl = $Page->origUrl;
 				$newUrl = $newOrigUrl;
 
-				if (!empty($data[AM_KEY_URL])) {
-					$newUrl = $data[AM_KEY_URL];
+				if (!empty($data[Fields::URL])) {
+					$newUrl = $data[Fields::URL];
 				}
 
 				return array(
@@ -610,7 +611,7 @@ class Page {
 			if (!empty($files)) {
 				$file = reset($files);
 				$data = Parse::dataFile($file);
-				$data[AM_KEY_TITLE] .= ucwords(str_replace('-', ' ', $suffix));
+				$data[Fields::TITLE] .= ucwords(str_replace('-', ' ', $suffix));
 				FileSystem::writeData($data, $file);
 			}
 		}
@@ -624,9 +625,9 @@ class Page {
 	private function extractTags(): array {
 		$tags = array();
 
-		if (isset($this->data[AM_KEY_TAGS])) {
+		if (isset($this->data[Fields::TAGS])) {
 			// All tags are splitted into an array
-			$tags = explode(AM_PARSE_STR_SEPARATOR, $this->data[AM_KEY_TAGS]);
+			$tags = explode(AM_PARSE_STR_SEPARATOR, $this->data[Fields::TAGS]);
 			// Trim & strip tags
 			$tags = array_map(function (string $tag) {
 				return trim(Str::stripTags($tag));

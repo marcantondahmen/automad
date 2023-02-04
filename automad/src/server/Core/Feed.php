@@ -90,7 +90,7 @@ class Feed {
 			xmlns:content="http://purl.org/rss/1.0/modules/content/"
 			>
 				<channel>
-					<title>{$fn($this->Automad->Shared->get(AM_KEY_SITENAME))}</title>
+					<title>{$fn($this->Automad->Shared->get(Fields::SITENAME))}</title>
 					<link>{$fn(Server::url())}</link>
 					<atom:link href="{$fn(Server::url() . AM_BASE_INDEX . AM_FEED_URL)}" rel="self" type="application/rss+xml" />
 					<description>
@@ -131,7 +131,7 @@ class Feed {
 
 			$output .= <<< XML
 					<item>
-						<title>{$fn($Page->get(AM_KEY_TITLE))}</title>
+						<title>{$fn($Page->get(Fields::TITLE))}</title>
 						<link>$link</link>
 						<guid isPermaLink="true">$link</guid>
 						<pubDate>{$fn(Str::dateFormat($Page->getMTime(), DATE_RSS))}</pubDate>

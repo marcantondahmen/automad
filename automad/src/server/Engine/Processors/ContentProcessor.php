@@ -111,15 +111,15 @@ class ContentProcessor {
 		$runtimeShelf = $this->Runtime->shelve();
 
 		// Store current filename and its basename in the system variable buffer.
-		$this->Runtime->set(AM_KEY_FILE, $file);
-		$this->Runtime->set(AM_KEY_BASENAME, basename($file));
+		$this->Runtime->set(Fields::FILE, $file);
+		$this->Runtime->set(Fields::BASENAME, basename($file));
 
 		// If $file is an image, also provide width and height (and possibly a new filename after a resize).
 		if (FileUtils::fileIsImage($file)) {
 			// The Original file size.
 			$imgSize = getimagesize(AM_BASE_DIR . $file);
-			$this->Runtime->set(AM_KEY_WIDTH, $imgSize[0]);
-			$this->Runtime->set(AM_KEY_HEIGHT, $imgSize[1]);
+			$this->Runtime->set(Fields::WIDTH, $imgSize[0]);
+			$this->Runtime->set(Fields::HEIGHT, $imgSize[1]);
 
 			// If any options are given, create a resized version of the image.
 			if (!empty($options)) {
@@ -133,9 +133,9 @@ class ContentProcessor {
 				);
 
 				$img = new Image(AM_BASE_DIR . $file, $options['width'], $options['height'], $options['crop']);
-				$this->Runtime->set(AM_KEY_FILE_RESIZED, $img->file);
-				$this->Runtime->set(AM_KEY_WIDTH_RESIZED, $img->width);
-				$this->Runtime->set(AM_KEY_HEIGHT_RESIZED, $img->height);
+				$this->Runtime->set(Fields::FILE_RESIZED, $img->file);
+				$this->Runtime->set(Fields::WIDTH_RESIZED, $img->width);
+				$this->Runtime->set(Fields::HEIGHT_RESIZED, $img->height);
 			}
 		}
 

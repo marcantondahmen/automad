@@ -111,7 +111,7 @@ class PageController {
 			foreach ($Selection->getSelection(false) as $Page) {
 				$breadcrumbs[] = array(
 					'url' => $Page->origUrl,
-					'title' => $Page->get(AM_KEY_TITLE)
+					'title' => $Page->get(Fields::TITLE)
 				);
 			}
 
@@ -155,7 +155,7 @@ class PageController {
 
 		// If only the URL got submitted, just get the form ready.
 		$ThemeCollection = new ThemeCollection();
-		$Theme = $ThemeCollection->getThemeByKey($Page->get(AM_KEY_THEME));
+		$Theme = $ThemeCollection->getThemeByKey($Page->get(Fields::THEME));
 		$keys = Fields::inCurrentTemplate($Page, $Theme);
 		$data = Parse::dataFile($Page->getFile());
 
@@ -351,7 +351,7 @@ class PageController {
 		$Response = new Response();
 		$pageFile = $Page->getFile();
 
-		if (!$data[AM_KEY_TITLE]) {
+		if (!$data[Fields::TITLE]) {
 			return $Response->setError(Text::get('missingPageTitleError'));
 		}
 

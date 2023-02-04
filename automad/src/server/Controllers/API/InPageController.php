@@ -86,10 +86,10 @@ class InPageController {
 					Debug::log($Page->getFile(), 'data file');
 
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
-					if (!empty($postData[AM_KEY_TITLE]) && $Page->url != '/') {
+					if (!empty($postData[Fields::TITLE]) && $Page->url != '/') {
 						$slug = PageModel::updateSlug(
-							$Page->get(AM_KEY_TITLE),
-							$postData[AM_KEY_TITLE],
+							$Page->get(Fields::TITLE),
+							$postData[Fields::TITLE],
 							PageModel::extractSlugFromPath($Page->path)
 						);
 

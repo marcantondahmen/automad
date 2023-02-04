@@ -74,7 +74,7 @@ class AppController {
 			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
 			'languages' => self::getLanguages(),
 			'reservedFields' => Fields::$reserved,
-			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
+			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'text' => Text::getObject(),
 			'version' => AM_VERSION
 		));
@@ -95,9 +95,9 @@ class AppController {
 			'allowedFileTypes' => FileUtils::allowedFileTypes(),
 			'contentFields' => self::getContentFields(),
 			'feed' => Server::url() . AM_BASE_INDEX . AM_FEED_URL,
-			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME),
+			'mainTheme' => $Automad->Shared->get(Fields::THEME),
 			'pages' => $Automad->getNavigationMetaData(),
-			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
+			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'system' => array(
 				'cache' => array(
 					'enabled' => AM_CACHE_ENABLED,

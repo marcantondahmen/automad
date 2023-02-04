@@ -50,18 +50,52 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Fields {
+	const BASENAME = ':basename';
+	const CAPTION = ':caption';
+	const CURRENT_PAGE = ':current';
+	const CURRENT_PATH = ':currentPath';
+	const DATE = 'date';
+	const FILE = ':file';
+	const FILE_RESIZED = ':fileResized';
+	const FILELIST_COUNT = ':filelistCount';
+	const FILTER = ':filter';
+	const HEIGHT = ':height';
+	const HEIGHT_RESIZED = ':heightResized';
+	const HIDDEN = 'hidden';
+	const LEVEL = ':level';
+	const LOOP_INDEX = ':i';
+	const MTIME = ':mtime';
+	const NOW = ':now';
+	const ORIG_URL = ':origUrl';
+	const PAGE_INDEX = ':index';
+	const PAGELIST_COUNT = ':pagelistCount';
+	const PAGELIST_DISPLAY_COUNT = ':pagelistDisplayCount';
+	const PAGINATION_COUNT = ':paginationCount';
+	const PARENT = ':parent';
+	const PATH = ':path';
+	const PRIVATE = 'private';
+	const SITENAME = 'sitename';
+	const TAG = ':tag';
+	const TAGS = 'tags';
+	const TEMPLATE = ':template';
+	const THEME = 'theme';
+	const TITLE = 'title';
+	const URL = 'url';
+	const WIDTH = ':width';
+	const WIDTH_RESIZED = ':widthResized';
+
 	/**
 	 * Array with reserved variable fields.
 	 */
 	public static array $reserved = array(
-		'AM_KEY_DATE' => AM_KEY_DATE,
-		'AM_KEY_HIDDEN' => AM_KEY_HIDDEN,
-		'AM_KEY_PRIVATE' => AM_KEY_PRIVATE,
-		'AM_KEY_TAGS' => AM_KEY_TAGS,
-		'AM_KEY_THEME' => AM_KEY_THEME,
-		'AM_KEY_TITLE' => AM_KEY_TITLE,
-		'AM_KEY_SITENAME' => AM_KEY_SITENAME,
-		'AM_KEY_URL' => AM_KEY_URL
+		'DATE' => Fields::DATE,
+		'HIDDEN' => Fields::HIDDEN,
+		'PRIVATE' => Fields::PRIVATE,
+		'TAGS' => Fields::TAGS,
+		'THEME' => Fields::THEME,
+		'TITLE' => Fields::TITLE,
+		'SITENAME' => Fields::SITENAME,
+		'URL' => Fields::URL
 	);
 
 	/**
@@ -77,7 +111,7 @@ class Fields {
 		}
 
 		// Don't use $Page->getTemplate() to prevent exit on errors.
-		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
+		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(Fields::THEME) . '/' . $Page->template . '.php';
 		$fields = self::inTemplate($file);
 
 		return self::cleanUp($fields, $Theme->getMask('page'));
