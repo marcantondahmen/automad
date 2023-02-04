@@ -43,6 +43,7 @@ use Automad\Core\Resolve;
 use Automad\Core\SessionData;
 use Automad\Core\Str;
 use Automad\Models\Selection;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

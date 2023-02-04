@@ -38,6 +38,7 @@ namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
 use Automad\Engine\PatternAssembly;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -39,6 +39,7 @@ namespace Automad\Models;
 use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

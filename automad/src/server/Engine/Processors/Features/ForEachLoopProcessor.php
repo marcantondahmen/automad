@@ -40,6 +40,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Engine\PatternAssembly;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

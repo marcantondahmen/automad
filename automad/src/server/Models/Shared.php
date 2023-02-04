@@ -42,6 +42,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Parse;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

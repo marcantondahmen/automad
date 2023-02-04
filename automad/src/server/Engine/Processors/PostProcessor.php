@@ -43,6 +43,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
+use Automad\System\Fields;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

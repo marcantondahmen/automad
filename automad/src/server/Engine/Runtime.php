@@ -39,6 +39,7 @@ namespace Automad\Engine;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

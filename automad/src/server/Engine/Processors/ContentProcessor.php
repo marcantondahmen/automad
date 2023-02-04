@@ -47,6 +47,7 @@ use Automad\Core\Str;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
 use Automad\Engine\Runtime;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
