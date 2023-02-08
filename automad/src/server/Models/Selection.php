@@ -392,14 +392,14 @@ class Selection {
 		foreach ($sort as $i => $sortItem) {
 			$sort[$i]['values'] = array();
 
-			foreach ($this->selection as $url => $Page) {
+			foreach ($this->selection as $Page) {
 				$sort[$i]['values'][] = trim(strtolower(Str::stripTags($Page->get($sortItem['key']))));
 			}
 		}
 
 		// Build parameters and call array_multisort function.
 		foreach ($sort as $sortItem) {
-			$parameters[] = $sortItem['values'];
+			$parameters[] = $sortItem['values'] ?? '';
 			$parameters[] = $sortItem['order'];
 			$parameters[] = SORT_NATURAL;
 		}

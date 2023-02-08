@@ -91,7 +91,7 @@ class Replacement {
 	/**
 	 * Replace matches with a given string in a given list of files.
 	 *
-	 * @param array $fileFieldsArray
+	 * @param array<FileFields> $fileFieldsArray
 	 * @return bool true on success
 	 */
 	public function replaceInFiles(array $fileFieldsArray): bool {
@@ -140,13 +140,13 @@ class Replacement {
 	/**
 	 * Replace matches in data for a given list of keys.
 	 *
-	 * @param array $data
-	 * @param array $fields
+	 * @param array<string, mixed> $data
+	 * @param array<string> $fields
 	 * @return array the processed data array
 	 */
 	private function replaceInData(array $data, array $fields): array {
 		foreach ($fields as $field) {
-			if (str_starts_with($field, '+')) {
+			if (str_starts_with($field, '+') && is_object($data[$field])) {
 				$data[$field]->blocks = $this->replaceInBlocksRecursively($data[$field]->blocks);
 
 				Debug::log($data[$field]->blocks, 'Blocks');
@@ -183,6 +183,7 @@ class Replacement {
 	 *
 	 * @param mixed $value
 	 * @return mixed
+	 * @psalm-return ($value is string ? string : mixed)
 	 */
 	private function replaceString(mixed $value): mixed {
 		if (is_string($value)) {

@@ -114,7 +114,7 @@ class Search {
 	 * Perform a search in all data arrays and return an array with `FileResults`.
 	 *
 	 * @see FileResults
-	 * @return array an array of `FileResults`
+	 * @return array<FileResults> an array of `FileResults`
 	 */
 	public function searchPerFile(): array {
 		$resultsPerFile = array();
@@ -141,12 +141,12 @@ class Search {
 	/**
 	 * Append an item to a given array only in case it is an results.
 	 *
-	 * @param array $resultsArray
+	 * @param array<FieldResults> $resultsArray
 	 * @param FieldResults|null $results
-	 * @return array the results array
+	 * @return array<FieldResults> the results array
 	 */
 	private function appendFieldResults(array $resultsArray, ?FieldResults $results): array {
-		if (is_a($results, '\Automad\Models\Search\FieldResults')) {
+		if (is_a($results, FieldResults::class)) {
 			$resultsArray[] = $results;
 		}
 
@@ -157,7 +157,7 @@ class Search {
 	 * Merge an array of `FieldResults` into a single results.
 	 *
 	 * @param string $field
-	 * @param array $results
+	 * @param array<FieldResults> $results
 	 * @return FieldResults|null a field results results
 	 */
 	private function mergeFieldResults(string $field, array $results): ?FieldResults {
@@ -165,10 +165,8 @@ class Search {
 		$contextArray = array();
 
 		foreach ($results as $result) {
-			if (is_a($result, '\Automad\Models\Search\FieldResults')) {
-				$matches = array_merge($matches, $result->matches);
-				$contextArray[] = $result->context;
-			}
+			$matches = array_merge($matches, $result->matches);
+			$contextArray[] = $result->context;
 		}
 
 		if (!empty($matches)) {
@@ -187,7 +185,7 @@ class Search {
 	 * `FieldResults` results for a given search value.
 	 *
 	 * @param string $field
-	 * @param array $blocks
+	 * @param array<object{data: object, type: string}> $blocks
 	 * @return FieldResults|null a field results results
 	 */
 	private function searchBlocksRecursively(string $field, array $blocks): ?FieldResults {
@@ -222,20 +220,22 @@ class Search {
 	 * array of `FieldResults`.
 	 *
 	 * @see FieldResults
-	 * @param array $data
-	 * @return array an array of `FieldResults` resultss
+	 * @param array<string, string|object{blocks: mixed}> $data
+	 * @return array<FieldResults> an array of `FieldResults` resultss
 	 */
 	private function searchData(array $data): array {
 		$fieldResults = array();
 
 		foreach ($data as $field => $value) {
 			if (str_starts_with($field, '+')) {
+				/** @var object{blocks: mixed} $value */
 				try {
 					$FieldResults = $this->searchBlocksRecursively($field, $value->blocks);
 				} catch (Exception $error) {
 					$FieldResults = false;
 				}
 			} else {
+				/** @var ?string $value */
 				$FieldResults = $this->searchTextField($field, $value ?? '');
 			}
 

@@ -67,7 +67,7 @@ class FileResults {
 	 * Initialize a new field results instance.
 	 *
 	 * @see FieldResults
-	 * @param array $fieldResultsArray
+	 * @param array<FieldResults> $fieldResultsArray
 	 * @param string|null $path
 	 * @param string|null $url
 	 */
