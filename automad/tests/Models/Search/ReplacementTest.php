@@ -86,7 +86,7 @@ class ReplacementTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testReplaceInDataIsSame($searchValue, $replaceValue, $isRegex, $isCaseSensitive, $keys, $data, $expected) {
-		$ReplacementReflection = new \ReflectionClass('\Automad\Models\Search\Replacement');
+		$ReplacementReflection = new \ReflectionClass(Replacement::class);
 
 		$replaceInData = $ReplacementReflection->getMethod('replaceInData');
 		$replaceInData->setAccessible(true);
