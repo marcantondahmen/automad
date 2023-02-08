@@ -132,6 +132,7 @@ class RequestHandler {
 
 			if (is_array($error) && !empty($error['type']) && $error['type'] === 1) {
 				http_response_code(500);
+				$error['message'] = explode("\n", $error['message'] ?? '');
 				exit(json_encode($error, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 			}
 		});

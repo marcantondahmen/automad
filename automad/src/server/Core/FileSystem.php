@@ -91,19 +91,6 @@ class FileSystem {
 			chmod($copy, AM_PERM_FILE);
 		}
 	}
-	/**
-	 * Delete a file.
-	 *
-	 * @param string $file
-	 * @return bool Return true if the file was deleted succsessfully
-	 */
-	public static function deleteFile(string $file): bool {
-		if (is_writable($file) && is_writable(dirname($file))) {
-			return unlink($file);
-		}
-
-		return false;
-	}
 
 	/**
 	 * Deletes a file and its caption (if existing).
@@ -228,24 +215,6 @@ class FileSystem {
 		} catch (\Exception $e) {
 			return '';
 		}
-	}
-
-	/**
-	 * Get all items in the packages directory, optionally filtered by a regex string.
-	 *
-	 * @param string $filter
-	 * @return array A filtered list with all items in the packages directory
-	 */
-	public static function getPackagesDirectoryItems(string $filter = ''): array {
-		if (empty(self::$packageDirectoryItems)) {
-			self::$packageDirectoryItems = self::listDirectoryRecursively(AM_BASE_DIR . AM_DIR_PACKAGES, AM_BASE_DIR . AM_DIR_PACKAGES);
-		}
-
-		if ($filter) {
-			return array_values(preg_grep($filter, self::$packageDirectoryItems));
-		}
-
-		return self::$packageDirectoryItems;
 	}
 
 	/**
