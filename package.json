@@ -14,6 +14,7 @@
     "build:blocks": "",
     "build:themes": "",
     "build": "npm run build:admin && npm run build:blocks && npm run build:themes",
+    "phpunit": "phpunit --testdox",
     "psalm": "psalm --no-cache"
   },
   "devDependencies": {
