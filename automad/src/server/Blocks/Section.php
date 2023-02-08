@@ -57,8 +57,7 @@ class Section extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(object $data, Automad $Automad): string {
-		$json = json_encode($data->content);
-		$html = Blocks::render($json, $Automad);
+		$html = Blocks::render($data->content, $Automad);
 		$style = '';
 		$classes = array();
 

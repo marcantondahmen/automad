@@ -31,6 +31,16 @@ class ReplacementTest extends TestCase {
 				Parse::dataFile(__DIR__ . '/../../data/blocks.txt'),
 				Parse::dataFile(__DIR__ . '/../../data/blocks_replaced.txt')
 			),
+			// Blocks, regex, not case sensitive, invalid property.
+			array(
+				'left',
+				'right',
+				false,
+				false,
+				array('+main'),
+				Parse::dataFile(__DIR__ . '/../../data/blocks.txt'),
+				Parse::dataFile(__DIR__ . '/../../data/blocks.txt')
+			),
 			// Text, no regex, not case sensitive.
 			array(
 				'/Url/to/Page',
@@ -91,8 +101,8 @@ class ReplacementTest extends TestCase {
 		$replacedData = $replaceInData->invokeArgs($Replacement, array($data, $keys));
 
 		$this->assertSame(
-			json_encode($replacedData, JSON_PRETTY_PRINT),
-			json_encode($expected, JSON_PRETTY_PRINT)
+			json_encode($expected, JSON_PRETTY_PRINT),
+			json_encode($replacedData, JSON_PRETTY_PRINT)
 		);
 	}
 }

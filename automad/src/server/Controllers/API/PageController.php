@@ -39,6 +39,7 @@ namespace Automad\Controllers\API;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\DataFile;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
@@ -155,9 +156,9 @@ class PageController {
 
 		// If only the URL got submitted, just get the form ready.
 		$ThemeCollection = new ThemeCollection();
-		$Theme = $ThemeCollection->getThemeByKey($Page->get(Fields::THEME));
+		$Theme = $ThemeCollection->getThemeByKey(strval($Page->get(Fields::THEME)));
 		$keys = Fields::inCurrentTemplate($Page, $Theme);
-		$data = Parse::dataFile($Page->getFile());
+		$data = DataFile::read($Page->path) ?? array();
 
 		$fields = array_merge(
 			array_fill_keys(Fields::$reserved, ''),

@@ -38,6 +38,7 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Automad;
+use Automad\Core\DataFile;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
@@ -66,7 +67,7 @@ class SharedController {
 		$data = Request::post('data');
 
 		if (!empty($data) && is_array($data)) {
-			if (filemtime(AM_FILE_SHARED_DATA) > Request::post('dataFetchTime')) {
+			if (filemtime(DataFile::getFile(null)) > Request::post('dataFetchTime')) {
 				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
 			}
 

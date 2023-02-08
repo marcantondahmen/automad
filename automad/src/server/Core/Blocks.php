@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * Copyright (c) 2020-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Blocks class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Blocks {
@@ -69,23 +69,13 @@ class Blocks {
 	/**
 	 * Render blocks created by the EditorJS block editor.
 	 *
-	 * @param string $json
+	 * @param object $data
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(string $json, Automad $Automad): string {
+	public static function render(object $data, Automad $Automad): string {
 		$flexOpen = false;
-		$data = json_decode($json);
 		$html = '';
-
-		if (!is_object($data)) {
-			return $html;
-		}
-
-		if (!isset($data->blocks)) {
-			return $html;
-		}
-
 		$data = self::prepareData($data);
 
 		foreach ($data->blocks as $block) {

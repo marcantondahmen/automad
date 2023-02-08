@@ -101,7 +101,7 @@ class PageCollection {
 	}
 
 	/**
-	 * Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $collection.
+	 * Searches $path recursively for data files and adds the parsed data to $collection.
 	 *
 	 * After successful indexing, the $collection holds basically all information (except media files) from all pages of the whole site.
 	 * This makes searching and filtering very easy since all data is stored in one place.
@@ -118,51 +118,48 @@ class PageCollection {
 		string $parentUrl = '',
 		string $index = '1'
 	): void {
-		// First check, if $path contains any data files.
-		// If more that one file matches the pattern, the first one will be used as the page's data file and the others will just be ignored.
-		if ($files = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA)) {
-			$file = reset($files);
+		$url = $this->makeUrl($parentUrl, basename($path));
+		$Page = Page::fromDataFile($path, $url, $index, $this->Shared, $parentUrl, $level);
 
-			// Set URL.
-			$url = $this->makeUrl($parentUrl, basename($path));
-			$Page = Page::fromFile($file, $url, $path, $index, $this->Shared, $parentUrl, $level);
+		if (!$Page) {
+			return;
+		}
 
-			// Stop processing of page data and subdirectories if page is private and nobody is logged in.
-			if ($Page->private && !$this->user) {
-				return;
-			}
+		// Stop processing of page data and subdirectories if page is private and nobody is logged in.
+		if ($Page->private && !$this->user) {
+			return;
+		}
 
-			$this->collection[$url] = $Page;
-			$children = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR);
+		$this->collection[$url] = $Page;
+		$children = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR);
 
-			// Merge index file with glob array in order to restore the defined page order.
-			$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $path;
+		// Merge index file with glob array in order to restore the defined page order.
+		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $path;
 
-			$layout = array_map(function ($item) use ($fullPath) {
-				return "$fullPath$item";
-			}, PageIndex::read($path));
+		$layout = array_map(function ($item) use ($fullPath) {
+			return "$fullPath$item";
+		}, PageIndex::read($path));
 
-			$layout = array_filter($layout, function ($item) {
-				return is_readable($item);
-			});
+		$layout = array_filter($layout, function ($item) {
+			return is_readable($item);
+		});
 
-			if (!empty($children)) {
-				$children = array_unique(array_merge($layout, $children));
-			}
+		if (!empty($children)) {
+			$children = array_unique(array_merge($layout, $children));
+		}
 
-			// $path gets only scanned for sub-pages, in case it contains a data file.
-			// That way it is impossible to generate pages without a parent page.
-			if ($children) {
-				$pad = strlen((string) count($children));
-				$i = 1;
+		// $path gets only scanned for sub-pages, in case it contains a data file.
+		// That way it is impossible to generate pages without a parent page.
+		if ($children) {
+			$pad = strlen((string) count($children));
+			$i = 1;
 
-				// Scan each directory recursively.
-				foreach ($children as $child) {
-					$childIndex = $index . '.' . str_pad((string) $i, $pad, '0', STR_PAD_LEFT);
+			// Scan each directory recursively.
+			foreach ($children as $child) {
+				$childIndex = $index . '.' . str_pad((string) $i, $pad, '0', STR_PAD_LEFT);
 
-					$this->collectPages($path . basename($child) . '/', $level + 1, $url, $childIndex);
-					$i++;
-				}
+				$this->collectPages($path . basename($child) . '/', $level + 1, $url, $childIndex);
+				$i++;
 			}
 		}
 	}

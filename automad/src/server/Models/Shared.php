@@ -38,10 +38,9 @@ namespace Automad\Models;
 
 use Automad\API\RequestHandler;
 use Automad\Core\Cache;
+use Automad\Core\DataFile;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
-use Automad\Core\Parse;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -69,7 +68,7 @@ class Shared {
 		);
 
 		// Merge defaults with settings from file.
-		$this->data = array_merge($defaults, Parse::dataFile(AM_FILE_SHARED_DATA));
+		$this->data = array_merge($defaults, DataFile::read() ?? array());
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
 		// Check whether there is a theme defined in the Shared object data.
@@ -93,6 +92,15 @@ class Shared {
 	}
 
 	/**
+	 * The resolved filesystem path to the data file.
+	 *
+	 * @return string
+	 */
+	public static function getFile(): string {
+		return DataFile::getFile(null);
+	}
+
+	/**
 	 * Save shared data.
 	 *
 	 * @param array $data
@@ -100,13 +108,12 @@ class Shared {
 	 * @return bool true on success
 	 */
 	public function save(array $data, Messenger $Messenger): bool {
-		if (!is_writable(AM_FILE_SHARED_DATA)) {
+		if (!DataFile::write($data)) {
 			$Messenger->setError(Text::get('error_permission'));
 
 			return false;
 		}
 
-		FileSystem::writeData($data, AM_FILE_SHARED_DATA);
 		Cache::clear();
 
 		return true;

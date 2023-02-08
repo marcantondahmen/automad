@@ -163,7 +163,7 @@ class Feed {
 		foreach ($this->fields as $field) {
 			if (strpos($field, '+') === 0) {
 				$output .= Blocks::render(
-					$Page->get($field),
+					$Page->get($field, true),
 					$this->Automad
 				);
 			} else {

@@ -76,9 +76,9 @@ class Runtime {
 	 * Return the requested runtime variable.
 	 *
 	 * @param string $key
-	 * @return mixed The value of $key or NULL if the requested variable doesn't exsist
+	 * @return int|string|null The value of $key or NULL if the requested variable doesn't exsist
 	 */
-	public function get(string $key): mixed {
+	public function get(string $key): int|string|null {
 		// Check whether $key is generated within a loop and therefore stored in $this->data or
 		// if $key is related to the context, filelist or pagelist object.
 		if (array_key_exists($key, $this->data)) {
@@ -111,7 +111,7 @@ class Runtime {
 					if (isset($this->data[Fields::FILE])) {
 						return FileUtils::caption(AM_BASE_DIR . $this->data[Fields::FILE]);
 					} else {
-						return false;
+						return '';
 					}
 
 					// no break

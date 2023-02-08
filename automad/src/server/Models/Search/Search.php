@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,7 +37,6 @@
 namespace Automad\Models\Search;
 
 use Automad\Core\Automad;
-use Automad\Core\Str;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -46,10 +45,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Search model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Search {
+	const VALID_BLOCK_PROPERTIES = array(
+		'text',
+		'items',
+		'content',
+		'caption',
+		'url',
+		'globs',
+		'primaryText',
+		'primaryLink',
+		'secondaryText',
+		'secondaryLink',
+		'code'
+	);
+
 	/**
 	 * The Automad results.
 	 */
@@ -88,6 +101,16 @@ class Search {
 	}
 
 	/**
+	 * Check whether a property name represents a valid block property.
+	 *
+	 * @param string $property
+	 * @return bool true if the property name is in the whitelist
+	 */
+	public static function isValidBlockProperty(string $property): bool {
+		return in_array($property, Search::VALID_BLOCK_PROPERTIES);
+	}
+
+	/**
 	 * Perform a search in all data arrays and return an array with `FileResults`.
 	 *
 	 * @see FileResults
@@ -103,14 +126,12 @@ class Search {
 		$sharedData = $this->Automad->Shared->data;
 
 		if ($fieldResultsArray = $this->searchData($sharedData)) {
-			$path = Str::stripStart(AM_FILE_SHARED_DATA, AM_BASE_DIR);
-			$resultsPerFile[] = new FileResults($path, $fieldResultsArray);
+			$resultsPerFile[] = new FileResults($fieldResultsArray, null, null);
 		}
 
 		foreach ($this->Automad->getCollection() as $Page) {
 			if ($fieldResultsArray = $this->searchData($Page->data)) {
-				$path = AM_DIR_PAGES . $Page->path . $Page->get(Fields::TEMPLATE) . '.' . AM_FILE_EXT_DATA;
-				$resultsPerFile[] = new FileResults($path, $fieldResultsArray, $Page->origUrl);
+				$resultsPerFile[] = new FileResults($fieldResultsArray, AM_DIR_PAGES . $Page->path, $Page->origUrl);
 			}
 		}
 
@@ -130,30 +151,6 @@ class Search {
 		}
 
 		return $resultsArray;
-	}
-
-	/**
-	 * Check whether a property name represents a valid block property.
-	 *
-	 * @param string $property
-	 * @return bool true if the property name is in the whitelist
-	 */
-	private function isValidBlockProperty(string $property): bool {
-		$validProperties = array(
-			'text',
-			'items',
-			'content',
-			'caption',
-			'url',
-			'globs',
-			'primaryText',
-			'primaryLink',
-			'secondaryText',
-			'secondaryLink',
-			'code'
-		);
-
-		return in_array($property, $validProperties);
 	}
 
 	/**
@@ -186,29 +183,6 @@ class Search {
 	}
 
 	/**
-	 * Search an array of values recursively.
-	 *
-	 * @param string $field
-	 * @param array $array
-	 * @return FieldResults|null a field results results
-	 */
-	private function searchArrayRecursively(string $field, array $array): ?FieldResults {
-		$results = array();
-
-		foreach ($array as $item) {
-			if (is_array($item) || is_object($item)) {
-				$results = $this->appendFieldResults($results, $this->searchArrayRecursively($field, (array) $item));
-			}
-
-			if (is_string($item)) {
-				$results = $this->appendFieldResults($results, $this->searchTextField($field, $item));
-			}
-		}
-
-		return $this->mergeFieldResults($field, $results);
-	}
-
-	/**
 	 * Perform a search in a block field recursively and return a
 	 * `FieldResults` results for a given search value.
 	 *
@@ -227,9 +201,9 @@ class Search {
 				);
 			} else {
 				foreach ($block->data as $blockProperty => $value) {
-					if ($this->isValidBlockProperty($blockProperty)) {
+					if (Search::isValidBlockProperty($blockProperty)) {
 						if (is_array($value) || is_object($value)) {
-							$results = $this->appendFieldResults($results, $this->searchArrayRecursively($field, (array) $value));
+							$results = $this->appendFieldResults($results, $this->searchDataRecursively($field, $value));
 						}
 
 						if (is_string($value)) {
@@ -255,15 +229,14 @@ class Search {
 		$fieldResults = array();
 
 		foreach ($data as $field => $value) {
-			if (strpos($field, '+') === 0) {
+			if (str_starts_with($field, '+')) {
 				try {
-					$data = json_decode($value);
-					$FieldResults = $this->searchBlocksRecursively($field, $data->blocks);
+					$FieldResults = $this->searchBlocksRecursively($field, $value->blocks);
 				} catch (Exception $error) {
 					$FieldResults = false;
 				}
 			} else {
-				$FieldResults = $this->searchTextField($field, $value);
+				$FieldResults = $this->searchTextField($field, $value ?? '');
 			}
 
 			if (!empty($FieldResults)) {
@@ -272,6 +245,29 @@ class Search {
 		}
 
 		return $fieldResults;
+	}
+
+	/**
+	 * Search an array of values recursively.
+	 *
+	 * @param string $field
+	 * @param array|object $arrayOrObject
+	 * @return FieldResults|null a field results results
+	 */
+	private function searchDataRecursively(string $field, array|object $arrayOrObject): ?FieldResults {
+		$results = array();
+
+		foreach ($arrayOrObject as $item) {
+			if (is_array($item) || is_object($item)) {
+				$results = $this->appendFieldResults($results, $this->searchDataRecursively($field, $item));
+			}
+
+			if (is_string($item)) {
+				$results = $this->appendFieldResults($results, $this->searchTextField($field, $item));
+			}
+		}
+
+		return $this->mergeFieldResults($field, $results);
 	}
 
 	/**
@@ -286,6 +282,8 @@ class Search {
 		$ignoredKeys = array(
 			Fields::HIDDEN,
 			Fields::PRIVATE,
+			Fields::TEMPLATE,
+			Fields::TEMPLATE_LEGACY,
 			Fields::THEME,
 			Fields::URL,
 			Fields::TITLE

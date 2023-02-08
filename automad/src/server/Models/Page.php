@@ -38,10 +38,10 @@ namespace Automad\Models;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\DataFile;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
-use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\System\Fields;
 
@@ -185,7 +185,8 @@ class Page {
 		// Data, also directly append possibly existing suffix to title here.
 		$data = array(
 			Fields::TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
-			Fields::PRIVATE => $isPrivate
+			Fields::PRIVATE => $isPrivate,
+			Fields::TEMPLATE => $template
 		);
 
 		if ($theme != '.') {
@@ -195,9 +196,8 @@ class Page {
 		// Set date.
 		$data[Fields::DATE] = date('Y-m-d H:i:s');
 
-		// Build the file name and save the txt file.
-		$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
-		FileSystem::writeData($data, $file);
+		// Save data and add index.
+		DataFile::write($data, $newPagePath);
 		PageIndex::append($Parent->path, $newPagePath);
 
 		return Page::dashboardUrlByPath($newPagePath);
@@ -283,27 +283,29 @@ class Page {
 	}
 
 	/**
-	 * Create a new Page object by loading data from a given file.
+	 * Create a new Page object by loading data from the data file of the given path.
 	 *
-	 * @param string $file
-	 * @param string $url
 	 * @param string $path
+	 * @param string $url
 	 * @param string $index
 	 * @param Shared $Shared
 	 * @param string $parentUrl
 	 * @param int $level
-	 * @return Page
+	 * @return ?Page
 	 */
-	public static function fromFile(
-		string $file,
-		string $url,
+	public static function fromDataFile(
 		string $path,
+		string $url,
 		string $index,
 		Shared $Shared,
 		string $parentUrl,
 		int $level
-	): Page {
-		$data = Parse::dataFile($file);
+	): ?Page {
+		$data = DataFile::read($path);
+
+		if (empty($data)) {
+			return null;
+		}
 
 		if (array_key_exists(Fields::PRIVATE, $data)) {
 			$data[Fields::PRIVATE] = ($data[Fields::PRIVATE] && $data[Fields::PRIVATE] !== 'false');
@@ -330,12 +332,12 @@ class Page {
 		}
 
 		$data[Fields::ORIG_URL] = $url;
-
 		$data[Fields::PAGE_INDEX] = $index;
 		$data[Fields::PATH] = $path;
 		$data[Fields::LEVEL] = $level;
 		$data[Fields::PARENT] = $parentUrl;
-		$data[Fields::TEMPLATE] = str_replace('.txt', '', basename($file));
+
+		$data[Fields::TEMPLATE_LEGACY] = $data[Fields::TEMPLATE];
 
 		return new Page($data, $Shared);
 	}
@@ -348,22 +350,47 @@ class Page {
 	 * Note that not all data is stored in the data arrays.
 	 * Some data (:mtime, :basename ...) should only be generated when requested out of performance reasons.
 	 *
-	 * @param string $key
-	 * @return string The requested value
+	 * @param string $field
+	 * @param bool $returnEditorObject
+	 * @return object|string The requested value
+	 * @psalm-return ($returnEditorObject is true ? object : string)
 	 */
-	public function get(string $key): string {
-		// Return value from the data array.
-		if (array_key_exists($key, $this->data)) {
-			return $this->data[$key];
+	public function get(string $field, bool $returnEditorObject = false): object|string {
+		// Return as editor data object from the data array.
+		if ($returnEditorObject) {
+			$default = (object) array('blocks' => array());
+
+			if (!str_starts_with($field, '+') || !array_key_exists($field, $this->data)) {
+				return $default;
+			}
+
+			$blocks = $this->data[$field];
+
+			if (!is_object($blocks)) {
+				return $default;
+			}
+
+			return $blocks;
+		}
+
+		// Return as string value from the data array.
+		if (array_key_exists($field, $this->data)) {
+			$value = $this->data[$field];
+
+			if (!is_string($value)) {
+				$value = json_encode($value);
+			}
+
+			return $value;
 		}
 
 		// Return value from the Shared data array.
-		if ($this->Shared && array_key_exists($key, $this->Shared->data)) {
-			return $this->Shared->data[$key];
+		if ($this->Shared && array_key_exists($field, $this->Shared->data)) {
+			return $this->Shared->data[$field];
 		}
 
 		// Generate system variable value or return an empty string.
-		switch ($key) {
+		switch ($field) {
 			case Fields::CURRENT_PAGE:
 				return $this->isCurrent() ? 'true' : '';
 			case Fields::CURRENT_PATH:
@@ -383,7 +410,7 @@ class Page {
 	 * @return string The full file system path
 	 */
 	public function getFile(): string {
-		return FileSystem::fullPagePath($this->path) . $this->template . '.' . AM_FILE_EXT_DATA;
+		return DataFile::getFile($this);
 	}
 
 	/**
@@ -500,24 +527,25 @@ class Page {
 		$data = array_map('trim', $data);
 		$data = array_filter($data, 'strlen');
 
+		$data[Fields::TITLE] = $data[Fields::TITLE] ?? $slug;
+
+		$theme = dirname($themeTemplate);
+		$template = basename($themeTemplate);
+
+		$data[Fields::TEMPLATE] = $template;
+
+		if ($theme != '.') {
+			$data[Fields::THEME] = $theme;
+		}
+
 		if (!empty($data[Fields::PRIVATE])) {
+			$data[Fields::PRIVATE] = true;
 			$private = true;
 		} else {
 			$private = false;
 		}
 
-		if (dirname($themeTemplate) != '.') {
-			$data[Fields::THEME] = dirname($themeTemplate);
-		} else {
-			unset($data[Fields::THEME]);
-		}
-
-		unlink($this->getFile());
-
-		$newTemplate = Str::stripEnd(basename($themeTemplate), '.php');
-		$newPageFile = FileSystem::fullPagePath($this->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
-
-		FileSystem::writeData($data, $newPageFile);
+		DataFile::write($data, $this->path);
 
 		$newSlug = $slug;
 
@@ -552,7 +580,7 @@ class Page {
 
 		Cache::clear();
 
-		if ($currentTheme != $newTheme || $this->template != $newTemplate) {
+		if ($currentTheme != $newTheme || $this->template != $template) {
 			return array(
 				'redirect' => Page::dashboardUrlByPath($newPagePath)
 			);
@@ -605,15 +633,12 @@ class Page {
 	 */
 	private static function appendSuffixToTitle(string $path, string $suffix): void {
 		if ($suffix) {
-			$path = FileSystem::fullPagePath($path);
-			$files = FileSystem::glob($path . '*.' . AM_FILE_EXT_DATA);
+			$data = DataFile::read($path);
 
-			if (!empty($files)) {
-				$file = reset($files);
-				$data = Parse::dataFile($file);
-				$data[Fields::TITLE] .= ucwords(str_replace('-', ' ', $suffix));
-				FileSystem::writeData($data, $file);
-			}
+			$data[Fields::TITLE] = $data[Fields::TITLE] ?? basename($path);
+			$data[Fields::TITLE] .= ucwords(str_replace('-', ' ', $suffix));
+
+			DataFile::write($data, $path);
 		}
 	}
 

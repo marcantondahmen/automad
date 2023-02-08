@@ -97,13 +97,11 @@ class File {
 				if ($Page = $Automad->getPage(Request::post('url'))) {
 					// In case there is a posted URL, also rename files that have been added with only
 					// basename since they belong to the same page.
-					$file = AM_DIR_PAGES . $Page->path . $Page->template . '.' . AM_FILE_EXT_DATA;
-
 					Links::update(
 						$Automad,
 						basename($oldFile),
 						basename($newFile),
-						$file
+						$Page->getFile()
 					);
 				}
 			}

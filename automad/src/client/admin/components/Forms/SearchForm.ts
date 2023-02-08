@@ -98,9 +98,9 @@ const renderFileCard = (fileResults: FileResults): string => {
 					class="${CSS.cardListItem} ${CSS.cardListItemFaded} ${CSS.flex} ${CSS.flexBetween} ${CSS.flexAlignCenter}"
 				>
 					<am-link
-						${Attr.target}="${path.match(/^\/shared\//i)
-							? Route.shared
-							: `${Route.page}?url=${url}`}"
+						${Attr.target}="${path
+							? `${Route.page}?url=${url}`
+							: Route.shared}"
 						class="${CSS.iconText} ${CSS.textLink}"
 					>
 						<i class="bi bi-file-earmark-text"></i>

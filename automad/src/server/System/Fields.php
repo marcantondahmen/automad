@@ -77,7 +77,8 @@ class Fields {
 	const SITENAME = 'sitename';
 	const TAG = ':tag';
 	const TAGS = 'tags';
-	const TEMPLATE = ':template';
+	const TEMPLATE = 'template';
+	const TEMPLATE_LEGACY = ':template';
 	const THEME = 'theme';
 	const TITLE = 'title';
 	const URL = 'url';
@@ -92,6 +93,8 @@ class Fields {
 		'HIDDEN' => Fields::HIDDEN,
 		'PRIVATE' => Fields::PRIVATE,
 		'TAGS' => Fields::TAGS,
+		'TEMPLATE' => Fields::TEMPLATE,
+		'TEMPLATE_LEGACY' => Fields::TEMPLATE_LEGACY,
 		'THEME' => Fields::THEME,
 		'TITLE' => Fields::TITLE,
 		'SITENAME' => Fields::SITENAME,

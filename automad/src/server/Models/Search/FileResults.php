@@ -54,26 +54,26 @@ class FileResults {
 	public array $fieldResultsArray;
 
 	/**
-	 * The file path.
+	 * The page directory path or null for shared data.
 	 */
-	public string $path;
+	public ?string $path;
 
 	/**
-	 * The page URL or an empty string for shared data.
+	 * The page URL or null for shared data.
 	 */
-	public string $url;
+	public ?string $url;
 
 	/**
 	 * Initialize a new field results instance.
 	 *
 	 * @see FieldResults
-	 * @param string $path
 	 * @param array $fieldResultsArray
-	 * @param string $url
+	 * @param string|null $path
+	 * @param string|null $url
 	 */
-	public function __construct(string $path, array $fieldResultsArray, string $url = '') {
-		$this->path = $path;
+	public function __construct(array $fieldResultsArray, ?string $path, ?string $url) {
 		$this->fieldResultsArray = $fieldResultsArray;
+		$this->path = $path;
 		$this->url = $url;
 	}
 }

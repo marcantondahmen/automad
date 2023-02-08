@@ -17,7 +17,6 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/text/default.txt',
 						array(
 							new FieldResults(
 								'text',
@@ -25,10 +24,10 @@ class SearchTest extends TestCase {
 								'A <mark>simple</mark> sample text with a [link](/url/to/page)'
 							)
 						),
+						'/pages/text/',
 						'/text'
 					),
 					new FileResults(
-						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -36,6 +35,7 @@ class SearchTest extends TestCase {
 								'A <mark>Simple</mark> First Column Table Header ... A <mark>simple</mark> paragraph text ... Another <mark>simple</mark> item'
 							)
 						),
+						'/pages/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -46,7 +46,6 @@ class SearchTest extends TestCase {
 				true,
 				array(
 					new FileResults(
-						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -54,6 +53,7 @@ class SearchTest extends TestCase {
 								'A <mark>Simple</mark> First Column Table Header'
 							)
 						),
+						'/pages/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -64,7 +64,6 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -72,6 +71,7 @@ class SearchTest extends TestCase {
 								'A <mark>Simple First Column Table</mark> Header'
 							)
 						),
+						'/pages/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -82,7 +82,6 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/shared/data.txt',
 						array(
 							new FieldResults(
 								'shared',
@@ -90,7 +89,8 @@ class SearchTest extends TestCase {
 								'Shared <mark>default text content</mark>'
 							)
 						),
-						false
+						null,
+						null,
 					)
 				)
 			),
@@ -106,7 +106,6 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -119,6 +118,7 @@ class SearchTest extends TestCase {
 								'A Simple First Column <mark>Table Header</mark> ... Second Column <mark>Table Header</mark> ... First <mark>table row</mark> and column ... First <mark>table row</mark> and second column'
 							)
 						),
+						'/pages/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -129,7 +129,6 @@ class SearchTest extends TestCase {
 				false,
 				array(
 					new FileResults(
-						'/pages/blocks-slug/default.txt',
 						array(
 							new FieldResults(
 								'+main',
@@ -139,6 +138,7 @@ class SearchTest extends TestCase {
 								'<mark>Third level</mark> item'
 							)
 						),
+						'/pages/blocks-slug/',
 						'/blocks'
 					)
 				)

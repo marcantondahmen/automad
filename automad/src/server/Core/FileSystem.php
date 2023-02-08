@@ -500,10 +500,12 @@ class FileSystem {
 	 * Read a .json file.
 	 *
 	 * @param string $file
-	 * @return array
+	 * @param bool $returnAssocArray
+	 * @return array|object
+	 * @psalm-return ($returnAssocArray is true ? array : object)
 	 */
-	public static function readJson(string $file): array {
-		return json_decode(file_get_contents($file), true);
+	public static function readJson(string $file, bool $returnAssocArray = true): array|object {
+		return json_decode(file_get_contents($file), $returnAssocArray);
 	}
 
 	/**
@@ -595,28 +597,6 @@ class FileSystem {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Format, filter and write the data array a text file.
-	 *
-	 * @param array $data
-	 * @param string $file
-	 */
-	public static function writeData(array $data, string $file): void {
-		$pairs = array();
-		$data = array_filter($data, 'strlen');
-
-		foreach ($data as $key => $value) {
-			// Only keep variables keys starting with a letter.
-			// (ignore any kind of system variable)
-			if (preg_match('/^' . PatternAssembly::$charClassTextFileVariables . '+$/', $key)) {
-				$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
-			}
-		}
-
-		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
-		self::write($file, $content);
 	}
 
 	/**

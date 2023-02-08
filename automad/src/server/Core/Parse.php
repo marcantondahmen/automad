@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2021 by Marc Anton Dahmen
+ * Copyright (c) 2013-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Parse class holds all parsing methods.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Parse {
@@ -75,42 +75,15 @@ class Parse {
 	}
 
 	/**
-	 * Loads and parses a text file.
+	 * Please use `DataFile::readLegacyFormat()` instead.
 	 *
-	 * First it separates the different blocks into simple key/value pairs.
-	 * Then it creates an array of vars by splitting the pairs.
-	 *
+	 * @see DataFile::readLegacyFormat()
+	 * @deprecated 2.0.0
 	 * @param string $file
 	 * @return array $vars
 	 */
 	public static function dataFile(string $file): array {
-		$vars = array();
-
-		if (!file_exists($file)) {
-			return $vars;
-		}
-
-		// Get file content and normalize line breaks.
-		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));
-
-		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line.
-		$pairs = preg_split(
-			'/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . PatternAssembly::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s',
-			$content,
-			-1,
-			PREG_SPLIT_NO_EMPTY
-		);
-
-		// Split $pairs into an array of vars.
-		foreach ($pairs as $pair) {
-			list($key, $value) = explode(AM_PARSE_PAIR_SEPARATOR, $pair, 2);
-			$vars[trim($key)] = trim($value);
-		}
-
-		// Remove undefined (empty) items.
-		$vars = array_filter($vars, 'strlen');
-
-		return $vars;
+		return DataFile::readLegacyFormat($file);
 	}
 
 	/**

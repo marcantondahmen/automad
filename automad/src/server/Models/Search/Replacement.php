@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,9 +37,8 @@
 namespace Automad\Models\Search;
 
 use Automad\Core\Cache;
+use Automad\Core\DataFile;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
-use Automad\Core\Parse;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -47,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Replacement model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Replacement {
@@ -103,11 +102,10 @@ class Replacement {
 		}
 
 		foreach ($fileFieldsArray as $FileFields) {
-			$file = AM_BASE_DIR . $FileFields->path;
-			$data = Parse::dataFile($file);
+			$data = DataFile::read($FileFields->path) ?? array();
 			$data = $this->replaceInData($data, $FileFields->fields);
 
-			FileSystem::writeData($data, $file);
+			DataFile::write($data, $FileFields->path);
 		}
 
 		Cache::clear();
@@ -122,14 +120,18 @@ class Replacement {
 	 * @return array the processed blocks
 	 */
 	private function replaceInBlocksRecursively(array $blocks): array {
-		foreach ($blocks as $block) {
+		foreach ($blocks as $index => $block) {
 			if ($block->type == 'section') {
 				$block->data->content->blocks = $this->replaceInBlocksRecursively($block->data->content->blocks);
 			} else {
 				foreach ($block->data as $key => $value) {
-					$block->data->{$key} = $this->replaceInValueRecursively($value);
+					if (Search::isValidBlockProperty($key)) {
+						$block->data->{$key} = $this->replaceInValueRecursively($value);
+					}
 				}
 			}
+
+			$blocks[$index] = $block;
 		}
 
 		return $blocks;
@@ -139,23 +141,17 @@ class Replacement {
 	 * Replace matches in data for a given list of keys.
 	 *
 	 * @param array $data
-	 * @param array $keys
+	 * @param array $fields
 	 * @return array the processed data array
 	 */
-	private function replaceInData(array $data, array $keys): array {
-		foreach ($keys as $key) {
-			if (strpos($key, '+') === 0) {
-				$fieldData = json_decode($data[$key]);
-				$fieldData->blocks = $this->replaceInBlocksRecursively($fieldData->blocks);
-				$data[$key] = json_encode($fieldData, JSON_PRETTY_PRINT);
+	private function replaceInData(array $data, array $fields): array {
+		foreach ($fields as $field) {
+			if (str_starts_with($field, '+')) {
+				$data[$field]->blocks = $this->replaceInBlocksRecursively($data[$field]->blocks);
 
-				Debug::log($fieldData->blocks, 'Blocks');
+				Debug::log($data[$field]->blocks, 'Blocks');
 			} else {
-				$data[$key] = preg_replace(
-					'/' . $this->searchValue . '/' . $this->regexFlags,
-					$this->replaceValue,
-					$data[$key]
-				);
+				$data[$field] = $this->replaceString($data[$field]);
 			}
 		}
 
@@ -176,11 +172,21 @@ class Replacement {
 				$array[$key] = $this->replaceInValueRecursively($item);
 			}
 
-			$value = $array;
+			return is_object($value) ? (object) $array : $array;
 		}
 
+		return $this->replaceString($value);
+	}
+
+	/**
+	 * Check whether a value is a string and then perfom a replace.
+	 *
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	private function replaceString(mixed $value): mixed {
 		if (is_string($value)) {
-			$value = preg_replace(
+			return preg_replace(
 				'/' . $this->searchValue . '/' . $this->regexFlags,
 				$this->replaceValue,
 				$value

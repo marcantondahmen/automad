@@ -294,7 +294,7 @@ class ContentProcessor {
 		// Blocks variable.
 		if (strpos($key, '+') === 0) {
 			$value = Blocks::render(
-				$this->Automad->Context->get()->get($key),
+				$this->Automad->Context->get()->get($key, true),
 				$this->Automad
 			);
 
@@ -309,10 +309,6 @@ class ContentProcessor {
 			$value = $this->Automad->Context->get()->get($key);
 		}
 
-		if ($value) {
-			return $value;
-		}
-
-		return '';
+		return strval($value);
 	}
 }

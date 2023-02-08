@@ -89,7 +89,7 @@ class Mock extends TestCase {
 					':path' => '/',
 					':origUrl' => '/',
 					'theme' => $theme,
-					':template' => $template,
+					'template' => $template,
 					':level' => 0,
 					':index' => '1',
 					'tags' => 'test'
@@ -104,7 +104,7 @@ class Mock extends TestCase {
 						':origUrl' => '/page',
 						':parent' => '/',
 						'theme' => $theme,
-						':template' => $template,
+						'template' => $template,
 						':level' => 1,
 						':index' => '1.1',
 						'tags' => 'test'
@@ -122,7 +122,7 @@ class Mock extends TestCase {
 					':origUrl' => '/page/subpage',
 					':parent' => '/page',
 					'theme' => $theme,
-					':template' => $template,
+					'template' => $template,
 					':level' => 2,
 					':index' => '1.1.1',
 					'tags' => 'test'
@@ -137,7 +137,7 @@ class Mock extends TestCase {
 						':origUrl' => '/text',
 						':parent' => '/',
 						'theme' => $theme,
-						':template' => $template,
+						'template' => $template,
 						':level' => 1,
 						':index' => '1.2'
 					),
@@ -153,7 +153,7 @@ class Mock extends TestCase {
 						':origUrl' => '/blocks',
 						':parent' => '/',
 						'theme' => $theme,
-						':template' => $template,
+						'template' => $template,
 						':level' => 1,
 						':index' => '1.3'
 					),
