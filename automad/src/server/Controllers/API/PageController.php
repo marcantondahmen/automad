@@ -43,7 +43,6 @@ use Automad\Core\DataFile;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
-use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\Page;

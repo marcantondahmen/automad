@@ -65,7 +65,6 @@ class Mock extends TestCase {
 		$Shared->data['shared'] = 'Shared default text content';
 		$collection = $this->createCollection($Shared, $template);
 		$Automad = new Automad($collection, $Shared);
-		$Automad->Context = new Context($collection[AM_REQUEST]);
 
 		return $Automad;
 	}
