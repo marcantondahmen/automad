@@ -24,7 +24,7 @@ class SearchTest extends TestCase {
 								'A <mark>simple</mark> sample text with a [link](/url/to/page)'
 							)
 						),
-						'/pages/text/',
+						AM_DIR_PAGES . '/text/',
 						'/text'
 					),
 					new FileResults(
@@ -35,7 +35,7 @@ class SearchTest extends TestCase {
 								'A <mark>Simple</mark> First Column Table Header ... A <mark>simple</mark> paragraph text ... Another <mark>simple</mark> item'
 							)
 						),
-						'/pages/blocks-slug/',
+						AM_DIR_PAGES . '/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -53,7 +53,7 @@ class SearchTest extends TestCase {
 								'A <mark>Simple</mark> First Column Table Header'
 							)
 						),
-						'/pages/blocks-slug/',
+						AM_DIR_PAGES . '/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -71,7 +71,7 @@ class SearchTest extends TestCase {
 								'A <mark>Simple First Column Table</mark> Header'
 							)
 						),
-						'/pages/blocks-slug/',
+						AM_DIR_PAGES . '/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -118,7 +118,7 @@ class SearchTest extends TestCase {
 								'A Simple First Column <mark>Table Header</mark> ... Second Column <mark>Table Header</mark> ... First <mark>table row</mark> and column ... First <mark>table row</mark> and second column'
 							)
 						),
-						'/pages/blocks-slug/',
+						AM_DIR_PAGES . '/blocks-slug/',
 						'/blocks'
 					)
 				)
@@ -138,7 +138,7 @@ class SearchTest extends TestCase {
 								'<mark>Third level</mark> item'
 							)
 						),
-						'/pages/blocks-slug/',
+						AM_DIR_PAGES . '/blocks-slug/',
 						'/blocks'
 					)
 				)

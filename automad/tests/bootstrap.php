@@ -6,6 +6,7 @@ use Automad\Core\Config;
 define('AUTOMAD', true);
 define('AM_BASE_DIR', realpath(__DIR__ . '/../..'));
 define('AM_DIR_PACKAGES', '/automad/tests/packages');
+define('AM_DIR_PAGES', '/automad/tests/data');
 define('AM_FEED_ENABLED', false);
 define('AM_REQUEST', '/page');
 

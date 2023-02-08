@@ -16,9 +16,9 @@ class ViewTest extends TestCase {
 							"<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
 							'<a href="#">test</a>',
 			'email_02' => 	'<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
+			'resolve_01' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
+			'resolve_02' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>'
 		);
 
@@ -92,9 +92,9 @@ class ViewTest extends TestCase {
 			'pipe_shorten_02' => 'This is another very >>>',
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
-			'resolve_01' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
+			'resolve_01' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/page-slug/image.jpg" srcset="/pages/page-slug/image.jpg 500w, /pages/page-slug/image_large.jpg 1200w">' .
+			'resolve_02' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>',
 			'session_get_01' => 'Session Test',
 			'set_01' => 'Test 1, Test 2',

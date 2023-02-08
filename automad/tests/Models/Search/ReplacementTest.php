@@ -2,7 +2,7 @@
 
 namespace Automad\Models\Search;
 
-use Automad\Core\Parse;
+use Automad\Core\DataFile;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,8 +18,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('+main'),
-				Parse::dataFile(__DIR__ . '/../../data/blocks.txt'),
-				Parse::dataFile(__DIR__ . '/../../data/blocks_replaced.txt')
+				DataFile::read('/blocks'),
+				DataFile::read('/blocks-replaced')
 			),
 			// Blocks, regex, not case sensitive.
 			array(
@@ -28,8 +28,8 @@ class ReplacementTest extends TestCase {
 				true,
 				false,
 				array('+main'),
-				Parse::dataFile(__DIR__ . '/../../data/blocks.txt'),
-				Parse::dataFile(__DIR__ . '/../../data/blocks_replaced.txt')
+				DataFile::read('/blocks'),
+				DataFile::read('/blocks-replaced')
 			),
 			// Blocks, regex, not case sensitive, invalid property.
 			array(
@@ -38,8 +38,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('+main'),
-				Parse::dataFile(__DIR__ . '/../../data/blocks.txt'),
-				Parse::dataFile(__DIR__ . '/../../data/blocks.txt')
+				DataFile::read('/blocks'),
+				DataFile::read('/blocks')
 			),
 			// Text, no regex, not case sensitive.
 			array(
@@ -48,8 +48,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('text'),
-				Parse::dataFile(__DIR__ . '/../../data/text.txt'),
-				Parse::dataFile(__DIR__ . '/../../data/text_replaced.txt')
+				DataFile::read('/text'),
+				DataFile::read('/text-replaced')
 			),
 			// Text, no regex, case sensitive.
 			array(
@@ -58,8 +58,8 @@ class ReplacementTest extends TestCase {
 				false,
 				true,
 				array('text'),
-				Parse::dataFile(__DIR__ . '/../../data/text.txt'),
-				Parse::dataFile(__DIR__ . '/../../data/text.txt')
+				DataFile::read('/text'),
+				DataFile::read('/text')
 			),
 			// Text, regex, case sensitive.
 			array(
@@ -68,8 +68,8 @@ class ReplacementTest extends TestCase {
 				true,
 				true,
 				array('text'),
-				Parse::dataFile(__DIR__ . '/../../data/text.txt'),
-				Parse::dataFile(__DIR__ . '/../../data/text_replaced.txt')
+				DataFile::read('/text'),
+				DataFile::read('/text-replaced')
 			)
 		);
 	}

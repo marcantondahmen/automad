@@ -37,7 +37,7 @@
 namespace Automad\Test;
 
 use Automad\Core\Automad;
-use Automad\Core\Parse;
+use Automad\Core\DataFile;
 use Automad\Models\Context;
 use Automad\Models\Page;
 use Automad\Models\Shared;
@@ -79,7 +79,6 @@ class Mock extends TestCase {
 	 */
 	private function createCollection(Shared $Shared, string $template): array {
 		$theme = 'templates';
-		$testsDir = AM_BASE_DIR . '/automad/tests';
 
 		return array(
 			'/' => new Page(
@@ -110,8 +109,8 @@ class Mock extends TestCase {
 						':index' => '1.1',
 						'tags' => 'test'
 					),
-					Parse::dataFile($testsDir . '/data/page.txt'),
-					Parse::dataFile($testsDir . '/data/inheritance.txt')
+					DataFile::read('/page'),
+					DataFile::read('/inheritance')
 				),
 				$Shared
 			),
@@ -143,7 +142,7 @@ class Mock extends TestCase {
 						':level' => 1,
 						':index' => '1.2'
 					),
-					Parse::dataFile($testsDir . '/data/text.txt')
+					DataFile::read('/text')
 				),
 				$Shared
 			),
@@ -159,7 +158,7 @@ class Mock extends TestCase {
 						':level' => 1,
 						':index' => '1.3'
 					),
-					Parse::dataFile($testsDir . '/data/blocks.txt')
+					DataFile::read('/blocks')
 				),
 				$Shared
 			)
