@@ -156,11 +156,13 @@ class SearchTest extends TestCase {
 	 */
 	public function testSearchPerFileIsSame($searchValue, $isRegex, $isCaseSensitive, $expected) {
 		$Mock = new Mock();
+		$Automad = $Mock->createAutomad('default');
 		$Search = new Search(
-			$Mock->createAutomad('default'),
 			$searchValue,
 			$isRegex,
-			$isCaseSensitive
+			$isCaseSensitive,
+			$Automad->getCollection(),
+			$Automad->Shared
 		);
 
 		$results = $Search->searchPerFile();

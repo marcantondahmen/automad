@@ -69,6 +69,7 @@ class ViewTest extends TestCase {
 			'pagelist_01' => 'Text Subpage Page Home Blocks',
 			'pagelist_02' => 'Blocks Text',
 			'pagelist_03' => 'Home Subpage',
+			'pagelist_04' => '[/page]: includes not only the word find but also the word me. [/blocks]: Some text containing the word me and the word find nested in the list',
 			'pipe_dateformat_01' => '2019',
 			'pipe_dateformat_02' => 'Samstag, 21. Juli 2018',
 			'pipe_dateformat_03' => 'Sat, 21 Jul 2018',

@@ -39,6 +39,7 @@ namespace Automad\Models;
 use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\Models\Search\Search;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -63,6 +64,8 @@ class Selection {
 	 *
 	 * $selection is basically the internal working copy of the collection array.
 	 * It can be sorted and filtered without hurting the original collection.
+	 *
+	 * @var array<Page>
 	 */
 	private array $selection = array();
 
@@ -131,34 +134,34 @@ class Selection {
 	 * @param string $str
 	 */
 	public function filterByKeywords(string $str): void {
-		if ($str) {
+		if (!$str) {
+			return;
+		}
+
+		$filtered = $this->selection;
+		$keywords = explode(' ', str_replace('/', ' ', Str::stripTags($str)));
+
+		foreach ($keywords as $keyword) {
+			$Search = new Search($keyword, false, false, $filtered, null);
+			$fileResultsArray = $Search->searchPerFile();
 			$filtered = array();
 
-			// Explode keywords and also remove any tags and - most important - all "/", since they will be used as regex delimiters!
-			$keywords = explode(' ', str_replace('/', ' ', Str::stripTags($str)));
+			foreach ($fileResultsArray as $FileResult) {
+				$context = array();
 
-			// generate pattern
-			$pattern = '/^';
-			foreach ($keywords as $keyword) {
-				$pattern .= '(?=.*' . preg_quote(trim($keyword)) . ')';
-			}
-			// case-insensitive and multiline
-			$pattern .= '/is';
+				foreach ($FileResult->fieldResultsArray as $FieldResult) {
+					$context[] = $FieldResult->context;
+				}
 
-			// loop elements in $this->selection
-			foreach ($this->selection as $key => $Page) {
-				// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned,
-				// even if the keywords are distributed over different variables in $Page[data].
-				$dataAsString = Str::stripTags(implode(' ', $Page->data));
-
-				// search
-				if (preg_match($pattern, $dataAsString) == 1) {
-					$filtered[$key] = $Page;
+				if ($FileResult->url) {
+					$Page = $this->selection[$FileResult->url];
+					$Page->set(Fields::SEARCH_CONTEXT, implode(' ... ', $context));
+					$filtered[$FileResult->url] = $Page;
 				}
 			}
-
-			$this->selection = $filtered;
 		}
+
+		$this->selection = $filtered;
 	}
 
 	/**

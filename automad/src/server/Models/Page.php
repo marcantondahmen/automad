@@ -616,6 +616,16 @@ class Page {
 	}
 
 	/**
+	 * Set a page data value.
+	 *
+	 * @param string $field
+	 * @param string $value
+	 */
+	public function set(string $field, string $value): void {
+		$this->data[$field] = $value;
+	}
+
+	/**
 	 * Create an empty undefined Page object.
 	 *
 	 * @return Page

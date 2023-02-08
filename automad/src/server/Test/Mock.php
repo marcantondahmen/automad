@@ -92,7 +92,8 @@ class Mock extends TestCase {
 					'template' => $template,
 					':level' => 0,
 					':index' => '1',
-					'tags' => 'test'
+					'tags' => 'test',
+					'searchTest' => 'no results'
 				),
 				$Shared
 			),
@@ -125,7 +126,8 @@ class Mock extends TestCase {
 					'template' => $template,
 					':level' => 2,
 					':index' => '1.1.1',
-					'tags' => 'test'
+					'tags' => 'test',
+					'searchTest' => 'not included'
 				),
 				$Shared
 			),

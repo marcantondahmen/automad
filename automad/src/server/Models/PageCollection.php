@@ -55,6 +55,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class PageCollection {
 	/**
 	 * The collection array.
+	 * 
+	 * @var array<Page>
 	 */
 	private array $collection = array();
 
@@ -94,7 +96,7 @@ class PageCollection {
 	/**
 	 * Get the page collection array.
 	 *
-	 * @return array the pages array
+	 * @return array<string, Page> the pages array
 	 */
 	public function get(): array {
 		return $this->collection;

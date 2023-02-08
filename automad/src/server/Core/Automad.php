@@ -163,7 +163,7 @@ class Automad {
 	/**
 	 * Return $collection array.
 	 *
-	 * @return array $this->collection
+	 * @return array<string, Page> $this->collection
 	 */
 	public function getCollection(): array {
 		return $this->collection;

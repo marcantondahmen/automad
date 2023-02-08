@@ -86,11 +86,13 @@ class SearchController {
 		}
 
 		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Search = new Search(
-			$Cache->getAutomad(),
 			Request::post('searchValue'),
 			$isRegex,
-			$isCaseSensitive
+			$isCaseSensitive,
+			$Automad->getCollection(),
+			$Automad->Shared
 		);
 
 		$fileResultsArray = $Search->searchPerFile();

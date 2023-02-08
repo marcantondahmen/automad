@@ -77,6 +77,10 @@ title: Blocks
                                     {
                                         "content": "Another simple item",
                                         "items": []
+                                    },
+                                    {
+                                        "content": "Some text containing the word me and the word find nested in the list",
+                                        "items": []
                                     }
                                 ]
                             }

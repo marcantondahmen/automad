@@ -36,7 +36,8 @@
 
 namespace Automad\Models\Search;
 
-use Automad\Core\Automad;
+use Automad\Models\Page;
+use Automad\Models\Shared;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -64,9 +65,9 @@ class Search {
 	);
 
 	/**
-	 * The Automad results.
+	 * The pages array to search in.
 	 */
-	private Automad $Automad;
+	private array $pages;
 
 	/**
 	 * The search regex flags.
@@ -79,17 +80,24 @@ class Search {
 	private string $searchValue;
 
 	/**
+	 * The optional Shared object.
+	 */
+	private ?Shared $Shared;
+
+	/**
 	 * Initialize a new search model for a search value, optionally used as a regular expression.
 	 *
-	 * @param Automad $Automad
 	 * @param string $searchValue
 	 * @param bool $isRegex
 	 * @param bool $isCaseSensitive
+	 * @param array<string, Page> $pages
+	 * @param Shared|null $Shared
 	 */
-	public function __construct(Automad $Automad, string $searchValue, bool $isRegex, bool $isCaseSensitive) {
-		$this->Automad = $Automad;
+	public function __construct(string $searchValue, bool $isRegex, bool $isCaseSensitive, array $pages, ?Shared $Shared) {
 		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'ims';
+		$this->pages = $pages;
+		$this->Shared = $Shared;
 
 		if ($isRegex) {
 			$this->searchValue = str_replace('/', '\/', $searchValue);
@@ -123,13 +131,13 @@ class Search {
 			return $resultsPerFile;
 		}
 
-		$sharedData = $this->Automad->Shared->data;
+		$sharedData = $this->Shared?->data ?? array();
 
 		if ($fieldResultsArray = $this->searchData($sharedData)) {
 			$resultsPerFile[] = new FileResults($fieldResultsArray, null, null);
 		}
 
-		foreach ($this->Automad->getCollection() as $Page) {
+		foreach ($this->pages as $Page) {
 			if ($fieldResultsArray = $this->searchData($Page->data)) {
 				$resultsPerFile[] = new FileResults($fieldResultsArray, AM_DIR_PAGES . $Page->path, $Page->origUrl);
 			}

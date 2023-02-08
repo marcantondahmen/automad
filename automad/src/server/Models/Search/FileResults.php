@@ -50,6 +50,7 @@ class FileResults {
 	 * The array of `FieldResults`.
 	 *
 	 * @see FieldResults
+	 * @var array<FieldResults>
 	 */
 	public array $fieldResultsArray;
 

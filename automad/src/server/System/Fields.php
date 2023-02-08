@@ -74,6 +74,7 @@ class Fields {
 	const PARENT = ':parent';
 	const PATH = ':path';
 	const PRIVATE = 'private';
+	const SEARCH_CONTEXT = ':searchContext';
 	const SITENAME = 'sitename';
 	const TAG = ':tag';
 	const TAGS = 'tags';
