@@ -245,6 +245,7 @@ class Automad {
 	 * @return string The buffered output
 	 */
 	public function loadTemplate(string $file): string {
+		// Expose $Automad to templates.
 		$Automad = $this;
 
 		if (is_readable($file)) {
@@ -254,8 +255,8 @@ class Automad {
 			ob_end_clean();
 		} else {
 			$template = Str::stripStart($file, AM_BASE_DIR . AM_DIR_PACKAGES);
-			$title = $this->Context->get()->get(Fields::TITLE);
-			$url = $this->Context->get()->get(Fields::URL);
+			$title = $Automad->Context->get()->get(Fields::TITLE);
+			$url = $Automad->Context->get()->get(Fields::URL);
 			$output = "<h1>Template $template for page $title ($url) is missing!</h1><h2>Make sure you have selected an existing template for this page!</h2>";
 		}
 
