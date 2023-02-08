@@ -74,6 +74,8 @@ class Automad {
 	 * Array holding all the site's pages and the related data.
 	 *
 	 * To access the data for a specific page, use the url as key: $this->collection['url'].
+	 *
+	 * @var array<Page>
 	 */
 	private array $collection = array();
 
@@ -94,7 +96,7 @@ class Automad {
 	/**
 	 * Set collection and Shared properties and create the context object with the currently requested page.
 	 *
-	 * @param array $collection
+	 * @param array<Page> $collection
 	 * @param Shared $Shared
 	 */
 	public function __construct(array $collection, Shared $Shared) {
