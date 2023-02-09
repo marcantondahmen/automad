@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
