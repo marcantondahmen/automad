@@ -44,7 +44,7 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * The update command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2018-2021 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2018-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Update extends AbstractCommand {

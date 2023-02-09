@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The App controller handles all requests related to page data.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PageController {
