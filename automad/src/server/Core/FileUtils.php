@@ -48,6 +48,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class FileUtils {
+	const EXT_CAPTION = 'caption';
+
 	/**
 	 * Return an array with the allowed file types.
 	 *
@@ -67,7 +69,7 @@ class FileUtils {
 	 */
 	public static function caption(string $file): string {
 		// Build filename of the caption file.
-		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
+		$captionFile = $file . '.' . self::EXT_CAPTION;
 		Debug::log($captionFile);
 
 		if (is_readable($captionFile)) {

@@ -36,6 +36,7 @@
 
 namespace Automad\System;
 
+use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
@@ -96,7 +97,7 @@ class Composer {
 	public function __construct() {
 		$this->pharUrl = 'https://getcomposer.org/download/' . $this->composerVersion . '/composer.phar';
 		$this->installDirCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' .
-									 AM_FILE_PREFIX_CACHE . '_composer_' .
+									 Cache::PREFIX . '_composer_' .
 									 Str::sanitize($this->composerVersion, true) .
 									 '_dir';
 		$this->setUp();

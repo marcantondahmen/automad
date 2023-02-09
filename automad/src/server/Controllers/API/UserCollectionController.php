@@ -138,7 +138,7 @@ class UserCollectionController {
 		header('Pragma: public');
 		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
+		header('Content-Disposition: attachment; filename=' . basename(UserCollection::FILE_ACCOUNTS));
 		ob_end_flush();
 
 		exit($UserCollection->generatePHP());

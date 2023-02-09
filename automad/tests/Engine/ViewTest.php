@@ -35,6 +35,7 @@ class ViewTest extends TestCase {
 	public function dataForTestRenderIsEqual() {
 		$data = array();
 		$templates = array(
+			'comments_01' => 'Page',
 			'email_01' => '<a href="#">test</a>' .
 						  "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
 						  '<a href="#">test</a>',

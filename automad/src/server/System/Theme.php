@@ -38,6 +38,7 @@ namespace Automad\System;
 
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
+use Automad\Models\Page;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -146,7 +147,7 @@ class Theme {
 
 		// Remove the 'page not found' template from the array of templates.
 		$templates = array_filter($templates, function ($file) {
-			return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php'));
+			return false === in_array(basename($file), array(Page::TEMPLATE_NAME_404 . '.php'));
 		});
 
 		// Reindex array in order to force correct JSON encoding.

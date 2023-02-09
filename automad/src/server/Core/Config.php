@@ -103,21 +103,9 @@ class Config {
 		self::set('AM_DIR_SHARED', '/shared');
 		self::set('AM_DIR_PACKAGES', '/packages');
 		self::set('AM_DIR_CACHE', '/cache');
-		self::set('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
-		self::set('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
-		self::set('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE
-		self::set('AM_FILE_DEFAULT_TEMPLATE', 'standard/light/sidebar_left.php');
-		self::set('AM_FILE_EXT_CAPTION', 'caption');
-		self::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
-		self::set('AM_FILE_EXT_PAGE_CACHE', 'html');
-		self::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
-		self::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
-		self::set('AM_FILE_OBJECT_API_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object_api');
-		self::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
-		self::set('AM_FILE_UI_TEXT_MODULES', AM_BASE_DIR . '/automad/lang/english.json');
 		self::set('AM_FILE_UI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
 		self::set(
 			'AM_ALLOWED_FILE_TYPES',
@@ -134,7 +122,6 @@ class Config {
 		);
 
 		// PAGE
-		self::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
 		self::set('AM_PAGE_DASHBOARD', '/dashboard');
 
 		// FEED
@@ -153,25 +140,6 @@ class Config {
 
 		// IMAGE
 		self::set('AM_IMG_JPG_QUALITY', 90);
-
-		// TEMPLATE DELIMITERS
-		self::set('AM_DEL_VAR_OPEN', '@{');
-		self::set('AM_DEL_VAR_CLOSE', '}');
-		self::set('AM_DEL_STATEMENT_OPEN', '<@');
-		self::set('AM_DEL_STATEMENT_CLOSE', '@>');
-		self::set('AM_DEL_COMMENT_OPEN', '<#');
-		self::set('AM_DEL_COMMENT_CLOSE', '#>');
-		self::set('AM_DEL_INPAGE_BUTTON_OPEN', '{{@@');
-		self::set('AM_DEL_INPAGE_BUTTON_CLOSE', '@@}}');
-
-		// PARSE
-		// Block separator - separates all key/value pairs
-		// Must be used as the only string in a line within the template files.
-		self::set('AM_PARSE_BLOCK_SEPARATOR', '-');
-		// Pair separator - separates the key from the value
-		self::set('AM_PARSE_PAIR_SEPARATOR', ':');
-		// Tags/String separator
-		self::set('AM_PARSE_STR_SEPARATOR', ',');
 
 		// UPDATE
 		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard');

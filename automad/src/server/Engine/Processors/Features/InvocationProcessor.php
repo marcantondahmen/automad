@@ -40,6 +40,7 @@ use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Collections\SnippetCollection;
+use Automad\Engine\Delimiters;
 use Automad\Engine\Extension;
 use Automad\Engine\Toolbox;
 
@@ -111,8 +112,8 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 	 * @return string the invocation regex pattern
 	 */
 	public static function syntaxPattern(): string {
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(Delimiters::STATEMENT_OPEN);
+		$statementClose = preg_quote(Delimiters::STATEMENT_CLOSE);
 
 		return  $statementOpen . '\s*' .
 				'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?' .

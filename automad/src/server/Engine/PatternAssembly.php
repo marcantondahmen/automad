@@ -49,27 +49,22 @@ class PatternAssembly {
 	/**
 	 * The character class to be used within a regex matching all allowed characters for all kine of variable names (content in .txt files, system variables ( :var ) and query string items ( ?var )).
 	 */
-	public static string $charClassAllVariables = '[%:\?\+\w\.\-]';
+	const CHAR_CLASS_ALL_VARS = '[%:\?\+\w\.\-]';
 
 	/**
 	 * The character class to be used within a regex matching all allowed characters for variable names within .txt files.
 	 */
-	public static string $charClassTextFileVariables = '[\+\w\.\-]';
+	const CHAR_CLASS_DATAFILE_VARS = '[\+\w\.\-]';
 
 	/**
 	 * Logical operand "and" or "or".
 	 */
-	public static string $logicalOperator = '(?:and|or)';
+	const LOGICAL_OPERATOR = '(?:and|or)';
 
 	/**
 	 * Number (integer and float).
 	 */
-	public static string $number = '\d+(?:\.\d+)?';
-
-	/**
-	 * The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
-	 */
-	public static string $outerStatementMarker = '#';
+	const NUMBER  = '\d+(?:\.\d+)?';
 
 	/**
 	 * Return a regex to match a sequence of comma separated values or variables.
@@ -130,7 +125,7 @@ class PatternAssembly {
 	 * @return string The regex
 	 */
 	public static function inPageEditButton(): string {
-		return preg_quote(AM_DEL_INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
+		return preg_quote(Delimiters::INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(Delimiters::INPAGE_BUTTON_CLOSE);
 	}
 
 	/**
@@ -140,7 +135,7 @@ class PatternAssembly {
 	 * @return string The generated pattern.
 	 */
 	public static function keyValue(): string {
-		$key = '(?P<key>' . self::$charClassAllVariables . '+|\"' . self::$charClassAllVariables . '+\")';
+		$key = '(?P<key>' . self::CHAR_CLASS_ALL_VARS . '+|\"' . self::CHAR_CLASS_ALL_VARS . '+\")';
 		$value = '(?P<value>' . self::value(self::variable()) . ')';
 		$pair = '\s*' . $key . '\s*:\s*' . $value . '\s*';
 
@@ -175,7 +170,7 @@ class PatternAssembly {
 			$var = '?:';
 		}
 
-		return '(?:"(' . $doubleQuoted . '(?:[^"\\\\]|\\\\.)*)"|\'(' . $singleQuoted . '(?:[^\'\\\\]|\\\\.)*)\'|(' . $num . self::$number . ')|(' . $var . self::variable() . '))';
+		return '(?:"(' . $doubleQuoted . '(?:[^"\\\\]|\\\\.)*)"|\'(' . $singleQuoted . '(?:[^\'\\\\]|\\\\.)*)\'|(' . $num . self::NUMBER . ')|(' . $var . self::variable() . '))';
 	}
 
 	/**
@@ -222,7 +217,7 @@ class PatternAssembly {
 				'|' .
 				// Math.
 				'\s*(' . $operator . '[\+\-\*\/])\s*(' .
-				$num . self::$number . '|' . $subpatternMathVar .
+				$num . self::NUMBER . '|' . $subpatternMathVar .
 				')\s*' .
 				')';
 	}
@@ -257,7 +252,7 @@ class PatternAssembly {
 		// Use possessive quantifiers to improve performance of very long values.
 		$string = '"(?:[^"\\\\]|\\\\.)*+"|\'(?:[^\'\\\\]|\\\\.)*+\'';
 
-		return '\s*(' . $string . '|\w+|' . self::$number . '|' . $subpatternVar . ')\s*';
+		return '\s*(' . $string . '|\w+|' . self::NUMBER . '|' . $subpatternVar . ')\s*';
 	}
 
 	/**
@@ -285,10 +280,10 @@ class PatternAssembly {
 			$pipeReference = self::pipe(null, true);
 		}
 
-		return 	'(' . preg_quote(AM_DEL_VAR_OPEN) .
-				'\s*(' . $name . self::$charClassAllVariables . '+)\s*' .
+		return 	'(' . preg_quote(Delimiters::VAR_OPEN) .
+				'\s*(' . $name . self::CHAR_CLASS_ALL_VARS . '+)\s*' .
 				'(' . $functions . '(?:' . $pipeReference . ')*)' .
-				preg_quote(AM_DEL_VAR_CLOSE) . ')';
+				preg_quote(Delimiters::VAR_CLOSE) . ')';
 	}
 
 	/**
@@ -297,6 +292,6 @@ class PatternAssembly {
 	 * @return string The regex pattern.
 	 */
 	public static function variableKeyUI(): string {
-		return preg_quote(AM_DEL_VAR_OPEN) . '\s*(?P<varName>' . self::$charClassTextFileVariables . '+)';
+		return preg_quote(Delimiters::VAR_OPEN) . '\s*(?P<varName>' . self::CHAR_CLASS_DATAFILE_VARS . '+)';
 	}
 }

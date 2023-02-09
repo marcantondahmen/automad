@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * ("sub.domain.com/" and "www.domain.com/sub" will return different root relative URLs > "/" and "/sub", but may host the same site > each will get its own /cache/directory)
  *
  * 2.
- * The site's mTime gets determined. To keep things fast, the mTime gets only re-calculated after a certain delay and then stored in AM_FILE_SITE_MTIME.
+ * The site's mTime gets determined. To keep things fast, the mTime gets only re-calculated after a certain delay and then stored in FILE_SITE_MTIME.
  * In between the mTime just gets loaded from that file. That means that not later then AM_CACHE_MONITOR_DELAY seconds, all pages will be up to date again.
  * To determine the latest changed item, all directories and files under /pages, /shared, /themes and /config get collected in an array.
  * The filemtime for each item in that array gets stored in a new array ($mTimes[$item]). After sorting, all keys are stored in $mTimesKeys.
@@ -76,6 +76,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Cache {
+	const DIR_IMAGES = AM_DIR_CACHE . '/images';
+	const DIR_PAGES = AM_DIR_CACHE . '/pages';
+	const EXT_PAGE = 'html';
+	const FILE_OBJECT_API_CACHE = AM_BASE_DIR . AM_DIR_CACHE . '/' . self::PREFIX . '_automad_object_api';
+	const FILE_OBJECT_CACHE = AM_BASE_DIR . AM_DIR_CACHE . '/' . self::PREFIX . '_automad_object';
+	const FILE_SITE_MTIME = AM_BASE_DIR . AM_DIR_CACHE . '/' . self::PREFIX . '_site_mtime';
+	const PREFIX = 'cached';
+
 	/**
 	 * The status of the Automad object cache.
 	 */
@@ -133,13 +141,13 @@ class Cache {
 		$this->pageCachingIsEnabled = true;
 
 		// Define object cache file for visitors.
-		$this->objectCacheFile = AM_FILE_OBJECT_CACHE;
+		$this->objectCacheFile = Cache::FILE_OBJECT_CACHE;
 
 		// Disable page caching for in-page edit mode and define ui cache file.
 		if (Session::getUsername()) {
 			$this->pageCachingIsEnabled = false;
 			Debug::log('Page cache is disabled during editing.');
-			$this->objectCacheFile = AM_FILE_OBJECT_API_CACHE;
+			$this->objectCacheFile = Cache::FILE_OBJECT_API_CACHE;
 			Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
 		}
 
@@ -250,7 +258,7 @@ class Cache {
 	 * @return int The latest found mtime, which equal basically the site's modification time.
 	 */
 	public function getSiteMTime(): int {
-		if ((@filemtime(AM_FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
+		if ((@filemtime(Cache::FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
 			// The modification times get only checked every AM_CACHE_MONITOR_DELAY seconds, since
 			// the process of collecting all mtimes itself takes some time too.
 			// After scanning, the mTime gets written to a file.
@@ -397,9 +405,9 @@ class Cache {
 	 * @return int The site's modification time.
 	 */
 	public static function readSiteMTime(): int {
-		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+		Debug::log(Cache::FILE_SITE_MTIME, 'Reading Site-mTime from');
 
-		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
+		return unserialize(file_get_contents(Cache::FILE_SITE_MTIME));
 	}
 
 	/**
@@ -498,9 +506,9 @@ class Cache {
 			$serverName = '';
 		}
 
-		$pageCacheFile = 	AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' .
+		$pageCacheFile = 	AM_BASE_DIR . Cache::DIR_PAGES . '/' .
 							$serverName . AM_BASE_URL . $currentPath . '/' .
-							AM_FILE_PREFIX_CACHE . $sessionDataHash . '.' . AM_FILE_EXT_PAGE_CACHE;
+							Cache::PREFIX . $sessionDataHash . '.' . Cache::EXT_PAGE;
 
 		Debug::log($pageCacheFile);
 
@@ -515,7 +523,7 @@ class Cache {
 	 * @param int $siteMTime
 	 */
 	private static function writeSiteMTime(int $siteMTime): void {
-		FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
-		Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
+		FileSystem::write(Cache::FILE_SITE_MTIME, serialize($siteMTime));
+		Debug::log(Cache::FILE_SITE_MTIME, 'Site-mTime written to');
 	}
 }

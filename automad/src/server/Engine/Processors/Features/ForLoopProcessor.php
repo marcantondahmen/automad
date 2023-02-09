@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\System\Fields;
 
@@ -93,18 +94,18 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 	 * @return string the for loop pattern
 	 */
 	public static function syntaxPattern(): string {
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(Delimiters::STATEMENT_OPEN);
+		$statementClose = preg_quote(Delimiters::STATEMENT_CLOSE);
 
 		return  $statementOpen . '\s*' .
-				PatternAssembly::$outerStatementMarker . '\s*' .
+				Delimiters::OUTER_STATEMENT_MARKER . '\s*' .
 				'for\s+(?P<forStart>' .
-					PatternAssembly::variable() . '|' . PatternAssembly::$number .
+					PatternAssembly::variable() . '|' . PatternAssembly::NUMBER .
 				')\s+to\s+(?P<forEnd>' .
-					PatternAssembly::variable() . '|' . PatternAssembly::$number .
+					PatternAssembly::variable() . '|' . PatternAssembly::NUMBER .
 				')\s*' . $statementClose .
 				'(?P<forSnippet>.*?)' .
-				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				$statementOpen . Delimiters::OUTER_STATEMENT_MARKER . '\s*end' .
 				'\s*' . $statementClose;
 	}
 }

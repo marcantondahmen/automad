@@ -37,6 +37,7 @@
 namespace Automad\Core;
 
 use Automad\API\RequestHandler;
+use Automad\Engine\Delimiters;
 use Automad\Models\Context;
 use Automad\Models\Filelist;
 use Automad\Models\Page;
@@ -148,7 +149,7 @@ class Automad {
 	public function currentPageExists(): bool {
 		$Page = $this->Context->get();
 
-		return ($Page->template != AM_PAGE_NOT_FOUND_TEMPLATE);
+		return ($Page->template != Page::TEMPLATE_NAME_404);
 	}
 
 	/**
@@ -263,7 +264,7 @@ class Automad {
 		}
 
 		// Strip comments before return.
-		return preg_replace('/(' . preg_quote(AM_DEL_COMMENT_OPEN) . '.*?' . preg_quote(AM_DEL_COMMENT_CLOSE) . ')/s', '', $output);
+		return preg_replace('/(' . preg_quote(Delimiters::COMMENT_OPEN) . '.*?' . preg_quote(Delimiters::COMMENT_CLOSE) . ')/s', '', $output);
 	}
 
 	/**
@@ -295,9 +296,9 @@ class Automad {
 	private function pageNotFound(): Page {
 		header('HTTP/1.0 404 Not Found');
 
-		if (file_exists(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->Shared->get(Fields::THEME) . '/' . AM_PAGE_NOT_FOUND_TEMPLATE . '.php')) {
+		if (file_exists(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->Shared->get(Fields::THEME) . '/' . Page::TEMPLATE_NAME_404 . '.php')) {
 			$data = array();
-			$data[Fields::TEMPLATE] = AM_PAGE_NOT_FOUND_TEMPLATE;
+			$data[Fields::TEMPLATE] = Page::TEMPLATE_NAME_404;
 			$data[Fields::LEVEL] = 0;
 			$data[Fields::PARENT] = '';
 

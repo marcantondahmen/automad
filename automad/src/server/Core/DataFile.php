@@ -132,16 +132,14 @@ class DataFile {
 		}
 
 		$pairs = preg_split(
-			'/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' .
-			PatternAssembly::$charClassTextFileVariables .
-			'+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s',
+			'/\n\-+\s*\n(?=' . PatternAssembly::CHAR_CLASS_DATAFILE_VARS . '+\:)/s',
 			preg_replace('/\r\n?/', "\n", file_get_contents($file)),
 			-1,
 			PREG_SPLIT_NO_EMPTY
 		);
 
 		foreach ($pairs as $pair) {
-			list($key, $value) = explode(AM_PARSE_PAIR_SEPARATOR, $pair, 2);
+			list($key, $value) = explode(':', $pair, 2);
 
 			if (strlen($value)) {
 				$key = trim($key);

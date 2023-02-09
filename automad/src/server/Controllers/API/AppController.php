@@ -150,7 +150,7 @@ class AppController {
 	private static function getLanguages(): array {
 		$languages = array();
 
-		foreach (glob(dirname(AM_FILE_UI_TEXT_MODULES) . '/*.json') as $file) {
+		foreach (glob(dirname(Text::FILE_MODULES) . '/*.json') as $file) {
 			if (strpos($file, 'english.json') !== false) {
 				$value = '';
 			} else {

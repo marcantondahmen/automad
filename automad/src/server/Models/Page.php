@@ -42,6 +42,7 @@ use Automad\Core\DataFile;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
+use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\System\Fields;
 
@@ -57,6 +58,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Page {
+	const TEMPLATE_FILE_DEFAULT = 'standard/light/sidebar_left.php';
+	const TEMPLATE_NAME_404 = 'page_not_found';
+	const TRASH_DIRECTORY = AM_DIR_CACHE . '/trash';
+
 	/**
 	 * The $data array holds all the information stored as "key: value" in the text file and some other system generated information (:path, :level, :template ...).
 	 *
@@ -230,7 +235,7 @@ class Page {
 
 		return (bool) FileSystem::movePageDir(
 			$this->path,
-			'..' . AM_DIR_TRASH . dirname($this->path),
+			'..' . Page::TRASH_DIRECTORY . dirname($this->path),
 			basename($this->path)
 		);
 	}
@@ -445,7 +450,7 @@ class Page {
 			return $templatePath;
 		}
 
-		return $packages . AM_FILE_DEFAULT_TEMPLATE;
+		return $packages . Page::TEMPLATE_FILE_DEFAULT;
 	}
 
 	/**
@@ -662,7 +667,7 @@ class Page {
 
 		if (isset($this->data[Fields::TAGS])) {
 			// All tags are splitted into an array
-			$tags = explode(AM_PARSE_STR_SEPARATOR, $this->data[Fields::TAGS]);
+			$tags = explode(Parse::STRING_SEPARATOR, $this->data[Fields::TAGS]);
 			// Trim & strip tags
 			$tags = array_map(function (string $tag) {
 				return trim(Str::stripTags($tag));

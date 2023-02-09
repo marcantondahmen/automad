@@ -45,6 +45,7 @@ use Automad\Core\Feed;
 use Automad\Core\Parse;
 use Automad\Core\Router;
 use Automad\Core\Session;
+use Automad\Models\UserCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -133,7 +134,7 @@ class Routes {
 	 * @param bool $isAuthenticatedUser
 	 */
 	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser): void {
-		$hasAccounts = is_readable(AM_FILE_ACCOUNTS);
+		$hasAccounts = is_readable(UserCollection::FILE_ACCOUNTS);
 
 		$Router->register(
 			AM_PAGE_DASHBOARD . '/setup',

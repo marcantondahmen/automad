@@ -39,6 +39,7 @@ namespace Automad\Engine\Processors\Features;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\System\Fields;
 
@@ -191,11 +192,11 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 	 * @return string the foreach loop pattern
 	 */
 	public static function syntaxPattern(): string {
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(Delimiters::STATEMENT_OPEN);
+		$statementClose = preg_quote(Delimiters::STATEMENT_CLOSE);
 
 		return  $statementOpen . '\s*' .
-				PatternAssembly::$outerStatementMarker . '\s*' .
+				Delimiters::OUTER_STATEMENT_MARKER . '\s*' .
 				'foreach\s+in\s+(?P<foreach>' .
 					'pagelist|' .
 					'filters|' .
@@ -206,10 +207,10 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				'\s*(?P<foreachOptions>\{.*?\})?' .
 				'\s*' . $statementClose .
 				'(?P<foreachSnippet>.*?)' .
-				'(?:' . $statementOpen . PatternAssembly::$outerStatementMarker .
+				'(?:' . $statementOpen . Delimiters::OUTER_STATEMENT_MARKER .
 					'\s*else\s*' .
 				$statementClose . '(?P<foreachElseSnippet>.*?)' . ')?' .
-				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				$statementOpen . Delimiters::OUTER_STATEMENT_MARKER . '\s*end' .
 				'\s*' . $statementClose;
 	}
 }

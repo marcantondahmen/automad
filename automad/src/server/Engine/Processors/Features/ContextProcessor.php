@@ -39,6 +39,7 @@ namespace Automad\Engine\Processors\Features;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Selection;
 
@@ -153,21 +154,21 @@ class ContextProcessor extends AbstractFeatureProcessor {
 	 * @return string the regex pattern for context change statements
 	 */
 	public static function syntaxPattern(): string {
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(Delimiters::STATEMENT_OPEN);
+		$statementClose = preg_quote(Delimiters::STATEMENT_CLOSE);
 
 		return  $statementOpen . '\s*' .
-				PatternAssembly::$outerStatementMarker . '\s*' .
+				Delimiters::OUTER_STATEMENT_MARKER . '\s*' .
 				'with\s+(?P<with>' .
 					'"[^"]*"|' . "'[^']*'|" . PatternAssembly::variable() . '|prev|next' .
 				')' .
 				'\s*(?P<withOptions>\{.*?\})?' .
 				'\s*' . $statementClose .
 				'(?P<withSnippet>.*?)' .
-				'(?:' . $statementOpen . PatternAssembly::$outerStatementMarker .
+				'(?:' . $statementOpen . Delimiters::OUTER_STATEMENT_MARKER .
 					'\s*else\s*' .
 				$statementClose . '(?P<withElseSnippet>.*?)' . ')?' .
-				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				$statementOpen . Delimiters::OUTER_STATEMENT_MARKER . '\s*end' .
 				'\s*' . $statementClose;
 	}
 }

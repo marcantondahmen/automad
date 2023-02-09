@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -71,7 +72,7 @@ class ConditionalProcessor extends AbstractFeatureProcessor {
 
 		// Match each part of a logically combined expression separately.
 		preg_match_all(
-			'/(?P<operator>^|' . PatternAssembly::$logicalOperator . '\s+)' .
+			'/(?P<operator>^|' . PatternAssembly::LOGICAL_OPERATOR . '\s+)' .
 			PatternAssembly::expression('expression') . '/is',
 			trim($matches['if']),
 			$parts,
@@ -194,19 +195,19 @@ class ConditionalProcessor extends AbstractFeatureProcessor {
 	 * @return string the regex pattern for conditionals
 	 */
 	public static function syntaxPattern(): string {
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(Delimiters::STATEMENT_OPEN);
+		$statementClose = preg_quote(Delimiters::STATEMENT_CLOSE);
 
 		return  $statementOpen . '\s*' .
-				PatternAssembly::$outerStatementMarker . '\s*' .
+				Delimiters::OUTER_STATEMENT_MARKER . '\s*' .
 				'if\s+(?P<if>' . PatternAssembly::expression() .
-				'(\s+' . PatternAssembly::$logicalOperator . '\s+' . PatternAssembly::expression() . ')*)' .
+				'(\s+' . PatternAssembly::LOGICAL_OPERATOR . '\s+' . PatternAssembly::expression() . ')*)' .
 				'\s*' . $statementClose .
 				'(?P<ifSnippet>.*?)' .
-				'(?:' . $statementOpen . PatternAssembly::$outerStatementMarker .
+				'(?:' . $statementOpen . Delimiters::OUTER_STATEMENT_MARKER .
 					'\s*else\s*' .
 				$statementClose . '(?P<ifElseSnippet>.*?)' . ')?' .
-				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				$statementOpen . Delimiters::OUTER_STATEMENT_MARKER . '\s*end' .
 				'\s*' . $statementClose;
 	}
 }

@@ -38,7 +38,6 @@ namespace Automad\Core;
 
 use Automad\Core\Messenger;
 use Automad\Core\Text;
-use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -114,7 +113,7 @@ class FileSystem {
 			return false;
 		}
 
-		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
+		$captionFile = $file . '.' . FileUtils::EXT_CAPTION;
 		$captionError = Text::get('permissionsDeniedError');
 
 		if (file_exists($captionFile)) {
@@ -433,7 +432,7 @@ class FileSystem {
 		// Collect items to be removed.
 		$cacheItems = array_merge(
 			self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
-			self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
+			self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . Cache::PREFIX . '*')
 		);
 
 		foreach ($cacheItems as $item) {
@@ -511,8 +510,8 @@ class FileSystem {
 		// Set new mtime to force refresh of page cache in case the new name was belonging to a delete file before.
 		touch($newFile);
 
-		$oldCaptionFile = $oldFile . '.' . AM_FILE_EXT_CAPTION;
-		$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
+		$oldCaptionFile = $oldFile . '.' . FileUtils::EXT_CAPTION;
+		$newCaptionFile = $newFile . '.' . FileUtils::EXT_CAPTION;
 
 		if (file_exists($oldCaptionFile)) {
 			if (is_writable($oldCaptionFile) && (is_writable($newCaptionFile) || !file_exists($newCaptionFile))) {

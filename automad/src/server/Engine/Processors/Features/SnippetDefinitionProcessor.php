@@ -38,6 +38,7 @@ namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
 use Automad\Engine\Collections\SnippetCollection;
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -98,15 +99,15 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 	 * @return string the snippet definition pattern
 	 */
 	public static function syntaxPattern(): string {
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(Delimiters::STATEMENT_OPEN);
+		$statementClose = preg_quote(Delimiters::STATEMENT_CLOSE);
 
 		return  $statementOpen . '\s*' .
-				PatternAssembly::$outerStatementMarker . '\s*' .
+				Delimiters::OUTER_STATEMENT_MARKER . '\s*' .
 				'snippet\s+(?P<snippet>[\w\-]+)' .
 				'\s*' . $statementClose .
 				'(?P<snippetSnippet>.*?)' .
-				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				$statementOpen . Delimiters::OUTER_STATEMENT_MARKER . '\s*end' .
 				'\s*' . $statementClose;
 	}
 }

@@ -40,6 +40,7 @@ use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
+use Automad\Core\FileUtils;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Str;
@@ -109,7 +110,7 @@ class File {
 
 		// Write caption.
 		if (!$Messenger->getError()) {
-			$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
+			$newCaptionFile = $newFile . '.' . FileUtils::EXT_CAPTION;
 
 			// Only if file exists already or $caption is empty.
 			if (is_writable($newCaptionFile) || !file_exists($newCaptionFile)) {

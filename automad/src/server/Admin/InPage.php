@@ -40,6 +40,7 @@ use Automad\Admin\UI\Components\Modal\Link;
 use Automad\Admin\UI\Components\Modal\SelectImage;
 use Automad\Core\Session;
 use Automad\Core\Text;
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Context;
 use Automad\System\Asset;
@@ -87,12 +88,12 @@ class InPage {
 	public function injectTemporaryEditButton(string $value, string $key, Context $Context) {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $key) && Session::getUsername()) {
-			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN .
+			$value .= 	Delimiters::INPAGE_BUTTON_OPEN .
 						json_encode(array(
 							'context' => $Context->get()->origUrl,
 							'key' => $key
 						), JSON_UNESCAPED_SLASHES) .
-						AM_DEL_INPAGE_BUTTON_CLOSE;
+						Delimiters::INPAGE_BUTTON_CLOSE;
 		}
 
 		return $value;
@@ -205,8 +206,8 @@ class InPage {
 			return preg_replace('/' . PatternAssembly::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 
-		$open = preg_quote(AM_DEL_INPAGE_BUTTON_OPEN);
-		$close = preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
+		$open = preg_quote(Delimiters::INPAGE_BUTTON_OPEN);
+		$close = preg_quote(Delimiters::INPAGE_BUTTON_CLOSE);
 
 		$str = preg_replace_callback("/$open(.+?\"key\":\"([^\"]+)\".+?)$close/is", function ($matches) {
 			$json = $matches[1];

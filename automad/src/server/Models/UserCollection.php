@@ -53,6 +53,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class UserCollection {
+	const FILE_ACCOUNTS = AM_BASE_DIR . '/config/accounts.php';
+
 	/**
 	 * The collection of existing user objects.
 	 */
@@ -148,7 +150,7 @@ class UserCollection {
 		// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
 		// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
 		// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
-		if (is_writable(AM_FILE_ACCOUNTS)) {
+		if (is_writable(UserCollection::FILE_ACCOUNTS)) {
 			foreach ($users as $username) {
 				$id = $this->getUserId($username);
 
@@ -284,20 +286,20 @@ class UserCollection {
 	}
 
 	/**
-	 * Save the accounts array as PHP to AM_FILE_ACCOUNTS.
+	 * Save the accounts array as PHP to FILE_ACCOUNTS.
 	 *
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
 	public function save(Messenger $Messenger): bool {
-		if (!FileSystem::write(AM_FILE_ACCOUNTS, $this->generatePHP())) {
+		if (!FileSystem::write(UserCollection::FILE_ACCOUNTS, $this->generatePHP())) {
 			$Messenger->setError(Text::get('permissionsDeniedError'));
 
 			return false;
 		}
 
 		if (function_exists('opcache_invalidate')) {
-			opcache_invalidate(AM_FILE_ACCOUNTS, true);
+			opcache_invalidate(UserCollection::FILE_ACCOUNTS, true);
 		}
 
 		return true;
@@ -389,11 +391,11 @@ class UserCollection {
 	 * @return array The registered accounts
 	 */
 	private function load(): array {
-		if (!is_readable(AM_FILE_ACCOUNTS)) {
+		if (!is_readable(UserCollection::FILE_ACCOUNTS)) {
 			return array();
 		}
 
-		$contents = include AM_FILE_ACCOUNTS;
+		$contents = include UserCollection::FILE_ACCOUNTS;
 
 		// Lagacy support.
 		if (is_array($contents)) {

@@ -46,6 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Text {
+	const FILE_MODULES = AM_BASE_DIR . '/automad/lang/english.json';
+
 	/**
 	 * Array of UI text modules.
 	 */
@@ -88,7 +90,7 @@ class Text {
 			return;
 		}
 
-		self::$modules = FileSystem::readJson(AM_FILE_UI_TEXT_MODULES);
+		self::$modules = FileSystem::readJson(Text::FILE_MODULES);
 
 		if (AM_FILE_UI_TRANSLATION) {
 			$translationFile = AM_BASE_DIR . AM_FILE_UI_TRANSLATION;

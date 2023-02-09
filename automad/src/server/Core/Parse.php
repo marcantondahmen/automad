@@ -49,6 +49,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Parse {
+	const STRING_SEPARATOR = ',';
+
 	/**
 	 * Please use `FileUtils::caption()` instead.
 	 *
@@ -68,7 +70,7 @@ class Parse {
 	 * @return array The array of separate and trimmed strings
 	 */
 	public static function csv(string $str): array {
-		$array = explode(AM_PARSE_STR_SEPARATOR, $str);
+		$array = explode(self::STRING_SEPARATOR, $str);
 		$array = array_filter($array, 'strlen');
 
 		return array_map('trim', $array);

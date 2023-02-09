@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
+use Automad\Engine\Delimiters;
 use Automad\Engine\Processors\TemplateProcessor;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -83,8 +84,8 @@ class IncludeProcessor extends AbstractFeatureProcessor {
 	 * @return string the regex pattern that matches include statements
 	 */
 	public static function syntaxPattern(): string {
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(Delimiters::STATEMENT_OPEN);
+		$statementClose = preg_quote(Delimiters::STATEMENT_CLOSE);
 
 		return  $statementOpen . '\s*' .
 				'(?P<file>[\w\/\-\.]+\.[a-z0-9]{2,5})' .

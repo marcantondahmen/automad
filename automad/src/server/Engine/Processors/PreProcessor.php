@@ -36,6 +36,7 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -57,9 +58,9 @@ class PreProcessor {
 	public static function prepareWrappingStatements(string $str): string {
 		$depth = 0;
 		$regex = 	'/(' .
-					'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|for|foreach|with|snippet)\s.*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
-					'(?P<else>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*else\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
-					'(?P<end>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*end\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')' .
+					'(?P<begin>' . preg_quote(Delimiters::STATEMENT_OPEN) . '\s*(?:if|for|foreach|with|snippet)\s.*?' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')|' .
+					'(?P<else>' . preg_quote(Delimiters::STATEMENT_OPEN) . '\s*else\s*' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')|' .
+					'(?P<end>' . preg_quote(Delimiters::STATEMENT_OPEN) . '\s*end\s*' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')' .
 					')/is';
 
 		return 	preg_replace_callback($regex, function ($match) use (&$depth) {
@@ -75,7 +76,7 @@ class PreProcessor {
 
 			// Append a marker to the opening delimiter in case depth === 0.
 			if ($depth === 0) {
-				$return = str_replace(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_OPEN . PatternAssembly::$outerStatementMarker, $return);
+				$return = str_replace(Delimiters::STATEMENT_OPEN, Delimiters::STATEMENT_OPEN . Delimiters::OUTER_STATEMENT_MARKER, $return);
 			}
 
 			// Increase depth after (!) return was possible modified (in case depth === 0) in case the match is begin or else.
@@ -94,8 +95,8 @@ class PreProcessor {
 	 * @return string The processed string
 	 */
 	public static function stripWhitespace(string $str): string {
-		$str = preg_replace('/\s*(' . preg_quote(AM_DEL_STATEMENT_OPEN) . ')~/is', '$1', $str);
-		$str = preg_replace('/~(' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
+		$str = preg_replace('/\s*(' . preg_quote(Delimiters::STATEMENT_OPEN) . ')~/is', '$1', $str);
+		$str = preg_replace('/~(' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
 
 		return $str;
 	}

@@ -36,6 +36,7 @@
 
 namespace Automad\System;
 
+use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
@@ -137,8 +138,8 @@ class Update {
 			return false;
 		}
 
-		if (file_exists(AM_FILE_SITE_MTIME)) {
-			unlink(AM_FILE_SITE_MTIME);
+		if (file_exists(Cache::FILE_SITE_MTIME)) {
+			unlink(Cache::FILE_SITE_MTIME);
 		}
 
 		$version = '';

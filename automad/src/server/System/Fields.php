@@ -36,6 +36,7 @@
 
 namespace Automad\System;
 
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Page;
 use Automad\System\Theme;
@@ -135,8 +136,8 @@ class Fields {
 			$content = file_get_contents($file);
 			// Remove ~ characters to match includes correctly.
 			$content = str_replace(
-				array(AM_DEL_STATEMENT_OPEN . '~', '~' . AM_DEL_STATEMENT_CLOSE),
-				array(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_CLOSE),
+				array(Delimiters::STATEMENT_OPEN . '~', '~' . Delimiters::STATEMENT_CLOSE),
+				array(Delimiters::STATEMENT_OPEN, Delimiters::STATEMENT_CLOSE),
 				$content
 			);
 			preg_match_all('/' . PatternAssembly::variableKeyUI() . '/is', $content, $matches);

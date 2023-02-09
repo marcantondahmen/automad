@@ -44,6 +44,7 @@ use Automad\Core\Image;
 use Automad\Core\Request;
 use Automad\Core\SessionData;
 use Automad\Core\Str;
+use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
 use Automad\Engine\Runtime;
@@ -184,7 +185,7 @@ class ContentProcessor {
 			$str = preg_replace_callback(
 				'/' . PatternAssembly::keyValue() . '/s',
 				function ($pair) {
-					if (strpos($pair['value'], AM_DEL_VAR_OPEN) === 0) {
+					if (strpos($pair['value'], Delimiters::VAR_OPEN) === 0) {
 						$pair['value'] = '"' . trim($pair['value']) . '"';
 					}
 

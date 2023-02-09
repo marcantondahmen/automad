@@ -85,7 +85,7 @@ class PageController {
 
 		Debug::log($Parent->url, 'parent page');
 
-		$themeTemplate = self::getTemplateNameFromArray();
+		$themeTemplate = self::getTemplateNameFromPost();
 		$isPrivate = (bool) Request::post('private');
 
 		return $Response->setRedirect(Page::add($Parent, $title, $themeTemplate, $isPrivate));
@@ -334,8 +334,9 @@ class PageController {
 	 *
 	 * @return string The template filename
 	 */
-	private static function getTemplateNameFromArray(): string {
-		return $_POST['theme_template'] ?? AM_FILE_DEFAULT_TEMPLATE;
+	private static function getTemplateNameFromPost(): string {
+		/** @var array<string, string|null> $_POST */
+		return $_POST['theme_template'] ?? Page::TEMPLATE_FILE_DEFAULT;
 	}
 
 	/**
@@ -365,7 +366,7 @@ class PageController {
 
 		// The theme and the template get passed as theme/template.php combination separate
 		// form $_POST['data']. That information has to be parsed first and "subdivided".
-		$themeTemplate = self::getTemplateNameFromArray();
+		$themeTemplate = self::getTemplateNameFromPost();
 
 		if ($result = $Page->save($url, $data, $themeTemplate, $slug)) {
 			if (!empty($result['redirect'])) {
