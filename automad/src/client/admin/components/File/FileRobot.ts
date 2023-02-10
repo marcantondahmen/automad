@@ -121,7 +121,7 @@ class FileRobotComponent extends BaseComponent {
 				form.additionalData = savedImageData;
 				await form.submit();
 
-				App.reload();
+				close();
 			},
 			onClose: async (
 				closingReason: string,
@@ -133,7 +133,7 @@ class FileRobotComponent extends BaseComponent {
 					}
 				}
 
-				App.reload();
+				close();
 			},
 		};
 
@@ -141,6 +141,11 @@ class FileRobotComponent extends BaseComponent {
 			form,
 			config as FilerobotImageEditorConfig
 		);
+
+		const close = () => {
+			filerobotImageEditor.terminate();
+			modal.close();
+		};
 
 		filerobotImageEditor.render();
 	}
