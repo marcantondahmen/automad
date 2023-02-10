@@ -32,6 +32,8 @@
  * Licensed under the MIT license.
  */
 
+import { App } from './app';
+
 /**
  * Delete a parameter from the query string.
  *
@@ -63,6 +65,56 @@ export const getSearchParam = (param: string): string => {
 	const searchParams = new URLSearchParams(window.location.search);
 
 	return searchParams.get(param) || '';
+};
+
+/**
+ * Resolve a file URL.
+ *
+ * @param fileUrl
+ * @returns the resolved URL
+ */
+export const resolveFileUrl = (fileUrl: string): string => {
+	if (!fileUrl) {
+		return '';
+	}
+
+	if (fileUrl.match(/^\//)) {
+		return `${App.baseURL}${fileUrl}`;
+	}
+
+	if (fileUrl.match(/:\/\//g)) {
+		return fileUrl;
+	}
+
+	const pageUrl = getPageURL();
+
+	if (pageUrl) {
+		const page = App.pages[pageUrl];
+
+		if (page) {
+			return `${App.baseURL}/pages${page.path}${fileUrl}`;
+		}
+	}
+
+	return '';
+};
+
+/**
+ * Resolve a page URL.
+ *
+ * @param pageUrl
+ * @returns the resolved URL
+ */
+export const resolvePageUrl = (pageUrl: string): string => {
+	if (!pageUrl) {
+		return;
+	}
+
+	if (pageUrl.match(/^\//)) {
+		return `${App.baseURL}${pageUrl}`;
+	}
+
+	return pageUrl;
 };
 
 /**

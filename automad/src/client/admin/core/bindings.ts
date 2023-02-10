@@ -45,9 +45,19 @@ export class Binding {
 	input: InputElement;
 
 	/**
+	 * The binding name.
+	 */
+	private name: string;
+
+	/**
 	 * The modifier function that can optionally be defined to compute the value.
 	 */
 	private modifier: Function;
+
+	/**
+	 * The onChange handler.
+	 */
+	private onChange: Function;
 
 	/**
 	 * Set this to true in case there is no input passed in the options and the value
@@ -84,6 +94,10 @@ export class Binding {
 			this.input.value = value;
 		}
 
+		if (this.onChange) {
+			this.onChange(value);
+		}
+
 		fire('input', this.input);
 	}
 
@@ -95,12 +109,14 @@ export class Binding {
 	 */
 	constructor(name: string, options: BindingOptions = {}) {
 		options = Object.assign(
-			{ initial: null, input: null, modifier: null },
+			{ initial: null, input: null, modifier: null, onChange: null },
 			options
 		);
 
+		this.name = name;
 		this.modifier = options.modifier;
 		this.storeValueAsObject = options.input === null;
+		this.onChange = options.onChange;
 
 		// In case no input is given, an empty input element will be create without
 		// appending it to the DOM.
@@ -139,6 +155,16 @@ export class Bindings {
 	 */
 	static add(name: string, binding: Binding) {
 		this._bindings[name] = binding;
+	}
+
+	/**
+	 * Delete a binding by name.
+	 *
+	 * @param name
+	 * @static
+	 */
+	static delete(name: string): void {
+		delete this._bindings[name];
 	}
 
 	/**

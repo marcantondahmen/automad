@@ -61,6 +61,7 @@ export interface BindingOptions {
 	input?: InputElement;
 	modifier?: Function;
 	initial?: any;
+	onChange?: (value: string) => void;
 }
 
 export interface Image {

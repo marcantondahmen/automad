@@ -35,11 +35,23 @@
 import { InputComponent } from '../components/Fields/Input';
 import { ModalComponent } from '../components/Modal/Modal';
 import { FieldInitData, FieldSectionCollection, KeyValueMap } from '../types';
-import { App, Attr, CSS, html } from '.';
+import {
+	App,
+	Attr,
+	Binding,
+	Bindings,
+	CSS,
+	EventName,
+	getPageURL,
+	html,
+	listen,
+	query,
+} from '.';
 import { PageDataFormComponent } from '../components/Forms/PageDataForm';
 import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
 import { Section } from '../components/Switcher/Switcher';
 import { SharedDataFormComponent } from '../components/Forms/SharedDataForm';
+import { AutocompleteComponent } from '../components/Autocomplete';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -117,6 +129,165 @@ export const createFieldSections = (
 	};
 
 	return sections;
+};
+
+/**
+ * Create an image picker modal.
+ */
+export const createImagePickerModal = (
+	bindingName: string,
+	label: string
+): void => {
+	const modal = create('am-modal', [], { [Attr.destroy]: '' }, App.root);
+	const binding = Bindings.get(bindingName);
+	const pickerBindingName = `picker_${bindingName}`;
+	new Binding(pickerBindingName, {
+		onChange: (value) => {
+			const width = inputWidth.value;
+			const height = inputHeight.value;
+			const querystring =
+				width && height && !value.match(/\:\/\//)
+					? `?${width}x${height}`
+					: '';
+
+			binding.value = `${value}${querystring}`;
+
+			Bindings.delete(pickerBindingName);
+			modal.close();
+		},
+	});
+
+	modal.innerHTML = html`
+		<div class="${CSS.modalDialog} ${CSS.modalDialogLarge}">
+			<div class="${CSS.modalHeader}">
+				<span>${label}</span>
+				<am-modal-close class="${CSS.modalClose}"></am-modal-close>
+			</div>
+			<div class="${CSS.modalBody}">
+				<span class="${CSS.formGroup}">
+					<input
+						type="text"
+						class="${CSS.input} ${CSS.formGroupItem}"
+						placeholder="${App.text('url')}"
+					/>
+					<button class="${CSS.button} ${CSS.formGroupItem}">
+						${App.text('ok')}
+					</button>
+				</span>
+				<hr />
+				<div class="${CSS.flex} ${CSS.flexGap}">
+					<div class="${CSS.flexItemGrow}">
+						<div class="${CSS.field}">
+							<label class="${CSS.fieldLabel}">
+								${App.text('resizeWidthTitle')}
+							</label>
+							<input
+								type="number"
+								class="${CSS.input}"
+								name="width"
+							/>
+						</div>
+					</div>
+					<div class="${CSS.flexItemGrow}">
+						<div class="${CSS.field} ${CSS.flexItemGrow}">
+							<label class="${CSS.fieldLabel}">
+								${App.text('resizeHeightTitle')}
+							</label>
+							<input
+								type="number"
+								class="${CSS.input}"
+								name="height"
+							/>
+						</div>
+					</div>
+				</div>
+				<am-image-picker
+					${Attr.page}="${getPageURL()}"
+					${Attr.label}="${App.text('pageImages')}"
+					${Attr.binding}="${pickerBindingName}"
+				></am-image-picker>
+				<am-image-picker
+					${Attr.label}="${App.text('sharedImages')}"
+					${Attr.binding}="${pickerBindingName}"
+				></am-image-picker>
+			</div>
+		</div>
+	`;
+
+	const button = query('button', modal);
+	const inputUrl = query('input', modal) as HTMLInputElement;
+	const inputWidth = query('[name="width"]') as HTMLInputElement;
+	const inputHeight = query('[name="height"]') as HTMLInputElement;
+
+	listen(button, 'click', () => {
+		binding.value = inputUrl.value;
+
+		Bindings.delete(pickerBindingName);
+		modal.close();
+	});
+
+	setTimeout(() => {
+		modal.open();
+	}, 0);
+};
+
+/**
+ * Create the autocomplete modal element.
+ *
+ * @param bindingName
+ * @param label
+ */
+export const createLinkModal = (bindingName: string, label: string): void => {
+	const modal = create('am-modal', [], { [Attr.destroy]: '' }, App.root);
+	const dialog = create('div', [CSS.modalDialog], {}, modal);
+	const header = create('div', [CSS.modalHeader], {}, dialog);
+	const body = create('div', [CSS.modalBody], {}, dialog);
+	const footer = create('div', [CSS.modalFooter], {}, dialog);
+	const binding = Bindings.get(bindingName);
+
+	const autocomplete = create(
+		'am-autocomplete',
+		[],
+		{},
+		body
+	) as AutocompleteComponent;
+
+	create(
+		'am-modal-close',
+		[CSS.button, CSS.buttonPrimary],
+		{},
+		footer
+	).textContent = App.text('cancel');
+
+	const buttonOk = create(
+		'button',
+		[CSS.button, CSS.buttonAccent],
+		{},
+		footer
+	);
+
+	header.innerHTML = html`
+		<span>${label}</span>
+		<am-modal-close class="${CSS.modalClose}"></am-modal-close>
+	`;
+
+	buttonOk.textContent = App.text('ok');
+
+	listen(modal, EventName.modalOpen, () => {
+		autocomplete.input.value = '';
+	});
+
+	const select = () => {
+		binding.value = autocomplete.input.value;
+		modal.close();
+	};
+
+	listen(autocomplete, EventName.autocompleteSelect, select);
+	listen(buttonOk, 'click', select);
+
+	setTimeout(() => {
+		modal.open();
+	}, 0);
 };
 
 /**

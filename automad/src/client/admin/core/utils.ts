@@ -212,38 +212,6 @@ export const queryParents = (
 };
 
 /**
- * Resolve a file URL.
- *
- * @param fileUrl
- * @returns the resolved URL
- */
-export const resolveFileUrl = (fileUrl: string): string => {
-	if (!fileUrl) {
-		return '';
-	}
-
-	if (fileUrl.match(/^\//)) {
-		return `${App.baseURL}${fileUrl}`;
-	}
-
-	if (fileUrl.match(/:\/\//g)) {
-		return fileUrl;
-	}
-
-	const pageUrl = getPageURL();
-
-	if (pageUrl) {
-		const page = App.pages[pageUrl];
-
-		if (page) {
-			return `${App.baseURL}/pages${page.path}${fileUrl}`;
-		}
-	}
-
-	return '';
-};
-
-/**
  * Set the document title.
  *
  * @param page

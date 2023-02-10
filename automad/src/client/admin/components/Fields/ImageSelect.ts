@@ -36,18 +36,15 @@ import {
 	App,
 	Attr,
 	Binding,
-	Bindings,
 	create,
+	createImagePickerModal,
 	CSS,
 	EventName,
 	fire,
-	getPageURL,
 	html,
 	listen,
-	query,
 	resolveFileUrl,
 } from '../../core';
-import { KeyValueMap } from '../../types';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -57,11 +54,6 @@ import { BaseFieldComponent } from './BaseField';
  */
 class ImageSelectComponent extends BaseFieldComponent {
 	/**
-	 * The resize object.
-	 */
-	private resize: KeyValueMap = {};
-
-	/**
 	 * Create an input field.
 	 */
 	protected createInput(): void {
@@ -69,20 +61,6 @@ class ImageSelectComponent extends BaseFieldComponent {
 		const wrapper = create('span', [CSS.imageSelect], {}, this);
 		const preview = create('span', [CSS.imageSelectPreview], {}, wrapper);
 		const combo = create('div', [CSS.imageSelectCombo], {}, wrapper);
-
-		const inputBindingName = `input_${id}`;
-		new Binding(inputBindingName, {
-			modifier: (value: string) => {
-				const { width, height } = this.resize;
-				const querystring =
-					width && height && !value.match(/\:\/\//)
-						? `?${width}x${height}`
-						: '';
-
-				return `${value}${querystring}`;
-			},
-			initial: value || '',
-		});
 
 		const input = create(
 			'input',
@@ -92,21 +70,19 @@ class ImageSelectComponent extends BaseFieldComponent {
 				name,
 				type: 'text',
 				placeholder,
-				[Attr.bind]: inputBindingName,
-				[Attr.bindTo]: 'value',
+				value,
 			},
 			combo
 		);
 
-		listen(input, EventName.changeByBinding, () => {
-			fire('input', input);
-		});
-
 		this.createPreview(preview, input, id);
 		const button = this.createModalButton(combo);
 
-		const createModal = () => {
-			this.createModal(inputBindingName);
+		const inputBindingName = `input_${id}`;
+		new Binding(inputBindingName, { input });
+
+		const createModal = (): void => {
+			createImagePickerModal(inputBindingName, this._data.label);
 		};
 
 		listen(button, 'click', createModal.bind(this));
@@ -164,95 +140,6 @@ class ImageSelectComponent extends BaseFieldComponent {
 		`;
 
 		return button;
-	}
-
-	/**
-	 * Create the picker modal.
-	 */
-	private createModal(inputBindingName: string): void {
-		const modal = create('am-modal', [], { [Attr.destroy]: '' }, this);
-
-		modal.innerHTML = html`
-			<div class="${CSS.modalDialog} ${CSS.modalDialogLarge}">
-				<div class="${CSS.modalHeader}">
-					<span>${this._data.label}</span>
-					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-				</div>
-				<div class="${CSS.modalBody}">
-					<span class="${CSS.formGroup}">
-						<input
-							type="text"
-							class="${CSS.input} ${CSS.formGroupItem}"
-							placeholder="${App.text('url')}"
-						/>
-						<button class="${CSS.button} ${CSS.formGroupItem}">
-							${App.text('ok')}
-						</button>
-					</span>
-					<hr />
-					<div class="${CSS.flex} ${CSS.flexGap}">
-						<div class="${CSS.flexItemGrow}">
-							<div class="${CSS.field}">
-								<label class="${CSS.fieldLabel}">
-									${App.text('resizeWidthTitle')}
-								</label>
-								<input
-									type="number"
-									class="${CSS.input}"
-									name="width"
-								/>
-							</div>
-						</div>
-						<div class="${CSS.flexItemGrow}">
-							<div class="${CSS.field} ${CSS.flexItemGrow}">
-								<label class="${CSS.fieldLabel}">
-									${App.text('resizeHeightTitle')}
-								</label>
-								<input
-									type="number"
-									class="${CSS.input}"
-									name="height"
-								/>
-							</div>
-						</div>
-					</div>
-					<am-image-picker
-						${Attr.page}="${getPageURL()}"
-						${Attr.label}="${App.text('pageImages')}"
-						${Attr.binding}="${inputBindingName}"
-					></am-image-picker>
-					<am-image-picker
-						${Attr.label}="${App.text('sharedImages')}"
-						${Attr.binding}="${inputBindingName}"
-					></am-image-picker>
-				</div>
-			</div>
-		`;
-
-		const button = query('button', modal);
-		const inputUrl = query('input', modal) as HTMLInputElement;
-		const inputWidth = query('[name="width"]') as HTMLInputElement;
-		const inputHeight = query('[name="height"]') as HTMLInputElement;
-
-		listen(button, 'click', () => {
-			const binding = Bindings.get(inputBindingName);
-			binding.value = inputUrl.value;
-			modal.close();
-		});
-
-		this.resize = { width: '', height: '' };
-
-		listen(inputWidth, 'change', () => {
-			this.resize.width = inputWidth.value;
-		});
-
-		listen(inputHeight, 'change', () => {
-			this.resize.height = inputHeight.value;
-		});
-
-		setTimeout(() => {
-			modal.open();
-		}, 0);
 	}
 }
 
