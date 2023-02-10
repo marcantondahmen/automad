@@ -18,6 +18,7 @@
     "psalm": "psalm --no-cache"
   },
   "devDependencies": {
+    "@toast-ui/editor": "^3.2.1",
     "@types/dompurify": "^2.4.0",
     "@types/dropzone": "^5.7.4",
     "@types/sortablejs": "^1.15.0",
