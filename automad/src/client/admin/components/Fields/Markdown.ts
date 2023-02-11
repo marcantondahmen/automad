@@ -37,16 +37,18 @@ import {
 	create,
 	createImagePickerModal,
 	createLinkModal,
+	CSS,
 	fire,
 	FormDataProviders,
-	html,
 	listen,
 	resolveFileUrl,
 	resolvePageUrl,
 } from '../../core';
 import { BaseFieldComponent } from './BaseField';
-import Editor from '@toast-ui/editor';
+import Editor, { LinkMdNode } from '@toast-ui/editor';
 import { ToolbarCustomOptions } from '@toast-ui/editor/types/ui';
+import { Context, OpenTagToken } from '@toast-ui/editor/types/toastmark';
+import { CustomHTMLRenderer } from '@toast-ui/editor/dist/toastui-editor-viewer';
 
 /**
  * Create a custom toolbar button.
@@ -61,12 +63,40 @@ const createCustomButton = (
 	label: string,
 	onClick: Function
 ): ToolbarCustomOptions => {
-	const el = create('button', [], {});
+	const el = create('button', ['toastui-editor-toolbar-icons', icon], {});
 
-	el.innerHTML = html`<i class="bi bi-${icon}"></i>`;
 	listen(el, 'click', onClick);
 
 	return { el, name: label, tooltip: label };
+};
+
+/**
+ * Use a custom renderer to correctly resolve page and image links.
+ *
+ * @see {@link docs https://github.com/nhn/tui.editor/blob/master/docs/en/custom-html-renderer.md}
+ */
+const htmlRenderer: CustomHTMLRenderer = {
+	image(node: LinkMdNode, context: Context) {
+		const { origin, entering } = context;
+		const result = origin() as OpenTagToken;
+		if (entering) {
+			result.attributes = {
+				src: resolveFileUrl(node.destination),
+			};
+		}
+		return result;
+	},
+	link(node: LinkMdNode, context: Context) {
+		const { origin, entering } = context;
+		const result = origin() as OpenTagToken;
+		if (entering) {
+			result.attributes = {
+				href: resolvePageUrl(node.destination),
+				target: '_blank',
+			};
+		}
+		return result;
+	},
 };
 
 /**
@@ -94,7 +124,7 @@ class MarkdownComponent extends BaseFieldComponent {
 	 */
 	createInput(): void {
 		const { name, id, value, placeholder } = this._data;
-		const container = create('div', [], { id }, this);
+		const container = create('div', [CSS.mdEditor], { id }, this);
 
 		this.setAttribute('name', name);
 		this.value = value as string;
@@ -112,6 +142,7 @@ class MarkdownComponent extends BaseFieldComponent {
 
 		const editor = new Editor({
 			el: container,
+			initialValue: value as string,
 			usageStatistics: false,
 			height: 'auto',
 			hideModeSwitch: true,
@@ -121,25 +152,21 @@ class MarkdownComponent extends BaseFieldComponent {
 			toolbarItems: [
 				['heading', 'bold', 'italic', 'strike'],
 				['hr', 'quote'],
-				['ul', 'ol', 'task', 'indent', 'outdent'],
+				['ul', 'ol'],
 				['table', imageSelection, linkSelection],
 				['code', 'codeblock'],
 			],
+			customHTMLRenderer: htmlRenderer,
 			events: {
 				change: () => {
 					this.value = editor.getMarkdown();
 					fire('input', this);
 				},
-				beforePreviewRender: (html) => {
-					return html
-						.replace(/src="([^"]+)"/g, (tag, image) => {
-							return `src="${resolveFileUrl(image)}"`;
-						})
-						.replace(/href="([^"]+)"/g, (tag, link) => {
-							return `href="${resolvePageUrl(
-								link
-							)}" target="_blank"`;
-						});
+				focus: () => {
+					container.classList.add(CSS.mdEditorFocus);
+				},
+				blur: () => {
+					container.classList.remove(CSS.mdEditorFocus);
 				},
 			},
 		});
@@ -161,8 +188,6 @@ class MarkdownComponent extends BaseFieldComponent {
 				}
 			},
 		});
-
-		editor.setMarkdown(value as string, false);
 	}
 }
 

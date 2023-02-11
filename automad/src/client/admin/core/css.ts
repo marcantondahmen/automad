@@ -158,6 +158,9 @@ export const enum CSS {
 	layoutDashboardContentRow = 'am-l-dashboard__content--row',
 	layoutDashboardFooter = 'am-l-dashboard__footer',
 
+	mdEditor = 'am-c-md-editor',
+	mdEditorFocus = 'am-c-md-editor--focus',
+
 	menu = 'am-c-menu',
 	menuItem = 'am-c-menu__item',
 
