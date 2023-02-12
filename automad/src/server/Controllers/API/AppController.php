@@ -45,6 +45,7 @@ use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\Models\UserCollection;
+use Automad\System\Composer;
 use Automad\System\Fields;
 use Automad\System\Server;
 use Automad\System\ThemeCollection;
@@ -78,6 +79,29 @@ class AppController {
 			'text' => Text::getObject(),
 			'version' => AM_VERSION
 		));
+	}
+
+	/**
+	 * Install or update the automad/language-packs package.
+	 *
+	 * @return Response the Response object
+	 */
+	public static function getLanguagePacks(): Response {
+		$Response = new Response;
+		$Composer = new Composer();
+		$package = Text::PACKAGE;
+
+		if (!is_readable(Text::LANG_PACKS_DIR)) {
+			if (!$Composer->run("require --prefer-install=dist {$package}:dev-master")) {
+				$Response->setSuccess(
+					'Successfully installed the language pack extension! Reload the page in order to select another language in the system settings.'
+				);
+			}
+		}
+
+		$Composer->run("update {$package}");
+
+		return $Response;
 	}
 
 	/**
@@ -148,15 +172,10 @@ class AppController {
 	 * @return array the array of languages
 	 */
 	private static function getLanguages(): array {
-		$languages = array();
+		$languages = array('English' => '');
 
-		foreach (glob(dirname(Text::FILE_MODULES) . '/*.json') as $file) {
-			if (strpos($file, 'english.json') !== false) {
-				$value = '';
-			} else {
-				$value = Str::stripStart($file, AM_BASE_DIR);
-			}
-
+		foreach (glob(Text::LANG_PACKS_DIR . '/*.json') as $file) {
+			$value = Str::stripStart($file, AM_BASE_DIR);
 			$key = ucfirst(str_replace(array('_', '.json'), array(' ', ''), basename($file)));
 			$languages[$key] = $value;
 		}

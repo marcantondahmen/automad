@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -39,6 +39,7 @@ import {
 	fire,
 	getSearchParam,
 	listen,
+	notifySuccess,
 	query,
 	request,
 	requestAPI,
@@ -275,6 +276,14 @@ export class App {
 			EventName.appStateRequireUpdate,
 			this.updateState.bind(this)
 		);
+
+		setTimeout(async () => {
+			const { success } = await requestAPI('App/getLanguagePacks');
+
+			if (success) {
+				notifySuccess(success, -1);
+			}
+		}, 10000);
 	}
 
 	/**

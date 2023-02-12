@@ -96,11 +96,15 @@ export const notifyError = (message: string): void => {
  * Show a success notification.
  *
  * @param message
+ * @param [duration]
  */
-export const notifySuccess = (message: string): void => {
+export const notifySuccess = (
+	message: string,
+	duration: number = 3000
+): void => {
 	notify({
 		message,
-		duration: 3000,
+		duration,
 		icon: 'check-circle',
 	});
 };

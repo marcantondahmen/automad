@@ -19,7 +19,8 @@
     },
     "require": {
         "php": ">=8.0",
-        "automad/package-installer": "^1.1"
+        "automad/package-installer": "^1.1",
+        "automad/language-packs": "dev-master"
     },
     "config": {
         "allow-plugins": {

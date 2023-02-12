@@ -47,6 +47,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Text {
 	const FILE_MODULES = AM_BASE_DIR . '/automad/lang/english.json';
+	const LANG_PACKS_DIR = AM_BASE_DIR . '/vendor/automad/language-packs/lang';
+	const PACKAGE = 'automad/language-packs';
 
 	/**
 	 * Array of UI text modules.
