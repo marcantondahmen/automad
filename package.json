@@ -19,8 +19,10 @@
   },
   "devDependencies": {
     "@toast-ui/editor": "^3.2.1",
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
     "@types/dompurify": "^2.4.0",
     "@types/dropzone": "^5.7.4",
+    "@types/prismjs": "^1.26.0",
     "@types/sortablejs": "^1.15.0",
     "@types/toastify-js": "^1.11.1",
     "@types/yaireo__tagify": "^4.16.0",

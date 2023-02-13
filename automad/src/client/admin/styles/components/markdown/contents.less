@@ -1,0 +1,126 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.ProseMirror {
+	padding: 1.1rem 1.25rem;
+	overflow-y: auto;
+	overflow-x: hidden;
+	font-family: @am-code-font-family;
+	font-size: 1rem;
+	color: var(--am-clr-text-paragraph);
+	background-color: var(--am-clr-background-faded);
+	white-space: pre-wrap;
+
+	&-separator {
+		display: none;
+	}
+
+	& .placeholder {
+		line-height: @am-base-line-height;
+		color: var(--am-clr-text-muted);
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&-selectednode {
+		outline: none;
+	}
+
+	table&-selectednode {
+		border-radius: 2px;
+		outline: 2px solid #00a9ff;
+	}
+
+	.html-block&-selectednode {
+		border-radius: 2px;
+		outline: 2px solid #00a9ff;
+	}
+}
+
+.toastui-editor-md {
+	&-heading {
+		color: var(--am-clr-text);
+		font-weight: bolder;
+
+		&1 {
+			font-size: 1.5rem;
+		}
+
+		&2 {
+			font-size: 1.3rem;
+		}
+		&3 {
+			font-size: 1.2rem;
+		}
+		&4 {
+			font-size: 1.1rem;
+		}
+	}
+
+	&-strong {
+		font-weight: bold;
+	}
+
+	&-emph {
+		font-style: oblique 40deg;
+	}
+
+	&-strike {
+		text-decoration: line-through;
+	}
+
+	&-link {
+		color: var(--am-clr-text-link);
+	}
+}
+
+.toastui-editor-contents {
+	margin: 0;
+	padding: 1.1rem 1.25rem;
+	font-size: inherit;
+	font-family: @am-base-font-family;
+	z-index: 20;
+}
+
+.toastui-editor-pseudo-clipboard {
+	position: fixed;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	left: -10000px;
+	top: -10000px;
+	z-index: -1;
+}

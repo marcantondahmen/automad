@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -74,6 +74,8 @@ export const enum CSS {
 	cardListItemFaded = 'am-c-card__list-item--faded',
 
 	checkbox = 'am-f-checkbox',
+
+	contents = 'am-e-contents',
 
 	customIconCheckbox = 'am-f-custom-icon-checkbox',
 
