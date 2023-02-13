@@ -38,7 +38,6 @@ namespace Automad\Test;
 
 use Automad\Core\Automad;
 use Automad\Core\DataFile;
-use Automad\Models\Context;
 use Automad\Models\Page;
 use Automad\Models\Shared;
 use PHPUnit\Framework\TestCase;

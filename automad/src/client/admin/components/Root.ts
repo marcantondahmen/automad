@@ -45,13 +45,8 @@ import {
 	queryAll,
 	initTooltips,
 	requestAPI,
-	query,
-	setSearchParam,
-	deleteSearchParam,
-	getSearchParam,
 } from '../core';
 import { applyTheme, getTheme } from '../core/theme';
-import { InputElement } from '../types';
 import { BaseComponent } from './Base';
 import { ModalComponent } from './Modal/Modal';
 

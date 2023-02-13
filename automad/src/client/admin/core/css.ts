@@ -187,18 +187,10 @@ export const enum CSS {
 	modalJumpbarDivider = 'am-c-modal__jumpbar-divider',
 
 	nav = 'am-c-nav',
-	navSelectForm = 'am-c-nav--select',
-	navDragging = 'am-c-nav--dragging',
-	navChildren = 'am-c-nav__children',
-	navGrip = 'am-c-nav__grip',
 	navItem = 'am-c-nav__item',
 	navItemActive = 'am-c-nav__item--active',
-	navItemGhost = 'am-c-nav__item--ghost',
-	navItemChosen = 'am-c-nav__item--chosen',
-	navItemDrag = 'am-c-nav__item--drag',
 	navLabel = 'am-c-nav__label',
 	navLink = 'am-c-nav__link',
-	navLinkHasChildren = 'am-c-nav__link--has-children',
 
 	navbar = 'am-c-navbar',
 	navbarItem = 'am-c-navbar__item',

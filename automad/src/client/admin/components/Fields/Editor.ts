@@ -43,6 +43,14 @@ import { BaseFieldComponent } from './BaseField';
  */
 class EditorComponent extends BaseFieldComponent {
 	/**
+	 * The tag name.
+	 *
+	 * @static
+	 * @readonly
+	 */
+	static readonly TAG_NAME = 'am-editor';
+
+	/**
 	 * The editor value that serves a input value for the parent form.
 	 */
 	value: KeyValueMap;
@@ -59,5 +67,5 @@ class EditorComponent extends BaseFieldComponent {
 	}
 }
 
-FormDataProviders.add('am-editor');
-customElements.define('am-editor', EditorComponent);
+FormDataProviders.add(EditorComponent.TAG_NAME);
+customElements.define(EditorComponent.TAG_NAME, EditorComponent);

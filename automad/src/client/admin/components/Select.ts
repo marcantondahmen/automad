@@ -68,7 +68,9 @@ class SelectComponent extends BaseComponent {
 		const span = query('span', this);
 		const select = query('select', this) as HTMLSelectElement;
 		const update = () => {
-			span.textContent = select.options[select.selectedIndex].text;
+			try {
+				span.textContent = select.options[select.selectedIndex].text;
+			} catch {}
 		};
 
 		update();

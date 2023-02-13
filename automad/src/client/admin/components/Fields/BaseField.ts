@@ -39,7 +39,6 @@ import {
 	createIdFromField,
 	createLabelFromField,
 	CSS,
-	html,
 	htmlSpecialChars,
 	query,
 	queryAll,
