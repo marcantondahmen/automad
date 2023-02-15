@@ -93,6 +93,7 @@ export const create = (
  * @param data the field data object
  * @param [cls] the array with optional class name
  * @param [attributes] additional attributes
+ * @param [allowModal]
  * @returns the generated field
  */
 export const createField = (
@@ -100,9 +101,24 @@ export const createField = (
 	parent: HTMLElement,
 	data: FieldInitData,
 	cls: string[] = [],
-	attributes: KeyValueMap = {}
+	attributes: KeyValueMap = {},
+	allowModal: boolean = false
 ): InputComponent => {
-	const field = create(fieldType, cls, attributes, parent);
+	const field = create(
+		fieldType,
+		cls,
+		attributes,
+		allowModal
+			? create(
+					'am-modal-field',
+					[],
+					{
+						[Attr.page]: getPageURL(),
+					},
+					parent
+			  )
+			: parent
+	);
 
 	field.data = data;
 

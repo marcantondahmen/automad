@@ -131,17 +131,13 @@ export const fieldGroup = ({
 
 	const prefixMap = {
 		'+': 'am-editor',
-		checkbox: 'am-toggle',
+		checkbox: shared ? 'am-toggle-select' : 'am-toggle',
 		color: 'am-color',
 		date: 'am-date',
 		text: 'am-markdown',
 		image: 'am-image-select',
 		url: 'am-url',
-	};
-
-	if (shared) {
-		prefixMap.checkbox = 'am-toggle-select';
-	}
+	} as const;
 
 	Object.keys(fields).forEach((key) => {
 		if (!Object.values(App.reservedFields).includes(key)) {
@@ -159,13 +155,20 @@ export const fieldGroup = ({
 				placeholder = shared[key];
 			}
 
-			createField(fieldType, section, {
-				key: key,
-				value: fields[key],
-				tooltip: tooltips[key],
-				name: `data[${key}]`,
-				placeholder,
-			});
+			createField(
+				fieldType,
+				section,
+				{
+					key: key,
+					value: fields[key],
+					tooltip: tooltips[key],
+					name: `data[${key}]`,
+					placeholder,
+				},
+				[],
+				{},
+				['am-editor', 'am-markdown'].includes(fieldType)
+			);
 		}
 	});
 };

@@ -26,36 +26,57 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'markdown/markdown.less';
+.am-c-modal-field {
+	display: flex;
+	flex-direction: column;
+	position: relative;
 
-@import 'alert.less';
-@import 'breadcrumbs.less';
-@import 'card.less';
-@import 'dashboard-theme-toggle.less';
-@import 'dropdown.less';
-@import 'feed-field-select.less';
-@import 'field.less';
-@import 'file-robot.less';
-@import 'filter.less';
-@import 'icon-text.less';
-@import 'image-picker.less';
-@import 'image-select.less';
-@import 'link.less';
-@import 'menu.less';
-@import 'modal-field.less';
-@import 'modal.less';
-@import 'nav.less';
-@import 'navbar.less';
-@import 'notify.less';
-@import 'privacy-indicator.less';
-@import 'root.less';
-@import 'spinner.less';
-@import 'switcher.less';
-@import 'tree.less';
-@import 'upload.less';
+	* + & {
+		margin-top: @am-base-margin-y;
+	}
+
+	& > .am-c-field {
+		margin: 0;
+	}
+
+	&--open {
+		position: fixed;
+		z-index: 8000;
+		inset: 0;
+		margin: 0;
+		padding: var(--am-body-padding-x);
+		background-color: var(--am-clr-background);
+	}
+
+	&__header {
+		display: none;
+		justify-content: space-between;
+		margin: 0 ~'calc(var(--am-body-padding-x) * -1)' 1rem ~'calc(var(--am-body-padding-x) * -1)';
+		padding: 0 var(--am-body-padding-x) 1rem var(--am-body-padding-x);
+		border-bottom: @am-border;
+	}
+
+	&--open &__header {
+		display: flex;
+	}
+
+	&__toggle {
+		cursor: pointer;
+	}
+
+	& > &__toggle {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	&--open > &__toggle {
+		display: none;
+	}
+}

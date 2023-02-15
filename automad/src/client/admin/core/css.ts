@@ -181,6 +181,11 @@ export const enum CSS {
 	modalSpinnerIcon = 'am-c-modal__spinner-icon',
 	modalSpinnerText = 'am-c-modal__spinner-text',
 
+	modalField = 'am-c-modal-field',
+	modalFieldOpen = 'am-c-modal-field--open',
+	modalFieldHeader = 'am-c-modal-field__header',
+	modalFieldToggle = 'am-c-modal-field__toggle',
+
 	modalJumpbarInput = 'am-c-modal__jumpbar-input',
 	modalJumpbarItems = 'am-c-modal__jumpbar-items',
 	modalJumpbarLink = 'am-c-modal__jumpbar-link',
