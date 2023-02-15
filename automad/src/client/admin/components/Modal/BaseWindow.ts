@@ -65,7 +65,7 @@ export abstract class BaseWindowComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(this.className);
+		this.classList.add(this.classes.modal);
 
 		if (!this.hasAttribute(Attr.noClick)) {
 			listen(this, 'click', (event: MouseEvent) => {
