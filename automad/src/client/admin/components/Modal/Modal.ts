@@ -39,12 +39,11 @@ import {
 	EventName,
 	fire,
 	getFormData,
-	listen,
 	query,
 	setFormData,
 } from '../../core';
 import { KeyValueMap } from '../../types';
-import { BaseComponent } from '../Base';
+import { BaseWindowComponent } from './BaseWindow';
 
 /**
  * A modal component.
@@ -67,9 +66,9 @@ import { BaseComponent } from '../Base';
  *     </div>
  * </am-modal>
  *
- * @extends BaseComponent
+ * @extends BaseWindowComponent
  */
-export class ModalComponent extends BaseComponent {
+export class ModalComponent extends BaseWindowComponent {
 	/**
 	 * The tag name for the component.
 	 *
@@ -89,49 +88,6 @@ export class ModalComponent extends BaseComponent {
 	private lockId: number;
 
 	/**
-	 * True if the modal dialog is open.
-	 */
-	get isOpen(): boolean {
-		return this.matches(`.${CSS.modalOpen}`);
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.classList.add(CSS.modal);
-
-		if (!this.hasAttribute(Attr.noClick)) {
-			listen(this, 'click', (event: MouseEvent) => {
-				if (this === event.target) {
-					this.close();
-				}
-			});
-		}
-
-		if (!this.hasAttribute(Attr.noEsc)) {
-			this.listeners.push(
-				listen(window, 'keydown', (event: KeyboardEvent) => {
-					if (this.isOpen && event.keyCode == 27) {
-						this.close();
-					}
-				})
-			);
-		}
-	}
-
-	/**
-	 * Toggle the modal.
-	 */
-	toggle(): void {
-		if (this.isOpen) {
-			this.close();
-		} else {
-			this.open();
-		}
-	}
-
-	/**
 	 * Lock the navigation.
 	 */
 	protected lockNavigation(): void {
@@ -149,7 +105,8 @@ export class ModalComponent extends BaseComponent {
 	 * Close the modal.
 	 */
 	close(): void {
-		this.classList.remove(CSS.modalOpen);
+		super.close();
+
 		this.toggleBodyOverflow();
 		this.restoreInitialFormData();
 
@@ -168,9 +125,9 @@ export class ModalComponent extends BaseComponent {
 	 * Open the modal.
 	 */
 	open(): void {
-		this.lockNavigation();
+		super.open();
 
-		this.classList.add(CSS.modalOpen);
+		this.lockNavigation();
 		this.toggleBodyOverflow();
 		this.saveInitialFormData();
 
