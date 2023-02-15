@@ -79,7 +79,7 @@ export class ConfigFileFormComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		super.processResponse(response);
 
-		if (response.data.content) {
+		if (response.data?.content) {
 			this.render(response.data.content);
 		}
 	}
