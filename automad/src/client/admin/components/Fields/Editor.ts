@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { create, FormDataProviders } from '../../core';
-import { KeyValueMap } from '../../types';
+import { create, fire, FormDataProviders } from '../../core';
 import { BaseFieldComponent } from './BaseField';
+import EditorJS, { OutputData } from '@editorjs/editorjs';
 
 /**
  * A block editor field.
@@ -53,17 +53,26 @@ class EditorComponent extends BaseFieldComponent {
 	/**
 	 * The editor value that serves a input value for the parent form.
 	 */
-	value: KeyValueMap;
+	value: OutputData;
 
 	/**
 	 * Render the field.
 	 */
 	createInput(): void {
 		const { name, id, value } = this._data;
-		const editor = create('div', [], { id }, this);
 
 		this.setAttribute('name', name);
-		this.value = value as KeyValueMap;
+		this.value = value as OutputData;
+
+		const editor = new EditorJS({
+			holder: create('div', [], { id }, this),
+			data: this.value,
+
+			onChange: async (api, event) => {
+				this.value = await editor.save();
+				fire('input', this);
+			},
+		});
 	}
 }
 

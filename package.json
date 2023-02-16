@@ -18,6 +18,7 @@
     "psalm": "psalm --no-cache"
   },
   "devDependencies": {
+    "@editorjs/editorjs": "^2.26.5",
     "@toast-ui/editor": "^3.2.1",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
     "@types/dompurify": "^2.4.0",
