@@ -60,7 +60,7 @@ class Table extends AbstractBlock {
 		$html = "<am-table $class><table>";
 
 		if (!empty($data->withHeadings)) {
-			$firstRow = array_shift($data->content);
+			$firstRow = array_shift($data->content) ?? array();
 
 			$html .= '<thead>';
 			$html .= '<tr>';

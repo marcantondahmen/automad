@@ -39,7 +39,7 @@ import { KeyValueMap } from '../types';
 /**
  * The names of field that are submitted along with post requests.
  */
-export enum RequestKey {
+export const enum RequestKey {
 	csrf = '__csrf__',
 }
 
