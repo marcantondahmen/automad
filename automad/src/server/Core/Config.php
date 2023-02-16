@@ -36,6 +36,8 @@
 
 namespace Automad\Core;
 
+use Automad\System\Server;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -63,33 +65,22 @@ class Config {
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);
 
-		// Set base URL for all URLs relative to the root.
-		if (getenv('HTTP_X_FORWARDED_HOST') || getenv('HTTP_X_FORWARDED_SERVER')) {
-			// In case the site is behind a proxy, set AM_BASE_URL to AM_BASE_PROXY.
-			// AM_BASE_PROXY can be separately defined to enable running a site with and without a proxy in parallel.
-			self::set('AM_BASE_PROXY', '');
-			self::set('AM_BASE_URL', AM_BASE_PROXY);
-			Debug::log(getenv('HTTP_X_FORWARDED_SERVER'), 'Proxy');
-		} else {
-			// In case the site is not running behind a proxy server, just get the base URL from the script name.
-			self::set('AM_BASE_URL', str_replace('/index.php', '', (string) getenv('SCRIPT_NAME')));
-		}
+		// The server protocol, port and name.
+		self::set('AM_SERVER', Server::getHost());
 
-		Debug::log(getenv('SERVER_SOFTWARE'), 'Server Software');
+		// Set base URL for all URLs relative to the root.
+		// Change this only if needed, for example when running behind a proxy.
+		self::set('AM_BASE_URL', Server::getBaseUrl());
+
+		// Change this only if needed, for example when running behind a proxy and the automatic configuration is not working.
+		// Example: https://domain.com:8000/site-2 is forwarded to https://domain.com:3000/path/site-2 using a reverse proxy.
+		// Both constants would then be configured as follows:
+		// AM_BASE_URL = '/site-2' (the base URL that is visible to the internet outside)
+		// AM_BASE_PROXY = '/path/site-2' (the base URL behind the proxy)
+		self::set('AM_BASE_PROXY', Server::getProxyBaseUrl());
 
 		// Check whether pretty URLs are enabled.
-		if ((strpos(strtolower((string) getenv('SERVER_SOFTWARE')), 'apache') !== false && file_exists(AM_BASE_DIR . '/.htaccess')) || strpos(strtolower((string) getenv('SERVER_SOFTWARE')), 'nginx') !== false) {
-			// If .htaccess exists on Apache or the server software is Nginx, assume that pretty URLs are enabled and AM_INDEX is empty.
-			self::set('AM_INDEX', '');
-			Debug::log('Pretty URLs are enabled.');
-		} else {
-			// For all other environments, AM_INDEX will be defined as fallback and pretty URLs are disabled.
-			self::set('AM_INDEX', '/index.php');
-			Debug::log('Pretty URLs are disabled');
-		}
-
-		// Custom override for Server::url() method.
-		self::set('AM_SERVER', '');
+		self::set('AM_INDEX', self::getIndex());
 
 		// Define AM_BASE_INDEX as the prefix for all page URLs.
 		self::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
@@ -219,5 +210,28 @@ class Config {
 		}
 
 		return $success;
+	}
+
+	/**
+	 * Get the index filename in case pretty URLs are disabled.
+	 *
+	 * @return string
+	 */
+	private static function getIndex(): string {
+		$serverSoftware = $_SERVER['SERVER_SOFTWARE'] ?? '';
+
+		Debug::log($serverSoftware, 'Server Software');
+
+		$hasPrettyUrls = (
+			(
+				strpos(strtolower($serverSoftware), 'apache') !== false &&
+				file_exists(AM_BASE_DIR . '/.htaccess')
+			) ||
+			strpos(strtolower($serverSoftware), 'nginx') !== false
+		);
+
+		Debug::log('Pretty URLs are ' . ($hasPrettyUrls ? 'enabled' : 'disbaled'));
+
+		return $hasPrettyUrls ? '' : '/index.php';
 	}
 }

@@ -64,7 +64,7 @@ class Resolve {
 	 * @return string The resolved URL
 	 */
 	public static function absoluteUrlToDomain(string $url): string {
-		return Server::url() . self::absoluteUrlToRoot($url);
+		return AM_SERVER . self::absoluteUrlToRoot($url);
 	}
 
 	/**

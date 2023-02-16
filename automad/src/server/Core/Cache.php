@@ -428,7 +428,7 @@ class Cache {
 		// Only non-forwarded (no proxy) sites.
 		if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
 			$c = curl_init();
-			curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => getenv('SERVER_NAME') . AM_BASE_URL, 'version' => AM_VERSION, 'serverSoftware' => getenv('SERVER_SOFTWARE')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
+			curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => ($_SERVER['SERVER_NAME'] ?? '') . AM_BASE_URL, 'version' => AM_VERSION, 'serverSoftware' => ($_SERVER['SERVER_SOFTWARE'] ?? '')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
 			curl_exec($c);
 			curl_close($c);
 		}
@@ -494,17 +494,7 @@ class Cache {
 		// The actual server name is then already part of the AM_BASE_URL.
 		// For example: https://someproxy.com/domain.com/baseurl
 		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
-		if (getenv('HTTP_X_FORWARDED_SERVER')) {
-			$serverName = getenv('HTTP_X_FORWARDED_SERVER');
-		} elseif (getenv('HTTP_X_FORWARDED_HOST')) {
-			$serverName = getenv('HTTP_X_FORWARDED_HOST');
-		} else {
-			$serverName = getenv('SERVER_NAME');
-		}
-
-		if (!$serverName) {
-			$serverName = '';
-		}
+		$serverName = $_SERVER['HTTP_X_FORWARDED_SERVER'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''));
 
 		$pageCacheFile = 	AM_BASE_DIR . Cache::DIR_PAGES . '/' .
 							$serverName . AM_BASE_URL . $currentPath . '/' .

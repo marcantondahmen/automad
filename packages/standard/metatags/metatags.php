@@ -42,15 +42,8 @@ class MetaTags {
 
 		$options = array_merge($defaults, $options);
 
-		$host = getenv('HTTP_HOST');
-		$protocol = 'http';
-
-		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
-			$protocol = 'https';
-		}
-
-		$baseUrl = $protocol . '://' . $host . AM_BASE_URL;
-		$baseIndex = $protocol . '://' . $host . AM_BASE_INDEX;
+		$baseUrl = AM_SERVER . AM_BASE_URL;
+		$baseIndex = AM_SERVER . AM_BASE_INDEX;
 
 		$html = '';
 

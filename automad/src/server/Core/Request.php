@@ -93,16 +93,17 @@ class Request {
 				Debug::log('Getting request from ORIG_PATH_INFO');
 			} elseif (isset($_SERVER['REQUEST_URI'])) {
 				$request = Str::stripEnd($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+				$request = Str::stripStart($request, AM_BASE_PROXY);
 				$request = Str::stripStart($request, AM_BASE_URL);
 				Debug::log('Getting request from REQUEST_URI');
 			} elseif (isset($_SERVER['REDIRECT_URL'])) {
-				$request = Str::stripStart($_SERVER['REDIRECT_URL'], AM_BASE_URL);
+				$request = $_SERVER['REDIRECT_URL'];
+				$request = Str::stripStart($request, AM_BASE_PROXY);
+				$request = Str::stripStart($request, AM_BASE_URL);
 				Debug::log('Getting request from REDIRECT_URL');
-			} elseif (isset($_SERVER['PHP_SELF'])) {
-				$request = Str::stripStart($_SERVER['PHP_SELF'], AM_BASE_URL);
-				$request = Str::stripStart($request, '/index.php');
-				Debug::log('Getting request from PHP_SELF');
 			}
+
+			Debug::log($_SERVER['REQUEST_URI'] ?? '', 'REQUEST_URI');
 
 			$request = Str::stripStart($request, '/index.php');
 		}

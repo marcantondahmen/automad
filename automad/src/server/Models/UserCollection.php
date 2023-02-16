@@ -315,7 +315,7 @@ class UserCollection {
 	 */
 	public function sendInvitation(string $username, string $email, Messenger $Messenger): bool {
 		$website = $_SERVER['SERVER_NAME'] ?? '' . AM_BASE_URL;
-		$link = Server::url() . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/resetpassword?username=' . urlencode($username);
+		$link = AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/resetpassword?username=' . urlencode($username);
 		$subject = 'Automad: ' . Text::get('emailInviteSubject');
 		$message = InvitationEmail::render($website, $username, $link);
 		$headers = "MIME-Version: 1.0\r\n";

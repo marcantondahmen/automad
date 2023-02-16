@@ -74,7 +74,7 @@ class Sitemap {
 	 */
 	private function generate(array $collection, string $sitemap): void {
 		if (!$base = AM_BASE_SITEMAP) {
-			$base = Server::url() . AM_BASE_INDEX;
+			$base = AM_SERVER . AM_BASE_INDEX;
 		}
 
 		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .

@@ -142,13 +142,8 @@ class File {
 
 		// Resolve local URLs.
 		if (strpos($importUrl, '/') === 0) {
-			if (getenv('HTTPS') && getenv('HTTPS') !== 'off' && getenv('HTTP_HOST')) {
-				$protocol = 'https://';
-			} else {
-				$protocol = 'http://';
-			}
+			$importUrl = AM_SERVER . AM_BASE_URL . $importUrl;
 
-			$importUrl = $protocol . (string) getenv('HTTP_HOST') . AM_BASE_URL . $importUrl;
 			Debug::log($importUrl, 'Local URL');
 		}
 

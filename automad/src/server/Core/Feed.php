@@ -92,8 +92,8 @@ class Feed {
 			>
 				<channel>
 					<title>{$fn($this->Automad->Shared->get(Fields::SITENAME))}</title>
-					<link>{$fn(Server::url())}</link>
-					<atom:link href="{$fn(Server::url() . AM_BASE_INDEX . AM_FEED_URL)}" rel="self" type="application/rss+xml" />
+					<link>{$fn(AM_SERVER)}</link>
+					<atom:link href="{$fn(AM_SERVER . AM_BASE_INDEX . AM_FEED_URL)}" rel="self" type="application/rss+xml" />
 					<description>
 						{$fn(Str::stripTags(Str::findFirstParagraph($this->getPageContent($this->Automad->getPage('/')))))}
 					</description>
@@ -126,7 +126,7 @@ class Feed {
 
 		foreach ($pages as $Page) {
 			$this->Automad->Context->set($Page);
-			$link = Server::url() . AM_BASE_INDEX . $Page->url;
+			$link = AM_SERVER . AM_BASE_INDEX . $Page->url;
 			$content = $this->getPageContent($Page);
 			$output .= "\n";
 
