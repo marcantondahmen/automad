@@ -165,6 +165,22 @@ class DataFile {
 	 * @return bool
 	 */
 	public static function write(array $data, ?string $pagePath = null): bool {
+		$data = array_map(function ($value) {
+			if (is_string($value)) {
+				return trim($value);
+			}
+
+			return $value;
+		}, $data);
+
+		$data = array_filter($data, function ($value) {
+			if (is_string($value)) {
+				return strlen($value);
+			}
+
+			return true;
+		});
+
 		$path = !is_null($pagePath) ? AM_DIR_PAGES . $pagePath : AM_DIR_SHARED;
 		$file = rtrim(AM_BASE_DIR . $path, '/') . '/' . self::FILENAME;
 

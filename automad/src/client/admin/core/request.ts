@@ -53,8 +53,42 @@ export const getCsrfToken = (): string => {
 };
 
 /**
- * Request a given URL and optionally post an object as data.
+ * Create a FormData object based on an object.
+ *
+ * @param data
+ * @param formData
+ * @param parent
+ * @returns the created FormData object
+ */
+const createFormData = (
+	data: KeyValueMap,
+	formData: FormData = new FormData(),
+	parent: string = null
+): FormData => {
+	Object.keys(data).forEach((key) => {
+		const value = data[key];
+		const index = data instanceof Object ? key : '';
+		const fullKey = parent ? `${parent}[${index}]` : key;
+
+		if (value instanceof File) {
+			formData.set(fullKey, value);
+		} else if (value instanceof Array) {
+			createFormData(value, formData, fullKey);
+		} else if (value instanceof Object) {
+			createFormData(value, formData, fullKey);
+		} else {
+			formData.set(fullKey, value);
+		}
+	});
+
+	return formData;
+};
+
+/**
+ * Request a given URL and optionally post a stringified object as data.
  * When no data is passed, the request mehod will automatically be `GET`.
+ * In case data is passed, it will be send as a stringified object in the '__raw__' field
+ * that will be converted back to an array on the backend.
  *
  * @param url
  * @param [data]
@@ -68,13 +102,9 @@ export const request = async (
 	const init: KeyValueMap = { method: 'GET' };
 
 	if (data !== null) {
-		const formData = new FormData();
+		const formData = createFormData(data);
 
 		formData.append(RequestKey.csrf, getCsrfToken());
-
-		Object.keys(data).forEach((key) => {
-			formData.append(key, data[key]);
-		});
 
 		init.method = 'POST';
 		init.body = formData;

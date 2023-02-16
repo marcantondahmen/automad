@@ -529,9 +529,6 @@ class Page {
 	 * @return array|bool a data array in case the page was moved or its privacy has changed
 	 */
 	public function save(string $url, array $data, string $themeTemplate, string $slug): array|bool {
-		$data = array_map('trim', $data);
-		$data = array_filter($data, 'strlen');
-
 		$data[Fields::TITLE] = $data[Fields::TITLE] ?? $slug;
 
 		$theme = dirname($themeTemplate);
