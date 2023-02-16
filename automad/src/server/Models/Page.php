@@ -342,7 +342,7 @@ class Page {
 		$data[Fields::LEVEL] = $level;
 		$data[Fields::PARENT] = $parentUrl;
 
-		$data[Fields::TEMPLATE_LEGACY] = $data[Fields::TEMPLATE];
+		$data[Fields::TEMPLATE_LEGACY] = $data[Fields::TEMPLATE] ?? '';
 
 		return new Page($data, $Shared);
 	}
