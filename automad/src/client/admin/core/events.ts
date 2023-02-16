@@ -33,6 +33,7 @@
  */
 
 import { Listener } from '../types';
+import { query, queryAll } from './utils';
 
 /**
  * The object with all custom event that are used by the UI.
@@ -112,4 +113,47 @@ export const listen = (
 	};
 
 	return { remove };
+};
+
+/**
+ * Create a listener that traps focus inside of a given container.
+ *
+ * @param container
+ * @return the created listener
+ */
+export const createFocusTrap = (container: HTMLElement): Listener => {
+	const selector =
+		'input:not([type="hidden"]), button, textarea, [contenteditable]';
+
+	query(selector, container)?.focus();
+
+	return listen(document, 'keydown', (event: KeyboardEvent): void => {
+		if (!(event.key === 'Tab' || event.keyCode === 9)) {
+			return;
+		}
+		const elements = queryAll(selector, container);
+
+		if (elements.length === 0) {
+			event.preventDefault();
+
+			return;
+		}
+
+		const first = elements[0];
+		const last = elements[elements.length - 1];
+
+		if (event.shiftKey) {
+			if (document.activeElement === first) {
+				event.preventDefault();
+				last.focus();
+			}
+
+			return;
+		}
+
+		if (document.activeElement === last) {
+			event.preventDefault();
+			first.focus();
+		}
+	});
 };

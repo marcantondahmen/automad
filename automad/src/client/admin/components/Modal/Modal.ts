@@ -35,6 +35,7 @@
 import {
 	App,
 	Attr,
+	createFocusTrap,
 	CSS,
 	EventName,
 	fire,
@@ -43,7 +44,7 @@ import {
 	query,
 	setFormData,
 } from '../../core';
-import { KeyValueMap } from '../../types';
+import { KeyValueMap, Listener } from '../../types';
 import { BaseComponent } from '../Base';
 
 /**
@@ -88,6 +89,11 @@ export class ModalComponent extends BaseComponent {
 	 * The form data of the form controls included in the modal.
 	 */
 	private formData: KeyValueMap;
+
+	/**
+	 * The internal focus trap listener.
+	 */
+	private focusTrap: Listener;
 
 	/**
 	 * True if the modal dialog is open.
@@ -172,6 +178,8 @@ export class ModalComponent extends BaseComponent {
 		this.unlockNavigation();
 		this.restoreInitialFormData();
 
+		this.focusTrap.remove();
+
 		fire(EventName.modalClose, this);
 
 		if (this.hasAttribute(Attr.destroy)) {
@@ -189,6 +197,8 @@ export class ModalComponent extends BaseComponent {
 		this.toggleBodyOverflow();
 		this.lockNavigation();
 		this.saveInitialFormData();
+
+		this.focusTrap = createFocusTrap(this);
 
 		fire(EventName.modalOpen, this);
 
