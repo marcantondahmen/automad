@@ -53,6 +53,63 @@ export enum EventName {
 }
 
 /**
+ * Make any focused element clickable using the enter key.
+ *
+ * @param element
+ * @return
+ */
+export const documentEnterKeyHandler = (): Listener => {
+	return listen(document, 'keydown', (event: KeyboardEvent): void => {
+		if (event.keyCode == 13) {
+			(document.activeElement as HTMLButtonElement).click();
+		}
+	});
+};
+
+/**
+ * Create a listener that traps focus inside of a given container.
+ *
+ * @param container
+ * @return the created listener
+ */
+export const createFocusTrap = (container: HTMLElement): Listener => {
+	const selector =
+		'input:not([type="hidden"]), button, textarea, [contenteditable], [tabindex="0"]';
+
+	query(selector, container)?.focus();
+
+	return listen(document, 'keydown', (event: KeyboardEvent): void => {
+		if (!(event.key === 'Tab' || event.keyCode === 9)) {
+			return;
+		}
+		const elements = queryAll(selector, container);
+
+		if (elements.length === 0) {
+			event.preventDefault();
+
+			return;
+		}
+
+		const first = elements[0];
+		const last = elements[elements.length - 1];
+
+		if (event.shiftKey) {
+			if (document.activeElement === first) {
+				event.preventDefault();
+				last.focus();
+			}
+
+			return;
+		}
+
+		if (document.activeElement === last) {
+			event.preventDefault();
+			first.focus();
+		}
+	});
+};
+
+/**
  * Fires an event on an element or the window.
  *
  * @param name
@@ -113,47 +170,4 @@ export const listen = (
 	};
 
 	return { remove };
-};
-
-/**
- * Create a listener that traps focus inside of a given container.
- *
- * @param container
- * @return the created listener
- */
-export const createFocusTrap = (container: HTMLElement): Listener => {
-	const selector =
-		'input:not([type="hidden"]), button, textarea, [contenteditable]';
-
-	query(selector, container)?.focus();
-
-	return listen(document, 'keydown', (event: KeyboardEvent): void => {
-		if (!(event.key === 'Tab' || event.keyCode === 9)) {
-			return;
-		}
-		const elements = queryAll(selector, container);
-
-		if (elements.length === 0) {
-			event.preventDefault();
-
-			return;
-		}
-
-		const first = elements[0];
-		const last = elements[elements.length - 1];
-
-		if (event.shiftKey) {
-			if (document.activeElement === first) {
-				event.preventDefault();
-				last.focus();
-			}
-
-			return;
-		}
-
-		if (document.activeElement === last) {
-			event.preventDefault();
-			first.focus();
-		}
-	});
 };

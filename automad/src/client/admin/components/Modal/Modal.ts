@@ -178,9 +178,9 @@ export class ModalComponent extends BaseComponent {
 		this.unlockNavigation();
 		this.restoreInitialFormData();
 
-		this.focusTrap.remove();
-
 		fire(EventName.modalClose, this);
+
+		this.focusTrap.remove();
 
 		if (this.hasAttribute(Attr.destroy)) {
 			setTimeout(() => {
@@ -198,9 +198,9 @@ export class ModalComponent extends BaseComponent {
 		this.lockNavigation();
 		this.saveInitialFormData();
 
-		this.focusTrap = createFocusTrap(this);
-
 		fire(EventName.modalOpen, this);
+
+		this.focusTrap = createFocusTrap(this);
 
 		if (!this.hasAttribute(Attr.noFocus)) {
 			const input = query('input, textarea', this);

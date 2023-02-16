@@ -87,6 +87,8 @@ export class SubmitComponent extends BaseComponent {
 			});
 		};
 
+		this.setAttribute('tabindex', '0');
+
 		listen(this, 'click', submit.bind(this));
 	}
 }

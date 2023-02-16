@@ -46,6 +46,7 @@ import {
 	initTooltips,
 	requestAPI,
 	Attr,
+	documentEnterKeyHandler,
 } from '../core';
 import { applyTheme, getTheme } from '../core/theme';
 import { BaseComponent } from './Base';
@@ -103,6 +104,8 @@ export class RootComponent extends BaseComponent {
 				App.root.update();
 			})
 		);
+
+		this.listeners.push(documentEnterKeyHandler());
 
 		this.validateSession();
 	}

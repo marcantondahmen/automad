@@ -72,10 +72,15 @@ class SelectComponent extends BaseComponent {
 				span.textContent = select.options[select.selectedIndex].text;
 			} catch {}
 		};
+		const toggleFocus = () => {
+			this.classList.toggle(CSS.focus, select === document.activeElement);
+		};
 
 		update();
+		toggleFocus();
 
 		listen(select, `change ${EventName.changeByBinding}`, update);
+		listen(select, 'focus blur', toggleFocus);
 	}
 }
 

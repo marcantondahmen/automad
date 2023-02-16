@@ -49,6 +49,7 @@ import {
 import { createSortableTreeNodes, treeStyles } from '../core/tree';
 import { PageMetaData } from '../types';
 import { BaseComponent } from './Base';
+import { ModalComponent } from './Modal/Modal';
 
 /**
  * The render function that renders the label HTML.
@@ -64,10 +65,10 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 	return html`
 		<label class="${CSS.navItem}">
 			<input
-				class="${CSS.displayNone}"
 				type="radio"
 				name="targetPage"
 				value="${data.url}"
+				tabindex="0"
 			/>
 			<span class="${CSS.navLink}">
 				<am-icon-text
@@ -132,7 +133,15 @@ class PageSelectTreeComponent extends BaseComponent {
 
 		currentNode.reveal();
 
-		(query('input', currentNode.label) as HTMLInputElement).checked = true;
+		const modal = this.closest(ModalComponent.TAG_NAME) as ModalComponent;
+
+		if (modal) {
+			listen(modal, EventName.modalOpen, () => {
+				(
+					query('input', currentNode.label) as HTMLInputElement
+				).checked = true;
+			});
+		}
 	}
 
 	/**

@@ -37,6 +37,7 @@
  */
 export const enum CSS {
 	active = 'am-active',
+	focus = 'am-focus',
 
 	alert = 'am-c-alert',
 	alertIcon = 'am-c-alert__icon',

@@ -77,6 +77,7 @@
 		line-height: ~'calc(@{am-nav-item-line-height} - @{am-border-width} - @{am-border-width})';
 		height: @am-nav-item-line-height;
 		cursor: pointer;
+		outline: @am-outline;
 		transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 
 		& > span {
@@ -92,9 +93,19 @@
 		}
 	}
 
+	&__item input {
+		width: 0;
+		height: 0;
+	}
+
 	&__item--active > &__link,
 	input:checked + &__link {
 		color: @am-nav-item-active-clr;
 		background-color: @am-nav-item-active-bg;
+	}
+
+	input:focus + &__link {
+		outline: @am-outline-active;
+		border: @am-border-width solid var(--am-clr-border-active);
 	}
 }
