@@ -193,10 +193,14 @@ class Search {
 	 * `FieldResults` results for a given search value.
 	 *
 	 * @param string $field
-	 * @param array<object{data: object, type: string}> $blocks
+	 * @param array<object{data: object, type: string}>|null $blocks
 	 * @return FieldResults|null a field results results
 	 */
-	private function searchBlocksRecursively(string $field, array $blocks): ?FieldResults {
+	private function searchBlocksRecursively(string $field, ?array $blocks): ?FieldResults {
+		if (is_null($blocks)) {
+			return null;
+		}
+
 		$results = array();
 
 		foreach ($blocks as $block) {
