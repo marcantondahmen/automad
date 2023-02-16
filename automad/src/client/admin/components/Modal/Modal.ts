@@ -39,11 +39,12 @@ import {
 	EventName,
 	fire,
 	getFormData,
+	listen,
 	query,
 	setFormData,
 } from '../../core';
 import { KeyValueMap } from '../../types';
-import { BaseWindowComponent } from './BaseWindow';
+import { BaseComponent } from '../Base';
 
 /**
  * A modal component.
@@ -66,21 +67,34 @@ import { BaseWindowComponent } from './BaseWindow';
  *     </div>
  * </am-modal>
  *
- * @extends BaseWindowComponent
+ * @extends BaseComponent
  */
-export class ModalComponent extends BaseWindowComponent {
+export class ModalComponent extends BaseComponent {
 	/**
 	 * The tag name for the component.
 	 *
 	 * @static
+	 */
+	static TAG_NAME = 'am-modal';
+
+	/**
+	 * The class names for the component.
+	 *
 	 * @readonly
 	 */
-	static readonly TAG_NAME = 'am-modal';
+	protected readonly classes = [CSS.modal];
 
 	/**
 	 * The form data of the form controls included in the modal.
 	 */
 	private formData: KeyValueMap;
+
+	/**
+	 * True if the modal dialog is open.
+	 */
+	get isOpen(): boolean {
+		return this.matches(`[${Attr.modalOpen}]`);
+	}
 
 	/**
 	 * The internal navigation lock id.
@@ -102,43 +116,27 @@ export class ModalComponent extends BaseWindowComponent {
 	}
 
 	/**
-	 * Close the modal.
+	 * The callback function used when an element is created in the DOM.
 	 */
-	close(): void {
-		super.close();
+	connectedCallback(): void {
+		this.classList.add(...this.classes);
 
-		this.toggleBodyOverflow();
-		this.restoreInitialFormData();
-
-		fire(EventName.modalClose, this);
-
-		if (this.hasAttribute(Attr.destroy)) {
-			setTimeout(() => {
-				this.remove();
-			}, 400);
+		if (!this.hasAttribute(Attr.noClick)) {
+			listen(this, 'click', (event: MouseEvent) => {
+				if (this === event.target) {
+					this.close();
+				}
+			});
 		}
 
-		this.unlockNavigation();
-	}
-
-	/**
-	 * Open the modal.
-	 */
-	open(): void {
-		super.open();
-
-		this.lockNavigation();
-		this.toggleBodyOverflow();
-		this.saveInitialFormData();
-
-		fire(EventName.modalOpen, this);
-
-		if (!this.hasAttribute(Attr.noFocus)) {
-			const input = query('input, textarea', this);
-
-			if (input) {
-				input.focus();
-			}
+		if (!this.hasAttribute(Attr.noEsc)) {
+			this.listeners.push(
+				listen(window, 'keydown', (event: KeyboardEvent) => {
+					if (this.isOpen && event.keyCode == 27) {
+						this.close();
+					}
+				})
+			);
 		}
 	}
 
@@ -150,8 +148,57 @@ export class ModalComponent extends BaseWindowComponent {
 
 		body.classList.toggle(
 			CSS.overflowHidden,
-			query(`.${CSS.modalOpen}`) != null
+			query(`[${Attr.modalOpen}]`) != null
 		);
+	}
+
+	/**
+	 * Toggle the modal.
+	 */
+	toggle(): void {
+		if (this.isOpen) {
+			this.close();
+		} else {
+			this.open();
+		}
+	}
+
+	/**
+	 * Close the modal.
+	 */
+	close(): void {
+		this.removeAttribute(Attr.modalOpen);
+		this.toggleBodyOverflow();
+		this.unlockNavigation();
+		this.restoreInitialFormData();
+
+		fire(EventName.modalClose, this);
+
+		if (this.hasAttribute(Attr.destroy)) {
+			setTimeout(() => {
+				this.remove();
+			}, 400);
+		}
+	}
+
+	/**
+	 * Open the modal.
+	 */
+	open(): void {
+		this.setAttribute(Attr.modalOpen, '');
+		this.toggleBodyOverflow();
+		this.lockNavigation();
+		this.saveInitialFormData();
+
+		fire(EventName.modalOpen, this);
+
+		if (!this.hasAttribute(Attr.noFocus)) {
+			const input = query('input, textarea', this);
+
+			if (input) {
+				input.focus();
+			}
+		}
 	}
 
 	/**

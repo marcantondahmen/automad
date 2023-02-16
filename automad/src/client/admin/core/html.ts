@@ -58,6 +58,7 @@ export const enum Attr {
 	key = 'am-key',
 	label = 'am-label',
 	modal = 'am-modal',
+	modalOpen = 'am-modal-open',
 	narrow = 'am-narrow',
 	noClick = 'am-no-click',
 	noEsc = 'am-no-esc',

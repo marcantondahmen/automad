@@ -87,6 +87,7 @@ import './components/Indicators/System/SystemUpdateIndicator';
 
 import './components/Modal/Modal';
 import './components/Modal/ModalClose';
+import './components/Modal/ModalField';
 import './components/Modal/ModalJumpbar';
 import './components/Modal/ModalJumpbarDialog';
 import './components/Modal/ModalToggle';

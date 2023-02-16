@@ -45,7 +45,7 @@
 		margin: 0;
 	}
 
-	&--open {
+	&[am-modal-open] {
 		position: fixed;
 		z-index: 8000;
 		inset: 0;
@@ -62,7 +62,7 @@
 		border-bottom: @am-border;
 	}
 
-	&--open &__header {
+	&[am-modal-open] &__header {
 		display: flex;
 	}
 
@@ -76,7 +76,7 @@
 		right: 0;
 	}
 
-	&--open > &__toggle {
+	&[am-modal-open] > &__toggle {
 		display: none;
 	}
 }

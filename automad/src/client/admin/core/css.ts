@@ -167,7 +167,6 @@ export const enum CSS {
 	menuItem = 'am-c-menu__item',
 
 	modal = 'am-c-modal',
-	modalOpen = 'am-c-modal--open',
 	modalDialog = 'am-c-modal__dialog',
 	modalDialogLarge = 'am-c-modal__dialog--large',
 	modalDialogSmall = 'am-c-modal__dialog--small',
@@ -182,7 +181,6 @@ export const enum CSS {
 	modalSpinnerText = 'am-c-modal__spinner-text',
 
 	modalField = 'am-c-modal-field',
-	modalFieldOpen = 'am-c-modal-field--open',
 	modalFieldHeader = 'am-c-modal-field__header',
 	modalFieldToggle = 'am-c-modal-field__toggle',
 

@@ -33,31 +33,27 @@
  */
 
 import { App, Attr, create, CSS, html, listen } from '../../core';
-import { BaseWindowComponent } from './BaseWindow';
+import { ModalComponent } from './Modal';
 
 /**
  * A wrapper element that allows for opening a field in modal mode.
  *
  * @extends BaseWindowComponent
  */
-export class ModalFieldComponent extends BaseWindowComponent {
+export class ModalFieldComponent extends ModalComponent {
 	/**
 	 * The tag name for the component.
 	 *
 	 * @static
-	 * @readonly
 	 */
 	static TAG_NAME = 'am-modal-field';
 
 	/**
-	 * The class name for the component.
+	 * The class names for the component.
 	 *
 	 * @readonly
 	 */
-	protected readonly classes = {
-		modal: CSS.modalField,
-		open: CSS.modalFieldOpen,
-	};
+	protected readonly classes = [CSS.modalField];
 
 	/**
 	 * The callback function used when an element is created in the DOM.

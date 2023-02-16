@@ -45,6 +45,7 @@ import {
 	queryAll,
 	initTooltips,
 	requestAPI,
+	Attr,
 } from '../core';
 import { applyTheme, getTheme } from '../core/theme';
 import { BaseComponent } from './Base';
@@ -112,7 +113,7 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async update(): Promise<void> {
-		const openModal = queryAll(`.${CSS.modalOpen}`) as ModalComponent[];
+		const openModal = queryAll(`[${Attr.modalOpen}]`) as ModalComponent[];
 
 		if (openModal) {
 			openModal.forEach((modal) => {

@@ -87,13 +87,13 @@
 		}
 	}
 
-	&--open {
+	&[am-modal-open] {
 		transform: translateY(0);
 		opacity: 1;
 		transition: transform 0s linear, opacity 0.2s;
 	}
 
-	&--open > &__dialog {
+	&[am-modal-open] > &__dialog {
 		top: 0;
 	}
 
