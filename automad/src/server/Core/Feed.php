@@ -135,7 +135,7 @@ class Feed {
 						<title>{$fn($Page->get(Fields::TITLE))}</title>
 						<link>$link</link>
 						<guid isPermaLink="true">$link</guid>
-						<pubDate>{$fn(Str::dateFormat($Page->getMTime(), DATE_RSS))}</pubDate>
+						<pubDate>{$fn(Str::dateFormat($Page->get(Fields::TIME_LAST_MODIFIED), DATE_RSS))}</pubDate>
 						<description>
 							{$fn(Str::stripTags(Str::findFirstParagraph($content)))}
 						</description>
