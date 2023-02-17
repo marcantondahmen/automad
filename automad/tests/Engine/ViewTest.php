@@ -130,9 +130,9 @@ class ViewTest extends TestCase {
 		$rendered = $View->render();
 		$rendered = trim(str_replace('\n', '', $rendered));
 
-		$this->assertEquals($expected, $rendered);
-
 		$_SESSION['username'] = false;
+
+		$this->assertEquals($expected, $rendered);
 	}
 
 	/**
