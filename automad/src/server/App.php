@@ -87,10 +87,10 @@ class App {
 		$output = $this->render(AM_REQUEST);
 
 		if (AM_DEBUG_ENABLED) {
-			echo str_replace('</body>', Debug::consoleLog() . '</body>', $output);
-		} else {
-			echo $output;
+			$output = str_replace('</body>', Debug::consoleLog() . '</body>', $output);
 		}
+
+		exit($output);
 	}
 
 	/**
