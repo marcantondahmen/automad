@@ -76,6 +76,10 @@ const createFormData = (
 			createFormData(value, formData, fullKey);
 		} else if (value instanceof Object) {
 			createFormData(value, formData, fullKey);
+		} else if (typeof value === 'string') {
+			if (value.length) {
+				formData.set(fullKey, value);
+			}
 		} else {
 			formData.set(fullKey, value);
 		}
