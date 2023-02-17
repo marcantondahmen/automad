@@ -32,9 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { create, fire, FormDataProviders } from '../../core';
+import { App, create, fire, FormDataProviders } from '../../core';
 import { BaseFieldComponent } from './BaseField';
-import EditorJS, { OutputData } from '@editorjs/editorjs';
+import EditorJS from '@editorjs/editorjs';
+import { EditorOutputData } from '../../types';
 
 /**
  * A block editor field.
@@ -53,7 +54,7 @@ class EditorComponent extends BaseFieldComponent {
 	/**
 	 * The editor value that serves a input value for the parent form.
 	 */
-	value: OutputData;
+	value: EditorOutputData;
 
 	/**
 	 * Render the field.
@@ -62,14 +63,16 @@ class EditorComponent extends BaseFieldComponent {
 		const { name, id, value } = this._data;
 
 		this.setAttribute('name', name);
-		this.value = value as OutputData;
+		this.value = value as EditorOutputData;
 
 		const editor = new EditorJS({
 			holder: create('div', [], { id }, this),
 			data: this.value,
 
 			onChange: async (api, event) => {
-				this.value = await editor.save();
+				this.value = (await editor.save()) as EditorOutputData;
+				this.value['automadVersion'] = App.version;
+
 				fire('input', this);
 			},
 		});

@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+export * from './editor';
 export * from './field';
 export * from './package';
 export * from './page';
