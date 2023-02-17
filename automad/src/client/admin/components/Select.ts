@@ -32,7 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, EventName, listen, query } from '../core';
+import { create, CSS, EventName, html, listen, query } from '../core';
+import { KeyValueMap, SelectComponentOption } from '../types';
 import { BaseComponent } from './Base';
 
 /**
@@ -51,7 +52,67 @@ import { BaseComponent } from './Base';
  *
  * @extends BaseComponent
  */
-class SelectComponent extends BaseComponent {
+export class SelectComponent extends BaseComponent {
+	/**
+	 * The tag name for the component.
+	 *
+	 * @static
+	 */
+	static TAG_NAME = 'am-select';
+
+	/**
+	 * Create a select component based on an options object.
+	 *
+	 * @param options
+	 * @param selected
+	 * @param parent
+	 * @param name
+	 * @param id
+	 * @param prefix
+	 * @param cls
+	 * @param attributes
+	 * @returns the created component
+	 */
+	static create(
+		options: SelectComponentOption[],
+		selected: string,
+		parent: HTMLElement = null,
+		name: string = '',
+		id: string = '',
+		prefix: string = '',
+		cls: string[] = [],
+		attributes: KeyValueMap = {}
+	): SelectComponent {
+		const select = create(SelectComponent.TAG_NAME, cls, {}, parent);
+		let renderedOptions = '';
+		let renderedAttributes = '';
+
+		options.forEach((option) => {
+			renderedOptions += html`
+				<option
+					value="${option.value}"
+					${selected === option.value ? 'selected' : ''}
+				>
+					${option.text}
+				</option>
+			`;
+		});
+
+		for (const [key, value] of Object.entries(attributes)) {
+			renderedAttributes += html` ${key}="${value}"`;
+		}
+
+		select.innerHTML = html`
+			${prefix}
+			<span class="${CSS.flexItemGrow}"></span>
+			<select name="${name}" id="${id}" ${renderedAttributes}>
+				${renderedOptions}
+			</select>
+		`;
+
+		return select;
+	}
+
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
@@ -84,4 +145,4 @@ class SelectComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-select', SelectComponent);
+customElements.define(SelectComponent.TAG_NAME, SelectComponent);

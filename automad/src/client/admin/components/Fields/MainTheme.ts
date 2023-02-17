@@ -34,7 +34,8 @@
 
 import { App, Attr, create, CSS, html, Route } from '../../core';
 import { BaseFieldComponent } from './BaseField';
-import { Theme } from '../../types';
+import { KeyValueMap, SelectComponentOption, Theme } from '../../types';
+import { SelectComponent } from '../Select';
 
 /**
  * A theme select field.
@@ -47,33 +48,22 @@ export class MainThemeComponent extends BaseFieldComponent {
 	 */
 	protected createInput(): void {
 		const { name, id, value } = this._data;
-		const select = create('am-select', [], {}, this);
+		const themes = Object.values(App.themes) as Theme[];
 		const selectedTheme = App.themes[value as string] as Theme;
-		const options = (): string => {
-			const themes = Object.values(App.themes) as Theme[];
-			const options: string[] = [];
+		const options: SelectComponentOption[] = [];
 
-			themes.forEach((theme) => {
-				const selected =
-					selectedTheme.path === theme.path ? 'selected' : '';
+		themes.forEach((theme) => {
+			options.push({ text: theme.name, value: theme.path });
+		});
 
-				options.push(
-					html`<option value="${theme.path}" ${selected}>
-						${theme.name}
-					</option>`
-				);
-			});
-
-			return options.join('');
-		};
-
-		select.innerHTML = html`
-			<i class="bi bi-box-seam"></i>
-			<span class="${CSS.flexItemGrow}">${selectedTheme.name}</span>
-			<select id=${id} name=${name}>
-				${options()}
-			</select>
-		`;
+		SelectComponent.create(
+			options,
+			selectedTheme.path,
+			this,
+			name,
+			id,
+			'<i class="bi bi-box-seam"></i>'
+		);
 
 		const links = create('div', [CSS.flex, CSS.flexColumn], {}, this);
 

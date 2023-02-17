@@ -269,21 +269,3 @@ export const setFormData = (
 		}
 	});
 };
-
-/**
- * Render the select options markup.
- *
- * @param options
- * @returns the rendered options
- */
-export const renderOptions = (options: KeyValueMap[]): string => {
-	let output = '';
-
-	options.forEach((option) => {
-		output += html`
-			<option value="${option.value}">${option.text}</option>
-		`;
-	});
-
-	return output;
-};

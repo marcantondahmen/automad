@@ -40,9 +40,9 @@ import {
 	EventName,
 	html,
 	listen,
-	renderOptions,
 } from '../../../../core';
-import { Listener } from '../../../../types';
+import { Listener, SelectComponentOption } from '../../../../types';
+import { SelectComponent } from '../../../Select';
 
 /**
  * Create bindings for the form elements in the cache section.
@@ -68,10 +68,10 @@ const createBindings = (listeners: Listener[]): void => {
  * @returns the rendered HTML
  */
 export const renderLanguageSection = (listeners: Listener[]): string => {
-	const languages = [];
+	const languages: SelectComponentOption[] = [];
 
-	for (const [key, value] of Object.entries(App.languages)) {
-		languages.push({ text: key, value });
+	for (const [text, value] of Object.entries(App.languages)) {
+		languages.push({ text, value });
 	}
 
 	createBindings(listeners);
@@ -85,16 +85,19 @@ export const renderLanguageSection = (listeners: Listener[]): string => {
 			<input type="hidden" name="type" value="translation" />
 			<div>
 				<p>${App.text('systemLanguageInfo')}</p>
-				<am-select class="${CSS.selectInline}">
-					<span></span>
-					<select
-						name="translation"
-						${Attr.bind}="translation"
-						${Attr.bindTo}="value"
-					>
-						${renderOptions(languages)}
-					</select>
-				</am-select>
+				${SelectComponent.create(
+					languages,
+					'',
+					null,
+					'translation',
+					'',
+					'',
+					[CSS.selectInline],
+					{
+						[Attr.bind]: 'translation',
+						[Attr.bindTo]: 'value',
+					}
+				).outerHTML}
 			</div>
 		</am-form>
 	`;

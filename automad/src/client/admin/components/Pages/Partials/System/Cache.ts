@@ -41,9 +41,9 @@ import {
 	EventName,
 	html,
 	listen,
-	renderOptions,
 } from '../../../../core';
 import { Listener } from '../../../../types';
+import { SelectComponent } from '../../../Select';
 
 /**
  * Create bindings for the form elements in the cache section.
@@ -111,39 +111,43 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 				</div>
 				<div class="am-cache-settings">
 					<p>${App.text('systemCacheMonitorInfo')}</p>
-					<am-select class="${CSS.selectInline}">
-						${App.text('systemCacheMonitor')}
-						<span></span>
-						<select
-							name="cacheMonitorDelay"
-							${Attr.bind}="cacheMonitorDelay"
-							${Attr.bindTo}="value"
-						>
-							${renderOptions([
-								{ value: 60, text: '1 min' },
-								{ value: 120, text: '2 min' },
-								{ value: 300, text: '5 min' },
-								{ value: 600, text: '10 min' },
-							])}
-						</select>
-					</am-select>
+					${SelectComponent.create(
+						[
+							{ value: 60, text: '1 min' },
+							{ value: 120, text: '2 min' },
+							{ value: 300, text: '5 min' },
+							{ value: 600, text: '10 min' },
+						],
+						'',
+						null,
+						'cacheMonitorDelay',
+						'',
+						App.text('systemCacheMonitor'),
+						[CSS.selectInline],
+						{
+							[Attr.bind]: 'cacheMonitorDelay',
+							[Attr.bindTo]: 'value',
+						}
+					).outerHTML}
 					<p>${App.text('systemCacheLifetimeInfo')}</p>
-					<am-select class="${CSS.selectInline}">
-						${App.text('systemCacheLifetime')}
-						<span></span>
-						<select
-							name="cacheLifetime"
-							${Attr.bind}="cacheLifetime"
-							${Attr.bindTo}="value"
-						>
-							${renderOptions([
-								{ value: 3600, text: '1 h' },
-								{ value: 21600, text: '6 h' },
-								{ value: 43200, text: '12 h' },
-								{ value: 86400, text: '24 h' },
-							])}
-						</select>
-					</am-select>
+					${SelectComponent.create(
+						[
+							{ value: 3600, text: '1 h' },
+							{ value: 21600, text: '6 h' },
+							{ value: 43200, text: '12 h' },
+							{ value: 86400, text: '24 h' },
+						],
+						'',
+						null,
+						'cacheLifetime',
+						'',
+						App.text('systemCacheLifetime'),
+						[CSS.selectInline],
+						{
+							[Attr.bind]: 'cacheLifetime',
+							[Attr.bindTo]: 'value',
+						}
+					).outerHTML}
 				</div>
 			</am-form>
 			<am-form class="am-cache-settings" ${Attr.api}="Cache/clear">

@@ -108,6 +108,11 @@ export interface Partials {
 	[key: string]: string;
 }
 
+export interface SelectComponentOption {
+	text: string;
+	value: string | number;
+}
+
 export interface Theme {
 	author: string;
 	description: string;
