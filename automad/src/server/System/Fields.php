@@ -65,7 +65,6 @@ class Fields {
 	const HIDDEN = 'hidden';
 	const LEVEL = ':level';
 	const LOOP_INDEX = ':i';
-	const MTIME = ':mtime';
 	const NOW = ':now';
 	const ORIG_URL = ':origUrl';
 	const PAGE_INDEX = ':index';
@@ -82,6 +81,8 @@ class Fields {
 	const TEMPLATE = 'template';
 	const TEMPLATE_LEGACY = ':template';
 	const THEME = 'theme';
+	const TIME_CREATED = ':created';
+	const TIME_LAST_MODIFIED = ':lastModified';
 	const TITLE = 'title';
 	const URL = 'url';
 	const WIDTH = ':width';
@@ -98,6 +99,8 @@ class Fields {
 		'TEMPLATE' => Fields::TEMPLATE,
 		'TEMPLATE_LEGACY' => Fields::TEMPLATE_LEGACY,
 		'THEME' => Fields::THEME,
+		'TIME_CREATED' => Fields::TIME_CREATED,
+		'TIME_LAST_MODIFIED' => Fields::TIME_LAST_MODIFIED,
 		'TITLE' => Fields::TITLE,
 		'SITENAME' => Fields::SITENAME,
 		'URL' => Fields::URL

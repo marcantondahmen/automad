@@ -58,6 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Page {
+	const DATE_FORMAT = 'c';
 	const TEMPLATE_FILE_DEFAULT = 'standard/light/sidebar_left.php';
 	const TEMPLATE_NAME_404 = 'page_not_found';
 	const TRASH_DIRECTORY = AM_DIR_CACHE . '/trash';
@@ -199,7 +200,11 @@ class Page {
 		}
 
 		// Set date.
-		$data[Fields::DATE] = date('Y-m-d H:i:s');
+		$now = date(Page::DATE_FORMAT);
+
+		$data[Fields::DATE] = $now;
+		$data[Fields::TIME_CREATED] = $now;
+		$data[Fields::TIME_LAST_MODIFIED] = $now;
 
 		// Save data and add index.
 		DataFile::write($data, $newPagePath);
@@ -353,7 +358,7 @@ class Page {
 	 * The local page data array gets used as first and the shared data array gets used as second source for the requested variable.
 	 * That way it is possible to override a shared data value on a per page basis.
 	 * Note that not all data is stored in the data arrays.
-	 * Some data (:mtime, :basename ...) should only be generated when requested out of performance reasons.
+	 * Some data (:basename ...) should only be generated when requested out of performance reasons.
 	 *
 	 * @param string $field
 	 * @param bool $returnEditorObject
@@ -402,8 +407,6 @@ class Page {
 				return $this->isInCurrentPath() ? 'true' : '';
 			case Fields::BASENAME:
 				return basename($this->path);
-			case Fields::MTIME:
-				return $this->getMtime();
 			default:
 				return '';
 		}
@@ -416,25 +419,6 @@ class Page {
 	 */
 	public function getFile(): string {
 		return DataFile::getFile($this);
-	}
-
-	/**
-	 * Get the modification time/date of the page.
-	 * To determine to correct mtime, the page directory mtime (to check if any files got added) and the page data file mtime will be checked and the highest value will be returned.
-	 *
-	 * @return string The max mtime (directory and data file)
-	 */
-	public function getMtime(): string {
-		$path = AM_BASE_DIR . AM_DIR_PAGES . $this->path;
-		$mtimes = array();
-
-		foreach (array($path, $this->getFile()) as $item) {
-			if (file_exists($item)) {
-				$mtimes[] = date('Y-m-d H:i:s', filemtime($item));
-			}
-		}
-
-		return max($mtimes);
 	}
 
 	/**
@@ -546,6 +530,11 @@ class Page {
 		} else {
 			$private = false;
 		}
+
+		$now = date(Page::DATE_FORMAT);
+
+		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
+		$data[Fields::TIME_LAST_MODIFIED] = $now;
 
 		DataFile::write($data, $this->path);
 

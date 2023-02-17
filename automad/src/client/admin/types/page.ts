@@ -51,6 +51,7 @@ export interface PageMetaData {
 	path: string;
 	parentUrl: string;
 	private: boolean;
+	lastModified: string;
 }
 
 export interface Pages {

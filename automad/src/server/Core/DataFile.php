@@ -106,6 +106,11 @@ class DataFile {
 			$data = self::readLegacyFormat($legacyFile);
 			$data[Fields::TEMPLATE] = str_replace('.txt', '', basename($legacyFile));
 
+			$now = date(Page::DATE_FORMAT);
+
+			$data[Fields::TIME_CREATED] = $now;
+			$data[Fields::TIME_LAST_MODIFIED] = $now;
+
 			self::write($data, $pagePath);
 			unlink($legacyFile);
 
@@ -132,7 +137,7 @@ class DataFile {
 		}
 
 		$pairs = preg_split(
-			'/\n\-+\s*\n(?=' . PatternAssembly::CHAR_CLASS_DATAFILE_VARS . '+\:)/s',
+			'/\n\-+\s*\n(?=' . PatternAssembly::CHAR_CLASS_EDITABLE_VARS . '+\:)/s',
 			preg_replace('/\r\n?/', "\n", file_get_contents($file)),
 			-1,
 			PREG_SPLIT_NO_EMPTY

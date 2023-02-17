@@ -201,7 +201,7 @@ class Automad {
 				'path' => $Page->path,
 				'parentUrl' => $Page->parentUrl,
 				'private' => $Page->private,
-				'mTime' => $Page->get(Fields::MTIME)
+				'lastModified' => $Page->get(Fields::TIME_LAST_MODIFIED)
 			);
 		}
 

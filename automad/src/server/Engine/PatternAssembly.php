@@ -54,7 +54,7 @@ class PatternAssembly {
 	/**
 	 * The character class to be used within a regex matching all allowed characters for variable names within .txt files.
 	 */
-	const CHAR_CLASS_DATAFILE_VARS = '[\+\w\.\-]';
+	const CHAR_CLASS_EDITABLE_VARS = '[\+\w\.\-]';
 
 	/**
 	 * Logical operand "and" or "or".
@@ -292,6 +292,6 @@ class PatternAssembly {
 	 * @return string The regex pattern.
 	 */
 	public static function variableKeyUI(): string {
-		return preg_quote(Delimiters::VAR_OPEN) . '\s*(?P<varName>' . self::CHAR_CLASS_DATAFILE_VARS . '+)';
+		return preg_quote(Delimiters::VAR_OPEN) . '\s*(?P<varName>' . self::CHAR_CLASS_EDITABLE_VARS . '+)';
 	}
 }

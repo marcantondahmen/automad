@@ -152,7 +152,11 @@ const pagesData = (): JumpbarItemData[] => {
 	const pages: PageMetaData[] = Object.values(App.pages);
 
 	pages.sort((a: KeyValueMap, b: KeyValueMap) =>
-		a.mTime < b.mTime ? 1 : b.mTime < a.mTime ? -1 : 0
+		a.lastModified < b.lastModified
+			? 1
+			: b.lastModified < a.lastModified
+			? -1
+			: 0
 	);
 
 	pages.forEach((page: PageMetaData) => {
