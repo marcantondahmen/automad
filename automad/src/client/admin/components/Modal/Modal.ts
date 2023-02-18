@@ -39,7 +39,7 @@ import {
 	CSS,
 	EventName,
 	fire,
-	getFormData,
+	collectFieldData,
 	listen,
 	query,
 	setFormData,
@@ -215,7 +215,7 @@ export class ModalComponent extends BaseComponent {
 	 * Save the initial form values on opening.
 	 */
 	protected saveInitialFormData(): void {
-		this.formData = getFormData(this);
+		this.formData = collectFieldData(this);
 	}
 
 	/**

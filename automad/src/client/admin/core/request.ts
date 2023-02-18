@@ -53,14 +53,14 @@ export const getCsrfToken = (): string => {
 };
 
 /**
- * Create a FormData object based on an object.
+ * Create a FormData object from a generic key/value map.
  *
  * @param data
  * @param formData
  * @param parent
  * @returns the created FormData object
  */
-const createFormData = (
+const convertToFormData = (
 	data: KeyValueMap,
 	formData: FormData = new FormData(),
 	parent: string = null
@@ -73,9 +73,9 @@ const createFormData = (
 		if (value instanceof File) {
 			formData.set(fullKey, value);
 		} else if (value instanceof Array) {
-			createFormData(value, formData, fullKey);
+			convertToFormData(value, formData, fullKey);
 		} else if (value instanceof Object) {
-			createFormData(value, formData, fullKey);
+			convertToFormData(value, formData, fullKey);
 		} else if (typeof value === 'string') {
 			if (value.length) {
 				formData.set(fullKey, value);
@@ -106,7 +106,7 @@ export const request = async (
 	const init: KeyValueMap = { method: 'GET' };
 
 	if (data !== null) {
-		const formData = createFormData(data);
+		const formData = convertToFormData(data);
 
 		formData.append(RequestKey.csrf, getCsrfToken());
 

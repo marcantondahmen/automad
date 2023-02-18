@@ -41,7 +41,7 @@ import {
 	CSS,
 	debounce,
 	fire,
-	getFormData,
+	collectFieldData,
 	getSearchParam,
 	html,
 	listen,
@@ -178,7 +178,7 @@ export class SearchFormComponent extends BaseComponent {
 		}, 200);
 
 		const performReplace = () => {
-			const files = JSON.stringify(getFormData(resultsContainer));
+			const files = JSON.stringify(collectFieldData(resultsContainer));
 
 			performRequest({
 				replaceValue: replace.value,

@@ -32,16 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	create,
-	createField,
-	html,
-	query,
-	queryAll,
-	titleCase,
-} from '.';
+import { App, Attr, create, createField, query, queryAll, titleCase } from '.';
 import {
 	FieldGroupData,
 	FieldGroups,
@@ -174,12 +165,13 @@ export const fieldGroup = ({
 };
 
 /**
- * Collect all the form data to be submitted. Note that excludes all values of unchecked checkboxes and radios.
+ * Collect all the form data from a given container.
+ * Note that excludes all values of unchecked checkboxes and radios.
  *
  * @param container
- * @returns the form data object
+ * @returns the collected form data
  */
-export const getFormData = (container: HTMLElement): KeyValueMap => {
+export const collectFieldData = (container: HTMLElement): KeyValueMap => {
 	const data: KeyValueMap = {};
 
 	queryAll(FormDataProviders.selector, container).filter(

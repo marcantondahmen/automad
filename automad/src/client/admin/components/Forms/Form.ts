@@ -40,7 +40,7 @@ import {
 	debounce,
 	fire,
 	FormDataProviders,
-	getFormData,
+	collectFieldData,
 	getPageURL,
 	listen,
 	notifyError,
@@ -153,7 +153,7 @@ export class FormComponent extends BaseComponent {
 		const data: KeyValueMap = Object.assign(
 			{},
 			this.additionalData,
-			getFormData(this)
+			collectFieldData(this)
 		);
 
 		const pageUrl = getPageURL();
