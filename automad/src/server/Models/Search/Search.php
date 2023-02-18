@@ -139,7 +139,7 @@ class Search {
 
 		foreach ($this->pages as $Page) {
 			if ($fieldResultsArray = $this->searchData($Page->data)) {
-				$resultsPerFile[] = new FileResults($fieldResultsArray, AM_DIR_PAGES . $Page->path, $Page->origUrl);
+				$resultsPerFile[] = new FileResults($fieldResultsArray, $Page->path, $Page->origUrl);
 			}
 		}
 
