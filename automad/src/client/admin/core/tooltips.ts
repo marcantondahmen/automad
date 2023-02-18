@@ -91,10 +91,11 @@ export const initTooltips = () => {
 			let content = target.getAttribute(Attr.tooltip);
 
 			if (content) {
-				const node = create('span');
-
-				node.innerHTML = content;
-				tooltip.show(target, node, options);
+				tooltip.show(
+					target,
+					create('span', [], {}, null, content),
+					options
+				);
 			}
 
 			return;

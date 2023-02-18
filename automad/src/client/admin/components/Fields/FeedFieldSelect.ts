@@ -117,8 +117,13 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 			section
 		);
 
-		create('div', [CSS.feedFieldSelectArrows], {}, section).innerHTML =
-			'<i class="bi bi-arrow-down-up"></i>';
+		create(
+			'div',
+			[CSS.feedFieldSelectArrows],
+			{},
+			section,
+			'<i class="bi bi-arrow-down-up"></i>'
+		);
 
 		const unusedContainer = this.createSortable(
 			unusedFields,

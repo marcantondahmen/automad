@@ -240,16 +240,18 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @returns the created element
 	 */
 	protected createItemElement(item: KeyValueMap): HTMLElement {
-		const element = create('a', [this.linkClass], {});
-
-		element.innerHTML = html`
-			<am-icon-text
-				${Attr.icon}="link"
-				${Attr.text}="$${item.title}"
-			></am-icon-text>
-		`;
-
-		return element;
+		return create(
+			'a',
+			[this.linkClass],
+			{},
+			null,
+			html`
+				<am-icon-text
+					${Attr.icon}="link"
+					${Attr.text}="$${item.title}"
+				></am-icon-text>
+			`
+		);
 	}
 
 	/**

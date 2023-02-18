@@ -68,18 +68,23 @@ export class ModalFieldComponent extends ModalComponent {
 	 * Render the actual markup.
 	 */
 	private render(): void {
-		const header = create('div', [CSS.modalFieldHeader], {}, this);
 		const title = this.getAttribute(Attr.page) || App.text('sharedTitle');
 
-		header.innerHTML = html`
-			<am-icon-text
-				${Attr.icon}="file-earmark-text"
-				${Attr.text}="${title}"
-			></am-icon-text>
-			<span class="${CSS.modalFieldToggle}">
-				<i class="bi bi-fullscreen-exit"></i>
-			</span>
-		`;
+		create(
+			'div',
+			[CSS.modalFieldHeader],
+			{},
+			this,
+			html`
+				<am-icon-text
+					${Attr.icon}="file-earmark-text"
+					${Attr.text}="${title}"
+				></am-icon-text>
+				<span class="${CSS.modalFieldToggle}">
+					<i class="bi bi-fullscreen-exit"></i>
+				</span>
+			`
+		);
 
 		create('div', [CSS.modalFieldToggle], {}, this).innerHTML = html`
 			<i class="bi bi-window-fullscreen"></i>

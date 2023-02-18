@@ -229,39 +229,47 @@ export class PageTemplateComponent extends BaseComponent {
 			themeKey,
 		});
 
-		const button = create('div', [CSS.field], {}, this);
-		const modal = create(
+		create(
+			'div',
+			[CSS.field],
+			{},
+			this,
+			html`
+				<label class="${CSS.fieldLabel}"
+					>${App.text('pageTemplate')}</label
+				>
+				<am-modal-toggle
+					${Attr.modal}="#am-page-template-modal"
+					class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.cursorPointer}"
+				>
+					<am-icon-text
+						${Attr.icon}="${buttonIcon}"
+						${Attr.text}="${buttonLabel}"
+					></am-icon-text>
+					<i class="bi bi-pen"></i>
+				</am-modal-toggle>
+			`
+		);
+
+		create(
 			'am-modal',
 			[],
 			{ id: 'am-page-template-modal' },
-			this
+			this,
+			html`
+				<div class="${CSS.modalDialog}">
+					<div class="${CSS.modalHeader}">
+						<span>${App.text('pageTemplate')}</span>
+						<am-modal-close
+							class="${CSS.modalClose}"
+						></am-modal-close>
+					</div>
+					<div class="${CSS.modalBody}">
+						${createTemplateSelect(selectedTemplate).outerHTML}
+					</div>
+				</div>
+			`
 		);
-
-		button.innerHTML = html`
-			<label class="${CSS.fieldLabel}">${App.text('pageTemplate')}</label>
-			<am-modal-toggle
-				${Attr.modal}="#am-page-template-modal"
-				class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.cursorPointer}"
-			>
-				<am-icon-text
-					${Attr.icon}="${buttonIcon}"
-					${Attr.text}="${buttonLabel}"
-				></am-icon-text>
-				<i class="bi bi-pen"></i>
-			</am-modal-toggle>
-		`;
-
-		modal.innerHTML = html`
-			<div class="${CSS.modalDialog}">
-				<div class="${CSS.modalHeader}">
-					<span>${App.text('pageTemplate')}</span>
-					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-				</div>
-				<div class="${CSS.modalBody}">
-					${createTemplateSelect(selectedTemplate).outerHTML}
-				</div>
-			</div>
-		`;
 	}
 }
 

@@ -38,18 +38,16 @@ import { BaseComponent } from './Base';
 /**
  * A custom icon checkbox field.
  *
+ * @example
+ * <am-custom-icon-checkbox
+ *     ${Attr.icon}="icon"
+ *     name="name"
+ *     checked
+ * ></am-custom-icon-checkbox>
+ *
  * @extends BaseComponent
  */
 export class CustomIconCheckboxComponent extends BaseComponent {
-	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['name', Attr.icon];
-	}
-
 	/**
 	 * The actual checkbox state.
 	 */
@@ -65,19 +63,23 @@ export class CustomIconCheckboxComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(CSS.customIconCheckbox);
 
-		const label = create('label', [], {}, this);
-
-		label.innerHTML = html`
-			<input
-				type="checkbox"
-				name="${this.elementAttributes.name}"
-				value="1"
-				${this.hasAttribute('checked') ? 'checked' : ''}
-			/>
-			<span>
-				<i class="bi bi-${this.elementAttributes[Attr.icon]}"></i>
-			</span>
-		`;
+		create(
+			'label',
+			[],
+			{},
+			this,
+			html`
+				<input
+					type="checkbox"
+					name="${this.getAttribute('name')}"
+					value="1"
+					${this.hasAttribute('checked') ? 'checked' : ''}
+				/>
+				<span>
+					<i class="bi bi-${this.getAttribute(Attr.icon)}"></i>
+				</span>
+			`
+		);
 
 		this.removeAttribute(Attr.icon);
 		this.removeAttribute('name');

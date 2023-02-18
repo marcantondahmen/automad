@@ -66,7 +66,8 @@ export const create = (
 	tag: string,
 	classes: string[] = [],
 	attributes: object = {},
-	parent: HTMLElement | null = null
+	parent: HTMLElement | null = null,
+	innerHTML: string = null
 ): any => {
 	const element = document.createElement(tag);
 
@@ -80,6 +81,10 @@ export const create = (
 
 	if (parent) {
 		parent.appendChild(element);
+	}
+
+	if (innerHTML) {
+		element.innerHTML = innerHTML;
 	}
 
 	return element;
@@ -155,10 +160,16 @@ export const createImagePickerModal = (
 	label: string
 ): void => {
 	const modal = create('am-modal', [], { [Attr.destroy]: '' }, App.root);
+
 	const binding = Bindings.get(bindingName);
 	const pickerBindingName = `picker_${bindingName}`;
+	const idWidth = `width_${pickerBindingName}`;
+	const idHeight = `height_${pickerBindingName}`;
+
 	new Binding(pickerBindingName, {
 		onChange: (value) => {
+			const inputWidth = query(`#${idWidth}`) as HTMLInputElement;
+			const inputHeight = query(`#${idHeight}`) as HTMLInputElement;
 			const width = inputWidth.value;
 			const height = inputHeight.value;
 			const querystring =
@@ -173,8 +184,12 @@ export const createImagePickerModal = (
 		},
 	});
 
-	modal.innerHTML = html`
-		<div class="${CSS.modalDialog} ${CSS.modalDialogLarge}">
+	create(
+		'div',
+		[CSS.modalDialog, CSS.modalDialogLarge],
+		{},
+		modal,
+		html`
 			<div class="${CSS.modalHeader}">
 				<span>${label}</span>
 				<am-modal-close class="${CSS.modalClose}"></am-modal-close>
@@ -200,7 +215,7 @@ export const createImagePickerModal = (
 							<input
 								type="number"
 								class="${CSS.input}"
-								name="width"
+								id="${idWidth}"
 							/>
 						</div>
 					</div>
@@ -212,7 +227,7 @@ export const createImagePickerModal = (
 							<input
 								type="number"
 								class="${CSS.input}"
-								name="height"
+								id="${idHeight}"
 							/>
 						</div>
 					</div>
@@ -227,15 +242,11 @@ export const createImagePickerModal = (
 					${Attr.binding}="${pickerBindingName}"
 				></am-image-picker>
 			</div>
-		</div>
-	`;
+		`
+	);
 
-	const button = query('button', modal);
-	const inputUrl = query('input', modal) as HTMLInputElement;
-	const inputWidth = query('[name="width"]') as HTMLInputElement;
-	const inputHeight = query('[name="height"]') as HTMLInputElement;
-
-	listen(button, 'click', () => {
+	listen(query('button', modal), 'click', () => {
+		const inputUrl = query('input[type="text"]', modal) as HTMLInputElement;
 		binding.value = inputUrl.value;
 
 		Bindings.delete(pickerBindingName);
@@ -256,7 +267,18 @@ export const createImagePickerModal = (
 export const createLinkModal = (bindingName: string, label: string): void => {
 	const modal = create('am-modal', [], { [Attr.destroy]: '' }, App.root);
 	const dialog = create('div', [CSS.modalDialog], {}, modal);
-	const header = create('div', [CSS.modalHeader], {}, dialog);
+
+	create(
+		'div',
+		[CSS.modalHeader],
+		{},
+		dialog,
+		html`
+			<span>${label}</span>
+			<am-modal-close class="${CSS.modalClose}"></am-modal-close>
+		`
+	);
+
 	const body = create('div', [CSS.modalBody], {}, dialog);
 	const footer = create('div', [CSS.modalFooter], {}, dialog);
 	const binding = Bindings.get(bindingName);
@@ -281,11 +303,6 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 		{},
 		footer
 	);
-
-	header.innerHTML = html`
-		<span>${label}</span>
-		<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-	`;
 
 	buttonOk.textContent = App.text('ok');
 

@@ -168,36 +168,42 @@ const createHeader = (
 	href: string,
 	container: HTMLElement
 ): void => {
-	const header = create('div', [CSS.cardHeader], {}, container);
-
-	const title = html`
-		$${pkg.name.split('/')[0]} /<br />$${pkg.name.split('/')[1]}
-	`;
-
-	header.innerHTML = html`
-		<div class="${CSS.cardTitle}">${title}</div>
-		<am-dropdown class="${CSS.cardHeaderDropdown}" ${Attr.right}>
-			<i class="bi bi-three-dots"></i>
-			<div class="${CSS.dropdownItems}">
-				<a href="${href}" class="${CSS.dropdownLink}" target="_blank">
-					<am-icon-text
-						${Attr.icon}="file-richtext"
-						${Attr.text}="Readme"
-					></am-icon-text>
-				</a>
-				<a
-					href="${pkg.repository}"
-					class="${CSS.dropdownLink}"
-					target="_blank"
-				>
-					<am-icon-text
-						${Attr.icon}="git"
-						${Attr.text}="Repository"
-					></am-icon-text>
-				</a>
+	create(
+		'div',
+		[CSS.cardHeader],
+		{},
+		container,
+		html`
+			<div class="${CSS.cardTitle}">
+				$${pkg.name.split('/')[0]} /<br />$${pkg.name.split('/')[1]}
 			</div>
-		</am-dropdown>
-	`;
+			<am-dropdown class="${CSS.cardHeaderDropdown}" ${Attr.right}>
+				<i class="bi bi-three-dots"></i>
+				<div class="${CSS.dropdownItems}">
+					<a
+						href="${href}"
+						class="${CSS.dropdownLink}"
+						target="_blank"
+					>
+						<am-icon-text
+							${Attr.icon}="file-richtext"
+							${Attr.text}="Readme"
+						></am-icon-text>
+					</a>
+					<a
+						href="${pkg.repository}"
+						class="${CSS.dropdownLink}"
+						target="_blank"
+					>
+						<am-icon-text
+							${Attr.icon}="git"
+							${Attr.text}="Repository"
+						></am-icon-text>
+					</a>
+				</div>
+			</am-dropdown>
+		`
+	);
 };
 
 /**

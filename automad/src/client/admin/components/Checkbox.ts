@@ -45,15 +45,6 @@ import { BaseComponent } from './Base';
  */
 class CheckboxComponent extends BaseComponent {
 	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['name'];
-	}
-
-	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
@@ -79,21 +70,26 @@ class CheckboxComponent extends BaseComponent {
 	render(): void {
 		this.classList.add(CSS.checkbox);
 
-		const label = create('label', [], {}, this);
-
-		label.innerHTML = html`
-			<input
-				type="checkbox"
-				name="${this.elementAttributes.name}"
-				${this.hasAttribute('checked') ? 'checked' : ''}
-				${this.hasAttribute('value')
-					? `value="${this.getAttribute('value')}"`
-					: ''}
-			/>
-			<i class="bi"></i>
-		`;
+		create(
+			'label',
+			[],
+			{},
+			this,
+			html`
+				<input
+					type="checkbox"
+					name="${this.getAttribute('name')}"
+					${this.hasAttribute('checked') ? 'checked' : ''}
+					${this.hasAttribute('value')
+						? `value="${this.getAttribute('value')}"`
+						: ''}
+				/>
+				<i class="bi"></i>
+			`
+		);
 
 		this.removeAttribute('checked');
+		this.removeAttribute('name');
 		this.removeAttribute('value');
 	}
 }

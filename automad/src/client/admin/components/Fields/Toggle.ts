@@ -51,21 +51,26 @@ export class ToggleComponent extends BaseFieldComponent {
 	 */
 	createInput(): void {
 		const { name, id, value, label } = this._data;
-		const wrapper = create('div', this.classes, {}, this);
 
-		wrapper.innerHTML = html`
-			<input
-				type="checkbox"
-				name="${name}"
-				id="${id}"
-				value="1"
-				${value ? 'checked' : ''}
-			/>
-			<label for="${id}">
-				<i class="bi"></i>
-				<span>${label}</span>
-			</label>
-		`;
+		create(
+			'div',
+			this.classes,
+			{},
+			this,
+			html`
+				<input
+					type="checkbox"
+					name="${name}"
+					id="${id}"
+					value="1"
+					${value ? 'checked' : ''}
+				/>
+				<label for="${id}">
+					<i class="bi"></i>
+					<span>${label}</span>
+				</label>
+			`
+		);
 	}
 }
 

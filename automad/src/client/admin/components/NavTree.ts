@@ -232,11 +232,17 @@ export class NavTreeComponent extends BaseComponent {
 
 		const pages = Object.values(App.pages);
 
-		create('span', [CSS.navLabel], {}, this).innerHTML = html`
-			<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}">
-				${App.text('sidebarPages')} &mdash; ${pages.length}
-			</span>
-		`;
+		create(
+			'span',
+			[CSS.navLabel],
+			{},
+			this,
+			html`
+				<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}">
+					${App.text('sidebarPages')} &mdash; ${pages.length}
+				</span>
+			`
+		);
 
 		const current = getPageURL();
 		const nodes = createSortableTreeNodes(pages);

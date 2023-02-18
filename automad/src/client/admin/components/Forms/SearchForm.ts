@@ -321,7 +321,7 @@ export class SearchFormComponent extends BaseComponent {
 			wrapper
 		);
 
-		replaceButton.innerHTML = App.text('searchReplaceSelected');
+		replaceButton.textContent = App.text('searchReplaceSelected');
 
 		const toggles = create('div', [CSS.formGroup], {}, wrapper);
 		const checkAll = create(

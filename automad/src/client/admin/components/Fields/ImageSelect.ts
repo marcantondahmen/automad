@@ -132,12 +132,16 @@ class ImageSelectComponent extends BaseFieldComponent {
 	 * @returns the modal button
 	 */
 	private createModalButton(container: HTMLElement): HTMLElement {
-		const button = create('button', [CSS.button], {}, container);
-
-		button.innerHTML = html`
-			<i class="bi bi-folder"></i>
-			<span>${App.text('browseFiles')}</span>
-		`;
+		const button = create(
+			'button',
+			[CSS.button],
+			{},
+			container,
+			html`
+				<i class="bi bi-folder"></i>
+				<span>${App.text('browseFiles')}</span>
+			`
+		);
 
 		return button;
 	}

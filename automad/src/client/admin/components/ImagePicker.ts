@@ -99,8 +99,13 @@ class ImagePickerComponent extends BaseComponent {
 				this.elementAttributes[Attr.label];
 		}
 
-		const wrapper = create('div', [], {}, this);
-		wrapper.innerHTML = '<am-spinner></am-spinner>';
+		const wrapper = create(
+			'div',
+			[],
+			{},
+			this,
+			'<am-spinner></am-spinner>'
+		);
 
 		const { data } = await requestAPI('ImageCollection/list', {
 			url: this.elementAttributes[Attr.page] || '',

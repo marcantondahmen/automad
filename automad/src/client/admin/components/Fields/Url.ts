@@ -32,18 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	CSS,
-	create,
-	html,
-	listen,
-	EventName,
-	App,
-	Attr,
-	Binding,
-	createLinkModal,
-} from '../../core';
-import { AutocompleteComponent } from '../Autocomplete';
+import { CSS, create, listen, Binding, createLinkModal } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -72,8 +61,13 @@ class URLComponent extends BaseFieldComponent {
 			combo
 		);
 
-		const button = create('span', [CSS.inputComboButton], {}, combo);
-		button.innerHTML = html`<i class="bi bi-link"></i>`;
+		const button = create(
+			'span',
+			[CSS.inputComboButton],
+			{},
+			combo,
+			'<i class="bi bi-link"></i>'
+		);
 
 		new Binding(bindingName, { input });
 
