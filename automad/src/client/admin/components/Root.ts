@@ -97,8 +97,6 @@ export class RootComponent extends BaseComponent {
 		await App.bootstrap(this);
 		await this.update();
 
-		initTooltips();
-
 		this.listeners.push(
 			listen(window, 'popstate', () => {
 				App.root.update();
@@ -128,6 +126,8 @@ export class RootComponent extends BaseComponent {
 		this.progressBar(20);
 
 		App.isReady = false;
+
+		initTooltips();
 		Bindings.reset();
 
 		await App.updateState();

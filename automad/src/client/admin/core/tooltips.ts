@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, listen, query } from '.';
+import { Attr, create, listen, query, queryAll } from '.';
 import Tooltip from 'codex-tooltip';
 import { KeyValueMap } from '../types';
 
@@ -63,6 +63,10 @@ const getTooltipOptions = (element: HTMLElement): KeyValueMap => {
  * @see {@link github https://github.com/codex-team/codex.tooltips}
  */
 export const initTooltips = () => {
+	queryAll('.ct').forEach((element) => {
+		element.remove();
+	});
+
 	const ui = query('.am-ui');
 	const tooltip = new Tooltip();
 
