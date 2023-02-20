@@ -35,12 +35,14 @@
 import { App, create, fire, notifyError, query } from '.';
 import { FormComponent } from '../components/Forms/Form';
 import { KeyValueMap } from '../types';
+import { getLogger } from './logger';
 
 /**
  * The names of field that are submitted along with post requests.
  */
 export const enum RequestKey {
 	csrf = '__csrf__',
+	json = '__json__',
 }
 
 /**
@@ -53,39 +55,79 @@ export const getCsrfToken = (): string => {
 };
 
 /**
- * Create a FormData object from a generic key/value map.
+ * Set a value inside a nested tree data structure by a given path as key,
+ * where the path follows the default form notation formatting.
  *
- * @param data
- * @param formData
- * @param parent
- * @returns the created FormData object
+ * @example
+ * setValueByPath(obj, 'data[nested][key]', value);
+ *
+ * This will create the following structure:
+ * {
+ *   data: {
+ *     nested: {
+ *       key: value
+ *     }
+ *   }
+ * }
+ *
+ * Also non-object arrays are transformed as follows:
+ * setValueByPath(obj, 'data[nested][]', value1);
+ * setValueByPath(obj, 'data[nested][]', value2);
+ * {
+ *   data: {
+ *     nested: {
+ *       0: value1,
+ *       1: value2
+ *     }
+ *   }
+ * }
+ *
+ * @param nodes
+ * @param path the dot notation path
+ * @param value
  */
-const convertToFormData = (
-	data: KeyValueMap,
-	formData: FormData = new FormData(),
-	parent: string = null
-): FormData => {
-	Object.keys(data).forEach((key) => {
-		const value = data[key];
-		const index = data instanceof Object ? key : '';
-		const fullKey = parent ? `${parent}[${index}]` : key;
+export const setNodeByPath = (
+	nodes: KeyValueMap,
+	path: string,
+	value: any
+): void => {
+	const parts = path.split(/(\[[^\[\]]*\])/g).filter((part) => part);
+	const keys = parts.map((part) => part.replace(/[\[\]]/g, ''));
 
-		if (value instanceof File) {
-			formData.set(fullKey, value);
-		} else if (value instanceof Array) {
-			convertToFormData(value, formData, fullKey);
-		} else if (value instanceof Object) {
-			convertToFormData(value, formData, fullKey);
-		} else if (typeof value === 'string') {
-			if (value.length) {
-				formData.set(fullKey, value);
+	let node = nodes;
+
+	keys.forEach((key, index) => {
+		const _key = key || Object.keys(node).length || 0;
+
+		if (keys.length === index + 1) {
+			if (typeof value === 'string') {
+				if (value.length) {
+					node[_key] = value;
+				}
+			} else {
+				node[_key] = value;
 			}
 		} else {
-			formData.set(fullKey, value);
+			node[_key] = node[_key] || {};
+			node = node[_key];
 		}
 	});
+};
 
-	return formData;
+/**
+ * Convert a key/value map where all keys are actually form encoded names into a object structure.
+ *
+ * @param data
+ * @returns the structured data object
+ */
+const transformToTree = (data: KeyValueMap): KeyValueMap => {
+	const tree = {};
+
+	Object.keys(data).forEach((path) => {
+		setNodeByPath(tree, path, data[path]);
+	});
+
+	return tree;
 };
 
 /**
@@ -106,9 +148,13 @@ export const request = async (
 	const init: KeyValueMap = { method: 'GET' };
 
 	if (data !== null) {
-		const formData = convertToFormData(data);
+		const formData = new FormData();
+		const tree = transformToTree(data);
+
+		getLogger().log(url, tree);
 
 		formData.append(RequestKey.csrf, getCsrfToken());
+		formData.append(RequestKey.json, JSON.stringify(tree));
 
 		init.method = 'POST';
 		init.body = formData;

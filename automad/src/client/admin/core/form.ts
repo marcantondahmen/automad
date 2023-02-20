@@ -181,7 +181,7 @@ export const collectFieldData = (container: HTMLElement): KeyValueMap => {
 			const isCheckbox = ['checkbox', 'radio'].includes(type);
 
 			if ((!isCheckbox || input.checked) && name) {
-				let value = input.value;
+				let value = type === 'checkbox' ? true : input.value;
 
 				if (typeof value == 'string') {
 					value = value.trim();
