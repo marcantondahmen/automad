@@ -32,18 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, create, html, listen, getPageURL } from '.';
+import { App, Attr, CSS, create, html, listen } from '.';
 import { Listener } from '../types';
-
-declare global {
-	interface Event {
-		path: string[];
-	}
-
-	interface ParentNode {
-		closest: any;
-	}
-}
 
 /**
  * A simple confirmation modal.

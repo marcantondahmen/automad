@@ -49,6 +49,7 @@ import {
 	queryAll,
 	requestAPI,
 } from '../../core';
+import { getLogger } from '../../core/logger';
 import { InputElement, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
 import { ModalComponent } from '../Modal/Modal';
@@ -292,7 +293,7 @@ export class FormComponent extends BaseComponent {
 
 		if (debug && debug instanceof Array) {
 			debug.forEach((item) => {
-				console.log(this.api, item);
+				getLogger().log(this.api, item);
 			});
 		}
 	}

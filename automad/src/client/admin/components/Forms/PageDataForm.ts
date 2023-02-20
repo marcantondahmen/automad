@@ -57,6 +57,7 @@ import {
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
+import { getLogger } from '../../core/logger';
 
 /**
  * Init all URL and slug related bindings.
@@ -361,6 +362,7 @@ export class PageDataFormComponent extends FormComponent {
 
 		if (response.code === 404) {
 			this.pageNotFound();
+			getLogger().error('Page not found');
 
 			return;
 		}

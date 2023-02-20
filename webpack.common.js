@@ -29,6 +29,8 @@ class SystemBellPlugin {
 }
 
 module.exports = (env, argv) => {
+	const devMode = argv.mode === 'development';
+
 	const config = {
 		module: {
 			rules: [
@@ -137,10 +139,13 @@ module.exports = (env, argv) => {
 				},
 				exclude: /vendor/,
 			}),
+			new webpack.DefinePlugin({
+				DEVELOPMENT: JSON.stringify(devMode),
+			}),
 		],
 	};
 
-	if (argv.mode === 'development') {
+	if (devMode) {
 		console.log('Development Mode');
 
 		config.plugins.push(

@@ -43,6 +43,22 @@ export * from './system';
 import { PageMetaData } from '.';
 import { InputElement } from './field';
 
+declare global {
+	const DEVELOPMENT: boolean;
+
+	interface Event {
+		path: string[];
+	}
+
+	interface ParentNode {
+		closest: any;
+	}
+
+	interface Window {
+		DEBUG: boolean;
+	}
+}
+
 export interface KeyValueMap {
 	[key: string | number]: any;
 }
@@ -95,6 +111,11 @@ export interface File {
 
 export interface Listener {
 	remove: Function;
+}
+
+export interface Logger {
+	error: (...args: any[]) => void;
+	log: (...args: any[]) => void;
 }
 
 export interface NavTreeItem {
