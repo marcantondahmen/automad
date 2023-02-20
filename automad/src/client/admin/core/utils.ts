@@ -34,6 +34,7 @@
 
 import { App, Attr, CSS, create, html, listen } from '.';
 import { Listener } from '../types';
+import { nanoid } from 'nanoid';
 
 /**
  * A simple confirmation modal.
@@ -224,4 +225,15 @@ export const titleCase = (str: string): string => {
 		.split(' ')
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(' ');
+};
+
+/**
+ * Create a unique id with an optional prefix.
+ *
+ * @see {@link docs https://github.com/ai/nanoid/#readme}
+ * @param prefix
+ * @returns the optionally prefixed id
+ */
+export const uniqueId = (prefix = 'am-') => {
+	return `${prefix}${nanoid(10)}`;
 };

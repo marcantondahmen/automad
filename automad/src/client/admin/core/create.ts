@@ -46,6 +46,7 @@ import {
 	html,
 	listen,
 	query,
+	uniqueId,
 } from '.';
 import { PageDataFormComponent } from '../components/Forms/PageDataForm';
 import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
@@ -163,8 +164,9 @@ export const createImagePickerModal = (
 
 	const binding = Bindings.get(bindingName);
 	const pickerBindingName = `picker_${bindingName}`;
-	const idWidth = `width_${pickerBindingName}`;
-	const idHeight = `height_${pickerBindingName}`;
+	const idUrl = uniqueId();
+	const idWidth = uniqueId();
+	const idHeight = uniqueId();
 
 	new Binding(pickerBindingName, {
 		onChange: (value) => {
@@ -197,6 +199,7 @@ export const createImagePickerModal = (
 			<div class="${CSS.modalBody}">
 				<span class="${CSS.formGroup}">
 					<input
+						id="${idUrl}"
 						type="text"
 						class="${CSS.input} ${CSS.formGroupItem}"
 						placeholder="${App.text('url')}"
@@ -246,7 +249,7 @@ export const createImagePickerModal = (
 	);
 
 	listen(query('button', modal), 'click', () => {
-		const inputUrl = query('input[type="text"]', modal) as HTMLInputElement;
+		const inputUrl = query(`#${idUrl}`, modal) as HTMLInputElement;
 		binding.value = inputUrl.value;
 
 		Bindings.delete(pickerBindingName);
