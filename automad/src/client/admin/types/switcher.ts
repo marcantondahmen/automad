@@ -44,7 +44,7 @@ export interface SwitcherDropdownItem {
 	section: Section;
 }
 
-export interface SwitcherDropdownOverview {
+interface SwitcherDropdownOverview {
 	icon: string;
 	section: Section;
 }

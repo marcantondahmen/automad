@@ -385,18 +385,12 @@ class Page {
 
 		// Return as string value from the data array.
 		if (array_key_exists($field, $this->data)) {
-			$value = $this->data[$field];
-
-			if (!is_string($value)) {
-				$value = json_encode($value);
-			}
-
-			return $value;
+			return strval($this->data[$field]);
 		}
 
 		// Return value from the Shared data array.
 		if ($this->Shared && array_key_exists($field, $this->Shared->data)) {
-			return $this->Shared->data[$field];
+			return strval($this->Shared->data[$field]);
 		}
 
 		// Generate system variable value or return an empty string.

@@ -32,9 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { InputComponent } from '../components/Fields/Input';
 import { ModalComponent } from '../components/Modal/Modal';
-import { FieldInitData, FieldSectionCollection, KeyValueMap } from '../types';
+import {
+	FieldInitData,
+	FieldSectionCollection,
+	FieldType,
+	KeyValueMap,
+} from '../types';
 import {
 	App,
 	Attr,
@@ -53,6 +57,7 @@ import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection
 import { Section } from '../components/Switcher/Switcher';
 import { SharedDataFormComponent } from '../components/Forms/SharedDataForm';
 import { AutocompleteComponent } from '../components/Autocomplete';
+import { BaseFieldComponent } from '../components/Fields/BaseField';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -103,13 +108,13 @@ export const create = (
  * @returns the generated field
  */
 export const createField = (
-	fieldType: string,
+	fieldType: FieldType,
 	parent: HTMLElement,
 	data: FieldInitData,
 	cls: string[] = [],
 	attributes: KeyValueMap = {},
 	allowModal: boolean = false
-): InputComponent => {
+): BaseFieldComponent => {
 	const field = create(
 		fieldType,
 		cls,

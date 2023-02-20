@@ -36,6 +36,7 @@ import { App, Attr, create, createField, query, queryAll, titleCase } from '.';
 import {
 	FieldGroupData,
 	FieldGroups,
+	FieldType,
 	InputElement,
 	KeyValueMap,
 } from '../types';
@@ -132,7 +133,7 @@ export const fieldGroup = ({
 
 	Object.keys(fields).forEach((key) => {
 		if (!Object.values(App.reservedFields).includes(key)) {
-			let fieldType = 'am-textarea';
+			let fieldType: FieldType = 'am-textarea';
 			let placeholder = '';
 
 			for (const [prefix, value] of Object.entries(prefixMap)) {

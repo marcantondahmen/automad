@@ -35,6 +35,7 @@
 import {
 	FieldSectionCollection,
 	FieldSectionName,
+	FieldType,
 	KeyValueMap,
 	PageBindings,
 	PageMainSettingsData,
@@ -57,6 +58,8 @@ import {
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
+import { BaseComponent } from '../Base';
+import { BaseFieldComponent } from '../Fields/BaseField';
 import { getLogger } from '../../core/logger';
 
 /**
@@ -212,11 +215,11 @@ export class PageDataFormComponent extends FormComponent {
 		 * @returns the generated field
 		 */
 		const createMainField = (
-			fieldType: string,
+			fieldType: FieldType,
 			key: string,
 			label: string = '',
 			attributes: KeyValueMap = {}
-		): InputComponent => {
+		): BaseFieldComponent => {
 			const data = {
 				key,
 				value: fields[key],

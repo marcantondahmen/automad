@@ -142,8 +142,6 @@ class PackageListComponent extends BaseComponent {
 				card.data = pkg;
 			});
 		} catch (error) {
-			console.error(error);
-
 			create(
 				'am-alert',
 				[],

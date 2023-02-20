@@ -61,6 +61,27 @@ export class SelectComponent extends BaseComponent {
 	static TAG_NAME = 'am-select';
 
 	/**
+	 * The current value of the select component.
+	 */
+	get value(): string {
+		return this.selectedOption.value;
+	}
+
+	/**
+	 * Return the inner select element.
+	 */
+	get select(): HTMLSelectElement {
+		return query('select', this) as HTMLSelectElement;
+	}
+
+	/**
+	 * The currently selected option.
+	 */
+	get selectedOption(): HTMLOptionElement {
+		return this.select.options[this.select.selectedIndex];
+	}
+
+	/**
 	 * Create a select component based on an options object.
 	 *
 	 * @param options
@@ -93,7 +114,9 @@ export class SelectComponent extends BaseComponent {
 					value="${option.value}"
 					${selected === option.value ? 'selected' : ''}
 				>
-					${option.text}
+					${typeof option.text !== 'undefined'
+						? option.text
+						: option.value}
 				</option>
 			`;
 		});
@@ -127,21 +150,21 @@ export class SelectComponent extends BaseComponent {
 	 */
 	private init(): void {
 		const span = query('span', this);
-		const select = query('select', this) as HTMLSelectElement;
+		const select = this.select;
 		const update = () => {
 			try {
-				span.textContent = select.options[select.selectedIndex].text;
+				span.textContent = this.selectedOption.text;
 			} catch {}
 		};
 		const toggleFocus = () => {
 			this.classList.toggle(CSS.focus, select === document.activeElement);
 		};
 
-		update();
-		toggleFocus();
-
 		listen(select, `change ${EventName.changeByBinding}`, update);
 		listen(select, 'focus blur', toggleFocus);
+
+		update();
+		toggleFocus();
 	}
 }
 

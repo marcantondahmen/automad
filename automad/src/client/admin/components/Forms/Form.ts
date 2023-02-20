@@ -285,6 +285,7 @@ export class FormComponent extends BaseComponent {
 
 		if (error) {
 			notifyError(error);
+			getLogger().error(error);
 		}
 
 		if (success) {

@@ -63,8 +63,6 @@ export class FileInfoComponent extends BaseComponent {
 	connectedCallback(): void {
 		listen(this, 'click', () => {
 			if (!this.data) {
-				console.log('File data is not defined');
-
 				return;
 			}
 

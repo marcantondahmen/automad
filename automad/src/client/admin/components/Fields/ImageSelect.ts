@@ -39,8 +39,6 @@ import {
 	create,
 	createImagePickerModal,
 	CSS,
-	EventName,
-	fire,
 	html,
 	listen,
 	resolveFileUrl,

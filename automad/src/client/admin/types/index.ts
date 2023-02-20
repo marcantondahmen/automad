@@ -130,8 +130,8 @@ export interface Partials {
 }
 
 export interface SelectComponentOption {
-	text: string;
 	value: string | number;
+	text?: string;
 }
 
 export interface Theme {
