@@ -41,8 +41,7 @@ ps | grep "webpack" | grep -v grep | awk '{print $1}' | xargs kill
 
 
 # Run tests.
-phpunit
-npm run psalm
+npm run test
 echo
 
 

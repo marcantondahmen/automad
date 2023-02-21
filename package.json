@@ -14,7 +14,7 @@
     "build:blocks": "",
     "build:themes": "",
     "build": "npm run build:admin && npm run build:blocks && npm run build:themes",
-    "phpunit": "phpunit --testdox",
+    "phpunit": "phpunit",
     "psalm": "psalm --no-cache",
     "jest": "jest",
     "jest:watch": "jest --watch",
