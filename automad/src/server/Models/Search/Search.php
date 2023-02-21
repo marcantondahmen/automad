@@ -36,6 +36,7 @@
 
 namespace Automad\Models\Search;
 
+use Automad\Core\Value;
 use Automad\Models\Page;
 use Automad\Models\Shared;
 use Automad\System\Fields;
@@ -248,7 +249,7 @@ class Search {
 				}
 			} else {
 				/** @var ?string $value */
-				$FieldResults = $this->searchTextField($field, $value ?? '');
+				$FieldResults = $this->searchTextField($field, Value::asString($value));
 			}
 
 			if (!empty($FieldResults)) {

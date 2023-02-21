@@ -58,6 +58,7 @@ class ViewTest extends TestCase {
 								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/script.js') .
 								'"></script>' .
 								'</head>Asset Test',
+			'falsy' => '0//false/0/1',
 			'for_01' => '1, 2, 3, 4, 5',
 			'if_01' => 'True',
 			'if_02' => 'False',
@@ -67,6 +68,7 @@ class ViewTest extends TestCase {
 			'inheritance_02' => 'derived by user',
 			'inheritance_03' => 'nested derived',
 			'inheritance_04' => 'nested derived override',
+			'invalid' => '//',
 			'pagelist_01' => 'Text Subpage Page Home Blocks',
 			'pagelist_02' => 'Blocks Text',
 			'pagelist_03' => 'Home Subpage',

@@ -41,6 +41,7 @@ use Automad\Core\Cache;
 use Automad\Core\DataFile;
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
+use Automad\Core\Value;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -85,7 +86,7 @@ class Shared {
 	 */
 	public function get(string $key): string {
 		if (array_key_exists($key, $this->data)) {
-			return $this->data[$key];
+			return Value::asString($this->data[$key]);
 		}
 
 		return '';

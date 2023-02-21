@@ -62,6 +62,7 @@ class Mock extends TestCase {
 	public function createAutomad(string $template = ''): object {
 		$Shared = new Shared();
 		$Shared->data['shared'] = 'Shared default text content';
+		$Shared->data['+default'] = json_decode('{"blocks": [{"id": "abc","type": "paragraph","data": {"text": "test"}}],"time": "123456789","version": "1.2.3","automadVersion": "1.2.3"}');
 		$collection = $this->createCollection($Shared, $template);
 		$Automad = new Automad($collection, $Shared);
 
@@ -108,7 +109,9 @@ class Mock extends TestCase {
 						'tags' => 'test'
 					),
 					DataFile::read('/page'),
-					DataFile::read('/inheritance')
+					DataFile::read('/inheritance'),
+					DataFile::read('/falsy'),
+					DataFile::read('/invalid')
 				),
 				$Shared
 			),

@@ -44,6 +44,7 @@ use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\Core\Value;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -64,7 +65,8 @@ class Page {
 	const TRASH_DIRECTORY = AM_DIR_CACHE . '/trash';
 
 	/**
-	 * The $data array holds all the information stored as "key: value" in the text file and some other system generated information (:path, :level, :template ...).
+	 * The $data array holds all the information stored in the data json file and
+	 * some other system generated information (:path, :level, :template ...).
 	 *
 	 * The key can be everything alphanumeric as long as there is a matching var set in the template files.
 	 * Out of all possible keys ther are two very special ones:
@@ -368,29 +370,21 @@ class Page {
 	public function get(string $field, bool $returnEditorObject = false): object|string {
 		// Return as editor data object from the data array.
 		if ($returnEditorObject) {
-			$default = (object) array('blocks' => array());
-
-			if (!str_starts_with($field, '+') || !array_key_exists($field, $this->data)) {
-				return $default;
+			if (array_key_exists($field, $this->data)) {
+				return Value::asEditorObject($this->data[$field]);
 			}
 
-			$blocks = $this->data[$field];
-
-			if (!is_object($blocks)) {
-				return $default;
-			}
-
-			return $blocks;
+			return Value::asEditorObject($this->Shared->data[$field] ?? null);
 		}
 
 		// Return as string value from the data array.
 		if (array_key_exists($field, $this->data)) {
-			return strval($this->data[$field]);
+			return Value::asString($this->data[$field]);
 		}
 
 		// Return value from the Shared data array.
 		if ($this->Shared && array_key_exists($field, $this->Shared->data)) {
-			return strval($this->Shared->data[$field]);
+			return Value::asString($this->Shared->data[$field]);
 		}
 
 		// Generate system variable value or return an empty string.
