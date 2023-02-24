@@ -8,6 +8,28 @@ A flat-file content management system and template engine
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
 [![Twitter](https://img.shields.io/twitter/follow/automadcms?label=Follow)](https://twitter.com/automadcms)
 
+## :wave: Version 2
+
+Currently, the development of version 2 is *very, very active*. New features and fixes are implemented on a daily basis. 
+The version 2 update will essentially be a full rewrite of the entire application, including the *backend*, *frontend*, *standard theme* and *blocks*.
+The goal is to also include as many open feature requests and resolve as many open issues as possible until the day of the release.
+Existing websites using version 1 as well as existing extensions, except for some minor execptions, will continue to work just fine and will be compatible with version 2. Minor breaking changes will be communicated with the relase notes.
+
+The new dashboard will be entirely written in *TypeScript* and will no longer have jQuery and UIkit as dependencies. 
+The new backend will require at least *PHP 8.0* or newer.
+
+Please note that this is an open-source project that is free to use and the maintainer spends a substatial portion of his free time, weekends and nights in 
+order to finish the release as soon as possible. That said, there is no fix release date yet. It is done whenever it is done. In the meantime you can 
+safely start new website using version 1 and migrate to version 2 afterwards. 
+
+**Please also consider the above when opening new issues in order to not waste anybody's time.** 
+
+And as always, **pull-request will continue to be ignored** as stated below. 
+
+In case you want to help, **please give this repository a star**, consider a small donation or take a look a these other possible ways to [contribute](#contributing) to the project.
+
+---
+
 ![Mockup](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad/readme.png)     
 
 ## Installation
