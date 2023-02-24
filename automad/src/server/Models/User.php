@@ -40,6 +40,7 @@ use Automad\Admin\Templates\PasswordResetEmail;
 use Automad\Core\Messenger;
 use Automad\Core\Session;
 use Automad\Core\Text;
+use Automad\Traits\ValidatePasswordTrait;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,6 +52,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class User {
+	use ValidatePasswordTrait;
+
 	/**
 	 * The user's email.
 	 */
@@ -161,8 +164,11 @@ class User {
 		UserCollection $UserCollection,
 		Messenger $Messenger
 	): bool {
-		if ($newPassword1 !== $newPassword2) {
-			$Messenger->setError(Text::get('passwordRepeatError'));
+
+		$validPassword = self::validatePassword($newPassword1, $newPassword2);
+
+		if ($validPassword === false) {
+			$Messenger->setError(self::getPasswordError());
 
 			return false;
 		}

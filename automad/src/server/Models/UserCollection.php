@@ -42,6 +42,7 @@ use Automad\Core\Messenger;
 use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\System\Server;
+use Automad\Traits\ValidatePasswordTrait;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,6 +54,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class UserCollection {
+	use ValidatePasswordTrait;
+
 	const FILE_ACCOUNTS = AM_BASE_DIR . '/config/accounts.php';
 
 	/**
@@ -115,8 +118,10 @@ class UserCollection {
 			return false;
 		}
 
-		if ($password1 != $password2) {
-			$Messenger->setError(Text::get('repeatPassword'));
+		$validPassword = self::validatePassword($password1, $password2);
+
+		if ($validPassword === false) {
+			$Messenger->setError(self::getPasswordError());
 
 			return false;
 		}

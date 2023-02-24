@@ -42,6 +42,7 @@ use Automad\Core\Request;
 use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\Models\UserCollection;
+use Automad\Traits\ValidatePasswordTrait;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,6 +54,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class UserController {
+	use ValidatePasswordTrait;
+
 	/**
 	 * Change the password of the currently logged in user based on $_POST.
 	 *
@@ -68,8 +71,10 @@ class UserController {
 			return $Response->setError(Text::get('invalidFormError'));
 		}
 
-		if ($newPassword1 !== $newPassword2) {
-			return $Response->setError(Text::get('passwordRepeatError'));
+		$validPassword = self::validatePassword($newPassword1, $newPassword2);
+
+		if ($validPassword === false) {
+			return $Response->setError(self::getPasswordError());
 		}
 
 		if ($currentPassword === $newPassword1) {
