@@ -81,7 +81,7 @@ export class FormDataProviders {
  * @returns the generated ID
  */
 export const createIdFromField = (key: string): string => {
-	return `am-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
+	return `am-field__${key.replace(/\s+/g, '_')}`;
 };
 
 /**

@@ -89,7 +89,7 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	set data({ key, value, name, tooltip, label, placeholder }: FieldInitData) {
 		const id = createIdFromField(key);
 
-		value = value || '';
+		value = typeof value === 'undefined' ? '' : value;
 		tooltip = htmlSpecialChars(tooltip || '');
 		label = label || createLabelFromField(key);
 		placeholder = placeholder || '';

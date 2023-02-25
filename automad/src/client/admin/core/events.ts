@@ -33,6 +33,7 @@
  */
 
 import { Listener } from '../types';
+import { getLogger } from './logger';
 import { query, queryAll } from './utils';
 
 /**
@@ -134,7 +135,7 @@ export const fire = (
 export const listen = (
 	element: HTMLElement | Document | Window,
 	eventNamesString: string,
-	callback: Function,
+	callback: (event: Event) => void,
 	selector: string = ''
 ): Listener => {
 	const eventNames = eventNamesString
@@ -166,6 +167,7 @@ export const listen = (
 	const remove = () => {
 		eventNames.forEach((eventName) => {
 			element.removeEventListener(eventName, handler);
+			getLogger().log('Remove Listener', { eventName });
 		});
 	};
 

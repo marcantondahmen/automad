@@ -59,7 +59,7 @@ const getCaller = (): string => {
 	for (const match of new Error('').stack.matchAll(funcRegex)) {
 		const func = match.groups.func;
 
-		if (!['Generator.next', '__awaiter'].includes(func)) {
+		if (!func.match(/(Generator\.next|__awaiter|Object\.|Array\.)/)) {
 			stack.push(func);
 		}
 	}

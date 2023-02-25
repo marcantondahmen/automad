@@ -106,12 +106,12 @@ export const confirm = async (text: string): Promise<boolean> => {
  * @returns the debounced function
  */
 export const debounce = (
-	callback: Function,
+	callback: (...args: any[]) => void,
 	timeout: number = 50
-): Function => {
+): ((...args: any[]) => void) => {
 	let timer: NodeJS.Timer;
 
-	return (...args: any) => {
+	return (...args: any[]) => {
 		clearTimeout(timer);
 
 		timer = setTimeout(() => {

@@ -67,7 +67,7 @@ import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/d
 const createCustomButton = (
 	icon: string,
 	label: string,
-	onClick: Function
+	onClick: (event: Event) => void
 ): ToolbarCustomOptions => {
 	const el = create('button', ['toastui-editor-toolbar-icons', icon], {});
 

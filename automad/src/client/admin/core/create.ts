@@ -125,6 +125,7 @@ export const createField = (
 					[],
 					{
 						[Attr.page]: getPageURL(),
+						[Attr.noClick]: '',
 					},
 					parent
 			  )

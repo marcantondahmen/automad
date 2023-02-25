@@ -110,7 +110,7 @@ export interface File {
 }
 
 export interface Listener {
-	remove: Function;
+	remove: () => void;
 }
 
 export interface Logger {

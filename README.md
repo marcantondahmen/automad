@@ -93,5 +93,5 @@ To make the development of themes more efficient, plugins providing syntax highl
 
 ---
       
-© 2013-2021 [Marc Anton Dahmen](https://marcdahmen.de)     
+© 2013-2023 [Marc Anton Dahmen](https://marcdahmen.de)     
 Released under the [MIT license](https://automad.org/license) 
