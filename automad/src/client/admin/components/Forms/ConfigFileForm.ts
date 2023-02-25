@@ -126,7 +126,7 @@ export class ConfigFileFormComponent extends FormComponent {
 			</am-modal>
 		`;
 
-		(query('textarea', this) as HTMLInputElement).value = content;
+		query<HTMLInputElement>('textarea', this).value = content;
 	}
 }
 

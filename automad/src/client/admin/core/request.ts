@@ -51,7 +51,7 @@ export const enum RequestKey {
  * @returns the csrf token stored in the meta tag
  */
 export const getCsrfToken = (): string => {
-	return (query('meta[name="csrf"]') as HTMLMetaElement).content || '';
+	return query<HTMLMetaElement>('meta[name="csrf"]').content || '';
 };
 
 /**

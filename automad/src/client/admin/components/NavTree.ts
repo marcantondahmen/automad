@@ -119,10 +119,10 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 	const oldParent = srcParentNode.data as unknown as PageMetaData;
 	const url = movedNode.data.url;
 	const layout: string[] = [];
-	const draggables: SortableTreeNodeComponent[] = queryAll(
+	const draggables = queryAll<SortableTreeNodeComponent>(
 		'sortable-tree-node',
 		query(NavTreeComponent.TAG_NAME)
-	) as SortableTreeNodeComponent[];
+	);
 	const toggleDraggable = (state: 'true' | 'false') => {
 		draggables.forEach((node) => {
 			node.setAttribute('draggable', state);
@@ -186,9 +186,9 @@ const confirmFunction: SortableTreeConfirmFunction = async (
  * when dragging over a node for more than 1200 miliseconds.
  */
 const showSubnodesOnDragover = debounce((event: MouseEvent): void => {
-	const node = (event.target as HTMLElement).closest(
-		'sortable-tree-node'
-	) as SortableTreeNodeComponent;
+	const node = (
+		event.target as HTMLElement
+	).closest<SortableTreeNodeComponent>('sortable-tree-node');
 
 	node.collapse(false);
 }, 1200);

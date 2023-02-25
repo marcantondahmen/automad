@@ -137,7 +137,7 @@ class ImagePickerComponent extends BaseComponent {
 	private renderGrid(images: Image[], wrapper: HTMLElement) {
 		const grid = create('div', [CSS.imagePicker], {}, wrapper);
 		const base = this.elementAttributes[Attr.page] ? '' : '/shared/';
-		const modal = (this.closest('am-modal') as ModalComponent) || null;
+		const modal = this.closest<ModalComponent>('am-modal') || null;
 
 		images.forEach((image: Image) => {
 			const img = create(

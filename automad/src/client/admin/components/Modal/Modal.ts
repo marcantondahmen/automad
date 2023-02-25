@@ -44,7 +44,7 @@ import {
 	query,
 	setFormData,
 } from '../../core';
-import { KeyValueMap, Listener } from '../../types';
+import { InputElement, KeyValueMap, Listener } from '../../types';
 import { BaseComponent } from '../Base';
 
 /**
@@ -203,7 +203,7 @@ export class ModalComponent extends BaseComponent {
 		this.focusTrap = createFocusTrap(this);
 
 		if (!this.hasAttribute(Attr.noFocus)) {
-			const input = query('input, textarea', this);
+			const input = query<InputElement>('input, textarea', this);
 
 			if (input) {
 				input.focus();

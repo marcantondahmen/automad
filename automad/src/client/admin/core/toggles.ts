@@ -40,10 +40,10 @@ import { Attr, CSS, EventName, listen, queryAll } from '.';
  * @param container
  */
 export const initCheckboxToggles = (container: HTMLElement) => {
-	const checkboxes = queryAll(
+	const checkboxes = queryAll<HTMLInputElement>(
 		`input[${Attr.toggle}]`,
 		container
-	) as HTMLInputElement[];
+	);
 
 	checkboxes.forEach((checkbox) => {
 		const targets = queryAll(checkbox.getAttribute(Attr.toggle));

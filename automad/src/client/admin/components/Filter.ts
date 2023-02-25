@@ -111,7 +111,7 @@ class FilterComponent extends BaseComponent {
 	 */
 	private filter(input: InputElement): void {
 		const filters = input.value.toLowerCase().split(' ');
-		const items = queryAll(this.targetSelector) as HTMLElement[];
+		const items = queryAll(this.targetSelector);
 
 		items.forEach((item) => {
 			var hide = false;

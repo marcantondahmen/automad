@@ -175,8 +175,8 @@ export const fieldGroup = ({
 export const collectFieldData = (container: HTMLElement): KeyValueMap => {
 	const data: KeyValueMap = {};
 
-	queryAll(FormDataProviders.selector, container).filter(
-		(input: HTMLInputElement) => {
+	queryAll<HTMLInputElement>(FormDataProviders.selector, container).filter(
+		(input) => {
 			const type = input.getAttribute('type');
 			const name = input.getAttribute('name');
 			const isCheckbox = ['checkbox', 'radio'].includes(type);
@@ -242,14 +242,14 @@ export const setFormData = (
 		return;
 	}
 
-	queryAll('[type="radio"], [type="input"]').forEach(
-		(input: HTMLInputElement) => {
+	queryAll<HTMLInputElement>('[type="radio"], [type="input"]').forEach(
+		(input) => {
 			input.checked = false;
 		}
 	);
 
 	Object.keys(formData).forEach((name) => {
-		const control = query(`[name="${name}"]`, container) as InputElement;
+		const control = query<InputElement>(`[name="${name}"]`, container);
 
 		if (control) {
 			const type = control.getAttribute('type');

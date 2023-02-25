@@ -52,9 +52,7 @@ export class CustomIconCheckboxComponent extends BaseComponent {
 	 * The actual checkbox state.
 	 */
 	get checked(): boolean {
-		const input = query('input', this) as HTMLInputElement;
-
-		return input.checked;
+		return query<HTMLInputElement>('input', this).checked;
 	}
 
 	/**

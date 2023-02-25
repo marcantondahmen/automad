@@ -56,7 +56,7 @@ class CheckboxComponent extends BaseComponent {
 		const toggleParent = () => {
 			this.closest(`.${CSS.card}`).classList.toggle(
 				CSS.cardActive,
-				(query('input', this) as HTMLInputElement).checked
+				query<HTMLInputElement>('input', this).checked
 			);
 		};
 

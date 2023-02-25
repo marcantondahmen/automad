@@ -71,7 +71,7 @@ export class SelectComponent extends BaseComponent {
 	 * Return the inner select element.
 	 */
 	get select(): HTMLSelectElement {
-		return query('select', this) as HTMLSelectElement;
+		return query('select', this);
 	}
 
 	/**

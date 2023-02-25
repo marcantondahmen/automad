@@ -133,13 +133,12 @@ class PageSelectTreeComponent extends BaseComponent {
 
 		currentNode.reveal();
 
-		const modal = this.closest(ModalComponent.TAG_NAME) as ModalComponent;
+		const modal = this.closest<ModalComponent>(ModalComponent.TAG_NAME);
 
 		if (modal) {
 			listen(modal, EventName.modalOpen, () => {
-				(
-					query('input', currentNode.label) as HTMLInputElement
-				).checked = true;
+				query<HTMLInputElement>('input', currentNode.label).checked =
+					true;
 			});
 		}
 	}

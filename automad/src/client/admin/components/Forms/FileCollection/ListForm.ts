@@ -103,8 +103,8 @@ export class FileCollectionListFormComponent extends FormComponent {
 	 * Reset the selection and submit the form in order to refresh the list of files.
 	 */
 	refresh(): void {
-		queryAll('[type="checkbox"]', this).forEach(
-			(checkbox: HTMLInputElement) => {
+		queryAll<HTMLInputElement>('[type="checkbox"]', this).forEach(
+			(checkbox) => {
 				checkbox.checked = false;
 			}
 		);

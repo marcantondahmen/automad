@@ -118,11 +118,12 @@ export class SwitcherComponent extends BaseComponent {
 		let activeSection = getActiveSection();
 		const sections: string[] = [];
 
-		queryAll(SwitcherLinkComponent.TAG_NAME, this).forEach(
-			(link: SwitcherLinkComponent) => {
-				sections.push(link.getAttribute(Attr.section));
-			}
-		);
+		queryAll<SwitcherLinkComponent>(
+			SwitcherLinkComponent.TAG_NAME,
+			this
+		).forEach((link) => {
+			sections.push(link.getAttribute(Attr.section));
+		});
 
 		if (sections.indexOf(activeSection) == -1) {
 			setActiveSection(sections[0]);

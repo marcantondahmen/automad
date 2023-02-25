@@ -175,8 +175,8 @@ export const createImagePickerModal = (
 
 	new Binding(pickerBindingName, {
 		onChange: (value) => {
-			const inputWidth = query(`#${idWidth}`) as HTMLInputElement;
-			const inputHeight = query(`#${idHeight}`) as HTMLInputElement;
+			const inputWidth = query<HTMLInputElement>(`#${idWidth}`);
+			const inputHeight = query<HTMLInputElement>(`#${idHeight}`);
 			const width = inputWidth.value;
 			const height = inputHeight.value;
 			const querystring =
@@ -254,7 +254,7 @@ export const createImagePickerModal = (
 	);
 
 	listen(query('button', modal), 'click', () => {
-		const inputUrl = query(`#${idUrl}`, modal) as HTMLInputElement;
+		const inputUrl = query<HTMLInputElement>(`#${idUrl}`, modal);
 		binding.value = inputUrl.value;
 
 		Bindings.delete(pickerBindingName);

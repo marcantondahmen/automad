@@ -170,7 +170,7 @@ export class FormComponent extends BaseComponent {
 	 * Get the parent modal if existing.
 	 */
 	get parentModal(): ModalComponent {
-		const modal = this.closest('am-modal') as ModalComponent;
+		const modal = this.closest<ModalComponent>('am-modal');
 
 		return modal || null;
 	}
@@ -202,7 +202,7 @@ export class FormComponent extends BaseComponent {
 
 		if (this.hasAttribute(Attr.focus)) {
 			setTimeout(() => {
-				(query('input') as InputElement).focus();
+				query<InputElement>('input').focus();
 			}, 0);
 		}
 
@@ -350,10 +350,10 @@ export class FormComponent extends BaseComponent {
 	 * @returns true if all required fields have values
 	 */
 	private verifyRequired(): boolean {
-		const requiredInputs: HTMLElement[] = queryAll('[required]', this);
+		const requiredInputs = queryAll<InputElement>('[required]', this);
 		const requiredEmpty: InputElement[] = [];
 
-		requiredInputs.forEach((input: InputElement) => {
+		requiredInputs.forEach((input) => {
 			if (!input.value.trim()) {
 				requiredEmpty.push(input);
 			}

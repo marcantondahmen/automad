@@ -319,7 +319,7 @@ export class App {
 	 * @static
 	 */
 	static reload(): void {
-		const filter = query('am-filter input') as InputElement;
+		const filter = query<InputElement>('am-filter input');
 
 		if (filter) {
 			setSearchParam('filter', filter.value);
@@ -336,7 +336,7 @@ export class App {
 	 * @static
 	 */
 	static restoreFilterAndScroll(): void {
-		const filter = query('am-filter input') as InputElement;
+		const filter = query<InputElement>('am-filter input');
 		const savedFilter = getSearchParam('filter');
 		const savedScrollY = getSearchParam('scroll');
 

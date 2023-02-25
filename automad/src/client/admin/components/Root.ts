@@ -114,7 +114,7 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async update(): Promise<void> {
-		const openModal = queryAll(`[${Attr.modalOpen}]`) as ModalComponent[];
+		const openModal = queryAll<ModalComponent>(`[${Attr.modalOpen}]`);
 
 		if (openModal) {
 			openModal.forEach((modal) => {

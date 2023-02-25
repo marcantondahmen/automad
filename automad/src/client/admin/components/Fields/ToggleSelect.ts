@@ -72,7 +72,7 @@ class ToggleSelectComponent extends BaseFieldComponent {
 
 		wrapper.classList.toggle(CSS.toggleDefaultOn, placeholder != '');
 
-		const select = query('select', wrapper) as HTMLSelectElement;
+		const select = query<HTMLSelectElement>('select', wrapper);
 		select.value = (value as string) || '';
 
 		this.listeners.push(listen(select, 'change', toggle.bind(this)));

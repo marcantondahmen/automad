@@ -115,7 +115,7 @@ class FileCardComponent extends BaseComponent {
 			</div>
 		`;
 
-		queryAll('am-file-info', this).forEach((edit: FileInfoComponent) => {
+		queryAll<FileInfoComponent>('am-file-info', this).forEach((edit) => {
 			edit.data = file;
 		});
 	}

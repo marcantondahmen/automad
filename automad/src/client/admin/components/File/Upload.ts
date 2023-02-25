@@ -162,9 +162,9 @@ class UploadComponent extends BaseComponent {
 	 * @param file
 	 */
 	private onSuccess(file: DropzoneFile): void {
-		const fileCollection = query(
+		const fileCollection = query<FileCollectionListFormComponent>(
 			'am-file-collection-list-form'
-		) as FileCollectionListFormComponent;
+		);
 
 		notifySuccess(html`${App.text('uploadedSuccess')}:<br />$${file.name}`);
 

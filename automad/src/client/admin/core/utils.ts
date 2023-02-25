@@ -159,10 +159,10 @@ export const keyCombo = (key: string, callback: Function): Listener => {
  * @param [element] - optional, defaults to `document`
  * @returns the first matched element
  */
-export const query = (
+export const query = <T extends HTMLElement = HTMLElement>(
 	selector: string,
 	element: Document | HTMLElement = document
-): HTMLElement => {
+): T => {
 	return element.querySelector(selector);
 };
 
@@ -173,10 +173,10 @@ export const query = (
  * @param [element] - optional, defaults to `document`
  * @returns an array of matched elements
  */
-export const queryAll = (
+export const queryAll = <T extends HTMLElement = HTMLElement>(
 	selector: string,
 	element: HTMLElement | Document = document
-): HTMLElement[] => {
+): T[] => {
 	return Array.from(element.querySelectorAll(selector));
 };
 
@@ -187,12 +187,12 @@ export const queryAll = (
  * @param element
  * @returns an array of matched parent elements
  */
-export const queryParents = (
+export const queryParents = <T extends HTMLElement = HTMLElement>(
 	selector: string,
 	element: HTMLElement
-): HTMLElement[] => {
-	const parents: HTMLElement[] = [];
-	let parent = element.closest(selector) as HTMLElement;
+): T[] => {
+	const parents: T[] = [];
+	let parent = element?.closest<T>(selector) || null;
 
 	while (parent !== null) {
 		parents.push(parent);

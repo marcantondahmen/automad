@@ -191,8 +191,8 @@ export class SearchFormComponent extends BaseComponent {
 		listen(replaceButton, 'click', performReplace);
 
 		const toggle = (state: boolean) => {
-			queryAll('input', resultsContainer).forEach(
-				(checkbox: HTMLInputElement) => {
+			queryAll<HTMLInputElement>('input', resultsContainer).forEach(
+				(checkbox) => {
 					checkbox.checked = state;
 					fire('input', checkbox);
 				}

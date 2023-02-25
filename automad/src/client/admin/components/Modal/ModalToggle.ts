@@ -57,9 +57,9 @@ class ModalToggleComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		const toggle = () => {
-			const modal = query(
+			const modal = query<ModalComponent>(
 				this.elementAttributes[Attr.modal]
-			) as ModalComponent;
+			);
 
 			modal.toggle();
 		};

@@ -72,7 +72,7 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	 * Get the actual field input element.
 	 */
 	get input(): InputElement {
-		return query('[name]', this) as InputElement;
+		return query('[name]', this);
 	}
 
 	/**
@@ -148,7 +148,7 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	 * Apply field attributes to actual input elements.
 	 */
 	private applyAttributes(): void {
-		queryAll('input, textarea', this).forEach((input: InputElement) => {
+		queryAll<InputElement>('input, textarea', this).forEach((input) => {
 			if (this.hasAttribute('required')) {
 				input.setAttribute('pattern', '.*\\S.*');
 				input.setAttribute('placeholder', App.text('requiredField'));
