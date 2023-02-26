@@ -48,7 +48,7 @@ export abstract class BaseComponent extends HTMLElement {
 	/**
 	 * The array of event listeners that have to be remove on destruction.
 	 */
-	listeners: Listener[] = [];
+	protected listeners: Listener[] = [];
 
 	/**
 	 * The class constructor.
@@ -85,6 +85,22 @@ export abstract class BaseComponent extends HTMLElement {
 	 * Remove all window event listeners when disconnecting.
 	 */
 	disconnectedCallback(): void {
+		this.removeListeners();
+	}
+
+	/**
+	 * Add a listener that will be removed on destruction.
+	 *
+	 * @param listener
+	 */
+	addListener(listener: Listener): void {
+		this.listeners.push(listener);
+	}
+
+	/**
+	 * Remove all listeners that have been added using addListener.
+	 */
+	protected removeListeners(): void {
 		this.listeners.forEach((listener) => {
 			listener.remove();
 		});

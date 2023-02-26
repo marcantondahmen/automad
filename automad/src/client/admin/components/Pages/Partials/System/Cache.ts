@@ -42,15 +42,15 @@ import {
 	html,
 	listen,
 } from '../../../../core';
-import { Listener } from '../../../../types';
 import { SelectComponent } from '../../../Select';
+import { SystemComponent } from '../../System';
 
 /**
  * Create bindings for the form elements in the cache section.
  *
  * @param listeners
  */
-const createBindings = (listeners: Listener[]): void => {
+const createBindings = (component: SystemComponent): void => {
 	const cacheEnabled = new Binding('cacheEnabled', {
 		initial: App.system.cache.enabled,
 	});
@@ -63,7 +63,7 @@ const createBindings = (listeners: Listener[]): void => {
 		initial: App.system.cache.lifetime,
 	});
 
-	listeners.push(
+	component.addListener(
 		listen(window, EventName.appStateChange, () => {
 			cacheEnabled.value = App.system.cache.enabled;
 			cacheMonitorDelay.value = App.system.cache.monitorDelay;
@@ -75,11 +75,11 @@ const createBindings = (listeners: Listener[]): void => {
 /**
  * Render the cache section.
  *
- * @param listeners
+ * @param component
  * @returns the rendered HTML
  */
-export const renderCacheSection = (listeners: Listener[]): string => {
-	createBindings(listeners);
+export const renderCacheSection = (component: SystemComponent): string => {
+	createBindings(component);
 
 	return html`
 		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">

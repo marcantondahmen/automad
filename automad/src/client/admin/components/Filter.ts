@@ -84,14 +84,14 @@ class FilterComponent extends BaseComponent {
 			}, 200)
 		);
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.switcherChange, () => {
 				input.value = '';
 				this.filter(input);
 			})
 		);
 
-		this.listeners.push(
+		this.addListener(
 			keyCombo('k', () => {
 				input.focus();
 			})

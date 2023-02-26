@@ -62,7 +62,7 @@ export class FileCollectionListFormComponent extends FormComponent {
 		this.classList.add(CSS.grid);
 		this.setAttribute('style', '--min: 12rem; --aspect: 1.25;');
 
-		this.listeners.push(
+		this.addListener(
 			listen(
 				window,
 				`${EventName.appStateChange} ${EventName.filesChangeOnServer}`,

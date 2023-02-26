@@ -55,7 +55,7 @@ class ModalJumpbarComponent extends ModalComponent {
 			this
 		);
 
-		this.listeners.push(
+		this.addListener(
 			keyCombo('j', () => {
 				if (App.navigationIsLocked) {
 					return;

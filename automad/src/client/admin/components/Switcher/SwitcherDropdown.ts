@@ -66,7 +66,7 @@ class SwitcherDropdownComponent extends BaseComponent {
 			);
 		};
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.switcherChange, toggle.bind(this))
 		);
 

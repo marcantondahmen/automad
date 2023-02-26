@@ -46,7 +46,7 @@ export abstract class BaseUpdateIndicatorComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.render();
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.systemUpdateCheck, this.render.bind(this))
 		);
 	}

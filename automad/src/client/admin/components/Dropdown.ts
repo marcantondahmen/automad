@@ -64,7 +64,7 @@ class DropdownComponent extends BaseComponent {
 		this.classList.add(CSS.dropdown);
 		this.classList.toggle(CSS.dropdownRight, this.hasAttribute(Attr.right));
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, 'click', (event: MouseEvent) => {
 				if (
 					event.target === this ||

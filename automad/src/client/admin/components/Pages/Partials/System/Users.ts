@@ -42,14 +42,14 @@ import {
 	html,
 	listen,
 } from '../../../../core';
-import { Listener } from '../../../../types';
+import { SystemComponent } from '../../System';
 
 /**
  * Create bindings for the form elements in the feed section.
  *
- * @param listeners
+ * @param component
  */
-const createBindings = (listeners: Listener[]): void => {
+const createBindings = (component: SystemComponent): void => {
 	const username = new Binding('username', { initial: App.user.name });
 	const email = new Binding('email', { initial: App.user.email });
 	const userSubmit = new Binding('userSubmitButton', { initial: true });
@@ -57,7 +57,7 @@ const createBindings = (listeners: Listener[]): void => {
 		initial: App.system.users.length,
 	});
 
-	listeners.push(
+	component.addListener(
 		listen(window, EventName.appStateChange, () => {
 			username.value = App.user.name;
 			email.value = App.user.email;
@@ -70,11 +70,11 @@ const createBindings = (listeners: Listener[]): void => {
 /**
  * Render the user section.
  *
- * @param listeners
+ * @param component
  * @returns the rendered HTML
  */
-export const renderUsersSection = (listeners: Listener[]): string => {
-	createBindings(listeners);
+export const renderUsersSection = (component: SystemComponent): string => {
+	createBindings(component);
 
 	return html`
 		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">

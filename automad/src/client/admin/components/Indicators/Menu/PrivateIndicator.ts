@@ -47,7 +47,7 @@ class PrivateIndicatorComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(CSS.privacyIndicator);
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.appStateChange, this.render.bind(this))
 		);
 

@@ -47,7 +47,7 @@ export abstract class BaseStateIndicatorComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.render();
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.appStateChange, this.render.bind(this))
 		);
 	}

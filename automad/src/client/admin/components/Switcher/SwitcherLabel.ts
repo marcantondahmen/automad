@@ -57,7 +57,7 @@ export class SwitcherLabelComponent extends BaseComponent {
 			}="${getActiveSection()}"]`;
 		};
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.switcherChange, () => {
 				// Prefer links in menus and dropdowns before all other links
 				// in order to exclude overview cards as links.

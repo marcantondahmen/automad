@@ -62,7 +62,7 @@ export class ConfigFileFormComponent extends FormComponent {
 	protected init(): void {
 		super.init();
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.appStateChange, () => {
 				this.innerHTML = '';
 				this.submit();

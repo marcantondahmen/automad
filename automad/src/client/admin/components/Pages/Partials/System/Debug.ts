@@ -41,19 +41,19 @@ import {
 	html,
 	listen,
 } from '../../../../core';
-import { Listener } from '../../../../types';
+import { SystemComponent } from '../../System';
 
 /**
  * Create bindings for the form elements in the debug section.
  *
- * @param listeners
+ * @param component
  */
-const createBindings = (listeners: Listener[]): void => {
+const createBindings = (component: SystemComponent): void => {
 	const debugEnabled = new Binding('debugEnabled', {
 		initial: App.system.debug,
 	});
 
-	listeners.push(
+	component.addListener(
 		listen(window, EventName.appStateChange, () => {
 			debugEnabled.value = App.system.debug;
 		})
@@ -63,11 +63,11 @@ const createBindings = (listeners: Listener[]): void => {
 /**
  * Render the debug section.
  *
- * @param listeners
+ * @param component
  * @returns the rendered HTML
  */
-export const renderDebugSection = (listeners: Listener[]): string => {
-	createBindings(listeners);
+export const renderDebugSection = (component: SystemComponent): string => {
+	createBindings(component);
 
 	return html`
 		<am-form

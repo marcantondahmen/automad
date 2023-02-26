@@ -55,7 +55,7 @@ class FileCountComponent extends BaseComponent {
 			badge.textContent = `${count}`;
 		};
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.fileCollectionRender, update.bind(this))
 		);
 

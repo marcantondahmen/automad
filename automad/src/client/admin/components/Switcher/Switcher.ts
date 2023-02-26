@@ -106,7 +106,7 @@ export class SwitcherComponent extends BaseComponent {
 			window.dispatchEvent(new Event(EventName.switcherChange));
 		}, 0);
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.switcherChange, this.onChange.bind(this))
 		);
 	}

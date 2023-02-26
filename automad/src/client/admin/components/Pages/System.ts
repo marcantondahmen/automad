@@ -195,7 +195,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 		this.sectionData.forEach((item: SystemSectionData) => {
 			sections += html`
 				<am-switcher-section name="${item.section}">
-					${item.render(this.listeners)}
+					${item.render(this)}
 				</am-switcher-section>
 			`;
 		});

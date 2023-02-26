@@ -70,7 +70,7 @@ class TextareaComponent extends BaseFieldComponent {
 		}, 50);
 
 		listen(textarea, 'keyup focus focusout drop paste', fit);
-		this.listeners.push(listen(window, 'resize', fit));
+		this.addListener(listen(window, 'resize', fit));
 
 		fit();
 	}

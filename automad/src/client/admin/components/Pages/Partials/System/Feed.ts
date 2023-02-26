@@ -42,14 +42,14 @@ import {
 	html,
 	listen,
 } from '../../../../core';
-import { Listener } from '../../../../types';
+import { SystemComponent } from '../../System';
 
 /**
  * Create bindings for the form elements in the feed section.
  *
- * @param listeners
+ * @param component
  */
-const createBindings = (listeners: Listener[]): void => {
+const createBindings = (component: SystemComponent): void => {
 	const feedEnabled = new Binding('feedEnabled', {
 		initial: App.system.feed.enabled,
 	});
@@ -58,7 +58,7 @@ const createBindings = (listeners: Listener[]): void => {
 		initial: JSON.stringify(App.system.feed.fields),
 	});
 
-	listeners.push(
+	component.addListener(
 		listen(window, EventName.appStateChange, () => {
 			feedEnabled.value = App.system.feed.enabled;
 			feedFields.value = JSON.stringify(App.system.feed.fields);
@@ -69,11 +69,11 @@ const createBindings = (listeners: Listener[]): void => {
 /**
  * Render the feed section.
  *
- * @param listeners
+ * @param component
  * @returns the rendered HTML
  */
-export const renderFeedSection = (listeners: Listener[]): string => {
-	createBindings(listeners);
+export const renderFeedSection = (component: SystemComponent): string => {
+	createBindings(component);
 
 	return html`
 		<am-form

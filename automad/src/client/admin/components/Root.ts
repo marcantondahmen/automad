@@ -97,14 +97,13 @@ export class RootComponent extends BaseComponent {
 		await App.bootstrap(this);
 		await this.update();
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, 'popstate', () => {
 				App.root.update();
 			})
 		);
 
-		this.listeners.push(documentEnterKeyHandler());
-
+		this.addListener(documentEnterKeyHandler());
 		this.validateSession();
 	}
 
@@ -186,11 +185,11 @@ export class RootComponent extends BaseComponent {
 			}
 		};
 
-		this.listeners.push(
+		this.addListener(
 			listen(document, 'visibilitychange', stateChangeHandler.bind(this))
 		);
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, 'focus', stateChangeHandler.bind(this))
 		);
 	}

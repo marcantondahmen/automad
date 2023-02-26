@@ -120,7 +120,7 @@ class PackageListComponent extends BaseComponent {
 		this.classList.add(CSS.grid);
 		this.init();
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.packagesChange, this.init.bind(this))
 		);
 	}

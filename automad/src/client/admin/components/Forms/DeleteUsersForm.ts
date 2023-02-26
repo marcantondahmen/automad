@@ -87,7 +87,7 @@ export class DeleteUsersFormComponent extends FormComponent {
 
 		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.appStateChange, render.bind(this))
 		);
 

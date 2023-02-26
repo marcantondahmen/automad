@@ -66,7 +66,7 @@ class SidebarComponent extends BaseComponent {
 		this.setHeight();
 		setTimeout(this.setHeight.bind(this), 0);
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, 'resize', debounce(this.setHeight.bind(this), 200))
 		);
 	}

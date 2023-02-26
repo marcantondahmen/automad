@@ -136,7 +136,7 @@ export class ModalComponent extends BaseComponent {
 		}
 
 		if (!this.hasAttribute(Attr.noEsc)) {
-			this.listeners.push(
+			this.addListener(
 				listen(window, 'keydown', (event: KeyboardEvent) => {
 					if (this.isOpen && event.keyCode == 27) {
 						this.close();

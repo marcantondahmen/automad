@@ -100,7 +100,7 @@ class PageSelectTreeComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.appStateChange, this.init.bind(this))
 		);
 

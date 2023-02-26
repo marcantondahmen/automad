@@ -60,7 +60,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 
 		this.init();
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.packagesChange, this.init.bind(this))
 		);
 

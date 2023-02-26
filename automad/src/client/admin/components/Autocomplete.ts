@@ -178,7 +178,7 @@ export class AutocompleteComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(...this.elementClasses);
 
-		this.listeners.push(
+		this.addListener(
 			listen(window, EventName.appStateChange, this.init.bind(this))
 		);
 

@@ -41,20 +41,21 @@ import {
 	html,
 	listen,
 } from '../../../../core';
-import { Listener, SelectComponentOption } from '../../../../types';
+import { SelectComponentOption } from '../../../../types';
 import { SelectComponent } from '../../../Select';
+import { SystemComponent } from '../../System';
 
 /**
  * Create bindings for the form elements in the cache section.
  *
- * @param listeners
+ * @param component
  */
-const createBindings = (listeners: Listener[]): void => {
+const createBindings = (component: SystemComponent): void => {
 	const translation = new Binding('translation', {
 		initial: App.system.translation,
 	});
 
-	listeners.push(
+	component.addListener(
 		listen(window, EventName.appStateChange, () => {
 			translation.value = App.system.translation;
 		})
@@ -64,17 +65,17 @@ const createBindings = (listeners: Listener[]): void => {
 /**
  * Render the cache section.
  *
- * @param listeners
+ * @param component
  * @returns the rendered HTML
  */
-export const renderLanguageSection = (listeners: Listener[]): string => {
+export const renderLanguageSection = (component: SystemComponent): string => {
 	const languages: SelectComponentOption[] = [];
 
 	for (const [text, value] of Object.entries(App.languages)) {
 		languages.push({ text, value });
 	}
 
-	createBindings(listeners);
+	createBindings(component);
 
 	return html`
 		<am-form
