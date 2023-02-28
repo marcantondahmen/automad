@@ -37,13 +37,13 @@ import {
 	App,
 	Attr,
 	create,
+	createSelect,
 	CSS,
 	listen,
 	query,
 	queryAll,
 } from '../../../../core';
 import { LayoutTuneData, SelectComponentOption } from '../../../../types';
-import { SelectComponent } from '../../../Select';
 import { BaseTune } from './BaseTune';
 
 /**
@@ -191,7 +191,7 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 			});
 		}
 
-		const select = SelectComponent.create(options, this.selected, wrapper);
+		const select = createSelect(options, this.selected, wrapper);
 
 		listen(select.select, 'change', () => {
 			this.selected = select.value;

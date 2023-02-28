@@ -39,6 +39,7 @@ import {
 	collectFieldData,
 	create,
 	createField,
+	createSelect,
 	CSS,
 	html,
 	listen,
@@ -55,7 +56,6 @@ import {
 } from '../../../../types';
 import { BaseBlock } from './BaseBlock';
 import { createEditor } from '../../../../core/editor';
-import { SelectComponent } from '../../../Select';
 import { ModalComponent } from '../../../Modal/Modal';
 import { uniqueId } from '../../../../core';
 import iconFlexGap from '../../../../svg/icons/flex-gap.svg';
@@ -239,7 +239,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			`
 		);
 
-		const justify = SelectComponent.create(
+		const justify = createSelect(
 			justifySelectOptions,
 			this.data.justify,
 			formGroup,
@@ -350,6 +350,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		field('am-color', 'borderColor', 'borderColor', group2);
 
 		field('am-image-select', 'backgroundImage', 'backgroundImage', body);
+
 		const blendModeId = uniqueId();
 		const blendMode = create(
 			'div',
@@ -358,7 +359,8 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			body,
 			html`<label for="${blendModeId}">Background Blendmode</label>`
 		);
-		SelectComponent.create(
+
+		createSelect(
 			SectionBackgroundBlendModes.reduce(
 				(
 					res: SelectComponentOption[],

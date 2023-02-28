@@ -36,13 +36,13 @@ import {
 	App,
 	Attr,
 	Binding,
+	createSelect,
 	CSS,
 	EventName,
 	html,
 	listen,
 } from '../../../../core';
 import { SelectComponentOption } from '../../../../types';
-import { SelectComponent } from '../../../Select';
 import { SystemComponent } from '../../System';
 
 /**
@@ -86,7 +86,7 @@ export const renderLanguageSection = (component: SystemComponent): string => {
 			<input type="hidden" name="type" value="translation" />
 			<div>
 				<p>${App.text('systemLanguageInfo')}</p>
-				${SelectComponent.create(
+				${createSelect(
 					languages,
 					'',
 					null,

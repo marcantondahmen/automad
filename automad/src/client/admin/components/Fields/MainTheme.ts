@@ -32,10 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, Route } from '../../core';
+import { App, Attr, create, createSelect, CSS, Route } from '../../core';
 import { BaseFieldComponent } from './BaseField';
-import { KeyValueMap, SelectComponentOption, Theme } from '../../types';
-import { SelectComponent } from '../Select';
+import { SelectComponentOption, Theme } from '../../types';
 
 /**
  * A theme select field.
@@ -56,7 +55,7 @@ export class MainThemeComponent extends BaseFieldComponent {
 			options.push({ text: theme.name, value: theme.path });
 		});
 
-		SelectComponent.create(
+		createSelect(
 			options,
 			selectedTheme.path,
 			this,

@@ -32,9 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, fire, FormDataProviders, listen } from '../core';
+import {
+	create,
+	createSelect,
+	CSS,
+	fire,
+	FormDataProviders,
+	listen,
+} from '../core';
 import { BaseComponent } from './Base';
-import { SelectComponent } from './Select';
 
 /**
  * A special input that combines a number input with a unit dropdown.
@@ -86,7 +92,7 @@ class NumberUnitInputComponent extends BaseComponent {
 			this
 		);
 
-		const unitSelect = SelectComponent.create(
+		const unitSelect = createSelect(
 			[
 				{ value: 'px' },
 				{ value: '%' },

@@ -37,12 +37,12 @@ import {
 	Attr,
 	Binding,
 	createField,
+	createSelect,
 	CSS,
 	EventName,
 	html,
 	listen,
 } from '../../../../core';
-import { SelectComponent } from '../../../Select';
 import { SystemComponent } from '../../System';
 
 /**
@@ -111,7 +111,7 @@ export const renderCacheSection = (component: SystemComponent): string => {
 				</div>
 				<div class="am-cache-settings">
 					<p>${App.text('systemCacheMonitorInfo')}</p>
-					${SelectComponent.create(
+					${createSelect(
 						[
 							{ value: 60, text: '1 min' },
 							{ value: 120, text: '2 min' },
@@ -130,7 +130,7 @@ export const renderCacheSection = (component: SystemComponent): string => {
 						}
 					).outerHTML}
 					<p>${App.text('systemCacheLifetimeInfo')}</p>
-					${SelectComponent.create(
+					${createSelect(
 						[
 							{ value: 3600, text: '1 h' },
 							{ value: 21600, text: '6 h' },

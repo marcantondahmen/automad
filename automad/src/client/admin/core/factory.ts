@@ -38,6 +38,7 @@ import {
 	FieldSectionCollection,
 	FieldType,
 	KeyValueMap,
+	SelectComponentOption,
 } from '../types';
 import {
 	App,
@@ -58,6 +59,7 @@ import { Section } from '../components/Switcher/Switcher';
 import { SharedDataFormComponent } from '../components/Forms/SharedDataForm';
 import { AutocompleteComponent } from '../components/Autocomplete';
 import { BaseFieldComponent } from '../components/Fields/BaseField';
+import { SelectComponent } from '../components/Select';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -359,4 +361,59 @@ export const createProgressModal = (text: string): ModalComponent => {
 	`;
 
 	return modal;
+};
+
+/**
+ * Create a select component based on an options object.
+ *
+ * @param options
+ * @param selected
+ * @param parent
+ * @param name
+ * @param id
+ * @param prefix
+ * @param cls
+ * @param attributes
+ * @returns the created component
+ */
+export const createSelect = (
+	options: SelectComponentOption[],
+	selected: string,
+	parent: HTMLElement = null,
+	name: string = '',
+	id: string = '',
+	prefix: string = '',
+	cls: string[] = [],
+	attributes: KeyValueMap = {}
+): SelectComponent => {
+	const select = create(SelectComponent.TAG_NAME, cls, {}, parent);
+	let renderedOptions = '';
+	let renderedAttributes = '';
+
+	options.forEach((option) => {
+		renderedOptions += html`
+			<option
+				value="${option.value}"
+				${selected === option.value ? 'selected' : ''}
+			>
+				${typeof option.text !== 'undefined'
+					? option.text
+					: option.value}
+			</option>
+		`;
+	});
+
+	for (const [key, value] of Object.entries(attributes)) {
+		renderedAttributes += html` ${key}="${value}"`;
+	}
+
+	select.innerHTML = html`
+		${prefix}
+		<span class="${CSS.flexItemGrow}"></span>
+		<select name="${name}" id="${id}" ${renderedAttributes}>
+			${renderedOptions}
+		</select>
+	`;
+
+	return select;
 };
