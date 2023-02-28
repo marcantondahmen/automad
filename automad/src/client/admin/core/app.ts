@@ -44,6 +44,7 @@ import {
 	request,
 	requestAPI,
 	setSearchParam,
+	State,
 } from '.';
 import {
 	InputElement,
@@ -59,18 +60,17 @@ import {
  */
 export class App {
 	/**
-	 * The internal private state.
+	 * Get a state property.
 	 *
 	 * @static
+	 * @param key
+	 * @return the property value
 	 */
-	private static _state: KeyValueMap;
-
-	/**
-	 * The internal private root element
-	 *
-	 * @static
-	 */
-	private static _root: RootComponent;
+	private static getState(
+		key: keyof KeyValueMap
+	): KeyValueMap[keyof KeyValueMap] {
+		return State.getInstance().get(key);
+	}
 
 	/**
 	 * The internal state of the nav.
@@ -99,7 +99,7 @@ export class App {
 	 * @static
 	 */
 	static get allowedFileTypes(): string[] {
-		return this._state.allowedFileTypes;
+		return App.getState('allowedFileTypes');
 	}
 
 	/**
@@ -108,7 +108,7 @@ export class App {
 	 * @static
 	 */
 	static get baseURL(): string {
-		return this._state.base;
+		return App.getState('base');
 	}
 
 	/**
@@ -117,7 +117,7 @@ export class App {
 	 * @static
 	 */
 	static get dashboardURL(): string {
-		return this._state.dashboard;
+		return App.getState('dashboard');
 	}
 
 	/**
@@ -126,7 +126,7 @@ export class App {
 	 * @static
 	 */
 	static get feedURL(): string {
-		return this._state.feed;
+		return App.getState('feed');
 	}
 
 	/**
@@ -135,7 +135,7 @@ export class App {
 	 * @static
 	 */
 	static get languages(): KeyValueMap {
-		return this._state.languages;
+		return App.getState('languages');
 	}
 
 	/**
@@ -144,7 +144,7 @@ export class App {
 	 * @static
 	 */
 	static get mainTheme(): string {
-		return this._state.mainTheme;
+		return App.getState('mainTheme');
 	}
 
 	/**
@@ -153,7 +153,7 @@ export class App {
 	 * @static
 	 */
 	static get pages(): Pages {
-		return this._state.pages;
+		return App.getState('pages');
 	}
 
 	/**
@@ -162,7 +162,7 @@ export class App {
 	 * @static
 	 */
 	static get reservedFields(): KeyValueMap {
-		return this._state.reservedFields;
+		return App.getState('reservedFields');
 	}
 
 	/**
@@ -171,7 +171,7 @@ export class App {
 	 * @static
 	 */
 	static get contentFields(): string[] {
-		return this._state.contentFields;
+		return App.getState('contentFields');
 	}
 
 	/**
@@ -180,7 +180,7 @@ export class App {
 	 * @static
 	 */
 	static get sitename(): string {
-		return this._state.sitename;
+		return App.getState('sitename');
 	}
 
 	/**
@@ -189,7 +189,7 @@ export class App {
 	 * @static
 	 */
 	static get tags(): string[] {
-		return this._state.tags;
+		return App.getState('tags');
 	}
 
 	/**
@@ -198,7 +198,7 @@ export class App {
 	 * @static
 	 */
 	static get themes(): ThemeCollection {
-		return this._state.themes;
+		return App.getState('themes');
 	}
 
 	/**
@@ -207,7 +207,7 @@ export class App {
 	 * @static
 	 */
 	static get system(): SystemSettings {
-		return this._state.system;
+		return App.getState('system');
 	}
 
 	/**
@@ -216,7 +216,7 @@ export class App {
 	 * @static
 	 */
 	static get user(): User {
-		return this._state.user;
+		return App.getState('user');
 	}
 
 	/**
@@ -225,7 +225,7 @@ export class App {
 	 * @static
 	 */
 	static get state(): KeyValueMap {
-		return this._state;
+		return State.getInstance().data;
 	}
 
 	/**
@@ -234,7 +234,7 @@ export class App {
 	 * @static
 	 */
 	static get root(): RootComponent {
-		return this._root;
+		return State.getInstance().root;
 	}
 
 	/**
@@ -252,7 +252,7 @@ export class App {
 	 * @static
 	 */
 	static get version() {
-		return this._state.version;
+		return App.getState('version');
 	}
 
 	/**
@@ -263,13 +263,12 @@ export class App {
 	 * @param root
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
-		this._root = root;
-
 		const api = `${root.elementAttributes.base}/api`;
 		const response = await request(`${api}/App/bootstrap`);
 		const json = await response.json();
+		const state = State.getInstance();
 
-		this._state = json.data;
+		state.bootstrap(root, json.data);
 
 		listen(
 			window,
@@ -294,9 +293,9 @@ export class App {
 	 */
 	static async updateState(): Promise<void> {
 		const response = await requestAPI('App/updateState', null, false);
+		const state = State.getInstance();
 
-		this._state = Object.assign({}, this._state, response.data);
-		fire(EventName.appStateChange);
+		state.update(response.data);
 	}
 
 	/**
@@ -375,7 +374,7 @@ export class App {
 	 * @returns the requested text module
 	 */
 	static text(key: string): string {
-		return this._state.text[key] || '';
+		return App.getState('text')[key] || '';
 	}
 
 	/**
@@ -388,7 +387,7 @@ export class App {
 			return;
 		}
 
-		this._state.systemUpdate = response.data;
+		State.getInstance().set('systemUpdate', response.data);
 		fire(EventName.systemUpdateCheck, window);
 	}
 
@@ -398,7 +397,10 @@ export class App {
 	static async checkForOutdatedPackages(): Promise<void> {
 		const { data } = await requestAPI('PackageManager/getOutdated');
 
-		this._state.outdatedPackages = data?.outdated?.length || 0;
+		State.getInstance().set(
+			'outdatedPackages',
+			data?.outdated?.length || 0
+		);
 		fire(EventName.systemUpdateCheck, window);
 	}
 }
