@@ -173,3 +173,42 @@ export const listen = (
 
 	return { remove };
 };
+
+/**
+ * Listen to class changes by using a MutationObserver.
+ *
+ * @param element
+ * @param callback
+ * @param subtree
+ * @returns a special listener that listens for class changes
+ */
+export const listenToClassChange = (
+	element: HTMLElement,
+	callback: (mutation: MutationRecord) => void,
+	subtree: boolean = true
+): Listener => {
+	const observer = new MutationObserver((mutationList, observer) => {
+		mutationList.forEach(function (mutation) {
+			if (
+				mutation.type === 'attributes' &&
+				mutation.attributeName === 'class'
+			) {
+				callback.apply(mutation.target, [mutation]);
+			}
+		});
+	});
+
+	observer.observe(element, {
+		attributes: true,
+		childList: false,
+		subtree,
+	});
+
+	const remove = () => {
+		observer.disconnect();
+		getLogger().log('Remove Observer', observer);
+	};
+
+	return { remove };
+};
+

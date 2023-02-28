@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -32,59 +32,49 @@
  * Licensed under the MIT license.
  */
 
-.am-c-modal-field {
-	display: flex;
-	flex-direction: column;
-	position: relative;
+import EditorJS, { EditorConfig } from '@editorjs/editorjs';
+import { SectionBlock } from '../components/Fields/Editor/Blocks/Section';
+import { LayoutTune } from '../components/Fields/Editor/Tunes/Layout';
+import { EditorOutputData } from '../types';
 
-	* + & {
-		margin-top: @am-base-margin-y;
-	}
+// @ts-ignore
+import Header from '@editorjs/header';
 
-	& > .am-c-field {
-		margin: 0;
-	}
+export const createEditor = (
+	data: EditorOutputData,
+	config: EditorConfig,
+	isSectionBlock: boolean
+): EditorJS => {
+	const editor = new EditorJS(
+		Object.assign(
+			{
+				data,
+				logLevel: 'ERROR',
+				minHeight: 50,
+				autofocus: false,
+				tools: {
+					layout: {
+						class: LayoutTune,
+						config: {
+							isSectionBlock,
+						},
+					},
+					header: Header,
+					section: SectionBlock,
+				},
+				tunes: ['layout'],
+				onReady: (): void => {
+					data.blocks?.forEach((_block) => {
+						const block = editor.blocks.getById(_block.id);
+						const layout = _block.tunes?.layout;
 
-	&[am-modal-open] {
-		position: fixed;
-		z-index: 450;
-		inset: 0;
-		margin: 0;
-		padding: var(--am-body-padding-x);
-		padding-top: 0;
-		overflow: auto;
-		background-color: var(--am-clr-background);
-	}
+						LayoutTune.apply(block, layout);
+					});
+				},
+			},
+			config
+		)
+	);
 
-	&__header {
-		position: sticky;
-		display: none;
-		justify-content: space-between;
-		align-items: center;
-		z-index: 1000;
-		top: 0;
-		min-height: @am-navbar-height;
-		margin: 0 ~'calc(var(--am-body-padding-x) * -1)' 1rem ~'calc(var(--am-body-padding-x) * -1)';
-		padding: 0 var(--am-body-padding-x);
-		background-color: var(--am-clr-background);
-		border-bottom: @am-border;
-	}
-
-	&[am-modal-open] &__header {
-		display: flex;
-	}
-
-	&__toggle {
-		cursor: pointer;
-	}
-
-	& > &__toggle {
-		position: absolute;
-		top: 0;
-		right: 0;
-	}
-
-	&[am-modal-open] > &__toggle {
-		display: none;
-	}
-}
+	return editor;
+};

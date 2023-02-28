@@ -32,10 +32,21 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, fire, FormDataProviders } from '../../core';
+import {
+	App,
+	create,
+	CSS,
+	debounce,
+	fire,
+	FormDataProviders,
+	listen,
+	listenToClassChange,
+	queryAll,
+} from '../../core';
 import { BaseFieldComponent } from './BaseField';
-import EditorJS from '@editorjs/editorjs';
 import { EditorOutputData } from '../../types';
+import { createEditor } from '../../core/editor';
+import { LayoutTune } from './Editor/Tunes/Layout';
 
 /**
  * A block editor field.
@@ -65,17 +76,77 @@ class EditorComponent extends BaseFieldComponent {
 		this.setAttribute('name', name);
 		this.value = value as EditorOutputData;
 
-		const editor = new EditorJS({
-			holder: create('div', [], { id }, this),
-			data: this.value,
+		const editor = createEditor(
+			this.value,
+			{
+				holder: create('div', [], { id }, this),
+				onChange: async (api, event) => {
+					const _value = (await editor.save()) as EditorOutputData;
 
-			onChange: async (api, event) => {
-				this.value = (await editor.save()) as EditorOutputData;
-				this.value['automadVersion'] = App.version;
+					if (
+						JSON.stringify(this.value.blocks) ===
+						JSON.stringify(_value.blocks)
+					) {
+						return;
+					}
 
-				fire('input', this);
+					this.value = _value;
+					this.value['automadVersion'] = App.version;
+
+					fire('input', this);
+				},
 			},
-		});
+			false
+		);
+
+		this.attachToolbarPositionObserver();
+	}
+
+	/**
+	 * Attach observer and listeners in order to update the toolbar positions within sections.
+	 * Note that this should be done here in the parent component in order to be able to properly detach and destroy
+	 * listeners and observers after changing views.
+	 */
+	private attachToolbarPositionObserver(): void {
+		this.addListener(
+			listenToClassChange(this, (mutation) => {
+				const target = mutation.target as HTMLElement;
+
+				if (target.className.indexOf('ce-block--focused') === -1) {
+					return;
+				}
+
+				LayoutTune.updateToolbarPosition(target);
+			})
+		);
+
+		this.addListener(
+			listen(
+				this,
+				'mouseover',
+				debounce((event: Event) => {
+					event.stopPropagation();
+
+					const target = event.target as HTMLElement;
+					const block = target.closest<HTMLElement>('.ce-block');
+
+					LayoutTune.updateToolbarPosition(block);
+				}, 20),
+				'.ce-block'
+			)
+		);
+
+		this.addListener(
+			listen(window, 'click', (event: Event) => {
+				event.stopPropagation();
+
+				queryAll(
+					`.${CSS.editorBlockSectionSettings}.${CSS.active}`
+				).forEach((item) => {
+					item.classList.remove(CSS.active);
+				});
+			})
+		);
 	}
 }
 

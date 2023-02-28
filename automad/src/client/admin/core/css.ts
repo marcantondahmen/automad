@@ -96,6 +96,12 @@ export const enum CSS {
 
 	dropdownArrow = 'am-e-dropdown-arrow',
 
+	editorBlockSection = 'am-c-ed-bl-section',
+	editorBlockSectionSettings = 'am-c-ed-bl-section__toolbar',
+	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
+
+	editorLayoutBase = 'am-layout',
+
 	feedFieldSelect = 'am-c-feed-field-select',
 	feedFieldSelectMuted = 'am-c-feed-field-select--muted',
 	feedFieldSelectArrows = 'am-c-feed-field-select__arrows',
@@ -205,6 +211,8 @@ export const enum CSS {
 	notifyIcon = 'am-c-notify__icon',
 	notifyText = 'am-c-notify__text',
 	notifyClose = 'am-c-notify__close',
+
+	numberUnit = 'am-f-number-unit',
 
 	overflowHidden = 'am-u-overflow-hidden',
 

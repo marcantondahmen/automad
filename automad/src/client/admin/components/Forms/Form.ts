@@ -57,9 +57,12 @@ import { SubmitComponent } from './Submit';
 
 export const autoSubmitTimeout = 750;
 
-const debounced = debounce(async (callback: Function): Promise<void> => {
-	await callback();
-}, autoSubmitTimeout);
+const debounced = debounce(
+	async (callback: (...args: any[]) => void): Promise<void> => {
+		await callback();
+	},
+	autoSubmitTimeout
+);
 
 /**
  * A basic form.

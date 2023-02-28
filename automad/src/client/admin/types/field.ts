@@ -45,6 +45,7 @@ const FieldTypes = [
 	'am-input',
 	'am-main-theme',
 	'am-markdown',
+	'am-number-unit',
 	'am-page-tags',
 	'am-page-template',
 	'am-password',
