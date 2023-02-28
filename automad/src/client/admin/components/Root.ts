@@ -47,6 +47,7 @@ import {
 	requestAPI,
 	Attr,
 	documentEnterKeyHandler,
+	initWindowErrorHandler,
 } from '../core';
 import { applyTheme, getTheme } from '../core/theme';
 import { BaseComponent } from './Base';
@@ -91,6 +92,7 @@ export class RootComponent extends BaseComponent {
 	 */
 	private async init(): Promise<void> {
 		this.classList.add(CSS.root);
+		initWindowErrorHandler();
 		applyTheme(getTheme());
 		this.progressBar(10);
 

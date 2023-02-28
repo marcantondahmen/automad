@@ -212,3 +212,16 @@ export const listenToClassChange = (
 	return { remove };
 };
 
+/**
+ * Initialize an error event handler that mutes a given set of errors.
+ */
+export const initWindowErrorHandler = (): void => {
+	const muted = ['InvalidStateError'];
+
+	listen(window, 'error', (event: ErrorEvent) => {
+		if (muted.includes(event.error.name)) {
+			getLogger().log(event.error);
+			event.preventDefault();
+		}
+	});
+};
