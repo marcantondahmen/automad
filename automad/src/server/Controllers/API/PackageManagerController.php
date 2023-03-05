@@ -111,6 +111,7 @@ class PackageManagerController {
 	public static function getThumbnail(): Response {
 		// Close session here already in order to prevent blocking other requests.
 		session_write_close();
+		ignore_user_abort(true);
 
 		$Response = new Response();
 		$repository = Request::post('repository');

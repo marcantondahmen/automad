@@ -88,6 +88,7 @@ class AppController {
 	public static function getLanguagePacks(): Response {
 		// Close session here already in order to prevent blocking other requests.
 		session_write_close();
+		ignore_user_abort(true);
 
 		$Response = new Response;
 		$Composer = new Composer();

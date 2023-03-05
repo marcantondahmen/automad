@@ -138,6 +138,7 @@ const transformToTree = (data: KeyValueMap): KeyValueMap => {
  *
  * @param url
  * @param [data]
+ * @param [signal]
  * @returns the Promise
  * @async
  */
@@ -176,6 +177,7 @@ export const request = async (
  * @param [dataOrForm]
  * @param [parallel]
  * @param [callback]
+ * @param [cancelable]
  * @returns the Promise
  * @async
  */
@@ -183,7 +185,8 @@ export const requestAPI = async (
 	route: string,
 	dataOrForm: KeyValueMap | FormComponent = null,
 	parallel: boolean = true,
-	callback: Function = null
+	callback: Function = null,
+	cancelable: boolean = false
 ): Promise<KeyValueMap> => {
 	if (!parallel) {
 		while (!PendingRequests.idle) {
@@ -202,7 +205,10 @@ export const requestAPI = async (
 
 	const abortController = new AbortController();
 	const abortListener = listen(window, EventName.beforeUpdateView, () => {
-		abortController.abort();
+		if (cancelable) {
+			abortController.abort();
+		}
+
 		abortListener.remove();
 	});
 

@@ -389,7 +389,13 @@ export class App {
 	 * Check for system updates.
 	 */
 	static async checkForSystemUpdate(): Promise<void> {
-		const response = await requestAPI('System/checkForUpdate');
+		const response = await requestAPI(
+			'System/checkForUpdate',
+			null,
+			true,
+			null,
+			true
+		);
 
 		if (!response.data) {
 			return;
@@ -403,7 +409,13 @@ export class App {
 	 * Check for outdated packages.
 	 */
 	static async checkForOutdatedPackages(): Promise<void> {
-		const { data } = await requestAPI('PackageManager/getOutdated');
+		const { data } = await requestAPI(
+			'PackageManager/getOutdated',
+			null,
+			true,
+			null,
+			true
+		);
 
 		State.getInstance().set(
 			'outdatedPackages',
