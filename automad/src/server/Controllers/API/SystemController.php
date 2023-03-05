@@ -56,6 +56,9 @@ class SystemController {
 	 * @return Response the response object
 	 */
 	public static function checkForUpdate(): Response {
+		// Close session here already in order to prevent blocking other requests.
+		session_write_close();
+
 		$Response = new Response();
 		$latest = Update::getVersion();
 		$data = array(

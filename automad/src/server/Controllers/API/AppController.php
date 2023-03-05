@@ -47,7 +47,6 @@ use Automad\Core\Text;
 use Automad\Models\UserCollection;
 use Automad\System\Composer;
 use Automad\System\Fields;
-use Automad\System\Server;
 use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -87,6 +86,9 @@ class AppController {
 	 * @return Response the Response object
 	 */
 	public static function getLanguagePacks(): Response {
+		// Close session here already in order to prevent blocking other requests.
+		session_write_close();
+
 		$Response = new Response;
 		$Composer = new Composer();
 		$package = Text::PACKAGE;
@@ -110,6 +112,9 @@ class AppController {
 	 * @return Response the Response object
 	 */
 	public static function updateState(): Response {
+		// Close session here already in order to prevent blocking other requests.
+		session_write_close();
+
 		$Response = new Response;
 		$Automad = Automad::fromCache();
 		$UserCollection = new UserCollection();
