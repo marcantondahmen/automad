@@ -87,6 +87,13 @@ export class App {
 	private static latestLockId: number = 0;
 
 	/**
+	 * The API base url.
+	 *
+	 * @static
+	 */
+	static apiURL = '';
+
+	/**
 	 * The app initialization state.
 	 *
 	 * @static
@@ -263,8 +270,9 @@ export class App {
 	 * @param root
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
-		const api = `${root.elementAttributes.base}/api`;
-		const response = await request(`${api}/App/bootstrap`);
+		App.apiURL = `${root.elementAttributes.base}/api`;
+
+		const response = await request(`${App.apiURL}/App/bootstrap`);
 		const json = await response.json();
 		const state = State.getInstance();
 

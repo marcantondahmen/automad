@@ -48,6 +48,8 @@ import {
 	Attr,
 	documentEnterKeyHandler,
 	initWindowErrorHandler,
+	fire,
+	EventName,
 } from '../core';
 import { applyTheme, getTheme } from '../core/theme';
 import { BaseComponent } from './Base';
@@ -115,6 +117,8 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async update(): Promise<void> {
+		fire(EventName.beforeUpdateView, window);
+
 		const openModal = queryAll<ModalComponent>(`[${Attr.modalOpen}]`);
 
 		if (openModal) {

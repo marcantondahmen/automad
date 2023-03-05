@@ -39,10 +39,11 @@ import { query, queryAll } from './utils';
 /**
  * The object with all custom event that are used by the UI.
  */
-export enum EventName {
+export const enum EventName {
 	appStateChange = 'AutomadAppStateChange',
 	appStateRequireUpdate = 'AutomadAppStateRequireUpdate',
 	autocompleteSelect = 'AutomadAutocompleteSelect',
+	beforeUpdateView = 'AutomadBeforeUpdateView',
 	changeByBinding = 'AutomadChangeByBinding',
 	fileCollectionRender = 'AutomadFileCollectionRender',
 	filesChangeOnServer = 'AutomadFilesChangeOnServer',

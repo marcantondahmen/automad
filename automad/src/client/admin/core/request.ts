@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, fire, notifyError, query } from '.';
+import { App, create, EventName, fire, listen, notifyError, query } from '.';
 import { FormComponent } from '../components/Forms/Form';
 import { KeyValueMap } from '../types';
 import { getLogger } from './logger';
@@ -143,9 +143,10 @@ const transformToTree = (data: KeyValueMap): KeyValueMap => {
  */
 export const request = async (
 	url: string,
-	data: KeyValueMap = null
+	data: KeyValueMap = null,
+	signal: AbortSignal = null
 ): Promise<Response> => {
-	const init: KeyValueMap = { method: 'GET' };
+	const init: RequestInit = { method: 'GET', signal };
 
 	if (data !== null) {
 		const formData = new FormData();
@@ -199,15 +200,30 @@ export const requestAPI = async (
 	let data = dataOrForm?.formData || dataOrForm;
 	let responseData;
 
+	const abortController = new AbortController();
+	const abortListener = listen(window, EventName.beforeUpdateView, () => {
+		abortController.abort();
+		abortListener.remove();
+	});
+
 	try {
-		const response = await request(`${App.baseURL}/api/${route}`, data);
+		const response = await request(
+			`${App.apiURL}/${route}`,
+			data,
+			abortController.signal
+		);
+
+		abortListener.remove();
 		responseData = await response.json();
 
 		if (typeof callback === 'function') {
 			callback.apply(this, [responseData]);
 		}
-	} catch {
-		notifyError(`${App.text('fetchingDataError')} (${route})`);
+	} catch (error) {
+		if (!error.message.includes('aborted')) {
+			notifyError(`${App.text('fetchingDataError')} (${route})`);
+		}
+
 		responseData = {};
 	}
 
