@@ -109,6 +109,9 @@ class PackageManagerController {
 	 * @return Response the response object
 	 */
 	public static function getThumbnail(): Response {
+		// Close session here already in order to prevent blocking other requests.
+		session_write_close();
+
 		$Response = new Response();
 		$repository = Request::post('repository');
 		$repositorySlug = Str::stripStart($repository, 'https://github.com/');
@@ -117,17 +120,25 @@ class PackageManagerController {
 			return $Response;
 		}
 
-		$lifetime = 216000;
+		$lifetime = 604800;
 		$cachePath = AM_BASE_DIR . AM_DIR_CACHE . "/packages/$repositorySlug/thumbnail";
 
 		if (is_readable($cachePath) && filemtime($cachePath) > time() - $lifetime) {
-			return $Response->setData(array('thumbnail' => file_get_contents($cachePath)));
+			$cachedImageUrl = file_get_contents($cachePath);
+
+			if (!$cachedImageUrl) {
+				return $Response;
+			}
+
+			return $Response->setData(array('thumbnail' => $cachedImageUrl));
 		}
 
 		$readme = self::getReadme($repository);
 		$imageUrl = Str::findFirstImage($readme);
 
 		if (!$imageUrl) {
+			FileSystem::write($cachePath, '');
+
 			return $Response;
 		}
 
