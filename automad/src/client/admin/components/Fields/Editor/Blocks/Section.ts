@@ -202,7 +202,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.setStyle();
 		});
 
-		listen(this.holder, 'click', (event: Event) => {
+		listen(this.wrapper, 'click', (event: Event) => {
 			event.stopPropagation();
 
 			queryAll(`.${CSS.editorBlockSectionSettings}`).forEach(
