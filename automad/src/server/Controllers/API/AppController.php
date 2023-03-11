@@ -76,6 +76,7 @@ class AppController {
 			'reservedFields' => Fields::$reserved,
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'text' => Text::getObject(),
+			'packageRepo' => AM_PACKAGE_REPO,
 			'version' => AM_VERSION
 		));
 	}

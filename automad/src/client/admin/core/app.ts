@@ -41,6 +41,7 @@ import {
 	listen,
 	notifySuccess,
 	query,
+	remoteTrigger,
 	request,
 	requestAPI,
 	setSearchParam,
@@ -152,6 +153,13 @@ export class App {
 	 */
 	static get mainTheme(): string {
 		return App.getState('mainTheme');
+	}
+
+	/**
+	 * The package repo api endpoint.
+	 */
+	static get packageRepo(): string {
+		return App.getState('packageRepo');
 	}
 
 	/**
@@ -290,7 +298,9 @@ export class App {
 			if (success) {
 				notifySuccess(success, -1);
 			}
-		}, 10000);
+
+			remoteTrigger('PackageManager/preFetchThumbnails');
+		}, 2000);
 	}
 
 	/**

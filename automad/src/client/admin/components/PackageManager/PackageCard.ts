@@ -58,9 +58,15 @@ const packageBrowser = 'https://packages.automad.org';
  * @returns the thumbnail URL
  */
 const getThumbnail = async (repository: string): Promise<string> => {
-	const response = await requestAPI('PackageManager/getThumbnail', {
-		repository,
-	});
+	const response = await requestAPI(
+		'PackageManager/getThumbnail',
+		{
+			repository,
+		},
+		true,
+		null,
+		true
+	);
 
 	return response.data?.thumbnail;
 };

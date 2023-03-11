@@ -42,10 +42,12 @@ use Automad\Core\FileSystem;
 use Automad\Core\Image;
 use Automad\Core\RemoteFile;
 use Automad\Core\Request;
+use Automad\Core\Resolve;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\System\Composer;
 use Automad\System\Fetch;
+use Automad\System\Package;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -115,43 +117,8 @@ class PackageManagerController {
 
 		$Response = new Response();
 		$repository = Request::post('repository');
-		$repositorySlug = Str::stripStart($repository, 'https://github.com/');
 
-		if (!preg_match('#\w+/\w+#', $repositorySlug)) {
-			return $Response;
-		}
-
-		$lifetime = 604800;
-		$cachePath = AM_BASE_DIR . AM_DIR_CACHE . "/packages/$repositorySlug/thumbnail";
-
-		if (is_readable($cachePath) && filemtime($cachePath) > time() - $lifetime) {
-			$cachedImageUrl = file_get_contents($cachePath);
-
-			if (!$cachedImageUrl) {
-				return $Response;
-			}
-
-			return $Response->setData(array('thumbnail' => $cachedImageUrl));
-		}
-
-		$readme = self::getReadme($repository);
-		$imageUrl = Str::findFirstImage($readme);
-
-		if (!$imageUrl) {
-			FileSystem::write($cachePath, '');
-
-			return $Response;
-		}
-
-		$RemoteFile = new RemoteFile($imageUrl);
-		$download = $RemoteFile->getLocalCopy();
-
-		$Image = new Image($download, 400, 300, true);
-		$thumbnail = AM_BASE_URL . $Image->file;
-
-		FileSystem::write($cachePath, $thumbnail);
-
-		return $Response->setData(array('thumbnail' => $thumbnail));
+		return $Response->setData(array('thumbnail' => Package::getThumbnail($repository)));
 	}
 
 	/**
@@ -161,18 +128,43 @@ class PackageManagerController {
 	 */
 	public static function install(): Response {
 		$Response = new Response();
+		$package = Request::post('package');
 
-		if ($package = Request::post('package')) {
-			$Composer = new Composer();
-
-			if ($error = $Composer->run('require ' . $package)) {
-				$Response->setError($error);
-			} else {
-				$Response->setSuccess(Text::get('packageInstalledSuccess') . '<br>' . $package);
-			}
+		if (!$package) {
+			return $Response;
 		}
 
-		return $Response;
+		$Composer = new Composer();
+
+		if ($error = $Composer->run('require ' . $package)) {
+			return $Response->setError($error);
+		}
+
+		return $Response->setSuccess(Text::get('packageInstalledSuccess') . '<br>' . $package);
+	}
+
+	/**
+	 * Pre-fetch all package thumbnails in the background.
+	 *
+	 * @return Response
+	 */
+	public static function preFetchThumbnails(): Response {
+		$Response = new Response();
+
+		// Close session here already in order to prevent blocking other requests.
+		session_write_close();
+		ignore_user_abort(true);
+		set_time_limit(0);
+		ini_set('memory_limit', '-1');
+
+		$packages = json_decode(Fetch::get(AM_PACKAGE_REPO));
+		$thumbnails = array();
+
+		foreach ($packages->results as $package) {
+			$thumbnails[] = Package::getThumbnail($package->repository);
+		}
+
+		return $Response->setData(array('thumbnails' => $thumbnails));
 	}
 
 	/**
@@ -235,30 +227,5 @@ class PackageManagerController {
 		Cache::clear();
 
 		return $Response->setSuccess(Text::get('packageUpdatedAllSuccess'));
-	}
-
-	/**
-	 * Get the rendered README for a given package repository.
-	 *
-	 * @param string $repository
-	 * @return string the thumbnail URL
-	 */
-	private static function getReadme(string $repository): string {
-		$repositorySlug = Str::stripStart($repository, 'https://github.com/');
-
-		preg_match(
-			'#href="/' . $repositorySlug . '/blob/(\w+)/(readme[\w\.]*)"#i',
-			Fetch::get($repository),
-			$matches
-		);
-
-		if (empty($matches) || empty($matches[1]) || empty($matches[2])) {
-			return '';
-		}
-
-		$blob = 'https://raw.githubusercontent.com/' . $repositorySlug . '/' . $matches[1] . '/' . $matches[2];
-		$raw = Fetch::get($blob);
-
-		return Str::markdown($raw);
 	}
 }

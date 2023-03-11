@@ -239,6 +239,21 @@ export const requestAPI = async (
 };
 
 /**
+ * Call a endpoint in order to trigger a remote background process.
+ *
+ * @param route
+ */
+export const remoteTrigger = async (route: string) => {
+	const abortController = new AbortController();
+
+	request(`${App.apiURL}/${route}`, null, abortController.signal);
+
+	setTimeout(() => {
+		abortController.abort();
+	}, 10);
+};
+
+/**
  * Wait for pending requests to be finished.
  *
  * @returns a promise that resolves as soon there is no pending request

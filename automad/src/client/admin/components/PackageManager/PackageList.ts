@@ -33,6 +33,7 @@
  */
 
 import {
+	App,
 	create,
 	CSS,
 	EventName,
@@ -49,9 +50,7 @@ import { BaseComponent } from '../Base';
  * @returns the list of available packages
  */
 const getPackagistPackages = async (): Promise<Package[]> => {
-	const response = await request(
-		'https://packagist.org/search.json?&type=automad-package&per_page=100'
-	);
+	const response = await request(App.packageRepo);
 	const { results } = await response.json();
 
 	return results;
