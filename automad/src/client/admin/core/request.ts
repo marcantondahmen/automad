@@ -246,11 +246,13 @@ export const requestAPI = async (
 export const remoteTrigger = async (route: string) => {
 	const abortController = new AbortController();
 
-	request(`${App.apiURL}/${route}`, null, abortController.signal);
+	try {
+		setTimeout(() => {
+			abortController.abort();
+		}, 50);
 
-	setTimeout(() => {
-		abortController.abort();
-	}, 10);
+		await request(`${App.apiURL}/${route}`, null, abortController.signal);
+	} catch {}
 };
 
 /**
