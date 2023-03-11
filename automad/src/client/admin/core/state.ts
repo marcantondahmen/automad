@@ -37,6 +37,9 @@ import { KeyValueMap } from '../types';
 import { EventName, fire } from './events';
 import { getLogger } from './logger';
 
+/**
+ * The Application State container singelton class.
+ */
 export class State {
 	/**
 	 * The singelton instance.
