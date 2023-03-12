@@ -22,69 +22,23 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
  *
  * AUTOMAD
  *
- * Copyright (c) 2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.codex-editor {
-	padding: 2px;
-	border: @am-border;
-	border-style: dashed;
-	border-radius: 3px;
+@modules: '../../../../../node_modules';
 
-	am-editor > div > & {
-		border-style: solid;
-		border-radius: @am-bl-editor-radius;
-	}
+@import '@{modules}/@yaireo/tagify/dist/tagify.css';
+@import '@{modules}/toastify-js/src/toastify.css';
 
-	& &__redactor {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 2px;
-		padding: 2px;
-	}
-}
-
-.ce-block {
-	flex-basis: 100%;
-	flex-grow: 0;
-	min-width: 8rem;
-	margin: 0 !important;
-	padding: 0 !important;
-
-	&__content {
-		height: 100%;
-		padding-left: 50px;
-	}
-}
-
-.am-layout--stretched > .ce-block__content {
-	max-width: 100%;
-	margin: 0;
-}
-
-.ce-toolbar {
-	z-index: 1000;
-	top: 0 !important;
-	transform: translate(var(--x), var(--y));
-
-	&__content {
-		max-width: none;
-	}
-
-	.codex-editor &__actions {
-		right: unset;
-	}
-}
-
-.ce-popover {
-	&--opened {
-		max-height: none;
-	}
-}
+@import 'components/index.less';
+@import 'elements/index.less';
+@import 'form/index.less';
+@import 'layout/index.less';
+@import 'themes/index.less';
+@import 'utils/index.less';
