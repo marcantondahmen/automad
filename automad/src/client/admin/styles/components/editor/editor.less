@@ -36,7 +36,6 @@
 	padding: 2px;
 	border: @am-border;
 	border-style: dashed;
-	border-radius: 3px;
 
 	am-editor > div > & {
 		border-style: solid;
@@ -48,43 +47,5 @@
 		flex-wrap: wrap;
 		gap: 2px;
 		padding: 2px;
-	}
-}
-
-.ce-block {
-	flex-basis: 100%;
-	flex-grow: 0;
-	min-width: 8rem;
-	margin: 0 !important;
-	padding: 0 !important;
-
-	&__content {
-		height: 100%;
-		padding-left: 50px;
-	}
-}
-
-.am-layout--stretched > .ce-block__content {
-	max-width: 100%;
-	margin: 0;
-}
-
-.ce-toolbar {
-	z-index: 1000;
-	top: 0 !important;
-	transform: translate(var(--x), var(--y));
-
-	&__content {
-		max-width: none;
-	}
-
-	.codex-editor &__actions {
-		right: unset;
-	}
-}
-
-.ce-popover {
-	&--opened {
-		max-height: none;
 	}
 }

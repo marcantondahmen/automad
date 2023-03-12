@@ -61,13 +61,11 @@
 
 	&__editor {
 		& > .codex-editor > .codex-editor__redactor {
-			--space: var(--gap, 2px);
-			--margin: calc(-1 * var(--space));
+			--space: var(--gap, 1px);
 
 			display: flex;
 			flex-wrap: wrap;
 			gap: var(--space);
-			margin-right: var(--margin);
 			height: 100%;
 		}
 
@@ -78,13 +76,6 @@
 			min-width: 8rem;
 			border: @am-border;
 			border-style: dashed;
-
-			// Add this in order to correctly catch mouseover events.
-			&:before {
-				content: '';
-				position: absolute;
-				inset: calc(var(--margin) / 2);
-			}
 		}
 
 		& [am-layout-width] {

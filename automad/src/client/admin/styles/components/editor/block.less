@@ -32,23 +32,20 @@
  * Licensed under the MIT license.
  */
 
-.ce-toolbar {
-	z-index: 1000;
-	top: 0 !important;
-	transform: translate(var(--x), var(--y));
+.ce-block {
+	flex-basis: 100%;
+	flex-grow: 0;
+	min-width: 8rem;
+	margin: 0 !important;
+	padding: 0 !important;
 
 	&__content {
-		max-width: none;
-		padding-top: 0.4rem;
-	}
+		height: 100%;
+		padding-left: 50px;
 
-	.codex-editor &__actions {
-		right: unset;
-	}
-}
-
-.ce-popover {
-	&--opened {
-		max-height: none;
+		.am-layout--stretched > & {
+			max-width: 100%;
+			margin: 0;
+		}
 	}
 }
