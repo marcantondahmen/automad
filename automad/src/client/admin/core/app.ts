@@ -95,6 +95,13 @@ export class App {
 	static apiURL = '';
 
 	/**
+	 * The base URL for the website.
+	 *
+	 * @static
+	 */
+	static baseURL = '';
+
+	/**
 	 * The app initialization state.
 	 *
 	 * @static
@@ -108,15 +115,6 @@ export class App {
 	 */
 	static get allowedFileTypes(): string[] {
 		return App.getState('allowedFileTypes');
-	}
-
-	/**
-	 * The base URL for the website.
-	 *
-	 * @static
-	 */
-	static get baseURL(): string {
-		return App.getState('base');
 	}
 
 	/**
@@ -278,7 +276,8 @@ export class App {
 	 * @param root
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
-		App.apiURL = `${root.elementAttributes.base}/api`;
+		App.baseURL = root.elementAttributes.base;
+		App.apiURL = `${App.baseURL}/api`;
 
 		const response = await request(`${App.apiURL}/App/bootstrap`);
 		const json = await response.json();

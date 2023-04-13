@@ -70,8 +70,6 @@ class AppController {
 		$Automad = Automad::fromCache();
 
 		return $Response->setData(array(
-			'base' => AM_BASE_URL,
-			'baseIndex' => AM_BASE_INDEX,
 			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
 			'languages' => self::getLanguages(),
 			'reservedFields' => Fields::$reserved,

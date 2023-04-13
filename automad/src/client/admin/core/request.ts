@@ -133,7 +133,7 @@ const transformToTree = (data: KeyValueMap): KeyValueMap => {
 /**
  * Request a given URL and optionally post a stringified object as data.
  * When no data is passed, the request mehod will automatically be `GET`.
- * In case data is passed, it will be send as a stringified object in the '__raw__' field
+ * In case data is passed, it will be send as a stringified object in the '__json__' field
  * that will be converted back to an array on the backend.
  *
  * @param url
@@ -151,12 +151,9 @@ export const request = async (
 
 	if (data !== null) {
 		const formData = new FormData();
-		const tree = transformToTree(data);
-
-		getLogger().log(url, tree);
 
 		formData.append(RequestKey.csrf, getCsrfToken());
-		formData.append(RequestKey.json, JSON.stringify(tree));
+		formData.append(RequestKey.json, JSON.stringify(data));
 
 		init.method = 'POST';
 		init.body = formData;
@@ -203,6 +200,10 @@ export const requestAPI = async (
 	let data = dataOrForm?.formData || dataOrForm;
 	let responseData;
 
+	if (data) {
+		data = transformToTree(data);
+	}
+
 	const abortController = new AbortController();
 	const abortListener = listen(window, EventName.beforeUpdateView, () => {
 		if (cancelable) {
@@ -234,6 +235,11 @@ export const requestAPI = async (
 	}
 
 	PendingRequests.remove();
+
+	const log = getLogger();
+
+	log.request(route, data);
+	log.response(route, responseData);
 
 	return responseData;
 };

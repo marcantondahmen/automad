@@ -32,7 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Logger } from '../types';
+import { KeyValueMap, Logger } from '../types';
+import { App } from './app';
 
 /**
  * The logger factory.
@@ -78,6 +79,31 @@ const compose = (...args: any[]): any[] => {
 };
 
 /**
+ * Create a fetch console entry.
+ *
+ * @param url
+ * @param data
+ * @param [prefix]
+ * @param [color]
+ * @param [bg]
+ */
+const fetch = (
+	url: string,
+	data: KeyValueMap,
+	prefix: string = '',
+	color: string = '',
+	bg: string = ''
+): void => {
+	const route = url.split(`${App.apiURL}/`).pop();
+
+	console.log(
+		`%c${prefix} ${route}`,
+		`padding: 3px 5px; font-weight: 500; color: ${color}; background-color: ${bg}`,
+		data
+	);
+};
+
+/**
  * The logger class being used during development.
  */
 class DevelopmentLogger implements Logger {
@@ -87,6 +113,14 @@ class DevelopmentLogger implements Logger {
 
 	log(...args: any[]): void {
 		console.log(...compose(...args));
+	}
+
+	request(url: string, data: KeyValueMap): void {
+		fetch(url, data, '>>', '#b9b0eb', '#503bc4');
+	}
+
+	response(url: string, data: KeyValueMap): void {
+		fetch(url, data, '<<', '#d3b0eb', '#613480');
 	}
 }
 
@@ -98,5 +132,9 @@ class ProductionLogger implements Logger {
 		console.error(...args);
 	}
 
-	log(...args: any[]): void {}
+	log(): void {}
+
+	request(): void {}
+
+	response(): void {}
 }
