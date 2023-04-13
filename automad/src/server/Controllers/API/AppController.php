@@ -47,6 +47,7 @@ use Automad\Core\Text;
 use Automad\Models\UserCollection;
 use Automad\System\Composer;
 use Automad\System\Fields;
+use Automad\System\Theme;
 use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -121,10 +122,11 @@ class AppController {
 		$Automad = Automad::fromCache();
 		$UserCollection = new UserCollection();
 		$ThemeCollection = new ThemeCollection();
+		$themes = $ThemeCollection->getThemes();
 
 		return $Response->setData(array(
 			'allowedFileTypes' => FileUtils::allowedFileTypes(),
-			'contentFields' => self::getContentFields(),
+			'contentFields' => self::getContentFields($themes),
 			'feed' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL,
 			'mainTheme' => $Automad->Shared->get(Fields::THEME),
 			'pages' => $Automad->getNavigationMetaData(),
@@ -145,7 +147,7 @@ class AppController {
 				'tempDirectory' => FileSystem::getTmpDir()
 			),
 			'tags' => $Automad->getPagelist()->getTags(),
-			'themes' => $ThemeCollection->getThemes(),
+			'themes' => $themes,
 			'user' => $UserCollection->getUser(Session::getUsername())
 		));
 	}
@@ -153,13 +155,13 @@ class AppController {
 	/**
 	 * Get all relevant text based fields from all themes.
 	 *
+	 * @param array<int, Theme> $themes
 	 * @return array the fields array
 	 */
-	private static function getContentFields(): array {
-		$ThemeCollection = new ThemeCollection();
+	private static function getContentFields(array $themes): array {
 		$fields = array();
 
-		foreach ($ThemeCollection->getThemes() as $Theme) {
+		foreach ($themes as $Theme) {
 			foreach ($Theme->templates as $file) {
 				$fields = array_merge($fields, Fields::inTemplate($file));
 			}
