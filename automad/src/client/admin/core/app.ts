@@ -279,11 +279,10 @@ export class App {
 		App.baseURL = root.elementAttributes.base;
 		App.apiURL = `${App.baseURL}/api`;
 
-		const response = await request(`${App.apiURL}/App/bootstrap`);
-		const json = await response.json();
+		const { data } = await requestAPI(`App/bootstrap`);
 		const state = State.getInstance();
 
-		state.bootstrap(root, json.data);
+		state.bootstrap(root, data);
 
 		listen(
 			window,
