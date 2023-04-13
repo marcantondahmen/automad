@@ -116,6 +116,8 @@ export interface Listener {
 export interface Logger {
 	error: (...args: any[]) => void;
 	log: (...args: any[]) => void;
+	request: (url: string, data: KeyValueMap) => void;
+	response: (url: string, data: KeyValueMap) => void;
 }
 
 export interface NavTreeItem {
