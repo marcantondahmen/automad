@@ -421,24 +421,17 @@ class FileSystem {
 	 * @return mixed $tmp
 	 */
 	public static function purgeCache(): mixed {
-		$tmp = self::getTmpDir();
-
-		// Check if the temp dir is actually writable.
-		if (!$tmp) {
-			return false;
-		}
-
-		$tmpSubDir = '/automad-trash';
-		$trash = $tmp . $tmpSubDir;
+		$trash = AM_DIR_TMP_CACHE . '/trash/';
 		$n = 0;
+		$target = $trash . $n;
 
 		// Create unique subdirectory in temp.
-		while (is_dir($trash)) {
+		while (is_dir($target)) {
 			$n++;
-			$trash = $tmp . $tmpSubDir . '-' . $n;
+			$target = $trash . $n;
 		}
 
-		if (!self::makeDir($trash)) {
+		if (!self::makeDir($target)) {
 			return false;
 		}
 
@@ -449,7 +442,7 @@ class FileSystem {
 		);
 
 		foreach ($cacheItems as $item) {
-			$dest = $trash . '/' . basename($item);
+			$dest = $target . '/' . basename($item);
 
 			if (!@rename($item, $dest)) {
 				if (function_exists('exec')) {
@@ -473,8 +466,8 @@ class FileSystem {
 			}
 		}
 
-		// Return $trash on success.
-		return $trash;
+		// Return $target on success.
+		return $target;
 	}
 
 	/**
