@@ -38,12 +38,7 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Cache;
-use Automad\Core\FileSystem;
-use Automad\Core\Image;
-use Automad\Core\RemoteFile;
 use Automad\Core\Request;
-use Automad\Core\Resolve;
-use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\System\Composer;
 use Automad\System\Fetch;

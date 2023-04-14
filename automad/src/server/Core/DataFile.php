@@ -144,7 +144,10 @@ class DataFile {
 		);
 
 		foreach ($pairs as $pair) {
-			list($key, $value) = explode(':', $pair, 2);
+			$exploded = explode(':', $pair, 2);
+
+			$key = $exploded[0];
+			$value = $exploded[1] ?? '';
 
 			if (strlen($value)) {
 				$key = trim($key);
