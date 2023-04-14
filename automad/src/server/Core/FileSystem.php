@@ -234,6 +234,19 @@ class FileSystem {
 	}
 
 	/**
+	 * Generate a dedicated cache directory for a single installation on a server based on its base directory
+	 * that can be used to cache files that should not be exposed to the public.
+	 *
+	 * @return string the generated path
+	 */
+	public static function getTmpCacheDir(): string {
+		$dir = self::getTmpDir() . '/automad/' . sha1(AM_BASE_DIR);
+		self::makeDir($dir);
+
+		return $dir;
+	}
+
+	/**
 	 * Return the path of the temp dir if it is writable by the webserver.
 	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
 	 * while other locations like '/var/tmp' do not get purged by the system.

@@ -73,7 +73,12 @@ class Composer {
 	/**
 	 * Composer extraction directory within temporary directory.
 	 */
-	private string $extractionDir = '/src';
+	private string $extractionDir = '/extracted';
+
+	/*
+	 * The base directory for the installation.
+	 */
+	private string $installBaseDir;
 
 	/**
 	 * A chached file including the temporary Composer install directory.
@@ -96,10 +101,8 @@ class Composer {
 	 */
 	public function __construct() {
 		$this->pharUrl = 'https://getcomposer.org/download/' . $this->composerVersion . '/composer.phar';
-		$this->installDirCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' .
-									 Cache::PREFIX . '_composer_' .
-									 Str::sanitize($this->composerVersion, true) .
-									 '_dir';
+		$this->installBaseDir = AM_DIR_TMP_CACHE . '/composer/' . $this->composerVersion;
+		$this->installDirCacheFile = $this->installBaseDir . '/path';
 		$this->setUp();
 	}
 
@@ -275,8 +278,7 @@ class Composer {
 	 * @return string The path to the directory
 	 */
 	private function newInstallDir(): string {
-		$tmp = FileSystem::getTmpDir();
-		$installDir = $tmp . '/composer_' . time();
+		$installDir = $this->installBaseDir . '/' . bin2hex(random_bytes(32));
 		Debug::log($installDir, 'Generating new Composer installation path');
 		FileSystem::write($this->installDirCacheFile, $installDir);
 		FileSystem::makeDir($installDir);

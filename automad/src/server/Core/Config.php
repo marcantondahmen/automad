@@ -88,12 +88,17 @@ class Config {
 		// An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
 		self::set('AM_BASE_SITEMAP', '');
 
+		// PERMISSIONS
+		self::set('AM_PERM_DIR', 0755);
+		self::set('AM_PERM_FILE', 0644);
+
 		// Define all constants which are not defined yet by the config file.
 		// DIR
 		self::set('AM_DIR_PAGES', '/pages');
 		self::set('AM_DIR_SHARED', '/shared');
 		self::set('AM_DIR_PACKAGES', '/packages');
 		self::set('AM_DIR_CACHE', '/cache');
+		self::set('AM_DIR_TMP_CACHE', FileSystem::getTmpCacheDir());
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE
@@ -119,10 +124,6 @@ class Config {
 		self::set('AM_FEED_ENABLED', true);
 		self::set('AM_FEED_URL', '/feed');
 		self::set('AM_FEED_FIELDS', '+hero, +main');
-
-		// PERMISSIONS
-		self::set('AM_PERM_DIR', 0755);
-		self::set('AM_PERM_FILE', 0644);
 
 		// CACHE
 		self::set('AM_CACHE_ENABLED', true);
