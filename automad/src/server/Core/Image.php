@@ -333,9 +333,9 @@ class Image {
 		// since the given hashData will always result in the same hash.
 		// So if a file gets requested, the hash is generated from the path, calculated width x height, the mtime from the original and the cropping setting.
 		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . filemtime($this->originalFile) . '-' . var_export($this->crop, true);
-		$hash = hash('md5', $hashData);
+		$hash = sha1($hashData);
 
-		$file = Cache::DIR_IMAGES . '/' . Cache::PREFIX . '_' . $hash . '.' . $extension;
+		$file = Cache::DIR_IMAGES . '/' . $hash . '.' . $extension;
 
 		Debug::log($hashData, 'Hash data for ' . $hash);
 

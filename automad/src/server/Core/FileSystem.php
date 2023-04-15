@@ -436,10 +436,7 @@ class FileSystem {
 		}
 
 		// Collect items to be removed.
-		$cacheItems = array_merge(
-			self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
-			self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . Cache::PREFIX . '*')
-		);
+		$cacheItems = self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR);
 
 		foreach ($cacheItems as $item) {
 			$dest = $target . '/' . basename($item);

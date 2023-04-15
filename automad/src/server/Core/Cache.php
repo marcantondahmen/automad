@@ -79,10 +79,9 @@ class Cache {
 	const DIR_IMAGES = AM_DIR_CACHE . '/images';
 	const DIR_PAGES = AM_DIR_CACHE . '/pages';
 	const EXT_PAGE = 'html';
-	const FILE_OBJECT_API_CACHE = AM_BASE_DIR . AM_DIR_CACHE . '/' . self::PREFIX . '_automad_object_api';
-	const FILE_OBJECT_CACHE = AM_BASE_DIR . AM_DIR_CACHE . '/' . self::PREFIX . '_automad_object';
-	const FILE_SITE_MTIME = AM_BASE_DIR . AM_DIR_CACHE . '/' . self::PREFIX . '_site_mtime';
-	const PREFIX = 'cached';
+	const FILE_OBJECT_API_CACHE = AM_DIR_TMP_CACHE . '/' . 'automad_admin';
+	const FILE_OBJECT_CACHE = AM_DIR_TMP_CACHE . '/' . 'automad_public';
+	const FILE_SITE_MTIME = AM_DIR_TMP_CACHE . '/' . 'site_mtime';
 
 	/**
 	 * The status of the Automad object cache.
@@ -478,14 +477,14 @@ class Cache {
 	 * @return string The determined file name of the matching cached version of the visited page.
 	 */
 	private function getPageCacheFilePath(): string {
-		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
-		$currentPath = rtrim(AM_REQUEST, '/');
+		// Make sure that $route is never just '/', by wrapping the string in an extra rtrim().
+		$route = rtrim(AM_REQUEST, '/');
 
 		// Create hashed string of session data.
-		$sessionDataHash = '';
+		$sessionHash = '';
 
 		if ($sessionData = SessionData::get()) {
-			$sessionDataHash = '_' . sha1(json_encode($sessionData));
+			$sessionHash = '_' . sha1(json_encode($sessionData));
 		}
 
 		Debug::log($sessionData, 'Session Data');
@@ -494,15 +493,12 @@ class Cache {
 		// The actual server name is then already part of the AM_BASE_URL.
 		// For example: https://someproxy.com/domain.com/baseurl
 		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
-		$serverName = $_SERVER['HTTP_X_FORWARDED_SERVER'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''));
+		$server = $_SERVER['HTTP_X_FORWARDED_SERVER'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''));
+		$file = AM_BASE_DIR . Cache::DIR_PAGES . '/' . $server . AM_BASE_URL . $route . '/page' . $sessionHash . '.' . Cache::EXT_PAGE;
 
-		$pageCacheFile = 	AM_BASE_DIR . Cache::DIR_PAGES . '/' .
-							$serverName . AM_BASE_URL . $currentPath . '/' .
-							Cache::PREFIX . $sessionDataHash . '.' . Cache::EXT_PAGE;
+		Debug::log($file);
 
-		Debug::log($pageCacheFile);
-
-		return $pageCacheFile;
+		return $file;
 	}
 
 	/**
