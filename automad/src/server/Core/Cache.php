@@ -225,8 +225,16 @@ class Cache {
 	 * scanning of files when creating a new cache object.
 	 */
 	public static function clear(): void {
-		Debug::log('Resetting the site modification time');
+		Debug::log('Resetting the site modification time and removing objects');
 		Cache::writeSiteMTime(time());
+
+		if (file_exists(Cache::FILE_OBJECT_CACHE)) {
+			unlink(Cache::FILE_OBJECT_CACHE);
+		}
+
+		if (file_exists(Cache::FILE_OBJECT_API_CACHE)) {
+			unlink(Cache::FILE_OBJECT_API_CACHE);
+		}
 	}
 
 	/**
