@@ -463,6 +463,8 @@ class FileSystem {
 			}
 		}
 
+		Cache::clear();
+
 		// Return $target on success.
 		return $target;
 	}

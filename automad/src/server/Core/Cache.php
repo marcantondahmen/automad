@@ -77,8 +77,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Cache {
 	const DIR_IMAGES = AM_DIR_CACHE . '/images';
-	const DIR_PAGES = AM_DIR_CACHE . '/pages';
-	const EXT_PAGE = 'html';
+	const DIR_PAGES = AM_DIR_TMP_CACHE . '/pages';
 	const FILE_OBJECT_API_CACHE = AM_DIR_TMP_CACHE . '/' . 'automad_admin';
 	const FILE_OBJECT_CACHE = AM_DIR_TMP_CACHE . '/' . 'automad_public';
 	const FILE_SITE_MTIME = AM_DIR_TMP_CACHE . '/' . 'site_mtime';
@@ -494,7 +493,8 @@ class Cache {
 		// For example: https://someproxy.com/domain.com/baseurl
 		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
 		$server = $_SERVER['HTTP_X_FORWARDED_SERVER'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''));
-		$file = AM_BASE_DIR . Cache::DIR_PAGES . '/' . $server . AM_BASE_URL . $route . '/page' . $sessionHash . '.' . Cache::EXT_PAGE;
+		$port = $_SERVER['SERVER_PORT'] ?? '80';
+		$file = Cache::DIR_PAGES . '/' . $server . '_' . $port . AM_BASE_URL . $route . '/page' . $sessionHash;
 
 		Debug::log($file);
 
