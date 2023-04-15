@@ -98,7 +98,7 @@ class Config {
 		self::set('AM_DIR_SHARED', '/shared');
 		self::set('AM_DIR_PACKAGES', '/packages');
 		self::set('AM_DIR_CACHE', '/cache');
-		self::set('AM_DIR_TMP_CACHE', FileSystem::getTmpCacheDir());
+		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE

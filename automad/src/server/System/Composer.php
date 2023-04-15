@@ -101,7 +101,7 @@ class Composer {
 	 */
 	public function __construct() {
 		$this->pharUrl = 'https://getcomposer.org/download/' . $this->composerVersion . '/composer.phar';
-		$this->installBaseDir = AM_DIR_TMP_CACHE . '/composer/' . $this->composerVersion;
+		$this->installBaseDir = AM_DIR_TMP . '/composer/' . $this->composerVersion;
 		$this->installDirCacheFile = $this->installBaseDir . '/path';
 		$this->setUp();
 	}

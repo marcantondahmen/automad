@@ -77,10 +77,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Cache {
 	const DIR_IMAGES = AM_DIR_CACHE . '/images';
-	const DIR_PAGES = AM_DIR_TMP_CACHE . '/pages';
-	const FILE_OBJECT_API_CACHE = AM_DIR_TMP_CACHE . '/' . 'automad_admin';
-	const FILE_OBJECT_CACHE = AM_DIR_TMP_CACHE . '/' . 'automad_public';
-	const FILE_SITE_MTIME = AM_DIR_TMP_CACHE . '/' . 'site_mtime';
+	const DIR_PAGES = AM_DIR_TMP . '/pages';
+	const FILE_OBJECT_API_CACHE = AM_DIR_TMP . '/' . 'automad_admin';
+	const FILE_OBJECT_CACHE = AM_DIR_TMP . '/' . 'automad_public';
+	const FILE_SITE_MTIME = AM_DIR_TMP . '/' . 'site_mtime';
 
 	/**
 	 * The status of the Automad object cache.
