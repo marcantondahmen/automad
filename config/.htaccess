@@ -1,1 +1,1 @@
-RewriteRule ^.*$ - [F,L,NC]
+RewriteRule ^.*$ ../ [L]

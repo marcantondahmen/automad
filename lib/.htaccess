@@ -1,3 +1,1 @@
-# Block all access to lib files.
-# Note that this only works on Apache without using ProxyPassMatch for PHP-FPM.
-RewriteRule ^.*$ - [F,L,NC]
+RewriteRule ^.*$ ../ [L]
