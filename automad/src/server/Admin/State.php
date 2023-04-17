@@ -1,0 +1,144 @@
+<?php
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
+ */
+
+namespace Automad\Admin;
+
+use Automad\Core\Automad;
+use Automad\Core\Cache;
+use Automad\Core\FileSystem;
+use Automad\Core\FileUtils;
+use Automad\Core\Parse;
+use Automad\Core\Session;
+use Automad\Models\UserCollection;
+use Automad\System\Fields;
+use Automad\System\ThemeCollection;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+/**
+ * The State class contains all functionality to create the application state.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
+ */
+class State {
+	/**
+	 * The state data.
+	 */
+	private array $data;
+
+	/**
+	 * The constructor
+	 */
+	public function __construct() {
+		$this->data = $this->create();
+	}
+
+	/**
+	 * Return the current state array.
+	 *
+	 * @return array the state array
+	 */
+	public function get(): array {
+		return $this->data;
+	}
+
+	/**
+	 * Create a fresh state.
+	 *
+	 * @return array the state data
+	 */
+	private function create(): array {
+		$Automad = Automad::fromCache();
+		$UserCollection = new UserCollection();
+		$ThemeCollection = new ThemeCollection();
+		$themes = $ThemeCollection->getThemes();
+		$Cache = new Cache();
+
+		$data = array(
+			'allowedFileTypes' => FileUtils::allowedFileTypes(),
+			'contentFields' => $this->getContentFields($themes),
+			'feed' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL,
+			'mainTheme' => $Automad->Shared->get(Fields::THEME),
+			'pages' => $Automad->getNavigationMetaData(),
+			'siteMTime' => date('D, d M Y', $Cache->getSiteMTime()),
+			'sitename' => $Automad->Shared->get(Fields::SITENAME),
+			'system' => array(
+				'cache' => array(
+					'enabled' => AM_CACHE_ENABLED,
+					'lifetime' => AM_CACHE_LIFETIME,
+					'monitorDelay' => AM_CACHE_MONITOR_DELAY
+				),
+				'debug' => AM_DEBUG_ENABLED,
+				'feed' => array(
+					'enabled' => AM_FEED_ENABLED,
+					'fields' => Parse::csv(AM_FEED_FIELDS)
+				),
+				'translation' => AM_FILE_UI_TRANSLATION,
+				'users'=> array_values($UserCollection->getCollection())
+			),
+			'tags' => $Automad->getPagelist()->getTags(),
+			'themes' => $themes,
+			'user' => $UserCollection->getUser(Session::getUsername())
+		);
+
+		return $data;
+	}
+
+	/**
+	 * Get all relevant text based fields from all themes.
+	 *
+	 * @param array<int, Theme> $themes
+	 * @return array the fields array
+	 */
+	private function getContentFields(array $themes): array {
+		$fields = array();
+
+		foreach ($themes as $Theme) {
+			foreach ($Theme->templates as $file) {
+				$fields = array_merge($fields, Fields::inTemplate($file));
+			}
+		}
+
+		$fields = array_unique($fields);
+		$fields = array_filter($fields, function ($field) {
+			return preg_match('/^(\+|text)/', $field);
+		});
+
+		return array_values($fields);
+	}
+}

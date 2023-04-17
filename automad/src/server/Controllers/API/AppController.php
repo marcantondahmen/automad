@@ -36,8 +36,12 @@
 
 namespace Automad\Controllers\API;
 
+use Automad\Admin\State;
 use Automad\API\Response;
+use Automad\API\ResponseCache;
 use Automad\Core\Automad;
+use Automad\Core\Cache;
+use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
@@ -66,18 +70,22 @@ class AppController {
 	 * @return Response the Response object
 	 */
 	public static function bootstrap(): Response {
-		$Response = new Response;
-		$Automad = Automad::fromCache();
+		$ResponseCache = new ResponseCache(function () {
+			$Response = new Response;
+			$Automad = Automad::fromCache();
 
-		return $Response->setData(array(
-			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
-			'languages' => self::getLanguages(),
-			'reservedFields' => Fields::$reserved,
-			'sitename' => $Automad->Shared->get(Fields::SITENAME),
-			'text' => Text::getObject(),
-			'packageRepo' => AM_PACKAGE_REPO,
-			'version' => AM_VERSION
-		));
+			return $Response->setData(array(
+				'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
+				'languages' => self::getLanguages(),
+				'reservedFields' => Fields::$reserved,
+				'sitename' => $Automad->Shared->get(Fields::SITENAME),
+				'text' => Text::getObject(),
+				'packageRepo' => AM_PACKAGE_REPO,
+				'version' => AM_VERSION
+			));
+		});
+
+		return $ResponseCache->get();
 	}
 
 	/**
@@ -116,61 +124,14 @@ class AppController {
 		// Close session here already in order to prevent blocking other requests.
 		session_write_close();
 
-		$Response = new Response;
-		$Automad = Automad::fromCache();
-		$UserCollection = new UserCollection();
-		$ThemeCollection = new ThemeCollection();
-		$themes = $ThemeCollection->getThemes();
+		$ResponseCache = new ResponseCache(function () {
+			$Response = new Response();
+			$State = new State();
 
-		return $Response->setData(array(
-			'allowedFileTypes' => FileUtils::allowedFileTypes(),
-			'contentFields' => self::getContentFields($themes),
-			'feed' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL,
-			'mainTheme' => $Automad->Shared->get(Fields::THEME),
-			'pages' => $Automad->getNavigationMetaData(),
-			'sitename' => $Automad->Shared->get(Fields::SITENAME),
-			'system' => array(
-				'cache' => array(
-					'enabled' => AM_CACHE_ENABLED,
-					'lifetime' => AM_CACHE_LIFETIME,
-					'monitorDelay' => AM_CACHE_MONITOR_DELAY
-				),
-				'debug' => AM_DEBUG_ENABLED,
-				'feed' => array(
-					'enabled' => AM_FEED_ENABLED,
-					'fields' => Parse::csv(AM_FEED_FIELDS)
-				),
-				'translation' => AM_FILE_UI_TRANSLATION,
-				'users'=> array_values($UserCollection->getCollection()),
-				'tempDirectory' => FileSystem::getTmpDir()
-			),
-			'tags' => $Automad->getPagelist()->getTags(),
-			'themes' => $themes,
-			'user' => $UserCollection->getUser(Session::getUsername())
-		));
-	}
-
-	/**
-	 * Get all relevant text based fields from all themes.
-	 *
-	 * @param array<int, Theme> $themes
-	 * @return array the fields array
-	 */
-	private static function getContentFields(array $themes): array {
-		$fields = array();
-
-		foreach ($themes as $Theme) {
-			foreach ($Theme->templates as $file) {
-				$fields = array_merge($fields, Fields::inTemplate($file));
-			}
-		}
-
-		$fields = array_unique($fields);
-		$fields = array_filter($fields, function ($field) {
-			return preg_match('/^(\+|text)/', $field);
+			return $Response->setData($State->get());
 		});
 
-		return array_values($fields);
+		return $ResponseCache->get();
 	}
 
 	/**
