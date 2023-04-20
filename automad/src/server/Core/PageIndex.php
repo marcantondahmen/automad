@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class PageIndex {
-	const FILENAME = '.index.json';
+	const FILENAME = 'index';
 
 	/**
 	 * Append a new page to the index in case the index exists.

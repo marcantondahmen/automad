@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class DataFile {
-	const FILENAME = '.data.json';
+	const FILENAME = 'data';
 
 	/**
 	 * Get the data file path for a given page or the shared data.
@@ -76,7 +76,7 @@ class DataFile {
 	}
 
 	/**
-	 * Read a shared data from disk. If a page path is given, read page data instead.
+	 * Read shared data from disk. If a page path is given, read page data instead.
 	 * Legacy formats are supported as well.
 	 *
 	 * @param string|null $pagePath
