@@ -252,6 +252,7 @@ export class NavTreeComponent extends BaseComponent {
 			element: this,
 			initCollapseLevel: 1,
 			styles: treeStyles,
+			stateId: 'nav',
 			renderLabel: renderLabelFunction,
 			onChange: onChangeFunction,
 			confirm: confirmFunction,
