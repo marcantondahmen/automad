@@ -459,7 +459,7 @@ class FileSystem {
 	 * @psalm-return ($returnAssocArray is true ? array : object)
 	 */
 	public static function readJson(string $file, bool $returnAssocArray = true): array|object {
-		return json_decode(file_get_contents($file), $returnAssocArray);
+		return json_decode(file_get_contents($file), $returnAssocArray) ?? array();
 	}
 
 	/**

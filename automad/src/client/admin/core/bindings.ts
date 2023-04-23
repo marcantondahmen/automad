@@ -45,11 +45,6 @@ export class Binding {
 	input: InputElement;
 
 	/**
-	 * The binding name.
-	 */
-	private name: string;
-
-	/**
 	 * The modifier function that can optionally be defined to compute the value.
 	 */
 	private modifier: Function;
@@ -113,7 +108,6 @@ export class Binding {
 			options
 		);
 
-		this.name = name;
 		this.modifier = options.modifier;
 		this.storeValueAsObject = options.input === null;
 		this.onChange = options.onChange;
