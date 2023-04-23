@@ -45,6 +45,7 @@ use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\Core\Value;
+use Automad\Models\History\History;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -525,6 +526,9 @@ class Page {
 		$data[Fields::TIME_LAST_MODIFIED] = $now;
 
 		DataFile::write($data, $this->path);
+
+		$History = History::get($this->path);
+		$History->commit($data);
 
 		$newSlug = $slug;
 

@@ -69,6 +69,7 @@ import './components/Forms/FileCollection/Submit';
 import './components/Forms/ConfigFileForm';
 import './components/Forms/DeleteUsersForm';
 import './components/Forms/Form';
+import './components/Forms/HistoryModalForm';
 import './components/Forms/PageDataForm';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';

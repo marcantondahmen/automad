@@ -41,6 +41,7 @@ import {
 	html,
 	Route,
 } from '../../core';
+import { HistoryModalFormComponent } from '../Forms/HistoryModalForm';
 import { Section } from '../Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
@@ -53,6 +54,14 @@ const renderBreadcrumbs = (): string => {
 			</div>
 		</section>
 	`;
+};
+
+const renderHistoryModal = (): string => {
+	if (getPageURL() === '/') {
+		return '';
+	}
+
+	return html`<am-history-modal-form></am-history-modal-form>`;
 };
 
 const renderMovePageModal = (): string => {
@@ -108,6 +117,16 @@ const renderDropdown = (): string => {
 				<span class="${CSS.dropdownArrow}"></span>
 			</span>
 			<div class="${CSS.dropdownItems}">
+				<am-modal-toggle
+					class="${CSS.dropdownLink}"
+					${Attr.modal}="#${HistoryModalFormComponent.MODAL_ID}"
+				>
+					<am-icon-text
+						${Attr.icon}="clock-history"
+						${Attr.text}="${App.text('pageHistory')}"
+					></am-icon-text>
+				</am-modal-toggle>
+				<span class="${CSS.dropdownDivider}"></span>
 				<a
 					${Attr.bind}="pageUrlWithBase"
 					${Attr.bindTo}="href"
@@ -255,6 +274,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 				</div>
 			</section>
 			${renderMovePageModal()}${renderFileImportModal()}
+			${renderHistoryModal()}
 		`;
 	}
 }
