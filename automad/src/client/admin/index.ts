@@ -76,6 +76,7 @@ import './components/Forms/SearchForm';
 import './components/Forms/SharedDataForm';
 import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';
+import './components/Forms/TrashForm';
 
 import './components/Indicators/Menu/PrivateIndicator';
 import './components/Indicators/Navbar/DebugIndicator';
@@ -107,6 +108,7 @@ import './components/Pages/Search';
 import './components/Pages/Setup';
 import './components/Pages/Shared';
 import './components/Pages/System';
+import './components/Pages/Trash';
 
 import './components/Sidebar/Sidebar';
 import './components/Sidebar/SidebarToggle';

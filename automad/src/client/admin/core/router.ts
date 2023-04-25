@@ -44,6 +44,7 @@ export enum Route {
 	shared = 'shared',
 	packages = 'packages',
 	page = 'page',
+	trash = 'trash',
 }
 
 /**

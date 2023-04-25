@@ -155,23 +155,26 @@ const renderDropdown = (): string => {
 						${Attr.text}="${App.text('movePage')}"
 					></am-icon-text>
 				</am-modal-toggle>
+				<am-copy
+					class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
+					value="${getPageURL()}"
+				>
+					<am-icon-text
+						${Attr.icon}="clipboard-plus"
+						${Attr.text}="${App.text('copyUrlClipboard')}"
+					></am-icon-text>
+				</am-copy>
 				<am-form
 					${Attr.api}="Page/delete"
 					${Attr.confirm}="${App.text('confirmDeletePage')}"
 				>
 					<am-submit class="${CSS.dropdownLink}">
 						<am-icon-text
-							${Attr.icon}="trash2"
+							${Attr.icon}="trash3"
 							${Attr.text}="${App.text('deletePage')}"
 						></am-icon-text>
 					</am-submit>
 				</am-form>
-				<am-copy class="${CSS.dropdownLink}" value="${getPageURL()}">
-					<am-icon-text
-						${Attr.icon}="clipboard-plus"
-						${Attr.text}="${App.text('copyUrlClipboard')}"
-					></am-icon-text>
-				</am-copy>
 			</div>
 		</am-dropdown>
 	`;

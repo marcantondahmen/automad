@@ -143,6 +143,23 @@ const packagesData = (): JumpbarItemData[] => {
 };
 
 /**
+ * Return the jumpbar autocompletion data for the trash page.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
+const trashData = (): JumpbarItemData[] => {
+	return [
+		{
+			target: Route.trash,
+			value: App.text('trashTitle'),
+			title: App.text('trashTitle'),
+			icon: 'trash3',
+			cls: [CSS.modalJumpbarDivider],
+		},
+	];
+};
+
+/**
  * Return the jumpbar autocompletion data for pages, sorted by modification date.
  *
  * @returns the jumpbar autocompletion data array
@@ -186,6 +203,7 @@ const jumpbarData = (): JumpbarItemData[] => {
 		settingsData(),
 		sharedData(),
 		packagesData(),
+		trashData(),
 		pagesData()
 	);
 };

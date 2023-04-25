@@ -95,6 +95,9 @@ RewriteCond %{REQUEST_FILENAME} /data$ [OR]
 RewriteCond %{REQUEST_FILENAME} /index$ [OR] 
 RewriteCond %{REQUEST_FILENAME} /\.history$ [OR] 
 
+# Redirect trash.
+RewriteCond %{REQUEST_FILENAME} /\.trash/ [OR] 
+
 # Redirect system files 
 RewriteCond %{REQUEST_FILENAME} \.DS_Store$ [OR,NC] 
 

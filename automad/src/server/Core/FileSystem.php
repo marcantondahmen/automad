@@ -402,51 +402,11 @@ class FileSystem {
 	 * @return mixed $tmp
 	 */
 	public static function purgeCache(): mixed {
-		$trash = AM_DIR_TMP . '/trash/';
-		$n = 0;
-		$target = $trash . $n;
-
-		// Create unique subdirectory in temp.
-		while (is_dir($target)) {
-			$n++;
-			$target = $trash . $n;
-		}
-
-		if (!self::makeDir($target)) {
-			return false;
-		}
-
-		// Collect items to be removed.
 		$cacheItems = self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR);
-
-		foreach ($cacheItems as $item) {
-			$dest = $target . '/' . basename($item);
-
-			if (!@rename($item, $dest)) {
-				if (function_exists('exec')) {
-					if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-						$cmd = "move $item $dest";
-						$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
-					} else {
-						$cmd = "mv $item $dest";
-					}
-
-					$output = array();
-					$code = null;
-					@exec($cmd, $output, $code);
-
-					if ($code !== 0) {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			}
-		}
+		$target = self::trash($cacheItems);
 
 		Cache::clear();
 
-		// Return $target on success.
 		return $target;
 	}
 
@@ -510,6 +470,52 @@ class FileSystem {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Move an array of items to the trash.
+	 *
+	 * @param array $items
+	 */
+	public static function trash(array $items): string | null {
+		$trash = AM_DIR_TMP . '/trash/';
+		$n = 0;
+		$target = $trash . $n;
+
+		// Create unique subdirectory in temp.
+		while (is_dir($target)) {
+			$n++;
+			$target = $trash . $n;
+		}
+
+		if (!self::makeDir($target)) {
+			return null;
+		}
+
+		foreach ($items as $item) {
+			$dest = $target . '/' . basename($item);
+
+			if (!@rename($item, $dest)) {
+				if (function_exists('exec')) {
+					if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+						$cmd = "move $item $dest";
+						$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
+					} else {
+						$cmd = "mv $item $dest";
+					}
+
+					$output = array();
+					$code = null;
+					@exec($cmd, $output, $code);
+
+					if ($code !== 0) {
+						return null;
+					}
+				}
+			}
+		}
+
+		return $target;
 	}
 
 	/**

@@ -63,7 +63,7 @@ class Page {
 	const DATE_FORMAT = 'c';
 	const TEMPLATE_FILE_DEFAULT = 'standard/light/sidebar_left.php';
 	const TEMPLATE_NAME_404 = 'page_not_found';
-	const TRASH_DIRECTORY = AM_DIR_CACHE . '/trash';
+	const TRASH_DIRECTORY = '/.trash';
 
 	/**
 	 * The $data array holds all the information stored in the data json file and
@@ -243,7 +243,7 @@ class Page {
 
 		return (bool) FileSystem::movePageDir(
 			$this->path,
-			'..' . Page::TRASH_DIRECTORY . dirname($this->path),
+			Page::TRASH_DIRECTORY,
 			basename($this->path)
 		);
 	}
