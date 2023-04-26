@@ -45,7 +45,6 @@ use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
 use Automad\System\Fields;
-use Automad\System\Serializer;
 
 /**
  * The page history class.
@@ -171,9 +170,13 @@ class History {
 	 * @return array
 	 */
 	public function log(): array {
-		$revisions = array_values($this->revisions);
+		$log = array();
 
-		usort($revisions, function ($a, $b) {
+		foreach (array_values($this->revisions) as $Revision) {
+			$log[] = (object) array('hash' => $Revision->hash, 'time' => $Revision->time);
+		}
+
+		usort($log, function ($a, $b) {
 			if ($a->time === $b->time) {
 				return 0;
 			}
@@ -181,7 +184,7 @@ class History {
 			return $a->time < $b->time ? 1 : -1;
 		});
 
-		return $revisions;
+		return $log;
 	}
 
 	/**
