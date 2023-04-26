@@ -107,6 +107,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 	 * @async
 	 */
 	private async init(container: HTMLElement): Promise<void> {
+		const lang = navigator.language;
 		container.innerHTML = '<am-spinner></am-spinner>';
 
 		const { data } = await requestAPI('History/log', {
@@ -127,8 +128,12 @@ export class HistoryModalFormComponent extends BaseComponent {
 				rev: { time: string; hash: string }
 			) => {
 				const time = new Date(rev.time);
+				const text = time.toLocaleString(lang, {
+					dateStyle: 'full',
+					timeStyle: 'medium',
+				});
 
-				res.push({ text: time.toLocaleString(), value: rev.hash });
+				res.push({ text, value: rev.hash });
 
 				return res;
 			},
