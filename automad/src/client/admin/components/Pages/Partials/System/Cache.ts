@@ -160,9 +160,6 @@ export const renderCacheSection = (component: SystemComponent): string => {
 				<p>${App.text('systemCachePurgeInfo')}</p>
 				<am-submit class="${CSS.button}">
 					${App.text('systemCachePurge')}
-					<span class="${CSS.badge} ${CSS.badgeMuted}">
-						${App.system.tempDirectory}
-					</span>
 				</am-submit>
 			</am-form>
 		</div>

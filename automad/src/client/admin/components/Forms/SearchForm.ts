@@ -117,7 +117,7 @@ const renderFileCard = (fileResults: FileResults): string => {
 };
 
 /**
- * The delete users form.
+ * The search form.
  *
  * @extends BaseComponent
  */

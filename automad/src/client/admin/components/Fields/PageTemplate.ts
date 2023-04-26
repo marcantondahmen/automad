@@ -39,6 +39,7 @@ import {
 	TemplateFieldData,
 } from '../../types';
 import { BaseComponent } from '../Base';
+import { SelectComponent } from '../Select';
 
 /**
  * Beautify a template path to be used as name.
@@ -157,7 +158,7 @@ export const createTemplateSelect = (selectedTemplate: string): HTMLElement => {
 	const mainTheme =
 		App.themes[App.mainTheme] || App.themes[Object.keys(App.themes)[0]];
 	const themes = App.themes;
-	const wrapper = create('am-select', [CSS.button], {});
+	const wrapper = create(SelectComponent.TAG_NAME, [CSS.button], {});
 
 	create('span', [], {}, wrapper);
 

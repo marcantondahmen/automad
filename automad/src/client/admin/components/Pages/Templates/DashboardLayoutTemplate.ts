@@ -143,6 +143,11 @@ export const dashboardLayout = ({ main }: Partials) => {
 						${Attr.text}="packagesTitle"
 						${Attr.badge}="am-sidebar-outdated-packages-indicator"
 					></am-nav-item>
+					<am-nav-item
+						${Attr.page}="trash"
+						${Attr.icon}="trash3"
+						${Attr.text}="trashTitle"
+					></am-nav-item>
 				</nav>
 				<am-nav-tree></am-nav-tree>
 			</am-sidebar>

@@ -65,3 +65,9 @@ export interface PageBindings {
 	pageDataFetchTimeBinding: Binding;
 	slugBinding: Binding;
 }
+
+export interface DeletedPageMetaData {
+	title: string;
+	path: string;
+	lastModified: string;
+}
