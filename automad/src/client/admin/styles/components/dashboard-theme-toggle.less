@@ -40,8 +40,18 @@
 	padding: 0;
 	margin: 0 -0.35rem;
 
+	am-sidebar & {
+		justify-content: start;
+		padding-left: ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x} - 0.3rem)';
+		padding-top: 1rem;
+	}
+
 	&__button {
-		padding: 0 0.7rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 2.5rem;
+		height: 2.5rem;
 		color: var(--am-clr-text);
 		cursor: pointer;
 		border-radius: 0.25rem;

@@ -48,9 +48,14 @@ import { Section } from '../../Switcher/Switcher';
 export const dashboardLayout = ({ main }: Partials) => {
 	return html`
 		<div class="${CSS.layoutDashboard}">
-			<div class="${CSS.layoutDashboardNavbar} ${CSS.layoutDashboardNavbarLeft}">
+			<div
+				class="${CSS.layoutDashboardNavbar} ${CSS.layoutDashboardNavbarLeft}"
+			>
 				<div class="${CSS.navbar}">
-					<am-link ${Attr.target}="${Route.home}" class="${CSS.navbarItem}">
+					<am-link
+						${Attr.target}="${Route.home}"
+						class="${CSS.navbarItem}"
+					>
 						<am-logo></am-logo>
 					</am-link>
 					<am-modal-toggle
@@ -63,16 +68,37 @@ export const dashboardLayout = ({ main }: Partials) => {
 					</am-modal-toggle>
 				</div>
 			</div>
-			<div class="${CSS.layoutDashboardNavbar} ${CSS.layoutDashboardNavbarRight}">
+			<div
+				class="${CSS.layoutDashboardNavbar} ${CSS.layoutDashboardNavbarRight}"
+			>
 				<div class="${CSS.navbar}">
+					<am-link
+						${Attr.target}="${Route.home}"
+						class="${CSS.displaySmall} ${CSS.navbarItem}"
+					>
+						<am-logo></am-logo>
+					</am-link>
 					<am-modal-toggle
 						class="${CSS.navbarItem}"
 						${Attr.modal}="#am-jumpbar-modal"
 					>
-						<span>${App.text('jumpbarButtonText')}</span>
-						<am-key-combo-badge ${Attr.key}="J">
+						<span class="${CSS.displaySmallNone}"
+							>${App.text('jumpbarButtonText')}</span
+						>
+						<am-key-combo-badge
+							class="${CSS.displaySmallNone}"
+							${Attr.key}="J"
+						></am-key-combo-badge>
+						<span class="${CSS.displaySmall}"
+							><i class="bi bi-search"></i
+						></span>
 					</am-modal-toggle>
-					<span class="${CSS.navbarGroup}">
+					<am-sidebar-toggle
+						class="${CSS.navbarItem} ${CSS.displaySmall}"
+					>
+						<i class="bi bi-list"></i>
+					</am-sidebar-toggle>
+					<span class="${CSS.navbarGroup} ${CSS.displaySmallNone}">
 						<am-navbar-update-indicator></am-navbar-update-indicator>
 						<am-navbar-outdated-packages-indicator></am-navbar-outdated-packages-indicator>
 						<am-navbar-debug-indicator></am-navbar-debug-indicator>
@@ -86,7 +112,10 @@ export const dashboardLayout = ({ main }: Partials) => {
 								>
 									<am-dashboard-theme-toggle></am-dashboard-theme-toggle>
 								</span>
-								<am-modal-toggle class="${CSS.dropdownLink}" ${Attr.modal}="#am-about-modal">
+								<am-modal-toggle
+									class="${CSS.dropdownLink}"
+									${Attr.modal}="#am-about-modal"
+								>
 									<i class="bi bi-info-circle"></i>
 									<span>${App.text('aboutAutomad')}</span>
 								</am-modal-toggle>
@@ -112,6 +141,9 @@ export const dashboardLayout = ({ main }: Partials) => {
 					</span>
 				</div>
 			</div>
+			<am-sidebar-toggle
+				class="${CSS.layoutDashboardSidebarBackdrop}"
+			></am-sidebar-toggle>
 			<am-sidebar class="${CSS.layoutDashboardSidebar}">
 				<nav class="${CSS.nav}">
 					<span class="${CSS.navItem}">
@@ -150,6 +182,30 @@ export const dashboardLayout = ({ main }: Partials) => {
 					></am-nav-item>
 				</nav>
 				<am-nav-tree></am-nav-tree>
+				<div class="${CSS.nav} ${CSS.displaySmall}">
+					<span class="${CSS.navItem}">
+						<am-modal-toggle
+							class="${CSS.navLink}"
+							${Attr.modal}="#am-about-modal"
+						>
+							<i class="bi bi-info-circle"></i>
+							<span>${App.text('aboutAutomad')}</span>
+						</am-modal-toggle>
+					</span>
+					<span class="${CSS.navItem}">
+						<am-form ${Attr.api}="Session/logout"></am-form>
+						<am-submit
+							class="${CSS.navLink}"
+							${Attr.form}="Session/logout"
+						>
+							<i class="bi bi-box-arrow-right"></i>
+							<span>
+								${App.text('signOut')} ${App.user.name}
+							</span>
+						</am-submit>
+					</span>
+					<am-dashboard-theme-toggle></am-dashboard-theme-toggle>
+				</div>
 			</am-sidebar>
 			<div class="${CSS.layoutDashboardMain}">${main}</div>
 			<footer class="${CSS.layoutDashboardFooter}">
@@ -163,9 +219,11 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<span>${App.user.name}</span>
 					</span>
 					<span>&mdash;</span>
-					<am-modal-toggle class="${CSS.cursorPointer}" ${Attr.modal}="#am-about-modal">
-						Automad
-						${App.version}
+					<am-modal-toggle
+						class="${CSS.cursorPointer}"
+						${Attr.modal}="#am-about-modal"
+					>
+						Automad ${App.version}
 					</am-modal-toggle>
 				</div>
 			</footer>
@@ -183,44 +241,44 @@ export const dashboardLayout = ({ main }: Partials) => {
 						></am-modal-close>
 					</div>
 					<div class="${CSS.modalBody}">
-						${
-							createField(
-								'am-input',
-								null,
-								{
-									key: `new-${App.reservedFields.TITLE}`,
-									name: App.reservedFields.TITLE,
-									label: titleCase(App.reservedFields.TITLE),
-									value: '',
-								},
-								[],
-								{ required: '' }
-							).outerHTML
-						}
+						${createField(
+							'am-input',
+							null,
+							{
+								key: `new-${App.reservedFields.TITLE}`,
+								name: App.reservedFields.TITLE,
+								label: titleCase(App.reservedFields.TITLE),
+								value: '',
+							},
+							[],
+							{ required: '' }
+						).outerHTML}
 						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}">${App.text('pageTemplate')}</label>
+							<label class="${CSS.fieldLabel}"
+								>${App.text('pageTemplate')}</label
+							>
 							${createTemplateSelect('').outerHTML}
 						</div>
-						${
-							createField('am-toggle-large', null, {
-								key: `new-${App.reservedFields.PRIVATE}`,
-								name: App.reservedFields.PRIVATE,
-								label: App.text('keepPagePrivate'),
-								value: true,
-							}).outerHTML
-						}
+						${createField('am-toggle-large', null, {
+							key: `new-${App.reservedFields.PRIVATE}`,
+							name: App.reservedFields.PRIVATE,
+							label: App.text('keepPagePrivate'),
+							value: true,
+						}).outerHTML}
 						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}">${App.text('selectTargetNewPage')}</label>
+							<label class="${CSS.fieldLabel}"
+								>${App.text('selectTargetNewPage')}</label
+							>
 							<am-page-select-tree></am-page-select-tree>
 						</div>
 					</div>
 					<div class="${CSS.modalFooter}">
-						<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
+						<am-modal-close
+							class="${CSS.button} ${CSS.buttonPrimary}"
+						>
 							${App.text('cancel')}
 						</am-modal-close>
-						<am-submit
-							class="${CSS.button} ${CSS.buttonAccent}"
-						>
+						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('addPage')}
 						</am-submit>
 					</div>
@@ -232,21 +290,25 @@ export const dashboardLayout = ({ main }: Partials) => {
 			<div class="${CSS.modalDialog} ${CSS.modalDialogSmall}">
 				<div class="${CSS.modalBody}">
 					<am-logo></am-logo>
-					<hr>
+					<hr />
 					<strong>Automad</strong>
-					is a modern flat-file content management system and templating engine
-					<hr>
+					is a modern flat-file content management system and
+					templating engine
+					<hr />
 					<span class="${CSS.flex} ${CSS.flexBetween}">
-						<a href="https://automad.org" target="_blank" class="${
-							CSS.textLink
-						}">Open Website</a>
-						<a 
-							href="https://automad.org/release-notes" 
+						<a
+							href="https://automad.org"
+							target="_blank"
+							class="${CSS.textLink}"
+							>Open Website</a
+						>
+						<a
+							href="https://automad.org/release-notes"
 							class="${CSS.badge}"
 							target="_blank"
 						>
 							${App.version}
-						</a> 
+						</a>
 					</span>
 				</div>
 			</div>

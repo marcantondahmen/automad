@@ -54,6 +54,7 @@ import {
 import { applyTheme, getTheme } from '../core/theme';
 import { BaseComponent } from './Base';
 import { ModalComponent } from './Modal/Modal';
+import { SidebarComponent } from './Sidebar/Sidebar';
 
 /**
  * The root app component.
@@ -83,6 +84,7 @@ export class RootComponent extends BaseComponent {
 	 * @param url
 	 */
 	setView(url: URL): void {
+		SidebarComponent.toggle(false);
 		window.history.pushState(null, null, url);
 		this.update();
 	}

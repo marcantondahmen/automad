@@ -156,11 +156,7 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * The dropdown items CSS class.
 	 */
-	protected itemsClasses = [
-		CSS.dropdownItems,
-		CSS.dropdownItemsAutocomplete,
-		CSS.dropdownItemsStretch,
-	];
+	protected itemsClasses = [CSS.dropdownItems, CSS.dropdownItemsAutocomplete];
 
 	/**
 	 * The link class.

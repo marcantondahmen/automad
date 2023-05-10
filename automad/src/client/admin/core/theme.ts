@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { query } from '.';
+import { EventName, fire, query } from '.';
 
 export enum DashboardTheme {
 	light = 'light',
@@ -68,6 +68,8 @@ export const getTheme = (): DashboardTheme => {
 export const setTheme = (theme: DashboardTheme): void => {
 	localStorage.setItem('dashboard-theme', theme);
 	applyTheme(theme);
+
+	fire(EventName.dashboardThemeChange);
 };
 
 /**

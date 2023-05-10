@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, html, listen, titleCase } from '../core';
+import { Attr, create, EventName, html, listen, titleCase } from '../core';
 import { DashboardTheme, getTheme, setTheme } from '../core/theme';
 import { BaseComponent } from './Base';
 
@@ -48,6 +48,14 @@ class DashboardThemeToggleComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add('am-c-dashboard-theme-toggle');
 		this.render();
+
+		this.addListener(
+			listen(
+				window,
+				EventName.dashboardThemeChange,
+				this.render.bind(this)
+			)
+		);
 	}
 
 	/**
@@ -58,8 +66,8 @@ class DashboardThemeToggleComponent extends BaseComponent {
 
 		this.innerHTML = '';
 		this.renderThemeToggle(DashboardTheme.light, 'sun');
-		this.renderThemeToggle(DashboardTheme.lowContrast, 'cloud-moon');
 		this.renderThemeToggle(DashboardTheme.dark, 'moon');
+		this.renderThemeToggle(DashboardTheme.lowContrast, 'brightness-low');
 
 		setTimeout(() => {
 			document.documentElement.classList.remove('am-u-no-transition');

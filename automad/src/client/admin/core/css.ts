@@ -83,6 +83,8 @@ export const enum CSS {
 	cursorPointer = 'am-u-cursor-pointer',
 
 	displayNone = 'am-u-display-none',
+	displaySmall = 'am-u-display-small',
+	displaySmallNone = 'am-u-display-small-none',
 
 	dropdown = 'am-c-dropdown',
 	dropdownOpen = 'am-c-dropdown--open',
@@ -159,6 +161,8 @@ export const enum CSS {
 	layoutDashboardNavbarLeft = 'am-l-dashboard__navbar--left',
 	layoutDashboardNavbarRight = 'am-l-dashboard__navbar--right',
 	layoutDashboardSidebar = 'am-l-dashboard__sidebar',
+	lauoutDashboardSidebarOpen = 'am-body-sidebar-open',
+	layoutDashboardSidebarBackdrop = 'am-l-dashboard__sidebar-backdrop',
 	layoutDashboardMain = 'am-l-dashboard__main',
 	layoutDashboardSection = 'am-l-dashboard__section',
 	layoutDashboardSectionSticky = 'am-l-dashboard__section--sticky',

@@ -45,6 +45,7 @@ export const enum EventName {
 	autocompleteSelect = 'AutomadAutocompleteSelect',
 	beforeUpdateView = 'AutomadBeforeUpdateView',
 	changeByBinding = 'AutomadChangeByBinding',
+	dashboardThemeChange = 'AutomadDashboardThemeChange',
 	fileCollectionRender = 'AutomadFileCollectionRender',
 	filesChangeOnServer = 'AutomadFilesChangeOnServer',
 	modalClose = 'AutomadModalClose',

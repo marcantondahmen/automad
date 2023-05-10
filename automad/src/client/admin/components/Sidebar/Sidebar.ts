@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { debounce, listen } from '../../core';
+import { CSS, debounce, listen } from '../../core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -58,7 +58,31 @@ import { BaseComponent } from '../Base';
  *
  * @extends BaseComponent
  */
-class SidebarComponent extends BaseComponent {
+export class SidebarComponent extends BaseComponent {
+	/**
+	 * The sidebar state.
+	 * Note that this static property assumes that there is only one sidebar component
+	 * in the document.
+	 *
+	 * @static
+	 */
+	static open = false;
+
+	/**
+	 * Toggle the sidebar from anywhere.
+	 *
+	 * @param [state]
+	 * @static
+	 */
+	static toggle(state?: boolean): void {
+		const open = state ?? !SidebarComponent.open;
+
+		document.body.classList.toggle(CSS.lauoutDashboardSidebarOpen, open);
+		document.body.classList.toggle(CSS.overflowHidden, open);
+
+		SidebarComponent.open = open;
+	}
+
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
