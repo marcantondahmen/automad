@@ -147,8 +147,6 @@ class FileCardComponent extends BaseComponent {
 				<i class="bi bi-file-earmark bi-filetype-${file.extension}"></i>
 			</am-file-info>
 		`;
-
-		return '';
 	}
 
 	/**

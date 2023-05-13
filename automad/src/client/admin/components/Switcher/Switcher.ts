@@ -84,6 +84,8 @@ export const setActiveSection = (section: string): void => {
 
 /**
  * A switcher menu component. A switcher can have any layout and is not more that a container with items.
+ * Note that there can only be one switcher per rendered page. It is however possible to have a second switcher
+ * including the same items for a different device resolution in order to keep the UI responsive.
  *
  * @example
  * <am-switcher>
