@@ -92,7 +92,6 @@ export const enum CSS {
 	dropdownContent = 'am-c-dropdown__content',
 	dropdownDivider = 'am-c-dropdown__divider',
 	dropdownItems = 'am-c-dropdown__items',
-	dropdownItemsStretch = 'am-c-dropdown__items--stretch',
 	dropdownItemsAutocomplete = 'am-c-dropdown__items--autocomplete',
 	dropdownLink = 'am-c-dropdown__link',
 

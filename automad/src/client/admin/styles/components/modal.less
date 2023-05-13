@@ -50,6 +50,10 @@
 	overflow: auto;
 	cursor: default;
 
+	@media (max-width: @am-breakpoint-small-max) {
+		padding-top: var(--am-body-padding-x);
+	}
+
 	&__dialog {
 		position: relative;
 		display: flex;

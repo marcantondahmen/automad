@@ -214,7 +214,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 				<div class="${CSS.grid}" style="--min: 17rem;">
 					${this.renderOverviewCards(this.sectionData.slice(0, 4))}
 				</div>
-				<div class="${CSS.grid}" style="--min: 12rem;">
+				<div class="${CSS.grid}" style="--min: 13rem;">
 					${this.renderOverviewCards(this.sectionData.slice(4, 7))}
 				</div>
 			</am-switcher-section>
@@ -238,7 +238,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 				>
 					<div class="${CSS.flexItemGrow}">
 						<span
-							class="${CSS.cardIcon} ${item.narrowIcon
+							class="${CSS.cardIcon} ${CSS.displaySmallNone} ${item.narrowIcon
 								? CSS.cardIconNarrow
 								: ''}"
 						>

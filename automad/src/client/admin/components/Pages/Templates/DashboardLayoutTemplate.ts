@@ -78,26 +78,28 @@ export const dashboardLayout = ({ main }: Partials) => {
 					>
 						<am-logo></am-logo>
 					</am-link>
-					<am-modal-toggle
-						class="${CSS.navbarItem}"
-						${Attr.modal}="#am-jumpbar-modal"
-					>
-						<span class="${CSS.displaySmallNone}"
-							>${App.text('jumpbarButtonText')}</span
+					<div class="${CSS.flex}">
+						<am-modal-toggle
+							class="${CSS.navbarItem}"
+							${Attr.modal}="#am-jumpbar-modal"
 						>
-						<am-key-combo-badge
-							class="${CSS.displaySmallNone}"
-							${Attr.key}="J"
-						></am-key-combo-badge>
-						<span class="${CSS.displaySmall}"
-							><i class="bi bi-search"></i
-						></span>
-					</am-modal-toggle>
-					<am-sidebar-toggle
-						class="${CSS.navbarItem} ${CSS.displaySmall}"
-					>
-						<i class="bi bi-list"></i>
-					</am-sidebar-toggle>
+							<span class="${CSS.displaySmallNone}"
+								>${App.text('jumpbarButtonText')}</span
+							>
+							<am-key-combo-badge
+								class="${CSS.displaySmallNone}"
+								${Attr.key}="J"
+							></am-key-combo-badge>
+							<span class="${CSS.displaySmall}"
+								><i class="bi bi-search"></i
+							></span>
+						</am-modal-toggle>
+						<am-sidebar-toggle
+							class="${CSS.navbarItem} ${CSS.displaySmall}"
+						>
+							<i class="bi bi-list"></i>
+						</am-sidebar-toggle>
+					</div>
 					<span class="${CSS.navbarGroup} ${CSS.displaySmallNone}">
 						<am-navbar-update-indicator></am-navbar-update-indicator>
 						<am-navbar-outdated-packages-indicator></am-navbar-outdated-packages-indicator>
@@ -166,7 +168,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 					></am-nav-item>
 					<am-nav-item
 						${Attr.page}="shared"
-						${Attr.icon}="file-medical"
+						${Attr.icon}="asterisk"
 						${Attr.text}="sharedTitle"
 					></am-nav-item>
 					<am-nav-item
@@ -215,7 +217,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						${Attr.tooltip}="${App.user.email}"
 						${Attr.tooltipOptions}="placement: top"
 					>
-						<i class="bi bi-person-square"></i>
+						<i class="bi bi-person-circle"></i>
 						<span>${App.user.name}</span>
 					</span>
 					<span>&mdash;</span>

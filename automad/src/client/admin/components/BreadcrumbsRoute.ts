@@ -75,13 +75,13 @@ class BreadcrumbsRouteComponent extends BaseComponent {
 						class="${CSS.breadcrumbsItem}"
 						${Attr.target}="${Route.home}"
 					>
-						${App.text('dashboardTitle')}
+						<span>${App.text('dashboardTitle')}</span>
 					</am-link>
 					<am-link
 						class="${CSS.breadcrumbsItem}"
 						${Attr.target}="${this.elementAttributes[Attr.target]}"
 					>
-						${this.elementAttributes[Attr.text]}
+						<span>${this.elementAttributes[Attr.text]}</span>
 					</am-link>
 				</div>
 			</div>

@@ -123,12 +123,7 @@ class SwitcherDropdownComponent extends BaseComponent {
 			dropdown
 		);
 
-		const items = create(
-			'div',
-			[CSS.dropdownItems, CSS.dropdownItemsStretch],
-			{},
-			dropdown
-		);
+		const items = create('div', [CSS.dropdownItems], {}, dropdown);
 
 		data.items.forEach((item: SwitcherDropdownItem) => {
 			items.innerHTML += html`

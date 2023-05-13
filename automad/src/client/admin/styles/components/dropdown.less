@@ -55,8 +55,11 @@
 		z-index: 1000;
 		display: flex;
 		flex-direction: column;
+		min-width: 100%;
+		width: auto;
 		padding: @padding-y 0;
 		top: ~'calc(100% + var(--space))';
+		left: 0;
 		opacity: 0;
 		pointer-events: none;
 		transform: translateY(-0.5rem);
@@ -66,10 +69,6 @@
 		box-shadow: @am-shadow;
 		border: @am-border;
 		overflow: hidden;
-
-		&--stretch {
-			width: 100%;
-		}
 
 		&:empty {
 			display: none;
@@ -88,6 +87,7 @@
 	}
 
 	&--right &__items {
+		left: auto;
 		right: 0;
 	}
 

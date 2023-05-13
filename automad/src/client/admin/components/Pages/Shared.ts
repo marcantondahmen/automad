@@ -44,34 +44,70 @@ const renderMenu = (): string => {
 			<div
 				class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentRow}"
 			>
-				<am-switcher class="${CSS.menu}">
-					<am-switcher-link
-						class="${CSS.menuItem}"
-						${Attr.section}="${Section.settings}"
+				<am-switcher>
+					<div class="${CSS.menu} ${CSS.displaySmallNone}">
+						<am-switcher-link
+							class="${CSS.menuItem}"
+							${Attr.section}="${Section.settings}"
+						>
+							${App.text('fieldsSettings')}
+						</am-switcher-link>
+						<am-switcher-link
+							class="${CSS.menuItem}"
+							${Attr.section}="${Section.text}"
+						>
+							${App.text('fieldsContent')}
+						</am-switcher-link>
+						<am-switcher-link
+							class="${CSS.menuItem}"
+							${Attr.section}="${Section.colors}"
+						>
+							${App.text('fieldsColors')}
+						</am-switcher-link>
+						<am-switcher-link
+							class="${CSS.menuItem}"
+							${Attr.section}="${Section.files}"
+						>
+							${App.text('uploadedFiles')}
+							<span class="${CSS.badge}">
+								<am-file-count></am-file-count>
+							</span>
+						</am-switcher-link>
+					</div>
+					<am-dropdown
+						class="${CSS.displaySmall} ${CSS.button} ${CSS.buttonPrimary}"
 					>
-						${App.text('fieldsSettings')}
-					</am-switcher-link>
-					<am-switcher-link
-						class="${CSS.menuItem}"
-						${Attr.section}="${Section.text}"
-					>
-						${App.text('fieldsContent')}
-					</am-switcher-link>
-					<am-switcher-link
-						class="${CSS.menuItem}"
-						${Attr.section}="${Section.colors}"
-					>
-						${App.text('fieldsColors')}
-					</am-switcher-link>
-					<am-switcher-link
-						class="${CSS.menuItem}"
-						${Attr.section}="${Section.files}"
-					>
-						${App.text('uploadedFiles')}
-						<span class="${CSS.badge}">
-							<am-file-count></am-file-count>
+						<span class="${CSS.iconText}">
+							<am-switcher-label></am-switcher-label>
+							<span class="${CSS.dropdownArrow}"></span>
 						</span>
-					</am-switcher-link>
+						<div class="${CSS.dropdownItems}">
+							<am-switcher-link
+								class="${CSS.dropdownLink}"
+								${Attr.section}="${Section.settings}"
+							>
+								${App.text('fieldsSettings')}
+							</am-switcher-link>
+							<am-switcher-link
+								class="${CSS.dropdownLink}"
+								${Attr.section}="${Section.text}"
+							>
+								${App.text('fieldsContent')}
+							</am-switcher-link>
+							<am-switcher-link
+								class="${CSS.dropdownLink}"
+								${Attr.section}="${Section.colors}"
+							>
+								${App.text('fieldsColors')}
+							</am-switcher-link>
+							<am-switcher-link
+								class="${CSS.dropdownLink}"
+								${Attr.section}="${Section.files}"
+							>
+								${App.text('uploadedFiles')}
+							</am-switcher-link>
+						</div>
+					</am-dropdown>
 				</am-switcher>
 				<am-filter placeholder="filterContent"></am-filter>
 			</div>
@@ -113,7 +149,7 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 						<am-upload></am-upload>
 						<div class="${CSS.flex} ${CSS.flexGap}">
 							<am-modal-toggle
-								class="${CSS.button} ${CSS.buttonAccent}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 								${Attr.modal}="#am-file-import-modal"
 							>
 								${App.text('importFromUrl')}

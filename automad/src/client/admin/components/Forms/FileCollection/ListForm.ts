@@ -60,7 +60,7 @@ export class FileCollectionListFormComponent extends FormComponent {
 		super.init();
 
 		this.classList.add(CSS.grid);
-		this.setAttribute('style', '--min: 12rem; --aspect: 1.25;');
+		this.setAttribute('style', '--min: 11.5rem; --aspect: 1.25;');
 
 		this.addListener(
 			listen(

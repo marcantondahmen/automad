@@ -62,8 +62,8 @@ export class SwitcherLabelComponent extends BaseComponent {
 				// Prefer links in menus and dropdowns before all other links
 				// in order to exclude overview cards as links.
 				this.innerHTML = (
-					query(`${menu} ${getLink()}`) ||
 					query(`${dropdown} ${getLink()}`) ||
+					query(`${menu} ${getLink()}`) ||
 					query(getLink())
 				).innerHTML;
 			})
