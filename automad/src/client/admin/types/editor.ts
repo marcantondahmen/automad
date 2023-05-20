@@ -36,9 +36,10 @@ import { API, BlockAPI, OutputData, ToolConfig } from '@editorjs/editorjs';
 import { KeyValueMap } from '.';
 import {
 	SectionBackgroundBlendModes,
+	SectionBorderStyles,
 	SectionJustifyContentOptions,
-} from '../components/Fields/Editor/Blocks/Section';
-import { fractions } from '../components/Fields/Editor/Tunes/Layout';
+} from '../editor/blocks/Section';
+import { fractions } from '../editor/tunes/Layout';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
@@ -60,7 +61,9 @@ export type SectionJustifyContentOption =
 	keyof typeof SectionJustifyContentOptions;
 
 export type SectionBackgroundBlendMode =
-	typeof SectionBackgroundBlendModes[number];
+	(typeof SectionBackgroundBlendModes)[number];
+
+export type SectionBorderStyle = (typeof SectionBorderStyles)[number];
 
 export interface SectionStyle {
 	card: boolean;
@@ -72,6 +75,7 @@ export interface SectionStyle {
 	borderColor: string;
 	borderWidth: string;
 	borderRadius: string;
+	borderStyle: SectionBorderStyle;
 	backgroundImage: string;
 	paddingTop: string;
 	paddingBottom: string;

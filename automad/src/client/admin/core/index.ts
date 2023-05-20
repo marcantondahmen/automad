@@ -39,6 +39,7 @@ export * from './events';
 export * from './factory';
 export * from './form';
 export * from './html';
+export * from './logger';
 export * from './notify';
 export * from './request';
 export * from './router';

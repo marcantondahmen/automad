@@ -115,16 +115,16 @@ export const createEditor = (
 	config: EditorConfig,
 	isSectionBlock: boolean
 ): EditorJSComponent => {
-	const holder = create(
+	const editorJS = create(
 		EditorJSComponent.TAG_NAME,
 		[],
 		{},
 		container
 	) as EditorJSComponent;
 
-	holder.init(data, config, isSectionBlock);
+	editorJS.init(data, config, isSectionBlock);
 
-	return holder;
+	return editorJS;
 };
 
 /**

@@ -46,15 +46,15 @@ import {
 import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData } from '../../types';
 import { createEditor } from '../../core';
-import { LayoutTune } from './Editor/Tunes/Layout';
 import { getLogger } from '../../core/logger';
+import { LayoutTune } from '../../editor/tunes/Layout';
 
 /**
  * A block editor field.
  *
  * @extends BaseFieldComponent
  */
-class EditorComponent extends BaseFieldComponent {
+export class EditorComponent extends BaseFieldComponent {
 	/**
 	 * The tag name.
 	 *

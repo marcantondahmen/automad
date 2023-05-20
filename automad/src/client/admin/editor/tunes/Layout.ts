@@ -42,8 +42,8 @@ import {
 	listen,
 	query,
 	queryAll,
-} from '../../../../core';
-import { LayoutTuneData, SelectComponentOption } from '../../../../types';
+} from '../../core';
+import { LayoutTuneData, SelectComponentOption } from '../../types';
 import { BaseTune } from './BaseTune';
 
 /**

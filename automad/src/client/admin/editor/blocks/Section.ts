@@ -38,15 +38,18 @@ import {
 	Bindings,
 	collectFieldData,
 	create,
+	createEditor,
 	createField,
 	createSelect,
 	CSS,
+	getLogger,
 	html,
 	listen,
 	query,
 	queryAll,
 	resolveFileUrl,
-} from '../../../../core';
+	uniqueId,
+} from '../../core';
 import {
 	EditorOutputData,
 	FieldType,
@@ -54,16 +57,13 @@ import {
 	SectionJustifyContentOption,
 	SectionStyle,
 	SelectComponentOption,
-} from '../../../../types';
+} from '../../types';
 import { BaseBlock } from './BaseBlock';
-import { createEditor } from '../../../../core';
-import { ModalComponent } from '../../../Modal/Modal';
-import { uniqueId } from '../../../../core';
-import iconFlexGap from '../../../../svg/icons/flex-gap.svg';
-import iconMinWidth from '../../../../svg/icons/min-width.svg';
-import iconFlexJustyifyContent from '../../../../svg/icons/flex-justify-content.svg';
-import { EditorJSComponent } from '../../../EditorJS';
-import { getLogger } from '../../../../core/logger';
+import iconFlexGap from '../../svg/icons/flex-gap.svg';
+import iconMinWidth from '../../svg/icons/min-width.svg';
+import iconFlexJustyifyContent from '../../svg/icons/flex-justify-content.svg';
+import { EditorJSComponent } from '../../components/EditorJS';
+import { ModalComponent } from '../../components/Modal/Modal';
 
 /**
  * The flexbox option for "justify-content".

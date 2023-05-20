@@ -33,7 +33,7 @@
  */
 
 import { API, BlockAPI, BlockTune, ToolConfig } from '@editorjs/editorjs';
-import { BlockTuneConstructorOptions } from '../../../../types';
+import { BlockTuneConstructorOptions } from '../../types';
 
 export abstract class BaseTune<DataType extends object> implements BlockTune {
 	protected api: API;

@@ -35,12 +35,12 @@
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { EditorOutputData } from '../types';
 import { BaseComponent } from './Base';
-import { SectionBlock } from '../components/Fields/Editor/Blocks/Section';
-import { LayoutTune } from '../components/Fields/Editor/Tunes/Layout';
-import { DragDrop } from '../components/Fields/Editor/Plugins/DragDrop';
 
 // @ts-ignore
 import Header from '@editorjs/header';
+import { LayoutTune } from '../editor/tunes/Layout';
+import { SectionBlock } from '../editor/blocks/Section';
+import { DragDrop } from '../editor/plugins/DragDrop';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
