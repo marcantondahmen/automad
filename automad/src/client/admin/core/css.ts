@@ -98,10 +98,13 @@ export const enum CSS {
 	dropdownArrow = 'am-e-dropdown-arrow',
 
 	editorBlockSection = 'am-c-ed-bl-section',
+	editorBlockSectionLabel = 'am-c-ed-bl-section__label',
 	editorBlockSectionSettings = 'am-c-ed-bl-section__toolbar',
 	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
 
-	editorLayoutBase = 'am-layout',
+	editorPopoverForm = 'am-c-ed-popover__form',
+
+	editorStyleBase = 'am-style',
 
 	feedFieldSelect = 'am-c-feed-field-select',
 	feedFieldSelectMuted = 'am-c-feed-field-select--muted',

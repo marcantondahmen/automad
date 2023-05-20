@@ -1,0 +1,114 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-ed-popover {
+	&__form {
+		padding: 0 var(--space);
+	}
+}
+
+.ce-popover {
+	--space: 0.4rem;
+	padding: 0;
+	overflow: hidden;
+	color: var(--am-clr-text);
+	background-color: var(--am-clr-background);
+	border: @am-border;
+
+	&--opened {
+		max-height: none;
+	}
+
+	& > * {
+		margin: 0;
+		margin-top: var(--space) !important;
+	}
+
+	&__item {
+		display: flex;
+		gap: 0.3rem;
+		border-radius: 0;
+
+		&-icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 1.75rem;
+			height: 1.75rem;
+			margin: 0;
+			color: var(--am-clr-text);
+			background-color: transparent;
+			box-shadow: none;
+
+			& svg {
+				width: 1.75rem;
+				height: 1.75rem;
+			}
+		}
+
+		&:hover {
+			color: var(--am-clr-selected-text) !important;
+			background-color: var(--am-clr-selected-background) !important;
+		}
+	}
+
+	& .cdx-search-field {
+		position: relative;
+		padding: 0 var(--space);
+		height: auto;
+		border: none;
+		background-color: transparent;
+
+		&__icon {
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: @am-form-height;
+			height: 100%;
+			top: 0;
+			left: var(--space);
+			color: var(--am-clr-muted);
+		}
+
+		&__input {
+			&:extend(.am-f-input);
+			padding-left: @am-form-height !important;
+
+			&:focus {
+				&:extend(.am-f-input:focus);
+			}
+		}
+	}
+}

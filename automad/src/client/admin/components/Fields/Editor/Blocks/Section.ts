@@ -45,6 +45,7 @@ import {
 	listen,
 	query,
 	queryAll,
+	resolveFileUrl,
 } from '../../../../core';
 import {
 	EditorOutputData,
@@ -99,6 +100,18 @@ export const SectionBackgroundBlendModes = [
 ] as const;
 
 /**
+ * Border styles for sections.
+ */
+export const SectionBorderStyles = [
+	'solid',
+	'dashed',
+	'dotted',
+	'double',
+	'groove',
+	'ridge',
+];
+
+/**
  * Section style defaults.
  */
 export const styleDefaults: SectionStyle = {
@@ -109,13 +122,23 @@ export const styleDefaults: SectionStyle = {
 	backgroundColor: '',
 	backgroundBlendMode: 'normal',
 	borderColor: '',
-	borderWidth: '',
-	borderRadius: '',
+	borderWidth: '0',
+	borderRadius: '0',
+	borderStyle: 'solid',
 	backgroundImage: '',
-	paddingTop: '',
-	paddingBottom: '',
+	paddingTop: '0',
+	paddingBottom: '0',
 	overflowHidden: false,
 } as const;
+
+/**
+ * Section style defaults that are used for the editor UI.
+ */
+const editorStyleDefaults = Object.assign({}, styleDefaults, {
+	color: 'inherit',
+	backgroundColor: 'transparent',
+	borderColor: 'transparent',
+});
 
 /**
  * The Section block that create a new editor inside a parent editor
@@ -139,7 +162,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 	static get toolbox() {
 		return {
-			title: 'Section',
+			title: App.text('editorBlockSection'),
 			icon: '<i class="bi bi-plus-square-dotted"></i>',
 		};
 	}
@@ -359,7 +382,39 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		field('am-color', 'color', 'textColor', group2);
 		field('am-color', 'backgroundColor', 'backgroundColor', group2);
-		field('am-color', 'borderColor', 'borderColor', group2);
+
+		const group3 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+
+		const borderStyleId = uniqueId();
+		const borderStyle = create(
+			'div',
+			[CSS.field],
+			{},
+			group3,
+			html`<div>
+				<label for="${borderStyleId}" class="${CSS.fieldLabel}">
+					${App.text('borderStyle')}
+				</label>
+			</div>`
+		);
+
+		createSelect(
+			SectionBorderStyles.reduce(
+				(
+					res: SelectComponentOption[],
+					style: string
+				): SelectComponentOption[] => {
+					return [...res, { value: style }];
+				},
+				[]
+			),
+			this.data.style.borderStyle,
+			borderStyle,
+			'borderStyle',
+			borderStyleId
+		);
+
+		field('am-color', 'borderColor', 'borderColor', group3);
 
 		field('am-image-select', 'backgroundImage', 'backgroundImage', body);
 
@@ -369,7 +424,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			[CSS.field],
 			{},
 			body,
-			html`<label for="${blendModeId}">Background Blendmode</label>`
+			html`<div>
+				<label for="${blendModeId}" class="${CSS.fieldLabel}">
+					Background Blendmode
+				</label>
+			</div>`
 		);
 
 		createSelect(
@@ -388,13 +447,13 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			blendModeId
 		);
 
-		const group3 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
-		field('am-number-unit', 'borderWidth', 'borderWidth', group3);
-		field('am-number-unit', 'borderRadius', 'borderRadius', group3);
 		const group4 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+		field('am-number-unit', 'borderWidth', 'borderWidth', group4);
+		field('am-number-unit', 'borderRadius', 'borderRadius', group4);
+		const group5 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
-		field('am-number-unit', 'paddingTop', 'paddingTop', group4);
-		field('am-number-unit', 'paddingBottom', 'paddingBottom', group4);
+		field('am-number-unit', 'paddingTop', 'paddingTop', group5);
+		field('am-number-unit', 'paddingBottom', 'paddingBottom', group5);
 
 		Bindings.connectElements(body);
 
@@ -409,7 +468,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 	private setStyle(): void {
 		const { style, gap, justify, minBlockWidth } = this.data;
-		const baseClass = CSS.editorLayoutBase;
+		const baseClass = CSS.editorStyleBase;
 		const classes: string[] = [CSS.editorBlockSectionEditor];
 
 		classes.push(`${baseClass}--justify-${justify}`);
@@ -437,20 +496,30 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		[
 			'color',
 			'backgroundColor',
-			'backgroundImage',
 			'backgroundBlendMode',
 			'borderColor',
 			'borderWidth',
 			'borderRadius',
+			'borderStyle',
 			'paddingTop',
 			'paddingBottom',
 		].forEach((prop: string) => {
 			const value = style[prop as keyof SectionStyle];
 
-			if (value) {
-				inline.push(`--${prop}: ${value};`);
-			}
+			inline.push(
+				`--${prop}: ${
+					value || editorStyleDefaults[prop as keyof SectionStyle]
+				};`
+			);
 		});
+
+		if (style['backgroundImage']) {
+			const url = resolveFileUrl(style['backgroundImage']);
+
+			inline.push(`--backgroundImage: url(${url});`);
+		} else {
+			inline.push(`--backgroundImage: none;`);
+		}
 
 		if (gap) {
 			inline.push(`--gap: ${gap};`);

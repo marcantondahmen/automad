@@ -134,7 +134,7 @@ class EditorComponent extends BaseFieldComponent {
 					const block = target.closest<HTMLElement>('.ce-block');
 
 					LayoutTune.updateToolbarPosition(block);
-				}, 20),
+				}, 10),
 				'.ce-block'
 			)
 		);

@@ -33,11 +33,15 @@
  */
 
 .codex-editor {
-	padding: 2px;
 	border: @am-border;
-	border-style: dashed;
+	--space-left: @am-bl-editor-toolbar-icons-width;
+
+	& & {
+		--space-left: 0;
+	}
 
 	am-editor > div > & {
+		border: @am-border;
 		border-style: solid;
 		border-radius: @am-bl-editor-radius;
 	}
@@ -46,6 +50,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 2px;
-		padding: 2px;
+		padding-left: var(--space-left);
 	}
 }

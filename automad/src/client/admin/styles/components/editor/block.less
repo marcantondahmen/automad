@@ -33,19 +33,36 @@
  */
 
 .ce-block {
+	position: relative;
 	flex-basis: 100%;
 	flex-grow: 0;
 	min-width: 8rem;
 	margin: 0 !important;
 	padding: 0 !important;
 
+	&:hover > &__content:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -@am-bl-editor-toolbar-icons-width;
+		width: @am-bl-editor-toolbar-icons-width;
+		height: (@am-bl-editor-toolbar-icons-width / 2);
+	}
+
 	&__content {
 		height: 100%;
-		padding-left: 50px;
 
-		.am-layout--stretched > & {
+		.am-style--stretched > & {
 			max-width: 100%;
 			margin: 0;
 		}
+
+		&:hover:not(:has(&:hover)) {
+			background-color: var(--am-clr-editor-highlight-background);
+		}
+	}
+
+	&--selected &__content {
+		background-color: var(--am-clr-editor-highlight-background);
 	}
 }

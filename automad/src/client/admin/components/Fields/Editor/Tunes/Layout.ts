@@ -106,13 +106,13 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		const width = (layout?.width as unknown as string) || null;
 
 		element.classList.toggle(
-			`${CSS.editorLayoutBase}--stretched`,
+			`${CSS.editorStyleBase}--stretched`,
 			stretched
 		);
 
 		width
-			? element.setAttribute(Attr.layoutWidth, width)
-			: element.removeAttribute(Attr.layoutWidth);
+			? element.setAttribute(Attr.width, width)
+			: element.removeAttribute(Attr.width);
 	}
 
 	static updateToolbarPosition(blockHolder: HTMLElement): void {
@@ -120,6 +120,7 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 			return;
 		}
 
+		const content = query(':scope > .ce-block__content', blockHolder);
 		const editor = blockHolder.closest<HTMLElement>('.codex-editor');
 		const toolbar = query(':scope > .ce-toolbar', editor);
 
@@ -136,12 +137,12 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		}
 
 		const offsetX = Math.round(
-			blockHolder.getBoundingClientRect().x -
+			content.getBoundingClientRect().x -
 				blockHolder.parentElement.getBoundingClientRect().x
 		);
 
 		const offsetY = Math.round(
-			blockHolder.getBoundingClientRect().y -
+			content.getBoundingClientRect().y -
 				blockHolder.parentElement.getBoundingClientRect().y
 		);
 
@@ -160,7 +161,7 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 	}
 
 	renderSettings(): HTMLElement {
-		const wrapper = create('div');
+		const wrapper = create('div', [CSS.editorPopoverForm]);
 
 		if (!this.isFlex && !this.isStretchable) {
 			this.data = null;

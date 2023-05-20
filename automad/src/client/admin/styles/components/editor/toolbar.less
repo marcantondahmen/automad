@@ -35,20 +35,30 @@
 .ce-toolbar {
 	z-index: 1000;
 	top: 0 !important;
+	left: -@am-bl-editor-toolbar-icons-width;
 	transform: translate(var(--x), var(--y));
+	opacity: 1;
+	transition: opacity 0.2s 0.2s;
 
 	&__content {
 		max-width: none;
-		padding-top: 0.4rem;
 	}
 
 	.codex-editor &__actions {
 		right: unset;
 	}
-}
 
-.ce-popover {
-	&--opened {
-		max-height: none;
+	&__plus,
+	&__settings-btn {
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 0;
+		color: var(--am-clr-text-paragraph);
+	}
+
+	.codex-editor:not(:hover) &,
+	.codex-editor:has(.codex-editor:hover) > & {
+		opacity: 0;
+		pointer-events: none;
 	}
 }
