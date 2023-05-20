@@ -34,6 +34,7 @@
 
 import { ModalComponent } from '../components/Modal/Modal';
 import {
+	EditorOutputData,
 	FieldInitData,
 	FieldSectionCollection,
 	FieldType,
@@ -60,6 +61,8 @@ import { SharedDataFormComponent } from '../components/Forms/SharedDataForm';
 import { AutocompleteComponent } from '../components/Autocomplete';
 import { BaseFieldComponent } from '../components/Fields/BaseField';
 import { SelectComponent } from '../components/Select';
+import { EditorConfig } from '@editorjs/editorjs';
+import { EditorJSComponent } from '../components/EditorJS';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -96,6 +99,32 @@ export const create = (
 	}
 
 	return element;
+};
+
+/**
+ * Create a new EditorJSComponent element.
+ *
+ * @param container
+ * @param data
+ * @param config
+ * @param isSectionBlock
+ */
+export const createEditor = (
+	container: HTMLElement,
+	data: EditorOutputData,
+	config: EditorConfig,
+	isSectionBlock: boolean
+): EditorJSComponent => {
+	const holder = create(
+		EditorJSComponent.TAG_NAME,
+		[],
+		{},
+		container
+	) as EditorJSComponent;
+
+	holder.init(data, config, isSectionBlock);
+
+	return holder;
 };
 
 /**

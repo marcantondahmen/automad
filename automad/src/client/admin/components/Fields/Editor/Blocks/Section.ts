@@ -56,7 +56,7 @@ import {
 	SelectComponentOption,
 } from '../../../../types';
 import { BaseBlock } from './BaseBlock';
-import { createEditor } from '../../../../core/editor';
+import { createEditor } from '../../../../core';
 import { ModalComponent } from '../../../Modal/Modal';
 import { uniqueId } from '../../../../core';
 import iconFlexGap from '../../../../svg/icons/flex-gap.svg';

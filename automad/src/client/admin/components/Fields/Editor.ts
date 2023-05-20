@@ -45,7 +45,7 @@ import {
 } from '../../core';
 import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData } from '../../types';
-import { createEditor } from '../../core/editor';
+import { createEditor } from '../../core';
 import { LayoutTune } from './Editor/Tunes/Layout';
 import { getLogger } from '../../core/logger';
 
