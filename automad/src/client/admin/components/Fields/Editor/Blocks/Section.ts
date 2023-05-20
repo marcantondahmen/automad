@@ -61,6 +61,8 @@ import { uniqueId } from '../../../../core';
 import iconFlexGap from '../../../../svg/icons/flex-gap.svg';
 import iconMinWidth from '../../../../svg/icons/min-width.svg';
 import iconFlexJustyifyContent from '../../../../svg/icons/flex-justify-content.svg';
+import { EditorJSComponent } from '../../../EditorJS';
+import { getLogger } from '../../../../core/logger';
 
 /**
  * The flexbox option for "justify-content".
@@ -122,7 +124,7 @@ export const styleDefaults: SectionStyle = {
  * @extends BaseBlock
  */
 export class SectionBlock extends BaseBlock<SectionBlockData> {
-	private holder: HTMLElement = null;
+	private holder: EditorJSComponent = null;
 
 	static get enableLineBreaks() {
 		return true;
@@ -155,17 +157,24 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 	render(): HTMLElement {
 		this.wrapper.classList.add(CSS.editorBlockSection);
-		this.holder = create('div', [], {}, this.wrapper);
 
-		this.renderFlexSettings();
-		this.setStyle();
+		create(
+			'span',
+			[CSS.flex],
+			{},
+			this.wrapper,
+			html`<span class="${CSS.editorBlockSectionLabel}"
+				>${App.text('editorBlockSection')}</span
+			>`
+		);
 
-		const editor = createEditor(
+		this.holder = createEditor(
+			this.wrapper,
 			this.data.content as EditorOutputData,
 			{
-				holder: this.holder,
 				onChange: async (api, event) => {
-					this.data.content = await editor.save();
+					getLogger().log(event);
+					this.data.content = await api.saver.save();
 					this.blockAPI.dispatchChange();
 				},
 			},
@@ -177,6 +186,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 				event.stopImmediatePropagation();
 			}
 		});
+
+		this.renderFlexSettings();
+		this.setStyle();
 
 		return this.wrapper;
 	}

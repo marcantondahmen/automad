@@ -47,6 +47,7 @@ import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData } from '../../types';
 import { createEditor } from '../../core/editor';
 import { LayoutTune } from './Editor/Tunes/Layout';
+import { getLogger } from '../../core/logger';
 
 /**
  * A block editor field.
@@ -76,12 +77,14 @@ class EditorComponent extends BaseFieldComponent {
 		this.setAttribute('name', name);
 		this.value = value as EditorOutputData;
 
-		const editor = createEditor(
+		createEditor(
+			create('div', [], { id }, this),
 			this.value,
 			{
-				holder: create('div', [], { id }, this),
 				onChange: async (api, event) => {
-					const _value = (await editor.save()) as EditorOutputData;
+					getLogger().log(event);
+
+					const _value = (await api.saver.save()) as EditorOutputData;
 
 					if (
 						JSON.stringify(this.value.blocks) ===

@@ -128,6 +128,7 @@ import './components/CustomIconCheckbox';
 import './components/Copy';
 import './components/DashboardThemeToggle';
 import './components/Dropdown';
+import './components/EditorJS';
 import './components/Filter';
 import './components/IconText';
 import './components/ImagePicker';
