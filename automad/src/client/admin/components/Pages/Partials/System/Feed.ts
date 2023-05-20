@@ -41,8 +41,8 @@ import {
 	EventName,
 	html,
 	listen,
-} from '../../../../core';
-import { SystemComponent } from '../../System';
+} from '@/core';
+import { SystemComponent } from '@/components/Pages/System';
 
 /**
  * Create bindings for the form elements in the feed section.

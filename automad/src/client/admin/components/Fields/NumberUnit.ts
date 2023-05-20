@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create } from '../../core';
+import { create } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**

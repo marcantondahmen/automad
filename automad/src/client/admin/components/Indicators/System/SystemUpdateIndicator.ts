@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, html, listen } from '../../../core';
-import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
+import { App, Attr, CSS, html } from '@/core';
+import { BaseUpdateIndicatorComponent } from '@/components/Indicators/BaseUpdateIndicator';
 
 /**
  * A system update state component.

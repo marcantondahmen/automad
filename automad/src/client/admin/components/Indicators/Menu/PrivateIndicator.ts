@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS, EventName, getPageURL, listen } from '../../../core';
-import { BaseComponent } from '../../Base';
+import { App, create, CSS, EventName, getPageURL, listen } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A private indicator badge for pages.

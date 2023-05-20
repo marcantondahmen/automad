@@ -40,6 +40,7 @@ import {
 	debounce,
 	fire,
 	FormDataProviders,
+	getLogger,
 	collectFieldData,
 	getPageURL,
 	listen,
@@ -48,11 +49,10 @@ import {
 	query,
 	queryAll,
 	requestAPI,
-} from '../../core';
-import { getLogger } from '../../core/logger';
-import { InputElement, KeyValueMap } from '../../types';
-import { BaseComponent } from '../Base';
-import { ModalComponent } from '../Modal/Modal';
+} from '@/core';
+import { InputElement, KeyValueMap } from '@/types';
+import { BaseComponent } from '@/components/Base';
+import { ModalComponent } from '@/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
 
 export const autoSubmitTimeout = 750;

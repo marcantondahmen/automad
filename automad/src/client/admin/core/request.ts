@@ -32,10 +32,18 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, EventName, fire, listen, notifyError, query } from '.';
-import { FormComponent } from '../components/Forms/Form';
-import { KeyValueMap } from '../types';
-import { getLogger } from './logger';
+import {
+	App,
+	create,
+	EventName,
+	fire,
+	getLogger,
+	listen,
+	notifyError,
+	query,
+} from '.';
+import { FormComponent } from '@/components/Forms/Form';
+import { KeyValueMap } from '@/types';
 
 /**
  * The names of field that are submitted along with post requests.

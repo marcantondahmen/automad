@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App } from './app';
+import { App } from '.';
 
 /**
  * Delete a parameter from the query string.

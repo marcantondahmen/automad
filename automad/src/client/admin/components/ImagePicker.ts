@@ -42,9 +42,9 @@ import {
 	html,
 	listen,
 	requestAPI,
-} from '../core';
-import { Image } from '../types';
-import { BaseComponent } from './Base';
+} from '@/core';
+import { Image } from '@/types';
+import { BaseComponent } from '@/components/Base';
 import { ModalComponent } from './Modal/Modal';
 
 /**

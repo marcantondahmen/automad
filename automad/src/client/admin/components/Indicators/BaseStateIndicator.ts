@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '../Base';
-import { EventName, listen } from '../../core';
+import { BaseComponent } from '@/components/Base';
+import { EventName, listen } from '@/core';
 
 /**
  * The abstract base state component.

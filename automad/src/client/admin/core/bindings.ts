@@ -33,7 +33,7 @@
  */
 
 import { Attr, create, EventName, fire, listen, queryAll } from '.';
-import { BindingOptions, InputElement, KeyValueMap } from '../types';
+import { BindingOptions, InputElement, KeyValueMap } from '@/types';
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.

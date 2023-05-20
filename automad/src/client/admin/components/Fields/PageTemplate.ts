@@ -32,14 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, titleCase } from '../../core';
-import {
-	KeyValueMap,
-	TemplateButtonStatus,
-	TemplateFieldData,
-} from '../../types';
-import { BaseComponent } from '../Base';
-import { SelectComponent } from '../Select';
+import { App, Attr, create, CSS, html, titleCase } from '@/core';
+import { KeyValueMap, TemplateButtonStatus, TemplateFieldData } from '@/types';
+import { BaseComponent } from '@/components/Base';
+import { SelectComponent } from '@/components/Select';
 
 /**
  * Beautify a template path to be used as name.

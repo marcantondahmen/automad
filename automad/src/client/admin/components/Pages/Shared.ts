@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, getTagFromRoute, html, Route } from '../../core';
-import { Section } from '../Switcher/Switcher';
+import { App, Attr, CSS, getTagFromRoute, html, Route } from '@/core';
+import { Section } from '@/components/Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 const renderMenu = (): string => {

@@ -32,10 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { AutocompleteComponent } from '../Autocomplete';
-import { JumpbarItemData, KeyValueMap, PageMetaData } from '../../types';
-import { App, Attr, create, CSS, html, Route } from '../../core';
-import { Section } from '../Switcher/Switcher';
+import { AutocompleteComponent } from '@/components/Autocomplete';
+import { JumpbarItemData, KeyValueMap, PageMetaData } from '@/types';
+import { App, Attr, create, CSS, html, Route } from '@/core';
+import { Section } from '@/components/Switcher/Switcher';
 
 /**
  * Return the jumpbar autocompletion data for the search.

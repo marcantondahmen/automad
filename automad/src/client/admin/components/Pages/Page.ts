@@ -40,9 +40,9 @@ import {
 	getTagFromRoute,
 	html,
 	Route,
-} from '../../core';
-import { HistoryModalFormComponent } from '../Forms/HistoryModalForm';
-import { Section } from '../Switcher/Switcher';
+} from '@/core';
+import { HistoryModalFormComponent } from '@/components/Forms/HistoryModalForm';
+import { Section } from '@/components/Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 

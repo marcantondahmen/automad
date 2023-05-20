@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, CSS, create, html, listen } from '.';
-import { Listener } from '../types';
+import { Listener } from '@/types';
 import { nanoid } from 'nanoid';
 
 /**

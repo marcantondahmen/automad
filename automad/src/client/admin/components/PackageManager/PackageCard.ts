@@ -45,9 +45,9 @@ import {
 	notifyError,
 	notifySuccess,
 	requestAPI,
-} from '../../core';
-import { Package } from '../../types';
-import { BaseComponent } from '../Base';
+} from '@/core';
+import { Package } from '@/types';
+import { BaseComponent } from '@/components/Base';
 
 const packageBrowser = 'https://packages.automad.org';
 

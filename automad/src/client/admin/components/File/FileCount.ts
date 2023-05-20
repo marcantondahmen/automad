@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '../Base';
-import { create, EventName, listen, queryAll } from '../../core';
+import { BaseComponent } from '@/components/Base';
+import { create, EventName, listen, queryAll } from '@/core';
 
 /**
  * A file count badge component that displays the total number of file card elements.

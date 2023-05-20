@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, Route } from '../../../core';
-import { Section } from '../../Switcher/Switcher';
-import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
+import { App, Attr, CSS, html, Route } from '@/core';
+import { Section } from '@/components/Switcher/Switcher';
+import { BaseStateIndicatorComponent } from '@/components/Indicators/BaseStateIndicator';
 
 /**
  * A debug state component.

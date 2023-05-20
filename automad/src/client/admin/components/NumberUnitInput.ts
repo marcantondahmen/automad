@@ -39,8 +39,8 @@ import {
 	fire,
 	FormDataProviders,
 	listen,
-} from '../core';
-import { BaseComponent } from './Base';
+} from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A special input that combines a number input with a unit dropdown.

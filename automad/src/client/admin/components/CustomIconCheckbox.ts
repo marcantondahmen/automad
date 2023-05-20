@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS, html, query } from '../core';
-import { BaseComponent } from './Base';
+import { Attr, create, CSS, html, query } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A custom icon checkbox field.

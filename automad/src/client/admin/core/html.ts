@@ -33,7 +33,7 @@
  */
 
 import DOMPurify from 'dompurify';
-import { KeyValueMap } from '../types';
+import { KeyValueMap } from '@/types';
 
 /**
  * A whitelist of custom component attributes.

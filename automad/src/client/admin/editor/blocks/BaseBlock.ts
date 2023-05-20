@@ -39,8 +39,8 @@ import {
 	BlockToolConstructorOptions,
 	BlockToolData,
 } from '@editorjs/editorjs';
-import { create } from '../../core';
-import { KeyValueMap } from '../../types';
+import { create } from '@/core';
+import { KeyValueMap } from '@/types';
 
 export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	protected api: API;

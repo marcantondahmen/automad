@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS, EventName, html, listen } from '../../core';
-import { SwitcherDropdownData, SwitcherDropdownItem } from '../../types';
-import { BaseComponent } from '../Base';
+import { Attr, create, CSS, EventName, html, listen } from '@/core';
+import { SwitcherDropdownData, SwitcherDropdownItem } from '@/types';
+import { BaseComponent } from '@/components/Base';
 import { getActiveSection, Section } from './Switcher';
 
 /**

@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, requestAPI } from '../../core';
-import { DeletedPageMetaData } from '../../types';
-import { BaseComponent } from '../Base';
+import { App, Attr, create, CSS, html, requestAPI } from '@/core';
+import { DeletedPageMetaData } from '@/types';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * Create a card for a deleted page.

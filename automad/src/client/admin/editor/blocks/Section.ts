@@ -49,7 +49,7 @@ import {
 	queryAll,
 	resolveFileUrl,
 	uniqueId,
-} from '../../core';
+} from '@/core';
 import {
 	EditorOutputData,
 	FieldType,
@@ -57,13 +57,13 @@ import {
 	SectionJustifyContentOption,
 	SectionStyle,
 	SelectComponentOption,
-} from '../../types';
+} from '@/types';
 import { BaseBlock } from './BaseBlock';
-import iconFlexGap from '../../svg/icons/flex-gap.svg';
-import iconMinWidth from '../../svg/icons/min-width.svg';
-import iconFlexJustyifyContent from '../../svg/icons/flex-justify-content.svg';
-import { EditorJSComponent } from '../../components/EditorJS';
-import { ModalComponent } from '../../components/Modal/Modal';
+import iconFlexGap from '@/svg/icons/flex-gap.svg';
+import iconMinWidth from '@/svg/icons/min-width.svg';
+import iconFlexJustyifyContent from '@/svg/icons/flex-justify-content.svg';
+import { EditorJSComponent } from '@/components/EditorJS';
+import { ModalComponent } from '@/components/Modal/Modal';
 
 /**
  * The flexbox option for "justify-content".

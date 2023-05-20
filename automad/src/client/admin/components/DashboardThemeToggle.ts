@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, EventName, html, listen, titleCase } from '../core';
-import { DashboardTheme, getTheme, setTheme } from '../core/theme';
-import { BaseComponent } from './Base';
+import { Attr, create, EventName, html, listen, titleCase } from '@/core';
+import { DashboardTheme, getTheme, setTheme } from '@/core/theme';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A theme toggle component for the dashboard.

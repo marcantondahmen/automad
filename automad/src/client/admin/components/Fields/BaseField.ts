@@ -42,9 +42,9 @@ import {
 	htmlSpecialChars,
 	query,
 	queryAll,
-} from '../../core';
-import { FieldInitData, FieldRenderData, InputElement } from '../../types';
-import { BaseComponent } from '../Base';
+} from '@/core';
+import { FieldInitData, FieldRenderData, InputElement } from '@/types';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A standard input field with a label.

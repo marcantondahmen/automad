@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { ModalComponent } from '../components/Modal/Modal';
+import { ModalComponent } from '@/components/Modal/Modal';
 import {
 	EditorOutputData,
 	FieldInitData,
@@ -40,7 +40,7 @@ import {
 	FieldType,
 	KeyValueMap,
 	SelectComponentOption,
-} from '../types';
+} from '@/types';
 import {
 	App,
 	Attr,
@@ -54,15 +54,15 @@ import {
 	query,
 	uniqueId,
 } from '.';
-import { PageDataFormComponent } from '../components/Forms/PageDataForm';
-import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
-import { Section } from '../components/Switcher/Switcher';
-import { SharedDataFormComponent } from '../components/Forms/SharedDataForm';
-import { AutocompleteComponent } from '../components/Autocomplete';
-import { BaseFieldComponent } from '../components/Fields/BaseField';
-import { SelectComponent } from '../components/Select';
+import { PageDataFormComponent } from '@/components/Forms/PageDataForm';
+import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
+import { Section } from '@/components/Switcher/Switcher';
+import { SharedDataFormComponent } from '@/components/Forms/SharedDataForm';
+import { AutocompleteComponent } from '@/components/Autocomplete';
+import { BaseFieldComponent } from '@/components/Fields/BaseField';
+import { SelectComponent } from '@/components/Select';
 import { EditorConfig } from '@editorjs/editorjs';
-import { EditorJSComponent } from '../components/EditorJS';
+import { EditorJSComponent } from '@/components/EditorJS';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.

@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, debounce, listen } from '../../core';
-import { BaseComponent } from '../Base';
+import { CSS, debounce, listen } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * The sidebar scroll container.

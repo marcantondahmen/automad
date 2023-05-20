@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, Route } from '../core';
-import { BaseComponent } from './Base';
+import { App, Attr, CSS, html, Route } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A breadcrumbs nav for a main page of the top level route.

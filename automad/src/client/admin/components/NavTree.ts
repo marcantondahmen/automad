@@ -55,10 +55,10 @@ import {
 	queryAll,
 	requestAPI,
 	Route,
-} from '../core';
-import { createSortableTreeNodes, treeStyles } from '../core/tree';
-import { KeyValueMap, PageMetaData } from '../types';
-import { BaseComponent } from './Base';
+} from '@/core';
+import { createSortableTreeNodes, treeStyles } from '@/core/tree';
+import { KeyValueMap, PageMetaData } from '@/types';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * Handle responses when moving pages.

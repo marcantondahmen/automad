@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { listen, App, Attr } from '../core';
-import { BaseComponent } from './Base';
+import { listen, App, Attr } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A simple link component to change the dashboard view.

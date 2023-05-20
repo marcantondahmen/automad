@@ -41,9 +41,9 @@ import {
 	CSS,
 	App,
 	Attr,
-} from '../core';
-import { KeyValueMap } from '../types';
-import { BaseComponent } from './Base';
+} from '@/core';
+import { KeyValueMap } from '@/types';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A breadcrumbs nav for a page.

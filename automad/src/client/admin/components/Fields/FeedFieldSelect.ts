@@ -43,7 +43,7 @@ import {
 	html,
 	listen,
 	query,
-} from '../../core';
+} from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 const options: SortableOptions = {

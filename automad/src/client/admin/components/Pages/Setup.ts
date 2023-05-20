@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, Routes } from '../../core';
-import { CenteredLayoutComponent } from './CenteredLayout';
+import { App, getTagFromRoute, Route } from '@/core';
+import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
  * The setup view.

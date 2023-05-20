@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { listen, queryAll } from '../../../core';
-import { FormComponent } from '../Form';
-import { SubmitComponent } from '../Submit';
+import { listen, queryAll } from '@/core';
+import { FormComponent } from '@/components/Forms/Form';
+import { SubmitComponent } from '@/components/Forms/Submit';
 
 /**
  * A submit button for the FileCollectionListComponent form.

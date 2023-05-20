@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { isActivePage, App, html, CSS, Attr } from '../core';
-import { BaseComponent } from './Base';
+import { isActivePage, App, html, CSS, Attr } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A simple link in the sidebar navigation.

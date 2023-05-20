@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, html } from '../../../../core';
-import { Listener } from '../../../../types';
+import { Attr, html } from '@/core';
+import { Listener } from '@/types';
 
 /**
  * Render the update section.

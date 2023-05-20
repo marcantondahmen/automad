@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS } from '../../core';
+import { CSS } from '@/core';
 import { ToggleComponent } from './Toggle';
 
 /**

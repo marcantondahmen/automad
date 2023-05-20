@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, Routes } from '../../core';
-import { SidebarLayoutComponent } from './SidebarLayout';
+import { App, Attr, CSS, getTagFromRoute, html, Route } from '@/core';
+import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
  * The home view.

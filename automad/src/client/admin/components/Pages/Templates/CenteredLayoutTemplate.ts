@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html } from '../../../core';
-import { Partials } from '../../../types';
+import { App, Attr, CSS, html } from '@/core';
+import { Partials } from '@/types';
 
 export const centered = ({ title, main }: Partials): string => {
 	return html`

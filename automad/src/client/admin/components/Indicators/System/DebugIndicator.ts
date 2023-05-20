@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../../../core';
-import { BaseActivationIndicatorComponent } from '../BaseActivationIndicator';
+import { App } from '@/core';
+import { BaseActivationIndicatorComponent } from '@/components/Indicators/BaseActivationIndicator';
 
 /**
  * A debug state indicator component.

@@ -40,13 +40,13 @@ import {
 	getTagFromRoute,
 	html,
 	Route,
-} from '../../core';
+} from '@/core';
 import {
 	SwitcherDropdownData,
 	SwitcherDropdownItem,
 	SystemSectionData,
-} from '../../types';
-import { Section } from '../Switcher/Switcher';
+} from '@/types';
+import { Section } from '@/components/Switcher/Switcher';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderConfigFileSection } from './Partials/System/ConfigFile';
 import { renderDebugSection } from './Partials/System/Debug';

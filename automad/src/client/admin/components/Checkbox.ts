@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, html, listen, query } from '../core';
-import { BaseComponent } from './Base';
+import { create, CSS, html, listen, query } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A simple checkbox component.

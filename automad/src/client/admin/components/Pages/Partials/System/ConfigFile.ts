@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html } from '../../../../core';
-import { Listener } from '../../../../types';
+import { App, Attr, CSS, html } from '@/core';
+import { Listener } from '@/types';
 
 /**
  * Render the config file section.

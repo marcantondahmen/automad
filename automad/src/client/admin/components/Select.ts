@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, EventName, listen, query } from '../core';
-import { BaseComponent } from './Base';
+import { CSS, EventName, listen, query } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * An advanced select component. The component inner HTML has to contain a single span

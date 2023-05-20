@@ -38,8 +38,8 @@ import {
 	SectionBackgroundBlendModes,
 	SectionBorderStyles,
 	SectionJustifyContentOptions,
-} from '../editor/blocks/Section';
-import { fractions } from '../editor/tunes/Layout';
+} from '@/editor/blocks/Section';
+import { fractions } from '@/editor/tunes/Layout';
 
 export interface BlockTuneConstructorOptions {
 	api: API;

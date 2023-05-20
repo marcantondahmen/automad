@@ -39,7 +39,7 @@ import {
 	FieldType,
 	InputElement,
 	KeyValueMap,
-} from '../types';
+} from '@/types';
 
 /**
  * A class to register elements to be used to generate form data.

@@ -50,9 +50,9 @@ import {
 	initWindowErrorHandler,
 	fire,
 	EventName,
-} from '../core';
-import { applyTheme, getTheme } from '../core/theme';
-import { BaseComponent } from './Base';
+} from '@/core';
+import { applyTheme, getTheme } from '@/core/theme';
+import { BaseComponent } from '@/components/Base';
 import { ModalComponent } from './Modal/Modal';
 import { SidebarComponent } from './Sidebar/Sidebar';
 

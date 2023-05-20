@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Binding } from '../core';
+import { Binding } from '@/core';
 
 export interface SharedBindings {
 	sharedDataFetchTimeBinding: Binding;

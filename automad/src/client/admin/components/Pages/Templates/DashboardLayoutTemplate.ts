@@ -32,18 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	createField,
-	CSS,
-	html,
-	Route,
-	titleCase,
-} from '../../../core';
-import { Partials } from '../../../types';
-import { createTemplateSelect } from '../../Fields/PageTemplate';
-import { Section } from '../../Switcher/Switcher';
+import { App, Attr, createField, CSS, html, Route, titleCase } from '@/core';
+import { Partials } from '@/types';
+import { createTemplateSelect } from '@/components/Fields/PageTemplate';
+import { Section } from '@/components/Switcher/Switcher';
 
 export const dashboardLayout = ({ main }: Partials) => {
 	return html`

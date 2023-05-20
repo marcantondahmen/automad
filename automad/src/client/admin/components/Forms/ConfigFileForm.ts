@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, html, listen, query } from '../../core';
-import { KeyValueMap } from '../../types';
+import { App, Attr, CSS, EventName, html, listen, query } from '@/core';
+import { KeyValueMap } from '@/types';
 import { FormComponent } from './Form';
 
 /**

@@ -40,9 +40,9 @@ import {
 	listen,
 	request,
 	requestAPI,
-} from '../../core';
-import { KeyValueMap, Package } from '../../types';
-import { BaseComponent } from '../Base';
+} from '@/core';
+import { KeyValueMap, Package } from '@/types';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * Get the list of available packages.

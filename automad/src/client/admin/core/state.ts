@@ -32,10 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { RootComponent } from '../components/Root';
-import { KeyValueMap } from '../types';
-import { EventName, fire } from './events';
-import { getLogger } from './logger';
+import { RootComponent } from '@/components/Root';
+import { KeyValueMap } from '@/types';
+import { EventName, fire, getLogger } from '.';
 
 /**
  * The Application State container singelton class.

@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, listen, query } from '../../core';
-import { KeyValueMap, SystemUpdateResponse } from '../../types';
-import { ModalComponent } from '../Modal/Modal';
+import { App, Attr, create, CSS, html, listen, query } from '@/core';
+import { KeyValueMap, SystemUpdateResponse } from '@/types';
+import { ModalComponent } from '@/components/Modal/Modal';
 import { FormComponent } from './Form';
 
 /**

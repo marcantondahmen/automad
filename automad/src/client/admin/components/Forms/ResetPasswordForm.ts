@@ -40,8 +40,8 @@ import {
 	getSearchParam,
 	html,
 	Route,
-} from '../../core';
-import { KeyValueMap } from '../../types';
+} from '@/core';
+import { KeyValueMap } from '@/types';
 import { FormComponent } from './Form';
 
 /**

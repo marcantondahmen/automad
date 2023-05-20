@@ -44,10 +44,10 @@ import {
 	getPageURL,
 	createSelect,
 	Attr,
-} from '../../core';
-import { SelectComponentOption } from '../../types';
-import { BaseComponent } from '../Base';
-import { ModalComponent } from '../Modal/Modal';
+} from '@/core';
+import { SelectComponentOption } from '@/types';
+import { BaseComponent } from '@/components/Base';
+import { ModalComponent } from '@/components/Modal/Modal';
 
 export class HistoryModalFormComponent extends BaseComponent {
 	/**

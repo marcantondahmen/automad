@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS, html, listen, query } from '../../core';
+import { App, create, CSS, html, listen, query } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**

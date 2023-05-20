@@ -41,13 +41,13 @@ import {
 	createFieldSections,
 	fieldGroup,
 	prepareFieldGroups,
-} from '../../core';
+} from '@/core';
 import {
 	FieldSectionCollection,
 	FieldSectionName,
 	KeyValueMap,
 	SharedBindings,
-} from '../../types';
+} from '@/types';
 import { FormComponent } from './Form';
 
 /**

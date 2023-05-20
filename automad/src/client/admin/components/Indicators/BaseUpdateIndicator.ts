@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { EventName, listen } from '../../core';
-import { BaseComponent } from '../Base';
+import { EventName, listen } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * A base update indicator component.

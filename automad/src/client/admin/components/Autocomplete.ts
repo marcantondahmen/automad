@@ -32,13 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from './Base';
+import { BaseComponent } from '@/components/Base';
 import {
 	AutocompleteItem,
 	AutocompleteItemData,
 	KeyValueMap,
 	PageMetaData,
-} from '../types';
+} from '@/types';
 import {
 	App,
 	create,
@@ -49,7 +49,7 @@ import {
 	CSS,
 	fire,
 	Attr,
-} from '../core';
+} from '@/core';
 
 /**
  * Compile the autocompletion data.

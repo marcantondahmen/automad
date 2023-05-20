@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, getTagFromRoute, html, Route } from '../../core';
+import { App, Attr, getTagFromRoute, html, Route } from '@/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**

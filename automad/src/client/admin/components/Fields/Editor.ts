@@ -35,19 +35,19 @@
 import {
 	App,
 	create,
+	createEditor,
 	CSS,
 	debounce,
 	fire,
 	FormDataProviders,
+	getLogger,
 	listen,
 	listenToClassChange,
 	queryAll,
-} from '../../core';
+} from '@/core';
 import { BaseFieldComponent } from './BaseField';
-import { EditorOutputData } from '../../types';
-import { createEditor } from '../../core';
-import { getLogger } from '../../core/logger';
-import { LayoutTune } from '../../editor/tunes/Layout';
+import { EditorOutputData } from '@/types';
+import { LayoutTune } from '@/editor/tunes/Layout';
 
 /**
  * A block editor field.

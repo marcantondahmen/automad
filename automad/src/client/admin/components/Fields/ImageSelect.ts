@@ -42,7 +42,7 @@ import {
 	html,
 	listen,
 	resolveFileUrl,
-} from '../../core';
+} from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**

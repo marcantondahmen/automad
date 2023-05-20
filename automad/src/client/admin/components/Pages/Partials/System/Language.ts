@@ -41,9 +41,9 @@ import {
 	EventName,
 	html,
 	listen,
-} from '../../../../core';
-import { SelectComponentOption } from '../../../../types';
-import { SystemComponent } from '../../System';
+} from '@/core';
+import { SelectComponentOption } from '@/types';
+import { SystemComponent } from '@/components/Pages/System';
 
 /**
  * Create bindings for the form elements in the cache section.

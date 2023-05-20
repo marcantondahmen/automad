@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Logger } from '../types';
-import { App } from './app';
+import { KeyValueMap, Logger } from '@/types';
+import { App } from '.';
 
 /**
  * The logger factory.

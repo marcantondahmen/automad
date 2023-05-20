@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, listen, queryAll, queryParents } from '../../core';
-import { BaseComponent } from '../Base';
+import { Attr, listen, queryAll, queryParents } from '@/core';
+import { BaseComponent } from '@/components/Base';
 import { FormComponent } from './Form';
 
 /**

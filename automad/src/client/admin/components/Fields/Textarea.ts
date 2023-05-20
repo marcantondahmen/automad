@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, debounce, listen } from '../../core';
+import { create, CSS, debounce, listen } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**

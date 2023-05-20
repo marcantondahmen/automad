@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { RootComponent } from '../components/Root';
+import { RootComponent } from '@/components/Root';
 import {
 	deleteSearchParam,
 	EventName,
@@ -54,7 +54,7 @@ import {
 	SystemSettings,
 	ThemeCollection,
 	User,
-} from '../types';
+} from '@/types';
 
 /**
  * The static class that provides the app state and root element to be used across the application.

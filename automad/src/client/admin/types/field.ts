@@ -33,7 +33,7 @@
  */
 
 import { KeyValueMap } from '.';
-import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
+import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
 
 const FieldTypes = [
 	'am-color',

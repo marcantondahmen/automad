@@ -32,9 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Listener } from '../types';
-import { getLogger } from './logger';
-import { query, queryAll } from './utils';
+import { Listener } from '@/types';
+import { getLogger, query, queryAll } from '.';
 
 /**
  * The object with all custom event that are used by the UI.

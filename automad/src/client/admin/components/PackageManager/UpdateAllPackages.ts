@@ -42,8 +42,8 @@ import {
 	notifyError,
 	notifySuccess,
 	requestAPI,
-} from '../../core';
-import { BaseComponent } from '../Base';
+} from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
  * The update all button component. It is only visible in case there are outdated packages.

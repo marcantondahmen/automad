@@ -39,8 +39,7 @@ import {
 	KeyValueMap,
 	PageBindings,
 	PageMainSettingsData,
-} from '../../types';
-import { InputComponent } from '../Fields/Input';
+} from '@/types';
 import { FormComponent } from './Form';
 import {
 	App,
@@ -51,16 +50,15 @@ import {
 	createFieldSections,
 	CSS,
 	fieldGroup,
+	getLogger,
 	getPageURL,
 	html,
 	prepareFieldGroups,
 	Route,
 	setDocumentTitle,
-} from '../../core';
-import { PageTemplateComponent } from '../Fields/PageTemplate';
-import { BaseComponent } from '../Base';
-import { BaseFieldComponent } from '../Fields/BaseField';
-import { getLogger } from '../../core/logger';
+} from '@/core';
+import { PageTemplateComponent } from '@/components/Fields/PageTemplate';
+import { BaseFieldComponent } from '@/components/Fields/BaseField';
 
 /**
  * Init all URL and slug related bindings.

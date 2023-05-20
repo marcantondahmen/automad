@@ -41,10 +41,10 @@ import {
 	EventName,
 	html,
 	listen,
-} from '../../core';
-import { File } from '../../types';
-import { BaseComponent } from '../Base';
-import { ModalComponent } from '../Modal/Modal';
+} from '@/core';
+import { File } from '@/types';
+import { BaseComponent } from '@/components/Base';
+import { ModalComponent } from '@/components/Modal/Modal';
 
 /**
  * A file edit modal toggle component.

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, listen } from '../../core';
+import { App, Attr, create, CSS, html, listen } from '@/core';
 import { ModalComponent } from './Modal';
 
 /**

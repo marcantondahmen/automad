@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, listen, query } from '../../core';
-import { BaseComponent } from '../Base';
+import { Attr, listen, query } from '@/core';
+import { BaseComponent } from '@/components/Base';
 import { ModalComponent } from './Modal';
 
 /**

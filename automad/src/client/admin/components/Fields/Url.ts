@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, create, listen, Binding, createLinkModal } from '../../core';
+import { CSS, create, listen, Binding, createLinkModal } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**

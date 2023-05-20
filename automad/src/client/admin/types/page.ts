@@ -33,8 +33,8 @@
  */
 
 import { KeyValueMap } from '.';
-import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
-import { Binding } from '../core';
+import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
+import { Binding } from '@/core';
 
 export interface PageMainSettingsData {
 	section: SwitcherSectionComponent;

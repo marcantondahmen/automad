@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Partials } from '../../types';
+import { Partials } from '@/types';
 import { BaseLayoutComponent } from './BaseLayout';
 import { centered } from './Templates/CenteredLayoutTemplate';
 

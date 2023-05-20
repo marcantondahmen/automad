@@ -33,8 +33,8 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import { App, create, CSS } from '../../core';
-import { PageDataFormComponent } from '../Forms/PageDataForm';
+import { App, create, CSS } from '@/core';
+import { PageDataFormComponent } from '@/components/Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';
 
 /**

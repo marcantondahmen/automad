@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html } from '../../../core';
-import { BaseUpdateIndicatorComponent } from '../BaseUpdateIndicator';
+import { App, CSS, html } from '@/core';
+import { BaseUpdateIndicatorComponent } from '@/components/Indicators/BaseUpdateIndicator';
 
 /**
  * A packages state component.
