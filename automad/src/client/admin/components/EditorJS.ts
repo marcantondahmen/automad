@@ -99,7 +99,7 @@ export class EditorJSComponent extends BaseComponent {
 							LayoutTune.apply(block, layout);
 						});
 
-						new DragDrop(this.editor);
+						new DragDrop(this);
 					},
 				},
 				config

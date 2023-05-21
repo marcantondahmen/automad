@@ -50,7 +50,10 @@
 	}
 
 	&__content {
+		position: relative;
 		height: 100%;
+		outline: 1px dashed transparent;
+		transition: outline 0.2s;
 
 		.am-style--stretched > & {
 			max-width: 100%;
@@ -64,5 +67,16 @@
 
 	&--selected &__content {
 		background-color: var(--am-clr-editor-highlight-background);
+	}
+
+	.am-ui &--drop-target &__content {
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+
+	.am-ui &--drop-target > &__content {
+		outline-color: var(--am-clr-accent-background);
 	}
 }
