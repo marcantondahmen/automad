@@ -232,6 +232,10 @@ class UndoProvider {
 			const value = field.query();
 			const undoState = this.undoState;
 
+			if (value === undoState) {
+				return;
+			}
+
 			Undo.addEntry({
 				undo: () => {
 					field.mutate(undoState);
