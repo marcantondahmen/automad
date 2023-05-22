@@ -52,6 +52,7 @@ export const enum EventName {
 	packagesChange = 'AutomadPackagesChange',
 	switcherChange = 'AutomadSwitcherChange',
 	systemUpdateCheck = 'AutomadSystemUpdateCheck',
+	undoStackUpdate = 'AutomadUndoStackUpdate',
 }
 
 /**

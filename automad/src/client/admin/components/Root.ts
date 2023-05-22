@@ -50,6 +50,7 @@ import {
 	initWindowErrorHandler,
 	fire,
 	EventName,
+	Undo,
 } from '@/core';
 import { applyTheme, getTheme } from '@/core/theme';
 import { BaseComponent } from '@/components/Base';
@@ -111,6 +112,8 @@ export class RootComponent extends BaseComponent {
 
 		this.addListener(documentEnterKeyHandler());
 		this.validateSession();
+
+		Undo.addListeners();
 	}
 
 	/**
@@ -136,6 +139,7 @@ export class RootComponent extends BaseComponent {
 
 		initTooltips();
 		Bindings.reset();
+		Undo.new();
 
 		await App.updateState();
 

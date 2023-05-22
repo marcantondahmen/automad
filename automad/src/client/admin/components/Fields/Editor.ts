@@ -46,8 +46,9 @@ import {
 	queryAll,
 } from '@/core';
 import { BaseFieldComponent } from './BaseField';
-import { EditorOutputData } from '@/types';
+import { EditorOutputData, UndoValue } from '@/types';
 import { LayoutTune } from '@/editor/tunes/Layout';
+import { EditorJSComponent } from '../EditorJS';
 
 /**
  * A block editor field.
@@ -64,6 +65,11 @@ export class EditorComponent extends BaseFieldComponent {
 	static readonly TAG_NAME = 'am-editor';
 
 	/**
+	 * The editor component.
+	 */
+	private editorJS: EditorJSComponent;
+
+	/**
 	 * The editor value that serves a input value for the parent form.
 	 */
 	value: EditorOutputData;
@@ -77,7 +83,7 @@ export class EditorComponent extends BaseFieldComponent {
 		this.setAttribute('name', name);
 		this.value = value as EditorOutputData;
 
-		createEditor(
+		this.editorJS = createEditor(
 			create('div', [], { id }, this),
 			this.value,
 			{
@@ -103,6 +109,33 @@ export class EditorComponent extends BaseFieldComponent {
 		);
 
 		this.attachToolbarPositionObserver();
+	}
+
+	/**
+	 * Return the field that is observed for changes.
+	 *
+	 * @return the input field
+	 */
+	getValueProvider(): HTMLElement {
+		return this;
+	}
+
+	/**
+	 * A function that can be used to mutate the field value.
+	 *
+	 * @param value
+	 */
+	mutate(value: UndoValue): void {
+		this.editorJS.editor.render(value);
+	}
+
+	/**
+	 * Query the current field value.
+	 *
+	 * @return the current value
+	 */
+	query() {
+		return this.value;
 	}
 
 	/**

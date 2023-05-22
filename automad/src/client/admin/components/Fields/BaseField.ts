@@ -42,8 +42,15 @@ import {
 	htmlSpecialChars,
 	query,
 	queryAll,
+	Undo,
 } from '@/core';
-import { FieldInitData, FieldRenderData, InputElement } from '@/types';
+import {
+	FieldInitData,
+	FieldRenderData,
+	InputElement,
+	Undoable,
+	UndoValue,
+} from '@/types';
 import { BaseComponent } from '@/components/Base';
 
 /**
@@ -54,8 +61,12 @@ import { BaseComponent } from '@/components/Base';
  * - `spellcheck` - enable spell checking
  *
  * @extends BaseComponent
+ * @implements Undoable
  */
-export abstract class BaseFieldComponent extends BaseComponent {
+export abstract class BaseFieldComponent
+	extends BaseComponent
+	implements Undoable
+{
 	/**
 	 * If true the field data is spell checked while editing.
 	 */
@@ -114,12 +125,41 @@ export abstract class BaseFieldComponent extends BaseComponent {
 	}
 
 	/**
+	 * Return the field that is observed for changes.
+	 *
+	 * @return the input field
+	 */
+	getValueProvider(): HTMLElement {
+		return this.input;
+	}
+
+	/**
+	 * A function that can be used to mutate the field value.
+	 *
+	 * @param value
+	 */
+	mutate(value: UndoValue): void {
+		this.input.value = value;
+	}
+
+	/**
+	 * Query the current field value.
+	 *
+	 * @return the current value
+	 */
+	query(): UndoValue {
+		return this.input.value;
+	}
+
+	/**
 	 * Render field when data is set.
 	 */
 	protected create(): void {
 		this.createLabel();
 		this.createInput();
 		this.applyAttributes();
+
+		Undo.attach(this);
 	}
 
 	/**
