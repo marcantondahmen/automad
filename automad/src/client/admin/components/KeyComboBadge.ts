@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, CSS } from '@/core';
+import { Attr, CSS, getMetaKeyLabel } from '@/core';
 import { BaseComponent } from '@/components/Base';
 
 /**
@@ -56,11 +56,7 @@ class KeyComboComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(CSS.keyCombo);
 
-		let meta = 'Ctrl';
-
-		if (navigator.userAgent.toLowerCase().indexOf('mac') != -1) {
-			meta = '⌘';
-		}
+		const meta = getMetaKeyLabel();
 
 		this.textContent = `${meta} + ${this.elementAttributes[Attr.key]}`;
 

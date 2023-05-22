@@ -121,6 +121,19 @@ export const debounce = (
 };
 
 /**
+ * Get the meta key symbol based on the current client OS.
+ *
+ * @return For mac return "⌘", else "Ctrl"
+ */
+export const getMetaKeyLabel = (): string => {
+	if (navigator.userAgent.toLowerCase().indexOf('mac') != -1) {
+		return '⌘';
+	}
+
+	return 'Ctrl';
+};
+
+/**
  * Test whether a slug is active.
  *
  * @param slug

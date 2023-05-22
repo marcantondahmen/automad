@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, EventName, html, listen, Undo } from '@/core';
+import {
+	Attr,
+	create,
+	CSS,
+	EventName,
+	getMetaKeyLabel,
+	html,
+	listen,
+	Undo,
+} from '@/core';
 import { BaseComponent } from '@/components/Base';
 
 /**
@@ -60,10 +69,12 @@ class UndoButtonsComponent extends BaseComponent {
 	render(): void {
 		this.innerHTML = '';
 
+		const meta = getMetaKeyLabel();
+
 		const undoButton = create(
 			'span',
 			[CSS.navbarItem],
-			{},
+			{ [Attr.tooltip]: `${meta} + Z` },
 			this,
 			html`<i class="bi bi-arrow-counterclockwise"></i>`
 		);
@@ -71,7 +82,7 @@ class UndoButtonsComponent extends BaseComponent {
 		const redoButton = create(
 			'span',
 			[CSS.navbarItem],
-			{},
+			{ [Attr.tooltip]: `${meta} + Y` },
 			this,
 			html`<i class="bi bi-arrow-clockwise"></i>`
 		);
