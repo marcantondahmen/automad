@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,7 +36,7 @@ import { create, CSS, EventName, html, listen, Undo } from '@/core';
 import { BaseComponent } from '@/components/Base';
 
 /**
- * A spinner component.
+ * Undo/redo buttons component.
  *
  * @extends BaseComponent
  */
@@ -54,6 +54,9 @@ class UndoButtonsComponent extends BaseComponent {
 		);
 	}
 
+	/**
+	 * Render the buttons based on the stack sizes.
+	 */
 	render(): void {
 		this.innerHTML = '';
 
