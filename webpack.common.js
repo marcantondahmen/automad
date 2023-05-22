@@ -91,22 +91,6 @@ module.exports = (env, argv) => {
 				},
 			],
 		},
-		resolve: {
-			extensions: ['.ts', '.js'],
-			alias: {
-				// Add this alias to make FileRobot imports work.
-				// React is only used as dependency of FileRobot but will be installed in two locations:
-				// 1. node_modules/react
-				// 2. node_modules/filerobot-image-editor/node_modules/react
-				//
-				// It is important to make sure that react is only imported once during bundling and therefore
-				// the alias has to be added here.
-				//
-				// https://github.com/scaleflex/filerobot-image-editor/issues/107#issuecomment-886589896
-				// https://github.com/facebook/react/issues/13991#issuecomment-983316545
-				react: path.resolve(__dirname, 'node_modules/react'),
-			},
-		},
 		optimization: {
 			minimizer: [
 				new CssMinimizerPlugin(),
@@ -155,6 +139,7 @@ module.exports = (env, argv) => {
 				proxy: 'http://127.0.0.1:8080/automad-development',
 				files: ['**/*.php', '**/src/**/*.html'],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
+				notify: false,
 			})
 		);
 
