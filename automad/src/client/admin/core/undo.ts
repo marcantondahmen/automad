@@ -232,7 +232,7 @@ class UndoProvider {
 			const value = field.query();
 			const undoState = this.undoState;
 
-			if (value === undoState) {
+			if (JSON.stringify(value) === JSON.stringify(undoState)) {
 				return;
 			}
 
@@ -248,7 +248,7 @@ class UndoProvider {
 			});
 
 			this.undoState = value;
-		}, 500);
+		}, 1000);
 
 		this.undoState = field.query();
 
