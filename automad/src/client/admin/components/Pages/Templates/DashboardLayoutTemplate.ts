@@ -96,6 +96,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<am-navbar-update-indicator></am-navbar-update-indicator>
 						<am-navbar-outdated-packages-indicator></am-navbar-outdated-packages-indicator>
 						<am-navbar-debug-indicator></am-navbar-debug-indicator>
+						<am-undo-buttons></am-undo-buttons>
 						<am-dropdown ${Attr.right}>
 							<span class="${CSS.navbarItem}">
 								<i class="bi bi-three-dots"></i>
