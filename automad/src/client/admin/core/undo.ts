@@ -223,8 +223,6 @@ class UndoProvider {
 			fire('change', field.getValueProvider());
 		};
 
-		console.log('UNDO CONST', field.query(), field.getValueProvider());
-
 		const onChange = debounce(() => {
 			if (this.ignoreEventFeedback) {
 				this.ignoreEventFeedback = false;
