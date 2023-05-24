@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Undoable, UndoEntry, UndoValue } from '@/types';
+import { UndoCapableField, UndoEntry, UndoValue } from '@/types';
 import { debounce, EventName, fire, keyCombo, listen } from '.';
 
 /**
@@ -133,7 +133,7 @@ export class Undo {
 	 *
 	 * @static
 	 */
-	static attach(field: Undoable): void {
+	static attach(field: UndoCapableField): void {
 		setTimeout(() => {
 			new UndoProvider(field);
 		}, 0);
@@ -217,11 +217,13 @@ class UndoProvider {
 	 *
 	 * @param field
 	 */
-	constructor(field: Undoable) {
+	constructor(field: UndoCapableField) {
 		const fireEvent = () => {
 			this.ignoreEventFeedback = true;
 			fire('change', field.getValueProvider());
 		};
+
+		console.log('UNDO CONST', field.query(), field.getValueProvider());
 
 		const onChange = debounce(() => {
 			if (this.ignoreEventFeedback) {
@@ -248,7 +250,7 @@ class UndoProvider {
 			});
 
 			this.undoState = value;
-		}, 1000);
+		}, 500);
 
 		this.undoState = field.query();
 

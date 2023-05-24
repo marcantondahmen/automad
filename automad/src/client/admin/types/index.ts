@@ -40,6 +40,7 @@ export * from './search';
 export * from './shared';
 export * from './switcher';
 export * from './system';
+export * from './undo';
 import { PageMetaData } from '.';
 import { InputElement } from './field';
 

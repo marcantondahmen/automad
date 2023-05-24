@@ -48,7 +48,7 @@ import {
 	FieldInitData,
 	FieldRenderData,
 	InputElement,
-	Undoable,
+	UndoCapableField,
 	UndoValue,
 } from '@/types';
 import { BaseComponent } from '@/components/Base';
@@ -61,11 +61,11 @@ import { BaseComponent } from '@/components/Base';
  * - `spellcheck` - enable spell checking
  *
  * @extends BaseComponent
- * @implements Undoable
+ * @implements UndoCapableField
  */
 export abstract class BaseFieldComponent
 	extends BaseComponent
-	implements Undoable
+	implements UndoCapableField
 {
 	/**
 	 * If true the field data is spell checked while editing.
