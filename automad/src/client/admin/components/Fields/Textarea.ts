@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, debounce, listen } from '@/core';
+import { create, CSS, debounce, initTabHandler, listen } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -56,7 +56,7 @@ class TextareaComponent extends BaseFieldComponent {
 		textarea.textContent = value;
 
 		this.initAutoResize(textarea);
-		this.initTabHandler(textarea);
+		initTabHandler(textarea);
 	}
 
 	/**
@@ -94,31 +94,6 @@ class TextareaComponent extends BaseFieldComponent {
 		clone.textContent = textarea.value + '-';
 		textarea.style.height = `${clone.offsetHeight + 15}px`;
 		clone.remove();
-	}
-
-	/**
-	 * Initialize handling of the tab key.
-	 * @param textarea
-	 */
-	private initTabHandler(textarea: HTMLTextAreaElement) {
-		listen(textarea, 'keydown', (event: KeyboardEvent) => {
-			if (event.keyCode === 9) {
-				event.preventDefault();
-				event.stopPropagation();
-
-				const selectionStart = textarea.selectionStart;
-				const selectionEnd = textarea.selectionEnd;
-				const value = textarea.value;
-
-				textarea.value = `${value.substring(
-					0,
-					selectionStart
-				)}\t${value.substring(selectionEnd)}`;
-
-				textarea.selectionStart = selectionStart + 1;
-				textarea.selectionEnd = selectionStart + 1;
-			}
-		});
 	}
 }
 

@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, createField, query, queryAll, titleCase } from '.';
+import {
+	App,
+	Attr,
+	create,
+	createField,
+	listen,
+	query,
+	queryAll,
+	titleCase,
+} from '.';
 import {
 	FieldGroupData,
 	FieldGroups,
@@ -259,6 +268,32 @@ export const setFormData = (
 			} else {
 				control.value = formData[name];
 			}
+		}
+	});
+};
+
+/**
+ * Initialize handling of the tab key.
+ *
+ * @param textarea
+ */
+export const initTabHandler = (textarea: HTMLTextAreaElement) => {
+	listen(textarea, 'keydown', (event: KeyboardEvent) => {
+		if (event.keyCode === 9) {
+			event.preventDefault();
+			event.stopPropagation();
+
+			const selectionStart = textarea.selectionStart;
+			const selectionEnd = textarea.selectionEnd;
+			const value = textarea.value;
+
+			textarea.value = `${value.substring(
+				0,
+				selectionStart
+			)}\t${value.substring(selectionEnd)}`;
+
+			textarea.selectionStart = selectionStart + 1;
+			textarea.selectionEnd = selectionStart + 1;
 		}
 	});
 };
