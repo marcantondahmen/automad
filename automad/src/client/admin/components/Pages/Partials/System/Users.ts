@@ -32,50 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	Binding,
-	createField,
-	CSS,
-	EventName,
-	html,
-	listen,
-} from '@/core';
-import { SystemComponent } from '@/components/Pages/System';
-
-/**
- * Create bindings for the form elements in the feed section.
- *
- * @param component
- */
-const createBindings = (component: SystemComponent): void => {
-	const username = new Binding('username', { initial: App.user.name });
-	const email = new Binding('email', { initial: App.user.email });
-	const userSubmit = new Binding('userSubmitButton', { initial: true });
-	const userCount = new Binding('userCount', {
-		initial: App.system.users.length,
-	});
-
-	component.addListener(
-		listen(window, EventName.appStateChange, () => {
-			username.value = App.user.name;
-			email.value = App.user.email;
-			userSubmit.value = true;
-			userCount.value = App.system.users.length;
-		})
-	);
-};
+import { App, Attr, createField, CSS, EventName, html } from '@/core';
 
 /**
  * Render the user section.
  *
- * @param component
  * @returns the rendered HTML
  */
-export const renderUsersSection = (component: SystemComponent): string => {
-	createBindings(component);
-
+export const renderUsersSection = (): string => {
 	return html`
 		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
 			<am-form
@@ -90,40 +54,15 @@ export const renderUsersSection = (component: SystemComponent): string => {
 					<span
 						class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
 					>
-						<span>
-							${createField(
-								'am-input',
-								null,
-								{
-									key: 'username',
-									value: App.user.name,
-									name: 'username',
-									label: App.text('username'),
-								},
-								[],
-								{
-									[Attr.bind]: 'username',
-									[Attr.bindTo]: 'value',
-								}
-							).outerHTML}
-							${createField(
-								'am-email',
-								null,
-								{
-									key: 'email',
-									value: App.user.email,
-									name: 'email',
-									label: App.text('email'),
-								},
-								[],
-								{ [Attr.bind]: 'email', [Attr.bindTo]: 'value' }
-							).outerHTML}
+						<span
+							class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+						>
+							<am-user-name></am-user-name>
+							<am-user-email></am-user-email>
 						</span>
 						<span class="${CSS.cardFormButtons}">
 							<am-submit
 								class="${CSS.button} ${CSS.buttonPrimary}"
-								${Attr.bind}="userSubmitButton"
-								${Attr.bindTo}="disabled"
 							>
 								<span>${App.text('save')}</span>
 							</am-submit>
@@ -160,11 +99,9 @@ export const renderUsersSection = (component: SystemComponent): string => {
 											'systemUsersRegistered'
 										)}</span
 									>
-									<span
-										class="${CSS.badge}"
-										${Attr.bind}="userCount"
-										${Attr.bindTo}="textContent"
-									></span>
+									<span class="${CSS.badge}">
+										<am-user-count-indicator></am-user-count-indicator>
+									</span>
 								</span>
 							</span>
 						</am-modal-toggle>
@@ -235,7 +172,7 @@ export const renderUsersSection = (component: SystemComponent): string => {
 					).outerHTML}
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
@@ -257,7 +194,7 @@ export const renderUsersSection = (component: SystemComponent): string => {
 					></am-delete-users-form>
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit
@@ -330,7 +267,7 @@ export const renderUsersSection = (component: SystemComponent): string => {
 					).outerHTML}
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
@@ -376,7 +313,7 @@ export const renderUsersSection = (component: SystemComponent): string => {
 					).outerHTML}
 				</div>
 				<div class="${CSS.modalFooter}">
-					<am-modal-close class="${CSS.button}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">

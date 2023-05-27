@@ -32,8 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, EventName, listen, query } from '@/core';
+import { CSS, EventName, listen, query, Undo } from '@/core';
 import { BaseComponent } from '@/components/Base';
+import { UndoValue } from '@/types';
 
 /**
  * An advanced select component. The component inner HTML has to contain a single span
@@ -49,7 +50,7 @@ import { BaseComponent } from '@/components/Base';
  *     </select>
  * </am-select>
  *
- * @extends BaseComponent
+ *@extends BaseComponent
  */
 export class SelectComponent extends BaseComponent {
 	/**
@@ -109,6 +110,16 @@ export class SelectComponent extends BaseComponent {
 
 		update();
 		toggleFocus();
+
+		setTimeout(() => {
+			Undo.attach({
+				getValueProvider: () => this.select,
+				query: () => this.select.value,
+				mutate: (value: UndoValue) => {
+					this.select.value = `${value}`;
+				},
+			});
+		}, 0);
 	}
 }
 

@@ -32,49 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	Binding,
-	createField,
-	CSS,
-	EventName,
-	html,
-	listen,
-} from '@/core';
-import { SystemComponent } from '@/components/Pages/System';
-
-/**
- * Create bindings for the form elements in the feed section.
- *
- * @param component
- */
-const createBindings = (component: SystemComponent): void => {
-	const feedEnabled = new Binding('feedEnabled', {
-		initial: App.system.feed.enabled,
-	});
-
-	const feedFields = new Binding('feedFields', {
-		initial: JSON.stringify(App.system.feed.fields),
-	});
-
-	component.addListener(
-		listen(window, EventName.appStateChange, () => {
-			feedEnabled.value = App.system.feed.enabled;
-			feedFields.value = JSON.stringify(App.system.feed.fields);
-		})
-	);
-};
+import { App, Attr, CSS, EventName, html } from '@/core';
 
 /**
  * Render the feed section.
  *
- * @param component
  * @returns the rendered HTML
  */
-export const renderFeedSection = (component: SystemComponent): string => {
-	createBindings(component);
-
+export const renderFeedSection = (): string => {
 	return html`
 		<am-form
 			class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
@@ -85,22 +50,7 @@ export const renderFeedSection = (component: SystemComponent): string => {
 			<input type="hidden" name="type" value="feed" />
 			<div>
 				<p>${App.text('systemRssFeedInfo')}</p>
-				${createField(
-					'am-toggle-large',
-					null,
-					{
-						key: 'feedEnabled',
-						value: App.system.feed.enabled,
-						name: 'feedEnabled',
-						label: App.text('systemRssFeedEnable'),
-					},
-					[],
-					{
-						[Attr.bind]: 'feedEnabled',
-						[Attr.bindTo]: 'checked',
-						[Attr.toggle]: '#am-feed-settings',
-					}
-				).outerHTML}
+				<am-feed-enable></am-feed-enable>
 			</div>
 			<div id="am-feed-settings">
 				<p>${App.text('systemRssFeedUrl')}</p>
@@ -119,20 +69,7 @@ export const renderFeedSection = (component: SystemComponent): string => {
 					</am-copy>
 				</div>
 				<p>${App.text('systemRssFeedFields')}</p>
-				${createField(
-					'am-feed-field-select',
-					null,
-					{
-						key: 'feedFields',
-						value: '',
-						name: 'feedFields',
-					},
-					[],
-					{
-						[Attr.bind]: 'feedFields',
-						[Attr.bindTo]: 'value',
-					}
-				).outerHTML}
+				<am-feed-fields></am-feed-fields>
 			</div>
 		</am-form>
 	`;

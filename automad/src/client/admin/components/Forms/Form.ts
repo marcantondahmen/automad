@@ -195,14 +195,6 @@ export class FormComponent extends BaseComponent {
 			this.submit(true);
 		}
 
-		if (this.watch) {
-			setTimeout(() => {
-				this.submitButtons.forEach((button: SubmitComponent) => {
-					button.setAttribute('disabled', '');
-				});
-			}, 0);
-		}
-
 		if (this.hasAttribute(Attr.focus)) {
 			setTimeout(() => {
 				query<InputElement>('input').focus();
@@ -223,7 +215,22 @@ export class FormComponent extends BaseComponent {
 			);
 		}
 
+		this.disableSubmitButtons();
 		this.watchChanges();
+	}
+
+	/**
+	 * Disable submit button for watched forms.
+	 */
+	disableSubmitButtons(): void {
+		if (this.watch) {
+			setTimeout(() => {
+				this.submitButtons.forEach((button: SubmitComponent) => {
+					button.setAttribute('disabled', '');
+					button.blur();
+				});
+			}, 0);
+		}
 	}
 
 	/**
@@ -253,12 +260,6 @@ export class FormComponent extends BaseComponent {
 
 					if (this.hasAttribute(Attr.event)) {
 						fire(this.getAttribute(Attr.event));
-					}
-
-					const modal = this.parentModal;
-
-					if (modal) {
-						modal.close();
 					}
 
 					App.removeNavigationLock(lockId);
@@ -299,6 +300,11 @@ export class FormComponent extends BaseComponent {
 			debug.forEach((item) => {
 				getLogger().log(this.api, item);
 			});
+		}
+
+		if (!error) {
+			this.disableSubmitButtons();
+			this.parentModal?.close();
 		}
 	}
 

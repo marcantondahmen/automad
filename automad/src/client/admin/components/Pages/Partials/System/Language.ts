@@ -32,51 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	Binding,
-	createSelect,
-	CSS,
-	EventName,
-	html,
-	listen,
-} from '@/core';
-import { SelectComponentOption } from '@/types';
-import { SystemComponent } from '@/components/Pages/System';
-
-/**
- * Create bindings for the form elements in the cache section.
- *
- * @param component
- */
-const createBindings = (component: SystemComponent): void => {
-	const translation = new Binding('translation', {
-		initial: App.system.translation,
-	});
-
-	component.addListener(
-		listen(window, EventName.appStateChange, () => {
-			translation.value = App.system.translation;
-		})
-	);
-};
+import { App, Attr, EventName, html } from '@/core';
 
 /**
  * Render the cache section.
  *
- * @param component
  * @returns the rendered HTML
  */
-export const renderLanguageSection = (component: SystemComponent): string => {
-	const languages: SelectComponentOption[] = [];
-
-	for (const [text, value] of Object.entries(App.languages)) {
-		languages.push({ text, value });
-	}
-
-	createBindings(component);
-
+export const renderLanguageSection = (): string => {
 	return html`
 		<am-form
 			${Attr.api}="Config/update"
@@ -86,19 +49,7 @@ export const renderLanguageSection = (component: SystemComponent): string => {
 			<input type="hidden" name="type" value="translation" />
 			<div>
 				<p>${App.text('systemLanguageInfo')}</p>
-				${createSelect(
-					languages,
-					'',
-					null,
-					'translation',
-					'',
-					'',
-					[CSS.selectInline],
-					{
-						[Attr.bind]: 'translation',
-						[Attr.bindTo]: 'value',
-					}
-				).outerHTML}
+				<am-language-select></am-language-select>
 			</div>
 		</am-form>
 	`;

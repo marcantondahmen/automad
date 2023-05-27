@@ -26,34 +26,42 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { EventName, listen } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { App, createSelect, CSS } from '@/core';
+import { SelectComponentOption } from '@/types';
+import { BaseComponent } from '../Base';
 
 /**
- * A base update indicator component.
+ * A wrapper element for initializing the language select field.
  *
  * @extends BaseComponent
  */
-export abstract class BaseUpdateIndicatorComponent extends BaseComponent {
+class LanguageSelectComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.render();
+		const languages: SelectComponentOption[] = [];
 
-		this.addListener(
-			listen(window, EventName.systemUpdateCheck, this.render.bind(this))
+		for (const [text, value] of Object.entries(App.languages)) {
+			languages.push({ text, value });
+		}
+
+		createSelect(
+			languages,
+			App.system.translation,
+			this,
+			'translation',
+			'',
+			'',
+			[CSS.selectInline]
 		);
 	}
-
-	/**
-	 * Render the state element.
-	 */
-	abstract render(): void;
 }
+
+customElements.define('am-language-select', LanguageSelectComponent);

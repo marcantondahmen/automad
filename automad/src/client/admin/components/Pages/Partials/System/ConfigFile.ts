@@ -33,15 +33,13 @@
  */
 
 import { App, Attr, CSS, html } from '@/core';
-import { Listener } from '@/types';
 
 /**
  * Render the config file section.
  *
- * @param listeners
  * @returns the rendered HTML
  */
-export const renderConfigFileSection = (listeners: Listener[]): string => {
+export const renderConfigFileSection = (): string => {
 	return html`
 		<div class="${CSS.alert}">
 			<div class="${CSS.alertIcon}">

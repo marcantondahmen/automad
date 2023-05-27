@@ -42,6 +42,7 @@ import {
 	query,
 	queryAll,
 	setSearchParam,
+	Undo,
 } from '@/core';
 import { SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
@@ -132,6 +133,8 @@ export class SwitcherComponent extends BaseComponent {
 		}
 
 		query('html').scrollTop = 0;
+
+		Undo.new();
 	}
 }
 

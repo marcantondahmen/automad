@@ -32,15 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	create,
-	CSS,
-	getTagFromRoute,
-	html,
-	Route,
-} from '@/core';
+import { App, Attr, create, CSS, getTagFromRoute, html, Route } from '@/core';
 import {
 	SwitcherDropdownData,
 	SwitcherDropdownItem,
@@ -195,7 +187,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 		this.sectionData.forEach((item: SystemSectionData) => {
 			sections += html`
 				<am-switcher-section name="${item.section}">
-					${item.render(this)}
+					${item.render()}
 				</am-switcher-section>
 			`;
 		});

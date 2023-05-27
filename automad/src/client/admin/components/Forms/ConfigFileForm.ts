@@ -32,8 +32,18 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, html, listen, query } from '@/core';
-import { KeyValueMap } from '@/types';
+import {
+	App,
+	Attr,
+	CSS,
+	EventName,
+	html,
+	initTabHandler,
+	listen,
+	query,
+	Undo,
+} from '@/core';
+import { KeyValueMap, UndoValue } from '@/types';
 import { FormComponent } from './Form';
 
 /**
@@ -126,7 +136,18 @@ export class ConfigFileFormComponent extends FormComponent {
 			</am-modal>
 		`;
 
-		query<HTMLInputElement>('textarea', this).value = content;
+		const textarea = query<HTMLTextAreaElement>('textarea', this);
+
+		textarea.value = content;
+		initTabHandler(textarea);
+
+		Undo.attach({
+			getValueProvider: () => textarea,
+			query: () => textarea.value,
+			mutate: (value: UndoValue) => {
+				textarea.value = value;
+			},
+		});
 	}
 }
 

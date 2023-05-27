@@ -117,6 +117,8 @@ export class Undo {
 	static new(): void {
 		Undo.undoStack = new UndoStack();
 		Undo.redoStack = new UndoStack();
+
+		fire(EventName.undoStackUpdate);
 	}
 
 	/**

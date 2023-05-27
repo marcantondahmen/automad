@@ -26,34 +26,27 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { EventName, listen } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { App } from '@/core';
+import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
 
 /**
- * A base update indicator component.
+ * A user count indicator.
  *
- * @extends BaseComponent
+ * @extends BaseUpdateIndicatorComponent
  */
-export abstract class BaseUpdateIndicatorComponent extends BaseComponent {
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.render();
-
-		this.addListener(
-			listen(window, EventName.systemUpdateCheck, this.render.bind(this))
-		);
-	}
-
+class UserCountIndicatorComponent extends BaseStateIndicatorComponent {
 	/**
 	 * Render the state element.
 	 */
-	abstract render(): void;
+	render(): void {
+		this.textContent = `${App.system.users.length}`;
+	}
 }
+
+customElements.define('am-user-count-indicator', UserCountIndicatorComponent);
