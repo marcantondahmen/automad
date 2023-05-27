@@ -140,7 +140,6 @@ class ConfigController {
 
 		if (Config::write($config)) {
 			Debug::log($config, 'Updated config file');
-			$Response->setSuccess(Text::get('updateConfigSuccess'));
 			Cache::clear();
 		} else {
 			$Response->setError(Text::get('permissionsDeniedError'));

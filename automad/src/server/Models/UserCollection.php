@@ -37,6 +37,7 @@
 namespace Automad\Models;
 
 use Automad\Admin\Templates\InvitationEmail;
+use Automad\Core\Cache;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Session;
@@ -301,6 +302,8 @@ class UserCollection {
 		if (function_exists('opcache_invalidate')) {
 			opcache_invalidate(UserCollection::FILE_ACCOUNTS, true);
 		}
+
+		Cache::clear();
 
 		return true;
 	}

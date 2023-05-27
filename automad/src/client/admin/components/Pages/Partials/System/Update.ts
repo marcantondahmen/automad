@@ -33,7 +33,6 @@
  */
 
 import { Attr, html } from '@/core';
-import { Listener } from '@/types';
 
 /**
  * Render the update section.
@@ -41,7 +40,7 @@ import { Listener } from '@/types';
  * @param listeners
  * @returns the rendered HTML
  */
-export const renderUpdateSection = (listeners: Listener[]): string => {
+export const renderUpdateSection = (): string => {
 	return html`<am-system-update-form
 		${Attr.api}="System/update"
 	></am-system-update-form>`;

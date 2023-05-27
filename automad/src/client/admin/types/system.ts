@@ -40,7 +40,7 @@ export interface SystemSectionData {
 	title: string;
 	info: string;
 	state: string;
-	render: Function;
+	render: () => void;
 	narrowIcon?: boolean;
 }
 
