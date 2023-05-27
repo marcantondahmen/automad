@@ -73,7 +73,11 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 		setTimeout(() => {
 			this.init();
 
-			listen(this.input, EventName.changeByBinding, this.init.bind(this));
+			listen(
+				this.input,
+				`change ${EventName.changeByBinding}`,
+				this.init.bind(this)
+			);
 		}, 0);
 	}
 

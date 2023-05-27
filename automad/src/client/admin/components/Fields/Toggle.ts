@@ -72,6 +72,24 @@ export class ToggleComponent extends BaseFieldComponent {
 			`
 		);
 	}
+
+	/**
+	 * Query the current field value.
+	 *
+	 * @return the current value
+	 */
+	query() {
+		return (this.input as HTMLInputElement).checked;
+	}
+
+	/**
+	 * A function that can be used to mutate the field value.
+	 *
+	 * @param value
+	 */
+	mutate(value: any): void {
+		(this.input as HTMLInputElement).checked = value;
+	}
 }
 
 customElements.define('am-toggle', ToggleComponent);

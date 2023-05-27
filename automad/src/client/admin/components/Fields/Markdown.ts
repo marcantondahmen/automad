@@ -156,6 +156,11 @@ class MarkdownComponent extends BaseFieldComponent {
 	static readonly TAG_NAME = 'am-markdown';
 
 	/**
+	 * The editor instance.
+	 */
+	private editor: Editor;
+
+	/**
 	 * The editor value that serves a input value for the parent form.
 	 */
 	value: string;
@@ -199,7 +204,7 @@ class MarkdownComponent extends BaseFieldComponent {
 
 		setMdEditorLanguage();
 
-		const editor = new Editor({
+		this.editor = new Editor({
 			el: container,
 			initialValue: value as string,
 			usageStatistics: false,
@@ -217,7 +222,7 @@ class MarkdownComponent extends BaseFieldComponent {
 			customHTMLRenderer: htmlRenderer,
 			events: {
 				change: () => {
-					this.value = editor.getMarkdown();
+					this.value = this.editor.getMarkdown();
 					fire('input', this);
 				},
 				focus: () => {
@@ -233,7 +238,7 @@ class MarkdownComponent extends BaseFieldComponent {
 		new Binding(imageBindingName, {
 			onChange: (value) => {
 				if (value) {
-					editor.insertText(`\r\n![](${value})`);
+					this.editor.insertText(`\r\n![](${value})`);
 				}
 			},
 		});
@@ -241,8 +246,8 @@ class MarkdownComponent extends BaseFieldComponent {
 		new Binding(linkBindingName, {
 			onChange: (value) => {
 				if (value) {
-					editor.insertText(
-						`[${editor.getSelectedText() || value}](${value})`
+					this.editor.insertText(
+						`[${this.editor.getSelectedText() || value}](${value})`
 					);
 				}
 			},
@@ -269,7 +274,7 @@ class MarkdownComponent extends BaseFieldComponent {
 					item.classList.toggle('active', item.isSameNode(target));
 				});
 
-				editor.changePreviewStyle(
+				this.editor.changePreviewStyle(
 					activeIndex === 2 ? 'vertical' : 'tab'
 				);
 
@@ -277,6 +282,33 @@ class MarkdownComponent extends BaseFieldComponent {
 			},
 			'div'
 		);
+	}
+
+	/**
+	 * Return the field that is observed for changes.
+	 *
+	 * @return the input field
+	 */
+	getValueProvider(): HTMLElement {
+		return this;
+	}
+
+	/**
+	 * A function that can be used to mutate the field value.
+	 *
+	 * @param value
+	 */
+	query() {
+		return this.value;
+	}
+
+	/**
+	 * Query the current field value.
+	 *
+	 * @return the current value
+	 */
+	mutate(value: any): void {
+		this.editor.setMarkdown(value);
 	}
 }
 

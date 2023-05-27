@@ -227,7 +227,7 @@ export class Bindings {
 				});
 			};
 
-			listen(binding.input, 'input', update);
+			listen(binding.input, 'change input', update);
 			fire('input', binding.input);
 		});
 	}

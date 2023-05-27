@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, listen } from '@/core';
+import { create, CSS, fire, listen } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -62,9 +62,10 @@ class ColorComponent extends BaseFieldComponent {
 
 		listen(picker, 'change', () => {
 			input.value = picker.value;
+			fire('change', input);
 		});
 
-		listen(input, 'keyup', () => {
+		listen(input, 'keyup change', () => {
 			picker.value = input.value;
 		});
 	}
