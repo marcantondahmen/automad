@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	Binding,
 	create,
 	createImagePickerModal,
@@ -159,6 +160,11 @@ class MarkdownComponent extends BaseFieldComponent {
 	 * The editor instance.
 	 */
 	private editor: Editor;
+
+	/**
+	 * Don't link the label.
+	 */
+	protected linkLabel = false;
 
 	/**
 	 * The editor value that serves a input value for the parent form.

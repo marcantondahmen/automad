@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	create,
 	createEditor,
 	CSS,
@@ -68,6 +69,11 @@ export class EditorComponent extends BaseFieldComponent {
 	 * The editor component.
 	 */
 	private editorJS: EditorJSComponent;
+
+	/**
+	 * Don't link the label.
+	 */
+	protected linkLabel = false;
 
 	/**
 	 * The editor value that serves a input value for the parent form.

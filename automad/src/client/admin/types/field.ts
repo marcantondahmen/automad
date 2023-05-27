@@ -57,7 +57,7 @@ const FieldTypes = [
 	'am-url',
 ] as const;
 
-export type FieldType = typeof FieldTypes[number];
+export type FieldType = (typeof FieldTypes)[number];
 
 export type FieldSectionName = 'settings' | 'text' | 'colors';
 
@@ -94,6 +94,7 @@ export interface FieldInitData {
 	key: string;
 	value: string | number | KeyValueMap | boolean;
 	name: string;
+	id?: string;
 	tooltip?: string;
 	label?: string;
 	placeholder?: string | number | KeyValueMap | boolean;

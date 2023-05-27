@@ -42,6 +42,11 @@ import { BaseFieldComponent } from './BaseField';
  */
 export class NumberUnitComponent extends BaseFieldComponent {
 	/**
+	 * Don't link the label.
+	 */
+	protected linkLabel = false;
+
+	/**
 	 * Create an input field.
 	 */
 	protected createInput(): void {

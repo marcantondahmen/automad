@@ -186,9 +186,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			[CSS.flex],
 			{},
 			this.wrapper,
-			html`<span class="${CSS.editorBlockSectionLabel}"
-				>${App.text('editorBlockSection')}</span
-			>`
+			html`
+				<span class="${CSS.editorBlockSectionLabel}">
+					${App.text('editorBlockSection')}
+				</span>
+			`
 		);
 
 		this.holder = createEditor(
@@ -268,9 +270,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			{},
 			toolbar,
 			html`
-				<span class="${CSS.formGroupItem} ${CSS.formGroupIcon} "
-					>${iconFlexJustyifyContent}</span
-				>
+				<span class="${CSS.formGroupItem} ${CSS.formGroupIcon}">
+					${iconFlexJustyifyContent}
+				</span>
 			`
 		);
 

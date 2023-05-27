@@ -48,6 +48,7 @@ import {
 	FieldInitData,
 	FieldRenderData,
 	InputElement,
+	KeyValueMap,
 	UndoCapableField,
 	UndoValue,
 } from '@/types';
@@ -75,6 +76,11 @@ export abstract class BaseFieldComponent
 	}
 
 	/**
+	 * Add "for" attribute to label.
+	 */
+	protected linkLabel = true;
+
+	/**
 	 * The internal field data.
 	 */
 	protected _data: FieldRenderData;
@@ -93,13 +99,21 @@ export abstract class BaseFieldComponent
 	 * @param params.key
 	 * @param params.value
 	 * @param params.name
+	 * @param params.id
 	 * @param params.tooltip
 	 * @param params.label
 	 * @param params.placeholder
 	 */
-	set data({ key, value, name, tooltip, label, placeholder }: FieldInitData) {
-		const id = createIdFromField(key);
-
+	set data({
+		key,
+		value,
+		name,
+		id,
+		tooltip,
+		label,
+		placeholder,
+	}: FieldInitData) {
+		id = id ?? createIdFromField(key);
 		value = typeof value === 'undefined' ? '' : value;
 		tooltip = htmlSpecialChars(tooltip || '');
 		label = label || createLabelFromField(key);
@@ -166,9 +180,15 @@ export abstract class BaseFieldComponent
 	 * Create a label.
 	 */
 	protected createLabel(): void {
-		const { id, label, tooltip } = this._data;
+		const { label, tooltip } = this._data;
+		const attributes: KeyValueMap = {};
+
+		if (this.linkLabel) {
+			attributes['for'] = this._data.id;
+		}
+
 		const wrapper = create('div', [], {}, this);
-		const element = create('label', [CSS.fieldLabel], { for: id }, wrapper);
+		const element = create('label', [CSS.fieldLabel], attributes, wrapper);
 
 		create('span', [], {}, element).textContent = label;
 

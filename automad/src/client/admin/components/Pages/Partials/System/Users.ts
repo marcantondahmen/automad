@@ -70,11 +70,9 @@ export const renderUsersSection = (): string => {
 								class="${CSS.button} ${CSS.buttonAccent}"
 								${Attr.modal}="#am-change-password-modal"
 							>
-								<span
-									>${App.text(
-										'systemUsersChangePassword'
-									)}</span
-								>
+								<span>
+									${App.text('systemUsersChangePassword')}
+								</span>
 							</am-modal-toggle>
 						</span>
 					</span>
@@ -94,11 +92,9 @@ export const renderUsersSection = (): string => {
 								<span
 									class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
 								>
-									<span
-										>${App.text(
-											'systemUsersRegistered'
-										)}</span
-									>
+									<span>
+										${App.text('systemUsersRegistered')}
+									</span>
 									<span class="${CSS.badge}">
 										<am-user-count-indicator></am-user-count-indicator>
 									</span>
@@ -222,6 +218,7 @@ export const renderUsersSection = (): string => {
 						null,
 						{
 							key: 'username',
+							id: 'am-field__create-username',
 							value: '',
 							name: 'username',
 							label: App.text('username'),
@@ -234,6 +231,7 @@ export const renderUsersSection = (): string => {
 						null,
 						{
 							key: 'email',
+							id: 'am-field__create-email',
 							value: '',
 							name: 'email',
 							label: App.text('email'),
@@ -246,6 +244,7 @@ export const renderUsersSection = (): string => {
 						null,
 						{
 							key: 'password1',
+							id: 'am-field__create-password1',
 							value: '',
 							name: 'password1',
 							label: App.text('password'),
@@ -258,6 +257,7 @@ export const renderUsersSection = (): string => {
 						null,
 						{
 							key: 'password2',
+							id: 'am-field__create-password2',
 							value: '',
 							name: 'password2',
 							label: App.text('repeatPassword'),
@@ -292,6 +292,7 @@ export const renderUsersSection = (): string => {
 						null,
 						{
 							key: 'username',
+							id: 'am-field__invite-username',
 							value: '',
 							name: 'username',
 							label: App.text('username'),
@@ -304,6 +305,7 @@ export const renderUsersSection = (): string => {
 						null,
 						{
 							key: 'email',
+							id: 'am-field__invite-email',
 							value: '',
 							name: 'email',
 							label: App.text('email'),

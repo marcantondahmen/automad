@@ -432,6 +432,14 @@ export const createSelect = (
 		`;
 	});
 
+	if (name) {
+		attributes['name'] = name;
+	}
+
+	if (id) {
+		attributes['id'] = id;
+	}
+
 	for (const [key, value] of Object.entries(attributes)) {
 		renderedAttributes += html` ${key}="${value}"`;
 	}
@@ -439,7 +447,7 @@ export const createSelect = (
 	select.innerHTML = html`
 		${prefix}
 		<span class="${CSS.flexItemGrow}"></span>
-		<select name="${name}" id="${id}" ${renderedAttributes}>
+		<select ${renderedAttributes}>
 			${renderedOptions}
 		</select>
 	`;
