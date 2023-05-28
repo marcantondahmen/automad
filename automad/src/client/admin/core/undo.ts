@@ -127,6 +127,7 @@ export class Undo {
 	 * @static
 	 */
 	static addEntry(entry: UndoEntry): void {
+		Undo.redoStack = new UndoStack();
 		Undo.undoStack.push(entry);
 	}
 
