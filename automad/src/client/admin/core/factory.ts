@@ -205,6 +205,8 @@ export const createImagePickerModal = (
 	const idWidth = uniqueId();
 	const idHeight = uniqueId();
 
+	const pageUrl = getPageURL();
+
 	new Binding(pickerBindingName, {
 		onChange: (value) => {
 			const inputWidth = query<HTMLInputElement>(`#${idWidth}`);
@@ -272,11 +274,14 @@ export const createImagePickerModal = (
 						</div>
 					</div>
 				</div>
-				<am-image-picker
-					${Attr.page}="${getPageURL()}"
-					${Attr.label}="${App.text('pageImages')}"
-					${Attr.binding}="${pickerBindingName}"
-				></am-image-picker>
+				${pageUrl &&
+				html`
+					<am-image-picker
+						${Attr.page}="${getPageURL()}"
+						${Attr.label}="${App.text('pageImages')}"
+						${Attr.binding}="${pickerBindingName}"
+					></am-image-picker>
+				`}
 				<am-image-picker
 					${Attr.label}="${App.text('sharedImages')}"
 					${Attr.binding}="${pickerBindingName}"
