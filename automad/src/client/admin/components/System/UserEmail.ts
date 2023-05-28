@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, Binding, createField, EventName, listen } from '@/core';
+import { App, createField } from '@/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -45,26 +45,12 @@ class UserEmailComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const email = new Binding('email', { initial: App.user.email });
-
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				email.value = App.user.email;
-			})
-		);
-
-		createField(
-			'am-email',
-			this,
-			{
-				key: 'email',
-				value: App.user.email,
-				name: 'email',
-				label: App.text('email'),
-			},
-			[],
-			{ [Attr.bind]: 'email', [Attr.bindTo]: 'value' }
-		);
+		createField('am-email', this, {
+			key: 'email',
+			value: App.user.email,
+			name: 'email',
+			label: App.text('email'),
+		});
 	}
 }
 
