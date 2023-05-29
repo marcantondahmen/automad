@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, listen } from '@/core';
+import { App, Attr, create, CSS, html, listen, queryAll } from '@/core';
 import { ModalComponent } from './Modal';
 
 /**
@@ -62,6 +62,23 @@ export class ModalFieldComponent extends ModalComponent {
 		super.connectedCallback();
 
 		this.render();
+
+		// Make sure all fields that are clicked have a higher z-index
+		// in order to keep menues and toolbars of those fiels on top even
+		// when overlapping with fields below.
+		this.addListener(
+			listen(this, 'click', () => {
+				const modalFields = queryAll<ModalFieldComponent>(
+					ModalFieldComponent.TAG_NAME
+				);
+
+				modalFields.forEach((field) => {
+					field.removeAttribute('style');
+				});
+
+				this.style.zIndex = '10';
+			})
+		);
 	}
 
 	/**
