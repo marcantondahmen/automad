@@ -148,10 +148,6 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		);
 
 		toolbar.setAttribute('style', `--x: ${offsetX}px; --y: ${offsetY}px;`);
-
-		queryAll('.ce-toolbar').forEach((_toolbar) => {
-			_toolbar.classList.toggle(CSS.active, _toolbar === toolbar);
-		});
 	}
 
 	protected prepareData(data: LayoutTuneData): LayoutTuneData {
