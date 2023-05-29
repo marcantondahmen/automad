@@ -34,7 +34,6 @@
 
 import {
 	App,
-	Attr,
 	create,
 	createEditor,
 	CSS,
@@ -178,6 +177,7 @@ export class EditorComponent extends BaseFieldComponent {
 			)
 		);
 
+		// This is required to hide the section layout toolbar when clicking outside of the editor.
 		this.addListener(
 			listen(window, 'click', (event: Event) => {
 				event.stopPropagation();
