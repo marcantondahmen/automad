@@ -37,7 +37,8 @@
 	top: 0 !important;
 	left: -@am-bl-editor-toolbar-icons-width;
 	transform: translate(var(--x), var(--y));
-	opacity: 1;
+	opacity: 0;
+	pointer-events: none;
 	transition: opacity 0.2s 0.2s;
 
 	&__content {
@@ -55,10 +56,35 @@
 		border-radius: 0;
 		color: var(--am-clr-text-paragraph);
 	}
+}
 
-	.codex-editor:not(:hover) &,
-	.codex-editor:has(.codex-editor:hover) > & {
+// Hide all settings buttons but the hovered.
+.codex-editor:not(:has(.codex-editor:hover)):hover > .ce-toolbar {
+	opacity: 1;
+	pointer-events: all;
+}
+
+// Hide all other hovered toolbars of nested editors in case settings are open.
+am-editor:has(.ce-settings:not(:empty)) {
+	& .codex-editor:not(:has(.codex-editor:hover)):hover > .ce-toolbar {
 		opacity: 0;
 		pointer-events: none;
+	}
+}
+
+// Hide all other hovered toolbars of nested editors in case the toolbox is open.
+am-editor:has(.codex-editor--toolbox-opened) {
+	& .codex-editor:not(:has(.codex-editor:hover)):hover > .ce-toolbar {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+// Alsways show toolbars that have an open toolbox or open settings.
+.ce-toolbar {
+	&:has(.ce-settings:not(:empty)),
+	.codex-editor--toolbox-opened > & {
+		opacity: 1 !important;
+		pointer-events: all !important;
 	}
 }

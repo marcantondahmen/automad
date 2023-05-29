@@ -123,13 +123,14 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		const content = query(':scope > .ce-block__content', blockHolder);
 		const editor = blockHolder.closest<HTMLElement>('.codex-editor');
 		const toolbar = query(':scope > .ce-toolbar', editor);
+		const settings = query('.ce-settings', toolbar);
 
 		if (!toolbar) {
 			return;
 		}
 
 		if (
-			query('.ce-settings', toolbar) ||
+			settings?.hasChildNodes() ||
 			editor.matches('.codex-editor--toolbox-opened')
 		) {
 			// Return early in order keep focus in case a settings panel is opened.
