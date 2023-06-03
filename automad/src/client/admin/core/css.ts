@@ -99,7 +99,7 @@ export const enum CSS {
 
 	editorBlockSection = 'am-c-ed-bl-section',
 	editorBlockSectionLabel = 'am-c-ed-bl-section__label',
-	editorBlockSectionSettings = 'am-c-ed-bl-section__toolbar',
+	editorBlockSectionToolbar = 'am-c-ed-bl-section__toolbar',
 	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
 
 	editorPopoverForm = 'am-c-ed-popover__form',
@@ -131,6 +131,7 @@ export const enum CSS {
 
 	formGroup = 'am-f-group',
 	formGroupItem = 'am-f-group__item',
+	formGroupIcon = 'am-f-group__icon',
 
 	grid = 'am-l-grid',
 

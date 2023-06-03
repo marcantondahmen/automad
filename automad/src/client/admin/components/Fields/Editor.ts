@@ -183,7 +183,7 @@ export class EditorComponent extends BaseFieldComponent {
 				event.stopPropagation();
 
 				queryAll(
-					`.${CSS.editorBlockSectionSettings}.${CSS.active}`
+					`.${CSS.editorBlockSectionToolbar}.${CSS.active}`
 				).forEach((item) => {
 					item.classList.remove(CSS.active);
 				});

@@ -212,7 +212,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			}
 		});
 
-		this.renderFlexSettings();
+		this.renderToolbar();
 		this.setStyle();
 
 		return this.wrapper;
@@ -222,32 +222,29 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		return this.data;
 	}
 
-	private renderFlexSettings(): void {
-		const settings = create(
+	private renderToolbar(): void {
+		const toolbar = create(
 			'div',
-			[CSS.editorBlockSectionSettings],
+			[CSS.editorBlockSectionToolbar],
 			{},
 			this.wrapper
 		);
 
-		this.renderStylesModal(settings);
-		this.renderJustifySelect(settings);
-		this.renderNumberUnitInput(settings, 'gap', iconFlexGap);
-		this.renderNumberUnitInput(settings, 'minBlockWidth', iconMinWidth);
+		this.renderStylesModal(toolbar);
+		this.renderJustifySelect(toolbar);
+		this.renderNumberUnitInput(toolbar, 'gap', iconFlexGap);
+		this.renderNumberUnitInput(toolbar, 'minBlockWidth', iconMinWidth);
 
-		listen(settings, 'change', () => {
+		listen(toolbar, 'change', () => {
 			this.setStyle();
 		});
 
 		listen(this.wrapper, 'click', (event: Event) => {
 			event.stopPropagation();
 
-			queryAll(`.${CSS.editorBlockSectionSettings}`).forEach(
-				(_settings) => {
-					_settings.classList.toggle(
-						CSS.active,
-						_settings == settings
-					);
+			queryAll(`.${CSS.editorBlockSectionToolbar}`).forEach(
+				(_toolbar) => {
+					_toolbar.classList.toggle(CSS.active, _toolbar == toolbar);
 				}
 			);
 		});
@@ -266,7 +263,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		}, []);
 		const formGroup = create(
 			'span',
-			[CSS.formGroup, CSS.flex],
+			[CSS.formGroup],
 			{},
 			toolbar,
 			html`

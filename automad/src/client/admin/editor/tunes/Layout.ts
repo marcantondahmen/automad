@@ -33,16 +33,7 @@
  */
 
 import { BlockAPI } from '@editorjs/editorjs';
-import {
-	App,
-	Attr,
-	create,
-	createSelect,
-	CSS,
-	listen,
-	query,
-	queryAll,
-} from '@/core';
+import { App, Attr, create, createSelect, CSS, listen, query } from '@/core';
 import { LayoutTuneData, SelectComponentOption } from '@/types';
 import { BaseTune } from './BaseTune';
 
