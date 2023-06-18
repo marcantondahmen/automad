@@ -198,8 +198,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.data.content as EditorOutputData,
 			{
 				onChange: async (api, event) => {
-					getLogger().log(event);
-					this.data.content = await api.saver.save();
+					const { blocks } = await api.saver.save();
+
+					this.data.content = { blocks };
 					this.blockAPI.dispatchChange();
 				},
 			},
