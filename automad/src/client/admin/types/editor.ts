@@ -49,7 +49,7 @@ export interface BlockTuneConstructorOptions {
 }
 
 export interface EditorOutputData extends OutputData {
-	automadVersion: string;
+	automadVersion?: string;
 }
 
 export interface LayoutTuneData {

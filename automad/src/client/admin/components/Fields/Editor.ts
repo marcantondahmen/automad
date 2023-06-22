@@ -40,7 +40,6 @@ import {
 	debounce,
 	fire,
 	FormDataProviders,
-	getLogger,
 	listen,
 	listenToClassChange,
 	queryAll,
@@ -90,22 +89,20 @@ export class EditorComponent extends BaseFieldComponent {
 
 		this.editorJS = createEditor(
 			create('div', [], { id }, this),
-			this.value,
+			{ blocks: this.value.blocks },
 			{
 				onChange: async (api, event) => {
-					getLogger().log(event);
-
-					const _value = (await api.saver.save()) as EditorOutputData;
+					const { blocks } =
+						(await api.saver.save()) as EditorOutputData;
 
 					if (
 						JSON.stringify(this.value.blocks) ===
-						JSON.stringify(_value.blocks)
+						JSON.stringify(blocks)
 					) {
 						return;
 					}
 
-					this.value = _value;
-					this.value['automadVersion'] = App.version;
+					this.value = { blocks, automadVersion: App.version };
 
 					fire('input', this);
 				},
