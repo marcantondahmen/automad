@@ -35,6 +35,7 @@
 import { API, BlockAPI, OutputData, ToolConfig } from '@editorjs/editorjs';
 import { KeyValueMap } from '.';
 import {
+	SectionAlignItemsOptions,
 	SectionBackgroundBlendModes,
 	SectionBorderStyles,
 	SectionJustifyContentOptions,
@@ -59,6 +60,8 @@ export interface LayoutTuneData {
 
 export type SectionJustifyContentOption =
 	keyof typeof SectionJustifyContentOptions;
+
+export type SectionAlignItemsOption = keyof typeof SectionAlignItemsOptions;
 
 export type SectionBackgroundBlendMode =
 	(typeof SectionBackgroundBlendModes)[number];
@@ -86,6 +89,7 @@ export interface SectionBlockData {
 	content: KeyValueMap;
 	style: SectionStyle;
 	justify: SectionJustifyContentOption;
+	align: SectionAlignItemsOption;
 	gap: string;
 	minBlockWidth: string;
 }
