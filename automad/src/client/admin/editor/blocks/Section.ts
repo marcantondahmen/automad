@@ -53,6 +53,7 @@ import {
 import {
 	EditorOutputData,
 	FieldType,
+	SectionAlignItemsOption,
 	SectionBlockData,
 	SectionJustifyContentOption,
 	SectionStyle,
@@ -62,6 +63,7 @@ import { BaseBlock } from './BaseBlock';
 import iconFlexGap from '@/svg/icons/flex-gap.svg';
 import iconMinWidth from '@/svg/icons/min-width.svg';
 import iconFlexJustyifyContent from '@/svg/icons/flex-justify-content.svg';
+import iconFlexAlignItems from '@/svg/icons/flex-align-items.svg';
 import { EditorJSComponent } from '@/components/EditorJS';
 import { ModalComponent } from '@/components/Modal/Modal';
 
@@ -75,6 +77,17 @@ export const SectionJustifyContentOptions = {
 	'space-between': 'Space Between',
 	'space-evenly': 'Space Evenly',
 	'fill-row': 'Fill Row',
+} as const;
+
+/**
+ * The flexbox option for "align-items".
+ */
+export const SectionAlignItemsOptions = {
+	normal: 'Normal',
+	stretch: 'Stretch',
+	center: 'Center',
+	start: 'Start',
+	end: 'End',
 } as const;
 
 /**
@@ -172,6 +185,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			content: data.content || {},
 			style: Object.assign({}, styleDefaults, data.style),
 			justify: data.justify || 'start',
+			align: data.align || 'normal',
 			gap: data.gap !== undefined ? data.gap : '',
 			minBlockWidth:
 				data.minBlockWidth !== undefined ? data.minBlockWidth : '',
@@ -233,6 +247,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		this.renderStylesModal(toolbar);
 		this.renderJustifySelect(toolbar);
+		this.renderAlignSelect(toolbar);
 		this.renderNumberUnitInput(toolbar, 'gap', iconFlexGap);
 		this.renderNumberUnitInput(toolbar, 'minBlockWidth', iconMinWidth);
 
@@ -286,6 +301,46 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		listen(justify.select, 'change', () => {
 			this.data.justify = justify.value as SectionJustifyContentOption;
+			this.blockAPI.dispatchChange();
+		});
+	}
+
+	private renderAlignSelect(toolbar: HTMLElement): void {
+		const alignSelectOptions = Object.keys(SectionAlignItemsOptions).reduce(
+			(result, key: SectionAlignItemsOption) => {
+				result.push({
+					text: SectionAlignItemsOptions[key],
+					value: key,
+				});
+
+				return result;
+			},
+			[]
+		);
+		const formGroup = create(
+			'span',
+			[CSS.formGroup],
+			{},
+			toolbar,
+			html`
+				<span class="${CSS.formGroupItem} ${CSS.formGroupIcon}">
+					${iconFlexAlignItems}
+				</span>
+			`
+		);
+
+		const align = createSelect(
+			alignSelectOptions,
+			this.data.align,
+			formGroup,
+			null,
+			null,
+			'',
+			[CSS.formGroupItem]
+		);
+
+		listen(align.select, 'change', () => {
+			this.data.align = align.value as SectionAlignItemsOption;
 			this.blockAPI.dispatchChange();
 		});
 	}
@@ -467,11 +522,12 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	}
 
 	private setStyle(): void {
-		const { style, gap, justify, minBlockWidth } = this.data;
+		const { style, gap, justify, align, minBlockWidth } = this.data;
 		const baseClass = CSS.editorStyleBase;
 		const classes: string[] = [CSS.editorBlockSectionEditor];
 
 		classes.push(`${baseClass}--justify-${justify}`);
+		classes.push(`${baseClass}--align-${align}`);
 
 		if (style.card) {
 			classes.push(`${baseClass}--card`);

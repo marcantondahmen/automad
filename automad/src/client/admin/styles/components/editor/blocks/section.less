@@ -155,8 +155,32 @@
 				flex-grow: 1;
 			}
 
+			&--align-normal > .codex-editor > .codex-editor__redactor {
+				align-items: normal;
+			}
+
+			&--align-stretch > .codex-editor > .codex-editor__redactor {
+				align-items: stretch;
+			}
+
+			&--align-center > .codex-editor > .codex-editor__redactor {
+				align-items: center;
+			}
+
+			&--align-start > .codex-editor > .codex-editor__redactor {
+				align-items: start;
+			}
+
+			&--align-end > .codex-editor > .codex-editor__redactor {
+				align-items: end;
+			}
+
 			&--shadow > .codex-editor {
 				box-shadow: @am-shadow;
+			}
+
+			&--card > .codex-editor > .codex-editor__redactor {
+				padding: 1rem;
 			}
 		}
 
