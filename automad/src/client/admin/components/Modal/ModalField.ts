@@ -76,7 +76,7 @@ export class ModalFieldComponent extends ModalComponent {
 					field.removeAttribute('style');
 				});
 
-				this.style.zIndex = '10';
+				this.style.zIndex = '50';
 			})
 		);
 	}
@@ -104,7 +104,7 @@ export class ModalFieldComponent extends ModalComponent {
 		);
 
 		create('div', [CSS.modalFieldToggle], {}, this).innerHTML = html`
-			<i class="bi bi-window-fullscreen"></i>
+			<i class="bi bi-fullscreen"></i>
 		`;
 
 		listen(
