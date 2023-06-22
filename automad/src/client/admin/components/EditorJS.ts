@@ -78,7 +78,7 @@ export class EditorJSComponent extends BaseComponent {
 					data,
 					holder: this,
 					logLevel: 'ERROR',
-					minHeight: 50,
+					minHeight: 30,
 					autofocus: false,
 					tools: {
 						layout: {

@@ -47,24 +47,24 @@
 
 	&[am-modal-open] {
 		position: fixed;
-		z-index: 450;
+		align-items: center;
+		z-index: 450 !important;
 		inset: 0;
 		margin: 0;
 		padding: var(--am-body-padding-x);
-		padding-top: 0;
+		padding-top: @am-navbar-height * 1.5;
 		overflow: auto;
 		background-color: var(--am-clr-background);
 	}
 
 	&__header {
-		position: sticky;
+		position: fixed;
 		display: none;
 		justify-content: space-between;
 		align-items: center;
 		z-index: 1000;
-		top: 0;
+		inset: 0 0 auto 0;
 		min-height: @am-navbar-height;
-		margin: 0 ~'calc(var(--am-body-padding-x) * -1)' 1rem ~'calc(var(--am-body-padding-x) * -1)';
 		padding: 0 var(--am-body-padding-x);
 		background-color: var(--am-clr-background);
 		border-bottom: @am-border;
@@ -82,6 +82,7 @@
 		position: absolute;
 		top: 0;
 		right: 0;
+		color: var(--am-clr-text-paragraph);
 	}
 
 	&[am-modal-open] > &__toggle {

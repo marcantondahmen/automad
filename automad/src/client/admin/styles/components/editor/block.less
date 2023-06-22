@@ -36,7 +36,7 @@
 	position: relative;
 	flex-basis: 100%;
 	flex-grow: 0;
-	min-width: 8rem;
+	min-width: 16rem;
 	margin: 0 !important;
 	padding: 0 !important;
 
@@ -52,11 +52,13 @@
 	&__content {
 		position: relative;
 		height: 100%;
+		width: 100%;
+		max-width: @am-bl-editor-block-max-width !important;
 		outline: 1px dashed transparent;
 		transition: outline 0.2s;
 
 		.am-style--stretched > & {
-			max-width: 100%;
+			max-width: 100% !important;
 			margin: 0;
 		}
 
