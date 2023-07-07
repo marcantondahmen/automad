@@ -83,6 +83,7 @@
 
 	&__editor {
 		display: block;
+		padding-top: 4px;
 
 		& > .codex-editor > .codex-editor__redactor {
 			--space: var(--gap, 1px);
@@ -91,7 +92,6 @@
 			flex-wrap: wrap;
 			gap: var(--space);
 			height: 100%;
-			margin-right: calc(var(--space) * -1) !important;
 		}
 
 		& .ce-block {
@@ -108,27 +108,27 @@
 		}
 
 		& [am-width='1/4'] {
-			flex-basis: calc((1 / 4 * 100%) - var(--space));
+			flex-basis: calc((100% - (3 * var(--space))) / 4);
 		}
 
 		& [am-width='1/3'] {
-			flex-basis: calc((1 / 3 * 100%) - var(--space));
+			flex-basis: calc((100% - (2 * var(--space))) / 3);
 		}
 
 		& [am-width='1/2'] {
-			flex-basis: calc((1 / 2 * 100%) - var(--space));
+			flex-basis: calc((100% - var(--space)) / 2);
 		}
 
 		& [am-width='3/4'] {
-			flex-basis: calc((3 / 4 * 100%) - var(--space));
+			flex-basis: calc((300% - var(--space)) / 4);
 		}
 
 		& [am-width='2/3'] {
-			flex-basis: calc((2 / 3 * 100%) - var(--space));
+			flex-basis: calc((200% - var(--space)) / 3);
 		}
 
 		& [am-width='1/1'] {
-			flex-basis: calc((1 / 1 * 100%) - var(--space));
+			flex-basis: 100%;
 		}
 
 		&.am-style {
