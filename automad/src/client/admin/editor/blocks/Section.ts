@@ -42,7 +42,6 @@ import {
 	createField,
 	createSelect,
 	CSS,
-	getLogger,
 	html,
 	listen,
 	query,
@@ -64,8 +63,9 @@ import iconFlexGap from '@/svg/icons/flex-gap.svg';
 import iconMinWidth from '@/svg/icons/min-width.svg';
 import iconFlexJustyifyContent from '@/svg/icons/flex-justify-content.svg';
 import iconFlexAlignItems from '@/svg/icons/flex-align-items.svg';
-import { EditorJSComponent } from '@/components/EditorJS';
+import { EditorJSComponent } from '@/components/Editor/EditorJS';
 import { ModalComponent } from '@/components/Modal/Modal';
+import { SectionPortalComponent } from '@/components/Editor/SectionPortal';
 
 /**
  * The flexbox option for "justify-content".
@@ -207,8 +207,15 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			`
 		);
 
+		const portal = create(
+			SectionPortalComponent.TAG_NAME,
+			[],
+			{},
+			this.wrapper
+		);
+
 		this.holder = createEditor(
-			this.wrapper,
+			portal,
 			this.data.content as EditorOutputData,
 			{
 				onChange: async (api, event) => {
@@ -220,12 +227,6 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			},
 			true
 		);
-
-		listen(this.wrapper, 'keydown', (event: KeyboardEvent) => {
-			if (event.key === 'Tab' || event.keyCode === 9) {
-				event.stopImmediatePropagation();
-			}
-		});
 
 		this.renderToolbar();
 		this.setStyle();

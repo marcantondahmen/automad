@@ -43,12 +43,15 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--space);
+	left: 0 !important;
+	right: auto !important;
 	padding: var(--space) 0;
 	overflow: hidden;
 	color: var(--am-clr-text);
 	background-color: var(--am-clr-background);
 	border: @am-border;
 	border-radius: @am-bl-editor-toolbar-radius;
+	box-shadow: @am-shadow;
 
 	&--opened {
 		max-height: none;
@@ -61,6 +64,9 @@
 	&__nothing-found-message {
 		padding: var(--space) 0.6rem;
 		color: var(--am-clr-text-muted);
+		font-size: @am-small-font-size;
+		line-height: @am-small-line-height;
+		font-weight: @am-small-font-weight;
 	}
 
 	&-item {
@@ -69,6 +75,7 @@
 		border-radius: 0;
 		color: inherit;
 		background-color: inherit;
+		transition: color 0.2s, background-color 0.2s;
 
 		&:hover {
 			color: var(--am-clr-selected-text) !important;
@@ -109,10 +116,10 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: @am-form-height;
+			left: var(--space);
+			width: @am-form-height * 0.9;
 			height: 100%;
 			top: 0;
-			// left: var(--space);
 			color: var(--am-clr-muted);
 		}
 

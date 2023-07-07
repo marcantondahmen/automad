@@ -72,13 +72,15 @@ export class EditorJSComponent extends BaseComponent {
 		config: EditorConfig,
 		isSectionBlock: boolean
 	): void {
+		this.style.position = 'relative';
+
 		this.editor = new EditorJS(
 			Object.assign(
 				{
 					data,
 					holder: this,
 					logLevel: 'ERROR',
-					minHeight: 30,
+					minHeight: 50,
 					autofocus: false,
 					tools: {
 						layout: {
@@ -87,24 +89,33 @@ export class EditorJSComponent extends BaseComponent {
 								isSectionBlock,
 							},
 						},
-						header: Header,
+						header: { class: Header, inlineToolbar: true },
 						section: SectionBlock,
 					},
 					tunes: ['layout'],
 					onReady: (): void => {
-						data.blocks?.forEach((_block) => {
-							const block = this.editor.blocks.getById(_block.id);
-							const layout = _block.tunes?.layout;
-
-							LayoutTune.apply(block, layout);
-						});
-
-						new DragDrop(this);
+						this.onRender(data);
 					},
 				},
 				config
 			)
 		);
+	}
+
+	/**
+	 * Apply layout to rendered blocks and initialyze drag and drop.
+	 *
+	 * @param data
+	 */
+	onRender(data: EditorOutputData): void {
+		data.blocks?.forEach((_block) => {
+			const block = this.editor.blocks.getById(_block.id);
+			const layout = _block.tunes?.layout;
+
+			LayoutTune.apply(block, layout);
+		});
+
+		new DragDrop(this);
 	}
 }
 

@@ -62,7 +62,7 @@ import { AutocompleteComponent } from '@/components/Autocomplete';
 import { BaseFieldComponent } from '@/components/Fields/BaseField';
 import { SelectComponent } from '@/components/Select';
 import { EditorConfig } from '@editorjs/editorjs';
-import { EditorJSComponent } from '@/components/EditorJS';
+import { EditorJSComponent } from '@/components/Editor/EditorJS';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.

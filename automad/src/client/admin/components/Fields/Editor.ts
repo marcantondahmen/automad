@@ -47,7 +47,8 @@ import {
 import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData, UndoValue } from '@/types';
 import { LayoutTune } from '@/editor/tunes/Layout';
-import { EditorJSComponent } from '../EditorJS';
+import { EditorJSComponent } from '../Editor/EditorJS';
+import { SectionPortalDestinationComponent } from '../Editor/SectionPortal';
 
 /**
  * A block editor field.
@@ -127,8 +128,16 @@ export class EditorComponent extends BaseFieldComponent {
 	 *
 	 * @param value
 	 */
-	mutate(value: UndoValue): void {
-		this.editorJS.editor.render(value);
+	async mutate(value: UndoValue): Promise<void> {
+		queryAll(SectionPortalDestinationComponent.TAG_NAME, this).forEach(
+			(dest: SectionPortalDestinationComponent) => {
+				dest.remove();
+			}
+		);
+
+		await this.editorJS.editor.render(value);
+
+		this.editorJS.onRender(value);
 	}
 
 	/**
@@ -178,6 +187,12 @@ export class EditorComponent extends BaseFieldComponent {
 		this.addListener(
 			listen(window, 'click', (event: Event) => {
 				event.stopPropagation();
+
+				const target = event.target as HTMLElement;
+
+				if (target.closest(EditorComponent.TAG_NAME)) {
+					return;
+				}
 
 				queryAll(
 					`.${CSS.editorBlockSectionToolbar}.${CSS.active}`

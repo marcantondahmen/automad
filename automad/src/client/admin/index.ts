@@ -38,6 +38,9 @@ import 'sortable-tree/dist/sortable-tree.css';
 
 import './styles/index.less';
 
+import './components/Editor/EditorJS';
+import './components/Editor/SectionPortal';
+
 import './components/Fields/Color';
 import './components/Fields/Date';
 import './components/Fields/Editor';
@@ -139,7 +142,6 @@ import './components/CustomIconCheckbox';
 import './components/Copy';
 import './components/DashboardThemeToggle';
 import './components/Dropdown';
-import './components/EditorJS';
 import './components/Filter';
 import './components/IconText';
 import './components/ImagePicker';

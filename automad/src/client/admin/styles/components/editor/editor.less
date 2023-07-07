@@ -33,11 +33,13 @@
  */
 
 .codex-editor {
-	padding: 8px 0;
+	z-index: initial !important;
+	padding: 12px 0;
 	border: @am-border;
 	--space-left: @am-bl-editor-toolbar-icons-width;
 
-	& & {
+	am-section-portal-destination & {
+		padding: 0;
 		--space-left: 0;
 	}
 
@@ -50,7 +52,7 @@
 	& &__redactor {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 2px;
+		gap: 4px;
 		margin: 0 !important;
 		padding-left: var(--space-left);
 	}

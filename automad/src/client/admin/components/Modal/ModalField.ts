@@ -76,7 +76,7 @@ export class ModalFieldComponent extends ModalComponent {
 					field.removeAttribute('style');
 				});
 
-				this.style.zIndex = '50';
+				this.style.zIndex = '40';
 			})
 		);
 	}

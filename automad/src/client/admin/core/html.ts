@@ -65,6 +65,7 @@ export const enum Attr {
 	noFocus = 'am-no-focus',
 	page = 'am-page',
 	path = 'am-path',
+	portal = 'am-portal',
 	right = 'am-right',
 	section = 'am-section',
 	target = 'am-target',

@@ -36,15 +36,11 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	height: 100%;
+	outline: 1px solid var(--am-clr-border);
 
 	&:hover {
-		outline: 1px dashed var(--am-clr-border);
-		outline-offset: 5px;
-	}
-
-	&:hover:not(:has(&:hover)) {
-		outline: 1px solid var(--am-clr-accent-background);
-		outline-offset: 3px;
+		outline: 1px solid var(--am-clr-border);
 	}
 
 	&__toolbar {
@@ -73,17 +69,21 @@
 
 	&__label {
 		position: relative;
-		z-index: 10;
-		padding: 0 0.4em;
+		display: flex;
+		align-items: center;
+		height: 1.65rem;
+		padding: 0 0.6em;
 		font-size: @am-small-font-size;
 		font-weight: 560;
-		color: var(--am-clr-accent-text);
-		background: var(--am-clr-accent-background);
-		outline: 3px solid var(--am-clr-accent-background);
+		color: var(--am-clr-primary-text);
+		background: var(--am-clr-primary-background);
+		outline: 1px solid var(--am-clr-primary-background);
 		cursor: pointer;
 	}
 
 	&__editor {
+		display: block;
+
 		& > .codex-editor > .codex-editor__redactor {
 			--space: var(--gap, 1px);
 
@@ -91,6 +91,7 @@
 			flex-wrap: wrap;
 			gap: var(--space);
 			height: 100%;
+			margin-right: calc(var(--space) * -1) !important;
 		}
 
 		& .ce-block {
@@ -102,7 +103,7 @@
 
 		& [am-width] {
 			& > * {
-				max-width: none;
+				max-width: none !important;
 			}
 		}
 
@@ -181,6 +182,15 @@
 
 			&--card > .codex-editor > .codex-editor__redactor {
 				padding: 1rem;
+			}
+
+			&--match-height {
+				flex-grow: 1;
+				display: flex;
+
+				& > .codex-editor {
+					flex-grow: 1;
+				}
 			}
 		}
 
