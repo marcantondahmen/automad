@@ -241,7 +241,7 @@
 							</div>
 							<div
 								class="ce-inline-toolbar ce-inline-toolbar--left-oriented ce-inline-toolbar--showed"
-								style="left: 378px; top: 62px"
+								style="left: 378px; top: 36px"
 							>
 								<div
 									class="ce-inline-toolbar__toggler-and-button-wrapper"
@@ -363,7 +363,7 @@
 										class="ce-inline-tool-input"
 									/>
 								</div>
-								<div class="ce-conversion-toolbar">
+								<div class="ce-conversion-toolbar ce-conversion-toolbar--showed">
 									<div class="ce-conversion-toolbar__label">
 										Convert to
 									</div>
