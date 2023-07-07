@@ -480,11 +480,13 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			[CSS.field],
 			{},
 			body,
-			html`<div>
-				<label for="${blendModeId}" class="${CSS.fieldLabel}">
-					Background Blendmode
-				</label>
-			</div>`
+			html`
+				<div>
+					<label for="${blendModeId}" class="${CSS.fieldLabel}">
+						Background Blendmode
+					</label>
+				</div>
+			`
 		);
 
 		createSelect(

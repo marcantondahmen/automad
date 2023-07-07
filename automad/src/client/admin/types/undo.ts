@@ -41,6 +41,6 @@ export type UndoValue = any;
 
 export interface UndoCapableField {
 	getValueProvider: () => HTMLElement;
-	mutate: (value: UndoValue) => void;
+	mutate: (value: UndoValue) => void | Promise<void>;
 	query: () => UndoValue;
 }
