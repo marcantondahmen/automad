@@ -422,7 +422,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			createField(type, parent, {
 				name: name,
 				value: this.data.style[name],
-				key: uniqueId(''),
+				key: uniqueId(),
 				label: App.text(text),
 			});
 		};
