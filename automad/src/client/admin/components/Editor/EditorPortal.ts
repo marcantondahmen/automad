@@ -70,7 +70,7 @@ const getRootEditor = (element: HTMLElement): EditorJSComponent => {
 const garbageCollectDestinations = (): void => {
 	setTimeout(() => {
 		const destinations = queryAll(
-			SectionPortalDestinationComponent.TAG_NAME
+			EditorPortalDestinationComponent.TAG_NAME
 		);
 
 		destinations.forEach((destination) => {
@@ -85,17 +85,17 @@ const garbageCollectDestinations = (): void => {
 };
 
 /**
- * A editor section portal component.
+ * A editor portal component.
  *
  * @extends BaseComponent
  */
-export class SectionPortalComponent extends BaseComponent {
+export class EditorPortalComponent extends BaseComponent {
 	/**
 	 * The components tag name.
 	 *
 	 * @static
 	 */
-	static TAG_NAME = 'am-section-portal';
+	static TAG_NAME = 'am-editor-portal';
 
 	/**
 	 * The most outer parent EditorJSComponent that is itself not a section.
@@ -146,7 +146,7 @@ export class SectionPortalComponent extends BaseComponent {
 
 		this.setAttribute('id', portalId);
 		this.destination = create(
-			SectionPortalDestinationComponent.TAG_NAME,
+			EditorPortalDestinationComponent.TAG_NAME,
 			[],
 			{ [Attr.portal]: portalId },
 			this.rootEditor
@@ -277,13 +277,13 @@ export class SectionPortalComponent extends BaseComponent {
  *
  * @extends BaseComponent
  */
-export class SectionPortalDestinationComponent extends BaseComponent {
+export class EditorPortalDestinationComponent extends BaseComponent {
 	/**
 	 * The components tag name.
 	 *
 	 * @static
 	 */
-	static TAG_NAME = 'am-section-portal-destination';
+	static TAG_NAME = 'am-editor-portal-destination';
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -293,8 +293,8 @@ export class SectionPortalDestinationComponent extends BaseComponent {
 	}
 }
 
-customElements.define(SectionPortalComponent.TAG_NAME, SectionPortalComponent);
+customElements.define(EditorPortalComponent.TAG_NAME, EditorPortalComponent);
 customElements.define(
-	SectionPortalDestinationComponent.TAG_NAME,
-	SectionPortalDestinationComponent
+	EditorPortalDestinationComponent.TAG_NAME,
+	EditorPortalDestinationComponent
 );

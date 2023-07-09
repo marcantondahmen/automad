@@ -48,7 +48,7 @@ import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData, UndoValue } from '@/types';
 import { LayoutTune } from '@/editor/tunes/Layout';
 import { EditorJSComponent } from '../Editor/EditorJS';
-import { SectionPortalDestinationComponent } from '../Editor/SectionPortal';
+import { EditorPortalDestinationComponent } from '../Editor/EditorPortal';
 
 /**
  * A block editor field.
@@ -129,8 +129,8 @@ export class EditorComponent extends BaseFieldComponent {
 	 * @param value
 	 */
 	async mutate(value: UndoValue): Promise<void> {
-		queryAll(SectionPortalDestinationComponent.TAG_NAME, this).forEach(
-			(dest: SectionPortalDestinationComponent) => {
+		queryAll(EditorPortalDestinationComponent.TAG_NAME, this).forEach(
+			(dest: EditorPortalDestinationComponent) => {
 				dest.remove();
 			}
 		);

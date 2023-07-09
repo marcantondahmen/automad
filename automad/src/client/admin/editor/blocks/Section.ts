@@ -65,7 +65,7 @@ import iconFlexJustyifyContent from '@/svg/icons/flex-justify-content.svg';
 import iconFlexAlignItems from '@/svg/icons/flex-align-items.svg';
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
 import { ModalComponent } from '@/components/Modal/Modal';
-import { SectionPortalComponent } from '@/components/Editor/SectionPortal';
+import { EditorPortalComponent } from '@/components/Editor/EditorPortal';
 
 /**
  * The flexbox option for "justify-content".
@@ -208,7 +208,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		);
 
 		const portal = create(
-			SectionPortalComponent.TAG_NAME,
+			EditorPortalComponent.TAG_NAME,
 			[],
 			{},
 			this.wrapper

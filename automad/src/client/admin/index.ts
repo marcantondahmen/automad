@@ -39,7 +39,7 @@ import 'sortable-tree/dist/sortable-tree.css';
 import './styles/index.less';
 
 import './components/Editor/EditorJS';
-import './components/Editor/SectionPortal';
+import './components/Editor/EditorPortal';
 
 import './components/Fields/Color';
 import './components/Fields/Date';
