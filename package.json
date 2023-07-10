@@ -19,7 +19,7 @@
     "test": "npm run phpunit && npm run psalm && jest"
   },
   "devDependencies": {
-    "@editorjs/editorjs": "^2.27.0",
+    "@editorjs/editorjs": "^2.27.2",
     "@editorjs/header": "^2.7.0",
     "@toast-ui/editor": "^3.2.1",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
@@ -37,10 +37,10 @@
     "codex-tooltip": "^1.0.5",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^3.4.1",
-    "dompurify": "^2.4.1",
+    "dompurify": "^3.0.4",
     "dropzone": "^6.0.0-beta.2",
     "file-loader": "^6.2.0",
-    "filerobot-image-editor": "^4.3.8",
+    "filerobot-image-editor": "^4.5.1",
     "html-loader": "^3.1.2",
     "jest": "^29.4.3",
     "jest-environment-jsdom": "^29.6.1",
