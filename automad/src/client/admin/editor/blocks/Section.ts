@@ -162,6 +162,8 @@ const editorStyleDefaults = Object.assign({}, styleDefaults, {
 export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private holder: EditorJSComponent = null;
 
+	private stylesModal: ModalComponent = null;
+
 	static get enableLineBreaks() {
 		return true;
 	}
@@ -387,11 +389,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			'<i class="bi bi-palette2"></i>'
 		);
 
-		const modal = create(
+		this.stylesModal = create(
 			ModalComponent.TAG_NAME,
 			[],
 			{ id },
-			this.wrapper,
+			App.root,
 			html`
 				<div class="${CSS.modalDialog}">
 					<div class="${CSS.modalHeader}">
@@ -410,8 +412,8 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			`
 		);
 
-		const body = query(`.${CSS.modalBody}`, modal);
-		const button = query(`.${CSS.modalFooter} button`, modal);
+		const body = query(`.${CSS.modalBody}`, this.stylesModal);
+		const button = query(`.${CSS.modalFooter} button`, this.stylesModal);
 
 		const field = (
 			type: FieldTag,
@@ -520,7 +522,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.setStyle();
 			this.blockAPI.dispatchChange();
 
-			modal.close();
+			this.stylesModal.close();
 		});
 	}
 
@@ -589,5 +591,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		}
 
 		this.holder.setAttribute('style', inline.join(' '));
+	}
+
+	destroy(): void {
+		this.stylesModal.remove();
 	}
 }
