@@ -19,6 +19,7 @@
 		<UndefinedClass errorLevel="suppress" />
 		<UnresolvableInclude errorLevel="suppress" />
 		<UnsupportedReferenceUsage errorLevel="suppress" />
+		<UnsupportedPropertyReferenceUsage errorLevel="suppress" />
 		<MoreSpecificReturnType errorLevel="suppress" />
 	</issueHandlers>
 </psalm>
