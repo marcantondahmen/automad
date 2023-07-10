@@ -87,11 +87,18 @@ export class FormDataProviders {
 
 	/**
 	 * Get the registered controls as selector.
+	 * Note that the returned selector is not only a joined list
+	 * of input selectors but also prevents collecting field data from
+	 * nested editors.
 	 *
 	 * @static
 	 */
 	static get selector() {
-		return this._controls.join(', ');
+		const controls = this._controls.map((control) => {
+			return `${control}:not(:scope ${FieldTag.editor} ${control})`;
+		});
+
+		return controls.join(', ');
 	}
 
 	/**
@@ -101,7 +108,7 @@ export class FormDataProviders {
 	 * @static
 	 */
 	static add(name: string): void {
-		if (!this._controls.includes('name')) {
+		if (!this._controls.includes(name)) {
 			this._controls.push(name);
 		}
 	}
