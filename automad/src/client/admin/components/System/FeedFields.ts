@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, Binding, createField, EventName, listen } from '@/core';
+import {
+	App,
+	Attr,
+	Binding,
+	createField,
+	EventName,
+	FieldTag,
+	listen,
+} from '@/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -56,7 +64,7 @@ class FeedFieldsComponent extends BaseComponent {
 		);
 
 		createField(
-			'am-feed-field-select',
+			FieldTag.feedFieldSelect,
 			this,
 			{
 				key: 'feedFields',

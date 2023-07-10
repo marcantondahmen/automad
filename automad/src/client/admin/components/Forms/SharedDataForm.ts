@@ -40,6 +40,7 @@ import {
 	createField,
 	createFieldSections,
 	fieldGroup,
+	FieldTag,
 	prepareFieldGroups,
 } from '@/core';
 import {
@@ -168,7 +169,7 @@ export class SharedDataFormComponent extends FormComponent {
 		);
 
 		createField(
-			'am-title',
+			FieldTag.title,
 			this.sections.settings,
 			{
 				key: App.reservedFields.SITENAME,
@@ -179,7 +180,7 @@ export class SharedDataFormComponent extends FormComponent {
 			{ required: '' }
 		);
 
-		createField('am-main-theme', this.sections.settings, {
+		createField(FieldTag.mainTheme, this.sections.settings, {
 			key: themeKey,
 			value: mainTheme,
 			name: `data[${themeKey}]`,

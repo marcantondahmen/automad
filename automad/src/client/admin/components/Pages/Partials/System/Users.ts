@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, CSS, EventName, html } from '@/core';
+import { App, Attr, createField, CSS, EventName, FieldTag, html } from '@/core';
 
 /**
  * Render the user section.
@@ -131,7 +131,7 @@ export const renderUsersSection = (): string => {
 				</div>
 				<div class="${CSS.modalBody}">
 					${createField(
-						'am-password',
+						FieldTag.password,
 						null,
 						{
 							key: 'currentPassword',
@@ -143,7 +143,7 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 					${createField(
-						'am-password',
+						FieldTag.password,
 						null,
 						{
 							key: 'newPassword1',
@@ -155,7 +155,7 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 					${createField(
-						'am-password',
+						FieldTag.password,
 						null,
 						{
 							key: 'newPassword2',
@@ -214,7 +214,7 @@ export const renderUsersSection = (): string => {
 				</div>
 				<div class="${CSS.modalBody}">
 					${createField(
-						'am-input',
+						FieldTag.input,
 						null,
 						{
 							key: 'username',
@@ -227,7 +227,7 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 					${createField(
-						'am-email',
+						FieldTag.email,
 						null,
 						{
 							key: 'email',
@@ -240,7 +240,7 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 					${createField(
-						'am-password',
+						FieldTag.password,
 						null,
 						{
 							key: 'password1',
@@ -253,7 +253,7 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 					${createField(
-						'am-password',
+						FieldTag.password,
 						null,
 						{
 							key: 'password2',
@@ -288,7 +288,7 @@ export const renderUsersSection = (): string => {
 				</div>
 				<div class="${CSS.modalBody}">
 					${createField(
-						'am-input',
+						FieldTag.input,
 						null,
 						{
 							key: 'username',
@@ -301,7 +301,7 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 					${createField(
-						'am-email',
+						FieldTag.email,
 						null,
 						{
 							key: 'email',

@@ -39,6 +39,7 @@ import {
 	createField,
 	CSS,
 	EventName,
+	FieldTag,
 	html,
 	listen,
 } from '@/core';
@@ -113,7 +114,7 @@ export class FileInfoComponent extends BaseComponent {
 				<input type="hidden" name="old-name" value="${file.basename}" />
 				<div class="${CSS.modalBody}">
 					${createField(
-						'am-input',
+						FieldTag.input,
 						null,
 						{
 							key: 'new-name',
@@ -124,7 +125,7 @@ export class FileInfoComponent extends BaseComponent {
 						[]
 					).outerHTML}
 					${createField(
-						'am-textarea',
+						FieldTag.textarea,
 						null,
 						{
 							key: 'caption',

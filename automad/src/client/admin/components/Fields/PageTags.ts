@@ -33,7 +33,7 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import { App, create, CSS } from '@/core';
+import { App, create, CSS, FieldTag } from '@/core';
 import { PageDataFormComponent } from '@/components/Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';
 
@@ -83,4 +83,4 @@ class PageTagsComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-page-tags', PageTagsComponent);
+customElements.define(FieldTag.pageTags, PageTagsComponent);

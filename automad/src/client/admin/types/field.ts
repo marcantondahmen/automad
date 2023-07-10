@@ -35,30 +35,6 @@
 import { KeyValueMap } from '.';
 import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
 
-const FieldTypes = [
-	'am-color',
-	'am-date',
-	'am-editor',
-	'am-email',
-	'am-feed-field-select',
-	'am-image-select',
-	'am-input',
-	'am-main-theme',
-	'am-markdown',
-	'am-number-unit',
-	'am-page-tags',
-	'am-page-template',
-	'am-password',
-	'am-textarea',
-	'am-title',
-	'am-toggle',
-	'am-toggle-large',
-	'am-toggle-select',
-	'am-url',
-] as const;
-
-export type FieldType = (typeof FieldTypes)[number];
-
 export type FieldSectionName = 'settings' | 'text' | 'colors';
 
 export type FieldSectionCollection = {

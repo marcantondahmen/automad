@@ -42,6 +42,7 @@ import {
 	createField,
 	createSelect,
 	CSS,
+	FieldTag,
 	html,
 	listen,
 	query,
@@ -51,7 +52,6 @@ import {
 } from '@/core';
 import {
 	EditorOutputData,
-	FieldType,
 	SectionAlignItemsOption,
 	SectionBlockData,
 	SectionJustifyContentOption,
@@ -414,7 +414,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		const button = query(`.${CSS.modalFooter} button`, modal);
 
 		const field = (
-			type: FieldType,
+			type: FieldTag,
 			name: keyof SectionStyle,
 			text: string,
 			parent: HTMLElement
@@ -427,17 +427,17 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			});
 		};
 
-		field('am-toggle', 'card', 'optimizeContentForCards', body);
-		field('am-toggle', 'matchRowHeight', 'matchRowHeight', body);
+		field(FieldTag.toggle, 'card', 'optimizeContentForCards', body);
+		field(FieldTag.toggle, 'matchRowHeight', 'matchRowHeight', body);
 
 		const group1 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
-		field('am-toggle', 'overflowHidden', 'overflowHidden', group1);
-		field('am-toggle', 'shadow', 'addShadow', group1);
+		field(FieldTag.toggle, 'overflowHidden', 'overflowHidden', group1);
+		field(FieldTag.toggle, 'shadow', 'addShadow', group1);
 		const group2 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
-		field('am-color', 'color', 'textColor', group2);
-		field('am-color', 'backgroundColor', 'backgroundColor', group2);
+		field(FieldTag.color, 'color', 'textColor', group2);
+		field(FieldTag.color, 'backgroundColor', 'backgroundColor', group2);
 
 		const group3 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
@@ -470,9 +470,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			borderStyleId
 		);
 
-		field('am-color', 'borderColor', 'borderColor', group3);
+		field(FieldTag.color, 'borderColor', 'borderColor', group3);
 
-		field('am-image-select', 'backgroundImage', 'backgroundImage', body);
+		field(FieldTag.imageSelect, 'backgroundImage', 'backgroundImage', body);
 
 		const blendModeId = uniqueId();
 		const blendMode = create(
@@ -506,12 +506,12 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		);
 
 		const group4 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
-		field('am-number-unit', 'borderWidth', 'borderWidth', group4);
-		field('am-number-unit', 'borderRadius', 'borderRadius', group4);
+		field(FieldTag.numberUnit, 'borderWidth', 'borderWidth', group4);
+		field(FieldTag.numberUnit, 'borderRadius', 'borderRadius', group4);
 		const group5 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
-		field('am-number-unit', 'paddingTop', 'paddingTop', group5);
-		field('am-number-unit', 'paddingBottom', 'paddingBottom', group5);
+		field(FieldTag.numberUnit, 'paddingTop', 'paddingTop', group5);
+		field(FieldTag.numberUnit, 'paddingBottom', 'paddingBottom', group5);
 
 		Bindings.connectElements(body);
 

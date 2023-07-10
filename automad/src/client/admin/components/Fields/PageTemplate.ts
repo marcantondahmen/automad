@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, titleCase } from '@/core';
+import { App, Attr, create, CSS, FieldTag, html, titleCase } from '@/core';
 import { KeyValueMap, TemplateButtonStatus, TemplateFieldData } from '@/types';
 import { BaseComponent } from '@/components/Base';
 import { SelectComponent } from '@/components/Select';
@@ -270,4 +270,4 @@ export class PageTemplateComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-page-template', PageTemplateComponent);
+customElements.define(FieldTag.pageTemplate, PageTemplateComponent);

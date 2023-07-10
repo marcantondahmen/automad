@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { FieldTag } from '@/core';
 import { InputComponent } from './Input';
 
 /**
@@ -48,4 +49,4 @@ export class EmailComponent extends InputComponent {
 	}
 }
 
-customElements.define('am-email', EmailComponent);
+customElements.define(FieldTag.email, EmailComponent);

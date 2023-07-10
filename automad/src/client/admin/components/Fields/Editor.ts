@@ -38,6 +38,7 @@ import {
 	createEditor,
 	CSS,
 	debounce,
+	FieldTag,
 	fire,
 	FormDataProviders,
 	listen,
@@ -47,8 +48,8 @@ import {
 import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData, UndoValue } from '@/types';
 import { LayoutTune } from '@/editor/tunes/Layout';
-import { EditorJSComponent } from '../Editor/EditorJS';
-import { EditorPortalDestinationComponent } from '../Editor/EditorPortal';
+import { EditorJSComponent } from '@/components/Editor/EditorJS';
+import { EditorPortalDestinationComponent } from '@/components/Editor/EditorPortal';
 
 /**
  * A block editor field.
@@ -56,14 +57,6 @@ import { EditorPortalDestinationComponent } from '../Editor/EditorPortal';
  * @extends BaseFieldComponent
  */
 export class EditorComponent extends BaseFieldComponent {
-	/**
-	 * The tag name.
-	 *
-	 * @static
-	 * @readonly
-	 */
-	static readonly TAG_NAME = 'am-editor';
-
 	/**
 	 * The editor component.
 	 */
@@ -190,7 +183,7 @@ export class EditorComponent extends BaseFieldComponent {
 
 				const target = event.target as HTMLElement;
 
-				if (target.closest(EditorComponent.TAG_NAME)) {
+				if (target.closest(FieldTag.editor)) {
 					return;
 				}
 
@@ -204,5 +197,5 @@ export class EditorComponent extends BaseFieldComponent {
 	}
 }
 
-FormDataProviders.add(EditorComponent.TAG_NAME);
-customElements.define(EditorComponent.TAG_NAME, EditorComponent);
+FormDataProviders.add(FieldTag.editor);
+customElements.define(FieldTag.editor, EditorComponent);

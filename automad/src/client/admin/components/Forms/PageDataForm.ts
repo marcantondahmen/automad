@@ -35,7 +35,6 @@
 import {
 	FieldSectionCollection,
 	FieldSectionName,
-	FieldType,
 	KeyValueMap,
 	PageBindings,
 	PageMainSettingsData,
@@ -50,6 +49,7 @@ import {
 	createFieldSections,
 	CSS,
 	fieldGroup,
+	FieldTag,
 	getLogger,
 	getPageURL,
 	html,
@@ -213,7 +213,7 @@ export class PageDataFormComponent extends FormComponent {
 		 * @returns the generated field
 		 */
 		const createMainField = (
-			fieldType: FieldType,
+			fieldType: FieldTag,
 			key: string,
 			label: string = '',
 			attributes: KeyValueMap = {}
@@ -229,7 +229,7 @@ export class PageDataFormComponent extends FormComponent {
 		};
 
 		const titleField = createMainField(
-			'am-title',
+			FieldTag.title,
 			App.reservedFields.TITLE,
 			'',
 			{
@@ -267,7 +267,7 @@ export class PageDataFormComponent extends FormComponent {
 		`;
 
 		createMainField(
-			'am-toggle-large',
+			FieldTag.toggleLarge,
 			App.reservedFields.PRIVATE,
 			App.text('keepPagePrivate')
 		);
@@ -303,16 +303,20 @@ export class PageDataFormComponent extends FormComponent {
 		);
 
 		createMainField(
-			'am-toggle',
+			FieldTag.toggle,
 			App.reservedFields.HIDDEN,
 			App.text('hidePage')
 		);
 
-		createMainField('am-date', App.reservedFields.DATE, App.text('date'));
+		createMainField(
+			FieldTag.date,
+			App.reservedFields.DATE,
+			App.text('date')
+		);
 
 		if (url != '/') {
 			createField(
-				'am-input',
+				FieldTag.input,
 				section,
 				{
 					key: 'slug',
@@ -326,13 +330,13 @@ export class PageDataFormComponent extends FormComponent {
 		}
 
 		createMainField(
-			'am-url',
+			FieldTag.url,
 			App.reservedFields.URL,
 			App.text('redirectPage')
 		);
 
 		createMainField(
-			'am-page-tags',
+			FieldTag.pageTags,
 			App.reservedFields.TAGS,
 			App.text('pageTags')
 		);

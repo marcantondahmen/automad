@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS } from '@/core';
+import { create, CSS, FieldTag } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -55,4 +55,4 @@ class TitleComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-title', TitleComponent);
+customElements.define(FieldTag.title, TitleComponent);

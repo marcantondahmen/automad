@@ -39,6 +39,7 @@ import {
 	createLabelFromField,
 	CSS,
 	EventName,
+	FieldTag,
 	fire,
 	html,
 	listen,
@@ -189,4 +190,4 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-feed-field-select', FeedFieldSelectComponent);
+customElements.define(FieldTag.feedFieldSelect, FeedFieldSelectComponent);

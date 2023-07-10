@@ -34,12 +34,12 @@
 
 import {
 	App,
-	Attr,
 	Binding,
 	create,
 	createImagePickerModal,
 	createLinkModal,
 	CSS,
+	FieldTag,
 	fire,
 	FormDataProviders,
 	listen,
@@ -148,14 +148,6 @@ const setMdEditorLanguage = (): void => {
  * @extends BaseFieldComponent
  */
 class MarkdownComponent extends BaseFieldComponent {
-	/**
-	 * The tag name.
-	 *
-	 * @static
-	 * @readonly
-	 */
-	static readonly TAG_NAME = 'am-markdown';
-
 	/**
 	 * The editor instance.
 	 */
@@ -318,5 +310,5 @@ class MarkdownComponent extends BaseFieldComponent {
 	}
 }
 
-FormDataProviders.add(MarkdownComponent.TAG_NAME);
-customElements.define(MarkdownComponent.TAG_NAME, MarkdownComponent);
+FormDataProviders.add(FieldTag.markdown);
+customElements.define(FieldTag.markdown, MarkdownComponent);

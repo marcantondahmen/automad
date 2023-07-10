@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create } from '@/core';
+import { create, FieldTag } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -55,4 +55,4 @@ export class NumberUnitComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-number-unit', NumberUnitComponent);
+customElements.define(FieldTag.numberUnit, NumberUnitComponent);

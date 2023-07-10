@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, createSelect, CSS, Route } from '@/core';
+import { App, Attr, create, createSelect, CSS, FieldTag, Route } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 import { SelectComponentOption, Theme } from '@/types';
 
@@ -98,4 +98,4 @@ export class MainThemeComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-main-theme', MainThemeComponent);
+customElements.define(FieldTag.mainTheme, MainThemeComponent);

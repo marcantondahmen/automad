@@ -39,6 +39,7 @@ import {
 	create,
 	createImagePickerModal,
 	CSS,
+	FieldTag,
 	html,
 	listen,
 	resolveFileUrl,
@@ -145,4 +146,4 @@ class ImageSelectComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-image-select', ImageSelectComponent);
+customElements.define(FieldTag.imageSelect, ImageSelectComponent);

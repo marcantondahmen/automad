@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, CSS, html, Route, titleCase } from '@/core';
+import {
+	App,
+	Attr,
+	createField,
+	CSS,
+	FieldTag,
+	html,
+	Route,
+	titleCase,
+} from '@/core';
 import { Partials } from '@/types';
 import { createTemplateSelect } from '@/components/Fields/PageTemplate';
 import { Section } from '@/components/Switcher/Switcher';
@@ -237,7 +246,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 					</div>
 					<div class="${CSS.modalBody}">
 						${createField(
-							'am-input',
+							FieldTag.input,
 							null,
 							{
 								key: `new-${App.reservedFields.TITLE}`,
@@ -254,7 +263,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							>
 							${createTemplateSelect('').outerHTML}
 						</div>
-						${createField('am-toggle-large', null, {
+						${createField(FieldTag.toggleLarge, null, {
 							key: `new-${App.reservedFields.PRIVATE}`,
 							name: App.reservedFields.PRIVATE,
 							label: App.text('keepPagePrivate'),

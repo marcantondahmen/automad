@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, createField } from '@/core';
+import { App, createField, FieldTag } from '@/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -45,7 +45,7 @@ class UserEmailComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		createField('am-email', this, {
+		createField(FieldTag.email, this, {
 			key: 'email',
 			value: App.user.email,
 			name: 'email',

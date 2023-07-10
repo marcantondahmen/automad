@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, debounce, initTabHandler, listen } from '@/core';
+import {
+	create,
+	CSS,
+	debounce,
+	FieldTag,
+	initTabHandler,
+	listen,
+} from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -97,4 +104,4 @@ class TextareaComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-textarea', TextareaComponent);
+customElements.define(FieldTag.textarea, TextareaComponent);

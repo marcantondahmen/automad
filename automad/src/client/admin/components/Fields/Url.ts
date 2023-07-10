@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, create, listen, Binding, createLinkModal } from '@/core';
+import {
+	CSS,
+	create,
+	listen,
+	Binding,
+	createLinkModal,
+	FieldTag,
+} from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -77,4 +84,4 @@ class URLComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-url', URLComponent);
+customElements.define(FieldTag.url, URLComponent);

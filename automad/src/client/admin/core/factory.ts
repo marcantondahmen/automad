@@ -37,7 +37,6 @@ import {
 	EditorOutputData,
 	FieldInitData,
 	FieldSectionCollection,
-	FieldType,
 	KeyValueMap,
 	SelectComponentOption,
 } from '@/types';
@@ -48,6 +47,7 @@ import {
 	Bindings,
 	CSS,
 	EventName,
+	FieldTag,
 	getPageURL,
 	html,
 	listen,
@@ -139,7 +139,7 @@ export const createEditor = (
  * @returns the generated field
  */
 export const createField = (
-	fieldType: FieldType,
+	fieldType: FieldTag,
 	parent: HTMLElement,
 	data: FieldInitData,
 	cls: string[] = [],

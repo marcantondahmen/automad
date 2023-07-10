@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, html } from '@/core';
+import { create, CSS, FieldTag, html } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -92,4 +92,4 @@ export class ToggleComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-toggle', ToggleComponent);
+customElements.define(FieldTag.toggle, ToggleComponent);

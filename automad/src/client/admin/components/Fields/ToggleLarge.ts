@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS } from '@/core';
+import { CSS, FieldTag } from '@/core';
 import { ToggleComponent } from './Toggle';
 
 /**
@@ -52,4 +52,4 @@ class ToggleLargeComponent extends ToggleComponent {
 	protected createLabel(): void {}
 }
 
-customElements.define('am-toggle-large', ToggleLargeComponent);
+customElements.define(FieldTag.toggleLarge, ToggleLargeComponent);

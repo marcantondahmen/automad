@@ -45,10 +45,34 @@ import {
 import {
 	FieldGroupData,
 	FieldGroups,
-	FieldType,
 	InputElement,
 	KeyValueMap,
 } from '@/types';
+
+/**
+ * The tag names enum for fields.
+ */
+export const enum FieldTag {
+	editor = 'am-editor',
+	email = 'am-email',
+	feedFieldSelect = 'am-feed-field-select',
+	input = 'am-input',
+	mainTheme = 'am-main-theme',
+	pageTags = 'am-page-tags',
+	pageTemplate = 'am-page-template',
+	password = 'am-password',
+	numberUnit = 'am-number-unit',
+	toggle = 'am-toggle',
+	toggleSelect = 'am-toggle-select',
+	toggleLarge = 'am-toggle-large',
+	color = 'am-color',
+	date = 'am-date',
+	markdown = 'am-markdown',
+	imageSelect = 'am-image-select',
+	url = 'am-url',
+	textarea = 'am-textarea',
+	title = 'am-title',
+}
 
 /**
  * A class to register elements to be used to generate form data.
@@ -131,18 +155,18 @@ export const fieldGroup = ({
 	}
 
 	const prefixMap = {
-		'+': 'am-editor',
-		checkbox: shared ? 'am-toggle-select' : 'am-toggle',
-		color: 'am-color',
-		date: 'am-date',
-		text: 'am-markdown',
-		image: 'am-image-select',
-		url: 'am-url',
+		'+': FieldTag.editor,
+		checkbox: shared ? FieldTag.toggleSelect : FieldTag.toggle,
+		color: FieldTag.color,
+		date: FieldTag.date,
+		text: FieldTag.markdown,
+		image: FieldTag.imageSelect,
+		url: FieldTag.url,
 	} as const;
 
 	Object.keys(fields).forEach((key) => {
 		if (!Object.values(App.reservedFields).includes(key)) {
-			let fieldType: FieldType = 'am-textarea';
+			let fieldType: FieldTag = FieldTag.textarea;
 			let placeholder = '';
 
 			for (const [prefix, value] of Object.entries(prefixMap)) {
@@ -168,7 +192,7 @@ export const fieldGroup = ({
 				},
 				[],
 				{},
-				['am-editor', 'am-markdown'].includes(fieldType)
+				[FieldTag.editor, FieldTag.markdown].includes(fieldType)
 			);
 		}
 	});

@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { FieldTag } from '@/core';
 import { InputComponent } from './Input';
 
 /**
@@ -48,4 +49,4 @@ export class PasswordComponent extends InputComponent {
 	}
 }
 
-customElements.define('am-password', PasswordComponent);
+customElements.define(FieldTag.password, PasswordComponent);

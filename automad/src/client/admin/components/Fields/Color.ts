@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, fire, listen } from '@/core';
+import { create, CSS, FieldTag, fire, listen } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -71,4 +71,4 @@ class ColorComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-color', ColorComponent);
+customElements.define(FieldTag.color, ColorComponent);

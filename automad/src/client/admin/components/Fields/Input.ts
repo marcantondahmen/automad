@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS } from '@/core';
+import { create, CSS, FieldTag } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -62,4 +62,4 @@ export class InputComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define('am-input', InputComponent);
+customElements.define(FieldTag.input, InputComponent);
