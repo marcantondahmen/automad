@@ -162,8 +162,6 @@ const editorStyleDefaults = Object.assign({}, styleDefaults, {
 export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private holder: EditorJSComponent = null;
 
-	private stylesModal: ModalComponent = null;
-
 	static get enableLineBreaks() {
 		return true;
 	}
@@ -248,7 +246,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.wrapper
 		);
 
-		this.renderStylesModal(toolbar);
+		this.renderStylesButton(toolbar);
 		this.renderJustifySelect(toolbar);
 		this.renderAlignSelect(toolbar);
 		this.renderNumberUnitInput(toolbar, 'gap', iconFlexGap);
@@ -266,6 +264,20 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 					_toolbar.classList.toggle(CSS.active, _toolbar == toolbar);
 				}
 			);
+		});
+	}
+
+	private renderStylesButton(toolbar: HTMLElement): void {
+		const button = create(
+			'am-modal-toggle',
+			[CSS.button, CSS.buttonIcon, CSS.buttonAccent],
+			{ [Attr.tooltip]: App.text('editStyle') },
+			toolbar,
+			'<i class="bi bi-palette2"></i>'
+		);
+
+		listen(button, 'click', () => {
+			this.renderStylesModal();
 		});
 	}
 
@@ -378,21 +390,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 	}
 
-	private renderStylesModal(toolbar: HTMLElement): void {
-		const id = uniqueId();
-
-		create(
-			'am-modal-toggle',
-			[CSS.button, CSS.buttonIcon, CSS.buttonAccent],
-			{ [Attr.modal]: `#${id}`, [Attr.tooltip]: App.text('editStyle') },
-			toolbar,
-			'<i class="bi bi-palette2"></i>'
-		);
-
-		this.stylesModal = create(
+	private renderStylesModal(): void {
+		const modal = create(
 			ModalComponent.TAG_NAME,
 			[],
-			{ id },
+			{ [Attr.destroy]: '' },
 			App.root,
 			html`
 				<div class="${CSS.modalDialog}">
@@ -412,8 +414,8 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			`
 		);
 
-		const body = query(`.${CSS.modalBody}`, this.stylesModal);
-		const button = query(`.${CSS.modalFooter} button`, this.stylesModal);
+		const body = query(`.${CSS.modalBody}`, modal);
+		const button = query(`.${CSS.modalFooter} button`, modal);
 
 		const field = (
 			type: FieldTag,
@@ -522,7 +524,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.setStyle();
 			this.blockAPI.dispatchChange();
 
-			this.stylesModal.close();
+			modal.close();
+		});
+
+		setTimeout(() => {
+			modal.open();
 		});
 	}
 
@@ -591,9 +597,5 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		}
 
 		this.holder.setAttribute('style', inline.join(' '));
-	}
-
-	destroy(): void {
-		this.stylesModal.remove();
 	}
 }
