@@ -160,12 +160,25 @@ const editorStyleDefaults = Object.assign({}, styleDefaults, {
  * @extends BaseBlock
  */
 export class SectionBlock extends BaseBlock<SectionBlockData> {
+	/**
+	 * The editor holder element.
+	 */
 	private holder: EditorJSComponent = null;
 
+	/**
+	 * Enable linebreaks.
+	 *
+	 * @static
+	 */
 	static get enableLineBreaks() {
 		return true;
 	}
 
+	/**
+	 * Sanitizer settings.
+	 *
+	 * @static
+	 */
 	static get sanitize() {
 		return {
 			content: true,
@@ -173,6 +186,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		};
 	}
 
+	/**
+	 * Toolbox settings.
+	 */
 	static get toolbox() {
 		return {
 			title: App.text('editorBlockSection'),
@@ -180,6 +196,12 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		};
 	}
 
+	/**
+	 * Prepare block data.
+	 *
+	 * @param data
+	 * @return the section block data
+	 */
 	protected prepareData(data: SectionBlockData): SectionBlockData {
 		return {
 			content: data.content || {},
@@ -192,6 +214,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		};
 	}
 
+	/**
+	 * Render the main block element.
+	 *
+	 * @return the rendered block
+	 */
 	render(): HTMLElement {
 		this.wrapper.classList.add(CSS.editorBlockSection);
 
@@ -234,10 +261,18 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		return this.wrapper;
 	}
 
+	/**
+	 * Return the section block data.
+	 *
+	 * @return the saved data
+	 */
 	save(): SectionBlockData {
 		return this.data;
 	}
 
+	/**
+	 * Render the layout toolbox and append it to the main wrapper.
+	 */
 	private renderToolbar(): void {
 		const toolbar = create(
 			'div',
@@ -267,6 +302,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 	}
 
+	/**
+	 * Render the styles button.
+	 *
+	 * @param toolbar
+	 */
 	private renderStylesButton(toolbar: HTMLElement): void {
 		const button = create(
 			'am-modal-toggle',
@@ -281,6 +321,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 	}
 
+	/**
+	 * Render the justify setting select button.
+	 *
+	 * @param toolbar
+	 */
 	private renderJustifySelect(toolbar: HTMLElement): void {
 		const justifySelectOptions = Object.keys(
 			SectionJustifyContentOptions
@@ -320,6 +365,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 	}
 
+	/**
+	 * Render the align setting select button.
+	 *
+	 * @param toolbar
+	 */
 	private renderAlignSelect(toolbar: HTMLElement): void {
 		const alignSelectOptions = Object.keys(SectionAlignItemsOptions).reduce(
 			(result, key: SectionAlignItemsOption) => {
@@ -360,6 +410,13 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 	}
 
+	/**
+	 * Render a number unit input.
+	 *
+	 * @param toolbar
+	 * @param key
+	 * @param icon
+	 */
 	private renderNumberUnitInput(
 		toolbar: HTMLElement,
 		key: 'gap' | 'minBlockWidth',
@@ -390,6 +447,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 	}
 
+	/**
+	 * Render the styles modal and append it to root.
+	 */
 	private renderStylesModal(): void {
 		const modal = create(
 			ModalComponent.TAG_NAME,
@@ -532,6 +592,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 	}
 
+	/**
+	 * Set the section styles.
+	 */
 	private setStyle(): void {
 		const { style, gap, justify, align, minBlockWidth } = this.data;
 		const baseClass = CSS.editorStyleBase;
