@@ -241,10 +241,10 @@ export const titleCase = (str: string): string => {
 };
 
 /**
- * Create a unique id with an optional prefix.
+ * Create a unique id with that can be used for the "id" attribute (starting with a letter).
  *
  * @see {@link docs https://github.com/ai/nanoid/#readme}
- * @returns the optionally prefixed id
+ * @returns the unique id
  */
 export const uniqueId = () => {
 	const prefix = customAlphabet(

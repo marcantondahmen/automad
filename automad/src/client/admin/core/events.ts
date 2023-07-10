@@ -170,7 +170,6 @@ export const listen = (
 	const remove = () => {
 		eventNames.forEach((eventName) => {
 			element.removeEventListener(eventName, handler);
-			getLogger().log('Remove Listener', { eventName });
 		});
 	};
 
@@ -209,7 +208,6 @@ export const listenToClassChange = (
 
 	const remove = () => {
 		observer.disconnect();
-		getLogger().log('Remove Observer', observer);
 	};
 
 	return { remove };
