@@ -391,7 +391,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			ModalComponent.TAG_NAME,
 			[],
 			{ id },
-			App.root,
+			this.wrapper,
 			html`
 				<div class="${CSS.modalDialog}">
 					<div class="${CSS.modalHeader}">
