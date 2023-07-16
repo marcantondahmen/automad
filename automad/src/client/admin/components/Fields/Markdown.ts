@@ -129,6 +129,8 @@ const setMdEditorLanguage = (): void => {
 		Heading: App.text('heading'),
 		Paragraph: App.text('paragraph'),
 		Strike: App.text('strikeThrough'),
+		Bold: App.text('bold'),
+		Italic: App.text('italic'),
 		Code: App.text('inlineCode'),
 		'Insert CodeBlock': App.text('insertCodeBlock'),
 		Blockquote: App.text('blockquote'),

@@ -192,6 +192,9 @@ export const createFieldSections = (
 
 /**
  * Create an image picker modal.
+ *
+ * @param bindingName
+ * @param label
  */
 export const createImagePickerModal = (
 	bindingName: string,
@@ -372,6 +375,7 @@ export const createLinkModal = (bindingName: string, label: string): void => {
  * Create a blocking progress modal.
  *
  * @param text
+ * @return The modal
  */
 export const createProgressModal = (text: string): ModalComponent => {
 	const modal = create(
