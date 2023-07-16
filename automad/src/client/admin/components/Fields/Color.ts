@@ -40,7 +40,7 @@ import { BaseFieldComponent } from './BaseField';
  *
  * @extends BaseFieldComponent
  */
-class ColorComponent extends BaseFieldComponent {
+export class ColorComponent extends BaseFieldComponent {
 	/**
 	 * Create an input field.
 	 */

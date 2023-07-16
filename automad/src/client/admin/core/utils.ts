@@ -34,7 +34,7 @@
 
 import { App, Attr, CSS, create, html, listen } from '.';
 import { Listener } from '@/types';
-import { customAlphabet, nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
 /**
  * A simple confirmation modal.
@@ -96,6 +96,26 @@ export const confirm = async (text: string): Promise<boolean> => {
 
 		listen(modal, 'click', execute, 'am-modal-close');
 	});
+};
+
+/**
+ * Convert RGB color to HEX.
+ *
+ * @param color
+ * @return the HEX value
+ */
+export const convertRgbToHex = (color: string): string => {
+	const rgb = color.match(/(\d+)/g);
+
+	let hexr = parseInt(rgb[0]).toString(16);
+	let hexg = parseInt(rgb[1]).toString(16);
+	let hexb = parseInt(rgb[2]).toString(16);
+
+	hexr = hexr.length === 1 ? '0' + hexr : hexr;
+	hexg = hexg.length === 1 ? '0' + hexg : hexg;
+	hexb = hexb.length === 1 ? '0' + hexb : hexb;
+
+	return '#' + hexr + hexg + hexb;
 };
 
 /**
