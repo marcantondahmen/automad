@@ -45,6 +45,7 @@ import { LinkInline } from '@/editor/inline/Link';
 import { BoldInline } from '@/editor/inline/Bold';
 import { ItalicInline } from '@/editor/inline/Italic';
 import { CodeInline } from '@/editor/inline/Code';
+import { UnderlineInline } from '@/editor/inline/Underline';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -99,9 +100,16 @@ export class EditorJSComponent extends BaseComponent {
 						italic: { class: ItalicInline },
 						link: { class: LinkInline },
 						codeInline: { class: CodeInline },
+						underline: { class: UnderlineInline },
 					},
 					tunes: ['layout'],
-					inlineToolbar: ['bold', 'italic', 'link', 'codeInline'],
+					inlineToolbar: [
+						'bold',
+						'italic',
+						'link',
+						'codeInline',
+						'underline',
+					],
 					onReady: (): void => {
 						this.onRender(data);
 					},
