@@ -161,8 +161,7 @@ export abstract class BaseInline {
 
 		this.api.selection.expandToTag(node);
 
-		const sel = window.getSelection();
-		const range = sel.getRangeAt(0);
+		const range = window.getSelection().getRangeAt(0);
 		const unwrappedContent = range.extractContents();
 
 		node.remove();
