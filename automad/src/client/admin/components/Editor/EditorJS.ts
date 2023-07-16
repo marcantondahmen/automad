@@ -47,6 +47,7 @@ import { ItalicInline } from '@/editor/inline/Italic';
 import { CodeInline } from '@/editor/inline/Code';
 import { UnderlineInline } from '@/editor/inline/Underline';
 import { ColorInline } from '@/editor/inline/Color';
+import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -102,6 +103,7 @@ export class EditorJSComponent extends BaseComponent {
 						link: { class: LinkInline },
 						codeInline: { class: CodeInline },
 						underline: { class: UnderlineInline },
+						strikeThrough: { class: StrikeThroughInline },
 						color: { class: ColorInline },
 					},
 					tunes: ['layout'],
@@ -111,6 +113,7 @@ export class EditorJSComponent extends BaseComponent {
 						'link',
 						'codeInline',
 						'underline',
+						'strikeThrough',
 						'color',
 					],
 					onReady: (): void => {
