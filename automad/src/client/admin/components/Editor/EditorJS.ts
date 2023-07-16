@@ -41,6 +41,7 @@ import Header from '@editorjs/header';
 import { LayoutTune } from '@/editor/tunes/Layout';
 import { SectionBlock } from '@/editor/blocks/Section';
 import { DragDrop } from '@/editor/plugins/DragDrop';
+import { LinkInline } from '@/editor/inline/Link';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -91,8 +92,10 @@ export class EditorJSComponent extends BaseComponent {
 						},
 						header: { class: Header, inlineToolbar: true },
 						section: SectionBlock,
+						link: LinkInline,
 					},
 					tunes: ['layout'],
+					inlineToolbar: ['bold', 'italic', 'link'],
 					onReady: (): void => {
 						this.onRender(data);
 					},
