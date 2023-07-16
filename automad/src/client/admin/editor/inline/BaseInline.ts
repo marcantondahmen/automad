@@ -36,6 +36,16 @@ import { create } from '@/core';
 import { API, InlineToolConstructorOptions } from '@editorjs/editorjs';
 
 /**
+ * Define interface with same name in order to merge definition for base class.
+ */
+export interface BaseInline {
+	readonly tag: string;
+	readonly icon: string;
+	renderActions(): HTMLElement;
+	clear(): void;
+}
+
+/**
  * The abstract base class for inline tools.
  */
 export abstract class BaseInline {
@@ -46,20 +56,6 @@ export abstract class BaseInline {
 	 */
 	static get isInline() {
 		return true;
-	}
-
-	/**
-	 * The toolbar icon.
-	 */
-	protected get icon(): string {
-		return '';
-	}
-
-	/**
-	 * The actual tag that is used.
-	 */
-	protected get tag(): string {
-		return '';
 	}
 
 	/**
@@ -206,11 +202,15 @@ export abstract class BaseInline {
 		selection.addRange(this.range);
 	}
 
-	abstract showActions(node: HTMLElement): void;
+	/**
+	 * Runs when menu is shown.
+	 *
+	 * @param node
+	 */
+	protected showActions(node: HTMLElement): void {}
 
-	abstract hideActions(): void;
-
-	abstract renderActions(): HTMLElement;
-
-	abstract clear(): void;
+	/**
+	 * Runs when menu is hidden.
+	 */
+	protected hideActions(): void {}
 }

@@ -73,14 +73,14 @@ export class LinkInline extends BaseInline {
 	/**
 	 * The tool tag.
 	 */
-	protected get tag(): string {
+	get tag(): string {
 		return 'A';
 	}
 
 	/**
 	 * The tool icon.
 	 */
-	protected get icon(): string {
+	get icon(): string {
 		return '<i class="bi bi-link-45deg"></i>';
 	}
 
