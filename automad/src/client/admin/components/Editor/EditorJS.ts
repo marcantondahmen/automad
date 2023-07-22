@@ -48,6 +48,8 @@ import { CodeInline } from '@/editor/inline/Code';
 import { UnderlineInline } from '@/editor/inline/Underline';
 import { ColorInline } from '@/editor/inline/Color';
 import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
+import { FontSizeInline } from '@/editor/inline/FontSize';
+import { LineHeightInline } from '@/editor/inline/LineHeight';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -105,6 +107,8 @@ export class EditorJSComponent extends BaseComponent {
 						underline: { class: UnderlineInline },
 						strikeThrough: { class: StrikeThroughInline },
 						color: { class: ColorInline },
+						fontSize: { class: FontSizeInline },
+						lineHeight: { class: LineHeightInline },
 					},
 					tunes: ['layout'],
 					inlineToolbar: [
@@ -115,6 +119,8 @@ export class EditorJSComponent extends BaseComponent {
 						'underline',
 						'strikeThrough',
 						'color',
+						'fontSize',
+						'lineHeight',
 					],
 					onReady: (): void => {
 						this.onRender(data);
