@@ -34,7 +34,7 @@
 
 import { BlockAPI } from '@editorjs/editorjs';
 import { App, Attr, create, createSelect, CSS, listen, query } from '@/core';
-import { LayoutTuneData, SelectComponentOption } from '@/types';
+import { LayoutFraction, LayoutTuneData, SelectComponentOption } from '@/types';
 import { BaseTune } from './BaseTune';
 
 /**
@@ -100,7 +100,7 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		this.data.stretched = value === LayoutTune.STRETCHED;
 		this.data.width =
 			value && value !== LayoutTune.STRETCHED
-				? (value as unknown as typeof fractions)
+				? (value as LayoutFraction)
 				: null;
 
 		LayoutTune.apply(this.block, this.data);

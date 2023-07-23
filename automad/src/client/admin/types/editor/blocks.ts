@@ -32,30 +32,20 @@
  * Licensed under the MIT license.
  */
 
-import { API, BlockAPI, OutputData, ToolConfig } from '@editorjs/editorjs';
-import { KeyValueMap } from '.';
+import { API, BlockAPI, ToolConfig } from '@editorjs/editorjs';
+import { KeyValueMap } from '..';
 import {
 	SectionAlignItemsOptions,
 	SectionBackgroundBlendModes,
 	SectionBorderStyles,
 	SectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
-import { fractions } from '@/editor/tunes/Layout';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
 	config?: ToolConfig;
 	block: BlockAPI;
 	data: any;
-}
-
-export interface EditorOutputData extends OutputData {
-	automadVersion?: string;
-}
-
-export interface LayoutTuneData {
-	stretched: boolean;
-	width: typeof fractions;
 }
 
 export type SectionJustifyContentOption =
