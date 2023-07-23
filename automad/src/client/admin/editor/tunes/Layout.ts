@@ -60,16 +60,30 @@ export const fractions = ['1/4', '1/3', '1/2', '2/3', '3/4', '1/1'] as const;
  * The LayoutTune class allows for block layout based on flexbox.
  */
 export class LayoutTune extends BaseTune<LayoutTuneData> {
+	/**
+	 * The stretched property name.
+	 *
+	 * @static
+	 */
 	static STRETCHED = 'stretched';
 
+	/**
+	 * Test whether the block is allowd to stretch.
+	 */
 	get isStretchable(): boolean {
 		return stretchableBlocks.includes(this.block.name || '');
 	}
 
+	/**
+	 * Test whether flex can be enabled.
+	 */
 	get isFlex(): boolean {
 		return this.config.isSectionBlock || false;
 	}
 
+	/**
+	 * Get the selected option.
+	 */
 	get selected(): string {
 		const { stretched, width } = this.data;
 		const selected = stretched ? LayoutTune.STRETCHED : width ? width : '';
@@ -77,6 +91,11 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		return selected as string;
 	}
 
+	/**
+	 * Create data object based on selected option string.
+	 *
+	 * @param data
+	 */
 	set selected(value) {
 		this.data.stretched = value === LayoutTune.STRETCHED;
 		this.data.width =
@@ -87,6 +106,12 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		LayoutTune.apply(this.block, this.data);
 	}
 
+	/**
+	 * Apply layout to block.
+	 *
+	 * @param block
+	 * @param layout
+	 */
 	static apply(block: BlockAPI, layout: LayoutTuneData): void {
 		if (!layout) {
 			return;
@@ -106,6 +131,11 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 			: element.removeAttribute(Attr.width);
 	}
 
+	/**
+	 * Update the toolbar handle position based on the block's position in the layout.
+	 *
+	 * @param blockHolder
+	 */
 	static updateToolbarPosition(blockHolder: HTMLElement): void {
 		if (!blockHolder) {
 			return;
@@ -141,6 +171,12 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		toolbar.setAttribute('style', `--x: ${offsetX}px; --y: ${offsetY}px;`);
 	}
 
+	/**
+	 * Prepare the tune data.
+	 *
+	 * @param data
+	 * @return the prepared data
+	 */
 	protected prepareData(data: LayoutTuneData): LayoutTuneData {
 		return {
 			stretched: data.stretched || false,
@@ -148,6 +184,11 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 		};
 	}
 
+	/**
+	 * Render the wrapper element.
+	 *
+	 * @return the wrapper
+	 */
 	renderSettings(): HTMLElement {
 		const wrapper = create('div', [CSS.editorPopoverForm]);
 
