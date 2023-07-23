@@ -38,8 +38,10 @@ import {
 	App,
 	create,
 	createField,
+	CSS,
 	EventName,
 	FieldTag,
+	html,
 	listen,
 	uniqueId,
 } from '@/core';
@@ -112,11 +114,19 @@ export class LinkInline extends BaseInline {
 	renderActions(): HTMLElement {
 		this.wrapper = create('div', [], {});
 
+		const inputField = create(
+			'div',
+			[CSS.field],
+			{},
+			this.wrapper,
+			html`<label class="${CSS.fieldLabel}">${LinkInline.title}</label>`
+		);
+
 		this.autocomplete = create(
 			'am-autocomplete',
 			[],
 			{},
-			this.wrapper
+			inputField
 		) as AutocompleteComponent;
 
 		this.targetToggle = createField(FieldTag.toggle, this.wrapper, {

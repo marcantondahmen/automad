@@ -53,7 +53,7 @@ export class ColorInline extends BaseInline {
 	 * @static
 	 */
 	static get title(): string {
-		return App.text('textColor');
+		return App.text('color');
 	}
 
 	/**

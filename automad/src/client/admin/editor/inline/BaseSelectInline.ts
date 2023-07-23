@@ -83,11 +83,13 @@ export abstract class BaseSelectInline extends BaseInline {
 	 * @return the rendered fields
 	 */
 	renderActions(): HTMLElement {
-		this.wrapper = create(
+		this.wrapper = create('div', [], {});
+
+		const field = create(
 			'div',
-			[],
+			[CSS.field],
 			{},
-			null,
+			this.wrapper,
 			html`
 				<label class="${CSS.fieldLabel}">
 					${(this.constructor as typeof BaseSelectInline).title}
@@ -106,7 +108,7 @@ export abstract class BaseSelectInline extends BaseInline {
 				[]
 			),
 			this.default,
-			this.wrapper
+			field
 		);
 
 		return this.wrapper;

@@ -34,18 +34,17 @@
 
 .am-c-ed-popover {
 	&__form {
-		padding: 0 var(--space);
+		padding: 0 @am-bl-editor-space;
 	}
 }
 
 .ce-popover {
-	--space: 6px;
 	display: flex;
 	flex-direction: column;
-	gap: var(--space);
+	gap: @am-bl-editor-space;
 	left: 0 !important;
 	right: auto !important;
-	padding: var(--space) 0;
+	padding: @am-bl-editor-space 0;
 	overflow: hidden;
 	color: var(--am-clr-text);
 	background-color: var(--am-clr-background);
@@ -62,7 +61,7 @@
 	}
 
 	&__nothing-found-message {
-		padding: var(--space) 0.6rem;
+		padding: @am-bl-editor-space 0.6rem;
 		color: var(--am-clr-text-muted);
 		font-size: @am-small-font-size;
 		line-height: @am-small-line-height;
@@ -106,7 +105,7 @@
 
 	& .cdx-search-field {
 		position: relative;
-		padding: 0 var(--space);
+		padding: 0 @am-bl-editor-space;
 		height: auto;
 		border: none;
 		background-color: transparent;
@@ -116,7 +115,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			left: var(--space);
+			left: @am-bl-editor-space;
 			width: @am-form-height * 0.9;
 			height: 100%;
 			top: 0;
