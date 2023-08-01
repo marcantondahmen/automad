@@ -225,6 +225,8 @@ export const enum CSS {
 
 	privacyIndicator = 'am-c-privacy-indicator',
 
+	radio = 'am-f-radio',
+
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',
 

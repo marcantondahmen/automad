@@ -26,18 +26,52 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'checkbox.less';
-@import 'custom-icon-checkbox.less';
-@import 'group.less';
-@import 'input.less';
-@import 'number-unit.less';
-@import 'radio.less';
-@import 'select.less';
-@import 'tagify.less';
-@import 'toggle.less';
+.am-f-radio {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	width: 100%;
+	height: @am-form-height;
+	border: @am-border;
+	border-radius: @am-form-radius;
+	overflow: hidden;
+
+	& label {
+		display: flex;
+		align-items: stretch;
+		flex-grow: 1;
+		font-size: 1.2rem;
+	}
+
+	& label + label {
+		border-left: @am-border;
+	}
+
+	& label span {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-grow: 1;
+		cursor: pointer;
+		color: var(--am-clr-text-muted);
+
+		&:hover {
+			background-color: var(--am-clr-background-faded);
+		}
+	}
+
+	& label > input:checked + span {
+		color: var(--am-clr-text);
+		background-color: var(--am-clr-background-faded);
+	}
+
+	& input {
+		display: none;
+	}
+}

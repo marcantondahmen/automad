@@ -68,8 +68,16 @@
 		font-weight: @am-small-font-weight;
 	}
 
+	&__custom-content {
+		position: relative;
+		top: -@am-bl-editor-space;
+
+		& > * {
+			margin-top: @am-bl-editor-space;
+		}
+	}
+
 	&-item {
-		display: flex;
 		gap: 0.3rem;
 		border-radius: 0;
 		color: inherit;
@@ -79,6 +87,11 @@
 		&:hover {
 			color: var(--am-clr-selected-text) !important;
 			background-color: var(--am-clr-selected-background) !important;
+		}
+
+		&--active {
+			color: var(--am-clr-primary-text);
+			background-color: var(--am-clr-primary-background);
 		}
 
 		&__icon {
