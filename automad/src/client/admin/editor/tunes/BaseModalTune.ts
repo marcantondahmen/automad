@@ -137,7 +137,7 @@ export abstract class BaseModalTune<DataType extends object> {
 		return {
 			icon: this.icon,
 			label: label
-				? `<span class="${CSS.badge}">${label}</span><span class="${CSS.displayNone}">${this.title}</span>`
+				? `${label}<span class="${CSS.displayNone}">${this.title}</span>`
 				: `<span class="${CSS.textMuted}">${this.title}</span>`,
 			closeOnActivate: true,
 			onActivate: this.onActivate.bind(this),

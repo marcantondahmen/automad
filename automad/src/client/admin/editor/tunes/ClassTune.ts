@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, createField, FieldTag, uniqueId } from '@/core';
+import { App, createField, CSS, FieldTag, html, uniqueId } from '@/core';
 import { ClassTuneData } from '@/types';
 import { BaseModalTune } from './BaseModalTune';
 
@@ -91,6 +91,8 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	 * @return the rendered label
 	 */
 	protected renderLabel(): string {
-		return this.data.value || '';
+		return this.data.value
+			? html`<span class="${CSS.badge}">$${this.data.value}</span>`
+			: '';
 	}
 }
