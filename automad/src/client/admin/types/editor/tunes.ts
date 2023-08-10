@@ -42,6 +42,13 @@ export interface IdTuneData {
 	value: string;
 }
 
+export interface PaddingTuneData {
+	top: string;
+	right: string;
+	bottom: string;
+	left: string;
+}
+
 export type LayoutFraction = (typeof fractions)[number];
 
 export interface LayoutTuneData {

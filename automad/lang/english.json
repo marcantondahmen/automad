@@ -175,6 +175,8 @@
 	"packagistConnectionError": "Can't connect to the Packagist API",
 	"padding": "Padding",
 	"paddingBottom": "Spacing Bottom",
+	"paddingLeft": "Spacing Left",
+	"paddingRight": "Spacing Right",
 	"paddingTop": "Spacing Top",
 	"pageImages": "Page Images",
 	"pageHistory": "Restore Previous Version",

@@ -55,6 +55,7 @@ import Header from '@editorjs/header';
 import Paragraph from '@editorjs/paragraph';
 import { ClassTune } from '@/editor/tunes/ClassTune';
 import { IdTune } from '@/editor/tunes/IdTune';
+import { PaddingTune } from '@/editor/tunes/PaddingTune';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -101,7 +102,7 @@ export class EditorJSComponent extends BaseComponent {
 						...this.getBlockTunes(isSectionBlock),
 						...this.getInlineTools(),
 					},
-					tunes: ['layout', 'className', 'id'],
+					tunes: ['layout', 'padding', 'className', 'id'],
 					inlineToolbar: [
 						'bold',
 						'italic',
@@ -128,7 +129,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return an object with block configurations
 	 */
 	private getBlockTools(): KeyValueMap {
-		const textTunes = ['textAlign', 'layout', 'className', 'id'];
+		const textTunes = ['textAlign', 'layout', 'padding', 'className', 'id'];
 
 		return {
 			paragraph: {
@@ -172,6 +173,7 @@ export class EditorJSComponent extends BaseComponent {
 	 */
 	private getBlockTunes(isSectionBlock: boolean): KeyValueMap {
 		return {
+			padding: { class: PaddingTune },
 			className: { class: ClassTune },
 			id: { class: IdTune },
 			layout: {

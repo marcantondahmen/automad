@@ -149,6 +149,7 @@ export abstract class BaseModalTune<DataType extends object> {
 	 */
 	protected onActivate(): void {
 		const blockIndex = this.api.blocks.getCurrentBlockIndex();
+		const blockElement = query(':scope > *', this.block.holder);
 		const container = query('.am-ui body, body .am-ui');
 		const modal = create(
 			ModalComponent.TAG_NAME,
@@ -179,9 +180,10 @@ export abstract class BaseModalTune<DataType extends object> {
 
 		body.appendChild(this.createForm());
 
-		listen(body, 'input', onChange.bind(this));
+		listen(body, 'input change', onChange.bind(this));
 
 		listen(modal, EventName.modalClose, () => {
+			this.wrap(blockElement);
 			this.block.dispatchChange();
 			this.api.caret.setToBlock(blockIndex, 'start');
 			this.api.toolbar.toggleBlockSettings(true);
