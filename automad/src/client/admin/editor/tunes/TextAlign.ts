@@ -68,10 +68,10 @@ export class TextAlignTune extends BaseTune<TextAlignTuneData> {
 	 * Apply the align option to the block.
 	 */
 	private apply(blockContent: HTMLElement): void {
-		const base = CSS.editorStyleBase;
+		const base = 'am-bl-ed-tune-text-align';
 
 		alignOptions.forEach((option) => {
-			const cls = `${base}--text-${option.value}`;
+			const cls = `${base}--${option.value}`;
 			blockContent.classList.toggle(cls, this.data.align == option.value);
 		});
 	}

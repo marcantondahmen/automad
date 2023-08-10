@@ -101,9 +101,9 @@ export abstract class BaseSelectInline extends BaseInline {
 			this.options.reduce(
 				(
 					res: SelectComponentOption[],
-					style: string
+					value: string
 				): SelectComponentOption[] => {
-					return [...res, { value: style }];
+					return [...res, { value }];
 				},
 				[]
 			),
