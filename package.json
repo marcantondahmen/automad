@@ -21,6 +21,7 @@
   "devDependencies": {
     "@editorjs/editorjs": "^2.27.2",
     "@editorjs/header": "^2.7.0",
+    "@editorjs/paragraph": "^2.9.0",
     "@toast-ui/editor": "^3.2.1",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
     "@types/dompurify": "^2.4.0",
