@@ -33,11 +33,29 @@
  */
 
 import { fractions } from '@/editor/tunes/Layout';
-import { alignments } from '@/editor/tunes/TextAlign';
+
+export interface ClassTuneData {
+	value: string;
+}
+
+export interface IdTuneData {
+	value: string;
+}
 
 export type LayoutFraction = (typeof fractions)[number];
 
 export interface LayoutTuneData {
 	stretched: boolean;
 	width: LayoutFraction;
+}
+
+export type TextAlignOption = 'left' | 'center' | 'right';
+
+export interface TextAlignRadio {
+	value: TextAlignOption;
+	icon: string;
+}
+
+export interface TextAlignTuneData {
+	align: TextAlignOption;
 }

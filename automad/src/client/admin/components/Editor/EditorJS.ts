@@ -33,11 +33,8 @@
  */
 
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
-import { EditorOutputData } from '@/types';
+import { EditorOutputData, KeyValueMap } from '@/types';
 import { BaseComponent } from '@/components/Base';
-
-// @ts-ignore
-import Header from '@editorjs/header';
 import { LayoutTune } from '@/editor/tunes/Layout';
 import { SectionBlock } from '@/editor/blocks/Section';
 import { DragDrop } from '@/editor/plugins/DragDrop';
@@ -50,6 +47,14 @@ import { ColorInline } from '@/editor/inline/Color';
 import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
 import { FontSizeInline } from '@/editor/inline/FontSize';
 import { LineHeightInline } from '@/editor/inline/LineHeight';
+import { TextAlignTune } from '@/editor/tunes/TextAlign';
+
+// @ts-ignore
+import Header from '@editorjs/header';
+// @ts-ignore
+import Paragraph from '@editorjs/paragraph';
+import { ClassTune } from '@/editor/tunes/ClassTune';
+import { IdTune } from '@/editor/tunes/IdTune';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -92,25 +97,11 @@ export class EditorJSComponent extends BaseComponent {
 					minHeight: 50,
 					autofocus: false,
 					tools: {
-						layout: {
-							class: LayoutTune,
-							config: {
-								isSectionBlock,
-							},
-						},
-						header: { class: Header, inlineToolbar: true },
-						section: { class: SectionBlock },
-						bold: { class: BoldInline },
-						italic: { class: ItalicInline },
-						link: { class: LinkInline },
-						codeInline: { class: CodeInline },
-						underline: { class: UnderlineInline },
-						strikeThrough: { class: StrikeThroughInline },
-						color: { class: ColorInline },
-						fontSize: { class: FontSizeInline },
-						lineHeight: { class: LineHeightInline },
+						...this.getBlockTools(),
+						...this.getBlockTunes(isSectionBlock),
+						...this.getInlineTools(),
 					},
-					tunes: ['layout'],
+					tunes: ['layout', 'className', 'id'],
 					inlineToolbar: [
 						'bold',
 						'italic',
@@ -129,6 +120,70 @@ export class EditorJSComponent extends BaseComponent {
 				config
 			)
 		);
+	}
+
+	/**
+	 * The blocks used.
+	 *
+	 * @return an object with block configurations
+	 */
+	private getBlockTools(): KeyValueMap {
+		const textTunes = ['textAlign', 'layout', 'className', 'id'];
+
+		return {
+			paragraph: {
+				class: Paragraph,
+				inlineToolbar: true,
+				tunes: textTunes,
+			},
+			header: {
+				class: Header,
+				inlineToolbar: true,
+				tunes: textTunes,
+			},
+			section: { class: SectionBlock },
+		};
+	}
+
+	/**
+	 * The inline tools used.
+	 *
+	 * @return an object with tool configurations
+	 */
+	private getInlineTools(): KeyValueMap {
+		return {
+			bold: { class: BoldInline },
+			italic: { class: ItalicInline },
+			link: { class: LinkInline },
+			codeInline: { class: CodeInline },
+			underline: { class: UnderlineInline },
+			strikeThrough: { class: StrikeThroughInline },
+			color: { class: ColorInline },
+			fontSize: { class: FontSizeInline },
+			lineHeight: { class: LineHeightInline },
+		};
+	}
+
+	/**
+	 * The block tunes used.
+	 *
+	 * @param isSectionBlock
+	 * @return an object with tune configurations
+	 */
+	private getBlockTunes(isSectionBlock: boolean): KeyValueMap {
+		return {
+			className: { class: ClassTune },
+			id: { class: IdTune },
+			layout: {
+				class: LayoutTune,
+				config: {
+					isSectionBlock,
+				},
+			},
+			textAlign: {
+				class: TextAlignTune,
+			},
+		};
 	}
 
 	/**
