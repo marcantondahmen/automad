@@ -120,7 +120,6 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 			const element = this.block.holder;
 			const { stretched, width } = this.data;
 
-			console.log('WRAP', this.data, element);
 			element.classList.toggle(
 				`${CSS.editorStyleBase}--stretched`,
 				stretched
