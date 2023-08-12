@@ -42,10 +42,10 @@ import {
 	query,
 	uniqueId,
 } from '@/core';
-import { PaddingTuneData } from '@/types';
+import { SpacingTuneData } from '@/types';
 import { BaseModalTune } from './BaseModalTune';
 
-export class PaddingTune extends BaseModalTune<PaddingTuneData> {
+export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 	/**
 	 * The tune title.
 	 */
@@ -66,7 +66,7 @@ export class PaddingTune extends BaseModalTune<PaddingTuneData> {
 	 * @param data
 	 * @return the prepared data
 	 */
-	protected prepareData(data: PaddingTuneData): PaddingTuneData {
+	protected prepareData(data: SpacingTuneData): SpacingTuneData {
 		return {
 			top: data.top || '',
 			right: data.right || '',
@@ -81,7 +81,7 @@ export class PaddingTune extends BaseModalTune<PaddingTuneData> {
 	 * @param data
 	 * @return the sanitized data
 	 */
-	protected sanitize(data: PaddingTuneData): PaddingTuneData {
+	protected sanitize(data: SpacingTuneData): SpacingTuneData {
 		const sanitize = (str: string) => {
 			return str.replace(/[^\w_\.]+/g, '').trim();
 		};

@@ -42,7 +42,7 @@ export interface IdTuneData {
 	value: string;
 }
 
-export interface PaddingTuneData {
+export interface SpacingTuneData {
 	top: string;
 	right: string;
 	bottom: string;

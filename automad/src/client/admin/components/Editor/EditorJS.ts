@@ -55,7 +55,7 @@ import Header from '@editorjs/header';
 import Paragraph from '@editorjs/paragraph';
 import { ClassTune } from '@/editor/tunes/ClassTune';
 import { IdTune } from '@/editor/tunes/IdTune';
-import { PaddingTune } from '@/editor/tunes/PaddingTune';
+import { SpacingTune } from '@/editor/tunes/SpacingTune';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -74,6 +74,20 @@ export class EditorJSComponent extends BaseComponent {
 	 * The EditorJS instance that is associated with the holder.
 	 */
 	editor: EditorJS;
+
+	/**
+	 * The base selection of tunes that is used for all blocks.
+	 */
+	private get baseTunes() {
+		return ['layout', 'spacing', 'className', 'id'];
+	}
+
+	/**
+	 * The selection of tunes that is used for text based blocks.
+	 */
+	private get textTunes() {
+		return ['textAlign', ...this.baseTunes];
+	}
 
 	/**
 	 * Create an EditorJS instance and bind it to the editor property.
@@ -102,7 +116,7 @@ export class EditorJSComponent extends BaseComponent {
 						...this.getBlockTunes(isSectionBlock),
 						...this.getInlineTools(),
 					},
-					tunes: ['layout', 'padding', 'className', 'id'],
+					tunes: this.baseTunes,
 					inlineToolbar: [
 						'bold',
 						'italic',
@@ -129,18 +143,16 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return an object with block configurations
 	 */
 	private getBlockTools(): KeyValueMap {
-		const textTunes = ['textAlign', 'layout', 'padding', 'className', 'id'];
-
 		return {
 			paragraph: {
 				class: Paragraph,
 				inlineToolbar: true,
-				tunes: textTunes,
+				tunes: this.textTunes,
 			},
 			header: {
 				class: Header,
 				inlineToolbar: true,
-				tunes: textTunes,
+				tunes: this.textTunes,
 			},
 			section: { class: SectionBlock },
 		};
@@ -173,7 +185,7 @@ export class EditorJSComponent extends BaseComponent {
 	 */
 	private getBlockTunes(isSectionBlock: boolean): KeyValueMap {
 		return {
-			padding: { class: PaddingTune },
+			spacing: { class: SpacingTune },
 			className: { class: ClassTune },
 			id: { class: IdTune },
 			layout: {
