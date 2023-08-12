@@ -32,7 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import { BlockAPI } from '@editorjs/editorjs';
 import { App, Attr, create, createSelect, CSS, listen, query } from '@/core';
 import { LayoutFraction, LayoutTuneData, SelectComponentOption } from '@/types';
 import { BaseTune } from './BaseTune';
