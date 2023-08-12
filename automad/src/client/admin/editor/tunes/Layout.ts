@@ -103,7 +103,7 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 				? (value as LayoutFraction)
 				: null;
 
-		LayoutTune.apply(this.block, this.data);
+		this.apply();
 	}
 
 	/**
@@ -112,23 +112,37 @@ export class LayoutTune extends BaseTune<LayoutTuneData> {
 	 * @param block
 	 * @param layout
 	 */
-	static apply(block: BlockAPI, layout: LayoutTuneData): void {
-		if (!layout) {
+	private apply(): void {
+		if (!this.data) {
 			return;
 		}
 
-		const element = block.holder;
-		const { stretched } = layout;
-		const width = (layout?.width as unknown as string) || null;
+		setTimeout(() => {
+			const element = this.block.holder;
+			const { stretched, width } = this.data;
 
-		element.classList.toggle(
-			`${CSS.editorStyleBase}--stretched`,
-			stretched
-		);
+			console.log('WRAP', this.data, element);
+			element.classList.toggle(
+				`${CSS.editorStyleBase}--stretched`,
+				stretched
+			);
 
-		width
-			? element.setAttribute(Attr.width, width)
-			: element.removeAttribute(Attr.width);
+			width
+				? element.setAttribute(Attr.width, width)
+				: element.removeAttribute(Attr.width);
+		}, 0);
+	}
+
+	/**
+	 * Apply tune to block content element.
+	 *
+	 * @param the block content element
+	 * @return the element
+	 */
+	wrap(blockElement: HTMLElement): HTMLElement {
+		this.apply();
+
+		return blockElement;
 	}
 
 	/**

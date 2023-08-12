@@ -130,7 +130,7 @@ export class EditorComponent extends BaseFieldComponent {
 
 		await this.editorJS.editor.render(value);
 
-		this.editorJS.onRender(value);
+		this.editorJS.onRender();
 	}
 
 	/**

@@ -129,7 +129,7 @@ export class EditorJSComponent extends BaseComponent {
 						'lineHeight',
 					],
 					onReady: (): void => {
-						this.onRender(data);
+						this.onRender();
 					},
 				},
 				config
@@ -202,17 +202,8 @@ export class EditorJSComponent extends BaseComponent {
 
 	/**
 	 * Apply layout to rendered blocks and initialyze drag and drop.
-	 *
-	 * @param data
 	 */
-	onRender(data: EditorOutputData): void {
-		data.blocks?.forEach((_block) => {
-			const block = this.editor.blocks.getById(_block.id);
-			const layout = _block.tunes?.layout;
-
-			LayoutTune.apply(block, layout);
-		});
-
+	onRender(): void {
 		new DragDrop(this);
 	}
 }
