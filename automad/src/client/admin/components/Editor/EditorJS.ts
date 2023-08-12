@@ -53,9 +53,9 @@ import { TextAlignTune } from '@/editor/tunes/TextAlign';
 import Header from '@editorjs/header';
 // @ts-ignore
 import Paragraph from '@editorjs/paragraph';
-import { ClassTune } from '@/editor/tunes/ClassTune';
-import { IdTune } from '@/editor/tunes/IdTune';
-import { SpacingTune } from '@/editor/tunes/SpacingTune';
+import { ClassTune } from '@/editor/tunes/Class';
+import { IdTune } from '@/editor/tunes/Id';
+import { SpacingTune } from '@/editor/tunes/Spacing';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
