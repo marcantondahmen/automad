@@ -36,7 +36,6 @@ import { ModalComponent } from '@/components/Modal/Modal';
 import {
 	App,
 	Attr,
-	collectFieldData,
 	create,
 	CSS,
 	debounce,

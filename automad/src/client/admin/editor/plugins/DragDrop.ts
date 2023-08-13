@@ -189,6 +189,7 @@ export class DragDrop {
 
 		if (sourceComponent === targetComponent) {
 			sourceComponent.editor.blocks.move(targetIndex, sourceIndex);
+			sourceComponent.editor.caret.setToBlock(targetIndex, 'end');
 		} else {
 			const data = await DragDrop.CURRENT.block.save();
 
@@ -203,8 +204,10 @@ export class DragDrop {
 				data.data,
 				DragDrop.CURRENT.block.config,
 				targetIndex + 1,
-				true
+				false
 			);
+
+			targetComponent.editor.caret.setToBlock(targetIndex + 1, 'end');
 		}
 
 		DragDrop.CURRENT = null;

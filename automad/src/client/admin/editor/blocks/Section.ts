@@ -245,7 +245,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			portal,
 			this.data.content as EditorOutputData,
 			{
-				onChange: async (api, event) => {
+				onChange: async (api) => {
 					const { blocks } = await api.saver.save();
 
 					this.data.content = { blocks };
@@ -255,7 +255,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			true
 		);
 
-		listen(this.holder, 'paste drop', (event: Event) => {
+		listen(this.holder, 'paste', (event: Event) => {
 			event.stopImmediatePropagation();
 		});
 
