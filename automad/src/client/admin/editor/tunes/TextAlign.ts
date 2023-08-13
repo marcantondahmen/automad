@@ -34,7 +34,7 @@
 
 import { collectFieldData, create, CSS, html, listen, query } from '@/core';
 import { TextAlignRadio, TextAlignTuneData } from '@/types';
-import { BaseTune } from './BaseTune';
+import { BaseElementTune } from './BaseElementTune';
 
 const alignOptions: TextAlignRadio[] = [
 	{ value: 'left', icon: 'text-left' },
@@ -42,7 +42,7 @@ const alignOptions: TextAlignRadio[] = [
 	{ value: 'right', icon: 'text-right' },
 ];
 
-export class TextAlignTune extends BaseTune<TextAlignTuneData> {
+export class TextAlignTune extends BaseElementTune<TextAlignTuneData> {
 	/**
 	 * Prepare the tune data.
 	 *

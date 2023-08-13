@@ -56,6 +56,7 @@ import Paragraph from '@editorjs/paragraph';
 import { ClassTune } from '@/editor/tunes/Class';
 import { IdTune } from '@/editor/tunes/Id';
 import { SpacingTune } from '@/editor/tunes/Spacing';
+import { LargeTune } from '@/editor/tunes/Large';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -147,7 +148,7 @@ export class EditorJSComponent extends BaseComponent {
 			paragraph: {
 				class: Paragraph,
 				inlineToolbar: true,
-				tunes: this.textTunes,
+				tunes: ['large', ...this.textTunes],
 			},
 			header: {
 				class: Header,
@@ -196,6 +197,9 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			textAlign: {
 				class: TextAlignTune,
+			},
+			large: {
+				class: LargeTune,
 			},
 		};
 	}

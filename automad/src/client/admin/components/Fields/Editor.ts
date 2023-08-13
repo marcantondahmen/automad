@@ -96,7 +96,10 @@ export class EditorComponent extends BaseFieldComponent {
 						return;
 					}
 
-					this.value = { blocks, automadVersion: App.version };
+					this.value = {
+						blocks: { ...blocks },
+						automadVersion: App.version,
+					};
 
 					fire('input', this);
 				},

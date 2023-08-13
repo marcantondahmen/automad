@@ -34,20 +34,22 @@
 
 import { API, BlockAPI, BlockTune, ToolConfig } from '@editorjs/editorjs';
 import { BlockTuneConstructorOptions } from '@/types';
+import { TunesMenuConfig } from '@editorjs/editorjs/types/tools';
+import { query } from '@/core';
 
 /**
- * The abstract base tune class.
+ * The abstract base tune class that retuns a config object on render.
  */
-export abstract class BaseTune<DataType extends object> implements BlockTune {
+export abstract class BaseToggleTune implements BlockTune {
 	/**
 	 * The editor API.
 	 */
 	protected api: API;
 
 	/**
-	 * The tune data.
+	 * The tune state.
 	 */
-	protected data: DataType;
+	protected state: boolean;
 
 	/**
 	 * The tool configuration.
@@ -60,9 +62,14 @@ export abstract class BaseTune<DataType extends object> implements BlockTune {
 	protected block: BlockAPI;
 
 	/**
-	 * The wrapper element.
+	 * The tune icon.
 	 */
-	protected wrapper: HTMLElement;
+	abstract get icon(): string;
+
+	/**
+	 * The default title, also used for filtering.
+	 */
+	abstract get title(): string;
 
 	/**
 	 * Define tool to be a tune.
@@ -84,42 +91,43 @@ export abstract class BaseTune<DataType extends object> implements BlockTune {
 		this.api = api;
 		this.config = config;
 		this.block = block;
-		this.data = this.prepareData(data || ({} as DataType));
-		this.wrapper = this.renderSettings();
+		this.state = data || false;
 	}
 
 	/**
-	 * Prepare the data that is passed to the constructor.
+	 * Save the tune state.
 	 *
-	 * @param data
-	 * @return the prepared data
+	 * @return the saved state
 	 */
-	protected prepareData(data: DataType): DataType {
-		return data;
+	save(): boolean {
+		return this.state;
 	}
 
 	/**
-	 * Render the wrapper content.
+	 * Return the actual tune config.
 	 *
-	 * @return the rendered wrapper content
+	 * @return the config object
 	 */
-	abstract renderSettings(): HTMLElement;
-
-	/**
-	 * Save the tune data.
-	 *
-	 * @return the saved data
-	 */
-	save(): DataType {
-		return this.data;
+	render(): TunesMenuConfig {
+		return {
+			icon: this.icon,
+			label: this.title,
+			closeOnActivate: false,
+			onActivate: () => {
+				this.state = !this.state;
+				this.wrap(query(':scope > *', this.block.holder));
+				this.block.dispatchChange();
+			},
+			isActive: this.state,
+			toggle: 'large',
+		};
 	}
 
 	/**
-	 * Return the wrapper.
+	 * Apply tune to block content element.
 	 *
-	 * @return the main wrapper
+	 * @param the block content element
+	 * @return the element
 	 */
-	render(): HTMLElement {
-		return this.wrapper;
-	}
+	abstract wrap(blockElement: HTMLElement): HTMLElement;
 }

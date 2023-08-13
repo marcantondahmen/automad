@@ -34,7 +34,7 @@
 
 import { App, Attr, create, createSelect, CSS, listen, query } from '@/core';
 import { LayoutFraction, LayoutTuneData, SelectComponentOption } from '@/types';
-import { BaseTune } from './BaseTune';
+import { BaseElementTune } from './BaseElementTune';
 
 /**
  * The list of blocks that can be stretched.
@@ -58,7 +58,7 @@ export const fractions = ['1/4', '1/3', '1/2', '2/3', '3/4', '1/1'] as const;
 /**
  * The LayoutTune class allows for block layout based on flexbox.
  */
-export class LayoutTune extends BaseTune<LayoutTuneData> {
+export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	/**
 	 * The stretched property name.
 	 *
