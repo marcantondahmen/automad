@@ -85,7 +85,7 @@ export class EditorComponent extends BaseFieldComponent {
 			create('div', [], { id }, this),
 			{ blocks: this.value.blocks },
 			{
-				onChange: async (api, event) => {
+				onChange: async (api) => {
 					const { blocks } =
 						(await api.saver.save()) as EditorOutputData;
 
@@ -97,7 +97,7 @@ export class EditorComponent extends BaseFieldComponent {
 					}
 
 					this.value = {
-						blocks: { ...blocks },
+						blocks: [...blocks],
 						automadVersion: App.version,
 					};
 
@@ -130,6 +130,8 @@ export class EditorComponent extends BaseFieldComponent {
 				dest.remove();
 			}
 		);
+
+		this.value = value;
 
 		await this.editorJS.editor.render(value);
 
