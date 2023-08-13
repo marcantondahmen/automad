@@ -191,8 +191,8 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	 */
 	protected prepareData(data: LayoutTuneData): LayoutTuneData {
 		return {
-			stretched: data.stretched || false,
-			width: data.width || null,
+			stretched: data?.stretched || false,
+			width: data?.width || null,
 		};
 	}
 

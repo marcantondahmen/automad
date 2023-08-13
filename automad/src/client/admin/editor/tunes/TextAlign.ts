@@ -50,9 +50,11 @@ export class TextAlignTune extends BaseElementTune<TextAlignTuneData> {
 	 * @return the prepared data
 	 */
 	protected prepareData(data: TextAlignTuneData): TextAlignTuneData {
-		return {
-			align: data.align ?? 'left',
-		};
+		if (['left', 'center', 'right'].includes(data ?? '')) {
+			return data;
+		}
+
+		return 'left';
 	}
 
 	/**
@@ -72,7 +74,7 @@ export class TextAlignTune extends BaseElementTune<TextAlignTuneData> {
 
 		alignOptions.forEach((option) => {
 			const cls = `${base}${option.value}`;
-			blockContent.classList.toggle(cls, this.data.align == option.value);
+			blockContent.classList.toggle(cls, this.data == option.value);
 		});
 	}
 
@@ -84,7 +86,6 @@ export class TextAlignTune extends BaseElementTune<TextAlignTuneData> {
 	renderSettings(): HTMLElement {
 		const wrapper = create('div', [CSS.editorPopoverForm], {});
 		const radio = create('form', [CSS.radio], {}, wrapper);
-		const name = 'align';
 
 		alignOptions.forEach((option) => {
 			create(
@@ -93,28 +94,21 @@ export class TextAlignTune extends BaseElementTune<TextAlignTuneData> {
 				{},
 				radio,
 				html`
-					<input
-						type="radio"
-						name="${name}"
-						value="${option.value}"
-						${this.data.align == option.value ? 'checked' : ''}
-					/>
+					<input type="radio" name="align" value="${option.value}" />
 					<span><i class="bi bi-${option.icon}"></i></span>
 				`
 			);
 		});
 
-		radio.align.value = this.data.align;
+		radio.align.value = this.data;
 
 		listen(wrapper, 'change', () => {
-			const { align } = collectFieldData(
-				wrapper
-			) as unknown as TextAlignTuneData;
+			const { align } = collectFieldData(wrapper);
 
-			this.data.align = align;
+			this.data = align;
 			this.block.dispatchChange();
 
-			this.apply(query('.ce-block__content', this.block.holder));
+			this.apply(query(':scope > *', this.block.holder));
 		});
 
 		return wrapper;

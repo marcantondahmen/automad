@@ -52,7 +52,7 @@ import { TunesMenuConfig } from '@editorjs/editorjs/types/tools';
 /**
  * The abstract base modal tune class.
  */
-export abstract class BaseModalTune<DataType extends object> {
+export abstract class BaseModalTune<DataType> {
 	/**
 	 * The editor API.
 	 */
@@ -103,7 +103,7 @@ export abstract class BaseModalTune<DataType extends object> {
 		this.api = api;
 		this.config = config;
 		this.block = block;
-		this.data = this.prepareData(data || ({} as DataType));
+		this.data = this.prepareData(data ?? null);
 	}
 
 	/**
@@ -112,9 +112,7 @@ export abstract class BaseModalTune<DataType extends object> {
 	 * @param data
 	 * @return the prepared data
 	 */
-	protected prepareData(data: DataType): DataType {
-		return data;
-	}
+	protected abstract prepareData(data: DataType): DataType;
 
 	/**
 	 * Sanitize form data before setting the current state.
@@ -172,10 +170,8 @@ export abstract class BaseModalTune<DataType extends object> {
 
 		const body = query(`.${CSS.modalBody}`, modal);
 
-		const onChange = debounce((event: Event) => {
-			const data = collectFieldData(modal) as DataType;
-
-			this.data = this.sanitize(data);
+		const onChange = debounce(() => {
+			this.data = this.sanitize(this.getFormData(modal));
 		}, 50);
 
 		body.appendChild(this.createForm());
@@ -216,6 +212,14 @@ export abstract class BaseModalTune<DataType extends object> {
 	 * @return the fields wrapper
 	 */
 	protected abstract createForm(): HTMLElement;
+
+	/**
+	 * Extract field data from the modal.
+	 *
+	 * @param modal
+	 * @return the extracted data
+	 */
+	protected abstract getFormData(modal: HTMLElement): DataType;
 
 	/**
 	 * Apply tune to block content element.

@@ -34,13 +34,9 @@
 
 import { fractions } from '@/editor/tunes/Layout';
 
-export interface ClassTuneData {
-	value: string;
-}
+export type ClassTuneData = string;
 
-export interface IdTuneData {
-	value: string;
-}
+export type IdTuneData = string;
 
 export interface SpacingTuneData {
 	top: string;
@@ -56,13 +52,9 @@ export interface LayoutTuneData {
 	width: LayoutFraction;
 }
 
-export type TextAlignOption = 'left' | 'center' | 'right';
+export type TextAlignTuneData = 'left' | 'center' | 'right';
 
 export interface TextAlignRadio {
-	value: TextAlignOption;
+	value: TextAlignTuneData;
 	icon: string;
-}
-
-export interface TextAlignTuneData {
-	align: TextAlignOption;
 }

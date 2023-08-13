@@ -34,6 +34,7 @@
 
 import {
 	App,
+	collectFieldData,
 	create,
 	createField,
 	CSS,
@@ -68,10 +69,10 @@ export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 	 */
 	protected prepareData(data: SpacingTuneData): SpacingTuneData {
 		return {
-			top: data.top || '',
-			right: data.right || '',
-			bottom: data.bottom || '',
-			left: data.left || '',
+			top: data?.top || '',
+			right: data?.right || '',
+			bottom: data?.bottom || '',
+			left: data?.left || '',
 		};
 	}
 
@@ -92,6 +93,16 @@ export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 			bottom: sanitize(data.bottom),
 			left: sanitize(data.left),
 		};
+	}
+
+	/**
+	 * Extract field data from the modal.
+	 *
+	 * @param modal
+	 * @return the extracted data
+	 */
+	protected getFormData(modal: HTMLElement): SpacingTuneData {
+		return collectFieldData(modal) as SpacingTuneData;
 	}
 
 	/**

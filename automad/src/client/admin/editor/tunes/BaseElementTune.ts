@@ -38,9 +38,7 @@ import { BlockTuneConstructorOptions } from '@/types';
 /**
  * The abstract base tune class that returns an element on render.
  */
-export abstract class BaseElementTune<DataType extends object>
-	implements BlockTune
-{
+export abstract class BaseElementTune<DataType> implements BlockTune {
 	/**
 	 * The editor API.
 	 */
@@ -86,7 +84,7 @@ export abstract class BaseElementTune<DataType extends object>
 		this.api = api;
 		this.config = config;
 		this.block = block;
-		this.data = this.prepareData(data || ({} as DataType));
+		this.data = this.prepareData(data);
 		this.wrapper = this.renderSettings();
 	}
 
@@ -96,9 +94,7 @@ export abstract class BaseElementTune<DataType extends object>
 	 * @param data
 	 * @return the prepared data
 	 */
-	protected prepareData(data: DataType): DataType {
-		return data;
-	}
+	protected abstract prepareData(data: DataType): DataType;
 
 	/**
 	 * Render the wrapper content.

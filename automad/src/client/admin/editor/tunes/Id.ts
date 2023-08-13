@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { createField, CSS, FieldTag, html, uniqueId } from '@/core';
+import {
+	collectFieldData,
+	createField,
+	CSS,
+	FieldTag,
+	html,
+	uniqueId,
+} from '@/core';
 import { IdTuneData } from '@/types';
 import { BaseModalTune } from './BaseModalTune';
 
@@ -58,7 +65,7 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 	 * @return the prepared data
 	 */
 	protected prepareData(data: IdTuneData): IdTuneData {
-		return { value: data.value || '' };
+		return data ?? '';
 	}
 
 	/**
@@ -68,7 +75,19 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 	 * @return the sanitized data
 	 */
 	protected sanitize(data: IdTuneData): IdTuneData {
-		return { value: data.value?.replace(/[^\w_]+/g, '-').trim() };
+		return (data || '').replace(/[^\w_]+/g, '-').trim();
+	}
+
+	/**
+	 * Extract the id from the form.
+	 *
+	 * @param modal
+	 * @return the id
+	 */
+	protected getFormData(modal: HTMLElement): string {
+		const { id } = collectFieldData(modal);
+
+		return id;
 	}
 
 	/**
@@ -79,9 +98,9 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 	protected createForm(): HTMLElement {
 		return createField(FieldTag.input, null, {
 			label: this.title,
-			value: this.data.value,
+			value: this.data,
 			key: uniqueId(),
-			name: 'value',
+			name: 'id',
 		});
 	}
 
@@ -91,8 +110,8 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 	 * @return the rendered label
 	 */
 	protected renderLabel(): string {
-		return this.data.value
-			? html`<span class="${CSS.badge}">$${this.data.value}</span>`
+		return this.data
+			? html`<span class="${CSS.badge}">$${this.data}</span>`
 			: '';
 	}
 }

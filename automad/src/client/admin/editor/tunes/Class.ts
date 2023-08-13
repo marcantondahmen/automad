@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, createField, CSS, FieldTag, html, uniqueId } from '@/core';
+import {
+	App,
+	collectFieldData,
+	createField,
+	CSS,
+	FieldTag,
+	html,
+	uniqueId,
+} from '@/core';
 import { ClassTuneData } from '@/types';
 import { BaseModalTune } from './BaseModalTune';
 
@@ -58,7 +66,7 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	 * @return the prepared data
 	 */
 	protected prepareData(data: ClassTuneData): ClassTuneData {
-		return { value: data.value || '' };
+		return data ?? '';
 	}
 
 	/**
@@ -68,7 +76,19 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	 * @return the sanitized data
 	 */
 	protected sanitize(data: ClassTuneData): ClassTuneData {
-		return { value: data.value?.replace(/[^\w_\s]+/g, '-').trim() };
+		return (data || '').replace(/[^\w_\s]+/g, '-').trim();
+	}
+
+	/**
+	 * Extract the id from the form.
+	 *
+	 * @param modal
+	 * @return the id
+	 */
+	protected getFormData(modal: HTMLElement): string {
+		const { className } = collectFieldData(modal);
+
+		return className;
 	}
 
 	/**
@@ -79,9 +99,9 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	protected createForm(): HTMLElement {
 		return createField(FieldTag.input, null, {
 			label: this.title,
-			value: this.data.value,
+			value: this.data,
 			key: uniqueId(),
-			name: 'value',
+			name: 'className',
 		});
 	}
 
@@ -91,8 +111,8 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	 * @return the rendered label
 	 */
 	protected renderLabel(): string {
-		return this.data.value
-			? html`<span class="${CSS.badge}">$${this.data.value}</span>`
+		return this.data
+			? html`<span class="${CSS.badge}">$${this.data}</span>`
 			: '';
 	}
 }
