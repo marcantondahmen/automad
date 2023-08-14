@@ -192,7 +192,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	static get toolbox() {
 		return {
 			title: App.text('editorBlockSection'),
-			icon: '<i class="bi bi-plus-square-dotted"></i>',
+			icon: '<i class="bi bi-layout-three-columns"></i>',
 		};
 	}
 
@@ -298,6 +298,17 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.setStyle();
 		});
 
+		const setToolbarPosition = () => {
+			const rect = toolbar.getBoundingClientRect();
+			const docWidth = document.body.offsetWidth;
+
+			if (docWidth < rect.right - 10) {
+				toolbar.style.transform = `translateX(${
+					docWidth - rect.right - 10
+				}px)`;
+			}
+		};
+
 		listen(this.wrapper, 'click', (event: Event) => {
 			event.stopPropagation();
 
@@ -306,6 +317,10 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 					_toolbar.classList.toggle(CSS.active, _toolbar == toolbar);
 				}
 			);
+
+			setTimeout(() => {
+				setToolbarPosition();
+			}, 0);
 		});
 	}
 
@@ -363,7 +378,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			null,
 			null,
 			'',
-			[CSS.formGroupItem]
+			[CSS.formGroupItem, CSS.selectInline]
 		);
 
 		listen(justify.select, 'change', () => {
@@ -408,7 +423,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			null,
 			null,
 			'',
-			[CSS.formGroupItem]
+			[CSS.formGroupItem, CSS.selectInline]
 		);
 
 		listen(align.select, 'change', () => {
