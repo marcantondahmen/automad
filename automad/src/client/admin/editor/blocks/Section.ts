@@ -291,6 +291,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		this.renderNumberUnitInput(toolbar, 'gap', iconFlexGap);
 		this.renderNumberUnitInput(toolbar, 'minBlockWidth', iconMinWidth);
 
+		// Add this hidden input in order to catch the focus after a block has been dragged around.
+		create('input', [CSS.displayNone], {}, toolbar);
+
 		listen(toolbar, 'change', () => {
 			this.setStyle();
 		});
