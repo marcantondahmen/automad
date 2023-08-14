@@ -81,7 +81,7 @@ const garbageCollectDestinations = (): void => {
 				destination.remove();
 			}
 		});
-	}, 15000);
+	}, 5000);
 };
 
 /**
@@ -250,6 +250,13 @@ export class EditorPortalComponent extends BaseComponent {
 
 		this.destination.style.left = `${x}px`;
 		this.destination.style.top = `${y}px`;
+
+		// Handle nested portals inside of deleted section blocks.
+		// If a parent section is deleted, the contained child portal moves
+		// to the top-left corner of the window.
+		if (portalRect.x === 0) {
+			this.destination.style.left = '-90000px';
+		}
 
 		this.destination.style.width = `${this.offsetWidth}px`;
 
