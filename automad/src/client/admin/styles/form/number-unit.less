@@ -35,6 +35,18 @@
 .am-f-number-unit {
 	display: flex;
 
+	& input {
+		flex-grow: 1;
+		min-width: 4rem;
+		appearance: textfield;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+
 	& am-select {
 		width: 5.5em;
 	}
