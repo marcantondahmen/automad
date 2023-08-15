@@ -299,14 +299,18 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		});
 
 		const setToolbarPosition = () => {
-			const rect = toolbar.getBoundingClientRect();
-			const docWidth = document.body.offsetWidth;
+			toolbar.style.transform = 'translateX(0)';
 
-			if (docWidth < rect.right - 10) {
-				toolbar.style.transform = `translateX(${
-					docWidth - rect.right - 10
-				}px)`;
-			}
+			setTimeout(() => {
+				const rect = toolbar.getBoundingClientRect();
+				const docWidth = document.body.offsetWidth;
+
+				if (docWidth < rect.right) {
+					const shift = docWidth - rect.right - 10;
+
+					toolbar.style.transform = `translateX(${shift}px)`;
+				}
+			}, 0);
 		};
 
 		listen(this.wrapper, 'click', (event: Event) => {
@@ -318,9 +322,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 				}
 			);
 
-			setTimeout(() => {
-				setToolbarPosition();
-			}, 0);
+			setToolbarPosition();
 		});
 	}
 
