@@ -41,7 +41,6 @@
 .ce-popover {
 	display: flex;
 	flex-direction: column;
-	gap: @am-bl-editor-space;
 	left: 0 !important;
 	right: auto !important;
 	padding: @am-bl-editor-space 0;
@@ -70,15 +69,19 @@
 
 	&__custom-content {
 		position: relative;
-		top: -@am-bl-editor-space;
+
+		& :empty {
+			display: none;
+		}
 
 		& > * {
-			margin-top: @am-bl-editor-space;
+			margin-bottom: @am-bl-editor-space;
 		}
 	}
 
 	&-item {
 		gap: 0.3rem;
+		align-items: center;
 		padding-right: 0.3rem;
 		border-radius: 0;
 		color: inherit;
@@ -101,7 +104,7 @@
 			align-items: center;
 			width: 1.75rem;
 			min-width: 1.75rem;
-			height: 1.75rem;
+			height: 100%;
 			margin: 0;
 			color: inherit;
 			background-color: transparent;
@@ -113,7 +116,7 @@
 			}
 
 			& .bi {
-				font-size: 1.05em;
+				font-size: 16px;
 			}
 		}
 
@@ -125,6 +128,7 @@
 	& .cdx-search-field {
 		position: relative;
 		padding: 0 @am-bl-editor-space;
+		margin-bottom: @am-bl-editor-space !important;
 		height: auto;
 		border: none;
 		background-color: transparent;

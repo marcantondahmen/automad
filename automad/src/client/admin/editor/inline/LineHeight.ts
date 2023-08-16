@@ -102,6 +102,6 @@ export class LineHeightInline extends BaseSelectInline {
 	 * The tool icon.
 	 */
 	get icon(): string {
-		return '<i class="bi bi-list"></i>';
+		return '<i class="bi bi-distribute-vertical"></i>';
 	}
 }

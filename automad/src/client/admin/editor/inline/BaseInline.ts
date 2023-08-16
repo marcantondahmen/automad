@@ -103,6 +103,7 @@ export abstract class BaseInline {
 	 */
 	constructor({ api }: InlineToolConstructorOptions) {
 		this.api = api;
+
 		this.button = create(
 			'button',
 			[this.api.styles.inlineToolButton],

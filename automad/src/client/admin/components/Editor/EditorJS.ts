@@ -121,13 +121,13 @@ export class EditorJSComponent extends BaseComponent {
 						'alignRight',
 						'bold',
 						'italic',
+						'fontSize',
+						'lineHeight',
 						'link',
 						'codeInline',
 						'underline',
 						'strikeThrough',
 						'color',
-						'fontSize',
-						'lineHeight',
 					],
 					onReady: (): void => {
 						this.onRender();
@@ -145,7 +145,6 @@ export class EditorJSComponent extends BaseComponent {
 	 */
 	private getBlockTools(): KeyValueMap {
 		return {
-			section: { class: SectionBlock },
 			paragraph: {
 				class: Paragraph,
 				inlineToolbar: true,
@@ -155,6 +154,7 @@ export class EditorJSComponent extends BaseComponent {
 				class: Header,
 				inlineToolbar: true,
 			},
+			section: { class: SectionBlock },
 		};
 	}
 
