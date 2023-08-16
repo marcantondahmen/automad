@@ -102,8 +102,22 @@
 	font-size: 16px;
 
 	&:hover {
-		color: var(--am-clr-accent-text);
-		background-color: var(--am-clr-accent-background);
+		background-color: var(--am-clr-background-faded);
+	}
+
+	&[data-tool='alignRight'] {
+		position: relative;
+		margin-right: @am-bl-editor-space * 2;
+
+		&:after {
+			content: '';
+			position: absolute;
+			display: block;
+			height: 100%;
+			right: -@am-bl-editor-space;
+			border-right: @am-border;
+			pointer-events: none;
+		}
 	}
 }
 

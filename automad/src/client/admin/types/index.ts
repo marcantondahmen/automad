@@ -34,6 +34,7 @@
 
 export * from './editor/blocks';
 export * from './editor/editor';
+export * from './editor/inline';
 export * from './editor/tunes';
 export * from './field';
 export * from './package';

@@ -32,22 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { fractions } from '@/editor/tunes/Layout';
+export type TextAlignOption = 'left' | 'center' | 'right';
 
-export type ClassTuneData = string;
-
-export type IdTuneData = string;
-
-export interface SpacingTuneData {
-	top: string;
-	right: string;
-	bottom: string;
-	left: string;
-}
-
-export type LayoutFraction = (typeof fractions)[number];
-
-export interface LayoutTuneData {
-	stretched: boolean;
-	width: LayoutFraction;
+export interface TextAlignSelection {
+	start: number;
+	end: number;
+	div: HTMLElement;
 }

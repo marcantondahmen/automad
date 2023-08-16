@@ -47,7 +47,6 @@ import { ColorInline } from '@/editor/inline/Color';
 import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
 import { FontSizeInline } from '@/editor/inline/FontSize';
 import { LineHeightInline } from '@/editor/inline/LineHeight';
-import { TextAlignTune } from '@/editor/tunes/TextAlign';
 
 // @ts-ignore
 import Header from '@editorjs/header';
@@ -57,6 +56,11 @@ import { ClassTune } from '@/editor/tunes/Class';
 import { IdTune } from '@/editor/tunes/Id';
 import { SpacingTune } from '@/editor/tunes/Spacing';
 import { LargeTune } from '@/editor/tunes/Large';
+import {
+	TextAlignCenterInline,
+	TextAlignLeftInline,
+	TextAlignRightInline,
+} from '@/editor/inline/TextAlign';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -81,13 +85,6 @@ export class EditorJSComponent extends BaseComponent {
 	 */
 	private get baseTunes() {
 		return ['layout', 'spacing', 'className', 'id'];
-	}
-
-	/**
-	 * The selection of tunes that is used for text based blocks.
-	 */
-	private get textTunes() {
-		return ['textAlign', ...this.baseTunes];
 	}
 
 	/**
@@ -119,6 +116,9 @@ export class EditorJSComponent extends BaseComponent {
 					},
 					tunes: this.baseTunes,
 					inlineToolbar: [
+						'alignLeft',
+						'alignCenter',
+						'alignRight',
 						'bold',
 						'italic',
 						'link',
@@ -145,17 +145,16 @@ export class EditorJSComponent extends BaseComponent {
 	 */
 	private getBlockTools(): KeyValueMap {
 		return {
+			section: { class: SectionBlock },
 			paragraph: {
 				class: Paragraph,
 				inlineToolbar: true,
-				tunes: ['large', ...this.textTunes],
+				tunes: ['large', ...this.baseTunes],
 			},
 			header: {
 				class: Header,
 				inlineToolbar: true,
-				tunes: this.textTunes,
 			},
-			section: { class: SectionBlock },
 		};
 	}
 
@@ -166,6 +165,9 @@ export class EditorJSComponent extends BaseComponent {
 	 */
 	private getInlineTools(): KeyValueMap {
 		return {
+			alignLeft: { class: TextAlignLeftInline },
+			alignCenter: { class: TextAlignCenterInline },
+			alignRight: { class: TextAlignRightInline },
 			bold: { class: BoldInline },
 			italic: { class: ItalicInline },
 			link: { class: LinkInline },
@@ -194,9 +196,6 @@ export class EditorJSComponent extends BaseComponent {
 				config: {
 					isSectionBlock,
 				},
-			},
-			textAlign: {
-				class: TextAlignTune,
 			},
 			large: {
 				class: LargeTune,
