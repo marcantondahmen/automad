@@ -52,7 +52,7 @@ export const confirm = async (text: string): Promise<boolean> => {
 			[Attr.noEsc]: '',
 			style: 'z-index: 2000;',
 		},
-		App.root
+		getComponentTargetContainer()
 	);
 
 	modal.innerHTML = html`
@@ -138,6 +138,16 @@ export const debounce = (
 			callback.apply(this, args);
 		}, timeout);
 	};
+};
+
+/**
+ * Get the container element where components can be created savely in the dashboard
+ * as well as in the in-page edit mode.
+ *
+ * @return the container element
+ */
+export const getComponentTargetContainer = () => {
+	return query('body .am-ui, .am-ui body');
 };
 
 /**

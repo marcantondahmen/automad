@@ -48,6 +48,7 @@ import {
 	CSS,
 	EventName,
 	FieldTag,
+	getComponentTargetContainer,
 	getPageURL,
 	html,
 	listen,
@@ -204,7 +205,7 @@ export const createImagePickerModal = (
 		ModalComponent.TAG_NAME,
 		[],
 		{ [Attr.destroy]: '' },
-		App.root
+		getComponentTargetContainer()
 	);
 
 	const pickerBindingName = uniqueId();
@@ -318,7 +319,12 @@ export const createImagePickerModal = (
  * @param label
  */
 export const createLinkModal = (bindingName: string, label: string): void => {
-	const modal = create('am-modal', [], { [Attr.destroy]: '' }, App.root);
+	const modal = create(
+		'am-modal',
+		[],
+		{ [Attr.destroy]: '' },
+		getComponentTargetContainer()
+	);
 	const dialog = create('div', [CSS.modalDialog], {}, modal);
 
 	create(
@@ -391,7 +397,7 @@ export const createProgressModal = (text: string): ModalComponent => {
 			[Attr.noClick]: '',
 			[Attr.destroy]: '',
 		},
-		App.root
+		getComponentTargetContainer()
 	);
 
 	modal.innerHTML = html`

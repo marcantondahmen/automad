@@ -43,6 +43,7 @@ import {
 	createSelect,
 	CSS,
 	FieldTag,
+	getComponentTargetContainer,
 	html,
 	listen,
 	query,
@@ -479,7 +480,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			ModalComponent.TAG_NAME,
 			[],
 			{ [Attr.destroy]: '' },
-			App.root,
+			getComponentTargetContainer(),
 			html`
 				<div class="${CSS.modalDialog}">
 					<div class="${CSS.modalHeader}">

@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, listen, query } from '@/core';
+import {
+	App,
+	Attr,
+	create,
+	CSS,
+	getComponentTargetContainer,
+	html,
+	listen,
+	query,
+} from '@/core';
 import { KeyValueMap, SystemUpdateResponse } from '@/types';
 import { ModalComponent } from '@/components/Modal/Modal';
 import { FormComponent } from './Form';
@@ -235,7 +244,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 				'am-modal',
 				[],
 				{ [Attr.noEsc]: '', [Attr.noClick]: '', [Attr.destroy]: '' },
-				App.root
+				getComponentTargetContainer()
 			) as ModalComponent;
 
 			this.progressModal.innerHTML = html`
