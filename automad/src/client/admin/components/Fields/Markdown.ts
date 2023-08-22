@@ -180,17 +180,17 @@ class MarkdownComponent extends BaseFieldComponent {
 		this.setAttribute('name', name);
 		this.value = value as string;
 
-		const imageBindingName = `image_${id}`;
 		const linkBindingName = `link_${id}`;
 
 		const imageSelection = createCustomButton(
 			'image',
 			App.text('insertImage'),
 			() => {
-				createImagePickerModal(
-					imageBindingName,
-					App.text('insertImage')
-				);
+				createImagePickerModal((value) => {
+					if (value) {
+						this.editor.insertText(`\r\n![](${value})`);
+					}
+				}, App.text('insertImage'));
 			}
 		);
 
@@ -233,14 +233,6 @@ class MarkdownComponent extends BaseFieldComponent {
 				},
 			},
 			plugins: [[codeSyntaxHighlight, { highlighter: Prism }]],
-		});
-
-		new Binding(imageBindingName, {
-			onChange: (value) => {
-				if (value) {
-					this.editor.insertText(`\r\n![](${value})`);
-				}
-			},
 		});
 
 		new Binding(linkBindingName, {

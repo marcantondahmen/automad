@@ -40,6 +40,7 @@ import {
 	createImagePickerModal,
 	CSS,
 	FieldTag,
+	fire,
 	html,
 	listen,
 	resolveFileUrl,
@@ -77,11 +78,11 @@ class ImageSelectComponent extends BaseFieldComponent {
 		this.createPreview(preview, input, id);
 		const button = this.createModalButton(combo);
 
-		const inputBindingName = `input_${id}`;
-		new Binding(inputBindingName, { input });
-
 		const createModal = (): void => {
-			createImagePickerModal(inputBindingName, this._data.label);
+			createImagePickerModal((value) => {
+				input.value = value;
+				fire('change', input);
+			}, this._data.label);
 		};
 
 		listen(button, 'click', createModal.bind(this));

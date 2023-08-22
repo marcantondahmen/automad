@@ -193,17 +193,21 @@ export const createFieldSections = (
 /**
  * Create an image picker modal.
  *
- * @param bindingName
+ * @param onSelect
  * @param label
  */
 export const createImagePickerModal = (
-	bindingName: string,
+	onSelect: (value: string) => void,
 	label: string
 ): void => {
-	const modal = create('am-modal', [], { [Attr.destroy]: '' }, App.root);
+	const modal = create(
+		ModalComponent.TAG_NAME,
+		[],
+		{ [Attr.destroy]: '' },
+		App.root
+	);
 
-	const binding = Bindings.get(bindingName);
-	const pickerBindingName = `picker_${bindingName}`;
+	const pickerBindingName = uniqueId();
 	const idUrl = uniqueId();
 	const idWidth = uniqueId();
 	const idHeight = uniqueId();
@@ -221,7 +225,7 @@ export const createImagePickerModal = (
 					? `?${width}x${height}`
 					: '';
 
-			binding.value = `${value}${querystring}`;
+			onSelect(`${value}${querystring}`);
 
 			Bindings.delete(pickerBindingName);
 			modal.close();
@@ -295,7 +299,8 @@ export const createImagePickerModal = (
 
 	listen(query('button', modal), 'click', () => {
 		const inputUrl = query<HTMLInputElement>(`#${idUrl}`, modal);
-		binding.value = inputUrl.value;
+
+		onSelect(inputUrl.value);
 
 		Bindings.delete(pickerBindingName);
 		modal.close();
