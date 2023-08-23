@@ -320,7 +320,7 @@ export const createImagePickerModal = (
  */
 export const createLinkModal = (bindingName: string, label: string): void => {
 	const modal = create(
-		'am-modal',
+		ModalComponent.TAG_NAME,
 		[],
 		{ [Attr.destroy]: '' },
 		getComponentTargetContainer()
@@ -390,7 +390,7 @@ export const createLinkModal = (bindingName: string, label: string): void => {
  */
 export const createProgressModal = (text: string): ModalComponent => {
 	const modal = create(
-		'am-modal',
+		ModalComponent.TAG_NAME,
 		[],
 		{
 			[Attr.noEsc]: '',
