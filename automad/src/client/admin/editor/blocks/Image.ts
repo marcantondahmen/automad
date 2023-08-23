@@ -135,11 +135,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	render(): HTMLElement {
 		this.img = create('img', [], {}, this.wrapper);
 
-		if (!this.data.url) {
-			this.pickImage();
-		} else {
-			this.setImage(this.data.url);
-		}
+		this.setImage(this.data.url);
 
 		const select = create(
 			'button',
@@ -169,6 +165,13 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 		listen(settings, 'click', this.createLinkModal.bind(this));
 
 		return this.wrapper;
+	}
+
+	/**
+	 * Called when block is added.
+	 */
+	appendCallback(): void {
+		this.pickImage();
 	}
 
 	/**
