@@ -175,6 +175,15 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	}
 
 	/**
+	 * Add image when pasting a valid image url.
+	 */
+	onPaste(event: CustomEvent) {
+		if (event.type == 'pattern') {
+			this.setImage(event.detail.data);
+		}
+	}
+
+	/**
 	 * Pick an image.
 	 */
 	private pickImage(): void {

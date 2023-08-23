@@ -257,7 +257,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		);
 
 		listen(this.holder, 'paste', (event: Event) => {
-			event.stopImmediatePropagation();
+			event.stopPropagation();
 		});
 
 		this.renderToolbar();
