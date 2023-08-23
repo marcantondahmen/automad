@@ -56,6 +56,7 @@ import { ClassTune } from '@/editor/tunes/Class';
 import { IdTune } from '@/editor/tunes/Id';
 import { SpacingTune } from '@/editor/tunes/Spacing';
 import { LargeTune } from '@/editor/tunes/Large';
+import { ImageBlock } from '@/editor/blocks/Image';
 import {
 	TextAlignCenterInline,
 	TextAlignLeftInline,
@@ -155,6 +156,10 @@ export class EditorJSComponent extends BaseComponent {
 				inlineToolbar: true,
 			},
 			section: { class: SectionBlock },
+			image: {
+				class: ImageBlock,
+				inlineToolbar: true,
+			},
 		};
 	}
 

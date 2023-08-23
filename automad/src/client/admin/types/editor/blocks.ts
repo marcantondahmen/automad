@@ -48,6 +48,13 @@ export interface BlockTuneConstructorOptions {
 	data: any;
 }
 
+export interface ImageBlockData {
+	url: string;
+	caption: string;
+	link: string;
+	openInNewTab: boolean;
+}
+
 export type SectionJustifyContentOption =
 	keyof typeof SectionJustifyContentOptions;
 

@@ -81,4 +81,9 @@
 	.am-ui &--drop-target > &__content {
 		outline-color: var(--am-clr-accent-background);
 	}
+
+	& [placeholder]:empty:before {
+		content: attr(placeholder);
+		color: var(--am-clr-text-muted) !important;
+	}
 }
