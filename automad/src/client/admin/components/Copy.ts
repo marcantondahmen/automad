@@ -57,12 +57,9 @@ class CopyComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(this, 'click', () => {
-			navigator.clipboard
-				.writeText(this.elementAttributes.value)
-				.then(() => {
-					notifySuccess(this.elementAttributes.value);
-				});
+		listen(this, 'click', async () => {
+			await navigator.clipboard.writeText(this.elementAttributes.value);
+			notifySuccess(this.elementAttributes.value);
 		});
 	}
 }
