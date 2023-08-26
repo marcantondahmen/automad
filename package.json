@@ -19,7 +19,7 @@
     "test": "npm run phpunit && npm run psalm && jest"
   },
   "devDependencies": {
-    "@editorjs/editorjs": "^2.27.2",
+    "@editorjs/editorjs": "^2.28.0",
     "@editorjs/header": "^2.7.0",
     "@editorjs/paragraph": "^2.9.0",
     "@toast-ui/editor": "^3.2.1",
