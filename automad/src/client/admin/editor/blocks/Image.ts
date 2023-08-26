@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { ImgComponent } from '@/components/Img';
 import { ModalComponent } from '@/components/Modal/Modal';
 import {
 	App,
@@ -91,7 +92,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	/**
 	 * The image element.
 	 */
-	private img: HTMLImageElement;
+	private img: ImgComponent;
 
 	/**
 	 * The caption element.
@@ -133,7 +134,12 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 * @return the rendered block
 	 */
 	render(): HTMLElement {
-		this.img = create('img', [], {}, this.wrapper);
+		this.img = create(
+			ImgComponent.TAG_NAME,
+			[],
+			{},
+			this.wrapper
+		) as ImgComponent;
 
 		this.setImage(this.data.url);
 
@@ -189,7 +195,8 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	private pickImage(): void {
 		createImagePickerModal(
 			this.setImage.bind(this),
-			App.text('selectImage')
+			App.text('selectImage'),
+			this.data.url
 		);
 	}
 
