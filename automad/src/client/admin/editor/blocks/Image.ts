@@ -134,6 +134,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 * @return the rendered block
 	 */
 	render(): HTMLElement {
+		this.wrapper.classList.add(CSS.editorBlockImage);
 		this.img = create(
 			ImgComponent.TAG_NAME,
 			[],
@@ -143,19 +144,26 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 		this.setImage(this.data.url);
 
+		const buttons = create(
+			'div',
+			[CSS.editorBlockImageButtons, CSS.formGroup],
+			{},
+			this.wrapper
+		);
+
 		const select = create(
 			'button',
-			[CSS.button, CSS.buttonIcon],
-			{},
-			this.wrapper,
+			[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+			{ [Attr.tooltip]: App.text('selectImage') },
+			buttons,
 			'<i class="bi bi-images"></i>'
 		);
 
-		const settings = create(
+		const link = create(
 			'button',
-			[CSS.button, CSS.buttonIcon],
-			{},
-			this.wrapper,
+			[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+			{ [Attr.tooltip]: App.text('link') },
+			buttons,
 			'<i class="bi bi-link-45deg"></i>'
 		);
 
@@ -168,7 +176,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 		);
 
 		listen(select, 'click', this.pickImage.bind(this));
-		listen(settings, 'click', this.createLinkModal.bind(this));
+		listen(link, 'click', this.createLinkModal.bind(this));
 
 		return this.wrapper;
 	}
