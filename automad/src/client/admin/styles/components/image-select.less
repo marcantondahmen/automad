@@ -44,26 +44,12 @@
 		justify-content: center;
 		align-items: center;
 		aspect-ratio: 1;
-		font-size: 2rem;
-		color: var(--am-clr-text-muted);
-		background-color: var(--am-clr-background-faded);
 		cursor: pointer;
 
 		& > img {
 			object-fit: cover;
 			min-width: 100%;
 			min-height: 100%;
-		}
-
-		&--error {
-			& img {
-				display: none;
-			}
-
-			&:after {
-				content: '';
-				font-weight: 300;
-			}
 		}
 	}
 

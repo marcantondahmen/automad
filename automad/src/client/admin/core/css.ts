@@ -144,7 +144,6 @@ export const enum CSS {
 
 	imageSelect = 'am-c-image-select',
 	imageSelectPreview = 'am-c-image-select__preview',
-	imageSelectPreviewError = 'am-c-image-select__preview--error',
 	imageSelectCombo = 'am-c-image-select__combo',
 	imageSelectMove = 'am-c-image-select__move',
 

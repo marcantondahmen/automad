@@ -45,6 +45,7 @@ import {
 	listen,
 	resolveFileUrl,
 } from '@/core';
+import { ImgComponent } from '../Img';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -59,30 +60,31 @@ class ImageSelectComponent extends BaseFieldComponent {
 	protected createInput(): void {
 		const { name, id, value, placeholder } = this._data;
 		const wrapper = create('span', [CSS.imageSelect], {}, this);
-		const preview = create('span', [CSS.imageSelectPreview], {}, wrapper);
+
+		const input = create('input', [CSS.input], {
+			id,
+			name,
+			type: 'text',
+			placeholder,
+			value,
+		});
+
+		const preview = this.createPreview(wrapper, input, id);
 		const combo = create('div', [CSS.imageSelectCombo], {}, wrapper);
 
-		const input = create(
-			'input',
-			[CSS.input],
-			{
-				id,
-				name,
-				type: 'text',
-				placeholder,
-				value,
-			},
-			combo
-		);
+		combo.appendChild(input);
 
-		this.createPreview(preview, input, id);
 		const button = this.createModalButton(combo);
 
 		const createModal = (): void => {
-			createImagePickerModal((value) => {
-				input.value = value;
-				fire('change', input);
-			}, this._data.label);
+			createImagePickerModal(
+				(value) => {
+					input.value = value;
+					fire('change', input);
+				},
+				this._data.label,
+				input.value
+			);
 		};
 
 		listen(button, 'click', createModal.bind(this));
@@ -106,23 +108,19 @@ class ImageSelectComponent extends BaseFieldComponent {
 		new Binding(previewBindingName, {
 			input,
 			modifier: (value: string): string => {
-				container.classList.remove(CSS.imageSelectPreviewError);
-
 				return resolveFileUrl(value).split('?')[0];
 			},
 		});
 
-		const img = create(
-			'img',
-			[],
-			{ [Attr.bind]: previewBindingName, [Attr.bindTo]: 'src' },
+		return create(
+			ImgComponent.TAG_NAME,
+			[CSS.imageSelectPreview],
+			{
+				[Attr.bind]: previewBindingName,
+				[Attr.bindTo]: 'src',
+			},
 			container
 		);
-
-		listen(img, 'error', () => {
-			img.removeAttribute('src');
-			container.classList.add(CSS.imageSelectPreviewError);
-		});
 	}
 
 	/**
