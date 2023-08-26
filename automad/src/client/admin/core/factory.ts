@@ -196,10 +196,12 @@ export const createFieldSections = (
  *
  * @param onSelect
  * @param label
+ * @param [url]
  */
 export const createImagePickerModal = (
 	onSelect: (value: string) => void,
-	label: string
+	label: string,
+	url: string = ''
 ): void => {
 	const modal = create(
 		ModalComponent.TAG_NAME,
@@ -249,6 +251,7 @@ export const createImagePickerModal = (
 						id="${idUrl}"
 						type="text"
 						class="${CSS.input} ${CSS.formGroupItem}"
+						value="${url}"
 						placeholder="${App.text('url')}"
 					/>
 					<button class="${CSS.button} ${CSS.formGroupItem}">
