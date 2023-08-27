@@ -45,9 +45,6 @@
 		height: @am-bl-editor-inline-toolbar-height;
 		margin-bottom: -1px;
 		padding: 0 @am-bl-editor-space;
-		border-bottom: @am-border;
-		border-radius: @am-bl-editor-toolbar-radius;
-		overflow: hidden !important;
 	}
 
 	&__dropdown {
@@ -85,19 +82,18 @@
 	&__actions {
 		display: flex;
 		flex-direction: column;
-		gap: 0.65rem;
-		padding: 0 @am-bl-editor-space;
+
+		& .am-l-grid {
+			margin: 0;
+		}
 
 		& * + .am-c-field {
 			margin-top: 0.5rem !important;
 		}
 
 		& > * {
-			margin-top: @am-bl-editor-space;
-		}
-
-		& > :last-child {
-			margin-bottom: @am-bl-editor-space;
+			padding: @am-card-padding;
+			border-top: @am-border;
 		}
 	}
 }

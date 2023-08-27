@@ -38,6 +38,7 @@ import {
 	convertRgbToHex,
 	create,
 	createField,
+	CSS,
 	FieldTag,
 	fire,
 	listen,
@@ -107,7 +108,7 @@ export class ColorInline extends BaseInline {
 	 * @return the rendered fields
 	 */
 	renderActions(): HTMLElement {
-		this.wrapper = create('div', [], {});
+		this.wrapper = create('div', [CSS.grid, CSS.gridAuto], {});
 
 		this.textColorPicker = createField(FieldTag.color, this.wrapper, {
 			key: uniqueId(),

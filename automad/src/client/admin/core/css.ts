@@ -137,11 +137,13 @@ export const enum CSS {
 	formGroupIcon = 'am-f-group__icon',
 
 	grid = 'am-l-grid',
+	gridAuto = 'am-l-grid--auto',
 
 	iconText = 'am-c-icon-text',
 
 	img = 'am-e-img',
 	imgError = 'am-e-img__error',
+
 	imagePicker = 'am-c-image-picker',
 	imagePickerImage = 'am-c-image-picker__image',
 
