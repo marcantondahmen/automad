@@ -151,12 +151,26 @@ export class EditorJSComponent extends BaseComponent {
 	private getBlockTools(): KeyValueMap {
 		return {
 			paragraph: {
-				class: Paragraph,
+				class: class extends Paragraph {
+					static get toolbox() {
+						return {
+							title: App.text('textTool'),
+							icon: '<i class="bi bi-text-paragraph"></i>',
+						};
+					}
+				},
 				inlineToolbar: true,
 				tunes: ['large', ...this.baseTunes],
 			},
 			header: {
-				class: Header,
+				class: class extends Header {
+					static get toolbox() {
+						return {
+							title: App.text('heading'),
+							icon: '<i class="bi bi-type-h1"></i>',
+						};
+					}
+				},
 				inlineToolbar: true,
 			},
 			section: { class: SectionBlock },
