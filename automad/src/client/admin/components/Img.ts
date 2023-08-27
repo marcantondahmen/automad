@@ -98,17 +98,33 @@ export class ImgComponent extends BaseComponent {
 		this.innerHTML = '';
 		this.listener?.remove();
 
+		if (value.length == 0) {
+			this.innerHTML = this.placeholder('slash-circle');
+
+			return;
+		}
+
 		const img = create('img', [], {}, this);
 
 		this.listener = listen(img, 'error', () => {
-			this.innerHTML = html`
-				<span class="${CSS.imgError}">
-					<i class="bi bi-slash-circle"></i>
-				</span>
-			`;
+			this.innerHTML = this.placeholder('exclamation-triangle');
 		});
 
 		img.src = value;
+	}
+
+	/**
+	 * Render a placeholder.
+	 *
+	 * @param icon
+	 * @return the rendered HTML
+	 */
+	private placeholder(icon: string): string {
+		return html`
+			<span class="${CSS.imgError}">
+				<i class="bi bi-${icon}"></i>
+			</span>
+		`;
 	}
 }
 
