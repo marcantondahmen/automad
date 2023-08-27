@@ -227,7 +227,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 					</div>
 					<div class="${CSS.modalBody}"></div>
 					<div class="${CSS.modalFooter}">
-						<button class="${CSS.button}">
+						<button class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('save')}
 						</button>
 					</div>
