@@ -33,24 +33,42 @@
  */
 
 .ce-toolbar {
-	z-index: 1200;
+	z-index: 5;
 	top: 0.5rem !important;
 	left: -@am-bl-editor-toolbar-icons-width;
 	transform: translate(var(--x), var(--y));
+	height: 0;
+	overflow: hidden;
 	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.2s 0.2s;
+	transition: opacity 0.2s 0.3s, height 0s 0.5s;
+
+	.am-c-ed-bl-section__editor & {
+		top: 0 !important;
+	}
+
+	// Invisible element for catching hover in order to display toolbar.
+	&:before {
+		content: '';
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		width: @am-bl-editor-toolbar-icons-width;
+		height: 40px;
+	}
 
 	.codex-editor--toolbox-opened > &,
 	.codex-editor:hover > & {
 		opacity: 1;
-		pointer-events: all;
+		height: auto;
+		overflow: visible;
 	}
 
 	@supports selector(:has(*)) {
 		.codex-editor > &:not(:has(.ce-settings:empty)) {
 			opacity: 1;
-			pointer-events: all;
+			height: auto;
+			overflow: visible;
 		}
 	}
 
