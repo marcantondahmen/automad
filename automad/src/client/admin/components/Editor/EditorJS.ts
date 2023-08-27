@@ -244,6 +244,7 @@ export class EditorJSComponent extends BaseComponent {
 			blockTunes: {
 				delete: {
 					Delete: App.text('delete'),
+					'Click to delete': App.text('clickToDelete'),
 				},
 				moveUp: {
 					'Move up': App.text('moveUp'),
