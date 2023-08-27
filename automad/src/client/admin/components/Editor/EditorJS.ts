@@ -47,7 +47,6 @@ import { ColorInline } from '@/editor/inline/Color';
 import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
 import { FontSizeInline } from '@/editor/inline/FontSize';
 import { LineHeightInline } from '@/editor/inline/LineHeight';
-
 // @ts-ignore
 import Header from '@editorjs/header';
 // @ts-ignore
@@ -63,6 +62,7 @@ import {
 	TextAlignRightInline,
 } from '@/editor/inline/TextAlign';
 import { App } from '@/core';
+import { TableBlock } from '@/editor/blocks/Table';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -164,6 +164,10 @@ export class EditorJSComponent extends BaseComponent {
 				class: ImageBlock,
 				inlineToolbar: true,
 			},
+			table: {
+				class: TableBlock,
+				inlineToolbar: true,
+			},
 		};
 	}
 
@@ -236,11 +240,17 @@ export class EditorJSComponent extends BaseComponent {
 					},
 				},
 			},
-			toolNames: {
-				Text: App.text('textTool'),
-				Heading: App.text('heading'),
+			toolNames: {},
+			tools: {
+				table: {
+					'Add column to left': App.text('tableAddColumnLeft'),
+					'Add column to right': App.text('tableAddColumnRight'),
+					'Delete column': App.text('tableDeleteColumn'),
+					'Add row above': App.text('tableAddRowAbove'),
+					'Add row below': App.text('tableAddRowBelow'),
+					'Delete row': App.text('tableDeleteRow'),
+				},
 			},
-			tools: {},
 			blockTunes: {
 				delete: {
 					Delete: App.text('delete'),

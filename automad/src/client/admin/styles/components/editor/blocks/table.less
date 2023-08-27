@@ -1,0 +1,118 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-ui {
+	.tc-wrap {
+		--color-background: var(--am-clr-editor-highlight-background);
+		--color-text-secondary: var(--am-clr-text-muted);
+		--color-border: var(--am-clr-border);
+		--cell-size: 34px;
+		--toolbox-icon-size: 18px;
+		--toolbox-padding: 6px;
+		--toolbox-aiming-field-size: calc(
+			var(--toolbox-icon-size) + 2 * var(--toolbox-padding)
+		);
+	}
+
+	.tc-toolbox {
+		--toolbox-padding: 0;
+		--toggler-dots-color: var(--am-clr-text-paragraph);
+		--toggler-dots-color-hovered: var(--am-clr-text);
+	}
+
+	.tc-popover {
+		--color-border: var(--am-clr-border);
+		--color-background: var(--am-clr-background);
+	}
+}
+
+.tc-toolbox {
+	&__toggler {
+		& rect {
+			display: none;
+		}
+	}
+
+	.tc-popover {
+		flex-direction: column;
+		left: 0 !important;
+		right: auto !important;
+		padding: @am-bl-editor-space 0 !important;
+		overflow: hidden;
+		color: var(--am-clr-text);
+		background-color: var(--am-clr-background);
+		border: @am-border;
+		border-radius: @am-bl-editor-toolbar-radius;
+		box-shadow: @am-shadow;
+
+		&__item {
+			display: flex;
+			gap: 0.3rem;
+			align-items: center;
+			padding-right: 0.8rem;
+			border-radius: 0 !important;
+			color: inherit !important;
+			background-color: inherit;
+			transition: color 0.2s, background-color 0.2s;
+
+			&:hover {
+				color: var(--am-clr-selected-text) !important;
+				background-color: var(--am-clr-selected-background) !important;
+			}
+
+			&-icon {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 1.75rem;
+				min-width: 1.75rem;
+				height: 100%;
+				margin: 0;
+				color: inherit !important;
+				background-color: transparent !important;
+				box-shadow: none;
+				border: none;
+
+				& svg {
+					width: 1.75rem;
+					height: 1.75rem;
+				}
+			}
+
+			&-label {
+				color: inherit;
+			}
+		}
+	}
+}
