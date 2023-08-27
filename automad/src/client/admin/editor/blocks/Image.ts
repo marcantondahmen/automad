@@ -156,7 +156,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
 			{ [Attr.tooltip]: App.text('selectImage') },
 			buttons,
-			'<i class="bi bi-images"></i>'
+			'<i class="bi bi-folder2"></i>'
 		);
 
 		const link = create(
