@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import EditorJS, { EditorConfig } from '@editorjs/editorjs';
+import EditorJS, { EditorConfig, I18nDictionary } from '@editorjs/editorjs';
 import { EditorOutputData, KeyValueMap } from '@/types';
 import { BaseComponent } from '@/components/Base';
 import { LayoutTune } from '@/editor/tunes/Layout';
@@ -62,6 +62,7 @@ import {
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/editor/inline/TextAlign';
+import { App } from '@/core';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -130,6 +131,9 @@ export class EditorJSComponent extends BaseComponent {
 						'strikeThrough',
 						'color',
 					],
+					i18n: {
+						messages: this.getI18nDictionary(),
+					},
 					onReady: (): void => {
 						this.onRender();
 					},
@@ -204,6 +208,49 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			large: {
 				class: LargeTune,
+			},
+		};
+	}
+
+	/**
+	 * The i18n dictionary.
+	 *
+	 * @return the translations object
+	 */
+	private getI18nDictionary(): I18nDictionary {
+		return {
+			ui: {
+				blockTunes: {
+					toggler: {
+						'Click to tune': App.text('tuneOrMove'),
+					},
+				},
+				inlineToolbar: {
+					converter: {
+						'Convert to': App.text('convertTo'),
+					},
+				},
+				toolbar: {
+					toolbox: {
+						Add: App.text('add'),
+					},
+				},
+			},
+			toolNames: {
+				Text: App.text('textTool'),
+				Heading: App.text('heading'),
+			},
+			tools: {},
+			blockTunes: {
+				delete: {
+					Delete: App.text('delete'),
+				},
+				moveUp: {
+					'Move up': App.text('moveUp'),
+				},
+				moveDown: {
+					'Move down': App.text('moveDown'),
+				},
 			},
 		};
 	}
