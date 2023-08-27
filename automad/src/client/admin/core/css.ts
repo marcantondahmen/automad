@@ -105,6 +105,8 @@ export const enum CSS {
 	editorBlockImage = 'am-c-ed-bl-image',
 	editorBlockImageButtons = 'am-c-ed-bl-image__buttons',
 
+	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
+
 	editorPopoverForm = 'am-c-ed-popover__form',
 
 	editorStyleBase = 'am-style',

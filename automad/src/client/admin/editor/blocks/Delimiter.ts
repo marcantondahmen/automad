@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -32,8 +32,35 @@
  * Licensed under the MIT license.
  */
 
-@import 'delimiter.less';
-@import 'header.less';
-@import 'image.less';
-@import 'section.less';
-@import 'table.less';
+import { App, create, CSS } from '@/core';
+import { BaseBlock } from './BaseBlock';
+
+export class Delimiter extends BaseBlock<object> {
+	/**
+	 * Toolbox settings.
+	 */
+	static get toolbox() {
+		return {
+			title: App.text('delimiter'),
+			icon: '<i class="bi bi-hr"></i>',
+		};
+	}
+
+	/**
+	 * Render the block.
+	 *
+	 * @return the rendered element
+	 */
+	render(): HTMLElement {
+		return create('div', [CSS.editorBlockDelimiter], {}, null, '<hr>');
+	}
+
+	/**
+	 * Save the block data.
+	 *
+	 * @return the saved data
+	 */
+	save(): object {
+		return {};
+	}
+}

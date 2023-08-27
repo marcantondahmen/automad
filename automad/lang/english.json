@@ -89,6 +89,7 @@
 	"emailResetPasswordTextTop": "the requested authentication token for your account on {} can be found below. You can use that token in order to create a new password for you now.",
 	"enable": "Enable",
 	"extension": "Extension",
+	"delimiter": "Delimiter",
 	"feedDisabled": "The RSS feed is disabled",
 	"feedEnabled": "The RSS feed is enabled",
 	"fetchingDataError": "Error fetching data from API!",

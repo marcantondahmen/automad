@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -32,8 +32,12 @@
  * Licensed under the MIT license.
  */
 
-@import 'delimiter.less';
-@import 'header.less';
-@import 'image.less';
-@import 'section.less';
-@import 'table.less';
+.am-c-ed-bl-delimiter {
+	padding: 7px 0;
+	margin: 1rem 0;
+
+	& > hr {
+		margin: 0 !important;
+		border-top: 2px solid var(--am-clr-border) !important;
+	}
+}

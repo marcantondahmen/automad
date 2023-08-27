@@ -63,6 +63,7 @@ import {
 } from '@/editor/inline/TextAlign';
 import { App } from '@/core';
 import { TableBlock } from '@/editor/blocks/Table';
+import { Delimiter } from '@/editor/blocks/Delimiter';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -182,6 +183,7 @@ export class EditorJSComponent extends BaseComponent {
 				class: TableBlock,
 				inlineToolbar: true,
 			},
+			delimiter: Delimiter,
 		};
 	}
 
