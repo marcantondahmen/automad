@@ -52,17 +52,17 @@
 		justify-content: space-between;
 		width: 47px;
 		font-size: 16px;
-		transition: color 0.2s, background-color 0.2s;
+		transition: background-color 0.2s;
 		margin: 0;
-		padding: 0 3px;
+		padding: 0 7px;
 		border: none;
 
 		&:hover {
-			color: var(--am-clr-accent-text);
-			background-color: var(--am-clr-accent-background);
+			background-color: var(--am-clr-background-faded);
 		}
 
 		&-arrow {
+			margin-left: 5px;
 			opacity: 0.4;
 		}
 	}
@@ -103,8 +103,12 @@
 	transition: color 0.2s, background-color 0.2s;
 	font-size: 16px;
 
-	&:hover {
-		background-color: var(--am-clr-background-faded);
+	&:hover,
+	&--focused {
+		background-color: var(--am-clr-background-faded) !important;
+		border: none !important;
+		outline: none !important;
+		box-shadow: none !important;
 	}
 
 	&[data-tool='alignRight'] {
