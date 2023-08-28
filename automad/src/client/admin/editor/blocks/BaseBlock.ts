@@ -47,6 +47,16 @@ import { KeyValueMap } from '@/types';
  */
 export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	/**
+	 * Allow to press Enter inside the Quote
+	 *
+	 * @returns boolean
+	 * @static
+	 */
+	static get enableLineBreaks() {
+		return false;
+	}
+
+	/**
 	 * The editor API.
 	 */
 	protected api: API;

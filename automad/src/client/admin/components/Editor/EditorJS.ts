@@ -65,6 +65,7 @@ import { App } from '@/core';
 import { TableBlock } from '@/editor/blocks/Table';
 import { Delimiter } from '@/editor/blocks/Delimiter';
 import { ListBlock } from '@/editor/blocks/List';
+import { QuoteBlock } from '@/editor/blocks/Quote';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -186,6 +187,10 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			table: {
 				class: TableBlock,
+				inlineToolbar: true,
+			},
+			quote: {
+				class: QuoteBlock,
 				inlineToolbar: true,
 			},
 			delimiter: Delimiter,

@@ -107,6 +107,10 @@ export const enum CSS {
 
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
 
+	editorBlockQuote = 'am-c-ed-bl-quote',
+	editorBlockQuoteText = 'am-c-ed-bl-quote__text',
+	editorBlockQuoteCaption = 'am-c-ed-bl-quote__caption',
+
 	editorPopoverForm = 'am-c-ed-popover__form',
 
 	editorStyleBase = 'am-style',

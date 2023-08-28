@@ -131,7 +131,7 @@ export class FileInfoComponent extends BaseComponent {
 							key: 'caption',
 							value: file.caption,
 							name: 'caption',
-							label: App.text('fileCaption'),
+							label: App.text('caption'),
 						},
 						[]
 					).outerHTML}

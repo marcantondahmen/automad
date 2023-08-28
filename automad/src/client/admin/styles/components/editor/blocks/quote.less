@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -32,9 +32,11 @@
  * Licensed under the MIT license.
  */
 
-@import 'delimiter.less';
-@import 'header.less';
-@import 'image.less';
-@import 'quote.less';
-@import 'section.less';
-@import 'table.less';
+.am-c-ed-bl-quote {
+	padding-left: 1rem;
+	border-left: 3px solid var(--am-clr-border);
+
+	&__caption:before {
+		content: '— ';
+	}
+}

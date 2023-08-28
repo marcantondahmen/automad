@@ -170,9 +170,9 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 		this.caption = create(
 			'div',
 			['cdx-block', 'ce-paragraph'],
-			{ contenteditable: 'true', placeholder: App.text('fileCaption') },
+			{ contenteditable: 'true', placeholder: App.text('caption') },
 			this.wrapper,
-			this.data.caption
+			html`$${this.data.caption}`
 		);
 
 		listen(select, 'click', this.pickImage.bind(this));
