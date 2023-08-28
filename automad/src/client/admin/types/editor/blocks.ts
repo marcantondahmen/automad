@@ -55,6 +55,16 @@ export interface ImageBlockData {
 	openInNewTab: boolean;
 }
 
+export interface QuoteBlockData {
+	text: string;
+	caption: string;
+}
+
+export interface QuoteBlockInputs {
+	text: HTMLDivElement;
+	caption: HTMLDivElement;
+}
+
 export type SectionJustifyContentOption =
 	keyof typeof SectionJustifyContentOptions;
 

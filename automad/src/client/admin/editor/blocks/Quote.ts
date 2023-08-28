@@ -122,7 +122,7 @@ export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 					placeholder: App.text('blockquote'),
 				},
 				this.wrapper,
-				html`$${this.data.text}`
+				html`${this.data.text}`
 			),
 			caption: create(
 				'div',
@@ -132,7 +132,7 @@ export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 					placeholder: `— ${App.text('caption')}`,
 				},
 				this.wrapper,
-				html`$${this.data.caption}`
+				html`${this.data.caption}`
 			),
 		};
 
