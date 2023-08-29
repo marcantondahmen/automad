@@ -153,7 +153,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 		const select = create(
 			'button',
-			[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+			[CSS.button, CSS.buttonPrimary, CSS.buttonIcon, CSS.formGroupItem],
 			{ [Attr.tooltip]: App.text('selectImage') },
 			buttons,
 			'<i class="bi bi-folder2"></i>'
@@ -161,7 +161,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 		const link = create(
 			'button',
-			[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+			[CSS.button, CSS.buttonPrimary, CSS.buttonIcon, CSS.formGroupItem],
 			{ [Attr.tooltip]: App.text('link') },
 			buttons,
 			'<i class="bi bi-link-45deg"></i>'

@@ -34,7 +34,7 @@
 
 .ce-toolbar {
 	z-index: 110;
-	top: 0.6rem !important;
+	top: 1.1rem !important;
 	left: -@am-bl-editor-toolbar-icons-width;
 	transform: translate(var(--x), var(--y));
 	height: 0;
@@ -43,7 +43,7 @@
 	transition: opacity 0.2s 0.3s, height 0s 0.5s;
 
 	.am-c-ed-bl-section__editor & {
-		top: -0.267rem !important;
+		top: 0 !important;
 	}
 
 	// Invisible element for catching hover in order to display toolbar.
@@ -84,18 +84,32 @@
 	&__settings-btn {
 		width: 1.5rem;
 		height: 1.5rem;
+		margin: 0;
 		color: var(--am-clr-text-paragraph);
-		background-color: var(--am-clr-background) !important;
-		border-radius: 0.267rem;
-		transition: color 0.2s;
+		background-color: var(--am-clr-background-faded) !important;
+		border-radius: 0;
 
 		& svg {
 			width: 1.75rem;
 			height: 1.75rem;
+			opacity: 1;
+			transition: opacity 0.2s;
 		}
 
 		&:hover {
-			color: var(--am-clr-text);
+			& svg {
+				opacity: 0.5;
+			}
 		}
+	}
+
+	&__plus {
+		border-top-left-radius: 0.25rem;
+		border-bottom-left-radius: 0.25rem;
+	}
+
+	&__settings-btn {
+		border-top-right-radius: 0.25rem;
+		border-bottom-right-radius: 0.25rem;
 	}
 }

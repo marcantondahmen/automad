@@ -48,7 +48,7 @@
 	.tc-toolbox {
 		--toolbox-padding: 0;
 		--toggler-dots-color: var(--am-clr-text-paragraph);
-		--toggler-dots-color-hovered: var(--am-clr-text);
+		--toggler-dots-color-hovered: var(--am-clr-text-paragraph);
 	}
 
 	.tc-popover {
@@ -59,6 +59,17 @@
 
 .tc-toolbox {
 	&__toggler {
+		& svg {
+			background-color: var(--am-clr-background-faded);
+			border-radius: 0.2rem;
+			opacity: 1;
+			transition: opacity 0.2s;
+		}
+
+		&:hover svg {
+			opacity: 0.5;
+		}
+
 		& rect {
 			display: none;
 		}

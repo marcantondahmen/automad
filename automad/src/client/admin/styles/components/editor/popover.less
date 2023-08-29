@@ -95,9 +95,11 @@
 			background-color: var(--am-clr-selected-background) !important;
 		}
 
+		&&--focused,
 		&--active {
 			color: var(--am-clr-primary-text) !important;
-			background-color: var(--am-clr-primary-background);
+			background-color: var(--am-clr-primary-background) !important;
+			box-shadow: none !important;
 		}
 
 		&__icon {
@@ -131,7 +133,6 @@
 		padding: 0 @am-bl-editor-space;
 		margin-bottom: @am-bl-editor-space !important;
 		height: auto;
-		width: 100%;
 		border: none;
 		background-color: transparent;
 
@@ -140,23 +141,23 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			left: @am-bl-editor-space;
-			width: @am-form-height * 0.9;
+			left: @am-bl-editor-space * 0.85;
+			width: @am-form-height;
 			height: 100%;
 			top: 0;
 			font-size: 1rem;
 			color: var(--am-clr-muted);
 
 			& svg {
-				height: 1.6em !important;
-				width: 1.6em !important;
+				height: 1.25em !important;
+				width: 1.25em !important;
 			}
 		}
 
 		&__input {
 			&:extend(.am-f-input);
 			font-size: 1rem;
-			padding-left: @am-form-height !important;
+			padding-left: @am-form-height * 0.85 !important;
 
 			&:focus {
 				&:extend(.am-f-input:focus);
