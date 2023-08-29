@@ -34,7 +34,7 @@
 
 .ce-toolbar {
 	z-index: 110;
-	top: 9px !important;
+	top: 0.6rem !important;
 	left: -@am-bl-editor-toolbar-icons-width;
 	transform: translate(var(--x), var(--y));
 	height: 0;
@@ -43,7 +43,7 @@
 	transition: opacity 0.2s 0.3s, height 0s 0.5s;
 
 	.am-c-ed-bl-section__editor & {
-		top: -4px !important;
+		top: -0.267rem !important;
 	}
 
 	// Invisible element for catching hover in order to display toolbar.
@@ -54,7 +54,7 @@
 		top: 0;
 		left: 0;
 		width: @am-bl-editor-toolbar-icons-width;
-		height: 40px;
+		height: 2.667rem;
 	}
 
 	.codex-editor--toolbox-opened > &,
@@ -86,8 +86,13 @@
 		height: 1.5rem;
 		color: var(--am-clr-text-paragraph);
 		background-color: var(--am-clr-background) !important;
-		border-radius: 4px;
+		border-radius: 0.267rem;
 		transition: color 0.2s;
+
+		& svg {
+			width: 1.75rem;
+			height: 1.75rem;
+		}
 
 		&:hover {
 			color: var(--am-clr-text);

@@ -50,11 +50,11 @@
 	&__dropdown {
 		display: flex;
 		justify-content: space-between;
-		width: 47px;
-		font-size: 16px;
+		width: 3.1333rem;
+		font-size: 1rem;
 		transition: background-color 0.2s;
 		margin: 0;
-		padding: 0 7px;
+		padding: 0 0.4666rem;
 		border: none;
 
 		&:hover {
@@ -62,7 +62,7 @@
 		}
 
 		&-arrow {
-			margin-left: 5px;
+			margin-left: 0.333rem;
 			opacity: 0.4;
 		}
 	}
@@ -101,7 +101,7 @@
 .ce-inline-tool {
 	width: @am-bl-editor-inline-toolbar-height * 0.78;
 	transition: color 0.2s, background-color 0.2s;
-	font-size: 16px;
+	font-size: 1rem;
 
 	&:hover,
 	&--focused {
@@ -128,6 +128,7 @@
 }
 
 .ce-conversion-toolbar {
+	width: 13.5rem;
 	padding: @am-bl-editor-space 0;
 	color: var(--am-clr-text);
 	background-color: var(--am-clr-background);
@@ -148,7 +149,8 @@
 .ce-conversion-tool {
 	display: flex;
 	gap: 0.3rem;
-	padding: 3px;
+	padding: 0.2rem;
+	font-size: 1rem;
 	border-radius: 0;
 	color: inherit;
 	background-color: inherit;
