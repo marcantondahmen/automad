@@ -4,3 +4,7 @@ root = true
 indent_style = tab
 indent_size = 4
 quote_type = single
+
+[package.json]
+indent_style = space
+indent_size = 2
