@@ -33,7 +33,7 @@
  */
 
 .am-c-dropdown {
-	@padding-y: 0.3rem;
+	@padding: 3px;
 	position: relative;
 	display: block;
 	cursor: pointer;
@@ -46,7 +46,7 @@
 		flex-direction: column;
 		min-width: 100%;
 		width: auto;
-		padding: @padding-y 0;
+		padding: @padding;
 		top: ~'calc(100% + var(--space))';
 		left: 0;
 		opacity: 0;
@@ -54,9 +54,9 @@
 		transform: translateY(-0.5rem);
 		transition: all 0.2s;
 		background-color: var(--am-clr-background);
-		border-radius: @am-form-radius;
+		border-radius: @am-card-radius;
 		box-shadow: @am-shadow;
-		border: @am-border;
+		border: @am-card-border;
 		overflow: hidden;
 
 		&:empty {
@@ -86,6 +86,7 @@
 		cursor: pointer;
 		color: var(--am-clr-text);
 		background-color: var(--am-clr-background);
+		border-radius: 0.35rem;
 		transition: background 0.2s;
 
 		& > * {
@@ -118,17 +119,21 @@
 	}
 
 	&__divider:not(:last-child) {
+		@space: 3px;
 		position: relative;
-		margin-bottom: 2 * @padding-y;
+		margin-bottom: 2 * @space + 1;
 
 		&:after {
 			content: '';
 			position: absolute;
 			display: block;
-			width: 100%;
+			width: ~'calc(100% + (2 * @{padding}))';
+			margin-left: -@padding;
+			margin-right: -@padding;
 			left: 0;
-			bottom: -@padding-y;
+			bottom: -@space - 1;
 			border-bottom: @am-border;
+			pointer-events: none;
 		}
 	}
 

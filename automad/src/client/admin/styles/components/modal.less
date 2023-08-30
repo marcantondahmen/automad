@@ -33,7 +33,7 @@
  */
 
 .am-c-modal {
-	@jumpbar-padding-y: 0.4rem;
+	@jumpbar-padding: 3px;
 	@radius-inner: ~'calc(@{am-modal-radius} - 1px)';
 	display: block;
 	position: fixed;
@@ -65,7 +65,7 @@
 		padding: 0;
 		background-color: var(--am-clr-background);
 		border-radius: @am-modal-radius;
-		border: @am-border;
+		border: @am-modal-border;
 		box-shadow: 0 0.4rem 2.1rem var(--am-shadow),
 			0 5.2rem 5rem -4.7rem var(--am-shadow);
 		transition: top 0.2s;
@@ -205,7 +205,7 @@
 		&-items {
 			display: flex;
 			flex-direction: column;
-			padding: @jumpbar-padding-y 0;
+			padding: @jumpbar-padding;
 			border-top: @am-border;
 
 			&:empty {
@@ -224,6 +224,7 @@
 			cursor: pointer;
 			color: var(--am-clr-text);
 			background-color: var(--am-clr-background);
+			border-radius: 0.35rem;
 			transition: all 0.2s;
 
 			&.am-active {
@@ -244,16 +245,19 @@
 		}
 
 		&-divider:not(:last-child) {
+			@space: 3px;
 			position: relative;
-			margin-bottom: 2 * @jumpbar-padding-y;
+			margin-bottom: 2 * @space + 1;
 
 			&:after {
 				content: '';
 				position: absolute;
 				display: block;
-				width: 100%;
+				width: ~'calc(100% + (2 * @{jumpbar-padding}))';
+				margin-left: -@jumpbar-padding;
+				margin-right: -@jumpbar-padding;
 				left: 0;
-				bottom: -@jumpbar-padding-y;
+				bottom: -@space - 1;
 				border-bottom: @am-border;
 			}
 		}

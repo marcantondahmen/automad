@@ -37,8 +37,8 @@
 	display: flex;
 	flex-direction: column;
 	border-radius: @am-card-radius;
-	border: @am-border;
-	outline: transparent solid 1px;
+	border: @am-card-border;
+	outline: @am-outline;
 	transition: border 0.2s, outline 0.2s;
 
 	&,
@@ -48,7 +48,7 @@
 
 	&--active {
 		border-color: var(--am-clr-border-active);
-		outline: var(--am-clr-border-active) solid 1px;
+		outline: @am-outline-active;
 	}
 
 	&--hover {

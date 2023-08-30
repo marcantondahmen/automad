@@ -34,7 +34,7 @@
 
 .ce-toolbar {
 	z-index: 110;
-	top: 1.1rem !important;
+	top: 1rem !important;
 	left: -@am-bl-editor-toolbar-icons-width;
 	transform: translate(var(--x), var(--y));
 	height: 0;
@@ -43,7 +43,8 @@
 	transition: opacity 0.2s 0.3s, height 0s 0.5s;
 
 	.am-c-ed-bl-section__editor & {
-		top: 0 !important;
+		top: 2px !important;
+		left: ~'calc(-1 * (@{am-bl-editor-toolbar-icons-width} + 0.6rem))' !important;
 	}
 
 	// Invisible element for catching hover in order to display toolbar.

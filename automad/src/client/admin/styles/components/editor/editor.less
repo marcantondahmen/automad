@@ -36,7 +36,7 @@
 	z-index: initial !important;
 	padding: 12px 10px;
 	border: @am-border;
-	--space-left: @am-bl-editor-toolbar-icons-width;
+	--space-left: ~'calc(0.5rem + @{am-bl-editor-toolbar-icons-width})';
 
 	am-editor-portal-destination & {
 		padding: 0;
@@ -44,8 +44,7 @@
 	}
 
 	am-editor > div > am-editor-js > & {
-		border: @am-border;
-		border-style: dashed;
+		border: @am-form-border;
 		border-radius: @am-bl-editor-radius;
 	}
 

@@ -331,7 +331,7 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 			this.input.value
 		);
 
-		this.maxItems = Math.floor((window.innerHeight - 150) / 40);
+		this.maxItems = Math.floor((window.innerHeight - 150) / 46);
 
 		super.update();
 	}

@@ -39,7 +39,7 @@
 	& > :not(:first-child) &__item {
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
-		margin-left: -1px;
+		margin-left: -@am-form-border-width;
 	}
 
 	& > &__item:not(:last-child),
@@ -55,7 +55,7 @@
 		width: @am-form-height;
 		min-width: @am-form-height;
 		font-size: 1.1em;
-		border: @am-border;
+		border: @am-form-border;
 		border-radius: @am-form-radius;
 		background-color: var(--am-clr-background-faded);
 

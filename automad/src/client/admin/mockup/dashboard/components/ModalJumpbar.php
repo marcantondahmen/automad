@@ -14,7 +14,7 @@
 							<span class="am-u-text-muted">System Settings</span>
 						</span>
 					</span>
-					<span class="am-c-modal__jumpbar-link">
+					<span class="am-c-modal__jumpbar-link am-active">
 						<span class="am-c-icon-text">
 							<i class="bi bi-bug"></i>
 							<span>Debug Mode</span>

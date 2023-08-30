@@ -48,7 +48,7 @@
 	text-decoration: none;
 	color: var(--am-clr-text);
 	background-color: var(--am-clr-background);
-	border: 1px solid var(--am-clr-border-button);
+	border: @am-button-border-width solid var(--am-clr-border-button);
 	outline: @am-outline;
 	transition: color 0.2s, background 0.2s, border-color 0.2s, outline 0.2s;
 
@@ -60,19 +60,20 @@
 	&--primary {
 		color: var(--am-clr-primary-text);
 		background-color: var(--am-clr-primary-background);
-		border: 1px solid var(--am-clr-primary-background);
+		border: @am-button-border-width solid var(--am-clr-primary-background);
 
 		&:hover,
 		&:active {
 			background-color: var(--am-clr-primary-background-hover);
-			border: 1px solid var(--am-clr-primary-background-hover);
+			border: @am-button-border-width solid
+				var(--am-clr-primary-background-hover);
 		}
 	}
 
 	&--accent {
 		color: var(--am-clr-accent-text);
 		background-color: var(--am-clr-accent-background);
-		border: 1px solid var(--am-clr-accent-background);
+		border: @am-button-border-width solid var(--am-clr-accent-background);
 
 		&:hover,
 		&:active {
@@ -90,13 +91,13 @@
 	&:focus,
 	&.am-focus {
 		outline: @am-outline-active;
-		border: 1px solid var(--am-clr-border-active);
+		border: @am-button-border-width solid var(--am-clr-border-active);
 	}
 
 	&[disabled] {
 		cursor: not-allowed;
 		color: var(--am-clr-text-muted);
-		border: 1px solid var(--am-clr-border-button);
+		border: @am-button-border-width solid var(--am-clr-border-button);
 		background-color: transparent;
 	}
 }

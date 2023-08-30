@@ -34,21 +34,22 @@
 
 .am-c-ed-popover {
 	&__form {
-		padding: 0 @am-bl-editor-space;
+		padding: 0;
 	}
 }
 
 .ce-popover {
+	@padding: 3px;
 	--width: 13.5rem;
 	display: flex;
 	flex-direction: column;
 	left: 0 !important;
 	right: auto !important;
-	padding: @am-bl-editor-space 0;
+	padding: @padding;
 	overflow: hidden;
 	color: var(--am-clr-text);
 	background-color: var(--am-clr-background);
-	border: @am-border;
+	border: @am-modal-border;
 	border-radius: @am-bl-editor-toolbar-radius;
 	box-shadow: @am-shadow;
 
@@ -76,19 +77,22 @@
 		}
 
 		& > * {
-			margin-bottom: @am-bl-editor-space;
+			margin-bottom: @padding;
 		}
+	}
+
+	&__items {
+		padding-top: 3px !important;
 	}
 
 	&-item {
 		gap: 0.3rem;
 		align-items: center;
-		padding-right: 0.3rem;
-		height: 2.15rem;
-		border-radius: 0;
+		height: 2.2rem;
 		color: inherit !important;
 		background-color: inherit;
 		transition: color 0.2s, background-color 0.2s;
+		border-radius: 0.35rem;
 
 		&:hover {
 			color: var(--am-clr-selected-text) !important;
@@ -130,8 +134,8 @@
 
 	& .cdx-search-field {
 		position: relative;
-		padding: 0 @am-bl-editor-space;
-		margin-bottom: @am-bl-editor-space !important;
+		padding: 0;
+		margin-bottom: @padding !important;
 		height: auto;
 		border: none;
 		background-color: transparent;
@@ -141,7 +145,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			left: @am-bl-editor-space * 0.85;
+			left: -0.2rem;
 			width: @am-form-height;
 			height: 100%;
 			top: 0;
@@ -157,7 +161,7 @@
 		&__input {
 			&:extend(.am-f-input);
 			font-size: 1rem;
-			padding-left: @am-form-height * 0.85 !important;
+			padding-left: 2.25rem !important;
 
 			&:focus {
 				&:extend(.am-f-input:focus);
