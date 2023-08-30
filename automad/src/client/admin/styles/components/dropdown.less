@@ -39,17 +39,6 @@
 	cursor: pointer;
 	--space: 0.3rem;
 
-	// Add this invisible block when hovering to keep hover status
-	// while moving cursor to dropdown items that have gap to the actual button.
-	&--hover:hover:before {
-		content: '';
-		position: absolute;
-		display: block;
-		top: 100%;
-		height: var(--space);
-		width: 100%;
-	}
-
 	&__items {
 		position: absolute;
 		z-index: 1000;
@@ -75,11 +64,6 @@
 		}
 	}
 
-	&--hover &__items {
-		transition: all 0.2s 0.4s;
-	}
-
-	&--hover:hover &__items,
 	&--open &__items {
 		opacity: 1;
 		pointer-events: all;
