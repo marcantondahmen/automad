@@ -61,7 +61,7 @@ import {
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/editor/inline/TextAlign';
-import { App } from '@/core';
+import { App, CSS } from '@/core';
 import { TableBlock } from '@/editor/blocks/Table';
 import { Delimiter } from '@/editor/blocks/Delimiter';
 import { ListBlock } from '@/editor/blocks/List';
@@ -105,6 +105,7 @@ export class EditorJSComponent extends BaseComponent {
 		isSectionBlock: boolean
 	): void {
 		this.style.position = 'relative';
+		this.classList.add(CSS.contents);
 
 		this.editor = new EditorJS(
 			Object.assign(
