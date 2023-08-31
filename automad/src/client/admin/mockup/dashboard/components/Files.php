@@ -14,7 +14,7 @@
 		<div class="am-l-grid" style="--min: 12.5rem; --aspect: 1.25;">
 			<div class="am-c-card am-c-card--active">
 				<div class="am-c-card__teaser">
-					<img src="https://picsum.photos/id/119/600/400" alt="">
+					<img src="https://images.unsplash.com/photo-1632059368252-be6d65abc4e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="">
 				</div>
 				<div class="am-c-card__title">
 					filename.jpg
@@ -61,7 +61,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="am-c-card">
+			<div class="am-c-card am-c-card--active">
 				<div class="am-c-card__teaser">
 					<i class="bi bi-filetype-pdf"></i>
 				</div>
@@ -101,14 +101,12 @@
 						</div>
 					</div>
 					<label for="file-2" class="am-f-checkbox">
-						<input type="checkbox" name="file-2" id="file-2">
+						<input type="checkbox" name="file-2" id="file-2" checked>
 						<i class="bi"></i>
 					</label>
 				</div>
 			</div>
-		</div>
-		<div class="am-l-grid" style="--min: 12.5rem; --aspect: 1.25;">
-			<div class="am-c-card am-c-card--active">
+			<div class="am-c-card">
 				<div class="am-c-card__teaser">
 					<i class="bi bi-filetype-pdf"></i>
 				</div>
@@ -152,7 +150,7 @@
 						</div>
 					</div>
 					<label for="file-1" class="am-f-checkbox">
-						<input type="checkbox" name="file-1" id="file-1" checked>
+						<input type="checkbox" name="file-1" id="file-1">
 						<i class="bi"></i>
 					</label>
 				</div>
