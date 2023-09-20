@@ -1,1 +1,0 @@
-@{ iconNav | replace('/^(.+)$/s', '<span class="nav-icon">$1</span>') }@{ title | stripTags }
