@@ -76,7 +76,7 @@ Join the community, ask questions or start a discussion on the Automad [discussi
 
 In case you are interested in contributing, the following types of contribution are welcome:
 
--   Improving [language packs](https://github.com/marcantondahmen/automad-language-packs) by fixing translation errors or adding new languages
+-   Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
 -   [Publishing packages](https://automad.org/developer-guide/publishing-packages) like themes or extensions to the Automad package [browser](https://packages.automad.org)
 -   Giving feedback and helping to grow a [community](https://discuss.automad.org)
 -   Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
