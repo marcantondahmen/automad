@@ -52,6 +52,28 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Package {
 	/**
+	 * Get the contaning composer package info by a path somewhere below the package directory.
+	 *
+	 * @param string $path
+	 * @return array the composer package object
+	 */
+	public static function getContainingPackage(string $path): array {
+		$dir = $path;
+		$composerJsonPath = $dir . '/composer.json';
+
+		while ($dir != AM_BASE_DIR . AM_DIR_PACKAGES && !is_readable($composerJsonPath)) {
+			$dir = realpath($dir . '/..');
+			$composerJsonPath = $dir . '/composer.json';
+		}
+
+		if (!is_readable($composerJsonPath)) {
+			return array();
+		}
+
+		return FileSystem::readJson($composerJsonPath);
+	}
+
+	/**
 	 * Try to fetch and cache a package thumbnail based on the repository readme file.
 	 *
 	 * @param string $repository

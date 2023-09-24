@@ -36,6 +36,7 @@
 
 namespace Automad\System;
 
+use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
 use Automad\Models\Page;
@@ -103,12 +104,13 @@ class Theme {
 	/**
 	 * The constructor.
 	 *
-	 * @param string $themeJSON
+	 * @param string $themeJson
 	 * @param array $composerInstalled
 	 */
-	public function __construct(string $themeJSON, array $composerInstalled) {
+	public function __construct(string $themeJson, array $composerInstalled) {
 		$json = false;
-		$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
+		$path = Str::stripStart(dirname($themeJson), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
+		$package = Package::getContainingPackage(dirname($themeJson));
 
 		$defaults = array(
 			'name' => $path,
@@ -118,32 +120,30 @@ class Theme {
 			'license' => false,
 			'masks' => array(),
 			'tooltips' => array(),
-			'readme' => 'https://github.com/marcantondahmen/automad/tree/master/packages/' . $path . '#readme'
+			'readme' => ''
 		);
 
-		// Get Composer version.
-		if (array_key_exists($path, $composerInstalled)) {
-			$package = array_intersect_key(
-				$composerInstalled[$path],
-				array_flip(array('version', 'support'))
-			);
+		// Get Composer version and readme URL.
+		if (!empty($package)) {
+			$packageName = $package['name'];
 
-			$package['readme'] = $package['support']['source'] . '#readme';
-		} else {
-			$package = array();
+			if (array_key_exists($packageName, $composerInstalled)) {
+				$package = array_intersect_key(
+					$composerInstalled[$packageName],
+					array_flip(array('version', 'support'))
+				);
+
+				$package['readme'] = $package['support']['source'] . '#readme';
+			} else {
+				$package = array();
+			}
 		}
 
 		// Decode JSON file.
-		if (is_readable($themeJSON)) {
-			$json = @json_decode(file_get_contents($themeJSON), true);
-		}
-
-		if (!is_array($json)) {
-			$json = array();
-		}
+		$json = FileSystem::readJson($themeJson);
 
 		// Get templates.
-		$templates = FileSystem::glob(dirname($themeJSON) . '/*.php');
+		$templates = FileSystem::glob(dirname($themeJson) . '/*.php');
 
 		// Remove the 'page not found' template from the array of templates.
 		$templates = array_filter($templates, function ($file) {
