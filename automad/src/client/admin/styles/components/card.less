@@ -110,6 +110,7 @@
 	}
 
 	&__teaser {
+		position: relative;
 		box-sizing: content-box;
 		display: flex;
 		aspect-ratio: var(--aspect, 1.38);
@@ -128,12 +129,19 @@
 			aspect-ratio: inherit;
 		}
 
-		&:first-child {
-			overflow: hidden;
-			border-top: none;
-			border-top-left-radius: @radius-inner;
-			border-top-right-radius: @radius-inner;
+		& > .am-e-badge {
+			position: absolute;
+			z-index: 10;
+			top: 0.4rem;
+			right: 0.4rem;
 		}
+	}
+
+	& > &__teaser:first-child {
+		overflow: hidden;
+		border-top: none;
+		border-top-left-radius: @radius-inner;
+		border-top-right-radius: @radius-inner;
 	}
 
 	&__icon {

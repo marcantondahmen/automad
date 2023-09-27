@@ -57,7 +57,7 @@ class Package {
 	 * @param string $path
 	 * @return array the composer package object
 	 */
-	public static function getContainingPackage(string $path): array {
+	public static function getPackageForPath(string $path): array {
 		$dir = $path;
 		$composerJsonPath = $dir . '/composer.json';
 
@@ -123,7 +123,7 @@ class Package {
 	 * Get the rendered README for a given package repository.
 	 *
 	 * @param string $repository
-	 * @return string the thumbnail URL
+	 * @return string the rendered Markdown of the README file
 	 */
 	private static function getReadme(string $repository): string {
 		$repositorySlug = Str::stripStart($repository, 'https://github.com/');

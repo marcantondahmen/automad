@@ -32,56 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	create,
-	CSS,
-	EventName,
-	listen,
-	request,
-	requestAPI,
-} from '@/core';
+import { create, CSS, EventName, listen, requestAPI } from '@/core';
 import { KeyValueMap, Package } from '@/types';
 import { BaseComponent } from '@/components/Base';
-
-/**
- * Get the list of available packages.
- *
- * @returns the list of available packages
- */
-const getPackagistPackages = async (): Promise<Package[]> => {
-	const response = await request(App.packageRepo);
-	const { results } = await response.json();
-
-	return results;
-};
-
-/**
- * Get the outdated packages.
- *
- * @returns the object of outdated packages
- */
-const getOutdatedPackages = async (): Promise<KeyValueMap> => {
-	const { data } = await requestAPI('PackageManager/getOutdated');
-	const packages: KeyValueMap = {};
-
-	data?.outdated.forEach((pkg: Package) => {
-		packages[pkg.name] = pkg;
-	});
-
-	return packages;
-};
-
-/**
- * Get all installed packages.
- *
- * @returns the object of installed packages
- */
-const getInstalledPackages = async (): Promise<KeyValueMap> => {
-	const { data } = await requestAPI('PackageManager/getInstalled');
-
-	return data.installed;
-};
 
 /**
  * Get and sort all required package data in order to generate the package card grid.
@@ -89,15 +42,13 @@ const getInstalledPackages = async (): Promise<KeyValueMap> => {
  * @returns the list of package objects
  */
 const getPackages = async (): Promise<Package[]> => {
-	const packages = await getPackagistPackages();
-	const outdated = await getOutdatedPackages();
-	const installed = await getInstalledPackages();
+	const { data } = await requestAPI('PackageManager/getPackageCollection');
 
-	packages.forEach((pkg) => {
-		pkg.outdated = typeof outdated[pkg.name] !== 'undefined';
-		pkg.installed = typeof installed[pkg.name] !== 'undefined';
-		pkg.latest = outdated[pkg.name]?.latest || '';
-	});
+	if (!data) {
+		return [];
+	}
+
+	const packages = data.packages;
 
 	packages.sort((a: KeyValueMap, b: KeyValueMap) =>
 		a.installed < b.installed ? 1 : b.installed < a.installed ? -1 : 0

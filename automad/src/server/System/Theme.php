@@ -110,7 +110,7 @@ class Theme {
 	public function __construct(string $themeJson, array $composerInstalled) {
 		$json = false;
 		$path = Str::stripStart(dirname($themeJson), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
-		$package = Package::getContainingPackage(dirname($themeJson));
+		$package = Package::getPackageForPath(dirname($themeJson));
 
 		$defaults = array(
 			'name' => $path,

@@ -154,13 +154,6 @@ export class App {
 	}
 
 	/**
-	 * The package repo api endpoint.
-	 */
-	static get packageRepo(): string {
-		return App.getState('packageRepo');
-	}
-
-	/**
 	 * The pages array used to build the nav tree.
 	 *
 	 * @static

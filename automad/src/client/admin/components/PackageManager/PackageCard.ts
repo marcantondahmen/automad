@@ -215,20 +215,44 @@ const createHeader = (
 /**
  * Create a preview container.
  *
+ * @param pkg
  * @param href
  * @param container
  * @returns the preview element
  */
-const createPreview = (href: string, container: HTMLElement): HTMLElement => {
-	const preview = create(
+const createPreview = (
+	pkg: Package,
+	href: string,
+	container: HTMLElement
+): HTMLElement => {
+	const link = create(
 		'a',
 		[CSS.cardTeaser],
 		{ href, target: '_blank' },
 		container
 	);
-	create('i', ['bi', 'bi-box-seam'], {}, preview);
 
-	return preview;
+	if (pkg.version) {
+		const badgeCls = [CSS.badge];
+		const badgeText = [pkg.version];
+
+		if (!pkg.outdated) {
+			badgeCls.push(CSS.badgeMuted);
+		} else {
+			badgeText.push('→');
+			badgeText.push(pkg.latest);
+		}
+
+		create('span', badgeCls, {}, link, badgeText.join(' '));
+	}
+
+	return create(
+		'div',
+		[CSS.cardTeaser],
+		{},
+		link,
+		'<i class="bi bi-box-seam"></i>'
+	);
 };
 
 /**
@@ -292,7 +316,7 @@ class PackageCardComponent extends BaseComponent {
 		const href = `${packageBrowser}/${pkg.name}`;
 
 		createHeader(pkg, href, this);
-		const preview = createPreview(href, this);
+		const preview = createPreview(pkg, href, this);
 
 		createDescription(pkg, this);
 		createFooter(pkg, this);

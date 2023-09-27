@@ -142,7 +142,7 @@ class Config {
 		self::set('AM_UPDATE_TEMP', AM_DIR_CACHE . '/update');
 
 		// Packagist
-		self::set('AM_PACKAGE_REPO', 'https://packagist.org/search.json?&type=automad-package&per_page=100');
+		self::set('AM_PACKAGE_REPO_QUERY', 'https://packagist.org/search.json?type=automad-package&per_page=100');
 
 		// Version number
 		include AM_BASE_DIR . '/automad/version.php';

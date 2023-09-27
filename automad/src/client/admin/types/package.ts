@@ -40,4 +40,5 @@ export interface Package {
 	outdated?: boolean;
 	installed?: boolean;
 	latest?: string;
+	version?: string;
 }
