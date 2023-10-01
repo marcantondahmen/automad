@@ -65,6 +65,11 @@ class History {
 	private array $daily = array();
 
 	/**
+	 * The everyFiveMinutes backup array.
+	 */
+	private array $everyFiveMinutes = array();
+
+	/**
 	 * The current path the file was opened from.
 	 */
 	private string $historyPath = '';
@@ -102,6 +107,7 @@ class History {
 	 */
 	public function __serialize(): array {
 		return array(
+			'everyFiveMinutes' => $this->everyFiveMinutes,
 			'hourly' => $this->hourly,
 			'daily' => $this->daily,
 			'monthly' => $this->monthly,
@@ -115,6 +121,7 @@ class History {
 	 * @param array $props
 	 */
 	public function __unserialize(array $props): void {
+		$this->everyFiveMinutes = $props['everyFiveMinutes'] ?? array();
 		$this->hourly = $props['hourly'] ?? array();
 		$this->daily = $props['daily'] ?? array();
 		$this->monthly = $props['monthly'] ?? array();
@@ -131,6 +138,8 @@ class History {
 
 		$this->revisions[$Revision->hash] = $Revision;
 
+		$this->everyFiveMinutes = $this->sliceRevisions($this->everyFiveMinutes);
+		$this->everyFiveMinutes[date('Y-m-d-H-') . (round(intval(date('i')) / 5) * 5)] = $Revision->hash;
 		$this->hourly = $this->sliceRevisions($this->hourly);
 		$this->hourly[date('Y-m-d-H')] = $Revision->hash;
 		$this->daily = $this->sliceRevisions($this->daily);
@@ -235,7 +244,7 @@ class History {
 	 * Filter our revisions that are no longer linked to a set such as hourly, daily or monthly.
 	 */
 	private function garbageCollectRevisions(): void {
-		$hashes = array_values(array_merge($this->hourly, $this->daily, $this->monthly));
+		$hashes = array_values(array_merge($this->everyFiveMinutes, $this->hourly, $this->daily, $this->monthly));
 		$filtered = array();
 
 		foreach ($this->revisions as $Revision) {
