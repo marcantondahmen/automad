@@ -113,7 +113,7 @@ const updateUI = async (
 	update: KeyValueMap,
 	pageBindings: PageBindings
 ): Promise<void> => {
-	if (!update.slug || !update.origUrl) {
+	if (!update.origUrl) {
 		return;
 	}
 
