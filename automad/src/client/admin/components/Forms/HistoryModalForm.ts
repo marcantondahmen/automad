@@ -61,6 +61,14 @@ export class HistoryModalFormComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		let confirm = '';
+
+		if (getPageURL() == '/') {
+			confirm = `${Attr.confirm}="${App.text(
+				'pageHistoryRestoreHomeConfirm'
+			)}"`;
+		}
+
 		const modal = create(
 			ModalComponent.TAG_NAME,
 			[],
@@ -70,6 +78,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 				<am-form
 					class="${CSS.modalDialog}"
 					${Attr.api}="History/restore"
+					${confirm}
 				>
 					<div class="${CSS.modalHeader}">
 						<span>${App.text('pageHistory')}</span>
@@ -77,7 +86,9 @@ export class HistoryModalFormComponent extends BaseComponent {
 							class="${CSS.modalClose}"
 						></am-modal-close>
 					</div>
-					<div class="${CSS.modalBody}"></div>
+					<div
+						class="${CSS.modalBody} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+					></div>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonPrimary}"
@@ -120,7 +131,11 @@ export class HistoryModalFormComponent extends BaseComponent {
 			return;
 		}
 
-		container.innerHTML = '';
+		container.innerHTML = `<span>${
+			getPageURL() == '/'
+				? App.text('pageHistoryRestoreHomeText')
+				: App.text('pageHistoryRestoreText')
+		}</span>`;
 
 		const options = data.reduce(
 			(

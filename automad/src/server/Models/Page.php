@@ -224,7 +224,7 @@ class Page {
 	 */
 	public static function dashboardUrlByPath(string $path): string {
 		Cache::clear();
-		$Page = Page::findByPath($path);
+		$Page = Page::findByPath(rtrim($path, '/') . '/');
 
 		if (!$Page) {
 			return '';

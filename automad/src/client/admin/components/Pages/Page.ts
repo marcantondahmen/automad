@@ -57,10 +57,6 @@ const renderBreadcrumbs = (): string => {
 };
 
 const renderHistoryModal = (): string => {
-	if (getPageURL() === '/') {
-		return '';
-	}
-
 	return html`<am-history-modal-form></am-history-modal-form>`;
 };
 
@@ -106,8 +102,48 @@ const renderMovePageModal = (): string => {
 };
 
 const renderDropdown = (): string => {
-	if (getPageURL() === '/') {
-		return '';
+	let subpageItems = '';
+
+	if (getPageURL() != '/') {
+		subpageItems = html`
+			<am-form ${Attr.api}="Page/duplicate">
+				<am-submit class="${CSS.dropdownLink}">
+					<am-icon-text
+						${Attr.icon}="files"
+						${Attr.text}="${App.text('duplicatePage')}"
+					></am-icon-text>
+				</am-submit>
+			</am-form>
+			<am-modal-toggle
+				class="${CSS.dropdownLink}"
+				${Attr.modal}="#am-move-page-modal"
+			>
+				<am-icon-text
+					${Attr.icon}="arrows-move"
+					${Attr.text}="${App.text('movePage')}"
+				></am-icon-text>
+			</am-modal-toggle>
+			<am-copy
+				class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
+				value="${getPageURL()}"
+			>
+				<am-icon-text
+					${Attr.icon}="clipboard-plus"
+					${Attr.text}="${App.text('copyUrlClipboard')}"
+				></am-icon-text>
+			</am-copy>
+			<am-form
+				${Attr.api}="Page/delete"
+				${Attr.confirm}="${App.text('confirmDeletePage')}"
+			>
+				<am-submit class="${CSS.dropdownLink}">
+					<am-icon-text
+						${Attr.icon}="trash3"
+						${Attr.text}="${App.text('deletePage')}"
+					></am-icon-text>
+				</am-submit>
+			</am-form>
+		`;
 	}
 
 	return html`
@@ -145,43 +181,7 @@ const renderDropdown = (): string => {
 						${Attr.text}="${App.text('inPageEdit')}"
 					></am-icon-text>
 				</a>
-				<am-form ${Attr.api}="Page/duplicate">
-					<am-submit class="${CSS.dropdownLink}">
-						<am-icon-text
-							${Attr.icon}="files"
-							${Attr.text}="${App.text('duplicatePage')}"
-						></am-icon-text>
-					</am-submit>
-				</am-form>
-				<am-modal-toggle
-					class="${CSS.dropdownLink}"
-					${Attr.modal}="#am-move-page-modal"
-				>
-					<am-icon-text
-						${Attr.icon}="arrows-move"
-						${Attr.text}="${App.text('movePage')}"
-					></am-icon-text>
-				</am-modal-toggle>
-				<am-copy
-					class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
-					value="${getPageURL()}"
-				>
-					<am-icon-text
-						${Attr.icon}="clipboard-plus"
-						${Attr.text}="${App.text('copyUrlClipboard')}"
-					></am-icon-text>
-				</am-copy>
-				<am-form
-					${Attr.api}="Page/delete"
-					${Attr.confirm}="${App.text('confirmDeletePage')}"
-				>
-					<am-submit class="${CSS.dropdownLink}">
-						<am-icon-text
-							${Attr.icon}="trash3"
-							${Attr.text}="${App.text('deletePage')}"
-						></am-icon-text>
-					</am-submit>
-				</am-form>
+				${subpageItems}
 			</div>
 		</am-dropdown>
 	`;

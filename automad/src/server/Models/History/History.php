@@ -43,7 +43,10 @@ use Automad\Core\Cache;
 use Automad\Core\DataFile;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
+use Automad\Core\PageIndex;
+use Automad\Core\Str;
 use Automad\Core\Text;
+use Automad\Models\Page;
 use Automad\System\Fields;
 
 /**
@@ -193,23 +196,39 @@ class History {
 	 * @param string $hash
 	 * @param string $title
 	 * @param Messenger $Messenger
+	 * @return string the URL for the restored copy in the dashboard
 	 */
-	public function restore(string $hash, string $title, Messenger $Messenger): void {
+	public function restore(string $hash, string $title, Messenger $Messenger): string {
 		if (!array_key_exists($hash, $this->revisions)) {
 			$Messenger->setError(Text::get('pageRevisionNotFound'));
 
-			return;
+			return '';
 		}
 
 		$revision = $this->revisions[$hash];
 
-		// Note that the title has to stay unchanged in order to avoid unitentionally decoupling title and slug.
-		$data = array_merge($revision->data, array(Fields::TITLE => $title));
+		if ($this->pagePath === '/') {
+			DataFile::write($revision->data, $this->pagePath);
+			$this->commit($revision->data);
 
-		DataFile::write($data, $this->pagePath);
-		$this->commit($revision->data);
+			Cache::clear();
 
-		Cache::clear();
+			return '';
+		}
+
+		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time);
+		$time = str_replace('T', ', ', $time);
+
+		$restoredTitle = $title . ' (' . $time . ')';
+		$duplicatePath = dirname($this->pagePath) . '/' . Str::slug($restoredTitle, true);
+		$duplicatePath .= FileSystem::uniquePathSuffix($duplicatePath) . '/';
+		$data = array_merge($revision->data, array(Fields::TITLE => $restoredTitle));
+
+		FileSystem::copyPageFiles($this->pagePath, $duplicatePath);
+		PageIndex::append(dirname($duplicatePath), $duplicatePath);
+		DataFile::write($data, $duplicatePath);
+
+		return Page::dashboardUrlByPath($duplicatePath);
 	}
 
 	/**
