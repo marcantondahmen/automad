@@ -48,7 +48,9 @@ export class MainThemeComponent extends BaseFieldComponent {
 	protected createInput(): void {
 		const { name, id, value } = this._data;
 		const themes = Object.values(App.themes) as Theme[];
-		const selectedTheme = App.themes[value as string] as Theme;
+		const selectedTheme =
+			(App.themes[value as string] as Theme) ??
+			Object.values(App.themes)[0];
 		const options: SelectComponentOption[] = [];
 
 		themes.forEach((theme) => {

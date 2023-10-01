@@ -153,7 +153,7 @@ export class SharedDataFormComponent extends FormComponent {
 		const { fields } = response.data;
 		const themeKey = App.reservedFields.THEME;
 		const mainTheme = fields[themeKey] || Object.keys(App.themes)[0];
-		const tooltips = App.themes[mainTheme].tooltips;
+		const tooltips = App.themes[mainTheme]?.tooltips ?? {};
 		const fieldGroups = prepareFieldGroups(fields);
 
 		create(

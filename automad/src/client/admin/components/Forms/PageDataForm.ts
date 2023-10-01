@@ -425,9 +425,9 @@ export class PageDataFormComponent extends FormComponent {
 		let tooltips = {};
 
 		if (fields[themeKey]) {
-			tooltips = themes[fields[themeKey]].tooltips;
+			tooltips = themes[fields[themeKey]]?.tooltips || {};
 		} else {
-			tooltips = themes[shared[themeKey]].tooltips;
+			tooltips = themes[shared[themeKey]]?.tooltips || {};
 		}
 
 		const fieldGroups = prepareFieldGroups(fields);
