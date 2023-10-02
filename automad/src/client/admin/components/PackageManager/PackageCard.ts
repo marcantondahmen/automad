@@ -246,13 +246,7 @@ const createPreview = (
 		create('span', badgeCls, {}, link, badgeText.join(' '));
 	}
 
-	return create(
-		'div',
-		[CSS.cardTeaser],
-		{},
-		link,
-		'<i class="bi bi-box-seam"></i>'
-	);
+	return create('i', ['bi', 'bi-box-seam'], {}, link);
 };
 
 /**
@@ -316,7 +310,7 @@ class PackageCardComponent extends BaseComponent {
 		const href = `${packageBrowser}/${pkg.name}`;
 
 		createHeader(pkg, href, this);
-		const preview = createPreview(pkg, href, this);
+		const icon = createPreview(pkg, href, this);
 
 		createDescription(pkg, this);
 		createFooter(pkg, this);
@@ -324,8 +318,8 @@ class PackageCardComponent extends BaseComponent {
 		const thumbnail = await getThumbnail(pkg.repository);
 
 		if (thumbnail) {
-			preview.innerHTML = '';
-			create('img', [], { src: thumbnail }, preview);
+			create('img', [], { src: thumbnail }, icon.parentElement);
+			icon.remove();
 		}
 	}
 }
