@@ -32,40 +32,41 @@
  * Licensed under the MIT license.
  */
 
-import EditorJS, { EditorConfig, I18nDictionary } from '@editorjs/editorjs';
-import { EditorOutputData, KeyValueMap } from '@/types';
 import { BaseComponent } from '@/components/Base';
-import { LayoutTune } from '@/editor/tunes/Layout';
 import { SectionBlock } from '@/editor/blocks/Section';
-import { DragDrop } from '@/editor/plugins/DragDrop';
-import { LinkInline } from '@/editor/inline/Link';
 import { BoldInline } from '@/editor/inline/Bold';
-import { ItalicInline } from '@/editor/inline/Italic';
 import { CodeInline } from '@/editor/inline/Code';
-import { UnderlineInline } from '@/editor/inline/Underline';
 import { ColorInline } from '@/editor/inline/Color';
-import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
 import { FontSizeInline } from '@/editor/inline/FontSize';
+import { ItalicInline } from '@/editor/inline/Italic';
 import { LineHeightInline } from '@/editor/inline/LineHeight';
+import { LinkInline } from '@/editor/inline/Link';
+import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
+import { UnderlineInline } from '@/editor/inline/Underline';
+import { DragDrop } from '@/editor/plugins/DragDrop';
+import { LayoutTune } from '@/editor/tunes/Layout';
+import { EditorOutputData, KeyValueMap } from '@/types';
+import EditorJS, { EditorConfig, I18nDictionary } from '@editorjs/editorjs';
 // @ts-ignore
 import Header from '@editorjs/header';
-// @ts-ignore
-import Paragraph from '@editorjs/paragraph';
-import { ClassTune } from '@/editor/tunes/Class';
-import { IdTune } from '@/editor/tunes/Id';
-import { SpacingTune } from '@/editor/tunes/Spacing';
-import { LargeTune } from '@/editor/tunes/Large';
+import { App, CSS } from '@/core';
+import { Delimiter } from '@/editor/blocks/Delimiter';
 import { ImageBlock } from '@/editor/blocks/Image';
+import { ListBlock } from '@/editor/blocks/List';
+import { QuoteBlock } from '@/editor/blocks/Quote';
+import { TableBlock } from '@/editor/blocks/Table';
 import {
 	TextAlignCenterInline,
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/editor/inline/TextAlign';
-import { App, CSS } from '@/core';
-import { TableBlock } from '@/editor/blocks/Table';
-import { Delimiter } from '@/editor/blocks/Delimiter';
-import { ListBlock } from '@/editor/blocks/List';
-import { QuoteBlock } from '@/editor/blocks/Quote';
+import { ClassTune } from '@/editor/tunes/Class';
+import { IdTune } from '@/editor/tunes/Id';
+import { LargeTune } from '@/editor/tunes/Large';
+import { SpacingTune } from '@/editor/tunes/Spacing';
+// @ts-ignore
+import Paragraph from '@editorjs/paragraph';
+import { CodeBlock } from '@/editor/blocks/Code';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -193,6 +194,10 @@ export class EditorJSComponent extends BaseComponent {
 			quote: {
 				class: QuoteBlock,
 				inlineToolbar: true,
+			},
+			code: {
+				class: CodeBlock,
+				inlineToolbar: false,
 			},
 			delimiter: Delimiter,
 		};

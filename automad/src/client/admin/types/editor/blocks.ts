@@ -40,12 +40,20 @@ import {
 	SectionBorderStyles,
 	SectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
+import { codeBlockLanguages } from '@/editor/blocks/Code';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
 	config?: ToolConfig;
 	block: BlockAPI;
 	data: any;
+}
+
+export type CodeBlockLanguage = (typeof codeBlockLanguages)[number];
+
+export interface CodeBlockData {
+	code: string;
+	language: CodeBlockLanguage;
 }
 
 export interface ImageBlockData {

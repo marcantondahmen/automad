@@ -32,10 +32,44 @@
  * Licensed under the MIT license.
  */
 
-@import 'code.less';
-@import 'delimiter.less';
-@import 'header.less';
-@import 'image.less';
-@import 'quote.less';
-@import 'section.less';
-@import 'table.less';
+.am-c-ed-bl-code {
+	position: relative;
+	overflow: hidden;
+}
+
+.codeflask {
+	height: 100%;
+	overflow: hidden;
+	background-color: var(--am-clr-background-faded);
+	border-radius: @am-form-radius;
+	border: @am-form-border;
+
+	& &__textarea {
+		overflow: hidden;
+		color: var(--am-clr-background-faded);
+		caret-color: var(--am-clr-text);
+	}
+
+	& &__pre,
+	& &__code {
+		box-sizing: border-box;
+		padding: 0;
+		background-color: transparent;
+	}
+
+	& &__code {
+		padding: 0;
+	}
+
+	& &__textarea,
+	& &__pre {
+		padding: 1rem;
+	}
+
+	& &__textarea,
+	& &__code {
+		font-family: @am-code-font-family;
+		font-size: 1rem;
+		line-height: @am-base-line-height;
+	}
+}
