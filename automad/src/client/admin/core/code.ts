@@ -40,6 +40,8 @@ export const codeLanguages = ['js', 'html', 'css', 'php'] as const;
 
 /**
  * A thin wrapper around CodeFlask.
+ *
+ * @see {@link github https://github.com/kazzkiq/CodeFlask}
  */
 export class CodeEditor {
 	/**
@@ -84,7 +86,7 @@ export class CodeEditor {
 				}px`;
 
 				onChange(this.codeFlask.getCode());
-			}, 50)
+			}, 20)
 		);
 	}
 }

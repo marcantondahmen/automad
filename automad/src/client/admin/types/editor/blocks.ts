@@ -70,6 +70,10 @@ export interface QuoteBlockInputs {
 	caption: HTMLDivElement;
 }
 
+export interface RawBlockData {
+	code: string;
+}
+
 export type SectionJustifyContentOption =
 	keyof typeof sectionJustifyContentOptions;
 

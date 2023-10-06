@@ -67,6 +67,7 @@ import { SpacingTune } from '@/editor/tunes/Spacing';
 // @ts-ignore
 import Paragraph from '@editorjs/paragraph';
 import { CodeBlock } from '@/editor/blocks/Code';
+import { RawBlock } from '@/editor/blocks/Raw';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -197,6 +198,10 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			code: {
 				class: CodeBlock,
+				inlineToolbar: false,
+			},
+			raw: {
+				class: RawBlock,
 				inlineToolbar: false,
 			},
 			delimiter: Delimiter,
