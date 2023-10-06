@@ -44,8 +44,8 @@ export * from './shared';
 export * from './switcher';
 export * from './system';
 export * from './undo';
-import { PageMetaData } from '.';
-import { InputElement } from './field';
+import { codeLanguages } from '@/core/code';
+import { PageMetaData, InputElement } from '.';
 
 declare global {
 	const DEVELOPMENT: boolean;
@@ -84,6 +84,8 @@ export interface BindingOptions {
 	initial?: any;
 	onChange?: (value: string) => void;
 }
+
+export type CodeLanguage = (typeof codeLanguages)[number];
 
 export interface Image {
 	name: string;

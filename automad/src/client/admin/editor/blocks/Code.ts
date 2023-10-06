@@ -32,12 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, createSelect, CSS, debounce, query } from '@/core';
+import { App, create, createSelect, CSS, query } from '@/core';
+import { CodeEditor, codeLanguages } from '@/core/code';
 import { CodeBlockData } from '@/types';
-import CodeFlask from 'codeflask';
 import { BaseBlock } from './BaseBlock';
-
-export const codeBlockLanguages = ['js', 'html', 'css', 'php'] as const;
 
 export class CodeBlock extends BaseBlock<CodeBlockData> {
 	/**
@@ -76,7 +74,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	/**
 	 * The CodeFlask instance.
 	 */
-	private flask: CodeFlask;
+	private editor: CodeEditor;
 
 	/**
 	 * Prepare the data that is passed to the constructor.
@@ -110,28 +108,28 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 		);
 
 		const langSelect = createSelect(
-			codeBlockLanguages.map((lang) => ({
+			codeLanguages.map((lang) => ({
 				value: lang,
 			})),
 			this.data.language,
 			this.wrapper
 		);
 
-		const editor = create(
+		const container = create(
 			'div',
 			[CSS.editorBlockCode],
 			{},
 			this.wrapper
 		) as HTMLDivElement;
 
-		this.api.listeners.on(langSelect, 'change', (event: Event) => {
+		this.api.listeners.on(langSelect, 'change', () => {
 			this.data.language =
-				langSelect.value as unknown as (typeof codeBlockLanguages)[number];
+				langSelect.value as unknown as (typeof codeLanguages)[number];
 
-			this.initEditor(editor);
+			this.initEditor(container);
 		});
 
-		this.initEditor(editor);
+		this.initEditor(container);
 
 		return this.wrapper;
 	}
@@ -141,30 +139,18 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 *
 	 * @param editor
 	 */
-	private initEditor(editor: HTMLDivElement): void {
-		editor.innerHTML = '';
-
-		this.flask = new CodeFlask(editor, {
-			lineNumbers: false,
-			defaultTheme: false,
-			handleTabs: true,
-			tabSize: 4,
-			language: this.data.language,
-		});
-
-		this.flask.updateCode(this.data.code);
-
-		const pre = query('pre', editor);
-
-		this.flask.onUpdate(
-			debounce(() => {
-				editor.style.height = `${pre.getBoundingClientRect().height}px`;
-				this.data.code = this.flask.getCode();
-			}, 50)
+	private initEditor(container: HTMLDivElement): void {
+		this.editor = new CodeEditor(
+			container,
+			this.data.code,
+			this.data.language,
+			(code) => {
+				this.data.code = code;
+			}
 		);
 
 		this.api.listeners.on(
-			query('textarea', editor),
+			query('textarea', container),
 			'keydown',
 			(event: Event) => {
 				event.stopImmediatePropagation();
@@ -179,7 +165,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 */
 	save(): CodeBlockData {
 		return {
-			code: this.flask.getCode(),
+			code: this.editor.codeFlask.getCode(),
 			language: this.data.language,
 		};
 	}

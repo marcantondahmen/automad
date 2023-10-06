@@ -33,14 +33,13 @@
  */
 
 import { API, BlockAPI, ToolConfig } from '@editorjs/editorjs';
-import { KeyValueMap } from '..';
+import { CodeLanguage, KeyValueMap } from '..';
 import {
 	SectionAlignItemsOptions,
 	SectionBackgroundBlendModes,
 	SectionBorderStyles,
 	SectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
-import { codeBlockLanguages } from '@/editor/blocks/Code';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
@@ -49,11 +48,9 @@ export interface BlockTuneConstructorOptions {
 	data: any;
 }
 
-export type CodeBlockLanguage = (typeof codeBlockLanguages)[number];
-
 export interface CodeBlockData {
 	code: string;
-	language: CodeBlockLanguage;
+	language: CodeLanguage;
 }
 
 export interface ImageBlockData {
