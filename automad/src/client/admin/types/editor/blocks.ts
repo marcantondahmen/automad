@@ -35,10 +35,10 @@
 import { API, BlockAPI, ToolConfig } from '@editorjs/editorjs';
 import { CodeLanguage, KeyValueMap } from '..';
 import {
-	SectionAlignItemsOptions,
-	SectionBackgroundBlendModes,
-	SectionBorderStyles,
-	SectionJustifyContentOptions,
+	sectionAlignItemsOptions,
+	sectionBackgroundBlendModes,
+	sectionBorderStyles,
+	sectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
 
 export interface BlockTuneConstructorOptions {
@@ -71,14 +71,14 @@ export interface QuoteBlockInputs {
 }
 
 export type SectionJustifyContentOption =
-	keyof typeof SectionJustifyContentOptions;
+	keyof typeof sectionJustifyContentOptions;
 
-export type SectionAlignItemsOption = keyof typeof SectionAlignItemsOptions;
+export type SectionAlignItemsOption = keyof typeof sectionAlignItemsOptions;
 
 export type SectionBackgroundBlendMode =
-	(typeof SectionBackgroundBlendModes)[number];
+	(typeof sectionBackgroundBlendModes)[number];
 
-export type SectionBorderStyle = (typeof SectionBorderStyles)[number];
+export type SectionBorderStyle = (typeof sectionBorderStyles)[number];
 
 export interface SectionStyle {
 	card: boolean;

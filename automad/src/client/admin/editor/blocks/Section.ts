@@ -71,7 +71,7 @@ import { EditorPortalComponent } from '@/components/Editor/EditorPortal';
 /**
  * The flexbox option for "justify-content".
  */
-export const SectionJustifyContentOptions = {
+export const sectionJustifyContentOptions = {
 	start: 'Start',
 	end: 'End',
 	center: 'Center',
@@ -83,7 +83,7 @@ export const SectionJustifyContentOptions = {
 /**
  * The flexbox option for "align-items".
  */
-export const SectionAlignItemsOptions = {
+export const sectionAlignItemsOptions = {
 	normal: 'Normal',
 	stretch: 'Stretch',
 	center: 'Center',
@@ -94,7 +94,7 @@ export const SectionAlignItemsOptions = {
 /**
  * Background blend modes for the section's background image.
  */
-export const SectionBackgroundBlendModes = [
+export const sectionBackgroundBlendModes = [
 	'normal',
 	'multiply',
 	'screen',
@@ -116,7 +116,7 @@ export const SectionBackgroundBlendModes = [
 /**
  * Border styles for sections.
  */
-export const SectionBorderStyles = [
+export const sectionBorderStyles = [
 	'solid',
 	'dashed',
 	'dotted',
@@ -353,10 +353,10 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 */
 	private renderJustifySelect(toolbar: HTMLElement): void {
 		const justifySelectOptions = Object.keys(
-			SectionJustifyContentOptions
+			sectionJustifyContentOptions
 		).reduce((result, key: SectionJustifyContentOption) => {
 			result.push({
-				text: SectionJustifyContentOptions[key],
+				text: sectionJustifyContentOptions[key],
 				value: key,
 			});
 
@@ -396,10 +396,10 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 * @param toolbar
 	 */
 	private renderAlignSelect(toolbar: HTMLElement): void {
-		const alignSelectOptions = Object.keys(SectionAlignItemsOptions).reduce(
+		const alignSelectOptions = Object.keys(sectionAlignItemsOptions).reduce(
 			(result, key: SectionAlignItemsOption) => {
 				result.push({
-					text: SectionAlignItemsOptions[key],
+					text: sectionAlignItemsOptions[key],
 					value: key,
 				});
 
@@ -544,7 +544,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		);
 
 		createSelect(
-			SectionBorderStyles.reduce(
+			sectionBorderStyles.reduce(
 				(
 					res: SelectComponentOption[],
 					style: string
@@ -579,7 +579,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		);
 
 		createSelect(
-			SectionBackgroundBlendModes.reduce(
+			sectionBackgroundBlendModes.reduce(
 				(
 					res: SelectComponentOption[],
 					mode: string

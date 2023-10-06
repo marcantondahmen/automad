@@ -100,6 +100,7 @@ const htmlRenderer: CustomHTMLRenderer = {
 				src: resolveFileUrl(node.destination),
 			};
 		}
+
 		return result;
 	},
 	link(node: LinkMdNode, context: Context) {
@@ -111,6 +112,7 @@ const htmlRenderer: CustomHTMLRenderer = {
 				target: '_blank',
 			};
 		}
+
 		return result;
 	},
 };

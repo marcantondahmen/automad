@@ -97,6 +97,8 @@ export const enum CSS {
 
 	dropdownArrow = 'am-e-dropdown-arrow',
 
+	editorBlockCode = 'am-c-ed-bl-code',
+
 	editorBlockSection = 'am-c-ed-bl-section',
 	editorBlockSectionLabel = 'am-c-ed-bl-section__label',
 	editorBlockSectionToolbar = 'am-c-ed-bl-section__toolbar',
