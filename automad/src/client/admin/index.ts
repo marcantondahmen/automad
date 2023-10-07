@@ -36,6 +36,9 @@ import 'modern-normalize/modern-normalize.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'sortable-tree/dist/sortable-tree.css';
 
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+
 import './styles/index.less';
 
 import './components/Editor/EditorJS';
