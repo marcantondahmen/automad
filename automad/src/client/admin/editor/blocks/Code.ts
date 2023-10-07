@@ -83,7 +83,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 * @return the prepared data
 	 */
 	protected prepareData(data: CodeBlockData): CodeBlockData {
-		return { code: data.code ?? '', language: data.language ?? 'html' };
+		return { code: data.code ?? '', language: data.language ?? 'none' };
 	}
 
 	/**
