@@ -59,13 +59,16 @@
 	}
 
 	&__close {
-		padding-right: 0.4rem;
+		padding-top: 0.15rem;
 		opacity: 0.3;
 		transition: opacity 0.2s;
 		font-size: 1.25rem;
 
 		&:before {
-			content: '×';
+			&:extend(.am-bi);
+			content: '\f62a';
+			font-size: 1.35rem;
+			line-height: 1;
 		}
 	}
 

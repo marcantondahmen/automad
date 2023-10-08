@@ -52,7 +52,6 @@
 
 		&-save-wrapper {
 			width: auto !important;
-			height: 2rem !important;
 		}
 
 		&-history-buttons {
@@ -61,7 +60,7 @@
 
 			& .SfxIconButton-root {
 				width: @am-form-height;
-				font-size: 1.15rem !important;
+				height: @am-form-height;
 				font-weight: 520;
 
 				& svg {
@@ -71,15 +70,21 @@
 		}
 
 		&-reset-button:after {
-			content: '↺';
+			&:extend(.am-bi);
+			content: '\f659';
+			font-size: 1.25rem;
 		}
 
 		&-undo-button:after {
-			content: '↩';
+			&:extend(.am-bi);
+			content: '\f117';
+			font-size: 1.25rem;
 		}
 
 		&-redo-button:after {
-			content: '↪';
+			&:extend(.am-bi);
+			content: '\f116';
+			font-size: 1.25rem;
 		}
 
 		&-center-options {
@@ -112,10 +117,10 @@
 			}
 
 			&:after {
-				content: '✗';
-				font-size: 1.5rem;
-				font-weight: 460;
-				padding: 0.5rem;
+				&:extend(.am-bi);
+				content: '\f659';
+				font-size: 1.25rem;
+				padding: 1rem 0.5rem;
 			}
 
 			& svg {
@@ -178,11 +183,15 @@
 		}
 
 		& .FIE_carousel-prev-button:after {
-			content: '←';
+			&:extend(.am-bi);
+			content: '\f22d';
+			line-height: 1.9rem !important;
 		}
 
 		& .FIE_carousel-next-button:after {
-			content: '→';
+			&:extend(.am-bi);
+			content: '\f231';
+			line-height: 1.9rem !important;
 		}
 	}
 }

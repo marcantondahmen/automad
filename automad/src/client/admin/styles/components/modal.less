@@ -264,16 +264,16 @@
 	}
 
 	&__close {
+		display: inline-flex;
+		align-items: center;
 		cursor: pointer;
 		transition: color 0.2s;
 
 		&:before {
-			content: '✗';
-			font-size: 1.25rem;
-			line-height: 1.2rem;
-			font-weight: 250;
-			margin: 0 -0.5rem;
-			padding: 0 0.5rem;
+			&:extend(.am-bi);
+			content: '\f62a';
+			font-size: 1.35rem;
+			line-height: 1;
 		}
 
 		&:hover {

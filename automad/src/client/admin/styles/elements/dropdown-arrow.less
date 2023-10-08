@@ -39,13 +39,8 @@
 	width: 1em;
 
 	&:after {
-		content: '⌃';
-		margin-top: -0.43em;
-		margin-right: -0.08em;
-		font-size: 1.1em;
-		font-weight: 680;
-		color: var(--am-clr-text-paragraph);
-		transform: rotateZ(180deg);
-		pointer-events: none;
+		&:extend(.am-bi);
+		content: '\f282';
+		padding-bottom: 0.1em;
 	}
 }
