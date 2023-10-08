@@ -147,6 +147,7 @@ import './components/DashboardThemeToggle';
 import './components/Dropdown';
 import './components/Filter';
 import './components/IconText';
+import './components/ImageCollection';
 import './components/ImagePicker';
 import './components/Img';
 import './components/KeyComboBadge';
