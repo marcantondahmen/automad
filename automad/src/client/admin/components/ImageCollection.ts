@@ -73,7 +73,9 @@ export class ImageCollectionComponent extends BaseComponent {
 	 * @param images
 	 */
 	set images(images: string[]) {
-		this.render(images);
+		setTimeout(() => {
+			this.render(images);
+		}, 0);
 	}
 
 	/**
@@ -129,10 +131,11 @@ export class ImageCollectionComponent extends BaseComponent {
 		});
 
 		this.sortable = new Sortable(grid, {
+			group: 'gallery',
 			dataIdAttr: 'data-url',
 			dragoverBubble: false,
 			ghostClass: CSS.imageCollectionItemGhost,
-			onUpdate: () => {
+			onSort: () => {
 				fire('change', this);
 			},
 		});
