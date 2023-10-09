@@ -149,6 +149,8 @@ export const enum CSS {
 
 	iconText = 'am-c-icon-text',
 
+	iconLarge = 'am-bi-lg',
+
 	img = 'am-e-img',
 	imgError = 'am-e-img__error',
 

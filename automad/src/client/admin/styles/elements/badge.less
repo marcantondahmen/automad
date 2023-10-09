@@ -37,15 +37,16 @@
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	gap: 0.4em;
+	gap: 0.35em;
 	font-size: 0.75rem;
-	line-height: 1em;
-	min-width: 2em;
-	padding: 0.5em 0.85em 0.375em 0.85em;
+	height: 1.85em;
+	min-width: 2.5em;
+	padding: 0 0.75em;
+	padding-top: 0.05em;
 	border-radius: 100px;
 	color: var(--am-clr-badge-text);
 	background-color: var(--am-clr-badge-background);
-	font-weight: 780;
+	font-weight: 680;
 
 	&:empty {
 		position: absolute;
@@ -63,12 +64,5 @@
 	&--muted {
 		color: var(--am-clr-primary-text);
 		background-color: var(--am-clr-primary-background);
-	}
-
-	& .bi {
-		display: flex;
-		align-items: center;
-		font-size: 0.75rem;
-		height: 100%;
 	}
 }
