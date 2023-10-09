@@ -73,9 +73,7 @@ export class ImageCollectionComponent extends BaseComponent {
 	 * @param images
 	 */
 	set images(images: string[]) {
-		setTimeout(() => {
-			this.render(images);
-		}, 0);
+		this.render(images);
 	}
 
 	/**
@@ -135,6 +133,9 @@ export class ImageCollectionComponent extends BaseComponent {
 			dataIdAttr: 'data-url',
 			dragoverBubble: false,
 			ghostClass: CSS.imageCollectionItemGhost,
+			dragClass: CSS.imageCollectionItemDrag,
+			chosenClass: CSS.imageCollectionItemChosen,
+			animation: 300,
 			onSort: () => {
 				fire('change', this);
 			},
@@ -143,7 +144,7 @@ export class ImageCollectionComponent extends BaseComponent {
 		this.addListener(
 			listen(grid, 'dragover', (event: Event) => {
 				event.preventDefault();
-				event.stopImmediatePropagation();
+				event.stopPropagation();
 			})
 		);
 
@@ -155,15 +156,25 @@ export class ImageCollectionComponent extends BaseComponent {
 			App.text('addImage')
 		);
 
+		this.addListener(listen(addButton, 'click', this.add.bind(this)));
 		this.addListener(
-			listen(addButton, 'click', () => {
-				createImagePickerModal((file) => {
-					this.images = [...this.images, file];
-
-					fire('change', this);
-				}, App.text('addImage'));
+			listen(grid, 'click', (event: Event) => {
+				if (event.target === grid) {
+					this.add();
+				}
 			})
 		);
+	}
+
+	/**
+	 * Open the image picker in order to add an image to the collection.
+	 */
+	private add(): void {
+		createImagePickerModal((file) => {
+			this.images = [...this.images, file];
+
+			fire('change', this);
+		}, App.text('addImage'));
 	}
 }
 

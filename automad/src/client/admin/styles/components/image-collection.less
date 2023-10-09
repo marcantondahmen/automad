@@ -35,33 +35,60 @@
 .am-c-image-collection {
 	display: flex;
 	flex-direction: column;
-	gap: @am-flex-gap;
 
 	&__grid {
+		position: relative;
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
 		grid-auto-rows: auto;
 		gap: 1px;
 		border: @am-form-border;
-		border-radius: @am-form-radius;
+		border-top-left-radius: @am-card-radius;
+		border-top-right-radius: @am-card-radius;
+		border-bottom: none;
 		overflow: hidden;
+		background-color: var(--am-clr-background-faded);
+		cursor: pointer;
 
 		&:empty {
-			display: none;
+			height: 6rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&:after {
+				&:extend(.am-bi);
+				content: '\f64d';
+				font-size: 2.5rem;
+				color: var(--am-clr-text-muted);
+			}
 		}
 	}
 
 	&__item {
 		position: relative;
+		z-index: 2;
+		outline: var(--am-clr-border) solid 1px;
+	}
+
+	&__item--drag {
+		outline: none;
+
+		& img {
+			box-shadow: @am-shadow;
+			transform: scale(0.95);
+			border-radius: @am-form-radius;
+		}
+	}
+
+	&__item--drag &__delete,
+	&__item--chosen &__delete,
+	&__item--drag &__delete {
+		opacity: 0 !important;
 	}
 
 	&__item--ghost {
-		border: 1px dashed var(--am-clr-border-active);
-		background-color: var(--am-clr-highlight-background);
-
-		& > * {
-			opacity: 0 !important;
-		}
+		opacity: 0;
 	}
 
 	&__image {
@@ -76,7 +103,7 @@
 		transition: opacity 0.2s;
 
 		&:hover {
-			opacity: 0.85;
+			opacity: 0.75;
 		}
 	}
 
@@ -85,24 +112,38 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: 0.2rem;
-		right: 0.2rem;
+		top: 0.5rem;
+		right: 0.5rem;
 		width: 1.6rem;
 		height: 1.6rem;
-		color: var(--am-clr-text-muted);
-		background-color: var(--am-clr-background-faded);
+		color: var(--am-clr-accent-text);
+		background-color: var(--am-clr-accent-background);
 		border-radius: 100%;
-		transition: color 0.2s;
+		opacity: 0;
+		transition: opacity 0.2s;
 		cursor: pointer;
 
 		&:after {
 			&:extend(.am-bi);
 			content: '\f62a';
-			font-size: 1.3rem !important;
+			font-size: 1.25rem !important;
 		}
 
-		&:hover {
-			color: var(--am-clr-text);
+		:hover > & {
+			opacity: 0.5;
 		}
+
+		&:hover,
+		&:active {
+			opacity: 0.8;
+		}
+	}
+
+	& > :last-child {
+		position: relative;
+		z-index: 2;
+		border-radius: 0;
+		border-bottom-left-radius: @am-card-radius;
+		border-bottom-right-radius: @am-card-radius;
 	}
 }

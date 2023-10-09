@@ -155,9 +155,12 @@ export const enum CSS {
 	imageCollection = 'am-c-image-collection',
 	imageCollectionGrid = 'am-c-image-collection__grid',
 	imageCollectionItem = 'am-c-image-collection__item',
+	imageCollectionItemDrag = 'am-c-image-collection__item--drag',
 	imageCollectionItemGhost = 'am-c-image-collection__item--ghost',
+	imageCollectionItemChosen = 'am-c-image-collection__item--chosen',
 	imageCollectionImage = 'am-c-image-collection__image',
 	imageCollectionDelete = 'am-c-image-collection__delete',
+	imageCollectionAdd = 'am-c-image-collection__add',
 
 	imagePicker = 'am-c-image-picker',
 	imagePickerImage = 'am-c-image-picker__image',
