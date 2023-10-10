@@ -140,16 +140,7 @@
 	font-size: 1.25rem;
 
 	&:before {
-		display: inline-block;
-		font-family: bootstrap-icons !important;
-		font-style: normal;
-		font-weight: normal !important;
-		font-variant: normal;
-		text-transform: none;
-		line-height: 1;
-		vertical-align: -0.125em;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
+		&:extend(.am-bi);
 	}
 
 	&:disabled {
@@ -158,7 +149,6 @@
 
 	&.heading:before {
 		content: '\F5F1';
-		font-size: 1.3rem;
 	}
 
 	&.bold:before {

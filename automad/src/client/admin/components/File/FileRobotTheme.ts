@@ -73,6 +73,6 @@ export const fileRobotTheme = {
 		info: 'var(--am-clr-text-paragraph)',
 	},
 	typography: {
-		fontFamily: 'Inter',
+		fontFamily: 'Inter Variable',
 	},
 };

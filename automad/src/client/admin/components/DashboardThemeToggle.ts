@@ -67,7 +67,7 @@ class DashboardThemeToggleComponent extends BaseComponent {
 		this.innerHTML = '';
 		this.renderThemeToggle(DashboardTheme.light, 'sun');
 		this.renderThemeToggle(DashboardTheme.dark, 'moon');
-		this.renderThemeToggle(DashboardTheme.lowContrast, 'brightness-low');
+		this.renderThemeToggle(DashboardTheme.lowContrast, 'moon-stars');
 
 		setTimeout(() => {
 			document.documentElement.classList.remove('am-u-no-transition');

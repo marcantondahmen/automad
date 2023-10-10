@@ -70,10 +70,12 @@ class FileCardComponent extends BaseComponent {
 
 		if (file.width && file.height) {
 			dimensions = html`
-				<am-icon-text
-					${Attr.icon}="aspect-ratio"
-					${Attr.text}="${file.width} ✗ ${file.height}"
-				></am-icon-text>
+				<div class="${CSS.iconText}">
+					<i class="bi bi-aspect-ratio"></i>
+					<span>
+						${file.width} <i class="bi bi-x-lg"></i> ${file.height}
+					</span>
+				</div>
 			`;
 		}
 
