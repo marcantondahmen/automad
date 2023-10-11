@@ -195,7 +195,7 @@ class UploadComponent extends BaseComponent {
 		const form = create(
 			'form',
 			[CSS.uploadDropzone],
-			{ action: `${App.baseURL}/api/FileCollection/upload` },
+			{ action: `${App.apiURL}/FileCollection/upload` },
 			this
 		);
 

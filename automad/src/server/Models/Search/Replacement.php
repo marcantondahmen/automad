@@ -122,7 +122,7 @@ class Replacement {
 	private function replaceInBlocksRecursively(array $blocks): array {
 		foreach ($blocks as $index => $block) {
 			if ($block->type == 'section') {
-				$block->data->content->blocks = $this->replaceInBlocksRecursively($block->data->content->blocks);
+				$block->data->content->blocks = $this->replaceInBlocksRecursively($block->data->content->blocks ?? array());
 			} else {
 				foreach ($block->data as $key => $value) {
 					if (Search::isValidBlockProperty($key)) {

@@ -42,7 +42,6 @@ import {
 	notifySuccess,
 	query,
 	remoteTrigger,
-	request,
 	requestAPI,
 	setSearchParam,
 	State,
