@@ -67,6 +67,11 @@ class Image {
 	public float $originalWidth = 0;
 
 	/**
+	 * The given image type.
+	 */
+	public string $type = '';
+
+	/**
 	 * The width of the generated image.
 	 */
 	public int $width = 0;
@@ -105,11 +110,6 @@ class Image {
 	 * The disired width of the new image. (May not be the resulting width, depending on cropping or original image size)
 	 */
 	private float $requestedWidth = 0;
-
-	/**
-	 * The given image type.
-	 */
-	private string $type = '';
 
 	/**
 	 * The constructor defines the main object properties from the given parameters and initiates the main methods.

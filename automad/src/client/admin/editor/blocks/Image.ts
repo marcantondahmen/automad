@@ -61,10 +61,10 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 */
 	static get sanitize() {
 		return {
-			url: false,
+			url: {},
 			link: false,
 			openInNewTab: false,
-			caption: true,
+			caption: {},
 		};
 	}
 

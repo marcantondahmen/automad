@@ -68,6 +68,28 @@ export const getSearchParam = (param: string): string => {
 };
 
 /**
+ * Build a resize url.
+ *
+ * @param url
+ * @param [width]
+ * @param [height]
+ * @return the generated URL
+ */
+export const resizeImageUrl = (
+	url: string,
+	width: number = 250,
+	height: number = 250
+): string => {
+	if (!url) {
+		return '';
+	}
+
+	const encoded = encodeURIComponent(resolveFileUrl(url));
+
+	return `${App.baseURL}/_resize?url=${encoded}&w=${width}&h=${height}`;
+};
+
+/**
  * Resolve a file URL.
  *
  * @param fileUrl

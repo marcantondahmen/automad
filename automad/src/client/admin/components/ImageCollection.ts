@@ -40,7 +40,7 @@ import {
 	fire,
 	html,
 	listen,
-	resolveFileUrl,
+	resizeImageUrl,
 } from '@/core';
 import Sortable from 'sortablejs';
 import { BaseComponent } from './Base';
@@ -107,7 +107,7 @@ export class ImageCollectionComponent extends BaseComponent {
 				grid,
 				html`
 					<img
-						src="${resolveFileUrl(url)}"
+						src="${resizeImageUrl(url)}"
 						class="${CSS.imageCollectionImage}"
 					/>
 				`

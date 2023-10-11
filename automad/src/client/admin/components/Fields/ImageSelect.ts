@@ -43,7 +43,7 @@ import {
 	fire,
 	html,
 	listen,
-	resolveFileUrl,
+	resizeImageUrl,
 } from '@/core';
 import { ImgComponent } from '../Img';
 import { BaseFieldComponent } from './BaseField';
@@ -108,7 +108,7 @@ class ImageSelectComponent extends BaseFieldComponent {
 		new Binding(previewBindingName, {
 			input,
 			modifier: (value: string): string => {
-				return resolveFileUrl(value).split('?')[0];
+				return resizeImageUrl(value.split('?')[0]);
 			},
 		});
 

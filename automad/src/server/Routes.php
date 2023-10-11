@@ -39,6 +39,7 @@ namespace Automad;
 use Automad\Admin\Dashboard;
 use Automad\API\RequestHandler;
 use Automad\API\Response;
+use Automad\Controllers\ImageController;
 use Automad\Controllers\PageController;
 use Automad\Core\Cache;
 use Automad\Core\Feed;
@@ -70,6 +71,7 @@ class Routes {
 	public static function init(Router $Router): void {
 		$isAuthenticatedUser = AM_PAGE_DASHBOARD && Session::getUsername();
 
+		self::registerResizeRoute($Router, $isAuthenticatedUser);
 		self::registerAPIRoutes($Router, $isAuthenticatedUser);
 		self::registerDashboardRoutes($Router, $isAuthenticatedUser);
 		self::registerFeedRoute($Router);
@@ -230,6 +232,20 @@ class Routes {
 		$Router->register(
 			'/.*',
 			array(PageController::class, 'render')
+		);
+	}
+
+	/**
+	 * Register image routes.
+	 *
+	 * @param Router $Router
+	 * @param bool $isAuthenticatedUser
+	 */
+	private static function registerResizeRoute(Router $Router, bool $isAuthenticatedUser): void {
+		$Router->register(
+			'/_resize',
+			array(ImageController::class, 'resize'),
+			$isAuthenticatedUser
 		);
 	}
 }
