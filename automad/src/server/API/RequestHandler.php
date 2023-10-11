@@ -58,7 +58,7 @@ class RequestHandler {
 	/**
 	 * The API base route.
 	 */
-	public static string $apiBase = '/api';
+	public static string $apiBase = '/_api';
 
 	/**
 	 * The controller namespace.

@@ -269,7 +269,7 @@ export class App {
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
 		App.baseURL = root.elementAttributes.base;
-		App.apiURL = `${App.baseURL}/api`;
+		App.apiURL = `${App.baseURL}/_api`;
 
 		const { data } = await requestAPI(`App/bootstrap`);
 		const state = State.getInstance();
