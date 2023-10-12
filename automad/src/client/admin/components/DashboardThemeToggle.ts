@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, EventName, html, listen, titleCase } from '@/core';
+import { Attr, create, CSS, EventName, html, listen, titleCase } from '@/core';
 import { DashboardTheme, getTheme, setTheme } from '@/core/theme';
 import { BaseComponent } from '@/components/Base';
 
@@ -46,7 +46,7 @@ class DashboardThemeToggleComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add('am-c-dashboard-theme-toggle');
+		this.classList.add(CSS.dashboardThemeToggle);
 		this.render();
 
 		this.addListener(
@@ -65,9 +65,9 @@ class DashboardThemeToggleComponent extends BaseComponent {
 		document.documentElement.classList.add('am-u-no-transition');
 
 		this.innerHTML = '';
-		this.renderThemeToggle(DashboardTheme.light, 'sun');
-		this.renderThemeToggle(DashboardTheme.dark, 'moon');
-		this.renderThemeToggle(DashboardTheme.lowContrast, 'moon-stars');
+		this.renderThemeToggle(DashboardTheme.light, 'sun-fill');
+		this.renderThemeToggle(DashboardTheme.dark, 'moon-stars');
+		this.renderThemeToggle(DashboardTheme.lowContrast, 'shadows');
 
 		setTimeout(() => {
 			document.documentElement.classList.remove('am-u-no-transition');
@@ -81,10 +81,10 @@ class DashboardThemeToggleComponent extends BaseComponent {
 	 * @param icon
 	 */
 	private renderThemeToggle = (theme: DashboardTheme, icon: string) => {
-		const cls: string[] = ['am-c-dashboard-theme-toggle__button'];
+		const cls: string[] = [CSS.dashboardThemeToggleButton];
 
 		if (theme == getTheme()) {
-			cls.push('am-c-dashboard-theme-toggle__button--active');
+			cls.push(CSS.dashboardThemeToggleButtonActive);
 		}
 
 		const tooltip = `${titleCase(theme.replace('-', ' '))} Theme`;
@@ -97,7 +97,7 @@ class DashboardThemeToggleComponent extends BaseComponent {
 			this
 		);
 
-		button.innerHTML = html`<i class="bi bi-${icon}"></i>`;
+		button.innerHTML = `<i class="bi bi-${icon}"></i>`;
 		listen(button, 'click', () => {
 			setTimeout(() => {
 				setTheme(theme);

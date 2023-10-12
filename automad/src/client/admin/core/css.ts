@@ -82,6 +82,10 @@ export const enum CSS {
 
 	cursorPointer = 'am-u-cursor-pointer',
 
+	dashboardThemeToggle = 'am-c-dashboard-theme-toggle',
+	dashboardThemeToggleButton = 'am-c-dashboard-theme-toggle__button',
+	dashboardThemeToggleButtonActive = 'am-c-dashboard-theme-toggle__button--active',
+
 	displayNone = 'am-u-display-none',
 	displaySmall = 'am-u-display-small',
 	displaySmallNone = 'am-u-display-small-none',
@@ -149,7 +153,7 @@ export const enum CSS {
 
 	iconText = 'am-c-icon-text',
 
-	iconLarge = 'am-bi-lg',
+	iconArrow = 'am-bi--arrow',
 
 	img = 'am-e-img',
 	imgError = 'am-e-img__error',

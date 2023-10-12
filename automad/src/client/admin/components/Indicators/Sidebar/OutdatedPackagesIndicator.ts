@@ -51,7 +51,7 @@ class SidebarOutdatedPackagesIndicatorComponent extends BaseUpdateIndicatorCompo
 
 		if (count) {
 			this.innerHTML = html`
-				<i class="bi bi-arrow-down-short ${CSS.iconLarge}"></i>
+				<i class="bi bi-arrow-down-short ${CSS.iconArrow}"></i>
 				${count}
 			`;
 		} else {

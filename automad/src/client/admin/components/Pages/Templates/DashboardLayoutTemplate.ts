@@ -219,7 +219,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						${Attr.tooltip}="${App.user.email}"
 						${Attr.tooltipOptions}="placement: top"
 					>
-						<i class="bi bi-person-circle"></i>
+						<i class="bi bi-person-fill"></i>
 						<span>${App.user.name}</span>
 					</span>
 					<span>&mdash;</span>

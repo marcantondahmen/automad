@@ -241,7 +241,7 @@ const createPreview = (
 			badgeCls.push(CSS.badgeMuted);
 		} else {
 			badgeText.push(
-				`<i class="bi bi-arrow-right-short ${CSS.iconLarge}"></i>`
+				`<i class="bi bi-arrow-right-short ${CSS.iconArrow}"></i>`
 			);
 			badgeText.push(pkg.latest);
 		}
