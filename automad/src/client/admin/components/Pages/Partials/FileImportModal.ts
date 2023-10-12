@@ -32,14 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, html } from '@/core';
+import { App, Attr, CSS, EventName, FileController, html } from '@/core';
 
 export const renderFileImportModal = (): string => {
 	return html`
 		<am-modal id="am-file-import-modal">
 			<div class="${CSS.modalDialog}">
 				<am-form
-					${Attr.api}="File/import"
+					${Attr.api}="${FileController.import}"
 					${Attr.event}="${EventName.filesChangeOnServer}"
 				>
 					<div class="${CSS.modalBody}">

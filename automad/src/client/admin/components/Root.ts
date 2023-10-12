@@ -51,6 +51,7 @@ import {
 	fire,
 	EventName,
 	Undo,
+	SessionController,
 } from '@/core';
 import { applyTheme, getTheme } from '@/core/theme';
 import { BaseComponent } from '@/components/Base';
@@ -180,7 +181,7 @@ export class RootComponent extends BaseComponent {
 	private async validateSession(): Promise<void> {
 		const stateChangeHandler = async (): Promise<void> => {
 			if (document.visibilityState === 'visible') {
-				const data = await requestAPI('Session/validate', {
+				const data = await requestAPI(SessionController.validate, {
 					// Send a random key/value pair in order to provide a valid POST request.
 					csrfTokenValidation: 1,
 				});

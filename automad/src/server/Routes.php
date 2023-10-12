@@ -108,7 +108,7 @@ class Routes {
 		);
 
 		$Router->register(
-			"$apiBase/(Session/login|Session/validate|App/bootstrap|User/resetPassword)",
+			"$apiBase/(session/login|session/validate|app/bootstrap|user/reset-password)",
 			function () {
 				return RequestHandler::getResponse();
 			},

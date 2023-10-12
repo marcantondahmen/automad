@@ -34,6 +34,7 @@
 
 export * from './app';
 export * from './bindings';
+export * from './controllers';
 export * from './css';
 export * from './events';
 export * from './factory';

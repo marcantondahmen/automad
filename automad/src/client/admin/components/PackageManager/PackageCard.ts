@@ -44,6 +44,7 @@ import {
 	listen,
 	notifyError,
 	notifySuccess,
+	PackageManagerController,
 	requestAPI,
 } from '@/core';
 import { Package } from '@/types';
@@ -59,7 +60,7 @@ const packageBrowser = 'https://packages.automad.org';
  */
 const getThumbnail = async (repository: string): Promise<string> => {
 	const response = await requestAPI(
-		'PackageManager/getThumbnail',
+		PackageManagerController.getThumbnail,
 		{
 			repository,
 		},
@@ -116,7 +117,7 @@ const createUpdateButton = (pkg: Package, container: HTMLElement): void => {
 	listen(button, 'click', () => {
 		performAction(
 			pkg,
-			'PackageManager/update',
+			PackageManagerController.update,
 			App.text('packageUpdating')
 		);
 	});
@@ -136,7 +137,7 @@ const createInstallButton = (pkg: Package, container: HTMLElement): void => {
 	listen(button, 'click', () => {
 		performAction(
 			pkg,
-			'PackageManager/install',
+			PackageManagerController.install,
 			App.text('packageInstalling')
 		);
 	});
@@ -156,7 +157,7 @@ const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
 	listen(button, 'click', () => {
 		performAction(
 			pkg,
-			'PackageManager/remove',
+			PackageManagerController.remove,
 			App.text('packageRemoving')
 		);
 	});

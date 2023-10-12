@@ -41,6 +41,7 @@ import {
 	listen,
 	notifyError,
 	notifySuccess,
+	PackageManagerController,
 	requestAPI,
 } from '@/core';
 import { BaseComponent } from '@/components/Base';
@@ -70,7 +71,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 			modal.open();
 
 			const { error, success } = await requestAPI(
-				'PackageManager/updateAll'
+				PackageManagerController.updateAll
 			);
 
 			if (error) {
@@ -91,7 +92,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 	 * Check if the button should be displayed.
 	 */
 	private async init(): Promise<void> {
-		const { data } = await requestAPI('PackageManager/getOutdated');
+		const { data } = await requestAPI(PackageManagerController.getOutdated);
 		const hasUpdates = data?.outdated?.length > 0;
 
 		this.classList.toggle(CSS.displayNone, !hasUpdates);

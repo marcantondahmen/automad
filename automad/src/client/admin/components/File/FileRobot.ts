@@ -43,6 +43,7 @@ import {
 	CSS,
 	EventName,
 	fire,
+	ImageController,
 	listen,
 } from '@/core';
 import { ModalComponent } from '@/components/Modal/Modal';
@@ -98,7 +99,7 @@ class FileRobotComponent extends BaseComponent {
 		const dialog = create(
 			'am-form',
 			[CSS.modalDialog, CSS.modalDialogFullscreen],
-			{ [Attr.api]: 'Image/save' },
+			{ [Attr.api]: ImageController.save },
 			modal
 		);
 

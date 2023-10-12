@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html } from '@/core';
+import { App, Attr, ConfigController, CSS, html } from '@/core';
 
 /**
  * Render the config file section.
@@ -49,7 +49,7 @@ export const renderConfigFileSection = (): string => {
 				<div>${App.text('systemConfigFileInfo')}</div>
 				<div>
 					<am-config-file-form
-						${Attr.api}="Config/file"
+						${Attr.api}="${ConfigController.file}"
 					></am-config-file-form>
 				</div>
 			</div>

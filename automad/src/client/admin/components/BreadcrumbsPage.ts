@@ -41,6 +41,7 @@ import {
 	CSS,
 	App,
 	Attr,
+	PageController,
 } from '@/core';
 import { KeyValueMap } from '@/types';
 import { BaseComponent } from '@/components/Base';
@@ -72,7 +73,7 @@ class BreadcrumbsPageComponent extends BaseComponent {
 		this.classList.add(CSS.breadcrumbs);
 
 		const url = getPageURL();
-		const response = await requestAPI('Page/breadcrumbs', { url });
+		const response = await requestAPI(PageController.breadcrumbs, { url });
 
 		this.render(response.data);
 	}

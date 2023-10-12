@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, html } from '@/core';
+import { App, Attr, ConfigController, CSS, EventName, html } from '@/core';
 
 /**
  * Render the feed section.
@@ -43,7 +43,7 @@ export const renderFeedSection = (): string => {
 	return html`
 		<am-form
 			class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
-			${Attr.api}="Config/update"
+			${Attr.api}="${ConfigController.update}"
 			${Attr.event}="${EventName.appStateRequireUpdate}"
 			${Attr.auto}
 		>

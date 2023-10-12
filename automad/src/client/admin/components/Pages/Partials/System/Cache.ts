@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, html } from '@/core';
+import {
+	App,
+	Attr,
+	CacheController,
+	ConfigController,
+	CSS,
+	EventName,
+	html,
+} from '@/core';
 
 /**
  * Render the cache section.
@@ -44,7 +52,7 @@ export const renderCacheSection = (): string => {
 		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
 			<am-form
 				class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
-				${Attr.api}="Config/update"
+				${Attr.api}="${ConfigController.update}"
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 				${Attr.auto}
 			>
@@ -60,13 +68,19 @@ export const renderCacheSection = (): string => {
 					<am-cache-lifetime></am-cache-lifetime>
 				</div>
 			</am-form>
-			<am-form class="am-cache-settings" ${Attr.api}="Cache/clear">
+			<am-form
+				class="am-cache-settings"
+				${Attr.api}="${CacheController.clear}"
+			>
 				<p>${App.text('systemCacheClearInfo')}</p>
 				<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 					${App.text('systemCacheClear')}
 				</am-submit>
 			</am-form>
-			<am-form class="am-cache-settings" ${Attr.api}="Cache/purge">
+			<am-form
+				class="am-cache-settings"
+				${Attr.api}="${CacheController.purge}"
+			>
 				<p>${App.text('systemCachePurgeInfo')}</p>
 				<am-submit class="${CSS.button}">
 					${App.text('systemCachePurge')}

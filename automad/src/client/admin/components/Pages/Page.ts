@@ -36,9 +36,11 @@ import {
 	App,
 	Attr,
 	CSS,
+	FileCollectionController,
 	getPageURL,
 	getTagFromRoute,
 	html,
+	PageController,
 	Route,
 } from '@/core';
 import { HistoryModalFormComponent } from '@/components/Forms/HistoryModalForm';
@@ -68,7 +70,7 @@ const renderMovePageModal = (): string => {
 	return html`
 		<am-modal id="am-move-page-modal">
 			<div class="${CSS.modalDialog}">
-				<am-form ${Attr.api}="Page/move">
+				<am-form ${Attr.api}="${PageController.move}">
 					<div class="${CSS.modalHeader}">
 						<span>${App.text('movePage')}</span>
 						<am-modal-close
@@ -106,7 +108,7 @@ const renderDropdown = (): string => {
 
 	if (getPageURL() != '/') {
 		subpageItems = html`
-			<am-form ${Attr.api}="Page/duplicate">
+			<am-form ${Attr.api}="${PageController.duplicate}">
 				<am-submit class="${CSS.dropdownLink}">
 					<am-icon-text
 						${Attr.icon}="files"
@@ -133,7 +135,7 @@ const renderDropdown = (): string => {
 				></am-icon-text>
 			</am-copy>
 			<am-form
-				${Attr.api}="Page/delete"
+				${Attr.api}="${PageController.delete}"
 				${Attr.confirm}="${App.text('confirmDeletePage')}"
 			>
 				<am-submit class="${CSS.dropdownLink}">
@@ -294,7 +296,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 			<section class="${CSS.layoutDashboardSection}">
 				<div class="${CSS.layoutDashboardContent}">
 					<am-page-data-form
-						${Attr.api}="Page/data"
+						${Attr.api}="${PageController.data}"
 					></am-page-data-form>
 					<am-switcher-section name="${Section.files}">
 						<am-upload></am-upload>
@@ -307,7 +309,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 							</am-modal-toggle>
 							<am-file-collection-submit
 								class="${CSS.button} ${CSS.buttonPrimary}"
-								${Attr.form}="FileCollection/list"
+								${Attr.form}="${FileCollectionController.list}"
 							>
 								${App.text('deleteSelected')}
 							</am-file-collection-submit>
@@ -316,7 +318,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 							${Attr.confirm}="${App.text(
 								'confirmDeleteSelectedFiles'
 							)}"
-							${Attr.api}="FileCollection/list"
+							${Attr.api}="${FileCollectionController.list}"
 						></am-file-collection-list-form>
 					</am-switcher-section>
 				</div>

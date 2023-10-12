@@ -68,7 +68,7 @@ const debounced = debounce(
  * A basic form.
  *
  * The following options are available and can be passed as attributes:
- * - Attr.api (required) - the API endpoint
+ * - Attr.api (required) - the API endpoint controller
  * - Attr.focus - focus first input when connected
  * - Attr.enter - submit using enter key
  * - Attr.confirm - require confirmation before submitting
@@ -79,14 +79,14 @@ const debounced = debounce(
  * Focus the first input of a for when being connected:
  *
  * @example
- * <am-form ${Attr.api}="Class/method" ${Attr.focus}>
+ * <am-form ${Attr.api}="Controller::method" ${Attr.focus}>
  *     <input>
  * </am-form>
  *
  * Fire an event on the window after getting a response from the server:
  *
  * @example
- * <am-form ${Attr.api}="File/import" ${Attr.event}="FileCollectionUpdate">
+ * <am-form ${Attr.api}="FileController::import" ${Attr.event}="FileCollectionUpdate">
  *     <input>
  * </am-form>
  *

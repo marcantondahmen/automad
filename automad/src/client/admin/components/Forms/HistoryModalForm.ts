@@ -44,6 +44,7 @@ import {
 	getPageURL,
 	createSelect,
 	Attr,
+	HistoryController,
 } from '@/core';
 import { SelectComponentOption } from '@/types';
 import { BaseComponent } from '@/components/Base';
@@ -77,7 +78,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 			html`
 				<am-form
 					class="${CSS.modalDialog}"
-					${Attr.api}="History/restore"
+					${Attr.api}="${HistoryController.restore}"
 					${confirm}
 				>
 					<div class="${CSS.modalHeader}">
@@ -121,7 +122,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 		const lang = navigator.language;
 		container.innerHTML = '<am-spinner></am-spinner>';
 
-		const { data } = await requestAPI('History/log', {
+		const { data } = await requestAPI(HistoryController.log, {
 			url: getPageURL(),
 		});
 

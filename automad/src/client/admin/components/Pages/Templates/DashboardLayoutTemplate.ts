@@ -39,7 +39,9 @@ import {
 	CSS,
 	FieldTag,
 	html,
+	PageController,
 	Route,
+	SessionController,
 	titleCase,
 } from '@/core';
 import { Partials } from '@/types';
@@ -130,10 +132,9 @@ export const dashboardLayout = ({ main }: Partials) => {
 									<i class="bi bi-people"></i>
 									<span>${App.text('systemUsers')}</span>
 								</am-link>
-								<am-form ${Attr.api}="Session/logout"></am-form>
 								<am-submit
 									class="${CSS.dropdownLink}"
-									${Attr.form}="Session/logout"
+									${Attr.form}="${SessionController.logout}"
 								>
 									<i class="bi bi-box-arrow-right"></i>
 									<span>
@@ -197,10 +198,9 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</am-modal-toggle>
 					</span>
 					<span class="${CSS.navItem}">
-						<am-form ${Attr.api}="Session/logout"></am-form>
 						<am-submit
 							class="${CSS.navLink}"
-							${Attr.form}="Session/logout"
+							${Attr.form}="${SessionController.logout}"
 						>
 							<i class="bi bi-box-arrow-right"></i>
 							<span>
@@ -232,12 +232,14 @@ export const dashboardLayout = ({ main }: Partials) => {
 				</div>
 			</footer>
 		</div>
+		<!-- Sign out form -->
+		<am-form ${Attr.api}="${SessionController.logout}"></am-form>
 		<!-- Jumpbar Modal -->
 		<am-modal-jumpbar id="am-jumpbar-modal"></am-modal-jumpbar>
 		<!-- New Page Modal -->
 		<am-modal id="am-add-page-modal">
 			<div class="${CSS.modalDialog}">
-				<am-form ${Attr.api}="Page/add">
+				<am-form ${Attr.api}="${PageController.add}">
 					<div class="${CSS.modalHeader}">
 						<span>${App.text('addPage')}</span>
 						<am-modal-close

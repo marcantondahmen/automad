@@ -40,6 +40,7 @@ import {
 	CSS,
 	EventName,
 	FieldTag,
+	FileController,
 	html,
 	listen,
 } from '@/core';
@@ -103,7 +104,7 @@ export class FileInfoComponent extends BaseComponent {
 	protected renderModal(file: File): string {
 		return html`
 			<am-form
-				${Attr.api}="File/editInfo"
+				${Attr.api}="${FileController.editInfo}"
 				${Attr.event}="${EventName.filesChangeOnServer}"
 				class="${CSS.modalDialog}"
 			>

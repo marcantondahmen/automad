@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, getTagFromRoute, html, Route } from '@/core';
+import {
+	App,
+	Attr,
+	getTagFromRoute,
+	html,
+	Route,
+	UserController,
+} from '@/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
@@ -56,7 +63,7 @@ export class ResetPasswordComponent extends BaseCenteredLayoutComponent {
 	protected renderMainPartial(): string {
 		return html`
 			<am-reset-password-form
-				${Attr.api}="User/resetPassword"
+				${Attr.api}="${UserController.resetPassword}"
 			></am-reset-password-form>
 		`;
 	}

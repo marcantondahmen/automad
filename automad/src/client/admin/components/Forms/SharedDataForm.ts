@@ -71,7 +71,7 @@ const createBindings = (response: KeyValueMap): SharedBindings => {
  * The shared data form element.
  *
  * @example
- * <am-shared-data-form ${Attr.api}="Shared/data"></am-shared-data-form>
+ * <am-shared-data-form ${Attr.api}="SharedController::data"></am-shared-data-form>
  *
  * @extends FormComponent
  */

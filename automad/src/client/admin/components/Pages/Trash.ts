@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, getTagFromRoute, html, Route } from '@/core';
+import {
+	App,
+	Attr,
+	CSS,
+	getTagFromRoute,
+	html,
+	PageTrashController,
+	Route,
+} from '@/core';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
@@ -68,7 +76,7 @@ export class TrashComponent extends BaseDashboardLayoutComponent {
 				>
 					<am-filter placeholder="trashFilter"></am-filter>
 					<am-form
-						${Attr.api}="PageTrash/clear"
+						${Attr.api}="${PageTrashController.clear}"
 						${Attr.confirm}="${App.text('trashClearConfirm')}"
 					>
 						<am-submit class="${CSS.button}">

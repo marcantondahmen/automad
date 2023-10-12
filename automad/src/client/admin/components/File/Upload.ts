@@ -38,6 +38,7 @@ import {
 	Attr,
 	create,
 	CSS,
+	FileCollectionController,
 	getCsrfToken,
 	getPageURL,
 	html,
@@ -195,7 +196,7 @@ class UploadComponent extends BaseComponent {
 		const form = create(
 			'form',
 			[CSS.uploadDropzone],
-			{ action: `${App.apiURL}/FileCollection/upload` },
+			{ action: `${App.apiURL}/${FileCollectionController.upload}` },
 			this
 		);
 

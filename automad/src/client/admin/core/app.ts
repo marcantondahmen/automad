@@ -34,17 +34,20 @@
 
 import { RootComponent } from '@/components/Root';
 import {
+	AppController,
 	deleteSearchParam,
 	EventName,
 	fire,
 	getSearchParam,
 	listen,
 	notifySuccess,
+	PackageManagerController,
 	query,
 	remoteTrigger,
 	requestAPI,
 	setSearchParam,
 	State,
+	SystemController,
 } from '.';
 import {
 	InputElement,
@@ -271,7 +274,7 @@ export class App {
 		App.baseURL = root.elementAttributes.base;
 		App.apiURL = `${App.baseURL}/_api`;
 
-		const { data } = await requestAPI(`App/bootstrap`);
+		const { data } = await requestAPI(AppController.bootstrap);
 		const state = State.getInstance();
 
 		state.bootstrap(root, data);
@@ -283,13 +286,15 @@ export class App {
 		);
 
 		setTimeout(async () => {
-			const { success } = await requestAPI('App/getLanguagePacks');
+			const { success } = await requestAPI(
+				AppController.getLanguagePacks
+			);
 
 			if (success) {
 				notifySuccess(success, -1);
 			}
 
-			remoteTrigger('PackageManager/preFetchThumbnails');
+			remoteTrigger(PackageManagerController.preFetchThumbnails);
 		}, 2000);
 	}
 
@@ -300,7 +305,11 @@ export class App {
 	 * @static
 	 */
 	static async updateState(): Promise<void> {
-		const response = await requestAPI('App/updateState', null, false);
+		const response = await requestAPI(
+			AppController.updateState,
+			null,
+			false
+		);
 		const state = State.getInstance();
 
 		state.update(response.data);
@@ -390,7 +399,7 @@ export class App {
 	 */
 	static async checkForSystemUpdate(): Promise<void> {
 		const response = await requestAPI(
-			'System/checkForUpdate',
+			SystemController.checkForUpdate,
 			null,
 			true,
 			null,
@@ -410,7 +419,7 @@ export class App {
 	 */
 	static async checkForOutdatedPackages(): Promise<void> {
 		const { data } = await requestAPI(
-			'PackageManager/getOutdated',
+			PackageManagerController.getOutdated,
 			null,
 			true,
 			null,

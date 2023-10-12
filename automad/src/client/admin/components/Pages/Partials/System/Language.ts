@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, EventName, html } from '@/core';
+import { App, Attr, ConfigController, EventName, html } from '@/core';
 
 /**
  * Render the cache section.
@@ -42,7 +42,7 @@ import { App, Attr, EventName, html } from '@/core';
 export const renderLanguageSection = (): string => {
 	return html`
 		<am-form
-			${Attr.api}="Config/update"
+			${Attr.api}="${ConfigController.update}"
 			${Attr.event}="${EventName.appStateRequireUpdate}"
 			${Attr.auto}
 		>

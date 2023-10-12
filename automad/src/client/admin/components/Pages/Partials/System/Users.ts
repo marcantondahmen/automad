@@ -32,7 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, CSS, EventName, FieldTag, html } from '@/core';
+import {
+	App,
+	Attr,
+	createField,
+	CSS,
+	EventName,
+	FieldTag,
+	html,
+	UserCollectionController,
+	UserController,
+} from '@/core';
 
 /**
  * Render the user section.
@@ -43,7 +53,7 @@ export const renderUsersSection = (): string => {
 	return html`
 		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
 			<am-form
-				${Attr.api}="User/edit"
+				${Attr.api}="${UserController.edit}"
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 				${Attr.watch}
 			>
@@ -123,7 +133,7 @@ export const renderUsersSection = (): string => {
 		<am-modal id="am-change-password-modal">
 			<am-form
 				class="${CSS.modalDialog}"
-				${Attr.api}="User/changePassword"
+				${Attr.api}="${UserController.changePassword}"
 			>
 				<div class="${CSS.modalHeader}">
 					<span>${App.text('systemUsersChangePassword')}</span>
@@ -185,7 +195,7 @@ export const renderUsersSection = (): string => {
 				</div>
 				<div class="${CSS.modalBody}">
 					<am-delete-users-form
-						${Attr.api}="UserCollection/edit"
+						${Attr.api}="${UserCollectionController.edit}"
 						${Attr.event}="${EventName.appStateRequireUpdate}"
 					></am-delete-users-form>
 				</div>
@@ -195,7 +205,7 @@ export const renderUsersSection = (): string => {
 					</am-modal-close>
 					<am-submit
 						class="${CSS.button} ${CSS.buttonAccent}"
-						${Attr.form}="UserCollection/edit"
+						${Attr.form}="${UserCollectionController.edit}"
 					>
 						${App.text('deleteSelected')}
 					</am-submit>
@@ -205,7 +215,7 @@ export const renderUsersSection = (): string => {
 		<am-modal id="am-add-user-modal">
 			<am-form
 				class="${CSS.modalDialog}"
-				${Attr.api}="UserCollection/createUser"
+				${Attr.api}="${UserCollectionController.createUser}"
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
 				<div class="${CSS.modalHeader}">
@@ -279,7 +289,7 @@ export const renderUsersSection = (): string => {
 		<am-modal id="am-invite-user-modal">
 			<am-form
 				class="${CSS.modalDialog}"
-				${Attr.api}="UserCollection/inviteUser"
+				${Attr.api}="${UserCollectionController.inviteUser}"
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
 				<div class="${CSS.modalHeader}">

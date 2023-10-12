@@ -69,8 +69,8 @@ class RequestHandler {
 	 * An array of routes that are excluded from CSRF token validation.
 	 */
 	private static array $validationExcluded = array(
-		'Session/login',
-		'User/resetPassword'
+		'SessionController::login',
+		'UserController::resetPassword'
 	);
 
 	/**
@@ -81,21 +81,19 @@ class RequestHandler {
 	public static function getResponse(): string {
 		header('Content-Type: application/json; charset=utf-8');
 
-		$apiRoute = trim(Str::stripStart(AM_REQUEST, self::$apiBase), '/');
+		$controller = self::routeController(AM_REQUEST);
 
-		Debug::log($apiRoute);
+		[$class, $method] = explode('::', $controller);
 
-		$method = self::$controllerNamespace . str_replace('/', 'Controller::', $apiRoute);
-		$parts = explode('::', $method);
-		$class = $parts[0];
+		Debug::log($controller, AM_REQUEST);
 
-		if (!empty($parts[1]) && self::classFileExists($class) && method_exists($class, $parts[1])) {
+		if (self::classFileExists($class) && method_exists($class, $method)) {
 			$Messenger = new Messenger();
 
-			if (self::validate($apiRoute, $Messenger)) {
+			if (self::validate($controller, $Messenger)) {
 				self::registerControllerErrorHandler();
 				self::convertJsonPost();
-				$Response = call_user_func($method);
+				$Response = call_user_func($controller);
 			} else {
 				$Response = new Response();
 				$Response->setCode(403);
@@ -104,7 +102,7 @@ class RequestHandler {
 		} else {
 			$Response = new Response();
 			$Response->setCode(404);
-			$Response->setError('Invalid API route: ' . $apiRoute);
+			$Response->setError('Invalid API route: ' . AM_REQUEST . ' [' . $controller . ']');
 		}
 
 		$Response->setDebug(Debug::getLog());
@@ -157,14 +155,30 @@ class RequestHandler {
 	}
 
 	/**
-	 * Validate request by checking the CSRF token in case of a post request.
+	 * Convert a route into a controller name.
 	 *
 	 * @param string $route
+	 * @return string the controller name
+	 */
+	private static function routeController(string $route): string {
+		$route = str_replace(self::$apiBase . '/', '', $route);
+		[$class, $method] = explode('/', $route);
+
+		$class = self::$controllerNamespace . str_replace(' ', '', ucwords(str_replace('-', ' ', $class))) . 'Controller';
+		$method = lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $method))));
+
+		return "$class::$method";
+	}
+
+	/**
+	 * Validate request by checking the CSRF token in case of a post request.
+	 *
+	 * @param string $controller
 	 * @param Messenger $Messenger
 	 * @return bool true if the request is valid
 	 */
-	private static function validate(string $route, Messenger $Messenger): bool {
-		if (in_array($route, self::$validationExcluded)) {
+	private static function validate(string $controller, Messenger $Messenger): bool {
+		if (in_array(Str::stripStart($controller, self::$controllerNamespace), self::$validationExcluded)) {
 			return true;
 		}
 

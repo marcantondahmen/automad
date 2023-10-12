@@ -40,8 +40,8 @@ import { FormComponent } from '@/components/Forms/Form';
  * The file collection form component.
  *
  * @example
- * <am-file-collection-list-form ${Attr.api}="FileCollection/list"></am-file-collection-list-form>
- * <am-submit ${Attr.form}="FileCollection/list">Submit</am-submit>
+ * <am-file-collection-list-form ${Attr.api}="FileCollectionController::list"></am-file-collection-list-form>
+ * <am-submit ${Attr.form}="FileCollectionController::list">Submit</am-submit>
  *
  * @extends FormComponent
  */

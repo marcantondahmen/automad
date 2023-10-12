@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, requestAPI } from '@/core';
+import {
+	App,
+	Attr,
+	create,
+	CSS,
+	html,
+	PageTrashController,
+	requestAPI,
+} from '@/core';
 import { DeletedPageMetaData } from '@/types';
 import { BaseComponent } from '@/components/Base';
 
@@ -72,7 +80,9 @@ const createCard = (
 					>
 						<i class="bi bi-three-dots"></i>
 						<div class="${CSS.dropdownItems}">
-							<am-form ${Attr.api}="PageTrash/restore">
+							<am-form
+								${Attr.api}="${PageTrashController.restore}"
+							>
 								<input
 									type="hidden"
 									name="path"
@@ -84,7 +94,7 @@ const createCard = (
 								</am-submit>
 							</am-form>
 							<am-form
-								${Attr.api}="PageTrash/permanentlyDelete"
+								${Attr.api}="${PageTrashController.permanentlyDelete}"
 								${Attr.confirm}="${App.text(
 									'trashPermanentlyDeleteConfirm'
 								)}"
@@ -128,7 +138,7 @@ export class TrashFormComponent extends BaseComponent {
 	async init(): Promise<void> {
 		this.innerHTML = '';
 
-		const { data } = await requestAPI('PageTrash/list');
+		const { data } = await requestAPI(PageTrashController.list);
 		const container = create(
 			'div',
 			[CSS.flex, CSS.flexColumn, CSS.flexGap],

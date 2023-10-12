@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, EventName, listen, requestAPI } from '@/core';
+import {
+	create,
+	CSS,
+	EventName,
+	listen,
+	PackageManagerController,
+	requestAPI,
+} from '@/core';
 import { KeyValueMap, Package } from '@/types';
 import { BaseComponent } from '@/components/Base';
 
@@ -42,7 +49,9 @@ import { BaseComponent } from '@/components/Base';
  * @returns the list of package objects
  */
 const getPackages = async (): Promise<Package[]> => {
-	const { data } = await requestAPI('PackageManager/getPackageCollection');
+	const { data } = await requestAPI(
+		PackageManagerController.getPackageCollection
+	);
 
 	if (!data) {
 		return [];

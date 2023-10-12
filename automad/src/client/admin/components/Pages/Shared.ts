@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, getTagFromRoute, html, Route } from '@/core';
+import {
+	App,
+	Attr,
+	CSS,
+	FileCollectionController,
+	getTagFromRoute,
+	html,
+	Route,
+	SharedController,
+} from '@/core';
 import { Section } from '@/components/Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
@@ -143,7 +152,7 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 			<section class="${CSS.layoutDashboardSection}">
 				<div class="${CSS.layoutDashboardContent}">
 					<am-shared-data-form
-						${Attr.api}="Shared/data"
+						${Attr.api}="${SharedController.data}"
 					></am-shared-data-form>
 					<am-switcher-section name="${Section.files}">
 						<am-upload></am-upload>
@@ -156,7 +165,7 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 							</am-modal-toggle>
 							<am-file-collection-submit
 								class="${CSS.button} ${CSS.buttonPrimary}"
-								${Attr.form}="FileCollection/list"
+								${Attr.form}="${FileCollectionController.list}"
 							>
 								${App.text('deleteSelected')}
 							</am-file-collection-submit>
@@ -165,7 +174,7 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 							${Attr.confirm}="${App.text(
 								'confirmDeleteSelectedFiles'
 							)}"
-							${Attr.api}="FileCollection/list"
+							${Attr.api}="${FileCollectionController.list}"
 						></am-file-collection-list-form>
 					</am-switcher-section>
 				</div>

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, html } from '@/core';
+import { Attr, html, SystemController } from '@/core';
 
 /**
  * Render the update section.
@@ -42,6 +42,6 @@ import { Attr, html } from '@/core';
  */
 export const renderUpdateSection = (): string => {
 	return html`<am-system-update-form
-		${Attr.api}="System/update"
+		${Attr.api}="${SystemController.update}"
 	></am-system-update-form>`;
 };

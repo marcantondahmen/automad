@@ -172,13 +172,13 @@ export const request = async (
 };
 
 /**
- * Send a request to an API endpoint such as `Page/data`.
+ * Send a request to an API endpoint such as `page/data`.
  * Optionally execute a callback function that takes the response data as argument.
  * This is useful, in case the execution of the callback is critical and
  * has to be within the timespan of a pending request.
  *
  * @see {@link request}
- * @param route
+ * @param controller
  * @param [dataOrForm]
  * @param [parallel]
  * @param [callback]
@@ -187,7 +187,7 @@ export const request = async (
  * @async
  */
 export const requestAPI = async (
-	route: string,
+	controller: string,
 	dataOrForm: KeyValueMap | FormComponent = null,
 	parallel: boolean = true,
 	callback: Function = null,
@@ -221,6 +221,8 @@ export const requestAPI = async (
 		abortListener.remove();
 	});
 
+	const route = controllerRoute(controller);
+
 	try {
 		const response = await request(
 			`${App.apiURL}/${route}`,
@@ -246,18 +248,39 @@ export const requestAPI = async (
 
 	const log = getLogger();
 
-	log.request(route, data);
-	log.response(route, responseData);
+	log.request(controller, data);
+	log.response(controller, responseData);
 
 	return responseData;
 };
 
 /**
+ * Convert a controller name into a valid route.
+ *
+ * @param controller
+ * @return the route
+ */
+const controllerRoute = (controller: string): string => {
+	const [controllerClass, method] = controller.split('::');
+	const convert = (part: string) => {
+		return part
+			.replace(/([A-Z])/g, ' $1')
+			.trim()
+			.toLowerCase()
+			.replace(/\s/g, '-');
+	};
+
+	return `${convert(controllerClass.replace('Controller', ''))}/${convert(
+		method
+	)}`;
+};
+
+/**
  * Call a endpoint in order to trigger a remote background process.
  *
- * @param route
+ * @param controller
  */
-export const remoteTrigger = async (route: string) => {
+export const remoteTrigger = async (controller: string) => {
 	const abortController = new AbortController();
 
 	try {
@@ -265,7 +288,11 @@ export const remoteTrigger = async (route: string) => {
 			abortController.abort();
 		}, 50);
 
-		await request(`${App.apiURL}/${route}`, null, abortController.signal);
+		await request(
+			`${App.apiURL}/${controllerRoute(controller)}`,
+			null,
+			abortController.signal
+		);
 	} catch {}
 };
 

@@ -145,8 +145,8 @@ const updateUI = async (
  * A page data form element.
  *
  * @example
- * <am-page-data-form ${Attr.api}="Page/data"></am-page-data-form>
- * <am-submit ${Attr.form}="Page/data">Submit</am-submit>
+ * <am-page-data-form ${Attr.api}="PageController::data"></am-page-data-form>
+ * <am-submit ${Attr.form}="PageController::data">Submit</am-submit>
  *
  * @extends FormComponent
  */

@@ -47,6 +47,7 @@ import {
 	queryAll,
 	requestAPI,
 	Route,
+	SearchController,
 } from '@/core';
 import { FieldResults, FileResults, KeyValueMap } from '@/types';
 import { BaseComponent } from '@/components/Base';
@@ -126,7 +127,7 @@ export class SearchFormComponent extends BaseComponent {
 	 * Get the api attribute already before attributes are observed.
 	 */
 	protected get api(): string {
-		return 'Search/searchReplace';
+		return SearchController.searchReplace;
 	}
 
 	/**

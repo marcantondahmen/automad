@@ -51,6 +51,7 @@ import {
 	html,
 	listen,
 	notifyError,
+	PageController,
 	query,
 	queryAll,
 	requestAPI,
@@ -139,7 +140,7 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 		const lockId = App.addNavigationLock();
 		const targetPage = newParent.url;
 
-		const data = await requestAPI('Page/move', {
+		const data = await requestAPI(PageController.move, {
 			url,
 			targetPage,
 			layout: JSON.stringify(layout),
@@ -155,7 +156,7 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 	const lockId = App.addNavigationLock();
 	const parentPath = newParent.path;
 
-	const data = await requestAPI('Page/updateIndex', {
+	const data = await requestAPI(PageController.updateIndex, {
 		url,
 		parentPath,
 		layout: JSON.stringify(layout),
