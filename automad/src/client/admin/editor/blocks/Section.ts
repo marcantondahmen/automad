@@ -123,7 +123,7 @@ export const sectionBorderStyles = [
 	'double',
 	'groove',
 	'ridge',
-];
+] as const;
 
 /**
  * Section style defaults.

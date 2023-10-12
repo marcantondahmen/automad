@@ -64,7 +64,7 @@ class ImageCollection {
 		);
 
 		foreach ($globGrep as $file) {
-			$image = new Image($file, 500, 500);
+			$image = new Image($file, 250, 250);
 
 			$item = array();
 			$item['name'] = basename($file);
