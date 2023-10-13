@@ -155,7 +155,7 @@ export abstract class BaseModalTune<DataType> {
 			container,
 			html`
 				<div class="${CSS.modalDialog}">
-					<div class="${CSS.modalBody}"></div>
+					<am-modal-body></am-modal-body>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonAccent}"
@@ -167,7 +167,7 @@ export abstract class BaseModalTune<DataType> {
 			`
 		) as ModalComponent;
 
-		const body = query(`.${CSS.modalBody}`, modal);
+		const body = query('am-modal-body', modal);
 
 		const onChange = debounce(() => {
 			this.data = this.sanitize(this.getFormData(modal));

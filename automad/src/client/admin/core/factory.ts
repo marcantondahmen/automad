@@ -242,7 +242,7 @@ export const createImagePickerModal = (
 		modal,
 		html`
 			<am-modal-header>${label}</am-modal-header>
-			<div class="${CSS.modalBody}">
+			<am-modal-body>
 				<span class="${CSS.formGroup}">
 					<input
 						id="${idUrl}"
@@ -294,7 +294,7 @@ export const createImagePickerModal = (
 					${Attr.label}="${App.text('sharedImages')}"
 					${Attr.binding}="${pickerBindingName}"
 				></am-image-picker>
-			</div>
+			</am-modal-body>
 		`
 	);
 
@@ -334,7 +334,7 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 		html`<am-modal-header>$${label}</am-modal-header>`
 	);
 
-	const body = create('div', [CSS.modalBody], {}, dialog);
+	const body = create('am-modal-body', [], {}, dialog);
 	const footer = create('div', [CSS.modalFooter], {}, dialog);
 	const binding = Bindings.get(bindingName);
 

@@ -110,7 +110,7 @@ export class FileInfoComponent extends BaseComponent {
 			>
 				<am-modal-header>${App.text('editFileInfo')}</am-modal-header>
 				<input type="hidden" name="old-name" value="${file.basename}" />
-				<div class="${CSS.modalBody}">
+				<am-modal-body>
 					${createField(
 						FieldTag.input,
 						null,
@@ -133,7 +133,7 @@ export class FileInfoComponent extends BaseComponent {
 						},
 						[]
 					).outerHTML}
-				</div>
+				</am-modal-body>
 				<div class="${CSS.modalFooter}">
 					<a
 						href="${file.url}"

@@ -154,9 +154,9 @@ export class SystemUpdateFormComponent extends FormComponent {
 
 		modal.innerHTML = html`
 			<div class="${CSS.modalDialog}">
-				<div class="${CSS.modalBody}">
+				<am-modal-body>
 					${App.text('systemUpdateSuccess')}
-				</div>
+				</am-modal-body>
 				<div class="${CSS.modalFooter}">
 					<a
 						href="${App.dashboardURL}"

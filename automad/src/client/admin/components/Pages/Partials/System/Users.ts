@@ -138,7 +138,7 @@ export const renderUsersSection = (): string => {
 				<am-modal-header>
 					${App.text('systemUsersChangePassword')}
 				</am-modal-header>
-				<div class="${CSS.modalBody}">
+				<am-modal-body>
 					${createField(
 						FieldTag.password,
 						null,
@@ -175,7 +175,7 @@ export const renderUsersSection = (): string => {
 						[],
 						{}
 					).outerHTML}
-				</div>
+				</am-modal-body>
 				<div class="${CSS.modalFooter}">
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
@@ -191,12 +191,12 @@ export const renderUsersSection = (): string => {
 				<am-modal-header>
 					${App.text('systemUsersRegistered')}
 				</am-modal-header>
-				<div class="${CSS.modalBody}">
+				<am-modal-body>
 					<am-delete-users-form
 						${Attr.api}="${UserCollectionController.edit}"
 						${Attr.event}="${EventName.appStateRequireUpdate}"
 					></am-delete-users-form>
-				</div>
+				</am-modal-body>
 				<div class="${CSS.modalFooter}">
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
@@ -219,7 +219,7 @@ export const renderUsersSection = (): string => {
 				<am-modal-header>
 					${App.text('systemUsersAdd')}
 				</am-modal-header>
-				<div class="${CSS.modalBody}">
+				<am-modal-body>
 					${createField(
 						FieldTag.input,
 						null,
@@ -272,7 +272,7 @@ export const renderUsersSection = (): string => {
 						[],
 						{}
 					).outerHTML}
-				</div>
+				</am-modal-body>
 				<div class="${CSS.modalFooter}">
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
@@ -292,7 +292,7 @@ export const renderUsersSection = (): string => {
 				<am-modal-header>
 					${App.text('systemUsersInvite')}
 				</am-modal-header>
-				<div class="${CSS.modalBody}">
+				<am-modal-body>
 					${createField(
 						FieldTag.input,
 						null,
@@ -319,7 +319,7 @@ export const renderUsersSection = (): string => {
 						[],
 						{}
 					).outerHTML}
-				</div>
+				</am-modal-body>
 				<div class="${CSS.modalFooter}">
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}

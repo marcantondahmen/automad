@@ -84,9 +84,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 					<am-modal-header>
 						${App.text('pageHistory')}
 					</am-modal-header>
-					<div
-						class="${CSS.modalBody} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
-					></div>
+					<am-modal-body class="${CSS.flexGapLarge}"></am-modal-body>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonPrimary}"
@@ -100,7 +98,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 			`
 		);
 
-		const body = query(`.${CSS.modalBody}`, modal);
+		const body = query('am-modal-body', modal);
 
 		this.addListener(
 			listen(modal, EventName.modalOpen, () => {

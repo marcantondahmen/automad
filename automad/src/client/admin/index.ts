@@ -96,6 +96,7 @@ import './components/Indicators/System/SystemUpdateIndicator';
 import './components/Indicators/System/UserCountIndicator';
 
 import './components/Modal/Modal';
+import './components/Modal/ModalBody';
 import './components/Modal/ModalClose';
 import './components/Modal/ModalHeader';
 import './components/Modal/ModalField';

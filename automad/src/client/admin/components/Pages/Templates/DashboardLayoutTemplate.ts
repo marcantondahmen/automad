@@ -241,7 +241,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 			<div class="${CSS.modalDialog}">
 				<am-form ${Attr.api}="${PageController.add}">
 					<am-modal-header>${App.text('addPage')}</am-modal-header>
-					<div class="${CSS.modalBody}">
+					<am-modal-body>
 						${createField(
 							FieldTag.input,
 							null,
@@ -272,7 +272,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							>
 							<am-page-select-tree></am-page-select-tree>
 						</div>
-					</div>
+					</am-modal-body>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonPrimary}"
@@ -289,7 +289,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 		<!-- About Automad Modal -->
 		<am-modal id="am-about-modal">
 			<div class="${CSS.modalDialog} ${CSS.modalDialogSmall}">
-				<div class="${CSS.modalBody}">
+				<am-modal-body>
 					<am-logo></am-logo>
 					<hr />
 					<strong>Automad</strong>
@@ -311,7 +311,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							${App.version}
 						</a>
 					</span>
-				</div>
+				</am-modal-body>
 			</div>
 		</am-modal>
 	`;

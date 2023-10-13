@@ -220,7 +220,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			html`
 				<div class="${CSS.modalDialog}">
 					<am-modal-header>${App.text('link')}</am-modal-header>
-					<div class="${CSS.modalBody}"></div>
+					<am-modal-body></am-modal-body>
 					<div class="${CSS.modalFooter}">
 						<button class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('save')}
@@ -230,7 +230,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			`
 		);
 
-		const body = query(`.${CSS.modalBody}`, modal);
+		const body = query('am-modal-body', modal);
 
 		createField(FieldTag.url, body, {
 			value: this.data.link,

@@ -57,7 +57,7 @@ export const confirm = async (text: string): Promise<boolean> => {
 
 	modal.innerHTML = html`
 		<div class="${CSS.modalDialog}">
-			<div class="${CSS.modalBody}">${text}</div>
+			<am-modal-body>${text}</am-modal-body>
 			<div class="${CSS.modalFooter}">
 				<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 					${App.text('cancel')}

@@ -72,7 +72,7 @@ const renderMovePageModal = (): string => {
 			<div class="${CSS.modalDialog}">
 				<am-form ${Attr.api}="${PageController.move}">
 					<am-modal-header>${App.text('movePage')}</am-modal-header>
-					<div class="${CSS.modalBody}">
+					<am-modal-body>
 						<div class="${CSS.field}">
 							<label class="${CSS.fieldLabel}">
 								${App.text('selectTargetMovePage')}
@@ -81,7 +81,7 @@ const renderMovePageModal = (): string => {
 								${Attr.hideCurrent}
 							></am-page-select-tree>
 						</div>
-					</div>
+					</am-modal-body>
 					<div class="${CSS.modalFooter}">
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonPrimary}"
