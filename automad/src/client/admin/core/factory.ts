@@ -241,10 +241,7 @@ export const createImagePickerModal = (
 		{},
 		modal,
 		html`
-			<div class="${CSS.modalHeader}">
-				<span>${label}</span>
-				<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-			</div>
+			<am-modal-header>${label}</am-modal-header>
 			<div class="${CSS.modalBody}">
 				<span class="${CSS.formGroup}">
 					<input
@@ -328,17 +325,13 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 		{ [Attr.destroy]: '' },
 		getComponentTargetContainer()
 	);
-	const dialog = create('div', [CSS.modalDialog], {}, modal);
 
-	create(
+	const dialog = create(
 		'div',
-		[CSS.modalHeader],
+		[CSS.modalDialog],
 		{},
-		dialog,
-		html`
-			<span>${label}</span>
-			<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-		`
+		modal,
+		html`<am-modal-header>$${label}</am-modal-header>`
 	);
 
 	const body = create('div', [CSS.modalBody], {}, dialog);

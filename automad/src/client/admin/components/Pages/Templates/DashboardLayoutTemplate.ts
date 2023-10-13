@@ -240,12 +240,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 		<am-modal id="am-add-page-modal">
 			<div class="${CSS.modalDialog}">
 				<am-form ${Attr.api}="${PageController.add}">
-					<div class="${CSS.modalHeader}">
-						<span>${App.text('addPage')}</span>
-						<am-modal-close
-							class="${CSS.modalClose}"
-						></am-modal-close>
-					</div>
+					<am-modal-header>${App.text('addPage')}</am-modal-header>
 					<div class="${CSS.modalBody}">
 						${createField(
 							FieldTag.input,

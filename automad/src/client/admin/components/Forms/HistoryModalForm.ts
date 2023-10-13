@@ -81,12 +81,9 @@ export class HistoryModalFormComponent extends BaseComponent {
 					${Attr.api}="${HistoryController.restore}"
 					${confirm}
 				>
-					<div class="${CSS.modalHeader}">
-						<span>${App.text('pageHistory')}</span>
-						<am-modal-close
-							class="${CSS.modalClose}"
-						></am-modal-close>
-					</div>
+					<am-modal-header>
+						${App.text('pageHistory')}
+					</am-modal-header>
 					<div
 						class="${CSS.modalBody} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
 					></div>

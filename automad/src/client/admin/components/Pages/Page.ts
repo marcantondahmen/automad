@@ -71,12 +71,7 @@ const renderMovePageModal = (): string => {
 		<am-modal id="am-move-page-modal">
 			<div class="${CSS.modalDialog}">
 				<am-form ${Attr.api}="${PageController.move}">
-					<div class="${CSS.modalHeader}">
-						<span>${App.text('movePage')}</span>
-						<am-modal-close
-							class="${CSS.modalClose}"
-						></am-modal-close>
-					</div>
+					<am-modal-header>${App.text('movePage')}</am-modal-header>
 					<div class="${CSS.modalBody}">
 						<div class="${CSS.field}">
 							<label class="${CSS.fieldLabel}">

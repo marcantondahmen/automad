@@ -483,12 +483,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			getComponentTargetContainer(),
 			html`
 				<div class="${CSS.modalDialog}">
-					<div class="${CSS.modalHeader}">
-						<span>${App.text('editStyle')}</span>
-						<am-modal-close
-							class="${CSS.modalClose}"
-						></am-modal-close>
-					</div>
+					<am-modal-header>
+						${App.text('editStyle')}
+					</am-modal-header>
 					<div class="${CSS.modalBody}"></div>
 					<div class="${CSS.modalFooter}">
 						<button class="${CSS.button} ${CSS.buttonAccent}">

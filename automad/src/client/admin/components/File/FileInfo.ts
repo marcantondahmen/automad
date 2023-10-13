@@ -108,10 +108,7 @@ export class FileInfoComponent extends BaseComponent {
 				${Attr.event}="${EventName.filesChangeOnServer}"
 				class="${CSS.modalDialog}"
 			>
-				<div class="${CSS.modalHeader}">
-					<span>${App.text('editFileInfo')}</span>
-					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-				</div>
+				<am-modal-header>${App.text('editFileInfo')}</am-modal-header>
 				<input type="hidden" name="old-name" value="${file.basename}" />
 				<div class="${CSS.modalBody}">
 					${createField(

@@ -135,10 +135,9 @@ export const renderUsersSection = (): string => {
 				class="${CSS.modalDialog}"
 				${Attr.api}="${UserController.changePassword}"
 			>
-				<div class="${CSS.modalHeader}">
-					<span>${App.text('systemUsersChangePassword')}</span>
-					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-				</div>
+				<am-modal-header>
+					${App.text('systemUsersChangePassword')}
+				</am-modal-header>
 				<div class="${CSS.modalBody}">
 					${createField(
 						FieldTag.password,
@@ -189,10 +188,9 @@ export const renderUsersSection = (): string => {
 		</am-modal>
 		<am-modal id="am-registered-users-modal" nofocus>
 			<div class="${CSS.modalDialog}">
-				<div class="${CSS.modalHeader}">
-					<span>${App.text('systemUsersRegistered')}</span>
-					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-				</div>
+				<am-modal-header>
+					${App.text('systemUsersRegistered')}
+				</am-modal-header>
 				<div class="${CSS.modalBody}">
 					<am-delete-users-form
 						${Attr.api}="${UserCollectionController.edit}"
@@ -218,10 +216,9 @@ export const renderUsersSection = (): string => {
 				${Attr.api}="${UserCollectionController.createUser}"
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
-				<div class="${CSS.modalHeader}">
-					<span>${App.text('systemUsersAdd')}</span>
-					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-				</div>
+				<am-modal-header>
+					${App.text('systemUsersAdd')}
+				</am-modal-header>
 				<div class="${CSS.modalBody}">
 					${createField(
 						FieldTag.input,
@@ -292,10 +289,9 @@ export const renderUsersSection = (): string => {
 				${Attr.api}="${UserCollectionController.inviteUser}"
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
-				<div class="${CSS.modalHeader}">
-					<span>${App.text('systemUsersInvite')}</span>
-					<am-modal-close class="${CSS.modalClose}"></am-modal-close>
-				</div>
+				<am-modal-header>
+					${App.text('systemUsersInvite')}
+				</am-modal-header>
 				<div class="${CSS.modalBody}">
 					${createField(
 						FieldTag.input,
