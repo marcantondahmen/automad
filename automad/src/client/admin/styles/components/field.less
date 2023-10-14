@@ -49,8 +49,18 @@
 
 	&__label {
 		display: inline-flex;
+		align-items: center;
 		gap: @am-flex-gap;
 		font-size: @am-small-font-size;
 		color: var(--am-clr-text-paragraph);
+	}
+
+	&:has(:invalid) &__label {
+		color: var(--am-clr-text-danger);
+
+		&:after {
+			&:extend(.am-bi);
+			content: '\f332';
+		}
 	}
 }

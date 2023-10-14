@@ -51,6 +51,12 @@
 		</div>
 		<div class="am-c-field">
 			<label for="" class="am-c-field__label">
+				Invalid
+			</label>
+			<input type="text" class="am-f-input" placeholder="Placeholder" pattern="xxx" value="invalid" />
+		</div>
+		<div class="am-c-field">
+			<label for="" class="am-c-field__label">
 				Link
 			</label>
 			<div class="am-f-input-combo">
