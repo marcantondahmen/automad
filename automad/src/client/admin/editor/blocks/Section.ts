@@ -482,7 +482,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			{ [Attr.destroy]: '' },
 			getComponentTargetContainer(),
 			html`
-				<div class="${CSS.modalDialog}">
+				<am-modal-dialog>
 					<am-modal-header>
 						${App.text('editStyle')}
 					</am-modal-header>
@@ -492,7 +492,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 							${App.text('ok')}
 						</button>
 					</am-modal-footer>
-				</div>
+				</am-modal-dialog>
 			`
 		);
 

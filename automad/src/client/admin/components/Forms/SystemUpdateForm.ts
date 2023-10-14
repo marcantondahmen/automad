@@ -153,7 +153,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 		) as ModalComponent;
 
 		modal.innerHTML = html`
-			<div class="${CSS.modalDialog}">
+			<am-modal-dialog>
 				<am-modal-body>
 					${App.text('systemUpdateSuccess')}
 				</am-modal-body>
@@ -165,7 +165,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 						${App.text('systemUpdateSuccessReload')}
 					</a>
 				</am-modal-footer>
-			</div>
+			</am-modal-dialog>
 		`;
 
 		modal.open();
@@ -248,14 +248,14 @@ export class SystemUpdateFormComponent extends FormComponent {
 			) as ModalComponent;
 
 			this.progressModal.innerHTML = html`
-				<div class="${CSS.modalDialog}">
+				<am-modal-dialog>
 					<div class="${CSS.modalSpinner}">
 						<span class="${CSS.modalSpinnerIcon}"></span>
 						<span class="${CSS.modalSpinnerText}">
 							${App.text('systemUpdateProgress')}
 						</span>
 					</div>
-				</div>
+				</am-modal-dialog>
 			`;
 
 			this.progressModal.open();

@@ -154,7 +154,7 @@ export abstract class BaseModalTune<DataType> {
 			{ [Attr.destroy]: '' },
 			container,
 			html`
-				<div class="${CSS.modalDialog}">
+				<am-modal-dialog>
 					<am-modal-body></am-modal-body>
 					<am-modal-footer>
 						<am-modal-close
@@ -163,7 +163,7 @@ export abstract class BaseModalTune<DataType> {
 							${App.text('close')}
 						</am-modal-close>
 					</am-modal-footer>
-				</div>
+				</am-modal-dialog>
 			`
 		) as ModalComponent;
 

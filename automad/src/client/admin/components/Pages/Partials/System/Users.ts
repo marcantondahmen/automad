@@ -187,7 +187,7 @@ export const renderUsersSection = (): string => {
 			</am-form>
 		</am-modal>
 		<am-modal id="am-registered-users-modal" nofocus>
-			<div class="${CSS.modalDialog}">
+			<am-modal-dialog>
 				<am-modal-header>
 					${App.text('systemUsersRegistered')}
 				</am-modal-header>
@@ -208,7 +208,7 @@ export const renderUsersSection = (): string => {
 						${App.text('deleteSelected')}
 					</am-submit>
 				</am-modal-footer>
-			</div>
+			</am-modal-dialog>
 		</am-modal>
 		<am-modal id="am-add-user-modal">
 			<am-form

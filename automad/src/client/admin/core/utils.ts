@@ -56,7 +56,7 @@ export const confirm = async (text: string): Promise<boolean> => {
 	);
 
 	modal.innerHTML = html`
-		<div class="${CSS.modalDialog}">
+		<am-modal-dialog>
 			<am-modal-body>${text}</am-modal-body>
 			<am-modal-footer>
 				<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
@@ -69,7 +69,7 @@ export const confirm = async (text: string): Promise<boolean> => {
 					${App.text('ok')}
 				</am-modal-close>
 			</am-modal-footer>
-		</div>
+		</am-modal-dialog>
 	`;
 
 	setTimeout(() => {

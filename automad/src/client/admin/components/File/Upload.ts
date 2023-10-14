@@ -128,8 +128,8 @@ class UploadComponent extends BaseComponent {
 			this.form
 		);
 		this.queue = create(
-			'div',
-			[CSS.uploadPreviews, CSS.modalDialog],
+			'am-modal-dialog',
+			[CSS.uploadPreviews],
 			{},
 			this.modal
 		);

@@ -238,7 +238,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 		<am-modal-jumpbar id="am-jumpbar-modal"></am-modal-jumpbar>
 		<!-- New Page Modal -->
 		<am-modal id="am-add-page-modal">
-			<div class="${CSS.modalDialog}">
+			<am-modal-dialog>
 				<am-form ${Attr.api}="${PageController.add}">
 					<am-modal-header>${App.text('addPage')}</am-modal-header>
 					<am-modal-body>
@@ -284,11 +284,11 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</am-submit>
 					</am-modal-footer>
 				</am-form>
-			</div>
+			</am-modal-dialog>
 		</am-modal>
 		<!-- About Automad Modal -->
 		<am-modal id="am-about-modal">
-			<div class="${CSS.modalDialog} ${CSS.modalDialogSmall}">
+			<am-modal-dialog class="${CSS.modalDialogSmall}">
 				<am-modal-body>
 					<am-logo></am-logo>
 					<hr />
@@ -312,7 +312,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</a>
 					</span>
 				</am-modal-body>
-			</div>
+			</am-modal-dialog>
 		</am-modal>
 	`;
 };

@@ -108,7 +108,7 @@ export class ConfigFileFormComponent extends FormComponent {
 				${App.text('systemConfigFileEdit')}
 			</am-modal-toggle>
 			<am-modal id="am-config-file-form-modal">
-				<div class="${CSS.modalDialog} ${CSS.modalDialogLarge}">
+				<am-modal-dialog class="${CSS.modalDialogLarge}">
 					<div
 						class="${CSS.modalHeader} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
 					>
@@ -132,7 +132,7 @@ export class ConfigFileFormComponent extends FormComponent {
 						class="${CSS.modalCode}"
 						name="content"
 					></textarea>
-				</div>
+				</am-modal-dialog>
 			</am-modal>
 		`;
 

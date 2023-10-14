@@ -236,8 +236,8 @@ export const createImagePickerModal = (
 	});
 
 	create(
-		'div',
-		[CSS.modalDialog, CSS.modalDialogLarge],
+		'am-modal-dialog',
+		[CSS.modalDialogLarge],
 		{},
 		modal,
 		html`
@@ -327,8 +327,8 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 	);
 
 	const dialog = create(
-		'div',
-		[CSS.modalDialog],
+		'am-modal-dialog',
+		[],
 		{},
 		modal,
 		html`<am-modal-header>$${label}</am-modal-header>`
@@ -397,12 +397,12 @@ export const createProgressModal = (text: string): ModalComponent => {
 	);
 
 	modal.innerHTML = html`
-		<div class="${CSS.modalDialog}">
+		<am-modal-dialog>
 			<span class="${CSS.modalSpinner}">
 				<span class="${CSS.modalSpinnerIcon}"></span>
 				<span class="${CSS.modalSpinnerText}">${text}</span>
 			</span>
-		</div>
+		</am-modal-dialog>
 	`;
 
 	return modal;

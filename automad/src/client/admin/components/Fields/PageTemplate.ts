@@ -254,14 +254,14 @@ export class PageTemplateComponent extends BaseComponent {
 			{ id: 'am-page-template-modal' },
 			this,
 			html`
-				<div class="${CSS.modalDialog}">
+				<am-modal-dialog>
 					<am-modal-header>
 						${App.text('pageTemplate')}
 					</am-modal-header>
 					<am-modal-body>
 						${createTemplateSelect(selectedTemplate).outerHTML}
 					</am-modal-body>
-				</div>
+				</am-modal-dialog>
 			`
 		);
 	}

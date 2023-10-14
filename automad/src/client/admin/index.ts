@@ -98,6 +98,7 @@ import './components/Indicators/System/UserCountIndicator';
 import './components/Modal/Modal';
 import './components/Modal/ModalBody';
 import './components/Modal/ModalClose';
+import './components/Modal/ModalDialog';
 import './components/Modal/ModalFooter';
 import './components/Modal/ModalHeader';
 import './components/Modal/ModalField';

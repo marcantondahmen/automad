@@ -69,7 +69,7 @@ const renderMovePageModal = (): string => {
 
 	return html`
 		<am-modal id="am-move-page-modal">
-			<div class="${CSS.modalDialog}">
+			<am-modal-dialog>
 				<am-form ${Attr.api}="${PageController.move}">
 					<am-modal-header>${App.text('movePage')}</am-modal-header>
 					<am-modal-body>
@@ -93,7 +93,7 @@ const renderMovePageModal = (): string => {
 						</am-submit>
 					</am-modal-footer>
 				</am-form>
-			</div>
+			</am-modal-dialog>
 		</am-modal>
 	`;
 };

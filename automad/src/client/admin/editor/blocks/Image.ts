@@ -218,7 +218,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			{ [Attr.destroy]: '' },
 			getComponentTargetContainer(),
 			html`
-				<div class="${CSS.modalDialog}">
+				<am-modal-dialog>
 					<am-modal-header>${App.text('link')}</am-modal-header>
 					<am-modal-body></am-modal-body>
 					<am-modal-footer>
@@ -226,7 +226,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 							${App.text('save')}
 						</button>
 					</am-modal-footer>
-				</div>
+				</am-modal-dialog>
 			`
 		);
 
