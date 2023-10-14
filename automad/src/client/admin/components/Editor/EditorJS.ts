@@ -69,6 +69,7 @@ import Paragraph from '@editorjs/paragraph';
 import { CodeBlock } from '@/editor/blocks/Code';
 import { RawBlock } from '@/editor/blocks/Raw';
 import { GalleryBlock } from '@/editor/blocks/Gallery';
+import { SliderBlock } from '@/editor/blocks/Slider';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -199,6 +200,10 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			gallery: {
 				class: GalleryBlock,
+				inlineToolbar: false,
+			},
+			slider: {
+				class: SliderBlock,
 				inlineToolbar: false,
 			},
 			code: {

@@ -61,6 +61,7 @@ export const enum FieldTag {
 	pageTags = 'am-page-tags',
 	pageTemplate = 'am-page-template',
 	password = 'am-password',
+	number = 'am-number',
 	numberUnit = 'am-number-unit',
 	toggle = 'am-toggle',
 	toggleSelect = 'am-toggle-select',

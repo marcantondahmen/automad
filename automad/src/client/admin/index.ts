@@ -53,6 +53,7 @@ import './components/Fields/ImageSelect';
 import './components/Fields/Input';
 import './components/Fields/MainTheme';
 import './components/Fields/Markdown';
+import './components/Fields/Number';
 import './components/Fields/NumberUnit';
 import './components/Fields/PageTags';
 import './components/Fields/PageTemplate';

@@ -40,6 +40,7 @@ import {
 	sectionBorderStyles,
 	sectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
+import { sliderEffects } from '@/editor/blocks/Slider';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
@@ -117,4 +118,19 @@ export interface SectionBlockData {
 	align: SectionAlignItemsOption;
 	gap: string;
 	minBlockWidth: string;
+}
+
+export interface SliderBlockBreakpoint {
+	minWidth: number;
+	slidesPerView: number;
+}
+
+export interface SliderBlockData {
+	files: string[];
+	spaceBetween: number; // Unlike the normal `gap` parameter, this one is a number (pixels only)
+	slidesPerView: number;
+	loop: boolean;
+	autoplay: boolean;
+	effect: (typeof sliderEffects)[number];
+	breakpoints: SliderBlockBreakpoint[];
 }
