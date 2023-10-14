@@ -209,6 +209,7 @@ class MarkdownComponent extends BaseFieldComponent {
 		this.editor = new Editor({
 			el: container,
 			initialValue: value as string,
+			autofocus: false,
 			usageStatistics: false,
 			height: 'auto',
 			hideModeSwitch: true,

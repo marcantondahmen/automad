@@ -39,6 +39,7 @@ import { KeyValueMap } from '@/types';
  * A whitelist of custom component attributes.
  */
 export const enum Attr {
+	action = 'am-action',
 	api = 'am-api',
 	auto = 'am-auto',
 	badge = 'am-badge',

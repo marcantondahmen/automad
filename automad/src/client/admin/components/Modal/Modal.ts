@@ -60,11 +60,11 @@ import { BaseComponent } from '@/components/Base';
  *     Open
  * </am-modal-toggle>
  * <am-modal id="modal" ${Attr.noEsc} ${Attr.noClick}>
- *     <div class="am-c-modal__dialog">
- *         <am-modal-header>
- *             Title
- *         </am-modal-header>
- *     </div>
+ *     <am-modal-dialog>
+ *         <am-modal-header>...</am-modal-header>
+ *         <am-modal-body>...</am-modal-body>
+ *         <am-modal-footer>...</am-modal-footer>
+ *     </am-modal-dialog>
  * </am-modal>
  *
  * @extends BaseComponent

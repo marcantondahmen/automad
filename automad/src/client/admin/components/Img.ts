@@ -36,6 +36,11 @@ import { create, CSS, html, listen } from '@/core';
 import { Listener } from '@/types';
 import { BaseComponent } from './Base';
 
+/**
+ * A basic image component with error handling.
+ *
+ * @extends BaseComponent
+ */
 export class ImgComponent extends BaseComponent {
 	/**
 	 * The tag name.
