@@ -103,19 +103,19 @@ export const enum CSS {
 
 	editorBlockCode = 'am-c-ed-bl-code',
 
-	editorBlockSection = 'am-c-ed-bl-section',
-	editorBlockSectionLabel = 'am-c-ed-bl-section__label',
-	editorBlockSectionToolbar = 'am-c-ed-bl-section__toolbar',
-	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
+	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
 
 	editorBlockImage = 'am-c-ed-bl-image',
 	editorBlockImageButtons = 'am-c-ed-bl-image__buttons',
 
-	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
-
 	editorBlockQuote = 'am-c-ed-bl-quote',
 	editorBlockQuoteText = 'am-c-ed-bl-quote__text',
 	editorBlockQuoteCaption = 'am-c-ed-bl-quote__caption',
+
+	editorBlockSection = 'am-c-ed-bl-section',
+	editorBlockSectionLabel = 'am-c-ed-bl-section__label',
+	editorBlockSectionToolbar = 'am-c-ed-bl-section__toolbar',
+	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
 
 	editorPopoverForm = 'am-c-ed-popover__form',
 
@@ -159,6 +159,7 @@ export const enum CSS {
 	imgError = 'am-e-img__error',
 
 	imageCollection = 'am-c-image-collection',
+	imageCollectionAction = 'am-c-image-collection__action',
 	imageCollectionGrid = 'am-c-image-collection__grid',
 	imageCollectionItem = 'am-c-image-collection__item',
 	imageCollectionItemDrag = 'am-c-image-collection__item--drag',

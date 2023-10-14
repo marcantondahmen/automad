@@ -60,6 +60,15 @@ export interface ImageBlockData {
 	openInNewTab: boolean;
 }
 
+export interface GalleryBlockData {
+	files: string[];
+	layout: 'columns' | 'rows';
+	columnWidth: string;
+	rowHeight: string;
+	gap: string;
+	cleanBottom: boolean;
+}
+
 export interface QuoteBlockData {
 	text: string;
 	caption: string;
