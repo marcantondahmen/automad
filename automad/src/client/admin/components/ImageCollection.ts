@@ -34,6 +34,7 @@
 
 import {
 	App,
+	Attr,
 	create,
 	createImagePickerModal,
 	CSS,
@@ -47,6 +48,9 @@ import { BaseComponent } from './Base';
 
 /**
  * An image collection grid component.
+ *
+ * The `am-action` attribute can be used to ad an action button on top of the image grid.
+ * This button can be used to implement any functionality. It can be publicly accessed using the `actionButton` property.
  *
  * @extends BaseComponent
  */
@@ -82,10 +86,46 @@ export class ImageCollectionComponent extends BaseComponent {
 	private sortable: Sortable;
 
 	/**
+	 * The actual collection container that is re-rendered when images are added/removed.
+	 */
+	private container: HTMLElement;
+
+	/**
+	 * The action button element that can optionally be used added by defining the
+	 * `am-action` attribute. The button has no functionality out of the box
+	 * and therefore any kind of listener has to be attached in a later step.
+	 */
+	actionButton: HTMLElement = null;
+
+	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
 		this.classList.add(CSS.imageCollection);
+
+		const actionButtonLabel = this.getAttribute(Attr.action);
+
+		if (actionButtonLabel) {
+			this.actionButton = create(
+				'button',
+				[CSS.button, CSS.imageCollectionAction],
+				{},
+				this,
+				actionButtonLabel
+			);
+		}
+
+		this.container = create('div', [], {}, this);
+
+		const addButton = create(
+			'button',
+			[CSS.button, CSS.imageCollectionAdd],
+			{},
+			this,
+			App.text('addImage')
+		);
+
+		listen(addButton, 'click', this.add.bind(this));
 	}
 
 	/**
@@ -95,21 +135,27 @@ export class ImageCollectionComponent extends BaseComponent {
 	 */
 	private render(images: string[]): void {
 		this.removeListeners();
-		this.innerHTML = '';
+		this.sortable?.destroy();
+		this.container.innerHTML = '';
 
-		const grid = create('div', [CSS.imageCollectionGrid], {}, this);
+		const grid = create(
+			'div',
+			[CSS.imageCollectionGrid],
+			{},
+			this.container
+		);
 
 		images.forEach((url) => {
 			const item = create(
 				'div',
 				[CSS.imageCollectionItem],
-				{ 'data-url': url },
+				{ 'data-url': url, title: url },
 				grid,
 				html`
-					<img
+					<am-img
 						src="${resizeImageUrl(url)}"
 						class="${CSS.imageCollectionImage}"
-					/>
+					></am-img>
 				`
 			);
 
@@ -148,15 +194,6 @@ export class ImageCollectionComponent extends BaseComponent {
 			})
 		);
 
-		const addButton = create(
-			'button',
-			[CSS.button],
-			{},
-			this,
-			App.text('addImage')
-		);
-
-		this.addListener(listen(addButton, 'click', this.add.bind(this)));
 		this.addListener(
 			listen(grid, 'click', (event: Event) => {
 				if (event.target === grid) {
