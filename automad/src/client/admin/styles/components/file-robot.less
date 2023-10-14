@@ -139,9 +139,38 @@
 			background-color: var(--am-clr-background-faded);
 		}
 
+		&:before {
+			&:extend(.am-bi);
+			color: var(--am-clr-text-sidebar);
+			font-size: 1.25rem;
+		}
+
+		&:nth-child(1):before {
+			content: '\f2dd';
+		}
+
+		&:nth-child(2):before {
+			content: '\f56b';
+		}
+
+		&:nth-child(3):before {
+			content: '\f18c';
+		}
+
+		&:nth-child(4):before {
+			content: '\f30d';
+		}
+
+		&:nth-child(5):before {
+			content: '\f4cb';
+		}
+
+		&:nth-child(6):before {
+			content: '\f150';
+		}
+
 		& > svg {
-			width: 21px !important;
-			height: 21px !important;
+			display: none;
 		}
 
 		&-label {
