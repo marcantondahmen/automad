@@ -134,7 +134,7 @@ export class FileInfoComponent extends BaseComponent {
 						[]
 					).outerHTML}
 				</am-modal-body>
-				<div class="${CSS.modalFooter}">
+				<am-modal-footer>
 					<a
 						href="${file.url}"
 						class="${CSS.button} ${CSS.buttonPrimary}"
@@ -145,7 +145,7 @@ export class FileInfoComponent extends BaseComponent {
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 						${App.text('save')}
 					</am-submit>
-				</div>
+				</am-modal-footer>
 			</am-form>
 		`;
 	}

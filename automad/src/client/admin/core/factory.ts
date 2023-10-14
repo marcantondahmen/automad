@@ -335,7 +335,7 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 	);
 
 	const body = create('am-modal-body', [], {}, dialog);
-	const footer = create('div', [CSS.modalFooter], {}, dialog);
+	const footer = create('am-modal-footer', [], {}, dialog);
 	const binding = Bindings.get(bindingName);
 
 	const autocomplete = create(

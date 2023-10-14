@@ -157,14 +157,14 @@ export class SystemUpdateFormComponent extends FormComponent {
 				<am-modal-body>
 					${App.text('systemUpdateSuccess')}
 				</am-modal-body>
-				<div class="${CSS.modalFooter}">
+				<am-modal-footer>
 					<a
 						href="${App.dashboardURL}"
 						class="${CSS.button} ${CSS.buttonAccent}"
 					>
 						${App.text('systemUpdateSuccessReload')}
 					</a>
-				</div>
+				</am-modal-footer>
 			</div>
 		`;
 

@@ -221,11 +221,11 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				<div class="${CSS.modalDialog}">
 					<am-modal-header>${App.text('link')}</am-modal-header>
 					<am-modal-body></am-modal-body>
-					<div class="${CSS.modalFooter}">
+					<am-modal-footer>
 						<button class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('save')}
 						</button>
-					</div>
+					</am-modal-footer>
 				</div>
 			`
 		);

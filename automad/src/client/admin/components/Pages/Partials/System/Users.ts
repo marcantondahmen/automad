@@ -176,14 +176,14 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 				</am-modal-body>
-				<div class="${CSS.modalFooter}">
+				<am-modal-footer>
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 						${App.text('save')}
 					</am-submit>
-				</div>
+				</am-modal-footer>
 			</am-form>
 		</am-modal>
 		<am-modal id="am-registered-users-modal" nofocus>
@@ -197,7 +197,7 @@ export const renderUsersSection = (): string => {
 						${Attr.event}="${EventName.appStateRequireUpdate}"
 					></am-delete-users-form>
 				</am-modal-body>
-				<div class="${CSS.modalFooter}">
+				<am-modal-footer>
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
@@ -207,7 +207,7 @@ export const renderUsersSection = (): string => {
 					>
 						${App.text('deleteSelected')}
 					</am-submit>
-				</div>
+				</am-modal-footer>
 			</div>
 		</am-modal>
 		<am-modal id="am-add-user-modal">
@@ -273,14 +273,14 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 				</am-modal-body>
-				<div class="${CSS.modalFooter}">
+				<am-modal-footer>
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 						${App.text('systemUsersAdd')}
 					</am-submit>
-				</div>
+				</am-modal-footer>
 			</am-form>
 		</am-modal>
 		<am-modal id="am-invite-user-modal">
@@ -320,14 +320,14 @@ export const renderUsersSection = (): string => {
 						{}
 					).outerHTML}
 				</am-modal-body>
-				<div class="${CSS.modalFooter}">
+				<am-modal-footer>
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 						${App.text('systemUsersSendInvitation')}
 					</am-submit>
-				</div>
+				</am-modal-footer>
 			</am-form>
 		</am-modal>
 	`;

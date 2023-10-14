@@ -156,13 +156,13 @@ export abstract class BaseModalTune<DataType> {
 			html`
 				<div class="${CSS.modalDialog}">
 					<am-modal-body></am-modal-body>
-					<div class="${CSS.modalFooter}">
+					<am-modal-footer>
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonAccent}"
 						>
 							${App.text('close')}
 						</am-modal-close>
-					</div>
+					</am-modal-footer>
 				</div>
 			`
 		) as ModalComponent;

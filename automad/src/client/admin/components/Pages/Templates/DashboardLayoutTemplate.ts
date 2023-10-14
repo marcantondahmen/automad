@@ -273,7 +273,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 							<am-page-select-tree></am-page-select-tree>
 						</div>
 					</am-modal-body>
-					<div class="${CSS.modalFooter}">
+					<am-modal-footer>
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonPrimary}"
 						>
@@ -282,7 +282,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('addPage')}
 						</am-submit>
-					</div>
+					</am-modal-footer>
 				</am-form>
 			</div>
 		</am-modal>

@@ -82,7 +82,7 @@ const renderMovePageModal = (): string => {
 							></am-page-select-tree>
 						</div>
 					</am-modal-body>
-					<div class="${CSS.modalFooter}">
+					<am-modal-footer>
 						<am-modal-close
 							class="${CSS.button} ${CSS.buttonPrimary}"
 						>
@@ -91,7 +91,7 @@ const renderMovePageModal = (): string => {
 						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('movePage')}
 						</am-submit>
-					</div>
+					</am-modal-footer>
 				</am-form>
 			</div>
 		</am-modal>

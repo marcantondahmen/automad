@@ -487,17 +487,17 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 						${App.text('editStyle')}
 					</am-modal-header>
 					<am-modal-body></am-modal-body>
-					<div class="${CSS.modalFooter}">
+					<am-modal-footer>
 						<button class="${CSS.button} ${CSS.buttonAccent}">
 							${App.text('ok')}
 						</button>
-					</div>
+					</am-modal-footer>
 				</div>
 			`
 		);
 
 		const body = query('am-modal-body', modal);
-		const button = query(`.${CSS.modalFooter} button`, modal);
+		const button = query('am-modal-footer button', modal);
 
 		const field = (
 			type: FieldTag,
