@@ -73,7 +73,7 @@
 		color: @am-nav-item-clr;
 		text-decoration: none;
 		border-radius: @am-nav-item-radius;
-		border: @am-border-width dashed transparent;
+		border: @am-form-border-width dashed transparent;
 		line-height: ~'calc(@{am-nav-item-line-height} - @{am-border-width} - @{am-border-width})';
 		height: @am-nav-item-line-height;
 		cursor: pointer;
@@ -106,6 +106,6 @@
 
 	input:focus + &__link {
 		outline: @am-outline-active;
-		border: @am-border-width solid var(--am-clr-border-active);
+		border: @am-form-border-width solid var(--am-clr-border-active);
 	}
 }

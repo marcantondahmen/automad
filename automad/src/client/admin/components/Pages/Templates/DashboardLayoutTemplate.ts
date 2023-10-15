@@ -249,7 +249,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 								key: `new-${App.reservedFields.TITLE}`,
 								name: App.reservedFields.TITLE,
 								label: titleCase(App.reservedFields.TITLE),
-								value: '',
+								value: App.text('newPageTitle'),
 							},
 							[],
 							{ required: '' }
