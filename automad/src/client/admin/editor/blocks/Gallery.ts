@@ -119,14 +119,26 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			[CSS.textMuted],
 			{},
 			this.wrapper,
-			GalleryBlock.toolbox.title
+			html`
+				<am-icon-text
+					${Attr.icon}="columns"
+					${Attr.text}="${GalleryBlock.toolbox.title}"
+				></am-icon-text>
+			`
+		);
+
+		const group = create(
+			'div',
+			[CSS.imageCollectionGroup],
+			{},
+			this.wrapper
 		);
 
 		const layoutButton = create(
 			'button',
 			[CSS.button],
 			{},
-			this.wrapper,
+			group,
 			App.text('galleryBlockLayout')
 		);
 
@@ -140,7 +152,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			ImageCollectionComponent.TAG_NAME,
 			[],
 			{},
-			this.wrapper
+			group
 		) as ImageCollectionComponent;
 
 		setTimeout(() => {

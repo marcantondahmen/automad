@@ -163,14 +163,26 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 			[CSS.textMuted],
 			{},
 			this.wrapper,
-			SliderBlock.toolbox.title
+			html`
+				<am-icon-text
+					${Attr.icon}="collection-play"
+					${Attr.text}="${SliderBlock.toolbox.title}"
+				></am-icon-text>
+			`
+		);
+
+		const group = create(
+			'div',
+			[CSS.imageCollectionGroup],
+			{},
+			this.wrapper
 		);
 
 		const settingsButton = create(
 			'button',
 			[CSS.button],
 			{},
-			this.wrapper,
+			group,
 			App.text('sliderBlockSettings')
 		);
 
@@ -184,7 +196,7 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 			ImageCollectionComponent.TAG_NAME,
 			[],
 			{},
-			this.wrapper
+			group
 		) as ImageCollectionComponent;
 
 		setTimeout(() => {

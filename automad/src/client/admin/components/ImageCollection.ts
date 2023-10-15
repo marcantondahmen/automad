@@ -34,7 +34,6 @@
 
 import {
 	App,
-	Attr,
 	create,
 	createImagePickerModal,
 	CSS,

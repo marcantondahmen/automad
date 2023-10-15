@@ -149,3 +149,20 @@
 		border-bottom-right-radius: @am-card-radius;
 	}
 }
+
+.am-c-image-collection-group {
+	display: flex;
+	flex-direction: column;
+
+	& > .am-e-button {
+		border-radius: @am-card-radius;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	& .am-c-image-collection__grid {
+		border-top: none;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}

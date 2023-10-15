@@ -168,6 +168,8 @@ export const enum CSS {
 	imageCollectionDelete = 'am-c-image-collection__delete',
 	imageCollectionAdd = 'am-c-image-collection__add',
 
+	imageCollectionGroup = 'am-c-image-collection-group',
+
 	imagePicker = 'am-c-image-picker',
 	imagePickerImage = 'am-c-image-picker__image',
 
