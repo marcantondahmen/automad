@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, createSelect, CSS, query } from '@/core';
+import { App, Attr, create, createSelect, CSS, html, query } from '@/core';
 import { CodeEditor, codeLanguages } from '@/core/code';
 import { CodeBlockData } from '@/types';
 import { BaseBlock } from './BaseBlock';
@@ -67,7 +67,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	static get toolbox() {
 		return {
 			title: App.text('code'),
-			icon: '<i class="bi bi-code"></i>',
+			icon: '<i class="bi bi-code-slash"></i>',
 		};
 	}
 
@@ -104,7 +104,12 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 			[CSS.textMuted],
 			{},
 			this.wrapper,
-			CodeBlock.toolbox.title
+			html`
+				<am-icon-text
+					${Attr.icon}="code-slash"
+					${Attr.text}="${CodeBlock.toolbox.title}"
+				></am-icon-text>
+			`
 		);
 
 		const langSelect = createSelect(

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS, query } from '@/core';
+import { App, Attr, create, CSS, html, query } from '@/core';
 import { CodeEditor } from '@/core/code';
 import { RawBlockData } from '@/types';
 import { BaseBlock } from './BaseBlock';
@@ -104,7 +104,12 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 			[CSS.textMuted],
 			{},
 			this.wrapper,
-			RawBlock.toolbox.title
+			html`
+				<am-icon-text
+					${Attr.icon}="markdown"
+					${Attr.text}="${RawBlock.toolbox.title}"
+				></am-icon-text>
+			`
 		);
 
 		const container = create(
