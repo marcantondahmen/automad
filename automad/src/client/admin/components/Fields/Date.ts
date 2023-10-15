@@ -46,10 +46,12 @@ class DateComponent extends BaseFieldComponent {
 	 */
 	createInput(): void {
 		const { name, id, value, placeholder } = this._data;
+		const date = (value as string).match(/[\d-]+T\d\d:\d\d/)?.[0] ?? '';
+
 		create(
 			'input',
 			[CSS.input],
-			{ id, name, value, type: 'datetime-local', placeholder },
+			{ id, name, value: date, type: 'datetime-local', placeholder },
 			this
 		);
 	}
