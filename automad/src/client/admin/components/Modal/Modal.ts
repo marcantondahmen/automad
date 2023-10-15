@@ -205,7 +205,12 @@ export class ModalComponent extends BaseComponent {
 			const input = query<InputElement>('input, textarea', this);
 
 			if (input) {
+				// Focus at end of input.
+				const value = input.value;
+
 				input.focus();
+				input.value = '';
+				input.value = value;
 			}
 		}
 	}
