@@ -122,23 +122,31 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			GalleryBlock.toolbox.title
 		);
 
+		const layoutButton = create(
+			'button',
+			[CSS.button],
+			{},
+			this.wrapper,
+			App.text('galleryBlockLayout')
+		);
+
+		this.api.listeners.on(
+			layoutButton,
+			'click',
+			this.renderModal.bind(this)
+		);
+
 		const collection = create(
 			ImageCollectionComponent.TAG_NAME,
 			[],
-			{ [Attr.action]: App.text('galleryBlockLayout') },
+			{},
 			this.wrapper
 		) as ImageCollectionComponent;
 
 		setTimeout(() => {
 			collection.images = this.data.files;
 
-			listen(
-				collection.actionButton,
-				'click',
-				this.renderModal.bind(this)
-			);
-
-			listen(collection, 'change', () => {
+			this.api.listeners.on(collection, 'change', () => {
 				this.data.files = collection.images;
 				this.blockAPI.dispatchChange();
 			});

@@ -159,7 +159,6 @@ export const enum CSS {
 	imgError = 'am-e-img__error',
 
 	imageCollection = 'am-c-image-collection',
-	imageCollectionAction = 'am-c-image-collection__action',
 	imageCollectionGrid = 'am-c-image-collection__grid',
 	imageCollectionItem = 'am-c-image-collection__item',
 	imageCollectionItemDrag = 'am-c-image-collection__item--drag',

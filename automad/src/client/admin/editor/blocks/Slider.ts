@@ -166,23 +166,31 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 			SliderBlock.toolbox.title
 		);
 
+		const settingsButton = create(
+			'button',
+			[CSS.button],
+			{},
+			this.wrapper,
+			App.text('sliderBlockSettings')
+		);
+
+		this.api.listeners.on(
+			settingsButton,
+			'click',
+			this.renderModal.bind(this)
+		);
+
 		const collection = create(
 			ImageCollectionComponent.TAG_NAME,
 			[],
-			{ [Attr.action]: App.text('sliderBlockSettings') },
+			{},
 			this.wrapper
 		) as ImageCollectionComponent;
 
 		setTimeout(() => {
 			collection.images = this.data.files;
 
-			listen(
-				collection.actionButton,
-				'click',
-				this.renderModal.bind(this)
-			);
-
-			listen(collection, 'change', () => {
+			this.api.listeners.on(collection, 'change', () => {
 				this.data.files = collection.images;
 				this.blockAPI.dispatchChange();
 			});
