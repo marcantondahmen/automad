@@ -55,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class PageCollection {
 	/**
 	 * The collection array.
-	 * 
+	 *
 	 * @var array<Page>
 	 */
 	private array $collection = array();

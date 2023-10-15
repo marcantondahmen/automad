@@ -113,7 +113,7 @@ class FileCollection {
 			$item = array();
 
 			if (FileUtils::fileIsImage($file)) {
-				$image = new Image($file, 600, 600);
+				$image = new Image($file, 300, 240);
 
 				$item['thumbnail'] = AM_BASE_URL . $image->file;
 				$item['width'] = $image->originalWidth;
