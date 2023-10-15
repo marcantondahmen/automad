@@ -184,8 +184,10 @@ export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 			left: 'paddingLeft',
 		} as const;
 
+		const block = query(':scope > .cdx-block', blockElement);
+
 		for (const [key, value] of Object.entries(this.data)) {
-			blockElement.style[props[key as keyof typeof props]] = value;
+			block.style[props[key as keyof typeof props]] = value;
 		}
 
 		return blockElement;

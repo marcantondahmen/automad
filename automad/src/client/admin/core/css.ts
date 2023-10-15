@@ -288,4 +288,6 @@ export const enum CSS {
 	upload = 'am-c-upload',
 	uploadDropzone = 'am-c-upload__dropzone',
 	uploadPreviews = 'am-c-upload__previews',
+
+	userSelectNone = 'am-u-user-select-none',
 }
