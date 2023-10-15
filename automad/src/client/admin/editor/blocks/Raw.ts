@@ -96,7 +96,7 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 
 		create(
 			'span',
-			[CSS.textMuted],
+			[CSS.textMuted, CSS.userSelectNone],
 			{},
 			this.wrapper,
 			html`

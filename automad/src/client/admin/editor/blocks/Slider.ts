@@ -155,7 +155,7 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 
 		create(
 			'span',
-			[CSS.textMuted],
+			[CSS.textMuted, CSS.userSelectNone],
 			{},
 			this.wrapper,
 			html`

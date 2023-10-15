@@ -111,7 +111,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 
 		create(
 			'span',
-			[CSS.textMuted],
+			[CSS.textMuted, CSS.userSelectNone],
 			{},
 			this.wrapper,
 			html`

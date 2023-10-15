@@ -38,7 +38,7 @@
 	flex-grow: 0;
 	min-width: 16rem;
 	margin: 0 !important;
-	padding: 0 0 0.5rem 0 !important;
+	padding: 0 !important;
 
 	&:hover > &__content:before {
 		content: '';
@@ -53,6 +53,7 @@
 		position: relative;
 		height: 100%;
 		width: 100%;
+		padding: 0.2rem 0;
 		max-width: @am-bl-editor-block-max-width !important;
 		outline: 1px dashed transparent;
 		transition: outline 0.2s;
@@ -64,7 +65,11 @@
 	}
 
 	&--selected &__content {
-		background-color: var(--am-clr-highlight-background);
+		background-color: transparent;
+
+		& > .cdx-block {
+			background-color: var(--am-clr-highlight-background);
+		}
 	}
 
 	.am-ui &--drop-target &__content {
