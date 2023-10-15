@@ -52,7 +52,10 @@ export class Delimiter extends BaseBlock<object> {
 	 * @return the rendered element
 	 */
 	render(): HTMLElement {
-		return create('div', [CSS.editorBlockDelimiter], {}, null, '<hr>');
+		this.wrapper.classList.add(CSS.editorBlockDelimiter);
+		create('hr', [], {}, this.wrapper);
+
+		return this.wrapper;
 	}
 
 	/**

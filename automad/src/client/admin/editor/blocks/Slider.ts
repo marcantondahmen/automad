@@ -50,11 +50,7 @@ import {
 	query,
 	uniqueId,
 } from '@/core';
-import {
-	SliderBlockBreakpoint,
-	SliderBlockBreakpoints,
-	SliderBlockData,
-} from '@/types';
+import { SliderBlockBreakpoints, SliderBlockData } from '@/types';
 import { BaseBlock } from './BaseBlock';
 
 /**
@@ -155,12 +151,7 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	 * @return the rendered block
 	 */
 	render(): HTMLElement {
-		this.wrapper.classList.add(
-			'cdx-block',
-			CSS.flex,
-			CSS.flexColumn,
-			CSS.flexGap
-		);
+		this.wrapper.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
 		create(
 			'span',

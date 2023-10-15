@@ -107,12 +107,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	 * @return the rendered block
 	 */
 	render(): HTMLElement {
-		this.wrapper.classList.add(
-			'cdx-block',
-			CSS.flex,
-			CSS.flexColumn,
-			CSS.flexGap
-		);
+		this.wrapper.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
 		create(
 			'span',

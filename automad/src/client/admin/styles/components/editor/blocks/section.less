@@ -38,10 +38,7 @@
 	flex-direction: column;
 	height: 100%;
 	outline: 1px solid var(--am-clr-border);
-
-	&:hover {
-		outline: 1px solid var(--am-clr-border);
-	}
+	border-radius: @am-form-radius;
 
 	&__toolbar {
 		position: absolute;
@@ -83,6 +80,7 @@
 		font-weight: 560;
 		color: var(--am-clr-primary-text);
 		background: var(--am-clr-primary-background);
+		border-top-left-radius: @am-form-radius;
 		outline: 1px solid var(--am-clr-primary-background);
 		cursor: pointer;
 	}

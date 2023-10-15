@@ -95,7 +95,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 		this.data = this.prepareData(data || ({} as DataType));
 		this.config = config;
 		this.blockAPI = block;
-		this.wrapper = create('div');
+		this.wrapper = create('div', ['cdx-block']);
 	}
 
 	/**

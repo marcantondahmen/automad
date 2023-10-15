@@ -109,8 +109,7 @@ export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 			CSS.editorBlockQuote,
 			CSS.flex,
 			CSS.flexColumn,
-			CSS.flexGap,
-			'cdx-block'
+			CSS.flexGap
 		);
 
 		this.inputs = {
