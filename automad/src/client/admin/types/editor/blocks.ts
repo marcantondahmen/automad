@@ -121,8 +121,11 @@ export interface SectionBlockData {
 }
 
 export interface SliderBlockBreakpoint {
-	minWidth: number;
 	slidesPerView: number;
+}
+
+export interface SliderBlockBreakpoints {
+	[minWidth: string]: SliderBlockBreakpoint;
 }
 
 export interface SliderBlockData {
@@ -132,5 +135,5 @@ export interface SliderBlockData {
 	loop: boolean;
 	autoplay: boolean;
 	effect: (typeof sliderEffects)[number];
-	breakpoints: SliderBlockBreakpoint[];
+	breakpoints: SliderBlockBreakpoints;
 }

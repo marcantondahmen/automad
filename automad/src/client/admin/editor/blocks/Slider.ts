@@ -50,7 +50,11 @@ import {
 	query,
 	uniqueId,
 } from '@/core';
-import { SliderBlockBreakpoint, SliderBlockData } from '@/types';
+import {
+	SliderBlockBreakpoint,
+	SliderBlockBreakpoints,
+	SliderBlockData,
+} from '@/types';
 import { BaseBlock } from './BaseBlock';
 
 /**
@@ -60,28 +64,24 @@ import { BaseBlock } from './BaseBlock';
  */
 export const sliderEffects = ['slide', 'fade', 'cube', 'flip'] as const;
 
-const breakpointsToString = (breakpoints: SliderBlockBreakpoint[]): string => {
-	return breakpoints.reduce(
-		(out: string, breakpoint: SliderBlockBreakpoint) => {
-			return `${out} ${breakpoint.minWidth}:${breakpoint.slidesPerView}`.trim();
-		},
-		''
-	);
+const breakpointsToString = (breakpoints: SliderBlockBreakpoints): string => {
+	return Object.keys(breakpoints).reduce((out: string, minWidth: string) => {
+		return `${out} ${minWidth}:${breakpoints[minWidth].slidesPerView}`.trim();
+	}, '');
 };
 
 const stringToBreakpoints = (
 	breakpointsString: string
-): SliderBlockBreakpoint[] => {
-	const breakpoints: SliderBlockBreakpoint[] = [];
+): SliderBlockBreakpoints => {
+	const breakpoints: SliderBlockBreakpoints = {};
 
 	breakpointsString.split(' ').forEach((pair: string) => {
 		const [minWidth, slidesPerView] = pair.split(':');
 
 		if (minWidth && slidesPerView) {
-			breakpoints.push({
-				minWidth: parseInt(minWidth),
+			breakpoints[minWidth] = {
 				slidesPerView: parseInt(slidesPerView),
-			});
+			};
 		}
 	});
 
@@ -138,10 +138,14 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 			loop: data.loop ?? true,
 			autoplay: data.autoplay ?? false,
 			effect: data.effect ?? 'slide',
-			breakpoints: data.breakpoints ?? [
-				{ minWidth: 600, slidesPerView: 2 },
-				{ minWidth: 900, slidesPerView: 3 },
-			],
+			breakpoints: data.breakpoints ?? {
+				600: {
+					slidesPerView: 2,
+				},
+				900: {
+					slidesPerView: 3,
+				},
+			},
 		};
 	}
 
