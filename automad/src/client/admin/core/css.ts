@@ -101,6 +101,10 @@ export const enum CSS {
 
 	dropdownArrow = 'am-e-dropdown-arrow',
 
+	editorBlockButtons = 'am-c-ed-bl-buttons',
+	editorBlockButtonsEdit = 'am-c-ed-bl-buttons__edit',
+	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
+
 	editorBlockCode = 'am-c-ed-bl-code',
 
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
@@ -142,6 +146,7 @@ export const enum CSS {
 	flexGap = 'am-u-flex--gap',
 	flexGapLarge = 'am-u-flex--gap-large',
 	flexBetween = 'am-u-flex--between',
+	flexCenter = 'am-u-flex--center',
 	flexItemGrow = 'am-u-flex__item-grow',
 
 	formGroup = 'am-f-group',

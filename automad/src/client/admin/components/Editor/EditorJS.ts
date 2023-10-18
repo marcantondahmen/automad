@@ -70,6 +70,7 @@ import { CodeBlock } from '@/editor/blocks/Code';
 import { RawBlock } from '@/editor/blocks/Raw';
 import { GalleryBlock } from '@/editor/blocks/Gallery';
 import { SliderBlock } from '@/editor/blocks/Slider';
+import { ButtonsBlock } from '@/editor/blocks/Buttons';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -196,6 +197,10 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			quote: {
 				class: QuoteBlock,
+				inlineToolbar: true,
+			},
+			buttons: {
+				class: ButtonsBlock,
 				inlineToolbar: true,
 			},
 			gallery: {

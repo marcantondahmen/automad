@@ -41,12 +41,39 @@ import {
 	sectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
 import { sliderEffects } from '@/editor/blocks/Slider';
+import { buttonsAlignOptions } from '@/editor/blocks/Buttons';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
 	config?: ToolConfig;
 	block: BlockAPI;
 	data: any;
+}
+
+export interface ButtonsBlockButtonStyle {
+	color?: string;
+	background?: string;
+	borderColor?: string;
+	hoverColor?: string;
+	hoverBackground?: string;
+	hoverBorderColor?: string;
+	borderWidth?: string;
+	borderRadius?: string;
+	paddingHorizontal?: string;
+	paddingVertical?: string;
+}
+
+export interface ButtonsBlockData {
+	align: (typeof buttonsAlignOptions)[number];
+	gap: string;
+	primaryText: string;
+	primaryLink: string;
+	primaryStyle: ButtonsBlockButtonStyle;
+	primaryOpenInNewTab: boolean;
+	secondaryText?: string;
+	secondaryLink?: string;
+	secondaryStyle?: ButtonsBlockButtonStyle;
+	secondaryOpenInNewTab?: boolean;
 }
 
 export interface CodeBlockData {
