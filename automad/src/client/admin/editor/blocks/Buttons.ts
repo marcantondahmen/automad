@@ -350,7 +350,6 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 		});
 
 		const styleContainer = create('div', [], {}, body);
-		create('hr', [], {}, styleContainer);
 
 		const style = (
 			type: FieldTag,
