@@ -33,21 +33,19 @@
  */
 
 import { ImageCollectionComponent } from '@/components/ImageCollection';
-import { ModalComponent } from '@/components/Modal/Modal';
 import {
 	App,
 	Attr,
 	collectFieldData,
 	create,
 	createField,
+	createGenericModal,
 	createSelect,
 	CSS,
 	EventName,
 	FieldTag,
-	getComponentTargetContainer,
 	html,
 	listen,
-	query,
 	uniqueId,
 } from '@/core';
 import { GalleryBlockData } from '@/types';
@@ -166,30 +164,12 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	 * Render a new layout settings modal.
 	 */
 	private renderModal(): void {
-		const modal = create(
-			ModalComponent.TAG_NAME,
-			[],
-			{ [Attr.destroy]: '' },
-			getComponentTargetContainer(),
-			html`
-				<am-modal-dialog>
-					<am-modal-header>
-						${App.text('galleryBlockLayout')}
-					</am-modal-header>
-					<am-modal-body></am-modal-body>
-					<am-modal-footer>
-						<am-modal-close
-							class="${CSS.button} ${CSS.buttonAccent}"
-						>
-							${App.text('ok')}
-						</am-modal-close>
-					</am-modal-footer>
-				</am-modal-dialog>
-			`
-		) as ModalComponent;
+		const { modal, body } = createGenericModal(
+			App.text('galleryBlockLayout')
+		);
 
 		setTimeout(() => {
-			this.renderLayoutSettings(modal);
+			this.renderLayoutSettings(body);
 			modal.open();
 		}, 0);
 
@@ -209,11 +189,9 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	/**
 	 * Render the settings form.
 	 *
-	 * @param modal
+	 * @param body
 	 */
-	private renderLayoutSettings(modal: ModalComponent): void {
-		const body = query('am-modal-body', modal);
-
+	private renderLayoutSettings(body: HTMLElement): void {
 		body.innerHTML = '';
 
 		const layout = createSelect(
@@ -265,7 +243,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 		const layoutListener = listen(layout, 'change', () => {
 			layoutListener.remove();
 			this.data.layout = layout.value as 'columns' | 'rows';
-			this.renderLayoutSettings(modal);
+			this.renderLayoutSettings(body);
 		});
 	}
 

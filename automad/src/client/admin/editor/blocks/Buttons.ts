@@ -32,18 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { ModalComponent } from '@/components/Modal/Modal';
 import {
 	App,
 	Attr,
 	collectFieldData,
 	create,
 	createField,
+	createGenericModal,
 	createSelect,
 	CSS,
 	debounce,
 	FieldTag,
-	getComponentTargetContainer,
 	html,
 	query,
 	uniqueId,
@@ -52,30 +51,6 @@ import { ButtonsBlockButtonStyle, ButtonsBlockData } from '@/types';
 import { BaseBlock } from './BaseBlock';
 
 export const buttonsAlignOptions = ['start', 'center', 'end'] as const;
-
-const createModal = (label: string) => {
-	const modal = create(
-		ModalComponent.TAG_NAME,
-		[],
-		{ [Attr.destroy]: '' },
-		getComponentTargetContainer(),
-		html`
-			<am-modal-dialog>
-				<am-modal-header>${label}</am-modal-header>
-				<am-modal-body></am-modal-body>
-				<am-modal-footer>
-					<am-modal-close class="${CSS.button} ${CSS.buttonAccent}">
-						${App.text('ok')}
-					</am-modal-close>
-				</am-modal-footer>
-			</am-modal-dialog>
-		`
-	) as ModalComponent;
-
-	const body = query('am-modal-body', modal);
-
-	return { modal, body };
-};
 
 /**
  * A buttons block.
@@ -273,7 +248,9 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * Render and open the flex layout modal.
 	 */
 	private renderLayoutModal(): void {
-		const { modal, body } = createModal(App.text('buttonsBlockAlignment'));
+		const { modal, body } = createGenericModal(
+			App.text('buttonsBlockAlignment')
+		);
 
 		const layout = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 		const align = create(
@@ -333,7 +310,9 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * @param prefix
 	 */
 	private renderButtonModal(button: 'primary' | 'secondary'): void {
-		const { modal, body } = createModal(App.text('buttonsBlockSettings'));
+		const { modal, body } = createGenericModal(
+			App.text('buttonsBlockSettings')
+		);
 
 		const link = createField(FieldTag.url, body, {
 			name: `${button}Link`,

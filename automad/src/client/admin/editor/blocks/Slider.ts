@@ -33,21 +33,19 @@
  */
 
 import { ImageCollectionComponent } from '@/components/ImageCollection';
-import { ModalComponent } from '@/components/Modal/Modal';
 import {
 	App,
 	Attr,
 	collectFieldData,
 	create,
 	createField,
+	createGenericModal,
 	createSelect,
 	CSS,
 	EventName,
 	FieldTag,
-	getComponentTargetContainer,
 	html,
 	listen,
-	query,
 	uniqueId,
 } from '@/core';
 import { SliderBlockBreakpoints, SliderBlockData } from '@/types';
@@ -210,30 +208,12 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	 * Render a new layout settings modal.
 	 */
 	private renderModal(): void {
-		const modal = create(
-			ModalComponent.TAG_NAME,
-			[],
-			{ [Attr.destroy]: '' },
-			getComponentTargetContainer(),
-			html`
-				<am-modal-dialog>
-					<am-modal-header>
-						${App.text('sliderBlockSettings')}
-					</am-modal-header>
-					<am-modal-body></am-modal-body>
-					<am-modal-footer>
-						<am-modal-close
-							class="${CSS.button} ${CSS.buttonAccent}"
-						>
-							${App.text('ok')}
-						</am-modal-close>
-					</am-modal-footer>
-				</am-modal-dialog>
-			`
-		) as ModalComponent;
+		const { modal, body } = createGenericModal(
+			App.text('sliderBlockSettings')
+		);
 
 		setTimeout(() => {
-			this.renderSliderSettings(modal);
+			this.renderSliderSettings(body);
 			modal.open();
 		}, 0);
 
@@ -259,11 +239,9 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	/**
 	 * Render the settings form.
 	 *
-	 * @param modal
+	 * @param body
 	 */
-	private renderSliderSettings(modal: ModalComponent): void {
-		const body = query('am-modal-body', modal);
-
+	private renderSliderSettings(body: HTMLElement): void {
 		body.innerHTML = '';
 
 		const effect = create(
@@ -272,9 +250,9 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 			{},
 			body,
 			html`
-				<label class="${CSS.fieldLabel}"
-					>${App.text('sliderBlockEffect')}</label
-				>
+				<label class="${CSS.fieldLabel}">
+					${App.text('sliderBlockEffect')}
+				</label>
 			`
 		);
 

@@ -33,20 +33,18 @@
  */
 
 import { ImgComponent } from '@/components/Img';
-import { ModalComponent } from '@/components/Modal/Modal';
 import {
 	App,
 	Attr,
 	collectFieldData,
 	create,
 	createField,
+	createGenericModal,
 	createImagePickerModal,
 	CSS,
 	FieldTag,
-	getComponentTargetContainer,
 	html,
 	listen,
-	query,
 	resolveFileUrl,
 	uniqueId,
 } from '@/core';
@@ -212,25 +210,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 * Create the link modal.
 	 */
 	private createLinkModal(): void {
-		const modal = create(
-			ModalComponent.TAG_NAME,
-			[],
-			{ [Attr.destroy]: '' },
-			getComponentTargetContainer(),
-			html`
-				<am-modal-dialog>
-					<am-modal-header>${App.text('link')}</am-modal-header>
-					<am-modal-body></am-modal-body>
-					<am-modal-footer>
-						<button class="${CSS.button} ${CSS.buttonAccent}">
-							${App.text('save')}
-						</button>
-					</am-modal-footer>
-				</am-modal-dialog>
-			`
-		);
-
-		const body = query('am-modal-body', modal);
+		const { modal, body } = createGenericModal(App.text('link'));
 
 		createField(FieldTag.url, body, {
 			value: this.data.link,
@@ -246,15 +226,13 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			label: App.text('openInNewTab'),
 		});
 
-		listen(query('button', modal), 'click', () => {
+		listen(body, 'change', () => {
 			const data = collectFieldData(modal);
 
 			this.data.link = data.link;
 			this.data.openInNewTab = data.newTab ? true : false;
 
 			this.blockAPI.dispatchChange();
-
-			modal.close();
 		});
 
 		setTimeout(() => {

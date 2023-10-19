@@ -40,13 +40,12 @@ import {
 	create,
 	createEditor,
 	createField,
+	createGenericModal,
 	createSelect,
 	CSS,
 	FieldTag,
-	getComponentTargetContainer,
 	html,
 	listen,
-	query,
 	queryAll,
 	resolveFileUrl,
 	uniqueId,
@@ -65,7 +64,6 @@ import iconMinWidth from '@/svg/icons/min-width.svg';
 import iconFlexJustyifyContent from '@/svg/icons/flex-justify-content.svg';
 import iconFlexAlignItems from '@/svg/icons/flex-align-items.svg';
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
-import { ModalComponent } from '@/components/Modal/Modal';
 import { EditorPortalComponent } from '@/components/Editor/EditorPortal';
 
 /**
@@ -476,28 +474,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 * Render the styles modal and append it to root.
 	 */
 	private renderStylesModal(): void {
-		const modal = create(
-			ModalComponent.TAG_NAME,
-			[],
-			{ [Attr.destroy]: '' },
-			getComponentTargetContainer(),
-			html`
-				<am-modal-dialog>
-					<am-modal-header>
-						${App.text('editStyle')}
-					</am-modal-header>
-					<am-modal-body></am-modal-body>
-					<am-modal-footer>
-						<button class="${CSS.button} ${CSS.buttonAccent}">
-							${App.text('ok')}
-						</button>
-					</am-modal-footer>
-				</am-modal-dialog>
-			`
-		);
-
-		const body = query('am-modal-body', modal);
-		const button = query('am-modal-footer button', modal);
+		const { modal, body } = createGenericModal(App.text('editStyle'));
 
 		const field = (
 			type: FieldTag,
@@ -601,12 +578,10 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		Bindings.connectElements(body);
 
-		listen(button, 'click', () => {
+		this.api.listeners.on(body, 'change', () => {
 			this.data.style = collectFieldData(body) as SectionStyle;
 			this.setStyle();
 			this.blockAPI.dispatchChange();
-
-			modal.close();
 		});
 
 		setTimeout(() => {

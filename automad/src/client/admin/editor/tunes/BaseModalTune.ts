@@ -32,15 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import { ModalComponent } from '@/components/Modal/Modal';
 import {
-	App,
-	Attr,
-	create,
+	createGenericModal,
 	CSS,
 	debounce,
 	EventName,
-	html,
 	listen,
 	query,
 } from '@/core';
@@ -147,27 +143,7 @@ export abstract class BaseModalTune<DataType> {
 	protected onActivate(): void {
 		const blockIndex = this.api.blocks.getCurrentBlockIndex();
 		const blockElement = query(':scope > *', this.block.holder);
-		const container = query('.am-ui body, body .am-ui');
-		const modal = create(
-			ModalComponent.TAG_NAME,
-			[],
-			{ [Attr.destroy]: '' },
-			container,
-			html`
-				<am-modal-dialog>
-					<am-modal-body></am-modal-body>
-					<am-modal-footer>
-						<am-modal-close
-							class="${CSS.button} ${CSS.buttonAccent}"
-						>
-							${App.text('close')}
-						</am-modal-close>
-					</am-modal-footer>
-				</am-modal-dialog>
-			`
-		) as ModalComponent;
-
-		const body = query('am-modal-body', modal);
+		const { modal, body } = createGenericModal(this.title);
 
 		const onChange = debounce(() => {
 			this.data = this.sanitize(this.getFormData(modal));

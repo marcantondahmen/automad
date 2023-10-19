@@ -192,6 +192,49 @@ export const createFieldSections = (
 };
 
 /**
+ * Create a generic modal with an empty body element.
+ *
+ * @param title
+ * @param [buttonText]
+ * @param [destroy]
+ * @return an object that contains the modal, body and closing button
+ */
+export const createGenericModal = (
+	title: string,
+	buttonText: string = App.text('ok'),
+	destroy: boolean = true
+): { modal: ModalComponent; body: HTMLElement; button: HTMLElement } => {
+	const attr: KeyValueMap = {};
+
+	if (destroy) {
+		attr[Attr.destroy] = '';
+	}
+
+	const modal = create(
+		ModalComponent.TAG_NAME,
+		[],
+		attr,
+		getComponentTargetContainer(),
+		html`
+			<am-modal-dialog>
+				<am-modal-header>${title}</am-modal-header>
+				<am-modal-body></am-modal-body>
+				<am-modal-footer>
+					<am-modal-close class="${CSS.button} ${CSS.buttonAccent}">
+						${buttonText}
+					</am-modal-close>
+				</am-modal-footer>
+			</am-modal-dialog>
+		`
+	) as ModalComponent;
+
+	const body = query('am-modal-body', modal);
+	const button = query('am-modal-footer button', modal);
+
+	return { modal, body, button };
+};
+
+/**
  * Create an image picker modal.
  *
  * @param onSelect
