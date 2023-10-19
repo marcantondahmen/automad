@@ -71,6 +71,9 @@ import { RawBlock } from '@/editor/blocks/Raw';
 import { GalleryBlock } from '@/editor/blocks/Gallery';
 import { SliderBlock } from '@/editor/blocks/Slider';
 import { ButtonsBlock } from '@/editor/blocks/Buttons';
+// @ts-ignore
+import Embed from '@editorjs/embed';
+import { embedServices } from '@/editor/embedServices';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -220,6 +223,11 @@ export class EditorJSComponent extends BaseComponent {
 				inlineToolbar: false,
 			},
 			delimiter: Delimiter,
+			embed: {
+				class: Embed,
+				inlineToolbar: true,
+				config: { services: embedServices },
+			},
 		};
 	}
 
@@ -301,6 +309,9 @@ export class EditorJSComponent extends BaseComponent {
 					'Add row above': App.text('tableAddRowAbove'),
 					'Add row below': App.text('tableAddRowBelow'),
 					'Delete row': App.text('tableDeleteRow'),
+				},
+				embed: {
+					'Enter a caption': App.text('caption'),
 				},
 			},
 			blockTunes: {
