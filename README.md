@@ -87,6 +87,7 @@ However, I do not exclude at this point using parts of Automad's source in futur
 
 To make the development of themes more efficient, plugins providing syntax highlighting and snippets for Automad's template language are available for the following editors:
 
+-   [Neovim (Tree-Sitter)](https://github.com/automadcms/tree-sitter-automad)
 -   [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MarcAntonDahmen.automad)
 -   [Atom](https://atom.io/packages/language-automad)
 -   [Textmate 2](https://github.com/marcantondahmen/automad.tmbundle)
