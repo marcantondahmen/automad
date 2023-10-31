@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, FieldTag, html, titleCase } from '@/core';
+import {
+	App,
+	Attr,
+	create,
+	CSS,
+	FieldTag,
+	html,
+	query,
+	titleCase,
+} from '@/core';
 import { KeyValueMap, TemplateButtonStatus, TemplateFieldData } from '@/types';
 import { BaseComponent } from '@/components/Base';
 import { SelectComponent } from '@/components/Select';
@@ -103,7 +112,7 @@ const themeStatus = ({
 		selectedTemplate = templatePath(template, appliedTheme.path);
 	}
 
-	templateExists = appliedTheme.templates.indexOf(template) !== -1;
+	templateExists = appliedTheme?.templates.indexOf(template) !== -1;
 
 	if (!templateExists) {
 		buttonIcon = 'question-circle';
@@ -169,7 +178,7 @@ export const createTemplateSelect = (selectedTemplate: string): HTMLElement => {
 
 	const mainGroup = create('optgroup', [], { label: '*' }, select);
 
-	createOptions(mainTheme.templates, mainGroup, selectedTemplate);
+	createOptions(mainTheme?.templates ?? [], mainGroup, selectedTemplate);
 
 	Object.values(themes).forEach((theme: KeyValueMap) => {
 		const group = create('optgroup', [], { label: theme.name }, select);
@@ -258,12 +267,18 @@ export class PageTemplateComponent extends BaseComponent {
 					<am-modal-header>
 						${App.text('pageTemplate')}
 					</am-modal-header>
-					<am-modal-body>
-						${createTemplateSelect(selectedTemplate).outerHTML}
-					</am-modal-body>
+					<am-modal-body></am-modal-body>
 				</am-modal-dialog>
 			`
 		);
+
+		const body = query('am-modal-body', this);
+
+		if (Object.keys(App.themes).length > 0) {
+			body.appendChild(createTemplateSelect(selectedTemplate));
+		} else {
+			body.textContent = App.text('noThemesFound');
+		}
 	}
 }
 

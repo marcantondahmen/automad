@@ -113,6 +113,8 @@ class PackageManagerController {
 			return $Response->setError($error);
 		}
 
+		Cache::clear();
+
 		return $Response->setSuccess(Text::get('packageInstalledSuccess') . '<br>' . $package);
 	}
 
@@ -157,6 +159,8 @@ class PackageManagerController {
 				$Response->setSuccess(Text::get('deteledSuccess') . '<br>' . $package);
 			}
 		}
+
+		Cache::clear();
 
 		return $Response;
 	}
