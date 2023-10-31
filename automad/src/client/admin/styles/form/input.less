@@ -57,7 +57,7 @@
 		color: var(--am-clr-text-muted);
 	}
 
-	&:invalid {
+	&:invalid:not(:required) {
 		border-color: var(--am-clr-border-danger);
 		outline: @am-outline-danger;
 	}
