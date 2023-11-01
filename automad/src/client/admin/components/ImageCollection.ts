@@ -91,7 +91,7 @@ export class ImageCollectionComponent extends BaseComponent {
 	/**
 	 * Render the component and init all listeners.
 	 *
-	 * @paramm images
+	 * @param images
 	 */
 	private render(images: string[]): void {
 		this.removeListeners();
@@ -129,7 +129,6 @@ export class ImageCollectionComponent extends BaseComponent {
 		});
 
 		this.sortable = new Sortable(grid, {
-			group: 'gallery',
 			dataIdAttr: 'data-url',
 			dragoverBubble: false,
 			ghostClass: CSS.imageCollectionItemGhost,
