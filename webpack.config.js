@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -8,7 +9,7 @@ const pkg = require('./package.json');
 
 const optimizeTemplate = (html) => {
 	return html
-		.replace(/\$\{"([^"]+)"\s\/\*\s\w+\s\*\/\}/g, '$1')
+		.replace(/\$\{"([^"]+)"(\s\/\*\s[\w\.\-]+\s\*\/)?\}/g, '$1')
 		.replace(/\s+/g, ' ')
 		.replace(/\<\s+/g, '<')
 		.replace(/\s+\>/g, '>')
@@ -28,9 +29,8 @@ class SystemBellPlugin {
 	}
 }
 
-module.exports = (env, argv) => {
+const common = (env, argv) => {
 	const devMode = argv.mode === 'development';
-
 	const config = {
 		module: {
 			rules: [
@@ -99,16 +99,6 @@ module.exports = (env, argv) => {
 				}),
 				'...',
 			],
-			splitChunks: {
-				cacheGroups: {
-					vendor: {
-						test: /node_modules/,
-						chunks: 'all',
-						name: 'vendor',
-						enforce: true,
-					},
-				},
-			},
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
@@ -130,24 +120,83 @@ module.exports = (env, argv) => {
 	};
 
 	if (devMode) {
-		console.log('Development Mode');
+		config.watch = true;
+		config.devtool = 'source-map';
+	}
 
+	return config;
+};
+
+const admin = (env, argv) => {
+	const config = merge(common(env, argv), {
+		entry: {
+			main: './automad/src/client/admin/index.ts',
+		},
+		resolve: {
+			extensions: ['.ts', '.js'],
+			alias: {
+				'@': path.resolve(__dirname, './automad/src/client/admin'),
+				// Add this alias to make FileRobot imports work.
+				// React is only used as dependency of FileRobot but will be installed in two locations:
+				// 1. node_modules/react
+				// 2. node_modules/filerobot-image-editor/node_modules/react
+				//
+				// It is important to make sure that react is only imported once during bundling and therefore
+				// the alias has to be added here.
+				//
+				// https://github.com/scaleflex/filerobot-image-editor/issues/107#issuecomment-886589896
+				// https://github.com/facebook/react/issues/13991#issuecomment-983316545
+				react: path.resolve(__dirname, './node_modules/react'),
+			},
+		},
+		output: {
+			path: path.resolve(__dirname, './automad/dist/admin'),
+			filename: '[name].bundle.js',
+		},
+	});
+
+	config.optimization.splitChunks = {
+		cacheGroups: {
+			vendor: {
+				test: /node_modules/,
+				chunks: 'all',
+				name: 'vendor',
+				enforce: true,
+			},
+		},
+	};
+
+	if (argv.mode === 'development') {
 		config.plugins.push(
 			new BrowserSyncPlugin({
 				host: 'localhost',
 				port: 3000,
 				proxy: 'http://127.0.0.1:8080/automad-development',
-				files: ['**/*.php', '**/src/**/*.html'],
+				files: ['**/*.php', '**/src/**/*.html', '**/src/**/blocks/**'],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
 				notify: false,
 			})
 		);
-
-		config.watch = true;
-		config.devtool = 'source-map';
-	} else {
-		console.log('Production Mode');
 	}
 
 	return config;
 };
+
+const blocks = (env, argv) =>
+	merge(common(env, argv), {
+		entry: {
+			main: './automad/src/client/blocks/index.ts',
+		},
+		resolve: {
+			extensions: ['.ts', '.js'],
+			alias: {
+				'~': path.resolve(__dirname, './automad/src/client/blocks'),
+			},
+		},
+		output: {
+			path: path.resolve(__dirname, './automad/dist/blocks'),
+			filename: '[name].bundle.js',
+		},
+	});
+
+module.exports = [admin, blocks];
