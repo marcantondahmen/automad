@@ -55,9 +55,11 @@
 		color: var(--am-clr-text-paragraph);
 	}
 
-	&:has(:invalid) &__label {
+	&:has(:invalid:not(:required)) &__label {
 		color: var(--am-clr-text-danger);
+	}
 
+	&:has(:invalid) &__label {
 		&:after {
 			&:extend(.am-bi);
 			content: '\f332';
