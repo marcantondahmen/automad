@@ -172,7 +172,11 @@ const admin = (env, argv) => {
 				host: 'localhost',
 				port: 3000,
 				proxy: 'http://127.0.0.1:8080/automad-development',
-				files: ['**/*.php', '**/src/**/*.html', '**/src/**/blocks/**'],
+				files: [
+					'**/*.php',
+					'./automad/src/client/admin/mockup/**/*.html',
+					'./automad/dist/blocks/main.bundle.*',
+				],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
 				notify: false,
 			})
