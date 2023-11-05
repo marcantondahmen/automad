@@ -34,10 +34,12 @@
 
 import {
 	collectFieldData,
+	create,
 	createField,
 	CSS,
 	FieldTag,
 	html,
+	query,
 	uniqueId,
 } from '@/core';
 import { IdTuneData } from '@/types';
@@ -119,5 +121,23 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 		return this.data
 			? html`<span class="${CSS.badge}">$${this.data}</span>`
 			: '';
+	}
+
+	/**
+	 * Apply tune to block content element.
+	 *
+	 * @param the block content element
+	 * @return the element
+	 */
+	protected wrap(blockElement: HTMLElement): HTMLElement {
+		const badgeContainer =
+			query('.__id', blockElement) ??
+			create('span', ['__id'], {}, blockElement, '', true);
+
+		badgeContainer.innerHTML = this.data
+			? html`<span class="${CSS.badge}">#${this.data}</span>`
+			: '';
+
+		return blockElement;
 	}
 }

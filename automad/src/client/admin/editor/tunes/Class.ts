@@ -35,10 +35,12 @@
 import {
 	App,
 	collectFieldData,
+	create,
 	createField,
 	CSS,
 	FieldTag,
 	html,
+	query,
 	uniqueId,
 } from '@/core';
 import { ClassTuneData } from '@/types';
@@ -122,5 +124,27 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 		return this.data
 			? html`<span class="${CSS.badge}">$${this.data}</span>`
 			: '';
+	}
+
+	/**
+	 * Apply tune to block content element.
+	 *
+	 * @param the block content element
+	 * @return the element
+	 */
+	protected wrap(blockElement: HTMLElement): HTMLElement {
+		const badgeContainer =
+			query('.__class', blockElement) ??
+			create('span', ['__class'], {}, blockElement, '', true);
+
+		badgeContainer.innerHTML = this.data
+			? html`
+					<span class="${CSS.badge} ${CSS.badgeMuted}">
+						.${this.data.replace(/\s+/g, '.')}
+					</span>
+			  `
+			: '';
+
+		return blockElement;
 	}
 }

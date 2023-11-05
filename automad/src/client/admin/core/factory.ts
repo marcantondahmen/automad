@@ -72,6 +72,8 @@ import { EditorJSComponent } from '@/components/Editor/EditorJS';
  * @param classes - an array of class names that are added to the element
  * @param attributes - an object of attributes (key/value pairs) that are added to the element
  * @param [parent] - the optional node where the element will be appendend to
+ * @param [innerHTML] - the optional innerHTML of the created element
+ * @param [prepend] - prepend instead of append
  * @returns the created element
  */
 export const create = (
@@ -79,7 +81,8 @@ export const create = (
 	classes: string[] = [],
 	attributes: object = {},
 	parent: HTMLElement | null = null,
-	innerHTML: string = null
+	innerHTML: string = null,
+	prepend: boolean = false
 ): any => {
 	const element = document.createElement(tag);
 
@@ -92,7 +95,11 @@ export const create = (
 	}
 
 	if (parent) {
-		parent.appendChild(element);
+		if (prepend) {
+			parent.prepend(element);
+		} else {
+			parent.appendChild(element);
+		}
 	}
 
 	if (innerHTML) {
