@@ -96,12 +96,18 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 	 * @return the fields wrapper
 	 */
 	protected createForm(): HTMLElement {
-		return createField(FieldTag.input, null, {
-			label: this.title,
-			value: this.data,
-			key: uniqueId(),
-			name: 'id',
-		});
+		return createField(
+			FieldTag.input,
+			null,
+			{
+				label: this.title,
+				value: this.data,
+				key: uniqueId(),
+				name: 'id',
+			},
+			[],
+			{ pattern: '[\\w\\-_]*' }
+		);
 	}
 
 	/**

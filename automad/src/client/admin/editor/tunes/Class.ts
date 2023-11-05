@@ -97,12 +97,20 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	 * @return the fields wrapper
 	 */
 	protected createForm(): HTMLElement {
-		return createField(FieldTag.input, null, {
-			label: this.title,
-			value: this.data,
-			key: uniqueId(),
-			name: 'className',
-		});
+		return createField(
+			FieldTag.input,
+			null,
+			{
+				label: this.title,
+				value: this.data,
+				key: uniqueId(),
+				name: 'className',
+			},
+			[],
+			{
+				pattern: '[\\w\\-\\s_:]*',
+			}
+		);
 	}
 
 	/**
