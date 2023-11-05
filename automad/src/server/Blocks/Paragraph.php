@@ -51,26 +51,20 @@ class Paragraph extends AbstractBlock {
 	/**
 	 * Render a paragraph block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
+	public static function render(object $block, Automad $Automad): string {
 		$classes = array();
-		$text = htmlspecialchars_decode($data->text);
+		$text = htmlspecialchars_decode($block->data->text);
 
-		if (!empty($data->large)) {
+		if (!empty($block->tunes->large)) {
 			$classes[] = 'am-paragraph-large';
 		}
 
-		if (!empty($data->alignment)) {
-			if ($data->alignment == 'center') {
-				$classes[] = 'am-center';
-			}
-		}
+		$attr = self::attr($block->tunes, $classes);
 
-		$class = self::classAttr($classes);
-
-		return "<p $class>$text</p>";
+		return "<p $attr>$text</p>";
 	}
 }
