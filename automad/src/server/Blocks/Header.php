@@ -52,23 +52,18 @@ class Header extends AbstractBlock {
 	/**
 	 * Render a header block.
 	 *
-	 * @param object $data
+	 * @param object{tunes: object, data: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$classes = array();
-
-		if (!empty($data->alignment)) {
-			if ($data->alignment == 'center') {
-				$classes[] = 'am-center';
-			}
+	public static function render(object $block, Automad $Automad): string {
+		if (empty($block->tunes->id)) {
+			$block->tunes->id = Str::slug(strip_tags($block->data->text), true);
 		}
 
-		return 	'<h' . $data->level .
-				' id="' . Str::slug(strip_tags($data->text), true) . '" ' .
-				self::classAttr($classes) . '>' .
-					htmlspecialchars_decode($data->text) .
-				'</h' . $data->level . '>';
+		$attr = self::attr($block->tunes);
+		$text =	htmlspecialchars_decode($block->data->text);
+
+		return "<h{$block->data->level} $attr>$text</h{$block->data->level}>";
 	}
 }
