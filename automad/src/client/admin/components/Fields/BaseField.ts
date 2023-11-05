@@ -221,12 +221,17 @@ export abstract class BaseFieldComponent
 				this.isSpellchecked ? 'true' : 'false'
 			);
 
-			[Attr.bind, Attr.bindTo, Attr.toggle].forEach((attribute) => {
-				if (this.hasAttribute(attribute)) {
-					input.setAttribute(attribute, this.getAttribute(attribute));
-					this.removeAttribute(attribute);
+			[Attr.bind, Attr.bindTo, Attr.toggle, 'pattern'].forEach(
+				(attribute) => {
+					if (this.hasAttribute(attribute)) {
+						input.setAttribute(
+							attribute,
+							this.getAttribute(attribute)
+						);
+						this.removeAttribute(attribute);
+					}
 				}
-			});
+			);
 		});
 	}
 }
