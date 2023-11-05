@@ -37,6 +37,7 @@
 namespace Automad\Blocks;
 
 use Automad\Core\Automad;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,21 +52,103 @@ abstract class AbstractBlock {
 	/**
 	 * Render a paragraph block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	abstract public static function render(object $data, Automad $Automad): string;
+	abstract public static function render(object $block, Automad $Automad): string;
+
+	/**
+	 * Create an attribute string for id, class and style.
+	 *
+	 * @param object{
+	 *		id?: string,
+	 *		className?: string,
+	 *		spacing?: object{
+	 *			top?: string,
+	 *			right?: string,
+	 *			bottom?: string,
+	 *			left?: string
+	 *		}} $tunes
+	 * @param array $classes
+	 * @param ?array $styles
+	 * @return string
+	 */
+	protected static function attr(object $tunes, array $classes = array(), ?array $styles = null): string {
+		$id = empty($tunes->id) ? '' : 'id="' . $tunes->id . '"';
+
+		return join(' ', array_filter(array($id, self::classAttr($tunes, $classes), self::styleAttr($tunes, $styles))));
+	}
 
 	/**
 	 * Return a class attribute for the wrapping block element.
 	 *
+	 * @param object{className?: string} $tunes
 	 * @param array $custom
 	 * @return string the attribute string
 	 */
-	protected static function classAttr(array $custom = array()): string {
+	protected static function classAttr(object $tunes, array $custom = array()): string {
 		$classes = array_merge(array('am-block'), $custom);
 
+		if (!empty($tunes->className)) {
+			$classes[] = preg_replace('/[<>]/', '', $tunes->className);
+		}
+
 		return 'class="' . join(' ', $classes) . '"';
+	}
+
+	/**
+	 * Return a style attribute for the wrapping block element.
+	 *
+	 * @param object{
+	 *		spacing?: object{
+	 *			top?: string,
+	 *			right?: string,
+	 *			bottom?: string,
+	 *			left?: string
+	 *		}} $tunes
+	 * @param ?array $styles
+	 * @return string the styles attribute
+	 */
+	protected static function styleAttr(object $tunes, ?array $styles = null): string {
+		$styles = array_merge(self::getPaddingStylesFromTunes($tunes), $styles ?? array());
+
+		if (empty($styles)) {
+			return '';
+		}
+
+		$rules = array();
+
+		foreach ($styles as $key => $value) {
+			$value = preg_replace('/[<>]/', '', $value);
+			$rules[] = "$key: $value;";
+		}
+
+		return 'style="' . join(' ', $rules) . '"';
+	}
+
+	/**
+	 * Generate a spacing styles array from tunes.
+	 *
+	 * @param object{
+	 *		spacing?: object{
+	 *			top?: string,
+	 *			right?: string,
+	 *			bottom?: string,
+	 *			left?: string
+	 *		}} $tunes
+	 * @return array<array-key, string> a styles array
+	 */
+	private static function getPaddingStylesFromTunes(object $tunes): array {
+		$sides = array('top', 'right', 'bottom', 'left');
+		$styles = array();
+
+		foreach ($sides as $side) {
+			if (!empty($tunes->spacing->$side)) {
+				$styles["padding-$side"] =  preg_replace('/[<>]/', '', $tunes->spacing->$side);
+			}
+		}
+
+		return $styles;
 	}
 }

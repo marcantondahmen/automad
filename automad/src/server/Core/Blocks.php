@@ -69,7 +69,7 @@ class Blocks {
 	/**
 	 * Render blocks created by the EditorJS block editor.
 	 *
-	 * @param object $data
+	 * @param object{blocks: array<int, object{id:string, data:object, type:string, tunes:object}>} $data
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
@@ -97,7 +97,7 @@ class Blocks {
 
 				$blockHtml = call_user_func_array(
 					'\\Automad\\Blocks\\' . ucfirst($block->type) . '::render',
-					array($block->data, $Automad)
+					array($block, $Automad)
 				);
 
 				// Stretch block.
