@@ -47,8 +47,6 @@ import { DragDrop } from '@/editor/plugins/DragDrop';
 import { LayoutTune } from '@/editor/tunes/Layout';
 import { EditorOutputData, KeyValueMap } from '@/types';
 import EditorJS, { EditorConfig, I18nDictionary } from '@editorjs/editorjs';
-// @ts-ignore
-import Header from '@editorjs/header';
 import { App, CSS } from '@/core';
 import { Delimiter } from '@/editor/blocks/Delimiter';
 import { ImageBlock } from '@/editor/blocks/Image';
@@ -74,6 +72,7 @@ import { ButtonsBlock } from '@/editor/blocks/Buttons';
 // @ts-ignore
 import Embed from '@editorjs/embed';
 import { embedServices } from '@/editor/embedServices';
+import { HeaderBlock } from '@/editor/blocks/Header';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -175,21 +174,10 @@ export class EditorJSComponent extends BaseComponent {
 				tunes: ['large', ...this.baseTunes],
 			},
 			header: {
-				class: class extends Header {
-					static get toolbox() {
-						return {
-							title: App.text('heading'),
-							icon: '<i class="bi bi-type-h1"></i>',
-						};
-					}
-				},
+				class: HeaderBlock,
 				inlineToolbar: true,
 			},
 			section: { class: SectionBlock },
-			image: {
-				class: ImageBlock,
-				inlineToolbar: true,
-			},
 			list: {
 				class: ListBlock,
 				inlineToolbar: true,
@@ -202,8 +190,9 @@ export class EditorJSComponent extends BaseComponent {
 				class: QuoteBlock,
 				inlineToolbar: true,
 			},
-			buttons: {
-				class: ButtonsBlock,
+			delimiter: Delimiter,
+			image: {
+				class: ImageBlock,
 				inlineToolbar: true,
 			},
 			gallery: {
@@ -214,6 +203,10 @@ export class EditorJSComponent extends BaseComponent {
 				class: SliderBlock,
 				inlineToolbar: false,
 			},
+			buttons: {
+				class: ButtonsBlock,
+				inlineToolbar: true,
+			},
 			code: {
 				class: CodeBlock,
 				inlineToolbar: false,
@@ -222,7 +215,6 @@ export class EditorJSComponent extends BaseComponent {
 				class: RawBlock,
 				inlineToolbar: false,
 			},
-			delimiter: Delimiter,
 			embed: {
 				class: Embed,
 				inlineToolbar: true,
