@@ -122,7 +122,7 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	 */
 	protected renderLabel(): string {
 		return this.data
-			? html`<span class="${CSS.badge}">$${this.data}</span>`
+			? html`<span class="${CSS.badge}">$${this.data}</span> `
 			: '';
 	}
 
@@ -139,7 +139,7 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 
 		badgeContainer.innerHTML = this.data
 			? html`
-					<span class="${CSS.badge} ${CSS.badgeMuted}">
+					<span class="${CSS.badge}">
 						.${this.data.replace(/\s+/g, '.')}
 					</span>
 			  `
