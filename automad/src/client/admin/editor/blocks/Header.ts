@@ -73,7 +73,7 @@ export class HeaderBlock extends BaseBlock<HeaderBlockData> {
 	static get sanitize() {
 		return {
 			level: false,
-			text: {},
+			text: { br: true },
 		};
 	}
 
