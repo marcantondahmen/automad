@@ -33,7 +33,7 @@
  */
 
 import { App, create, query } from '@/core';
-import { TextAlignOption, TextAlignSelection } from '@/types';
+import { KeyValueMap, TextAlignOption, TextAlignSelection } from '@/types';
 import { API, InlineToolConstructorOptions } from '@editorjs/editorjs';
 
 abstract class BaseTextAlignInline {
@@ -78,6 +78,17 @@ abstract class BaseTextAlignInline {
 			this.api.styles.inlineToolButtonActive,
 			state
 		);
+	}
+
+	/**
+	 * The tool sanitize config.
+	 *
+	 * @static
+	 */
+	static get sanitize(): KeyValueMap {
+		return {
+			'am-inline-align': true,
+		};
 	}
 
 	/**
