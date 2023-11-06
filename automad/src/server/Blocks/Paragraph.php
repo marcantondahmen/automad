@@ -59,7 +59,7 @@ class Paragraph extends AbstractBlock {
 		$classes = array();
 		$text = htmlspecialchars_decode($block->data->text);
 
-		if (!empty($block->tunes->large)) {
+		if (!empty($block->data->large)) {
 			$classes[] = 'am-paragraph-large';
 		}
 
