@@ -33,7 +33,7 @@
  * https://automad.org/license
  */
 
-import { App, create, html, query } from '@/core';
+import { App, create, CSS, html, query } from '@/core';
 import { HeaderBlockData } from '@/types';
 import {
 	HTMLPasteEvent,
@@ -130,7 +130,7 @@ export class HeaderBlock extends BaseBlock<HeaderBlockData> {
 
 		create(
 			'div',
-			[],
+			[CSS.editorBlockHeader],
 			{ contenteditable: 'true' },
 			create(`h${this.data.level}`, [], {}, this.wrapper)
 		).innerHTML = this.data.text;

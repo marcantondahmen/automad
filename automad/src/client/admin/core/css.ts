@@ -109,6 +109,8 @@ export const enum CSS {
 
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
 
+	editorBlockHeader = 'am-c-ed-bl-header',
+
 	editorBlockImage = 'am-c-ed-bl-image',
 	editorBlockImageButtons = 'am-c-ed-bl-image__buttons',
 
