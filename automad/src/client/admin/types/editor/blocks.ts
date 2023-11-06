@@ -81,6 +81,11 @@ export interface CodeBlockData {
 	language: CodeLanguage;
 }
 
+export interface HeaderBlockData {
+	level: 1 | 2 | 3 | 4 | 5 | 6;
+	text: string;
+}
+
 export interface ImageBlockData {
 	url: string;
 	caption: string;
