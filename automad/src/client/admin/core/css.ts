@@ -114,6 +114,8 @@ export const enum CSS {
 	editorBlockImage = 'am-c-ed-bl-image',
 	editorBlockImageButtons = 'am-c-ed-bl-image__buttons',
 
+	editorBlockParagraph = 'am-c-ed-bl-paragraph',
+
 	editorBlockQuote = 'am-c-ed-bl-quote',
 	editorBlockQuoteText = 'am-c-ed-bl-quote__text',
 	editorBlockQuoteCaption = 'am-c-ed-bl-quote__caption',
