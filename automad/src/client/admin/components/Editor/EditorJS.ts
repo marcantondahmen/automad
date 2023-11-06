@@ -60,10 +60,7 @@ import {
 } from '@/editor/inline/TextAlign';
 import { ClassTune } from '@/editor/tunes/Class';
 import { IdTune } from '@/editor/tunes/Id';
-import { LargeTune } from '@/editor/tunes/Large';
 import { SpacingTune } from '@/editor/tunes/Spacing';
-// @ts-ignore
-import Paragraph from '@editorjs/paragraph';
 import { CodeBlock } from '@/editor/blocks/Code';
 import { RawBlock } from '@/editor/blocks/Raw';
 import { GalleryBlock } from '@/editor/blocks/Gallery';
@@ -73,6 +70,7 @@ import { ButtonsBlock } from '@/editor/blocks/Buttons';
 import Embed from '@editorjs/embed';
 import { embedServices } from '@/editor/embedServices';
 import { HeaderBlock } from '@/editor/blocks/Header';
+import { ParagraphBlock } from '@/editor/blocks/Paragraph';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -162,16 +160,8 @@ export class EditorJSComponent extends BaseComponent {
 	private getBlockTools(): KeyValueMap {
 		return {
 			paragraph: {
-				class: class extends Paragraph {
-					static get toolbox() {
-						return {
-							title: App.text('textTool'),
-							icon: '<i class="bi bi-text-paragraph"></i>',
-						};
-					}
-				},
+				class: ParagraphBlock,
 				inlineToolbar: true,
-				tunes: ['large', ...this.baseTunes],
 			},
 			header: {
 				class: HeaderBlock,
@@ -261,9 +251,6 @@ export class EditorJSComponent extends BaseComponent {
 				config: {
 					isSectionBlock,
 				},
-			},
-			large: {
-				class: LargeTune,
 			},
 		};
 	}

@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
@@ -32,36 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS } from '@/core';
-import { BaseToggleTune } from './BaseToggleTune';
+.am-c-ed-bl-paragraph {
+	line-height: inherit;
+	outline: none !important;
 
-export class LargeTune extends BaseToggleTune {
-	/**
-	 * The tune icon.
-	 */
-	get icon() {
-		return '<i class="bi bi-capslock"></i>';
-	}
-
-	/**
-	 * The default title, also used for filtering.
-	 */
-	get title() {
-		return App.text('large');
-	}
-
-	/**
-	 * Apply tune to block content element.
-	 *
-	 * @param the block content element
-	 * @return the element
-	 */
-	wrap(blockElement: HTMLElement): HTMLElement {
-		blockElement.classList.toggle(
-			`${CSS.editorStyleBase}--large`,
-			this.state
-		);
-
-		return blockElement;
+	.am-style--large & {
+		font-size: 1.45rem;
+		line-height: 1.75rem;
+		font-weight: 450;
 	}
 }

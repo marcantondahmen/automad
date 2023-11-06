@@ -102,6 +102,11 @@ export interface GalleryBlockData {
 	cleanBottom: boolean;
 }
 
+export interface ParagraphBlockData {
+	text: string;
+	large: boolean;
+}
+
 export interface QuoteBlockData {
 	text: string;
 	caption: string;
