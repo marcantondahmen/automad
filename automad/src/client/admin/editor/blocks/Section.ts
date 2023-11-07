@@ -149,7 +149,7 @@ export const styleDefaults: SectionStyle = {
 const editorStyleDefaults = Object.assign({}, styleDefaults, {
 	color: 'inherit',
 	backgroundColor: 'transparent',
-	borderColor: 'transparent',
+	borderColor: 'currentColor',
 });
 
 /**

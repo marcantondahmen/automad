@@ -52,87 +52,84 @@ class Section extends AbstractBlock {
 	/**
 	 * Render a section editor block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$html = Blocks::render($data->content, $Automad);
-		$style = '';
+	public static function render(object $block, Automad $Automad): string {
+		$data = $block->data;
+		$html = '';
+
+		if ($data->content) {
+			$html = Blocks::render($data->content, $Automad);
+		}
+
+		$defaultStyles = array(
+			'backgroundColor' => '',
+			'backgroundBlendMode' => '',
+			'borderWidth' => '0px',
+			'borderRadius' => '',
+			'borderStyle' => '',
+			'paddingTop' => '',
+			'paddingBottom' => ''
+		);
+
 		$classes = array();
+		$styles = array_intersect_key(
+			array_filter(array_merge($defaultStyles, array_filter((array) $data->style))),
+			$defaultStyles
+		);
+
+		if (!empty($data->gap)) {
+			$styles['--am-flex-gap'] = $data->gap;
+		}
+
+		if (!empty($data->minBlockWidth)) {
+			$styles['--am-flex-min-block-width'] = $data->minBlockWidth;
+		}
 
 		if (!empty($data->justify)) {
 			$classes[] = "am-justify-{$data->justify}";
 		}
 
-		if (!empty($data->gap)) {
-			$style .= " --am-flex-gap: {$data->gap};";
-		}
-
-		if (!empty($data->minBlockWidth)) {
-			$style .= " --am-flex-min-block-width: {$data->minBlockWidth};";
+		if (!empty($data->align)) {
+			$classes[] = "am-align-{$data->align}";
 		}
 
 		if (!empty($data->style)) {
-			if (!empty($data->style->card)) {
-				$classes[] = 'am-card';
-			}
-
-			if (!empty($data->style->class)) {
-				$classes = array_merge($classes, explode(' ', $data->style->class));
-			}
-
 			if (!empty($data->style->backgroundImage)) {
-				$style .= " background-image: url('{$data->style->backgroundImage}');";
+				$styles['backgroundImage'] = "url('{$data->style->backgroundImage}')";
 			}
 
 			if (!empty($data->style->overflowHidden)) {
-				$style .= ' overflow: hidden;';
+				$styles['overflow'] = 'hidden';
 			}
 
 			if (!empty($data->style->matchRowHeight)) {
-				$style .= ' height: 100%;';
+				$styles['height'] = '100%';
 			}
 
 			if (!empty($data->style->shadow)) {
-				$style .= ' box-shadow: var(--am-section-shadow);';
+				$styles['boxShadow'] = 'var(--am-section-shadow)';
 			}
 
-			foreach (array(
-				'backgroundColor',
-				'backgroundBlendMode',
-				'borderWidth',
-				'borderRadius',
-				'paddingTop',
-				'paddingBottom'
-			) as $item) {
-				$property = strtolower(preg_replace('/([A-Z])/', '-$1', $item));
-
-				if (!empty($data->style->$item)) {
-					$style .= " $property: {$data->style->$item};";
-				}
+			if (!empty($data->style->color)) {
+				$styles['--am-section-color'] = $data->style->color;
 			}
 
-			foreach (array(
-				'color',
-				'borderColor'
-			) as $item) {
-				$property = strtolower(preg_replace('/([A-Z])/', '-$1', $item));
+			if (!empty($data->style->borderColor)) {
+				$styles['--am-section-border-color'] = $data->style->borderColor;
+			}
 
-				if (!empty($data->style->$item)) {
-					$style .= " --am-section-$property: {$data->style->$item};";
-				}
+			if (!empty($data->style->card)) {
+				$classes[] = 'am-card';
 			}
 		}
 
-		if ($style) {
-			$style = 'style="' . trim($style) . '"';
-		}
-
-		$class = self::classAttr($classes);
+		$attr = self::attr($block->tunes, $classes, $styles);
 
 		return <<< HTML
-			<am-section $class $style>
+			<am-section $attr>
 				$html
 			</am-section>
 		HTML;
