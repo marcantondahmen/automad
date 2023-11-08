@@ -63,6 +63,7 @@ class Fields {
 	const HEIGHT = ':height';
 	const HEIGHT_RESIZED = ':heightResized';
 	const HIDDEN = 'hidden';
+	const LANG = ':lang';
 	const LEVEL = ':level';
 	const LOOP_INDEX = ':i';
 	const NOW = ':now';

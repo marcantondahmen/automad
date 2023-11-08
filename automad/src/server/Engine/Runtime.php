@@ -39,6 +39,7 @@ namespace Automad\Engine;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
+use Automad\Core\I18n;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -92,6 +93,10 @@ class Runtime {
 				case Fields::FILELIST_COUNT:
 					// The filelist count represents the number of files within the last defined filelist.
 					return count($this->Automad->getFilelist()->getFiles());
+
+				case Fields::LANG:
+					// The currently active language.
+					return I18n::get()->getLanguage();
 
 				case Fields::PAGELIST_COUNT:
 					// The pagelist count represents the number of pages within the last defined pagelist, ignoring limit and pagination.
