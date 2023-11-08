@@ -43,6 +43,7 @@ use Automad\Controllers\ImageController;
 use Automad\Controllers\PageController;
 use Automad\Core\Cache;
 use Automad\Core\Feed;
+use Automad\Core\I18n;
 use Automad\Core\Parse;
 use Automad\Core\Router;
 use Automad\Core\Session;
@@ -229,6 +230,15 @@ class Routes {
 	 * @param Router $Router
 	 */
 	private static function registerPageRoutes(Router $Router): void {
+		$Router->register(
+			'/',
+			function () {
+				header(('Location: ' . AM_BASE_URL . '/' . I18n::get()->getLanguage()));
+				exit();
+			},
+			AM_I18N_ENABLED
+		);
+
 		$Router->register(
 			'/.*',
 			array(PageController::class, 'render')

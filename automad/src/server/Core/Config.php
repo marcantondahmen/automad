@@ -144,6 +144,10 @@ class Config {
 		// Packagist
 		self::set('AM_PACKAGE_REPO_QUERY', 'https://packagist.org/search.json?type=automad-package&per_page=100');
 
+		// I18n
+		self::set('AM_I18N_ENABLED', false);
+		self::set('AM_I18N_DEFAULT_LANG', '');
+
 		// Version number
 		include AM_BASE_DIR . '/automad/version.php';
 	}
