@@ -38,6 +38,7 @@ import {
 	createField,
 	CSS,
 	FieldTag,
+	fire,
 	html,
 	query,
 	uniqueId,
@@ -137,6 +138,8 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 		badgeContainer.innerHTML = this.data
 			? html`<span class="${CSS.badge}">#${this.data}</span>`
 			: '';
+
+		fire('change', blockElement);
 
 		return blockElement;
 	}

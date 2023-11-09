@@ -39,6 +39,7 @@ import {
 	createField,
 	CSS,
 	FieldTag,
+	fire,
 	html,
 	query,
 	uniqueId,
@@ -144,6 +145,8 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 					</span>
 			  `
 			: '';
+
+		fire('change', blockElement);
 
 		return blockElement;
 	}
