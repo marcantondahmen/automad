@@ -108,6 +108,7 @@ class State {
 					'enabled' => AM_FEED_ENABLED,
 					'fields' => Parse::csv(AM_FEED_FIELDS)
 				),
+				'i18n' => AM_I18N_ENABLED,
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection())
 			),

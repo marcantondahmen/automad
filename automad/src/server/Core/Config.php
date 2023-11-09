@@ -146,7 +146,6 @@ class Config {
 
 		// I18n
 		self::set('AM_I18N_ENABLED', false);
-		self::set('AM_I18N_DEFAULT_LANG', '');
 
 		// Version number
 		include AM_BASE_DIR . '/automad/version.php';

@@ -83,16 +83,13 @@ class I18n {
 
 		$serverLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 0, 2);
 		$urlLang = substr(trim(AM_REQUEST, '/'), 0, 2);
-		$lang = AM_I18N_DEFAULT_LANG;
+		$fallbacks = array_filter(array_merge(PageIndex::read('/'), $available));
+		$lang = substr($fallbacks[0] ?? 'en', 0, 2);
 
 		if (in_array($urlLang, $available)) {
 			$lang = $urlLang;
 		} elseif (in_array($serverLang, $available)) {
 			$lang = $serverLang;
-		}
-
-		if (!$lang) {
-			$lang = $available[0];
 		}
 
 		$this->lang = $lang;
