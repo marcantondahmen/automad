@@ -26,60 +26,59 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { Section } from '@/components/Switcher/Switcher';
+import {
+	App,
+	Attr,
+	Binding,
+	createField,
+	EventName,
+	FieldTag,
+	listen,
+} from '@/core';
+import { BaseComponent } from '../Base';
 
-type Enabled = boolean | 0 | 1;
+/**
+ * A wrapper element for initializing the i18n enable checkbox.
+ *
+ * @extends BaseComponent
+ */
+class I18nEnableComponent extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		const i18nEnabled = new Binding('i18nEnabled', {
+			initial: App.system.i18n,
+		});
 
-export interface SystemSectionData {
-	section: Section;
-	icon: string;
-	title: string;
-	info: string;
-	state: string;
-	render: () => void;
-	narrowIcon?: boolean;
+		this.addListener(
+			listen(window, EventName.appStateChange, () => {
+				i18nEnabled.value = App.system.i18n;
+			})
+		);
+
+		createField(
+			FieldTag.toggleLarge,
+			this,
+			{
+				key: 'i18nEnabled',
+				value: App.system.i18n,
+				name: 'i18nEnabled',
+				label: App.text('systemI18nEnable'),
+			},
+			[],
+			{
+				[Attr.bind]: 'i18nEnabled',
+				[Attr.bindTo]: 'checked',
+			}
+		);
+	}
 }
 
-interface CacheSettings {
-	enabled: Enabled;
-	lifetime: number;
-	monitorDelay: number;
-}
-
-interface FeedSettings {
-	enabled: Enabled;
-	fields: string;
-}
-
-interface UserSettings {
-	name: string;
-	email: string;
-}
-
-export interface SystemSettings {
-	cache: CacheSettings;
-	debug: Enabled;
-	feed: FeedSettings;
-	i18n: Enabled;
-	translation: string;
-	users: UserSettings[];
-	tempDirectory: string;
-}
-
-export interface SystemUpdateResponse {
-	state: string;
-	current: string;
-	latest: string;
-	items: string[];
-}
-
-export interface User {
-	name: string;
-	email: string;
-}
+customElements.define('am-i18n-enable', I18nEnableComponent);

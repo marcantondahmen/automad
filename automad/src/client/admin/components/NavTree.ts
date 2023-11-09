@@ -93,7 +93,7 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 	const active = data.url == getPageURL() ? CSS.navItemActive : '';
 
 	return html`
-		<span class="${CSS.navItem} ${active}">
+		<span class="${CSS.navItem} ${active}" title="${data.url}">
 			<am-link
 				class="${CSS.navLink}"
 				${Attr.target}="${Route.page}?url=${encodeURIComponent(

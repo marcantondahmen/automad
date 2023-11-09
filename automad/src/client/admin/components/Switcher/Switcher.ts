@@ -48,11 +48,12 @@ import { SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
 
-export enum Section {
+export const enum Section {
 	overview = 'overview',
 	cache = 'cache',
 	users = 'users',
 	update = 'update',
+	i18n = 'i18n',
 	feed = 'feed',
 	language = 'language',
 	debug = 'debug',

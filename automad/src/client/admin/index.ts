@@ -93,6 +93,7 @@ import './components/Indicators/Sidebar/OutdatedPackagesIndicator';
 import './components/Indicators/System/CacheIndicator';
 import './components/Indicators/System/DebugIndicator';
 import './components/Indicators/System/FeedIndicator';
+import './components/Indicators/System/I18nIndicator';
 import './components/Indicators/System/SystemUpdateIndicator';
 import './components/Indicators/System/UserCountIndicator';
 
@@ -137,6 +138,7 @@ import './components/System/CacheMonitor';
 import './components/System/DebugEnable';
 import './components/System/FeedEnable';
 import './components/System/FeedFields';
+import './components/System/I18nEnable';
 import './components/System/LanguageSelect';
 import './components/System/UserEmail';
 import './components/System/UserName';
