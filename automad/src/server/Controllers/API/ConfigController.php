@@ -131,6 +131,11 @@ class ConfigController {
 
 				break;
 
+			case 'i18n':
+				$config['AM_I18N_ENABLED'] = !empty(Request::post('i18nEnabled'));
+
+				break;
+
 			case 'translation':
 				$config['AM_FILE_UI_TRANSLATION'] = Request::post('translation');
 				$Response->setReload(true);

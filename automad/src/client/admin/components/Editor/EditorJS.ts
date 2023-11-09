@@ -168,7 +168,7 @@ export class EditorJSComponent extends BaseComponent {
 				inlineToolbar: true,
 			},
 			section: { class: SectionBlock },
-			list: {
+			lists: {
 				class: ListBlock,
 				inlineToolbar: true,
 			},
