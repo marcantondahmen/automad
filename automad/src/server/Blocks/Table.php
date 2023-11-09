@@ -51,16 +51,18 @@ class Table extends AbstractBlock {
 	/**
 	 * Render a table block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$class = self::classAttr();
-		$html = "<am-table $class><table>";
+	public static function render(object $block, Automad $Automad): string {
+		$attr = self::attr($block->tunes);
+		$data = $block->data;
+		$html = "<am-table $attr><table>";
+		$rows = (array) $data->content;
 
 		if (!empty($data->withHeadings)) {
-			$firstRow = array_shift($data->content) ?? array();
+			$firstRow = array_shift($rows) ?? array();
 
 			$html .= '<thead>';
 			$html .= '<tr>';
@@ -75,7 +77,7 @@ class Table extends AbstractBlock {
 
 		$html .= '<tbody>';
 
-		foreach ($data->content as $row) {
+		foreach ($rows as $row) {
 			$html .= '<tr>';
 
 			foreach ($row as $item) {
