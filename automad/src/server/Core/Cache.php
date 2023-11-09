@@ -139,13 +139,13 @@ class Cache {
 		$this->pageCachingIsEnabled = true;
 
 		// Define object cache file for visitors.
-		$this->objectCacheFile = trim(AM_FILE_OBJECT_CACHE . '_' . I18n::get()->getLanguage(), '_');
+		$this->objectCacheFile = trim(Cache::FILE_OBJECT_CACHE . '_' . I18n::get()->getLanguage(), '_');
 
 		// Disable page caching for in-page edit mode and define ui cache file.
 		if (Session::getUsername()) {
 			$this->pageCachingIsEnabled = false;
 			Debug::log('Page cache is disabled during editing.');
-			$this->objectCacheFile = trim(AM_FILE_OBJECT_USER_CACHE . '_' . I18n::get()->getLanguage(), '_');
+			$this->objectCacheFile = trim(Cache::FILE_OBJECT_API_CACHE . '_' . I18n::get()->getLanguage(), '_');
 			Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
 		}
 
