@@ -51,26 +51,18 @@ class Quote extends AbstractBlock {
 	/**
 	 * Render a quote block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$classes = array();
-
-		if (!empty($data->alignment)) {
-			if ($data->alignment == 'center') {
-				$classes[] = 'am-center';
-			}
-		}
-
-		$class = self::classAttr($classes);
+	public static function render(object $block, Automad $Automad): string {
+		$attr = self::attr($block->tunes);
 
 		return <<< HTML
-			<am-quote $class>
+			<am-quote $attr>
 				<figure>
-					<blockquote>$data->text</blockquote>
-					<figcaption>$data->caption</figcaption>
+					<blockquote>{$block->data->text}</blockquote>
+					<figcaption>{$block->data->caption}</figcaption>
 				</figure>
 			</am-quote>
 		HTML;

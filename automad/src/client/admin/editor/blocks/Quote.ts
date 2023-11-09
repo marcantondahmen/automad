@@ -108,8 +108,7 @@ export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 		this.wrapper.classList.add(
 			CSS.editorBlockQuote,
 			CSS.flex,
-			CSS.flexColumn,
-			CSS.flexGap
+			CSS.flexColumn
 		);
 
 		this.inputs = {
