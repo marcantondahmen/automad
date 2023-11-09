@@ -56,21 +56,21 @@ class Lists extends AbstractBlock {
 	/**
 	 * Render a list block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		if ($data->style == 'ordered') {
+	public static function render(object $block, Automad $Automad): string {
+		if ($block->data->style == 'ordered') {
 			self::$tag = 'ol';
 		} else {
 			self::$tag = 'ul';
 		}
 
-		$html = self::renderItems((array) $data->items);
-		$class = self::classAttr();
+		$html = self::renderItems((array) $block->data->items);
+		$attr = self::attr($block->tunes);
 
-		return "<am-list $class>$html</am-list>";
+		return "<am-list $attr>$html</am-list>";
 	}
 
 	/**
