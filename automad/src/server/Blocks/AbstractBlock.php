@@ -71,7 +71,7 @@ abstract class AbstractBlock {
 	 *			left?: string
 	 *		}} $tunes
 	 * @param array $classes
-	 * @param ?array $styles
+	 * @param ?array<non-empty-literal-string, string> $styles
 	 * @return string
 	 */
 	protected static function attr(object $tunes, array $classes = array(), ?array $styles = null): string {
@@ -107,7 +107,7 @@ abstract class AbstractBlock {
 	 *			bottom?: string,
 	 *			left?: string
 	 *		}} $tunes
-	 * @param ?array $styles
+	 * @param ?array<non-empty-literal-string, string> $styles
 	 * @return string the styles attribute
 	 */
 	protected static function styleAttr(object $tunes, ?array $styles = null): string {
@@ -138,7 +138,7 @@ abstract class AbstractBlock {
 	 *			bottom?: string,
 	 *			left?: string
 	 *		}} $tunes
-	 * @return array<array-key, string> a styles array
+	 * @return array<non-empty-literal-string, string> a styles array
 	 */
 	private static function getPaddingStylesFromTunes(object $tunes): array {
 		$sides = array('top', 'right', 'bottom', 'left');
@@ -146,6 +146,7 @@ abstract class AbstractBlock {
 
 		foreach ($sides as $side) {
 			if (!empty($tunes->spacing->$side)) {
+				/** @var string */
 				$styles["padding-$side"] =  preg_replace('/[<>]/', '', $tunes->spacing->$side);
 			}
 		}
