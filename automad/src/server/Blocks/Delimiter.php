@@ -51,11 +51,11 @@ class Delimiter extends AbstractBlock {
 	/**
 	 * Render a delimiter block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		return '<hr ' . self::classAttr() . '>';
+	public static function render(object $block, Automad $Automad): string {
+		return '<div ' . self::attr($block->tunes) . '><hr></div>';
 	}
 }
