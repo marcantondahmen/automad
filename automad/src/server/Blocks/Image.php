@@ -51,13 +51,13 @@ class Image extends AbstractBlock {
 	/**
 	 * Render an image block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$class = self::classAttr();
-
+	public static function render(object $block, Automad $Automad): string {
+		$attr = self::attr($block->tunes);
+		$data = $block->data;
 		$img = "<img src=\"{$data->url}\" />";
 		$caption = '';
 
@@ -66,11 +66,12 @@ class Image extends AbstractBlock {
 		}
 
 		if (!empty($data->link)) {
-			$img = "<a href=\"{$data->link}\">$img</a>";
+			$target = $data->openInNewTab ? ' target="_blank"' : '';
+			$img = "<a href=\"{$data->link}\"{$target}>$img</a>";
 		}
 
 		return <<< HTML
-			<am-img $class>
+			<am-img $attr>
 				<figure>
 					$img
 					$caption
