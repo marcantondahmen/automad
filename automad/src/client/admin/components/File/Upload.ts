@@ -36,6 +36,7 @@ import Dropzone, { DropzoneFile, DropzoneOptions } from 'dropzone';
 import {
 	App,
 	Attr,
+	controllerRoute,
 	create,
 	CSS,
 	FileCollectionController,
@@ -196,8 +197,12 @@ class UploadComponent extends BaseComponent {
 		const form = create(
 			'form',
 			[CSS.uploadDropzone],
-			{ action: `${App.apiURL}/${FileCollectionController.upload}` },
-			this
+			{
+				action: `${App.apiURL}/${controllerRoute(
+					FileCollectionController.upload,
+				)}`,
+			},
+			this,
 		);
 
 		form.innerHTML = html`<span>${App.text('dropFilesOrClick')}</span>`;

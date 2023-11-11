@@ -260,7 +260,7 @@ export const requestAPI = async (
  * @param controller
  * @return the route
  */
-const controllerRoute = (controller: string): string => {
+export const controllerRoute = (controller: string): string => {
 	const [controllerClass, method] = controller.split('::');
 	const convert = (part: string) => {
 		return part
