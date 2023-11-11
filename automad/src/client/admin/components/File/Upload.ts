@@ -199,10 +199,10 @@ class UploadComponent extends BaseComponent {
 			[CSS.uploadDropzone],
 			{
 				action: `${App.apiURL}/${controllerRoute(
-					FileCollectionController.upload,
+					FileCollectionController.upload
 				)}`,
 			},
-			this,
+			this
 		);
 
 		form.innerHTML = html`<span>${App.text('dropFilesOrClick')}</span>`;

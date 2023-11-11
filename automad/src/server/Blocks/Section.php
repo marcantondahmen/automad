@@ -75,6 +75,8 @@ class Section extends AbstractBlock {
 		);
 
 		$classes = array();
+
+		/** @var array<non-empty-literal-string, string> */
 		$styles = array_intersect_key(
 			array_filter(array_merge($defaultStyles, array_filter((array) $data->style))),
 			$defaultStyles

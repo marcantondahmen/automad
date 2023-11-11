@@ -104,6 +104,7 @@ class Blocks {
 				if ($stretched) {
 					$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
 				} elseif ($width) {
+					/** @var string */
 					$w = str_replace('/', '-', $width);
 					$blockHtml = "<am-$w>$blockHtml</am-$w>";
 				}
