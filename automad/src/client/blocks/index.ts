@@ -33,3 +33,5 @@
  */
 
 import './styles/index.less';
+
+import './components/ImgLoader';

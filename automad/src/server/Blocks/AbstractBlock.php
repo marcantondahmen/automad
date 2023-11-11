@@ -37,6 +37,9 @@
 namespace Automad\Blocks;
 
 use Automad\Core\Automad;
+use Automad\Core\Image;
+use Automad\Core\RemoteFile;
+use Automad\Core\Resolve;
 use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -95,6 +98,34 @@ abstract class AbstractBlock {
 		}
 
 		return 'class="' . join(' ', $classes) . '"';
+	}
+
+	/**
+	 * Return a pair of two images, the actual cached image and the tiny preload-background.
+	 * The specified $file can either be a remote URL or a local path.
+	 *
+	 * @param string $file
+	 * @param Automad $Automad
+	 * @return object{image: string, preload: string}
+	 */
+	protected static function getPreloadableImage(string $file, Automad $Automad): object {
+		if (preg_match('/\:\/\//is', $file)) {
+			$RemoteFile = new RemoteFile($file);
+			$file = $RemoteFile->getLocalCopy();
+		} else {
+			$file = Resolve::filePath($Automad->Context->get()->path, $file);
+		}
+
+		preg_match('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png|webp))(\?(\d+)x(\d+))?/is', $file, $matches);
+
+		$file = $matches[1];
+		$width = $matches[3] ?? 0;
+		$height = $matches[4] ?? 0;
+
+		$Image = new Image($file, $width, $height, true);
+		$Preload = new Image(AM_BASE_DIR . $Image->file, 20);
+
+		return (object) array('image' => AM_BASE_URL . $Image->file, 'preload' => AM_BASE_URL . $Preload->file);
 	}
 
 	/**

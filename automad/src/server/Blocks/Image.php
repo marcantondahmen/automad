@@ -58,7 +58,10 @@ class Image extends AbstractBlock {
 	public static function render(object $block, Automad $Automad): string {
 		$attr = self::attr($block->tunes);
 		$data = $block->data;
-		$img = "<img src=\"{$data->url}\" />";
+
+		$images = self::getPreloadableImage($data->url, $Automad);
+
+		$img = "<am-img-loader image=\"{$images->image}\" preload=\"{$images->preload}\"></am-img-loader>";
 		$caption = '';
 
 		if (!empty($data->caption)) {
@@ -71,12 +74,10 @@ class Image extends AbstractBlock {
 		}
 
 		return <<< HTML
-			<am-img $attr>
-				<figure>
-					$img
-					$caption
-				</figure>
-			</am-img>
+			<figure $attr>
+				$img
+				$caption
+			</figure>
 		HTML;
 	}
 }
