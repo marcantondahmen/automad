@@ -10,7 +10,8 @@
 		"outDir": "dist",
 		"paths": {
 			"@/*": ["./automad/src/client/admin/*"],
-			"~/*": ["./automad/src/client/blocks/*"]
+			"~/*": ["./automad/src/client/blocks/*"],
+			"common": ["./automad/src/client/common/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "automad/dist"]

@@ -136,6 +136,7 @@ const admin = (env, argv) => {
 			extensions: ['.ts', '.js'],
 			alias: {
 				'@': path.resolve(__dirname, './automad/src/client/admin'),
+				common: path.resolve(__dirname, './automad/src/client/common'),
 				// Add this alias to make FileRobot imports work.
 				// React is only used as dependency of FileRobot but will be installed in two locations:
 				// 1. node_modules/react
@@ -195,6 +196,7 @@ const blocks = (env, argv) =>
 			extensions: ['.ts', '.js'],
 			alias: {
 				'~': path.resolve(__dirname, './automad/src/client/blocks'),
+				common: path.resolve(__dirname, './automad/src/client/common'),
 			},
 		},
 		output: {

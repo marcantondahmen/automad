@@ -32,6 +32,8 @@
  * Licensed under the MIT license.
  */
 
+export { create } from 'common';
+
 export * from './app';
 export * from './bindings';
 export * from './controllers';
