@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -68,7 +69,7 @@ class Lists extends AbstractBlock {
 		}
 
 		$html = self::renderItems((array) $block->data->items);
-		$attr = self::attr($block->tunes);
+		$attr = Attr::render($block->tunes);
 
 		return "<am-list $attr>$html</am-list>";
 	}

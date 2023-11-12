@@ -36,6 +36,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
+use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,12 +58,12 @@ class Image extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(object $block, Automad $Automad): string {
-		$attr = self::attr($block->tunes);
+		$attr = Attr::render($block->tunes);
 		$data = $block->data;
 
-		$images = self::getPreloadableImage($data->url, $Automad);
+		$ImgLoaderSet = new ImgLoaderSet($data->url, $Automad);
 
-		$img = "<am-img-loader image=\"{$images->image}\" preload=\"{$images->preload}\"></am-img-loader>";
+		$img = "<am-img-loader image=\"{$ImgLoaderSet->image}\" preload=\"{$ImgLoaderSet->preload}\"></am-img-loader>";
 		$caption = '';
 
 		if (!empty($data->caption)) {

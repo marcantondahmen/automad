@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,6 +57,6 @@ class Delimiter extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(object $block, Automad $Automad): string {
-		return '<div ' . self::attr($block->tunes) . '><hr></div>';
+		return '<div ' . Attr::render($block->tunes) . '><hr></div>';
 	}
 }

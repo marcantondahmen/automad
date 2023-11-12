@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 
@@ -128,7 +129,7 @@ class Section extends AbstractBlock {
 			}
 		}
 
-		$attr = self::attr($block->tunes, $classes, $styles);
+		$attr = Attr::render($block->tunes, $classes, $styles);
 
 		return <<< HTML
 			<am-section $attr>

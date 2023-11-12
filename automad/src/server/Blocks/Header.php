@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Str;
 
@@ -61,7 +62,7 @@ class Header extends AbstractBlock {
 			$block->tunes->id = Str::slug(strip_tags($block->data->text), true);
 		}
 
-		$attr = self::attr($block->tunes);
+		$attr = Attr::render($block->tunes);
 		$text =	htmlspecialchars_decode($block->data->text);
 
 		return "<h{$block->data->level} $attr>$text</h{$block->data->level}>";
