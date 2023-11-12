@@ -36,6 +36,9 @@ import { create } from 'common';
 
 /**
  * A simple image preloader with a blurred background.
+ *
+ * @example
+ * <am-img-loader image="..." preload="..." width="200" height="200"></am-img-loader>
  */
 export class ImgLoaderComponent extends HTMLElement {
 	/**
