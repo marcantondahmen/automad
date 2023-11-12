@@ -63,7 +63,7 @@ class Image extends AbstractBlock {
 
 		$ImgLoaderSet = new ImgLoaderSet($data->url, $Automad);
 
-		$img = "<am-img-loader image=\"{$ImgLoaderSet->image}\" preload=\"{$ImgLoaderSet->preload}\"></am-img-loader>";
+		$img = "<am-img-loader width=\"{$ImgLoaderSet->width}\" height=\"{$ImgLoaderSet->height}\" image=\"{$ImgLoaderSet->image}\" preload=\"{$ImgLoaderSet->preload}\"></am-img-loader>";
 		$caption = '';
 
 		if (!empty($data->caption)) {

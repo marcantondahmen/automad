@@ -51,9 +51,25 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class ImgLoaderSet {
+	/**
+	 * The resized image height.
+	 */
+	public float $height;
+
+	/**
+	 * The url to the actual large image.
+	 */
 	public string $image;
 
+	/**
+	 * The url to the tiny blurred placeholder image.
+	 */
 	public string $preload;
+
+	/**
+	 * The resized image width.
+	 */
+	public float $width;
 
 	/**
 	 * Create a pair of two images, the actual cached image and the tiny preload-background.
@@ -61,8 +77,10 @@ class ImgLoaderSet {
 	 *
 	 * @param string $file
 	 * @param Automad $Automad
+	 * @param float $width
+	 * @param float $height
 	 */
-	public function __construct(string $file, Automad $Automad) {
+	public function __construct(string $file, Automad $Automad, float $width = 0, float $height = 0) {
 		if (preg_match('/\:\/\//is', $file)) {
 			$RemoteFile = new RemoteFile($file);
 			$file = $RemoteFile->getLocalCopy();
@@ -72,14 +90,13 @@ class ImgLoaderSet {
 
 		preg_match('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png|webp))(\?(\d+)x(\d+))?/is', $file, $matches);
 
-		$file = $matches[1];
-		$width = $matches[3] ?? 0;
-		$height = $matches[4] ?? 0;
-
-		$Image = new Image($file, $width, $height, true);
-		$Preload = new Image(AM_BASE_DIR . $Image->file, 20);
+		$Image = new Image($matches[1], $matches[3] ?? $width, $matches[4] ?? $height, true);
 
 		$this->image = AM_BASE_URL . $Image->file;
+		$this->width = $Image->width;
+		$this->height = $Image->height;
+
+		$Preload = new Image(AM_BASE_DIR . $Image->file, 20);
 		$this->preload = AM_BASE_URL . $Preload->file;
 	}
 }

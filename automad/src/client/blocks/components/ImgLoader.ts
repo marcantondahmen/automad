@@ -32,6 +32,8 @@
  * Licensed under the MIT license.
  */
 
+import { create } from 'common';
+
 /**
  * A simple image preloader with a blurred background.
  */
@@ -47,7 +49,19 @@ export class ImgLoaderComponent extends HTMLElement {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const img = document.createElement('img');
+		this.style.backgroundImage = `url(${this.getAttribute('preload')})`;
+
+		const img = create(
+			'img',
+			[],
+			{
+				src: this.getAttribute('image'),
+				width: this.getAttribute('width'),
+				height: this.getAttribute('height'),
+			},
+			this
+		);
+
 		const loaded = () => {
 			this.classList.add('am-loaded');
 
@@ -55,11 +69,6 @@ export class ImgLoaderComponent extends HTMLElement {
 				this.replaceWith(img);
 			}, 300);
 		};
-
-		img.src = this.getAttribute('image');
-
-		this.style.backgroundImage = `url(${this.getAttribute('preload')})`;
-		this.appendChild(img);
 
 		if (img.complete) {
 			loaded();
