@@ -64,20 +64,11 @@ const common = (env, argv) => {
 					test: /\.svg$/,
 					loader: 'html-loader',
 				},
-				// Fix file name of inter font.
 				{
 					test: /\.woff2?$/i,
 					type: 'asset/resource',
 					generator: {
-						filename: (pathData) => {
-							const name = path.basename(
-								pathData.module.resourceResolveData.relativePath
-							);
-
-							return `../fonts/${name
-								.replace('.var', '-var')
-								.toLowerCase()}`;
-						},
+						filename: '[name][ext][query]',
 					},
 				},
 				// Ignore Bootstrap icons legacy woff file.
