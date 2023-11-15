@@ -76,6 +76,9 @@ class Dashboard {
 				{$fn(Asset::css('dist/admin/vendor.bundle.css'))}
 				{$fn(Asset::css('dist/admin/main.bundle.css'))}
 				{$fn(Asset::js('dist/admin/vendor.bundle.js'))}
+				{$fn(Asset::js('dist/admin/vendor.editorjs.bundle.js'))}
+				{$fn(Asset::js('dist/admin/vendor.filerobot.bundle.js'))}
+				{$fn(Asset::js('dist/admin/vendor.toastui.bundle.js'))}
 				{$fn(Asset::js('dist/admin/main.bundle.js'))}
 			</head>
 			<body>

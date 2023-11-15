@@ -164,6 +164,27 @@ const admin = (env, argv) => {
 				name: 'vendor',
 				enforce: true,
 			},
+			filerobot: {
+				test: /(@scaleflex|filerobot|react)/,
+				chunks: 'all',
+				name: 'vendor.filerobot',
+				enforce: true,
+				priority: 1,
+			},
+			editorjs: {
+				test: /(@editorjs|codex)/,
+				chunks: 'all',
+				name: 'vendor.editorjs',
+				enforce: true,
+				priority: 2,
+			},
+			toastui: {
+				test: /@toast/,
+				chunks: 'all',
+				name: 'vendor.toastui',
+				enforce: true,
+				priority: 3,
+			},
 		},
 	};
 

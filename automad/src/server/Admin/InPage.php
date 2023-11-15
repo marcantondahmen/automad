@@ -112,10 +112,13 @@ class InPage {
 
 		$assets = <<< HTML
 			<!-- Automad UI -->
-			{$fn(Asset::css('ui/dist/vendor.bundle.css'))}
-			{$fn(Asset::css('ui/dist/ui.bundle.css'))}
-			{$fn(Asset::js('ui/dist/vendor.bundle.js'))}
-			{$fn(Asset::js('ui/dist/ui.bundle.js'))}
+			{$fn(Asset::css('dist/admin/vendor.bundle.css'))}
+			{$fn(Asset::css('dist/admin/main.bundle.css'))}
+			{$fn(Asset::js('dist/admin/vendor.bundle.js'))}
+			{$fn(Asset::js('dist/admin/vendor.editorjs.bundle.js'))}
+			{$fn(Asset::js('dist/admin/vendor.filerobot.bundle.js'))}
+			{$fn(Asset::js('dist/admin/vendor.toastui.bundle.js'))}
+			{$fn(Asset::js('dist/admin/main.bundle.js'))}
 			<!-- Automad UI end -->
 		HTML;
 
