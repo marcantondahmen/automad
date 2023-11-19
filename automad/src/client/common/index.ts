@@ -75,3 +75,25 @@ export const create = (
 
 	return element;
 };
+
+/**
+ * Debounce a function.
+ *
+ * @param callback
+ * @param [timeout]
+ * @returns the debounced function
+ */
+export const debounce = (
+	callback: (...args: any[]) => void,
+	timeout: number = 50
+): ((...args: any[]) => void) => {
+	let timer: NodeJS.Timer;
+
+	return (...args: any[]) => {
+		clearTimeout(timer);
+
+		timer = setTimeout(() => {
+			callback.apply(this, args);
+		}, timeout);
+	};
+};

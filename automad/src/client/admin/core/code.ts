@@ -34,7 +34,7 @@
 
 import { CodeLanguage } from '@/types';
 import CodeFlask from 'codeflask';
-import { debounce } from './utils';
+import { debounce } from '@/core';
 
 // https://github.com/PrismJS/prism/issues/1020#issuecomment-602180996
 import Prism, { Languages } from 'prismjs';
