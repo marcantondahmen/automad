@@ -66,13 +66,13 @@ const renderThumb = (imgSet: GalleryData['imageSets'][number]): string => {
 };
 
 /**
- * A simple image preloader with a blurred background.
+ * A gallery component for column or row based layouts.
  *
  * @see {@link docs https://photoswipe.com}
  * @see {@link github https://github.com/dimsemenov/photoswipe}
  * @see {@link captions https://github.com/dimsemenov/photoswipe-dynamic-caption-plugin}
  */
-export class GalleryComponent extends HTMLElement {
+class GalleryComponent extends HTMLElement {
 	/**
 	 * The tag name.
 	 *
