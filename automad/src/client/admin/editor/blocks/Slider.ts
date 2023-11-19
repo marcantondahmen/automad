@@ -116,7 +116,9 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	 *
 	 * @param data
 	 * @param data.files
-	 * @param data.spaceBetween
+	 * @param data.imageWidthPx
+	 * @param data.imageHeightPx
+	 * @param data.gapPx
 	 * @param data.slidesPerView
 	 * @param data.loop
 	 * @param data.autoplay
@@ -127,7 +129,9 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	protected prepareData(data: SliderBlockData): SliderBlockData {
 		return {
 			files: data.files || [],
-			spaceBetween: data.spaceBetween || 30,
+			imageWidthPx: data.imageWidthPx || 1200,
+			imageHeightPx: data.imageHeightPx || 780,
+			gapPx: data.gapPx || 30,
 			slidesPerView: data.slidesPerView || 1,
 			loop: data.loop ?? true,
 			autoplay: data.autoplay ?? false,
@@ -222,7 +226,9 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 
 			this.data = {
 				files: this.data.files,
-				spaceBetween: data.spaceBetween,
+				imageWidthPx: data.imageWidthPx,
+				imageHeightPx: data.imageHeightPx,
+				gapPx: data.gapPx,
 				slidesPerView: data.slidesPerView,
 				loop: data.loop ?? false,
 				autoplay: data.autoplay ?? false,
@@ -277,20 +283,35 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 			label: App.text('sliderBlockAutoplay'),
 		});
 
-		const group = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+		const layout = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
-		createField(FieldTag.number, group, {
+		createField(FieldTag.number, dimensions, {
+			name: 'imageWidthPx',
+			value: this.data.imageWidthPx,
+			key: uniqueId(),
+			label: `${App.text('sliderBlockImageWidth')} (Pixel)`,
+		});
+
+		createField(FieldTag.number, dimensions, {
+			name: 'imageHeightPx',
+			value: this.data.imageHeightPx,
+			key: uniqueId(),
+			label: `${App.text('sliderBlockImageHeight')} (Pixel)`,
+		});
+
+		createField(FieldTag.number, layout, {
 			name: 'slidesPerView',
 			value: this.data.slidesPerView,
 			key: uniqueId(),
 			label: App.text('sliderBlockSlidesPerView'),
 		});
 
-		createField(FieldTag.number, group, {
-			name: 'spaceBetween',
-			value: this.data.spaceBetween,
+		createField(FieldTag.number, layout, {
+			name: 'gapPx',
+			value: this.data.gapPx,
 			key: uniqueId(),
-			label: App.text('sliderBlockSpaceBetween'),
+			label: `${App.text('sliderBlockSpaceBetween')} (Pixel)`,
 		});
 
 		create(

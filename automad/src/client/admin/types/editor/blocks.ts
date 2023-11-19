@@ -167,7 +167,9 @@ export interface SliderBlockBreakpoints {
 
 export interface SliderBlockData {
 	files: string[];
-	spaceBetween: number; // Unlike the normal `gap` parameter, this one is a number (pixels only)
+	imageWidthPx: number;
+	imageHeightPx: number;
+	gapPx: number;
 	slidesPerView: number;
 	loop: boolean;
 	autoplay: boolean;

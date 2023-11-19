@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { GalleryBlockData } from '@/types';
+import { GalleryBlockData, SliderBlockData } from '@/types';
 
 export interface GalleryData {
 	imageSets: {
@@ -57,4 +57,16 @@ export interface MasonryItem {
 	rowSpan: number;
 	height: number;
 	thumbHeight: number;
+}
+
+export interface SliderData {
+	imageSets: {
+		imageSet: {
+			image: string;
+			width: number;
+			height: number;
+			preload: string;
+		};
+	}[];
+	settings: Omit<SliderBlockData, 'files'>;
 }

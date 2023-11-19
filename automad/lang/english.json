@@ -291,6 +291,8 @@
 	"sliderBlockTitle": "Image Slider",
 	"sliderBlockSettings": "Settings",
 	"sliderBlockEffect": "Effect",
+	"sliderBlockImageWidth": "Image Width",
+	"sliderBlockImageHeight": "Image Height",
 	"sliderBlockSpaceBetween": "Space between slides in pixels",
 	"sliderBlockSlidesPerView": "Slides per view",
 	"sliderBlockLoop": "Enable continous loop mode",
