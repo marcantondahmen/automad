@@ -34,10 +34,21 @@
 
 import { SliderData } from '~/types';
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import {
+	Autoplay,
+	EffectFade,
+	EffectCube,
+	EffectFlip,
+	Navigation,
+	Pagination,
+} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-cube';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-flip';
 import { create } from 'common';
 
 /**
@@ -108,22 +119,31 @@ class SliderComponent extends HTMLElement {
 		});
 
 		new Swiper(swiperContainer, {
-			modules: [Navigation, Pagination],
+			modules: [
+				Autoplay,
+				EffectFade,
+				EffectFlip,
+				EffectCube,
+				Navigation,
+				Pagination,
+			],
 			pagination: {
 				el: '.swiper-pagination',
+				clickable: true,
 			},
 			navigation: {
 				nextEl: '.swiper-button-next',
 				prevEl: '.swiper-button-prev',
 			},
 			grabCursor: true,
-			speed: 400,
+			speed: 300,
 			loop: settings.loop ?? true,
 			autoplay: settings.autoplay ?? false,
 			effect: settings.effect ?? 'slide',
 			slidesPerView: settings.slidesPerView || 1,
 			spaceBetween: settings.gapPx ?? 0,
 			breakpoints: settings.breakpoints ?? {},
+			breakpointsBase: 'container',
 		});
 	}
 }
