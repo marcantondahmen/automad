@@ -40,18 +40,17 @@ use Automad\Core\Automad;
 use Automad\Core\Image;
 use Automad\Core\RemoteFile;
 use Automad\Core\Resolve;
-use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The ImgLoaderSet allows for resizing local or remote images and also create the their tiny prelod version.
+ * The Img class is a tiny wrapper for resizing local or remote images.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ImgLoaderSet {
+class Img {
 	/**
 	 * The resized image height.
 	 */
@@ -63,17 +62,11 @@ class ImgLoaderSet {
 	public string $image;
 
 	/**
-	 * The url to the tiny blurred placeholder image.
-	 */
-	public string $preload;
-
-	/**
 	 * The resized image width.
 	 */
 	public float $width;
 
 	/**
-	 * Create a pair of two images, the actual cached image and the tiny preload-background.
 	 * The specified $file can either be a remote URL or a local path.
 	 *
 	 * @param string $file
@@ -83,13 +76,19 @@ class ImgLoaderSet {
 	 * @param bool $crop
 	 */
 	public function __construct(string $file, Automad $Automad, float $width = 0, float $height = 0, bool $crop = true) {
-		$Img = new Img($file, $Automad, $width, $height, $crop);
+		if (preg_match('/\:\/\//is', $file)) {
+			$RemoteFile = new RemoteFile($file);
+			$file = $RemoteFile->getLocalCopy();
+		} else {
+			$file = Resolve::filePath($Automad->Context->get()->path, $file);
+		}
 
-		$this->image = $Img->image;
-		$this->width = $Img->width;
-		$this->height = $Img->height;
+		preg_match('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png|webp))(\?(\d+)x(\d+))?/is', $file, $matches);
 
-		$Preload = new Image(AM_BASE_DIR . Str::stripStart($Img->image, AM_BASE_URL), 20);
-		$this->preload = AM_BASE_URL . $Preload->file;
+		$Image = new Image($matches[1], $matches[3] ?? $width, $matches[4] ?? $height, $crop);
+
+		$this->image = AM_BASE_URL . $Image->file;
+		$this->width = $Image->width;
+		$this->height = $Image->height;
 	}
 }

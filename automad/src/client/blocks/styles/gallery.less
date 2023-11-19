@@ -1,0 +1,107 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-gallery {
+	&-flex {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
+		margin-left: ~'calc(var(--am-gallery-gap) * -1)';
+		margin-bottom: ~'calc(var(--am-gallery-gap) * -1)';
+
+		&-item {
+			flex-grow: 1;
+			max-height: var(--am-gallery-flex-item-height);
+			padding-left: var(--am-gallery-gap);
+			padding-bottom: var(--am-gallery-gap);
+
+			& am-img-loader,
+			& img {
+				object-fit: cover;
+				object-position: 50% 50%;
+				background-size: cover;
+				background-position: center;
+				width: 100%;
+				height: 100%;
+				min-height: 100% !important;
+				min-width: 100% !important;
+			}
+		}
+
+		&:after {
+			content: '';
+			flex-grow: 10;
+			min-width: 30%;
+		}
+	}
+
+	&-masonry {
+		display: grid;
+		gap: 0;
+		grid-template-columns: repeat(
+			auto-fill,
+			minmax(var(--am-gallery-item-width), 1fr)
+		) !important;
+		grid-auto-rows: var(--am-gallery-auto-rows);
+		margin-left: ~'calc(var(--am-gallery-gap) * -1)';
+		margin-bottom: ~'calc(var(--am-gallery-gap) * -1)';
+
+		&-item {
+			padding-left: var(--am-gallery-gap);
+			padding-bottom: var(--am-gallery-gap);
+			grid-row-end: span var(--am-gallery-masonry-rows);
+		}
+	}
+
+	&-img-small am-img-loader,
+	&-img-small img {
+		object-fit: cover;
+		object-position: 50% 50%;
+		background-size: cover;
+		background-position: center;
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		min-width: 100% !important;
+		min-height: 100% !important;
+	}
+}
+
+svg.am-pswp__icon {
+	color: var(--am-gallery-controls-color);
+}
+
+.am-pswp.pswp {
+	--pswp-bg: var(--am-gallery-background);
+}

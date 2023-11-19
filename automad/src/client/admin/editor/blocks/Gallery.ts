@@ -60,9 +60,9 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	static get sanitize() {
 		return {
 			layout: false,
-			columnWidth: false,
-			rowHeight: false,
-			gap: false,
+			columnWidthPx: false,
+			rowHeightPx: false,
+			gapPx: false,
 		};
 	}
 
@@ -82,9 +82,9 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	 * @param data
 	 * @param data.files
 	 * @param data.layout
-	 * @param data.columnWidth
-	 * @param data.rowHeight
-	 * @param data.gap
+	 * @param data.columnWidthPx
+	 * @param data.rowHeightPx
+	 * @param data.gapPx
 	 * @param data.cleanBottom
 	 * @return the gallery block data
 	 */
@@ -92,9 +92,9 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 		return {
 			files: data.files || [],
 			layout: data.layout || 'columns',
-			columnWidth: data.columnWidth || '250px',
-			rowHeight: data.rowHeight || '10rem',
-			gap: data.gap || '5px',
+			columnWidthPx: data.columnWidthPx || 250,
+			rowHeightPx: data.rowHeightPx || 250,
+			gapPx: data.gapPx || 5,
 			cleanBottom: data.cleanBottom ?? false,
 		};
 	}
@@ -210,26 +210,28 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			'layout'
 		);
 
-		createField(FieldTag.numberUnit, body, {
-			name: 'gap',
-			value: this.data.gap,
+		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+
+		createField(FieldTag.number, dimensions, {
+			name: 'gapPx',
+			value: this.data.gapPx,
 			key: uniqueId(),
-			label: App.text('galleryBlockLayoutGap'),
+			label: `${App.text('galleryBlockLayoutGap')} (Pixel)`,
 		});
 
 		if (this.data.layout == 'rows') {
-			createField(FieldTag.numberUnit, body, {
-				name: 'rowHeight',
-				value: this.data.rowHeight,
+			createField(FieldTag.number, dimensions, {
+				name: 'rowHeightPx',
+				value: this.data.rowHeightPx,
 				key: uniqueId(),
-				label: App.text('galleryBlockLayoutRowHeight'),
+				label: `${App.text('galleryBlockLayoutRowHeight')} (Pixel)`,
 			});
 		} else {
-			createField(FieldTag.numberUnit, body, {
-				name: 'columnWidth',
-				value: this.data.columnWidth,
+			createField(FieldTag.number, dimensions, {
+				name: 'columnWidthPx',
+				value: this.data.columnWidthPx,
 				key: uniqueId(),
-				label: App.text('galleryBlockLayoutColumnWidth'),
+				label: `${App.text('galleryBlockLayoutColumnWidth')} (Pixel)`,
 			});
 
 			createField(FieldTag.toggle, body, {

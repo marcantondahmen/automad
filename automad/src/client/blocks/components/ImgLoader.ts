@@ -52,8 +52,6 @@ export class ImgLoaderComponent extends HTMLElement {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.style.backgroundImage = `url(${this.getAttribute('preload')})`;
-
 		const img = create(
 			'img',
 			[],
@@ -61,9 +59,14 @@ export class ImgLoaderComponent extends HTMLElement {
 				src: this.getAttribute('image'),
 				width: this.getAttribute('width'),
 				height: this.getAttribute('height'),
+				loading: 'lazy',
 			},
 			this
 		);
+
+		if (this.hasAttribute('style')) {
+			img.setAttribute('style', this.getAttribute('style'));
+		}
 
 		const loaded = () => {
 			this.classList.add('am-loaded');
@@ -72,6 +75,8 @@ export class ImgLoaderComponent extends HTMLElement {
 				this.replaceWith(img);
 			}, 300);
 		};
+
+		this.style.backgroundImage = `url(${this.getAttribute('preload')})`;
 
 		if (img.complete) {
 			loaded();

@@ -96,9 +96,9 @@ export interface ImageBlockData {
 export interface GalleryBlockData {
 	files: string[];
 	layout: 'columns' | 'rows';
-	columnWidth: string;
-	rowHeight: string;
-	gap: string;
+	columnWidthPx: number;
+	rowHeightPx: number;
+	gapPx: number;
 	cleanBottom: boolean;
 }
 

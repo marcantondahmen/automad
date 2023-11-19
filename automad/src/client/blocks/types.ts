@@ -32,24 +32,29 @@
  * Licensed under the MIT license.
  */
 
-:root {
-	// Container
-	--am-block-max-width: 50rem;
-	--am-block-margin-top: 2em;
-	--am-container-padding: 2rem;
+import { GalleryBlockData } from '@/types';
 
-	// Section & Cards
-	--am-card-padding: 1.25rem;
-	--am-section-shadow: 0 0.3rem 2.4rem rgba(0, 0, 0, 0.12),
-		0 1.1rem 1.6rem -1rem rgba(0, 0, 0, 0.12);
-	--am-section-color: inherit;
-	--am-section-border-color: inherit;
+export interface GalleryData {
+	imageSets: {
+		thumb: {
+			image: string;
+			width: number;
+			height: number;
+			preload: string;
+		};
+		large: {
+			image: string;
+			width: number;
+			height: number;
+		};
+		caption: string;
+	}[];
+	settings: Omit<GalleryBlockData, 'files'>;
+}
 
-	// Flex
-	--am-flex-gap: 2rem;
-	--am-flex-min-block-width: 12rem;
-
-	// Gallery
-	--am-gallery-background: rgba(0, 0, 0, 0.2);
-	--am-gallery-controls-color: #ffffff;
+export interface MasonryItem {
+	element: HTMLElement;
+	rowSpan: number;
+	height: number;
+	thumbHeight: number;
 }
