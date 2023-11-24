@@ -38,6 +38,7 @@ namespace Automad\Controllers;
 
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\I18n;
 use Automad\Engine\View;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -63,6 +64,9 @@ class PageController {
 		}
 
 		$Automad = $Cache->getAutomad();
+
+		I18n::get()->apply($Automad);
+
 		$View = new View($Automad);
 		$output = $View->render();
 

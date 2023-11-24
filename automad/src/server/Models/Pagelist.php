@@ -64,10 +64,16 @@ class Pagelist {
 	private mixed $context;
 
 	/**
+	 * If true all pages having another language than the language of the currently visited one are removed.
+	 */
+	private mixed $currentLanguageOnly;
+
+	/**
 	 * The default set of options.
 	 */
 	private array $defaults = array(
 		'context' => false,
+		'currentLanguageOnly' => true,
 		'excludeCurrent' => false,
 		'excludeHidden' => true,
 		'filter' => false,
@@ -155,6 +161,7 @@ class Pagelist {
 	 * Options:
 	 *
 	 * - context: an optionally fixed URL for the context of a pagelist of type breadcrumbs or children. In case this parameter is false, within a loop the context always changes dynamically to the current page.
+	 * - currentLanguageOnly: remove all pages that have a different language, only if language routing is enabled
 	 * - excludeCurrent: default false
 	 * - excludeHidden: default true
 	 * - filter: filter pages by tags
@@ -279,6 +286,10 @@ class Pagelist {
 	 */
 	private function getRelevant(): array {
 		$Selection = new Selection($this->collection);
+
+		if ($this->currentLanguageOnly) {
+			$Selection->filterCurrentLanguage();
+		}
 
 		// In case $this->context is an empty string or false, use the current context.
 		// Therefore it is not possible to have a pagelist only including the homepage (context: "").

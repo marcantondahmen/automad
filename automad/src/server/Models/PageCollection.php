@@ -38,9 +38,9 @@ namespace Automad\Models;
 
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
-use Automad\Core\I18n;
 use Automad\Core\PageIndex;
 use Automad\Core\Session;
+use Automad\Core\Sitemap;
 use Automad\Core\Str;
 use Automad\Routes;
 
@@ -92,6 +92,8 @@ class PageCollection {
 		$this->user = Session::getUsername();
 
 		$this->collectPages($entryDir);
+
+		new Sitemap($this->collection);
 	}
 
 	/**
@@ -121,10 +123,6 @@ class PageCollection {
 		string $parentUrl = '',
 		string $index = '1'
 	): void {
-		if (!I18n::get()->isInCurrentLang($path)) {
-			return;
-		}
-
 		$url = $this->makeUrl($parentUrl, basename($path));
 		$Page = Page::fromDataFile($path, $url, $index, $this->Shared, $parentUrl, $level);
 

@@ -68,7 +68,7 @@ class I18n {
 	 * The constructor.
 	 */
 	private function __construct() {
-		if (!AM_I18N_ENABLED || $this->isDashboard()) {
+		if (!AM_I18N_ENABLED) {
 			Debug::log('Disable i18n for dashboard and API');
 
 			return;
@@ -104,7 +104,7 @@ class I18n {
 	 * @param Automad $Automad
 	 */
 	public function apply(Automad $Automad): void {
-		if (!AM_I18N_ENABLED || $this->isDashboard()) {
+		if (!AM_I18N_ENABLED) {
 			return;
 		}
 
@@ -154,19 +154,10 @@ class I18n {
 	 * @return bool
 	 */
 	public function isInCurrentLang(string $path): bool {
-		if (!AM_I18N_ENABLED || $path == '/' || $this->isDashboard()) {
+		if (!AM_I18N_ENABLED || $path == '/') {
 			return true;
 		}
 
 		return str_starts_with(trim($path, '/'), $this->lang);
-	}
-
-	/**
-	 * Test whether request is targeting the dashboard or the API.
-	 *
-	 * @return bool true if it is a dashboard or API request
-	 */
-	private function isDashboard(): bool {
-		return AM_REQUEST == AM_PAGE_DASHBOARD || str_starts_with(AM_REQUEST, RequestHandler::$apiBase);
 	}
 }

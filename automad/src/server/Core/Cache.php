@@ -139,13 +139,13 @@ class Cache {
 		$this->pageCachingIsEnabled = true;
 
 		// Define object cache file for visitors.
-		$this->objectCacheFile = trim(Cache::FILE_OBJECT_CACHE . '_' . I18n::get()->getLanguage(), '_');
+		$this->objectCacheFile = Cache::FILE_OBJECT_CACHE;
 
 		// Disable page caching for in-page edit mode and define ui cache file.
 		if (Session::getUsername()) {
 			$this->pageCachingIsEnabled = false;
 			Debug::log('Page cache is disabled during editing.');
-			$this->objectCacheFile = trim(Cache::FILE_OBJECT_API_CACHE . '_' . I18n::get()->getLanguage(), '_');
+			$this->objectCacheFile = Cache::FILE_OBJECT_API_CACHE;
 			Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
 		}
 
@@ -250,7 +250,6 @@ class Cache {
 		$Automad = Automad::create();
 
 		$this->writeAutomadObjectToCache($Automad);
-		new Sitemap($Automad->getCollection());
 
 		return $Automad;
 	}

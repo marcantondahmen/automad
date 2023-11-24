@@ -37,6 +37,7 @@
 namespace Automad\Models;
 
 use Automad\Core\Debug;
+use Automad\Core\I18n;
 use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\Models\Search\Search;
@@ -220,6 +221,26 @@ class Selection {
 
 			$this->selection = $filtered;
 		}
+	}
+
+	/**
+	 * Only include pages that have the current language.
+	 */
+	public function filterCurrentLanguage(): void {
+		if (!AM_I18N_ENABLED) {
+			return;
+		}
+
+		$I18n = I18n::get();
+		$filtered = array();
+
+		foreach ($this->selection as $key => $Page) {
+			if ($I18n->isInCurrentLang($Page->path)) {
+				$filtered[$key] = $Page;
+			}
+		}
+
+		$this->selection = $filtered;
 	}
 
 	/**
