@@ -59,10 +59,6 @@ import {
 	SelectComponentOption,
 } from '@/types';
 import { BaseBlock } from './BaseBlock';
-import iconFlexGap from '@/svg/icons/flex-gap.svg';
-import iconMinWidth from '@/svg/icons/min-width.svg';
-import iconFlexJustyifyContent from '@/svg/icons/flex-justify-content.svg';
-import iconFlexAlignItems from '@/svg/icons/flex-align-items.svg';
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
 import { EditorPortalComponent } from '@/components/Editor/EditorPortal';
 
@@ -287,8 +283,16 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		this.renderStylesButton(toolbar);
 		this.renderJustifySelect(toolbar);
 		this.renderAlignSelect(toolbar);
-		this.renderNumberUnitInput(toolbar, 'gap', iconFlexGap);
-		this.renderNumberUnitInput(toolbar, 'minBlockWidth', iconMinWidth);
+		this.renderNumberUnitInput(
+			toolbar,
+			'gap',
+			'<i class="bi bi-columns-gap"></i>'
+		);
+		this.renderNumberUnitInput(
+			toolbar,
+			'minBlockWidth',
+			'<i class="bi bi-arrows"></i>'
+		);
 
 		// Add this hidden input in order to catch the focus after a block has been dragged around.
 		create('input', [CSS.displayNone], {}, toolbar);
@@ -367,7 +371,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			toolbar,
 			html`
 				<span class="${CSS.formGroupItem} ${CSS.formGroupIcon}">
-					${iconFlexJustyifyContent}
+					<i class="bi bi-distribute-horizontal"></i>
 				</span>
 			`
 		);
@@ -412,7 +416,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			toolbar,
 			html`
 				<span class="${CSS.formGroupItem} ${CSS.formGroupIcon}">
-					${iconFlexAlignItems}
+					<i class="bi bi-distribute-vertical"></i>
 				</span>
 			`
 		);
