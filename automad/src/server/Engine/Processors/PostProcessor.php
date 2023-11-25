@@ -41,6 +41,7 @@ use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
+use Automad\Core\I18n;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\System\Fields;
@@ -89,6 +90,7 @@ class PostProcessor {
 	public function process(string $output): string {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
+		$output = $this->setLanguage($output);
 		$output = $this->obfuscateEmails($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
@@ -130,11 +132,19 @@ class PostProcessor {
 	 * @return string The meta tag
 	 */
 	private function addMetaTags(string $str): string {
+		$base = AM_SERVER . AM_BASE_INDEX;
+
 		$meta = '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
+		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '" />';
 
 		if (AM_FEED_ENABLED) {
 			$sitename = $this->Automad->Shared->get(Fields::SITENAME);
-			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . AM_SERVER . AM_BASE_INDEX . AM_FEED_URL . '">';
+			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . $base . AM_FEED_URL . '">';
+		}
+
+		if (AM_I18N_ENABLED) {
+			$lang = I18n::getLanguageFromUrl(AM_REQUEST);
+			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '" />';
 		}
 
 		return str_replace('<head>', '<head>' . $meta, $str);
@@ -228,5 +238,22 @@ class PostProcessor {
 			},
 			$str
 		);
+	}
+
+	/**
+	 * Set the lang attribute fot the <html> element.
+	 *
+	 * @param string $output
+	 * @return string the updated output
+	 */
+	private function setLanguage(string $output): string {
+		if (!AM_I18N_ENABLED) {
+			return $output;
+		}
+
+		// Remove existing lang attribute.
+		$output = preg_replace('/^(\s*(?:<[^>]+>\s*)?<html\s[^>]*)(lang="\w+")([^>]*>)/i', '$1$3', $output);
+
+		return preg_replace('/^(\s*(?:<[^>]+>\s*)?<html)/', '$1 lang="' . I18n::getLanguageFromUrl(AM_REQUEST) . '"', $output);
 	}
 }
