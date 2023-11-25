@@ -50,7 +50,7 @@ import {
 import { ButtonsBlockButtonStyle, ButtonsBlockData } from '@/types';
 import { BaseBlock } from './BaseBlock';
 
-export const buttonsAlignOptions = ['start', 'center', 'end'] as const;
+export const buttonsJustifyOptions = ['start', 'center', 'end'] as const;
 
 /**
  * A buttons block.
@@ -102,21 +102,28 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * @param data.secondaryLink
 	 * @param data.secondaryStyle
 	 * @param data.secondaryOpenInNewTab
-	 * @param data.align
+	 * @param data.justify
 	 * @param data.gap
 	 * @return the slider block data
 	 */
 	protected prepareData(data: ButtonsBlockData): ButtonsBlockData {
+		const defaultStyle: ButtonsBlockButtonStyle = {
+			borderWidth: '2px',
+			borderRadius: '0.5rem',
+			paddingHorizontal: '1.5rem',
+			paddingVertical: '0.5rem',
+		};
+
 		return {
 			primaryText: data.primaryText || 'Button',
 			primaryLink: data.primaryLink || '',
-			primaryStyle: data.primaryStyle ?? {},
+			primaryStyle: data.primaryStyle ?? defaultStyle,
 			primaryOpenInNewTab: data.primaryOpenInNewTab ?? true,
 			secondaryText: data.secondaryText || '',
 			secondaryLink: data.secondaryLink || '',
-			secondaryStyle: data.secondaryStyle ?? {},
+			secondaryStyle: data.secondaryStyle ?? defaultStyle,
 			secondaryOpenInNewTab: data.secondaryOpenInNewTab ?? true,
-			align: data.align ?? 'start',
+			justify: data.justify ?? 'start',
 			gap: data.gap ?? '1rem',
 		};
 	}
@@ -207,7 +214,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * Update the flex properties.
 	 */
 	private updateLayout(): void {
-		this.wrapper.style.justifyContent = this.data.align;
+		this.wrapper.style.justifyContent = this.data.justify;
 		this.flex.style.gap = this.data.gap;
 	}
 
@@ -253,7 +260,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 		);
 
 		const layout = create('div', [CSS.grid, CSS.gridAuto], {}, body);
-		const align = create(
+		const justify = create(
 			'div',
 			[CSS.field],
 			{},
@@ -273,9 +280,9 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 				{ text: App.text('alignCenter'), value: 'center' },
 				{ text: App.text('alignRight'), value: 'end' },
 			],
-			this.data.align,
-			align,
-			'align'
+			this.data.justify,
+			justify,
+			'justify'
 		);
 
 		createField(FieldTag.numberUnit, layout, {

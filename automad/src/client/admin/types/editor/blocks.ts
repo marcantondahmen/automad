@@ -41,7 +41,7 @@ import {
 	sectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
 import { sliderEffects } from '@/editor/blocks/Slider';
-import { buttonsAlignOptions } from '@/editor/blocks/Buttons';
+import { buttonsJustifyOptions } from '@/editor/blocks/Buttons';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
@@ -64,7 +64,7 @@ export interface ButtonsBlockButtonStyle {
 }
 
 export interface ButtonsBlockData {
-	align: (typeof buttonsAlignOptions)[number];
+	justify: (typeof buttonsJustifyOptions)[number];
 	gap: string;
 	primaryText: string;
 	primaryLink: string;

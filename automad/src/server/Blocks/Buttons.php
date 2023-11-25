@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,74 +52,64 @@ class Buttons extends AbstractBlock {
 	/**
 	 * Render a buttons block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$defaults = array(
-			'primaryText' => '',
-			'primaryLink' => '',
-			'primaryStyle' => (object) array(),
-			'secondaryText' => '',
-			'secondaryLink' => '',
-			'secondaryStyle' => (object) array(),
-			'alignment' => 'left'
+	public static function render(object $block, Automad $Automad): string {
+		$data = $block->data;
+		$settingsPrimary = (object) array(
+			'text' => $data->primaryText ?? '',
+			'link' => $data->primaryLink ?? '',
+			'style' =>  $data->primaryStyle ?? (object) array(),
+			'openInNewTab' => $data->primaryOpenInNewTab ?? true,
+		);
+		$settingsSecondary = (object) array(
+			'text' => $data->secondaryText ?? '',
+			'link' => $data->secondaryLink ?? '',
+			'style' =>  $data->secondaryStyle ?? (object) array(),
+			'openInNewTab' => $data->secondaryOpenInNewTab ?? true,
+		);
+		$settings = (object) array(
+			'justify' => $data->justify ?? 'start',
+			'gap' => $data->gap ?? '1rem',
 		);
 
-		$options = array_merge($defaults, (array) $data);
-		$data = (object) $options;
-		$html = '';
+		$primary = self::renderButton($settingsPrimary);
+		$secondary = self::renderButton($settingsSecondary);
 
-		foreach (array('primary', 'secondary') as $item) {
-			if (trim($data->{$item . 'Text'}) && trim($data->{$item . 'Link'})) {
-				$text = htmlspecialchars_decode($data->{$item . 'Text'});
-				$styleObj = $data->{$item . 'Style'};
-				$style = '';
-				$link = $data->{$item . 'Link'};
-				$class = '';
-
-				foreach ($styleObj as $key => $value) {
-					if ($key != 'class') {
-						$style .= '--am-button-' .
-						strtolower(preg_replace('/([A-Z])/', '-$1', $key)) .
-						": $value; ";
-					}
-				}
-
-				if ($style) {
-					$style = trim($style);
-					$style = 'style="' . $style . '"';
-				}
-
-				if (!empty($styleObj->class)) {
-					$class = " {$styleObj->class}";
-				}
-
-				$html .= <<< HTML
-					<a 
-					href="$link"
-					class="am-button{$class}"
-					$style
-					>
-						$text
-					</a>
-				HTML;
-			}
+		if (empty($primary) && empty($secondary)) {
+			return '';
 		}
 
-		if ($html) {
-			$classes = array();
+		$styles = array('--am-button-justify' => $settings->justify, '--am-button-gap' => $settings->gap);
+		$attr = Attr::render($block->tunes, array(), $styles);
 
-			if ($data->alignment == 'center') {
-				$classes[] = 'am-center';
-			}
+		return "<am-buttons $attr>$primary$secondary</am-buttons>";
+	}
 
-			$class = self::classAttr($classes);
-
-			$html = "<am-buttons $class>$html</am-buttons>";
+	/**
+	 * Render a button markup.
+	 *
+	 * @param object{text: string, link: string, style: array<string, string>, openInNewTab: bool} $settings
+	 * @return string
+	 */
+	private static function renderButton(object $settings): string {
+		if (empty($settings->text)) {
+			return '';
 		}
 
-		return $html;
+		$style = '';
+		$openInNewTab = $settings->openInNewTab ? 'target="_blank"' : '';
+
+		foreach ($settings->style as $key => $value) {
+			$style .= '--am-button-' . strtolower(preg_replace('/([A-Z])/', '-$1', $key)) . ": $value; ";
+		}
+
+		return <<< HTML
+			<a href="$settings->link" class="am-button" style="$style" $openInNewTab>
+				$settings->text
+			</a>
+		HTML;
 	}
 }
