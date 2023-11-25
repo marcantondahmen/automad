@@ -39,7 +39,7 @@ import { BaseComponent } from '@/components/Base';
  * A simple link component to change the dashboard view.
  *
  * @example
- * <am-link ${Attr.target}="Page?url=..."></am-link>
+ * <am-link ${Attr.target}="page?url=..."></am-link>
  * <am-link ${Attr.external}="http://..."></am-link>
  *
  * @extends BaseComponent

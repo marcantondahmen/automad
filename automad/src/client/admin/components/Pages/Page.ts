@@ -286,6 +286,26 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
+		if (App.system.i18n && getPageURL() === '/') {
+			return html`
+				${renderBreadcrumbs()}
+				<section class="${CSS.layoutDashboardSection}">
+					<div class="${CSS.layoutDashboardContent}">
+						<am-alert
+							${Attr.icon}="globe"
+							${Attr.text}="i18nEnabled"
+						></am-alert>
+						<am-link
+							${Attr.target}="${Route.system}?section=${Section.i18n}"
+							class="${CSS.button} ${CSS.buttonPrimary}"
+						>
+							${App.text('systemI18n')}
+						</am-link>
+					</div>
+				</section>
+			`;
+		}
+
 		return html`
 			${renderBreadcrumbs()}${renderMenu()}
 			<section class="${CSS.layoutDashboardSection}">

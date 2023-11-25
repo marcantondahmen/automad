@@ -89,8 +89,15 @@ const handleResponse = (data: KeyValueMap): void => {
 const renderLabelFunction: SortableTreeRenderLabelFunction = (
 	data: SortableTreeKeyValue
 ): string => {
-	const icon = data.private ? 'eye-slash-fill' : 'file-earmark-text';
 	const active = data.url == getPageURL() ? CSS.navItemActive : '';
+	const icon =
+		App.system.i18n && data.url === '/'
+			? 'globe'
+			: App.system.i18n && data.parentUrl === '/'
+			? 'translate'
+			: data.private
+			? 'eye-slash-fill'
+			: 'file-earmark-text';
 
 	return html`
 		<span class="${CSS.navItem} ${active}" title="${data.url}">
@@ -101,7 +108,11 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 				)}"
 			>
 				<i class="bi bi-${icon}"></i>
-				<span>$${data.title}</span>
+				<span
+					>${App.system.i18n && data.parentUrl === '/'
+						? `${(data.url as string).replace('/', '')} &mdash; `
+						: ''}$${data.title}</span
+				>
 			</am-link>
 		</span>
 	`;
