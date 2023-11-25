@@ -82,7 +82,7 @@ class I18n {
 		);
 
 		$serverLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 0, 2);
-		$urlLang = substr(trim(AM_REQUEST, '/'), 0, 2);
+		$urlLang = self::getLanguageFromUrl(AM_REQUEST);
 		$fallbacks = array_filter(array_merge(PageIndex::read('/'), $available));
 		$lang = substr($fallbacks[0] ?? 'en', 0, 2);
 
@@ -145,6 +145,16 @@ class I18n {
 	 */
 	public function getLanguage(): string {
 		return $this->lang;
+	}
+
+	/**
+	 * Extract the language code from a given URL.
+	 *
+	 * @param string $url
+	 * @return string the language code
+	 */
+	public static function getLanguageFromUrl(string $url): string {
+		return substr(trim($url, '/'), 0, 2);
 	}
 
 	/**

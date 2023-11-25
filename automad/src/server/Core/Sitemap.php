@@ -77,13 +77,20 @@ class Sitemap {
 			$base = AM_SERVER . AM_BASE_INDEX;
 		}
 
-		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
-				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' .
+				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">';
 
 		foreach ($collection as $Page) {
+			$hreflang = '';
+
+			if (AM_I18N_ENABLED && $Page->url !== '/') {
+				$lang = I18n::getLanguageFromUrl($Page->url);
+				$hreflang = '<xhtml:link rel="alternate" hreflang="' . $lang . '" href="' . $base . $Page->url . '"/>';
+			}
+
 			// Only include "real" URLs and not aliases.
 			if (strpos($Page->url, '/') === 0) {
-				$xml .= "<url><loc>{$base}{$Page->url}</loc></url>\n";
+				$xml .= "<url><loc>{$base}{$Page->url}</loc>$hreflang</url>";
 			}
 		}
 
