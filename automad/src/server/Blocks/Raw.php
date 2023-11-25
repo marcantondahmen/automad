@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Str;
 
@@ -52,14 +53,14 @@ class Raw extends AbstractBlock {
 	/**
 	 * Render a raw block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$html = Str::markdown($data->code);
-		$class = self::classAttr();
+	public static function render(object $block, Automad $Automad): string {
+		$html = Str::markdown($block->data->code);
+		$attr = Attr::render($block->tunes);
 
-		return "<am-raw $class>$html</am-raw>";
+		return "<am-raw $attr>$html</am-raw>";
 	}
 }
