@@ -126,7 +126,7 @@ export const embedServices = {
 	youtube: {
 		regex: /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=\w*)*)/,
 		embedUrl: 'https://www.youtube.com/embed/<%= remote_id %>',
-		html: '<iframe style="width:100%;" height="320" frameborder="0" allowfullscreen></iframe>',
+		html: '<iframe style="width: 100%; aspect-ratio: 16/9;" frameborder="0" allowfullscreen></iframe>',
 		height: 9,
 		width: 16,
 		id: ([id, params]: [string, any]) => {

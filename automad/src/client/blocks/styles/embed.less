@@ -32,14 +32,13 @@
  * Licensed under the MIT license.
  */
 
-@import 'block.less';
-@import 'buttons.less';
-@import 'embed.less';
-@import 'flex.less';
-@import 'gallery.less';
-@import 'img-loader.less';
-@import 'paragraph.less';
-@import 'section.less';
-@import 'slider.less';
-@import 'stretched.less';
-@import 'variables.less';
+am-embed {
+	& figure {
+		overflow: hidden;
+
+		& > div {
+			margin: -1px;
+			width: auto;
+		}
+	}
+}

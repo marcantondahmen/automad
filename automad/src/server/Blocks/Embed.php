@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Str;
 
@@ -52,12 +53,13 @@ class Embed extends AbstractBlock {
 	/**
 	 * Render a embed block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
-		$attr = <<< HTML
+	public static function render(object $block, Automad $Automad): string {
+		$data = $block->data;
+		$iframeAttr = <<< HTML
 			scrolling="no"
 			frameborder="no"
 			allowtransparency="true"
@@ -80,7 +82,7 @@ class Embed extends AbstractBlock {
 				<div style="position: relative; padding-top: $paddingTop%;">
 					<iframe 
 					src="$data->embed"
-					$attr
+					$iframeAttr
 					style="position: absolute; top: 0; width: 100%; height: 100%;"
 					>
 					</iframe>
@@ -91,7 +93,7 @@ class Embed extends AbstractBlock {
 				<iframe 
 				src="$data->embed"
 				height="$data->height"
-				$attr
+				$iframeAttr
 				style="width: 100%;"
 				>
 				</iframe>
@@ -102,8 +104,8 @@ class Embed extends AbstractBlock {
 			$html .= "<figcaption>$data->caption</figcaption>";
 		}
 
-		$class = self::classAttr();
+		$attr = Attr::render($block->tunes);
 
-		return "<am-embed $class><figure>$html</figure></am-embed>";
+		return "<am-embed $attr><figure>$html</figure></am-embed>";
 	}
 }
