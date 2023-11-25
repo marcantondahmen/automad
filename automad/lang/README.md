@@ -6,7 +6,7 @@ Note that the text modules that are used by [FileRobot](https://github.com/scale
 
 ## FileRobot Keys
 
-Below is a list of all [text modules](https://github.com/scaleflex/filerobot-image-editor/blob/v4/packages/react-filerobot-image-editor/src/context/defaultTranslations.js) that are used by [FileRobot](https://github.com/scaleflex/filerobot-image-editor). They are included in this README in order to make them appear in searches during refactoring.
+Below is a list of all [text modules](https://github.com/scaleflex/filerobot-image-editor/blob/master/packages/react-filerobot-image-editor/src/context/defaultTranslations.js) that are used by [FileRobot](https://github.com/scaleflex/filerobot-image-editor). They are included in this README in order to make them appear in searches during refactoring.
 
 	name
 	save
