@@ -117,7 +117,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			secondaryStyle: data.secondaryStyle ?? {},
 			secondaryOpenInNewTab: data.secondaryOpenInNewTab ?? true,
 			align: data.align ?? 'start',
-			gap: data.gap ?? '10rem',
+			gap: data.gap ?? '1rem',
 		};
 	}
 
