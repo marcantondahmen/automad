@@ -136,7 +136,7 @@ class Automad {
 	 */
 	public static function create(): Automad {
 		$Shared = new Shared();
-		$PageCollection = new PageCollection('/', $Shared);
+		$PageCollection = new PageCollection($Shared);
 
 		return new Automad($PageCollection->get(), $Shared);
 	}

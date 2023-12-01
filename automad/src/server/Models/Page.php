@@ -344,6 +344,10 @@ class Page {
 			$data[Fields::HIDDEN] = false;
 		}
 
+		if (AM_I18N_ENABLED) {
+			$level--;
+		}
+
 		$data[Fields::ORIG_URL] = $url;
 		$data[Fields::PAGE_INDEX] = $index;
 		$data[Fields::PATH] = $path;

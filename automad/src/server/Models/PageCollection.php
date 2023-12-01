@@ -83,15 +83,15 @@ class PageCollection {
 
 	/**
 	 * The constructor.
-	 * @param string $entryDir
+	 *
 	 * @param Shared $Shared
 	 */
-	public function __construct(string $entryDir, Shared $Shared) {
+	public function __construct(Shared $Shared) {
 		$this->Shared = $Shared;
 		$this->reservedUrls = $this->getReservedUrls();
 		$this->user = Session::getUsername();
 
-		$this->collectPages($entryDir);
+		$this->collectPages();
 
 		new Sitemap($this->collection);
 	}
