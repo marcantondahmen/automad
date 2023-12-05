@@ -1,1 +1,1 @@
-<a href="mailto:test@test.com"><span></span>test@test.com</a>
+<body><a href="mailto:test@test.com"><span></span>test@test.com</a></body>

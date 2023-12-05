@@ -12,10 +12,21 @@ class ViewTest extends TestCase {
 	public function dataForTestInPageRenderIsEqual() {
 		$data = array();
 		$templates = array(
-			'email_01' =>   '<a href="#">test</a>' .
-							"<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
-							'<a href="#">test</a>',
-			'email_02' => 	'<a href="mailto:test@test.com"><span></span>test@test.com</a>',
+			'email_01' => '<body>' .
+						  '<a href="#">test</a>' .
+						  '<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">' .
+						  'test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com' .
+						  '</a>' .
+						  '<a href="#">test</a>' .
+						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
+						  '</body>',
+			'email_02' => '<body>' .
+						  '<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">' .
+						  '<span></span>' .
+						  'test<span class="am-at"></span>test<span class="am-dot"></span>com' .
+						  '</a>' .
+						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
+						  '</body>',
 			'resolve_01' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>',
 			'resolve_02' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
@@ -36,10 +47,21 @@ class ViewTest extends TestCase {
 		$data = array();
 		$templates = array(
 			'comments_01' => 'Page',
-			'email_01' => '<a href="#">test</a>' .
-						  "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
-						  '<a href="#">test</a>',
-			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
+			'email_01' => '<body>' .
+						  '<a href="#">test</a>' .
+						  '<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">' .
+						  'test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com' .
+						  '</a>' .
+						  '<a href="#">test</a>' .
+						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
+						  '</body>',
+			'email_02' => '<body>' .
+						  '<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">' .
+						  '<span></span>' .
+						  'test<span class="am-at"></span>test<span class="am-dot"></span>com' .
+						  '</a>' .
+						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
+						  '</body>',
 			'extension_01' => 'Test',
 			'extension_02' => 	'<head>' .
 								'<meta name="Generator" content="Automad ' . AM_VERSION . '">' .
