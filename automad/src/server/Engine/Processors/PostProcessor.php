@@ -91,9 +91,9 @@ class PostProcessor {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->setLanguage($output);
-		$output = $this->obfuscateEmails($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
+		$output = MailAddressProcessor::obfuscate($output);
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
@@ -178,41 +178,6 @@ class PostProcessor {
 
 		// Prepend all items ($html) to the closing </head> tag.
 		return str_replace('</head>', $html . '</head>', $str);
-	}
-
-	/**
-	 * Obfuscate all stand-alone eMail addresses matched in $str.
-	 * Addresses in links are ignored.
-	 *
-	 * @param string $str
-	 * @return string The processed string
-	 */
-	private function obfuscateEmails(string $str): string {
-		$regexEmail = '[\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,}';
-
-		// The following regex matches all email links or just an email address.
-		// That way it is possible to separate email addresses
-		// within <a></a> tags from stand-alone ones.
-		$regex = '/(<a\s[^>]*href="mailto.+?<\/a>|(?P<email>' . $regexEmail . '))/is';
-
-		return preg_replace_callback($regex, function ($matches) {
-			// Only stand-alone addresses are obfuscated.
-			if (!empty($matches['email'])) {
-				Debug::log($matches['email'], 'Obfuscating');
-
-				$html = "<a href='#' " .
-						"onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' " .
-						"style='unicode-bidi:bidi-override;direction:rtl'>";
-				$html .= strrev($matches['email']);
-				$html .= '</a>&#x200E;';
-
-				return $html;
-			} else {
-				Debug::log($matches[0], 'Ignoring');
-
-				return $matches[0];
-			}
-		}, $str);
 	}
 
 	/**

@@ -147,6 +147,9 @@ class Config {
 		// I18n
 		self::set('AM_I18N_ENABLED', false);
 
+		// Mail address obfuscation
+		self::set('AM_MAIL_OBFUSCATION_ENABLED', true);
+
 		// Version number
 		include AM_BASE_DIR . '/automad/version.php';
 	}
