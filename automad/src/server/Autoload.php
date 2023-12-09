@@ -50,13 +50,13 @@ class Autoload {
 	 * Init the autoloader.
 	 */
 	public static function init(): void {
-		require AM_BASE_DIR . '/lib/vendor/autoload.php';
-
 		$packagesAutoload = AM_BASE_DIR . '/vendor/autoload.php';
 
-		if (file_exists($packagesAutoload)) {
-			require $packagesAutoload;
+		if (!file_exists($packagesAutoload)) {
+			exit('Please install dependencies first.');
 		}
+
+		require $packagesAutoload;
 
 		spl_autoload_register(function ($class) {
 			$prefix = 'Automad\\';

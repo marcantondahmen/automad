@@ -6,7 +6,7 @@ vendor
 packages
 pages/test
 automad/legacy
-/composer.lock
+automad/src/client/blocks/legacy
 /sitemap.xml
 .phpunit.result.cache
 .php-cs-fixer.cache
