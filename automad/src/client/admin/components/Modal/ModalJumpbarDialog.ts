@@ -95,6 +95,7 @@ const settingsData = (): JumpbarItemData[] => {
 
 	const data: JumpbarItemData[] = [
 		item(Section.cache, 'systemCache', 'device-ssd'),
+		item(Section.mail, 'systemMail', 'envelope'),
 		item(Section.users, 'systemUsers', 'person-badge'),
 		item(Section.i18n, 'systemI18n', 'globe'),
 		item(Section.update, 'systemUpdate', 'arrow-repeat'),
