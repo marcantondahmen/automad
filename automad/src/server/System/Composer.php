@@ -146,7 +146,9 @@ class Composer {
 		require_once($autoloader);
 
 		$decoded = json_decode(file_get_contents($this->composerFile), true);
-		$decoded['config'] = array('allow-plugins' => array('automad/package-installer' => true));
+		$config = $decoded['config'] ?? array();
+		$decoded['config'] = array_merge_recursive($config, array('allow-plugins' => array()));
+		$decoded['config']['allow-plugins']['automad/package-installer'] = true;
 		FileSystem::write($this->composerFile, json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
 		if ($updatePackageInstaller) {
