@@ -51,6 +51,7 @@ import { SwitcherSectionComponent } from './SwitcherSection';
 export const enum Section {
 	overview = 'overview',
 	cache = 'cache',
+	mail = 'mail',
 	users = 'users',
 	update = 'update',
 	i18n = 'i18n',

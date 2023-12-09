@@ -65,7 +65,7 @@ const getSystemSections = (): SystemSectionData[] => {
 			narrowIcon: true,
 		},
 		{
-			section: Section.email,
+			section: Section.mail,
 			icon: 'envelope-at',
 			title: App.text('systemMail'),
 			info: App.text('systemMailCardInfo'),
