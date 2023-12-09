@@ -42,6 +42,7 @@ use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Core\Session;
+use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
@@ -88,6 +89,7 @@ class State {
 		$ThemeCollection = new ThemeCollection();
 		$themes = $ThemeCollection->getThemes();
 		$Cache = new Cache();
+		$MailConfig = new MailConfig();
 
 		$data = array(
 			'allowedFileTypes' => FileUtils::allowedFileTypes(),
@@ -109,6 +111,15 @@ class State {
 					'fields' => Parse::csv(AM_FEED_FIELDS)
 				),
 				'i18n' => AM_I18N_ENABLED,
+				'mail' => array(
+					'transport' => $MailConfig->transport,
+					'from' => $MailConfig->from,
+					'fromDefault' => $MailConfig->getDefaultFrom(),
+					'smtpServer' => $MailConfig->smtpServer,
+					'smtpUsername' => $MailConfig->smtpUsername,
+					'smtpPort' => $MailConfig->smtpPort,
+					'smtpPasswordIsSet' => strlen($MailConfig->smtpPassword) > 0
+				),
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection())
 			),

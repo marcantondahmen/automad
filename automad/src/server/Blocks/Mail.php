@@ -73,7 +73,7 @@ class Mail extends AbstractBlock {
 		$options = array_merge($defaults, (array) $data);
 		$data = (object) $options;
 
-		$status = SystemMail::send($data, $Automad);
+		$status = SystemMail::sendForm($data, $Automad);
 
 		if ($status) {
 			$status = "<h3>$status</h3>";

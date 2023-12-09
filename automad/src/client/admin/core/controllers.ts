@@ -71,6 +71,12 @@ export const enum ImageController {
 	save = 'ImageController::save',
 }
 
+export const enum MailConfigController {
+	save = 'MailConfigController::save',
+	reset = 'MailConfigController::reset',
+	test = 'MailConfigController::test',
+}
+
 export const enum PackageManagerController {
 	getOutdated = 'PackageManagerController::getOutdated',
 	getPackageCollection = 'PackageManagerController::getPackageCollection',

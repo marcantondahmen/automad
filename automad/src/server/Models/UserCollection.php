@@ -42,6 +42,7 @@ use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Session;
 use Automad\Core\Text;
+use Automad\System\Mail;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -321,10 +322,8 @@ class UserCollection {
 		$link = AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/resetpassword?username=' . urlencode($username);
 		$subject = 'Automad: ' . Text::get('emailInviteSubject');
 		$message = InvitationEmail::render($website, $username, $link);
-		$headers = "MIME-Version: 1.0\r\n";
-		$headers .= 'Content-type: text/html; charset=UTF-8';
 
-		if (!mail($email, $subject, $message, $headers)) {
+		if (!Mail::send($email, $subject, $message)) {
 			$Messenger->setError(Text::get('sendMailError'));
 
 			return false;

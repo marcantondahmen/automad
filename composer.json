@@ -18,12 +18,13 @@
         "post-create-project-cmd": "@php automad/console createuser"
     },
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.2",
         "automad/package-installer": "^1.1",
         "automad/language-packs": "dev-master",
         "automad/standard-v1": "^1.0",
         "jbroadway/urlify": "^1.2",
-        "michelf/php-markdown": "^2.0"
+        "michelf/php-markdown": "^2.0",
+        "symfony/mailer": "^7.0"
     },
     "config": {
         "allow-plugins": {
@@ -34,4 +35,3 @@
         }
     }
 }
-

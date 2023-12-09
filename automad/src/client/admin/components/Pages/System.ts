@@ -47,6 +47,7 @@ import { renderI18nSection } from './Partials/System/I18n';
 import { renderLanguageSection } from './Partials/System/Language';
 import { renderUpdateSection } from './Partials/System/Update';
 import { renderUsersSection } from './Partials/System/Users';
+import { renderMailSection } from './Partials/System/Mail';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
@@ -62,6 +63,15 @@ const getSystemSections = (): SystemSectionData[] => {
 			state: '<am-system-cache-indicator></am-system-cache-indicator>',
 			render: renderCacheSection,
 			narrowIcon: true,
+		},
+		{
+			section: Section.email,
+			icon: 'envelope-at',
+			title: App.text('systemMail'),
+			info: App.text('systemMailCardInfo'),
+			state: '<am-system-mail-indicator></am-system-mail-indicator>',
+			render: renderMailSection,
+			narrowIcon: false,
 		},
 		{
 			section: Section.update,
@@ -212,11 +222,8 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 	private renderOverviewSection(): string {
 		return html`
 			<am-switcher-section name="${Section.overview}">
-				<div class="${CSS.grid}" style="--min: 17rem;">
-					${this.renderOverviewCards(this.sectionData.slice(0, 2))}
-				</div>
 				<div class="${CSS.grid}" style="--min: 13rem;">
-					${this.renderOverviewCards(this.sectionData.slice(2, 8))}
+					${this.renderOverviewCards(this.sectionData)}
 				</div>
 			</am-switcher-section>
 		`;

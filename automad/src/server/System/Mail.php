@@ -37,6 +37,10 @@
 namespace Automad\System;
 
 use Automad\Core\Automad;
+use Automad\Models\MailConfig;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -54,13 +58,47 @@ class Mail {
 	private static bool $sent = false;
 
 	/**
-	 * Send mail.
+	 * Send an email.
+	 *
+	 * @param string $to
+	 * @param string $subject
+	 * @param string $message
+	 * @param ?string $from
+	 * @return bool
+	 */
+	public static function send(string $to, string $subject, string $message, ?string $from = null): bool {
+		$MailConfig = new MailConfig();
+
+		$dsn = $MailConfig->transport === 'sendmail'
+			? 'sendmail://default'
+			: "smtp://{$MailConfig->smtpUsername}:{$MailConfig->smtpPassword}@{$MailConfig->smtpServer}:{$MailConfig->smtpPort}";
+
+		$transport = Transport::fromDsn($dsn);
+		$mailer = new Mailer($transport);
+
+		$email = (new Email())
+			->from($from ?? $MailConfig->from)
+			->to($to)
+			->subject($subject)
+			->html($message);
+
+		try {
+			$mailer->send($email);
+
+			return true;
+		} catch (\Throwable $error) {
+			return false;
+		}
+	}
+
+	/**
+	 * Send content of mail form.
 	 *
 	 * @param object $data
 	 * @param Automad $Automad
 	 * @return bool|string the sendig status
 	 */
-	public static function send(object $data, Automad $Automad): bool|string {
+	public static function sendForm(object $data, Automad $Automad): bool|string {
 		// Prevent a second call.
 		if (self::$sent) {
 			return $data->success;
@@ -95,9 +133,8 @@ class Mail {
 		// Prepare mail.
 		$subject = $Automad->Shared->get(Fields::SITENAME) . ': ' . strip_tags($_POST[$subject]);
 		$message = strip_tags($_POST[$message]);
-		$header = 'From: ' . preg_replace('/[^\w\d\.@\-]/', '', $_POST[$from]);
 
-		if (mail($data->to, $subject, $message, $header)) {
+		if (self::send($data->to, $subject, $message, $_POST[$from])) {
 			self::$sent = true;
 
 			return $data->success;

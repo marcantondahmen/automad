@@ -77,6 +77,7 @@ import './components/Forms/ConfigFileForm';
 import './components/Forms/DeleteUsersForm';
 import './components/Forms/Form';
 import './components/Forms/HistoryModalForm';
+import './components/Forms/MailConfigForm';
 import './components/Forms/PageDataForm';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';
@@ -94,6 +95,7 @@ import './components/Indicators/System/CacheIndicator';
 import './components/Indicators/System/DebugIndicator';
 import './components/Indicators/System/FeedIndicator';
 import './components/Indicators/System/I18nIndicator';
+import './components/Indicators/System/MailIndicator';
 import './components/Indicators/System/SystemUpdateIndicator';
 import './components/Indicators/System/UserCountIndicator';
 

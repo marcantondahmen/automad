@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { transportOptions } from '@/components/Forms/MailConfigForm';
 import { Section } from '@/components/Switcher/Switcher';
 
 type Enabled = boolean | 0 | 1;
@@ -57,6 +58,16 @@ interface FeedSettings {
 	fields: string;
 }
 
+export interface MailConfig {
+	transport: (typeof transportOptions)[number];
+	from: string;
+	fromDefault: string;
+	smtpServer: string;
+	smtpUsername: string;
+	smtpPort: number;
+	smtpPasswordIsSet: boolean;
+}
+
 interface UserSettings {
 	name: string;
 	email: string;
@@ -67,6 +78,7 @@ export interface SystemSettings {
 	debug: Enabled;
 	feed: FeedSettings;
 	i18n: Enabled;
+	mail: MailConfig;
 	translation: string;
 	users: UserSettings[];
 	tempDirectory: string;

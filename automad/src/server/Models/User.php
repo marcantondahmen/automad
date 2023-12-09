@@ -40,6 +40,7 @@ use Automad\Admin\Templates\PasswordResetEmail;
 use Automad\Core\Messenger;
 use Automad\Core\Session;
 use Automad\Core\Text;
+use Automad\System\Mail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -200,10 +201,8 @@ class User {
 		$website = $_SERVER['SERVER_NAME'] ?? '' . AM_BASE_URL;
 		$subject = 'Automad: ' . Text::get('emailResetPasswordSubject');
 		$message = PasswordResetEmail::render($website, $this->name, $token);
-		$headers = "MIME-Version: 1.0\r\n";
-		$headers .= 'Content-type: text/html; charset=UTF-8';
 
-		if (!mail($email, $subject, $message, $headers)) {
+		if (!Mail::send($email, $subject, $message)) {
 			$Messenger->setError(Text::get('sendMailError'));
 
 			return false;
