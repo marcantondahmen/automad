@@ -217,4 +217,18 @@ const blocks = (env, argv) =>
 		},
 	});
 
-module.exports = [admin, blocks];
+const mail = (env, argv) =>
+	merge(common(env, argv), {
+		entry: {
+			main: './automad/src/client/mail/index.ts',
+		},
+		resolve: {
+			extensions: ['.ts', '.js'],
+		},
+		output: {
+			path: path.resolve(__dirname, './automad/dist/mail'),
+			filename: '[name].bundle.js',
+		},
+	});
+
+module.exports = [admin, blocks, mail];
