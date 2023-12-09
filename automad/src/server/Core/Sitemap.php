@@ -55,14 +55,7 @@ class Sitemap {
 	 */
 	public function __construct(array $collection) {
 		if (!Session::getUsername()) {
-			$sitemap = AM_BASE_DIR . '/sitemap.xml';
-
-			// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.
-			if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
-				$this->generate($collection, $sitemap);
-			} else {
-				Debug::log('Permissions denied!');
-			}
+			$this->generate($collection);
 		}
 	}
 
@@ -70,13 +63,13 @@ class Sitemap {
 	 * Generate the XML for the sitemap and write sitemap.xml.
 	 *
 	 * @param array $collection
-	 * @param string $sitemap
 	 */
-	private function generate(array $collection, string $sitemap): void {
+	private function generate(array $collection): void {
 		if (!$base = AM_BASE_SITEMAP) {
 			$base = AM_SERVER . AM_BASE_INDEX;
 		}
 
+		$sitemap = AM_BASE_DIR . '/sitemap.xml';
 		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' .
 				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">';
 
@@ -98,6 +91,19 @@ class Sitemap {
 
 		if (FileSystem::write($sitemap, $xml)) {
 			Debug::log($sitemap, 'Successfully generated');
+		}
+
+		$server = AM_SERVER;
+		$robots = AM_BASE_DIR . '/robots.txt';
+		$txt = <<< TXT
+			User-agent: *
+			Allow: /
+
+			Sitemap: $server/sitemap.xml
+			TXT;
+
+		if (FileSystem::write($robots, $txt)) {
+			Debug::log($robots, 'Successfully generated');
 		}
 	}
 }

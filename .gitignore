@@ -12,3 +12,4 @@ automad/src/client/blocks/legacy
 .php-cs-fixer.cache
 .history
 *-legacy.*
+robots.txt
