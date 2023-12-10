@@ -51,12 +51,7 @@ class Config {
 	/**
 	 * The configuration file.
 	 */
-	public static string $file = AM_BASE_DIR . '/config/config.php';
-
-	/**
-	 * The legacy .json file.
-	 */
-	private static string $legacy = AM_BASE_DIR . '/config/config.json';
+	const FILE = AM_BASE_DIR . '/config/config.php';
 
 	/**
 	 * Define default values for all constants that are not overriden.
@@ -174,11 +169,8 @@ class Config {
 		$json = false;
 		$config = array();
 
-		if (is_readable(self::$file)) {
-			$json = require self::$file;
-		} elseif (is_readable(self::$legacy)) {
-			// Support legacy configuration files.
-			$json = file_get_contents(self::$legacy);
+		if (is_readable(Config::FILE)) {
+			$json = require Config::FILE;
 		}
 
 		if ($json) {
@@ -209,14 +201,10 @@ class Config {
 	public static function write(array $config): bool {
 		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
-		$success = FileSystem::write(self::$file, $content);
-
-		if ($success && is_writable(self::$legacy)) {
-			@unlink(self::$legacy);
-		}
+		$success = FileSystem::write(Config::FILE, $content);
 
 		if ($success && function_exists('opcache_invalidate')) {
-			opcache_invalidate(self::$file, true);
+			opcache_invalidate(Config::FILE, true);
 		}
 
 		return $success;

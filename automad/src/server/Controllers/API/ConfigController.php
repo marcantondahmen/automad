@@ -68,6 +68,7 @@ class ConfigController {
 				// Make sure 'php' and other PHP extensions like 'php5' are removed
 				// from the list of allowed file types.
 				if (!empty($config['AM_ALLOWED_FILE_TYPES'])) {
+					/** @var array<string, string> $config */
 					$config['AM_ALLOWED_FILE_TYPES'] = trim(
 						preg_replace(
 							'/,?\s*php\w?/is',
