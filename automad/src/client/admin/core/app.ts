@@ -183,6 +183,15 @@ export class App {
 	}
 
 	/**
+	 * The modification time of the site.
+	 *
+	 * @static
+	 */
+	static get siteMTime(): string {
+		return App.getState('siteMTime');
+	}
+
+	/**
 	 * The name of the site.
 	 *
 	 * @static

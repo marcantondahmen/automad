@@ -46,6 +46,8 @@ export const enum CSS {
 	badge = 'am-e-badge',
 	badgeMuted = 'am-e-badge--muted',
 
+	baseHomeH1 = 'am-e-base-home-h1',
+
 	breadcrumbs = 'am-c-breadcrumbs',
 	breadcrumbsItem = 'am-c-breadcrumbs__item',
 
@@ -146,6 +148,7 @@ export const enum CSS {
 
 	flex = 'am-u-flex',
 	flexAlignCenter = 'am-u-flex--align-center',
+	flexAlignBaseline = 'am-u-flex--align-baseline',
 	flexColumn = 'am-u-flex--column',
 	flexGap = 'am-u-flex--gap',
 	flexGapLarge = 'am-u-flex--gap-large',

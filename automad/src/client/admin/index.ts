@@ -86,6 +86,9 @@ import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';
 import './components/Forms/TrashForm';
 
+import './components/Home/RecentlyEditedPages';
+import './components/Home/ServerInfo';
+
 import './components/Indicators/Menu/PrivateIndicator';
 import './components/Indicators/Navbar/DebugIndicator';
 import './components/Indicators/Navbar/OutdatedPackagesIndicator';

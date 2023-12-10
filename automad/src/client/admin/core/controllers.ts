@@ -35,6 +35,7 @@
 export const enum AppController {
 	bootstrap = 'AppController::bootstrap',
 	getLanguagePacks = 'AppController::getLanguagePacks',
+	getServerInfo = 'AppController::getServerInfo',
 	updateState = 'AppController::updateState',
 }
 
@@ -96,6 +97,10 @@ export const enum PageController {
 	duplicate = 'PageController::duplicate',
 	move = 'PageController::move',
 	updateIndex = 'PageController::updateIndex',
+}
+
+export const enum PageCollectionController {
+	getRecentlyEdited = 'PageCollectionController::getRecentlyEdited',
 }
 
 export const enum PageTrashController {

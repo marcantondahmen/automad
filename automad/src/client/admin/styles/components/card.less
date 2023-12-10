@@ -39,7 +39,9 @@
 	border-radius: @am-card-radius;
 	border: @am-card-border;
 	outline: @am-outline;
-	transition: border 0.2s, outline 0.2s;
+	transition:
+		border 0.2s,
+		outline 0.2s;
 
 	&,
 	& * {
@@ -52,12 +54,15 @@
 	}
 
 	&--hover {
-		transition: border-color 0.2s, box-shadow 0.2s;
+		transition:
+			border-color 0.2s,
+			box-shadow 0.2s;
 		cursor: pointer;
 
 		&:hover {
 			border-color: var(--am-clr-border-button);
-			box-shadow: 0 0.4rem 1.2rem var(--am-shadow),
+			box-shadow:
+				0 0.4rem 1.2rem var(--am-shadow),
 				0 3.7rem 3.5rem -3.2rem var(--am-shadow);
 		}
 	}
@@ -244,7 +249,7 @@
 			font-size: @am-small-font-size;
 			font-weight: 580;
 			text-decoration: none;
-			color: var(--am-clr-text);
+			color: var(--am-clr-text) !important;
 			background-color: var(--am-clr-background);
 			outline: @am-outline;
 			transition: background-color 0.2s;

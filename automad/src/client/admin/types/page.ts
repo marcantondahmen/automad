@@ -36,6 +36,15 @@ import { KeyValueMap } from '.';
 import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
 import { Binding } from '@/core';
 
+export interface PageRecentlyEditedCardData {
+	title: string;
+	url: string;
+	lastModified: string;
+	private: boolean;
+	thumbnail: string;
+	fileCount: number;
+}
+
 export interface PageMainSettingsData {
 	section: SwitcherSectionComponent;
 	url: string;
