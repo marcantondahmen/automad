@@ -1,4 +1,5 @@
 {
+	"__lang__": "en",
 	"aboutAutomad": "About Automad",
 	"add": "Add",
 	"addImage": "Add image",
@@ -155,6 +156,7 @@
 	"keepPagePrivate": "Keep page private",
 	"landscape": "Landscape",
 	"large": "Large",
+	"latestActivity": "Latest activity on",
 	"layoutDefault": "Automatic Width",
 	"layoutStretch": "Stretch Block",
 	"layoutWidth": "Width",
@@ -276,6 +278,7 @@
 	"selectTargetMovePage": "Select a destination for moving",
 	"selectTargetNewPage": "Select a location for the new page",
 	"sendMailError": "Error sending email!",
+	"serverInfo": "Server Information",
 	"setupUserAccount": "Setup user account",
 	"shadow": "Shadow",
 	"sharedImages": "Shared images",
