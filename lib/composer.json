@@ -1,0 +1,9 @@
+{
+    "name": "automad/lib",
+    "description": "Automad dependencies",
+    "require": {
+        "jbroadway/urlify": "^1.2",
+        "michelf/php-markdown": "^2.0",
+        "symfony/mailer": "^7.0"
+    }
+}

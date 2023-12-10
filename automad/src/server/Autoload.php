@@ -50,13 +50,18 @@ class Autoload {
 	 * Init the autoloader.
 	 */
 	public static function init(): void {
-		$packagesAutoload = AM_BASE_DIR . '/vendor/autoload.php';
+		$vendors = array(
+			AM_BASE_DIR . '/lib/vendor/autoload.php',
+			AM_BASE_DIR . '/vendor/autoload.php'
+		);
 
-		if (!file_exists($packagesAutoload)) {
-			exit('Please install dependencies first.');
+		foreach($vendors as $file) {
+			if (!is_readable($file)) {
+				exit('<h1>Missing dependencies!</h1><p>Please run <code>composer install</code> in <strong>' . dirname(dirname($file)) . '</strong> first.</p>');
+			}
+
+			require_once $file;
 		}
-
-		require $packagesAutoload;
 
 		spl_autoload_register(function ($class) {
 			$prefix = 'Automad\\';
