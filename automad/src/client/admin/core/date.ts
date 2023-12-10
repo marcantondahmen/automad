@@ -26,30 +26,30 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-export { create, debounce } from 'common';
+import { App } from './app';
 
-export * from './app';
-export * from './bindings';
-export * from './controllers';
-export * from './css';
-export * from './date';
-export * from './events';
-export * from './factory';
-export * from './form';
-export * from './html';
-export * from './logger';
-export * from './notify';
-export * from './request';
-export * from './router';
-export * from './state';
-export * from './toggles';
-export * from './tooltips';
-export * from './undo';
-export * from './url';
-export * from './utils';
+/**
+ * Format dates by the locale that is defined in the translations.
+ *
+ * @param timestamp
+ * @return the formatted date string
+ */
+export const dateFormat = (timestamp: string): string => {
+	const lang = App.text('__lang__');
+	const date = new Date(timestamp);
+
+	return date.toLocaleDateString(lang, {
+		day: '2-digit',
+		weekday: 'short',
+		month: 'short',
+		year: 'numeric',
+		hour: '2-digit',
+		minute: '2-digit',
+	});
+};

@@ -45,6 +45,7 @@ import {
 	createSelect,
 	Attr,
 	HistoryController,
+	dateFormat,
 } from '@/core';
 import { SelectComponentOption } from '@/types';
 import { BaseComponent } from '@/components/Base';
@@ -114,7 +115,6 @@ export class HistoryModalFormComponent extends BaseComponent {
 	 * @async
 	 */
 	private async init(container: HTMLElement): Promise<void> {
-		const lang = navigator.language;
 		container.innerHTML = '<am-spinner></am-spinner>';
 
 		const { data } = await requestAPI(HistoryController.log, {
@@ -138,11 +138,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 				res: SelectComponentOption[],
 				rev: { time: string; hash: string }
 			) => {
-				const time = new Date(rev.time);
-				const text = time.toLocaleString(lang, {
-					dateStyle: 'full',
-					timeStyle: 'medium',
-				});
+				const text = dateFormat(rev.time);
 
 				res.push({ text, value: rev.hash });
 
