@@ -98,13 +98,13 @@ export class ModalFieldComponent extends ModalComponent {
 					${Attr.text}="${title}"
 				></am-icon-text>
 				<span class="${CSS.modalFieldToggle}">
-					<i class="bi bi-fullscreen-exit"></i>
+					<i class="bi bi-x-lg"></i>
 				</span>
 			`
 		);
 
 		create('div', [CSS.modalFieldToggle], {}, this).innerHTML = html`
-			<i class="bi bi-fullscreen"></i>
+			<i class="bi bi-arrow-up-right-circle"></i>
 		`;
 
 		listen(

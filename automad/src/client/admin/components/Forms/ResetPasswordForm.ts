@@ -32,15 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	createField,
-	CSS,
-	getSearchParam,
-	html,
-	Route,
-} from '@/core';
+import { App, Attr, CSS, getSearchParam, html, Route } from '@/core';
 import { KeyValueMap } from '@/types';
 import { FormComponent } from './Form';
 
