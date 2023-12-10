@@ -97,7 +97,7 @@ class State {
 			'feed' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL,
 			'mainTheme' => $Automad->Shared->get(Fields::THEME),
 			'pages' => $Automad->getNavigationMetaData(),
-			'siteMTime' => date('D, d M Y', $Cache->getSiteMTime()),
+			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'system' => array(
 				'cache' => array(

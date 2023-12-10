@@ -182,6 +182,7 @@ class Str {
 
 		$str = MarkdownExtra::defaultTransform($str);
 
+		/** @var string */
 		return preg_replace_callback('/\<h(2|3)\>(.*?)\<\/h\1\>/i', function ($matches) {
 			$id = self::sanitize(self::stripTags($matches[2]), true, 100);
 

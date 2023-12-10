@@ -78,7 +78,6 @@ class AppController {
 				'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
 				'languages' => self::getLanguages(),
 				'reservedFields' => Fields::$reserved,
-				'sitename' => $Automad->Shared->get(Fields::SITENAME),
 				'text' => Text::getObject(),
 				'version' => AM_VERSION
 			));
@@ -112,6 +111,25 @@ class AppController {
 		$Composer->run("update {$package}");
 
 		return $Response;
+	}
+
+	/**
+	 * Get server information
+	 *
+	 * @return Response the Response object
+	 */
+	public static function getServerInfo(): Response {
+		$Response = new Response();
+
+		return $Response->setData(array(
+			'hostName' => gethostname(),
+			'hostIp' => gethostbyname(gethostname()),
+			'serverOs' => php_uname('s') . ' / ' . php_uname('r'),
+			'serverSoftware' => getenv('SERVER_SOFTWARE'),
+			'phpVersion' => phpversion(),
+			'phpSapiName' => php_sapi_name(),
+			'memoryLimit' => ini_get('memory_limit'),
+		));
 	}
 
 	/**
