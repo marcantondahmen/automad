@@ -44,6 +44,7 @@ import {
 } from '@/core';
 import { Section } from '@/components/Switcher/Switcher';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
+import { renderFileImportModal } from './Partials/FileImportModal';
 
 const renderMenu = (): string => {
 	return html`
@@ -179,6 +180,7 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 					</am-switcher-section>
 				</div>
 			</section>
+			${renderFileImportModal()}
 		`;
 	}
 }

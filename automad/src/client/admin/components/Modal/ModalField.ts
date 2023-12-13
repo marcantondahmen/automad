@@ -97,15 +97,11 @@ export class ModalFieldComponent extends ModalComponent {
 					${Attr.icon}="file-earmark-text"
 					${Attr.text}="${title}"
 				></am-icon-text>
-				<span class="${CSS.modalFieldToggle}">
-					<i class="bi bi-x-lg"></i>
-				</span>
+				<span class="${CSS.modalFieldToggle}">↙</span>
 			`
 		);
 
-		create('div', [CSS.modalFieldToggle], {}, this).innerHTML = html`
-			<i class="bi bi-arrow-up-right-circle"></i>
-		`;
+		create('div', [CSS.modalFieldToggle], {}, this).innerHTML = '↗';
 
 		listen(
 			this,

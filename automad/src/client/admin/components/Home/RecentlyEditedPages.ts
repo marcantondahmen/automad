@@ -70,6 +70,7 @@ class RecentlyEditedPagesComponent extends BaseComponent {
 		);
 
 		this.classList.add(CSS.grid);
+		this.setAttribute('style', '--min: 12rem;');
 
 		data.forEach((page: PageRecentlyEditedCardData) => {
 			const editRoute = `${Route.page}?url=${page.url}`;

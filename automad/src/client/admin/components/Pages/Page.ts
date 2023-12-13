@@ -317,7 +317,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 						<am-upload></am-upload>
 						<div class="${CSS.flex} ${CSS.flexGap}">
 							<am-modal-toggle
-								class="${CSS.button} ${CSS.buttonAccent}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 								${Attr.modal}="#am-file-import-modal"
 							>
 								${App.text('importFromUrl')}
