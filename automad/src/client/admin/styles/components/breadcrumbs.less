@@ -38,7 +38,8 @@
 	gap: 0.4em;
 	max-width: 100%;
 	padding: 0.35rem 0 1.1rem 0;
-	font-size: 0.785rem;
+	font-size: @am-small-font-size;
+	font-weight: @am-small-font-weight;
 	overflow: hidden;
 
 	&__item {
@@ -56,11 +57,6 @@
 			color: @am-breadcrumbs-hover-clr;
 		}
 
-		&:before,
-		&:after {
-			&:extend(.am-bi);
-		}
-
 		&:before {
 			padding-right: 0.4em;
 		}
@@ -71,7 +67,7 @@
 
 		&:not(:last-child) {
 			&:after {
-				content: '\f285';
+				content: '→';
 			}
 		}
 
@@ -90,7 +86,7 @@
 
 		@media (max-width: @am-breakpoint-small-max) {
 			& + &:nth-last-child(3):before {
-				content: '\f5d4';
+				content: '…';
 			}
 		}
 
@@ -98,7 +94,7 @@
 			max-width: 20%;
 
 			& + &:nth-last-child(5):before {
-				content: '\f5d4';
+				content: '…';
 			}
 
 			&:nth-last-child(5),
