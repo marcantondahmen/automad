@@ -165,8 +165,6 @@ export const enum CSS {
 
 	iconText = 'am-c-icon-text',
 
-	iconArrow = 'am-bi--arrow',
-
 	img = 'am-e-img',
 	imgError = 'am-e-img__error',
 
@@ -255,6 +253,7 @@ export const enum CSS {
 
 	navbar = 'am-c-navbar',
 	navbarItem = 'am-c-navbar__item',
+	navbarItemGlyph = 'am-c-navbar__item--glyph',
 	navbarGroup = 'am-c-navbar__group',
 
 	notify = 'am-c-notify',

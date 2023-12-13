@@ -240,9 +240,7 @@ const createPreview = (
 		if (!pkg.outdated) {
 			badgeCls.push(CSS.badgeMuted);
 		} else {
-			badgeText.push(
-				`<i class="bi bi-arrow-right-short ${CSS.iconArrow}"></i>`
-			);
+			badgeText.push('');
 			badgeText.push(pkg.latest);
 		}
 

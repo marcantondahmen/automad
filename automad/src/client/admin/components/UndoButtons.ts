@@ -73,18 +73,18 @@ class UndoButtonsComponent extends BaseComponent {
 
 		const undoButton = create(
 			'span',
-			[CSS.navbarItem],
+			[CSS.navbarItem, CSS.navbarItemGlyph],
 			{ [Attr.tooltip]: `${meta} + Z` },
 			this,
-			html`<i class="bi bi-arrow-90deg-left"></i>`
+			'↩'
 		);
 
 		const redoButton = create(
 			'span',
-			[CSS.navbarItem],
+			[CSS.navbarItem, CSS.navbarItemGlyph],
 			{ [Attr.tooltip]: `${meta} + Y` },
 			this,
-			html`<i class="bi bi-arrow-90deg-right"></i>`
+			'↪'
 		);
 
 		const { undo, redo } = Undo.size;

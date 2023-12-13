@@ -50,10 +50,7 @@ class SidebarOutdatedPackagesIndicatorComponent extends BaseUpdateIndicatorCompo
 		this.classList.toggle(CSS.badge, count > 0);
 
 		if (count) {
-			this.innerHTML = html`
-				<i class="bi bi-arrow-down-short ${CSS.iconArrow}"></i>
-				${count}
-			`;
+			this.innerHTML = html`↓ ${count}`;
 		} else {
 			this.innerHTML = '';
 		}

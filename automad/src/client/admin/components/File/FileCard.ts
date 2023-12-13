@@ -72,9 +72,7 @@ class FileCardComponent extends BaseComponent {
 			dimensions = html`
 				<div class="${CSS.iconText}">
 					<i class="bi bi-aspect-ratio"></i>
-					<span>
-						${file.width} <i class="bi bi-x-lg"></i> ${file.height}
-					</span>
+					<span> ${file.width} ✗ ${file.height} </span>
 				</div>
 			`;
 		}
