@@ -44,7 +44,7 @@ am-flex {
 		box-sizing: border-box;
 		flex-grow: 0;
 		max-width: none;
-		min-width: var(--am-flex-min-block-width);
+		min-width: ~'min(100%, var(--am-flex-min-block-width))';
 		margin: 0;
 		padding: ~'calc(var(--am-flex-gap) * 0.5)';
 	}
