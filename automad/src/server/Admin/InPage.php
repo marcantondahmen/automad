@@ -36,10 +36,7 @@
 
 namespace Automad\Admin;
 
-use Automad\Admin\UI\Components\Modal\Link;
-use Automad\Admin\UI\Components\Modal\SelectImage;
 use Automad\Core\Session;
-use Automad\Core\Text;
 use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Context;
@@ -106,7 +103,7 @@ class InPage {
 	 * @return string The processed markup
 	 */
 	private function injectAssets(string $str) {
-		$fn = function ($expression) {
+		$fn = function (mixed $expression): string {
 			return $expression;
 		};
 
@@ -137,7 +134,8 @@ class InPage {
 	 * @return string The processed $str
 	 */
 	private function injectMarkup(string $str) {
-		$urlBase = AM_BASE_URL;
+		return $str;
+		/* $urlBase = AM_BASE_URL;
 		$urlUI = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		$urlSys = $urlUI . '/System';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
@@ -153,7 +151,7 @@ class InPage {
 		if (!empty($_SERVER['QUERY_STRING'])) {
 			$queryString = $_SERVER['QUERY_STRING'];
 		}
-
+		 */
 		/* $html = <<< HTML
 			<div class="am-inpage" data-am-base-url="$urlBase">
 				<div class="am-inpage-menubar">
@@ -199,13 +197,13 @@ class InPage {
 		// Remove invalid buttons.
 		// Within HTML tags.
 		// Like <div data-attr="...">
-		$str = preg_replace_callback('/\<[^>]+\>/is', function ($matches) {
+		$str = preg_replace_callback('/\<[^>]+\>/is', function ($matches): string {
 			return preg_replace('/' . PatternAssembly::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
-		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function ($matches) {
+		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function ($matches): string {
 			return preg_replace('/' . PatternAssembly::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 
