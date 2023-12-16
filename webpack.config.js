@@ -192,6 +192,7 @@ const admin = (env, argv) => {
 				],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
 				notify: false,
+				open: false,
 			})
 		);
 	}
