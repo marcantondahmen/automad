@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -38,9 +38,9 @@ import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 /**
  * The setup view.
  *
- * @extends CenteredLayoutComponent
+ * @extends BaseCenteredLayoutComponent
  */
-export class SetupComponent extends CenteredLayoutComponent {
+export class SetupComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -58,4 +58,4 @@ export class SetupComponent extends CenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes.setup), SetupComponent);
+customElements.define(getTagFromRoute(Route.setup), SetupComponent);
