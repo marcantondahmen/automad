@@ -80,8 +80,8 @@ class Blocks {
 
 		foreach ($data->blocks as $block) {
 			try {
-				$width = $block->tunes->layout->width;
-				$stretched = $block->tunes->layout->stretched;
+				$width = $block->tunes->layout?->width;
+				$stretched = $block->tunes?->layout?->stretched;
 
 				$blockIsFlexItem = ($width && !$stretched);
 
