@@ -95,14 +95,13 @@ const settingsData = (): JumpbarItemData[] => {
 
 	const data: JumpbarItemData[] = [
 		item(Section.cache, 'systemCache', 'device-ssd'),
-		item(Section.mail, 'systemMail', 'envelope'),
 		item(Section.users, 'systemUsers', 'person-badge'),
-		item(Section.i18n, 'systemI18n', 'globe'),
-		item(Section.update, 'systemUpdate', 'arrow-repeat'),
 		item(Section.feed, 'systemRssFeed', 'rss'),
+		item(Section.mail, 'systemMail', 'envelope'),
+		item(Section.i18n, 'systemI18n', 'globe'),
 		item(Section.language, 'systemLanguage', 'translate'),
 		item(Section.debug, 'systemDebug', 'bug'),
-		item(Section.config, 'systemConfigFile', 'file-earmark-code', [
+		item(Section.update, 'systemUpdate', 'arrow-repeat', [
 			CSS.modalJumpbarDivider,
 		]),
 	];
