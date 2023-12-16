@@ -4,6 +4,7 @@ cache/*
 config/*
 vendor
 packages
+pages/.trash
 pages/test
 automad/legacy
 automad/src/client/blocks/legacy
