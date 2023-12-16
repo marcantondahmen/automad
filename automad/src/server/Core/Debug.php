@@ -75,8 +75,7 @@ class Debug {
 		// Memory usage.
 		self::memory();
 
-		// Get user & server constants.
-		self::uc();
+		// Get server constants.
 		self::log($_SERVER, 'Server');
 
 		// Get last error.
@@ -140,7 +139,7 @@ class Debug {
 				$backtrace = array_shift($backtrace);
 				$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '(): ';
 			} else {
-				$prefix = basename($backtraceAll[0]['file']) . ': ';
+				$prefix = basename($backtraceAll[0]['file'] ?? '') . ': ';
 			}
 
 			// Prepend the method to $description.
@@ -176,14 +175,5 @@ class Debug {
 			$executionTime = microtime(true) - self::$time;
 			self::log($executionTime . ' seconds', 'Time for execution');
 		}
-	}
-
-	/**
-	 * Log all user constants for get_defined_constants().
-	 */
-	private static function uc(): void {
-		$definedConstants = get_defined_constants(true);
-		$userConstants = $definedConstants['user'];
-		self::log($userConstants, 'Automad constants');
 	}
 }
