@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-language-packs.git",
-                "reference": "69bb4f52c2397957e77a2c6b2985ef55e3a34652"
+                "reference": "cb2b3243b0134e435490ba44daefc63169c99546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/69bb4f52c2397957e77a2c6b2985ef55e3a34652",
-                "reference": "69bb4f52c2397957e77a2c6b2985ef55e3a34652",
+                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/cb2b3243b0134e435490ba44daefc63169c99546",
+                "reference": "cb2b3243b0134e435490ba44daefc63169c99546",
                 "shasum": ""
             },
             "default-branch": true,
@@ -41,7 +41,7 @@
                 "issues": "https://github.com/automadcms/automad-language-packs/issues",
                 "source": "https://github.com/automadcms/automad-language-packs/tree/master"
             },
-            "time": "2023-07-23T10:20:50+00:00"
+            "time": "2023-12-10T22:58:30+00:00"
         },
         {
             "name": "automad/meta-tags",
@@ -135,16 +135,16 @@
         },
         {
             "name": "automad/standard-v1",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-standard-v1.git",
-                "reference": "1940360030fe53684cf9645726ff52b46a42e2bc"
+                "reference": "794d086e6448992135bf83a8b2bfb91644377ead"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-standard-v1/zipball/1940360030fe53684cf9645726ff52b46a42e2bc",
-                "reference": "1940360030fe53684cf9645726ff52b46a42e2bc",
+                "url": "https://api.github.com/repos/automadcms/automad-standard-v1/zipball/794d086e6448992135bf83a8b2bfb91644377ead",
+                "reference": "794d086e6448992135bf83a8b2bfb91644377ead",
                 "shasum": ""
             },
             "require": {
@@ -172,9 +172,9 @@
             ],
             "support": {
                 "issues": "https://github.com/automadcms/automad-standard-v1/issues",
-                "source": "https://github.com/automadcms/automad-standard-v1/tree/1.0.0"
+                "source": "https://github.com/automadcms/automad-standard-v1/tree/1.0.1"
             },
-            "time": "2023-09-24T16:24:16+00:00"
+            "time": "2023-12-13T18:50:21+00:00"
         }
     ],
     "packages-dev": [],
