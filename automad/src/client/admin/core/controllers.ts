@@ -45,7 +45,6 @@ export const enum CacheController {
 }
 
 export const enum ConfigController {
-	file = 'ConfigController::file',
 	update = 'ConfigController::update',
 }
 

@@ -54,51 +54,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class ConfigController {
 	/**
-	 * Save the posted configuartion to the config.php file.
-	 *
-	 * @return Response the response object
-	 */
-	public static function file(): Response {
-		$Response = new Response();
-
-		if ($json = Request::post('content')) {
-			$config = json_decode($json, true);
-
-			if (json_last_error() === JSON_ERROR_NONE) {
-				// Make sure 'php' and other PHP extensions like 'php5' are removed
-				// from the list of allowed file types.
-				if (!empty($config['AM_ALLOWED_FILE_TYPES'])) {
-					/** @var array<string, string> $config */
-					$config['AM_ALLOWED_FILE_TYPES'] = trim(
-						preg_replace(
-							'/,?\s*php\w?/is',
-							'',
-							$config['AM_ALLOWED_FILE_TYPES']
-						),
-						', '
-					);
-				}
-
-				if (Config::write($config)) {
-					Cache::clear();
-					$Response->setReload(true);
-				} else {
-					$Response->setError(Text::get('permissionsDeniedError'));
-				}
-			} else {
-				$Response->setError(Text::get('invalidJsonError'));
-			}
-		} else {
-			$config = Config::read();
-			$json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-			$Response->setData(array('content' => $json));
-		}
-
-		return $Response;
-	}
-
-	/**
 	 * Update a single configuration item.
 	 *
 	 * @return Response the response object

@@ -40,7 +40,6 @@ import {
 } from '@/types';
 import { Section } from '@/components/Switcher/Switcher';
 import { renderCacheSection } from './Partials/System/Cache';
-import { renderConfigFileSection } from './Partials/System/ConfigFile';
 import { renderDebugSection } from './Partials/System/Debug';
 import { renderFeedSection } from './Partials/System/Feed';
 import { renderI18nSection } from './Partials/System/I18n';
@@ -121,15 +120,6 @@ const getSystemSections = (): SystemSectionData[] => {
 			info: App.text('systemLanguageCardInfo'),
 			state: '',
 			render: renderLanguageSection,
-		},
-		{
-			section: Section.config,
-			icon: 'file-earmark-code',
-			title: App.text('systemConfigFile'),
-			info: App.text('systemConfigFileCardInfo'),
-			state: '',
-			render: renderConfigFileSection,
-			narrowIcon: true,
 		},
 	];
 };
