@@ -90,7 +90,7 @@ class MailConfig {
 	 */
 	public function __construct() {
 		$this->transport = AM_MAIL_TRANSPORT;
-		$this->from = AM_MAIL_FROM;
+		$this->from = AM_MAIL_FROM ? AM_MAIL_FROM : MailConfig::getDefaultFrom();
 		$this->smtpServer = AM_MAIL_SMTP_SERVER;
 		$this->smtpUsername = AM_MAIL_SMTP_USERNAME;
 		$this->smtpPassword = AM_MAIL_SMTP_PASSWORD;
