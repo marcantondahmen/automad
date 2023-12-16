@@ -232,7 +232,7 @@
 	"passwordRepeatError": "Please enter twice the same new password!",
 	"passwordRequirementsError": "A password must at least contain one character of {1} and has a minimum length of {2} characters.",
 	"passwordResetEnterNameOrEmail": "Please enter your username or email address in order to request an authentication token to create a new password for your account.",
-	"passwordResetEnterNewPassword": "An email including an authentication token just has been send to you. Please enter that token now below along with a new password.",
+	"passwordResetEnterNewPassword": "An email including an authentication token has been sent to you. Please enter that token below along with a new password.",
 	"passwordResetSave": "Save Password",
 	"passwordResetToken": "Authentication Token",
 	"passwordResetVerificationError": "The authentication token is invalid or has expired already!",
