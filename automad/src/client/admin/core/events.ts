@@ -50,6 +50,7 @@ export const enum EventName {
 	modalClose = 'AutomadModalClose',
 	modalOpen = 'AutomadModalOpen',
 	packagesChange = 'AutomadPackagesChange',
+	packagesUpdateCheck = 'AutomadPackagesUpdateCheck',
 	portalChange = 'AutomadPortalChange',
 	switcherChange = 'AutomadSwitcherChange',
 	systemUpdateCheck = 'AutomadSystemUpdateCheck',

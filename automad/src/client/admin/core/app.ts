@@ -439,6 +439,6 @@ export class App {
 			'outdatedPackages',
 			data?.outdated?.length || 0
 		);
-		fire(EventName.systemUpdateCheck, window);
+		fire(EventName.packagesUpdateCheck, window);
 	}
 }

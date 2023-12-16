@@ -26,38 +26,38 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html } from '@/core';
-import { BaseOutdatedPackagesIndicator } from '../BaseOutdatedPackagesIndicator';
+import { EventName, listen } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
 /**
- * A packages state component.
+ * A base update indicator component.
  *
- * @extends BaseOutdatedPackagesIndicator
+ * @extends BaseComponent
  */
-class SidebarOutdatedPackagesIndicatorComponent extends BaseOutdatedPackagesIndicator {
+export abstract class BaseOutdatedPackagesIndicator extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		this.render();
+
+		this.addListener(
+			listen(
+				window,
+				EventName.packagesUpdateCheck,
+				this.render.bind(this)
+			)
+		);
+	}
+
 	/**
 	 * Render the state element.
 	 */
-	render(): void {
-		const count = App.state.outdatedPackages;
-
-		this.classList.toggle(CSS.badge, count > 0);
-
-		if (count) {
-			this.innerHTML = html`↓ ${count}`;
-		} else {
-			this.innerHTML = '';
-		}
-	}
+	abstract render(): void;
 }
-
-customElements.define(
-	'am-sidebar-outdated-packages-indicator',
-	SidebarOutdatedPackagesIndicatorComponent
-);

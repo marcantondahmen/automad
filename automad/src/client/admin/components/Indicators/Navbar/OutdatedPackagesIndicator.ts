@@ -33,14 +33,14 @@
  */
 
 import { App, Attr, CSS, html, Route } from '@/core';
-import { BaseUpdateIndicatorComponent } from '@/components/Indicators/BaseUpdateIndicator';
+import { BaseOutdatedPackagesIndicator } from '../BaseOutdatedPackagesIndicator';
 
 /**
  * A packages state component.
  *
- * @extends BaseUpdateIndicatorComponent
+ * @extends BaseOutdatedPackagesIndicator
  */
-class NavbarOutdatedPackagesIndicatorComponent extends BaseUpdateIndicatorComponent {
+class NavbarOutdatedPackagesIndicatorComponent extends BaseOutdatedPackagesIndicator {
 	/**
 	 * Render the state element.
 	 */
@@ -49,7 +49,7 @@ class NavbarOutdatedPackagesIndicatorComponent extends BaseUpdateIndicatorCompon
 
 		this.classList.toggle(CSS.displayNone, !count);
 
-		if (App.state.systemUpdate?.pending) {
+		if (count > 0) {
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"

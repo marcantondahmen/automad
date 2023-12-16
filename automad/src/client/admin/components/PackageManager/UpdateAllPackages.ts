@@ -62,7 +62,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 		this.init();
 
 		this.addListener(
-			listen(window, EventName.packagesChange, this.init.bind(this))
+			listen(window, EventName.packagesUpdateCheck, this.init.bind(this))
 		);
 
 		listen(this, 'click', async () => {
@@ -85,6 +85,8 @@ class UpdateAllPackagesComponent extends BaseComponent {
 			modal.close();
 
 			fire(EventName.packagesChange);
+
+			App.checkForOutdatedPackages();
 		});
 	}
 
@@ -92,8 +94,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 	 * Check if the button should be displayed.
 	 */
 	private async init(): Promise<void> {
-		const { data } = await requestAPI(PackageManagerController.getOutdated);
-		const hasUpdates = data?.outdated?.length > 0;
+		const hasUpdates = App.state.outdatedPackages > 0;
 
 		this.classList.toggle(CSS.displayNone, !hasUpdates);
 	}

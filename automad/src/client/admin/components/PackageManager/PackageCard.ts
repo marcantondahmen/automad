@@ -101,6 +101,8 @@ const performAction = async (
 	modal.close();
 
 	fire(EventName.packagesChange);
+
+	App.checkForOutdatedPackages();
 };
 
 /**
