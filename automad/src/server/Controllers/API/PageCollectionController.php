@@ -65,7 +65,7 @@ class PageCollectionController {
 			$Automad = Automad::fromCache();
 			$Selection = new Selection($Automad->getCollection());
 			$Selection->sortPages(Fields::TIME_LAST_MODIFIED . ' desc');
-			$pages = array_values($Selection->getSelection(false, false, 0, 12));
+			$pages = array_values($Selection->getSelection(false, false, 0, 15));
 
 			return $Response->setData(array_map(function ($Page) {
 				$files = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $Page->path . '*.*');

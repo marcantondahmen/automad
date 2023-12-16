@@ -78,6 +78,7 @@ class AppController {
 				'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
 				'languages' => self::getLanguages(),
 				'reservedFields' => Fields::$reserved,
+				'sitename' => $Automad->Shared->get(Fields::SITENAME),
 				'text' => Text::getObject(),
 				'version' => AM_VERSION
 			));
