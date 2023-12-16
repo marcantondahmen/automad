@@ -64,29 +64,18 @@ const getSystemSections = (): SystemSectionData[] => {
 			narrowIcon: true,
 		},
 		{
-			section: Section.mail,
-			icon: 'envelope-at',
-			title: App.text('systemMail'),
-			info: App.text('systemMailCardInfo'),
-			state: '<am-system-mail-indicator></am-system-mail-indicator>',
-			render: renderMailSection,
-			narrowIcon: false,
-		},
-		{
-			section: Section.update,
-			icon: 'arrow-repeat',
-			title: App.text('systemUpdate'),
-			info: App.text('systemUpdateCardInfo'),
-			state: '<am-system-update-indicator></am-system-update-indicator>',
-			render: renderUpdateSection,
-		},
-		{
-			section: Section.i18n,
-			icon: 'globe',
-			title: App.text('systemI18n'),
-			info: App.text('systemI18nCardInfo'),
-			state: '<am-system-i18n-indicator></am-system-i18n-indicator>',
-			render: renderI18nSection,
+			section: Section.users,
+			icon: 'person-badge',
+			title: App.text('systemUsers'),
+			info: App.text('systemUsersCardInfo'),
+			state: html`
+				<span class="${CSS.textMuted}">
+					${App.text('systemUsersRegistered')}:
+					<am-user-count-indicator></am-user-count-indicator>
+				</span>
+			`,
+			render: renderUsersSection,
+			narrowIcon: true,
 		},
 		{
 			section: Section.feed,
@@ -97,6 +86,37 @@ const getSystemSections = (): SystemSectionData[] => {
 			render: renderFeedSection,
 		},
 		{
+			section: Section.mail,
+			icon: 'envelope-at',
+			title: App.text('systemMail'),
+			info: App.text('systemMailCardInfo'),
+			state: '<am-system-mail-indicator></am-system-mail-indicator>',
+			render: renderMailSection,
+			narrowIcon: false,
+		},
+		{
+			section: Section.i18n,
+			icon: 'globe',
+			title: App.text('systemI18n'),
+			info: App.text('systemI18nCardInfo'),
+			state: '<am-system-i18n-indicator></am-system-i18n-indicator>',
+			render: renderI18nSection,
+		},
+		{
+			section: Section.language,
+			icon: 'translate',
+			title: App.text('systemLanguage'),
+			info: App.text('systemLanguageCardInfo'),
+			state: html`
+				<span class="${CSS.textMuted}">
+					${Object.keys(App.languages).find(
+						(lang) => App.languages[lang] == App.system.translation
+					)}
+				</span>
+			`,
+			render: renderLanguageSection,
+		},
+		{
 			section: Section.debug,
 			icon: 'bug',
 			title: App.text('systemDebug'),
@@ -105,21 +125,12 @@ const getSystemSections = (): SystemSectionData[] => {
 			render: renderDebugSection,
 		},
 		{
-			section: Section.users,
-			icon: 'person-badge',
-			title: App.text('systemUsers'),
-			info: App.text('systemUsersCardInfo'),
-			state: '',
-			render: renderUsersSection,
-			narrowIcon: true,
-		},
-		{
-			section: Section.language,
-			icon: 'translate',
-			title: App.text('systemLanguage'),
-			info: App.text('systemLanguageCardInfo'),
-			state: '',
-			render: renderLanguageSection,
+			section: Section.update,
+			icon: 'arrow-repeat',
+			title: App.text('systemUpdate'),
+			info: App.text('systemUpdateCardInfo'),
+			state: '<am-system-update-indicator></am-system-update-indicator>',
+			render: renderUpdateSection,
 		},
 	];
 };
@@ -212,8 +223,11 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 	private renderOverviewSection(): string {
 		return html`
 			<am-switcher-section name="${Section.overview}">
+				<div class="${CSS.grid}" style="--min: 17rem;">
+					${this.renderOverviewCards(this.sectionData.slice(0, 2))}
+				</div>
 				<div class="${CSS.grid}" style="--min: 13rem;">
-					${this.renderOverviewCards(this.sectionData)}
+					${this.renderOverviewCards(this.sectionData.slice(2, 8))}
 				</div>
 			</am-switcher-section>
 		`;
