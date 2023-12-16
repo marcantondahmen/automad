@@ -49,17 +49,19 @@ import {
 	query,
 	queryAll,
 	requestAPI,
+	html,
 } from '@/core';
 import { InputElement, KeyValueMap } from '@/types';
 import { BaseComponent } from '@/components/Base';
 import { ModalComponent } from '@/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
+import { FormErrorComponent } from './FormError';
 
 export const autoSubmitTimeout = 750;
 
 const debounced = debounce(
 	async (callback: (...args: any[]) => void): Promise<void> => {
-		await callback();
+		callback();
 	},
 	autoSubmitTimeout
 );
@@ -287,10 +289,24 @@ export class FormComponent extends BaseComponent {
 			App.reload();
 		}
 
-		if (error) {
-			notifyError(error);
-			getLogger().error(error);
-		}
+		setTimeout(() => {
+			const errorContainer = query<FormErrorComponent>(
+				FormErrorComponent.TAG_NAME,
+				this
+			);
+
+			if (errorContainer) {
+				errorContainer.message = error ?? '';
+			}
+
+			if (error) {
+				if (!errorContainer) {
+					notifyError(error);
+				}
+
+				getLogger().error(error);
+			}
+		}, 0);
 
 		if (success) {
 			notifySuccess(success);

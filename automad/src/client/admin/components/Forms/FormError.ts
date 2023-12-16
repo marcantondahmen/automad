@@ -22,61 +22,40 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2023 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-alert {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1.1rem;
-	margin: 0;
-	margin-bottom: @am-base-margin-y;
-	padding: 1.1rem 1.1rem;
-	border: @am-card-border;
-	border-radius: @am-card-radius;
-	color: var(--am-clr-text);
-	background-color: var(--am-clr-background-faded);
-	box-shadow: @am-shadow;
-	--multiplier: ~'calc(30rem - 100%)';
+import { CSS, html } from '@/core';
+import { BaseComponent } from '@/components/Base';
 
-	& > * {
-		flex-basis: ~'calc(var(--multiplier) * 999)';
-		max-width: 100%;
-	}
+/**
+ * A simple error message component that is used to display errors inside of forms.
+ *
+ * @extends BaseComponent
+ */
+export class FormErrorComponent extends BaseComponent {
+	/**
+	 * The tag name.
+	 *
+	 * @static
+	 */
+	static TAG_NAME = 'am-form-error';
 
-	* + & {
-		margin-top: @am-base-margin-y;
-	}
+	/**
+	 * Set content and toggle class.
+	 */
+	set message(content: string) {
+		this.classList.toggle(CSS.alert, content.length > 0);
 
-	&__icon {
-		display: flex;
-		width: min-content;
-
-		& > .bi {
-			font-size: 2rem;
-			line-height: 1;
-		}
-	}
-
-	&__text {
-		flex-grow: 1;
-		align-self: center;
-		color: inherit;
-		max-width: 50rem;
-
-		& > * {
-			margin: 0;
-
-			& + * {
-				margin-top: @am-base-margin-y;
-			}
-		}
+		this.innerHTML = html`${content}`;
 	}
 }
+
+customElements.define(FormErrorComponent.TAG_NAME, FormErrorComponent);

@@ -88,6 +88,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 	private renderRequestToken(data: KeyValueMap): void {
 		this.innerHTML = html`
 			<h2>${App.text('resetPassword')}</h2>
+			<am-form-error></am-form-error>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 					${App.text('passwordResetEnterNameOrEmail')}
@@ -124,6 +125,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 	private renderSetPassword(data: KeyValueMap): void {
 		this.innerHTML = html`
 			<h2>${App.text('resetPassword')}</h2>
+			<am-form-error></am-form-error>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 					${App.text('passwordResetEnterNewPassword')}

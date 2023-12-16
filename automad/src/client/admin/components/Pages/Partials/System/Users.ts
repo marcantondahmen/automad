@@ -57,6 +57,7 @@ export const renderUsersSection = (): string => {
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 				${Attr.watch}
 			>
+				<am-form-error></am-form-error>
 				<span class="${CSS.card}">
 					<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 						${App.text('systemUsersInfo')}
@@ -139,42 +140,45 @@ export const renderUsersSection = (): string => {
 					${App.text('systemUsersChangePassword')}
 				</am-modal-header>
 				<am-modal-body>
-					${createField(
-						FieldTag.password,
-						null,
-						{
-							key: 'currentPassword',
-							value: '',
-							name: 'currentPassword',
-							label: App.text('currentPassword'),
-						},
-						[],
-						{}
-					).outerHTML}
-					${createField(
-						FieldTag.password,
-						null,
-						{
-							key: 'newPassword1',
-							value: '',
-							name: 'newPassword1',
-							label: App.text('newPassword'),
-						},
-						[],
-						{}
-					).outerHTML}
-					${createField(
-						FieldTag.password,
-						null,
-						{
-							key: 'newPassword2',
-							value: '',
-							name: 'newPassword2',
-							label: App.text('repeatPassword'),
-						},
-						[],
-						{}
-					).outerHTML}
+					<am-form-error></am-form-error>
+					<div>
+						${createField(
+							FieldTag.password,
+							null,
+							{
+								key: 'currentPassword',
+								value: '',
+								name: 'currentPassword',
+								label: App.text('currentPassword'),
+							},
+							[],
+							{}
+						).outerHTML}
+						${createField(
+							FieldTag.password,
+							null,
+							{
+								key: 'newPassword1',
+								value: '',
+								name: 'newPassword1',
+								label: App.text('newPassword'),
+							},
+							[],
+							{}
+						).outerHTML}
+						${createField(
+							FieldTag.password,
+							null,
+							{
+								key: 'newPassword2',
+								value: '',
+								name: 'newPassword2',
+								label: App.text('repeatPassword'),
+							},
+							[],
+							{}
+						).outerHTML}
+					</div>
 				</am-modal-body>
 				<am-modal-footer>
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
@@ -220,58 +224,61 @@ export const renderUsersSection = (): string => {
 					${App.text('systemUsersAdd')}
 				</am-modal-header>
 				<am-modal-body>
-					${createField(
-						FieldTag.input,
-						null,
-						{
-							key: 'username',
-							id: 'am-field__create-username',
-							value: '',
-							name: 'username',
-							label: App.text('username'),
-						},
-						[],
-						{}
-					).outerHTML}
-					${createField(
-						FieldTag.email,
-						null,
-						{
-							key: 'email',
-							id: 'am-field__create-email',
-							value: '',
-							name: 'email',
-							label: App.text('email'),
-						},
-						[],
-						{}
-					).outerHTML}
-					${createField(
-						FieldTag.password,
-						null,
-						{
-							key: 'password1',
-							id: 'am-field__create-password1',
-							value: '',
-							name: 'password1',
-							label: App.text('password'),
-						},
-						[],
-						{}
-					).outerHTML}
-					${createField(
-						FieldTag.password,
-						null,
-						{
-							key: 'password2',
-							id: 'am-field__create-password2',
-							value: '',
-							name: 'password2',
-							label: App.text('repeatPassword'),
-						},
-						[],
-						{}
-					).outerHTML}
+					<am-form-error></am-form-error>
+					<div>
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								key: 'username',
+								id: 'am-field__create-username',
+								value: '',
+								name: 'username',
+								label: App.text('username'),
+							},
+							[],
+							{}
+						).outerHTML}
+						${createField(
+							FieldTag.email,
+							null,
+							{
+								key: 'email',
+								id: 'am-field__create-email',
+								value: '',
+								name: 'email',
+								label: App.text('email'),
+							},
+							[],
+							{}
+						).outerHTML}
+						${createField(
+							FieldTag.password,
+							null,
+							{
+								key: 'password1',
+								id: 'am-field__create-password1',
+								value: '',
+								name: 'password1',
+								label: App.text('password'),
+							},
+							[],
+							{}
+						).outerHTML}
+						${createField(
+							FieldTag.password,
+							null,
+							{
+								key: 'password2',
+								id: 'am-field__create-password2',
+								value: '',
+								name: 'password2',
+								label: App.text('repeatPassword'),
+							},
+							[],
+							{}
+						).outerHTML}
+					</div>
 				</am-modal-body>
 				<am-modal-footer>
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
@@ -293,32 +300,35 @@ export const renderUsersSection = (): string => {
 					${App.text('systemUsersInvite')}
 				</am-modal-header>
 				<am-modal-body>
-					${createField(
-						FieldTag.input,
-						null,
-						{
-							key: 'username',
-							id: 'am-field__invite-username',
-							value: '',
-							name: 'username',
-							label: App.text('username'),
-						},
-						[],
-						{}
-					).outerHTML}
-					${createField(
-						FieldTag.email,
-						null,
-						{
-							key: 'email',
-							id: 'am-field__invite-email',
-							value: '',
-							name: 'email',
-							label: App.text('email'),
-						},
-						[],
-						{}
-					).outerHTML}
+					<am-form-error></am-form-error>
+					<div>
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								key: 'username',
+								id: 'am-field__invite-username',
+								value: '',
+								name: 'username',
+								label: App.text('username'),
+							},
+							[],
+							{}
+						).outerHTML}
+						${createField(
+							FieldTag.email,
+							null,
+							{
+								key: 'email',
+								id: 'am-field__invite-email',
+								value: '',
+								name: 'email',
+								label: App.text('email'),
+							},
+							[],
+							{}
+						).outerHTML}
+					</div>
 				</am-modal-body>
 				<am-modal-footer>
 					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">

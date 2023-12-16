@@ -64,43 +64,45 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 	protected renderMainPartial(): string {
 		return html`
 			<h2>$${App.sitename} &mdash; ${App.text('signIn')}</h2>
-			<div class="am-c-card">
-				<am-form
-					class="am-c-card__form"
-					${Attr.api}="${SessionController.login}"
-					${Attr.focus}
-					${Attr.enter}
-				>
-					<input
-						class="${CSS.input}"
-						type="text"
-						name="name-or-email"
-						placeholder="${App.text('usernameOrEmail')}"
-						required
-					/>
-					<input
-						class="${CSS.input}"
-						type="password"
-						name="password"
-						placeholder="${App.text('password')}"
-						required
-					/>
-					<div class="am-c-card__form-buttons">
-						<a
-							href="./${Route.resetpassword}"
-							class="${CSS.button}"
-						>
-							${App.text('forgotPassword')}
-						</a>
-						<am-submit
-							class="${CSS.button} ${CSS.buttonPrimary}"
-							${Attr.form}="${SessionController.login}"
-						>
-							${App.text('signIn')}
-						</am-submit>
+			<am-form
+				${Attr.api}="${SessionController.login}"
+				${Attr.focus}
+				${Attr.enter}
+			>
+				<am-form-error></am-form-error>
+				<div class="am-c-card">
+					<div class="${CSS.cardForm}">
+						<input
+							class="${CSS.input}"
+							type="text"
+							name="name-or-email"
+							placeholder="${App.text('usernameOrEmail')}"
+							required
+						/>
+						<input
+							class="${CSS.input}"
+							type="password"
+							name="password"
+							placeholder="${App.text('password')}"
+							required
+						/>
+						<div class="am-c-card__form-buttons">
+							<a
+								href="./${Route.resetpassword}"
+								class="${CSS.button}"
+							>
+								${App.text('forgotPassword')}
+							</a>
+							<am-submit
+								class="${CSS.button} ${CSS.buttonPrimary}"
+								${Attr.form}="${SessionController.login}"
+							>
+								${App.text('signIn')}
+							</am-submit>
+						</div>
 					</div>
-				</am-form>
-			</div>
+				</div>
+			</am-form>
 		`;
 	}
 }

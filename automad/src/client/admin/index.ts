@@ -76,6 +76,7 @@ import './components/Forms/FileCollection/Submit';
 import './components/Forms/ConfigFileForm';
 import './components/Forms/DeleteUsersForm';
 import './components/Forms/Form';
+import './components/Forms/FormError';
 import './components/Forms/HistoryModalForm';
 import './components/Forms/MailConfigForm';
 import './components/Forms/PageDataForm';
