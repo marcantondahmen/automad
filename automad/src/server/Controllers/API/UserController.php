@@ -61,19 +61,22 @@ class UserController {
 	public static function changePassword(): Response {
 		$Response = new Response();
 		$currentPassword = Request::post('currentPassword');
-		$newPassword1 = Request::post('newPassword1');
-		$newPassword2 = Request::post('newPassword2');
+		$newPassword = Request::post('newPassword1');
 
-		if (!$currentPassword || !$newPassword1 || !$newPassword2) {
+		if (!$currentPassword || !$newPassword) {
 			return $Response->setError(Text::get('invalidFormError'));
 		}
 
-		if ($newPassword1 !== $newPassword2) {
+		if ($newPassword !== Request::post('newPassword2')) {
 			return $Response->setError(Text::get('passwordRepeatError'));
 		}
 
-		if ($currentPassword === $newPassword1) {
+		if ($currentPassword === $newPassword) {
 			return $Response->setError(Text::get('passwordReuseError'));
+		}
+
+		if (!self::verifyPasswordRequirements($newPassword)) {
+			return $Response->setError(self::generatePasswordRequirementsError());
 		}
 
 		$UserCollection = new UserCollection();
@@ -84,7 +87,7 @@ class UserController {
 			return $Response->setError(Text::get('userNotFoundError'));
 		}
 
-		$User->changePassword($currentPassword, $newPassword1, $UserCollection, $Messenger);
+		$User->changePassword($currentPassword, $newPassword, $UserCollection, $Messenger);
 
 		return $Response
 				->setError($Messenger->getError())
@@ -126,7 +129,7 @@ class UserController {
 		// Only one field will be defined, so they can just be concatenated here.
 		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
 
-		$token = Request::post('token');
+		$token = trim(Request::post('token'));
 		$newPassword1 = Request::post('password1');
 		$newPassword2 = Request::post('password2');
 
@@ -143,6 +146,12 @@ class UserController {
 		$responseData = array('username' => $User->name);
 
 		if ($token && $newPassword1 && $newPassword2) {
+			if (!self::verifyPasswordRequirements($newPassword1)) {
+				$responseData['state'] = 'setPassword';
+
+				return $Response->setData($responseData)->setError(self::generatePasswordRequirementsError());
+			}
+
 			if ($User->verifyPasswordResetToken($token)) {
 				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
 					$responseData['state'] = 'success';
@@ -167,5 +176,38 @@ class UserController {
 		}
 
 		return $Response->setError($Messenger->getError());
+	}
+
+	/**
+	 * Generate a password requirements error message.
+	 *
+	 * @return string
+	 */
+	private static function generatePasswordRequirementsError(): string {
+		/** @var string */
+		$chars = str_replace(' ', ', ', AM_PASSWORD_REQUIRED_CHARS);
+
+		return str_replace(array('{1}', '{2}'), array($chars, AM_PASSWORD_MIN_LENGTH), Text::get('passwordRequirementsError'));
+	}
+
+	/**
+	 * Verify that a given password matches the requirements.
+	 *
+	 * @param string $password
+	 * @return bool
+	 */
+	private static function verifyPasswordRequirements(string $password): bool {
+		$charGroups = preg_split('/\s+/', AM_PASSWORD_REQUIRED_CHARS);
+		$len = is_numeric(AM_PASSWORD_MIN_LENGTH) ? AM_PASSWORD_MIN_LENGTH : 0;
+
+		$regex = '';
+
+		foreach ($charGroups as $group) {
+			$regex .= '(?=.*[' . $group . '])';
+		}
+
+		$regex .= '.{' . intval(AM_PASSWORD_MIN_LENGTH) . ',}';
+
+		return (bool) preg_match('/' . $regex . '/', $password);
 	}
 }

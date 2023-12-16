@@ -145,6 +145,10 @@ class Config {
 		// Mail address obfuscation
 		self::set('AM_MAIL_OBFUSCATION_ENABLED', true);
 
+		// Password requirements
+		self::set('AM_PASSWORD_REQUIRED_CHARS', '@#%^~+=*$&! A-Z a-z 0-9');
+		self::set('AM_PASSWORD_MIN_LENGTH', '8');
+
 		// Version number
 		include AM_BASE_DIR . '/automad/version.php';
 	}
