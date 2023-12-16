@@ -1,0 +1,14 @@
+{
+    "title": "Home",
+    "+hero": {
+        "blocks": [],
+        "automadVersion": "1.10.9"
+    },
+    "+main": {
+        "blocks": [],
+        "automadVersion": "1.10.9"
+    },
+    "template": "sidebar_left",
+    ":created": "2023-02-17T10:36:01+00:00",
+    ":lastModified": "2023-12-16T18:48:26+00:00"
+}

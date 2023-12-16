@@ -1,0 +1,6 @@
+{
+    "sitename": "My Site",
+    "theme": "automad/standard-v1/light",
+    "brand": "<svg \nwidth=\"1.65em\" \nheight=\"1.65em\" \nviewBox=\"0 0 16 16\" \nclass=\"bi bi-circle-fill\" \nfill=\"currentColor\" \nxmlns=\"http://www.w3.org/2000/svg\">\n  <circle cx=\"8\" cy=\"8\" r=\"8\"/>\n</svg>",
+    "imageFavicon": "/shared/favicon.ico"
+}
