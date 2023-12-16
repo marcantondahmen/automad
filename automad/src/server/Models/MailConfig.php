@@ -37,6 +37,7 @@
 namespace Automad\Models;
 
 use Automad\Core\Automad;
+use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Text;
@@ -51,46 +52,49 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class MailConfig {
-	/**
-	 * The config file location.
-	 */
-	const FILE = AM_BASE_DIR . '/config/mail.php';
+	const DEFAULT_PORT = 587;
+	const DEFAULT_TRANSPORT = 'sendmail';
 
 	/**
 	 * The from address that is used when no from address is passed to the Mail::send() method.
 	 */
-	public string $from = '';
+	public string $from;
 
 	/**
 	 * The SMTP password.
 	 */
-	public string $smtpPassword = '';
+	public string $smtpPassword;
 
 	/**
 	 * The SMTP port.
 	 */
-	public int $smtpPort = 25;
+	public int $smtpPort;
 
 	/**
 	 * The SMTP server.
 	 */
-	public string $smtpServer = '';
+	public string $smtpServer;
 
 	/**
 	 * The SMTP username.
 	 */
-	public string $smtpUsername = '';
+	public string $smtpUsername;
 
 	/**
 	 * The transport method.
 	 */
-	public string $transport = '';
+	public string $transport;
 
 	/**
 	 * The constructor.
 	 */
 	public function __construct() {
-		$this->load();
+		$this->transport = AM_MAIL_TRANSPORT;
+		$this->from = AM_MAIL_FROM;
+		$this->smtpServer = AM_MAIL_SMTP_SERVER;
+		$this->smtpUsername = AM_MAIL_SMTP_USERNAME;
+		$this->smtpPassword = AM_MAIL_SMTP_PASSWORD;
+		$this->smtpPort = AM_MAIL_SMTP_PORT;
 	}
 
 	/**
@@ -98,8 +102,26 @@ class MailConfig {
 	 *
 	 * @return string
 	 */
-	public function getDefaultFrom(): string {
+	public static function getDefaultFrom(): string {
 		return 'noreply@' . ($_SERVER['SERVER_NAME'] ?? '');
+	}
+
+	/**
+	 * Reset the config to defaults.
+	 *
+	 * @return bool
+	 */
+	public static function reset(): bool {
+		$config = Config::read();
+
+		$config['AM_MAIL_TRANSPORT'] = self::DEFAULT_TRANSPORT;
+		$config['AM_MAIL_FROM'] = '';
+		$config['AM_MAIL_SMTP_SERVER'] = '';
+		$config['AM_MAIL_SMTP_USERNAME'] = '';
+		$config['AM_MAIL_SMTP_PASSWORD'] = '';
+		$config['AM_MAIL_SMTP_PORT'] = self::DEFAULT_PORT;
+
+		return Config::write($config);
 	}
 
 	/**
@@ -108,42 +130,15 @@ class MailConfig {
 	 * @return bool
 	 */
 	public function save(): bool {
-		$config = array(
-			'transport' => $this->transport,
-			'from' => $this->from,
-			'smtpServer' => $this->smtpServer,
-			'smtpUsername' => $this->smtpUsername,
-			'smtpPassword' => $this->smtpPassword,
-			'smtpPort' => $this->smtpPort,
-		);
+		$config = Config::read();
 
-		$serialized = serialize($config);
-		$php = "<?php return unserialize('$serialized');";
+		$config['AM_MAIL_TRANSPORT'] = $this->transport;
+		$config['AM_MAIL_FROM'] = $this->from;
+		$config['AM_MAIL_SMTP_SERVER'] = $this->smtpServer;
+		$config['AM_MAIL_SMTP_USERNAME'] = $this->smtpUsername;
+		$config['AM_MAIL_SMTP_PASSWORD'] = $this->smtpPassword;
+		$config['AM_MAIL_SMTP_PORT'] = $this->smtpPort;
 
-		$success = FileSystem::write(MailConfig::FILE, $php);
-
-		if ($success && function_exists('opcache_invalidate')) {
-			opcache_invalidate(MailConfig::FILE, true);
-		}
-
-		return $success;
-	}
-
-	/**
-	 * Load the config from file.
-	 */
-	private function load(): void {
-		$config = array();
-
-		if (is_readable(MailConfig::FILE)) {
-			$config = require MailConfig::FILE;
-		}
-
-		$this->transport = $config['transport'] ?? 'sendmail';
-		$this->from = $config['from'] ? $config['from'] : $this->getDefaultFrom();
-		$this->smtpServer = $config['smtpServer'] ?? '';
-		$this->smtpUsername = $config['smtpUsername'] ?? '';
-		$this->smtpPassword = $config['smtpPassword'] ?? '';
-		$this->smtpPort = $config['smtpPort'] ?? 25;
+		return Config::write($config);
 	}
 }

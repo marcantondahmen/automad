@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\Models\MailConfig;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -144,6 +145,14 @@ class Config {
 
 		// Mail address obfuscation
 		self::set('AM_MAIL_OBFUSCATION_ENABLED', true);
+
+		// Mail
+		self::set('AM_MAIL_TRANSPORT', MailConfig::DEFAULT_TRANSPORT);
+		self::set('AM_MAIL_FROM', MailConfig::getDefaultFrom());
+		self::set('AM_MAIL_SMTP_SERVER', '');
+		self::set('AM_MAIL_SMTP_USERNAME', '');
+		self::set('AM_MAIL_SMTP_PASSWORD', '');
+		self::set('AM_MAIL_SMTP_PORT', MailConfig::DEFAULT_PORT);
 
 		// Password requirements
 		self::set('AM_PASSWORD_REQUIRED_CHARS', '@#%^~+=*$&! A-Z a-z 0-9');

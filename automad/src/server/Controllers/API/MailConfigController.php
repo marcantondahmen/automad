@@ -64,9 +64,7 @@ class MailConfigController {
 	public static function reset(): Response {
 		$Response = new Response();
 
-		if (is_writable(MailConfig::FILE)) {
-			unlink(MailConfig::FILE);
-		}
+		MailConfig::reset();
 
 		return $Response;
 	}
