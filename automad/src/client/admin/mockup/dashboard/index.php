@@ -37,7 +37,9 @@ $themes = array('light', 'dark', 'low-contrast');
 	<div class="am-l-dashboard">
 		<div class="am-l-dashboard__navbar am-l-dashboard__navbar--left" style="z-index: 1100;">
 			<div class="am-c-navbar">
-				<am-logo class="am-c-navbar__item"></am-logo>
+				<span class="am-c-navbar__item">
+					<am-logo></am-logo>
+				</span>
 				<span class="am-c-navbar__item" am-tooltip="Add new page">
 					<span>New</span>
 					<i class="bi bi-plus-lg"></i>

@@ -6,5 +6,8 @@
 	<link rel="stylesheet" href="../../../../../dist/admin/vendor.bundle.css?t=<?php echo time(); ?>">
 	<link rel="stylesheet" href="../../../../../dist/admin/main.bundle.css?t=<?php echo time(); ?>">
 	<script defer src="../../../../../dist/admin/vendor.bundle.js?t=<?php echo time(); ?>"></script>
+	<script defer src="../../../../../dist/admin/vendor.editorjs.bundle.js?t=<?php echo time(); ?>"></script>
+	<script defer src="../../../../../dist/admin/vendor.filerobot.bundle.js?t=<?php echo time(); ?>"></script>
+	<script defer src="../../../../../dist/admin/vendor.toastui.bundle.js?t=<?php echo time(); ?>"></script>
 	<script defer src="../../../../../dist/admin/main.bundle.js?t=<?php echo time(); ?>"></script>
 </head>

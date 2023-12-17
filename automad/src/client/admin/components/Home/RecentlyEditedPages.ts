@@ -103,7 +103,6 @@ class RecentlyEditedPagesComponent extends BaseComponent {
 							<span
 								class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
 							>
-								<i class="bi bi-pencil"></i>
 								<span>${App.text('edit')}</span>
 							</span>
 						</am-link>
@@ -112,7 +111,6 @@ class RecentlyEditedPagesComponent extends BaseComponent {
 								class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
 							>
 								<span>${App.text('visit')}</span>
-								<i class="bi bi-arrow-right"></i>
 							</span>
 						</a>
 					</div>
