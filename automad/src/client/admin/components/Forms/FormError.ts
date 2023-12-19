@@ -53,6 +53,7 @@ export class FormErrorComponent extends BaseComponent {
 	 */
 	set message(content: string) {
 		this.classList.toggle(CSS.alert, content.length > 0);
+		this.classList.toggle(CSS.alertDanger, content.length > 0);
 
 		this.innerHTML = html`${content}`;
 	}

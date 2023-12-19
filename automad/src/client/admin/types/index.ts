@@ -133,6 +133,13 @@ export interface NavTreeItem {
 	page: PageMetaData;
 }
 
+export interface NotifyOptions {
+	message: string;
+	icon: string;
+	duration: number;
+	className?: string;
+}
+
 export interface Partials {
 	[key: string]: string;
 }

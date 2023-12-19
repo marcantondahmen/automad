@@ -58,7 +58,9 @@
 	}
 
 	&:invalid:not(:required) {
+		color: var(--am-clr-text-danger);
 		border-color: var(--am-clr-border-danger);
+		background-color: var(--am-clr-background-danger);
 		outline: @am-outline-danger;
 	}
 
@@ -97,7 +99,9 @@
 
 		&__button {
 			color: var(--am-clr-text);
-			transition: color 0.2s, background-color 0.2s;
+			transition:
+				color 0.2s,
+				background-color 0.2s;
 			cursor: pointer;
 
 			&:hover,

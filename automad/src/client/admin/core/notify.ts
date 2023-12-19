@@ -34,7 +34,7 @@
 
 import Toastify from 'toastify-js';
 import { query, create, CSS } from '.';
-import { KeyValueMap } from '@/types';
+import { NotifyOptions } from '@/types';
 
 const defaults: Toastify.Options = {
 	close: false,
@@ -54,9 +54,9 @@ const defaults: Toastify.Options = {
  * @param params.message
  * @param params.icon
  * @param params.duration
- * @param params.className
+ * @param [params.className]
  */
-const notify = ({ message, icon, duration }: KeyValueMap) => {
+const notify = ({ message, icon, duration, className }: NotifyOptions) => {
 	const ui = query('html.am-ui > body, body .am-ui');
 	const node = create('div', [CSS.notifyNode], {});
 
@@ -64,11 +64,11 @@ const notify = ({ message, icon, duration }: KeyValueMap) => {
 	create('span', [CSS.notifyText], {}, node).innerHTML = message;
 	create('span', [CSS.notifyClose], {}, node);
 
-	const toast: KeyValueMap = Toastify(
+	const toast = Toastify(
 		Object.assign(defaults, {
 			node,
 			duration,
-			className: CSS.notify,
+			className: className ?? CSS.notify,
 			selector: ui,
 			onClick: function () {
 				toast.hideToast();
@@ -89,6 +89,7 @@ export const notifyError = (message: string): void => {
 		message,
 		duration: -1,
 		icon: 'slash-circle',
+		className: `${CSS.notify} ${CSS.notifyDanger}`,
 	});
 };
 

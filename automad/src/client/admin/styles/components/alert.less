@@ -46,6 +46,12 @@
 	box-shadow: @am-shadow;
 	--multiplier: ~'calc(30rem - 100%)';
 
+	&--danger {
+		color: var(--am-clr-text-danger);
+		background-color: var(--am-clr-background-danger);
+		border-color: var(--am-clr-border-danger);
+	}
+
 	& > * {
 		flex-basis: ~'calc(var(--multiplier) * 999)';
 		max-width: 100%;

@@ -40,6 +40,7 @@ export const enum CSS {
 	focus = 'am-focus',
 
 	alert = 'am-c-alert',
+	alertDanger = 'am-c-alert--danger',
 	alertIcon = 'am-c-alert__icon',
 	alertText = 'am-c-alert__text',
 
@@ -257,6 +258,7 @@ export const enum CSS {
 	navbarGroup = 'am-c-navbar__group',
 
 	notify = 'am-c-notify',
+	notifyDanger = 'am-c-notify--danger',
 	notifyNode = 'am-c-notify__node',
 	notifyIcon = 'am-c-notify__icon',
 	notifyText = 'am-c-notify__text',

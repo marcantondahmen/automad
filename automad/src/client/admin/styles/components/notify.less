@@ -39,8 +39,14 @@
 	color: var(--am-clr-text);
 	background: var(--am-clr-background-faded);
 	box-shadow: @am-shadow;
-	border: @am-border;
+	border: @am-card-border-width solid var(--am-clr-border);
 	border-radius: @am-card-radius;
+
+	&--danger {
+		color: var(--am-clr-text-danger);
+		background: var(--am-clr-background-danger);
+		border-color: var(--am-clr-border-danger);
+	}
 
 	&__node {
 		display: flex;
@@ -50,7 +56,6 @@
 	&__icon {
 		font-size: 1.5em;
 		line-height: 1.4;
-		color: var(--am-clr-text-paragraph);
 	}
 
 	&__text {

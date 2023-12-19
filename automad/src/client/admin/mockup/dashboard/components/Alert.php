@@ -28,5 +28,13 @@
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dicta quibusdam facere ducimus quae porro consectetur dignissimos, eaque delectus laborum rerum, commodi voluptate, minus tempora eligendi non repellat assumenda quo?
 			</div>
 		</div>
+		<div class="am-c-alert am-c-alert--danger">
+			<div class="am-c-alert__icon">
+				<i class="bi bi-fire"></i>
+			</div>
+			<div class="am-c-alert__text">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dicta quibusdam facere ducimus quae porro consectetur dignissimos, eaque delectus laborum rerum, commodi voluptate, minus tempora eligendi non repellat assumenda quo?
+			</div>
+		</div>
 	</div>
 </section>
