@@ -102,7 +102,7 @@ export class ConfigFileFormComponent extends FormComponent {
 	private render(content: string): void {
 		this.innerHTML = html`
 			<am-modal-toggle
-				class="${CSS.button} ${CSS.buttonAccent}"
+				class="${CSS.button} ${CSS.buttonPrimary}"
 				${Attr.modal}="#am-config-file-form-modal"
 			>
 				${App.text('systemConfigFileEdit')}
@@ -117,12 +117,12 @@ export class ConfigFileFormComponent extends FormComponent {
 							class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
 						>
 							<am-modal-close
-								class="${CSS.button} ${CSS.buttonPrimary}"
+								class="${CSS.button} ${CSS.buttonSecondary}"
 							>
 								${App.text('cancel')}
 							</am-modal-close>
 							<am-submit
-								class="${CSS.button} ${CSS.buttonAccent}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 							>
 								${App.text('save')}
 							</am-submit>

@@ -192,7 +192,7 @@ export class MailConfigFormComponent extends FormComponent {
 
 		create(
 			'am-submit',
-			[CSS.button, CSS.buttonAccent],
+			[CSS.button, CSS.buttonPrimary],
 			{ disabled: 'true' },
 			footer,
 			App.text('save')

@@ -316,7 +316,7 @@ export class SearchFormComponent extends BaseComponent {
 
 		const replaceButton = create(
 			'span',
-			[CSS.button, CSS.buttonAccent],
+			[CSS.button, CSS.buttonPrimary],
 			{},
 			wrapper
 		);

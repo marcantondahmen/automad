@@ -88,10 +88,10 @@ export class HistoryModalFormComponent extends BaseComponent {
 					<am-modal-body class="${CSS.flexGapLarge}"></am-modal-body>
 					<am-modal-footer>
 						<am-modal-close
-							class="${CSS.button} ${CSS.buttonPrimary}"
+							class="${CSS.button} ${CSS.buttonSecondary}"
 							>${App.text('cancel')}</am-modal-close
 						>
-						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('pageHistoryRestore')}
 						</am-submit>
 					</am-modal-footer>

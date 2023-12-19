@@ -48,7 +48,7 @@ export const renderMailSection = (): string => {
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			></am-mail-config-form>
 			<am-form ${Attr.api}=${MailConfigController.test}>
-				<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+				<am-submit class="${CSS.button} ${CSS.buttonSecondary}">
 					${App.text('systemMailSendTest')}
 				</am-submit>
 			</am-form>

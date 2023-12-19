@@ -5,7 +5,7 @@
 			<span class="am-e-badge am-e-badge--muted">Muted</span>
 		</p>
 		<p class="am-u-flex am-u-flex--gap">
-			<button class="am-e-button am-e-button--accent">
+			<button class="am-e-button am-e-button--primary">
 				<span>Button</span>
 				<span class="am-e-badge">Badge</span>
 			</button>

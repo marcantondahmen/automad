@@ -73,7 +73,7 @@ export const renderCacheSection = (): string => {
 				${Attr.api}="${CacheController.clear}"
 			>
 				<p>${App.text('systemCacheClearInfo')}</p>
-				<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+				<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 					${App.text('systemCacheClear')}
 				</am-submit>
 			</am-form>

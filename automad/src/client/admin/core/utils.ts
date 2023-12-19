@@ -59,12 +59,12 @@ export const confirm = async (text: string): Promise<boolean> => {
 		<am-modal-dialog>
 			<am-modal-body>${text}</am-modal-body>
 			<am-modal-footer>
-				<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
+				<am-modal-close class="${CSS.button} ${CSS.buttonSecondary}">
 					${App.text('cancel')}
 				</am-modal-close>
 				<am-modal-close
 					${Attr.confirm}
-					class="${CSS.button} ${CSS.buttonAccent}"
+					class="${CSS.button} ${CSS.buttonPrimary}"
 				>
 					${App.text('ok')}
 				</am-modal-close>

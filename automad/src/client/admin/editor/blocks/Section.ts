@@ -337,7 +337,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private renderStylesButton(toolbar: HTMLElement): void {
 		const button = create(
 			'am-modal-toggle',
-			[CSS.button, CSS.buttonIcon, CSS.buttonAccent],
+			[CSS.button, CSS.buttonIcon, CSS.buttonPrimary],
 			{ [Attr.tooltip]: App.text('editStyle') },
 			toolbar,
 			'<i class="bi bi-palette2"></i>'

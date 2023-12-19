@@ -7,7 +7,7 @@
 	<div class="am-c-card__form">
 		<input type="text" class="am-f-input" placeholder="username" value="user@domain.com">
 		<div class="am-c-card__form-buttons">
-			<button class="am-e-button am-e-button--accent">Submit</button>
+			<button class="am-e-button am-e-button--primary">Submit</button>
 		</div>
 	</div>
 </div>

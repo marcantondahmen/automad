@@ -184,7 +184,7 @@ export const createGenericModal = (
 				<am-modal-header>${title}</am-modal-header>
 				<am-modal-body></am-modal-body>
 				<am-modal-footer>
-					<am-modal-close class="${CSS.button} ${CSS.buttonAccent}">
+					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
 						${buttonText}
 					</am-modal-close>
 				</am-modal-footer>
@@ -354,14 +354,14 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 
 	create(
 		'am-modal-close',
-		[CSS.button, CSS.buttonPrimary],
+		[CSS.button, CSS.buttonSecondary],
 		{},
 		footer
 	).textContent = App.text('cancel');
 
 	const buttonOk = create(
 		'button',
-		[CSS.button, CSS.buttonAccent],
+		[CSS.button, CSS.buttonPrimary],
 		{},
 		footer
 	);

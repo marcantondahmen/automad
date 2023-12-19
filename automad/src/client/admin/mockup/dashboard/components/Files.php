@@ -6,7 +6,7 @@
 		</div>
 		<div class="am-u-flex am-u-flex--between">
 			<div class="am-u-flex am-u-flex--gap">
-				<button class="am-e-button am-e-button--accent">Upload</button>
+				<button class="am-e-button am-e-button--primary">Upload</button>
 				<button class="am-e-button">Import from URL</button>
 			</div>
 			<button class="am-e-button">Delete Selected</button>

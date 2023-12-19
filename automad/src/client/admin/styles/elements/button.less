@@ -57,6 +57,19 @@
 		background-color: var(--am-clr-background-faded);
 	}
 
+	&--secondary {
+		color: var(--am-clr-secondary-text);
+		background-color: var(--am-clr-secondary-background);
+		border: @am-button-border-width solid var(--am-clr-secondary-background);
+
+		&:hover,
+		&:active {
+			background-color: var(--am-clr-secondary-background-hover);
+			border: @am-button-border-width solid
+				var(--am-clr-secondary-background-hover);
+		}
+	}
+
 	&--primary {
 		color: var(--am-clr-primary-text);
 		background-color: var(--am-clr-primary-background);
@@ -65,25 +78,12 @@
 		&:hover,
 		&:active {
 			background-color: var(--am-clr-primary-background-hover);
-			border: @am-button-border-width solid
-				var(--am-clr-primary-background-hover);
-		}
-	}
-
-	&--accent {
-		color: var(--am-clr-accent-text);
-		background-color: var(--am-clr-accent-background);
-		border: @am-button-border-width solid var(--am-clr-accent-background);
-
-		&:hover,
-		&:active {
-			background-color: var(--am-clr-accent-background-hover);
-			border-color: var(--am-clr-accent-background-hover);
+			border-color: var(--am-clr-primary-background-hover);
 		}
 
 		& .am-e-badge {
-			--am-clr-badge-text: var(--am-clr-accent-background);
-			--am-clr-badge-background: var(--am-clr-accent-text);
+			--am-clr-badge-text: var(--am-clr-primary-background);
+			--am-clr-badge-background: var(--am-clr-primary-text);
 		}
 	}
 

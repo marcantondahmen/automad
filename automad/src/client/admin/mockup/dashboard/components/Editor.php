@@ -885,7 +885,7 @@
 											</am-editor-js>
 											<div class="am-c-ed-bl-section__toolbar am-active">
 												<am-modal-toggle
-													class="am-e-button am-e-button--icon am-e-button--accent"
+													class="am-e-button am-e-button--icon am-e-button--primary"
 													am-modal="#am-Sb5CwrhRmi"
 													am-tooltip="Edit Style"
 												>

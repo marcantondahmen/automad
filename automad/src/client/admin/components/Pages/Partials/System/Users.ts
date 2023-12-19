@@ -73,12 +73,12 @@ export const renderUsersSection = (): string => {
 						</span>
 						<span class="${CSS.cardFormButtons}">
 							<am-submit
-								class="${CSS.button} ${CSS.buttonPrimary}"
+								class="${CSS.button} ${CSS.buttonSecondary}"
 							>
 								<span>${App.text('save')}</span>
 							</am-submit>
 							<am-modal-toggle
-								class="${CSS.button} ${CSS.buttonAccent}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 								${Attr.modal}="#am-change-password-modal"
 							>
 								<span>
@@ -96,7 +96,7 @@ export const renderUsersSection = (): string => {
 				<span class="${CSS.cardForm}">
 					<span class="${CSS.cardFormButtons}">
 						<am-modal-toggle
-							class="${CSS.button} ${CSS.buttonPrimary}"
+							class="${CSS.button} ${CSS.buttonSecondary}"
 							${Attr.modal}="#am-registered-users-modal"
 						>
 							<span class="${CSS.iconText}">
@@ -181,10 +181,12 @@ export const renderUsersSection = (): string => {
 					</div>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
+					<am-modal-close
+						class="${CSS.button} ${CSS.buttonSecondary}"
+					>
 						${App.text('close')}
 					</am-modal-close>
-					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('save')}
 					</am-submit>
 				</am-modal-footer>
@@ -202,11 +204,13 @@ export const renderUsersSection = (): string => {
 					></am-delete-users-form>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
+					<am-modal-close
+						class="${CSS.button} ${CSS.buttonSecondary}"
+					>
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit
-						class="${CSS.button} ${CSS.buttonAccent}"
+						class="${CSS.button} ${CSS.buttonPrimary}"
 						${Attr.form}="${UserCollectionController.edit}"
 					>
 						${App.text('deleteSelected')}
@@ -281,10 +285,12 @@ export const renderUsersSection = (): string => {
 					</div>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
+					<am-modal-close
+						class="${CSS.button} ${CSS.buttonSecondary}"
+					>
 						${App.text('close')}
 					</am-modal-close>
-					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('systemUsersAdd')}
 					</am-submit>
 				</am-modal-footer>
@@ -331,10 +337,12 @@ export const renderUsersSection = (): string => {
 					</div>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
+					<am-modal-close
+						class="${CSS.button} ${CSS.buttonSecondary}"
+					>
 						${App.text('close')}
 					</am-modal-close>
-					<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 						${App.text('systemUsersSendInvitation')}
 					</am-submit>
 				</am-modal-footer>

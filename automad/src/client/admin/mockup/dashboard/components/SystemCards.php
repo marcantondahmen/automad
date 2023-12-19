@@ -9,7 +9,7 @@
 				<div class="am-c-card__body">
 					Enim faucibus sem tristique porta viverra eu turpis vestibulum sed dui aliquet
 				</div>
-				<div class="am-c-card__state am-u-text-accent">
+				<div class="am-c-card__state am-u-text-primary">
 					<span class="am-c-icon-text">
 						<i class="bi bi-check-circle"></i>
 						<span>Caching is enabled</span>

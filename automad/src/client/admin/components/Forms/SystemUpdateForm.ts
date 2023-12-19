@@ -160,7 +160,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 				<am-modal-footer>
 					<a
 						href="${App.dashboardURL}"
-						class="${CSS.button} ${CSS.buttonAccent}"
+						class="${CSS.button} ${CSS.buttonPrimary}"
 					>
 						${App.text('systemUpdateSuccessReload')}
 					</a>
@@ -217,13 +217,13 @@ export class SystemUpdateFormComponent extends FormComponent {
 						${App.text('systemUpdateAvailable')}
 					</div>
 					<div class="${CSS.flex} ${CSS.flexGap}">
-						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('systemUpdateTo')}
 							<span class="${CSS.badge}">${data.latest}</span>
 						</am-submit>
 						<a
 							href="https://automad.org/release-notes"
-							class="${CSS.button} ${CSS.buttonPrimary}"
+							class="${CSS.button} ${CSS.buttonSecondary}"
 							target="_blank"
 						>
 							Release Notes

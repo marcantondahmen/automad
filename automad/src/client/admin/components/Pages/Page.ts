@@ -84,11 +84,11 @@ const renderMovePageModal = (): string => {
 					</am-modal-body>
 					<am-modal-footer>
 						<am-modal-close
-							class="${CSS.button} ${CSS.buttonPrimary}"
+							class="${CSS.button} ${CSS.buttonSecondary}"
 						>
 							${App.text('cancel')}
 						</am-modal-close>
-						<am-submit class="${CSS.button} ${CSS.buttonAccent}">
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('movePage')}
 						</am-submit>
 					</am-modal-footer>
@@ -223,7 +223,7 @@ const renderMenu = (): string => {
 						</am-switcher-link>
 					</div>
 					<am-dropdown
-						class="${CSS.displaySmall} ${CSS.button} ${CSS.buttonPrimary}"
+						class="${CSS.displaySmall} ${CSS.button} ${CSS.buttonSecondary}"
 					>
 						<span class="${CSS.iconText}">
 							<am-switcher-label></am-switcher-label>
@@ -297,7 +297,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 						></am-alert>
 						<am-link
 							${Attr.target}="${Route.system}?section=${Section.i18n}"
-							class="${CSS.button} ${CSS.buttonPrimary}"
+							class="${CSS.button} ${CSS.buttonSecondary}"
 						>
 							${App.text('systemI18n')}
 						</am-link>
@@ -317,13 +317,13 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 						<am-upload></am-upload>
 						<div class="${CSS.flex} ${CSS.flexGap}">
 							<am-modal-toggle
-								class="${CSS.button} ${CSS.buttonPrimary}"
+								class="${CSS.button} ${CSS.buttonSecondary}"
 								${Attr.modal}="#am-file-import-modal"
 							>
 								${App.text('importFromUrl')}
 							</am-modal-toggle>
 							<am-file-collection-submit
-								class="${CSS.button} ${CSS.buttonPrimary}"
+								class="${CSS.button} ${CSS.buttonSecondary}"
 								${Attr.form}="${FileCollectionController.list}"
 							>
 								${App.text('deleteSelected')}
