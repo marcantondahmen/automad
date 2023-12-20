@@ -65,6 +65,7 @@ class MailConfigController {
 		$Response = new Response();
 
 		MailConfig::reset();
+		Cache::clear();
 
 		return $Response;
 	}
