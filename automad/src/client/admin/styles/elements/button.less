@@ -50,24 +50,15 @@
 	background-color: var(--am-clr-background);
 	border: @am-button-border-width solid var(--am-clr-border-button);
 	outline: @am-outline;
-	transition: color 0.2s, background 0.2s, border-color 0.2s, outline 0.2s;
+	transition:
+		color 0.2s,
+		background 0.2s,
+		border-color 0.2s,
+		outline 0.2s;
 
 	&:hover,
 	&:active {
 		background-color: var(--am-clr-background-faded);
-	}
-
-	&--secondary {
-		color: var(--am-clr-secondary-text);
-		background-color: var(--am-clr-secondary-background);
-		border: @am-button-border-width solid var(--am-clr-secondary-background);
-
-		&:hover,
-		&:active {
-			background-color: var(--am-clr-secondary-background-hover);
-			border: @am-button-border-width solid
-				var(--am-clr-secondary-background-hover);
-		}
 	}
 
 	&--primary {

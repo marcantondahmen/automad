@@ -56,7 +56,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(CSS.displayNone, CSS.button, CSS.buttonSecondary);
+		this.classList.add(CSS.displayNone, CSS.button);
 		this.textContent = App.text('packagesUpdateAll');
 
 		this.init();

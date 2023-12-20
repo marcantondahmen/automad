@@ -352,12 +352,8 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 		body
 	) as AutocompleteComponent;
 
-	create(
-		'am-modal-close',
-		[CSS.button, CSS.buttonSecondary],
-		{},
-		footer
-	).textContent = App.text('cancel');
+	create('am-modal-close', [CSS.button], {}, footer).textContent =
+		App.text('cancel');
 
 	const buttonOk = create(
 		'button',

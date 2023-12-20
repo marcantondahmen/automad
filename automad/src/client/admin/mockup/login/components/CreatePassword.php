@@ -1,4 +1,4 @@
-<h1>Create Password</h1>
+<h2>Create Password</h2>
 <div class="am-c-card">
 	<div class="am-c-card__body am-c-card__body--large">
 		Please enter your username or email address in order to request an authentication 

@@ -51,12 +51,14 @@ const systemInfo = (): string => {
 				<am-icon-text
 					${Attr.icon}="hdd-network"
 					${Attr.text}="${location.hostname}"
+					class="${CSS.textMuted}"
 				></am-icon-text>
 				<am-icon-text
 					${Attr.icon}="clock-history"
 					${Attr.text}="${App.text('latestActivity')} ${dateFormat(
 						App.siteMTime
 					)}"
+					class="${CSS.textMuted}"
 				></am-icon-text>
 				<am-link
 					${Attr.target}="${Route.system}?section=${Section.cache}"

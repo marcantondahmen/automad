@@ -40,17 +40,19 @@
 		position: fixed;
 		z-index: 9000;
 		inset: 0 0 auto 0;
-		height: 3px;
+		height: 2px;
 		pointer-events: none;
 		opacity: 0;
 		background-color: transparent;
-		transition: opacity 0.2s 0.3s, inset 0.3s;
+		transition:
+			opacity 0.2s 0.3s,
+			inset 0.3s;
 	}
 
 	&:after {
 		z-index: 9001;
 		inset: 0 ~'calc(100% - var(--progress, 0%))' auto 0;
-		background-color: var(--am-clr-primary-background);
+		background-color: var(--am-clr-border-active);
 	}
 
 	&--loading {

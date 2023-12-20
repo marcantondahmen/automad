@@ -116,9 +116,7 @@ export class ConfigFileFormComponent extends FormComponent {
 						<span
 							class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
 						>
-							<am-modal-close
-								class="${CSS.button} ${CSS.buttonSecondary}"
-							>
+							<am-modal-close class="${CSS.button}">
 								${App.text('cancel')}
 							</am-modal-close>
 							<am-submit

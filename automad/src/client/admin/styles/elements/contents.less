@@ -99,6 +99,16 @@
 		color: var(--am-clr-text);
 	}
 
+	& [contenteditable] a {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		font-weight: 600;
+
+		&:after {
+			content: ' ↗';
+		}
+	}
+
 	& i,
 	& cite,
 	& em,

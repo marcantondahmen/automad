@@ -1,4 +1,4 @@
-<h1>My Site — Login</h1>
+<h2>My Site — Login</h2>
 <div class="am-c-card">
 	<div class="am-c-card__form">
 		<input type="text" class="am-f-input" placeholder="username">

@@ -66,7 +66,7 @@ const renderFieldResults = (fieldResultsArray: FieldResults[]): string => {
 				class="${CSS.cardListItem} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap}"
 			>
 				<span>
-					<span class="${CSS.badge} ${CSS.badgeMuted}">
+					<span class="${CSS.badge}">
 						${createLabelFromField(fieldResults.field)}
 					</span>
 				</span>

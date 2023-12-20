@@ -72,9 +72,7 @@ export const renderUsersSection = (): string => {
 							<am-user-email></am-user-email>
 						</span>
 						<span class="${CSS.cardFormButtons}">
-							<am-submit
-								class="${CSS.button} ${CSS.buttonSecondary}"
-							>
+							<am-submit class="${CSS.button}">
 								<span>${App.text('save')}</span>
 							</am-submit>
 							<am-modal-toggle
@@ -96,7 +94,7 @@ export const renderUsersSection = (): string => {
 				<span class="${CSS.cardForm}">
 					<span class="${CSS.cardFormButtons}">
 						<am-modal-toggle
-							class="${CSS.button} ${CSS.buttonSecondary}"
+							class="${CSS.button}"
 							${Attr.modal}="#am-registered-users-modal"
 						>
 							<span class="${CSS.iconText}">
@@ -181,9 +179,7 @@ export const renderUsersSection = (): string => {
 					</div>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close
-						class="${CSS.button} ${CSS.buttonSecondary}"
-					>
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
@@ -204,9 +200,7 @@ export const renderUsersSection = (): string => {
 					></am-delete-users-form>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close
-						class="${CSS.button} ${CSS.buttonSecondary}"
-					>
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit
@@ -285,9 +279,7 @@ export const renderUsersSection = (): string => {
 					</div>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close
-						class="${CSS.button} ${CSS.buttonSecondary}"
-					>
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
@@ -337,9 +329,7 @@ export const renderUsersSection = (): string => {
 					</div>
 				</am-modal-body>
 				<am-modal-footer>
-					<am-modal-close
-						class="${CSS.button} ${CSS.buttonSecondary}"
-					>
+					<am-modal-close class="${CSS.button}">
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">

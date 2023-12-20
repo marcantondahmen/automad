@@ -45,7 +45,6 @@ export const enum CSS {
 	alertText = 'am-c-alert__text',
 
 	badge = 'am-e-badge',
-	badgeMuted = 'am-e-badge--muted',
 
 	baseHomeH1 = 'am-e-base-home-h1',
 
@@ -54,7 +53,6 @@ export const enum CSS {
 
 	button = 'am-e-button',
 	buttonPrimary = 'am-e-button--primary',
-	buttonSecondary = 'am-e-button--secondary',
 	buttonIcon = 'am-e-button--icon',
 
 	card = 'am-c-card',

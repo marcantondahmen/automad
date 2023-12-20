@@ -84,9 +84,7 @@ const renderMenu = (): string => {
 							</span>
 						</am-switcher-link>
 					</div>
-					<am-dropdown
-						class="${CSS.displaySmall} ${CSS.button} ${CSS.buttonSecondary}"
-					>
+					<am-dropdown class="${CSS.displaySmall} ${CSS.button}">
 						<span class="${CSS.iconText}">
 							<am-switcher-label></am-switcher-label>
 							<span class="${CSS.dropdownArrow}"></span>
@@ -159,13 +157,13 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 						<am-upload></am-upload>
 						<div class="${CSS.flex} ${CSS.flexGap}">
 							<am-modal-toggle
-								class="${CSS.button} ${CSS.buttonSecondary}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 								${Attr.modal}="#am-file-import-modal"
 							>
 								${App.text('importFromUrl')}
 							</am-modal-toggle>
 							<am-file-collection-submit
-								class="${CSS.button} ${CSS.buttonSecondary}"
+								class="${CSS.button}"
 								${Attr.form}="${FileCollectionController.list}"
 							>
 								${App.text('deleteSelected')}

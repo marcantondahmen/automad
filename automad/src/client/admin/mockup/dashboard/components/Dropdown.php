@@ -2,7 +2,7 @@
 	<div class="am-l-dashboard__content">
 		<div class="am-l-grid">
 			<div class="am-c-dropdown am-c-dropdown--open">
-				<span class="am-e-button am-e-button--secondary">
+				<span class="am-e-button am-e-button--primary">
 					Dropdown
 				</span>
 				<div class="am-c-dropdown__items">
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			<div class="am-c-dropdown am-c-dropdown--open">
-				<span class="am-e-button am-e-button--secondary">
+				<span class="am-e-button am-e-button--primary">
 					Dropdown
 				</span>
 				<div class="am-c-dropdown__items">

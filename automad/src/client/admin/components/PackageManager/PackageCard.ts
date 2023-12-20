@@ -239,9 +239,7 @@ const createPreview = (
 		const badgeCls = [CSS.badge];
 		const badgeText = [pkg.version];
 
-		if (!pkg.outdated) {
-			badgeCls.push(CSS.badgeMuted);
-		} else {
+		if (pkg.outdated) {
 			badgeText.push('');
 			badgeText.push(pkg.latest);
 		}

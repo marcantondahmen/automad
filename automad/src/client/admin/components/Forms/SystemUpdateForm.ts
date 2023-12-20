@@ -223,7 +223,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 						</am-submit>
 						<a
 							href="https://automad.org/release-notes"
-							class="${CSS.button} ${CSS.buttonSecondary}"
+							class="${CSS.button}"
 							target="_blank"
 						>
 							Release Notes
