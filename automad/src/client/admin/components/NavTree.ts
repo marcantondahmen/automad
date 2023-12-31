@@ -223,6 +223,11 @@ export class NavTreeComponent extends BaseComponent {
 	static readonly TAG_NAME = 'am-nav-tree';
 
 	/**
+	 * The sortable tree instance.
+	 */
+	private tree: SortableTree;
+
+	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
@@ -259,7 +264,7 @@ export class NavTreeComponent extends BaseComponent {
 		const current = getPageURL();
 		const nodes = createSortableTreeNodes(pages);
 
-		const tree = new SortableTree({
+		this.tree = new SortableTree({
 			nodes,
 			element: this,
 			initCollapseLevel: 1,
@@ -271,13 +276,22 @@ export class NavTreeComponent extends BaseComponent {
 		});
 
 		if (current) {
-			const currentNode = tree.findNode('url', current);
+			const currentNode = this.tree.findNode('url', current);
 
 			currentNode?.reveal();
 			currentNode?.scrollIntoView({
 				block: 'end',
 			});
 		}
+	}
+
+	/**
+	 * Remove all window event listeners and observers when disconnecting.
+	 */
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		this.tree.destroy();
 	}
 }
 
