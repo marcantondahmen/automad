@@ -37,7 +37,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	outline: 1px solid var(--am-clr-border);
+	outline: 1px solid hsl(var(--am-clr-border));
 	border-radius: @am-form-radius;
 
 	&__toolbar {
@@ -52,8 +52,8 @@
 		opacity: 0;
 		transition: opacity 0.2s;
 		pointer-events: none;
-		color: var(--am-clr-text);
-		background-color: var(--am-clr-background);
+		color: hsl(var(--am-clr-text));
+		background-color: hsl(var(--am-clr-background));
 		border-radius: @am-bl-editor-toolbar-radius;
 		border: @am-modal-border;
 		box-shadow: @am-shadow;
@@ -78,10 +78,10 @@
 		padding: 0 0.6em;
 		font-size: @am-small-font-size;
 		font-weight: 560;
-		color: var(--am-clr-primary-text);
-		background: var(--am-clr-primary-background);
+		color: hsl(var(--am-clr-primary-text));
+		background: hsl(var(--am-clr-primary-background));
 		border-top-left-radius: @am-form-radius;
-		outline: 1px solid var(--am-clr-primary-background);
+		outline: 1px solid hsl(var(--am-clr-primary-background));
 		cursor: pointer;
 	}
 

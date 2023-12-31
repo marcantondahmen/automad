@@ -34,7 +34,7 @@
 
 .am-ui {
 	--tagify-dd-color-primary: @am-nav-item-hover-bg;
-	--tagify-dd-bg-color: var(--am-clr-background);
+	--tagify-dd-bg-color: hsl(var(--am-clr-background));
 	--tagify-dd-item-pad: 0 0.8rem;
 
 	& .tagify {
@@ -44,29 +44,29 @@
 		height: auto;
 		font-size: 1rem;
 
-		--tags-border-color: var(--am-clr-border);
-		--tags-hover-border-color: var(--am-clr-border);
-		--tags-focus-border-color: var(--am-clr-border-active);
+		--tags-border-color: hsl(var(--am-clr-border));
+		--tags-hover-border-color: hsl(var(--am-clr-border));
+		--tags-focus-border-color: hsl(var(--am-clr-border-active));
 
 		--tag-border-radius: 100px;
 		--tag-pad: 0.2em 0.3em 0.2em 0.7em;
-		--tag-bg: var(--am-clr-primary-background);
-		--tag-hover: var(--am-clr-primary-background-hover);
-		--tag-text-color: var(--am-clr-primary-text);
-		--tag-text-color--edit: var(--am-clr-primary-text);
+		--tag-bg: hsl(var(--am-clr-primary-background));
+		--tag-hover: hsl(var(--am-clr-primary-background-hover));
+		--tag-text-color: hsl(var(--am-clr-primary-text));
+		--tag-text-color--edit: hsl(var(--am-clr-primary-text));
 
-		--tag-remove-bg: var(--am-clr-primary-background);
-		--tag-remove-btn-color: var(--am-clr-primary-text);
-		--tag-remove-btn-bg: var(--am-clr-primary-background);
-		--tag-remove-btn-bg--hover: var(--am-clr-primary-background-hover);
+		--tag-remove-bg: hsl(var(--am-clr-primary-background));
+		--tag-remove-btn-color: hsl(var(--am-clr-primary-text));
+		--tag-remove-btn-bg: hsl(var(--am-clr-primary-background));
+		--tag-remove-btn-bg--hover: hsl(var(--am-clr-primary-background-hover));
 
-		--input-color: var(--am-clr-text);
+		--input-color: hsl(var(--am-clr-text));
 
-		--placeholder-color: var(--am-clr-text-muted);
-		--placeholder-color-focus: var(--am-clr-text-muted);
+		--placeholder-color: hsl(var(--am-clr-text-muted));
+		--placeholder-color-focus: hsl(var(--am-clr-text-muted));
 
 		&--focus {
-			border-color: var(--am-clr-border-active);
+			border-color: hsl(var(--am-clr-border-active));
 			outline: @am-outline-active;
 		}
 
@@ -88,7 +88,7 @@
 			& > div:before {
 				box-sizing: border-box;
 				border-radius: 100px;
-				border: 1px solid var(--am-clr-primary-background);
+				border: 1px solid hsl(var(--am-clr-primary-background));
 			}
 
 			&__removeBtn {
@@ -96,10 +96,10 @@
 				max-width: 1.2rem;
 				height: 1.2rem;
 				line-height: 1.2rem;
-				color: var(--am-clr-primary-text);
+				color: hsl(var(--am-clr-primary-text));
 
 				&:hover {
-					color: var(--am-clr-text);
+					color: hsl(var(--am-clr-text));
 				}
 			}
 		}
@@ -125,7 +125,7 @@
 				margin: 0;
 				line-height: 2.2;
 				border-radius: 0;
-				color: var(--am-clr-text);
+				color: hsl(var(--am-clr-text));
 
 				&--active {
 					color: @am-nav-item-hover-clr;

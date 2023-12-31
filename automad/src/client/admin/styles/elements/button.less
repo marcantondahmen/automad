@@ -46,9 +46,9 @@
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
-	color: var(--am-clr-text);
-	background-color: var(--am-clr-background);
-	border: @am-button-border-width solid var(--am-clr-border-button);
+	color: hsl(var(--am-clr-text));
+	background-color: hsl(var(--am-clr-background));
+	border: @am-button-border-width solid hsl(var(--am-clr-border-button));
 	outline: @am-outline;
 	transition:
 		color 0.2s,
@@ -58,23 +58,23 @@
 
 	&:hover,
 	&:active {
-		background-color: var(--am-clr-background-faded);
+		background-color: hsl(var(--am-clr-background-faded));
 	}
 
 	&--primary {
-		color: var(--am-clr-primary-text);
-		background-color: var(--am-clr-primary-background);
-		border: @am-button-border-width solid var(--am-clr-primary-background);
+		color: hsl(var(--am-clr-primary-text));
+		background-color: hsl(var(--am-clr-primary-background));
+		border: @am-button-border-width solid hsl(var(--am-clr-primary-background));
 
 		&:hover,
 		&:active {
-			background-color: var(--am-clr-primary-background-hover);
-			border-color: var(--am-clr-primary-background-hover);
+			background-color: hsl(var(--am-clr-primary-background-hover));
+			border-color: hsl(var(--am-clr-primary-background-hover));
 		}
 
 		& .am-e-badge {
-			--am-clr-badge-text: var(--am-clr-primary-background);
-			--am-clr-badge-background: var(--am-clr-primary-text);
+			--am-clr-badge-text: hsl(var(--am-clr-primary-background));
+			--am-clr-badge-background: hsl(var(--am-clr-primary-text));
 		}
 	}
 
@@ -87,13 +87,13 @@
 	&:focus,
 	&.am-focus {
 		outline: @am-outline-active;
-		border: @am-button-border-width solid var(--am-clr-border-active);
+		border: @am-button-border-width solid hsl(var(--am-clr-border-active));
 	}
 
 	&[disabled] {
 		cursor: not-allowed;
-		color: var(--am-clr-text-muted);
-		border: @am-button-border-width solid var(--am-clr-border-button);
+		color: hsl(var(--am-clr-text-muted));
+		border: @am-button-border-width solid hsl(var(--am-clr-border-button));
 		background-color: transparent;
 	}
 }

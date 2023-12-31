@@ -49,7 +49,7 @@
 	}
 
 	&--active {
-		border-color: var(--am-clr-border-active);
+		border-color: hsl(var(--am-clr-border-active));
 		outline: @am-outline-active;
 	}
 
@@ -60,7 +60,7 @@
 		cursor: pointer;
 
 		&:hover {
-			border-color: var(--am-clr-border-button);
+			border-color: hsl(var(--am-clr-border-button));
 			box-shadow:
 				0 0.4rem 1.2rem var(--am-shadow),
 				0 3.7rem 3.5rem -3.2rem var(--am-shadow);
@@ -102,7 +102,7 @@
 		flex-direction: column;
 		padding: @am-card-padding;
 		text-wrap: balance;
-		color: var(--am-clr-text-paragraph);
+		color: hsl(var(--am-clr-text-paragraph));
 
 		&:not(&--large) {
 			font-size: @am-small-font-size;
@@ -125,8 +125,8 @@
 		border-top: @am-border;
 		border-bottom: @am-border;
 		font-size: 2.75rem;
-		color: var(--am-clr-text);
-		background-color: var(--am-clr-background-faded);
+		color: hsl(var(--am-clr-text));
+		background-color: hsl(var(--am-clr-background-faded));
 
 		& > img {
 			object-fit: cover;
@@ -156,7 +156,7 @@
 		padding-bottom: 0.4rem;
 		font-size: 1.8rem;
 		line-height: 2.2rem;
-		color: var(--am-clr-text);
+		color: hsl(var(--am-clr-text));
 
 		&--narrow {
 			margin-left: -0.1em;
@@ -171,7 +171,7 @@
 		font-size: @am-small-font-size;
 		font-weight: @am-small-font-weight;
 		line-height: @am-small-line-height;
-		background-color: var(--am-clr-background-faded);
+		background-color: hsl(var(--am-clr-background-faded));
 		border-top: @am-border;
 		border-bottom-left-radius: ~'calc(@{am-card-radius} - 1px)';
 		border-bottom-right-radius: ~'calc(@{am-card-radius} - 1px)';
@@ -189,14 +189,14 @@
 
 		&-item {
 			padding: (@am-card-padding * 0.82) @am-card-padding;
-			color: var(--am-clr-text-paragraph);
+			color: hsl(var(--am-clr-text-paragraph));
 
 			& + & {
 				border-top: @am-border;
 			}
 
 			&--faded {
-				background-color: var(--am-clr-background-faded);
+				background-color: hsl(var(--am-clr-background-faded));
 			}
 		}
 	}
@@ -250,8 +250,8 @@
 			font-size: @am-small-font-size;
 			font-weight: 580;
 			text-decoration: none;
-			color: var(--am-clr-text) !important;
-			background-color: var(--am-clr-background);
+			color: hsl(var(--am-clr-text)) !important;
+			background-color: hsl(var(--am-clr-background));
 			outline: @am-outline;
 			transition: background-color 0.2s;
 			border: none;
@@ -269,7 +269,7 @@
 
 			&:hover,
 			&:active {
-				background-color: var(--am-clr-background-faded);
+				background-color: hsl(var(--am-clr-background-faded));
 			}
 
 			& .bi {

@@ -53,7 +53,7 @@
 		pointer-events: none;
 		transform: translateY(-0.5rem);
 		transition: all 0.2s;
-		background-color: var(--am-clr-background);
+		background-color: hsl(var(--am-clr-background));
 		border-radius: @am-card-radius;
 		box-shadow: @am-shadow;
 		border: @am-card-border;
@@ -84,8 +84,8 @@
 		line-height: 2.2;
 		text-decoration: none;
 		cursor: pointer;
-		color: var(--am-clr-text);
-		background-color: var(--am-clr-background);
+		color: hsl(var(--am-clr-text));
+		background-color: hsl(var(--am-clr-background));
 		border-radius: 0.35rem;
 		transition: background 0.2s;
 
@@ -96,25 +96,25 @@
 		}
 
 		&.am-active {
-			color: var(--am-clr-primary-text);
-			background-color: var(--am-clr-primary-background);
+			color: hsl(var(--am-clr-primary-text));
+			background-color: hsl(var(--am-clr-primary-background));
 		}
 
 		&:hover {
-			color: var(--am-clr-selected-text);
-			background-color: var(--am-clr-selected-background);
+			color: hsl(var(--am-clr-selected-text));
+			background-color: hsl(var(--am-clr-selected-background));
 		}
 	}
 
 	&__items--autocomplete &__link {
 		&:not(.am-active):hover {
-			color: var(--am-clr-text);
-			background-color: var(--am-clr-background);
+			color: hsl(var(--am-clr-text));
+			background-color: hsl(var(--am-clr-background));
 		}
 
 		&.am-active {
-			color: var(--am-clr-selected-text);
-			background-color: var(--am-clr-selected-background);
+			color: hsl(var(--am-clr-selected-text));
+			background-color: hsl(var(--am-clr-selected-background));
 		}
 	}
 

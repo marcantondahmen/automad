@@ -107,10 +107,10 @@
 			position: absolute;
 			top: 0.6rem;
 			right: 1rem;
-			color: var(--am-clr-text);
+			color: hsl(var(--am-clr-text));
 
 			&:hover {
-				color: var(--am-clr-text-hover);
+				color: hsl(var(--am-clr-text-hover));
 			}
 
 			&:after {
@@ -132,12 +132,12 @@
 		transition: background-color 0.2s;
 
 		&:hover {
-			background-color: var(--am-clr-background-faded);
+			background-color: hsl(var(--am-clr-background-faded));
 		}
 
 		&:before {
 			&:extend(.am-bi);
-			color: var(--am-clr-text-sidebar);
+			color: hsl(var(--am-clr-text-sidebar));
 			font-size: 1.25rem;
 		}
 
@@ -182,10 +182,10 @@
 		}
 
 		&[aria-selected='true'] {
-			background-color: var(--am-clr-primary-background);
+			background-color: hsl(var(--am-clr-primary-background));
 
 			& * {
-				color: var(--am-clr-primary-text) !important;
+				color: hsl(var(--am-clr-primary-text)) !important;
 			}
 		}
 	}
@@ -208,8 +208,8 @@
 				font-size: 15px;
 				font-weight: 560;
 				border-radius: 28px;
-				color: var(--am-clr-primary-text);
-				background-color: var(--am-clr-primary-background);
+				color: hsl(var(--am-clr-primary-text));
+				background-color: hsl(var(--am-clr-primary-background));
 			}
 		}
 
@@ -236,13 +236,13 @@
 	& .SfxButton-root {
 		&:extend(.am-e-button all);
 		margin: 0 !important;
-		border-color: var(--am-clr-border-button) !important;
+		border-color: hsl(var(--am-clr-border-button)) !important;
 		outline: 0 !important;
 
 		&:hover,
 		&:focus,
 		&:active {
-			border-color: var(--am-clr-border-button) !important;
+			border-color: hsl(var(--am-clr-border-button)) !important;
 			outline: 0 !important;
 		}
 
@@ -256,14 +256,14 @@
 
 	& [color='primary'].SfxButton-root,
 	& [color='error'].SfxButton-root {
-		color: var(--am-clr-primary-text) !important;
-		background-color: var(--am-clr-primary-background) !important;
-		border: 1px solid var(--am-clr-primary-background) !important;
+		color: hsl(var(--am-clr-primary-text)) !important;
+		background-color: hsl(var(--am-clr-primary-background)) !important;
+		border: 1px solid hsl(var(--am-clr-primary-background)) !important;
 
 		&:hover,
 		&:active {
-			background-color: var(--am-clr-primary-background-hover) !important;
-			border-color: var(--am-clr-primary-background-hover) !important;
+			background-color: hsl(var(--am-clr-primary-background-hover)) !important;
+			border-color: hsl(var(--am-clr-primary-background-hover)) !important;
 		}
 	}
 }
@@ -323,16 +323,16 @@
 		font-size: 0.9rem;
 
 		& [color='link'].SfxButton-root {
-			color: var(--am-clr-primary-text) !important;
-			background-color: var(--am-clr-primary-background) !important;
-			border: 1px solid var(--am-clr-primary-background) !important;
+			color: hsl(var(--am-clr-primary-text)) !important;
+			background-color: hsl(var(--am-clr-primary-background)) !important;
+			border: 1px solid hsl(var(--am-clr-primary-background)) !important;
 
 			&:hover,
 			&:active {
 				background-color: var(
 					--am-clr-primary-background-hover
 				) !important;
-				border-color: var(--am-clr-primary-background-hover) !important;
+				border-color: hsl(var(--am-clr-primary-background-hover)) !important;
 			}
 		}
 	}

@@ -60,7 +60,7 @@
 		top: 0;
 		height: 100%;
 		grid-row: top / main;
-		background-color: var(--am-clr-background);
+		background-color: hsl(var(--am-clr-background));
 		border-bottom: @am-border;
 
 		&--left {
@@ -87,7 +87,7 @@
 		grid-row: top / bottom;
 		overflow: scroll;
 		border-right: @am-border;
-		background-color: var(--am-clr-background);
+		background-color: hsl(var(--am-clr-background));
 
 		@media (max-width: @am-breakpoint-medium-max) {
 			position: fixed;
@@ -112,7 +112,7 @@
 		inset: 0;
 		opacity: 0;
 		pointer-events: none;
-		background-color: var(--am-clr-modal-backdrop);
+		background-color: var(--am-modal-backdrop);
 		transition: opacity 0.2s;
 
 		@media (max-width: @am-breakpoint-medium-max) {
@@ -147,12 +147,13 @@
 		}
 
 		&--sticky {
+			--am-opacity: 0.2;
 			position: sticky;
 			z-index: 50;
 			margin-bottom: 2.25rem;
 			top: @am-navbar-height;
 			border-bottom: @am-border;
-			background-color: var(--am-clr-background);
+			background-color: hsl(var(--am-clr-background));
 
 			margin-right: -15px;
 			padding-right: 15px;

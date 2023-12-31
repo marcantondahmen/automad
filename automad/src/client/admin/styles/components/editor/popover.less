@@ -47,8 +47,8 @@
 	right: auto !important;
 	padding: @padding;
 	overflow: hidden;
-	color: var(--am-clr-text);
-	background-color: var(--am-clr-background);
+	color: hsl(var(--am-clr-text));
+	background-color: hsl(var(--am-clr-background));
 	border: @am-modal-border;
 	border-radius: @am-bl-editor-toolbar-radius;
 	box-shadow: @am-shadow;
@@ -63,7 +63,7 @@
 
 	&__nothing-found-message {
 		padding: @am-bl-editor-space 0.6rem;
-		color: var(--am-clr-text-muted);
+		color: hsl(var(--am-clr-text-muted));
 		font-size: @am-small-font-size;
 		line-height: @am-small-line-height;
 		font-weight: @am-small-font-weight;
@@ -95,8 +95,8 @@
 		border-radius: 0.35rem;
 
 		&:hover {
-			color: var(--am-clr-selected-text) !important;
-			background-color: var(--am-clr-selected-background) !important;
+			color: hsl(var(--am-clr-selected-text)) !important;
+			background-color: hsl(var(--am-clr-selected-background)) !important;
 
 			& .am-u-text-muted {
 				color: inherit !important;
@@ -106,8 +106,8 @@
 
 		&&--focused,
 		&--active {
-			color: var(--am-clr-primary-text) !important;
-			background-color: var(--am-clr-primary-background) !important;
+			color: hsl(var(--am-clr-primary-text)) !important;
+			background-color: hsl(var(--am-clr-primary-background)) !important;
 			box-shadow: none !important;
 		}
 
@@ -154,7 +154,7 @@
 			height: 100%;
 			top: 0;
 			font-size: 1rem;
-			color: var(--am-clr-muted);
+			color: hsl(var(--am-clr-muted));
 
 			& svg {
 				height: 1.25em !important;

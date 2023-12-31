@@ -38,21 +38,21 @@
 	gap: @am-flex-gap;
 
 	&__edit {
-		color: var(--am-clr-text-muted);
+		color: hsl(var(--am-clr-text-muted));
 		cursor: pointer;
 		transition: color 0.2s;
 
 		&:hover,
 		&:active {
-			color: var(--am-clr-text-paragraph);
+			color: hsl(var(--am-clr-text-paragraph));
 		}
 	}
 
 	&__button {
-		color: var(--color, var(--am-clr-text));
-		background-color: var(--background, var(--am-clr-background-faded));
+		color: var(--color, hsl(var(--am-clr-text)));
+		background-color: var(--background, hsl(var(--am-clr-background-faded)));
 		border: var(--borderWidth, 0) solid
-			var(--borderColor, var(--am-clr-border));
+			var(--borderColor, hsl(var(--am-clr-border)));
 		border-radius: var(--borderRadius, 0.5rem);
 		padding: var(--paddingVertical, 0.75rem)
 			var(--paddingHorizontal, 2.5rem);
@@ -61,20 +61,20 @@
 		cursor: pointer;
 
 		&:hover {
-			color: var(--hoverColor, var(--am-clr-text));
+			color: var(--hoverColor, hsl(var(--am-clr-text)));
 			background-color: var(
 				--hoverBackground,
-				var(--am-clr-background-faded)
+				hsl(var(--am-clr-background-faded))
 			);
 			border: var(--borderWidth, 0) solid
-				var(--hoverBorderColor, var(--am-clr-border));
+				var(--hoverBorderColor, hsl(var(--am-clr-border)));
 		}
 
 		&:empty {
 			min-width: 6rem;
-			color: var(--am-clr-text-muted) !important;
+			color: hsl(var(--am-clr-text-muted)) !important;
 			background-color: transparent !important;
-			border: 2px dashed var(--am-clr-border);
+			border: 2px dashed hsl(var(--am-clr-border));
 
 			&:before {
 				content: attr(data-placeholder);

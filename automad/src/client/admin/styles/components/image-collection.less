@@ -47,7 +47,7 @@
 		border-top-right-radius: @am-card-radius;
 		border-bottom: none;
 		overflow: hidden;
-		background-color: var(--am-clr-background-faded);
+		background-color: hsl(var(--am-clr-background-faded));
 		cursor: pointer;
 
 		&:empty {
@@ -60,7 +60,7 @@
 				&:extend(.am-bi);
 				content: '\f64d';
 				font-size: 2.5rem;
-				color: var(--am-clr-text-muted);
+				color: hsl(var(--am-clr-text-muted));
 			}
 		}
 	}
@@ -68,7 +68,7 @@
 	&__item {
 		position: relative;
 		z-index: 2;
-		outline: var(--am-clr-border) solid 1px;
+		outline: hsl(var(--am-clr-border)) solid 1px;
 	}
 
 	&__item--drag {
@@ -99,7 +99,7 @@
 		min-width: 100%;
 		min-height: 100%;
 		margin: 0 !important;
-		outline: var(--am-clr-border) solid 1px;
+		outline: hsl(var(--am-clr-border)) solid 1px;
 		cursor: move;
 		opacity: 1;
 		transition: opacity 0.2s;
@@ -118,8 +118,8 @@
 		right: 0.5rem;
 		width: 1.6rem;
 		height: 1.6rem;
-		color: var(--am-clr-primary-text);
-		background-color: var(--am-clr-primary-background);
+		color: hsl(var(--am-clr-primary-text));
+		background-color: hsl(var(--am-clr-primary-background));
 		border-radius: 100%;
 		opacity: 0;
 		transition: opacity 0.2s;

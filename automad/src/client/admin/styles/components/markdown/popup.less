@@ -36,7 +36,7 @@
 	&-popup {
 		width: auto;
 		margin-right: auto;
-		background: var(--am-clr-background);
+		background: hsl(var(--am-clr-background));
 		z-index: 30;
 		position: absolute;
 		border-radius: @am-form-radius;
@@ -65,11 +65,11 @@
 		width: 20px;
 		height: 20px;
 		border: @am-border;
-		background: var(--am-clr-background);
+		background: hsl(var(--am-clr-background));
 	}
 
 	&-popup-add-table &-table-cell.header {
-		background: var(--am-clr-background-faded);
+		background: hsl(var(--am-clr-background-faded));
 	}
 
 	&-popup-add-table &-table-row {
@@ -85,14 +85,14 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		border: @am-border-width solid var(--am-clr-border-active);
-		background: var(--am-clr-outline-active);
+		border: @am-border-width solid hsl(var(--am-clr-border-active));
+		background: hsl(var(--am-clr-outline-active));
 		z-index: 30;
 	}
 
 	&-popup-add-table &-table-description {
 		text-align: center;
-		color: var(--am-clr-text);
+		color: hsl(var(--am-clr-text));
 	}
 
 	&-popup-add-heading {
@@ -127,7 +127,7 @@
 	}
 
 	&-popup-add-heading ul li:hover {
-		color: var(--am-clr-selected-text);
-		background-color: var(--am-clr-selected-background);
+		color: hsl(var(--am-clr-selected-text));
+		background-color: hsl(var(--am-clr-selected-background));
 	}
 }

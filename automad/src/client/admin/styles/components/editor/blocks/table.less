@@ -34,9 +34,9 @@
 
 .am-ui {
 	.tc-wrap {
-		--color-background: var(--am-clr-highlight-background);
-		--color-text-secondary: var(--am-clr-text-muted);
-		--color-border: var(--am-clr-border);
+		--color-background: hsl(var(--am-clr-highlight-background));
+		--color-text-secondary: hsl(var(--am-clr-text-muted));
+		--color-border: hsl(var(--am-clr-border));
 		--cell-size: 34px;
 		--toolbox-icon-size: 18px;
 		--toolbox-padding: 6px;
@@ -49,20 +49,20 @@
 
 	.tc-toolbox {
 		--toolbox-padding: 0;
-		--toggler-dots-color: var(--am-clr-text-paragraph);
-		--toggler-dots-color-hovered: var(--am-clr-text-paragraph);
+		--toggler-dots-color: hsl(var(--am-clr-text-paragraph));
+		--toggler-dots-color-hovered: hsl(var(--am-clr-text-paragraph));
 	}
 
 	.tc-popover {
-		--color-border: var(--am-clr-border);
-		--color-background: var(--am-clr-background);
+		--color-border: hsl(var(--am-clr-border));
+		--color-background: hsl(var(--am-clr-background));
 	}
 }
 
 .tc-toolbox {
 	&__toggler {
 		& svg {
-			background-color: var(--am-clr-background-faded);
+			background-color: hsl(var(--am-clr-background-faded));
 			border-radius: 0.2rem;
 			opacity: 1;
 			transition: opacity 0.2s;
@@ -83,8 +83,8 @@
 		right: auto !important;
 		padding: @am-bl-editor-space 0 !important;
 		overflow: hidden;
-		color: var(--am-clr-text);
-		background-color: var(--am-clr-background);
+		color: hsl(var(--am-clr-text));
+		background-color: hsl(var(--am-clr-background));
 		border: @am-border;
 		border-radius: @am-bl-editor-toolbar-radius;
 		box-shadow: @am-shadow;
@@ -100,8 +100,8 @@
 			transition: color 0.2s, background-color 0.2s;
 
 			&:hover {
-				color: var(--am-clr-selected-text) !important;
-				background-color: var(--am-clr-selected-background) !important;
+				color: hsl(var(--am-clr-selected-text)) !important;
+				background-color: hsl(var(--am-clr-selected-background)) !important;
 			}
 
 			&-icon {

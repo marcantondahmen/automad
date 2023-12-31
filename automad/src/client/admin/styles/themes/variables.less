@@ -59,13 +59,13 @@
 @am-small-font-weight: 540;
 
 @am-border-width: 1px;
-@am-border: @am-border-width solid var(--am-clr-border);
+@am-border: @am-border-width solid hsl(var(--am-clr-border));
 
 @am-flex-gap: 0.58em;
 
 @am-outline: transparent solid 4px;
-@am-outline-active: var(--am-clr-outline-active) solid 4px;
-@am-outline-danger: var(--am-clr-outline-danger) solid 4px;
+@am-outline-active: hsl(var(--am-clr-outline-active)) solid 4px;
+@am-outline-danger: hsl(var(--am-clr-outline-danger)) solid 4px;
 
 @am-shadow:
 	0 0.4rem 1.2rem var(--am-shadow),
@@ -78,32 +78,32 @@
 @am-nav-padding-x: 4px;
 @am-nav-item-line-height: 2.36rem;
 @am-nav-item-radius: 0.3rem;
-@am-nav-item-clr: var(--am-clr-text-sidebar);
-@am-nav-item-active-clr: var(--am-clr-primary-text);
-@am-nav-item-active-bg: var(--am-clr-primary-background);
-@am-nav-item-hover-clr: var(--am-clr-text);
-@am-nav-item-hover-bg: var(--am-clr-background-faded);
+@am-nav-item-clr: hsl(var(--am-clr-text-sidebar));
+@am-nav-item-active-clr: hsl(var(--am-clr-primary-text));
+@am-nav-item-active-bg: hsl(var(--am-clr-primary-background));
+@am-nav-item-hover-clr: hsl(var(--am-clr-text));
+@am-nav-item-hover-bg: hsl(var(--am-clr-background-faded));
 
-@am-breadcrumbs-clr: var(--am-clr-text-muted);
-@am-breadcrumbs-hover-clr: var(--am-clr-text);
+@am-breadcrumbs-clr: hsl(var(--am-clr-text-muted));
+@am-breadcrumbs-hover-clr: hsl(var(--am-clr-text));
 
 @am-menu-height: 3.72rem;
-@am-menu-item-clr: var(--am-clr-text);
-@am-menu-item-hover-clr: var(--am-clr-text-hover);
+@am-menu-item-clr: hsl(var(--am-clr-text));
+@am-menu-item-hover-clr: hsl(var(--am-clr-text-hover));
 
 @am-footer-height: 4rem;
 
 @am-card-padding: 0.65rem;
 @am-card-radius: 0.65rem;
 @am-card-border-width: 2px;
-@am-card-border: @am-card-border-width solid var(--am-clr-border);
+@am-card-border: @am-card-border-width solid hsl(var(--am-clr-border));
 
-@am-form-background: var(--am-clr-background-faded);
+@am-form-background: hsl(var(--am-clr-background-faded));
 @am-form-height: 2.95em;
 @am-form-padding-x: 1em;
 @am-form-radius: 0.395rem;
 @am-form-border-width: 2px;
-@am-form-border: @am-form-border-width solid var(--am-clr-border);
+@am-form-border: @am-form-border-width solid hsl(var(--am-clr-border));
 
 @am-button-border-width: 2px;
 
@@ -120,7 +120,7 @@
 @am-modal-padding: 1.28rem;
 @am-modal-radius: 0.7rem;
 @am-modal-border-width: 2px;
-@am-modal-border: @am-modal-border-width solid var(--am-clr-border);
+@am-modal-border: @am-modal-border-width solid hsl(var(--am-clr-border));
 
 :root {
 	--am-base-font-size: 14px;

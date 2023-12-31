@@ -39,10 +39,10 @@
 	transition: outline 0.2s, border-color 0.2s;
 	outline: @am-outline;
 	border-radius: @am-md-editor-radius;
-	background-color: var(--am-clr-background-faded);
+	background-color: hsl(var(--am-clr-background-faded));
 
 	&--focus {
-		border-color: var(--am-clr-border-active);
+		border-color: hsl(var(--am-clr-border-active));
 		outline: @am-outline-active;
 	}
 }
@@ -87,7 +87,7 @@
 		display: none;
 		height: 100%;
 		width: 1px;
-		background-color: var(--am-clr-border);
+		background-color: hsl(var(--am-clr-border));
 		position: absolute;
 		left: 50%;
 	}
@@ -122,13 +122,13 @@
 	}
 
 	&-md-preview-highlight {
-		background-color: var(--am-clr-highlight-background);
+		background-color: hsl(var(--am-clr-highlight-background));
 	}
 
 	&-main-container {
 		position: relative;
 		line-height: @am-base-line-height;
-		color: var(--am-clr-text);
+		color: hsl(var(--am-clr-text));
 		width: 100%;
 		height: inherit;
 	}

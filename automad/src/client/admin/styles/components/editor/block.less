@@ -68,7 +68,7 @@
 		background-color: transparent;
 
 		& > .cdx-block {
-			background-color: var(--am-clr-highlight-background);
+			background-color: hsl(var(--am-clr-highlight-background));
 		}
 	}
 
@@ -80,12 +80,12 @@
 	}
 
 	.am-ui &--drop-target > &__content {
-		outline-color: var(--am-clr-primary-background);
+		outline-color: hsl(var(--am-clr-primary-background));
 	}
 
 	& [placeholder]:empty:before {
 		content: attr(placeholder);
-		color: var(--am-clr-text-muted) !important;
+		color: hsl(var(--am-clr-text-muted)) !important;
 	}
 
 	& .am-e-badge {

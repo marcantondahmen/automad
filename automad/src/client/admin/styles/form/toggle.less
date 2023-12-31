@@ -34,7 +34,7 @@
 
 .am-f-toggle {
 	display: flex;
-	color: var(--am-clr-text);
+	color: hsl(var(--am-clr-text));
 
 	& input {
 		display: none;
@@ -64,7 +64,7 @@
 			width: 100%;
 			padding: 0 @am-form-padding-x;
 			font-weight: @am-base-font-weight;
-			background-color: var(--am-clr-background-faded);
+			background-color: hsl(var(--am-clr-background-faded));
 		}
 
 		& .bi {
@@ -76,7 +76,7 @@
 		position: relative;
 
 		& label {
-			color: var(--am-clr-text-muted);
+			color: hsl(var(--am-clr-text-muted));
 		}
 
 		& select {
@@ -89,13 +89,13 @@
 
 	&--on label,
 	&--button :checked + label {
-		color: var(--am-clr-text-active);
-		border-color: var(--am-clr-border-active);
-		background-color: var(--am-clr-highlight-background);
+		color: hsl(var(--am-clr-text-active));
+		border-color: hsl(var(--am-clr-border-active));
+		background-color: hsl(var(--am-clr-highlight-background));
 	}
 
 	&--off label {
-		color: var(--am-clr-text);
+		color: hsl(var(--am-clr-text));
 	}
 
 	& .bi:before,

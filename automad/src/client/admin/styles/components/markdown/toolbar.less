@@ -42,7 +42,7 @@
 		overflow: hidden;
 		border-top-left-radius: @am-md-editor-radius;
 		border-top-right-radius: @am-md-editor-radius;
-		background-color: var(--am-clr-background);
+		background-color: hsl(var(--am-clr-background));
 	}
 
 	&-defaultUI &-md-tab-container {
@@ -64,15 +64,15 @@
 		padding: 0 1.25rem;
 		height: 100%;
 		font-size: 0.85rem;
-		color: var(--am-clr-text-paragraph);
+		color: hsl(var(--am-clr-text-paragraph));
 		cursor: pointer;
 		border-right: @am-border !important;
 		box-sizing: content-box;
 	}
 
 	&-md-tab-container .tab-item.active {
-		border-bottom: 1px solid var(--am-clr-background-faded);
-		background-color: var(--am-clr-background-faded);
+		border-bottom: 1px solid hsl(var(--am-clr-background-faded));
+		background-color: hsl(var(--am-clr-background-faded));
 	}
 
 	&-defaultUI-toolbar {
@@ -113,13 +113,13 @@
 		border: none;
 		border-radius: @am-card-radius * 0.5;
 		outline: 0 !important;
-		color: var(--am-clr-text-paragraph);
+		color: hsl(var(--am-clr-text-paragraph));
 		background-color: transparent;
 		cursor: pointer;
 	}
 
 	&-defaultUI-toolbar button:not(:disabled):hover {
-		background-color: var(--am-clr-background-faded);
+		background-color: hsl(var(--am-clr-background-faded));
 	}
 
 	&-dropdown-toolbar {
@@ -130,7 +130,7 @@
 		border-radius: 2px;
 		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
 		border: @am-border;
-		background-color: var(--am-clr-background);
+		background-color: hsl(var(--am-clr-background));
 	}
 }
 

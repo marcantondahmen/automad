@@ -48,21 +48,21 @@
 		margin-bottom: 1.25rem;
 		text-align: center;
 		font-size: 1.25rem;
-		color: var(--am-clr-text-muted);
-		background-color: var(--am-clr-background-faded);
+		color: hsl(var(--am-clr-text-muted));
+		background-color: hsl(var(--am-clr-background-faded));
 		border-radius: @am-card-radius;
-		border: @am-button-border-width dashed var(--am-clr-border);
+		border: @am-button-border-width dashed hsl(var(--am-clr-border));
 		cursor: pointer;
 		transition: color 0.2s, background-color 0.2s, border 0.2s, outline 0.2s;
 
 		&:hover {
-			color: var(--am-clr-text-paragraph);
+			color: hsl(var(--am-clr-text-paragraph));
 		}
 
 		&.dz-drag-hover {
-			color: var(--am-clr-text-active);
-			background-color: var(--am-clr-outline-active);
-			border: 1px solid var(--am-clr-border-active);
+			color: hsl(var(--am-clr-text-active));
+			background-color: hsl(var(--am-clr-outline-active));
+			border: 1px solid hsl(var(--am-clr-border-active));
 			outline: @am-outline-active;
 		}
 
@@ -108,7 +108,7 @@
 			height: @upload-thumbnail-size;
 			border-radius: 0.3rem;
 			overflow: hidden;
-			background-color: var(--am-clr-background-faded);
+			background-color: hsl(var(--am-clr-background-faded));
 			border: @am-border;
 
 			& > img {
@@ -124,7 +124,7 @@
 
 			display: flex;
 			flex-direction: column-reverse;
-			color: var(--am-clr-text-paragraph);
+			color: hsl(var(--am-clr-text-paragraph));
 
 			& > .dz-filename {
 				white-space: nowrap;
@@ -133,7 +133,7 @@
 			}
 
 			& > .dz-size {
-				color: var(--am-clr-text-muted);
+				color: hsl(var(--am-clr-text-muted));
 			}
 		}
 
@@ -147,12 +147,12 @@
 			inset: 42% 10%;
 			overflow: hidden;
 			border-radius: 2rem;
-			border: 2px solid var(--am-clr-primary-text);
-			background-color: var(--am-clr-primary-text);
+			border: 2px solid hsl(var(--am-clr-primary-text));
+			background-color: hsl(var(--am-clr-primary-text));
 			opacity: 1;
 
 			& .dz-upload {
-				background-color: var(--am-clr-primary-background);
+				background-color: hsl(var(--am-clr-primary-background));
 				display: block;
 				position: relative;
 				height: 100%;
@@ -166,11 +166,11 @@
 			grid-row: 3 / 4;
 			align-self: end;
 			text-decoration: none;
-			color: var(--am-clr-text-link);
+			color: hsl(var(--am-clr-text-link));
 			transition: color 0.2s;
 
 			&:hover {
-				color: var(--am-clr-text-link-hover);
+				color: hsl(var(--am-clr-text-link-hover));
 			}
 		}
 

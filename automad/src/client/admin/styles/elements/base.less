@@ -41,8 +41,8 @@
 		font-size: var(--am-base-font-size);
 		font-weight: @am-base-font-weight;
 		line-height: @am-base-line-height;
-		color: var(--am-clr-text);
-		background-color: var(--am-clr-background);
+		color: hsl(var(--am-clr-text));
+		background-color: hsl(var(--am-clr-background));
 	}
 
 	html& {
@@ -109,10 +109,10 @@
 	}
 
 	& a:not([class]) {
-		color: var(--am-clr-text-link);
+		color: hsl(var(--am-clr-text-link));
 
 		&:hover {
-			color: var(--am-clr-text-link-hover);
+			color: hsl(var(--am-clr-text-link-hover));
 		}
 	}
 
@@ -129,7 +129,7 @@
 
 	& p {
 		margin: 0;
-		color: var(--am-clr-text-paragraph);
+		color: hsl(var(--am-clr-text-paragraph));
 
 		&:not(:last-child) {
 			margin-bottom: @am-base-margin-y;
@@ -155,7 +155,7 @@
 		font-family: @am-code-font-family;
 		padding: 0.1rem 0.35rem;
 		color: var(--am-prism-1);
-		background-color: var(--am-clr-background-faded);
+		background-color: hsl(var(--am-clr-background-faded));
 		border-radius: 0.3rem;
 	}
 
@@ -166,17 +166,17 @@
 	& mark {
 		display: inline-block;
 		padding: 0 0.3em;
-		color: var(--am-clr-selected-text);
-		background-color: var(--am-clr-selected-background);
+		color: hsl(var(--am-clr-selected-text));
+		background-color: hsl(var(--am-clr-selected-background));
 		border-radius: 0.3em;
 	}
 
 	& footer {
-		color: var(--am-clr-text-paragraph);
+		color: hsl(var(--am-clr-text-paragraph));
 	}
 
 	& ::selection {
-		color: var(--am-clr-selected-text);
-		background-color: var(--am-clr-selected-background);
+		color: hsl(var(--am-clr-selected-text));
+		background-color: hsl(var(--am-clr-selected-background));
 	}
 }
