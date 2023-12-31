@@ -333,26 +333,6 @@ class UserCollection {
 	}
 
 	/**
-	 * Convert legacy accounts file content.
-	 *
-	 * @param array $contents
-	 * @return string the serialized accounts
-	 */
-	private function convertLegacyAccountsFile(array $contents): string {
-		$accounts = array();
-
-		foreach ($contents as $name => $passwordHash) {
-			$accounts[] = (object) array('name' => $name, 'passwordHash' => $passwordHash);
-		}
-
-		return str_replace(
-			'O:8:"stdClass"',
-			$this->userTypeSerialized,
-			serialize($accounts)
-		);
-	}
-
-	/**
 	 * Return a user id by name or email address.
 	 *
 	 * @param string $nameOrEmail
@@ -399,11 +379,7 @@ class UserCollection {
 
 		$contents = include UserCollection::FILE_ACCOUNTS;
 
-		// Lagacy support.
-		if (is_array($contents)) {
-			$contents = $this->convertLegacyAccountsFile($contents);
-		}
-
+		/** @var string */
 		$serialized = str_replace(
 			$this->userTypeSerialized,
 			'O:' . strlen($this->userType) . ':"' . $this->userType . '"',

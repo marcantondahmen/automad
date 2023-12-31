@@ -76,7 +76,6 @@ class Blocks {
 	public static function render(object $data, Automad $Automad): string {
 		$flexOpen = false;
 		$html = '';
-		$data = self::prepareData($data);
 
 		foreach ($data->blocks as $block) {
 			try {
@@ -120,25 +119,5 @@ class Blocks {
 		}
 
 		return $html;
-	}
-
-	/**
-	 * Prepare block data
-	 *
-	 * @param object $data
-	 * @return object $data
-	 */
-	private static function prepareData(object $data): object {
-		$LegacyData = new LegacyData($data);
-		$data = $LegacyData->convert();
-
-		foreach ($data->blocks as $block) {
-			$block->tunes->layout = (object) array_merge(
-				array('width' => false, 'stretched' => false),
-				(array) $block->tunes->layout
-			);
-		}
-
-		return $data;
 	}
 }

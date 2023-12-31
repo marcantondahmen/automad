@@ -80,7 +80,6 @@ class Fields {
 	const TAG = ':tag';
 	const TAGS = 'tags';
 	const TEMPLATE = 'template';
-	const TEMPLATE_LEGACY = ':template';
 	const THEME = 'theme';
 	const TIME_CREATED = ':created';
 	const TIME_LAST_MODIFIED = ':lastModified';
@@ -98,7 +97,6 @@ class Fields {
 		'PRIVATE' => Fields::PRIVATE,
 		'TAGS' => Fields::TAGS,
 		'TEMPLATE' => Fields::TEMPLATE,
-		'TEMPLATE_LEGACY' => Fields::TEMPLATE_LEGACY,
 		'THEME' => Fields::THEME,
 		'TIME_CREATED' => Fields::TIME_CREATED,
 		'TIME_LAST_MODIFIED' => Fields::TIME_LAST_MODIFIED,

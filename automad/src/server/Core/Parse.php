@@ -77,18 +77,6 @@ class Parse {
 	}
 
 	/**
-	 * Please use `DataFile::readLegacyFormat()` instead.
-	 *
-	 * @see DataFile::readLegacyFormat()
-	 * @deprecated 2.0.0
-	 * @param string $file
-	 * @return array $vars
-	 */
-	public static function dataFile(string $file): array {
-		return DataFile::readLegacyFormat($file);
-	}
-
-	/**
 	 * Please use `FileUtils::fileDeclaration()` instead.
 	 *
 	 * @see FileUtils::fileDeclaration()

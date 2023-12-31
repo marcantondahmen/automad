@@ -296,7 +296,6 @@ class Search {
 			Fields::HIDDEN,
 			Fields::PRIVATE,
 			Fields::TEMPLATE,
-			Fields::TEMPLATE_LEGACY,
 			Fields::THEME,
 			Fields::URL,
 			Fields::TITLE
