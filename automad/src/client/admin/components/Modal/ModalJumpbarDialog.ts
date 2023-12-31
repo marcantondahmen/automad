@@ -173,8 +173,8 @@ const pagesData = (): JumpbarItemData[] => {
 		a.lastModified < b.lastModified
 			? 1
 			: b.lastModified < a.lastModified
-			? -1
-			: 0
+				? -1
+				: 0
 	);
 
 	pages.forEach((page: PageMetaData) => {
@@ -348,7 +348,9 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 	/**
 	 * Open the dropdown.
 	 */
-	open(): void {}
+	open(): void {
+		this.update();
+	}
 
 	/**
 	 * Select an item and use the item value as the input value.
