@@ -294,15 +294,7 @@ export class App {
 			this.updateState.bind(this)
 		);
 
-		setTimeout(async () => {
-			const { success } = await requestAPI(
-				AppController.getLanguagePacks
-			);
-
-			if (success) {
-				notifySuccess(success, -1);
-			}
-
+		setTimeout(() => {
 			remoteTrigger(PackageManagerController.preFetchThumbnails);
 		}, 2000);
 	}

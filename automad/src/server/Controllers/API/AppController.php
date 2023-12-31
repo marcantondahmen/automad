@@ -88,33 +88,6 @@ class AppController {
 	}
 
 	/**
-	 * Install or update the automad/language-packs package.
-	 *
-	 * @return Response the Response object
-	 */
-	public static function getLanguagePacks(): Response {
-		// Close session here already in order to prevent blocking other requests.
-		session_write_close();
-		ignore_user_abort(true);
-
-		$Response = new Response;
-		$Composer = new Composer();
-		$package = Text::PACKAGE;
-
-		if (!is_readable(Text::LANG_PACKS_DIR)) {
-			if (!$Composer->run("require --prefer-install=dist {$package}:dev-master")) {
-				$Response->setSuccess(
-					'Successfully installed the language pack extension! Reload the page in order to select another language in the system settings.'
-				);
-			}
-		}
-
-		$Composer->run("update {$package}");
-
-		return $Response;
-	}
-
-	/**
 	 * Get server information
 	 *
 	 * @return Response the Response object

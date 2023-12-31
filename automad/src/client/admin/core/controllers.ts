@@ -34,7 +34,6 @@
 
 export const enum AppController {
 	bootstrap = 'AppController::bootstrap',
-	getLanguagePacks = 'AppController::getLanguagePacks',
 	getServerInfo = 'AppController::getServerInfo',
 	updateState = 'AppController::updateState',
 }

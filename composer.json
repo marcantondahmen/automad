@@ -20,7 +20,6 @@
     "require": {
         "php": ">=8.2",
         "automad/package-installer": "^1.1",
-        "automad/language-packs": "dev-master",
         "automad/standard-v1": "^1.0"
     },
     "config": {

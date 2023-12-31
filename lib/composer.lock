@@ -4,8 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dca6aa82ef71ddb94307e57991ac651",
+    "content-hash": "cbe10b52b42cdd02d5857261911ce223",
     "packages": [
+        {
+            "name": "automad/language-packs",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/automadcms/automad-language-packs.git",
+                "reference": "e8d14bcb0e027249a814dfe4e7a174372e0b78da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/e8d14bcb0e027249a814dfe4e7a174372e0b78da",
+                "reference": "e8d14bcb0e027249a814dfe4e7a174372e0b78da",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Anton Dahmen",
+                    "homepage": "https://marcdahmen.de"
+                }
+            ],
+            "description": "A collection of language packs for the Automad dashboard.",
+            "keywords": [
+                "automad",
+                "language"
+            ],
+            "support": {
+                "issues": "https://github.com/automadcms/automad-language-packs/issues",
+                "source": "https://github.com/automadcms/automad-language-packs/tree/master"
+            },
+            "time": "2023-12-17T18:51:44+00:00"
+        },
         {
             "name": "doctrine/lexer",
             "version": "3.0.0",
@@ -1286,7 +1323,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "automad/language-packs": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
