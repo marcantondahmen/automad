@@ -25,9 +25,6 @@
     "config": {
         "allow-plugins": {
             "automad/package-installer": true
-        },
-        "preferred-install": {
-            "*": "dist"
         }
     }
 }
