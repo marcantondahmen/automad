@@ -163,7 +163,7 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 								${App.text('importFromUrl')}
 							</am-modal-toggle>
 							<am-file-collection-submit
-								class="${CSS.button}"
+								class="${CSS.button} ${CSS.buttonDanger}"
 								${Attr.form}="${FileCollectionController.list}"
 							>
 								${App.text('deleteSelected')}

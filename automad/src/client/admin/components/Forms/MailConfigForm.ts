@@ -200,7 +200,7 @@ export class MailConfigFormComponent extends FormComponent {
 
 		const reset = create(
 			'button',
-			[CSS.button],
+			[CSS.button, CSS.buttonDanger],
 			{},
 			footer,
 			App.text('reset')

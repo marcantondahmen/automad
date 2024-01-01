@@ -8,6 +8,10 @@
 				<span>Button</span>
 				<span class="am-e-badge">Badge</span>
 			</button>
+			<button class="am-e-button am-e-button--danger">
+				<span>Button</span>
+				<span class="am-e-badge">Badge</span>
+			</button>
 		</p>
 	</div>
 </section>

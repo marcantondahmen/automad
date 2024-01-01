@@ -79,7 +79,7 @@ export class TrashComponent extends BaseDashboardLayoutComponent {
 						${Attr.api}="${PageTrashController.clear}"
 						${Attr.confirm}="${App.text('trashClearConfirm')}"
 					>
-						<am-submit class="${CSS.button}">
+						<am-submit class="${CSS.button} ${CSS.buttonDanger}">
 							${App.text('trashClear')}
 						</am-submit>
 					</am-form>

@@ -52,6 +52,7 @@ export const enum CSS {
 	breadcrumbsItem = 'am-c-breadcrumbs__item',
 
 	button = 'am-e-button',
+	buttonDanger = 'am-e-button--danger',
 	buttonPrimary = 'am-e-button--primary',
 	buttonIcon = 'am-e-button--icon',
 

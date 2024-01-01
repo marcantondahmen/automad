@@ -33,6 +33,13 @@
  */
 
 .am-e-button {
+	--text: var(--am-clr-text);
+	--text-hover: var(--am-clr-text);
+	--bg: var(--am-clr-background);
+	--bg-hover: var(--am-clr-background-faded);
+	--border: var(--am-clr-border-button);
+	--border-hover: var(--am-clr-border-button);
+
 	box-sizing: border-box;
 	display: inline-flex;
 	justify-content: center;
@@ -46,9 +53,9 @@
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
-	color: hsl(var(--am-clr-text));
-	background-color: hsl(var(--am-clr-background));
-	border: @am-button-border-width solid hsl(var(--am-clr-border-button));
+	color: hsl(var(--text));
+	background-color: hsl(var(--bg));
+	border: @am-button-border-width solid hsl(var(--border));
 	outline: @am-outline;
 	transition:
 		color 0.2s,
@@ -58,23 +65,36 @@
 
 	&:hover,
 	&:active {
-		background-color: hsl(var(--am-clr-background-faded));
+		color: hsl(var(--text-hover));
+		background-color: hsl(var(--bg-hover));
+		border-color: hsl(var(--border-hover));
+	}
+
+	&--danger {
+		--text: var(--am-clr-text-danger);
+		--text-hover: var(--am-clr-text-danger);
+		--bg: var(--am-clr-background-danger);
+		--bg-hover: var(--am-clr-background-danger-hover);
+		--border: var(--am-clr-border-danger);
+		--border-hover: var(--am-clr-border-danger);
+
+		& .am-e-badge {
+			--am-clr-text-badge: var(--am-clr-background-danger);
+			--am-clr-background-badge: var(--am-clr-text-danger);
+		}
 	}
 
 	&--primary {
-		color: hsl(var(--am-clr-text-primary));
-		background-color: hsl(var(--am-clr-background-primary));
-		border: @am-button-border-width solid hsl(var(--am-clr-background-primary));
-
-		&:hover,
-		&:active {
-			background-color: hsl(var(--am-clr-background-primary-hover));
-			border-color: hsl(var(--am-clr-background-primary-hover));
-		}
+		--text: var(--am-clr-text-primary);
+		--text-hover: var(--am-clr-text-primary);
+		--bg: var(--am-clr-background-primary);
+		--bg-hover: var(--am-clr-background-primary-hover);
+		--border: var(--am-clr-background-primary);
+		--border-hover: var(--am-clr-background-primary-hover);
 
 		& .am-e-badge {
-			--am-clr-text-badge: hsl(var(--am-clr-background-primary));
-			--am-clr-background-badge: hsl(var(--am-clr-text-primary));
+			--am-clr-text-badge: var(--am-clr-background-primary);
+			--am-clr-background-badge: var(--am-clr-text-primary);
 		}
 	}
 
