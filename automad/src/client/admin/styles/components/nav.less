@@ -73,12 +73,15 @@
 		color: @am-nav-item-clr;
 		text-decoration: none;
 		border-radius: @am-nav-item-radius;
-		border: @am-form-border-width dashed transparent;
+		border: @am-border-width dashed transparent;
 		line-height: ~'calc(@{am-nav-item-line-height} - @{am-border-width} - @{am-border-width})';
 		height: @am-nav-item-line-height;
 		cursor: pointer;
 		outline: @am-outline;
-		transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+		transition:
+			background-color 0.2s,
+			color 0.2s,
+			border-color 0.2s;
 
 		& > span {
 			min-width: 0;
