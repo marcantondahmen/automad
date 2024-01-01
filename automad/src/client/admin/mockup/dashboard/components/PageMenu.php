@@ -1,4 +1,4 @@
-<section class="am-l-dashboard__section">
+<section class="am-l-dashboard__section am-l-dashboard__section--breadcrumbs">
 	<div class="am-l-dashboard__content">
 		<div class="am-c-breadcrumbs">
 			<span class="am-c-breadcrumbs__item">My Site</span>
