@@ -33,23 +33,27 @@
  */
 
 .am-c-alert {
+	--text: var(--am-clr-text);
+	--bg: var(--am-clr-background);
+	--border: var(--am-clr-border);
+
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.1rem;
 	margin: 0;
 	margin-bottom: @am-base-margin-y;
 	padding: 1.1rem 1.1rem;
-	border: @am-card-border;
+	border: @am-card-border-width solid hsl(var(--border));
 	border-radius: @am-card-radius;
-	color: hsl(var(--am-clr-text-paragraph));
-	background-color: hsl(var(--am-clr-background-faded));
+	color: hsl(var(--text));
+	background-color: hsl(var(--bg));
 	box-shadow: @am-shadow;
 	--multiplier: ~'calc(30rem - 100%)';
 
 	&--danger {
-		color: hsl(var(--am-clr-text-danger));
-		background-color: hsl(var(--am-clr-background-danger));
-		border-color: hsl(var(--am-clr-border-danger));
+		--text: var(--am-clr-text-danger);
+		--bg: var(--am-clr-background-danger);
+		--border: var(--am-clr-border-danger);
 	}
 
 	& > * {
