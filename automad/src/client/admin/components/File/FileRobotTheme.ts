@@ -64,7 +64,8 @@ export const fileRobotTheme = {
 		'border-active-bottom': 'hsl(var(--am-clr-text))',
 		'active-secondary': 'hsl(var(--am-clr-background-primary))',
 		'active-secondary-hover': 'hsl(var(--am-clr-background-primary-hover))',
-		'active-secondary-active': 'hsl(var(--am-clr-background-primary-hover))',
+		'active-secondary-active':
+			'hsl(var(--am-clr-background-primary-hover))',
 		'light-shadow': '0 4px 20px rgba(0,0,0,0.1)',
 		tag: 'hsl(var(--am-clr-text-paragraph))',
 		error: 'hsl(var(--am-clr-text-paragraph))',
@@ -73,6 +74,6 @@ export const fileRobotTheme = {
 		info: 'hsl(var(--am-clr-text-paragraph))',
 	},
 	typography: {
-		fontFamily: 'Inter Variable',
+		fontFamily: 'InterVariable',
 	},
 };
