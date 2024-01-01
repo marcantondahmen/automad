@@ -33,19 +33,23 @@
  */
 
 .am-c-notify {
+	--text: var(--am-clr-text);
+	--bg: var(--am-clr-background);
+	--border: var(--am-clr-border);
+
 	gap: 1.2em;
 	width: 24rem;
 	padding: 0.6rem 0.95rem;
-	color: hsl(var(--am-clr-text));
-	background: hsl(var(--am-clr-background-faded));
+	color: hsl(var(--text));
+	background: hsl(var(--bg));
 	box-shadow: @am-shadow;
-	border: @am-card-border-width solid hsl(var(--am-clr-border));
+	border: @am-card-border-width solid hsl(var(--border));
 	border-radius: @am-card-radius;
 
 	&--danger {
-		color: hsl(var(--am-clr-text-danger));
-		background: hsl(var(--am-clr-background-danger));
-		border-color: hsl(var(--am-clr-border-danger));
+		--text: var(--am-clr-text-danger);
+		--bg: var(--am-clr-background-danger);
+		--border: var(--am-clr-border-danger);
 	}
 
 	&__node {

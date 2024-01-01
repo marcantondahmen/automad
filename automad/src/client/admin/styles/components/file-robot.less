@@ -184,7 +184,8 @@
 		&[aria-selected='true'] {
 			background-color: hsl(var(--am-clr-background-primary));
 
-			& * {
+			& *,
+			&:before {
 				color: hsl(var(--am-clr-text-primary)) !important;
 			}
 		}
@@ -262,8 +263,12 @@
 
 		&:hover,
 		&:active {
-			background-color: hsl(var(--am-clr-background-primary-hover)) !important;
-			border-color: hsl(var(--am-clr-background-primary-hover)) !important;
+			background-color: hsl(
+				var(--am-clr-background-primary-hover)
+			) !important;
+			border-color: hsl(
+				var(--am-clr-background-primary-hover)
+			) !important;
 		}
 	}
 }
@@ -332,7 +337,9 @@
 				background-color: var(
 					--am-clr-background-primary-hover
 				) !important;
-				border-color: hsl(var(--am-clr-background-primary-hover)) !important;
+				border-color: hsl(
+					var(--am-clr-background-primary-hover)
+				) !important;
 			}
 		}
 	}

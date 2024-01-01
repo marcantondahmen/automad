@@ -94,7 +94,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 								${App.text('forgotPassword')}
 							</a>
 							<am-submit
-								class="${CSS.button}"
+								class="${CSS.button} ${CSS.buttonPrimary}"
 								${Attr.form}="${SessionController.login}"
 							>
 								${App.text('signIn')}
