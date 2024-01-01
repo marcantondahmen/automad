@@ -32,22 +32,22 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, Route } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { App, Attr, CSS, html, listen, Route } from '@/core';
+import { BaseBreadcrumbsComponent } from './BaseBreadcrumbs';
 
 /**
  * A breadcrumbs nav for a main page of the top level route.
  *
  * @example
- * <am-route-breadcrumbs
+ * <am-breadcrumbs-route
  *     ${Attr.target}="..."
  *     ${Attr.text}="..."
  *     ${Attr.narrow}
- * ></am-route-breadcrumbs>
+ * ></am-breadcrumbs-route>
  *
- * @extends BaseComponent
+ * @extends BaseBreadcrumbsComponent
  */
-class BreadcrumbsRouteComponent extends BaseComponent {
+class BreadcrumbsRouteComponent extends BaseBreadcrumbsComponent {
 	/**
 	 * The array of observed attributes.
 	 *
@@ -61,7 +61,8 @@ class BreadcrumbsRouteComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(CSS.layoutDashboardSection);
+		super.connectedCallback();
+
 		const isNarrow = this.hasAttribute(Attr.narrow);
 
 		this.innerHTML = html`

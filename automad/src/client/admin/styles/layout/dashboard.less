@@ -146,8 +146,20 @@
 			margin-top: 0.3rem;
 		}
 
+		&--breadcrumbs {
+			position: sticky;
+			z-index: 1000;
+			top: @am-navbar-height;
+			opacity: 1;
+			transition: opacity 0.2s;
+
+			&-hidden {
+				opacity: 0;
+				pointer-events: none;
+			}
+		}
+
 		&--sticky {
-			--am-opacity: 0.2;
 			position: sticky;
 			z-index: 50;
 			margin-bottom: 2.25rem;
@@ -195,5 +207,37 @@
 		border-top: @am-border;
 		margin-right: -15px;
 		padding-right: 15px;
+	}
+
+	// Backdrop blur for navbar and switchers.
+	@supports selector(:has(*)) and (backdrop-filter: blur(@am-backdrop-radius)) {
+		&__navbar {
+			background-color: transparent;
+		}
+
+		&__navbar--left,
+		&:not(:has(.am-l-dashboard__section--sticky:not(.am-u-display-none)))
+			> .am-l-dashboard__navbar--right,
+		&:has(.am-l-dashboard__section--sticky.am-u-display-none)
+			> .am-l-dashboard__navbar--right {
+			&:before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				.blur();
+			}
+		}
+
+		&__section--sticky {
+			background-color: transparent;
+
+			&:before {
+				content: '';
+				position: absolute;
+				z-index: -1;
+				inset: -300px 0 0 0;
+				.blur();
+			}
+		}
 	}
 }

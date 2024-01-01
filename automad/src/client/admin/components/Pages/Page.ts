@@ -49,13 +49,7 @@ import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 
 const renderBreadcrumbs = (): string => {
-	return html`
-		<section class="${CSS.layoutDashboardSection}">
-			<div class="${CSS.layoutDashboardContent}">
-				<am-breadcrumbs-page></am-breadcrumbs-page>
-			</div>
-		</section>
-	`;
+	return html`<am-breadcrumbs-page></am-breadcrumbs-page>`;
 };
 
 const renderHistoryModal = (): string => {

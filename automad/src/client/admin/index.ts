@@ -41,6 +41,9 @@ import '@fontsource-variable/jetbrains-mono';
 
 import './styles/index.less';
 
+import './components/Breadcrumbs/BreadcrumbsPage';
+import './components/Breadcrumbs/BreadcrumbsRoute';
+
 import './components/Editor/EditorJS';
 import './components/Editor/EditorPortal';
 
@@ -151,8 +154,6 @@ import './components/System/UserName';
 
 import './components/Alert';
 import './components/Autocomplete';
-import './components/BreadcrumbsPage';
-import './components/BreadcrumbsRoute';
 import './components/Checkbox';
 import './components/CustomIconCheckbox';
 import './components/Copy';

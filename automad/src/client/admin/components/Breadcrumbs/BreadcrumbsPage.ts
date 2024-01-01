@@ -42,9 +42,10 @@ import {
 	App,
 	Attr,
 	PageController,
+	listen,
 } from '@/core';
 import { KeyValueMap } from '@/types';
-import { BaseComponent } from '@/components/Base';
+import { BaseBreadcrumbsComponent } from './BaseBreadcrumbs';
 
 /**
  * A breadcrumbs nav for a page.
@@ -52,47 +53,60 @@ import { BaseComponent } from '@/components/Base';
  * @example
  * <am-breadcrumbs-page></am-breadcrumbs-page>
  *
- * @extends BaseComponent
+ * @extends BaseBreadcrumbsComponent
  */
-class BreadcrumbsPageComponent extends BaseComponent {
+class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 	/**
 	 * The constructor.
 	 */
 	constructor() {
 		super();
 
-		this.init();
+		const container = create(
+			'div',
+			[CSS.breadcrumbs],
+			{},
+			create('div', [CSS.layoutDashboardContent], {}, this)
+		);
+
+		create(
+			'am-link',
+			[CSS.breadcrumbsItem],
+			{ [Attr.target]: Route.home },
+			container,
+			App.text('dashboardTitle')
+		);
+
+		this.init(container);
+	}
+
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		super.connectedCallback();
 	}
 
 	/**
 	 * Fetch the breadcrumb data and init the componenten.
 	 *
+	 * @param container
 	 * @async
 	 */
-	private async init(): Promise<void> {
-		this.classList.add(CSS.breadcrumbs);
-
+	private async init(container: HTMLElement): Promise<void> {
 		const url = getPageURL();
 		const response = await requestAPI(PageController.breadcrumbs, { url });
 
-		this.render(response.data);
+		this.render(container, response.data);
 	}
 
 	/**
 	 * Render the actual component.
 	 *
+	 * @param container
 	 * @param data
 	 */
-	private render(data: KeyValueMap): void {
-		const dashboard = create(
-			'am-link',
-			[CSS.breadcrumbsItem],
-			{ [Attr.target]: Route.home },
-			this
-		);
-
-		dashboard.textContent = App.text('dashboardTitle');
-
+	private render(container: HTMLElement, data: KeyValueMap): void {
 		if (!data) {
 			return;
 		}
@@ -104,7 +118,7 @@ class BreadcrumbsPageComponent extends BaseComponent {
 				'am-link',
 				[CSS.breadcrumbsItem],
 				{ [Attr.target]: target },
-				this
+				container
 			);
 
 			if (index == data.length - 1) {

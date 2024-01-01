@@ -209,6 +209,8 @@ export const enum CSS {
 	layoutDashboardSidebarBackdrop = 'am-l-dashboard__sidebar-backdrop',
 	layoutDashboardMain = 'am-l-dashboard__main',
 	layoutDashboardSection = 'am-l-dashboard__section',
+	layoutDashboardSectionBreadcrumbs = 'am-l-dashboard__section--breadcrumbs',
+	layoutDashboardSectionBreadcrumbsHidden = 'am-l-dashboard__section--breadcrumbs-hidden',
 	layoutDashboardSectionSticky = 'am-l-dashboard__section--sticky',
 	layoutDashboardContent = 'am-l-dashboard__content',
 	layoutDashboardContentNarrow = 'am-l-dashboard__content--narrow',
