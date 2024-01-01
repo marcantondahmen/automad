@@ -37,6 +37,7 @@
 namespace Automad\Admin;
 
 use Automad\Core\Session;
+use Automad\Core\Text;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -58,10 +59,11 @@ class Dashboard {
 		$fn = function (mixed $expression): string {
 			return $expression;
 		};
+		$lang = Text::get('__lang__');
 
 		return <<< HTML
 			<!DOCTYPE html>
-			<html lang="en" class="am-ui">
+			<html lang="$lang" class="am-ui">
 			<head>
 				<meta charset="utf-8">
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
