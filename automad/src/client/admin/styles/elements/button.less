@@ -62,19 +62,19 @@
 	}
 
 	&--primary {
-		color: hsl(var(--am-clr-primary-text));
-		background-color: hsl(var(--am-clr-primary-background));
-		border: @am-button-border-width solid hsl(var(--am-clr-primary-background));
+		color: hsl(var(--am-clr-text-primary));
+		background-color: hsl(var(--am-clr-background-primary));
+		border: @am-button-border-width solid hsl(var(--am-clr-background-primary));
 
 		&:hover,
 		&:active {
-			background-color: hsl(var(--am-clr-primary-background-hover));
-			border-color: hsl(var(--am-clr-primary-background-hover));
+			background-color: hsl(var(--am-clr-background-primary-hover));
+			border-color: hsl(var(--am-clr-background-primary-hover));
 		}
 
 		& .am-e-badge {
-			--am-clr-badge-text: hsl(var(--am-clr-primary-background));
-			--am-clr-badge-background: hsl(var(--am-clr-primary-text));
+			--am-clr-text-badge: hsl(var(--am-clr-background-primary));
+			--am-clr-background-badge: hsl(var(--am-clr-text-primary));
 		}
 	}
 
