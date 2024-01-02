@@ -290,8 +290,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 				<am-modal-body>
 					<am-logo></am-logo>
 					<hr />
-					<strong>Automad</strong>
-					is a modern flat-file content management system and
+					Automad is a modern flat-file content management system and
 					templating engine
 					<hr />
 					<span class="${CSS.flex} ${CSS.flexBetween}">

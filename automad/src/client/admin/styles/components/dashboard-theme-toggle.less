@@ -55,16 +55,18 @@
 		color: hsl(var(--am-clr-text));
 		cursor: pointer;
 		border-radius: 0.25rem;
-		transition: color 0.2s, background-color 0.2s;
+		transition:
+			color 0.2s,
+			background-color 0.2s;
 
 		&:hover {
-			color: hsl(var(--am-clr-text-selected));
-			background-color: hsl(var(--am-clr-background-selected));
+			color: hsl(var(--am-clr-text));
+			background-color: hsl(var(--am-clr-background-faded));
 		}
 
 		&--active {
-			color: hsl(var(--am-clr-text-primary));
-			background-color: hsl(var(--am-clr-background-primary));
+			color: hsl(var(--am-clr-text-selected));
+			background-color: hsl(var(--am-clr-background-selected));
 		}
 	}
 
