@@ -71,6 +71,7 @@ import Embed from '@editorjs/embed';
 import { embedServices } from '@/editor/embedServices';
 import { HeaderBlock } from '@/editor/blocks/Header';
 import { ParagraphBlock } from '@/editor/blocks/Paragraph';
+import { DuplicateTune } from '@/editor/tunes/Duplicate';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -94,7 +95,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * The base selection of tunes that is used for all blocks.
 	 */
 	private get baseTunes() {
-		return ['layout', 'spacing', 'className', 'id'];
+		return ['layout', 'spacing', 'className', 'id', 'duplicate'];
 	}
 
 	/**
@@ -252,6 +253,9 @@ export class EditorJSComponent extends BaseComponent {
 					isSectionBlock,
 				},
 			},
+			duplicate: {
+				class: DuplicateTune,
+			},
 		};
 	}
 
@@ -309,7 +313,7 @@ export class EditorJSComponent extends BaseComponent {
 	}
 
 	/**
-	 * Apply layout to rendered blocks and initialyze drag and drop.
+	 * Initialyze drag and drop.
 	 */
 	onRender(): void {
 		new DragDrop(this);

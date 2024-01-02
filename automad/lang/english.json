@@ -78,6 +78,7 @@
 	"discardImageChanges": "Are you sure you want to close the editor without saving changes to the image?",
 	"downloadFile": "Download",
 	"dropFilesOrClick": "Drop files here or click to browse",
+	"duplicate": "Duplicate",
 	"duplicatePage": "Duplicate Page",
 	"edit": "Edit",
 	"editorBlockSection": "Layout Section",
