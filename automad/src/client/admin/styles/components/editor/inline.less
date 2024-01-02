@@ -38,6 +38,7 @@
 	border: @am-modal-border;
 	border-radius: @am-bl-editor-toolbar-radius;
 	box-shadow: @am-shadow;
+	min-height: ~'calc(@{am-bl-editor-inline-toolbar-height} + (2 * @{am-modal-border-width}))';
 
 	&__toggler-and-button-wrapper {
 		display: flex;
@@ -48,17 +49,30 @@
 	}
 
 	&__dropdown {
+		--bg: transparent;
+
+		position: relative;
 		display: flex;
 		justify-content: space-between;
-		width: 3.1333rem;
+		width: 3.5rem;
 		font-size: 1rem;
-		transition: background-color 0.2s;
 		margin: 0;
-		padding: 0 0.4666rem;
+		padding: 0 0.45rem;
 		border: none;
+		background-color: transparent !important;
+
+		&:before {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			inset: 4px 1px 4px 1px;
+			border-radius: 0.35rem;
+			background-color: hsl(var(--bg));
+			transition: background-color 0.2s;
+		}
 
 		&:hover {
-			background-color: hsl(var(--am-clr-background-faded));
+			--bg: var(--am-clr-background-faded);
 		}
 
 		&-arrow {
@@ -99,16 +113,35 @@
 }
 
 .ce-inline-tool {
+	--bg: transparent;
+
+	position: relative;
 	width: @am-bl-editor-inline-toolbar-height * 0.78;
-	transition: color 0.2s, background-color 0.2s;
 	font-size: 1rem;
+	color: hsl(var(--am-clr-text)) !important;
+	background-color: transparent !important;
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
+
+	&:before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		inset: 4px 1px 4px 1px;
+		border-radius: 0.35rem;
+		background-color: hsl(var(--bg));
+		transition: background-color 0.2s;
+	}
 
 	&:hover,
 	&--focused {
-		background-color: hsl(var(--am-clr-background-faded)) !important;
-		border: none !important;
-		outline: none !important;
-		box-shadow: none !important;
+		--bg: var(--am-clr-background-faded);
+	}
+
+	&--active,
+	&--active:hover {
+		--bg: var(--am-clr-background-selected);
 	}
 
 	&[data-tool='alignRight'] {
@@ -144,6 +177,12 @@
 		line-height: @am-small-line-height;
 		font-weight: @am-small-font-weight;
 	}
+
+	&__tools {
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+	}
 }
 
 .ce-conversion-tool {
@@ -154,12 +193,15 @@
 	border-radius: 0.35rem;
 	color: inherit;
 	background-color: inherit;
-	transition: color 0.2s, background-color 0.2s;
+	transition:
+		color 0.2s,
+		background-color 0.2s;
 
 	&--focused,
 	&:hover {
 		color: hsl(var(--am-clr-text-selected)) !important;
 		background-color: hsl(var(--am-clr-background-selected)) !important;
+		box-shadow: none !important;
 	}
 
 	&__icon {
