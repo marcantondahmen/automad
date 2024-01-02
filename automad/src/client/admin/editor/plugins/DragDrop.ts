@@ -35,6 +35,7 @@
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
 import { listen, query } from '@/core';
 import EditorJS, { BlockAPI } from '@editorjs/editorjs';
+import { insertBlock } from '../utils';
 
 /**
  * Get the index of a block element.
@@ -191,20 +192,12 @@ export class DragDrop {
 			sourceComponent.editor.blocks.move(targetIndex, sourceIndex);
 			sourceComponent.editor.caret.setToBlock(targetIndex, 'end');
 		} else {
-			const data = await DragDrop.CURRENT.block.save();
-
-			if (!data) {
-				return;
-			}
-
 			sourceComponent.editor.blocks.delete(sourceIndex);
 
-			targetComponent.editor.blocks.insert(
-				data.tool,
-				data.data,
-				DragDrop.CURRENT.block.config,
-				targetIndex + 1,
-				false
+			insertBlock(
+				DragDrop.CURRENT.block,
+				targetComponent.editor,
+				targetIndex + 1
 			);
 
 			targetComponent.editor.caret.setToBlock(targetIndex + 1, 'end');
