@@ -110,7 +110,7 @@ export class Undo {
 	}
 
 	/**
-	 * Create new or resets the undo/redo stacks.
+	 * Create new or reset the undo/redo stacks.
 	 *
 	 * @static
 	 */

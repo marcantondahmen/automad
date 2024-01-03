@@ -45,6 +45,7 @@ import {
 	listen,
 	MailConfigController,
 	requestAPI,
+	Undo,
 } from '@/core';
 import { MailConfig } from '@/types';
 import { FormComponent } from './Form';
@@ -214,6 +215,7 @@ export class MailConfigFormComponent extends FormComponent {
 
 				requestAPI(MailConfigController.reset, {}, true, () => {
 					fire(EventName.appStateRequireUpdate);
+					Undo.new();
 				});
 			})
 		);
