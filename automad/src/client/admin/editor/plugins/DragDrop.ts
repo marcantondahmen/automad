@@ -197,10 +197,10 @@ export class DragDrop {
 			insertBlock(
 				DragDrop.CURRENT.block,
 				targetComponent.editor,
-				targetIndex + 1
+				targetIndex
 			);
 
-			targetComponent.editor.caret.setToBlock(targetIndex + 1, 'end');
+			targetComponent.editor.caret.setToBlock(targetIndex, 'end');
 		}
 
 		DragDrop.CURRENT = null;
