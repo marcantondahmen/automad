@@ -72,6 +72,7 @@ import { embedServices } from '@/editor/embedServices';
 import { HeaderBlock } from '@/editor/blocks/Header';
 import { ParagraphBlock } from '@/editor/blocks/Paragraph';
 import { DuplicateTune } from '@/editor/tunes/Duplicate';
+import { MailBlock } from '@/editor/blocks/Mail';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -205,6 +206,10 @@ export class EditorJSComponent extends BaseComponent {
 			raw: {
 				class: RawBlock,
 				inlineToolbar: false,
+			},
+			mail: {
+				class: MailBlock,
+				inlineToolbar: true,
 			},
 			embed: {
 				class: Embed,

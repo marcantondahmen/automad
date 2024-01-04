@@ -102,6 +102,16 @@ export interface GalleryBlockData {
 	cleanBottom: boolean;
 }
 
+export interface MailBlockData {
+	to: string;
+	error: string;
+	success: string;
+	labelAddress: string;
+	labelSubject: string;
+	labelBody: string;
+	labelSend: string;
+}
+
 export interface ParagraphBlockData {
 	text: string;
 	large: boolean;
