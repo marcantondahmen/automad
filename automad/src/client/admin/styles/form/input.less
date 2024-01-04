@@ -57,11 +57,15 @@
 		color: hsl(var(--am-clr-text-muted));
 	}
 
-	&:invalid:not(:required) {
+	&.am-validate:invalid {
 		color: hsl(var(--am-clr-text-danger));
 		border-color: hsl(var(--am-clr-border-danger));
 		background-color: hsl(var(--am-clr-background-danger));
 		outline: @am-outline-danger;
+
+		&::placeholder {
+			color: hsla(var(--am-clr-text-danger), 0.5);
+		}
 	}
 
 	&--title {

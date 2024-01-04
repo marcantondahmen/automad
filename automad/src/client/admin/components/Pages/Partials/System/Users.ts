@@ -197,6 +197,7 @@ export const renderUsersSection = (): string => {
 					<am-delete-users-form
 						${Attr.api}="${UserCollectionController.edit}"
 						${Attr.event}="${EventName.appStateRequireUpdate}"
+						${Attr.watch}
 					></am-delete-users-form>
 				</am-modal-body>
 				<am-modal-footer>
@@ -204,8 +205,9 @@ export const renderUsersSection = (): string => {
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit
-						class="${CSS.button} ${CSS.buttonPrimary}"
+						class="${CSS.button} ${CSS.buttonDanger}"
 						${Attr.form}="${UserCollectionController.edit}"
+						disabled
 					>
 						${App.text('deleteSelected')}
 					</am-submit>
@@ -235,7 +237,11 @@ export const renderUsersSection = (): string => {
 								label: App.text('username'),
 							},
 							[],
-							{}
+							{
+								required: '',
+								pattern: '^\\S+$',
+								[Attr.error]: App.text('systemUsersNameError'),
+							}
 						).outerHTML}
 						${createField(
 							FieldTag.email,
@@ -248,7 +254,10 @@ export const renderUsersSection = (): string => {
 								label: App.text('email'),
 							},
 							[],
-							{}
+							{
+								required: '',
+								[Attr.error]: App.text('emailRequiredError'),
+							}
 						).outerHTML}
 						${createField(
 							FieldTag.password,
@@ -261,7 +270,9 @@ export const renderUsersSection = (): string => {
 								label: App.text('password'),
 							},
 							[],
-							{}
+							{
+								required: '',
+							}
 						).outerHTML}
 						${createField(
 							FieldTag.password,
@@ -274,7 +285,9 @@ export const renderUsersSection = (): string => {
 								label: App.text('repeatPassword'),
 							},
 							[],
-							{}
+							{
+								required: '',
+							}
 						).outerHTML}
 					</div>
 				</am-modal-body>
@@ -311,7 +324,11 @@ export const renderUsersSection = (): string => {
 								label: App.text('username'),
 							},
 							[],
-							{}
+							{
+								required: '',
+								pattern: '^\\S+$',
+								[Attr.error]: App.text('systemUsersNameError'),
+							}
 						).outerHTML}
 						${createField(
 							FieldTag.email,
@@ -324,7 +341,10 @@ export const renderUsersSection = (): string => {
 								label: App.text('email'),
 							},
 							[],
-							{}
+							{
+								required: '',
+								[Attr.error]: App.text('emailRequiredError'),
+							}
 						).outerHTML}
 					</div>
 				</am-modal-body>

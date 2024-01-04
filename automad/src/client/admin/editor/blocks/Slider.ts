@@ -286,38 +286,62 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 		const layout = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
-		createField(FieldTag.number, dimensions, {
-			name: 'imageWidthPx',
-			value: this.data.imageWidthPx,
-			key: uniqueId(),
-			label: `${App.text('sliderBlockImageWidth')} (Pixel)`,
-		});
+		createField(
+			FieldTag.number,
+			dimensions,
+			{
+				name: 'imageWidthPx',
+				value: this.data.imageWidthPx,
+				key: uniqueId(),
+				label: `${App.text('sliderBlockImageWidth')} (Pixel)`,
+			},
+			[],
+			{ required: '' }
+		);
 
-		createField(FieldTag.number, dimensions, {
-			name: 'imageHeightPx',
-			value: this.data.imageHeightPx,
-			key: uniqueId(),
-			label: `${App.text('sliderBlockImageHeight')} (Pixel)`,
-		});
+		createField(
+			FieldTag.number,
+			dimensions,
+			{
+				name: 'imageHeightPx',
+				value: this.data.imageHeightPx,
+				key: uniqueId(),
+				label: `${App.text('sliderBlockImageHeight')} (Pixel)`,
+			},
+			[],
+			{ required: '' }
+		);
 
-		createField(FieldTag.number, layout, {
-			name: 'slidesPerView',
-			value: this.data.slidesPerView,
-			key: uniqueId(),
-			label: App.text('sliderBlockSlidesPerView'),
-		});
+		createField(
+			FieldTag.number,
+			layout,
+			{
+				name: 'slidesPerView',
+				value: this.data.slidesPerView,
+				key: uniqueId(),
+				label: App.text('sliderBlockSlidesPerView'),
+			},
+			[],
+			{ required: '' }
+		);
 
-		createField(FieldTag.number, layout, {
-			name: 'gapPx',
-			value: this.data.gapPx,
-			key: uniqueId(),
-			label: `${App.text('sliderBlockSpaceBetween')} (Pixel)`,
-		});
+		createField(
+			FieldTag.number,
+			layout,
+			{
+				name: 'gapPx',
+				value: this.data.gapPx,
+				key: uniqueId(),
+				label: `${App.text('sliderBlockSpaceBetween')} (Pixel)`,
+			},
+			[],
+			{ required: '' }
+		);
 
 		create(
 			'div',
 			[CSS.field],
-			{},
+			{ [Attr.error]: App.text('sliderBlockBreakpointsError') },
 			body,
 			html`
 				<label class="${CSS.fieldLabel}">

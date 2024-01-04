@@ -54,13 +54,20 @@
 		font-size: @am-small-font-size;
 		font-weight: @am-small-font-weight;
 		color: hsl(var(--am-clr-text-paragraph));
+		user-select: none;
 	}
 
-	&:has(:invalid:not(:required)) &__label {
+	&:not(:has(&)):has(.am-validate:invalid)[am-error]:after {
+		content: attr(am-error);
+		font-size: @am-small-font-size;
+		font-weight: @am-small-font-weight;
+		line-height: @am-small-line-height;
 		color: hsl(var(--am-clr-text-danger));
 	}
 
-	&:has(:invalid) &__label {
+	&:not(:has(&)):has(.am-validate:invalid) &__label {
+		color: hsl(var(--am-clr-text-danger));
+
 		&:after {
 			&:extend(.am-bi);
 			content: '\f333';

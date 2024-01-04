@@ -38,6 +38,7 @@
 export const enum CSS {
 	active = 'am-active',
 	focus = 'am-focus',
+	validate = 'am-validate',
 
 	alert = 'am-c-alert',
 	alertDanger = 'am-c-alert--danger',

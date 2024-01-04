@@ -46,12 +46,13 @@ import {
 	initTooltips,
 	requestAPI,
 	Attr,
-	documentEnterKeyHandler,
+	initEnterKeyHandler,
 	initWindowErrorHandler,
 	fire,
 	EventName,
 	Undo,
 	SessionController,
+	initInputChangeHandler,
 } from '@/core';
 import { applyTheme, getTheme } from '@/core/theme';
 import { BaseComponent } from '@/components/Base';
@@ -98,7 +99,7 @@ export class RootComponent extends BaseComponent {
 	 */
 	private async init(): Promise<void> {
 		this.classList.add(CSS.root);
-		initWindowErrorHandler();
+		this.addListener(initWindowErrorHandler());
 		applyTheme(getTheme());
 		this.progressBar(10);
 
@@ -111,7 +112,8 @@ export class RootComponent extends BaseComponent {
 			})
 		);
 
-		this.addListener(documentEnterKeyHandler());
+		this.addListener(initEnterKeyHandler());
+		this.addListener(initInputChangeHandler());
 		this.validateSession();
 
 		Undo.addListeners();

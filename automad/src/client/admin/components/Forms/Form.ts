@@ -49,7 +49,6 @@ import {
 	query,
 	queryAll,
 	requestAPI,
-	html,
 } from '@/core';
 import { InputElement, KeyValueMap } from '@/types';
 import { BaseComponent } from '@/components/Base';
@@ -251,6 +250,13 @@ export class FormComponent extends BaseComponent {
 		}
 
 		const lockId = App.addNavigationLock();
+
+		queryAll(
+			'input:not([type="hidden"], textarea, [contenteditable])',
+			this
+		).forEach((input) => {
+			input.classList.add(CSS.validate);
+		});
 
 		if (this.verifyRequired()) {
 			await requestAPI(

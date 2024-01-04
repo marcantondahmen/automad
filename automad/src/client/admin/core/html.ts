@@ -49,6 +49,7 @@ export const enum Attr {
 	destroy = 'am-destroy',
 	enter = 'am-enter',
 	event = 'am-event',
+	error = 'am-error',
 	external = 'am-external',
 	file = 'am-file',
 	focus = 'am-focus',

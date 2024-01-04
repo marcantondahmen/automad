@@ -211,9 +211,12 @@ export abstract class BaseFieldComponent
 		queryAll<InputElement>('input, textarea', this).forEach((input) => {
 			if (this.hasAttribute('required')) {
 				input.setAttribute('pattern', '.*\\S.*');
-				input.setAttribute('placeholder', App.text('requiredField'));
 				input.setAttribute('required', '');
 				this.removeAttribute('required');
+
+				if (!this.hasAttribute(Attr.error)) {
+					this.setAttribute(Attr.error, App.text('requiredField'));
+				}
 			}
 
 			input.setAttribute(

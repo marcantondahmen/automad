@@ -216,7 +216,8 @@ export class PageDataFormComponent extends FormComponent {
 			fieldType: FieldTag,
 			key: string,
 			label: string = '',
-			attributes: KeyValueMap = {}
+			attributes: KeyValueMap = {},
+			container: HTMLElement = section
 		): BaseFieldComponent => {
 			const data = {
 				key,
@@ -225,8 +226,15 @@ export class PageDataFormComponent extends FormComponent {
 				label,
 			};
 
-			return createField(fieldType, section, data, [], attributes);
+			return createField(fieldType, container, data, [], attributes);
 		};
+
+		const titleContainer = create(
+			'div',
+			[CSS.flex, CSS.flexColumn, CSS.flexGap],
+			{},
+			section
+		);
 
 		const titleField = createMainField(
 			FieldTag.title,
@@ -234,7 +242,8 @@ export class PageDataFormComponent extends FormComponent {
 			'',
 			{
 				required: '',
-			}
+			},
+			titleContainer
 		);
 
 		new Binding('title', {
@@ -255,7 +264,7 @@ export class PageDataFormComponent extends FormComponent {
 				[Attr.bind]: 'pageUrlWithBase',
 				[Attr.bindTo]: 'href',
 			},
-			titleField
+			titleContainer
 		).innerHTML = html`
 			<span class="${CSS.iconText}">
 				<i class="bi bi-link"></i>

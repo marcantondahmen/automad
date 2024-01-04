@@ -48,7 +48,7 @@ const renderRegisteredUsers = (): string => {
 						<span class="${CSS.textMuted}">
 							${App.text('systemUsersYou')}
 						</span>
-				  `
+					`
 				: html`<am-checkbox name="delete[${user.name}]"></am-checkbox>`;
 
 		return html`

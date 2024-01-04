@@ -212,27 +212,47 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 
 		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
-		createField(FieldTag.number, dimensions, {
-			name: 'gapPx',
-			value: this.data.gapPx,
-			key: uniqueId(),
-			label: `${App.text('galleryBlockLayoutGap')} (Pixel)`,
-		});
+		createField(
+			FieldTag.number,
+			dimensions,
+			{
+				name: 'gapPx',
+				value: this.data.gapPx,
+				key: uniqueId(),
+				label: `${App.text('galleryBlockLayoutGap')} (Pixel)`,
+			},
+			[],
+			{ required: '' }
+		);
 
 		if (this.data.layout == 'rows') {
-			createField(FieldTag.number, dimensions, {
-				name: 'rowHeightPx',
-				value: this.data.rowHeightPx,
-				key: uniqueId(),
-				label: `${App.text('galleryBlockLayoutRowHeight')} (Pixel)`,
-			});
+			createField(
+				FieldTag.number,
+				dimensions,
+				{
+					name: 'rowHeightPx',
+					value: this.data.rowHeightPx,
+					key: uniqueId(),
+					label: `${App.text('galleryBlockLayoutRowHeight')} (Pixel)`,
+				},
+				[],
+				{ required: '' }
+			);
 		} else {
-			createField(FieldTag.number, dimensions, {
-				name: 'columnWidthPx',
-				value: this.data.columnWidthPx,
-				key: uniqueId(),
-				label: `${App.text('galleryBlockLayoutColumnWidth')} (Pixel)`,
-			});
+			createField(
+				FieldTag.number,
+				dimensions,
+				{
+					name: 'columnWidthPx',
+					value: this.data.columnWidthPx,
+					key: uniqueId(),
+					label: `${App.text(
+						'galleryBlockLayoutColumnWidth'
+					)} (Pixel)`,
+				},
+				[],
+				{ required: '' }
+			);
 
 			createField(FieldTag.toggle, body, {
 				name: 'cleanBottom',

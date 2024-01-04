@@ -33,7 +33,7 @@
  */
 
 import { Listener } from '@/types';
-import { getLogger, query, queryAll } from '.';
+import { CSS, getLogger, query, queryAll } from '.';
 
 /**
  * The object with all custom event that are used by the UI.
@@ -56,20 +56,6 @@ export const enum EventName {
 	systemUpdateCheck = 'AutomadSystemUpdateCheck',
 	undoStackUpdate = 'AutomadUndoStackUpdate',
 }
-
-/**
- * Make any focused element clickable using the enter key.
- *
- * @param element
- * @return
- */
-export const documentEnterKeyHandler = (): Listener => {
-	return listen(document, 'keydown', (event: KeyboardEvent): void => {
-		if (event.keyCode == 13) {
-			(document.activeElement as HTMLButtonElement).click();
-		}
-	});
-};
 
 /**
  * Create a listener that traps focus inside of a given container.
@@ -215,12 +201,45 @@ export const listenToClassChange = (
 };
 
 /**
- * Initialize an error event handler that mutes a given set of errors.
+ * Make any focused element clickable using the enter key.
+ *
+ * @return the listener
  */
-export const initWindowErrorHandler = (): void => {
+export const initEnterKeyHandler = (): Listener => {
+	return listen(document, 'keydown', (event: KeyboardEvent): void => {
+		if (event.keyCode == 13) {
+			(document.activeElement as HTMLButtonElement).click();
+		}
+	});
+};
+
+/**
+ * Add validate class to changed input field.
+ *
+ * @returns the listener
+ */
+export const initInputChangeHandler = (): Listener => {
+	return listen(
+		document,
+		'change',
+		(event: Event) => {
+			const input = event.target as HTMLElement;
+
+			input.classList.add(CSS.validate);
+		},
+		'input, textarea, [contenteditable]'
+	);
+};
+
+/**
+ * Initialize an error event handler that mutes a given set of errors.
+ *
+ * @return the listener
+ */
+export const initWindowErrorHandler = (): Listener => {
 	const muted = ['InvalidStateError', 'TypeError'];
 
-	listen(window, 'error', (event: ErrorEvent) => {
+	return listen(window, 'error', (event: ErrorEvent) => {
 		if (muted.includes(event.error.name)) {
 			getLogger().log(event.error);
 			event.preventDefault();
