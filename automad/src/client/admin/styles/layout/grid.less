@@ -33,19 +33,19 @@
  */
 
 .am-l-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr));
-	gap: var(--gap);
 	--gap: 1.25rem;
 	--min: 15rem;
+	--repeat: auto-fill;
+
+	display: grid;
+	grid-template-columns: repeat(var(--repeat), minmax(var(--min), 1fr));
+	gap: var(--gap);
 
 	* + & {
 		margin-top: var(--gap);
 	}
 
 	&--auto {
-		grid-template-columns: none;
-		grid-auto-columns: minmax(0, 1fr);
-		grid-auto-flow: column;
+		--repeat: auto-fit;
 	}
 }

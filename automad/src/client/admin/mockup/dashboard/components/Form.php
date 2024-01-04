@@ -49,11 +49,11 @@
 			</label>
 			<input type="text" class="am-f-input" placeholder="Placeholder">
 		</div>
-		<div class="am-c-field">
+		<div class="am-c-field" am-error="This is an error message">
 			<label for="" class="am-c-field__label">
 				Invalid
 			</label>
-			<input type="text" class="am-f-input" placeholder="Placeholder" pattern="xxx" value="invalid" />
+			<input type="text" class="am-f-input am-validate" placeholder="Placeholder" pattern="xxx" value="invalid" />
 		</div>
 		<div class="am-c-field">
 			<label for="" class="am-c-field__label">
