@@ -43,6 +43,7 @@ import {
 	listen,
 	query,
 	setFormData,
+	queryAll,
 } from '@/core';
 import { InputElement, KeyValueMap, Listener } from '@/types';
 import { BaseComponent } from '@/components/Base';
@@ -180,6 +181,12 @@ export class ModalComponent extends BaseComponent {
 		fire(EventName.modalClose, this);
 
 		this.focusTrap.remove();
+
+		setTimeout(() => {
+			queryAll(`.${CSS.validate}`).forEach((input) => {
+				input.classList.remove(CSS.validate);
+			});
+		}, 400);
 
 		if (this.hasAttribute(Attr.destroy)) {
 			setTimeout(() => {
