@@ -109,7 +109,7 @@ class PackageManagerController {
 
 		$Composer = new Composer();
 
-		if ($error = $Composer->run('require ' . $package)) {
+		if ($error = $Composer->run('require --update-no-dev ' . $package)) {
 			return $Response->setError($error);
 		}
 
@@ -176,7 +176,7 @@ class PackageManagerController {
 		if ($package = Request::post('package')) {
 			$Composer = new Composer();
 
-			if ($error = $Composer->run('update --with-dependencies ' . $package)) {
+			if ($error = $Composer->run('update --with-dependencies --no-dev ' . $package)) {
 				return $Response->setError($error);
 			}
 
@@ -197,7 +197,7 @@ class PackageManagerController {
 		$Response = new Response();
 		$Composer = new Composer();
 
-		if ($error = $Composer->run('update')) {
+		if ($error = $Composer->run('update --no-dev')) {
 			return $Response->setError($error);
 		}
 
