@@ -33,6 +33,9 @@
  */
 
 .am-e-badge {
+	--text: var(--am-clr-text-badge);
+	--bg: var(--am-clr-background-badge);
+
 	box-sizing: border-box;
 	display: inline-flex;
 	justify-content: center;
@@ -44,8 +47,8 @@
 	min-width: 2.5em;
 	padding: 0 0.85em;
 	border-radius: 100px;
-	color: hsl(var(--am-clr-text-badge));
-	background-color: hsl(var(--am-clr-background-badge));
+	color: hsl(var(--text));
+	background-color: hsl(var(--bg));
 	font-weight: 820;
 
 	&:empty {
@@ -59,5 +62,10 @@
 		right: 0.4rem;
 		border-radius: 100%;
 		background-color: hsl(var(--am-clr-border-active));
+	}
+
+	[class*='--danger'] & {
+		--text: var(--am-clr-background-danger);
+		--bg: var(--am-clr-text-danger);
 	}
 }
