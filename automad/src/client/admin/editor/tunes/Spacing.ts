@@ -39,7 +39,6 @@ import {
 	createField,
 	CSS,
 	FieldTag,
-	fire,
 	html,
 	query,
 	uniqueId,
@@ -190,8 +189,6 @@ export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 		for (const [key, value] of Object.entries(this.data)) {
 			block.style[props[key as keyof typeof props]] = value;
 		}
-
-		fire('change', blockElement);
 
 		return blockElement;
 	}

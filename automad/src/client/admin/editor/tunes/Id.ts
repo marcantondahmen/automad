@@ -139,8 +139,6 @@ export class IdTune extends BaseModalTune<IdTuneData> {
 			? html`<span class="${CSS.badge}">#${this.data}</span>`
 			: '';
 
-		fire('change', blockElement);
-
 		return blockElement;
 	}
 }

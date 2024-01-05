@@ -32,14 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	createGenericModal,
-	CSS,
-	debounce,
-	EventName,
-	listen,
-	query,
-} from '@/core';
+import { createGenericModal, CSS, fire, listen, query } from '@/core';
 import { BlockTuneConstructorOptions } from '@/types';
 import { API, BlockAPI, ToolConfig } from '@editorjs/editorjs';
 import { TunesMenuConfig } from '@editorjs/editorjs/types/tools';
@@ -56,7 +49,27 @@ export abstract class BaseModalTune<DataType> {
 	/**
 	 * The tune data.
 	 */
-	protected data: DataType;
+	private _data: DataType;
+
+	/**
+	 * Set tune data.
+	 */
+	protected set data(value: DataType) {
+		const blockElement = query(':scope > *', this.block.holder);
+
+		this._data = value;
+		this.wrap(blockElement);
+		this.block.dispatchChange();
+
+		fire('change', blockElement);
+	}
+
+	/**
+	 * Get tune data.
+	 */
+	protected get data(): DataType {
+		return this._data;
+	}
 
 	/**
 	 * The tool configuration.
@@ -98,7 +111,7 @@ export abstract class BaseModalTune<DataType> {
 		this.api = api;
 		this.config = config;
 		this.block = block;
-		this.data = this.prepareData(data ?? null);
+		this._data = this.prepareData(data ?? null);
 	}
 
 	/**
@@ -141,23 +154,12 @@ export abstract class BaseModalTune<DataType> {
 	 * Called when the tune button is activated.
 	 */
 	protected onActivate(): void {
-		const blockIndex = this.api.blocks.getCurrentBlockIndex();
-		const blockElement = query(':scope > *', this.block.holder);
 		const { modal, body } = createGenericModal(this.title);
-
-		const onChange = debounce(() => {
-			this.data = this.sanitize(this.getFormData(modal));
-		}, 50);
 
 		body.appendChild(this.createForm());
 
-		listen(body, 'input change', onChange.bind(this));
-
-		listen(modal, EventName.modalClose, () => {
-			this.wrap(blockElement);
-			this.block.dispatchChange();
-			this.api.caret.setToBlock(blockIndex, 'start');
-			this.api.toolbar.toggleBlockSettings(true);
+		listen(body, 'change', () => {
+			this.data = this.sanitize(this.getFormData(body));
 		});
 
 		setTimeout(() => {

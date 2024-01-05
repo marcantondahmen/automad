@@ -39,7 +39,6 @@ import {
 	createField,
 	CSS,
 	FieldTag,
-	fire,
 	html,
 	query,
 	uniqueId,
@@ -83,13 +82,13 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 	}
 
 	/**
-	 * Extract the id from the form.
+	 * Extract the class from the form.
 	 *
-	 * @param modal
-	 * @return the id
+	 * @param container
+	 * @return the class
 	 */
-	protected getFormData(modal: HTMLElement): string {
-		const { className } = collectFieldData(modal);
+	protected getFormData(container: HTMLElement): string {
+		const { className } = collectFieldData(container);
 
 		return className;
 	}
@@ -143,10 +142,8 @@ export class ClassTune extends BaseModalTune<ClassTuneData> {
 					<span class="${CSS.badge}">
 						.${this.data.replace(/\s+/g, '.')}
 					</span>
-			  `
+				`
 			: '';
-
-		fire('change', blockElement);
 
 		return blockElement;
 	}
