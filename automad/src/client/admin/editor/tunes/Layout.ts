@@ -156,11 +156,12 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 		const content = query(':scope > .ce-block__content', blockHolder);
 		const editor = blockHolder.closest<HTMLElement>('.codex-editor');
 		const toolbar = query(':scope > .ce-toolbar', editor);
-		const settings = query('.ce-settings', toolbar);
 
 		if (!toolbar) {
 			return;
 		}
+
+		const settings = query('.ce-settings', toolbar);
 
 		if (
 			settings?.hasChildNodes() ||
