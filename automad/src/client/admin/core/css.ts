@@ -207,6 +207,7 @@ export const enum CSS {
 	layoutDashboardNavbarLeft = 'am-l-dashboard__navbar--left',
 	layoutDashboardNavbarRight = 'am-l-dashboard__navbar--right',
 	layoutDashboardSidebar = 'am-l-dashboard__sidebar',
+	layoutDashboardSidebarNavbar = 'am-l-dashboard__sidebar-navbar',
 	lauoutDashboardSidebarOpen = 'am-body-sidebar-open',
 	layoutDashboardSidebarBackdrop = 'am-l-dashboard__sidebar-backdrop',
 	layoutDashboardMain = 'am-l-dashboard__main',

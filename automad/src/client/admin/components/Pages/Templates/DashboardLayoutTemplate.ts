@@ -150,6 +150,18 @@ export const dashboardLayout = ({ main }: Partials) => {
 				class="${CSS.layoutDashboardSidebarBackdrop}"
 			></am-sidebar-toggle>
 			<am-sidebar class="${CSS.layoutDashboardSidebar}">
+				<div class="${CSS.layoutDashboardSidebarNavbar}">
+					<div class="${CSS.navbar}">
+						<am-modal-toggle
+							${Attr.modal}="#am-add-page-modal"
+							class="${CSS.navbarItem}"
+							${Attr.tooltip}="${App.text('addPage')}"
+						>
+							<span>${App.text('new')}</span>
+							<i class="bi bi-plus-lg"></i>
+						</am-modal-toggle>
+					</div>
+				</div>
 				<nav class="${CSS.nav}">
 					<span class="${CSS.navItem}">
 						<a href="${App.baseURL}" class="${CSS.navLink}">
