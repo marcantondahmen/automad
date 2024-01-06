@@ -329,4 +329,8 @@ const initLightbox = (): void => {
 	lightbox.init();
 };
 
-document.addEventListener('DOMContentLoaded', initLightbox);
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initLightbox);
+} else {
+	initLightbox();
+}
