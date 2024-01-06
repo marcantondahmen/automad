@@ -73,6 +73,7 @@ import { HeaderBlock } from '@/editor/blocks/Header';
 import { ParagraphBlock } from '@/editor/blocks/Paragraph';
 import { DuplicateTune } from '@/editor/tunes/Duplicate';
 import { MailBlock } from '@/editor/blocks/Mail';
+import { TableOfContentsBlock } from '@/editor/blocks/TableOfContents';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -198,6 +199,9 @@ export class EditorJSComponent extends BaseComponent {
 			buttons: {
 				class: ButtonsBlock,
 				inlineToolbar: true,
+			},
+			tableOfContents: {
+				class: TableOfContentsBlock,
 			},
 			code: {
 				class: CodeBlock,

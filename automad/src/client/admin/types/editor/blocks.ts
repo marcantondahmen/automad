@@ -42,6 +42,7 @@ import {
 } from '@/editor/blocks/Section';
 import { sliderEffects } from '@/editor/blocks/Slider';
 import { buttonsJustifyOptions } from '@/editor/blocks/Buttons';
+import { tableOfContentsTypes } from '@/editor/blocks/TableOfContents';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
@@ -185,4 +186,8 @@ export interface SliderBlockData {
 	autoplay: boolean;
 	effect: (typeof sliderEffects)[number];
 	breakpoints: SliderBlockBreakpoints;
+}
+
+export interface TableOfContentsBlockData {
+	type: (typeof tableOfContentsTypes)[number];
 }
