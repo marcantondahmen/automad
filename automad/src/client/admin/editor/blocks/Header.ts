@@ -83,7 +83,7 @@ export class HeaderBlock extends BaseBlock<HeaderBlockData> {
 	 * @static
 	 */
 	static get enableLineBreaks() {
-		return true;
+		return false;
 	}
 
 	/**

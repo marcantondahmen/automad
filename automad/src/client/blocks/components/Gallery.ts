@@ -302,7 +302,7 @@ class GalleryComponent extends HTMLElement {
 customElements.define(GalleryComponent.TAG_NAME, GalleryComponent);
 
 /**
- * Initialize all aglleries at once in order to allow for merged lighbox image sets.
+ * Initialize all galleries at once in order to allow for merged lighbox image sets.
  */
 const initLightbox = (): void => {
 	const lightbox = new PhotoSwipeLightbox({

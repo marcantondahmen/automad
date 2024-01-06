@@ -34,7 +34,7 @@
  */
 
 import { App, create, CSS, query } from '@/core';
-import { HeaderBlockData, ParagraphBlockData } from '@/types';
+import { ParagraphBlockData } from '@/types';
 import {
 	HTMLPasteEvent,
 	TunesMenuConfig,
@@ -85,7 +85,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 * @static
 	 */
 	static get enableLineBreaks() {
-		return true;
+		return false;
 	}
 
 	/**
