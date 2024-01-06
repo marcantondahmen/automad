@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-export { create, debounce } from 'common';
+export { create, debounce, query, queryAll, queryParents } from 'common';
 
 export * from './app';
 export * from './bindings';
