@@ -37,3 +37,4 @@ import './styles/index.less';
 import './components/Gallery';
 import './components/ImgLoader';
 import './components/Slider';
+import './components/TableOfContents';
