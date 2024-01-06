@@ -143,13 +143,29 @@ export class DragDrop {
 			const target = event.target as HTMLElement;
 			const targetBlock = target.closest<HTMLElement>('.ce-block');
 
-			if (!targetBlock) {
+			if (targetBlock) {
+				DragDrop.TARGET = targetBlock;
+				setSelection(DragDrop.TARGET);
+
 				return;
 			}
 
-			DragDrop.TARGET = targetBlock;
+			const targetEditor = target.closest<EditorJSComponent>(
+				EditorJSComponent.TAG_NAME
+			);
 
-			setSelection(targetBlock);
+			if (!targetEditor) {
+				return;
+			}
+
+			const firstBlock = query<HTMLElement>('.ce-block');
+
+			if (!firstBlock) {
+				return;
+			}
+
+			DragDrop.TARGET = firstBlock;
+			setSelection(DragDrop.TARGET);
 		});
 
 		listen(this.component, 'drop', async (event: DragEvent) => {
@@ -174,6 +190,10 @@ export class DragDrop {
 	 * Move a block. Either within a single editor or between two different editors.
 	 */
 	private static async move(): Promise<void> {
+		if (DragDrop.CURRENT.block.holder == DragDrop.TARGET) {
+			return;
+		}
+
 		if (!DragDrop.TARGET || !DragDrop.CURRENT) {
 			return;
 		}
