@@ -40,6 +40,7 @@ import {
 	createField,
 	createGenericModal,
 	createSelect,
+	createSelectField,
 	CSS,
 	debounce,
 	FieldTag,
@@ -260,29 +261,20 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 		);
 
 		const layout = create('div', [CSS.grid, CSS.gridAuto], {}, body);
-		const justify = create(
-			'div',
-			[CSS.field],
-			{},
-			layout,
-			html`
-				<div>
-					<label class="${CSS.fieldLabel}">
-						${App.text('buttonsBlockAlignment')}
-					</label>
-				</div>
-			`
-		);
 
-		createSelect(
-			[
-				{ text: App.text('alignLeft'), value: 'start' },
-				{ text: App.text('alignCenter'), value: 'center' },
-				{ text: App.text('alignRight'), value: 'end' },
-			],
-			this.data.justify,
-			justify,
-			'justify'
+		createSelectField(
+			App.text('buttonsBlockAlignment'),
+			createSelect(
+				[
+					{ text: App.text('alignLeft'), value: 'start' },
+					{ text: App.text('alignCenter'), value: 'center' },
+					{ text: App.text('alignRight'), value: 'end' },
+				],
+				this.data.justify,
+				null,
+				'justify'
+			),
+			layout
 		);
 
 		createField(FieldTag.numberUnit, layout, {

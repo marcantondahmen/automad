@@ -41,6 +41,7 @@ import {
 	createField,
 	createGenericModal,
 	createSelect,
+	createSelectField,
 	CSS,
 	EventName,
 	FieldTag,
@@ -250,23 +251,15 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	private renderSliderSettings(body: HTMLElement): void {
 		body.innerHTML = '';
 
-		const effect = create(
-			'div',
-			[CSS.field],
-			{},
-			body,
-			html`
-				<label class="${CSS.fieldLabel}">
-					${App.text('sliderBlockEffect')}
-				</label>
-			`
-		);
-
-		createSelect(
-			sliderEffects.map((effect) => ({ value: effect })),
-			this.data.effect,
-			effect,
-			'effect'
+		createSelectField(
+			App.text('sliderBlockEffect'),
+			createSelect(
+				sliderEffects.map((effect) => ({ value: effect })),
+				this.data.effect,
+				null,
+				'effect'
+			),
+			body
 		);
 
 		createField(FieldTag.toggle, body, {

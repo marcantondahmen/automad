@@ -124,7 +124,7 @@ export const createField = (
 						[Attr.noClick]: '',
 					},
 					parent
-			  )
+				)
 			: parent
 	);
 
@@ -470,6 +470,37 @@ export const createSelect = (
 			${renderedOptions}
 		</select>
 	`;
+
+	return select;
+};
+
+/**
+ * Create a field wrapper for a given select component and
+ * then return that select component
+ *
+ * @param label
+ * @param select
+ * @param container
+ * @return the wrapped select component
+ */
+export const createSelectField = (
+	label: string,
+	select: SelectComponent,
+	container: HTMLElement
+): SelectComponent => {
+	const field = create(
+		'div',
+		[CSS.field],
+		{},
+		container,
+		html`
+			<div>
+				<label class="${CSS.fieldLabel}">${label}</label>
+			</div>
+		`
+	);
+
+	field.appendChild(select);
 
 	return select;
 };
