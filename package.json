@@ -38,7 +38,7 @@
     "@yaireo/tagify": "^4.17.6",
     "bootstrap-icons": "^1.11.1",
     "browser-sync": "^3.0.2",
-    "browser-sync-webpack-plugin": "^2.3.0",
+    "browser-sync-v3-webpack-plugin": "^0.1.0",
     "codeflask": "^1.4.1",
     "codex-tooltip": "^1.0.5",
     "css-loader": "^6.7.3",
