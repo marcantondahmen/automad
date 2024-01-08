@@ -36,7 +36,7 @@
 import NestedList from '@editorjs/nested-list';
 import { App } from '@/core';
 
-export class ListBlock extends NestedList {
+export class NestedListBlock extends NestedList {
 	/**
 	 * Get Toolbox settings.
 	 *

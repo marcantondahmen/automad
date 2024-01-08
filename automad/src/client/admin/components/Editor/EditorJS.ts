@@ -50,7 +50,7 @@ import EditorJS, { EditorConfig, I18nDictionary } from '@editorjs/editorjs';
 import { App, CSS } from '@/core';
 import { Delimiter } from '@/editor/blocks/Delimiter';
 import { ImageBlock } from '@/editor/blocks/Image';
-import { ListBlock } from '@/editor/blocks/List';
+import { NestedListBlock } from '@/editor/blocks/NestedList';
 import { QuoteBlock } from '@/editor/blocks/Quote';
 import { TableBlock } from '@/editor/blocks/Table';
 import {
@@ -171,8 +171,8 @@ export class EditorJSComponent extends BaseComponent {
 				inlineToolbar: true,
 			},
 			section: { class: SectionBlock },
-			lists: {
-				class: ListBlock,
+			nestedList: {
+				class: NestedListBlock,
 				inlineToolbar: true,
 			},
 			table: {

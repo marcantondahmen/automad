@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Lists extends AbstractBlock {
+class NestedList extends AbstractBlock {
 	/**
 	 * The list type tag
 	 */
