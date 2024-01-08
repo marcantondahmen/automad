@@ -187,7 +187,6 @@ export const enum CSS {
 	imageSelect = 'am-c-image-select',
 	imageSelectPreview = 'am-c-image-select__preview',
 	imageSelectCombo = 'am-c-image-select__combo',
-	imageSelectMove = 'am-c-image-select__move',
 
 	input = 'am-f-input',
 	inputTitle = 'am-f-input--title',
@@ -272,8 +271,6 @@ export const enum CSS {
 	overflowHidden = 'am-u-overflow-hidden',
 
 	privacyIndicator = 'am-c-privacy-indicator',
-
-	radio = 'am-f-radio',
 
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',
