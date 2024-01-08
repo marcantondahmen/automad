@@ -8,6 +8,7 @@ const config = {
 	setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
 	moduleNameMapper: {
 		'^@/(.*)$': '<rootDir>/$1',
+		'^common$': '<rootDir>/../common/index.ts',
 	},
 	modulePaths: ['<rootDir>/../../../../node_modules'],
 	transform: {
