@@ -1,6 +1,6 @@
 import { collectFieldData, create, FieldTag, query } from '@/core';
 
-test('collectFieldData', () => {
+test('collectFieldData (nested)', () => {
 	const tag = FieldTag.editor;
 	const element = create(
 		'div',
@@ -34,4 +34,48 @@ test('collectFieldData', () => {
 	expect(mainData).toEqual({ field1: 'value1', field2: 'value2' });
 	expect(editorData).toEqual({ field3: 'value3', field4: 'value4' });
 	expect(nestedData).toEqual({ field5: 'value5', field6: 'value6' });
+});
+
+test('collectFieldData (checkbox)', () => {
+	const element = create(
+		'div',
+		[],
+		{},
+		null,
+		`
+			<input name="input" value="string" />
+			<input type="checkbox" name="checkbox1" value="1" checked />
+			<input type="checkbox" name="checkbox2" value="1" />
+		`
+	);
+
+	const data = collectFieldData(element);
+
+	expect(data).toEqual({
+		input: 'string',
+		checkbox1: true,
+		checkbox2: false,
+	});
+});
+
+test('collectFieldData (radio)', () => {
+	const element = create(
+		'div',
+		[],
+		{},
+		null,
+		`
+			<input name="input" value="string" />
+			<input type="radio" name="radio" value="1" />
+			<input type="radio" name="radio" value="2" checked />
+			<input type="radio" name="radio" value="3" />
+		`
+	);
+
+	const data = collectFieldData(element);
+
+	expect(data).toEqual({
+		input: 'string',
+		radio: '2',
+	});
 });

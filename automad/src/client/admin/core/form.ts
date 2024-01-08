@@ -208,7 +208,6 @@ export const fieldGroup = ({
 
 /**
  * Collect all the form data from a given container.
- * Note that excludes all values of unchecked checkboxes and radios.
  *
  * @param container
  * @returns the collected form data
@@ -216,20 +215,24 @@ export const fieldGroup = ({
 export const collectFieldData = (container: HTMLElement): KeyValueMap => {
 	const data: KeyValueMap = {};
 
-	queryAll<HTMLInputElement>(FormDataProviders.selector, container).filter(
+	queryAll<HTMLInputElement>(FormDataProviders.selector, container).forEach(
 		(input) => {
-			const type = input.getAttribute('type');
+			const type = input.getAttribute('type') ?? '';
 			const name = input.getAttribute('name');
-			const isCheckbox = ['checkbox', 'radio'].includes(type);
 
-			if ((!isCheckbox || input.checked) && name) {
-				let value = type === 'checkbox' ? true : input.value;
+			if (name) {
+				const isCheckbox = type == 'checkbox';
+				const isRadio = type == 'radio';
 
-				if (typeof value == 'string') {
-					value = value.trim();
+				if (!isRadio || input.checked) {
+					let value = isCheckbox ? input.checked : input.value;
+
+					if (typeof value == 'string') {
+						value = value.trim();
+					}
+
+					data[name] = value;
 				}
-
-				data[name] = value;
 			}
 		}
 	);
