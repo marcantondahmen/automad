@@ -39,6 +39,7 @@ import {
 	CSS,
 	FieldTag,
 	html,
+	listen,
 	query,
 	titleCase,
 } from '@/core';
@@ -154,46 +155,53 @@ const createOptions = (
 };
 
 /**
- * Create a template select element.
+ * The template select.
  *
- * @param selectedTemplate
- * @returns the rendered element
+ * @extends BaseComponent
  */
-export const createTemplateSelect = (selectedTemplate: string): HTMLElement => {
-	const mainTheme =
-		App.themes[App.mainTheme] || App.themes[Object.keys(App.themes)[0]];
-	const themes = App.themes;
-	const wrapper = create(SelectComponent.TAG_NAME, [CSS.button], {});
+class PageTemplateSelectComponent extends BaseComponent {
+	connectedCallback(): void {
+		this.classList.add(CSS.select);
 
-	create('span', [], {}, wrapper);
+		const selectedTemplate = this.getAttribute('value');
+		const mainTheme =
+			App.themes[App.mainTheme] || App.themes[Object.keys(App.themes)[0]];
+		const themes = App.themes;
+		const label = create('span', [], {}, this);
+		const select = create(
+			'select',
+			[],
+			{
+				name: 'theme_template',
+			},
+			this
+		) as HTMLSelectElement;
 
-	const select = create(
-		'select',
-		[],
-		{
-			name: 'theme_template',
-		},
-		wrapper
-	);
+		const mainGroup = create('optgroup', [], { label: '*' }, select);
 
-	const mainGroup = create('optgroup', [], { label: '*' }, select);
+		createOptions(mainTheme?.templates ?? [], mainGroup, selectedTemplate);
 
-	createOptions(mainTheme?.templates ?? [], mainGroup, selectedTemplate);
+		Object.values(themes).forEach((theme: KeyValueMap) => {
+			const group = create('optgroup', [], { label: theme.name }, select);
 
-	Object.values(themes).forEach((theme: KeyValueMap) => {
-		const group = create('optgroup', [], { label: theme.name }, select);
+			createOptions(
+				theme.templates,
+				group,
+				selectedTemplate,
+				theme.name,
+				theme.path
+			);
+		});
 
-		createOptions(
-			theme.templates,
-			group,
-			selectedTemplate,
-			theme.name,
-			theme.path
-		);
-	});
+		const update = () => {
+			label.textContent = select.options[select.selectedIndex].text;
+		};
 
-	return wrapper;
-};
+		listen(select, 'change', update);
+
+		setTimeout(update, 0);
+	}
+}
 
 /**
  * The template field button.
@@ -275,7 +283,11 @@ export class PageTemplateComponent extends BaseComponent {
 		const body = query('am-modal-body', this);
 
 		if (Object.keys(App.themes).length > 0) {
-			body.appendChild(createTemplateSelect(selectedTemplate));
+			body.innerHTML = html`
+				<am-page-template-select
+					value="${selectedTemplate}"
+				></am-page-template-select>
+			`;
 		} else {
 			body.textContent = App.text('noThemesFound');
 		}
@@ -283,3 +295,4 @@ export class PageTemplateComponent extends BaseComponent {
 }
 
 customElements.define(FieldTag.pageTemplate, PageTemplateComponent);
+customElements.define('am-page-template-select', PageTemplateSelectComponent);

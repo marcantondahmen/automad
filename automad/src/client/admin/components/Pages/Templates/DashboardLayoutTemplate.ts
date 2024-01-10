@@ -45,7 +45,6 @@ import {
 	titleCase,
 } from '@/core';
 import { Partials } from '@/types';
-import { createTemplateSelect } from '@/components/Fields/PageTemplate';
 import { Section } from '@/components/Switcher/Switcher';
 
 export const dashboardLayout = ({ main }: Partials) => {
@@ -270,7 +269,9 @@ export const dashboardLayout = ({ main }: Partials) => {
 							<label class="${CSS.fieldLabel}"
 								>${App.text('pageTemplate')}</label
 							>
-							${createTemplateSelect('').outerHTML}
+							<am-page-template-select
+								value=""
+							></am-page-template-select>
 						</div>
 						${createField(FieldTag.toggleLarge, null, {
 							key: `new-${App.reservedFields.PRIVATE}`,
