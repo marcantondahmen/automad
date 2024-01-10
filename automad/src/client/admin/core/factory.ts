@@ -435,21 +435,6 @@ export const createSelect = (
 	attributes: KeyValueMap = {}
 ): SelectComponent => {
 	const select = create(SelectComponent.TAG_NAME, cls, {}, parent);
-	let renderedOptions = '';
-	let renderedAttributes = '';
-
-	options.forEach((option) => {
-		renderedOptions += html`
-			<option
-				value="${option.value}"
-				${selected === option.value ? 'selected' : ''}
-			>
-				${typeof option.text !== 'undefined'
-					? option.text
-					: option.value}
-			</option>
-		`;
-	});
 
 	if (name) {
 		attributes['name'] = name;
@@ -459,17 +444,11 @@ export const createSelect = (
 		attributes['id'] = id;
 	}
 
-	for (const [key, value] of Object.entries(attributes)) {
-		renderedAttributes += html` ${key}="${value}"`;
-	}
-
-	select.innerHTML = html`
-		${prefix}
-		<span class="${CSS.flexItemGrow}"></span>
-		<select ${renderedAttributes}>
-			${renderedOptions}
-		</select>
-	`;
+	select.init(options, selected, prefix, {
+		...attributes,
+		name,
+		id,
+	});
 
 	return select;
 };
@@ -481,13 +460,13 @@ export const createSelect = (
  * @param label
  * @param select
  * @param container
- * @return the wrapped select component
+ * @return an object containing the field element as well as the select component
  */
 export const createSelectField = (
 	label: string,
 	select: SelectComponent,
 	container: HTMLElement
-): SelectComponent => {
+): { select: SelectComponent; field: HTMLElement } => {
 	const field = create(
 		'div',
 		[CSS.field],
@@ -502,5 +481,5 @@ export const createSelectField = (
 
 	field.appendChild(select);
 
-	return select;
+	return { select, field };
 };
