@@ -1,8 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ foreach in pagelist @>
-	<p>
-		<a href="@{ url }"><b>@{ title }</b></a>
-		<br>
-		@{ tags }
-	</p>
-<@ end @>
+<ul>
+	<@ foreach in pagelist @>
+		<li>
+			<a href="@{ url }">@{ title }</a>
+		</li>
+	<@ end @>
+</ul>

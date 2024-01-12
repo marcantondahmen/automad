@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,32 +52,32 @@ class Pagelist extends AbstractBlock {
 	/**
 	 * Render a pagelist block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
+	public static function render(object $block, Automad $Automad): string {
 		$Pagelist = $Automad->getPagelist();
 
 		// Reset pagelist.
 		$Pagelist->config($Pagelist->getDefaults());
 
 		$defaults = array(
+			'file' => '',
+			'sortField' => ':index',
+			'sortOrder' => 'asc',
 			'type' => '',
-			'matchUrl' => '',
 			'excludeHidden' => true,
+			'excludeCurrent' => false,
+			'matchUrl' => '',
 			'filter' => '',
 			'template' => '',
-			'excludeCurrent' => true,
 			'limit' => null,
 			'offset' => 0,
-			'sortKey' => ':path',
-			'sortOrder' => 'asc',
-			'file' => ''
 		);
 
-		$options = array_merge($defaults, (array) $data);
-		$options['sort'] = $options['sortKey'] . ' ' . $options['sortOrder'];
+		$options = array_merge($defaults, (array) $block->data);
+		$options['sort'] = $options['sortField'] . ' ' . $options['sortOrder'];
 
 		if (!empty($options['matchUrl'])) {
 			$options['match'] = json_encode(array('url' => '/(' . $options['matchUrl'] . ')/'));
@@ -91,8 +92,8 @@ class Pagelist extends AbstractBlock {
 		}
 
 		$html = Snippet::render((object) $options, $Automad);
-		$class = self::classAttr();
+		$attr = Attr::render($block->tunes);
 
-		return "<am-pagelist $class>$html</am-pagelist>";
+		return "<am-pagelist $attr>$html</am-pagelist>";
 	}
 }
