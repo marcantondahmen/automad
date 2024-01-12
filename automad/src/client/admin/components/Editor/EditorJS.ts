@@ -76,6 +76,7 @@ import { MailBlock } from '@/editor/blocks/Mail';
 import { TableOfContentsBlock } from '@/editor/blocks/TableOfContents';
 import { PagelistBlock } from '@/editor/blocks/Pagelist';
 import { FilelistBlock } from '@/editor/blocks/Filelist';
+import { SnippetBlock } from '@/editor/blocks/Snippet';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -222,6 +223,10 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			filelist: {
 				class: FilelistBlock,
+			},
+			snippet: {
+				class: SnippetBlock,
+				tunes: [],
 			},
 			embed: {
 				class: Embed,

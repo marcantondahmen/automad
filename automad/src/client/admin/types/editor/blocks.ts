@@ -209,6 +209,11 @@ export interface SliderBlockData {
 	breakpoints: SliderBlockBreakpoints;
 }
 
+export interface SnippetBlockData {
+	file: string;
+	snippet: string;
+}
+
 export interface TableOfContentsBlockData {
 	type: (typeof tableOfContentsTypes)[number];
 }
