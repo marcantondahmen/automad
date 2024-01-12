@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,20 +52,20 @@ class Filelist extends AbstractBlock {
 	/**
 	 * Render a filelist block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
+	public static function render(object $block, Automad $Automad): string {
 		$Filelist = $Automad->getFilelist();
 
 		$defaults = array(
+			'file' => '',
 			'glob' => '*.*',
-			'sort' => 'asc',
-			'file' => ''
+			'sortOrder' => 'asc'
 		);
 
-		$options = array_merge($defaults, (array) $data);
+		$options = array_merge($defaults, (array) $block->data);
 		$Filelist->config($options);
 
 		$options['file'] = AM_DIR_PACKAGES . $options['file'];
@@ -74,8 +75,8 @@ class Filelist extends AbstractBlock {
 		}
 
 		$html = Snippet::render((object) $options, $Automad);
-		$class = self::classAttr();
+		$attr = Attr::render($block->tunes);
 
-		return "<am-filelist $class>$html</am-filelist>";
+		return "<am-filelist $attr>$html</am-filelist>";
 	}
 }
