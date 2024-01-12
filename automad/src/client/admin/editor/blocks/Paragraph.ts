@@ -39,6 +39,7 @@ import {
 	HTMLPasteEvent,
 	TunesMenuConfig,
 } from '@editorjs/editorjs/types/tools';
+import { config } from 'webpack';
 import { BaseBlock } from './BaseBlock';
 
 export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
@@ -137,7 +138,10 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 		create(
 			'div',
 			[CSS.editorBlockParagraph],
-			{ contenteditable: 'true' },
+			{
+				contenteditable: 'true',
+				placeholder: this.config.placeholder || '',
+			},
 			this.wrapper
 		).innerHTML = this.data.text;
 
