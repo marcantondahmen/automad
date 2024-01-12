@@ -83,6 +83,12 @@ export interface CodeBlockData {
 	language: CodeLanguage;
 }
 
+export interface FilelistBlockData {
+	file: string;
+	glob: string;
+	sortOrder: 'asc' | 'desc';
+}
+
 export interface HeaderBlockData {
 	level: 1 | 2 | 3 | 4 | 5 | 6;
 	text: string;
