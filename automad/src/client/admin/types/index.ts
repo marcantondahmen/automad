@@ -140,6 +140,12 @@ export interface NotifyOptions {
 	className?: string;
 }
 
+export interface PackageDirectoryItems {
+	pagelist: string[];
+	filelist: string[];
+	snippets: string[];
+}
+
 export interface Partials {
 	[key: string]: string;
 }

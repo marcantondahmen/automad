@@ -45,6 +45,7 @@ use Automad\Core\Session;
 use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;
 use Automad\System\Fields;
+use Automad\System\PackageCollection;
 use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -99,6 +100,11 @@ class State {
 			'pages' => $Automad->getNavigationMetaData(),
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
+			'files' => array(
+				'pagelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
+				'filelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),
+				'snippets' => PackageCollection::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/'),
+			),
 			'system' => array(
 				'cache' => array(
 					'enabled' => AM_CACHE_ENABLED,

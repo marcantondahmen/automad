@@ -74,6 +74,7 @@ import { ParagraphBlock } from '@/editor/blocks/Paragraph';
 import { DuplicateTune } from '@/editor/tunes/Duplicate';
 import { MailBlock } from '@/editor/blocks/Mail';
 import { TableOfContentsBlock } from '@/editor/blocks/TableOfContents';
+import { PagelistBlock } from '@/editor/blocks/Pagelist';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -214,6 +215,9 @@ export class EditorJSComponent extends BaseComponent {
 			mail: {
 				class: MailBlock,
 				inlineToolbar: true,
+			},
+			pagelist: {
+				class: PagelistBlock,
 			},
 			embed: {
 				class: Embed,

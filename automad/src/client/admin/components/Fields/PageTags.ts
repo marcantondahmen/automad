@@ -33,7 +33,7 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import { App, create, CSS, FieldTag } from '@/core';
+import { App, create, CSS, debounce, FieldTag } from '@/core';
 import { PageDataFormComponent } from '@/components/Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';
 
@@ -80,6 +80,14 @@ class PageTagsComponent extends BaseFieldComponent {
 
 			form.onChange();
 		});
+
+		// Update global tags in the app state.
+		tagify.on(
+			'change',
+			debounce(() => {
+				App.updateState();
+			}, 2000)
+		);
 	}
 }
 

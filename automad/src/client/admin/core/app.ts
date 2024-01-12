@@ -40,7 +40,6 @@ import {
 	fire,
 	getSearchParam,
 	listen,
-	notifySuccess,
 	PackageManagerController,
 	query,
 	remoteTrigger,
@@ -52,6 +51,7 @@ import {
 import {
 	InputElement,
 	KeyValueMap,
+	PackageDirectoryItems,
 	Pages,
 	SystemSettings,
 	ThemeCollection,
@@ -135,6 +135,15 @@ export class App {
 	 */
 	static get feedURL(): string {
 		return App.getState('feed');
+	}
+
+	/**
+	 * The files object.
+	 *
+	 * @static
+	 */
+	static get files(): PackageDirectoryItems {
+		return App.getState('files');
 	}
 
 	/**

@@ -51,6 +51,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class PackageCollection {
 	/**
+	 * The cached array of items in the packages directory.
+	 */
+	private static array $packageDirectoryItems = array();
+
+	/**
 	 * Get the full list of available packages and their install/update state.
 	 *
 	 * @return array the list of packages
@@ -87,7 +92,7 @@ class PackageCollection {
 			}
 		}
 
-		return array_map(function ($pkg) use ($installed, $outdated) {
+		return array_map(function ($pkg) use ($installed, $outdated): array {
 			if (!empty($pkg['name'])) {
 				$name = $pkg['name'];
 				$isOutdated = array_key_exists($name, $outdated);
@@ -118,6 +123,26 @@ class PackageCollection {
 		}
 
 		return array();
+	}
+
+	/**
+	 * Get all items in the packages directory, optionally filtered by a regex string.
+	 *
+	 * @param string $filter
+	 * @return array A filtered list with all items in the packages directory
+	 */
+	public static function getPackagesDirectoryItems(string $filter = '') {
+		if (empty(self::$packageDirectoryItems)) {
+			$packagesDir = AM_BASE_DIR . AM_DIR_PACKAGES;
+
+			self::$packageDirectoryItems = FileSystem::listDirectoryRecursively($packagesDir, $packagesDir);
+		}
+
+		if ($filter) {
+			return array_values(preg_grep($filter, self::$packageDirectoryItems));
+		}
+
+		return self::$packageDirectoryItems;
 	}
 
 	/**

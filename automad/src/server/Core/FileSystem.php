@@ -50,11 +50,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class FileSystem {
 	/**
-	 * The cached array of items in the packages directory.
-	 */
-	private static array $packageDirectoryItems = array();
-
-	/**
 	 * Append a suffix to a path just before the trailing slash.
 	 *
 	 * @param string $path

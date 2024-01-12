@@ -43,6 +43,7 @@ import {
 import { sliderEffects } from '@/editor/blocks/Slider';
 import { buttonsJustifyOptions } from '@/editor/blocks/Buttons';
 import { tableOfContentsTypes } from '@/editor/blocks/TableOfContents';
+import { pagelistTypes } from '@/editor/blocks/Pagelist';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
@@ -111,6 +112,20 @@ export interface MailBlockData {
 	labelSubject: string;
 	labelBody: string;
 	labelSend: string;
+}
+
+export interface PagelistBlockData {
+	file: string;
+	sortField: string;
+	sortOrder: 'asc' | 'desc';
+	type: (typeof pagelistTypes)[number];
+	excludeHidden: boolean;
+	excludeCurrent: boolean;
+	matchUrl: string;
+	filter: string;
+	template: string;
+	limit: number;
+	offset: number;
 }
 
 export interface ParagraphBlockData {
