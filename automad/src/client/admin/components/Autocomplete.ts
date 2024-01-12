@@ -33,12 +33,7 @@
  */
 
 import { BaseComponent } from '@/components/Base';
-import {
-	AutocompleteItem,
-	AutocompleteItemData,
-	KeyValueMap,
-	PageMetaData,
-} from '@/types';
+import { AutocompleteItem, AutocompleteItemData, KeyValueMap } from '@/types';
 import {
 	App,
 	create,
@@ -52,37 +47,10 @@ import {
 } from '@/core';
 
 /**
- * Compile the autocompletion data.
- *
- * @returns the autocomplete data
- */
-const autocompleteData = (): AutocompleteItemData[] => {
-	const data: AutocompleteItemData[] = [];
-	const pages: PageMetaData[] = Object.values(App.pages);
-
-	pages.sort((a: KeyValueMap, b: KeyValueMap) =>
-		a.lastModified < b.lastModified
-			? 1
-			: b.lastModified < a.lastModified
-			? -1
-			: 0
-	);
-
-	pages.forEach((page: PageMetaData) => {
-		data.push({
-			value: page.url,
-			title: page.title,
-		});
-	});
-
-	return data;
-};
-
-/**
  * An input field with page autocompletion.
  *
  * @example
- * <am-autocomplete></am-autocomplete>
+ * <am-autocomplete name="..." ${Attr.data}="item1, item2" $Attr.min="2"></am-autocomplete>
  *
  * @extends BaseComponent
  */
@@ -93,14 +61,23 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['placeholder'];
+		return ['placeholder', 'name', 'value'];
 	}
 
 	/**
 	 * The autocomplete data.
 	 */
 	protected get data(): AutocompleteItemData[] {
-		return autocompleteData();
+		const data: AutocompleteItemData[] = [];
+		const dataCsv = this.getAttribute(Attr.data) ?? '';
+
+		dataCsv.split(',').forEach((item) => {
+			const value = item.trim();
+
+			data.push({ value, title: value });
+		});
+
+		return data;
 	}
 
 	/**
@@ -126,7 +103,9 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * The minimum input value length to trigger the dropdown.
 	 */
-	protected minInputLength = 1;
+	protected get minInputLength() {
+		return parseInt(this.getAttribute(Attr.min) ?? '1');
+	}
 
 	/**
 	 * The maximum number of displayed items.
@@ -217,16 +196,24 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @returns the input element
 	 */
 	protected createInput(): HTMLInputElement {
+		const attributes: KeyValueMap = { type: 'text' };
 		const placeholder: string = App.text(
 			this.elementAttributes.placeholder
 		);
 
-		return create(
-			'input',
-			this.inputClasses,
-			{ type: 'text', placeholder },
-			this
-		);
+		if (placeholder) {
+			attributes['placeholder'] = placeholder;
+		}
+
+		if (this.elementAttributes.name) {
+			attributes['name'] = this.elementAttributes.name;
+		}
+
+		if (this.elementAttributes.value) {
+			attributes['value'] = this.elementAttributes.value;
+		}
+
+		return create('input', this.inputClasses, attributes, this);
 	}
 
 	/**
@@ -236,18 +223,7 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @returns the created element
 	 */
 	protected createItemElement(item: KeyValueMap): HTMLElement {
-		return create(
-			'a',
-			[this.linkClass],
-			{},
-			null,
-			html`
-				<am-icon-text
-					${Attr.icon}="link"
-					${Attr.text}="$${item.title}"
-				></am-icon-text>
-			`
-		);
+		return create('a', [this.linkClass], {}, null, html`$${item.title}`);
 	}
 
 	/**
@@ -311,10 +287,10 @@ export class AutocompleteComponent extends BaseComponent {
 	protected onKeyDownEvent(event: KeyboardEvent): void {
 		switch (event.keyCode) {
 			case 38:
-				this.prev();
+				this.prev(event);
 				break;
 			case 40:
-				this.next();
+				this.next(event);
 				break;
 			case 13:
 				this.select(event);
@@ -428,7 +404,10 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * Highlight and save the index of the previous item in the dropdown.
 	 */
-	prev(): void {
+	prev(event: Event): void {
+		event.stopImmediatePropagation();
+		event.preventDefault();
+
 		this.selectedIndex--;
 
 		if (this.selectedIndex < 0) {
@@ -441,7 +420,10 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * Highlight and save the index of the next item in the dropdown.
 	 */
-	next(): void {
+	next(event: Event): void {
+		event.stopImmediatePropagation();
+		event.preventDefault();
+
 		if (this.selectedIndex === null) {
 			this.selectedIndex = 0;
 		} else {
@@ -461,6 +443,7 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @param event
 	 */
 	select(event: Event): void {
+		event.stopImmediatePropagation();
 		event.preventDefault();
 
 		if (this.selectedIndex !== null) {

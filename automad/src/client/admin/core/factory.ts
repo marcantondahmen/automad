@@ -60,7 +60,7 @@ import { PageDataFormComponent } from '@/components/Forms/PageDataForm';
 import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
 import { Section } from '@/components/Switcher/Switcher';
 import { SharedDataFormComponent } from '@/components/Forms/SharedDataForm';
-import { AutocompleteComponent } from '@/components/Autocomplete';
+import { AutocompleteUrlComponent } from '@/components/AutocompleteUrl';
 import { BaseFieldComponent } from '@/components/Fields/BaseField';
 import { SelectComponent } from '@/components/Select';
 import { EditorConfig } from '@editorjs/editorjs';
@@ -346,23 +346,21 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 	const binding = Bindings.get(bindingName);
 
 	const autocomplete = create(
-		'am-autocomplete',
+		'am-autocomplete-url',
 		[],
 		{},
 		body
-	) as AutocompleteComponent;
+	) as AutocompleteUrlComponent;
 
-	create('am-modal-close', [CSS.button], {}, footer).textContent =
-		App.text('cancel');
+	create('am-modal-close', [CSS.button], {}, footer, App.text('cancel'));
 
 	const buttonOk = create(
 		'button',
 		[CSS.button, CSS.buttonPrimary],
 		{},
-		footer
+		footer,
+		App.text('ok')
 	);
-
-	buttonOk.textContent = App.text('ok');
 
 	listen(modal, EventName.modalOpen, () => {
 		autocomplete.input.value = '';

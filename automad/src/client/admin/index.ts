@@ -154,6 +154,7 @@ import './components/System/UserName';
 
 import './components/Alert';
 import './components/Autocomplete';
+import './components/AutocompleteUrl';
 import './components/Checkbox';
 import './components/CustomIconCheckbox';
 import './components/Copy';

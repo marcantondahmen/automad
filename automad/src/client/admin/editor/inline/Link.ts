@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { AutocompleteComponent } from '@/components/Autocomplete';
+import { AutocompleteUrlComponent } from '@/components/AutocompleteUrl';
 import { ToggleComponent } from '@/components/Fields/Toggle';
 import {
 	App,
@@ -94,7 +94,7 @@ export class LinkInline extends BaseInline {
 	/**
 	 * The autocomplete component.
 	 */
-	private autocomplete: AutocompleteComponent;
+	private autocomplete: AutocompleteUrlComponent;
 
 	/**
 	 * The toggle component.
@@ -123,11 +123,11 @@ export class LinkInline extends BaseInline {
 		);
 
 		this.autocomplete = create(
-			'am-autocomplete',
+			'am-autocomplete-url',
 			[],
 			{},
 			inputField
-		) as AutocompleteComponent;
+		) as AutocompleteUrlComponent;
 
 		this.targetToggle = createField(FieldTag.toggle, this.wrapper, {
 			key: uniqueId(),

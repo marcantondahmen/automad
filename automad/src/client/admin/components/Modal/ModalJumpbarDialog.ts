@@ -32,10 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { AutocompleteComponent } from '@/components/Autocomplete';
 import { JumpbarItemData, KeyValueMap, PageMetaData } from '@/types';
 import { App, Attr, create, CSS, html, Route } from '@/core';
 import { Section } from '@/components/Switcher/Switcher';
+import { AutocompleteComponent } from '../Autocomplete';
 
 /**
  * Return the jumpbar autocompletion data for the search.
@@ -230,7 +230,9 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 	/**
 	 * The minimum input value length to trigger the dropdown.
 	 */
-	protected minInputLength = 0;
+	protected get minInputLength() {
+		return 0;
+	}
 
 	/**
 	 * The dropdown items CSS class.
