@@ -133,7 +133,11 @@ export class EditorComponent extends BaseFieldComponent {
 
 		this.value = value;
 
-		await this.editorJS.editor.render(value);
+		if (value.blocks.length > 0) {
+			await this.editorJS.editor.render(value);
+		} else {
+			this.editorJS.editor.clear();
+		}
 
 		this.editorJS.onRender();
 	}
