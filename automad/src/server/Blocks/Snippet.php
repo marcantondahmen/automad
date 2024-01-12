@@ -60,17 +60,19 @@ class Snippet {
 	/**
 	 * Render a snippet block.
 	 *
-	 * @param object $data
+	 * @param object{id: string, data: object, tunes: object} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
+	public static function render(object $block, Automad $Automad): string {
 		// Prevent infinite recursion.
 		if (self::$snippetIsRendering) {
 			return '';
 		}
 
 		self::$snippetIsRendering = true;
+
+		$data = $block->data;
 
 		$Runtime = new Runtime($Automad);
 		$InPage = new InPage();
