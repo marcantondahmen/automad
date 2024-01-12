@@ -186,7 +186,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 */
 	static get toolbox() {
 		return {
-			title: App.text('editorBlockSection'),
+			title: App.text('sectionBlockTitle'),
 			icon: '<i class="bi bi-layout-three-columns"></i>',
 		};
 	}
@@ -224,7 +224,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.wrapper,
 			html`
 				<span class="${CSS.editorBlockSectionLabel}">
-					${App.text('editorBlockSection')}
+					${App.text('sectionBlockTitle')}
 				</span>
 			`
 		);
