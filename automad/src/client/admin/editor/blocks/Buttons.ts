@@ -43,12 +43,14 @@ import {
 	createSelectField,
 	CSS,
 	debounce,
+	EventName,
 	FieldTag,
 	html,
+	listen,
 	query,
 	uniqueId,
 } from '@/core';
-import { ButtonsBlockButtonStyle, ButtonsBlockData } from '@/types';
+import { ButtonsBlockButtonStyle, ButtonsBlockData, Listener } from '@/types';
 import { BaseBlock } from './BaseBlock';
 
 export const buttonsJustifyOptions = ['start', 'center', 'end'] as const;
@@ -85,6 +87,11 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * The main layout container.
 	 */
 	private flex: HTMLElement;
+
+	/**
+	 * The change listener.
+	 */
+	private changeListener: Listener;
 
 	/**
 	 * The button preview containers.
@@ -377,9 +384,9 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			modal.open();
 		}, 0);
 
-		this.api.listeners.on(
+		this.changeListener = listen(
 			modal,
-			'change',
+			'change input',
 			debounce(() => {
 				this.data = {
 					...this.data,
@@ -411,5 +418,12 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			primaryText: query('[name="primaryText"]', this.flex).innerHTML,
 			secondaryText: query('[name="secondaryText"]', this.flex).innerHTML,
 		};
+	}
+
+	/**
+	 * Remove the change listener on destroy.
+	 */
+	destroy(): void {
+		this.changeListener.remove();
 	}
 }
