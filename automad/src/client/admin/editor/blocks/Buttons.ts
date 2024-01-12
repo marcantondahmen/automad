@@ -424,6 +424,6 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * Remove the change listener on destroy.
 	 */
 	destroy(): void {
-		this.changeListener.remove();
+		this.changeListener?.remove();
 	}
 }
