@@ -64,6 +64,23 @@ const defaultFile = 'default';
 
 export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 	/**
+	 * Sanitizer settings.
+	 *
+	 * @static
+	 */
+	static get sanitize() {
+		return {
+			file: false,
+			filter: false,
+			matchUrl: false,
+			template: false,
+			sortField: false,
+			sortOrder: false,
+			type: false,
+		};
+	}
+
+	/**
 	 * Toolbox settings.
 	 */
 	static get toolbox() {
@@ -73,6 +90,9 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 		};
 	}
 
+	/**
+	 * The tag change listener.
+	 */
 	protected tagChangeListener: Listener;
 
 	/**
@@ -127,6 +147,11 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 		return this.wrapper;
 	}
 
+	/**
+	 * Render the settings form.
+	 *
+	 * @param container
+	 */
 	private renderForm(container: HTMLElement): void {
 		const files = App.files.pagelist.reduce(
 			(res: SelectComponentOption[], value) => [
@@ -267,10 +292,18 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 		return collectFieldData(this.wrapper) as PagelistBlockData;
 	}
 
+	/**
+	 * Remove the tag change listener on destroy.
+	 */
 	destroy(): void {
 		this.tagChangeListener?.remove();
 	}
 
+	/**
+	 * Render the tag select field.
+	 *
+	 * @param grid
+	 */
 	private renderTagSelectField(grid: HTMLElement): void {
 		const getTags = () => {
 			return App.tags.reduce(

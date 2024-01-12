@@ -43,7 +43,6 @@ import {
 	createSelectField,
 	CSS,
 	debounce,
-	EventName,
 	FieldTag,
 	html,
 	listen,
