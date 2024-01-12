@@ -230,7 +230,6 @@ export const requestAPI = async (
 			abortController.signal
 		);
 
-		abortListener.remove();
 		responseData = await response.json();
 
 		if (typeof callback === 'function') {
@@ -244,6 +243,7 @@ export const requestAPI = async (
 		responseData = {};
 	}
 
+	abortListener.remove();
 	PendingRequests.remove();
 
 	const log = getLogger();
