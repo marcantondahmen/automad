@@ -54,7 +54,6 @@ test('collectFieldData (checkbox)', () => {
 	expect(data).toEqual({
 		input: 'string',
 		checkbox1: true,
-		checkbox2: false,
 	});
 });
 
