@@ -289,7 +289,13 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 	 * @return the saved data
 	 */
 	save(): PagelistBlockData {
-		return collectFieldData(this.wrapper) as PagelistBlockData;
+		const data = collectFieldData(this.wrapper) as PagelistBlockData;
+
+		return {
+			excludeCurrent: false,
+			excludeHidden: false,
+			...data,
+		};
 	}
 
 	/**
