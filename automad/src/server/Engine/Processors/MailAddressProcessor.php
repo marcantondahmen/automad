@@ -64,7 +64,7 @@ class MailAddressProcessor {
 
 		$str = preg_replace_callback(
 			'/<body.+<\/body>/s',
-			array('self', 'processBody'),
+			array(self::class, 'processBody'),
 			$str
 		);
 
