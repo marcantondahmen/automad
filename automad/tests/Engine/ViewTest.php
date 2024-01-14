@@ -71,6 +71,7 @@ class ViewTest extends TestCase {
 								'<script src="' . AM_BASE_URL . '/automad/dist/blocks/main.bundle.js?m=' .
 								filemtime(AM_BASE_DIR . '/automad/dist/blocks/main.bundle.js') .
 								'" type="text/javascript"></script>' .
+								'<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '" />' .
 								'<link rel="stylesheet" href="' .
 								AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css?m=' .
 								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/styles.css') .
