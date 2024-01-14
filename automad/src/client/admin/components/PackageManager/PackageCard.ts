@@ -53,26 +53,6 @@ import { BaseComponent } from '@/components/Base';
 const packageBrowser = 'https://packages.automad.org';
 
 /**
- * Get the tumbnail for a package.
- *
- * @param repository
- * @returns the thumbnail URL
- */
-const getThumbnail = async (repository: string): Promise<string> => {
-	const response = await requestAPI(
-		PackageManagerController.getThumbnail,
-		{
-			repository,
-		},
-		true,
-		null,
-		true
-	);
-
-	return response.data?.thumbnail;
-};
-
-/**
  * Perform a package manager action.
  *
  * @param pkg
@@ -227,7 +207,11 @@ const createPreview = (
 	pkg: Package,
 	href: string,
 	container: HTMLElement
-): HTMLElement => {
+): void => {
+	const renderIcon = (container: HTMLElement) => {
+		create('i', ['bi', 'bi-box-seam'], {}, container);
+	};
+
 	const link = create(
 		'a',
 		[CSS.cardTeaser],
@@ -247,7 +231,19 @@ const createPreview = (
 		create('span', badgeCls, {}, link, badgeText.join(' '));
 	}
 
-	return create('i', ['bi', 'bi-box-seam'], {}, link);
+	if (pkg.image) {
+		const img = create('img', [], { src: pkg.image }, link);
+
+		listen(img, 'error', () => {
+			img.remove();
+
+			renderIcon(link);
+		});
+
+		return;
+	}
+
+	renderIcon(link);
 };
 
 /**
@@ -311,17 +307,9 @@ class PackageCardComponent extends BaseComponent {
 		const href = `${packageBrowser}/${pkg.name}`;
 
 		createHeader(pkg, href, this);
-		const icon = createPreview(pkg, href, this);
-
+		createPreview(pkg, href, this);
 		createDescription(pkg, this);
 		createFooter(pkg, this);
-
-		const thumbnail = await getThumbnail(pkg.repository);
-
-		if (thumbnail) {
-			create('img', [], { src: thumbnail }, icon.parentElement);
-			icon.remove();
-		}
 	}
 }
 

@@ -79,22 +79,6 @@ class PackageManagerController {
 	}
 
 	/**
-	 * Get the thumbnail for a given package repository.
-	 *
-	 * @return Response the response object
-	 */
-	public static function getThumbnail(): Response {
-		// Close session here already in order to prevent blocking other requests.
-		session_write_close();
-		ignore_user_abort(true);
-
-		$Response = new Response();
-		$repository = Request::post('repository');
-
-		return $Response->setData(array('thumbnail' => Package::getThumbnail($repository)));
-	}
-
-	/**
 	 * Install a package.
 	 *
 	 * @return Response the response object
@@ -116,30 +100,6 @@ class PackageManagerController {
 		Cache::clear();
 
 		return $Response->setSuccess(Text::get('packageInstalledSuccess') . '<br>' . $package);
-	}
-
-	/**
-	 * Pre-fetch all package thumbnails in the background.
-	 *
-	 * @return Response
-	 */
-	public static function preFetchThumbnails(): Response {
-		$Response = new Response();
-
-		// Close session here already in order to prevent blocking other requests.
-		session_write_close();
-		ignore_user_abort(true);
-		set_time_limit(0);
-		ini_set('memory_limit', '-1');
-
-		$packages = json_decode(Fetch::get(AM_PACKAGE_REPO_QUERY));
-		$thumbnails = array();
-
-		foreach ($packages->results as $package) {
-			$thumbnails[] = Package::getThumbnail($package->repository);
-		}
-
-		return $Response->setData(array('thumbnails' => $thumbnails));
 	}
 
 	/**

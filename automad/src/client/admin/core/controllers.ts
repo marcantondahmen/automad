@@ -79,9 +79,7 @@ export const enum MailConfigController {
 export const enum PackageManagerController {
 	getOutdated = 'PackageManagerController::getOutdated',
 	getPackageCollection = 'PackageManagerController::getPackageCollection',
-	getThumbnail = 'PackageManagerController::getThumbnail',
 	install = 'PackageManagerController::install',
-	preFetchThumbnails = 'PackageManagerController::preFetchThumbnails',
 	remove = 'PackageManagerController::remove',
 	update = 'PackageManagerController::update',
 	updateAll = 'PackageManagerController::updateAll',

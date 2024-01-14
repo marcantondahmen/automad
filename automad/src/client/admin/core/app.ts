@@ -42,7 +42,6 @@ import {
 	listen,
 	PackageManagerController,
 	query,
-	remoteTrigger,
 	requestAPI,
 	setSearchParam,
 	State,
@@ -302,10 +301,6 @@ export class App {
 			EventName.appStateRequireUpdate,
 			this.updateState.bind(this)
 		);
-
-		setTimeout(() => {
-			remoteTrigger(PackageManagerController.preFetchThumbnails);
-		}, 2000);
 	}
 
 	/**

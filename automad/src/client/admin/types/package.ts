@@ -37,6 +37,8 @@ export interface Package {
 	description: string;
 	url: string;
 	repository: string;
+	image?: string;
+	readme?: string;
 	outdated?: boolean;
 	installed?: boolean;
 	latest?: string;

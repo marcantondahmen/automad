@@ -37,7 +37,6 @@
 namespace Automad\System;
 
 use Automad\API\Response;
-use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,22 +60,8 @@ class PackageCollection {
 	 * @return array the list of packages
 	 */
 	public static function get(): array {
-		$next = AM_PACKAGE_REPO_QUERY;
-		$packages = array();
-
-		while (!empty($next)) {
-			$data = json_decode(Fetch::get($next), true);
-			$next = '';
-
-			if (!empty($data)) {
-				$next = $data['next'];
-
-				if (!empty($data['results'])) {
-					$packages = array_merge($packages, $data['results']);
-				}
-			}
-		}
-
+		$apiResponse = Fetch::get('https://api.packages.automad.org');
+		$packages = json_decode($apiResponse, true);
 		$outdated = array();
 		$installed = array();
 
@@ -92,7 +77,7 @@ class PackageCollection {
 			}
 		}
 
-		return array_map(function ($pkg) use ($installed, $outdated): array {
+		return array_map(function (array $pkg) use ($installed, $outdated): array {
 			if (!empty($pkg['name'])) {
 				$name = $pkg['name'];
 				$isOutdated = array_key_exists($name, $outdated);

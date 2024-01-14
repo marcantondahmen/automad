@@ -276,27 +276,6 @@ export const controllerRoute = (controller: string): string => {
 };
 
 /**
- * Call a endpoint in order to trigger a remote background process.
- *
- * @param controller
- */
-export const remoteTrigger = async (controller: string) => {
-	const abortController = new AbortController();
-
-	try {
-		setTimeout(() => {
-			abortController.abort();
-		}, 50);
-
-		await request(
-			`${App.apiURL}/${controllerRoute(controller)}`,
-			null,
-			abortController.signal
-		);
-	} catch {}
-};
-
-/**
  * Wait for pending requests to be finished.
  *
  * @returns a promise that resolves as soon there is no pending request
