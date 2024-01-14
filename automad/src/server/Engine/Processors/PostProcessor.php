@@ -88,12 +88,14 @@ class PostProcessor {
 	 * @return string the final output
 	 */
 	public function process(string $output): string {
+		$MailAddressProcessor = new MailAddressProcessor();
+
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
-		$output = MailAddressProcessor::obfuscate($output);
+		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);

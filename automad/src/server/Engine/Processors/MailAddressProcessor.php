@@ -48,7 +48,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class MailAddressProcessor {
-	private static bool $hasMail = false;
+	/**
+	 * A boolean that tracks if the page content includes an email address.
+	 */
+	private bool $hasMail = false;
+
+	/**
+	 * The constructor.
+	 */
+	public function __construct() {
+		$this->hasMail = false;
+	}
 
 	/**
 	 * Obfuscate all stand-alone eMail addresses matched in $str.
@@ -57,18 +67,18 @@ class MailAddressProcessor {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	public static function obfuscate(string $str): string {
+	public function obfuscate(string $str): string {
 		if (!AM_MAIL_OBFUSCATION_ENABLED) {
 			return $str;
 		}
 
 		$str = preg_replace_callback(
 			'/<body.+<\/body>/s',
-			array(self::class, 'processBody'),
+			array($this, 'processBody'),
 			$str
 		);
 
-		if (self::$hasMail) {
+		if ($this->hasMail) {
 			$str = str_replace('</head>', Asset::css('dist/mail/main.bundle.css', false) . '</head>', $str);
 			$str = str_replace('</body>', Asset::js('dist/mail/main.bundle.js', false) . '</body>', $str);
 		}
@@ -82,7 +92,7 @@ class MailAddressProcessor {
 	 * @param string $email
 	 * @return string
 	 */
-	private static function addTags(string $email): string {
+	private function addTags(string $email): string {
 		return str_replace(array('@', '.'), array('<span class="am-at"></span>', '<span class="am-dot"></span>'), $email);
 	}
 
@@ -94,7 +104,7 @@ class MailAddressProcessor {
 	 * @param string $key
 	 * @return string
 	 */
-	private static function encrypt(string $str, string $key): string {
+	private function encrypt(string $str, string $key): string {
 		$keyChars = array_map('ord', str_split($key));
 		$keyCount = count($keyChars);
 		$strChars = array_map('ord', str_split($str));
@@ -115,7 +125,7 @@ class MailAddressProcessor {
 	 * @param string $email
 	 * @return string
 	 */
-	private static function generateKey(string $email): string {
+	private function generateKey(string $email): string {
 		return substr(md5($email), 0, 8);
 	}
 
@@ -125,16 +135,16 @@ class MailAddressProcessor {
 	 * @param array $matches
 	 * @return string
 	 */
-	private static function processBody(array $matches): string {
+	private function processBody(array $matches): string {
 		$regexEmail = '[~\w_\.\+\-]+@[\w\.\-]+\.[a-zA-Z]{2,}';
 		$body = $matches[0] ?? '';
 
 		$body = preg_replace_callback(
 			'/href="mailto:(' . $regexEmail . ')"/is',
 			function ($matches) {
-				$key = self::generateKey($matches[1]);
-				$encoded = self::encrypt($matches[1], $key);
-				self::$hasMail = true;
+				$key = $this->generateKey($matches[1]);
+				$encoded = $this->encrypt($matches[1], $key);
+				$this->hasMail = true;
 
 				return 'href="#" data-eml="' . $encoded . '" data-key="' . $key . '"';
 			},
@@ -148,10 +158,10 @@ class MailAddressProcessor {
 					return $matches[0];
 				}
 
-				$key = self::generateKey($matches[2]);
-				$encoded = self::encrypt($matches[2], $key);
-				$label = self::addTags($matches[2]);
-				self::$hasMail = true;
+				$key = $this->generateKey($matches[2]);
+				$encoded = $this->encrypt($matches[2], $key);
+				$label = $this->addTags($matches[2]);
+				$this->hasMail = true;
 
 				return '<a href="#" data-eml="' . $encoded . '" data-key="' . $key . '">' . $label . '</a>';
 			},
@@ -161,9 +171,9 @@ class MailAddressProcessor {
 		$body = preg_replace_callback(
 			'/' . $regexEmail . '/',
 			function ($matches) {
-				self::$hasMail = true;
+				$this->hasMail = true;
 
-				return self::addTags($matches[0]);
+				return $this->addTags($matches[0]);
 			},
 			$body
 		);
