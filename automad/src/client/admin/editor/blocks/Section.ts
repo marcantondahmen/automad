@@ -327,6 +327,16 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 			setToolbarPosition();
 		});
+
+		this.addListener(
+			listen(document, 'click', (event: Event) => {
+				const target = event.target as HTMLElement;
+
+				if (!target?.closest(EditorJSComponent.TAG_NAME)) {
+					toolbar.classList.remove(CSS.active);
+				}
+			})
+		);
 	}
 
 	/**
