@@ -78,8 +78,8 @@ class NumberUnitInputComponent extends BaseComponent {
 	 */
 	private render(value: string): void {
 		this.classList.add(CSS.formGroup, CSS.numberUnit);
-		const number = value.replace(/([^\d\.]+)/g, '');
-		const unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
+		const number = value?.replace(/([^\d\.]+)/g, '') ?? '';
+		const unit = value?.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
 
 		const numberInput = create(
 			'input',
