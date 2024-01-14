@@ -178,8 +178,11 @@ class Extension {
 
 		foreach (array('.css', '.js') as $type) {
 			foreach (FileSystem::glob($path . '/*' . $type) as $file) {
+				/** @var string */
+				$min = str_replace($type, '.min' . $type, $file);
+
 				// Only add the non-minified version, if no minified version exists.
-				if (!file_exists(str_replace($type, '.min' . $type, $file))) {
+				if (!file_exists($min)) {
 					// Remove base directory from file path.
 					$file = Str::stripStart($file, AM_BASE_DIR);
 
