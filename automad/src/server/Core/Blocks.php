@@ -79,10 +79,16 @@ class Blocks {
 
 		foreach ($data->blocks as $block) {
 			try {
-				$width = $block->tunes->layout?->width;
-				$stretched = $block->tunes->layout?->stretched;
+				$blockIsFlexItem = false;
+				$width = '';
+				$stretched = false;
 
-				$blockIsFlexItem = ($width && !$stretched);
+				if (!empty($block->tunes)) {
+					$width = $block->tunes->layout?->width ?? '';
+					$stretched = $block->tunes->layout?->stretched ?? false;
+
+					$blockIsFlexItem = ($width && !$stretched);
+				}
 
 				if (!$flexOpen && $blockIsFlexItem) {
 					$html .= '<am-flex>';
