@@ -184,25 +184,6 @@ export class EditorComponent extends BaseFieldComponent {
 				'.ce-block'
 			)
 		);
-
-		// This is required to hide the section layout toolbar when clicking outside of the editor.
-		this.addListener(
-			listen(window, 'click', (event: Event) => {
-				event.stopPropagation();
-
-				const target = event.target as HTMLElement;
-
-				if (target.closest(FieldTag.editor)) {
-					return;
-				}
-
-				queryAll(
-					`.${CSS.editorBlockSectionToolbar}.${CSS.active}`
-				).forEach((item) => {
-					item.classList.remove(CSS.active);
-				});
-			})
-		);
 	}
 }
 
