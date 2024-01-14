@@ -43,6 +43,7 @@ import {
 	FormDataProviders,
 	listen,
 	listenToClassChange,
+	query,
 	queryAll,
 } from '@/core';
 import { BaseFieldComponent } from './BaseField';
@@ -161,7 +162,7 @@ export class EditorComponent extends BaseFieldComponent {
 			listenToClassChange(this, (mutation) => {
 				const target = mutation.target as HTMLElement;
 
-				if (target.className.indexOf('ce-block--focused') === -1) {
+				if (!target.classList.contains('ce-block--focused')) {
 					return;
 				}
 
@@ -183,6 +184,64 @@ export class EditorComponent extends BaseFieldComponent {
 				}, 10),
 				'.ce-block'
 			)
+		);
+
+		// Expand height of editor when toolbar is open.
+		this.addListener(
+			listenToClassChange(this, (mutation) => {
+				const target = mutation.target as HTMLElement;
+
+				if (!target.classList.contains('codex-editor')) {
+					return;
+				}
+
+				if (
+					!target.classList.contains('codex-editor--toolbox-opened')
+				) {
+					this.style.removeProperty('min-height');
+
+					return;
+				}
+
+				const popover = query('.ce-popover', target);
+
+				setTimeout(() => {
+					const popoverRect = popover.getBoundingClientRect();
+					const editorRect = this.getBoundingClientRect();
+					const minHeight =
+						popoverRect.top - editorRect.top + popoverRect.height;
+					this.style.minHeight = `${minHeight}px`;
+				}, 0);
+			})
+		);
+
+		// Expand height of editor when tunes popover is open.
+		this.addListener(
+			listenToClassChange(this, (mutation) => {
+				const target = mutation.target as HTMLElement;
+
+				if (!target.classList.contains('ce-popover')) {
+					return;
+				}
+
+				if (!target.closest('.ce-settings')) {
+					return;
+				}
+
+				if (!target.classList.contains('ce-popover--opened')) {
+					this.style.removeProperty('min-height');
+
+					return;
+				}
+
+				setTimeout(() => {
+					const popoverRect = target.getBoundingClientRect();
+					const editorRect = this.getBoundingClientRect();
+					const minHeight =
+						popoverRect.top - editorRect.top + popoverRect.height;
+					this.style.minHeight = `${minHeight}px`;
+				}, 0);
+			})
 		);
 	}
 }
