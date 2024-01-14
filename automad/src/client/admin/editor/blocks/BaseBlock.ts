@@ -40,7 +40,7 @@ import {
 	BlockToolData,
 } from '@editorjs/editorjs';
 import { create } from '@/core';
-import { KeyValueMap } from '@/types';
+import { KeyValueMap, Listener } from '@/types';
 
 /**
  * The abstract base block class.
@@ -81,6 +81,11 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	protected wrapper: HTMLElement;
 
 	/**
+	 * Listeners that will be removed on destroy.
+	 */
+	protected listeners: Listener[] = [];
+
+	/**
 	 * The constructor.
 	 *
 	 * @param options
@@ -108,6 +113,15 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	}
 
 	/**
+	 * Add listener.
+	 *
+	 * @param listener
+	 */
+	protected addListener(listener: Listener): void {
+		this.listeners.push(listener);
+	}
+
+	/**
 	 * Render the block.
 	 *
 	 * @return the rendered element
@@ -120,4 +134,13 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	 * @return the saved data
 	 */
 	abstract save(): BlockToolData<DataType>;
+
+	/**
+	 * Remove listeners.
+	 */
+	destroy(): void {
+		this.listeners.forEach((listener) => {
+			listener.remove();
+		});
+	}
 }

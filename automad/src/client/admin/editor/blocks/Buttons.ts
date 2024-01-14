@@ -88,11 +88,6 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	private flex: HTMLElement;
 
 	/**
-	 * The change listener.
-	 */
-	private changeListener: Listener;
-
-	/**
 	 * The button preview containers.
 	 */
 	private previews: { primary: HTMLElement; secondary: HTMLElement };
@@ -383,26 +378,28 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			modal.open();
 		}, 0);
 
-		this.changeListener = listen(
-			modal,
-			'change input',
-			debounce(() => {
-				this.data = {
-					...this.data,
-					[`${button}Style`]: Object.fromEntries(
-						Object.entries(collectFieldData(styleContainer)).filter(
-							([key, value]) => value.length > 0
-						)
-					),
-					[`${button}Link`]: link.input.value,
-					[`${button}OpenInNewTab`]: (
-						target.input as HTMLInputElement
-					).checked,
-				};
+		this.addListener(
+			listen(
+				modal,
+				'change input',
+				debounce(() => {
+					this.data = {
+						...this.data,
+						[`${button}Style`]: Object.fromEntries(
+							Object.entries(
+								collectFieldData(styleContainer)
+							).filter(([key, value]) => value.length > 0)
+						),
+						[`${button}Link`]: link.input.value,
+						[`${button}OpenInNewTab`]: (
+							target.input as HTMLInputElement
+						).checked,
+					};
 
-				this.renderButton(button);
-				this.blockAPI.dispatchChange();
-			}, 50)
+					this.renderButton(button);
+					this.blockAPI.dispatchChange();
+				}, 50)
+			)
 		);
 	}
 
@@ -417,12 +414,5 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			primaryText: query('[name="primaryText"]', this.flex).innerHTML,
 			secondaryText: query('[name="secondaryText"]', this.flex).innerHTML,
 		};
-	}
-
-	/**
-	 * Remove the change listener on destroy.
-	 */
-	destroy(): void {
-		this.changeListener?.remove();
 	}
 }

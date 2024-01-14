@@ -91,11 +91,6 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 	}
 
 	/**
-	 * The tag change listener.
-	 */
-	protected tagChangeListener: Listener;
-
-	/**
 	 * Prepare the data that is passed to the constructor.
 	 *
 	 * @param data
@@ -299,13 +294,6 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 	}
 
 	/**
-	 * Remove the tag change listener on destroy.
-	 */
-	destroy(): void {
-		this.tagChangeListener?.remove();
-	}
-
-	/**
 	 * Render the tag select field.
 	 *
 	 * @param grid
@@ -326,10 +314,8 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 			grid
 		);
 
-		this.tagChangeListener = listen(
-			window,
-			EventName.appStateChange,
-			() => {
+		this.addListener(
+			listen(window, EventName.appStateChange, () => {
 				const value = select.value;
 
 				select.options = getTags();
@@ -337,7 +323,7 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 				if (App.tags.includes(value)) {
 					select.value = value;
 				}
-			}
+			})
 		);
 	}
 }
