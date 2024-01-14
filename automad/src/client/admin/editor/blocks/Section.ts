@@ -161,6 +161,12 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private holder: EditorJSComponent = null;
 
 	/**
+	 * The actual section element.
+	 * Must be contained inside the wrapper in order to apply spacing correctly.
+	 */
+	private section: HTMLElement = null;
+
+	/**
 	 * Enable linebreaks.
 	 *
 	 * @static
@@ -215,13 +221,18 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 * @return the rendered block
 	 */
 	render(): HTMLElement {
-		this.wrapper.classList.add(CSS.editorBlockSection);
+		this.section = create(
+			'div',
+			[CSS.editorBlockSection],
+			{},
+			this.wrapper
+		);
 
 		create(
 			'span',
 			[CSS.flex],
 			{},
-			this.wrapper,
+			this.section,
 			html`
 				<span class="${CSS.editorBlockSectionLabel}">
 					${App.text('sectionBlockTitle')}
@@ -233,7 +244,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			EditorPortalComponent.TAG_NAME,
 			[],
 			{},
-			this.wrapper
+			this.section
 		);
 
 		this.holder = createEditor(
@@ -277,7 +288,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			'div',
 			[CSS.editorBlockSectionToolbar],
 			{},
-			this.wrapper
+			this.section
 		);
 
 		this.renderStylesButton(toolbar);
