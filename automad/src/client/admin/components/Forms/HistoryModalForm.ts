@@ -146,7 +146,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 			[]
 		);
 
-		createSelect(options, options[0], container, 'revision');
+		createSelect(options, options[0].value, container, 'revision');
 	}
 }
 
