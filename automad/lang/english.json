@@ -1,5 +1,6 @@
 {
 	"__lang__": "en",
+	"__translator__": "Name or Nickname of translator (and additionally some contact info for feedback)",
 	"aboutAutomad": "About Automad",
 	"add": "Add",
 	"addImage": "Add image",
@@ -415,7 +416,7 @@
 	"systemUsersAdd": "Add User",
 	"systemUsersCardInfo": "Edit your profile information, change your password or invite other users",
 	"systemUsersChangePassword": "Change Your Password",
-	"systemUsersInfo": "Here you can find all information related to your account and change your username, password or email. In order to be able to reset your password by email, please make sure that you have entered a vaild and active email address below.",
+	"systemUsersInfo": "Here you can find all information related to your account and change your username, password or email. In order to be able to reset your password by email, please make sure that you have entered a valid and active email address below.",
 	"systemUsersInvite": "Invite User by Email",
 	"systemUsersNameError": "Enter a valid username (without whitespace)",
 	"systemUsersRegistered": "Registered Users",
