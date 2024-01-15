@@ -200,8 +200,9 @@ class Composer {
 			$phar = $this->getInstallDir() . '/composer.phar';
 			$exitCode = null;
 
-			@exec("$php $phar $command 2>&1", $output, $exitCode);
-			$buffer = implode("\n", $output);
+			$execOutput = array();
+			@exec("$php $phar $command 2>&1", $execOutput, $exitCode);
+			$buffer = implode("\n", $execOutput);
 
 			Debug::log("$php $phar $command", 'Use exec() function as fallback');
 			Debug::log($exitCode, 'exec() exit code');

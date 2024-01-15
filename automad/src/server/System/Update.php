@@ -251,6 +251,7 @@ class Update {
 
 		try {
 			$data = json_decode($composerJson);
+			/** @var string */
 			$composerRequiredVersion = preg_replace('/[^\d\.]*/', '', $data->require->php);
 
 			self::log("The required PHP version is $composerRequiredVersion");

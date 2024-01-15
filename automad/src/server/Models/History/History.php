@@ -226,6 +226,7 @@ class History {
 		}
 
 		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time);
+		/** @var string */
 		$time = str_replace('T', ', ', $time);
 
 		$restoredTitle = $title . ' (' . $time . ')';
