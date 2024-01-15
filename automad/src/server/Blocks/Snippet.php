@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Snippet extends AbstractBlock {
+class Snippet {
 	/**
 	 * This variable tracks whether a snippet is called by another snippet to prevent inifinte recursive loops.
 	 */
@@ -60,7 +60,7 @@ class Snippet extends AbstractBlock {
 	/**
 	 * Render a snippet block.
 	 *
-	 * @param object{id: string, data: object} $block
+	 * @param object{id: string, data: object{file: string, snippet: string}} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */

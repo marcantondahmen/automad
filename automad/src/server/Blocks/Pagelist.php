@@ -62,37 +62,43 @@ class Pagelist extends AbstractBlock {
 		// Reset pagelist.
 		$Pagelist->config($Pagelist->getDefaults());
 
-		$defaults = array(
-			'file' => '',
-			'sortField' => ':index',
-			'sortOrder' => 'asc',
-			'type' => '',
-			'excludeHidden' => true,
-			'excludeCurrent' => false,
-			'matchUrl' => '',
-			'filter' => '',
-			'template' => '',
-			'limit' => null,
-			'offset' => 0,
+		$match = false;
+
+		if (!empty($block->data->matchUrl)) {
+			$match = json_encode(array('url' => '/(' . $block->data->matchUrl . ')/'));
+		}
+
+		$Pagelist->config(
+			array(
+				'excludeCurrent' => $block->data->excludeCurrent ?? false,
+				'excludeHidden' => $block->data->excludeHidden ?? true,
+				'filter' => $block->data->filter ?? false,
+				'limit' => $block->data->limit ?? null,
+				'match' => $match,
+				'offset' => $block->data->offset ?? 0,
+				'sort' => ($block->data->sortField ?? ':index') . ' ' . ($block->data->sortOrder ?? 'asc'),
+				'template' => $block->data->template ?? '',
+				'type' => $block->data->type ?? ''
+			)
 		);
 
-		$options = array_merge($defaults, (array) $block->data);
-		$options['sort'] = $options['sortField'] . ' ' . $options['sortOrder'];
+		$file = AM_DIR_PACKAGES . ($block->data->file ?? '');
 
-		if (!empty($options['matchUrl'])) {
-			$options['match'] = json_encode(array('url' => '/(' . $options['matchUrl'] . ')/'));
+		if (!is_file(AM_BASE_DIR . $file)) {
+			$file = '/automad/src/server/Blocks/Templates/Pagelist.php';
 		}
 
-		$Pagelist->config($options);
-
-		$options['file'] = AM_DIR_PACKAGES . $options['file'];
-
-		if (!is_readable(AM_BASE_DIR . $options['file'])) {
-			$options['file'] = '/automad/src/server/Blocks/Templates/Pagelist.php';
-		}
-
-		$html = Snippet::render((object) $options, $Automad);
 		$attr = Attr::render($block->tunes);
+		$html = Snippet::render(
+			(object) array(
+				'id' => '',
+				'data' => (object) array(
+					'file' => $file,
+					'snippet' => ''
+				)
+			),
+			$Automad
+		);
 
 		return "<am-pagelist $attr>$html</am-pagelist>";
 	}

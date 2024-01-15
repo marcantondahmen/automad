@@ -59,23 +59,30 @@ class Filelist extends AbstractBlock {
 	public static function render(object $block, Automad $Automad): string {
 		$Filelist = $Automad->getFilelist();
 
-		$defaults = array(
-			'file' => '',
-			'glob' => '*.*',
-			'sortOrder' => 'asc'
+		$Filelist->config(
+			array(
+				'glob' => $block->data->glob ?? '*.*',
+				'sort' => $block->data->sortOrder ?? 'asc'
+			)
 		);
 
-		$options = array_merge($defaults, (array) $block->data);
-		$Filelist->config($options);
+		$file = AM_DIR_PACKAGES . ($block->data->file ?? '');
 
-		$options['file'] = AM_DIR_PACKAGES . $options['file'];
-
-		if (!is_readable(AM_BASE_DIR . $options['file'])) {
-			$options['file'] = '/automad/src/server/Blocks/Templates/Filelist.php';
+		if (!is_file(AM_BASE_DIR . $file)) {
+			$file = '/automad/src/server/Blocks/Templates/Filelist.php';
 		}
 
-		$html = Snippet::render((object) $options, $Automad);
 		$attr = Attr::render($block->tunes);
+		$html = Snippet::render(
+			(object) array(
+				'id' => '',
+				'data' => (object) array(
+					'file' => $file,
+					'snippet' => ''
+				)
+			),
+			$Automad
+		);
 
 		return "<am-filelist $attr>$html</am-filelist>";
 	}
