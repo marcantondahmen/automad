@@ -59,9 +59,6 @@ class Pagelist extends AbstractBlock {
 	public static function render(object $block, Automad $Automad): string {
 		$Pagelist = $Automad->getPagelist();
 
-		// Reset pagelist.
-		$Pagelist->config($Pagelist->getDefaults());
-
 		$match = false;
 
 		if (!empty($block->data->matchUrl)) {
@@ -69,16 +66,20 @@ class Pagelist extends AbstractBlock {
 		}
 
 		$Pagelist->config(
-			array(
-				'excludeCurrent' => $block->data->excludeCurrent ?? false,
-				'excludeHidden' => $block->data->excludeHidden ?? true,
-				'filter' => $block->data->filter ?? false,
-				'limit' => $block->data->limit ?? null,
-				'match' => $match,
-				'offset' => $block->data->offset ?? 0,
-				'sort' => ($block->data->sortField ?? ':index') . ' ' . ($block->data->sortOrder ?? 'asc'),
-				'template' => $block->data->template ?? '',
-				'type' => $block->data->type ?? ''
+			array_merge(
+				$Pagelist->getDefaults(),
+				array(
+					'context' => $block->data->context ?? false,
+					'excludeCurrent' => $block->data->excludeCurrent ?? false,
+					'excludeHidden' => $block->data->excludeHidden ?? true,
+					'filter' => $block->data->filter ?? false,
+					'limit' => intval($block->data->limit ?? 10),
+					'match' => $match,
+					'offset' => intval($block->data->offset ?? 0),
+					'sort' => ($block->data->sortField ?? ':index') . ' ' . ($block->data->sortOrder ?? 'asc'),
+					'template' => $block->data->template ?? '',
+					'type' => $block->data->type ?? ''
+				)
 			)
 		);
 

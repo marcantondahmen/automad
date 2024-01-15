@@ -122,6 +122,7 @@ export interface MailBlockData {
 
 export interface PagelistBlockData {
 	file: string;
+	context: string;
 	sortField: string;
 	sortOrder: 'asc' | 'desc';
 	type: (typeof pagelistTypes)[number];

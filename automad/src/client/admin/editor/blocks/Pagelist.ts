@@ -99,6 +99,7 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 	protected prepareData(data: PagelistBlockData): PagelistBlockData {
 		return {
 			type: data.type || pagelistTypes[0],
+			context: data.context ?? '',
 			excludeHidden: data.excludeHidden ?? true,
 			excludeCurrent: data.excludeCurrent ?? false,
 			matchUrl: data.matchUrl || '',
@@ -163,7 +164,6 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 
 		const form1 = create('div', [CSS.cardForm], {}, container);
 		const form2 = create('div', [CSS.cardForm], {}, container);
-		const form3 = create('div', [CSS.cardForm], {}, container);
 
 		createSelectField(
 			App.text('pagelistBlockFile'),
@@ -172,8 +172,8 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 		);
 
 		const grid1 = create('div', [CSS.grid, CSS.gridAuto], {}, form2);
-		const grid2 = create('div', [CSS.grid, CSS.gridAuto], {}, form3);
-		const grid3 = create('div', [CSS.grid, CSS.gridAuto], {}, form3);
+		const grid2 = create('div', [CSS.grid, CSS.gridAuto], {}, form2);
+		const grid3 = create('div', [CSS.grid, CSS.gridAuto], {}, form2);
 
 		const toggle = (name: keyof typeof this.data, label: string) => {
 			const id = uniqueId();
@@ -242,21 +242,43 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 			grid2
 		);
 
+		createField(FieldTag.url, grid2, {
+			key: uniqueId(),
+			name: 'context',
+			value: this.data.context,
+			label: App.text('pagelistBlockContext'),
+		});
+
 		this.renderTagSelectField(grid2);
 
-		createField(FieldTag.number, grid2, {
-			key: uniqueId(),
-			name: 'offset',
-			value: this.data.offset,
-			label: App.text('pagelistBlockOffset'),
-		});
-
-		createField(FieldTag.number, grid2, {
-			key: uniqueId(),
-			name: 'limit',
-			value: this.data.limit,
-			label: App.text('pagelistBlockLimit'),
-		});
+		create(
+			'div',
+			[CSS.field],
+			{},
+			grid2,
+			html`
+				<div>
+					<label class="${CSS.fieldLabel}">
+						${App.text('pagelistBlockOffset')} /
+						${App.text('pagelistBlockLimit')}
+					</label>
+				</div>
+				<div class="${CSS.formGroup}">
+					<input
+						type="number"
+						class="${CSS.input} ${CSS.formGroupItem}"
+						name="offset"
+						value="${this.data.offset}"
+					/>
+					<input
+						type="number"
+						class="${CSS.input} ${CSS.formGroupItem}"
+						name="limit"
+						value="${this.data.limit}"
+					/>
+				</div>
+			`
+		);
 
 		createField(FieldTag.input, grid3, {
 			key: uniqueId(),

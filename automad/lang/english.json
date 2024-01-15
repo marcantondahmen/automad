@@ -246,6 +246,7 @@
 	"pagelistBlockTitle": "Pagelist",
 	"pagelistBlockDefaultFile": "Default",
 	"pagelistBlockFile": "Template file",
+	"pagelistBlockContext": "Parent page",
 	"pagelistBlockSortField": "Sort by",
 	"pagelistBlockSortOrder": "Sort order",
 	"pagelistBlockType": "Type",
