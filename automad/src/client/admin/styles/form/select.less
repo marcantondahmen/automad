@@ -40,7 +40,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 0.3em;
+	gap: @am-flex-gap;
 	padding: 0 @am-form-padding-x;
 
 	&&--inline {
@@ -54,6 +54,7 @@
 	}
 
 	& > span {
+		flex-grow: 1;
 		max-width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;
