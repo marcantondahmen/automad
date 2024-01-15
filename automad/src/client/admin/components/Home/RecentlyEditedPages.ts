@@ -65,9 +65,13 @@ class RecentlyEditedPagesComponent extends BaseComponent {
 	 * Request server info and render modal body.
 	 */
 	private async init(): Promise<void> {
+		this.innerHTML = '<am-spinner></am-spinner>';
+
 		const { data } = await requestAPI(
 			PageCollectionController.getRecentlyEdited
 		);
+
+		this.innerHTML = '';
 
 		this.classList.add(CSS.grid);
 		this.setAttribute('style', '--min: 12rem;');
