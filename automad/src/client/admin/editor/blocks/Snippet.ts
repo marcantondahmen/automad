@@ -75,6 +75,15 @@ export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 	}
 
 	/**
+	 * Allow to press Enter inside the text field.
+	 *
+	 * @static
+	 */
+	static get enableLineBreaks() {
+		return true;
+	}
+
+	/**
 	 * Prepare the data that is passed to the constructor.
 	 *
 	 * @param data

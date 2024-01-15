@@ -50,7 +50,7 @@ import {
 	query,
 	uniqueId,
 } from '@/core';
-import { Listener, PagelistBlockData, SelectComponentOption } from '@/types';
+import { PagelistBlockData, SelectComponentOption } from '@/types';
 import { BaseBlock } from './BaseBlock';
 
 export const pagelistTypes = [

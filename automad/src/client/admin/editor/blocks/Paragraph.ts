@@ -39,7 +39,6 @@ import {
 	HTMLPasteEvent,
 	TunesMenuConfig,
 } from '@editorjs/editorjs/types/tools';
-import { config } from 'webpack';
 import { BaseBlock } from './BaseBlock';
 
 export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
