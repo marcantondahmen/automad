@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,7 +57,7 @@ class Quote extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(object $block, Automad $Automad): string {
-		$attr = self::attr($block->tunes);
+		$attr = Attr::render($block->tunes);
 
 		return <<< HTML
 			<am-quote $attr>
