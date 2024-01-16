@@ -44,6 +44,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\I18n;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
+use Automad\Engine\Document\Head;
 use Automad\System\Fields;
 use Automad\System\Server;
 
@@ -149,7 +150,7 @@ class PostProcessor {
 			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '" />';
 		}
 
-		return str_replace('<head>', '<head>' . $meta, $str);
+		return Head::prepend($str, $meta);
 	}
 
 	/**
@@ -166,7 +167,7 @@ class PostProcessor {
 
 		if (isset($assets['.css'])) {
 			foreach ($assets['.css'] as $file) {
-				$html .= '<link rel="stylesheet" href="' . $file . '" />';
+				$html .= '<link href="' . $file . '" rel="stylesheet">';
 				Debug::log($file, 'Created tag for');
 			}
 		}
@@ -178,8 +179,7 @@ class PostProcessor {
 			}
 		}
 
-		// Prepend all items ($html) to the closing </head> tag.
-		return str_replace('</head>', $html . '</head>', $str);
+		return Head::append($str, $html);
 	}
 
 	/**

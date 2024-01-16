@@ -36,6 +36,8 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Engine\Document\Body;
+use Automad\Engine\Document\Head;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -79,8 +81,8 @@ class MailAddressProcessor {
 		);
 
 		if ($this->hasMail) {
-			$str = str_replace('</head>', Asset::css('dist/mail/main.bundle.css', false) . '</head>', $str);
-			$str = str_replace('</body>', Asset::js('dist/mail/main.bundle.js', false) . '</body>', $str);
+			$str = Head::append($str, Asset::css('dist/mail/main.bundle.css', false));
+			$str = Body::append($str, Asset::js('dist/mail/main.bundle.js', false));
 		}
 
 		return $str;

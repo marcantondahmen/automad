@@ -41,6 +41,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Core\Router;
+use Automad\Engine\Document\Body;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -87,7 +88,7 @@ class App {
 		$output = $this->render(AM_REQUEST);
 
 		if (AM_DEBUG_ENABLED) {
-			$output = str_replace('</body>', Debug::consoleLog() . '</body>', $output);
+			$output = Body::append($output, Debug::consoleLog());
 		}
 
 		exit($output);

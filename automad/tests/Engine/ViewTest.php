@@ -11,22 +11,32 @@ use PHPUnit\Framework\TestCase;
 class ViewTest extends TestCase {
 	public function dataForTestInPageRenderIsEqual() {
 		$data = array();
+		$assets = $this->getAssets();
+
 		$templates = array(
-			'email_01' => '<body>' .
-						  '<a href="#">test</a>' .
-						  '<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">' .
-						  'test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com' .
-						  '</a>' .
-						  '<a href="#">test</a>' .
-						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
-						  '</body>',
-			'email_02' => '<body>' .
-						  '<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">' .
-						  '<span></span>' .
-						  'test<span class="am-at"></span>test<span class="am-dot"></span>com' .
-						  '</a>' .
-						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
-						  '</body>',
+			'email_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<a href="#">test</a>
+								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
+								<a href="#">test</a>
+							{$assets->mailJS}{$assets->inPage}</body>
+						</html>
+						HTML,
+			'email_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
+									<span></span>
+									test<span class="am-at"></span>test<span class="am-dot"></span>com
+								</a>
+							{$assets->mailJS}{$assets->inPage}</body>
+						</html>
+						HTML,
 			'resolve_01' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
 							'<a href="/index.php/page/test">Test</a>',
 			'resolve_02' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
@@ -45,42 +55,43 @@ class ViewTest extends TestCase {
 
 	public function dataForTestRenderIsEqual() {
 		$data = array();
+		$assets = $this->getAssets();
+
 		$templates = array(
 			'comments_01' => 'Page',
-			'email_01' => '<body>' .
-						  '<a href="#">test</a>' .
-						  '<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">' .
-						  'test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com' .
-						  '</a>' .
-						  '<a href="#">test</a>' .
-						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
-						  '</body>',
-			'email_02' => '<body>' .
-						  '<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">' .
-						  '<span></span>' .
-						  'test<span class="am-at"></span>test<span class="am-dot"></span>com' .
-						  '</a>' .
-						  '<script src="/automad/dist/mail/main.bundle.js?m=' . filemtime(AM_BASE_DIR . '/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>' .
-						  '</body>',
+			'email_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}</head>
+							<body>
+								<a href="#">test</a>
+								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
+								<a href="#">test</a>
+							{$assets->mailJS}</body>
+						</html>
+						HTML,
+			'email_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}</head>
+							<body>
+								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
+									<span></span>
+									test<span class="am-at"></span>test<span class="am-dot"></span>com
+								</a>
+							{$assets->mailJS}</body>
+						</html>
+						HTML,
 			'extension_01' => 'Test',
-			'extension_02' => 	'<head>' .
-								'<meta name="Generator" content="Automad ' . AM_VERSION . '">' .
-								'<link href="' . AM_BASE_URL . '/automad/dist/blocks/main.bundle.css?m=' .
-								filemtime(AM_BASE_DIR . '/automad/dist/blocks/main.bundle.css') .
-								'" rel="stylesheet">' .
-								'<script src="' . AM_BASE_URL . '/automad/dist/blocks/main.bundle.js?m=' .
-								filemtime(AM_BASE_DIR . '/automad/dist/blocks/main.bundle.js') .
-								'" type="text/javascript"></script>' .
-								'<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '" />' .
-								'<link rel="stylesheet" href="' .
-								AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css?m=' .
-								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/styles.css') .
-								'" />' .
-								'<script type="text/javascript" src="' .
-								AM_BASE_URL . '/automad/tests/packages/vendor/extension/script.js?m=' .
-								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/script.js') .
-								'"></script>' .
-								'</head>Asset Test',
+			'extension_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->extensionCSS}{$assets->extensionJS}</head>
+							<body>
+								Asset Test
+							</body>
+						</html>
+						HTML,
 			'falsy' => '0//false/0/1',
 			'for_01' => '1, 2, 3, 4, 5',
 			'if_01' => 'True',
@@ -173,5 +184,25 @@ class ViewTest extends TestCase {
 		$rendered = trim(str_replace('\n', '', $rendered));
 
 		$this->assertEquals($expected, $rendered);
+	}
+
+	private function getAssets(): object {
+		$asset = function (string $file): string {
+			return $file . '?m=' . filemtime(AM_BASE_DIR . $file);
+		};
+
+		return (object) array(
+			'generator' => '<meta name="Generator" content="Automad ' . AM_VERSION . '">',
+			'canonical' => '<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '" />',
+			'blocksJS' => '<script src="' . $asset('/automad/dist/blocks/main.bundle.js') . '" type="text/javascript"></script>',
+			'blocksCSS' => '<link href="' . $asset('/automad/dist/blocks/main.bundle.css') . '" rel="stylesheet">',
+			'mailJS' => '<script src="' . $asset('/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>',
+			'mailCSS' => '<link href="' . $asset('/automad/dist/mail/main.bundle.css') . '" rel="stylesheet">',
+			'inPageJS' => '<script src="' . $asset('/automad/dist/inpage/main.bundle.js') . '" type="text/javascript"></script>',
+			'inPageCSS' => '<link href="' . $asset('/automad/dist/inpage/main.bundle.css') . '" rel="stylesheet">',
+			'inPage' => '<am-inpage base="" dashboard="/index.php/dashboard" page="/page" labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22systemTitle%22%3A%22System+Settings%22%7D"></am-inpage>',
+			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/packages/vendor/extension/script.js') . '"></script>',
+			'extensionCSS' => '<link href="' . $asset('/automad/tests/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
+		);
 	}
 }
