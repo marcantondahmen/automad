@@ -38,6 +38,7 @@ namespace Automad;
 
 use Automad\Core\Config;
 use Automad\Core\Debug;
+use Automad\Core\Error;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Core\Router;
@@ -58,7 +59,7 @@ class App {
 	/**
 	 * Required PHP version.
 	 */
-	private string $requiredVersion = '8.2.0';
+	private string $requiredPhpVersion = '8.2.0';
 
 	/**
 	 * The main app constructor takes care of running all required startup tests,
@@ -66,14 +67,16 @@ class App {
 	 * and displaying the final output for a request.
 	 */
 	public function __construct() {
-		$this->runVersionCheck();
-		date_default_timezone_set(@date_default_timezone_get());
 
 		require_once __DIR__ . '/Core/FileSystem.php';
 		define('AM_BASE_DIR', FileSystem::normalizeSlashes(dirname(dirname(dirname(__DIR__)))));
 
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
+
+		$this->runVersionCheck();
+
+		date_default_timezone_set(@date_default_timezone_get());
 
 		Config::overrides();
 		Config::defaults();
@@ -113,7 +116,7 @@ class App {
 	 */
 	private function runPermissionCheck(): void {
 		if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
-			exit('<h1>Permission denied!</h1><h2>The "' . AM_DIR_CACHE . '" directory must be writable by the web server!</h2>');
+			Error::exit('<h1>Permission denied!</h1><h2>The "' . AM_DIR_CACHE . '" directory must be writable by the web server!</h2>');
 		}
 	}
 
@@ -121,8 +124,8 @@ class App {
 	 * Run a basic PHP version check.
 	 */
 	private function runVersionCheck(): void {
-		if (version_compare(PHP_VERSION, $this->requiredVersion, '<')) {
-			exit("<h1>PHP out of date!</h1><h2>Please update your PHP version to $this->requiredVersion or newer!</h2>");
+		if (version_compare(PHP_VERSION, $this->requiredPhpVersion, '<')) {
+			Error::exit("<h1>PHP out of date!</h1><h2>Please update your PHP version to $this->requiredPhpVersion or newer!</h2>");
 		}
 	}
 
