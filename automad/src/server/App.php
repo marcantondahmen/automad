@@ -56,6 +56,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class App {
+	const VERSION = '2.0.0';
+
 	/**
 	 * Required PHP version.
 	 */
@@ -67,6 +69,7 @@ class App {
 	 * and displaying the final output for a request.
 	 */
 	public function __construct() {
+		define('AM_VERSION', App::VERSION);
 
 		require_once __DIR__ . '/Core/FileSystem.php';
 		define('AM_BASE_DIR', FileSystem::normalizeSlashes(dirname(dirname(dirname(__DIR__)))));
