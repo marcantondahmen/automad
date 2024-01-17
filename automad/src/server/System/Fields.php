@@ -98,6 +98,8 @@ class Fields {
 		'TAGS' => Fields::TAGS,
 		'TEMPLATE' => Fields::TEMPLATE,
 		'THEME' => Fields::THEME,
+		'TIME_CREATED' => Fields::TIME_CREATED,
+		'TIME_LAST_MODIFIED' => Fields::TIME_LAST_MODIFIED,
 		'TITLE' => Fields::TITLE,
 		'SITENAME' => Fields::SITENAME,
 		'URL' => Fields::URL
