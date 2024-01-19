@@ -369,10 +369,28 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 		);
 		style(FieldTag.color, 'hoverBorderColor', 'borderColor', hover, true);
 		create('hr', [], {}, styleContainer);
-		style(FieldTag.numberUnit, 'borderWidth', 'borderWidth');
-		style(FieldTag.numberUnit, 'borderRadius', 'borderRadius');
-		style(FieldTag.numberUnit, 'paddingVertical', 'paddingVertical');
-		style(FieldTag.numberUnit, 'paddingHorizontal', 'paddingHorizontal');
+
+		const dimensions = create(
+			'div',
+			[CSS.grid, CSS.gridAuto],
+			{},
+			styleContainer
+		);
+
+		style(FieldTag.numberUnit, 'borderWidth', 'borderWidth', dimensions);
+		style(FieldTag.numberUnit, 'borderRadius', 'borderRadius', dimensions);
+		style(
+			FieldTag.numberUnit,
+			'paddingVertical',
+			'paddingVertical',
+			dimensions
+		);
+		style(
+			FieldTag.numberUnit,
+			'paddingHorizontal',
+			'paddingHorizontal',
+			dimensions
+		);
 
 		setTimeout(() => {
 			modal.open();
