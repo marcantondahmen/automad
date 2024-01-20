@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { GalleryBlockData, SliderBlockData } from '@/types';
+import { GalleryBlockData, ImageSlideshowBlockData } from '@/types';
 
 export interface GalleryData {
 	imageSets: {
@@ -68,5 +68,5 @@ export interface SliderData {
 			preload: string;
 		};
 	}[];
-	settings: Omit<SliderBlockData, 'files'>;
+	settings: Omit<ImageSlideshowBlockData, 'files'>;
 }
