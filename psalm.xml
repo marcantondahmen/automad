@@ -21,5 +21,6 @@
 		<UnsupportedReferenceUsage errorLevel="suppress" />
 		<UnsupportedPropertyReferenceUsage errorLevel="suppress" />
 		<MoreSpecificReturnType errorLevel="suppress" />
+		<RiskyTruthyFalsyComparison errorLevel="suppress" />
 	</issueHandlers>
 </psalm>
