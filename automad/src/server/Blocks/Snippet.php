@@ -60,11 +60,11 @@ class Snippet {
 	/**
 	 * Render a snippet block.
 	 *
-	 * @param object{id: string, data: object{file: string, snippet: string}} $block
+	 * @param array{id: string, data: array{file: string, snippet: string}} $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
+	public static function render(array $block, Automad $Automad): string {
 		// Prevent infinite recursion.
 		if (self::$snippetIsRendering) {
 			return '';
@@ -72,7 +72,7 @@ class Snippet {
 
 		self::$snippetIsRendering = true;
 
-		$data = $block->data;
+		$data = $block['data'];
 
 		$Runtime = new Runtime($Automad);
 		$InPage = new InPage();
@@ -91,17 +91,17 @@ class Snippet {
 
 		$output = '';
 
-		if (!empty($data->snippet)) {
-			$output .= $TemplateProcessor->process($data->snippet, AM_BASE_DIR . AM_DIR_PACKAGES, true);
+		if (!empty($data['snippet'])) {
+			$output .= $TemplateProcessor->process($data['snippet'], AM_BASE_DIR . AM_DIR_PACKAGES, true);
 		}
 
-		if (!empty($data->file)) {
+		if (!empty($data['file'])) {
 			// Test for files with or without leading slash.
-			$file = AM_BASE_DIR . '/' . trim($data->file, '/');
+			$file = AM_BASE_DIR . '/' . trim($data['file'], '/');
 
 			if (!is_readable($file)) {
 				// Test also path without packages directory.
-				$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . trim($data->file, '/');
+				$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . trim($data['file'], '/');
 			}
 
 			if (is_readable($file)) {

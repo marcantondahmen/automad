@@ -49,7 +49,7 @@ import {
 	listen,
 	uniqueId,
 } from '@/core';
-import { SliderBlockBreakpoints, SliderBlockData } from '@/types';
+import { ImageSlideshowBreakpoints, ImageSlideshowBlockData } from '@/types';
 import { BaseBlock } from './BaseBlock';
 
 /**
@@ -59,7 +59,9 @@ import { BaseBlock } from './BaseBlock';
  */
 export const sliderEffects = ['slide', 'fade', 'cube', 'flip'] as const;
 
-const breakpointsToString = (breakpoints: SliderBlockBreakpoints): string => {
+const breakpointsToString = (
+	breakpoints: ImageSlideshowBreakpoints
+): string => {
 	return Object.keys(breakpoints).reduce((out: string, minWidth: string) => {
 		return `${out} ${minWidth}:${breakpoints[minWidth].slidesPerView}`.trim();
 	}, '');
@@ -67,8 +69,8 @@ const breakpointsToString = (breakpoints: SliderBlockBreakpoints): string => {
 
 const stringToBreakpoints = (
 	breakpointsString: string
-): SliderBlockBreakpoints => {
-	const breakpoints: SliderBlockBreakpoints = {};
+): ImageSlideshowBreakpoints => {
+	const breakpoints: ImageSlideshowBreakpoints = {};
 
 	breakpointsString.split(' ').forEach((pair: string) => {
 		const [minWidth, slidesPerView] = pair.split(':');
@@ -90,7 +92,7 @@ const stringToBreakpoints = (
  * @see {@link docs https://swiperjs.com/swiper-api#parameters}
  * @see {@link github https://github.com/nolimits4web/swiper}
  */
-export class SliderBlock extends BaseBlock<SliderBlockData> {
+export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 	/**
 	 * Sanitizer settings.
 	 *
@@ -127,7 +129,9 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	 * @param data.breakpoints
 	 * @return the slider block data
 	 */
-	protected prepareData(data: SliderBlockData): SliderBlockData {
+	protected prepareData(
+		data: ImageSlideshowBlockData
+	): ImageSlideshowBlockData {
 		return {
 			files: data.files || [],
 			imageWidthPx: data.imageWidthPx || 1200,
@@ -164,7 +168,7 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 			html`
 				<am-icon-text
 					${Attr.icon}="collection-play"
-					${Attr.text}="${SliderBlock.toolbox.title}"
+					${Attr.text}="${ImageSlideshowBlock.toolbox.title}"
 				></am-icon-text>
 			`
 		);
@@ -360,7 +364,7 @@ export class SliderBlock extends BaseBlock<SliderBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): SliderBlockData {
+	save(): ImageSlideshowBlockData {
 		return this.data;
 	}
 }

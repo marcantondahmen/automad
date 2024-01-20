@@ -47,22 +47,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Table extends AbstractBlock {
 	/**
 	 * Render a table block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
-		$attr = Attr::render($block->tunes);
-		$data = $block->data;
+	public static function render(array $block, Automad $Automad): string {
+		$attr = Attr::render($block['tunes']);
+		$data = $block['data'];
 		$html = "<am-table $attr><table>";
-		$rows = (array) $data->content;
+		$rows = (array) $data['content'];
 
-		if (!empty($data->withHeadings)) {
+		if (!empty($data['withHeadings'])) {
 			$firstRow = array_shift($rows) ?? array();
 
 			$html .= '<thead>';

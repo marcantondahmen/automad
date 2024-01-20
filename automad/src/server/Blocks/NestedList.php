@@ -47,6 +47,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class NestedList extends AbstractBlock {
 	/**
@@ -57,19 +59,19 @@ class NestedList extends AbstractBlock {
 	/**
 	 * Render a list block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
-		if ($block->data->style == 'ordered') {
+	public static function render(array $block, Automad $Automad): string {
+		if ($block['data']['style'] == 'ordered') {
 			self::$tag = 'ol';
 		} else {
 			self::$tag = 'ul';
 		}
 
-		$html = self::renderItems((array) $block->data->items);
-		$attr = Attr::render($block->tunes);
+		$html = self::renderItems((array) $block['data']['items']);
+		$attr = Attr::render($block['tunes']);
 
 		return "<am-list $attr>$html</am-list>";
 	}
@@ -85,8 +87,8 @@ class NestedList extends AbstractBlock {
 		$html = "<$tag>";
 
 		foreach ($items as $item) {
-			$content = htmlspecialchars_decode($item->content);
-			$children = self::renderItems((array) $item->items);
+			$content = htmlspecialchars_decode($item['content']);
+			$children = self::renderItems($item['items']);
 			$html .= "<li><span>$content</span>$children</li>";
 		}
 

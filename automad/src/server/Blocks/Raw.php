@@ -48,18 +48,20 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Raw extends AbstractBlock {
 	/**
 	 * Render a raw block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
-		$html = Str::markdown($block->data->code);
-		$attr = Attr::render($block->tunes);
+	public static function render(array $block, Automad $Automad): string {
+		$html = Str::markdown($block['data']['code']);
+		$attr = Attr::render($block['tunes']);
 
 		return "<am-raw $attr>$html</am-raw>";
 	}

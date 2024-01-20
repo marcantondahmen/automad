@@ -77,6 +77,7 @@ class Fields {
 	const PRIVATE = 'private';
 	const SEARCH_CONTEXT = ':searchContext';
 	const SITENAME = 'sitename';
+	const SLUG = 'slug';
 	const TAG = ':tag';
 	const TAGS = 'tags';
 	const TEMPLATE = 'template';
@@ -102,6 +103,7 @@ class Fields {
 		'TIME_LAST_MODIFIED' => Fields::TIME_LAST_MODIFIED,
 		'TITLE' => Fields::TITLE,
 		'SITENAME' => Fields::SITENAME,
+		'SLUG' => Fields::SLUG,
 		'URL' => Fields::URL
 	);
 

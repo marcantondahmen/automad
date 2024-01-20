@@ -37,8 +37,9 @@
 namespace Automad\Models\Search;
 
 use Automad\Core\Cache;
-use Automad\Core\DataFile;
+use Automad\Core\DataStore;
 use Automad\Core\Debug;
+use Automad\Core\PublicationState;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -102,10 +103,17 @@ class Replacement {
 		}
 
 		foreach ($fileFieldsArray as $FileFields) {
-			$data = DataFile::read($FileFields->path) ?? array();
-			$data = $this->replaceInData($data, $FileFields->fields);
+			$DataStore = new DataStore($FileFields->path);
 
-			DataFile::write($data, $FileFields->path);
+			$draft = $DataStore->getState(PublicationState::DRAFT) ?? array();
+			$draft = $this->replaceInData($draft, $FileFields->fields);
+			$DataStore->setState(PublicationState::DRAFT, $draft);
+
+			$published = $DataStore->getState(PublicationState::PUBLISHED) ?? array();
+			$published = $this->replaceInData($published, $FileFields->fields);
+			$DataStore->setState(PublicationState::PUBLISHED, $published);
+
+			$DataStore->save();
 		}
 
 		Cache::clear();
@@ -116,17 +124,17 @@ class Replacement {
 	/**
 	 * Replace matches in block data recursively.
 	 *
-	 * @param array $blocks
+	 * @param array<array{type: string, data: array}> $blocks
 	 * @return array the processed blocks
 	 */
 	private function replaceInBlocksRecursively(array $blocks): array {
 		foreach ($blocks as $index => $block) {
-			if ($block->type == 'section') {
-				$block->data->content->blocks = $this->replaceInBlocksRecursively($block->data->content->blocks ?? array());
+			if ($block['type'] == 'section' && isset($block['data']['content']['blocks'])) {
+				$block['data']['content']['blocks'] = $this->replaceInBlocksRecursively($block['data']['content']['blocks']);
 			} else {
-				foreach ($block->data as $key => $value) {
+				foreach ($block['data'] as $key => $value) {
 					if (Search::isValidBlockProperty($key)) {
-						$block->data->{$key} = $this->replaceInValueRecursively($value);
+						$block['data'][$key] = $this->replaceInValueRecursively($value);
 					}
 				}
 			}
@@ -145,11 +153,12 @@ class Replacement {
 	 * @return array the processed data array
 	 */
 	private function replaceInData(array $data, array $fields): array {
+		Debug::log($data);
 		foreach ($fields as $field) {
-			if (str_starts_with($field, '+') && is_object($data[$field])) {
-				$data[$field]->blocks = $this->replaceInBlocksRecursively($data[$field]->blocks);
+			if (str_starts_with($field, '+') && is_array($data[$field])) {
+				$data[$field]['blocks'] = $this->replaceInBlocksRecursively($data[$field]['blocks']);
 
-				Debug::log($data[$field]->blocks, 'Blocks');
+				Debug::log($data[$field]['blocks'], 'Blocks');
 			} else {
 				$data[$field] = $this->replaceString($data[$field]);
 			}
@@ -165,14 +174,14 @@ class Replacement {
 	 * @return mixed $value
 	 */
 	private function replaceInValueRecursively(mixed $value): mixed {
-		if (is_array($value) || is_object($value)) {
+		if (is_array($value)) {
 			$array = array();
 
 			foreach ($value as $key => $item) {
 				$array[$key] = $this->replaceInValueRecursively($item);
 			}
 
-			return is_object($value) ? (object) $array : $array;
+			return $array;
 		}
 
 		return $this->replaceString($value);

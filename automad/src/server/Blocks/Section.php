@@ -48,21 +48,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Section extends AbstractBlock {
 	/**
 	 * Render a section editor block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
-		$data = $block->data;
+	public static function render(array $block, Automad $Automad): string {
+		$data = $block['data'];
 		$html = '';
 
-		if ($data->content) {
-			$html = Blocks::render($data->content, $Automad);
+		if ($data['content']) {
+			$html = Blocks::render($data['content'], $Automad);
 		}
 
 		$defaultStyles = array(
@@ -79,57 +81,57 @@ class Section extends AbstractBlock {
 
 		/** @var array<non-empty-literal-string, string> */
 		$styles = array_intersect_key(
-			array_filter(array_merge($defaultStyles, array_filter((array) $data->style))),
+			array_filter(array_merge($defaultStyles, array_filter($data['style']))),
 			$defaultStyles
 		);
 
-		if (!empty($data->gap)) {
-			$styles['--am-flex-gap'] = $data->gap;
+		if (!empty($data['gap'])) {
+			$styles['--am-flex-gap'] = $data['gap'];
 		}
 
-		if (!empty($data->minBlockWidth)) {
-			$styles['--am-flex-min-block-width'] = $data->minBlockWidth;
+		if (!empty($data['minBlockWidth'])) {
+			$styles['--am-flex-min-block-width'] = $data['minBlockWidth'];
 		}
 
-		if (!empty($data->justify)) {
-			$classes[] = "am-justify-{$data->justify}";
+		if (!empty($data['justify'])) {
+			$classes[] = "am-justify-{$data['justify']}";
 		}
 
-		if (!empty($data->align)) {
-			$classes[] = "am-align-{$data->align}";
+		if (!empty($data['align'])) {
+			$classes[] = "am-align-{$data['align']}";
 		}
 
-		if (!empty($data->style)) {
-			if (!empty($data->style->backgroundImage)) {
-				$styles['backgroundImage'] = "url('{$data->style->backgroundImage}')";
+		if (!empty($data['style'])) {
+			if (!empty($data['style']['backgroundImage'])) {
+				$styles['backgroundImage'] = "url('{$data['style']['backgroundImage']}')";
 			}
 
-			if (!empty($data->style->overflowHidden)) {
+			if (!empty($data['style']['overflowHidden'])) {
 				$styles['overflow'] = 'hidden';
 			}
 
-			if (!empty($data->style->matchRowHeight)) {
+			if (!empty($data['style']['matchRowHeight'])) {
 				$styles['height'] = '100%';
 			}
 
-			if (!empty($data->style->shadow)) {
+			if (!empty($data['style']['shadow'])) {
 				$styles['boxShadow'] = 'var(--am-section-shadow)';
 			}
 
-			if (!empty($data->style->color)) {
-				$styles['--am-section-color'] = $data->style->color;
+			if (!empty($data['style']['color'])) {
+				$styles['--am-section-color'] = $data['style']['color'];
 			}
 
-			if (!empty($data->style->borderColor)) {
-				$styles['--am-section-border-color'] = $data->style->borderColor;
+			if (!empty($data['style']['borderColor'])) {
+				$styles['--am-section-border-color'] = $data['style']['borderColor'];
 			}
 
-			if (!empty($data->style->card)) {
+			if (!empty($data['style']['card'])) {
 				$classes[] = 'am-card';
 			}
 		}
 
-		$attr = Attr::render($block->tunes, $classes, $styles);
+		$attr = Attr::render($block['tunes'], $classes, $styles);
 
 		return <<< HTML
 			<am-section $attr>

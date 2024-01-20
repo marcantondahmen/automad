@@ -39,8 +39,11 @@ import {
 	create,
 	createField,
 	createFieldSections,
+	EventName,
 	fieldGroup,
 	FieldTag,
+	fire,
+	listen,
 	prepareFieldGroups,
 } from '@/core';
 import {
@@ -114,6 +117,18 @@ export class SharedDataFormComponent extends FormComponent {
 		this.sections = createFieldSections(this);
 
 		super.init();
+
+		this.addListener(
+			listen(window, EventName.contentPublished, () => {
+				if (!this.bindings) {
+					return;
+				}
+
+				this.bindings.sharedDataFetchTimeBinding.value = Math.ceil(
+					new Date().getTime() / 1000
+				);
+			})
+		);
 	}
 
 	/**
@@ -128,6 +143,8 @@ export class SharedDataFormComponent extends FormComponent {
 		if (response.code !== 200) {
 			return;
 		}
+
+		fire(EventName.contentSaved);
 
 		if (this.bindings) {
 			this.bindings.sharedDataFetchTimeBinding.value = response.time;
@@ -168,7 +185,7 @@ export class SharedDataFormComponent extends FormComponent {
 			this
 		);
 
-		createField(
+		const sitenameField = createField(
 			FieldTag.title,
 			this.sections.settings,
 			{
@@ -179,6 +196,14 @@ export class SharedDataFormComponent extends FormComponent {
 			[],
 			{ required: '' }
 		);
+
+		// Used for sidebar top link.
+		new Binding('sitename', {
+			input: sitenameField.input,
+			modifier: (sitename: string) => {
+				return sitename;
+			},
+		});
 
 		createField(FieldTag.mainTheme, this.sections.settings, {
 			key: themeKey,

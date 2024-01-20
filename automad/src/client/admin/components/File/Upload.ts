@@ -216,8 +216,7 @@ class UploadComponent extends BaseComponent {
 				{
 					type: 'hidden',
 					name: 'url',
-					[Attr.bind]: 'pageUrl',
-					[Attr.bindTo]: 'value',
+					value: page,
 				},
 				form
 			);

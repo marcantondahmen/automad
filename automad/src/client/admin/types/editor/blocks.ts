@@ -40,7 +40,7 @@ import {
 	sectionBorderStyles,
 	sectionJustifyContentOptions,
 } from '@/editor/blocks/Section';
-import { sliderEffects } from '@/editor/blocks/Slider';
+import { sliderEffects } from '@/editor/blocks/ImageSlideshow';
 import { buttonsJustifyOptions } from '@/editor/blocks/Buttons';
 import { tableOfContentsTypes } from '@/editor/blocks/TableOfContents';
 import { pagelistTypes } from '@/editor/blocks/Pagelist';
@@ -190,15 +190,15 @@ export interface SectionBlockData {
 	minBlockWidth: string;
 }
 
-export interface SliderBlockBreakpoint {
+export interface ImageSlideshowBreakpoint {
 	slidesPerView: number;
 }
 
-export interface SliderBlockBreakpoints {
-	[minWidth: string]: SliderBlockBreakpoint;
+export interface ImageSlideshowBreakpoints {
+	[minWidth: string]: ImageSlideshowBreakpoint;
 }
 
-export interface SliderBlockData {
+export interface ImageSlideshowBlockData {
 	files: string[];
 	imageWidthPx: number;
 	imageHeightPx: number;
@@ -207,7 +207,7 @@ export interface SliderBlockData {
 	loop: boolean;
 	autoplay: boolean;
 	effect: (typeof sliderEffects)[number];
-	breakpoints: SliderBlockBreakpoints;
+	breakpoints: ImageSlideshowBreakpoints;
 }
 
 export interface SnippetBlockData {

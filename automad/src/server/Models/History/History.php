@@ -40,10 +40,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\DataFile;
+use Automad\Core\DataStore;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\PageIndex;
+use Automad\Core\PublicationState;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\Models\Page;
@@ -217,7 +218,9 @@ class History {
 		$revision = $this->revisions[$hash];
 
 		if ($this->pagePath === '/') {
-			DataFile::write($revision->data, $this->pagePath);
+			$DataStore = new DataStore($this->pagePath);
+			$DataStore->setState(PublicationState::DRAFT, $revision->data)->save();
+
 			$this->commit($revision->data);
 
 			Cache::clear();
@@ -236,7 +239,13 @@ class History {
 
 		FileSystem::copyPageFiles($this->pagePath, $duplicatePath);
 		PageIndex::append(dirname($duplicatePath), $duplicatePath);
-		DataFile::write($data, $duplicatePath);
+
+		$DataStore = new DataStore($duplicatePath);
+		$DataStore->setState(PublicationState::PUBLISHED, array())
+				  ->setState(PublicationState::DRAFT, $data)
+				  ->save();
+
+		Cache::clear();
 
 		return Page::dashboardUrlByPath($duplicatePath);
 	}

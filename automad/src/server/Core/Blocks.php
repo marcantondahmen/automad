@@ -46,6 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from \Automad\Blocks\AbstractBlock
  */
 class Blocks {
 	/**
@@ -69,25 +71,26 @@ class Blocks {
 	/**
 	 * Render blocks created by the EditorJS block editor.
 	 *
-	 * @param object{blocks: array<int, object{id:string, data:object, type:string, tunes:object}>} $data
+	 * @param array{blocks: array<int, BlockData>} $data
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $data, Automad $Automad): string {
+	public static function render(array $data, Automad $Automad): string {
 		$flexOpen = false;
 		$html = '';
 
-		foreach ($data->blocks as $block) {
+		foreach ($data['blocks'] as $block) {
 			try {
 				$blockIsFlexItem = false;
-				$width = '';
 				$stretched = false;
+				$width = '';
 
-				if (!empty($block->tunes)) {
-					$width = $block->tunes->layout?->width ?? '';
-					$stretched = $block->tunes->layout?->stretched ?? false;
+				if (isset($block['tunes']['layout'])) {
+					/** @var bool */
+					$stretched = $block['tunes']['layout']['stretched'] ?? false;
+					$width = $block['tunes']['layout']['width'] ?? '';
 
-					$blockIsFlexItem = ($width && !$stretched);
+					$blockIsFlexItem = ($width != '' && !$stretched);
 				}
 
 				if (!$flexOpen && $blockIsFlexItem) {
@@ -101,14 +104,14 @@ class Blocks {
 				}
 
 				$blockHtml = call_user_func_array(
-					'\\Automad\\Blocks\\' . ucfirst($block->type) . '::render',
+					'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
 					array($block, $Automad)
 				);
 
 				// Stretch block.
 				if ($stretched) {
 					$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
-				} elseif ($width) {
+				} elseif ($width != '') {
 					/** @var string */
 					$w = str_replace('/', '-', $width);
 					$blockHtml = "<am-$w>$blockHtml</am-$w>";

@@ -38,10 +38,13 @@ namespace Automad\Models;
 
 use Automad\API\RequestHandler;
 use Automad\Core\Cache;
-use Automad\Core\DataFile;
+use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\Error;
 use Automad\Core\Messenger;
+use Automad\Core\PublicationState;
+use Automad\Core\Session;
+use Automad\Core\Text;
 use Automad\Core\Value;
 use Automad\System\Fields;
 
@@ -69,8 +72,14 @@ class Shared {
 			Fields::SITENAME => $_SERVER['SERVER_NAME'] ?? 'Site'
 		);
 
+		$DataStore = new DataStore();
+
 		// Merge defaults with settings from file.
-		$this->data = array_merge($defaults, DataFile::read() ?? array());
+		$this->data = array_merge(
+			$defaults,
+			$DataStore->getState(empty(Session::getUsername())) ?? array()
+		);
+
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
 		// Check whether there is a theme defined in the Shared object data.
@@ -99,7 +108,38 @@ class Shared {
 	 * @return string
 	 */
 	public static function getFile(): string {
-		return DataFile::getFile(null);
+		$DataStore = new DataStore();
+
+		return $DataStore->getFile();
+	}
+
+	/**
+	 * Publish shared settings.
+	 *
+	 * @param Messenger $Messenger
+	 */
+	public function publish(Messenger $Messenger): void {
+		$DataStore = new DataStore();
+		$published = $DataStore->getState(PublicationState::PUBLISHED) ?? array();
+		$draft = $DataStore->getState(PublicationState::DRAFT) ?? array();
+
+		$publishedTheme = $published[Fields::THEME] ?? '';
+		$publishedSitename = $published[Fields::SITENAME] ?? '';
+		$draftTheme = $draft[Fields::THEME] ?? '';
+		$draftSitename = $draft[Fields::SITENAME] ?? '';
+
+		$DataStore->setState(PublicationState::DRAFT, array());
+		$DataStore->setState(PublicationState::PUBLISHED, $draft);
+
+		if (!$DataStore->save()) {
+			$Messenger->setError(Text::get('error_permission'));
+
+			return;
+		}
+
+		$Messenger->setSuccess(Text::get('publishedSuccessfully'));
+
+		Cache::clear();
 	}
 
 	/**
@@ -107,10 +147,15 @@ class Shared {
 	 *
 	 * @param array $data
 	 * @param Messenger $Messenger
-	 * @return bool true on success
+	 * @return bool true on in case a reload is required
 	 */
 	public function save(array $data, Messenger $Messenger): bool {
-		if (!DataFile::write($data)) {
+		$DataStore = new DataStore();
+
+		$draft = $DataStore->getState(PublicationState::DRAFT);
+		$DataStore->setState(PublicationState::DRAFT, $data);
+
+		if (!$DataStore->save()) {
 			$Messenger->setError(Text::get('error_permission'));
 
 			return false;
@@ -118,7 +163,11 @@ class Shared {
 
 		Cache::clear();
 
-		return true;
+		if (($draft[Fields::THEME] ?? '') != ($data[Fields::THEME] ?? '')) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

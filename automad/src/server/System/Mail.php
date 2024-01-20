@@ -94,14 +94,14 @@ class Mail {
 	/**
 	 * Send content of mail form.
 	 *
-	 * @param object $data
+	 * @param array $data
 	 * @param Automad $Automad
 	 * @return bool|string the sendig status
 	 */
-	public static function sendForm(object $data, Automad $Automad): bool|string {
+	public static function sendForm(array $data, Automad $Automad): bool|string {
 		// Prevent a second call.
 		if (self::$sent) {
-			return $data->success;
+			return $data['success'];
 		}
 
 		// Define field names.
@@ -111,7 +111,7 @@ class Mail {
 		$message = 'message';
 
 		// Basic checks.
-		if (empty($_POST) || empty($data->to)) {
+		if (empty($_POST) || empty($data['to'])) {
 			return false;
 		}
 
@@ -122,22 +122,22 @@ class Mail {
 
 		// Check if form fields are not empty.
 		if (empty($_POST[$from]) || empty($_POST[$subject]) || empty($_POST[$message])) {
-			return $data->error;
+			return $data['error'];
 		}
 
 		// Check if form fields are actually strings.
 		if (!is_string($_POST[$from]) || !is_string($_POST[$subject]) || !is_string($_POST[$message])) {
-			return $data->error;
+			return $data['error'];
 		}
 
 		// Prepare mail.
 		$subject = $Automad->Shared->get(Fields::SITENAME) . ': ' . strip_tags($_POST[$subject]);
 		$message = strip_tags($_POST[$message]);
 
-		if (self::send($data->to, $subject, $message, $_POST[$from])) {
+		if (self::send($data['to'], $subject, $message, $_POST[$from])) {
 			self::$sent = true;
 
-			return $data->success;
+			return $data['success'];
 		}
 
 		return '';

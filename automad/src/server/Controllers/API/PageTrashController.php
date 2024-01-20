@@ -37,7 +37,7 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Core\DataFile;
+use Automad\Core\DataStore;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Models\Page;
@@ -76,7 +76,7 @@ class PageTrashController {
 	public static function list(): Response {
 		$Response = new Response();
 		$path = AM_BASE_DIR . AM_DIR_PAGES . Page::TRASH_DIRECTORY;
-		$items = FileSystem::glob("$path/*/" . DataFile::FILENAME);
+		$items = FileSystem::glob("$path/*/" . DataStore::FILENAME);
 		$Shared = new Shared();
 		$trash = Page::TRASH_DIRECTORY;
 		$pages = array();

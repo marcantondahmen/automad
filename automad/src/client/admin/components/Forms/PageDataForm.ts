@@ -48,13 +48,15 @@ import {
 	createField,
 	createFieldSections,
 	CSS,
+	EventName,
 	fieldGroup,
 	FieldTag,
+	fire,
 	getLogger,
 	getPageURL,
 	html,
+	listen,
 	prepareFieldGroups,
-	Route,
 	setDocumentTitle,
 } from '@/core';
 import { PageTemplateComponent } from '@/components/Fields/PageTemplate';
@@ -67,78 +69,18 @@ import { BaseFieldComponent } from '@/components/Fields/BaseField';
  * @return the page bindings object
  */
 const createBindings = (response: KeyValueMap): PageBindings => {
-	const { slug, url } = response.data;
-
 	const pageDataFetchTimeBinding = new Binding('pageDataFetchTime', {
 		initial: response.time,
 	});
 
 	const slugBinding = new Binding('pageSlug', {
-		initial: slug,
-	});
-	const pageUrlBinding = new Binding('pageUrl', {
-		initial: url,
-	});
-
-	const pageUrlWithBaseBinding = new Binding('pageUrlWithBase', {
-		modifier: (url: string) => {
-			return `${App.baseURL}${url}`;
-		},
-		initial: url,
-	});
-
-	const pageLinkUIBinding = new Binding('pageLinkUI', {
-		modifier: (url: string) => {
-			return `${Route.page}?url=${encodeURIComponent(url)}`;
-		},
-		initial: url,
+		initial: response.data.fields[App.reservedFields.SLUG],
 	});
 
 	return {
 		slugBinding,
-		pageUrlBinding,
-		pageUrlWithBaseBinding,
-		pageLinkUIBinding,
 		pageDataFetchTimeBinding,
 	};
-};
-
-/**
- * Handle UI updates.
- *
- * @param update
- * @return a promise
- */
-const updateUI = async (
-	update: KeyValueMap,
-	pageBindings: PageBindings
-): Promise<void> => {
-	if (!update.origUrl) {
-		return;
-	}
-
-	const lockId = App.addNavigationLock();
-
-	const { slug, origUrl } = update;
-	const urlObject = new URL(window.location.href);
-	const {
-		pageUrlBinding,
-		pageUrlWithBaseBinding,
-		pageLinkUIBinding,
-		slugBinding,
-	} = pageBindings;
-
-	pageUrlBinding.value = origUrl;
-	pageUrlWithBaseBinding.value = origUrl;
-	pageLinkUIBinding.value = origUrl;
-	slugBinding.value = slug;
-
-	urlObject.searchParams.set('url', update.origUrl);
-	window.history.replaceState(null, null, urlObject);
-
-	await App.updateState();
-
-	App.removeNavigationLock(lockId);
 };
 
 /**
@@ -189,6 +131,18 @@ export class PageDataFormComponent extends FormComponent {
 		this.sections = createFieldSections(this);
 
 		super.init();
+
+		this.addListener(
+			listen(window, EventName.contentPublished, () => {
+				if (!this.bindings) {
+					return;
+				}
+
+				this.bindings.pageDataFetchTimeBinding.value = Math.ceil(
+					new Date().getTime() / 1000
+				);
+			})
+		);
 	}
 
 	/**
@@ -246,6 +200,7 @@ export class PageDataFormComponent extends FormComponent {
 			titleContainer
 		);
 
+		// Used in breadcrumbs and nav tree.
 		new Binding('title', {
 			input: titleField.input,
 			modifier: (title: string) => {
@@ -259,19 +214,14 @@ export class PageDataFormComponent extends FormComponent {
 			'a',
 			[],
 			{
-				href: `${App.baseURL}${fields[App.reservedFields.URL]}`,
+				href: `${App.baseURL}${url}`,
 				target: '_blank',
-				[Attr.bind]: 'pageUrlWithBase',
-				[Attr.bindTo]: 'href',
 			},
 			titleContainer
 		).innerHTML = html`
 			<span class="${CSS.iconText}">
 				<i class="bi bi-link"></i>
-				<span
-					${Attr.bind}="pageUrlWithBase"
-					${Attr.bindTo}="textContent"
-				></span>
+				<span>${App.baseURL}${url}</span>
 			</span>
 		`;
 
@@ -328,9 +278,9 @@ export class PageDataFormComponent extends FormComponent {
 				FieldTag.input,
 				section,
 				{
-					key: 'slug',
-					value: null, // Defined by binding.
-					name: 'slug',
+					key: App.reservedFields.SLUG,
+					value: fields[App.reservedFields.SLUG], // Defined by binding.
+					name: `data[${App.reservedFields.SLUG}]`,
 					label: App.text('pageSlug'),
 				},
 				[],
@@ -385,6 +335,8 @@ export class PageDataFormComponent extends FormComponent {
 			return;
 		}
 
+		fire(EventName.contentSaved);
+
 		if (this.bindings) {
 			this.bindings.pageDataFetchTimeBinding.value = response.time;
 		}
@@ -397,8 +349,10 @@ export class PageDataFormComponent extends FormComponent {
 			this.bindings = createBindings(response);
 		}
 
-		if (response.data.update) {
-			await updateUI(response.data.update, this.bindings);
+		if (response.data.updateUI) {
+			this.bindings.slugBinding.value = response.data.slug ?? '';
+
+			await App.updateState();
 
 			return;
 		}

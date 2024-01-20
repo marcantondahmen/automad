@@ -38,11 +38,13 @@ namespace Automad\Models;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\DataFile;
+use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
+use Automad\Core\PublicationState;
+use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\History\History;
@@ -195,7 +197,8 @@ class Page {
 		$data = array(
 			Fields::TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
 			Fields::PRIVATE => $isPrivate,
-			Fields::TEMPLATE => $template
+			Fields::TEMPLATE => $template,
+			Fields::SLUG => basename($newPagePath)
 		);
 
 		if ($theme != '.') {
@@ -209,8 +212,9 @@ class Page {
 		$data[Fields::TIME_CREATED] = $now;
 		$data[Fields::TIME_LAST_MODIFIED] = $now;
 
-		// Save data and add index.
-		DataFile::write($data, $newPagePath);
+		$DataStore = new DataStore($newPagePath);
+		$DataStore->setState(PublicationState::DRAFT, $data)->save();
+
 		PageIndex::append($Parent->path, $newPagePath);
 
 		return Page::dashboardUrlByPath($newPagePath);
@@ -259,7 +263,7 @@ class Page {
 		$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);
 
 		FileSystem::copyPageFiles($this->path, $duplicatePath);
-		Page::appendSuffixToTitle($duplicatePath, $suffix);
+		Page::appendSuffixToTitleAndSlug($duplicatePath, $suffix);
 		PageIndex::append(dirname($duplicatePath), $duplicatePath);
 
 		return Page::dashboardUrlByPath($duplicatePath);
@@ -314,7 +318,8 @@ class Page {
 		string $parentUrl,
 		int $level
 	): ?Page {
-		$data = DataFile::read($path);
+		$DataStrore = new DataStore($path);
+		$data = $DataStrore->getState(empty(Session::getUsername()));
 
 		if (empty($data)) {
 			return null;
@@ -366,18 +371,18 @@ class Page {
 	 * Some data (:basename ...) should only be generated when requested out of performance reasons.
 	 *
 	 * @param string $field
-	 * @param bool $returnEditorObject
-	 * @return object|string The requested value
-	 * @psalm-return ($returnEditorObject is true ? object : string)
+	 * @param bool $returnEditorArray
+	 * @return array|string The requested value
+	 * @psalm-return ($returnEditorArray is true ? array : string)
 	 */
-	public function get(string $field, bool $returnEditorObject = false): object|string {
+	public function get(string $field, bool $returnEditorArray = false): array|string {
 		// Return as editor data object from the data array.
-		if ($returnEditorObject) {
+		if ($returnEditorArray) {
 			if (array_key_exists($field, $this->data)) {
-				return Value::asEditorObject($this->data[$field]);
+				return Value::asEditorArray($this->data[$field]);
 			}
 
-			return Value::asEditorObject($this->Shared->data[$field] ?? null);
+			return Value::asEditorArray($this->Shared->data[$field] ?? null);
 		}
 
 		// Return as string value from the data array.
@@ -409,7 +414,9 @@ class Page {
 	 * @return string The full file system path
 	 */
 	public function getFile(): string {
-		return DataFile::getFile($this);
+		$DataStore = new DataStore($this->path);
+
+		return $DataStore->getFile();
 	}
 
 	/**
@@ -472,7 +479,7 @@ class Page {
 		Debug::log(array($oldPath, $newPath, $layout));
 
 		if (dirname($oldPath) !== dirname($newPath)) {
-			if ($layout) {
+			if (!is_null($layout)) {
 				$index = array_search($oldPath, $layout);
 
 				if ($index !== false) {
@@ -495,49 +502,35 @@ class Page {
 	}
 
 	/**
-	 * Save page data.
+	 * Publish a page.
 	 *
-	 * @param string $url
-	 * @param array $data
-	 * @param string $themeTemplate
-	 * @param string $slug
-	 * @return array|bool a data array in case the page was moved or its privacy has changed
+	 * @return array
 	 */
-	public function save(string $url, array $data, string $themeTemplate, string $slug): array|bool {
-		$data[Fields::TITLE] = $data[Fields::TITLE] ?? $slug;
+	public function publish(): array {
+		$DataStore = new DataStore($this->path);
 
-		$theme = dirname($themeTemplate);
-		$template = basename($themeTemplate);
-
-		$data[Fields::TEMPLATE] = $template;
-
-		if ($theme != '.') {
-			$data[Fields::THEME] = $theme;
-		}
-
-		if (!empty($data[Fields::PRIVATE])) {
-			$data[Fields::PRIVATE] = true;
-			$private = true;
-		} else {
-			$private = false;
-		}
+		$published = $DataStore->getState(PublicationState::PUBLISHED);
+		$draft = $DataStore->getState(PublicationState::DRAFT);
 
 		$now = date(Page::DATE_FORMAT);
 
-		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
-		$data[Fields::TIME_LAST_MODIFIED] = $now;
+		$draft[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
+		$draft[Fields::TIME_LAST_MODIFIED] = $now;
 
-		DataFile::write($data, $this->path);
+		$DataStore->setState(PublicationState::DRAFT, array());
+		$DataStore->setState(PublicationState::PUBLISHED, $draft);
+		$DataStore->save();
 
-		$History = History::get($this->path);
-		$History->commit($data);
+		$title = $draft[Fields::TITLE] ?? '';
+		$title = $title === '' ? basename($this->path) : $title;
+		$slug = $draft[Fields::SLUG] ?? '';
+		$newSlug = $draft[Fields::SLUG] ?? '';
+		$newPagePath = $this->path;
 
-		$newSlug = $slug;
-
-		if ($url != '/' && $data[Fields::TITLE]) {
+		if ($this->url != '/') {
 			$newSlug = Page::updateSlug(
 				$this->get(Fields::TITLE),
-				$data[Fields::TITLE],
+				$title,
 				$slug
 			);
 
@@ -551,53 +544,104 @@ class Page {
 			$newPagePath = '/';
 		}
 
-		$newTheme = '';
+		if ($slug != $newSlug) {
+			$DataStore = new DataStore($newPagePath);
 
-		if (isset($data[Fields::THEME])) {
-			$newTheme = $data[Fields::THEME];
-		}
+			$movedData = $DataStore->getState(PublicationState::PUBLISHED);
+			$movedData[Fields::SLUG] = $newSlug;
 
-		$currentTheme = '';
-
-		if (isset($this->data[Fields::THEME])) {
-			$currentTheme = $this->data[Fields::THEME];
+			$DataStore->setState(PublicationState::PUBLISHED, $movedData)->save();
 		}
 
 		Cache::clear();
 
-		if ($currentTheme != $newTheme || $this->template != $template) {
+		if (
+			$this->path != $newPagePath ||
+			$newSlug != $slug
+		) {
 			return array(
 				'redirect' => Page::dashboardUrlByPath($newPagePath)
 			);
 		}
 
-		if ($this->path != $newPagePath ||
-			$data[Fields::TITLE] != $this->data[Fields::TITLE] ||
-			$newSlug != $slug ||
-			$private != $this->private
-		) {
-			Cache::clear();
+		return array();
+	}
 
-			$Page = Page::findByPath($newPagePath);
+	/**
+	 * Save page data.
+	 *
+	 * @param array $data
+	 * @param string $themeTemplate
+	 * @return array a data array in case the page was moved or its privacy has changed
+	 */
+	public function save(array $data, string $themeTemplate): array {
+		$DataStore = new DataStore($this->path);
 
-			if ($Page) {
-				$newOrigUrl = $Page->origUrl;
-				$newUrl = $newOrigUrl;
+		$theme = dirname($themeTemplate);
+		$template = basename($themeTemplate);
 
-				if (!empty($data[Fields::URL])) {
-					$newUrl = $data[Fields::URL];
-				}
+		$data[Fields::TEMPLATE] = $template;
 
-				return array(
-					'slug' => $newSlug,
-					'url' => $newUrl,
-					'path' => $newPagePath,
-					'origUrl' => $newOrigUrl
-				);
-			}
+		if ($theme != '.') {
+			$data[Fields::THEME] = $theme;
 		}
 
-		return false;
+		$private = !empty($data[Fields::PRIVATE]);
+		$data[Fields::PRIVATE] = $private;
+
+		$published = $DataStore->getState(PublicationState::PUBLISHED);
+		$DataStore->setState(
+			PublicationState::PUBLISHED,
+			array_merge(
+				$DataStore->getState(PublicationState::PUBLISHED) ?? array(),
+				array(Fields::PRIVATE => $private)
+			)
+		);
+
+		$now = date(Page::DATE_FORMAT);
+
+		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
+		$data[Fields::TIME_LAST_MODIFIED] = $now;
+
+		$slug = $data[Fields::SLUG] ?? '';
+		$newSlug = $slug;
+
+		if ($this->url != '/' && isset($data[Fields::TITLE])) {
+			$newSlug = Page::updateSlug(
+				$this->get(Fields::TITLE),
+				$data[Fields::TITLE],
+				$slug
+			);
+		}
+
+		$data[Fields::SLUG] = $newSlug;
+
+		$DataStore->setState(PublicationState::DRAFT, $data)
+				  ->save();
+
+		$History = History::get($this->path);
+		$History->commit($data);
+
+		Cache::clear();
+
+		$newTheme = $data[Fields::THEME] ?? '';
+		$currentTheme = $this->data[Fields::THEME] ?? '';
+
+		// Soft reload in order to refresh fields in form.
+		if ($currentTheme != $newTheme || $this->template != $template) {
+			return array(
+				'redirect' => Page::dashboardUrlByPath($this->path)
+			);
+		}
+
+		if ($private != $this->private || $newSlug != $slug || $this->get(Fields::TITLE) != ($data[Fields::TITLE] ?? '')) {
+			return array(
+				'updateUI' => true,
+				'slug' => $newSlug
+			);
+		}
+
+		return array();
 	}
 
 	/**
@@ -626,14 +670,23 @@ class Page {
 	 * @param string $path
 	 * @param string $suffix
 	 */
-	private static function appendSuffixToTitle(string $path, string $suffix): void {
+	private static function appendSuffixToTitleAndSlug(string $path, string $suffix): void {
 		if ($suffix) {
-			$data = DataFile::read($path);
+			$DataStore = new DataStore($path);
+			$data = $DataStore->getState(PublicationState::DRAFT);
 
-			$data[Fields::TITLE] = $data[Fields::TITLE] ?? basename($path);
-			$data[Fields::TITLE] .= ucwords(str_replace('-', ' ', $suffix));
+			$title = $data[Fields::TITLE] ?? basename($path);
+			$data[Fields::TITLE] = $title . ucwords(str_replace('-', ' ', $suffix));
 
-			DataFile::write($data, $path);
+			$slug = Page::updateSlug(
+				$title,
+				$data[Fields::TITLE],
+				''
+			);
+
+			$data[Fields::SLUG] = $slug;
+
+			$DataStore->setState(PublicationState::DRAFT, $data)->save();
 		}
 	}
 

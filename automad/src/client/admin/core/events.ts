@@ -44,6 +44,8 @@ export const enum EventName {
 	autocompleteSelect = 'AutomadAutocompleteSelect',
 	beforeUpdateView = 'AutomadBeforeUpdateView',
 	changeByBinding = 'AutomadChangeByBinding',
+	contentSaved = 'AutomadContentSaved',
+	contentPublished = 'AutomadContentPublished',
 	dashboardThemeChange = 'AutomadDashboardThemeChange',
 	fileCollectionRender = 'AutomadFileCollectionRender',
 	filesChangeOnServer = 'AutomadFilesChangeOnServer',

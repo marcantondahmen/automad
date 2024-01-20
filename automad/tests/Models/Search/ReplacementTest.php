@@ -2,7 +2,7 @@
 
 namespace Automad\Models\Search;
 
-use Automad\Core\DataFile;
+use Automad\Test\Data;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,8 +18,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('+main'),
-				DataFile::read('/blocks'),
-				DataFile::read('/blocks-replaced')
+				Data::load('/blocks'),
+				Data::load('/blocks-replaced')
 			),
 			// Blocks, regex, not case sensitive.
 			array(
@@ -28,8 +28,8 @@ class ReplacementTest extends TestCase {
 				true,
 				false,
 				array('+main'),
-				DataFile::read('/blocks'),
-				DataFile::read('/blocks-replaced')
+				Data::load('/blocks'),
+				Data::load('/blocks-replaced')
 			),
 			// Blocks, regex, not case sensitive, invalid property.
 			array(
@@ -38,8 +38,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('+main'),
-				DataFile::read('/blocks'),
-				DataFile::read('/blocks')
+				Data::load('/blocks'),
+				Data::load('/blocks')
 			),
 			// Text, no regex, not case sensitive.
 			array(
@@ -48,8 +48,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('text'),
-				DataFile::read('/text'),
-				DataFile::read('/text-replaced')
+				Data::load('/text'),
+				Data::load('/text-replaced')
 			),
 			// Text, no regex, case sensitive.
 			array(
@@ -58,8 +58,8 @@ class ReplacementTest extends TestCase {
 				false,
 				true,
 				array('text'),
-				DataFile::read('/text'),
-				DataFile::read('/text')
+				Data::load('/text'),
+				Data::load('/text')
 			),
 			// Text, regex, case sensitive.
 			array(
@@ -68,8 +68,8 @@ class ReplacementTest extends TestCase {
 				true,
 				true,
 				array('text'),
-				DataFile::read('/text'),
-				DataFile::read('/text-replaced')
+				Data::load('/text'),
+				Data::load('/text-replaced')
 			)
 		);
 	}

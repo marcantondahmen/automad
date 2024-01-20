@@ -64,7 +64,7 @@ import { SpacingTune } from '@/editor/tunes/Spacing';
 import { CodeBlock } from '@/editor/blocks/Code';
 import { RawBlock } from '@/editor/blocks/Raw';
 import { GalleryBlock } from '@/editor/blocks/Gallery';
-import { SliderBlock } from '@/editor/blocks/Slider';
+import { ImageSlideshowBlock } from '@/editor/blocks/ImageSlideshow';
 import { ButtonsBlock } from '@/editor/blocks/Buttons';
 // @ts-ignore
 import Embed from '@editorjs/embed';
@@ -196,8 +196,8 @@ export class EditorJSComponent extends BaseComponent {
 				class: GalleryBlock,
 				inlineToolbar: false,
 			},
-			slider: {
-				class: SliderBlock,
+			imageSlideshow: {
+				class: ImageSlideshowBlock,
 				inlineToolbar: false,
 			},
 			buttons: {

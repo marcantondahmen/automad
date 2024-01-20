@@ -92,6 +92,8 @@ export const enum PageController {
 	delete = 'PageController::delete',
 	duplicate = 'PageController::duplicate',
 	move = 'PageController::move',
+	publish = 'PageController::publish',
+	getPublicationState = 'PageController::getPublicationState',
 	updateIndex = 'PageController::updateIndex',
 }
 
@@ -118,6 +120,8 @@ export const enum SessionController {
 
 export const enum SharedController {
 	data = 'SharedController::data',
+	publish = 'SharedController::publish',
+	getPublicationState = 'SharedController::getPublicationState',
 }
 
 export const enum SystemController {

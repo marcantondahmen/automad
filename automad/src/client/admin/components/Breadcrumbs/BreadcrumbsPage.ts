@@ -122,9 +122,6 @@ class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 			);
 
 			if (index == data.length - 1) {
-				link.setAttribute(Attr.bind, 'pageLinkUI');
-				link.setAttribute(Attr.bindTo, Attr.target);
-
 				link.innerHTML = html`<span ${Attr.bind}="title">
 					$${page.title}
 				</span>`;

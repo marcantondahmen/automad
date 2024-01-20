@@ -39,10 +39,11 @@ namespace Automad\Controllers\API;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\DataFile;
+use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
+use Automad\Core\PublicationState;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\Page;
@@ -146,9 +147,7 @@ class PageController {
 				// Save page and replace $Response with the returned $Response object (error or redirect).
 				return self::save(
 					$Page,
-					$url,
 					$data,
-					Request::post('slug')
 				);
 			}
 		}
@@ -157,7 +156,9 @@ class PageController {
 		$ThemeCollection = new ThemeCollection();
 		$Theme = $ThemeCollection->getThemeByKey(strval($Page->get(Fields::THEME)));
 		$keys = Fields::inCurrentTemplate($Page, $Theme);
-		$data = DataFile::read($Page->path) ?? array();
+
+		$DataStore = new DataStore($Page->path);
+		$data = $DataStore->getState(PublicationState::DRAFT) ?? array();
 
 		$fields = array_merge(
 			array_fill_keys(Fields::$reserved, ''),
@@ -170,7 +171,6 @@ class PageController {
 		return $Response->setData(
 			array(
 				'url' => $Page->origUrl,
-				'slug' => basename($Page->path),
 				'template' => $Page->getTemplate(),
 				'fields' => $fields,
 				'shared' => $Automad->Shared->data,
@@ -240,6 +240,25 @@ class PageController {
 	}
 
 	/**
+	 * Get the publication state for a given page URL.
+	 *
+	 * @return Response
+	 */
+	public static function getPublicationState(): Response {
+		$Response = new Response();
+		$url = Request::post('url');
+		$Page = Page::fromCache($url);
+
+		if (empty($Page)) {
+			return $Response;
+		}
+
+		$DataStore = new DataStore($Page->path);
+
+		return $Response->setData(array('isPublished' => $DataStore->isPublished()));
+	}
+
+	/**
 	 * Move a page.
 	 *
 	 * @return Response the response object
@@ -303,6 +322,30 @@ class PageController {
 	}
 
 	/**
+	 * Publish a page.
+	 *
+	 * @return Response
+	 */
+	public static function publish(): Response {
+		$Response = new Response();
+		$url = Request::post('url');
+		$Page = Page::fromCache($url);
+
+		if (!$Page) {
+			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
+		}
+
+		$result = $Page->publish();
+		$Response->setSuccess(Text::get('publishedSuccessfully'));
+
+		if (!empty($result['redirect'])) {
+			return $Response->setRedirect($result['redirect']);
+		}
+
+		return $Response;
+	}
+
+	/**
 	 * Update the index of a page after reordering it in the nav tree.
 	 *
 	 * @return Response the response object
@@ -343,12 +386,10 @@ class PageController {
 	 * Save a page.
 	 *
 	 * @param Page $Page
-	 * @param string $url
 	 * @param array $data
-	 * @param string $slug
 	 * @return Response the response object
 	 */
-	private static function save(Page $Page, string $url, array $data, string $slug): Response {
+	private static function save(Page $Page, array $data): Response {
 		$Response = new Response();
 		$pageFile = $Page->getFile();
 
@@ -356,7 +397,7 @@ class PageController {
 			return $Response->setError(Text::get('missingPageTitleError'));
 		}
 
-		if ($url != '/' && !is_writable(dirname(dirname($pageFile)))) {
+		if ($Page->origUrl != '/' && !is_writable(dirname(dirname($pageFile)))) {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
@@ -368,12 +409,14 @@ class PageController {
 		// form $_POST['data']. That information has to be parsed first and "subdivided".
 		$themeTemplate = self::getTemplateNameFromPost();
 
-		if ($result = $Page->save($url, $data, $themeTemplate, $slug)) {
-			if (!empty($result['redirect'])) {
-				return $Response->setRedirect($result['redirect']);
-			}
+		$result = $Page->save($data, $themeTemplate);
 
-			$Response->setData(array('update' => $result));
+		if (!empty($result['redirect'])) {
+			$Response->setRedirect($result['redirect']);
+		}
+
+		if (!empty($result)) {
+			$Response->setData($result);
 		}
 
 		return $Response;

@@ -48,17 +48,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Embed extends AbstractBlock {
 	/**
 	 * Render a embed block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
-		$data = $block->data;
+	public static function render(array $block, Automad $Automad): string {
+		$data = $block['data'];
 		$iframeAttr = <<< HTML
 			scrolling="no"
 			frameborder="no"
@@ -66,8 +68,8 @@ class Embed extends AbstractBlock {
 			allowfullscreen="true"
 		HTML;
 
-		if ($data->service == 'twitter') {
-			$url = Str::stripStart($data->embed, 'https://twitframe.com/show?url=');
+		if ($data['service'] == 'twitter') {
+			$url = Str::stripStart($data['embed'], 'https://twitframe.com/show?url=');
 
 			$html = <<< HTML
 				<blockquote class="twitter-tweet tw-align-center" style="visibility: hidden;">
@@ -75,13 +77,13 @@ class Embed extends AbstractBlock {
 				</blockquote>
 				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 			HTML;
-		} elseif (!empty($data->width)) {
-			$paddingTop = $data->height / $data->width * 100;
+		} elseif (!empty($data['width'])) {
+			$paddingTop = $data['height'] / $data['width'] * 100;
 
 			$html = <<< HTML
 				<div style="position: relative; padding-top: $paddingTop%;">
 					<iframe 
-					src="$data->embed"
+					src="{$data['embed']}"
 					$iframeAttr
 					style="position: absolute; top: 0; width: 100%; height: 100%;"
 					>
@@ -91,8 +93,8 @@ class Embed extends AbstractBlock {
 		} else {
 			$html = <<< HTML
 				<iframe 
-				src="$data->embed"
-				height="$data->height"
+				src="{$data['embed']}"
+				height="{$data['height']}"
 				$iframeAttr
 				style="width: 100%;"
 				>
@@ -100,11 +102,11 @@ class Embed extends AbstractBlock {
 			HTML;
 		}
 
-		if (!empty($data->caption)) {
-			$html .= "<figcaption>$data->caption</figcaption>";
+		if (!empty($data['caption'])) {
+			$html .= "<figcaption>{$data['caption']}</figcaption>";
 		}
 
-		$attr = Attr::render($block->tunes);
+		$attr = Attr::render($block['tunes']);
 
 		return "<am-embed $attr><figure>$html</figure></am-embed>";
 	}

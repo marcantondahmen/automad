@@ -47,53 +47,56 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Pagelist extends AbstractBlock {
 	/**
 	 * Render a pagelist block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
+	public static function render(array $block, Automad $Automad): string {
 		$Pagelist = $Automad->getPagelist();
+		$data = $block['data'];
 
 		$match = false;
 
-		if (!empty($block->data->matchUrl)) {
-			$match = json_encode(array('url' => '/(' . $block->data->matchUrl . ')/'));
+		if (!empty($block['data']['matchUrl'])) {
+			$match = json_encode(array('url' => '/(' . $block['data']['matchUrl'] . ')/'));
 		}
 
 		$Pagelist->config(
 			array_merge(
 				$Pagelist->getDefaults(),
 				array(
-					'context' => $block->data->context ?? false,
-					'excludeCurrent' => $block->data->excludeCurrent ?? false,
-					'excludeHidden' => $block->data->excludeHidden ?? true,
-					'filter' => $block->data->filter ?? false,
-					'limit' => intval($block->data->limit ?? 10),
+					'context' => $data['context'] ?? false,
+					'excludeCurrent' => $data['excludeCurrent'] ?? false,
+					'excludeHidden' => $data['excludeHidden'] ?? true,
+					'filter' => $data['filter'] ?? false,
+					'limit' => intval($data['limit'] ?? 10),
 					'match' => $match,
-					'offset' => intval($block->data->offset ?? 0),
-					'sort' => ($block->data->sortField ?? ':index') . ' ' . ($block->data->sortOrder ?? 'asc'),
-					'template' => $block->data->template ?? '',
-					'type' => $block->data->type ?? ''
+					'offset' => intval($data['offset'] ?? 0),
+					'sort' => ($data['sortField'] ?? ':index') . ' ' . ($data['sortOrder'] ?? 'asc'),
+					'template' => $data['template'] ?? '',
+					'type' => $data['type'] ?? ''
 				)
 			)
 		);
 
-		$file = AM_DIR_PACKAGES . ($block->data->file ?? '');
+		$file = AM_DIR_PACKAGES . ($data['file'] ?? '');
 
 		if (!is_file(AM_BASE_DIR . $file)) {
 			$file = '/automad/src/server/Blocks/Templates/Pagelist.php';
 		}
 
-		$attr = Attr::render($block->tunes);
+		$attr = Attr::render($block['tunes']);
 		$html = Snippet::render(
-			(object) array(
+			array(
 				'id' => '',
-				'data' => (object) array(
+				'data' => array(
 					'file' => $file,
 					'snippet' => ''
 				)

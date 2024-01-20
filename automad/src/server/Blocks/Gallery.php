@@ -51,30 +51,32 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Gallery extends AbstractBlock {
 	/**
 	 * Render a gallery block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
-		$settings = (object) array(
-			'layout' => $block->data->layout ?? 'columns',
-			'columnWidthPx' => $block->data->columnWidthPx ?? 250,
-			'rowHeightPx' => $block->data->rowHeightPx ?? 250,
-			'gapPx' => $block->data->gapPx ?? 5,
-			'cleanBottom' => $block->data->cleanBottom ?? false
+	public static function render(array $block, Automad $Automad): string {
+		$settings = array(
+			'layout' => $block['data']['layout'] ?? 'columns',
+			'columnWidthPx' => $block['data']['columnWidthPx'] ?? 250,
+			'rowHeightPx' => $block['data']['rowHeightPx'] ?? 250,
+			'gapPx' => $block['data']['gapPx'] ?? 5,
+			'cleanBottom' => $block['data']['cleanBottom'] ?? false
 		);
 
 		$imageSets = array();
 
-		$width = $settings->layout === 'columns' ? $settings->columnWidthPx : 0;
-		$height = $settings->layout === 'rows' ? $settings->rowHeightPx : 0;
+		$width = $settings['layout'] === 'columns' ? $settings['columnWidthPx'] : 0;
+		$height = $settings['layout'] === 'rows' ? $settings['rowHeightPx'] : 0;
 
-		foreach ($block->data->files ?? array() as $file) {
+		foreach ($block['data']['files'] ?? array() as $file) {
 			$imageSets[] = array(
 				'thumb' => new ImgLoaderSet($file, $Automad, $width, $height, false),
 				'large' => new Img($file, $Automad, 3000, 3000, false),
@@ -83,7 +85,7 @@ class Gallery extends AbstractBlock {
 		}
 
 		$json = rawurlencode(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES));
-		$attr = Attr::render($block->tunes);
+		$attr = Attr::render($block['tunes']);
 
 		return "<am-gallery $attr data=\"$json\"></am-gallery>";
 	}

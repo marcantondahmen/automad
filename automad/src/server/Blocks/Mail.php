@@ -49,19 +49,21 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Mail extends AbstractBlock {
 	/**
 	 * Render a mail form block.
 	 *
-	 * @param object{id: string, data: object, tunes: object} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render(object $block, Automad $Automad): string {
-		$data = $block->data;
+	public static function render(array $block, Automad $Automad): string {
+		$data = $block['data'];
 
-		if (empty($data->to)) {
+		if (empty($data['to'])) {
 			return '';
 		}
 
@@ -74,8 +76,7 @@ class Mail extends AbstractBlock {
 			'labelSend' => Text::get('mailBlockDefaultLabelSend')
 		);
 
-		$options = array_merge($defaults, array_filter((array) $data));
-		$data = (object) $options;
+		$data = array_merge($defaults, array_filter($data));
 
 		$status = SystemMail::sendForm($data, $Automad);
 
@@ -83,17 +84,17 @@ class Mail extends AbstractBlock {
 			$status = "<h3>$status</h3>";
 		}
 
-		$attr = Attr::render($block->tunes);
+		$attr = Attr::render($block['tunes']);
 
 		return <<< HTML
 			<am-mail $attr>
 				$status
 				<form action="" method="post">	
 					<input type="text" name="human" value="">	
-					<input class="am-input" type="text" name="from" value="" placeholder="$data->labelAddress">
-					<input class="am-input" type="text" name="subject" value="" placeholder="$data->labelSubject">
-					<textarea class="am-input" name="message" placeholder="$data->labelBody"></textarea>
-					<button class="am-button" type="submit">$data->labelSend</button>	
+					<input class="am-input" type="text" name="from" value="" placeholder="{$data['labelAddress']}">
+					<input class="am-input" type="text" name="subject" value="" placeholder="{$data['labelSubject']}">
+					<textarea class="am-input" name="message" placeholder="{$data['labelBody']}"></textarea>
+					<button class="am-button" type="submit">{$data['labelSend']}</button>	
 				</form>
 			</am-mail>
 		HTML;

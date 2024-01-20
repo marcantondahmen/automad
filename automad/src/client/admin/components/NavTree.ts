@@ -43,6 +43,7 @@ import SortableTree, {
 import {
 	App,
 	Attr,
+	Bindings,
 	create,
 	CSS,
 	debounce,
@@ -94,10 +95,14 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 		App.system.i18n && data.url === '/'
 			? 'globe'
 			: App.system.i18n && data.parentUrl === '/'
-			? 'translate'
-			: data.private
-			? 'eye-slash-fill'
-			: 'file-earmark-text';
+				? 'translate'
+				: data.private
+					? 'eye-slash-fill'
+					: 'file-earmark-text';
+
+	const titleBinding = active
+		? `${Attr.bind}="title" ${Attr.bindTo}="textContent"`
+		: '';
 
 	return html`
 		<span class="${CSS.navItem} ${active}" title="${data.url}">
@@ -108,11 +113,11 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 				)}"
 			>
 				<i class="bi bi-${icon}"></i>
-				<span
-					>${App.system.i18n && data.parentUrl === '/'
+				<span>
+					${App.system.i18n && data.parentUrl === '/'
 						? `${(data.url as string).replace('/', '')} &mdash; `
-						: ''}$${data.title}</span
-				>
+						: ''}<span ${titleBinding}>$${data.title}</span>
+				</span>
 			</am-link>
 		</span>
 	`;
@@ -283,6 +288,8 @@ export class NavTreeComponent extends BaseComponent {
 				block: 'end',
 			});
 		}
+
+		Bindings.connectElements(this);
 	}
 
 	/**

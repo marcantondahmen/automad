@@ -38,7 +38,7 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Automad;
-use Automad\Core\DataFile;
+use Automad\Core\DataStore;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
@@ -65,21 +65,17 @@ class SharedController {
 		$Automad = Automad::fromCache();
 		$Shared = $Automad->Shared;
 		$data = Request::post('data');
+		$DataStore = new DataStore();
 
 		if (!empty($data) && is_array($data)) {
-			if (filemtime(DataFile::getFile(null)) > Request::post('dataFetchTime')) {
+			if (filemtime($DataStore->getFile()) > Request::post('dataFetchTime')) {
 				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
 			}
 
 			$Messenger = new Messenger();
 
-			if (!$Shared->save($data, $Messenger)) {
-				return $Response->setError($Messenger->getError());
-			}
-
-			if (!empty($data[Fields::THEME]) && $data[Fields::THEME] != $Shared->get(Fields::THEME)) {
-				$Response->setReload(true);
-			}
+			$Response->setReload($Shared->save($data, $Messenger));
+			$Response->setError($Messenger->getError());
 
 			return $Response;
 		}
@@ -98,5 +94,35 @@ class SharedController {
 		ksort($fields);
 
 		return $Response->setData(array('fields' => $fields));
+	}
+
+	/**
+	 * Get the publication state for shared data.
+	 *
+	 * @return Response
+	 */
+	public static function getPublicationState(): Response {
+		$Response = new Response();
+		$DataStore = new DataStore();
+
+		return $Response->setData(array('isPublished' => $DataStore->isPublished()));
+	}
+
+	/**
+	 * Publish shared data.
+	 *
+	 * @return Response
+	 */
+	public static function publish(): Response {
+		$Response = new Response();
+		$Messenger = new Messenger();
+		$Automad = Automad::fromCache();
+		$Shared = $Automad->Shared;
+
+		$Shared->publish($Messenger);
+		$Response->setError($Messenger->getError());
+		$Response->setSuccess($Messenger->getSuccess());
+
+		return $Response;
 	}
 }

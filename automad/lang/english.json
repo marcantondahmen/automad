@@ -279,6 +279,8 @@
 	"position": "Position",
 	"preventDataOverwritingError": "A newer version has been edited in another browser tab. Please reload this page in order to continue.",
 	"preview": "Preview",
+	"publish": "Publish",
+	"publishedSuccessfully": "Published successfully",
 	"quality": "Quality",
 	"rawHtmlMarkdown": "HTML / Markdown",
 	"recentlyEditedPages": "Recently Edited Pages",

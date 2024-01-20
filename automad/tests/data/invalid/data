@@ -1,7 +1,10 @@
 {
-	"object": {
-		"key": "value"
-	},
-	"array": [10],
-	"null": null
+	"draft": {
+		"object": {
+			"key": "value"
+		},
+		"array": [10],
+		"null": null
+	}
 }
+

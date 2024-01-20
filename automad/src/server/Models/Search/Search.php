@@ -57,12 +57,18 @@ class Search {
 		'content',
 		'caption',
 		'url',
-		'globs',
+		'link',
+		'files',
+		'labelAddress',
+		'labelSubject',
+		'labelBody',
+		'labelSend',
 		'primaryText',
 		'primaryLink',
 		'secondaryText',
 		'secondaryLink',
-		'code'
+		'code',
+		'snippet'
 	);
 
 	/**
@@ -194,26 +200,26 @@ class Search {
 	 * `FieldResults` results for a given search value.
 	 *
 	 * @param string $field
-	 * @param array<object{data: object, type: string}>|null $blocks
+	 * @param array<array{data: array, type: string}>|null $blocks
 	 * @return FieldResults|null a field results results
 	 */
 	private function searchBlocksRecursively(string $field, ?array $blocks): ?FieldResults {
-		if (is_null($blocks)) {
+		if (empty($blocks)) {
 			return null;
 		}
 
 		$results = array();
 
 		foreach ($blocks as $block) {
-			if ($block->type == 'section') {
+			if ($block['type'] == 'section') {
 				$results = $this->appendFieldResults(
 					$results,
-					$this->searchBlocksRecursively($field, $block->data->content->blocks)
+					$this->searchBlocksRecursively($field, $block['data']['content']['blocks'])
 				);
 			} else {
-				foreach ($block->data as $blockProperty => $value) {
+				foreach ($block['data'] as $blockProperty => $value) {
 					if (Search::isValidBlockProperty($blockProperty)) {
-						if (is_array($value) || is_object($value)) {
+						if (is_array($value)) {
 							$results = $this->appendFieldResults($results, $this->searchDataRecursively($field, $value));
 						}
 
@@ -233,7 +239,7 @@ class Search {
 	 * array of `FieldResults`.
 	 *
 	 * @see FieldResults
-	 * @param array<string, string|object{blocks: mixed}> $data
+	 * @param array<string, array{blocks: mixed}|string> $data
 	 * @return array<FieldResults> an array of `FieldResults` resultss
 	 */
 	private function searchData(array $data): array {
@@ -241,9 +247,9 @@ class Search {
 
 		foreach ($data as $field => $value) {
 			if (str_starts_with($field, '+')) {
-				/** @var object{blocks: mixed} $value */
+				/** @var array{blocks: array} $value */
 				try {
-					$FieldResults = $this->searchBlocksRecursively($field, $value->blocks);
+					$FieldResults = $this->searchBlocksRecursively($field, $value['blocks']);
 				} catch (Exception $error) {
 					$FieldResults = false;
 				}
@@ -264,14 +270,14 @@ class Search {
 	 * Search an array of values recursively.
 	 *
 	 * @param string $field
-	 * @param array|object $arrayOrObject
+	 * @param array $array
 	 * @return FieldResults|null a field results results
 	 */
-	private function searchDataRecursively(string $field, array|object $arrayOrObject): ?FieldResults {
+	private function searchDataRecursively(string $field, array $array): ?FieldResults {
 		$results = array();
 
-		foreach ($arrayOrObject as $item) {
-			if (is_array($item) || is_object($item)) {
+		foreach ($array as $item) {
+			if (is_array($item)) {
 				$results = $this->appendFieldResults($results, $this->searchDataRecursively($field, $item));
 			}
 

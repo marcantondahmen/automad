@@ -83,6 +83,7 @@ import './components/Forms/FormError';
 import './components/Forms/HistoryModalForm';
 import './components/Forms/MailConfigForm';
 import './components/Forms/PageDataForm';
+import './components/Forms/Publish';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';
 import './components/Forms/SharedDataForm';

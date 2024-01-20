@@ -1,7 +1,10 @@
 {
-	"zeroAsNumber": 0,
-	"falseAsBool": false,
-	"falseAsString": "false",
-	"zeroAsString": "0",
-	"notFalseAsBool": true
+	"draft": {
+		"zeroAsNumber": 0,
+		"falseAsBool": false,
+		"falseAsString": "false",
+		"zeroAsString": "0",
+		"notFalseAsBool": true
+	}
 }
+

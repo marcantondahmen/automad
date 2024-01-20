@@ -107,6 +107,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<am-navbar-outdated-packages-indicator></am-navbar-outdated-packages-indicator>
 						<am-navbar-debug-indicator></am-navbar-debug-indicator>
 						<am-undo-buttons></am-undo-buttons>
+						<am-publish></am-publish>
 						<am-dropdown ${Attr.right}>
 							<span class="${CSS.navbarItem}">
 								<i class="bi bi-three-dots"></i>
@@ -164,10 +165,15 @@ export const dashboardLayout = ({ main }: Partials) => {
 				<nav class="${CSS.nav}">
 					<span class="${CSS.navItem}">
 						<a href="${App.baseURL}" class="${CSS.navLink}">
-							<am-icon-text
-								${Attr.icon}="window-desktop"
-								${Attr.text}="$${App.sitename}"
-							></am-icon-text>
+							<span class="${CSS.iconText}">
+								<i class="bi bi-window-desktop"></i>
+								<span
+									${Attr.bind}="sitename"
+									${Attr.bindTo}="textContent"
+								>
+									$${App.sitename}
+								</span>
+							</span>
 						</a>
 					</span>
 					<am-nav-item

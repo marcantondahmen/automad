@@ -37,7 +37,6 @@
 namespace Automad\Test;
 
 use Automad\Core\Automad;
-use Automad\Core\DataFile;
 use Automad\Models\Page;
 use Automad\Models\Shared;
 use PHPUnit\Framework\TestCase;
@@ -62,7 +61,7 @@ class Mock extends TestCase {
 	public function createAutomad(string $template = ''): object {
 		$Shared = new Shared();
 		$Shared->data['shared'] = 'Shared default text content';
-		$Shared->data['+default'] = json_decode('{"blocks": [{"id": "abc","type": "paragraph","data": {"text": "test"}}],"time": "123456789","version": "1.2.3","automadVersion": "1.2.3"}');
+		$Shared->data['+default'] = json_decode('{"blocks": [{"id": "abc","type": "paragraph","data": {"text": "test"}}],"time": "123456789","version": "1.2.3","automadVersion": "1.2.3"}', true);
 		$collection = $this->createCollection($Shared, $template);
 		$Automad = new Automad($collection, $Shared);
 
@@ -108,10 +107,10 @@ class Mock extends TestCase {
 						':index' => '1.1',
 						'tags' => 'test'
 					),
-					DataFile::read('/page'),
-					DataFile::read('/inheritance'),
-					DataFile::read('/falsy'),
-					DataFile::read('/invalid')
+					Data::load('/page'),
+					Data::load('/inheritance'),
+					Data::load('/falsy'),
+					Data::load('/invalid')
 				),
 				$Shared
 			),
@@ -143,7 +142,7 @@ class Mock extends TestCase {
 						':level' => 1,
 						':index' => '1.2'
 					),
-					DataFile::read('/text')
+					Data::load('/text')
 				),
 				$Shared
 			),
@@ -159,7 +158,7 @@ class Mock extends TestCase {
 						':level' => 1,
 						':index' => '1.3'
 					),
-					DataFile::read('/blocks')
+					Data::load('/blocks')
 				),
 				$Shared
 			)

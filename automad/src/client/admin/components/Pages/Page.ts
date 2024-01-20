@@ -160,8 +160,7 @@ const renderDropdown = (): string => {
 				</am-modal-toggle>
 				<span class="${CSS.dropdownDivider}"></span>
 				<a
-					${Attr.bind}="pageUrlWithBase"
-					${Attr.bindTo}="href"
+					href="${App.baseURL}${getPageURL()}"
 					class="${CSS.dropdownLink}"
 					target="_blank"
 				>
