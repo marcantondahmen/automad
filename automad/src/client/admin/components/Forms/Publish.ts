@@ -155,7 +155,11 @@ export class PublishComponent extends BaseComponent {
 		);
 
 		this.addListener(
-			listen(window, EventName.contentSaved, this.update.bind(this))
+			listen(
+				window,
+				`${EventName.contentSaved} ${EventName.contentPublished}`,
+				this.update.bind(this)
+			)
 		);
 
 		this.update();
