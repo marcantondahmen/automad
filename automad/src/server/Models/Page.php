@@ -508,18 +508,9 @@ class Page {
 	 */
 	public function publish(): array {
 		$DataStore = new DataStore($this->path);
-
-		$published = $DataStore->getState(PublicationState::PUBLISHED);
 		$draft = $DataStore->getState(PublicationState::DRAFT);
 
-		$now = date(Page::DATE_FORMAT);
-
-		$draft[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
-		$draft[Fields::TIME_LAST_MODIFIED] = $now;
-
-		$DataStore->setState(PublicationState::DRAFT, array());
-		$DataStore->setState(PublicationState::PUBLISHED, $draft);
-		$DataStore->save();
+		$DataStore->publish();
 
 		$title = $draft[Fields::TITLE] ?? '';
 		$title = $title === '' ? basename($this->path) : $title;

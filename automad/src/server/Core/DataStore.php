@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\Models\Page;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -113,6 +114,32 @@ class DataStore {
 	 */
 	public function isPublished(): bool {
 		return empty($this->data[PublicationState::DRAFT->value]);
+	}
+
+	/**
+	 * Return the last publication date.
+	 *
+	 * @return string
+	 */
+	public function lastPublished(): string {
+		$published = $this->getState(PublicationState::PUBLISHED);
+
+		return $published[Fields::TIME_LAST_PUBLISHED] ?? '';
+	}
+
+	/**
+	 * Publish a draft.
+	 *
+	 * @return bool
+	 */
+	public function publish(): bool {
+		$draft = $this->getState(PublicationState::DRAFT);
+		$draft[Fields::TIME_LAST_PUBLISHED] = date(Page::DATE_FORMAT);
+
+		$this->setState(PublicationState::DRAFT, array());
+		$this->setState(PublicationState::PUBLISHED, $draft);
+
+		return $this->save();
 	}
 
 	/**

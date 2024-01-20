@@ -105,7 +105,12 @@ class SharedController {
 		$Response = new Response();
 		$DataStore = new DataStore();
 
-		return $Response->setData(array('isPublished' => $DataStore->isPublished()));
+		return $Response->setData(
+			array(
+				'isPublished' => $DataStore->isPublished(),
+				'lastPublished' => $DataStore->lastPublished()
+			)
+		);
 	}
 
 	/**

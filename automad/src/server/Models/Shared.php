@@ -128,10 +128,7 @@ class Shared {
 		$draftTheme = $draft[Fields::THEME] ?? '';
 		$draftSitename = $draft[Fields::SITENAME] ?? '';
 
-		$DataStore->setState(PublicationState::DRAFT, array());
-		$DataStore->setState(PublicationState::PUBLISHED, $draft);
-
-		if (!$DataStore->save()) {
+		if (!$DataStore->publish()) {
 			$Messenger->setError(Text::get('error_permission'));
 
 			return;

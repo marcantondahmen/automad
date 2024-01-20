@@ -84,6 +84,7 @@ class Fields {
 	const THEME = 'theme';
 	const TIME_CREATED = ':created';
 	const TIME_LAST_MODIFIED = ':lastModified';
+	const TIME_LAST_PUBLISHED = ':lastPublished';
 	const TITLE = 'title';
 	const URL = 'url';
 	const WIDTH = ':width';
@@ -101,6 +102,7 @@ class Fields {
 		'THEME' => Fields::THEME,
 		'TIME_CREATED' => Fields::TIME_CREATED,
 		'TIME_LAST_MODIFIED' => Fields::TIME_LAST_MODIFIED,
+		'TIME_LAST_PUBLISHED' => Fields::TIME_LAST_PUBLISHED,
 		'TITLE' => Fields::TITLE,
 		'SITENAME' => Fields::SITENAME,
 		'SLUG' => Fields::SLUG,

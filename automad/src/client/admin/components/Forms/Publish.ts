@@ -35,7 +35,9 @@
 import {
 	App,
 	Attr,
+	create,
 	CSS,
+	dateFormat,
 	EventName,
 	getPageURL,
 	getSlug,
@@ -47,7 +49,9 @@ import {
 	Route,
 	SharedController,
 } from '@/core';
+import Tooltip from 'codex-tooltip';
 import { BaseComponent } from '../Base';
+import { SubmitComponent } from './Submit';
 
 /**
  * The publish button and form for the navbar.
@@ -71,6 +75,21 @@ export class PublishComponent extends BaseComponent {
 	 * The publish controller route.
 	 */
 	private publishController: PageController | SharedController;
+
+	/**
+	 * The publish info tooltip.
+	 */
+	private tooltip: Tooltip;
+
+	/**
+	 * The publish button.
+	 */
+	private button: SubmitComponent;
+
+	/**
+	 * The last published timestamp.
+	 */
+	private lastPublished: string;
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -108,6 +127,33 @@ export class PublishComponent extends BaseComponent {
 			</am-form>
 		`;
 
+		this.button = query('am-submit', this);
+		this.tooltip = new Tooltip();
+
+		this.addListener(
+			listen(this.button, 'mouseover', () => {
+				if (this.tooltip) {
+					this.tooltip.show(
+						this.button,
+						create(
+							'span',
+							[],
+							{},
+							null,
+							`${App.text('lastPublished')}:<br>${dateFormat(this.lastPublished)}`
+						),
+						{}
+					);
+				}
+			})
+		);
+
+		this.addListener(
+			listen(this.button, 'mouseleave', () => {
+				this.tooltip.hide();
+			})
+		);
+
 		this.addListener(
 			listen(window, EventName.contentSaved, this.update.bind(this))
 		);
@@ -123,16 +169,16 @@ export class PublishComponent extends BaseComponent {
 			url: getPageURL(),
 		});
 
-		const button = query('am-submit', this);
+		this.lastPublished = data.lastPublished;
 
 		if (data.isPublished) {
-			button.setAttribute('disabled', '');
+			this.button.setAttribute('disabled', '');
 
 			return;
 		}
 
-		if (button.hasAttribute('disabled')) {
-			button.removeAttribute('disabled');
+		if (this.button.hasAttribute('disabled')) {
+			this.button.removeAttribute('disabled');
 		}
 	}
 }

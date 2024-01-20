@@ -255,7 +255,12 @@ class PageController {
 
 		$DataStore = new DataStore($Page->path);
 
-		return $Response->setData(array('isPublished' => $DataStore->isPublished()));
+		return $Response->setData(
+			array(
+				'isPublished' => $DataStore->isPublished(),
+				'lastPublished' => $DataStore->lastPublished()
+			)
+		);
 	}
 
 	/**
