@@ -114,6 +114,16 @@
 			box-shadow: none !important;
 		}
 
+		&--confirmation {
+			&,
+			&:hover {
+				color: hsl(var(--am-clr-text-danger)) !important;
+				background-color: hsl(
+					var(--am-clr-background-danger)
+				) !important;
+			}
+		}
+
 		&__icon {
 			display: flex;
 			justify-content: center;
@@ -135,7 +145,7 @@
 
 		&__title {
 			font-size: 1rem;
-			color: inherit;
+			color: inherit !important;
 		}
 	}
 
