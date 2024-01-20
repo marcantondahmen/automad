@@ -309,7 +309,7 @@ class Page {
 	 * @param int $level
 	 * @return ?Page
 	 */
-	public static function fromDataFile(
+	public static function fromDataStore(
 		string $path,
 		string $url,
 		string $index,

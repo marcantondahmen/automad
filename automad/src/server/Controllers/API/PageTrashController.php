@@ -84,7 +84,7 @@ class PageTrashController {
 		foreach ($items as $key => $item) {
 			$dir = basename(dirname($item));
 			$id = $trash . '/' . $dir;
-			$Page = Page::fromDataFile($id, $id, $key, $Shared, $trash, 1);
+			$Page = Page::fromDataStore($id, $id, $key, $Shared, $trash, 1);
 
 			if ($Page) {
 				$pages[] = array(

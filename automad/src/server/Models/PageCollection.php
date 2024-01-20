@@ -124,7 +124,7 @@ class PageCollection {
 		string $index = '1'
 	): void {
 		$url = $this->makeUrl($parentUrl, basename($path));
-		$Page = Page::fromDataFile($path, $url, $index, $this->Shared, $parentUrl, $level);
+		$Page = Page::fromDataStore($path, $url, $index, $this->Shared, $parentUrl, $level);
 
 		if (!$Page) {
 			return;
