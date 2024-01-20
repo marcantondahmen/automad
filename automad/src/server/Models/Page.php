@@ -62,7 +62,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Page {
-	const DATE_FORMAT = 'c';
 	const TEMPLATE_FILE_DEFAULT = 'standard/light/sidebar_left.php';
 	const TEMPLATE_NAME_404 = 'page_not_found';
 	const TRASH_DIRECTORY = '/.trash';
@@ -206,7 +205,7 @@ class Page {
 		}
 
 		// Set date.
-		$now = date(Page::DATE_FORMAT);
+		$now = date(DataStore::DATE_FORMAT);
 
 		$data[Fields::DATE] = $now;
 		$data[Fields::TIME_CREATED] = $now;
@@ -589,7 +588,7 @@ class Page {
 			)
 		);
 
-		$now = date(Page::DATE_FORMAT);
+		$now = date(DataStore::DATE_FORMAT);
 
 		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
 		$data[Fields::TIME_LAST_MODIFIED] = $now;

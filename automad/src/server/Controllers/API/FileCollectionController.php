@@ -87,6 +87,7 @@ class FileCollectionController {
 	 * Upload controller based on $_POST and $_FILES.
 	 *
 	 * @return Response the response object
+	 * @psalm-suppress RedundantCondition
 	 */
 	public static function upload(): Response {
 		$Response = new Response();
