@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, EventName, fire, listen, queryAll } from '.';
+import { Attr, create, EventName, fire, getLogger, listen, queryAll } from '.';
 import { BindingOptions, InputElement, KeyValueMap } from '@/types';
 
 /**
@@ -128,6 +128,93 @@ export class Binding {
 }
 
 /**
+ * Validate binding. Check if binding names used in "am-bind" actually exist
+ * and if existing bindings are actually used in "am-bind" attributes.
+ */
+class BindingValidator {
+	/**
+	 * A unique array of bindings that are used in "am-bind" but are not found.
+	 *
+	 * @static
+	 */
+	private static missing: string[] = [];
+
+	/**
+	 * A unique array of binding names that have been actually created but are unused.
+	 *
+	 * @static
+	 */
+	private static unused: string[] = [];
+
+	/**
+	 * A unique, dynamically growing list of binding names that used in "am-bind" attributes.
+	 *
+	 * @static
+	 */
+	private static references: string[] = [];
+
+	/**
+	 * A unique, dynamically growing list of binding names that have been created.
+	 *
+	 * @static
+	 */
+	private static bindings: string[] = [];
+
+	/**
+	 * Track the missing binding references.
+	 * Some bindings might be missing at first, but will be created after navigating to other pages that actually use them.
+	 *
+	 * Note that it is important to actually take a look at the console for a longer time navigating around.
+	 *
+	 * @param name
+	 * @param binding
+	 */
+	static track(name: string, binding: Binding): void {
+		if (!DEVELOPMENT) {
+			return;
+		}
+
+		const log = getLogger().log;
+
+		const currentMissing = [...this.missing];
+		const currentUnused = [...this.unused];
+
+		this.references = Array.from(new Set([...this.references, name]));
+		this.bindings = Array.from(
+			new Set([...this.bindings, ...Bindings.getBindingNames()])
+		);
+
+		if (!binding) {
+			if (!this.bindings.includes(name)) {
+				this.missing = Array.from(new Set([...this.missing, name]));
+			}
+		} else {
+			this.missing = this.missing.filter((item) => item != name);
+		}
+
+		this.unused = this.bindings.filter(
+			(binding: string) => !this.references.includes(binding)
+		);
+
+		if (JSON.stringify(currentMissing) != JSON.stringify(this.missing)) {
+			if (this.missing.length > 0) {
+				log('Missing bindings', this.missing);
+			} else {
+				log('No missing bindings found, all ok!');
+			}
+		}
+
+		if (JSON.stringify(currentUnused) != JSON.stringify(this.unused)) {
+			if (this.unused.length > 0) {
+				log('Unused bindings', this.unused);
+			} else {
+				log('No unused bindings, all ok!');
+			}
+		}
+	}
+}
+
+/**
  * The Bindings class connects elements to a data binding instance.
  *
  * @example
@@ -170,12 +257,24 @@ export class Bindings {
 	 * @returns the binding
 	 * @static
 	 */
-	static get(name: string) {
+	static get(name: string): Binding {
+		BindingValidator.track(name, this._bindings[name]);
+
 		return this._bindings[name];
 	}
 
 	/**
-	 * Connect all elements that have a bind attribute to the actual binding instance.
+	 * The list of registered binding names.
+	 *
+	 * @return the list of binding names
+	 * @static
+	 */
+	static getBindingNames(): string[] {
+		return Object.keys(this._bindings);
+	}
+
+	/**
+	 * Connect all elements that have the "am-bind" attribute to the actual binding instance.
 	 *
 	 * @param container
 	 * @static
@@ -184,6 +283,8 @@ export class Bindings {
 		queryAll(`[${Attr.bind}]`, container).forEach((element) => {
 			const key = element.getAttribute(Attr.bind);
 			const binding: Binding = this._bindings[key];
+
+			BindingValidator.track(key, binding);
 
 			if (!binding) {
 				return;
