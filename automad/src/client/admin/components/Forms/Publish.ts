@@ -35,6 +35,7 @@
 import {
 	App,
 	Attr,
+	Binding,
 	create,
 	CSS,
 	dateFormat,
@@ -92,6 +93,11 @@ export class PublishComponent extends BaseComponent {
 	private lastPublished: string;
 
 	/**
+	 * The state binding.
+	 */
+	private stateBinding: Binding;
+
+	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
@@ -104,6 +110,10 @@ export class PublishComponent extends BaseComponent {
 		}
 
 		const isPageRoute = route === Route.page;
+
+		this.stateBinding = new Binding('publicationState', {
+			initial: App.pages[getPageURL()].publicationState,
+		});
 
 		this.publishController = isPageRoute
 			? PageController.publish
@@ -162,7 +172,9 @@ export class PublishComponent extends BaseComponent {
 			)
 		);
 
-		this.update();
+		setTimeout(() => {
+			this.update();
+		}, 0);
 	}
 
 	/**
@@ -174,6 +186,7 @@ export class PublishComponent extends BaseComponent {
 		});
 
 		this.lastPublished = data.lastPublished;
+		this.stateBinding.value = data.isPublished ? 'published' : 'draft';
 
 		if (data.isPublished) {
 			this.button.setAttribute('disabled', '');

@@ -101,7 +101,12 @@ class DataStore {
 		$data = $this->data[$pubState->value] ?? null;
 
 		if ($pubState == PublicationState::DRAFT && empty($data)) {
-			$data = $this->getState(PublicationState::PUBLISHED);
+			$pubState = PublicationState::PUBLISHED;
+			$data = $this->getState($pubState);
+		}
+
+		if (!is_null($data)) {
+			$data[Fields::PUBLICATION_STATE] = $pubState->value;
 		}
 
 		return $data;

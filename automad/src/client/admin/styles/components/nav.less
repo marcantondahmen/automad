@@ -60,6 +60,12 @@
 		border-radius: @am-nav-item-radius;
 	}
 
+	&__item[am-publication-state*='draft'] &__link:after {
+		content: '●';
+		font-size: 0.8rem;
+		color: hsl(var(--am-clr-text));
+	}
+
 	&__link {
 		box-sizing: border-box;
 		display: flex;

@@ -68,8 +68,10 @@ export class Binding {
 
 		if (this.storeValueAsObject) {
 			// Get value from JSON string in order to corecctly handle booleans and numbers.
-			const data = JSON.parse(value);
-			value = data.value;
+			if (typeof value != 'string' || value != '') {
+				const data = JSON.parse(value);
+				value = data.value;
+			}
 		}
 
 		if (this.modifier) {

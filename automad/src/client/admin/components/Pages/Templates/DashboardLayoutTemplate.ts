@@ -38,6 +38,7 @@ import {
 	createField,
 	CSS,
 	FieldTag,
+	getSlug,
 	html,
 	PageController,
 	Route,
@@ -190,6 +191,13 @@ export const dashboardLayout = ({ main }: Partials) => {
 						${Attr.page}="shared"
 						${Attr.icon}="asterisk"
 						${Attr.text}="sharedTitle"
+						${Attr.publicationState}="${App.sharedPublicationState}"
+						${(getSlug() as Route) == Route.shared
+							? `
+							${Attr.bind}="publicationState"
+							${Attr.bindTo}="${Attr.publicationState}"
+						`
+							: ''}
 					></am-nav-item>
 					<am-nav-item
 						${Attr.page}="packages"

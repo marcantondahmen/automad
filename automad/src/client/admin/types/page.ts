@@ -61,6 +61,7 @@ export interface PageMetaData {
 	parentUrl: string;
 	private: boolean;
 	lastModified: string;
+	publicationState: 'published' | 'draft';
 }
 
 export interface Pages {

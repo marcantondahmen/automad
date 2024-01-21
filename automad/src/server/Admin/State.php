@@ -100,6 +100,7 @@ class State {
 			'pages' => $Automad->getNavigationMetaData(),
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
+			'sharedPublicationState' => $Automad->Shared->get(Fields::PUBLICATION_STATE),
 			'files' => array(
 				'pagelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
 				'filelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),

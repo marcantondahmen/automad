@@ -104,8 +104,17 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 		? `${Attr.bind}="title" ${Attr.bindTo}="textContent"`
 		: '';
 
+	const publicationStateBinding = active
+		? `${Attr.bind}="publicationState" ${Attr.bindTo}="${Attr.publicationState}"`
+		: '';
+
 	return html`
-		<span class="${CSS.navItem} ${active}" title="${data.url}">
+		<span
+			class="${CSS.navItem} ${active}"
+			title="${data.url}"
+			${Attr.publicationState}="${data.publicationState}"
+			${publicationStateBinding}
+		>
 			<am-link
 				class="${CSS.navLink}"
 				${Attr.target}="${Route.page}?url=${encodeURIComponent(
@@ -187,16 +196,12 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
  * The confirmation handler function checks whether there is
  * no other ongoing request that blocks the navigation.
  *
- * @param movedNode
- * @param targetParentNode
  * @returns true when the navigation is not blocked by a previous request
  */
-const confirmFunction: SortableTreeConfirmFunction = async (
-	movedNode,
-	targetParentNode
-): Promise<boolean> => {
-	return !App.navigationIsLocked;
-};
+const confirmFunction: SortableTreeConfirmFunction =
+	async (): Promise<boolean> => {
+		return !App.navigationIsLocked;
+	};
 
 /**
  * Return a debaounced function that reveals subnodes

@@ -200,6 +200,15 @@ export class App {
 	}
 
 	/**
+	 * The publication state of the shared data.
+	 *
+	 * @static
+	 */
+	static get sharedPublicationState(): string {
+		return App.getState('sharedPublicationState');
+	}
+
+	/**
 	 * The name of the site.
 	 *
 	 * @static

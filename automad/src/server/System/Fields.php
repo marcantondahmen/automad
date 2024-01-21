@@ -75,6 +75,7 @@ class Fields {
 	const PARENT = ':parent';
 	const PATH = ':path';
 	const PRIVATE = 'private';
+	const PUBLICATION_STATE = ':publicationState';
 	const SEARCH_CONTEXT = ':searchContext';
 	const SITENAME = 'sitename';
 	const SLUG = 'slug';
@@ -97,6 +98,7 @@ class Fields {
 		'DATE' => Fields::DATE,
 		'HIDDEN' => Fields::HIDDEN,
 		'PRIVATE' => Fields::PRIVATE,
+		'PUBLICATION_STATE' => Fields::PUBLICATION_STATE,
 		'TAGS' => Fields::TAGS,
 		'TEMPLATE' => Fields::TEMPLATE,
 		'THEME' => Fields::THEME,

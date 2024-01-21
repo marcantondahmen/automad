@@ -68,6 +68,7 @@ export const enum Attr {
 	noFocus = 'am-no-focus',
 	page = 'am-page',
 	path = 'am-path',
+	publicationState = 'am-publication-state',
 	portal = 'am-portal',
 	right = 'am-right',
 	section = 'am-section',
@@ -95,6 +96,7 @@ const dompurifyOption = {
 	ADD_ATTR: [
 		Attr.bind,
 		Attr.bindTo,
+		Attr.publicationState,
 		Attr.tooltip,
 		Attr.tooltipOptions,
 		Attr.toggle,
