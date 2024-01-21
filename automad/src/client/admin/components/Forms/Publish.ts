@@ -110,9 +110,10 @@ export class PublishComponent extends BaseComponent {
 		}
 
 		const isPageRoute = route === Route.page;
+		const pageUrl = getPageURL();
 
 		this.stateBinding = new Binding('publicationState', {
-			initial: App.pages[getPageURL()].publicationState,
+			initial: pageUrl ? App.pages[pageUrl].publicationState : null,
 		});
 
 		this.publishController = isPageRoute
