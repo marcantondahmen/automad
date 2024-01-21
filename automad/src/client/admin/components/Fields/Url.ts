@@ -54,7 +54,7 @@ class URLComponent extends BaseFieldComponent {
 	protected createInput(): void {
 		const { name, id, value, placeholder, label } = this._data;
 		const combo = create('div', [CSS.inputCombo], {}, this);
-		const bindingName = `input_${id}`;
+		const bindingName = `urlComponent_${id}`;
 		const input = create(
 			'input',
 			[CSS.input],

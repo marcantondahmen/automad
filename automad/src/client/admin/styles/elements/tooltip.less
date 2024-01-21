@@ -34,9 +34,13 @@
 
 .am-ui .ct {
 	z-index: 9999;
-	box-shadow: 0 8px 12px 0 var(--am-shadow), 0 4px 5px -3px var(--am-shadow);
+	box-shadow:
+		0 8px 12px 0 var(--am-shadow),
+		0 4px 5px -3px var(--am-shadow);
 	border-radius: 0.25rem;
-	transition: opacity 0.1s, transform 0.1s;
+	transition:
+		opacity 0.1s,
+		transform 0.1s;
 
 	&::before {
 		border-radius: 0.25rem;
@@ -54,9 +58,10 @@
 
 	&__content {
 		padding: 0.45rem 0.75rem;
-		max-width: 20rem;
-		text-align: left;
+		max-width: 16rem;
+		text-align: center;
 		font-size: 0.8rem;
+		text-wrap: pretty;
 		font-weight: 540;
 		line-height: 1.5;
 		color: hsl(var(--am-clr-text-primary));

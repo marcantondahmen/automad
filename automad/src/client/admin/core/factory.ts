@@ -217,7 +217,7 @@ export const createImagePickerModal = (
 		getComponentTargetContainer()
 	);
 
-	const pickerBindingName = uniqueId();
+	const pickerBindingName = `imagePickerModal-temp-${uniqueId()}`;
 	const idUrl = uniqueId();
 	const idWidth = uniqueId();
 	const idHeight = uniqueId();

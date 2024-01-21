@@ -182,7 +182,7 @@ class MarkdownComponent extends BaseFieldComponent {
 		this.setAttribute('name', name);
 		this.value = value as string;
 
-		const linkBindingName = `link_${id}`;
+		const linkBindingName = `markdownComponents_link_${id}`;
 
 		const imageSelection = createCustomButton(
 			'image',

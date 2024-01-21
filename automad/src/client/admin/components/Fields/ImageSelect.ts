@@ -103,7 +103,7 @@ class ImageSelectComponent extends BaseFieldComponent {
 		input: HTMLInputElement,
 		id: string
 	) {
-		const previewBindingName = `preview_${id}`;
+		const previewBindingName = `imageSelectComponent_preview_${id}`;
 
 		new Binding(previewBindingName, {
 			input,
