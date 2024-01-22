@@ -174,7 +174,7 @@ class BindingValidator {
 			return;
 		}
 
-		const log = getLogger().log;
+		const log = getLogger();
 
 		const currentMissing = [...this.missing];
 		const currentUnused = [...this.unused];
@@ -198,17 +198,17 @@ class BindingValidator {
 
 		if (JSON.stringify(currentMissing) != JSON.stringify(this.missing)) {
 			if (this.missing.length > 0) {
-				log('Missing bindings', this.missing);
+				log.bindingInfo('Missing bindings', this.missing);
 			} else {
-				log('No missing bindings found, all ok!');
+				log.bindingSuccess('No missing bindings found, all ok!');
 			}
 		}
 
 		if (JSON.stringify(currentUnused) != JSON.stringify(this.unused)) {
 			if (this.unused.length > 0) {
-				log('Unused bindings', this.unused);
+				log.bindingInfo('Unused bindings', this.unused);
 			} else {
-				log('No unused bindings, all ok!');
+				log.bindingSuccess('No unused bindings, all ok!');
 			}
 		}
 	}

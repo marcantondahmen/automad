@@ -79,6 +79,32 @@ const compose = (...args: any[]): any[] => {
 };
 
 /**
+ * A styled log entry.
+ *
+ * @param label
+ * @param data
+ * @param color
+ * @param bg
+ */
+const styled = (
+	label: string,
+	data: KeyValueMap,
+	color: string,
+	bg: string
+): void => {
+	const items: (string | KeyValueMap)[] = [
+		`%c${label}`,
+		`padding: 3px 5px; font-weight: 500; color: ${color}; background-color: ${bg}`,
+	];
+
+	if (data !== null) {
+		items.push(data);
+	}
+
+	console.log(...items);
+};
+
+/**
  * Create a fetch console entry.
  *
  * @param url
@@ -96,11 +122,7 @@ const fetch = (
 ): void => {
 	const route = url.split(`${App.apiURL}/`).pop();
 
-	console.log(
-		`%c${prefix} ${route}`,
-		`padding: 3px 5px; font-weight: 500; color: ${color}; background-color: ${bg}`,
-		data
-	);
+	styled(`${prefix} ${route}`, data, color, bg);
 };
 
 /**
@@ -122,6 +144,14 @@ class DevelopmentLogger implements Logger {
 	response(url: string, data: KeyValueMap): void {
 		fetch(url, data, '<<', '#d3b0eb', '#613480');
 	}
+
+	bindingInfo(label: string, data: KeyValueMap): void {
+		styled(label, data, '#888888', '#333333');
+	}
+
+	bindingSuccess(text: string): void {
+		styled(text, null, '#71c9a1', '#356e54');
+	}
 }
 
 /**
@@ -137,4 +167,8 @@ class ProductionLogger implements Logger {
 	request(): void {}
 
 	response(): void {}
+
+	bindingInfo(): void {}
+
+	bindingSuccess(): void {}
 }
