@@ -71,8 +71,12 @@
 			}
 		}
 
-		& .am-e-button {
+		& am-submit.am-e-button {
 			font-size: 1rem;
+
+			&:not([disabled]) {
+				border-color: hsl(var(--am-clr-border-active));
+			}
 		}
 
 		&&--glyph {

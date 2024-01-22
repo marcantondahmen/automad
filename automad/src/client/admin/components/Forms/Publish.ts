@@ -132,7 +132,7 @@ export class PublishComponent extends BaseComponent {
 				${Attr.api}="${this.publishController}"
 				${Attr.event}="${EventName.contentPublished}"
 			>
-				<am-submit disabled class="${CSS.button} ${CSS.buttonPrimary}">
+				<am-submit disabled class="${CSS.button}">
 					${App.text('publish')}
 				</am-submit>
 			</am-form>
@@ -143,7 +143,7 @@ export class PublishComponent extends BaseComponent {
 
 		this.addListener(
 			listen(this.button, 'mouseover', () => {
-				if (this.tooltip) {
+				if (this.tooltip && this.lastPublished) {
 					this.tooltip.show(
 						this.button,
 						create(

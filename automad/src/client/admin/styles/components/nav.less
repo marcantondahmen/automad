@@ -60,14 +60,15 @@
 		border-radius: @am-nav-item-radius;
 	}
 
-	:has([am-publication-state*='draft']) > div > &__item > &__link:after,
-	&__item[am-publication-state*='draft'] > &__link:after {
+	:has([am-publication-state*='draft']) > div > &__item > &__link:after {
 		content: '●';
 		font-size: 0.8rem;
 		color: hsl(var(--am-clr-text-muted));
 	}
 
 	&__item[am-publication-state*='draft'] > &__link:after {
+		content: '●';
+		font-size: 0.8rem;
 		color: hsl(var(--am-clr-text)) !important;
 	}
 
