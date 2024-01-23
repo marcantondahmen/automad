@@ -579,15 +579,6 @@ class Page {
 		$private = !empty($data[Fields::PRIVATE]);
 		$data[Fields::PRIVATE] = $private;
 
-		$published = $DataStore->getState(PublicationState::PUBLISHED);
-		$DataStore->setState(
-			PublicationState::PUBLISHED,
-			array_merge(
-				$DataStore->getState(PublicationState::PUBLISHED) ?? array(),
-				array(Fields::PRIVATE => $private)
-			)
-		);
-
 		$now = date(DataStore::DATE_FORMAT);
 
 		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
