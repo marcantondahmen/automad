@@ -126,6 +126,14 @@ export const dashboardLayout = ({ main }: Partials) => {
 									<i class="bi bi-info-circle"></i>
 									<span>${App.text('aboutAutomad')}</span>
 								</am-modal-toggle>
+								<a
+									href="https://automad.org"
+									target="_blank"
+									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
+								>
+									<i class="bi bi-book"></i>
+									<span>${App.text('documentation')}</span>
+								</a>
 								<am-link
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 									${Attr.target}="${Route.system}?section=${Section.users}"
