@@ -38,6 +38,7 @@ namespace Automad\Core;
 
 use Automad\Core\Messenger;
 use Automad\Core\Text;
+use Exception;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -236,7 +237,12 @@ class FileSystem {
 	 */
 	public static function getTmpDir(): string {
 		$dir = self::getSystemTmpDir() . '/automad/' . sha1(AM_BASE_DIR);
-		self::makeDir($dir);
+
+		try {
+			self::makeDir($dir);
+		} catch (\Throwable $th) {
+			throw new Exception('The system temp directory is not writable &mdash; please define <code>AM_TMP_DIR</code>.');
+		}
 
 		return $dir;
 	}

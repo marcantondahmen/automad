@@ -78,7 +78,7 @@ class Error {
 
 				self::printError(
 					$error->getMessage(),
-					"In File $file<br>on line $line",
+					"In file $file<br>on line $line",
 					$error->getTrace()
 				);
 
@@ -99,7 +99,7 @@ class Error {
 
 		if ($trace) {
 			$code = json_encode($trace, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-			$code = "<p>Stack Trace:</p><pre><code>$code</code></pre>";
+			$code = "<p>Stack trace:</p><pre><code>$code</code></pre>";
 		}
 
 		echo <<< HTML
