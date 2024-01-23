@@ -76,6 +76,7 @@ class App {
 
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
+		Error::setHandlers();
 
 		$this->runVersionCheck();
 
@@ -119,7 +120,7 @@ class App {
 	 */
 	private function runPermissionCheck(): void {
 		if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
-			Error::exit('<h1>Permission denied!</h1><h2>The "' . AM_DIR_CACHE . '" directory must be writable by the web server!</h2>');
+			Error::exit('Permission denied', 'The "' . AM_DIR_CACHE . '" directory must be writable by the web server.');
 		}
 	}
 
@@ -128,7 +129,7 @@ class App {
 	 */
 	private function runVersionCheck(): void {
 		if (version_compare(PHP_VERSION, $this->requiredPhpVersion, '<')) {
-			Error::exit("<h1>PHP out of date!</h1><h2>Please update your PHP version to $this->requiredPhpVersion or newer!</h2>");
+			Error::exit('PHP out of date', "Please update your PHP version to $this->requiredPhpVersion or newer.");
 		}
 	}
 

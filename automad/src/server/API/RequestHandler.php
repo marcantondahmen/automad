@@ -79,6 +79,9 @@ class RequestHandler {
 	 * @return string the JSON formatted response
 	 */
 	public static function getResponse(): string {
+		restore_error_handler();
+		restore_exception_handler();
+
 		header('Content-Type: application/json; charset=utf-8');
 
 		$controller = self::routeController(AM_REQUEST);
