@@ -63,7 +63,7 @@ class SliderComponent extends HTMLElement {
 	 *
 	 * @static
 	 */
-	static TAG_NAME = 'am-slider';
+	static TAG_NAME = 'am-image-slideshow';
 
 	/**
 	 * The gallery settings and files.

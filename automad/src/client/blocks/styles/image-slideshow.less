@@ -32,13 +32,13 @@
  * Licensed under the MIT license.
  */
 
-am-slider {
+am-image-slideshow {
 	--swiper-navigation-size: 44px;
 	--swiper-navigation-top-offset: 50%;
-	--swiper-navigation-sides-offset: 12px;
-	--swiper-navigation-color: var(--am-slider-controls-color);
+	--swiper-navigation-sides-offset: 0;
+	--swiper-navigation-color: var(--am-image-slideshow-controls-color);
 
-	--swiper-pagination-color: var(--am-slider-controls-color);
+	--swiper-pagination-color: var(--am-image-slideshow-controls-color);
 	--swiper-pagination-left: auto;
 	--swiper-pagination-right: 8px;
 	--swiper-pagination-bottom: 8px;
@@ -49,7 +49,9 @@ am-slider {
 	--swiper-pagination-bullet-size: 10px;
 	--swiper-pagination-bullet-width: 10px;
 	--swiper-pagination-bullet-height: 10px;
-	--swiper-pagination-bullet-inactive-color: var(--am-slider-controls-color);
+	--swiper-pagination-bullet-inactive-color: var(
+		--am-image-slideshow-controls-color
+	);
 	--swiper-pagination-bullet-inactive-opacity: 0.2;
 	--swiper-pagination-bullet-opacity: 1;
 	--swiper-pagination-bullet-horizontal-gap: 5px;
@@ -57,8 +59,18 @@ am-slider {
 
 	& .swiper-button-prev,
 	& .swiper-button-next {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		width: 54px;
+		height: 54px;
 		opacity: 0;
 		transition: opacity 0.2s;
+		background-color: var(--am-image-slideshow-controls-background);
+
+		&:after {
+			font-size: 36px !important;
+		}
 	}
 
 	&:hover .swiper-button-prev,
@@ -67,6 +79,6 @@ am-slider {
 	}
 
 	& .swiper-pagination-bullet {
-		outline: var(--am-slider-controls-background) solid 1px;
+		outline: var(--am-image-slideshow-controls-background) solid 2px;
 	}
 }

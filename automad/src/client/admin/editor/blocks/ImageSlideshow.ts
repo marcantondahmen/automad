@@ -109,7 +109,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 	 */
 	static get toolbox() {
 		return {
-			title: App.text('sliderBlockTitle'),
+			title: App.text('imageSlideshowBlockTitle'),
 			icon: '<i class="bi bi-collection-play"></i>',
 		};
 	}
@@ -185,7 +185,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			[CSS.button],
 			{},
 			group,
-			App.text('sliderBlockSettings')
+			App.text('imageSlideshowBlockSettings')
 		);
 
 		this.api.listeners.on(
@@ -218,7 +218,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 	 */
 	private renderModal(): void {
 		const { modal, body } = createGenericModal(
-			App.text('sliderBlockSettings')
+			App.text('imageSlideshowBlockSettings')
 		);
 
 		setTimeout(() => {
@@ -256,7 +256,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 		body.innerHTML = '';
 
 		createSelectField(
-			App.text('sliderBlockEffect'),
+			App.text('imageSlideshowBlockEffect'),
 			createSelect(
 				sliderEffects.map((effect) => ({ value: effect })),
 				this.data.effect,
@@ -270,14 +270,14 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			name: 'loop',
 			value: this.data.loop,
 			key: uniqueId(),
-			label: App.text('sliderBlockLoop'),
+			label: App.text('imageSlideshowBlockLoop'),
 		});
 
 		createField(FieldTag.toggle, body, {
 			name: 'autoplay',
 			value: this.data.autoplay,
 			key: uniqueId(),
-			label: App.text('sliderBlockAutoplay'),
+			label: App.text('imageSlideshowBlockAutoplay'),
 		});
 
 		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
@@ -290,7 +290,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 				name: 'imageWidthPx',
 				value: this.data.imageWidthPx,
 				key: uniqueId(),
-				label: `${App.text('sliderBlockImageWidth')} (Pixel)`,
+				label: `${App.text('imageSlideshowBlockImageWidth')} (Pixel)`,
 			},
 			[],
 			{ required: '' }
@@ -303,7 +303,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 				name: 'imageHeightPx',
 				value: this.data.imageHeightPx,
 				key: uniqueId(),
-				label: `${App.text('sliderBlockImageHeight')} (Pixel)`,
+				label: `${App.text('imageSlideshowBlockImageHeight')} (Pixel)`,
 			},
 			[],
 			{ required: '' }
@@ -316,7 +316,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 				name: 'slidesPerView',
 				value: this.data.slidesPerView,
 				key: uniqueId(),
-				label: App.text('sliderBlockSlidesPerView'),
+				label: App.text('imageSlideshowBlockSlidesPerView'),
 			},
 			[],
 			{ required: '' }
@@ -329,7 +329,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 				name: 'gapPx',
 				value: this.data.gapPx,
 				key: uniqueId(),
-				label: `${App.text('sliderBlockSpaceBetween')} (Pixel)`,
+				label: `${App.text('imageSlideshowBlockSpaceBetween')} (Pixel)`,
 			},
 			[],
 			{ required: '' }
@@ -338,11 +338,11 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 		create(
 			'div',
 			[CSS.field],
-			{ [Attr.error]: App.text('sliderBlockBreakpointsError') },
+			{ [Attr.error]: App.text('imageSlideshowBlockBreakpointsError') },
 			body,
 			html`
 				<label class="${CSS.fieldLabel}">
-					${App.text('sliderBlockBreakpoints')} &mdash;
+					${App.text('imageSlideshowBlockBreakpoints')} &mdash;
 					<span class="${CSS.textMono}">px:slides px:slides ...</span>
 				</label>
 				<input
@@ -356,7 +356,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			`
 		);
 
-		create('p', [], {}, body, App.text('sliderBlockBreakpointsHelp'));
+		create('p', [], {}, body, App.text('imageSlideshowBlockBreakpointsHelp'));
 	}
 
 	/**
