@@ -111,6 +111,7 @@ class Error {
 						:root {
 							--color: hsl(6, 96%, 60%);
 							--bg: hsl(7, 74%, 5%);
+							--bg-code: hsl(7, 74%, 8%);
 
 							color-scheme: dark;
 						}
@@ -161,8 +162,7 @@ class Error {
 
 						pre {
 							padding: 20px;
-							background-color: hsl(7, 74%, 8%);
-
+							background-color: var(--bg-code);
 							font-size: 16px;
 						}
 
@@ -171,6 +171,12 @@ class Error {
 							font-size: inherit;
 							white-space: pre-wrap;
 							overflow-wrap: break-word;
+						}
+
+						p code {
+							padding: 5px 10px;
+							background-color: var(--bg-code);
+							font-size: 0.9em;
 						}
 					</style>
 				</head>

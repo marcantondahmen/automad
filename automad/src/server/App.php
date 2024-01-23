@@ -74,9 +74,11 @@ class App {
 		require_once __DIR__ . '/Core/FileSystem.php';
 		define('AM_BASE_DIR', FileSystem::normalizeSlashes(dirname(dirname(dirname(__DIR__)))));
 
+		require_once __DIR__ . '/Core/Error.php';
+		Error::setHandlers();
+
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
-		Error::setHandlers();
 
 		$this->runVersionCheck();
 
