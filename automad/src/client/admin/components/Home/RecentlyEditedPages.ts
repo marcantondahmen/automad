@@ -47,6 +47,7 @@ import {
 	Route,
 } from '@/core';
 import { PageRecentlyEditedCardData } from '@/types';
+import { Section } from '../Switcher/Switcher';
 
 /**
  * A grid of recently edited pages.
@@ -82,26 +83,34 @@ class RecentlyEditedPagesComponent extends BaseComponent {
 
 			create(
 				'div',
-				[CSS.card],
+				[CSS.card, CSS.cardHover],
 				{},
 				this,
 				html`
 					<am-link
-						${Attr.target}="${editRoute}"
+						${Attr.target}="${editRoute}&section=${Section.files}"
 						class="${CSS.cardTeaser}"
 					>
 						${page.thumbnail != ''
 							? `<img src="${resolveFileUrl(page.thumbnail)}" />`
 							: `<i class="bi bi-file-earmark-text"></i>`}
 					</am-link>
-					<div class="${CSS.cardTitle}">${page.title}</div>
-					<div class="${CSS.cardBody}">
+					<am-link
+						${Attr.target}="${editRoute}"
+						class="${CSS.cardTitle}"
+					>
+						${page.title}
+					</am-link>
+					<am-link
+						${Attr.target}="${editRoute}"
+						class="${CSS.cardBody}"
+					>
 						<span>${dateFormat(page.lastModified)}</span>
 						<span>
 							${page.fileCount}
 							${App.text(page.fileCount === 1 ? 'file' : 'files')}
 						</span>
-					</div>
+					</am-link>
 					<div class="${CSS.cardButtons}">
 						<am-link ${Attr.target}="${editRoute}">
 							<span
