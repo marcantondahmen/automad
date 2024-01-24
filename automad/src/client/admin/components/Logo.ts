@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '@/components/Base';
-import logo from '@/svg/logo.svg';
+import logo from 'common/svg/logo.svg';
 
 /**
  * The Automad logo component.
