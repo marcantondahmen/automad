@@ -44,9 +44,6 @@ import './styles/index.less';
 import './components/Breadcrumbs/BreadcrumbsPage';
 import './components/Breadcrumbs/BreadcrumbsRoute';
 
-import './components/Editor/EditorJS';
-import './components/Editor/EditorPortal';
-
 import './components/Fields/Color';
 import './components/Fields/Date';
 import './components/Fields/Editor';
@@ -161,6 +158,7 @@ import './components/CustomIconCheckbox';
 import './components/Copy';
 import './components/DashboardThemeToggle';
 import './components/Dropdown';
+import './components/EditorJS';
 import './components/Filter';
 import './components/IconText';
 import './components/ImageCollection';

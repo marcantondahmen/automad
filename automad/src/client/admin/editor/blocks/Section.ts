@@ -59,7 +59,7 @@ import {
 	SelectComponentOption,
 } from '@/types';
 import { BaseBlock } from './BaseBlock';
-import { EditorJSComponent } from '@/components/Editor/EditorJS';
+import { EditorJSComponent } from '@/components/EditorJS';
 import { API } from 'automad-editorjs';
 
 /**

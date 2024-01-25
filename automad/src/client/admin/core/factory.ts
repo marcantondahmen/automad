@@ -64,7 +64,7 @@ import { AutocompleteUrlComponent } from '@/components/AutocompleteUrl';
 import { BaseFieldComponent } from '@/components/Fields/BaseField';
 import { SelectComponent } from '@/components/Select';
 import { EditorConfig } from 'automad-editorjs';
-import { EditorJSComponent } from '@/components/Editor/EditorJS';
+import { EditorJSComponent } from '@/components/EditorJS';
 
 /**
  * Create a new EditorJSComponent element.

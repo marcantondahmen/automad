@@ -47,7 +47,7 @@ import {
 import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData, UndoValue } from '@/types';
 import { LayoutTune } from '@/editor/tunes/Layout';
-import { EditorJSComponent } from '@/components/Editor/EditorJS';
+import { EditorJSComponent } from '@/components/EditorJS';
 import { API } from 'automad-editorjs';
 
 /**

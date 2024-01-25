@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { EditorJSComponent } from '@/components/Editor/EditorJS';
+import { EditorJSComponent } from '@/components/EditorJS';
 import { listen, query } from '@/core';
 import EditorJS, { BlockAPI } from 'automad-editorjs';
 import { insertBlock } from '../utils';
