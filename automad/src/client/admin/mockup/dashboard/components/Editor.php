@@ -1316,7 +1316,7 @@
 </section>
 
 <div id="editor" class="am-u-display-none"></div>
-<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/automad-editorjs@latest"></script>
 <script>
 	new EditorJS('editor');
 </script>

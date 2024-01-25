@@ -46,7 +46,7 @@ import { UnderlineInline } from '@/editor/inline/Underline';
 import { DragDrop } from '@/editor/plugins/DragDrop';
 import { LayoutTune } from '@/editor/tunes/Layout';
 import { EditorOutputData, KeyValueMap } from '@/types';
-import EditorJS, { EditorConfig, I18nDictionary } from '@editorjs/editorjs';
+import EditorJS, { EditorConfig, I18nDictionary } from 'automad-editorjs';
 import { App, CSS } from '@/core';
 import { Delimiter } from '@/editor/blocks/Delimiter';
 import { ImageBlock } from '@/editor/blocks/Image';

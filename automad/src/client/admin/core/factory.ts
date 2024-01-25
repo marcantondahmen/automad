@@ -63,7 +63,7 @@ import { SharedDataFormComponent } from '@/components/Forms/SharedDataForm';
 import { AutocompleteUrlComponent } from '@/components/AutocompleteUrl';
 import { BaseFieldComponent } from '@/components/Fields/BaseField';
 import { SelectComponent } from '@/components/Select';
-import { EditorConfig } from '@editorjs/editorjs';
+import { EditorConfig } from 'automad-editorjs';
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
 
 /**
@@ -426,8 +426,8 @@ export const createSelect = (
 	options: SelectComponentOption[],
 	selected: string,
 	parent: HTMLElement = null,
-	name: string = '',
-	id: string = '',
+	name: string = null,
+	id: string = null,
 	prefix: string = '',
 	cls: string[] = [],
 	attributes: KeyValueMap = {}
@@ -442,11 +442,7 @@ export const createSelect = (
 		attributes['id'] = id;
 	}
 
-	select.init(options, selected, prefix, {
-		...attributes,
-		name,
-		id,
-	});
+	select.init(options, selected, prefix, attributes);
 
 	return select;
 };

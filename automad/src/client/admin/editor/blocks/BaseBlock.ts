@@ -38,7 +38,7 @@ import {
 	BlockTool,
 	BlockToolConstructorOptions,
 	BlockToolData,
-} from '@editorjs/editorjs';
+} from 'automad-editorjs';
 import { create } from '@/core';
 import { KeyValueMap, Listener } from '@/types';
 

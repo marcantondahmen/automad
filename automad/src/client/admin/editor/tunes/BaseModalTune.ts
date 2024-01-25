@@ -34,8 +34,8 @@
 
 import { createGenericModal, CSS, fire, listen, query } from '@/core';
 import { BlockTuneConstructorOptions } from '@/types';
-import { API, BlockAPI, ToolConfig } from '@editorjs/editorjs';
-import { TunesMenuConfig } from '@editorjs/editorjs/types/tools';
+import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
+import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 
 /**
  * The abstract base modal tune class.

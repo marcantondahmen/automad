@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, BlockAPI, BlockTune, ToolConfig } from '@editorjs/editorjs';
+import { API, BlockAPI, BlockTune, ToolConfig } from 'automad-editorjs';
 import { BlockTuneConstructorOptions } from '@/types';
 
 /**

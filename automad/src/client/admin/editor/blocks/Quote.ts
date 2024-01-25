@@ -34,7 +34,7 @@
 
 import { App, create, CSS, html } from '@/core';
 import { QuoteBlockData, QuoteBlockInputs } from '@/types';
-import { ConversionConfig } from '@editorjs/editorjs';
+import { ConversionConfig } from 'automad-editorjs';
 import { BaseBlock } from './BaseBlock';
 
 export class QuoteBlock extends BaseBlock<QuoteBlockData> {

@@ -33,7 +33,7 @@
  */
 
 import { create } from '@/core';
-import { API, InlineToolConstructorOptions } from '@editorjs/editorjs';
+import { API, InlineToolConstructorOptions } from 'automad-editorjs';
 
 /**
  * Define interface with same name in order to merge definition for base class.

@@ -34,7 +34,7 @@
 
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
 import { listen, query } from '@/core';
-import EditorJS, { BlockAPI } from '@editorjs/editorjs';
+import EditorJS, { BlockAPI } from 'automad-editorjs';
 import { insertBlock } from '../utils';
 
 /**
@@ -120,7 +120,10 @@ export class DragDrop {
 	 * Initialize listeners.
 	 */
 	private initListeners(): void {
-		const handle = query('.ce-toolbar__settings-btn', this.component);
+		const handle = query(
+			':scope > .codex-editor > .ce-toolbar .ce-toolbar__settings-btn',
+			this.component
+		);
 
 		handle.setAttribute('draggable', 'true');
 

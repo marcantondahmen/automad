@@ -34,7 +34,7 @@
 
 import { App, CSS, html } from '@/core';
 import { TableOfContentsBlockData } from '@/types';
-import { TunesMenuConfig } from '@editorjs/editorjs/types/tools';
+import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export const tableOfContentsTypes = ['ordered', 'unordered'] as const;

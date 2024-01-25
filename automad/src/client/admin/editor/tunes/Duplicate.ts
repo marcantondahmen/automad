@@ -34,8 +34,8 @@
 
 import { App } from '@/core';
 import { BlockTuneConstructorOptions } from '@/types';
-import { API, BlockAPI, BlockTune } from '@editorjs/editorjs';
-import { TunesMenuConfig } from '@editorjs/editorjs/types/tools';
+import { API, BlockAPI, BlockTune } from 'automad-editorjs';
+import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { insertBlock } from '../utils';
 
 /**

@@ -36,7 +36,6 @@ import {
 	App,
 	create,
 	createEditor,
-	CSS,
 	debounce,
 	FieldTag,
 	fire,
@@ -44,13 +43,12 @@ import {
 	listen,
 	listenToClassChange,
 	query,
-	queryAll,
 } from '@/core';
 import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData, UndoValue } from '@/types';
 import { LayoutTune } from '@/editor/tunes/Layout';
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
-import { EditorPortalDestinationComponent } from '@/components/Editor/EditorPortal';
+import { API } from 'automad-editorjs';
 
 /**
  * A block editor field.
@@ -86,7 +84,7 @@ export class EditorComponent extends BaseFieldComponent {
 			create('div', [], { id }, this),
 			{ blocks: this.value.blocks },
 			{
-				onChange: async (api) => {
+				onChange: async (api: API) => {
 					const { blocks } =
 						(await api.saver.save()) as EditorOutputData;
 
@@ -108,7 +106,8 @@ export class EditorComponent extends BaseFieldComponent {
 			false
 		);
 
-		this.attachToolbarPositionObserver();
+		this.attachToolbarPositionObservers();
+		this.attachPopupHeightObservers();
 	}
 
 	/**
@@ -126,12 +125,6 @@ export class EditorComponent extends BaseFieldComponent {
 	 * @param value
 	 */
 	async mutate(value: UndoValue): Promise<void> {
-		queryAll(EditorPortalDestinationComponent.TAG_NAME, this).forEach(
-			(dest: EditorPortalDestinationComponent) => {
-				dest.remove();
-			}
-		);
-
 		this.value = value;
 
 		if (value.blocks.length > 0) {
@@ -153,39 +146,9 @@ export class EditorComponent extends BaseFieldComponent {
 	}
 
 	/**
-	 * Attach observer and listeners in order to update the toolbar positions within sections.
-	 * Note that this should be done here in the parent component in order to be able to properly detach and destroy
-	 * listeners and observers after changing views.
+	 * Expand editor field height whenever a popup is opened.
 	 */
-	private attachToolbarPositionObserver(): void {
-		this.addListener(
-			listenToClassChange(this, (mutation) => {
-				const target = mutation.target as HTMLElement;
-
-				if (!target.classList.contains('ce-block--focused')) {
-					return;
-				}
-
-				LayoutTune.updateToolbarPosition(target);
-			})
-		);
-
-		this.addListener(
-			listen(
-				this,
-				'mouseover',
-				debounce((event: Event) => {
-					event.stopPropagation();
-
-					const target = event.target as HTMLElement;
-					const block = target.closest<HTMLElement>('.ce-block');
-
-					LayoutTune.updateToolbarPosition(block);
-				}, 10),
-				'.ce-block'
-			)
-		);
-
+	private attachPopupHeightObservers(): void {
 		// Expand height of editor when toolbar is open.
 		this.addListener(
 			listenToClassChange(this, (mutation) => {
@@ -203,7 +166,7 @@ export class EditorComponent extends BaseFieldComponent {
 					return;
 				}
 
-				const popover = query('.ce-popover', target);
+				const popover = query('.ce-popover--opened', target);
 
 				setTimeout(() => {
 					const popoverRect = popover.getBoundingClientRect();
@@ -242,6 +205,44 @@ export class EditorComponent extends BaseFieldComponent {
 					this.style.minHeight = `${minHeight}px`;
 				}, 0);
 			})
+		);
+	}
+
+	/**
+	 * Attach observer and listeners in order to update the toolbar positions within sections.
+	 * Note that this should be done here in the parent component in order to be able to properly detach and destroy
+	 * listeners and observers after changing views.
+	 */
+	private attachToolbarPositionObservers(): void {
+		// When forward slash is pressed.
+		this.addListener(
+			listen(this, 'keydown', (event: KeyboardEvent) => {
+				if (event.key != '/') {
+					return;
+				}
+
+				const target = event.target as HTMLElement;
+				const block = target.closest<HTMLElement>('.ce-block');
+
+				LayoutTune.updateToolbarPosition(block);
+			})
+		);
+
+		// On mouseover.
+		this.addListener(
+			listen(
+				this,
+				'mouseover',
+				debounce((event: Event) => {
+					event.stopPropagation();
+
+					const target = event.target as HTMLElement;
+					const block = target.closest<HTMLElement>('.ce-block');
+
+					LayoutTune.updateToolbarPosition(block);
+				}, 10),
+				'.ce-block'
+			)
 		);
 	}
 }

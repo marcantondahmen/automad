@@ -34,7 +34,7 @@
 
 import { App, create, query } from '@/core';
 import { KeyValueMap, TextAlignOption, TextAlignSelection } from '@/types';
-import { API, InlineToolConstructorOptions } from '@editorjs/editorjs';
+import { API, InlineToolConstructorOptions } from 'automad-editorjs';
 
 abstract class BaseTextAlignInline {
 	/**

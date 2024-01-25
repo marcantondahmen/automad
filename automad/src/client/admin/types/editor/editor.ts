@@ -32,8 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { OutputData } from '@editorjs/editorjs';
+import { API, OutputData } from 'automad-editorjs';
 
 export interface EditorOutputData extends OutputData {
 	automadVersion?: string;
+}
+
+export interface BaseEditor {
+	saver: API['saver'];
+	blocks: API['blocks'];
 }

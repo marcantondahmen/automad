@@ -60,7 +60,7 @@ import {
 } from '@/types';
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/components/Editor/EditorJS';
-import { EditorPortalComponent } from '@/components/Editor/EditorPortal';
+import { API } from 'automad-editorjs';
 
 /**
  * The flexbox option for "justify-content".
@@ -240,33 +240,36 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			`
 		);
 
-		const portal = create(
-			EditorPortalComponent.TAG_NAME,
-			[],
-			{},
-			this.section
-		);
+		const renderEditor = async () => {
+			const holder = create('div', [], {}, this.section);
 
-		this.holder = createEditor(
-			portal,
-			this.data.content as EditorOutputData,
-			{
-				onChange: async (api) => {
-					const { blocks } = await api.saver.save();
+			this.holder = createEditor(
+				holder,
+				this.data.content as EditorOutputData,
+				{
+					onChange: async (api: API) => {
+						const { blocks } = await api.saver.save();
 
-					this.data.content = { blocks };
-					this.blockAPI.dispatchChange();
+						this.data.content = { blocks };
+						this.blockAPI.dispatchChange();
+					},
 				},
-			},
-			true
-		);
+				true
+			);
 
-		listen(this.holder, 'paste', (event: Event) => {
-			event.stopPropagation();
-		});
+			await this.holder.editor.isReady;
 
-		this.renderToolbar();
-		this.setStyle();
+			this.holder.editor.focus();
+
+			listen(this.holder, 'paste', (event: Event) => {
+				event.stopPropagation();
+			});
+
+			this.renderToolbar();
+			this.setStyle();
+		};
+
+		renderEditor();
 
 		return this.wrapper;
 	}

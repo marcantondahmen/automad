@@ -38,7 +38,7 @@ import { ParagraphBlockData } from '@/types';
 import {
 	HTMLPasteEvent,
 	TunesMenuConfig,
-} from '@editorjs/editorjs/types/tools';
+} from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {

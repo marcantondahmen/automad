@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, BlockAPI, ToolConfig } from '@editorjs/editorjs';
+import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
 import { CodeLanguage, KeyValueMap } from '..';
 import {
 	sectionAlignItemsOptions,
