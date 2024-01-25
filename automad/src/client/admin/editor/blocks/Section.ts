@@ -241,10 +241,8 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		);
 
 		const renderEditor = async () => {
-			const holder = create('div', [], {}, this.section);
-
 			this.holder = createEditor(
-				holder,
+				this.section,
 				this.data.content as EditorOutputData,
 				{
 					onChange: async (api: API) => {
