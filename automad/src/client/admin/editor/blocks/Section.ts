@@ -344,9 +344,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			listen(document, 'click', (event: Event) => {
 				const target = event.target as HTMLElement;
 
-				if (!target?.closest(EditorJSComponent.TAG_NAME)) {
-					toolbar.classList.remove(CSS.active);
+				if (this.wrapper.contains(target)) {
+					return;
 				}
+
+				toolbar.classList.remove(CSS.active);
 			})
 		);
 	}
