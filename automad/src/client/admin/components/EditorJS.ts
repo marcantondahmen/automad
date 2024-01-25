@@ -126,7 +126,9 @@ export class EditorJSComponent extends BaseComponent {
 					logLevel: 'ERROR',
 					minHeight: 50,
 					autofocus: false,
-					placeholder: App.text('editorPlaceholder'),
+					placeholder: isSectionBlock
+						? ''
+						: App.text('editorPlaceholder'),
 					tools: {
 						...this.getBlockTools(),
 						...this.getBlockTunes(isSectionBlock),
