@@ -52,7 +52,6 @@ export abstract class BaseCenteredLayoutComponent extends BaseLayoutComponent {
 	 */
 	protected partials: Partials = {
 		main: this.renderMainPartial(),
-		// title: this.renderTitlePartial(),
 	};
 
 	/**
@@ -61,13 +60,4 @@ export abstract class BaseCenteredLayoutComponent extends BaseLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected abstract renderMainPartial(): string;
-
-	// /**
-	//  * Render the navbar title partial.
-	//  *
-	//  * @returns the rendered HTML
-	//  */
-	// protected renderTitlePartial(): string {
-	// 	return this.pageTitle;
-	// }
 }
