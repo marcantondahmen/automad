@@ -59,13 +59,13 @@ import { SubmitComponent } from './Submit';
  *
  * @extends BaseComponent
  */
-export class PublishComponent extends BaseComponent {
+export class PublishFormComponent extends BaseComponent {
 	/**
 	 * The tag name.
 	 *
 	 * @static
 	 */
-	static TAG_NAME = 'am-publish';
+	static TAG_NAME = 'am-publish-form';
 
 	/**
 	 * The state controller route.
@@ -201,4 +201,4 @@ export class PublishComponent extends BaseComponent {
 	}
 }
 
-customElements.define(PublishComponent.TAG_NAME, PublishComponent);
+customElements.define(PublishFormComponent.TAG_NAME, PublishFormComponent);
