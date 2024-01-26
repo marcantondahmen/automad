@@ -45,7 +45,7 @@ export abstract class BaseDashboardLayoutComponent extends BaseLayoutComponent {
 	/**
 	 * The template render function used to render the view.
 	 */
-	protected render: Function = dashboardLayout;
+	protected template: Function = dashboardLayout;
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.

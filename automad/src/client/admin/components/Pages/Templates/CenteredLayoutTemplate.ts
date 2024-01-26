@@ -35,7 +35,7 @@
 import { App, Attr, CSS, html } from '@/core';
 import { Partials } from '@/types';
 
-export const centered = ({ title, main }: Partials): string => {
+export const centered = ({ main }: Partials): string => {
 	return html`
 		<div class="${CSS.layoutCentered}">
 			<div class="${CSS.layoutCenteredNavbar}">

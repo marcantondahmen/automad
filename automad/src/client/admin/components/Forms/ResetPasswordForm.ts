@@ -108,7 +108,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 						>
 							${App.text('cancel')}
 						</am-link>
-						<am-submit class="${CSS.button}">
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('submit')}
 						</am-submit>
 					</div>
@@ -173,7 +173,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 						>
 							${App.text('cancel')}
 						</am-link>
-						<am-submit class="${CSS.button}">
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('passwordResetSave')}
 						</am-submit>
 					</div>
@@ -196,7 +196,7 @@ export class ResetPasswordFormComponent extends FormComponent {
 				</div>
 				<div class="${CSS.cardForm}">
 					<am-link
-						class="${CSS.button}"
+						class="${CSS.button} ${CSS.buttonPrimary}"
 						${Attr.target}="${Route.login}"
 					>
 						${App.text('signIn')}

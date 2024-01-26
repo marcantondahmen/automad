@@ -45,14 +45,14 @@ export abstract class BaseCenteredLayoutComponent extends BaseLayoutComponent {
 	/**
 	 * The template render function used to render the view.
 	 */
-	protected render: Function = centered;
+	protected template: Function = centered;
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.
 	 */
 	protected partials: Partials = {
 		main: this.renderMainPartial(),
-		title: this.renderTitlePartial(),
+		// title: this.renderTitlePartial(),
 	};
 
 	/**
@@ -62,12 +62,12 @@ export abstract class BaseCenteredLayoutComponent extends BaseLayoutComponent {
 	 */
 	protected abstract renderMainPartial(): string;
 
-	/**
-	 * Render the navbar title partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderTitlePartial(): string {
-		return this.pageTitle;
-	}
+	// /**
+	//  * Render the navbar title partial.
+	//  *
+	//  * @returns the rendered HTML
+	//  */
+	// protected renderTitlePartial(): string {
+	// 	return this.pageTitle;
+	// }
 }

@@ -45,7 +45,7 @@ export abstract class BaseLayoutComponent extends BaseComponent {
 	/**
 	 * The template render function used to render the view.
 	 */
-	protected render: Function;
+	protected abstract template: Function;
 
 	/**
 	 * Set the page title that is used a document title suffix.
@@ -65,7 +65,7 @@ export abstract class BaseLayoutComponent extends BaseComponent {
 	 */
 	init(): HTMLElement {
 		setDocumentTitle(this.pageTitle);
-		this.innerHTML = this.render(this.partials);
+		this.innerHTML = this.template(this.partials);
 
 		return this;
 	}
