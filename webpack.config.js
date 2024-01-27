@@ -68,16 +68,7 @@ const common = (env, argv) => {
 					test: /\.woff2?$/i,
 					type: 'asset/resource',
 					generator: {
-						filename: '[name][ext][query]',
-					},
-				},
-				// Ignore Bootstrap icons legacy woff file.
-				{
-					test: /bootstrap-icons\.css$/i,
-					loader: 'string-replace-loader',
-					options: {
-						search: /,\s*url\("[^"]+\/bootstrap-icons\.woff\?\w+"\)\s*format\("woff"\)/g,
-						replace: '',
+						filename: '../fonts/[name][ext][query]',
 					},
 				},
 			],
