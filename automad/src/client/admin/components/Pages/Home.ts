@@ -41,7 +41,7 @@ import {
 	html,
 	Route,
 } from '@/core';
-import { Section } from '../Switcher/Switcher';
+import { Section } from 'common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 const systemInfo = (): string => {

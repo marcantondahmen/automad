@@ -46,7 +46,7 @@ import {
 	titleCase,
 } from '@/core';
 import { Partials } from '@/types';
-import { Section } from '@/components/Switcher/Switcher';
+import { Section } from 'common';
 
 export const dashboardLayout = ({ main }: Partials) => {
 	return html`

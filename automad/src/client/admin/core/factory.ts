@@ -58,13 +58,13 @@ import {
 } from '.';
 import { PageDataFormComponent } from '@/components/Forms/PageDataForm';
 import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
-import { Section } from '@/components/Switcher/Switcher';
 import { SharedDataFormComponent } from '@/components/Forms/SharedDataForm';
 import { AutocompleteUrlComponent } from '@/components/AutocompleteUrl';
 import { BaseFieldComponent } from '@/components/Fields/BaseField';
 import { SelectComponent } from '@/components/Select';
 import { EditorConfig } from 'automad-editorjs';
 import { EditorJSComponent } from '@/components/EditorJS';
+import { Section } from 'common';
 
 /**
  * Create a new EditorJSComponent element.

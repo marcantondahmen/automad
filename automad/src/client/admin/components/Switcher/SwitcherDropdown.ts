@@ -35,7 +35,8 @@
 import { Attr, create, CSS, EventName, html, listen } from '@/core';
 import { SwitcherDropdownData, SwitcherDropdownItem } from '@/types';
 import { BaseComponent } from '@/components/Base';
-import { getActiveSection, Section } from './Switcher';
+import { getActiveSection } from './Switcher';
+import { Section } from 'common';
 
 /**
  * The system menu switcher wrapper.

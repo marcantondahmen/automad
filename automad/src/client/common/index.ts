@@ -32,6 +32,9 @@
  * Licensed under the MIT license.
  */
 
+export * from './routes';
+export * from './sections';
+
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
  *

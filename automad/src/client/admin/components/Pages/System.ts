@@ -38,7 +38,7 @@ import {
 	SwitcherDropdownItem,
 	SystemSectionData,
 } from '@/types';
-import { Section } from '@/components/Switcher/Switcher';
+import { Section } from 'common';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderDebugSection } from './Partials/System/Debug';
 import { renderFeedSection } from './Partials/System/Feed';

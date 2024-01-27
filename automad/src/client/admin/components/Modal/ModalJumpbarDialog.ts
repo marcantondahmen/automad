@@ -34,7 +34,7 @@
 
 import { JumpbarItemData, KeyValueMap, PageMetaData } from '@/types';
 import { App, Attr, create, CSS, html, Route } from '@/core';
-import { Section } from '@/components/Switcher/Switcher';
+import { Section } from 'common';
 import { AutocompleteComponent } from '../Autocomplete';
 
 /**

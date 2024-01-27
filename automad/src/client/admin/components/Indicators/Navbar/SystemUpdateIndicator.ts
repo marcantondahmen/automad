@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, CSS, html, Route } from '@/core';
-import { Section } from '@/components/Switcher/Switcher';
+import { Section } from 'common';
 import { BaseUpdateIndicatorComponent } from '@/components/Indicators/BaseUpdateIndicator';
 
 /**

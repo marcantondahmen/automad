@@ -44,7 +44,7 @@ import {
 	Route,
 } from '@/core';
 import { HistoryModalFormComponent } from '@/components/Forms/HistoryModalForm';
-import { Section } from '@/components/Switcher/Switcher';
+import { Section } from 'common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 

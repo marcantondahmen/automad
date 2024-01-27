@@ -47,7 +47,7 @@ import {
 	Route,
 } from '@/core';
 import { PageRecentlyEditedCardData } from '@/types';
-import { Section } from '../Switcher/Switcher';
+import { Section } from 'common';
 
 /**
  * A grid of recently edited pages.

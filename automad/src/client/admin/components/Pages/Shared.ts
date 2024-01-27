@@ -42,7 +42,7 @@ import {
 	Route,
 	SharedController,
 } from '@/core';
-import { Section } from '@/components/Switcher/Switcher';
+import { Section } from 'common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 

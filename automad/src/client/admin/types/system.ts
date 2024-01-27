@@ -33,7 +33,7 @@
  */
 
 import { transportOptions } from '@/components/Forms/MailConfigForm';
-import { Section } from '@/components/Switcher/Switcher';
+import { Section } from 'common';
 
 type Enabled = boolean | 0 | 1;
 
