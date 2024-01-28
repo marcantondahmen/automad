@@ -180,6 +180,8 @@ class DataStore {
 			return true;
 		});
 
+		unset($data[Fields::PUBLICATION_STATE]);
+
 		$this->data[$state->value] = $data;
 
 		return $this;
