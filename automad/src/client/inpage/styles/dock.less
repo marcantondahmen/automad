@@ -48,6 +48,20 @@
 		justify-content: center;
 		align-items: center;
 		width: 50px;
+
+		&:before {
+			content: attr(data-tooltip);
+			display: flex;
+			position: absolute;
+			top: -30px;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.2s;
+		}
+
+		&:hover:before {
+			opacity: 1;
+		}
 	}
 
 	&__logo {

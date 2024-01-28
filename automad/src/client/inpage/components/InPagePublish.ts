@@ -48,8 +48,9 @@ export class InPagePublishComponent extends BaseInPageComponent {
 		const url = this.getAttr('url');
 		const api = this.getAttr('api');
 		const csrf = this.getAttr('csrf');
+		const label = this.getAttr('label');
 
-		this.innerHTML = 'publish';
+		this.textContent = label;
 
 		if (state === 'draft') {
 			this.addEventListener('click', async () => {

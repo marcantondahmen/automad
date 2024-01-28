@@ -147,7 +147,7 @@ class InPage {
 			'fieldsSettings',
 			'fieldsContent',
 			'uploadedFiles',
-			'systemTitle'
+			'publish'
 		);
 
 		$labels = urlencode(

@@ -61,7 +61,11 @@ export class InPageDockComponent extends BaseInPageComponent {
 			logo
 		);
 
-		const createPageLink = (icon: string, section: Section) => {
+		const createPageLink = (
+			icon: string,
+			section: Section,
+			tooltip: string
+		) => {
 			create(
 				'i',
 				['bi', `bi-${icon}`],
@@ -71,17 +75,23 @@ export class InPageDockComponent extends BaseInPageComponent {
 					['am-inpage-dock__item'],
 					{
 						href: `${dashboard}/${Route.page}?url=${encodeURIComponent(url)}&section=${section}`,
+						'data-tooltip': tooltip,
 					},
 					this
 				)
 			);
 		};
 
-		createPageLink('sliders', Section.settings);
-		createPageLink('file-richtext', Section.text);
-		createPageLink('files', Section.files);
+		createPageLink('sliders', Section.settings, labels.fieldsSettings);
+		createPageLink('file-richtext', Section.text, labels.fieldsContent);
+		createPageLink('files', Section.files, labels.uploadedFiles);
 
-		create('am-inpage-publish', [], { state, url, api, csrf }, this);
+		create(
+			'am-inpage-publish',
+			[],
+			{ state, url, api, csrf, label: labels.publish },
+			this
+		);
 	}
 }
 
