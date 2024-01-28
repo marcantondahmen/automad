@@ -125,7 +125,7 @@ export class DragDrop {
 			this.component
 		);
 
-		handle?.setAttribute('draggable', 'true');
+		handle.setAttribute('draggable', 'true');
 
 		listen(handle, 'dragstart', () => {
 			const block = this.getCurrentBlock();

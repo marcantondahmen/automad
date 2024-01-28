@@ -341,7 +341,9 @@ export class EditorJSComponent extends BaseComponent {
 	 * Initialyze drag and drop.
 	 */
 	onRender(): void {
-		new DragDrop(this);
+		window.requestIdleCallback(() => {
+			new DragDrop(this);
+		});
 	}
 }
 
