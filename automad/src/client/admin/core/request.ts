@@ -34,6 +34,7 @@
 
 import {
 	App,
+	controllerRoute,
 	create,
 	EventName,
 	fire,
@@ -41,17 +42,10 @@ import {
 	listen,
 	notifyError,
 	query,
+	RequestKey,
 } from '.';
 import { FormComponent } from '@/components/Forms/Form';
 import { KeyValueMap } from '@/types';
-
-/**
- * The names of field that are submitted along with post requests.
- */
-export const enum RequestKey {
-	csrf = '__csrf__',
-	json = '__json__',
-}
 
 /**
  * Get the current CSRF token that is stored in the meta tag.
@@ -252,27 +246,6 @@ export const requestAPI = async (
 	log.response(controller, responseData);
 
 	return responseData;
-};
-
-/**
- * Convert a controller name into a valid route.
- *
- * @param controller
- * @return the route
- */
-export const controllerRoute = (controller: string): string => {
-	const [controllerClass, method] = controller.split('::');
-	const convert = (part: string) => {
-		return part
-			.replace(/([A-Z])/g, ' $1')
-			.trim()
-			.toLowerCase()
-			.replace(/\s/g, '-');
-	};
-
-	return `${convert(controllerClass.replace('Controller', ''))}/${convert(
-		method
-	)}`;
 };
 
 /**

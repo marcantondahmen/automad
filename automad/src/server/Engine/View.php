@@ -95,7 +95,7 @@ class View {
 		Debug::log($this->template, 'Render template');
 
 		$Runtime = new Runtime($this->Automad);
-		$InPage = new InPage();
+		$InPage = new InPage($this->Automad);
 
 		$ContentProcessor = new ContentProcessor(
 			$this->Automad,

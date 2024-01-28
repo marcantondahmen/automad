@@ -180,6 +180,7 @@ const admin = (env, argv) => {
 					'**/*.php',
 					'./automad/src/client/admin/mockup/**/*.html',
 					'./automad/dist/blocks/main.bundle.*',
+					'./automad/dist/inpage/main.bundle.*',
 				],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
 				notify: false,
@@ -223,4 +224,21 @@ const mail = (env, argv) =>
 		},
 	});
 
-module.exports = [admin, blocks, mail];
+const inpage = (env, argv) =>
+	merge(common(env, argv), {
+		entry: {
+			main: './automad/src/client/inpage/index.ts',
+		},
+		resolve: {
+			extensions: ['.ts', '.js'],
+			alias: {
+				common: path.resolve(__dirname, './automad/src/client/common'),
+			},
+		},
+		output: {
+			path: path.resolve(__dirname, './automad/dist/inpage'),
+			filename: '[name].bundle.js',
+		},
+	});
+
+module.exports = [admin, blocks, mail, inpage];

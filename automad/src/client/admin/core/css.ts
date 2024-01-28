@@ -219,6 +219,11 @@ export const enum CSS {
 	layoutDashboardContentRow = 'am-l-dashboard__content--row',
 	layoutDashboardFooter = 'am-l-dashboard__footer',
 
+	layoutInPage = 'am-l-inpage',
+	layoutInPageNavbar = 'am-l-inpage__navbar',
+	layoutInPageMain = 'am-l-inpage__main',
+	layoutInPageContent = 'am-l-inpage__content',
+
 	mdEditor = 'am-c-md-editor',
 	mdEditorFocus = 'am-c-md-editor--focus',
 

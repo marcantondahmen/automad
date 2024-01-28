@@ -36,11 +36,18 @@
 
 namespace Automad\Admin;
 
+use Automad\API\RequestHandler;
+use Automad\Core\Automad;
+use Automad\Core\Error;
 use Automad\Core\Session;
+use Automad\Core\Text;
 use Automad\Engine\Delimiters;
+use Automad\Engine\Document\Body;
+use Automad\Engine\Document\Head;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Context;
 use Automad\System\Asset;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,9 +60,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class InPage {
 	/**
-	 * The constructor.
+	 * The Automad instance.
 	 */
-	public function __construct() {
+	private Automad $Automad;
+
+	/**
+	 * The constructor.
+	 *
+	 * @param Automad $Automad
+	 */
+	public function __construct(Automad $Automad) {
+		$this->Automad = $Automad;
 	}
 
 	/**
@@ -64,11 +79,13 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed $str
 	 */
-	public function createUI(string $str) {
+	public function createUI(string $str): string {
 		if (Session::getUsername()) {
+			$this->validateTemplate($str);
+
 			$str = $this->injectAssets($str);
-			$str = $this->injectMarkup($str);
-			$str = $this->processTemporaryEditButtons($str);
+			$str = $this->injectDock($str);
+			$str = $this->processEditButtons($str);
 		}
 
 		return $str;
@@ -78,19 +95,22 @@ class InPage {
 	 * Inject a temporary markup for an edit button.
 	 *
 	 * @param string $value
-	 * @param string $key
+	 * @param string $field
 	 * @param Context $Context
 	 * @return string The processed $value
 	 */
-	public function injectTemporaryEditButton(string $value, string $key, Context $Context) {
+	public function injectTemporaryEditButton(string $value, string $field, Context $Context) {
 		// Only inject button if $key is no runtime var and a user is logged in.
-		if (preg_match('/^(\+|\w)/', $key) && Session::getUsername()) {
-			$value .= 	Delimiters::INPAGE_BUTTON_OPEN .
-						json_encode(array(
-							'context' => $Context->get()->origUrl,
-							'key' => $key
-						), JSON_UNESCAPED_SLASHES) .
-						Delimiters::INPAGE_BUTTON_CLOSE;
+		if (preg_match('/^(\+|\w)/', $field) && Session::getUsername()) {
+			return	Delimiters::INPAGE_BUTTON_OPEN .
+					json_encode(array(
+						'context' => $Context->get()->origUrl,
+						'field' => $field,
+						'page' => AM_REQUEST,
+						'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
+					), JSON_UNESCAPED_SLASHES) .
+					Delimiters::INPAGE_BUTTON_CLOSE .
+					$value;
 		}
 
 		return $value;
@@ -107,83 +127,53 @@ class InPage {
 			return $expression;
 		};
 
-		$assets = <<< HTML
-			<!-- Automad UI -->
-			{$fn(Asset::css('dist/admin/vendor.bundle.css'))}
-			{$fn(Asset::css('dist/admin/main.bundle.css'))}
-			{$fn(Asset::js('dist/admin/vendor.bundle.js'))}
-			{$fn(Asset::js('dist/admin/vendor.editorjs.bundle.js'))}
-			{$fn(Asset::js('dist/admin/vendor.filerobot.bundle.js'))}
-			{$fn(Asset::js('dist/admin/vendor.toastui.bundle.js'))}
-			{$fn(Asset::js('dist/admin/main.bundle.js'))}
-			<!-- Automad UI end -->
-		HTML;
+		$assets = Asset::css('dist/inpage/main.bundle.css') . Asset::js('dist/inpage/main.bundle.js');
 
-		// Check if there is already any other script tag and try to prepend all assets as first items.
-		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
-			return preg_replace('/(\<(script|link).*\<\/head\>)/is', $assets . "\n$1", $str);
-		} else {
-			return str_replace('</head>', $assets . "\n</head>", $str);
-		}
+		return Head::append($str, $assets);
 	}
 
 	/**
-	 * Inject UI markup like bottom menu and modal dialogs.
+	 * Inject main InPage component that provides the bottom menu and modal dialog.
 	 *
 	 * @param string $str
 	 * @return string The processed $str
 	 */
-	private function injectMarkup(string $str) {
-		return $str;
-		/* $urlBase = AM_BASE_URL;
-		$urlUI = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlSys = $urlUI . '/System';
-		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
-		$request = AM_REQUEST;
-		$logoSvg = file_get_contents(AM_BASE_DIR . '/automad/ui/svg/logo.svg');
-		$Text = Text::getObject();
+	private function injectDock(string $str) {
+		$state = $this->Automad->getPage(AM_REQUEST)?->get(Fields::PUBLICATION_STATE) ?? '';
+		$urlDashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
+		$urlApi = AM_BASE_INDEX . RequestHandler::$apiBase;
+		$urlPage = AM_REQUEST;
+		$labelKeys = array(
+			'fieldsSettings',
+			'fieldsContent',
+			'uploadedFiles',
+			'systemTitle'
+		);
 
-		//$modalSelectImage = SelectImage::render();
-		//$modalLink = Link::render();
+		$labels = urlencode(
+			json_encode(
+				array_reduce($labelKeys, function ($result, $key): array {
+					$result[$key] = Text::get($key);
 
-		$queryString = '';
+					return $result;
+				}, array())
+			)
+		);
 
-		if (!empty($_SERVER['QUERY_STRING'])) {
-			$queryString = $_SERVER['QUERY_STRING'];
-		}
-		 */
-		/* $html = <<< HTML
-			<div class="am-inpage" data-am-base-url="$urlBase">
-				<div class="am-inpage-menubar">
-					<div class="uk-button-group">
-						<a href="$urlUI" class="am-inpage-menu-button">$logoSvg</a>
-						<a href="$urlData" title="$Text->btn_data" $attr><i class="uk-icon-file-text-o"></i></a>
-						<a href="$urlFiles" title="$Text->uploadedFiles" $attr><i class="uk-icon-folder-open-o"></i></a>
-						<a href="$urlSys" title="$Text->systemTitle" $attr><i class="uk-icon-sliders"></i></a>
-						<a href="#" class="am-drag-handle am-inpage-menu-button">
-							<i class="uk-icon-arrows"></i>
-						</a>
-					</div>
-				</div>
-				<div id="am-inpage-edit-modal" class="am-fullscreen-modal uk-modal">
-					<div class="uk-modal-dialog uk-modal-dialog-blank">
-						<div class="uk-container uk-container-center">
-							<form
-							class="uk-form uk-form-stacked"
-							data-am-inpage-controller="${urlUI}?controller=InPage::edit"
-							>
-								<input type="hidden" name="url" value="$request" />
-								<input type="hidden" name="query" value="$queryString" />
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			$modalSelectImage
-			$modalLink
-		HTML;
+		$csrf = Session::getCsrfToken();
 
-		return str_replace('</body>', $html . '</body>', $str); */
+		$html = <<< HTML
+			<am-inpage-dock 
+				csrf="$csrf" 
+				api="$urlApi" 
+				dashboard="$urlDashboard" 
+				url="$urlPage" 
+				state="$state"
+				labels="$labels"
+			></am-inpage-dock>
+			HTML;
+
+		return Body::append($str, $html);
 	}
 
 	/**
@@ -193,7 +183,7 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed markup
 	 */
-	private function processTemporaryEditButtons(string $str) {
+	private function processEditButtons(string $str) {
 		// Remove invalid buttons.
 		// Within HTML tags.
 		// Like <div data-attr="...">
@@ -210,25 +200,38 @@ class InPage {
 		$open = preg_quote(Delimiters::INPAGE_BUTTON_OPEN);
 		$close = preg_quote(Delimiters::INPAGE_BUTTON_CLOSE);
 
-		$str = preg_replace_callback("/$open(.+?\"key\":\"([^\"]+)\".+?)$close/is", function ($matches) {
+		$str = preg_replace_callback("/$open(.+?\"field\":\"([^\"]+)\".+?)$close/is", function ($matches) {
 			$json = $matches[1];
-			$name = ucwords(str_replace('+', '', preg_replace('/([A-Z])/', ' $1', $matches[2])));
+			$data = json_decode($json);
 
 			return <<< HTML
-				<span class="am-inpage">
-					<a 
-					href="#am-inpage-edit-modal" 
-					class="am-inpage-edit-button" 
-					data-uk-modal="{modal:false}" 
-					data-am-inpage-content='$json'
-					>
-						<i class="uk-icon-pencil"></i>&nbsp;
-						$name 
-					</a>
-				</span>
-			HTML;
+				<am-inpage-edit
+					dashboard="{$data->dashboard}"
+					context="{$data->context}"
+					field="{$data->field}"
+					page="{$data->page}"
+				></am-inpage-edit>
+				HTML;
 		}, $str);
 
 		return $str;
+	}
+
+	/**
+	 * Check if the provided template qualifies for in-page editing.
+	 *
+	 * @param string $str
+	 */
+	private function validateTemplate(string $str): void {
+		if (!preg_match('#<html[^>]*?>.*?<head[^>]*?>.*?</head>.*?<body[^>]*?>.*?</body>.*?</html>#mis', $str)) {
+			Error::exit(
+				'Invalid Template Structure',
+				<<< HTML
+					A template must have a valid HTML structure including an outer 
+					<code>html</code> tag with one <code>head</code> and 
+					one <code>body</code> tag as direct child elements.
+				HTML
+			);
+		}
 	}
 }

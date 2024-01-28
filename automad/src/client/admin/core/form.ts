@@ -162,15 +162,7 @@ export const fieldGroup = ({
 		return;
 	}
 
-	const prefixMap = {
-		'+': FieldTag.editor,
-		checkbox: shared ? FieldTag.toggleSelect : FieldTag.toggle,
-		color: FieldTag.color,
-		date: FieldTag.date,
-		text: FieldTag.markdown,
-		image: FieldTag.imageSelect,
-		url: FieldTag.url,
-	} as const;
+	const prefixMap = getPrefixMap(!!shared);
 
 	Object.keys(fields).forEach((key) => {
 		if (!Object.values(App.reservedFields).includes(key)) {
@@ -235,6 +227,24 @@ export const collectFieldData = (container: HTMLElement): KeyValueMap => {
 	);
 
 	return data;
+};
+
+/**
+ * Get the map of prefixes that match the related input type.
+ *
+ * @param hasSharedDefaults
+ * @return the prefix map object
+ */
+export const getPrefixMap = (hasSharedDefaults: boolean) => {
+	return {
+		'+': FieldTag.editor,
+		checkbox: hasSharedDefaults ? FieldTag.toggleSelect : FieldTag.toggle,
+		color: FieldTag.color,
+		date: FieldTag.date,
+		text: FieldTag.markdown,
+		image: FieldTag.imageSelect,
+		url: FieldTag.url,
+	} as const;
 };
 
 /**

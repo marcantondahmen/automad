@@ -75,7 +75,7 @@ class Snippet {
 		$data = $block['data'];
 
 		$Runtime = new Runtime($Automad);
-		$InPage = new InPage();
+		$InPage = new InPage($Automad);
 
 		$ContentProcessor = new ContentProcessor(
 			$Automad,

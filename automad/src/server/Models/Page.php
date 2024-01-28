@@ -503,9 +503,9 @@ class Page {
 	/**
 	 * Publish a page.
 	 *
-	 * @return array
+	 * @return string|null a new path in case the page has moved or null
 	 */
-	public function publish(): array {
+	public function publish(): ?string {
 		$DataStore = new DataStore($this->path);
 		$draft = $DataStore->getState(PublicationState::DRAFT);
 
@@ -549,12 +549,10 @@ class Page {
 			$this->path != $newPagePath ||
 			$newSlug != $slug
 		) {
-			return array(
-				'redirect' => Page::dashboardUrlByPath($newPagePath)
-			);
+			return $newPagePath;
 		}
 
-		return array();
+		return null;
 	}
 
 	/**
@@ -642,6 +640,28 @@ class Page {
 	 */
 	public static function undefined(): Page {
 		return new Page(array(), null);
+	}
+
+	/**
+	 * Update a single field.
+	 *
+	 * @param string $field
+	 * @param mixed $value
+	 */
+	public function updateField(string $field, mixed $value): void {
+		$DataStore = new DataStore($this->path);
+		$draft = $DataStore->getState(PublicationState::DRAFT);
+
+		if ($field == Fields::TITLE && $this->origUrl != '/') {
+			$draft[Fields::SLUG] = self::updateSlug($draft[Fields::TITLE] ?? '', $value, $draft[Fields::SLUG] ?? '');
+		}
+
+		$draft[$field] = $value;
+
+		$DataStore->setState(PublicationState::DRAFT, $draft)
+				  ->save();
+
+		Cache::clear();
 	}
 
 	/**

@@ -22,71 +22,36 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-navbar {
+.am-inpage-dock {
+	position: fixed;
+	z-index: 99999;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
-	width: 100%;
-	padding: 1rem ~'calc(var(--am-body-padding-x) - @{am-navbar-item-padding-x})';
-
-	&__group {
-		display: flex;
-	}
+	align-items: stretch;
+	height: 50px;
+	border: 2px solid;
 
 	&__item {
-		position: relative;
 		display: flex;
+		justify-content: center;
 		align-items: center;
-		gap: @am-flex-gap;
-		padding: 0 @am-navbar-item-padding-x;
-		height: 100%;
-		font-size: @am-navbar-font-size;
-		font-weight: 520;
-		line-height: 1.8;
-		color: hsl(var(--am-clr-text));
-		transition: color 0.2s;
-		user-select: none;
-		cursor: pointer;
+		width: 50px;
+	}
 
-		&:hover {
-			color: hsl(var(--am-clr-text-hover));
-		}
-
-		& .bi {
-			font-size: 1.425rem;
-
-			&.bi-plus-lg {
-				padding-top: 0.1em;
-				font-size: 1.75rem;
-			}
-		}
-
-		& am-submit.am-e-button {
-			font-size: 1rem;
-
-			&:not([disabled]) {
-				border-color: hsl(var(--am-clr-border-active));
-			}
-		}
-
-		&&--glyph {
-			font-size: 1.425rem;
-			font-weight: 430;
-		}
-
-		& am-logo {
-			height: 100%;
-		}
+	&__logo {
+		width: 22px;
+		height: auto;
 	}
 }

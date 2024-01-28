@@ -22,67 +22,49 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-notify {
-	--text: var(--am-clr-text);
-	--bg: var(--am-clr-background);
-	--border: var(--am-clr-border);
+import { getTagFromRoute, Route } from '@/core';
+import { Partials } from '@/types';
+import { BaseLayoutComponent } from './BaseLayout';
+import { inPage } from './Templates/InPageLayoutTemplate';
 
-	gap: 1.2em;
-	width: 24rem;
-	padding: 0.6rem 0.95rem;
-	color: hsl(var(--text));
-	background: hsl(var(--bg));
-	box-shadow: @am-shadow;
-	border: @am-card-border-width solid hsl(var(--border));
-	border-radius: @am-card-radius;
+class InPageComponent extends BaseLayoutComponent {
+	/**
+	 * The template render function used to render the view.
+	 */
+	protected template: Function = inPage;
 
-	&--danger {
-		--text: var(--am-clr-text-danger);
-		--bg: var(--am-clr-background-danger);
-		--border: var(--am-clr-border-danger);
+	/**
+	 * Set the page title that is used a document title suffix.
+	 */
+	protected get pageTitle(): string {
+		return 'InPage';
 	}
 
-	&__node {
-		display: flex;
-		gap: 0.9em;
-	}
+	/**
+	 * An array of partials that must be provided in order to render partial references.
+	 */
+	protected partials: Partials = {
+		main: this.renderMainPartial(),
+	};
 
-	&__icon {
-		font-size: 1.5em;
-		line-height: 1.4;
-	}
-
-	&__text {
-		flex-grow: 1;
-		align-self: center;
-		word-break: break-all;
-	}
-
-	&__close {
-		padding-top: 0.15rem;
-		opacity: 0.3;
-		transition: opacity 0.2s;
-		font-size: 1.25rem;
-
-		&:before {
-			&:extend(.am-bi);
-			content: '\f62a';
-			font-size: 1.35rem;
-			line-height: 1;
-		}
-	}
-
-	&:hover &__close {
-		opacity: 1;
+	/**
+	 * Render the main partial.
+	 *
+	 * @returns the rendered HTML
+	 */
+	private renderMainPartial(): string {
+		return '<am-inpage-form></am-inpage-form>';
 	}
 }
+
+customElements.define(getTagFromRoute(Route.inpage), InPageComponent);

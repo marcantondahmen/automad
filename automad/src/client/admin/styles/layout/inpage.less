@@ -26,67 +26,42 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-navbar {
+.am-l-inpage {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
-	width: 100%;
-	padding: 1rem ~'calc(var(--am-body-padding-x) - @{am-navbar-item-padding-x})';
+	flex-direction: column;
+	gap: 2rem;
 
-	&__group {
+	&__navbar {
+		position: sticky;
 		display: flex;
+		z-index: 20;
+		top: 0;
+		justify-content: space-between;
+		align-items: center;
+		height: @am-navbar-height;
+		border-bottom: @am-border;
+		background-color: hsl(var(--am-clr-background));
+
+		margin-right: -15px;
+		padding-right: 15px;
+
+		.blur();
 	}
 
-	&__item {
-		position: relative;
+	&__main {
 		display: flex;
-		align-items: center;
-		gap: @am-flex-gap;
-		padding: 0 @am-navbar-item-padding-x;
-		height: 100%;
-		font-size: @am-navbar-font-size;
-		font-weight: 520;
-		line-height: 1.8;
-		color: hsl(var(--am-clr-text));
-		transition: color 0.2s;
-		user-select: none;
-		cursor: pointer;
+		justify-content: center;
+		padding: 0 var(--am-body-padding-x);
+	}
 
-		&:hover {
-			color: hsl(var(--am-clr-text-hover));
-		}
-
-		& .bi {
-			font-size: 1.425rem;
-
-			&.bi-plus-lg {
-				padding-top: 0.1em;
-				font-size: 1.75rem;
-			}
-		}
-
-		& am-submit.am-e-button {
-			font-size: 1rem;
-
-			&:not([disabled]) {
-				border-color: hsl(var(--am-clr-border-active));
-			}
-		}
-
-		&&--glyph {
-			font-size: 1.425rem;
-			font-weight: 430;
-		}
-
-		& am-logo {
-			height: 100%;
-		}
+	&__content {
+		width: 100%;
+		max-width: 76rem;
 	}
 }

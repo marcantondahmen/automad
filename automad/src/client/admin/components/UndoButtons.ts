@@ -38,7 +38,6 @@ import {
 	CSS,
 	EventName,
 	getMetaKeyLabel,
-	html,
 	listen,
 	Undo,
 } from '@/core';

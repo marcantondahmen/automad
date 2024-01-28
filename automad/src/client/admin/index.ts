@@ -78,6 +78,7 @@ import './components/Forms/DeleteUsersForm';
 import './components/Forms/Form';
 import './components/Forms/FormError';
 import './components/Forms/HistoryModalForm';
+import './components/Forms/InPageForm';
 import './components/Forms/MailConfigForm';
 import './components/Forms/PageDataForm';
 import './components/Forms/PublishForm';
@@ -120,6 +121,7 @@ import './components/PackageManager/PackageList';
 import './components/PackageManager/UpdateAllPackages';
 
 import './components/Pages/Home';
+import './components/Pages/InPage';
 import './components/Pages/Login';
 import './components/Pages/Packages';
 import './components/Pages/Page';

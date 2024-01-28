@@ -73,6 +73,12 @@ export interface PageBindings {
 	slugBinding: Binding;
 }
 
+export interface InPageBindings {
+	inPageReturnUrlBinding: Binding;
+	inPageTitleBinding: Binding;
+	inPageContextUrlBinding: Binding;
+}
+
 export interface DeletedPageMetaData {
 	title: string;
 	path: string;

@@ -34,17 +34,18 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Controllers\API;
 
+use Automad\API\Response;
+use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\Debug;
-use Automad\Core\Parse;
+use Automad\Core\DataStore;
+use Automad\Core\PublicationState;
 use Automad\Core\Request;
-use Automad\UI\Components\InPage\Edit;
-use Automad\UI\Models\PageModel;
-use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\UICache;
+use Automad\Core\Text;
+use Automad\Models\Page;
+use Automad\System\Fields;
+use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -57,112 +58,71 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class InPageController {
 	/**
-	 * Handle AJAX request for editing a data variable in-page context.
-	 *
-	 * If no data gets received, form fields to build up the editing dialog are send back.
-	 * Else the received data gets merged with the full data array of the requested context and
-	 * saved back into the .txt file.
-	 * In case the title variable gets modified, the page directory gets renamed accordingly.
+	 * Handle in-page field editing requests.
 	 *
 	 * @return Response the response object
 	 */
-	/* public static function edit() {
-		$Automad = UICache::get();
+	public static function edit(): Response {
 		$Response = new Response();
+		$Automad = Automad::fromCache();
 		$context = Request::post('context');
-		$postData = Request::post('data');
+		$init = Request::post('init');
+		$field = Request::post('field');
+
+		$Page = $Automad->getPage($context);
+
+		if (!$Page) {
+			return $Response->setError(Text::get('pageNotFoundError'));
+		}
+
+		$ThemeCollection = new ThemeCollection();
+		$Theme = $ThemeCollection->getThemeByKey($Page->get(Fields::THEME));
+		$templateFields = array_merge(
+			Fields::inCurrentTemplate($Page, $Theme),
+			array_values(Fields::$reserved)
+		);
+
+		if (!in_array($field, $templateFields)) {
+			return $Response->setError(Text::get('invalidFieldError'));
+		}
+
+		if ($init) {
+			return $Response->setData(array('value'=> $Page->data[$field] ?? ''));
+		}
+
+		if (filemtime($Page->getFile()) > Request::post('dataFetchTime')) {
+			return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
+		}
+
+		$Page->updateField($field, Request::post('value'));
+
+		return $Response->setData(array('saved' => true));
+	}
+
+	/**
+	 * Publish a page.
+	 *
+	 * @return Response
+	 */
+	public static function publish(): Response {
+		$Response = new Response();
 		$url = Request::post('url');
+		$Page = Page::fromCache($url);
 
-		if ($context) {
-			// Check if page actually exists.
-			if ($Page = $Automad->getPage($context)) {
-				// If data gets received, merge and save.
-				// Else send back form fields.
-				if ($postData && is_array($postData)) {
-					// Merge and save data.
-					$data = array_merge(Parse::dataFile($Page->getFile()), $postData);
-					FileSystem::writeData($data, $Page->getFile());
-					Debug::log($data, 'saved data');
-					Debug::log($Page->getFile(), 'data file');
+		if (!$Page) {
+			return $Response;
+		}
 
-					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
-					if (!empty($postData[Fields::TITLE]) && $Page->url != '/') {
-						$slug = PageModel::updateSlug(
-							$Page->get(Fields::TITLE),
-							$postData[Fields::TITLE],
-							PageModel::extractSlugFromPath($Page->path)
-						);
+		$newPagePath = $Page->publish();
 
-						// Move directory.
-						$newPagePath = PageModel::moveDirAndUpdateLinks(
-							$Page,
-							dirname($Page->path),
-							PageModel::extractPrefixFromPath($Page->path),
-							$slug
-						);
+		if (!empty($newPagePath)) {
+			$Page = Page::findByPath($newPagePath);
 
-						Debug::log($newPagePath, 'renamed page');
-					}
-
-					// Clear cache to reflect changes.
-					Cache::clear();
-
-					$redirectUrl = '';
-
-					// If the page directory got renamed, find the new URL.
-					if ($Page->url == $url && isset($newPagePath)) {
-						// The page has to be redirected to a new url in case the edited context is actually
-						// the requested page and the title of the page and therefore the URL has changed.
-
-						// Rebuild Automad object, since the file structure has changed.
-						$Automad = UICache::rebuild();
-
-						// Find new URL and return redirect URL.
-						foreach ($Automad->getCollection() as $key => $Page) {
-							if ($Page->path == $newPagePath) {
-								$redirectUrl = AM_BASE_INDEX . $key;
-
-								break;
-							}
-						}
-					} else {
-						// There are two cases where the currently requested page has to be
-						// simply reloaded without redirection:
-						//
-						// 1.	The context of the edits is not the current page and another
-						// 		pages gets actually edited.
-						// 		That would be the case for edits of pages displayed in pagelists or menus.
-						//
-						// 2.	The context is the current page, but the title didn't change and
-						// 		therefore the URL stays the same.
-						$redirectUrl = AM_BASE_INDEX . $url;
-					}
-
-					// Append query string if not empty.
-					$queryString = Request::post('query');
-
-					if ($queryString) {
-						$redirectUrl .= '?' . $queryString;
-					}
-
-					$Response->setRedirect($redirectUrl);
-				} else {
-					// Return form fields if key is defined.
-					if ($key = Request::post('key')) {
-						$value = '';
-
-						if (!empty($Page->data[$key])) {
-							$value = $Page->data[$key];
-						}
-
-						// Note that $Page->path has to be added to make
-						// image previews work in CodeMirror.
-						$Response->setHtml(Edit::render($Automad, $key, $value, $context, $Page->path));
-					}
-				}
+			if ($Page) {
+				return $Response->setRedirect(AM_BASE_INDEX . $Page->origUrl);
 			}
 		}
 
 		return $Response;
-	} */
+	}
 }

@@ -1,0 +1,197 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2024 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+import { InPageBindings, KeyValueMap } from '@/types';
+import { FormComponent } from './Form';
+import {
+	App,
+	Attr,
+	Binding,
+	Bindings,
+	create,
+	createField,
+	CSS,
+	EventName,
+	FieldTag,
+	fire,
+	getPrefixMap,
+	html,
+	InPageController,
+	listen,
+	setDocumentTitle,
+} from '@/core';
+
+/**
+ * The InPage editing form element.
+ *
+ * @extends FormComponent
+ */
+export class InPageFormComponent extends FormComponent {
+	/**
+	 * Get the api attribute already before attributes are observed.
+	 */
+	protected get api(): string {
+		return InPageController.edit;
+	}
+
+	/**
+	 * Wait for pending requests.
+	 */
+	protected get parallel(): boolean {
+		return false;
+	}
+
+	/**
+	 * Only enable submit button when input values have changed.
+	 */
+	protected get watch(): boolean {
+		return true;
+	}
+
+	/**
+	 * Enable self init.
+	 */
+	protected get initSelf(): boolean {
+		return true;
+	}
+
+	private field: string;
+
+	private page: string;
+
+	private context: string;
+
+	/**
+	 * The page bindings object.
+	 */
+	private bindings: InPageBindings;
+
+	/**
+	 * Initialize the form.
+	 */
+	protected init(): void {
+		const params = new URLSearchParams(document.location.search);
+
+		this.field = params.get('field');
+		this.page = params.get('page');
+		this.context = params.get('context');
+
+		this.additionalData = {
+			field: this.field,
+			context: this.context,
+			init: true,
+		};
+
+		this.setAttribute(Attr.api, this.api);
+
+		setDocumentTitle(
+			`${App.pages[this.context]?.title ?? '404'} (${this.field})`
+		);
+
+		this.bindings = {
+			inPageReturnUrlBinding: new Binding('inPageReturnUrl', {
+				initial: this.page,
+				modifier: (url: string) => `${App.baseURL}${url}`,
+			}),
+			inPageTitleBinding: new Binding('inPageTitle', {
+				initial: App.pages[this.context]?.title ?? '404',
+			}),
+			inPageContextUrlBinding: new Binding('inPageContextUrl', {
+				initial: this.context,
+				modifier: (url: string) => `${App.baseURL}${url}`,
+			}),
+		};
+
+		Bindings.connectElements(App.root);
+
+		super.init();
+	}
+
+	/**
+	 * Create the form after the response was received successfully.
+	 *
+	 * @param response - the response data
+	 * @async
+	 */
+	protected async processResponse(response: KeyValueMap): Promise<void> {
+		this.additionalData.init = false;
+
+		await super.processResponse(response);
+
+		if (response.code !== 200) {
+			return;
+		}
+
+		if (!response.data) {
+			return;
+		}
+
+		if (response.data.saved) {
+			window.location.href = this.bindings.inPageReturnUrlBinding.value;
+		}
+
+		if (typeof response.data.value != 'undefined') {
+			this.render(response);
+		}
+	}
+
+	/**
+	 * Create the actual form fields.
+	 *
+	 * @param response
+	 */
+	private render(response: KeyValueMap): void {
+		const prefixMap = getPrefixMap(true);
+		let fieldType: FieldTag = FieldTag.textarea;
+
+		for (const [prefix, value] of Object.entries(prefixMap)) {
+			if (this.field.startsWith(prefix)) {
+				fieldType = value;
+				break;
+			}
+		}
+
+		this.innerHTML = '';
+
+		createField(fieldType, this, {
+			key: this.field,
+			value: response.data.value,
+			name: 'value',
+		});
+
+		this.additionalData['dataFetchTime'] = response.time;
+	}
+}
+
+customElements.define('am-inpage-form', InPageFormComponent);

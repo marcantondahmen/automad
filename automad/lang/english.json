@@ -168,6 +168,7 @@
 	"insertLink": "Insert link",
 	"insertTable": "Insert table",
 	"invalidEmailError": "Invalid email address!",
+	"invalidFieldError": "Invalid field",
 	"invalidFormError": "Incomplete or incorrect data!<br />All fields are required and have to be completed as described!",
 	"invalidImageError": "Invalid image provided.",
 	"invalidUsernameError": "Invalid username! A username can only contain the following characters:",

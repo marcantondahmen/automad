@@ -22,67 +22,35 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-notify {
-	--text: var(--am-clr-text);
-	--bg: var(--am-clr-background);
-	--border: var(--am-clr-border);
-
-	gap: 1.2em;
-	width: 24rem;
-	padding: 0.6rem 0.95rem;
-	color: hsl(var(--text));
-	background: hsl(var(--bg));
-	box-shadow: @am-shadow;
-	border: @am-card-border-width solid hsl(var(--border));
-	border-radius: @am-card-radius;
-
-	&--danger {
-		--text: var(--am-clr-text-danger);
-		--bg: var(--am-clr-background-danger);
-		--border: var(--am-clr-border-danger);
+export abstract class BaseInPageComponent extends HTMLElement {
+	/**
+	 * The class constructor.
+	 */
+	constructor() {
+		super();
 	}
 
-	&__node {
-		display: flex;
-		gap: 0.9em;
-	}
+	/**
+	 * Get attribute value and remove attribute.
+	 *
+	 * @param name
+	 * @return the value
+	 */
+	protected getAttr(name: string): string {
+		const value = this.getAttribute(name);
 
-	&__icon {
-		font-size: 1.5em;
-		line-height: 1.4;
-	}
+		this.removeAttribute(name);
 
-	&__text {
-		flex-grow: 1;
-		align-self: center;
-		word-break: break-all;
-	}
-
-	&__close {
-		padding-top: 0.15rem;
-		opacity: 0.3;
-		transition: opacity 0.2s;
-		font-size: 1.25rem;
-
-		&:before {
-			&:extend(.am-bi);
-			content: '\f62a';
-			font-size: 1.35rem;
-			line-height: 1;
-		}
-	}
-
-	&:hover &__close {
-		opacity: 1;
+		return value;
 	}
 }
