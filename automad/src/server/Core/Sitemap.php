@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\API\RequestHandler;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -88,8 +89,12 @@ class Sitemap {
 
 		$server = AM_SERVER;
 		$robots = AM_BASE_DIR . '/robots.txt';
+		$dashboard = AM_PAGE_DASHBOARD;
+		$api = RequestHandler::$apiBase;
 		$txt = <<< TXT
 			User-agent: *
+			Disallow: $dashboard/*
+			Disallow: $api/*
 			Allow: /
 
 			Sitemap: $server/sitemap.xml
