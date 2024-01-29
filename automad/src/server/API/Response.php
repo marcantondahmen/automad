@@ -69,6 +69,12 @@ class Response {
 	private ?string $error = null;
 
 	/**
+	 * The exception array for all exceptions that are caught by the exception handler
+	 * defined in Error::setJsonResponseHandler().
+	 */
+	private ?array $exception = null;
+
+	/**
 	 * The output buffer used to store a redirect URL.
 	 */
 	private ?string $redirect = null;
@@ -158,6 +164,19 @@ class Response {
 	 */
 	public function setError(string $value = ''): Response {
 		$this->error = $value;
+
+		return $this;
+	}
+
+	/**
+	 * Set the exception property.
+	 *
+	 * @see $exception
+	 * @param array $value
+	 * @return Response
+	 */
+	public function setException(array $value = array()): Response {
+		$this->exception = $value;
 
 		return $this;
 	}

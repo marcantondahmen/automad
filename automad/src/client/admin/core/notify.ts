@@ -88,7 +88,7 @@ export const notifyError = (message: string): void => {
 	notify({
 		message,
 		duration: -1,
-		icon: 'slash-circle',
+		icon: 'x-circle',
 		className: `${CSS.notify} ${CSS.notifyDanger}`,
 	});
 };

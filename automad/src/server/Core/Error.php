@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\API\Response;
 use ErrorException;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,12 +63,10 @@ class Error {
 	}
 
 	/**
-	 * Set error handlers that output styled error messages.
+	 * Set error handlers that output styled error messages on HTML pages.
 	 */
-	public static function setHandlers(): void {
-		set_error_handler(function ($serverity, $message, $file, $line) {
-			throw new ErrorException($message, 0, $serverity, $file, $line);
-		});
+	public static function setHtmlOutputHandler(): void {
+		self::setErrorHandler();
 
 		set_exception_handler(
 			function ($error) {
@@ -83,6 +82,31 @@ class Error {
 				);
 
 				exit(1);
+			}
+		);
+	}
+
+	/**
+	 * Set error handlers that output a JSON response including an exception object.
+	 */
+	public static function setJsonResponseHandler(): void {
+		self::setErrorHandler();
+
+		set_exception_handler(
+			function ($error) {
+				$Response = new Response();
+
+				$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
+				$line = $error->getLine();
+
+				$json = $Response->setException(array(
+					'message' => $error->getMessage(),
+					'file' => $error->getFile(),
+					'line' => $error->getLine(),
+					'trace' => $error->getTrace()
+				))->setCode(500)->json();
+
+				exit($json);
 			}
 		);
 	}
@@ -189,5 +213,14 @@ class Error {
 				</body>
 			</html>
 			HTML;
+	}
+
+	/**
+	 * Set up the error handler to throw a new exception on error.
+	 */
+	private static function setErrorHandler(): void {
+		set_error_handler(function ($serverity, $message, $file, $line) {
+			throw new ErrorException($message, 0, $serverity, $file, $line);
+		});
 	}
 }

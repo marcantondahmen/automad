@@ -245,6 +245,12 @@ export const requestAPI = async (
 	log.request(controller, data);
 	log.response(controller, responseData);
 
+	if (typeof responseData.exception != 'undefined') {
+		notifyError(responseData.exception.message);
+
+		log.error(controller, responseData.exception);
+	}
+
 	return responseData;
 };
 

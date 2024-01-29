@@ -37,6 +37,7 @@
 namespace Automad\API;
 
 use Automad\Core\Debug;
+use Automad\Core\Error;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Session;
@@ -79,8 +80,7 @@ class RequestHandler {
 	 * @return string the JSON formatted response
 	 */
 	public static function getResponse(): string {
-		restore_error_handler();
-		restore_exception_handler();
+		Error::setJsonResponseHandler();
 
 		header('Content-Type: application/json; charset=utf-8');
 
@@ -94,7 +94,6 @@ class RequestHandler {
 			$Messenger = new Messenger();
 
 			if (self::validate($controller, $Messenger)) {
-				self::registerControllerErrorHandler();
 				self::convertJsonPost();
 				$Response = call_user_func($controller);
 			} else {
@@ -138,23 +137,6 @@ class RequestHandler {
 		}
 
 		Debug::log($_POST);
-	}
-
-	/**
-	 * Register a error handler that sends a 500 response code in case of a fatal error created by a controller.
-	 */
-	private static function registerControllerErrorHandler(): void {
-		error_reporting(0);
-
-		register_shutdown_function(function () {
-			$error = error_get_last();
-
-			if (is_array($error) && !empty($error['type']) && $error['type'] === 1) {
-				http_response_code(500);
-				$error['message'] = explode("\n", $error['message'] ?? '');
-				exit(json_encode($error, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-			}
-		});
 	}
 
 	/**

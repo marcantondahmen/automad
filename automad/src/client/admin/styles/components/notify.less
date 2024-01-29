@@ -39,7 +39,7 @@
 
 	gap: 1.2em;
 	width: 24rem;
-	padding: 0.6rem 0.95rem;
+	padding: 0.6rem 0.85rem;
 	color: hsl(var(--text));
 	background: hsl(var(--bg));
 	box-shadow: @am-shadow;
@@ -65,19 +65,20 @@
 	&__text {
 		flex-grow: 1;
 		align-self: center;
-		word-break: break-all;
+		padding: 0.2rem 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	&__close {
-		padding-top: 0.15rem;
+		padding: 0.2rem 0;
 		opacity: 0.3;
 		transition: opacity 0.2s;
-		font-size: 1.25rem;
 
 		&:before {
 			&:extend(.am-bi);
-			content: '\f62a';
-			font-size: 1.35rem;
+			content: '\f659';
+			font-size: 1rem;
 			line-height: 1;
 		}
 	}
