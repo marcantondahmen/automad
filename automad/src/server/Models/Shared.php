@@ -153,7 +153,7 @@ class Shared {
 		$DataStore->setState(PublicationState::DRAFT, $data);
 
 		if (!$DataStore->save()) {
-			$Messenger->setError(Text::get('error_permission'));
+			$Messenger->setError(Text::get('permissionsDeniedError'));
 
 			return false;
 		}
