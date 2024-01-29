@@ -48,32 +48,39 @@ export class InPagePublishComponent extends BaseInPageComponent {
 		const url = this.getAttr('url');
 		const api = this.getAttr('api');
 		const csrf = this.getAttr('csrf');
-		const label = this.getAttr('label');
 
-		this.textContent = label;
+		const publish = async (): Promise<void> => {
+			const data = await inPageRequest(
+				api,
+				InPageController.publish,
+				csrf,
+				{
+					url,
+				}
+			);
+
+			if (data.code != 200) {
+				return;
+			}
+
+			if (data.redirect) {
+				window.location.href = `${data.redirect}`;
+
+				return;
+			}
+
+			window.location.reload();
+		};
+
+		this.textContent = this.getAttr('label');
 
 		if (state === 'draft') {
-			this.addEventListener('click', async () => {
-				const data = await inPageRequest(
-					api,
-					InPageController.publish,
-					csrf,
-					{
-						url,
-					}
-				);
+			this.addEventListener('click', publish);
 
-				if (data.redirect) {
-					window.location.href = `${data.redirect}`;
-
-					return;
-				}
-
-				window.location.reload();
-			});
-		} else {
-			this.setAttribute('disabled', '');
+			return;
 		}
+
+		this.setAttribute('disabled', '');
 	}
 }
 

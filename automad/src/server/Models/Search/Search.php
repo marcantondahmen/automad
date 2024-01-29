@@ -211,7 +211,7 @@ class Search {
 		$results = array();
 
 		foreach ($blocks as $block) {
-			if ($block['type'] == 'section') {
+			if ($block['type'] == 'section' && isset($block['data']['content']['blocks'])) {
 				$results = $this->appendFieldResults(
 					$results,
 					$this->searchBlocksRecursively($field, $block['data']['content']['blocks'])
