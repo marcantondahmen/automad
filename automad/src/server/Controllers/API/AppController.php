@@ -41,7 +41,6 @@ use Automad\API\Response;
 use Automad\API\ResponseCache;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
