@@ -32,6 +32,8 @@
  * Licensed under the MIT license.
  */
 
+export * from '@/../common/types';
+
 export * from './editor/blocks';
 export * from './editor/editor';
 export * from './editor/inline';
@@ -44,6 +46,9 @@ export * from './shared';
 export * from './switcher';
 export * from './system';
 export * from './undo';
+
+import { KeyValueMap } from 'common';
+
 import { codeLanguages } from '@/core/code';
 import { PageMetaData, InputElement } from '.';
 
@@ -61,10 +66,6 @@ declare global {
 	interface Window {
 		DEBUG: boolean;
 	}
-}
-
-export interface KeyValueMap {
-	[key: string | number]: any;
 }
 
 export interface AutocompleteItem {

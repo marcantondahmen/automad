@@ -64,7 +64,7 @@ export class InPagePublishComponent extends BaseInPageComponent {
 				);
 
 				if (data.redirect) {
-					window.location.href = data.redirect;
+					window.location.href = `${data.redirect}`;
 
 					return;
 				}

@@ -45,7 +45,7 @@ import {
 	RequestKey,
 } from '.';
 import { FormComponent } from '@/components/Forms/Form';
-import { KeyValueMap } from '@/types';
+import { KeyValueMap, APIResponse } from '@/types';
 
 /**
  * Get the current CSRF token that is stored in the meta tag.
@@ -186,7 +186,7 @@ export const requestAPI = async (
 	parallel: boolean = true,
 	callback: Function = null,
 	cancelable: boolean = false
-): Promise<KeyValueMap> => {
+): Promise<APIResponse> => {
 	if (!parallel) {
 		while (!PendingRequests.idle) {
 			await waitForPendingRequests();
@@ -200,7 +200,7 @@ export const requestAPI = async (
 	// non-parallel request was queued. Note that  between queuing a request and the actual time of submission,
 	// form data can change due to bindings.
 	let data = dataOrForm?.formData || dataOrForm;
-	let responseData;
+	let responseData: APIResponse;
 
 	if (data) {
 		data = transformToTree(data);
@@ -234,7 +234,7 @@ export const requestAPI = async (
 			notifyError(`${App.text('fetchingDataError')} (${route})`);
 		}
 
-		responseData = {};
+		responseData = { code: 500, time: 0 };
 	}
 
 	abortListener.remove();

@@ -32,7 +32,12 @@
  * Licensed under the MIT license.
  */
 
-import { controllerRoute, InPageController, RequestKey } from 'common';
+import {
+	APIResponse,
+	controllerRoute,
+	InPageController,
+	RequestKey,
+} from 'common';
 
 /**
  * Make a request to the API from an InPage component.
@@ -48,7 +53,7 @@ export const inPageRequest = async (
 	controller: InPageController,
 	csrf: string,
 	data: { [key: string]: string | boolean }
-): Promise<{ [key: string]: string }> => {
+): Promise<APIResponse> => {
 	log(`${controller} ${'>>'}`, data);
 
 	const formData = new FormData();
@@ -62,11 +67,11 @@ export const inPageRequest = async (
 	};
 
 	const response = await fetch(`${api}/${controllerRoute(controller)}`, init);
-	const resonseData = await response.json();
+	const responseData = await response.json();
 
-	log(`${controller} ${'<<'}`, resonseData);
+	log(`${controller} ${'<<'}`, responseData);
 
-	return resonseData;
+	return responseData;
 };
 
 /**
