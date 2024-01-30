@@ -9,10 +9,10 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "clean": "rm -rf ./automad/dist/admin && rm -rf ./automad/dist/blocks && rm -rf ./automad/dist/mail",
+    "clean": "rm -rf ./automad/dist/*/*",
     "build": "npm run clean && webpack --config webpack.config.js --mode production",
     "dev": "npm run clean && webpack --config webpack.config.js --mode development",
-    "phpunit": "phpunit",
+    "phpunit": "phpunit --testdox",
     "psalm": "psalm --clear-global-cache && psalm",
     "jest": "jest",
     "jest:watch": "jest --watch",
