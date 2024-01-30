@@ -33,6 +33,7 @@
  */
 
 import { create } from 'common';
+import { saveScrollPosition } from '../sessionStore';
 import { BaseInPageComponent } from './BaseInPageComponent';
 
 const createLabel = (field: string): string => {
@@ -75,6 +76,8 @@ export class InPageEditComponent extends BaseInPageComponent {
 				page,
 				context,
 			}).toString();
+
+			saveScrollPosition();
 
 			window.location.href = `${dashboard}/inpage?${query}`;
 		});

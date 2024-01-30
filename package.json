@@ -45,6 +45,7 @@
     "css-minimizer-webpack-plugin": "^3.4.1",
     "dist-font-inter": "^4.0.2",
     "dompurify": "^3.0.4",
+    "draggabilly": "^3.0.0",
     "dropzone": "^6.0.0-beta.2",
     "file-loader": "^6.2.0",
     "filerobot-image-editor": "^4.5.1",

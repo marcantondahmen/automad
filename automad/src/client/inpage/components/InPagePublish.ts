@@ -34,6 +34,7 @@
 
 import { InPageController } from 'common';
 import { inPageRequest } from '../request';
+import { saveScrollPosition } from '../sessionStore';
 import { BaseInPageComponent } from './BaseInPageComponent';
 
 /**
@@ -62,6 +63,8 @@ export class InPagePublishComponent extends BaseInPageComponent {
 			if (data.code != 200) {
 				return;
 			}
+
+			saveScrollPosition();
 
 			if (data.redirect) {
 				window.location.href = `${data.redirect}`;

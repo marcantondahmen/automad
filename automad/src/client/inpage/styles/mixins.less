@@ -32,10 +32,11 @@
  * Licensed under the MIT license.
  */
 
-@import '../../admin/styles/themes/variables.less';
+.background() {
+	background-color: hsla(220, 9%, 6%, var(--am-inpage-bg-opacity, 100%));
 
-@import 'dock.less';
-@import 'edit.less';
-@import 'mixins.less';
-@import 'publish.less';
-@import 'variables.less';
+	@supports (backdrop-filter: blur(9px)) {
+		--am-inpage-bg-opacity: 48%;
+		backdrop-filter: blur(9px);
+	}
+}
