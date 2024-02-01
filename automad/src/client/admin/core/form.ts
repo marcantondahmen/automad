@@ -164,37 +164,42 @@ export const fieldGroup = ({
 
 	const prefixMap = getPrefixMap(!!shared);
 
-	Object.keys(fields).forEach((key) => {
-		if (!Object.values(App.reservedFields).includes(key)) {
-			let fieldType: FieldTag = FieldTag.textarea;
-			let placeholder = '';
-
-			for (const [prefix, value] of Object.entries(prefixMap)) {
-				if (key.startsWith(prefix)) {
-					fieldType = value;
-					break;
-				}
-			}
-
-			if (shared) {
-				placeholder = shared[key];
-			}
-
-			createField(
-				fieldType,
-				section,
-				{
-					key: key,
-					value: fields[key],
-					tooltip: tooltips[key],
-					name: `data[${key}]`,
-					placeholder,
-				},
-				[],
-				{},
-				[FieldTag.editor, FieldTag.markdown].includes(fieldType)
-			);
+	Object.keys(fields).forEach((name) => {
+		if (
+			Object.values(App.reservedFields).includes(name) ||
+			name.startsWith(':')
+		) {
+			return;
 		}
+
+		let fieldType: FieldTag = FieldTag.textarea;
+		let placeholder = '';
+
+		for (const [prefix, value] of Object.entries(prefixMap)) {
+			if (name.startsWith(prefix)) {
+				fieldType = value;
+				break;
+			}
+		}
+
+		if (shared) {
+			placeholder = shared[name];
+		}
+
+		createField(
+			fieldType,
+			section,
+			{
+				key: name,
+				value: fields[name],
+				tooltip: tooltips[name],
+				name: `data[${name}]`,
+				placeholder,
+			},
+			[],
+			{},
+			[FieldTag.editor, FieldTag.markdown].includes(fieldType)
+		);
 	});
 };
 
