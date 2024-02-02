@@ -48,8 +48,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class Delimiters {
 	const COMMENT_CLOSE = '#>';
 	const COMMENT_OPEN = '<#';
-	const INPAGE_BUTTON_CLOSE = '@@}}';
-	const INPAGE_BUTTON_OPEN = '{{@@';
 	const OUTER_STATEMENT_MARKER = '#';
 	const STATEMENT_CLOSE = '@>';
 	const STATEMENT_OPEN = '<@';

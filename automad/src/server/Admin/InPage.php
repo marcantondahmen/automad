@@ -60,6 +60,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class InPage {
 	/**
+	 * This regex matches the "{{@open:$data@}}$value{{@close@}}" string that temporary
+	 * wraps values in encoded fields that are later converted into webcomponents.
+	 *
+	 * @see injectTemporaryEditButton()
+	 */
+	const TEMP_REGEX = '/\{\{@open:([\w=]+)@\}\}(.*?)\{\{@close@\}\}/s';
+
+	/**
 	 * The Automad instance.
 	 */
 	private Automad $Automad;
@@ -102,15 +110,16 @@ class InPage {
 	public function injectTemporaryEditButton(string $value, string $field, Context $Context) {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $field) && Session::getUsername()) {
-			return	Delimiters::INPAGE_BUTTON_OPEN .
-					json_encode(array(
-						'context' => $Context->get()->origUrl,
-						'field' => $field,
-						'page' => AM_REQUEST,
-						'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
-					), JSON_UNESCAPED_SLASHES) .
-					Delimiters::INPAGE_BUTTON_CLOSE .
-					$value;
+			$data = base64_encode(
+				json_encode(array(
+					'context' => $Context->get()->origUrl,
+					'field' => $field,
+					'page' => AM_REQUEST,
+					'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
+				), JSON_UNESCAPED_SLASHES)
+			);
+
+			return "{{@open:$data@}}$value{{@close@}}";
 		}
 
 		return $value;
@@ -188,21 +197,21 @@ class InPage {
 		// Within HTML tags.
 		// Like <div data-attr="...">
 		$str = preg_replace_callback('/\<[^>]+\>/is', function ($matches): string {
-			return preg_replace('/' . PatternAssembly::inPageEditButton() . '/is', '', $matches[0]);
+			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]);
 		}, $str);
 
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
 		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function ($matches): string {
-			return preg_replace('/' . PatternAssembly::inPageEditButton() . '/is', '', $matches[0]);
+			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]);
 		}, $str);
 
-		$open = preg_quote(Delimiters::INPAGE_BUTTON_OPEN);
-		$close = preg_quote(Delimiters::INPAGE_BUTTON_CLOSE);
-
-		$str = preg_replace_callback("/$open(.+?\"field\":\"([^\"]+)\".+?)$close/is", function ($matches) {
-			$json = $matches[1];
-			$data = json_decode($json);
+		$str = preg_replace_callback(InPage::TEMP_REGEX, function ($matches) {
+			$base64Data = $matches[1];
+			$value = $matches[2];
+			$data = json_decode(base64_decode($base64Data));
+			$label = Text::get('edit');
+			$empty = !$value ? 'empty' : '';
 
 			return <<< HTML
 				<am-inpage-edit
@@ -210,7 +219,9 @@ class InPage {
 					context="{$data->context}"
 					field="{$data->field}"
 					page="{$data->page}"
-				></am-inpage-edit>
+					label="$label"
+					$empty
+				>$value</am-inpage-edit>
 				HTML;
 		}, $str);
 

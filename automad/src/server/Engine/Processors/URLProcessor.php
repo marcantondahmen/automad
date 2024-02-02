@@ -36,6 +36,7 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Admin\InPage;
 use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -79,7 +80,7 @@ class URLProcessor {
 		$str = preg_replace_callback(
 			'/<([^>]+)>/s',
 			function ($match) {
-				return '<' . preg_replace('/' . PatternAssembly::inPageEditButton() . '/s', '', $match[1]) . '>';
+				return '<' . preg_replace(InPage::TEMP_REGEX, '$2', $match[1]) . '>';
 			},
 			$str
 		);
@@ -91,6 +92,7 @@ class URLProcessor {
 			function ($match) use ($method, $parameters) {
 				$parameters = array_merge(array(0 => $match[3]), $parameters);
 				$url = call_user_func_array($method, $parameters);
+
 				// Matches 2 and 4 are quotes.
 				return $match[1] . '=' . $match[2] . $url . $match[4];
 			},
@@ -124,6 +126,7 @@ class URLProcessor {
 					},
 					$match[3]
 				);
+
 				// Matches 2 and 4 are quotes.
 				return $match[1] . '=' . $match[2] . $urls . $match[4];
 			},

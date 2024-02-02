@@ -120,15 +120,6 @@ class PatternAssembly {
 	}
 
 	/**
-	 * Return regex to match any temporary in-page edit button.
-	 *
-	 * @return string The regex
-	 */
-	public static function inPageEditButton(): string {
-		return preg_quote(Delimiters::INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(Delimiters::INPAGE_BUTTON_CLOSE);
-	}
-
-	/**
 	 * Return a regex pattern to match key/value pairs in an invalid JSON string
 	 * without valid quoting/escaping.
 	 *
