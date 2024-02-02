@@ -39,18 +39,15 @@ import {
 	Attr,
 	Binding,
 	Bindings,
-	create,
 	createField,
-	CSS,
-	EventName,
 	FieldTag,
-	fire,
 	getPrefixMap,
-	html,
 	InPageController,
 	listen,
+	query,
 	setDocumentTitle,
 } from '@/core';
+import { ModalComponent } from '@/components/Modal/Modal';
 
 /**
  * The InPage editing form element.
@@ -86,10 +83,19 @@ export class InPageFormComponent extends FormComponent {
 		return true;
 	}
 
+	/**
+	 * The field name.
+	 */
 	private field: string;
 
+	/**
+	 * The origin page to return to.
+	 */
 	private page: string;
 
+	/**
+	 * The page that contains the value.
+	 */
 	private context: string;
 
 	/**
@@ -134,6 +140,21 @@ export class InPageFormComponent extends FormComponent {
 		};
 
 		Bindings.connectElements(App.root);
+
+		listen(window, 'keydown', (event: KeyboardEvent) => {
+			if (event.keyCode !== 27) {
+				return;
+			}
+
+			if (query<ModalComponent>(`[${Attr.modalOpen}]`)) {
+				return;
+			}
+
+			event.preventDefault();
+			event.stopImmediatePropagation();
+
+			window.location.href = this.bindings.inPageReturnUrlBinding.value;
+		});
 
 		super.init();
 	}
