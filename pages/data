@@ -1,14 +1,19 @@
 {
-    "title": "Home",
-    "+hero": {
-        "blocks": [],
-        "automadVersion": "1.10.9"
+    "published": {
+        "title": "Home",
+        "+hero": {
+            "blocks": [],
+            "automadVersion": "1.10.9"
+        },
+        "+main": {
+            "blocks": [],
+            "automadVersion": "1.10.9"
+        },
+        "template": "project",
+        "private": false,
+        ":created": "2023-02-17T10:36:01+00:00",
+        ":lastModified": "2024-02-02T11:53:17+00:00",
+        ":lastPublished": "2024-02-02T11:53:23+00:00"
     },
-    "+main": {
-        "blocks": [],
-        "automadVersion": "1.10.9"
-    },
-    "template": "sidebar_left",
-    ":created": "2023-02-17T10:36:01+00:00",
-    ":lastModified": "2023-12-16T18:48:26+00:00"
+    "draft": []
 }
