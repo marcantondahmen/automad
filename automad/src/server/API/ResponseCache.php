@@ -77,8 +77,8 @@ class ResponseCache {
 		$Cache = new Cache();
 		$siteMTime = $Cache->getSiteMTime();
 		$hash = sha1(serialize($_GET) . serialize($_POST) . serialize($_SESSION));
-		$path = strtolower(AM_DIR_TMP . '/' . AM_REQUEST . '/' . $hash);
-		$responseMTime = filemtime($path);
+		$path = strtolower(AM_DIR_TMP . AM_REQUEST . '/' . $hash);
+		$responseMTime = is_readable($path) ? filemtime($path) : 0;
 
 		Debug::log($path, 'Response caching path');
 
