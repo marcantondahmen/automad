@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-language-packs.git",
-                "reference": "e8d14bcb0e027249a814dfe4e7a174372e0b78da"
+                "reference": "7b1513137958dd7ebffe616482e599390ff22773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/e8d14bcb0e027249a814dfe4e7a174372e0b78da",
-                "reference": "e8d14bcb0e027249a814dfe4e7a174372e0b78da",
+                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/7b1513137958dd7ebffe616482e599390ff22773",
+                "reference": "7b1513137958dd7ebffe616482e599390ff22773",
                 "shasum": ""
             },
             "default-branch": true,
@@ -41,7 +41,7 @@
                 "issues": "https://github.com/automadcms/automad-language-packs/issues",
                 "source": "https://github.com/automadcms/automad-language-packs/tree/master"
             },
-            "time": "2023-12-17T18:51:44+00:00"
+            "time": "2024-02-02T08:49:56+00:00"
         },
         {
             "name": "doctrine/lexer",
