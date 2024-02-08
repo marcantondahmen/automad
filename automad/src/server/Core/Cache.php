@@ -263,7 +263,7 @@ class Cache {
 	 * @return int The latest found mtime, which equal basically the site's modification time.
 	 */
 	public function getSiteMTime(): int {
-		if ((@filemtime(Cache::FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
+		if (!is_readable(Cache::FILE_SITE_MTIME) || (@filemtime(Cache::FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
 			// The modification times get only checked every AM_CACHE_MONITOR_DELAY seconds, since
 			// the process of collecting all mtimes itself takes some time too.
 			// After scanning, the mTime gets written to a file.
