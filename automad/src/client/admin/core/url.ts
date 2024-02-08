@@ -52,7 +52,7 @@ export const deleteSearchParam = (param: string): void => {
  * @returns a page URL
  */
 export const getPageURL = (): string => {
-	return getSearchParam('url');
+	return getSearchParam('url') || getSearchParam('context');
 };
 
 /**
