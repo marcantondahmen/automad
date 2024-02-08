@@ -40,13 +40,19 @@ export const inPage = ({ main }: Partials): string => {
 		<div class="${CSS.layoutInPage}">
 			<div class="${CSS.layoutInPageNavbar}">
 				<nav class="${CSS.navbar}">
-					<a
-						class="${CSS.navbarItem}"
-						${Attr.bind}="inPageContextUrl"
-						${Attr.bindTo}="href"
-					>
-						<span ${Attr.bind}="inPageTitle"></span>
-					</a>
+					<span class="${CSS.navbarGroup} ${CSS.flexGap}">
+						<a
+							class="${CSS.navbarItem}"
+							${Attr.bind}="inPageContextUrl"
+							${Attr.bindTo}="href"
+						>
+							<span ${Attr.bind}="inPageTitle"></span>
+						</a>
+						<span
+							class="${CSS.badge}"
+							${Attr.bind}="inPageField"
+						></span>
+					</span>
 					<span
 						class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
 					>

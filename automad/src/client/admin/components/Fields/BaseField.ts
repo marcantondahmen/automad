@@ -103,6 +103,7 @@ export abstract class BaseFieldComponent
 	 * @param params.tooltip
 	 * @param params.label
 	 * @param params.placeholder
+	 * @param params.isInPage
 	 */
 	set data({
 		key,
@@ -112,12 +113,14 @@ export abstract class BaseFieldComponent
 		tooltip,
 		label,
 		placeholder,
+		isInPage,
 	}: FieldInitData) {
 		id = id ?? createIdFromField(key);
 		value = typeof value === 'undefined' ? '' : value;
 		tooltip = htmlSpecialChars(tooltip || '');
 		label = label || createLabelFromField(key);
 		placeholder = placeholder || '';
+		isInPage = isInPage ?? false;
 
 		this._data = {
 			name,
@@ -126,6 +129,7 @@ export abstract class BaseFieldComponent
 			value,
 			tooltip,
 			placeholder,
+			isInPage,
 		};
 
 		this.create();
@@ -180,7 +184,12 @@ export abstract class BaseFieldComponent
 	 * Create a label.
 	 */
 	protected createLabel(): void {
-		const { label, tooltip } = this._data;
+		const { label, tooltip, isInPage } = this._data;
+
+		if (isInPage) {
+			return;
+		}
+
 		const attributes: KeyValueMap = {};
 
 		if (this.linkLabel) {

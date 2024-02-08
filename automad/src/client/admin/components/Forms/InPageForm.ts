@@ -40,6 +40,7 @@ import {
 	Binding,
 	Bindings,
 	createField,
+	createLabelFromField,
 	FieldTag,
 	getPrefixMap,
 	InPageController,
@@ -137,6 +138,10 @@ export class InPageFormComponent extends FormComponent {
 				initial: this.context,
 				modifier: (url: string) => `${App.baseURL}${url}`,
 			}),
+			inPageFieldBinding: new Binding('inPageField', {
+				initial: this.field,
+				modifier: (field: string) => createLabelFromField(field),
+			}),
 		};
 
 		Bindings.connectElements(App.root);
@@ -209,6 +214,7 @@ export class InPageFormComponent extends FormComponent {
 			key: this.field,
 			value: response.data.value,
 			name: 'value',
+			isInPage: true,
 		});
 
 		this.additionalData['dataFetchTime'] = response.time;

@@ -77,6 +77,7 @@ export interface InPageBindings {
 	inPageReturnUrlBinding: Binding;
 	inPageTitleBinding: Binding;
 	inPageContextUrlBinding: Binding;
+	inPageFieldBinding: Binding;
 }
 
 export interface DeletedPageMetaData {

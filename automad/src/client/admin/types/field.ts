@@ -74,6 +74,7 @@ export interface FieldInitData {
 	tooltip?: string;
 	label?: string;
 	placeholder?: string | number | KeyValueMap | boolean;
+	isInPage?: boolean;
 }
 
 export interface FieldRenderData extends Omit<FieldInitData, 'key'> {
