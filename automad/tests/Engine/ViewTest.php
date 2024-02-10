@@ -2,6 +2,7 @@
 
 namespace Automad\Engine;
 
+use Automad\Core\Session;
 use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
@@ -12,6 +13,18 @@ class ViewTest extends TestCase {
 	public function dataForTestInPageRenderIsEqual() {
 		$data = array();
 		$assets = $this->getAssets();
+		$pagesDir = AM_DIR_PAGES;
+		$csrf = Session::getCsrfToken();
+		$dock = <<< HTML
+			<am-inpage-dock
+				csrf="$csrf"
+				api="/index.php/_api"
+				dashboard="/index.php/dashboard"
+				url="/page"
+				state="draft"
+				labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22publish%22%3A%22Publish%22%7D"
+			></am-inpage-dock>
+			HTML;
 
 		$templates = array(
 			'email_01' => <<< HTML
@@ -22,7 +35,7 @@ class ViewTest extends TestCase {
 								<a href="#">test</a>
 								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
 								<a href="#">test</a>
-							{$assets->mailJS}{$assets->inPage}</body>
+							{$assets->mailJS}$dock</body>
 						</html>
 						HTML,
 			'email_02' => <<< HTML
@@ -34,13 +47,27 @@ class ViewTest extends TestCase {
 									<span></span>
 									test<span class="am-at"></span>test<span class="am-dot"></span>com
 								</a>
-							{$assets->mailJS}{$assets->inPage}</body>
+							{$assets->mailJS}$dock</body>
 						</html>
 						HTML,
-			'resolve_01' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>'
+			'resolve_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							$dock</body>
+						</html>
+						HTML,
+			'resolve_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							$dock</body>
+						</html>
+						HTML
 		);
 
 		foreach ($templates as $template => $expected) {
@@ -56,6 +83,7 @@ class ViewTest extends TestCase {
 	public function dataForTestRenderIsEqual() {
 		$data = array();
 		$assets = $this->getAssets();
+		$pagesDir = AM_DIR_PAGES;
 
 		$templates = array(
 			'comments_01' => 'Page',
@@ -129,10 +157,24 @@ class ViewTest extends TestCase {
 			'pipe_shorten_02' => 'This is another very >>>',
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
-			'resolve_01' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="' . AM_DIR_PAGES . '/page-slug/image.jpg" srcset="' . AM_DIR_PAGES . '/page-slug/image.jpg 500w, ' . AM_DIR_PAGES . '/page-slug/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
+			'resolve_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							</body>
+						</html>
+						HTML,
+			'resolve_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							</body>
+						</html>
+						HTML,
 			'session_get_01' => 'Session Test',
 			'set_01' => 'Test 1, Test 2',
 			'snippet_01' => 'Snippet Test / Snippet Test',
@@ -155,6 +197,7 @@ class ViewTest extends TestCase {
 	/**
 	 * @dataProvider dataForTestInPageRenderIsEqual
 	 * @testdox render $template: $expected
+	 * @runInSeparateProcess
 	 * @param mixed $template
 	 * @param mixed $expected
 	 */
@@ -174,6 +217,7 @@ class ViewTest extends TestCase {
 	/**
 	 * @dataProvider dataForTestRenderIsEqual
 	 * @testdox render $template: $expected
+	 * @runInSeparateProcess
 	 * @param mixed $template
 	 * @param mixed $expected
 	 */
@@ -200,7 +244,6 @@ class ViewTest extends TestCase {
 			'mailCSS' => '<link href="' . $asset('/automad/dist/mail/main.bundle.css') . '" rel="stylesheet">',
 			'inPageJS' => '<script src="' . $asset('/automad/dist/inpage/main.bundle.js') . '" type="text/javascript"></script>',
 			'inPageCSS' => '<link href="' . $asset('/automad/dist/inpage/main.bundle.css') . '" rel="stylesheet">',
-			'inPage' => '<am-inpage base="" dashboard="/index.php/dashboard" page="/page" labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22systemTitle%22%3A%22System+Settings%22%7D"></am-inpage>',
 			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/packages/vendor/extension/script.js') . '"></script>',
 			'extensionCSS' => '<link href="' . $asset('/automad/tests/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
 		);

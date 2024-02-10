@@ -172,11 +172,11 @@ class InPage {
 		$csrf = Session::getCsrfToken();
 
 		$html = <<< HTML
-			<am-inpage-dock 
-				csrf="$csrf" 
-				api="$urlApi" 
-				dashboard="$urlDashboard" 
-				url="$urlPage" 
+			<am-inpage-dock
+				csrf="$csrf"
+				api="$urlApi"
+				dashboard="$urlDashboard"
+				url="$urlPage"
 				state="$state"
 				labels="$labels"
 			></am-inpage-dock>
