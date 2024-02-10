@@ -57,9 +57,9 @@ class Links {
 	 * @param Automad $Automad
 	 * @param string $old
 	 * @param string $new
-	 * @param string|null $dataFilePath
+	 * @param string|null $pagePath
 	 */
-	public static function update(Automad $Automad, string $old, string $new, ?string $dataFilePath = null): void {
+	public static function update(Automad $Automad, string $old, string $new, ?string $pagePath = null): void {
 		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
 		$replaceValue = $new;
 
@@ -68,7 +68,7 @@ class Links {
 		$fileFieldsArray = array();
 
 		foreach ($fileResultsArray as $FileResults) {
-			if ($dataFilePath === $FileResults->path || empty($dataFilePath)) {
+			if ($pagePath === $FileResults->path || empty($pagePath)) {
 				$fields = array();
 
 				foreach ($FileResults->fieldResultsArray as $FieldResults) {
