@@ -36,22 +36,16 @@
 	position: relative;
 	display: inline-block;
 
-	&[field^='+'] {
+	&[field^='+'],
+	&[field^='text'] {
 		display: block;
 		min-height: 60px;
 		margin: 0 1px;
 	}
 
-	&[empty]:before {
-		content: '⬤';
-		display: inline-block;
-		margin: 3px;
-		padding: 0 3px;
-		line-height: 26px;
-		font-family: @am-inpage-font-family;
-		font-size: 14px;
-		font-weight: 560;
-		color: @am-inpage-button-background;
+	&[placeholder]:before {
+		content: attr(placeholder);
+		opacity: 0.3;
 	}
 
 	&__overlay {

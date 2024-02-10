@@ -211,7 +211,7 @@ class InPage {
 			$value = $matches[2];
 			$data = json_decode(base64_decode($base64Data));
 			$label = Text::get('edit');
-			$empty = !$value ? 'empty' : '';
+			$placeholder = !$value ? 'placeholder="' . Text::get('inPagePlaceholder') . '"' : '';
 
 			return <<< HTML
 				<am-inpage-edit
@@ -220,7 +220,7 @@ class InPage {
 					field="{$data->field}"
 					page="{$data->page}"
 					label="$label"
-					$empty
+					$placeholder
 				>$value</am-inpage-edit>
 				HTML;
 		}, $str);
