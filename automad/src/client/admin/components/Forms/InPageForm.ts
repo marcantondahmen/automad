@@ -49,6 +49,7 @@ import {
 	setDocumentTitle,
 } from '@/core';
 import { ModalComponent } from '@/components/Modal/Modal';
+import { EditorJSComponent } from '@/components/EditorJS';
 
 /**
  * The InPage editing form element.
@@ -159,6 +160,17 @@ export class InPageFormComponent extends FormComponent {
 			event.stopImmediatePropagation();
 
 			window.location.href = this.bindings.inPageReturnUrlBinding.value;
+		});
+
+		listen(document, 'click', (event: Event) => {
+			const target = event.target as HTMLElement;
+
+			if (target.contains(this)) {
+				query('[contenteditable], input, textarea', this)?.focus();
+				query<EditorJSComponent>(
+					EditorJSComponent.TAG_NAME
+				)?.editor.caret.setToLastBlock('end');
+			}
 		});
 
 		super.init();

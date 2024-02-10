@@ -35,10 +35,7 @@
 
 import { App, create, CSS, query } from '@/core';
 import { ParagraphBlockData } from '@/types';
-import {
-	HTMLPasteEvent,
-	TunesMenuConfig,
-} from 'automad-editorjs/types/tools';
+import { HTMLPasteEvent, TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
@@ -139,7 +136,10 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 			[CSS.editorBlockParagraph],
 			{
 				contenteditable: 'true',
-				placeholder: this.config.placeholder || '',
+				placeholder:
+					this.api.blocks.getBlocksCount() === 0
+						? this.config.placeholder || ''
+						: '',
 			},
 			this.wrapper
 		).innerHTML = this.data.text;
