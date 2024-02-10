@@ -65,7 +65,7 @@ class File {
 	 * @param string $oldName
 	 * @param string $caption
 	 * @param Messenger $Messenger
-	 * @return bool true on success
+	 * @return bool true in case a file hase been renamed
 	 */
 	public static function editInfo(string $newName, string $oldName, string $caption, Messenger $Messenger): bool {
 		if (!$oldName || !$newName) {
@@ -86,9 +86,13 @@ class File {
 			return false;
 		}
 
+		$reload = false;
+
 		// Rename file and caption if needed and update all file links.
 		if ($newFile != $oldFile) {
 			if (FileSystem::renameMedia($oldFile, $newFile, $Messenger)) {
+				$reload = true;
+
 				Links::update(
 					$Automad,
 					Str::stripStart($oldFile, AM_BASE_DIR),
@@ -102,7 +106,7 @@ class File {
 						$Automad,
 						basename($oldFile),
 						basename($newFile),
-						$Page->getFile()
+						$Page->path
 					);
 				}
 			}
@@ -122,7 +126,7 @@ class File {
 
 		Cache::clear();
 
-		return true;
+		return $reload;
 	}
 
 	/**
