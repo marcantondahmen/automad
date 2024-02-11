@@ -81,7 +81,6 @@ class Request {
 			unset($_GET[$request]);
 			unset($_REQUEST[$request]);
 			Debug::log($_GET, '$_GET');
-			Debug::log($_REQUEST, '$_REQUEST');
 		} else {
 			// The requested page gets passed 'index.php/page/path'.
 			// That can be the case if rewriting is disabled and AM_BASE_INDEX ends with '/index.php'.
