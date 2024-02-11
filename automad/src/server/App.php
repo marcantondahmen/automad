@@ -77,17 +77,15 @@ class App {
 		require_once __DIR__ . '/Core/Error.php';
 		Error::setHtmlOutputHandler();
 
+		$this->runVersionCheck();
+
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
-
-		$this->runVersionCheck();
 
 		date_default_timezone_set(@date_default_timezone_get());
 
 		Config::overrides();
 		Config::defaults();
-
-		Debug::errorReporting();
 
 		define('AM_REQUEST', Request::page());
 

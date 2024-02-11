@@ -173,7 +173,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 				</div>
 				<nav class="${CSS.nav}">
 					<span class="${CSS.navItem}">
-						<a href="${App.baseURL}" class="${CSS.navLink}">
+						<a href="${App.baseURL || '/'}" class="${CSS.navLink}">
 							<span class="${CSS.iconText}">
 								<i class="bi bi-window-desktop"></i>
 								<span

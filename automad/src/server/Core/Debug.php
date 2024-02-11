@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Debug {
-	const string DIR_LOGS = '/logs';
+	const DIR_LOGS = '/logs';
 
 	/**
 	 * Log buffer.
@@ -100,17 +100,6 @@ class Debug {
 	}
 
 	/**
-	 * Enable full error reporting, when debugging is enabled.
-	 */
-	public static function errorReporting(): void {
-		if (AM_DEBUG_ENABLED) {
-			error_reporting(E_ALL);
-		} else {
-			error_reporting(E_ERROR);
-		}
-	}
-
-	/**
 	 * Return the buffer array.
 	 *
 	 * @return array The log buffer array
@@ -127,7 +116,7 @@ class Debug {
 			return;
 		}
 
-		$file = FileSystem::getTmpDir() . self::DIR_LOGS . AM_REQUEST . '/log.json';
+		$file = AM_DIR_TMP . self::DIR_LOGS . AM_REQUEST . '/log.json';
 
 		FileSystem::writeJson($file, self::$buffer);
 	}

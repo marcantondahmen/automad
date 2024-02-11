@@ -36,6 +36,7 @@
 
 namespace Automad\Console;
 
+use Automad\App;
 use Automad\Core\FileSystem;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
@@ -54,7 +55,7 @@ class Console {
 	 * @param array $argv
 	 */
 	public function __construct(array $argv) {
-		echo 'Automad Console version ' . AM_VERSION . PHP_EOL . PHP_EOL;
+		echo 'Automad Console version ' . App::VERSION . PHP_EOL . PHP_EOL;
 		$this->runCommand($argv);
 		echo PHP_EOL;
 	}

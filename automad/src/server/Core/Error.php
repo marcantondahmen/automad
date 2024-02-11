@@ -68,6 +68,9 @@ class Error {
 	public static function setHtmlOutputHandler(): void {
 		self::setErrorHandler();
 
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+
 		set_exception_handler(
 			function ($error) {
 				http_response_code(500);

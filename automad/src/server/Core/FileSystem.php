@@ -236,7 +236,7 @@ class FileSystem {
 	 * @return string the generated path
 	 */
 	public static function getTmpDir(): string {
-		$dir = self::getSystemTmpDir() . '/automad/' . sha1(AM_BASE_DIR);
+		$dir = self::getSystemTmpDir() . '/automad/' . basename(AM_BASE_DIR) . '-' . sha1(AM_BASE_DIR);
 
 		try {
 			self::makeDir($dir);
