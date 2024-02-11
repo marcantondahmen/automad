@@ -48,10 +48,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Debug {
+	const string DIR_LOGS = '/logs';
+
 	/**
 	 * Log buffer.
 	 */
 	private static array $buffer = array();
+
+	/**
+	 * The log entry index.
+	 */
+	private static int $index = 0;
 
 	/**
 	 * Timestamp when script started.
@@ -83,8 +90,8 @@ class Debug {
 
 		$html = '<script type="text/javascript">' . "\n";
 
-		foreach (self::$buffer as $item) {
-			$html .= 'console.log(' . json_encode($item) . ');' . "\n";
+		foreach (self::$buffer as $key => $value) {
+			$html .= 'console.log(' . json_encode(array($key => $value)) . ');' . "\n";
 		}
 
 		$html .= '</script>' . "\n";
@@ -104,12 +111,25 @@ class Debug {
 	}
 
 	/**
-	 * 	Return the buffer array.
+	 * Return the buffer array.
 	 *
 	 * @return array The log buffer array
 	 */
 	public static function getLog(): array {
 		return self::$buffer;
+	}
+
+	/**
+	 * Write log to json file.
+	 */
+	public static function json(): void {
+		if (!AM_DEBUG_ENABLED) {
+			return;
+		}
+
+		$file = FileSystem::getTmpDir() . self::DIR_LOGS . AM_REQUEST . '/log.json';
+
+		FileSystem::writeJson($file, self::$buffer);
 	}
 
 	/**
@@ -119,34 +139,38 @@ class Debug {
 	 * @param string $description (Basic info, class, method etc.)
 	 */
 	public static function log($element, string $description = ''): void {
-		if (AM_DEBUG_ENABLED) {
-			// Start timer. self::timerStart() only saves the time on the first call.
-			self::timerStart();
-
-			// Get backtrace.
-			$backtraceAll = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
-
-			// Remove all backtrace items without any class defined (standard PHP functions) and the items with the functions Debug::log() and {closure}
-			// To get a clean array with only the relevant Automad methods in the backtrace.
-			$ignoreFunctions = array('log', __NAMESPACE__ . '\{closure}');
-			$backtrace = array_filter($backtraceAll, function ($item) use ($ignoreFunctions) {
-				return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions));
-			});
-
-			// If class, type & method exist, use them to build the description prefix. Else use just the file name from the full backtrace.
-			if (count($backtrace) > 0) {
-				// When the backtrace array got reduced to the actually relevant items in the backtrace, take the first element (the one calling Debug::log()).
-				$backtrace = array_shift($backtrace);
-				$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '(): ';
-			} else {
-				$prefix = basename($backtraceAll[0]['file'] ?? '') . ': ';
-			}
-
-			// Prepend the method to $description.
-			$description = trim($prefix . $description, ': ');
-
-			self::$buffer[] = array($description => $element);
+		if (!AM_DEBUG_ENABLED) {
+			return;
 		}
+
+		// Start timer. self::timerStart() only saves the time on the first call.
+		self::timerStart();
+
+		// Get backtrace.
+		$backtraceAll = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+
+		// Remove all backtrace items without any class defined (standard PHP functions) and the items with the functions Debug::log() and {closure}
+		// To get a clean array with only the relevant Automad methods in the backtrace.
+		$ignoreFunctions = array('log', __NAMESPACE__ . '\{closure}');
+		$backtrace = array_filter($backtraceAll, function ($item) use ($ignoreFunctions) {
+			return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions));
+		});
+
+		// If class, type & method exist, use them to build the description prefix. Else use just the file name from the full backtrace.
+		if (count($backtrace) > 0) {
+			// When the backtrace array got reduced to the actually relevant items in the backtrace, take the first element (the one calling Debug::log()).
+			$backtrace = array_shift($backtrace);
+			$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '(): ';
+		} else {
+			$prefix = basename($backtraceAll[0]['file'] ?? '') . ': ';
+		}
+
+		// Prepend the method to $description.
+		$description = self::$index . ': ' . trim($prefix . $description, ': ');
+
+		self::$buffer[$description] = $element;
+
+		self::$index++;
 	}
 
 	/**

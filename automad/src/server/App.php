@@ -97,6 +97,7 @@ class App {
 		$output = $this->render(AM_REQUEST);
 
 		if (AM_DEBUG_ENABLED) {
+			Debug::json();
 			$output = Body::append($output, Debug::consoleLog());
 		}
 
