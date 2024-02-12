@@ -1,0 +1,26 @@
+name: Dist
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*'
+
+env:
+  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+
+jobs:
+  dist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: checkout
+        uses: actions/checkout@v4
+      - run: chmod +x .github/workflows/dist.sh && bash .github/workflows/dist.sh
