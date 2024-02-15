@@ -131,11 +131,9 @@ class Config {
 
 		// UPDATE
 		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php');
-		self::set('AM_UPDATE_BRANCH', 'master');
-		self::set('AM_UPDATE_REPO_DOWNLOAD_URL', 'https://github.com/marcantondahmen/automad/archive');
-		self::set('AM_UPDATE_REPO_RAW_URL', 'https://raw.githubusercontent.com/marcantondahmen/automad');
-		self::set('AM_UPDATE_REPO_VERSION_FILE', '/automad/version.php');
-		self::set('AM_UPDATE_TEMP', AM_DIR_CACHE . '/update');
+		self::set('AM_UPDATE_BRANCH', 'v2');
+		self::set('AM_UPDATE_REPO', 'automadcms/automad-dist');
+		self::set('AM_UPDATE_TEMP', AM_BASE_DIR . AM_DIR_CACHE . '/update');
 
 		// Packagist
 		self::set('AM_PACKAGE_REPO_QUERY', 'https://packagist.org/search.json?type=automad-package&per_page=100');

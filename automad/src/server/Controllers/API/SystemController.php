@@ -37,6 +37,7 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\App;
 use Automad\Core\Messenger;
 use Automad\System\Update;
 
@@ -66,7 +67,7 @@ class SystemController {
 			'pending' => false
 		);
 
-		if (version_compare(AM_VERSION, $latest, '<')) {
+		if (version_compare(App::VERSION, $latest, '<')) {
 			$data['pending'] = true;
 		}
 
@@ -82,7 +83,7 @@ class SystemController {
 		$Response = new Response();
 		$data = array(
 			'state' => 'upToDate',
-			'current' => AM_VERSION,
+			'current' => App::VERSION,
 			'latest' => '',
 			'items' => Update::items()
 		);
@@ -121,7 +122,7 @@ class SystemController {
 
 		$data['latest'] = $latest;
 
-		if (version_compare(AM_VERSION, $latest, '<')) {
+		if (version_compare(App::VERSION, $latest, '<')) {
 			$data['state'] = 'pending';
 		}
 

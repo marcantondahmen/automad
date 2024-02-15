@@ -59,7 +59,6 @@ class NavbarUpdateIndicatorComponent extends BaseUpdateIndicatorComponent {
 					${Attr.tooltip}="${App.text('systemUpdateTooltip')}"
 				>
 					<i class="bi bi-download"></i>
-					<span class="am-e-badge"></span>
 				</am-link>
 			`;
 		} else {

@@ -156,6 +156,11 @@ export class SystemUpdateFormComponent extends FormComponent {
 			<am-modal-dialog>
 				<am-modal-body>
 					${App.text('systemUpdateSuccess')}
+					<br />
+					<span>
+						${App.text('systemUpdateCurrentVersion')}:
+						<strong>${data.current}</strong>
+					</span>
 				</am-modal-body>
 				<am-modal-footer>
 					<a
@@ -207,7 +212,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 			<div class="${CSS.alert}">
 				<input type="hidden" name="update" value="run" />
 				<div class="${CSS.alertIcon}">
-					<i class="bi bi-tag"></i>
+					<i class="bi bi-download"></i>
 				</div>
 				<div class="${CSS.alertText}">
 					<div>

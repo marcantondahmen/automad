@@ -97,6 +97,7 @@ class Error {
 
 		set_exception_handler(
 			function ($error) {
+				Debug::json();
 				$Response = new Response();
 
 				$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());

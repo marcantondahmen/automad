@@ -36,6 +36,7 @@
 
 namespace Automad\System;
 
+use Automad\App;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
@@ -54,6 +55,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Update {
+	const DOWNLOAD_URL = 'https://github.com/' . AM_UPDATE_REPO . '/archive/' . AM_UPDATE_BRANCH . '.zip';
+	const RAW_URL = 'https://raw.githubusercontent.com/' . AM_UPDATE_REPO . '/' . AM_UPDATE_BRANCH;
+
 	/**
 	 * The update timestamp.
 	 */
@@ -65,12 +69,9 @@ class Update {
 	 * @return string Version number or false on error.
 	 */
 	public static function getVersion(): string {
-		$version = '';
-		$versionFileUrl = AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . AM_UPDATE_REPO_VERSION_FILE;
+		$version = trim(Fetch::get(Update::RAW_URL . '/VERSION'));
 
-		if ($content = Fetch::get($versionFileUrl)) {
-			$version = self::extractVersion($content);
-		}
+		Debug::log($version);
 
 		return $version;
 	}
@@ -91,6 +92,7 @@ class Update {
 	 * @return bool true on success
 	 */
 	public static function run(Messenger $Messenger): bool {
+		Debug::log(date('Ymd-His'), 'Start Update');
 		self::$timestamp = date('Ymd-His');
 		self::log('Starting update ' . date('c'));
 		self::preloadClasses();
@@ -114,8 +116,8 @@ class Update {
 			return false;
 		}
 
-		self::log('Version to be updated: ' . AM_VERSION);
-		Debug::log('Version to be updated: ' . AM_VERSION);
+		self::log('Version to be updated: ' . App::VERSION);
+		Debug::log('Version to be updated: ' . App::VERSION);
 		self::log('Updating items: ' . implode(', ', $items));
 
 		$archive = self::getArchive();
@@ -143,10 +145,12 @@ class Update {
 		}
 
 		$version = '';
-		$versionFile = AM_BASE_DIR . '/automad/version.php';
+		$versionFile = AM_BASE_DIR . '/automad/src/server/App.php';
 
 		if (is_readable($versionFile)) {
-			$version = self::extractVersion(file_get_contents($versionFile));
+			$versionFileContent = file_get_contents($versionFile);
+			preg_match("/VERSION\s=\s'([^']+)'/is", $versionFileContent, $matches);
+			$version = $matches[1] ?? '';
 		}
 
 		self::log('Successfully updated Automad to version ' . $version);
@@ -174,7 +178,7 @@ class Update {
 	 * @return bool True on success, false on error
 	 */
 	private static function backupCurrent(array $items): bool {
-		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
+		$backup = AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
 
 		FileSystem::makeDir($backup);
 
@@ -202,31 +206,17 @@ class Update {
 	}
 
 	/**
-	 * Extract version number form content of version.php.
-	 *
-	 * @param string $str
-	 * @return string The version number
-	 */
-	private static function extractVersion(string $str): string {
-		if (preg_match('/\d[^\'"]+/', $str, $matches)) {
-			return $matches[0];
-		}
-
-		return '';
-	}
-
-	/**
 	 * Download zip-archive to be installed.
 	 *
 	 * @return string|null Path to the downloaded archive or null on error
 	 */
 	private static function getArchive(): ?string {
-		$downloadUrl = AM_UPDATE_REPO_DOWNLOAD_URL . '/' . AM_UPDATE_BRANCH . '.zip';
-		$archive = AM_BASE_DIR . AM_UPDATE_TEMP . '/download/' . self::$timestamp . '.zip';
+		$archive = AM_UPDATE_TEMP . '/download/' . self::$timestamp . '.zip';
 
+		Debug::log($archive, 'Archive');
 		FileSystem::makeDir(dirname($archive));
 
-		if (!Fetch::download($downloadUrl, $archive)) {
+		if (!Fetch::download(Update::DOWNLOAD_URL, $archive)) {
 			$archive = null;
 			self::log('Download failed!');
 		}
@@ -241,7 +231,7 @@ class Update {
 	 */
 	private static function higherPHPVersionRequired(): string {
 		$requiredVersion = '';
-		$composerFileUrl = AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . '/composer.json';
+		$composerFileUrl = Update::RAW_URL . '/composer.json';
 
 		$composerJson = Fetch::get($composerFileUrl);
 
@@ -275,7 +265,7 @@ class Update {
 	 * @return string The path to the log file
 	 */
 	private static function log(string $data): string {
-		$file = AM_BASE_DIR . AM_UPDATE_TEMP . '/' . self::$timestamp . '.log';
+		$file = AM_UPDATE_TEMP . '/' . self::$timestamp . '.log';
 		FileSystem::makeDir(dirname($file));
 		file_put_contents($file, $data . "\r\n", FILE_APPEND);
 
@@ -328,7 +318,7 @@ class Update {
 			for ($i = 0; $i < $zip->numFiles; $i++) {
 				$name = $zip->getNameIndex($i);
 
-				if (preg_match($itemsMatchRegex, $name)) {
+				if (preg_match($itemsMatchRegex, $name) && !str_ends_with($name, '/')) {
 					$filename = AM_BASE_DIR . preg_replace('/^([\w\-]+)/', '', $name);
 
 					if (FileSystem::write($filename, $zip->getFromName($name)) !== false) {
