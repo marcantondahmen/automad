@@ -46,6 +46,10 @@ npm run build
 
 echo '---------------------------------------------------------------------------'
 echo "Installing PHP dependencies ..."
+
+mv composer.json composer.json.orig
+sed 's|"automad/automad"|"automad/dist"|g' composer.json.orig >composer.json
+
 composer install
 (cd lib && composer install)
 
@@ -77,6 +81,8 @@ rsync \
 	$srcDir/shared \
 	$srcDir/vendor \
 	$srcDir/.htaccess \
+	$srcDir/composer.json \
+	$srcDir/composer.lock \
 	$srcDir/index.php \
 	$srcDir/LICENSE.md \
 	$distDir
@@ -84,6 +90,9 @@ rsync \
 echo $srcVersion >VERSION
 echo ".gitattributes export-ignore" >.gitattributes
 echo "VERSION export-ignore" >>.gitattributes
+
+echo -e "> :bell: Note that is the distribution-only repository for [Automad](https://automad.org). Head over to [marcantondahmen/automad](https://github.com/marcantondahmen/automad) for the source code and issues.\n---\n" >README.md
+cat $srcDir/README.md >>README.md
 
 echo '---------------------------------------------------------------------------'
 echo 'Commit and push'
