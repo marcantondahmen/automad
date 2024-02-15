@@ -36,6 +36,7 @@
 
 namespace Automad\Console\Commands;
 
+use Automad\App;
 use Automad\Core\Messenger;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
@@ -74,13 +75,13 @@ class Update extends AbstractCommand {
 			exit('Can\'t run updates within the development repository!' . PHP_EOL . PHP_EOL);
 		}
 
-		echo 'Automad version ' . AM_VERSION . PHP_EOL;
+		echo 'Automad version ' . App::VERSION . PHP_EOL;
 		echo 'Update branch is ' . AM_UPDATE_BRANCH . PHP_EOL;
 
 		$updateVersion = \Automad\System\Update::getVersion();
 		$Messenger = new Messenger();
 
-		if (version_compare(AM_VERSION, $updateVersion, '<')) {
+		if (version_compare(App::VERSION, $updateVersion, '<')) {
 			echo 'Updating to version ' . $updateVersion . PHP_EOL;
 
 			if (\Automad\System\Update::run($Messenger)) {
