@@ -3,6 +3,7 @@
 A flat-file content management system and template engine
 
 ![Tag](https://img.shields.io/github/v/tag/marcantondahmen/automad?include_prereleases&sort=semver&color=222222)
+![PHP](https://img.shields.io/packagist/dependency-v/automad/dist/php?color=222222)
 ![Language](https://img.shields.io/github/languages/top/marcantondahmen/automad?color=222222)
 ![Size](https://img.shields.io/github/languages/code-size/marcantondahmen/automad?color=222222)
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
@@ -13,10 +14,11 @@ A flat-file content management system and template engine
 Currently, the development of version 2 is _very, very active_. New features and fixes are implemented on a daily basis.
 The version 2 update will essentially be a full rewrite of the entire application, including the _backend_, _frontend_, _standard theme_ and _blocks_.
 The goal is to also include as many open feature requests and resolve as many open issues as possible until the day of the release.
-Existing websites using version 1 as well as existing extensions, except for some minor execptions, will continue to work just fine and will be compatible with version 2. Minor breaking changes will be communicated with the relase notes.
+Existing themes and extensions will continue to work just fine and will be compatible with version 2.
+Minor breaking changes will be communicated with the relase notes.
 
 The new dashboard will be entirely written in _TypeScript_ and will no longer have jQuery and UIkit as dependencies.
-The new backend will require at least _PHP 8.0_ or newer.
+The new backend will require at least _PHP 8.2_ or newer.
 
 Please note that this is an open-source project that is free to use and the maintainer spends a substatial portion of his free time, weekends and nights in
 order to finish the release as soon as possible. That said, there is no fix release date yet. It is done whenever it is done. In the meantime you can
