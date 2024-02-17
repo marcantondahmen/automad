@@ -141,14 +141,15 @@ export const dashboardLayout = ({ main }: Partials) => {
 									<i class="bi bi-people"></i>
 									<span>${App.text('systemUsers')}</span>
 								</am-link>
+								<span class="${CSS.dropdownLabel}">
+									${App.text('signedInAs')} ${App.user.name}
+								</span>
 								<am-submit
 									class="${CSS.dropdownLink}"
 									${Attr.form}="${SessionController.logout}"
 								>
 									<i class="bi bi-box-arrow-right"></i>
-									<span>
-										${App.text('signOut')} ${App.user.name}
-									</span>
+									<span> ${App.text('signOut')} </span>
 								</am-submit>
 							</div>
 						</am-dropdown>
@@ -246,23 +247,14 @@ export const dashboardLayout = ({ main }: Partials) => {
 			</am-sidebar>
 			<div class="${CSS.layoutDashboardMain}">${main}</div>
 			<footer class="${CSS.layoutDashboardFooter}">
-				<div class="${CSS.flex} ${CSS.flexGap} ${CSS.textMuted}">
-					<span
-						class="${CSS.iconText}"
-						${Attr.tooltip}="${App.user.email}"
-						${Attr.tooltipOptions}="placement: top"
-					>
-						<i class="bi bi-person-fill"></i>
-						<span>${App.user.name}</span>
+				<am-modal-toggle
+					class="${CSS.cursorPointer} ${CSS.flex} ${CSS.flexGap}"
+					${Attr.modal}="#am-about-modal"
+				>
+					<span class="${CSS.badge} ${CSS.badgeMuted}">
+						${App.version}
 					</span>
-					<span>&mdash;</span>
-					<am-modal-toggle
-						class="${CSS.cursorPointer}"
-						${Attr.modal}="#am-about-modal"
-					>
-						Automad ${App.version}
-					</am-modal-toggle>
-				</div>
+				</am-modal-toggle>
 			</footer>
 		</div>
 		<!-- Sign out form -->

@@ -46,6 +46,7 @@ export const enum CSS {
 	alertText = 'am-c-alert__text',
 
 	badge = 'am-e-badge',
+	badgeMuted = 'am-e-badge--muted',
 
 	baseHomeH1 = 'am-e-base-home-h1',
 
@@ -101,6 +102,7 @@ export const enum CSS {
 	dropdownItems = 'am-c-dropdown__items',
 	dropdownItemsAutocomplete = 'am-c-dropdown__items--autocomplete',
 	dropdownLink = 'am-c-dropdown__link',
+	dropdownLabel = 'am-c-dropdown__label',
 
 	dropdownArrow = 'am-e-dropdown-arrow',
 

@@ -346,6 +346,7 @@
 	"signIn": "Sign in",
 	"signInError": "Invalid username or password",
 	"signOut": "Sign out",
+	"signedInAs": "Signed in as",
 	"signedOut": "Signed out",
 	"signedOutSuccess": "You have been successfully signed out.",
 	"size": "Size",
