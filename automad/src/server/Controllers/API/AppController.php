@@ -39,6 +39,7 @@ namespace Automad\Controllers\API;
 use Automad\Admin\State;
 use Automad\API\Response;
 use Automad\API\ResponseCache;
+use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
@@ -79,7 +80,7 @@ class AppController {
 				'reservedFields' => Fields::$reserved,
 				'sitename' => $Automad->Shared->get(Fields::SITENAME),
 				'text' => Text::getObject(),
-				'version' => AM_VERSION
+				'version' => App::VERSION
 			));
 		});
 

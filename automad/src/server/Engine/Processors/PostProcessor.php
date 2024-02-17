@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Admin\InPage;
+use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
@@ -137,7 +138,7 @@ class PostProcessor {
 	private function addMetaTags(string $str): string {
 		$base = AM_SERVER . AM_BASE_INDEX;
 
-		$meta = '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
+		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
 		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '" />';
 
 		if (AM_FEED_ENABLED) {

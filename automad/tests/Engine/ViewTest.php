@@ -2,6 +2,7 @@
 
 namespace Automad\Engine;
 
+use Automad\App;
 use Automad\Core\Session;
 use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
@@ -236,7 +237,7 @@ class ViewTest extends TestCase {
 		};
 
 		return (object) array(
-			'generator' => '<meta name="Generator" content="Automad ' . AM_VERSION . '">',
+			'generator' => '<meta name="Generator" content="Automad ' . App::VERSION . '">',
 			'canonical' => '<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '" />',
 			'blocksJS' => '<script src="' . $asset('/automad/dist/blocks/main.bundle.js') . '" type="text/javascript"></script>',
 			'blocksCSS' => '<link href="' . $asset('/automad/dist/blocks/main.bundle.css') . '" rel="stylesheet">',

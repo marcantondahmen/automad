@@ -16,5 +16,3 @@ require_once AM_BASE_DIR . '/automad/src/server/Autoload.php';
 Autoload::init();
 Config::overrides();
 Config::defaults();
-
-define('AM_VERSION', App::VERSION);
