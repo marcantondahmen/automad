@@ -140,9 +140,7 @@ class Update {
 			return false;
 		}
 
-		if (file_exists(Cache::FILE_SITE_MTIME)) {
-			unlink(Cache::FILE_SITE_MTIME);
-		}
+		Cache::clear();
 
 		$version = '';
 		$versionFile = AM_BASE_DIR . '/automad/src/server/App.php';
@@ -298,6 +296,7 @@ class Update {
 	 */
 	private static function preloadClasses(): void {
 		Text::getObject();
+		Cache::clear();
 	}
 
 	/**
