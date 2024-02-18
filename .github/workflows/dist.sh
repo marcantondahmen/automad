@@ -8,6 +8,7 @@ fi
 git config --global url.https://x-access-token:${BOT_TOKEN}@github.com/.insteadOf https://github.com/
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+git config --global advice.detachedHead false
 
 cd ..
 
@@ -20,10 +21,13 @@ echo "Cloning source repository ..."
 git clone https://github.com/marcantondahmen/automad.git $srcDir
 cd $srcDir
 
-git status
+git fetch --tags
 
-srcVersion=$(cat package.json | jq -r .version)
+srcVersion=$(git describe --tags "$(git rev-list --tags --max-count=1)")
 echo "Latest source version: $srcVersion"
+
+git checkout $srcVersion
+git status
 
 echo "Cloning dist repository ..."
 git clone https://github.com/automadcms/automad-dist.git $distDir
@@ -100,5 +104,10 @@ echo 'Commit and push'
 
 git add .
 git commit -m "build version $srcVersion"
+git tag -a -m "v$srcVersion" $srcVersion
+
+git checkout master
+git merge $branch --ff -m "merge branch $branch"
+
 git push origin --all -u
 git push --tags
