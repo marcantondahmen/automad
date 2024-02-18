@@ -1,4 +1,4 @@
-name: Dist
+name: 'Build Dist'
 
 on:
   workflow_dispatch:
@@ -13,14 +13,14 @@ jobs:
   dist:
     runs-on: ubuntu-latest
     steps:
-      - name: setup Node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - name: setup PHP
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
       - run: chmod +x .github/workflows/dist.sh && bash .github/workflows/dist.sh
