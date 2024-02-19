@@ -12,7 +12,7 @@
     "clean": "rm -rf ./automad/dist/*/*",
     "build": "npm run clean && webpack --config webpack.config.js --mode production",
     "dev": "npm run clean && webpack --config webpack.config.js --mode development",
-    "phpunit": "phpunit --testdox",
+    "phpunit": "phpunit",
     "psalm": "psalm --clear-global-cache && psalm",
     "jest": "jest",
     "jest:watch": "jest --watch",
