@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-language-packs.git",
-                "reference": "eb2c7782f40a2367e6afcfbda70820f1758beadf"
+                "reference": "771e17588cfa80f86d812bdf555ad6277953011a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/eb2c7782f40a2367e6afcfbda70820f1758beadf",
-                "reference": "eb2c7782f40a2367e6afcfbda70820f1758beadf",
+                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/771e17588cfa80f86d812bdf555ad6277953011a",
+                "reference": "771e17588cfa80f86d812bdf555ad6277953011a",
                 "shasum": ""
             },
             "default-branch": true,
@@ -41,7 +41,21 @@
                 "issues": "https://github.com/automadcms/automad-language-packs/issues",
                 "source": "https://github.com/automadcms/automad-language-packs/tree/master"
             },
-            "time": "2024-02-11T14:48:57+00:00"
+            "funding": [
+                {
+                    "url": "https://paypal.me/marcantondahmen",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/marcantondahmen",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/marcantondahmen",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2024-02-18T18:45:55+00:00"
         },
         {
             "name": "doctrine/lexer",
