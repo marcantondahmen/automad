@@ -51,9 +51,6 @@ npm run build
 echo '---------------------------------------------------------------------------'
 echo "Installing PHP dependencies ..."
 
-mv composer.json composer.json.orig
-sed 's|"automad/automad"|"automad/dist"|g' composer.json.orig >composer.json
-
 composer install
 (cd lib && composer install)
 

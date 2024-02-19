@@ -4,7 +4,7 @@
 set -e
 
 workBranch="v2"
-releaseBranch="develop"
+releaseBranch="master"
 
 # Change to the base directory of the repository.
 dir=$(dirname "$0")
@@ -106,7 +106,6 @@ echo
 echo "The following files got updated:"
 git status -s
 echo
-
 
 # Wait for confirmation to commit and merge.
 while true; do
