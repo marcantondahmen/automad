@@ -9,30 +9,7 @@ A flat-file content management system and template engine
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
 [![Twitter](https://img.shields.io/twitter/follow/automadcms?label=Follow)](https://twitter.com/automadcms)
 
-## :wave: Version 2
-
-Currently, the development of version 2 is _very, very active_. New features and fixes are implemented on a daily basis.
-The version 2 update will essentially be a full rewrite of the entire application, including the _backend_, _frontend_, _standard theme_ and _blocks_.
-The goal is to also include as many open feature requests and resolve as many open issues as possible until the day of the release.
-Existing themes and extensions will continue to work just fine and will be compatible with version 2.
-Minor breaking changes will be communicated with the relase notes.
-
-The new dashboard will be entirely written in _TypeScript_ and will no longer have jQuery and UIkit as dependencies.
-The new backend will require at least _PHP 8.2_ or newer.
-
-Please note that this is an open-source project that is free to use and the maintainer spends a substatial portion of his free time, weekends and nights in
-order to finish the release as soon as possible. That said, there is no fix release date yet. It is done whenever it is done. In the meantime you can
-safely start new website using version 1 and migrate to version 2 afterwards.
-
-**Please also consider the above when opening new issues in order to not waste anybody's time.**
-
-And as always, **pull-request will continue to be ignored** as stated below.
-
-In case you want to help, **please give this repository a star**, consider a small donation or take a look a these other possible ways to [contribute](#contributing) to the project.
-
----
-
-![Mockup](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad/readme.png)
+![](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)
 
 ## Installation
 
@@ -42,29 +19,35 @@ Automad can be installed using [Docker](https://docker.com), [Composer](https://
 
 The fastest way to get Automad up and running is to use Composer.
 
-    composer create-project automad/automad .
+```bash
+composer create-project automad/automad . v2.x-dev
+```
 
-Follow this [guide](https://automad.org/getting-started#composer) to finish the installation and get started quickly.
+Follow this [guide](https://automad.org/version-2#getting-started) to finish the installation and get started quickly.
 
 ### Docker
 
-It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8**.
+It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8.3**.
 
-    docker run -dp 80:80 -v ./app:/app --name mysite automad/automad
+```bash
+docker run -dp 80:80 -v ./app:/app --name mysite automad/automad:v2
+```
 
 The first time you run the image, a new user account for the Automad dashboard will be created automatically. The account details will be logged by the running container. You can show these logs using the following command:
 
-    docker logs mysite
+```bash
+docker logs mysite
+```
 
 Your can now navigate to [localhost](http://localhost) to view your new site.
 
 ### Manual Download
 
-Alternatively Automad can also be [installed manually](https://automad.org/getting-started#manual-installation).
+Alternatively Automad can also be [downloaded](https://github.com/automadcms/automad-dist/archive/refs/heads/v2.zip) as a `.zip` file and installed manually. [Read more here.](https://automad.org/version-2#getting-started)
 
 ## Documentation
 
-Take a look at the [documentation](https://automad.org) to get started with [using](https://automad.org/user-guide) Automad or to learn how to [develop](https://automad.org/developer-guide) themes and extensions. In case you are interested in using [plain PHP](https://automad.org/developer-guide/building-themes/plain-php) in your themes or to develop more complex extensions, check out Automad's [API reference](https://api.automad.org).
+Take a look at the [documentation](https://automad.org) to get started with Automad.
 
 ## Packages
 
@@ -72,7 +55,7 @@ Visit the [Automad package browser](https://packages.automad.org) to get free th
 
 ## Community
 
-Join the community, ask questions or start a discussion on the Automad [discussion platform](https://discuss.automad.org).
+Join the community, ask questions or start a discussion on the Automad [discussion platform](https://automad.org/discuss).
 
 ## Contributing
 
@@ -96,5 +79,5 @@ To make the development of themes more efficient, plugins providing syntax highl
 
 ---
 
-© 2013-2023 [Marc Anton Dahmen](https://marcdahmen.de)  
+© 2013-2024 [Marc Anton Dahmen](https://marcdahmen.de)  
 Released under the [MIT license](https://automad.org/license)
