@@ -1,19 +1,76 @@
 {
     "published": {
-        "title": "Home",
+        "title": "Welcome",
         "+hero": {
             "blocks": [],
             "automadVersion": "1.10.9"
         },
         "+main": {
-            "blocks": [],
-            "automadVersion": "1.10.9"
+            "blocks": [
+                {
+                    "id": "lD9sUJki6gn463oRwjcY_ICq5oQPYZVP",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "You have successfully installed Automad 2.&nbsp;",
+                        "large": false
+                    },
+                    "tunes": {
+                        "layout": null,
+                        "spacing": {
+                            "top": "",
+                            "right": "",
+                            "bottom": "",
+                            "left": ""
+                        },
+                        "className": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "id": "NR_n3XqFF94kfN0jka5XGbi_-TBEf9ot",
+                    "type": "buttons",
+                    "data": {
+                        "primaryText": "Visit Dashboard",
+                        "primaryLink": "/dashboard",
+                        "primaryStyle": {
+                            "borderWidth": "2px",
+                            "borderRadius": "0.5rem",
+                            "paddingVertical": "0.5rem",
+                            "paddingHorizontal": "1.5rem"
+                        },
+                        "primaryOpenInNewTab": false,
+                        "secondaryText": "",
+                        "secondaryLink": "",
+                        "secondaryStyle": {
+                            "borderWidth": "2px",
+                            "borderRadius": "0.5rem",
+                            "paddingHorizontal": "1.5rem",
+                            "paddingVertical": "0.5rem"
+                        },
+                        "secondaryOpenInNewTab": true,
+                        "justify": "start",
+                        "gap": "1rem"
+                    },
+                    "tunes": {
+                        "layout": null,
+                        "spacing": {
+                            "top": "",
+                            "right": "",
+                            "bottom": "",
+                            "left": ""
+                        },
+                        "className": "",
+                        "id": ""
+                    }
+                }
+            ],
+            "automadVersion": "2.0.0-alpha.1"
         },
         "template": "project",
         "private": false,
         ":created": "2023-02-17T10:36:01+00:00",
-        ":lastModified": "2024-02-02T11:53:17+00:00",
-        ":lastPublished": "2024-02-02T11:53:23+00:00"
+        ":lastModified": "2024-02-19T15:59:38+00:00",
+        ":lastPublished": "2024-02-19T16:01:31+00:00"
     },
     "draft": []
 }
