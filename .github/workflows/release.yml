@@ -13,8 +13,7 @@ jobs:
       - uses: 'marcantondahmen/release-notes-action@master'
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          prerelease: false
-          draft: false
+          prerelease: true
+          draft: true
           filter: '^(feat|fix|refactor)'
           strict: true
-
