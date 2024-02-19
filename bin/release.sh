@@ -57,6 +57,7 @@ echo
 echo "  1) Patch $newPatchTag (default)"
 echo "  2) Minor $newMinorTag"
 echo "  3) Major $newMajorTag"
+echo "  4) Custom"
 echo
 read -n 1 -p "Please select a number or press Enter for a patch: " option
 echo
@@ -65,6 +66,7 @@ case $option in
 1) tag=$newPatchTag ;;
 2) tag=$newMinorTag ;;
 3) tag=$newMajorTag ;;
+4) read -p "Tag: " tag ;;
 *) tag=$newPatchTag ;;
 esac
 
