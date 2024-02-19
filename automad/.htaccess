@@ -1,0 +1,4 @@
+RewriteRule ^console$ ../ [L,NC]
+RewriteRule \.php ../ [L,NC]
+RewriteRule ^src\/.*$ ../ [L,NC]
+RewriteRule ^lang\/.*$ ../ [L,NC]

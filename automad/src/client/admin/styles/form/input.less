@@ -1,0 +1,154 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-f-input {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 @am-form-padding-x;
+	height: @am-form-height;
+	border: @am-form-border;
+	border-radius: @am-form-radius;
+	color: hsl(var(--am-clr-text));
+	background-color: @am-form-background;
+	transition: all 0.2s;
+	outline: @am-outline;
+
+	&::placeholder {
+		color: hsl(var(--am-clr-text-muted));
+	}
+
+	&:focus {
+		border-color: hsl(var(--am-clr-border-active));
+		outline: @am-outline-active;
+	}
+
+	&:disabled {
+		color: hsl(var(--am-clr-text-muted));
+	}
+
+	&.am-validate:invalid {
+		color: hsl(var(--am-clr-text-danger));
+		border-color: hsl(var(--am-clr-border-danger));
+		background-color: hsl(var(--am-clr-background-danger));
+		outline: @am-outline-danger;
+
+		&::placeholder {
+			color: hsla(var(--am-clr-text-danger), 0.5);
+		}
+	}
+
+	&--title {
+		padding: 0 1.1rem;
+		height: 4.25rem;
+		font-size: 1.9rem;
+		font-weight: 670;
+		border-radius: 0.475rem;
+	}
+
+	div&,
+	textarea& {
+		min-height: 6.2rem;
+		padding: 0.5rem @am-form-padding-x;
+		font-family: @am-code-font-family;
+		line-height: 1.65;
+		resize: none;
+		scrollbar-width: thin !important;
+		overflow-y: hidden;
+	}
+
+	&-combo {
+		position: relative;
+		display: flex;
+
+		& > :last-child {
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			inset: @am-form-border-width 0;
+			width: @am-form-height;
+			border-right: @am-form-border;
+		}
+
+		&__button {
+			color: hsl(var(--am-clr-text));
+			transition:
+				color 0.2s,
+				background-color 0.2s;
+			cursor: pointer;
+
+			&:hover,
+			&:active {
+				color: hsl(var(--am-clr-text-hover));
+			}
+
+			& .bi {
+				font-size: 1.25rem;
+			}
+		}
+
+		&__color {
+			& > [type='color'] {
+				box-sizing: border-box;
+				width: 1.6rem;
+				height: 1.6rem;
+				padding: 0 !important;
+				border: none !important;
+				outline: none;
+				background-color: transparent !important;
+				box-shadow: none !important;
+				appearance: none;
+				cursor: pointer;
+
+				&::-webkit-color-swatch-wrapper {
+					padding: 0;
+				}
+
+				&::-moz-color-swatch {
+					border: @am-form-border;
+					border-radius: 100%;
+				}
+
+				&::-webkit-color-swatch {
+					border: @am-form-border;
+					border-radius: 100%;
+				}
+			}
+		}
+	}
+
+	&-combo > & {
+		padding-left: 3.75rem;
+	}
+}

@@ -1,19 +1,19 @@
-name: "release-notes"
+name: 'Release Notes'
 
 on:
   push:
     tags:
-      - "*"
+      - '*'
 
 jobs:
   release-notes:
-    name: "Regex Filtered Release Notes"
-    runs-on: "ubuntu-latest"
+    name: 'Regex Filtered Release Notes'
+    runs-on: 'ubuntu-latest'
     steps:
-      - uses: "marcantondahmen/release-notes-action@master"
+      - uses: 'marcantondahmen/release-notes-action@master'
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          draft: false
-          filter: "^(feat|fix|refactor)"
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          prerelease: true
+          draft: true
+          filter: '^(feat|fix|refactor)'
           strict: true

@@ -1,1 +1,0 @@
-<@ ../templates/page_not_found.php @>

@@ -82,12 +82,24 @@ RewriteRule ^(.*)$ %2index.php?/$1 [QSA,L]
 
 # Redirect blocked files to the 404 page. 
 
-# Redirect all non-image cache files.
-RewriteCond %{REQUEST_FILENAME} !\.(jpg|gif|png)$
-RewriteCond %{REQUEST_FILENAME} cached [OR]
+# Redirect package thumbnails.
+RewriteCond %{REQUEST_FILENAME} /cache/packages/.*/thumbnail [OR]
 
-# Redirect all .txt files.
-RewriteCond %{REQUEST_FILENAME} \.txt$ [OR] 
+# Redirect src files.
+RewriteCond %{REQUEST_FILENAME} /(packages|vendor)/.*\.(ts|less|php|md|sh|xml|json|lock)$ [OR,NC]
+RewriteCond %{REQUEST_FILENAME} /vendor/.*(readme|license) [OR,NC]
+RewriteCond %{REQUEST_FILENAME} /(package|package-lock|composer)\.(json|lock)$ [OR] 
+
+# Redirect data files.
+RewriteCond %{REQUEST_FILENAME} /data$ [OR] 
+RewriteCond %{REQUEST_FILENAME} /index$ [OR] 
+RewriteCond %{REQUEST_FILENAME} /\.history$ [OR] 
+
+# Redirect trash.
+RewriteCond %{REQUEST_FILENAME} /\.trash/ [OR] 
+
+# Redirect system files 
+RewriteCond %{REQUEST_FILENAME} \.DS_Store$ [OR,NC] 
 
 # Redirect all subdirectories.
 RewriteCond %{REQUEST_FILENAME} -d

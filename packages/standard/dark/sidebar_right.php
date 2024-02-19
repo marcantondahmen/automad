@@ -1,1 +1,0 @@
-<@ ../templates/sidebar_right.php @>

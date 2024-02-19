@@ -1,0 +1,99 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.ce-block {
+	position: relative;
+	flex-basis: 100%;
+	flex-grow: 0;
+	min-width: 16rem;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	&:hover > &__content:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -@am-bl-editor-toolbar-icons-width;
+		width: @am-bl-editor-toolbar-icons-width;
+		height: (@am-bl-editor-toolbar-icons-width / 2);
+	}
+
+	&__content {
+		position: relative;
+		width: 100%;
+		padding: 0.2rem 0;
+		max-width: @am-bl-editor-block-max-width !important;
+		outline: 1px dashed transparent;
+		transition: outline 0.2s;
+
+		.am-style--stretched > & {
+			max-width: 100% !important;
+			margin: 0;
+		}
+	}
+
+	&--selected &__content {
+		background-color: transparent;
+
+		& > .cdx-block {
+			background-color: hsl(var(--am-clr-background-highlight));
+		}
+	}
+
+	.am-ui &--drop-target &__content {
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+
+	.am-ui &--drop-target > &__content {
+		outline-color: hsl(var(--am-clr-background-primary));
+	}
+
+	& [placeholder]:empty:before {
+		content: attr(placeholder);
+		color: hsl(var(--am-clr-text-muted)) !important;
+	}
+
+	& .am-e-badge {
+		gap: 0;
+		margin: 0 0.4rem 0.4rem 0;
+		pointer-events: none;
+	}
+}
+
+.cdx-block {
+	padding: 0;
+}

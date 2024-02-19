@@ -1,0 +1,199 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-e-contents {
+	@margin-bottom: 1rem;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	blockquote,
+	img,
+	table,
+	pre,
+	ul,
+	ol {
+		margin-top: unit(@margin-bottom, em);
+		margin-bottom: @margin-bottom;
+		color: hsl(var(--am-clr-text));
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	h1 {
+		font-size: 2.45rem;
+		font-weight: 670;
+		line-height: 1.235;
+		color: hsl(var(--am-clr-text));
+	}
+
+	h2 {
+		font-size: 2.05rem;
+		font-weight: 640;
+		line-height: 1.275;
+		color: hsl(var(--am-clr-text));
+	}
+
+	h3 {
+		font-size: 1.75rem;
+		font-weight: 610;
+		line-height: 1.35;
+		color: hsl(var(--am-clr-text));
+	}
+
+	h4 {
+		font-size: 1.45rem;
+		font-weight: 610;
+		line-height: 1.375;
+		color: hsl(var(--am-clr-text));
+	}
+
+	h5 {
+		font-size: 1.25rem;
+		font-weight: 610;
+		line-height: 1.45;
+		color: hsl(var(--am-clr-text));
+	}
+
+	h6 {
+		font-size: 1.125rem;
+		font-weight: 610;
+		line-height: 1.475;
+		color: hsl(var(--am-clr-text));
+	}
+
+	& [contenteditable] a {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		font-weight: 600;
+
+		&:after {
+			content: ' ↗';
+		}
+	}
+
+	& i,
+	& cite,
+	& em,
+	& var,
+	& address,
+	& dfn {
+		font-style: italic;
+	}
+
+	& strong {
+		font-weight: bold;
+	}
+
+	& del {
+		color: hsl(var(--am-clr-text-muted));
+		font-style: italic;
+	}
+
+	& blockquote {
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 1rem;
+		border-left: 3px solid hsl(var(--am-clr-border));
+		font-style: italic;
+	}
+
+	& pre,
+	& code {
+		font-family: @am-code-font-family;
+		background-color: hsl(var(--am-clr-background-faded));
+	}
+
+	& .toastui-editor-contents pre,
+	& .toastui-editor-contents code {
+		background-color: hsl(var(--am-clr-background));
+	}
+
+	& pre {
+		padding: 0.75rem 1rem;
+		border-radius: 0.5rem;
+	}
+
+	& code {
+		display: inline-block;
+		padding: 0 0.4em;
+		border-radius: 3px;
+		color: var(--am-prism-1);
+	}
+
+	& pre code {
+		padding: 0;
+		color: inherit;
+	}
+
+	& ul,
+	& ol {
+		padding-left: 1.5rem;
+
+		& * {
+			margin: 0 !important;
+		}
+	}
+
+	& img {
+		max-width: 100%;
+	}
+
+	& table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	& table th,
+	& table td {
+		padding: 0.4em 0.6em;
+		border: @am-border;
+	}
+
+	& table th {
+		font-weight: 540;
+		border-bottom-width: 2px;
+		text-align: left;
+	}
+}

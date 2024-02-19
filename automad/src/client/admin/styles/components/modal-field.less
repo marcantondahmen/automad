@@ -1,0 +1,99 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-modal-field {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	* + & {
+		margin-top: @am-base-margin-y;
+	}
+
+	& > .am-c-field {
+		margin: 0;
+	}
+
+	&[am-modal-open] {
+		position: fixed;
+		align-items: center;
+		z-index: 450 !important;
+		inset: 0;
+		margin: 0;
+		padding: var(--am-body-padding-x);
+		padding-top: @am-navbar-height * 1.5;
+		overflow: auto;
+		background-color: hsl(var(--am-clr-background));
+	}
+
+	&__header {
+		position: fixed;
+		display: none;
+		justify-content: space-between;
+		align-items: center;
+		z-index: 1000;
+		inset: 0 0 auto 0;
+		min-height: @am-navbar-height;
+		padding: 0 var(--am-body-padding-x);
+		background-color: hsl(var(--am-clr-background));
+		border-bottom: @am-border;
+	}
+
+	&[am-modal-open] &__header {
+		display: flex;
+	}
+
+	&__toggle {
+		font-size: 1.25rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: opacity 0.2s;
+		opacity: 1;
+		color: hsl(var(--am-clr-text-paragraph));
+
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+
+	& > &__toggle {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	&[am-modal-open] > &__toggle {
+		display: none;
+	}
+}

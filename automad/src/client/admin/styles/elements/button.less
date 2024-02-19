@@ -1,0 +1,109 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-e-button {
+	--text: var(--am-clr-text);
+	--text-hover: var(--am-clr-text);
+	--bg: var(--am-clr-background);
+	--bg-hover: var(--am-clr-background-faded);
+	--border: var(--am-clr-border-button);
+	--border-hover: var(--am-clr-border-button);
+
+	box-sizing: border-box;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: @am-flex-gap;
+	height: @am-form-height;
+	padding: 0 1.25em;
+	font-size: 1em;
+	font-weight: 520;
+	border-radius: @am-form-radius;
+	cursor: pointer;
+	user-select: none;
+	text-decoration: none;
+	color: hsl(var(--text));
+	background-color: hsl(var(--bg));
+	border: @am-button-border-width solid hsl(var(--border));
+	outline: @am-outline;
+	transition:
+		color 0.2s,
+		background 0.2s,
+		border-color 0.2s,
+		outline 0.2s;
+
+	&:hover,
+	&:active {
+		color: hsl(var(--text-hover));
+		background-color: hsl(var(--bg-hover));
+		border-color: hsl(var(--border-hover));
+	}
+
+	&--danger {
+		--text: var(--am-clr-text-danger);
+		--text-hover: var(--am-clr-text-danger);
+		--bg: var(--am-clr-background-danger);
+		--bg-hover: var(--am-clr-background-danger-hover);
+		--border: var(--am-clr-border-danger);
+		--border-hover: var(--am-clr-border-danger);
+	}
+
+	&--primary {
+		--text: var(--am-clr-text-primary);
+		--text-hover: var(--am-clr-text-primary);
+		--bg: var(--am-clr-background-primary);
+		--bg-hover: var(--am-clr-background-primary-hover);
+		--border: var(--am-clr-background-primary);
+		--border-hover: var(--am-clr-background-primary-hover);
+	}
+
+	&--icon {
+		width: @am-form-height;
+		min-width: @am-form-height;
+		padding: 0;
+	}
+
+	&:focus,
+	&.am-focus {
+		outline: @am-outline-active;
+		border: @am-button-border-width solid hsl(var(--am-clr-border-active));
+	}
+
+	&[disabled] {
+		cursor: not-allowed;
+		color: hsl(var(--am-clr-text-muted));
+		border: @am-button-border-width solid hsl(var(--am-clr-border-button));
+		background-color: transparent;
+	}
+}

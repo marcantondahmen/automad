@@ -2,7 +2,8 @@
 
 namespace Automad\Engine;
 
-use Automad\Core\Str;
+use Automad\App;
+use Automad\Core\Session;
 use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
@@ -10,51 +11,64 @@ use PHPUnit\Framework\TestCase;
  * @testdox Automad\Engine\View
  */
 class ViewTest extends TestCase {
-	public function dataForTestHeadlessJSONIsEqual() {
-		return array(
-			array(
-				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
-				'{"test": "<img src=\"/pages/01.page/image.jpg\" srcset=\"/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w\"><a href=\"/index.php/page/test\">Test</a>"}'
-			),
-			array(
-				"This is a\n\rmultiline test.",
-				'{"test": "This is a\\\\nmultiline test."}'
-			),
-			array(
-				'{"test":""}',
-				'{"test": "{\"test\":\"\"}"}'
-			)
-		);
-	}
-
-	public function dataForTestHeadlessValueIsEqual() {
-		return array(
-			array(
-				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
-				'<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
-			),
-			array(
-				"This is a\n\rmultiline test.",
-				'This is a\nmultiline test.'
-			),
-			array(
-				'{"test":""}',
-				'{"test":""}'
-			)
-		);
-	}
-
 	public function dataForTestInPageRenderIsEqual() {
 		$data = array();
+		$assets = $this->getAssets();
+		$pagesDir = AM_DIR_PAGES;
+		$csrf = Session::getCsrfToken();
+		$dock = <<< HTML
+			<am-inpage-dock
+				csrf="$csrf"
+				api="/index.php/_api"
+				dashboard="/index.php/dashboard"
+				url="/page"
+				state="draft"
+				labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22publish%22%3A%22Publish%22%7D"
+			></am-inpage-dock>
+			HTML;
+
 		$templates = array(
-			'email_01' =>   '<a href="#">test</a>' .
-							"<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
-							'<a href="#">test</a>',
-			'email_02' => 	'<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>'
+			'email_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<a href="#">test</a>
+								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
+								<a href="#">test</a>
+							{$assets->mailJS}$dock</body>
+						</html>
+						HTML,
+			'email_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
+									<span></span>
+									test<span class="am-at"></span>test<span class="am-dot"></span>com
+								</a>
+							{$assets->mailJS}$dock</body>
+						</html>
+						HTML,
+			'resolve_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							$dock</body>
+						</html>
+						HTML,
+			'resolve_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							$dock</body>
+						</html>
+						HTML
 		);
 
 		foreach ($templates as $template => $expected) {
@@ -69,7 +83,62 @@ class ViewTest extends TestCase {
 
 	public function dataForTestRenderIsEqual() {
 		$data = array();
+		$assets = $this->getAssets();
+		$pagesDir = AM_DIR_PAGES;
+
 		$templates = array(
+			'comments_01' => 'Page',
+			'email_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}</head>
+							<body>
+								<a href="#">test</a>
+								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
+								<a href="#">test</a>
+							{$assets->mailJS}</body>
+						</html>
+						HTML,
+			'email_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->mailCSS}</head>
+							<body>
+								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
+									<span></span>
+									test<span class="am-at"></span>test<span class="am-dot"></span>com
+								</a>
+							{$assets->mailJS}</body>
+						</html>
+						HTML,
+			'extension_01' => 'Test',
+			'extension_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							{$assets->extensionCSS}{$assets->extensionJS}</head>
+							<body>
+								Asset Test
+							</body>
+						</html>
+						HTML,
+			'falsy' => '0//false/0/1',
+			'for_01' => '1, 2, 3, 4, 5',
+			'if_01' => 'True',
+			'if_02' => 'False',
+			'if_03' => 'True',
+			'if_04' => 'True',
+			'inheritance_01' => 'derived',
+			'inheritance_02' => 'derived by user',
+			'inheritance_03' => 'nested derived',
+			'inheritance_04' => 'nested derived override',
+			'invalid' => '//',
+			'pagelist_01' => 'Text Subpage Page Home Blocks',
+			'pagelist_02' => 'Blocks Text',
+			'pagelist_03' => 'Home Subpage',
+			'pagelist_04' => '[/page]: includes not only the word find but also the word me. [/blocks]: Some text containing the word me and the word find nested in the list',
+			'pipe_dateformat_01' => '2019',
+			'pipe_dateformat_02' => 'Samstag, 21. Juli 2018',
+			'pipe_dateformat_03' => 'Sat, 21 Jul 2018',
 			'pipe_def_01' => 'Test String',
 			'pipe_def_02' => 'This is a "Test String"',
 			'pipe_def_03' => 'This is a "Test String"',
@@ -78,54 +147,42 @@ class ViewTest extends TestCase {
 			'pipe_def_06' => '"Quoted" "Test" "String"',
 			'pipe_empty' => '',
 			'pipe_markdown_01' => '<p>A paragraph with <strong>bold</strong> text.</p>',
-			'pipe_dateformat_01' => '2019',
-			'pipe_dateformat_02' => 'Samstag, 21. Juli 2018',
-			'pipe_dateformat_03' => 'Sat, 21 Jul 2018',
+			'pipe_math_01' => '15',
+			'pipe_math_02' => '50',
+			'pipe_math_03' => '10',
+			'pipe_math_04' => '17',
 			'pipe_replace_01' => 'Some <div class="test">test</div> string',
 			'pipe_replace_02' => '<div class="test"><p>Test</p></div>',
 			'pipe_sanatize_01' => 'some-very-long-quoted-string-all-do',
 			'pipe_shorten_01' => 'This is ...',
 			'pipe_shorten_02' => 'This is another very >>>',
-			'pipe_math_01' => '15',
-			'pipe_math_02' => '50',
-			'pipe_math_03' => '10',
-			'pipe_math_04' => '17',
-			'for_01' => '1, 2, 3, 4, 5',
-			'if_01' => 'True',
-			'if_02' => 'False',
-			'if_03' => 'True',
-			'if_04' => 'True',
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
-			'set_01' => 'Test 1, Test 2',
+			'resolve_01' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							</body>
+						</html>
+						HTML,
+			'resolve_02' => <<< HTML
+						<html>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}</head>
+							<body>
+								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
+								<a href="/index.php/page/test">Test</a>
+							</body>
+						</html>
+						HTML,
 			'session_get_01' => 'Session Test',
-			'email_01' => '<a href="#">test</a>' .
-						  "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
-						  '<a href="#">test</a>',
-			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
-							'<a href="/index.php/page/test">Test</a>',
-			'extension_01' => 'Test',
-			'extension_02' => 	'<head>' .
-								'<meta name="Generator" content="Automad ' . AM_VERSION . '">' .
-								'<link rel="stylesheet" href="' . AM_BASE_URL . '/automad/dist/blocks.min.css?v=' . Str::sanitize(AM_VERSION) . '">' .
-								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . Str::sanitize(AM_VERSION) . '"></script>' .
-								'<link rel="stylesheet" href="' .
-								AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css?m=' .
-								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/styles.css') .
-								'" />' .
-								'<script type="text/javascript" src="' .
-								AM_BASE_URL . '/automad/tests/packages/vendor/extension/script.js?m=' .
-								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/script.js') .
-								'"></script>' .
-								'</head>Asset Test',
+			'set_01' => 'Test 1, Test 2',
 			'snippet_01' => 'Snippet Test / Snippet Test',
-			'inheritance_01' => 'derived',
-			'inheritance_02' => 'derived by user',
-			'inheritance_03' => 'nested derived',
-			'inheritance_04' => 'nested derived override',
+			'toolbox_breadcrumbs_01' => '<ul><li><a href="/">Home</a></li> <li><a href="/index.php/page">Page</a></li> <li><a href="/index.php/page/subpage">Subpage</a></li> </ul>',
+			'toolbox_nav_01' => '<ul><li><a href="/">Home</a></li><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
+			'toolbox_nav_02' => '<ul><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
+			'with_01' => 'Text, Blocks'
 		);
 
 		foreach ($templates as $template => $expected) {
@@ -139,47 +196,9 @@ class ViewTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider dataForTestHeadlessJSONIsEqual
-	 * @testdox render $value: $expected
-	 * @param mixed $value
-	 * @param mixed $expected
-	 */
-	public function testHeadlessJSONIsEqual($value, $expected) {
-		$Mock = new Mock();
-		$AutomadMock = $Mock->createAutomad();
-		$Page = $AutomadMock->Context->get();
-		// Set test to $value.
-		$Page->data['test'] = $value;
-		// Render view in headless mode.
-		$View = new View($AutomadMock, true);
-
-		$this->assertEquals($expected, $View->render());
-	}
-
-	/**
-	 * @dataProvider dataForTestHeadlessValueIsEqual
-	 * @testdox render $value: $expected
-	 * @param mixed $value
-	 * @param mixed $expected
-	 */
-	public function testHeadlessValueIsEqual($value, $expected) {
-		$Mock = new Mock();
-		$AutomadMock = $Mock->createAutomad();
-		$Page = $AutomadMock->Context->get();
-		// Set test to $value.
-		$Page->data['test'] = $value;
-		// Render view in headless mode.
-		$View = new View($AutomadMock, true);
-		// Convert JSON output back into array to check if
-		// $value matches $expected.
-		$array = json_decode($View->render());
-
-		$this->assertEquals($expected, $array->test);
-	}
-
-	/**
 	 * @dataProvider dataForTestInPageRenderIsEqual
 	 * @testdox render $template: $expected
+	 * @runInSeparateProcess
 	 * @param mixed $template
 	 * @param mixed $expected
 	 */
@@ -191,14 +210,15 @@ class ViewTest extends TestCase {
 		$rendered = $View->render();
 		$rendered = trim(str_replace('\n', '', $rendered));
 
-		$this->assertEquals($expected, $rendered);
-
 		$_SESSION['username'] = false;
+
+		$this->assertEquals($expected, $rendered);
 	}
 
 	/**
 	 * @dataProvider dataForTestRenderIsEqual
 	 * @testdox render $template: $expected
+	 * @runInSeparateProcess
 	 * @param mixed $template
 	 * @param mixed $expected
 	 */
@@ -209,5 +229,24 @@ class ViewTest extends TestCase {
 		$rendered = trim(str_replace('\n', '', $rendered));
 
 		$this->assertEquals($expected, $rendered);
+	}
+
+	private function getAssets(): object {
+		$asset = function (string $file): string {
+			return $file . '?m=' . filemtime(AM_BASE_DIR . $file);
+		};
+
+		return (object) array(
+			'generator' => '<meta name="Generator" content="Automad ' . App::VERSION . '">',
+			'canonical' => '<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '" />',
+			'blocksJS' => '<script src="' . $asset('/automad/dist/blocks/main.bundle.js') . '" type="text/javascript"></script>',
+			'blocksCSS' => '<link href="' . $asset('/automad/dist/blocks/main.bundle.css') . '" rel="stylesheet">',
+			'mailJS' => '<script src="' . $asset('/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>',
+			'mailCSS' => '<link href="' . $asset('/automad/dist/mail/main.bundle.css') . '" rel="stylesheet">',
+			'inPageJS' => '<script src="' . $asset('/automad/dist/inpage/main.bundle.js') . '" type="text/javascript"></script>',
+			'inPageCSS' => '<link href="' . $asset('/automad/dist/inpage/main.bundle.css') . '" rel="stylesheet">',
+			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/packages/vendor/extension/script.js') . '"></script>',
+			'extensionCSS' => '<link href="' . $asset('/automad/tests/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
+		);
 	}
 }

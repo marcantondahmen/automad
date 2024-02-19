@@ -1,2 +1,7 @@
-<head></head>
-<@~ Vendor/Extension { parameter: 'Asset Test' } @>
+<html>
+	<head>
+	</head>
+	<body>
+		<@ Vendor/Extension { parameter: 'Asset Test' } @>
+	</body>
+</html>

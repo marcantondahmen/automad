@@ -1,0 +1,88 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-ed-bl-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: @am-flex-gap;
+
+	&__edit {
+		color: hsl(var(--am-clr-text-muted));
+		cursor: pointer;
+		transition: color 0.2s;
+
+		&:hover,
+		&:active {
+			color: hsl(var(--am-clr-text-paragraph));
+		}
+	}
+
+	&__button {
+		color: var(--color, hsl(var(--am-clr-text)));
+		background-color: var(--background, hsl(var(--am-clr-background-faded)));
+		border: var(--borderWidth, 0) solid
+			var(--borderColor, hsl(var(--am-clr-border)));
+		border-radius: var(--borderRadius, 0.5rem);
+		padding: var(--paddingVertical, 0.75rem)
+			var(--paddingHorizontal, 2.5rem);
+		outline: @am-outline;
+		transition: all 0.2s;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--hoverColor, hsl(var(--am-clr-text)));
+			background-color: var(
+				--hoverBackground,
+				hsl(var(--am-clr-background-faded))
+			);
+			border: var(--borderWidth, 0) solid
+				var(--hoverBorderColor, hsl(var(--am-clr-border)));
+		}
+
+		&:empty {
+			min-width: 6rem;
+			color: hsl(var(--am-clr-text-muted)) !important;
+			background-color: transparent !important;
+			border: 2px dashed hsl(var(--am-clr-border));
+
+			&:before {
+				content: attr(data-placeholder);
+			}
+		}
+
+		&:focus {
+			outline: @am-outline-active;
+		}
+	}
+}

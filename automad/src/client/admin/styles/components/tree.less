@@ -1,0 +1,105 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-tree {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	max-width: 100%;
+	--st-label-height: ~'calc(@{am-nav-item-line-height} + @{am-border-width})';
+	--st-subnodes-padding-left: 1.1rem;
+	--st-collapse-icon-height: var(--st-label-height);
+	--st-collapse-icon-width: 1.2rem;
+	--st-collapse-icon-size: 0.6rem;
+
+	&__node {
+		&--drop-before,
+		&--drop-inside,
+		&--drop-after {
+			z-index: 5;
+		}
+	}
+
+	&__label {
+		&:hover {
+			z-index: 2;
+			--color: var(--hover-color);
+			--background: var(--hover-background);
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			z-index: 5;
+			inset: -1px ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
+			border-top: 2px solid transparent;
+			border-bottom: 2px solid transparent;
+			transition: border-color 0.2s 0.2s;
+			pointer-events: none;
+		}
+	}
+
+	&__node--dragging * {
+		cursor: move !important;
+	}
+
+	&__node--dragging > &__label {
+		opacity: 0.6;
+	}
+
+	&__node--drop-before > &__label:after {
+		border-top-color: hsl(var(--am-clr-border-active));
+		transition-delay: 0s;
+	}
+
+	&__node--drop-after > &__label:after {
+		border-bottom-color: hsl(var(--am-clr-border-active));
+		transition-delay: 0s;
+	}
+
+	&__node--drop-inside > &__label > * > * {
+		border-color: hsl(var(--am-clr-border-active));
+	}
+
+	&__collapse {
+		z-index: 3;
+		left: 0.275rem !important;
+		opacity: 0.4;
+		transition: opacity 0.2s;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

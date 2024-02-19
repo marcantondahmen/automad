@@ -36,8 +36,8 @@
  */
 
 use Automad\Autoload;
+use Automad\Console\Console;
 use Automad\Core\Config;
-use Automad\UI\Console;
 
 if (http_response_code() || !defined('STDIN')) {
 	exit('CLI only!');
@@ -47,7 +47,7 @@ define('AUTOMAD', true);
 define('AUTOMAD_CONSOLE', true);
 define('AM_BASE_DIR', dirname(dirname(__FILE__)));
 
-require_once AM_BASE_DIR . '/automad/src/Autoload.php';
+require_once AM_BASE_DIR . '/automad/src/server/Autoload.php';
 
 Autoload::init();
 Config::overrides();

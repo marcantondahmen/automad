@@ -8,9 +8,9 @@ return (new PhpCsFixer\Config())
 		'array_syntax' => array('syntax' => 'long'),
 		'blank_line_after_opening_tag' => false,
 		'blank_line_before_statement' => true,
-		'braces' => array(
-			'allow_single_line_closure' => true,
-			'position_after_functions_and_oop_constructs' => 'same'
+		'braces_position' => array(
+			'classes_opening_brace' => 'same_line',
+			'functions_opening_brace' => 'same_line'
 		),
 		'concat_space' => array(
 			'spacing' => 'one'

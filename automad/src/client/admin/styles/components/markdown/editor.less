@@ -1,0 +1,190 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-md-editor {
+	width: 100%;
+	height: auto;
+	border: @am-form-border;
+	transition: outline 0.2s, border-color 0.2s;
+	outline: @am-outline;
+	border-radius: @am-md-editor-radius;
+	background-color: hsl(var(--am-clr-background-faded));
+
+	&--focus {
+		border-color: hsl(var(--am-clr-border-active));
+		outline: @am-outline-active;
+	}
+}
+
+.toastui-editor {
+	white-space: pre-line;
+
+	&-main {
+		box-sizing: border-box;
+		position: relative;
+		min-height: 0;
+		height: inherit;
+	}
+
+	&-main &-md-tab-style > &,
+	&-main &-md-tab-style > &-md-preview {
+		width: 100%;
+		display: none;
+	}
+
+	&-main &-md-tab-style > .active {
+		display: block;
+	}
+
+	&-main &-md-tab-style > &-tabs {
+		display: block;
+	}
+
+	&-main &-md-vertical-style > &-tabs {
+		display: none;
+	}
+
+	&-main &-md-vertical-style & {
+		width: 50%;
+	}
+
+	&-main &-md-vertical-style &-md-preview {
+		width: 50%;
+	}
+
+	&-main &-md-splitter {
+		display: none;
+		height: 100%;
+		width: 1px;
+		background-color: hsl(var(--am-clr-border));
+		position: absolute;
+		left: 50%;
+	}
+
+	&-main &-md-vertical-style &-md-splitter {
+		display: block;
+	}
+
+	&-md-container {
+		position: relative;
+		display: none;
+		overflow: hidden;
+		height: 100%;
+	}
+
+	&-md-container & {
+		line-height: @am-base-line-height;
+		position: relative;
+	}
+
+	&-md-container &,
+	&-md-container &-md-preview {
+		box-sizing: border-box;
+		padding: 0;
+		height: inherit;
+	}
+
+	&-md-container &-md-preview {
+		overflow: auto;
+		height: 100%;
+		min-height: @am-md-editor-min-height !important;
+	}
+
+	&-md-preview-highlight {
+		background-color: hsl(var(--am-clr-background-highlight));
+	}
+
+	&-main-container {
+		position: relative;
+		line-height: @am-base-line-height;
+		color: hsl(var(--am-clr-text));
+		width: 100%;
+		height: inherit;
+	}
+
+	&-ww-container {
+		display: none;
+		overflow: hidden;
+		height: inherit;
+	}
+
+	&-ww-container > & {
+		height: inherit;
+		position: relative;
+		width: 100%;
+	}
+
+	&-ww-container &-contents {
+		overflow: auto;
+		box-sizing: border-box;
+		margin: 0px;
+		height: inherit;
+
+		& p {
+			margin: 0;
+		}
+	}
+
+	&-md-container::after,
+	&-defaultUI-toolbar::after {
+		content: '';
+		display: block;
+		height: 0;
+		clear: both;
+	}
+
+	&.md-mode {
+		min-height: auto !important;
+
+		& .ProseMirror {
+			min-height: @am-md-editor-min-height;
+			background-color: transparent;
+		}
+	}
+
+	&-md-mode &-md-container,
+	&-ww-mode &-ww-container {
+		display: block;
+		z-index: 20;
+	}
+
+	&-md-mode &-md-vertical-style {
+		display: flex;
+	}
+
+	&-main.hidden,
+	&-defaultUI.hidden {
+		display: none;
+	}
+}

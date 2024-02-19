@@ -1,4 +1,4 @@
-name: 'Lock down repository'
+name: 'Close Pull-Requests'
 
 on:
   pull_request_target:
@@ -16,3 +16,4 @@ jobs:
             This repository does not accept pull requests,
             see the README for details.
           skip-closed-pr-comment: true
+

@@ -1,7 +1,9 @@
 {
     "name": "automad/automad",
     "description": "A flat-file content management system and template engine",
-    "keywords": ["cms"],
+    "keywords": [
+        "cms"
+    ],
     "type": "project",
     "homepage": "https://automad.org",
     "license": "MIT",
@@ -16,7 +18,13 @@
         "post-create-project-cmd": "@php automad/console createuser"
     },
     "require": {
-        "php": ">=7.4",
-        "automad/package-installer": "^1.1"
+        "php": ">=8.2",
+        "automad/package-installer": "^1.1",
+        "automad/standard-v1": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "automad/package-installer": true
+        }
     }
 }

@@ -4,3 +4,16 @@ root = true
 indent_style = tab
 indent_size = 4
 quote_type = single
+
+[{package,package-lock}.json]
+indent_style = space
+indent_size = 2
+
+[composer.json]
+indent_style = space
+indent_size = 4
+
+[*.yml]
+indent_style = space
+indent_size = 2
+

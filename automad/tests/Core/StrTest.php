@@ -25,7 +25,7 @@ class StrTest extends TestCase {
 
 	public function dataForTestShortenIsEqual() {
 		return array(
-			array('Some long string.', 3, ' ...', '...'),
+			array('Some long string.', 3, ' ...', 'Som ...'),
 			array('Some long string.', 8, ' ...', 'Some ...'),
 			array('Some long string.', 9, ' (more)', 'Some long (more)'),
 			array('Some long string.', 16, ' ...', 'Some long ...'),

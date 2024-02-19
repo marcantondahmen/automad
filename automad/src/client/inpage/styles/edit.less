@@ -1,0 +1,101 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2024 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-inpage-edit {
+	position: relative;
+	display: inline-block;
+
+	&[field^='+'],
+	&[field^='text'] {
+		display: block;
+		min-height: 60px;
+		margin: 0 1px;
+	}
+
+	&[placeholder]:before {
+		content: attr(placeholder);
+		opacity: 0.3;
+	}
+
+	&__overlay {
+		all: initial;
+		color: inherit;
+		position: absolute;
+		display: flex;
+		justify-content: start;
+		align-items: start;
+		z-index: 9999;
+		inset: 0;
+		min-height: 30px;
+		min-width: max-content;
+		opacity: 0;
+		pointer-events: none;
+		border-radius: 6px;
+		border: 1px dashed @am-inpage-button-background;
+		transition: opacity 0.2s 0.2s;
+	}
+
+	&:hover &__overlay {
+		opacity: 1;
+		transition: opacity 0.2s;
+	}
+
+	&__button {
+		position: sticky;
+		top: 5px;
+		margin: 2px;
+		display: inline-block;
+		align-items: center;
+		line-height: 26px;
+		overflow: visible;
+		padding: 0 10px;
+		font-family: @am-inpage-font-family;
+		font-size: 14px;
+		font-weight: 560;
+		border-radius: 4px;
+		cursor: pointer;
+		color: @am-inpage-button-color;
+		background-color: @am-inpage-button-background;
+		pointer-events: all;
+		transition: background-color 0.2s;
+		user-select: none;
+		box-shadow:
+			0 2px 12px rgba(0, 0, 0, 0.12),
+			0 6px 30px -10px rgba(0, 0, 0, 0.45);
+
+		&:hover {
+			background-color: @am-inpage-button-background-hover;
+		}
+	}
+}

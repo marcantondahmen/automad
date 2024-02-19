@@ -1,0 +1,93 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-feed-field-select {
+	--gap: 3px;
+	--clr: hsl(var(--am-clr-text-active));
+	--bg: hsl(var(--am-clr-background-highlight));
+	--border: hsl(var(--am-clr-border-active));
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap);
+	padding: var(--gap);
+
+	border-radius: ~'calc(@{am-form-radius} + var(--gap))';
+	border: 1px dashed hsl(var(--am-clr-border));
+
+	&:after {
+		content: attr(data-text);
+		padding: 0.5rem;
+		text-align: center;
+		color: hsl(var(--am-clr-text-muted));
+	}
+
+	&__arrows {
+		line-height: 2.5;
+		text-align: center;
+		color: hsl(var(--am-clr-text-muted));
+	}
+
+	&__item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 @am-form-padding-x;
+		height: @am-form-height;
+		color: var(--clr);
+		background-color: var(--bg);
+		border: @am-button-border-width solid var(--border);
+		border-radius: @am-form-radius;
+		cursor: grab;
+
+		&--ghost {
+			--clr: transparent;
+			--border: hsl(var(--am-clr-border-active));
+		}
+
+		&--drag {
+			box-shadow: @am-shadow;
+			opacity: 1 !important;
+		}
+
+		&--chosen {
+			box-shadow: @am-shadow;
+		}
+	}
+
+	&--muted {
+		--clr: hsl(var(--am-clr-text-muted));
+		--bg: hsl(var(--am-clr-background));
+		--border: hsl(var(--am-clr-border));
+	}
+}

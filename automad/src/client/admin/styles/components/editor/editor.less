@@ -1,0 +1,62 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.codex-editor {
+	z-index: initial !important;
+	padding: 12px 10px;
+	border: @am-border;
+	--space-left: ~'calc(0.5rem + @{am-bl-editor-toolbar-icons-width})';
+
+	& & {
+		padding: 0;
+		--space-left: 0;
+	}
+
+	[class$='-inpage'] & {
+		border: none;
+	}
+
+	am-editor > div > am-editor-js > & {
+		border: @am-form-border;
+		border-radius: @am-bl-editor-radius;
+	}
+
+	& &__redactor {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin: 0 !important;
+		padding-left: var(--space-left);
+	}
+}

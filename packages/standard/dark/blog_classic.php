@@ -1,1 +1,0 @@
-<@ ../templates/blog_classic.php @>

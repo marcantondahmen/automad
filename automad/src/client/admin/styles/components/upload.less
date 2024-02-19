@@ -1,0 +1,182 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-upload {
+	@upload-preview-padding: 0.6rem;
+	@upload-thumbnail-size: 4rem;
+	display: block;
+
+	&__dropzone {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: @am-flex-gap * 1.3;
+		padding: 1rem;
+		width: 100%;
+		height: 5rem;
+		margin-bottom: 1.25rem;
+		text-align: center;
+		font-size: 1.25rem;
+		color: hsl(var(--am-clr-text-muted));
+		background-color: hsl(var(--am-clr-background-faded));
+		border-radius: @am-card-radius;
+		border: @am-button-border-width dashed hsl(var(--am-clr-border));
+		cursor: pointer;
+		transition: color 0.2s, background-color 0.2s, border 0.2s, outline 0.2s;
+
+		&:hover {
+			color: hsl(var(--am-clr-text-paragraph));
+		}
+
+		&.dz-drag-hover {
+			color: hsl(var(--am-clr-text-active));
+			background-color: hsl(var(--am-clr-outline-active));
+			border: 1px solid hsl(var(--am-clr-border-active));
+			outline: @am-outline-active;
+		}
+
+		& > span {
+			user-select: none;
+			pointer-events: none;
+		}
+
+		& .bi {
+			font-size: 1.5rem;
+		}
+	}
+
+	&__previews.am-c-modal__dialog {
+		display: flex;
+		flex-direction: column;
+		min-height: (@upload-thumbnail-size + (2 * @upload-preview-padding));
+		padding: 0;
+	}
+
+	& .dz-clickable {
+		cursor: pointer;
+	}
+
+	& .dz-preview {
+		display: grid;
+		grid-template-columns: @upload-thumbnail-size ~'calc(100% - @{upload-thumbnail-size} - @{upload-preview-padding})';
+		grid-template-rows: repeat(3, (@upload-thumbnail-size / 3));
+		column-gap: @upload-preview-padding;
+		box-sizing: content-box;
+		padding: @upload-preview-padding;
+		height: @upload-thumbnail-size;
+		font-size: @am-small-font-size;
+		text-align: left;
+
+		& + .dz-preview {
+			border-top: @am-border;
+		}
+
+		& .dz-image {
+			grid-column: 1 / 2;
+			grid-row: 1 / 4;
+			height: @upload-thumbnail-size;
+			border-radius: 0.3rem;
+			overflow: hidden;
+			background-color: hsl(var(--am-clr-background-faded));
+			border: @am-border;
+
+			& > img {
+				width: 100%;
+				height: auto;
+			}
+		}
+
+		& .dz-details {
+			grid-column: 2 / 3;
+			grid-row: 1 / 3;
+			align-self: start;
+
+			display: flex;
+			flex-direction: column-reverse;
+			color: hsl(var(--am-clr-text-paragraph));
+
+			& > .dz-filename {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			& > .dz-size {
+				color: hsl(var(--am-clr-text-muted));
+			}
+		}
+
+		& .dz-progress {
+			grid-column: 1 / 2;
+			grid-row: 1 / 4;
+
+			position: relative;
+			height: 14%;
+			width: 80%;
+			inset: 42% 10%;
+			overflow: hidden;
+			border-radius: 2rem;
+			border: 2px solid hsl(var(--am-clr-text-primary));
+			background-color: hsl(var(--am-clr-text-primary));
+			opacity: 1;
+
+			& .dz-upload {
+				background-color: hsl(var(--am-clr-background-primary));
+				display: block;
+				position: relative;
+				height: 100%;
+				width: 0;
+				transition: width 0.2s;
+			}
+		}
+
+		& > .dz-remove {
+			grid-column: 2 / 3;
+			grid-row: 3 / 4;
+			align-self: end;
+			text-decoration: none;
+			color: hsl(var(--am-clr-text-link));
+			transition: color 0.2s;
+
+			&:hover {
+				color: hsl(var(--am-clr-text-link-hover));
+			}
+		}
+
+		& .dz-success-mark,
+		& .dz-error-mark {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,220 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.toastui-editor {
+	@toolbar-height: 2.75rem;
+
+	&-toolbar {
+		display: flex;
+		align-items: center;
+		box-sizing: border-box;
+		overflow: hidden;
+		border-top-left-radius: @am-md-editor-radius;
+		border-top-right-radius: @am-md-editor-radius;
+		background-color: hsl(var(--am-clr-background));
+	}
+
+	&-defaultUI &-md-tab-container {
+		box-sizing: content-box;
+		display: flex !important;
+		width: 100%;
+		height: @toolbar-height;
+		border-bottom: @am-border;
+	}
+
+	&-md-tab-container &-tabs {
+		display: flex;
+		height: 100%;
+	}
+
+	&-md-tab-container .tab-item {
+		display: flex;
+		align-items: center;
+		padding: 0 1.25rem;
+		height: 100%;
+		font-size: 0.85rem;
+		color: hsl(var(--am-clr-text-paragraph));
+		cursor: pointer;
+		border-right: @am-border !important;
+		box-sizing: content-box;
+	}
+
+	&-md-tab-container .tab-item.active {
+		border-bottom: 1px solid hsl(var(--am-clr-background-faded));
+		background-color: hsl(var(--am-clr-background-faded));
+	}
+
+	&-defaultUI-toolbar {
+		display: none;
+		align-items: center;
+		border-bottom: @am-border;
+
+		@media (min-width: @am-breakpoint-small) {
+			display: flex;
+		}
+	}
+
+	&-toolbar-group {
+		display: flex;
+		align-items: center;
+		gap: 0.3rem;
+		height: @toolbar-height;
+		padding: 1px 0.5rem 0 0.5rem;
+
+		& + & {
+			border-left: @am-border;
+		}
+	}
+
+	&-toolbar-item-wrapper {
+		display: flex !important;
+		align-items: center;
+	}
+
+	&-defaultUI-toolbar button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: @toolbar-height * 0.8;
+		height: @toolbar-height * 0.8;
+		padding: 0;
+		appearance: none;
+		border: none;
+		border-radius: @am-card-radius * 0.5;
+		outline: 0 !important;
+		color: hsl(var(--am-clr-text-paragraph));
+		background-color: transparent;
+		cursor: pointer;
+	}
+
+	&-defaultUI-toolbar button:not(:disabled):hover {
+		background-color: hsl(var(--am-clr-background-faded));
+	}
+
+	&-dropdown-toolbar {
+		position: absolute;
+		display: flex;
+		height: 46px;
+		z-index: 30;
+		border-radius: 2px;
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+		border: @am-border;
+		background-color: hsl(var(--am-clr-background));
+	}
+}
+
+.toastui-editor-toolbar-icons {
+	display: flex;
+	align-items: center;
+	font-size: 1.25rem;
+
+	&:before {
+		&:extend(.am-bi);
+	}
+
+	&:disabled {
+		opacity: 0.4;
+	}
+
+	&.heading:before {
+		content: '\F5F1';
+	}
+
+	&.bold:before {
+		content: '\F5F0';
+	}
+
+	&.italic:before {
+		content: '\F5F4';
+	}
+
+	&.strike:before {
+		content: '\F5F5';
+	}
+
+	&.hrline:before {
+		content: '\F426';
+	}
+
+	&.quote:before {
+		content: '\F6B0';
+	}
+
+	&.bullet-list:before {
+		content: '\F478';
+	}
+
+	&.ordered-list:before {
+		content: '\F475';
+	}
+
+	&.task-list:before {
+		content: '\F473';
+	}
+
+	&.indent:before {
+		content: '\F7FE';
+	}
+
+	&.outdent:before {
+		content: '\F823';
+	}
+
+	&.table:before {
+		content: '\F5AA';
+		font-size: 1rem;
+	}
+
+	&.image:before {
+		content: '\F42A';
+		font-size: 1.1rem;
+	}
+
+	&.link:before {
+		content: '\F470';
+	}
+
+	&.code:before {
+		content: '\F2C8';
+	}
+
+	&.codeblock:before {
+		content: '\F2C7';
+		font-size: 1.15rem;
+	}
+
+	&.more:before {
+		content: '\F5D4';
+	}
+}

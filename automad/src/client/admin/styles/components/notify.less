@@ -1,0 +1,89 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-notify {
+	--text: var(--am-clr-text);
+	--bg: var(--am-clr-background);
+	--border: var(--am-clr-border);
+
+	gap: 1.2em;
+	width: 24rem;
+	padding: 0.6rem 0.85rem;
+	color: hsl(var(--text));
+	background: hsl(var(--bg));
+	box-shadow: @am-shadow;
+	border: @am-card-border-width solid hsl(var(--border));
+	border-radius: @am-card-radius;
+
+	&--danger {
+		--text: var(--am-clr-text-danger);
+		--bg: var(--am-clr-background-danger);
+		--border: var(--am-clr-border-danger);
+	}
+
+	&__node {
+		display: flex;
+		gap: 0.9em;
+	}
+
+	&__icon {
+		font-size: 1.5em;
+		line-height: 1.4;
+	}
+
+	&__text {
+		flex-grow: 1;
+		align-self: center;
+		padding: 0.2rem 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	&__close {
+		padding: 0.2rem 0;
+		opacity: 0.3;
+		transition: opacity 0.2s;
+
+		&:before {
+			&:extend(.am-bi);
+			content: '\f659';
+			font-size: 1rem;
+			line-height: 1;
+		}
+	}
+
+	&:hover &__close {
+		opacity: 1;
+	}
+}

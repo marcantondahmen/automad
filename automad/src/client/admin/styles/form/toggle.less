@@ -1,0 +1,112 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-f-toggle {
+	display: flex;
+	color: hsl(var(--am-clr-text));
+
+	& input {
+		display: none;
+	}
+
+	&--large {
+		& label {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			cursor: pointer;
+		}
+
+		& .bi {
+			font-size: 2.75rem;
+			line-height: 1rem;
+		}
+	}
+
+	&--button,
+	&--select {
+		& label {
+			&:extend(.am-e-button all);
+
+			justify-content: flex-start;
+			gap: 0.8rem;
+			width: 100%;
+			padding: 0 @am-form-padding-x;
+			font-weight: @am-base-font-weight;
+			background-color: hsl(var(--am-clr-background-faded));
+		}
+
+		& .bi {
+			font-size: 1.25rem;
+		}
+	}
+
+	&--select {
+		position: relative;
+
+		& label {
+			color: hsl(var(--am-clr-text-muted));
+		}
+
+		& select {
+			position: absolute;
+			inset: 0;
+			opacity: 0;
+			cursor: pointer;
+		}
+	}
+
+	&--on label,
+	&--button :checked + label {
+		color: hsl(var(--am-clr-text-active));
+		border-color: hsl(var(--am-clr-border-active));
+		background-color: hsl(var(--am-clr-background-highlight));
+	}
+
+	&--off label {
+		color: hsl(var(--am-clr-text));
+	}
+
+	& .bi:before,
+	&--off .bi:before,
+	&--default-on&--off .bi:before {
+		content: '\f5d5';
+	}
+
+	&--on .bi:before,
+	&--default-on .bi:before,
+	& :checked + * .bi:before {
+		content: '\f5d6';
+	}
+}

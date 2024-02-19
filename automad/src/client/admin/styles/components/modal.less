@@ -1,0 +1,300 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-modal {
+	@jumpbar-padding: 3px;
+	@radius-inner: ~'calc(@{am-modal-radius} - 1px)';
+	display: block;
+	position: fixed;
+	z-index: 500;
+	width: 100vw;
+	height: 100vh;
+	max-height: 100vh;
+	inset: 0;
+	padding: 4rem var(--am-body-padding-x) 2rem var(--am-body-padding-x);
+	background-color: var(--am-modal-backdrop);
+	transform: translateY(-100%);
+	opacity: 0;
+	transition:
+		transform 0s linear 0.2s,
+		opacity 0.2s;
+	overflow: auto;
+	cursor: default;
+
+	@media (max-width: @am-breakpoint-small-max) {
+		padding-top: var(--am-body-padding-x);
+	}
+
+	&__dialog {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		top: -2%;
+		width: 100%;
+		max-width: 38rem;
+		margin: 0 auto;
+		padding: 0;
+		background-color: hsl(var(--am-clr-background));
+		border-radius: @am-modal-radius;
+		border: @am-modal-border;
+		box-shadow:
+			0 0.4rem 2.1rem var(--am-shadow),
+			0 5.2rem 5rem -4.7rem var(--am-shadow);
+		transition: top 0.2s;
+
+		&--large {
+			max-width: 64rem;
+		}
+
+		&--small {
+			max-width: 20rem;
+		}
+
+		&--fullscreen {
+			position: fixed;
+			padding: 0;
+			inset: 0;
+			width: 100%;
+			max-width: 100%;
+			margin: 0;
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+		}
+	}
+
+	&[am-modal-open] {
+		transform: translateY(0);
+		opacity: 1;
+		transition:
+			transform 0s linear,
+			opacity 0.2s;
+	}
+
+	&[am-modal-open] > &__dialog {
+		top: 0;
+	}
+
+	&__header,
+	&__body,
+	&__spinner,
+	&__footer {
+		padding: @am-modal-padding;
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: hsl(var(--am-clr-text));
+		border-bottom: @am-border;
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		color: hsl(var(--am-clr-text-paragraph));
+	}
+
+	& &__body hr {
+		margin: @am-modal-padding -@am-modal-padding;
+	}
+
+	&__code {
+		box-sizing: border-box;
+		width: 100%;
+		height: ~'calc(100vh - 15rem)';
+		padding: 0.5rem @am-form-padding-x;
+		font-family: @am-code-font-family;
+		line-height: 1.65;
+		color: hsl(var(--am-clr-text-paragraph));
+		background-color: @am-form-background;
+		outline: none;
+		border: none;
+		border-radius: 0;
+		border-bottom-left-radius: @radius-inner;
+		border-bottom-right-radius: @radius-inner;
+		resize: none;
+	}
+
+	&__footer {
+		display: flex;
+		justify-content: end;
+		align-items: center;
+		gap: @am-flex-gap;
+	}
+
+	&__spinner {
+		display: flex;
+		align-items: center;
+		gap: @am-modal-padding;
+
+		&-icon {
+			@size: 1.8rem;
+			position: relative;
+			width: @size;
+			height: @size;
+
+			&:before {
+				content: '';
+				box-sizing: border-box;
+				display: flex;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: @size;
+				height: @size;
+				border-radius: @size;
+				border: 0.2rem solid hsl(var(--am-clr-text-active));
+				border-left-color: transparent;
+				animation: 1.5s linear 0s infinite modal-spinner;
+			}
+		}
+
+		&-text {
+			flex-grow: 1;
+			color: hsl(var(--am-clr-text-paragraph));
+		}
+	}
+
+	&__jumpbar {
+		&-input {
+			box-sizing: border-box;
+			width: 100%;
+			padding: 0 0.92rem;
+			height: 3.4rem;
+			font-size: @am-navbar-font-size;
+			font-weight: 490;
+			border: none;
+			border-top-left-radius: @radius-inner;
+			border-top-right-radius: @radius-inner;
+			color: hsl(var(--am-clr-text));
+			background-color: @am-form-background;
+			transition: all 0.2s;
+			outline: @am-outline;
+
+			&::placeholder {
+				color: hsl(var(--am-clr-text-muted));
+			}
+		}
+
+		&-items {
+			display: flex;
+			flex-direction: column;
+			padding: @jumpbar-padding;
+			border-top: @am-border;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		&-link {
+			display: flex;
+			align-items: center;
+			gap: @am-flex-gap;
+			padding: 0 0.92rem;
+			font-size: 1rem;
+			line-height: 2.6;
+			text-decoration: none;
+			cursor: pointer;
+			color: hsl(var(--am-clr-text));
+			background-color: hsl(var(--am-clr-background));
+			border-radius: 0.35rem;
+			transition: all 0.2s;
+
+			&.am-active {
+				color: hsl(var(--am-clr-text-selected));
+				background-color: hsl(var(--am-clr-background-selected));
+			}
+
+			& > * {
+				flex-shrink: 0;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			& > :last-child {
+				flex-shrink: 1;
+			}
+		}
+
+		&-divider:not(:last-child) {
+			@space: 3px;
+			position: relative;
+			margin-bottom: 2 * @space + 1;
+
+			&:after {
+				content: '';
+				position: absolute;
+				display: block;
+				width: ~'calc(100% + (2 * @{jumpbar-padding}))';
+				margin-left: -@jumpbar-padding;
+				margin-right: -@jumpbar-padding;
+				left: 0;
+				bottom: -@space - 1;
+				border-bottom: @am-border;
+			}
+		}
+	}
+
+	&__close {
+		display: inline-flex;
+		align-items: center;
+		cursor: pointer;
+		transition: color 0.2s;
+
+		&:before {
+			&:extend(.am-bi);
+			content: '\f62a';
+			font-size: 1.35rem;
+			line-height: 1;
+		}
+
+		&:hover {
+			color: hsl(var(--am-clr-text-hover));
+		}
+	}
+}
+
+@keyframes modal-spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

@@ -1,0 +1,133 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.toastui-editor {
+	&-popup {
+		width: auto;
+		margin-right: auto;
+		background: hsl(var(--am-clr-background));
+		z-index: 30;
+		position: absolute;
+		border-radius: @am-form-radius;
+		box-shadow: @am-shadow;
+		border: @am-border;
+		overflow: hidden;
+	}
+
+	&-popup-body {
+		& * {
+			margin: 0 !important;
+		}
+	}
+
+	&-popup-add-table {
+		width: auto;
+	}
+
+	&-popup-add-table &-table-selection {
+		position: relative;
+	}
+
+	&-popup-add-table &-table-cell {
+		box-sizing: border-box;
+		display: table-cell;
+		width: 20px;
+		height: 20px;
+		border: @am-border;
+		background: hsl(var(--am-clr-background));
+	}
+
+	&-popup-add-table &-table-cell.header {
+		background: hsl(var(--am-clr-background-faded));
+	}
+
+	&-popup-add-table &-table-row {
+		display: table-row;
+	}
+
+	&-popup-add-table &-table {
+		display: table;
+		border-collapse: collapse;
+	}
+
+	&-popup-add-table &-table-selection-layer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		border: @am-border-width solid hsl(var(--am-clr-border-active));
+		background: hsl(var(--am-clr-outline-active));
+		z-index: 30;
+	}
+
+	&-popup-add-table &-table-description {
+		text-align: center;
+		color: hsl(var(--am-clr-text));
+	}
+
+	&-popup-add-heading {
+		width: auto;
+	}
+
+	&-popup-add-heading &-popup-body {
+		padding: 0;
+	}
+
+	&-popup-add-heading h1,
+	&-popup-add-heading h2,
+	&-popup-add-heading h3,
+	&-popup-add-heading h4,
+	&-popup-add-heading h5,
+	&-popup-add-heading h6,
+	&-popup-add-heading ul,
+	&-popup-add-heading p {
+		padding: 0 !important;
+		margin: 0;
+		border: none !important;
+	}
+
+	&-popup-add-heading ul {
+		padding: 5px 0;
+		list-style: none;
+	}
+
+	&-popup-add-heading ul li {
+		padding: 0.5rem 0.7rem;
+		cursor: pointer;
+	}
+
+	&-popup-add-heading ul li:hover {
+		color: hsl(var(--am-clr-text-selected));
+		background-color: hsl(var(--am-clr-background-selected));
+	}
+}

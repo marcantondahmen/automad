@@ -1,0 +1,64 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-image-select {
+	display: flex;
+	height: 7rem;
+	overflow: hidden;
+	border: @am-border;
+	border-radius: @am-card-radius;
+
+	&__preview {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		aspect-ratio: 1;
+		cursor: pointer;
+
+		& > img {
+			object-fit: cover;
+			min-width: 100%;
+			min-height: 100%;
+		}
+	}
+
+	&__combo {
+		display: flex;
+		justify-content: space-evenly;
+		flex-grow: 1;
+		flex-direction: column;
+		padding: 0 0.55rem;
+		border-left: @am-border;
+	}
+}

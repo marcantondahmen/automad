@@ -1,0 +1,69 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.toastui-editor {
+	&-tooltip {
+		position: absolute;
+		box-shadow: 0 8px 12px 0 var(--am-shadow),
+			0 4px 5px -3px var(--am-shadow);
+		border-radius: 0.25rem;
+		transition: opacity 0.1s, transform 0.1s;
+		z-index: 9999;
+		background-color: hsl(var(--am-clr-background-primary));
+		padding: 0.45rem 0.75rem;
+		max-width: 20rem;
+		font-size: 0.8rem;
+		font-weight: 540;
+		line-height: 1.5;
+		color: hsl(var(--am-clr-text-primary));
+		font-family: @am-base-font-family;
+	}
+
+	&-tooltip .arrow {
+		content: '';
+		display: inline-block;
+		z-index: -1;
+		width: 10px;
+		height: 10px;
+		background-color: hsl(var(--am-clr-background-primary));
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		transform: rotate(45deg);
+		position: absolute;
+		top: -3px;
+		left: 6px;
+	}
+}

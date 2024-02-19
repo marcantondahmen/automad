@@ -37,7 +37,7 @@ do
 	esac
 done
 
-ps | grep "gulp watch" | grep -v grep | awk '{print $1}' | xargs kill
+ps | grep "webpack" | grep -v grep | awk '{print $1}' | xargs kill
 
 msg="$( echo $branch | sed -E 's|([^/]+)/([^/]+)/(.*)|\1(\2): \3|' | sed 's|_| |g' )"
 

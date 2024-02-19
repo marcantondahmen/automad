@@ -1,0 +1,355 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-ui .SfxPopper-root *,
+.am-ui .FIE_root *,
+.am-ui .SfxModal-Wrapper .SfxModal-Overlay * {
+	font-family: @am-base-font-family !important;
+}
+
+.am-ui .am-c-modal .FIE_root {
+	& .FIE_topbar {
+		position: relative;
+		justify-content: flex-start;
+		font-size: 1rem;
+
+		&-buttons-wrapper {
+			align-items: center;
+			gap: 0.5rem;
+			width: 30%;
+		}
+
+		&-save-wrapper {
+			width: auto !important;
+		}
+
+		&-history-buttons {
+			white-space: nowrap;
+			gap: 2px;
+
+			& .SfxIconButton-root {
+				width: @am-form-height;
+				height: @am-form-height;
+				font-weight: 520;
+
+				& svg {
+					display: none;
+				}
+			}
+		}
+
+		&-reset-button:after {
+			content: '↺';
+			font-size: 1.25rem;
+		}
+
+		&-undo-button:after {
+			content: '↩';
+			font-size: 1.25rem;
+		}
+
+		&-redo-button:after {
+			content: '↪';
+			font-size: 1.25rem;
+		}
+
+		&-center-options {
+			gap: 0.65rem;
+			width: 40%;
+			justify-content: center;
+
+			& > * {
+				white-space: nowrap;
+			}
+
+			& button {
+				justify-content: center;
+
+				& svg {
+					min-width: 1em !important;
+					min-height: 1em;
+				}
+			}
+		}
+
+		&-close-button {
+			position: absolute;
+			top: 0.6rem;
+			right: 1rem;
+			color: hsl(var(--am-clr-text));
+
+			&:hover {
+				color: hsl(var(--am-clr-text-hover));
+			}
+
+			&:after {
+				content: '✗';
+				font-size: 1.25rem;
+				padding: 1rem 0.5rem;
+			}
+
+			& svg {
+				display: none;
+			}
+		}
+	}
+
+	& .FIE_tab {
+		width: 6rem;
+		border-radius: 0.3rem;
+		padding: 0 0.4em;
+		transition: background-color 0.2s;
+
+		&:hover {
+			background-color: hsl(var(--am-clr-background-faded));
+		}
+
+		&:before {
+			&:extend(.am-bi);
+			color: hsl(var(--am-clr-text-sidebar));
+			font-size: 1.25rem;
+		}
+
+		&:nth-child(1):before {
+			content: '\f2dd';
+		}
+
+		&:nth-child(2):before {
+			content: '\f56b';
+		}
+
+		&:nth-child(3):before {
+			content: '\f18c';
+		}
+
+		&:nth-child(4):before {
+			content: '\f30d';
+		}
+
+		&:nth-child(5):before {
+			content: '\f4cb';
+		}
+
+		&:nth-child(6):before {
+			content: '\f150';
+		}
+
+		& > svg {
+			display: none;
+		}
+
+		&-label {
+			display: block;
+			padding-top: 4px;
+			max-width: 100%;
+			font-size: 0.75rem;
+			font-weight: 520 !important;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			text-align: center;
+		}
+
+		&[aria-selected='true'] {
+			background-color: hsl(var(--am-clr-background-primary));
+
+			& *,
+			&:before {
+				color: hsl(var(--am-clr-text-primary)) !important;
+			}
+		}
+	}
+
+	& .FIE_editor-content {
+		& .FIE_carousel-prev-button,
+		& .FIE_carousel-next-button {
+			display: flex;
+			align-items: center;
+			background: none !important;
+
+			& > svg {
+				display: none;
+			}
+
+			&:after {
+				text-align: center;
+				width: 28px;
+				line-height: 28px;
+				font-size: 15px;
+				font-weight: 560;
+				border-radius: 28px;
+				color: hsl(var(--am-clr-text-primary));
+				background-color: hsl(var(--am-clr-background-primary));
+			}
+		}
+
+		& .FIE_carousel-prev-button:after {
+			&:extend(.am-bi);
+			content: '\f22d';
+			line-height: 1.9rem !important;
+		}
+
+		& .FIE_carousel-next-button:after {
+			&:extend(.am-bi);
+			content: '\f231';
+			line-height: 1.9rem !important;
+		}
+	}
+}
+
+.am-ui .FIE_topbar-buttons-wrapper .SfxButton-root {
+	border: none !important;
+}
+
+.am-ui .FIE_topbar-buttons-wrapper,
+.am-ui .SfxModalActions-root {
+	& .SfxButton-root {
+		&:extend(.am-e-button all);
+		margin: 0 !important;
+		border-color: hsl(var(--am-clr-border-button)) !important;
+		outline: 0 !important;
+
+		&:hover,
+		&:focus,
+		&:active {
+			border-color: hsl(var(--am-clr-border-button)) !important;
+			outline: 0 !important;
+		}
+
+		& > .SfxButton-Label {
+			font-family: @am-base-font-family !important;
+			font-size: inherit !important;
+			font-weight: inherit !important;
+			line-height: inherit !important;
+		}
+	}
+
+	& [color='primary'].SfxButton-root,
+	& [color='error'].SfxButton-root {
+		color: hsl(var(--am-clr-text-primary)) !important;
+		background-color: hsl(var(--am-clr-background-primary)) !important;
+		border: 1px solid hsl(var(--am-clr-background-primary)) !important;
+
+		&:hover,
+		&:active {
+			background-color: hsl(
+				var(--am-clr-background-primary-hover)
+			) !important;
+			border-color: hsl(
+				var(--am-clr-background-primary-hover)
+			) !important;
+		}
+	}
+}
+
+.am-ui .SfxModal-Container[open] {
+	top: 4rem !important;
+	transform: translate(-50%, 0) !important;
+	border-radius: @am-modal-radius;
+	overflow: hidden;
+	box-shadow: @am-shadow;
+	width: 520px !important;
+	max-width: 520px !important;
+	padding: 8px 2px;
+
+	& .SfxModalTitle-root {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	& .SfxModalTitle-LabelSecondary,
+	& .SfxModalTitle-Icon {
+		display: none;
+	}
+
+	& .SfxInput-root {
+		height: 32px !important;
+		border-radius: 5px !important;
+	}
+
+	& .FIE_save-file-name-input {
+		width: 400px !important;
+	}
+
+	& .FIE_save-extension-selector {
+		min-width: 80px;
+	}
+
+	& .FIE_save-quality-wrapper,
+	& .FIE_save-resize-wrapper {
+		margin-top: 24px !important;
+	}
+
+	& .FIE_resize-height-option,
+	& .FIE_resize-width-option {
+		width: 90px !important;
+	}
+
+	& input {
+		padding: 0 0.35em;
+		line-height: 32px !important;
+	}
+
+	& .SfxModalActions-root {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.4rem;
+		font-size: 0.9rem;
+
+		& [color='link'].SfxButton-root {
+			color: hsl(var(--am-clr-text-primary)) !important;
+			background-color: hsl(var(--am-clr-background-primary)) !important;
+			border: 1px solid hsl(var(--am-clr-background-primary)) !important;
+
+			&:hover,
+			&:active {
+				background-color: var(
+					--am-clr-background-primary-hover
+				) !important;
+				border-color: hsl(
+					var(--am-clr-background-primary-hover)
+				) !important;
+			}
+		}
+	}
+}
+
+.am-ui .Menu-open {
+	overflow: hidden !important;
+}
+
+.am-ui .FIE_tools-bar svg {
+	width: 20px !important;
+	height: 20px !important;
+}

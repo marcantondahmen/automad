@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"allowJs": true,
+		"checkJs": false,
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"preserveConstEnums": false,
+		"target": "es6",
+		"outDir": "dist",
+		"paths": {
+			"@/*": ["./automad/src/client/admin/*"],
+			"~/*": ["./automad/src/client/blocks/*"],
+			"common": ["./automad/src/client/common/index.ts"]
+		}
+	},
+	"exclude": ["node_modules", "automad/dist"]
+}

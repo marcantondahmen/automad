@@ -1,0 +1,109 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-breadcrumbs {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 0.4em;
+	max-width: 100%;
+	padding: 0.35rem 0 1.1rem 0;
+	font-size: @am-small-font-size;
+	font-weight: @am-small-font-weight;
+	overflow: hidden;
+
+	&__item {
+		display: none;
+		align-items: center;
+		flex-wrap: nowrap;
+		max-width: 33%;
+		line-height: 1.5;
+		color: @am-breadcrumbs-clr;
+		border-radius: 0.3rem;
+		transition: color 0.2s;
+		cursor: pointer;
+
+		&:hover {
+			color: @am-breadcrumbs-hover-clr;
+		}
+
+		&:before {
+			padding-right: 0.4em;
+		}
+
+		&:after {
+			padding-left: 0.4em;
+		}
+
+		&:not(:last-child) {
+			&:after {
+				content: '→';
+			}
+		}
+
+		&:nth-last-child(3),
+		&:nth-last-child(2),
+		&:nth-last-child(1) {
+			display: flex;
+		}
+
+		& > * {
+			max-width: 100%;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		@media (max-width: @am-breakpoint-small-max) {
+			& + &:nth-last-child(3):before {
+				content: '…';
+			}
+		}
+
+		@media (min-width: @am-breakpoint-small) {
+			max-width: 20%;
+
+			& + &:nth-last-child(5):before {
+				content: '…';
+			}
+
+			&:nth-last-child(5),
+			&:nth-last-child(4),
+			&:nth-last-child(3),
+			&:nth-last-child(2),
+			&:nth-last-child(1) {
+				display: flex;
+			}
+		}
+	}
+}

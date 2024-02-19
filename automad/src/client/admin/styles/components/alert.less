@@ -1,0 +1,92 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-alert {
+	--text: var(--am-clr-text);
+	--bg: var(--am-clr-background);
+	--border: var(--am-clr-border);
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.1rem;
+	margin: 0;
+	margin-bottom: @am-base-margin-y;
+	padding: 0.9rem;
+	border: @am-card-border-width solid hsl(var(--border));
+	border-radius: @am-card-radius;
+	color: hsl(var(--text));
+	background-color: hsl(var(--bg));
+	box-shadow: @am-shadow;
+	--multiplier: ~'calc(30rem - 100%)';
+
+	&--danger {
+		--text: var(--am-clr-text-danger);
+		--bg: var(--am-clr-background-danger);
+		--border: var(--am-clr-border-danger);
+	}
+
+	& > * {
+		flex-basis: ~'calc(var(--multiplier) * 999)';
+		max-width: 100%;
+	}
+
+	* + & {
+		margin-top: @am-base-margin-y;
+	}
+
+	&__icon {
+		display: flex;
+		width: min-content;
+
+		& > .bi {
+			font-size: 1.75rem;
+			line-height: 1;
+		}
+	}
+
+	&__text {
+		flex-grow: 1;
+		align-self: center;
+		color: inherit;
+		max-width: 50rem;
+
+		& > * {
+			margin: 0;
+
+			& + * {
+				margin-top: @am-base-margin-y;
+			}
+		}
+	}
+}

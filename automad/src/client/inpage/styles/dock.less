@@ -1,0 +1,122 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2024 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-inpage-dock {
+	all: initial;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	z-index: 99999;
+	inset: auto 10px 25px 10px;
+	pointer-events: none;
+
+	&__container {
+		padding: 0 6px;
+		display: flex;
+		align-items: stretch;
+		height: 48px;
+		font-family: @am-inpage-font-family;
+		pointer-events: initial;
+		color: @am-inpage-color;
+		border: @am-inpage-border;
+		border-radius: 9px;
+		box-shadow:
+			0 5px 20px rgba(0, 0, 0, 0.12),
+			0 22px 40px -10px rgba(0, 0, 0, 0.45);
+		.background();
+	}
+
+	&__handle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 18px;
+		color: @am-inpage-color-muted;
+		cursor: grab;
+
+		.is-pointer-down & {
+			cursor: grabbing;
+		}
+	}
+
+	&__item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 42px;
+		color: @am-inpage-color;
+		transition: color 0.2s;
+
+		& .bi {
+			font-size: 21px;
+		}
+
+		&:hover {
+			color: @am-inpage-color-hover;
+		}
+
+		&:before {
+			content: attr(data-tooltip);
+			display: flex;
+			position: absolute;
+			padding: 0 6px;
+			top: -25px;
+			opacity: 0;
+			font-size: 12px;
+			font-weight: 560;
+			line-height: 20px;
+			color: @am-inpage-color;
+			border-radius: 4px;
+			pointer-events: none;
+			transition: opacity 0.2s;
+			background-color: @am-inpage-background;
+		}
+
+		&:hover:before {
+			opacity: 1;
+		}
+	}
+
+	&__logo {
+		width: 24px;
+		height: auto;
+		margin-top: -3px;
+		padding: 0 2px;
+		color: inherit;
+
+		& svg {
+			color: inherit;
+		}
+	}
+}
