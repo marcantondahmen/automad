@@ -1,6 +1,6 @@
 # Automad
 
-A flat-file content management system and template engine
+A flat-file content management system and template engine.
 
 ![Tag](https://img.shields.io/github/v/tag/marcantondahmen/automad?include_prereleases&sort=semver&color=222222)
 ![PHP](https://img.shields.io/packagist/dependency-v/automad/dist/php?color=222222)
@@ -13,7 +13,8 @@ A flat-file content management system and template engine
 
 ## Installation
 
-Automad can be installed using [Docker](https://docker.com), [Composer](https://getcomposer.org) or manually.
+Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled
+version of Automad using [Docker](https://docker.com) or [Composer](https://getcomposer.org).
 
 ### Composer
 
@@ -33,17 +34,15 @@ It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automa
 docker run -dp 80:80 -v ./app:/app --name mysite automad/automad:v2
 ```
 
-The first time you run the image, a new user account for the Automad dashboard will be created automatically. The account details will be logged by the running container. You can show these logs using the following command:
+This will essentially make your site available at port `80` and mount a directory called `app` in the current working directory for data persistence.
+A new user account for the Automad dashboard will be created automatically. The account details will be logged by the running container.
+You can show these logs using the following command:
 
 ```bash
 docker logs mysite
 ```
 
 Your can now navigate to [localhost](http://localhost) to view your new site.
-
-### Manual Download
-
-Alternatively Automad can also be [downloaded](https://github.com/automadcms/automad-dist/archive/refs/heads/v2.zip) as a `.zip` file and installed manually. [Read more here.](https://automad.org/version-2#getting-started)
 
 ## Documentation
 
