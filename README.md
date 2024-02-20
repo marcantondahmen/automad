@@ -3,7 +3,7 @@
 A flat-file content management system and template engine.
 
 ![Tag](https://img.shields.io/github/v/tag/marcantondahmen/automad?include_prereleases&sort=semver&color=222222)
-![PHP](https://img.shields.io/packagist/dependency-v/automad/dist/php?color=222222)
+![PHP](https://img.shields.io/packagist/dependency-v/automad/automad/php?color=222222)
 ![Language](https://img.shields.io/github/languages/top/marcantondahmen/automad?color=222222)
 ![Size](https://img.shields.io/github/languages/code-size/marcantondahmen/automad?color=222222)
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
