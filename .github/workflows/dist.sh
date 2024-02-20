@@ -93,9 +93,6 @@ echo ".gitattributes export-ignore" >.gitattributes
 echo ".github export-ignore" >>.gitattributes
 echo "VERSION export-ignore" >>.gitattributes
 
-echo -e "> :bell: Note that is the distribution-only repository for [Automad](https://automad.org). Head over to [marcantondahmen/automad](https://github.com/marcantondahmen/automad) for the source code and issues.\n---\n" >README.md
-cat $srcDir/README.md >>README.md
-
 echo '---------------------------------------------------------------------------'
 echo 'Commit and push'
 
