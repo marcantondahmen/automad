@@ -62,7 +62,7 @@ In case you are interested in contributing, the following types of contribution 
 
 -   Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
 -   [Publishing packages](https://automad.org/developer-guide/publishing-packages) like themes or extensions to the Automad package [browser](https://packages.automad.org)
--   Giving feedback and helping to grow a [community](https://discuss.automad.org)
+-   Giving feedback and helping to grow a [community](https://automad.org/discuss)
 -   Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
 
 However, I do not exclude at this point using parts of Automad's source in future projects under different licenses. In order to avoid having to ask anybody for permission when doing so, I will not accept any contributions to **this** repository. Please understand that pull requests will therefore be ignored.
