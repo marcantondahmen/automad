@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.0.0-alpha.2](https://github.com/marcantondahmen/automad/commit/6f0ee3a96542fb26de6816430938ba2c5283f1df)
+
+Sat, 24 Feb 2024 22:36:24 +0100
+
+### New Features
+
+- add option to install Automad manually ([6f0ee3a96](https://github.com/marcantondahmen/automad/commit/6f0ee3a96542fb26de6816430938ba2c5283f1df))
+
+### Bugfixes
+
+- fix homepage links for empty base urls ([22f35c4a5](https://github.com/marcantondahmen/automad/commit/22f35c4a5ac88bcfa55c5e254061ff8e59a22423))
+
 ## [v2.0.0-alpha.1](https://github.com/marcantondahmen/automad/commit/46ba17b955e9905c79a07b3673af40f1c4c30f71)
 
 Mon, 19 Feb 2024 19:44:14 +0100
@@ -315,3 +327,16 @@ Sat, 7 Aug 2021 19:45:51 +0200
 - **ui**: fix disabled save button after deleting unused variable field ([fe375915e](https://github.com/marcantondahmen/automad/commit/fe375915e5afaa9fb9ec4798df3c466fd0e283a5))
 - **ui**: fix position of block editor toolbar on large devices ([e19b4b983](https://github.com/marcantondahmen/automad/commit/e19b4b98356d22ed475a8f27489c1d65a26e83e2))
 - **ui**: fix switcher tab update on hashchanges ([2a6725d37](https://github.com/marcantondahmen/automad/commit/2a6725d374ffd0b575b8ce98f7a0eb14707d222e))
+
+## [v1.7.5](https://github.com/marcantondahmen/automad/commit/fe9027615d9a63051fa4e0cca80d7000a2830bae)
+
+Wed, 23 Jun 2021 20:24:36 +0200
+
+### New Features
+
+- **blocks**: add option to exclude or include hidden pages ([64625ddbb](https://github.com/marcantondahmen/automad/commit/64625ddbb25bf224096b94085af98fa178d3f1f9))
+
+### Bugfixes
+
+- **sitemap**: exclude private pages from sitemap.xml ([e4b6169c4](https://github.com/marcantondahmen/automad/commit/e4b6169c4c74be7a0d5cdf2bf09106e05a38b70a))
+- **ui**: remove resize option in image selection dialog ([3af5973c3](https://github.com/marcantondahmen/automad/commit/3af5973c3b406a2ff74545c3a8e2b716de2ed1b1))
