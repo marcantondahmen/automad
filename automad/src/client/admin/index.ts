@@ -84,6 +84,7 @@ import './components/Forms/PageDataForm';
 import './components/Forms/PublishForm';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';
+import './components/Forms/SetupForm';
 import './components/Forms/SharedDataForm';
 import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';

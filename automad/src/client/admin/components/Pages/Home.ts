@@ -68,7 +68,7 @@ const systemInfo = (): string => {
 			</div>
 			<div class="${CSS.formGroup}">
 				<a
-					href="${App.baseURL}"
+					href="${App.baseURL || '/'}"
 					class="${CSS.button} ${CSS.formGroupItem}"
 					target="_blank"
 				>

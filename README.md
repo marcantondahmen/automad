@@ -1,9 +1,9 @@
 # Automad
 
-A flat-file content management system and template engine
+A flat-file content management system and template engine.
 
 ![Tag](https://img.shields.io/github/v/tag/marcantondahmen/automad?include_prereleases&sort=semver&color=222222)
-![PHP](https://img.shields.io/packagist/dependency-v/automad/dist/php?color=222222)
+![PHP](https://img.shields.io/packagist/dependency-v/automad/automad/php?color=222222)
 ![Language](https://img.shields.io/github/languages/top/marcantondahmen/automad?color=222222)
 ![Size](https://img.shields.io/github/languages/code-size/marcantondahmen/automad?color=222222)
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
@@ -11,9 +11,16 @@ A flat-file content management system and template engine
 
 ![](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)
 
+## Links
+
+-   [Documentation](https://automad.org)
+-   [Changelog](https://github.com/marcantondahmen/automad/blob/-/CHANGELOG.md)
+-   [Discussion](https://automad.org/discuss)
+
 ## Installation
 
-Automad can be installed using [Docker](https://docker.com), [Composer](https://getcomposer.org) or manually.
+Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled
+version of Automad using [Docker](https://docker.com) or [Composer](https://getcomposer.org).
 
 ### Composer
 
@@ -33,17 +40,15 @@ It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automa
 docker run -dp 80:80 -v ./app:/app --name mysite automad/automad:v2
 ```
 
-The first time you run the image, a new user account for the Automad dashboard will be created automatically. The account details will be logged by the running container. You can show these logs using the following command:
+This will essentially make your site available at port `80` and mount a directory called `app` in the current working directory for data persistence.
+A new user account for the Automad dashboard will be created automatically. The account details will be logged by the running container.
+You can show these logs using the following command:
 
 ```bash
 docker logs mysite
 ```
 
 Your can now navigate to [localhost](http://localhost) to view your new site.
-
-### Manual Download
-
-Alternatively Automad can also be [downloaded](https://github.com/automadcms/automad-dist/archive/refs/heads/v2.zip) as a `.zip` file and installed manually. [Read more here.](https://automad.org/version-2#getting-started)
 
 ## Documentation
 
@@ -63,7 +68,7 @@ In case you are interested in contributing, the following types of contribution 
 
 -   Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
 -   [Publishing packages](https://automad.org/developer-guide/publishing-packages) like themes or extensions to the Automad package [browser](https://packages.automad.org)
--   Giving feedback and helping to grow a [community](https://discuss.automad.org)
+-   Giving feedback and helping to grow a [community](https://automad.org/discuss)
 -   Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
 
 However, I do not exclude at this point using parts of Automad's source in future projects under different licenses. In order to avoid having to ask anybody for permission when doing so, I will not accept any contributions to **this** repository. Please understand that pull requests will therefore be ignored.

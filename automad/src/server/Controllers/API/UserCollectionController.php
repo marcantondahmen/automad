@@ -53,6 +53,42 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class UserCollectionController {
 	/**
+	 * Create the first user account.
+	 *
+	 * @return Response the response object
+	 */
+	public static function createFirstUser(): Response {
+		$Response = new Response();
+
+		if (empty($_POST)) {
+			return $Response;
+		}
+
+		$UserCollection = new UserCollection();
+		$Messenger = new Messenger();
+
+		if (!$UserCollection->createUser(
+			Request::post('username'),
+			Request::post('password1'),
+			Request::post('password2'),
+			Request::post('email'),
+			$Messenger
+		)) {
+			return $Response->setError($Messenger->getError());
+		}
+
+		$php = $UserCollection->generatePHP();
+
+		return $Response->setData(
+			array(
+				'php'=> $php,
+				'filename' => basename(UserCollection::FILE_ACCOUNTS),
+				'configDir' => dirname(UserCollection::FILE_ACCOUNTS)
+			)
+		);
+	}
+
+	/**
 	 * Add user account based on $_POST.
 	 *
 	 * @return Response the response object
@@ -106,46 +142,6 @@ class UserCollectionController {
 
 		return $Response;
 	}
-
-	/**
-	 * Install the first user account.
-	 *
-	 * @return string Error message in case of an error
-	 */
-	/*
-
-
-	public static function install() {
-		if (empty($_POST)) {
-			return '';
-		}
-
-		$UserCollection = new UserCollection();
-		$Messenger = new Messenger();
-
-		if (!$UserCollection->createUser(
-			Request::post('username'),
-			Request::post('password1'),
-			Request::post('password2'),
-			Request::post('email'),
-			$Messenger
-		)) {
-			return $Messenger->getError();
-		}
-
-		header('Expires: -1');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Content-Type: application/octet-stream');
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename=' . basename(UserCollection::FILE_ACCOUNTS));
-		ob_end_flush();
-
-		exit($UserCollection->generatePHP());
-	}
-
-
-	 */
 
 	/**
 	 * Invite a new user by email.

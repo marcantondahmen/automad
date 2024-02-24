@@ -67,7 +67,7 @@ export const inPage = ({ main }: Partials): string => {
 							</am-submit>
 						</span>
 						<am-link
-							href="${App.baseURL}"
+							href="${App.baseURL || '/'}"
 							class="${CSS.navbarItem}"
 							${Attr.bind}="inPageReturnUrl"
 							${Attr.bindTo}="${Attr.external}"

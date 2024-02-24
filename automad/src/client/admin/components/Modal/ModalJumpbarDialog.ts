@@ -62,7 +62,7 @@ const searchData = (): JumpbarItemData[] => {
 const inPageData = (): JumpbarItemData[] => {
 	return [
 		{
-			external: App.baseURL,
+			external: App.baseURL || '/',
 			value: App.text('inPageEdit'),
 			title: App.text('inPageEdit'),
 			icon: 'window-desktop',

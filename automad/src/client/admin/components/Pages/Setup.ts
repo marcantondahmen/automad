@@ -32,7 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, Route } from '@/core';
+import {
+	Attr,
+	getTagFromRoute,
+	html,
+	Route,
+	UserCollectionController,
+} from '@/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
@@ -45,7 +51,9 @@ export class SetupComponent extends BaseCenteredLayoutComponent {
 	 * Set the page title that is used a document title suffix.
 	 */
 	protected get pageTitle(): string {
-		return App.text('setupUserAccount');
+		// Setup happens before a user can set a language.
+		// Therefore the title will be by default in English.
+		return 'Create User';
 	}
 
 	/**
@@ -54,7 +62,13 @@ export class SetupComponent extends BaseCenteredLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return 'Setup';
+		return html`
+			<am-setup-form
+				${Attr.api}="${UserCollectionController.createFirstUser}"
+				${Attr.focus}
+				${Attr.enter}
+			></am-setup-form>
+		`;
 	}
 }
 

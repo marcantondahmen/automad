@@ -6,14 +6,16 @@ on:
       - '*'
 
 jobs:
-  release-notes:
-    name: 'Regex Filtered Release Notes'
-    runs-on: 'ubuntu-latest'
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: 'marcantondahmen/release-notes-action@master'
+      - uses: actions/checkout@v4
         with:
-          repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          prerelease: true
-          draft: true
-          filter: '^(feat|fix|refactor)'
-          strict: true
+          fetch-depth: 0
+          fetch-tags: true
+      - run: bash bin/changelog.sh 1 >body.md
+      - uses: ncipollo/release-action@v1
+        with:
+          bodyFile: 'body.md'
