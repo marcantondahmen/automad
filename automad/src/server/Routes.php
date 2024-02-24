@@ -109,7 +109,7 @@ class Routes {
 		);
 
 		$Router->register(
-			"$apiBase/(session/login|session/validate|app/bootstrap|user/reset-password)",
+			"$apiBase/(session/login|session/validate|app/bootstrap|user/reset-password|user-collection/create-first-user)",
 			function () {
 				return RequestHandler::getResponse();
 			},

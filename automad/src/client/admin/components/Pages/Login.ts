@@ -70,7 +70,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 				${Attr.enter}
 			>
 				<am-form-error></am-form-error>
-				<div class="am-c-card">
+				<div class="${CSS.card}">
 					<div class="${CSS.cardForm}">
 						<input
 							class="${CSS.input}"
@@ -86,16 +86,15 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 							placeholder="${App.text('password')}"
 							required
 						/>
-						<div class="am-c-card__form-buttons">
-							<a
-								href="./${Route.resetpassword}"
+						<div class="${CSS.cardFormButtons}">
+							<am-link
+								${Attr.target}="${Route.resetpassword}"
 								class="${CSS.button}"
 							>
 								${App.text('forgotPassword')}
-							</a>
+							</am-link>
 							<am-submit
 								class="${CSS.button} ${CSS.buttonPrimary}"
-								${Attr.form}="${SessionController.login}"
 							>
 								${App.text('signIn')}
 							</am-submit>

@@ -118,7 +118,7 @@ class UserCollection {
 		}
 
 		if ($password1 != $password2) {
-			$Messenger->setError(Text::get('repeatPassword'));
+			$Messenger->setError(Text::get('passwordRepeatError'));
 
 			return false;
 		}

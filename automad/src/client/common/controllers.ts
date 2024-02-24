@@ -135,6 +135,7 @@ export const enum SystemController {
 }
 
 export const enum UserCollectionController {
+	createFirstUser = 'UserCollectionController::createFirstUser',
 	createUser = 'UserCollectionController::createUser',
 	edit = 'UserCollectionController::edit',
 	inviteUser = 'UserCollectionController::inviteUser',
