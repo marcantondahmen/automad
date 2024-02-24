@@ -87,6 +87,10 @@ while true; do
 done
 echo
 
+# Generate changelog.
+echo "Generating changelog ..."
+bash bin/changelog.sh 25 $tag >CHANGELOG.md
+
 # Updating version numbers.
 echo "Updating version numbers ..."
 
@@ -105,7 +109,7 @@ done
 echo
 
 # Status of repo.
-echo "The following files got updated:"
+echo "The following files have been updated:"
 git status -s
 echo
 
