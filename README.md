@@ -11,6 +11,12 @@ A flat-file content management system and template engine.
 
 ![](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)
 
+## Links
+
+-   [Documentation](https://automad.org)
+-   [Changelog](https://github.com/marcantondahmen/automad/blob/-/CHANGELOG.md)
+-   [Discussion](https://automad.org/discuss)
+
 ## Installation
 
 Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled
