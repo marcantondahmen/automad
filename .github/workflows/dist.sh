@@ -67,7 +67,7 @@ git switch $branch || git switch -c $branch
 echo "Syncing changes ..."
 
 rsync \
-	-a \
+	-rcvh \
 	--delete \
 	--stats \
 	--exclude=.git \
