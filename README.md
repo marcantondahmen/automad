@@ -21,6 +21,8 @@ A flat-file content management system and template engine.
 
 Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled
 version of Automad using [Docker](https://docker.com) or [Composer](https://getcomposer.org).
+It is also possible to manually [download](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip)
+and [install](#manual-installation) Automad.
 
 ### Composer
 
@@ -49,6 +51,15 @@ docker logs mysite
 ```
 
 Your can now navigate to [localhost](http://localhost) to view your new site.
+
+### Manual Installation
+
+In case you are not able to use Docker or Composer, you can also deploy Automad manually.
+
+1. Download a [distribution bundle](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip) and move the
+   unpacked content to the document root of your webserver.
+2. Make sure the PHP process has the permissions to write to the document root and its subdirectories including all installed files.
+3. Visit the `/dashboard` route of your site and create the first user.
 
 ## Documentation
 
