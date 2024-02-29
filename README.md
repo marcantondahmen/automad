@@ -3,7 +3,7 @@
 A flat-file content management system and template engine.
 
 ![Tag](https://img.shields.io/github/v/tag/marcantondahmen/automad?include_prereleases&sort=semver&color=222222)
-![PHP](https://img.shields.io/packagist/dependency-v/automad/automad/php?color=222222)
+![PHP](https://img.shields.io/packagist/dependency-v/automad/automad/php?version=dev-master&color=222222)
 ![Language](https://img.shields.io/github/languages/top/marcantondahmen/automad?color=222222)
 ![Size](https://img.shields.io/github/languages/code-size/marcantondahmen/automad?color=222222)
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
@@ -21,6 +21,8 @@ A flat-file content management system and template engine.
 
 Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled
 version of Automad using [Docker](https://docker.com) or [Composer](https://getcomposer.org).
+It is also possible to manually [download](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip)
+and [install](#manual-installation) Automad.
 
 ### Composer
 
@@ -49,6 +51,15 @@ docker logs mysite
 ```
 
 Your can now navigate to [localhost](http://localhost) to view your new site.
+
+### Manual Installation
+
+In case you are not able to use Docker or Composer, you can also deploy Automad manually.
+
+1. Download a [distribution bundle](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip) and move the
+   unpacked content to the document root of your webserver.
+2. Make sure the PHP process has the permissions to write to the document root and its subdirectories including all installed files.
+3. Visit the `/dashboard` route of your site and create the first user.
 
 ## Documentation
 

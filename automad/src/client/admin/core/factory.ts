@@ -242,6 +242,16 @@ export const createImagePickerModal = (
 		},
 	});
 
+	const pageImagePicker = pageUrl
+		? html`
+				<am-image-picker
+					${Attr.page}="${pageUrl}"
+					${Attr.label}="${App.text('pageImages')}"
+					${Attr.binding}="${pickerBindingName}"
+				></am-image-picker>
+			`
+		: '';
+
 	create(
 		'am-modal-dialog',
 		[CSS.modalDialogLarge],
@@ -289,14 +299,7 @@ export const createImagePickerModal = (
 						</div>
 					</div>
 				</div>
-				${pageUrl &&
-				html`
-					<am-image-picker
-						${Attr.page}="${getPageURL()}"
-						${Attr.label}="${App.text('pageImages')}"
-						${Attr.binding}="${pickerBindingName}"
-					></am-image-picker>
-				`}
+				${pageImagePicker}
 				<am-image-picker
 					${Attr.label}="${App.text('sharedImages')}"
 					${Attr.binding}="${pickerBindingName}"
