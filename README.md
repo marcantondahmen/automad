@@ -61,6 +61,19 @@ In case you are not able to use Docker or Composer, you can also deploy Automad 
 2. Make sure the PHP process has the permissions to write to the document root and its subdirectories including all installed files.
 3. Visit the `/dashboard` route of your site and create the first user.
 
+## Migrating Content
+
+In order to migrate an old Automad installation to the new version 2, follow these steps:
+
+1. Set up a fresh Automad installation in a new directory somewhere next to your old version 1 site.
+2. Change into the main directory of that new installation and use the following command in ordert to migrate your content:
+
+    ```bash
+    php automad/console migrate /path/to/version-1/site
+    ```
+
+3. After the migration is finished, you can delete the two backup directories that have been created before moving your content.
+
 ## Documentation
 
 Take a look at the [documentation](https://automad.org) to get started with Automad.
