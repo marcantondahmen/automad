@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, html, SystemController } from '@/core';
+import { Attr, html, SystemController } from '@/admin/core';
 
 /**
  * Render the update section.

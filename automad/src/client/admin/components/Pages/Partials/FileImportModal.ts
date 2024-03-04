@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, FileController, html } from '@/core';
+import { App, Attr, CSS, EventName, FileController, html } from '@/admin/core';
 
 export const renderFileImportModal = (): string => {
 	return html`

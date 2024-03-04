@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, html, listen } from '@/core';
-import { Listener } from '@/types';
+import { create, CSS, html, listen } from '@/admin/core';
+import { Listener } from '@/admin/types';
 import { BaseComponent } from './Base';
 
 /**

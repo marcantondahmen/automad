@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-export * from 'common';
+export * from '@/common';
 
 export * from './app';
 export * from './bindings';

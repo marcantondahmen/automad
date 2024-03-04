@@ -43,8 +43,8 @@ import {
 	Attr,
 	PageController,
 	listen,
-} from '@/core';
-import { KeyValueMap } from '@/types';
+} from '@/admin/core';
+import { KeyValueMap } from '@/admin/types';
 import { BaseBreadcrumbsComponent } from './BaseBreadcrumbs';
 
 /**

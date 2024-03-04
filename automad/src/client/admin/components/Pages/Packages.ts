@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, getTagFromRoute, html, Route } from '@/core';
+import { App, Attr, CSS, getTagFromRoute, html, Route } from '@/admin/core';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**

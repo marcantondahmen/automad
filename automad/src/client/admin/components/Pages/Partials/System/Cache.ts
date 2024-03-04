@@ -40,7 +40,7 @@ import {
 	CSS,
 	EventName,
 	html,
-} from '@/core';
+} from '@/admin/core';
 
 /**
  * Render the cache section.

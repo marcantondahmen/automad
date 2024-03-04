@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { SliderData } from '~/types';
+import { SliderData } from '@/blocks/types';
 import Swiper from 'swiper';
 import {
 	Autoplay,
@@ -49,7 +49,7 @@ import 'swiper/css/autoplay';
 import 'swiper/css/effect-cube';
 import 'swiper/css/effect-fade';
 import 'swiper/css/effect-flip';
-import { create } from 'common';
+import { create } from '@/common';
 
 /**
  * A slider component based on Swiper.js.

@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { create, Route, Section } from 'common';
-import logo from 'common/svg/logo.svg';
+import { create, Route, Section } from '@/common';
+import logo from '@/common/svg/logo.svg';
 import {
 	restoreDockPosition,
 	restoreScrollPosition,

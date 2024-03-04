@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, html, query } from '@/core';
-import { CodeEditor } from '@/core/code';
-import { RawBlockData } from '@/types';
+import { App, Attr, create, CSS, html, query } from '@/admin/core';
+import { CodeEditor } from '@/admin/core/code';
+import { RawBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export class RawBlock extends BaseBlock<RawBlockData> {

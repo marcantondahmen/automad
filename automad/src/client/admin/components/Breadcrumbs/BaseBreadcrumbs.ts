@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, listen } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { CSS, listen } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A breadcrumbs base component.

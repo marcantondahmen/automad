@@ -42,7 +42,7 @@ import {
 	html,
 	UserCollectionController,
 	UserController,
-} from '@/core';
+} from '@/admin/core';
 
 /**
  * Render the user section.

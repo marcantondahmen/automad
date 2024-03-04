@@ -41,8 +41,8 @@ import {
 	FieldTag,
 	html,
 	uniqueId,
-} from '@/core';
-import { MailBlockData } from '@/types';
+} from '@/admin/core';
+import { MailBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export class MailBlock extends BaseBlock<MailBlockData> {

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, FieldTag } from '@/core';
+import { App, Attr, createField, FieldTag } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**

@@ -33,7 +33,7 @@
  */
 
 import { KeyValueMap } from '.';
-import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
+import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
 
 export type FieldSectionName = 'settings' | 'text' | 'colors';
 

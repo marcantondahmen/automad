@@ -47,7 +47,7 @@ import {
 	FieldGroups,
 	InputElement,
 	KeyValueMap,
-} from '@/types';
+} from '@/admin/types';
 
 /**
  * The tag names enum for fields.

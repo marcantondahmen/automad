@@ -40,9 +40,9 @@ import {
 	html,
 	PageTrashController,
 	requestAPI,
-} from '@/core';
-import { DeletedPageMetaData } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { DeletedPageMetaData } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * Create a card for a deleted page.

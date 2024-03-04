@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { InPageController } from 'common';
+import { InPageController } from '@/common';
 import { inPageRequest } from '../request';
 import { saveScrollPosition } from '../sessionStore';
 import { BaseInPageComponent } from './BaseInPageComponent';

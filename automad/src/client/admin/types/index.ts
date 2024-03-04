@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-export * from '@/../common/types';
+export * from '@/common/types';
 
 export * from './editor/blocks';
 export * from './editor/editor';

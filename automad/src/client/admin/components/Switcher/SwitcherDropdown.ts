@@ -32,11 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS, EventName, html, listen } from '@/core';
-import { SwitcherDropdownData, SwitcherDropdownItem } from '@/types';
-import { BaseComponent } from '@/components/Base';
+import { Attr, create, CSS, EventName, html, listen } from '@/admin/core';
+import { SwitcherDropdownData, SwitcherDropdownItem } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 import { getActiveSection } from './Switcher';
-import { Section } from 'common';
+import { Section } from '@/common';
 
 /**
  * The system menu switcher wrapper.

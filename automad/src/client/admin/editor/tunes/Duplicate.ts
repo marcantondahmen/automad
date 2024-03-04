@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '@/core';
-import { BlockTuneConstructorOptions } from '@/types';
+import { App } from '@/admin/core';
+import { BlockTuneConstructorOptions } from '@/admin/types';
 import { API, BlockAPI, BlockTune } from 'automad-editorjs';
 import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { insertBlock } from '../utils';

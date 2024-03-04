@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, Route } from '@/core';
-import { Section } from 'common';
-import { BaseUpdateIndicatorComponent } from '@/components/Indicators/BaseUpdateIndicator';
+import { App, Attr, CSS, html, Route } from '@/admin/core';
+import { Section } from '@/common';
+import { BaseUpdateIndicatorComponent } from '@/admin/components/Indicators/BaseUpdateIndicator';
 
 /**
  * A system update state button component.

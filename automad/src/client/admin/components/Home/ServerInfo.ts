@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
-import { AppController, html, requestAPI } from '@/core';
+import { BaseComponent } from '@/admin/components/Base';
+import { AppController, html, requestAPI } from '@/admin/core';
 
 /**
  * A server info component.

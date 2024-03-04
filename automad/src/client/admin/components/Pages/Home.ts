@@ -40,8 +40,8 @@ import {
 	getTagFromRoute,
 	html,
 	Route,
-} from '@/core';
-import { Section } from 'common';
+} from '@/admin/core';
+import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 const systemInfo = (): string => {

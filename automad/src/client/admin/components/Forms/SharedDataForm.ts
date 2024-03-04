@@ -45,13 +45,13 @@ import {
 	fire,
 	listen,
 	prepareFieldGroups,
-} from '@/core';
+} from '@/admin/core';
 import {
 	FieldSectionCollection,
 	FieldSectionName,
 	KeyValueMap,
 	SharedBindings,
-} from '@/types';
+} from '@/admin/types';
 import { FormComponent } from './Form';
 
 /**

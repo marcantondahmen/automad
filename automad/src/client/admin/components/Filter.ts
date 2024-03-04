@@ -42,9 +42,9 @@ import {
 	keyCombo,
 	listen,
 	queryAll,
-} from '@/core';
-import { InputElement } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { InputElement } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A field and card filter input component.

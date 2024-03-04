@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { JumpbarItemData, KeyValueMap, PageMetaData } from '@/types';
-import { App, Attr, create, CSS, html, Route } from '@/core';
-import { Section } from 'common';
+import { JumpbarItemData, KeyValueMap, PageMetaData } from '@/admin/types';
+import { App, Attr, create, CSS, html, Route } from '@/admin/core';
+import { Section } from '@/common';
 import { AutocompleteComponent } from '../Autocomplete';
 
 /**

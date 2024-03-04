@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { ImageCollectionComponent } from '@/components/ImageCollection';
+import { ImageCollectionComponent } from '@/admin/components/ImageCollection';
 import {
 	App,
 	Attr,
@@ -47,8 +47,8 @@ import {
 	html,
 	listen,
 	uniqueId,
-} from '@/core';
-import { GalleryBlockData } from '@/types';
+} from '@/admin/core';
+import { GalleryBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export class GalleryBlock extends BaseBlock<GalleryBlockData> {

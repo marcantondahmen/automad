@@ -33,8 +33,8 @@
  * https://automad.org/license
  */
 
-import { App, create, CSS, html, query } from '@/core';
-import { HeaderBlockData } from '@/types';
+import { App, create, CSS, html, query } from '@/admin/core';
+import { HeaderBlockData } from '@/admin/types';
 import {
 	HTMLPasteEvent,
 	TunesMenuConfig,

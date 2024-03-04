@@ -1,4 +1,4 @@
-import { collectFieldData, create, FieldTag, query } from '@/core';
+import { collectFieldData, create, FieldTag, query } from '@/admin/core';
 
 test('collectFieldData (nested)', () => {
 	const tag = FieldTag.editor;

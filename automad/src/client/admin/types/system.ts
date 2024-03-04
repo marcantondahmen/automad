@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { transportOptions } from '@/components/Forms/MailConfigForm';
-import { Section } from 'common';
+import { transportOptions } from '@/admin/components/Forms/MailConfigForm';
+import { Section } from '@/common';
 
 type Enabled = boolean | 0 | 1;
 

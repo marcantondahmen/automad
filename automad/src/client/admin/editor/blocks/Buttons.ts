@@ -48,8 +48,8 @@ import {
 	listen,
 	query,
 	uniqueId,
-} from '@/core';
-import { ButtonsBlockButtonStyle, ButtonsBlockData } from '@/types';
+} from '@/admin/core';
+import { ButtonsBlockButtonStyle, ButtonsBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export const buttonsJustifyOptions = ['start', 'center', 'end'] as const;

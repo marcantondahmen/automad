@@ -42,8 +42,8 @@ import {
 	html,
 	query,
 	uniqueId,
-} from '@/core';
-import { IdTuneData } from '@/types';
+} from '@/admin/core';
+import { IdTuneData } from '@/admin/types';
 import { BaseModalTune } from './BaseModalTune';
 
 export class IdTune extends BaseModalTune<IdTuneData> {

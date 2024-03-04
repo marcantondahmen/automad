@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, createSelect, CSS, FieldTag, Route } from '@/core';
+import { App, Attr, create, createSelect, CSS, FieldTag, Route } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
-import { SelectComponentOption, Theme } from '@/types';
+import { SelectComponentOption, Theme } from '@/admin/types';
 
 /**
  * A theme select field.

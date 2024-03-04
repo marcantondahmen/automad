@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create } from 'common';
+import { create } from '@/common';
 
 /**
  * A simple image preloader with a blurred background.

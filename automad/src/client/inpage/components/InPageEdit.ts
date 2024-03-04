@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create } from 'common';
+import { create } from '@/common';
 import { saveScrollPosition } from '../sessionStore';
 import { BaseInPageComponent } from './BaseInPageComponent';
 

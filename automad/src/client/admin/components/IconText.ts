@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { Attr, create, CSS } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A simple icon with text component.

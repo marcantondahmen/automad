@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { UndoCapableField, UndoEntry, UndoValue } from '@/types';
+import { UndoCapableField, UndoEntry, UndoValue } from '@/admin/types';
 import { debounce, EventName, fire, keyCombo, listen } from '.';
 
 /**

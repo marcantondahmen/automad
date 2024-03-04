@@ -39,8 +39,8 @@ import {
 	BlockToolConstructorOptions,
 	BlockToolData,
 } from 'automad-editorjs';
-import { create } from '@/core';
-import { KeyValueMap, Listener } from '@/types';
+import { create } from '@/admin/core';
+import { KeyValueMap, Listener } from '@/admin/types';
 
 /**
  * The abstract base block class.

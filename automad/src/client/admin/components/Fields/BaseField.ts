@@ -43,7 +43,7 @@ import {
 	query,
 	queryAll,
 	Undo,
-} from '@/core';
+} from '@/admin/core';
 import {
 	FieldInitData,
 	FieldRenderData,
@@ -51,8 +51,8 @@ import {
 	KeyValueMap,
 	UndoCapableField,
 	UndoValue,
-} from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A standard input field with a label.

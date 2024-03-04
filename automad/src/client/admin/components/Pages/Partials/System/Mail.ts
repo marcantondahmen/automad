@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, EventName, MailConfigController } from '@/core';
+import { App, Attr, CSS, EventName, MailConfigController } from '@/admin/core';
 
 /**
  * Render the email section.

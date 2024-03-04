@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Listener } from '@/types';
+import { Listener } from '@/admin/types';
 import { CSS, getLogger, query, queryAll } from '.';
 
 /**

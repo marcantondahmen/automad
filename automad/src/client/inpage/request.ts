@@ -37,7 +37,7 @@ import {
 	controllerRoute,
 	InPageController,
 	RequestKey,
-} from 'common';
+} from '@/common';
 
 /**
  * Make a request to the API from an InPage component.

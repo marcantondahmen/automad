@@ -45,10 +45,10 @@ import {
 	html,
 	listen,
 	query,
-} from '@/core';
-import { createSortableTreeNodes, treeStyles } from '@/core/tree';
-import { PageMetaData } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { createSortableTreeNodes, treeStyles } from '@/admin/core/tree';
+import { PageMetaData } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal/Modal';
 
 /**

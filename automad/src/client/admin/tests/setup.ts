@@ -1,4 +1,4 @@
-import { FieldTag, FormDataProviders } from '@/core';
+import { FieldTag, FormDataProviders } from '@/admin/core';
 
 jest.mock('nanoid', () => {
 	return { nanoid: () => 'xxxx' };

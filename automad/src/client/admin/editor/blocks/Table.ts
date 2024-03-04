@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '@/core';
+import { App } from '@/admin/core';
 // @ts-ignore
 import Table from '@editorjs/table';
 

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag } from '@/core';
+import { create, CSS, FieldTag } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**

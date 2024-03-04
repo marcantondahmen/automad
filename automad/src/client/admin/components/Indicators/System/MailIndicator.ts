@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS } from '@/core';
+import { App, Attr, CSS } from '@/admin/core';
 import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
 
 /**

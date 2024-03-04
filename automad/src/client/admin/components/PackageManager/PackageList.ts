@@ -39,9 +39,9 @@ import {
 	listen,
 	PackageManagerController,
 	requestAPI,
-} from '@/core';
-import { KeyValueMap, Package } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { KeyValueMap, Package } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * Get and sort all required package data in order to generate the package card grid.

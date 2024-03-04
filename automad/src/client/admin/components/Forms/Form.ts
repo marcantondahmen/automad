@@ -49,10 +49,10 @@ import {
 	query,
 	queryAll,
 	requestAPI,
-} from '@/core';
-import { InputElement, KeyValueMap } from '@/types';
-import { BaseComponent } from '@/components/Base';
-import { ModalComponent } from '@/components/Modal/Modal';
+} from '@/admin/core';
+import { InputElement, KeyValueMap } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
 import { FormErrorComponent } from './FormError';
 

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create } from '@/core';
+import { create } from '@/admin/core';
 import { API, InlineToolConstructorOptions } from 'automad-editorjs';
 
 /**

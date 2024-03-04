@@ -47,8 +47,8 @@ import {
 	listen,
 	query,
 	uniqueId,
-} from '@/core';
-import { FilelistBlockData, SelectComponentOption } from '@/types';
+} from '@/admin/core';
+import { FilelistBlockData, SelectComponentOption } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 const defaultFile = 'default';

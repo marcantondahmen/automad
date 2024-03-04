@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
+import { BaseComponent } from '@/admin/components/Base';
 import {
 	Attr,
 	EventName,
@@ -43,7 +43,7 @@ import {
 	queryAll,
 	setSearchParam,
 	Undo,
-} from '@/core';
+} from '@/admin/core';
 import { SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';

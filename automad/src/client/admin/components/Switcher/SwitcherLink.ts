@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
-import { App, Attr, CSS, EventName, listen } from '@/core';
+import { BaseComponent } from '@/admin/components/Base';
+import { App, Attr, CSS, EventName, listen } from '@/admin/core';
 import {
 	getActiveSection,
 	setActiveSection,

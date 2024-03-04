@@ -44,9 +44,9 @@ import {
 	Route,
 	SessionController,
 	titleCase,
-} from '@/core';
-import { Partials } from '@/types';
-import { Section } from 'common';
+} from '@/admin/core';
+import { Partials } from '@/admin/types';
+import { Section } from '@/common';
 
 export const dashboardLayout = ({ main }: Partials) => {
 	return html`

@@ -47,7 +47,7 @@ import {
 	queryAll,
 	resolveFileUrl,
 	resolvePageUrl,
-} from '@/core';
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 import Editor, { LinkMdNode } from '@toast-ui/editor';
 import { ToolbarCustomOptions } from '@toast-ui/editor/types/ui';

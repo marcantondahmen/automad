@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { RootComponent } from '@/components/Root';
-import { KeyValueMap } from '@/types';
+import { RootComponent } from '@/admin/components/Root';
+import { KeyValueMap } from '@/admin/types';
 import { EventName, fire, getLogger } from '.';
 
 /**

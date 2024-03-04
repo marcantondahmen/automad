@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { FieldTag } from '@/core';
+import { FieldTag } from '@/admin/core';
 import { InputComponent } from './Input';
 
 /**

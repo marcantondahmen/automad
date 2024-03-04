@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { ColorComponent } from '@/components/Fields/Color';
+import { ColorComponent } from '@/admin/components/Fields/Color';
 import {
 	App,
 	convertRgbToHex,
@@ -43,8 +43,8 @@ import {
 	fire,
 	listen,
 	uniqueId,
-} from '@/core';
-import { KeyValueMap, Listener } from '@/types';
+} from '@/admin/core';
+import { KeyValueMap, Listener } from '@/admin/types';
 import { BaseInline } from './BaseInline';
 
 export class ColorInline extends BaseInline {

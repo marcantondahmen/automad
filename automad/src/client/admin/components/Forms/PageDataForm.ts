@@ -38,7 +38,7 @@ import {
 	KeyValueMap,
 	PageBindings,
 	PageMainSettingsData,
-} from '@/types';
+} from '@/admin/types';
 import { FormComponent } from './Form';
 import {
 	App,
@@ -58,9 +58,9 @@ import {
 	listen,
 	prepareFieldGroups,
 	setDocumentTitle,
-} from '@/core';
-import { PageTemplateComponent } from '@/components/Fields/PageTemplate';
-import { BaseFieldComponent } from '@/components/Fields/BaseField';
+} from '@/admin/core';
+import { PageTemplateComponent } from '@/admin/components/Fields/PageTemplate';
+import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
 
 /**
  * Init all URL and slug related bindings.

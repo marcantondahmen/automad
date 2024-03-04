@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html } from '@/core';
+import { App, CSS, html } from '@/admin/core';
 import { BaseOutdatedPackagesIndicator } from '../BaseOutdatedPackagesIndicator';
 
 /**

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, ConfigController, EventName, html } from '@/core';
+import { App, Attr, ConfigController, EventName, html } from '@/admin/core';
 
 /**
  * Render the cache section.

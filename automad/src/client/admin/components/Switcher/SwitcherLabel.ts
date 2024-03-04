@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
-import { Attr, CSS, EventName, listen, query } from '@/core';
+import { BaseComponent } from '@/admin/components/Base';
+import { Attr, CSS, EventName, listen, query } from '@/admin/core';
 import { getActiveSection, SwitcherComponent } from './Switcher';
 import { SwitcherLinkComponent } from './SwitcherLink';
 

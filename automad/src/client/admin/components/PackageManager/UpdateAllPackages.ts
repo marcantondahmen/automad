@@ -43,8 +43,8 @@ import {
 	notifySuccess,
 	PackageManagerController,
 	requestAPI,
-} from '@/core';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * The update all button component. It is only visible in case there are outdated packages.

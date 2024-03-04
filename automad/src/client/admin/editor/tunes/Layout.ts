@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, createSelect, CSS, listen, query } from '@/core';
-import { LayoutFraction, LayoutTuneData, SelectComponentOption } from '@/types';
+import { App, Attr, create, createSelect, CSS, listen, query } from '@/admin/core';
+import { LayoutFraction, LayoutTuneData, SelectComponentOption } from '@/admin/types';
 import { BaseElementTune } from './BaseElementTune';
 
 /**

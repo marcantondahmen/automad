@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { ImgComponent } from '@/components/Img';
+import { ImgComponent } from '@/admin/components/Img';
 import {
 	App,
 	Attr,
@@ -47,8 +47,8 @@ import {
 	listen,
 	resolveFileUrl,
 	uniqueId,
-} from '@/core';
-import { ImageBlockData } from '@/types';
+} from '@/admin/core';
+import { ImageBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export class ImageBlock extends BaseBlock<ImageBlockData> {

@@ -43,9 +43,9 @@ import {
 	ImageCollectionController,
 	listen,
 	requestAPI,
-} from '@/core';
-import { Image } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { Image } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal/Modal';
 
 /**

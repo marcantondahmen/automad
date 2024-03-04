@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { InPageBindings, KeyValueMap } from '@/types';
+import { InPageBindings, KeyValueMap } from '@/admin/types';
 import { FormComponent } from './Form';
 import {
 	App,
@@ -47,9 +47,9 @@ import {
 	listen,
 	query,
 	setDocumentTitle,
-} from '@/core';
-import { ModalComponent } from '@/components/Modal/Modal';
-import { EditorJSComponent } from '@/components/EditorJS';
+} from '@/admin/core';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
+import { EditorJSComponent } from '@/admin/components/EditorJS';
 
 /**
  * The InPage editing form element.

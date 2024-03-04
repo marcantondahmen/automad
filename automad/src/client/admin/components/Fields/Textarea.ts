@@ -39,7 +39,7 @@ import {
 	FieldTag,
 	initTabHandler,
 	listen,
-} from '@/core';
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**

@@ -47,8 +47,8 @@ import {
 	listen,
 	query,
 	uniqueId,
-} from '@/core';
-import { SelectComponentOption, SnippetBlockData } from '@/types';
+} from '@/admin/core';
+import { SelectComponentOption, SnippetBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export class SnippetBlock extends BaseBlock<SnippetBlockData> {

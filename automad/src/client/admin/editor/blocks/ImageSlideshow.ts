@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { ImageCollectionComponent } from '@/components/ImageCollection';
+import { ImageCollectionComponent } from '@/admin/components/ImageCollection';
 import {
 	App,
 	Attr,
@@ -48,8 +48,8 @@ import {
 	html,
 	listen,
 	uniqueId,
-} from '@/core';
-import { ImageSlideshowBreakpoints, ImageSlideshowBlockData } from '@/types';
+} from '@/admin/core';
+import { ImageSlideshowBreakpoints, ImageSlideshowBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 /**

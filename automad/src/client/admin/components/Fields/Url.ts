@@ -39,7 +39,7 @@ import {
 	Binding,
 	createLinkModal,
 	FieldTag,
-} from '@/core';
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
