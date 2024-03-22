@@ -9,13 +9,13 @@ A flat-file content management system and template engine.
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
 [![Twitter](https://img.shields.io/twitter/follow/automadcms?label=Follow)](https://twitter.com/automadcms)
 
-![](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)
+![Screenshot](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)
 
 ## Links
 
--   [Documentation](https://automad.org)
--   [Changelog](https://github.com/marcantondahmen/automad/blob/-/CHANGELOG.md)
--   [Discussion](https://automad.org/discuss)
+- [Documentation](https://automad.org)
+- [Changelog](https://github.com/marcantondahmen/automad/blob/-/CHANGELOG.md)
+- [Discussion](https://automad.org/discuss)
 
 ## Installation
 
@@ -81,10 +81,10 @@ Join the community, ask questions or start a discussion on the Automad [discussi
 
 In case you are interested in contributing, the following types of contribution are welcome:
 
--   Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
--   [Publishing packages](https://automad.org/developer-guide/publishing-packages) like themes or extensions to the Automad package [browser](https://packages.automad.org)
--   Giving feedback and helping to grow a [community](https://automad.org/discuss)
--   Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
+- Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
+- [Publishing packages](https://automad.org/developer-guide/publishing-packages) like themes or extensions to the Automad package [browser](https://packages.automad.org)
+- Giving feedback and helping to grow a [community](https://automad.org/discuss)
+- Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
 
 However, I do not exclude at this point using parts of Automad's source in future projects under different licenses. In order to avoid having to ask anybody for permission when doing so, I will not accept any contributions to **this** repository. Please understand that pull requests will therefore be ignored.
 
@@ -92,10 +92,10 @@ However, I do not exclude at this point using parts of Automad's source in futur
 
 To make the development of themes more efficient, plugins providing syntax highlighting and snippets for Automad's template language are available for the following editors:
 
--   [Neovim (Tree-Sitter)](https://github.com/automadcms/tree-sitter-automad)
--   [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MarcAntonDahmen.automad)
--   [Atom](https://atom.io/packages/language-automad)
--   [Textmate 2](https://github.com/marcantondahmen/automad.tmbundle)
+- [Neovim (Tree-Sitter)](https://github.com/automadcms/tree-sitter-automad)
+- [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MarcAntonDahmen.automad)
+- [Atom](https://atom.io/packages/language-automad)
+- [Textmate 2](https://github.com/marcantondahmen/automad.tmbundle)
 
 ---
 
