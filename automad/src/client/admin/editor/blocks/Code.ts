@@ -32,9 +32,18 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, createSelect, CSS, html, query } from '@/core';
-import { CodeEditor, codeLanguages } from '@/core/code';
-import { CodeBlockData } from '@/types';
+import {
+	App,
+	Attr,
+	create,
+	createSelect,
+	CSS,
+	html,
+	query,
+} from '@/admin/core';
+import { CodeEditor } from '@/admin/core/code';
+import { CodeBlockData } from '@/admin/types';
+import { supportedLanguages } from '@/prism/languages';
 import { BaseBlock } from './BaseBlock';
 
 export class CodeBlock extends BaseBlock<CodeBlockData> {
@@ -108,7 +117,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 		);
 
 		const langSelect = createSelect(
-			codeLanguages.map((lang) => ({
+			supportedLanguages.map((lang) => ({
 				value: lang,
 			})),
 			this.data.language,
@@ -124,7 +133,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 
 		this.api.listeners.on(langSelect, 'change', () => {
 			this.data.language =
-				langSelect.value as unknown as (typeof codeLanguages)[number];
+				langSelect.value as unknown as (typeof supportedLanguages)[number];
 
 			this.initEditor(container);
 		});
