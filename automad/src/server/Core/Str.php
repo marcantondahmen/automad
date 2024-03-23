@@ -180,6 +180,9 @@ class Str {
 			return $str;
 		}
 
+		// Fix syntax highlighting.
+		/** @var string */
+		$str = preg_replace('/```(\w+)/is', '```language-$1', $str);
 		$str = MarkdownExtra::defaultTransform($str);
 
 		/** @var string */

@@ -27,44 +27,49 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2023 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Blocks;
+namespace Automad\Engine\Processors;
 
-use Automad\Blocks\Utils\Attr;
-use Automad\Core\Automad;
+use Automad\Engine\Document\Body;
+use Automad\Engine\Document\Head;
+use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The code block.
+ * The syntax highlighting address processor class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
- *
- * @psalm-import-type BlockData from AbstractBlock
  */
-class Code extends AbstractBlock {
+class SyntaxHighlightingProcessor {
 	/**
-	 * Render a code block.
-	 *
-	 * @param BlockData $block
-	 * @param Automad $Automad
-	 * @return string the rendered HTML
+	 * The constructor.
 	 */
-	public static function render(array $block, Automad $Automad): string {
-		$code = htmlspecialchars($block['data']['code']);
-		$lang = 'language-' . ($block['data']['language'] ?? '');
-		$attr = Attr::render($block['tunes']);
+	public function __construct() {
+	}
 
-		return <<< HTML
-			<pre $attr class="$lang"><code>$code</code></pre>
-			HTML;
+	/**
+	 * Search for pre tags and add Prism assets if needed.
+	 *
+	 * @param string $str
+	 * @return string The processed string
+	 */
+	public function addAssets(string $str): string {
+		if (!preg_match('/\<pre\s*[^>]*\>/', $str)) {
+			return $str;
+		}
+
+		$str = Head::prepend($str, Asset::css('dist/prism/main.bundle.css', false));
+		$str = Body::append($str, Asset::js('dist/prism/main.bundle.js', false));
+
+		return $str;
 	}
 }
