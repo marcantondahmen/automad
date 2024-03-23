@@ -43,7 +43,7 @@ import {
 } from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
 import { CodeBlockData } from '@/admin/types';
-import { supportedLanguages } from '@/prism/languages';
+import { supportedLanguages } from '@/prism/prism';
 import { BaseBlock } from './BaseBlock';
 
 export class CodeBlock extends BaseBlock<CodeBlockData> {

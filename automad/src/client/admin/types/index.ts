@@ -48,7 +48,7 @@ export * from './system';
 export * from './undo';
 
 import { KeyValueMap } from '@/common';
-import { supportedLanguages } from '@/prism/languages';
+import { supportedLanguages } from '@/prism/prism';
 import { PageMetaData, InputElement } from '.';
 
 declare global {
