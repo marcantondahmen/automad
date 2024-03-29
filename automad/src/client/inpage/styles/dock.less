@@ -109,14 +109,20 @@
 	}
 
 	&__logo {
-		width: 24px;
+		display: flex;
+		align-items: center;
+		width: 27px;
 		height: auto;
-		margin-top: -3px;
+		margin-top: -2px;
 		padding: 0 2px;
 		color: inherit;
+		opacity: 0.99;
 
 		& svg {
+			max-width: 100%;
+			height: auto;
 			color: inherit;
+			transform: scale(0.99);
 		}
 	}
 }
