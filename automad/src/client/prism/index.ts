@@ -32,7 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import './styles/index.less';
 import { Prism } from './prism';
 
 Prism.highlightAll();

@@ -36,14 +36,16 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Core\Automad;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
 use Automad\System\Asset;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The syntax highlighting address processor class.
+ * The syntax highlighting processor class.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
@@ -51,9 +53,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class SyntaxHighlightingProcessor {
 	/**
-	 * The constructor.
+	 * The main Automad instance.
 	 */
-	public function __construct() {
+	private Automad $Automad;
+
+	/**
+	 * The constructor.
+	 *
+	 * @param Automad $Automad
+	 */
+	public function __construct(Automad $Automad) {
+		$this->Automad = $Automad;
 	}
 
 	/**
@@ -63,11 +73,19 @@ class SyntaxHighlightingProcessor {
 	 * @return string The processed string
 	 */
 	public function addAssets(string $str): string {
-		if (!preg_match('/\<pre\s*[^>]*\>/', $str)) {
+		if (!preg_match('/\<pre\s*[^>]*\>/', $str) || !preg_match('/class="language-\w+"/', $str)) {
 			return $str;
 		}
 
-		$str = Head::prepend($str, Asset::css('dist/prism/main.bundle.css', false));
+		$theme = $this->Automad->Context->get()->get(Fields::SYNTAX_THEME);
+
+		if ($theme && $theme != 'none') {
+			$str = Head::append(
+				$str,
+				'<link href="https://unpkg.com/automad-prism-themes@latest/dist/prism-' . $theme . '.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">'
+			);
+		}
+
 		$str = Body::append($str, Asset::js('dist/prism/main.bundle.js', false));
 
 		return $str;

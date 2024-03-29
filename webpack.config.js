@@ -180,6 +180,7 @@ const admin = (env, argv) => {
 					'./automad/src/client/admin/mockup/**/*.html',
 					'./automad/dist/blocks/main.bundle.*',
 					'./automad/dist/inpage/main.bundle.*',
+					'./automad/dist/prism/main.bundle.*',
 				],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
 				notify: false,
@@ -224,4 +225,15 @@ const inpage = (env, argv) =>
 		},
 	});
 
-module.exports = [admin, blocks, mail, inpage];
+const prism = (env, argv) =>
+	merge(common(env, argv), {
+		entry: {
+			main: './automad/src/client/prism/index.ts',
+		},
+		output: {
+			path: path.resolve(__dirname, './automad/dist/prism'),
+			filename: '[name].bundle.js',
+		},
+	});
+
+module.exports = [admin, blocks, mail, inpage, prism];

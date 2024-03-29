@@ -1,4 +1,3 @@
-<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -27,46 +26,44 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2023 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
- * https://automad.org/license
  */
 
-namespace Automad\Blocks;
+import { FieldTag, createSelect, getPageURL, App } from '@/admin/core';
+import { BaseFieldComponent } from './BaseField';
+import themes from 'automad-prism-themes/dist/themes.json';
 
-use Automad\Blocks\Utils\Attr;
-use Automad\Core\Automad;
-
-defined('AUTOMAD') or die('Direct access not permitted!');
+const defaultTheme = 'tokyo-night-storm';
 
 /**
- * The code block.
+ * A syntax theme select field.
  *
- * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2023 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
- *
- * @psalm-import-type BlockData from AbstractBlock
+ * @extends BaseFieldComponent
  */
-class Code extends AbstractBlock {
+class SyntaxThemeSelectComponent extends BaseFieldComponent {
 	/**
-	 * Render a code block.
-	 *
-	 * @param BlockData $block
-	 * @param Automad $Automad
-	 * @return string the rendered HTML
+	 * Render the input field.
 	 */
-	public static function render(array $block, Automad $Automad): string {
-		$code = htmlspecialchars($block['data']['code']);
-		$lang = 'language-' . ($block['data']['language'] ?? '');
-		$attr = Attr::render($block['tunes']);
+	createInput(): void {
+		const { name, id, value } = this._data;
+		const isPage = !!getPageURL();
+		const _default = isPage ? '' : defaultTheme;
+		const _value = (value as string) || _default;
 
-		return <<< HTML
-			<div $attr>
-				<pre><code class="$lang">$code</code></pre>
-			</div>
-			HTML;
+		let options = themes;
+
+		if (isPage) {
+			options = [
+				{ text: App.text('useSharedDefault'), value: '' },
+				...themes,
+			];
+		}
+
+		createSelect(options, _value, this, name, id);
 	}
 }
+
+customElements.define(FieldTag.syntaxSelect, SyntaxThemeSelectComponent);

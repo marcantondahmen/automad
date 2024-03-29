@@ -47,6 +47,7 @@ import {
 	create,
 	createField,
 	createFieldSections,
+	createLabelFromField,
 	CSS,
 	EventName,
 	fieldGroup,
@@ -262,6 +263,12 @@ export class PageDataFormComponent extends FormComponent {
 		);
 
 		createMainField(
+			FieldTag.syntaxSelect,
+			App.reservedFields.SYNTAX_THEME,
+			createLabelFromField(App.reservedFields.SYNTAX_THEME)
+		);
+
+		createMainField(
 			FieldTag.toggle,
 			App.reservedFields.HIDDEN,
 			App.text('hidePage')
@@ -367,6 +374,10 @@ export class PageDataFormComponent extends FormComponent {
 	 */
 	private render(response: KeyValueMap): void {
 		const { url, fields, shared, template, readme } = response.data;
+
+		if (!fields) {
+			return;
+		}
 
 		create(
 			'input',

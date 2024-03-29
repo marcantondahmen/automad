@@ -211,6 +211,12 @@ export class SharedDataFormComponent extends FormComponent {
 			name: `data[${themeKey}]`,
 		});
 
+		createField(FieldTag.syntaxSelect, this.sections.settings, {
+			key: App.reservedFields.SYNTAX_THEME,
+			value: fields[App.reservedFields.SYNTAX_THEME],
+			name: `data[${App.reservedFields.SYNTAX_THEME}]`,
+		});
+
 		Object.keys(this.sections).forEach((item: FieldSectionName) => {
 			fieldGroup({
 				section: this.sections[item],

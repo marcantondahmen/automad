@@ -79,6 +79,7 @@ class Fields {
 	const SEARCH_CONTEXT = ':searchContext';
 	const SITENAME = 'sitename';
 	const SLUG = 'slug';
+	const SYNTAX_THEME = 'syntaxTheme';
 	const TAG = ':tag';
 	const TAGS = 'tags';
 	const TEMPLATE = 'template';
@@ -108,6 +109,7 @@ class Fields {
 		'TITLE' => Fields::TITLE,
 		'SITENAME' => Fields::SITENAME,
 		'SLUG' => Fields::SLUG,
+		'SYNTAX_THEME' => Fields::SYNTAX_THEME,
 		'URL' => Fields::URL
 	);
 

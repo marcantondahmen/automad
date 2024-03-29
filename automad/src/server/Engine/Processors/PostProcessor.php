@@ -91,7 +91,7 @@ class PostProcessor {
 	 */
 	public function process(string $output): string {
 		$MailAddressProcessor = new MailAddressProcessor();
-		$SyntaxHighlightingProcessor = new SyntaxHighlightingProcessor();
+		$SyntaxHighlightingProcessor = new SyntaxHighlightingProcessor($this->Automad);
 
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
