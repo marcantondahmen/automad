@@ -9,13 +9,18 @@ A flat-file content management system and template engine.
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
 [![Twitter](https://img.shields.io/twitter/follow/automadcms?label=Follow)](https://twitter.com/automadcms)
 
-![Screenshot](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)
+[![Screenshot](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)](https://try.automad.org)
 
 ## Links
 
 - [Documentation](https://automad.org)
+- [Live Demo](https://try.automad.org)
 - [Changelog](https://github.com/marcantondahmen/automad/blob/-/CHANGELOG.md)
 - [Discussion](https://automad.org/discuss)
+
+## Live Demo
+
+In case you quickly want to try out the latest Automad release without setting up a server first, just try out the [live demo here](https://try.automad.org). There is no sign-up required and you can start exploring new features right in away in your personal demo instance. Please note that all demos expire after one hour.
 
 ## Installation
 
