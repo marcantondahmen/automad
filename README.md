@@ -20,7 +20,10 @@ A flat-file content management system and template engine.
 
 ## Live Demo
 
-In case you quickly want to try out the latest Automad release without setting up a server first, just try out the [live demo here](https://try.automad.org). There is no sign-up required and you can start exploring new features right in away in your personal demo instance. Please note that all demos expire after one hour.
+In case you quickly want to try out Automad without setting up a server first, just check out the [live demo](https://try.automad.org) for free. There is no sign-up required and you can start exploring new features right in away in your personal demo instance.
+
+> [!IMPORTANT]
+> Please note that in order to keep hosting costs under control, all demos are running on **minimal hardware** and expire after one hour.
 
 ## Installation
 
