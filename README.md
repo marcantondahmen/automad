@@ -2,11 +2,11 @@
 
 A flat-file content management system and template engine.
 
-![Tag](https://img.shields.io/github/v/tag/marcantondahmen/automad?include_prereleases&sort=semver&color=222222)
-![PHP](https://img.shields.io/packagist/dependency-v/automad/automad/php?version=dev-master&color=222222)
-![Language](https://img.shields.io/github/languages/top/marcantondahmen/automad?color=222222)
-![Size](https://img.shields.io/github/languages/code-size/marcantondahmen/automad?color=222222)
-![License](https://img.shields.io/github/license/marcantondahmen/automad?color=222222)
+![Tag](https://img.shields.io/github/v/tag/marcantondahmen/automad?include_prereleases&sort=semver&color=151619&labelColor=1c1d20)
+![PHP](https://img.shields.io/packagist/dependency-v/automad/automad/php?version=dev-master&color=151619&labelColor=1c1d20)
+![Language](https://img.shields.io/github/languages/top/marcantondahmen/automad?color=151619&labelColor=1c1d20)
+![Size](https://img.shields.io/github/languages/code-size/marcantondahmen/automad?color=151619&labelColor=1c1d20)
+![License](https://img.shields.io/github/license/marcantondahmen/automad?color=151619&labelColor=1c1d20)
 [![Twitter](https://img.shields.io/twitter/follow/automadcms?label=Follow)](https://twitter.com/automadcms)
 
 [![Screenshot](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad-v2/readme-light.png)](https://try.automad.org)
