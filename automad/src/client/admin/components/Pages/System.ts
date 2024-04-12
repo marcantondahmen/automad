@@ -32,13 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, CSS, getTagFromRoute, html, Route } from '@/core';
+import { App, Attr, create, CSS, getTagFromRoute, html, Route } from '@/admin/core';
 import {
 	SwitcherDropdownData,
 	SwitcherDropdownItem,
 	SystemSectionData,
-} from '@/types';
-import { Section } from 'common';
+} from '@/admin/types';
+import { Section } from '@/common';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderDebugSection } from './Partials/System/Debug';
 import { renderFeedSection } from './Partials/System/Feed';

@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
-import { listen } from '@/core';
+import { BaseComponent } from '@/admin/components/Base';
+import { listen } from '@/admin/core';
 import { SidebarComponent } from './Sidebar';
 
 /**

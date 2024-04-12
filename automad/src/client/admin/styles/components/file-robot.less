@@ -105,8 +105,8 @@
 
 		&-close-button {
 			position: absolute;
-			top: 0.6rem;
-			right: 1rem;
+			top: 0.2rem;
+			right: 0.4rem;
 			color: hsl(var(--am-clr-text));
 
 			&:hover {
@@ -116,7 +116,7 @@
 			&:after {
 				content: '✗';
 				font-size: 1.25rem;
-				padding: 1rem 0.5rem;
+				padding: 1rem 1rem;
 			}
 
 			& svg {
@@ -273,15 +273,31 @@
 	}
 }
 
+.am-ui .FIE_topbar-center-options {
+	@media (max-width: @am-breakpoint-medium-max) {
+		display: none;
+	}
+}
+
+.am-ui .FIE_phone-tools-tabs-wrapper {
+	padding: 5px;
+}
+
 .am-ui .SfxModal-Container[open] {
 	top: 4rem !important;
 	transform: translate(-50%, 0) !important;
 	border-radius: @am-modal-radius;
 	overflow: hidden;
 	box-shadow: @am-shadow;
-	width: 520px !important;
+	width: 90vw !important;
 	max-width: 520px !important;
 	padding: 8px 2px;
+
+	& .SfxModalContent-root {
+		& > * {
+			max-width: 100% !important;
+		}
+	}
 
 	& .SfxModalTitle-root {
 		flex-direction: row;
@@ -352,4 +368,8 @@
 .am-ui .FIE_tools-bar svg {
 	width: 20px !important;
 	height: 20px !important;
+}
+
+.am-ui table.SfxColorPicker-bar {
+	table-layout: fixed;
 }

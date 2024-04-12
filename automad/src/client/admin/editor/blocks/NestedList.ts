@@ -34,7 +34,7 @@
 
 // @ts-ignore
 import NestedList from '@editorjs/nested-list';
-import { App } from '@/core';
+import { App } from '@/admin/core';
 
 export class NestedListBlock extends NestedList {
 	/**

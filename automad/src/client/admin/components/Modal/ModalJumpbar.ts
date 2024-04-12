@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, keyCombo, listen } from '@/core';
+import { App, create, keyCombo, listen } from '@/admin/core';
 import { ModalComponent } from './Modal';
 
 /**

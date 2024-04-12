@@ -32,51 +32,51 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
-import { SectionBlock } from '@/editor/blocks/Section';
-import { BoldInline } from '@/editor/inline/Bold';
-import { CodeInline } from '@/editor/inline/Code';
-import { ColorInline } from '@/editor/inline/Color';
-import { FontSizeInline } from '@/editor/inline/FontSize';
-import { ItalicInline } from '@/editor/inline/Italic';
-import { LineHeightInline } from '@/editor/inline/LineHeight';
-import { LinkInline } from '@/editor/inline/Link';
-import { StrikeThroughInline } from '@/editor/inline/StrikeThrough';
-import { UnderlineInline } from '@/editor/inline/Underline';
-import { DragDrop } from '@/editor/plugins/DragDrop';
-import { LayoutTune } from '@/editor/tunes/Layout';
-import { EditorOutputData, KeyValueMap } from '@/types';
+import { BaseComponent } from '@/admin/components/Base';
+import { SectionBlock } from '@/admin/editor/blocks/Section';
+import { BoldInline } from '@/admin/editor/inline/Bold';
+import { CodeInline } from '@/admin/editor/inline/Code';
+import { ColorInline } from '@/admin/editor/inline/Color';
+import { FontSizeInline } from '@/admin/editor/inline/FontSize';
+import { ItalicInline } from '@/admin/editor/inline/Italic';
+import { LineHeightInline } from '@/admin/editor/inline/LineHeight';
+import { LinkInline } from '@/admin/editor/inline/Link';
+import { StrikeThroughInline } from '@/admin/editor/inline/StrikeThrough';
+import { UnderlineInline } from '@/admin/editor/inline/Underline';
+import { DragDrop } from '@/admin/editor/plugins/DragDrop';
+import { LayoutTune } from '@/admin/editor/tunes/Layout';
+import { EditorOutputData, KeyValueMap } from '@/admin/types';
 import EditorJS, { EditorConfig, I18nDictionary } from 'automad-editorjs';
-import { App, CSS } from '@/core';
-import { Delimiter } from '@/editor/blocks/Delimiter';
-import { ImageBlock } from '@/editor/blocks/Image';
-import { NestedListBlock } from '@/editor/blocks/NestedList';
-import { QuoteBlock } from '@/editor/blocks/Quote';
-import { TableBlock } from '@/editor/blocks/Table';
+import { App, CSS } from '@/admin/core';
+import { Delimiter } from '@/admin/editor/blocks/Delimiter';
+import { ImageBlock } from '@/admin/editor/blocks/Image';
+import { NestedListBlock } from '@/admin/editor/blocks/NestedList';
+import { QuoteBlock } from '@/admin/editor/blocks/Quote';
+import { TableBlock } from '@/admin/editor/blocks/Table';
 import {
 	TextAlignCenterInline,
 	TextAlignLeftInline,
 	TextAlignRightInline,
-} from '@/editor/inline/TextAlign';
-import { ClassTune } from '@/editor/tunes/Class';
-import { IdTune } from '@/editor/tunes/Id';
-import { SpacingTune } from '@/editor/tunes/Spacing';
-import { CodeBlock } from '@/editor/blocks/Code';
-import { RawBlock } from '@/editor/blocks/Raw';
-import { GalleryBlock } from '@/editor/blocks/Gallery';
-import { ImageSlideshowBlock } from '@/editor/blocks/ImageSlideshow';
-import { ButtonsBlock } from '@/editor/blocks/Buttons';
+} from '@/admin/editor/inline/TextAlign';
+import { ClassTune } from '@/admin/editor/tunes/Class';
+import { IdTune } from '@/admin/editor/tunes/Id';
+import { SpacingTune } from '@/admin/editor/tunes/Spacing';
+import { CodeBlock } from '@/admin/editor/blocks/Code';
+import { RawBlock } from '@/admin/editor/blocks/Raw';
+import { GalleryBlock } from '@/admin/editor/blocks/Gallery';
+import { ImageSlideshowBlock } from '@/admin/editor/blocks/ImageSlideshow';
+import { ButtonsBlock } from '@/admin/editor/blocks/Buttons';
 // @ts-ignore
 import Embed from '@editorjs/embed';
-import { embedServices } from '@/editor/embedServices';
-import { HeaderBlock } from '@/editor/blocks/Header';
-import { ParagraphBlock } from '@/editor/blocks/Paragraph';
-import { DuplicateTune } from '@/editor/tunes/Duplicate';
-import { MailBlock } from '@/editor/blocks/Mail';
-import { TableOfContentsBlock } from '@/editor/blocks/TableOfContents';
-import { PagelistBlock } from '@/editor/blocks/Pagelist';
-import { FilelistBlock } from '@/editor/blocks/Filelist';
-import { SnippetBlock } from '@/editor/blocks/Snippet';
+import { embedServices } from '@/admin/editor/embedServices';
+import { HeaderBlock } from '@/admin/editor/blocks/Header';
+import { ParagraphBlock } from '@/admin/editor/blocks/Paragraph';
+import { DuplicateTune } from '@/admin/editor/tunes/Duplicate';
+import { MailBlock } from '@/admin/editor/blocks/Mail';
+import { TableOfContentsBlock } from '@/admin/editor/blocks/TableOfContents';
+import { PagelistBlock } from '@/admin/editor/blocks/Pagelist';
+import { FilelistBlock } from '@/admin/editor/blocks/Filelist';
+import { SnippetBlock } from '@/admin/editor/blocks/Snippet';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.

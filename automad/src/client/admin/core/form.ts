@@ -47,7 +47,7 @@ import {
 	FieldGroups,
 	InputElement,
 	KeyValueMap,
-} from '@/types';
+} from '@/admin/types';
 
 /**
  * The tag names enum for fields.
@@ -71,6 +71,7 @@ export const enum FieldTag {
 	markdown = 'am-markdown',
 	imageSelect = 'am-image-select',
 	url = 'am-url',
+	syntaxSelect = 'am-syntax-theme-select',
 	textarea = 'am-textarea',
 	title = 'am-title',
 }

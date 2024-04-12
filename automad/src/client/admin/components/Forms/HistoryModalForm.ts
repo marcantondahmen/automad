@@ -46,10 +46,10 @@ import {
 	Attr,
 	HistoryController,
 	dateFormat,
-} from '@/core';
-import { SelectComponentOption } from '@/types';
-import { BaseComponent } from '@/components/Base';
-import { ModalComponent } from '@/components/Modal/Modal';
+} from '@/admin/core';
+import { SelectComponentOption } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 
 export class HistoryModalFormComponent extends BaseComponent {
 	/**

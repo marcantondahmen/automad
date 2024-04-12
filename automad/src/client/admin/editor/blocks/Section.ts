@@ -49,7 +49,7 @@ import {
 	queryAll,
 	resolveFileUrl,
 	uniqueId,
-} from '@/core';
+} from '@/admin/core';
 import {
 	EditorOutputData,
 	SectionAlignItemsOption,
@@ -57,9 +57,9 @@ import {
 	SectionJustifyContentOption,
 	SectionStyle,
 	SelectComponentOption,
-} from '@/types';
+} from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
-import { EditorJSComponent } from '@/components/EditorJS';
+import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { API } from 'automad-editorjs';
 
 /**

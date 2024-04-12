@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { App, Attr, CSS, html } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A simple alert box component.

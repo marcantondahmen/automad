@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, ConfigController, CSS, EventName, html } from '@/core';
+import { App, Attr, ConfigController, CSS, EventName, html } from '@/admin/core';
 
 /**
  * Render the feed section.

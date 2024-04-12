@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { getTagFromRoute, Route } from '@/core';
-import { Partials } from '@/types';
+import { getTagFromRoute, Route } from '@/admin/core';
+import { Partials } from '@/admin/types';
 import { BaseLayoutComponent } from './BaseLayout';
 import { inPage } from './Templates/InPageLayoutTemplate';
 

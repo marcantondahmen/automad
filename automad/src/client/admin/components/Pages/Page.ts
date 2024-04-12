@@ -42,9 +42,9 @@ import {
 	html,
 	PageController,
 	Route,
-} from '@/core';
-import { HistoryModalFormComponent } from '@/components/Forms/HistoryModalForm';
-import { Section } from 'common';
+} from '@/admin/core';
+import { HistoryModalFormComponent } from '@/admin/components/Forms/HistoryModalForm';
+import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 
@@ -162,7 +162,6 @@ const renderDropdown = (): string => {
 				<a
 					href="${App.baseURL}${getPageURL()}"
 					class="${CSS.dropdownLink}"
-					target="_blank"
 				>
 					<am-icon-text
 						${Attr.icon}="pencil"

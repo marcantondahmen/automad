@@ -32,14 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { ModalComponent } from '@/components/Modal/Modal';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 import {
 	EditorOutputData,
 	FieldInitData,
 	FieldSectionCollection,
 	KeyValueMap,
 	SelectComponentOption,
-} from '@/types';
+} from '@/admin/types';
 import {
 	App,
 	Attr,
@@ -56,15 +56,15 @@ import {
 	query,
 	uniqueId,
 } from '.';
-import { PageDataFormComponent } from '@/components/Forms/PageDataForm';
-import { SwitcherSectionComponent } from '@/components/Switcher/SwitcherSection';
-import { SharedDataFormComponent } from '@/components/Forms/SharedDataForm';
-import { AutocompleteUrlComponent } from '@/components/AutocompleteUrl';
-import { BaseFieldComponent } from '@/components/Fields/BaseField';
-import { SelectComponent } from '@/components/Select';
+import { PageDataFormComponent } from '@/admin/components/Forms/PageDataForm';
+import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
+import { SharedDataFormComponent } from '@/admin/components/Forms/SharedDataForm';
+import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
+import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
+import { SelectComponent } from '@/admin/components/Select';
 import { EditorConfig } from 'automad-editorjs';
-import { EditorJSComponent } from '@/components/EditorJS';
-import { Section } from 'common';
+import { EditorJSComponent } from '@/admin/components/EditorJS';
+import { Section } from '@/common';
 
 /**
  * Create a new EditorJSComponent element.

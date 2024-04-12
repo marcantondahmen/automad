@@ -43,11 +43,11 @@ import {
 	listen,
 	listenToClassChange,
 	query,
-} from '@/core';
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
-import { EditorOutputData, UndoValue } from '@/types';
-import { LayoutTune } from '@/editor/tunes/Layout';
-import { EditorJSComponent } from '@/components/EditorJS';
+import { EditorOutputData, UndoValue } from '@/admin/types';
+import { LayoutTune } from '@/admin/editor/tunes/Layout';
+import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { API } from 'automad-editorjs';
 
 /**

@@ -38,7 +38,7 @@ import {
 	html,
 	Route,
 	UserCollectionController,
-} from '@/core';
+} from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**

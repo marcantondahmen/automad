@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { SelectComponent } from '@/components/Select';
-import { create, createSelect, CSS, html, listen } from '@/core';
-import { Listener, SelectComponentOption } from '@/types';
+import { SelectComponent } from '@/admin/components/Select';
+import { create, createSelect, CSS, html, listen } from '@/admin/core';
+import { Listener, SelectComponentOption } from '@/admin/types';
 import { BaseInline } from './BaseInline';
 
 export abstract class BaseSelectInline extends BaseInline {

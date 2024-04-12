@@ -46,9 +46,9 @@ import {
 	notifySuccess,
 	PackageManagerController,
 	requestAPI,
-} from '@/core';
-import { Package } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { Package } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 const packageBrowser = 'https://packages.automad.org';
 

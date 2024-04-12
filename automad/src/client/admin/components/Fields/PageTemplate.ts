@@ -42,10 +42,10 @@ import {
 	listen,
 	query,
 	titleCase,
-} from '@/core';
-import { KeyValueMap, TemplateButtonStatus, TemplateFieldData } from '@/types';
-import { BaseComponent } from '@/components/Base';
-import { SelectComponent } from '@/components/Select';
+} from '@/admin/core';
+import { KeyValueMap, TemplateButtonStatus, TemplateFieldData } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
+import { SelectComponent } from '@/admin/components/Select';
 
 /**
  * Beautify a template path to be used as name.

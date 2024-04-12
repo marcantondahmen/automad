@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Section } from 'common';
+import { Section } from '@/common';
 
 export interface SwitcherDropdownData {
 	overview: SwitcherDropdownOverview;

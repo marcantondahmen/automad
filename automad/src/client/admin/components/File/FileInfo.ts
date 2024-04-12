@@ -43,10 +43,10 @@ import {
 	FileController,
 	html,
 	listen,
-} from '@/core';
-import { File } from '@/types';
-import { BaseComponent } from '@/components/Base';
-import { ModalComponent } from '@/components/Modal/Modal';
+} from '@/admin/core';
+import { File } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 
 /**
  * A file edit modal toggle component.

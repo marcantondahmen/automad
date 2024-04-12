@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { create, debounce } from 'common';
-import { GalleryData, MasonryItem } from '~/types';
+import { create, debounce } from '@/common';
+import { GalleryData, MasonryItem } from '@/blocks/types';
 import PhotoSwipe from 'photoswipe';
 // @ts-ignore
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -43,10 +43,10 @@ import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
 import ObjectPosition from '@vovayatsyuk/photoswipe-object-position';
 import 'photoswipe/style.css';
 import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css';
-import arrowPrevSVG from '~/svg/arrowPrev.svg';
-import arrowNextSVG from '~/svg/arrowNext.svg';
-import closeSVG from '~/svg/close.svg';
-import zoomSVG from '~/svg/zoom.svg';
+import arrowPrevSVG from '@/blocks/svg/arrowPrev.svg';
+import arrowNextSVG from '@/blocks/svg/arrowNext.svg';
+import closeSVG from '@/blocks/svg/close.svg';
+import zoomSVG from '@/blocks/svg/zoom.svg';
 
 const renderThumb = (imgSet: GalleryData['imageSets'][number]): string => {
 	return `

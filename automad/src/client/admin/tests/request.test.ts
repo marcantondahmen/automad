@@ -1,4 +1,4 @@
-import { setNodeByPath } from '@/core';
+import { setNodeByPath } from '@/admin/core';
 
 test('setNodebyPath', () => {
 	const tree = {};

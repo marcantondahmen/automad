@@ -6,12 +6,11 @@
 		"moduleResolution": "node",
 		"noImplicitAny": true,
 		"preserveConstEnums": false,
+		"resolveJsonModule": true,
 		"target": "es6",
 		"outDir": "dist",
 		"paths": {
-			"@/*": ["./automad/src/client/admin/*"],
-			"~/*": ["./automad/src/client/blocks/*"],
-			"common": ["./automad/src/client/common/index.ts"]
+			"@/*": ["./automad/src/client/*"]
 		}
 	},
 	"exclude": ["node_modules", "automad/dist"]

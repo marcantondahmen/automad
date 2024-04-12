@@ -42,8 +42,8 @@ import {
 	listen,
 	query,
 	Undo,
-} from '@/core';
-import { KeyValueMap, UndoValue } from '@/types';
+} from '@/admin/core';
+import { KeyValueMap, UndoValue } from '@/admin/types';
 import { FormComponent } from './Form';
 
 /**

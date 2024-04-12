@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { listen, notifySuccess } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { listen, notifySuccess } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A copy to clipboard button component.

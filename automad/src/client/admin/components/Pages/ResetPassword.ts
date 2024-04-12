@@ -39,7 +39,7 @@ import {
 	html,
 	Route,
 	UserController,
-} from '@/core';
+} from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**

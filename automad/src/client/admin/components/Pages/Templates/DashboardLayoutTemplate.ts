@@ -44,9 +44,9 @@ import {
 	Route,
 	SessionController,
 	titleCase,
-} from '@/core';
-import { Partials } from '@/types';
-import { Section } from 'common';
+} from '@/admin/core';
+import { Partials } from '@/admin/types';
+import { Section } from '@/common';
 
 export const dashboardLayout = ({ main }: Partials) => {
 	return html`
@@ -81,35 +81,44 @@ export const dashboardLayout = ({ main }: Partials) => {
 					>
 						<am-logo></am-logo>
 					</am-link>
-					<div class="${CSS.flex}">
+					<am-modal-toggle
+						class="${CSS.navbarItem} ${CSS.displaySmallNone}"
+						${Attr.modal}="#am-jumpbar-modal"
+					>
+						<span> ${App.text('jumpbarButtonText')} </span>
+						<am-key-combo-badge
+							${Attr.key}="J"
+						></am-key-combo-badge>
+					</am-modal-toggle>
+					<span class="${CSS.navbarGroup}">
+						<am-navbar-update-indicator
+							class="${CSS.displaySmallNone}"
+						></am-navbar-update-indicator>
+						<am-navbar-outdated-packages-indicator
+							class="${CSS.displaySmallNone}"
+						></am-navbar-outdated-packages-indicator>
+						<am-navbar-debug-indicator
+							class="${CSS.displaySmallNone}"
+						></am-navbar-debug-indicator>
+						<am-undo-buttons
+							class="${CSS.displaySmallNone}"
+						></am-undo-buttons>
+						<am-publish-form></am-publish-form>
 						<am-modal-toggle
-							class="${CSS.navbarItem}"
+							class="${CSS.navbarItem} ${CSS.displaySmall}"
 							${Attr.modal}="#am-jumpbar-modal"
 						>
-							<span class="${CSS.displaySmallNone}"
-								>${App.text('jumpbarButtonText')}</span
-							>
-							<am-key-combo-badge
-								class="${CSS.displaySmallNone}"
-								${Attr.key}="J"
-							></am-key-combo-badge>
-							<span class="${CSS.displaySmall}"
-								><i class="bi bi-search"></i
-							></span>
+							<i class="bi bi-menu-button-wide"></i>
 						</am-modal-toggle>
 						<am-sidebar-toggle
 							class="${CSS.navbarItem} ${CSS.displaySmall}"
 						>
 							<i class="bi bi-list"></i>
 						</am-sidebar-toggle>
-					</div>
-					<span class="${CSS.navbarGroup} ${CSS.displaySmallNone}">
-						<am-navbar-update-indicator></am-navbar-update-indicator>
-						<am-navbar-outdated-packages-indicator></am-navbar-outdated-packages-indicator>
-						<am-navbar-debug-indicator></am-navbar-debug-indicator>
-						<am-undo-buttons></am-undo-buttons>
-						<am-publish-form></am-publish-form>
-						<am-dropdown ${Attr.right}>
+						<am-dropdown
+							class="${CSS.displaySmallNone}"
+							${Attr.right}
+						>
 							<span class="${CSS.navbarItem}">
 								<i class="bi bi-three-dots"></i>
 							</span>

@@ -48,9 +48,9 @@ import {
 	requestAPI,
 	Route,
 	SearchController,
-} from '@/core';
-import { FieldResults, FileResults, KeyValueMap } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { FieldResults, FileResults, KeyValueMap } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * Render the inner content for a given field in the results card.

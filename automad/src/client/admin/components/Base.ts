@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Listener } from '@/types';
+import { KeyValueMap, Listener } from '@/admin/types';
 
 /**
  * The Automad base component. All Automad components are based on this class.

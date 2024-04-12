@@ -44,7 +44,7 @@ import {
 	html,
 	listen,
 	resizeImageUrl,
-} from '@/core';
+} from '@/admin/core';
 import { ImgComponent } from '../Img';
 import { BaseFieldComponent } from './BaseField';
 

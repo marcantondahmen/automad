@@ -40,7 +40,7 @@ import {
 	html,
 	PageTrashController,
 	Route,
-} from '@/core';
+} from '@/admin/core';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**

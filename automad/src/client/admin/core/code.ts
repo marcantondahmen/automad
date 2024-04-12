@@ -32,73 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { CodeLanguage } from '@/types';
+import { CodeLanguage } from '@/admin/types';
 import CodeFlask from 'codeflask';
-import { debounce } from '@/core';
-
-// https://github.com/PrismJS/prism/issues/1020#issuecomment-602180996
-import Prism, { Languages } from 'prismjs';
-import 'prismjs/components/prism-apacheconf';
-import 'prismjs/components/prism-basic';
-import 'prismjs/components/prism-c';
-import 'prismjs/components/prism-csharp';
-import 'prismjs/components/prism-cpp';
-import 'prismjs/components/prism-go';
-import 'prismjs/components/prism-handlebars';
-import 'prismjs/components/prism-graphql';
-import 'prismjs/components/prism-java';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-latex';
-import 'prismjs/components/prism-less';
-import 'prismjs/components/prism-lua';
-import 'prismjs/components/prism-markdown';
-import 'prismjs/components/prism-nginx';
-import 'prismjs/components/prism-php';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-ruby';
-import 'prismjs/components/prism-rust';
-import 'prismjs/components/prism-sass';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-tsx';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-vim';
-import 'prismjs/components/prism-yaml';
-
-export const codeLanguages = [
-	'apacheconf',
-	'bash',
-	'basic',
-	'c',
-	'clike',
-	'csharp',
-	'cpp',
-	'css',
-	'go',
-	'graphql',
-	'handlebars',
-	'html',
-	'java',
-	'javascript',
-	'jsx',
-	'latex',
-	'less',
-	'lua',
-	'markdown',
-	'nginx',
-	'none',
-	'php',
-	'powershell',
-	'python',
-	'ruby',
-	'rust',
-	'sass',
-	'sql',
-	'tsx',
-	'typescript',
-	'vim',
-	'yaml',
-] as const;
+import { debounce, getLogger } from '@/admin/core';
+import { Prism, Languages } from '@/prism/prism';
 
 /**
  * A thin wrapper around CodeFlask.
@@ -143,6 +80,8 @@ export class CodeEditor {
 		);
 
 		this.codeFlask.updateCode(code);
+
+		getLogger().log('Prism:', language, Prism.languages[language]);
 
 		this.codeFlask.onUpdate(
 			debounce(() => {

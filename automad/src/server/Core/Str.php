@@ -180,6 +180,14 @@ class Str {
 			return $str;
 		}
 
+		// Fix syntax highlighting.
+		/** @var string */
+		$str = preg_replace('/```(\w+)/is', '```language-$1', $str);
+
+		// Fix strikethrough.
+		/** @var string */
+		$str = preg_replace('/~~([\w][^~]*[\w])~~/is', '<del>$1</del>', $str);
+
 		$str = MarkdownExtra::defaultTransform($str);
 
 		/** @var string */

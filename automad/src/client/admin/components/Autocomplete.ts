@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
-import { AutocompleteItem, AutocompleteItemData, KeyValueMap } from '@/types';
+import { BaseComponent } from '@/admin/components/Base';
+import { AutocompleteItem, AutocompleteItemData, KeyValueMap } from '@/admin/types';
 import {
 	App,
 	create,
@@ -44,7 +44,7 @@ import {
 	CSS,
 	fire,
 	Attr,
-} from '@/core';
+} from '@/admin/core';
 
 /**
  * An input field with page autocompletion.

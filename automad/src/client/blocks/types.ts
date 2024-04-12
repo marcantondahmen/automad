@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { GalleryBlockData, ImageSlideshowBlockData } from '@/types';
+import { GalleryBlockData, ImageSlideshowBlockData } from '@/admin/types';
 
 export interface GalleryData {
 	imageSets: {

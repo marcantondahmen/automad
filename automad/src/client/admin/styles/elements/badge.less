@@ -51,19 +51,6 @@
 	background-color: hsl(var(--bg));
 	font-weight: 740;
 
-	&:empty {
-		position: absolute;
-		display: block;
-		min-width: 0;
-		padding: 0;
-		width: 0.5rem;
-		height: 0.5rem;
-		top: 0.2rem;
-		right: 0.4rem;
-		border-radius: 100%;
-		background-color: hsl(var(--am-clr-border-active));
-	}
-
 	[class*='--danger'] & {
 		--text: var(--am-clr-background-danger);
 		--bg: var(--am-clr-text-danger);

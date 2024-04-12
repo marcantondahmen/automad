@@ -34,7 +34,7 @@
 
 import FilerobotImageEditor from 'filerobot-image-editor';
 import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
-import { KeyValueMap } from '@/types';
+import { KeyValueMap } from '@/admin/types';
 import {
 	App,
 	Attr,
@@ -45,10 +45,10 @@ import {
 	fire,
 	ImageController,
 	listen,
-} from '@/core';
-import { ModalComponent } from '@/components/Modal/Modal';
-import { BaseComponent } from '@/components/Base';
-import { FormComponent } from '@/components/Forms/Form';
+} from '@/admin/core';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
+import { BaseComponent } from '@/admin/components/Base';
+import { FormComponent } from '@/admin/components/Forms/Form';
 import { fileRobotTheme } from './FileRobotTheme';
 
 /**

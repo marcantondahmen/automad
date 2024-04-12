@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS, html } from '@/core';
-import { QuoteBlockData, QuoteBlockInputs } from '@/types';
+import { App, create, CSS, html } from '@/admin/core';
+import { QuoteBlockData, QuoteBlockInputs } from '@/admin/types';
 import { ConversionConfig } from 'automad-editorjs';
 import { BaseBlock } from './BaseBlock';
 

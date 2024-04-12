@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, Route } from '@/core';
+import { App, Attr, CSS, html, Route } from '@/admin/core';
 import { BaseOutdatedPackagesIndicator } from '../BaseOutdatedPackagesIndicator';
 
 /**
@@ -57,7 +57,6 @@ class NavbarOutdatedPackagesIndicatorComponent extends BaseOutdatedPackagesIndic
 					${Attr.tooltip}="${App.text('packagesUpdatesAvailable')}"
 				>
 					<i class="bi bi-box-seam"></i>
-					<span class="am-e-badge"></span>
 				</am-link>
 			`;
 		} else {

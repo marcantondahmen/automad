@@ -39,11 +39,11 @@ import {
 	sectionBackgroundBlendModes,
 	sectionBorderStyles,
 	sectionJustifyContentOptions,
-} from '@/editor/blocks/Section';
-import { sliderEffects } from '@/editor/blocks/ImageSlideshow';
-import { buttonsJustifyOptions } from '@/editor/blocks/Buttons';
-import { tableOfContentsTypes } from '@/editor/blocks/TableOfContents';
-import { pagelistTypes } from '@/editor/blocks/Pagelist';
+} from '@/admin/editor/blocks/Section';
+import { sliderEffects } from '@/admin/editor/blocks/ImageSlideshow';
+import { buttonsJustifyOptions } from '@/admin/editor/blocks/Buttons';
+import { tableOfContentsTypes } from '@/admin/editor/blocks/TableOfContents';
+import { pagelistTypes } from '@/admin/editor/blocks/Pagelist';
 
 export interface BlockTuneConstructorOptions {
 	api: API;
@@ -81,6 +81,7 @@ export interface ButtonsBlockData {
 export interface CodeBlockData {
 	code: string;
 	language: CodeLanguage;
+	lineNumbers: boolean;
 }
 
 export interface FilelistBlockData {

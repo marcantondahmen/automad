@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { AutocompleteUrlComponent } from '@/components/AutocompleteUrl';
-import { ToggleComponent } from '@/components/Fields/Toggle';
+import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
+import { ToggleComponent } from '@/admin/components/Fields/Toggle';
 import {
 	App,
 	create,
@@ -44,8 +44,8 @@ import {
 	html,
 	listen,
 	uniqueId,
-} from '@/core';
-import { KeyValueMap, Listener } from '@/types';
+} from '@/admin/core';
+import { KeyValueMap, Listener } from '@/admin/types';
 import { BaseInline } from './BaseInline';
 
 /**

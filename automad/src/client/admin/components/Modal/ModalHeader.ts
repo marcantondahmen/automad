@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS } from '@/core';
+import { create, CSS } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**

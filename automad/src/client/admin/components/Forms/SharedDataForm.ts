@@ -45,13 +45,13 @@ import {
 	fire,
 	listen,
 	prepareFieldGroups,
-} from '@/core';
+} from '@/admin/core';
 import {
 	FieldSectionCollection,
 	FieldSectionName,
 	KeyValueMap,
 	SharedBindings,
-} from '@/types';
+} from '@/admin/types';
 import { FormComponent } from './Form';
 
 /**
@@ -209,6 +209,12 @@ export class SharedDataFormComponent extends FormComponent {
 			key: themeKey,
 			value: mainTheme,
 			name: `data[${themeKey}]`,
+		});
+
+		createField(FieldTag.syntaxSelect, this.sections.settings, {
+			key: App.reservedFields.SYNTAX_THEME,
+			value: fields[App.reservedFields.SYNTAX_THEME],
+			name: `data[${App.reservedFields.SYNTAX_THEME}]`,
 		});
 
 		Object.keys(this.sections).forEach((item: FieldSectionName) => {

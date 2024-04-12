@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, InPageController } from '@/core';
-import { Partials } from '@/types';
+import { App, Attr, CSS, html, InPageController } from '@/admin/core';
+import { Partials } from '@/admin/types';
 
 export const inPage = ({ main }: Partials): string => {
 	return html`

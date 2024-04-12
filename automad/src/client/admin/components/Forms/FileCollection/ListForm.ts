@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, EventName, fire, listen, queryAll } from '@/core';
-import { File, KeyValueMap } from '@/types';
-import { FormComponent } from '@/components/Forms/Form';
+import { create, CSS, EventName, fire, listen, queryAll } from '@/admin/core';
+import { File, KeyValueMap } from '@/admin/types';
+import { FormComponent } from '@/admin/components/Forms/Form';
 
 /**
  * The file collection form component.

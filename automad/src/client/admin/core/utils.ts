@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, CSS, create, html, listen, query } from '.';
-import { Listener } from '@/types';
+import { Listener } from '@/admin/types';
 import { customAlphabet } from 'nanoid';
 
 /**

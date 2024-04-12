@@ -41,7 +41,7 @@ import {
 	html,
 	listen,
 	resizeImageUrl,
-} from '@/core';
+} from '@/admin/core';
 import Sortable from 'sortablejs';
 import { BaseComponent } from './Base';
 

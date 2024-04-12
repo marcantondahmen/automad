@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, html } from '@/core';
-import { TableOfContentsBlockData } from '@/types';
+import { App, CSS, html } from '@/admin/core';
+import { TableOfContentsBlockData } from '@/admin/types';
 import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 

@@ -34,7 +34,7 @@
 
 import Toastify from 'toastify-js';
 import { query, create, CSS } from '.';
-import { NotifyOptions } from '@/types';
+import { NotifyOptions } from '@/admin/types';
 
 const defaults: Toastify.Options = {
 	close: false,

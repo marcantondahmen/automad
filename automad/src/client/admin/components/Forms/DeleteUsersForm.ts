@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, EventName, html, listen } from '@/core';
+import { App, CSS, EventName, html, listen } from '@/admin/core';
 import { FormComponent } from './Form';
 
 /**

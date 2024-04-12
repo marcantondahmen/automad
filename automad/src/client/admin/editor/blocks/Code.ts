@@ -32,9 +32,20 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, createSelect, CSS, html, query } from '@/core';
-import { CodeEditor, codeLanguages } from '@/core/code';
-import { CodeBlockData } from '@/types';
+import {
+	App,
+	Attr,
+	collectFieldData,
+	create,
+	createSelect,
+	CSS,
+	html,
+	query,
+	uniqueId,
+} from '@/admin/core';
+import { CodeEditor } from '@/admin/core/code';
+import { CodeBlockData } from '@/admin/types';
+import { supportedLanguages } from '@/prism/prism';
 import { BaseBlock } from './BaseBlock';
 
 export class CodeBlock extends BaseBlock<CodeBlockData> {
@@ -83,7 +94,11 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 * @return the prepared data
 	 */
 	protected prepareData(data: CodeBlockData): CodeBlockData {
-		return { code: data.code ?? '', language: data.language ?? 'none' };
+		return {
+			code: data.code ?? '',
+			language: data.language ?? 'none',
+			lineNumbers: data.lineNumbers ?? false,
+		};
 	}
 
 	/**
@@ -107,29 +122,69 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 			`
 		);
 
-		const langSelect = createSelect(
-			codeLanguages.map((lang) => ({
-				value: lang,
-			})),
-			this.data.language,
+		const container = create(
+			'div',
+			[CSS.flex, CSS.flexColumn, CSS.flexGap],
+			{},
 			this.wrapper
 		);
 
-		const container = create(
+		const settings = create(
+			'div',
+			[CSS.grid, CSS.gridAuto, CSS.flexGap],
+			{},
+			container
+		);
+
+		createSelect(
+			supportedLanguages.map((lang) => ({
+				value: lang,
+			})),
+			this.data.language,
+			settings,
+			'language'
+		);
+
+		const toggleId = uniqueId();
+
+		create(
+			'div',
+			[CSS.toggle, CSS.toggleButton],
+			{},
+			settings,
+			html`
+				<input
+					id="${toggleId}"
+					type="checkbox"
+					name="lineNumbers"
+					value="1"
+					${this.data.lineNumbers ? 'checked' : ''}
+				/>
+				<label for="${toggleId}">
+					<i class="bi"></i>
+					<span>${App.text('codeBlockLineNumbers')}</span>
+				</label>
+			`
+		);
+
+		const code = create(
 			'div',
 			[CSS.editorBlockCode],
 			{},
-			this.wrapper
+			container
 		) as HTMLDivElement;
 
-		this.api.listeners.on(langSelect, 'change', () => {
-			this.data.language =
-				langSelect.value as unknown as (typeof codeLanguages)[number];
+		this.api.listeners.on(settings, 'change', () => {
+			const { language, lineNumbers } = collectFieldData(settings);
 
-			this.initEditor(container);
+			this.data.lineNumbers = lineNumbers;
+			this.data.language =
+				language as unknown as (typeof supportedLanguages)[number];
+
+			this.initEditor(code);
 		});
 
-		this.initEditor(container);
+		this.initEditor(code);
 
 		return this.wrapper;
 	}
@@ -167,6 +222,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 		return {
 			code: this.editor.codeFlask.getCode(),
 			language: this.data.language,
+			lineNumbers: this.data.lineNumbers,
 		};
 	}
 }

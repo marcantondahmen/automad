@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '@/core';
-import { BaseActivationIndicatorComponent } from '@/components/Indicators/BaseActivationIndicator';
+import { App } from '@/admin/core';
+import { BaseActivationIndicatorComponent } from '@/admin/components/Indicators/BaseActivationIndicator';
 
 /**
  * A cache state indicator component.

@@ -47,10 +47,10 @@ import {
 	notifySuccess,
 	query,
 	RequestKey,
-} from '@/core';
-import { BaseComponent } from '@/components/Base';
-import { FileCollectionListFormComponent } from '@/components/Forms/FileCollection/ListForm';
-import { ModalComponent } from '@/components/Modal/Modal';
+} from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
+import { FileCollectionListFormComponent } from '@/admin/components/Forms/FileCollection/ListForm';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 
 /**
  * An upload component.

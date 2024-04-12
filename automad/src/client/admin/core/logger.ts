@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Logger } from '@/types';
+import { KeyValueMap, Logger } from '@/admin/types';
 import { App } from '.';
 
 /**

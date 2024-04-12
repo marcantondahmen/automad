@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, Route } from '@/core';
-import { Section } from 'common';
-import { BaseStateIndicatorComponent } from '@/components/Indicators/BaseStateIndicator';
+import { App, Attr, CSS, html, Route } from '@/admin/core';
+import { Section } from '@/common';
+import { BaseStateIndicatorComponent } from '@/admin/components/Indicators/BaseStateIndicator';
 
 /**
  * A debug state component.

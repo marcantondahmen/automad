@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, FieldTag } from '@/core';
+import { CSS, FieldTag } from '@/admin/core';
 import { ToggleComponent } from './Toggle';
 
 /**

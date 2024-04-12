@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { setDocumentTitle } from '@/core';
-import { Partials } from '@/types';
-import { BaseComponent } from '@/components/Base';
+import { setDocumentTitle } from '@/admin/core';
+import { Partials } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * The base view component.

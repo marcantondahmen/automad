@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS } from '@/core';
+import { App, create, CSS } from '@/admin/core';
 import { BaseBlock } from './BaseBlock';
 
 export class Delimiter extends BaseBlock<object> {

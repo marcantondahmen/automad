@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { BaseEditor, KeyValueMap } from '@/types';
+import { BaseEditor, KeyValueMap } from '@/admin/types';
 import { BlockAPI } from 'automad-editorjs';
 import { nanoid } from 'nanoid';
 

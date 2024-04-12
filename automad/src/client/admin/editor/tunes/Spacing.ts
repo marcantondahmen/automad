@@ -42,8 +42,8 @@ import {
 	html,
 	query,
 	uniqueId,
-} from '@/core';
-import { SpacingTuneData } from '@/types';
+} from '@/admin/core';
+import { SpacingTuneData } from '@/admin/types';
 import { BaseModalTune } from './BaseModalTune';
 
 export class SpacingTune extends BaseModalTune<SpacingTuneData> {

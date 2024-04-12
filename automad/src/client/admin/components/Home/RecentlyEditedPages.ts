@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
+import { BaseComponent } from '@/admin/components/Base';
 import {
 	App,
 	Attr,
@@ -45,9 +45,9 @@ import {
 	resolveFileUrl,
 	resolvePageUrl,
 	Route,
-} from '@/core';
-import { PageRecentlyEditedCardData } from '@/types';
-import { Section } from 'common';
+} from '@/admin/core';
+import { PageRecentlyEditedCardData } from '@/admin/types';
+import { Section } from '@/common';
 
 /**
  * A grid of recently edited pages.

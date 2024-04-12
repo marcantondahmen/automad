@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, EventName, html, listen, Undo } from '@/core';
-import { BaseComponent } from '@/components/Base';
-import { KeyValueMap, SelectComponentOption, UndoValue } from '@/types';
+import { create, CSS, EventName, html, listen, Undo } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
+import { KeyValueMap, SelectComponentOption, UndoValue } from '@/admin/types';
 
 /**
  * An advanced select component. The component inner HTML has to contain a single span

@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { CSS } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { CSS } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A spinner component.

@@ -40,7 +40,7 @@ import {
 	EventName,
 	FieldTag,
 	listen,
-} from '@/core';
+} from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**

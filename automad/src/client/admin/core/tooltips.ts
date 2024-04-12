@@ -34,7 +34,7 @@
 
 import { Attr, create, listen, query, queryAll } from '.';
 import Tooltip from 'codex-tooltip';
-import { KeyValueMap } from '@/types';
+import { KeyValueMap } from '@/admin/types';
 
 const getTooltipOptions = (element: HTMLElement): KeyValueMap => {
 	const optionString = element.getAttribute(Attr.tooltipOptions) || '';

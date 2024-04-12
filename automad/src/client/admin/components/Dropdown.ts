@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, CSS, listen, queryParents } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { Attr, CSS, listen, queryParents } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A simple dropdown menu component.

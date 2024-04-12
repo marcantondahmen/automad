@@ -52,8 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Code extends AbstractBlock {
 	/**
-	 * Render a code block. A language class is automatically added that can be used by
-	 * syntax highlighters such as highlight.js and prism.
+	 * Render a code block.
 	 *
 	 * @param BlockData $block
 	 * @param Automad $Automad
@@ -61,7 +60,14 @@ class Code extends AbstractBlock {
 	 */
 	public static function render(array $block, Automad $Automad): string {
 		$code = htmlspecialchars($block['data']['code']);
+		$lang = 'language-' . ($block['data']['language'] ?? '');
+		$lines = ($block['data']['lineNumbers'] ?? false) ? ' class="line-numbers"' : '';
+		$attr = Attr::render($block['tunes']);
 
-		return '<pre ' . Attr::render($block['tunes']) . '><code class="language-' . $block['data']['language'] . '">' . $code . '</code></pre>';
+		return <<< HTML
+			<div $attr>
+				<pre $lines><code class="$lang" data-prismjs-copy="Copy">$code</code></pre>
+			</div>
+			HTML;
 	}
 }

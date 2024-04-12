@@ -53,9 +53,9 @@ import {
 	Undo,
 	SessionController,
 	initInputChangeHandler,
-} from '@/core';
-import { applyTheme, getTheme } from '@/core/theme';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { applyTheme, getTheme } from '@/admin/core/theme';
+import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal/Modal';
 import { SidebarComponent } from './Sidebar/Sidebar';
 

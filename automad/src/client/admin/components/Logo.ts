@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/components/Base';
-import logo from 'common/svg/logo.svg';
+import { BaseComponent } from '@/admin/components/Base';
+import logo from '@/common/svg/logo.svg';
 
 /**
  * The Automad logo component.

@@ -33,8 +33,8 @@
  * https://automad.org/license
  */
 
-import { App, create, CSS, query } from '@/core';
-import { ParagraphBlockData } from '@/types';
+import { App, create, CSS, query } from '@/admin/core';
+import { ParagraphBlockData } from '@/admin/types';
 import { HTMLPasteEvent, TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 

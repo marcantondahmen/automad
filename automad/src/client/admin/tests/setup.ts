@@ -1,4 +1,10 @@
-import { FieldTag, FormDataProviders } from '@/core';
+import { FieldTag, FormDataProviders } from '@/admin/core';
+
+jest.mock('prismjs', () => {
+	return {
+		default: { languages: { extend: () => {} } },
+	};
+});
 
 jest.mock('nanoid', () => {
 	return { nanoid: () => 'xxxx' };

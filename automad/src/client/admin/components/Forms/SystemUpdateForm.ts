@@ -41,9 +41,9 @@ import {
 	html,
 	listen,
 	query,
-} from '@/core';
-import { KeyValueMap, SystemUpdateResponse } from '@/types';
-import { ModalComponent } from '@/components/Modal/Modal';
+} from '@/admin/core';
+import { KeyValueMap, SystemUpdateResponse } from '@/admin/types';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { FormComponent } from './Form';
 
 /**

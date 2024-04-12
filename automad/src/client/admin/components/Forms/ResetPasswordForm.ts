@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, getSearchParam, html, Route } from '@/core';
-import { KeyValueMap } from '@/types';
+import { App, Attr, CSS, getSearchParam, html, Route } from '@/admin/core';
+import { KeyValueMap } from '@/admin/types';
 import { FormComponent } from './Form';
 
 /**

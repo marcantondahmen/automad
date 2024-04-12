@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App, createSelect, CSS } from '@/core';
-import { SelectComponentOption } from '@/types';
+import { App, createSelect, CSS } from '@/admin/core';
+import { SelectComponentOption } from '@/admin/types';
 import { BaseComponent } from '../Base';
 
 /**

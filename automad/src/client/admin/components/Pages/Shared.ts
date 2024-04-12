@@ -41,8 +41,8 @@ import {
 	html,
 	Route,
 	SharedController,
-} from '@/core';
-import { Section } from 'common';
+} from '@/admin/core';
+import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 

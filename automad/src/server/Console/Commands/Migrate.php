@@ -89,8 +89,11 @@ class Migrate extends AbstractCommand {
 		echo "Importing from $source ..." . PHP_EOL;
 		echo 'Converting shared data ...' . PHP_EOL;
 
+		$shared = self::dataFile("$source/shared/data.txt");
+		$shared['theme'] = str_replace('standard/', 'automad/standard-v1/', $shared['theme']);
+
 		$DataStore = new DataStore();
-		$DataStore->setState(PublicationState::DRAFT, self::dataFile("$source/shared/data.txt"))->publish();
+		$DataStore->setState(PublicationState::DRAFT, $shared)->publish();
 
 		self::copyFiles("$source/shared", AM_BASE_DIR . AM_DIR_SHARED);
 
@@ -99,6 +102,10 @@ class Migrate extends AbstractCommand {
 		foreach($files as $file) {
 			$data = self::dataFile($file);
 			$path = dirname(Str::stripStart($file, "$source/pages"));
+
+			if (!empty($data['theme'])) {
+				$data['theme'] = str_replace('standard/', 'automad/standard-v1/', $data['theme']);
+			}
 
 			echo "  $path" . PHP_EOL;
 

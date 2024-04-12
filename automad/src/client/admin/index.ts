@@ -58,6 +58,7 @@ import './components/Fields/NumberUnit';
 import './components/Fields/PageTags';
 import './components/Fields/PageTemplate';
 import './components/Fields/Password';
+import './components/Fields/SyntaxThemeSelect';
 import './components/Fields/Textarea';
 import './components/Fields/Title';
 import './components/Fields/Toggle';

@@ -16,6 +16,13 @@ if [[ $(git branch | grep \* | cut -d ' ' -f2) != "$workBranch" ]]; then
 	exit 0
 fi
 
+# Check if working directory is clean.
+if [[ $(git status -s) ]]; then
+	echo "Working directory is not clean!"
+	git status -s
+	echo
+fi
+
 # Run tests.
 echo "Running tests ..."
 npm run test
@@ -30,13 +37,6 @@ echo "Updating language packs ..."
 
 # Get latest tag.
 latestTag=$(git describe --tags $(git rev-list --tags --max-count=1))
-
-# Check if working directory is clean.
-if [[ $(git status -s) ]]; then
-	echo "Working directory is not clean!"
-	git status -s
-	echo
-fi
 
 # Choose type of release.
 echo "Current version is: $latestTag"

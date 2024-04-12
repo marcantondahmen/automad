@@ -46,8 +46,8 @@ import {
 	MailConfigController,
 	requestAPI,
 	Undo,
-} from '@/core';
-import { MailConfig } from '@/types';
+} from '@/admin/core';
+import { MailConfig } from '@/admin/types';
 import { FormComponent } from './Form';
 
 export const transportOptions = ['sendmail', 'smtp'] as const;

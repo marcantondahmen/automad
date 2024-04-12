@@ -40,8 +40,8 @@ import {
 	getMetaKeyLabel,
 	listen,
 	Undo,
-} from '@/core';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * Undo/redo buttons component.

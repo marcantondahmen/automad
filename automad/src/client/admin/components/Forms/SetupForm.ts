@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, html, KeyValueMap, Route } from '@/core';
+import { create, CSS, html, KeyValueMap, Route } from '@/admin/core';
 import { FormComponent } from './Form';
 
 /**

@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { listen } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { listen } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal';
 
 /**

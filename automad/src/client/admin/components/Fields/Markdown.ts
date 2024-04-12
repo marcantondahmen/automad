@@ -47,15 +47,15 @@ import {
 	queryAll,
 	resolveFileUrl,
 	resolvePageUrl,
-} from '@/core';
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 import Editor, { LinkMdNode } from '@toast-ui/editor';
 import { ToolbarCustomOptions } from '@toast-ui/editor/types/ui';
 import { Context, OpenTagToken } from '@toast-ui/editor/types/toastmark';
 import { CustomHTMLRenderer } from '@toast-ui/editor/dist/toastui-editor-viewer';
-import Prism from 'prismjs';
+import { Prism } from '@/prism/prism';
 // @ts-ignore
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 
 /**
  * Create a custom toolbar button.

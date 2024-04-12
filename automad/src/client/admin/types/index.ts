@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-export * from '@/../common/types';
+export * from '@/common/types';
 
 export * from './editor/blocks';
 export * from './editor/editor';
@@ -47,9 +47,8 @@ export * from './switcher';
 export * from './system';
 export * from './undo';
 
-import { KeyValueMap } from 'common';
-
-import { codeLanguages } from '@/core/code';
+import { KeyValueMap } from '@/common';
+import { supportedLanguages } from '@/prism/prism';
 import { PageMetaData, InputElement } from '.';
 
 declare global {
@@ -86,7 +85,7 @@ export interface BindingOptions {
 	onChange?: (value: string) => void;
 }
 
-export type CodeLanguage = (typeof codeLanguages)[number];
+export type CodeLanguage = (typeof supportedLanguages)[number];
 
 export interface Image {
 	name: string;

@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, CSS, getMetaKeyLabel } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { Attr, CSS, getMetaKeyLabel } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A key combo badge that automatically displays the correct meta key.

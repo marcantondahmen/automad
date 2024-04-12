@@ -33,7 +33,7 @@
  */
 
 import { API, BlockAPI, BlockTune, ToolConfig } from 'automad-editorjs';
-import { BlockTuneConstructorOptions } from '@/types';
+import { BlockTuneConstructorOptions } from '@/admin/types';
 
 /**
  * The abstract base tune class that returns an element on render.

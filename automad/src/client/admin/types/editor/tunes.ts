@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { fractions } from '@/editor/tunes/Layout';
+import { fractions } from '@/admin/editor/tunes/Layout';
 
 export type ClassTuneData = string;
 

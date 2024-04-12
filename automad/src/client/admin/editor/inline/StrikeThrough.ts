@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '@/core';
-import { KeyValueMap } from '@/types';
+import { App } from '@/admin/core';
+import { KeyValueMap } from '@/admin/types';
 import { BaseInline } from './BaseInline';
 
 export class StrikeThroughInline extends BaseInline {

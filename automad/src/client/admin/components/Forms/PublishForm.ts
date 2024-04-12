@@ -49,7 +49,7 @@ import {
 	requestAPI,
 	Route,
 	SharedController,
-} from '@/core';
+} from '@/admin/core';
 import Tooltip from 'codex-tooltip';
 import { BaseComponent } from '../Base';
 import { SubmitComponent } from './Submit';

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { queryAll } from 'common';
+import { queryAll } from '@/common';
 
 class TableOfContentsComponent extends HTMLElement {
 	/**

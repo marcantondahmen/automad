@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, queryAll } from '@/core';
-import { File } from '@/types';
-import { BaseComponent } from '@/components/Base';
+import { App, Attr, CSS, html, queryAll } from '@/admin/core';
+import { File } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 import { FileInfoComponent } from './FileInfo';
 
 /**

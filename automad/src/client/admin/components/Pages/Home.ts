@@ -40,8 +40,8 @@ import {
 	getTagFromRoute,
 	html,
 	Route,
-} from '@/core';
-import { Section } from 'common';
+} from '@/admin/core';
+import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 const systemInfo = (): string => {
@@ -66,11 +66,15 @@ const systemInfo = (): string => {
 					<am-system-cache-indicator></am-system-cache-indicator>
 				</am-link>
 			</div>
-			<div class="${CSS.formGroup}">
+			<div class="${CSS.displaySmall}">
+				<a href="${App.baseURL || '/'}" class="${CSS.button}">
+					${App.text('inPageEdit')}
+				</a>
+			</div>
+			<div class="${CSS.formGroup} ${CSS.displaySmallNone}">
 				<a
 					href="${App.baseURL || '/'}"
 					class="${CSS.button} ${CSS.formGroupItem}"
-					target="_blank"
 				>
 					${App.text('inPageEdit')}
 				</a>

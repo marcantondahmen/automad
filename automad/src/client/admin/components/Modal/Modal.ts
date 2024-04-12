@@ -44,9 +44,9 @@ import {
 	query,
 	setFormData,
 	queryAll,
-} from '@/core';
-import { InputElement, KeyValueMap, Listener } from '@/types';
-import { BaseComponent } from '@/components/Base';
+} from '@/admin/core';
+import { InputElement, KeyValueMap, Listener } from '@/admin/types';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A modal component.

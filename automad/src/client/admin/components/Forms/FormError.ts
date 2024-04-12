@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, html } from '@/core';
-import { BaseComponent } from '@/components/Base';
+import { CSS, html } from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A simple error message component that is used to display errors inside of forms.

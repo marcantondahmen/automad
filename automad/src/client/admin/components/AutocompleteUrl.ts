@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { AutocompleteItemData, KeyValueMap, PageMetaData } from '@/types';
-import { App, create, html, Attr } from '@/core';
+import { AutocompleteItemData, KeyValueMap, PageMetaData } from '@/admin/types';
+import { App, create, html, Attr } from '@/admin/core';
 import { AutocompleteComponent } from './Autocomplete';
 
 /**

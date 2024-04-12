@@ -38,7 +38,7 @@ import {
 	KeyValueMap,
 	PageBindings,
 	PageMainSettingsData,
-} from '@/types';
+} from '@/admin/types';
 import { FormComponent } from './Form';
 import {
 	App,
@@ -47,6 +47,7 @@ import {
 	create,
 	createField,
 	createFieldSections,
+	createLabelFromField,
 	CSS,
 	EventName,
 	fieldGroup,
@@ -58,9 +59,9 @@ import {
 	listen,
 	prepareFieldGroups,
 	setDocumentTitle,
-} from '@/core';
-import { PageTemplateComponent } from '@/components/Fields/PageTemplate';
-import { BaseFieldComponent } from '@/components/Fields/BaseField';
+} from '@/admin/core';
+import { PageTemplateComponent } from '@/admin/components/Fields/PageTemplate';
+import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
 
 /**
  * Init all URL and slug related bindings.
@@ -215,7 +216,6 @@ export class PageDataFormComponent extends FormComponent {
 			[],
 			{
 				href: `${App.baseURL}${url}`,
-				target: '_blank',
 			},
 			titleContainer
 		).innerHTML = html`
@@ -259,6 +259,12 @@ export class PageDataFormComponent extends FormComponent {
 				[Attr.text]: App.text('themeReadme'),
 			},
 			readmeLink
+		);
+
+		createMainField(
+			FieldTag.syntaxSelect,
+			App.reservedFields.SYNTAX_THEME,
+			createLabelFromField(App.reservedFields.SYNTAX_THEME)
 		);
 
 		createMainField(
@@ -367,6 +373,10 @@ export class PageDataFormComponent extends FormComponent {
 	 */
 	private render(response: KeyValueMap): void {
 		const { url, fields, shared, template, readme } = response.data;
+
+		if (!fields) {
+			return;
+		}
 
 		create(
 			'input',
