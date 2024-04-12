@@ -216,7 +216,6 @@ export class PageDataFormComponent extends FormComponent {
 			[],
 			{
 				href: `${App.baseURL}${url}`,
-				target: '_blank',
 			},
 			titleContainer
 		).innerHTML = html`

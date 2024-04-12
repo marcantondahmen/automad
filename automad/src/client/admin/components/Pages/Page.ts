@@ -162,7 +162,6 @@ const renderDropdown = (): string => {
 				<a
 					href="${App.baseURL}${getPageURL()}"
 					class="${CSS.dropdownLink}"
-					target="_blank"
 				>
 					<am-icon-text
 						${Attr.icon}="pencil"

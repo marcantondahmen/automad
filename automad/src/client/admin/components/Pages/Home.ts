@@ -70,7 +70,6 @@ const systemInfo = (): string => {
 				<a
 					href="${App.baseURL || '/'}"
 					class="${CSS.button} ${CSS.formGroupItem}"
-					target="_blank"
 				>
 					${App.text('inPageEdit')}
 				</a>
