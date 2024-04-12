@@ -32,11 +32,20 @@
  * Licensed under the MIT license.
  */
 
-import { FieldTag, createSelect, getPageURL, App } from '@/admin/core';
+import {
+	FieldTag,
+	createSelect,
+	getPageURL,
+	App,
+	CSS,
+	create,
+	html,
+	Attr,
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 import themes from 'automad-prism-themes/dist/themes.json';
 
-const defaultTheme = 'tokyo-night-storm';
+const defaultTheme = 'verdandi.light-dark';
 
 /**
  * A syntax theme select field.
@@ -53,16 +62,34 @@ class SyntaxThemeSelectComponent extends BaseFieldComponent {
 		const _default = isPage ? '' : defaultTheme;
 		const _value = (value as string) || _default;
 
-		let options = themes;
+		let options = [{ text: '&mdash;', value: 'none' }, ...themes];
 
 		if (isPage) {
 			options = [
 				{ text: App.text('useSharedDefault'), value: '' },
-				...themes,
+				...options,
 			];
 		}
 
+		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 		createSelect(options, _value, this, name, id);
+		create(
+			'div',
+			[],
+			{},
+			this,
+			html`
+				<a
+					href="https://automadcms.github.io/automad-prism-themes/"
+					target="_blank"
+				>
+					<am-icon-text
+						${Attr.icon}="palette2"
+						${Attr.text}="${App.text('visitSyntaxGallery')}"
+					></am-icon-text>
+				</a>
+			`
+		);
 	}
 }
 
