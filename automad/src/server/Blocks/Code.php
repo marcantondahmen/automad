@@ -61,11 +61,12 @@ class Code extends AbstractBlock {
 	public static function render(array $block, Automad $Automad): string {
 		$code = htmlspecialchars($block['data']['code']);
 		$lang = 'language-' . ($block['data']['language'] ?? '');
+		$lines = ($block['data']['lineNumbers'] ?? false) ? ' class="line-numbers"' : '';
 		$attr = Attr::render($block['tunes']);
 
 		return <<< HTML
 			<div $attr>
-				<pre><code class="$lang">$code</code></pre>
+				<pre $lines><code class="$lang" data-prismjs-copy="Copy">$code</code></pre>
 			</div>
 			HTML;
 	}

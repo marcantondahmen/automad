@@ -81,6 +81,7 @@ export interface ButtonsBlockData {
 export interface CodeBlockData {
 	code: string;
 	language: CodeLanguage;
+	lineNumbers: boolean;
 }
 
 export interface FilelistBlockData {

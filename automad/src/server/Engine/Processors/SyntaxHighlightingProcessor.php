@@ -86,6 +86,7 @@ class SyntaxHighlightingProcessor {
 			);
 		}
 
+		$str = Head::append($str, Asset::css('dist/prism/main.bundle.css', false));
 		$str = Body::append($str, Asset::js('dist/prism/main.bundle.js', false));
 
 		return $str;
