@@ -57,7 +57,6 @@ class NavbarOutdatedPackagesIndicatorComponent extends BaseOutdatedPackagesIndic
 					${Attr.tooltip}="${App.text('packagesUpdatesAvailable')}"
 				>
 					<i class="bi bi-box-seam"></i>
-					<span class="am-e-badge"></span>
 				</am-link>
 			`;
 		} else {
