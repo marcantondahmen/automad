@@ -661,6 +661,9 @@ class Page {
 		$DataStore->setState(PublicationState::DRAFT, $draft)
 				  ->save();
 
+		$History = History::get($this->path);
+		$History->commit($draft);
+
 		Cache::clear();
 	}
 
