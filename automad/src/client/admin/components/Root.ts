@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -71,7 +71,7 @@ export class RootComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['base'];
+		return ['base-index', 'base-url'];
 	}
 
 	/**
@@ -149,6 +149,11 @@ export class RootComponent extends BaseComponent {
 		this.progressBar(40);
 
 		const route = getValidRouteOrRedirect();
+
+		if (!route) {
+			return;
+		}
+
 		const page = create(getTagFromRoute(route), [], {}).init();
 
 		this.progressBar(60);

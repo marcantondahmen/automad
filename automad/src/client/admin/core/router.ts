@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -41,6 +41,7 @@ import { App, Route } from '.';
  */
 export const getSlug = (): string => {
 	const regex = new RegExp(`^${App.dashboardURL}\/`, 'i');
+
 	return window.location.pathname.replace(regex, '');
 };
 

@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2022-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -183,7 +183,10 @@ export const dashboardLayout = ({ main }: Partials) => {
 				</div>
 				<nav class="${CSS.nav}">
 					<span class="${CSS.navItem}">
-						<a href="${App.baseURL || '/'}" class="${CSS.navLink}">
+						<a
+							href="${App.baseIndex || '/'}"
+							class="${CSS.navLink}"
+						>
 							<span class="${CSS.iconText}">
 								<i class="bi bi-window-desktop"></i>
 								<span

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2023 by Marc Anton Dahmen
+ * Copyright (c) 2016-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Fields class provides all methods to search all kind of content variables (fields of the data array) used in templates.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Fields {

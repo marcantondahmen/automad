@@ -1,45 +1,43 @@
 #!/bin/bash
 
-# Run this script on a feature, bugfix or refactoring branch to squash and merge changes to develop.
+# Run this script on a feature, bugfix or refactoring branch to merge changes to v2.
 
 # Change to the base directory of the repository.
 dir=$(dirname "$0")
 cd "$dir/.."
 
-branch=$(git branch | egrep -v "(master|develop)" | grep \* | sed "s|\* ||")
+branch=$(git branch | egrep -v "(master|v2)" | grep \* | sed "s|\* ||")
 
-if [[ ! $branch ]] 
-then
+if [[ ! $branch ]]; then
 	echo "You are not on a feature, bugfix or refactor branch!"
 	exit 0
 fi
 
-if [[ $(git status -s) ]]
-then
+if [[ $(git status -s) ]]; then
 	echo "Working directory is not clean!"
 	git status -s
 	exit 0
 fi
 
-while true
-do
-	read -n 1 -p "Finish $branch? (y/n) " option 
+while true; do
+	read -n 1 -p "Finish $branch? (y/n) " option
 	case $option in
-		[Yy]* ) 
-			break
-			;;
-		[Nn]* ) 
-			exit 0
-			;;
-		* ) 
-			echo "Please only enter \"y\" or \"n\"."
-			;;
+	[Yy]*)
+		break
+		;;
+	[Nn]*)
+		exit 0
+		;;
+	*)
+		echo "Please only enter \"y\" or \"n\"."
+		;;
 	esac
 done
 
 ps | grep "webpack" | grep -v grep | awk '{print $1}' | xargs kill
 
-msg="$( echo $branch | sed -E 's|([^/]+)/([^/]+)/(.*)|\1(\2): \3|' | sed 's|_| |g' )"
+msg="$(echo $branch | sed -E 's|([^/]+)/([^/]+)/(.*)|\1(\2): \3|' | sed 's|_| |g')"
 
-git checkout develop
+git checkout v2
 git merge $branch --no-ff -m "$msg" && git push origin --all -u && git branch --delete $branch && git push -d origin $branch
+

@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -12,6 +12,7 @@
     "clean": "rm -rf ./automad/dist/*/*",
     "build": "npm run clean && webpack --config webpack.config.js --mode production",
     "dev": "npm run clean && webpack --config webpack.config.js --mode development",
+    "bump-year": "bash bin/bump-year.sh",
     "phpunit": "phpunit",
     "psalm": "psalm --clear-global-cache && psalm",
     "jest": "jest",

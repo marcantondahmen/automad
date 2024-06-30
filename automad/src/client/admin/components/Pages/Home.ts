@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -67,13 +67,13 @@ const systemInfo = (): string => {
 				</am-link>
 			</div>
 			<div class="${CSS.displaySmall}">
-				<a href="${App.baseURL || '/'}" class="${CSS.button}">
+				<a href="${App.baseIndex || '/'}" class="${CSS.button}">
 					${App.text('inPageEdit')}
 				</a>
 			</div>
 			<div class="${CSS.formGroup} ${CSS.displaySmallNone}">
 				<a
-					href="${App.baseURL || '/'}"
+					href="${App.baseIndex || '/'}"
 					class="${CSS.button} ${CSS.formGroupItem}"
 				>
 					${App.text('inPageEdit')}

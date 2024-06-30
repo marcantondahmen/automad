@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,6 +37,7 @@
 namespace Automad\Models;
 
 use Automad\Core\FileSystem;
+use Automad\Core\FileUtils;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
 use Automad\Core\Text;
@@ -47,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Image controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Image {
@@ -61,6 +62,15 @@ class Image {
 	 * @param Messenger $Messenger
 	 */
 	public static function save(string $path, string $name, string $extension, string $base64, Messenger $Messenger): void {
+		if (!in_array($extension, FileUtils::allowedFileTypes())) {
+			$Messenger->setError(
+				Text::get('unsupportedFileTypeError') . ' "' .
+				FileSystem::getExtension($extension) . '"'
+			);
+
+			return;
+		}
+
 		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
 		$data = base64_decode($data);
 

@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-alpha.4](https://github.com/marcantondahmen/automad/commit/3278dc38395cad81068657e12a7893ebd9e02bd6)
+## [v2.0.0-alpha.5](https://github.com/marcantondahmen/automad/commit/3443ff5f06d1a52661f7f5318ee183248e95a4d3)
 
-Sat, 13 Apr 2024 00:08:53 +0200
+Sun, 30 Jun 2024 19:35:04 +0200
+
+### New Features
+
+- add better button loading state ([f2eaf3696](https://github.com/marcantondahmen/automad/commit/f2eaf369649fc0c311c2cb8b416031d26dd1a074))
+
+### Bugfixes
+
+- **history**: fix missing revisions when using in-page edit mode ([4a87da80c](https://github.com/marcantondahmen/automad/commit/4a87da80c22aaecde932ee92ec458b49aaf40db7))
+- fix delete button state for empty file lists ([c9617f0ac](https://github.com/marcantondahmen/automad/commit/c9617f0ac080b94124bc2b7baae78f4c9d70d2ab))
+- fix image previews when pretty urls are disabled ([2cc2afa80](https://github.com/marcantondahmen/automad/commit/2cc2afa806898b168e48e1657400b049950c9f5f))
+- fix remote code execution vulnerability in file editor ([85e23bc67](https://github.com/marcantondahmen/automad/commit/85e23bc67aadb84df633c41ee782cd106e1413da))
+- set proper response code when uploading unsupported file type ([66f369c30](https://github.com/marcantondahmen/automad/commit/66f369c30f015db819206a8459c0a131cfcd8f7d))
+
+## [v2.0.0-alpha.4](https://github.com/marcantondahmen/automad/commit/ff40d45a283385b05eac7e5f2bea3936fe578d29)
+
+Sat, 13 Apr 2024 00:13:36 +0200
 
 ### New Features
 
@@ -326,12 +342,3 @@ Sun, 8 Aug 2021 22:25:34 +0200
 ### Bugfixes
 
 - **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
-
-## [v1.8.1](https://github.com/marcantondahmen/automad/commit/8be976c0215c549d3ac27016b8c9fee02c052cca)
-
-Sat, 7 Aug 2021 23:06:36 +0200
-
-### Bugfixes
-
-- **ui**: fix breadcrumbs position in safari ([0ed10e20d](https://github.com/marcantondahmen/automad/commit/0ed10e20d8d32f963be4d76c84d79bcf967b77c0))
-- **ui**: fix status badge for outdated packages ([8b53a821f](https://github.com/marcantondahmen/automad/commit/8b53a821fa0d9cdc57af25f0eb122dc0dd312050))

@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -62,7 +62,7 @@ const searchData = (): JumpbarItemData[] => {
 const inPageData = (): JumpbarItemData[] => {
 	return [
 		{
-			external: App.baseURL || '/',
+			external: App.baseIndex || '/',
 			value: App.text('inPageEdit'),
 			title: App.text('inPageEdit'),
 			icon: 'window-desktop',

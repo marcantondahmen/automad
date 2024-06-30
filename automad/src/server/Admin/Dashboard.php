@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2014-2023 by Marc Anton Dahmen
+ * Copyright (c) 2014-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The base for all dashboard views.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2014-2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2014-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Dashboard {
@@ -84,7 +84,7 @@ class Dashboard {
 				{$fn(Asset::js('dist/admin/main.bundle.js'))}
 			</head>
 			<body>
-				<am-root base="{$fn(AM_BASE_INDEX)}"></am-root>
+				<am-root base-url="{$fn(AM_BASE_URL)}" base-index="{$fn(AM_BASE_INDEX)}"></am-root>
 			</body>
 			</html>
 			HTML;

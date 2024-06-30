@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2023 by Marc Anton Dahmen
+ * Copyright (c) 2022-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { listen, queryAll } from '@/admin/core';
+import { EventName, listen, queryAll } from '@/admin/core';
 import { FormComponent } from '@/admin/components/Forms/Form';
 import { SubmitComponent } from '@/admin/components/Forms/Submit';
 
@@ -51,17 +51,18 @@ class FileCollectionSubmitComponent extends SubmitComponent {
 		this.toggleAttribute('disabled', true);
 
 		this.relatedForms.forEach((form: FormComponent) => {
-			listen(
-				form,
-				'change',
-				() => {
-					this.toggleAttribute(
-						'disabled',
-						queryAll(':checked', form).length == 0
-					);
-				},
-				'[type="checkbox"]'
+			const handler = () => {
+				this.toggleAttribute(
+					'disabled',
+					queryAll(':checked', form).length == 0
+				);
+			};
+
+			this.addListener(
+				listen(window, EventName.fileCollectionRender, handler)
 			);
+
+			this.addListener(listen(form, 'change', handler));
 		});
 	}
 }

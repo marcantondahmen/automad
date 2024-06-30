@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -160,7 +160,7 @@ const renderDropdown = (): string => {
 				</am-modal-toggle>
 				<span class="${CSS.dropdownDivider}"></span>
 				<a
-					href="${App.baseURL}${getPageURL()}"
+					href="${App.baseIndex}${getPageURL()}"
 					class="${CSS.dropdownLink}"
 				>
 					<am-icon-text

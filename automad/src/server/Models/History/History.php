@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023 by Marc Anton Dahmen
+ * Copyright (c) 2023-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -54,7 +54,7 @@ use Automad\System\Fields;
  * The page history class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class History {

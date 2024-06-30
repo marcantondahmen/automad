@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -49,6 +49,7 @@ import {
 	query,
 	queryAll,
 	requestAPI,
+	create,
 } from '@/admin/core';
 import { InputElement, KeyValueMap } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
@@ -251,6 +252,11 @@ export class FormComponent extends BaseComponent {
 
 		const lockId = App.addNavigationLock();
 
+		this.submitButtons.forEach((button) => {
+			button.classList.add(CSS.buttonLoading);
+			button.prepend(create('am-spinner'));
+		});
+
 		queryAll(
 			'input:not([type="hidden"], textarea, [contenteditable])',
 			this
@@ -276,6 +282,11 @@ export class FormComponent extends BaseComponent {
 		} else {
 			App.removeNavigationLock(lockId);
 		}
+
+		this.submitButtons.forEach((button) => {
+			button.classList.remove(CSS.buttonLoading);
+			query('am-spinner', button)?.remove();
+		});
 	}
 
 	/**

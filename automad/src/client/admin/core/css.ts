@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2023 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -57,6 +57,7 @@ export const enum CSS {
 	buttonDanger = 'am-e-button--danger',
 	buttonPrimary = 'am-e-button--primary',
 	buttonIcon = 'am-e-button--icon',
+	buttonLoading = 'am-e-button--loading',
 
 	card = 'am-c-card',
 	cardHover = 'am-c-card--hover',
