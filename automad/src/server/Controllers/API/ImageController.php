@@ -72,6 +72,8 @@ class ImageController {
 			$Messenger
 		);
 
-		return $Response->setError($Messenger->getError());
+		return $Response
+			->setError($Messenger->getError())
+			->setCode($Messenger->getError() ? 406 : 200);
 	}
 }

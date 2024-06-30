@@ -37,6 +37,7 @@
 namespace Automad\Models;
 
 use Automad\Core\FileSystem;
+use Automad\Core\FileUtils;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
 use Automad\Core\Text;
@@ -61,6 +62,15 @@ class Image {
 	 * @param Messenger $Messenger
 	 */
 	public static function save(string $path, string $name, string $extension, string $base64, Messenger $Messenger): void {
+		if (!in_array($extension, FileUtils::allowedFileTypes())) {
+			$Messenger->setError(
+				Text::get('unsupportedFileTypeError') . ' "' .
+				FileSystem::getExtension($extension) . '"'
+			);
+
+			return;
+		}
+
 		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
 		$data = base64_decode($data);
 
