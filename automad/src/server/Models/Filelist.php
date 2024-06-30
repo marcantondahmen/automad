@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2015-2023 by Marc Anton Dahmen
+ * Copyright (c) 2015-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Filelist object represents a set of files based on a file pattern depending on the current context.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2015-2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2015-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Filelist {

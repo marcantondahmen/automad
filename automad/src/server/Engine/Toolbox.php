@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2023 by Marc Anton Dahmen
+ * Copyright (c) 2013-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Toolbox class holds all methods to be used within the template files.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2023 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Toolbox {
