@@ -118,6 +118,7 @@ class FileCollectionController {
 			);
 
 			$Response->setError($Messenger->getError());
+			$Response->setCode($Messenger->getError() ? 406 : 200);
 		}
 
 		return $Response;
