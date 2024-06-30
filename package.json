@@ -12,6 +12,7 @@
     "clean": "rm -rf ./automad/dist/*/*",
     "build": "npm run clean && webpack --config webpack.config.js --mode production",
     "dev": "npm run clean && webpack --config webpack.config.js --mode development",
+    "bump-year": "bash bin/bump-year.sh",
     "phpunit": "phpunit",
     "psalm": "psalm --clear-global-cache && psalm",
     "jest": "jest",
