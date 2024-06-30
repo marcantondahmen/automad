@@ -96,7 +96,14 @@ export class App {
 	static apiURL = '';
 
 	/**
-	 * The base URL for the website.
+	 * The base URL for the website including a possibly existing "/index.php" suffix.
+	 *
+	 * @static
+	 */
+	static baseIndex = '';
+
+	/**
+	 * The base URL for the website without a possibly existing "/index.php" suffix.
 	 *
 	 * @static
 	 */
@@ -297,8 +304,9 @@ export class App {
 	 * @param root
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
-		App.baseURL = root.elementAttributes.base;
-		App.apiURL = `${App.baseURL}/_api`;
+		App.baseIndex = root.elementAttributes['base-index'];
+		App.baseURL = root.elementAttributes['base-url'];
+		App.apiURL = `${App.baseIndex}/_api`;
 
 		const { data } = await requestAPI(AppController.bootstrap);
 		const state = State.getInstance();

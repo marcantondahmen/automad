@@ -215,13 +215,13 @@ export class PageDataFormComponent extends FormComponent {
 			'a',
 			[],
 			{
-				href: `${App.baseURL}${url}`,
+				href: `${App.baseIndex}${url}`,
 			},
 			titleContainer
 		).innerHTML = html`
 			<span class="${CSS.iconText}">
 				<i class="bi bi-link"></i>
-				<span>${App.baseURL}${url}</span>
+				<span>${App.baseIndex}${url}</span>
 			</span>
 		`;
 

@@ -84,7 +84,7 @@ class Dashboard {
 				{$fn(Asset::js('dist/admin/main.bundle.js'))}
 			</head>
 			<body>
-				<am-root base="{$fn(AM_BASE_INDEX)}"></am-root>
+				<am-root base-url="{$fn(AM_BASE_URL)}" base-index="{$fn(AM_BASE_INDEX)}"></am-root>
 			</body>
 			</html>
 			HTML;

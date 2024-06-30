@@ -40,11 +40,11 @@ export const centered = ({ main }: Partials): string => {
 		<div class="${CSS.layoutCentered}">
 			<div class="${CSS.layoutCenteredNavbar}">
 				<nav class="${CSS.navbar}">
-					<a href="${App.baseURL || '/'}" class="${CSS.navbarItem}">
+					<a href="${App.baseIndex || '/'}" class="${CSS.navbarItem}">
 						<am-logo></am-logo>
 					</a>
 					<a
-						href="${App.baseURL || '/'}"
+						href="${App.baseIndex || '/'}"
 						class="${CSS.navbarItem}"
 						${Attr.tooltip}="${App.text('close')}"
 					>

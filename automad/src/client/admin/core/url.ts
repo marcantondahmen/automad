@@ -86,7 +86,7 @@ export const resizeImageUrl = (
 
 	const encoded = encodeURIComponent(resolveFileUrl(url));
 
-	return `${App.baseURL}/_resize?url=${encoded}&w=${width}&h=${height}`;
+	return `${App.baseIndex}/_resize?url=${encoded}&w=${width}&h=${height}`;
 };
 
 /**
@@ -133,7 +133,7 @@ export const resolvePageUrl = (pageUrl: string): string => {
 	}
 
 	if (pageUrl.match(/^\//)) {
-		return `${App.baseURL}${pageUrl}`;
+		return `${App.baseIndex}${pageUrl}`;
 	}
 
 	return pageUrl;

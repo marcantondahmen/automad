@@ -130,14 +130,14 @@ export class InPageFormComponent extends FormComponent {
 		this.bindings = {
 			inPageReturnUrlBinding: new Binding('inPageReturnUrl', {
 				initial: this.page,
-				modifier: (url: string) => `${App.baseURL}${url}`,
+				modifier: (url: string) => `${App.baseIndex}${url}`,
 			}),
 			inPageTitleBinding: new Binding('inPageTitle', {
 				initial: App.pages[this.context]?.title ?? '404',
 			}),
 			inPageContextUrlBinding: new Binding('inPageContextUrl', {
 				initial: this.context,
-				modifier: (url: string) => `${App.baseURL}${url}`,
+				modifier: (url: string) => `${App.baseIndex}${url}`,
 			}),
 			inPageFieldBinding: new Binding('inPageField', {
 				initial: this.field,

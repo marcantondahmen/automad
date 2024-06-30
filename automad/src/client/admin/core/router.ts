@@ -41,6 +41,7 @@ import { App, Route } from '.';
  */
 export const getSlug = (): string => {
 	const regex = new RegExp(`^${App.dashboardURL}\/`, 'i');
+
 	return window.location.pathname.replace(regex, '');
 };
 

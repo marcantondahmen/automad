@@ -71,7 +71,7 @@ export class RootComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['base'];
+		return ['base-index', 'base-url'];
 	}
 
 	/**
@@ -149,6 +149,11 @@ export class RootComponent extends BaseComponent {
 		this.progressBar(40);
 
 		const route = getValidRouteOrRedirect();
+
+		if (!route) {
+			return;
+		}
+
 		const page = create(getTagFromRoute(route), [], {}).init();
 
 		this.progressBar(60);

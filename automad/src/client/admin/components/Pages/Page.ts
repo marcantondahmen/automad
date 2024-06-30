@@ -160,7 +160,7 @@ const renderDropdown = (): string => {
 				</am-modal-toggle>
 				<span class="${CSS.dropdownDivider}"></span>
 				<a
-					href="${App.baseURL}${getPageURL()}"
+					href="${App.baseIndex}${getPageURL()}"
 					class="${CSS.dropdownLink}"
 				>
 					<am-icon-text
