@@ -8,7 +8,8 @@ Whenever you encounter a security vulnerability, please feel free to [report it 
 - A use case for an exploit and a valid attack vector
 - All required steps in order to enable an attacker to exploit the vulnerability
 
-Please note that pull-request for this repository will be ignored as stated in the README.
+> [!IMPORTANT]
+> Please note that pull-requests for this repository will be ignored as stated in the README.
 
 ## Quality of Reports
 
