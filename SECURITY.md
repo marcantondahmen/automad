@@ -2,7 +2,7 @@
 
 Security should be taken seriously whenever private data and/or the digital distribution of any data is at play. Automad is **no exception** here.
 
-Whenever you encounter a security vulnerability, please feel free to [report it privately](https://github.com/marcantondahmen/automad/security) and provide the following information:
+Whenever you encounter a security vulnerability, please feel free to [report it privately](https://github.com/marcantondahmen/automad/security/advisories/new) and provide the following information:
 
 - A brief description of the vulnerability
 - A use case for an exploit and a valid attack vector
