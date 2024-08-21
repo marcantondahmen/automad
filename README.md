@@ -27,14 +27,12 @@ In case you quickly want to try out Automad without setting up a server first, j
 
 ## Installation
 
-Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled
-version of Automad using [Docker](https://docker.com) or [Composer](https://getcomposer.org).
-It is also possible to manually [download](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip)
-and [install](#manual-installation) Automad.
+Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled version of Automad using [Docker](https://github.com/automadcms/automad-docker) or [Composer](https://packagist.org/packages/automad/automad).
+It is also possible to manually [download](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip) and [install](#manual-installation) Automad.
 
 ### Composer
 
-The fastest way to get Automad up and running is to use Composer.
+The fastest way to get Automad up and running is to use [Composer](https://packagist.org/packages/automad/automad).
 
 ```bash
 composer create-project automad/automad . v2.x-dev
@@ -44,7 +42,7 @@ Follow this [guide](https://automad.org/version-2#getting-started) to finish the
 
 ### Docker
 
-It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8.3**.
+It is also possible to run Automad in a [Docker](https://github.com/automadcms/automad-docker) container including **Nginx** and **PHP 8.3**.
 
 ```bash
 docker run -dp 80:80 -v ./app:/app --name mysite automad/automad:v2
