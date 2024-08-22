@@ -158,11 +158,22 @@ class Config {
 	}
 
 	/**
-	 * Define constants based on the configuration array.
+	 * Merge default constants with overrides that are saved in config files
+	 * such as "config.php" and "config.mail.php".
 	 */
 	public static function overrides(): void {
-		foreach (self::read() as $name => $value) {
-			self::set($name, $value);
+		$files = FileSystem::glob(AM_BASE_DIR . '/config/config.*');
+
+		foreach ($files as $file) {
+			// Strip filename until it is an empty string (main config)
+			// or the name of the config such as "mail" (config.mail.php).
+			$configName = Str::stripStart($file, AM_BASE_DIR . '/config/config');
+			$configName = Str::stripEnd($configName, 'php');
+			$configName = trim($configName, '.');
+
+			foreach (self::read($configName) as $name => $value) {
+				self::set($name, $value);
+			}
 		}
 	}
 
@@ -171,14 +182,16 @@ class Config {
 	 * and decode the returned string. Note that now the configuration is stored in
 	 * PHP files instead of JSON files to make it less easy to access from outside.
 	 *
+	 * @param string $name
 	 * @return array The configuration array
 	 */
-	public static function read(): array {
+	public static function read(string $name = ''): array {
 		$json = false;
 		$config = array();
+		$file = self::getConfigPath($name);
 
-		if (is_readable(Config::FILE)) {
-			$json = require Config::FILE;
+		if (is_readable($file)) {
+			$json = require $file;
 		}
 
 		if ($json) {
@@ -204,18 +217,32 @@ class Config {
 	 * Write the configuration file.
 	 *
 	 * @param array $config
+	 * @param string $name
 	 * @return bool True on success
 	 */
-	public static function write(array $config): bool {
+	public static function write(array $config, string $name = ''): bool {
 		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
-		$success = FileSystem::write(Config::FILE, $content);
+		$file = self::getConfigPath($name);
+		$success = FileSystem::write($file, $content);
+
+		Debug::log($file);
 
 		if ($success && function_exists('opcache_invalidate')) {
-			opcache_invalidate(Config::FILE, true);
+			opcache_invalidate($file, true);
 		}
 
 		return $success;
+	}
+
+	/**
+	 * Get the config path for a given optional name.
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	private static function getConfigPath(string $name): string {
+		return $name ? AM_BASE_DIR . '/config/config.' . $name . '.php' : Config::FILE;
 	}
 
 	/**
