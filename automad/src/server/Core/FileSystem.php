@@ -200,6 +200,10 @@ class FileSystem {
 					$extension = '.png';
 
 					break;
+				case 'image/webp':
+					$extension = '.webp';
+
+					break;
 				default:
 					$extension = '';
 
