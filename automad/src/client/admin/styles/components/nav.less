@@ -76,6 +76,12 @@
 		color: hsl(var(--am-clr-text)) !important;
 	}
 
+	&__item--active[am-publication-state*='draft'] > &__link:after {
+		content: '●';
+		font-size: 0.8rem;
+		color: hsl(var(--am-clr-primary-text)) !important;
+	}
+
 	&__link {
 		box-sizing: border-box;
 		display: flex;
