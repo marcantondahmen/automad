@@ -40,11 +40,13 @@ import {
 	listen,
 	query,
 	queryAll,
+	Section,
 	titleCase,
 } from '.';
 import {
 	FieldGroupData,
 	FieldGroups,
+	FieldSectionCollection,
 	InputElement,
 	KeyValueMap,
 } from '@/admin/types';
@@ -53,27 +55,28 @@ import {
  * The tag names enum for fields.
  */
 export const enum FieldTag {
+	code = 'am-code',
+	color = 'am-color',
+	date = 'am-date',
 	editor = 'am-editor',
 	email = 'am-email',
 	feedFieldSelect = 'am-feed-field-select',
+	imageSelect = 'am-image-select',
 	input = 'am-input',
 	mainTheme = 'am-main-theme',
+	markdown = 'am-markdown',
+	number = 'am-number',
+	numberUnit = 'am-number-unit',
 	pageTags = 'am-page-tags',
 	pageTemplate = 'am-page-template',
 	password = 'am-password',
-	number = 'am-number',
-	numberUnit = 'am-number-unit',
-	toggle = 'am-toggle',
-	toggleSelect = 'am-toggle-select',
-	toggleLarge = 'am-toggle-large',
-	color = 'am-color',
-	date = 'am-date',
-	markdown = 'am-markdown',
-	imageSelect = 'am-image-select',
-	url = 'am-url',
 	syntaxSelect = 'am-syntax-theme-select',
 	textarea = 'am-textarea',
 	title = 'am-title',
+	toggle = 'am-toggle',
+	toggleLarge = 'am-toggle-large',
+	toggleSelect = 'am-toggle-select',
+	url = 'am-url',
 }
 
 /**
@@ -115,6 +118,81 @@ export class FormDataProviders {
 		}
 	}
 }
+
+/**
+ * Create all custom CSS and JS fields.
+ *
+ * @param fields
+ * @param sections
+ */
+export const createCustomizationFields = (
+	fields: KeyValueMap,
+	sections: FieldSectionCollection
+) => {
+	const buildFieldProps = (
+		field: string,
+		label: string | null = null,
+		placeholder: string | null = null
+	) => {
+		const key = App.reservedFields[field];
+
+		return {
+			key,
+			label,
+			placeholder,
+			value: fields[key],
+			name: `data[${key}]`,
+		};
+	};
+
+	createField(
+		FieldTag.input,
+		sections.customize,
+		buildFieldProps(
+			'CUSTOM_CSS_FILE',
+			App.text('customCSSFile'),
+			'/shared/custom.css'
+		)
+	);
+
+	createField(
+		FieldTag.input,
+		sections.customize,
+		buildFieldProps(
+			'CUSTOM_JS_HEADER_FILE',
+			`${App.text('customJSFile')} (Header)`,
+			'/shared/header.js'
+		)
+	);
+
+	createField(
+		FieldTag.input,
+		sections.customize,
+		buildFieldProps(
+			'CUSTOM_JS_FOOTER_FILE',
+			`${App.text('customJSFile')} (Footer)`,
+			'/shared/footer.js'
+		)
+	);
+
+	createField(
+		FieldTag.code,
+		sections.customize,
+		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
+	);
+
+	createField(
+		FieldTag.code,
+		sections.customize,
+		buildFieldProps('CUSTOM_JS_HEADER', `${App.text('customJS')} (Header)`)
+	);
+
+	createField(
+		FieldTag.code,
+		sections.customize,
+		buildFieldProps('CUSTOM_JS_FOOTER', `${App.text('customJS')} (Footer)`)
+	);
+};
 
 /**
  * Create an ID from a field key.
@@ -263,7 +341,7 @@ export const prepareFieldGroups = (fields: KeyValueMap): FieldGroups => {
 	const groups: FieldGroups = {
 		settings: {},
 		text: {},
-		colors: {},
+		customize: {},
 	};
 
 	Object.keys(fields).forEach((name) => {
@@ -275,7 +353,7 @@ export const prepareFieldGroups = (fields: KeyValueMap): FieldGroups => {
 				groups.text[name] = fields[name];
 				break;
 			case 'color':
-				groups.colors[name] = fields[name];
+				groups.customize[name] = fields[name];
 				break;
 			default:
 				groups.settings[name] = fields[name];

@@ -35,7 +35,7 @@
 import { KeyValueMap } from '.';
 import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
 
-export type FieldSectionName = 'settings' | 'text' | 'colors';
+export type FieldSectionName = 'settings' | 'text' | 'customize';
 
 export type FieldSectionCollection = {
 	[name in FieldSectionName]: SwitcherSectionComponent;

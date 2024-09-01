@@ -44,6 +44,7 @@ import './styles/index.less';
 import './components/Breadcrumbs/BreadcrumbsPage';
 import './components/Breadcrumbs/BreadcrumbsRoute';
 
+import './components/Fields/Code';
 import './components/Fields/Color';
 import './components/Fields/Date';
 import './components/Fields/Editor';

@@ -55,6 +55,12 @@ class Fields {
 	const CAPTION = ':caption';
 	const CURRENT_PAGE = ':current';
 	const CURRENT_PATH = ':currentPath';
+	const CUSTOM_CSS = 'customCSS';
+	const CUSTOM_CSS_FILE = 'customCSSFile';
+	const CUSTOM_JS_FOOTER = 'customJSFooter';
+	const CUSTOM_JS_FOOTER_FILE = 'customJSFooterFile';
+	const CUSTOM_JS_HEADER = 'customJSHeader';
+	const CUSTOM_JS_HEADER_FILE = 'customJSHeaderFile';
 	const DATE = 'date';
 	const FILE = ':file';
 	const FILE_RESIZED = ':fileResized';
@@ -96,10 +102,19 @@ class Fields {
 	 * Array with reserved variable fields.
 	 */
 	public static array $reserved = array(
+		'CUSTOM_CSS' => Fields::CUSTOM_CSS,
+		'CUSTOM_CSS_FILE' => Fields::CUSTOM_CSS_FILE,
+		'CUSTOM_JS_FOOTER' => Fields::CUSTOM_JS_FOOTER,
+		'CUSTOM_JS_FOOTER_FILE' => Fields::CUSTOM_JS_FOOTER_FILE,
+		'CUSTOM_JS_HEADER' => Fields::CUSTOM_JS_HEADER,
+		'CUSTOM_JS_HEADER_FILE' => Fields::CUSTOM_JS_HEADER_FILE,
 		'DATE' => Fields::DATE,
 		'HIDDEN' => Fields::HIDDEN,
 		'PRIVATE' => Fields::PRIVATE,
 		'PUBLICATION_STATE' => Fields::PUBLICATION_STATE,
+		'SITENAME' => Fields::SITENAME,
+		'SLUG' => Fields::SLUG,
+		'SYNTAX_THEME' => Fields::SYNTAX_THEME,
 		'TAGS' => Fields::TAGS,
 		'TEMPLATE' => Fields::TEMPLATE,
 		'THEME' => Fields::THEME,
@@ -107,10 +122,7 @@ class Fields {
 		'TIME_LAST_MODIFIED' => Fields::TIME_LAST_MODIFIED,
 		'TIME_LAST_PUBLISHED' => Fields::TIME_LAST_PUBLISHED,
 		'TITLE' => Fields::TITLE,
-		'SITENAME' => Fields::SITENAME,
-		'SLUG' => Fields::SLUG,
-		'SYNTAX_THEME' => Fields::SYNTAX_THEME,
-		'URL' => Fields::URL
+		'URL' => Fields::URL,
 	);
 
 	/**

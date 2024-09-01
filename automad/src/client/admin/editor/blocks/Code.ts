@@ -169,7 +169,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 
 		const code = create(
 			'div',
-			[CSS.editorBlockCode],
+			[CSS.codeflask],
 			{},
 			container
 		) as HTMLDivElement;

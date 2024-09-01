@@ -37,6 +37,7 @@ import {
 	Attr,
 	Binding,
 	create,
+	createCustomizationFields,
 	createField,
 	createFieldSections,
 	EventName,
@@ -216,6 +217,8 @@ export class SharedDataFormComponent extends FormComponent {
 			value: fields[App.reservedFields.SYNTAX_THEME],
 			name: `data[${App.reservedFields.SYNTAX_THEME}]`,
 		});
+
+		createCustomizationFields(fields, this.sections);
 
 		Object.keys(this.sections).forEach((item: FieldSectionName) => {
 			fieldGroup({

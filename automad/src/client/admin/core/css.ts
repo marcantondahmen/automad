@@ -81,6 +81,8 @@ export const enum CSS {
 
 	checkbox = 'am-f-checkbox',
 
+	codeflask = 'am-f-codeflask',
+
 	contents = 'am-e-contents',
 
 	customIconCheckbox = 'am-f-custom-icon-checkbox',
@@ -110,8 +112,6 @@ export const enum CSS {
 	editorBlockButtons = 'am-c-ed-bl-buttons',
 	editorBlockButtonsEdit = 'am-c-ed-bl-buttons__edit',
 	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
-
-	editorBlockCode = 'am-c-ed-bl-code',
 
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
 
