@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-alpha.5](https://github.com/marcantondahmen/automad/commit/3443ff5f06d1a52661f7f5318ee183248e95a4d3)
+## [v2.0.0-alpha.6](https://github.com/marcantondahmen/automad/commit/2f32588222c4829ca3fad8009d9093949f48360d)
 
-Sun, 30 Jun 2024 19:35:04 +0200
+Sun, 15 Sep 2024 19:28:10 +0200
+
+### New Features
+
+- **ui**: improve button loading animation ([7fbb813ef](https://github.com/marcantondahmen/automad/commit/7fbb813ef89b19da0b16662764da3fa914a9aa7c))
+- add customization fields for CSS and JS code and files ([660691c24](https://github.com/marcantondahmen/automad/commit/660691c2459c33750436a57e50ad7d8237b18e47))
+- add support for remote webp images ([0f1885dd9](https://github.com/marcantondahmen/automad/commit/0f1885dd9d1236549d45b90a936e98ed24f39fab))
+- move mail config to a separate file ([b48b25329](https://github.com/marcantondahmen/automad/commit/b48b253292e950dcbd74d8bd81f898e9933c31c2))
+
+### Bugfixes
+
+- **ui**: fix visibility of navbar items on medium size screens ([2f3258822](https://github.com/marcantondahmen/automad/commit/2f32588222c4829ca3fad8009d9093949f48360d))
+- fix processing of nested in-page editing buttons ([4fa5eb0d3](https://github.com/marcantondahmen/automad/commit/4fa5eb0d3cad40ee39338c975eb427b0c68c6674))
+
+## [v2.0.0-alpha.5](https://github.com/marcantondahmen/automad/commit/09e8864bdc5a62ba735aa0a7f08d358e92aaa735)
+
+Sun, 30 Jun 2024 19:41:20 +0200
 
 ### New Features
 
@@ -329,16 +345,3 @@ Mon, 9 Aug 2021 23:21:36 +0200
 ### Bugfixes
 
 - **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
-
-## [v1.8.2](https://github.com/marcantondahmen/automad/commit/e070a89209c2e90eadb9be4b77580beef6aa75d1)
-
-Sun, 8 Aug 2021 22:25:34 +0200
-
-### New Features
-
-- **samples**: add pagelist example page ([2a033f4da](https://github.com/marcantondahmen/automad/commit/2a033f4dada04e3d2fd7d24f2d2d6b1bfd04986e))
-- **samples**: add tags and filters to example pages ([d18f2482b](https://github.com/marcantondahmen/automad/commit/d18f2482b2f258d7b42a6609a439769773ffb7f8))
-
-### Bugfixes
-
-- **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
