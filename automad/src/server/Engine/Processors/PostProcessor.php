@@ -45,6 +45,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\I18n;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
+use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
 use Automad\System\Fields;
 use Automad\System\Server;
@@ -98,6 +99,7 @@ class PostProcessor {
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
+		$output = $this->addCustomizations($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
 		$output = $this->addCacheBustingTimestamps($output);
@@ -132,10 +134,53 @@ class PostProcessor {
 	}
 
 	/**
+	 * Add custom JS and CSS customizations.
+	 *
+	 * @param string $str
+	 * @return string The rendered output
+	 */
+	private function addCustomizations(string $str): string {
+		$Page = $this->Automad->Context->get();
+
+		$css = $Page->get(Fields::CUSTOM_CSS);
+		$cssFile = $Page->get(Fields::CUSTOM_CSS_FILE);
+		$jsHeader = $Page->get(Fields::CUSTOM_JS_HEADER);
+		$jsHeaderFile = $Page->get(Fields::CUSTOM_JS_HEADER_FILE);
+		$jsFooter = $Page->get(Fields::CUSTOM_JS_FOOTER);
+		$jsFooterFile = $Page->get(Fields::CUSTOM_JS_FOOTER_FILE);
+
+		if ($cssFile) {
+			$str = Head::append($str, '<link href="' . $cssFile . '" rel="stylesheet" />');
+		}
+
+		if ($jsHeaderFile) {
+			$str = Head::append($str, '<script src="' . $jsHeaderFile . '" type="text/javascript"></script>');
+		}
+
+		if ($jsFooterFile) {
+			$str = Body::append($str, '<script src="' . $jsFooterFile . '" type="text/javascript"></script>');
+		}
+
+		if ($css) {
+			$str = Head::append($str, "<style>$css</style>");
+		}
+
+		if ($jsHeader) {
+			$str = Head::append($str, "<script>$jsHeader</script>");
+		}
+
+		if ($jsFooter) {
+			$str = Body::append($str, "<script>$jsFooter</script>");
+		}
+
+		return $str;
+	}
+
+	/**
 	 * Add meta tags to the head of $str.
 	 *
 	 * @param string $str
-	 * @return string The meta tag
+	 * @return string The rendered output
 	 */
 	private function addMetaTags(string $str): string {
 		$base = AM_SERVER . AM_BASE_INDEX;

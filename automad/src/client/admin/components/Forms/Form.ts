@@ -253,8 +253,9 @@ export class FormComponent extends BaseComponent {
 		const lockId = App.addNavigationLock();
 
 		this.submitButtons.forEach((button) => {
-			button.classList.add(CSS.buttonLoading);
-			button.prepend(create('am-spinner'));
+			if (button.classList.contains(CSS.button)) {
+				button.classList.add(CSS.buttonLoading);
+			}
 		});
 
 		queryAll(
@@ -285,7 +286,6 @@ export class FormComponent extends BaseComponent {
 
 		this.submitButtons.forEach((button) => {
 			button.classList.remove(CSS.buttonLoading);
-			query('am-spinner', button)?.remove();
 		});
 	}
 

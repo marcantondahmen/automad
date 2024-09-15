@@ -45,6 +45,7 @@ import {
 	Attr,
 	Binding,
 	create,
+	createCustomizationFields,
 	createField,
 	createFieldSections,
 	createLabelFromField,
@@ -412,6 +413,8 @@ export class PageDataFormComponent extends FormComponent {
 			template,
 			readme,
 		});
+
+		createCustomizationFields(fields, this.sections);
 
 		Object.keys(this.sections).forEach((item: FieldSectionName) => {
 			fieldGroup({

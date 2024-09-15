@@ -65,12 +65,17 @@ class InPage {
 	 *
 	 * @see injectTemporaryEditButton()
 	 */
-	const TEMP_REGEX = '/\{\{@open:([\w=]+)@\}\}(.*?)\{\{@close@\}\}/s';
+	const TEMP_REGEX = '/\{\{@open:([\w=]+)@\}\}(.*?)\{\{@close:\1@\}\}/s';
 
 	/**
 	 * The Automad instance.
 	 */
 	private Automad $Automad;
+
+	/**
+	 * The incremental button id.
+	 */
+	private static int $buttonId = 0;
 
 	/**
 	 * The constructor.
@@ -107,11 +112,12 @@ class InPage {
 	 * @param Context $Context
 	 * @return string The processed $value
 	 */
-	public function injectTemporaryEditButton(string $value, string $field, Context $Context) {
+	public function injectTemporaryEditButton(string $value, string $field, Context $Context): string {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $field) && Session::getUsername()) {
 			$data = base64_encode(
 				json_encode(array(
+					'id' => self::$buttonId++,
 					'context' => $Context->get()->origUrl,
 					'field' => $field,
 					'page' => AM_REQUEST,
@@ -119,7 +125,7 @@ class InPage {
 				), JSON_UNESCAPED_SLASHES)
 			);
 
-			return "{{@open:$data@}}$value{{@close@}}";
+			return "{{@open:$data@}}$value{{@close:$data@}}";
 		}
 
 		return $value;
@@ -131,7 +137,7 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed markup
 	 */
-	private function injectAssets(string $str) {
+	private function injectAssets(string $str): string {
 		$fn = function (mixed $expression): string {
 			return $expression;
 		};
@@ -147,7 +153,7 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed $str
 	 */
-	private function injectDock(string $str) {
+	private function injectDock(string $str): string {
 		$state = $this->Automad->getPage(AM_REQUEST)?->get(Fields::PUBLICATION_STATE) ?? '';
 		$urlDashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		$urlApi = AM_BASE_INDEX . RequestHandler::$apiBase;
@@ -192,7 +198,7 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed markup
 	 */
-	private function processEditButtons(string $str) {
+	private function processEditButtons(string $str): string {
 		// Remove invalid buttons.
 		// Within HTML tags.
 		// Like <div data-attr="...">
@@ -208,7 +214,7 @@ class InPage {
 
 		$str = preg_replace_callback(InPage::TEMP_REGEX, function ($matches) {
 			$base64Data = $matches[1];
-			$value = $matches[2];
+			$value = $this->processEditButtons($matches[2]);
 			$data = json_decode(base64_decode($base64Data));
 			$label = Text::get('edit');
 			$placeholder = !$value ? 'placeholder="' . Text::get('inPagePlaceholder') . '"' : '';

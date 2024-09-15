@@ -109,7 +109,7 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 
 		const container = create(
 			'div',
-			[CSS.editorBlockCode],
+			[CSS.codeflask],
 			{},
 			this.wrapper
 		) as HTMLDivElement;

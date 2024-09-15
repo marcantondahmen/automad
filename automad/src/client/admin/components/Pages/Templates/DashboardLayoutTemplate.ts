@@ -77,12 +77,12 @@ export const dashboardLayout = ({ main }: Partials) => {
 				<div class="${CSS.navbar}">
 					<am-link
 						${Attr.target}="${Route.home}"
-						class="${CSS.displaySmall} ${CSS.navbarItem}"
+						class="${CSS.displayMedium} ${CSS.navbarItem}"
 					>
 						<am-logo></am-logo>
 					</am-link>
 					<am-modal-toggle
-						class="${CSS.navbarItem} ${CSS.displaySmallNone}"
+						class="${CSS.navbarItem} ${CSS.displayMediumNone}"
 						${Attr.modal}="#am-jumpbar-modal"
 					>
 						<span> ${App.text('jumpbarButtonText')} </span>
@@ -105,18 +105,18 @@ export const dashboardLayout = ({ main }: Partials) => {
 						></am-undo-buttons>
 						<am-publish-form></am-publish-form>
 						<am-modal-toggle
-							class="${CSS.navbarItem} ${CSS.displaySmall}"
+							class="${CSS.navbarItem} ${CSS.displayMedium}"
 							${Attr.modal}="#am-jumpbar-modal"
 						>
 							<i class="bi bi-menu-button-wide"></i>
 						</am-modal-toggle>
 						<am-sidebar-toggle
-							class="${CSS.navbarItem} ${CSS.displaySmall}"
+							class="${CSS.navbarItem} ${CSS.displayMedium}"
 						>
 							<i class="bi bi-list"></i>
 						</am-sidebar-toggle>
 						<am-dropdown
-							class="${CSS.displaySmallNone}"
+							class="${CSS.displayMediumNone}"
 							${Attr.right}
 						>
 							<span class="${CSS.navbarItem}">

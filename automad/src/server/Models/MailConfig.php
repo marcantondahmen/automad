@@ -52,6 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class MailConfig {
+	const CONFIG_NAME = 'mail';
 	const DEFAULT_PORT = 587;
 	const DEFAULT_TRANSPORT = 'sendmail';
 
@@ -112,7 +113,7 @@ class MailConfig {
 	 * @return bool
 	 */
 	public static function reset(): bool {
-		$config = Config::read();
+		$config = Config::read(MailConfig::CONFIG_NAME);
 
 		$config['AM_MAIL_TRANSPORT'] = self::DEFAULT_TRANSPORT;
 		$config['AM_MAIL_FROM'] = '';
@@ -121,7 +122,7 @@ class MailConfig {
 		$config['AM_MAIL_SMTP_PASSWORD'] = '';
 		$config['AM_MAIL_SMTP_PORT'] = self::DEFAULT_PORT;
 
-		return Config::write($config);
+		return Config::write($config, MailConfig::CONFIG_NAME);
 	}
 
 	/**
@@ -130,7 +131,7 @@ class MailConfig {
 	 * @return bool
 	 */
 	public function save(): bool {
-		$config = Config::read();
+		$config = Config::read(MailConfig::CONFIG_NAME);
 
 		$config['AM_MAIL_TRANSPORT'] = $this->transport;
 		$config['AM_MAIL_FROM'] = $this->from;
@@ -139,6 +140,6 @@ class MailConfig {
 		$config['AM_MAIL_SMTP_PASSWORD'] = $this->smtpPassword;
 		$config['AM_MAIL_SMTP_PORT'] = $this->smtpPort;
 
-		return Config::write($config);
+		return Config::write($config, MailConfig::CONFIG_NAME);
 	}
 }

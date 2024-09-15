@@ -70,9 +70,9 @@ const renderMenu = (): string => {
 						</am-switcher-link>
 						<am-switcher-link
 							class="${CSS.menuItem}"
-							${Attr.section}="${Section.colors}"
+							${Attr.section}="${Section.customize}"
 						>
-							${App.text('fieldsColors')}
+							${App.text('fieldsCustomize')}
 						</am-switcher-link>
 						<am-switcher-link
 							class="${CSS.menuItem}"
@@ -104,9 +104,9 @@ const renderMenu = (): string => {
 							</am-switcher-link>
 							<am-switcher-link
 								class="${CSS.dropdownLink}"
-								${Attr.section}="${Section.colors}"
+								${Attr.section}="${Section.customize}"
 							>
-								${App.text('fieldsColors')}
+								${App.text('fieldsCustomize')}
 							</am-switcher-link>
 							<am-switcher-link
 								class="${CSS.dropdownLink}"

@@ -27,14 +27,12 @@ In case you quickly want to try out Automad without setting up a server first, j
 
 ## Installation
 
-Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled
-version of Automad using [Docker](https://docker.com) or [Composer](https://getcomposer.org).
-It is also possible to manually [download](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip)
-and [install](#manual-installation) Automad.
+Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled version of Automad using [Docker](https://github.com/automadcms/automad-docker) or [Composer](https://packagist.org/packages/automad/automad).
+It is also possible to manually [download](https://github.com/automadcms/automad-dist/archive/refs/heads/master.zip) and [install](#manual-installation) Automad.
 
 ### Composer
 
-The fastest way to get Automad up and running is to use Composer.
+The fastest way to get Automad up and running is to use [Composer](https://packagist.org/packages/automad/automad).
 
 ```bash
 composer create-project automad/automad . v2.x-dev
@@ -44,7 +42,7 @@ Follow this [guide](https://automad.org/version-2#getting-started) to finish the
 
 ### Docker
 
-It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8.3**.
+It is also possible to run Automad in a [Docker](https://github.com/automadcms/automad-docker) container including **Nginx** and **PHP 8.3**.
 
 ```bash
 docker run -dp 80:80 -v ./app:/app --name mysite automad/automad:v2
@@ -93,6 +91,7 @@ In case you are interested in contributing, the following types of contribution 
 - [Publishing packages](https://automad.org/developer-guide/publishing-packages) like themes or extensions to the Automad package [browser](https://packages.automad.org)
 - Giving feedback and helping to grow a [community](https://automad.org/discuss)
 - Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
+- Reporting [security vulnerabilities](https://github.com/marcantondahmen/automad/security)
 
 However, I do not exclude at this point using parts of Automad's source in future projects under different licenses. In order to avoid having to ask anybody for permission when doing so, I will not accept any contributions to **this** repository. Please understand that pull requests will therefore be ignored.
 

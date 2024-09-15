@@ -64,8 +64,7 @@ class Image {
 	public static function save(string $path, string $name, string $extension, string $base64, Messenger $Messenger): void {
 		if (!in_array($extension, FileUtils::allowedFileTypes())) {
 			$Messenger->setError(
-				Text::get('unsupportedFileTypeError') . ' "' .
-				FileSystem::getExtension($extension) . '"'
+				Text::get('unsupportedFileTypeError') . ' "' . $extension . '"'
 			);
 
 			return;

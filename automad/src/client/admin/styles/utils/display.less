@@ -38,12 +38,24 @@
 	}
 
 	&-small {
-		@media (min-width: @am-breakpoint-medium) {
+		@media (min-width: @am-breakpoint-small) {
 			display: none !important;
 		}
 	}
 
 	&-small-none {
+		@media (max-width: @am-breakpoint-small-max) {
+			display: none !important;
+		}
+	}
+
+	&-medium {
+		@media (min-width: @am-breakpoint-medium) {
+			display: none !important;
+		}
+	}
+
+	&-medium-none {
 		@media (max-width: @am-breakpoint-medium-max) {
 			display: none !important;
 		}

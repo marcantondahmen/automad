@@ -36,9 +36,11 @@
 	display: inline-flex;
 	align-items: center;
 	gap: @am-flex-gap;
-	max-width: 100%;
+	max-width: min(100%, 85vw);
 
 	& > span {
+		display: inline-block;
+		max-width: 100%;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

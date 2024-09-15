@@ -45,6 +45,8 @@
 	justify-content: center;
 	align-items: center;
 	gap: @am-flex-gap;
+	position: relative;
+	overflow: hidden;
 	height: @am-form-height;
 	padding: 0 1.25em;
 	font-size: 1em;
@@ -108,9 +110,53 @@
 		background-color: transparent;
 	}
 
-	&--loading {
+	// Loading animation
+	&:before {
+		content: '';
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 5;
+		width: 1rem;
+		height: 1rem;
+		border: 2px solid;
+		border-top-color: transparent;
+		border-radius: 1rem;
+		animation: 0.8s linear 0s infinite loading-button-spinner;
+		transition: opacity 0.2s;
+		opacity: 0;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: inherit;
+		transition: opacity 0.2s;
+		opacity: 0;
+	}
+
+	&&--loading {
 		pointer-events: none;
 		cursor: progress;
-		opacity: 0.8;
+
+		&:before {
+			opacity: 1;
+		}
+
+		&:after {
+			opacity: 0.65;
+		}
+	}
+}
+
+@keyframes loading-button-spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
 	}
 }

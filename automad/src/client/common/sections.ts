@@ -45,6 +45,6 @@ export const enum Section {
 	config = 'config',
 	settings = 'settings',
 	text = 'text',
-	colors = 'colors',
+	customize = 'customize',
 	files = 'files',
 }

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-.am-c-ed-bl-code {
+.am-f-codeflask {
 	position: relative;
 	overflow: hidden;
 	height: auto;
@@ -78,6 +78,10 @@
 			font-family: @am-code-font-family;
 			font-size: 1rem;
 			line-height: @am-base-line-height;
+		}
+
+		& ::selection {
+			background-color: hsla(var(--am-clr-text), 0.1);
 		}
 	}
 }
