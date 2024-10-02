@@ -82,6 +82,9 @@ class Debug {
 		// Memory usage.
 		self::memory();
 
+		// Disk usage.
+		self::diskUsage();
+
 		// Get server constants.
 		self::log($_SERVER, 'Server');
 
@@ -160,6 +163,13 @@ class Debug {
 		self::$buffer[$description] = $element;
 
 		self::$index++;
+	}
+
+	/**
+	 * Log disk usage.
+	 */
+	private static function diskUsage(): void {
+		self::log(FileSystem::diskUsage(), 'Disk usage');
 	}
 
 	/**

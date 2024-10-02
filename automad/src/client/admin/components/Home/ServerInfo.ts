@@ -84,6 +84,10 @@ class ServerInfoComponent extends BaseComponent {
 					<td>Memory Limit</td>
 					<td>${data.memoryLimit}</td>
 				</tr>
+				<tr>
+					<td>Disk Usage</td>
+					<td>${data.diskUsage}M</td>
+				</tr>
 			</table>
 		`;
 	}
