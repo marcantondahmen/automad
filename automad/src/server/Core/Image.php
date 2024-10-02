@@ -323,6 +323,7 @@ class Image {
 	 */
 	private function getImageCacheFilePath(): string {
 		$extension = strtolower(pathinfo($this->originalFile, PATHINFO_EXTENSION));
+		$sanitized = Str::sanitize(pathinfo($this->originalFile, PATHINFO_FILENAME), true, 64);
 
 		if ($extension == 'jpeg') {
 			$extension = 'jpg';
@@ -333,11 +334,11 @@ class Image {
 		// since the given hashData will always result in the same hash.
 		// So if a file gets requested, the hash is generated from the path, calculated width x height, the mtime from the original and the cropping setting.
 		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . filemtime($this->originalFile) . '-' . var_export($this->crop, true);
-		$hash = sha1($hashData);
+		$hash = hash('crc32', $hashData);
 
-		$file = Cache::DIR_IMAGES . '/' . $hash . '.' . $extension;
+		$file = Cache::DIR_IMAGES . '/' . $sanitized . '.' . $hash . '.' . $extension;
 
-		Debug::log($hashData, 'Hash data for ' . $hash);
+		Debug::log($hashData, 'Hash data for ' . basename($file));
 
 		return $file;
 	}
