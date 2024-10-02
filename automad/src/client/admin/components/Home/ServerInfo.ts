@@ -86,7 +86,7 @@ class ServerInfoComponent extends BaseComponent {
 				</tr>
 				<tr>
 					<td>Disk Usage</td>
-					<td>${data.diskUsage}M</td>
+					<td>${data.diskUsage}M / ${data.diskQuota}M</td>
 				</tr>
 			</table>
 		`;

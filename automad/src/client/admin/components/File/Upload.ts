@@ -155,7 +155,7 @@ class UploadComponent extends BaseComponent {
 			message = message.error;
 		}
 
-		notifyError(html`${message}:<br />$${file.name}`);
+		notifyError(html`${message}`);
 	}
 
 	/**

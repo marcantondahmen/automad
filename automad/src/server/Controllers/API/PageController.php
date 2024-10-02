@@ -68,6 +68,11 @@ class PageController {
 	 */
 	public static function add(): Response {
 		$Response = new Response();
+
+		if (FileSystem::diskQuotaExceeded()) {
+			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
+		}
+
 		$targetPage = Request::post('targetPage');
 		$Parent = Page::fromCache($targetPage);
 		$title = Request::post('title');
@@ -221,6 +226,11 @@ class PageController {
 	 */
 	public static function duplicate(): Response {
 		$Response = new Response();
+
+		if (FileSystem::diskQuotaExceeded()) {
+			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
+		}
+
 		$url = Request::post('url');
 		$Page = Page::fromCache($url);
 
@@ -396,6 +406,11 @@ class PageController {
 	 */
 	private static function save(Page $Page, array $data): Response {
 		$Response = new Response();
+
+		if (FileSystem::diskQuotaExceeded()) {
+			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
+		}
+
 		$pageFile = $Page->getFile();
 
 		if (!$data[Fields::TITLE]) {

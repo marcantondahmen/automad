@@ -42,6 +42,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
+use Automad\Core\Text;
 use Automad\Models\FileCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -91,6 +92,10 @@ class FileCollectionController {
 	 */
 	public static function upload(): Response {
 		$Response = new Response();
+
+		if (FileSystem::diskQuotaExceeded()) {
+			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
+		}
 
 		Debug::log($_POST + $_FILES, 'file');
 

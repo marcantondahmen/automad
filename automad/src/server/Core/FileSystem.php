@@ -133,7 +133,20 @@ class FileSystem {
 	}
 
 	/**
-	 * Get the disk usage of the installation.
+	 * Check whether the disk quota is exeeded.
+	 *
+	 * @return bool
+	 */
+	public static function diskQuotaExceeded(): bool {
+		if (!AM_DISK_QUOTA) {
+			return false;
+		}
+
+		return (self::diskUsage() > AM_DISK_QUOTA);
+	}
+
+	/**
+	 * Get the disk usage of the installation in MB.
 	 *
 	 * @return float the disk usage in MB
 	 */

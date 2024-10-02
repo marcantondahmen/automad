@@ -7,6 +7,8 @@
 	"AM_CACHE_MONITOR_DELAY": 120,
 	
 	"AM_DEBUG_ENABLED": false,
+
+	"AM_DISK_QUOTA": 2048,
 	
 	"AM_FEED_ENABLED": true,
 	"AM_FEED_FIELDS": "+hero, +main",
