@@ -137,6 +137,7 @@ class Config {
 
 		// Packagist
 		self::set('AM_PACKAGE_REPO_QUERY', 'https://packagist.org/search.json?type=automad-package&per_page=100');
+		self::set('AM_PACKAGE_FILTER_REGEX', '.');
 
 		// I18n
 		self::set('AM_I18N_ENABLED', false);
