@@ -9,14 +9,15 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "clean": "rm -rf ./automad/dist/*/*",
     "build": "npm run clean && webpack --config webpack.config.js --mode production",
-    "dev": "npm run clean && webpack --config webpack.config.js --mode development",
     "bump-year": "bash bin/bump-year.sh",
-    "phpunit": "phpunit",
-    "psalm": "psalm --clear-global-cache && psalm",
+    "clean": "rm -rf ./automad/dist/*/*",
+    "dev": "npm run clean && webpack --config webpack.config.js --mode development",
+    "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket 2&>/dev/null",
     "jest": "jest",
     "jest:watch": "jest --watch",
+    "phpunit": "phpunit",
+    "psalm": "psalm --clear-global-cache && psalm",
     "test": "npm run phpunit && npm run psalm && jest"
   },
   "devDependencies": {
