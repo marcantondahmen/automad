@@ -87,6 +87,11 @@ export interface BindingOptions {
 
 export type CodeLanguage = (typeof supportedLanguages)[number];
 
+export interface DeduplicationSettings {
+	getFormData: (element: HTMLElement) => KeyValueMap;
+	enabled: boolean;
+}
+
 export interface Image {
 	name: string;
 	thumbnail: string;
