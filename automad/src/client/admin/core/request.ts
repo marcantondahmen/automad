@@ -333,12 +333,14 @@ class PendingRequests {
 	static remove() {
 		const spinner = query('am-spinner');
 
-		this.count--;
+		setTimeout(() => {
+			this.count--;
 
-		if (this.idle && spinner) {
-			spinner.remove();
-		}
+			if (this.idle && spinner) {
+				spinner.remove();
+			}
 
-		fire(this.EVENT_NAME);
+			fire(this.EVENT_NAME);
+		}, 0);
 	}
 }

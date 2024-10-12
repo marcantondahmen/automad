@@ -101,7 +101,6 @@ class Response {
 		Debug::log('Instanciated new Response instance');
 
 		$this->setCode(200);
-		$this->time = time();
 	}
 
 	/**
@@ -110,6 +109,13 @@ class Response {
 	 * @return string the json encoded array of response properties
 	 */
 	public function json(): string {
+		// Note that the response time should be set just before returning it
+		// since longer running requests involving file operations require the
+		// precise point in time at the moment of returning the response.
+		// This is particulary true for testing aginst the filemtime of page data
+		// files based on response times.
+		$this->time = time();
+
 		$properties = array_filter(get_object_vars($this));
 
 		return json_encode($properties, JSON_UNESCAPED_SLASHES);
