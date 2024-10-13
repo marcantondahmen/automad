@@ -1,8 +1,27 @@
 # Changelog
 
-## [v2.0.0-alpha.6](https://github.com/marcantondahmen/automad/commit/2f32588222c4829ca3fad8009d9093949f48360d)
+## [v2.0.0-alpha.7](https://github.com/marcantondahmen/automad/commit/5ecf43618492a8260e3f5e06dbbe513537a912cc)
 
-Sun, 15 Sep 2024 19:28:10 +0200
+Sun, 13 Oct 2024 20:51:29 +0200
+
+### New Features
+
+- add disk usage monitoring ([bd6495852](https://github.com/marcantondahmen/automad/commit/bd64958529e5fbb7251c7b77ff189310af9593bd))
+- add option to define a disk quota ([de39719aa](https://github.com/marcantondahmen/automad/commit/de39719aacb7e84e5ec6377e4cc37cf96b8c9838))
+- add option to filter the list of allowed packages ([b525156b2](https://github.com/marcantondahmen/automad/commit/b525156b2d49b327e70188ae1c6145904d57a7bc))
+- deduplicate form submissions ([a6ded4e63](https://github.com/marcantondahmen/automad/commit/a6ded4e639f1f0b6dddda26e172891e5ae84b0c6))
+- improve naming of resized images in cache ([075b45fec](https://github.com/marcantondahmen/automad/commit/075b45fec5a02cc56b1eb12964d8f9d6a591b095))
+
+### Bugfixes
+
+- **blocks**: fix pasting and merging blocks ([c811131f9](https://github.com/marcantondahmen/automad/commit/c811131f9da6edb333f51c3495f46829be044739))
+- **ui**: fix visibility of sidebar items on medium size devices ([de2e6fe40](https://github.com/marcantondahmen/automad/commit/de2e6fe402b2ce2801a2ba4bd632c38d16640fe7))
+- fix dashboard redirections when saving pages the are aliases for the home page ([4cb37fd55](https://github.com/marcantondahmen/automad/commit/4cb37fd55757558c8666eb2886e08952ed0e7c6a))
+- fix wrong file overwriting errors when editing page and shared data ([1e4903f09](https://github.com/marcantondahmen/automad/commit/1e4903f09af54c900f876da84a60d3bcca6a44eb))
+
+## [v2.0.0-alpha.6](https://github.com/marcantondahmen/automad/commit/6c607392b3fe02b202790bd496e109089525367b)
+
+Sun, 15 Sep 2024 19:37:00 +0200
 
 ### New Features
 
@@ -333,15 +352,3 @@ Thu, 12 Aug 2021 22:24:51 +0200
 
 - **ui**: fix typo in text modules ([ba8702a87](https://github.com/marcantondahmen/automad/commit/ba8702a87d26afd0172294d541c1573925f77f56))
 - **ui**: fix updating links that are wrapped in quotes ([4417468d6](https://github.com/marcantondahmen/automad/commit/4417468d659c1e71e9b76698e377a19a1e209b5a))
-
-## [v1.8.3](https://github.com/marcantondahmen/automad/commit/aa72e82f0192571f5ae1a8b032720fd9b3fb8645)
-
-Mon, 9 Aug 2021 23:21:36 +0200
-
-### New Features
-
-- **core**: use a shortened md5 hash as directory slug in case a sanitized title is too short ([d6d5e57cd](https://github.com/marcantondahmen/automad/commit/d6d5e57cd663bcf0eed7c8697b7b454fac1064fb))
-
-### Bugfixes
-
-- **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
