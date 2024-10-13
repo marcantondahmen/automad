@@ -70,4 +70,14 @@ export class NestedListBlock extends NestedList {
 			},
 		];
 	}
+
+	/**
+	 * Merge two lists.
+	 *
+	 * @param data
+	 */
+	merge(data: { items: any[] }) {
+		// @ts-ignore
+		this.appendItems(data.items, this.nodes.wrapper);
+	}
 }
