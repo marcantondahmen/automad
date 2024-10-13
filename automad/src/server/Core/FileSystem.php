@@ -39,6 +39,9 @@ namespace Automad\Core;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
 use Exception;
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -127,6 +130,37 @@ class FileSystem {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Check whether the disk quota is exeeded.
+	 *
+	 * @return bool
+	 */
+	public static function diskQuotaExceeded(): bool {
+		if (!AM_DISK_QUOTA) {
+			return false;
+		}
+
+		return (self::diskUsage() > AM_DISK_QUOTA);
+	}
+
+	/**
+	 * Get the disk usage of the installation in MB.
+	 *
+	 * @return float the disk usage in MB
+	 */
+	public static function diskUsage(): float {
+		$bytes = 0.0;
+		$objects = new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator(AM_BASE_DIR, FilesystemIterator::SKIP_DOTS)
+		);
+
+		foreach($objects as $object) {
+			$bytes += $object->getSize();
+		}
+
+		return round($bytes / (1024 * 1024), 2);
 	}
 
 	/**

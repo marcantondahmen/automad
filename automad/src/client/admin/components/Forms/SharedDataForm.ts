@@ -36,6 +36,7 @@ import {
 	App,
 	Attr,
 	Binding,
+	collectFieldData,
 	create,
 	createCustomizationFields,
 	createField,
@@ -48,6 +49,7 @@ import {
 	prepareFieldGroups,
 } from '@/admin/core';
 import {
+	DeduplicationSettings,
 	FieldSectionCollection,
 	FieldSectionName,
 	KeyValueMap,
@@ -80,6 +82,22 @@ const createBindings = (response: KeyValueMap): SharedBindings => {
  * @extends FormComponent
  */
 export class SharedDataFormComponent extends FormComponent {
+	/**
+	 * The deduplication settings for the form.
+	 */
+	protected get deduplicationSettings(): DeduplicationSettings {
+		return {
+			getFormData: (element) => {
+				const data = collectFieldData(element);
+
+				data.dataFetchTime = null;
+
+				return data;
+			},
+			enabled: true,
+		};
+	}
+
 	/**
 	 * The section collection object.
 	 */

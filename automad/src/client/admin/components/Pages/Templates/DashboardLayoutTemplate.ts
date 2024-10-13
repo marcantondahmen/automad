@@ -233,7 +233,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 					></am-nav-item>
 				</nav>
 				<am-nav-tree></am-nav-tree>
-				<div class="${CSS.nav} ${CSS.displaySmall}">
+				<div class="${CSS.nav} ${CSS.displayMedium}">
 					<span class="${CSS.navItem}">
 						<am-modal-toggle
 							class="${CSS.navLink}"

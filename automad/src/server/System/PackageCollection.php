@@ -62,6 +62,11 @@ class PackageCollection {
 	public static function get(): array {
 		$apiResponse = Fetch::get('https://api.packages.automad.org');
 		$packages = json_decode($apiResponse, true);
+		$packages = array_values(
+			array_filter($packages, function (array $package) {
+				return Package::isValidPackageName($package['name']);
+			})
+		);
 		$outdated = array();
 		$installed = array();
 

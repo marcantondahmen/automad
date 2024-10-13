@@ -517,7 +517,7 @@ class Page {
 		$newSlug = $draft[Fields::SLUG] ?? '';
 		$newPagePath = $this->path;
 
-		if ($this->url != '/') {
+		if ($this->origUrl != '/') {
 			$newSlug = Page::updateSlug(
 				$this->get(Fields::TITLE),
 				$title,

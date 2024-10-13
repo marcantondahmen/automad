@@ -35,10 +35,7 @@
 
 import { App, create, CSS, html, query } from '@/admin/core';
 import { HeaderBlockData } from '@/admin/types';
-import {
-	HTMLPasteEvent,
-	TunesMenuConfig,
-} from 'automad-editorjs/types/tools';
+import { HTMLPasteEvent, TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export class HeaderBlock extends BaseBlock<HeaderBlockData> {
@@ -176,12 +173,14 @@ export class HeaderBlock extends BaseBlock<HeaderBlockData> {
 	 * @param data
 	 */
 	merge(data: HeaderBlockData): void {
-		const newData = {
-			text: this.data.text + data.text,
-			level: this.data.level,
-		};
+		const div = query('[contenteditable]', this.wrapper);
+		const index = this.api.blocks.getBlockIndex(this.blockAPI.id);
 
-		this.data = newData;
+		div.innerHTML = `${div.innerHTML}${data.text}`;
+
+		setTimeout(() => {
+			this.api.caret.setToBlock(index, 'end');
+		}, 100);
 	}
 
 	/**

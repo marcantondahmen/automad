@@ -49,9 +49,12 @@ import {
 	query,
 	queryAll,
 	requestAPI,
-	create,
 } from '@/admin/core';
-import { InputElement, KeyValueMap } from '@/admin/types';
+import {
+	DeduplicationSettings,
+	InputElement,
+	KeyValueMap,
+} from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
@@ -99,6 +102,21 @@ export class FormComponent extends BaseComponent {
 	 * Additional data that can be added to the form data object.
 	 */
 	additionalData: KeyValueMap = {};
+
+	/**
+	 * Cache the last submitted form data in order to identify duplicate submissions.
+	 */
+	lastSubmittedFormData: KeyValueMap = {};
+
+	/**
+	 * The deduplication settings for the form.
+	 */
+	protected get deduplicationSettings(): DeduplicationSettings {
+		return {
+			getFormData: null,
+			enabled: false,
+		};
+	}
 
 	/**
 	 * Allow parallel requests.
@@ -236,6 +254,32 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
+	 * Optionally test for duplicate form submissions.
+	 *
+	 * @return boolean
+	 */
+	isDuplicateSubmission(): boolean {
+		if (!this.deduplicationSettings.enabled) {
+			return false;
+		}
+
+		const data = this.deduplicationSettings.getFormData(this);
+
+		if (
+			Object.keys(data).length &&
+			JSON.stringify(data) === JSON.stringify(this.lastSubmittedFormData)
+		) {
+			getLogger().log('Form data has not changed');
+
+			return true;
+		}
+
+		this.lastSubmittedFormData = data;
+
+		return false;
+	}
+
+	/**
 	 * Submit the form.
 	 *
 	 * @param skipConfirmOnInit
@@ -248,6 +292,10 @@ export class FormComponent extends BaseComponent {
 			if (!isConfirmed) {
 				return;
 			}
+		}
+
+		if (this.isDuplicateSubmission()) {
+			return;
 		}
 
 		const lockId = App.addNavigationLock();

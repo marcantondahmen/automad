@@ -55,7 +55,6 @@ $themes = array('light', 'dark', 'low-contrast');
 				<span class="am-c-navbar__group">
 					<span class="am-c-navbar__item" am-tooltip="A system update is available">
 						<i class="bi bi-download"></i>
-						<span class="am-e-badge"></span>
 					</span>
 					<span class="am-c-navbar__item" am-tooltip="Debugging is enabled"><i class="bi bi-bug"></i></span>
 					<span class="am-c-navbar__item"><i class="bi bi-three-dots"></i></span>

@@ -111,7 +111,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	}
 
 	/**
-	 * The content of the header.
+	 * The content of the paragraph.
 	 *
 	 * @return the innerHTML
 	 */
@@ -187,12 +187,14 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 * @param data
 	 */
 	merge(data: ParagraphBlockData): void {
-		const newData = {
-			text: this.data.text + data.text,
-			large: this.data.large,
-		};
+		const div = query('[contenteditable]', this.wrapper);
+		const index = this.api.blocks.getBlockIndex(this.blockAPI.id);
 
-		this.data = newData;
+		div.innerHTML = `${div.innerHTML}${data.text}`;
+
+		setTimeout(() => {
+			this.api.caret.setToBlock(index, 'end');
+		}, 100);
 	}
 
 	/**
@@ -216,6 +218,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 			large: false,
 		};
 
-		this.data = data;
+		const div = query('[contenteditable]', this.wrapper);
+		div.innerHTML = data.text;
 	}
 }

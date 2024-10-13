@@ -37,8 +37,10 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
+use Automad\Core\Text;
 use Automad\Models\File;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -78,6 +80,10 @@ class FileController {
 	public static function import(): Response {
 		$Response = new Response();
 		$Messenger = new Messenger();
+
+		if (FileSystem::diskQuotaExceeded()) {
+			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
+		}
 
 		File::import(
 			Request::post('importUrl'),

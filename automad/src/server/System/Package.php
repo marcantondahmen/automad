@@ -72,4 +72,14 @@ class Package {
 
 		return FileSystem::readJson($composerJsonPath);
 	}
+
+	/**
+	 * Check whether a package name matches the filter regex in the config.
+	 *
+	 * @param string $name
+	 * @return bool
+	 */
+	public static function isValidPackageName(string $name): bool {
+		return preg_match('#' . AM_PACKAGE_FILTER_REGEX . '#', $name) == 1;
+	}
 }

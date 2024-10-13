@@ -91,6 +91,10 @@ class PackageManagerController {
 			return $Response;
 		}
 
+		if (!Package::isValidPackageName($package)) {
+			return $Response;
+		}
+
 		$Composer = new Composer();
 
 		if ($error = $Composer->run('require --update-no-dev ' . $package)) {
@@ -134,6 +138,10 @@ class PackageManagerController {
 		$Response = new Response();
 
 		if ($package = Request::post('package')) {
+			if (!Package::isValidPackageName($package)) {
+				return $Response;
+			}
+
 			$Composer = new Composer();
 
 			if ($error = $Composer->run('update --with-dependencies --no-dev ' . $package)) {

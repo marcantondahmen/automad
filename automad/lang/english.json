@@ -82,6 +82,7 @@
 	"deteledSuccess": "Successfully removed",
 	"disable": "Disable",
 	"discardImageChanges": "Are you sure you want to close the editor without saving changes to the image?",
+	"diskQuotaExceeded": "The disk quota is exceeded. Please free up some space before adding new content.",
 	"documentation": "Documentation",
 	"downloadFile": "Download",
 	"dropFilesOrClick": "Drop files here or click to browse",

@@ -177,7 +177,6 @@ const admin = (env, argv) => {
 				proxy: 'http://127.0.0.1:8080/automad-development',
 				files: [
 					'**/*.php',
-					'./automad/src/client/admin/mockup/**/*.html',
 					'./automad/dist/blocks/main.bundle.*',
 					'./automad/dist/inpage/main.bundle.*',
 					'./automad/dist/prism/main.bundle.*',

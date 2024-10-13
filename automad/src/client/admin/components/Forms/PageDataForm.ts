@@ -33,6 +33,7 @@
  */
 
 import {
+	DeduplicationSettings,
 	FieldSectionCollection,
 	FieldSectionName,
 	KeyValueMap,
@@ -44,6 +45,7 @@ import {
 	App,
 	Attr,
 	Binding,
+	collectFieldData,
 	create,
 	createCustomizationFields,
 	createField,
@@ -95,6 +97,22 @@ const createBindings = (response: KeyValueMap): PageBindings => {
  * @extends FormComponent
  */
 export class PageDataFormComponent extends FormComponent {
+	/**
+	 * The deduplication settings for the form.
+	 */
+	protected get deduplicationSettings(): DeduplicationSettings {
+		return {
+			getFormData: (element) => {
+				const data = collectFieldData(element);
+
+				data.dataFetchTime = null;
+
+				return data;
+			},
+			enabled: true,
+		};
+	}
+
 	/**
 	 * The section collection object.
 	 */
