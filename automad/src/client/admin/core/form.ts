@@ -40,7 +40,6 @@ import {
 	listen,
 	query,
 	queryAll,
-	Section,
 	titleCase,
 } from '.';
 import {
