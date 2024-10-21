@@ -145,32 +145,32 @@ export const createCustomizationFields = (
 	};
 
 	createField(
-		FieldTag.input,
+		FieldTag.code,
+		sections.customize,
+		buildFieldProps('CUSTOM_HTML_HEAD', `${App.text('customHTML')} (Head)`)
+	);
+
+	createField(
+		FieldTag.code,
 		sections.customize,
 		buildFieldProps(
-			'CUSTOM_CSS_FILE',
-			App.text('customCSSFile'),
-			'/shared/custom.css'
+			'CUSTOM_HTML_BODY_END',
+			`${App.text('customHTML')} (Body End)`
 		)
 	);
 
 	createField(
-		FieldTag.input,
+		FieldTag.code,
 		sections.customize,
-		buildFieldProps(
-			'CUSTOM_JS_HEADER_FILE',
-			`${App.text('customJSFile')} (Header)`,
-			'/shared/header.js'
-		)
+		buildFieldProps('CUSTOM_JS_HEAD', `${App.text('customJS')} (Head)`)
 	);
 
 	createField(
-		FieldTag.input,
+		FieldTag.code,
 		sections.customize,
 		buildFieldProps(
-			'CUSTOM_JS_FOOTER_FILE',
-			`${App.text('customJSFile')} (Footer)`,
-			'/shared/footer.js'
+			'CUSTOM_JS_BODY_END',
+			`${App.text('customJS')} (Body End)`
 		)
 	);
 
@@ -178,18 +178,6 @@ export const createCustomizationFields = (
 		FieldTag.code,
 		sections.customize,
 		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
-	);
-
-	createField(
-		FieldTag.code,
-		sections.customize,
-		buildFieldProps('CUSTOM_JS_HEADER', `${App.text('customJS')} (Header)`)
-	);
-
-	createField(
-		FieldTag.code,
-		sections.customize,
-		buildFieldProps('CUSTOM_JS_FOOTER', `${App.text('customJS')} (Footer)`)
 	);
 };
 

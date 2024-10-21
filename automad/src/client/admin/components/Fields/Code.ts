@@ -61,6 +61,10 @@ export class CodeComponent extends BaseFieldComponent {
 	private getLanguageFromName = (name: string) => {
 		const sanitized = name.replace(/\W+/g, '');
 
+		if (sanitized.match(/html/i)) {
+			return 'html';
+		}
+
 		if (sanitized.match(/js/i)) {
 			return 'javascript';
 		}
