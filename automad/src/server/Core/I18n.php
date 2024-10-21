@@ -81,12 +81,15 @@ class I18n {
 			FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . '/*', GLOB_ONLYDIR)
 		);
 
+		$sessionLang = $_SESSION[Session::I18N_LANG] ?? '';
 		$serverLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 0, 2);
 		$urlLang = self::getLanguageFromUrl(AM_REQUEST);
 		$fallbacks = array_filter(array_merge(PageIndex::read('/'), $available));
 		$lang = substr($fallbacks[0] ?? 'en', 0, 2);
 
-		if (in_array($urlLang, $available)) {
+		if (AM_REQUEST == '/' && $sessionLang) {
+			$lang = $sessionLang;
+		} elseif (in_array($urlLang, $available)) {
 			$lang = $urlLang;
 		} elseif (in_array($serverLang, $available)) {
 			$lang = $serverLang;
@@ -94,6 +97,8 @@ class I18n {
 
 		$this->lang = $lang;
 		$this->available = $available;
+
+		$_SESSION[Session::I18N_LANG] = $lang;
 
 		Debug::log(array('lang' => $this->lang, 'available' => $this->available));
 	}

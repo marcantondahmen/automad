@@ -49,6 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Session {
 	const CSRF_TOKEN_KEY = 'csrf';
+	const I18N_LANG = 'lang';
 	const RESET_TOKEN_KEY = 'reset';
 	const USERNAME_KEY = 'username';
 

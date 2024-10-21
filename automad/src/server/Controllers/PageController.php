@@ -58,6 +58,7 @@ class PageController {
 	 */
 	public static function render(): string {
 		$Cache = new Cache();
+		$I18n = I18n::get();
 
 		if ($Cache->pageCacheIsApproved()) {
 			return $Cache->readPageFromCache();
@@ -65,7 +66,7 @@ class PageController {
 
 		$Automad = $Cache->getAutomad();
 
-		I18n::get()->apply($Automad);
+		$I18n->apply($Automad);
 
 		$View = new View($Automad);
 		$output = $View->render();
