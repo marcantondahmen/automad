@@ -141,34 +141,30 @@ export const createCustomizationFields = (
 		};
 	};
 
+	create('p', [], {}, sections.customize, App.text('customization'));
+
 	createField(
 		FieldTag.code,
 		sections.customize,
-		buildFieldProps('CUSTOM_HTML_HEAD', `${App.text('customHTML')} (Head)`)
+		buildFieldProps('CUSTOM_HTML_HEAD', App.text('customHTMLHead'))
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customize,
-		buildFieldProps(
-			'CUSTOM_HTML_BODY_END',
-			`${App.text('customHTML')} (Body End)`
-		)
+		buildFieldProps('CUSTOM_HTML_BODY_END', App.text('customHTMLBodyEnd'))
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customize,
-		buildFieldProps('CUSTOM_JS_HEAD', `${App.text('customJS')} (Head)`)
+		buildFieldProps('CUSTOM_JS_HEAD', App.text('customJSHead'))
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customize,
-		buildFieldProps(
-			'CUSTOM_JS_BODY_END',
-			`${App.text('customJS')} (Body End)`
-		)
+		buildFieldProps('CUSTOM_JS_BODY_END', App.text('customJSBodyEnd'))
 	);
 
 	createField(
