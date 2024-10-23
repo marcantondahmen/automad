@@ -126,21 +126,18 @@ export class FormDataProviders {
  */
 export const createCustomizationFields = (
 	fields: KeyValueMap,
-	sections: FieldSectionCollection
+	sections: FieldSectionCollection,
+	shared: KeyValueMap = {}
 ) => {
-	const buildFieldProps = (
-		field: string,
-		label: string | null = null,
-		placeholder: string | null = null
-	) => {
+	const buildFieldProps = (field: string, label: string) => {
 		const key = App.reservedFields[field];
 
 		return {
 			key,
 			label,
-			placeholder,
 			value: fields[key],
 			name: `data[${key}]`,
+			placeholder: shared[key] ?? '',
 		};
 	};
 
