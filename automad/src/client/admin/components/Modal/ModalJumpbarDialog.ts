@@ -308,9 +308,11 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 	 */
 	private itemHtml(icon: string, title: string, subtitle: string): string {
 		return html`
-			<i class="bi bi-${icon}"></i>
-			<span>$${title}</span>
-			<span class="${CSS.textMuted}">$${subtitle || ''}</span>
+			<span class="${CSS.iconText}">
+				<i class="bi bi-${icon}"></i>
+				<span>$${title}</span>
+				<span class="${CSS.textMuted}">$${subtitle || ''}</span>
+			</span>
 		`;
 	}
 

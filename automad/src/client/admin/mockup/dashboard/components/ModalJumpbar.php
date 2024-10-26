@@ -38,6 +38,13 @@
 					<span class="am-c-modal__jumpbar-link">
 						<span class="am-c-icon-text">
 							<i class="bi bi-file-text"></i>
+							<span>Page With an Exceptionally Very Very Long Title That is way too Long</span>
+							<span class="am-u-text-muted">/page-with-an-exceptionally-very-very-long-title</span>
+						</span>
+					</span>
+					<span class="am-c-modal__jumpbar-link">
+						<span class="am-c-icon-text">
+							<i class="bi bi-file-text"></i>
 							<span>Another Page</span>
 							<span class="am-u-text-muted">/another-page</span>
 						</span>
