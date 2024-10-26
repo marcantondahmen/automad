@@ -47,7 +47,7 @@ import { DragDrop } from '@/admin/editor/plugins/DragDrop';
 import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorOutputData, KeyValueMap } from '@/admin/types';
 import EditorJS, { EditorConfig, I18nDictionary } from 'automad-editorjs';
-import { App, CSS } from '@/admin/core';
+import { App, Attr, create, CSS } from '@/admin/core';
 import { Delimiter } from '@/admin/editor/blocks/Delimiter';
 import { ImageBlock } from '@/admin/editor/blocks/Image';
 import { NestedListBlock } from '@/admin/editor/blocks/NestedList';
@@ -117,6 +117,16 @@ export class EditorJSComponent extends BaseComponent {
 	): void {
 		this.style.position = 'relative';
 		this.classList.add(CSS.contents);
+
+		create(
+			'am-alert',
+			[CSS.displaySmall],
+			{
+				[Attr.icon]: 'window',
+				[Attr.text]: 'editorSmallDisplayAlert',
+			},
+			this
+		);
 
 		this.editor = new EditorJS(
 			Object.assign(
