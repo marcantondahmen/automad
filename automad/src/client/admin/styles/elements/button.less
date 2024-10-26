@@ -97,7 +97,7 @@
 		padding: 0;
 	}
 
-	&:focus:not(&--loading),
+	&:focus:not(&--loading):not([disabled]),
 	&.am-focus:not(&--loading) {
 		outline: @am-outline-active;
 		border: @am-button-border-width solid hsl(var(--am-clr-border-active));
