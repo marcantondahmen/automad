@@ -99,9 +99,9 @@ class PostProcessor {
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
-		$output = $this->addCustomizations($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
+		$output = $this->addCustomizations($output);
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
@@ -143,34 +143,29 @@ class PostProcessor {
 		$Page = $this->Automad->Context->get();
 
 		$css = $Page->get(Fields::CUSTOM_CSS);
-		$cssFile = $Page->get(Fields::CUSTOM_CSS_FILE);
-		$jsHeader = $Page->get(Fields::CUSTOM_JS_HEADER);
-		$jsHeaderFile = $Page->get(Fields::CUSTOM_JS_HEADER_FILE);
-		$jsFooter = $Page->get(Fields::CUSTOM_JS_FOOTER);
-		$jsFooterFile = $Page->get(Fields::CUSTOM_JS_FOOTER_FILE);
+		$htmlHead = $Page->get(Fields::CUSTOM_HTML_HEAD);
+		$htmlBodyEnd = $Page->get(Fields::CUSTOM_HTML_BODY_END);
+		$jsHead = $Page->get(Fields::CUSTOM_JS_HEAD);
+		$jsBodyEnd = $Page->get(Fields::CUSTOM_JS_BODY_END);
 
-		if ($cssFile) {
-			$str = Head::append($str, '<link href="' . $cssFile . '" rel="stylesheet" />');
+		if ($htmlHead) {
+			$str = Head::append($str, $htmlHead);
 		}
 
-		if ($jsHeaderFile) {
-			$str = Head::append($str, '<script src="' . $jsHeaderFile . '" type="text/javascript"></script>');
+		if ($htmlBodyEnd) {
+			$str = Body::append($str, $htmlBodyEnd);
 		}
 
-		if ($jsFooterFile) {
-			$str = Body::append($str, '<script src="' . $jsFooterFile . '" type="text/javascript"></script>');
+		if ($jsHead) {
+			$str = Head::append($str, "<script>$jsHead</script>");
+		}
+
+		if ($jsBodyEnd) {
+			$str = Body::append($str, "<script>$jsBodyEnd</script>");
 		}
 
 		if ($css) {
 			$str = Head::append($str, "<style>$css</style>");
-		}
-
-		if ($jsHeader) {
-			$str = Head::append($str, "<script>$jsHeader</script>");
-		}
-
-		if ($jsFooter) {
-			$str = Body::append($str, "<script>$jsFooter</script>");
 		}
 
 		return $str;

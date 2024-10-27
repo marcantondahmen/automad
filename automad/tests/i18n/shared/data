@@ -1,0 +1,10 @@
+{
+	"draft": [],
+	"published": {
+		"sitename": "I18n Test Site",
+		"theme": "theme",
+		"varSetInShared": "shared",
+		"varSetInLocalizedHome": "shared",
+		"var": "shared"
+    }
+}

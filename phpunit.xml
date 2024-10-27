@@ -1,10 +1,11 @@
-<phpunit bootstrap="automad/tests/bootstrap.php" colors="true">
+<phpunit bootstrap="automad/tests/bootstrap-main.php" colors="true">
 	<testsuites>
 		<testsuite name="Automad">
-			<directory suffix="Test.php">automad/tests</directory>
+			<directory suffix="Test.php">automad/tests/main/src</directory>
 		</testsuite>
 	</testsuites>
 	<php>
 		<server name="SERVER_NAME" value=""/>
 	</php>
 </phpunit>
+

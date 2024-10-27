@@ -56,11 +56,10 @@ class Fields {
 	const CURRENT_PAGE = ':current';
 	const CURRENT_PATH = ':currentPath';
 	const CUSTOM_CSS = 'customCSS';
-	const CUSTOM_CSS_FILE = 'customCSSFile';
-	const CUSTOM_JS_FOOTER = 'customJSFooter';
-	const CUSTOM_JS_FOOTER_FILE = 'customJSFooterFile';
-	const CUSTOM_JS_HEADER = 'customJSHeader';
-	const CUSTOM_JS_HEADER_FILE = 'customJSHeaderFile';
+	const CUSTOM_HTML_BODY_END = 'customHTMLBodyEnd';
+	const CUSTOM_HTML_HEAD = 'customHTMLHead';
+	const CUSTOM_JS_BODY_END = 'customJSBodyEnd';
+	const CUSTOM_JS_HEAD = 'customJSHead';
 	const DATE = 'date';
 	const FILE = ':file';
 	const FILE_RESIZED = ':fileResized';
@@ -103,11 +102,10 @@ class Fields {
 	 */
 	public static array $reserved = array(
 		'CUSTOM_CSS' => Fields::CUSTOM_CSS,
-		'CUSTOM_CSS_FILE' => Fields::CUSTOM_CSS_FILE,
-		'CUSTOM_JS_FOOTER' => Fields::CUSTOM_JS_FOOTER,
-		'CUSTOM_JS_FOOTER_FILE' => Fields::CUSTOM_JS_FOOTER_FILE,
-		'CUSTOM_JS_HEADER' => Fields::CUSTOM_JS_HEADER,
-		'CUSTOM_JS_HEADER_FILE' => Fields::CUSTOM_JS_HEADER_FILE,
+		'CUSTOM_HTML_BODY_END' => Fields::CUSTOM_HTML_BODY_END,
+		'CUSTOM_HTML_HEAD' => Fields::CUSTOM_HTML_HEAD,
+		'CUSTOM_JS_BODY_END' => Fields::CUSTOM_JS_BODY_END,
+		'CUSTOM_JS_HEAD' => Fields::CUSTOM_JS_HEAD,
 		'DATE' => Fields::DATE,
 		'HIDDEN' => Fields::HIDDEN,
 		'PRIVATE' => Fields::PRIVATE,

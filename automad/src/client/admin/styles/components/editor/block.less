@@ -55,6 +55,8 @@
 		padding: 0.2rem 0;
 		max-width: @am-bl-editor-block-max-width !important;
 		outline: 1px dashed transparent;
+		outline-offset: 1px;
+		border-radius: @am-nav-item-radius;
 		transition: outline 0.2s;
 
 		.am-style--stretched > & {
@@ -79,7 +81,7 @@
 	}
 
 	.am-ui &--drop-target > &__content {
-		outline-color: hsl(var(--am-clr-background-primary));
+		outline-color: hsl(var(--am-clr-text));
 	}
 
 	& [placeholder]:empty:before {

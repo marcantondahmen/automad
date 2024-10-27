@@ -43,6 +43,7 @@ import {
 	createImagePickerModal,
 	CSS,
 	FieldTag,
+	fire,
 	html,
 	listen,
 	resolveFileUrl,
@@ -175,6 +176,9 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 		listen(select, 'click', this.pickImage.bind(this));
 		listen(link, 'click', this.createLinkModal.bind(this));
+		listen(this.caption, 'input', () => {
+			fire('change', this.caption);
+		});
 
 		return this.wrapper;
 	}

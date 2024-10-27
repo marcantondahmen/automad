@@ -1,0 +1,12 @@
+{
+    "draft": [],
+    "published": {
+        "sitename": "My Test Site",
+        "theme": "automad/standard-v1/light",
+        "customHTMLHead": "<title>html head</title>",
+        "customHTMLBodyEnd": "<p>html body end</p>",
+        "customJSHead": "javascript head",
+        "customJSBodyEnd": "javascript body end",
+        "customCSS": "custom css"
+    }
+}

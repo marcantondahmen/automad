@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag, FormDataProviders } from '@/admin/core';
+import { create, CSS, FieldTag, FormDataProviders, html } from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
 import { UndoValue } from '@/admin/types';
 import { BaseFieldComponent } from './BaseField';
@@ -61,6 +61,10 @@ export class CodeComponent extends BaseFieldComponent {
 	private getLanguageFromName = (name: string) => {
 		const sanitized = name.replace(/\W+/g, '');
 
+		if (sanitized.match(/html/i)) {
+			return 'html';
+		}
+
 		if (sanitized.match(/js/i)) {
 			return 'javascript';
 		}
@@ -72,7 +76,7 @@ export class CodeComponent extends BaseFieldComponent {
 	 * Render the field.
 	 */
 	protected createInput(): void {
-		const { name, id, value } = this._data;
+		const { name, id, value, placeholder } = this._data;
 
 		this.setAttribute('name', name);
 		this.value = value as string;
@@ -81,7 +85,8 @@ export class CodeComponent extends BaseFieldComponent {
 			create('div', [CSS.codeflask], { id }, this),
 			value as string,
 			this.getLanguageFromName(name),
-			(code) => (this.value = code)
+			(code) => (this.value = code),
+			placeholder as string
 		);
 	}
 

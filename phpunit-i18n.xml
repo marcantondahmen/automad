@@ -1,0 +1,11 @@
+<phpunit bootstrap="automad/tests/bootstrap-i18n.php" colors="true">
+	<testsuites>
+		<testsuite name="Automad I18n">
+			<directory suffix="Test.php">automad/tests/i18n/src</directory>
+		</testsuite>
+	</testsuites>
+	<php>
+		<server name="SERVER_NAME" value=""/>
+	</php>
+</phpunit>
+

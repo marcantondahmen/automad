@@ -126,70 +126,51 @@ export class FormDataProviders {
  */
 export const createCustomizationFields = (
 	fields: KeyValueMap,
-	sections: FieldSectionCollection
+	sections: FieldSectionCollection,
+	shared: KeyValueMap = {}
 ) => {
-	const buildFieldProps = (
-		field: string,
-		label: string | null = null,
-		placeholder: string | null = null
-	) => {
+	const buildFieldProps = (field: string, label: string) => {
 		const key = App.reservedFields[field];
 
 		return {
 			key,
 			label,
-			placeholder,
 			value: fields[key],
 			name: `data[${key}]`,
+			placeholder: shared[key] ?? '',
 		};
 	};
 
+	create('p', [], {}, sections.customize, App.text('customization'));
+
 	createField(
-		FieldTag.input,
+		FieldTag.code,
 		sections.customize,
-		buildFieldProps(
-			'CUSTOM_CSS_FILE',
-			App.text('customCSSFile'),
-			'/shared/custom.css'
-		)
+		buildFieldProps('CUSTOM_HTML_HEAD', App.text('customHTMLHead'))
 	);
 
 	createField(
-		FieldTag.input,
+		FieldTag.code,
 		sections.customize,
-		buildFieldProps(
-			'CUSTOM_JS_HEADER_FILE',
-			`${App.text('customJSFile')} (Header)`,
-			'/shared/header.js'
-		)
+		buildFieldProps('CUSTOM_HTML_BODY_END', App.text('customHTMLBodyEnd'))
 	);
 
 	createField(
-		FieldTag.input,
+		FieldTag.code,
 		sections.customize,
-		buildFieldProps(
-			'CUSTOM_JS_FOOTER_FILE',
-			`${App.text('customJSFile')} (Footer)`,
-			'/shared/footer.js'
-		)
+		buildFieldProps('CUSTOM_JS_HEAD', App.text('customJSHead'))
+	);
+
+	createField(
+		FieldTag.code,
+		sections.customize,
+		buildFieldProps('CUSTOM_JS_BODY_END', App.text('customJSBodyEnd'))
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customize,
 		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
-	);
-
-	createField(
-		FieldTag.code,
-		sections.customize,
-		buildFieldProps('CUSTOM_JS_HEADER', `${App.text('customJS')} (Header)`)
-	);
-
-	createField(
-		FieldTag.code,
-		sections.customize,
-		buildFieldProps('CUSTOM_JS_FOOTER', `${App.text('customJS')} (Footer)`)
 	);
 };
 

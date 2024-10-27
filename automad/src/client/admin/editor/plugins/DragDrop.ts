@@ -197,6 +197,10 @@ export class DragDrop {
 			return;
 		}
 
+		if (DragDrop.CURRENT.block.holder.contains(DragDrop.TARGET)) {
+			return;
+		}
+
 		if (!DragDrop.TARGET || !DragDrop.CURRENT) {
 			return;
 		}

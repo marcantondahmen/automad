@@ -41,6 +41,7 @@ use Automad\Core\Cache;
 use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\Error;
+use Automad\Core\I18n;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
 use Automad\Core\Session;
@@ -79,6 +80,9 @@ class Shared {
 			$defaults,
 			$DataStore->getState(empty(Session::getUsername())) ?? array()
 		);
+
+		// Merge values of a localized home page into shared.
+		$this->getI18nOverrides();
 
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
@@ -175,5 +179,22 @@ class Shared {
 	 */
 	public function set(string $key, $value): void {
 		$this->data[$key] = $value;
+	}
+
+	/**
+	 * Merge data with values of a localized home page in case the language router is enabled.
+	 */
+	private function getI18nOverrides(): void {
+		if (!AM_I18N_ENABLED) {
+			return;
+		}
+
+		$I18n = I18n::get();
+		$lang = $I18n->getLanguage();
+
+		$DataStore = new DataStore("/$lang/");
+		$data = $DataStore->getState(empty(Session::getUsername())) ?? array();
+
+		$this->data = array_merge($this->data, $data);
 	}
 }

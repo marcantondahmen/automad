@@ -432,7 +432,7 @@ export class PageDataFormComponent extends FormComponent {
 			readme,
 		});
 
-		createCustomizationFields(fields, this.sections);
+		createCustomizationFields(fields, this.sections, shared);
 
 		Object.keys(this.sections).forEach((item: FieldSectionName) => {
 			fieldGroup({

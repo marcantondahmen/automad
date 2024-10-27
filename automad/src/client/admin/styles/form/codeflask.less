@@ -33,6 +33,7 @@
  */
 
 .am-f-codeflask {
+	@padding: 1rem;
 	position: relative;
 	overflow: hidden;
 	height: auto;
@@ -70,7 +71,8 @@
 
 		&__textarea,
 		&__pre {
-			padding: 1rem;
+			padding: @padding;
+			text-wrap: wrap;
 		}
 
 		&__textarea,
@@ -82,6 +84,26 @@
 
 		& ::selection {
 			background-color: hsla(var(--am-clr-text), 0.1);
+		}
+	}
+
+	&__placeholder.codeflask__pre {
+		position: absolute;
+		margin: 0;
+		padding: ~'calc(@{padding} + @{am-form-border-width})';
+		display: none;
+		inset: 0;
+		color: hsl(var(--am-clr-text-muted));
+		pointer-events: none;
+	}
+
+	@supports selector(:has(*)) {
+		&__placeholder.codeflask__pre {
+			display: block;
+		}
+
+		&:has(pre > code:not(:empty)) &__placeholder {
+			display: none;
 		}
 	}
 }

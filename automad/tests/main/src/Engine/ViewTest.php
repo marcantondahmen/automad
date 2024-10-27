@@ -14,6 +14,7 @@ class ViewTest extends TestCase {
 	public function dataForTestInPageRenderIsEqual() {
 		$data = array();
 		$assets = $this->getAssets();
+		$custom = $this->getCustomizations();
 		$pagesDir = AM_DIR_PAGES;
 		$csrf = Session::getCsrfToken();
 		$dock = <<< HTML
@@ -31,42 +32,42 @@ class ViewTest extends TestCase {
 			'email_01' => <<< HTML
 						<html>
 							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
-							{$assets->mailCSS}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<a href="#">test</a>
 								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
 								<a href="#">test</a>
-							{$assets->mailJS}$dock</body>
+							{$assets->mailJS}{$custom->bodyEnd}$dock</body>
 						</html>
 						HTML,
 			'email_02' => <<< HTML
 						<html>
 							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
-							{$assets->mailCSS}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
 									<span></span>
 									test<span class="am-at"></span>test<span class="am-dot"></span>com
 								</a>
-							{$assets->mailJS}$dock</body>
+							{$assets->mailJS}{$custom->bodyEnd}$dock</body>
 						</html>
 						HTML,
 			'resolve_01' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
-							$dock</body>
+							{$custom->bodyEnd}$dock</body>
 						</html>
 						HTML,
 			'resolve_02' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
-							$dock</body>
+							{$custom->bodyEnd}$dock</body>
 						</html>
 						HTML
 		);
@@ -84,6 +85,7 @@ class ViewTest extends TestCase {
 	public function dataForTestRenderIsEqual() {
 		$data = array();
 		$assets = $this->getAssets();
+		$custom = $this->getCustomizations();
 		$pagesDir = AM_DIR_PAGES;
 
 		$templates = array(
@@ -91,34 +93,34 @@ class ViewTest extends TestCase {
 			'email_01' => <<< HTML
 						<html>
 							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
-							{$assets->mailCSS}</head>
+							{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#">test</a>
 								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
 								<a href="#">test</a>
-							{$assets->mailJS}</body>
+							{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'email_02' => <<< HTML
 						<html>
 							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
-							{$assets->mailCSS}</head>
+							{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
 									<span></span>
 									test<span class="am-at"></span>test<span class="am-dot"></span>com
 								</a>
-							{$assets->mailJS}</body>
+							{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'extension_01' => 'Test',
 			'extension_02' => <<< HTML
 						<html>
 							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
-							{$assets->extensionCSS}{$assets->extensionJS}</head>
+							{$assets->extensionCSS}{$assets->extensionJS}{$custom->head}</head>
 							<body>
 								Asset Test
-							</body>
+							{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'falsy' => '0//false/0/1',
@@ -160,20 +162,20 @@ class ViewTest extends TestCase {
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'resolve_01' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}</head>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
-							</body>
+							{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'resolve_02' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}</head>
+							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
-							</body>
+							{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'session_get_01' => 'Session Test',
@@ -245,8 +247,15 @@ class ViewTest extends TestCase {
 			'mailCSS' => '<link href="' . $asset('/automad/dist/mail/main.bundle.css') . '" rel="stylesheet">',
 			'inPageJS' => '<script src="' . $asset('/automad/dist/inpage/main.bundle.js') . '" type="text/javascript"></script>',
 			'inPageCSS' => '<link href="' . $asset('/automad/dist/inpage/main.bundle.css') . '" rel="stylesheet">',
-			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/packages/vendor/extension/script.js') . '"></script>',
-			'extensionCSS' => '<link href="' . $asset('/automad/tests/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
+			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/main/packages/vendor/extension/script.js') . '"></script>',
+			'extensionCSS' => '<link href="' . $asset('/automad/tests/main/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
+		);
+	}
+
+	private function getCustomizations(): object {
+		return (object) array(
+			'head' => '<title>html head</title><script>javascript head</script><style>custom css</style>',
+			'bodyEnd' => '<p>html body end</p><script>javascript body end</script>'
 		);
 	}
 }

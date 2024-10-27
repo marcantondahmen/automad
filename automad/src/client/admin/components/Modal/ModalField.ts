@@ -101,7 +101,12 @@ export class ModalFieldComponent extends ModalComponent {
 			`
 		);
 
-		create('div', [CSS.modalFieldToggle], {}, this).innerHTML = '↗';
+		create(
+			'div',
+			[CSS.modalFieldToggle, CSS.displaySmallNone],
+			{},
+			this
+		).innerHTML = '↗';
 
 		listen(
 			this,

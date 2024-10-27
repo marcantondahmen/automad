@@ -82,6 +82,7 @@ export const enum CSS {
 	checkbox = 'am-f-checkbox',
 
 	codeflask = 'am-f-codeflask',
+	codeflaskPlaceholder = 'am-f-codeflask__placeholder',
 
 	contents = 'am-e-contents',
 

@@ -34,7 +34,7 @@
 
 import { CodeLanguage } from '@/admin/types';
 import CodeFlask from 'codeflask';
-import { debounce, getLogger } from '@/admin/core';
+import { create, CSS, debounce, getLogger, html } from '@/admin/core';
 import { Prism, Languages } from '@/prism/prism';
 
 /**
@@ -55,12 +55,14 @@ export class CodeEditor {
 	 * @param code
 	 * @param language
 	 * @param onChange
+	 * @param placeholder
 	 */
 	constructor(
 		element: HTMLElement,
 		code: string,
 		language: CodeLanguage,
-		onChange: (code: string) => void = () => {}
+		onChange: (code: string) => void = () => {},
+		placeholder: string = ''
 	) {
 		element.innerHTML = '';
 
@@ -73,6 +75,14 @@ export class CodeEditor {
 			tabSize: 2,
 			language,
 		});
+
+		create(
+			'pre',
+			[CSS.codeflaskPlaceholder, 'codeflask__pre'],
+			{},
+			element,
+			html`$${placeholder}`
+		);
 
 		this.codeFlask.addLanguage(
 			language,
