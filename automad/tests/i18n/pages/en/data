@@ -1,0 +1,12 @@
+{
+	"published": {
+		"title": "en",
+		"template": "page",
+		"varSetInLocalizedHome": "en/home",
+		"var": "en/home",
+		":created": "2023-02-17T10:36:01+00:00",
+		":lastModified": "2024-02-19T15:59:38+00:00",
+		":lastPublished": "2024-02-19T16:01:31+00:00"
+	},
+	"draft": []
+}

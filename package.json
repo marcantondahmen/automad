@@ -16,9 +16,9 @@
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket 2&>/dev/null",
     "jest": "jest",
     "jest:watch": "jest --watch",
-    "phpunit": "phpunit",
+    "phpunit": "phpunit && phpunit -c phpunit-i18n.xml",
     "psalm": "psalm --clear-global-cache && psalm",
-    "test": "npm run phpunit && npm run psalm && jest"
+    "test": "npm run phpunit && npm run psalm && npm run jest"
   },
   "devDependencies": {
     "@editorjs/embed": "^2.6.0",
