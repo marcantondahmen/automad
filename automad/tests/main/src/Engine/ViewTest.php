@@ -247,8 +247,8 @@ class ViewTest extends TestCase {
 			'mailCSS' => '<link href="' . $asset('/automad/dist/mail/main.bundle.css') . '" rel="stylesheet">',
 			'inPageJS' => '<script src="' . $asset('/automad/dist/inpage/main.bundle.js') . '" type="text/javascript"></script>',
 			'inPageCSS' => '<link href="' . $asset('/automad/dist/inpage/main.bundle.css') . '" rel="stylesheet">',
-			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/packages/vendor/extension/script.js') . '"></script>',
-			'extensionCSS' => '<link href="' . $asset('/automad/tests/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
+			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/main/packages/vendor/extension/script.js') . '"></script>',
+			'extensionCSS' => '<link href="' . $asset('/automad/tests/main/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
 		);
 	}
 
