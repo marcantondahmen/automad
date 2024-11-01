@@ -84,7 +84,7 @@ export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 	 */
 	protected sanitize(data: SpacingTuneData): SpacingTuneData {
 		const sanitize = (str: string) => {
-			return str.replace(/[^\w_\.]+/g, '').trim();
+			return str.replace(/[^\w_\.\%]+/g, '').trim();
 		};
 
 		return {
