@@ -65,6 +65,18 @@ class Routes {
 	public static array $registered = array();
 
 	/**
+	 * Public API routes.
+	 */
+	private static array $publicAPIRoutes =array(
+		'public/.*',
+		'session/login',
+		'session/validate',
+		'app/bootstrap',
+		'user/reset-password',
+		'user-collection/create-first-user'
+	);
+
+	/**
 	 * Register routes to a giver Router.
 	 *
 	 * @param Router $Router
@@ -109,7 +121,7 @@ class Routes {
 		);
 
 		$Router->register(
-			"$apiBase/(session/login|session/validate|app/bootstrap|user/reset-password|user-collection/create-first-user)",
+			"$apiBase/(" . join('|', self::$publicAPIRoutes) . ')',
 			function () {
 				return RequestHandler::getResponse();
 			},
