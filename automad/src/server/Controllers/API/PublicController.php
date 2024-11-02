@@ -40,6 +40,7 @@ use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Parse;
 use Automad\Core\Request;
+use Automad\Core\Resolve;
 use Automad\Models\Page;
 use Automad\Models\Pagelist;
 use Automad\System\Fields;
@@ -76,7 +77,7 @@ class PublicController {
 		$config = array_intersect_key($_GET, $Pagelist->getDefaults());
 		$Pagelist->config($config);
 
-		$pages = !empty($fields) ? array_map(
+		$items = !empty($fields) ? array_map(
 			function (Page $Page) use ($fields) {
 				$content = array();
 
@@ -89,6 +90,12 @@ class PublicController {
 			$Pagelist->getPages()
 		) : $Pagelist->getPages();
 
-		return $Response->setData($pages);
+		$items = array_map(function ($item) {
+			$item[Fields::URL] = Resolve::absoluteUrlToRoot($item[Fields::URL]);
+
+			return $item;
+		}, $items);
+
+		return $Response->setData($items);
 	}
 }
