@@ -66,6 +66,7 @@ export const enum FieldTag {
 	markdown = 'am-markdown-field',
 	number = 'am-number-field',
 	numberUnit = 'am-number-unit-field',
+	select = 'am-select-field',
 	pageTags = 'am-page-tags-field',
 	pageTemplate = 'am-page-template-field',
 	password = 'am-password-field',
@@ -192,8 +193,9 @@ export const createIdFromField = (key: string): string => {
  */
 export const createLabelFromField = (key: string): string => {
 	return titleCase(key.replace('+', ''))
-		.replace('Color ', '')
-		.replace('Checkbox ', '');
+		.replace(/^Color /, '')
+		.replace(/^Checkbox /, '')
+		.replace(/^Select /, '');
 };
 
 /**
@@ -205,6 +207,7 @@ export const fieldGroup = ({
 	section,
 	fields,
 	tooltips,
+	themeOptions,
 	shared,
 }: FieldGroupData): void => {
 	if (Object.values(fields).length == 0) {
@@ -252,6 +255,7 @@ export const fieldGroup = ({
 				key: name,
 				value: fields[name],
 				tooltip: tooltips[name],
+				options: themeOptions[name] ?? null,
 				name: `data[${name}]`,
 				placeholder,
 			},
@@ -307,6 +311,7 @@ export const getPrefixMap = (hasSharedDefaults: boolean) => {
 		date: FieldTag.date,
 		text: FieldTag.markdown,
 		image: FieldTag.image,
+		select: FieldTag.select,
 		url: FieldTag.url,
 	} as const;
 };

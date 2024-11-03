@@ -190,6 +190,7 @@ export class SharedDataFormComponent extends FormComponent {
 		const themeKey = App.reservedFields.THEME;
 		const mainTheme = fields[themeKey] || Object.keys(App.themes)[0];
 		const tooltips = App.themes[mainTheme]?.tooltips ?? {};
+		const themeOptions = App.themes[mainTheme]?.options ?? {};
 		const fieldGroups = prepareFieldGroups(fields);
 
 		create(
@@ -243,6 +244,7 @@ export class SharedDataFormComponent extends FormComponent {
 				section: this.sections[item],
 				fields: fieldGroups[item],
 				tooltips,
+				themeOptions,
 			});
 		});
 	}

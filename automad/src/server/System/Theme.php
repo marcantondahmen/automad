@@ -77,6 +77,11 @@ class Theme {
 	public string $name;
 
 	/**
+	 * The options array.
+	 */
+	public array $options = array();
+
+	/**
 	 * The theme path.
 	 */
 	public string $path;
@@ -120,6 +125,7 @@ class Theme {
 			'license' => false,
 			'masks' => array(),
 			'tooltips' => array(),
+			'options' => array(),
 			'readme' => ''
 		);
 
@@ -168,6 +174,7 @@ class Theme {
 		$this->readme = $data['readme'];
 		$this->templates = $templates;
 		$this->tooltips = $data['tooltips'];
+		$this->options = $data['options'];
 		$this->version = $data['version'];
 	}
 

@@ -39,6 +39,7 @@ import {
 	KeyValueMap,
 	PageBindings,
 	PageMainSettingsData,
+	Theme,
 } from '@/admin/types';
 import { FormComponent } from './Form';
 import {
@@ -414,13 +415,18 @@ export class PageDataFormComponent extends FormComponent {
 
 		setDocumentTitle(fields.title);
 
+		let theme: Theme | null = null;
 		let tooltips = {};
+		let themeOptions = {};
 
 		if (fields[themeKey]) {
-			tooltips = themes[fields[themeKey]]?.tooltips || {};
+			theme = themes[fields[themeKey]];
 		} else {
-			tooltips = themes[shared[themeKey]]?.tooltips || {};
+			theme = themes[shared[themeKey]];
 		}
+
+		tooltips = theme?.tooltips ?? {};
+		themeOptions = theme?.options ?? {};
 
 		const fieldGroups = prepareFieldGroups(fields);
 
@@ -439,6 +445,7 @@ export class PageDataFormComponent extends FormComponent {
 				section: this.sections[item],
 				fields: fieldGroups[item],
 				tooltips,
+				themeOptions,
 				shared,
 			});
 		});
