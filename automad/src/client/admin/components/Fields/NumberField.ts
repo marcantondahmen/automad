@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -32,37 +32,22 @@
  * Licensed under the MIT license.
  */
 
-@media (max-width: @am-breakpoint-small-max) {
-	am-editor-js .codex-editor {
-		display: none;
+import { create, CSS, FieldTag } from '@/admin/core';
+import { BaseFieldComponent } from './BaseField';
+
+/**
+ * A number input field with a label.
+ *
+ * @extends BaseFieldComponent
+ */
+class NumberFieldComponent extends BaseFieldComponent {
+	/**
+	 * Create an input field.
+	 */
+	protected createInput(): void {
+		const { name, id, value } = this._data;
+		create('input', [CSS.input], { type: 'number', id, name, value }, this);
 	}
 }
 
-.codex-editor {
-	z-index: initial !important;
-	padding: 12px 10px;
-	border: @am-border;
-	--space-left: ~'calc(0.5rem + @{am-bl-editor-toolbar-icons-width})';
-
-	& & {
-		padding: 0;
-		--space-left: 0;
-	}
-
-	[class$='-inpage'] & {
-		border: none;
-	}
-
-	am-editor-field > div > am-editor-js > & {
-		border: @am-form-border;
-		border-radius: @am-bl-editor-radius;
-	}
-
-	& &__redactor {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 4px;
-		margin: 0 !important;
-		padding-left: var(--space-left);
-	}
-}
+customElements.define(FieldTag.number, NumberFieldComponent);

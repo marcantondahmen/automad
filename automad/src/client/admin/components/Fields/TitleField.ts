@@ -36,30 +36,23 @@ import { create, CSS, FieldTag } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
- * A standard input field with a label.
+ * A title field.
  *
  * @extends BaseFieldComponent
  */
-export class InputComponent extends BaseFieldComponent {
+class TitleFieldComponent extends BaseFieldComponent {
 	/**
-	 * The input type.
+	 * Render the field.
 	 */
-	protected get inputType(): string {
-		return 'text';
-	}
-
-	/**
-	 * Create an input field.
-	 */
-	protected createInput(): void {
-		const { name, id, value, placeholder } = this._data;
+	createInput(): void {
+		const { name, id, value } = this._data;
 		create(
 			'input',
-			[CSS.input],
-			{ id, name, value, type: this.inputType, placeholder },
+			[CSS.input, CSS.inputTitle],
+			{ id, name, value, type: 'text' },
 			this
 		);
 	}
 }
 
-customElements.define(FieldTag.input, InputComponent);
+customElements.define(FieldTag.title, TitleFieldComponent);

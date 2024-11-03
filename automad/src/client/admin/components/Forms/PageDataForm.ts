@@ -63,7 +63,7 @@ import {
 	prepareFieldGroups,
 	setDocumentTitle,
 } from '@/admin/core';
-import { PageTemplateComponent } from '@/admin/components/Fields/PageTemplate';
+import { PageTemplateFieldComponent } from '@/admin/components/Fields/PageTemplateField';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
 
 /**
@@ -251,11 +251,11 @@ export class PageDataFormComponent extends FormComponent {
 		);
 
 		const templateField = create(
-			'am-page-template',
+			FieldTag.pageTemplate,
 			[],
 			{},
 			section
-		) as PageTemplateComponent;
+		) as PageTemplateFieldComponent;
 
 		templateField.data = {
 			fields,

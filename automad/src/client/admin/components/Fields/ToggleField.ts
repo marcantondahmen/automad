@@ -32,43 +32,64 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag, fire, listen } from '@/admin/core';
+import { create, CSS, FieldTag, html } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
- * A color field.
+ * A checkbox field.
  *
  * @extends BaseFieldComponent
  */
-export class ColorComponent extends BaseFieldComponent {
+export class ToggleFieldComponent extends BaseFieldComponent {
 	/**
-	 * Create an input field.
+	 * Checkbox styles.
+	 */
+	protected classes = [CSS.toggle, CSS.toggleButton];
+
+	/**
+	 * Render the input field.
 	 */
 	createInput(): void {
-		const { name, id, value } = this._data;
-		const combo = create('div', [CSS.inputCombo], {}, this);
-		const input = create(
-			'input',
-			[CSS.input, CSS.textMono],
-			{ id, name, value, type: 'text' },
-			combo
-		);
-		const picker = create(
-			'input',
-			[],
-			{ type: 'color', value },
-			create('span', [CSS.inputComboColor], {}, combo)
-		);
+		const { name, id, value, label } = this._data;
 
-		listen(picker, 'change', () => {
-			input.value = picker.value;
-			fire('change', input);
-		});
+		create(
+			'div',
+			this.classes,
+			{},
+			this,
+			html`
+				<input
+					type="checkbox"
+					name="${name}"
+					id="${id}"
+					value="1"
+					${value ? 'checked' : ''}
+				/>
+				<label for="${id}">
+					<i class="bi"></i>
+					<span>${label}</span>
+				</label>
+			`
+		);
+	}
 
-		listen(input, 'keyup change', () => {
-			picker.value = input.value;
-		});
+	/**
+	 * Query the current field value.
+	 *
+	 * @return the current value
+	 */
+	query() {
+		return (this.input as HTMLInputElement).checked;
+	}
+
+	/**
+	 * A function that can be used to mutate the field value.
+	 *
+	 * @param value
+	 */
+	mutate(value: any): void {
+		(this.input as HTMLInputElement).checked = value;
 	}
 }
 
-customElements.define(FieldTag.color, ColorComponent);
+customElements.define(FieldTag.toggle, ToggleFieldComponent);

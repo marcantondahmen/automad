@@ -47,7 +47,7 @@ import { BaseFieldComponent } from './BaseField';
  *
  * @extends BaseFieldComponent
  */
-class TextareaComponent extends BaseFieldComponent {
+class TextareaFieldComponent extends BaseFieldComponent {
 	/**
 	 * Create an input field.
 	 */
@@ -104,4 +104,4 @@ class TextareaComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define(FieldTag.textarea, TextareaComponent);
+customElements.define(FieldTag.textarea, TextareaFieldComponent);

@@ -563,7 +563,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		field(FieldTag.color, 'borderColor', 'borderColor', group3);
 
-		field(FieldTag.imageSelect, 'backgroundImage', 'backgroundImage', body);
+		field(FieldTag.image, 'backgroundImage', 'backgroundImage', body);
 
 		const blendModeId = uniqueId();
 		const blendMode = create(

@@ -26,27 +26,33 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { FieldTag } from '@/admin/core';
-import { InputComponent } from './Input';
+import { create, FieldTag } from '@/admin/core';
+import { BaseFieldComponent } from './BaseField';
 
 /**
- * A password field with a label.
+ * A number/unit input field with a label.
  *
- * @extends InputComponent
+ * @extends BaseFieldComponent
  */
-export class PasswordComponent extends InputComponent {
+class NumberUnitFieldComponent extends BaseFieldComponent {
 	/**
-	 * The input type.
+	 * Don't link the label.
 	 */
-	protected get inputType(): string {
-		return 'password';
+	protected linkLabel = false;
+
+	/**
+	 * Create an input field.
+	 */
+	protected createInput(): void {
+		const { name, id, value } = this._data;
+		create('am-number-unit-input', [], { id, name, value }, this);
 	}
 }
 
-customElements.define(FieldTag.password, PasswordComponent);
+customElements.define(FieldTag.numberUnit, NumberUnitFieldComponent);

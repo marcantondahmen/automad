@@ -125,4 +125,7 @@ class NumberUnitInputComponent extends BaseComponent {
 }
 
 FormDataProviders.add(NumberUnitInputComponent.TAG_NAME);
-customElements.define('am-number-unit-input', NumberUnitInputComponent);
+customElements.define(
+	NumberUnitInputComponent.TAG_NAME,
+	NumberUnitInputComponent
+);

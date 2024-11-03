@@ -53,7 +53,7 @@ import { BaseFieldComponent } from './BaseField';
  *
  * @extends BaseFieldComponent
  */
-class ImageSelectComponent extends BaseFieldComponent {
+class ImageFieldComponent extends BaseFieldComponent {
 	/**
 	 * Create an input field.
 	 */
@@ -145,4 +145,4 @@ class ImageSelectComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define(FieldTag.imageSelect, ImageSelectComponent);
+customElements.define(FieldTag.image, ImageFieldComponent);

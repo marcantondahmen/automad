@@ -33,7 +33,7 @@
  */
 
 import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
-import { ToggleComponent } from '@/admin/components/Fields/Toggle';
+import { ToggleFieldComponent } from '@/admin/components/Fields/ToggleField';
 import {
 	App,
 	create,
@@ -99,7 +99,7 @@ export class LinkInline extends BaseInline {
 	/**
 	 * The toggle component.
 	 */
-	private targetToggle: ToggleComponent;
+	private targetToggle: ToggleFieldComponent;
 
 	/**
 	 * The chanhe listener.
@@ -134,7 +134,7 @@ export class LinkInline extends BaseInline {
 			value: false,
 			name: 'target',
 			label: App.text('openInNewTab'),
-		}) as ToggleComponent;
+		}) as ToggleFieldComponent;
 
 		return this.wrapper;
 	}

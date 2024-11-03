@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, create, createSelect, CSS, FieldTag, Route } from '@/admin/core';
+import {
+	App,
+	Attr,
+	create,
+	createSelect,
+	CSS,
+	FieldTag,
+	Route,
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 import { SelectComponentOption, Theme } from '@/admin/types';
 
@@ -41,7 +49,7 @@ import { SelectComponentOption, Theme } from '@/admin/types';
  *
  * @extends BaseFieldComponent
  */
-export class MainThemeComponent extends BaseFieldComponent {
+class MainThemeFieldComponent extends BaseFieldComponent {
 	/**
 	 * Create the actual input field.
 	 */
@@ -100,4 +108,4 @@ export class MainThemeComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define(FieldTag.mainTheme, MainThemeComponent);
+customElements.define(FieldTag.mainTheme, MainThemeFieldComponent);

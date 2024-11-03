@@ -32,24 +32,56 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, FieldTag } from '@/admin/core';
-import { ToggleComponent } from './Toggle';
+import {
+	CSS,
+	create,
+	listen,
+	Binding,
+	createLinkModal,
+	FieldTag,
+} from '@/admin/core';
+import { BaseFieldComponent } from './BaseField';
 
 /**
- * A large checkbox field.
+ * An URL field.
  *
- * @extends ToggleComponent
+ * @extends BaseFieldComponent
  */
-class ToggleLargeComponent extends ToggleComponent {
+class UrlFieldComponent extends BaseFieldComponent {
 	/**
-	 * Checkbox styles.
+	 * Create an input field.
 	 */
-	protected classes = [CSS.toggle, CSS.toggleLarge];
+	protected createInput(): void {
+		const { name, id, value, placeholder, label } = this._data;
+		const combo = create('div', [CSS.inputCombo], {}, this);
+		const bindingName = `urlComponent_${id}`;
+		const input = create(
+			'input',
+			[CSS.input],
+			{
+				id,
+				name,
+				value,
+				type: 'text',
+				placeholder,
+			},
+			combo
+		);
 
-	/**
-	 * Remove label fpr large checkboxes.
-	 */
-	protected createLabel(): void {}
+		const button = create(
+			'span',
+			[CSS.inputComboButton],
+			{},
+			combo,
+			'<i class="bi bi-link"></i>'
+		);
+
+		new Binding(bindingName, { input });
+
+		listen(button, 'click', () => {
+			createLinkModal(bindingName, label);
+		});
+	}
 }
 
-customElements.define(FieldTag.toggleLarge, ToggleLargeComponent);
+customElements.define(FieldTag.url, UrlFieldComponent);

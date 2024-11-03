@@ -32,56 +32,21 @@
  * Licensed under the MIT license.
  */
 
-import {
-	CSS,
-	create,
-	listen,
-	Binding,
-	createLinkModal,
-	FieldTag,
-} from '@/admin/core';
-import { BaseFieldComponent } from './BaseField';
+import { FieldTag } from '@/admin/core';
+import { InputFieldComponent } from './InputField';
 
 /**
- * An URL field.
+ * A email field with a label.
  *
- * @extends BaseFieldComponent
+ * @extends InputFieldComponent
  */
-class URLComponent extends BaseFieldComponent {
+class EmailFieldComponent extends InputFieldComponent {
 	/**
-	 * Create an input field.
+	 * The input type.
 	 */
-	protected createInput(): void {
-		const { name, id, value, placeholder, label } = this._data;
-		const combo = create('div', [CSS.inputCombo], {}, this);
-		const bindingName = `urlComponent_${id}`;
-		const input = create(
-			'input',
-			[CSS.input],
-			{
-				id,
-				name,
-				value,
-				type: 'text',
-				placeholder,
-			},
-			combo
-		);
-
-		const button = create(
-			'span',
-			[CSS.inputComboButton],
-			{},
-			combo,
-			'<i class="bi bi-link"></i>'
-		);
-
-		new Binding(bindingName, { input });
-
-		listen(button, 'click', () => {
-			createLinkModal(bindingName, label);
-		});
+	protected get inputType(): string {
+		return 'email';
 	}
 }
 
-customElements.define(FieldTag.url, URLComponent);
+customElements.define(FieldTag.email, EmailFieldComponent);

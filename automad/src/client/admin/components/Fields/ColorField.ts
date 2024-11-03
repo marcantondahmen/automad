@@ -32,27 +32,43 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag } from '@/admin/core';
+import { create, CSS, FieldTag, fire, listen } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
- * An URL field.
+ * A color field.
  *
  * @extends BaseFieldComponent
  */
-class TitleComponent extends BaseFieldComponent {
+export class ColorFieldComponent extends BaseFieldComponent {
 	/**
-	 * Render the field.
+	 * Create an input field.
 	 */
 	createInput(): void {
 		const { name, id, value } = this._data;
-		create(
+		const combo = create('div', [CSS.inputCombo], {}, this);
+		const input = create(
 			'input',
-			[CSS.input, CSS.inputTitle],
+			[CSS.input, CSS.textMono],
 			{ id, name, value, type: 'text' },
-			this
+			combo
 		);
+		const picker = create(
+			'input',
+			[],
+			{ type: 'color', value },
+			create('span', [CSS.inputComboColor], {}, combo)
+		);
+
+		listen(picker, 'change', () => {
+			input.value = picker.value;
+			fire('change', input);
+		});
+
+		listen(input, 'keyup change', () => {
+			picker.value = input.value;
+		});
 	}
 }
 
-customElements.define(FieldTag.title, TitleComponent);
+customElements.define(FieldTag.color, ColorFieldComponent);
