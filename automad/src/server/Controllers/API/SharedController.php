@@ -87,10 +87,17 @@ class SharedController {
 		$Theme = $ThemeCollection->getThemeByKey($mainThemeName);
 		$keys = isset($Theme) ? Fields::inTheme($Theme) : array();
 
-		$fields = array_merge(
+		$supportedFields = array_merge(
 			array_fill_keys(Fields::$reserved, ''),
 			array_fill_keys($keys, ''),
-			$Shared->data
+		);
+
+		$fields = array_intersect_key(
+			array_merge(
+				$supportedFields,
+				$Shared->data
+			),
+			$supportedFields
 		);
 
 		ksort($fields);

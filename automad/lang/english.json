@@ -456,6 +456,7 @@
 	"textSpacings": "Text spacings",
 	"textTool": "Text",
 	"themeReadme": "Open readme file of current theme",
+	"themePurgeUnusedInfo": "Please note that content that is no longer used when changing to another theme will be purged on selection.",
 	"toBeUploaded": "to be uploaded",
 	"toggleRatioLockTitle": "Toggle aspect ratio lock",
 	"trashClear": "Clear",
