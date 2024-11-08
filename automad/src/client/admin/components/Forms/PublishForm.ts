@@ -165,7 +165,7 @@ export class PublishFormComponent extends BaseComponent {
 
 		this.discardButton = create(
 			'am-submit',
-			[CSS.navbarItem, CSS.navbarItemGlyph],
+			[CSS.navbarItem, CSS.navbarItemGlyph, CSS.textMuted],
 			{ disabled: '', [Attr.tooltip]: App.text('discardDraftTooltip') },
 			discardForm,
 			'↺'
@@ -247,7 +247,10 @@ export class PublishFormComponent extends BaseComponent {
 			return;
 		}
 
-		enable(this.discardButton);
+		if (data.lastPublished) {
+			enable(this.discardButton);
+		}
+
 		enable(this.publishButton);
 	}
 }

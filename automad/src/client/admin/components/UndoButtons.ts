@@ -90,10 +90,12 @@ class UndoButtonsComponent extends BaseComponent {
 
 		if (undo == 0) {
 			undoButton.classList.add(CSS.textMuted);
+			undoButton.setAttribute('disabled', '');
 		}
 
 		if (redo == 0) {
 			redoButton.classList.add(CSS.textMuted);
+			redoButton.setAttribute('disabled', '');
 		}
 
 		listen(undoButton, 'click', Undo.undoHandler);
