@@ -99,6 +99,7 @@ export const enum PageController {
 	move = 'PageController::move',
 	publish = 'PageController::publish',
 	getPublicationState = 'PageController::getPublicationState',
+	discardDraft = 'PageController::discardDraft',
 	updateIndex = 'PageController::updateIndex',
 }
 
@@ -127,6 +128,7 @@ export const enum SharedController {
 	data = 'SharedController::data',
 	publish = 'SharedController::publish',
 	getPublicationState = 'SharedController::getPublicationState',
+	discardDraft = 'SharedController::discardDraft',
 }
 
 export const enum SystemController {

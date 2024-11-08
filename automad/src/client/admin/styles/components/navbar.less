@@ -73,14 +73,6 @@
 			}
 		}
 
-		& am-submit.am-e-button {
-			font-size: 1rem;
-
-			&:not([disabled]) {
-				border-color: hsl(var(--am-clr-border-active));
-			}
-		}
-
 		&&--glyph {
 			font-size: 1.425rem;
 			font-weight: 430;
@@ -88,6 +80,15 @@
 
 		& am-logo {
 			height: 100%;
+		}
+	}
+
+	& .am-e-button {
+		margin: 0 @am-navbar-item-padding-x;
+		font-size: 1rem;
+
+		&:not([disabled]) {
+			border-color: hsl(var(--am-clr-border-active));
 		}
 	}
 }

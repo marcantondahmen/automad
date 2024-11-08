@@ -83,6 +83,8 @@
 	"delimiter": "Delimiter",
 	"deteledSuccess": "Successfully removed",
 	"disable": "Disable",
+	"discardDraftConfirm": "Do you really want to discard your unpublished changes? Please note that this action can't be undone.",
+	"discardDraftTooltip": "Discard draft and revert to the last published version",
 	"discardImageChanges": "Are you sure you want to close the editor without saving changes to the image?",
 	"diskQuotaExceeded": "The disk quota is exceeded. Please free up some space before adding new content.",
 	"documentation": "Documentation",

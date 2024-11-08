@@ -38,8 +38,10 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Automad;
+use Automad\Core\Cache;
 use Automad\Core\DataStore;
 use Automad\Core\Messenger;
+use Automad\Core\PublicationState;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\System\Fields;
@@ -94,6 +96,22 @@ class SharedController {
 		ksort($fields);
 
 		return $Response->setData(array('fields' => $fields));
+	}
+
+	/**
+	 * Discard a draft and revert content to the last published version.
+	 *
+	 * @return Response the response object
+	 */
+	public static function discardDraft(): Response {
+		$Response = new Response();
+
+		$DataStore = new DataStore();
+		$DataStore->setState(PublicationState::DRAFT, array())->save();
+
+		Cache::clear();
+
+		return $Response->setReload(true);
 	}
 
 	/**

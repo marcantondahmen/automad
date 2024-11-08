@@ -220,6 +220,28 @@ class PageController {
 	}
 
 	/**
+	 * Discard a draft and revert content to the last published version.
+	 *
+	 * @return Response the response object
+	 */
+	public static function discardDraft(): Response {
+		$Response = new Response();
+		$url = Request::post('url');
+		$Page = Page::fromCache($url);
+
+		if (!$Page) {
+			return $Response;
+		}
+
+		$DataStore = new DataStore($Page->path);
+		$DataStore->setState(PublicationState::DRAFT, array())->save();
+
+		Cache::clear();
+
+		return $Response->setReload(true);
+	}
+
+	/**
 	 * Duplicate a page.
 	 *
 	 * @return Response the response object

@@ -42,10 +42,8 @@ import {
 	EventName,
 	getPageURL,
 	getSlug,
-	html,
 	listen,
 	PageController,
-	query,
 	requestAPI,
 	Route,
 	SharedController,
@@ -53,6 +51,19 @@ import {
 import Tooltip from 'codex-tooltip';
 import { BaseComponent } from '../Base';
 import { SubmitComponent } from './Submit';
+
+const enable = (button: SubmitComponent): void => {
+	if (button.hasAttribute('disabled')) {
+		button.removeAttribute('disabled');
+	}
+
+	button.classList.remove(CSS.textMuted);
+};
+
+const disable = (button: SubmitComponent): void => {
+	button.setAttribute('disabled', '');
+	button.classList.add(CSS.textMuted);
+};
 
 /**
  * The publish button and form for the navbar.
@@ -73,6 +84,11 @@ export class PublishFormComponent extends BaseComponent {
 	private stateController: PageController | SharedController;
 
 	/**
+	 * The discard controller route.
+	 */
+	private discardController: PageController | SharedController;
+
+	/**
 	 * The publish controller route.
 	 */
 	private publishController: PageController | SharedController;
@@ -83,9 +99,14 @@ export class PublishFormComponent extends BaseComponent {
 	private tooltip: Tooltip;
 
 	/**
+	 * The discard button.
+	 */
+	private discardButton: SubmitComponent;
+
+	/**
 	 * The publish button.
 	 */
-	private button: SubmitComponent;
+	private publishButton: SubmitComponent;
 
 	/**
 	 * The last published timestamp.
@@ -116,6 +137,10 @@ export class PublishFormComponent extends BaseComponent {
 			initial: pageUrl ? App.pages[pageUrl].publicationState : null,
 		});
 
+		this.discardController = isPageRoute
+			? PageController.discardDraft
+			: SharedController.discardDraft;
+
 		this.publishController = isPageRoute
 			? PageController.publish
 			: SharedController.publish;
@@ -124,28 +149,54 @@ export class PublishFormComponent extends BaseComponent {
 			? PageController.getPublicationState
 			: SharedController.getPublicationState;
 
-		this.classList.add(CSS.navbarItem);
+		this.classList.add(CSS.navbarGroup);
 
-		this.innerHTML = html`
-			<am-form
-				${Attr.watch}
-				${Attr.api}="${this.publishController}"
-				${Attr.event}="${EventName.contentPublished}"
-			>
-				<am-submit disabled class="${CSS.button}">
-					${App.text('publish')}
-				</am-submit>
-			</am-form>
-		`;
+		const discardForm = create(
+			'am-form',
+			[],
+			{
+				[Attr.watch]: '',
+				[Attr.confirm]: App.text('discardDraftConfirm'),
+				[Attr.api]: this.discardController,
+				[Attr.event]: EventName.contentPublished,
+			},
+			this
+		);
 
-		this.button = query('am-submit', this);
+		this.discardButton = create(
+			'am-submit',
+			[CSS.navbarItem, CSS.navbarItemGlyph],
+			{ disabled: '', [Attr.tooltip]: App.text('discardDraftTooltip') },
+			discardForm,
+			'↺'
+		);
+
+		const publishForm = create(
+			'am-form',
+			[],
+			{
+				[Attr.watch]: '',
+				[Attr.api]: this.publishController,
+				[Attr.event]: EventName.contentPublished,
+			},
+			this
+		);
+
+		this.publishButton = create(
+			'am-submit',
+			[CSS.button],
+			{ disabled: '' },
+			publishForm,
+			App.text('publish')
+		);
+
 		this.tooltip = new Tooltip();
 
 		this.addListener(
-			listen(this.button, 'mouseover', () => {
+			listen(this.publishButton, 'mouseover', () => {
 				if (this.tooltip && this.lastPublished) {
 					this.tooltip.show(
-						this.button,
+						this.publishButton,
 						create(
 							'span',
 							[],
@@ -160,7 +211,7 @@ export class PublishFormComponent extends BaseComponent {
 		);
 
 		this.addListener(
-			listen(this.button, 'mouseleave', () => {
+			listen(this.publishButton, 'mouseleave', () => {
 				this.tooltip.hide();
 			})
 		);
@@ -190,14 +241,14 @@ export class PublishFormComponent extends BaseComponent {
 		this.stateBinding.value = data.isPublished ? 'published' : 'draft';
 
 		if (data.isPublished) {
-			this.button.setAttribute('disabled', '');
+			disable(this.discardButton);
+			disable(this.publishButton);
 
 			return;
 		}
 
-		if (this.button.hasAttribute('disabled')) {
-			this.button.removeAttribute('disabled');
-		}
+		enable(this.discardButton);
+		enable(this.publishButton);
 	}
 }
 
