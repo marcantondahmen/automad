@@ -165,10 +165,17 @@ class PageController {
 		$DataStore = new DataStore($Page->path);
 		$data = $DataStore->getState(PublicationState::DRAFT) ?? array();
 
-		$fields = array_merge(
+		$supportedFields = array_merge(
 			array_fill_keys(Fields::$reserved, ''),
 			array_fill_keys($keys, ''),
-			$data
+		);
+
+		$fields = array_intersect_key(
+			array_merge(
+				$supportedFields,
+				$data
+			),
+			$supportedFields
 		);
 
 		ksort($fields);

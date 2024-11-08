@@ -274,6 +274,7 @@
 	"pageSlug": "Directory Name",
 	"pageTags": "Tags (Separate multiple tags by comma or tab)",
 	"pageTemplate": "Template",
+	"pageTemplatePurgeUnusedInfo": "Please note that content that is no longer used when changing to another template will be purged on selection.",
 	"pagelistBlockContext": "Parent page",
 	"pagelistBlockDefaultFile": "Default",
 	"pagelistBlockExcludeCurrent": "Exclude this page",

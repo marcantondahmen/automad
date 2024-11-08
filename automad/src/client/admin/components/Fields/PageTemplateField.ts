@@ -287,6 +287,7 @@ export class PageTemplateFieldComponent extends BaseComponent {
 
 		if (Object.keys(App.themes).length > 0) {
 			body.innerHTML = html`
+				<p>${App.text('pageTemplatePurgeUnusedInfo')}</p>
 				<am-page-template-select
 					value="${selectedTemplate}"
 				></am-page-template-select>
