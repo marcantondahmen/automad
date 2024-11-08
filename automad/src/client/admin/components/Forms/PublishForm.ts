@@ -153,7 +153,7 @@ export class PublishFormComponent extends BaseComponent {
 
 		const discardForm = create(
 			'am-form',
-			[],
+			[CSS.displaySmallNone],
 			{
 				[Attr.watch]: '',
 				[Attr.confirm]: App.text('discardDraftConfirm'),

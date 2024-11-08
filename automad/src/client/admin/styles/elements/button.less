@@ -73,6 +73,12 @@
 		border-color: hsl(var(--border-hover));
 	}
 
+	& > * {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
 	&--danger {
 		--text: var(--am-clr-text-danger);
 		--text-hover: var(--am-clr-text-danger);

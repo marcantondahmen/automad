@@ -122,7 +122,7 @@ export const renderUsersSection = (): string => {
 							class="${CSS.button}"
 							${Attr.modal}="#am-invite-user-modal"
 						>
-							${App.text('systemUsersInvite')}
+							<span>${App.text('systemUsersInvite')}</span>
 						</am-modal-toggle>
 					</span>
 				</span>
