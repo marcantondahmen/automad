@@ -58,10 +58,18 @@
 			white-space: nowrap;
 			gap: 2px;
 
-			& .SfxIconButton-root {
+			& > .SfxIconButton-root {
+				display: inline-flex;
+				align-items: center;
 				width: @am-form-height;
 				height: @am-form-height;
-				font-weight: 520;
+
+				&:after {
+					position: relative;
+					font-weight: 520;
+					font-size: 1.25rem;
+					opacity: 1 !important;
+				}
 
 				& svg {
 					display: none;
@@ -71,17 +79,14 @@
 
 		&-reset-button:after {
 			content: '↺';
-			font-size: 1.25rem;
 		}
 
 		&-undo-button:after {
 			content: '↩';
-			font-size: 1.25rem;
 		}
 
 		&-redo-button:after {
 			content: '↪';
-			font-size: 1.25rem;
 		}
 
 		&-center-options {
@@ -286,12 +291,13 @@
 .am-ui .SfxModal-Container[open] {
 	top: 4rem !important;
 	transform: translate(-50%, 0) !important;
-	border-radius: @am-modal-radius;
+	border-radius: @am-modal-radius !important;
 	overflow: hidden;
 	box-shadow: @am-shadow;
 	width: 90vw !important;
 	max-width: 520px !important;
 	padding: 8px 2px;
+	border: @am-modal-border;
 
 	& .SfxModalContent-root {
 		& > * {
@@ -346,7 +352,7 @@
 		& [color='link'].SfxButton-root {
 			color: hsl(var(--am-clr-text-primary)) !important;
 			background-color: hsl(var(--am-clr-background-primary)) !important;
-			border: 1px solid hsl(var(--am-clr-background-primary)) !important;
+			border: 2px solid hsl(var(--am-clr-background-primary)) !important;
 
 			&:hover,
 			&:active {
