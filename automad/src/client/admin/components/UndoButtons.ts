@@ -33,6 +33,7 @@
  */
 
 import {
+	App,
 	Attr,
 	create,
 	CSS,
@@ -73,7 +74,7 @@ class UndoButtonsComponent extends BaseComponent {
 		const undoButton = create(
 			'span',
 			[CSS.navbarItem, CSS.navbarItemGlyph],
-			{ [Attr.tooltip]: `${meta} + Z` },
+			{ [Attr.tooltip]: `${App.text('undoTitle')}<br>${meta} + Z` },
 			this,
 			'↩'
 		);
@@ -81,7 +82,7 @@ class UndoButtonsComponent extends BaseComponent {
 		const redoButton = create(
 			'span',
 			[CSS.navbarItem, CSS.navbarItemGlyph],
-			{ [Attr.tooltip]: `${meta} + Y` },
+			{ [Attr.tooltip]: `${App.text('redoTitle')}<br>${meta} + Y` },
 			this,
 			'↪'
 		);
