@@ -316,8 +316,10 @@
 	}
 
 	& .SfxInput-root {
-		height: 32px !important;
+		height: @am-form-height !important;
 		border-radius: 5px !important;
+		border: @am-form-border;
+		background: hsl(var(--am-clr-background-faded)) !important;
 	}
 
 	& .FIE_save-file-name-input {
@@ -325,7 +327,7 @@
 	}
 
 	& .FIE_save-extension-selector {
-		min-width: 80px;
+		min-width: 75px;
 	}
 
 	& .FIE_save-quality-wrapper,
@@ -351,8 +353,9 @@
 
 		& [color='link'].SfxButton-root {
 			color: hsl(var(--am-clr-text-primary)) !important;
-			background-color: hsl(var(--am-clr-background-primary)) !important;
-			border: 2px solid hsl(var(--am-clr-background-primary)) !important;
+			background-color: transparent !important;
+			border: @am-border !important;
+			border-width: @am-button-border-width !important;
 
 			&:hover,
 			&:active {
