@@ -41,6 +41,12 @@
 	transition:
 		opacity 0.1s,
 		transform 0.1s;
+	--align: center;
+
+	&--left,
+	&--right {
+		--align: left;
+	}
 
 	&::before {
 		border-radius: 0.25rem;
@@ -58,10 +64,10 @@
 
 	&__content {
 		padding: 0.45rem 0.75rem;
-		max-width: 16rem;
-		text-align: center;
+		max-width: 15rem;
 		font-size: 0.8rem;
-		text-wrap: pretty;
+		text-align: var(--align);
+		text-wrap: balance;
 		font-weight: 540;
 		line-height: 1.5;
 		color: hsl(var(--am-clr-text-primary));

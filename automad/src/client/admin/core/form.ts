@@ -80,6 +80,13 @@ export const enum FieldTag {
 }
 
 /**
+ * Input patterns.
+ */
+export const enum InputPattern {
+	username = '^[a-z0-9]([a-z0-9_]|-)+[a-z0-9]$',
+}
+
+/**
  * A class to register elements to be used to generate form data.
  */
 export class FormDataProviders {

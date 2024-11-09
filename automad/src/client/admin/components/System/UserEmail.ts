@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, FieldTag } from '@/admin/core';
+import { App, Attr, createField, CSS, FieldTag, uniqueId } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -45,12 +45,15 @@ class UserEmailComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		this.classList.add(CSS.field);
+
 		createField(
 			FieldTag.email,
 			this,
 			{
+				id: uniqueId(),
 				key: 'email',
-				value: App.user.email,
+				value: this.getAttribute('value') ?? '',
 				name: 'email',
 				label: App.text('email'),
 			},
