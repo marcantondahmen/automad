@@ -73,6 +73,12 @@
 		border-color: hsl(var(--border-hover));
 	}
 
+	& > * {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
 	&--danger {
 		--text: var(--am-clr-text-danger);
 		--text-hover: var(--am-clr-text-danger);
@@ -104,7 +110,7 @@
 	}
 
 	&[disabled] {
-		cursor: not-allowed;
+		cursor: default;
 		color: hsl(var(--am-clr-text-muted));
 		border: @am-button-border-width solid hsl(var(--am-clr-border-button));
 		background-color: transparent;

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { ColorComponent } from '@/admin/components/Fields/Color';
+import { ColorFieldComponent } from '@/admin/components/Fields/ColorField';
 import {
 	App,
 	convertRgbToHex,
@@ -90,12 +90,12 @@ export class ColorInline extends BaseInline {
 	/**
 	 * Text-color picker.
 	 */
-	private textColorPicker: ColorComponent;
+	private textColorPicker: ColorFieldComponent;
 
 	/**
 	 * Background-color picker.
 	 */
-	private backgroundColorPicker: ColorComponent;
+	private backgroundColorPicker: ColorFieldComponent;
 
 	/**
 	 * The chanhe listener.
@@ -115,14 +115,14 @@ export class ColorInline extends BaseInline {
 			value: '',
 			name: 'color',
 			label: App.text('textColor'),
-		}) as ColorComponent;
+		}) as ColorFieldComponent;
 
 		this.backgroundColorPicker = createField(FieldTag.color, this.wrapper, {
 			key: uniqueId(),
 			value: '',
 			name: 'backgroundColor',
 			label: App.text('backgroundColor'),
-		}) as ColorComponent;
+		}) as ColorFieldComponent;
 
 		return this.wrapper;
 	}

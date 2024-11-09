@@ -165,10 +165,17 @@ class PageController {
 		$DataStore = new DataStore($Page->path);
 		$data = $DataStore->getState(PublicationState::DRAFT) ?? array();
 
-		$fields = array_merge(
+		$supportedFields = array_merge(
 			array_fill_keys(Fields::$reserved, ''),
 			array_fill_keys($keys, ''),
-			$data
+		);
+
+		$fields = array_intersect_key(
+			array_merge(
+				$supportedFields,
+				$data
+			),
+			$supportedFields
 		);
 
 		ksort($fields);
@@ -217,6 +224,28 @@ class PageController {
 		Cache::clear();
 
 		return $Response;
+	}
+
+	/**
+	 * Discard a draft and revert content to the last published version.
+	 *
+	 * @return Response the response object
+	 */
+	public static function discardDraft(): Response {
+		$Response = new Response();
+		$url = Request::post('url');
+		$Page = Page::fromCache($url);
+
+		if (!$Page) {
+			return $Response;
+		}
+
+		$DataStore = new DataStore($Page->path);
+		$DataStore->setState(PublicationState::DRAFT, array())->save();
+
+		Cache::clear();
+
+		return $Response->setReload(true);
 	}
 
 	/**

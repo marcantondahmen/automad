@@ -26,33 +26,30 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { create, FieldTag } from '@/admin/core';
-import { BaseFieldComponent } from './BaseField';
+import { CSS, FieldTag } from '@/admin/core';
+import { ToggleFieldComponent } from './ToggleField';
 
 /**
- * A number/unit input field with a label.
+ * A large checkbox field.
  *
- * @extends BaseFieldComponent
+ * @extends ToggleFieldComponent
  */
-export class NumberUnitComponent extends BaseFieldComponent {
+class ToggleLargeFieldComponent extends ToggleFieldComponent {
 	/**
-	 * Don't link the label.
+	 * Checkbox styles.
 	 */
-	protected linkLabel = false;
+	protected classes = [CSS.toggle, CSS.toggleLarge];
 
 	/**
-	 * Create an input field.
+	 * Remove label fpr large checkboxes.
 	 */
-	protected createInput(): void {
-		const { name, id, value } = this._data;
-		create('am-number-unit-input', [], { id, name, value }, this);
-	}
+	protected createLabel(): void {}
 }
 
-customElements.define(FieldTag.numberUnit, NumberUnitComponent);
+customElements.define(FieldTag.toggleLarge, ToggleLargeFieldComponent);

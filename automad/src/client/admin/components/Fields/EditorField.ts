@@ -55,7 +55,7 @@ import { API } from 'automad-editorjs';
  *
  * @extends BaseFieldComponent
  */
-export class EditorComponent extends BaseFieldComponent {
+class EditorFieldComponent extends BaseFieldComponent {
 	/**
 	 * The editor component.
 	 */
@@ -248,4 +248,4 @@ export class EditorComponent extends BaseFieldComponent {
 }
 
 FormDataProviders.add(FieldTag.editor);
-customElements.define(FieldTag.editor, EditorComponent);
+customElements.define(FieldTag.editor, EditorFieldComponent);

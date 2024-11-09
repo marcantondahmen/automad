@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, html, KeyValueMap, Route } from '@/admin/core';
+import {
+	Attr,
+	create,
+	CSS,
+	html,
+	InputPattern,
+	KeyValueMap,
+	Route,
+} from '@/admin/core';
 import { FormComponent } from './Form';
 
 /**
@@ -95,7 +103,10 @@ export class SetupFormComponent extends FormComponent {
 						class="${CSS.input}"
 						type="text"
 						name="username"
+						pattern="${InputPattern.username}"
 						placeholder="Username"
+						${Attr.tooltip}='A username must start and end with a letter or number and can only contain the characters "a-z", "0-9", "_" or "-".'
+						${Attr.tooltipOptions}="placement:right"
 						required
 					/>
 					<input

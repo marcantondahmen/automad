@@ -32,64 +32,52 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag, html } from '@/admin/core';
+import { App, create, CSS, FieldTag, html, listen, query } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
- * A checkbox field.
+ * A checkbox field that can have a default global value.
  *
  * @extends BaseFieldComponent
  */
-export class ToggleComponent extends BaseFieldComponent {
-	/**
-	 * Checkbox styles.
-	 */
-	protected classes = [CSS.toggle, CSS.toggleButton];
-
+class ToggleSelectFieldComponent extends BaseFieldComponent {
 	/**
 	 * Render the input field.
 	 */
 	createInput(): void {
-		const { name, id, value, label } = this._data;
+		const { name, id, value, label, placeholder } = this._data;
 
-		create(
+		const wrapper = create(
 			'div',
-			this.classes,
+			[CSS.toggle, CSS.toggleSelect],
 			{},
 			this,
 			html`
-				<input
-					type="checkbox"
-					name="${name}"
-					id="${id}"
-					value="1"
-					${value ? 'checked' : ''}
-				/>
 				<label for="${id}">
 					<i class="bi"></i>
 					<span>${label}</span>
 				</label>
+				<select name="${name}" id="${id}">
+					<option value="">${App.text('useSharedDefault')}</option>
+					<option value="0">${App.text('disable')}</option>
+					<option value="1">${App.text('enable')}</option>
+				</select>
 			`
 		);
-	}
 
-	/**
-	 * Query the current field value.
-	 *
-	 * @return the current value
-	 */
-	query() {
-		return (this.input as HTMLInputElement).checked;
-	}
+		const toggle = () => {
+			wrapper.classList.toggle(CSS.toggleOff, select.value === '0');
+			wrapper.classList.toggle(CSS.toggleOn, select.value === '1');
+		};
 
-	/**
-	 * A function that can be used to mutate the field value.
-	 *
-	 * @param value
-	 */
-	mutate(value: any): void {
-		(this.input as HTMLInputElement).checked = value;
+		wrapper.classList.toggle(CSS.toggleDefaultOn, placeholder != '');
+
+		const select = query<HTMLSelectElement>('select', wrapper);
+		select.value = (value as string) || '';
+
+		this.addListener(listen(select, 'change', toggle.bind(this)));
+		toggle();
 	}
 }
 
-customElements.define(FieldTag.toggle, ToggleComponent);
+customElements.define(FieldTag.toggleSelect, ToggleSelectFieldComponent);

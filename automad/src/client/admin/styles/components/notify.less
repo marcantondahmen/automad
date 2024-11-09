@@ -39,12 +39,17 @@
 
 	gap: 1.2em;
 	width: 24rem;
+	min-width: 24rem;
 	padding: 0.6rem 0.85rem;
 	color: hsl(var(--text));
 	background: hsl(var(--bg));
 	box-shadow: @am-shadow;
 	border: @am-card-border-width solid hsl(var(--border));
 	border-radius: @am-card-radius;
+
+	@media (max-width: 450px) {
+		min-width: ~'calc(100vw - 30px)';
+	}
 
 	&--danger {
 		--text: var(--am-clr-text-danger);

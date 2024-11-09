@@ -56,6 +56,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class UserCollection {
 	const FILE_ACCOUNTS = AM_BASE_DIR . '/config/accounts.php';
+	const VALID_EMAIL_REGEX = '/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/';
+	const VALID_USERNAME_REGEX = '/^[a-z0-9][a-z0-9_\-]+[a-z0-9]$/s';
 
 	/**
 	 * The collection of existing user objects.
@@ -97,16 +99,16 @@ class UserCollection {
 		Messenger $Messenger
 	): bool {
 		$username = trim($username);
-		$email = trim($email);
+		$email = strtolower(trim($email));
 
 		if (!$this->validUsername($username)) {
-			$Messenger->setError($this->invalidUsernameError());
+			$Messenger->setError(Text::get('invalidUsernameError'));
 
 			return false;
 		}
 
 		if ($email && !$this->validEmail($email)) {
-			$Messenger->setError($this->invalidEmailError());
+			$Messenger->setError(Text::get('invalidEmailError'));
 
 			return false;
 		}
@@ -203,13 +205,13 @@ class UserCollection {
 		$email = trim($email);
 
 		if (!$this->validUsername($username)) {
-			$Messenger->setError($this->invalidUsernameError());
+			$Messenger->setError(Text::get('invalidUsernameError'));
 
 			return false;
 		}
 
 		if (!$this->validEmail($email)) {
-			$Messenger->setError($this->invalidEmailError());
+			$Messenger->setError(Text::get('invalidEmailError'));
 
 			return false;
 		}
@@ -229,7 +231,7 @@ class UserCollection {
 		$User->name = $username;
 		$_SESSION['username'] = $username;
 
-		$User->email = $email;
+		$User->email = strtolower($email);
 
 		$this->users[$id] = $User;
 
@@ -279,7 +281,7 @@ class UserCollection {
 		}
 
 		foreach ($this->users as $User) {
-			if ($nameOrEmail === $User->name || $nameOrEmail === $User->email) {
+			if ($nameOrEmail === $User->name || strtolower($nameOrEmail) === strtolower($User->email)) {
 				return $User;
 			}
 		}
@@ -349,24 +351,6 @@ class UserCollection {
 	}
 
 	/**
-	 * The invalid email error message.
-	 *
-	 * @return string the error message
-	 */
-	private function invalidEmailError(): string {
-		return Text::get('invalidEmailError');
-	}
-
-	/**
-	 * The invalid username error message.
-	 *
-	 * @return string the error message
-	 */
-	private function invalidUsernameError(): string {
-		return Text::get('invalidUsernameError') . ' "a-z", "A-Z", ".", "-", "_", "@"';
-	}
-
-	/**
 	 * Get the accounts array by including the accounts PHP file.
 	 *
 	 * @see User
@@ -396,7 +380,7 @@ class UserCollection {
 	 * @return bool true in case the username is valid
 	 */
 	private function validEmail(string $email = ''): bool {
-		preg_match('/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/', $email, $matches);
+		preg_match(UserCollection::VALID_EMAIL_REGEX, $email, $matches);
 
 		return (bool) $matches;
 	}
@@ -408,8 +392,8 @@ class UserCollection {
 	 * @return bool true in case the username is valid
 	 */
 	private function validUsername(string $username): bool {
-		preg_match('/[^@\w\.\-]/', $username, $matches);
+		preg_match(UserCollection::VALID_USERNAME_REGEX, $username, $matches);
 
-		return empty($matches);
+		return (bool) $matches;
 	}
 }

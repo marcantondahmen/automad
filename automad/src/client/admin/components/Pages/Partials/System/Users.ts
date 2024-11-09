@@ -65,11 +65,13 @@ export const renderUsersSection = (): string => {
 					<span
 						class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
 					>
-						<span
-							class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
-						>
-							<am-user-name></am-user-name>
-							<am-user-email></am-user-email>
+						<span class="${CSS.flex} ${CSS.flexColumn}">
+							<am-user-name
+								value="${App.user.name}"
+							></am-user-name>
+							<am-user-email
+								value="${App.user.email}"
+							></am-user-email>
 						</span>
 						<span class="${CSS.cardFormButtons}">
 							<am-submit class="${CSS.button}">
@@ -122,7 +124,7 @@ export const renderUsersSection = (): string => {
 							class="${CSS.button}"
 							${Attr.modal}="#am-invite-user-modal"
 						>
-							${App.text('systemUsersInvite')}
+							<span>${App.text('systemUsersInvite')}</span>
 						</am-modal-toggle>
 					</span>
 				</span>
@@ -226,39 +228,8 @@ export const renderUsersSection = (): string => {
 				<am-modal-body>
 					<am-form-error></am-form-error>
 					<div>
-						${createField(
-							FieldTag.input,
-							null,
-							{
-								key: 'username',
-								id: 'am-field__create-username',
-								value: '',
-								name: 'username',
-								label: App.text('username'),
-							},
-							[],
-							{
-								required: '',
-								pattern: '^\\S+$',
-								[Attr.error]: App.text('systemUsersNameError'),
-							}
-						).outerHTML}
-						${createField(
-							FieldTag.email,
-							null,
-							{
-								key: 'email',
-								id: 'am-field__create-email',
-								value: '',
-								name: 'email',
-								label: App.text('email'),
-							},
-							[],
-							{
-								required: '',
-								[Attr.error]: App.text('emailRequiredError'),
-							}
-						).outerHTML}
+						<am-user-name></am-user-name>
+						<am-user-email></am-user-email>
 						${createField(
 							FieldTag.password,
 							null,
@@ -313,39 +284,8 @@ export const renderUsersSection = (): string => {
 				<am-modal-body>
 					<am-form-error></am-form-error>
 					<div>
-						${createField(
-							FieldTag.input,
-							null,
-							{
-								key: 'username',
-								id: 'am-field__invite-username',
-								value: '',
-								name: 'username',
-								label: App.text('username'),
-							},
-							[],
-							{
-								required: '',
-								pattern: '^\\S+$',
-								[Attr.error]: App.text('systemUsersNameError'),
-							}
-						).outerHTML}
-						${createField(
-							FieldTag.email,
-							null,
-							{
-								key: 'email',
-								id: 'am-field__invite-email',
-								value: '',
-								name: 'email',
-								label: App.text('email'),
-							},
-							[],
-							{
-								required: '',
-								[Attr.error]: App.text('emailRequiredError'),
-							}
-						).outerHTML}
+						<am-user-name></am-user-name>
+						<am-user-email></am-user-email>
 					</div>
 				</am-modal-body>
 				<am-modal-footer>

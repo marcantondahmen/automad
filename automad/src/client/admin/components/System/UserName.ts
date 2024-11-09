@@ -32,7 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, createField, FieldTag } from '@/admin/core';
+import {
+	App,
+	Attr,
+	createField,
+	CSS,
+	FieldTag,
+	InputPattern,
+	uniqueId,
+} from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -45,20 +53,23 @@ class UserNameComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		this.classList.add(CSS.field);
+
 		createField(
 			FieldTag.input,
 			this,
 			{
+				id: uniqueId(),
 				key: 'username',
-				value: App.user.name,
+				value: this.getAttribute('value') ?? '',
 				name: 'username',
 				label: App.text('username'),
 			},
 			[],
 			{
-				pattern: '^\\S+$',
+				pattern: InputPattern.username,
 				required: '',
-				[Attr.error]: App.text('systemUsersNameError'),
+				[Attr.error]: App.text('invalidUsernameError'),
 			}
 		);
 	}

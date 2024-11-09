@@ -32,34 +32,21 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag } from '@/admin/core';
-import { BaseFieldComponent } from './BaseField';
+import { FieldTag } from '@/admin/core';
+import { InputFieldComponent } from './InputField';
 
 /**
- * A standard input field with a label.
+ * A email field with a label.
  *
- * @extends BaseFieldComponent
+ * @extends InputFieldComponent
  */
-export class InputComponent extends BaseFieldComponent {
+class EmailFieldComponent extends InputFieldComponent {
 	/**
 	 * The input type.
 	 */
 	protected get inputType(): string {
-		return 'text';
-	}
-
-	/**
-	 * Create an input field.
-	 */
-	protected createInput(): void {
-		const { name, id, value, placeholder } = this._data;
-		create(
-			'input',
-			[CSS.input],
-			{ id, name, value, type: this.inputType, placeholder },
-			this
-		);
+		return 'email';
 	}
 }
 
-customElements.define(FieldTag.input, InputComponent);
+customElements.define(FieldTag.email, EmailFieldComponent);

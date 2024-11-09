@@ -26,27 +26,62 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { FieldTag } from '@/admin/core';
-import { InputComponent } from './Input';
+import {
+	CSS,
+	create,
+	listen,
+	Binding,
+	createLinkModal,
+	FieldTag,
+} from '@/admin/core';
+import { BaseFieldComponent } from './BaseField';
 
 /**
- * A password field with a label.
+ * An URL field.
  *
- * @extends InputComponent
+ * @extends BaseFieldComponent
  */
-export class PasswordComponent extends InputComponent {
+class UrlFieldComponent extends BaseFieldComponent {
 	/**
-	 * The input type.
+	 * Create an input field.
 	 */
-	protected get inputType(): string {
-		return 'password';
+	protected createInput(): void {
+		const { name, id, value, placeholder, label } = this._data;
+		const combo = create('div', [CSS.inputCombo], {}, this);
+		const bindingName = `urlComponent_${id}`;
+		const input = create(
+			'input',
+			[CSS.input],
+			{
+				id,
+				name,
+				value,
+				type: 'text',
+				placeholder,
+			},
+			combo
+		);
+
+		const button = create(
+			'span',
+			[CSS.inputComboButton],
+			{},
+			combo,
+			'<i class="bi bi-link"></i>'
+		);
+
+		new Binding(bindingName, { input });
+
+		listen(button, 'click', () => {
+			createLinkModal(bindingName, label);
+		});
 	}
 }
 
-customElements.define(FieldTag.password, PasswordComponent);
+customElements.define(FieldTag.url, UrlFieldComponent);

@@ -151,7 +151,7 @@ const setMdEditorLanguage = (): void => {
  * @see {@link tui-editor https://github.com/nhn/tui.editor/tree/master/apps/editor}
  * @extends BaseFieldComponent
  */
-class MarkdownComponent extends BaseFieldComponent {
+class MarkdownFieldComponent extends BaseFieldComponent {
 	/**
 	 * The editor instance.
 	 */
@@ -308,4 +308,4 @@ class MarkdownComponent extends BaseFieldComponent {
 }
 
 FormDataProviders.add(FieldTag.markdown);
-customElements.define(FieldTag.markdown, MarkdownComponent);
+customElements.define(FieldTag.markdown, MarkdownFieldComponent);

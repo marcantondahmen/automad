@@ -172,6 +172,7 @@ export const keyCombo = (key: string, callback: Function): Listener => {
 		}
 	});
 };
+
 /**
  * Set the document title.
  *

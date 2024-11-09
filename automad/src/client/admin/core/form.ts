@@ -54,28 +54,36 @@ import {
  * The tag names enum for fields.
  */
 export const enum FieldTag {
-	code = 'am-code',
-	color = 'am-color',
-	date = 'am-date',
-	editor = 'am-editor',
-	email = 'am-email',
-	feedFieldSelect = 'am-feed-field-select',
-	imageSelect = 'am-image-select',
-	input = 'am-input',
-	mainTheme = 'am-main-theme',
-	markdown = 'am-markdown',
-	number = 'am-number',
-	numberUnit = 'am-number-unit',
-	pageTags = 'am-page-tags',
-	pageTemplate = 'am-page-template',
-	password = 'am-password',
-	syntaxSelect = 'am-syntax-theme-select',
-	textarea = 'am-textarea',
-	title = 'am-title',
-	toggle = 'am-toggle',
-	toggleLarge = 'am-toggle-large',
-	toggleSelect = 'am-toggle-select',
-	url = 'am-url',
+	code = 'am-code-field',
+	color = 'am-color-field',
+	date = 'am-date-field',
+	editor = 'am-editor-field',
+	email = 'am-email-field',
+	feedFieldSelect = 'am-feed-field-select-field',
+	image = 'am-image-field',
+	input = 'am-input-field',
+	mainTheme = 'am-main-theme-field',
+	markdown = 'am-markdown-field',
+	number = 'am-number-field',
+	numberUnit = 'am-number-unit-field',
+	select = 'am-select-field',
+	pageTags = 'am-page-tags-field',
+	pageTemplate = 'am-page-template-field',
+	password = 'am-password-field',
+	syntaxSelect = 'am-syntax-theme-select-field',
+	textarea = 'am-textarea-field',
+	title = 'am-title-field',
+	toggle = 'am-toggle-field',
+	toggleLarge = 'am-toggle-large-field',
+	toggleSelect = 'am-toggle-select-field',
+	url = 'am-url-field',
+}
+
+/**
+ * Input patterns.
+ */
+export const enum InputPattern {
+	username = '^[a-z0-9]([a-z0-9_]|-)+[a-z0-9]$',
 }
 
 /**
@@ -192,8 +200,9 @@ export const createIdFromField = (key: string): string => {
  */
 export const createLabelFromField = (key: string): string => {
 	return titleCase(key.replace('+', ''))
-		.replace('Color ', '')
-		.replace('Checkbox ', '');
+		.replace(/^Color /, '')
+		.replace(/^Checkbox /, '')
+		.replace(/^Select /, '');
 };
 
 /**
@@ -205,6 +214,7 @@ export const fieldGroup = ({
 	section,
 	fields,
 	tooltips,
+	themeOptions,
 	shared,
 }: FieldGroupData): void => {
 	if (Object.values(fields).length == 0) {
@@ -252,6 +262,7 @@ export const fieldGroup = ({
 				key: name,
 				value: fields[name],
 				tooltip: tooltips[name],
+				options: themeOptions[name] ?? null,
 				name: `data[${name}]`,
 				placeholder,
 			},
@@ -306,7 +317,8 @@ export const getPrefixMap = (hasSharedDefaults: boolean) => {
 		color: FieldTag.color,
 		date: FieldTag.date,
 		text: FieldTag.markdown,
-		image: FieldTag.imageSelect,
+		image: FieldTag.image,
+		select: FieldTag.select,
 		url: FieldTag.url,
 	} as const;
 };

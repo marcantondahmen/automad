@@ -26,28 +26,27 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag } from '@/admin/core';
-import { BaseFieldComponent } from './BaseField';
+import { FieldTag } from '@/admin/core';
+import { InputFieldComponent } from './InputField';
 
 /**
- * A number input field with a label.
+ * A password field with a label.
  *
- * @extends BaseFieldComponent
+ * @extends InputFieldComponent
  */
-export class NumberComponent extends BaseFieldComponent {
+class PasswordFieldComponent extends InputFieldComponent {
 	/**
-	 * Create an input field.
+	 * The input type.
 	 */
-	protected createInput(): void {
-		const { name, id, value } = this._data;
-		create('input', [CSS.input], { type: 'number', id, name, value }, this);
+	protected get inputType(): string {
+		return 'password';
 	}
 }
 
-customElements.define(FieldTag.number, NumberComponent);
+customElements.define(FieldTag.password, PasswordFieldComponent);

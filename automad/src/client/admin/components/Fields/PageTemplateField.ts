@@ -43,9 +43,12 @@ import {
 	query,
 	titleCase,
 } from '@/admin/core';
-import { KeyValueMap, TemplateButtonStatus, TemplateFieldData } from '@/admin/types';
+import {
+	KeyValueMap,
+	TemplateButtonStatus,
+	TemplateFieldData,
+} from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
-import { SelectComponent } from '@/admin/components/Select';
 
 /**
  * Beautify a template path to be used as name.
@@ -208,7 +211,7 @@ class PageTemplateSelectComponent extends BaseComponent {
  *
  * @extends BaseComponent
  */
-export class PageTemplateComponent extends BaseComponent {
+export class PageTemplateFieldComponent extends BaseComponent {
 	/**
 	 * The field data.
 	 *
@@ -284,6 +287,7 @@ export class PageTemplateComponent extends BaseComponent {
 
 		if (Object.keys(App.themes).length > 0) {
 			body.innerHTML = html`
+				<p>${App.text('pageTemplatePurgeUnusedInfo')}</p>
 				<am-page-template-select
 					value="${selectedTemplate}"
 				></am-page-template-select>
@@ -294,5 +298,5 @@ export class PageTemplateComponent extends BaseComponent {
 	}
 }
 
-customElements.define(FieldTag.pageTemplate, PageTemplateComponent);
+customElements.define(FieldTag.pageTemplate, PageTemplateFieldComponent);
 customElements.define('am-page-template-select', PageTemplateSelectComponent);

@@ -32,29 +32,63 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag } from '@/admin/core';
+import Tagify from '@yaireo/tagify';
+import { App, create, CSS, debounce, FieldTag } from '@/admin/core';
+import { PageDataFormComponent } from '@/admin/components/Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';
 
 /**
- * A date field.
+ * A tags input field.
  *
  * @extends BaseFieldComponent
  */
-class DateComponent extends BaseFieldComponent {
+class PageTagsFieldComponent extends BaseFieldComponent {
 	/**
-	 * Create an input field.
+	 * Create the input field.
+	 *
+	 * @see {@link tagify https://github.com/yairEO/tagify}
 	 */
 	createInput(): void {
-		const { name, id, value, placeholder } = this._data;
-		const date = (value as string).match(/[\d-]+T\d\d:\d\d/)?.[0] ?? '';
-
-		create(
-			'input',
+		const { name, id, value } = this._data;
+		const textarea = create(
+			'textarea',
 			[CSS.input],
-			{ id, name, value: date, type: 'datetime-local', placeholder },
+			{
+				name,
+				id,
+			},
 			this
+		);
+
+		textarea.innerHTML = value;
+
+		const tagify = new Tagify(textarea, {
+			whitelist: App.tags,
+			originalInputValueFormat: (tags) =>
+				tags.map((item) => item.value).join(', '),
+			dropdown: {
+				enabled: 0,
+				maxItems: 8,
+				position: 'text',
+				closeOnSelect: true,
+			},
+		});
+
+		tagify.on('change', (event: Event) => {
+			const form: PageDataFormComponent =
+				this.closest('am-page-data-form');
+
+			form.onChange();
+		});
+
+		// Update global tags in the app state.
+		tagify.on(
+			'change',
+			debounce(() => {
+				App.updateState();
+			}, 2000)
 		);
 	}
 }
 
-customElements.define(FieldTag.date, DateComponent);
+customElements.define(FieldTag.pageTags, PageTagsFieldComponent);

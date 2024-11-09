@@ -26,62 +26,33 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import {
-	CSS,
-	create,
-	listen,
-	Binding,
-	createLinkModal,
-	FieldTag,
-} from '@/admin/core';
+import { create, FieldTag } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
- * An URL field.
+ * A number/unit input field with a label.
  *
  * @extends BaseFieldComponent
  */
-class URLComponent extends BaseFieldComponent {
+class NumberUnitFieldComponent extends BaseFieldComponent {
+	/**
+	 * Don't link the label.
+	 */
+	protected linkLabel = false;
+
 	/**
 	 * Create an input field.
 	 */
 	protected createInput(): void {
-		const { name, id, value, placeholder, label } = this._data;
-		const combo = create('div', [CSS.inputCombo], {}, this);
-		const bindingName = `urlComponent_${id}`;
-		const input = create(
-			'input',
-			[CSS.input],
-			{
-				id,
-				name,
-				value,
-				type: 'text',
-				placeholder,
-			},
-			combo
-		);
-
-		const button = create(
-			'span',
-			[CSS.inputComboButton],
-			{},
-			combo,
-			'<i class="bi bi-link"></i>'
-		);
-
-		new Binding(bindingName, { input });
-
-		listen(button, 'click', () => {
-			createLinkModal(bindingName, label);
-		});
+		const { name, id, value } = this._data;
+		create('am-number-unit-input', [], { id, name, value }, this);
 	}
 }
 
-customElements.define(FieldTag.url, URLComponent);
+customElements.define(FieldTag.numberUnit, NumberUnitFieldComponent);

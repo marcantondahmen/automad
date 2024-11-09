@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag, FormDataProviders, html } from '@/admin/core';
+import { create, CSS, FieldTag, FormDataProviders } from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
 import { UndoValue } from '@/admin/types';
 import { BaseFieldComponent } from './BaseField';
@@ -40,9 +40,9 @@ import { BaseFieldComponent } from './BaseField';
 /**
  * A code field with a label.
  *
- * @extends InputComponent
+ * @extends BaseFieldComponent
  */
-export class CodeComponent extends BaseFieldComponent {
+class CodeFieldComponent extends BaseFieldComponent {
 	/**
 	 * The editor value that serves a input value for the parent form.
 	 */
@@ -120,4 +120,4 @@ export class CodeComponent extends BaseFieldComponent {
 }
 
 FormDataProviders.add(FieldTag.code);
-customElements.define(FieldTag.code, CodeComponent);
+customElements.define(FieldTag.code, CodeFieldComponent);

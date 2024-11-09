@@ -26,30 +26,44 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { CSS, FieldTag } from '@/admin/core';
-import { ToggleComponent } from './Toggle';
+import { App, createSelect, FieldTag, getPageURL } from '@/admin/core';
+import { BaseFieldComponent } from './BaseField';
 
 /**
- * A large checkbox field.
+ * A select field with a label.
  *
- * @extends ToggleComponent
+ * @extends BaseFieldComponent
  */
-class ToggleLargeComponent extends ToggleComponent {
-	/**
-	 * Checkbox styles.
-	 */
-	protected classes = [CSS.toggle, CSS.toggleLarge];
+class SelectFieldComponent extends BaseFieldComponent {
+	createInput(): void {
+		const { name, id, value, options } = this._data;
+		const opt = Object.keys(options).map((key: string) => ({
+			value: key,
+			text: options[key],
+		}));
 
-	/**
-	 * Remove label fpr large checkboxes.
-	 */
-	protected createLabel(): void {}
+		createSelect(
+			[
+				{
+					text: !!getPageURL()
+						? App.text('useSharedDefault')
+						: '&mdash;',
+					value: '',
+				},
+				...opt,
+			],
+			`${value}`,
+			this,
+			name,
+			id
+		);
+	}
 }
 
-customElements.define(FieldTag.toggleLarge, ToggleLargeComponent);
+customElements.define(FieldTag.select, SelectFieldComponent);

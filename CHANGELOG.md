@@ -1,8 +1,29 @@
 # Changelog
 
-## [v2.0.0-alpha.8](https://github.com/marcantondahmen/automad/commit/3ef9f936a5651dab3a6e9285b1506b2321b8ff36)
+## [v2.0.0-alpha.9](https://github.com/marcantondahmen/automad/commit/b0bebc0ddb73807dd5a217daa22989d003faf359)
 
-Sun, 27 Oct 2024 19:22:31 +0100
+Sat, 9 Nov 2024 14:00:18 +0100
+
+### New Features
+
+- **ui**: add undo and redo button tooltips ([e5def55b6](https://github.com/marcantondahmen/automad/commit/e5def55b62bb13608cea0dfe671034ec32caff00))
+- **ui**: improve highlighting of matches in search results ([4586f54bb](https://github.com/marcantondahmen/automad/commit/4586f54bbd3d65a764f0fb8fd35d8925cef212d6))
+- add option to discard changes and revert content to the last published version ([2a40c1e74](https://github.com/marcantondahmen/automad/commit/2a40c1e74ef6fdf1301252774fb608595db104ea))
+- add public pagelist api ([6967a5faa](https://github.com/marcantondahmen/automad/commit/6967a5faa2c2413495695a00231e0c799a543cf3))
+- add select field type ([45a7e1569](https://github.com/marcantondahmen/automad/commit/45a7e156999873a494b9fb91eac05bfb99957e4f))
+- improve handling of usernames and emails ([847b80aab](https://github.com/marcantondahmen/automad/commit/847b80aabc87cb7eeb4ca851de958bd63a26541c))
+- purge unused fields when changing page templates ([1a23b56c4](https://github.com/marcantondahmen/automad/commit/1a23b56c42ed311d4fe16d99ebe74be5f6d1f66c))
+- purge unused fields when changing the main theme ([b9f1da599](https://github.com/marcantondahmen/automad/commit/b9f1da599c93b3cafd8db820e2d78c0a92711ad9))
+
+### Bugfixes
+
+- **ui**: fix several styling issues ([3e0641ad8](https://github.com/marcantondahmen/automad/commit/3e0641ad813a34d74d14cb9973e60d3db62d2e1b))
+- fix image editor button and modal window style issues ([2db554413](https://github.com/marcantondahmen/automad/commit/2db554413353aacbc39bdfc701175b1c832bda24))
+- fix percentage unit input field ([b6df22c5f](https://github.com/marcantondahmen/automad/commit/b6df22c5f454213fe2ff727859802428824aeb52))
+
+## [v2.0.0-alpha.8](https://github.com/marcantondahmen/automad/commit/80de5b2483592d4a94a034292b560bbf7298de43)
+
+Sun, 27 Oct 2024 19:34:06 +0100
 
 ### New Features
 
@@ -409,29 +430,3 @@ Sat, 7 Aug 2021 23:06:36 +0200
 
 - **ui**: fix breadcrumbs position in safari ([0ed10e20d](https://github.com/marcantondahmen/automad/commit/0ed10e20d8d32f963be4d76c84d79bcf967b77c0))
 - **ui**: fix status badge for outdated packages ([8b53a821f](https://github.com/marcantondahmen/automad/commit/8b53a821fa0d9cdc57af25f0eb122dc0dd312050))
-
-## [v1.8.0](https://github.com/marcantondahmen/automad/commit/cbdd0e59738ad28a6a0e2c6d235d5fa886438b2c)
-
-Sat, 7 Aug 2021 19:45:51 +0200
-
-### New Features
-
-- **blocks**: add option to use an image block as link ([586875ca3](https://github.com/marcantondahmen/automad/commit/586875ca31f9ec5cb273a1d0dc4de24a1c006346))
-- **blocks**: add option to use custom css classes for button blocks ([dd615b97f](https://github.com/marcantondahmen/automad/commit/dd615b97f0dc20b6f440d44d47e7e73e43483bb0))
-- **blocks**: add option to use custom css classes for section blocks ([aea1beec2](https://github.com/marcantondahmen/automad/commit/aea1beec298eacc4317389b8eb913c93a326111c))
-- **console**: add clearcache command ([f72112406](https://github.com/marcantondahmen/automad/commit/f72112406c5a79adb4c7ab26f1a3d87ae1bd87fc))
-- **console**: add purge command ([9f0ca5a83](https://github.com/marcantondahmen/automad/commit/9f0ca5a8324ffd0833161998f9b2b2bb7777f45f))
-- **system**: add check for required PHP version before updating ([c547d52af](https://github.com/marcantondahmen/automad/commit/c547d52afe2b8c5a86d9eebd1cbea1a09986b583))
-- **ui**: add autocompletion for inline link tool ([fb70070ff](https://github.com/marcantondahmen/automad/commit/fb70070ff30ce818463f6421a2f9ae374a8778f9))
-- **ui**: add site wide search and replace ([91e9ad680](https://github.com/marcantondahmen/automad/commit/91e9ad6802e3f9410364a1bed3b9de7fa1ebf023))
-- **ui**: convert search bar in top navigation into a jump bar ([0ab079586](https://github.com/marcantondahmen/automad/commit/0ab07958624b42a8cbe5f22b939483355ea39b5b))
-- **ui**: implement automatic updates of links to moved pages ([0369e52fd](https://github.com/marcantondahmen/automad/commit/0369e52fdc4eb6bacbc87e08e49d73bffc00c97a))
-- **ui**: implement automatic updates of links to renamed files ([3a26c4065](https://github.com/marcantondahmen/automad/commit/3a26c4065095e616db87b2a2df45101e6d2a58fa))
-- **ui**: verify that a given username is valid when adding accounts ([283a41a2f](https://github.com/marcantondahmen/automad/commit/283a41a2f99b59914e81b48935800cd59fbc1b41))
-
-### Bugfixes
-
-- **theme**: fix inline link styles in blocks ([8b89e00f0](https://github.com/marcantondahmen/automad/commit/8b89e00f027372189a5a25ae5b0e7bb9409ac665))
-- **ui**: fix disabled save button after deleting unused variable field ([fe375915e](https://github.com/marcantondahmen/automad/commit/fe375915e5afaa9fb9ec4798df3c466fd0e283a5))
-- **ui**: fix position of block editor toolbar on large devices ([e19b4b983](https://github.com/marcantondahmen/automad/commit/e19b4b98356d22ed475a8f27489c1d65a26e83e2))
-- **ui**: fix switcher tab update on hashchanges ([2a6725d37](https://github.com/marcantondahmen/automad/commit/2a6725d374ffd0b575b8ce98f7a0eb14707d222e))

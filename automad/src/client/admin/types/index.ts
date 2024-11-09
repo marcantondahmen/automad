@@ -162,6 +162,10 @@ export interface SelectComponentOption {
 	text?: string;
 }
 
+export interface ThemeOptions {
+	[key: string]: KeyValueMap;
+}
+
 export interface Theme {
 	author: string;
 	description: string;
@@ -171,6 +175,7 @@ export interface Theme {
 	readme: string;
 	templates: string[];
 	tooltips: KeyValueMap;
+	options: ThemeOptions;
 	version?: string;
 }
 

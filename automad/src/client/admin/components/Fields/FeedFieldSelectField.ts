@@ -64,7 +64,7 @@ const options: SortableOptions = {
  *
  * @extends BaseFieldComponent
  */
-class FeedFieldSelectComponent extends BaseFieldComponent {
+class FeedFieldSelectFieldComponent extends BaseFieldComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
@@ -190,4 +190,4 @@ class FeedFieldSelectComponent extends BaseFieldComponent {
 	}
 }
 
-customElements.define(FieldTag.feedFieldSelect, FeedFieldSelectComponent);
+customElements.define(FieldTag.feedFieldSelect, FeedFieldSelectFieldComponent);

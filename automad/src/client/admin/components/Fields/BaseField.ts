@@ -101,6 +101,7 @@ export abstract class BaseFieldComponent
 	 * @param params.name
 	 * @param params.id
 	 * @param params.tooltip
+	 * @param params.options
 	 * @param params.label
 	 * @param params.placeholder
 	 * @param params.isInPage
@@ -111,6 +112,7 @@ export abstract class BaseFieldComponent
 		name,
 		id,
 		tooltip,
+		options,
 		label,
 		placeholder,
 		isInPage,
@@ -128,6 +130,7 @@ export abstract class BaseFieldComponent
 			label,
 			value,
 			tooltip,
+			options,
 			placeholder,
 			isInPage,
 		};

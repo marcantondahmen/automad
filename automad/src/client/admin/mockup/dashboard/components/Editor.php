@@ -1,7 +1,7 @@
 <section class="am-l-dashboard__section">
 	<div class="am-l-dashboard__content">
 		<div class="am-u-flex am-u-flex--column am-u-flex--gap-large">
-			<am-editor style="margin-bottom: 4rem">
+			<am-editor-field style="margin-bottom: 4rem">
 				<div>
 					<am-editor-js>
 						<div
@@ -409,8 +409,8 @@
 						</div>
 					</am-editor-js>
 				</div>
-			</am-editor>
-			<am-editor>
+			</am-editor-field>
+			<am-editor-field>
 				<div>
 					<am-editor-js>
 						<div class="codex-editor codex-editor--narrow">
@@ -1310,7 +1310,7 @@
 						</div>
 					</am-editor-js>
 				</div>
-			</am-editor>
+			</am-editor-field>
 		</div>
 	</div>
 </section>
