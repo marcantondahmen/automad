@@ -149,35 +149,35 @@ export const createCustomizationFields = (
 		};
 	};
 
-	create('p', [], {}, sections.customize, App.text('customization'));
+	create('p', [], {}, sections.customizations, App.text('customization'));
 
 	createField(
 		FieldTag.code,
-		sections.customize,
+		sections.customizations,
 		buildFieldProps('CUSTOM_HTML_HEAD', App.text('customHTMLHead'))
 	);
 
 	createField(
 		FieldTag.code,
-		sections.customize,
+		sections.customizations,
 		buildFieldProps('CUSTOM_HTML_BODY_END', App.text('customHTMLBodyEnd'))
 	);
 
 	createField(
 		FieldTag.code,
-		sections.customize,
+		sections.customizations,
 		buildFieldProps('CUSTOM_JS_HEAD', App.text('customJSHead'))
 	);
 
 	createField(
 		FieldTag.code,
-		sections.customize,
+		sections.customizations,
 		buildFieldProps('CUSTOM_JS_BODY_END', App.text('customJSBodyEnd'))
 	);
 
 	createField(
 		FieldTag.code,
-		sections.customize,
+		sections.customizations,
 		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
 	);
 };
@@ -215,9 +215,10 @@ export const fieldGroup = ({
 	fields,
 	tooltips,
 	themeOptions,
+	renderEmptyAlert,
 	shared,
 }: FieldGroupData): void => {
-	if (Object.values(fields).length == 0) {
+	if (Object.values(fields).length == 0 && renderEmptyAlert) {
 		create(
 			'am-alert',
 			[],
@@ -333,7 +334,7 @@ export const prepareFieldGroups = (fields: KeyValueMap): FieldGroups => {
 	const groups: FieldGroups = {
 		settings: {},
 		text: {},
-		customize: {},
+		customizations: {},
 	};
 
 	Object.keys(fields).forEach((name) => {
@@ -345,7 +346,7 @@ export const prepareFieldGroups = (fields: KeyValueMap): FieldGroups => {
 				groups.text[name] = fields[name];
 				break;
 			case 'color':
-				groups.customize[name] = fields[name];
+				groups.customizations[name] = fields[name];
 				break;
 			default:
 				groups.settings[name] = fields[name];

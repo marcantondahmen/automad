@@ -32,10 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, SelectComponentOption, ThemeOptions } from '.';
+import { KeyValueMap, ThemeOptions } from '.';
 import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
 
-export type FieldSectionName = 'settings' | 'text' | 'customize';
+export type FieldSectionName = 'settings' | 'text' | 'customizations';
 
 export type FieldSectionCollection = {
 	[name in FieldSectionName]: SwitcherSectionComponent;
@@ -64,6 +64,7 @@ export interface FieldGroupData {
 	fields: KeyValueMap;
 	tooltips: KeyValueMap;
 	themeOptions: ThemeOptions;
+	renderEmptyAlert: boolean;
 	shared?: KeyValueMap;
 }
 
