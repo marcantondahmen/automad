@@ -56,8 +56,8 @@ export const inPage = ({ main }: Partials): string => {
 					<span
 						class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
 					>
-						<am-undo-buttons></am-undo-buttons>
-						<span class="${CSS.navbarItem}">
+						<span class="${CSS.navbarGroup}">
+							<am-undo-buttons></am-undo-buttons>
 							<am-submit
 								class="${CSS.button}"
 								${Attr.form}="${InPageController.edit}"
@@ -65,15 +65,15 @@ export const inPage = ({ main }: Partials): string => {
 							>
 								${App.text('save')}
 							</am-submit>
+							<am-link
+								href="${App.baseIndex || '/'}"
+								class="${CSS.navbarItem}"
+								${Attr.bind}="inPageReturnUrl"
+								${Attr.bindTo}="${Attr.external}"
+							>
+								<i class="bi bi-x"></i>
+							</am-link>
 						</span>
-						<am-link
-							href="${App.baseIndex || '/'}"
-							class="${CSS.navbarItem}"
-							${Attr.bind}="inPageReturnUrl"
-							${Attr.bindTo}="${Attr.external}"
-						>
-							<i class="bi bi-x"></i>
-						</am-link>
 					</span>
 				</nav>
 			</div>
