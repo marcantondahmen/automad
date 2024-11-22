@@ -34,8 +34,10 @@
 
 import {
 	App,
+	Attr,
 	create,
 	createEditor,
+	CSS,
 	debounce,
 	FieldTag,
 	fire,
@@ -80,8 +82,20 @@ class EditorFieldComponent extends BaseFieldComponent {
 		this.setAttribute('name', name);
 		this.value = value as EditorOutputData;
 
+		const wrapper = create('div', [], { id }, this);
+
+		create(
+			'am-alert',
+			[CSS.displaySmall],
+			{
+				[Attr.icon]: 'window',
+				[Attr.text]: 'editorSmallDisplayAlert',
+			},
+			wrapper
+		);
+
 		this.editorJS = createEditor(
-			create('div', [], { id }, this),
+			wrapper,
 			{ blocks: this.value.blocks },
 			{
 				onChange: async (api: API) => {
