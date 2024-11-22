@@ -61,7 +61,8 @@ class SelectFieldComponent extends BaseFieldComponent {
 			`${value}`,
 			this,
 			name,
-			id
+			id,
+			'<i class="bi bi-ui-radios"></i> '
 		);
 	}
 }
