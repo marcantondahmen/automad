@@ -178,8 +178,6 @@ class PageController {
 			$supportedFields
 		);
 
-		ksort($fields);
-
 		return $Response->setData(
 			array(
 				'url' => $Page->origUrl,

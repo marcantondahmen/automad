@@ -139,7 +139,7 @@ class Fields {
 		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(Fields::THEME) . '/' . $Page->template . '.php';
 		$fields = self::inTemplate($file);
 
-		return self::cleanUp($fields, $Theme->getMask('page'));
+		return self::cleanUp($fields, $Theme->getMask('page'), $Theme->fieldOrder);
 	}
 
 	/**
@@ -196,21 +196,25 @@ class Fields {
 			$fields = array_merge($fields, self::inTemplate($file));
 		}
 
-		return self::cleanUp($fields, $Theme->getMask('shared'));
+		return self::cleanUp($fields, $Theme->getMask('shared'), $Theme->fieldOrder);
 	}
 
 	/**
 	 * Cleans up an array of fields. All reserved and duplicate fields get removed
-	 * and the optional UI mask is applied.
+	 * and the optional UI mask is applied. Fields are sorted according to a field order
+	 * array.
 	 *
 	 * @param array $fields
 	 * @param array $mask
+	 * @param array $fieldOrder
 	 * @return array The sorted and filtered fields array
 	 */
-	private static function cleanUp(array $fields, array $mask = array()): array {
+	private static function cleanUp(array $fields, array $mask = array(), array $fieldOrder = array()): array {
 		if (empty($fields)) {
 			return array();
 		}
+
+		$fields = array_unique(array_diff($fields, array_values(self::$reserved)));
 
 		if (!empty($mask)) {
 			$fields = array_filter($fields, function ($key) use ($mask) {
@@ -218,6 +222,12 @@ class Fields {
 			});
 		}
 
-		return array_unique(array_diff($fields, array_values(self::$reserved)));
+		if (!empty($fieldOrder)) {
+			$fields = array_keys(array_merge(array_fill_keys($fieldOrder, true), array_fill_keys($fields, true)));
+		} else {
+			sort($fields);
+		}
+
+		return $fields;
 	}
 }

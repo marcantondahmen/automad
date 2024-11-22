@@ -62,6 +62,11 @@ class Theme {
 	public string $description = '';
 
 	/**
+	 * The field order array defines the order of fields in the dashboard.
+	 */
+	public array $fieldOrder = array();
+
+	/**
 	 * The theme license.
 	 */
 	public string $license = '';
@@ -118,15 +123,16 @@ class Theme {
 		$package = Package::getPackageForPath(dirname($themeJson));
 
 		$defaults = array(
-			'name' => $path,
-			'description' => false,
 			'author' => false,
-			'version' => false,
+			'description' => false,
+			'fieldOrder' => array(),
 			'license' => false,
 			'masks' => array(),
-			'tooltips' => array(),
+			'name' => $path,
 			'options' => array(),
-			'readme' => ''
+			'readme' => '',
+			'tooltips' => array(),
+			'version' => false
 		);
 
 		// Get Composer version and readme URL.
@@ -167,14 +173,15 @@ class Theme {
 
 		$this->author = $data['author'];
 		$this->description = $data['description'];
+		$this->fieldOrder = $data['fieldOrder'];
 		$this->license = $data['license'];
 		$this->masks = $data['masks'];
 		$this->name = $data['name'];
+		$this->options = $data['options'];
 		$this->path = $path;
 		$this->readme = $data['readme'];
 		$this->templates = $templates;
 		$this->tooltips = $data['tooltips'];
-		$this->options = $data['options'];
 		$this->version = $data['version'];
 	}
 
