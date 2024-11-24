@@ -136,9 +136,9 @@ export class FileInfoComponent extends BaseComponent {
 				</am-modal-body>
 				<am-modal-footer>
 					<a
-						href="${file.url}"
+						href="${App.baseURL}${file.url}"
 						class="${CSS.button}"
-						download="$${file.basename}"
+						target="_blank"
 					>
 						${App.text('downloadFile')}
 					</a>

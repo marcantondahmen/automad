@@ -189,6 +189,16 @@ class FileCardComponent extends BaseComponent {
 							${Attr.text}="${App.text('copyUrlClipboard')}"
 						></am-icon-text>
 					</am-copy>
+					<a
+						href="${App.baseURL}${file.url}"
+						class="${CSS.dropdownLink}"
+						target="_blank"
+					>
+						<am-icon-text
+							${Attr.icon}="box-arrow-down"
+							${Attr.text}="${App.text('downloadFile')}"
+						></am-icon-text>
+					</a>
 				</div>
 			</am-dropdown>
 		`;

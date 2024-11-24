@@ -100,8 +100,6 @@ class SharedController {
 			$supportedFields
 		);
 
-		ksort($fields);
-
 		return $Response->setData(array('fields' => $fields));
 	}
 

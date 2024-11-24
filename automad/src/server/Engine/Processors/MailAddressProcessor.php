@@ -132,7 +132,7 @@ class MailAddressProcessor {
 	}
 
 	/**
-	 * The function that is used to process the mody in the regex matches matched in the obfuscate method.
+	 * The function that is used to process the body in the regex matches matched in the obfuscate method.
 	 *
 	 * @param array $matches
 	 * @return string
@@ -154,7 +154,7 @@ class MailAddressProcessor {
 		);
 
 		$body = preg_replace_callback(
-			'/(<a[^>]*>.+?<\/a>|(' . $regexEmail . '))/is',
+			'/(<a\b[^>]*>.+?<\/a>|(' . $regexEmail . '))/is',
 			function ($matches) {
 				if (empty($matches[2])) {
 					return $matches[0];

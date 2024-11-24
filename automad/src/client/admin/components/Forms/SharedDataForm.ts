@@ -245,6 +245,7 @@ export class SharedDataFormComponent extends FormComponent {
 				fields: fieldGroups[item],
 				tooltips,
 				themeOptions,
+				renderEmptyAlert: item != 'customizations',
 			});
 		});
 	}

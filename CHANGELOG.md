@@ -1,8 +1,29 @@
 # Changelog
 
-## [v2.0.0-alpha.9](https://github.com/marcantondahmen/automad/commit/b0bebc0ddb73807dd5a217daa22989d003faf359)
+## [v2.0.0-alpha.10](https://github.com/marcantondahmen/automad/commit/9f07136e84fce6fc7306b57f479b5f625703e60c)
 
-Sat, 9 Nov 2024 14:00:18 +0100
+Sun, 24 Nov 2024 11:58:06 +0100
+
+### New Features
+
+- add download link to file cards ([461ece5e4](https://github.com/marcantondahmen/automad/commit/461ece5e4a39e3d038c56fbdc69d00129e9fcec9))
+- add option to define the order of fields inside the dashboard in the theme.json file ([55d93ec1a](https://github.com/marcantondahmen/automad/commit/55d93ec1a0164c6c7ba51bcd88488e6c8bac0350))
+- make sure that block ids are always unique in rendered html ([9f07136e8](https://github.com/marcantondahmen/automad/commit/9f07136e84fce6fc7306b57f479b5f625703e60c))
+
+### Bugfixes
+
+- **ui**: fix button text overflow breaking card layouts ([2bdfe5fa3](https://github.com/marcantondahmen/automad/commit/2bdfe5fa30b8876812b9c2494233df4109aadc21))
+- **ui**: fix datetime input field style on ios ([166e1dc7b](https://github.com/marcantondahmen/automad/commit/166e1dc7b434bf41fbdc5c3ce0f6a5ac74f224f5))
+- fix download links in file info modal ([0b81320a4](https://github.com/marcantondahmen/automad/commit/0b81320a4b774e7055d1de5d0b5df5a27437d88d))
+- fix navbar spacing in inpage edit form ([0fd31f749](https://github.com/marcantondahmen/automad/commit/0fd31f749ffccf14be8377d69db167dc75ae539f))
+- fix position of inpage edit overlay in dom ([486a455ed](https://github.com/marcantondahmen/automad/commit/486a455ed3688fb0b5195c9307136a71c4889c8b))
+- fix processing email addresses inside of markdown blocks ([af569f032](https://github.com/marcantondahmen/automad/commit/af569f032ff0ef47eef5a073042c4ace06ed2c26))
+- fix small display alert being copied with editor content ([cb7a6c73a](https://github.com/marcantondahmen/automad/commit/cb7a6c73a387d12b126f2547361120fc1d42a58c))
+- fix template name display in page data form ([451101ded](https://github.com/marcantondahmen/automad/commit/451101ded3cb4aa8b3e35467e300882b6d2f31b8))
+
+## [v2.0.0-alpha.9](https://github.com/marcantondahmen/automad/commit/c6118ae98545f0d2e2783f2894d1a6da00d57121)
+
+Sat, 9 Nov 2024 19:24:22 +0100
 
 ### New Features
 
@@ -421,12 +442,3 @@ Sun, 8 Aug 2021 22:25:34 +0200
 ### Bugfixes
 
 - **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
-
-## [v1.8.1](https://github.com/marcantondahmen/automad/commit/8be976c0215c549d3ac27016b8c9fee02c052cca)
-
-Sat, 7 Aug 2021 23:06:36 +0200
-
-### Bugfixes
-
-- **ui**: fix breadcrumbs position in safari ([0ed10e20d](https://github.com/marcantondahmen/automad/commit/0ed10e20d8d32f963be4d76c84d79bcf967b77c0))
-- **ui**: fix status badge for outdated packages ([8b53a821f](https://github.com/marcantondahmen/automad/commit/8b53a821fa0d9cdc57af25f0eb122dc0dd312050))

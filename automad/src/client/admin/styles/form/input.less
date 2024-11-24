@@ -43,6 +43,7 @@
 	background-color: @am-form-background;
 	transition: all 0.2s;
 	outline: @am-outline;
+	appearance: none;
 
 	&::placeholder {
 		color: hsl(var(--am-clr-text-muted));
@@ -55,6 +56,10 @@
 
 	&:disabled {
 		color: hsl(var(--am-clr-text-muted));
+	}
+
+	&::-webkit-date-and-time-value {
+		text-align: left;
 	}
 
 	&.am-validate:invalid {

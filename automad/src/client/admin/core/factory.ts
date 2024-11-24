@@ -149,7 +149,7 @@ export const createFieldSections = (
 	const sections: FieldSectionCollection = {
 		settings: createSection(Section.settings),
 		text: createSection(Section.text),
-		customize: createSection(Section.customize),
+		customizations: createSection(Section.customizations),
 	};
 
 	return sections;

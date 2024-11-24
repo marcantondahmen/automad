@@ -217,17 +217,9 @@
 		}
 
 		&-buttons {
-			display: flex;
-			gap: @am-card-padding;
-
-			* + & {
-				margin-top: @am-card-padding;
-			}
-
-			& > * {
-				flex: 1;
-				min-width: 0;
-			}
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+			gap: @am-flex-gap;
 		}
 	}
 

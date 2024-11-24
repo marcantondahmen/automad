@@ -118,7 +118,7 @@ export const renderUsersSection = (): string => {
 							class="${CSS.button}"
 							${Attr.modal}="#am-add-user-modal"
 						>
-							${App.text('systemUsersAdd')}
+							<span>${App.text('systemUsersAdd')}</span>
 						</am-modal-toggle>
 						<am-modal-toggle
 							class="${CSS.button}"

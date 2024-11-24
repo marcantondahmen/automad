@@ -10,6 +10,7 @@ define('AM_BASE_URL', '');
 define('AM_DIR_PACKAGES', '/automad/tests/main/packages');
 define('AM_DIR_PAGES', '/automad/tests/main/data');
 define('AM_DIR_SHARED', '/automad/tests/main/shared');
+define('AM_FILE_UI_TRANSLATION', '');
 define('AM_FEED_ENABLED', false);
 define('AM_I18N_ENABLED', false);
 define('AM_REQUEST', '/page');

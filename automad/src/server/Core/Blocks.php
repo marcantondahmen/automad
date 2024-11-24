@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\Blocks\Utils\Attr;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -50,6 +51,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @psalm-import-type BlockData from \Automad\Blocks\AbstractBlock
  */
 class Blocks {
+	private static bool $isRendering = false;
+
 	/**
 	 * Inject block assets into the header of a page.
 	 *
@@ -76,6 +79,13 @@ class Blocks {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $data, Automad $Automad): string {
+		$isSection = self::$isRendering;
+
+		if (!$isSection) {
+			self::$isRendering = true;
+			Attr::resetUniqueIds();
+		}
+
 		$flexOpen = false;
 		$html = '';
 
@@ -125,6 +135,10 @@ class Blocks {
 
 		if ($flexOpen) {
 			$html .= '</am-flex>';
+		}
+
+		if (!$isSection) {
+			self::$isRendering = false;
 		}
 
 		return $html;

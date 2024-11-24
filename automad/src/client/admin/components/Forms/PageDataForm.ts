@@ -446,6 +446,7 @@ export class PageDataFormComponent extends FormComponent {
 				fields: fieldGroups[item],
 				tooltips,
 				themeOptions,
+				renderEmptyAlert: item != 'customizations',
 				shared,
 			});
 		});

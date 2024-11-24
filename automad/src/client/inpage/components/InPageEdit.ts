@@ -56,27 +56,34 @@ export class InPageEditComponent extends BaseInPageComponent {
 		// in order to apply correct styles.
 		const field = this.getAttribute('field');
 
-		const overlay = create('span', ['am-inpage-edit__overlay'], {}, this);
+		setTimeout(() => {
+			const overlay = create(
+				'span',
+				['am-inpage-edit__overlay'],
+				{},
+				this
+			);
 
-		const button = create(
-			'span',
-			['am-inpage-edit__button'],
-			{},
-			overlay,
-			label
-		);
+			const button = create(
+				'span',
+				['am-inpage-edit__button'],
+				{},
+				overlay,
+				label
+			);
 
-		button.addEventListener('click', () => {
-			const query = new URLSearchParams({
-				field,
-				page,
-				context,
-			}).toString();
+			button.addEventListener('click', () => {
+				const query = new URLSearchParams({
+					field,
+					page,
+					context,
+				}).toString();
 
-			saveScrollPosition();
+				saveScrollPosition();
 
-			window.location.href = `${dashboard}/inpage?${query}`;
-		});
+				window.location.href = `${dashboard}/inpage?${query}`;
+			});
+		}, 0);
 	}
 }
 

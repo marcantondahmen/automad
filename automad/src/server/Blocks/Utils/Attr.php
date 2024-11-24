@@ -49,6 +49,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 abstract class Attr {
 	/**
+	 * The array of IDs that are already used.
+	 */
+	private static array $uniqueIds = array();
+
+	/**
 	 * Create an attribute string for id, class and style.
 	 *
 	 * @param Tunes $tunes
@@ -57,9 +62,17 @@ abstract class Attr {
 	 * @return string
 	 */
 	public static function render(array $tunes, array $classes = array(), ?array $styles = null): string {
-		$id = empty($tunes['id']) ? '' : 'id="' . $tunes['id'] . '"';
+		$id = self::uniqueId($tunes['id']);
+		$id = strlen($id) == 0 ? '' : 'id="' . $id . '"';
 
 		return join(' ', array_filter(array($id, self::classAttr($tunes, $classes), self::styleAttr($tunes, $styles))));
+	}
+
+	/**
+	 * Reset the array on unique IDs.
+	 */
+	public static function resetUniqueIds(): void {
+		self::$uniqueIds = array();
 	}
 
 	/**
@@ -122,5 +135,29 @@ abstract class Attr {
 		}
 
 		return 'style="' . join(' ', $rules) . '"';
+	}
+
+	/**
+	 * Make sure an ID is unique.
+	 *
+	 * @param string $id
+	 * @return string
+	 */
+	private static function uniqueId(string $id): string {
+		if (strlen($id) == 0) {
+			return '';
+		}
+
+		$base = $id;
+		$suffix = 1;
+
+		while (in_array($id, self::$uniqueIds)) {
+			$id = "$base-$suffix";
+			$suffix++;
+		}
+
+		self::$uniqueIds[] = $id;
+
+		return $id;
 	}
 }
