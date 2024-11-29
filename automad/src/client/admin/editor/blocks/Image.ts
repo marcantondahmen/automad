@@ -42,6 +42,7 @@ import {
 	createGenericModal,
 	createImagePickerModal,
 	CSS,
+	debounce,
 	FieldTag,
 	fire,
 	html,
@@ -230,14 +231,18 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			label: App.text('openInNewTab'),
 		});
 
-		listen(body, 'change', () => {
-			const data = collectFieldData(modal);
+		listen(
+			body,
+			'input',
+			debounce(() => {
+				const data = collectFieldData(modal);
 
-			this.data.link = data.link;
-			this.data.openInNewTab = data.newTab ? true : false;
+				this.data.link = data.link;
+				this.data.openInNewTab = data.newTab ? true : false;
 
-			this.blockAPI.dispatchChange();
-		});
+				this.blockAPI.dispatchChange();
+			}, 200)
+		);
 
 		setTimeout(() => {
 			modal.open();

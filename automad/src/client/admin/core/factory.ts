@@ -165,7 +165,7 @@ export const createFieldSections = (
  */
 export const createGenericModal = (
 	title: string,
-	buttonText: string = App.text('ok'),
+	buttonText: string = App.text('close'),
 	destroy: boolean = true
 ): { modal: ModalComponent; body: HTMLElement; button: HTMLElement } => {
 	const attr: KeyValueMap = {};
@@ -193,7 +193,7 @@ export const createGenericModal = (
 	) as ModalComponent;
 
 	const body = query('am-modal-body', modal);
-	const button = query('am-modal-footer button', modal);
+	const button = query('am-modal-footer am-modal-close', modal);
 
 	return { modal, body, button };
 };
