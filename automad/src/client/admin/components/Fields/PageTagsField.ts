@@ -33,7 +33,7 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import { App, create, CSS, debounce, FieldTag } from '@/admin/core';
+import { App, create, CSS, debounce, FieldTag, State } from '@/admin/core';
 import { PageDataFormComponent } from '@/admin/components/Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';
 
@@ -85,8 +85,16 @@ class PageTagsFieldComponent extends BaseFieldComponent {
 		tagify.on(
 			'change',
 			debounce(() => {
-				App.updateState();
-			}, 2000)
+				const state = State.getInstance();
+				const fieldTags = textarea.value
+					.split(',')
+					.map((tag: string) => tag.trim());
+
+				state.set(
+					'tags',
+					[...new Set([...state.get('tags'), ...fieldTags])].sort()
+				);
+			}, 500)
 		);
 	}
 }
