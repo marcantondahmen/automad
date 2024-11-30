@@ -202,6 +202,7 @@ export const createLabelFromField = (key: string): string => {
 	return titleCase(key.replace('+', ''))
 		.replace(/^Color /, '')
 		.replace(/^Checkbox /, '')
+		.replace(/^Number /, '')
 		.replace(/^Select /, '');
 };
 
@@ -317,9 +318,10 @@ export const getPrefixMap = (hasSharedDefaults: boolean) => {
 		checkbox: hasSharedDefaults ? FieldTag.toggleSelect : FieldTag.toggle,
 		color: FieldTag.color,
 		date: FieldTag.date,
-		text: FieldTag.markdown,
 		image: FieldTag.image,
+		number: FieldTag.number,
 		select: FieldTag.select,
+		text: FieldTag.markdown,
 		url: FieldTag.url,
 	} as const;
 };
