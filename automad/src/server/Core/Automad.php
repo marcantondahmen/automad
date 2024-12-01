@@ -302,6 +302,7 @@ class Automad {
 			$data[Fields::TEMPLATE] = Page::TEMPLATE_NAME_404;
 			$data[Fields::LEVEL] = 0;
 			$data[Fields::PARENT] = '';
+			$data[Fields::TITLE] = '404';
 
 			return new Page($data, $this->Shared);
 		}
