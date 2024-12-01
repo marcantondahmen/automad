@@ -273,26 +273,21 @@ class Selection {
 
 			$keys = array_keys($this->selection);
 			$keyIndexes = array_flip($keys);
+			$currentIndex = $keyIndexes[$url];
 
 			$neighbors = array();
 
-			// Check number of pages
-			if (sizeof($keys) > 1) {
-				if (sizeof($keys) > 2) {
-					// Previous
-					if ($keyIndexes[$url] > 0 && isset($keys[$keyIndexes[$url]-1])) {
-						$neighbors['prev'] = $this->selection[$keys[$keyIndexes[$url]-1]];
-					} else {
-						$neighbors['prev'] = $this->selection[$keys[sizeof($keys)-1]];
-					}
-				}
+			if ($currentIndex > 0) {
+				$neighbors['prev'] = $this->selection[$keys[$currentIndex - 1]];
 
-				// Next
-				if (isset($keys[$keyIndexes[$url]+1])) {
-					$neighbors['next'] = $this->selection[$keys[$keyIndexes[$url]+1]];
-				} else {
-					$neighbors['next'] = $this->selection[$keys[0]];
+				// Exclude home page when i18n language routing is enabled.
+				if ($neighbors['prev']->level == -1) {
+					unset($neighbors['prev']);
 				}
+			}
+
+			if ($currentIndex < count($keys) - 1) {
+				$neighbors['next'] = $this->selection[$keys[$currentIndex + 1]];
 			}
 
 			$this->selection = $neighbors;
