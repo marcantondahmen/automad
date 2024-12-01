@@ -46,6 +46,7 @@ use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Context;
+use Automad\Models\Page;
 use Automad\System\Asset;
 use Automad\System\Fields;
 
@@ -113,6 +114,10 @@ class InPage {
 	 * @return string The processed $value
 	 */
 	public function injectTemporaryEditButton(string $value, string $field, Context $Context): string {
+		if ($Context->get()->get(Fields::TEMPLATE) === Page::TEMPLATE_NAME_404) {
+			return $value;
+		}
+
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $field) && Session::getUsername()) {
 			$data = base64_encode(
