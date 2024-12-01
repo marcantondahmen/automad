@@ -17,7 +17,7 @@
     "jest": "jest",
     "jest:watch": "jest --watch",
     "phpunit": "phpunit && phpunit -c phpunit-i18n.xml",
-    "psalm": "psalm --clear-global-cache && psalm",
+    "psalm": "psalm --clear-global-cache && psalm --no-cache --threads=1",
     "test": "npm run phpunit && npm run psalm && npm run jest"
   },
   "devDependencies": {
