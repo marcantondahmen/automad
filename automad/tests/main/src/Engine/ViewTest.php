@@ -124,6 +124,8 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'falsy' => '0//false/0/1',
+			'find_first_image_01' => '/shared/image.png',
+			'find_first_image_02' => '/shared/image.png',
 			'for_01' => '1, 2, 3, 4, 5',
 			'if_01' => 'True',
 			'if_02' => 'False',
@@ -184,7 +186,7 @@ class ViewTest extends TestCase {
 			'toolbox_breadcrumbs_01' => '<ul><li><a href="/">Home</a></li> <li><a href="/index.php/page">Page</a></li> <li><a href="/index.php/page/subpage">Subpage</a></li> </ul>',
 			'toolbox_nav_01' => '<ul><li><a href="/">Home</a></li><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
 			'toolbox_nav_02' => '<ul><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
-			'with_01' => 'Text, Blocks'
+			'with_01' => 'Home, Subpage'
 		);
 
 		foreach ($templates as $template => $expected) {

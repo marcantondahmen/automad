@@ -110,7 +110,8 @@ class Mock extends TestCase {
 					Data::load('/page'),
 					Data::load('/inheritance'),
 					Data::load('/falsy'),
-					Data::load('/invalid')
+					Data::load('/invalid'),
+					Data::load('/find-first-image')
 				),
 				$Shared
 			),

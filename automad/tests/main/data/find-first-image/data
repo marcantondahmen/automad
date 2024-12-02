@@ -1,0 +1,33 @@
+{
+    "draft": {
+        "+findFirstImage": {
+            "blocks": [
+                {
+                    "id": "g41KFif4H4V_l9QzsTRFYnxG8G-3u_HC",
+                    "type": "image",
+                    "data": {
+                        "url": "/shared/image.png",
+                        "link": "",
+                        "openInNewTab": false,
+                        "caption": ""
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": true,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "",
+                            "right": "",
+                            "bottom": "",
+                            "left": ""
+                        },
+                        "className": "",
+                        "id": ""
+                    }
+                }
+            ]
+        },
+		"findFirstImage": "![](/shared/image.png)"
+    }
+}
