@@ -63,9 +63,12 @@ class Image extends AbstractBlock {
 		$attr = Attr::render($block['tunes']);
 		$data = $block['data'];
 
-		$ImgLoaderSet = new ImgLoaderSet($data['url'], $Automad);
+		$src = $data['url'];
+		$ImgLoaderSet = new ImgLoaderSet($src, $Automad);
 
-		$img = "<am-img-loader width=\"{$ImgLoaderSet->width}\" height=\"{$ImgLoaderSet->height}\" image=\"{$ImgLoaderSet->image}\" preload=\"{$ImgLoaderSet->preload}\"></am-img-loader>";
+		// Note that the "src" attribute must be included in order to be able
+		// to find the original source using Str::findFirstImage.
+		$img = "<am-img-loader src=\"$src\" width=\"{$ImgLoaderSet->width}\" height=\"{$ImgLoaderSet->height}\" image=\"{$ImgLoaderSet->image}\" preload=\"{$ImgLoaderSet->preload}\"></am-img-loader>";
 		$caption = '';
 
 		if (!empty($data['caption'])) {
