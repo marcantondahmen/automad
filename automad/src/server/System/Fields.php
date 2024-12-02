@@ -222,12 +222,14 @@ class Fields {
 			});
 		}
 
+		$supportedFields = $fields;
+
 		if (!empty($fieldOrder)) {
 			$fields = array_keys(array_merge(array_fill_keys($fieldOrder, true), array_fill_keys($fields, true)));
 		} else {
 			sort($fields);
 		}
 
-		return $fields;
+		return array_intersect($fields, $supportedFields);
 	}
 }
