@@ -129,6 +129,11 @@ class Config {
 		// IMAGE
 		self::set('AM_IMG_JPG_QUALITY', 90);
 
+		// OPEN GRAPH
+		self::set('AM_OG_IMG_COLOR_TEXT_PRIMARY', '242,248,255');
+		self::set('AM_OG_IMG_COLOR_TEXT_SECONDARY', '180,184,192');
+		self::set('AM_OG_IMG_COLOR_BACKGROUND', '12,14,18');
+
 		// UPDATE
 		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php');
 		self::set('AM_UPDATE_BRANCH', 'v2');
