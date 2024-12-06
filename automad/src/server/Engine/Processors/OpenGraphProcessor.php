@@ -150,7 +150,7 @@ class OpenGraphProcessor {
 		if (is_readable($file)) {
 			Debug::log($name, 'Using cached image');
 
-			return $file;
+			return $url;
 		}
 
 		Debug::log($hashItems, 'Generate new image');
@@ -167,9 +167,60 @@ class OpenGraphProcessor {
 
 		imagefill($image, 0, 0, $colorBackground);
 
-		imagefttext($image, 25, 0, 90, 120, $colorTextPrimary, OpenGraphProcessor::IMAGE_FONT_BOLD, Str::shorten($sitename, 80) . ' —', array('linespacing' => 1.0));
-		imagefttext($image, 58, 0, 87, 220, $colorTextPrimary, OpenGraphProcessor::IMAGE_FONT_BOLD, wordwrap(Str::shorten($title, 72), 26), array('linespacing' => 1.05));
-		imagefttext($image, 25, 0, 90, OpenGraphProcessor::IMAGE_HEIGHT - 110, $colorTextSecondary, OpenGraphProcessor::IMAGE_FONT_REGULAR, '☀ ' . Str::shorten(Server::getHost(), 80), array('linespacing' => 1.0));
+		$maxTitleLength = 100;
+		$lineLength = 22;
+		$shortened = '';
+		$multiline = '';
+		$lineCount = 0;
+
+		while ($lineCount == 0 || $lineCount > 4) {
+			$shortened = Str::shorten($title, $maxTitleLength);
+			$multiline = wordwrap($shortened, $lineLength, "\n", true);
+			$lineCount = preg_match_all('/\n/', $multiline) + 1;
+			$maxTitleLength--;
+		}
+
+		if (strlen($shortened) - (($lineCount - 1) * $lineLength) < 10) {
+			$lineLength -= intval(round(10 / $lineCount));
+		}
+
+		$fontSizeTitle = $lineCount > 3 ? 46 : 58;
+
+		imagefttext(
+			$image,
+			25,
+			0,
+			90,
+			120,
+			$colorTextPrimary,
+			OpenGraphProcessor::IMAGE_FONT_BOLD,
+			Str::shorten($sitename, 80) . ' —',
+			array('linespacing' => 1.0)
+		);
+
+		imagefttext(
+			$image,
+			$fontSizeTitle,
+			0,
+			87,
+			220,
+			$colorTextPrimary,
+			OpenGraphProcessor::IMAGE_FONT_BOLD,
+			$multiline,
+			array('linespacing' => 1.05)
+		);
+
+		imagefttext(
+			$image,
+			25,
+			0,
+			90,
+			OpenGraphProcessor::IMAGE_HEIGHT - 110,
+			$colorTextSecondary,
+			OpenGraphProcessor::IMAGE_FONT_REGULAR,
+			'☀ ' . Str::shorten(Server::getHost(), 80),
+			array('linespacing' => 1.0)
+		);
 
 		imagepng($image, $file);
 
