@@ -309,6 +309,9 @@ class Image {
 				break;
 		}
 
+		$src = null;
+		$dest = null;
+
 		chmod($this->fileFullPath, AM_PERM_FILE);
 	}
 
