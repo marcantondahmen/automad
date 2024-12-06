@@ -71,6 +71,8 @@ class Fields {
 	const LANG = ':lang';
 	const LEVEL = ':level';
 	const LOOP_INDEX = ':i';
+	const META_DESCRIPTION = 'metaDescription';
+	const META_TITLE = 'metaTitle';
 	const NOW = ':now';
 	const ORIG_URL = ':origUrl';
 	const PAGE_INDEX = ':index';
@@ -96,7 +98,6 @@ class Fields {
 	const URL = 'url';
 	const WIDTH = ':width';
 	const WIDTH_RESIZED = ':widthResized';
-
 	/**
 	 * Array with reserved variable fields.
 	 */
@@ -108,6 +109,8 @@ class Fields {
 		'CUSTOM_JS_HEAD' => Fields::CUSTOM_JS_HEAD,
 		'DATE' => Fields::DATE,
 		'HIDDEN' => Fields::HIDDEN,
+		'META_TITLE' => Fields::META_TITLE,
+		'META_DESCRIPTION' => Fields::META_DESCRIPTION,
 		'PRIVATE' => Fields::PRIVATE,
 		'PUBLICATION_STATE' => Fields::PUBLICATION_STATE,
 		'SITENAME' => Fields::SITENAME,
