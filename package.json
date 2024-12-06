@@ -12,14 +12,15 @@
     "build": "npm run clean && webpack --config webpack.config.js --mode production",
     "bump-year": "bash bin/bump-year.sh",
     "clean": "rm -rf ./automad/dist/*/*",
-    "dev": "npm run clean && webpack --config webpack.config.js --mode development",
+    "copy-og-fonts": "mkdir -p ./automad/dist/fonts/open-graph/ && cp node_modules/@expo-google-fonts/inter/Inter_{500Medium,700Bold}.ttf ./automad/dist/fonts/open-graph/",
+    "dev": "npm run clean && npm run copy-og-fonts && webpack --config webpack.config.js --mode development",
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket 2&>/dev/null",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "phpunit": "phpunit && phpunit -c phpunit-i18n.xml",
     "psalm": "psalm --clear-global-cache && psalm --no-cache --threads=1",
     "test": "npm run phpunit && npm run psalm && npm run jest",
-    "postinstall": "mkdir -p ./automad/dist/fonts/open-graph/ && cp node_modules/@expo-google-fonts/inter/Inter_{500Medium,700Bold}.ttf ./automad/dist/fonts/open-graph/"
+    "postinstall": "npm run copy-og-fonts"
   },
   "devDependencies": {
     "@editorjs/embed": "^2.6.0",
