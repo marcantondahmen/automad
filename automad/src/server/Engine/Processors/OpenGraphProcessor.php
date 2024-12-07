@@ -137,6 +137,11 @@ class OpenGraphProcessor {
 		$title = $this->Page->get(Fields::TITLE);
 		$sitename = $this->Shared->get(Fields::SITENAME);
 		$hashItems = array(Server::getHost(), AM_REQUEST, $title, $sitename);
+
+		if (is_readable(OpenGraphProcessor::IMAGE_LOGO)) {
+			$hashItems[] = filemtime(OpenGraphProcessor::IMAGE_LOGO);
+		}
+
 		$hash = hash('sha256', join(':', $hashItems));
 		$dir = Cache::DIR_IMAGES;
 		$baseDir = AM_BASE_DIR;
