@@ -131,7 +131,7 @@ class Config {
 
 		// OPEN GRAPH
 		self::set('AM_OG_IMG_COLOR_TEXT_PRIMARY', '242,248,255');
-		self::set('AM_OG_IMG_COLOR_TEXT_SECONDARY', '180,184,192');
+		self::set('AM_OG_IMG_COLOR_TEXT_SECONDARY', '242,248,255');
 		self::set('AM_OG_IMG_COLOR_BACKGROUND', '12,14,18');
 
 		// UPDATE

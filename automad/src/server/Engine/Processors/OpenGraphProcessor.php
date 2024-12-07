@@ -50,7 +50,7 @@ use Automad\System\Server;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The OpenGraph class handles adding and creating open-grpah information to a page header.
+ * The OpenGraphProcessor class handles adding and creating open-graph information to a page header.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
@@ -59,8 +59,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class OpenGraphProcessor {
 	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_700Bold.ttf';
 	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_500Medium.ttf';
-	const IMAGE_HEIGHT = 640;
-	const IMAGE_WIDTH = 1280;
+	const IMAGE_LOGO = AM_BASE_DIR . '/shared/open-graph-logo.png';
 
 	/**
 	 * The current page model.
@@ -130,7 +129,7 @@ class OpenGraphProcessor {
 	}
 
 	/**
-	 * Create a dynamic open-grpah image.
+	 * Create a dynamic open-graph image.
 	 *
 	 * @return string Return the image URL
 	 */
@@ -155,7 +154,10 @@ class OpenGraphProcessor {
 
 		Debug::log($hashItems, 'Generate new image');
 
-		$image = imagecreatetruecolor(OpenGraphProcessor::IMAGE_WIDTH, OpenGraphProcessor::IMAGE_HEIGHT);
+		$width = 1280;
+		$height = 640;
+
+		$image = imagecreatetruecolor($width, $height);
 
 		$rgbTextPrimary = Parse::csv(AM_OG_IMG_COLOR_TEXT_PRIMARY);
 		$rgbTextSecondary = Parse::csv(AM_OG_IMG_COLOR_TEXT_SECONDARY);
@@ -178,10 +180,6 @@ class OpenGraphProcessor {
 			$multiline = wordwrap($shortened, $lineLength, "\n", true);
 			$lineCount = preg_match_all('/\n/', $multiline) + 1;
 			$maxTitleLength--;
-		}
-
-		if (strlen($shortened) - (($lineCount - 1) * $lineLength) < 10) {
-			$lineLength -= intval(round(10 / $lineCount));
 		}
 
 		$fontSizeTitle = $lineCount > 3 ? 46 : 58;
@@ -215,12 +213,29 @@ class OpenGraphProcessor {
 			25,
 			0,
 			90,
-			OpenGraphProcessor::IMAGE_HEIGHT - 110,
+			$height - 95,
 			$colorTextSecondary,
 			OpenGraphProcessor::IMAGE_FONT_REGULAR,
 			'☀ ' . Str::shorten(Server::getHost(), 80),
 			array('linespacing' => 1.0)
 		);
+
+		if (is_readable(OpenGraphProcessor::IMAGE_LOGO)) {
+			$logo = imagecreatefrompng(OpenGraphProcessor::IMAGE_LOGO);
+
+			imagecopyresampled(
+				$image,
+				$logo,
+				$width - 90 - imagesx($logo),
+				$height - 90 - imagesy($logo),
+				0,
+				0,
+				imagesx($logo),
+				imagesy($logo),
+				imagesx($logo),
+				imagesy($logo)
+			);
+		}
 
 		imagepng($image, $file);
 
@@ -228,7 +243,7 @@ class OpenGraphProcessor {
 	}
 
 	/**
-	 * Test if a given open-grpah meta tag already exists in the given HTML.
+	 * Test if a given open-graph meta tag already exists in the given HTML.
 	 *
 	 * @param string $property
 	 * @param string $html
