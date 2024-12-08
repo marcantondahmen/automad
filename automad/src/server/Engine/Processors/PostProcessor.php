@@ -91,7 +91,7 @@ class PostProcessor {
 	 * @return string the final output
 	 */
 	public function process(string $output): string {
-		$OpenGraphProcessor = new OpenGraphProcessor($this->Automad);
+		$MetaProcessor = new MetaProcessor($this->Automad);
 		$MailAddressProcessor = new MailAddressProcessor();
 		$SyntaxHighlightingProcessor = new SyntaxHighlightingProcessor($this->Automad);
 
@@ -100,7 +100,7 @@ class PostProcessor {
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
-		$output = $OpenGraphProcessor->addMetaTags($output);
+		$output = $MetaProcessor->addMetaTags($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
 		$output = $this->addCustomizations($output);

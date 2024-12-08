@@ -50,13 +50,13 @@ use Automad\System\Server;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The OpenGraphProcessor class handles adding and creating open-graph information to a page header.
+ * The MetaProcessor class handles adding and creating open-graph information to a page header.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class OpenGraphProcessor {
+class MetaProcessor {
 	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_700Bold.ttf';
 	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_500Medium.ttf';
 	const IMAGE_LOGO = AM_BASE_DIR . '/shared/open-graph-logo.png';
@@ -138,8 +138,8 @@ class OpenGraphProcessor {
 		$sitename = $this->Shared->get(Fields::SITENAME);
 		$hashItems = array(Server::getHost(), AM_REQUEST, $title, $sitename);
 
-		if (is_readable(OpenGraphProcessor::IMAGE_LOGO)) {
-			$hashItems[] = filemtime(OpenGraphProcessor::IMAGE_LOGO);
+		if (is_readable(MetaProcessor::IMAGE_LOGO)) {
+			$hashItems[] = filemtime(MetaProcessor::IMAGE_LOGO);
 		}
 
 		$hash = hash('sha256', join(':', $hashItems));
@@ -198,7 +198,7 @@ class OpenGraphProcessor {
 			$padding,
 			$padding + 25,
 			$colorTextPrimary,
-			OpenGraphProcessor::IMAGE_FONT_BOLD,
+			MetaProcessor::IMAGE_FONT_BOLD,
 			Str::shorten($sitename, 80) . ' —',
 			array('linespacing' => 1.0)
 		);
@@ -210,7 +210,7 @@ class OpenGraphProcessor {
 			$padding - 3,
 			$padding + $titleSpace,
 			$colorTextPrimary,
-			OpenGraphProcessor::IMAGE_FONT_BOLD,
+			MetaProcessor::IMAGE_FONT_BOLD,
 			$multiline,
 			array('linespacing' => 1.05)
 		);
@@ -222,13 +222,13 @@ class OpenGraphProcessor {
 			$padding,
 			$height - $padding - 5,
 			$colorTextSecondary,
-			OpenGraphProcessor::IMAGE_FONT_REGULAR,
+			MetaProcessor::IMAGE_FONT_REGULAR,
 			'☀ ' . Str::shorten(preg_replace('#^https?://#', '', Server::getHost()), 80),
 			array('linespacing' => 1.0)
 		);
 
-		if (is_readable(OpenGraphProcessor::IMAGE_LOGO)) {
-			$logo = imagecreatefrompng(OpenGraphProcessor::IMAGE_LOGO);
+		if (is_readable(MetaProcessor::IMAGE_LOGO)) {
+			$logo = imagecreatefrompng(MetaProcessor::IMAGE_LOGO);
 
 			imagecopyresampled(
 				$image,
