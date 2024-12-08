@@ -337,6 +337,12 @@ export class PageDataFormComponent extends FormComponent {
 			App.reservedFields.META_DESCRIPTION,
 			App.text('metaDescription')
 		);
+
+		createMainField(
+			FieldTag.image,
+			App.reservedFields.OPEN_GRAPH_IMAGE,
+			App.text('openGraphImage')
+		);
 	}
 
 	/**

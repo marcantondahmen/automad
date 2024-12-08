@@ -236,6 +236,8 @@
 	"ok": "Ok",
 	"opacity": "Opacity",
 	"openInNewTab": "Open in a new tab",
+	"openGraphImage": "Open-Graph Image (leave blank in order to use the automatically generated image)",
+	"openGraphImageShared": "Open-Graph Image (overrides automatically generated open-graph images sitewide)",
 	"optimizeContentForCards": "Optimize Content for Cards",
 	"orderedList": "Ordered list",
 	"original": "Original",

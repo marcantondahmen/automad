@@ -47,7 +47,6 @@ use Automad\Engine\Document\Head;
 use Automad\Models\Page;
 use Automad\Models\Shared;
 use Automad\System\Fields;
-use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -107,10 +106,16 @@ class MetaProcessor {
 
 		$html = $this->addIcons($html);
 
+		if ($ogImage = $this->Page->get(Fields::OPEN_GRAPH_IMAGE)) {
+			$ogImage = AM_SERVER . AM_BASE_URL . $ogImage;
+		} else {
+			$ogImage = $this->createOpenGraphImage();
+		}
+
 		$html = $this->addMetaTagOnce('property', 'twitter:card', 'summary_large_image', $html);
-		$html = $this->addMetaTagOnce('property', 'og:url', Server::getHost() . Server::getBaseUrl() . $this->Page->url, $html);
+		$html = $this->addMetaTagOnce('property', 'og:url', $base . $this->Page->url, $html);
 		$html = $this->addMetaTagOnce('property', 'og:type', 'website', $html);
-		$html = $this->addMetaTagOnce('property', 'og:image', $this->createOpenGraphImage(), $html);
+		$html = $this->addMetaTagOnce('property', 'og:image', $ogImage, $html);
 		$html = $this->addMetaTagOnce('property', 'og:description', $content['description'], $html);
 		$html = $this->addMetaTagOnce('property', 'og:title', $content['title'], $html);
 		$html = $this->addMetaTagOnce('name', 'description', $content['description'], $html);
@@ -197,7 +202,9 @@ class MetaProcessor {
 	private function createOpenGraphImage(): string {
 		$title = $this->Page->get(Fields::TITLE);
 		$sitename = $this->Shared->get(Fields::SITENAME);
-		$hashItems = array(Server::getHost(), AM_REQUEST, $title, $sitename);
+		$baseDir = AM_BASE_DIR;
+		$baseUrl = AM_SERVER . AM_BASE_URL;
+		$hashItems = array($baseUrl, AM_REQUEST, $title, $sitename);
 
 		if (is_readable(MetaProcessor::IMAGE_LOGO)) {
 			$hashItems[] = filemtime(MetaProcessor::IMAGE_LOGO);
@@ -205,8 +212,6 @@ class MetaProcessor {
 
 		$hash = hash('sha256', join(':', $hashItems));
 		$dir = Cache::DIR_IMAGES;
-		$baseDir = AM_BASE_DIR;
-		$baseUrl = Server::getHost() . Server::getBaseUrl();
 		$name = "og-$hash.png";
 
 		$url = "$baseUrl$dir/$name";
@@ -284,7 +289,7 @@ class MetaProcessor {
 			$height - $padding - 5,
 			$colorTextSecondary,
 			MetaProcessor::IMAGE_FONT_REGULAR,
-			'☀ ' . Str::shorten(preg_replace('#^https?://#', '', Server::getHost()), 80),
+			'☀ ' . Str::shorten(preg_replace('#^https?://#', '', $baseUrl), 40),
 			array('linespacing' => 1.0)
 		);
 

@@ -237,6 +237,13 @@ export class SharedDataFormComponent extends FormComponent {
 			name: `data[${App.reservedFields.SYNTAX_THEME}]`,
 		});
 
+		createField(FieldTag.image, this.sections.settings, {
+			key: App.reservedFields.OPEN_GRAPH_IMAGE,
+			value: fields[App.reservedFields.OPEN_GRAPH_IMAGE],
+			name: `data[${App.reservedFields.OPEN_GRAPH_IMAGE}]`,
+			label: App.text('openGraphImageShared'),
+		});
+
 		createCustomizationFields(fields, this.sections);
 
 		Object.keys(this.sections).forEach((item: FieldSectionName) => {

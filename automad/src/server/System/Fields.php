@@ -39,7 +39,6 @@ namespace Automad\System;
 use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Page;
-use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -74,6 +73,7 @@ class Fields {
 	const META_DESCRIPTION = 'metaDescription';
 	const META_TITLE = 'metaTitle';
 	const NOW = ':now';
+	const OPEN_GRAPH_IMAGE = 'openGraphImage';
 	const ORIG_URL = ':origUrl';
 	const PAGE_INDEX = ':index';
 	const PAGELIST_COUNT = ':pagelistCount';
@@ -111,6 +111,7 @@ class Fields {
 		'HIDDEN' => Fields::HIDDEN,
 		'META_TITLE' => Fields::META_TITLE,
 		'META_DESCRIPTION' => Fields::META_DESCRIPTION,
+		'OPEN_GRAPH_IMAGE' => Fields::OPEN_GRAPH_IMAGE,
 		'PRIVATE' => Fields::PRIVATE,
 		'PUBLICATION_STATE' => Fields::PUBLICATION_STATE,
 		'SITENAME' => Fields::SITENAME,
