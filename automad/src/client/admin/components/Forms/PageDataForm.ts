@@ -329,13 +329,13 @@ export class PageDataFormComponent extends FormComponent {
 		createMainField(
 			FieldTag.input,
 			App.reservedFields.META_TITLE,
-			'Open Graph Meta Title'
+			App.text('metaTitle')
 		);
 
 		createMainField(
 			FieldTag.textarea,
 			App.reservedFields.META_DESCRIPTION,
-			'Open Graph Meta Description'
+			App.text('metaDescription')
 		);
 	}
 

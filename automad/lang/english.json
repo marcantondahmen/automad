@@ -216,6 +216,8 @@
 	"mailBlockTitle": "Mail Form",
 	"mailBlockTo": "Receiving mail address",
 	"matchRowHeight": "Match Content to Row Height",
+	"metaTitle": "Meta Title (optional)",
+	"metaDescription": "Meta Description (optional)",
 	"missingPageTitleError": "Title missing!",
 	"missingTargetPageError": "Please select a page as destination!",
 	"missingUrlError": "Please enter a valid URL!",
