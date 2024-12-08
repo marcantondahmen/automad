@@ -97,10 +97,10 @@ class PostProcessor {
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
-		$output = $MetaProcessor->addMetaTags($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
 		$output = $this->addCustomizations($output);
+		$output = $MetaProcessor->addMetaTags($output);
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);

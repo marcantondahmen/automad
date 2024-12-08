@@ -37,6 +37,7 @@
 namespace Automad\Core;
 
 use Automad\Blocks\Utils\Attr;
+use Automad\Engine\Document\Head;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -63,12 +64,7 @@ class Blocks {
 		$assets = Asset::css('dist/blocks/main.bundle.css', false) .
 				  Asset::js('dist/blocks/main.bundle.js', false);
 
-		// Check if there is already any other script tag and try to prepend all assets as first items.
-		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
-			return preg_replace('/(\<(script|link).*\<\/head\>)/is', $assets . '$1', $str);
-		}
-
-		return str_replace('</head>', $assets . '</head>', $str);
+		return Head::prepend($str, $assets);
 	}
 
 	/**

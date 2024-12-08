@@ -123,7 +123,7 @@ class MetaProcessor {
 		$html = $this->addMetaTagOnce('http-equiv', 'X-UA-Compatible', 'IE=edge', $html);
 
 		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
-		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '" />';
+		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '">';
 
 		if (!preg_match('/\<title\>/', $html)) {
 			$meta .= '<title>' . $content['title'] . '</title>';
@@ -136,7 +136,7 @@ class MetaProcessor {
 
 		if (AM_I18N_ENABLED) {
 			$lang = I18n::getLanguageFromUrl(AM_REQUEST);
-			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '" />';
+			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '">';
 		}
 
 		$html = Head::prepend($html, $meta);

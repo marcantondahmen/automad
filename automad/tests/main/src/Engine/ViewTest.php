@@ -13,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 class ViewTest extends TestCase {
 	public function dataForTestInPageRenderIsEqual() {
 		$data = array();
+		$metaTags = $this->getMetaTags();
 		$assets = $this->getAssets();
 		$custom = $this->getCustomizations();
 		$pagesDir = AM_DIR_PAGES;
@@ -31,7 +32,7 @@ class ViewTest extends TestCase {
 		$templates = array(
 			'email_01' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
 							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<a href="#">test</a>
@@ -42,7 +43,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'email_02' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
 							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
@@ -54,7 +55,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'resolve_01' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
@@ -63,7 +64,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'resolve_02' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
@@ -84,6 +85,7 @@ class ViewTest extends TestCase {
 
 	public function dataForTestRenderIsEqual() {
 		$data = array();
+		$metaTags = $this->getMetaTags();
 		$assets = $this->getAssets();
 		$custom = $this->getCustomizations();
 		$pagesDir = AM_DIR_PAGES;
@@ -92,7 +94,7 @@ class ViewTest extends TestCase {
 			'comments_01' => 'Page',
 			'email_01' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
 							{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#">test</a>
@@ -103,7 +105,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'email_02' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
 							{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
@@ -116,7 +118,7 @@ class ViewTest extends TestCase {
 			'extension_01' => 'Test',
 			'extension_02' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
 							{$assets->extensionCSS}{$assets->extensionJS}{$custom->head}</head>
 							<body>
 								Asset Test
@@ -164,7 +166,7 @@ class ViewTest extends TestCase {
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'resolve_01' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}</head>
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
@@ -173,7 +175,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'resolve_02' => <<< HTML
 						<html>
-							<head>{$assets->generator}{$assets->blocksCSS}{$assets->blocksJS}{$assets->canonical}{$custom->head}</head>
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
@@ -241,8 +243,6 @@ class ViewTest extends TestCase {
 		};
 
 		return (object) array(
-			'generator' => '<meta name="Generator" content="Automad ' . App::VERSION . '">',
-			'canonical' => '<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '" />',
 			'blocksJS' => '<script src="' . $asset('/automad/dist/blocks/main.bundle.js') . '" type="text/javascript"></script>',
 			'blocksCSS' => '<link href="' . $asset('/automad/dist/blocks/main.bundle.css') . '" rel="stylesheet">',
 			'mailJS' => '<script src="' . $asset('/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>',
@@ -259,5 +259,18 @@ class ViewTest extends TestCase {
 			'head' => '<title>html head</title><script>javascript head</script><style>custom css</style>',
 			'bodyEnd' => '<p>html body end</p><script>javascript body end</script>'
 		);
+	}
+
+	private function getMetaTags(): string {
+		return '<meta name="Generator" content="Automad ' . App::VERSION . '">' .
+			'<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '">' .
+			'<meta http-equiv="X-UA-Compatible" content="IE=edge">' .
+			'<meta name="description" content="html body end">' .
+			'<meta property="og:title" content="Page | My Test Site">' .
+			'<meta property="og:description" content="html body end">' .
+			'<meta property="og:image" content="http://localhost/cache/images/og-f6039865b8da0ea1944c4d94eb9777172ecfc176d6145bcb6182139a9aabd4b9.png">' .
+			'<meta property="og:type" content="website">' .
+			'<meta property="og:url" content="http://localhost/index.php/page">' .
+			'<meta property="twitter:card" content="summary_large_image">';
 	}
 }
