@@ -61,7 +61,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class MetaProcessor {
 	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_700Bold.ttf';
 	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_500Medium.ttf';
-	const IMAGE_LOGO = AM_BASE_DIR . '/shared/open-graph-logo.png';
+	const IMAGE_LOGO = AM_BASE_DIR . AM_DIR_SHARED . '/open-graph-logo.png';
 
 	/**
 	 * The current page model.
@@ -91,22 +91,6 @@ class MetaProcessor {
 	 */
 	public function addMetaTags(string $html): string {
 		$base = AM_SERVER . AM_BASE_INDEX;
-
-		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
-		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '" />';
-
-		if (AM_FEED_ENABLED) {
-			$sitename = $this->Shared->get(Fields::SITENAME);
-			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . $base . AM_FEED_URL . '">';
-		}
-
-		if (AM_I18N_ENABLED) {
-			$lang = I18n::getLanguageFromUrl(AM_REQUEST);
-			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '" />';
-		}
-
-		$html = Head::prepend($html, $meta);
-
 		$content = array_merge(
 			array(
 				'title' => $this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME),
@@ -121,12 +105,69 @@ class MetaProcessor {
 			)
 		);
 
-		$html = $this->addIfNotExisting('og:image', $this->createOpenGraphImage(), $html);
-		$html = $this->addIfNotExisting('og:url', Server::getHost() . Server::getBaseUrl() . $this->Page->url, $html);
-		$html = $this->addIfNotExisting('og:type', 'website', $html);
-		$html = $this->addIfNotExisting('og:title', $content['title'], $html);
-		$html = $this->addIfNotExisting('og:description', $content['description'], $html);
-		$html = $this->addIfNotExisting('twitter:card', 'summary_large_image', $html);
+		$html = $this->addIcons($html);
+
+		$html = $this->addMetaTagOnce('property', 'twitter:card', 'summary_large_image', $html);
+		$html = $this->addMetaTagOnce('property', 'og:url', Server::getHost() . Server::getBaseUrl() . $this->Page->url, $html);
+		$html = $this->addMetaTagOnce('property', 'og:type', 'website', $html);
+		$html = $this->addMetaTagOnce('property', 'og:image', $this->createOpenGraphImage(), $html);
+		$html = $this->addMetaTagOnce('property', 'og:description', $content['description'], $html);
+		$html = $this->addMetaTagOnce('property', 'og:title', $content['title'], $html);
+		$html = $this->addMetaTagOnce('name', 'description', $content['description'], $html);
+		$html = $this->addMetaTagOnce('http-equiv', 'X-UA-Compatible', 'IE=edge', $html);
+
+		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
+		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '" />';
+
+		if (!preg_match('/\<title\>/', $html)) {
+			$meta .= '<title>' . $content['title'] . '</title>';
+		}
+
+		if (AM_FEED_ENABLED) {
+			$sitename = $this->Shared->get(Fields::SITENAME);
+			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . $base . AM_FEED_URL . '">';
+		}
+
+		if (AM_I18N_ENABLED) {
+			$lang = I18n::getLanguageFromUrl(AM_REQUEST);
+			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '" />';
+		}
+
+		$html = Head::prepend($html, $meta);
+
+		return $html;
+	}
+
+	/**
+	 * Add an icon if it is not existing.
+	 *
+	 * @param string $rel
+	 * @param string $file
+	 * @param string $html
+	 * @param string $extra
+	 */
+	private function addIconIfExistingOnce(string $rel, string $file, string $html, string $extra = ''): string {
+		if (preg_match('/\<link\b[^>]+href="[^"]*' . preg_quote($file) . '[^"]*"/s', $html)) {
+			return $html;
+		}
+
+		if (!is_readable(AM_BASE_DIR . AM_DIR_SHARED . '/' . $file)) {
+			return $html;
+		}
+
+		return Head::prepend($html, '<link rel="' . $rel . '" href="' . AM_DIR_SHARED . '/' . $file . '" ' . $extra . '>');
+	}
+
+	/**
+	 * Add favions, touch icons etc.
+	 *
+	 * @param string $html
+	 * @return string
+	 */
+	private function addIcons(string $html): string {
+		$html = $this->addIconIfExistingOnce('icon', 'favicon.ico', $html, 'sizes="32x32"');
+		$html = $this->addIconIfExistingOnce('icon', 'favicon.svg', $html);
+		$html = $this->addIconIfExistingOnce('apple-touch-icon', 'apple-touch-icon.png', $html);
 
 		return $html;
 	}
@@ -134,17 +175,18 @@ class MetaProcessor {
 	/**
 	 * Add a missing meta tag if not existing.
 	 *
-	 * @param string $property
+	 * @param string $key
+	 * @param string $name
 	 * @param string $content
 	 * @param string $html
 	 * @return string the updated HTML
 	 */
-	private function addIfNotExisting(string $property, string $content, string $html): string {
-		if ($this->hasProperty($property, $html)) {
+	private function addMetaTagOnce(string $key, string $name, string $content, string $html): string {
+		if (preg_match('/\<meta\b[^>]+' . preg_quote($key) . '="' . preg_quote($name) . '"/s', $html) === 1) {
 			return $html;
 		}
 
-		return Head::append($html, '<meta property="' . $property . '" content="' . $content . '">');
+		return Head::prepend($html, '<meta ' . $key . '="' . $name . '" content="' . $content . '">');
 	}
 
 	/**
@@ -266,16 +308,5 @@ class MetaProcessor {
 		imagepng($image, $file);
 
 		return $url;
-	}
-
-	/**
-	 * Test if a given open-graph meta tag already exists in the given HTML.
-	 *
-	 * @param string $property
-	 * @param string $html
-	 * @return bool true if the meta tag already exists
-	 */
-	private function hasProperty(string $property, string $html): bool {
-		return preg_match('/\<meta\b[^>]+property="' . preg_quote($property) . '"/s', $html) === 1;
 	}
 }
