@@ -161,6 +161,7 @@ class OpenGraphProcessor {
 
 		$width = 1280;
 		$height = 640;
+		$padding = 108;
 
 		$image = imagecreatetruecolor($width, $height);
 
@@ -175,7 +176,7 @@ class OpenGraphProcessor {
 		imagefill($image, 0, 0, $colorBackground);
 
 		$maxTitleLength = 100;
-		$lineLength = 22;
+		$lineLength = 21;
 		$shortened = '';
 		$multiline = '';
 		$lineCount = 0;
@@ -187,14 +188,15 @@ class OpenGraphProcessor {
 			$maxTitleLength--;
 		}
 
-		$fontSizeTitle = $lineCount > 3 ? 46 : 58;
+		$fontSizeTitle = $lineCount > 3 ? 45 : 54;
+		$titleSpace = $lineCount > 3 ? 105 : 125;
 
 		imagefttext(
 			$image,
 			25,
 			0,
-			90,
-			120,
+			$padding,
+			$padding + 25,
 			$colorTextPrimary,
 			OpenGraphProcessor::IMAGE_FONT_BOLD,
 			Str::shorten($sitename, 80) . ' —',
@@ -205,8 +207,8 @@ class OpenGraphProcessor {
 			$image,
 			$fontSizeTitle,
 			0,
-			87,
-			220,
+			$padding - 3,
+			$padding + $titleSpace,
 			$colorTextPrimary,
 			OpenGraphProcessor::IMAGE_FONT_BOLD,
 			$multiline,
@@ -217,11 +219,11 @@ class OpenGraphProcessor {
 			$image,
 			25,
 			0,
-			90,
-			$height - 95,
+			$padding,
+			$height - $padding - 5,
 			$colorTextSecondary,
 			OpenGraphProcessor::IMAGE_FONT_REGULAR,
-			'☀ ' . Str::shorten(Server::getHost(), 80),
+			'☀ ' . Str::shorten(preg_replace('#^https?://#', '', Server::getHost()), 80),
 			array('linespacing' => 1.0)
 		);
 
@@ -231,8 +233,8 @@ class OpenGraphProcessor {
 			imagecopyresampled(
 				$image,
 				$logo,
-				$width - 90 - imagesx($logo),
-				$height - 90 - imagesy($logo),
+				$width - $padding - imagesx($logo),
+				$height - $padding - imagesy($logo),
 				0,
 				0,
 				imagesx($logo),
