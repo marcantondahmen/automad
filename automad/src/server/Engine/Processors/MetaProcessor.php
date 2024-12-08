@@ -36,9 +36,11 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\I18n;
 use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\Engine\Document\Head;
@@ -88,6 +90,23 @@ class MetaProcessor {
 	 * @return string the HTML with including the added meta tags
 	 */
 	public function addMetaTags(string $html): string {
+		$base = AM_SERVER . AM_BASE_INDEX;
+
+		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
+		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '" />';
+
+		if (AM_FEED_ENABLED) {
+			$sitename = $this->Shared->get(Fields::SITENAME);
+			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . $base . AM_FEED_URL . '">';
+		}
+
+		if (AM_I18N_ENABLED) {
+			$lang = I18n::getLanguageFromUrl(AM_REQUEST);
+			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '" />';
+		}
+
+		$html = Head::prepend($html, $meta);
+
 		$content = array_merge(
 			array(
 				'title' => $this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME),
