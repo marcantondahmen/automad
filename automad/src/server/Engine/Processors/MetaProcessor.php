@@ -41,7 +41,6 @@ use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\I18n;
-use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\Engine\Document\Head;
 use Automad\Models\Page;
@@ -58,6 +57,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class MetaProcessor {
+	const IMAGE_COLOR_BACKGROUND = '#0e0f11';
+	const IMAGE_COLOR_TEXT = '#f4f4f6';
 	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_700Bold.ttf';
 	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_500Medium.ttf';
 	const IMAGE_LOGO = AM_BASE_DIR . AM_DIR_SHARED . '/open-graph-logo.png';
@@ -204,7 +205,9 @@ class MetaProcessor {
 		$sitename = $this->Shared->get(Fields::SITENAME);
 		$baseDir = AM_BASE_DIR;
 		$baseUrl = AM_SERVER . AM_BASE_URL;
-		$hashItems = array($baseUrl, AM_REQUEST, $title, $sitename);
+		$customColorText = $this->Page->get(Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT);
+		$customColorBackground = $this->Page->get(Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND);
+		$hashItems = array($baseUrl, AM_REQUEST, $title, $sitename, $customColorText, $customColorBackground);
 
 		if (is_readable(MetaProcessor::IMAGE_LOGO)) {
 			$hashItems[] = filemtime(MetaProcessor::IMAGE_LOGO);
@@ -231,12 +234,10 @@ class MetaProcessor {
 
 		$image = imagecreatetruecolor($width, $height);
 
-		$rgbTextPrimary = Parse::csv(AM_OG_IMG_COLOR_TEXT_PRIMARY);
-		$rgbTextSecondary = Parse::csv(AM_OG_IMG_COLOR_TEXT_SECONDARY);
-		$rgbBackground = Parse::csv(AM_OG_IMG_COLOR_BACKGROUND);
+		$rgbText = $this->hexToRgbColor($customColorText, MetaProcessor::IMAGE_COLOR_TEXT);
+		$rgbBackground = $this->hexToRgbColor($customColorBackground, MetaProcessor::IMAGE_COLOR_BACKGROUND);
 
-		$colorTextPrimary = imagecolorallocate($image, $rgbTextPrimary[0] ?? 0, $rgbTextPrimary[1] ?? 0, $rgbTextPrimary[2] ?? 0);
-		$colorTextSecondary = imagecolorallocate($image, $rgbTextSecondary[0] ?? 0, $rgbTextSecondary[1] ?? 0, $rgbTextSecondary[2] ?? 0);
+		$colorText = imagecolorallocate($image, $rgbText[0] ?? 0, $rgbText[1] ?? 0, $rgbText[2] ?? 0);
 		$colorBackground = imagecolorallocate($image, $rgbBackground[0] ?? 0, $rgbBackground[1] ?? 0, $rgbBackground[2] ?? 0);
 
 		imagefill($image, 0, 0, $colorBackground);
@@ -263,7 +264,7 @@ class MetaProcessor {
 			0,
 			$padding,
 			$padding + 25,
-			$colorTextPrimary,
+			$colorText,
 			MetaProcessor::IMAGE_FONT_BOLD,
 			Str::shorten($sitename, 80) . ' —',
 			array('linespacing' => 1.0)
@@ -275,7 +276,7 @@ class MetaProcessor {
 			0,
 			$padding - 3,
 			$padding + $titleSpace,
-			$colorTextPrimary,
+			$colorText,
 			MetaProcessor::IMAGE_FONT_BOLD,
 			$multiline,
 			array('linespacing' => 1.05)
@@ -287,7 +288,7 @@ class MetaProcessor {
 			0,
 			$padding,
 			$height - $padding - 5,
-			$colorTextSecondary,
+			$colorText,
 			MetaProcessor::IMAGE_FONT_REGULAR,
 			'☀ ' . Str::shorten(preg_replace('#^https?://#', '', $baseUrl), 40),
 			array('linespacing' => 1.0)
@@ -313,5 +314,31 @@ class MetaProcessor {
 		imagepng($image, $file);
 
 		return $url;
+	}
+
+	/**
+	 * Convert a hex color string into an rgb array.
+	 *
+	 * @param string $hex
+	 * @param string $defaultHex
+	 * @return array
+	 */
+	private function hexToRgbColor(string $hex, string $defaultHex): array {
+		$format = '#%02x%02x%02x';
+
+		/** @var array */
+		$default = sscanf($defaultHex, $format);
+
+		if (!$hex) {
+			return $default;
+		}
+
+		$rgb = sscanf($hex, $format);
+
+		if (isset($rgb[2])) {
+			return $rgb;
+		}
+
+		return $default;
 	}
 }

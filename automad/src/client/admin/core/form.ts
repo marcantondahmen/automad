@@ -37,6 +37,7 @@ import {
 	Attr,
 	create,
 	createField,
+	CSS,
 	listen,
 	query,
 	queryAll,
@@ -179,6 +180,31 @@ export const createCustomizationFields = (
 		FieldTag.code,
 		sections.customizations,
 		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
+	);
+
+	const ogColors = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{},
+		sections.customizations
+	);
+
+	createField(
+		FieldTag.color,
+		ogColors,
+		buildFieldProps(
+			'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT',
+			App.text('customOpenGraphImageColorText')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		ogColors,
+		buildFieldProps(
+			'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND',
+			App.text('customOpenGraphImageColorBackground')
+		)
 	);
 };
 

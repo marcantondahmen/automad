@@ -59,6 +59,8 @@ class Fields {
 	const CUSTOM_HTML_HEAD = 'customHTMLHead';
 	const CUSTOM_JS_BODY_END = 'customJSBodyEnd';
 	const CUSTOM_JS_HEAD = 'customJSHead';
+	const CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND = 'customOpenGraphImageColorBackground';
+	const CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT = 'customOpenGraphImageColorText';
 	const DATE = 'date';
 	const FILE = ':file';
 	const FILE_RESIZED = ':fileResized';
@@ -107,6 +109,8 @@ class Fields {
 		'CUSTOM_HTML_HEAD' => Fields::CUSTOM_HTML_HEAD,
 		'CUSTOM_JS_BODY_END' => Fields::CUSTOM_JS_BODY_END,
 		'CUSTOM_JS_HEAD' => Fields::CUSTOM_JS_HEAD,
+		'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND' => Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND,
+		'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT' => Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT,
 		'DATE' => Fields::DATE,
 		'HIDDEN' => Fields::HIDDEN,
 		'META_TITLE' => Fields::META_TITLE,
