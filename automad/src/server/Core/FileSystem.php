@@ -36,8 +36,6 @@
 
 namespace Automad\Core;
 
-use Automad\Core\Messenger;
-use Automad\Core\Text;
 use Exception;
 use FilesystemIterator;
 use RecursiveCallbackFilterIterator;
@@ -549,6 +547,9 @@ class FileSystem {
 
 			if (!@rename($item, $dest)) {
 				if (function_exists('exec')) {
+					$item = '"' . $item . '"';
+					$dest = '"' . $dest . '"';
+
 					if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 						$cmd = "move $item $dest";
 						$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
