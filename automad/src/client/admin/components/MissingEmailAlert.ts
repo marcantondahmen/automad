@@ -33,7 +33,19 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { App, Attr, CSS, html, Route, Section } from '../core';
+import {
+	App,
+	Attr,
+	create,
+	CSS,
+	getComponentTargetContainer,
+	html,
+	listen,
+	query,
+	Route,
+	Section,
+} from '../core';
+import { ModalComponent } from './Modal/Modal';
 
 /**
  * An alert component that is displayed whenever a user has no associated email address.
@@ -49,24 +61,49 @@ class MissingEmailAlertComponent extends BaseComponent {
 			return;
 		}
 
-		this.classList.add(CSS.alert);
+		const username = App.user.name
+			.replace(/[^\w\-\_]+/g, '-')
+			.toLowerCase();
 
-		this.innerHTML = html`
-			<div class="${CSS.alertIcon}">
-				<i class="bi bi-envelope-x"></i>
-			</div>
-			<div class="${CSS.alertText}">
-				<div>${App.text('missingEmailAlert')}</div>
-				<div>
-					<am-link
-						class="${CSS.button} ${CSS.buttonPrimary}"
-						${Attr.target}="${Route.system}?section=${Section.users}"
-					>
-						${App.text('openUserSettings')}
-					</am-link>
-				</div>
-			</div>
-		`;
+		const key = `missing-email-notified-${username}`;
+
+		if (localStorage.getItem(key)) {
+			return;
+		}
+
+		const modal = create(
+			ModalComponent.TAG_NAME,
+			[],
+			{ [Attr.noEsc]: '', [Attr.noClick]: '' },
+			getComponentTargetContainer(),
+			html`
+				<am-modal-dialog>
+					<am-modal-header>
+						${App.text('missingEmailAlertTitle')}
+					</am-modal-header>
+					<am-modal-body>
+						${App.text('missingEmailAlertBody')}
+					</am-modal-body>
+					<am-modal-footer>
+						<am-modal-close class="${CSS.button}">
+							${App.text('missingEmailAlertIgnore')}
+						</am-modal-close>
+						<a
+							class="${CSS.button} ${CSS.buttonPrimary}"
+							href="${App.dashboardURL}/${Route.system}?section=${Section.users}"
+						>
+							${App.text('missingEmailAlertOpenSettings')}
+						</a>
+					</am-modal-footer>
+				</am-modal-dialog>
+			`
+		) as ModalComponent;
+
+		listen(query('am-modal-footer am-modal-close', modal), 'click', () => {
+			localStorage.setItem(key, 'ignore');
+		});
+
+		modal.open();
 	}
 }
 
