@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.11](https://github.com/marcantondahmen/automad/commit/9d1bf6b82d2f83c4c08905920067151e4bdfa186)
+## [v2.0.0-alpha.12](https://github.com/marcantondahmen/automad/commit/73e34b55e8a8b646141cd84ccdc796afb29242f7)
 
-Fri, 13 Dec 2024 16:07:28 +0100
+Fri, 13 Dec 2024 16:53:24 +0100
+
+### Bugfixes
+
+- fix missing fonts in dist bundle ([73e34b55e](https://github.com/marcantondahmen/automad/commit/73e34b55e8a8b646141cd84ccdc796afb29242f7))
+
+## [v2.0.0-alpha.11](https://github.com/marcantondahmen/automad/commit/61449346db3c0b70109892daa2f987e3a913b2de)
+
+Fri, 13 Dec 2024 16:10:26 +0100
 
 ### New Features
 
@@ -441,15 +449,3 @@ Thu, 12 Aug 2021 22:24:51 +0200
 
 - **ui**: fix typo in text modules ([ba8702a87](https://github.com/marcantondahmen/automad/commit/ba8702a87d26afd0172294d541c1573925f77f56))
 - **ui**: fix updating links that are wrapped in quotes ([4417468d6](https://github.com/marcantondahmen/automad/commit/4417468d659c1e71e9b76698e377a19a1e209b5a))
-
-## [v1.8.3](https://github.com/marcantondahmen/automad/commit/aa72e82f0192571f5ae1a8b032720fd9b3fb8645)
-
-Mon, 9 Aug 2021 23:21:36 +0200
-
-### New Features
-
-- **core**: use a shortened md5 hash as directory slug in case a sanitized title is too short ([d6d5e57cd](https://github.com/marcantondahmen/automad/commit/d6d5e57cd663bcf0eed7c8697b7b454fac1064fb))
-
-### Bugfixes
-
-- **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
