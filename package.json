@@ -9,7 +9,7 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "build": "npm run clean && webpack --config webpack.config.js --mode production",
+    "build": "npm run clean && npm run copy-og-fonts && webpack --config webpack.config.js --mode production",
     "bump-year": "bash bin/bump-year.sh",
     "clean": "rm -rf ./automad/dist/*/*",
     "copy-og-fonts": "bash bin/copy-open-graph-fonts.sh",
@@ -19,8 +19,7 @@
     "jest:watch": "jest --watch",
     "phpunit": "phpunit && phpunit -c phpunit-i18n.xml",
     "psalm": "psalm --clear-global-cache && psalm --no-cache --threads=1",
-    "test": "npm run phpunit && npm run psalm && npm run jest",
-    "postinstall": "npm run copy-og-fonts"
+    "test": "npm run phpunit && npm run psalm && npm run jest"
   },
   "devDependencies": {
     "@editorjs/embed": "^2.6.0",
