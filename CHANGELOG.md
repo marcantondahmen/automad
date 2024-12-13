@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.14](https://github.com/marcantondahmen/automad/commit/a9785e611e600c93690cbb435fe8c293891e11b3)
+## [v2.0.0-alpha.15](https://github.com/marcantondahmen/automad/commit/fbfbc70581742ea47055fb1a287d43355b6c5e69)
 
-Fri, 13 Dec 2024 17:49:52 +0100
+Fri, 13 Dec 2024 17:59:31 +0100
+
+### Bugfixes
+
+- refactor build script ([fbfbc7058](https://github.com/marcantondahmen/automad/commit/fbfbc70581742ea47055fb1a287d43355b6c5e69))
+
+## [v2.0.0-alpha.14](https://github.com/marcantondahmen/automad/commit/5431d379fb67c94a30eb1a0a4f50a9b7753ad4ab)
+
+Fri, 13 Dec 2024 17:51:44 +0100
 
 ### Bugfixes
 
@@ -490,12 +498,3 @@ Sun, 8 Aug 2021 22:25:34 +0200
 ### Bugfixes
 
 - **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
-
-## [v1.8.1](https://github.com/marcantondahmen/automad/commit/8be976c0215c549d3ac27016b8c9fee02c052cca)
-
-Sat, 7 Aug 2021 23:06:36 +0200
-
-### Bugfixes
-
-- **ui**: fix breadcrumbs position in safari ([0ed10e20d](https://github.com/marcantondahmen/automad/commit/0ed10e20d8d32f963be4d76c84d79bcf967b77c0))
-- **ui**: fix status badge for outdated packages ([8b53a821f](https://github.com/marcantondahmen/automad/commit/8b53a821fa0d9cdc57af25f0eb122dc0dd312050))
