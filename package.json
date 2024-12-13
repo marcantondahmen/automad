@@ -12,7 +12,7 @@
     "build": "npm run clean && webpack --config webpack.config.js --mode production",
     "bump-year": "bash bin/bump-year.sh",
     "clean": "rm -rf ./automad/dist/*/*",
-    "copy-og-fonts": "mkdir -p ./automad/dist/fonts/open-graph/ && cp node_modules/@expo-google-fonts/inter/Inter_{500Medium,700Bold}.ttf ./automad/dist/fonts/open-graph/",
+    "copy-og-fonts": "bash bin/copy-open-graph-fonts.sh",
     "dev": "npm run clean && npm run copy-og-fonts && webpack --config webpack.config.js --mode development",
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket 2&>/dev/null",
     "jest": "jest",
