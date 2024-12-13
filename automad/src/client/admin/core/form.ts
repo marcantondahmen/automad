@@ -37,6 +37,7 @@ import {
 	Attr,
 	create,
 	createField,
+	CSS,
 	listen,
 	query,
 	queryAll,
@@ -180,6 +181,31 @@ export const createCustomizationFields = (
 		sections.customizations,
 		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
 	);
+
+	const ogColors = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{},
+		sections.customizations
+	);
+
+	createField(
+		FieldTag.color,
+		ogColors,
+		buildFieldProps(
+			'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT',
+			App.text('customOpenGraphImageColorText')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		ogColors,
+		buildFieldProps(
+			'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND',
+			App.text('customOpenGraphImageColorBackground')
+		)
+	);
 };
 
 /**
@@ -202,6 +228,7 @@ export const createLabelFromField = (key: string): string => {
 	return titleCase(key.replace('+', ''))
 		.replace(/^Color /, '')
 		.replace(/^Checkbox /, '')
+		.replace(/^Number /, '')
 		.replace(/^Select /, '');
 };
 
@@ -317,9 +344,10 @@ export const getPrefixMap = (hasSharedDefaults: boolean) => {
 		checkbox: hasSharedDefaults ? FieldTag.toggleSelect : FieldTag.toggle,
 		color: FieldTag.color,
 		date: FieldTag.date,
-		text: FieldTag.markdown,
 		image: FieldTag.image,
+		number: FieldTag.number,
 		select: FieldTag.select,
+		text: FieldTag.markdown,
 		url: FieldTag.url,
 	} as const;
 };

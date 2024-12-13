@@ -1,6 +1,5 @@
 <?php
 
-use Automad\App;
 use Automad\Autoload;
 use Automad\Core\Config;
 
@@ -14,6 +13,7 @@ define('AM_FILE_UI_TRANSLATION', '');
 define('AM_FEED_ENABLED', false);
 define('AM_I18N_ENABLED', false);
 define('AM_REQUEST', '/page');
+define('AM_SERVER', 'http://localhost');
 
 require_once AM_BASE_DIR . '/automad/src/server/Autoload.php';
 Autoload::init();

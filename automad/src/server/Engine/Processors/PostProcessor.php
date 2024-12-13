@@ -37,7 +37,6 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Admin\InPage;
-use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
@@ -48,7 +47,6 @@ use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
 use Automad\System\Fields;
-use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -91,17 +89,18 @@ class PostProcessor {
 	 * @return string the final output
 	 */
 	public function process(string $output): string {
+		$MetaProcessor = new MetaProcessor($this->Automad);
 		$MailAddressProcessor = new MailAddressProcessor();
 		$SyntaxHighlightingProcessor = new SyntaxHighlightingProcessor($this->Automad);
 
 		$output = $this->createExtensionAssetTags($output);
-		$output = $this->addMetaTags($output);
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
 		$output = $this->addCustomizations($output);
+		$output = $MetaProcessor->addMetaTags($output);
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
@@ -169,31 +168,6 @@ class PostProcessor {
 		}
 
 		return $str;
-	}
-
-	/**
-	 * Add meta tags to the head of $str.
-	 *
-	 * @param string $str
-	 * @return string The rendered output
-	 */
-	private function addMetaTags(string $str): string {
-		$base = AM_SERVER . AM_BASE_INDEX;
-
-		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
-		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '" />';
-
-		if (AM_FEED_ENABLED) {
-			$sitename = $this->Automad->Shared->get(Fields::SITENAME);
-			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . $base . AM_FEED_URL . '">';
-		}
-
-		if (AM_I18N_ENABLED) {
-			$lang = I18n::getLanguageFromUrl(AM_REQUEST);
-			$meta .= '<link rel="alternate" hreflang="' . $lang . '" href="' . $base . AM_REQUEST . '" />';
-		}
-
-		return Head::prepend($str, $meta);
 	}
 
 	/**

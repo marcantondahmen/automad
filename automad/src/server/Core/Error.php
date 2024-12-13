@@ -223,8 +223,15 @@ class Error {
 	 * Set up the error handler to throw a new exception on error.
 	 */
 	private static function setErrorHandler(): void {
-		set_error_handler(function ($serverity, $message, $file, $line) {
-			throw new ErrorException($message, 0, $serverity, $file, $line);
+		set_error_handler(function (int $serverity, string $message, string $file, int $line) {
+			if (
+				$serverity != E_DEPRECATED &&
+				$serverity != E_USER_DEPRECATED &&
+				$serverity != E_USER_WARNING &&
+				$serverity != E_WARNING
+			) {
+				throw new ErrorException($message, 0, $serverity, $file, $line);
+			}
 		});
 	}
 }

@@ -36,10 +36,9 @@
 
 namespace Automad\Core;
 
-use Automad\Core\Messenger;
-use Automad\Core\Text;
 use Exception;
 use FilesystemIterator;
+use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -152,12 +151,24 @@ class FileSystem {
 	 */
 	public static function diskUsage(): float {
 		$bytes = 0.0;
-		$objects = new RecursiveIteratorIterator(
-			new RecursiveDirectoryIterator(AM_BASE_DIR, FilesystemIterator::SKIP_DOTS)
-		);
+		$dirIterator = new RecursiveDirectoryIterator(AM_BASE_DIR, FilesystemIterator::SKIP_DOTS);
 
-		foreach($objects as $object) {
-			$bytes += $object->getSize();
+		$filterIterator = new RecursiveCallbackFilterIterator($dirIterator, function ($item) {
+			if (is_link($item->getPathname())) {
+				return false;
+			}
+
+			return true;
+		});
+
+		$objects = new RecursiveIteratorIterator($filterIterator);
+
+		foreach ($objects as $object) {
+			try {
+				$bytes += $object->getSize();
+			} catch (Exception $e) {
+				Debug::log($e->getMessage());
+			}
 		}
 
 		return round($bytes / (1024 * 1024), 2);
@@ -536,6 +547,9 @@ class FileSystem {
 
 			if (!@rename($item, $dest)) {
 				if (function_exists('exec')) {
+					$item = '"' . $item . '"';
+					$dest = '"' . $dest . '"';
+
 					if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 						$cmd = "move $item $dest";
 						$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);

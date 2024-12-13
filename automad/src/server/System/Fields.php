@@ -39,7 +39,6 @@ namespace Automad\System;
 use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Models\Page;
-use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -60,6 +59,8 @@ class Fields {
 	const CUSTOM_HTML_HEAD = 'customHTMLHead';
 	const CUSTOM_JS_BODY_END = 'customJSBodyEnd';
 	const CUSTOM_JS_HEAD = 'customJSHead';
+	const CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND = 'customOpenGraphImageColorBackground';
+	const CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT = 'customOpenGraphImageColorText';
 	const DATE = 'date';
 	const FILE = ':file';
 	const FILE_RESIZED = ':fileResized';
@@ -71,7 +72,10 @@ class Fields {
 	const LANG = ':lang';
 	const LEVEL = ':level';
 	const LOOP_INDEX = ':i';
+	const META_DESCRIPTION = 'metaDescription';
+	const META_TITLE = 'metaTitle';
 	const NOW = ':now';
+	const OPEN_GRAPH_IMAGE = 'openGraphImage';
 	const ORIG_URL = ':origUrl';
 	const PAGE_INDEX = ':index';
 	const PAGELIST_COUNT = ':pagelistCount';
@@ -96,7 +100,6 @@ class Fields {
 	const URL = 'url';
 	const WIDTH = ':width';
 	const WIDTH_RESIZED = ':widthResized';
-
 	/**
 	 * Array with reserved variable fields.
 	 */
@@ -106,8 +109,13 @@ class Fields {
 		'CUSTOM_HTML_HEAD' => Fields::CUSTOM_HTML_HEAD,
 		'CUSTOM_JS_BODY_END' => Fields::CUSTOM_JS_BODY_END,
 		'CUSTOM_JS_HEAD' => Fields::CUSTOM_JS_HEAD,
+		'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND' => Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND,
+		'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT' => Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT,
 		'DATE' => Fields::DATE,
 		'HIDDEN' => Fields::HIDDEN,
+		'META_TITLE' => Fields::META_TITLE,
+		'META_DESCRIPTION' => Fields::META_DESCRIPTION,
+		'OPEN_GRAPH_IMAGE' => Fields::OPEN_GRAPH_IMAGE,
 		'PRIVATE' => Fields::PRIVATE,
 		'PUBLICATION_STATE' => Fields::PUBLICATION_STATE,
 		'SITENAME' => Fields::SITENAME,
@@ -222,12 +230,14 @@ class Fields {
 			});
 		}
 
+		$supportedFields = $fields;
+
 		if (!empty($fieldOrder)) {
 			$fields = array_keys(array_merge(array_fill_keys($fieldOrder, true), array_fill_keys($fields, true)));
 		} else {
 			sort($fields);
 		}
 
-		return $fields;
+		return array_intersect($fields, $supportedFields);
 	}
 }

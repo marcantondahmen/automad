@@ -1,3 +1,3 @@
-<@ newPagelist { type: 'siblings' } ~@>
-<@ with next @>@{ title }<@ end ~@>
-<@ with prev @>, @{ title }<@ end ~@>
+<@ newPagelist ~@>
+<@ with prev @>@{ title }<@ end ~@>
+<@ with next @>, @{ title }<@ end ~@>

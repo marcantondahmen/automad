@@ -325,6 +325,24 @@ export class PageDataFormComponent extends FormComponent {
 			App.reservedFields.TAGS,
 			App.text('pageTags')
 		);
+
+		createMainField(
+			FieldTag.input,
+			App.reservedFields.META_TITLE,
+			App.text('metaTitle')
+		);
+
+		createMainField(
+			FieldTag.textarea,
+			App.reservedFields.META_DESCRIPTION,
+			App.text('metaDescription')
+		);
+
+		createMainField(
+			FieldTag.image,
+			App.reservedFields.OPEN_GRAPH_IMAGE,
+			App.text('openGraphImage')
+		);
 	}
 
 	/**

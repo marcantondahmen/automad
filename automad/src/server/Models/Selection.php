@@ -103,6 +103,10 @@ class Selection {
 	 * @param string $url
 	 */
 	public function filterBreadcrumbs(string $url): void {
+		$I18n = I18n::get();
+		$lang = $I18n->getLanguage();
+		$home = "/$lang";
+
 		// Test wheter $url is the URL of a real page.
 		// "Real" pages have a URL (not like search or error pages) and they exist in the selection array (not hidden).
 		// For all other $url, just the home page will be returned.
@@ -111,13 +115,13 @@ class Selection {
 
 			// While $url is not the home page, strip each segement one by one and
 			// add the corresponding Page object to $pages.
-			while ($url != '/') {
+			while ($url != $home) {
 				$pages[$url] = $this->selection[$url];
 				$url = '/' . trim(substr($url, 0, (int) strrpos($url, '/')), '/');
 			}
 
 			// Add home page
-			$pages['/'] = $this->selection['/'];
+			$pages[$home] = $this->selection[$home];
 
 			// Reverse the $pages array and pass it to $this->selection.
 			$this->selection = array_reverse($pages);
@@ -125,7 +129,7 @@ class Selection {
 			// If $url is not a valid URL, only add the home page to the selection.
 			// This might be the case for "virtual pages", like the "error" or "search results" pages,
 			// which don't have a $page->url.
-			$this->selection = array($this->selection['/']);
+			$this->selection = array($this->selection[$home]);
 		}
 	}
 
@@ -269,26 +273,21 @@ class Selection {
 
 			$keys = array_keys($this->selection);
 			$keyIndexes = array_flip($keys);
+			$currentIndex = $keyIndexes[$url];
 
 			$neighbors = array();
 
-			// Check number of pages
-			if (sizeof($keys) > 1) {
-				if (sizeof($keys) > 2) {
-					// Previous
-					if ($keyIndexes[$url] > 0 && isset($keys[$keyIndexes[$url]-1])) {
-						$neighbors['prev'] = $this->selection[$keys[$keyIndexes[$url]-1]];
-					} else {
-						$neighbors['prev'] = $this->selection[$keys[sizeof($keys)-1]];
-					}
-				}
+			if ($currentIndex > 0) {
+				$neighbors['prev'] = $this->selection[$keys[$currentIndex - 1]];
 
-				// Next
-				if (isset($keys[$keyIndexes[$url]+1])) {
-					$neighbors['next'] = $this->selection[$keys[$keyIndexes[$url]+1]];
-				} else {
-					$neighbors['next'] = $this->selection[$keys[0]];
+				// Exclude home page when i18n language routing is enabled.
+				if ($neighbors['prev']->level == -1) {
+					unset($neighbors['prev']);
 				}
+			}
+
+			if ($currentIndex < count($keys) - 1) {
+				$neighbors['next'] = $this->selection[$keys[$currentIndex + 1]];
 			}
 
 			$this->selection = $neighbors;

@@ -86,6 +86,7 @@ const systemInfo = (): string => {
 				</am-modal-toggle>
 			</div>
 		</div>
+		<am-missing-email-alert></am-missing-email-alert>
 		<am-modal id="am-server-info-modal">
 			<am-modal-dialog>
 				<am-modal-header>${App.text('serverInfo')}</am-modal-header>

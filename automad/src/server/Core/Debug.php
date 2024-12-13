@@ -169,14 +169,14 @@ class Debug {
 	 * Log disk usage.
 	 */
 	private static function diskUsage(): void {
-		self::log(FileSystem::diskUsage(), 'Disk usage');
+		self::log(round(FileSystem::diskUsage(), 2), 'Disk usage (M)');
 	}
 
 	/**
 	 * Provide info about memory usage.
 	 */
 	private static function memory(): void {
-		self::log((memory_get_peak_usage(true) / 1048576) . 'M of ' . ini_get('memory_limit'), 'Memory used');
+		self::log(round((memory_get_peak_usage(true) / 1048576), 2), 'Peak memory useage (M)');
 	}
 
 	/**
@@ -196,7 +196,7 @@ class Debug {
 	private static function timerStop(): void {
 		if (self::$time) {
 			$executionTime = microtime(true) - self::$time;
-			self::log($executionTime . ' seconds', 'Time for execution');
+			self::log(round($executionTime, 6), 'Time for execution (seconds)');
 		}
 	}
 }

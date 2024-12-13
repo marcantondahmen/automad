@@ -80,7 +80,7 @@ class RemoteFile {
 	private function download(string $url): string {
 		$downloads = AM_BASE_DIR . AM_DIR_CACHE . '/downloads';
 		FileSystem::makeDir($downloads);
-		$sanitized = Str::sanitize(pathinfo(basename($url), PATHINFO_FILENAME), false, 64);
+		$sanitized = Str::sanitize(pathinfo(basename($url), PATHINFO_FILENAME), true, 64);
 		$file = $downloads . '/' . $sanitized . '.' . hash('crc32', $url);
 
 		$existing = FileSystem::glob("$file*");

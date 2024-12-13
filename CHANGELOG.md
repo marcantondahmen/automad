@@ -1,8 +1,32 @@
 # Changelog
 
-## [v2.0.0-alpha.10](https://github.com/marcantondahmen/automad/commit/9f07136e84fce6fc7306b57f479b5f625703e60c)
+## [v2.0.0-alpha.11](https://github.com/marcantondahmen/automad/commit/9d1bf6b82d2f83c4c08905920067151e4bdfa186)
 
-Sun, 24 Nov 2024 11:58:06 +0100
+Fri, 13 Dec 2024 16:07:28 +0100
+
+### New Features
+
+- add automatically generated open-graph image and tags when rendering pages ([fbdc8ac79](https://github.com/marcantondahmen/automad/commit/fbdc8ac79a1a68e674390a35c24969746216242a))
+- add better notifications whenever a user has no associated email address ([f99bcc808](https://github.com/marcantondahmen/automad/commit/f99bcc8087cafb7461e2d17053e4a2eada6f8096))
+- add number field type ([fae969487](https://github.com/marcantondahmen/automad/commit/fae969487d512787b3222b2db1268a9f7920e1d1))
+- add support for custom logo in open-graph images ([7675b0905](https://github.com/marcantondahmen/automad/commit/7675b09050bc15b49db66ad458ed9de102d6d348))
+- automatically add favicons and apple touch icon when existing ([b5bbd5439](https://github.com/marcantondahmen/automad/commit/b5bbd54399158bd03d256cf1e8699d3212aafda7))
+- make prev and next selections work with language router and disable looping ([37fc8bf8b](https://github.com/marcantondahmen/automad/commit/37fc8bf8bd430cc95bf7e7b167859d189d871006))
+- set title for 404 pages ([df3ca2b15](https://github.com/marcantondahmen/automad/commit/df3ca2b154e4e90e28fabf8146f2e4165e85a210))
+
+### Bugfixes
+
+- **ui**: fix image links not being saved when using the autocomplete form ([dcbd537d9](https://github.com/marcantondahmen/automad/commit/dcbd537d916741bfb3aec330e1d777825828bb2c))
+- **ui**: fix page reload when page tags are edited ([01db0d55e](https://github.com/marcantondahmen/automad/commit/01db0d55e8371f11e717dcfe09460f79d07d39a4))
+- disable in-page editing on 404 pages ([c39522113](https://github.com/marcantondahmen/automad/commit/c3952211318e473cf2002427e430efe744f77596))
+- fix breadcrumbs selection on multilingual sites ([390bfbb1c](https://github.com/marcantondahmen/automad/commit/390bfbb1c6d6d8c5a805de2a4c53ec2e4bb79e97))
+- fix error in disk usage calculation when following broken symlinks ([07c360064](https://github.com/marcantondahmen/automad/commit/07c3600642c164f9b07909303f3af42556c2a990))
+- fix finding first image in rendered blocks ([06ce168da](https://github.com/marcantondahmen/automad/commit/06ce168dae537c2b0a12b8d8690870b3e335cd9f))
+- fix warning when purging cache across file systems ([e4a3a92ef](https://github.com/marcantondahmen/automad/commit/e4a3a92efcdb94d22809ede640ec46cd4db90d2a))
+
+## [v2.0.0-alpha.10](https://github.com/marcantondahmen/automad/commit/cc8976c207bcc937e18dab442a66f6bd10289ebd)
+
+Sun, 24 Nov 2024 12:01:23 +0100
 
 ### New Features
 
@@ -429,16 +453,3 @@ Mon, 9 Aug 2021 23:21:36 +0200
 ### Bugfixes
 
 - **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
-
-## [v1.8.2](https://github.com/marcantondahmen/automad/commit/e070a89209c2e90eadb9be4b77580beef6aa75d1)
-
-Sun, 8 Aug 2021 22:25:34 +0200
-
-### New Features
-
-- **samples**: add pagelist example page ([2a033f4da](https://github.com/marcantondahmen/automad/commit/2a033f4dada04e3d2fd7d24f2d2d6b1bfd04986e))
-- **samples**: add tags and filters to example pages ([d18f2482b](https://github.com/marcantondahmen/automad/commit/d18f2482b2f258d7b42a6609a439769773ffb7f8))
-
-### Bugfixes
-
-- **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
