@@ -66,6 +66,7 @@ const systemInfo = (): string => {
 					<am-system-cache-indicator></am-system-cache-indicator>
 				</am-link>
 			</div>
+			<am-missing-email-alert></am-missing-email-alert>
 			<div class="${CSS.displaySmall}">
 				<a href="${App.baseIndex || '/'}" class="${CSS.button}">
 					${App.text('inPageEdit')}

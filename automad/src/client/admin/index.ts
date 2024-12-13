@@ -173,6 +173,7 @@ import './components/Img';
 import './components/KeyComboBadge';
 import './components/Link';
 import './components/Logo';
+import './components/MissingEmailAlert';
 import './components/NavItem';
 import './components/NavTree';
 import './components/NumberUnitInput';

@@ -38,7 +38,6 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Cache;
-use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Session;
 use Automad\Core\Text;
@@ -119,7 +118,11 @@ class MailConfigController {
 		$User = $UserCollection->getUser(Session::getUsername());
 		$to = $User->email ?? '';
 
-		if ($to && Mail::send($to, 'Automad Mail Config Test', '<h1>Success</h1>')) {
+		if (!$to) {
+			return $Response->setError(Text::get('systemMailSendTestNoEmail'));
+		}
+
+		if (Mail::send($to, 'Automad Mail Config Test', '<h1>Success</h1>')) {
 			return $Response->setSuccess(Text::get('systemMailSendTestSuccess') . ' ' . $to);
 		}
 
