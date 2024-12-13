@@ -222,7 +222,7 @@
 	"metaDescription": "Meta Description (optional)",
 	"missingEmailAlertBody": "There is currently no email address associated with your user account. In order to be able to receive password reset emails or other system notifications you can add an email address inside the user settings.",
 	"missingEmailAlertTitle": "Email Address",
-	"missingEmailAlertOpenSettings": "Open User Settings",
+	"missingEmailAlertOpenSettings": "Settings",
 	"missingEmailAlertIgnore": "Don't Show Again",
 	"missingPageTitleError": "Title missing!",
 	"missingTargetPageError": "Please select a page as destination!",
