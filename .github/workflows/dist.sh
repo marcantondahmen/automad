@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -z ${BOT_TOKEN} ]; then
 	echo "BOT_TOKEN is not set. Skipping workflow ..."
@@ -45,7 +45,7 @@ cd $srcDir
 
 echo '---------------------------------------------------------------------------'
 echo "Building from source ..."
-npm install
+npm install --loglevel=error
 npm run build
 
 echo '---------------------------------------------------------------------------'
