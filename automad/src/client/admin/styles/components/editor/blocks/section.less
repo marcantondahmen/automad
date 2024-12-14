@@ -197,7 +197,7 @@
 			}
 		}
 
-		& > .codex-editor {
+		.ce-block & > .codex-editor {
 			color: var(--color, inherit);
 			padding-top: var(--paddingTop);
 			padding-bottom: var(--paddingBottom);
@@ -206,7 +206,7 @@
 			background-blend-mode: var(--backgroundBlendMode, normal);
 			border-radius: var(--borderRadius, 0);
 			border: var(--borderWidth, 0) var(--borderStyle, none)
-				var(--borderColor);
+				var(--borderColor, currentColor);
 		}
 	}
 }
