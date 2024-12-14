@@ -47,17 +47,20 @@ IFS='.' read -ra elem <<<"$latestTag"
 major=${elem[0]}
 minor=${elem[1]}
 patch=${elem[2]}
+pre=${elem[3]}
 
 newMajorTag=$((major + 1)).0.0
 newMinorTag=$major.$((minor + 1)).0
 newPatchTag=$major.$minor.$((patch + 1))
+newPreTag=$major.$minor.$patch.$((pre + 1))
 
 echo "Choose type of release:"
 echo
-echo "  1) Patch $newPatchTag (default)"
-echo "  2) Minor $newMinorTag"
-echo "  3) Major $newMajorTag"
-echo "  4) Custom"
+echo "  1) Patch       $newPatchTag (default)"
+echo "  2) Minor       $newMinorTag"
+echo "  3) Major       $newMajorTag"
+echo "  4) Pre-Release $newPreTag"
+echo "  5) Custom"
 echo
 read -n 1 -p "Please select a number or press Enter for a patch: " option
 echo
@@ -66,7 +69,8 @@ case $option in
 1) tag=$newPatchTag ;;
 2) tag=$newMinorTag ;;
 3) tag=$newMajorTag ;;
-4) read -p "Tag: " tag ;;
+4) tag=$newPreTag ;;
+5) read -p "Tag: " tag ;;
 *) tag=$newPatchTag ;;
 esac
 
