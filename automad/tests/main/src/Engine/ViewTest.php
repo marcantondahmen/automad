@@ -264,6 +264,7 @@ class ViewTest extends TestCase {
 	private function getMetaTags(): string {
 		return '<meta name="Generator" content="Automad ' . App::VERSION . '">' .
 			'<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '">' .
+			'<meta charset="utf-8">' .
 			'<meta http-equiv="X-UA-Compatible" content="IE=edge">' .
 			'<meta name="description" content="html body end">' .
 			'<meta property="og:title" content="Page | My Test Site">' .

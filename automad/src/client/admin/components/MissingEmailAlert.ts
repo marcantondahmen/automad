@@ -74,7 +74,7 @@ class MissingEmailAlertComponent extends BaseComponent {
 		const modal = create(
 			ModalComponent.TAG_NAME,
 			[],
-			{ [Attr.noEsc]: '', [Attr.noClick]: '' },
+			{ [Attr.noEsc]: '', [Attr.noClick]: '', [Attr.destroy]: '' },
 			getComponentTargetContainer(),
 			html`
 				<am-modal-dialog>

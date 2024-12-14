@@ -40,6 +40,7 @@ use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
 use Automad\Core\I18n;
 use Automad\Core\Str;
 use Automad\Engine\Document\Head;
@@ -93,13 +94,13 @@ class MetaProcessor {
 		$base = AM_SERVER . AM_BASE_INDEX;
 		$content = array_merge(
 			array(
-				'title' => $this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME),
+				'title' => Str::stripTags($this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME)),
 				'description' => Str::shorten(Str::stripTags(Str::findFirstParagraph($html)), 150)
 			),
 			array_filter(
 				array(
-					'title' => $this->Page->get(Fields::META_TITLE),
-					'description' => $this->Page->get(Fields::META_DESCRIPTION)
+					'title' => Str::stripTags($this->Page->get(Fields::META_TITLE)),
+					'description' => Str::stripTags($this->Page->get(Fields::META_DESCRIPTION))
 				),
 				'strlen'
 			)
@@ -114,7 +115,7 @@ class MetaProcessor {
 		}
 
 		$html = $this->addMetaTagOnce('property', 'twitter:card', 'summary_large_image', $html);
-		$html = $this->addMetaTagOnce('property', 'og:url', $base . $this->Page->url, $html);
+		$html = $this->addMetaTagOnce('property', 'og:url', $base . AM_REQUEST, $html);
 		$html = $this->addMetaTagOnce('property', 'og:type', 'website', $html);
 		$html = $this->addMetaTagOnce('property', 'og:image', $ogImage, $html);
 		$html = $this->addMetaTagOnce('property', 'og:description', $content['description'], $html);
@@ -125,12 +126,16 @@ class MetaProcessor {
 		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
 		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '">';
 
+		if (!preg_match('/\<meta[^>]+charset=/', $html)) {
+			$meta .= '<meta charset="utf-8">';
+		}
+
 		if (!preg_match('/\<title\>/', $html)) {
 			$meta .= '<title>' . $content['title'] . '</title>';
 		}
 
 		if (AM_FEED_ENABLED) {
-			$sitename = $this->Shared->get(Fields::SITENAME);
+			$sitename = Str::stripTags($this->Shared->get(Fields::SITENAME));
 			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . $base . AM_FEED_URL . '">';
 		}
 
@@ -311,6 +316,7 @@ class MetaProcessor {
 			);
 		}
 
+		FileSystem::makeDir(dirname($file));
 		imagepng($image, $file);
 
 		return $url;

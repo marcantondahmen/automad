@@ -111,6 +111,7 @@ export const sectionBackgroundBlendModes = [
  * Border styles for sections.
  */
 export const sectionBorderStyles = [
+	'none',
 	'solid',
 	'dashed',
 	'dotted',
@@ -130,23 +131,14 @@ export const styleDefaults: SectionStyle = {
 	backgroundColor: '',
 	backgroundBlendMode: 'normal',
 	borderColor: '',
-	borderWidth: '0',
-	borderRadius: '0',
-	borderStyle: 'solid',
+	borderWidth: '',
+	borderRadius: '',
+	borderStyle: 'none',
 	backgroundImage: '',
-	paddingTop: '0',
-	paddingBottom: '0',
+	paddingTop: '',
+	paddingBottom: '',
 	overflowHidden: false,
 } as const;
-
-/**
- * Section style defaults that are used for the editor UI.
- */
-const editorStyleDefaults = Object.assign({}, styleDefaults, {
-	color: 'inherit',
-	backgroundColor: 'transparent',
-	borderColor: 'currentColor',
-});
 
 /**
  * The Section block that create a new editor inside a parent editor
@@ -661,11 +653,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		].forEach((prop: string) => {
 			const value = style[prop as keyof SectionStyle];
 
-			inline.push(
-				`--${prop}: ${
-					value || editorStyleDefaults[prop as keyof SectionStyle]
-				};`
-			);
+			if (value.toString().length) {
+				inline.push(`--${prop}: ${value};`);
+			}
 		});
 
 		if (style['backgroundImage']) {

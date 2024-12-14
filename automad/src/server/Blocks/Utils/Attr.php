@@ -69,6 +69,42 @@ abstract class Attr {
 	}
 
 	/**
+	 * Render a class attribute.
+	 *
+	 * @param array $classes
+	 * @return string
+	 */
+	public static function renderClasses(array $classes): string {
+		if (empty($classes)) {
+			return '';
+		}
+
+		return 'class="' . join(' ', $classes) . '"';
+	}
+
+	/**
+	 * Render a style attribute.
+	 *
+	 * @param array<non-empty-literal-string, string> $styles
+	 * @return string
+	 */
+	public static function renderStyles(array $styles): string {
+		if (empty($styles)) {
+			return '';
+		}
+
+		$rules = array();
+
+		foreach ($styles as $key => $value) {
+			$value = preg_replace('/[<>]/', '', $value);
+			$key = strtolower(preg_replace('/([A-Z])/', '-$1', $key));
+			$rules[] = "$key: $value;";
+		}
+
+		return 'style="' . join(' ', $rules) . '"';
+	}
+
+	/**
 	 * Reset the array on unique IDs.
 	 */
 	public static function resetUniqueIds(): void {
@@ -89,7 +125,7 @@ abstract class Attr {
 			$classes[] = preg_replace('/[<>]/', '', $tunes['className']);
 		}
 
-		return 'class="' . join(' ', $classes) . '"';
+		return self::renderClasses($classes);
 	}
 
 	/**
@@ -122,19 +158,7 @@ abstract class Attr {
 	private static function styleAttr(array $tunes, ?array $styles = null): string {
 		$styles = array_merge(self::getPaddingStylesFromTunes($tunes), $styles ?? array());
 
-		if (empty($styles)) {
-			return '';
-		}
-
-		$rules = array();
-
-		foreach ($styles as $key => $value) {
-			$value = preg_replace('/[<>]/', '', $value);
-			$key = strtolower(preg_replace('/([A-Z])/', '-$1', $key));
-			$rules[] = "$key: $value;";
-		}
-
-		return 'style="' . join(' ', $rules) . '"';
+		return self::renderStyles($styles);
 	}
 
 	/**
