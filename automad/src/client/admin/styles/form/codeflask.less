@@ -73,6 +73,8 @@
 		&__pre {
 			padding: @padding;
 			text-wrap: wrap;
+			word-break: break-all;
+			overflow-wrap: break-word;
 		}
 
 		&__textarea,
@@ -80,6 +82,10 @@
 			font-family: @am-code-font-family;
 			font-size: 1rem;
 			line-height: @am-base-line-height;
+		}
+
+		&__code {
+			width: 100%;
 		}
 
 		& ::selection {
