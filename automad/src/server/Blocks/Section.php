@@ -131,12 +131,16 @@ class Section extends AbstractBlock {
 			}
 		}
 
-		$attr = Attr::render($block['tunes'], $classes, $styles);
+		$attr = Attr::render($block['tunes']);
+		$classes = Attr::renderClasses($classes);
+		$styles = Attr::renderStyles($styles);
 
 		return <<< HTML
-			<am-section $attr>
-				$html
-			</am-section>
+			<section $attr>
+				<am-section $classes $styles>
+					$html
+				</am-section>
+			</section>
 		HTML;
 	}
 }
