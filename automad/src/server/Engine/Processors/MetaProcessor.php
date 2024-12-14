@@ -125,6 +125,10 @@ class MetaProcessor {
 		$meta = '<meta name="Generator" content="Automad ' . App::VERSION . '">';
 		$meta .= '<link rel="canonical" href="' . $base . AM_REQUEST . '">';
 
+		if (!preg_match('/\<meta[^>]+charset=/', $html)) {
+			$meta .= '<meta charset="utf-8">';
+		}
+
 		if (!preg_match('/\<title\>/', $html)) {
 			$meta .= '<title>' . $content['title'] . '</title>';
 		}
