@@ -1,8 +1,27 @@
 # Changelog
 
-## [v2.0.0-alpha.15](https://github.com/marcantondahmen/automad/commit/fbfbc70581742ea47055fb1a287d43355b6c5e69)
+## [v2.0.0-alpha.16](https://github.com/marcantondahmen/automad/commit/a7aa128b57fb50803523ac58c4f06a97e2747c31)
 
-Fri, 13 Dec 2024 17:59:31 +0100
+Sat, 14 Dec 2024 22:54:50 +0100
+
+### New Features
+
+- add charset meta tag to rendered pages automatically ([82512bcb2](https://github.com/marcantondahmen/automad/commit/82512bcb26dd269653507f55cda2d14a9badaf74))
+- update standard theme to version 1.0.7 ([b78efaf24](https://github.com/marcantondahmen/automad/commit/b78efaf24748dae0d5ffe843902d788b01d3f0c8))
+
+### Bugfixes
+
+- fix layout section defaults ([91b0b0160](https://github.com/marcantondahmen/automad/commit/91b0b0160b5336cf409083ed851e9e07bee92f08))
+- fix missing cache directory error when saving open-graph images ([f0b2f2f5c](https://github.com/marcantondahmen/automad/commit/f0b2f2f5c8ba8b302e1aee630b00b438f1027e50))
+- fix missing email alter position in dom ([b2c09b01a](https://github.com/marcantondahmen/automad/commit/b2c09b01a141626adf4c1bcae82cee48eb49eb27))
+- fix section block spacing ([4c0fd4654](https://github.com/marcantondahmen/automad/commit/4c0fd465409435dbb6d00909dbcff7a5eb2cdeff))
+- fix tests ([1a19b1337](https://github.com/marcantondahmen/automad/commit/1a19b133719727f08bf04e35a66c49a95a97d581))
+- fix text wrapping in code editor ([e190c5def](https://github.com/marcantondahmen/automad/commit/e190c5def5ef9de4c67f8cb461e83020fc495385))
+- strip tags from meta tag content ([39551032f](https://github.com/marcantondahmen/automad/commit/39551032f9afb6514c3e5c9e5f79f6a2225a2245))
+
+## [v2.0.0-alpha.15](https://github.com/marcantondahmen/automad/commit/5a52e1f46c54db96395f6dbe25ff9dd11af7c643)
+
+Fri, 13 Dec 2024 18:00:44 +0100
 
 ### Bugfixes
 
@@ -485,16 +504,3 @@ Mon, 9 Aug 2021 23:21:36 +0200
 ### Bugfixes
 
 - **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
-
-## [v1.8.2](https://github.com/marcantondahmen/automad/commit/e070a89209c2e90eadb9be4b77580beef6aa75d1)
-
-Sun, 8 Aug 2021 22:25:34 +0200
-
-### New Features
-
-- **samples**: add pagelist example page ([2a033f4da](https://github.com/marcantondahmen/automad/commit/2a033f4dada04e3d2fd7d24f2d2d6b1bfd04986e))
-- **samples**: add tags and filters to example pages ([d18f2482b](https://github.com/marcantondahmen/automad/commit/d18f2482b2f258d7b42a6609a439769773ffb7f8))
-
-### Bugfixes
-
-- **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
