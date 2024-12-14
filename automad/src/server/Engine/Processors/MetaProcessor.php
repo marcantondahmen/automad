@@ -40,6 +40,7 @@ use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
 use Automad\Core\I18n;
 use Automad\Core\Str;
 use Automad\Engine\Document\Head;
@@ -315,6 +316,7 @@ class MetaProcessor {
 			);
 		}
 
+		FileSystem::makeDir(dirname($file));
 		imagepng($image, $file);
 
 		return $url;
