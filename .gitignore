@@ -8,9 +8,8 @@
 /config/*
 /lib/vendor
 /packages
-/pages/.trash
-/pages/index
-/pages/test
+/pages
+/shared
 /sitemap.xml
 /vendor
 dist
