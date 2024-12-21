@@ -115,7 +115,7 @@ class Selection {
 
 			// While $url is not the home page, strip each segement one by one and
 			// add the corresponding Page object to $pages.
-			while ($url != $home) {
+			while (substr_count($url, '/') > 1) {
 				$pages[$url] = $this->selection[$url];
 				$url = '/' . trim(substr($url, 0, (int) strrpos($url, '/')), '/');
 			}

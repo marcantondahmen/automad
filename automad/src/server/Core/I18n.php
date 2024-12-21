@@ -36,7 +36,6 @@
 
 namespace Automad\Core;
 
-use Automad\API\RequestHandler;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -85,7 +84,7 @@ class I18n {
 		$serverLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 0, 2);
 		$urlLang = self::getLanguageFromUrl(AM_REQUEST);
 		$fallbacks = array_filter(array_merge(PageIndex::read('/'), $available));
-		$lang = substr($fallbacks[0] ?? 'en', 0, 2);
+		$lang = $fallbacks[0] ?? 'en';
 
 		if (AM_REQUEST == '/' && $sessionLang) {
 			$lang = $sessionLang;
