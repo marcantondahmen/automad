@@ -131,6 +131,13 @@ export const enum SharedController {
 	discardDraft = 'SharedController::discardDraft',
 }
 
+export const enum SharedComponentController {
+	data = 'SharedComponentController::data',
+	publish = 'SharedComponentController::publish',
+	getPublicationState = 'SharedComponentController::getPublicationState',
+	discardDraft = 'SharedComponentController::discardDraft',
+}
+
 export const enum SystemController {
 	checkForUpdate = 'SystemController::checkForUpdate',
 	update = 'SystemController::update',

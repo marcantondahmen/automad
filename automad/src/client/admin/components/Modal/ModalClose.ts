@@ -50,6 +50,10 @@ class ModalCloseComponent extends BaseComponent {
 		const close = () => {
 			const modal = this.closest<ModalComponent>(ModalComponent.TAG_NAME);
 
+			if (this.hasAttribute('disabled')) {
+				return;
+			}
+
 			if (modal instanceof ModalComponent) {
 				modal.close();
 			}

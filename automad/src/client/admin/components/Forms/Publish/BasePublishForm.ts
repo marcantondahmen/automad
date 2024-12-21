@@ -40,12 +40,9 @@ import {
 	CSS,
 	dateFormat,
 	EventName,
-	getPageURL,
-	getSlug,
 	KeyValueMap,
 	listen,
 	requestAPI,
-	Route,
 } from '@/admin/core';
 import { PublishControllers } from '@/admin/types';
 import Tooltip from 'codex-tooltip';

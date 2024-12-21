@@ -43,6 +43,7 @@ export * from './package';
 export * from './page';
 export * from './search';
 export * from './shared';
+export * from './sharedComponents';
 export * from './switcher';
 export * from './system';
 export * from './undo';
@@ -50,6 +51,7 @@ export * from './undo';
 import {
 	KeyValueMap,
 	PageController,
+	SharedComponentController,
 	SharedController,
 } from '@/common';
 import { supportedLanguages } from '@/prism/prism';

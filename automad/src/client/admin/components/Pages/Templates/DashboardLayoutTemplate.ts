@@ -199,17 +199,17 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 						</a>
 					</span>
 					<am-nav-item
-						${Attr.page}="search"
+						${Attr.page}="${Route.search}"
 						${Attr.icon}="search"
 						${Attr.text}="searchTitle"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="system"
+						${Attr.page}="${Route.system}"
 						${Attr.icon}="sliders"
 						${Attr.text}="systemTitle"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="shared"
+						${Attr.page}="${Route.shared}"
 						${Attr.icon}="asterisk"
 						${Attr.text}="sharedTitle"
 						${Attr.publicationState}="${App.sharedPublicationState}"
@@ -221,18 +221,18 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 							: ''}
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="packages"
 						${Attr.page}="${Route.components}"
 						${Attr.icon}="boxes"
 						${Attr.text}="sharedComponentsTitle"
 					></am-nav-item>
 					<am-nav-item
+						${Attr.page}="${Route.packages}"
 						${Attr.icon}="box-seam"
 						${Attr.text}="packagesTitle"
 						${Attr.badge}="am-sidebar-outdated-packages-indicator"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="trash"
+						${Attr.page}="${Route.trash}"
 						${Attr.icon}="trash3"
 						${Attr.text}="trashTitle"
 					></am-nav-item>
