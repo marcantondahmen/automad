@@ -44,6 +44,7 @@ use Automad\Models\Page;
 use Automad\Models\PageCollection;
 use Automad\Models\Pagelist;
 use Automad\Models\Shared;
+use Automad\Stores\SharedComponentStore;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -55,6 +56,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type SharedComponent from SharedComponentStore
  */
 class Automad {
 	/**
@@ -73,12 +76,18 @@ class Automad {
 
 	/**
 	 * Array holding all the site's pages and the related data.
-	 *
 	 * To access the data for a specific page, use the url as key: $this->collection['url'].
 	 *
 	 * @var array<Page>
 	 */
 	private array $collection = array();
+
+	/**
+	 * The shared components collection.
+	 *
+	 * @var array<SharedComponent>
+	 */
+	private array $components = array();
 
 	/**
 	 * Automad's Filelist object
@@ -103,6 +112,7 @@ class Automad {
 	public function __construct(array $collection, Shared $Shared) {
 		$this->collection = $collection;
 		$this->Shared = $Shared;
+		$this->components = $this->loadComponents();
 
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 
@@ -115,7 +125,7 @@ class Automad {
 	 * @return array $itemsToCache
 	 */
 	public function __sleep(): array {
-		$itemsToCache = array('collection', 'Shared');
+		$itemsToCache = array('components', 'collection', 'Shared');
 		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
 
 		return $itemsToCache;
@@ -125,7 +135,7 @@ class Automad {
 	 * Set new Context after being restored from cache.
 	 */
 	public function __wakeup(): void {
-		Debug::log(get_object_vars($this), 'Automad object got unserialized');
+		Debug::log(get_object_vars($this), 'Automad object was unserialized');
 		$this->Context = new Context($this->getRequestedPage());
 	}
 
@@ -170,6 +180,15 @@ class Automad {
 	 */
 	public function getCollection(): array {
 		return $this->collection;
+	}
+
+	/**
+	 * Return the components array.
+	 *
+	 * @return array<SharedComponent>
+	 */
+	public function getComponents(): array {
+		return $this->components;
 	}
 
 	/**
@@ -287,6 +306,22 @@ class Automad {
 		}
 
 		return $this->pageNotFound();
+	}
+
+	/**
+	 * Load shared components from store.
+	 *
+	 * @return array<SharedComponent>
+	 */
+	private function loadComponents(): array {
+		$SharedComponentStore = new SharedComponentStore();
+		$storeContent = $SharedComponentStore->getState(empty(Session::getUsername())) ?? array();
+
+		if (isset($storeContent['components'])) {
+			return $storeContent['components'];
+		}
+
+		return array();
 	}
 
 	/**

@@ -52,6 +52,7 @@ import {
 	KeyValueMap,
 	PackageDirectoryItems,
 	Pages,
+	SharedComponentEditorData,
 	SystemSettings,
 	ThemeCollection,
 	User,
@@ -186,6 +187,18 @@ export class App {
 	 */
 	static get reservedFields(): KeyValueMap {
 		return App.getState('reservedFields');
+	}
+
+	/**
+	 * The shared components meta data map.
+	 *
+	 * @static
+	 */
+	static get sharedComponents(): Pick<
+		SharedComponentEditorData,
+		'id' | 'name'
+	>[] {
+		return App.getState('sharedComponents');
 	}
 
 	/**

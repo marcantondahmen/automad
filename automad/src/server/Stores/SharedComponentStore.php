@@ -44,6 +44,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-type SharedComponent = array{
+ *   id: string,
+ *	 name: string,
+ *	 blocks: array,
+ *	 collapsed: bool
+ * }
  */
 class SharedComponentStore extends AbstractStore {
 	const FILENAME = 'components';

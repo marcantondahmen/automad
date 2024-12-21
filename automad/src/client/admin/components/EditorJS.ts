@@ -47,7 +47,7 @@ import { DragDrop } from '@/admin/editor/plugins/DragDrop';
 import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorOutputData, KeyValueMap } from '@/admin/types';
 import EditorJS, { EditorConfig, I18nDictionary } from 'automad-editorjs';
-import { App, CSS } from '@/admin/core';
+import { App, CSS, getSlug, Route } from '@/admin/core';
 import { Delimiter } from '@/admin/editor/blocks/Delimiter';
 import { ImageBlock } from '@/admin/editor/blocks/Image';
 import { NestedListBlock } from '@/admin/editor/blocks/NestedList';
@@ -77,6 +77,7 @@ import { TableOfContentsBlock } from '@/admin/editor/blocks/TableOfContents';
 import { PagelistBlock } from '@/admin/editor/blocks/Pagelist';
 import { FilelistBlock } from '@/admin/editor/blocks/Filelist';
 import { SnippetBlock } from '@/admin/editor/blocks/Snippet';
+import { SharedComponentBlock } from '../editor/blocks/SharedComponent';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -104,6 +105,46 @@ export class EditorJSComponent extends BaseComponent {
 	}
 
 	/**
+	 * Return true if the editor is place in the shared component page.
+	 */
+	private get isSharedComponentEditor() {
+		return getSlug() === Route.components;
+	}
+
+	/**
+	 * Prepare data for rendering the editor.
+	 *
+	 * @param data
+	 * @return The prepared data
+	 */
+	private prepareData(data: EditorOutputData): EditorOutputData {
+		return this.removeDeleteComponents(data);
+	}
+
+	/**
+	 * Remove shared component blocks that have been deleted.
+	 *
+	 * @param data
+	 * @return The filtered data
+	 */
+	private removeDeleteComponents(data: EditorOutputData): EditorOutputData {
+		const componentIds = App.sharedComponents.map(
+			(component) => component.id
+		);
+
+		return {
+			...data,
+			blocks:
+				data.blocks?.filter((block) => {
+					return (
+						block.type != 'sharedComponent' ||
+						componentIds.includes(block.data.id ?? '')
+					);
+				}) ?? [],
+		};
+	}
+
+	/**
 	 * Create an EditorJS instance and bind it to the editor property.
 	 *
 	 * @param data
@@ -121,7 +162,7 @@ export class EditorJSComponent extends BaseComponent {
 		this.editor = new EditorJS(
 			Object.assign(
 				{
-					data,
+					data: this.prepareData(data),
 					holder: this,
 					logLevel: 'ERROR',
 					minHeight: 50,
@@ -167,6 +208,16 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return an object with block configurations
 	 */
 	private getBlockTools(): KeyValueMap {
+		let sharedComponent: KeyValueMap = {
+			sharedComponent: {
+				class: SharedComponentBlock,
+			},
+		};
+
+		if (this.isSharedComponentEditor) {
+			sharedComponent = {};
+		}
+
 		return {
 			paragraph: {
 				class: ParagraphBlock,
@@ -202,6 +253,7 @@ export class EditorJSComponent extends BaseComponent {
 				class: ImageSlideshowBlock,
 				inlineToolbar: false,
 			},
+			...sharedComponent,
 			buttons: {
 				class: ButtonsBlock,
 				inlineToolbar: true,

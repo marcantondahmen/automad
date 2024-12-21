@@ -60,17 +60,17 @@ class SharedComponentController {
 	public static function data(): Response {
 		$Response = new Response();
 		$components = Request::post('components');
-		$Store = new SharedComponentStore();
+		$SharedComponentStore = new SharedComponentStore();
 
 		if (!empty($components) && is_array($components)) {
-			if ($Store->setState(PublicationState::DRAFT, array('components' => $components))->save()) {
+			if ($SharedComponentStore->setState(PublicationState::DRAFT, array('components' => $components))->save()) {
 				return $Response;
 			}
 
 			return $Response->setError(Text::get('sharedComponentsSavingError'));
 		}
 
-		$components = $Store->getState(empty(Session::getUsername())) ?? array();
+		$components = $SharedComponentStore->getState(empty(Session::getUsername())) ?? array();
 
 		return $Response->setData($components);
 	}

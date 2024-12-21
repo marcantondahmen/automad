@@ -38,7 +38,6 @@ namespace Automad\Admin;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Core\Session;
@@ -101,6 +100,9 @@ class State {
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'sharedPublicationState' => $Automad->Shared->get(Fields::PUBLICATION_STATE),
+			'sharedComponents' => array_map(function ($component) {
+				return array('id' => $component['id'], 'name' => $component['name']);
+			}, $Automad->getComponents()),
 			'files' => array(
 				'pagelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
 				'filelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),

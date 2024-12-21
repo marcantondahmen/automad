@@ -191,6 +191,10 @@ export interface SectionBlockData {
 	minBlockWidth: string;
 }
 
+export interface SharedComponentBlockData {
+	id: string;
+}
+
 export interface ImageSlideshowBreakpoint {
 	slidesPerView: number;
 }
