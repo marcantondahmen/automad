@@ -99,7 +99,7 @@ class Migrate extends AbstractCommand {
 
 		$files = self::getFiles("$source/pages", '*.txt');
 
-		foreach($files as $file) {
+		foreach ($files as $file) {
 			$data = self::dataFile($file);
 			$path = dirname(Str::stripStart($file, "$source/pages"));
 
@@ -188,7 +188,7 @@ class Migrate extends AbstractCommand {
 
 		$vars = array_filter($vars, 'strlen');
 
-		foreach($vars as $key => $value) {
+		foreach ($vars as $key => $value) {
 			if (str_starts_with($key, '+')) {
 				$vars[$key] = json_decode($value);
 			}
@@ -207,7 +207,7 @@ class Migrate extends AbstractCommand {
 	private static function getFiles(string $dir, string $pattern): array {
 		$files = FileSystem::glob("$dir/$pattern");
 
-		foreach(FileSystem::glob("$dir/*", GLOB_ONLYDIR) as $d) {
+		foreach (FileSystem::glob("$dir/*", GLOB_ONLYDIR) as $d) {
 			$files = array_merge($files, self::getFiles($d, $pattern));
 		}
 
@@ -224,7 +224,7 @@ class Migrate extends AbstractCommand {
 
 		sort($dataFiles);
 
-		foreach($dataFiles as $file) {
+		foreach ($dataFiles as $file) {
 			$path = Str::stripStart(dirname($file), AM_BASE_DIR . AM_DIR_PAGES);
 			$slug = basename(preg_replace('/^[^\.]+\./', '', $path));
 			$newPath = $path;
