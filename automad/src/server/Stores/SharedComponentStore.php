@@ -34,30 +34,27 @@
  * https://automad.org/license
  */
 
-namespace Automad\Test;
-
-use Automad\Core\PublicationState;
-use Automad\Stores\DataStore;
+namespace Automad\Stores;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The test data helper class.
+ * A store class handles the reading of JSON formatted data files.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Data {
-	/**
-	 * Load testing data for a page.
-	 *
-	 * @param string $pagePath
-	 * @return array
-	 */
-	public static function load(string $pagePath): array {
-		$DataStore = new DataStore($pagePath);
+class SharedComponentStore extends AbstractStore {
+	const FILENAME = 'components';
 
-		return $DataStore->getState(PublicationState::DRAFT) ?? array();
+	/**
+	 * This method is required to set the actual file path for the store on disk.
+	 *
+	 * @param ?string $optionalPath
+	 * @return string
+	 */
+	protected function resolvePath(?string $optionalPath = null): string {
+		return AM_BASE_DIR . AM_DIR_SHARED . '/' . self::FILENAME;
 	}
 }

@@ -36,11 +36,11 @@
 
 namespace Automad\Console\Commands;
 
-use Automad\Core\DataStore;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\PublicationState;
 use Automad\Core\Str;
+use Automad\Stores\DataStore;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 

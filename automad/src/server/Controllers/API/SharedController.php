@@ -39,11 +39,11 @@ namespace Automad\Controllers\API;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\DataStore;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
 use Automad\Core\Request;
 use Automad\Core\Text;
+use Automad\Stores\DataStore;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
 
