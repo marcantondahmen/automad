@@ -62,7 +62,7 @@ class SharedComponentController {
 		$components = Request::post('components');
 		$SharedComponentStore = new SharedComponentStore();
 
-		if (!empty($components) && is_array($components)) {
+		if (isset($components) && is_array($components)) {
 			if ($SharedComponentStore->setState(PublicationState::DRAFT, array('components' => $components))->save()) {
 				return $Response;
 			}

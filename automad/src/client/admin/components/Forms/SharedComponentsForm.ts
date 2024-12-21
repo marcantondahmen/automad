@@ -73,9 +73,19 @@ export class SharedComponentsFormComponent extends FormComponent {
 	}
 
 	/**
+	 * This is false until the first request was made and the store components are rendered
+	 * in order to prevent submitting an empty form and therefore deleting the components store.
+	 */
+	private isInitialized = false;
+
+	/**
 	 * The form data object.
 	 */
 	get formData(): KeyValueMap {
+		if (!this.isInitialized) {
+			return {};
+		}
+
 		const componentEditors = queryAll<SharedComponentEditorComponent>(
 			SharedComponentEditorComponent.TAG_NAME,
 			this
@@ -166,6 +176,8 @@ export class SharedComponentsFormComponent extends FormComponent {
 					this.submit();
 				},
 			});
+
+			this.isInitialized = true;
 		}
 
 		fire(EventName.contentSaved);
