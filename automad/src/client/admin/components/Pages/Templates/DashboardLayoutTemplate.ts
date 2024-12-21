@@ -222,6 +222,11 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 					></am-nav-item>
 					<am-nav-item
 						${Attr.page}="packages"
+						${Attr.page}="${Route.components}"
+						${Attr.icon}="boxes"
+						${Attr.text}="sharedComponentsTitle"
+					></am-nav-item>
+					<am-nav-item
 						${Attr.icon}="box-seam"
 						${Attr.text}="packagesTitle"
 						${Attr.badge}="am-sidebar-outdated-packages-indicator"

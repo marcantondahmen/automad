@@ -44,11 +44,8 @@ import {
 	getSlug,
 	KeyValueMap,
 	listen,
-	PageController,
 	requestAPI,
 	Route,
-	SharedComponentController,
-	SharedController,
 } from '@/admin/core';
 import { PublishControllers } from '@/admin/types';
 import Tooltip from 'codex-tooltip';
@@ -110,18 +107,8 @@ export abstract class BasePublishFormComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
-		const route = getSlug() as Route;
-
-		if (![Route.page, Route.shared].includes(route)) {
-			this.remove();
-
-			return;
-		}
-
-		const pageUrl = getPageURL();
-
 		this.stateBinding = new Binding('publicationState', {
-			initial: pageUrl ? App.pages[pageUrl].publicationState : null,
+			initial: this.initialState(),
 		});
 
 		this.classList.add(CSS.navbarGroup);
