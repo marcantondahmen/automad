@@ -36,6 +36,7 @@ import {
 	create,
 	CSS,
 	EventName,
+	FieldTag,
 	fire,
 	listen,
 	query,
@@ -45,6 +46,7 @@ import {
 import { SharedComponentEditorComponent } from '@/admin/components/SharedComponentEditor';
 import { FormComponent } from './Form';
 import { KeyValueMap, SharedComponentEditorData } from '@/admin/types';
+import Sortable from 'sortablejs';
 
 export const newComponentButtonId = 'am-new-component-button';
 
@@ -86,7 +88,7 @@ export class SharedComponentsFormComponent extends FormComponent {
 	 * The function that is called when the form is connected.
 	 */
 	connectedCallback(): void {
-		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGapLarge);
+		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
 		this.addListener(
 			listen(query(`#${newComponentButtonId}`), 'click', () => {
@@ -133,11 +135,38 @@ export class SharedComponentsFormComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		await super.processResponse(response);
 
-		response.data?.components.forEach(
-			(component: SharedComponentEditorData) => {
-				this.add(component);
-			}
-		);
+		if (response.data?.components) {
+			this.innerHTML = '';
+
+			response.data?.components.forEach(
+				(component: SharedComponentEditorData) => {
+					this.add(component);
+				}
+			);
+
+			new Sortable(this, {
+				handle: `.${CSS.cardHeaderDrag}`,
+				animation: 200,
+				draggable: SharedComponentEditorComponent.TAG_NAME,
+				ghostClass: CSS.cardGhost,
+				chosenClass: CSS.cardChosen,
+				dragClass: CSS.cardDrag,
+				direction: 'vertical',
+				onStart: () => {
+					queryAll(`${FieldTag.editor}`, this).forEach((editor) => {
+						editor.style.pointerEvents = 'none';
+					});
+				},
+				onEnd: () => {
+					queryAll(`${FieldTag.editor}`, this).forEach((editor) => {
+						editor.style.removeProperty('pointer-events');
+					});
+				},
+				onChange: () => {
+					this.submit();
+				},
+			});
+		}
 
 		fire(EventName.contentSaved);
 	}

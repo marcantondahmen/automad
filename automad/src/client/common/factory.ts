@@ -58,7 +58,9 @@ export const create = (
 	});
 
 	for (const [key, value] of Object.entries(attributes)) {
-		element.setAttribute(key, value);
+		if (typeof value !== 'undefined') {
+			element.setAttribute(key, value);
+		}
 	}
 
 	if (parent) {

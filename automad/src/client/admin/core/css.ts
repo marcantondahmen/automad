@@ -65,10 +65,12 @@ export const enum CSS {
 	cardHeader = 'am-c-card__header',
 	cardHeaderDropdown = 'am-c-card__header-dropdown',
 	cardHeaderIcons = 'am-c-card__header-icons',
+	cardHeaderDrag = 'am-c-card__header-drag',
 	cardTeaser = 'am-c-card__teaser',
 	cardTitle = 'am-c-card__title',
 	cardBody = 'am-c-card__body',
 	cardBodyLarge = 'am-c-card__body--large',
+	cardEditor = 'am-c-card__editor',
 	cardButtons = 'am-c-card__buttons',
 	cardIcon = 'am-c-card__icon',
 	cardIconNarrow = 'am-c-card__icon--narrow',
@@ -79,6 +81,9 @@ export const enum CSS {
 	cardList = 'am-c-card__list',
 	cardListItem = 'am-c-card__list-item',
 	cardListItemFaded = 'am-c-card__list-item--faded',
+	cardGhost = 'am-c-card--ghost',
+	cardChosen = 'am-c-card--chosen',
+	cardDrag = 'am-c-card--drag',
 
 	checkbox = 'am-f-checkbox',
 

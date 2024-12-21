@@ -126,14 +126,17 @@ export class SharedComponentEditorComponent extends BaseComponent {
 						</span>
 					</div>
 					<div class="${CSS.cardHeaderIcons}"></div>
+					<div class="${CSS.cardHeaderDrag}">
+						<i class="bi bi-grip-vertical"></i>
+					</div>
 				</div>
-				<div class="${CSS.cardBody}"></div>
+				<div class="${CSS.cardEditor}"></div>
 			`;
 
 			Bindings.connectElements(this);
 
 			const header = query(`.${CSS.cardHeaderIcons}`, this);
-			const body = query(`.${CSS.cardBody}`, this);
+			const body = query(`.${CSS.cardEditor}`, this);
 			const toggle = query(`.${CSS.cardTitle}`, this);
 
 			const rename = create(
@@ -205,9 +208,9 @@ export class SharedComponentEditorComponent extends BaseComponent {
 
 			this.editor = createField(FieldTag.editor, body, {
 				value: { blocks: this._data.blocks },
-				name: `component-${this._data.id}`,
-				key: `component-${this._data.id}`,
-				label: 'Blocks',
+				name: '',
+				key: '',
+				label: '',
 			}) as EditorFieldComponent;
 
 			await this.editor.editorJS.editor.isReady;
@@ -242,7 +245,7 @@ export class SharedComponentEditorComponent extends BaseComponent {
 		this._data.collapsed = collapsed;
 
 		body.classList.toggle(CSS.displayNone, this._data.collapsed);
-		icon.className = `bi bi-chevron-${this._data.collapsed ? 'right' : 'down'}`;
+		icon.className = `bi bi-${this._data.collapsed ? 'plus' : 'dash'}-lg`;
 
 		fire('change', this.editor);
 	}

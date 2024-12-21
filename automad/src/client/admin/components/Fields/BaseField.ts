@@ -193,6 +193,10 @@ export abstract class BaseFieldComponent
 			return;
 		}
 
+		if (!label) {
+			return;
+		}
+
 		const attributes: KeyValueMap = {};
 
 		if (this.linkLabel) {

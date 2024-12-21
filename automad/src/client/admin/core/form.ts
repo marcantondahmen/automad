@@ -215,6 +215,10 @@ export const createCustomizationFields = (
  * @returns the generated ID
  */
 export const createIdFromField = (key: string): string => {
+	if (!key) {
+		return;
+	}
+
 	return `am-field__${key.replace(/\s+/g, '_')}`;
 };
 
