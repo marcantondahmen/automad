@@ -37,11 +37,11 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Core\DataStore;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Models\Page;
 use Automad\Models\Shared;
+use Automad\Stores\DataStore;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
