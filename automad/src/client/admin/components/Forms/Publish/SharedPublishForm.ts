@@ -36,6 +36,11 @@ import { PublishControllers } from '@/admin/types';
 import { KeyValueMap, SharedController } from '@/common';
 import { BasePublishFormComponent } from './BasePublishForm';
 
+/**
+ * The component publish button and form for the navbar.
+ *
+ * @extends BasePublishFormComponent
+ */
 class SharedPublishFormComponent extends BasePublishFormComponent {
 	/**
 	 * Data that is added to the update request.

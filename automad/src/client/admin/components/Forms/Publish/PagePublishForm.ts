@@ -37,6 +37,11 @@ import { PublishControllers } from '@/admin/types';
 import { KeyValueMap, PageController } from '@/common';
 import { BasePublishFormComponent } from './BasePublishForm';
 
+/**
+ * The page publish button and form for the navbar.
+ *
+ * @extends BasePublishFormComponent
+ */
 class PagePublishFormComponent extends BasePublishFormComponent {
 	/**
 	 * Data that is added to the update request.

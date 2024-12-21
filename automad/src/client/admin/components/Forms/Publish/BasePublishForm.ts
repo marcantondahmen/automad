@@ -63,7 +63,7 @@ const disable = (button: SubmitComponent): void => {
 };
 
 /**
- * The publish button and form for the navbar.
+ * The base publish button and form for the navbar.
  *
  * @extends BaseComponent
  */
@@ -197,17 +197,17 @@ export abstract class BasePublishFormComponent extends BaseComponent {
 			this.additionalRequestData()
 		);
 
-		this.lastPublished = data.lastPublished;
-		this.stateBinding.value = data.isPublished ? 'published' : 'draft';
+		this.lastPublished = data?.lastPublished;
+		this.stateBinding.value = data?.isPublished ? 'published' : 'draft';
 
-		if (data.isPublished) {
+		if (data?.isPublished) {
 			disable(this.discardButton);
 			disable(this.publishButton);
 
 			return;
 		}
 
-		if (data.lastPublished) {
+		if (data?.lastPublished) {
 			enable(this.discardButton);
 		}
 
