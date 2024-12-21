@@ -74,6 +74,8 @@ import './components/File/FileInfo';
 import './components/File/FileRobot';
 import './components/File/Upload';
 
+import './components/Forms/Publish/PagePublishForm';
+import './components/Forms/Publish/SharedPublishForm';
 import './components/Forms/FileCollection/ListForm';
 import './components/Forms/FileCollection/Submit';
 import './components/Forms/ConfigFileForm';
@@ -84,7 +86,6 @@ import './components/Forms/HistoryModalForm';
 import './components/Forms/InPageForm';
 import './components/Forms/MailConfigForm';
 import './components/Forms/PageDataForm';
-import './components/Forms/PublishForm';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';
 import './components/Forms/SetupForm';

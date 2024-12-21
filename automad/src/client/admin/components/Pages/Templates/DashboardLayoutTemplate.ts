@@ -48,7 +48,7 @@ import {
 import { Partials } from '@/admin/types';
 import { Section } from '@/common';
 
-export const dashboardLayout = ({ main }: Partials) => {
+export const dashboardLayout = ({ main, publishForm }: Partials) => {
 	return html`
 		<div class="${CSS.layoutDashboard}">
 			<div
@@ -103,7 +103,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<am-undo-buttons
 							class="${CSS.displaySmallNone}"
 						></am-undo-buttons>
-						<am-publish-form></am-publish-form>
+						${publishForm}
 						<am-modal-toggle
 							class="${CSS.navbarItem} ${CSS.displayMedium}"
 							${Attr.modal}="#am-jumpbar-modal"

@@ -42,15 +42,18 @@ import {
 	EventName,
 	getPageURL,
 	getSlug,
+	KeyValueMap,
 	listen,
 	PageController,
 	requestAPI,
 	Route,
+	SharedComponentController,
 	SharedController,
 } from '@/admin/core';
+import { PublishControllers } from '@/admin/types';
 import Tooltip from 'codex-tooltip';
-import { BaseComponent } from '../Base';
-import { SubmitComponent } from './Submit';
+import { BaseComponent } from '../../Base';
+import { SubmitComponent } from '../Submit';
 
 const enable = (button: SubmitComponent): void => {
 	if (button.hasAttribute('disabled')) {
@@ -70,28 +73,13 @@ const disable = (button: SubmitComponent): void => {
  *
  * @extends BaseComponent
  */
-export class PublishFormComponent extends BaseComponent {
+export abstract class BasePublishFormComponent extends BaseComponent {
 	/**
 	 * The tag name.
 	 *
 	 * @static
 	 */
 	static TAG_NAME = 'am-publish-form';
-
-	/**
-	 * The state controller route.
-	 */
-	private stateController: PageController | SharedController;
-
-	/**
-	 * The discard controller route.
-	 */
-	private discardController: PageController | SharedController;
-
-	/**
-	 * The publish controller route.
-	 */
-	private publishController: PageController | SharedController;
 
 	/**
 	 * The publish info tooltip.
@@ -130,24 +118,11 @@ export class PublishFormComponent extends BaseComponent {
 			return;
 		}
 
-		const isPageRoute = route === Route.page;
 		const pageUrl = getPageURL();
 
 		this.stateBinding = new Binding('publicationState', {
 			initial: pageUrl ? App.pages[pageUrl].publicationState : null,
 		});
-
-		this.discardController = isPageRoute
-			? PageController.discardDraft
-			: SharedController.discardDraft;
-
-		this.publishController = isPageRoute
-			? PageController.publish
-			: SharedController.publish;
-
-		this.stateController = isPageRoute
-			? PageController.getPublicationState
-			: SharedController.getPublicationState;
 
 		this.classList.add(CSS.navbarGroup);
 
@@ -157,7 +132,7 @@ export class PublishFormComponent extends BaseComponent {
 			{
 				[Attr.watch]: '',
 				[Attr.confirm]: App.text('discardDraftConfirm'),
-				[Attr.api]: this.discardController,
+				[Attr.api]: this.controllers().discard,
 				[Attr.event]: EventName.contentPublished,
 			},
 			this
@@ -176,7 +151,7 @@ export class PublishFormComponent extends BaseComponent {
 			[],
 			{
 				[Attr.watch]: '',
-				[Attr.api]: this.publishController,
+				[Attr.api]: this.controllers().publish,
 				[Attr.event]: EventName.contentPublished,
 			},
 			this
@@ -233,9 +208,10 @@ export class PublishFormComponent extends BaseComponent {
 	 * Update the publish button.
 	 */
 	async update(): Promise<void> {
-		const { data } = await requestAPI(this.stateController, {
-			url: getPageURL(),
-		});
+		const { data } = await requestAPI(
+			this.controllers().state,
+			this.additionalRequestData()
+		);
 
 		this.lastPublished = data.lastPublished;
 		this.stateBinding.value = data.isPublished ? 'published' : 'draft';
@@ -253,6 +229,25 @@ export class PublishFormComponent extends BaseComponent {
 
 		enable(this.publishButton);
 	}
-}
 
-customElements.define(PublishFormComponent.TAG_NAME, PublishFormComponent);
+	/**
+	 * Data that is added to the update request.
+	 *
+	 * @abstract
+	 */
+	protected abstract additionalRequestData(): KeyValueMap;
+
+	/**
+	 * Initial state.
+	 *
+	 * @abstract
+	 */
+	protected abstract initialState(): string;
+
+	/**
+	 * The controllers configuration.
+	 *
+	 * @abstract
+	 */
+	protected abstract controllers(): PublishControllers;
+}

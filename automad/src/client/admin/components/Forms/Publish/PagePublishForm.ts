@@ -26,49 +26,48 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { Partials } from '@/admin/types';
-import { BaseLayoutComponent } from './BaseLayout';
-import { dashboardLayout } from './Templates/DashboardLayoutTemplate';
+import { App, getPageURL } from '@/admin/core';
+import { PublishControllers } from '@/admin/types';
+import { KeyValueMap, PageController } from '@/common';
+import { BasePublishFormComponent } from './BasePublishForm';
 
-/**
- * The Automad base component. All Automad components are based on this class.
- *
- * @extends BaseLayoutComponent
- */
-export abstract class BaseDashboardLayoutComponent extends BaseLayoutComponent {
+class PagePublishFormComponent extends BasePublishFormComponent {
 	/**
-	 * The template render function used to render the view.
-	 */
-	protected template: Function = dashboardLayout;
-
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {
-		main: this.renderMainPartial(),
-		publishForm: this.renderPublishForm(),
-	};
-
-	/**
-	 * Render the main partial.
+	 * Data that is added to the update request.
 	 *
-	 * @returns the rendered HTML
 	 * @abstract
 	 */
-	protected abstract renderMainPartial(): string;
+	protected additionalRequestData(): KeyValueMap {
+		return { url: getPageURL() };
+	}
 
 	/**
-	 * Render an optional publish form.
+	 * Initial state.
 	 *
-	 * @returns the rendered HTML
+	 * @abstract
 	 */
-	protected renderPublishForm(): string {
-		return '';
+	protected initialState(): string {
+		return App.pages[getPageURL()].publicationState;
+	}
+
+	/**
+	 * The controllers configuration.
+	 *
+	 * @abstract
+	 */
+	protected controllers(): PublishControllers {
+		return {
+			state: PageController.getPublicationState,
+			discard: PageController.discardDraft,
+			publish: PageController.publish,
+		};
 	}
 }
+
+customElements.define('am-page-publish-form', PagePublishFormComponent);

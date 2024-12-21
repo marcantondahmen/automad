@@ -26,49 +26,47 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { Partials } from '@/admin/types';
-import { BaseLayoutComponent } from './BaseLayout';
-import { dashboardLayout } from './Templates/DashboardLayoutTemplate';
+import { PublishControllers } from '@/admin/types';
+import { KeyValueMap, SharedController } from '@/common';
+import { BasePublishFormComponent } from './BasePublishForm';
 
-/**
- * The Automad base component. All Automad components are based on this class.
- *
- * @extends BaseLayoutComponent
- */
-export abstract class BaseDashboardLayoutComponent extends BaseLayoutComponent {
+class SharedPublishFormComponent extends BasePublishFormComponent {
 	/**
-	 * The template render function used to render the view.
-	 */
-	protected template: Function = dashboardLayout;
-
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {
-		main: this.renderMainPartial(),
-		publishForm: this.renderPublishForm(),
-	};
-
-	/**
-	 * Render the main partial.
+	 * Data that is added to the update request.
 	 *
-	 * @returns the rendered HTML
 	 * @abstract
 	 */
-	protected abstract renderMainPartial(): string;
+	protected additionalRequestData(): KeyValueMap {
+		return {};
+	}
 
 	/**
-	 * Render an optional publish form.
+	 * Initial state.
 	 *
-	 * @returns the rendered HTML
+	 * @abstract
 	 */
-	protected renderPublishForm(): string {
+	protected initialState(): string {
 		return '';
 	}
+
+	/**
+	 * The controllers configuration.
+	 *
+	 * @abstract
+	 */
+	protected controllers(): PublishControllers {
+		return {
+			state: SharedController.getPublicationState,
+			discard: SharedController.discardDraft,
+			publish: SharedController.publish,
+		};
+	}
 }
+
+customElements.define('am-shared-publish-form', SharedPublishFormComponent);

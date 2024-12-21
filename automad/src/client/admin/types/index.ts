@@ -47,7 +47,11 @@ export * from './switcher';
 export * from './system';
 export * from './undo';
 
-import { KeyValueMap } from '@/common';
+import {
+	KeyValueMap,
+	PageController,
+	SharedController,
+} from '@/common';
 import { supportedLanguages } from '@/prism/prism';
 import { PageMetaData, InputElement } from '.';
 
@@ -155,6 +159,17 @@ export interface PackageDirectoryItems {
 
 export interface Partials {
 	[key: string]: string;
+}
+
+type PublishController =
+	| PageController
+	| SharedController
+	| SharedComponentController;
+
+export interface PublishControllers {
+	state: PublishController;
+	discard: PublishController;
+	publish: PublishController;
 }
 
 export interface SelectComponentOption {

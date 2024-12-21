@@ -181,6 +181,15 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 			${renderFileImportModal()}
 		`;
 	}
+
+	/**
+	 * Render an optional publish form.
+	 *
+	 * @returns the rendered HTML
+	 */
+	protected renderPublishForm(): string {
+		return html`<am-shared-publish-form></am-shared-publish-form>`;
+	}
 }
 
 customElements.define(getTagFromRoute(Route.shared), SharedComponent);

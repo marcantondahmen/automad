@@ -330,6 +330,15 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 			${renderHistoryModal()}
 		`;
 	}
+
+	/**
+	 * Render an optional publish form.
+	 *
+	 * @returns the rendered HTML
+	 */
+	protected renderPublishForm(): string {
+		return html`<am-page-publish-form></am-page-publish-form>`;
+	}
 }
 
 customElements.define(getTagFromRoute(Route.page), PageComponent);
