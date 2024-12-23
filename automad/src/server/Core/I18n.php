@@ -158,7 +158,7 @@ class I18n {
 	 * @return string the language code
 	 */
 	public static function getLanguageFromUrl(string $url): string {
-		return substr(trim($url, '/'), 0, 2);
+		return preg_replace('#^/([^/]+)(/.*)?$#', '$1', $url);
 	}
 
 	/**
