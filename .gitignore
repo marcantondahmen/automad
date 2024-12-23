@@ -14,4 +14,6 @@
 /vendor
 dist
 node_modules
+phpunit.phar
+psalm.phar
 robots.txt
