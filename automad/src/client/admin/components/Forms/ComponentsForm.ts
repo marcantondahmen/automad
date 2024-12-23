@@ -79,6 +79,11 @@ export class ComponentsFormComponent extends FormComponent {
 	private isInitialized = false;
 
 	/**
+	 * The time of the latest fetch.
+	 */
+	private fetchTime: number;
+
+	/**
 	 * The form data object.
 	 */
 	get formData(): KeyValueMap {
@@ -91,7 +96,10 @@ export class ComponentsFormComponent extends FormComponent {
 			this
 		);
 
-		return { components: componentEditors.map((editor) => editor.data) };
+		return {
+			components: componentEditors.map((editor) => editor.data),
+			fetchTime: this.fetchTime,
+		};
 	}
 
 	/**
@@ -146,6 +154,7 @@ export class ComponentsFormComponent extends FormComponent {
 		await super.processResponse(response);
 
 		this.isInitialized = true;
+		this.fetchTime = response.time;
 
 		if (response.data?.components) {
 			this.innerHTML = '';

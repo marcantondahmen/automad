@@ -63,6 +63,10 @@ class ComponentController {
 		$ComponentStore = new ComponentStore();
 
 		if (isset($components) && is_array($components)) {
+			if (filemtime($ComponentStore->getFile()) > Request::post('fetchTime')) {
+				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
+			}
+
 			if ($ComponentStore->setState(PublicationState::DRAFT, array('components' => $components))->save()) {
 				return $Response;
 			}
