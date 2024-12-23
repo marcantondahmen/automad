@@ -52,7 +52,7 @@ import {
 	KeyValueMap,
 	PackageDirectoryItems,
 	Pages,
-	SharedComponentEditorData,
+	ComponentEditorData,
 	SystemSettings,
 	ThemeCollection,
 	User,
@@ -194,11 +194,8 @@ export class App {
 	 *
 	 * @static
 	 */
-	static get sharedComponents(): Pick<
-		SharedComponentEditorData,
-		'id' | 'name'
-	>[] {
-		return App.getState('sharedComponents');
+	static get components(): Pick<ComponentEditorData, 'id' | 'name'>[] {
+		return App.getState('components');
 	}
 
 	/**

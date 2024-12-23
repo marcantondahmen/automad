@@ -131,11 +131,11 @@ export const enum SharedController {
 	discardDraft = 'SharedController::discardDraft',
 }
 
-export const enum SharedComponentController {
-	data = 'SharedComponentController::data',
-	publish = 'SharedComponentController::publish',
-	getPublicationState = 'SharedComponentController::getPublicationState',
-	discardDraft = 'SharedComponentController::discardDraft',
+export const enum ComponentController {
+	data = 'ComponentController::data',
+	publish = 'ComponentController::publish',
+	getPublicationState = 'ComponentController::getPublicationState',
+	discardDraft = 'ComponentController::discardDraft',
 }
 
 export const enum SystemController {

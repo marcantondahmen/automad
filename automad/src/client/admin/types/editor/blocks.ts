@@ -191,7 +191,7 @@ export interface SectionBlockData {
 	minBlockWidth: string;
 }
 
-export interface SharedComponentBlockData {
+export interface ComponentBlockData {
 	id: string;
 }
 

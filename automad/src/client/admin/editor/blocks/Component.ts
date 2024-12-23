@@ -42,14 +42,14 @@ import {
 	html,
 	listen,
 } from '@/admin/core';
-import { SharedComponentBlockData } from '@/admin/types';
+import { ComponentBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 const getComponent = (id: string) => {
-	return App.sharedComponents.find((c) => c.id === id);
+	return App.components.find((c) => c.id === id);
 };
 
-export class SharedComponentBlock extends BaseBlock<SharedComponentBlockData> {
+export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	/**
 	 * Sanitizer rules
 	 */
@@ -64,7 +64,7 @@ export class SharedComponentBlock extends BaseBlock<SharedComponentBlockData> {
 	 */
 	static get toolbox() {
 		return {
-			title: App.text('sharedComponentBlockTitle'),
+			title: App.text('componentBlockTitle'),
 			icon: '<i class="bi bi-boxes"></i>',
 		};
 	}
@@ -75,9 +75,7 @@ export class SharedComponentBlock extends BaseBlock<SharedComponentBlockData> {
 	 * @param data
 	 * @return the prepared data
 	 */
-	protected prepareData(
-		data: SharedComponentBlockData
-	): SharedComponentBlockData {
+	protected prepareData(data: ComponentBlockData): ComponentBlockData {
 		return { id: data.id || '' };
 	}
 
@@ -122,11 +120,11 @@ export class SharedComponentBlock extends BaseBlock<SharedComponentBlockData> {
 	 */
 	appendCallback(): void {
 		const { modal, body } = createGenericModal(
-			App.text('sharedComponentBlockTitle'),
+			App.text('componentBlockTitle'),
 			App.text('ok')
 		);
 
-		const options = App.sharedComponents.map((component) => {
+		const options = App.components.map((component) => {
 			return {
 				value: component.id,
 				text: component.name,
@@ -148,7 +146,7 @@ export class SharedComponentBlock extends BaseBlock<SharedComponentBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): SharedComponentBlockData {
+	save(): ComponentBlockData {
 		return this.data;
 	}
 }

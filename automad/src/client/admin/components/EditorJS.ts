@@ -77,7 +77,7 @@ import { TableOfContentsBlock } from '@/admin/editor/blocks/TableOfContents';
 import { PagelistBlock } from '@/admin/editor/blocks/Pagelist';
 import { FilelistBlock } from '@/admin/editor/blocks/Filelist';
 import { SnippetBlock } from '@/admin/editor/blocks/Snippet';
-import { SharedComponentBlock } from '../editor/blocks/SharedComponent';
+import { ComponentBlock } from '../editor/blocks/Component';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -107,7 +107,7 @@ export class EditorJSComponent extends BaseComponent {
 	/**
 	 * Return true if the editor is place in the shared component page.
 	 */
-	private get isSharedComponentEditor() {
+	private get isComponentEditor() {
 		return getSlug() === Route.components;
 	}
 
@@ -128,16 +128,14 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return The filtered data
 	 */
 	private removeDeleteComponents(data: EditorOutputData): EditorOutputData {
-		const componentIds = App.sharedComponents.map(
-			(component) => component.id
-		);
+		const componentIds = App.components.map((component) => component.id);
 
 		return {
 			...data,
 			blocks:
 				data.blocks?.filter((block) => {
 					return (
-						block.type != 'sharedComponent' ||
+						block.type != 'component' ||
 						componentIds.includes(block.data.id ?? '')
 					);
 				}) ?? [],
@@ -208,14 +206,14 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return an object with block configurations
 	 */
 	private getBlockTools(): KeyValueMap {
-		let sharedComponent: KeyValueMap = {
-			sharedComponent: {
-				class: SharedComponentBlock,
+		let component: KeyValueMap = {
+			component: {
+				class: ComponentBlock,
 			},
 		};
 
-		if (this.isSharedComponentEditor) {
-			sharedComponent = {};
+		if (this.isComponentEditor) {
+			component = {};
 		}
 
 		return {
@@ -253,7 +251,7 @@ export class EditorJSComponent extends BaseComponent {
 				class: ImageSlideshowBlock,
 				inlineToolbar: false,
 			},
-			...sharedComponent,
+			...component,
 			buttons: {
 				class: ButtonsBlock,
 				inlineToolbar: true,

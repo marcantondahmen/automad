@@ -44,7 +44,7 @@ use Automad\Models\Page;
 use Automad\Models\PageCollection;
 use Automad\Models\Pagelist;
 use Automad\Models\Shared;
-use Automad\Stores\SharedComponentStore;
+use Automad\Stores\ComponentStore;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -57,7 +57,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  *
- * @psalm-import-type SharedComponent from SharedComponentStore
+ * @psalm-import-type Component from ComponentStore
  */
 class Automad {
 	/**
@@ -83,9 +83,9 @@ class Automad {
 	private array $collection = array();
 
 	/**
-	 * The shared components collection.
+	 * The components collection.
 	 *
-	 * @var array<SharedComponent>
+	 * @var array<Component>
 	 */
 	private array $components = array();
 
@@ -185,7 +185,7 @@ class Automad {
 	/**
 	 * Return the components array.
 	 *
-	 * @return array<SharedComponent>
+	 * @return array<Component>
 	 */
 	public function getComponents(): array {
 		return $this->components;
@@ -311,11 +311,11 @@ class Automad {
 	/**
 	 * Load shared components from store.
 	 *
-	 * @return array<SharedComponent>
+	 * @return array<Component>
 	 */
 	private function loadComponents(): array {
-		$SharedComponentStore = new SharedComponentStore();
-		$storeContent = $SharedComponentStore->getState(empty(Session::getUsername())) ?? array();
+		$ComponentStore = new ComponentStore();
+		$storeContent = $ComponentStore->getState(empty(Session::getUsername())) ?? array();
 
 		if (isset($storeContent['components'])) {
 			return $storeContent['components'];

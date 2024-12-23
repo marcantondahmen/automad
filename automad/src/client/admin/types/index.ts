@@ -38,12 +38,12 @@ export * from './editor/blocks';
 export * from './editor/editor';
 export * from './editor/inline';
 export * from './editor/tunes';
+export * from './components';
 export * from './field';
 export * from './package';
 export * from './page';
 export * from './search';
 export * from './shared';
-export * from './sharedComponents';
 export * from './switcher';
 export * from './system';
 export * from './undo';
@@ -51,7 +51,7 @@ export * from './undo';
 import {
 	KeyValueMap,
 	PageController,
-	SharedComponentController,
+	ComponentController,
 	SharedController,
 } from '@/common';
 import { supportedLanguages } from '@/prism/prism';
@@ -166,7 +166,7 @@ export interface Partials {
 type PublishController =
 	| PageController
 	| SharedController
-	| SharedComponentController;
+	| ComponentController;
 
 export interface PublishControllers {
 	state: PublishController;

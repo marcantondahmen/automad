@@ -39,9 +39,9 @@ import {
 	getTagFromRoute,
 	html,
 	Route,
-	SharedComponentController,
+	ComponentController,
 } from '@/admin/core';
-import { newComponentButtonId } from '@/admin/components/Forms/SharedComponentsForm';
+import { newComponentButtonId } from '@/admin/components/Forms/ComponentsForm';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
@@ -49,12 +49,12 @@ import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
  *
  * @extends BaseDashboardLayoutComponent
  */
-export class SharedComponentsComponent extends BaseDashboardLayoutComponent {
+class ComponentsComponent extends BaseDashboardLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
 	protected get pageTitle(): string {
-		return App.text('sharedComponentsTitle');
+		return App.text('componentsTitle');
 	}
 
 	/**
@@ -80,14 +80,14 @@ export class SharedComponentsComponent extends BaseDashboardLayoutComponent {
 					>
 						${App.text('new')}
 					</button>
-					<am-filter placeholder="sharedComponentsFilter"></am-filter>
+					<am-filter placeholder="componentFilter"></am-filter>
 				</div>
 			</section>
 			<section class="${CSS.layoutDashboardSection}">
 				<div class="${CSS.layoutDashboardContent}">
-					<am-shared-component-form
-						${Attr.api}="${SharedComponentController.data}"
-					></am-shared-component-form>
+					<am-components-form
+						${Attr.api}="${ComponentController.data}"
+					></am-components-form>
 				</div>
 			</section>
 		`;
@@ -99,11 +99,8 @@ export class SharedComponentsComponent extends BaseDashboardLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderPublishForm(): string {
-		return html`<am-shared-component-publish-form></am-shared-component-publish-form>`;
+		return html`<am-component-publish-form></am-component-publish-form>`;
 	}
 }
 
-customElements.define(
-	getTagFromRoute(Route.components),
-	SharedComponentsComponent
-);
+customElements.define(getTagFromRoute(Route.components), ComponentsComponent);

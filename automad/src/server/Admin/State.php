@@ -100,7 +100,7 @@ class State {
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'sharedPublicationState' => $Automad->Shared->get(Fields::PUBLICATION_STATE),
-			'sharedComponents' => array_map(function ($component) {
+			'components' => array_map(function ($component) {
 				return array('id' => $component['id'], 'name' => $component['name']);
 			}, $Automad->getComponents()),
 			'files' => array(

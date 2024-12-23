@@ -34,7 +34,7 @@
 
 import { OutputBlockData } from 'automad-editorjs';
 
-export interface SharedComponentEditorData {
+export interface ComponentEditorData {
 	id: string;
 	name: string;
 	blocks: OutputBlockData[];

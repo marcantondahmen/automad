@@ -51,27 +51,27 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { SharedComponentEditorData } from '@/admin/types';
+import { ComponentEditorData } from '@/admin/types';
 import { EditorFieldComponent } from './Fields/EditorField';
-import { SharedComponentsFormComponent } from './Forms/SharedComponentsForm';
+import { ComponentsFormComponent } from './Forms/ComponentsForm';
 
 /**
  * A spinner component.
  *
  * @extends BaseComponent
  */
-export class SharedComponentEditorComponent extends BaseComponent {
+export class ComponentEditorComponent extends BaseComponent {
 	/**
 	 * The tag name.
 	 *
 	 * @static
 	 */
-	static TAG_NAME: string = 'am-shared-component-editor';
+	static TAG_NAME: string = 'am-component-editor';
 
 	/**
 	 * The component data object.
 	 */
-	private _data: SharedComponentEditorData;
+	private _data: ComponentEditorData;
 
 	/**
 	 * The editor field component instance.
@@ -81,7 +81,7 @@ export class SharedComponentEditorComponent extends BaseComponent {
 	/**
 	 * The component data getter.
 	 */
-	get data(): SharedComponentEditorData {
+	get data(): ComponentEditorData {
 		this._data.blocks = this.editor.value.blocks;
 
 		return this._data;
@@ -92,7 +92,7 @@ export class SharedComponentEditorComponent extends BaseComponent {
 	 *
 	 * @param data
 	 */
-	set data(data: SharedComponentEditorData) {
+	set data(data: ComponentEditorData) {
 		this._data = data;
 
 		setTimeout(this.init.bind(this), 0);
@@ -170,14 +170,14 @@ export class SharedComponentEditorComponent extends BaseComponent {
 			});
 
 			listen(copy, 'click', () => {
-				const collection = this.closest<SharedComponentsFormComponent>(
-					SharedComponentsFormComponent.TAG_NAME
+				const collection = this.closest<ComponentsFormComponent>(
+					ComponentsFormComponent.TAG_NAME
 				);
 
 				collection.add(
 					{
 						id: uniqueId(),
-						name: `${this._data.name} (${App.text('sharedComponentCopy')})`,
+						name: `${this._data.name} (${App.text('componentCopy')})`,
 						blocks: this.data.blocks,
 						collapsed: false,
 					},
@@ -194,11 +194,11 @@ export class SharedComponentEditorComponent extends BaseComponent {
 			listen(remove, 'click', async () => {
 				if (
 					await confirm(
-						`${App.text('sharedComponentConfirmRemoval')} (${this._data.name})`
+						`${App.text('componentConfirmRemoval')} (${this._data.name})`
 					)
 				) {
-					const form = this.closest<SharedComponentsFormComponent>(
-						SharedComponentsFormComponent.TAG_NAME
+					const form = this.closest<ComponentsFormComponent>(
+						ComponentsFormComponent.TAG_NAME
 					);
 
 					this.remove();
@@ -257,7 +257,7 @@ export class SharedComponentEditorComponent extends BaseComponent {
 	 */
 	private setName(callback: (name: string) => void): void {
 		const { modal, body, button } = createGenericModal(
-			App.text('sharedComponentName'),
+			App.text('componentName'),
 			App.text('ok')
 		);
 		const input = create(
@@ -294,6 +294,6 @@ export class SharedComponentEditorComponent extends BaseComponent {
 }
 
 customElements.define(
-	SharedComponentEditorComponent.TAG_NAME,
-	SharedComponentEditorComponent
+	ComponentEditorComponent.TAG_NAME,
+	ComponentEditorComponent
 );

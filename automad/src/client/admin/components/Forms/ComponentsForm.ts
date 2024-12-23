@@ -43,20 +43,20 @@ import {
 	queryAll,
 	uniqueId,
 } from '@/admin/core';
-import { SharedComponentEditorComponent } from '@/admin/components/SharedComponentEditor';
+import { ComponentEditorComponent } from '@/admin/components/ComponentEditor';
 import { FormComponent } from './Form';
-import { KeyValueMap, SharedComponentEditorData } from '@/admin/types';
+import { KeyValueMap, ComponentEditorData } from '@/admin/types';
 import Sortable from 'sortablejs';
 
 export const newComponentButtonId = 'am-new-component-button';
 
-export class SharedComponentsFormComponent extends FormComponent {
+export class ComponentsFormComponent extends FormComponent {
 	/**
 	 * The tag name.
 	 *
 	 * @static
 	 */
-	static TAG_NAME: string = 'am-shared-component-form';
+	static TAG_NAME: string = 'am-components-form';
 
 	/**
 	 * The form inits itself when created.
@@ -86,8 +86,8 @@ export class SharedComponentsFormComponent extends FormComponent {
 			return {};
 		}
 
-		const componentEditors = queryAll<SharedComponentEditorComponent>(
-			SharedComponentEditorComponent.TAG_NAME,
+		const componentEditors = queryAll<ComponentEditorComponent>(
+			ComponentEditorComponent.TAG_NAME,
 			this
 		);
 
@@ -119,11 +119,11 @@ export class SharedComponentsFormComponent extends FormComponent {
 	 * @param [insertAfter]
 	 */
 	add(
-		data: SharedComponentEditorData,
-		insertAfter: SharedComponentEditorComponent | null = null
+		data: ComponentEditorData,
+		insertAfter: ComponentEditorComponent | null = null
 	): void {
 		const component = create(
-			SharedComponentEditorComponent.TAG_NAME,
+			ComponentEditorComponent.TAG_NAME,
 			[],
 			{},
 			this
@@ -149,7 +149,7 @@ export class SharedComponentsFormComponent extends FormComponent {
 			this.innerHTML = '';
 
 			response.data?.components.forEach(
-				(component: SharedComponentEditorData) => {
+				(component: ComponentEditorData) => {
 					this.add(component);
 				}
 			);
@@ -157,7 +157,7 @@ export class SharedComponentsFormComponent extends FormComponent {
 			new Sortable(this, {
 				handle: `.${CSS.cardHeaderDrag}`,
 				animation: 200,
-				draggable: SharedComponentEditorComponent.TAG_NAME,
+				draggable: ComponentEditorComponent.TAG_NAME,
 				ghostClass: CSS.cardGhost,
 				chosenClass: CSS.cardChosen,
 				dragClass: CSS.cardDrag,
@@ -185,6 +185,6 @@ export class SharedComponentsFormComponent extends FormComponent {
 }
 
 customElements.define(
-	SharedComponentsFormComponent.TAG_NAME,
-	SharedComponentsFormComponent
+	ComponentsFormComponent.TAG_NAME,
+	ComponentsFormComponent
 );

@@ -33,7 +33,7 @@
  */
 
 import { PublishControllers } from '@/admin/types';
-import { KeyValueMap, SharedComponentController } from '@/common';
+import { KeyValueMap, ComponentController } from '@/common';
 import { BasePublishFormComponent } from './BasePublishForm';
 
 /**
@@ -41,7 +41,7 @@ import { BasePublishFormComponent } from './BasePublishForm';
  *
  * @extends BasePublishFormComponent
  */
-class SharedComponentPublishFormComponent extends BasePublishFormComponent {
+class ComponentPublishFormComponent extends BasePublishFormComponent {
 	/**
 	 * Data that is added to the update request.
 	 *
@@ -67,14 +67,14 @@ class SharedComponentPublishFormComponent extends BasePublishFormComponent {
 	 */
 	protected controllers(): PublishControllers {
 		return {
-			state: SharedComponentController.getPublicationState,
-			discard: SharedComponentController.discardDraft,
-			publish: SharedComponentController.publish,
+			state: ComponentController.getPublicationState,
+			discard: ComponentController.discardDraft,
+			publish: ComponentController.publish,
 		};
 	}
 }
 
 customElements.define(
-	'am-shared-component-publish-form',
-	SharedComponentPublishFormComponent
+	'am-component-publish-form',
+	ComponentPublishFormComponent
 );
