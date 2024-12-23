@@ -52,8 +52,8 @@ import {
 	uniqueId,
 } from '@/admin/core';
 import { ComponentEditorData } from '@/admin/types';
-import { EditorFieldComponent } from './Fields/EditorField';
 import { ComponentsFormComponent } from './Forms/ComponentsForm';
+import { EditorFieldComponent } from './Fields/EditorField';
 
 /**
  * A spinner component.
@@ -103,7 +103,7 @@ export class ComponentEditorComponent extends BaseComponent {
 	 */
 	private init(): void {
 		const hasName = this._data.name.length > 0;
-		const nameBindingKey = `shared-component-name-${this._data.id}-${Array.from(this.parentNode?.childNodes ?? [])?.indexOf(this) ?? 0}`;
+		const nameBindingKey = `component-name-${this._data.id}-${Array.from(this.parentNode?.childNodes ?? [])?.indexOf(this) ?? 0}`;
 		const nameBinding = new Binding(nameBindingKey, {
 			onChange: (value) => {
 				this._data.name = value;

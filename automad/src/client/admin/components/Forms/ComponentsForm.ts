@@ -145,6 +145,8 @@ export class ComponentsFormComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		await super.processResponse(response);
 
+		this.isInitialized = true;
+
 		if (response.data?.components) {
 			this.innerHTML = '';
 
@@ -176,8 +178,6 @@ export class ComponentsFormComponent extends FormComponent {
 					this.submit();
 				},
 			});
-
-			this.isInitialized = true;
 		}
 
 		fire(EventName.contentSaved);
