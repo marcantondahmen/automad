@@ -78,13 +78,16 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 						id="${newComponentButtonId}"
 						class="${CSS.button} ${CSS.buttonPrimary}"
 					>
-						${App.text('new')}
+						${App.text('newComponent')}
 					</button>
 					<am-filter placeholder="componentFilter"></am-filter>
 				</div>
 			</section>
 			<section class="${CSS.layoutDashboardSection}">
 				<div class="${CSS.layoutDashboardContent}">
+					<p class="${CSS.componentsHint}">
+						${App.text('componentsHint')}
+					</p>
 					<am-components-form
 						${Attr.api}="${ComponentController.data}"
 					></am-components-form>

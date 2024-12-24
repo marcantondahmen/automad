@@ -105,12 +105,10 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 				class="${CSS.card} ${CSS.userSelectNone}"
 				title="${component?.name}"
 			>
-				<div class="${CSS.cardTitle} ${CSS.flex} ${CSS.flexGap}">
-					<am-icon-text
-						${Attr.icon}="boxes"
-						${Attr.text}="${component?.name}"
-					></am-icon-text>
+				<div class="${CSS.cardIcon}">
+					<i class="bi bi-boxes"></i>
 				</div>
+				<div class="${CSS.cardTitle}">${component?.name}</div>
 			</div>
 		`;
 	}

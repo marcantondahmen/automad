@@ -255,7 +255,7 @@ export class ComponentEditorComponent extends BaseComponent {
 		this._data.collapsed = collapsed;
 
 		body.classList.toggle(CSS.displayNone, this._data.collapsed);
-		icon.className = `bi bi-${this._data.collapsed ? 'plus' : 'dash'}-lg`;
+		icon.className = `bi bi-chevron-bar-${this._data.collapsed ? 'expand' : 'contract'}`;
 
 		fire('change', this.editor);
 	}

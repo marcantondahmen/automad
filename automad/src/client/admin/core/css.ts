@@ -90,6 +90,8 @@ export const enum CSS {
 	codeflask = 'am-f-codeflask',
 	codeflaskPlaceholder = 'am-f-codeflask__placeholder',
 
+	componentsHint = 'am-c-components__hint',
+
 	contents = 'am-e-contents',
 
 	customIconCheckbox = 'am-f-custom-icon-checkbox',

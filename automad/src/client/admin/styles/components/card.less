@@ -151,14 +151,18 @@
 	}
 
 	&__editor {
-		padding: 0 0 3rem 0;
+		padding: 0.3rem;
 		transform: translate3d(0, 0, 0);
+		border-top: @am-border;
 		outline: 0;
 
 		& .codex-editor:not(.codex-editor .codex-editor) {
 			border: none;
-			border-top: @am-card-border;
 			border-radius: 0;
+		}
+
+		& am-alert {
+			margin: 0;
 		}
 	}
 
