@@ -225,6 +225,8 @@ export class ComponentsFormComponent extends FormComponent {
 					this.submit();
 				},
 			});
+		} else {
+			fire(EventName.appStateRequireUpdate);
 		}
 
 		fire(EventName.contentSaved);

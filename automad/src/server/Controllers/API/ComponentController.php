@@ -68,6 +68,8 @@ class ComponentController {
 			}
 
 			if ($ComponentStore->setState(PublicationState::DRAFT, array('components' => $components))->save()) {
+				Cache::clear();
+
 				return $Response;
 			}
 

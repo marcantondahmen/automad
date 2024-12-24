@@ -226,6 +226,7 @@ export class EditorJSComponent extends BaseComponent {
 				inlineToolbar: true,
 			},
 			section: { class: SectionBlock },
+			...component,
 			nestedList: {
 				class: NestedListBlock,
 				inlineToolbar: true,
@@ -251,7 +252,6 @@ export class EditorJSComponent extends BaseComponent {
 				class: ImageSlideshowBlock,
 				inlineToolbar: false,
 			},
-			...component,
 			buttons: {
 				class: ButtonsBlock,
 				inlineToolbar: true,
