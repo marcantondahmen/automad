@@ -174,15 +174,17 @@ export class ComponentEditorComponent extends BaseComponent {
 					ComponentsFormComponent.TAG_NAME
 				);
 
-				collection.add(
-					{
-						id: uniqueId(),
-						name: `${this._data.name} (${App.text('componentCopy')})`,
-						blocks: this.data.blocks,
-						collapsed: false,
-					},
-					this
-				);
+				collection
+					.add(
+						{
+							id: uniqueId(),
+							name: `${this._data.name} (${App.text('componentCopy')})`,
+							blocks: this.data.blocks,
+							collapsed: false,
+						},
+						this
+					)
+					.fireOnReady();
 			});
 
 			listen(rename, 'click', () => {
@@ -212,10 +214,6 @@ export class ComponentEditorComponent extends BaseComponent {
 				key: '',
 				label: '',
 			}) as EditorFieldComponent;
-
-			await this.editor.editorJS.editor.isReady;
-
-			fire('input', this.editor);
 		};
 
 		if (hasName) {
@@ -224,8 +222,20 @@ export class ComponentEditorComponent extends BaseComponent {
 			this.setName((name) => {
 				nameBinding.value = name;
 				setupEditor();
+				this.fireOnReady();
 			});
 		}
+	}
+
+	/**
+	 * Fire input event when editor is ready.
+	 */
+	fireOnReady(): void {
+		setTimeout(async () => {
+			await this.editor.editorJS.editor.isReady;
+
+			fire('change', this.editor);
+		}, 0);
 	}
 
 	/**

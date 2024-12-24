@@ -45,7 +45,11 @@ import {
 } from '@/admin/core';
 import { ComponentEditorComponent } from '@/admin/components/ComponentEditor';
 import { FormComponent } from './Form';
-import { KeyValueMap, ComponentEditorData } from '@/admin/types';
+import {
+	KeyValueMap,
+	ComponentEditorData,
+	DeduplicationSettings,
+} from '@/admin/types';
 import Sortable from 'sortablejs';
 
 export const newComponentButtonId = 'am-new-component-button';
@@ -82,6 +86,27 @@ export class ComponentsFormComponent extends FormComponent {
 	 * The time of the latest fetch.
 	 */
 	private fetchTime: number;
+
+	/**
+	 * The sortable instance.
+	 */
+	private sortable: Sortable;
+
+	/**
+	 * The deduplication settings for the form.
+	 */
+	protected get deduplicationSettings(): DeduplicationSettings {
+		return {
+			getFormData: () => {
+				const data = this.formData;
+
+				data.fetchTime = null;
+
+				return data;
+			},
+			enabled: true,
+		};
+	}
 
 	/**
 	 * The form data object.
@@ -129,7 +154,7 @@ export class ComponentsFormComponent extends FormComponent {
 	add(
 		data: ComponentEditorData,
 		insertAfter: ComponentEditorComponent | null = null
-	): void {
+	): ComponentEditorComponent {
 		const component = create(
 			ComponentEditorComponent.TAG_NAME,
 			[],
@@ -142,6 +167,21 @@ export class ComponentsFormComponent extends FormComponent {
 		}
 
 		component.data = data;
+
+		return component;
+	}
+
+	/**
+	 * Initialize the form.
+	 */
+	protected init(): void {
+		super.init();
+
+		this.addListener(
+			listen(window, EventName.contentPublished, () => {
+				this.fetchTime = Math.ceil(new Date().getTime() / 1000);
+			})
+		);
 	}
 
 	/**
@@ -153,19 +193,17 @@ export class ComponentsFormComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		await super.processResponse(response);
 
-		this.isInitialized = true;
-		this.fetchTime = response.time;
-
 		if (response.data?.components) {
+			this.sortable?.destroy();
 			this.innerHTML = '';
 
-			response.data?.components.forEach(
+			response.data.components.forEach(
 				(component: ComponentEditorData) => {
 					this.add(component);
 				}
 			);
 
-			new Sortable(this, {
+			this.sortable = new Sortable(this, {
 				handle: `.${CSS.cardHeaderDrag}`,
 				animation: 200,
 				draggable: ComponentEditorComponent.TAG_NAME,
@@ -190,6 +228,9 @@ export class ComponentsFormComponent extends FormComponent {
 		}
 
 		fire(EventName.contentSaved);
+
+		this.fetchTime = response.time;
+		this.isInitialized = true;
 	}
 }
 
