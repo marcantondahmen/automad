@@ -215,15 +215,22 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 						${Attr.publicationState}="${App.sharedPublicationState}"
 						${(getSlug() as Route) == Route.shared
 							? `
-							${Attr.bind}="publicationState"
-							${Attr.bindTo}="${Attr.publicationState}"
-						`
+								${Attr.bind}="publicationState"
+								${Attr.bindTo}="${Attr.publicationState}"
+							`
 							: ''}
 					></am-nav-item>
 					<am-nav-item
 						${Attr.page}="${Route.components}"
 						${Attr.icon}="boxes"
 						${Attr.text}="componentsTitle"
+						${Attr.publicationState}="${App.componentsPublicationState}"
+						${(getSlug() as Route) == Route.components
+							? `
+								${Attr.bind}="publicationState"
+								${Attr.bindTo}="${Attr.publicationState}"
+							`
+							: ''}
 					></am-nav-item>
 					<am-nav-item
 						${Attr.page}="${Route.packages}"

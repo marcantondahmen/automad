@@ -56,6 +56,7 @@ import {
 	SystemSettings,
 	ThemeCollection,
 	User,
+	PublicationState,
 } from '@/admin/types';
 
 /**
@@ -199,6 +200,15 @@ export class App {
 	}
 
 	/**
+	 * The components publication state.
+	 *
+	 * @static
+	 */
+	static get componentsPublicationState(): PublicationState {
+		return App.getState('componentsPublicationState');
+	}
+
+	/**
 	 * The array of content field names.
 	 *
 	 * @static
@@ -221,7 +231,7 @@ export class App {
 	 *
 	 * @static
 	 */
-	static get sharedPublicationState(): string {
+	static get sharedPublicationState(): PublicationState {
 		return App.getState('sharedPublicationState');
 	}
 

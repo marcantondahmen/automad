@@ -34,27 +34,68 @@
  * https://automad.org/license
  */
 
-namespace Automad\Stores;
+namespace Automad\Models;
+
+use Automad\Core\Session;
+use Automad\Stores\ComponentStore;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A store class handles the reading of JSON formatted data files.
+ * The component collection model.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-type Component = array{
+ *   id: string,
+ *	 name: string,
+ *	 blocks: array,
+ *	 collapsed: bool
+ * }
  */
-class ComponentStore extends AbstractStore {
-	const FILENAME = 'components';
+class ComponentCollection {
+	/**
+	 * The collection.
+	 *
+	 * @var array<Component>
+	 */
+	private array $collection;
 
 	/**
-	 * This method is required to set the actual file path for the store on disk.
+	 * The publication state.
+	 */
+	private string $publicationState;
+
+	/**
+	 * The collection constructor.
+	 */
+	public function __construct() {
+		$ComponentStore = new ComponentStore();
+
+		$state = $ComponentStore->getState(empty(Session::getUsername())) ?? array('components' => array());
+
+		$this->collection = $state['components'];
+		$this->publicationState = $state[Fields::PUBLICATION_STATE];
+	}
+
+	/**
+	 * Get the collection.
 	 *
-	 * @param ?string $optionalPath
+	 * @return array<Component>
+	 */
+	public function get(): array {
+		return $this->collection;
+	}
+
+	/**
+	 * Return the publication state.
+	 *
 	 * @return string
 	 */
-	protected function resolvePath(?string $optionalPath = null): string {
-		return AM_BASE_DIR . AM_DIR_SHARED . '/' . self::FILENAME;
+	public function getPublicationState(): string {
+		return $this->publicationState;
 	}
 }

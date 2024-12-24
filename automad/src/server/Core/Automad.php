@@ -38,13 +38,13 @@ namespace Automad\Core;
 
 use Automad\API\RequestHandler;
 use Automad\Engine\Delimiters;
+use Automad\Models\ComponentCollection;
 use Automad\Models\Context;
 use Automad\Models\Filelist;
 use Automad\Models\Page;
 use Automad\Models\PageCollection;
 use Automad\Models\Pagelist;
 use Automad\Models\Shared;
-use Automad\Stores\ComponentStore;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,10 +56,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
- *
- * @psalm-import-type Component from ComponentStore
  */
 class Automad {
+	/**
+	 * The components collection.
+	 */
+	public ComponentCollection $ComponentCollection;
+
 	/**
 	 * Automad's Context object.
 	 *
@@ -81,13 +84,6 @@ class Automad {
 	 * @var array<Page>
 	 */
 	private array $collection = array();
-
-	/**
-	 * The components collection.
-	 *
-	 * @var array<Component>
-	 */
-	private array $components = array();
 
 	/**
 	 * Automad's Filelist object
@@ -112,7 +108,7 @@ class Automad {
 	public function __construct(array $collection, Shared $Shared) {
 		$this->collection = $collection;
 		$this->Shared = $Shared;
-		$this->components = $this->loadComponents();
+		$this->ComponentCollection = new ComponentCollection();
 
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 
@@ -180,15 +176,6 @@ class Automad {
 	 */
 	public function getCollection(): array {
 		return $this->collection;
-	}
-
-	/**
-	 * Return the components array.
-	 *
-	 * @return array<Component>
-	 */
-	public function getComponents(): array {
-		return $this->components;
 	}
 
 	/**
@@ -306,22 +293,6 @@ class Automad {
 		}
 
 		return $this->pageNotFound();
-	}
-
-	/**
-	 * Load shared components from store.
-	 *
-	 * @return array<Component>
-	 */
-	private function loadComponents(): array {
-		$ComponentStore = new ComponentStore();
-		$storeContent = $ComponentStore->getState(empty(Session::getUsername())) ?? array();
-
-		if (isset($storeContent['components'])) {
-			return $storeContent['components'];
-		}
-
-		return array();
 	}
 
 	/**

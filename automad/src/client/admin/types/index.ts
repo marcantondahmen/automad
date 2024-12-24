@@ -174,6 +174,8 @@ export interface PublishControllers {
 	publish: PublishController;
 }
 
+export type PublicationState = 'draft' | 'published';
+
 export interface SelectComponentOption {
 	value: string | number;
 	text?: string;
