@@ -266,7 +266,18 @@ class Automad {
 			$template = Str::stripStart($file, AM_BASE_DIR . AM_DIR_PACKAGES);
 			$title = $Automad->Context->get()->get(Fields::TITLE);
 			$url = $Automad->Context->get()->get(Fields::URL);
-			$output = "<h1>Template $template for page $title ($url) is missing!</h1><h2>Make sure you have selected an existing template for this page!</h2>";
+			$dashboard = AM_BASE_URL . AM_PAGE_DASHBOARD;
+			$output = '';
+			Error::exit(
+				'Template missing!',
+				<<< HTML
+				Template <code>$template</code> for page <strong>$title</strong> <code>$url</code> 
+				is missing! Make sure you have selected an existing template for this page!
+				<br>
+				<br>
+				<a href="$dashboard">Visit the dashboard</a>
+				HTML
+			);
 		}
 
 		// Strip comments before return.

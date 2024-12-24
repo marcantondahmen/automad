@@ -81,7 +81,7 @@ class PublicController {
 			function (Page $Page) use ($fields) {
 				$content = array();
 
-				foreach($fields as $field) {
+				foreach ($fields as $field) {
 					$content[$field] = $Page->get($field);
 				}
 

@@ -206,6 +206,10 @@ class Error {
 							background-color: var(--bg-code);
 							font-size: 0.9em;
 						}
+
+						a {
+							color: inherit;
+						}
 					</style>
 				</head>
 				<body>

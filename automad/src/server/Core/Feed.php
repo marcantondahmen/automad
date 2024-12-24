@@ -40,7 +40,6 @@ use Automad\Engine\Processors\URLProcessor;
 use Automad\Models\Page;
 use Automad\Models\Selection;
 use Automad\System\Fields;
-use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
