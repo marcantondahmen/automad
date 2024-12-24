@@ -72,7 +72,7 @@ class Toolbox {
 	 */
 	public function __construct(Automad $Automad) {
 		$this->Automad = $Automad;
-		$this->collection = $this->Automad->getCollection();
+		$this->collection = $this->Automad->getPages();
 	}
 
 	/**

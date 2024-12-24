@@ -277,7 +277,7 @@ class Page {
 	public static function findByPath(string $path): ?Page {
 		$Automad = Automad::fromCache();
 
-		foreach ($Automad->getCollection() as $Page) {
+		foreach ($Automad->getPages() as $Page) {
 			if ($Page->path == $path) {
 				return $Page;
 			}

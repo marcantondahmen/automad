@@ -78,14 +78,6 @@ class Automad {
 	public Shared $Shared;
 
 	/**
-	 * Array holding all the site's pages and the related data.
-	 * To access the data for a specific page, use the url as key: $this->collection['url'].
-	 *
-	 * @var array<Page>
-	 */
-	private array $collection = array();
-
-	/**
 	 * Automad's Filelist object
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Filelist class for all objects using the Automad object as parameter.
@@ -100,17 +92,24 @@ class Automad {
 	private ?Pagelist $Pagelist = null;
 
 	/**
+	 * Array holding all the site's pages and the related data.
+	 *
+	 * @var array<Page>
+	 */
+	private array $pages = array();
+
+	/**
 	 * Set collection and Shared properties and create the context object with the currently requested page.
 	 *
-	 * @param array<Page> $collection
+	 * @param array<Page> $pages
 	 * @param Shared $Shared
 	 */
-	public function __construct(array $collection, Shared $Shared) {
-		$this->collection = $collection;
+	public function __construct(array $pages, Shared $Shared) {
+		$this->pages = $pages;
 		$this->Shared = $Shared;
 		$this->ComponentCollection = new ComponentCollection();
 
-		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
+		Debug::log(array('Shared' => $this->Shared, 'Pages' => $this->pages), 'New instance created');
 
 		$this->Context = new Context($this->getRequestedPage());
 	}
@@ -121,7 +120,7 @@ class Automad {
 	 * @return array $itemsToCache
 	 */
 	public function __sleep(): array {
-		$itemsToCache = array('components', 'collection', 'Shared');
+		$itemsToCache = array('pages', 'Shared', 'ComponentCollection');
 		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
 
 		return $itemsToCache;
@@ -170,15 +169,6 @@ class Automad {
 	}
 
 	/**
-	 * Return $collection array.
-	 *
-	 * @return array<string, Page> $this->collection
-	 */
-	public function getCollection(): array {
-		return $this->collection;
-	}
-
-	/**
 	 * Return Automad's instance of the Filelist class and create instance when accessed for the first time.
 	 *
 	 * @return Filelist Filelist object
@@ -199,7 +189,7 @@ class Automad {
 	public function getNavigationMetaData(): array {
 		$pages = array();
 
-		foreach ($this->collection as $Page) {
+		foreach ($this->pages as $Page) {
 			$pages[$Page->origUrl] = array(
 				'title' => $Page->get(Fields::TITLE),
 				'index' => $Page->index,
@@ -222,8 +212,8 @@ class Automad {
 	 * @return Page|null Page
 	 */
 	public function getPage(string $url): ?Page {
-		if (array_key_exists($url, $this->collection)) {
-			return $this->collection[$url];
+		if (array_key_exists($url, $this->pages)) {
+			return $this->pages[$url];
 		}
 
 		return null;
@@ -236,10 +226,19 @@ class Automad {
 	 */
 	public function getPagelist(): Pagelist {
 		if (!$this->Pagelist) {
-			$this->Pagelist = new Pagelist($this->collection, $this->Context);
+			$this->Pagelist = new Pagelist($this->pages, $this->Context);
 		}
 
 		return $this->Pagelist;
+	}
+
+	/**
+	 * Return array with all pages.
+	 *
+	 * @return array<string, Page>
+	 */
+	public function getPages(): array {
+		return $this->pages;
 	}
 
 	/**

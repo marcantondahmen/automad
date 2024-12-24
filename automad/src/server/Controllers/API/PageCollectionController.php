@@ -63,7 +63,7 @@ class PageCollectionController {
 		$ResponseCache = new ResponseCache(function () {
 			$Response = new Response();
 			$Automad = Automad::fromCache();
-			$Selection = new Selection($Automad->getCollection());
+			$Selection = new Selection($Automad->getPages());
 			$Selection->sortPages(Fields::TIME_LAST_MODIFIED . ' desc');
 			$pages = array_values($Selection->getSelection(false, false, 0, 15));
 

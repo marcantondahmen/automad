@@ -91,7 +91,7 @@ class SearchController {
 			Request::post('searchValue'),
 			$isRegex,
 			$isCaseSensitive,
-			$Automad->getCollection(),
+			$Automad->getPages(),
 			$Automad->Shared
 		);
 

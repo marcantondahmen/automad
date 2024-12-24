@@ -109,7 +109,7 @@ class PageController {
 		$Page = $Automad->getPage($url);
 
 		if ($Page) {
-			$Selection = new Selection($Automad->getCollection());
+			$Selection = new Selection($Automad->getPages());
 			$Selection->filterBreadcrumbs($url);
 
 			$breadcrumbs = array();

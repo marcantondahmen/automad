@@ -80,7 +80,7 @@ class Feed {
 	 */
 	public function get(): string {
 		$fn = $this->fn();
-		$Selection = new Selection($this->Automad->getCollection());
+		$Selection = new Selection($this->Automad->getPages());
 		$items = $this->getItems($Selection->getSelection());
 
 		return <<< XML

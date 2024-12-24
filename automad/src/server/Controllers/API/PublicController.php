@@ -72,7 +72,7 @@ class PublicController {
 		);
 
 		$Automad->Context->set($Automad->getPage($context ? $context : '/'));
-		$Pagelist = new Pagelist($Automad->getCollection(), $Automad->Context);
+		$Pagelist = new Pagelist($Automad->getPages(), $Automad->Context);
 
 		$config = array_intersect_key($_GET, $Pagelist->getDefaults());
 		$Pagelist->config($config);

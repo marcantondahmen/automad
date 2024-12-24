@@ -63,7 +63,7 @@ class Links {
 		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
 		$replaceValue = $new;
 
-		$Search = new Search($searchValue, true, false, $Automad->getCollection(), $Automad->Shared);
+		$Search = new Search($searchValue, true, false, $Automad->getPages(), $Automad->Shared);
 		$fileResultsArray = $Search->searchPerFile();
 		$fileFieldsArray = array();
 
