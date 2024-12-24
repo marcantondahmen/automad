@@ -161,7 +161,7 @@ class SearchTest extends TestCase {
 			$searchValue,
 			$isRegex,
 			$isCaseSensitive,
-			$Automad->getPages()(),
+			$Automad->getPages(),
 			$Automad->Shared
 		);
 

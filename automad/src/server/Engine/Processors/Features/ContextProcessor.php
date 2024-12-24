@@ -92,7 +92,7 @@ class ContextProcessor extends AbstractFeatureProcessor {
 		// Any existing page.
 		// To avoid overriding $Page (next/prev), it has to be tested explicitly whether
 		// the URL actually exists.
-		if (array_key_exists($url, $this->Automad->getPages()())) {
+		if (array_key_exists($url, $this->Automad->getPages())) {
 			$Page = $this->Automad->getPage($url);
 		}
 

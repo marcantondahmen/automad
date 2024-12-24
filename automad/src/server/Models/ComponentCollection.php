@@ -78,7 +78,7 @@ class ComponentCollection {
 		$state = $ComponentStore->getState(empty(Session::getUsername())) ?? array('components' => array());
 
 		$this->collection = $state['components'];
-		$this->publicationState = $state[Fields::PUBLICATION_STATE];
+		$this->publicationState = $state[Fields::PUBLICATION_STATE] ?? '';
 	}
 
 	/**
