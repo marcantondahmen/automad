@@ -36,9 +36,9 @@
 
 namespace Automad\Models;
 
+use Automad\Core\PublicationState;
 use Automad\Core\Session;
 use Automad\Stores\ComponentStore;
-use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -78,7 +78,7 @@ class ComponentCollection {
 		$state = $ComponentStore->getState(empty(Session::getUsername())) ?? array('components' => array());
 
 		$this->collection = $state['components'];
-		$this->publicationState = $state[Fields::PUBLICATION_STATE] ?? '';
+		$this->publicationState = $ComponentStore->isPublished() ? PublicationState::PUBLISHED->value : PublicationState::DRAFT->value;
 	}
 
 	/**

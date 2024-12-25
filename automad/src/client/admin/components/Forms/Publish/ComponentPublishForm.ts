@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { App } from '@/admin/core';
 import { PublishControllers } from '@/admin/types';
 import { KeyValueMap, ComponentController } from '@/common';
 import { BasePublishFormComponent } from './BasePublishForm';
@@ -57,7 +58,7 @@ class ComponentPublishFormComponent extends BasePublishFormComponent {
 	 * @abstract
 	 */
 	protected initialState(): string {
-		return '';
+		return App.componentsPublicationState;
 	}
 
 	/**

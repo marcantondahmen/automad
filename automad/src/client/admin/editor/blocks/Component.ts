@@ -32,15 +32,18 @@
  * Licensed under the MIT license.
  */
 
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 import {
 	App,
-	Attr,
-	createGenericModal,
+	create,
 	createSelect,
 	CSS,
 	EventName,
+	getComponentTargetContainer,
 	html,
 	listen,
+	query,
+	Route,
 } from '@/admin/core';
 import { ComponentBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
@@ -117,10 +120,34 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	 * Called when block is added.
 	 */
 	appendCallback(): void {
-		const { modal, body } = createGenericModal(
-			App.text('componentBlockTitle'),
-			App.text('ok')
-		);
+		const modal = create(
+			ModalComponent.TAG_NAME,
+			[],
+			{},
+			getComponentTargetContainer(),
+			html`
+				<am-modal-dialog>
+					<am-modal-header>
+						${App.text('selectComponent')}
+					</am-modal-header>
+					<am-modal-body></am-modal-body>
+					<am-modal-footer>
+						<a
+							href="${App.dashboardURL}/${Route.components}"
+							class="${CSS.button}"
+						>
+							${App.text('openComponentEditor')}
+						</a>
+						<button class="${CSS.button} ${CSS.buttonPrimary}">
+							${App.text('addComponent')}
+						</button>
+					</am-modal-footer>
+				</am-modal-dialog>
+			`
+		) as ModalComponent;
+
+		const body = query('am-modal-body', modal);
+		const button = query('am-modal-footer button', modal);
 
 		const options = App.components.map((component) => {
 			return {
@@ -129,12 +156,29 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			};
 		});
 
-		const select = createSelect(options, options[0].value, body);
+		if (options.length > 0) {
+			const select = createSelect(options, options[0].value, body);
+
+			listen(button, 'click', () => {
+				this.data.id = select.value;
+				modal.close();
+			});
+		} else {
+			button.setAttribute('disabled', '');
+			body.textContent = App.text('noComponentsFound');
+		}
 
 		modal.open();
 
 		listen(modal, EventName.modalClose, () => {
-			this.data.id = select.value;
+			if (!this.data.id) {
+				this.api.blocks.delete(
+					this.api.blocks.getBlockIndex(this.blockAPI.id)
+				);
+
+				return;
+			}
+
 			this.renderWrapper();
 		});
 	}

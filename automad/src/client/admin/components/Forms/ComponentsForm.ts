@@ -226,10 +226,9 @@ export class ComponentsFormComponent extends FormComponent {
 				},
 			});
 		} else {
+			fire(EventName.contentSaved);
 			fire(EventName.appStateRequireUpdate);
 		}
-
-		fire(EventName.contentSaved);
 
 		this.fetchTime = response.time;
 		this.isInitialized = true;
