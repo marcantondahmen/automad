@@ -52,7 +52,7 @@ import {
 } from '@/admin/types';
 import Sortable from 'sortablejs';
 
-export const newComponentButtonId = 'am-new-component-button';
+export const newComponentButtonClass = 'am-new-component-button';
 
 export class ComponentCollectionFormComponent extends FormComponent {
 	/**
@@ -133,16 +133,18 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	connectedCallback(): void {
 		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
-		this.addListener(
-			listen(query(`#${newComponentButtonId}`), 'click', () => {
-				this.add({
-					id: uniqueId(),
-					name: '',
-					blocks: [],
-					collapsed: false,
-				});
-			})
-		);
+		queryAll(`.${newComponentButtonClass}`).forEach((button) => {
+			this.addListener(
+				listen(button, 'click', () => {
+					this.add({
+						id: uniqueId(),
+						name: '',
+						blocks: [],
+						collapsed: false,
+					});
+				})
+			);
+		});
 	}
 
 	/**

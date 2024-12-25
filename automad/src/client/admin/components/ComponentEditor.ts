@@ -44,6 +44,7 @@ import {
 	createGenericModal,
 	CSS,
 	debounce,
+	EventName,
 	FieldTag,
 	fire,
 	html,
@@ -299,6 +300,12 @@ export class ComponentEditorComponent extends BaseComponent {
 			if (name.length) {
 				callback(name);
 				modal.close();
+			}
+		});
+
+		listen(modal, EventName.modalClose, () => {
+			if (input.value.length == 0) {
+				this.remove();
 			}
 		});
 	}

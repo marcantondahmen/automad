@@ -41,7 +41,7 @@ import {
 	Route,
 	ComponentController,
 } from '@/admin/core';
-import { newComponentButtonId } from '@/admin/components/Forms/ComponentCollectionForm';
+import { newComponentButtonClass } from '@/admin/components/Forms/ComponentCollectionForm';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
@@ -69,14 +69,13 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 				${Attr.text}="${this.pageTitle}"
 			></am-breadcrumbs-route>
 			<section
-				class="${CSS.layoutDashboardSection} ${CSS.layoutDashboardSectionSticky}"
+				class="${CSS.componentsStickySection} ${CSS.layoutDashboardSection} ${CSS.layoutDashboardSectionSticky}"
 			>
 				<div
 					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentRow} ${CSS.flexGap}"
 				>
 					<button
-						id="${newComponentButtonId}"
-						class="${CSS.button} ${CSS.buttonPrimary}"
+						class="${newComponentButtonClass} ${CSS.button} ${CSS.buttonPrimary}"
 					>
 						${App.text('newComponent')}
 					</button>
@@ -85,9 +84,14 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 			</section>
 			<section class="${CSS.layoutDashboardSection}">
 				<div class="${CSS.layoutDashboardContent}">
-					<p class="${CSS.componentsHint}">
-						${App.text('componentsHint')}
-					</p>
+					<div class="${CSS.componentsHint}">
+						<p>${App.text('componentsHint')}</p>
+						<button
+							class="${newComponentButtonClass} ${CSS.button} ${CSS.buttonPrimary}"
+						>
+							${App.text('newComponent')}
+						</button>
+					</div>
 					<am-component-collection-form
 						${Attr.api}="${ComponentController.data}"
 					></am-component-collection-form>

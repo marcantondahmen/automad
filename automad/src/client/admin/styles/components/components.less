@@ -33,6 +33,14 @@
  */
 
 .am-c-components {
+	div > &__sticky-section {
+		display: none;
+	}
+
+	div:has(am-component-editor) > &__sticky-section {
+		display: grid;
+	}
+
 	div:has(am-component-editor) &__hint {
 		display: none;
 	}
