@@ -54,13 +54,13 @@ import Sortable from 'sortablejs';
 
 export const newComponentButtonId = 'am-new-component-button';
 
-export class ComponentsFormComponent extends FormComponent {
+export class ComponentCollectionFormComponent extends FormComponent {
 	/**
 	 * The tag name.
 	 *
 	 * @static
 	 */
-	static TAG_NAME: string = 'am-components-form';
+	static TAG_NAME: string = 'am-component-collection-form';
 
 	/**
 	 * The form inits itself when created.
@@ -236,6 +236,6 @@ export class ComponentsFormComponent extends FormComponent {
 }
 
 customElements.define(
-	ComponentsFormComponent.TAG_NAME,
-	ComponentsFormComponent
+	ComponentCollectionFormComponent.TAG_NAME,
+	ComponentCollectionFormComponent
 );

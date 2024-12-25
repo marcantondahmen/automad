@@ -90,7 +90,7 @@ import './components/Forms/PageDataForm';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';
 import './components/Forms/SetupForm';
-import './components/Forms/ComponentsForm';
+import './components/Forms/ComponentCollectionForm';
 import './components/Forms/SharedDataForm';
 import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';

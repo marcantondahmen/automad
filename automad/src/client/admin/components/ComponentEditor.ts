@@ -52,7 +52,7 @@ import {
 	uniqueId,
 } from '@/admin/core';
 import { ComponentEditorData } from '@/admin/types';
-import { ComponentsFormComponent } from './Forms/ComponentsForm';
+import { ComponentCollectionFormComponent } from './Forms/ComponentCollectionForm';
 import { EditorFieldComponent } from './Fields/EditorField';
 
 /**
@@ -170,9 +170,10 @@ export class ComponentEditorComponent extends BaseComponent {
 			});
 
 			listen(copy, 'click', () => {
-				const collection = this.closest<ComponentsFormComponent>(
-					ComponentsFormComponent.TAG_NAME
-				);
+				const collection =
+					this.closest<ComponentCollectionFormComponent>(
+						ComponentCollectionFormComponent.TAG_NAME
+					);
 
 				collection
 					.add(
@@ -199,8 +200,8 @@ export class ComponentEditorComponent extends BaseComponent {
 						`${App.text('componentConfirmRemoval')} (${this._data.name})`
 					)
 				) {
-					const form = this.closest<ComponentsFormComponent>(
-						ComponentsFormComponent.TAG_NAME
+					const form = this.closest<ComponentCollectionFormComponent>(
+						ComponentCollectionFormComponent.TAG_NAME
 					);
 
 					this.remove();

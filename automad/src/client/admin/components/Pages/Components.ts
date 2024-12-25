@@ -41,7 +41,7 @@ import {
 	Route,
 	ComponentController,
 } from '@/admin/core';
-import { newComponentButtonId } from '@/admin/components/Forms/ComponentsForm';
+import { newComponentButtonId } from '@/admin/components/Forms/ComponentCollectionForm';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
@@ -88,9 +88,9 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 					<p class="${CSS.componentsHint}">
 						${App.text('componentsHint')}
 					</p>
-					<am-components-form
+					<am-component-collection-form
 						${Attr.api}="${ComponentController.data}"
-					></am-components-form>
+					></am-component-collection-form>
 				</div>
 			</section>
 		`;
