@@ -91,6 +91,24 @@ class ComponentCollection {
 	}
 
 	/**
+	 * Find a component by id.
+	 *
+	 * @param string $id
+	 * @return Component|null
+	 */
+	public function getComponent(string $id): array|null {
+		$filtered = array_filter($this->collection, function (array $item) use ($id) {
+			return $item['id'] === $id;
+		});
+
+		if (!empty($filtered)) {
+			return $filtered[0];
+		}
+
+		return null;
+	}
+
+	/**
 	 * Return the publication state.
 	 *
 	 * @return string
