@@ -111,7 +111,8 @@ class Mock extends TestCase {
 					Data::load('/inheritance'),
 					Data::load('/falsy'),
 					Data::load('/invalid'),
-					Data::load('/find-first-image')
+					Data::load('/find-first-image'),
+					Data::load('/component')
 				),
 				$Shared
 			),

@@ -92,6 +92,7 @@ class ViewTest extends TestCase {
 
 		$templates = array(
 			'comments_01' => 'Page',
+			'components_01' => '<div class="am-block"><p class="am-block">Component test</p></div>',
 			'email_01' => <<< HTML
 						<html>
 							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}

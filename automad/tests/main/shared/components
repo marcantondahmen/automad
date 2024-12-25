@@ -1,0 +1,34 @@
+{
+    "draft": [],
+    "published": {
+        "components": [
+            {
+                "id": "fV1gSH5wHXJcRjlPxyfxJskhzYCYvQdb",
+                "name": "Test Component",
+                "blocks": [
+                    {
+                        "id": "U0R9vL7ZN8w4NIN4kauQcXvZj6qtCN_4",
+                        "type": "paragraph",
+                        "data": {
+                            "text": "Component test",
+                            "large": false
+                        },
+                        "tunes": {
+                            "layout": null,
+                            "spacing": {
+                                "top": "",
+                                "right": "",
+                                "bottom": "",
+                                "left": ""
+                            },
+                            "className": "",
+                            "id": ""
+                        }
+                    }
+                ],
+                "collapsed": false
+            }
+        ],
+        ":lastPublished": "2024-12-25T18:22:06+00:00"
+    }
+}

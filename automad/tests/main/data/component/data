@@ -1,0 +1,29 @@
+{
+    "draft": {
+        "+component": {
+            "blocks": [
+                {
+                    "id": "oKODYY-_XI9hEp-qCLcRLjW9-G5w2YGT",
+                    "type": "component",
+                    "data": {
+                        "id": "fV1gSH5wHXJcRjlPxyfxJskhzYCYvQdb"
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "",
+                            "right": "",
+                            "bottom": "",
+                            "left": ""
+                        },
+                        "className": "",
+                        "id": ""
+                    }
+                }
+            ]
+        }
+    }
+}
