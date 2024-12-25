@@ -1,9 +1,9 @@
 #!/bin/bash
 
-PHPUNIT_PHAR=phpunit.phar
+PHPUNIT_PHAR=phpunit-9.6.22.phar
 
 if [[ ! -f "$PHPUNIT_PHAR" ]]; then
-	curl -L https://phar.phpunit.de/phpunit-9.phar --output $PHPUNIT_PHAR
+	curl -L https://phar.phpunit.de/phpunit-9.6.22.phar --output $PHPUNIT_PHAR
 	chmod +x $PHPUNIT_PHAR
 fi
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PSALM_PHAR=psalm.phar
+PSALM_PHAR=psalm-5.26.1.phar
 
 if [[ ! -f "$PSALM_PHAR" ]]; then
 	curl -L https://github.com/vimeo/psalm/releases/download/5.26.1/psalm.phar --output $PSALM_PHAR
