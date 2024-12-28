@@ -195,7 +195,7 @@ export class App {
 	 *
 	 * @static
 	 */
-	static get components(): Pick<ComponentEditorData, 'id' | 'name'>[] {
+	static get components(): ComponentEditorData[] {
 		return App.getState('components');
 	}
 

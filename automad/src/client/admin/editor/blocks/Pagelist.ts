@@ -132,13 +132,15 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 
 		this.renderForm(query('.__card', this.wrapper));
 
-		listen(
-			this.wrapper,
-			'change input',
-			debounce(() => {
-				this.blockAPI.dispatchChange();
-			}, 50)
-		);
+		if (!this.readOnly) {
+			listen(
+				this.wrapper,
+				'change input',
+				debounce(() => {
+					this.blockAPI.dispatchChange();
+				}, 50)
+			);
+		}
 
 		return this.wrapper;
 	}
@@ -149,6 +151,8 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 	 * @param container
 	 */
 	private renderForm(container: HTMLElement): void {
+		const disabled = this.readOnly ? { disabled: '' } : {};
+		const disabledAttr = this.readOnly ? 'disabled=""' : '';
 		const files = App.files.pagelist.reduce(
 			(res: SelectComponentOption[], value) => [
 				...res,
@@ -167,7 +171,16 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 
 		createSelectField(
 			App.text('pagelistBlockFile'),
-			createSelect(files, this.data.file, null, 'file'),
+			createSelect(
+				files,
+				this.data.file,
+				null,
+				'file',
+				null,
+				'',
+				[],
+				disabled
+			),
 			form1
 		);
 
@@ -189,6 +202,7 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 						type="checkbox"
 						name="${name}"
 						value="1"
+						${disabledAttr}
 						${this.data[name] ? 'checked' : ''}
 					/>
 					<label for="${id}">
@@ -218,6 +232,7 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 					value="${this.data.sortField}"
 					${Attr.data}=":index, :path, date, title"
 					${Attr.min}="0"
+					${disabledAttr}
 				></am-autocomplete>
 			`
 		);
@@ -231,23 +246,42 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 				],
 				this.data.sortOrder,
 				null,
-				'sortOrder'
+				'sortOrder',
+				null,
+				'',
+				[],
+				disabled
 			),
 			grid2
 		);
 
 		createSelectField(
 			App.text('pagelistBlockType'),
-			createSelect(types, this.data.type, null, 'type'),
+			createSelect(
+				types,
+				this.data.type,
+				null,
+				'type',
+				null,
+				'',
+				[],
+				disabled
+			),
 			grid2
 		);
 
-		createField(FieldTag.url, grid2, {
-			key: uniqueId(),
-			name: 'context',
-			value: this.data.context,
-			label: App.text('pagelistBlockContext'),
-		});
+		createField(
+			FieldTag.url,
+			grid2,
+			{
+				key: uniqueId(),
+				name: 'context',
+				value: this.data.context,
+				label: App.text('pagelistBlockContext'),
+			},
+			[],
+			disabled
+		);
 
 		this.renderTagSelectField(grid2);
 
@@ -269,35 +303,51 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 						class="${CSS.input} ${CSS.formGroupItem}"
 						name="offset"
 						value="${this.data.offset}"
+						${disabledAttr}
 					/>
 					<input
 						type="number"
 						class="${CSS.input} ${CSS.formGroupItem}"
 						name="limit"
 						value="${this.data.limit}"
+						${disabledAttr}
 					/>
 				</div>
 			`
 		);
 
-		createField(FieldTag.input, grid3, {
-			key: uniqueId(),
-			name: 'matchUrl',
-			value: this.data.matchUrl,
-			label: `${App.text('pagelistBlockFilterByUrl')} (Regex)`,
-		});
+		createField(
+			FieldTag.input,
+			grid3,
+			{
+				key: uniqueId(),
+				name: 'matchUrl',
+				value: this.data.matchUrl,
+				label: `${App.text('pagelistBlockFilterByUrl')} (Regex)`,
+			},
+			[],
+			disabled
+		);
 
-		createField(FieldTag.input, grid3, {
-			key: uniqueId(),
-			name: 'template',
-			value: this.data.template,
-			label: `${App.text('pagelistBlockFilterByTemplate')} (Regex)`,
-		});
+		createField(
+			FieldTag.input,
+			grid3,
+			{
+				key: uniqueId(),
+				name: 'template',
+				value: this.data.template,
+				label: `${App.text('pagelistBlockFilterByTemplate')} (Regex)`,
+			},
+			[],
+			disabled
+		);
 
-		setTimeout(() => {
-			query(':focus', this.wrapper)?.blur();
-			fire('click', this.wrapper);
-		}, 50);
+		if (!this.readOnly) {
+			setTimeout(() => {
+				query(':focus', this.wrapper)?.blur();
+				fire('click', this.wrapper);
+			}, 50);
+		}
 	}
 
 	/**
@@ -332,7 +382,16 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 
 		const { select } = createSelectField(
 			App.text('pagelistBlockFilter'),
-			createSelect(tags, this.data.filter, null, 'filter'),
+			createSelect(
+				tags,
+				this.data.filter,
+				null,
+				'filter',
+				null,
+				'',
+				[],
+				this.readOnly ? { disabled: '' } : {}
+			),
 			grid
 		);
 

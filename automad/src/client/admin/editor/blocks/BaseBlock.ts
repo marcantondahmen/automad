@@ -49,11 +49,27 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	/**
 	 * Allow to press Enter inside the text field.
 	 *
+	 * @returns boolean
 	 * @static
 	 */
-	static get enableLineBreaks() {
+	static get enableLineBreaks(): boolean {
 		return false;
 	}
+
+	/**
+	 * Returns true to notify the core that read-only mode is supported
+	 *
+	 * @returns boolean
+	 * @static
+	 */
+	static get isReadOnlySupported(): boolean {
+		return true;
+	}
+
+	/**
+	 * Make block read-only.
+	 */
+	readOnly: boolean;
 
 	/**
 	 * The editor API.
@@ -94,11 +110,18 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	 * @param options.config
 	 * @param options.block
 	 */
-	constructor({ data, api, config, block }: BlockToolConstructorOptions) {
+	constructor({
+		data,
+		api,
+		config,
+		block,
+		readOnly,
+	}: BlockToolConstructorOptions) {
 		this.api = api;
 		this.data = this.prepareData(data || ({} as DataType));
 		this.config = config;
 		this.blockAPI = block;
+		this.readOnly = readOnly;
 		this.wrapper = create('div', ['cdx-block']);
 	}
 

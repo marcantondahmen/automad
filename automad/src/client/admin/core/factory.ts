@@ -78,7 +78,8 @@ export const createEditor = (
 	container: HTMLElement,
 	data: EditorOutputData,
 	config: EditorConfig,
-	isSectionBlock: boolean
+	isSectionBlock: boolean,
+	readOnly: boolean = false
 ): EditorJSComponent => {
 	const editorJS = create(
 		EditorJSComponent.TAG_NAME,
@@ -87,7 +88,7 @@ export const createEditor = (
 		container
 	) as EditorJSComponent;
 
-	editorJS.init(data, config, isSectionBlock);
+	editorJS.init(data, config, isSectionBlock, readOnly);
 
 	return editorJS;
 };

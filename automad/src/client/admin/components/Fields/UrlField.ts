@@ -71,7 +71,7 @@ class UrlFieldComponent extends BaseFieldComponent {
 		const button = create(
 			'span',
 			[CSS.inputComboButton],
-			{},
+			this.hasAttribute('disabled') ? { disabled: '' } : {},
 			combo,
 			'<i class="bi bi-link"></i>'
 		);

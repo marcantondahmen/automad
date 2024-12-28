@@ -109,4 +109,9 @@
 	& :checked + * .bi:before {
 		content: '\f5d6';
 	}
+
+	& [disabled] + label {
+		color: hsl(var(--am-clr-text-muted));
+		border-color: hsl(var(--am-clr-border));
+	}
 }

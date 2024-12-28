@@ -135,7 +135,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 			'div',
 			[CSS.editorBlockParagraph],
 			{
-				contenteditable: 'true',
+				contenteditable: this.readOnly ? 'false' : 'true',
 				placeholder:
 					this.api.blocks.getBlocksCount() === 0
 						? this.config.placeholder || ''

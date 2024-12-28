@@ -125,22 +125,25 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 	 * @param editor
 	 */
 	private initEditor(container: HTMLDivElement): void {
-		this.editor = new CodeEditor(
-			container,
-			this.data.code,
-			'html',
-			(code) => {
+		this.editor = new CodeEditor({
+			element: container,
+			code: this.data.code,
+			language: 'html',
+			onChange: (code) => {
 				this.data.code = code;
-			}
-		);
+			},
+			readonly: this.readOnly,
+		});
 
-		this.api.listeners.on(
-			query('textarea', container),
-			'keydown',
-			(event: Event) => {
-				event.stopImmediatePropagation();
-			}
-		);
+		if (!this.readOnly) {
+			this.api.listeners.on(
+				query('textarea', container),
+				'keydown',
+				(event: Event) => {
+					event.stopImmediatePropagation();
+				}
+			);
+		}
 	}
 
 	/**

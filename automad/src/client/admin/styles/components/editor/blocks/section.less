@@ -74,8 +74,11 @@
 		position: relative;
 		display: flex;
 		align-items: center;
+		gap: 0.4em;
 		height: 1.75rem;
 		padding: 0 0.85em;
+		top: -1px;
+		left: -1px;
 		font-size: @am-small-font-size;
 		font-weight: 560;
 		color: hsl(var(--am-clr-text));
@@ -86,7 +89,6 @@
 
 	&__editor {
 		display: block;
-		padding-top: 4px;
 
 		& > .codex-editor > .codex-editor__redactor {
 			--space: var(--gap, 1px);

@@ -101,9 +101,7 @@ class State {
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'sharedPublicationState' => $Automad->Shared->get(Fields::PUBLICATION_STATE),
 			'componentsPublicationState' => $Automad->ComponentCollection->getPublicationState(),
-			'components' => array_map(function ($component) {
-				return array('id' => $component['id'], 'name' => $component['name']);
-			}, $Automad->ComponentCollection->get()),
+			'components' => $Automad->ComponentCollection->get(),
 			'files' => array(
 				'pagelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
 				'filelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),

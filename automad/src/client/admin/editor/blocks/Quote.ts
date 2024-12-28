@@ -116,7 +116,7 @@ export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 				'div',
 				[CSS.editorBlockQuoteText, 'ce-paragraph'],
 				{
-					contenteditable: 'true',
+					contenteditable: this.readOnly ? 'false' : 'true',
 					placeholder: App.text('blockquote'),
 				},
 				this.wrapper,
@@ -126,7 +126,7 @@ export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 				'div',
 				[CSS.editorBlockQuoteCaption, 'ce-paragraph'],
 				{
-					contenteditable: 'true',
+					contenteditable: this.readOnly ? 'false' : 'true',
 					placeholder: `— ${App.text('caption')}`,
 				},
 				this.wrapper,

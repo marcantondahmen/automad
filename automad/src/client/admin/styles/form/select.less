@@ -43,6 +43,10 @@
 	gap: @am-flex-gap;
 	padding: 0 @am-form-padding-x;
 
+	&:has(select[disabled]) {
+		color: hsl(var(--am-clr-text-muted));
+	}
+
 	&&--inline {
 		display: inline-flex;
 		width: auto;

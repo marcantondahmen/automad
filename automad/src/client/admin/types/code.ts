@@ -22,23 +22,25 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'buttons.less';
-@import 'component.less';
-@import 'delimiter.less';
-@import 'embed.less';
-@import 'header.less';
-@import 'image.less';
-@import 'paragraph.less';
-@import 'quote.less';
-@import 'section.less';
-@import 'table.less';
+import { supportedLanguages } from '@/prism/prism';
+
+export type CodeLanguage = (typeof supportedLanguages)[number];
+
+export interface CodeEditorData {
+	element: HTMLElement;
+	code: string;
+	language: CodeLanguage;
+	onChange?: (code: string) => void;
+	placeholder?: string;
+	readonly?: boolean;
+}

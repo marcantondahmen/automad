@@ -97,6 +97,7 @@ export class ImageCollectionComponent extends BaseComponent {
 		this.removeListeners();
 		this.innerHTML = '';
 
+		const disabled = this.hasAttribute('disabled');
 		const grid = create('div', [CSS.imageCollectionGrid], {}, this);
 
 		images.forEach((url) => {
@@ -113,57 +114,61 @@ export class ImageCollectionComponent extends BaseComponent {
 				`
 			);
 
-			const deleteButton = create(
-				'span',
-				[CSS.imageCollectionDelete],
-				{},
-				item
+			if (!disabled) {
+				const deleteButton = create(
+					'span',
+					[CSS.imageCollectionDelete],
+					{},
+					item
+				);
+
+				this.addListener(
+					listen(deleteButton, 'click', () => {
+						item.remove();
+						fire('change', this);
+					})
+				);
+			}
+		});
+
+		if (!disabled) {
+			this.sortable = new Sortable(grid, {
+				dataIdAttr: 'data-url',
+				dragoverBubble: false,
+				ghostClass: CSS.imageCollectionItemGhost,
+				dragClass: CSS.imageCollectionItemDrag,
+				chosenClass: CSS.imageCollectionItemChosen,
+				animation: 300,
+				onSort: () => {
+					fire('change', this);
+				},
+			});
+
+			this.addListener(
+				listen(grid, 'dragover', (event: Event) => {
+					event.preventDefault();
+					event.stopImmediatePropagation();
+				})
 			);
 
 			this.addListener(
-				listen(deleteButton, 'click', () => {
-					item.remove();
-					fire('change', this);
+				listen(grid, 'click', (event: Event) => {
+					if (event.target === grid) {
+						this.add();
+					}
 				})
 			);
-		});
 
-		this.sortable = new Sortable(grid, {
-			dataIdAttr: 'data-url',
-			dragoverBubble: false,
-			ghostClass: CSS.imageCollectionItemGhost,
-			dragClass: CSS.imageCollectionItemDrag,
-			chosenClass: CSS.imageCollectionItemChosen,
-			animation: 300,
-			onSort: () => {
-				fire('change', this);
-			},
-		});
+			const addButton = create(
+				'button',
+				[CSS.button, CSS.imageCollectionAdd],
+				{},
+				this,
+				App.text('addImage')
+			);
 
-		this.addListener(
-			listen(grid, 'dragover', (event: Event) => {
-				event.preventDefault();
-				event.stopPropagation();
-			})
-		);
-
-		this.addListener(
-			listen(grid, 'click', (event: Event) => {
-				if (event.target === grid) {
-					this.add();
-				}
-			})
-		);
-
-		const addButton = create(
-			'button',
-			[CSS.button, CSS.imageCollectionAdd],
-			{},
-			this,
-			App.text('addImage')
-		);
-
-		this.addListener(listen(addButton, 'click', this.add.bind(this)));
+			this.addListener(listen(addButton, 'click', this.add.bind(this)));
+		}
 	}
 
 	/**

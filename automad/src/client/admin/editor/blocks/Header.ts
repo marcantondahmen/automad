@@ -128,7 +128,7 @@ export class HeaderBlock extends BaseBlock<HeaderBlockData> {
 		create(
 			'div',
 			[CSS.editorBlockHeader],
-			{ contenteditable: 'true' },
+			{ contenteditable: this.readOnly ? 'false' : 'true' },
 			create(`h${this.data.level}`, [], {}, this.wrapper)
 		).innerHTML = this.data.text;
 

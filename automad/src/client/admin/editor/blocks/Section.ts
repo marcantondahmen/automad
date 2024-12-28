@@ -215,22 +215,25 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	render(): HTMLElement {
 		this.section = create(
 			'div',
-			[CSS.editorBlockSection],
+			this.readOnly ? [] : [CSS.editorBlockSection],
 			{},
 			this.wrapper
 		);
 
-		create(
-			'span',
-			[CSS.flex],
-			{},
-			this.section,
-			html`
-				<span class="${CSS.editorBlockSectionLabel}">
-					${App.text('sectionBlockTitle')}
-				</span>
-			`
-		);
+		if (!this.readOnly) {
+			create(
+				'span',
+				[CSS.flex],
+				{},
+				this.section,
+				html`
+					<span class="${CSS.editorBlockSectionLabel}">
+						${SectionBlock.toolbox.icon}
+						<span>${App.text('sectionBlockTitle')}</span>
+					</span>
+				`
+			);
+		}
 
 		const renderEditor = async () => {
 			this.holder = createEditor(
@@ -238,24 +241,32 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 				this.data.content as EditorOutputData,
 				{
 					onChange: async (api: API) => {
+						if (this.readOnly) {
+							return;
+						}
+
 						const { blocks } = await api.saver.save();
 
 						this.data.content = { blocks };
 						this.blockAPI.dispatchChange();
 					},
 				},
-				true
+				true,
+				this.readOnly
 			);
 
 			await this.holder.editor.isReady;
 
-			this.holder.editor.focus();
+			if (!this.readOnly) {
+				this.holder.editor.focus();
 
-			listen(this.holder, 'paste', (event: Event) => {
-				event.stopPropagation();
-			});
+				listen(this.holder, 'paste', (event: Event) => {
+					event.stopPropagation();
+				});
 
-			this.renderToolbar();
+				this.renderToolbar();
+			}
+
 			this.setStyle();
 		};
 

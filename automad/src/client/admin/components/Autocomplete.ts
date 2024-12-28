@@ -33,7 +33,11 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { AutocompleteItem, AutocompleteItemData, KeyValueMap } from '@/admin/types';
+import {
+	AutocompleteItem,
+	AutocompleteItemData,
+	KeyValueMap,
+} from '@/admin/types';
 import {
 	App,
 	create,
@@ -172,21 +176,23 @@ export class AutocompleteComponent extends BaseComponent {
 
 			this.input = this.createInput();
 
-			this.dropdown = create('div', this.itemsClasses, {}, this);
+			if (!this.hasAttribute('disabled')) {
+				this.dropdown = create('div', this.itemsClasses, {}, this);
 
-			this.data.forEach((item: KeyValueMap) => {
-				this.items.push({
-					element: this.createItemElement(item),
-					value: this.createItemValue(item),
-					item: item,
+				this.data.forEach((item: KeyValueMap) => {
+					this.items.push({
+						element: this.createItemElement(item),
+						value: this.createItemValue(item),
+						item: item,
+					});
 				});
-			});
 
-			this.itemsFiltered = this.items;
+				this.itemsFiltered = this.items;
 
-			this.registerDropdownEvents();
-			this.registerInputEvents();
-			this.update();
+				this.registerDropdownEvents();
+				this.registerInputEvents();
+				this.update();
+			}
 		}
 	}
 
@@ -196,7 +202,8 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @returns the input element
 	 */
 	protected createInput(): HTMLInputElement {
-		const attributes: KeyValueMap = { type: 'text' };
+		const disabled = this.hasAttribute('disabled') ? { disabled: '' } : {};
+		const attributes: KeyValueMap = { type: 'text', ...disabled };
 		const placeholder: string = App.text(
 			this.elementAttributes.placeholder
 		);

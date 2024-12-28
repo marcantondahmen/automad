@@ -38,6 +38,7 @@ export * from './editor/blocks';
 export * from './editor/editor';
 export * from './editor/inline';
 export * from './editor/tunes';
+export * from './code';
 export * from './components';
 export * from './field';
 export * from './package';
@@ -54,7 +55,6 @@ import {
 	ComponentController,
 	SharedController,
 } from '@/common';
-import { supportedLanguages } from '@/prism/prism';
 import { PageMetaData, InputElement } from '.';
 
 declare global {
@@ -90,8 +90,6 @@ export interface BindingOptions {
 	initial?: any;
 	onChange?: (value: string) => void;
 }
-
-export type CodeLanguage = (typeof supportedLanguages)[number];
 
 export interface DeduplicationSettings {
 	getFormData: (element: HTMLElement) => KeyValueMap;

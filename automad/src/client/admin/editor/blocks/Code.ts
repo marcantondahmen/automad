@@ -109,18 +109,20 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	render(): HTMLElement {
 		this.wrapper.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
-		create(
-			'span',
-			[CSS.textMuted, CSS.userSelectNone],
-			{},
-			this.wrapper,
-			html`
-				<am-icon-text
-					${Attr.icon}="code-slash"
-					${Attr.text}="${CodeBlock.toolbox.title}"
-				></am-icon-text>
-			`
-		);
+		if (!this.readOnly) {
+			create(
+				'span',
+				[CSS.textMuted, CSS.userSelectNone],
+				{},
+				this.wrapper,
+				html`
+					<am-icon-text
+						${Attr.icon}="code-slash"
+						${Attr.text}="${CodeBlock.toolbox.title}"
+					></am-icon-text>
+				`
+			);
+		}
 
 		const container = create(
 			'div',
@@ -129,43 +131,55 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 			this.wrapper
 		);
 
-		const settings = create(
-			'div',
-			[CSS.grid, CSS.gridAuto, CSS.flexGap],
-			{},
-			container
-		);
+		if (!this.readOnly) {
+			const settings = create(
+				'div',
+				[CSS.grid, CSS.gridAuto, CSS.flexGap],
+				{},
+				container
+			);
 
-		createSelect(
-			supportedLanguages.map((lang) => ({
-				value: lang,
-			})),
-			this.data.language,
-			settings,
-			'language'
-		);
+			createSelect(
+				supportedLanguages.map((lang) => ({
+					value: lang,
+				})),
+				this.data.language,
+				settings,
+				'language'
+			);
 
-		const toggleId = uniqueId();
+			const toggleId = uniqueId();
 
-		create(
-			'div',
-			[CSS.toggle, CSS.toggleButton],
-			{},
-			settings,
-			html`
-				<input
-					id="${toggleId}"
-					type="checkbox"
-					name="lineNumbers"
-					value="1"
-					${this.data.lineNumbers ? 'checked' : ''}
-				/>
-				<label for="${toggleId}">
-					<i class="bi"></i>
-					<span>${App.text('codeBlockLineNumbers')}</span>
-				</label>
-			`
-		);
+			create(
+				'div',
+				[CSS.toggle, CSS.toggleButton],
+				{},
+				settings,
+				html`
+					<input
+						id="${toggleId}"
+						type="checkbox"
+						name="lineNumbers"
+						value="1"
+						${this.data.lineNumbers ? 'checked' : ''}
+					/>
+					<label for="${toggleId}">
+						<i class="bi"></i>
+						<span>${App.text('codeBlockLineNumbers')}</span>
+					</label>
+				`
+			);
+
+			this.api.listeners.on(settings, 'change', () => {
+				const { language, lineNumbers } = collectFieldData(settings);
+
+				this.data.lineNumbers = lineNumbers;
+				this.data.language =
+					language as unknown as (typeof supportedLanguages)[number];
+
+				this.initEditor(code);
+			});
+		}
 
 		const code = create(
 			'div',
@@ -173,16 +187,6 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 			{},
 			container
 		) as HTMLDivElement;
-
-		this.api.listeners.on(settings, 'change', () => {
-			const { language, lineNumbers } = collectFieldData(settings);
-
-			this.data.lineNumbers = lineNumbers;
-			this.data.language =
-				language as unknown as (typeof supportedLanguages)[number];
-
-			this.initEditor(code);
-		});
 
 		this.initEditor(code);
 
@@ -195,14 +199,15 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 * @param editor
 	 */
 	private initEditor(container: HTMLDivElement): void {
-		this.editor = new CodeEditor(
-			container,
-			this.data.code,
-			this.data.language,
-			(code) => {
+		this.editor = new CodeEditor({
+			element: container,
+			code: this.data.code,
+			language: this.data.language,
+			onChange: (code) => {
 				this.data.code = code;
-			}
-		);
+			},
+			readonly: this.readOnly,
+		});
 
 		this.api.listeners.on(
 			query('textarea', container),

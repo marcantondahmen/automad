@@ -26,40 +26,61 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2024 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-c-image-select {
+.am-c-ed-bl-component {
+	position: relative;
 	display: flex;
-	height: 7rem;
-	overflow: hidden;
-	border: @am-border;
-	border-radius: @am-card-radius;
+	flex-direction: column;
+	height: 100%;
+	outline: 1px dashed hsl(var(--am-clr-border));
+	border-radius: @am-form-radius;
 
-	&__preview {
+	&__label {
+		position: relative;
+		display: flex;
+		gap: 0.4em;
+		align-self: start;
+		align-items: center;
+		top: -1px;
+		left: -1px;
+		height: 1.75rem;
+		padding: 0 0.85em;
+		font-size: @am-small-font-size;
+		font-weight: 560;
+		color: hsl(var(--am-clr-text));
+		background: hsl(var(--am-clr-border));
+		border-top-left-radius: @am-form-radius;
+	}
+
+	&__overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 10;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		aspect-ratio: 1;
-		cursor: pointer;
-		background-color: hsl(var(--am-clr-background-faded));
+		opacity: 0;
+		transition: opacity 0.2s;
+		background-color: var(--am-modal-backdrop);
 
-		& > img {
-			object-fit: cover;
-			min-width: 100%;
-			min-height: 100%;
+		&:hover {
+			opacity: 1;
 		}
 	}
 
-	&__combo {
-		display: flex;
-		justify-content: space-evenly;
-		flex-grow: 1;
-		flex-direction: column;
-		padding: 0 0.3rem;
-		border-left: @am-border;
+	& > .codex-editor {
+		border: none;
+	}
+
+	&
+		.ce-block__content:has(
+			> .cdx-block > .am-c-ed-bl-paragraph:first-child:empty
+		) {
+		display: none;
 	}
 }

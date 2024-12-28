@@ -193,11 +193,11 @@ export class DragDrop {
 	 * Move a block. Either within a single editor or between two different editors.
 	 */
 	private static async move(): Promise<void> {
-		if (DragDrop.CURRENT.block.holder == DragDrop.TARGET) {
+		if (DragDrop.CURRENT?.block.holder == DragDrop.TARGET) {
 			return;
 		}
 
-		if (DragDrop.CURRENT.block.holder.contains(DragDrop.TARGET)) {
+		if (DragDrop.CURRENT?.block.holder.contains(DragDrop.TARGET)) {
 			return;
 		}
 

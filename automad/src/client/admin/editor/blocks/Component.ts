@@ -33,8 +33,10 @@
  */
 
 import { ModalComponent } from '@/admin/components/Modal/Modal';
+import EditorJS from 'automad-editorjs';
 import {
 	App,
+	Attr,
 	create,
 	createSelect,
 	CSS,
@@ -46,7 +48,9 @@ import {
 	Route,
 } from '@/admin/core';
 import { ComponentBlockData } from '@/admin/types';
+import { getBlockTools } from '../blocks';
 import { BaseBlock } from './BaseBlock';
+import { baseTunes, getBlockTunes } from '../tunes';
 
 const getComponent = (id: string) => {
 	return App.components.find((c) => c.id === id);
@@ -103,17 +107,40 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	private renderWrapper(): void {
 		const component = getComponent(this.data.id ?? '');
 
+		if (!component) {
+			return;
+		}
+
+		this.wrapper.classList.add(
+			CSS.editorBlockComponent,
+			CSS.userSelectNone
+		);
+
 		this.wrapper.innerHTML = html`
-			<div
-				class="${CSS.card} ${CSS.userSelectNone}"
-				title="${component?.name}"
-			>
-				<div class="${CSS.cardIcon}">
-					<i class="bi bi-boxes"></i>
-				</div>
-				<div class="${CSS.cardTitle}">${component?.name}</div>
+			<div class="${CSS.editorBlockComponentLabel}">
+				${ComponentBlock.toolbox.icon}
+				<span>${component.name}</span>
+			</div>
+			<div class="${CSS.editorBlockComponentOverlay}">
+				<am-link
+					class="${CSS.button}"
+					${Attr.target}="${Route.components}"
+				>
+					${App.text('openComponentEditor')}
+				</am-link>
 			</div>
 		`;
+
+		new EditorJS({
+			data: { blocks: component.blocks },
+			holder: this.wrapper,
+			minHeight: 30,
+			autofocus: false,
+			tools: { ...getBlockTools(true), ...getBlockTunes(false) },
+			inlineToolbar: [],
+			tunes: baseTunes,
+			readOnly: true,
+		});
 	}
 
 	/**

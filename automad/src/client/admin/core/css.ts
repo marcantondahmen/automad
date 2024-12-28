@@ -125,6 +125,10 @@ export const enum CSS {
 	editorBlockButtonsEdit = 'am-c-ed-bl-buttons__edit',
 	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
 
+	editorBlockComponent = 'am-c-ed-bl-component',
+	editorBlockComponentLabel = 'am-c-ed-bl-component__label',
+	editorBlockComponentOverlay = 'am-c-ed-bl-component__overlay',
+
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
 
 	editorBlockHeader = 'am-c-ed-bl-header',

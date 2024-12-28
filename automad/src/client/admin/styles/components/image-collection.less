@@ -50,6 +50,12 @@
 		background-color: hsl(var(--am-clr-background-faded));
 		cursor: pointer;
 
+		[disabled] & {
+			cursor: default;
+			border: none;
+			background-color: transparent;
+		}
+
 		&:empty {
 			height: 6rem;
 			display: flex;
@@ -106,6 +112,11 @@
 
 		&:hover {
 			opacity: 0.75;
+		}
+
+		[disabled] & {
+			cursor: default;
+			pointer-events: none;
 		}
 	}
 
