@@ -123,7 +123,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			</div>
 			<div class="${CSS.editorBlockComponentOverlay}">
 				<am-link
-					class="${CSS.button}"
+					class="${CSS.button} ${CSS.buttonPrimary}"
 					${Attr.target}="${Route.components}"
 				>
 					${App.text('openComponentEditor')}
@@ -134,7 +134,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 		new EditorJS({
 			data: { blocks: component.blocks },
 			holder: this.wrapper,
-			minHeight: 30,
+			minHeight: 0,
 			autofocus: false,
 			tools: { ...getBlockTools(true), ...getBlockTunes(false) },
 			inlineToolbar: [],
@@ -166,7 +166,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 							${App.text('openComponentEditor')}
 						</a>
 						<button class="${CSS.button} ${CSS.buttonPrimary}">
-							${App.text('addComponent')}
+							${App.text('add')}
 						</button>
 					</am-modal-footer>
 				</am-modal-dialog>

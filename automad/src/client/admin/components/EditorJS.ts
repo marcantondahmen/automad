@@ -132,7 +132,7 @@ export class EditorJSComponent extends BaseComponent {
 					data: this.prepareData(data),
 					holder: this,
 					logLevel: 'ERROR',
-					minHeight: 50,
+					minHeight: readOnly ? 0 : 50,
 					autofocus: false,
 					readOnly,
 					placeholder: isSectionBlock
