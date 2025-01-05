@@ -68,20 +68,6 @@
 		}
 	}
 
-	&--ghost {
-		border-color: hsl(var(--am-clr-border-active));
-	}
-
-	&--drag {
-		box-shadow: @am-shadow;
-		opacity: 1 !important;
-	}
-
-	&--chosen {
-		background-color: hsl(var(--am-clr-background-faded));
-		box-shadow: @am-shadow;
-	}
-
 	&__title {
 		box-sizing: border-box;
 		display: block;
@@ -105,32 +91,8 @@
 			min-width: 0;
 		}
 
-		&-icons,
 		&-dropdown {
 			padding: (@am-card-padding * 0.72) @am-card-padding;
-		}
-
-		&-icons {
-			display: flex;
-			align-items: center;
-			gap: 0.3rem;
-
-			& > * {
-				color: hsl(var(--am-clr-text-muted));
-				padding: 0 0.25rem;
-				cursor: pointer;
-				transition: color 0.2s;
-
-				&:hover {
-					color: hsl(var(--am-clr-text));
-				}
-			}
-		}
-
-		&-drag {
-			padding: 0 @am-card-padding;
-			cursor: grab;
-			color: hsl(var(--am-clr-text-muted));
 		}
 	}
 
@@ -147,22 +109,6 @@
 			font-size: @am-small-font-size;
 			font-weight: @am-small-font-weight;
 			line-height: @am-small-line-height;
-		}
-	}
-
-	&__editor {
-		padding: 0.3rem;
-		transform: translate3d(0, 0, 0);
-		border-top: @am-border;
-		outline: 0;
-
-		& .codex-editor:not(.codex-editor .codex-editor) {
-			border: none;
-			border-radius: 0;
-		}
-
-		& am-alert {
-			margin: 0;
 		}
 	}
 

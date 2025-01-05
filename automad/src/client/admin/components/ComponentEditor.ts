@@ -114,37 +114,39 @@ export class ComponentEditorComponent extends BaseComponent {
 		});
 
 		const setupEditor = async () => {
-			this.classList.add(CSS.card);
+			this.classList.add(CSS.componentEditor);
 
 			this.innerHTML = html`
-				<div class="${CSS.cardHeader}">
+				<div class="${CSS.componentEditorHeader}">
 					<div
-						class="${CSS.cardTitle} ${CSS.cursorPointer} ${CSS.flex} ${CSS.flexGap} ${CSS.flexItemGrow}"
+						class="${CSS.componentEditorName}"
+						${Attr.bind}="${nameBindingKey}"
+						${Attr.bindTo}="title"
 					>
 						<i></i>
 						<span ${Attr.bind}="${nameBindingKey}">
 							${this._data.name}
 						</span>
 					</div>
-					<div class="${CSS.cardHeaderIcons}"></div>
-					<div class="${CSS.cardHeaderDrag}">
+					<div class="${CSS.componentEditorTools}"></div>
+					<div class="${CSS.componentEditorHandle}">
 						<i class="bi bi-grip-vertical"></i>
 					</div>
 				</div>
-				<div class="${CSS.cardEditor}"></div>
+				<div class="${CSS.componentEditorMain}"></div>
 			`;
 
 			Bindings.connectElements(this);
 
-			const header = query(`.${CSS.cardHeaderIcons}`, this);
-			const body = query(`.${CSS.cardEditor}`, this);
-			const toggle = query(`.${CSS.cardTitle}`, this);
+			const tools = query(`.${CSS.componentEditorTools}`, this);
+			const editor = query(`.${CSS.componentEditorMain}`, this);
+			const toggle = query(`.${CSS.componentEditorName}`, this);
 
 			const rename = create(
 				'span',
 				[],
 				{},
-				header,
+				tools,
 				'<i class="bi bi-pencil"></i>'
 			);
 
@@ -152,7 +154,7 @@ export class ComponentEditorComponent extends BaseComponent {
 				'span',
 				[],
 				{},
-				header,
+				tools,
 				'<i class="bi bi-copy"></i>'
 			);
 
@@ -160,14 +162,14 @@ export class ComponentEditorComponent extends BaseComponent {
 				'span',
 				[],
 				{},
-				header,
+				tools,
 				'<i class="bi bi-trash3"></i>'
 			);
 
-			this.toggleEditor(body, toggle, this._data.collapsed);
+			this.toggleEditor(editor, toggle, this._data.collapsed);
 
 			listen(toggle, 'click', () => {
-				this.toggleEditor(body, toggle, !this._data.collapsed);
+				this.toggleEditor(editor, toggle, !this._data.collapsed);
 			});
 
 			listen(copy, 'click', () => {
@@ -210,7 +212,7 @@ export class ComponentEditorComponent extends BaseComponent {
 				}
 			});
 
-			this.editor = createField(FieldTag.editor, body, {
+			this.editor = createField(FieldTag.editor, editor, {
 				value: { blocks: this._data.blocks },
 				name: '',
 				key: '',
@@ -257,7 +259,7 @@ export class ComponentEditorComponent extends BaseComponent {
 		this._data.collapsed = collapsed;
 
 		body.classList.toggle(CSS.displayNone, this._data.collapsed);
-		icon.className = `bi bi-chevron-bar-${this._data.collapsed ? 'expand' : 'contract'}`;
+		icon.className = `bi bi-chevron-${this._data.collapsed ? 'right' : 'down'}`;
 
 		fire('change', this.editor);
 	}

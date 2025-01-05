@@ -39,7 +39,6 @@ import {
 	FieldTag,
 	fire,
 	listen,
-	query,
 	queryAll,
 	uniqueId,
 } from '@/admin/core';
@@ -206,12 +205,12 @@ export class ComponentCollectionFormComponent extends FormComponent {
 			);
 
 			this.sortable = new Sortable(this, {
-				handle: `.${CSS.cardHeaderDrag}`,
+				handle: `.${CSS.componentEditorHandle}, .${CSS.componentEditorName}`,
 				animation: 200,
 				draggable: ComponentEditorComponent.TAG_NAME,
-				ghostClass: CSS.cardGhost,
-				chosenClass: CSS.cardChosen,
-				dragClass: CSS.cardDrag,
+				ghostClass: CSS.componentEditorGhost,
+				chosenClass: CSS.componentEditorChosen,
+				dragClass: CSS.componentEditorDrag,
 				direction: 'vertical',
 				onStart: () => {
 					queryAll(`${FieldTag.editor}`, this).forEach((editor) => {

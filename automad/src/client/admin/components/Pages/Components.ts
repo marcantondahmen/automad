@@ -74,12 +74,12 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 				<div
 					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentRow} ${CSS.flexGap}"
 				>
+					<am-filter placeholder="componentFilter"></am-filter>
 					<button
 						class="${newComponentButtonClass} ${CSS.button} ${CSS.buttonPrimary}"
 					>
-						${App.text('newComponent')}
+						${App.text('add')}
 					</button>
-					<am-filter placeholder="componentFilter"></am-filter>
 				</div>
 			</section>
 			<section class="${CSS.layoutDashboardSection}">
