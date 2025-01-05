@@ -37,6 +37,8 @@
 namespace Automad\System;
 
 use Automad\Core\Automad;
+use Automad\Core\Debug;
+use Automad\Core\Messenger;
 use Automad\Models\MailConfig;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
@@ -64,9 +66,10 @@ class Mail {
 	 * @param string $subject
 	 * @param string $message
 	 * @param ?string $from
+	 * @param ?Messenger $Messenger
 	 * @return bool
 	 */
-	public static function send(string $to, string $subject, string $message, ?string $from = null): bool {
+	public static function send(string $to, string $subject, string $message, ?string $from = null, ?Messenger $Messenger = null): bool {
 		$MailConfig = new MailConfig();
 
 		$dsn = $MailConfig->transport === 'sendmail'
@@ -77,7 +80,7 @@ class Mail {
 		$mailer = new Mailer($transport);
 
 		$email = (new Email())
-			->from($from ?? $MailConfig->from)
+			->from($from ? $from : $MailConfig->from)
 			->to($to)
 			->subject($subject)
 			->html($message);
@@ -87,6 +90,12 @@ class Mail {
 
 			return true;
 		} catch (\Throwable $error) {
+			Debug::log($error->getMessage());
+
+			if ($Messenger) {
+				$Messenger->setError($error->getMessage());
+			}
+
 			return false;
 		}
 	}

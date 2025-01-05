@@ -202,13 +202,7 @@ class User {
 		$subject = 'Automad: ' . Text::get('emailResetPasswordSubject');
 		$message = PasswordResetEmail::render($website, $this->name, $token);
 
-		if (!Mail::send($email, $subject, $message)) {
-			$Messenger->setError(Text::get('sendMailError'));
-
-			return false;
-		}
-
-		return true;
+		return Mail::send($email, $subject, $message, null, $Messenger);
 	}
 
 	/**
