@@ -84,10 +84,10 @@ class Request {
 		} else {
 			// The requested page gets passed 'index.php/page/path'.
 			// That can be the case if rewriting is disabled and AM_BASE_INDEX ends with '/index.php'.
-			if (isset($_SERVER['PATH_INFO'])) {
+			if (!empty($_SERVER['PATH_INFO'])) {
 				$request = $_SERVER['PATH_INFO'];
 				Debug::log('Getting request from PATH_INFO');
-			} elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
+			} elseif (!empty($_SERVER['ORIG_PATH_INFO'])) {
 				$request = $_SERVER['ORIG_PATH_INFO'];
 				Debug::log('Getting request from ORIG_PATH_INFO');
 			} elseif (isset($_SERVER['REQUEST_URI'])) {
