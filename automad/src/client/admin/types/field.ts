@@ -57,6 +57,7 @@ export interface TemplateFieldData {
 	fields: KeyValueMap;
 	template: string;
 	themeKey: string;
+	readme: string;
 }
 
 export interface FieldGroupData {

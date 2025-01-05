@@ -262,24 +262,8 @@ export class PageDataFormComponent extends FormComponent {
 			fields,
 			template,
 			themeKey: App.reservedFields.THEME,
+			readme,
 		};
-
-		const readmeLink = create(
-			'a',
-			[],
-			{ href: readme, target: '_blank' },
-			templateField
-		);
-
-		create(
-			'am-icon-text',
-			[],
-			{
-				[Attr.icon]: 'file-earmark-text',
-				[Attr.text]: App.text('themeReadme'),
-			},
-			readmeLink
-		);
 
 		createMainField(
 			FieldTag.syntaxSelect,
