@@ -127,6 +127,23 @@ const sharedData = (): JumpbarItemData[] => {
 };
 
 /**
+ * Return the jumpbar autocompletion data for components.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
+const componentsData = (): JumpbarItemData[] => {
+	return [
+		{
+			target: Route.components,
+			value: App.text('componentsTitle'),
+			title: App.text('componentsTitle'),
+			icon: 'boxes',
+			cls: [CSS.modalJumpbarDivider],
+		},
+	];
+};
+
+/**
  * Return the jumpbar autocompletion data for the packages page.
  *
  * @returns the jumpbar autocompletion data array
@@ -203,6 +220,7 @@ const jumpbarData = (): JumpbarItemData[] => {
 		inPageData(),
 		settingsData(),
 		sharedData(),
+		componentsData(),
 		packagesData(),
 		trashData(),
 		pagesData()
