@@ -101,11 +101,11 @@ class ComponentCollection {
 			return $item['id'] === $id;
 		});
 
-		if (!empty($filtered)) {
-			return $filtered[0];
+		if (empty($filtered)) {
+			return null;
 		}
 
-		return null;
+		return reset($filtered);
 	}
 
 	/**
