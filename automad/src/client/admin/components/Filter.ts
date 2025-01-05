@@ -48,6 +48,18 @@ import { BaseComponent } from '@/admin/components/Base';
 
 /**
  * A field and card filter input component.
+ * The following attributes are supported:
+ * - placeholder
+ * - Attr.target
+ *
+ * @example
+ * <am-filter placeholder="..."></am-filter>
+ *
+ * Or with a custom target selector:
+ * <am-filter
+ *	   placeholder="..."
+ *	   ${Attr.target}=".selector"
+ * ></am-filter>
  *
  * @extends BaseComponent
  */
@@ -65,7 +77,10 @@ class FilterComponent extends BaseComponent {
 	 * The target selector.
 	 */
 	protected get targetSelector(): string {
-		return `section [${Attr.api}] .${CSS.field}:not(am-title-field):not(.${CSS.card} .${CSS.field}), .${CSS.card}`;
+		return (
+			this.getAttribute(Attr.target) ||
+			`section [${Attr.api}] .${CSS.field}:not(am-title-field):not(.${CSS.card} .${CSS.field}), .${CSS.card}`
+		);
 	}
 
 	/**

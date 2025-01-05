@@ -43,6 +43,7 @@ import {
 } from '@/admin/core';
 import { newComponentButtonClass } from '@/admin/components/Forms/ComponentCollectionForm';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
+import { ComponentEditorComponent } from '../ComponentEditor';
 
 /**
  * The components view.
@@ -74,7 +75,10 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 				<div
 					class="${CSS.layoutDashboardContent} ${CSS.layoutDashboardContentRow} ${CSS.flexGap}"
 				>
-					<am-filter placeholder="componentFilter"></am-filter>
+					<am-filter
+						placeholder="componentFilter"
+						${Attr.target}="${ComponentEditorComponent.TAG_NAME}"
+					></am-filter>
 					<button
 						class="${newComponentButtonClass} ${CSS.button} ${CSS.buttonPrimary}"
 					>
