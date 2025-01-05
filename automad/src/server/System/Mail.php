@@ -65,11 +65,11 @@ class Mail {
 	 * @param string $to
 	 * @param string $subject
 	 * @param string $message
-	 * @param ?string $from
+	 * @param ?string $replyTo
 	 * @param ?Messenger $Messenger
 	 * @return bool
 	 */
-	public static function send(string $to, string $subject, string $message, ?string $from = null, ?Messenger $Messenger = null): bool {
+	public static function send(string $to, string $subject, string $message, ?string $replyTo = null, ?Messenger $Messenger = null): bool {
 		$MailConfig = new MailConfig();
 
 		$dsn = $MailConfig->transport === 'sendmail'
@@ -80,10 +80,14 @@ class Mail {
 		$mailer = new Mailer($transport);
 
 		$email = (new Email())
-			->from($from ? $from : $MailConfig->from)
+			->from($MailConfig->from)
 			->to($to)
 			->subject($subject)
 			->html($message);
+
+		if ($replyTo) {
+			$email->replyTo($replyTo);
+		}
 
 		try {
 			$mailer->send($email);
@@ -115,7 +119,7 @@ class Mail {
 
 		// Define field names.
 		$honeypot = 'human';
-		$from = 'from';
+		$from = 'from'; // The "from" field will be used for "reply to".
 		$subject = 'subject';
 		$message = 'message';
 
@@ -143,6 +147,7 @@ class Mail {
 		$subject = $Automad->Shared->get(Fields::SITENAME) . ': ' . strip_tags($_POST[$subject]);
 		$message = strip_tags($_POST[$message]);
 
+		// Note that "$from" means in this context "reply to".
 		if (self::send($data['to'], $subject, $message, $_POST[$from])) {
 			self::$sent = true;
 
