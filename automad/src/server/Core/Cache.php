@@ -428,8 +428,7 @@ class Cache {
 		FileSystem::write($this->objectCacheFile, serialize($Automad));
 		Debug::log($this->objectCacheFile, 'Automad object written to');
 
-		// Only non-forwarded (no proxy) sites.
-		if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+		if (function_exists('curl_version')) {
 			$c = curl_init();
 			curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => ($_SERVER['SERVER_NAME'] ?? '') . AM_BASE_URL, 'version' => App::VERSION, 'serverSoftware' => ($_SERVER['SERVER_SOFTWARE'] ?? '')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
 			curl_exec($c);
