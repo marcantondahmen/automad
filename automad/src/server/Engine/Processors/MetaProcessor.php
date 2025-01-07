@@ -248,7 +248,7 @@ class MetaProcessor {
 		imagefill($image, 0, 0, $colorBackground);
 
 		$maxTitleLength = 100;
-		$lineLength = 21;
+		$lineLength = 22;
 		$shortened = '';
 		$multiline = '';
 		$lineCount = 0;
@@ -260,8 +260,8 @@ class MetaProcessor {
 			$maxTitleLength--;
 		}
 
-		$fontSizeTitle = $lineCount > 3 ? 45 : 54;
-		$titleSpace = $lineCount > 3 ? 105 : 125;
+		$fontSizeTitle = $lineCount > 3 ? 43 : 50;
+		$titleSpace = $lineCount > 3 ? 105 : 120;
 
 		imagefttext(
 			$image,
@@ -284,7 +284,7 @@ class MetaProcessor {
 			$colorText,
 			MetaProcessor::IMAGE_FONT_BOLD,
 			$multiline,
-			array('linespacing' => 1.05)
+			array('linespacing' => 1.175)
 		);
 
 		imagefttext(
