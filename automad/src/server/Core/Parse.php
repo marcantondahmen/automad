@@ -113,7 +113,7 @@ class Parse {
 
 			foreach ($matches as $match) {
 				$key = '"' . trim($match['key'], '"') . '"';
-				$value = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match['value']));
+				$value = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match['value'])) ?? '';
 
 				if (!is_numeric($value) && $value !== 'true' && $value !== 'false') {
 					$value = str_replace('\"', '"', $value);

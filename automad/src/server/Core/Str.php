@@ -75,6 +75,10 @@ class Str {
 
 		$date = strtotime($date);
 
+		if (!$date) {
+			return '';
+		}
+
 		if ($locale && class_exists('\IntlDateFormatter')) {
 			$formatter = new \IntlDateFormatter(
 				$locale,
@@ -119,7 +123,7 @@ class Str {
 		// are stripped to get the escaped version of $str.
 		$str = preg_replace('/[\r\n]+/', '\n', trim($str));
 		$str = json_encode(array('temp' => $str), JSON_UNESCAPED_SLASHES);
-		$str = Str::stripStart($str, '{"temp":"');
+		$str = Str::stripStart($str ? $str : '', '{"temp":"');
 		$str = Str::stripEnd($str, '"}');
 
 		return $str;
@@ -157,7 +161,7 @@ class Str {
 		}
 
 		// First remove any paragraph only containing an image.
-		$str = preg_replace('/<p>\s*<img.+?><\/p>/is', '', $str);
+		$str = preg_replace('/<p>\s*<img.+?><\/p>/is', '', $str) ?? '';
 		preg_match('/<p\b[^>]*>(.*?)<\/p>/is', $str, $matches);
 
 		if (!empty($matches[1])) {
@@ -203,10 +207,10 @@ class Str {
 	 *
 	 * @param string $str
 	 * @param string $regex
-	 * @return int 1 or 0
+	 * @return bool
 	 */
-	public static function match(string $str, string $regex = ''): int {
-		return preg_match($regex, $str);
+	public static function match(string $str, string $regex = ''): bool {
+		return (bool) preg_match($regex, $str);
 	}
 
 	/**
@@ -218,7 +222,7 @@ class Str {
 	 * @return string The processed string
 	 */
 	public static function replace(string $str, string $regex = '', string $replace = ''): string {
-		return preg_replace($regex, $replace, $str);
+		return preg_replace($regex, $replace, $str) ?? '';
 	}
 
 	/**
@@ -276,7 +280,7 @@ class Str {
 		}
 
 		$str = Str::stripTags($str);
-		$str = preg_replace('/[\n\r]+/s', ' ', $str);
+		$str = preg_replace('/[\n\r]+/s', ' ', $str) ?? '';
 
 		// Shorten $text to maximal characters (full words).
 		if (strlen($str) > $maxChars) {
@@ -333,7 +337,7 @@ class Str {
 	 * @return string The processed string
 	 */
 	public static function stripEnd(string $str, string $end = ''): string {
-		return preg_replace('/' . preg_quote($end, '/') . '$/', '', $str);
+		return preg_replace('/' . preg_quote($end, '/') . '$/', '', $str) ?? '';
 	}
 
 	/**
@@ -344,7 +348,7 @@ class Str {
 	 * @return string The processed string
 	 */
 	public static function stripStart(string $str, string $start = ''): string {
-		return preg_replace('/^' . preg_quote($start, '/') . '/', '', $str);
+		return preg_replace('/^' . preg_quote($start, '/') . '/', '', $str) ?? '';
 	}
 
 	/**

@@ -39,7 +39,6 @@ namespace Automad\System;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
-use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -142,7 +141,7 @@ class ThemeCollection {
 		$installed = array();
 
 		if (is_readable($installedJSON)) {
-			$decoded = @json_decode(file_get_contents($installedJSON), true);
+			$decoded = @json_decode(strval(file_get_contents($installedJSON)), true);
 
 			if (is_array($decoded) && !empty($decoded['packages'])) {
 				$packages = $decoded['packages'];

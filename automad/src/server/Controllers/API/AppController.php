@@ -41,18 +41,11 @@ use Automad\API\Response;
 use Automad\API\ResponseCache;
 use Automad\App;
 use Automad\Core\Automad;
-use Automad\Core\Cache;
 use Automad\Core\FileSystem;
-use Automad\Core\FileUtils;
-use Automad\Core\Parse;
 use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Core\Text;
-use Automad\Models\UserCollection;
-use Automad\System\Composer;
 use Automad\System\Fields;
-use Automad\System\Theme;
-use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -97,7 +90,7 @@ class AppController {
 
 		return $Response->setData(array(
 			'hostName' => gethostname(),
-			'hostIp' => gethostbyname(gethostname()),
+			'hostIp' => gethostbyname(strval(gethostname())),
 			'serverOs' => php_uname('s') . ' / ' . php_uname('r'),
 			'serverSoftware' => getenv('SERVER_SOFTWARE'),
 			'phpVersion' => phpversion(),
@@ -134,8 +127,13 @@ class AppController {
 	 */
 	private static function getLanguages(): array {
 		$languages = array('English' => '');
+		$files = glob(Text::LANG_PACKS_DIR . '/*.json');
 
-		foreach (glob(Text::LANG_PACKS_DIR . '/*.json') as $file) {
+		if (!$files) {
+			$files = array();
+		}
+
+		foreach ($files as $file) {
 			$value = Str::stripStart($file, AM_BASE_DIR);
 			$key = ucfirst(str_replace(array('_', '.json'), array(' ', ''), basename($file)));
 			$languages[$key] = $value;

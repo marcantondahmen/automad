@@ -84,7 +84,7 @@ class Gallery extends AbstractBlock {
 			);
 		}
 
-		$json = rawurlencode(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES));
+		$json = rawurlencode(strval(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES)));
 		$attr = Attr::render($block['tunes']);
 
 		return "<am-gallery $attr data=\"$json\"></am-gallery>";

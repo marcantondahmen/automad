@@ -39,7 +39,6 @@ namespace Automad\System;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
-use Automad\Core\Str;
 use Composer\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -145,11 +144,11 @@ class Composer {
 		Debug::log($autoloader, 'Require Composer autoloader');
 		require_once($autoloader);
 
-		$decoded = json_decode(file_get_contents($this->composerFile), true);
+		$decoded = json_decode(strval(file_get_contents($this->composerFile)), true);
 		$config = $decoded['config'] ?? array();
 		$decoded['config'] = array_merge_recursive($config, array('allow-plugins' => array()));
 		$decoded['config']['allow-plugins']['automad/package-installer'] = true;
-		FileSystem::write($this->composerFile, json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+		FileSystem::write($this->composerFile, strval(json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
 
 		if ($updatePackageInstaller) {
 			$this->run('require automad/package-installer');
@@ -213,8 +212,8 @@ class Composer {
 			}
 		}
 
-		$bufferJsonOnly = preg_replace('/^[^\{]*(\{.*\})[^\}]*$/is', '$1', $buffer);
-		$bufferJsonOnly = preg_replace('/\s+/is', ' ', $bufferJsonOnly);
+		$bufferJsonOnly = preg_replace('/^[^\{]*(\{.*\})[^\}]*$/is', '$1', $buffer) ?? '';
+		$bufferJsonOnly = preg_replace('/\s+/is', ' ', $bufferJsonOnly) ?? '';
 
 		Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
 		Debug::log($bufferJsonOnly, 'Buffer JSON only');
@@ -263,8 +262,8 @@ class Composer {
 			Debug::log($installDir, 'Getting Composer installation directory from cache');
 
 			// To verify that the directory actually contains Composer, simply test for existance of the autoloader.
-			if (!is_readable($installDir . $this->extractionDir . $this->autoloader)) {
-				Debug::log($installDir . $this->extractionDir . $this->autoloader, 'Autoloader not found');
+			if (!$installDir || !is_readable($installDir . $this->extractionDir . $this->autoloader)) {
+				Debug::log(strval($installDir) . $this->extractionDir . $this->autoloader, 'Autoloader not found');
 
 				return $this->newInstallDir();
 			}

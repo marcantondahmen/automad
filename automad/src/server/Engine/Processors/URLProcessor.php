@@ -37,7 +37,6 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Admin\InPage;
-use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -74,16 +73,16 @@ class URLProcessor {
 				}
 			},
 			$str
-		);
+		) ?? '';
 
 		// Remove all temporary edit buttons inside HTML tags to avoid confusing the URL resolver.
 		$str = preg_replace_callback(
 			'/<([^>]+)>/s',
 			function ($match) {
-				return '<' . preg_replace(InPage::TEMP_REGEX, '$2', $match[1]) . '>';
+				return '<' . (preg_replace(InPage::TEMP_REGEX, '$2', $match[1]) ?? '') . '>';
 			},
 			$str
-		);
+		) ?? '';
 
 		// Find URLs in action, href and src attributes.
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
@@ -97,7 +96,7 @@ class URLProcessor {
 				return $match[1] . '=' . $match[2] . $url . $match[4];
 			},
 			$str
-		);
+		) ?? '';
 
 		// Inline styles (like background-image).
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
@@ -110,7 +109,7 @@ class URLProcessor {
 				return $match[1] . 'url(\'' . $url . '\')';
 			},
 			$str
-		);
+		) ?? '';
 
 		// Image srcset attributes.
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
@@ -125,13 +124,13 @@ class URLProcessor {
 						return call_user_func_array($method, $parameters) . ' ' . $match[2];
 					},
 					$match[3]
-				);
+				) ?? '';
 
 				// Matches 2 and 4 are quotes.
 				return $match[1] . '=' . $match[2] . $urls . $match[4];
 			},
 			$str
-		);
+		) ?? '';
 
 		return $str;
 	}

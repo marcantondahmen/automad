@@ -37,7 +37,6 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Engine\Delimiters;
-use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -85,7 +84,7 @@ class PreProcessor {
 			}
 
 			return $return;
-		}, $str);
+		}, $str) ?? '';
 	}
 
 	/**
@@ -95,8 +94,8 @@ class PreProcessor {
 	 * @return string The processed string
 	 */
 	public static function stripWhitespace(string $str): string {
-		$str = preg_replace('/\s*(' . preg_quote(Delimiters::STATEMENT_OPEN) . ')~/is', '$1', $str);
-		$str = preg_replace('/~(' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
+		$str = preg_replace('/\s*(' . preg_quote(Delimiters::STATEMENT_OPEN) . ')~/is', '$1', $str) ?? '';
+		$str = preg_replace('/~(' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')\s*/is', '$1', $str) ?? '';
 
 		return $str;
 	}

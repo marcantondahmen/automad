@@ -119,13 +119,15 @@ class InPage {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $field) && Session::getUsername()) {
 			$data = base64_encode(
-				json_encode(array(
-					'id' => self::$buttonId++,
-					'context' => $Context->get()->origUrl,
-					'field' => $field,
-					'page' => AM_REQUEST,
-					'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
-				), JSON_UNESCAPED_SLASHES)
+				strval(
+					json_encode(array(
+						'id' => self::$buttonId++,
+						'context' => $Context->get()->origUrl,
+						'field' => $field,
+						'page' => AM_REQUEST,
+						'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
+					), JSON_UNESCAPED_SLASHES)
+				)
 			);
 
 			return "{{@open:$data@}}$value{{@close:$data@}}";
@@ -169,12 +171,14 @@ class InPage {
 		);
 
 		$labels = urlencode(
-			json_encode(
-				array_reduce($labelKeys, function ($result, $key): array {
-					$result[$key] = Text::get($key);
+			strval(
+				json_encode(
+					array_reduce($labelKeys, function ($result, $key): array {
+						$result[$key] = Text::get($key);
 
-					return $result;
-				}, array())
+						return $result;
+					}, array())
+				)
 			)
 		);
 
@@ -206,14 +210,14 @@ class InPage {
 		// Within HTML tags.
 		// Like <div data-attr="...">
 		$str = preg_replace_callback('/\<[^>]+\>/is', function ($matches): string {
-			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]);
-		}, $str);
+			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]) ?? '';
+		}, $str) ?? '';
 
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
 		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function ($matches): string {
-			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]);
-		}, $str);
+			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]) ?? '';
+		}, $str) ?? '';
 
 		$str = preg_replace_callback(InPage::TEMP_REGEX, function ($matches) {
 			$base64Data = $matches[1];
@@ -232,7 +236,7 @@ class InPage {
 					$placeholder
 				>$value</am-inpage-edit>
 				HTML;
-		}, $str);
+		}, $str) ?? '';
 
 		return $str;
 	}

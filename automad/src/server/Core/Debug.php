@@ -94,7 +94,7 @@ class Debug {
 		$html = '<script type="text/javascript">' . "\n";
 
 		foreach (self::$buffer as $key => $value) {
-			$html .= 'console.log(' . json_encode(array($key => $value)) . ');' . "\n";
+			$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');' . "\n";
 		}
 
 		$html .= '</script>' . "\n";

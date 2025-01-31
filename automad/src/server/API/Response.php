@@ -118,7 +118,7 @@ class Response {
 
 		$properties = array_filter(get_object_vars($this));
 
-		return json_encode($properties, JSON_UNESCAPED_SLASHES);
+		return strval(json_encode($properties, JSON_UNESCAPED_SLASHES));
 	}
 
 	/**

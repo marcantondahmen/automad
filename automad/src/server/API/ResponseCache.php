@@ -39,7 +39,6 @@ namespace Automad\API;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
-use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -78,13 +77,13 @@ class ResponseCache {
 		$siteMTime = $Cache->getSiteMTime();
 		$hash = sha1(serialize($_GET) . serialize($_POST) . serialize($_SESSION));
 		$path = strtolower(AM_DIR_TMP . AM_REQUEST . '/' . $hash);
-		$responseMTime = is_readable($path) ? filemtime($path) : 0;
+		$responseMTime = is_readable($path) ? intval(filemtime($path)) : 0;
 
 		Debug::log($path, 'Response caching path');
 
 		if (is_readable($path) && $siteMTime < $responseMTime && time() < $responseMTime + ResponseCache::LIFETIME) {
 			Debug::log(AM_REQUEST, 'Loading response from cache');
-			$this->Response = unserialize(file_get_contents($path));
+			$this->Response = unserialize(strval(file_get_contents($path)));
 
 			return;
 		}

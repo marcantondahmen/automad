@@ -121,7 +121,7 @@ class TemplateProcessor {
 				return '';
 			},
 			$output
-		);
+		) ?? '';
 
 		return URLProcessor::resolveUrls(
 			$output,

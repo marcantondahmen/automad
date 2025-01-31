@@ -116,6 +116,6 @@ class Asset {
 	private static function mTime(string $file): int {
 		$path = AM_BASE_DIR . '/automad/' . $file;
 
-		return filemtime($path);
+		return intval(filemtime($path));
 	}
 }

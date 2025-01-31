@@ -70,7 +70,7 @@ class Image {
 			return;
 		}
 
-		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
+		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64) ?? '';
 		$data = base64_decode($data);
 
 		$name = $path . Str::slug($name) . '.' . $extension;

@@ -78,7 +78,7 @@ class MailAddressProcessor {
 			'/<body.+<\/body>/s',
 			array($this, 'processBody'),
 			$str
-		);
+		) ?? '';
 
 		if ($this->hasMail) {
 			$str = Head::append($str, Asset::css('dist/mail/main.bundle.css', false));
@@ -151,7 +151,7 @@ class MailAddressProcessor {
 				return 'href="#" data-eml="' . $encoded . '" data-key="' . $key . '"';
 			},
 			$body
-		);
+		) ?? '';
 
 		$body = preg_replace_callback(
 			'/(<a\b[^>]*>.+?<\/a>|(' . $regexEmail . '))/is',
@@ -168,7 +168,7 @@ class MailAddressProcessor {
 				return '<a href="#" data-eml="' . $encoded . '" data-key="' . $key . '">' . $label . '</a>';
 			},
 			$body
-		);
+		) ?? '';
 
 		$body = preg_replace_callback(
 			'/' . $regexEmail . '/',
@@ -178,7 +178,7 @@ class MailAddressProcessor {
 				return $this->addTags($matches[0]);
 			},
 			$body
-		);
+		) ?? '';
 
 		return $body;
 	}

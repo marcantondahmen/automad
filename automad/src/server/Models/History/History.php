@@ -164,7 +164,7 @@ class History {
 		$History = new History();
 
 		if (is_readable($historyPath)) {
-			$unserialized = self::unserialize(file_get_contents($historyPath));
+			$unserialized = self::unserialize(strval(file_get_contents($historyPath)));
 
 			if ($unserialized instanceof History) {
 				$History = $unserialized;
@@ -228,7 +228,7 @@ class History {
 			return '';
 		}
 
-		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time);
+		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time) ?? '';
 		/** @var string */
 		$time = str_replace('T', ', ', $time);
 
@@ -283,7 +283,7 @@ class History {
 	 */
 	private function serialize(): string {
 		if (function_exists('gzcompress') && function_exists('gzuncompress')) {
-			return gzcompress(serialize($this));
+			return strval(gzcompress(serialize($this)));
 		}
 
 		return serialize($this);
@@ -309,7 +309,7 @@ class History {
 	 */
 	private static function unserialize(string $serialized): History | bool {
 		if (function_exists('gzcompress') && function_exists('gzuncompress')) {
-			return unserialize(gzuncompress($serialized));
+			return unserialize(strval(gzuncompress($serialized)));
 		}
 
 		return unserialize($serialized);

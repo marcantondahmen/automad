@@ -161,7 +161,7 @@ class Fields {
 
 		if (is_readable($file)) {
 			// Find all variable fields in the template file.
-			$content = file_get_contents($file);
+			$content = strval(file_get_contents($file));
 			// Remove ~ characters to match includes correctly.
 			$content = str_replace(
 				array(Delimiters::STATEMENT_OPEN . '~', '~' . Delimiters::STATEMENT_CLOSE),

@@ -120,7 +120,7 @@ class FileCollection {
 				$item['height'] = $image->originalHeight;
 			}
 
-			$item['mtime'] = date('M j, Y H:i', filemtime($file));
+			$item['mtime'] = date('M j, Y H:i', intval(filemtime($file)));
 			$item['size'] = FileSystem::getFileSize($file);
 			$item['path'] = $file;
 			$item['basename'] = basename($file);
@@ -174,10 +174,13 @@ class FileCollection {
 			$cacheHandle = fopen($cache, 'a+');
 			$tmpHandle = fopen($chunk->tmp_name, 'rb');
 
-			fwrite($cacheHandle, fread($tmpHandle, $bufferSize));
+			if ($cacheHandle && $tmpHandle) {
+				fwrite($cacheHandle, strval(fread($tmpHandle, $bufferSize)));
 
-			fclose($tmpHandle);
-			fclose($cacheHandle);
+				fclose($tmpHandle);
+				fclose($cacheHandle);
+			}
+
 			unlink($chunk->tmp_name);
 		}
 

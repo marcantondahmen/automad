@@ -73,7 +73,7 @@ class FileUtils {
 		Debug::log($captionFile);
 
 		if (is_readable($captionFile)) {
-			return file_get_contents($captionFile);
+			return strval(file_get_contents($captionFile));
 		}
 
 		return '';

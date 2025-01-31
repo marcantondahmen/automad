@@ -37,9 +37,6 @@
 namespace Automad\System;
 
 use Automad\Core\FileSystem;
-use Automad\Core\Image;
-use Automad\Core\RemoteFile;
-use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -62,7 +59,7 @@ class Package {
 		$composerJsonPath = $dir . '/composer.json';
 
 		while ($dir != AM_BASE_DIR . AM_DIR_PACKAGES && !is_readable($composerJsonPath)) {
-			$dir = realpath($dir . '/..');
+			$dir = strval(realpath($dir . '/..'));
 			$composerJsonPath = $dir . '/composer.json';
 		}
 

@@ -97,7 +97,7 @@ abstract class Attr {
 
 		foreach ($styles as $key => $value) {
 			$value = preg_replace('/[<>]/', '', $value);
-			$key = strtolower(preg_replace('/([A-Z])/', '-$1', $key));
+			$key = strtolower(preg_replace('/([A-Z])/', '-$1', $key) ?? '');
 			$rules[] = "$key: $value;";
 		}
 

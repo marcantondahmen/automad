@@ -270,6 +270,10 @@ class Image {
 
 		$dest = imagecreatetruecolor($this->width, $this->height);
 
+		if (!$dest) {
+			return;
+		}
+
 		imagealphablending($dest, false);
 		imagesavealpha($dest, true);
 		imagecopyresampled(
@@ -336,7 +340,7 @@ class Image {
 		// The hash makes it possible to clearly identify an unchanged file in the cache,
 		// since the given hashData will always result in the same hash.
 		// So if a file gets requested, the hash is generated from the path, calculated width x height, the mtime from the original and the cropping setting.
-		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . filemtime($this->originalFile) . '-' . var_export($this->crop, true);
+		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . strval(filemtime($this->originalFile)) . '-' . var_export($this->crop, true);
 		$hash = hash('crc32', $hashData);
 
 		$file = Cache::DIR_IMAGES . '/' . $sanitized . '.' . $hash . '.' . $extension;

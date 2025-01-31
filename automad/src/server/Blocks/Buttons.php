@@ -105,7 +105,7 @@ class Buttons extends AbstractBlock {
 		$openInNewTab = $settings['openInNewTab'] ? 'target="_blank"' : '';
 
 		foreach ($settings['style'] as $key => $value) {
-			$style .= '--am-button-' . strtolower(preg_replace('/([A-Z])/', '-$1', $key)) . ": $value; ";
+			$style .= '--am-button-' . strtolower(preg_replace('/([A-Z])/', '-$1', $key) ?? '') . ": $value; ";
 		}
 
 		return <<< HTML

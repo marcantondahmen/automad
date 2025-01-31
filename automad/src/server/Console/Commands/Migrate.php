@@ -172,7 +172,7 @@ class Migrate extends AbstractCommand {
 			return $vars;
 		}
 
-		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));
+		$content = preg_replace('/\r\n?/', "\n", strval(file_get_contents($file))) ?? '';
 
 		$pairs = preg_split(
 			'/\n\-+\s*\n(?=[\+\w\.\-]+:)/s',
@@ -180,6 +180,10 @@ class Migrate extends AbstractCommand {
 			-1,
 			PREG_SPLIT_NO_EMPTY
 		);
+
+		if (!$pairs) {
+			$pairs = array();
+		}
 
 		foreach ($pairs as $pair) {
 			list($key, $value) = explode(':', $pair, 2);
@@ -226,7 +230,7 @@ class Migrate extends AbstractCommand {
 
 		foreach ($dataFiles as $file) {
 			$path = Str::stripStart(dirname($file), AM_BASE_DIR . AM_DIR_PAGES);
-			$slug = basename(preg_replace('/^[^\.]+\./', '', $path));
+			$slug = basename(preg_replace('/^[^\.]+\./', '', $path) ?? '');
 			$newPath = $path;
 
 			if (basename($path) !== $slug) {

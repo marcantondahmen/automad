@@ -45,7 +45,6 @@ use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Str;
 use Automad\Core\Text;
-use Automad\Models\Links;
 use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -78,7 +77,7 @@ class File {
 		$path = FileSystem::getPathByPostUrl($Automad);
 		$oldFile = $path . basename($oldName);
 		$extension = FileSystem::getExtension($oldFile);
-		$newFile = $path . Str::slug(basename(preg_replace('/\.' . $extension . '$/i', '', $newName))) . '.' . $extension;
+		$newFile = $path . Str::slug(basename(preg_replace('/\.' . $extension . '$/i', '', $newName) ?? '')) . '.' . $extension;
 
 		if (!FileSystem::isAllowedFileType($newFile)) {
 			$Messenger->setError(Text::get('unsupportedFileTypeError') . ' "' . FileSystem::getExtension($newFile) . '"');
@@ -159,7 +158,7 @@ class File {
 			return false;
 		}
 
-		$fileName = Str::slug(preg_replace('/\?.*/', '', basename($importUrl)));
+		$fileName = Str::slug(preg_replace('/\?.*/', '', basename($importUrl)) ?? '');
 
 		if ($pageUrl) {
 			$Automad = Automad::fromCache();

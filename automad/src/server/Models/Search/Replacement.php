@@ -200,7 +200,7 @@ class Replacement {
 				'/' . $this->searchValue . '/' . $this->regexFlags,
 				$this->replaceValue,
 				$value
-			);
+			) ?? '';
 		}
 
 		return $value;

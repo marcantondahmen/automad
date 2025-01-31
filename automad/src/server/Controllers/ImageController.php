@@ -83,7 +83,7 @@ class ImageController {
 		$resized = AM_BASE_DIR . $image->file;
 
 		header('Content-Type:' . $image->type);
-		header('Content-Length: ' . filesize($resized));
+		header('Content-Length: ' . strval(filesize($resized)));
 		readfile($resized);
 
 		exit();

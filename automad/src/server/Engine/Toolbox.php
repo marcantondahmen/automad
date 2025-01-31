@@ -156,7 +156,7 @@ class Toolbox {
 		if ($options['file']) {
 			$files = FileUtils::fileDeclaration($options['file'], $this->Automad->Context->get());
 			$file = reset($files);
-			$img = new Image($file, $options['width'], $options['height'], $options['crop']);
+			$img = new Image(strval($file), $options['width'], $options['height'], $options['crop']);
 
 			if ($img->file) {
 				if ($options['class']) {

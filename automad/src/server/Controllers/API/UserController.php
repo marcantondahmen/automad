@@ -200,6 +200,10 @@ class UserController {
 		$charGroups = preg_split('/\s+/', AM_PASSWORD_REQUIRED_CHARS);
 		$len = is_numeric(AM_PASSWORD_MIN_LENGTH) ? AM_PASSWORD_MIN_LENGTH : 0;
 
+		if (!$charGroups) {
+			$charGroups = array();
+		}
+
 		$regex = '';
 
 		foreach ($charGroups as $group) {

@@ -281,7 +281,7 @@ class Automad {
 		}
 
 		// Strip comments before return.
-		return preg_replace('/(' . preg_quote(Delimiters::COMMENT_OPEN) . '.*?' . preg_quote(Delimiters::COMMENT_CLOSE) . ')/s', '', $output);
+		return preg_replace('/(' . preg_quote(Delimiters::COMMENT_OPEN) . '.*?' . preg_quote(Delimiters::COMMENT_CLOSE) . ')/s', '', $output ? $output : '') ?? '';
 	}
 
 	/**

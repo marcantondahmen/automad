@@ -188,7 +188,7 @@ class Pagelist {
 
 		// Only log debug info in case $options is not empty.
 		if (!empty($options)) {
-			Debug::log(array('Options' => $options, 'Current Config' => $configArray), json_encode($options, JSON_UNESCAPED_SLASHES));
+			Debug::log(array('Options' => $options, 'Current Config' => $configArray), strval(json_encode($options, JSON_UNESCAPED_SLASHES)));
 		}
 
 		return $configArray;

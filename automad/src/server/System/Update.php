@@ -146,7 +146,7 @@ class Update {
 		$versionFile = AM_BASE_DIR . '/automad/src/server/App.php';
 
 		if (is_readable($versionFile)) {
-			$versionFileContent = file_get_contents($versionFile);
+			$versionFileContent = strval(file_get_contents($versionFile));
 			preg_match("/VERSION\s=\s'([^']+)'/is", $versionFileContent, $matches);
 			$version = $matches[1] ?? '';
 		}

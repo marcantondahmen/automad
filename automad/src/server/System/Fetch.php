@@ -58,6 +58,10 @@ class Fetch {
 
 		$fp = fopen($file, 'w+');
 
+		if (!$fp) {
+			return false;
+		}
+
 		$options = array(
 			CURLOPT_TIMEOUT => 300,
 			CURLOPT_FILE => $fp,
@@ -67,6 +71,11 @@ class Fetch {
 		);
 
 		$curl = curl_init();
+
+		if (!$curl) {
+			return false;
+		}
+
 		curl_setopt_array($curl, $options);
 		curl_exec($curl);
 
@@ -101,6 +110,11 @@ class Fetch {
 		);
 
 		$curl = curl_init();
+
+		if (!$curl) {
+			return '';
+		}
+
 		curl_setopt_array($curl, $options);
 		$output = curl_exec($curl);
 

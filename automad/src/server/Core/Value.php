@@ -77,7 +77,7 @@ class Value {
 
 		if (is_numeric($value)) {
 			// Also handle 0 to be returned as "0".
-			return json_encode($value);
+			return strval(json_encode($value));
 		}
 
 		return '';

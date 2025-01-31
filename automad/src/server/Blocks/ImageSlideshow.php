@@ -84,7 +84,7 @@ class ImageSlideshow extends AbstractBlock {
 			);
 		}
 
-		$json = rawurlencode(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES));
+		$json = rawurlencode(strval(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES)));
 		$attr = Attr::render($block['tunes']);
 
 		return "<am-image-slideshow $attr data=\"$json\"></am-image-slideshow>";
