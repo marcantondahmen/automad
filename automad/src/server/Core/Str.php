@@ -36,8 +36,8 @@
 
 namespace Automad\Core;
 
+use Cocur\Slugify\Slugify;
 use Michelf\MarkdownExtra;
-use URLify;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -239,28 +239,27 @@ class Str {
 			return '';
 		}
 
-		// If dots should be removed from $str, replace them with '-', since URLify::filter() only removes them fully without replacing.
-		if ($removeDots) {
-			$str = str_replace('.', '-', $str);
+		$Slugify = new Slugify(
+			array(
+				'regexp' => $removeDots ? '/[^A-Za-z0-9]+/' : '/[^A-Za-z0-9\.]+/',
+				'strip_tags' => true
+			)
+		);
+
+		$Slugify->addRule('&', '-and-');
+		$Slugify->addRule('+', '-plus-');
+		$Slugify->addRule('@', '-at-');
+		$Slugify->addRule('*', '-x-');
+		$Slugify->addRule('&mdash;', '-');
+		$Slugify->addRule('&ndash;', '-');
+
+		$str = $Slugify->slugify($str);
+
+		if (strlen($str) > $maxChars) {
+			$str = substr($str, 0, $maxChars);
 		}
 
-		// Convert slashes separately to avoid issues with regex in URLify.
-		$str = str_replace('/', '-', $str);
-
-		// Convert dashes to simple hyphen.
-		$str = str_replace(array('&mdash;', '&ndash;'), '-', $str);
-
-		// Configure URLify.
-		// Add non-word chars and reset the remove list.
-		// Note: $maps gets directly manipulated without using URLify::add_chars().
-		// Using the add_chars() method would extend $maps every time, Str::sanitize() gets called.
-		// Adding a new array to $maps using a key avoids that and just overwrites that same array after the first call without adding new elements.
-		URLify::$maps['nonWordChars'] = array('=' => '-', '&' => '-and-', '+' => '-plus-', '@' => '-at-', '|' => '-', '*' => '-x-');
-		URLify::$remove_list = array();
-
-		// Since all possible dots got removed already above (if $removeDots is true),
-		// $str should be filtered as filename to keep dots if they are still in $str and $removeDots is false.
-		return URLify::filter($str, $maxChars, '', true);
+		return trim($str, '-');
 	}
 
 	/**

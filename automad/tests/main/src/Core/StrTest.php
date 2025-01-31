@@ -19,7 +19,16 @@ class StrTest extends TestCase {
 		return array(
 			array('Some string.', true, 100, 'some-string'),
 			array('Some very long sentence, with a comma.', true, 10, 'some-very'),
-			array('Filename with space.jpg', false, 100, 'filename-with-space.jpg')
+			array('Filename with space.jpg', false, 100, 'filename-with-space.jpg'),
+			array('Some & word', true, 100, 'some-and-word'),
+			array('Hello@world', true, 100, 'hello-at-world'),
+			array('10+10', true, 100, '10-plus-10'),
+			array('10*10', true, 100, '10-x-10'),
+			array('Hello &mdash; world', true, 100, 'hello-world'),
+			array('Hello &ndash; world', true, 100, 'hello-world'),
+			array('Hello / world', true, 100, 'hello-world'),
+			array('<h1>Hello</h1>', true, 100, 'hello'),
+			array('abc defgh', true, 4, 'abc')
 		);
 	}
 
