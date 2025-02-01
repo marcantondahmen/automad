@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -78,7 +78,8 @@ export const createEditor = (
 	container: HTMLElement,
 	data: EditorOutputData,
 	config: EditorConfig,
-	isSectionBlock: boolean
+	isSectionBlock: boolean,
+	readOnly: boolean = false
 ): EditorJSComponent => {
 	const editorJS = create(
 		EditorJSComponent.TAG_NAME,
@@ -87,7 +88,7 @@ export const createEditor = (
 		container
 	) as EditorJSComponent;
 
-	editorJS.init(data, config, isSectionBlock);
+	editorJS.init(data, config, isSectionBlock, readOnly);
 
 	return editorJS;
 };

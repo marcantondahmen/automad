@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -84,6 +84,19 @@ export const enum CSS {
 	codeflask = 'am-f-codeflask',
 	codeflaskPlaceholder = 'am-f-codeflask__placeholder',
 
+	componentEditor = 'am-c-component-editor',
+	componentEditorGhost = 'am-c-component-editor--ghost',
+	componentEditorChosen = 'am-c-component-editor--chosen',
+	componentEditorDrag = 'am-c-component-editor--drag',
+	componentEditorHeader = 'am-c-component-editor__header',
+	componentEditorName = 'am-c-component-editor__name',
+	componentEditorTools = 'am-c-component-editor__tools',
+	componentEditorHandle = 'am-c-component-editor__handle',
+	componentEditorMain = 'am-c-component-editor__main',
+
+	componentsStickySection = 'am-c-components__sticky-section',
+	componentsHint = 'am-c-components__hint',
+
 	contents = 'am-e-contents',
 
 	customIconCheckbox = 'am-f-custom-icon-checkbox',
@@ -115,6 +128,10 @@ export const enum CSS {
 	editorBlockButtons = 'am-c-ed-bl-buttons',
 	editorBlockButtonsEdit = 'am-c-ed-bl-buttons__edit',
 	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
+
+	editorBlockComponent = 'am-c-ed-bl-component',
+	editorBlockComponentLabel = 'am-c-ed-bl-component__label',
+	editorBlockComponentOverlay = 'am-c-ed-bl-component__overlay',
 
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
 

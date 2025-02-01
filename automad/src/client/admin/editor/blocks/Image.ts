@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -144,39 +144,45 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 		this.setImage(this.data.url);
 
-		const buttons = create(
-			'div',
-			[CSS.editorBlockImageButtons, CSS.formGroup],
-			{},
-			this.wrapper
-		);
+		if (!this.readOnly) {
+			const buttons = create(
+				'div',
+				[CSS.editorBlockImageButtons, CSS.formGroup],
+				{},
+				this.wrapper
+			);
 
-		const select = create(
-			'button',
-			[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
-			{ [Attr.tooltip]: App.text('selectImage') },
-			buttons,
-			'<i class="bi bi-folder2"></i>'
-		);
+			const select = create(
+				'button',
+				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+				{ [Attr.tooltip]: App.text('selectImage') },
+				buttons,
+				'<i class="bi bi-folder2"></i>'
+			);
 
-		const link = create(
-			'button',
-			[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
-			{ [Attr.tooltip]: App.text('link') },
-			buttons,
-			'<i class="bi bi-link-45deg"></i>'
-		);
+			const link = create(
+				'button',
+				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+				{ [Attr.tooltip]: App.text('link') },
+				buttons,
+				'<i class="bi bi-link-45deg"></i>'
+			);
+
+			listen(select, 'click', this.pickImage.bind(this));
+			listen(link, 'click', this.createLinkModal.bind(this));
+		}
 
 		this.caption = create(
 			'div',
 			['cdx-block', 'ce-paragraph'],
-			{ contenteditable: 'true', placeholder: App.text('caption') },
+			{
+				contenteditable: this.readOnly ? 'false' : 'true',
+				placeholder: App.text('caption'),
+			},
 			this.wrapper,
 			html`${this.data.caption}`
 		);
 
-		listen(select, 'click', this.pickImage.bind(this));
-		listen(link, 'click', this.createLinkModal.bind(this));
 		listen(this.caption, 'input', () => {
 			fire('change', this.caption);
 		});

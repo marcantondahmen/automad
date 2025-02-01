@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The User type is a custom data type that stores all data that is related to a user.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class User {
@@ -202,13 +202,7 @@ class User {
 		$subject = 'Automad: ' . Text::get('emailResetPasswordSubject');
 		$message = PasswordResetEmail::render($website, $this->name, $token);
 
-		if (!Mail::send($email, $subject, $message)) {
-			$Messenger->setError(Text::get('sendMailError'));
-
-			return false;
-		}
-
-		return true;
+		return Mail::send($email, $subject, $message, null, $Messenger);
 	}
 
 	/**

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2018-2024 by Marc Anton Dahmen
+ * Copyright (c) 2018-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -39,7 +39,6 @@ namespace Automad\System;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
-use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -47,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The theme collection system class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2018-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2018-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class ThemeCollection {
@@ -142,7 +141,7 @@ class ThemeCollection {
 		$installed = array();
 
 		if (is_readable($installedJSON)) {
-			$decoded = @json_decode(file_get_contents($installedJSON), true);
+			$decoded = @json_decode(strval(file_get_contents($installedJSON)), true);
 
 			if (is_array($decoded) && !empty($decoded['packages'])) {
 				$packages = $decoded['packages'];

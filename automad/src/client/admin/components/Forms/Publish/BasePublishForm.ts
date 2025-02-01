@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -40,17 +40,14 @@ import {
 	CSS,
 	dateFormat,
 	EventName,
-	getPageURL,
-	getSlug,
+	KeyValueMap,
 	listen,
-	PageController,
 	requestAPI,
-	Route,
-	SharedController,
 } from '@/admin/core';
+import { PublishControllers } from '@/admin/types';
 import Tooltip from 'codex-tooltip';
-import { BaseComponent } from '../Base';
-import { SubmitComponent } from './Submit';
+import { BaseComponent } from '../../Base';
+import { SubmitComponent } from '../Submit';
 
 const enable = (button: SubmitComponent): void => {
 	if (button.hasAttribute('disabled')) {
@@ -66,32 +63,17 @@ const disable = (button: SubmitComponent): void => {
 };
 
 /**
- * The publish button and form for the navbar.
+ * The base publish button and form for the navbar.
  *
  * @extends BaseComponent
  */
-export class PublishFormComponent extends BaseComponent {
+export abstract class BasePublishFormComponent extends BaseComponent {
 	/**
 	 * The tag name.
 	 *
 	 * @static
 	 */
 	static TAG_NAME = 'am-publish-form';
-
-	/**
-	 * The state controller route.
-	 */
-	private stateController: PageController | SharedController;
-
-	/**
-	 * The discard controller route.
-	 */
-	private discardController: PageController | SharedController;
-
-	/**
-	 * The publish controller route.
-	 */
-	private publishController: PageController | SharedController;
 
 	/**
 	 * The publish info tooltip.
@@ -122,32 +104,9 @@ export class PublishFormComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
-		const route = getSlug() as Route;
-
-		if (![Route.page, Route.shared].includes(route)) {
-			this.remove();
-
-			return;
-		}
-
-		const isPageRoute = route === Route.page;
-		const pageUrl = getPageURL();
-
 		this.stateBinding = new Binding('publicationState', {
-			initial: pageUrl ? App.pages[pageUrl].publicationState : null,
+			initial: this.initialState(),
 		});
-
-		this.discardController = isPageRoute
-			? PageController.discardDraft
-			: SharedController.discardDraft;
-
-		this.publishController = isPageRoute
-			? PageController.publish
-			: SharedController.publish;
-
-		this.stateController = isPageRoute
-			? PageController.getPublicationState
-			: SharedController.getPublicationState;
 
 		this.classList.add(CSS.navbarGroup);
 
@@ -157,7 +116,7 @@ export class PublishFormComponent extends BaseComponent {
 			{
 				[Attr.watch]: '',
 				[Attr.confirm]: App.text('discardDraftConfirm'),
-				[Attr.api]: this.discardController,
+				[Attr.api]: this.controllers().discard,
 				[Attr.event]: EventName.contentPublished,
 			},
 			this
@@ -176,7 +135,7 @@ export class PublishFormComponent extends BaseComponent {
 			[],
 			{
 				[Attr.watch]: '',
-				[Attr.api]: this.publishController,
+				[Attr.api]: this.controllers().publish,
 				[Attr.event]: EventName.contentPublished,
 			},
 			this
@@ -233,26 +192,46 @@ export class PublishFormComponent extends BaseComponent {
 	 * Update the publish button.
 	 */
 	async update(): Promise<void> {
-		const { data } = await requestAPI(this.stateController, {
-			url: getPageURL(),
-		});
+		const { data } = await requestAPI(
+			this.controllers().state,
+			this.additionalRequestData()
+		);
 
-		this.lastPublished = data.lastPublished;
-		this.stateBinding.value = data.isPublished ? 'published' : 'draft';
+		this.lastPublished = data?.lastPublished;
+		this.stateBinding.value = data?.isPublished ? 'published' : 'draft';
 
-		if (data.isPublished) {
+		if (data?.isPublished) {
 			disable(this.discardButton);
 			disable(this.publishButton);
 
 			return;
 		}
 
-		if (data.lastPublished) {
+		if (data?.lastPublished) {
 			enable(this.discardButton);
 		}
 
 		enable(this.publishButton);
 	}
-}
 
-customElements.define(PublishFormComponent.TAG_NAME, PublishFormComponent);
+	/**
+	 * Data that is added to the update request.
+	 *
+	 * @abstract
+	 */
+	protected abstract additionalRequestData(): KeyValueMap;
+
+	/**
+	 * Initial state.
+	 *
+	 * @abstract
+	 */
+	protected abstract initialState(): string;
+
+	/**
+	 * The controllers configuration.
+	 *
+	 * @abstract
+	 */
+	protected abstract controllers(): PublishControllers;
+}

@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -48,7 +48,11 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { FilelistBlockData, SelectComponentOption } from '@/admin/types';
+import {
+	FilelistBlockData,
+	KeyValueMap,
+	SelectComponentOption,
+} from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 const defaultFile = 'default';
@@ -110,13 +114,15 @@ export class FilelistBlock extends BaseBlock<FilelistBlockData> {
 
 		this.renderForm(query('.__card', this.wrapper));
 
-		listen(
-			this.wrapper,
-			'change input',
-			debounce(() => {
-				this.blockAPI.dispatchChange();
-			}, 50)
-		);
+		if (!this.readOnly) {
+			listen(
+				this.wrapper,
+				'change input',
+				debounce(() => {
+					this.blockAPI.dispatchChange();
+				}, 50)
+			);
+		}
 
 		return this.wrapper;
 	}
@@ -140,18 +146,39 @@ export class FilelistBlock extends BaseBlock<FilelistBlockData> {
 
 		const grid = create('div', [CSS.grid, CSS.gridAuto], {}, form2);
 
+		const attr: KeyValueMap = {};
+
+		if (this.readOnly) {
+			attr.disabled = '';
+		}
+
 		createSelectField(
 			App.text('filelistBlockFile'),
-			createSelect(files, this.data.file, null, 'file'),
+			createSelect(
+				files,
+				this.data.file,
+				null,
+				'file',
+				null,
+				'',
+				[],
+				attr
+			),
 			form1
 		);
 
-		createField(FieldTag.input, grid, {
-			key: uniqueId(),
-			name: 'glob',
-			value: this.data.glob,
-			label: `${App.text('filelistBlockPattern')} (Glob)`,
-		});
+		createField(
+			FieldTag.input,
+			grid,
+			{
+				key: uniqueId(),
+				name: 'glob',
+				value: this.data.glob,
+				label: `${App.text('filelistBlockPattern')} (Glob)`,
+			},
+			[],
+			attr
+		);
 
 		createSelectField(
 			App.text('filelistBlockSortOrder'),
@@ -162,7 +189,11 @@ export class FilelistBlock extends BaseBlock<FilelistBlockData> {
 				],
 				this.data.sortOrder,
 				null,
-				'sortOrder'
+				'sortOrder',
+				null,
+				'',
+				[],
+				attr
 			),
 			grid
 		);

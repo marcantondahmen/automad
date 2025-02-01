@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -180,6 +180,15 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 			</section>
 			${renderFileImportModal()}
 		`;
+	}
+
+	/**
+	 * Render an optional publish form.
+	 *
+	 * @returns the rendered HTML
+	 */
+	protected renderPublishForm(): string {
+		return html`<am-shared-publish-form></am-shared-publish-form>`;
 	}
 }
 

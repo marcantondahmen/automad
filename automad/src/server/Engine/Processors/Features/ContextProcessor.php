@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The context change processor.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class ContextProcessor extends AbstractFeatureProcessor {
@@ -92,7 +92,7 @@ class ContextProcessor extends AbstractFeatureProcessor {
 		// Any existing page.
 		// To avoid overriding $Page (next/prev), it has to be tested explicitly whether
 		// the URL actually exists.
-		if (array_key_exists($url, $this->Automad->getCollection())) {
+		if (array_key_exists($url, $this->Automad->getPages())) {
 			$Page = $this->Automad->getPage($url);
 		}
 

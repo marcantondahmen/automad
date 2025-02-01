@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -40,7 +40,6 @@ use Automad\Engine\Processors\URLProcessor;
 use Automad\Models\Page;
 use Automad\Models\Selection;
 use Automad\System\Fields;
-use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -48,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Feed class handles the rendering of the feed.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Feed {
@@ -80,7 +79,7 @@ class Feed {
 	 */
 	public function get(): string {
 		$fn = $this->fn();
-		$Selection = new Selection($this->Automad->getCollection());
+		$Selection = new Selection($this->Automad->getPages());
 		$items = $this->getItems($Selection->getSelection());
 
 		return <<< XML

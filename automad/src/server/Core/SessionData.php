@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2018-2024 by Marc Anton Dahmen
+ * Copyright (c) 2018-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -39,10 +39,10 @@ namespace Automad\Core;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The SessionData class handles setting and getting items of $_SESSION['data'].
+ * The SessionData class handles setting and getting items of $_SESSION[Session::DATA_KEY].
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2018-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2018-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class SessionData {
@@ -53,15 +53,15 @@ class SessionData {
 	 * @return mixed The data array or a single value
 	 */
 	public static function get(?string $key = null): mixed {
-		if (!isset($_SESSION['data'])) {
-			$_SESSION['data'] = array();
+		if (!isset($_SESSION[Session::DATA_KEY])) {
+			$_SESSION[Session::DATA_KEY] = array();
 		}
 
 		if ($key) {
-			return $_SESSION['data'][$key] ?? '';
+			return $_SESSION[Session::DATA_KEY][$key] ?? '';
 		}
 
-		return $_SESSION['data'];
+		return $_SESSION[Session::DATA_KEY];
 	}
 
 	/**
@@ -71,10 +71,10 @@ class SessionData {
 	 * @param mixed $value
 	 */
 	public static function set(string $key, $value): void {
-		if (!isset($_SESSION['data'])) {
-			$_SESSION['data'] = array();
+		if (!isset($_SESSION[Session::DATA_KEY])) {
+			$_SESSION[Session::DATA_KEY] = array();
 		}
 
-		$_SESSION['data'][$key] = $value;
+		$_SESSION[Session::DATA_KEY][$key] = $value;
 	}
 }

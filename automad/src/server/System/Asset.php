@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -42,7 +42,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Asset handles loading and cache busting assets that are located in the automad directory.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Asset {
@@ -116,6 +116,6 @@ class Asset {
 	private static function mTime(string $file): int {
 		$path = AM_BASE_DIR . '/automad/' . $file;
 
-		return filemtime($path);
+		return intval(filemtime($path));
 	}
 }

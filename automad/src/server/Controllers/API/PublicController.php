@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The public controller handles all requests to public handlers.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2024-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PublicController {
@@ -72,7 +72,7 @@ class PublicController {
 		);
 
 		$Automad->Context->set($Automad->getPage($context ? $context : '/'));
-		$Pagelist = new Pagelist($Automad->getCollection(), $Automad->Context);
+		$Pagelist = new Pagelist($Automad->getPages(), $Automad->Context);
 
 		$config = array_intersect_key($_GET, $Pagelist->getDefaults());
 		$Pagelist->config($config);
@@ -81,8 +81,10 @@ class PublicController {
 			function (Page $Page) use ($fields) {
 				$content = array();
 
-				foreach($fields as $field) {
-					$content[$field] = $Page->get($field);
+				foreach ($fields as $field) {
+					if ($field) {
+						$content[$field] = $Page->get($field);
+					}
 				}
 
 				return $content;

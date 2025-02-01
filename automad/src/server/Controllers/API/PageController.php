@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -39,7 +39,6 @@ namespace Automad\Controllers\API;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
@@ -48,6 +47,7 @@ use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\Page;
 use Automad\Models\Selection;
+use Automad\Stores\DataStore;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
 
@@ -57,7 +57,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Page controller handles all requests related to page data.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PageController {
@@ -109,7 +109,7 @@ class PageController {
 		$Page = $Automad->getPage($url);
 
 		if ($Page) {
-			$Selection = new Selection($Automad->getCollection());
+			$Selection = new Selection($Automad->getPages());
 			$Selection->filterBreadcrumbs($url);
 
 			$breadcrumbs = array();

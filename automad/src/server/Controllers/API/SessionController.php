@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2024 by Marc Anton Dahmen
+ * Copyright (c) 2016-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Session controller class provides all methods related to a user session.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class SessionController {

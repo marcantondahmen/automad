@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,11 +36,11 @@
 
 namespace Automad\Console\Commands;
 
-use Automad\Core\DataStore;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\PublicationState;
 use Automad\Core\Str;
+use Automad\Stores\DataStore;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -48,7 +48,7 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * The migrate command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2024-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Migrate extends AbstractCommand {
@@ -99,7 +99,7 @@ class Migrate extends AbstractCommand {
 
 		$files = self::getFiles("$source/pages", '*.txt');
 
-		foreach($files as $file) {
+		foreach ($files as $file) {
 			$data = self::dataFile($file);
 			$path = dirname(Str::stripStart($file, "$source/pages"));
 
@@ -172,7 +172,7 @@ class Migrate extends AbstractCommand {
 			return $vars;
 		}
 
-		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));
+		$content = preg_replace('/\r\n?/', "\n", strval(file_get_contents($file))) ?? '';
 
 		$pairs = preg_split(
 			'/\n\-+\s*\n(?=[\+\w\.\-]+:)/s',
@@ -181,6 +181,10 @@ class Migrate extends AbstractCommand {
 			PREG_SPLIT_NO_EMPTY
 		);
 
+		if (!$pairs) {
+			$pairs = array();
+		}
+
 		foreach ($pairs as $pair) {
 			list($key, $value) = explode(':', $pair, 2);
 			$vars[trim($key)] = trim($value);
@@ -188,7 +192,7 @@ class Migrate extends AbstractCommand {
 
 		$vars = array_filter($vars, 'strlen');
 
-		foreach($vars as $key => $value) {
+		foreach ($vars as $key => $value) {
 			if (str_starts_with($key, '+')) {
 				$vars[$key] = json_decode($value);
 			}
@@ -207,7 +211,7 @@ class Migrate extends AbstractCommand {
 	private static function getFiles(string $dir, string $pattern): array {
 		$files = FileSystem::glob("$dir/$pattern");
 
-		foreach(FileSystem::glob("$dir/*", GLOB_ONLYDIR) as $d) {
+		foreach (FileSystem::glob("$dir/*", GLOB_ONLYDIR) as $d) {
 			$files = array_merge($files, self::getFiles($d, $pattern));
 		}
 
@@ -224,9 +228,9 @@ class Migrate extends AbstractCommand {
 
 		sort($dataFiles);
 
-		foreach($dataFiles as $file) {
+		foreach ($dataFiles as $file) {
 			$path = Str::stripStart(dirname($file), AM_BASE_DIR . AM_DIR_PAGES);
-			$slug = basename(preg_replace('/^[^\.]+\./', '', $path));
+			$slug = basename(preg_replace('/^[^\.]+\./', '', $path) ?? '');
 			$newPath = $path;
 
 			if (basename($path) !== $slug) {

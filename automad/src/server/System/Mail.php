@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2024 by Marc Anton Dahmen
+ * Copyright (c) 2020-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,6 +37,8 @@
 namespace Automad\System;
 
 use Automad\Core\Automad;
+use Automad\Core\Debug;
+use Automad\Core\Messenger;
 use Automad\Models\MailConfig;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
@@ -48,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The mail class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2020-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Mail {
@@ -63,10 +65,11 @@ class Mail {
 	 * @param string $to
 	 * @param string $subject
 	 * @param string $message
-	 * @param ?string $from
+	 * @param ?string $replyTo
+	 * @param ?Messenger $Messenger
 	 * @return bool
 	 */
-	public static function send(string $to, string $subject, string $message, ?string $from = null): bool {
+	public static function send(string $to, string $subject, string $message, ?string $replyTo = null, ?Messenger $Messenger = null): bool {
 		$MailConfig = new MailConfig();
 
 		$dsn = $MailConfig->transport === 'sendmail'
@@ -77,16 +80,26 @@ class Mail {
 		$mailer = new Mailer($transport);
 
 		$email = (new Email())
-			->from($from ?? $MailConfig->from)
+			->from($MailConfig->from)
 			->to($to)
 			->subject($subject)
 			->html($message);
+
+		if ($replyTo) {
+			$email->replyTo($replyTo);
+		}
 
 		try {
 			$mailer->send($email);
 
 			return true;
 		} catch (\Throwable $error) {
+			Debug::log($error->getMessage());
+
+			if ($Messenger) {
+				$Messenger->setError($error->getMessage());
+			}
+
 			return false;
 		}
 	}
@@ -106,7 +119,7 @@ class Mail {
 
 		// Define field names.
 		$honeypot = 'human';
-		$from = 'from';
+		$from = 'from'; // The "from" field will be used for "reply to".
 		$subject = 'subject';
 		$message = 'message';
 
@@ -134,6 +147,7 @@ class Mail {
 		$subject = $Automad->Shared->get(Fields::SITENAME) . ': ' . strip_tags($_POST[$subject]);
 		$message = strip_tags($_POST[$message]);
 
+		// Note that "$from" means in this context "reply to".
 		if (self::send($data['to'], $subject, $message, $_POST[$from])) {
 			self::$sent = true;
 

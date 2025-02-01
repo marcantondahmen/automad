@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -49,6 +49,12 @@
 		overflow: hidden;
 		background-color: hsl(var(--am-clr-background-faded));
 		cursor: pointer;
+
+		[disabled] & {
+			cursor: default;
+			border: none;
+			background-color: transparent;
+		}
 
 		&:empty {
 			height: 6rem;
@@ -106,6 +112,11 @@
 
 		&:hover {
 			opacity: 0.75;
+		}
+
+		[disabled] & {
+			cursor: default;
+			pointer-events: none;
 		}
 	}
 

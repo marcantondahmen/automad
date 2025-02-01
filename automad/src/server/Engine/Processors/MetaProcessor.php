@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -54,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The MetaProcessor class handles adding and creating open-graph information to a page header.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2024-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class MetaProcessor {
@@ -239,16 +239,20 @@ class MetaProcessor {
 
 		$image = imagecreatetruecolor($width, $height);
 
+		if (!$image) {
+			return '';
+		}
+
 		$rgbText = $this->hexToRgbColor($customColorText, MetaProcessor::IMAGE_COLOR_TEXT);
 		$rgbBackground = $this->hexToRgbColor($customColorBackground, MetaProcessor::IMAGE_COLOR_BACKGROUND);
 
-		$colorText = imagecolorallocate($image, $rgbText[0] ?? 0, $rgbText[1] ?? 0, $rgbText[2] ?? 0);
-		$colorBackground = imagecolorallocate($image, $rgbBackground[0] ?? 0, $rgbBackground[1] ?? 0, $rgbBackground[2] ?? 0);
+		$colorText = intval(imagecolorallocate($image, $rgbText[0] ?? 0, $rgbText[1] ?? 0, $rgbText[2] ?? 0));
+		$colorBackground = intval(imagecolorallocate($image, $rgbBackground[0] ?? 0, $rgbBackground[1] ?? 0, $rgbBackground[2] ?? 0));
 
 		imagefill($image, 0, 0, $colorBackground);
 
 		$maxTitleLength = 100;
-		$lineLength = 21;
+		$lineLength = 22;
 		$shortened = '';
 		$multiline = '';
 		$lineCount = 0;
@@ -256,12 +260,12 @@ class MetaProcessor {
 		while ($lineCount == 0 || $lineCount > 4) {
 			$shortened = Str::shorten($title, $maxTitleLength);
 			$multiline = wordwrap($shortened, $lineLength, "\n", true);
-			$lineCount = preg_match_all('/\n/', $multiline) + 1;
+			$lineCount = intval(preg_match_all('/\n/', $multiline)) + 1;
 			$maxTitleLength--;
 		}
 
-		$fontSizeTitle = $lineCount > 3 ? 45 : 54;
-		$titleSpace = $lineCount > 3 ? 105 : 125;
+		$fontSizeTitle = $lineCount > 3 ? 43 : 50;
+		$titleSpace = $lineCount > 3 ? 105 : 120;
 
 		imagefttext(
 			$image,
@@ -284,7 +288,7 @@ class MetaProcessor {
 			$colorText,
 			MetaProcessor::IMAGE_FONT_BOLD,
 			$multiline,
-			array('linespacing' => 1.05)
+			array('linespacing' => 1.175)
 		);
 
 		imagefttext(
@@ -295,25 +299,27 @@ class MetaProcessor {
 			$height - $padding - 5,
 			$colorText,
 			MetaProcessor::IMAGE_FONT_REGULAR,
-			'☀ ' . Str::shorten(preg_replace('#^https?://#', '', $baseUrl), 40),
+			'☀ ' . Str::shorten(preg_replace('#^https?://#', '', $baseUrl) ?? '', 40),
 			array('linespacing' => 1.0)
 		);
 
 		if (is_readable(MetaProcessor::IMAGE_LOGO)) {
 			$logo = imagecreatefrompng(MetaProcessor::IMAGE_LOGO);
 
-			imagecopyresampled(
-				$image,
-				$logo,
-				$width - $padding - imagesx($logo),
-				$height - $padding - imagesy($logo),
-				0,
-				0,
-				imagesx($logo),
-				imagesy($logo),
-				imagesx($logo),
-				imagesy($logo)
-			);
+			if ($logo) {
+				imagecopyresampled(
+					$image,
+					$logo,
+					$width - $padding - imagesx($logo),
+					$height - $padding - imagesy($logo),
+					0,
+					0,
+					imagesx($logo),
+					imagesy($logo),
+					imagesx($logo),
+					imagesy($logo)
+				);
+			}
 		}
 
 		FileSystem::makeDir(dirname($file));

@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -116,6 +116,11 @@
 			&:hover,
 			&:active {
 				color: hsl(var(--am-clr-text-hover));
+			}
+
+			&[disabled] {
+				pointer-events: none;
+				color: hsl(var(--am-clr-text-muted));
 			}
 
 			& .bi {

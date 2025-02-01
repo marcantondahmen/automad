@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2024 by Marc Anton Dahmen
+ * Copyright (c) 2013-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Parse class holds all parsing methods.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Parse {
@@ -113,7 +113,7 @@ class Parse {
 
 			foreach ($matches as $match) {
 				$key = '"' . trim($match['key'], '"') . '"';
-				$value = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match['value']));
+				$value = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match['value'])) ?? '';
 
 				if (!is_numeric($value) && $value !== 'true' && $value !== 'false') {
 					$value = str_replace('\"', '"', $value);
@@ -135,7 +135,7 @@ class Parse {
 			// Remove all undefined items (empty string).
 			// It is not possible to use array_filter($options, 'strlen') here, since an array item could be an array itself and strlen() only expects strings.
 			if (is_array($options)) {
-				$options = 	array_filter($options, function ($value) {
+				$options = array_filter($options, function ($value) {
 					return ($value !== '');
 				});
 			} else {

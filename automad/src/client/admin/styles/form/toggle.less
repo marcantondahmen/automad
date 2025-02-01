@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -108,5 +108,10 @@
 	&--default-on .bi:before,
 	& :checked + * .bi:before {
 		content: '\f5d6';
+	}
+
+	& [disabled] + label {
+		color: hsl(var(--am-clr-text-muted));
+		border-color: hsl(var(--am-clr-border));
 	}
 }

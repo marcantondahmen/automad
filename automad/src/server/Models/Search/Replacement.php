@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,9 +37,9 @@
 namespace Automad\Models\Search;
 
 use Automad\Core\Cache;
-use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\PublicationState;
+use Automad\Stores\DataStore;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Replacement model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Replacement {
@@ -200,7 +200,7 @@ class Replacement {
 				'/' . $this->searchValue . '/' . $this->regexFlags,
 				$this->replaceValue,
 				$value
-			);
+			) ?? '';
 		}
 
 		return $value;

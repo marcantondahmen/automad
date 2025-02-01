@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2017-2024 by Marc Anton Dahmen
+ * Copyright (c) 2017-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -41,10 +41,8 @@ use Automad\Core\Automad;
 use Automad\Core\Error;
 use Automad\Core\Session;
 use Automad\Core\Text;
-use Automad\Engine\Delimiters;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
-use Automad\Engine\PatternAssembly;
 use Automad\Models\Context;
 use Automad\Models\Page;
 use Automad\System\Asset;
@@ -56,12 +54,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The InPage class provides all methods related to edit content directly in the page.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2017-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2017-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class InPage {
 	/**
-	 * This regex matches the "{{@open:$data@}}$value{{@close@}}" string that temporary
+	 * This regex matches the "{{@open:$data@}}$value{{@close:$data@}}" string that temporary
 	 * wraps values in encoded fields that are later converted into webcomponents.
 	 *
 	 * @see injectTemporaryEditButton()
@@ -121,13 +119,15 @@ class InPage {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $field) && Session::getUsername()) {
 			$data = base64_encode(
-				json_encode(array(
-					'id' => self::$buttonId++,
-					'context' => $Context->get()->origUrl,
-					'field' => $field,
-					'page' => AM_REQUEST,
-					'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
-				), JSON_UNESCAPED_SLASHES)
+				strval(
+					json_encode(array(
+						'id' => self::$buttonId++,
+						'context' => $Context->get()->origUrl,
+						'field' => $field,
+						'page' => AM_REQUEST,
+						'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
+					), JSON_UNESCAPED_SLASHES)
+				)
 			);
 
 			return "{{@open:$data@}}$value{{@close:$data@}}";
@@ -171,12 +171,14 @@ class InPage {
 		);
 
 		$labels = urlencode(
-			json_encode(
-				array_reduce($labelKeys, function ($result, $key): array {
-					$result[$key] = Text::get($key);
+			strval(
+				json_encode(
+					array_reduce($labelKeys, function ($result, $key): array {
+						$result[$key] = Text::get($key);
 
-					return $result;
-				}, array())
+						return $result;
+					}, array())
+				)
 			)
 		);
 
@@ -208,14 +210,14 @@ class InPage {
 		// Within HTML tags.
 		// Like <div data-attr="...">
 		$str = preg_replace_callback('/\<[^>]+\>/is', function ($matches): string {
-			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]);
-		}, $str);
+			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]) ?? '';
+		}, $str) ?? '';
 
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
 		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function ($matches): string {
-			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]);
-		}, $str);
+			return preg_replace(InPage::TEMP_REGEX, '$2', $matches[0]) ?? '';
+		}, $str) ?? '';
 
 		$str = preg_replace_callback(InPage::TEMP_REGEX, function ($matches) {
 			$base64Data = $matches[1];
@@ -234,7 +236,7 @@ class InPage {
 					$placeholder
 				>$value</am-inpage-edit>
 				HTML;
-		}, $str);
+		}, $str) ?? '';
 
 		return $str;
 	}

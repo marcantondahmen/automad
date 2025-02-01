@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2017-2024 by Marc Anton Dahmen
+ * Copyright (c) 2017-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The FileSystem class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2017-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2017-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class FileSystem {
@@ -218,7 +218,7 @@ class FileSystem {
 			$bytes = $bytes / 1204;
 		}
 
-		return round($bytes, 2) . ' ' . $units[$i];
+		return round(intval($bytes), 2) . ' ' . $units[$i];
 	}
 
 	/**
@@ -230,6 +230,11 @@ class FileSystem {
 	public static function getImageExtensionFromMimeType(string $file): string {
 		try {
 			$getimagesize = getimagesize($file);
+
+			if (!$getimagesize) {
+				return '';
+			}
+
 			$type = $getimagesize['mime'];
 
 			switch ($type) {
@@ -345,7 +350,7 @@ class FileSystem {
 	 */
 	public static function isAllowedFileType(string $str): bool {
 		// Remove possible query string
-		$str = preg_replace('/\?.*/', '', $str);
+		$str = preg_replace('/\?.*/', '', $str) ?? '';
 
 		// Get just the basename
 		$str = basename($str);
@@ -469,7 +474,7 @@ class FileSystem {
 	 * @psalm-return ($returnAssocArray is true ? array : object)
 	 */
 	public static function readJson(string $file, bool $returnAssocArray = true): array|object {
-		return json_decode(file_get_contents($file), $returnAssocArray) ?? array();
+		return json_decode(strval(file_get_contents($file)), $returnAssocArray) ?? array();
 	}
 
 	/**
@@ -620,7 +625,7 @@ class FileSystem {
 	 * @return bool
 	 */
 	public static function writeJson(string $file, array $data): bool {
-		return self::write($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+		return self::write($file, strval(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
 	}
 
 	/**

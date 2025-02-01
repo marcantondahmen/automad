@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,7 +36,6 @@
 
 namespace Automad\Core;
 
-use Automad\API\RequestHandler;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -45,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The I18n class is responsible for language detection.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class I18n {
@@ -85,7 +84,7 @@ class I18n {
 		$serverLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 0, 2);
 		$urlLang = self::getLanguageFromUrl(AM_REQUEST);
 		$fallbacks = array_filter(array_merge(PageIndex::read('/'), $available));
-		$lang = substr($fallbacks[0] ?? 'en', 0, 2);
+		$lang = $fallbacks[0] ?? 'en';
 
 		if (AM_REQUEST == '/' && $sessionLang) {
 			$lang = $sessionLang;
@@ -159,7 +158,7 @@ class I18n {
 	 * @return string the language code
 	 */
 	public static function getLanguageFromUrl(string $url): string {
-		return substr(trim($url, '/'), 0, 2);
+		return preg_replace('#^/([^/]+)(/.*)?$#', '$1', $url) ?? '';
 	}
 
 	/**

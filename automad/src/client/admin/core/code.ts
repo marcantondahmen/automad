@@ -26,13 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { CodeLanguage } from '@/admin/types';
+import { CodeEditorData, CodeLanguage } from '@/admin/types';
 import CodeFlask from 'codeflask';
 import { create, CSS, debounce, getLogger, html } from '@/admin/core';
 import { Prism, Languages } from '@/prism/prism';
@@ -51,19 +51,22 @@ export class CodeEditor {
 	/**
 	 * The constructor
 	 *
-	 * @param element
-	 * @param code
-	 * @param language
-	 * @param onChange
-	 * @param placeholder
+	 * @param options
+	 * @param options.element
+	 * @param options.code
+	 * @param options.language
+	 * @param [options.onChange]
+	 * @param [options.placeholder]
+	 * @param [options.readonly]
 	 */
-	constructor(
-		element: HTMLElement,
-		code: string,
-		language: CodeLanguage,
-		onChange: (code: string) => void = () => {},
-		placeholder: string = ''
-	) {
+	constructor({
+		element,
+		code,
+		language,
+		onChange = () => {},
+		placeholder = '',
+		readonly = false,
+	}: CodeEditorData) {
 		element.innerHTML = '';
 
 		this.codeFlask = new CodeFlask(element, {
@@ -74,6 +77,7 @@ export class CodeEditor {
 			handleSelfClosingCharacters: true,
 			tabSize: 2,
 			language,
+			readonly,
 		});
 
 		create(

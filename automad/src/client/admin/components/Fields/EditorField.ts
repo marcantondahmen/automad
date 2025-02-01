@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -57,11 +57,11 @@ import { API } from 'automad-editorjs';
  *
  * @extends BaseFieldComponent
  */
-class EditorFieldComponent extends BaseFieldComponent {
+export class EditorFieldComponent extends BaseFieldComponent {
 	/**
 	 * The editor component.
 	 */
-	private editorJS: EditorJSComponent;
+	editorJS: EditorJSComponent;
 
 	/**
 	 * Don't link the label.
@@ -141,7 +141,7 @@ class EditorFieldComponent extends BaseFieldComponent {
 	async mutate(value: UndoValue): Promise<void> {
 		this.value = value;
 
-		if (value.blocks.length > 0) {
+		if (value.blocks?.length > 0) {
 			await this.editorJS.editor.render(value);
 		} else {
 			this.editorJS.editor.clear();

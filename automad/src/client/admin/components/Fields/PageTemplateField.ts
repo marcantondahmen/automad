@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -215,13 +215,14 @@ export class PageTemplateFieldComponent extends BaseComponent {
 	/**
 	 * The field data.
 	 *
-	 * @param {KeyValueMap} params
-	 * @param {KeyValueMap} params.fields
-	 * @param {string} params.template
-	 * @param {string} params.themeKey
+	 * @param params
+	 * @param params.fields
+	 * @param params.template
+	 * @param params.themeKey
+	 * @param params.readme
 	 */
-	set data({ fields, template, themeKey }: TemplateFieldData) {
-		this.render({ fields, template, themeKey });
+	set data({ fields, template, themeKey, readme }: TemplateFieldData) {
+		this.render({ fields, template, themeKey, readme });
 	}
 
 	/**
@@ -238,35 +239,53 @@ export class PageTemplateFieldComponent extends BaseComponent {
 	 * @param params.fields
 	 * @param params.template
 	 * @param params.themeKey
+	 * @param params.readme
 	 */
-	private render({ fields, template, themeKey }: TemplateFieldData): void {
+	private render({
+		fields,
+		template,
+		themeKey,
+		readme,
+	}: TemplateFieldData): void {
 		const { buttonLabel, buttonIcon, selectedTemplate } = themeStatus({
 			fields,
 			template,
 			themeKey,
+			readme,
 		});
 
-		create(
-			'div',
-			[CSS.field],
-			{},
-			this,
-			html`
-				<label class="${CSS.fieldLabel}"
-					>${App.text('pageTemplate')}</label
-				>
-				<am-modal-toggle
-					${Attr.modal}="#am-page-template-modal"
-					class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.cursorPointer}"
-				>
-					<am-icon-text
-						${Attr.icon}="${buttonIcon}"
-						${Attr.text}="${buttonLabel}"
-					></am-icon-text>
-					<i class="bi bi-pen"></i>
-				</am-modal-toggle>
-			`
-		);
+		this.innerHTML = html`
+			<label class="${CSS.fieldLabel}">${App.text('pageTemplate')}</label>
+			<am-modal-toggle
+				${Attr.modal}="#am-page-template-modal"
+				class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.cursorPointer}"
+			>
+				<am-icon-text
+					${Attr.icon}="${buttonIcon}"
+					${Attr.text}="${buttonLabel}"
+				></am-icon-text>
+				<i class="bi bi-pen"></i>
+			</am-modal-toggle>
+		`;
+
+		if (readme) {
+			const readmeLink = create(
+				'a',
+				[],
+				{ href: readme, target: '_blank' },
+				this
+			);
+
+			create(
+				'am-icon-text',
+				[],
+				{
+					[Attr.icon]: 'file-earmark-text',
+					[Attr.text]: App.text('themeReadme'),
+				},
+				readmeLink
+			);
+		}
 
 		create(
 			'am-modal',

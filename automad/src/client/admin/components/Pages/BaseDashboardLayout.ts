@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -52,12 +52,23 @@ export abstract class BaseDashboardLayoutComponent extends BaseLayoutComponent {
 	 */
 	protected partials: Partials = {
 		main: this.renderMainPartial(),
+		publishForm: this.renderPublishForm(),
 	};
 
 	/**
 	 * Render the main partial.
 	 *
 	 * @returns the rendered HTML
+	 * @abstract
 	 */
 	protected abstract renderMainPartial(): string;
+
+	/**
+	 * Render an optional publish form.
+	 *
+	 * @returns the rendered HTML
+	 */
+	protected renderPublishForm(): string {
+		return '';
+	}
 }

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2024 by Marc Anton Dahmen
+ * Copyright (c) 2013-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * All logged information will be stored in $buffer as JS's console.log() items.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Debug {
@@ -94,7 +94,7 @@ class Debug {
 		$html = '<script type="text/javascript">' . "\n";
 
 		foreach (self::$buffer as $key => $value) {
-			$html .= 'console.log(' . json_encode(array($key => $value)) . ');' . "\n";
+			$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');' . "\n";
 		}
 
 		$html .= '</script>' . "\n";

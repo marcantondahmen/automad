@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-alpha.16",
+  "version": "2.0.0-alpha.17",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -17,8 +17,8 @@
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket 2&>/dev/null",
     "jest": "jest",
     "jest:watch": "jest --watch",
-    "phpunit": "phpunit && phpunit -c phpunit-i18n.xml",
-    "psalm": "psalm --clear-global-cache && psalm --no-cache --threads=1",
+    "phpunit": "bash bin/phpunit.sh",
+    "psalm": "bash bin/psalm.sh",
     "test": "npm run phpunit && npm run psalm && npm run jest"
   },
   "devDependencies": {

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The links model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Links {
@@ -63,7 +63,7 @@ class Links {
 		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
 		$replaceValue = $new;
 
-		$Search = new Search($searchValue, true, false, $Automad->getCollection(), $Automad->Shared);
+		$Search = new Search($searchValue, true, false, $Automad->getPages(), $Automad->Shared);
 		$fileResultsArray = $Search->searchPerFile();
 		$fileFieldsArray = array();
 

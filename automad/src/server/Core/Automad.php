@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2024 by Marc Anton Dahmen
+ * Copyright (c) 2013-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -38,6 +38,7 @@ namespace Automad\Core;
 
 use Automad\API\RequestHandler;
 use Automad\Engine\Delimiters;
+use Automad\Models\ComponentCollection;
 use Automad\Models\Context;
 use Automad\Models\Filelist;
 use Automad\Models\Page;
@@ -53,10 +54,15 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * A Automad object is the "main" object. It consists of many single Page objects, the Shared object and holds also additional data like the Filelist and Pagelist objects.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Automad {
+	/**
+	 * The components collection.
+	 */
+	public ComponentCollection $ComponentCollection;
+
 	/**
 	 * Automad's Context object.
 	 *
@@ -70,15 +76,6 @@ class Automad {
 	 * The Shared object is passed also to all Page objects to allow for access of global data from within a page without needing access to the full Automad object.
 	 */
 	public Shared $Shared;
-
-	/**
-	 * Array holding all the site's pages and the related data.
-	 *
-	 * To access the data for a specific page, use the url as key: $this->collection['url'].
-	 *
-	 * @var array<Page>
-	 */
-	private array $collection = array();
 
 	/**
 	 * Automad's Filelist object
@@ -95,16 +92,24 @@ class Automad {
 	private ?Pagelist $Pagelist = null;
 
 	/**
+	 * Array holding all the site's pages and the related data.
+	 *
+	 * @var array<Page>
+	 */
+	private array $pages = array();
+
+	/**
 	 * Set collection and Shared properties and create the context object with the currently requested page.
 	 *
-	 * @param array<Page> $collection
+	 * @param array<Page> $pages
 	 * @param Shared $Shared
 	 */
-	public function __construct(array $collection, Shared $Shared) {
-		$this->collection = $collection;
+	public function __construct(array $pages, Shared $Shared) {
+		$this->pages = $pages;
 		$this->Shared = $Shared;
+		$this->ComponentCollection = new ComponentCollection();
 
-		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
+		Debug::log(array('Shared' => $this->Shared, 'Pages' => $this->pages), 'New instance created');
 
 		$this->Context = new Context($this->getRequestedPage());
 	}
@@ -115,7 +120,7 @@ class Automad {
 	 * @return array $itemsToCache
 	 */
 	public function __sleep(): array {
-		$itemsToCache = array('collection', 'Shared');
+		$itemsToCache = array('pages', 'Shared', 'ComponentCollection');
 		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
 
 		return $itemsToCache;
@@ -125,7 +130,7 @@ class Automad {
 	 * Set new Context after being restored from cache.
 	 */
 	public function __wakeup(): void {
-		Debug::log(get_object_vars($this), 'Automad object got unserialized');
+		Debug::log(get_object_vars($this), 'Automad object was unserialized');
 		$this->Context = new Context($this->getRequestedPage());
 	}
 
@@ -164,15 +169,6 @@ class Automad {
 	}
 
 	/**
-	 * Return $collection array.
-	 *
-	 * @return array<string, Page> $this->collection
-	 */
-	public function getCollection(): array {
-		return $this->collection;
-	}
-
-	/**
 	 * Return Automad's instance of the Filelist class and create instance when accessed for the first time.
 	 *
 	 * @return Filelist Filelist object
@@ -193,7 +189,7 @@ class Automad {
 	public function getNavigationMetaData(): array {
 		$pages = array();
 
-		foreach ($this->collection as $Page) {
+		foreach ($this->pages as $Page) {
 			$pages[$Page->origUrl] = array(
 				'title' => $Page->get(Fields::TITLE),
 				'index' => $Page->index,
@@ -216,8 +212,8 @@ class Automad {
 	 * @return Page|null Page
 	 */
 	public function getPage(string $url): ?Page {
-		if (array_key_exists($url, $this->collection)) {
-			return $this->collection[$url];
+		if (array_key_exists($url, $this->pages)) {
+			return $this->pages[$url];
 		}
 
 		return null;
@@ -230,10 +226,19 @@ class Automad {
 	 */
 	public function getPagelist(): Pagelist {
 		if (!$this->Pagelist) {
-			$this->Pagelist = new Pagelist($this->collection, $this->Context);
+			$this->Pagelist = new Pagelist($this->pages, $this->Context);
 		}
 
 		return $this->Pagelist;
+	}
+
+	/**
+	 * Return array with all pages.
+	 *
+	 * @return array<string, Page>
+	 */
+	public function getPages(): array {
+		return $this->pages;
 	}
 
 	/**
@@ -261,11 +266,22 @@ class Automad {
 			$template = Str::stripStart($file, AM_BASE_DIR . AM_DIR_PACKAGES);
 			$title = $Automad->Context->get()->get(Fields::TITLE);
 			$url = $Automad->Context->get()->get(Fields::URL);
-			$output = "<h1>Template $template for page $title ($url) is missing!</h1><h2>Make sure you have selected an existing template for this page!</h2>";
+			$dashboard = AM_BASE_URL . AM_PAGE_DASHBOARD;
+			$output = '';
+			Error::exit(
+				'Template missing!',
+				<<< HTML
+				Template <code>$template</code> for page <strong>$title</strong> <code>$url</code> 
+				is missing! Make sure you have selected an existing template for this page!
+				<br>
+				<br>
+				<a href="$dashboard">Visit the dashboard</a>
+				HTML
+			);
 		}
 
 		// Strip comments before return.
-		return preg_replace('/(' . preg_quote(Delimiters::COMMENT_OPEN) . '.*?' . preg_quote(Delimiters::COMMENT_CLOSE) . ')/s', '', $output);
+		return preg_replace('/(' . preg_quote(Delimiters::COMMENT_OPEN) . '.*?' . preg_quote(Delimiters::COMMENT_CLOSE) . ')/s', '', $output ? $output : '') ?? '';
 	}
 
 	/**

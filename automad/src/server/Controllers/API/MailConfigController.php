@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -38,6 +38,7 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Cache;
+use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Session;
 use Automad\Core\Text;
@@ -51,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The email config controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class MailConfigController {
@@ -122,10 +123,13 @@ class MailConfigController {
 			return $Response->setError(Text::get('systemMailSendTestNoEmail'));
 		}
 
-		if (Mail::send($to, 'Automad Mail Config Test', '<h1>Success</h1>')) {
+		$Messenger = new Messenger();
+		$success = Mail::send($to, 'Automad Mail Config Test', '<h1>Success</h1>', null, $Messenger);
+
+		if ($success) {
 			return $Response->setSuccess(Text::get('systemMailSendTestSuccess') . ' ' . $to);
 		}
 
-		return $Response->setError(Text::get('systemMailSendTestError'));
+		return $Response->setError($Messenger->getError());
 	}
 }

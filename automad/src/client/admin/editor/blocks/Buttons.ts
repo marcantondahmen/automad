@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -139,52 +139,64 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 		this.wrapper.classList.add(CSS.flex);
 		this.wrapper.innerHTML = html`
 			<div class="${CSS.editorBlockButtons}">
-				<div>
-					<span class="__layout-edit ${CSS.editorBlockButtonsEdit}">
-						<am-icon-text
-							${Attr.icon}="arrow-left-right"
-							${Attr.text}="${App.text('buttonsBlockAlignment')}"
-						></am-icon-text>
-					</span>
-				</div>
+				${this.readOnly
+					? ''
+					: html`
+							<div>
+								<span
+									class="__layout-edit ${CSS.editorBlockButtonsEdit}"
+								>
+									<am-icon-text
+										${Attr.icon}="arrow-left-right"
+										${Attr.text}="${App.text(
+											'buttonsBlockAlignment'
+										)}"
+									></am-icon-text>
+								</span>
+							</div>
+						`}
 				<div class="__flex ${CSS.flex}">
 					<div
 						class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap} ${CSS.flexCenter}"
 					>
 						<div class="__primary"></div>
-						<span
-							class="__primary-edit ${CSS.editorBlockButtonsEdit}"
-						>
-							<am-icon-text
-								${Attr.icon}="sliders"
-								${Attr.text}="${App.text(
-									'buttonsBlockSettings'
-								)}"
-							></am-icon-text>
-						</span>
+						${this.readOnly
+							? ''
+							: html`
+									<span
+										class="__primary-edit ${CSS.editorBlockButtonsEdit}"
+									>
+										<am-icon-text
+											${Attr.icon}="sliders"
+											${Attr.text}="${App.text(
+												'buttonsBlockSettings'
+											)}"
+										></am-icon-text>
+									</span>
+								`}
 					</div>
 					<div
 						class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap} ${CSS.flexCenter}"
 					>
 						<div class="__secondary"></div>
-						<span
-							class="__secondary-edit ${CSS.editorBlockButtonsEdit}"
-						>
-							<am-icon-text
-								${Attr.icon}="sliders"
-								${Attr.text}="${App.text(
-									'buttonsBlockSettings'
-								)}"
-							></am-icon-text>
-						</span>
+						${this.readOnly
+							? ''
+							: html`
+									<span
+										class="__secondary-edit ${CSS.editorBlockButtonsEdit}"
+									>
+										<am-icon-text
+											${Attr.icon}="sliders"
+											${Attr.text}="${App.text(
+												'buttonsBlockSettings'
+											)}"
+										></am-icon-text>
+									</span>
+								`}
 					</div>
 				</div>
 			</div>
 		`;
-
-		const buttonLayout = query('.__layout-edit', this.wrapper);
-		const buttonPrimary = query('.__primary-edit', this.wrapper);
-		const buttonSecondary = query('.__secondary-edit', this.wrapper);
 
 		this.flex = query('.__flex', this.wrapper);
 		this.previews = { primary: null, secondary: null };
@@ -195,19 +207,25 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 		this.renderButton('secondary');
 		this.updateLayout();
 
-		this.api.listeners.on(
-			buttonLayout,
-			'click',
-			this.renderLayoutModal.bind(this)
-		);
+		if (!this.readOnly) {
+			const buttonLayout = query('.__layout-edit', this.wrapper);
+			const buttonPrimary = query('.__primary-edit', this.wrapper);
+			const buttonSecondary = query('.__secondary-edit', this.wrapper);
 
-		this.api.listeners.on(buttonPrimary, 'click', () => {
-			this.renderButtonModal('primary');
-		});
+			this.api.listeners.on(
+				buttonLayout,
+				'click',
+				this.renderLayoutModal.bind(this)
+			);
 
-		this.api.listeners.on(buttonSecondary, 'click', () => {
-			this.renderButtonModal('secondary');
-		});
+			this.api.listeners.on(buttonPrimary, 'click', () => {
+				this.renderButtonModal('primary');
+			});
+
+			this.api.listeners.on(buttonSecondary, 'click', () => {
+				this.renderButtonModal('secondary');
+			});
+		}
 
 		return this.wrapper;
 	}
@@ -227,6 +245,11 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 */
 	renderButton(prefix: 'primary' | 'secondary'): void {
 		const text = this.data[`${prefix}Text`];
+
+		if (this.readOnly && text.length == 0) {
+			return;
+		}
+
 		const styleProps: ButtonsBlockButtonStyle = this.data[`${prefix}Style`];
 		const style = Object.keys(styleProps).reduce(
 			(acc, prop: keyof ButtonsBlockButtonStyle) => {
@@ -245,7 +268,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			{
 				style,
 				name: `${prefix}Text`,
-				contenteditable: 'true',
+				contenteditable: this.readOnly ? 'false' : 'true',
 				placeholder: App.text('buttonsBlockPlaceholder'),
 			},
 			null,

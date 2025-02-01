@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -262,24 +262,8 @@ export class PageDataFormComponent extends FormComponent {
 			fields,
 			template,
 			themeKey: App.reservedFields.THEME,
+			readme,
 		};
-
-		const readmeLink = create(
-			'a',
-			[],
-			{ href: readme, target: '_blank' },
-			templateField
-		);
-
-		create(
-			'am-icon-text',
-			[],
-			{
-				[Attr.icon]: 'file-earmark-text',
-				[Attr.text]: App.text('themeReadme'),
-			},
-			readmeLink
-		);
 
 		createMainField(
 			FieldTag.syntaxSelect,

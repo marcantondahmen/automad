@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2017-2024 by Marc Anton Dahmen
+ * Copyright (c) 2017-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * Those variables are created by Automad at runtime and independent from the Context and Shared objects.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2017-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2017-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Runtime {

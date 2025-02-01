@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -76,6 +76,9 @@ import './components/File/Upload';
 
 import './components/Forms/FileCollection/ListForm';
 import './components/Forms/FileCollection/Submit';
+import './components/Forms/Publish/ComponentPublishForm';
+import './components/Forms/Publish/PagePublishForm';
+import './components/Forms/Publish/SharedPublishForm';
 import './components/Forms/ConfigFileForm';
 import './components/Forms/DeleteUsersForm';
 import './components/Forms/Form';
@@ -84,10 +87,10 @@ import './components/Forms/HistoryModalForm';
 import './components/Forms/InPageForm';
 import './components/Forms/MailConfigForm';
 import './components/Forms/PageDataForm';
-import './components/Forms/PublishForm';
 import './components/Forms/ResetPasswordForm';
 import './components/Forms/SearchForm';
 import './components/Forms/SetupForm';
+import './components/Forms/ComponentCollectionForm';
 import './components/Forms/SharedDataForm';
 import './components/Forms/Submit';
 import './components/Forms/SystemUpdateForm';
@@ -124,6 +127,7 @@ import './components/PackageManager/PackageCard';
 import './components/PackageManager/PackageList';
 import './components/PackageManager/UpdateAllPackages';
 
+import './components/Pages/Components';
 import './components/Pages/Home';
 import './components/Pages/InPage';
 import './components/Pages/Login';
@@ -161,6 +165,7 @@ import './components/Autocomplete';
 import './components/AutocompleteUrl';
 import './components/Checkbox';
 import './components/CustomIconCheckbox';
+import './components/ComponentEditor';
 import './components/Copy';
 import './components/DashboardThemeToggle';
 import './components/Dropdown';

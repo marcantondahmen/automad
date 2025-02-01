@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -42,7 +42,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * A simple cURL wrapper class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Fetch {
@@ -58,6 +58,10 @@ class Fetch {
 
 		$fp = fopen($file, 'w+');
 
+		if (!$fp) {
+			return false;
+		}
+
 		$options = array(
 			CURLOPT_TIMEOUT => 300,
 			CURLOPT_FILE => $fp,
@@ -67,6 +71,11 @@ class Fetch {
 		);
 
 		$curl = curl_init();
+
+		if (!$curl) {
+			return false;
+		}
+
 		curl_setopt_array($curl, $options);
 		curl_exec($curl);
 
@@ -101,6 +110,11 @@ class Fetch {
 		);
 
 		$curl = curl_init();
+
+		if (!$curl) {
+			return '';
+		}
+
 		curl_setopt_array($curl, $options);
 		$output = curl_exec($curl);
 

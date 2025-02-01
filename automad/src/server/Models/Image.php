@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Image controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Image {
@@ -70,7 +70,7 @@ class Image {
 			return;
 		}
 
-		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
+		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64) ?? '';
 		$data = base64_decode($data);
 
 		$name = $path . Str::slug($name) . '.' . $extension;

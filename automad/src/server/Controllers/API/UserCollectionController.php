@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2024 by Marc Anton Dahmen
+ * Copyright (c) 2016-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The user collection class provides all methods for creating and loading user accounts.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class UserCollectionController {

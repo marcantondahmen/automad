@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2024 by Marc Anton Dahmen
+ * Copyright (c) 2013-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * A Pagelist object represents a set of Page objects (matching certain criterias).
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Pagelist {
@@ -188,7 +188,7 @@ class Pagelist {
 
 		// Only log debug info in case $options is not empty.
 		if (!empty($options)) {
-			Debug::log(array('Options' => $options, 'Current Config' => $configArray), json_encode($options, JSON_UNESCAPED_SLASHES));
+			Debug::log(array('Options' => $options, 'Current Config' => $configArray), strval(json_encode($options, JSON_UNESCAPED_SLASHES)));
 		}
 
 		return $configArray;

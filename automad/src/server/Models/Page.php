@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2024 by Marc Anton Dahmen
+ * Copyright (c) 2013-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -38,7 +38,6 @@ namespace Automad\Models;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
@@ -48,6 +47,7 @@ use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\History\History;
+use Automad\Stores\DataStore;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -58,7 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * Basically the Automad object consists of many Page objects.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Page {
@@ -277,7 +277,7 @@ class Page {
 	public static function findByPath(string $path): ?Page {
 		$Automad = Automad::fromCache();
 
-		foreach ($Automad->getCollection() as $Page) {
+		foreach ($Automad->getPages() as $Page) {
 			if ($Page->path == $path) {
 				return $Page;
 			}

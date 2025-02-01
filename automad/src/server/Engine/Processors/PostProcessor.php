@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -54,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The post-processor class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PostProcessor {
@@ -126,10 +126,10 @@ class PostProcessor {
 					return $matches[0];
 				}
 
-				return $matches[0] . '?m=' . filemtime($file);
+				return $matches[0] . '?m=' . intval(filemtime($file));
 			},
 			$str
-		);
+		) ?? '';
 	}
 
 	/**
@@ -221,7 +221,7 @@ class PostProcessor {
 				return $match[0];
 			},
 			$str
-		);
+		) ?? '';
 	}
 
 	/**
@@ -236,8 +236,8 @@ class PostProcessor {
 		}
 
 		// Remove existing lang attribute.
-		$output = preg_replace('/^(\s*(?:<[^>]+>\s*)?<html\s[^>]*)(lang="\w+")([^>]*>)/i', '$1$3', $output);
+		$output = preg_replace('/^(\s*(?:<[^>]+>\s*)?<html\s[^>]*)(lang="\w+")([^>]*>)/i', '$1$3', $output) ?? '';
 
-		return preg_replace('/^(\s*(?:<[^>]+>\s*)?<html)/', '$1 lang="' . I18n::getLanguageFromUrl(AM_REQUEST) . '"', $output);
+		return preg_replace('/^(\s*(?:<[^>]+>\s*)?<html)/', '$1 lang="' . I18n::getLanguageFromUrl(AM_REQUEST) . '"', $output) ?? '';
 	}
 }

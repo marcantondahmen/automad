@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -215,6 +215,10 @@ export const createCustomizationFields = (
  * @returns the generated ID
  */
 export const createIdFromField = (key: string): string => {
+	if (!key) {
+		return;
+	}
+
 	return `am-field__${key.replace(/\s+/g, '_')}`;
 };
 

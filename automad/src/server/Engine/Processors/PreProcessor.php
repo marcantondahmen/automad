@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,7 +37,6 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Engine\Delimiters;
-use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -45,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The pre-processor class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PreProcessor {
@@ -85,7 +84,7 @@ class PreProcessor {
 			}
 
 			return $return;
-		}, $str);
+		}, $str) ?? '';
 	}
 
 	/**
@@ -95,8 +94,8 @@ class PreProcessor {
 	 * @return string The processed string
 	 */
 	public static function stripWhitespace(string $str): string {
-		$str = preg_replace('/\s*(' . preg_quote(Delimiters::STATEMENT_OPEN) . ')~/is', '$1', $str);
-		$str = preg_replace('/~(' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
+		$str = preg_replace('/\s*(' . preg_quote(Delimiters::STATEMENT_OPEN) . ')~/is', '$1', $str) ?? '';
+		$str = preg_replace('/~(' . preg_quote(Delimiters::STATEMENT_CLOSE) . ')\s*/is', '$1', $str) ?? '';
 
 		return $str;
 	}

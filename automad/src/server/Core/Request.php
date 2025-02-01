@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2024 by Marc Anton Dahmen
+ * Copyright (c) 2020-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -42,7 +42,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Request class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2020-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Request {
@@ -84,10 +84,10 @@ class Request {
 		} else {
 			// The requested page gets passed 'index.php/page/path'.
 			// That can be the case if rewriting is disabled and AM_BASE_INDEX ends with '/index.php'.
-			if (isset($_SERVER['PATH_INFO'])) {
+			if (!empty($_SERVER['PATH_INFO'])) {
 				$request = $_SERVER['PATH_INFO'];
 				Debug::log('Getting request from PATH_INFO');
-			} elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
+			} elseif (!empty($_SERVER['ORIG_PATH_INFO'])) {
 				$request = $_SERVER['ORIG_PATH_INFO'];
 				Debug::log('Getting request from ORIG_PATH_INFO');
 			} elseif (isset($_SERVER['REQUEST_URI'])) {

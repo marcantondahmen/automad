@@ -27,29 +27,30 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Stores;
 
+use Automad\Core\FileSystem;
+use Automad\Core\PublicationState;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The DataStore class handles the reading of JSON formatted data files.
+ * A store class handles the reading of JSON formatted data files.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2024-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class DataStore {
+abstract class AbstractStore {
 	const DATE_FORMAT = 'c';
-	const FILENAME = 'data';
 
 	/**
 	 * The full data store content.
@@ -64,13 +65,10 @@ class DataStore {
 	/**
 	 * The constructor.
 	 *
-	 * @param string|null $pagePath
+	 * @param ?string $optionalPath
 	 */
-	public function __construct(?string $pagePath = null) {
-		$path = !is_null($pagePath) ? AM_DIR_PAGES . $pagePath : AM_DIR_SHARED;
-		$path = rtrim(AM_BASE_DIR . $path, '/') . '/';
-
-		$this->file = $path . self::FILENAME;
+	public function __construct(?string $optionalPath = null) {
+		$this->file = $this->resolvePath($optionalPath);
 
 		if (is_readable($this->file)) {
 			$this->data = FileSystem::readJson($this->file, true);
@@ -139,7 +137,7 @@ class DataStore {
 	 */
 	public function publish(): bool {
 		$draft = $this->getState(PublicationState::DRAFT);
-		$draft[Fields::TIME_LAST_PUBLISHED] = date(DataStore::DATE_FORMAT);
+		$draft[Fields::TIME_LAST_PUBLISHED] = date(self::DATE_FORMAT);
 
 		$this->setState(PublicationState::DRAFT, array());
 		$this->setState(PublicationState::PUBLISHED, $draft);
@@ -161,9 +159,9 @@ class DataStore {
 	 *
 	 * @param PublicationState $state
 	 * @param array $data
-	 * @return DataStore
+	 * @return AbstractStore
 	 */
-	public function setState(PublicationState $state, array $data): DataStore {
+	public function setState(PublicationState $state, array $data): AbstractStore {
 		$data = array_map(function ($value) {
 			if (is_string($value)) {
 				return trim($value);
@@ -186,4 +184,12 @@ class DataStore {
 
 		return $this;
 	}
+
+	/**
+	 * This method is required to set the actual file path for the store on disk.
+	 *
+	 * @param ?string $optionalPath
+	 * @return string
+	 */
+	abstract protected function resolvePath(?string $optionalPath = null): string;
 }

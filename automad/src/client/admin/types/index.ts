@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -38,6 +38,8 @@ export * from './editor/blocks';
 export * from './editor/editor';
 export * from './editor/inline';
 export * from './editor/tunes';
+export * from './code';
+export * from './components';
 export * from './field';
 export * from './package';
 export * from './page';
@@ -47,8 +49,12 @@ export * from './switcher';
 export * from './system';
 export * from './undo';
 
-import { KeyValueMap } from '@/common';
-import { supportedLanguages } from '@/prism/prism';
+import {
+	KeyValueMap,
+	PageController,
+	ComponentController,
+	SharedController,
+} from '@/common';
 import { PageMetaData, InputElement } from '.';
 
 declare global {
@@ -84,8 +90,6 @@ export interface BindingOptions {
 	initial?: any;
 	onChange?: (value: string) => void;
 }
-
-export type CodeLanguage = (typeof supportedLanguages)[number];
 
 export interface DeduplicationSettings {
 	getFormData: (element: HTMLElement) => KeyValueMap;
@@ -156,6 +160,19 @@ export interface PackageDirectoryItems {
 export interface Partials {
 	[key: string]: string;
 }
+
+type PublishController =
+	| PageController
+	| SharedController
+	| ComponentController;
+
+export interface PublishControllers {
+	state: PublishController;
+	discard: PublishController;
+	publish: PublishController;
+}
+
+export type PublicationState = 'draft' | 'published';
 
 export interface SelectComponentOption {
 	value: string | number;

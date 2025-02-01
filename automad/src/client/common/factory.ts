@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -58,7 +58,9 @@ export const create = (
 	});
 
 	for (const [key, value] of Object.entries(attributes)) {
-		element.setAttribute(key, value);
+		if (typeof value !== 'undefined') {
+			element.setAttribute(key, value);
+		}
 	}
 
 	if (parent) {

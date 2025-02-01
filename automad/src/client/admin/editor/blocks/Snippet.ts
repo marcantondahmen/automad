@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -115,13 +115,15 @@ export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 
 		this.renderForm(query('.__card', this.wrapper));
 
-		listen(
-			this.wrapper,
-			'change input',
-			debounce(() => {
-				this.blockAPI.dispatchChange();
-			}, 50)
-		);
+		if (!this.readOnly) {
+			listen(
+				this.wrapper,
+				'change input',
+				debounce(() => {
+					this.blockAPI.dispatchChange();
+				}, 50)
+			);
+		}
 
 		return this.wrapper;
 	}
@@ -132,6 +134,8 @@ export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 	 * @param container
 	 */
 	private renderForm(container: HTMLElement): void {
+		const disabled = this.readOnly ? { disabled: '' } : {};
+		const disabledAttr = this.readOnly ? 'disabled=""' : '';
 		const files = App.files.snippets.reduce(
 			(res: SelectComponentOption[], value) => [
 				...res,
@@ -143,16 +147,31 @@ export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 		const form1 = create('div', [CSS.cardForm], {}, container);
 		const form2 = create('div', [CSS.cardForm], {}, container);
 
-		createField(FieldTag.textarea, form1, {
-			key: uniqueId(),
-			name: 'snippet',
-			value: this.data.snippet,
-			label: App.text('snippetBlockSnippet'),
-		});
+		createField(
+			FieldTag.textarea,
+			form1,
+			{
+				key: uniqueId(),
+				name: 'snippet',
+				value: this.data.snippet,
+				label: App.text('snippetBlockSnippet'),
+			},
+			[],
+			disabled
+		);
 
 		createSelectField(
 			App.text('snippetBlockFile'),
-			createSelect(files, this.data.file, null, 'file'),
+			createSelect(
+				files,
+				this.data.file,
+				null,
+				'file',
+				null,
+				'',
+				[],
+				disabled
+			),
 			form2
 		);
 	}

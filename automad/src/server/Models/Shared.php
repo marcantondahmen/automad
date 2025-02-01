@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2024 by Marc Anton Dahmen
+ * Copyright (c) 2016-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -38,15 +38,14 @@ namespace Automad\Models;
 
 use Automad\API\RequestHandler;
 use Automad\Core\Cache;
-use Automad\Core\DataStore;
 use Automad\Core\Debug;
 use Automad\Core\Error;
-use Automad\Core\I18n;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
 use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\Core\Value;
+use Automad\Stores\DataStore;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -55,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Shared class represents a collection of all shared site-wide data.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Shared {
@@ -80,9 +79,6 @@ class Shared {
 			$defaults,
 			$DataStore->getState(empty(Session::getUsername())) ?? array()
 		);
-
-		// Merge values of a localized home page into shared.
-		$this->getI18nOverrides();
 
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
@@ -179,22 +175,5 @@ class Shared {
 	 */
 	public function set(string $key, $value): void {
 		$this->data[$key] = $value;
-	}
-
-	/**
-	 * Merge data with values of a localized home page in case the language router is enabled.
-	 */
-	private function getI18nOverrides(): void {
-		if (!AM_I18N_ENABLED) {
-			return;
-		}
-
-		$I18n = I18n::get();
-		$lang = $I18n->getLanguage();
-
-		$DataStore = new DataStore("/$lang/");
-		$data = $DataStore->getState(empty(Session::getUsername())) ?? array();
-
-		$this->data = array_merge($this->data, $data);
 	}
 }

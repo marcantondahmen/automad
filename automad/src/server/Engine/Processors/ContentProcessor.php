@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The content processor class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class ContentProcessor {
@@ -120,8 +120,11 @@ class ContentProcessor {
 		if (FileUtils::fileIsImage($file)) {
 			// The Original file size.
 			$imgSize = getimagesize(AM_BASE_DIR . $file);
-			$this->Runtime->set(Fields::WIDTH, $imgSize[0]);
-			$this->Runtime->set(Fields::HEIGHT, $imgSize[1]);
+
+			if ($imgSize) {
+				$this->Runtime->set(Fields::WIDTH, $imgSize[0]);
+				$this->Runtime->set(Fields::HEIGHT, $imgSize[1]);
+			}
 
 			// If any options are given, create a resized version of the image.
 			if (!empty($options)) {
@@ -192,7 +195,7 @@ class ContentProcessor {
 					return $pair['key'] . ':' . $pair['value'];
 				},
 				$str
-			);
+			) ?? '';
 		}
 
 		return preg_replace_callback(
@@ -225,7 +228,7 @@ class ContentProcessor {
 									$parameter = filter_var($parameter, FILTER_VALIDATE_BOOLEAN);
 								} else {
 									// Remove outer quotes and strip slashes.
-									$parameter = preg_replace('/^([\'"])(.*)\1$/s', '$2', $parameter);
+									$parameter = preg_replace('/^([\'"])(.*)\1$/s', '$2', $parameter) ?? '';
 									$parameter = stripcslashes($this->processVariables($parameter));
 								}
 
@@ -269,7 +272,7 @@ class ContentProcessor {
 				return $value;
 			},
 			$str
-		);
+		) ?? '';
 	}
 
 	/**

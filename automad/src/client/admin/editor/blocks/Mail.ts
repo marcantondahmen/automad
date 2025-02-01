@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -42,7 +42,7 @@ import {
 	html,
 	uniqueId,
 } from '@/admin/core';
-import { MailBlockData } from '@/admin/types';
+import { KeyValueMap, MailBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export class MailBlock extends BaseBlock<MailBlockData> {
@@ -95,6 +95,8 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 	 * @return the rendered element
 	 */
 	render(): HTMLElement {
+		const disabled: KeyValueMap = this.readOnly ? { disabled: '' } : {};
+
 		this.wrapper.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 		this.wrapper.innerHTML = html`
 			<span class="${CSS.textMuted} ${CSS.userSelectNone}">
@@ -106,7 +108,9 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 			<div class="${CSS.card}">
 				<div class="${CSS.cardForm}">
 					${createField(
-						FieldTag.email,
+						// This must be a standard input in order to
+						// prevent editorjs selection error.
+						FieldTag.input,
 						null,
 						{
 							name: 'to',
@@ -119,58 +123,99 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 						{
 							[Attr.error]: App.text('emailRequiredError'),
 							required: '',
+							...disabled,
 						}
 					).outerHTML}
 					<div class="${CSS.grid} ${CSS.gridAuto}">
-						${createField(FieldTag.input, null, {
-							name: 'labelAddress',
-							key: uniqueId(),
-							label: App.text('mailBlockAddressFieldLabel'),
-							value: this.data.labelAddress,
-							placeholder: App.text(
-								'mailBlockDefaultLabelAddress'
-							),
-						}).outerHTML}
-						${createField(FieldTag.input, null, {
-							name: 'labelSubject',
-							key: uniqueId(),
-							label: App.text('mailBlockSubjectFieldLabel'),
-							value: this.data.labelSubject,
-							placeholder: App.text(
-								'mailBlockDefaultLabelSubject'
-							),
-						}).outerHTML}
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								name: 'labelAddress',
+								key: uniqueId(),
+								label: App.text('mailBlockAddressFieldLabel'),
+								value: this.data.labelAddress,
+								placeholder: App.text(
+									'mailBlockDefaultLabelAddress'
+								),
+							},
+							[],
+							disabled
+						).outerHTML}
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								name: 'labelSubject',
+								key: uniqueId(),
+								label: App.text('mailBlockSubjectFieldLabel'),
+								value: this.data.labelSubject,
+								placeholder: App.text(
+									'mailBlockDefaultLabelSubject'
+								),
+							},
+							[],
+							disabled
+						).outerHTML}
 					</div>
 					<div class="${CSS.grid} ${CSS.gridAuto}">
-						${createField(FieldTag.input, null, {
-							name: 'labelBody',
-							key: uniqueId(),
-							label: App.text('mailBlockBodyFieldLabel'),
-							value: this.data.labelBody,
-							placeholder: App.text('mailBlockDefaultLabelBody'),
-						}).outerHTML}
-						${createField(FieldTag.input, null, {
-							name: 'labelSend',
-							key: uniqueId(),
-							label: App.text('mailBlockSendButtonLabel'),
-							value: this.data.labelSend,
-							placeholder: App.text('mailBlockDefaultLabelSend'),
-						}).outerHTML}
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								name: 'labelBody',
+								key: uniqueId(),
+								label: App.text('mailBlockBodyFieldLabel'),
+								value: this.data.labelBody,
+								placeholder: App.text(
+									'mailBlockDefaultLabelBody'
+								),
+							},
+							[],
+							disabled
+						).outerHTML}
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								name: 'labelSend',
+								key: uniqueId(),
+								label: App.text('mailBlockSendButtonLabel'),
+								value: this.data.labelSend,
+								placeholder: App.text(
+									'mailBlockDefaultLabelSend'
+								),
+							},
+							[],
+							disabled
+						).outerHTML}
 					</div>
-					${createField(FieldTag.textarea, null, {
-						name: 'error',
-						key: uniqueId(),
-						label: App.text('mailBlockError'),
-						value: this.data.error,
-						placeholder: App.text('mailBlockDefaultError'),
-					}).outerHTML}
-					${createField(FieldTag.textarea, null, {
-						name: 'success',
-						key: uniqueId(),
-						label: App.text('mailBlockSuccess'),
-						value: this.data.success,
-						placeholder: App.text('mailBlockDefaultSuccess'),
-					}).outerHTML}
+					${createField(
+						FieldTag.textarea,
+						null,
+						{
+							name: 'error',
+							key: uniqueId(),
+							label: App.text('mailBlockError'),
+							value: this.data.error,
+							placeholder: App.text('mailBlockDefaultError'),
+						},
+						[],
+						disabled
+					).outerHTML}
+					${createField(
+						FieldTag.textarea,
+						null,
+						{
+							name: 'success',
+							key: uniqueId(),
+							label: App.text('mailBlockSuccess'),
+							value: this.data.success,
+							placeholder: App.text('mailBlockDefaultSuccess'),
+						},
+						[],
+						disabled
+					).outerHTML}
 				</div>
 			</div>
 		`;

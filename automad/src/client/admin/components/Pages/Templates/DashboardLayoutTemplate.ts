@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -48,7 +48,7 @@ import {
 import { Partials } from '@/admin/types';
 import { Section } from '@/common';
 
-export const dashboardLayout = ({ main }: Partials) => {
+export const dashboardLayout = ({ main, publishForm }: Partials) => {
 	return html`
 		<div class="${CSS.layoutDashboard}">
 			<div
@@ -103,7 +103,7 @@ export const dashboardLayout = ({ main }: Partials) => {
 						<am-undo-buttons
 							class="${CSS.displaySmallNone}"
 						></am-undo-buttons>
-						<am-publish-form></am-publish-form>
+						${publishForm}
 						<am-modal-toggle
 							class="${CSS.navbarItem} ${CSS.displayMedium}"
 							${Attr.modal}="#am-jumpbar-modal"
@@ -199,35 +199,47 @@ export const dashboardLayout = ({ main }: Partials) => {
 						</a>
 					</span>
 					<am-nav-item
-						${Attr.page}="search"
+						${Attr.page}="${Route.search}"
 						${Attr.icon}="search"
 						${Attr.text}="searchTitle"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="system"
+						${Attr.page}="${Route.system}"
 						${Attr.icon}="sliders"
 						${Attr.text}="systemTitle"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="shared"
+						${Attr.page}="${Route.shared}"
 						${Attr.icon}="asterisk"
 						${Attr.text}="sharedTitle"
 						${Attr.publicationState}="${App.sharedPublicationState}"
 						${(getSlug() as Route) == Route.shared
 							? `
-							${Attr.bind}="publicationState"
-							${Attr.bindTo}="${Attr.publicationState}"
-						`
+								${Attr.bind}="publicationState"
+								${Attr.bindTo}="${Attr.publicationState}"
+							`
 							: ''}
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="packages"
+						${Attr.page}="${Route.components}"
+						${Attr.icon}="boxes"
+						${Attr.text}="componentsTitle"
+						${Attr.publicationState}="${App.componentsPublicationState}"
+						${(getSlug() as Route) == Route.components
+							? `
+								${Attr.bind}="publicationState"
+								${Attr.bindTo}="${Attr.publicationState}"
+							`
+							: ''}
+					></am-nav-item>
+					<am-nav-item
+						${Attr.page}="${Route.packages}"
 						${Attr.icon}="box-seam"
 						${Attr.text}="packagesTitle"
 						${Attr.badge}="am-sidebar-outdated-packages-indicator"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="trash"
+						${Attr.page}="${Route.trash}"
 						${Attr.icon}="trash3"
 						${Attr.text}="trashTitle"
 					></am-nav-item>

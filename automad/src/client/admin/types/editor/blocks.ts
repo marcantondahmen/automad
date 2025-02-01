@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -189,6 +189,10 @@ export interface SectionBlockData {
 	align: SectionAlignItemsOption;
 	gap: string;
 	minBlockWidth: string;
+}
+
+export interface ComponentBlockData {
+	id: string;
 }
 
 export interface ImageSlideshowBreakpoint {

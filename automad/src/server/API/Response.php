@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Response class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Response {
@@ -118,7 +118,7 @@ class Response {
 
 		$properties = array_filter(get_object_vars($this));
 
-		return json_encode($properties, JSON_UNESCAPED_SLASHES);
+		return strval(json_encode($properties, JSON_UNESCAPED_SLASHES));
 	}
 
 	/**

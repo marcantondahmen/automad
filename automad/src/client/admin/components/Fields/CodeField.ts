@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -81,13 +81,13 @@ class CodeFieldComponent extends BaseFieldComponent {
 		this.setAttribute('name', name);
 		this.value = value as string;
 
-		this.editor = new CodeEditor(
-			create('div', [CSS.codeflask], { id }, this),
-			value as string,
-			this.getLanguageFromName(name),
-			(code) => (this.value = code),
-			placeholder as string
-		);
+		this.editor = new CodeEditor({
+			element: create('div', [CSS.codeflask], { id }, this),
+			code: value as string,
+			language: this.getLanguageFromName(name),
+			onChange: (code) => (this.value = code),
+			placeholder: placeholder as string,
+		});
 	}
 
 	/**

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -43,7 +43,6 @@ use Automad\Core\Messenger;
 use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\System\Mail;
-use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The user collection model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class UserCollection {
@@ -325,13 +324,7 @@ class UserCollection {
 		$subject = 'Automad: ' . Text::get('emailInviteSubject');
 		$message = InvitationEmail::render($website, $username, $link);
 
-		if (!Mail::send($email, $subject, $message)) {
-			$Messenger->setError(Text::get('sendMailError'));
-
-			return false;
-		}
-
-		return true;
+		return Mail::send($email, $subject, $message, null, $Messenger);
 	}
 
 	/**

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,9 +37,6 @@
 namespace Automad\System;
 
 use Automad\Core\FileSystem;
-use Automad\Core\Image;
-use Automad\Core\RemoteFile;
-use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -47,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Package class contains a collection of helper methods for handling package data.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Package {
@@ -62,7 +59,7 @@ class Package {
 		$composerJsonPath = $dir . '/composer.json';
 
 		while ($dir != AM_BASE_DIR . AM_DIR_PACKAGES && !is_readable($composerJsonPath)) {
-			$dir = realpath($dir . '/..');
+			$dir = strval(realpath($dir . '/..'));
 			$composerJsonPath = $dir . '/composer.json';
 		}
 

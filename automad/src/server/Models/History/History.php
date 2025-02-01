@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -40,7 +40,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\DataStore;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\PageIndex;
@@ -48,13 +47,14 @@ use Automad\Core\PublicationState;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\Models\Page;
+use Automad\Stores\DataStore;
 use Automad\System\Fields;
 
 /**
  * The page history class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class History {
@@ -164,7 +164,7 @@ class History {
 		$History = new History();
 
 		if (is_readable($historyPath)) {
-			$unserialized = self::unserialize(file_get_contents($historyPath));
+			$unserialized = self::unserialize(strval(file_get_contents($historyPath)));
 
 			if ($unserialized instanceof History) {
 				$History = $unserialized;
@@ -228,7 +228,7 @@ class History {
 			return '';
 		}
 
-		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time);
+		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time) ?? '';
 		/** @var string */
 		$time = str_replace('T', ', ', $time);
 
@@ -283,7 +283,7 @@ class History {
 	 */
 	private function serialize(): string {
 		if (function_exists('gzcompress') && function_exists('gzuncompress')) {
-			return gzcompress(serialize($this));
+			return strval(gzcompress(serialize($this)));
 		}
 
 		return serialize($this);
@@ -309,7 +309,7 @@ class History {
 	 */
 	private static function unserialize(string $serialized): History | bool {
 		if (function_exists('gzcompress') && function_exists('gzuncompress')) {
-			return unserialize(gzuncompress($serialized));
+			return unserialize(strval(gzuncompress($serialized)));
 		}
 
 		return unserialize($serialized);

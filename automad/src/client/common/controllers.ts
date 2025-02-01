@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -129,6 +129,13 @@ export const enum SharedController {
 	publish = 'SharedController::publish',
 	getPublicationState = 'SharedController::getPublicationState',
 	discardDraft = 'SharedController::discardDraft',
+}
+
+export const enum ComponentController {
+	data = 'ComponentController::data',
+	publish = 'ComponentController::publish',
+	getPublicationState = 'ComponentController::getPublicationState',
+	discardDraft = 'ComponentController::discardDraft',
 }
 
 export const enum SystemController {

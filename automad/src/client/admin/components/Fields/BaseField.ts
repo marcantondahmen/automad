@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -193,6 +193,10 @@ export abstract class BaseFieldComponent
 			return;
 		}
 
+		if (!label) {
+			return;
+		}
+
 		const attributes: KeyValueMap = {};
 
 		if (this.linkLabel) {
@@ -236,17 +240,18 @@ export abstract class BaseFieldComponent
 				this.isSpellchecked ? 'true' : 'false'
 			);
 
-			[Attr.bind, Attr.bindTo, Attr.toggle, 'pattern'].forEach(
-				(attribute) => {
-					if (this.hasAttribute(attribute)) {
-						input.setAttribute(
-							attribute,
-							this.getAttribute(attribute)
-						);
-						this.removeAttribute(attribute);
-					}
+			[
+				Attr.bind,
+				Attr.bindTo,
+				Attr.toggle,
+				'disabled',
+				'pattern',
+			].forEach((attribute) => {
+				if (this.hasAttribute(attribute)) {
+					input.setAttribute(attribute, this.getAttribute(attribute));
+					this.removeAttribute(attribute);
 				}
-			);
+			});
 		});
 	}
 }

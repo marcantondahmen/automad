@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Image controller class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class ImageController {
@@ -83,7 +83,7 @@ class ImageController {
 		$resized = AM_BASE_DIR . $image->file;
 
 		header('Content-Type:' . $image->type);
-		header('Content-Length: ' . filesize($resized));
+		header('Content-Length: ' . strval(filesize($resized)));
 		readfile($resized);
 
 		exit();

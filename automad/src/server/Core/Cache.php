@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2024 by Marc Anton Dahmen
+ * Copyright (c) 2013-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -74,7 +74,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * In case the page and the Automad object are deprecated, after creating both, they can be saved to cache using writePageToCache() and writeAutomadObjectToCache().
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Cache {
@@ -192,7 +192,7 @@ class Cache {
 			return false;
 		}
 
-		$automadObjectMTime = filemtime($this->objectCacheFile);
+		$automadObjectMTime = intval(filemtime($this->objectCacheFile));
 
 		if (($automadObjectMTime + AM_CACHE_LIFETIME) <= time()) {
 			Debug::log(
@@ -310,7 +310,7 @@ class Cache {
 			asort($mTimes);
 			$mTimesKeys = array_keys($mTimes);
 			$lastModifiedItem = end($mTimesKeys);
-			$siteMTime = $mTimes[$lastModifiedItem];
+			$siteMTime = intval($mTimes[$lastModifiedItem]);
 
 			// Save mTime
 			Debug::log('Scanned directories to get the site modification time');
@@ -351,7 +351,7 @@ class Cache {
 			return false;
 		}
 
-		$cacheMTime = filemtime($this->pageCacheFile);
+		$cacheMTime = intval(filemtime($this->pageCacheFile));
 
 		if (($cacheMTime + AM_CACHE_LIFETIME) <= time()) {
 			Debug::log(
@@ -387,7 +387,7 @@ class Cache {
 	public function readAutomadObjectFromCache(): Automad {
 		Debug::log($this->objectCacheFile, 'Reading cached Automad object from');
 
-		return unserialize(file_get_contents($this->objectCacheFile));
+		return unserialize(strval(file_get_contents($this->objectCacheFile)));
 	}
 
 	/**
@@ -398,7 +398,7 @@ class Cache {
 	public function readPageFromCache(): string {
 		Debug::log($this->pageCacheFile, 'Reading cached page from');
 
-		return file_get_contents($this->pageCacheFile);
+		return strval(file_get_contents($this->pageCacheFile));
 	}
 
 	/**
@@ -410,7 +410,7 @@ class Cache {
 	public static function readSiteMTime(): int {
 		Debug::log(Cache::FILE_SITE_MTIME, 'Reading Site-mTime from');
 
-		return unserialize(file_get_contents(Cache::FILE_SITE_MTIME));
+		return unserialize(strval(file_get_contents(Cache::FILE_SITE_MTIME)));
 	}
 
 	/**
@@ -428,12 +428,14 @@ class Cache {
 		FileSystem::write($this->objectCacheFile, serialize($Automad));
 		Debug::log($this->objectCacheFile, 'Automad object written to');
 
-		// Only non-forwarded (no proxy) sites.
-		if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+		if (function_exists('curl_version')) {
 			$c = curl_init();
-			curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => ($_SERVER['SERVER_NAME'] ?? '') . AM_BASE_URL, 'version' => App::VERSION, 'serverSoftware' => ($_SERVER['SERVER_SOFTWARE'] ?? '')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
-			curl_exec($c);
-			curl_close($c);
+
+			if ($c) {
+				curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => ($_SERVER['SERVER_NAME'] ?? '') . AM_BASE_URL, 'version' => App::VERSION, 'serverSoftware' => ($_SERVER['SERVER_SOFTWARE'] ?? '')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
+				curl_exec($c);
+				curl_close($c);
+			}
 		}
 	}
 
@@ -488,7 +490,7 @@ class Cache {
 		$sessionHash = '';
 
 		if ($sessionData = SessionData::get()) {
-			$sessionHash = '_' . sha1(json_encode($sessionData));
+			$sessionHash = '_' . sha1(strval(json_encode($sessionData)));
 		}
 
 		Debug::log($sessionData, 'Session Data');

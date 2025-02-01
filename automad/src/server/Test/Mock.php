@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The test mock class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Mock extends TestCase {
@@ -62,8 +62,8 @@ class Mock extends TestCase {
 		$Shared = new Shared();
 		$Shared->data['shared'] = 'Shared default text content';
 		$Shared->data['+default'] = json_decode('{"blocks": [{"id": "abc","type": "paragraph","data": {"text": "test"}}],"time": "123456789","version": "1.2.3","automadVersion": "1.2.3"}', true);
-		$collection = $this->createCollection($Shared, $template);
-		$Automad = new Automad($collection, $Shared);
+		$pages = $this->createCollection($Shared, $template);
+		$Automad = new Automad($pages, $Shared);
 
 		return $Automad;
 	}
@@ -111,7 +111,8 @@ class Mock extends TestCase {
 					Data::load('/inheritance'),
 					Data::load('/falsy'),
 					Data::load('/invalid'),
-					Data::load('/find-first-image')
+					Data::load('/find-first-image'),
+					Data::load('/component')
 				),
 				$Shared
 			),

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The file collection model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class FileCollection {
@@ -120,7 +120,7 @@ class FileCollection {
 				$item['height'] = $image->originalHeight;
 			}
 
-			$item['mtime'] = date('M j, Y H:i', filemtime($file));
+			$item['mtime'] = date('M j, Y H:i', intval(filemtime($file)));
 			$item['size'] = FileSystem::getFileSize($file);
 			$item['path'] = $file;
 			$item['basename'] = basename($file);
@@ -174,10 +174,13 @@ class FileCollection {
 			$cacheHandle = fopen($cache, 'a+');
 			$tmpHandle = fopen($chunk->tmp_name, 'rb');
 
-			fwrite($cacheHandle, fread($tmpHandle, $bufferSize));
+			if ($cacheHandle && $tmpHandle) {
+				fwrite($cacheHandle, strval(fread($tmpHandle, $bufferSize)));
 
-			fclose($tmpHandle);
-			fclose($cacheHandle);
+				fclose($tmpHandle);
+				fclose($cacheHandle);
+			}
+
 			unlink($chunk->tmp_name);
 		}
 

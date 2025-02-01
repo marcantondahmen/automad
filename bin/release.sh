@@ -20,7 +20,7 @@ fi
 if [[ $(git status -s) ]]; then
 	echo "Working directory is not clean!"
 	git status -s
-	echo
+	exit 0
 fi
 
 # Run tests.
@@ -93,7 +93,7 @@ echo
 
 # Generate changelog.
 echo "Generating changelog ..."
-bash bin/changelog.sh 35 $tag >CHANGELOG.md
+bash bin/changelog.sh 40 $tag >CHANGELOG.md
 
 # Updating version numbers.
 echo "Updating version numbers ..."

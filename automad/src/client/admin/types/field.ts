@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -57,6 +57,7 @@ export interface TemplateFieldData {
 	fields: KeyValueMap;
 	template: string;
 	themeKey: string;
+	readme: string;
 }
 
 export interface FieldGroupData {

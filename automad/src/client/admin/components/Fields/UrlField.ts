@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -71,7 +71,7 @@ class UrlFieldComponent extends BaseFieldComponent {
 		const button = create(
 			'span',
 			[CSS.inputComboButton],
-			{},
+			this.hasAttribute('disabled') ? { disabled: '' } : {},
 			combo,
 			'<i class="bi bi-link"></i>'
 		);

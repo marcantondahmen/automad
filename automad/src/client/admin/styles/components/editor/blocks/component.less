@@ -1,0 +1,87 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-ed-bl-component {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 3.8rem;
+	outline: 1px dashed hsl(var(--am-clr-border));
+	border-radius: @am-form-radius;
+
+	&__label {
+		position: relative;
+		display: flex;
+		gap: 0.4em;
+		align-self: start;
+		align-items: center;
+		top: -1px;
+		left: -1px;
+		height: 1.75rem;
+		padding: 0 0.85em;
+		font-size: @am-small-font-size;
+		font-weight: 560;
+		color: hsl(var(--am-clr-text));
+		background: hsl(var(--am-clr-border));
+		border-top-left-radius: @am-form-radius;
+	}
+
+	&__overlay {
+		position: absolute;
+		inset: -1px;
+		z-index: 10;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		transition: opacity 0.2s;
+		background-color: var(--am-modal-backdrop);
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	& > .codex-editor {
+		border: none;
+	}
+
+	&
+		.ce-block__content:has(
+			> .cdx-block > .am-c-ed-bl-paragraph:first-child:empty
+		) {
+		display: none;
+	}
+}

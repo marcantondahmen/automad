@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2024 by Marc Anton Dahmen
+ * Copyright (c) 2013-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * it can be returned once by $this->getSelection().
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Selection {
@@ -107,7 +107,7 @@ class Selection {
 		$lang = $I18n->getLanguage();
 		$home = "/$lang";
 
-		// Test wheter $url is the URL of a real page.
+		// Test whether $url is the URL of a real page.
 		// "Real" pages have a URL (not like search or error pages) and they exist in the selection array (not hidden).
 		// For all other $url, just the home page will be returned.
 		if (strpos($url, '/') === 0 && array_key_exists($url, $this->selection)) {

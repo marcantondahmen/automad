@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -44,4 +44,5 @@ export enum Route {
 	page = 'page',
 	trash = 'trash',
 	inpage = 'inpage',
+	components = 'components',
 }

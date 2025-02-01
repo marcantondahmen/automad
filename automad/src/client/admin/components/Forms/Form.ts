@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -106,7 +106,7 @@ export class FormComponent extends BaseComponent {
 	/**
 	 * Cache the last submitted form data in order to identify duplicate submissions.
 	 */
-	lastSubmittedFormData: KeyValueMap = {};
+	private lastSubmittedFormData: string = '';
 
 	/**
 	 * The deduplication settings for the form.
@@ -267,14 +267,14 @@ export class FormComponent extends BaseComponent {
 
 		if (
 			Object.keys(data).length &&
-			JSON.stringify(data) === JSON.stringify(this.lastSubmittedFormData)
+			JSON.stringify(data) === this.lastSubmittedFormData
 		) {
 			getLogger().log('Form data has not changed');
 
 			return true;
 		}
 
-		this.lastSubmittedFormData = data;
+		this.lastSubmittedFormData = JSON.stringify(data);
 
 		return false;
 	}

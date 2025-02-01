@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2024 by Marc Anton Dahmen
+ * Copyright (c) 2022-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The page collection class handles building the page collection base on an entry point directory.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PageCollection {

@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,8 +36,8 @@
 
 namespace Automad\Test;
 
-use Automad\Core\DataStore;
 use Automad\Core\PublicationState;
+use Automad\Stores\DataStore;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The test data helper class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2024-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Data {

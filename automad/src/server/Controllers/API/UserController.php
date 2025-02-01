@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2024 by Marc Anton Dahmen
+ * Copyright (c) 2016-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The User class provides all methods related to a user account.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class UserController {
@@ -199,6 +199,10 @@ class UserController {
 	private static function verifyPasswordRequirements(string $password): bool {
 		$charGroups = preg_split('/\s+/', AM_PASSWORD_REQUIRED_CHARS);
 		$len = is_numeric(AM_PASSWORD_MIN_LENGTH) ? AM_PASSWORD_MIN_LENGTH : 0;
+
+		if (!$charGroups) {
+			$charGroups = array();
+		}
 
 		$regex = '';
 

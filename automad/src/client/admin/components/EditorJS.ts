@@ -26,14 +26,15 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
+import { getBlockTools } from '@/admin/editor/blocks';
+import { baseTunes, getBlockTunes } from '@/admin/editor/tunes';
 import { BaseComponent } from '@/admin/components/Base';
-import { SectionBlock } from '@/admin/editor/blocks/Section';
 import { BoldInline } from '@/admin/editor/inline/Bold';
 import { CodeInline } from '@/admin/editor/inline/Code';
 import { ColorInline } from '@/admin/editor/inline/Color';
@@ -44,39 +45,14 @@ import { LinkInline } from '@/admin/editor/inline/Link';
 import { StrikeThroughInline } from '@/admin/editor/inline/StrikeThrough';
 import { UnderlineInline } from '@/admin/editor/inline/Underline';
 import { DragDrop } from '@/admin/editor/plugins/DragDrop';
-import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorOutputData, KeyValueMap } from '@/admin/types';
 import EditorJS, { EditorConfig, I18nDictionary } from 'automad-editorjs';
-import { App, CSS } from '@/admin/core';
-import { Delimiter } from '@/admin/editor/blocks/Delimiter';
-import { ImageBlock } from '@/admin/editor/blocks/Image';
-import { NestedListBlock } from '@/admin/editor/blocks/NestedList';
-import { QuoteBlock } from '@/admin/editor/blocks/Quote';
-import { TableBlock } from '@/admin/editor/blocks/Table';
+import { App, CSS, getSlug, Route } from '@/admin/core';
 import {
 	TextAlignCenterInline,
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/admin/editor/inline/TextAlign';
-import { ClassTune } from '@/admin/editor/tunes/Class';
-import { IdTune } from '@/admin/editor/tunes/Id';
-import { SpacingTune } from '@/admin/editor/tunes/Spacing';
-import { CodeBlock } from '@/admin/editor/blocks/Code';
-import { RawBlock } from '@/admin/editor/blocks/Raw';
-import { GalleryBlock } from '@/admin/editor/blocks/Gallery';
-import { ImageSlideshowBlock } from '@/admin/editor/blocks/ImageSlideshow';
-import { ButtonsBlock } from '@/admin/editor/blocks/Buttons';
-// @ts-ignore
-import Embed from '@editorjs/embed';
-import { embedServices } from '@/admin/editor/embedServices';
-import { HeaderBlock } from '@/admin/editor/blocks/Header';
-import { ParagraphBlock } from '@/admin/editor/blocks/Paragraph';
-import { DuplicateTune } from '@/admin/editor/tunes/Duplicate';
-import { MailBlock } from '@/admin/editor/blocks/Mail';
-import { TableOfContentsBlock } from '@/admin/editor/blocks/TableOfContents';
-import { PagelistBlock } from '@/admin/editor/blocks/Pagelist';
-import { FilelistBlock } from '@/admin/editor/blocks/Filelist';
-import { SnippetBlock } from '@/admin/editor/blocks/Snippet';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -97,10 +73,41 @@ export class EditorJSComponent extends BaseComponent {
 	editor: EditorJS;
 
 	/**
-	 * The base selection of tunes that is used for all blocks.
+	 * Return true if the editor is place in the shared component page.
 	 */
-	private get baseTunes() {
-		return ['layout', 'spacing', 'className', 'id', 'duplicate'];
+	private get isComponentEditor() {
+		return getSlug() === Route.components;
+	}
+
+	/**
+	 * Prepare data for rendering the editor.
+	 *
+	 * @param data
+	 * @return The prepared data
+	 */
+	private prepareData(data: EditorOutputData): EditorOutputData {
+		return this.removeDeleteComponents(data);
+	}
+
+	/**
+	 * Remove shared component blocks that have been deleted.
+	 *
+	 * @param data
+	 * @return The filtered data
+	 */
+	private removeDeleteComponents(data: EditorOutputData): EditorOutputData {
+		const componentIds = App.components.map((component) => component.id);
+
+		return {
+			...data,
+			blocks:
+				data.blocks?.filter((block) => {
+					return (
+						block.type != 'component' ||
+						componentIds.includes(block.data.id ?? '')
+					);
+				}) ?? [],
+		};
 	}
 
 	/**
@@ -113,7 +120,8 @@ export class EditorJSComponent extends BaseComponent {
 	init(
 		data: EditorOutputData,
 		config: EditorConfig,
-		isSectionBlock: boolean
+		isSectionBlock: boolean,
+		readOnly: boolean = false
 	): void {
 		this.style.position = 'relative';
 		this.classList.add(CSS.contents);
@@ -121,20 +129,21 @@ export class EditorJSComponent extends BaseComponent {
 		this.editor = new EditorJS(
 			Object.assign(
 				{
-					data,
+					data: this.prepareData(data),
 					holder: this,
 					logLevel: 'ERROR',
-					minHeight: 50,
+					minHeight: readOnly ? 0 : 50,
 					autofocus: false,
+					readOnly,
 					placeholder: isSectionBlock
 						? ''
 						: App.text('editorPlaceholder'),
 					tools: {
-						...this.getBlockTools(),
-						...this.getBlockTunes(isSectionBlock),
+						...getBlockTools(this.isComponentEditor),
+						...getBlockTunes(isSectionBlock),
 						...this.getInlineTools(),
 					},
-					tunes: this.baseTunes,
+					tunes: baseTunes,
 					inlineToolbar: [
 						'alignLeft',
 						'alignCenter',
@@ -162,84 +171,6 @@ export class EditorJSComponent extends BaseComponent {
 	}
 
 	/**
-	 * The blocks used.
-	 *
-	 * @return an object with block configurations
-	 */
-	private getBlockTools(): KeyValueMap {
-		return {
-			paragraph: {
-				class: ParagraphBlock,
-				inlineToolbar: true,
-			},
-			header: {
-				class: HeaderBlock,
-				inlineToolbar: true,
-			},
-			section: { class: SectionBlock },
-			nestedList: {
-				class: NestedListBlock,
-				inlineToolbar: true,
-			},
-			table: {
-				class: TableBlock,
-				inlineToolbar: true,
-			},
-			quote: {
-				class: QuoteBlock,
-				inlineToolbar: true,
-			},
-			delimiter: Delimiter,
-			image: {
-				class: ImageBlock,
-				inlineToolbar: true,
-			},
-			gallery: {
-				class: GalleryBlock,
-				inlineToolbar: false,
-			},
-			imageSlideshow: {
-				class: ImageSlideshowBlock,
-				inlineToolbar: false,
-			},
-			buttons: {
-				class: ButtonsBlock,
-				inlineToolbar: true,
-			},
-			tableOfContents: {
-				class: TableOfContentsBlock,
-			},
-			code: {
-				class: CodeBlock,
-				inlineToolbar: false,
-			},
-			raw: {
-				class: RawBlock,
-				inlineToolbar: false,
-			},
-			mail: {
-				class: MailBlock,
-				inlineToolbar: true,
-			},
-			pagelist: {
-				class: PagelistBlock,
-			},
-			filelist: {
-				class: FilelistBlock,
-			},
-			snippet: {
-				class: SnippetBlock,
-				tunes: [],
-			},
-			embed: {
-				class: Embed,
-				inlineToolbar: true,
-				config: { services: embedServices },
-			},
-		};
-	}
-
-	/**
 	 * The inline tools used.
 	 *
 	 * @return an object with tool configurations
@@ -258,29 +189,6 @@ export class EditorJSComponent extends BaseComponent {
 			color: { class: ColorInline },
 			fontSize: { class: FontSizeInline },
 			lineHeight: { class: LineHeightInline },
-		};
-	}
-
-	/**
-	 * The block tunes used.
-	 *
-	 * @param isSectionBlock
-	 * @return an object with tune configurations
-	 */
-	private getBlockTunes(isSectionBlock: boolean): KeyValueMap {
-		return {
-			spacing: { class: SpacingTune },
-			className: { class: ClassTune },
-			id: { class: IdTune },
-			layout: {
-				class: LayoutTune,
-				config: {
-					isSectionBlock,
-				},
-			},
-			duplicate: {
-				class: DuplicateTune,
-			},
 		};
 	}
 

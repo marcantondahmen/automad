@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -38,7 +38,6 @@ namespace Automad\Admin;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Core\Session;
@@ -54,7 +53,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The State class contains all functionality to create the application state.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class State {
@@ -101,6 +100,8 @@ class State {
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
 			'sharedPublicationState' => $Automad->Shared->get(Fields::PUBLICATION_STATE),
+			'componentsPublicationState' => $Automad->ComponentCollection->getPublicationState(),
+			'components' => $Automad->ComponentCollection->get(),
 			'files' => array(
 				'pagelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
 				'filelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),

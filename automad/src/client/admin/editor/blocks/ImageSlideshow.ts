@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -49,7 +49,10 @@ import {
 	listen,
 	uniqueId,
 } from '@/admin/core';
-import { ImageSlideshowBreakpoints, ImageSlideshowBlockData } from '@/admin/types';
+import {
+	ImageSlideshowBreakpoints,
+	ImageSlideshowBlockData,
+} from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 /**
@@ -180,34 +183,38 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			this.wrapper
 		);
 
-		const settingsButton = create(
-			'button',
-			[CSS.button],
-			{},
-			group,
-			App.text('imageSlideshowBlockSettings')
-		);
+		if (!this.readOnly) {
+			const settingsButton = create(
+				'button',
+				[CSS.button],
+				{},
+				group,
+				App.text('imageSlideshowBlockSettings')
+			);
 
-		this.api.listeners.on(
-			settingsButton,
-			'click',
-			this.renderModal.bind(this)
-		);
+			this.api.listeners.on(
+				settingsButton,
+				'click',
+				this.renderModal.bind(this)
+			);
+		}
 
 		const collection = create(
 			ImageCollectionComponent.TAG_NAME,
 			[],
-			{},
+			this.readOnly ? { disabled: '' } : {},
 			group
 		) as ImageCollectionComponent;
 
 		setTimeout(() => {
 			collection.images = this.data.files;
 
-			this.api.listeners.on(collection, 'change', () => {
-				this.data.files = collection.images;
-				this.blockAPI.dispatchChange();
-			});
+			if (!this.readOnly) {
+				this.api.listeners.on(collection, 'change', () => {
+					this.data.files = collection.images;
+					this.blockAPI.dispatchChange();
+				});
+			}
 		}, 0);
 
 		return this.wrapper;
@@ -356,7 +363,13 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			`
 		);
 
-		create('p', [], {}, body, App.text('imageSlideshowBlockBreakpointsHelp'));
+		create(
+			'p',
+			[],
+			{},
+			body,
+			App.text('imageSlideshowBlockBreakpointsHelp')
+		);
 	}
 
 	/**

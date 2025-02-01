@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2024 by Marc Anton Dahmen
+ * Copyright (c) 2023-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -37,11 +37,11 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Core\DataStore;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Models\Page;
 use Automad\Models\Shared;
+use Automad\Stores\DataStore;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The page trash model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PageTrashController {

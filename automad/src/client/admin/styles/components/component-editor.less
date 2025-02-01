@@ -1,0 +1,119 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2025 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-component-editor {
+	display: flex;
+	flex-direction: column;
+	border: @am-form-border;
+	border-radius: @am-bl-editor-radius;
+
+	&--ghost {
+		border-color: hsl(var(--am-clr-border-active));
+	}
+
+	&--drag {
+		box-shadow: @am-shadow;
+		opacity: 1 !important;
+	}
+
+	&--chosen {
+		background-color: hsl(var(--am-clr-background-faded));
+		box-shadow: @am-shadow;
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		height: 3.2rem;
+		gap: 1rem;
+		padding: 0 @am-form-padding-x;
+		user-select: none;
+	}
+
+	&__name {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		flex-grow: 1;
+		height: 100%;
+		overflow: hidden;
+		cursor: pointer;
+
+		& > span {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+	&__tools {
+		display: flex;
+		align-items: center;
+		gap: 0.3rem;
+
+		& > * {
+			color: hsl(var(--am-clr-text-muted));
+			padding: 0.35rem;
+			cursor: pointer;
+			transition: color 0.2s;
+
+			&:hover {
+				color: hsl(var(--am-clr-text));
+			}
+		}
+	}
+
+	&__handle {
+		cursor: grab;
+	}
+
+	&__main {
+		padding: 0.3rem;
+		transform: translate3d(0, 0, 0);
+		border-top: @am-border;
+		outline: 0;
+
+		& .codex-editor:not(.codex-editor .codex-editor) {
+			border: none;
+			border-radius: 0;
+		}
+
+		& am-alert {
+			margin: 0;
+			border: none;
+			box-shadow: none;
+			padding: 0.7rem;
+		}
+	}
+}
