@@ -1,8 +1,28 @@
 # Changelog
 
-## [v2.0.0-alpha.16](https://github.com/marcantondahmen/automad/commit/a7aa128b57fb50803523ac58c4f06a97e2747c31)
+## [v2.0.0-alpha.17](https://github.com/marcantondahmen/automad/commit/2f3c250173b84d88cb0775ae946b5ac2ff45fd1f)
 
-Sat, 14 Dec 2024 22:54:50 +0100
+Sat, 1 Feb 2025 16:54:29 +0100
+
+### New Features
+
+- add reusable component block type ([254a62a2d](https://github.com/marcantondahmen/automad/commit/254a62a2d5816f65befd13906ec2b0ed72861846))
+- add support for php 8.4 ([a8ff6ce06](https://github.com/marcantondahmen/automad/commit/a8ff6ce06899335b7779dc7313f552207f8ba460))
+- ignore existing but empty path info server var when resolving request ([38315cd0a](https://github.com/marcantondahmen/automad/commit/38315cd0ade9560420b1d39d0207515221e1c06e))
+- improve mail error messages ([639d35070](https://github.com/marcantondahmen/automad/commit/639d3507061cfd566e85c31e70c6cf1aaaead665))
+- improve open-graph image style ([61df95c02](https://github.com/marcantondahmen/automad/commit/61df95c02fc761a04961940dcdde0c3a221d957f))
+- replace urlify package with slugify ([dbdb3b581](https://github.com/marcantondahmen/automad/commit/dbdb3b5814d185b2516ef088f60d54985dc25290))
+- revert merging localized homepage data with shared data ([5523abebe](https://github.com/marcantondahmen/automad/commit/5523abebe53f2704d089ef88deb03aa7117a2439))
+- show component block content as read-only preview in editor ([174f9e2b9](https://github.com/marcantondahmen/automad/commit/174f9e2b97eb9ad900cc5ed010519f957067c540))
+- use configured email for from field and visitor email for reply-to field ([10b3ef01d](https://github.com/marcantondahmen/automad/commit/10b3ef01d393c1c3df92091e21af3bcccc7fe43f))
+
+### Bugfixes
+
+- fix language routing for language codes with more than two characters ([dde411dee](https://github.com/marcantondahmen/automad/commit/dde411deec6c9acee3fd18be21f822a4ab0d2138))
+
+## [v2.0.0-alpha.16](https://github.com/marcantondahmen/automad/commit/53cab745c3b45291f0c8a3e450543d10a38e9d98)
+
+Sat, 14 Dec 2024 22:58:39 +0100
 
 ### New Features
 
@@ -504,3 +524,64 @@ Mon, 9 Aug 2021 23:21:36 +0200
 ### Bugfixes
 
 - **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
+
+## [v1.8.2](https://github.com/marcantondahmen/automad/commit/e070a89209c2e90eadb9be4b77580beef6aa75d1)
+
+Sun, 8 Aug 2021 22:25:34 +0200
+
+### New Features
+
+- **samples**: add pagelist example page ([2a033f4da](https://github.com/marcantondahmen/automad/commit/2a033f4dada04e3d2fd7d24f2d2d6b1bfd04986e))
+- **samples**: add tags and filters to example pages ([d18f2482b](https://github.com/marcantondahmen/automad/commit/d18f2482b2f258d7b42a6609a439769773ffb7f8))
+
+### Bugfixes
+
+- **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
+
+## [v1.8.1](https://github.com/marcantondahmen/automad/commit/8be976c0215c549d3ac27016b8c9fee02c052cca)
+
+Sat, 7 Aug 2021 23:06:36 +0200
+
+### Bugfixes
+
+- **ui**: fix breadcrumbs position in safari ([0ed10e20d](https://github.com/marcantondahmen/automad/commit/0ed10e20d8d32f963be4d76c84d79bcf967b77c0))
+- **ui**: fix status badge for outdated packages ([8b53a821f](https://github.com/marcantondahmen/automad/commit/8b53a821fa0d9cdc57af25f0eb122dc0dd312050))
+
+## [v1.8.0](https://github.com/marcantondahmen/automad/commit/cbdd0e59738ad28a6a0e2c6d235d5fa886438b2c)
+
+Sat, 7 Aug 2021 19:45:51 +0200
+
+### New Features
+
+- **blocks**: add option to use an image block as link ([586875ca3](https://github.com/marcantondahmen/automad/commit/586875ca31f9ec5cb273a1d0dc4de24a1c006346))
+- **blocks**: add option to use custom css classes for button blocks ([dd615b97f](https://github.com/marcantondahmen/automad/commit/dd615b97f0dc20b6f440d44d47e7e73e43483bb0))
+- **blocks**: add option to use custom css classes for section blocks ([aea1beec2](https://github.com/marcantondahmen/automad/commit/aea1beec298eacc4317389b8eb913c93a326111c))
+- **console**: add clearcache command ([f72112406](https://github.com/marcantondahmen/automad/commit/f72112406c5a79adb4c7ab26f1a3d87ae1bd87fc))
+- **console**: add purge command ([9f0ca5a83](https://github.com/marcantondahmen/automad/commit/9f0ca5a8324ffd0833161998f9b2b2bb7777f45f))
+- **system**: add check for required PHP version before updating ([c547d52af](https://github.com/marcantondahmen/automad/commit/c547d52afe2b8c5a86d9eebd1cbea1a09986b583))
+- **ui**: add autocompletion for inline link tool ([fb70070ff](https://github.com/marcantondahmen/automad/commit/fb70070ff30ce818463f6421a2f9ae374a8778f9))
+- **ui**: add site wide search and replace ([91e9ad680](https://github.com/marcantondahmen/automad/commit/91e9ad6802e3f9410364a1bed3b9de7fa1ebf023))
+- **ui**: convert search bar in top navigation into a jump bar ([0ab079586](https://github.com/marcantondahmen/automad/commit/0ab07958624b42a8cbe5f22b939483355ea39b5b))
+- **ui**: implement automatic updates of links to moved pages ([0369e52fd](https://github.com/marcantondahmen/automad/commit/0369e52fdc4eb6bacbc87e08e49d73bffc00c97a))
+- **ui**: implement automatic updates of links to renamed files ([3a26c4065](https://github.com/marcantondahmen/automad/commit/3a26c4065095e616db87b2a2df45101e6d2a58fa))
+- **ui**: verify that a given username is valid when adding accounts ([283a41a2f](https://github.com/marcantondahmen/automad/commit/283a41a2f99b59914e81b48935800cd59fbc1b41))
+
+### Bugfixes
+
+- **theme**: fix inline link styles in blocks ([8b89e00f0](https://github.com/marcantondahmen/automad/commit/8b89e00f027372189a5a25ae5b0e7bb9409ac665))
+- **ui**: fix disabled save button after deleting unused variable field ([fe375915e](https://github.com/marcantondahmen/automad/commit/fe375915e5afaa9fb9ec4798df3c466fd0e283a5))
+- **ui**: fix position of block editor toolbar on large devices ([e19b4b983](https://github.com/marcantondahmen/automad/commit/e19b4b98356d22ed475a8f27489c1d65a26e83e2))
+- **ui**: fix switcher tab update on hashchanges ([2a6725d37](https://github.com/marcantondahmen/automad/commit/2a6725d374ffd0b575b8ce98f7a0eb14707d222e))
+
+## [v1.7.5](https://github.com/marcantondahmen/automad/commit/fe9027615d9a63051fa4e0cca80d7000a2830bae)
+
+Wed, 23 Jun 2021 20:24:36 +0200
+
+### New Features
+
+- **blocks**: add option to exclude or include hidden pages ([64625ddbb](https://github.com/marcantondahmen/automad/commit/64625ddbb25bf224096b94085af98fa178d3f1f9))
+
+### Bugfixes
+
+- **sitemap**: exclude private pages from sitemap.xml ([e4b6169c4](https://github.com/marcantondahmen/automad/commit/e4b6169c4c74be7a0d5cdf2bf09106e05a38b70a))
+- **ui**: remove resize option in image selection dialog ([3af5973c3](https://github.com/marcantondahmen/automad/commit/3af5973c3b406a2ff74545c3a8e2b716de2ed1b1))
