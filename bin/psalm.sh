@@ -1,10 +1,12 @@
 #!/bin/bash
 
-PSALM_PHAR=psalm-5.26.1.phar
+PSALM_VERSION=6.1.0
+PSALM_PHAR=psalm-${PSALM_VERSION}.phar
+PHP_BIN=php
 
 if [[ ! -f "$PSALM_PHAR" ]]; then
-	curl -L https://github.com/vimeo/psalm/releases/download/5.26.1/psalm.phar --output $PSALM_PHAR
+	curl -L https://github.com/vimeo/psalm/releases/download/$PSALM_VERSION/psalm.phar --output $PSALM_PHAR
 	chmod +x $PSALM_PHAR
 fi
 
-./$PSALM_PHAR --clear-global-cache && ./$PSALM_PHAR --no-cache --threads=1
+$PHP_BIN ./$PSALM_PHAR --clear-global-cache && $PHP_BIN ./$PSALM_PHAR --no-cache --threads=1
