@@ -135,7 +135,7 @@ class Parse {
 			// Remove all undefined items (empty string).
 			// It is not possible to use array_filter($options, 'strlen') here, since an array item could be an array itself and strlen() only expects strings.
 			if (is_array($options)) {
-				$options = 	array_filter($options, function ($value) {
+				$options = array_filter($options, function ($value) {
 					return ($value !== '');
 				});
 			} else {

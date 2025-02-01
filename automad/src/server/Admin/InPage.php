@@ -59,7 +59,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class InPage {
 	/**
-	 * This regex matches the "{{@open:$data@}}$value{{@close@}}" string that temporary
+	 * This regex matches the "{{@open:$data@}}$value{{@close:$data@}}" string that temporary
 	 * wraps values in encoded fields that are later converted into webcomponents.
 	 *
 	 * @see injectTemporaryEditButton()
