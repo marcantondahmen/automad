@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024 by Marc Anton Dahmen
+ * Copyright (c) 2024-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -48,7 +48,7 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * The migrate command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2024-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Migrate extends AbstractCommand {

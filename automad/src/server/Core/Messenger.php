@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2024 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -42,7 +42,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Messenger object allows for pushing error messages to the calling method in order to separate return values from error details.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2024 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Messenger {

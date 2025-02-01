@@ -1,6 +1,6 @@
 #!/bin/bash
 
-year=2024
+year=2025
 
 bumpDate() {
 	mv $1 $1.bak
@@ -8,7 +8,7 @@ bumpDate() {
 	rm $1.bak
 
 	mv $1 $1.bak
-	sed -E "/by Marc Anton Dahmen/s/( 202(0|1|2|3)) /\1-$year /g" $1.bak >$1
+	sed -E "/by Marc Anton Dahmen/s/( 202(0|1|2|3|4)) /\1-$year /g" $1.bak >$1
 	rm $1.bak
 }
 
