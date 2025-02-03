@@ -125,6 +125,7 @@ class HeadTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testAppendIsEqual($doc, $tag, $expected) {
+		/** @disregard */
 		$this->assertEquals(Head::append($doc, $tag), $expected);
 	}
 
@@ -135,6 +136,7 @@ class HeadTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testPrependIsEqual($doc, $tag, $expected) {
+		/** @disregard */
 		$this->assertEquals(Head::prepend($doc, $tag), $expected);
 	}
 }

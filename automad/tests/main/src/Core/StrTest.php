@@ -69,6 +69,7 @@ class StrTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testDefIsEqual($str, $defaultValue, $expected) {
+		/** @disregard */
 		$this->assertEquals(Str::def($str, $defaultValue), $expected);
 	}
 
@@ -81,6 +82,7 @@ class StrTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testSanitizeIsEqual($str, $removeDots, $maxChars, $expected) {
+		/** @disregard */
 		$this->assertEquals(Str::sanitize($str, $removeDots, $maxChars), $expected);
 	}
 
@@ -93,6 +95,7 @@ class StrTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testShortenIsEqual($str, $maxChars, $ellipsis, $expected) {
+		/** @disregard */
 		$this->assertEquals(Str::shorten($str, $maxChars, $ellipsis), $expected);
 	}
 
@@ -104,6 +107,7 @@ class StrTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testStripEndIsEqual($str, $end, $expected) {
+		/** @disregard */
 		$this->assertEquals(Str::stripEnd($str, $end), $expected);
 	}
 
@@ -115,6 +119,7 @@ class StrTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testStripStartIsEqual($str, $start, $expected) {
+		/** @disregard */
 		$this->assertEquals(Str::stripStart($str, $start), $expected);
 	}
 
@@ -125,6 +130,7 @@ class StrTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testStripTagsIsEqual($str, $expected) {
+		/** @disregard */
 		$this->assertEquals(Str::stripTags($str), $expected);
 	}
 }

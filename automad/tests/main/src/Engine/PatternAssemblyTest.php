@@ -215,6 +215,7 @@ class PatternAssemblyTest extends TestCase {
 		}
 
 		for ($i = 0; $i < count($result); $i++) {
+			/** @disregard */
 			$this->assertSame($result[$i], $expected[$i]);
 		}
 	}
@@ -232,6 +233,7 @@ class PatternAssemblyTest extends TestCase {
 		$result = $matches[0];
 
 		foreach ($expected as $key => $value) {
+			/** @disregard */
 			$this->assertSame($value, $result[$key]);
 		}
 	}
@@ -247,6 +249,7 @@ class PatternAssemblyTest extends TestCase {
 
 		foreach ($expected as $index => $subarray) {
 			foreach ($subarray as $key => $value) {
+				/** @disregard */
 				$this->assertSame($value, $matches[$index][$key]);
 			}
 		}
@@ -265,6 +268,7 @@ class PatternAssemblyTest extends TestCase {
 		$result = $matches[0];
 
 		foreach ($expected as $key => $value) {
+			/** @disregard */
 			$this->assertSame($value, $result[$key]);
 		}
 	}
@@ -281,6 +285,7 @@ class PatternAssemblyTest extends TestCase {
 
 		foreach ($expected as $index => $subarray) {
 			foreach ($subarray as $key => $value) {
+				/** @disregard */
 				$this->assertSame($value, $matches[$index][$key]);
 			}
 		}
@@ -299,6 +304,7 @@ class PatternAssemblyTest extends TestCase {
 		$result = $matches[0];
 
 		foreach ($expected as $key => $value) {
+			/** @disregard */
 			$this->assertSame($value, $result[$key]);
 		}
 	}

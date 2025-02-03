@@ -100,6 +100,7 @@ class ReplacementTest extends TestCase {
 
 		$replacedData = $replaceInData->invokeArgs($Replacement, array($data, $keys));
 
+		/** @disregard */
 		$this->assertSame(
 			json_encode($expected, JSON_PRETTY_PRINT),
 			json_encode($replacedData, JSON_PRETTY_PRINT)

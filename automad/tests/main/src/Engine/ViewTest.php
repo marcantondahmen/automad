@@ -219,6 +219,7 @@ class ViewTest extends TestCase {
 
 		$_SESSION['username'] = false;
 
+		/** @disregard */
 		$this->assertEquals($expected, $rendered);
 	}
 
@@ -235,6 +236,7 @@ class ViewTest extends TestCase {
 		$rendered = $View->render();
 		$rendered = trim(str_replace('\n', '', $rendered));
 
+		/** @disregard */
 		$this->assertEquals($expected, $rendered);
 	}
 
