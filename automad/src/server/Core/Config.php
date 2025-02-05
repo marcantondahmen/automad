@@ -145,6 +145,9 @@ class Config {
 		// Mail address obfuscation
 		self::set('AM_MAIL_OBFUSCATION_ENABLED', true);
 
+		// Enable open_basedir restriction
+		self::set('AM_OPEN_BASEDIR_ENABLED', true);
+
 		// Mail
 		self::set('AM_MAIL_TRANSPORT', MailConfig::DEFAULT_TRANSPORT);
 		self::set('AM_MAIL_FROM', MailConfig::getDefaultFrom());

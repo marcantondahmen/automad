@@ -87,6 +87,8 @@ class App {
 		Config::overrides();
 		Config::defaults();
 
+		$this->setOpenBaseDir();
+
 		define('AM_REQUEST', Request::page());
 
 		$this->runPermissionCheck();
@@ -131,6 +133,18 @@ class App {
 	private function runVersionCheck(): void {
 		if (version_compare(PHP_VERSION, $this->requiredPhpVersion, '<')) {
 			Error::exit('PHP out of date', "Please update your PHP version to $this->requiredPhpVersion or newer.");
+		}
+	}
+
+	/**
+	 * Enable basedir restriction if configured.
+	 */
+	private function setOpenBaseDir(): void {
+		if (AM_OPEN_BASEDIR_ENABLED) {
+			ini_set(
+				'open_basedir',
+				AM_BASE_DIR . PATH_SEPARATOR . AM_DIR_TMP . PATH_SEPARATOR . sys_get_temp_dir()
+			);
 		}
 	}
 
