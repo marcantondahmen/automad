@@ -67,7 +67,7 @@ class ConfigSet extends AbstractCommand {
 	 * @return string the command description
 	 */
 	public function description(): string {
-		return 'Set a config value';
+		return 'Set a config value.';
 	}
 
 	/**

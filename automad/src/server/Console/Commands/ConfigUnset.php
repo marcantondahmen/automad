@@ -66,7 +66,7 @@ class ConfigUnset extends AbstractCommand {
 	 * @return string the command description
 	 */
 	public function description(): string {
-		return 'Unset a config value and restore the default';
+		return 'Unset a config value and restore the default.';
 	}
 
 	/**
