@@ -75,7 +75,7 @@ class ConfigUnset extends AbstractCommand {
 	 * @return string the command example
 	 */
 	public function example(): string {
-		return 'php automad/console config --key AM_CACHE_ENABLED';
+		return 'php automad/console config:unset --key AM_CACHE_ENABLED';
 	}
 
 	/**

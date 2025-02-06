@@ -51,7 +51,7 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * @copyright Copyright (c) 2018-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class CreateUser extends AbstractCommand {
+class UserCreate extends AbstractCommand {
 	/**
 	 * The constructor.
 	 */
@@ -78,7 +78,7 @@ class CreateUser extends AbstractCommand {
 	 * @return string the command example
 	 */
 	public function example(): string {
-		return '';
+		return 'php automad/console user:create --email user@domain.com';
 	}
 
 	/**
