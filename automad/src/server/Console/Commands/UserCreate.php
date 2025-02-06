@@ -36,6 +36,8 @@
 
 namespace Automad\Console\Commands;
 
+use Automad\Console\Argument;
+use Automad\Console\ArgumentCollection;
 use Automad\Console\Console;
 use Automad\Core\Messenger;
 use Automad\Models\UserCollection;
@@ -50,6 +52,17 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * @license MIT license - https://automad.org/license
  */
 class CreateUser extends AbstractCommand {
+	/**
+	 * The constructor.
+	 */
+	public function __construct() {
+		$this->ArgumentCollection = new ArgumentCollection(array(
+			new Argument('username', 'The username'),
+			new Argument('email', 'The email address'),
+			new Argument('password', 'The password')
+		));
+	}
+
 	/**
 	 * Get the command description.
 	 *
@@ -88,22 +101,28 @@ class CreateUser extends AbstractCommand {
 		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
 
-		$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
-		$password = substr(str_shuffle(MD5(microtime())), 0, 10);
+		$name = $this->ArgumentCollection->value('username');
+		$name = strlen($name) ? $name : 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
 
-		$UserCollection->createUser($name, $password, $password, '', $Messenger);
+		$email = $this->ArgumentCollection->value('email');
+
+		$password = $this->ArgumentCollection->value('password');
+		$password = strlen($password) ? $password : substr(str_shuffle(MD5(microtime())), 0, 10);
+
+		$UserCollection->createUser($name, $password, $password, $email, $Messenger);
 		$UserCollection->save($Messenger);
 
 		if (!$Messenger->getError()) {
 			echo Console::clr('heading', '--------------------') . PHP_EOL;
 			echo Console::clr('heading', 'Name:     ' . $name) . PHP_EOL;
+			echo Console::clr('heading', 'Email:    ' . $email) . PHP_EOL;
 			echo Console::clr('heading', 'Password: ' . $password) . PHP_EOL;
 			echo Console::clr('heading', '--------------------') . PHP_EOL;
 
 			return 0;
 		}
 
-		echo $Messenger->getError() . PHP_EOL;
+		echo Console::clr('error', $Messenger->getError()) . PHP_EOL;
 		echo Console::clr('error', 'Creating user account failed') . PHP_EOL;
 
 		return 1;

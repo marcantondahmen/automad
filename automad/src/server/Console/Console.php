@@ -55,7 +55,7 @@ class Console {
 	 */
 	const COLORS = array(
 		'code' => 32,
-		'title' => 91,
+		'title' => 35,
 		'heading' => 33,
 		'text' => 37,
 		'arg' => 34,
@@ -132,7 +132,7 @@ class Console {
 
 			foreach ($args as $Argument) {
 				echo str_pad(' ', 19, ' ', STR_PAD_LEFT);
-				echo self::clr('arg', str_pad('--' . $Argument->name, 8, ' ')) . '  ';
+				echo self::clr('arg', str_pad('--' . $Argument->name, 10, ' ')) . '  ';
 				echo self::clr('text', ($Argument->required ? '' : '[optional] ') . $Argument->description) . PHP_EOL;
 			}
 

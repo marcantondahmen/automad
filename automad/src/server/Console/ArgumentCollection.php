@@ -122,7 +122,7 @@ class ArgumentCollection {
 	 */
 	public function validateArgv(array $argv): bool {
 		foreach ($this->args as $Argument) {
-			if (array_search('--' . $Argument->name, $argv) === false) {
+			if (array_search('--' . $Argument->name, $argv) === false && $Argument->required) {
 				echo Console::clr('error', "Argument --{$Argument->name} is required") . PHP_EOL;
 
 				return false;
