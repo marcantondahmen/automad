@@ -36,6 +36,9 @@
 
 namespace Automad\Console\Commands;
 
+use Automad\Console\Argument;
+use Automad\Console\ArgumentCollection;
+use Automad\Console\Console;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\PublicationState;
@@ -53,12 +56,30 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  */
 class Migrate extends AbstractCommand {
 	/**
-	 * Get the command help.
-	 *
-	 * @return string the command help
+	 * The constructor.
 	 */
-	public static function help(): string {
+	public function __construct() {
+		$this->ArgumentCollection = new ArgumentCollection(array(
+			new Argument('path', 'The path to the Automad v1 installation', true),
+		));
+	}
+
+	/**
+	 * Get the command description.
+	 *
+	 * @return string the command description
+	 */
+	public function description(): string {
 		return 'Migrate content from a website made with Automad version 1.';
+	}
+
+	/**
+	 * Get the command example.
+	 *
+	 * @return string the command example
+	 */
+	public function example(): string {
+		return '';
 	}
 
 	/**
@@ -66,41 +87,41 @@ class Migrate extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name(): string {
+	public function name(): string {
 		return 'migrate';
 	}
 
 	/**
 	 * The actual command action.
+	 *
+	 * @return int exit code
 	 */
-	public static function run(): void {
-		$argv = $_SERVER['argv'] ?? array();
-
-		if (empty($argv[2])) {
-			exit('Please specify a source installation!' . PHP_EOL);
-		}
-
-		echo 'Creating backup ...' . PHP_EOL;
+	public function run(): int {
+		echo Console::clr('text', 'Creating backup ...') . PHP_EOL;
 		@rename(AM_BASE_DIR . AM_DIR_PAGES, AM_BASE_DIR . AM_DIR_PAGES . '.backup-' . time());
 		@rename(AM_BASE_DIR . AM_DIR_SHARED, AM_BASE_DIR . AM_DIR_SHARED . '.backup-' . time());
 
-		$source = $argv[2];
+		$source = $this->ArgumentCollection->value('path');
 
-		echo "Importing from $source ..." . PHP_EOL;
-		echo 'Converting shared data ...' . PHP_EOL;
+		if (empty($source)) {
+			echo Console::clr('error', 'The --path value must be a valid string') . PHP_EOL;
+		}
 
-		$shared = self::dataFile("$source/shared/data.txt");
+		echo Console::clr('text', "Importing from $source ...") . PHP_EOL;
+		echo Console::clr('text', 'Converting shared data ...') . PHP_EOL;
+
+		$shared = $this->dataFile("$source/shared/data.txt");
 		$shared['theme'] = str_replace('standard/', 'automad/standard-v1/', $shared['theme']);
 
 		$DataStore = new DataStore();
 		$DataStore->setState(PublicationState::DRAFT, $shared)->publish();
 
-		self::copyFiles("$source/shared", AM_BASE_DIR . AM_DIR_SHARED);
+		$this->copyFiles("$source/shared", AM_BASE_DIR . AM_DIR_SHARED);
 
-		$files = self::getFiles("$source/pages", '*.txt');
+		$files = $this->getFiles("$source/pages", '*.txt');
 
 		foreach ($files as $file) {
-			$data = self::dataFile($file);
+			$data = $this->dataFile($file);
 			$path = dirname(Str::stripStart($file, "$source/pages"));
 
 			if (!empty($data['theme'])) {
@@ -112,15 +133,17 @@ class Migrate extends AbstractCommand {
 			$DataStore = new DataStore($path);
 			$DataStore->setState(PublicationState::DRAFT, $data)->publish();
 
-			self::copyPageFiles("$source/pages", $path);
+			$this->copyPageFiles("$source/pages", $path);
 		}
 
-		echo 'Removing prefixes ...';
-		self::removePrefixRecursively(AM_BASE_DIR . AM_DIR_PAGES);
+		echo Console::clr('text', 'Removing prefixes ...');
+		$this->removePrefixRecursively(AM_BASE_DIR . AM_DIR_PAGES);
 
 		$count = count($files);
 
-		echo PHP_EOL . "Migrated $count pages";
+		echo PHP_EOL . Console::clr('text', "Migrated $count pages");
+
+		return 0;
 	}
 
 	/**
@@ -129,7 +152,7 @@ class Migrate extends AbstractCommand {
 	 * @param string $src
 	 * @param string $dest
 	 */
-	private static function copyFiles(string $src, string $dest): void {
+	private function copyFiles(string $src, string $dest): void {
 		$directoryItems = FileSystem::glob("$src/*");
 		$files = array_filter($directoryItems, 'is_file');
 		$files = array_filter($files, function ($path) {
@@ -137,7 +160,7 @@ class Migrate extends AbstractCommand {
 		});
 
 		foreach ($files as $file) {
-			echo '    copy ' . basename($file) . PHP_EOL;
+			echo Console::clr('text', '    copy ') . Console::clr('code', basename($file)) . PHP_EOL;
 			copy($file, $dest . '/' . basename($file));
 		}
 	}
@@ -148,11 +171,11 @@ class Migrate extends AbstractCommand {
 	 * @param string $sourcePages
 	 * @param string $pagePath
 	 */
-	private static function copyPageFiles(string $sourcePages, string $pagePath): void {
+	private function copyPageFiles(string $sourcePages, string $pagePath): void {
 		$src = "$sourcePages/$pagePath";
 		$dest = AM_BASE_DIR . AM_DIR_PAGES . $pagePath;
 
-		self::copyFiles($src, $dest);
+		$this->copyFiles($src, $dest);
 	}
 
 	/**
@@ -165,7 +188,7 @@ class Migrate extends AbstractCommand {
 	 * @param string $file
 	 * @return array
 	 */
-	private static function dataFile(string $file) {
+	private function dataFile(string $file) {
 		$vars = array();
 
 		if (!file_exists($file)) {
@@ -208,11 +231,11 @@ class Migrate extends AbstractCommand {
 	 * @param string $pattern
 	 * @return array
 	 */
-	private static function getFiles(string $dir, string $pattern): array {
+	private function getFiles(string $dir, string $pattern): array {
 		$files = FileSystem::glob("$dir/$pattern");
 
 		foreach (FileSystem::glob("$dir/*", GLOB_ONLYDIR) as $d) {
-			$files = array_merge($files, self::getFiles($d, $pattern));
+			$files = array_merge($files, $this->getFiles($d, $pattern));
 		}
 
 		return $files;
@@ -223,7 +246,7 @@ class Migrate extends AbstractCommand {
 	 *
 	 * @param string $dir
 	 */
-	private static function removePrefixRecursively(string $dir): void {
+	private function removePrefixRecursively(string $dir): void {
 		$dataFiles = FileSystem::glob(rtrim($dir, '/') . '/*/' . DataStore::FILENAME);
 
 		sort($dataFiles);
@@ -239,7 +262,7 @@ class Migrate extends AbstractCommand {
 
 			PageIndex::append(dirname($path), $newPath);
 
-			self::removePrefixRecursively(AM_BASE_DIR . AM_DIR_PAGES . $newPath);
+			$this->removePrefixRecursively(AM_BASE_DIR . AM_DIR_PAGES . $newPath);
 		}
 	}
 }

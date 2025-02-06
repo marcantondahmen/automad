@@ -37,6 +37,7 @@
 namespace Automad\Console\Commands;
 
 use Automad\App;
+use Automad\Console\Console;
 use Automad\Core\Messenger;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
@@ -50,12 +51,21 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  */
 class Update extends AbstractCommand {
 	/**
-	 * Get the command help.
+	 * Get the command description.
 	 *
-	 * @return string the command help
+	 * @return string the command description
 	 */
-	public static function help(): string {
+	public function description(): string {
 		return 'Update Automad to the latest version.';
+	}
+
+	/**
+	 * Get the command example.
+	 *
+	 * @return string the command example
+	 */
+	public function example(): string {
+		return '';
 	}
 
 	/**
@@ -63,39 +73,45 @@ class Update extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name(): string {
+	public function name(): string {
 		return 'update';
 	}
 
 	/**
 	 * The actual command action.
+	 *
+	 * @return int exit code
 	 */
-	public static function run(): void {
+	public function run(): int {
 		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
-			exit('Can\'t run updates within the development repository!' . PHP_EOL . PHP_EOL);
+			echo Console::clr('error', 'Can\'t run updates within the development repository!') . PHP_EOL;
+
+			return 1;
 		}
 
-		echo 'Automad version ' . App::VERSION . PHP_EOL;
-		echo 'Update branch is ' . AM_UPDATE_BRANCH . PHP_EOL;
+		echo Console::clr('heading', 'Automad version ' . App::VERSION) . PHP_EOL;
+		echo Console::clr('code', 'Update branch is ' . AM_UPDATE_BRANCH) . PHP_EOL;
 
 		$updateVersion = \Automad\System\Update::getVersion();
 		$Messenger = new Messenger();
 
 		if (version_compare(App::VERSION, $updateVersion, '<')) {
-			echo 'Updating to version ' . $updateVersion . PHP_EOL;
+			echo Console::clr('text', 'Updating to version ' . $updateVersion) . PHP_EOL;
 
 			if (\Automad\System\Update::run($Messenger)) {
 				echo $Messenger->getSuccess() . PHP_EOL;
 
-				exit(0);
+				return 0;
 			}
 
 			echo $Messenger->getError() . PHP_EOL;
-			echo 'Update has failed' . PHP_EOL;
+			echo Console::clr('error', 'Update has failed') . PHP_EOL;
 
-			exit(1);
+			return 1;
 		}
 
-		echo 'Up to date' . PHP_EOL;
+		echo Console::clr('text', 'Up to date') . PHP_EOL;
+
+		return 0;
 	}
 }

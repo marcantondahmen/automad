@@ -47,14 +47,23 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Purge extends AbstractCommand {
+class CachePurge extends AbstractCommand {
 	/**
-	 * Get the command help.
+	 * Get the command description.
 	 *
-	 * @return string the command help
+	 * @return string the command description
 	 */
-	public static function help(): string {
+	public function description(): string {
 		return 'Purge the cache directory including all cached images and deleted pages.';
+	}
+
+	/**
+	 * Get the command example.
+	 *
+	 * @return string the command example
+	 */
+	public function example(): string {
+		return '';
 	}
 
 	/**
@@ -62,15 +71,18 @@ class Purge extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name(): string {
-		return 'purge';
+	public function name(): string {
+		return 'cache:purge';
 	}
 
 	/**
 	 * The actual command action.
+	 *
+	 * @return int exit code
 	 */
-	public static function run(): void {
-		echo 'Purging cache directory ...' . PHP_EOL;
+	public function run(): int {
 		FileSystem::purgeCache();
+
+		return 0;
 	}
 }

@@ -15,7 +15,7 @@
         }
     ],
     "scripts": {
-        "post-create-project-cmd": "@php automad/console createuser"
+        "post-create-project-cmd": "@php automad/console user:create"
     },
     "require": {
         "php": ">=8.2",

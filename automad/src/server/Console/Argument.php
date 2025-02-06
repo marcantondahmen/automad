@@ -27,64 +27,56 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Console\Commands;
-
-use Automad\Console\ArgumentCollection;
+namespace Automad\Console;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The abstract base command class.
+ * The console argument type class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-abstract class AbstractCommand {
+class Argument {
 	/**
-	 * The argument collection.
+	 * The description.
 	 */
-	public ArgumentCollection $ArgumentCollection;
+	public readonly string $description;
+
+	/**
+	 * The argument name.
+	 */
+	public readonly string $name;
+
+	/**
+	 * True if the arg is required.
+	 */
+	public readonly bool $required;
+
+	/**
+	 * The value.
+	 */
+	public string $value;
 
 	/**
 	 * The constructor.
+	 *
+	 * @param string $name
+	 * @param string $description
+	 * @param bool $required
 	 */
-	public function __construct() {
-		$this->ArgumentCollection = new ArgumentCollection(array());
+	public function __construct(string $name, string $description, bool $required = false) {
+		$this->name = $name;
+		$this->description = $description;
+		$this->required = $required;
+		$this->value = '';
 	}
-
-	/**
-	 * Get the command description.
-	 *
-	 * @return string the command description
-	 */
-	abstract public function description(): string;
-
-	/**
-	 * Get the command example.
-	 *
-	 * @return string the command example
-	 */
-	abstract public function example(): string;
-
-	/**
-	 * Get the command name.
-	 *
-	 * @return string the command name
-	 */
-	abstract public function name(): string;
-
-	/**
-	 * The actual command action.
-	 *
-	 * @return int exit code
-	 */
-	abstract public function run(): int;
 }

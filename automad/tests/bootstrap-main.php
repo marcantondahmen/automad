@@ -4,6 +4,7 @@ use Automad\Autoload;
 use Automad\Core\Config;
 
 define('AUTOMAD', true);
+define('AUTOMAD_CONSOLE', true);
 define('AM_BASE_DIR', realpath(__DIR__ . '/../..'));
 define('AM_BASE_URL', '');
 define('AM_DIR_PACKAGES', '/automad/tests/main/packages');
