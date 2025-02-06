@@ -57,9 +57,9 @@ class UserCreate extends AbstractCommand {
 	 */
 	public function __construct() {
 		$this->ArgumentCollection = new ArgumentCollection(array(
-			new Argument('username', 'The username'),
 			new Argument('email', 'The email address'),
-			new Argument('password', 'The password')
+			new Argument('username', 'The username (defaults to a random username)'),
+			new Argument('password', 'The password (defaults to a random password)')
 		));
 	}
 
@@ -69,7 +69,7 @@ class UserCreate extends AbstractCommand {
 	 * @return string the command description
 	 */
 	public function description(): string {
-		return 'Create a new user with a random name and password.';
+		return 'Create a new user.';
 	}
 
 	/**
