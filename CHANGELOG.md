@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-alpha.17](https://github.com/marcantondahmen/automad/commit/2f3c250173b84d88cb0775ae946b5ac2ff45fd1f)
+## [v2.0.0-alpha.18](https://github.com/marcantondahmen/automad/commit/fcff14f7eee4c5ae853e5abf7965a83988783856)
 
-Sat, 1 Feb 2025 16:54:29 +0100
+Sat, 8 Feb 2025 14:17:19 +0100
+
+### New Features
+
+- add configuration option to enable open_basedir restriction ([4d067f7ea](https://github.com/marcantondahmen/automad/commit/4d067f7ea6b0fc5e7e8a862f3815c5af33e2dd37))
+- add option to add account details when creating users with the console ([bafa155ea](https://github.com/marcantondahmen/automad/commit/bafa155eaad021f2f6656f6deb0928837ba58585))
+- add option to hide caching, debug and mail settings from users ([824ebc7f5](https://github.com/marcantondahmen/automad/commit/824ebc7f597893734a255940bf2d1bf9f12ec442))
+- add option to put server in maintenance mode and make content read-only ([1cf051b9c](https://github.com/marcantondahmen/automad/commit/1cf051b9c8f2a6164ccfa3f6c82d52746e634c54))
+- improve console and add config commands ([3cebd17f6](https://github.com/marcantondahmen/automad/commit/3cebd17f6620972d3f4ef976ae9b63d56c60d924))
+
+## [v2.0.0-alpha.17](https://github.com/marcantondahmen/automad/commit/c9476f22fe75fbebdb2b0bceaf7f6336bc0ae683)
+
+Sat, 1 Feb 2025 16:57:15 +0100
 
 ### New Features
 
@@ -572,16 +584,3 @@ Sat, 7 Aug 2021 19:45:51 +0200
 - **ui**: fix disabled save button after deleting unused variable field ([fe375915e](https://github.com/marcantondahmen/automad/commit/fe375915e5afaa9fb9ec4798df3c466fd0e283a5))
 - **ui**: fix position of block editor toolbar on large devices ([e19b4b983](https://github.com/marcantondahmen/automad/commit/e19b4b98356d22ed475a8f27489c1d65a26e83e2))
 - **ui**: fix switcher tab update on hashchanges ([2a6725d37](https://github.com/marcantondahmen/automad/commit/2a6725d374ffd0b575b8ce98f7a0eb14707d222e))
-
-## [v1.7.5](https://github.com/marcantondahmen/automad/commit/fe9027615d9a63051fa4e0cca80d7000a2830bae)
-
-Wed, 23 Jun 2021 20:24:36 +0200
-
-### New Features
-
-- **blocks**: add option to exclude or include hidden pages ([64625ddbb](https://github.com/marcantondahmen/automad/commit/64625ddbb25bf224096b94085af98fa178d3f1f9))
-
-### Bugfixes
-
-- **sitemap**: exclude private pages from sitemap.xml ([e4b6169c4](https://github.com/marcantondahmen/automad/commit/e4b6169c4c74be7a0d5cdf2bf09106e05a38b70a))
-- **ui**: remove resize option in image selection dialog ([3af5973c3](https://github.com/marcantondahmen/automad/commit/3af5973c3b406a2ff74545c3a8e2b716de2ed1b1))
