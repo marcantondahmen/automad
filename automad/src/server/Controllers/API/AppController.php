@@ -68,6 +68,7 @@ class AppController {
 			$Automad = Automad::fromCache();
 
 			return $Response->setData(array(
+				'cloudMode' => AM_CLOUD_MODE_ENABLED,
 				'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
 				'languages' => self::getLanguages(),
 				'reservedFields' => Fields::$reserved,

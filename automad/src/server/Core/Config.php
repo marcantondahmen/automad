@@ -154,6 +154,10 @@ class Config {
 		self::set('AM_MAINTENANCE_MODE_ENABLED', getenv('AM_MAINTENANCE_MODE_ENABLED'));
 		self::set('AM_MAINTENANCE_MODE_TEXT', Text::get('maintenanceModeText'));
 
+		// Cloud mode
+		// Enable this in order to define fixed settings for caching, email etc.
+		self::set('AM_CLOUD_MODE_ENABLED', getenv('AM_CLOUD_MODE_ENABLED'));
+
 		// Mail
 		self::set('AM_MAIL_TRANSPORT', MailConfig::DEFAULT_TRANSPORT);
 		self::set('AM_MAIL_FROM', MailConfig::getDefaultFrom());

@@ -119,6 +119,15 @@ export class App {
 	static isReady = false;
 
 	/**
+	 * True if app is a cloud instance.
+	 *
+	 * @static
+	 */
+	static get isCloud(): boolean {
+		return App.getState('cloudMode');
+	}
+
+	/**
 	 * The array of allowed file types.
 	 *
 	 * @static
