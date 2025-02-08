@@ -27,7 +27,7 @@ class ArgumentCollectionTest extends TestCase {
 			array(
 				UserCreate::class,
 				array('automad/console', 'user:create', '--email', 'test@test.local'),
-				array('username=', 'email=test@test.local', 'password='),
+				array('email=test@test.local', 'username=', 'password='),
 				true
 			)
 		);
