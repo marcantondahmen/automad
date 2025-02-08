@@ -47,6 +47,7 @@ export * from './notify';
 export * from './request';
 export * from './router';
 export * from './state';
+export * from './theme';
 export * from './toggles';
 export * from './tooltips';
 export * from './undo';

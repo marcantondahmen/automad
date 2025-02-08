@@ -115,6 +115,19 @@ class Routes {
 		$Router->register(
 			"$apiBase/.*",
 			function () {
+				header('Content-Type: application/json; charset=utf-8');
+
+				$Response = new Response();
+				$Response->setCode(403);
+
+				exit($Response->json());
+			},
+			AM_MAINTENANCE_MODE_ENABLED
+		);
+
+		$Router->register(
+			"$apiBase/.*",
+			function () {
 				return RequestHandler::getResponse();
 			},
 			$isAuthenticatedUser

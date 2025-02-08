@@ -148,6 +148,12 @@ class Config {
 		// Enable open_basedir restriction
 		self::set('AM_OPEN_BASEDIR_ENABLED', true);
 
+		// Enable maintenance mode
+		// During maintenance, all content is accessible for visitors but read-only.
+		// This allows for server maintenance or moving a site to another server in a safe way.
+		self::set('AM_MAINTENANCE_MODE_ENABLED', getenv('AM_MAINTENANCE_MODE_ENABLED'));
+		self::set('AM_MAINTENANCE_MODE_TEXT', Text::get('maintenanceModeText'));
+
 		// Mail
 		self::set('AM_MAIL_TRANSPORT', MailConfig::DEFAULT_TRANSPORT);
 		self::set('AM_MAIL_FROM', MailConfig::getDefaultFrom());
