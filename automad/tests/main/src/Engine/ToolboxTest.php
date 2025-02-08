@@ -35,6 +35,8 @@ class ToolboxTest extends TestCase {
 		$Mock = new Mock();
 		$Toolbox = new Toolbox($Mock->createAutomad());
 		$Toolbox->set(array($key => $value));
+
+		/** @disregard */
 		$this->assertEquals(SessionData::get($key), $expected);
 	}
 
@@ -51,6 +53,8 @@ class ToolboxTest extends TestCase {
 		$Toolbox = new Toolbox($Automad);
 		$Shared = $Automad->Shared;
 		$Toolbox->set(array($key => $value));
+
+		/** @disregard */
 		$this->assertEquals($Shared->get($key), $expected);
 	}
 }

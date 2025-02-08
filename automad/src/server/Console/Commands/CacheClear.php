@@ -47,14 +47,23 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ClearCache extends AbstractCommand {
+class CacheClear extends AbstractCommand {
 	/**
-	 * Get the command help.
+	 * Get the command description.
 	 *
-	 * @return string the command help
+	 * @return string the command description
 	 */
-	public static function help(): string {
+	public function description(): string {
 		return 'Clear the page cache.';
+	}
+
+	/**
+	 * Get the command example.
+	 *
+	 * @return string the command example
+	 */
+	public function example(): string {
+		return '';
 	}
 
 	/**
@@ -62,15 +71,18 @@ class ClearCache extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name(): string {
-		return 'clearcache';
+	public function name(): string {
+		return 'cache:clear';
 	}
 
 	/**
 	 * The actual command action.
+	 *
+	 * @return int exit code
 	 */
-	public static function run(): void {
-		echo 'Clearing page cache ...' . PHP_EOL;
+	public function run(): int {
 		Cache::clear();
+
+		return 0;
 	}
 }

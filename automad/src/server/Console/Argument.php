@@ -27,50 +27,56 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Console\Commands;
-
-use Automad\Core\FileSystem;
+namespace Automad\Console;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The purge command.
+ * The console argument type class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Purge extends AbstractCommand {
+class Argument {
 	/**
-	 * Get the command help.
-	 *
-	 * @return string the command help
+	 * The description.
 	 */
-	public static function help(): string {
-		return 'Purge the cache directory including all cached images and deleted pages.';
-	}
+	public readonly string $description;
 
 	/**
-	 * Get the command name.
-	 *
-	 * @return string the command name
+	 * The argument name.
 	 */
-	public static function name(): string {
-		return 'purge';
-	}
+	public readonly string $name;
 
 	/**
-	 * The actual command action.
+	 * True if the arg is required.
 	 */
-	public static function run(): void {
-		echo 'Purging cache directory ...' . PHP_EOL;
-		FileSystem::purgeCache();
+	public readonly bool $required;
+
+	/**
+	 * The value.
+	 */
+	public string $value;
+
+	/**
+	 * The constructor.
+	 *
+	 * @param string $name
+	 * @param string $description
+	 * @param bool $required
+	 */
+	public function __construct(string $name, string $description, bool $required = false) {
+		$this->name = $name;
+		$this->description = $description;
+		$this->required = $required;
+		$this->value = '';
 	}
 }

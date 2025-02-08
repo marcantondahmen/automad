@@ -8,6 +8,8 @@
 	
 	"AM_DEBUG_ENABLED": false,
 
+	"AM_OPEN_BASEDIR_ENABLED": true,
+
 	"AM_DISK_QUOTA": 2048,
 	
 	"AM_FEED_ENABLED": true,

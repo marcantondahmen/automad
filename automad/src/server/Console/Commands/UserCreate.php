@@ -36,27 +36,40 @@
 
 namespace Automad\Console\Commands;
 
-use Automad\App;
+use Automad\Console\Argument;
+use Automad\Console\ArgumentCollection;
 use Automad\Console\Console;
 use Automad\Core\Messenger;
+use Automad\Models\UserCollection;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The update command.
+ * The createuser command.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Update extends AbstractCommand {
+class UserCreate extends AbstractCommand {
+	/**
+	 * The constructor.
+	 */
+	public function __construct() {
+		$this->ArgumentCollection = new ArgumentCollection(array(
+			new Argument('email', 'The email address'),
+			new Argument('username', 'The username (defaults to a random username)'),
+			new Argument('password', 'The password (defaults to a random password)')
+		));
+	}
+
 	/**
 	 * Get the command description.
 	 *
 	 * @return string the command description
 	 */
 	public function description(): string {
-		return 'Update Automad to the latest version.';
+		return 'Create a new user.';
 	}
 
 	/**
@@ -65,7 +78,7 @@ class Update extends AbstractCommand {
 	 * @return string the command example
 	 */
 	public function example(): string {
-		return '';
+		return 'php automad/console user:create --email user@domain.com';
 	}
 
 	/**
@@ -74,7 +87,7 @@ class Update extends AbstractCommand {
 	 * @return string the command name
 	 */
 	public function name(): string {
-		return 'update';
+		return 'user:create';
 	}
 
 	/**
@@ -83,35 +96,35 @@ class Update extends AbstractCommand {
 	 * @return int exit code
 	 */
 	public function run(): int {
-		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
-			echo Console::clr('error', 'Can\'t run updates within the development repository!') . PHP_EOL;
+		echo Console::clr('text', 'Creating new user account for the Automad dashboard ...') . PHP_EOL . PHP_EOL;
 
-			return 1;
-		}
-
-		echo Console::clr('heading', 'Automad version ' . App::VERSION) . PHP_EOL;
-		echo Console::clr('code', 'Update branch is ' . AM_UPDATE_BRANCH) . PHP_EOL;
-
-		$updateVersion = \Automad\System\Update::getVersion();
+		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
 
-		if (version_compare(App::VERSION, $updateVersion, '<')) {
-			echo Console::clr('text', 'Updating to version ' . $updateVersion) . PHP_EOL;
+		$name = $this->ArgumentCollection->value('username');
+		$name = strlen($name) ? $name : 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
 
-			if (\Automad\System\Update::run($Messenger)) {
-				echo $Messenger->getSuccess() . PHP_EOL;
+		$email = $this->ArgumentCollection->value('email');
 
-				return 0;
-			}
+		$password = $this->ArgumentCollection->value('password');
+		$password = strlen($password) ? $password : substr(str_shuffle(MD5(microtime())), 0, 10);
 
-			echo $Messenger->getError() . PHP_EOL;
-			echo Console::clr('error', 'Update has failed') . PHP_EOL;
+		$UserCollection->createUser($name, $password, $password, $email, $Messenger);
+		$UserCollection->save($Messenger);
 
-			return 1;
+		if (!$Messenger->getError()) {
+			echo Console::clr('heading', '--------------------') . PHP_EOL;
+			echo Console::clr('heading', 'Name:     ' . $name) . PHP_EOL;
+			echo Console::clr('heading', 'Email:    ' . $email) . PHP_EOL;
+			echo Console::clr('heading', 'Password: ' . $password) . PHP_EOL;
+			echo Console::clr('heading', '--------------------') . PHP_EOL;
+
+			return 0;
 		}
 
-		echo Console::clr('text', 'Up to date') . PHP_EOL;
+		echo Console::clr('error', $Messenger->getError()) . PHP_EOL;
+		echo Console::clr('error', 'Creating user account failed') . PHP_EOL;
 
-		return 0;
+		return 1;
 	}
 }

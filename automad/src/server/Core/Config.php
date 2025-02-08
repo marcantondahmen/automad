@@ -145,6 +145,19 @@ class Config {
 		// Mail address obfuscation
 		self::set('AM_MAIL_OBFUSCATION_ENABLED', true);
 
+		// Enable open_basedir restriction
+		self::set('AM_OPEN_BASEDIR_ENABLED', true);
+
+		// Enable maintenance mode
+		// During maintenance, all content is accessible for visitors but read-only.
+		// This allows for server maintenance or moving a site to another server in a safe way.
+		self::set('AM_MAINTENANCE_MODE_ENABLED', getenv('AM_MAINTENANCE_MODE_ENABLED'));
+		self::set('AM_MAINTENANCE_MODE_TEXT', Text::get('maintenanceModeText'));
+
+		// Cloud mode
+		// Enable this in order to define fixed settings for caching, email etc.
+		self::set('AM_CLOUD_MODE_ENABLED', getenv('AM_CLOUD_MODE_ENABLED'));
+
 		// Mail
 		self::set('AM_MAIL_TRANSPORT', MailConfig::DEFAULT_TRANSPORT);
 		self::set('AM_MAIL_FROM', MailConfig::getDefaultFrom());

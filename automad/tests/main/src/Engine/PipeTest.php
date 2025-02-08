@@ -52,6 +52,7 @@ class PipeTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testProcessIsEqual($value, $functions, $expected) {
+		/** @disregard */
 		$this->assertEquals(Pipe::process($value, $functions), $expected);
 	}
 }

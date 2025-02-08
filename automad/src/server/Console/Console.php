@@ -37,6 +37,7 @@
 namespace Automad\Console;
 
 use Automad\App;
+use Automad\Console\Commands\AbstractCommand;
 use Automad\Core\FileSystem;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
@@ -50,20 +51,45 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  */
 class Console {
 	/**
+	 * Colors.
+	 */
+	const COLORS = array(
+		'code' => 32,
+		'title' => 35,
+		'heading' => 33,
+		'text' => 37,
+		'arg' => 34,
+		'version' => 90,
+		'error' => 91
+	);
+
+	/**
 	 * The console constructor.
 	 *
 	 * @param array $argv
 	 */
 	public function __construct(array $argv) {
-		echo 'Automad Console version ' . App::VERSION . PHP_EOL . PHP_EOL;
-		$this->runCommand($argv);
+		$this->run($argv);
 		echo PHP_EOL;
+	}
+
+	/**
+	 * Colorize a string.
+	 *
+	 * @param string $color
+	 * @param string $str
+	 * @return string
+	 */
+	public static function clr(string $color, string $str): string {
+		$code = self::COLORS[$color] ?? 37;
+
+		return "\033[{$code}m{$str}\033[0m";
 	}
 
 	/**
 	 * Get the list of available commands.
 	 *
-	 * @return array the list of command objects
+	 * @return AbstractCommand[] the list of command objects
 	 */
 	private function getCommands(): array {
 		$files = FileSystem::glob(AM_BASE_DIR . '/automad/src/server/Console/Commands/*.php');
@@ -80,25 +106,42 @@ class Console {
 
 		foreach ($classList as $cls) {
 			$command = new $cls();
-			$commands[$command->name()] = (object) array(
-				'class' => $cls,
-				'help' => $command->help()
-			);
+			$commands[$command->name()] = $command;
 		}
 
+		/** @var AbstractCommand[] */
 		return $commands;
 	}
 
 	/**
 	 * Show the help for all available commands.
 	 *
-	 * @param array $commands
+	 * @param AbstractCommand[] $commands
 	 */
 	private function help(array $commands): void {
-		echo PHP_EOL . 'Commands: ' . PHP_EOL;
+		echo PHP_EOL . self::clr('heading', 'Commands: ') . PHP_EOL;
 
 		foreach ($commands as $name => $command) {
-			echo '    ' . str_pad($name, 15) . $command->help . PHP_EOL;
+			echo '    ' . self::clr('code', str_pad($name, 15)) . self::clr('text', $command->description()) . PHP_EOL;
+
+			$args = $command->ArgumentCollection->args;
+
+			if (count($args)) {
+				echo PHP_EOL . str_pad(' ', 19, ' ', STR_PAD_LEFT) . self::clr('heading', 'Arguments:') . PHP_EOL;
+			}
+
+			foreach ($args as $Argument) {
+				echo str_pad(' ', 19, ' ', STR_PAD_LEFT);
+				echo self::clr('arg', str_pad('--' . $Argument->name, 10, ' ')) . '  ';
+				echo self::clr('text', ($Argument->required ? '' : '[optional] ') . $Argument->description) . PHP_EOL;
+			}
+
+			echo PHP_EOL;
+
+			if ($example = $command->example()) {
+				echo str_pad(' ', 19, ' ', STR_PAD_LEFT) . self::clr('heading', 'Example: ') . PHP_EOL;
+				echo str_pad(' ', 19, ' ', STR_PAD_LEFT) . self::clr('code', $example) . PHP_EOL . PHP_EOL;
+			}
 		}
 	}
 
@@ -107,24 +150,31 @@ class Console {
 	 *
 	 * @param array $argv
 	 */
-	private function runCommand(array $argv): void {
+	private function run(array $argv): void {
 		$commands = $this->getCommands();
 
 		if (empty($argv[1])) {
-			echo 'Usage:' . PHP_EOL;
-			echo '    php automad/console [command]' . PHP_EOL;
+			echo PHP_EOL . self::clr('title', 'AUTOMAD CONSOLE') . self::clr('version', ' (' . App::VERSION . ')') . PHP_EOL . PHP_EOL;
+			echo self::clr('heading', 'Usage:') . PHP_EOL;
+			echo self::clr('code', '    php automad/console command [-a value ...] ') . PHP_EOL;
 			$this->help($commands);
-		} else {
-			$name = $argv[1];
-
-			if (array_key_exists($name, $commands)) {
-				$cls = $commands[$name]->class;
-				$command = new $cls;
-				$command->run();
-			} else {
-				echo "The command $name does not exist." . PHP_EOL;
-				$this->help($commands);
-			}
+			exit(0);
 		}
+
+		$name = $argv[1];
+
+		if (array_key_exists($name, $commands)) {
+			$command = $commands[$name];
+
+			if (!$command->ArgumentCollection->parseArgv($argv)) {
+				exit(1);
+			}
+
+			exit($command->run());
+		}
+
+		echo self::clr('error', "The command [$name] does not exist.") . PHP_EOL;
+		$this->help($commands);
+		exit(1);
 	}
 }

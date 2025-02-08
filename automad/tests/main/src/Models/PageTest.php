@@ -18,6 +18,7 @@ class PageTest extends TestCase {
 		$Page = $Automad->Context->get();
 		$default = $Page->get('+default', true);
 
+		/** @disregard */
 		$this->assertEquals($default['blocks'][0]['data']['text'], 'test');
 	}
 }

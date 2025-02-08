@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2018-2025 by Marc Anton Dahmen
+ * Copyright (c) 2021-2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,26 +36,34 @@
 
 namespace Automad\Console\Commands;
 
-use Automad\Core\Messenger;
-use Automad\Models\UserCollection;
+use Automad\Core\FileSystem;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The createuser command.
+ * The purge command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2018-2025 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class CreateUser extends AbstractCommand {
+class CachePurge extends AbstractCommand {
 	/**
-	 * Get the command help.
+	 * Get the command description.
 	 *
-	 * @return string the command help
+	 * @return string the command description
 	 */
-	public static function help(): string {
-		return 'Create a new user with a random name and password.';
+	public function description(): string {
+		return 'Purge the cache directory including all cached images and deleted pages.';
+	}
+
+	/**
+	 * Get the command example.
+	 *
+	 * @return string the command example
+	 */
+	public function example(): string {
+		return '';
 	}
 
 	/**
@@ -63,37 +71,18 @@ class CreateUser extends AbstractCommand {
 	 *
 	 * @return string the command name
 	 */
-	public static function name(): string {
-		return 'createuser';
+	public function name(): string {
+		return 'cache:purge';
 	}
 
 	/**
 	 * The actual command action.
+	 *
+	 * @return int exit code
 	 */
-	public static function run(): void {
-		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
+	public function run(): int {
+		FileSystem::purgeCache();
 
-		$UserCollection = new UserCollection();
-		$Messenger = new Messenger();
-
-		$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
-		$password = substr(str_shuffle(MD5(microtime())), 0, 10);
-
-		$UserCollection->createUser($name, $password, $password, '', $Messenger);
-		$UserCollection->save($Messenger);
-
-		if (!$Messenger->getError()) {
-			echo '--------------------' . PHP_EOL;
-			echo 'Name:     ' . $name . PHP_EOL;
-			echo 'Password: ' . $password . PHP_EOL;
-			echo '--------------------' . PHP_EOL;
-
-			exit(0);
-		}
-
-		echo $Messenger->getError() . PHP_EOL;
-		echo 'Creating user account failed' . PHP_EOL;
-
-		exit(1);
+		return 0;
 	}
 }

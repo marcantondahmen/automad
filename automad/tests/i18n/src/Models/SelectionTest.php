@@ -2,7 +2,6 @@
 
 namespace Automad\Models;
 
-use Automad\Core\I18n;
 use Automad\Core\Session;
 use PHPUnit\Framework\TestCase;
 
@@ -36,10 +35,11 @@ class SelectionTest extends TestCase {
 		$pages = $Selection->getSelection();
 		$actual = array();
 
-		foreach($pages as $Page) {
+		foreach ($pages as $Page) {
 			$actual[] = $Page->url;
 		}
 
+		/** @disregard */
 		$this->assertEquals(json_encode($expected), json_encode($actual));
 	}
 }

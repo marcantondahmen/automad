@@ -36,6 +36,7 @@ class ExtensionTest extends TestCase {
 		$Extension = new Extension('Vendor/Extension', array('parameter' => ''), $AutomadMock);
 		$assets = $Extension->getAssets();
 
+		/** @disregard */
 		$this->assertEquals(json_encode($assets), json_encode($expected));
 	}
 
@@ -48,6 +49,7 @@ class ExtensionTest extends TestCase {
 
 		$Extension = new Extension('Vendor/Extension', array('parameter' => 'Test'), $AutomadMock);
 
+		/** @disregard */
 		$this->assertEquals($Extension->getOutput(), 'Test');
 	}
 }

@@ -92,6 +92,10 @@ class InPage {
 	 * @return string The processed $str
 	 */
 	public function createUI(string $str): string {
+		if (AM_MAINTENANCE_MODE_ENABLED) {
+			return $str;
+		}
+
 		if (Session::getUsername()) {
 			$this->validateTemplate($str);
 
@@ -112,6 +116,10 @@ class InPage {
 	 * @return string The processed $value
 	 */
 	public function injectTemporaryEditButton(string $value, string $field, Context $Context): string {
+		if (AM_MAINTENANCE_MODE_ENABLED) {
+			return $value;
+		}
+
 		if ($Context->get()->get(Fields::TEMPLATE) === Page::TEMPLATE_NAME_404) {
 			return $value;
 		}

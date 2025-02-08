@@ -93,14 +93,22 @@ const settingsData = (): JumpbarItemData[] => {
 		};
 	};
 
+	const mail = App.isCloud
+		? []
+		: [item(Section.mail, 'systemMail', 'envelope')];
+
+	const debug = App.isCloud
+		? []
+		: [item(Section.debug, 'systemDebug', 'bug')];
+
 	const data: JumpbarItemData[] = [
 		item(Section.cache, 'systemCache', 'device-ssd'),
 		item(Section.users, 'systemUsers', 'person-badge'),
 		item(Section.feed, 'systemRssFeed', 'rss'),
-		item(Section.mail, 'systemMail', 'envelope'),
+		...mail,
 		item(Section.i18n, 'systemI18n', 'globe'),
 		item(Section.language, 'systemLanguage', 'translate'),
-		item(Section.debug, 'systemDebug', 'bug'),
+		...debug,
 		item(Section.update, 'systemUpdate', 'arrow-repeat', [
 			CSS.modalJumpbarDivider,
 		]),

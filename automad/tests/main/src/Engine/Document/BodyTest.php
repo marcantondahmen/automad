@@ -45,6 +45,7 @@ class BodyTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testAppendIsEqual($doc, $tag, $expected) {
+		/** @disregard */
 		$this->assertEquals(Body::append($doc, $tag), $expected);
 	}
 }

@@ -22,6 +22,7 @@ class FileUtilsTest extends TestCase {
 	 * @param mixed $str
 	 */
 	public function testFileIsImageIsFalse($str) {
+		/** @disregard */
 		$this->assertFalse(FileUtils::fileIsImage($str));
 	}
 
@@ -31,6 +32,7 @@ class FileUtilsTest extends TestCase {
 	 * @param mixed $str
 	 */
 	public function testFileIsImageIsTrue($str) {
+		/** @disregard */
 		$this->assertTrue(FileUtils::fileIsImage($str));
 	}
 }

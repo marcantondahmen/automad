@@ -167,6 +167,7 @@ class SearchTest extends TestCase {
 
 		$results = $Search->searchPerFile();
 
+		/** @disregard */
 		$this->assertSame(
 			json_encode($expected, JSON_PRETTY_PRINT),
 			json_encode($results, JSON_PRETTY_PRINT)

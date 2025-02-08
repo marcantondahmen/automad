@@ -61,6 +61,20 @@ class Dashboard {
 		};
 		$lang = Text::get('__lang__');
 
+		$title = 'Automad';
+		$body = <<<HTML
+			<am-root base-url="{$fn(AM_BASE_URL)}" base-index="{$fn(AM_BASE_INDEX)}"></am-root>
+		HTML;
+
+		if (AM_MAINTENANCE_MODE_ENABLED) {
+			$title = 'Maintenance — Automad';
+			$body = <<<HTML
+				<am-maintenance base-index="{$fn(AM_BASE_INDEX)}">
+					{$fn(AM_MAINTENANCE_MODE_TEXT)}
+				</am-maintenance>
+			HTML;
+		}
+
 		return <<< HTML
 			<!DOCTYPE html>
 			<html lang="$lang" class="am-ui">
@@ -73,7 +87,7 @@ class Dashboard {
 					name="viewport"
 					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				>
-				<title>Automad</title>
+				<title>$title</title>
 				{$fn(Asset::icon('dist/favicon.ico'))}
 				{$fn(Asset::css('dist/admin/vendor.bundle.css'))}
 				{$fn(Asset::css('dist/admin/main.bundle.css'))}
@@ -84,7 +98,7 @@ class Dashboard {
 				{$fn(Asset::js('dist/admin/main.bundle.js'))}
 			</head>
 			<body>
-				<am-root base-url="{$fn(AM_BASE_URL)}" base-index="{$fn(AM_BASE_INDEX)}"></am-root>
+				$body
 			</body>
 			</html>
 			HTML;

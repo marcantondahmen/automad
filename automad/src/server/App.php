@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class App {
-	const VERSION = '2.0.0-alpha.17';
+	const VERSION = '2.0.0-alpha.18';
 
 	/**
 	 * Required PHP version.
@@ -86,6 +86,8 @@ class App {
 
 		Config::overrides();
 		Config::defaults();
+
+		$this->setOpenBaseDir();
 
 		define('AM_REQUEST', Request::page());
 
@@ -131,6 +133,18 @@ class App {
 	private function runVersionCheck(): void {
 		if (version_compare(PHP_VERSION, $this->requiredPhpVersion, '<')) {
 			Error::exit('PHP out of date', "Please update your PHP version to $this->requiredPhpVersion or newer.");
+		}
+	}
+
+	/**
+	 * Enable basedir restriction if configured.
+	 */
+	private function setOpenBaseDir(): void {
+		if (AM_OPEN_BASEDIR_ENABLED) {
+			ini_set(
+				'open_basedir',
+				AM_BASE_DIR . PATH_SEPARATOR . AM_DIR_TMP . PATH_SEPARATOR . sys_get_temp_dir()
+			);
 		}
 	}
 

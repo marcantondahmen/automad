@@ -43,6 +43,7 @@ class ParseTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testCsvIsSame($str, $expected) {
+		/** @disregard */
 		$this->assertSame(Parse::csv($str), $expected);
 	}
 
@@ -53,6 +54,7 @@ class ParseTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testJsonOptionsIsSame($str, $expected) {
+		/** @disregard */
 		$this->assertSame(Parse::jsonOptions($str), $expected);
 	}
 }

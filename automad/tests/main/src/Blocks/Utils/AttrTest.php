@@ -155,6 +155,7 @@ class AttrTest extends TestCase {
 		$actual = preg_replace('/\>\s+\</', '><', Blocks::render($data, $Mock->createAutomad()));
 		$expected = preg_replace('/\>\s+\</', '><', $html);
 
+		/** @disregard */
 		$this->assertSame($expected, $actual);
 	}
 }

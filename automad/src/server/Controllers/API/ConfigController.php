@@ -66,14 +66,22 @@ class ConfigController {
 
 		switch (Request::post('type')) {
 			case 'cache':
-				$config['AM_CACHE_ENABLED'] = !empty(Request::post('cacheEnabled'));
-				$config['AM_CACHE_MONITOR_DELAY'] = intval(Request::post('cacheMonitorDelay'));
-				$config['AM_CACHE_LIFETIME'] = intval(Request::post('cacheLifetime'));
+				if (AM_CLOUD_MODE_ENABLED) {
+					$Response->setError(Text::get('permissionsDeniedError'));
+				} else {
+					$config['AM_CACHE_ENABLED'] = !empty(Request::post('cacheEnabled'));
+					$config['AM_CACHE_MONITOR_DELAY'] = intval(Request::post('cacheMonitorDelay'));
+					$config['AM_CACHE_LIFETIME'] = intval(Request::post('cacheLifetime'));
+				}
 
 				break;
 
 			case 'debug':
-				$config['AM_DEBUG_ENABLED'] = !empty(Request::post('debugEnabled'));
+				if (AM_CLOUD_MODE_ENABLED) {
+					$Response->setError(Text::get('permissionsDeniedError'));
+				} else {
+					$config['AM_DEBUG_ENABLED'] = !empty(Request::post('debugEnabled'));
+				}
 
 				break;
 
