@@ -85,9 +85,6 @@ class Debug {
 		// Disk usage.
 		self::diskUsage();
 
-		// Get server constants.
-		self::log($_SERVER, 'Server');
-
 		// Get last error.
 		self::log(error_get_last(), 'Last error');
 
@@ -112,7 +109,7 @@ class Debug {
 	}
 
 	/**
-	 * Write log to json file.
+	 * Write log and configuration dump to json files.
 	 */
 	public static function json(): void {
 		if (!AM_DEBUG_ENABLED) {
@@ -121,7 +118,13 @@ class Debug {
 
 		$file = AM_DIR_TMP . self::DIR_LOGS . AM_REQUEST . '/log.json';
 
-		FileSystem::writeJson($file, self::$buffer);
+		$definedConstants = get_defined_constants(true);
+		/** @var array<string, string> */
+		$userConstants = $definedConstants['user'];
+
+		ksort($userConstants);
+
+		FileSystem::writeJson($file, array_merge(self::$buffer, array('config' => $userConstants, 'server' => $_SERVER)));
 	}
 
 	/**
