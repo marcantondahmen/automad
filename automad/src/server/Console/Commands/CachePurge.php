@@ -41,7 +41,7 @@ use Automad\Core\FileSystem;
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The purge command.
+ * The cache:purge command.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
