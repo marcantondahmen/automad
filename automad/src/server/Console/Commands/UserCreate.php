@@ -45,7 +45,7 @@ use Automad\Models\UserCollection;
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The createuser command.
+ * The user:create command.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2025 by Marc Anton Dahmen - https://marcdahmen.de

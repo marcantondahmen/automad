@@ -38,9 +38,6 @@ namespace Automad\Models;
 
 use Automad\Core\Automad;
 use Automad\Core\Config;
-use Automad\Core\Debug;
-use Automad\Core\FileSystem;
-use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -104,7 +101,7 @@ class MailConfig {
 	 * @return string
 	 */
 	public static function getDefaultFrom(): string {
-		return 'noreply@' . ($_SERVER['SERVER_NAME'] ?? '');
+		return 'noreply@' . ($_SERVER['SERVER_NAME'] ?? 'localhost');
 	}
 
 	/**

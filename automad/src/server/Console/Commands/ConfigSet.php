@@ -44,7 +44,7 @@ use Automad\Core\Config as CoreConfig;
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The config-set command.
+ * The config:set command.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de

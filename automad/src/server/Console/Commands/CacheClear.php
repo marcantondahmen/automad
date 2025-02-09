@@ -41,7 +41,7 @@ use Automad\Core\Cache;
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The clearcache command.
+ * The cache:clear command.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de

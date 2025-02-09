@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class App {
-	const VERSION = '2.0.0-alpha.18';
+	const VERSION = '2.0.0-alpha.19';
 
 	/**
 	 * Required PHP version.
@@ -84,8 +84,7 @@ class App {
 
 		date_default_timezone_set(@date_default_timezone_get());
 
-		Config::overrides();
-		Config::defaults();
+		Config::init();
 
 		$this->setOpenBaseDir();
 
