@@ -84,8 +84,7 @@ class App {
 
 		date_default_timezone_set(@date_default_timezone_get());
 
-		Config::overrides();
-		Config::defaults();
+		Config::init();
 
 		$this->setOpenBaseDir();
 

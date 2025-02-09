@@ -50,14 +50,105 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Config {
 	/**
+	 * All keys that can be define as environment variable on the server.
+	 */
+	const ENV_VARS = array(
+		'AM_ALLOWED_FILE_TYPES',
+		'AM_DEBUG_ENABLED',
+		'AM_CACHE_ENABLED',
+		'AM_CACHE_MONITOR_DELAY',
+		'AM_CACHE_LIFETIME',
+		'AM_OPEN_BASEDIR_ENABLED',
+		'AM_MAINTENANCE_MODE_ENABLED',
+		'AM_MAINTENANCE_MODE_TEXT',
+		'AM_CLOUD_MODE_ENABLED',
+		'AM_MAIL_TRANSPORT',
+		'AM_MAIL_FROM',
+		'AM_MAIL_SMTP_PORT',
+		'AM_MAIL_SMTP_SERVER',
+		'AM_MAIL_SMTP_USERNAME',
+		'AM_MAIL_SMTP_PASSWORD',
+		'AM_PASSWORD_REQUIRED_CHARS',
+		'AM_PASSWORD_MIN_LENGTH',
+		'AM_DISK_QUOTA'
+	);
+
+	/**
 	 * The configuration file.
 	 */
 	const FILE = AM_BASE_DIR . '/config/config.php';
 
 	/**
+	 * Initialize the main config by merging all available sources.
+	 */
+	public static function init(): void {
+		self::fromFile();
+		self::fromEnv();
+		self::fromDefaults();
+	}
+
+	/**
+	 * Read configuration overrides as JSON string form PHP or JSON file
+	 * and decode the returned string. Note that now the configuration is stored in
+	 * PHP files instead of JSON files to make it less easy to access from outside.
+	 *
+	 * @param string $name
+	 * @return array The configuration array
+	 */
+	public static function read(string $name = ''): array {
+		$json = false;
+		$config = array();
+		$file = self::getConfigPath($name);
+
+		if (is_readable($file)) {
+			$json = require $file;
+		}
+
+		if ($json) {
+			$config = json_decode($json, true);
+		}
+
+		return $config;
+	}
+
+	/**
+	 * Define constant, if not defined already.
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 */
+	public static function set(string $name, mixed $value): void {
+		if (!defined($name)) {
+			define($name, $value);
+		}
+	}
+
+	/**
+	 * Write the configuration file.
+	 *
+	 * @param array $config
+	 * @param string $name
+	 * @return bool True on success
+	 */
+	public static function write(array $config, string $name = ''): bool {
+		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
+		$file = self::getConfigPath($name);
+		$success = FileSystem::write($file, $content);
+
+		Debug::log($file);
+
+		if ($success && function_exists('opcache_invalidate')) {
+			opcache_invalidate($file, true);
+		}
+
+		return $success;
+	}
+
+	/**
 	 * Define default values for all constants that are not overriden.
 	 */
-	public static function defaults(): void {
+	private static function fromDefaults(): void {
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);
 
@@ -151,12 +242,12 @@ class Config {
 		// Enable maintenance mode
 		// During maintenance, all content is accessible for visitors but read-only.
 		// This allows for server maintenance or moving a site to another server in a safe way.
-		self::set('AM_MAINTENANCE_MODE_ENABLED', getenv('AM_MAINTENANCE_MODE_ENABLED'));
+		self::set('AM_MAINTENANCE_MODE_ENABLED', false);
 		self::set('AM_MAINTENANCE_MODE_TEXT', Text::get('maintenanceModeText'));
 
 		// Cloud mode
 		// Enable this in order to define fixed settings for caching, email etc.
-		self::set('AM_CLOUD_MODE_ENABLED', getenv('AM_CLOUD_MODE_ENABLED'));
+		self::set('AM_CLOUD_MODE_ENABLED', false);
 
 		// Mail
 		self::set('AM_MAIL_TRANSPORT', MailConfig::DEFAULT_TRANSPORT);
@@ -175,10 +266,27 @@ class Config {
 	}
 
 	/**
+	 * Merge settings that can be defined as environment variables with config.
+	 */
+	private static function fromEnv(): void {
+		foreach (self::ENV_VARS as $key) {
+			$value = getenv($key);
+
+			if (is_numeric($value)) {
+				$value = floatval($value);
+			}
+
+			if (!empty($value)) {
+				self::set($key, $value);
+			}
+		}
+	}
+
+	/**
 	 * Merge default constants with overrides that are saved in config files
 	 * such as "config.php" and "config.mail.php".
 	 */
-	public static function overrides(): void {
+	private static function fromFile(): void {
 		$files = FileSystem::glob(AM_BASE_DIR . '/config/config.*');
 
 		foreach ($files as $file) {
@@ -192,64 +300,6 @@ class Config {
 				self::set($name, $value);
 			}
 		}
-	}
-
-	/**
-	 * Read configuration overrides as JSON string form PHP or JSON file
-	 * and decode the returned string. Note that now the configuration is stored in
-	 * PHP files instead of JSON files to make it less easy to access from outside.
-	 *
-	 * @param string $name
-	 * @return array The configuration array
-	 */
-	public static function read(string $name = ''): array {
-		$json = false;
-		$config = array();
-		$file = self::getConfigPath($name);
-
-		if (is_readable($file)) {
-			$json = require $file;
-		}
-
-		if ($json) {
-			$config = json_decode($json, true);
-		}
-
-		return $config;
-	}
-
-	/**
-	 * Define constant, if not defined already.
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 */
-	public static function set(string $name, mixed $value): void {
-		if (!defined($name)) {
-			define($name, $value);
-		}
-	}
-
-	/**
-	 * Write the configuration file.
-	 *
-	 * @param array $config
-	 * @param string $name
-	 * @return bool True on success
-	 */
-	public static function write(array $config, string $name = ''): bool {
-		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
-		$file = self::getConfigPath($name);
-		$success = FileSystem::write($file, $content);
-
-		Debug::log($file);
-
-		if ($success && function_exists('opcache_invalidate')) {
-			opcache_invalidate($file, true);
-		}
-
-		return $success;
 	}
 
 	/**

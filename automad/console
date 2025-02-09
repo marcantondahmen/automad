@@ -46,11 +46,12 @@ if (http_response_code() || !defined('STDIN')) {
 define('AUTOMAD', true);
 define('AUTOMAD_CONSOLE', true);
 define('AM_BASE_DIR', dirname(dirname(__FILE__)));
+define('AM_BASE_URL', '');
+define('AM_SERVER', '');
 
 require_once AM_BASE_DIR . '/automad/src/server/Autoload.php';
 
 Autoload::init();
-Config::overrides();
-Config::defaults();
+Config::init();
 
 $console = new Console($argv);
