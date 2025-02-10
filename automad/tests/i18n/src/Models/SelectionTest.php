@@ -9,21 +9,52 @@ use PHPUnit\Framework\TestCase;
  * @testdox Automad\Models\Selection
  */
 class SelectionTest extends TestCase {
-	public function dataForTestSelectionIsEqual() {
+	public function dataForTestFilterBreadcrumbsIsEqual() {
 		return array(
-			array('en', array('/', '/en', '/en/page')),
+			array('en', '/en/page/subpage', array('/en', '/en/page', '/en/page/subpage')),
+			array('de', '/de/page',array('/de', '/de/page'))
+		);
+	}
+
+	public function dataForTestFilterCurrentLanguageIsEqual() {
+		return array(
+			array('en', array('/', '/en', '/en/page', '/en/page/subpage')),
 			array('de', array('/', '/de', '/de/page'))
 		);
 	}
 
 	/**
-	 * @dataProvider dataForTestSelectionIsEqual
-	 * @testdox render $lang: $expected
+	 * @dataProvider dataForTestFilterBreadcrumbsIsEqual
+	 * @testdox Test filterBreadcrumbs method
+	 * @runInSeparateProcess
+	 * @param string $lang
+	 * @param string $url
+	 * @param array $expected
+	 */
+	public function testFilterBreadcrumbsIsEqual(string $lang, string $url, array $expected): void {
+		$_SESSION[Session::I18N_LANG] = 'en';
+
+		$Shared = new Shared();
+		$PageCollection = new PageCollection($Shared);
+
+		$Selection = new Selection($PageCollection->get());
+		$Selection->filterBreadcrumbs('/en/page/subpage');
+
+		/** @disregard */
+		$this->assertEquals(
+			array_keys($Selection->getSelection()),
+			array('/en', '/en/page', '/en/page/subpage')
+		);
+	}
+
+	/**
+	 * @dataProvider dataForTestFilterCurrentLanguageIsEqual
+	 * @testdox Test filterCurrentLanguage method
 	 * @runInSeparateProcess
 	 * @param string $lang
 	 * @param array $expected
 	 */
-	public function testSelectionIsEqual($lang, $expected) {
+	public function testFilterCurrentLanguageIsEqual($lang, $expected): void {
 		$_SESSION[Session::I18N_LANG] = $lang;
 
 		$Shared = new Shared();
@@ -40,6 +71,6 @@ class SelectionTest extends TestCase {
 		}
 
 		/** @disregard */
-		$this->assertEquals(json_encode($expected), json_encode($actual));
+		$this->assertEquals($expected, $actual);
 	}
 }

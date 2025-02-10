@@ -106,6 +106,7 @@ class Selection {
 		$I18n = I18n::get();
 		$lang = $I18n->getLanguage();
 		$home = "/$lang";
+		$level = $this->selection[$url]->level;
 
 		// Test whether $url is the URL of a real page.
 		// "Real" pages have a URL (not like search or error pages) and they exist in the selection array (not hidden).
@@ -113,15 +114,11 @@ class Selection {
 		if (strpos($url, '/') === 0 && array_key_exists($url, $this->selection)) {
 			$pages = array();
 
-			// While $url is not the home page, strip each segement one by one and
-			// add the corresponding Page object to $pages.
-			while ($url != $home) {
+			while ($level >= 0) {
 				$pages[$url] = $this->selection[$url];
 				$url = '/' . trim(substr($url, 0, (int) strrpos($url, '/')), '/');
+				$level--;
 			}
-
-			// Add home page
-			$pages[$home] = $this->selection[$home];
 
 			// Reverse the $pages array and pass it to $this->selection.
 			$this->selection = array_reverse($pages);
