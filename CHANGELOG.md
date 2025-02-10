@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.19](https://github.com/marcantondahmen/automad/commit/5aae77d3539a6da1da08766bed2c0f3ba8367cd1)
+## [v2.0.0-alpha.20](https://github.com/marcantondahmen/automad/commit/0a859f791466b236ef098968903c4e12403b378d)
 
-Sun, 9 Feb 2025 13:18:24 +0100
+Mon, 10 Feb 2025 21:00:43 +0100
+
+### Bugfixes
+
+- fix infinite loop in breadcrumb api when editing pages with secondary language in dashboard and language routing is enabled ([cf44ff921](https://github.com/marcantondahmen/automad/commit/cf44ff921f9cc9f85c17fe7778ac79c54fec62c2))
+
+## [v2.0.0-alpha.19](https://github.com/marcantondahmen/automad/commit/a5c13210580525ed730c5bbbd7a857a90fbb2b74)
+
+Sun, 9 Feb 2025 13:23:36 +0100
 
 ### New Features
 
@@ -558,12 +566,3 @@ Sun, 8 Aug 2021 22:25:34 +0200
 ### Bugfixes
 
 - **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
-
-## [v1.8.1](https://github.com/marcantondahmen/automad/commit/8be976c0215c549d3ac27016b8c9fee02c052cca)
-
-Sat, 7 Aug 2021 23:06:36 +0200
-
-### Bugfixes
-
-- **ui**: fix breadcrumbs position in safari ([0ed10e20d](https://github.com/marcantondahmen/automad/commit/0ed10e20d8d32f963be4d76c84d79bcf967b77c0))
-- **ui**: fix status badge for outdated packages ([8b53a821f](https://github.com/marcantondahmen/automad/commit/8b53a821fa0d9cdc57af25f0eb122dc0dd312050))
