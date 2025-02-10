@@ -134,7 +134,7 @@ class Mock extends TestCase {
 			),
 			'/page/subpage/breadcrumbs-test' => new Page(
 				array(
-					'title' => 'breadcrumbs-test',
+					'title' => 'BreadcrumbsTest',
 					'url' => '/page/subpage/breadcrumbs-test',
 					':path' => '/page-slug/subpage/breadcrumbs-test',
 					':origUrl' => '/page/subpage/breadcrumbs-test',

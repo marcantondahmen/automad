@@ -139,7 +139,7 @@ class ViewTest extends TestCase {
 			'inheritance_03' => 'nested derived',
 			'inheritance_04' => 'nested derived override',
 			'invalid' => '//',
-			'pagelist_01' => 'Text Subpage Page Home Blocks',
+			'pagelist_01' => 'Text Subpage Page Home BreadcrumbsTest Blocks',
 			'pagelist_02' => 'Blocks Text',
 			'pagelist_03' => 'Home Subpage',
 			'pagelist_04' => '[/page]: includes not only the word find but also the word me. [/blocks]: Some text containing the word me and the word find nested in the list',
