@@ -132,6 +132,21 @@ class Mock extends TestCase {
 				),
 				$Shared
 			),
+			'/page/subpage/breadcrumbs-test' => new Page(
+				array(
+					'title' => 'BreadcrumbsTest',
+					'url' => '/page/subpage/breadcrumbs-test',
+					':path' => '/page-slug/subpage/breadcrumbs-test',
+					':origUrl' => '/page/subpage/breadcrumbs-test',
+					':parent' => '/page/subpage',
+					'theme' => $theme,
+					'template' => $template,
+					':level' => 3,
+					':index' => '1.1.1.1',
+					'tags' => ''
+				),
+				$Shared
+			),
 			'/text' => new Page(
 				array_merge(
 					array(
