@@ -151,18 +151,6 @@ class Cache {
 			Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
 		}
 
-		// Disable page caching $_GET is not empty.
-		if (!empty($_GET)) {
-			Debug::log($_GET, '$_GET is not empty! Disable page caching.');
-			$this->pageCachingIsEnabled = false;
-		}
-
-		// Disable page caching $_POST is not empty.
-		if (!empty($_POST)) {
-			Debug::log($_POST, '$_POST is not empty! Disable page caching.');
-			$this->pageCachingIsEnabled = false;
-		}
-
 		// Get page cache file path in case page caching is enabled.
 		if ($this->pageCachingIsEnabled) {
 			$this->pageCacheFile = $this->getPageCacheFilePath();
@@ -483,17 +471,28 @@ class Cache {
 	 * @return string The determined file name of the matching cached version of the visited page.
 	 */
 	private function getPageCacheFilePath(): string {
-		// Make sure that $route is never just '/', by wrapping the string in an extra rtrim().
 		$route = rtrim(AM_REQUEST, '/');
 
-		// Create hashed string of session data.
-		$sessionHash = '';
+		$parameters = array();
+		$suffix = '';
 
 		if ($sessionData = SessionData::get()) {
-			$sessionHash = '_' . sha1(strval(json_encode($sessionData)));
+			$parameters['session'] = $sessionData;
 		}
 
-		Debug::log($sessionData, 'Session Data');
+		if (!empty($_GET)) {
+			$parameters['get'] = $_GET;
+		}
+
+		if (!empty($_POST)) {
+			$parameters['post'] = $_POST;
+		}
+
+		if (!empty($parameters)) {
+			$hash = sha1(strval(json_encode($parameters)));
+			$suffix = ".$hash";
+			Debug::log($parameters, "Parameters hash $hash");
+		}
 
 		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name.
 		// The actual server name is then already part of the AM_BASE_URL.
@@ -501,7 +500,7 @@ class Cache {
 		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
 		$server = $_SERVER['HTTP_X_FORWARDED_SERVER'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''));
 		$port = $_SERVER['SERVER_PORT'] ?? '80';
-		$file = Cache::DIR_PAGES . '/' . $server . '_' . $port . AM_BASE_URL . $route . '/page' . $sessionHash;
+		$file = Cache::DIR_PAGES . '/' . $server . '_' . $port . AM_BASE_URL . $route . '/page' . $suffix;
 
 		Debug::log($file);
 
