@@ -1,8 +1,21 @@
 # Changelog
 
-## [v2.0.0-alpha.20](https://github.com/marcantondahmen/automad/commit/0a859f791466b236ef098968903c4e12403b378d)
+## [v2.0.0-alpha.21](https://github.com/marcantondahmen/automad/commit/a6d809e1f4cdd945f731c712d2e802b2d1927789)
 
-Mon, 10 Feb 2025 21:00:43 +0100
+Sun, 16 Feb 2025 13:15:28 +0100
+
+### New Features
+
+- bring back full error reporting when debugging is enabled ([0bdcc1b7d](https://github.com/marcantondahmen/automad/commit/0bdcc1b7dbec5040e9e1a4f0335ad6c896996a46))
+- enable page caching also when get, post or session are not empty ([38cd4725e](https://github.com/marcantondahmen/automad/commit/38cd4725e66306805b819e0edc674519721ec422))
+
+### Bugfixes
+
+- fix navigating to the homepage from the dashboard in safari ([a6d809e1f](https://github.com/marcantondahmen/automad/commit/a6d809e1f4cdd945f731c712d2e802b2d1927789))
+
+## [v2.0.0-alpha.20](https://github.com/marcantondahmen/automad/commit/098ebe45aaa2581f18a3437732a1f744d0d9efd6)
+
+Mon, 10 Feb 2025 21:02:46 +0100
 
 ### Bugfixes
 
@@ -553,16 +566,3 @@ Mon, 9 Aug 2021 23:21:36 +0200
 ### Bugfixes
 
 - **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
-
-## [v1.8.2](https://github.com/marcantondahmen/automad/commit/e070a89209c2e90eadb9be4b77580beef6aa75d1)
-
-Sun, 8 Aug 2021 22:25:34 +0200
-
-### New Features
-
-- **samples**: add pagelist example page ([2a033f4da](https://github.com/marcantondahmen/automad/commit/2a033f4dada04e3d2fd7d24f2d2d6b1bfd04986e))
-- **samples**: add tags and filters to example pages ([d18f2482b](https://github.com/marcantondahmen/automad/commit/d18f2482b2f258d7b42a6609a439769773ffb7f8))
-
-### Bugfixes
-
-- **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
