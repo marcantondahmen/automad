@@ -100,6 +100,18 @@ class Debug {
 	}
 
 	/**
+	 * Enable full error reporting, when debugging is enabled.
+	 */
+	public static function errorReporting(): void {
+		if (AM_DEBUG_ENABLED) {
+			error_reporting(E_ALL);
+			ini_set('display_errors', '1');
+		} else {
+			error_reporting(E_ERROR);
+		}
+	}
+
+	/**
 	 * Return the buffer array.
 	 *
 	 * @return array The log buffer array
