@@ -61,6 +61,8 @@ class LinkComponent extends BaseComponent {
 		listen(this, 'click', (event: Event) => {
 			if (this.elementAttributes[Attr.external]) {
 				window.location.href = this.elementAttributes[Attr.external];
+
+				return;
 			}
 
 			if (App.navigationIsLocked) {
