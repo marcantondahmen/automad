@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.21](https://github.com/marcantondahmen/automad/commit/a6d809e1f4cdd945f731c712d2e802b2d1927789)
+## [v2.0.0-alpha.22](https://github.com/marcantondahmen/automad/commit/748d57440a83fbdeb41e51f0614143e6d61ddf1e)
 
-Sun, 16 Feb 2025 13:15:28 +0100
+Sun, 16 Mar 2025 13:10:12 +0100
+
+### Bugfixes
+
+- make composer installation for package manager more stable ([1beffd9bd](https://github.com/marcantondahmen/automad/commit/1beffd9bd4fbe63ed89718a4dcbb69e1e36916b5))
+
+## [v2.0.0-alpha.21](https://github.com/marcantondahmen/automad/commit/7a15498c0005a8e86c83bca00052b806be511ef9)
+
+Sun, 16 Feb 2025 15:08:43 +0100
 
 ### New Features
 
@@ -554,15 +562,3 @@ Thu, 12 Aug 2021 22:24:51 +0200
 
 - **ui**: fix typo in text modules ([ba8702a87](https://github.com/marcantondahmen/automad/commit/ba8702a87d26afd0172294d541c1573925f77f56))
 - **ui**: fix updating links that are wrapped in quotes ([4417468d6](https://github.com/marcantondahmen/automad/commit/4417468d659c1e71e9b76698e377a19a1e209b5a))
-
-## [v1.8.3](https://github.com/marcantondahmen/automad/commit/aa72e82f0192571f5ae1a8b032720fd9b3fb8645)
-
-Mon, 9 Aug 2021 23:21:36 +0200
-
-### New Features
-
-- **core**: use a shortened md5 hash as directory slug in case a sanitized title is too short ([d6d5e57cd](https://github.com/marcantondahmen/automad/commit/d6d5e57cd663bcf0eed7c8697b7b454fac1064fb))
-
-### Bugfixes
-
-- **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
