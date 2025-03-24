@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.22](https://github.com/marcantondahmen/automad/commit/748d57440a83fbdeb41e51f0614143e6d61ddf1e)
+## [v2.0.0-alpha.23](https://github.com/marcantondahmen/automad/commit/b753360329405d2f5849e135f7c36ccfa5014773)
 
-Sun, 16 Mar 2025 13:10:12 +0100
+Mon, 24 Mar 2025 23:50:37 +0100
+
+### New Features
+
+- add new automad syntax theme ([b75336032](https://github.com/marcantondahmen/automad/commit/b753360329405d2f5849e135f7c36ccfa5014773))
+
+## [v2.0.0-alpha.22](https://github.com/marcantondahmen/automad/commit/393a06788c7c978366e5c7e61bf7fab169b7d639)
+
+Sun, 16 Mar 2025 13:15:06 +0100
 
 ### Bugfixes
 
@@ -547,18 +555,3 @@ Fri, 13 Aug 2021 01:21:26 +0200
 ### Bugfixes
 
 - **ui**: remove slug input from homepage settings ([38a0ca8e5](https://github.com/marcantondahmen/automad/commit/38a0ca8e5d37fd00c3acc86d5f9d10062cf2d9e8))
-
-## [v1.8.4](https://github.com/marcantondahmen/automad/commit/5512e55549473e27a2223803caa52200cdc70800)
-
-Thu, 12 Aug 2021 22:24:51 +0200
-
-### New Features
-
-- **core**: add Str::slug() method to sanitize ids and directory names ([4ee87a3bc](https://github.com/marcantondahmen/automad/commit/4ee87a3bc521921af36c19414a7e23eb730f9595))
-- **ui**: add chinese, japanese and korean translations ([a287a740e](https://github.com/marcantondahmen/automad/commit/a287a740ed4028278f799112c3723fbfb733efb2))
-- **ui**: add option to define a custom slug for a page ([c593fa29d](https://github.com/marcantondahmen/automad/commit/c593fa29d73edb5c7d0ca9c9649d3b5b9c52863e))
-
-### Bugfixes
-
-- **ui**: fix typo in text modules ([ba8702a87](https://github.com/marcantondahmen/automad/commit/ba8702a87d26afd0172294d541c1573925f77f56))
-- **ui**: fix updating links that are wrapped in quotes ([4417468d6](https://github.com/marcantondahmen/automad/commit/4417468d659c1e71e9b76698e377a19a1e209b5a))

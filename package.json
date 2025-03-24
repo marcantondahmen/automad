@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-alpha.22",
+  "version": "2.0.0-alpha.23",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "@vovayatsyuk/photoswipe-object-position": "^1.0.0",
     "@yaireo/tagify": "^4.17.6",
     "automad-editorjs": "^2.29.3",
-    "automad-prism-themes": "^0.3.1",
+    "automad-prism-themes": "^0.3.2",
     "bootstrap-icons": "^1.11.1",
     "browser-sync": "^3.0.2",
     "browser-sync-v3-webpack-plugin": "^0.1.0",

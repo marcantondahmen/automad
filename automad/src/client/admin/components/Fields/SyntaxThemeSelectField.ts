@@ -45,7 +45,7 @@ import {
 import { BaseFieldComponent } from './BaseField';
 import themes from 'automad-prism-themes/dist/themes.json';
 
-const defaultTheme = 'verdandi.light-dark';
+const defaultTheme = 'automad.light-dark';
 
 /**
  * A syntax theme select field.
