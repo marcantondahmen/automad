@@ -39,10 +39,13 @@ import {
 	controllerRoute,
 	create,
 	CSS,
+	EventName,
 	FileCollectionController,
+	fire,
 	getCsrfToken,
 	getPageURL,
 	html,
+	listen,
 	notifyError,
 	notifySuccess,
 	query,
@@ -164,14 +167,14 @@ class UploadComponent extends BaseComponent {
 	 * @param file
 	 */
 	private onSuccess(file: DropzoneFile): void {
-		const fileCollection = query<FileCollectionListFormComponent>(
-			'am-file-collection-list-form'
-		);
+		this.dropzone.removeFile(file);
 
 		notifySuccess(html`${App.text('uploadedSuccess')}:<br />$${file.name}`);
+		fire(EventName.filesChangeOnServer);
 
-		this.dropzone.removeFile(file);
-		fileCollection.refresh();
+		query<FileCollectionListFormComponent>(
+			'am-file-collection-list-form'
+		)?.refresh();
 	}
 
 	/**
