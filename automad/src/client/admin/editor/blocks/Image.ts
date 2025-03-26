@@ -43,10 +43,15 @@ import {
 	createImagePickerModal,
 	CSS,
 	debounce,
+	EventName,
 	FieldTag,
 	fire,
+	getPageURL,
 	html,
+	ImageController,
 	listen,
+	notifyError,
+	requestAPI,
 	resolveFileUrl,
 	uniqueId,
 } from '@/admin/core';
@@ -75,6 +80,9 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 		return {
 			patterns: {
 				image: /(https?:\/\/)?\S+\.(gif|jpe?g|tiff|png)$/i,
+			},
+			files: {
+				extensions: ['gif', 'jpg', 'png', 'webp'],
 			},
 		};
 	}
@@ -203,6 +211,46 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	onPaste(event: CustomEvent) {
 		if (event.type == 'pattern') {
 			this.setImage(event.detail.data);
+		}
+
+		if (event.type == 'file') {
+			const file = event.detail.file;
+			const reader = new FileReader();
+			const extension = file.type.split('/')[1];
+			const name = `image-${Date.now()}`;
+
+			reader.onload = async (loadEvent) => {
+				if (!extension) {
+					return;
+				}
+
+				this.wrapper.innerHTML = '<am-spinner></am-spinner>';
+
+				const { error } = await requestAPI(
+					ImageController.save,
+					{
+						url: getPageURL(),
+						name,
+						extension,
+						imageBase64: loadEvent.target.result,
+					},
+					false,
+					() => {
+						this.wrapper.innerHTML = '';
+
+						this.data.url = `${name}.${extension}`;
+						this.render();
+
+						fire(EventName.filesChangeOnServer);
+					}
+				);
+
+				if (error) {
+					notifyError(error);
+				}
+			};
+
+			reader.readAsDataURL(file);
 		}
 	}
 
