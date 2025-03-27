@@ -133,12 +133,6 @@ class Fields {
 	);
 
 	/**
-	 * A list of directories that have been scanned already.
-	 * This is useful to find templates in overwritten snippets.
-	 */
-	private static array $knowDirectories = array();
-
-	/**
 	 * Find all variable fields in the currently used template and all included snippets (and ignore those fields in $this->reserved).
 	 *
 	 * @param Page $Page
@@ -168,8 +162,6 @@ class Fields {
 		$dir = realpath(dirname($file));
 
 		if (is_readable($file) && $dir) {
-			self::$knowDirectories = array_unique(array_merge(self::$knowDirectories, array($dir)));
-
 			// Find all variable fields in the template file.
 			$content = strval(file_get_contents($file));
 			// Remove ~ characters to match includes correctly.
@@ -191,13 +183,6 @@ class Fields {
 
 					if (file_exists($include)) {
 						$fields = array_merge($fields, self::inTemplate($include));
-					} else {
-						// In case of overwritten snippets in different locations,
-						// scan also other already know directories from previous snipptes.
-						foreach (self::$knowDirectories as $knownDir) {
-							$include = $knownDir . '/' . $match['file'];
-							$fields = array_merge($fields, self::inTemplate($include));
-						}
 					}
 				}
 			}

@@ -186,6 +186,7 @@ class ViewTest extends TestCase {
 			'session_get_01' => 'Session Test',
 			'set_01' => 'Test 1, Test 2',
 			'snippet_01' => 'Snippet Test / Snippet Test',
+			'snippet_02' => 'Hello',
 			'toolbox_breadcrumbs_01' => '<ul><li><a href="/">Home</a></li> <li><a href="/index.php/page">Page</a></li> <li><a href="/index.php/page/subpage">Subpage</a></li> </ul>',
 			'toolbox_nav_01' => '<ul><li><a href="/">Home</a></li><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
 			'toolbox_nav_02' => '<ul><li><a href="/index.php/page">Page</a></li><li><a href="/index.php/text">Text</a></li><li><a href="/index.php/blocks">Blocks</a></li></ul>',
