@@ -35,6 +35,7 @@
 import {
 	App,
 	Attr,
+	blockTemplateName,
 	collectFieldData,
 	create,
 	createField,
@@ -135,11 +136,13 @@ export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 	 */
 	private renderForm(container: HTMLElement): void {
 		const disabled = this.readOnly ? { disabled: '' } : {};
-		const disabledAttr = this.readOnly ? 'disabled=""' : '';
 		const files = App.files.snippets.reduce(
 			(res: SelectComponentOption[], value) => [
 				...res,
-				{ value, text: value },
+				{
+					value,
+					text: blockTemplateName(value),
+				},
 			],
 			[{ value: '', text: '—' }]
 		);

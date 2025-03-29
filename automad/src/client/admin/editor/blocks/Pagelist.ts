@@ -35,6 +35,7 @@
 import {
 	App,
 	Attr,
+	blockTemplateName,
 	collectFieldData,
 	create,
 	createField,
@@ -156,7 +157,10 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 		const files = App.files.pagelist.reduce(
 			(res: SelectComponentOption[], value) => [
 				...res,
-				{ value, text: value },
+				{
+					value,
+					text: blockTemplateName(value),
+				},
 			],
 			[{ value: defaultFile, text: App.text('pagelistBlockDefaultFile') }]
 		);

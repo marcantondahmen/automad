@@ -35,6 +35,7 @@
 import {
 	App,
 	Attr,
+	blockTemplateName,
 	collectFieldData,
 	create,
 	createField,
@@ -136,7 +137,10 @@ export class FilelistBlock extends BaseBlock<FilelistBlockData> {
 		const files = App.files.filelist.reduce(
 			(res: SelectComponentOption[], value) => [
 				...res,
-				{ value, text: value },
+				{
+					value,
+					text: blockTemplateName(value),
+				},
 			],
 			[{ value: defaultFile, text: App.text('filelistBlockDefaultFile') }]
 		);
