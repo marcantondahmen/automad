@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-alpha.23](https://github.com/marcantondahmen/automad/commit/b753360329405d2f5849e135f7c36ccfa5014773)
+## [v2.0.0-alpha.24](https://github.com/marcantondahmen/automad/commit/19a2f81d641aaaf13313a6cfdb81778b07aa7870)
 
-Mon, 24 Mar 2025 23:50:37 +0100
+Mon, 31 Mar 2025 19:05:45 +0200
+
+### New Features
+
+- **ui**: display block template files in human readable form ([4478818db](https://github.com/marcantondahmen/automad/commit/4478818db261a9533afee2754322ce81aefa61bd))
+- add option to upload images inside the image picker modal ([83b58af5c](https://github.com/marcantondahmen/automad/commit/83b58af5c6a86ba079d3b65737d01643f43c06d8))
+- add support for pasting and dragging images to the block editor ([9707ac2e4](https://github.com/marcantondahmen/automad/commit/9707ac2e48e534f985b8e78b5bacba041504e13c))
+- bundle prism themes instead of using unpkg cdn ([19a2f81d6](https://github.com/marcantondahmen/automad/commit/19a2f81d641aaaf13313a6cfdb81778b07aa7870))
+
+### Bugfixes
+
+- display fields in the dashboard that are inside overwritten snippet includes ([7205533ee](https://github.com/marcantondahmen/automad/commit/7205533eef3caf3ccd76bb162ae4da95482c8aa1))
+- fix resolving includes inside snippets that are defined in separate files ([12843fef0](https://github.com/marcantondahmen/automad/commit/12843fef019b4d8d524f603138cc2774b348ae21))
+
+## [v2.0.0-alpha.23](https://github.com/marcantondahmen/automad/commit/569a77384abd28e4ef50fea71b00c998511377dd)
+
+Mon, 24 Mar 2025 23:52:57 +0100
 
 ### New Features
 
@@ -547,11 +563,3 @@ Tue, 31 Aug 2021 21:01:29 +0200
 
 - **system**: update Composer to version 2.1.6 in order to fix issues on Windows ([81cc05972](https://github.com/marcantondahmen/automad/commit/81cc05972ae4d10202adfe062ecc7b70f540edff))
 - **ui**: fix block editor toolbar on small devices ([6c81c4378](https://github.com/marcantondahmen/automad/commit/6c81c43780be143a01018d388d192d06690c61bd))
-
-## [v1.8.5](https://github.com/marcantondahmen/automad/commit/09942a0ab9c92aaacf651e7b7d359e0cc5f47459)
-
-Fri, 13 Aug 2021 01:21:26 +0200
-
-### Bugfixes
-
-- **ui**: remove slug input from homepage settings ([38a0ca8e5](https://github.com/marcantondahmen/automad/commit/38a0ca8e5d37fd00c3acc86d5f9d10062cf2d9e8))
