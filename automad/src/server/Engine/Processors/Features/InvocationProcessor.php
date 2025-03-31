@@ -83,12 +83,12 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 		$Toolbox = new Toolbox($this->Automad);
 
 		// Call snippet or method in order of priority: Snippets, Toolbox methods and extensions.
-		if ($snippet = SnippetCollection::get($call)) {
+		if ($Snippet = SnippetCollection::get($call)) {
 			// Process a registered snippet.
 			Debug::log($call, 'Process registered snippet');
 			$TemplateProcessor = $this->initTemplateProcessor();
 
-			return $TemplateProcessor->process($snippet, $directory, $collectSnippetDefinitions);
+			return $TemplateProcessor->process($Snippet->body, $Snippet->path, $collectSnippetDefinitions);
 		}
 
 		if (method_exists($Toolbox, $call)) {

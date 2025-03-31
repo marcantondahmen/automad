@@ -39,6 +39,7 @@ import {
 	Bindings,
 	create,
 	CSS,
+	EventName,
 	html,
 	ImageCollectionController,
 	listen,
@@ -71,6 +72,11 @@ class ImagePickerComponent extends BaseComponent {
 	private binding: Binding = null;
 
 	/**
+	 * The wrapper element.
+	 */
+	private wrapper: HTMLElement;
+
+	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
@@ -85,6 +91,10 @@ class ImagePickerComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.binding = Bindings.get(this.elementAttributes[Attr.binding]);
 		this.init();
+
+		this.addListener(
+			listen(window, EventName.filesChangeOnServer, this.init.bind(this))
+		);
 	}
 
 	/**
@@ -98,26 +108,24 @@ class ImagePickerComponent extends BaseComponent {
 		if (this.elementAttributes[Attr.label]) {
 			create('label', [CSS.fieldLabel], {}, this).textContent =
 				this.elementAttributes[Attr.label];
+
+			this.removeAttribute(Attr.label);
 		}
 
-		const wrapper = create(
-			'div',
-			[],
-			{},
-			this,
-			'<am-spinner></am-spinner>'
-		);
+		this.wrapper =
+			this.wrapper ??
+			create('div', [], {}, this, '<am-spinner></am-spinner>');
 
 		const { data } = await requestAPI(ImageCollectionController.list, {
 			url: this.elementAttributes[Attr.page] || '',
 		});
 
-		wrapper.innerHTML = '';
+		this.wrapper.innerHTML = '';
 
 		const { images } = data;
 
 		if (!images.length) {
-			wrapper.innerHTML = html`
+			this.wrapper.innerHTML = html`
 				<am-icon-text
 					${Attr.icon}="folder-x"
 					${Attr.text}="${App.text('noImagesFound')}"
@@ -127,7 +135,7 @@ class ImagePickerComponent extends BaseComponent {
 			return;
 		}
 
-		this.renderGrid(images, wrapper);
+		this.renderGrid(images, this.wrapper);
 	}
 
 	/**

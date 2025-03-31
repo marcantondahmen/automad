@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-alpha.23",
+  "version": "2.0.0-alpha.24",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -9,15 +9,14 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "build": "npm run clean && npm run copy-og-fonts && webpack --config webpack.config.js --mode production",
+    "build": "npm run prebuild && webpack --config webpack.config.js --mode production",
     "bump-year": "bash bin/bump-year.sh",
-    "clean": "rm -rf ./automad/dist/*/*",
-    "copy-og-fonts": "bash bin/copy-open-graph-fonts.sh",
-    "dev": "npm run clean && npm run copy-og-fonts && webpack --config webpack.config.js --mode development",
+    "dev": "npm run prebuild && webpack --config webpack.config.js --mode development",
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket 2&>/dev/null",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "phpunit": "bash bin/phpunit.sh",
+    "prebuild": "bash bin/prebuild.sh",
     "psalm": "bash bin/psalm.sh",
     "test": "npm run phpunit && npm run psalm && npm run jest"
   },
@@ -40,7 +39,7 @@
     "@vovayatsyuk/photoswipe-object-position": "^1.0.0",
     "@yaireo/tagify": "^4.17.6",
     "automad-editorjs": "^2.29.3",
-    "automad-prism-themes": "^0.3.2",
+    "automad-prism-themes": "^0.3.4",
     "bootstrap-icons": "^1.11.1",
     "browser-sync": "^3.0.2",
     "browser-sync-v3-webpack-plugin": "^0.1.0",

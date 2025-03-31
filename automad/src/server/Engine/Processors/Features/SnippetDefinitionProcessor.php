@@ -39,7 +39,6 @@ namespace Automad\Engine\Processors\Features;
 use Automad\Core\Debug;
 use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Delimiters;
-use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -72,7 +71,7 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 		// The first run only collects definitions and also allows for overriding them based on other definitions
 		// using the same name and that occur after their actual evaluation in a template.
 		if ($collectSnippetDefinitions) {
-			SnippetCollection::add($name, $body);
+			SnippetCollection::add($name, $body, $directory);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 
 			return '';
@@ -86,7 +85,7 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 		// before the engine is able the evaluate them. Therefore in any case undefined (!) snippet entries always
 		// have to be registered.
 		if (empty($collection[$name])) {
-			SnippetCollection::add($name, $body);
+			SnippetCollection::add($name, $body, $directory);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 		}
 

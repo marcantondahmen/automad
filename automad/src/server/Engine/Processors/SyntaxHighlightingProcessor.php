@@ -80,10 +80,7 @@ class SyntaxHighlightingProcessor {
 		$theme = $this->Automad->Context->get()->get(Fields::SYNTAX_THEME);
 
 		if ($theme && $theme != 'none') {
-			$str = Head::append(
-				$str,
-				'<link href="https://unpkg.com/automad-prism-themes@latest/dist/prism-' . $theme . '.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">'
-			);
+			$str = Head::append($str, Asset::css("dist/prism/themes/prism-{$theme}.css", false));
 		}
 
 		$str = Head::append($str, Asset::css('dist/prism/main.bundle.css', false));

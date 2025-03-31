@@ -100,6 +100,7 @@ class Fields {
 	const URL = 'url';
 	const WIDTH = ':width';
 	const WIDTH_RESIZED = ':widthResized';
+
 	/**
 	 * Array with reserved variable fields.
 	 */
@@ -158,8 +159,9 @@ class Fields {
 	 */
 	public static function inTemplate(string $file): array {
 		$fields = array();
+		$dir = realpath(dirname($file));
 
-		if (is_readable($file)) {
+		if (is_readable($file) && $dir) {
 			// Find all variable fields in the template file.
 			$content = strval(file_get_contents($file));
 			// Remove ~ characters to match includes correctly.
@@ -177,7 +179,7 @@ class Fields {
 			foreach ($matches as $match) {
 				// Recursive include.
 				if (!empty($match['file'])) {
-					$include = dirname($file) . '/' . $match['file'];
+					$include = $dir . '/' . $match['file'];
 
 					if (file_exists($include)) {
 						$fields = array_merge($fields, self::inTemplate($include));

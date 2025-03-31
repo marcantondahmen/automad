@@ -37,6 +37,26 @@ import { Listener } from '@/admin/types';
 import { customAlphabet } from 'nanoid';
 
 /**
+ * Return the basename of a path.
+ *
+ * @param path
+ * @return the basename
+ */
+export const basename = (path: string): string => {
+	return path.split('/').reverse()[0];
+};
+
+/**
+ * Convert a block template file path into a human readable string.
+ *
+ * @param path
+ * @return the human readable template name
+ */
+export const blockTemplateName = (path: string): string => {
+	return `${titleCase(basename(path).replace('.php', ''))} &mdash; ${dirname(dirname(dirname(path))).replace(/^\//, '')}`;
+};
+
+/**
  * A simple confirmation modal.
  *
  * @param text
@@ -116,6 +136,16 @@ export const convertRgbToHex = (color: string): string => {
 	hexb = hexb.length === 1 ? '0' + hexb : hexb;
 
 	return '#' + hexr + hexg + hexb;
+};
+
+/**
+ * Return the basename of a path.
+ *
+ * @param path
+ * @return the basename
+ */
+export const dirname = (path: string): string => {
+	return path.replace(/\/[^\/]+$/, '');
 };
 
 /**

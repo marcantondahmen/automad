@@ -261,6 +261,7 @@ export const createImagePickerModal = (
 		html`
 			<am-modal-header>${label}</am-modal-header>
 			<am-modal-body>
+				<p>${App.text('linkImage')}</p>
 				<span class="${CSS.formGroup}">
 					<input
 						id="${idUrl}"
@@ -274,37 +275,41 @@ export const createImagePickerModal = (
 					</button>
 				</span>
 				<hr />
-				<div class="${CSS.flex} ${CSS.flexGap}">
-					<div class="${CSS.flexItemGrow}">
-						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}">
-								${App.text('resizeWidthTitle')}
-							</label>
-							<input
-								type="number"
-								class="${CSS.input}"
-								id="${idWidth}"
-							/>
+				<div>
+					<p>${App.text('useUploadedImage')}</p>
+					<am-upload></am-upload>
+					<div class="${CSS.flex} ${CSS.flexGap}">
+						<div class="${CSS.flexItemGrow}">
+							<div class="${CSS.field}">
+								<label class="${CSS.fieldLabel}">
+									${App.text('resizeWidthTitle')}
+								</label>
+								<input
+									type="number"
+									class="${CSS.input}"
+									id="${idWidth}"
+								/>
+							</div>
+						</div>
+						<div class="${CSS.flexItemGrow}">
+							<div class="${CSS.field} ${CSS.flexItemGrow}">
+								<label class="${CSS.fieldLabel}">
+									${App.text('resizeHeightTitle')}
+								</label>
+								<input
+									type="number"
+									class="${CSS.input}"
+									id="${idHeight}"
+								/>
+							</div>
 						</div>
 					</div>
-					<div class="${CSS.flexItemGrow}">
-						<div class="${CSS.field} ${CSS.flexItemGrow}">
-							<label class="${CSS.fieldLabel}">
-								${App.text('resizeHeightTitle')}
-							</label>
-							<input
-								type="number"
-								class="${CSS.input}"
-								id="${idHeight}"
-							/>
-						</div>
-					</div>
+					${pageImagePicker}
+					<am-image-picker
+						${Attr.label}="${App.text('sharedImages')}"
+						${Attr.binding}="${pickerBindingName}"
+					></am-image-picker>
 				</div>
-				${pageImagePicker}
-				<am-image-picker
-					${Attr.label}="${App.text('sharedImages')}"
-					${Attr.binding}="${pickerBindingName}"
-				></am-image-picker>
 			</am-modal-body>
 		`
 	);
