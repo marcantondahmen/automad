@@ -238,7 +238,10 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 					() => {
 						this.wrapper.innerHTML = '';
 
-						this.data.url = `${name}.${extension}`;
+						this.data.url = getPageURL()
+							? `${name}.${extension}`
+							: `/shared/${name}.${extension}`;
+
 						this.render();
 
 						fire(EventName.filesChangeOnServer);
