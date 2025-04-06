@@ -418,8 +418,6 @@ export class PageDataFormComponent extends FormComponent {
 		setDocumentTitle(fields.title);
 
 		let theme: Theme | null = null;
-		let tooltips = {};
-		let themeOptions = {};
 
 		if (fields[themeKey]) {
 			theme = themes[fields[themeKey]];
@@ -427,8 +425,9 @@ export class PageDataFormComponent extends FormComponent {
 			theme = themes[shared[themeKey]];
 		}
 
-		tooltips = theme?.tooltips ?? {};
-		themeOptions = theme?.options ?? {};
+		const labels = theme?.labels ?? {};
+		const tooltips = theme?.tooltips ?? {};
+		const themeOptions = theme?.options ?? {};
 
 		const fieldGroups = prepareFieldGroups(fields);
 
@@ -446,6 +445,7 @@ export class PageDataFormComponent extends FormComponent {
 			fieldGroup({
 				section: this.sections[item],
 				fields: fieldGroups[item],
+				labels,
 				tooltips,
 				themeOptions,
 				renderEmptyAlert: item != 'customizations',

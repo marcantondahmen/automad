@@ -65,6 +65,7 @@ export interface FieldGroupData {
 	fields: KeyValueMap;
 	tooltips: KeyValueMap;
 	themeOptions: ThemeOptions;
+	labels: KeyValueMap;
 	renderEmptyAlert: boolean;
 	shared?: KeyValueMap;
 }

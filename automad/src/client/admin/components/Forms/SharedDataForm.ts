@@ -189,6 +189,7 @@ export class SharedDataFormComponent extends FormComponent {
 		const { fields } = response.data;
 		const themeKey = App.reservedFields.THEME;
 		const mainTheme = fields[themeKey] || Object.keys(App.themes)[0];
+		const labels = App.themes[mainTheme]?.labels ?? {};
 		const tooltips = App.themes[mainTheme]?.tooltips ?? {};
 		const themeOptions = App.themes[mainTheme]?.options ?? {};
 		const fieldGroups = prepareFieldGroups(fields);
@@ -250,6 +251,7 @@ export class SharedDataFormComponent extends FormComponent {
 			fieldGroup({
 				section: this.sections[item],
 				fields: fieldGroups[item],
+				labels,
 				tooltips,
 				themeOptions,
 				renderEmptyAlert: item != 'customizations',
