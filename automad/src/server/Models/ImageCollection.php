@@ -37,7 +37,6 @@
 namespace Automad\Models;
 
 use Automad\Core\FileSystem;
-use Automad\Core\FileUtils;
 use Automad\Core\Image;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,7 +59,7 @@ class ImageCollection {
 		$images = array();
 		$globGrep = FileSystem::globGrep(
 			$path . '*.*',
-			'/\.(' . implode('|', FileUtils::imageFileTypes()) . ')$/i'
+			'/\.(' . implode('|', FileSystem::FILE_TYPES_IMAGE) . ')$/i'
 		);
 
 		foreach ($globGrep as $file) {

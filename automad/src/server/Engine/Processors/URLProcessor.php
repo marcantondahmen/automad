@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Admin\InPage;
+use Automad\Core\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,7 +62,7 @@ class URLProcessor {
 
 		// Find URLs in markdown like ![...](image.jpg?100x100).
 		$str = preg_replace_callback(
-			'/(\!\[[^\]]*\]\()([^\)]+\.(?:jpg|jpeg|gif|png))([^\)]*\))/is',
+			'/(\!\[[^\]]*\]\()([^\)]+\.(?:' . join('|', FileSystem::FILE_TYPES_IMAGE) . '))([^\)]*\))/is',
 			function ($match) use ($method, $parameters) {
 				$parameters = array_merge(array(0 => $match[2]), $parameters);
 				$url = call_user_func_array($method, $parameters);
