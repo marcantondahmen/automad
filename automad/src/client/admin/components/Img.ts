@@ -109,7 +109,7 @@ export class ImgComponent extends BaseComponent {
 			return;
 		}
 
-		const img = create('img', [], {}, this);
+		const img = create('img', [], { referrerpolicy: 'no-referrer' }, this);
 
 		this.listener = listen(img, 'error', () => {
 			this.innerHTML = this.placeholder('exclamation-triangle');
