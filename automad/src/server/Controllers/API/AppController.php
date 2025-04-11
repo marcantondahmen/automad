@@ -72,6 +72,10 @@ class AppController {
 				'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
 				'languages' => self::getLanguages(),
 				'reservedFields' => Fields::$reserved,
+				'fileTypes' => array(
+					'image' => FileSystem::FILE_TYPES_IMAGE,
+					'video' => FileSystem::FILE_TYPES_VIDEO
+				),
 				'sitename' => $Automad->Shared->get(Fields::SITENAME),
 				'text' => Text::getObject(),
 				'version' => App::VERSION

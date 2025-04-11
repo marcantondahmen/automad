@@ -139,12 +139,16 @@ class FileCardComponent extends BaseComponent {
 			`;
 		}
 
+		const icon = App.fileTypesVideo.includes(file.extension)
+			? 'film'
+			: `filetype-${file.extension}`;
+
 		return html`
 			<am-file-info
 				class="${CSS.cardTeaser} ${CSS.cursorPointer}"
 				${Attr.tooltip}="$${file.basename}"
 			>
-				<i class="bi bi-file-earmark bi-filetype-${file.extension}"></i>
+				<i class="bi bi-file-earmark bi-${icon}"></i>
 			</am-file-info>
 		`;
 	}

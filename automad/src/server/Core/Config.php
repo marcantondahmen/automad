@@ -199,7 +199,7 @@ class Config {
 			// Graphics
 			'ai, dxf, eps, gif, ico, jpg, jpeg, png, psd, svg, tga, tiff, webp, ' .
 			// Video
-			'avi, flv, mov, mp4, mpeg, ' .
+			'avi, flv, mov, mp4, mpeg, webm, ' .
 			// Other
 			'css, js, md, pdf'
 		);

@@ -155,3 +155,7 @@ export const enum UserController {
 	edit = 'UserController::edit',
 	resetPassword = 'UserController::resetPassword',
 }
+
+export const enum VideoCollectionController {
+	list = 'VideoCollectionController::list',
+}

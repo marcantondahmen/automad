@@ -137,6 +137,20 @@ export class App {
 	}
 
 	/**
+	 * The array of image file types.
+	 */
+	static get fileTypesImage(): string[] {
+		return App.getState('fileTypes')?.image;
+	}
+
+	/**
+	 * The array of video file types.
+	 */
+	static get fileTypesVideo(): string[] {
+		return App.getState('fileTypes')?.video;
+	}
+
+	/**
 	 * The dashboard URL.
 	 *
 	 * @static

@@ -1,6 +1,6 @@
 <?php return <<< JSON
 {
-	"AM_ALLOWED_FILE_TYPES": "dmg, iso, rar, tar, zip, aiff, m4a, mp3, ogg, wav, ai, dxf, eps, gif, ico, jpg, jpeg, png, psd, svg, tga, tiff, webp, avi, flv, mov, mp4, mpeg, css, js, json, md, pdf",
+	"AM_ALLOWED_FILE_TYPES": "dmg, iso, rar, tar, zip, aiff, m4a, mp3, ogg, wav, ai, dxf, eps, gif, ico, jpg, jpeg, png, psd, svg, tga, tiff, webp, avi, flv, mov, mp4, mpeg, webm, css, js, json, md, pdf",
 
 	"AM_CACHE_ENABLED": true,
 	"AM_CACHE_LIFETIME": 43200,
