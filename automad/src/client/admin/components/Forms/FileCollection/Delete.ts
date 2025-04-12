@@ -32,42 +32,34 @@
  * Licensed under the MIT license.
  */
 
-import { EventName, listen, queryAll } from '@/admin/core';
+import { App, confirm } from '@/admin/core';
 import { FormComponent } from '@/admin/components/Forms/Form';
-import { SubmitComponent } from '@/admin/components/Forms/Submit';
+import { BaseFileCollectionSubmitComponent } from './BaseSubmit';
 
 /**
- * A submit button for the FileCollectionListComponent form.
+ * A delete button for the FileCollectionListComponent form.
 
- * @extends SubmitComponent
+ * @extends BaseFileCollectionSubmitComponent
  */
-class FileCollectionSubmitComponent extends SubmitComponent {
+class FileCollectionDeleteComponent extends BaseFileCollectionSubmitComponent {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The actual submit implementation for deleteing files.
 	 */
-	connectedCallback() {
-		super.connectedCallback();
+	async submit(): Promise<void> {
+		if (this.hasAttribute('disabled')) {
+			return;
+		}
 
-		this.toggleAttribute('disabled', true);
-
-		this.relatedForms.forEach((form: FormComponent) => {
-			const handler = () => {
-				this.toggleAttribute(
-					'disabled',
-					queryAll(':checked', form).length == 0
-				);
-			};
-
-			this.addListener(
-				listen(window, EventName.fileCollectionRender, handler)
-			);
-
-			this.addListener(listen(form, 'change', handler));
-		});
+		if (await confirm(App.text('confirmDeleteSelectedFiles'))) {
+			this.relatedForms.forEach((form: FormComponent) => {
+				form.additionalData = { action: 'delete' };
+				form.submit();
+			});
+		}
 	}
 }
 
 customElements.define(
-	'am-file-collection-submit',
-	FileCollectionSubmitComponent
+	'am-file-collection-delete',
+	FileCollectionDeleteComponent
 );

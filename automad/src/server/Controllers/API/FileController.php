@@ -62,14 +62,16 @@ class FileController {
 		$Response = new Response();
 		$Messenger = new Messenger();
 
-		$reload = File::editInfo(
+		if (File::editInfo(
 			Request::post('new-name'),
 			Request::post('old-name'),
 			Request::post('caption'),
 			$Messenger
-		);
+		)) {
+			$Response->setRedirect('');
+		}
 
-		return $Response->setReload($reload)->setError($Messenger->getError());
+		return $Response->setError($Messenger->getError());
 	}
 
 	/**

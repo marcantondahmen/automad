@@ -244,6 +244,8 @@
 	"moveDown": "Move down",
 	"movePage": "Move Page",
 	"moveUp": "Move up",
+	"moveSelected": "Move selected",
+	"movedSuccess": "Successfully moved",
 	"name": "Name",
 	"nameIsRequired": "Name is required.",
 	"new": "New",

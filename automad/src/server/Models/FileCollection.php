@@ -36,6 +36,7 @@
 
 namespace Automad\Models;
 
+use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
@@ -132,6 +133,57 @@ class FileCollection {
 		}
 
 		return $files;
+	}
+
+	/**
+	 * Move selected files from $sourcePath to $destPath.
+	 *
+	 * @param Automad $Automad
+	 * @param array $files
+	 * @param string $sourcePath
+	 * @param string $destPath
+	 * @param Messenger $Messenger
+	 * @return bool
+	 */
+	public static function moveFiles(Automad $Automad, array $files, string $sourcePath, string $destPath, Messenger $Messenger): bool {
+		$sourcePath = rtrim(FileSystem::normalizeSlashes($sourcePath), '/') . '/';
+		$destPath = rtrim(FileSystem::normalizeSlashes($destPath), '/') . '/';
+		$success = array();
+		$errors = array();
+
+		foreach ($files as $file) {
+			$FileMessenger = new Messenger();
+			$source = "{$sourcePath}{$file}";
+			$dest = "{$destPath}{$file}";
+
+			if (FileSystem::renameMedia($source, $dest, $FileMessenger)) {
+				$success[] = '"' . basename($file) . '"';
+			} else {
+				$errors[] = $FileMessenger->getError();
+			}
+
+			Links::update(
+				$Automad,
+				Str::stripStart($source, AM_BASE_DIR),
+				Str::stripStart($dest, AM_BASE_DIR)
+			);
+
+			Links::update(
+				$Automad,
+				basename($source),
+				Str::stripStart($dest, AM_BASE_DIR)
+			);
+		}
+
+		Cache::clear();
+
+		if (!empty($success)) {
+			$Messenger->setSuccess(Text::get('movedSuccess') . '<br />' . implode('<br />', $success));
+		}
+
+		$Messenger->setError(implode('<br />', $errors));
+
+		return !empty($success);
 	}
 
 	/**

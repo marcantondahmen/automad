@@ -111,7 +111,7 @@ class FileCardComponent extends BaseComponent {
 			</am-file-info>
 			<div class="${CSS.cardFooter}">
 				${this.renderDropdown(file)}
-				<am-checkbox name="delete[$${file.basename}]"></am-checkbox>
+				<am-checkbox name="selected[$${file.basename}]"></am-checkbox>
 			</div>
 		`;
 

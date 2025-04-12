@@ -310,17 +310,20 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 							>
 								${App.text('importFromUrl')}
 							</am-modal-toggle>
-							<am-file-collection-submit
+							<am-file-collection-move
+								class="${CSS.button}"
+								${Attr.form}="${FileCollectionController.list}"
+							>
+								${App.text('moveSelected')}
+							</am-file-collection-move>
+							<am-file-collection-delete
 								class="${CSS.button} ${CSS.buttonDanger}"
 								${Attr.form}="${FileCollectionController.list}"
 							>
 								${App.text('deleteSelected')}
-							</am-file-collection-submit>
+							</am-file-collection-delete>
 						</div>
 						<am-file-collection-list-form
-							${Attr.confirm}="${App.text(
-								'confirmDeleteSelectedFiles'
-							)}"
 							${Attr.api}="${FileCollectionController.list}"
 						></am-file-collection-list-form>
 					</am-switcher-section>

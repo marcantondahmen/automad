@@ -62,17 +62,30 @@ class FileCollectionController {
 	 * @return Response the response object
 	 */
 	public static function list(): Response {
-		$Automad = Automad::fromCache();
-		$path = FileSystem::getPathByPostUrl($Automad);
-
 		$Response = new Response();
 		$Messenger = new Messenger();
+		$Automad = Automad::fromCache();
+		$path = FileSystem::getPathByPostUrl($Automad);
+		$selected = Request::post('selected');
+		$action = Request::post('action');
 
 		Debug::log($_POST);
 
-		if ($delete = Request::post('delete')) {
-			if (is_array($delete)) {
-				FileCollection::deleteFiles(array_keys($delete), $path, $Messenger);
+		if (!empty($selected)) {
+			$selected = array_keys($selected);
+		}
+
+		if ($action === 'delete' && !empty($selected)) {
+			FileCollection::deleteFiles($selected, $path, $Messenger);
+		}
+
+		if ($action === 'move' && !empty($selected)) {
+			$targetUrl = Request::post('target');
+			$targetPage = $Automad->getPage($targetUrl);
+			$targetPath = $targetPage ? FileSystem::fullPagePath($targetPage->path) : AM_BASE_DIR . AM_DIR_SHARED . '/';
+
+			if (FileCollection::moveFiles($Automad, $selected, $path, $targetPath, $Messenger)) {
+				$Response->setRedirect('');
 			}
 		}
 

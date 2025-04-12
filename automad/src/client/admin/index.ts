@@ -74,8 +74,9 @@ import './components/File/FileInfo';
 import './components/File/FileRobot';
 import './components/File/Upload';
 
+import './components/Forms/FileCollection/Delete';
+import './components/Forms/FileCollection/Move';
 import './components/Forms/FileCollection/ListForm';
-import './components/Forms/FileCollection/Submit';
 import './components/Forms/Publish/ComponentPublishForm';
 import './components/Forms/Publish/PagePublishForm';
 import './components/Forms/Publish/SharedPublishForm';

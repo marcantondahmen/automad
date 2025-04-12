@@ -346,7 +346,8 @@ export class FormComponent extends BaseComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		const { redirect, reload, error, success, debug } = response;
 
-		if (redirect) {
+		// Note that empty strings can be used to just soft-reload the dashboard.
+		if (typeof redirect != 'undefined') {
 			App.root.setView(redirect);
 		}
 
