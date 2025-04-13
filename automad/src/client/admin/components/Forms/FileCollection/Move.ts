@@ -41,6 +41,7 @@ import {
 	getPageURL,
 	html,
 	listen,
+	query,
 } from '@/admin/core';
 import { FormComponent } from '@/admin/components/Forms/Form';
 import { BaseFileCollectionSubmitComponent } from './BaseSubmit';
@@ -69,7 +70,7 @@ class FileCollectionMoveComponent extends BaseFileCollectionSubmitComponent {
 				<input type="radio" name="targetPage" value="" tabindex="0" />
 				<span class="${CSS.navLink}">
 					<am-icon-text
-						${Attr.icon}="asterisk"
+						${Attr.icon}="folder2"
 						${Attr.text}="${App.text('sharedTitle')}"
 					></am-icon-text>
 				</span>
@@ -93,7 +94,12 @@ class FileCollectionMoveComponent extends BaseFileCollectionSubmitComponent {
 			});
 		});
 
+		modal.setAttribute(Attr.noFocus, '');
 		modal.open();
+
+		setTimeout(() => {
+			query(':focus', body)?.blur();
+		}, 0);
 	}
 }
 

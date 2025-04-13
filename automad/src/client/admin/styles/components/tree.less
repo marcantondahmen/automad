@@ -94,12 +94,18 @@
 
 	&__collapse {
 		z-index: 3;
-		left: 0.275rem !important;
-		opacity: 0.4;
+		left: 0.25rem !important;
+		opacity: 0.85;
+		font-size: 0.65rem !important;
 		transition: opacity 0.2s;
 
 		&:hover {
-			opacity: 1;
+			opacity: 0.6;
 		}
+	}
+
+	&__node:has(> &__label > .am-c-nav__item--active) > &__collapse,
+	&__node:has(> &__label > label > :checked) > &__collapse {
+		color: hsl(var(--am-clr-text-primary)) !important;
 	}
 }
