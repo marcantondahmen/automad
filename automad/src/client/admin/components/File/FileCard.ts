@@ -77,7 +77,7 @@ class FileCardComponent extends BaseComponent {
 			`;
 		}
 
-		if (file.caption) {
+		if (file.caption && App.fileTypesImage.includes(file.extension)) {
 			caption = html`
 				<am-icon-text
 					${Attr.icon}="chat-square-text"

@@ -67,6 +67,7 @@ export interface SliderData {
 			height: number;
 			preload: string;
 		};
+		caption: string;
 	}[];
 	settings: Omit<ImageSlideshowBlockData, 'files'>;
 }

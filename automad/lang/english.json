@@ -162,6 +162,7 @@
 	"hue": "Hue",
 	"i18nDisabled": "Language routing disabled",
 	"i18nEnabled": "Language routing enabled",
+	"imageCaption": "Image caption that is displayed in gallery and slideshow blocks",
 	"imageDimensionsHoverTitle": "Saved image size (width x height)",
 	"imageSlideshowBlockAutoplay": "Autoplay mode",
 	"imageSlideshowBlockBreakpoints": "Number of images based on block size",

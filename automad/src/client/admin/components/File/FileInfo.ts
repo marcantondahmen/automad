@@ -102,6 +102,22 @@ export class FileInfoComponent extends BaseComponent {
 	 * @returns the modal markup
 	 */
 	protected renderModal(file: File): string {
+		let caption = '';
+
+		if (App.fileTypesImage.includes(file.extension)) {
+			caption = createField(
+				FieldTag.textarea,
+				null,
+				{
+					key: 'caption',
+					value: file.caption,
+					name: 'caption',
+					label: App.text('imageCaption'),
+				},
+				[]
+			).outerHTML;
+		}
+
 		return html`
 			<am-form
 				${Attr.api}="${FileController.editInfo}"
@@ -122,17 +138,7 @@ export class FileInfoComponent extends BaseComponent {
 						},
 						[]
 					).outerHTML}
-					${createField(
-						FieldTag.textarea,
-						null,
-						{
-							key: 'caption',
-							value: file.caption,
-							name: 'caption',
-							label: App.text('caption'),
-						},
-						[]
-					).outerHTML}
+					${caption}
 				</am-modal-body>
 				<am-modal-footer>
 					<a

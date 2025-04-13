@@ -112,7 +112,7 @@ class File {
 		}
 
 		// Write caption.
-		if (!$Messenger->getError()) {
+		if (!$Messenger->getError() && FileUtils::fileIsImage($newFile)) {
 			$newCaptionFile = $newFile . '.' . FileUtils::EXT_CAPTION;
 
 			// Only if file exists already or $caption is empty.
