@@ -162,17 +162,46 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 							>
 								${App.text('importFromUrl')}
 							</am-modal-toggle>
+							<am-dropdown class="${CSS.displaySmall}">
+								<span class="${CSS.button} ${CSS.buttonIcon}">
+									<i class="bi bi-three-dots"></i>
+								</span>
+								<div class="${CSS.dropdownItems}">
+									<am-file-collection-move
+										class="${CSS.dropdownLink}"
+										${Attr.form}="${FileCollectionController.list}"
+									>
+										<am-icon-text
+											${Attr.icon}="folder-symlink"
+											${Attr.text}="${App.text(
+												'moveSelection'
+											)}"
+										></am-icon-text>
+									</am-file-collection-move>
+									<am-file-collection-delete
+										class="${CSS.dropdownLink}"
+										${Attr.form}="${FileCollectionController.list}"
+									>
+										<am-icon-text
+											${Attr.icon}="trash3"
+											${Attr.text}="${App.text(
+												'deleteSelection'
+											)}"
+										></am-icon-text>
+									</am-file-collection-delete>
+								</div>
+							</am-dropdown>
 							<am-file-collection-move
-								class="${CSS.button}"
+								class="${CSS.button} ${CSS.displaySmallNone}"
 								${Attr.form}="${FileCollectionController.list}"
 							>
-								${App.text('moveSelected')}
+								${App.text('moveSelection')}
 							</am-file-collection-move>
 							<am-file-collection-delete
-								class="${CSS.button} ${CSS.buttonDanger}"
+								class="${CSS.button} ${CSS.buttonDanger} ${CSS.displaySmallNone}"
 								${Attr.form}="${FileCollectionController.list}"
 							>
-								${App.text('deleteSelected')}
+								${App.text('deleteSelection')}
 							</am-file-collection-delete>
 						</div>
 						<am-file-collection-list-form
