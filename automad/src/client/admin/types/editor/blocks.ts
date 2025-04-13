@@ -223,3 +223,12 @@ export interface SnippetBlockData {
 export interface TableOfContentsBlockData {
 	type: (typeof tableOfContentsTypes)[number];
 }
+
+export interface VideoBlockData {
+	url: string;
+	autoplay: boolean;
+	loop: boolean;
+	controls: boolean;
+	muted: boolean;
+	caption: string;
+}

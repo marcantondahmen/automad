@@ -54,6 +54,7 @@ import { SectionBlock } from './blocks/Section';
 import { SnippetBlock } from './blocks/Snippet';
 import { TableBlock } from './blocks/Table';
 import { TableOfContentsBlock } from './blocks/TableOfContents';
+import { VideoBlock } from './blocks/Video';
 import { embedServices } from './embedServices';
 
 /**
@@ -98,6 +99,10 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 		delimiter: Delimiter,
 		image: {
 			class: ImageBlock,
+			inlineToolbar: true,
+		},
+		video: {
+			class: VideoBlock,
 			inlineToolbar: true,
 		},
 		gallery: {

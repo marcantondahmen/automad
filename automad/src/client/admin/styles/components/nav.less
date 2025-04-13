@@ -79,7 +79,7 @@
 	&__item--active[am-publication-state*='draft'] > &__link:after {
 		content: '●';
 		font-size: 0.8rem;
-		color: hsl(var(--am-clr-primary-text)) !important;
+		color: hsl(var(--am-clr-text-primary)) !important;
 	}
 
 	&__link {
@@ -132,6 +132,5 @@
 
 	input:focus + &__link {
 		outline: @am-outline-active;
-		border: @am-form-border-width solid hsl(var(--am-clr-border-active));
 	}
 }

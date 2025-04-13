@@ -246,6 +246,7 @@ export const fieldGroup = ({
 	fields,
 	tooltips,
 	themeOptions,
+	labels,
 	renderEmptyAlert,
 	shared,
 }: FieldGroupData): void => {
@@ -295,6 +296,7 @@ export const fieldGroup = ({
 				value: fields[name],
 				tooltip: tooltips[name],
 				options: themeOptions[name] ?? null,
+				label: labels[name] ?? null,
 				name: `data[${name}]`,
 				placeholder,
 			},

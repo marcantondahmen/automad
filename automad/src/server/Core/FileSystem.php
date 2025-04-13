@@ -52,6 +52,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class FileSystem {
+	const array FILE_TYPES_IMAGE = array('jpg', 'jpeg', 'gif', 'png', 'webp');
+	const array FILE_TYPES_VIDEO = array('mp4', 'webm');
+
 	/**
 	 * Append a suffix to a path just before the trailing slash.
 	 *

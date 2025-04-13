@@ -116,16 +116,6 @@ class GalleryComponent extends HTMLElement {
 		const settings = this.data.settings;
 		const masonryRowHeight = 10;
 
-		this.innerHTML = `
-			<style scoped>
-				@media (max-width: ${settings.columnWidthPx * 1.75}px) { 
-					.am-gallery-masonry { 
-						grid-template-columns: 1fr !important; 
-					} 
-				}
-			</style>
-		`;
-
 		const gallery = create(
 			'div',
 			['am-gallery-masonry'],
@@ -262,7 +252,7 @@ class GalleryComponent extends HTMLElement {
 			'resize',
 			debounce(() => {
 				updateItems(items);
-			}, 300)
+			}, 100)
 		);
 	}
 

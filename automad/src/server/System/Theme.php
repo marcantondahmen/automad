@@ -36,9 +36,9 @@
 
 namespace Automad\System;
 
-use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
+use Automad\Core\Text;
 use Automad\Models\Page;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -65,6 +65,11 @@ class Theme {
 	 * The field order array defines the order of fields in the dashboard.
 	 */
 	public array $fieldOrder = array();
+
+	/**
+	 * The optional labels array.
+	 */
+	public array $labels = array();
 
 	/**
 	 * The theme license.
@@ -129,6 +134,7 @@ class Theme {
 			'license' => false,
 			'masks' => array(),
 			'name' => $path,
+			'labels' => array(),
 			'options' => array(),
 			'readme' => '',
 			'tooltips' => array(),
@@ -181,8 +187,11 @@ class Theme {
 		$this->path = $path;
 		$this->readme = $data['readme'];
 		$this->templates = $templates;
+		$this->labels = $data['labels'];
 		$this->tooltips = $data['tooltips'];
 		$this->version = $data['version'];
+
+		$this->i18n(dirname($themeJson));
 	}
 
 	/**
@@ -211,5 +220,32 @@ class Theme {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Handle translations.
+	 *
+	 * @param string $dir
+	 */
+	private function i18n(string $dir): void {
+		$lang = Text::get('__lang__');
+		$i18nFile = "{$dir}/i18n/{$lang}.json";
+
+		if (!is_readable($i18nFile)) {
+			return;
+		}
+
+		$i18n = array_merge(
+			array(
+				'labels' => array(),
+				'tooltips' => array(),
+				'options' => array()
+			),
+			FileSystem::readJson($i18nFile, true)
+		);
+
+		$this->labels = array_replace_recursive($this->labels, $i18n['labels']);
+		$this->tooltips = array_replace_recursive($this->tooltips, $i18n['tooltips']);
+		$this->options = array_replace_recursive($this->options, $i18n['options']);
 	}
 }

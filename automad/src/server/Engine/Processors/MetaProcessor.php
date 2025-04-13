@@ -94,13 +94,13 @@ class MetaProcessor {
 		$base = AM_SERVER . AM_BASE_INDEX;
 		$content = array_merge(
 			array(
-				'title' => Str::stripTags($this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME)),
-				'description' => Str::shorten(Str::stripTags(Str::findFirstParagraph($html)), 150)
+				'title' => htmlentities(Str::stripTags($this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME))),
+				'description' => htmlentities(Str::shorten(Str::stripTags(Str::findFirstParagraph($html)), 150))
 			),
 			array_filter(
 				array(
-					'title' => Str::stripTags($this->Page->get(Fields::META_TITLE)),
-					'description' => Str::stripTags($this->Page->get(Fields::META_DESCRIPTION))
+					'title' => htmlentities(Str::stripTags($this->Page->get(Fields::META_TITLE))),
+					'description' => htmlentities(Str::stripTags($this->Page->get(Fields::META_DESCRIPTION)))
 				),
 				'strlen'
 			)

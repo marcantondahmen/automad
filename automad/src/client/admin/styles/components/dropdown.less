@@ -106,6 +106,12 @@
 			color: hsl(var(--am-clr-text-selected));
 			background-color: hsl(var(--am-clr-background-selected));
 		}
+
+		&[disabled] {
+			color: hsl(var(--am-clr-text-muted));
+			background-color: transparent;
+			pointer-events: none;
+		}
 	}
 
 	&__items--autocomplete {

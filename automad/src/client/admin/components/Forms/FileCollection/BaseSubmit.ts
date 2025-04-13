@@ -1,4 +1,3 @@
-<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -31,47 +30,45 @@
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
- * https://automad.org/license
  */
 
-namespace Automad\Models;
-
-use Automad\Core\FileSystem;
-use Automad\Core\Image;
-
-defined('AUTOMAD') or die('Direct access not permitted!');
+import { EventName, listen, queryAll } from '@/admin/core';
+import { FormComponent } from '@/admin/components/Forms/Form';
+import { SubmitComponent } from '@/admin/components/Forms/Submit';
 
 /**
- * The image collection model.
- *
- * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * The base class for a FileCollectionListComponent form submit button.
+
+ * @extends SubmitComponent
  */
-class ImageCollection {
+export abstract class BaseFileCollectionSubmitComponent extends SubmitComponent {
 	/**
-	 * List all images of a page or the shared data directory.
-	 *
-	 * @param string $path
-	 * @return array
+	 * The callback function used when an element is created in the DOM.
 	 */
-	public static function list(string $path): array {
-		$images = array();
-		$globGrep = FileSystem::globGrep(
-			$path . '*.*',
-			'/\.(' . implode('|', FileSystem::FILE_TYPES_IMAGE) . ')$/i'
-		);
+	connectedCallback() {
+		this.setAttribute('tabindex', '0');
+		this.toggleAttribute('disabled', true);
 
-		foreach ($globGrep as $file) {
-			$image = new Image($file, 250, 250);
+		this.relatedForms.forEach((form: FormComponent) => {
+			const handler = () => {
+				this.toggleAttribute(
+					'disabled',
+					queryAll(':checked', form).length == 0
+				);
+			};
 
-			$item = array();
-			$item['name'] = basename($file);
-			$item['thumbnail'] = AM_BASE_URL . $image->file;
+			this.addListener(
+				listen(window, EventName.fileCollectionRender, handler)
+			);
 
-			$images[] = $item;
-		}
+			this.addListener(listen(form, 'change', handler));
+		});
 
-		return $images;
+		listen(this, 'click', this.submit.bind(this));
 	}
+
+	/**
+	 * The submit function.
+	 */
+	abstract submit(): void;
 }

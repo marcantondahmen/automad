@@ -1,8 +1,25 @@
 # Changelog
 
-## [v2.0.0-alpha.24](https://github.com/marcantondahmen/automad/commit/19a2f81d641aaaf13313a6cfdb81778b07aa7870)
+## [v2.0.0-alpha.25](https://github.com/marcantondahmen/automad/commit/6b09137a19b264635fd5aec8bb42302fa14e087d)
 
-Mon, 31 Mar 2025 19:05:45 +0200
+Sun, 13 Apr 2025 16:01:43 +0200
+
+### New Features
+
+- add i18n support for themes ([ce917910d](https://github.com/marcantondahmen/automad/commit/ce917910d98f1f9972f9aa296d3f93f906942cbf))
+- add option to move files between pages ([f5738c4d1](https://github.com/marcantondahmen/automad/commit/f5738c4d1dcd621b3a542e53a303f0a2909dfe2c))
+- add video block type ([db4ed58aa](https://github.com/marcantondahmen/automad/commit/db4ed58aa76de118548477a31cf06c1ea0a55cfc))
+- show captions in slideshow blocks ([87b01bd73](https://github.com/marcantondahmen/automad/commit/87b01bd73fd2b832fdbb733cc19c43e76effa1c1))
+
+### Bugfixes
+
+- convert special characters inside meta tags to html entities ([2d142b9a8](https://github.com/marcantondahmen/automad/commit/2d142b9a8fd7f765b102962f6a605510fee9511f))
+- fix broken image url when pasting image into shared content ([d78b2a031](https://github.com/marcantondahmen/automad/commit/d78b2a031a76ea7df14734105bd9e98dacc91d70))
+- fix referrerpolicy for linked images ([5ef485f4e](https://github.com/marcantondahmen/automad/commit/5ef485f4ec8f19980448f79dae10adb9babf4be1))
+
+## [v2.0.0-alpha.24](https://github.com/marcantondahmen/automad/commit/3718e8103c1bb2868a1e94137f9c44d65bc0d212)
+
+Mon, 31 Mar 2025 19:11:08 +0200
 
 ### New Features
 
@@ -554,12 +571,3 @@ Thu, 9 Sep 2021 01:02:47 +0200
 
 - **ui**: debounce status requests ([b3b54130b](https://github.com/marcantondahmen/automad/commit/b3b54130bc1b603a1834851876a2a6c396288523))
 - **ui**: fix switcher rendering in Safari ([2019c80ea](https://github.com/marcantondahmen/automad/commit/2019c80ea91fac2a2177917f02db8124694ab838))
-
-## [v1.8.6](https://github.com/marcantondahmen/automad/commit/cff6cb56fed110a8c3e9889c5c6eaa3ae0ca89e1)
-
-Tue, 31 Aug 2021 21:01:29 +0200
-
-### Bugfixes
-
-- **system**: update Composer to version 2.1.6 in order to fix issues on Windows ([81cc05972](https://github.com/marcantondahmen/automad/commit/81cc05972ae4d10202adfe062ecc7b70f540edff))
-- **ui**: fix block editor toolbar on small devices ([6c81c4378](https://github.com/marcantondahmen/automad/commit/6c81c43780be143a01018d388d192d06690c61bd))

@@ -37,6 +37,7 @@
 namespace Automad\Blocks\Utils;
 
 use Automad\Core\Automad;
+use Automad\Core\FileSystem;
 use Automad\Core\Image;
 use Automad\Core\RemoteFile;
 use Automad\Core\Resolve;
@@ -83,7 +84,7 @@ class Img {
 			$file = Resolve::filePath($Automad->Context->get()->path, $file);
 		}
 
-		preg_match('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png|webp))(\?(\d+)x(\d+))?/is', $file, $matches);
+		preg_match('/(\/[\w\.\-\/]+(?:' . join('|', FileSystem::FILE_TYPES_IMAGE) . '))(\?(\d+)x(\d+))?/is', $file, $matches);
 
 		$Image = new Image($matches[1], $matches[3] ?? $width, $matches[4] ?? $height, $crop);
 

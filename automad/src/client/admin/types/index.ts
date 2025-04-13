@@ -193,6 +193,7 @@ export interface Theme {
 	templates: string[];
 	tooltips: KeyValueMap;
 	options: ThemeOptions;
+	labels: KeyValueMap;
 	version?: string;
 }
 

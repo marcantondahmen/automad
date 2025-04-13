@@ -75,20 +75,27 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 	/**
 	 * Paste configuration
+	 *
+	 * @static
 	 */
 	static get pasteConfig() {
 		return {
 			patterns: {
-				image: /(https?:\/\/)?\S+\.(gif|jpe?g|tiff|png)$/i,
+				image: new RegExp(
+					`(https?:\\/\\/)?\\S+\\.(${App.fileTypesImage.join('|')})$`,
+					'i'
+				),
 			},
 			files: {
-				extensions: ['gif', 'jpg', 'png', 'webp'],
+				extensions: App.fileTypesImage,
 			},
 		};
 	}
 
 	/**
 	 * Toolbox settings.
+	 *
+	 * @static
 	 */
 	static get toolbox() {
 		return {
@@ -165,7 +172,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
 				{ [Attr.tooltip]: App.text('selectImage') },
 				buttons,
-				'<i class="bi bi-folder2"></i>'
+				'<i class="bi bi-images"></i>'
 			);
 
 			const link = create(
@@ -238,7 +245,10 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 					() => {
 						this.wrapper.innerHTML = '';
 
-						this.data.url = `${name}.${extension}`;
+						this.data.url = getPageURL()
+							? `${name}.${extension}`
+							: `/shared/${name}.${extension}`;
+
 						this.render();
 
 						fire(EventName.filesChangeOnServer);

@@ -45,7 +45,6 @@ import {
 	getCsrfToken,
 	getPageURL,
 	html,
-	listen,
 	notifyError,
 	notifySuccess,
 	query,

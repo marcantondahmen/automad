@@ -151,6 +151,10 @@ export const enum CSS {
 	editorBlockSectionToolbar = 'am-c-ed-bl-section__toolbar',
 	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
 
+	editorBlockVideo = 'am-c-ed-bl-video',
+	editorBlockVideoList = 'am-c-ed-bl-video__list',
+	editorBlockVideoListItem = 'am-c-ed-bl-video__list-item',
+
 	editorPopoverForm = 'am-c-ed-popover__form',
 
 	editorStyleBase = 'am-style',

@@ -1,3 +1,4 @@
+<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -26,48 +27,45 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-import { EventName, listen, queryAll } from '@/admin/core';
-import { FormComponent } from '@/admin/components/Forms/Form';
-import { SubmitComponent } from '@/admin/components/Forms/Submit';
+namespace Automad\Models;
+
+use Automad\Core\FileSystem;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A submit button for the FileCollectionListComponent form.
-
- * @extends SubmitComponent
+ * The video collection model.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-class FileCollectionSubmitComponent extends SubmitComponent {
+class VideoCollection {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * List all videos of a page or the shared data directory.
+	 *
+	 * @param string $path
+	 * @return array
 	 */
-	connectedCallback() {
-		super.connectedCallback();
+	public static function list(string $path): array {
+		$globGrep = FileSystem::globGrep(
+			$path . '*.*',
+			'/\.(' . join('|', FileSystem::FILE_TYPES_VIDEO) . ')$/i'
+		);
 
-		this.toggleAttribute('disabled', true);
+		return array_map(function (string $file): array {
+			$item = array();
+			$item['name'] = basename($file);
+			$item['size'] = FileSystem::getFileSize($file);
 
-		this.relatedForms.forEach((form: FormComponent) => {
-			const handler = () => {
-				this.toggleAttribute(
-					'disabled',
-					queryAll(':checked', form).length == 0
-				);
-			};
-
-			this.addListener(
-				listen(window, EventName.fileCollectionRender, handler)
-			);
-
-			this.addListener(listen(form, 'change', handler));
-		});
+			return $item;
+		}, $globGrep);
 	}
 }
-
-customElements.define(
-	'am-file-collection-submit',
-	FileCollectionSubmitComponent
-);

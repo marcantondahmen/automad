@@ -77,7 +77,7 @@ class FileCardComponent extends BaseComponent {
 			`;
 		}
 
-		if (file.caption) {
+		if (file.caption && App.fileTypesImage.includes(file.extension)) {
 			caption = html`
 				<am-icon-text
 					${Attr.icon}="chat-square-text"
@@ -111,7 +111,7 @@ class FileCardComponent extends BaseComponent {
 			</am-file-info>
 			<div class="${CSS.cardFooter}">
 				${this.renderDropdown(file)}
-				<am-checkbox name="delete[$${file.basename}]"></am-checkbox>
+				<am-checkbox name="selected[$${file.basename}]"></am-checkbox>
 			</div>
 		`;
 
@@ -139,12 +139,16 @@ class FileCardComponent extends BaseComponent {
 			`;
 		}
 
+		const icon = App.fileTypesVideo.includes(file.extension)
+			? 'film'
+			: `filetype-${file.extension}`;
+
 		return html`
 			<am-file-info
 				class="${CSS.cardTeaser} ${CSS.cursorPointer}"
 				${Attr.tooltip}="$${file.basename}"
 			>
-				<i class="bi bi-file-earmark bi-filetype-${file.extension}"></i>
+				<i class="bi bi-file-earmark bi-${icon}"></i>
 			</am-file-info>
 		`;
 	}

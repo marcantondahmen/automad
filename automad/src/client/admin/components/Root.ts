@@ -84,12 +84,17 @@ export class RootComponent extends BaseComponent {
 
 	/**
 	 * Set a new URL and update the view accordingly.
+	 * Note that an empty string can be used ro rerender a view.
 	 *
 	 * @param url
 	 */
 	setView(url: URL): void {
 		SidebarComponent.toggle(false);
-		window.history.pushState(null, null, url);
+
+		if (url) {
+			window.history.pushState(null, null, url);
+		}
+
 		this.update();
 	}
 

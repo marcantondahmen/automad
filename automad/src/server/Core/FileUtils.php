@@ -124,15 +124,6 @@ class FileUtils {
 	 * @return bool True if $file is an image file
 	 */
 	public static function fileIsImage(string $file): bool {
-		return (in_array(FileSystem::getExtension($file), self::imageFileTypes()));
-	}
-
-	/**
-	 * Return the array of valid image file types.
-	 *
-	 * @return array the valid image file types
-	 */
-	public static function imageFileTypes(): array {
-		return array('jpg', 'jpeg', 'png', 'gif', 'webp');
+		return (in_array(FileSystem::getExtension($file), FileSystem::FILE_TYPES_IMAGE));
 	}
 }

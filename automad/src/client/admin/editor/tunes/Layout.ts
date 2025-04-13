@@ -56,6 +56,7 @@ const stretchableBlocks = [
 	'component',
 	'delimiter',
 	'image',
+	'video',
 	'gallery',
 	'slider',
 	'pagelist',

@@ -85,12 +85,12 @@ class File {
 			return false;
 		}
 
-		$reload = false;
+		$softReload = false;
 
 		// Rename file and caption if needed and update all file links.
 		if ($newFile != $oldFile) {
 			if (FileSystem::renameMedia($oldFile, $newFile, $Messenger)) {
-				$reload = true;
+				$softReload = true;
 
 				Links::update(
 					$Automad,
@@ -112,7 +112,7 @@ class File {
 		}
 
 		// Write caption.
-		if (!$Messenger->getError()) {
+		if (!$Messenger->getError() && FileUtils::fileIsImage($newFile)) {
 			$newCaptionFile = $newFile . '.' . FileUtils::EXT_CAPTION;
 
 			// Only if file exists already or $caption is empty.
@@ -125,7 +125,7 @@ class File {
 
 		Cache::clear();
 
-		return $reload;
+		return $softReload;
 	}
 
 	/**

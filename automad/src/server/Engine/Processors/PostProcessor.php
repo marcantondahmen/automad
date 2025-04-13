@@ -40,6 +40,7 @@ use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\I18n;
 use Automad\Core\Image;
@@ -208,7 +209,7 @@ class PostProcessor {
 	 */
 	private function resizeImages(string $str): string {
 		return preg_replace_callback(
-			'/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png|webp))\?(\d+)x(\d+)/is',
+			'/(\/[\w\.\-\/]+(?:' . join('|', FileSystem::FILE_TYPES_IMAGE) . '))\?(\d+)x(\d+)/is',
 			function ($match) {
 				$file = AM_BASE_DIR . $match[1];
 

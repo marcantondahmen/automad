@@ -211,7 +211,7 @@ export const renderUsersSection = (): string => {
 						${Attr.form}="${UserCollectionController.edit}"
 						disabled
 					>
-						${App.text('deleteSelected')}
+						${App.text('deleteSelection')}
 					</am-submit>
 				</am-modal-footer>
 			</am-modal-dialog>

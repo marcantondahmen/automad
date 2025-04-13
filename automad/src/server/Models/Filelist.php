@@ -58,7 +58,7 @@ class Filelist {
 	 * The options array.
 	 */
 	private array $options = array(
-		'glob' => '*.jpg, *.jpeg, *.png, *.gif',
+		'glob' => '*.jpg, *.jpeg, *.png, *.gif, *.webp',
 		'sort' => 'asc'
 	);
 

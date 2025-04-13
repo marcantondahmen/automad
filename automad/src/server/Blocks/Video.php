@@ -27,51 +27,59 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Models;
+namespace Automad\Blocks;
 
+use Automad\Blocks\Utils\Attr;
+use Automad\Core\Automad;
 use Automad\Core\FileSystem;
-use Automad\Core\Image;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The image collection model.
+ * The video block.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022-2025 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
-class ImageCollection {
+class Video extends AbstractBlock {
 	/**
-	 * List all images of a page or the shared data directory.
+	 * Render an image block.
 	 *
-	 * @param string $path
-	 * @return array
+	 * @param BlockData $block
+	 * @param Automad $Automad
+	 * @return string the rendered HTML
 	 */
-	public static function list(string $path): array {
-		$images = array();
-		$globGrep = FileSystem::globGrep(
-			$path . '*.*',
-			'/\.(' . implode('|', FileSystem::FILE_TYPES_IMAGE) . ')$/i'
-		);
+	public static function render(array $block, Automad $Automad): string {
+		$attr = Attr::render($block['tunes']);
+		$data = $block['data'];
+		$src = $data['url'];
+		$extension = FileSystem::getExtension($src);
+		$props = '';
+		$caption = empty($data['caption']) ? '' : "<figcaption>{$data['caption']}</figcaption>";
 
-		foreach ($globGrep as $file) {
-			$image = new Image($file, 250, 250);
-
-			$item = array();
-			$item['name'] = basename($file);
-			$item['thumbnail'] = AM_BASE_URL . $image->file;
-
-			$images[] = $item;
+		foreach (array('autoplay', 'loop', 'muted', 'controls') as $prop) {
+			if ($data[$prop]) {
+				$props .= " $prop";
+			}
 		}
 
-		return $images;
+		return <<<HTML
+			<figure $attr>
+				<video playsinline{$props}>
+					<source src="$src" type="video/$extension" />	
+				</video>
+				$caption
+			</figure>
+		HTML;
 	}
 }
