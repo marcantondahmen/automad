@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.25](https://github.com/marcantondahmen/automad/commit/6b09137a19b264635fd5aec8bb42302fa14e087d)
+## [v2.0.0-alpha.26](https://github.com/marcantondahmen/automad/commit/95ffca4c92c371d3e76a45fce381d01f99bb086e)
 
-Sun, 13 Apr 2025 16:01:43 +0200
+Mon, 14 Apr 2025 21:51:07 +0200
+
+### Bugfixes
+
+- fix empty slideshow captions showing up on hover ([266783264](https://github.com/marcantondahmen/automad/commit/2667832641795d7c0835dd53b38c8f17ba41e02d))
+
+## [v2.0.0-alpha.25](https://github.com/marcantondahmen/automad/commit/34d9c1dd4d1bea8223fba1b50cb4b14c11cbf000)
+
+Sun, 13 Apr 2025 16:05:17 +0200
 
 ### New Features
 
@@ -553,21 +561,3 @@ Wed, 13 Oct 2021 23:15:28 +0200
 - **ui**: fix empty button for registered users before the status has been updated ([268cc868d](https://github.com/marcantondahmen/automad/commit/268cc868d50b86b995bee2596999c1041dd3aa52))
 - **ui**: fix text modules for search and replace ([3e698295b](https://github.com/marcantondahmen/automad/commit/3e698295bda14a724aae109e3ec060c92e9d953c))
 - fix error when moving cache files to tmp on other drive ([8003aa6d4](https://github.com/marcantondahmen/automad/commit/8003aa6d48a30e550bced421a4d6bac39668aa07))
-
-## [v1.8.7](https://github.com/marcantondahmen/automad/commit/8bbc8f2da0b868efd22ae9459b1bbc539d65ba49)
-
-Thu, 9 Sep 2021 01:02:47 +0200
-
-### Breaking Changes
-
-- set required PHP version to 7.2+ ([8abbf5107](https://github.com/marcantondahmen/automad/commit/8abbf5107b1865a649a3bc05bf67006f3467e746))
-- **core**: refactor Parse class ([39a8c4f47](https://github.com/marcantondahmen/automad/commit/39a8c4f47c849392fcb438917d2c0a8ec7725eed))
-
-### New Features
-
-- set required PHP version to 7.2+ ([8abbf5107](https://github.com/marcantondahmen/automad/commit/8abbf5107b1865a649a3bc05bf67006f3467e746))
-
-### Bugfixes
-
-- **ui**: debounce status requests ([b3b54130b](https://github.com/marcantondahmen/automad/commit/b3b54130bc1b603a1834851876a2a6c396288523))
-- **ui**: fix switcher rendering in Safari ([2019c80ea](https://github.com/marcantondahmen/automad/commit/2019c80ea91fac2a2177917f02db8124694ab838))

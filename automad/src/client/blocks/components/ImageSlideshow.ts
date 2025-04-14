@@ -102,6 +102,10 @@ class SliderComponent extends HTMLElement {
 		create('div', ['swiper-button-next'], {}, swiperContainer);
 
 		imageSets.forEach(({ imageSet, caption }) => {
+			const captionHtml = caption
+				? `<div class="swiper-caption">${caption}</div>`
+				: '';
+
 			create(
 				'div',
 				['swiper-slide'],
@@ -114,7 +118,7 @@ class SliderComponent extends HTMLElement {
 						width="${imageSet.width}" 
 						height="${imageSet.height}"
 					></am-img-loader>
-					<div class="swiper-caption">${caption}</div>
+					${captionHtml}
 				`
 			);
 		});

@@ -54,8 +54,6 @@
 	&__label {
 		&:hover {
 			z-index: 2;
-			--color: var(--hover-color);
-			--background: var(--hover-background);
 		}
 
 		&:after {
@@ -97,6 +95,7 @@
 		left: 0.25rem !important;
 		opacity: 0.85;
 		font-size: 0.65rem !important;
+		color: hsl(var(--am-clr-text-sidebar));
 		transition: opacity 0.2s;
 
 		&:hover {

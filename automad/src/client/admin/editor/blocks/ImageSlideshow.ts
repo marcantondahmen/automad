@@ -60,7 +60,7 @@ import { BaseBlock } from './BaseBlock';
  *
  * @see {@link docs https://swiperjs.com/swiper-api#param-effect}
  */
-export const sliderEffects = ['slide', 'fade', 'cube', 'flip'] as const;
+export const sliderEffects = ['slide', 'fade', 'flip'] as const;
 
 const breakpointsToString = (
 	breakpoints: ImageSlideshowBreakpoints

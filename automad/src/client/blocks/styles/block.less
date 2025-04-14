@@ -43,8 +43,11 @@
 		margin-top: var(--am-block-margin-top);
 	}
 
-	& > figure {
+	& > figure:not(&) {
 		margin: 0 !important;
+	}
+
+	& > figure {
 		padding: 0 !important;
 	}
 
