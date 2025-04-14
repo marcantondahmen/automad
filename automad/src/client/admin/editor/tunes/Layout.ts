@@ -46,23 +46,8 @@ import {
 	LayoutTuneData,
 	SelectComponentOption,
 } from '@/admin/types';
+import { getBlockTools } from '../blocks';
 import { BaseElementTune } from './BaseElementTune';
-
-/**
- * The list of blocks that can be stretched.
- */
-const stretchableBlocks = [
-	'section',
-	'component',
-	'delimiter',
-	'image',
-	'video',
-	'gallery',
-	'slider',
-	'pagelist',
-	'embed',
-	'table',
-];
 
 /**
  * The fractions that can be used as width.
@@ -81,10 +66,12 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	static STRETCHED = 'stretched';
 
 	/**
-	 * Test whether the block is allowd to stretch.
+	 * Test whether the block is allowed to stretch.
+	 * In order to make a block stretchable, set the
+	 * "stretchable: true" in the block tool configuration.
 	 */
 	get isStretchable(): boolean {
-		return stretchableBlocks.includes(this.block.name || '');
+		return getBlockTools(false)[this.block.name]?.stretchable ?? false;
 	}
 
 	/**

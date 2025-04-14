@@ -66,6 +66,7 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 	let component: KeyValueMap = {
 		component: {
 			class: ComponentBlock,
+			stretchable: true,
 		},
 	};
 
@@ -82,7 +83,7 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			class: HeaderBlock,
 			inlineToolbar: true,
 		},
-		section: { class: SectionBlock },
+		section: { class: SectionBlock, stretchable: true },
 		...component,
 		nestedList: {
 			class: NestedListBlock,
@@ -91,27 +92,35 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 		table: {
 			class: TableBlock,
 			inlineToolbar: true,
+			stretchable: true,
 		},
 		quote: {
 			class: QuoteBlock,
 			inlineToolbar: true,
 		},
-		delimiter: Delimiter,
+		delimiter: {
+			class: Delimiter,
+			stretchable: true,
+		},
 		image: {
 			class: ImageBlock,
 			inlineToolbar: true,
+			stretchable: true,
 		},
 		video: {
 			class: VideoBlock,
 			inlineToolbar: true,
+			stretchable: true,
 		},
 		gallery: {
 			class: GalleryBlock,
 			inlineToolbar: false,
+			stretchable: true,
 		},
 		imageSlideshow: {
 			class: ImageSlideshowBlock,
 			inlineToolbar: false,
+			stretchable: true,
 		},
 		buttons: {
 			class: ButtonsBlock,
@@ -123,10 +132,12 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 		code: {
 			class: CodeBlock,
 			inlineToolbar: false,
+			stretchable: true,
 		},
 		raw: {
 			class: RawBlock,
 			inlineToolbar: false,
+			stretchable: true,
 		},
 		mail: {
 			class: MailBlock,
@@ -134,9 +145,11 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 		},
 		pagelist: {
 			class: PagelistBlock,
+			stretchable: true,
 		},
 		filelist: {
 			class: FilelistBlock,
+			stretchable: true,
 		},
 		snippet: {
 			class: SnippetBlock,
@@ -146,6 +159,7 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			class: Embed,
 			inlineToolbar: true,
 			config: { services: embedServices },
+			stretchable: true,
 		},
 	};
 };
