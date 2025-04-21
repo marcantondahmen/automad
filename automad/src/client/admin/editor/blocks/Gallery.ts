@@ -48,7 +48,7 @@ import {
 	listen,
 	uniqueId,
 } from '@/admin/core';
-import { GalleryBlockData } from '@/admin/types';
+import { GalleryBlockData, GalleryLayout } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 export class GalleryBlock extends BaseBlock<GalleryBlockData> {
@@ -203,6 +203,10 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 					value: 'columns',
 				},
 				{
+					text: App.text('galleryBlockLayoutGrid'),
+					value: 'grid',
+				},
+				{
 					text: App.text('galleryBlockLayoutRows'),
 					value: 'rows',
 				},
@@ -212,11 +216,11 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			'layout'
 		);
 
-		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+		const settings = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
 		createField(
 			FieldTag.number,
-			dimensions,
+			settings,
 			{
 				name: 'gapPx',
 				value: this.data.gapPx,
@@ -227,7 +231,18 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			{ required: '' }
 		);
 
-		if (this.data.layout == 'rows') {
+		if (this.data.layout == 'columns') {
+			createField(FieldTag.toggle, settings, {
+				name: 'cleanBottom',
+				value: this.data.cleanBottom,
+				key: uniqueId(),
+				label: App.text('galleryBlockLayoutCleanBottom'),
+			});
+		}
+
+		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+
+		if (['rows', 'grid'].includes(this.data.layout)) {
 			createField(
 				FieldTag.number,
 				dimensions,
@@ -240,7 +255,9 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 				[],
 				{ required: '' }
 			);
-		} else {
+		}
+
+		if (['columns', 'grid'].includes(this.data.layout)) {
 			createField(
 				FieldTag.number,
 				dimensions,
@@ -255,18 +272,11 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 				[],
 				{ required: '' }
 			);
-
-			createField(FieldTag.toggle, body, {
-				name: 'cleanBottom',
-				value: this.data.cleanBottom,
-				key: uniqueId(),
-				label: App.text('galleryBlockLayoutCleanBottom'),
-			});
 		}
 
 		const layoutListener = listen(layout, 'change', () => {
 			layoutListener.remove();
-			this.data.layout = layout.value as 'columns' | 'rows';
+			this.data.layout = layout.value as GalleryLayout;
 			this.renderLayoutSettings(body);
 		});
 	}

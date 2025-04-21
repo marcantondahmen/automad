@@ -102,11 +102,50 @@ class GalleryComponent extends HTMLElement {
 
 		this.removeAttribute('data');
 
-		if (this.data.settings.layout === 'columns') {
-			this.renderColumns();
-		} else {
-			this.renderRows();
-		}
+		const layouts = {
+			columns: this.renderColumns,
+			grid: this.renderGrid,
+			rows: this.renderRows,
+		};
+
+		const render = (
+			layouts[this.data.settings.layout] ?? this.renderColumns
+		).bind(this);
+
+		render();
+	}
+
+	/**
+	 * Render the grid layout.
+	 */
+	private renderGrid(): void {
+		const gallery = create(
+			'div',
+			['am-gallery-grid'],
+			{
+				style: `
+					--am-gallery-grid-item-aspect: ${this.data.settings.columnWidthPx / this.data.settings.rowHeightPx};
+					--am-gallery-grid-item-width: ${this.data.settings.columnWidthPx}px;
+					--am-gallery-gap: ${this.data.settings.gapPx}px;
+				`,
+			},
+			this
+		);
+
+		this.data.imageSets.forEach((imgSet) => {
+			create(
+				'a',
+				['am-gallery-grid-item'],
+				{
+					href: imgSet.large.image,
+					target: '_blank',
+					'data-pswp-width': imgSet.large.width,
+					'data-pswp-height': imgSet.large.height,
+				},
+				gallery,
+				`<div class="am-gallery-img-small">${renderThumb(imgSet)}</div>`
+			);
+		});
 	}
 
 	/**

@@ -151,6 +151,7 @@
 	"galleryBlockLayoutColumnWidth": "Column Width",
 	"galleryBlockLayoutColumns": "Column Layout",
 	"galleryBlockLayoutGap": "Gap",
+	"galleryBlockLayoutGrid": "Grid Layout",
 	"galleryBlockLayoutRowHeight": "Row Height",
 	"galleryBlockLayoutRows": "Row Layout",
 	"galleryBlockTitle": "Image Gallery",

@@ -73,8 +73,8 @@ class Gallery extends AbstractBlock {
 
 		$imageSets = array();
 
-		$width = $settings['layout'] === 'columns' ? $settings['columnWidthPx'] : 0;
-		$height = $settings['layout'] === 'rows' ? $settings['rowHeightPx'] : 0;
+		$width = $settings['layout'] != 'rows' ? $settings['columnWidthPx'] : 0;
+		$height = $settings['layout'] != 'columns' ? $settings['rowHeightPx'] : 0;
 
 		foreach ($block['data']['files'] ?? array() as $file) {
 			$imageSets[] = array(
