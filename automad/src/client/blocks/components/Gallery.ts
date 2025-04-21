@@ -302,7 +302,7 @@ class GalleryComponent extends HTMLElement {
 			['am-gallery-flex'],
 			{
 				style: `
-					--am-gallery-flex-item-height: ${this.data.settings.rowHeightPx}px;
+					--am-gallery-flex-item-height: ${this.data.settings.rowHeightPx + this.data.settings.gapPx}px;
 					--am-gallery-gap: ${this.data.settings.gapPx}px;
 				`,
 			},
