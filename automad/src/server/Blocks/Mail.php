@@ -62,6 +62,7 @@ class Mail extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
+		$id = $block['id'];
 		$data = $block['data'];
 		$honeypot = 'nickname';
 
@@ -82,10 +83,13 @@ class Mail extends AbstractBlock {
 		);
 
 		$data = array_merge($defaults, array_filter($data));
+		$status = false;
 
-		$status = SystemMail::sendForm($data, $Automad);
+		if (!empty($_POST) && $_POST['id'] == $id) {
+			$status = SystemMail::sendForm($data, $Automad);
+		}
 
-		if (!empty($_POST) && is_string($status)) {
+		if (is_string($status) && !empty($status)) {
 			header('Content-Type: application/json; charset=utf-8');
 			$Response = new Response();
 
@@ -99,7 +103,7 @@ class Mail extends AbstractBlock {
 		$idBody = 'id_' . bin2hex(random_bytes(16));
 
 		return <<< HTML
-			<am-mail $attr>
+			<am-mail $attr id="$id">
 				<div class="am-field">
 					<label for="$idAddress" class="am-label">{$data['labelAddress']}</label>
 					<input 

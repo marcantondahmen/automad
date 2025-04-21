@@ -58,16 +58,6 @@ const resetInputs = (inputs: MailInput[]): void => {
 	});
 };
 
-const getInputData = (inputs: MailInput[]): FormData => {
-	const formData: FormData = new FormData();
-
-	inputs.forEach((input) => {
-		formData.append(input.name, input.value);
-	});
-
-	return formData;
-};
-
 /**
  * A simple mail form.
  */
@@ -104,7 +94,7 @@ export class MailComponent extends HTMLElement {
 			try {
 				const response = await fetch(window.location.href, {
 					method: 'POST',
-					body: getInputData(inputs),
+					body: this.getData(inputs),
 				});
 
 				const { data } = await response.json();
@@ -121,6 +111,21 @@ export class MailComponent extends HTMLElement {
 				}
 			} catch {}
 		});
+	}
+
+	/**
+	 * Get the input field data along with the block id.
+	 */
+	private getData(inputs: MailInput[]): FormData {
+		const formData: FormData = new FormData();
+
+		inputs.forEach((input) => {
+			formData.append(input.name, input.value);
+		});
+
+		formData.append('id', this.id);
+
+		return formData;
 	}
 }
 
