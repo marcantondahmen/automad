@@ -102,16 +102,17 @@
 			align-items: center;
 			background-color: var(--am-gallery-grid-item-background);
 			border-radius: var(--am-gallery-grid-item-radius);
+			overflow: hidden;
 		}
 	}
 
-	&-grid &-img-small am-img-loader,
-	&-grid &-img-small img {
-		display: flex;
-		min-height: var(--am-gallery-grid-item-scale);
-		min-width: var(--am-gallery-grid-item-scale) !important;
-		object-fit: contain;
-		background-size: contain;
+	&-grid &-img-small {
+		display: grid;
+		justify-content: center;
+		align-items: center;
+		max-height: var(--am-gallery-grid-item-scale);
+		width: var(--am-gallery-grid-item-scale);
+		aspect-ratio: var(--aspect);
 	}
 }
 

@@ -49,19 +49,16 @@ import closeSVG from '@/blocks/svg/close.svg';
 import zoomSVG from '@/blocks/svg/zoom.svg';
 
 const renderThumb = (imgSet: GalleryData['imageSets'][number]): string => {
+	const { thumb, caption } = imgSet;
+
 	return `
 		<am-img-loader
-			image="${imgSet.thumb.image}"
-			preload="${imgSet.thumb.preload}"
-			width="${imgSet.thumb.width}"
-			height="${imgSet.thumb.height}"
-			style="width: ${imgSet.thumb.width}px;"
+			image="${thumb.image}"
+			preload="${thumb.preload}"
+			width="${thumb.width}"
+			height="${thumb.height}"
 		></am-img-loader>
-		${
-			imgSet.caption
-				? `<span class="pswp-caption-content">${imgSet.caption}</span>`
-				: ''
-		}
+		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
 	`;
 };
 
@@ -141,6 +138,7 @@ class GalleryComponent extends HTMLElement {
 					target: '_blank',
 					'data-pswp-width': imgSet.large.width,
 					'data-pswp-height': imgSet.large.height,
+					style: `--aspect: ${imgSet.thumb.width / imgSet.thumb.height}`,
 				},
 				gallery,
 				`<div class="am-gallery-img-small">${renderThumb(imgSet)}</div>`
