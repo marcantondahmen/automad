@@ -32,14 +32,44 @@
  * Licensed under the MIT license.
  */
 
-input[name='human'] {
-	display: none !important;
+.am-form {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: var(--am-form-gap);
+
+	& input:not([class]) {
+		position: fixed;
+		top: -100px;
+		opacity: 0;
+		height: 0;
+		padding: 0;
+		margin: 0;
+	}
+
+	& button {
+		cursor: pointer;
+		align-self: start;
+	}
+}
+
+.am-field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--am-field-gap);
+}
+
+.am-label {
+	font-family: inherit;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	color: inherit;
 }
 
 .am-input {
 	box-sizing: border-box;
 	width: 100%;
-	margin: var(--am-input-margin);
 	padding: var(--am-input-padding);
 	font-family: inherit;
 	font-weight: inherit;
@@ -63,7 +93,23 @@ input[name='human'] {
 		outline: none;
 	}
 
-	&::placeholder {
-		color: var(--am-input-placeholder-color);
+	.am-validate &:invalid {
+		border: var(--am-input-invalid-border);
 	}
+
+	& + .am-error {
+		display: none;
+	}
+
+	.am-validate &:invalid + .am-error {
+		display: flex;
+	}
+}
+
+.am-error {
+	font-family: inherit;
+	font-weight: var(--am-error-font-weight);
+	font-size: var(--am-error-font-size);
+	line-height: inherit;
+	color: var(--am-error-color);
 }

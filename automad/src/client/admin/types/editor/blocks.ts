@@ -102,9 +102,11 @@ export interface ImageBlockData {
 	openInNewTab: boolean;
 }
 
+export type GalleryLayout = 'columns' | 'rows' | 'grid';
+
 export interface GalleryBlockData {
 	files: string[];
-	layout: 'columns' | 'rows';
+	layout: GalleryLayout;
 	columnWidthPx: number;
 	rowHeightPx: number;
 	gapPx: number;
@@ -115,8 +117,11 @@ export interface MailBlockData {
 	to: string;
 	error: string;
 	success: string;
+	errorAddress: string;
 	labelAddress: string;
+	errorSubject: string;
 	labelSubject: string;
+	errorBody: string;
 	labelBody: string;
 	labelSend: string;
 }

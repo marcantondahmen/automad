@@ -35,6 +35,7 @@
 import './styles/index.less';
 
 import './components/Gallery';
-import './components/ImgLoader';
 import './components/ImageSlideshow';
+import './components/ImgLoader';
+import './components/Mail';
 import './components/TableOfContents';

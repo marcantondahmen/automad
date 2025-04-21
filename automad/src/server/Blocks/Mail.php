@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\API\Response;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Text;
@@ -61,7 +62,9 @@ class Mail extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
+		$id = $block['id'];
 		$data = $block['data'];
+		$honeypot = 'nickname';
 
 		if (empty($data['to'])) {
 			return '';
@@ -69,33 +72,75 @@ class Mail extends AbstractBlock {
 
 		$defaults = array(
 			'error' => Text::get('mailBlockDefaultError'),
-			'success' => Text::get('mailBlockDefaultSuccess'),
+			'errorAddress' => Text::get('mailBlockDefaultErrorAddress'),
+			'errorBody' => Text::get('mailBlockDefaultErrorBody'),
+			'errorSubject' => Text::get('mailBlockDefaultErrorSubject'),
 			'labelAddress' => Text::get('mailBlockDefaultLabelAddress'),
-			'labelSubject' => Text::get('mailBlockDefaultLabelSubject'),
 			'labelBody' => Text::get('mailBlockDefaultLabelBody'),
-			'labelSend' => Text::get('mailBlockDefaultLabelSend')
+			'labelSend' => Text::get('mailBlockDefaultLabelSend'),
+			'labelSubject' => Text::get('mailBlockDefaultLabelSubject'),
+			'success' => Text::get('mailBlockDefaultSuccess')
 		);
 
 		$data = array_merge($defaults, array_filter($data));
+		$status = false;
 
-		$status = SystemMail::sendForm($data, $Automad);
-
-		if ($status) {
-			$status = "<h3>$status</h3>";
+		if (!empty($_POST) && $_POST['id'] == $id) {
+			$status = SystemMail::sendForm($data, $Automad);
 		}
 
-		$attr = Attr::render($block['tunes']);
+		if (is_string($status) && !empty($status)) {
+			header('Content-Type: application/json; charset=utf-8');
+			$Response = new Response();
+
+			exit($Response->setData(array('status' => $status))->json());
+		}
+
+		$attr = Attr::render($block['tunes'], array('am-form'));
+
+		$idAddress = 'id_' . bin2hex(random_bytes(16));
+		$idSubject = 'id_' . bin2hex(random_bytes(16));
+		$idBody = 'id_' . bin2hex(random_bytes(16));
 
 		return <<< HTML
-			<am-mail $attr>
-				$status
-				<form action="" method="post">	
-					<input type="text" name="human" value="">	
-					<input class="am-input" type="text" name="from" value="" placeholder="{$data['labelAddress']}">
-					<input class="am-input" type="text" name="subject" value="" placeholder="{$data['labelSubject']}">
-					<textarea class="am-input" name="message" placeholder="{$data['labelBody']}"></textarea>
-					<button class="am-button" type="submit">{$data['labelSend']}</button>	
-				</form>
+			<am-mail $attr id="$id">
+				<div class="am-field">
+					<label for="$idAddress" class="am-label">{$data['labelAddress']}</label>
+					<input 
+						id="$idAddress"
+						class="am-input" 
+						type="email" 
+						name="from" 
+						value="" 
+						required
+					>
+					<span class="am-error">{$data['errorAddress']}</span>
+				</div>
+				<input type="text" name="$honeypot" value="">	
+				<div class="am-field">
+					<label for="$idSubject" class="am-label">{$data['labelSubject']}</label>
+					<input 
+						id="$idSubject"
+						class="am-input" 
+						type="text" 
+						name="subject" 
+						value="" 
+						required
+					>
+					<span class="am-error">{$data['errorSubject']}</span>
+				</div>
+				<div class="am-field">
+					<label for="$idBody" class="am-label">{$data['labelBody']}</label>
+					<textarea 
+						id="$idBody"
+						class="am-input" 
+						name="message" 
+						rows="8"
+						required
+					></textarea>
+					<span class="am-error">{$data['errorBody']}</span>
+				</div>
+				<button class="am-button">{$data['labelSend']}</button>	
 			</am-mail>
 		HTML;
 	}

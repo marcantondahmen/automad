@@ -52,6 +52,8 @@ export interface GalleryData {
 	settings: Omit<GalleryBlockData, 'files'>;
 }
 
+export type MailInput = HTMLInputElement | HTMLTextAreaElement;
+
 export interface MasonryItem {
 	element: HTMLElement;
 	rowSpan: number;

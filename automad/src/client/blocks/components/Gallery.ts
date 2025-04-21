@@ -49,19 +49,16 @@ import closeSVG from '@/blocks/svg/close.svg';
 import zoomSVG from '@/blocks/svg/zoom.svg';
 
 const renderThumb = (imgSet: GalleryData['imageSets'][number]): string => {
+	const { thumb, caption } = imgSet;
+
 	return `
 		<am-img-loader
-			image="${imgSet.thumb.image}"
-			preload="${imgSet.thumb.preload}"
-			width="${imgSet.thumb.width}"
-			height="${imgSet.thumb.height}"
-			style="width: ${imgSet.thumb.width}px;"
+			image="${thumb.image}"
+			preload="${thumb.preload}"
+			width="${thumb.width}"
+			height="${thumb.height}"
 		></am-img-loader>
-		${
-			imgSet.caption
-				? `<span class="pswp-caption-content">${imgSet.caption}</span>`
-				: ''
-		}
+		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
 	`;
 };
 
@@ -102,11 +99,51 @@ class GalleryComponent extends HTMLElement {
 
 		this.removeAttribute('data');
 
-		if (this.data.settings.layout === 'columns') {
-			this.renderColumns();
-		} else {
-			this.renderRows();
-		}
+		const layouts = {
+			columns: this.renderColumns,
+			grid: this.renderGrid,
+			rows: this.renderRows,
+		};
+
+		const render = (
+			layouts[this.data.settings.layout] ?? this.renderColumns
+		).bind(this);
+
+		render();
+	}
+
+	/**
+	 * Render the grid layout.
+	 */
+	private renderGrid(): void {
+		const gallery = create(
+			'div',
+			['am-gallery-grid'],
+			{
+				style: `
+					--am-gallery-grid-item-aspect: ${this.data.settings.columnWidthPx / this.data.settings.rowHeightPx};
+					--am-gallery-grid-item-width: ${this.data.settings.columnWidthPx}px;
+					--am-gallery-gap: ${this.data.settings.gapPx}px;
+				`,
+			},
+			this
+		);
+
+		this.data.imageSets.forEach((imgSet) => {
+			create(
+				'a',
+				['am-gallery-grid-item'],
+				{
+					href: imgSet.large.image,
+					target: '_blank',
+					'data-pswp-width': imgSet.large.width,
+					'data-pswp-height': imgSet.large.height,
+					style: `--aspect: ${imgSet.thumb.width / imgSet.thumb.height}`,
+				},
+				gallery,
+				`<div class="am-gallery-img-small">${renderThumb(imgSet)}</div>`
+			);
+		});
 	}
 
 	/**
@@ -265,7 +302,7 @@ class GalleryComponent extends HTMLElement {
 			['am-gallery-flex'],
 			{
 				style: `
-					--am-gallery-flex-item-height: ${this.data.settings.rowHeightPx}px;
+					--am-gallery-flex-item-height: ${this.data.settings.rowHeightPx + this.data.settings.gapPx}px;
 					--am-gallery-gap: ${this.data.settings.gapPx}px;
 				`,
 			},
