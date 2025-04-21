@@ -109,7 +109,7 @@ class Mail {
 	 *
 	 * @param array $data
 	 * @param Automad $Automad
-	 * @return bool|string the sendig status
+	 * @return bool|string the sendig status message
 	 */
 	public static function sendForm(array $data, Automad $Automad): bool|string {
 		// Prevent a second call.
@@ -118,7 +118,7 @@ class Mail {
 		}
 
 		// Define field names.
-		$honeypot = 'human';
+		$honeypot = 'nickname'; // Not an obvious spam bot trap name.
 		$from = 'from'; // The "from" field will be used for "reply to".
 		$subject = 'subject';
 		$message = 'message';

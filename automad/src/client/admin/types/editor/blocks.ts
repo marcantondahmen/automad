@@ -117,8 +117,11 @@ export interface MailBlockData {
 	to: string;
 	error: string;
 	success: string;
+	errorAddress: string;
 	labelAddress: string;
+	errorSubject: string;
 	labelSubject: string;
+	errorBody: string;
 	labelBody: string;
 	labelSend: string;
 }

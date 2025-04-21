@@ -54,8 +54,11 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 			to: false,
 			error: {},
 			success: {},
+			errorAddress: false,
 			labelAddress: false,
+			errorSubject: false,
 			labelSubject: false,
+			errorBody: false,
 			labelBody: false,
 			labelSend: false,
 		};
@@ -82,8 +85,11 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 			to: data.to || App.user.email,
 			error: data.error || '',
 			success: data.success || '',
+			errorAddress: data.errorAddress || '',
 			labelAddress: data.labelAddress || '',
+			errorSubject: data.errorSubject || '',
 			labelSubject: data.labelSubject || '',
+			errorBody: data.errorBody || '',
 			labelBody: data.labelBody || '',
 			labelSend: data.labelSend || '',
 		};
@@ -126,7 +132,10 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 							...disabled,
 						}
 					).outerHTML}
-					<div class="${CSS.grid} ${CSS.gridAuto}">
+					<div
+						class="${CSS.grid} ${CSS.gridAuto}"
+						style="--min: 20rem;"
+					>
 						${createField(
 							FieldTag.input,
 							null,
@@ -137,6 +146,21 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 								value: this.data.labelAddress,
 								placeholder: App.text(
 									'mailBlockDefaultLabelAddress'
+								),
+							},
+							[],
+							disabled
+						).outerHTML}
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								name: 'errorAddress',
+								key: uniqueId(),
+								label: App.text('mailBlockAddressFieldError'),
+								value: this.data.errorAddress,
+								placeholder: App.text(
+									'mailBlockDefaultErrorAddress'
 								),
 							},
 							[],
@@ -157,8 +181,21 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 							[],
 							disabled
 						).outerHTML}
-					</div>
-					<div class="${CSS.grid} ${CSS.gridAuto}">
+						${createField(
+							FieldTag.input,
+							null,
+							{
+								name: 'errorSubject',
+								key: uniqueId(),
+								label: App.text('mailBlockSubjectFieldError'),
+								value: this.data.errorSubject,
+								placeholder: App.text(
+									'mailBlockDefaultErrorSubject'
+								),
+							},
+							[],
+							disabled
+						).outerHTML}
 						${createField(
 							FieldTag.input,
 							null,
@@ -178,18 +215,31 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 							FieldTag.input,
 							null,
 							{
-								name: 'labelSend',
+								name: 'errorBody',
 								key: uniqueId(),
-								label: App.text('mailBlockSendButtonLabel'),
-								value: this.data.labelSend,
+								label: App.text('mailBlockBodyFieldError'),
+								value: this.data.errorBody,
 								placeholder: App.text(
-									'mailBlockDefaultLabelSend'
+									'mailBlockDefaultErrorBody'
 								),
 							},
 							[],
 							disabled
 						).outerHTML}
 					</div>
+					${createField(
+						FieldTag.input,
+						null,
+						{
+							name: 'labelSend',
+							key: uniqueId(),
+							label: App.text('mailBlockSendButtonLabel'),
+							value: this.data.labelSend,
+							placeholder: App.text('mailBlockDefaultLabelSend'),
+						},
+						[],
+						disabled
+					).outerHTML}
 					${createField(
 						FieldTag.textarea,
 						null,
