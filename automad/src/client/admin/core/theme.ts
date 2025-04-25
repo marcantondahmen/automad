@@ -40,13 +40,15 @@ export enum DashboardTheme {
 	dark = 'dark',
 }
 
+const DASHBOARD_THEME_KEY = 'am-dashboard-theme';
+
 /**
  * Get the color scheme from local storage or system preferences.
  *
  * @returns The current color scheme in use
  */
 export const getTheme = (): DashboardTheme => {
-	const localScheme = localStorage.getItem('dashboard-theme');
+	const localScheme = localStorage.getItem(DASHBOARD_THEME_KEY);
 
 	if (localScheme) {
 		return localScheme as DashboardTheme;
@@ -66,7 +68,7 @@ export const getTheme = (): DashboardTheme => {
  * @param theme
  */
 export const setTheme = (theme: DashboardTheme): void => {
-	localStorage.setItem('dashboard-theme', theme);
+	localStorage.setItem(DASHBOARD_THEME_KEY, theme);
 	applyTheme(theme);
 
 	fire(EventName.dashboardThemeChange);
