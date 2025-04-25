@@ -49,6 +49,7 @@ class TwitterEmbedComponent extends BaseComponent {
 		const id = src.split(/\//).pop();
 
 		this.classList.add(CSS.flex, CSS.flexCenter);
+		this.innerHTML = '';
 
 		create(
 			'iframe',
