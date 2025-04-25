@@ -67,7 +67,6 @@ class ConsentComponent extends HTMLElement {
 	 */
 	static set state(value: 'accepted' | 'declined') {
 		localStorage.setItem(CONSENT_KEY, value);
-		ConsentComponent.banner.remove();
 	}
 
 	/**
@@ -126,7 +125,7 @@ class ConsentComponent extends HTMLElement {
 			['am-consent-banner'],
 			{},
 			document.body,
-			`${COOKIE_ICON} This site uses cookies.`
+			`${COOKIE_ICON} This site uses third-party cookies.`
 		);
 
 		const accept = create(
@@ -141,6 +140,7 @@ class ConsentComponent extends HTMLElement {
 			ConsentComponent.state = 'accepted';
 			ConsentComponent.pendingInstances.forEach((i) => i.injectContent());
 			ConsentComponent.pendingInstances = [];
+			ConsentComponent.banner.remove();
 		});
 
 		if (ConsentComponent.hasNoConsent) {
@@ -156,6 +156,10 @@ class ConsentComponent extends HTMLElement {
 
 			decline.addEventListener('click', () => {
 				ConsentComponent.state = 'declined';
+				ConsentComponent.banner.classList.add(
+					'am-consent-banner--small'
+				);
+				decline.remove();
 			});
 		}
 	}
