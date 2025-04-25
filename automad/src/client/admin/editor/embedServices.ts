@@ -107,13 +107,12 @@ export const embedServices = {
 		width: 0,
 	},
 	twitter: {
-		regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$/,
-		embedUrl:
-			'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
-		html: '<iframe width="500" height="500" style="display: block; width: 500px; border-bottom: 1px solid #E0E0E0; margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
+		regex: /^https?:\/\/(?:www\.)?(?:twitter\.com|x\.com)\/(.+?)\/status\/(\d+)(?:\?.*)?$/,
+		embedUrl: 'https://twitter.com/<%= remote_id %>',
+		html: '<am-twitter-embed></am-twitter-embed>',
 		height: 0,
 		width: 0,
-		id: (ids: string[]) => ids.join('/status/'),
+		id: (groups: string[]) => groups.join('/status/'),
 	},
 	vimeo: {
 		regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,

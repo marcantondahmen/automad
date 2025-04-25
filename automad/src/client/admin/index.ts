@@ -188,4 +188,5 @@ import './components/PageSelectTree';
 import './components/Root';
 import './components/Select';
 import './components/Spinner';
+import './components/TwitterEmbed';
 import './components/UndoButtons';
