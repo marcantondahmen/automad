@@ -111,6 +111,14 @@ export interface JumpbarItemData {
 	cls?: string[];
 }
 
+export interface EmbedServiceData {
+	[key: string]: {
+		cls: string[];
+		script: string;
+		getId: (src: string) => string;
+	};
+}
+
 export interface File {
 	basename: string;
 	extension: string;

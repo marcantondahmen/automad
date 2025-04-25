@@ -32,13 +32,12 @@
  * Licensed under the MIT license.
  */
 
-// @ts-ignore
-import Embed from '@editorjs/embed';
 import { KeyValueMap } from '../types';
 import { ButtonsBlock } from './blocks/Buttons';
 import { CodeBlock } from './blocks/Code';
 import { ComponentBlock } from './blocks/Component';
 import { Delimiter } from './blocks/Delimiter';
+import { EmbedBlock } from './blocks/Embed';
 import { FilelistBlock } from './blocks/Filelist';
 import { GalleryBlock } from './blocks/Gallery';
 import { HeaderBlock } from './blocks/Header';
@@ -156,7 +155,7 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			tunes: [],
 		},
 		embed: {
-			class: Embed,
+			class: EmbedBlock,
 			inlineToolbar: true,
 			config: { services: embedServices },
 			stretchable: true,

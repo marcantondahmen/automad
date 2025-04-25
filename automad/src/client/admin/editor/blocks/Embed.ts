@@ -32,39 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from '@/admin/components/Base';
-import { create, CSS } from '../core';
+import Embed from '@editorjs/embed';
 
-/**
- * A twitter embed component.
- *
- * @extends BaseComponent
- */
-class TwitterEmbedComponent extends BaseComponent {
+export class EmbedBlock extends Embed {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The sanitizer config.
+	 *
+	 * @static
 	 */
-	connectedCallback(): void {
-		const src = this.getAttribute('src');
-		const id = src.split(/\//).pop();
-
-		this.classList.add(CSS.flex, CSS.flexCenter);
-		this.innerHTML = '';
-
-		create(
-			'iframe',
-			[],
-			{
-				src: `https://platform.twitter.com/embed/Tweet.html?id=${id}`,
-				width: 550,
-				height: 290,
-				frameborder: '0',
-				scrolling: 'no',
-				allowtransparency: 'true',
-			},
-			this
-		);
+	static get sanitize() {
+		return {
+			embed: true,
+		};
 	}
 }
-
-customElements.define('am-twitter-embed', TwitterEmbedComponent);

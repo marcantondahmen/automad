@@ -86,6 +86,16 @@ class Embed extends AbstractBlock {
 				</blockquote>
 				<$script $scriptType async src="https://platform.twitter.com/widgets.js" charset="utf-8"></$script>
 			HTML;
+		} elseif ($data['service'] == 'imgur') {
+			/** @var string */
+			$id = preg_replace('/^.*\/imgur.com\//', '', $data['embed']);
+
+			$html = <<< HTML
+				<blockquote class="imgur-embed-pub" data-id="$id">
+					<a href="{$data['embed']}" class="am-consent-placeholder"></a>
+				</blockquote>
+				<$script $scriptType async src="https://s.imgur.com/min/embed.js" charset="utf-8"></$script>
+			HTML;
 		} elseif (!empty($data['width'])) {
 			$paddingTop = $data['height'] / $data['width'] * 100;
 
@@ -115,7 +125,7 @@ class Embed extends AbstractBlock {
 			$html .= "<figcaption>{$data['caption']}</figcaption>";
 		}
 
-		$attr = Attr::render($block['tunes']);
+		$attr = Attr::render($block['tunes'], array('am-embed-' . $data['service']));
 
 		return "<am-embed $attr><figure>$html</figure></am-embed>";
 	}
