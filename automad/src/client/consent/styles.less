@@ -1,0 +1,123 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2025 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+:root {
+	--am-consent-banner-color: #f9fafc;
+	--am-consent-banner-background: #121315;
+	--am-consent-banner-border: 1px solid rgba(255, 255, 255, 0.06);
+	--am-consent-placeholder-color: rgba(120, 123, 132, 0.3);
+	--am-consent-placeholder-background: rgba(120, 123, 132, 0.075);
+}
+
+am-consent[type='script'] {
+	display: none;
+}
+
+.am-consent {
+	&-banner {
+		box-sizing: border-box;
+		position: fixed;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.85em;
+		padding: 1em;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: auto;
+		font-family: 'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif,
+			system-ui, sans-serif;
+		font-size: 16px;
+		font-weight: 600;
+		color: var(--am-consent-banner-color);
+		background-color: var(--am-consent-banner-background);
+		border-top: var(--am-consent-banner-border);
+
+		& svg {
+			font-size: 1.25em;
+		}
+
+		&--small {
+			left: auto;
+			right: 10px;
+			bottom: 10px;
+			padding: 0.5em 1em;
+			border-radius: 1.75em;
+			border: var(--am-consent-banner-border);
+		}
+
+		&__button {
+			padding: 0;
+			font-family: inherit;
+			font-weight: inherit;
+			line-height: inherit;
+			appearance: none;
+			cursor: pointer;
+			color: inherit;
+			background-color: transparent;
+			border: none;
+			text-decoration: underline;
+			text-underline-offset: 4px;
+			opacity: 1;
+			transition: opacity 0.2s;
+
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+	}
+
+	&-placeholder {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75em;
+		height: 100%;
+		min-height: 160px;
+		padding: 1.5em;
+		font-family: 'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif,
+			system-ui, sans-serif;
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--am-consent-placeholder-color, rgba(0, 0, 0, 0.1));
+		background-color: var(--am-consent-placeholder-background);
+
+		& svg {
+			font-size: 36px;
+		}
+	}
+}
