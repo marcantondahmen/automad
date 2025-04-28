@@ -158,7 +158,9 @@ class Response {
 	 * @return Response
 	 */
 	public function setDebug(array $log): Response {
-		$this->debug = $log;
+		if (!empty($log)) {
+			$this->debug = $log;
+		}
 
 		return $this;
 	}
