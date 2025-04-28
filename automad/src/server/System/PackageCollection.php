@@ -38,6 +38,7 @@ namespace Automad\System;
 
 use Automad\API\Response;
 use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -105,8 +106,9 @@ class PackageCollection {
 	 */
 	public static function getOutdated(): array {
 		$Composer = new Composer();
-		$buffer = $Composer->run('show -oD -f json', true);
-		$decoded = json_decode($buffer, true);
+		$Messenger = new Messenger();
+		$buffer = $Composer->run('show -oD -f json', $Messenger);
+		$decoded = $Messenger->getData();
 
 		if ($decoded && !empty($decoded['installed'])) {
 			return $decoded['installed'];

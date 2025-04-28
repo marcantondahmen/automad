@@ -38,11 +38,10 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Cache;
-use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\System\Composer;
-use Automad\System\Fetch;
 use Automad\System\Package;
 use Automad\System\PackageCollection;
 
@@ -96,9 +95,11 @@ class PackageManagerController {
 		}
 
 		$Composer = new Composer();
+		$Messenger = new Messenger();
+		$exitCode = $Composer->run('require --update-no-dev ' . $package, $Messenger);
 
-		if ($error = $Composer->run('require --update-no-dev ' . $package)) {
-			return $Response->setError($error);
+		if ($exitCode !== 0) {
+			return $Response->setError($Messenger->getError());
 		}
 
 		Cache::clear();
@@ -113,15 +114,18 @@ class PackageManagerController {
 	 */
 	public static function remove(): Response {
 		$Response = new Response();
+		$package = Request::post('package');
 
-		if ($package = Request::post('package')) {
-			$Composer = new Composer();
+		if (!$package) {
+			return $Response;
+		}
 
-			if ($error = $Composer->run('remove ' . $package)) {
-				$Response->setError($error);
-			} else {
-				$Response->setSuccess(Text::get('deteledSuccess') . '<br>' . $package);
-			}
+		$Composer = new Composer();
+		$Messenger = new Messenger();
+		$exitCode = $Composer->run('remove ' . $package, $Messenger);
+
+		if ($exitCode !== 0) {
+			return $Response->setError($Messenger->getError());
 		}
 
 		Cache::clear();
@@ -143,9 +147,11 @@ class PackageManagerController {
 			}
 
 			$Composer = new Composer();
+			$Messenger = new Messenger();
+			$exitCode = $Composer->run('update --with-dependencies --no-dev ' . $package, $Messenger);
 
-			if ($error = $Composer->run('update --with-dependencies --no-dev ' . $package)) {
-				return $Response->setError($error);
+			if ($exitCode !== 0) {
+				return $Response->setError($Messenger->getError());
 			}
 
 			Cache::clear();
@@ -164,9 +170,11 @@ class PackageManagerController {
 	public static function updateAll(): Response {
 		$Response = new Response();
 		$Composer = new Composer();
+		$Messenger = new Messenger();
+		$exitCode = $Composer->run('update --no-dev', $Messenger);
 
-		if ($error = $Composer->run('update --no-dev')) {
-			return $Response->setError($error);
+		if ($exitCode !== 0) {
+			return $Response->setError($Messenger->getError());
 		}
 
 		Cache::clear();
