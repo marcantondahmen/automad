@@ -108,6 +108,7 @@ class Composer {
 			$this->run('update automad/package-installer');
 		}
 
+		$this->run('clear-cache');
 	}
 
 	/**
