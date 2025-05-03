@@ -85,6 +85,7 @@ class RepositoryCollection {
 		$MetaData = self::getRepositoryAdapter($platform, $name, $repositoryUrl, $branch);
 
 		$config['repositories'][] = $MetaData->getConfig();
+		$config['repositories'] = array_values($config['repositories']);
 
 		return Composer::writeConfig($config);
 	}
@@ -172,6 +173,8 @@ class RepositoryCollection {
 		if (empty($config['repositories'])) {
 			unset($config['repositories']);
 		}
+
+		$config['repositories'] = array_values($config['repositories']);
 
 		return Composer::writeConfig($config);
 	}

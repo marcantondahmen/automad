@@ -35,7 +35,6 @@
 import { BaseComponent } from '@/admin/components/Base';
 import {
 	App,
-	Attr,
 	createField,
 	createFormModal,
 	CSS,
@@ -125,7 +124,7 @@ export class ComposerAuthModalComponent extends BaseComponent {
 						value: '',
 						name: 'githubToken',
 						placeholder: auth.githubTokenIsSet ? '**********' : '',
-						label: 'Access Token (api read)',
+						label: 'Fine-grained access token "Contents: Read"',
 					},
 					[]
 				);
@@ -153,7 +152,7 @@ export class ComposerAuthModalComponent extends BaseComponent {
 						value: '',
 						name: 'gitlabToken',
 						placeholder: auth.gitlabTokenIsSet ? '**********' : '',
-						label: 'Access token (api read)',
+						label: 'Personal access token "read_api"',
 					},
 					[]
 				);

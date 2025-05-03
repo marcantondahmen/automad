@@ -98,6 +98,7 @@ export class RepositoryCardComponent extends BaseComponent {
 					<am-icon-text
 						${Attr.icon}="chat-left"
 						${Attr.text}="${data.description}"
+						title="${data.description}"
 					></am-icon-text>
 					<am-icon-text
 						${Attr.icon}="box-seam"
