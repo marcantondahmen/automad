@@ -82,11 +82,18 @@ export const enum MailConfigController {
 }
 
 export const enum PackageManagerController {
+	addRepository = 'PackageManagerController::addRepository',
 	getOutdated = 'PackageManagerController::getOutdated',
 	getPackageCollection = 'PackageManagerController::getPackageCollection',
+	getRepositoryCollection = 'PackageManagerController::getRepositoryCollection',
+	getSafeAuth = 'PackageManagerController::getSafeAuth',
 	install = 'PackageManagerController::install',
 	remove = 'PackageManagerController::remove',
+	removeRepository = 'PackageManagerController::removeRepository',
+	resetAuth = 'PackageManagerController::resetAuth',
+	saveAuth = 'PackageManagerController::saveAuth',
 	update = 'PackageManagerController::update',
+	updateRepository = 'PackageManagerController::updateRepository',
 	updateAll = 'PackageManagerController::updateAll',
 }
 

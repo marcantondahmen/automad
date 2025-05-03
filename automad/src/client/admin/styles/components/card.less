@@ -175,8 +175,11 @@
 		line-height: @am-small-line-height;
 		background-color: hsl(var(--am-clr-background-faded));
 		border-top: @am-border;
-		border-bottom-left-radius: ~'calc(@{am-card-radius} - 1px)';
-		border-bottom-right-radius: ~'calc(@{am-card-radius} - 1px)';
+
+		&:last-child {
+			border-bottom-left-radius: ~'calc(@{am-card-radius} - 1px)';
+			border-bottom-right-radius: ~'calc(@{am-card-radius} - 1px)';
+		}
 
 		& .bi {
 			font-size: 1rem;

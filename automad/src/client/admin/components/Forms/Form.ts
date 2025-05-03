@@ -314,6 +314,10 @@ export class FormComponent extends BaseComponent {
 		});
 
 		if (this.verifyRequired()) {
+			queryAll(`.${CSS.validate}`, this).forEach((input) => {
+				input.classList.remove(CSS.validate);
+			});
+
 			await requestAPI(
 				this.api,
 				this,

@@ -80,8 +80,7 @@ const settingsData = (): JumpbarItemData[] => {
 	const item = (
 		section: string,
 		title: string,
-		icon: string,
-		cls: string[] = []
+		icon: string
 	): JumpbarItemData => {
 		return {
 			target: `${Route.system}?section=${section}`,
@@ -89,7 +88,7 @@ const settingsData = (): JumpbarItemData[] => {
 			title: App.text(title),
 			subtitle: App.text('systemTitle'),
 			icon,
-			cls,
+			cls: [CSS.modalJumpbarDividerSystem],
 		};
 	};
 
@@ -109,9 +108,7 @@ const settingsData = (): JumpbarItemData[] => {
 		item(Section.i18n, 'systemI18n', 'globe'),
 		item(Section.language, 'systemLanguage', 'translate'),
 		...debug,
-		item(Section.update, 'systemUpdate', 'arrow-repeat', [
-			CSS.modalJumpbarDivider,
-		]),
+		item(Section.update, 'systemUpdate', 'arrow-repeat'),
 	];
 
 	return data;
@@ -163,7 +160,14 @@ const packagesData = (): JumpbarItemData[] => {
 			value: App.text('packagesTitle'),
 			title: App.text('packagesTitle'),
 			icon: 'box-seam',
-			cls: [CSS.modalJumpbarDivider],
+			cls: [CSS.modalJumpbarDividerPackages],
+		},
+		{
+			target: `${Route.packages}?section=${Section.repositories}`,
+			value: App.text('repositoriesTitle'),
+			title: App.text('repositoriesTitle'),
+			icon: 'git',
+			cls: [CSS.modalJumpbarDividerPackages],
 		},
 	];
 };

@@ -279,6 +279,8 @@ export const enum CSS {
 	modalJumpbarItems = 'am-c-modal__jumpbar-items',
 	modalJumpbarLink = 'am-c-modal__jumpbar-link',
 	modalJumpbarDivider = 'am-c-modal__jumpbar-divider',
+	modalJumpbarDividerSystem = 'am-c-modal__jumpbar-divider-system',
+	modalJumpbarDividerPackages = 'am-c-modal__jumpbar-divider-packages',
 
 	nav = 'am-c-nav',
 	navItem = 'am-c-nav__item',
@@ -301,6 +303,11 @@ export const enum CSS {
 	numberUnit = 'am-f-number-unit',
 
 	overflowHidden = 'am-u-overflow-hidden',
+
+	platformSelect = 'am-f-platform-select',
+	platformSelectOption = 'am-f-platform-select__option',
+	platformSelectIcon = 'am-f-platform-select__icon',
+	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
 
 	privacyIndicator = 'am-c-privacy-indicator',
 

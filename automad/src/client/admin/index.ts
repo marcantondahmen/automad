@@ -59,6 +59,7 @@ import './components/Fields/NumberUnitField';
 import './components/Fields/PageTagsField';
 import './components/Fields/PageTemplateField';
 import './components/Fields/PasswordField';
+import './components/Fields/PlatformSelectField';
 import './components/Fields/SelectField';
 import './components/Fields/SyntaxThemeSelectField';
 import './components/Fields/TextareaField';
@@ -124,8 +125,12 @@ import './components/Modal/ModalJumpbar';
 import './components/Modal/ModalJumpbarDialog';
 import './components/Modal/ModalToggle';
 
+import './components/PackageManager/AddRepositoryModal';
+import './components/PackageManager/ComposerAuthModal';
 import './components/PackageManager/PackageCard';
 import './components/PackageManager/PackageList';
+import './components/PackageManager/RepositoryCard';
+import './components/PackageManager/RepositoryList';
 import './components/PackageManager/UpdateAllPackages';
 
 import './components/Pages/Components';

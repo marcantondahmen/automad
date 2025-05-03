@@ -251,10 +251,12 @@
 			}
 		}
 
-		&-divider:not(:last-child) {
+		&-divider + *,
+		&-divider-packages + :not(&-divider-packages),
+		&-divider-system + :not(&-divider-system) {
 			@space: 3px;
 			position: relative;
-			margin-bottom: 2 * @space + 1;
+			margin-top: 2 * @space + 1;
 
 			&:after {
 				content: '';
@@ -264,8 +266,8 @@
 				margin-left: -@jumpbar-padding;
 				margin-right: -@jumpbar-padding;
 				left: 0;
-				bottom: -@space - 1;
-				border-bottom: @am-border;
+				top: -@space - 1;
+				border-top: @am-border;
 			}
 		}
 	}

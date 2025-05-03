@@ -41,7 +41,9 @@ use Automad\Core\Cache;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
-use Automad\System\Composer;
+use Automad\System\Composer\Auth;
+use Automad\System\Composer\Composer;
+use Automad\System\Composer\RepositoryCollection;
 use Automad\System\Package;
 use Automad\System\PackageCollection;
 
@@ -55,6 +57,38 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class PackageManagerController {
+	/**
+	 * Install a package from a repository.
+	 *
+	 * @return Response
+	 */
+	public static function addRepository(): Response {
+		$Response = new Response();
+		$Messenger = new Messenger();
+		$Composer = new Composer();
+
+		$name = Request::post('name');
+		$branch = Request::post('branch');
+		$repositoryUrl = rtrim(Request::post('repositoryUrl'), '/');
+		$platform = Request::post('platform');
+
+		RepositoryCollection::add($name, $repositoryUrl, $branch, $platform, $Messenger);
+
+		if ($Messenger->getError()) {
+			return $Response->setError($Messenger->getError());
+		}
+
+		$exitCode = $Composer->run("require {$name}:dev-{$branch}", $Messenger);
+
+		if ($exitCode !== 0) {
+			RepositoryCollection::remove($name);
+			$Response->setError($Messenger->getError());
+			$Composer->run("remove {$name}");
+		}
+
+		return $Response;
+	}
+
 	/**
 	 * Get a list of outdated packages.
 	 *
@@ -75,6 +109,29 @@ class PackageManagerController {
 		$Response = new Response();
 
 		return $Response->setData(array('packages' => PackageCollection::get()));
+	}
+
+	/**
+	 * Get a list of repositories.
+	 *
+	 * @return Response
+	 */
+	public static function getRepositoryCollection(): Response {
+		$Response = new Response();
+
+		return $Response->setData(RepositoryCollection::get());
+	}
+
+	/**
+	 * Get the Composer auth config.
+	 *
+	 * @return Response
+	 */
+	public static function getSafeAuth(): Response {
+		$Response = new Response();
+		$Auth = Auth::get();
+
+		return $Response->setData($Auth->getSafeValues());
 	}
 
 	/**
@@ -130,6 +187,78 @@ class PackageManagerController {
 
 		Cache::clear();
 
+		return $Response->setSuccess(Text::get('deteledSuccess') . '<br>' . $package);
+	}
+
+	/**
+	 * Remove a repository and uninstall the package.
+	 *
+	 * @return Response
+	 */
+	public static function removeRepository(): Response {
+		$Response = new Response();
+		$name = Request::post('name');
+
+		if (!$name) {
+			return $Response;
+		}
+
+		$Composer = new Composer();
+		$Messenger = new Messenger();
+		$exitCode = $Composer->run('remove ' . $name, $Messenger);
+
+		if ($exitCode !== 0) {
+			return $Response->setError($Messenger->getError());
+		}
+
+		if (RepositoryCollection::remove($name)) {
+			$Response->setSuccess(Text::get('repositoryRemovedSuccess'));
+		}
+
+		return $Response;
+	}
+
+	/**
+	 * Reset the Composer auth config.
+	 *
+	 * @return Response
+	 */
+	public static function resetAuth(): Response {
+		$Response = new Response();
+		$Auth = Auth::get();
+
+		if ($Auth->reset()) {
+			$Response->setSuccess(Text::get('composerAuthResetSuccess'));
+		}
+
+		return $Response;
+	}
+
+	/**
+	 * Save the Composer auth config.
+	 *
+	 * @return Response
+	 */
+	public static function saveAuth(): Response {
+		$Response = new Response();
+		$Auth = Auth::get();
+
+		if ($githubToken = Request::post('githubToken')) {
+			$Auth->githubToken = $githubToken;
+		}
+
+		if ($gitlabToken = Request::post('gitlabToken')) {
+			$Auth->gitlabToken = $gitlabToken;
+		}
+
+		$Auth->gitlabUrl = Request::post('gitlabUrl') ? Request::post('gitlabUrl') : 'gitlab.com';
+
+		if ($Auth->save()) {
+			$Response->setSuccess(Text::get('savedSuccess'));
+		} else {
+			$Response->setError(Text::get('composerAuthConfigError'));
+		}
+
 		return $Response;
 	}
 
@@ -180,5 +309,39 @@ class PackageManagerController {
 		Cache::clear();
 
 		return $Response->setSuccess(Text::get('packageUpdatedAllSuccess'));
+	}
+
+	/**
+	 * Update a repository package.
+	 *
+	 * @return Response the response object
+	 */
+	public static function updateRepository(): Response {
+		$Response = new Response();
+		$name = Request::post('name');
+
+		if (!$name) {
+			return $Response;
+		}
+
+		$Composer = new Composer();
+		$Messenger = new Messenger();
+		$ref = RepositoryCollection::getPackageVersion($name);
+
+		$exitCode = $Composer->run("remove $name", $Messenger);
+
+		if ($exitCode !== 0) {
+			return $Response->setError($Messenger->getError());
+		}
+
+		$exitCode = $Composer->run("require $name:$ref", $Messenger);
+
+		if ($exitCode !== 0) {
+			return $Response->setError($Messenger->getError());
+		}
+
+		Cache::clear();
+
+		return $Response->setSuccess(Text::get('repositoryUpdateSuccess'));
 	}
 }

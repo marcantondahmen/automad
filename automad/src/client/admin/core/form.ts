@@ -71,6 +71,7 @@ export const enum FieldTag {
 	pageTags = 'am-page-tags-field',
 	pageTemplate = 'am-page-template-field',
 	password = 'am-password-field',
+	platformSelect = 'am-platform-select-field',
 	syntaxSelect = 'am-syntax-theme-select-field',
 	textarea = 'am-textarea-field',
 	title = 'am-title-field',

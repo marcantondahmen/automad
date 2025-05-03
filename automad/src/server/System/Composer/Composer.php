@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\System;
+namespace Automad\System\Composer;
 
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
@@ -109,6 +109,7 @@ class Composer {
 		}
 
 		$this->run('clear-cache');
+		Auth::get()->setEnv();
 	}
 
 	/**
