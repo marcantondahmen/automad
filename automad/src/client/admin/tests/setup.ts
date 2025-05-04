@@ -10,6 +10,14 @@ jest.mock('nanoid', () => {
 	return { nanoid: () => 'xxxx' };
 });
 
+jest.mock('@editorjs/embed', () => {
+	return {
+		default: jest.fn().mockImplementation(() => {
+			return {};
+		}),
+	};
+});
+
 jest.mock('@editorjs/nested-list', () => {
 	return {
 		default: jest.fn().mockImplementation(() => {
