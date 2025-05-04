@@ -125,8 +125,8 @@ import './components/Modal/ModalJumpbar';
 import './components/Modal/ModalJumpbarDialog';
 import './components/Modal/ModalToggle';
 
-import './components/PackageManager/AddRepositoryModal';
-import './components/PackageManager/ComposerAuthModal';
+import './components/PackageManager/AddRepository';
+import './components/PackageManager/ComposerAuth';
 import './components/PackageManager/PackageCard';
 import './components/PackageManager/PackageList';
 import './components/PackageManager/RepositoryCard';

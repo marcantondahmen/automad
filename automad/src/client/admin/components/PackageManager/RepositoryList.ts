@@ -35,17 +35,19 @@
 import { BaseComponent } from '@/admin/components/Base';
 import {
 	App,
+	Attr,
 	confirm,
 	CSS,
 	EventName,
+	html,
 	listen,
 	notifySuccess,
 	requestAPI,
 } from '@/admin/core';
 import { Repository } from '@/admin/types';
 import { create, PackageManagerController } from '@/common';
-import { ComposerAuthModalComponent } from './ComposerAuthModal';
-import { AddRepositoryModalComponent } from './AddRepositoryModal';
+import { ComposerAuthComponent } from './ComposerAuth';
+import { AddRepositoryComponent } from './AddRepository';
 import { RepositoryCardComponent } from './RepositoryCard';
 
 /**
@@ -70,14 +72,17 @@ class RepositoryListComponent extends BaseComponent {
 	 * Init the component.
 	 */
 	private async init(): Promise<void> {
-		create(AddRepositoryModalComponent.TAG_NAME, [], {}, this);
-		create(ComposerAuthModalComponent.TAG_NAME, [], {}, this);
-		this.renderResetAuthModal();
+		const menu = create('div', [CSS.flex, CSS.flexGap], {}, this);
+
+		create(AddRepositoryComponent.TAG_NAME, [], {}, menu);
+		create(ComposerAuthComponent.TAG_NAME, [], {}, menu);
+
+		create('p', [], {}, this, App.text('repositoriesInfo'));
 
 		this.listContainer = create(
 			'div',
 			[CSS.grid],
-			{ style: '--min: 24rem;' },
+			{ style: '--min: 20rem;' },
 			this,
 			'<am-spinner></am-spinner>'
 		);
@@ -112,34 +117,6 @@ class RepositoryListComponent extends BaseComponent {
 			);
 
 			card.data = data;
-		});
-	}
-
-	/**
-	 * Render the auth reset button and modal.
-	 */
-	private renderResetAuthModal(): void {
-		const resetAuthButton = create(
-			'button',
-			[CSS.button],
-			{},
-			this,
-			App.text('composerAuthReset')
-		);
-		listen(resetAuthButton, 'click', async () => {
-			if (!(await confirm(App.text('composerAuthResetConfirm')))) {
-				return;
-			}
-
-			const { success } = await requestAPI(
-				PackageManagerController.resetAuth,
-				{},
-				true
-			);
-
-			if (success) {
-				notifySuccess(success);
-			}
 		});
 	}
 }

@@ -49,13 +49,13 @@ import { create, PackageManagerController } from '@/common';
  *
  * @extends BaseComponent
  */
-export class AddRepositoryModalComponent extends BaseComponent {
+export class AddRepositoryComponent extends BaseComponent {
 	/**
 	 * The tag name.
 	 *
 	 * @static
 	 */
-	static TAG_NAME = 'am-add-repository-modal';
+	static TAG_NAME = 'am-add-repository';
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -74,7 +74,7 @@ export class AddRepositoryModalComponent extends BaseComponent {
 				PackageManagerController.addRepository,
 				EventName.repositoriesChange,
 				App.text('repositoryAddTitle'),
-				App.text('repositoryAdd')
+				App.text('repositoryAddButton')
 			);
 
 			create('p', [], {}, form, App.text('repositoryAddInfo'));
@@ -133,7 +133,4 @@ export class AddRepositoryModalComponent extends BaseComponent {
 	}
 }
 
-customElements.define(
-	AddRepositoryModalComponent.TAG_NAME,
-	AddRepositoryModalComponent
-);
+customElements.define(AddRepositoryComponent.TAG_NAME, AddRepositoryComponent);
