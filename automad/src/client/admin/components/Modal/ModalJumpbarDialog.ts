@@ -157,15 +157,15 @@ const packagesData = (): JumpbarItemData[] => {
 	return [
 		{
 			target: Route.packages,
-			value: App.text('packagesTitle'),
-			title: App.text('packagesTitle'),
+			value: App.text('packagesSwitcherTitle'),
+			title: App.text('packagesSwitcherTitle'),
 			icon: 'box-seam',
 			cls: [CSS.modalJumpbarDividerPackages],
 		},
 		{
 			target: `${Route.packages}?section=${Section.repositories}`,
-			value: App.text('repositoriesTitle'),
-			title: App.text('repositoriesTitle'),
+			value: `${App.text('repositoriesSwitcherTitle')} (packages)`,
+			title: App.text('repositoriesSwitcherTitle'),
 			icon: 'git',
 			cls: [CSS.modalJumpbarDividerPackages],
 		},
