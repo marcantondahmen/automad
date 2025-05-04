@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.29](https://github.com/marcantondahmen/automad/commit/2df7c663c8a0f04a97531eb65369e11c1c70e353)
+## [v2.0.0-alpha.30](https://github.com/marcantondahmen/automad/commit/47dc90a3d3b45004f04125974fc61549a113c768)
 
-Sun, 4 May 2025 20:20:20 +0200
+Sun, 4 May 2025 20:34:44 +0200
+
+### Bugfixes
+
+- fix package manager links in jumpbar dialog ([c0c716c1e](https://github.com/marcantondahmen/automad/commit/c0c716c1e922d82e064861a145395bf4e399996a))
+
+## [v2.0.0-alpha.29](https://github.com/marcantondahmen/automad/commit/c5770192f8222f9f438aa90197772922c9c26c9d)
+
+Sun, 4 May 2025 20:23:06 +0200
 
 ### Bugfixes
 
@@ -625,3 +633,51 @@ Tue, 31 Aug 2021 21:01:29 +0200
 
 - **system**: update Composer to version 2.1.6 in order to fix issues on Windows ([81cc05972](https://github.com/marcantondahmen/automad/commit/81cc05972ae4d10202adfe062ecc7b70f540edff))
 - **ui**: fix block editor toolbar on small devices ([6c81c4378](https://github.com/marcantondahmen/automad/commit/6c81c43780be143a01018d388d192d06690c61bd))
+
+## [v1.8.5](https://github.com/marcantondahmen/automad/commit/09942a0ab9c92aaacf651e7b7d359e0cc5f47459)
+
+Fri, 13 Aug 2021 01:21:26 +0200
+
+### Bugfixes
+
+- **ui**: remove slug input from homepage settings ([38a0ca8e5](https://github.com/marcantondahmen/automad/commit/38a0ca8e5d37fd00c3acc86d5f9d10062cf2d9e8))
+
+## [v1.8.4](https://github.com/marcantondahmen/automad/commit/5512e55549473e27a2223803caa52200cdc70800)
+
+Thu, 12 Aug 2021 22:24:51 +0200
+
+### New Features
+
+- **core**: add Str::slug() method to sanitize ids and directory names ([4ee87a3bc](https://github.com/marcantondahmen/automad/commit/4ee87a3bc521921af36c19414a7e23eb730f9595))
+- **ui**: add chinese, japanese and korean translations ([a287a740e](https://github.com/marcantondahmen/automad/commit/a287a740ed4028278f799112c3723fbfb733efb2))
+- **ui**: add option to define a custom slug for a page ([c593fa29d](https://github.com/marcantondahmen/automad/commit/c593fa29d73edb5c7d0ca9c9649d3b5b9c52863e))
+
+### Bugfixes
+
+- **ui**: fix typo in text modules ([ba8702a87](https://github.com/marcantondahmen/automad/commit/ba8702a87d26afd0172294d541c1573925f77f56))
+- **ui**: fix updating links that are wrapped in quotes ([4417468d6](https://github.com/marcantondahmen/automad/commit/4417468d659c1e71e9b76698e377a19a1e209b5a))
+
+## [v1.8.3](https://github.com/marcantondahmen/automad/commit/aa72e82f0192571f5ae1a8b032720fd9b3fb8645)
+
+Mon, 9 Aug 2021 23:21:36 +0200
+
+### New Features
+
+- **core**: use a shortened md5 hash as directory slug in case a sanitized title is too short ([d6d5e57cd](https://github.com/marcantondahmen/automad/commit/d6d5e57cd663bcf0eed7c8697b7b454fac1064fb))
+
+### Bugfixes
+
+- **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
+
+## [v1.8.2](https://github.com/marcantondahmen/automad/commit/e070a89209c2e90eadb9be4b77580beef6aa75d1)
+
+Sun, 8 Aug 2021 22:25:34 +0200
+
+### New Features
+
+- **samples**: add pagelist example page ([2a033f4da](https://github.com/marcantondahmen/automad/commit/2a033f4dada04e3d2fd7d24f2d2d6b1bfd04986e))
+- **samples**: add tags and filters to example pages ([d18f2482b](https://github.com/marcantondahmen/automad/commit/d18f2482b2f258d7b42a6609a439769773ffb7f8))
+
+### Bugfixes
+
+- **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
