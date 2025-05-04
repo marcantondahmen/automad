@@ -93,7 +93,7 @@ echo
 
 # Generate changelog.
 echo "Generating changelog ..."
-bash bin/changelog.sh 45 $tag >CHANGELOG.md
+bash bin/changelog.sh 50 $tag >CHANGELOG.md
 
 # Updating version numbers.
 echo "Updating version numbers ..."
