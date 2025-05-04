@@ -39,6 +39,7 @@ namespace Automad\System\Composer;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
+use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

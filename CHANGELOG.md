@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.28](https://github.com/marcantondahmen/automad/commit/ddbfa0024aa7e2312a0acca9cfd48b583524f8d4)
+## [v2.0.0-alpha.29](https://github.com/marcantondahmen/automad/commit/2df7c663c8a0f04a97531eb65369e11c1c70e353)
 
-Sun, 4 May 2025 20:08:56 +0200
+Sun, 4 May 2025 20:20:20 +0200
+
+### Bugfixes
+
+- fix error when fetching composer phar ([2df7c663c](https://github.com/marcantondahmen/automad/commit/2df7c663c8a0f04a97531eb65369e11c1c70e353))
+
+## [v2.0.0-alpha.28](https://github.com/marcantondahmen/automad/commit/3af47b31360b3b43e8c0b2f38ad9c355f2154617)
+
+Sun, 4 May 2025 20:12:16 +0200
 
 ### New Features
 
@@ -617,11 +625,3 @@ Tue, 31 Aug 2021 21:01:29 +0200
 
 - **system**: update Composer to version 2.1.6 in order to fix issues on Windows ([81cc05972](https://github.com/marcantondahmen/automad/commit/81cc05972ae4d10202adfe062ecc7b70f540edff))
 - **ui**: fix block editor toolbar on small devices ([6c81c4378](https://github.com/marcantondahmen/automad/commit/6c81c43780be143a01018d388d192d06690c61bd))
-
-## [v1.8.5](https://github.com/marcantondahmen/automad/commit/09942a0ab9c92aaacf651e7b7d359e0cc5f47459)
-
-Fri, 13 Aug 2021 01:21:26 +0200
-
-### Bugfixes
-
-- **ui**: remove slug input from homepage settings ([38a0ca8e5](https://github.com/marcantondahmen/automad/commit/38a0ca8e5d37fd00c3acc86d5f9d10062cf2d9e8))
