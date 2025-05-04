@@ -170,11 +170,11 @@ class RepositoryCollection {
 			}
 		}
 
+		$config['repositories'] = array_values($config['repositories']);
+
 		if (empty($config['repositories'])) {
 			unset($config['repositories']);
 		}
-
-		$config['repositories'] = array_values($config['repositories']);
 
 		return Composer::writeConfig($config);
 	}
