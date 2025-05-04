@@ -83,7 +83,9 @@ class SwitcherDropdownComponent extends BaseComponent {
 			[
 				CSS.layoutDashboardContent,
 				CSS.layoutDashboardContentRow,
-				CSS.layoutDashboardContentNarrow,
+				...(this.hasAttribute(Attr.narrow)
+					? [CSS.layoutDashboardContentNarrow]
+					: []),
 			],
 			{},
 			this

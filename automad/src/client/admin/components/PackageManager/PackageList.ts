@@ -36,6 +36,7 @@ import {
 	create,
 	CSS,
 	EventName,
+	html,
 	listen,
 	PackageManagerController,
 	requestAPI,
@@ -73,10 +74,29 @@ const getPackages = async (): Promise<Package[]> => {
  */
 class PackageListComponent extends BaseComponent {
 	/**
+	 * The list container element.
+	 */
+	private listContainer: HTMLElement;
+
+	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(CSS.grid);
+		this.innerHTML = html`
+			<div class="${CSS.flex} ${CSS.flexGap}">
+				<am-update-all-packages></am-update-all-packages>
+				<am-filter placeholder="packagesFilter"></am-filter>
+			</div>
+		`;
+
+		this.listContainer = create(
+			'div',
+			[CSS.grid],
+			{},
+			this,
+			'<am-spinner></am-spinner>'
+		);
+
 		this.init();
 
 		this.addListener(
@@ -88,15 +108,18 @@ class PackageListComponent extends BaseComponent {
 	 * Init the component.
 	 */
 	private async init(): Promise<void> {
-		this.innerHTML = '<am-spinner></am-spinner>';
-
 		try {
 			const packages = await getPackages();
 
-			this.innerHTML = '';
+			this.listContainer.innerHTML = '';
 
 			packages.forEach((pkg) => {
-				const card = create('am-package-card', [], {}, this);
+				const card = create(
+					'am-package-card',
+					[],
+					{},
+					this.listContainer
+				);
 
 				card.data = pkg;
 			});
@@ -109,7 +132,7 @@ class PackageListComponent extends BaseComponent {
 					type: 'danger',
 					text: 'packagistConnectionError',
 				},
-				this
+				this.listContainer
 			);
 		}
 	}

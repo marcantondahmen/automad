@@ -194,7 +194,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		const menu = create('am-switcher-dropdown');
+		const menu = create('am-switcher-dropdown', [], { [Attr.narrow]: '' });
 
 		this.sectionData = getSystemSections();
 		menu.data = this.menuData;

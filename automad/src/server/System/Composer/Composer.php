@@ -34,10 +34,11 @@
  * https://automad.org/license
  */
 
-namespace Automad\System;
+namespace Automad\System\Composer;
 
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
+use Automad\Core\Messenger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -95,32 +96,39 @@ class Composer {
 		putenv('COMPOSER_HOME=' . AM_DIR_TMP . '/composer_home');
 		require_once 'phar://' . $this->pharPath . '/src/bootstrap.php';
 
-		$decoded = json_decode(strval(file_get_contents(self::COMPOSER_FILE)), true);
+		$decoded = self::readConfig();
 		$config = $decoded['config'] ?? array();
 		$decoded['config'] = array_merge_recursive($config, array('allow-plugins' => array()));
 		$decoded['config']['allow-plugins']['automad/package-installer'] = true;
 
-		FileSystem::write(
-			self::COMPOSER_FILE,
-			strval(
-				json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
-			)
-		);
+		self::writeConfig($decoded);
 
 		if ($updatePackageInstaller) {
 			$this->run('require automad/package-installer');
 			$this->run('update automad/package-installer');
 		}
+
+		$this->run('clear-cache');
+		Auth::get()->setEnv();
+	}
+
+	/**
+	 * Read the composer.json.
+	 *
+	 * @return array
+	 */
+	public static function readConfig(): array {
+		return FileSystem::readJson(Composer::COMPOSER_FILE, true);
 	}
 
 	/**
 	 * Run a given Composer command.
 	 *
 	 * @param string $command
-	 * @param bool $getBuffer
-	 * @return string The command output on false or in case $getBuffer is true
+	 * @param Messenger $Messenger
+	 * @return int
 	 */
-	public function run(string $command, bool $getBuffer = false): string {
+	public function run(string $command, Messenger $Messenger = new Messenger()): int {
 		$this->shutdownOnError();
 
 		chdir(AM_BASE_DIR);
@@ -137,24 +145,30 @@ class Composer {
 
 		Debug::log($command, 'Command');
 
+		$exitCode = 0;
 		$buffer = '';
 
 		try {
-			$application->run($input, $output);
+			$exitCode = $application->run($input, $output);
 			$buffer = $output->fetch();
 			Debug::log($buffer, 'Buffer');
+
+			if ($exitCode !== 0) {
+				$Messenger->setError($buffer);
+			}
 		} catch (\Exception $e) {
 			// Try to fall back to running composer.phar using exec() in case
 			// there was any execption raised using the Composer API.
 			// That could be for example the case on Windows machines.
 			if (!function_exists('exec')) {
-				return 'The exec() function is disabled in your php.ini file!';
+				$Messenger->setError('The exec() function is disabled in your php.ini file!');
+
+				return 1;
 			}
 
 			$binFinder = new \Symfony\Component\Process\PhpExecutableFinder();
 			$php = $binFinder->find();
 			$php = $php ? $php : 'export PATH=' . strval(getenv('PATH')) . ' && php';
-			$exitCode = null;
 
 			$execOutput = array();
 			exec("$php $this->pharPath $command 2>&1", $execOutput, $exitCode);
@@ -165,7 +179,9 @@ class Composer {
 			Debug::log($buffer, 'exec() buffer');
 
 			if ($exitCode !== 0) {
-				return $e->getMessage();
+				$Messenger->setError($e->getMessage());
+
+				return $exitCode;
 			}
 		}
 
@@ -175,11 +191,24 @@ class Composer {
 		Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
 		Debug::log($bufferJsonOnly, 'Buffer JSON only');
 
-		if ($getBuffer) {
-			return $bufferJsonOnly;
-		}
+		$Messenger->setData(json_decode($bufferJsonOnly, true) ?? array());
 
-		return '';
+		return $exitCode;
+	}
+
+	/**
+	 * Write the composer.json.
+	 *
+	 * @param array $config
+	 * @return bool
+	 */
+	public static function writeConfig(array $config): bool {
+		return FileSystem::write(
+			self::COMPOSER_FILE,
+			strval(
+				json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+			)
+		);
 	}
 
 	/**

@@ -95,12 +95,14 @@ class Fetch {
 	 * A cURL GET request.
 	 *
 	 * @param string $url
+	 * @param array $headers
 	 * @return string The output from the cURL get request
 	 */
-	public static function get(string $url): string {
+	public static function get(string $url, array $headers = array()): string {
 		$data = '';
 
 		$options = array(
+			CURLOPT_HTTPHEADER => $headers,
 			CURLOPT_HEADER => 0,
 			CURLOPT_RETURNTRANSFER => 1,
 			CURLOPT_TIMEOUT => 300,

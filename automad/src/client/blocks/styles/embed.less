@@ -35,10 +35,27 @@
 am-embed {
 	& figure {
 		overflow: hidden;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
 
 		& > div {
 			margin: -1px;
-			width: auto;
+			width: 100%;
+		}
+
+		& > blockquote {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+		}
+
+		& div.twitter-tweet {
+			margin: 0 !important;
+			padding: 0;
+			padding-right: 1px;
+			border-radius: 10px;
+			overflow: hidden;
 		}
 	}
 }

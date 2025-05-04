@@ -1,8 +1,23 @@
 # Changelog
 
-## [v2.0.0-alpha.27](https://github.com/marcantondahmen/automad/commit/8a6c0a4ad3da230eb099607a0577bc73cf020b86)
+## [v2.0.0-alpha.28](https://github.com/marcantondahmen/automad/commit/ddbfa0024aa7e2312a0acca9cfd48b583524f8d4)
 
-Mon, 21 Apr 2025 20:37:23 +0200
+Sun, 4 May 2025 20:08:56 +0200
+
+### New Features
+
+- add option to install private packages from github or gitlab using the dashboard ([c8f743248](https://github.com/marcantondahmen/automad/commit/c8f74324811ad6e71e45e126552ed9718cc4f5d9))
+- automatically show cookie consent banner for embedded content ([99da3b1bf](https://github.com/marcantondahmen/automad/commit/99da3b1bf0125586317cd39762e6b60fc97086da))
+
+### Bugfixes
+
+- fix broken embed block services ([020ecde25](https://github.com/marcantondahmen/automad/commit/020ecde25c97d30a06c189a1d00208fc02a68a0b))
+- fix empty debug log in api responses when debugging is disabled ([41fe627cf](https://github.com/marcantondahmen/automad/commit/41fe627cfae25d13b0ab911959c2ef607c9ddba4))
+- fix twitter embed blocks ([0119fefb0](https://github.com/marcantondahmen/automad/commit/0119fefb0eb49e257052f64b1050fb458c42afe0))
+
+## [v2.0.0-alpha.27](https://github.com/marcantondahmen/automad/commit/90f7f576f2bddee086ef1cbdcf6d2a2a123fef13)
+
+Mon, 21 Apr 2025 20:38:50 +0200
 
 ### New Features
 
@@ -549,3 +564,64 @@ Thu, 14 Oct 2021 13:11:38 +0200
 ### Bugfixes
 
 - **theme**: fix position of prev-next navigation ([83e9bf41f](https://github.com/marcantondahmen/automad/commit/83e9bf41fc26eb9e94df280f679fbafd23780d93))
+
+## [v1.9.0](https://github.com/marcantondahmen/automad/commit/dff5972edf04c435b853e573259021a4f6fc198d)
+
+Wed, 13 Oct 2021 23:15:28 +0200
+
+### Breaking Changes
+
+- set required PHP version to 7.4+ ([0ed244f30](https://github.com/marcantondahmen/automad/commit/0ed244f308340f685b17c4cfe305dae802d298e7))
+
+### New Features
+
+- **blocks**: add support for nested lists ([1c8966be6](https://github.com/marcantondahmen/automad/commit/1c8966be6b46713977c0f14b4ee164a641baa530))
+- **blocks**: upgrade table block ([0d8d8d0e0](https://github.com/marcantondahmen/automad/commit/0d8d8d0e0307f1bb16e65e374f1dd18c6f3bb077))
+- **engine**: add cache busting timestamps to assets ([8a06b4374](https://github.com/marcantondahmen/automad/commit/8a06b4374bab5cc016b7e7e0bd12211fc37f6ed0))
+- **engine**: improve template inheritance ([2a6baaa28](https://github.com/marcantondahmen/automad/commit/2a6baaa28ae297feddfa32fa6fb4c67a1b05be7b))
+- **engine**: snippets can't be redefined in order to enable a more flexible inheritance of templates ([8f0e7564b](https://github.com/marcantondahmen/automad/commit/8f0e7564b0afe4a4b0a51b628d08edcf69421e90))
+- **ui**: add option to change username and add email ([62a4e219b](https://github.com/marcantondahmen/automad/commit/62a4e219bb677ea37ac164a25c6207798ee34ee8))
+- **ui**: add option to invite users by email ([b281a8330](https://github.com/marcantondahmen/automad/commit/b281a8330a05295f74aec4679e94f03867e035fc))
+- **ui**: add option to reset passwords by email ([2abc11d10](https://github.com/marcantondahmen/automad/commit/2abc11d101d21bcd4eb9cb1b738f7c193d24de3f))
+- set required PHP version to 7.4+ ([0ed244f30](https://github.com/marcantondahmen/automad/commit/0ed244f308340f685b17c4cfe305dae802d298e7))
+
+### Bugfixes
+
+- **ui**: fix empty button for registered users before the status has been updated ([268cc868d](https://github.com/marcantondahmen/automad/commit/268cc868d50b86b995bee2596999c1041dd3aa52))
+- **ui**: fix text modules for search and replace ([3e698295b](https://github.com/marcantondahmen/automad/commit/3e698295bda14a724aae109e3ec060c92e9d953c))
+- fix error when moving cache files to tmp on other drive ([8003aa6d4](https://github.com/marcantondahmen/automad/commit/8003aa6d48a30e550bced421a4d6bac39668aa07))
+
+## [v1.8.7](https://github.com/marcantondahmen/automad/commit/8bbc8f2da0b868efd22ae9459b1bbc539d65ba49)
+
+Thu, 9 Sep 2021 01:02:47 +0200
+
+### Breaking Changes
+
+- set required PHP version to 7.2+ ([8abbf5107](https://github.com/marcantondahmen/automad/commit/8abbf5107b1865a649a3bc05bf67006f3467e746))
+- **core**: refactor Parse class ([39a8c4f47](https://github.com/marcantondahmen/automad/commit/39a8c4f47c849392fcb438917d2c0a8ec7725eed))
+
+### New Features
+
+- set required PHP version to 7.2+ ([8abbf5107](https://github.com/marcantondahmen/automad/commit/8abbf5107b1865a649a3bc05bf67006f3467e746))
+
+### Bugfixes
+
+- **ui**: debounce status requests ([b3b54130b](https://github.com/marcantondahmen/automad/commit/b3b54130bc1b603a1834851876a2a6c396288523))
+- **ui**: fix switcher rendering in Safari ([2019c80ea](https://github.com/marcantondahmen/automad/commit/2019c80ea91fac2a2177917f02db8124694ab838))
+
+## [v1.8.6](https://github.com/marcantondahmen/automad/commit/cff6cb56fed110a8c3e9889c5c6eaa3ae0ca89e1)
+
+Tue, 31 Aug 2021 21:01:29 +0200
+
+### Bugfixes
+
+- **system**: update Composer to version 2.1.6 in order to fix issues on Windows ([81cc05972](https://github.com/marcantondahmen/automad/commit/81cc05972ae4d10202adfe062ecc7b70f540edff))
+- **ui**: fix block editor toolbar on small devices ([6c81c4378](https://github.com/marcantondahmen/automad/commit/6c81c43780be143a01018d388d192d06690c61bd))
+
+## [v1.8.5](https://github.com/marcantondahmen/automad/commit/09942a0ab9c92aaacf651e7b7d359e0cc5f47459)
+
+Fri, 13 Aug 2021 01:21:26 +0200
+
+### Bugfixes
+
+- **ui**: remove slug input from homepage settings ([38a0ca8e5](https://github.com/marcantondahmen/automad/commit/38a0ca8e5d37fd00c3acc86d5f9d10062cf2d9e8))

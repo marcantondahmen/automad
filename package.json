@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-alpha.27",
+  "version": "2.0.0-alpha.28",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "test": "npm run phpunit && npm run psalm && npm run jest"
   },
   "devDependencies": {
-    "@editorjs/embed": "^2.6.0",
+    "@editorjs/embed": "^2.7.6",
     "@editorjs/nested-list": "^1.3.0",
     "@editorjs/table": "^2.2.2",
     "@expo-google-fonts/inter": "^0.2.3",

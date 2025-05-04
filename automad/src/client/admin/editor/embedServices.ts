@@ -78,9 +78,9 @@ export const embedServices = {
 		id: (groups: string[]) => `${groups.join('/')}.js`,
 	},
 	imgur: {
-		regex: /https?:\/\/(?:i\.)?imgur\.com.*\/([a-zA-Z0-9]+)(?:\.gifv)?/,
-		embedUrl: 'http://imgur.com/<%= remote_id %>/embed',
-		html: '<iframe allowfullscreen="true" scrolling="no" id="imgur-embed-iframe-pub-<%= remote_id %>" class="imgur-embed-iframe-pub" style="height: 500px; width: 100%; border: 1px solid #000"></iframe>',
+		regex: /https?:\/\/(?:i\.)?imgur\.com(?:\/gallery)?\/([\w-]+)(?:\.gifv)?/,
+		embedUrl: 'http://imgur.com/<%= remote_id %>',
+		html: '<am-embed-service type="imgur"></am-embed-service>',
 		height: 500,
 		width: 540,
 	},
@@ -107,19 +107,18 @@ export const embedServices = {
 		width: 0,
 	},
 	twitter: {
-		regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$/,
-		embedUrl:
-			'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
-		html: '<iframe width="500" height="500" style="display: block; width: 500px; border-bottom: 1px solid #E0E0E0; margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
+		regex: /^https?:\/\/(?:www\.)?(?:twitter\.com|x\.com)\/(.+?)\/status\/(\d+)(?:\?.*)?$/,
+		embedUrl: 'https://twitter.com/<%= remote_id %>',
+		html: '<am-embed-service type="twitter"></am-embed-service>',
 		height: 0,
 		width: 0,
-		id: (ids: string[]) => ids.join('/status/'),
+		id: (groups: string[]) => groups.join('/status/'),
 	},
 	vimeo: {
-		regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
+		regex: /^https?:\/\/(?:www\.)?vimeo\.com\/(\d+).*$/,
 		embedUrl:
 			'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
-		html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
+		html: '<iframe style="width:100%; aspect-ratio: 16/9;" frameborder="0"></iframe>',
 		height: 9,
 		width: 16,
 	},

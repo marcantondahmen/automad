@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
@@ -32,21 +32,60 @@
  * Licensed under the MIT license.
  */
 
-export const enum Section {
-	cache = 'cache',
-	config = 'config',
-	customizations = 'customizations',
-	debug = 'debug',
-	feed = 'feed',
-	files = 'files',
-	i18n = 'i18n',
-	language = 'language',
-	mail = 'mail',
-	overview = 'overview',
-	packages = 'packages',
-	repositories = 'repositories',
-	settings = 'settings',
-	text = 'text',
-	update = 'update',
-	users = 'users',
+.am-f-platform-select {
+	display: flex;
+	gap: 0.8rem;
+	justify-content: stretch;
+
+	&__option {
+		display: flex;
+		width: 50%;
+
+		& input {
+			display: none;
+		}
+
+		& label {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+			width: 100%;
+			padding: 0.6rem 0.8rem;
+			border: @am-form-border;
+			border-radius: @am-card-radius;
+			cursor: pointer;
+			user-select: none;
+			color: hsl(var(--am-clr-text-muted));
+			background-color: hsl(var(--am-clr-background-faded));
+			transition:
+				color 0.2s,
+				background-color 0.2s,
+				border-color 0.2s;
+		}
+
+		& input:checked + label {
+			color: hsl(var(--am-clr-text));
+			background-color: hsl(var(--am-clr-background));
+			border-color: hsl(var(--am-clr-border-active));
+			outline: @am-outline-active;
+		}
+	}
+
+	&__icon {
+		font-size: 1.65rem;
+	}
+
+	&__active-icon {
+		position: absolute;
+		top: 0.55rem;
+		right: 0.8rem;
+		font-size: 1.15em;
+		opacity: 0;
+		transition: opacity 0.2s;
+
+		input:checked + label > & {
+			opacity: 1;
+		}
+	}
 }

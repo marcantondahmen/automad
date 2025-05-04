@@ -58,6 +58,7 @@ import {
 } from '.';
 import { PageDataFormComponent } from '@/admin/components/Forms/PageDataForm';
 import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
+import { FormComponent } from '@/admin/components/Forms/Form';
 import { SharedDataFormComponent } from '@/admin/components/Forms/SharedDataForm';
 import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
@@ -154,6 +155,56 @@ export const createFieldSections = (
 	};
 
 	return sections;
+};
+
+/**
+ * Create a generic modal with an empty body element.
+ *
+ * @param title
+ * @param api
+ * @param event
+ * @param submitText
+ * @return an object that contains the modal and the form
+ */
+export const createFormModal = (
+	api: string,
+	event: string = '',
+	title: string = '',
+	submitText: string = App.text('submit')
+): { modal: ModalComponent; form: FormComponent } => {
+	const modal = create(
+		ModalComponent.TAG_NAME,
+		[],
+		{ [Attr.destroy]: '' },
+		getComponentTargetContainer(),
+		html`
+			<am-modal-dialog>
+				${title ? `<am-modal-header>${title}</am-modal-header>` : ''}
+				<am-modal-body>
+					<am-form
+						${Attr.api}="${api}"
+						${event ? `${Attr.event}="${event}"` : ''}
+					>
+					</am-form>
+				</am-modal-body>
+				<am-modal-footer>
+					<am-modal-close class=${CSS.button}>
+						${App.text('cancel')}
+					</am-modal-close>
+					<am-submit
+						class="${CSS.button} ${CSS.buttonPrimary}"
+						${Attr.form}="${api}"
+					>
+						${submitText}
+					</am-submit>
+				</am-modal-footer>
+			</am-modal-dialog>
+		`
+	) as ModalComponent;
+
+	const form = query('am-form', modal) as FormComponent;
+
+	return { modal, form };
 };
 
 /**

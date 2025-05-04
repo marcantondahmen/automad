@@ -1,3 +1,4 @@
+<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -26,46 +27,40 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-export interface ComposerAuth {
-	githubToken: string;
-	githubTokenIsSet: boolean;
-	gitlabUrl: string;
-	gitlabToken: string;
-	gitlabTokenIsSet: boolean;
-}
+namespace Automad\Engine\Processors;
 
-export type RepositoryPlatform = 'github' | 'gitlab';
+use Automad\Engine\Document\Head;
+use Automad\System\Asset;
 
-export interface Repository {
-	platform: RepositoryPlatform;
-	name: string;
-	description: string;
-	repositoryUrl: string;
-	branch: string;
-}
+defined('AUTOMAD') or die('Direct access not permitted!');
 
-export interface RepositoryCreationData {
-	name: string;
-	repositoryUrl: string;
-	branch: string;
-	platform: RepositoryPlatform;
-}
+/**
+ * The consent processor class.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
+ */
+class ConsentProcessor {
+	/**
+	 * Inject assets.
+	 *
+	 * @param string $str
+	 * @return string
+	 */
+	public static function injectAssets(string $str): string {
+		if (AM_COOKIE_CONSENT_ENABLED) {
+			$str = Head::prepend($str, Asset::js('dist/consent/main.bundle.js', false));
+			$str = Head::prepend($str, Asset::css('dist/consent/main.bundle.css', false));
+		}
 
-export interface Package {
-	name: string;
-	description: string;
-	url: string;
-	repository: string;
-	image?: string;
-	readme?: string;
-	outdated?: boolean;
-	installed?: boolean;
-	latest?: string;
-	version?: string;
+		return $str;
+	}
 }

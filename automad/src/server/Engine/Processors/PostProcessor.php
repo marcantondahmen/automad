@@ -98,6 +98,7 @@ class PostProcessor {
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
+		$output = ConsentProcessor::injectAssets($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
 		$output = $this->addCustomizations($output);

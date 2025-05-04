@@ -175,12 +175,7 @@ const admin = (env, argv) => {
 				host: 'localhost',
 				port: 3000,
 				proxy: 'http://127.0.0.1:8080/automad-development',
-				files: [
-					'**/*.php',
-					'./automad/dist/blocks/main.bundle.*',
-					'./automad/dist/inpage/main.bundle.*',
-					'./automad/dist/prism/main.bundle.*',
-				],
+				files: ['**/*.php', './automad/dist/*/main.bundle.*'],
 				ignore: ['config/*', 'packages/**/*.php', 'vendor/**/*.php'],
 				notify: false,
 				open: false,
@@ -191,48 +186,18 @@ const admin = (env, argv) => {
 	return config;
 };
 
-const blocks = (env, argv) =>
-	merge(common(env, argv), {
-		entry: {
-			main: './automad/src/client/blocks/index.ts',
-		},
-		output: {
-			path: path.resolve(__dirname, './automad/dist/blocks'),
-			filename: '[name].bundle.js',
-		},
-	});
+const features = ['blocks', 'consent', 'mail', 'inpage', 'prism'].map(
+	(name) => (env, argv) => {
+		return merge(common(env, argv), {
+			entry: {
+				main: `./automad/src/client/${name}/index.ts`,
+			},
+			output: {
+				path: path.resolve(__dirname, `./automad/dist/${name}`),
+				filename: '[name].bundle.js',
+			},
+		});
+	}
+);
 
-const mail = (env, argv) =>
-	merge(common(env, argv), {
-		entry: {
-			main: './automad/src/client/mail/index.ts',
-		},
-		output: {
-			path: path.resolve(__dirname, './automad/dist/mail'),
-			filename: '[name].bundle.js',
-		},
-	});
-
-const inpage = (env, argv) =>
-	merge(common(env, argv), {
-		entry: {
-			main: './automad/src/client/inpage/index.ts',
-		},
-		output: {
-			path: path.resolve(__dirname, './automad/dist/inpage'),
-			filename: '[name].bundle.js',
-		},
-	});
-
-const prism = (env, argv) =>
-	merge(common(env, argv), {
-		entry: {
-			main: './automad/src/client/prism/index.ts',
-		},
-		output: {
-			path: path.resolve(__dirname, './automad/dist/prism'),
-			filename: '[name].bundle.js',
-		},
-	});
-
-module.exports = [admin, blocks, mail, inpage, prism];
+module.exports = [admin, ...features];
