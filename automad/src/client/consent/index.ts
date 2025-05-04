@@ -125,7 +125,7 @@ class ConsentComponent extends HTMLElement {
 			['am-consent-banner'],
 			{},
 			document.body,
-			`${COOKIE_ICON} This site uses third-party cookies.`
+			`${COOKIE_ICON} ${this.attr('text', 'This site uses third-party cookies.')}`
 		);
 
 		const accept = create(
@@ -133,7 +133,7 @@ class ConsentComponent extends HTMLElement {
 			['am-consent-banner__button'],
 			{},
 			ConsentComponent.banner,
-			"That's fine"
+			this.attr('accept', "That's fine")
 		);
 
 		accept.addEventListener('click', () => {
@@ -151,7 +151,7 @@ class ConsentComponent extends HTMLElement {
 				['am-consent-banner__button'],
 				{},
 				ConsentComponent.banner,
-				'No, thanks'
+				this.attr('decline', 'No, thanks')
 			);
 
 			decline.addEventListener('click', () => {
@@ -173,6 +173,20 @@ class ConsentComponent extends HTMLElement {
 		}
 
 		this.innerHTML = '<am-consent-placeholder></am-consent-placeholder>';
+	}
+
+	/**
+	 * Get a text attribute from the component.
+	 *
+	 * @param name
+	 * @param fallback
+	 * @return the decoded text value
+	 */
+	private attr(
+		name: 'text' | 'accept' | 'decline',
+		fallback: string
+	): string {
+		return decodeURIComponent(this.getAttribute(name) || fallback);
 	}
 
 	/**

@@ -266,6 +266,9 @@ class Config {
 
 		// Disable cookie consent banner.
 		self::set('AM_COOKIE_CONSENT_ENABLED', true);
+		self::set('AM_COOKIE_CONSENT_TEXT', '');
+		self::set('AM_COOKIE_CONSENT_ACCEPT', '');
+		self::set('AM_COOKIE_CONSENT_DECLINE', '');
 	}
 
 	/**
