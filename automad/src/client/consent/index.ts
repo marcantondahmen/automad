@@ -125,7 +125,7 @@ class ConsentComponent extends HTMLElement {
 			['am-consent-banner'],
 			{},
 			document.body,
-			`${COOKIE_ICON} ${this.attr('text', 'This site uses third-party cookies.')}`
+			`${COOKIE_ICON} <span>${this.attr('text', 'This site uses third-party cookies.')}</span>`
 		);
 
 		const accept = create(
