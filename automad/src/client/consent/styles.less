@@ -48,42 +48,59 @@ am-consent[type='script'] {
 	&-banner {
 		box-sizing: border-box;
 		position: fixed;
+		z-index: 99999;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
-		gap: 0.85em;
+		column-gap: 0.9em;
 		padding: 1em;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		height: auto;
+		max-width: min(100%, 100vw);
 		font-family: 'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif,
 			system-ui, sans-serif;
 		font-size: 16px;
-		font-weight: 600;
+		font-weight: 500;
+		line-height: 1.55;
+		text-align: center;
 		color: var(--am-consent-banner-color);
 		background-color: var(--am-consent-banner-background);
 		border-top: var(--am-consent-banner-border);
 
 		& svg {
-			font-size: 1.25em;
+			font-size: 1.5em;
+		}
+
+		& span {
+			padding: 0.6em 0;
 		}
 
 		&--small {
-			gap: 0.5em;
+			height: 32px;
+			gap: 7px;
 			left: auto;
 			right: 10px;
 			bottom: 10px;
-			padding: 0.5em 1.15em 0.5em 0.85em;
-			font-size: 12px;
-			border-radius: 1.75em;
+			padding: 0 12px 0 7px;
+			font-size: 11px;
+			border-radius: 2em;
 			border: var(--am-consent-banner-border);
+
+			& span {
+				@media (max-width: 650px) {
+					display: none;
+				}
+			}
 		}
 
 		&__button {
 			padding: 0;
 			font-family: inherit;
 			font-weight: inherit;
+			font-size: inherit;
 			line-height: inherit;
 			appearance: none;
 			cursor: pointer;
