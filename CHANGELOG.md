@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.30](https://github.com/marcantondahmen/automad/commit/47dc90a3d3b45004f04125974fc61549a113c768)
+## [v2.0.0-alpha.31](https://github.com/marcantondahmen/automad/commit/76eac5d149f704892e526b586984e7e52546aeb4)
 
-Sun, 4 May 2025 20:34:44 +0200
+Mon, 5 May 2025 19:34:16 +0200
+
+### Bugfixes
+
+- fix cookie consent banner styles ([76eac5d14](https://github.com/marcantondahmen/automad/commit/76eac5d149f704892e526b586984e7e52546aeb4))
+
+## [v2.0.0-alpha.30](https://github.com/marcantondahmen/automad/commit/8d917d3cc8ceacdb3c6544cae95ba942a3d75991)
+
+Sun, 4 May 2025 20:36:35 +0200
 
 ### Bugfixes
 
@@ -668,16 +676,3 @@ Mon, 9 Aug 2021 23:21:36 +0200
 ### Bugfixes
 
 - **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
-
-## [v1.8.2](https://github.com/marcantondahmen/automad/commit/e070a89209c2e90eadb9be4b77580beef6aa75d1)
-
-Sun, 8 Aug 2021 22:25:34 +0200
-
-### New Features
-
-- **samples**: add pagelist example page ([2a033f4da](https://github.com/marcantondahmen/automad/commit/2a033f4dada04e3d2fd7d24f2d2d6b1bfd04986e))
-- **samples**: add tags and filters to example pages ([d18f2482b](https://github.com/marcantondahmen/automad/commit/d18f2482b2f258d7b42a6609a439769773ffb7f8))
-
-### Bugfixes
-
-- **themes**: fix thumbnail visibility ([45ed2eee5](https://github.com/marcantondahmen/automad/commit/45ed2eee5f1cf0b81148678820b6a796bf4791e2))
