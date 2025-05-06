@@ -218,7 +218,7 @@ export class SearchFormComponent extends BaseComponent {
 	private createResults(response: KeyValueMap, container: HTMLElement): void {
 		const fileResultsArray: FileResults[] = response.data;
 
-		if (fileResultsArray) {
+		if (fileResultsArray.length) {
 			container.innerHTML = fileResultsArray.reduce(
 				(output, fileResults): string => {
 					return html`${output} ${renderFileCard(fileResults)}`;
