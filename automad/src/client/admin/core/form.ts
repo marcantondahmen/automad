@@ -183,6 +183,16 @@ export const createCustomizationFields = (
 		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
 	);
 
+	create('hr', [], {}, sections.customizations);
+
+	create(
+		'p',
+		[],
+		{},
+		sections.customizations,
+		App.text('customOpenGraphInfo')
+	);
+
 	const ogColors = create(
 		'div',
 		[CSS.grid, CSS.gridAuto],
@@ -207,6 +217,111 @@ export const createCustomizationFields = (
 			App.text('customOpenGraphImageColorBackground')
 		)
 	);
+
+	create('hr', [], {}, sections.customizations);
+
+	create(
+		'p',
+		[],
+		{},
+		sections.customizations,
+		App.text('customConsentInfo')
+	);
+
+	createField(
+		FieldTag.input,
+		sections.customizations,
+		buildFieldProps(
+			'CUSTOM_CONSENT_TEXT',
+			App.text('customConsentText')
+		)
+	);
+
+	const cookieButtons = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{},
+		sections.customizations
+	);
+
+	createField(
+		FieldTag.input,
+		cookieButtons,
+		buildFieldProps(
+			'CUSTOM_CONSENT_ACCEPT',
+			App.text('customConsentAccept')
+		)
+	);
+
+	createField(
+		FieldTag.input,
+		cookieButtons,
+		buildFieldProps(
+			'CUSTOM_CONSENT_DECLINE',
+			App.text('customConsentDecline')
+		)
+	);
+
+	const cookieColors = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{},
+		sections.customizations
+	);
+
+	createField(
+		FieldTag.color,
+		cookieColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_COLOR_TEXT',
+			App.text('customConsentColorText')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookieColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_COLOR_BACKGROUND',
+			App.text('customConsentColorBackground')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookieColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_COLOR_BORDER',
+			App.text('customConsentColorBorder')
+		)
+	);
+
+	const cookiePlaceholderColors = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{},
+		sections.customizations
+	);
+
+	createField(
+		FieldTag.color,
+		cookiePlaceholderColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT',
+			App.text('customConsentPlaceholderColorText')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookiePlaceholderColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND',
+			App.text('customConsentPlaceholderColorBackground')
+		)
+	);
+
+	create('hr', [], {}, sections.customizations);
 };
 
 /**

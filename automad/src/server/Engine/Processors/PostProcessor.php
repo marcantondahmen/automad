@@ -93,12 +93,13 @@ class PostProcessor {
 		$MetaProcessor = new MetaProcessor($this->Automad);
 		$MailAddressProcessor = new MailAddressProcessor();
 		$SyntaxHighlightingProcessor = new SyntaxHighlightingProcessor($this->Automad);
+		$ConsentProcessor = new ConsentProcessor($this->Automad);
 
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
-		$output = ConsentProcessor::injectAssets($output);
+		$output = $ConsentProcessor->addMetaTags($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
 		$output = $this->addCustomizations($output);

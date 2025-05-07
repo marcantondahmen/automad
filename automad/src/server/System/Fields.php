@@ -54,6 +54,14 @@ class Fields {
 	const CAPTION = ':caption';
 	const CURRENT_PAGE = ':current';
 	const CURRENT_PATH = ':currentPath';
+	const CUSTOM_CONSENT_ACCEPT = 'customConsentAccept';
+	const CUSTOM_CONSENT_COLOR_BACKGROUND = 'customConsentColorBackground';
+	const CUSTOM_CONSENT_COLOR_BORDER = 'customConsentColorBorder';
+	const CUSTOM_CONSENT_COLOR_TEXT = 'customConsentColorText';
+	const CUSTOM_CONSENT_DECLINE = 'customConsentDecline';
+	const CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND = 'customConsentPlaceholderColorBackground';
+	const CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT = 'customConsentPlaceholderColorText';
+	const CUSTOM_CONSENT_TEXT = 'customConsentText';
 	const CUSTOM_CSS = 'customCSS';
 	const CUSTOM_HTML_BODY_END = 'customHTMLBodyEnd';
 	const CUSTOM_HTML_HEAD = 'customHTMLHead';
@@ -105,6 +113,14 @@ class Fields {
 	 * Array with reserved variable fields.
 	 */
 	public static array $reserved = array(
+		'CUSTOM_CONSENT_ACCEPT' => Fields::CUSTOM_CONSENT_ACCEPT,
+		'CUSTOM_CONSENT_DECLINE' => Fields::CUSTOM_CONSENT_DECLINE,
+		'CUSTOM_CONSENT_TEXT' => Fields::CUSTOM_CONSENT_TEXT,
+		'CUSTOM_CONSENT_COLOR_TEXT' => Fields::CUSTOM_CONSENT_COLOR_TEXT,
+		'CUSTOM_CONSENT_COLOR_BACKGROUND' => Fields::CUSTOM_CONSENT_COLOR_BACKGROUND,
+		'CUSTOM_CONSENT_COLOR_BORDER' => Fields::CUSTOM_CONSENT_COLOR_BORDER,
+		'CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT' => Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT,
+		'CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND' => Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND,
 		'CUSTOM_CSS' => Fields::CUSTOM_CSS,
 		'CUSTOM_HTML_BODY_END' => Fields::CUSTOM_HTML_BODY_END,
 		'CUSTOM_HTML_HEAD' => Fields::CUSTOM_HTML_HEAD,
