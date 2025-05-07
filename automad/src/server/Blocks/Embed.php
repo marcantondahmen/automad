@@ -71,17 +71,11 @@ class Embed extends AbstractBlock {
 		$scriptType = '';
 		$iframe = 'iframe';
 		$iframeType = '';
-		$consentText = '';
-		$consentAccept = '';
-		$consentDecline = '';
 
-		if (AM_COOKIE_CONSENT_ENABLED) {
-			$consentText = AM_COOKIE_CONSENT_TEXT ? ' text="' . rawurlencode(AM_COOKIE_CONSENT_TEXT) . '"' : '';
-			$consentAccept = AM_COOKIE_CONSENT_ACCEPT ? ' accept="' . rawurlencode(AM_COOKIE_CONSENT_ACCEPT) . '"' : '';
-			$consentDecline = AM_COOKIE_CONSENT_DECLINE ? ' decline="' . rawurlencode(AM_COOKIE_CONSENT_DECLINE) . '"' : '';
-			$script = 'am-consent' . $consentText . $consentAccept . $consentDecline;
+		if (AM_CONSENT_CHECK_ENABLED) {
+			$script = 'am-consent';
 			$scriptType = 'type="script"';
-			$iframe = 'am-consent' . $consentText . $consentAccept . $consentDecline;
+			$iframe = 'am-consent';
 			$iframeType = 'type="iframe"';
 		}
 

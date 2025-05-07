@@ -124,6 +124,13 @@ const renderFileCard = (fileResults: FileResults): string => {
  */
 export class SearchFormComponent extends BaseComponent {
 	/**
+	 * The search parameter name.
+	 *
+	 * @static
+	 */
+	private static SEARCH_PARAM = 'search';
+
+	/**
 	 * Get the api attribute already before attributes are observed.
 	 */
 	protected get api(): string {
@@ -171,7 +178,10 @@ export class SearchFormComponent extends BaseComponent {
 		const performSearch = debounce(async () => {
 			const url = new URL(window.location.href);
 
-			url.searchParams.set('search', search.value);
+			url.searchParams.set(
+				SearchFormComponent.SEARCH_PARAM,
+				search.value
+			);
 			window.history.replaceState(null, null, url);
 
 			performRequest();
@@ -218,7 +228,7 @@ export class SearchFormComponent extends BaseComponent {
 	private createResults(response: KeyValueMap, container: HTMLElement): void {
 		const fileResultsArray: FileResults[] = response.data;
 
-		if (fileResultsArray) {
+		if (fileResultsArray.length) {
 			container.innerHTML = fileResultsArray.reduce(
 				(output, fileResults): string => {
 					return html`${output} ${renderFileCard(fileResults)}`;
@@ -229,12 +239,14 @@ export class SearchFormComponent extends BaseComponent {
 			return;
 		}
 
-		container.innerHTML = html`
-			<am-alert
-				${Attr.icon}="slash-circle"
-				${Attr.text}="searchNoResults"
-			></am-alert>
-		`;
+		container.innerHTML = !!getSearchParam(SearchFormComponent.SEARCH_PARAM)
+			? html`
+					<am-alert
+						${Attr.icon}="slash-circle"
+						${Attr.text}="searchNoResults"
+					></am-alert>
+				`
+			: '';
 	}
 
 	/**
@@ -252,7 +264,7 @@ export class SearchFormComponent extends BaseComponent {
 			{
 				type: 'text',
 				name: 'searchValue',
-				value: getSearchParam('search'),
+				value: getSearchParam(SearchFormComponent.SEARCH_PARAM),
 				placeholder: App.text('searchPlaceholder'),
 			},
 			searchBar

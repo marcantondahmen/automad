@@ -142,6 +142,10 @@ class Auth {
 			$data['gitlab-token'] = array($this->gitlabUrl => $this->gitlabToken);
 		}
 
+		if (empty($data)) {
+			return;
+		}
+
 		$json = strval(json_encode($data));
 
 		putenv("COMPOSER_AUTH=$json");

@@ -66,6 +66,7 @@ export interface Package {
 	readme?: string;
 	outdated?: boolean;
 	installed?: boolean;
+	isDependency?: boolean;
 	latest?: string;
 	version?: string;
 }

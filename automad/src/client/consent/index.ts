@@ -36,6 +36,14 @@ import { create } from '@/common';
 import './styles.less';
 import 'dist-font-inter/variable';
 
+declare global {
+	interface Window {
+		amCookieConsentText: string | undefined;
+		amCookieConsentAccept: string | undefined;
+		amCookieConsentDecline: string | undefined;
+	}
+}
+
 const COOKIE_ICON = `
 	<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
 		<path d="M6 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m4.5.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m-.5 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
@@ -125,7 +133,7 @@ class ConsentComponent extends HTMLElement {
 			['am-consent-banner'],
 			{},
 			document.body,
-			`${COOKIE_ICON} <span>${this.attr('text', 'This site uses third-party cookies.')}</span>`
+			`${COOKIE_ICON} <span>${decodeURIComponent(window.amCookieConsentText || 'This site uses third-party cookies.')}</span>`
 		);
 
 		const accept = create(
@@ -133,7 +141,7 @@ class ConsentComponent extends HTMLElement {
 			['am-consent-banner__button'],
 			{},
 			ConsentComponent.banner,
-			this.attr('accept', "That's fine")
+			decodeURIComponent(window.amCookieConsentAccept || "That's fine")
 		);
 
 		accept.addEventListener('click', () => {
@@ -151,7 +159,9 @@ class ConsentComponent extends HTMLElement {
 				['am-consent-banner__button'],
 				{},
 				ConsentComponent.banner,
-				this.attr('decline', 'No, thanks')
+				decodeURIComponent(
+					window.amCookieConsentDecline || 'No, thanks'
+				)
 			);
 
 			decline.addEventListener('click', () => {
