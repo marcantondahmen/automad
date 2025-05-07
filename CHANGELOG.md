@@ -1,8 +1,23 @@
 # Changelog
 
-## [v2.0.0-alpha.31](https://github.com/marcantondahmen/automad/commit/76eac5d149f704892e526b586984e7e52546aeb4)
+## [v2.0.0-alpha.32](https://github.com/marcantondahmen/automad/commit/f810b5f381407d3ef5cd1c8455a978f11b5fcbe9)
 
-Mon, 5 May 2025 19:34:16 +0200
+Wed, 7 May 2025 22:38:30 +0200
+
+### New Features
+
+- add options to customize the cookie banner text, button labels and colors ([7fcbff95c](https://github.com/marcantondahmen/automad/commit/7fcbff95c7714022db64218c424295137a43a808))
+
+### Bugfixes
+
+- fix jumpbar link to community packages section ([70fcc98b1](https://github.com/marcantondahmen/automad/commit/70fcc98b137356a7f0b688935978017596e333dc))
+- fix missing message when there are no search results ([3326a0afc](https://github.com/marcantondahmen/automad/commit/3326a0afcd6c2ecc761f885e02cb0009c5ac578f))
+- only set composer auth environment variable when not being empty ([e1ebd8406](https://github.com/marcantondahmen/automad/commit/e1ebd840622489455b6cd1db9a1c44c8b7e153ed))
+- prevent removal of packages that are dependencies of other packages ([02541a591](https://github.com/marcantondahmen/automad/commit/02541a591fdebacc5b357f212e84fbcd55ee6f7f))
+
+## [v2.0.0-alpha.31](https://github.com/marcantondahmen/automad/commit/429432c6273489f0c9d4f832fdeef5d1cc28fba7)
+
+Mon, 5 May 2025 19:36:37 +0200
 
 ### Bugfixes
 
@@ -664,15 +679,3 @@ Thu, 12 Aug 2021 22:24:51 +0200
 
 - **ui**: fix typo in text modules ([ba8702a87](https://github.com/marcantondahmen/automad/commit/ba8702a87d26afd0172294d541c1573925f77f56))
 - **ui**: fix updating links that are wrapped in quotes ([4417468d6](https://github.com/marcantondahmen/automad/commit/4417468d659c1e71e9b76698e377a19a1e209b5a))
-
-## [v1.8.3](https://github.com/marcantondahmen/automad/commit/aa72e82f0192571f5ae1a8b032720fd9b3fb8645)
-
-Mon, 9 Aug 2021 23:21:36 +0200
-
-### New Features
-
-- **core**: use a shortened md5 hash as directory slug in case a sanitized title is too short ([d6d5e57cd](https://github.com/marcantondahmen/automad/commit/d6d5e57cd663bcf0eed7c8697b7b454fac1064fb))
-
-### Bugfixes
-
-- **ui**: fix updating links to images that belong to the page they are used on ([723a6be37](https://github.com/marcantondahmen/automad/commit/723a6be37fb283fdcd42a5a365e6089509a25139))
