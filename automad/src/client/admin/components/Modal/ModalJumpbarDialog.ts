@@ -156,7 +156,7 @@ const componentsData = (): JumpbarItemData[] => {
 const packagesData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Route.packages,
+			target: `${Route.packages}?section=${Section.packages}`,
 			value: App.text('packagesSwitcherTitle'),
 			title: App.text('packagesSwitcherTitle'),
 			icon: 'box-seam',
