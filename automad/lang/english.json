@@ -286,6 +286,7 @@
 	"packageInstalledSuccess": "Successfully installed",
 	"packageInstalling": "Installing package ...",
 	"packageIsInstalled": "Is installed",
+	"packageIsDependency": "This package is a dependency of another package and therefore cannot be removed.",
 	"packageRemove": "Remove",
 	"packageRemoving": "Removing package ...",
 	"packageUpdate": "Update",

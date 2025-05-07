@@ -72,6 +72,9 @@ class PackageCollection {
 		$outdated = array();
 		$installed = array();
 
+		$composerJson = Composer::readConfig();
+		$required = $composerJson['require'] ?? array();
+
 		foreach (self::getOutdated() as $pkg) {
 			if (!empty($pkg['name'])) {
 				$outdated[$pkg['name']] = $pkg;
@@ -84,13 +87,15 @@ class PackageCollection {
 			}
 		}
 
-		return array_map(function (array $pkg) use ($installed, $outdated): array {
+		return array_map(function (array $pkg) use ($installed, $outdated, $required): array {
 			if (!empty($pkg['name'])) {
 				$name = $pkg['name'];
 				$isOutdated = array_key_exists($name, $outdated);
 				$isInstalled = array_key_exists($name, $installed);
+				$isDependency = !array_key_exists($name, $required) && $isInstalled;
 
 				$pkg['outdated'] = $isOutdated;
+				$pkg['isDependency'] = $isDependency;
 				$pkg['latest'] = $isOutdated ? $outdated[$name]['latest'] ?? '' : '';
 				$pkg['installed'] = $isInstalled;
 				$pkg['version'] = $isInstalled ? $installed[$name]['version'] ?? '' : '';

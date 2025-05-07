@@ -136,6 +136,13 @@ const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
 
 	create('span', [], {}, button).textContent = App.text('packageRemove');
 
+	if (pkg.isDependency) {
+		button.setAttribute('disabled', '');
+		button.setAttribute('title', App.text('packageIsDependency'));
+
+		return;
+	}
+
 	listen(button, 'click', () => {
 		performAction(
 			pkg,
