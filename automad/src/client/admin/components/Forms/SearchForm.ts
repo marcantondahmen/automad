@@ -229,12 +229,14 @@ export class SearchFormComponent extends BaseComponent {
 			return;
 		}
 
-		container.innerHTML = html`
-			<am-alert
-				${Attr.icon}="slash-circle"
-				${Attr.text}="searchNoResults"
-			></am-alert>
-		`;
+		container.innerHTML = !!getSearchParam('search')
+			? html`
+					<am-alert
+						${Attr.icon}="slash-circle"
+						${Attr.text}="searchNoResults"
+					></am-alert>
+				`
+			: '';
 	}
 
 	/**
