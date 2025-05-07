@@ -72,7 +72,7 @@ class Embed extends AbstractBlock {
 		$iframe = 'iframe';
 		$iframeType = '';
 
-		if (AM_COOKIE_CONSENT_ENABLED) {
+		if (AM_CONSENT_CHECK_ENABLED) {
 			$script = 'am-consent';
 			$scriptType = 'type="script"';
 			$iframe = 'am-consent';

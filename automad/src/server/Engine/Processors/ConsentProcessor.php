@@ -72,7 +72,7 @@ class ConsentProcessor {
 	 * @return string
 	 */
 	public function addMetaTags(string $str): string {
-		if (!AM_COOKIE_CONSENT_ENABLED) {
+		if (!AM_CONSENT_CHECK_ENABLED) {
 			return $str;
 		}
 
