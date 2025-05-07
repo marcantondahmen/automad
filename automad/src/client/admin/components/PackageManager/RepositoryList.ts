@@ -33,17 +33,7 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import {
-	App,
-	Attr,
-	confirm,
-	CSS,
-	EventName,
-	html,
-	listen,
-	notifySuccess,
-	requestAPI,
-} from '@/admin/core';
+import { App, CSS, EventName, listen, requestAPI } from '@/admin/core';
 import { Repository } from '@/admin/types';
 import { create, PackageManagerController } from '@/common';
 import { ComposerAuthComponent } from './ComposerAuth';
@@ -82,7 +72,7 @@ class RepositoryListComponent extends BaseComponent {
 		this.listContainer = create(
 			'div',
 			[CSS.grid],
-			{ style: '--min: 20rem;' },
+			{ style: '--min: 24rem;' },
 			this,
 			'<am-spinner></am-spinner>'
 		);
