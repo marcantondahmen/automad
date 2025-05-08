@@ -306,6 +306,15 @@ export const createCustomizationFields = (
 		)
 	);
 
+	createField(
+		FieldTag.input,
+		sections.customizations,
+		buildFieldProps(
+			'CUSTOM_CONSENT_PLACEHOLDER_TEXT',
+			App.text('customConsentPlaceholderText')
+		)
+	);
+
 	const cookiePlaceholderColors = create(
 		'div',
 		[CSS.grid, CSS.gridAuto],
@@ -318,7 +327,7 @@ export const createCustomizationFields = (
 		cookiePlaceholderColors,
 		buildFieldProps(
 			'CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT',
-			App.text('customConsentPlaceholderText')
+			App.text('customConsentPlaceholderColorText')
 		)
 	);
 
@@ -327,7 +336,7 @@ export const createCustomizationFields = (
 		cookiePlaceholderColors,
 		buildFieldProps(
 			'CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND',
-			App.text('customConsentPlaceholderBackground')
+			App.text('customConsentPlaceholderColorBackground')
 		)
 	);
 

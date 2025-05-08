@@ -86,12 +86,14 @@ class ConsentProcessor {
 		$decline = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_DECLINE));
 		$revoke = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_REVOKE));
 		$tooltip = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_TOOLTIP));
+		$placeholder = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_PLACEHOLDER_TEXT));
 
 		$script = $text ? "window.amCookieConsentText = '$text';" : '';
 		$script .= $accept ? "window.amCookieConsentAccept = '$accept';" : '';
 		$script .= $decline ? "window.amCookieConsentDecline = '$decline';" : '';
 		$script .= $revoke ? "window.amCookieConsentRevoke = '$revoke';" : '';
 		$script .= $tooltip ? "window.amCookieConsentTooltip = '$tooltip';" : '';
+		$script .= $placeholder ? "window.amCookieConsentPlaceholder = '$placeholder';" : '';
 		$script = $script ? "<script>$script</script>" : '';
 
 		$str = Head::append($str, $script);
