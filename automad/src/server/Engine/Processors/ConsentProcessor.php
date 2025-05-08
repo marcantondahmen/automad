@@ -84,10 +84,12 @@ class ConsentProcessor {
 		$text = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_TEXT));
 		$accept = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_ACCEPT));
 		$decline = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_DECLINE));
+		$revoke = rawurlencode($Page->get(Fields::CUSTOM_CONSENT_REVOKE));
 
 		$script = $text ? "window.amCookieConsentText = '$text';" : '';
 		$script .= $accept ? "window.amCookieConsentAccept = '$accept';" : '';
 		$script .= $decline ? "window.amCookieConsentDecline = '$decline';" : '';
+		$script .= $revoke ? "window.amCookieConsentRevoke = '$revoke';" : '';
 		$script = $script ? "<script>$script</script>" : '';
 
 		$str = Head::append($str, $script);

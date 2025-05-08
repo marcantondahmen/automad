@@ -61,6 +61,7 @@ class Fields {
 	const CUSTOM_CONSENT_DECLINE = 'customConsentDecline';
 	const CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND = 'customConsentPlaceholderColorBackground';
 	const CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT = 'customConsentPlaceholderColorText';
+	const CUSTOM_CONSENT_REVOKE = 'customConsentRevoke';
 	const CUSTOM_CONSENT_TEXT = 'customConsentText';
 	const CUSTOM_CSS = 'customCSS';
 	const CUSTOM_HTML_BODY_END = 'customHTMLBodyEnd';
@@ -115,6 +116,7 @@ class Fields {
 	public static array $reserved = array(
 		'CUSTOM_CONSENT_ACCEPT' => Fields::CUSTOM_CONSENT_ACCEPT,
 		'CUSTOM_CONSENT_DECLINE' => Fields::CUSTOM_CONSENT_DECLINE,
+		'CUSTOM_CONSENT_REVOKE' => Fields::CUSTOM_CONSENT_REVOKE,
 		'CUSTOM_CONSENT_TEXT' => Fields::CUSTOM_CONSENT_TEXT,
 		'CUSTOM_CONSENT_COLOR_TEXT' => Fields::CUSTOM_CONSENT_COLOR_TEXT,
 		'CUSTOM_CONSENT_COLOR_BACKGROUND' => Fields::CUSTOM_CONSENT_COLOR_BACKGROUND,

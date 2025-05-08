@@ -71,11 +71,12 @@ am-consent[type='script'] {
 		border-top: 1px solid var(--am-consent-banner-border);
 		user-select: none;
 
-		& svg {
+		& > svg {
 			font-size: 1.5em;
+			pointer-events: none;
 		}
 
-		& span {
+		& > span {
 			padding: 0.6em 0;
 		}
 
@@ -85,16 +86,34 @@ am-consent[type='script'] {
 			left: auto;
 			right: 10px;
 			bottom: 10px;
-			padding: 0 12px 0 7px;
+			padding: 0 7px;
 			font-size: 11px;
 			border-radius: 2em;
 			border: var(--am-consent-banner-border);
 
-			& span {
+			& > svg {
+				pointer-events: all;
+				cursor: pointer;
+				transition: opacity 0.2s;
+
+				&:hover {
+					opacity: 0.6;
+				}
+			}
+
+			& > span {
 				@media (max-width: 650px) {
 					display: none;
 				}
 			}
+
+			& > button {
+				padding-right: 5px;
+			}
+		}
+
+		&--small:not(&--open) > :not(svg) {
+			display: none;
 		}
 
 		& a,

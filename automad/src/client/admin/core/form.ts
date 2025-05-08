@@ -220,21 +220,12 @@ export const createCustomizationFields = (
 
 	create('hr', [], {}, sections.customizations);
 
-	create(
-		'p',
-		[],
-		{},
-		sections.customizations,
-		App.text('customConsentInfo')
-	);
+	create('p', [], {}, sections.customizations, App.text('customConsentInfo'));
 
 	createField(
 		FieldTag.input,
 		sections.customizations,
-		buildFieldProps(
-			'CUSTOM_CONSENT_TEXT',
-			App.text('customConsentText')
-		)
+		buildFieldProps('CUSTOM_CONSENT_TEXT', App.text('customConsentText'))
 	);
 
 	const cookieButtons = create(
@@ -259,6 +250,15 @@ export const createCustomizationFields = (
 		buildFieldProps(
 			'CUSTOM_CONSENT_DECLINE',
 			App.text('customConsentDecline')
+		)
+	);
+
+	createField(
+		FieldTag.input,
+		cookieButtons,
+		buildFieldProps(
+			'CUSTOM_CONSENT_REVOKE',
+			App.text('customConsentRevoke')
 		)
 	);
 

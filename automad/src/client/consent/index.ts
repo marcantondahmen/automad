@@ -36,11 +36,14 @@ import { create } from '@/common';
 import './styles.less';
 import 'dist-font-inter/variable';
 
+type ConsentState = 'accepted' | 'declined';
+
 declare global {
 	interface Window {
 		amCookieConsentText: string | undefined;
 		amCookieConsentAccept: string | undefined;
 		amCookieConsentDecline: string | undefined;
+		amCookieConsentRevoke: string | undefined;
 	}
 }
 
@@ -52,6 +55,7 @@ const COOKIE_ICON = `
 `;
 
 const CONSENT_KEY = 'am-cookie-consent';
+const STATE_CHANGE_EVENT = 'AutomadConsentStateChange';
 
 /**
  * This component can be used for embedded content as well as for scripts
@@ -73,22 +77,32 @@ class ConsentComponent extends HTMLElement {
 	/**
 	 * The actual state.
 	 */
-	static set state(value: 'accepted' | 'declined') {
+	static set state(value: ConsentState) {
 		localStorage.setItem(CONSENT_KEY, value);
+
+		ConsentComponent.banner.classList.remove('am-consent-banner--open');
+		ConsentComponent.banner.dispatchEvent(new Event(STATE_CHANGE_EVENT));
+	}
+
+	/**
+	 * The actual state.
+	 */
+	static get state(): ConsentState {
+		return localStorage.getItem(CONSENT_KEY) as ConsentState;
 	}
 
 	/**
 	 * True when consent == 'accepted'.
 	 */
 	static get hasConsent(): boolean {
-		return localStorage.getItem(CONSENT_KEY) === 'accepted';
+		return ConsentComponent.state === 'accepted';
 	}
 
 	/**
 	 * True when consent == 'declined'.
 	 */
 	static get hasNoConsent(): boolean {
-		return localStorage.getItem(CONSENT_KEY) === 'declined';
+		return ConsentComponent.state === 'declined';
 	}
 
 	/**
@@ -111,8 +125,6 @@ class ConsentComponent extends HTMLElement {
 	connectedCallback(): void {
 		if (ConsentComponent.hasConsent) {
 			this.injectContent();
-
-			return;
 		}
 
 		ConsentComponent.pendingInstances.push(this);
@@ -136,24 +148,35 @@ class ConsentComponent extends HTMLElement {
 			`${COOKIE_ICON} <span>${decodeURIComponent(window.amCookieConsentText || 'This site uses third-party cookies.')}</span>`
 		);
 
-		const accept = create(
-			'button',
-			['am-consent-banner__button'],
-			{},
-			ConsentComponent.banner,
-			decodeURIComponent(window.amCookieConsentAccept || "That's fine")
-		);
+		ConsentComponent.banner
+			.querySelector('svg')
+			.addEventListener('click', () => {
+				ConsentComponent.banner.classList.toggle(
+					'am-consent-banner--open'
+				);
+			});
 
-		accept.addEventListener('click', () => {
-			ConsentComponent.state = 'accepted';
-			ConsentComponent.pendingInstances.forEach((i) => i.injectContent());
-			ConsentComponent.pendingInstances = [];
-			ConsentComponent.banner.remove();
-		});
+		const renderAccept = (): void => {
+			const accept = create(
+				'button',
+				['am-consent-banner__button'],
+				{},
+				ConsentComponent.banner,
+				decodeURIComponent(
+					window.amCookieConsentAccept || "That's fine"
+				)
+			);
 
-		if (ConsentComponent.hasNoConsent) {
-			ConsentComponent.banner.classList.add('am-consent-banner--small');
-		} else {
+			accept.addEventListener('click', () => {
+				ConsentComponent.state = 'accepted';
+				ConsentComponent.pendingInstances.forEach((i) =>
+					i.injectContent()
+				);
+				ConsentComponent.pendingInstances = [];
+			});
+		};
+
+		const renderDecline = (): void => {
 			const decline = create(
 				'button',
 				['am-consent-banner__button'],
@@ -166,12 +189,63 @@ class ConsentComponent extends HTMLElement {
 
 			decline.addEventListener('click', () => {
 				ConsentComponent.state = 'declined';
+			});
+		};
+
+		const renderRevoke = (): void => {
+			const revoke = create(
+				'button',
+				['am-consent-banner__button'],
+				{},
+				ConsentComponent.banner,
+				decodeURIComponent(
+					window.amCookieConsentRevoke || 'Revoke consent'
+				)
+			);
+
+			revoke.addEventListener('click', () => {
+				ConsentComponent.state = null;
+				ConsentComponent.banner.remove();
+
+				location.reload();
+			});
+		};
+
+		const renderButtons = () => {
+			Array.from(
+				ConsentComponent.banner.querySelectorAll('button')
+			).forEach((button) => {
+				button.remove();
+			});
+
+			if (ConsentComponent.hasNoConsent) {
 				ConsentComponent.banner.classList.add(
 					'am-consent-banner--small'
 				);
-				decline.remove();
-			});
-		}
+				renderAccept();
+
+				return;
+			}
+
+			if (ConsentComponent.hasConsent) {
+				ConsentComponent.banner.classList.add(
+					'am-consent-banner--small'
+				);
+				renderRevoke();
+
+				return;
+			}
+
+			renderAccept();
+			renderDecline();
+		};
+
+		ConsentComponent.banner.addEventListener(
+			STATE_CHANGE_EVENT,
+			renderButtons.bind(this)
+		);
+
+		ConsentComponent.banner.dispatchEvent(new Event(STATE_CHANGE_EVENT));
 	}
 
 	/**
