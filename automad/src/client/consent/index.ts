@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create } from '@/common';
+import { create, query, queryAll } from '@/common';
 import './styles.less';
 import 'dist-font-inter/variable';
 
@@ -174,11 +174,9 @@ class ConsentComponent extends HTMLElement {
 			`${COOKIE_ICON} <span>${decodeURIComponent(window.amCookieConsentText || 'This site uses third-party cookies.')}</span>`
 		);
 
-		ConsentComponent.banner
-			.querySelector('svg')
-			.addEventListener('click', () => {
-				ConsentComponent.banner.classList.toggle(cls.bannerOpen);
-			});
+		query('svg', ConsentComponent.banner).addEventListener('click', () => {
+			ConsentComponent.banner.classList.toggle(cls.bannerOpen);
+		});
 
 		const renderAccept = (): void => {
 			const accept = create(
@@ -239,11 +237,11 @@ class ConsentComponent extends HTMLElement {
 		};
 
 		const renderButtons = () => {
-			Array.from(
-				ConsentComponent.banner.querySelectorAll(`.${cls.button}`)
-			).forEach((button) => {
-				button.remove();
-			});
+			queryAll(`.${cls.button}`, ConsentComponent.banner).forEach(
+				(button) => {
+					button.remove();
+				}
+			);
 
 			if (ConsentComponent.hasNoConsent) {
 				ConsentComponent.banner.classList.add(
