@@ -35,8 +35,8 @@
 // @ts-ignore
 import Draggabilly from 'draggabilly';
 
-const SCROLL_KEY = 'AutomadInPageScrollY';
-const DOCK_POSITION_KEY = 'AutomadInPageDockPosition';
+const SCROLL_KEY = 'am-inpage-scroll-y';
+const DOCK_POSITION_KEY = 'am-inpage-dock-position';
 
 export const saveScrollPosition = () => {
 	sessionStorage.setItem(SCROLL_KEY, `${window.scrollY}`);
