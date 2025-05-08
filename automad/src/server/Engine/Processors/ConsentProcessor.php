@@ -120,7 +120,7 @@ class ConsentProcessor {
 		$str = preg_replace_callback(
 			'/<am-consent\s((?:[^>]+\s)?type="script"[^>]*)>(.*?)<\/am-consent>/s',
 			function ($matches) {
-				return '<am-consent ' . $matches[1] . '>' . base64_encode($matches[2]) . '</am-consent>';
+				return '<am-consent ' . $matches[1] . '>' . base64_encode(trim($matches[2])) . '</am-consent>';
 			},
 			$str
 		);
