@@ -74,6 +74,16 @@ const clearCookies = (): void => {
 };
 
 /**
+ * CSS classes
+ */
+const cls = {
+	banner: 'am-consent-banner',
+	bannerOpen: 'am-consent-banner--open',
+	bannerSmall: 'am-consent-banner--small',
+	button: 'am-consent-banner__button',
+};
+
+/**
  * This component can be used for embedded content as well as for scripts
  * that should only be loaded depending on the cookie consent.
  *
@@ -96,7 +106,7 @@ class ConsentComponent extends HTMLElement {
 	static set state(value: ConsentState) {
 		localStorage.setItem(CONSENT_KEY, value);
 
-		ConsentComponent.banner.classList.remove('am-consent-banner--open');
+		ConsentComponent.banner.classList.remove(cls.bannerOpen);
 		ConsentComponent.banner.dispatchEvent(new Event(STATE_CHANGE_EVENT));
 	}
 
@@ -158,7 +168,7 @@ class ConsentComponent extends HTMLElement {
 	private renderBanner(): void {
 		ConsentComponent.banner = create(
 			'div',
-			['am-consent-banner'],
+			[cls.banner],
 			{},
 			document.body,
 			`${COOKIE_ICON} <span>${decodeURIComponent(window.amCookieConsentText || 'This site uses third-party cookies.')}</span>`
@@ -167,15 +177,13 @@ class ConsentComponent extends HTMLElement {
 		ConsentComponent.banner
 			.querySelector('svg')
 			.addEventListener('click', () => {
-				ConsentComponent.banner.classList.toggle(
-					'am-consent-banner--open'
-				);
+				ConsentComponent.banner.classList.toggle(cls.bannerOpen);
 			});
 
 		const renderAccept = (): void => {
 			const accept = create(
 				'button',
-				['am-consent-banner__button'],
+				[cls.button],
 				{},
 				ConsentComponent.banner,
 				decodeURIComponent(
@@ -195,7 +203,7 @@ class ConsentComponent extends HTMLElement {
 		const renderDecline = (): void => {
 			const decline = create(
 				'button',
-				['am-consent-banner__button'],
+				[cls.button],
 				{},
 				ConsentComponent.banner,
 				decodeURIComponent(
@@ -205,13 +213,14 @@ class ConsentComponent extends HTMLElement {
 
 			decline.addEventListener('click', () => {
 				ConsentComponent.state = 'declined';
+				ConsentComponent.banner.classList.add(cls.bannerOpen);
 			});
 		};
 
 		const renderRevoke = (): void => {
 			const revoke = create(
 				'button',
-				['am-consent-banner__button'],
+				[cls.button],
 				{},
 				ConsentComponent.banner,
 				decodeURIComponent(
@@ -231,14 +240,15 @@ class ConsentComponent extends HTMLElement {
 
 		const renderButtons = () => {
 			Array.from(
-				ConsentComponent.banner.querySelectorAll('button')
+				ConsentComponent.banner.querySelectorAll(`.${cls.button}`)
 			).forEach((button) => {
 				button.remove();
 			});
 
 			if (ConsentComponent.hasNoConsent) {
 				ConsentComponent.banner.classList.add(
-					'am-consent-banner--small'
+					cls.bannerSmall,
+					cls.bannerOpen
 				);
 				renderAccept();
 
@@ -246,9 +256,7 @@ class ConsentComponent extends HTMLElement {
 			}
 
 			if (ConsentComponent.hasConsent) {
-				ConsentComponent.banner.classList.add(
-					'am-consent-banner--small'
-				);
+				ConsentComponent.banner.classList.add(cls.bannerSmall);
 				renderRevoke();
 
 				return;
