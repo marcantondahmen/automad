@@ -35,7 +35,7 @@
 :root {
 	--am-consent-banner-color: #f9fafc;
 	--am-consent-banner-background: #121315;
-	--am-consent-banner-border: 1px solid rgba(255, 255, 255, 0.06);
+	--am-consent-banner-border: rgba(255, 255, 255, 0.06);
 	--am-consent-placeholder-color: rgba(120, 123, 132, 0.3);
 	--am-consent-placeholder-background: rgba(120, 123, 132, 0.075);
 }
@@ -89,7 +89,7 @@ am-consent[type='script'] {
 			padding: 0 7px;
 			font-size: 11px;
 			border-radius: 2em;
-			border: var(--am-consent-banner-border);
+			border: 1px solid var(--am-consent-banner-border);
 
 			& > svg {
 				pointer-events: all;
