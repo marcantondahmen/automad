@@ -58,6 +58,22 @@ const CONSENT_KEY = 'am-cookie-consent';
 const STATE_CHANGE_EVENT = 'AutomadConsentStateChange';
 
 /**
+ * Clear third-party cookies.
+ */
+const clearCookies = (): void => {
+	document.cookie
+		.split(';')
+		.map((c) => c.trim())
+		.forEach((cookie) => {
+			const [name] = cookie.split('=');
+
+			if (!/^Automad-/.test(name)) {
+				document.cookie = `${name}=; Max-Age=0; path=/`;
+			}
+		});
+};
+
+/**
  * This component can be used for embedded content as well as for scripts
  * that should only be loaded depending on the cookie consent.
  *
@@ -206,6 +222,8 @@ class ConsentComponent extends HTMLElement {
 			revoke.addEventListener('click', () => {
 				ConsentComponent.state = null;
 				ConsentComponent.banner.remove();
+
+				clearCookies();
 
 				location.reload();
 			});
