@@ -211,7 +211,7 @@ class ConsentComponent extends HTMLElement {
 			const script = create('script', [], attributes);
 
 			setTimeout(() => {
-				script.text = this.textContent;
+				script.text = atob(this.textContent);
 
 				this.replaceWith(script);
 			}, 0);
