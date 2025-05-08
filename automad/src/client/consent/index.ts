@@ -44,6 +44,7 @@ declare global {
 		amCookieConsentAccept: string | undefined;
 		amCookieConsentDecline: string | undefined;
 		amCookieConsentRevoke: string | undefined;
+		amCookieConsentTooltip: string | undefined;
 	}
 }
 
@@ -174,7 +175,9 @@ class ConsentComponent extends HTMLElement {
 			`${COOKIE_ICON} <span>${decodeURIComponent(window.amCookieConsentText || 'This site uses third-party cookies.')}</span>`
 		);
 
-		query('svg', ConsentComponent.banner).addEventListener('click', () => {
+		const icon = query('svg', ConsentComponent.banner);
+
+		icon.addEventListener('click', () => {
 			ConsentComponent.banner.classList.toggle(cls.bannerOpen);
 		});
 
@@ -255,6 +258,11 @@ class ConsentComponent extends HTMLElement {
 
 			if (ConsentComponent.hasConsent) {
 				ConsentComponent.banner.classList.add(cls.bannerSmall);
+				ConsentComponent.banner.setAttribute(
+					'title',
+					window.amCookieConsentTooltip || 'Manage cookie consent'
+				);
+
 				renderRevoke();
 
 				return;
