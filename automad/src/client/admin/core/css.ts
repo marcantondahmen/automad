@@ -112,6 +112,7 @@ export const enum CSS {
 	displaySmallNone = 'am-u-display-small-none',
 	displayMedium = 'am-u-display-medium',
 	displayMediumNone = 'am-u-display-medium-none',
+	displayLastNone = 'am-u-display-last-none',
 
 	dropdown = 'am-c-dropdown',
 	dropdownOpen = 'am-c-dropdown--open',

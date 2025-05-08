@@ -38,6 +38,7 @@ import {
 	create,
 	createField,
 	CSS,
+	html,
 	listen,
 	query,
 	queryAll,
@@ -220,27 +221,18 @@ export const createCustomizationFields = (
 
 	create('hr', [], {}, sections.customizations);
 
-	create(
-		'p',
-		[],
-		{},
-		sections.customizations,
-		App.text('customConsentInfo')
-	);
+	create('p', [], {}, sections.customizations, App.text('customConsentInfo'));
 
 	createField(
 		FieldTag.input,
 		sections.customizations,
-		buildFieldProps(
-			'CUSTOM_CONSENT_TEXT',
-			App.text('customConsentText')
-		)
+		buildFieldProps('CUSTOM_CONSENT_TEXT', App.text('customConsentText'))
 	);
 
 	const cookieButtons = create(
 		'div',
 		[CSS.grid, CSS.gridAuto],
-		{},
+		{ style: '--min: 24rem;' },
 		sections.customizations
 	);
 
@@ -262,20 +254,38 @@ export const createCustomizationFields = (
 		)
 	);
 
-	const cookieColors = create(
-		'div',
-		[CSS.grid, CSS.gridAuto],
-		{},
-		sections.customizations
+	createField(
+		FieldTag.input,
+		cookieButtons,
+		buildFieldProps(
+			'CUSTOM_CONSENT_REVOKE',
+			App.text('customConsentRevoke')
+		)
+	);
+
+	createField(
+		FieldTag.input,
+		cookieButtons,
+		buildFieldProps(
+			'CUSTOM_CONSENT_TOOLTIP',
+			App.text('customConsentTooltip')
+		)
 	);
 
 	createField(
 		FieldTag.color,
-		cookieColors,
+		sections.customizations,
 		buildFieldProps(
 			'CUSTOM_CONSENT_COLOR_TEXT',
 			App.text('customConsentColorText')
 		)
+	);
+
+	const cookieColors = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{ style: '--min: 24rem;' },
+		sections.customizations
 	);
 
 	createField(
@@ -308,7 +318,7 @@ export const createCustomizationFields = (
 		cookiePlaceholderColors,
 		buildFieldProps(
 			'CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT',
-			App.text('customConsentPlaceholderColorText')
+			App.text('customConsentPlaceholderText')
 		)
 	);
 
@@ -317,11 +327,20 @@ export const createCustomizationFields = (
 		cookiePlaceholderColors,
 		buildFieldProps(
 			'CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND',
-			App.text('customConsentPlaceholderColorBackground')
+			App.text('customConsentPlaceholderBackground')
 		)
 	);
 
-	create('hr', [], {}, sections.customizations);
+	create(
+		'div',
+		[CSS.displayLastNone],
+		{},
+		sections.customizations,
+		html`
+			<hr />
+			<p>${App.text('customizationTemplate')}</p>
+		`
+	);
 };
 
 /**

@@ -32,15 +32,19 @@
  * Licensed under the MIT license.
  */
 
-import { create } from '@/common';
+import { create, query, queryAll } from '@/common';
 import './styles.less';
 import 'dist-font-inter/variable';
+
+type ConsentState = 'accepted' | 'declined';
 
 declare global {
 	interface Window {
 		amCookieConsentText: string | undefined;
 		amCookieConsentAccept: string | undefined;
 		amCookieConsentDecline: string | undefined;
+		amCookieConsentRevoke: string | undefined;
+		amCookieConsentTooltip: string | undefined;
 	}
 }
 
@@ -52,6 +56,33 @@ const COOKIE_ICON = `
 `;
 
 const CONSENT_KEY = 'am-cookie-consent';
+const STATE_CHANGE_EVENT = 'AutomadConsentStateChange';
+
+/**
+ * Clear third-party cookies.
+ */
+const clearCookies = (): void => {
+	document.cookie
+		.split(';')
+		.map((c) => c.trim())
+		.forEach((cookie) => {
+			const [name] = cookie.split('=');
+
+			if (!/^Automad-/.test(name)) {
+				document.cookie = `${name}=; Max-Age=0; path=/`;
+			}
+		});
+};
+
+/**
+ * CSS classes
+ */
+const cls = {
+	banner: 'am-consent-banner',
+	bannerOpen: 'am-consent-banner--open',
+	bannerSmall: 'am-consent-banner--small',
+	button: 'am-consent-banner__button',
+};
 
 /**
  * This component can be used for embedded content as well as for scripts
@@ -73,22 +104,32 @@ class ConsentComponent extends HTMLElement {
 	/**
 	 * The actual state.
 	 */
-	static set state(value: 'accepted' | 'declined') {
+	static set state(value: ConsentState) {
 		localStorage.setItem(CONSENT_KEY, value);
+
+		ConsentComponent.banner.classList.remove(cls.bannerOpen);
+		ConsentComponent.banner.dispatchEvent(new Event(STATE_CHANGE_EVENT));
+	}
+
+	/**
+	 * The actual state.
+	 */
+	static get state(): ConsentState {
+		return localStorage.getItem(CONSENT_KEY) as ConsentState;
 	}
 
 	/**
 	 * True when consent == 'accepted'.
 	 */
 	static get hasConsent(): boolean {
-		return localStorage.getItem(CONSENT_KEY) === 'accepted';
+		return ConsentComponent.state === 'accepted';
 	}
 
 	/**
 	 * True when consent == 'declined'.
 	 */
 	static get hasNoConsent(): boolean {
-		return localStorage.getItem(CONSENT_KEY) === 'declined';
+		return ConsentComponent.state === 'declined';
 	}
 
 	/**
@@ -111,8 +152,6 @@ class ConsentComponent extends HTMLElement {
 	connectedCallback(): void {
 		if (ConsentComponent.hasConsent) {
 			this.injectContent();
-
-			return;
 		}
 
 		ConsentComponent.pendingInstances.push(this);
@@ -130,33 +169,42 @@ class ConsentComponent extends HTMLElement {
 	private renderBanner(): void {
 		ConsentComponent.banner = create(
 			'div',
-			['am-consent-banner'],
+			[cls.banner],
 			{},
 			document.body,
 			`${COOKIE_ICON} <span>${decodeURIComponent(window.amCookieConsentText || 'This site uses third-party cookies.')}</span>`
 		);
 
-		const accept = create(
-			'button',
-			['am-consent-banner__button'],
-			{},
-			ConsentComponent.banner,
-			decodeURIComponent(window.amCookieConsentAccept || "That's fine")
-		);
+		const icon = query('svg', ConsentComponent.banner);
 
-		accept.addEventListener('click', () => {
-			ConsentComponent.state = 'accepted';
-			ConsentComponent.pendingInstances.forEach((i) => i.injectContent());
-			ConsentComponent.pendingInstances = [];
-			ConsentComponent.banner.remove();
+		icon.addEventListener('click', () => {
+			ConsentComponent.banner.classList.toggle(cls.bannerOpen);
 		});
 
-		if (ConsentComponent.hasNoConsent) {
-			ConsentComponent.banner.classList.add('am-consent-banner--small');
-		} else {
+		const renderAccept = (): void => {
+			const accept = create(
+				'button',
+				[cls.button],
+				{},
+				ConsentComponent.banner,
+				decodeURIComponent(
+					window.amCookieConsentAccept || "That's fine"
+				)
+			);
+
+			accept.addEventListener('click', () => {
+				ConsentComponent.state = 'accepted';
+				ConsentComponent.pendingInstances.forEach((i) =>
+					i.injectContent()
+				);
+				ConsentComponent.pendingInstances = [];
+			});
+		};
+
+		const renderDecline = (): void => {
 			const decline = create(
 				'button',
-				['am-consent-banner__button'],
+				[cls.button],
 				{},
 				ConsentComponent.banner,
 				decodeURIComponent(
@@ -166,12 +214,70 @@ class ConsentComponent extends HTMLElement {
 
 			decline.addEventListener('click', () => {
 				ConsentComponent.state = 'declined';
-				ConsentComponent.banner.classList.add(
-					'am-consent-banner--small'
-				);
-				decline.remove();
+				ConsentComponent.banner.classList.add(cls.bannerOpen);
 			});
-		}
+		};
+
+		const renderRevoke = (): void => {
+			const revoke = create(
+				'button',
+				[cls.button],
+				{},
+				ConsentComponent.banner,
+				decodeURIComponent(
+					window.amCookieConsentRevoke || 'Revoke consent'
+				)
+			);
+
+			revoke.addEventListener('click', () => {
+				ConsentComponent.state = null;
+				ConsentComponent.banner.remove();
+
+				clearCookies();
+
+				location.reload();
+			});
+		};
+
+		const renderButtons = () => {
+			queryAll(`.${cls.button}`, ConsentComponent.banner).forEach(
+				(button) => {
+					button.remove();
+				}
+			);
+
+			if (ConsentComponent.hasNoConsent) {
+				ConsentComponent.banner.classList.add(
+					cls.bannerSmall,
+					cls.bannerOpen
+				);
+				renderAccept();
+
+				return;
+			}
+
+			if (ConsentComponent.hasConsent) {
+				ConsentComponent.banner.classList.add(cls.bannerSmall);
+				ConsentComponent.banner.setAttribute(
+					'title',
+					window.amCookieConsentTooltip || 'Manage cookie consent'
+				);
+
+				renderRevoke();
+
+				return;
+			}
+
+			renderAccept();
+			renderDecline();
+		};
+
+		ConsentComponent.banner.addEventListener(
+			STATE_CHANGE_EVENT,
+			renderButtons.bind(this)
+		);
+
+		ConsentComponent.banner.dispatchEvent(new Event(STATE_CHANGE_EVENT));
 	}
 
 	/**
@@ -183,20 +289,6 @@ class ConsentComponent extends HTMLElement {
 		}
 
 		this.innerHTML = '<am-consent-placeholder></am-consent-placeholder>';
-	}
-
-	/**
-	 * Get a text attribute from the component.
-	 *
-	 * @param name
-	 * @param fallback
-	 * @return the decoded text value
-	 */
-	private attr(
-		name: 'text' | 'accept' | 'decline',
-		fallback: string
-	): string {
-		return decodeURIComponent(this.getAttribute(name) || fallback);
 	}
 
 	/**
@@ -225,7 +317,7 @@ class ConsentComponent extends HTMLElement {
 			const script = create('script', [], attributes);
 
 			setTimeout(() => {
-				script.text = this.textContent;
+				script.text = atob(this.textContent);
 
 				this.replaceWith(script);
 			}, 0);

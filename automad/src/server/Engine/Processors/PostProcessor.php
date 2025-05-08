@@ -104,6 +104,7 @@ class PostProcessor {
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
 		$output = $this->addCustomizations($output);
 		$output = $MetaProcessor->addMetaTags($output);
+		$output = $ConsentProcessor->encodeScript($output);
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
