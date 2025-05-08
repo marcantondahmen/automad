@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-alpha.32](https://github.com/marcantondahmen/automad/commit/f810b5f381407d3ef5cd1c8455a978f11b5fcbe9)
+## [v2.0.0-alpha.33](https://github.com/marcantondahmen/automad/commit/c7ba53d32fe4d761a4c4b900310dd41051c0df5e)
 
-Wed, 7 May 2025 22:38:30 +0200
+Thu, 8 May 2025 21:45:08 +0200
+
+### New Features
+
+- **consent**: add option to revoke cookie consent ([f73b235bf](https://github.com/marcantondahmen/automad/commit/f73b235bf8c42704962095ee44a044ba2279cc91))
+
+### Bugfixes
+
+- **consent**: fix breaking script tags when js content contains a greater-than symbol followed by letters ([2ccf78524](https://github.com/marcantondahmen/automad/commit/2ccf78524f2b417c16790c393b81315cdd11c849))
+
+## [v2.0.0-alpha.32](https://github.com/marcantondahmen/automad/commit/9e0d721c135b900ffd410248ab92ceab0ed9e4bb)
+
+Wed, 7 May 2025 22:43:47 +0200
 
 ### New Features
 
@@ -664,18 +676,3 @@ Fri, 13 Aug 2021 01:21:26 +0200
 ### Bugfixes
 
 - **ui**: remove slug input from homepage settings ([38a0ca8e5](https://github.com/marcantondahmen/automad/commit/38a0ca8e5d37fd00c3acc86d5f9d10062cf2d9e8))
-
-## [v1.8.4](https://github.com/marcantondahmen/automad/commit/5512e55549473e27a2223803caa52200cdc70800)
-
-Thu, 12 Aug 2021 22:24:51 +0200
-
-### New Features
-
-- **core**: add Str::slug() method to sanitize ids and directory names ([4ee87a3bc](https://github.com/marcantondahmen/automad/commit/4ee87a3bc521921af36c19414a7e23eb730f9595))
-- **ui**: add chinese, japanese and korean translations ([a287a740e](https://github.com/marcantondahmen/automad/commit/a287a740ed4028278f799112c3723fbfb733efb2))
-- **ui**: add option to define a custom slug for a page ([c593fa29d](https://github.com/marcantondahmen/automad/commit/c593fa29d73edb5c7d0ca9c9649d3b5b9c52863e))
-
-### Bugfixes
-
-- **ui**: fix typo in text modules ([ba8702a87](https://github.com/marcantondahmen/automad/commit/ba8702a87d26afd0172294d541c1573925f77f56))
-- **ui**: fix updating links that are wrapped in quotes ([4417468d6](https://github.com/marcantondahmen/automad/commit/4417468d659c1e71e9b76698e377a19a1e209b5a))
