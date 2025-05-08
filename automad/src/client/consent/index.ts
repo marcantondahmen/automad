@@ -186,20 +186,6 @@ class ConsentComponent extends HTMLElement {
 	}
 
 	/**
-	 * Get a text attribute from the component.
-	 *
-	 * @param name
-	 * @param fallback
-	 * @return the decoded text value
-	 */
-	private attr(
-		name: 'text' | 'accept' | 'decline',
-		fallback: string
-	): string {
-		return decodeURIComponent(this.getAttribute(name) || fallback);
-	}
-
-	/**
 	 * Create the actually pending element.
 	 */
 	private injectContent(): void {
