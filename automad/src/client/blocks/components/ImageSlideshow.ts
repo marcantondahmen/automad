@@ -37,7 +37,6 @@ import Swiper from 'swiper';
 import {
 	Autoplay,
 	EffectFade,
-	EffectCube,
 	EffectFlip,
 	Navigation,
 	Pagination,
@@ -46,7 +45,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import 'swiper/css/effect-cube';
 import 'swiper/css/effect-fade';
 import 'swiper/css/effect-flip';
 import { create } from '@/common';
@@ -124,14 +122,7 @@ class SliderComponent extends HTMLElement {
 		});
 
 		new Swiper(swiperContainer, {
-			modules: [
-				Autoplay,
-				EffectFade,
-				EffectFlip,
-				EffectCube,
-				Navigation,
-				Pagination,
-			],
+			modules: [Autoplay, EffectFade, EffectFlip, Navigation, Pagination],
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true,

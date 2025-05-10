@@ -147,24 +147,30 @@ class GalleryComponent extends HTMLElement {
 	}
 
 	/**
+	 * Calculate the optimal row height in pixels for the underlaying
+	 * CSS grid. Ideally the height is 1px to be as precise as possible.
+	 * When the grid is getting to long, that number will increase.
+	 *
+	 * @return number
+	 */
+	private calculateMasonryRowHeight(): number {
+		const maxRows = 10000;
+		const masonryWidth = this.getBoundingClientRect().width;
+		const { settings, imageSets } = this.data;
+		const colWidth = parseInt(settings.columnWidthPx.toString());
+		const gap = parseInt(settings.gapPx.toString());
+		const nCols = Math.ceil(masonryWidth / colWidth);
+		const estimatedHeight = (imageSets.length / nCols) * (colWidth + gap);
+
+		return Math.ceil(estimatedHeight / maxRows);
+	}
+
+	/**
 	 * Render a column based masonry layout.
 	 */
 	private renderColumns(): void {
 		const settings = this.data.settings;
-		const masonryRowHeight = 10;
-
-		const gallery = create(
-			'div',
-			['am-gallery-masonry'],
-			{
-				style: `
-					--am-gallery-item-width: ${settings.columnWidthPx}px;
-					--am-gallery-auto-rows: ${masonryRowHeight}px; 	
-					--am-gallery-gap: ${settings.gapPx}px;
-				`,
-			},
-			this
-		);
+		const gallery = create('div', ['am-gallery-masonry'], {}, this);
 
 		const items: MasonryItem[] = [];
 
@@ -199,19 +205,36 @@ class GalleryComponent extends HTMLElement {
 		});
 
 		const updateItems = (items: MasonryItem[]) => {
+			const masonryRowHeight = this.calculateMasonryRowHeight();
 			const masonryWidth = this.getBoundingClientRect().width;
-			const width = settings.columnWidthPx - settings.gapPx;
-			const nCols = Math.floor(masonryWidth / width) || 1;
-			const factor = (nCols * width) / masonryWidth;
+			const colWidth = parseInt(settings.columnWidthPx.toString());
+			const gap = parseInt(settings.gapPx.toString());
+
+			gallery.setAttribute(
+				'style',
+				`
+					--am-gallery-item-width: ${colWidth}px;
+					--am-gallery-auto-rows: ${masonryRowHeight}px; 	
+					--am-gallery-gap: ${gap}px;
+				`
+			);
+
+			const nCols = window
+				.getComputedStyle(gallery)
+				.getPropertyValue('grid-template-columns')
+				.split(' ').length;
+
+			const masonryWidthNoGap = masonryWidth - (nCols - 1) * gap;
+			const width = masonryWidthNoGap / nCols;
+			const factor = width / colWidth;
 
 			items.forEach((item) => {
 				item.element.removeAttribute('style');
 
-				const rowSpan = Math.round(
-					item.thumbHeight / (masonryRowHeight * factor)
+				item.rowSpan = Math.round(
+					(item.thumbHeight * factor + gap) / masonryRowHeight
 				);
 
-				item.rowSpan = rowSpan;
 				item.element.setAttribute(
 					'style',
 					`--am-gallery-masonry-rows: ${item.rowSpan};`
@@ -222,7 +245,7 @@ class GalleryComponent extends HTMLElement {
 
 			if (settings.cleanBottom) {
 				const columns: { [key: number]: MasonryItem[] } = {};
-				const nRows = Math.ceil(
+				const nRows = Math.round(
 					this.getBoundingClientRect().height / masonryRowHeight
 				);
 
@@ -289,7 +312,7 @@ class GalleryComponent extends HTMLElement {
 			'resize',
 			debounce(() => {
 				updateItems(items);
-			}, 100)
+			}, 50)
 		);
 	}
 

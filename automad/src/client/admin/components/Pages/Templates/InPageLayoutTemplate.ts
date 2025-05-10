@@ -57,7 +57,9 @@ export const inPage = ({ main }: Partials): string => {
 						class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
 					>
 						<span class="${CSS.navbarGroup}">
-							<am-undo-buttons></am-undo-buttons>
+							<am-undo-buttons
+								class="${CSS.displaySmallNone}"
+							></am-undo-buttons>
 							<am-submit
 								class="${CSS.button}"
 								${Attr.form}="${InPageController.edit}"

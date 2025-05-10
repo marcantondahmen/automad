@@ -45,6 +45,7 @@ declare global {
 		amCookieConsentDecline: string | undefined;
 		amCookieConsentRevoke: string | undefined;
 		amCookieConsentTooltip: string | undefined;
+		amCookieConsentPlaceholder: string | undefined;
 	}
 }
 
@@ -82,6 +83,7 @@ const cls = {
 	bannerOpen: 'am-consent-banner--open',
 	bannerSmall: 'am-consent-banner--small',
 	button: 'am-consent-banner__button',
+	placeholder: 'am-consent-placeholder',
 };
 
 /**
@@ -302,6 +304,7 @@ class ConsentComponent extends HTMLElement {
 		const attributes = Array.from(this.attributes).reduce(
 			(acc, attr) => {
 				acc[attr.name] = attr.value;
+
 				return acc;
 			},
 			{} as Record<string, string>
@@ -342,11 +345,11 @@ class ConsentPlaceholderComponent extends HTMLElement {
 	 * The connected callback.
 	 */
 	connectedCallback(): void {
-		this.classList.add('am-consent-placeholder');
+		this.classList.add(cls.placeholder);
 
 		this.innerHTML = `
 			${COOKIE_ICON}
-			<span>Cookies are disabled</span>
+			<span>${window.amCookieConsentPlaceholder || 'Cookies are disabled'}</span>
 		`;
 	}
 }
