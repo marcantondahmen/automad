@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-language-packs.git",
-                "reference": "4e2b095eb884dce333008a2af2feb3e9050ab136"
+                "reference": "94d717976228a279acb970b38048b87b6562a69d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/4e2b095eb884dce333008a2af2feb3e9050ab136",
-                "reference": "4e2b095eb884dce333008a2af2feb3e9050ab136",
+                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/94d717976228a279acb970b38048b87b6562a69d",
+                "reference": "94d717976228a279acb970b38048b87b6562a69d",
                 "shasum": ""
             },
             "default-branch": true,
@@ -55,7 +55,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2025-05-08T17:18:45+00:00"
+            "time": "2025-05-10T07:11:02+00:00"
         },
         {
             "name": "cocur/slugify",

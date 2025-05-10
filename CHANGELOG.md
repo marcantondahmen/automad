@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-alpha.33](https://github.com/marcantondahmen/automad/commit/c7ba53d32fe4d761a4c4b900310dd41051c0df5e)
+## [v2.0.0-alpha.34](https://github.com/marcantondahmen/automad/commit/1fbf56b5614a6de915d3a2c6bfb62b7fb33193d3)
 
-Thu, 8 May 2025 21:45:08 +0200
+Fri, 9 May 2025 23:14:01 +0200
+
+### New Features
+
+- **consent**: add option to customize consent placeholder text ([c1b3fba3c](https://github.com/marcantondahmen/automad/commit/c1b3fba3cb50d537ca1caf3a01191e79a113b95c))
+- **gallery**: improve masonry render engine precision ([27282edf2](https://github.com/marcantondahmen/automad/commit/27282edf2175405129b9f5173b82363944e26cfd))
+
+### Bugfixes
+
+- **consent**: fix consent banner border style ([0d33e167b](https://github.com/marcantondahmen/automad/commit/0d33e167b3b2af72a2fff022516d4039e78732ef))
+- fix select inputs in safari ([8bb775f44](https://github.com/marcantondahmen/automad/commit/8bb775f442acc8297aa19e1efe003580717ed4fa))
+
+## [v2.0.0-alpha.33](https://github.com/marcantondahmen/automad/commit/60b6ec6d92baf1b53d1746bb22db5ab443a49f91)
+
+Thu, 8 May 2025 21:48:48 +0200
 
 ### New Features
 
@@ -668,11 +682,3 @@ Tue, 31 Aug 2021 21:01:29 +0200
 
 - **system**: update Composer to version 2.1.6 in order to fix issues on Windows ([81cc05972](https://github.com/marcantondahmen/automad/commit/81cc05972ae4d10202adfe062ecc7b70f540edff))
 - **ui**: fix block editor toolbar on small devices ([6c81c4378](https://github.com/marcantondahmen/automad/commit/6c81c43780be143a01018d388d192d06690c61bd))
-
-## [v1.8.5](https://github.com/marcantondahmen/automad/commit/09942a0ab9c92aaacf651e7b7d359e0cc5f47459)
-
-Fri, 13 Aug 2021 01:21:26 +0200
-
-### Bugfixes
-
-- **ui**: remove slug input from homepage settings ([38a0ca8e5](https://github.com/marcantondahmen/automad/commit/38a0ca8e5d37fd00c3acc86d5f9d10062cf2d9e8))
