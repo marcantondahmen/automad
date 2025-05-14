@@ -60,17 +60,55 @@ const CONSENT_KEY = 'am-cookie-consent';
 const STATE_CHANGE_EVENT = 'AutomadConsentStateChange';
 
 /**
- * Clear third-party cookies.
+ * Get all possible versions that can be used as domain value for a cookie
+ * such as sub.domain.com and .domain.com.
+ *
+ * @return the array of domains
+ */
+const getDomains = (): string[] => {
+	const parts = location.hostname.split('.');
+	const domains = [];
+
+	domains.push(location.hostname);
+
+	for (let i = 0; i < parts.length - 1; i++) {
+		const domain = parts.slice(i).join('.');
+
+		if (parts.length - i >= 2) {
+			domains.push(`.${domain}`);
+		}
+	}
+
+	return [...new Set(domains)];
+};
+
+/**
+ * Delete a cookie
+ *
+ * @param name
+ */
+const deleteCookie = (name: string): void => {
+	const domains = getDomains();
+
+	domains.forEach((domain) => {
+		document.cookie = `${name}=; Max-Age=0; path=/; domain=${domain}`;
+	});
+
+	document.cookie = `${name}=; Max-Age=0; path=/`;
+};
+
+/**
+ * Clear all third-party cookies.
  */
 const clearCookies = (): void => {
 	document.cookie
 		.split(';')
-		.map((c) => c.trim())
+		.map((cookie) => cookie.trim())
 		.forEach((cookie) => {
 			const [name] = cookie.split('=');
 
 			if (!/^Automad-/.test(name)) {
-				document.cookie = `${name}=; Max-Age=0; path=/`;
+				deleteCookie(name);
 			}
 		});
 };
