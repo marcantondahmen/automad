@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class App {
-	const VERSION = '2.0.0-alpha.34';
+	const VERSION = '2.0.0-alpha.35';
 
 	/**
 	 * Required PHP version.

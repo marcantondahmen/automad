@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.34](https://github.com/marcantondahmen/automad/commit/1fbf56b5614a6de915d3a2c6bfb62b7fb33193d3)
+## [v2.0.0-alpha.35](https://github.com/marcantondahmen/automad/commit/d33402098960399f5a1de597270e23ec63ba3feb)
 
-Fri, 9 May 2025 23:14:01 +0200
+Wed, 14 May 2025 20:59:50 +0200
+
+### Bugfixes
+
+- fix removal of cookies for certain domains when consent is revoked ([d33402098](https://github.com/marcantondahmen/automad/commit/d33402098960399f5a1de597270e23ec63ba3feb))
+
+## [v2.0.0-alpha.34](https://github.com/marcantondahmen/automad/commit/f2ca0dc3d25cfea14a895f7008f353af97fa9cb0)
+
+Sat, 10 May 2025 09:13:41 +0200
 
 ### New Features
 
@@ -673,12 +681,3 @@ Thu, 9 Sep 2021 01:02:47 +0200
 
 - **ui**: debounce status requests ([b3b54130b](https://github.com/marcantondahmen/automad/commit/b3b54130bc1b603a1834851876a2a6c396288523))
 - **ui**: fix switcher rendering in Safari ([2019c80ea](https://github.com/marcantondahmen/automad/commit/2019c80ea91fac2a2177917f02db8124694ab838))
-
-## [v1.8.6](https://github.com/marcantondahmen/automad/commit/cff6cb56fed110a8c3e9889c5c6eaa3ae0ca89e1)
-
-Tue, 31 Aug 2021 21:01:29 +0200
-
-### Bugfixes
-
-- **system**: update Composer to version 2.1.6 in order to fix issues on Windows ([81cc05972](https://github.com/marcantondahmen/automad/commit/81cc05972ae4d10202adfe062ecc7b70f540edff))
-- **ui**: fix block editor toolbar on small devices ([6c81c4378](https://github.com/marcantondahmen/automad/commit/6c81c43780be143a01018d388d192d06690c61bd))
