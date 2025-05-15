@@ -345,8 +345,6 @@ class ConsentComponent extends HTMLElement {
 	private injectContent(): void {
 		const type = this.type;
 
-		this.removeAttribute('type');
-
 		const attributes = Array.from(this.attributes).reduce(
 			(acc, attr) => {
 				acc[attr.name] = attr.value;
