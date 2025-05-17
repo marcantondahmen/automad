@@ -57,6 +57,7 @@ const COOKIE_ICON = `
 `;
 
 const CONSENT_KEY = 'am-cookie-consent';
+const REVOKED_KEY = 'am-cookie-consent-revoked';
 const STATE_CHANGE_EVENT = 'AutomadConsentStateChange';
 
 /**
@@ -98,9 +99,9 @@ const deleteCookie = (name: string): void => {
 };
 
 /**
- * Clear all third-party cookies.
+ * Clear all third-party cookies as well as local and session storage.
  */
-const clearCookies = (): void => {
+const clearData = (): void => {
 	document.cookie
 		.split(';')
 		.map((cookie) => cookie.trim())
@@ -111,6 +112,9 @@ const clearCookies = (): void => {
 				deleteCookie(name);
 			}
 		});
+
+	localStorage.clear();
+	sessionStorage.clear();
 };
 
 /**
@@ -198,6 +202,10 @@ class ConsentComponent extends HTMLElement {
 
 		if (!ConsentComponent.banner) {
 			this.renderBanner();
+
+			if (localStorage.getItem(REVOKED_KEY)) {
+				clearData();
+			}
 		}
 
 		this.renderPlaceholder();
@@ -273,8 +281,7 @@ class ConsentComponent extends HTMLElement {
 				ConsentComponent.state = null;
 				ConsentComponent.banner.remove();
 
-				clearCookies();
-
+				localStorage.setItem(REVOKED_KEY, 'true');
 				location.reload();
 			});
 		};
@@ -291,6 +298,7 @@ class ConsentComponent extends HTMLElement {
 					cls.bannerSmall,
 					cls.bannerOpen
 				);
+
 				renderAccept();
 
 				return;
@@ -336,8 +344,6 @@ class ConsentComponent extends HTMLElement {
 	 */
 	private injectContent(): void {
 		const type = this.type;
-
-		this.removeAttribute('type');
 
 		const attributes = Array.from(this.attributes).reduce(
 			(acc, attr) => {

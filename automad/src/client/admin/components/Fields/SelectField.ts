@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { App, createSelect, FieldTag, getPageURL } from '@/admin/core';
+import {
+	App,
+	createSelect,
+	CSS,
+	FieldTag,
+	getPageURL,
+	listen,
+} from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -41,18 +48,21 @@ import { BaseFieldComponent } from './BaseField';
  * @extends BaseFieldComponent
  */
 class SelectFieldComponent extends BaseFieldComponent {
+	/**
+	 * Create an input field.
+	 */
 	createInput(): void {
-		const { name, id, value, options } = this._data;
+		const { name, id, value, options, placeholder } = this._data;
 		const opt = Object.keys(options).map((key: string) => ({
 			value: key,
 			text: options[key],
 		}));
 
-		createSelect(
+		const select = createSelect(
 			[
 				{
 					text: !!getPageURL()
-						? App.text('useSharedDefault')
+						? `${App.text('useSharedDefault')} ${!!placeholder ? `(${options[String(placeholder)]})` : ''}`
 						: '&mdash;',
 					value: '',
 				},
@@ -62,8 +72,13 @@ class SelectFieldComponent extends BaseFieldComponent {
 			this,
 			name,
 			id,
-			'<i class="bi bi-ui-radios"></i> '
+			'<i class="bi bi-ui-radios"></i> ',
+			!!value ? [] : [CSS.textMuted]
 		);
+
+		listen(select, 'change', () => {
+			select.classList.toggle(CSS.textMuted, !this.input.value);
+		});
 	}
 }
 
