@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-alpha.35](https://github.com/marcantondahmen/automad/commit/d33402098960399f5a1de597270e23ec63ba3feb)
+## [v2.0.0-alpha.36](https://github.com/marcantondahmen/automad/commit/f904be4b10dc81626b0679c7bf5d4ba757a97990)
 
-Wed, 14 May 2025 20:59:50 +0200
+Sat, 17 May 2025 14:50:51 +0200
+
+### Breaking Changes
+
+- the standard php date format syntax can now also be used for localized dates, the icu syntax is no longer supported ([f904be4b1](https://github.com/marcantondahmen/automad/commit/f904be4b10dc81626b0679c7bf5d4ba757a97990))
+
+### New Features
+
+- the standard php date format syntax can now also be used for localized dates, the icu syntax is no longer supported ([f904be4b1](https://github.com/marcantondahmen/automad/commit/f904be4b10dc81626b0679c7bf5d4ba757a97990))
+
+### Bugfixes
+
+- clear cookies, local storage and session storage after reloading page when consent is revoked ([89e3eb13e](https://github.com/marcantondahmen/automad/commit/89e3eb13e7b52f257afb6b12fdd3dbd5a58eb53c))
+
+## [v2.0.0-alpha.35](https://github.com/marcantondahmen/automad/commit/8ad5c216bc5e8ecccfd1c5c821f91986a2fc4029)
+
+Wed, 14 May 2025 21:02:19 +0200
 
 ### Bugfixes
 
@@ -663,21 +679,3 @@ Wed, 13 Oct 2021 23:15:28 +0200
 - **ui**: fix empty button for registered users before the status has been updated ([268cc868d](https://github.com/marcantondahmen/automad/commit/268cc868d50b86b995bee2596999c1041dd3aa52))
 - **ui**: fix text modules for search and replace ([3e698295b](https://github.com/marcantondahmen/automad/commit/3e698295bda14a724aae109e3ec060c92e9d953c))
 - fix error when moving cache files to tmp on other drive ([8003aa6d4](https://github.com/marcantondahmen/automad/commit/8003aa6d48a30e550bced421a4d6bac39668aa07))
-
-## [v1.8.7](https://github.com/marcantondahmen/automad/commit/8bbc8f2da0b868efd22ae9459b1bbc539d65ba49)
-
-Thu, 9 Sep 2021 01:02:47 +0200
-
-### Breaking Changes
-
-- set required PHP version to 7.2+ ([8abbf5107](https://github.com/marcantondahmen/automad/commit/8abbf5107b1865a649a3bc05bf67006f3467e746))
-- **core**: refactor Parse class ([39a8c4f47](https://github.com/marcantondahmen/automad/commit/39a8c4f47c849392fcb438917d2c0a8ec7725eed))
-
-### New Features
-
-- set required PHP version to 7.2+ ([8abbf5107](https://github.com/marcantondahmen/automad/commit/8abbf5107b1865a649a3bc05bf67006f3467e746))
-
-### Bugfixes
-
-- **ui**: debounce status requests ([b3b54130b](https://github.com/marcantondahmen/automad/commit/b3b54130bc1b603a1834851876a2a6c396288523))
-- **ui**: fix switcher rendering in Safari ([2019c80ea](https://github.com/marcantondahmen/automad/commit/2019c80ea91fac2a2177917f02db8124694ab838))
