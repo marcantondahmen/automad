@@ -5,7 +5,8 @@
         "michelf/php-markdown": "^2.0",
         "symfony/mailer": "^7.0",
         "automad/language-packs": "dev-master",
-        "cocur/slugify": "^4.6"
+        "cocur/slugify": "^4.6",
+        "nesbot/carbon": "^3.9"
     },
     "config": {
         "preferred-install": {

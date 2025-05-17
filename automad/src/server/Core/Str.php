@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Carbon\Carbon;
 use Cocur\Slugify\Slugify;
 use Michelf\MarkdownExtra;
 
@@ -52,16 +53,6 @@ class Str {
 	/**
 	 * Change format of a given date, optionally according to locale settings.
 	 *
-	 * In case a date variable is set in a txt file, its format can be different to a timestamp (mtime) of a file or page.
-	 * To be independent on the given format without explicitly specifying it, strtotime() is used generate a proper input date.
-	 * To use DateTime::createFromFormat() instead would require a third parameter (the original format)
-	 * and would therefore make things more complicated than needed.
-	 * The format can use either the date() or ICU syntax. In case a locale is defined,
-	 * the ICU syntax is used.
-	 *
-	 * @see https://www.php.net/manual/en/intldateformatter.create.php
-	 * @see https://www.php.net/manual/en/intldateformatter.format.php
-	 * @see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
 	 * @see https://www.php.net/manual/en/datetime.format.php
 	 * @param string $date
 	 * @param string $format
@@ -73,26 +64,15 @@ class Str {
 			return '';
 		}
 
-		$date = strtotime($date);
+		Carbon::setLocale($locale ?? 'en');
+
+		$date = Carbon::parse($date);
 
 		if (!$date) {
 			return '';
 		}
 
-		if ($locale && class_exists('\IntlDateFormatter')) {
-			$formatter = new \IntlDateFormatter(
-				$locale,
-				\IntlDateFormatter::LONG,
-				\IntlDateFormatter::NONE,
-				null,
-				null,
-				$format
-			);
-
-			return $formatter->format($date);
-		}
-
-		return date($format, $date);
+		return $date->translatedFormat($format);
 	}
 
 	/**

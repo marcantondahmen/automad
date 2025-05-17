@@ -8,6 +8,17 @@ use PHPUnit\Framework\TestCase;
  * @testdox Automad\Core\Str
  */
 class StrTest extends TestCase {
+	public function dataForTestDateFormatEqual() {
+		return array(
+			array('2025-04-05T14:39:57+00:00', 'l, j. F Y', 'de', 'Samstag, 5. April 2025'),
+			array('2025-04-05T14:39:57+00:00', 'l, j. F Y', 'fr', 'samedi, 5. avril 2025'),
+			array('2025-04-05T14:39:57+00:00', 'l, j. F Y', 'nl', 'zaterdag, 5. april 2025'),
+			array('2025-04-05T14:39:57+00:00', 'l, j. F Y', null, 'Saturday, 5. April 2025'),
+			array('2025-04-05T14:39:57+00:00', 'Y-m-d H:i:s', null, '2025-04-05 14:39:57'),
+			array('2025-04-05T14:39:57+00:00', 'F j, Y, g:i a', 'en', 'April 5, 2025, 2:39 pm'),
+		);
+	}
+
 	public function dataForTestDefIsEqual() {
 		return array(
 			array('', 'Some string.', 'Some string.'),
@@ -59,6 +70,19 @@ class StrTest extends TestCase {
 		return array(
 			array('	<div>Test</div>', 'Test')
 		);
+	}
+
+	/**
+	 * @dataProvider dataForTestDateFormatEqual
+	 * @testdox dateFormat($date, $format, $locale) equals "$expected"
+	 * @param mixed $date
+	 * @param mixed $format
+	 * @param mixed $locale
+	 * @param mixed $expected
+	 */
+	public function testDateFormatIsEqual($date, $format, $locale, $expected) {
+		/** @disregard */
+		$this->assertEquals(Str::dateFormat($date, $format, $locale), $expected);
 	}
 
 	/**

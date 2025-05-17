@@ -1,1 +1,1 @@
-@{ date | dateFormat ('EEEE, d. MMMM Y', 'de_DE') }
+@{ date | dateFormat ('l, j. F Y', 'de') }
