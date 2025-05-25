@@ -60,13 +60,14 @@ export interface RepositoryCreationData {
 export interface Package {
 	name: string;
 	description: string;
-	url: string;
+	thumbnail: string;
 	repository: string;
-	image?: string;
-	readme?: string;
+	issues: string;
+	documentation: string;
 	outdated?: boolean;
 	installed?: boolean;
 	isDependency?: boolean;
 	latest?: string;
 	version?: string;
+	authors: { name: string; homepage: string }[];
 }

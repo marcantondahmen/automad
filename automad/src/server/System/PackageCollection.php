@@ -62,7 +62,7 @@ class PackageCollection {
 	 * @return array the list of packages
 	 */
 	public static function get(): array {
-		$apiResponse = Fetch::get('https://api.packages.automad.org');
+		$apiResponse = Fetch::get(AM_PACKAGE_REGISTRY);
 		$packages = json_decode($apiResponse, true);
 		$packages = array_values(
 			array_filter($packages, function (array $package) {

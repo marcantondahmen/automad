@@ -182,7 +182,13 @@ class PackageManagerController {
 		$exitCode = $Composer->run('remove ' . $package, $Messenger);
 
 		if ($exitCode !== 0) {
-			return $Response->setError($Messenger->getError());
+			$error = $Messenger->getError();
+
+			if (preg_match('/(Removal failed.*?it may be required by another package)/', $error, $matches)) {
+				$error = Text::get('packageIsDependencyError');
+			}
+
+			return $Response->setError($error);
 		}
 
 		Cache::clear();

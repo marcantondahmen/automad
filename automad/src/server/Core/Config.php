@@ -227,7 +227,7 @@ class Config {
 		self::set('AM_UPDATE_TEMP', AM_BASE_DIR . AM_DIR_CACHE . '/update');
 
 		// Packagist
-		self::set('AM_PACKAGE_REPO_QUERY', 'https://packagist.org/search.json?type=automad-package&per_page=100');
+		self::set('AM_PACKAGE_REGISTRY', 'https://registry.automad.org/v2/themes.json');
 		self::set('AM_PACKAGE_FILTER_REGEX', '.');
 
 		// I18n
