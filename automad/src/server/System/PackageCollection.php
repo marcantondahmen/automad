@@ -63,6 +63,11 @@ class PackageCollection {
 	 */
 	public static function get(): array {
 		$apiResponse = Fetch::get(AM_PACKAGE_REGISTRY);
+
+		if (empty($apiResponse)) {
+			return array();
+		}
+
 		$packages = json_decode($apiResponse, true);
 		$packages = array_values(
 			array_filter($packages, function (array $package) {

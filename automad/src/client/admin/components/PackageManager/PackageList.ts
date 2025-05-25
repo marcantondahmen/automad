@@ -38,6 +38,7 @@ import {
 	EventName,
 	html,
 	listen,
+	notifyError,
 	PackageManagerController,
 	requestAPI,
 } from '@/admin/core';
@@ -50,11 +51,13 @@ import { BaseComponent } from '@/admin/components/Base';
  * @returns the list of package objects
  */
 const getPackages = async (): Promise<Package[]> => {
-	const { data } = await requestAPI(
+	const { data, error } = await requestAPI(
 		PackageManagerController.getPackageCollection
 	);
 
-	if (!data) {
+	if (!data || error) {
+		notifyError(error);
+
 		return [];
 	}
 
@@ -108,33 +111,15 @@ class PackageListComponent extends BaseComponent {
 	 * Init the component.
 	 */
 	private async init(): Promise<void> {
-		try {
-			const packages = await getPackages();
+		const packages = await getPackages();
 
-			this.listContainer.innerHTML = '';
+		this.listContainer.innerHTML = '';
 
-			packages.forEach((pkg) => {
-				const card = create(
-					'am-package-card',
-					[],
-					{},
-					this.listContainer
-				);
+		packages.forEach((pkg) => {
+			const card = create('am-package-card', [], {}, this.listContainer);
 
-				card.data = pkg;
-			});
-		} catch (error) {
-			create(
-				'am-alert',
-				[],
-				{
-					icon: 'exclamation-circle',
-					type: 'danger',
-					text: 'packagistConnectionError',
-				},
-				this.listContainer
-			);
-		}
+			card.data = pkg;
+		});
 	}
 }
 

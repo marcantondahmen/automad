@@ -107,8 +107,13 @@ class PackageManagerController {
 	 */
 	public static function getPackageCollection(): Response {
 		$Response = new Response();
+		$packages = PackageCollection::get();
 
-		return $Response->setData(array('packages' => PackageCollection::get()));
+		if (empty($packages)) {
+			$Response->setError(Text::get('packageRegistryFetchError'));
+		}
+
+		return $Response->setData(array('packages' => $packages));
 	}
 
 	/**

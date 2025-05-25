@@ -317,6 +317,7 @@
 	"packagesUpdateAll": "Update All",
 	"packagesUpdatesAvailable": "There are package updates available",
 	"packagesUpdatingAll": "Updating packages ...",
+	"packageRegistryFetchError": "The package registry is currently unavailable.",
 	"packagistConnectionError": "Can't connect to the Packagist API",
 	"padding": "Padding",
 	"paddingBottom": "Spacing Bottom",
