@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-alpha.36](https://github.com/marcantondahmen/automad/commit/f904be4b10dc81626b0679c7bf5d4ba757a97990)
+## [v2.0.0-alpha.37](https://github.com/marcantondahmen/automad/commit/950205c4db7f980157fb622d43159fd754b76869)
 
-Sat, 17 May 2025 14:50:51 +0200
+Fri, 30 May 2025 20:41:14 +0200
+
+### Breaking Changes
+
+- use new curated registry for package manager that only includes a selection of themes and no longer supports extensions ([a300042dd](https://github.com/marcantondahmen/automad/commit/a300042dd6e8a0a98092236b092d3557856ffa97))
+
+### New Features
+
+- use new curated registry for package manager that only includes a selection of themes and no longer supports extensions ([a300042dd](https://github.com/marcantondahmen/automad/commit/a300042dd6e8a0a98092236b092d3557856ffa97))
+
+### Bugfixes
+
+- throw error during repository installation when auth is missing ([d41fa1bed](https://github.com/marcantondahmen/automad/commit/d41fa1bed8bac656ec6ffffcb0b87656aa0e623a))
+
+## [v2.0.0-alpha.36](https://github.com/marcantondahmen/automad/commit/73da6a57aec98c8b3bc5c11cd304cfbd9a551513)
+
+Sat, 17 May 2025 15:12:01 +0200
 
 ### Breaking Changes
 
@@ -653,29 +669,3 @@ Thu, 14 Oct 2021 13:11:38 +0200
 ### Bugfixes
 
 - **theme**: fix position of prev-next navigation ([83e9bf41f](https://github.com/marcantondahmen/automad/commit/83e9bf41fc26eb9e94df280f679fbafd23780d93))
-
-## [v1.9.0](https://github.com/marcantondahmen/automad/commit/dff5972edf04c435b853e573259021a4f6fc198d)
-
-Wed, 13 Oct 2021 23:15:28 +0200
-
-### Breaking Changes
-
-- set required PHP version to 7.4+ ([0ed244f30](https://github.com/marcantondahmen/automad/commit/0ed244f308340f685b17c4cfe305dae802d298e7))
-
-### New Features
-
-- **blocks**: add support for nested lists ([1c8966be6](https://github.com/marcantondahmen/automad/commit/1c8966be6b46713977c0f14b4ee164a641baa530))
-- **blocks**: upgrade table block ([0d8d8d0e0](https://github.com/marcantondahmen/automad/commit/0d8d8d0e0307f1bb16e65e374f1dd18c6f3bb077))
-- **engine**: add cache busting timestamps to assets ([8a06b4374](https://github.com/marcantondahmen/automad/commit/8a06b4374bab5cc016b7e7e0bd12211fc37f6ed0))
-- **engine**: improve template inheritance ([2a6baaa28](https://github.com/marcantondahmen/automad/commit/2a6baaa28ae297feddfa32fa6fb4c67a1b05be7b))
-- **engine**: snippets can't be redefined in order to enable a more flexible inheritance of templates ([8f0e7564b](https://github.com/marcantondahmen/automad/commit/8f0e7564b0afe4a4b0a51b628d08edcf69421e90))
-- **ui**: add option to change username and add email ([62a4e219b](https://github.com/marcantondahmen/automad/commit/62a4e219bb677ea37ac164a25c6207798ee34ee8))
-- **ui**: add option to invite users by email ([b281a8330](https://github.com/marcantondahmen/automad/commit/b281a8330a05295f74aec4679e94f03867e035fc))
-- **ui**: add option to reset passwords by email ([2abc11d10](https://github.com/marcantondahmen/automad/commit/2abc11d101d21bcd4eb9cb1b738f7c193d24de3f))
-- set required PHP version to 7.4+ ([0ed244f30](https://github.com/marcantondahmen/automad/commit/0ed244f308340f685b17c4cfe305dae802d298e7))
-
-### Bugfixes
-
-- **ui**: fix empty button for registered users before the status has been updated ([268cc868d](https://github.com/marcantondahmen/automad/commit/268cc868d50b86b995bee2596999c1041dd3aa52))
-- **ui**: fix text modules for search and replace ([3e698295b](https://github.com/marcantondahmen/automad/commit/3e698295bda14a724aae109e3ec060c92e9d953c))
-- fix error when moving cache files to tmp on other drive ([8003aa6d4](https://github.com/marcantondahmen/automad/commit/8003aa6d48a30e550bced421a4d6bac39668aa07))
