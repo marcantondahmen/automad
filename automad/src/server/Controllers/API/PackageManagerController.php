@@ -75,6 +75,8 @@ class PackageManagerController {
 		RepositoryCollection::add($name, $repositoryUrl, $branch, $platform, $Messenger);
 
 		if ($Messenger->getError()) {
+			RepositoryCollection::remove($name);
+
 			return $Response->setError($Messenger->getError());
 		}
 
@@ -107,8 +109,13 @@ class PackageManagerController {
 	 */
 	public static function getPackageCollection(): Response {
 		$Response = new Response();
+		$packages = PackageCollection::get();
 
-		return $Response->setData(array('packages' => PackageCollection::get()));
+		if (empty($packages)) {
+			$Response->setError(Text::get('packageRegistryFetchError'));
+		}
+
+		return $Response->setData(array('packages' => $packages));
 	}
 
 	/**
@@ -182,7 +189,13 @@ class PackageManagerController {
 		$exitCode = $Composer->run('remove ' . $package, $Messenger);
 
 		if ($exitCode !== 0) {
-			return $Response->setError($Messenger->getError());
+			$error = $Messenger->getError();
+
+			if (preg_match('/(Removal failed.*?it may be required by another package)/', $error, $matches)) {
+				$error = Text::get('packageIsDependencyError');
+			}
+
+			return $Response->setError($error);
 		}
 
 		Cache::clear();

@@ -159,11 +159,7 @@ const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
  * @param href
  * @param container
  */
-const createHeader = (
-	pkg: Package,
-	href: string,
-	container: HTMLElement
-): void => {
+const createHeader = (pkg: Package, container: HTMLElement): void => {
 	create(
 		'div',
 		[CSS.cardHeader],
@@ -177,13 +173,13 @@ const createHeader = (
 				<i class="bi bi-three-dots"></i>
 				<div class="${CSS.dropdownItems}">
 					<a
-						href="${href}"
+						href="${pkg.documentation}"
 						class="${CSS.dropdownLink}"
 						target="_blank"
 					>
 						<am-icon-text
 							${Attr.icon}="file-richtext"
-							${Attr.text}="Readme"
+							${Attr.text}="${App.text('packageDocumentation')}"
 						></am-icon-text>
 					</a>
 					<a
@@ -194,6 +190,16 @@ const createHeader = (
 						<am-icon-text
 							${Attr.icon}="git"
 							${Attr.text}="Repository"
+						></am-icon-text>
+					</a>
+					<a
+						href="${pkg.issues}"
+						class="${CSS.dropdownLink}"
+						target="_blank"
+					>
+						<am-icon-text
+							${Attr.icon}="bug"
+							${Attr.text}="Issues"
 						></am-icon-text>
 					</a>
 				</div>
@@ -210,11 +216,7 @@ const createHeader = (
  * @param container
  * @returns the preview element
  */
-const createPreview = (
-	pkg: Package,
-	href: string,
-	container: HTMLElement
-): void => {
+const createPreview = (pkg: Package, container: HTMLElement): void => {
 	const renderIcon = (container: HTMLElement) => {
 		create('i', ['bi', 'bi-box-seam'], {}, container);
 	};
@@ -222,7 +224,7 @@ const createPreview = (
 	const link = create(
 		'a',
 		[CSS.cardTeaser],
-		{ href, target: '_blank' },
+		{ href: pkg.documentation, target: '_blank' },
 		container
 	);
 
@@ -238,8 +240,8 @@ const createPreview = (
 		create('span', badgeCls, {}, link, badgeText.join(' '));
 	}
 
-	if (pkg.image) {
-		const img = create('img', [], { src: pkg.image }, link);
+	if (pkg.thumbnail) {
+		const img = create('img', [], { src: pkg.thumbnail }, link);
 
 		listen(img, 'error', () => {
 			img.remove();
@@ -311,10 +313,8 @@ class PackageCardComponent extends BaseComponent {
 		this.classList.add(CSS.card);
 		this.classList.toggle(CSS.cardActive, pkg.installed);
 
-		const href = `${packageBrowser}/${pkg.name}`;
-
-		createHeader(pkg, href, this);
-		createPreview(pkg, href, this);
+		createHeader(pkg, this);
+		createPreview(pkg, this);
 		createDescription(pkg, this);
 		createFooter(pkg, this);
 	}

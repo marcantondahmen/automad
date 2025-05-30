@@ -37,6 +37,8 @@
 namespace Automad\System\Composer\RepositoryAdapters;
 
 use Automad\Core\Debug;
+use Automad\Core\Messenger;
+use Automad\Core\Text;
 use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -77,11 +79,16 @@ abstract class AbstractAdapter {
 	 * @param string $name
 	 * @param string $repositoryUrl
 	 * @param string $branch
+	 * @param Messenger $Messenger
 	 */
-	public function __construct(string $name, string $repositoryUrl, string $branch) {
+	public function __construct(string $name, string $repositoryUrl, string $branch, Messenger $Messenger) {
 		$composerJson = Fetch::get($this->getComposerJsonUrl($repositoryUrl, $branch), $this->getHeaders());
 
-		Debug::log($composerJson);
+		Debug::log($composerJson, 'composer.json');
+
+		if (empty($composerJson)) {
+			$Messenger->setError(Text::get('repositoryComposerJsonError'));
+		}
 
 		$this->config = $composerJson ? json_decode($composerJson, true) : array();
 		$this->name = $name;
