@@ -388,6 +388,7 @@
 	"repositoryAddButton": "Install",
 	"repositoryAddInfo": "In order to add a private repository, please make sure that you have provided a valid access token for the platform where the repository is hosted.",
 	"repositoryAlreadyExistsError": "A similar repository or package already exists in your configuration",
+	"repositoryComposerJsonError": "An error occurred while attempting to download the <i>composer.json</i> file from the repository. Please check that the repository URL, package name and branch are correct, and ensure that the file exists at the root of the repository. Make sure you’ve provided the necessary authentication token — even for public repositories — as API access requires it.",
 	"repositoryRemove": "Remove",
 	"repositoryRemoveConfirm": "Do you really want to remove the repository and uninstall the related packages?",
 	"repositoryRemovedSuccess": "The repository was removed successfully",

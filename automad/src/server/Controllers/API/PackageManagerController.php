@@ -75,6 +75,8 @@ class PackageManagerController {
 		RepositoryCollection::add($name, $repositoryUrl, $branch, $platform, $Messenger);
 
 		if ($Messenger->getError()) {
+			RepositoryCollection::remove($name);
+
 			return $Response->setError($Messenger->getError());
 		}
 

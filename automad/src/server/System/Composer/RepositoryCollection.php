@@ -82,7 +82,7 @@ class RepositoryCollection {
 			}
 		}
 
-		$MetaData = self::getRepositoryAdapter($platform, $name, $repositoryUrl, $branch);
+		$MetaData = self::getRepositoryAdapter($platform, $name, $repositoryUrl, $branch, $Messenger);
 
 		$config['repositories'][] = $MetaData->getConfig();
 		$config['repositories'] = array_values($config['repositories']);
@@ -186,13 +186,14 @@ class RepositoryCollection {
 	 * @param string $name
 	 * @param string $repositoryUrl
 	 * @param string $branch
+	 * @param Messenger $Messenger
 	 * @return AbstractAdapter
 	 */
-	private static function getRepositoryAdapter(string $platform, string $name, string $repositoryUrl, string $branch): AbstractAdapter {
+	private static function getRepositoryAdapter(string $platform, string $name, string $repositoryUrl, string $branch, Messenger $Messenger): AbstractAdapter {
 		if ($platform == 'github') {
-			return new GitHubAdapter($name, $repositoryUrl, $branch);
+			return new GitHubAdapter($name, $repositoryUrl, $branch, $Messenger);
 		}
 
-		return new GitLabAdapter($name, $repositoryUrl, $branch);
+		return new GitLabAdapter($name, $repositoryUrl, $branch, $Messenger);
 	}
 }
