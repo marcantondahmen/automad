@@ -38,9 +38,11 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Automad;
+use Automad\Core\Blocks;
 use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\Core\Resolve;
+use Automad\Core\Str;
 use Automad\Models\Page;
 use Automad\Models\Pagelist;
 use Automad\System\Fields;
@@ -64,6 +66,7 @@ class PublicController {
 		$Response = new Response();
 		$Automad = Automad::fromCache();
 		$context = Request::query('context');
+		$stripTags = Request::query('stripTags');
 		$fields =  array_map(
 			function (string $field) {
 				return preg_replace('/[^\w_\+\:]+/', '', $field);
@@ -78,12 +81,24 @@ class PublicController {
 		$Pagelist->config($config);
 
 		$items = !empty($fields) ? array_map(
-			function (Page $Page) use ($fields) {
+			function (Page $Page) use ($fields, $stripTags, $Automad) {
 				$content = array();
 
 				foreach ($fields as $field) {
 					if ($field) {
-						$content[$field] = $Page->get($field);
+						if (strpos($field, '+') === 0) {
+							$value = Blocks::render(
+								$Page->get($field, true),
+								$Automad
+							);
+
+							$content[$field] = $stripTags ? Str::stripTags($value) : $value;
+						} elseif (strpos($field, 'text') === 0) {
+							$value = Str::markdown($Page->get($field));
+							$content[$field] = $stripTags ? Str::stripTags($value) : $value;
+						} else {
+							$content[$field] = $Page->get($field);
+						}
 					}
 				}
 
