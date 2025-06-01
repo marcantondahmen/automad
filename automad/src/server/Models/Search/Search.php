@@ -93,6 +93,11 @@ class Search {
 	private ?Shared $Shared;
 
 	/**
+	 * Strip tags before performing search.
+	 */
+	private ?bool $stripTags;
+
+	/**
 	 * Initialize a new search model for a search value, optionally used as a regular expression.
 	 *
 	 * @param string $searchValue
@@ -100,12 +105,14 @@ class Search {
 	 * @param bool $isCaseSensitive
 	 * @param array<string, Page> $pages
 	 * @param Shared|null $Shared
+	 * @param bool|null $stripTags
 	 */
-	public function __construct(string $searchValue, bool $isRegex, bool $isCaseSensitive, array $pages, ?Shared $Shared) {
+	public function __construct(string $searchValue, bool $isRegex, bool $isCaseSensitive, array $pages, ?Shared $Shared = null, ?bool $stripTags = false) {
 		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'ims';
 		$this->pages = $pages;
 		$this->Shared = $Shared;
+		$this->stripTags = $stripTags;
 
 		if ($isRegex) {
 			$this->searchValue = str_replace('/', '\/', $searchValue);
@@ -331,9 +338,13 @@ class Search {
 
 		$fieldMatches = array();
 
+		if ($this->stripTags) {
+			$value = Str::stripTags($value);
+		}
+
 		preg_match_all(
 			'/(?P<before>(?:^|\s).{0,50})(?P<match>' . $this->searchValue . ')(?P<after>.{0,50}(?:\s|$))/' . $this->regexFlags,
-			Str::stripTags($value),
+			$value,
 			$matches,
 			PREG_SET_ORDER
 		);
