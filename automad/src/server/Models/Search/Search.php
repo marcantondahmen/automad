@@ -36,6 +36,7 @@
 
 namespace Automad\Models\Search;
 
+use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\Page;
 use Automad\Models\Shared;
@@ -332,7 +333,7 @@ class Search {
 
 		preg_match_all(
 			'/(?P<before>(?:^|\s).{0,50})(?P<match>' . $this->searchValue . ')(?P<after>.{0,50}(?:\s|$))/' . $this->regexFlags,
-			$value,
+			Str::stripTags($value),
 			$matches,
 			PREG_SET_ORDER
 		);
