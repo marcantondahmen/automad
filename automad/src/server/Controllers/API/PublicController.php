@@ -66,7 +66,7 @@ class PublicController {
 		$Response = new Response();
 		$Automad = Automad::fromCache();
 		$context = Request::query('context');
-		$stripTags = Request::query('stripTags');
+		$shorten = Request::query('shorten');
 		$fields =  array_map(
 			function (string $field) {
 				return preg_replace('/[^\w_\+\:]+/', '', $field);
@@ -81,21 +81,17 @@ class PublicController {
 		$Pagelist->config($config);
 
 		$items = !empty($fields) ? array_map(
-			function (Page $Page) use ($fields, $stripTags, $Automad) {
+			function (Page $Page) use ($fields, $shorten, $Automad) {
 				$content = array();
 
 				foreach ($fields as $field) {
 					if ($field) {
 						if (strpos($field, '+') === 0) {
-							$value = Blocks::render(
-								$Page->get($field, true),
-								$Automad
-							);
-
-							$content[$field] = $stripTags ? Str::stripTags($value) : $value;
+							$value = Blocks::render($Page->get($field, true), $Automad);
+							$content[$field] = $shorten ? Str::shorten($value, $shorten) : $value;
 						} elseif (strpos($field, 'text') === 0) {
 							$value = Str::markdown($Page->get($field));
-							$content[$field] = $stripTags ? Str::stripTags($value) : $value;
+							$content[$field] = $shorten ? Str::shorten($value, $shorten) : $value;
 						} else {
 							$content[$field] = $Page->get($field);
 						}
