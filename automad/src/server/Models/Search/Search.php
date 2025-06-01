@@ -304,7 +304,24 @@ class Search {
 			Fields::TEMPLATE,
 			Fields::THEME,
 			Fields::URL,
-			Fields::TITLE
+			Fields::CUSTOM_CONSENT_ACCEPT,
+			Fields::CUSTOM_CONSENT_COLOR_BACKGROUND,
+			Fields::CUSTOM_CONSENT_COLOR_BORDER,
+			Fields::CUSTOM_CONSENT_COLOR_TEXT,
+			Fields::CUSTOM_CONSENT_DECLINE,
+			Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND,
+			Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT,
+			Fields::CUSTOM_CONSENT_PLACEHOLDER_TEXT,
+			Fields::CUSTOM_CONSENT_REVOKE,
+			Fields::CUSTOM_CONSENT_TEXT,
+			Fields::CUSTOM_CONSENT_TOOLTIP,
+			Fields::CUSTOM_CSS,
+			Fields::CUSTOM_HTML_BODY_END,
+			Fields::CUSTOM_HTML_HEAD,
+			Fields::CUSTOM_JS_BODY_END,
+			Fields::CUSTOM_JS_HEAD,
+			Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND,
+			Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT,
 		);
 
 		if (preg_match('/^(:|date|checkbox|tags|color)/', $field) || in_array($field, $ignoredKeys)) {
