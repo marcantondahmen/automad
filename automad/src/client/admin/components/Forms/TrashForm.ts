@@ -146,7 +146,7 @@ export class TrashFormComponent extends BaseComponent {
 			this
 		);
 
-		if (!data) {
+		if (!data.length) {
 			create(
 				'am-alert',
 				[],
