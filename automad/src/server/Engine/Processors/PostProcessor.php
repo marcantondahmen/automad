@@ -45,9 +45,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\I18n;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
-use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
-use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -94,6 +92,7 @@ class PostProcessor {
 		$MailAddressProcessor = new MailAddressProcessor();
 		$SyntaxHighlightingProcessor = new SyntaxHighlightingProcessor($this->Automad);
 		$ConsentProcessor = new ConsentProcessor($this->Automad);
+		$CustomizationProcessor = new CustomizationProcessor($this->Automad);
 
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->setLanguage($output);
@@ -102,7 +101,7 @@ class PostProcessor {
 		$output = $ConsentProcessor->addMetaTags($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
-		$output = $this->addCustomizations($output);
+		$output = $CustomizationProcessor->addCustomizations($output);
 		$output = $MetaProcessor->addMetaTags($output);
 		$output = $ConsentProcessor->encodeScript($output);
 		$output = $this->addCacheBustingTimestamps($output);
@@ -134,44 +133,6 @@ class PostProcessor {
 			},
 			$str
 		) ?? '';
-	}
-
-	/**
-	 * Add custom JS and CSS customizations.
-	 *
-	 * @param string $str
-	 * @return string The rendered output
-	 */
-	private function addCustomizations(string $str): string {
-		$Page = $this->Automad->Context->get();
-
-		$css = $Page->get(Fields::CUSTOM_CSS);
-		$htmlHead = $Page->get(Fields::CUSTOM_HTML_HEAD);
-		$htmlBodyEnd = $Page->get(Fields::CUSTOM_HTML_BODY_END);
-		$jsHead = $Page->get(Fields::CUSTOM_JS_HEAD);
-		$jsBodyEnd = $Page->get(Fields::CUSTOM_JS_BODY_END);
-
-		if ($htmlHead) {
-			$str = Head::append($str, $htmlHead);
-		}
-
-		if ($htmlBodyEnd) {
-			$str = Body::append($str, $htmlBodyEnd);
-		}
-
-		if ($jsHead) {
-			$str = Head::append($str, "<script>$jsHead</script>");
-		}
-
-		if ($jsBodyEnd) {
-			$str = Body::append($str, "<script>$jsBodyEnd</script>");
-		}
-
-		if ($css) {
-			$str = Head::append($str, "<style>$css</style>");
-		}
-
-		return $str;
 	}
 
 	/**

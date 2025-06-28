@@ -38,6 +38,7 @@ import {
 	create,
 	createField,
 	CSS,
+	getPageURL,
 	html,
 	listen,
 	query,
@@ -140,7 +141,11 @@ export const createCustomizationFields = (
 	sections: FieldSectionCollection,
 	shared: KeyValueMap = {}
 ) => {
-	const buildFieldProps = (field: string, label: string) => {
+	const buildFieldProps = (
+		field: string,
+		label: string,
+		sharedPlaceholder: boolean = true
+	) => {
 		const key = App.reservedFields[field];
 
 		return {
@@ -148,40 +153,70 @@ export const createCustomizationFields = (
 			label,
 			value: fields[key],
 			name: `data[${key}]`,
-			placeholder: shared[key] ?? '',
+			placeholder: sharedPlaceholder ? (shared[key] ?? '') : '',
 		};
 	};
 
 	create('p', [], {}, sections.customizations, App.text('customization'));
 
+	if (getPageURL()) {
+		create(
+			'div',
+			[CSS.alert],
+			{},
+			sections.customizations,
+			html`
+				<div class="${CSS.alertIcon}">
+					<i class="bi bi-layers"></i>
+				</div>
+				<div class="${CSS.alertText} ${CSS.flex} ${CSS.flexColumn}">
+					<div>${App.text('customizationMerge')}</div>
+					<div>
+						<am-link class="${CSS.button} ${CSS.buttonPrimary}"
+							>${App.text('sharedTitle')}</am-link
+						>
+					</div>
+				</div>
+			`
+		);
+	}
+
 	createField(
 		FieldTag.code,
 		sections.customizations,
-		buildFieldProps('CUSTOM_HTML_HEAD', App.text('customHTMLHead'))
+		buildFieldProps('CUSTOM_HTML_HEAD', App.text('customHTMLHead'), false)
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customizations,
-		buildFieldProps('CUSTOM_HTML_BODY_END', App.text('customHTMLBodyEnd'))
+		buildFieldProps(
+			'CUSTOM_HTML_BODY_END',
+			App.text('customHTMLBodyEnd'),
+			false
+		)
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customizations,
-		buildFieldProps('CUSTOM_JS_HEAD', App.text('customJSHead'))
+		buildFieldProps('CUSTOM_JS_HEAD', App.text('customJSHead'), false)
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customizations,
-		buildFieldProps('CUSTOM_JS_BODY_END', App.text('customJSBodyEnd'))
+		buildFieldProps(
+			'CUSTOM_JS_BODY_END',
+			App.text('customJSBodyEnd'),
+			false
+		)
 	);
 
 	createField(
 		FieldTag.code,
 		sections.customizations,
-		buildFieldProps('CUSTOM_CSS', App.text('customCSS'))
+		buildFieldProps('CUSTOM_CSS', App.text('customCSS'), false)
 	);
 
 	create('hr', [], {}, sections.customizations);
