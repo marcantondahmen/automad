@@ -144,7 +144,7 @@ class Selection {
 		$keywords = explode(' ', str_replace('/', ' ', Str::stripTags($str)));
 
 		foreach ($keywords as $keyword) {
-			$Search = new Search($keyword, false, false, $filtered, null);
+			$Search = new Search($keyword, false, false, $filtered, null, true);
 			$fileResultsArray = $Search->searchPerFile();
 			$filtered = array();
 

@@ -36,6 +36,7 @@
 
 namespace Automad\Models\Search;
 
+use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\Page;
 use Automad\Models\Shared;
@@ -92,6 +93,11 @@ class Search {
 	private ?Shared $Shared;
 
 	/**
+	 * Strip tags before performing search.
+	 */
+	private ?bool $stripTags;
+
+	/**
 	 * Initialize a new search model for a search value, optionally used as a regular expression.
 	 *
 	 * @param string $searchValue
@@ -99,12 +105,14 @@ class Search {
 	 * @param bool $isCaseSensitive
 	 * @param array<string, Page> $pages
 	 * @param Shared|null $Shared
+	 * @param bool|null $stripTags
 	 */
-	public function __construct(string $searchValue, bool $isRegex, bool $isCaseSensitive, array $pages, ?Shared $Shared) {
+	public function __construct(string $searchValue, bool $isRegex, bool $isCaseSensitive, array $pages, ?Shared $Shared = null, ?bool $stripTags = false) {
 		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'ims';
 		$this->pages = $pages;
 		$this->Shared = $Shared;
+		$this->stripTags = $stripTags;
 
 		if ($isRegex) {
 			$this->searchValue = str_replace('/', '\/', $searchValue);
@@ -304,7 +312,24 @@ class Search {
 			Fields::TEMPLATE,
 			Fields::THEME,
 			Fields::URL,
-			Fields::TITLE
+			Fields::CUSTOM_CONSENT_ACCEPT,
+			Fields::CUSTOM_CONSENT_COLOR_BACKGROUND,
+			Fields::CUSTOM_CONSENT_COLOR_BORDER,
+			Fields::CUSTOM_CONSENT_COLOR_TEXT,
+			Fields::CUSTOM_CONSENT_DECLINE,
+			Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND,
+			Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT,
+			Fields::CUSTOM_CONSENT_PLACEHOLDER_TEXT,
+			Fields::CUSTOM_CONSENT_REVOKE,
+			Fields::CUSTOM_CONSENT_TEXT,
+			Fields::CUSTOM_CONSENT_TOOLTIP,
+			Fields::CUSTOM_CSS,
+			Fields::CUSTOM_HTML_BODY_END,
+			Fields::CUSTOM_HTML_HEAD,
+			Fields::CUSTOM_JS_BODY_END,
+			Fields::CUSTOM_JS_HEAD,
+			Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND,
+			Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT,
 		);
 
 		if (preg_match('/^(:|date|checkbox|tags|color)/', $field) || in_array($field, $ignoredKeys)) {
@@ -312,6 +337,10 @@ class Search {
 		}
 
 		$fieldMatches = array();
+
+		if ($this->stripTags) {
+			$value = Str::stripTags($value);
+		}
 
 		preg_match_all(
 			'/(?P<before>(?:^|\s).{0,50})(?P<match>' . $this->searchValue . ')(?P<after>.{0,50}(?:\s|$))/' . $this->regexFlags,

@@ -95,7 +95,6 @@ class Composer {
 		}
 
 		putenv('COMPOSER_HOME=' . AM_DIR_TMP . '/composer_home');
-		require_once 'phar://' . $this->pharPath . '/src/bootstrap.php';
 
 		$decoded = self::readConfig();
 		$config = $decoded['config'] ?? array();
@@ -137,19 +136,25 @@ class Composer {
 		set_time_limit(0);
 		ini_set('memory_limit', '-1');
 
-		$input = new \Symfony\Component\Console\Input\StringInput($command);
-		$output = new \Symfony\Component\Console\Output\BufferedOutput();
-		$application = new \Composer\Console\Application();
-
-		$application->setAutoExit(false);
-		$application->setCatchExceptions(false);
-
 		Debug::log($command, 'Command');
 
 		$exitCode = 0;
 		$buffer = '';
 
 		try {
+			@include_once 'phar://' . $this->pharPath . '/src/bootstrap.php';
+
+			if (!class_exists('\Composer\Console\Application')) {
+				throw new \Exception('Error including from PHAR!');
+			}
+
+			$input = new \Symfony\Component\Console\Input\StringInput($command);
+			$output = new \Symfony\Component\Console\Output\BufferedOutput();
+			$application = new \Composer\Console\Application();
+
+			$application->setAutoExit(false);
+			$application->setCatchExceptions(false);
+
 			$exitCode = $application->run($input, $output);
 			$buffer = $output->fetch();
 			Debug::log($buffer, 'Buffer');
@@ -167,9 +172,13 @@ class Composer {
 				return 1;
 			}
 
-			$binFinder = new \Symfony\Component\Process\PhpExecutableFinder();
-			$php = $binFinder->find();
-			$php = $php ? $php : 'export PATH=' . strval(getenv('PATH')) . ' && php';
+			$php = self::findPhpBinary();
+
+			if (!$php) {
+				$Messenger->setError('PHP executable not found!');
+
+				return 1;
+			}
 
 			$execOutput = array();
 			exec("$php $this->pharPath $command 2>&1", $execOutput, $exitCode);
@@ -228,6 +237,35 @@ class Composer {
 			FileSystem::makeDir(self::INSTALL_DIR);
 
 			return Fetch::download($this->pharUrl, $this->pharPath);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Find a working PHP CLI binary.
+	 *
+	 * @return false|string
+	 */
+	private static function findPhpBinary(): string|false {
+		$binaries = array(
+			'php',
+			'/usr/bin/php',
+			'/usr/local/bin/php',
+			'/opt/homebrew/bin/php',
+			'/Applications/XAMPP/xamppfiles/bin/php',
+			'C:\php\php.exe',
+			'C:\xampp\php\php.exe'
+		);
+
+		putenv('PATH=' . strval(getenv('PATH')));
+
+		foreach ($binaries as $php) {
+			exec("$php -v", $output, $code);
+
+			if ($code === 0) {
+				return $php;
+			}
 		}
 
 		return false;
