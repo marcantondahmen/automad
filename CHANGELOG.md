@@ -1,8 +1,29 @@
 # Changelog
 
-## [v2.0.0-alpha.37](https://github.com/marcantondahmen/automad/commit/950205c4db7f980157fb622d43159fd754b76869)
+## [v2.0.0-alpha.38](https://github.com/marcantondahmen/automad/commit/e8be555fdc45618a2e45017562205b54b613a5f2)
 
-Fri, 30 May 2025 20:41:14 +0200
+Sat, 28 Jun 2025 18:24:18 +0200
+
+### Breaking Changes
+
+- merge shared and page customizations ([ad4c9022e](https://github.com/marcantondahmen/automad/commit/ad4c9022e6fbe58a175c93f159f2d51bb26b191c))
+
+### New Features
+
+- merge shared and page customizations ([ad4c9022e](https://github.com/marcantondahmen/automad/commit/ad4c9022e6fbe58a175c93f159f2d51bb26b191c))
+- add option to shorten a field value in the public pagelist api ([07448f26b](https://github.com/marcantondahmen/automad/commit/07448f26b1613d4681e31b061e708ccb0772d0c0))
+- improve composer compatibility ([f47d923b9](https://github.com/marcantondahmen/automad/commit/f47d923b9907ea6469f3f118c27ef9091fef51bd))
+- render content in public pagelist api route and optionally strip tags ([e7f63afae](https://github.com/marcantondahmen/automad/commit/e7f63afaed6f26e7235bf4e38b673ad042567cca))
+
+### Bugfixes
+
+- fix missing alert box for empty trash ([e8be555fd](https://github.com/marcantondahmen/automad/commit/e8be555fdc45618a2e45017562205b54b613a5f2))
+- ignore html tags when searching ([6a973a040](https://github.com/marcantondahmen/automad/commit/6a973a0402965c68061ab12fb45568bf222f5745))
+- update ignored fields in search model ([026c8257c](https://github.com/marcantondahmen/automad/commit/026c8257c72e233103dfeb51c8c2bbd001fc97c6))
+
+## [v2.0.0-alpha.37](https://github.com/marcantondahmen/automad/commit/b7160ecffc21255e0b9b4e090c14b2bc8f855be0)
+
+Fri, 30 May 2025 21:30:59 +0200
 
 ### Breaking Changes
 
@@ -657,15 +678,3 @@ Fri, 15 Oct 2021 22:08:49 +0200
 - **ui**: fix image select fields nested in narrow sections ([a4cd370c4](https://github.com/marcantondahmen/automad/commit/a4cd370c471fe55a026d59eecc568f0b426febd4))
 - **ui**: fix inline toolbar width on small devices ([18b941734](https://github.com/marcantondahmen/automad/commit/18b941734ecb8eefdbffec9a2461bf502e4561ee))
 - **ui**: fix scollbars showing up all the time on block editor toolbox ([6b9aceb2a](https://github.com/marcantondahmen/automad/commit/6b9aceb2a14c6c2bc102e5e03fc9f7128a7a5caa))
-
-## [v1.9.1](https://github.com/marcantondahmen/automad/commit/6d5c90724027d24010b4501daa411f856f673b25)
-
-Thu, 14 Oct 2021 13:11:38 +0200
-
-### New Features
-
-- **engine**: allow overriding of snippets after including a template ([f2ed64e6f](https://github.com/marcantondahmen/automad/commit/f2ed64e6f8ab4116c629d476067155e5f9b4c62d))
-
-### Bugfixes
-
-- **theme**: fix position of prev-next navigation ([83e9bf41f](https://github.com/marcantondahmen/automad/commit/83e9bf41fc26eb9e94df280f679fbafd23780d93))
