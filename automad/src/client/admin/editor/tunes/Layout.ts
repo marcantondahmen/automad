@@ -88,7 +88,7 @@ const getMainOptions = (): LayoutOption[] => [
 	},
 	{
 		layout: STRETCHED,
-		tooltip: App.text('layoutStretched'),
+		tooltip: App.text('layoutStretch'),
 		icon: layoutStretched,
 		cls: [CSS.editorTunesLayoutOption, CSS.editorTunesLayoutOptionLarge],
 	},
@@ -136,7 +136,7 @@ const createLayoutOption = (
 			create(
 				'label',
 				cls,
-				{ title: option.tooltip },
+				{ [Attr.tooltip]: option.tooltip },
 				wrapper,
 				option.icon
 			)

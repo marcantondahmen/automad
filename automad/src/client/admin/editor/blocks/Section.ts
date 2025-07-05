@@ -80,12 +80,24 @@ import iconMin from '@/common/svg/flex/min.svg';
  */
 export const sectionJustifyContentOptions: SectionToolbarRadioOptions<SectionJustifyContentOption> =
 	{
-		start: { icon: iconJustifyStart, tooltip: 'Start' },
-		center: { icon: iconJustifyCenter, tooltip: 'Center' },
-		end: { icon: iconJustifyEnd, tooltip: 'End' },
-		'space-between': { icon: iconJustifyBetween, tooltip: 'Space Evenly' },
-		'space-evenly': { icon: iconJustifyEvenly, tooltip: 'Space Evenly' },
-		'fill-row': { icon: iconFillRow, tooltip: 'Fill Row' },
+		start: {
+			icon: iconJustifyStart,
+			tooltip: 'flexJustifyStart',
+		},
+		center: {
+			icon: iconJustifyCenter,
+			tooltip: 'flexJustifyCenter',
+		},
+		end: { icon: iconJustifyEnd, tooltip: 'flexJustifyEnd' },
+		'space-between': {
+			icon: iconJustifyBetween,
+			tooltip: 'flexJustifyBetween',
+		},
+		'space-evenly': {
+			icon: iconJustifyEvenly,
+			tooltip: 'flexJustifyEvenly',
+		},
+		'fill-row': { icon: iconFillRow, tooltip: 'flexFillRow' },
 	} as const;
 
 /**
@@ -93,10 +105,13 @@ export const sectionJustifyContentOptions: SectionToolbarRadioOptions<SectionJus
  */
 export const sectionAlignItemsOptions: SectionToolbarRadioOptions<SectionAlignItemsOption> =
 	{
-		start: { icon: iconAlignStart, tooltip: 'Start' },
-		center: { icon: iconAlignCenter, tooltip: 'Center' },
-		end: { icon: iconAlignEnd, tooltip: 'End' },
-		stretch: { icon: iconAlignStretch, tooltip: 'Stretch' },
+		start: { icon: iconAlignStart, tooltip: 'flexAlignStart' },
+		center: { icon: iconAlignCenter, tooltip: 'flexAlignCenter' },
+		end: { icon: iconAlignEnd, tooltip: 'flexAlignEnd' },
+		stretch: {
+			icon: iconAlignStretch,
+			tooltip: 'flexAlignStretch',
+		},
 	} as const;
 
 /**
@@ -168,7 +183,7 @@ const createRadioInput = (
 	name: string,
 	value: string,
 	icon: string,
-	title: string,
+	tooltip: string,
 	selected: string,
 	container: HTMLElement
 ): void => {
@@ -188,7 +203,7 @@ const createRadioInput = (
 					? [CSS.editorBlockSectionRadioActive]
 					: []),
 			],
-			{ title },
+			{ [Attr.tooltip]: App.text(tooltip) },
 			container,
 			icon
 		)
