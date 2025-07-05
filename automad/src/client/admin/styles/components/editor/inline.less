@@ -40,6 +40,12 @@
 	box-shadow: @am-shadow;
 	min-height: ~'calc(@{am-bl-editor-inline-toolbar-height} + (2 * @{am-modal-border-width}))';
 
+	// --x and --diff-right are calculated inside the LayoutTune component.
+	--estimated-width: 500px;
+	--right: ~'min(var(--estimated-width), var(--diff-right))';
+	--shift: ~'calc(var(--x) + var(--right) - var(--estimated-width) - 100px)';
+	transform: translateX(var(--shift));
+
 	&__toggler-and-button-wrapper {
 		display: flex;
 		align-items: stretch;

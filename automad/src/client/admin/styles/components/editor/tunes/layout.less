@@ -22,39 +22,57 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { fractions } from '@/admin/editor/tunes/Layout';
+.am-c-ed-tu-layout {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 4px;
+	padding: 4px;
+	margin: 0 -3px;
+	width: auto;
+	border-bottom: @am-border;
 
-export type ClassTuneData = string;
+	&__option {
+		--span: 1;
+		grid-column: span var(--span);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 2.15rem;
+		border-radius: 3px;
+		cursor: pointer;
+		color: hsl(var(--am-clr-text-muted));
+		background-color: hsl(var(--am-clr-background-faded));
+		transition:
+			color 0.2s,
+			background-color 0.2s;
 
-export type IdTuneData = string;
+		& svg {
+			height: 1.15rem !important;
+			width: auto !important;
+		}
 
-export interface SpacingTuneData {
-	top: string;
-	right: string;
-	bottom: string;
-	left: string;
-}
+		& input {
+			display: none;
+		}
 
-export type LayoutFraction = (typeof fractions)[number];
+		&--large {
+			--span: 3;
+		}
 
-export interface LayoutOption {
-	layout: LayoutFraction | 'stretched' | '';
-	tooltip: string;
-	icon: string;
-	cls: string[];
-}
-
-export interface LayoutTuneData {
-	stretched: boolean;
-	width: LayoutFraction | '';
+		&:hover,
+		&--active {
+			color: hsl(var(--am-clr-text-primary));
+			background-color: hsl(var(--am-clr-background-primary));
+		}
+	}
 }

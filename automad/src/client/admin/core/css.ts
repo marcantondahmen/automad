@@ -151,10 +151,18 @@ export const enum CSS {
 	editorBlockSectionLabel = 'am-c-ed-bl-section__label',
 	editorBlockSectionToolbar = 'am-c-ed-bl-section__toolbar',
 	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
+	editorBlockSectionRadios = 'am-c-ed-bl-section__radios',
+	editorBlockSectionRadio = 'am-c-ed-bl-section__radio',
+	editorBlockSectionRadioActive = 'am-c-ed-bl-section__radio--active',
 
 	editorBlockVideo = 'am-c-ed-bl-video',
 	editorBlockVideoList = 'am-c-ed-bl-video__list',
 	editorBlockVideoListItem = 'am-c-ed-bl-video__list-item',
+
+	editorTunesLayout = 'am-c-ed-tu-layout',
+	editorTunesLayoutOption = 'am-c-ed-tu-layout__option',
+	editorTunesLayoutOptionLarge = 'am-c-ed-tu-layout__option--large',
+	editorTunesLayoutOptionActive = 'am-c-ed-tu-layout__option--active',
 
 	editorPopoverForm = 'am-c-ed-popover__form',
 

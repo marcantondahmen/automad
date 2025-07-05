@@ -56,34 +56,48 @@ import {
 	SectionBlockData,
 	SectionJustifyContentOption,
 	SectionStyle,
+	SectionToolbarRadioOptions,
 	SelectComponentOption,
 } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { API } from 'automad-editorjs';
+import iconAlignStart from '@/common/svg/flex/align-start.svg';
+import iconAlignCenter from '@/common/svg/flex/align-center.svg';
+import iconAlignEnd from '@/common/svg/flex/align-end.svg';
+import iconAlignStretch from '@/common/svg/flex/align-stretch.svg';
+import iconFillRow from '@/common/svg/flex/fill-row.svg';
+import iconJustifyStart from '@/common/svg/flex/justify-start.svg';
+import iconJustifyCenter from '@/common/svg/flex/justify-center.svg';
+import iconJustifyEnd from '@/common/svg/flex/justify-end.svg';
+import iconJustifyBetween from '@/common/svg/flex/justify-between.svg';
+import iconJustifyEvenly from '@/common/svg/flex/justify-evenly.svg';
+import iconGap from '@/common/svg/flex/gap.svg';
+import iconMin from '@/common/svg/flex/min.svg';
 
 /**
  * The flexbox option for "justify-content".
  */
-export const sectionJustifyContentOptions = {
-	start: 'Start',
-	end: 'End',
-	center: 'Center',
-	'space-between': 'Space Between',
-	'space-evenly': 'Space Evenly',
-	'fill-row': 'Fill Row',
-} as const;
+export const sectionJustifyContentOptions: SectionToolbarRadioOptions<SectionJustifyContentOption> =
+	{
+		start: { icon: iconJustifyStart, tooltip: 'Start' },
+		center: { icon: iconJustifyCenter, tooltip: 'Center' },
+		end: { icon: iconJustifyEnd, tooltip: 'End' },
+		'space-between': { icon: iconJustifyBetween, tooltip: 'Space Evenly' },
+		'space-evenly': { icon: iconJustifyEvenly, tooltip: 'Space Evenly' },
+		'fill-row': { icon: iconFillRow, tooltip: 'Fill Row' },
+	} as const;
 
 /**
  * The flexbox option for "align-items".
  */
-export const sectionAlignItemsOptions = {
-	normal: 'Normal',
-	stretch: 'Stretch',
-	center: 'Center',
-	start: 'Start',
-	end: 'End',
-} as const;
+export const sectionAlignItemsOptions: SectionToolbarRadioOptions<SectionAlignItemsOption> =
+	{
+		start: { icon: iconAlignStart, tooltip: 'Start' },
+		center: { icon: iconAlignCenter, tooltip: 'Center' },
+		end: { icon: iconAlignEnd, tooltip: 'End' },
+		stretch: { icon: iconAlignStretch, tooltip: 'Stretch' },
+	} as const;
 
 /**
  * Background blend modes for the section's background image.
@@ -139,6 +153,61 @@ export const styleDefaults: SectionStyle = {
 	paddingBottom: '',
 	overflowHidden: false,
 } as const;
+
+/**
+ * Create a radio button input.
+ *
+ * @param value
+ * @param icon
+ * @param title
+ * @param selected
+ * @param container
+ *
+ */
+const createRadioInput = (
+	name: string,
+	value: string,
+	icon: string,
+	title: string,
+	selected: string,
+	container: HTMLElement
+): void => {
+	create<HTMLInputElement>(
+		'input',
+		[],
+		{
+			type: 'radio',
+			name,
+			value,
+		},
+		create(
+			'label',
+			[
+				CSS.editorBlockSectionRadio,
+				...(value === selected
+					? [CSS.editorBlockSectionRadioActive]
+					: []),
+			],
+			{ title },
+			container,
+			icon
+		)
+	).checked = value === selected;
+};
+
+/**
+ * Toggle the active class on the checked radio.
+ *
+ * @param wrapper
+ */
+const toggleActiveRadio = (wrapper: HTMLElement): void => {
+	queryAll<HTMLInputElement>('input', wrapper).forEach((input) => {
+		input.parentElement.classList.toggle(
+			CSS.editorBlockSectionRadioActive,
+			input.checked
+		);
+	});
+};
 
 /**
  * The Section block that create a new editor inside a parent editor
@@ -200,7 +269,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			content: data.content || {},
 			style: Object.assign({}, styleDefaults, data.style),
 			justify: data.justify || 'start',
-			align: data.align || 'normal',
+			align: data.align || 'start',
 			gap: data.gap !== undefined ? data.gap : '',
 			minBlockWidth:
 				data.minBlockWidth !== undefined ? data.minBlockWidth : '',
@@ -298,16 +367,8 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		this.renderStylesButton(toolbar);
 		this.renderJustifySelect(toolbar);
 		this.renderAlignSelect(toolbar);
-		this.renderNumberUnitInput(
-			toolbar,
-			'gap',
-			'<i class="bi bi-columns-gap"></i>'
-		);
-		this.renderNumberUnitInput(
-			toolbar,
-			'minBlockWidth',
-			'<i class="bi bi-arrows"></i>'
-		);
+		this.renderNumberUnitInput(toolbar, 'gap', iconGap);
+		this.renderNumberUnitInput(toolbar, 'minBlockWidth', iconMin);
 
 		// Add this hidden input in order to catch the focus after a block has been dragged around.
 		create('input', [CSS.displayNone], {}, toolbar);
@@ -381,41 +442,33 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 * @param toolbar
 	 */
 	private renderJustifySelect(toolbar: HTMLElement): void {
-		const justifySelectOptions = Object.keys(
-			sectionJustifyContentOptions
-		).reduce((result, key: SectionJustifyContentOption) => {
-			result.push({
-				text: sectionJustifyContentOptions[key],
-				value: key,
-			});
-
-			return result;
-		}, []);
-		const formGroup = create(
-			'span',
-			[CSS.formGroup],
+		const wrapper = create(
+			'div',
+			[CSS.editorBlockSectionRadios],
 			{},
-			toolbar,
-			html`
-				<span class="${CSS.formGroupItem} ${CSS.formGroupIcon}">
-					<i class="bi bi-distribute-horizontal"></i>
-				</span>
-			`
+			toolbar
 		);
 
-		const justify = createSelect(
-			justifySelectOptions,
-			this.data.justify,
-			formGroup,
-			null,
-			null,
-			'',
-			[CSS.formGroupItem, CSS.selectInline]
-		);
+		for (const [value, { icon, tooltip }] of Object.entries(
+			sectionJustifyContentOptions
+		)) {
+			createRadioInput(
+				'justify',
+				value,
+				icon,
+				tooltip,
+				this.data.justify,
+				wrapper
+			);
+		}
 
-		listen(justify.select, 'change', () => {
-			this.data.justify = justify.value as SectionJustifyContentOption;
+		listen(wrapper, 'change', () => {
+			const { justify } = collectFieldData(wrapper);
+
+			this.data.justify = justify as SectionJustifyContentOption;
 			this.blockAPI.dispatchChange();
+
+			toggleActiveRadio(wrapper);
 		});
 	}
 
@@ -425,42 +478,33 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 * @param toolbar
 	 */
 	private renderAlignSelect(toolbar: HTMLElement): void {
-		const alignSelectOptions = Object.keys(sectionAlignItemsOptions).reduce(
-			(result, key: SectionAlignItemsOption) => {
-				result.push({
-					text: sectionAlignItemsOptions[key],
-					value: key,
-				});
-
-				return result;
-			},
-			[]
-		);
-		const formGroup = create(
-			'span',
-			[CSS.formGroup],
+		const wrapper = create(
+			'div',
+			[CSS.editorBlockSectionRadios],
 			{},
-			toolbar,
-			html`
-				<span class="${CSS.formGroupItem} ${CSS.formGroupIcon}">
-					<i class="bi bi-distribute-vertical"></i>
-				</span>
-			`
+			toolbar
 		);
 
-		const align = createSelect(
-			alignSelectOptions,
-			this.data.align,
-			formGroup,
-			null,
-			null,
-			'',
-			[CSS.formGroupItem, CSS.selectInline]
-		);
+		for (const [value, { icon, tooltip }] of Object.entries(
+			sectionAlignItemsOptions
+		)) {
+			createRadioInput(
+				'align',
+				value,
+				icon,
+				tooltip,
+				this.data.align,
+				wrapper
+			);
+		}
 
-		listen(align.select, 'change', () => {
-			this.data.align = align.value as SectionAlignItemsOption;
+		listen(wrapper, 'change', () => {
+			const { align } = collectFieldData(wrapper);
+
+			this.data.align = align as SectionAlignItemsOption;
 			this.blockAPI.dispatchChange();
+
+			toggleActiveRadio(wrapper);
 		});
 	}
 

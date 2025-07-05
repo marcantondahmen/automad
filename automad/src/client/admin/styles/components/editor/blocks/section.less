@@ -70,6 +70,40 @@
 		}
 	}
 
+	&__radios {
+		display: flex;
+		align-items: stretch;
+		gap: 4px;
+		padding: 0 4px;
+		background-color: hsl(var(--am-clr-background-faded));
+		border-radius: @am-form-radius;
+		border: @am-form-border;
+	}
+
+	&__radio {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 2px;
+		cursor: pointer;
+		color: hsl(var(--am-clr-text-muted));
+		transition: color 0.2s;
+
+		& svg {
+			height: 1.3rem !important;
+			width: auto !important;
+		}
+
+		& input {
+			display: none;
+		}
+
+		&:hover,
+		&--active {
+			color: hsl(var(--am-clr-text-primary));
+		}
+	}
+
 	&__label {
 		position: relative;
 		display: flex;
