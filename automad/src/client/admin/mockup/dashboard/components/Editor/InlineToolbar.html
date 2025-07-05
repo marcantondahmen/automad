@@ -1,0 +1,275 @@
+<!-- Editor/InlineToolbar.html -->
+<div
+	class="ce-inline-toolbar ce-inline-toolbar--showed"
+	style="left: 220px; top: 60px; --x: 131px; --diff-right: 900px"
+>
+	<div class="ce-inline-toolbar__toggler-and-button-wrapper">
+		<div class="ce-inline-toolbar__dropdown">
+			<div class="ce-inline-toolbar__dropdown-content">
+				<i class="bi bi-text-paragraph"></i>
+			</div>
+			<div class="ce-inline-toolbar__dropdown-arrow">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					fill="none"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-width="2"
+						d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"
+					></path>
+				</svg>
+			</div>
+		</div>
+		<div class="ce-inline-toolbar__buttons">
+			<button class="ce-inline-tool" type="button" data-tool="alignLeft">
+				<i class="bi bi-text-left"></i></button
+			><button
+				class="ce-inline-tool"
+				type="button"
+				data-tool="alignCenter"
+			>
+				<i class="bi bi-text-center"></i></button
+			><button
+				class="ce-inline-tool"
+				type="button"
+				data-tool="alignRight"
+			>
+				<i class="bi bi-text-right"></i></button
+			><button class="ce-inline-tool" type="button" data-tool="bold">
+				<i class="bi bi-type-bold"></i></button
+			><button class="ce-inline-tool" type="button" data-tool="italic">
+				<i class="bi bi-type-italic"></i></button
+			><button class="ce-inline-tool" type="button" data-tool="fontSize">
+				<i class="bi bi-fonts"></i></button
+			><button
+				class="ce-inline-tool"
+				type="button"
+				data-tool="lineHeight"
+			>
+				<i class="bi bi-distribute-vertical"></i></button
+			><button class="ce-inline-tool" type="button" data-tool="link">
+				<i class="bi bi-link-45deg"></i></button
+			><button
+				class="ce-inline-tool"
+				type="button"
+				data-tool="codeInline"
+			>
+				<i class="bi bi-code"></i></button
+			><button class="ce-inline-tool" type="button" data-tool="underline">
+				<i class="bi bi-type-underline"></i></button
+			><button
+				class="ce-inline-tool"
+				type="button"
+				data-tool="strikeThrough"
+			>
+				<i class="bi bi-type-strikethrough"></i></button
+			><button class="ce-inline-tool" type="button" data-tool="color">
+				<i class="bi bi-paint-bucket"></i>
+			</button>
+		</div>
+	</div>
+	<div class="ce-inline-toolbar__actions">
+		<div hidden="">
+			<div class="am-c-field">
+				<label class="am-c-field__label"> Font Size </label
+				><am-select class="am-f-select"
+					><span>100%</span
+					><select>
+						<option value="70%">70%</option>
+						<option value="80%">80%</option>
+						<option value="90%">90%</option>
+						<option value="100%">100%</option>
+						<option value="110%">110%</option>
+						<option value="120%">120%</option>
+						<option value="130%">130%</option>
+						<option value="150%">150%</option>
+						<option value="175%">175%</option>
+						<option value="200%">200%</option>
+						<option value="250%">250%</option>
+						<option value="300%">300%</option>
+						<option value="350%">350%</option>
+						<option value="400%">400%</option>
+						<option value="450%">450%</option>
+						<option value="500%">500%</option>
+					</select></am-select
+				>
+			</div>
+		</div>
+		<div hidden="">
+			<div class="am-c-field">
+				<label class="am-c-field__label"> Line height </label
+				><am-select class="am-f-select"
+					><span>normal</span
+					><select>
+						<option value="normal">normal</option>
+						<option value="100%">100%</option>
+						<option value="105%">105%</option>
+						<option value="110%">110%</option>
+						<option value="115%">115%</option>
+						<option value="120%">120%</option>
+						<option value="125%">125%</option>
+						<option value="130%">130%</option>
+						<option value="135%">135%</option>
+						<option value="140%">140%</option>
+						<option value="145%">145%</option>
+						<option value="150%">150%</option>
+						<option value="155%">155%</option>
+						<option value="160%">160%</option>
+						<option value="165%">165%</option>
+						<option value="170%">170%</option>
+						<option value="175%">175%</option>
+						<option value="180%">180%</option>
+					</select></am-select
+				>
+			</div>
+		</div>
+		<div hidden="">
+			<div class="am-c-field">
+				<label class="am-c-field__label">Link</label
+				><am-autocomplete-url class="am-c-dropdown"
+					><input class="am-f-input" type="text" />
+					<div
+						class="am-c-dropdown__items am-c-dropdown__items--autocomplete"
+					>
+						<a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>Typography</span></am-icon-text
+							></a
+						><a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>Welcome</span></am-icon-text
+							></a
+						><a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>Consent Test</span></am-icon-text
+							></a
+						><a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>Custom Consent</span></am-icon-text
+							></a
+						><a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>Date Test</span></am-icon-text
+							></a
+						><a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>About</span></am-icon-text
+							></a
+						><a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>Gallery Test</span></am-icon-text
+							></a
+						><a class="am-c-dropdown__link"
+							><am-icon-text class="am-c-icon-text"
+								><i class="bi bi-link"></i
+								><span>Page Sidebar</span></am-icon-text
+							></a
+						>
+					</div></am-autocomplete-url
+				>
+			</div>
+			<am-toggle-field class="am-c-field"
+				><div>
+					<label
+						class="am-c-field__label"
+						for="am-field__LgRomC9MaGRBw8b8gzFgEOaVHLvCw92g"
+						><span>Open in a new tab</span></label
+					>
+				</div>
+				<div class="am-f-toggle am-f-toggle--button">
+					<input
+						value="1"
+						id="am-field__LgRomC9MaGRBw8b8gzFgEOaVHLvCw92g"
+						name="target"
+						type="checkbox"
+						spellcheck="false"
+					/><label for="am-field__LgRomC9MaGRBw8b8gzFgEOaVHLvCw92g"
+						><i class="bi"></i><span>Open in a new tab</span></label
+					>
+				</div></am-toggle-field
+			>
+		</div>
+		<div class="am-l-grid am-l-grid--auto" hidden="">
+			<am-color-field class="am-c-field"
+				><div>
+					<label
+						class="am-c-field__label"
+						for="am-field__sgM4tO8QVF2Msl1Z7aUGbRoupfBUTMQp"
+						><span>Text Color</span></label
+					>
+				</div>
+				<div class="am-f-input-combo">
+					<input
+						class="am-f-input am-u-text-mono"
+						id="am-field__sgM4tO8QVF2Msl1Z7aUGbRoupfBUTMQp"
+						name="color"
+						value=""
+						type="text"
+						spellcheck="false"
+					/><span class="am-f-input-combo__color"
+						><input type="color" value="" spellcheck="false"
+					/></span></div></am-color-field
+			><am-color-field class="am-c-field"
+				><div>
+					<label
+						class="am-c-field__label"
+						for="am-field__xvgSHZSi1JRsZZ2aQZC7X1FChH0xaLP8"
+						><span>Background Color</span></label
+					>
+				</div>
+				<div class="am-f-input-combo">
+					<input
+						class="am-f-input am-u-text-mono"
+						id="am-field__xvgSHZSi1JRsZZ2aQZC7X1FChH0xaLP8"
+						name="backgroundColor"
+						value=""
+						type="text"
+						spellcheck="false"
+					/><span class="am-f-input-combo__color"
+						><input type="color" value="" spellcheck="false"
+					/></span></div
+			></am-color-field>
+		</div>
+	</div>
+	<div class="ce-conversion-toolbar">
+		<div class="ce-conversion-toolbar__label">Convert to</div>
+		<div class="ce-conversion-toolbar__tools">
+			<div class="ce-conversion-tool" data-tool="paragraph">
+				<div class="ce-conversion-tool__icon">
+					<i class="bi bi-text-paragraph"></i>
+				</div>
+				Text
+			</div>
+			<div class="ce-conversion-tool" data-tool="header">
+				<div class="ce-conversion-tool__icon">
+					<i class="bi bi-type-h1"></i>
+				</div>
+				Heading
+			</div>
+			<div class="ce-conversion-tool" data-tool="nestedList">
+				<div class="ce-conversion-tool__icon">
+					<i class="bi bi-list-ul"></i>
+				</div>
+				List
+			</div>
+			<div class="ce-conversion-tool" data-tool="quote">
+				<div class="ce-conversion-tool__icon">
+					<i class="bi bi-quote"></i>
+				</div>
+				Blockquote
+			</div>
+		</div>
+	</div>
+</div>

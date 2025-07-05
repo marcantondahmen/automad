@@ -1,0 +1,566 @@
+<!-- Editor/SectionToolbar.html -->
+<div
+	class="am-c-ed-bl-section__toolbar am-active"
+	style="transform: translateX(0px)"
+>
+	<am-modal-toggle
+		class="am-e-button am-e-button--icon am-e-button--primary"
+		am-tooltip="Edit Style"
+		><i class="bi bi-palette2"></i
+	></am-modal-toggle>
+	<div class="am-c-ed-bl-section__radios">
+		<label
+			class="am-c-ed-bl-section__radio am-c-ed-bl-section__radio--active"
+			am-tooltip="Align content left"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="7"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="19"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="justify" value="start" /></label
+		><label
+			class="am-c-ed-bl-section__radio"
+			am-tooltip="Horizontally center content"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="12"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="24"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="justify" value="center" /></label
+		><label
+			class="am-c-ed-bl-section__radio"
+			am-tooltip="Align content right"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="17"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="29"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="justify" value="end" /></label
+		><label
+			class="am-c-ed-bl-section__radio"
+			am-tooltip="Add space between elements"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="7"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="29"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="justify" value="space-between" /></label
+		><label
+			class="am-c-ed-bl-section__radio"
+			am-tooltip="Justify elements evenly"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="10"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="26"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="justify" value="space-evenly" /></label
+		><label
+			class="am-c-ed-bl-section__radio"
+			am-tooltip="Stretch content in order to fill row"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="7"
+					y="7"
+					width="13"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="24"
+					y="7"
+					width="13"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="justify" value="fill-row"
+		/></label>
+	</div>
+	<div class="am-c-ed-bl-section__radios">
+		<label
+			class="am-c-ed-bl-section__radio am-c-ed-bl-section__radio--active"
+			am-tooltip="Stretch content from top to bottom"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="12"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="24"
+					y="7"
+					width="8"
+					height="19"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="7"
+					y="7"
+					width="30"
+					height="2"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="align" value="start" /></label
+		><label
+			class="am-c-ed-bl-section__radio"
+			am-tooltip="Vertically align content to the center"
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="12"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="24"
+					y="13"
+					width="8"
+					height="18"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="7"
+					y="21"
+					width="30"
+					height="2"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="align" value="center" /></label
+		><label class="am-c-ed-bl-section__radio" am-tooltip=""
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="12"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="24"
+					y="18"
+					width="8"
+					height="19"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="7"
+					y="35"
+					width="30"
+					height="2"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="align" value="end" /></label
+		><label class="am-c-ed-bl-section__radio" am-tooltip=""
+			><svg
+				width="44"
+				height="44"
+				viewBox="0 0 44 44"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					x="1.5"
+					y="1.5"
+					width="41"
+					height="41"
+					rx="5.5"
+					stroke="currentColor"
+					stroke-width="3"
+				></rect>
+				<rect
+					x="12"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="24"
+					y="7"
+					width="8"
+					height="30"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="8"
+					y="7"
+					width="28"
+					height="2"
+					rx="1"
+					fill="currentColor"
+				></rect>
+				<rect
+					x="8"
+					y="35"
+					width="28"
+					height="2"
+					rx="1"
+					fill="currentColor"
+				></rect>
+			</svg>
+			<input type="radio" name="align" value="stretch"
+		/></label>
+	</div>
+	<span class="am-f-group"
+		><span class="am-f-group__item am-f-group__icon">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 44 44"
+				height="44"
+				width="44"
+			>
+				<rect
+					fill="currentColor"
+					rx="1"
+					height="44"
+					width="4"
+					x="14"
+				></rect>
+				<rect
+					fill="currentColor"
+					rx="1"
+					height="44"
+					width="4"
+					x="26"
+				></rect>
+				<line
+					stroke-linecap="round"
+					stroke-width="3"
+					stroke="currentColor"
+					y2="30"
+					x2="2.12132"
+					y1="22.1213"
+					x1="10"
+				></line>
+				<line
+					stroke-linecap="round"
+					stroke-width="3"
+					stroke="currentColor"
+					transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 10 24)"
+					y2="-1.5"
+					x2="12.6421"
+					y1="-1.5"
+					x1="1.5"
+				></line>
+				<line
+					stroke-linecap="round"
+					stroke-width="3"
+					stroke="currentColor"
+					transform="matrix(0.707107 0.707107 0.707107 -0.707107 34 20)"
+					y2="-1.5"
+					x2="12.6421"
+					y1="-1.5"
+					x1="1.5"
+				></line>
+				<line
+					stroke-linecap="round"
+					stroke-width="3"
+					stroke="currentColor"
+					y2="14"
+					x2="41.8787"
+					y1="21.8787"
+					x1="34"
+				></line>
+			</svg> </span
+		><span class="am-f-group__item am-f-group am-f-number-unit"
+			><input
+				class="am-f-input am-f-group__item"
+				type="number"
+				step="1"
+				value="50"
+			/><am-select class="am-f-group__item am-f-select"
+				><span>px</span
+				><select>
+					<option value="px">px</option>
+					<option value="%">%</option>
+					<option value="rem">rem</option>
+					<option value="em">em</option>
+					<option value="vh">vh</option>
+					<option value="vw">vw</option>
+				</select></am-select
+			></span
+		></span
+	><span class="am-f-group"
+		><span class="am-f-group__item am-f-group__icon">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 44 44"
+				height="44"
+				width="44"
+			>
+				<rect
+					fill="currentColor"
+					rx="1"
+					height="3"
+					width="44"
+					y="31.2695"
+				></rect>
+				<path
+					fill="currentColor"
+					d="M40 7.10286C40.5523 7.10286 41 7.55057 41 8.10286V20.0724C41 20.6247 40.5523 21.0724 40 21.0724H39.2733C38.945 21.0724 38.6376 20.9113 38.4509 20.6413L32.1894 11.5898C32.1752 11.5693 32.1518 11.557 32.1268 11.557V11.557C32.0848 11.557 32.0508 11.5911 32.0508 11.6331V20.0724C32.0508 20.6247 31.6031 21.0724 31.0508 21.0724H30.5201C29.9679 21.0724 29.5201 20.6247 29.5201 20.0724V8.10286C29.5201 7.55058 29.9679 7.10286 30.5201 7.10286H31.26C31.5886 7.10286 31.8962 7.26426 32.0829 7.53463L38.3363 16.5903C38.3513 16.6121 38.3761 16.6251 38.4025 16.6251V16.6251C38.447 16.6251 38.4831 16.589 38.4831 16.5446V8.10286C38.4831 7.55058 38.9308 7.10286 39.4831 7.10286H40Z"
+				></path>
+				<path
+					fill="currentColor"
+					d="M23.8589 7.10286C24.4112 7.10286 24.8589 7.55057 24.8589 8.10286V20.0724C24.8589 20.6247 24.4112 21.0724 23.8589 21.0724H23.3282C22.776 21.0724 22.3282 20.6247 22.3282 20.0724V8.10286C22.3282 7.55058 22.776 7.10286 23.3282 7.10286H23.8589Z"
+				></path>
+				<path
+					fill="currentColor"
+					d="M3 8.10286C3 7.55058 3.44772 7.10286 4 7.10286H5.42581C5.83167 7.10286 6.19728 7.34817 6.35116 7.72374L10.213 17.1496C10.2317 17.1954 10.2763 17.2253 10.3259 17.2253V17.2253C10.3754 17.2253 10.42 17.1954 10.4387 17.1496L14.3006 7.72374C14.4544 7.34817 14.82 7.10286 15.2259 7.10286H16.6517C17.204 7.10286 17.6517 7.55057 17.6517 8.10286V20.0724C17.6517 20.6247 17.204 21.0724 16.6517 21.0724H16.2234C15.6711 21.0724 15.2234 20.6247 15.2234 20.0724V11.5526C15.2234 11.5098 15.1888 11.4752 15.146 11.4752V11.4752C15.1145 11.4752 15.0861 11.4943 15.0742 11.5236L11.4857 20.4061C11.333 20.7841 10.9662 21.0315 10.5585 21.0315H10.0937C9.6858 21.0315 9.31877 20.7837 9.16625 20.4054L5.57744 11.5032C5.56564 11.4739 5.53724 11.4547 5.50568 11.4547V11.4547C5.46295 11.4547 5.42831 11.4894 5.42831 11.5321V20.0724C5.42831 20.6247 4.9806 21.0724 4.42831 21.0724H4C3.44771 21.0724 3 20.6247 3 20.0724V8.10286Z"
+				></path>
+				<rect
+					fill="currentColor"
+					rx="1"
+					height="13"
+					width="3"
+					y="26.2695"
+					x="41"
+				></rect>
+				<rect
+					fill="currentColor"
+					rx="1"
+					height="13"
+					width="3"
+					y="26.2695"
+				></rect>
+			</svg> </span
+		><span class="am-f-group__item am-f-group am-f-number-unit"
+			><input
+				class="am-f-input am-f-group__item"
+				type="number"
+				step="1"
+				value="100"
+			/><am-select class="am-f-group__item am-f-select"
+				><span>px</span
+				><select>
+					<option value="px">px</option>
+					<option value="%">%</option>
+					<option value="rem">rem</option>
+					<option value="em">em</option>
+					<option value="vh">vh</option>
+					<option value="vw">vw</option>
+				</select></am-select
+			></span
+		></span
+	><input class="am-u-display-none" />
+</div>
