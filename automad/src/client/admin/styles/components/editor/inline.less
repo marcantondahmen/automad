@@ -43,8 +43,8 @@
 	// --x and --diff-right are calculated inside the LayoutTune component.
 	--estimated-width: 500px;
 	--right: ~'min(var(--estimated-width), var(--diff-right))';
-	--shift: ~'calc(var(--x) + var(--right) - var(--estimated-width) - 100px)';
-	transform: translateX(var(--shift));
+	--shift: ~'calc(var(--x) + var(--right) - var(--estimated-width))';
+	left: var(--shift) !important;
 
 	&__toggler-and-button-wrapper {
 		display: flex;
