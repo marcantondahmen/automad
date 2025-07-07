@@ -166,8 +166,6 @@ export class AutocompleteComponent extends BaseComponent {
 
 	/**
 	 * Init the autocompletion.
-	 *
-	 * @returns a Promise
 	 */
 	private init(): void {
 		if (typeof this.data !== 'undefined') {
