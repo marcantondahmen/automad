@@ -118,6 +118,8 @@ export abstract class BaseSelectInline extends BaseInline {
 	 * Init the fields.
 	 */
 	showActions(node: HTMLAnchorElement): void {
+		this.wrapper.hidden = false;
+
 		const prop = node.style.getPropertyValue(this.property);
 
 		if (prop) {
@@ -127,8 +129,6 @@ export abstract class BaseSelectInline extends BaseInline {
 		this.listener = listen(this.wrapper, 'change', () => {
 			node.style.setProperty(this.property, this.select.value);
 		});
-
-		this.wrapper.hidden = false;
 	}
 
 	/**

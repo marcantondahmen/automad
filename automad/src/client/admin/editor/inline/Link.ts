@@ -122,12 +122,12 @@ export class LinkInline extends BaseInline {
 			html`<label class="${CSS.fieldLabel}">${LinkInline.title}</label>`
 		);
 
-		this.autocomplete = create(
+		this.autocomplete = create<AutocompleteUrlComponent>(
 			'am-autocomplete-url',
 			[],
 			{},
 			inputField
-		) as AutocompleteUrlComponent;
+		);
 
 		this.targetToggle = createField(FieldTag.toggle, this.wrapper, {
 			key: uniqueId(),
@@ -143,6 +143,8 @@ export class LinkInline extends BaseInline {
 	 * Init the fields.
 	 */
 	showActions(node: HTMLAnchorElement): void {
+		this.wrapper.hidden = false;
+
 		const input = this.autocomplete.input;
 		const checkbox = this.targetToggle.input as HTMLInputElement;
 
@@ -162,8 +164,6 @@ export class LinkInline extends BaseInline {
 				}
 			}
 		);
-
-		this.wrapper.hidden = false;
 
 		input.focus();
 	}

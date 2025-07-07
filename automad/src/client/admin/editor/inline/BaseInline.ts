@@ -172,17 +172,22 @@ export abstract class BaseInline {
 	/**
 	 * Check the state of the selection.
 	 */
-	checkState(): void {
+	checkState(): boolean {
 		const node = this.api.selection.findParentTag(this.tag);
 
 		this.state = !!node;
 
 		if (this.state) {
 			this.saveSelection();
-			this.showActions(node);
+
+			setTimeout(() => {
+				this.showActions(node);
+			}, 0);
 		} else {
 			this.hideActions();
 		}
+
+		return this.state;
 	}
 
 	/**
