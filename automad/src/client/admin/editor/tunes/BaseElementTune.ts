@@ -34,6 +34,7 @@
 
 import { API, BlockAPI, BlockTune, ToolConfig } from 'automad-editorjs';
 import { BlockTuneConstructorOptions } from '@/admin/types';
+import { MenuConfig } from 'automad-editorjs/types/tools';
 
 /**
  * The abstract base tune class that returns an element on render.
@@ -43,6 +44,11 @@ export abstract class BaseElementTune<DataType> implements BlockTune {
 	 * The editor API.
 	 */
 	protected api: API;
+
+	/**
+	 * The sort order for this tune.
+	 */
+	protected sort: number = 100;
 
 	/**
 	 * The tune data.
@@ -117,7 +123,12 @@ export abstract class BaseElementTune<DataType> implements BlockTune {
 	 *
 	 * @return the main wrapper
 	 */
-	render(): HTMLElement {
-		return this.wrapper;
+	render(): MenuConfig {
+		return {
+			// @ts-ignore
+			type: 'html',
+			sort: this.sort,
+			element: this.wrapper,
+		};
 	}
 }

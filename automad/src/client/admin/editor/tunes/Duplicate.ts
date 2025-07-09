@@ -35,7 +35,7 @@
 import { App } from '@/admin/core';
 import { BlockTuneConstructorOptions } from '@/admin/types';
 import { API, BlockAPI, BlockTune } from 'automad-editorjs';
-import { TunesMenuConfig } from 'automad-editorjs/types/tools';
+import { MenuConfig } from 'automad-editorjs/types/tools';
 import { insertBlock } from '../utils';
 
 /**
@@ -76,9 +76,10 @@ export class DuplicateTune implements BlockTune {
 	 *
 	 * @returns the tune config
 	 */
-	render(): TunesMenuConfig {
+	render(): MenuConfig {
 		return {
 			icon: '<i class="bi bi-copy"></i>',
+			sort: 290,
 			label: App.text('duplicate'),
 			closeOnActivate: true,
 			onActivate: this.duplicate.bind(this),

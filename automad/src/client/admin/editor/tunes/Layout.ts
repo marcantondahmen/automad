@@ -158,6 +158,11 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	}
 
 	/**
+	 * The sort order for this tune.
+	 */
+	protected sort: number = 1;
+
+	/**
 	 * Test whether flex can be enabled.
 	 */
 	get isFlex(): boolean {
@@ -265,12 +270,8 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 
 		const offsetX = Math.round(contentRect.x - blockRect.x);
 		const offsetY = Math.round(contentRect.y - blockRect.y);
-		const diffRight = Math.round(window.innerWidth - contentRect.x);
 
-		toolbar.parentElement.setAttribute(
-			'style',
-			`--x: ${offsetX}px; --y: ${offsetY}px; --diff-right: ${diffRight}px`
-		);
+		toolbar.setAttribute('style', `--x: ${offsetX}px; --y: ${offsetY}px;`);
 	}
 
 	/**

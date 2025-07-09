@@ -38,7 +38,6 @@ import {
 	createField,
 	CSS,
 	FieldTag,
-	fire,
 	html,
 	query,
 	uniqueId,
@@ -47,6 +46,11 @@ import { IdTuneData } from '@/admin/types';
 import { BaseModalTune } from './BaseModalTune';
 
 export class IdTune extends BaseModalTune<IdTuneData> {
+	/**
+	 * The sort order for this tune.
+	 */
+	public sort: number = 201;
+
 	/**
 	 * The tune title.
 	 */
