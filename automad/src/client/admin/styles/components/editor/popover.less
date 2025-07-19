@@ -41,6 +41,7 @@
 .ce-popover {
 	@padding: 3px;
 	--width: 14.5rem;
+	--max-height: 25.85rem;
 	display: flex;
 	flex-direction: column;
 	gap: 1px;
@@ -63,12 +64,9 @@
 		font-weight: @am-small-font-weight;
 	}
 
-	&__custom-content {
+	& &__custom-content {
 		position: relative;
-
-		& > * {
-			margin-bottom: @padding;
-		}
+		margin: @padding 0 0 0;
 	}
 
 	&__items {

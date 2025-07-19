@@ -51,7 +51,7 @@ export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 	 *
 	 * The sort order for this tune.
 	 */
-	protected sort: number = 2;
+	protected sort: number = 102;
 
 	/**
 	 * The tune title.

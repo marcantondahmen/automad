@@ -36,10 +36,14 @@
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	gap: 4px;
-	padding: 4px;
-	margin: 0 -3px;
 	width: auto;
+	padding: 0 4px 4px 4px;
+	margin: 0 -3px;
 	border-bottom: @am-border;
+
+	&:empty {
+		display: none;
+	}
 
 	&__option {
 		--span: 1;
