@@ -165,7 +165,11 @@ export class LinkInline extends BaseInline {
 			}
 		);
 
-		input.focus();
+		setTimeout(() => {
+			if (!input.value) {
+				input.focus();
+			}
+		}, 0);
 	}
 
 	/**

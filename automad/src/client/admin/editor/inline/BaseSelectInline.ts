@@ -123,7 +123,7 @@ export abstract class BaseSelectInline extends BaseInline {
 		const prop = node.style.getPropertyValue(this.property);
 
 		if (prop) {
-			this.select.select.value = prop;
+			this.select.value = prop;
 		}
 
 		this.listener = listen(this.wrapper, 'change', () => {

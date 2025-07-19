@@ -35,7 +35,7 @@
 import { createGenericModal, CSS, fire, listen, query } from '@/admin/core';
 import { BlockTuneConstructorOptions } from '@/admin/types';
 import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
-import { MenuConfig } from 'automad-editorjs/types/tools';
+import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 
 /**
  * The abstract base modal tune class.
@@ -142,7 +142,7 @@ export abstract class BaseModalTune<DataType> {
 	 *
 	 * @return the config object
 	 */
-	render(): MenuConfig {
+	render(): TunesMenuConfig {
 		const label = this.renderLabel();
 
 		return {

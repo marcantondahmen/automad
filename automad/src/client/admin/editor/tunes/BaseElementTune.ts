@@ -34,7 +34,7 @@
 
 import { API, BlockAPI, BlockTune, ToolConfig } from 'automad-editorjs';
 import { BlockTuneConstructorOptions } from '@/admin/types';
-import { MenuConfig } from 'automad-editorjs/types/tools';
+import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 
 /**
  * The abstract base tune class that returns an element on render.
@@ -123,7 +123,7 @@ export abstract class BaseElementTune<DataType> implements BlockTune {
 	 *
 	 * @return the main wrapper
 	 */
-	render(): MenuConfig {
+	render(): TunesMenuConfig {
 		return {
 			// @ts-ignore
 			type: 'html',
