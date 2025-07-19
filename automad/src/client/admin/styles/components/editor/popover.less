@@ -47,25 +47,13 @@
 	left: 0 !important;
 	right: auto !important;
 	padding: @padding;
+	padding-bottom: 0 !important;
 	overflow: hidden;
 	color: hsl(var(--am-clr-text));
 	background-color: hsl(var(--am-clr-background));
 	border: @am-modal-border;
 	border-radius: @am-bl-editor-toolbar-radius;
 	box-shadow: @am-shadow;
-
-	&--opened {
-		max-height: none;
-	}
-
-	&--open-top {
-		top: auto;
-		bottom: 2rem;
-	}
-
-	& > * {
-		margin: 0 !important;
-	}
 
 	&__nothing-found-message {
 		padding: @am-bl-editor-space 0.6rem;
@@ -84,9 +72,7 @@
 	}
 
 	&__items {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-		padding-top: 3px !important;
+		padding-bottom: @padding;
 	}
 
 	&-item {
