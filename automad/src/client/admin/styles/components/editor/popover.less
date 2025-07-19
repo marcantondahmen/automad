@@ -54,15 +54,6 @@
 	border-radius: @am-bl-editor-toolbar-radius;
 	box-shadow: @am-shadow;
 
-	.ce-toolbox & {
-		--width: 45rem;
-
-		// --diff-right is calculated inside the LayoutTune component.
-		--right: ~'min(var(--diff-right), var(--width))';
-		left: ~'calc(var(--right) - var(--width))' !important;
-		right: initial !important;
-	}
-
 	&--opened {
 		max-height: none;
 	}
