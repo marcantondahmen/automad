@@ -43,11 +43,9 @@
 	&__toolbar {
 		position: absolute;
 		display: flex;
-		gap: 0.4em;
 		z-index: 30;
 		top: -3.5rem;
 		height: auto;
-		padding: 0.25em;
 		font-size: 0.85rem;
 		opacity: 0;
 		transition: opacity 0.2s;
@@ -58,14 +56,24 @@
 		border: @am-modal-border;
 		box-shadow: @am-shadow;
 
+		&-section {
+			display: flex;
+			gap: @am-bl-editor-space;
+			padding: @am-bl-editor-space;
+
+			& + & {
+				border-left: @am-border;
+			}
+		}
+
 		&.am-active {
 			opacity: 1;
 			pointer-events: all;
 		}
 
-		& > .am-f-group {
+		& .am-f-group {
 			[type='number'] {
-				width: 4rem;
+				width: 2rem;
 			}
 		}
 	}
@@ -73,25 +81,24 @@
 	&__radios {
 		display: flex;
 		align-items: stretch;
-		gap: 4px;
-		padding: 0 4px;
-		background-color: hsl(var(--am-clr-background-faded));
-		border-radius: @am-form-radius;
-		border: @am-form-border;
+		gap: 2px;
 	}
 
 	&__radio {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0 2px;
+		padding: 0 8px;
 		cursor: pointer;
 		color: hsl(var(--am-clr-text-muted));
-		transition: color 0.2s;
+		border-radius: 3px;
+		transition:
+			color 0.2s,
+			background-color 0.2s;
 
 		& svg {
-			height: 1.3rem !important;
-			width: auto !important;
+			height: 18px !important;
+			width: 18px !important;
 		}
 
 		& input {
@@ -100,7 +107,8 @@
 
 		&:hover,
 		&--active {
-			color: hsl(var(--am-clr-text-primary));
+			color: hsl(var(--am-clr-text));
+			background-color: hsl(var(--am-clr-background-highlight));
 		}
 	}
 

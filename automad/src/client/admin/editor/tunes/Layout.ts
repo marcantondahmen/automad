@@ -84,13 +84,11 @@ const getMainOptions = (): LayoutOption[] => [
 		layout: '',
 		tooltip: App.text('layoutDefault'),
 		icon: layoutDefault,
-		cls: [CSS.editorTunesLayoutOption, CSS.editorTunesLayoutOptionLarge],
 	},
 	{
 		layout: STRETCHED,
 		tooltip: App.text('layoutStretch'),
 		icon: layoutStretched,
-		cls: [CSS.editorTunesLayoutOption, CSS.editorTunesLayoutOptionLarge],
 	},
 ];
 
@@ -103,7 +101,6 @@ const getFlexOptions = (): LayoutOption[] =>
 			layout: fraction,
 			tooltip: `${App.text('layoutWidth')}: ${fraction}`,
 			icon: iconMap[fraction],
-			cls: [CSS.editorTunesLayoutOption],
 		};
 	});
 
@@ -120,7 +117,7 @@ const createLayoutOption = (
 ) => {
 	const active = (option.layout || '') === (selected || '');
 	const cls = [
-		...option.cls,
+		CSS.editorTunesLayoutOption,
 		...(active ? [CSS.editorTunesLayoutOptionActive] : []),
 	];
 
@@ -293,7 +290,7 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	 * @return the wrapper
 	 */
 	renderSettings(): HTMLElement {
-		const wrapper = create('div', [CSS.editorTunesLayout]);
+		const wrapper = create('div');
 
 		if (!this.isFlex && !this.isStretchable) {
 			this.data = null;
@@ -302,14 +299,18 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 		}
 
 		if (this.isStretchable) {
+			const main = create('div', [CSS.editorTunesLayout], {}, wrapper);
+
 			getMainOptions().forEach((option) => {
-				createLayoutOption(option, this.selected, wrapper);
+				createLayoutOption(option, this.selected, main);
 			});
 		}
 
 		if (this.isFlex) {
+			const flex = create('div', [CSS.editorTunesLayout], {}, wrapper);
+
 			getFlexOptions().forEach((option) => {
-				createLayoutOption(option, this.selected, wrapper);
+				createLayoutOption(option, this.selected, flex);
 			});
 		}
 

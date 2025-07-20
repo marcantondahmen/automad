@@ -379,11 +379,39 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			this.section
 		);
 
-		this.renderStylesButton(toolbar);
-		this.renderJustifySelect(toolbar);
-		this.renderAlignSelect(toolbar);
-		this.renderNumberUnitInput(toolbar, 'gap', iconGap);
-		this.renderNumberUnitInput(toolbar, 'minBlockWidth', iconMin);
+		const styleTools = create(
+			'div',
+			[CSS.editorBlockSectionToolbarSection],
+			{},
+			toolbar
+		);
+
+		const justifyTools = create(
+			'div',
+			[CSS.editorBlockSectionToolbarSection],
+			{},
+			toolbar
+		);
+
+		const alignTools = create(
+			'div',
+			[CSS.editorBlockSectionToolbarSection],
+			{},
+			toolbar
+		);
+
+		const sizeTools = create(
+			'div',
+			[CSS.editorBlockSectionToolbarSection],
+			{},
+			toolbar
+		);
+
+		this.renderStylesButton(styleTools);
+		this.renderJustifySelect(justifyTools);
+		this.renderAlignSelect(alignTools);
+		this.renderNumberUnitInput(sizeTools, 'gap', iconGap);
+		this.renderNumberUnitInput(sizeTools, 'minBlockWidth', iconMin);
 
 		// Add this hidden input in order to catch the focus after a block has been dragged around.
 		create('input', [CSS.displayNone], {}, toolbar);

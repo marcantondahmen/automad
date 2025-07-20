@@ -51,7 +51,6 @@ export interface LayoutOption {
 	layout: LayoutFraction | 'stretched' | '';
 	tooltip: string;
 	icon: string;
-	cls: string[];
 }
 
 export interface LayoutTuneData {

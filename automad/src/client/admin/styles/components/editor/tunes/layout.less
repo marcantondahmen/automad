@@ -35,48 +35,43 @@
 .am-c-ed-tu-layout {
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
-	gap: 4px;
+	gap: 2px;
 	width: auto;
-	padding: 0 4px 4px 4px;
-	margin: 0 -3px;
-	border-bottom: @am-border;
+	margin: 0 -@am-bl-editor-space;
+	padding: @am-bl-editor-space;
+	overflow: hidden;
+	border-top: @am-border;
 
 	&:empty {
 		display: none;
 	}
 
 	&__option {
-		--span: 1;
-		grid-column: span var(--span);
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 2.15rem;
-		border-radius: 3px;
+		height: 2.3rem;
 		cursor: pointer;
 		color: hsl(var(--am-clr-text-muted));
-		background-color: hsl(var(--am-clr-background-faded));
+		border-radius: 3px;
+		background-color: hsl(var(--am-clr-background));
 		transition:
 			color 0.2s,
 			background-color 0.2s;
 
 		& svg {
-			height: 1.15rem !important;
-			width: auto !important;
+			height: 18px !important;
+			width: 18px !important;
 		}
 
 		& input {
 			display: none;
 		}
 
-		&--large {
-			--span: 3;
-		}
-
 		&:hover,
 		&--active {
-			color: hsl(var(--am-clr-text-primary));
-			background-color: hsl(var(--am-clr-background-primary));
+			color: hsl(var(--am-clr-text));
+			background-color: hsl(var(--am-clr-background-highlight));
 		}
 	}
 }

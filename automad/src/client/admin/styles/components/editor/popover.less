@@ -39,15 +39,13 @@
 }
 
 .ce-popover {
-	@padding: 3px;
 	--width: 14.5rem;
-	--max-height: 22.5rem;
+	--max-height: 27.25rem;
 	display: flex;
 	flex-direction: column;
-	gap: 1px;
 	left: 0 !important;
 	right: auto !important;
-	padding: @padding;
+	padding: @am-bl-editor-space;
 	overflow: hidden;
 	color: hsl(var(--am-clr-text));
 	background-color: hsl(var(--am-clr-background));
@@ -65,12 +63,15 @@
 
 	& &__custom-content {
 		position: relative;
-		margin: @padding 0;
+		margin: 0;
+		margin-top: 2px;
 	}
 
 	&__items {
-		margin: -@padding;
-		padding: @padding;
+		margin: -@am-bl-editor-space;
+		padding: @am-bl-editor-space;
+		border-top: @am-border;
+		margin-top: 0;
 		scrollbar-width: thin;
 	}
 
@@ -141,7 +142,7 @@
 		grid-template-columns: 1fr;
 		position: relative;
 		padding: 0;
-		margin-bottom: @padding !important;
+		margin-bottom: @am-bl-editor-space !important;
 		height: auto;
 		border: none;
 		background-color: transparent;
