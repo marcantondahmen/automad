@@ -9,7 +9,7 @@ $settings = file_get_contents(__DIR__ . '/Editor/Toolbar/Settings.html');
 <section class="am-l-dashboard__section">
 	<div class="am-l-dashboard__content">
 		<div class="am-u-flex am-u-flex--column am-u-flex--gap-large">
-			<am-editor-field style="margin-bottom: 20rem">
+			<am-editor-field style="margin-bottom: 23rem">
 				<div>
 					<am-editor-js>
 						<div
@@ -52,7 +52,7 @@ $settings = file_get_contents(__DIR__ . '/Editor/Toolbar/Settings.html');
 					</am-editor-js>
 				</div>
 			</am-editor-field>
-			<am-editor-field style="margin-bottom: 19rem;">
+			<am-editor-field style="margin-bottom: 17rem;">
 				<div>
 					<am-editor-js>
 						<div class="codex-editor codex-editor--narrow">
@@ -127,102 +127,6 @@ $settings = file_get_contents(__DIR__ . '/Editor/Toolbar/Settings.html');
 													<div
 														class="ce-inline-toolbar"
 													>
-														<div
-															class="ce-inline-toolbar__toggler-and-button-wrapper"
-														>
-															<div
-																class="ce-inline-toolbar__dropdown"
-															>
-																<div
-																	class="ce-inline-toolbar__dropdown-content"
-																></div>
-																<div
-																	class="ce-inline-toolbar__dropdown-arrow"
-																>
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		width="24"
-																		height="24"
-																		fill="none"
-																		viewBox="0 0 24 24"
-																	>
-																		<path
-																			stroke="currentColor"
-																			stroke-linecap="round"
-																			stroke-width="2"
-																			d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"
-																		></path>
-																	</svg>
-																</div>
-															</div>
-															<div
-																class="ce-inline-toolbar__buttons"
-															></div>
-														</div>
-														<div
-															class="ce-inline-toolbar__actions"
-														></div>
-														<div
-															class="ce-conversion-toolbar"
-														>
-															<div
-																class="ce-conversion-toolbar__label"
-															>
-																Convert to
-															</div>
-															<div
-																class="ce-conversion-toolbar__tools"
-															>
-																<div
-																	class="ce-conversion-tool"
-																	data-tool="paragraph"
-																>
-																	<div
-																		class="ce-conversion-tool__icon"
-																	>
-																		<svg
-																			xmlns="http://www.w3.org/2000/svg"
-																			width="24"
-																			height="24"
-																			fill="none"
-																			viewBox="0 0 24 24"
-																		>
-																			<path
-																				stroke="currentColor"
-																				stroke-linecap="round"
-																				stroke-width="2"
-																				d="M8 9V7.2C8 7.08954 8.08954 7 8.2 7L12 7M16 9V7.2C16 7.08954 15.9105 7 15.8 7L12 7M12 7L12 17M12 17H10M12 17H14"
-																			></path>
-																		</svg>
-																	</div>
-																	Text
-																</div>
-																<div
-																	class="ce-conversion-tool"
-																	data-tool="header"
-																>
-																	<div
-																		class="ce-conversion-tool__icon"
-																	>
-																		<svg
-																			xmlns="http://www.w3.org/2000/svg"
-																			width="24"
-																			height="24"
-																			fill="none"
-																			viewBox="0 0 24 24"
-																		>
-																			<path
-																				stroke="currentColor"
-																				stroke-linecap="round"
-																				stroke-width="2"
-																				d="M9 7L9 12M9 17V12M9 12L15 12M15 7V12M15 17L15 12"
-																			></path>
-																		</svg>
-																	</div>
-																	Heading
-																</div>
-															</div>
-														</div>
 													</div>
 												</div>
 											</am-editor-js>
@@ -441,14 +345,14 @@ $settings = file_get_contents(__DIR__ . '/Editor/Toolbar/Settings.html');
 					</am-editor-js>
 				</div>
 			</am-editor-field>
-			<am-editor-field style="margin-bottom: 3rem">
+			<am-editor-field style="margin-bottom: 10rem">
 				<div>
 					<am-editor-js>
 						<div
 							class="codex-editor codex-editor--narrow codex-editor--toolbox-opened"
 						>
 							<div
-								class="codex-editor__redactor"
+								class="codex-editor__redactor am-e-contents"
 								style="padding-bottom: 50px"
 							>
 								<div class="ce-block ce-block--focused">
@@ -462,7 +366,7 @@ $settings = file_get_contents(__DIR__ . '/Editor/Toolbar/Settings.html');
 											consetetur sadipscing elitr, sed
 											diam nonumy eirmod tempor invidunt
 											ut labore et dolore magna aliquyam
-											erat, sed diam voluptua. At vero eos
+											erat, sed diam <a href="">voluptua</a>. At vero eos
 											et accusam et justo duo dolores et
 											ea rebum. Stet clita kasd gubergren,
 											no sea takimata sanctus est Lorem
