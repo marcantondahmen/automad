@@ -47,7 +47,7 @@ import { UnderlineInline } from '@/admin/editor/inline/Underline';
 import { DragDrop } from '@/admin/editor/plugins/DragDrop';
 import { EditorOutputData, KeyValueMap } from '@/admin/types';
 import EditorJS, { EditorConfig, I18nDictionary } from 'automad-editorjs';
-import { App, CSS, getSlug, Route } from '@/admin/core';
+import { App, CSS, getLogger, getSlug, Route } from '@/admin/core';
 import {
 	TextAlignCenterInline,
 	TextAlignLeftInline,
@@ -101,7 +101,7 @@ export class EditorJSComponent extends BaseComponent {
 		return {
 			...data,
 			blocks:
-				data.blocks?.filter((block) => {
+				data?.blocks?.filter((block) => {
 					return (
 						block.type != 'component' ||
 						componentIds.includes(block.data.id ?? '')
@@ -116,6 +116,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * @param data
 	 * @param config
 	 * @param isSectionBlock
+	 * @param readOnly
 	 */
 	init(
 		data: EditorOutputData,
@@ -126,48 +127,74 @@ export class EditorJSComponent extends BaseComponent {
 		this.style.position = 'relative';
 		this.classList.add(CSS.contents);
 
-		this.editor = new EditorJS(
-			Object.assign(
-				{
-					data: this.prepareData(data),
-					holder: this,
-					logLevel: 'ERROR',
-					minHeight: readOnly ? 0 : 50,
-					autofocus: false,
-					readOnly,
-					placeholder: isSectionBlock
-						? ''
-						: App.text('editorPlaceholder'),
-					tools: {
-						...getBlockTools(this.isComponentEditor),
-						...getBlockTunes(isSectionBlock),
-						...this.getInlineTools(),
-					},
-					tunes: baseTunes,
-					inlineToolbar: [
-						'alignLeft',
-						'alignCenter',
-						'alignRight',
-						'bold',
-						'italic',
-						'fontSize',
-						'lineHeight',
-						'link',
-						'codeInline',
-						'underline',
-						'strikeThrough',
-						'color',
-					],
-					i18n: {
-						messages: this.getI18nDictionary(),
-					},
-					onReady: (): void => {
-						this.onRender();
-					},
-				},
-				config
-			)
+		const createEditor = this.createEditor.bind(
+			this,
+			config,
+			isSectionBlock,
+			readOnly
 		);
+
+		try {
+			this.editor = createEditor(data);
+		} catch (error) {
+			getLogger().error(
+				'Error creating a new EditorJS instance with given data. Creating a fresh instance without data.',
+				data
+			);
+			this.editor = createEditor();
+		}
+	}
+
+	/**
+	 * An isolated wrapper for creating a fresh instance with or without initial data.
+	 *
+	 * @param config
+	 * @param isSectionBlock
+	 * @param readOnly
+	 * @param [data]
+	 * @return the created instance
+	 */
+	private createEditor(
+		config: EditorConfig,
+		isSectionBlock: boolean,
+		readOnly: boolean,
+		data?: EditorOutputData
+	): EditorJS {
+		return new EditorJS({
+			data: this.prepareData(data ?? null),
+			holder: this,
+			minHeight: readOnly ? 0 : 50,
+			autofocus: false,
+			readOnly,
+			placeholder: isSectionBlock ? '' : App.text('editorPlaceholder'),
+			tools: {
+				...getBlockTools(this.isComponentEditor),
+				...getBlockTunes(isSectionBlock),
+				...this.getInlineTools(),
+			},
+			tunes: baseTunes,
+			inlineToolbar: [
+				'alignLeft',
+				'alignCenter',
+				'alignRight',
+				'bold',
+				'italic',
+				'fontSize',
+				'lineHeight',
+				'link',
+				'codeInline',
+				'underline',
+				'strikeThrough',
+				'color',
+			],
+			i18n: {
+				messages: this.getI18nDictionary(),
+			},
+			onReady: (): void => {
+				this.onRender();
+			},
+			...config,
+		});
 	}
 
 	/**
