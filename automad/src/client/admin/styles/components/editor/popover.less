@@ -41,14 +41,13 @@
 .ce-popover {
 	@padding: 3px;
 	--width: 14.5rem;
-	--max-height: 25.85rem;
+	--max-height: 22.5rem;
 	display: flex;
 	flex-direction: column;
 	gap: 1px;
 	left: 0 !important;
 	right: auto !important;
 	padding: @padding;
-	padding-bottom: 0 !important;
 	overflow: hidden;
 	color: hsl(var(--am-clr-text));
 	background-color: hsl(var(--am-clr-background));
@@ -66,11 +65,13 @@
 
 	& &__custom-content {
 		position: relative;
-		margin: @padding 0 0 0;
+		margin: @padding 0;
 	}
 
 	&__items {
-		padding-bottom: @padding;
+		margin: -@padding;
+		padding: @padding;
+		scrollbar-width: thin;
 	}
 
 	&-item {
