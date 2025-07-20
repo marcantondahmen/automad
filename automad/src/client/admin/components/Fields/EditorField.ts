@@ -47,10 +47,11 @@ import {
 	query,
 } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
-import { EditorOutputData, UndoValue } from '@/admin/types';
+import { EditorOutputData, KeyValueMap, UndoValue } from '@/admin/types';
 import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { API } from 'automad-editorjs';
+import { filterEmptyData } from '@/admin/editor/utils';
 
 /**
  * A block editor field.
@@ -99,8 +100,14 @@ export class EditorFieldComponent extends BaseFieldComponent {
 			{ blocks: this.value.blocks },
 			{
 				onChange: async (api: API) => {
-					const { blocks } =
+					const { blocks: raw } =
 						(await api.saver.save()) as EditorOutputData;
+
+					const blocks = raw.map((block) => {
+						block.tunes = filterEmptyData<KeyValueMap>(block.tunes);
+
+						return block;
+					});
 
 					if (
 						JSON.stringify(this.value.blocks) ===
