@@ -4,8 +4,6 @@
 .phpunit.result.cache
 /automad/legacy
 /automad/src/client/blocks/legacy
-/cache/*
-/config/*
 /lib/vendor
 /packages
 /pages
