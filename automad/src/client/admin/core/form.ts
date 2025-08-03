@@ -43,6 +43,8 @@ import {
 	listen,
 	query,
 	queryAll,
+	Route,
+	Section,
 	titleCase,
 } from '.';
 import {
@@ -167,14 +169,17 @@ export const createCustomizationFields = (
 			sections.customizations,
 			html`
 				<div class="${CSS.alertIcon}">
-					<i class="bi bi-layers"></i>
+					<i class="bi bi-file-earmark-medical-fill"></i>
 				</div>
 				<div class="${CSS.alertText} ${CSS.flex} ${CSS.flexColumn}">
 					<div>${App.text('customizationMerge')}</div>
 					<div>
-						<am-link class="${CSS.button} ${CSS.buttonPrimary}"
-							>${App.text('sharedTitle')}</am-link
+						<am-link
+							${Attr.target}="${Route.shared}?section=${Section.customizations}"
+							class="${CSS.button} ${CSS.buttonPrimary}"
 						>
+							${App.text('sharedTitle')}
+						</am-link>
 					</div>
 				</div>
 			`
