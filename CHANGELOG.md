@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.39](https://github.com/marcantondahmen/automad/commit/5c8899f94382281c30328d1889b12df9413de61f)
+## [v2.0.0-alpha.40](https://github.com/marcantondahmen/automad/commit/322d2e033ec1e2147874017ebd9d065157dbf619)
 
-Sun, 3 Aug 2025 13:44:00 +0200
+Sun, 3 Aug 2025 14:21:13 +0200
+
+### New Features
+
+- add readme files for cache and config directories about avoiding temporary and sensitive information being version controlled ([322d2e033](https://github.com/marcantondahmen/automad/commit/322d2e033ec1e2147874017ebd9d065157dbf619))
+
+## [v2.0.0-alpha.39](https://github.com/marcantondahmen/automad/commit/0302368d66f2c2131f7d55fa95bc26750c6d5532)
+
+Sun, 3 Aug 2025 13:45:56 +0200
 
 ### New Features
 
@@ -667,11 +675,3 @@ Thu, 11 Nov 2021 12:06:24 +0100
 - **core**: fix :current and :currentPath properties of pages that are redirected ([f79a2cfa9](https://github.com/marcantondahmen/automad/commit/f79a2cfa9907334f4615a5dadda09ab7c4fa0635))
 - **ui**: fix overflowing select buttons ([78c3f9a7d](https://github.com/marcantondahmen/automad/commit/78c3f9a7d746422ec9a3e3ae1597b3e96bc5054f))
 - **ui**: fix overflowing toolbox ([bad19924b](https://github.com/marcantondahmen/automad/commit/bad19924b32a58aa65248844fa52b7b0d2df6b23))
-
-## [v1.9.3](https://github.com/marcantondahmen/automad/commit/ad5287079c87a7ad90835e731f78ef3e0ecc64b5)
-
-Fri, 15 Oct 2021 23:20:45 +0200
-
-### New Features
-
-- **engine**: register snippet definitions that are nested within overrides ([e6ad71f65](https://github.com/marcantondahmen/automad/commit/e6ad71f659437ac33c947f48c0225ee749d23a9c))
