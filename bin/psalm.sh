@@ -9,4 +9,4 @@ if [[ ! -f "$PSALM_PHAR" ]]; then
 	chmod +x $PSALM_PHAR
 fi
 
-$PHP_BIN ./$PSALM_PHAR --clear-global-cache && $PHP_BIN ./$PSALM_PHAR --no-cache --threads=1
+$PHP_BIN ./$PSALM_PHAR --clear-cache && $PHP_BIN ./$PSALM_PHAR --no-cache --threads=1
