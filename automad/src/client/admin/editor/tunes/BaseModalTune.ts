@@ -36,6 +36,7 @@ import { createGenericModal, CSS, fire, listen, query } from '@/admin/core';
 import { BlockTuneConstructorOptions } from '@/admin/types';
 import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
 import { TunesMenuConfig } from 'automad-editorjs/types/tools';
+import { filterEmptyData } from '../utils';
 
 /**
  * The abstract base modal tune class.
@@ -45,6 +46,11 @@ export abstract class BaseModalTune<DataType> {
 	 * The editor API.
 	 */
 	protected api: API;
+
+	/**
+	 * The sort order for this tune.
+	 */
+	protected sort: number = 100;
 
 	/**
 	 * The tune data.
@@ -120,7 +126,7 @@ export abstract class BaseModalTune<DataType> {
 	 * @param data
 	 * @return the prepared data
 	 */
-	protected abstract prepareData(data: DataType): DataType;
+	protected abstract prepareData(data: Partial<DataType>): DataType;
 
 	/**
 	 * Sanitize form data before setting the current state.
@@ -130,6 +136,26 @@ export abstract class BaseModalTune<DataType> {
 	 */
 	protected sanitize(data: DataType): DataType {
 		return data;
+	}
+
+	/**
+	 * Filter object data before saving it into JSON files in order to save space.
+	 *
+	 * @param data
+	 * @return the filtered data
+	 */
+	protected filterBeforeSave(data: DataType): Partial<DataType> {
+		if (typeof data !== 'object') {
+			return data;
+		}
+
+		const filtered = filterEmptyData<DataType>(data);
+
+		if (Object.keys(filtered).length === 0) {
+			return null;
+		}
+
+		return filtered;
 	}
 
 	/**
@@ -147,6 +173,7 @@ export abstract class BaseModalTune<DataType> {
 				: `<span class="${CSS.textMuted}">${this.title}</span>`,
 			closeOnActivate: true,
 			onActivate: this.onActivate.bind(this),
+			sort: this.sort,
 		};
 	}
 
@@ -172,8 +199,8 @@ export abstract class BaseModalTune<DataType> {
 	 *
 	 * @return the data object
 	 */
-	save(): DataType {
-		return this.data;
+	save(): Partial<DataType> {
+		return this.filterBeforeSave(this.data);
 	}
 
 	/**

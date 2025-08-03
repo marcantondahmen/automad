@@ -48,6 +48,11 @@ import { BaseModalTune } from './BaseModalTune';
 
 export class ClassTune extends BaseModalTune<ClassTuneData> {
 	/**
+	 * The sort order for this tune.
+	 */
+	public sort: number = 202;
+
+	/**
 	 * The tune title.
 	 */
 	get title() {

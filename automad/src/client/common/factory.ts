@@ -43,14 +43,14 @@
  * @param [prepend] - prepend instead of append
  * @returns the created element
  */
-export const create = (
+export const create = <T extends any = any>(
 	tag: string,
 	classes: string[] = [],
 	attributes: object = {},
 	parent: HTMLElement | null = null,
 	innerHTML: string = null,
 	prepend: boolean = false
-): any => {
+): T => {
 	const element = document.createElement(tag);
 
 	classes.forEach((cls) => {
@@ -75,5 +75,5 @@ export const create = (
 		element.innerHTML = innerHTML;
 	}
 
-	return element;
+	return element as T;
 };

@@ -50,18 +50,18 @@
 
 	&__icon {
 		display: flex;
-		align-items: center;
 		justify-content: center;
+		align-items: center;
+		aspect-ratio: 1/1;
 		width: (@am-form-height / 1.25);
-		min-width: (@am-form-height / 1.25);
 		font-size: 1.25em;
 		border: @am-form-border;
 		border-radius: @am-form-radius;
 		background-color: hsl(var(--am-clr-background-faded));
 
-		& svg {
-			width: 1.2em;
-			height: 1.2em;
+		& > svg {
+			width: 18px !important;
+			height: 18px !important;
 		}
 	}
 

@@ -36,6 +36,7 @@ import {
 	create,
 	createSelect,
 	CSS,
+	debounce,
 	fire,
 	FormDataProviders,
 	listen,
@@ -120,7 +121,7 @@ class NumberUnitInputComponent extends BaseComponent {
 			fire('change', this);
 		};
 
-		listen(this, 'change', merge, 'input, select');
+		listen(this, 'change input', debounce(merge, 100), 'input, select');
 	}
 }
 

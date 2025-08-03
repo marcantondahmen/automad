@@ -79,6 +79,7 @@ export class DuplicateTune implements BlockTune {
 	render(): TunesMenuConfig {
 		return {
 			icon: '<i class="bi bi-copy"></i>',
+			sort: 290,
 			label: App.text('duplicate'),
 			closeOnActivate: true,
 			onActivate: this.duplicate.bind(this),

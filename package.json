@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-alpha.38",
+  "version": "2.0.0-alpha.39",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "@types/yaireo__tagify": "^4.16.0",
     "@vovayatsyuk/photoswipe-object-position": "^1.0.0",
     "@yaireo/tagify": "^4.17.6",
-    "automad-editorjs": "^2.29.3",
+    "automad-editorjs": "^2.29.0-am.4",
     "automad-prism-themes": "^0.3.4",
     "autoprefixer": "^10.4.21",
     "bootstrap-icons": "^1.11.1",

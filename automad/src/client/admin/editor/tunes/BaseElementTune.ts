@@ -45,6 +45,11 @@ export abstract class BaseElementTune<DataType> implements BlockTune {
 	protected api: API;
 
 	/**
+	 * The sort order for this tune.
+	 */
+	protected sort: number = 100;
+
+	/**
 	 * The tune data.
 	 */
 	protected data: DataType;

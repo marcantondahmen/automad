@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-alpha.38](https://github.com/marcantondahmen/automad/commit/e8be555fdc45618a2e45017562205b54b613a5f2)
+## [v2.0.0-alpha.39](https://github.com/marcantondahmen/automad/commit/5c8899f94382281c30328d1889b12df9413de61f)
 
-Sat, 28 Jun 2025 18:24:18 +0200
+Sun, 3 Aug 2025 13:44:00 +0200
+
+### New Features
+
+- add separate .gitignore files for cache and config directories ([465e5e34f](https://github.com/marcantondahmen/automad/commit/465e5e34f7f70bfce438b28ff9898119d8664bf9))
+- filter out empty tune data when saving blocks ([389d504ad](https://github.com/marcantondahmen/automad/commit/389d504ad45f66ea7fd5f8c98308631f522d854f))
+- improve block editor ui including icons and toolbars ([93b8eb8c1](https://github.com/marcantondahmen/automad/commit/93b8eb8c1e1fc36e35801cb4d2d3ee09bf558487))
+- improve stability of block editor when corrupted data is used for initialization ([693a15b83](https://github.com/marcantondahmen/automad/commit/693a15b83161cfb5d0de9ad8fdaef44da83a05ca))
+- update editor.js ([d2361cf56](https://github.com/marcantondahmen/automad/commit/d2361cf5695d56d96b0153c2f56b2ce2ba379d95))
+
+## [v2.0.0-alpha.38](https://github.com/marcantondahmen/automad/commit/2af5de625e62ee90d005a897618795c3824284f2)
+
+Sun, 29 Jun 2025 17:43:58 +0200
 
 ### Breaking Changes
 
@@ -663,18 +675,3 @@ Fri, 15 Oct 2021 23:20:45 +0200
 ### New Features
 
 - **engine**: register snippet definitions that are nested within overrides ([e6ad71f65](https://github.com/marcantondahmen/automad/commit/e6ad71f659437ac33c947f48c0225ee749d23a9c))
-
-## [v1.9.2](https://github.com/marcantondahmen/automad/commit/dec961145927e46d4a221cb85e30a12a29b3d6b0)
-
-Fri, 15 Oct 2021 22:08:49 +0200
-
-### New Features
-
-- **themes**: add classic blog templates ([e30fe1d2a](https://github.com/marcantondahmen/automad/commit/e30fe1d2aff694df6970259f85c8c511b79e147e))
-
-### Bugfixes
-
-- **ui**: fix button block ui when nested in narrow sections ([7fa0babd6](https://github.com/marcantondahmen/automad/commit/7fa0babd67cc4432a23da7c366321ec7f13bcafb))
-- **ui**: fix image select fields nested in narrow sections ([a4cd370c4](https://github.com/marcantondahmen/automad/commit/a4cd370c471fe55a026d59eecc568f0b426febd4))
-- **ui**: fix inline toolbar width on small devices ([18b941734](https://github.com/marcantondahmen/automad/commit/18b941734ecb8eefdbffec9a2461bf502e4561ee))
-- **ui**: fix scollbars showing up all the time on block editor toolbox ([6b9aceb2a](https://github.com/marcantondahmen/automad/commit/6b9aceb2a14c6c2bc102e5e03fc9f7128a7a5caa))

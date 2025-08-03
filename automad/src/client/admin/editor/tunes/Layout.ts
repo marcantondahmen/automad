@@ -35,19 +35,24 @@
 import {
 	App,
 	Attr,
+	collectFieldData,
 	create,
-	createSelect,
 	CSS,
 	listen,
 	query,
+	queryAll,
 } from '@/admin/core';
-import {
-	LayoutFraction,
-	LayoutTuneData,
-	SelectComponentOption,
-} from '@/admin/types';
+import { LayoutFraction, LayoutOption, LayoutTuneData } from '@/admin/types';
 import { getBlockTools } from '../blocks';
 import { BaseElementTune } from './BaseElementTune';
+import layout11 from '@/common/svg/layout/layout-1-1.svg';
+import layout12 from '@/common/svg/layout/layout-1-2.svg';
+import layout13 from '@/common/svg/layout/layout-1-3.svg';
+import layout14 from '@/common/svg/layout/layout-1-4.svg';
+import layout23 from '@/common/svg/layout/layout-2-3.svg';
+import layout34 from '@/common/svg/layout/layout-3-4.svg';
+import layoutDefault from '@/common/svg/layout/layout-default.svg';
+import layoutStretched from '@/common/svg/layout/layout-stretched.svg';
 
 /**
  * The fractions that can be used as width.
@@ -55,16 +60,91 @@ import { BaseElementTune } from './BaseElementTune';
 export const fractions = ['1/4', '1/3', '1/2', '2/3', '3/4', '1/1'] as const;
 
 /**
+ * The layout value when elements are stretched.
+ */
+export const STRETCHED = 'stretched';
+
+/**
+ * The icon map for fractions.
+ */
+const iconMap = {
+	'1/1': layout11,
+	'1/2': layout12,
+	'1/3': layout13,
+	'1/4': layout14,
+	'2/3': layout23,
+	'3/4': layout34,
+} as const;
+
+/**
+ * The main layout options that are always available, also outside of sections.
+ */
+const getMainOptions = (): LayoutOption[] => [
+	{
+		layout: '',
+		tooltip: App.text('layoutDefault'),
+		icon: layoutDefault,
+	},
+	{
+		layout: STRETCHED,
+		tooltip: App.text('layoutStretch'),
+		icon: layoutStretched,
+	},
+];
+
+/**
+ * Additional fraction options that are available in flex sections.
+ */
+const getFlexOptions = (): LayoutOption[] =>
+	fractions.map((fraction) => {
+		return {
+			layout: fraction,
+			tooltip: `${App.text('layoutWidth')}: ${fraction}`,
+			icon: iconMap[fraction],
+		};
+	});
+
+/**
+ * Create a radio input.
+ *
+ * @param option
+ * @param wrapper
+ */
+const createLayoutOption = (
+	option: LayoutOption,
+	selected: string,
+	wrapper: HTMLElement
+) => {
+	const active = (option.layout || '') === (selected || '');
+	const cls = [
+		CSS.editorTunesLayoutOption,
+		...(active ? [CSS.editorTunesLayoutOptionActive] : []),
+	];
+
+	(
+		create(
+			'input',
+			[],
+			{
+				type: 'radio',
+				name: 'layout',
+				value: option.layout || '',
+			},
+			create(
+				'label',
+				cls,
+				{ [Attr.tooltip]: option.tooltip },
+				wrapper,
+				option.icon
+			)
+		) as HTMLInputElement
+	).checked = active;
+};
+
+/**
  * The LayoutTune class allows for block layout based on flexbox.
  */
 export class LayoutTune extends BaseElementTune<LayoutTuneData> {
-	/**
-	 * The stretched property name.
-	 *
-	 * @static
-	 */
-	static STRETCHED = 'stretched';
-
 	/**
 	 * Test whether the block is allowed to stretch.
 	 * In order to make a block stretchable, set the
@@ -73,6 +153,11 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	get isStretchable(): boolean {
 		return getBlockTools(false)[this.block.name]?.stretchable ?? false;
 	}
+
+	/**
+	 * The sort order for this tune.
+	 */
+	protected sort: number = 1;
 
 	/**
 	 * Test whether flex can be enabled.
@@ -86,7 +171,7 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	 */
 	get selected(): string {
 		const { stretched, width } = this.data;
-		const selected = stretched ? LayoutTune.STRETCHED : width ? width : '';
+		const selected = stretched ? STRETCHED : width ? width : '';
 
 		return selected as string;
 	}
@@ -97,11 +182,16 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	 * @param data
 	 */
 	set selected(value) {
-		this.data.stretched = value === LayoutTune.STRETCHED;
+		this.data.stretched = value === STRETCHED;
 		this.data.width =
-			value && value !== LayoutTune.STRETCHED
-				? (value as LayoutFraction)
-				: null;
+			value && value !== STRETCHED ? (value as LayoutFraction) : '';
+
+		queryAll<HTMLInputElement>('input', this.wrapper).forEach((input) => {
+			input.parentElement.classList.toggle(
+				CSS.editorTunesLayoutOptionActive,
+				input.checked
+			);
+		});
 
 		this.apply();
 	}
@@ -135,7 +225,7 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	/**
 	 * Apply tune to block content element.
 	 *
-	 * @param the block content element
+	 * @param blockElement
 	 * @return the element
 	 */
 	wrap(blockElement: HTMLElement): HTMLElement {
@@ -172,15 +262,11 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 			return;
 		}
 
-		const offsetX = Math.round(
-			content.getBoundingClientRect().x -
-				blockHolder.parentElement.getBoundingClientRect().x
-		);
+		const contentRect = content.getBoundingClientRect();
+		const blockRect = blockHolder.parentElement.getBoundingClientRect();
 
-		const offsetY = Math.round(
-			content.getBoundingClientRect().y -
-				blockHolder.parentElement.getBoundingClientRect().y
-		);
+		const offsetX = Math.round(contentRect.x - blockRect.x);
+		const offsetY = Math.round(contentRect.y - blockRect.y);
 
 		toolbar.setAttribute('style', `--x: ${offsetX}px; --y: ${offsetY}px;`);
 	}
@@ -204,7 +290,7 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 	 * @return the wrapper
 	 */
 	renderSettings(): HTMLElement {
-		const wrapper = create('div', [CSS.editorPopoverForm]);
+		const wrapper = create('div');
 
 		if (!this.isFlex && !this.isStretchable) {
 			this.data = null;
@@ -212,33 +298,26 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 			return wrapper;
 		}
 
-		const options: SelectComponentOption[] = [
-			{ value: '', text: App.text('layoutDefault') },
-		];
-
 		if (this.isStretchable) {
-			options.push({
-				value: LayoutTune.STRETCHED,
-				text: App.text('layoutStretch'),
+			const main = create('div', [CSS.editorTunesLayout], {}, wrapper);
+
+			getMainOptions().forEach((option) => {
+				createLayoutOption(option, this.selected, main);
 			});
 		}
 
 		if (this.isFlex) {
-			fractions.forEach((fraction) => {
-				options.push({
-					value: fraction,
-					text: `${App.text('layoutWidth')}: ${fraction.replace(
-						'/',
-						'⁄'
-					)}`,
-				});
+			const flex = create('div', [CSS.editorTunesLayout], {}, wrapper);
+
+			getFlexOptions().forEach((option) => {
+				createLayoutOption(option, this.selected, flex);
 			});
 		}
 
-		const select = createSelect(options, this.selected, wrapper);
+		listen(wrapper, 'change', () => {
+			const { layout } = collectFieldData(wrapper);
 
-		listen(select.select, 'change', () => {
-			this.selected = select.value;
+			this.selected = layout;
 			this.block.dispatchChange();
 		});
 

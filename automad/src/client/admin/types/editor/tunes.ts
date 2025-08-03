@@ -47,7 +47,13 @@ export interface SpacingTuneData {
 
 export type LayoutFraction = (typeof fractions)[number];
 
+export interface LayoutOption {
+	layout: LayoutFraction | 'stretched' | '';
+	tooltip: string;
+	icon: string;
+}
+
 export interface LayoutTuneData {
 	stretched: boolean;
-	width: LayoutFraction;
+	width: LayoutFraction | '';
 }

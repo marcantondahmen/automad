@@ -62,7 +62,7 @@ abstract class Attr {
 	 * @return string
 	 */
 	public static function render(array $tunes, array $classes = array(), ?array $styles = null): string {
-		$id = self::uniqueId($tunes['id']);
+		$id = self::uniqueId($tunes['id'] ?? '');
 		$id = strlen($id) == 0 ? '' : 'id="' . $id . '"';
 
 		return join(' ', array_filter(array($id, self::classAttr($tunes, $classes), self::styleAttr($tunes, $styles))));
@@ -85,7 +85,7 @@ abstract class Attr {
 	/**
 	 * Render a style attribute.
 	 *
-	 * @param array<non-empty-literal-string, string> $styles
+	 * @param array<string, string> $styles
 	 * @return string
 	 */
 	public static function renderStyles(array $styles): string {

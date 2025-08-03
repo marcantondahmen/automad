@@ -35,10 +35,8 @@
 import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
 import { CodeLanguage, KeyValueMap } from '..';
 import {
-	sectionAlignItemsOptions,
 	sectionBackgroundBlendModes,
 	sectionBorderStyles,
-	sectionJustifyContentOptions,
 } from '@/admin/editor/blocks/Section';
 import { sliderEffects } from '@/admin/editor/blocks/ImageSlideshow';
 import { buttonsJustifyOptions } from '@/admin/editor/blocks/Buttons';
@@ -160,10 +158,19 @@ export interface RawBlockData {
 	code: string;
 }
 
-export type SectionJustifyContentOption =
-	keyof typeof sectionJustifyContentOptions;
+export type SectionToolbarRadioOptions<T extends string> = {
+	[key in T]: { icon: string; tooltip: string };
+};
 
-export type SectionAlignItemsOption = keyof typeof sectionAlignItemsOptions;
+export type SectionJustifyContentOption =
+	| 'start'
+	| 'center'
+	| 'end'
+	| 'space-between'
+	| 'space-evenly'
+	| 'fill-row';
+
+export type SectionAlignItemsOption = 'start' | 'center' | 'end' | 'stretch';
 
 export type SectionBackgroundBlendMode =
 	(typeof sectionBackgroundBlendModes)[number];

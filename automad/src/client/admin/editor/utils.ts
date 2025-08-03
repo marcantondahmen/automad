@@ -37,6 +37,24 @@ import { BlockAPI } from 'automad-editorjs';
 import { nanoid } from 'nanoid';
 
 /**
+ * Filter out empty data from an object.
+ *
+ * @param data
+ * @return the filtered object
+ */
+export const filterEmptyData = <T>(data: T): Partial<T> => {
+	const filtered: Partial<T> = {};
+
+	for (const [key, value] of Object.entries(data)) {
+		if (!!value || value === false) {
+			filtered[key as keyof T] = value;
+		}
+	}
+
+	return filtered;
+};
+
+/**
  * Insert an existing block including its tunes.
  * Can be used for duplication or moving blocks to other editors.
  *
