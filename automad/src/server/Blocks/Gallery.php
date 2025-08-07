@@ -63,12 +63,14 @@ class Gallery extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
+		$pixelDensity = 2;
 		$settings = array(
 			'layout' => $block['data']['layout'] ?? 'columns',
-			'columnWidthPx' => $block['data']['columnWidthPx'] ?? 250,
-			'rowHeightPx' => $block['data']['rowHeightPx'] ?? 250,
-			'gapPx' => $block['data']['gapPx'] ?? 5,
-			'cleanBottom' => $block['data']['cleanBottom'] ?? false
+			'columnWidthPx' => intval($block['data']['columnWidthPx']) ?? 250,
+			'rowHeightPx' => intval($block['data']['rowHeightPx']) ?? 250,
+			'gapPx' => intval($block['data']['gapPx']) ?? 5,
+			'cleanBottom' => $block['data']['cleanBottom'] ?? false,
+			'pixelDensity' => $pixelDensity
 		);
 
 		$imageSets = array();
@@ -78,7 +80,7 @@ class Gallery extends AbstractBlock {
 
 		foreach ($block['data']['files'] ?? array() as $file) {
 			$imageSets[] = array(
-				'thumb' => new ImgLoaderSet($file, $Automad, $width, $height, false),
+				'thumb' => new ImgLoaderSet($file, $Automad, $width * $pixelDensity, $height * $pixelDensity, false),
 				'large' => new Img($file, $Automad, 3000, 3000, false),
 				'caption' => strip_tags(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
 			);

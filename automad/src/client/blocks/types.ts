@@ -49,8 +49,12 @@ export interface GalleryData {
 		};
 		caption: string;
 	}[];
-	settings: Omit<GalleryBlockData, 'files'>;
+	settings: Omit<GalleryBlockData, 'files'> & {
+		pixelDensity: number;
+	};
 }
+
+export type ImageSetData = GalleryData['imageSets'][number];
 
 export type MailInput = HTMLInputElement | HTMLTextAreaElement;
 

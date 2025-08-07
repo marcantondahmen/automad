@@ -33,7 +33,7 @@
  */
 
 import { create, debounce } from '@/common';
-import { GalleryData, MasonryItem } from '@/blocks/types';
+import { GalleryData, ImageSetData, MasonryItem } from '@/blocks/types';
 import PhotoSwipe from 'photoswipe';
 // @ts-ignore
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -47,20 +47,6 @@ import arrowPrevSVG from '@/blocks/svg/arrowPrev.svg';
 import arrowNextSVG from '@/blocks/svg/arrowNext.svg';
 import closeSVG from '@/blocks/svg/close.svg';
 import zoomSVG from '@/blocks/svg/zoom.svg';
-
-const renderThumb = (imgSet: GalleryData['imageSets'][number]): string => {
-	const { thumb, caption } = imgSet;
-
-	return `
-		<am-img-loader
-			image="${thumb.image}"
-			preload="${thumb.preload}"
-			width="${thumb.width}"
-			height="${thumb.height}"
-		></am-img-loader>
-		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
-	`;
-};
 
 /**
  * A gallery component for column or row based layouts.
@@ -141,7 +127,7 @@ class GalleryComponent extends HTMLElement {
 					style: `--aspect: ${imgSet.thumb.width / imgSet.thumb.height}`,
 				},
 				gallery,
-				`<div class="am-gallery-img-small">${renderThumb(imgSet)}</div>`
+				`<div class="am-gallery-img-small">${this.renderThumb(imgSet)}</div>`
 			);
 		});
 	}
@@ -157,8 +143,8 @@ class GalleryComponent extends HTMLElement {
 		const maxRows = 10000;
 		const masonryWidth = this.getBoundingClientRect().width;
 		const { settings, imageSets } = this.data;
-		const colWidth = parseInt(settings.columnWidthPx.toString());
-		const gap = parseInt(settings.gapPx.toString());
+		const colWidth = settings.columnWidthPx;
+		const gap = settings.gapPx;
 		const nCols = Math.ceil(masonryWidth / colWidth);
 		const estimatedHeight = (imageSets.length / nCols) * (colWidth + gap);
 
@@ -170,7 +156,12 @@ class GalleryComponent extends HTMLElement {
 	 */
 	private renderColumns(): void {
 		const settings = this.data.settings;
-		const gallery = create('div', ['am-gallery-masonry'], {}, this);
+		const gallery = create(
+			'div',
+			['am-gallery-masonry'],
+			{ hidden: 'true' },
+			this
+		);
 
 		const items: MasonryItem[] = [];
 
@@ -193,22 +184,24 @@ class GalleryComponent extends HTMLElement {
 					'data-cropped': 'true',
 				},
 				element,
-				renderThumb(imgSet)
+				this.renderThumb(imgSet)
 			);
 
 			items.push({
 				element,
 				rowSpan: 0,
 				height: element.getBoundingClientRect().height,
-				thumbHeight: imgSet.thumb.height,
+				thumbHeight: Math.round(
+					imgSet.thumb.height / this.data.settings.pixelDensity
+				),
 			});
 		});
 
 		const updateItems = (items: MasonryItem[]) => {
 			const masonryRowHeight = this.calculateMasonryRowHeight();
 			const masonryWidth = this.getBoundingClientRect().width;
-			const colWidth = parseInt(settings.columnWidthPx.toString());
-			const gap = parseInt(settings.gapPx.toString());
+			const colWidth = settings.columnWidthPx;
+			const gap = settings.gapPx;
 
 			gallery.setAttribute(
 				'style',
@@ -304,48 +297,105 @@ class GalleryComponent extends HTMLElement {
 					});
 				}
 			}
+
+			gallery.removeAttribute('hidden');
 		};
 
-		updateItems(items);
+		const debounced = debounce(updateItems.bind(this, items), 50);
 
-		window.addEventListener(
-			'resize',
-			debounce(() => {
-				updateItems(items);
-			}, 50)
-		);
+		setTimeout(debounced, 0);
+		window.addEventListener('resize', debounced);
+		window.addEventListener('load', debounced);
 	}
 
 	/**
 	 * Render a row based flex layout.
 	 */
 	private renderRows(): void {
+		const gap = this.data.settings.gapPx;
 		const gallery = create(
 			'div',
-			['am-gallery-flex'],
-			{
-				style: `
-					--am-gallery-flex-item-height: ${this.data.settings.rowHeightPx + this.data.settings.gapPx}px;
-					--am-gallery-gap: ${this.data.settings.gapPx}px;
-				`,
-			},
+			[
+				'am-gallery-flex',
+				...(gap > 1 ? ['am-gallery-flex--contain'] : []),
+			],
+			{ style: `--am-gallery-gap: ${gap}px;` },
 			this
 		);
 
-		this.data.imageSets.forEach((imgSet) => {
-			create(
-				'a',
-				['am-gallery-flex-item', 'am-gallery-img-small'],
-				{
-					href: imgSet.large.image,
-					target: '_blank',
-					'data-pswp-width': imgSet.large.width,
-					'data-pswp-height': imgSet.large.height,
-				},
-				gallery,
-				renderThumb(imgSet)
-			);
-		});
+		const updateItems = () => {
+			gallery.innerHTML = '';
+
+			const containerWidth = gallery.getBoundingClientRect().width;
+			let currentRow: ImageSetData[] = [];
+			let accWidth = -gap;
+
+			this.data.imageSets.forEach((imgSet, index) => {
+				const { thumb } = imgSet;
+
+				currentRow.push(imgSet);
+				accWidth += gap + thumb.width / this.data.settings.pixelDensity;
+
+				if (
+					accWidth > containerWidth ||
+					index == this.data.imageSets.length - 1
+				) {
+					const scale = Math.min(containerWidth / accWidth, 1);
+					const row = create(
+						'div',
+						['am-gallery-flex-row'],
+						{
+							style: `--am-gallery-flex-row-height: ${Math.round(this.data.settings.rowHeightPx * scale)}px`,
+						},
+						gallery
+					);
+
+					currentRow.forEach((is) => {
+						create(
+							'a',
+							['am-gallery-img-small'],
+							{
+								href: is.large.image,
+								target: '_blank',
+								'data-pswp-width': is.large.width,
+								'data-pswp-height': is.large.height,
+							},
+							row,
+							this.renderThumb(is)
+						);
+					});
+
+					accWidth = -gap;
+					currentRow = [];
+				}
+			});
+		};
+
+		updateItems();
+
+		const debounced = debounce(updateItems.bind(this), 50);
+
+		window.addEventListener('resize', debounced);
+		window.addEventListener('load', debounced);
+	}
+
+	/**
+	 * Render a thumbnail of an image.
+	 *
+	 * @param imgSet
+	 */
+	private renderThumb(imgSet: ImageSetData): string {
+		const { thumb, caption } = imgSet;
+
+		return `
+		<am-img-loader
+			image="${thumb.image}"
+			preload="${thumb.preload}"
+			width="${Math.round(thumb.width / this.data.settings.pixelDensity)}"
+			height="${Math.round(thumb.height / this.data.settings.pixelDensity)}"
+		></am-img-loader>
+		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
+	`;
 	}
 }
 
