@@ -69,7 +69,7 @@ class Gallery extends AbstractBlock {
 			'columnWidthPx' => intval($block['data']['columnWidthPx']) ?? 250,
 			'rowHeightPx' => intval($block['data']['rowHeightPx']) ?? 250,
 			'gapPx' => intval($block['data']['gapPx']) ?? 5,
-			'cleanBottom' => $block['data']['cleanBottom'] ?? false,
+			'fillRectangle' => $block['data']['fillRectangle'] ?? false,
 			'pixelDensity' => $pixelDensity
 		);
 

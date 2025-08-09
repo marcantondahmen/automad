@@ -179,7 +179,7 @@
 	"fontSize": "Font Size",
 	"forgotPassword": "Forgot Password",
 	"galleryBlockLayout": "Layout",
-	"galleryBlockLayoutCleanBottom": "Clean bottom edge",
+	"galleryBlockLayoutFillRectangle": "Fill rectangle",
 	"galleryBlockLayoutColumnWidth": "Column Width",
 	"galleryBlockLayoutColumns": "Column Layout",
 	"galleryBlockLayoutGap": "Gap",

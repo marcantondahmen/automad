@@ -108,7 +108,7 @@ export interface GalleryBlockData {
 	columnWidthPx: number;
 	rowHeightPx: number;
 	gapPx: number;
-	cleanBottom: boolean;
+	fillRectangle: boolean;
 }
 
 export interface MailBlockData {

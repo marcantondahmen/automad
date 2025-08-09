@@ -33,7 +33,12 @@
  */
 
 import { create, debounce } from '@/common';
-import { GalleryData, ImageSetData, MasonryItem } from '@/blocks/types';
+import {
+	GalleryData,
+	GalleryRow,
+	ImageSetData,
+	MasonryItem,
+} from '@/blocks/types';
 import PhotoSwipe from 'photoswipe';
 // @ts-ignore
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -236,7 +241,7 @@ class GalleryComponent extends HTMLElement {
 				item.height = item.element.getBoundingClientRect().height;
 			});
 
-			if (settings.cleanBottom) {
+			if (settings.fillRectangle) {
 				const columns: { [key: number]: MasonryItem[] } = {};
 				const nRows = Math.round(
 					this.getBoundingClientRect().height / masonryRowHeight
@@ -323,6 +328,42 @@ class GalleryComponent extends HTMLElement {
 			this
 		);
 
+		const calcWidth = (width: number): number => {
+			return gap + width / this.data.settings.pixelDensity;
+		};
+
+		const createRow = (
+			container: HTMLElement,
+			scale: number
+		): HTMLElement => {
+			return create(
+				'div',
+				['am-gallery-flex-row'],
+				{
+					style: `--am-gallery-flex-row-height: ${Math.round(this.data.settings.rowHeightPx * scale)}px`,
+				},
+				container
+			);
+		};
+
+		const createImageSet = (
+			is: ImageSetData,
+			container: HTMLElement
+		): void => {
+			create(
+				'a',
+				['am-gallery-img-small'],
+				{
+					href: is.large.image,
+					target: '_blank',
+					'data-pswp-width': is.large.width,
+					'data-pswp-height': is.large.height,
+				},
+				container,
+				this.renderThumb(is)
+			);
+		};
+
 		const updateItems = () => {
 			gallery.innerHTML = '';
 
@@ -330,45 +371,94 @@ class GalleryComponent extends HTMLElement {
 			let currentRow: ImageSetData[] = [];
 			let accWidth = -gap;
 
-			this.data.imageSets.forEach((imgSet, index) => {
-				const { thumb } = imgSet;
+			const calcScale = (
+				rowWidth: number,
+				numberOfItems: number
+			): number => {
+				const gaps = (numberOfItems - 1) * gap;
 
-				currentRow.push(imgSet);
-				accWidth += gap + thumb.width / this.data.settings.pixelDensity;
+				return (containerWidth - gaps) / (rowWidth - gaps);
+			};
 
-				if (
-					accWidth > containerWidth ||
-					index == this.data.imageSets.length - 1
+			if (this.data.settings.fillRectangle) {
+				const rowsReversed: GalleryRow[] = [];
+
+				[...this.data.imageSets].reverse().forEach((imgSet, index) => {
+					const { thumb } = imgSet;
+
+					currentRow.push(imgSet);
+					accWidth += calcWidth(thumb.width);
+
+					if (
+						accWidth > containerWidth ||
+						index == this.data.imageSets.length - 1
+					) {
+						rowsReversed.push({
+							width: accWidth,
+							imageSets: currentRow.reverse(),
+						});
+
+						accWidth = -gap;
+						currentRow = [];
+					}
+				});
+
+				const rows: GalleryRow[] = rowsReversed.reverse();
+
+				let indexOfLastRowRemovedFrom = 1;
+
+				while (
+					rows[0].width * 2 < containerWidth &&
+					indexOfLastRowRemovedFrom < rows.length &&
+					rows[indexOfLastRowRemovedFrom].width * 2 > rows[0].width
 				) {
-					const scale = Math.min(containerWidth / accWidth, 1);
-					const row = create(
-						'div',
-						['am-gallery-flex-row'],
-						{
-							style: `--am-gallery-flex-row-height: ${Math.round(this.data.settings.rowHeightPx * scale)}px`,
-						},
-						gallery
+					const moved =
+						rows[indexOfLastRowRemovedFrom].imageSets.shift();
+
+					rows[0].imageSets.push(moved);
+					rows[0].width += calcWidth(moved.thumb.width);
+
+					rows[indexOfLastRowRemovedFrom].width -= calcWidth(
+						moved.thumb.width
 					);
 
-					currentRow.forEach((is) => {
-						create(
-							'a',
-							['am-gallery-img-small'],
-							{
-								href: is.large.image,
-								target: '_blank',
-								'data-pswp-width': is.large.width,
-								'data-pswp-height': is.large.height,
-							},
-							row,
-							this.renderThumb(is)
-						);
-					});
-
-					accWidth = -gap;
-					currentRow = [];
+					indexOfLastRowRemovedFrom++;
 				}
-			});
+
+				rows.forEach((row) => {
+					const scale = calcScale(row.width, row.imageSets.length);
+					const rowContainer = createRow(gallery, scale);
+
+					row.imageSets.forEach((is) => {
+						createImageSet(is, rowContainer);
+					});
+				});
+			} else {
+				this.data.imageSets.forEach((imgSet, index) => {
+					const { thumb } = imgSet;
+
+					currentRow.push(imgSet);
+					accWidth += calcWidth(thumb.width);
+
+					if (
+						accWidth > containerWidth ||
+						index == this.data.imageSets.length - 1
+					) {
+						const scale = Math.min(
+							calcScale(accWidth, currentRow.length),
+							1
+						);
+						const row = createRow(gallery, scale);
+
+						currentRow.forEach((is) => {
+							createImageSet(is, row);
+						});
+
+						accWidth = -gap;
+						currentRow = [];
+					}
+				});
+			}
 		};
 
 		updateItems();
