@@ -410,7 +410,8 @@ class GalleryComponent extends HTMLElement {
 				while (
 					rows[0].width * 2 < containerWidth &&
 					indexOfLastRowRemovedFrom < rows.length &&
-					rows[indexOfLastRowRemovedFrom].width * 2 > rows[0].width
+					rows[indexOfLastRowRemovedFrom].imageSets.length >
+						rows[0].imageSets.length + 1
 				) {
 					const moved =
 						rows[indexOfLastRowRemovedFrom].imageSets.shift();
