@@ -160,7 +160,8 @@ class GalleryComponent extends HTMLElement {
 	 * Render a column based masonry layout.
 	 */
 	private renderColumns(): void {
-		const settings = this.data.settings;
+		const { columnWidthPx, gapPx, fillRectangle } = this.data.settings;
+		const { imageSets } = this.data;
 		const gallery = create(
 			'div',
 			['am-gallery-masonry'],
@@ -170,7 +171,14 @@ class GalleryComponent extends HTMLElement {
 
 		const items: MasonryItem[] = [];
 
-		this.data.imageSets.forEach((imgSet) => {
+		const calcHeight = (thumb: {
+			width: number;
+			height: number;
+		}): number => {
+			return Math.round((thumb.height / thumb.width) * columnWidthPx);
+		};
+
+		imageSets.forEach((imgSet) => {
 			const element = create(
 				'div',
 				['am-gallery-masonry-item'],
@@ -196,24 +204,20 @@ class GalleryComponent extends HTMLElement {
 				element,
 				rowSpan: 0,
 				height: element.getBoundingClientRect().height,
-				thumbHeight: Math.round(
-					imgSet.thumb.height / this.data.settings.pixelDensity
-				),
+				thumbHeight: calcHeight(imgSet.thumb),
 			});
 		});
 
 		const updateItems = (items: MasonryItem[]) => {
 			const masonryRowHeight = this.calculateMasonryRowHeight();
 			const masonryWidth = this.getBoundingClientRect().width;
-			const colWidth = settings.columnWidthPx;
-			const gap = settings.gapPx;
 
 			gallery.setAttribute(
 				'style',
 				`
-					--am-gallery-item-width: ${colWidth}px;
+					--am-gallery-item-width: ${columnWidthPx}px;
 					--am-gallery-auto-rows: ${masonryRowHeight}px; 	
-					--am-gallery-gap: ${gap}px;
+					--am-gallery-gap: ${gapPx}px;
 				`
 			);
 
@@ -222,15 +226,15 @@ class GalleryComponent extends HTMLElement {
 				.getPropertyValue('grid-template-columns')
 				.split(' ').length;
 
-			const masonryWidthNoGap = masonryWidth - (nCols - 1) * gap;
+			const masonryWidthNoGap = masonryWidth - (nCols - 1) * gapPx;
 			const width = masonryWidthNoGap / nCols;
-			const factor = width / colWidth;
+			const factor = width / columnWidthPx;
 
 			items.forEach((item) => {
 				item.element.removeAttribute('style');
 
 				item.rowSpan = Math.round(
-					(item.thumbHeight * factor + gap) / masonryRowHeight
+					(item.thumbHeight * factor + gapPx) / masonryRowHeight
 				);
 
 				item.element.setAttribute(
@@ -241,7 +245,7 @@ class GalleryComponent extends HTMLElement {
 				item.height = item.element.getBoundingClientRect().height;
 			});
 
-			if (settings.fillRectangle) {
+			if (fillRectangle) {
 				const columns: { [key: number]: MasonryItem[] } = {};
 				const nRows = Math.round(
 					this.getBoundingClientRect().height / masonryRowHeight
@@ -317,19 +321,25 @@ class GalleryComponent extends HTMLElement {
 	 * Render a row based flex layout.
 	 */
 	private renderRows(): void {
-		const gap = this.data.settings.gapPx;
+		const { gapPx, rowHeightPx, fillRectangle } = this.data.settings;
+		const { imageSets } = this.data;
 		const gallery = create(
 			'div',
 			[
 				'am-gallery-flex',
-				...(gap > 1 ? ['am-gallery-flex--contain'] : []),
+				...(fillRectangle ? ['am-gallery-flex--fill'] : []),
 			],
-			{ style: `--am-gallery-gap: ${gap}px;` },
+			{ style: `--am-gallery-gap: ${gapPx}px;` },
 			this
 		);
 
-		const calcWidth = (width: number): number => {
-			return gap + width / this.data.settings.pixelDensity;
+		const calcWidth = (thumb: {
+			width: number;
+			height: number;
+		}): number => {
+			return (
+				gapPx + Math.round((thumb.width / thumb.height) * rowHeightPx)
+			);
 		};
 
 		const createRow = (
@@ -340,7 +350,7 @@ class GalleryComponent extends HTMLElement {
 				'div',
 				['am-gallery-flex-row'],
 				{
-					style: `--am-gallery-flex-row-height: ${Math.round(this.data.settings.rowHeightPx * scale)}px`,
+					style: `--am-gallery-flex-row-height: ${Math.round(rowHeightPx * scale)}px`,
 				},
 				container
 			);
@@ -369,36 +379,36 @@ class GalleryComponent extends HTMLElement {
 
 			const containerWidth = gallery.getBoundingClientRect().width;
 			let currentRow: ImageSetData[] = [];
-			let accWidth = -gap;
+			let accWidth = -gapPx;
 
 			const calcScale = (
 				rowWidth: number,
 				numberOfItems: number
 			): number => {
-				const gaps = (numberOfItems - 1) * gap;
+				const gaps = (numberOfItems - 1) * gapPx;
 
 				return (containerWidth - gaps) / (rowWidth - gaps);
 			};
 
-			if (this.data.settings.fillRectangle) {
+			if (fillRectangle) {
 				const rowsReversed: GalleryRow[] = [];
 
-				[...this.data.imageSets].reverse().forEach((imgSet, index) => {
+				[...imageSets].reverse().forEach((imgSet, index) => {
 					const { thumb } = imgSet;
 
 					currentRow.push(imgSet);
-					accWidth += calcWidth(thumb.width);
+					accWidth += calcWidth(thumb);
 
 					if (
 						accWidth > containerWidth ||
-						index == this.data.imageSets.length - 1
+						index == imageSets.length - 1
 					) {
 						rowsReversed.push({
 							width: accWidth,
 							imageSets: currentRow.reverse(),
 						});
 
-						accWidth = -gap;
+						accWidth = -gapPx;
 						currentRow = [];
 					}
 				});
@@ -417,10 +427,10 @@ class GalleryComponent extends HTMLElement {
 						rows[indexOfLastRowRemovedFrom].imageSets.shift();
 
 					rows[0].imageSets.push(moved);
-					rows[0].width += calcWidth(moved.thumb.width);
+					rows[0].width += calcWidth(moved.thumb);
 
 					rows[indexOfLastRowRemovedFrom].width -= calcWidth(
-						moved.thumb.width
+						moved.thumb
 					);
 
 					indexOfLastRowRemovedFrom++;
@@ -435,15 +445,15 @@ class GalleryComponent extends HTMLElement {
 					});
 				});
 			} else {
-				this.data.imageSets.forEach((imgSet, index) => {
+				imageSets.forEach((imgSet, index) => {
 					const { thumb } = imgSet;
 
 					currentRow.push(imgSet);
-					accWidth += calcWidth(thumb.width);
+					accWidth += calcWidth(thumb);
 
 					if (
 						accWidth > containerWidth ||
-						index == this.data.imageSets.length - 1
+						index == imageSets.length - 1
 					) {
 						const scale = Math.min(
 							calcScale(accWidth, currentRow.length),
@@ -455,7 +465,7 @@ class GalleryComponent extends HTMLElement {
 							createImageSet(is, row);
 						});
 
-						accWidth = -gap;
+						accWidth = -gapPx;
 						currentRow = [];
 					}
 				});
@@ -482,8 +492,8 @@ class GalleryComponent extends HTMLElement {
 		<am-img-loader
 			image="${thumb.image}"
 			preload="${thumb.preload}"
-			width="${Math.round(thumb.width / this.data.settings.pixelDensity)}"
-			height="${Math.round(thumb.height / this.data.settings.pixelDensity)}"
+			width="${Math.round(thumb.width)}"
+			height="${Math.round(thumb.height)}"
 		></am-img-loader>
 		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
 	`;

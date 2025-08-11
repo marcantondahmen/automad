@@ -53,9 +53,13 @@
 
 		&-row {
 			display: flex;
-			gap: inherit;
+			gap: var(--am-gallery-gap);
 			height: var(--am-gallery-flex-row-height);
 			max-height: var(--am-gallery-flex-row-height);
+		}
+
+		&--fill &-row {
+			justify-content: space-between;
 		}
 	}
 
@@ -63,14 +67,6 @@
 		& am-img-loader,
 		& img {
 			max-height: 100%;
-		}
-	}
-
-	&-flex--contain &-img-small {
-		& am-img-loader,
-		& img {
-			background-size: contain;
-			object-fit: contain;
 		}
 	}
 

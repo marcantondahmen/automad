@@ -49,9 +49,7 @@ export interface GalleryData {
 		};
 		caption: string;
 	}[];
-	settings: Omit<GalleryBlockData, 'files'> & {
-		pixelDensity: number;
-	};
+	settings: Omit<GalleryBlockData, 'files'>;
 }
 
 export type ImageSetData = GalleryData['imageSets'][number];

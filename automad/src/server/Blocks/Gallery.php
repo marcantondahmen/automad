@@ -63,14 +63,13 @@ class Gallery extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
-		$pixelDensity = 2;
+		$pixelDensity = 2.5;
 		$settings = array(
 			'layout' => $block['data']['layout'] ?? 'columns',
 			'columnWidthPx' => intval($block['data']['columnWidthPx']) ?? 250,
 			'rowHeightPx' => intval($block['data']['rowHeightPx']) ?? 250,
 			'gapPx' => intval($block['data']['gapPx']) ?? 5,
 			'fillRectangle' => $block['data']['fillRectangle'] ?? false,
-			'pixelDensity' => $pixelDensity
 		);
 
 		$imageSets = array();
