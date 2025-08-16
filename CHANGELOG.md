@@ -1,8 +1,27 @@
 # Changelog
 
-## [v2.0.0-alpha.40](https://github.com/marcantondahmen/automad/commit/322d2e033ec1e2147874017ebd9d065157dbf619)
+## [v2.0.0-alpha.41](https://github.com/marcantondahmen/automad/commit/26fffa59ae5cdc8e555e1977732fe9247ce5a05f)
 
-Sun, 3 Aug 2025 14:21:13 +0200
+Sat, 16 Aug 2025 20:16:42 +0200
+
+### Breaking Changes
+
+- remove option to make a section block match the row height in a flex layout and fix stretch flex layout in a parent section ([873686df6](https://github.com/marcantondahmen/automad/commit/873686df66418aeb442eecd2fcf9cc78603443d5))
+
+### New Features
+
+- add option to fill out the entire rectangle when using the row layout of the gallery block ([f44920e6e](https://github.com/marcantondahmen/automad/commit/f44920e6ebf4680e272c4360af8ec60f35686eb2))
+
+### Bugfixes
+
+- remove option to make a section block match the row height in a flex layout and fix stretch flex layout in a parent section ([873686df6](https://github.com/marcantondahmen/automad/commit/873686df66418aeb442eecd2fcf9cc78603443d5))
+- fix field filters in customization tab ([ecec9f56e](https://github.com/marcantondahmen/automad/commit/ecec9f56e06a9b9c84b234aeaa1230a650827156))
+- fix issue with filtering empty tune data ([4cada3d24](https://github.com/marcantondahmen/automad/commit/4cada3d240d59e3788af533781a40f6035c7ac3d))
+- fix rendering of gallery blocks ([c0685a7d7](https://github.com/marcantondahmen/automad/commit/c0685a7d773f09807a3d3a1f5678f74d0bc4da10))
+
+## [v2.0.0-alpha.40](https://github.com/marcantondahmen/automad/commit/c82e048885f52e5e7638a05ea455ec4b8280956a)
+
+Sun, 3 Aug 2025 15:25:26 +0200
 
 ### New Features
 
@@ -660,18 +679,3 @@ Wed, 24 Nov 2021 09:35:46 +0100
 - **ui**: add feed configuration ui ([686d563d1](https://github.com/marcantondahmen/automad/commit/686d563d11a8cdec881c6053cc01ad6049e76400))
 - **ui**: redesign system settings ui ([aa84f8021](https://github.com/marcantondahmen/automad/commit/aa84f8021a0da6ff8d587e5f384cf6b6a46d1b4d))
 - remove gulp-util and update dependencies ([02ae09d59](https://github.com/marcantondahmen/automad/commit/02ae09d59931fc09f92fb8fd0161147d199031c4))
-
-## [v1.9.4](https://github.com/marcantondahmen/automad/commit/e52d003777a26e28746ab50140a0ebb65f0a28e5)
-
-Thu, 11 Nov 2021 12:06:24 +0100
-
-### New Features
-
-- **themes**: improve color scheme of dark theme ([11c27250f](https://github.com/marcantondahmen/automad/commit/11c27250f46b2ff9b8438289096e48a6b48f4aec))
-- **ui**: allow uppercase letters in custom field names ([0d11fc032](https://github.com/marcantondahmen/automad/commit/0d11fc032d0082a01190c8ed1cf020fdb31445fd))
-
-### Bugfixes
-
-- **core**: fix :current and :currentPath properties of pages that are redirected ([f79a2cfa9](https://github.com/marcantondahmen/automad/commit/f79a2cfa9907334f4615a5dadda09ab7c4fa0635))
-- **ui**: fix overflowing select buttons ([78c3f9a7d](https://github.com/marcantondahmen/automad/commit/78c3f9a7d746422ec9a3e3ae1597b3e96bc5054f))
-- **ui**: fix overflowing toolbox ([bad19924b](https://github.com/marcantondahmen/automad/commit/bad19924b32a58aa65248844fa52b7b0d2df6b23))
