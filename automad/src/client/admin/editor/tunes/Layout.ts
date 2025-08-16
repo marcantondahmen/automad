@@ -77,22 +77,6 @@ const iconMap = {
 } as const;
 
 /**
- * The main layout options that are always available, also outside of sections.
- */
-const getMainOptions = (): LayoutOption[] => [
-	{
-		layout: '',
-		tooltip: App.text('layoutDefault'),
-		icon: layoutDefault,
-	},
-	{
-		layout: STRETCHED,
-		tooltip: App.text('layoutStretch'),
-		icon: layoutStretched,
-	},
-];
-
-/**
  * Additional fraction options that are available in flex sections.
  */
 const getFlexOptions = (): LayoutOption[] =>
@@ -298,12 +282,28 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 			return wrapper;
 		}
 
-		if (this.isStretchable) {
-			const main = create('div', [CSS.editorTunesLayout], {}, wrapper);
+		const main = create('div', [CSS.editorTunesLayout], {}, wrapper);
 
-			getMainOptions().forEach((option) => {
-				createLayoutOption(option, this.selected, main);
-			});
+		createLayoutOption(
+			{
+				layout: '',
+				tooltip: App.text('layoutDefault'),
+				icon: layoutDefault,
+			},
+			this.selected,
+			main
+		);
+
+		if (this.isStretchable) {
+			createLayoutOption(
+				{
+					layout: STRETCHED,
+					tooltip: App.text('layoutStretch'),
+					icon: layoutStretched,
+				},
+				this.selected,
+				main
+			);
 		}
 
 		if (this.isFlex) {
