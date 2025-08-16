@@ -155,7 +155,6 @@ export const sectionBorderStyles = [
 export const styleDefaults: SectionStyle = {
 	card: false,
 	shadow: false,
-	matchRowHeight: false,
 	color: '',
 	backgroundColor: '',
 	backgroundBlendMode: 'normal',
@@ -609,7 +608,6 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		};
 
 		field(FieldTag.toggle, 'card', 'optimizeContentForCards', body);
-		field(FieldTag.toggle, 'matchRowHeight', 'matchRowHeight', body);
 
 		const group1 = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 
@@ -728,10 +726,6 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		if (style.overflowHidden) {
 			classes.push(`${baseClass}--overflow-hidden`);
-		}
-
-		if (style.matchRowHeight) {
-			classes.push(`${baseClass}--match-height`);
 		}
 
 		this.holder.className = classes.join(' ');

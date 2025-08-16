@@ -85,7 +85,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	 * @param data.columnWidthPx
 	 * @param data.rowHeightPx
 	 * @param data.gapPx
-	 * @param data.cleanBottom
+	 * @param data.fillRectangle
 	 * @return the gallery block data
 	 */
 	protected prepareData(data: GalleryBlockData): GalleryBlockData {
@@ -95,7 +95,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			columnWidthPx: data.columnWidthPx || 250,
 			rowHeightPx: data.rowHeightPx || 250,
 			gapPx: data.gapPx || 5,
-			cleanBottom: data.cleanBottom ?? false,
+			fillRectangle: data.fillRectangle ?? false,
 		};
 	}
 
@@ -178,7 +178,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 		listen(modal, 'change', () => {
 			this.data = {
 				...this.data,
-				cleanBottom: false, // Always set false, since false toggles are ignored by collectFieldData()
+				fillRectangle: false, // Always set false, since false toggles are ignored by collectFieldData()
 				...collectFieldData(modal),
 			};
 		});
@@ -231,12 +231,12 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			{ required: '' }
 		);
 
-		if (this.data.layout == 'columns') {
+		if (['columns', 'rows'].includes(this.data.layout)) {
 			createField(FieldTag.toggle, settings, {
-				name: 'cleanBottom',
-				value: this.data.cleanBottom,
+				name: 'fillRectangle',
+				value: this.data.fillRectangle,
 				key: uniqueId(),
-				label: App.text('galleryBlockLayoutCleanBottom'),
+				label: App.text('galleryBlockLayoutFillRectangle'),
 			});
 		}
 

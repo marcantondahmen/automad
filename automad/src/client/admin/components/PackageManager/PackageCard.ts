@@ -50,8 +50,6 @@ import {
 import { Package } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 
-const packageBrowser = 'https://packages.automad.org';
-
 /**
  * Perform a package manager action.
  *
@@ -295,7 +293,12 @@ const createFooter = (pkg: Package, container: HTMLElement): void => {
  *
  * @extends BaseComponent
  */
-class PackageCardComponent extends BaseComponent {
+export class PackageCardComponent extends BaseComponent {
+	/**
+	 * The tag name.
+	 */
+	static TAG_NAME = 'am-package-card';
+
 	/**
 	 * Render the package card as soon as the package data is provided.
 	 */
@@ -320,4 +323,4 @@ class PackageCardComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-package-card', PackageCardComponent);
+customElements.define(PackageCardComponent.TAG_NAME, PackageCardComponent);

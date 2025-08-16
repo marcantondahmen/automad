@@ -33,6 +33,7 @@
  */
 
 import {
+	Attr,
 	create,
 	CSS,
 	EventName,
@@ -44,6 +45,7 @@ import {
 } from '@/admin/core';
 import { KeyValueMap, Package } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+import { PackageCardComponent } from './PackageCard';
 
 /**
  * Get and sort all required package data in order to generate the package card grid.
@@ -88,7 +90,10 @@ class PackageListComponent extends BaseComponent {
 		this.innerHTML = html`
 			<div class="${CSS.flex} ${CSS.flexGap}">
 				<am-update-all-packages></am-update-all-packages>
-				<am-filter placeholder="packagesFilter"></am-filter>
+				<am-filter
+					placeholder="packagesFilter"
+					${Attr.target}="${PackageCardComponent.TAG_NAME}"
+				></am-filter>
 			</div>
 		`;
 

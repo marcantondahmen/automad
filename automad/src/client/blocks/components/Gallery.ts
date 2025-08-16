@@ -33,7 +33,12 @@
  */
 
 import { create, debounce } from '@/common';
-import { GalleryData, MasonryItem } from '@/blocks/types';
+import {
+	GalleryData,
+	GalleryRow,
+	ImageSetData,
+	MasonryItem,
+} from '@/blocks/types';
 import PhotoSwipe from 'photoswipe';
 // @ts-ignore
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -47,20 +52,6 @@ import arrowPrevSVG from '@/blocks/svg/arrowPrev.svg';
 import arrowNextSVG from '@/blocks/svg/arrowNext.svg';
 import closeSVG from '@/blocks/svg/close.svg';
 import zoomSVG from '@/blocks/svg/zoom.svg';
-
-const renderThumb = (imgSet: GalleryData['imageSets'][number]): string => {
-	const { thumb, caption } = imgSet;
-
-	return `
-		<am-img-loader
-			image="${thumb.image}"
-			preload="${thumb.preload}"
-			width="${thumb.width}"
-			height="${thumb.height}"
-		></am-img-loader>
-		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
-	`;
-};
 
 /**
  * A gallery component for column or row based layouts.
@@ -141,7 +132,7 @@ class GalleryComponent extends HTMLElement {
 					style: `--aspect: ${imgSet.thumb.width / imgSet.thumb.height}`,
 				},
 				gallery,
-				`<div class="am-gallery-img-small">${renderThumb(imgSet)}</div>`
+				`<div class="am-gallery-img-small">${this.renderThumb(imgSet)}</div>`
 			);
 		});
 	}
@@ -157,8 +148,8 @@ class GalleryComponent extends HTMLElement {
 		const maxRows = 10000;
 		const masonryWidth = this.getBoundingClientRect().width;
 		const { settings, imageSets } = this.data;
-		const colWidth = parseInt(settings.columnWidthPx.toString());
-		const gap = parseInt(settings.gapPx.toString());
+		const colWidth = settings.columnWidthPx;
+		const gap = settings.gapPx;
 		const nCols = Math.ceil(masonryWidth / colWidth);
 		const estimatedHeight = (imageSets.length / nCols) * (colWidth + gap);
 
@@ -169,12 +160,25 @@ class GalleryComponent extends HTMLElement {
 	 * Render a column based masonry layout.
 	 */
 	private renderColumns(): void {
-		const settings = this.data.settings;
-		const gallery = create('div', ['am-gallery-masonry'], {}, this);
+		const { columnWidthPx, gapPx, fillRectangle } = this.data.settings;
+		const { imageSets } = this.data;
+		const gallery = create(
+			'div',
+			['am-gallery-masonry'],
+			{ hidden: 'true' },
+			this
+		);
 
 		const items: MasonryItem[] = [];
 
-		this.data.imageSets.forEach((imgSet) => {
+		const calcHeight = (thumb: {
+			width: number;
+			height: number;
+		}): number => {
+			return Math.round((thumb.height / thumb.width) * columnWidthPx);
+		};
+
+		imageSets.forEach((imgSet) => {
 			const element = create(
 				'div',
 				['am-gallery-masonry-item'],
@@ -193,29 +197,27 @@ class GalleryComponent extends HTMLElement {
 					'data-cropped': 'true',
 				},
 				element,
-				renderThumb(imgSet)
+				this.renderThumb(imgSet)
 			);
 
 			items.push({
 				element,
 				rowSpan: 0,
 				height: element.getBoundingClientRect().height,
-				thumbHeight: imgSet.thumb.height,
+				thumbHeight: calcHeight(imgSet.thumb),
 			});
 		});
 
 		const updateItems = (items: MasonryItem[]) => {
 			const masonryRowHeight = this.calculateMasonryRowHeight();
 			const masonryWidth = this.getBoundingClientRect().width;
-			const colWidth = parseInt(settings.columnWidthPx.toString());
-			const gap = parseInt(settings.gapPx.toString());
 
 			gallery.setAttribute(
 				'style',
 				`
-					--am-gallery-item-width: ${colWidth}px;
+					--am-gallery-item-width: ${columnWidthPx}px;
 					--am-gallery-auto-rows: ${masonryRowHeight}px; 	
-					--am-gallery-gap: ${gap}px;
+					--am-gallery-gap: ${gapPx}px;
 				`
 			);
 
@@ -224,15 +226,15 @@ class GalleryComponent extends HTMLElement {
 				.getPropertyValue('grid-template-columns')
 				.split(' ').length;
 
-			const masonryWidthNoGap = masonryWidth - (nCols - 1) * gap;
+			const masonryWidthNoGap = masonryWidth - (nCols - 1) * gapPx;
 			const width = masonryWidthNoGap / nCols;
-			const factor = width / colWidth;
+			const factor = width / columnWidthPx;
 
 			items.forEach((item) => {
 				item.element.removeAttribute('style');
 
 				item.rowSpan = Math.round(
-					(item.thumbHeight * factor + gap) / masonryRowHeight
+					(item.thumbHeight * factor + gapPx) / masonryRowHeight
 				);
 
 				item.element.setAttribute(
@@ -243,7 +245,7 @@ class GalleryComponent extends HTMLElement {
 				item.height = item.element.getBoundingClientRect().height;
 			});
 
-			if (settings.cleanBottom) {
+			if (fillRectangle) {
 				const columns: { [key: number]: MasonryItem[] } = {};
 				const nRows = Math.round(
 					this.getBoundingClientRect().height / masonryRowHeight
@@ -304,48 +306,197 @@ class GalleryComponent extends HTMLElement {
 					});
 				}
 			}
+
+			gallery.removeAttribute('hidden');
 		};
 
-		updateItems(items);
+		const debounced = debounce(updateItems.bind(this, items), 50);
 
-		window.addEventListener(
-			'resize',
-			debounce(() => {
-				updateItems(items);
-			}, 50)
-		);
+		setTimeout(debounced, 0);
+		window.addEventListener('resize', debounced);
+		window.addEventListener('load', debounced);
 	}
 
 	/**
 	 * Render a row based flex layout.
 	 */
 	private renderRows(): void {
+		const { gapPx, rowHeightPx, fillRectangle } = this.data.settings;
+		const { imageSets } = this.data;
 		const gallery = create(
 			'div',
-			['am-gallery-flex'],
-			{
-				style: `
-					--am-gallery-flex-item-height: ${this.data.settings.rowHeightPx + this.data.settings.gapPx}px;
-					--am-gallery-gap: ${this.data.settings.gapPx}px;
-				`,
-			},
+			[
+				'am-gallery-flex',
+				...(fillRectangle ? ['am-gallery-flex--fill'] : []),
+			],
+			{ style: `--am-gallery-gap: ${gapPx}px;` },
 			this
 		);
 
-		this.data.imageSets.forEach((imgSet) => {
+		const calcWidth = (thumb: {
+			width: number;
+			height: number;
+		}): number => {
+			return (
+				gapPx + Math.round((thumb.width / thumb.height) * rowHeightPx)
+			);
+		};
+
+		const createRow = (
+			container: HTMLElement,
+			scale: number
+		): HTMLElement => {
+			return create(
+				'div',
+				['am-gallery-flex-row'],
+				{
+					style: `--am-gallery-flex-row-height: ${Math.round(rowHeightPx * scale)}px`,
+				},
+				container
+			);
+		};
+
+		const createImageSet = (
+			is: ImageSetData,
+			container: HTMLElement
+		): void => {
 			create(
 				'a',
-				['am-gallery-flex-item', 'am-gallery-img-small'],
+				['am-gallery-img-small'],
 				{
-					href: imgSet.large.image,
+					href: is.large.image,
 					target: '_blank',
-					'data-pswp-width': imgSet.large.width,
-					'data-pswp-height': imgSet.large.height,
+					'data-pswp-width': is.large.width,
+					'data-pswp-height': is.large.height,
 				},
-				gallery,
-				renderThumb(imgSet)
+				container,
+				this.renderThumb(is)
 			);
-		});
+		};
+
+		const updateItems = () => {
+			gallery.innerHTML = '';
+
+			const containerWidth = gallery.getBoundingClientRect().width;
+			let currentRow: ImageSetData[] = [];
+			let accWidth = -gapPx;
+
+			const calcScale = (
+				rowWidth: number,
+				numberOfItems: number
+			): number => {
+				const gaps = (numberOfItems - 1) * gapPx;
+
+				return (containerWidth - gaps) / (rowWidth - gaps);
+			};
+
+			if (fillRectangle) {
+				const rowsReversed: GalleryRow[] = [];
+
+				[...imageSets].reverse().forEach((imgSet, index) => {
+					const { thumb } = imgSet;
+
+					currentRow.push(imgSet);
+					accWidth += calcWidth(thumb);
+
+					if (
+						accWidth > containerWidth ||
+						index == imageSets.length - 1
+					) {
+						rowsReversed.push({
+							width: accWidth,
+							imageSets: currentRow.reverse(),
+						});
+
+						accWidth = -gapPx;
+						currentRow = [];
+					}
+				});
+
+				const rows: GalleryRow[] = rowsReversed.reverse();
+
+				let indexOfLastRowRemovedFrom = 1;
+
+				while (
+					rows[0].width * 2 < containerWidth &&
+					indexOfLastRowRemovedFrom < rows.length &&
+					rows[indexOfLastRowRemovedFrom].imageSets.length >
+						rows[0].imageSets.length + 1
+				) {
+					const moved =
+						rows[indexOfLastRowRemovedFrom].imageSets.shift();
+
+					rows[0].imageSets.push(moved);
+					rows[0].width += calcWidth(moved.thumb);
+
+					rows[indexOfLastRowRemovedFrom].width -= calcWidth(
+						moved.thumb
+					);
+
+					indexOfLastRowRemovedFrom++;
+				}
+
+				rows.forEach((row) => {
+					const scale = calcScale(row.width, row.imageSets.length);
+					const rowContainer = createRow(gallery, scale);
+
+					row.imageSets.forEach((is) => {
+						createImageSet(is, rowContainer);
+					});
+				});
+			} else {
+				imageSets.forEach((imgSet, index) => {
+					const { thumb } = imgSet;
+
+					currentRow.push(imgSet);
+					accWidth += calcWidth(thumb);
+
+					if (
+						accWidth > containerWidth ||
+						index == imageSets.length - 1
+					) {
+						const scale = Math.min(
+							calcScale(accWidth, currentRow.length),
+							1
+						);
+						const row = createRow(gallery, scale);
+
+						currentRow.forEach((is) => {
+							createImageSet(is, row);
+						});
+
+						accWidth = -gapPx;
+						currentRow = [];
+					}
+				});
+			}
+		};
+
+		updateItems();
+
+		const debounced = debounce(updateItems.bind(this), 50);
+
+		window.addEventListener('resize', debounced);
+		window.addEventListener('load', debounced);
+	}
+
+	/**
+	 * Render a thumbnail of an image.
+	 *
+	 * @param imgSet
+	 */
+	private renderThumb(imgSet: ImageSetData): string {
+		const { thumb, caption } = imgSet;
+
+		return `
+		<am-img-loader
+			image="${thumb.image}"
+			preload="${thumb.preload}"
+			width="${Math.round(thumb.width)}"
+			height="${Math.round(thumb.height)}"
+		></am-img-loader>
+		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
+	`;
 	}
 }
 

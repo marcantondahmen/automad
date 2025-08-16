@@ -103,11 +103,14 @@ export class EditorFieldComponent extends BaseFieldComponent {
 					const { blocks: raw } =
 						(await api.saver.save()) as EditorOutputData;
 
-					const blocks = raw.map((block) => {
-						block.tunes = filterEmptyData<KeyValueMap>(block.tunes);
+					const blocks =
+						raw?.map((block) => {
+							block.tunes = filterEmptyData<KeyValueMap>(
+								block.tunes ?? {}
+							);
 
-						return block;
-					});
+							return block;
+						}) || [];
 
 					if (
 						JSON.stringify(this.value.blocks) ===

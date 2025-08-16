@@ -108,7 +108,7 @@ export interface GalleryBlockData {
 	columnWidthPx: number;
 	rowHeightPx: number;
 	gapPx: number;
-	cleanBottom: boolean;
+	fillRectangle: boolean;
 }
 
 export interface MailBlockData {
@@ -180,7 +180,6 @@ export type SectionBorderStyle = (typeof sectionBorderStyles)[number];
 export interface SectionStyle {
 	card: boolean;
 	shadow: boolean;
-	matchRowHeight: boolean;
 	color: string;
 	backgroundColor: string;
 	backgroundBlendMode: SectionBackgroundBlendMode;

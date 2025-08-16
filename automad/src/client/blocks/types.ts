@@ -52,6 +52,13 @@ export interface GalleryData {
 	settings: Omit<GalleryBlockData, 'files'>;
 }
 
+export type ImageSetData = GalleryData['imageSets'][number];
+
+export type GalleryRow = {
+	width: number;
+	imageSets: ImageSetData[];
+};
+
 export type MailInput = HTMLInputElement | HTMLTextAreaElement;
 
 export interface MasonryItem {
