@@ -269,7 +269,6 @@
 	"mailBlockTitle": "Mail Form",
 	"mailBlockTo": "Receiving mail address",
 	"maintenanceModeText": "The server is under maintenance. All content stays accessible to visitors as usual but is currently read-only. Grap a quick coffee and as soon as maintenance is finished you can resume editing.",
-	"matchRowHeight": "Match Content to Row Height",
 	"metaDescription": "Meta Description (optional)",
 	"metaTitle": "Meta Title (optional)",
 	"missingEmailAlertBody": "There is currently no email address associated with your user account. In order to be able to receive password reset emails or other system notifications you can add an email address inside the user settings.",

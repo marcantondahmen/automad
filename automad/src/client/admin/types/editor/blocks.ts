@@ -180,7 +180,6 @@ export type SectionBorderStyle = (typeof sectionBorderStyles)[number];
 export interface SectionStyle {
 	card: boolean;
 	shadow: boolean;
-	matchRowHeight: boolean;
 	color: string;
 	backgroundColor: string;
 	backgroundBlendMode: SectionBackgroundBlendMode;
