@@ -218,7 +218,9 @@ class Config {
 		self::set('AM_CACHE_LIFETIME', 43200);
 
 		// IMAGE
-		self::set('AM_IMG_JPG_QUALITY', 90);
+		self::set('AM_IMG_JPG_QUALITY', 80);
+		self::set('AM_IMG_PNG_QUALITY', 9);
+		self::set('AM_IMG_WEBP_QUALITY', 80);
 
 		// UPDATE
 		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php');

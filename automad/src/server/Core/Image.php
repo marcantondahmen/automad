@@ -304,11 +304,11 @@ class Image {
 
 				break;
 			case 'image/png':
-				imagepng($dest, $this->fileFullPath);
+				imagepng($dest, $this->fileFullPath, AM_IMG_PNG_QUALITY);
 
 				break;
 			case 'image/webp':
-				imagewebp($dest, $this->fileFullPath);
+				imagewebp($dest, $this->fileFullPath, AM_IMG_WEBP_QUALITY);
 
 				break;
 		}
