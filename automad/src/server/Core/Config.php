@@ -218,8 +218,11 @@ class Config {
 		self::set('AM_CACHE_LIFETIME', 43200);
 
 		// IMAGE
+		// https://www.php.net/manual/en/function.imagejpeg.php
 		self::set('AM_IMG_JPG_QUALITY', 80);
+		// https://www.php.net/manual/en/function.imagepng.php
 		self::set('AM_IMG_PNG_QUALITY', 9);
+		// https://www.php.net/manual/en/function.imagewebp.php
 		self::set('AM_IMG_WEBP_QUALITY', 80);
 
 		// UPDATE
