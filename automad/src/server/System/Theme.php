@@ -192,6 +192,7 @@ class Theme {
 		$this->version = $data['version'];
 
 		$this->i18n(dirname($themeJson));
+		$this->resolveLinkedOptions();
 	}
 
 	/**
@@ -247,5 +248,16 @@ class Theme {
 		$this->labels = array_replace_recursive($this->labels, $i18n['labels']);
 		$this->tooltips = array_replace_recursive($this->tooltips, $i18n['tooltips']);
 		$this->options = array_replace_recursive($this->options, $i18n['options']);
+	}
+
+	/**
+	 * Resolved reused and linked options objects.
+	 */
+	private function resolveLinkedOptions(): void {
+		foreach ($this->options as $field => $value) {
+			if (is_string($value)) {
+				$this->options[$field] = $this->options[$value];
+			}
+		}
 	}
 }
