@@ -82,7 +82,7 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 
 		$Toolbox = new Toolbox($this->Automad);
 
-		// Call snippet or method in order of priority: Snippets, Toolbox methods and extensions.
+		// Call snippet or method in order of priority: Snippets, Toolbox methods, custom functions and extensions.
 		if ($Snippet = SnippetCollection::get($call)) {
 			// Process a registered snippet.
 			Debug::log($call, 'Process registered snippet');
@@ -98,8 +98,17 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 			return $Toolbox->$call($options) ?? '';
 		}
 
+		$custom = str_replace('/', '\\', $call);
+
+		if (function_exists($custom)) {
+			// Call a custom function.
+			Debug::log($options, 'Calling custom function ' . $custom);
+
+			return $custom($options);
+		}
+
 		// Try an extension, if no snippet or toolbox method was found.
-		Debug::log($call . ' is not a snippet or core method. Will look for a matching extension ...');
+		Debug::log($call . ' is not a snippet core method or custom function. Will look for a matching extension ...');
 		$Extension = new Extension($call, $options, $this->Automad);
 		AssetCollection::merge($Extension->getAssets());
 
