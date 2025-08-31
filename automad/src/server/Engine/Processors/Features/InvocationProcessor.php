@@ -103,7 +103,7 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 			// Call a custom function.
 			Debug::log($options, 'Calling custom function ' . $call);
 
-			return CustomFunction::call($call, $options);
+			return CustomFunction::call($call, $options, $this->Automad);
 		}
 
 		// Try an extension, if no snippet or toolbox method was found.

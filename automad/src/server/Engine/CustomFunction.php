@@ -36,6 +36,8 @@
 
 namespace Automad\Engine;
 
+use Automad\Core\Automad;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -66,13 +68,14 @@ class CustomFunction {
 	 *
 	 * @param string $name
 	 * @param array $options
+	 * @param Automad $Automad
 	 */
-	public static function call(string $name, array $options): string {
+	public static function call(string $name, array $options, Automad $Automad): string {
 		if (empty(self::$registry[$name])) {
 			return '';
 		}
 
-		return self::$registry[$name]($options) ?? '';
+		return self::$registry[$name]($options, $Automad) ?? '';
 	}
 
 	/**
