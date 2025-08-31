@@ -120,6 +120,7 @@ class View {
 	 * Load global template helpers such as func().
 	 */
 	private function loadGlobals(): void {
-		include_once __DIR__ . '/Globals/func.php';
+		require_once __DIR__ . '/Globals/func.php';
+		require_once __DIR__ . '/Globals/inc.php';
 	}
 }
