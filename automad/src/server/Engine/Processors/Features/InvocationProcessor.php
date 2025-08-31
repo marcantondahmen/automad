@@ -40,6 +40,7 @@ use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Collections\SnippetCollection;
+use Automad\Engine\CustomFunction;
 use Automad\Engine\Delimiters;
 use Automad\Engine\Extension;
 use Automad\Engine\Toolbox;
@@ -47,7 +48,7 @@ use Automad\Engine\Toolbox;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The snippet, Toolbox method or extension method invocation processor.
+ * The snippet, Toolbox method, function or extension method invocation processor.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
@@ -98,13 +99,11 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 			return $Toolbox->$call($options) ?? '';
 		}
 
-		$custom = str_replace('/', '\\', $call);
-
-		if (function_exists($custom)) {
+		if (CustomFunction::exists($call)) {
 			// Call a custom function.
-			Debug::log($options, 'Calling custom function ' . $custom);
+			Debug::log($options, 'Calling custom function ' . $call);
 
-			return $custom($options);
+			return CustomFunction::call($call, $options);
 		}
 
 		// Try an extension, if no snippet or toolbox method was found.

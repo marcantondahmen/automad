@@ -70,8 +70,6 @@ class View {
 	 * @param Automad $Automad
 	 */
 	public function __construct(Automad $Automad) {
-		$this->Automad = $Automad;
-
 		$Page = $Automad->Context->get();
 
 		// Redirect page, if the defined URL variable differs from the original URL.
@@ -81,7 +79,9 @@ class View {
 			exit();
 		}
 
+		$this->Automad = $Automad;
 		$this->template = $Page->getTemplate();
+		$this->loadGlobals();
 
 		Debug::log($Page, 'New instance created for the current page');
 	}
@@ -127,5 +127,12 @@ class View {
 		$output = $PostProcessor->process($output);
 
 		return trim($output);
+	}
+
+	/**
+	 * Load global template helpers such as func().
+	 */
+	private function loadGlobals(): void {
+		include_once __DIR__ . '/Globals/func.php';
 	}
 }

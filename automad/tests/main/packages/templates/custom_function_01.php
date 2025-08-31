@@ -1,13 +1,9 @@
 <?php
 
-namespace Automad;
-
-function test($options) {
-	$json = json_encode($options);
-
-	return $json;
-}
+func('test', function ($options) {
+	return json_encode($options);
+});
 
 ?>
 
-<@~ Automad/test { text: "Hello" } ~@>
+<@~ test { text: "Hello" } ~@>
