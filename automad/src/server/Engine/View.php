@@ -40,7 +40,6 @@ use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\Resolve;
-use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\PostProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
 
@@ -94,20 +93,8 @@ class View {
 	public function render(): string {
 		Debug::log($this->template, 'Render template');
 
-		$Runtime = new Runtime($this->Automad);
 		$InPage = new InPage($this->Automad);
-
-		$ContentProcessor = new ContentProcessor(
-			$this->Automad,
-			$Runtime,
-			$InPage
-		);
-
-		$TemplateProcessor = new TemplateProcessor(
-			$this->Automad,
-			$Runtime,
-			$ContentProcessor
-		);
+		$TemplateProcessor = TemplateProcessor::create($this->Automad, $InPage);
 
 		$output = $this->Automad->loadTemplate($this->template);
 		$directory = dirname($this->template);
