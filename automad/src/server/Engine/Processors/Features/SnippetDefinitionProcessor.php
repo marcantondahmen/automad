@@ -39,6 +39,7 @@ namespace Automad\Engine\Processors\Features;
 use Automad\Core\Debug;
 use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Delimiters;
+use Automad\Engine\Processors\TemplateProcessor;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -55,9 +56,8 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(array $matches, string $directory): string {
 		if (empty($matches['snippet'])) {
 			return '';
 		}
@@ -67,17 +67,17 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 		$collection = SnippetCollection::getCollection();
 
 		// It is very important to differentiate between the first time a template is processed,
-		// with $collectSnippetDefinitions == true, and the final one where the actual output is generated.
+		// with TemplateProcessor::$registerSnippets == true, and the final one where the actual output is generated.
 		// The first run only collects definitions and also allows for overriding them based on other definitions
 		// using the same name and that occur after their actual evaluation in a template.
-		if ($collectSnippetDefinitions) {
+		if (TemplateProcessor::$registerSnippets) {
 			SnippetCollection::add($name, $body, $directory);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 
 			return '';
 		}
 
-		// Now the point is that in the second run, when $collectSnippetDefinitions == false,
+		// Now the point is that in the second run, when TemplateProcessor::$registerSnippets == false,
 		// definitions that are already part of the collection must (!) not be overriden because
 		// that would revert the overrides that have been collected in the first run back to the
 		// original version right before they are evaluated. However, since the overrides have not been evaluated

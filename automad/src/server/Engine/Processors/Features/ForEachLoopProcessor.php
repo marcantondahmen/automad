@@ -58,10 +58,9 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(array $matches, string $directory): string {
 		if (empty($matches['foreach'])) {
 			return '';
 		}
@@ -107,7 +106,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				$this->Runtime->set(Fields::LOOP_INDEX, ++$i + $offset);
 				// Parse snippet.
 				Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
-				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
+				$html .= $TemplateProcessor->process($foreachSnippet, $directory);
 				// Note that the config only has to be shelved once before starting the loop,
 				// but has to be restored after each snippet to provide the correct data (like :pagelistCount)
 				// for the next iteration, since a changed config would generate incorrect values in
@@ -127,7 +126,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				$this->Runtime->set(Fields::FILTER, $filter);
 				// Set index. The index can be used as @{:i}.
 				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
-				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
+				$html .= $TemplateProcessor->process($foreachSnippet, $directory);
 			}
 		} elseif (strtolower($matches['foreach']) == 'tags') {
 			// Tags (of the current page)
@@ -138,7 +137,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				$this->Runtime->set(Fields::TAG, $tag);
 				// Set index. The index can be used as @{:i}.
 				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
-				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
+				$html .= $TemplateProcessor->process($foreachSnippet, $directory);
 			}
 		} else {
 			// Files
@@ -169,7 +168,6 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 					),
 					$foreachSnippet,
 					$directory,
-					$collectSnippetDefinitions
 				);
 			}
 		}
@@ -180,7 +178,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 		// If the counter ($i) is 0 (false), process the "else" snippet.
 		if (!$i) {
 			Debug::log('foreach in ' . strtolower($matches['foreach']), 'No elements array. Processing else statement for');
-			$html .= $TemplateProcessor->process($foreachElseSnippet, $directory, $collectSnippetDefinitions);
+			$html .= $TemplateProcessor->process($foreachElseSnippet, $directory);
 		}
 
 		return $html;

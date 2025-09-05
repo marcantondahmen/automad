@@ -67,6 +67,8 @@ class Snippet {
 			return '';
 		}
 
+		$registerSnippets = TemplateProcessor::$registerSnippets;
+		TemplateProcessor::$registerSnippets = true;
 		self::$snippetIsRendering = true;
 
 		$output = '';
@@ -74,7 +76,7 @@ class Snippet {
 		$TemplateProcessor = TemplateProcessor::create($Automad);
 
 		if (!empty($data['snippet'])) {
-			$output .= $TemplateProcessor->process($data['snippet'], AM_BASE_DIR . AM_DIR_PACKAGES, true);
+			$output .= $TemplateProcessor->process($data['snippet'], AM_BASE_DIR . AM_DIR_PACKAGES);
 		}
 
 		if (!empty($data['file'])) {
@@ -88,10 +90,11 @@ class Snippet {
 
 			if (is_readable($file)) {
 				$template = $Automad->loadTemplate($file);
-				$output .= $TemplateProcessor->process($template, dirname($file), true);
+				$output .= $TemplateProcessor->process($template, dirname($file));
 			}
 		}
 
+		TemplateProcessor::$registerSnippets = $registerSnippets;
 		self::$snippetIsRendering = false;
 
 		return $output;

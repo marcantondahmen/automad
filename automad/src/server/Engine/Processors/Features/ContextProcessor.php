@@ -58,10 +58,9 @@ class ContextProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed template string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(array $matches, string $directory): string {
 		if (empty($matches['with'])) {
 			return '';
 		}
@@ -108,7 +107,7 @@ class ContextProcessor extends AbstractFeatureProcessor {
 			$Context->set($Page);
 
 			// Parse snippet.
-			$html = $TemplateProcessor->process($matches['withSnippet'], $directory, $collectSnippetDefinitions);
+			$html = $TemplateProcessor->process($matches['withSnippet'], $directory);
 
 			// Restore original context and pagelist.
 			$Context->set($contextShelf);
@@ -134,7 +133,6 @@ class ContextProcessor extends AbstractFeatureProcessor {
 				),
 				$matches['withSnippet'],
 				$directory,
-				$collectSnippetDefinitions
 			);
 		}
 
@@ -142,7 +140,7 @@ class ContextProcessor extends AbstractFeatureProcessor {
 		Debug::log($url, 'With: No matching page or file found for');
 
 		if (!empty($matches['withElseSnippet'])) {
-			return $TemplateProcessor->process($matches['withElseSnippet'], $directory, $collectSnippetDefinitions);
+			return $TemplateProcessor->process($matches['withElseSnippet'], $directory);
 		}
 
 		return '';

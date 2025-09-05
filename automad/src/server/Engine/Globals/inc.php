@@ -49,5 +49,5 @@ function inc(string $file, Automad $Automad): string {
 	$TemplateProcessor = TemplateProcessor::create($Automad);
 	$template = $Automad->loadTemplate($file);
 
-	return $TemplateProcessor->process($template, dirname($file), true);
+	return $TemplateProcessor->process($template, dirname($file));
 }

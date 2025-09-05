@@ -38,7 +38,6 @@ namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
 use Automad\Engine\Delimiters;
-use Automad\Engine\Processors\TemplateProcessor;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -55,10 +54,9 @@ class IncludeProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(array $matches, string $directory): string {
 		if (empty($matches['file'])) {
 			return '';
 		}
@@ -70,7 +68,7 @@ class IncludeProcessor extends AbstractFeatureProcessor {
 			Debug::log($file, 'Including');
 			$TemplateProcessor = $this->initTemplateProcessor();
 
-			return $TemplateProcessor->process($this->Automad->loadTemplate($file), dirname($file), $collectSnippetDefinitions);
+			return $TemplateProcessor->process($this->Automad->loadTemplate($file), dirname($file));
 		}
 
 		Debug::log($file, 'File not found');

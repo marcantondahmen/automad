@@ -53,6 +53,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class TemplateProcessor {
 	/**
+	 * A flag the can be used to configure whether snippet definitions are registered when processing templates.
+	 */
+	public static bool $registerSnippets = true;
+
+	/**
 	 * The main Automad instance.
 	 */
 	private Automad $Automad;
@@ -116,27 +121,26 @@ class TemplateProcessor {
 
 	/**
 	 * The main template render process basically applies all feature processors to the rendered template.
-	 * Note that the $collectSnippetDefinitions parameter controls whether snippets are added to the
+	 * Note that the TemplateProcessor::$registerSnippets parameter controls whether snippets are added to the
 	 * snippet collection in order to enable basic inheritance.
 	 *
 	 * @param string $template
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed template
 	 */
-	public function process(string $template, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(string $template, string $directory): string {
 		$output = PreProcessor::stripWhitespace($template);
 		$output = PreProcessor::prepareWrappingStatements($output);
 
 		$output = preg_replace_callback(
 			'/' . PatternAssembly::template() . '/is',
-			function ($matches) use ($directory, $collectSnippetDefinitions) {
+			function ($matches) use ($directory) {
 				if (!empty($matches['var'])) {
 					return $this->ContentProcessor->processVariables($matches['var'], false, true);
 				}
 
 				foreach ($this->featureProcessors as $processor) {
-					$featureOutput = $processor->process($matches, $directory, $collectSnippetDefinitions);
+					$featureOutput = $processor->process($matches, $directory);
 
 					if (!empty($featureOutput)) {
 						return $featureOutput;

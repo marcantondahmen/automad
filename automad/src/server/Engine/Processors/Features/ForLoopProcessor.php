@@ -56,10 +56,9 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(array $matches, string $directory): string {
 		if (empty($matches['forSnippet'])) {
 			return '';
 		}
@@ -79,7 +78,7 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 			$this->Runtime->set(Fields::LOOP_INDEX, $i);
 			// Parse snippet.
 			Debug::log($i, 'Processing snippet in loop for index');
-			$html .= $TemplateProcessor->process($matches['forSnippet'], $directory, $collectSnippetDefinitions);
+			$html .= $TemplateProcessor->process($matches['forSnippet'], $directory);
 		}
 
 		// Restore index.

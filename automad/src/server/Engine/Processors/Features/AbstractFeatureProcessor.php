@@ -90,10 +90,9 @@ abstract class AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string
 	 */
-	abstract public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string;
+	abstract public function process(array $matches, string $directory): string;
 
 	/**
 	 * The actual pattern that is used to trigger the processor.
