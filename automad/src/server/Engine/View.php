@@ -40,7 +40,6 @@ use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\Resolve;
-use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\PostProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
 
@@ -70,8 +69,6 @@ class View {
 	 * @param Automad $Automad
 	 */
 	public function __construct(Automad $Automad) {
-		$this->Automad = $Automad;
-
 		$Page = $Automad->Context->get();
 
 		// Redirect page, if the defined URL variable differs from the original URL.
@@ -81,7 +78,9 @@ class View {
 			exit();
 		}
 
+		$this->Automad = $Automad;
 		$this->template = $Page->getTemplate();
+		$this->loadGlobals();
 
 		Debug::log($Page, 'New instance created for the current page');
 	}
@@ -94,20 +93,8 @@ class View {
 	public function render(): string {
 		Debug::log($this->template, 'Render template');
 
-		$Runtime = new Runtime($this->Automad);
 		$InPage = new InPage($this->Automad);
-
-		$ContentProcessor = new ContentProcessor(
-			$this->Automad,
-			$Runtime,
-			$InPage
-		);
-
-		$TemplateProcessor = new TemplateProcessor(
-			$this->Automad,
-			$Runtime,
-			$ContentProcessor
-		);
+		$TemplateProcessor = TemplateProcessor::create($this->Automad, $InPage);
 
 		$output = $this->Automad->loadTemplate($this->template);
 		$directory = dirname($this->template);
@@ -127,5 +114,13 @@ class View {
 		$output = $PostProcessor->process($output);
 
 		return trim($output);
+	}
+
+	/**
+	 * Load global template helpers such as func().
+	 */
+	private function loadGlobals(): void {
+		require_once __DIR__ . '/Globals/func.php';
+		require_once __DIR__ . '/Globals/inc.php';
 	}
 }

@@ -36,11 +36,8 @@
 
 namespace Automad\Blocks;
 
-use Automad\Admin\InPage;
 use Automad\Core\Automad;
-use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
-use Automad\Engine\Runtime;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -72,24 +69,9 @@ class Snippet {
 
 		self::$snippetIsRendering = true;
 
-		$data = $block['data'];
-
-		$Runtime = new Runtime($Automad);
-		$InPage = new InPage($Automad);
-
-		$ContentProcessor = new ContentProcessor(
-			$Automad,
-			$Runtime,
-			$InPage
-		);
-
-		$TemplateProcessor = new TemplateProcessor(
-			$Automad,
-			$Runtime,
-			$ContentProcessor
-		);
-
 		$output = '';
+		$data = $block['data'];
+		$TemplateProcessor = TemplateProcessor::create($Automad);
 
 		if (!empty($data['snippet'])) {
 			$output .= $TemplateProcessor->process($data['snippet'], AM_BASE_DIR . AM_DIR_PACKAGES, true);

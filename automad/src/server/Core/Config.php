@@ -218,7 +218,12 @@ class Config {
 		self::set('AM_CACHE_LIFETIME', 43200);
 
 		// IMAGE
-		self::set('AM_IMG_JPG_QUALITY', 90);
+		// https://www.php.net/manual/en/function.imagejpeg.php
+		self::set('AM_IMG_JPG_QUALITY', 80);
+		// https://www.php.net/manual/en/function.imagepng.php
+		self::set('AM_IMG_PNG_QUALITY', 9);
+		// https://www.php.net/manual/en/function.imagewebp.php
+		self::set('AM_IMG_WEBP_QUALITY', 80);
 
 		// UPDATE
 		self::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php');
@@ -227,7 +232,7 @@ class Config {
 		self::set('AM_UPDATE_TEMP', AM_BASE_DIR . AM_DIR_CACHE . '/update');
 
 		// Packagist
-		self::set('AM_PACKAGE_REGISTRY', 'https://registry.automad.org/v2/themes.json');
+		self::set('AM_PACKAGE_REGISTRY', 'https://registry.automad.org/2.0.0-alpha.43.json');
 		self::set('AM_PACKAGE_FILTER_REGEX', '.');
 
 		// I18n

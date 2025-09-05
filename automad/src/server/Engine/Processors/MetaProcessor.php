@@ -323,7 +323,7 @@ class MetaProcessor {
 		}
 
 		FileSystem::makeDir(dirname($file));
-		imagepng($image, $file);
+		imagepng($image, $file, AM_IMG_PNG_QUALITY);
 
 		return $url;
 	}

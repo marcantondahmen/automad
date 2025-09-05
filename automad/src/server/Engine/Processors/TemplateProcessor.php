@@ -36,6 +36,7 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Engine\FeatureProvider;
 use Automad\Engine\PatternAssembly;
@@ -87,6 +88,30 @@ class TemplateProcessor {
 		$this->Runtime = $Runtime;
 		$this->ContentProcessor = $ContentProcessor;
 		$this->featureProcessors = $this->initFeatureProcessors();
+	}
+
+	/**
+	 * Create a template processor instance.
+	 *
+	 * @param Automad $Automad
+	 * @param InPage|null $InPage
+	 * @return TemplateProcessor
+	 */
+	public static function create(Automad $Automad, InPage|null $InPage = null): TemplateProcessor {
+		$Runtime = new Runtime($Automad);
+		$InPage ??= new InPage($Automad);
+
+		$ContentProcessor = new ContentProcessor(
+			$Automad,
+			$Runtime,
+			$InPage
+		);
+
+		return new TemplateProcessor(
+			$Automad,
+			$Runtime,
+			$ContentProcessor
+		);
 	}
 
 	/**
