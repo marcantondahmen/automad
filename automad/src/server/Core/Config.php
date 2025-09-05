@@ -232,7 +232,7 @@ class Config {
 		self::set('AM_UPDATE_TEMP', AM_BASE_DIR . AM_DIR_CACHE . '/update');
 
 		// Packagist
-		self::set('AM_PACKAGE_REGISTRY', 'https://registry.automad.org/v2/themes.json');
+		self::set('AM_PACKAGE_REGISTRY', 'https://registry.automad.org/2.0.0-alpha.43.json');
 		self::set('AM_PACKAGE_FILTER_REGEX', '.');
 
 		// I18n
