@@ -38,7 +38,6 @@ namespace Automad\Core;
 
 use Automad\API\RequestHandler;
 use Automad\Engine\Delimiters;
-use Automad\Engine\Runtime;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Context;
 use Automad\Models\Filelist;

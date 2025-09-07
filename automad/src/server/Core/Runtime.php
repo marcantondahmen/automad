@@ -34,11 +34,8 @@
  * https://automad.org/license
  */
 
-namespace Automad\Engine;
+namespace Automad\Core;
 
-use Automad\Core\Debug;
-use Automad\Core\FileUtils;
-use Automad\Core\I18n;
 use Automad\Models\Filelist;
 use Automad\Models\Pagelist;
 use Automad\System\Fields;
