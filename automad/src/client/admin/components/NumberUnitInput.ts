@@ -87,7 +87,7 @@ class NumberUnitInputComponent extends BaseComponent {
 			[CSS.input, CSS.formGroupItem],
 			{
 				type: 'number',
-				step: '1',
+				step: '0.001',
 				value: number,
 			},
 			this
