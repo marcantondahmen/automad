@@ -38,6 +38,7 @@ namespace Automad\Core;
 
 use Automad\API\RequestHandler;
 use Automad\Engine\Delimiters;
+use Automad\Engine\Runtime;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Context;
 use Automad\Models\Filelist;
@@ -69,6 +70,11 @@ class Automad {
 	 * The object is part of the Automad class to allow to access always the same instance of the Context class for all objects using the Automad object as parameter.
 	 */
 	public Context $Context;
+
+	/**
+	 * The Runtime object;
+	 */
+	public Runtime $Runtime;
 
 	/**
 	 * Automad's Shared object.
@@ -111,7 +117,7 @@ class Automad {
 
 		Debug::log(array('Shared' => $this->Shared, 'Pages' => $this->pages), 'New instance created');
 
-		$this->Context = new Context($this->getRequestedPage());
+		$this->init();
 	}
 
 	/**
@@ -131,7 +137,8 @@ class Automad {
 	 */
 	public function __wakeup(): void {
 		Debug::log(get_object_vars($this), 'Automad object was unserialized');
-		$this->Context = new Context($this->getRequestedPage());
+
+		$this->init();
 	}
 
 	/**
@@ -303,6 +310,14 @@ class Automad {
 		}
 
 		return $this->pageNotFound();
+	}
+
+	/**
+	 * Initialized objects that are not cached.
+	 */
+	private function init(): void {
+		$this->Context = new Context($this->getRequestedPage());
+		$this->Runtime = new Runtime($this->getFilelist(), $this->getPagelist());
 	}
 
 	/**

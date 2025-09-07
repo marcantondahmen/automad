@@ -40,7 +40,6 @@ use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Engine\FeatureProvider;
 use Automad\Engine\PatternAssembly;
-use Automad\Engine\Runtime;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -73,24 +72,16 @@ class TemplateProcessor {
 	private array $featureProcessors;
 
 	/**
-	 * The Runtime instance.
-	 */
-	private Runtime $Runtime;
-
-	/**
 	 * The template processor constructor.
 	 *
 	 * @param Automad $Automad
-	 * @param Runtime $Runtime
 	 * @param ContentProcessor $ContentProcessor
 	 */
 	public function __construct(
 		Automad $Automad,
-		Runtime $Runtime,
 		ContentProcessor $ContentProcessor
 	) {
 		$this->Automad = $Automad;
-		$this->Runtime = $Runtime;
 		$this->ContentProcessor = $ContentProcessor;
 		$this->featureProcessors = $this->initFeatureProcessors();
 	}
@@ -103,18 +94,15 @@ class TemplateProcessor {
 	 * @return TemplateProcessor
 	 */
 	public static function create(Automad $Automad, InPage|null $InPage = null): TemplateProcessor {
-		$Runtime = new Runtime($Automad);
 		$InPage ??= new InPage($Automad);
 
 		$ContentProcessor = new ContentProcessor(
 			$Automad,
-			$Runtime,
 			$InPage
 		);
 
 		return new TemplateProcessor(
 			$Automad,
-			$Runtime,
 			$ContentProcessor
 		);
 	}
@@ -170,7 +158,6 @@ class TemplateProcessor {
 		foreach (FeatureProvider::getProcessorClasses() as $cls) {
 			$processors[$cls] = new $cls(
 				$this->Automad,
-				$this->Runtime,
 				$this->ContentProcessor
 			);
 		}

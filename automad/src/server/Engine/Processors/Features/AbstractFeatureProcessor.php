@@ -39,7 +39,6 @@ namespace Automad\Engine\Processors\Features;
 use Automad\Core\Automad;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
-use Automad\Engine\Runtime;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -63,24 +62,16 @@ abstract class AbstractFeatureProcessor {
 	protected ContentProcessor $ContentProcessor;
 
 	/**
-	 * The Runtime instance.
-	 */
-	protected Runtime $Runtime;
-
-	/**
 	 * The feature processor constructor.
 	 *
 	 * @param Automad $Automad
-	 * @param Runtime $Runtime
 	 * @param ContentProcessor $ContentProcessor
 	 */
 	public function __construct(
 		Automad $Automad,
-		Runtime $Runtime,
 		ContentProcessor $ContentProcessor
 	) {
 		$this->Automad = $Automad;
-		$this->Runtime = $Runtime;
 		$this->ContentProcessor = $ContentProcessor;
 	}
 
@@ -109,7 +100,6 @@ abstract class AbstractFeatureProcessor {
 	protected function initTemplateProcessor(): TemplateProcessor {
 		return new TemplateProcessor(
 			$this->Automad,
-			$this->Runtime,
 			$this->ContentProcessor
 		);
 	}

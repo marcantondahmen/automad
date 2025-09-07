@@ -47,7 +47,6 @@ use Automad\Core\Str;
 use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
-use Automad\Engine\Runtime;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -71,24 +70,16 @@ class ContentProcessor {
 	private InPage $InPage;
 
 	/**
-	 * The Runtime instance.
-	 */
-	private Runtime $Runtime;
-
-	/**
 	 * The content processor constructor.
 	 *
 	 * @param Automad $Automad
-	 * @param Runtime $Runtime
 	 * @param InPage $InPage
 	 */
 	public function __construct(
 		Automad $Automad,
-		Runtime $Runtime,
 		InPage $InPage
 	) {
 		$this->Automad = $Automad;
-		$this->Runtime = $Runtime;
 		$this->InPage = $InPage;
 	}
 
@@ -108,11 +99,11 @@ class ContentProcessor {
 		string $directory,
 	): string {
 		// Shelve runtime data.
-		$runtimeShelf = $this->Runtime->shelve();
+		$runtimeShelf = $this->Automad->Runtime->shelve();
 
 		// Store current filename and its basename in the system variable buffer.
-		$this->Runtime->set(Fields::FILE, $file);
-		$this->Runtime->set(Fields::BASENAME, basename($file));
+		$this->Automad->Runtime->set(Fields::FILE, $file);
+		$this->Automad->Runtime->set(Fields::BASENAME, basename($file));
 
 		// If $file is an image, also provide width and height (and possibly a new filename after a resize).
 		if (FileUtils::fileIsImage($file)) {
@@ -120,8 +111,8 @@ class ContentProcessor {
 			$imgSize = getimagesize(AM_BASE_DIR . $file);
 
 			if ($imgSize) {
-				$this->Runtime->set(Fields::WIDTH, $imgSize[0]);
-				$this->Runtime->set(Fields::HEIGHT, $imgSize[1]);
+				$this->Automad->Runtime->set(Fields::WIDTH, $imgSize[0]);
+				$this->Automad->Runtime->set(Fields::HEIGHT, $imgSize[1]);
 			}
 
 			// If any options are given, create a resized version of the image.
@@ -136,9 +127,9 @@ class ContentProcessor {
 				);
 
 				$img = new Image(AM_BASE_DIR . $file, $options['width'], $options['height'], $options['crop']);
-				$this->Runtime->set(Fields::FILE_RESIZED, $img->file);
-				$this->Runtime->set(Fields::WIDTH_RESIZED, $img->width);
-				$this->Runtime->set(Fields::HEIGHT_RESIZED, $img->height);
+				$this->Automad->Runtime->set(Fields::FILE_RESIZED, $img->file);
+				$this->Automad->Runtime->set(Fields::WIDTH_RESIZED, $img->width);
+				$this->Automad->Runtime->set(Fields::HEIGHT_RESIZED, $img->height);
 			}
 		}
 
@@ -148,7 +139,7 @@ class ContentProcessor {
 		$html = $TemplateProcessor->process($snippet, $directory);
 
 		// Unshelve runtime data.
-		$this->Runtime->unshelve($runtimeShelf);
+		$this->Automad->Runtime->unshelve($runtimeShelf);
 
 		return $html;
 	}
@@ -296,7 +287,7 @@ class ContentProcessor {
 		}
 
 		// First try to get the value from the current Runtime object.
-		$value = $this->Runtime->get($key);
+		$value = $this->Automad->Runtime->get($key);
 
 		// If $value is NULL (!), try the current context.
 		if (is_null($value)) {

@@ -36,10 +36,11 @@
 
 namespace Automad\Engine;
 
-use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\I18n;
+use Automad\Models\Filelist;
+use Automad\Models\Pagelist;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,22 +55,30 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Runtime {
 	/**
-	 * The Automad object.
-	 */
-	private Automad $Automad;
-
-	/**
 	 * The runtime data array.
 	 */
 	private array $data = array();
 
 	/**
+	 * The Filelist object.
+	 */
+	private Filelist $Filelist;
+
+	/**
+	 * The Pagelist object.
+	 */
+	private Pagelist $Pagelist;
+
+	/**
 	 * The constructor.
 	 *
-	 * @param Automad $Automad
+	 * @param Filelist $Filelist
+	 * @param Pagelist $Pagelist
 	 */
-	public function __construct(Automad $Automad) {
-		$this->Automad = $Automad;
+	public function __construct(Filelist $Filelist, Pagelist $Pagelist) {
+		$this->Filelist = $Filelist;
+		$this->Pagelist = $Pagelist;
+
 		Debug::log('Created new instance');
 	}
 
@@ -92,7 +101,7 @@ class Runtime {
 
 				case Fields::FILELIST_COUNT:
 					// The filelist count represents the number of files within the last defined filelist.
-					return count($this->Automad->getFilelist()->getFiles());
+					return count($this->Filelist->getFiles());
 
 				case Fields::LANG:
 					// The currently active language.
@@ -100,15 +109,15 @@ class Runtime {
 
 				case Fields::PAGELIST_COUNT:
 					// The pagelist count represents the number of pages within the last defined pagelist, ignoring limit and pagination.
-					return count($this->Automad->getPagelist()->getPages(true));
+					return count($this->Pagelist->getPages(true));
 
 				case Fields::PAGELIST_DISPLAY_COUNT:
 					// The pagelist display count represents the number of pages that will be displayed.
-					return count($this->Automad->getPagelist()->getPages(false));
+					return count($this->Pagelist->getPages(false));
 
 				case Fields::PAGINATION_COUNT:
 					// The last page number of the pagination of the current pagelist.
-					return $this->Automad->getPagelist()->getPaginationCount();
+					return $this->Pagelist->getPaginationCount();
 
 				case Fields::CAPTION:
 					// Get the caption for the currently used ":file".
