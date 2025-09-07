@@ -107,7 +107,7 @@ class Mock extends TestCase {
 						':index' => '1.1',
 						'tags' => 'test'
 					),
-					Data::load('/page'),
+					Data::load('/page-slug'),
 					Data::load('/inheritance'),
 					Data::load('/falsy'),
 					Data::load('/invalid'),

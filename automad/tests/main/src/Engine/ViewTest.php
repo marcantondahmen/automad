@@ -188,6 +188,7 @@ class ViewTest extends TestCase {
 							{$custom->bodyEnd}</body>
 						</html>
 						HTML,
+			'runtime_01' => '1. /automad/tests/main/data/page-slug/empty.css',
 			'session_get_01' => 'Session Test',
 			'set_01' => 'Test 1, Test 2',
 			'snippet_01' => 'Snippet Test / Snippet Test',
