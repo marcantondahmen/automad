@@ -131,7 +131,7 @@ class State {
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection())
 			),
-			'tags' => $Automad->getPagelist()->getTags(),
+			'tags' => $Automad->Pagelist->getTags(),
 			'themes' => $themes,
 			'user' => $UserCollection->getUser(Session::getUsername())
 		);

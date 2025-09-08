@@ -59,7 +59,7 @@ class Filelist extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
-		$Filelist = $Automad->getFilelist();
+		$Filelist = $Automad->Filelist;
 
 		$Filelist->config(
 			array(

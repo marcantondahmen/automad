@@ -85,12 +85,12 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			// Pagelist
 
 			// Get pages.
-			$pages = $this->Automad->getPagelist()->getPages();
+			$pages = $this->Automad->Pagelist->getPages();
 			Debug::log($pages, 'Foreach in pagelist loop');
 
 			// Shelve context page and pagelist config.
 			$contextShelf = $Context->get();
-			$pagelistConfigShelf = $this->Automad->getPagelist()->config();
+			$pagelistConfigShelf = $this->Automad->Pagelist->config();
 
 			// Calculate offset for index.
 			if ($pagelistPage = intval($pagelistConfigShelf['page'])) {
@@ -111,7 +111,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				// but has to be restored after each snippet to provide the correct data (like :pagelistCount)
 				// for the next iteration, since a changed config would generate incorrect values in
 				// recursive loops.
-				$this->Automad->getPagelist()->config($pagelistConfigShelf);
+				$this->Automad->Pagelist->config($pagelistConfigShelf);
 			}
 
 			// Restore context.
@@ -120,7 +120,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			// Filters (tags of the pages in the pagelist)
 			// Each filter can be used as @{:filter} within a snippet.
 
-			foreach ($this->Automad->getPagelist()->getTags() as $filter) {
+			foreach ($this->Automad->Pagelist->getTags() as $filter) {
 				Debug::log($filter, 'Processing snippet in loop for filter');
 				// Store current filter in the system variable buffer.
 				$this->Automad->Runtime->set(Fields::FILTER, $filter);
@@ -144,7 +144,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			// The file path and the basename can be used like @{:file} and @{:basename} within a snippet.
 			if (strtolower($matches['foreach']) == 'filelist') {
 				// Use files from filelist.
-				$files = $this->Automad->getFilelist()->getFiles();
+				$files = $this->Automad->Filelist->getFiles();
 			} else {
 				// Parse given glob pattern within any kind of quotes or from a variable value.
 				$files = FileUtils::fileDeclaration(

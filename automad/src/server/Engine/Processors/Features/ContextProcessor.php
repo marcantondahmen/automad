@@ -73,15 +73,15 @@ class ContextProcessor extends AbstractFeatureProcessor {
 		if (strtolower($matches['with']) == 'prev' || strtolower($matches['with']) == 'next') {
 			// Cache the current pagelist config and temporary disable the excludeHidden parameter to also
 			// get the neighbors of a hidden page.
-			$pagelistConfigShelf = $this->Automad->getPagelist()->config();
-			$this->Automad->getPagelist()->config(array('excludeHidden' => false));
+			$pagelistConfigShelf = $this->Automad->Pagelist->config();
+			$this->Automad->Pagelist->config(array('excludeHidden' => false));
 
-			$Selection = new Selection($this->Automad->getPagelist()->getPages(true));
+			$Selection = new Selection($this->Automad->Pagelist->getPages(true));
 			$Selection->filterPrevAndNextToUrl($Context->get()->url);
 			$pages = $Selection->getSelection();
 
 			// Restore the original pagelist config.
-			$this->Automad->getPagelist()->config($pagelistConfigShelf);
+			$this->Automad->Pagelist->config($pagelistConfigShelf);
 
 			if (array_key_exists(strtolower($matches['with']), $pages)) {
 				$Page = $pages[strtolower($matches['with'])];
@@ -101,7 +101,7 @@ class ContextProcessor extends AbstractFeatureProcessor {
 
 			// Save original context and pagelist.
 			$contextShelf = $Context->get();
-			$pagelistConfigShelf = $this->Automad->getPagelist()->config();
+			$pagelistConfigShelf = $this->Automad->Pagelist->config();
 
 			// Set context to $url.
 			$Context->set($Page);
@@ -111,7 +111,7 @@ class ContextProcessor extends AbstractFeatureProcessor {
 
 			// Restore original context and pagelist.
 			$Context->set($contextShelf);
-			$this->Automad->getPagelist()->config($pagelistConfigShelf);
+			$this->Automad->Pagelist->config($pagelistConfigShelf);
 
 			return $html;
 		}

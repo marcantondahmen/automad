@@ -59,7 +59,7 @@ class Pagelist extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
-		$Pagelist = $Automad->getPagelist();
+		$Pagelist = $Automad->Pagelist;
 		$data = $block['data'];
 
 		$match = false;

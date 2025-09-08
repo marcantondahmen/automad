@@ -124,7 +124,7 @@ class Toolbox {
 	 * @param array $options
 	 */
 	public function filelist(array $options = array()): void {
-		$this->Automad->getFilelist()->config($options);
+		$this->Automad->Filelist->config($options);
 	}
 
 	/**
@@ -372,7 +372,7 @@ class Toolbox {
 	 * @param array $options
 	 */
 	public function newPagelist(array $options = array()): void {
-		$this->pagelist(array_merge($this->Automad->getPagelist()->getDefaults(), $options));
+		$this->pagelist(array_merge($this->Automad->Pagelist->getDefaults(), $options));
 	}
 
 	/**
@@ -395,7 +395,7 @@ class Toolbox {
 	 * @param array $options
 	 */
 	public function pagelist(array $options = array()): void {
-		$this->Automad->getPagelist()->config($options);
+		$this->Automad->Pagelist->config($options);
 	}
 
 	/**
