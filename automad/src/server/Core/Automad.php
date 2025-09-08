@@ -71,25 +71,30 @@ class Automad {
 	public Context $Context;
 
 	/**
-	 * Automad's Shared object.
-	 *
-	 * The Shared object is passed also to all Page objects to allow for access of global data from within a page without needing access to the full Automad object.
-	 */
-	public Shared $Shared;
-
-	/**
 	 * Automad's Filelist object
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Filelist class for all objects using the Automad object as parameter.
 	 */
-	private ?Filelist $Filelist = null;
+	public Filelist $Filelist;
 
 	/**
 	 * Automad's Pagelist object.
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Pagelist class for all objects using the Automad object as parameter.
 	 */
-	private ?Pagelist $Pagelist = null;
+	public Pagelist $Pagelist;
+
+	/**
+	 * Automad's Runtime object;
+	 */
+	public Runtime $Runtime;
+
+	/**
+	 * Automad's Shared object.
+	 *
+	 * The Shared object is passed also to all Page objects to allow for access of global data from within a page without needing access to the full Automad object.
+	 */
+	public Shared $Shared;
 
 	/**
 	 * Array holding all the site's pages and the related data.
@@ -111,7 +116,7 @@ class Automad {
 
 		Debug::log(array('Shared' => $this->Shared, 'Pages' => $this->pages), 'New instance created');
 
-		$this->Context = new Context($this->getRequestedPage());
+		$this->init();
 	}
 
 	/**
@@ -131,7 +136,8 @@ class Automad {
 	 */
 	public function __wakeup(): void {
 		Debug::log(get_object_vars($this), 'Automad object was unserialized');
-		$this->Context = new Context($this->getRequestedPage());
+
+		$this->init();
 	}
 
 	/**
@@ -166,19 +172,6 @@ class Automad {
 		$Cache = new Cache();
 
 		return $Cache->getAutomad();
-	}
-
-	/**
-	 * Return Automad's instance of the Filelist class and create instance when accessed for the first time.
-	 *
-	 * @return Filelist Filelist object
-	 */
-	public function getFilelist(): Filelist {
-		if (!$this->Filelist) {
-			$this->Filelist = new Filelist($this->Context);
-		}
-
-		return $this->Filelist;
 	}
 
 	/**
@@ -217,19 +210,6 @@ class Automad {
 		}
 
 		return null;
-	}
-
-	/**
-	 * Return Automad's instance of the Pagelist class and create instance when accessed for the first time.
-	 *
-	 * @return Pagelist Pagelist object
-	 */
-	public function getPagelist(): Pagelist {
-		if (!$this->Pagelist) {
-			$this->Pagelist = new Pagelist($this->pages, $this->Context);
-		}
-
-		return $this->Pagelist;
 	}
 
 	/**
@@ -303,6 +283,16 @@ class Automad {
 		}
 
 		return $this->pageNotFound();
+	}
+
+	/**
+	 * Initialized objects that are not cached.
+	 */
+	private function init(): void {
+		$this->Context = new Context($this->getRequestedPage());
+		$this->Pagelist = new Pagelist($this->pages, $this->Context);
+		$this->Filelist = new Filelist($this->Context);
+		$this->Runtime = new Runtime($this->Filelist, $this->Pagelist);
 	}
 
 	/**

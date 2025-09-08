@@ -1,8 +1,23 @@
 # Changelog
 
-## [v2.0.0-alpha.43](https://github.com/marcantondahmen/automad/commit/0af30cca1ee0df8b674037e1d6acc15a6f970ba7)
+## [v2.0.0-alpha.44](https://github.com/marcantondahmen/automad/commit/c80722b75ab989e589c08e584c123231054614f8)
 
-Fri, 5 Sep 2025 20:35:35 +0200
+Mon, 8 Sep 2025 21:09:22 +0200
+
+### New Features
+
+- update standard-v1 theme ([31cb4518f](https://github.com/marcantondahmen/automad/commit/31cb4518f9d80f447c5be841a5023449aa326ffe))
+
+### Bugfixes
+
+- allow decimal values in number and unit fields ([80d22771d](https://github.com/marcantondahmen/automad/commit/80d22771de7b7cdda019d4dcfddcc8593ad3fd42))
+- fix asset injections when templates have whitespace at the top ([dd908a67e](https://github.com/marcantondahmen/automad/commit/dd908a67e6346a8e0aa219959bb2c7ebca5403e1))
+- fix indicator link for outdated packages ([6b9a8607c](https://github.com/marcantondahmen/automad/commit/6b9a8607c9989c9a03f57bd757e9d7a491762b37))
+- refactor template processor snippet flag and fix inheritance when using inc function ([e5b9b3af4](https://github.com/marcantondahmen/automad/commit/e5b9b3af43053acfee61539a51e2e387113a49d2))
+
+## [v2.0.0-alpha.43](https://github.com/marcantondahmen/automad/commit/197f610b6c0e53b44ccb69476c384504a6dc7b74)
+
+Fri, 5 Sep 2025 20:37:24 +0200
 
 ### New Features
 
@@ -674,11 +689,3 @@ Fri, 1 Apr 2022 16:42:24 +0200
 
 - **core**: fix deprecation warning for preg_split() ([87dd50597](https://github.com/marcantondahmen/automad/commit/87dd5059720805f7ad386c696977d40dede71b3e))
 - **core**: fix php 8.1 compatibility issues with trim() and strip_tags() ([5dee18a21](https://github.com/marcantondahmen/automad/commit/5dee18a21ca85af24457a4a0ee22cdee8201101b))
-
-## [v1.10.2](https://github.com/marcantondahmen/automad/commit/4d7f852678919babc453c8d65f801a8b7c106f58)
-
-Thu, 31 Mar 2022 18:52:37 +0200
-
-### Bugfixes
-
-- **system**: fix fetching packages from the packagist api ([8b53ae63d](https://github.com/marcantondahmen/automad/commit/8b53ae63d4e32343cc1f428259ec4bd719cccc84))

@@ -94,6 +94,10 @@ class ViewTest extends TestCase {
 			'comments_01' => 'Page',
 			'components_01' => '<div class="am-block"><p class="am-block">Component test</p></div>',
 			'custom_function_01' => '{"text":"Hello"}',
+			'custom_function_02' => 'Hello',
+			'custom_function_03' => 'Hi there',
+			'custom_function_04' => 'derived',
+			'custom_function_05' => 'derived by user',
 			'email_01' => <<< HTML
 						<html>
 							<head>{$metaTags}{$assets->consentCSS}{$assets->consentJS}{$assets->blocksCSS}{$assets->blocksJS}
@@ -184,6 +188,7 @@ class ViewTest extends TestCase {
 							{$custom->bodyEnd}</body>
 						</html>
 						HTML,
+			'runtime_01' => '1. /automad/tests/main/data/page-slug/empty.css',
 			'session_get_01' => 'Session Test',
 			'set_01' => 'Test 1, Test 2',
 			'snippet_01' => 'Snippet Test / Snippet Test',

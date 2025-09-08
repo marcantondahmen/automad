@@ -56,10 +56,9 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(array $matches, string $directory): string {
 		if (empty($matches['forSnippet'])) {
 			return '';
 		}
@@ -71,19 +70,19 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 		$TemplateProcessor = $this->initTemplateProcessor();
 
 		// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
-		$runtimeShelf = $this->Runtime->shelve();
+		$runtimeShelf = $this->Automad->Runtime->shelve();
 
 		// The loop.
 		for ($i = $start; $i <= $end; $i++) {
 			// Set index variable. The index can be used as @{:i}.
-			$this->Runtime->set(Fields::LOOP_INDEX, $i);
+			$this->Automad->Runtime->set(Fields::LOOP_INDEX, $i);
 			// Parse snippet.
 			Debug::log($i, 'Processing snippet in loop for index');
-			$html .= $TemplateProcessor->process($matches['forSnippet'], $directory, $collectSnippetDefinitions);
+			$html .= $TemplateProcessor->process($matches['forSnippet'], $directory);
 		}
 
 		// Restore index.
-		$this->Runtime->unshelve($runtimeShelf);
+		$this->Automad->Runtime->unshelve($runtimeShelf);
 
 		return $html;
 	}

@@ -58,10 +58,9 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(array $matches, string $directory): string {
 		if (empty($matches['foreach'])) {
 			return '';
 		}
@@ -80,18 +79,18 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 
 		// Shelve the runtime objetc before any loop.
 		// The index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
-		$runtimeShelf = $this->Runtime->shelve();
+		$runtimeShelf = $this->Automad->Runtime->shelve();
 
 		if (strtolower($matches['foreach']) == 'pagelist') {
 			// Pagelist
 
 			// Get pages.
-			$pages = $this->Automad->getPagelist()->getPages();
+			$pages = $this->Automad->Pagelist->getPages();
 			Debug::log($pages, 'Foreach in pagelist loop');
 
 			// Shelve context page and pagelist config.
 			$contextShelf = $Context->get();
-			$pagelistConfigShelf = $this->Automad->getPagelist()->config();
+			$pagelistConfigShelf = $this->Automad->Pagelist->config();
 
 			// Calculate offset for index.
 			if ($pagelistPage = intval($pagelistConfigShelf['page'])) {
@@ -104,15 +103,15 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				// Set context to the current page in the loop.
 				$Context->set($Page);
 				// Set index for current page. The index can be used as @{:i}.
-				$this->Runtime->set(Fields::LOOP_INDEX, ++$i + $offset);
+				$this->Automad->Runtime->set(Fields::LOOP_INDEX, ++$i + $offset);
 				// Parse snippet.
 				Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
-				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
+				$html .= $TemplateProcessor->process($foreachSnippet, $directory);
 				// Note that the config only has to be shelved once before starting the loop,
 				// but has to be restored after each snippet to provide the correct data (like :pagelistCount)
 				// for the next iteration, since a changed config would generate incorrect values in
 				// recursive loops.
-				$this->Automad->getPagelist()->config($pagelistConfigShelf);
+				$this->Automad->Pagelist->config($pagelistConfigShelf);
 			}
 
 			// Restore context.
@@ -121,13 +120,13 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			// Filters (tags of the pages in the pagelist)
 			// Each filter can be used as @{:filter} within a snippet.
 
-			foreach ($this->Automad->getPagelist()->getTags() as $filter) {
+			foreach ($this->Automad->Pagelist->getTags() as $filter) {
 				Debug::log($filter, 'Processing snippet in loop for filter');
 				// Store current filter in the system variable buffer.
-				$this->Runtime->set(Fields::FILTER, $filter);
+				$this->Automad->Runtime->set(Fields::FILTER, $filter);
 				// Set index. The index can be used as @{:i}.
-				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
-				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
+				$this->Automad->Runtime->set(Fields::LOOP_INDEX, ++$i);
+				$html .= $TemplateProcessor->process($foreachSnippet, $directory);
 			}
 		} elseif (strtolower($matches['foreach']) == 'tags') {
 			// Tags (of the current page)
@@ -135,17 +134,17 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			foreach ($Context->get()->tags as $tag) {
 				Debug::log($tag, 'Processing snippet in loop for tag');
 				// Store current tag in the system variable buffer.
-				$this->Runtime->set(Fields::TAG, $tag);
+				$this->Automad->Runtime->set(Fields::TAG, $tag);
 				// Set index. The index can be used as @{:i}.
-				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
-				$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
+				$this->Automad->Runtime->set(Fields::LOOP_INDEX, ++$i);
+				$html .= $TemplateProcessor->process($foreachSnippet, $directory);
 			}
 		} else {
 			// Files
 			// The file path and the basename can be used like @{:file} and @{:basename} within a snippet.
 			if (strtolower($matches['foreach']) == 'filelist') {
 				// Use files from filelist.
-				$files = $this->Automad->getFilelist()->getFiles();
+				$files = $this->Automad->Filelist->getFiles();
 			} else {
 				// Parse given glob pattern within any kind of quotes or from a variable value.
 				$files = FileUtils::fileDeclaration(
@@ -158,7 +157,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			foreach ($files as $file) {
 				Debug::log($file, 'Processing snippet in loop for file');
 				// Set index. The index can be used as @{:i}.
-				$this->Runtime->set(Fields::LOOP_INDEX, ++$i);
+				$this->Automad->Runtime->set(Fields::LOOP_INDEX, ++$i);
 				$html .= $this->ContentProcessor->processFileSnippet(
 					$file,
 					Parse::jsonOptions(
@@ -169,18 +168,17 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 					),
 					$foreachSnippet,
 					$directory,
-					$collectSnippetDefinitions
 				);
 			}
 		}
 
 		// Restore runtime.
-		$this->Runtime->unshelve($runtimeShelf);
+		$this->Automad->Runtime->unshelve($runtimeShelf);
 
 		// If the counter ($i) is 0 (false), process the "else" snippet.
 		if (!$i) {
 			Debug::log('foreach in ' . strtolower($matches['foreach']), 'No elements array. Processing else statement for');
-			$html .= $TemplateProcessor->process($foreachElseSnippet, $directory, $collectSnippetDefinitions);
+			$html .= $TemplateProcessor->process($foreachElseSnippet, $directory);
 		}
 
 		return $html;

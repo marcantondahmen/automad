@@ -40,7 +40,6 @@ use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Engine\FeatureProvider;
 use Automad\Engine\PatternAssembly;
-use Automad\Engine\Runtime;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -52,6 +51,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class TemplateProcessor {
+	/**
+	 * A flag the can be used to configure whether snippet definitions are registered when processing templates.
+	 */
+	public static bool $registerSnippets = true;
+
 	/**
 	 * The main Automad instance.
 	 */
@@ -68,24 +72,16 @@ class TemplateProcessor {
 	private array $featureProcessors;
 
 	/**
-	 * The Runtime instance.
-	 */
-	private Runtime $Runtime;
-
-	/**
 	 * The template processor constructor.
 	 *
 	 * @param Automad $Automad
-	 * @param Runtime $Runtime
 	 * @param ContentProcessor $ContentProcessor
 	 */
 	public function __construct(
 		Automad $Automad,
-		Runtime $Runtime,
 		ContentProcessor $ContentProcessor
 	) {
 		$this->Automad = $Automad;
-		$this->Runtime = $Runtime;
 		$this->ContentProcessor = $ContentProcessor;
 		$this->featureProcessors = $this->initFeatureProcessors();
 	}
@@ -98,45 +94,41 @@ class TemplateProcessor {
 	 * @return TemplateProcessor
 	 */
 	public static function create(Automad $Automad, InPage|null $InPage = null): TemplateProcessor {
-		$Runtime = new Runtime($Automad);
 		$InPage ??= new InPage($Automad);
 
 		$ContentProcessor = new ContentProcessor(
 			$Automad,
-			$Runtime,
 			$InPage
 		);
 
 		return new TemplateProcessor(
 			$Automad,
-			$Runtime,
 			$ContentProcessor
 		);
 	}
 
 	/**
 	 * The main template render process basically applies all feature processors to the rendered template.
-	 * Note that the $collectSnippetDefinitions parameter controls whether snippets are added to the
+	 * Note that the TemplateProcessor::$registerSnippets parameter controls whether snippets are added to the
 	 * snippet collection in order to enable basic inheritance.
 	 *
 	 * @param string $template
 	 * @param string $directory
-	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed template
 	 */
-	public function process(string $template, string $directory, bool $collectSnippetDefinitions): string {
+	public function process(string $template, string $directory): string {
 		$output = PreProcessor::stripWhitespace($template);
 		$output = PreProcessor::prepareWrappingStatements($output);
 
 		$output = preg_replace_callback(
 			'/' . PatternAssembly::template() . '/is',
-			function ($matches) use ($directory, $collectSnippetDefinitions) {
+			function ($matches) use ($directory) {
 				if (!empty($matches['var'])) {
 					return $this->ContentProcessor->processVariables($matches['var'], false, true);
 				}
 
 				foreach ($this->featureProcessors as $processor) {
-					$featureOutput = $processor->process($matches, $directory, $collectSnippetDefinitions);
+					$featureOutput = $processor->process($matches, $directory);
 
 					if (!empty($featureOutput)) {
 						return $featureOutput;
@@ -166,7 +158,6 @@ class TemplateProcessor {
 		foreach (FeatureProvider::getProcessorClasses() as $cls) {
 			$processors[$cls] = new $cls(
 				$this->Automad,
-				$this->Runtime,
 				$this->ContentProcessor
 			);
 		}

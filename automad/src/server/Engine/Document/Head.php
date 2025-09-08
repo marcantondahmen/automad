@@ -71,7 +71,7 @@ class Head {
 	 * @return string
 	 */
 	public static function prepend(string $doc, string $tag): string {
-		$split = preg_split('#^((?:<[^>]*>)*\s*<html[^>]*>\s*(?:<!--.*?-->)*\s*<head>)#is', $doc, 2, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+		$split = preg_split('#^((?:\s*<[^>]*>)*\s*<html[^>]*>\s*(?:<!--.*?-->)*\s*<head>)#is', $doc, 2, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
 		if (empty($split[0]) || empty($split[1])) {
 			return $doc;
