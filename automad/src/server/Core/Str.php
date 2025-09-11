@@ -120,7 +120,7 @@ class Str {
 			return '';
 		}
 
-		preg_match('/<(?:img|am-img-loader)[^>]+src="([^"]+)"/is', $str, $matches);
+		preg_match('/<(?:img|am-img-loader|am-gallery|am-image-slideshow)[^>]+(?:first|src)="([^"]+)"/is', $str, $matches);
 
 		if (!empty($matches[1])) {
 			return $matches[1];

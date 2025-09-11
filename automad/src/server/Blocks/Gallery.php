@@ -63,6 +63,10 @@ class Gallery extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
+		if (empty($block['data']['files'])) {
+			return '';
+		}
+
 		$pixelDensity = 2.5;
 		$settings = array(
 			'layout' => $block['data']['layout'] ?? 'columns',
@@ -73,6 +77,7 @@ class Gallery extends AbstractBlock {
 		);
 
 		$imageSets = array();
+		$first = $block['data']['files'][0];
 
 		$width = $settings['layout'] != 'rows' ? $settings['columnWidthPx'] : 0;
 		$height = $settings['layout'] != 'columns' ? $settings['rowHeightPx'] : 0;
@@ -88,6 +93,6 @@ class Gallery extends AbstractBlock {
 		$json = rawurlencode(strval(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES)));
 		$attr = Attr::render($block['tunes']);
 
-		return "<am-gallery $attr data=\"$json\"></am-gallery>";
+		return "<am-gallery first=\"$first\" $attr data=\"$json\"></am-gallery>";
 	}
 }
