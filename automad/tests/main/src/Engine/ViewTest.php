@@ -293,6 +293,6 @@ class ViewTest extends TestCase {
 			'<meta property="og:image" content="http://localhost/cache/images/og-f6039865b8da0ea1944c4d94eb9777172ecfc176d6145bcb6182139a9aabd4b9.png">' .
 			'<meta property="og:type" content="website">' .
 			'<meta property="og:url" content="http://localhost/index.php/page">' .
-			'<meta property="twitter:card" content="summary_large_image">';
+			'<meta name="twitter:card" content="summary_large_image">';
 	}
 }
