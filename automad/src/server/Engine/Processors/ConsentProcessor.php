@@ -76,6 +76,10 @@ class ConsentProcessor {
 			return $str;
 		}
 
+		if (!preg_match('/\<am-consent\s[^>]*\>/i', $str)) {
+			return $str;
+		}
+
 		$str = Head::prepend($str, Asset::js('dist/consent/main.bundle.js', false));
 		$str = Head::prepend($str, Asset::css('dist/consent/main.bundle.css', false));
 
