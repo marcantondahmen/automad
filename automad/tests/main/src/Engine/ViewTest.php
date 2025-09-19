@@ -198,7 +198,8 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'runtime_01' => '1. /automad/tests/main/data/page-slug/empty.css',
-			'session_get_01' => 'Session Test',
+			'session_01' => 'Session Test',
+			'session_02' => '1',
 			'set_01' => 'Test 1, Test 2',
 			'snippet_01' => 'Snippet Test / Snippet Test',
 			'snippet_02' => 'Hello',

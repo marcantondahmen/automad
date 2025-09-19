@@ -53,8 +53,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class TemplateProcessor {
 	/**
 	 * A flag the can be used to configure whether snippet definitions are registered when processing templates.
+	 * Such a preprocessing step is required in order to make it possible to inherit templates by first
+	 * registering all snippet definitions before rendering everithing in a second run.
+	 * Note that the second run doesn't update snippet definitions anymore.
 	 */
-	public static bool $registerSnippets = true;
+	public static bool $isPreProcessing = false;
 
 	/**
 	 * The main Automad instance.
@@ -109,7 +112,7 @@ class TemplateProcessor {
 
 	/**
 	 * The main template render process basically applies all feature processors to the rendered template.
-	 * Note that the TemplateProcessor::$registerSnippets parameter controls whether snippets are added to the
+	 * Note that the TemplateProcessor::$isPreProcessing parameter controls whether snippets are added to the
 	 * snippet collection in order to enable basic inheritance.
 	 *
 	 * @param string $template

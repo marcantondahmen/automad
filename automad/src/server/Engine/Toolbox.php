@@ -42,6 +42,7 @@ use Automad\Core\Image;
 use Automad\Core\Resolve;
 use Automad\Core\SessionData;
 use Automad\Core\Str;
+use Automad\Engine\Processors\TemplateProcessor;
 use Automad\Models\Selection;
 use Automad\System\Fields;
 
@@ -431,6 +432,10 @@ class Toolbox {
 	 * @param array $options
 	 */
 	public function set(array $options): void {
+		if (TemplateProcessor::$isPreProcessing) {
+			return;
+		}
+
 		foreach ($options as $key => $value) {
 			if (preg_match('/' . PatternAssembly::CHAR_CLASS_ALL_VARS . '/', $key)) {
 				if (strpos($key, '%') === 0) {

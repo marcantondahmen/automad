@@ -66,18 +66,18 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 		$body = $matches['snippetSnippet'];
 		$collection = SnippetCollection::getCollection();
 
-		// It is very important to differentiate between the first time a template is processed,
-		// with TemplateProcessor::$registerSnippets == true, and the final one where the actual output is generated.
+		// It is very important to differentiate between the first time a template is processed (pre-processed),
+		// with TemplateProcessor::$isPreProcessing == true, and the final one where the actual output is generated.
 		// The first run only collects definitions and also allows for overriding them based on other definitions
 		// using the same name and that occur after their actual evaluation in a template.
-		if (TemplateProcessor::$registerSnippets) {
+		if (TemplateProcessor::$isPreProcessing) {
 			SnippetCollection::add($name, $body, $directory);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 
 			return '';
 		}
 
-		// Now the point is that in the second run, when TemplateProcessor::$registerSnippets == false,
+		// Now the point is that in the second run, when TemplateProcessor::$isPreProcessing == false,
 		// definitions that are already part of the collection must (!) not be overriden because
 		// that would revert the overrides that have been collected in the first run back to the
 		// original version right before they are evaluated. However, since the overrides have not been evaluated
