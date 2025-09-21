@@ -1,8 +1,28 @@
 # Changelog
 
-## [v2.0.0-alpha.44](https://github.com/marcantondahmen/automad/commit/c80722b75ab989e589c08e584c123231054614f8)
+## [v2.0.0-alpha.45](https://github.com/marcantondahmen/automad/commit/94bdec468616e720141629ca46d850fefbe1f70a)
 
-Mon, 8 Sep 2025 21:09:22 +0200
+Sun, 21 Sep 2025 18:08:52 +0200
+
+### New Features
+
+- find first image in page also when being part of a gallery or slideshow block ([85c635fc3](https://github.com/marcantondahmen/automad/commit/85c635fc30cf5f12f1fe0bde3e5a28b0984150fc))
+- only inject block assets when needed ([7bc6a1a31](https://github.com/marcantondahmen/automad/commit/7bc6a1a31997ff7c09d325fe817afea2c8656fa2))
+- only inject consent check assets when needed ([5b72b99e0](https://github.com/marcantondahmen/automad/commit/5b72b99e0256a8719fd9f75ca823781187d4528e))
+- update standard theme ([eab254143](https://github.com/marcantondahmen/automad/commit/eab254143f3a62a9aaa9a2dfe3eed62c0deec6c3))
+
+### Bugfixes
+
+- fix broken event handlers in the image collection component after being moved around in the dom ([4daac0b35](https://github.com/marcantondahmen/automad/commit/4daac0b35a4edc78454df128b12fd6349148a75c))
+- fix double invocation of the set method in templates ([e5d3c1329](https://github.com/marcantondahmen/automad/commit/e5d3c1329fae1d3e3bf9b0fc8484e0c118f8c0dc))
+- fix rendering error when an empty image block is added to a page ([94bdec468](https://github.com/marcantondahmen/automad/commit/94bdec468616e720141629ca46d850fefbe1f70a))
+- fix twitter card meta tag ([28eec2e2c](https://github.com/marcantondahmen/automad/commit/28eec2e2c104831d4c48da64c31bd15fa54b2afb))
+- fix twitter embeds ([b273e896c](https://github.com/marcantondahmen/automad/commit/b273e896cc4bef7f3ef86f9df6823b7e5a52a985))
+- improve injection of inpage edit buttons ([0d85722e2](https://github.com/marcantondahmen/automad/commit/0d85722e21d0cba130c8d2309b4f0493a1102eb3))
+
+## [v2.0.0-alpha.44](https://github.com/marcantondahmen/automad/commit/748226a4e2161f346f06bec274d841ca18e048de)
+
+Mon, 8 Sep 2025 21:12:38 +0200
 
 ### New Features
 
@@ -680,12 +700,3 @@ Sat, 2 Apr 2022 21:36:15 +0200
 - **core**: fix overriding config for tests ([8b9e4b3ed](https://github.com/marcantondahmen/automad/commit/8b9e4b3ed51f2c3f0c138ed989a67e9f5d54a3f8))
 - **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
 - fix passing null as non-nullable function parameters ([3822317d3](https://github.com/marcantondahmen/automad/commit/3822317d304dc7e4dfe80e42c734e8309658a5d7))
-
-## [v1.10.3](https://github.com/marcantondahmen/automad/commit/f65ff67cce39173cea76ca3165f2b9c9deba8b59)
-
-Fri, 1 Apr 2022 16:42:24 +0200
-
-### Bugfixes
-
-- **core**: fix deprecation warning for preg_split() ([87dd50597](https://github.com/marcantondahmen/automad/commit/87dd5059720805f7ad386c696977d40dede71b3e))
-- **core**: fix php 8.1 compatibility issues with trim() and strip_tags() ([5dee18a21](https://github.com/marcantondahmen/automad/commit/5dee18a21ca85af24457a4a0ee22cdee8201101b))
