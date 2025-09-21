@@ -36,6 +36,8 @@
 
 namespace Automad\Blocks\Utils;
 
+use Automad\Core\Blocks;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -119,7 +121,7 @@ abstract class Attr {
 	 * @return string the attribute string
 	 */
 	private static function classAttr(array $tunes, array $custom = array()): string {
-		$classes = array_merge(array('am-block'), $custom);
+		$classes = array_merge(array(Blocks::BASE_CLASS), $custom);
 
 		if (!empty($tunes['className'])) {
 			$classes[] = preg_replace('/[<>]/', '', $tunes['className']);

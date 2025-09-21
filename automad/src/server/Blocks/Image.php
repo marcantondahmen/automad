@@ -63,6 +63,10 @@ class Image extends AbstractBlock {
 		$attr = Attr::render($block['tunes']);
 		$data = $block['data'];
 
+		if (empty($data['url'])) {
+			return '';
+		}
+
 		$src = $data['url'];
 		$ImgLoaderSet = new ImgLoaderSet($src, $Automad);
 

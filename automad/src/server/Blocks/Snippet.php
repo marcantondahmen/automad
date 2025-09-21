@@ -67,8 +67,8 @@ class Snippet {
 			return '';
 		}
 
-		$registerSnippets = TemplateProcessor::$registerSnippets;
-		TemplateProcessor::$registerSnippets = true;
+		$isPreProcessing = TemplateProcessor::$isPreProcessing;
+		TemplateProcessor::$isPreProcessing = true;
 		self::$snippetIsRendering = true;
 
 		$output = '';
@@ -94,7 +94,7 @@ class Snippet {
 			}
 		}
 
-		TemplateProcessor::$registerSnippets = $registerSnippets;
+		TemplateProcessor::$isPreProcessing = $isPreProcessing;
 		self::$snippetIsRendering = false;
 
 		return $output;

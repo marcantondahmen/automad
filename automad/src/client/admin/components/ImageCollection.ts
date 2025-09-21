@@ -86,6 +86,19 @@ export class ImageCollectionComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.classList.add(CSS.imageCollection);
+		this.handleMove();
+	}
+
+	/**
+	 * After being moved and reconnected to the DOM, event handlers
+	 * might be broken. In that case the list of image elements is not empty
+	 * because it was rendered already on the first run. In order to refresh
+	 * event handler the component can simply rerender with the existing images.
+	 */
+	private handleMove(): void {
+		if (this.images) {
+			this.render(this.images);
+		}
 	}
 
 	/**

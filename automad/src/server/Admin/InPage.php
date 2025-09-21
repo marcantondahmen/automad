@@ -134,7 +134,7 @@ class InPage {
 						'field' => $field,
 						'page' => AM_REQUEST,
 						'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD
-					), JSON_UNESCAPED_SLASHES)
+					))
 				)
 			);
 

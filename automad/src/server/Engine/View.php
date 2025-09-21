@@ -99,16 +99,16 @@ class View {
 		$output = $this->Automad->loadTemplate($this->template);
 		$directory = dirname($this->template);
 
-		// Process template first in order to collect all snippet definitions
+		// Pre-process template first in order to collect all snippet definitions
 		// without saving the generated output in order to enable snippet overrides.
-		TemplateProcessor::$registerSnippets = true;
+		TemplateProcessor::$isPreProcessing = true;
 		$TemplateProcessor->process($output, $directory);
 
 		// Process template a second time but without overriding any registered snippet
 		// definition and saving the output. Note that unknown snippets that haven't been registered
 		// and that are defined in an override that has not been evaluated in the first step
 		// are registered in this step.
-		TemplateProcessor::$registerSnippets = false;
+		TemplateProcessor::$isPreProcessing = false;
 		$output = $TemplateProcessor->process($output, $directory);
 
 		$PostProcessor = new PostProcessor($this->Automad, $InPage);

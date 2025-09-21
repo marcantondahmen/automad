@@ -26,6 +26,39 @@ class StrTest extends TestCase {
 		);
 	}
 
+	public function dataForTestFindFirstImageIsEqual() {
+		return array(
+			array(<<<HTML
+				Test
+				<img src="test-01.png" />
+				Test
+				HTML,
+				'test-01.png'
+			),
+			array(<<<HTML
+				Test
+				<am-img-loader src="test-01.png" width="2670" height="1780" image="xxxxx" preload="xxxxx"></am-img-loader>
+				Test
+				HTML,
+				'test-01.png'
+			),
+			array(<<<HTML
+				Test
+				<am-gallery first="gallery-01.png" data="xxxxx"></am-gallery>
+				Test
+				HTML,
+				'gallery-01.png'
+			),
+			array(<<<HTML
+				Test
+				<am-image-slideshow first="slideshow-01.png" data="xxxxx"></am-image-slideshow>
+				Test
+				HTML,
+				'slideshow-01.png'
+			)
+		);
+	}
+
 	public function dataForTestSanitizeIsEqual() {
 		return array(
 			array('Some string.', true, 100, 'some-string'),
@@ -95,6 +128,17 @@ class StrTest extends TestCase {
 	public function testDefIsEqual($str, $defaultValue, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::def($str, $defaultValue), $expected);
+	}
+
+	/**
+	 * @dataProvider dataForTestFindFirstImageIsEqual
+	 * @testdox findFirstImage($str) equals "$expected"
+	 * @param mixed $str
+	 * @param mixed $expected
+	 */
+	public function testFindFirstImageIsEqual($str, $expected) {
+		/** @disregard */
+		$this->assertEquals(Str::findFirstImage($str), $expected);
 	}
 
 	/**

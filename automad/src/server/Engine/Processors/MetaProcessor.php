@@ -114,7 +114,7 @@ class MetaProcessor {
 			$ogImage = $this->createOpenGraphImage();
 		}
 
-		$html = $this->addMetaTagOnce('property', 'twitter:card', 'summary_large_image', $html);
+		$html = $this->addMetaTagOnce('name', 'twitter:card', 'summary_large_image', $html);
 		$html = $this->addMetaTagOnce('property', 'og:url', $base . AM_REQUEST, $html);
 		$html = $this->addMetaTagOnce('property', 'og:type', 'website', $html);
 		$html = $this->addMetaTagOnce('property', 'og:image', $ogImage, $html);

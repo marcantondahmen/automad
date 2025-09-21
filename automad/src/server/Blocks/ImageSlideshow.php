@@ -62,6 +62,10 @@ class ImageSlideshow extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
+		if (empty($block['data']['files'])) {
+			return '';
+		}
+
 		$data = $block['data'];
 
 		$settings = array(
@@ -76,8 +80,9 @@ class ImageSlideshow extends AbstractBlock {
 		);
 
 		$imageSets = array();
+		$first = $block['data']['files'][0];
 
-		foreach ($block['data']['files'] ?? array() as $file) {
+		foreach ($data['files'] ?? array() as $file) {
 			$imageSets[] = array(
 				'imageSet' => new ImgLoaderSet($file, $Automad, $settings['imageWidthPx'], $settings['imageHeightPx'], true),
 				'caption' => strip_tags(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
@@ -87,6 +92,6 @@ class ImageSlideshow extends AbstractBlock {
 		$json = rawurlencode(strval(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES)));
 		$attr = Attr::render($block['tunes']);
 
-		return "<am-image-slideshow $attr data=\"$json\"></am-image-slideshow>";
+		return "<am-image-slideshow first=\"$first\" $attr data=\"$json\"></am-image-slideshow>";
 	}
 }
