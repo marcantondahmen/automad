@@ -345,14 +345,16 @@ class ConsentComponent extends HTMLElement {
 	private injectContent(): void {
 		const type = this.type;
 
-		const attributes = Array.from(this.attributes).reduce(
-			(acc, attr) => {
-				acc[attr.name] = attr.value;
+		const attributes = Array.from(this.attributes)
+			.filter((attr) => attr.name != 'type')
+			.reduce(
+				(acc, attr) => {
+					acc[attr.name] = attr.value;
 
-				return acc;
-			},
-			{} as Record<string, string>
-		);
+					return acc;
+				},
+				{} as Record<string, string>
+			);
 
 		if (type === 'iframe') {
 			const iframe = create('iframe', [], attributes);
