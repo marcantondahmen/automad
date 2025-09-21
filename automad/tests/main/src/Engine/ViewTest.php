@@ -32,7 +32,7 @@ class ViewTest extends TestCase {
 		$templates = array(
 			'email_01' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
+							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<a href="#">test</a>
@@ -43,7 +43,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'email_02' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
+							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
@@ -55,7 +55,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'resolve_01' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$metaTags}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
@@ -64,7 +64,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'resolve_02' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$metaTags}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
@@ -91,11 +91,29 @@ class ViewTest extends TestCase {
 		$pagesDir = AM_DIR_PAGES;
 
 		$templates = array(
+			'block_assets_01' => <<<HTML
+						<html>
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
+							{$custom->head}</head>
+							<body>
+								<div class="am-block some-class">Test</div>
+							{$custom->bodyEnd}</body>
+						</html>
+						HTML,
+			'block_assets_02' => <<<HTML
+						<html>
+							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
+							{$custom->head}</head>
+							<body>
+								<div class="some-class am-block">Test</div>
+							{$custom->bodyEnd}</body>
+						</html>
+						HTML,
 			'comments_01' => 'Page',
 			'components_01' => '<div class="am-block"><p class="am-block">Component test</p></div>',
 			'consent_check_01' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->consentCSS}{$assets->consentJS}{$assets->blocksCSS}{$assets->blocksJS}
+							<head>{$metaTags}{$assets->consentCSS}{$assets->consentJS}
 							{$custom->head}</head>
 							<body>
 								<am-consent type="script">Y29uc29sZS5sb2coJ0hlbGxvJyk7</am-consent>
@@ -109,7 +127,7 @@ class ViewTest extends TestCase {
 			'custom_function_05' => 'derived by user',
 			'email_01' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
+							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#">test</a>
@@ -120,7 +138,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'email_02' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
+							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
@@ -133,7 +151,7 @@ class ViewTest extends TestCase {
 			'extension_01' => 'Test',
 			'extension_02' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
+							<head>{$metaTags}
 							{$assets->extensionCSS}{$assets->extensionJS}{$custom->head}</head>
 							<body>
 								Asset Test
@@ -181,7 +199,7 @@ class ViewTest extends TestCase {
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'resolve_01' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}</head>
+							<head>{$metaTags}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
@@ -190,7 +208,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'resolve_02' => <<< HTML
 						<html>
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}{$custom->head}</head>
+							<head>{$metaTags}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>

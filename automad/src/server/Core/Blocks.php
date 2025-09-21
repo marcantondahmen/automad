@@ -52,6 +52,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @psalm-import-type BlockData from \Automad\Blocks\AbstractBlock
  */
 class Blocks {
+	const BASE_CLASS = 'am-block';
+
+	/**
+	 * A static state property that is true when rendering is in process.
+	 */
 	private static bool $isRendering = false;
 
 	/**
@@ -61,6 +66,10 @@ class Blocks {
 	 * @return string the processed HTML
 	 */
 	public static function injectAssets(string $str): string {
+		if (!preg_match('/\sclass="[^"]*' . Blocks::BASE_CLASS . '[^"]*"/', $str)) {
+			return $str;
+		}
+
 		$assets = Asset::css('dist/blocks/main.bundle.css', false) .
 				  Asset::js('dist/blocks/main.bundle.js', false);
 
