@@ -52,7 +52,7 @@ class Snippet {
 	/**
 	 * This variable tracks whether a snippet is called by another snippet to prevent inifinte recursive loops.
 	 */
-	private static bool $snippetIsRendering = false;
+	public static bool $snippetIsRendering = false;
 
 	/**
 	 * Render a snippet block.
@@ -67,8 +67,6 @@ class Snippet {
 			return '';
 		}
 
-		$isPreProcessing = TemplateProcessor::$isPreProcessing;
-		TemplateProcessor::$isPreProcessing = true;
 		self::$snippetIsRendering = true;
 
 		$output = '';
@@ -94,7 +92,6 @@ class Snippet {
 			}
 		}
 
-		TemplateProcessor::$isPreProcessing = $isPreProcessing;
 		self::$snippetIsRendering = false;
 
 		return $output;

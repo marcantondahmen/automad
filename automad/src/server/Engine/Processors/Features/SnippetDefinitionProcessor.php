@@ -36,6 +36,7 @@
 
 namespace Automad\Engine\Processors\Features;
 
+use Automad\Blocks\Snippet;
 use Automad\Core\Debug;
 use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Delimiters;
@@ -70,7 +71,7 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 		// with TemplateProcessor::$isPreProcessing == true, and the final one where the actual output is generated.
 		// The first run only collects definitions and also allows for overriding them based on other definitions
 		// using the same name and that occur after their actual evaluation in a template.
-		if (TemplateProcessor::$isPreProcessing) {
+		if (TemplateProcessor::$isPreProcessing || Snippet::$snippetIsRendering) {
 			SnippetCollection::add($name, $body, $directory);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 
