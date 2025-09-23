@@ -54,7 +54,7 @@ class TemplateProcessor {
 	/**
 	 * A flag the can be used to configure whether snippet definitions are registered when processing templates.
 	 * Such a preprocessing step is required in order to make it possible to inherit templates by first
-	 * registering all snippet definitions before rendering everithing in a second run.
+	 * registering all snippet definitions before rendering everything in a second run.
 	 * Note that the second run doesn't update snippet definitions anymore.
 	 */
 	public static bool $isPreProcessing = false;

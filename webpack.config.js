@@ -77,7 +77,7 @@ const common = (env, argv) => {
 					test: /\.woff2?$/i,
 					type: 'asset/resource',
 					generator: {
-						filename: '../fonts/[name][ext][query]',
+						filename: '../fonts/[name][ext]?[hash]',
 					},
 				},
 			],

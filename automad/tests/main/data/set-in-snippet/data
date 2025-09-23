@@ -1,0 +1,20 @@
+{
+	"draft": {
+		"+setInSnippet": {
+			"blocks": [
+				{
+					"id": "1CpTQHw3eC",
+					"type": "snippet",
+					"data": {
+						"file": "",
+						"snippet": "<@ snippet test @><@ set { custom: 'snippet value' } @><@ end @>"
+					},
+					"tunes": {
+						"layout": {}
+					}
+				}
+			]
+		}
+    }
+}
+
