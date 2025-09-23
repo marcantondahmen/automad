@@ -1,8 +1,17 @@
 # Changelog
 
-## [v2.0.0-alpha.45](https://github.com/marcantondahmen/automad/commit/94bdec468616e720141629ca46d850fefbe1f70a)
+## [v2.0.0-alpha.46](https://github.com/marcantondahmen/automad/commit/b0116ebc89e99740cead8aa8ce11060c8d4415a2)
 
-Sun, 21 Sep 2025 18:08:52 +0200
+Tue, 23 Sep 2025 19:02:45 +0200
+
+### Bugfixes
+
+- fix rendering of inter font ([9aae73f8c](https://github.com/marcantondahmen/automad/commit/9aae73f8c4a8a544a08fac2e846068c6cd88c5af))
+- fix setting variables in custom user defined snippets and blocks ([55543a67d](https://github.com/marcantondahmen/automad/commit/55543a67da7ce342e4b78f082346a4299a7cf041))
+
+## [v2.0.0-alpha.45](https://github.com/marcantondahmen/automad/commit/69b324164320daff8f1f4277c25b43d61aa607b5)
+
+Sun, 21 Sep 2025 18:12:38 +0200
 
 ### New Features
 
@@ -686,17 +695,3 @@ Sat, 2 Apr 2022 21:48:39 +0200
 ### Bugfixes
 
 - **ui**: fix messenger error when returning null ([ae1a51d6a](https://github.com/marcantondahmen/automad/commit/ae1a51d6ab5489d8dd37f31c287f4bdda8f59c94))
-
-## [v1.10.4](https://github.com/marcantondahmen/automad/commit/0255fad39ac3a534a97164521b423839fa82a2bb)
-
-Sat, 2 Apr 2022 21:36:15 +0200
-
-### Breaking Changes
-
-- **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
-
-### Bugfixes
-
-- **core**: fix overriding config for tests ([8b9e4b3ed](https://github.com/marcantondahmen/automad/commit/8b9e4b3ed51f2c3f0c138ed989a67e9f5d54a3f8))
-- **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
-- fix passing null as non-nullable function parameters ([3822317d3](https://github.com/marcantondahmen/automad/commit/3822317d304dc7e4dfe80e42c734e8309658a5d7))
