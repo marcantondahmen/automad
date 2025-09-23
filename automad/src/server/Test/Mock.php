@@ -112,6 +112,7 @@ class Mock extends TestCase {
 					Data::load('/falsy'),
 					Data::load('/invalid'),
 					Data::load('/find-first-image'),
+					Data::load('/set-in-snippet'),
 					Data::load('/component')
 				),
 				$Shared
