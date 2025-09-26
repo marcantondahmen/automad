@@ -71,8 +71,12 @@
 		margin: -@am-bl-editor-space;
 		padding: @am-bl-editor-space;
 		border-top: @am-border;
-		margin-top: 0;
+		margin-top: @am-bl-editor-space;
 		scrollbar-width: thin;
+	}
+
+	&__nothing-found-message--displayed + &__items {
+		display: none;
 	}
 
 	&-item {
