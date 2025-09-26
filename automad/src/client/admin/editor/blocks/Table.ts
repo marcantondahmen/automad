@@ -50,6 +50,19 @@ export class TableBlock extends Table {
 	}
 
 	/**
+	 * The sanitizer config.
+	 *
+	 * @static
+	 */
+	static get sanitize() {
+		return {
+			content: {
+				br: true,
+			},
+		};
+	}
+
+	/**
 	 * Returns plugin settings
 	 *
 	 * @returns the settings object
