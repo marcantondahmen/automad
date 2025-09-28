@@ -245,6 +245,27 @@ export class SharedDataFormComponent extends FormComponent {
 			label: App.text('openGraphImageShared'),
 		});
 
+		if (App.system.i18n) {
+			create(
+				'input',
+				[],
+				{
+					type: 'hidden',
+					name: `data[${App.reservedFields.LANG_CUSTOM}]`,
+					value: fields[App.reservedFields.LANG_CUSTOM],
+				},
+				this.sections.settings
+			);
+		} else {
+			createField(FieldTag.input, this.sections.settings, {
+				key: App.reservedFields.LANG_CUSTOM,
+				value: fields[App.reservedFields.LANG_CUSTOM],
+				name: `data[${App.reservedFields.LANG_CUSTOM}]`,
+				label: App.text('langAttr'),
+				placeholder: 'en',
+			});
+		}
+
 		createCustomizationFields(fields, this.sections);
 
 		Object.keys(this.sections).forEach((item: FieldSectionName) => {

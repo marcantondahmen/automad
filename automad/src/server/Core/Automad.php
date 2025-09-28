@@ -292,7 +292,7 @@ class Automad {
 		$this->Context = new Context($this->getRequestedPage());
 		$this->Pagelist = new Pagelist($this->pages, $this->Context);
 		$this->Filelist = new Filelist($this->Context);
-		$this->Runtime = new Runtime($this->Filelist, $this->Pagelist);
+		$this->Runtime = new Runtime($this->Filelist, $this->Pagelist, $this->Context);
 	}
 
 	/**

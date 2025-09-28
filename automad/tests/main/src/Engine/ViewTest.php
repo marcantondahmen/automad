@@ -31,7 +31,7 @@ class ViewTest extends TestCase {
 
 		$templates = array(
 			'email_01' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
@@ -42,7 +42,7 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'email_02' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
@@ -54,7 +54,7 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'resolve_01' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
@@ -63,7 +63,7 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'resolve_02' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
@@ -92,7 +92,7 @@ class ViewTest extends TestCase {
 
 		$templates = array(
 			'block_assets_01' => <<<HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
 							{$custom->head}</head>
 							<body>
@@ -101,7 +101,7 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'block_assets_02' => <<<HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
 							{$custom->head}</head>
 							<body>
@@ -112,7 +112,7 @@ class ViewTest extends TestCase {
 			'comments_01' => 'Page',
 			'components_01' => '<div class="am-block"><p class="am-block">Component test</p></div>',
 			'consent_check_01' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}{$assets->consentCSS}{$assets->consentJS}
 							{$custom->head}</head>
 							<body>
@@ -126,7 +126,7 @@ class ViewTest extends TestCase {
 			'custom_function_04' => 'derived',
 			'custom_function_05' => 'derived by user',
 			'email_01' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}</head>
 							<body>
@@ -137,7 +137,7 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'email_02' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}
 							{$assets->mailCSS}{$custom->head}</head>
 							<body>
@@ -150,7 +150,7 @@ class ViewTest extends TestCase {
 						HTML,
 			'extension_01' => 'Test',
 			'extension_02' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}
 							{$assets->extensionCSS}{$assets->extensionJS}{$custom->head}</head>
 							<body>
@@ -171,6 +171,7 @@ class ViewTest extends TestCase {
 			'inheritance_03' => 'nested derived',
 			'inheritance_04' => 'nested derived override',
 			'invalid' => '//',
+			'lang_01' => 'de-DE',
 			'pagelist_01' => 'Text Subpage Page Home BreadcrumbsTest Blocks',
 			'pagelist_02' => 'Blocks Text',
 			'pagelist_03' => 'Home Subpage',
@@ -198,7 +199,7 @@ class ViewTest extends TestCase {
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'resolve_01' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
@@ -207,7 +208,7 @@ class ViewTest extends TestCase {
 						</html>
 						HTML,
 			'resolve_02' => <<< HTML
-						<html>
+						<html lang="en">
 							<head>{$metaTags}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">

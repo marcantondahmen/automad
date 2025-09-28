@@ -46,6 +46,7 @@ use Automad\Core\I18n;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Document\Head;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -196,13 +197,19 @@ class PostProcessor {
 	 * @return string the updated output
 	 */
 	private function setLanguage(string $output): string {
-		if (!AM_I18N_ENABLED) {
-			return $output;
+		$lang = $this->Automad->Context->get()->get(Fields::LANG_CUSTOM);
+
+		if (AM_I18N_ENABLED) {
+			$lang = I18n::getLanguageFromUrl(AM_REQUEST);
+		}
+
+		if (!$lang) {
+			$lang = 'en';
 		}
 
 		// Remove existing lang attribute.
 		$output = preg_replace('/^(\s*(?:<[^>]+>\s*)?<html\s[^>]*)(lang="\w+")([^>]*>)/i', '$1$3', $output) ?? '';
 
-		return preg_replace('/^(\s*(?:<[^>]+>\s*)?<html)/', '$1 lang="' . I18n::getLanguageFromUrl(AM_REQUEST) . '"', $output) ?? '';
+		return preg_replace('/^(\s*(?:<[^>]+>\s*)?<html)/', '$1 lang="' . $lang . '"', $output) ?? '';
 	}
 }

@@ -152,6 +152,7 @@ class Mock extends TestCase {
 				array_merge(
 					array(
 						'url' => '/text',
+						'lang' => 'de-DE',
 						':path' => '/text/',
 						':origUrl' => '/text',
 						':parent' => '/',

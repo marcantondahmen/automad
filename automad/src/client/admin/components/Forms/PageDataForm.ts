@@ -177,6 +177,7 @@ export class PageDataFormComponent extends FormComponent {
 		fields,
 		template,
 		readme,
+		shared,
 	}: PageMainSettingsData): void {
 		/**
 		 * Create a field for one of the main settings.
@@ -277,11 +278,36 @@ export class PageDataFormComponent extends FormComponent {
 			App.text('hidePage')
 		);
 
+		const dateLang = create('div', [CSS.grid, CSS.gridAuto], {}, section);
+
 		createMainField(
 			FieldTag.date,
 			App.reservedFields.DATE,
-			App.text('date')
+			App.text('date'),
+			{},
+			dateLang
 		);
+
+		if (App.system.i18n) {
+			create(
+				'input',
+				[],
+				{
+					type: 'hidden',
+					name: `data[${App.reservedFields.LANG_CUSTOM}]`,
+					value: fields[App.reservedFields.LANG_CUSTOM],
+				},
+				section
+			);
+		} else {
+			createField(FieldTag.input, dateLang, {
+				key: App.reservedFields.LANG_CUSTOM,
+				value: fields[App.reservedFields.LANG_CUSTOM],
+				name: `data[${App.reservedFields.LANG_CUSTOM}]`,
+				label: App.text('langAttr'),
+				placeholder: shared[App.reservedFields.LANG_CUSTOM] || 'en',
+			});
+		}
 
 		if (url != '/') {
 			createField(
@@ -437,6 +463,7 @@ export class PageDataFormComponent extends FormComponent {
 			fields,
 			template,
 			readme,
+			shared,
 		});
 
 		createCustomizationFields(fields, this.sections, shared);

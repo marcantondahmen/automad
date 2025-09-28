@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\Models\Context;
 use Automad\Models\Filelist;
 use Automad\Models\Pagelist;
 use Automad\System\Fields;
@@ -51,6 +52,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Runtime {
+	/**
+	 * The Context object.
+	 */
+	private Context $Context;
+
 	/**
 	 * The runtime data array.
 	 */
@@ -71,10 +77,12 @@ class Runtime {
 	 *
 	 * @param Filelist $Filelist
 	 * @param Pagelist $Pagelist
+	 * @param Context $Context
 	 */
-	public function __construct(Filelist $Filelist, Pagelist $Pagelist) {
+	public function __construct(Filelist $Filelist, Pagelist $Pagelist, Context $Context) {
 		$this->Filelist = $Filelist;
 		$this->Pagelist = $Pagelist;
+		$this->Context = $Context;
 
 		Debug::log('Created new instance');
 	}
@@ -102,7 +110,9 @@ class Runtime {
 
 				case Fields::LANG:
 					// The currently active language.
-					return I18n::get()->getLanguage();
+					$lang = AM_I18N_ENABLED ? I18n::get()->getLanguage() : $this->Context->get()->get(Fields::LANG_CUSTOM);
+
+					return $lang ? $lang : 'en';
 
 				case Fields::PAGELIST_COUNT:
 					// The pagelist count represents the number of pages within the last defined pagelist, ignoring limit and pagination.
