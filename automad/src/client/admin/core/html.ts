@@ -59,6 +59,7 @@ export const enum Attr {
 	icon = 'am-icon',
 	key = 'am-key',
 	label = 'am-label',
+	loadingAnimation = 'am-loading-animation',
 	min = 'am-min',
 	modal = 'am-modal',
 	modalOpen = 'am-modal-open',

@@ -49,6 +49,7 @@ import {
 	query,
 	queryAll,
 	requestAPI,
+	createProgressModal,
 } from '@/admin/core';
 import {
 	DeduplicationSettings,
@@ -80,6 +81,7 @@ const debounced = debounce(
  * - Attr.event - fire event when receiving the API response
  * - Attr.auto - automatically submit form on change
  * - Attr.watch - disable submit buttons until changes are made
+ * - Attr.loadingAnimation - show a loading animation during requests
  *
  * Focus the first input of a for when being connected:
  *
@@ -107,6 +109,11 @@ export class FormComponent extends BaseComponent {
 	 * Cache the last submitted form data in order to identify duplicate submissions.
 	 */
 	private lastSubmittedFormData: string = '';
+
+	/**
+	 * The loading animation modal.
+	 */
+	private loadingAnimationModal: ModalComponent;
 
 	/**
 	 * The deduplication settings for the form.
@@ -144,6 +151,13 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected get confirm(): string {
 		return this.getAttribute(Attr.confirm);
+	}
+
+	/**
+	 * The loading animation message.
+	 */
+	protected get loadingAnimationMessage(): string {
+		return this.getAttribute(Attr.loadingAnimation);
 	}
 
 	/**
@@ -213,6 +227,12 @@ export class FormComponent extends BaseComponent {
 	protected init(): void {
 		if (this.initSelf) {
 			this.submit(true);
+		}
+
+		if (this.loadingAnimationMessage) {
+			this.loadingAnimationModal = createProgressModal(
+				this.loadingAnimationMessage
+			);
 		}
 
 		if (this.hasAttribute(Attr.focus)) {
@@ -294,6 +314,8 @@ export class FormComponent extends BaseComponent {
 			}
 		}
 
+		this.loadingAnimationModal?.open();
+
 		if (this.isDuplicateSubmission()) {
 			return;
 		}
@@ -339,6 +361,8 @@ export class FormComponent extends BaseComponent {
 		this.submitButtons.forEach((button) => {
 			button.classList.remove(CSS.buttonLoading);
 		});
+
+		this.loadingAnimationModal?.close();
 	}
 
 	/**

@@ -36,6 +36,7 @@ import {
 	App,
 	Attr,
 	create,
+	createProgressModal,
 	CSS,
 	FieldTag,
 	html,
@@ -196,11 +197,17 @@ class PageTemplateSelectComponent extends BaseComponent {
 			);
 		});
 
-		const update = () => {
+		const update = (showProgress: boolean = false) => {
 			label.textContent = select.options[select.selectedIndex].text;
+
+			if (showProgress) {
+				createProgressModal(
+					App.text('switchingTemplateProgress')
+				).open();
+			}
 		};
 
-		listen(select, 'change', update);
+		listen(select, 'change', update.bind(this, true));
 
 		setTimeout(update, 0);
 	}
