@@ -57,6 +57,7 @@ export class ImgLoaderComponent extends HTMLElement {
 			[],
 			{
 				src: this.getAttribute('image'),
+				alt: this.getAttribute('alt') || '',
 				width: this.getAttribute('width'),
 				height: this.getAttribute('height'),
 				loading: 'lazy',

@@ -96,6 +96,7 @@ export interface HeaderBlockData {
 export interface ImageBlockData {
 	url: string;
 	caption: string;
+	alt: string;
 	link: string;
 	openInNewTab: boolean;
 }

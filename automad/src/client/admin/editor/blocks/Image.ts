@@ -68,6 +68,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 		return {
 			url: true,
 			link: false,
+			alt: true,
 			openInNewTab: false,
 			caption: {},
 		};
@@ -119,6 +120,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 *
 	 * @param data
 	 * @param data.url
+	 * @param data.alt
 	 * @param data.link
 	 * @param data.openInNewTab
 	 * @param data.caption
@@ -127,6 +129,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	protected prepareData(data: ImageBlockData): ImageBlockData {
 		return {
 			url: data.url || '',
+			alt: data.alt || '',
 			link: data.link || '',
 			openInNewTab: data.openInNewTab || false,
 			caption: data.caption || '',
@@ -175,15 +178,24 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				'<i class="bi bi-images"></i>'
 			);
 
+			const alt = create(
+				'button',
+				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+				{ [Attr.tooltip]: App.text('altAttr') },
+				buttons,
+				'<i class="bi bi-tag-fill"></i>'
+			);
+
 			const link = create(
 				'button',
 				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
 				{ [Attr.tooltip]: App.text('link') },
 				buttons,
-				'<i class="bi bi-link-45deg"></i>'
+				'<i class="bi bi-link"></i>'
 			);
 
 			listen(select, 'click', this.pickImage.bind(this));
+			listen(alt, 'click', this.createAltModal.bind(this));
 			listen(link, 'click', this.createLinkModal.bind(this));
 		}
 
@@ -273,6 +285,35 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			App.text('selectImage'),
 			this.data.url
 		);
+	}
+
+	/**
+	 * Create the alt text modal.
+	 */
+	private createAltModal(): void {
+		const { modal, body } = createGenericModal(App.text('altAttr'));
+
+		createField(FieldTag.input, body, {
+			value: this.data.alt,
+			name: 'alt',
+			key: uniqueId(),
+			label: 'alt',
+		});
+
+		listen(
+			body,
+			'input',
+			debounce(() => {
+				const data = collectFieldData(modal);
+
+				this.data.alt = data.alt;
+				this.blockAPI.dispatchChange();
+			}, 200)
+		);
+
+		setTimeout(() => {
+			modal.open();
+		});
 	}
 
 	/**
