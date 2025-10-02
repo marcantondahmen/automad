@@ -34,6 +34,7 @@
 
 import { KeyValueMap } from '../types';
 import { ButtonsBlock } from './blocks/Buttons';
+import { CalloutBlock } from './blocks/Callout';
 import { CodeBlock } from './blocks/Code';
 import { ComponentBlock } from './blocks/Component';
 import { Delimiter } from './blocks/Delimiter';
@@ -92,6 +93,10 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			class: TableBlock,
 			inlineToolbar: true,
 			stretchable: true,
+		},
+		callout: {
+			class: CalloutBlock,
+			inlineToolbar: true,
 		},
 		quote: {
 			class: QuoteBlock,

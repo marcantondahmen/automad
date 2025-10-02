@@ -76,6 +76,16 @@ export interface ButtonsBlockData {
 	secondaryOpenInNewTab?: boolean;
 }
 
+export interface CalloutBlockData {
+	title: string;
+	text: string;
+}
+
+export interface CalloutBlockInputs {
+	title: HTMLDivElement;
+	text: HTMLDivElement;
+}
+
 export interface CodeBlockData {
 	code: string;
 	language: CodeLanguage;
