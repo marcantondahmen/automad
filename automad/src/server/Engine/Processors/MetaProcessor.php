@@ -94,13 +94,13 @@ class MetaProcessor {
 		$base = AM_SERVER . AM_BASE_INDEX;
 		$content = array_merge(
 			array(
-				'title' => htmlentities(Str::stripTags($this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME))),
-				'description' => htmlentities(Str::shorten(Str::stripTags(Str::findFirstParagraph($html)), 150))
+				'title' => $this->convertHtml(Str::stripTags($this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME))),
+				'description' => $this->convertHtml(Str::shorten(Str::stripTags(Str::findFirstParagraph($html)), 150))
 			),
 			array_filter(
 				array(
-					'title' => htmlentities(Str::stripTags($this->Page->get(Fields::META_TITLE))),
-					'description' => htmlentities(Str::stripTags($this->Page->get(Fields::META_DESCRIPTION)))
+					'title' => $this->convertHtml(Str::stripTags($this->Page->get(Fields::META_TITLE))),
+					'description' => $this->convertHtml(Str::stripTags($this->Page->get(Fields::META_DESCRIPTION)))
 				),
 				'strlen'
 			)
@@ -198,6 +198,16 @@ class MetaProcessor {
 		}
 
 		return Head::prepend($html, '<meta ' . $key . '="' . $name . '" content="' . $content . '">');
+	}
+
+	/**
+	 * Convert HTML special characters to be used in title and description.
+	 *
+	 * @param string $html
+	 * @return string
+	 */
+	private function convertHtml(string $html): string {
+		return htmlspecialchars($html, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, null, false);
 	}
 
 	/**
