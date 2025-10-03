@@ -47,7 +47,6 @@ import {
 	FieldTag,
 	fire,
 	html,
-	listen,
 	query,
 	uniqueId,
 } from '@/admin/core';
@@ -134,7 +133,7 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 		this.renderForm(query('.__card', this.wrapper));
 
 		if (!this.readOnly) {
-			listen(
+			this.listen(
 				this.wrapper,
 				'change input',
 				debounce(() => {
@@ -399,16 +398,14 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 			grid
 		);
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				const value = select.value;
+		this.listen(window, EventName.appStateChange, () => {
+			const value = select.value;
 
-				select.options = getTags();
+			select.options = getTags();
 
-				if (App.tags.includes(value)) {
-					select.value = value;
-				}
-			})
-		);
+			if (App.tags.includes(value)) {
+				select.value = value;
+			}
+		});
 	}
 }

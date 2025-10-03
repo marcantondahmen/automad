@@ -136,11 +136,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 				App.text('galleryBlockLayout')
 			);
 
-			this.api.listeners.on(
-				layoutButton,
-				'click',
-				this.renderModal.bind(this)
-			);
+			this.listen(layoutButton, 'click', this.renderModal.bind(this));
 		}
 
 		const collection = create(
@@ -153,7 +149,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 		setTimeout(() => {
 			collection.images = this.data.files;
 
-			this.api.listeners.on(collection, 'change', () => {
+			this.listen(collection, 'change', () => {
 				this.data.files = collection.images;
 				this.blockAPI.dispatchChange();
 			});
@@ -175,7 +171,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			modal.open();
 		}, 0);
 
-		listen(modal, 'change', () => {
+		this.listen(modal, 'change', () => {
 			this.data = {
 				...this.data,
 				fillRectangle: false, // Always set false, since false toggles are ignored by collectFieldData()
@@ -183,7 +179,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			};
 		});
 
-		listen(modal, EventName.modalClose, () => {
+		this.listen(modal, EventName.modalClose, () => {
 			this.blockAPI.dispatchChange();
 		});
 	}
@@ -279,6 +275,8 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 			this.data.layout = layout.value as GalleryLayout;
 			this.renderLayoutSettings(body);
 		});
+
+		this.addListener(layoutListener);
 	}
 
 	/**

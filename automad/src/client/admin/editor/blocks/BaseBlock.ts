@@ -39,7 +39,7 @@ import {
 	BlockToolConstructorOptions,
 	BlockToolData,
 } from 'automad-editorjs';
-import { create } from '@/admin/core';
+import { create, listen } from '@/admin/core';
 import { KeyValueMap, Listener } from '@/admin/types';
 
 /**
@@ -142,6 +142,23 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	 */
 	protected addListener(listener: Listener): void {
 		this.listeners.push(listener);
+	}
+
+	/**
+	 * Create a listener that will be removed on destruction.
+	 *
+	 * @param element - the element to register the event listeners to
+	 * @param eventNamesString - a string of one or more event names separated by a space
+	 * @param callback - the callback
+	 * @param [selector] - the sector to be used as filter
+	 */
+	protected listen(
+		element: HTMLElement | Document | Window,
+		eventNamesString: string,
+		callback: (event: Event) => void,
+		selector: string = ''
+	): void {
+		this.addListener(listen(element, eventNamesString, callback, selector));
 	}
 
 	/**

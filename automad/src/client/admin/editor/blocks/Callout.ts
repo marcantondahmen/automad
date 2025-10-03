@@ -78,7 +78,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 	static get toolbox() {
 		return {
 			title: App.text('callout'),
-			icon: '<i class="bi bi-chat-left-text"></i>',
+			icon: '<i class="bi bi-lightbulb-fill"></i>',
 		};
 	}
 

@@ -43,7 +43,6 @@ import {
 	EventName,
 	getComponentTargetContainer,
 	html,
-	listen,
 	query,
 	Route,
 } from '@/admin/core';
@@ -186,7 +185,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 		if (options.length > 0) {
 			const select = createSelect(options, options[0].value, body);
 
-			listen(button, 'click', () => {
+			this.listen(button, 'click', () => {
 				this.data.id = select.value;
 				modal.close();
 			});
@@ -197,7 +196,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 
 		modal.open();
 
-		listen(modal, EventName.modalClose, () => {
+		this.listen(modal, EventName.modalClose, () => {
 			if (!this.data.id) {
 				this.api.blocks.delete(
 					this.api.blocks.getBlockIndex(this.blockAPI.id)

@@ -49,7 +49,6 @@ import {
 	getPageURL,
 	html,
 	ImageController,
-	listen,
 	notifyError,
 	requestAPI,
 	resolveFileUrl,
@@ -194,9 +193,9 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				'<i class="bi bi-link"></i>'
 			);
 
-			listen(select, 'click', this.pickImage.bind(this));
-			listen(alt, 'click', this.createAltModal.bind(this));
-			listen(link, 'click', this.createLinkModal.bind(this));
+			this.listen(select, 'click', this.pickImage.bind(this));
+			this.listen(alt, 'click', this.createAltModal.bind(this));
+			this.listen(link, 'click', this.createLinkModal.bind(this));
 		}
 
 		this.caption = create(
@@ -210,7 +209,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			html`${this.data.caption}`
 		);
 
-		listen(this.caption, 'input', () => {
+		this.listen(this.caption, 'input', () => {
 			fire('change', this.caption);
 		});
 
@@ -300,7 +299,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			label: 'alt',
 		});
 
-		listen(
+		this.listen(
 			body,
 			'input',
 			debounce(() => {
@@ -336,7 +335,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			label: App.text('openInNewTab'),
 		});
 
-		listen(
+		this.listen(
 			body,
 			'input',
 			debounce(() => {

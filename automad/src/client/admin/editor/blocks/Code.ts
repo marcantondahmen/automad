@@ -170,7 +170,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 				`
 			);
 
-			this.api.listeners.on(settings, 'change', () => {
+			this.listen(settings, 'change', () => {
 				const { language, lineNumbers } = collectFieldData(settings);
 
 				this.data.lineNumbers = lineNumbers;
@@ -209,13 +209,9 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 			readonly: this.readOnly,
 		});
 
-		this.api.listeners.on(
-			query('textarea', container),
-			'keydown',
-			(event: Event) => {
-				event.stopImmediatePropagation();
-			}
-		);
+		this.listen(query('textarea', container), 'keydown', (event: Event) => {
+			event.stopImmediatePropagation();
+		});
 	}
 
 	/**

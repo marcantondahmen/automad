@@ -45,7 +45,6 @@ import {
 	CSS,
 	FieldTag,
 	html,
-	listen,
 	queryAll,
 	resolveFileUrl,
 	uniqueId,
@@ -343,7 +342,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			if (!this.readOnly) {
 				this.holder.editor.focus();
 
-				listen(this.holder, 'paste', (event: Event) => {
+				this.listen(this.holder, 'paste', (event: Event) => {
 					event.stopPropagation();
 				});
 
@@ -415,7 +414,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		// Add this hidden input in order to catch the focus after a block has been dragged around.
 		create('input', [CSS.displayNone], {}, toolbar);
 
-		listen(toolbar, 'change', () => {
+		this.listen(toolbar, 'change', () => {
 			this.setStyle();
 		});
 
@@ -434,7 +433,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			}, 0);
 		};
 
-		listen(this.wrapper, 'click', (event: Event) => {
+		this.listen(this.wrapper, 'click', (event: Event) => {
 			event.stopPropagation();
 
 			queryAll(`.${CSS.editorBlockSectionToolbar}`).forEach(
@@ -446,17 +445,15 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			setToolbarPosition();
 		});
 
-		this.addListener(
-			listen(document, 'click', (event: Event) => {
-				const target = event.target as HTMLElement;
+		this.listen(document, 'click', (event: Event) => {
+			const target = event.target as HTMLElement;
 
-				if (this.wrapper.contains(target)) {
-					return;
-				}
+			if (this.wrapper.contains(target)) {
+				return;
+			}
 
-				toolbar.classList.remove(CSS.active);
-			})
-		);
+			toolbar.classList.remove(CSS.active);
+		});
 	}
 
 	/**
@@ -473,7 +470,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			'<i class="bi bi-palette2"></i>'
 		);
 
-		listen(button, 'click', () => {
+		this.listen(button, 'click', () => {
 			this.renderStylesModal();
 		});
 	}
@@ -504,7 +501,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			);
 		}
 
-		listen(wrapper, 'change', () => {
+		this.listen(wrapper, 'change', () => {
 			const { justify } = collectFieldData(wrapper);
 
 			this.data.justify = justify as SectionJustifyContentOption;
@@ -540,7 +537,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			);
 		}
 
-		listen(wrapper, 'change', () => {
+		this.listen(wrapper, 'change', () => {
 			const { align } = collectFieldData(wrapper);
 
 			this.data.align = align as SectionAlignItemsOption;
@@ -581,7 +578,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			group
 		);
 
-		listen(input, 'change', () => {
+		this.listen(input, 'change', () => {
 			this.data[key] = input.value;
 			this.blockAPI.dispatchChange();
 		});
@@ -694,7 +691,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		Bindings.connectElements(body);
 
-		this.api.listeners.on(body, 'change', () => {
+		this.listen(body, 'change', () => {
 			this.data.style = collectFieldData(body) as SectionStyle;
 			this.setStyle();
 			this.blockAPI.dispatchChange();

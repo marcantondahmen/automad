@@ -43,7 +43,6 @@ import {
 	fire,
 	getPageURL,
 	html,
-	listen,
 	query,
 	requestAPI,
 	resolveFileUrl,
@@ -182,7 +181,7 @@ export class VideoBlock extends BaseBlock<VideoBlockData> {
 				'<i class="bi bi-film"></i>'
 			);
 
-			listen(select, 'click', this.pickVideo.bind(this));
+			this.listen(select, 'click', this.pickVideo.bind(this));
 		}
 
 		this.caption = create(
@@ -196,7 +195,7 @@ export class VideoBlock extends BaseBlock<VideoBlockData> {
 			html`${this.data.caption}`
 		);
 
-		listen(this.caption, 'input', () => {
+		this.listen(this.caption, 'input', () => {
 			fire('change', this.caption);
 		});
 
@@ -323,7 +322,7 @@ export class VideoBlock extends BaseBlock<VideoBlockData> {
 					`
 				);
 
-				listen(button, 'click', () => {
+				this.listen(button, 'click', () => {
 					this.setVideo(`${baseUrl}${item.name}`);
 
 					modal.close();
@@ -333,7 +332,7 @@ export class VideoBlock extends BaseBlock<VideoBlockData> {
 
 		render();
 
-		this.addListener(listen(window, EventName.filesChangeOnServer, render));
+		this.listen(window, EventName.filesChangeOnServer, render);
 	}
 
 	/**
@@ -374,7 +373,7 @@ export class VideoBlock extends BaseBlock<VideoBlockData> {
 			`
 		);
 
-		listen(linkButton, 'click', () => {
+		this.listen(linkButton, 'click', () => {
 			this.setVideo(linkInput.value);
 			modal.close();
 		});
