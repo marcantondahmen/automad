@@ -42,7 +42,6 @@ import {
 	FieldTag,
 	fire,
 	html,
-	listen,
 	query,
 } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
@@ -74,7 +73,7 @@ class FeedFieldSelectFieldComponent extends BaseFieldComponent {
 		setTimeout(() => {
 			this.init();
 
-			listen(
+			this.listen(
 				this.input,
 				`change ${EventName.changeByBinding}`,
 				this.init.bind(this)

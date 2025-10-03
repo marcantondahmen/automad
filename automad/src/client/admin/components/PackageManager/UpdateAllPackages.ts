@@ -38,7 +38,6 @@ import {
 	CSS,
 	EventName,
 	fire,
-	listen,
 	notifyError,
 	notifySuccess,
 	PackageManagerController,
@@ -61,11 +60,13 @@ class UpdateAllPackagesComponent extends BaseComponent {
 
 		this.init();
 
-		this.addListener(
-			listen(window, EventName.packagesUpdateCheck, this.init.bind(this))
+		this.listen(
+			window,
+			EventName.packagesUpdateCheck,
+			this.init.bind(this)
 		);
 
-		listen(this, 'click', async () => {
+		this.listen(this, 'click', async () => {
 			const modal = createProgressModal(App.text('packagesUpdatingAll'));
 
 			modal.open();

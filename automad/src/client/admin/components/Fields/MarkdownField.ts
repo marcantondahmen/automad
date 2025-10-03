@@ -42,7 +42,6 @@ import {
 	FieldTag,
 	fire,
 	FormDataProviders,
-	listen,
 	query,
 	queryAll,
 	resolveFileUrl,
@@ -56,35 +55,6 @@ import { CustomHTMLRenderer } from '@toast-ui/editor/dist/toastui-editor-viewer'
 import { Prism } from '@/prism/prism';
 // @ts-ignore
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-
-/**
- * Create a custom toolbar button.
- *
- * @param icon
- * @param label
- * @param onClick
- * @returns the toolbar item options
- */
-const createCustomButton = (
-	icon: string,
-	label: string,
-	onClick: (event: Event) => void
-): ToolbarCustomOptions => {
-	const el = create('button', ['toastui-editor-toolbar-icons', icon], {});
-
-	listen(el, 'click', onClick);
-
-	return {
-		el,
-		name: label,
-		tooltip: label,
-		onUpdated({ disabled }) {
-			disabled
-				? el.setAttribute('disabled', '')
-				: el.removeAttribute('disabled');
-		},
-	};
-};
 
 /**
  * Use a custom renderer to correctly resolve page and image links.
@@ -168,6 +138,35 @@ class MarkdownFieldComponent extends BaseFieldComponent {
 	value: string;
 
 	/**
+	 * Create a custom toolbar button.
+	 *
+	 * @param icon
+	 * @param label
+	 * @param onClick
+	 * @returns the toolbar item options
+	 */
+	private createCustomButton(
+		icon: string,
+		label: string,
+		onClick: (event: Event) => void
+	): ToolbarCustomOptions {
+		const el = create('button', ['toastui-editor-toolbar-icons', icon], {});
+
+		this.listen(el, 'click', onClick);
+
+		return {
+			el,
+			name: label,
+			tooltip: label,
+			onUpdated({ disabled }) {
+				disabled
+					? el.setAttribute('disabled', '')
+					: el.removeAttribute('disabled');
+			},
+		};
+	}
+
+	/**
 	 * Create an input field.
 	 */
 	createInput(): void {
@@ -184,7 +183,7 @@ class MarkdownFieldComponent extends BaseFieldComponent {
 
 		const linkBindingName = `markdownComponents_link_${id}`;
 
-		const imageSelection = createCustomButton(
+		const imageSelection = this.createCustomButton(
 			'image',
 			App.text('insertImage'),
 			() => {
@@ -196,7 +195,7 @@ class MarkdownFieldComponent extends BaseFieldComponent {
 			}
 		);
 
-		const linkSelection = createCustomButton(
+		const linkSelection = this.createCustomButton(
 			'link',
 			App.text('insertLink'),
 			() => {
@@ -254,7 +253,7 @@ class MarkdownFieldComponent extends BaseFieldComponent {
 
 		verticaToggle.textContent = App.text('vertical');
 
-		listen(
+		this.listen(
 			tabs,
 			'click',
 			(event: Event) => {

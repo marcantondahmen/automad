@@ -48,7 +48,6 @@ import {
 	FieldTag,
 	fire,
 	html,
-	listen,
 	query,
 	uniqueId,
 } from '@/admin/core';
@@ -168,11 +167,11 @@ export class ComponentEditorComponent extends BaseComponent {
 
 			this.toggleEditor(editor, toggle, this._data.collapsed);
 
-			listen(toggle, 'click', () => {
+			this.listen(toggle, 'click', () => {
 				this.toggleEditor(editor, toggle, !this._data.collapsed);
 			});
 
-			listen(copy, 'click', () => {
+			this.listen(copy, 'click', () => {
 				const collection =
 					this.closest<ComponentCollectionFormComponent>(
 						ComponentCollectionFormComponent.TAG_NAME
@@ -191,13 +190,13 @@ export class ComponentEditorComponent extends BaseComponent {
 					.fireOnReady();
 			});
 
-			listen(rename, 'click', () => {
+			this.listen(rename, 'click', () => {
 				this.setName((name) => {
 					nameBinding.value = name;
 				});
 			});
 
-			listen(remove, 'click', async () => {
+			this.listen(remove, 'click', async () => {
 				if (
 					await confirm(
 						`${App.text('componentConfirmRemoval')} (${this._data.name})`
@@ -284,7 +283,7 @@ export class ComponentEditorComponent extends BaseComponent {
 		button.setAttribute('disabled', '');
 		modal.open();
 
-		listen(
+		this.listen(
 			input,
 			'input paste cut',
 			debounce(() => {
@@ -296,7 +295,7 @@ export class ComponentEditorComponent extends BaseComponent {
 			}, 100)
 		);
 
-		listen(button, 'click', () => {
+		this.listen(button, 'click', () => {
 			const name = input.value;
 
 			if (name.length) {
@@ -305,7 +304,7 @@ export class ComponentEditorComponent extends BaseComponent {
 			}
 		});
 
-		listen(modal, EventName.modalClose, () => {
+		this.listen(modal, EventName.modalClose, () => {
 			if (input.value.length == 0) {
 				this.remove();
 			}

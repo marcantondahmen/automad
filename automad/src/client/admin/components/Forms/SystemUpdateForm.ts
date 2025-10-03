@@ -39,7 +39,6 @@ import {
 	CSS,
 	getComponentTargetContainer,
 	html,
-	listen,
 	query,
 } from '@/admin/core';
 import { KeyValueMap, SystemUpdateResponse } from '@/admin/types';
@@ -244,7 +243,7 @@ export class SystemUpdateFormComponent extends FormComponent {
 
 		const submit = query('am-submit', this);
 
-		listen(submit, 'click', () => {
+		this.listen(submit, 'click', () => {
 			this.progressModal = create(
 				'am-modal',
 				[],

@@ -42,7 +42,6 @@ import {
 	EventName,
 	FieldTag,
 	fire,
-	listen,
 	MailConfigController,
 	requestAPI,
 	Undo,
@@ -86,11 +85,9 @@ export class MailConfigFormComponent extends FormComponent {
 	connectedCallback(): void {
 		this.config = App.system.mail;
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				this.config = App.system.mail;
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			this.config = App.system.mail;
+		});
 	}
 
 	/**
@@ -187,7 +184,7 @@ export class MailConfigFormComponent extends FormComponent {
 
 		toggleSmtpCard();
 
-		this.addListener(listen(transportSelect, 'change', toggleSmtpCard));
+		this.listen(transportSelect, 'change', toggleSmtpCard);
 
 		const footer = create('div', [CSS.flex, CSS.flexGap], {}, this);
 
@@ -207,18 +204,16 @@ export class MailConfigFormComponent extends FormComponent {
 			App.text('reset')
 		);
 
-		this.addListener(
-			listen(reset, 'click', async () => {
-				if (!(await confirm(App.text('systemMailReset')))) {
-					return;
-				}
+		this.listen(reset, 'click', async () => {
+			if (!(await confirm(App.text('systemMailReset')))) {
+				return;
+			}
 
-				requestAPI(MailConfigController.reset, {}, true, () => {
-					fire(EventName.appStateRequireUpdate);
-					Undo.new();
-				});
-			})
-		);
+			requestAPI(MailConfigController.reset, {}, true, () => {
+				fire(EventName.appStateRequireUpdate);
+				Undo.new();
+			});
+		});
 	}
 }
 

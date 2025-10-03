@@ -43,7 +43,6 @@ import {
 	getLogger,
 	collectFieldData,
 	getPageURL,
-	listen,
 	notifyError,
 	notifySuccess,
 	query,
@@ -242,7 +241,7 @@ export class FormComponent extends BaseComponent {
 		}
 
 		if (this.hasAttribute(Attr.enter)) {
-			listen(
+			this.listen(
 				this,
 				'keydown',
 				(event: KeyboardEvent) => {
@@ -455,7 +454,7 @@ export class FormComponent extends BaseComponent {
 	 * Watch the form for changes.
 	 */
 	private watchChanges(): void {
-		listen(
+		this.listen(
 			this,
 			'change keydown cut paste drop input',
 			this.onChange.bind(this),

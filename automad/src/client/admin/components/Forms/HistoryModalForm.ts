@@ -38,7 +38,6 @@ import {
 	create,
 	CSS,
 	html,
-	listen,
 	query,
 	requestAPI,
 	getPageURL,
@@ -100,11 +99,9 @@ export class HistoryModalFormComponent extends BaseComponent {
 
 		const body = query('am-modal-body', modal);
 
-		this.addListener(
-			listen(modal, EventName.modalOpen, () => {
-				this.init(body);
-			})
-		);
+		this.listen(modal, EventName.modalOpen, () => {
+			this.init(body);
+		});
 	}
 
 	/**

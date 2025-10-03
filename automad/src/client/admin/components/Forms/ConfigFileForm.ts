@@ -39,7 +39,6 @@ import {
 	EventName,
 	html,
 	initTabHandler,
-	listen,
 	query,
 	Undo,
 } from '@/admin/core';
@@ -72,12 +71,10 @@ export class ConfigFileFormComponent extends FormComponent {
 	protected init(): void {
 		super.init();
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				this.innerHTML = '';
-				this.submit();
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			this.innerHTML = '';
+			this.submit();
+		});
 	}
 
 	/**

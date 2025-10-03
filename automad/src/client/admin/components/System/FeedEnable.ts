@@ -39,7 +39,6 @@ import {
 	createField,
 	EventName,
 	FieldTag,
-	listen,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
@@ -57,11 +56,9 @@ class FeedEnableComponent extends BaseComponent {
 			initial: App.system.feed.enabled,
 		});
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				feedEnabled.value = App.system.feed.enabled;
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			feedEnabled.value = App.system.feed.enabled;
+		});
 
 		createField(
 			FieldTag.toggleLarge,

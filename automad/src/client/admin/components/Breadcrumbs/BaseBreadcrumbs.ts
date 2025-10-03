@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, listen } from '@/admin/core';
+import { CSS } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -50,13 +50,11 @@ export abstract class BaseBreadcrumbsComponent extends BaseComponent {
 			CSS.layoutDashboardSectionBreadcrumbs
 		);
 
-		this.addListener(
-			listen(window, 'scroll', () => {
-				this.classList.toggle(
-					CSS.layoutDashboardSectionBreadcrumbsHidden,
-					window.scrollY > 40
-				);
-			})
-		);
+		this.listen(window, 'scroll', () => {
+			this.classList.toggle(
+				CSS.layoutDashboardSectionBreadcrumbsHidden,
+				window.scrollY > 40
+			);
+		});
 	}
 }

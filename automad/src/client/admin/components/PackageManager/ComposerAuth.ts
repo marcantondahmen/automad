@@ -42,7 +42,6 @@ import {
 	CSS,
 	FieldTag,
 	html,
-	listen,
 	notifySuccess,
 	requestAPI,
 } from '@/admin/core';
@@ -234,9 +233,9 @@ export class ComposerAuthComponent extends BaseComponent {
 			`
 		);
 
-		listen(button, 'click', configModal.bind(this));
-		listen(configLink, 'click', configModal.bind(this));
-		listen(resetLink, 'click', resetAuth.bind(this));
+		this.listen(button, 'click', configModal.bind(this));
+		this.listen(configLink, 'click', configModal.bind(this));
+		this.listen(resetLink, 'click', resetAuth.bind(this));
 	}
 }
 

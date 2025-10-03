@@ -40,7 +40,6 @@ import {
 	debounce,
 	EventName,
 	keyCombo,
-	listen,
 	queryAll,
 } from '@/admin/core';
 import { InputElement } from '@/admin/types';
@@ -91,7 +90,7 @@ class FilterComponent extends BaseComponent {
 
 		this.classList.add(CSS.filter);
 
-		listen(
+		this.listen(
 			input,
 			'input',
 			debounce(() => {
@@ -99,12 +98,10 @@ class FilterComponent extends BaseComponent {
 			}, 200)
 		);
 
-		this.addListener(
-			listen(window, EventName.switcherChange, () => {
-				input.value = '';
-				this.filter(input);
-			})
-		);
+		this.listen(window, EventName.switcherChange, () => {
+			input.value = '';
+			this.filter(input);
+		});
 
 		this.addListener(
 			keyCombo('k', () => {
@@ -112,7 +109,7 @@ class FilterComponent extends BaseComponent {
 			})
 		);
 
-		listen(input, 'keydown', (event: KeyboardEvent) => {
+		this.listen(input, 'keydown', (event: KeyboardEvent) => {
 			if (event.keyCode == 27) {
 				input.blur();
 			}

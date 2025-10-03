@@ -40,7 +40,6 @@ import {
 	CSS,
 	FieldTag,
 	html,
-	listen,
 	query,
 	titleCase,
 } from '@/admin/core';
@@ -207,7 +206,7 @@ class PageTemplateSelectComponent extends BaseComponent {
 			}
 		};
 
-		listen(select, 'change', update.bind(this, true));
+		this.listen(select, 'change', update.bind(this, true));
 
 		setTimeout(update, 0);
 	}

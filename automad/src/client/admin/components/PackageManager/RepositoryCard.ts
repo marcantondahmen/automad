@@ -41,7 +41,6 @@ import {
 	EventName,
 	fire,
 	html,
-	listen,
 	notifyError,
 	notifySuccess,
 	requestAPI,
@@ -122,7 +121,7 @@ export class RepositoryCardComponent extends BaseComponent {
 			html`<span>${App.text('repositoryRemove')}</span>`
 		);
 
-		listen(remove, 'click', async () => {
+		this.listen(remove, 'click', async () => {
 			const { modal, form } = createFormModal(
 				PackageManagerController.removeRepository,
 				EventName.repositoriesChange,
@@ -146,7 +145,7 @@ export class RepositoryCardComponent extends BaseComponent {
 			html`<span>${App.text('repositoryUpdate')}</span>`
 		);
 
-		listen(update, 'click', async () => {
+		this.listen(update, 'click', async () => {
 			const progress = createProgressModal(
 				App.text('repositoryUpdating')
 			);

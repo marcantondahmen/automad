@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { App, CSS, EventName, listen, requestAPI } from '@/admin/core';
+import { App, CSS, EventName, requestAPI } from '@/admin/core';
 import { Repository } from '@/admin/types';
 import { create, PackageManagerController } from '@/common';
 import { ComposerAuthComponent } from './ComposerAuth';
@@ -79,12 +79,10 @@ class RepositoryListComponent extends BaseComponent {
 
 		this.renderList();
 
-		this.addListener(
-			listen(
-				window,
-				EventName.repositoriesChange,
-				this.renderList.bind(this)
-			)
+		this.listen(
+			window,
+			EventName.repositoriesChange,
+			this.renderList.bind(this)
 		);
 	}
 

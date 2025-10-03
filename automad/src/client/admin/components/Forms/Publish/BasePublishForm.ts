@@ -41,7 +41,6 @@ import {
 	dateFormat,
 	EventName,
 	KeyValueMap,
-	listen,
 	requestAPI,
 } from '@/admin/core';
 import { PublishControllers } from '@/admin/types';
@@ -151,36 +150,30 @@ export abstract class BasePublishFormComponent extends BaseComponent {
 
 		this.tooltip = new Tooltip();
 
-		this.addListener(
-			listen(this.publishButton, 'mouseover', () => {
-				if (this.tooltip && this.lastPublished) {
-					this.tooltip.show(
-						this.publishButton,
-						create(
-							'span',
-							[],
-							{},
-							null,
-							`${App.text('lastPublished')}:<br>${dateFormat(this.lastPublished)}`
-						),
-						{}
-					);
-				}
-			})
-		);
+		this.listen(this.publishButton, 'mouseover', () => {
+			if (this.tooltip && this.lastPublished) {
+				this.tooltip.show(
+					this.publishButton,
+					create(
+						'span',
+						[],
+						{},
+						null,
+						`${App.text('lastPublished')}:<br>${dateFormat(this.lastPublished)}`
+					),
+					{}
+				);
+			}
+		});
 
-		this.addListener(
-			listen(this.publishButton, 'mouseleave', () => {
-				this.tooltip.hide();
-			})
-		);
+		this.listen(this.publishButton, 'mouseleave', () => {
+			this.tooltip.hide();
+		});
 
-		this.addListener(
-			listen(
-				window,
-				`${EventName.contentSaved} ${EventName.contentPublished}`,
-				this.update.bind(this)
-			)
+		this.listen(
+			window,
+			`${EventName.contentSaved} ${EventName.contentPublished}`,
+			this.update.bind(this)
 		);
 
 		setTimeout(() => {

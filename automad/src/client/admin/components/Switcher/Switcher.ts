@@ -38,7 +38,6 @@ import {
 	EventName,
 	fire,
 	getSearchParam,
-	listen,
 	query,
 	queryAll,
 	setSearchParam,
@@ -94,9 +93,7 @@ export class SwitcherComponent extends BaseComponent {
 			window.dispatchEvent(new Event(EventName.switcherChange));
 		}, 0);
 
-		this.addListener(
-			listen(window, EventName.switcherChange, this.onChange.bind(this))
-		);
+		this.listen(window, EventName.switcherChange, this.onChange.bind(this));
 	}
 
 	/**

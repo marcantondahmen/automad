@@ -40,7 +40,6 @@ import {
 	CSS,
 	EventName,
 	FieldTag,
-	listen,
 } from '@/admin/core';
 import { create, PackageManagerController } from '@/common';
 
@@ -69,7 +68,7 @@ export class AddRepositoryComponent extends BaseComponent {
 			App.text('repositoryAdd')
 		);
 
-		listen(addRepositoryButton, 'click', async () => {
+		this.listen(addRepositoryButton, 'click', async () => {
 			const { modal, form } = createFormModal(
 				PackageManagerController.addRepository,
 				EventName.repositoriesChange,

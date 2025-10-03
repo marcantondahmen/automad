@@ -38,7 +38,6 @@ import {
 	EventName,
 	FieldTag,
 	fire,
-	listen,
 	queryAll,
 	uniqueId,
 } from '@/admin/core';
@@ -133,16 +132,14 @@ export class ComponentCollectionFormComponent extends FormComponent {
 		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
 		queryAll(`.${newComponentButtonClass}`).forEach((button) => {
-			this.addListener(
-				listen(button, 'click', () => {
-					this.add({
-						id: uniqueId(),
-						name: '',
-						blocks: [],
-						collapsed: false,
-					});
-				})
-			);
+			this.listen(button, 'click', () => {
+				this.add({
+					id: uniqueId(),
+					name: '',
+					blocks: [],
+					collapsed: false,
+				});
+			});
 		});
 	}
 
@@ -178,11 +175,9 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	protected init(): void {
 		super.init();
 
-		this.addListener(
-			listen(window, EventName.contentPublished, () => {
-				this.fetchTime = Math.ceil(new Date().getTime() / 1000);
-			})
-		);
+		this.listen(window, EventName.contentPublished, () => {
+			this.fetchTime = Math.ceil(new Date().getTime() / 1000);
+		});
 	}
 
 	/**

@@ -41,7 +41,6 @@ import {
 	EventName,
 	fire,
 	html,
-	listen,
 	notifyError,
 	notifySuccess,
 	PackageManagerController,
@@ -84,211 +83,6 @@ const performAction = async (
 };
 
 /**
- * Create an update button.
- *
- * @param pkg
- * @param container
- */
-const createUpdateButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create('span', [], {}, container);
-
-	create('span', [], {}, button).textContent = App.text('packageUpdate');
-
-	listen(button, 'click', () => {
-		performAction(
-			pkg,
-			PackageManagerController.update,
-			App.text('packageUpdating')
-		);
-	});
-};
-
-/**
- * Create an install button.
- *
- * @param pkg
- * @param container
- */
-const createInstallButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create('span', [], {}, container);
-
-	create('span', [], {}, button).textContent = App.text('packageInstall');
-
-	listen(button, 'click', () => {
-		performAction(
-			pkg,
-			PackageManagerController.install,
-			App.text('packageInstalling')
-		);
-	});
-};
-
-/**
- * Create an remove button.
- *
- * @param pkg
- * @param container
- */
-const createRemoveButton = (pkg: Package, container: HTMLElement): void => {
-	const button = create('span', [], {}, container);
-
-	create('span', [], {}, button).textContent = App.text('packageRemove');
-
-	if (pkg.isDependency) {
-		button.setAttribute('disabled', '');
-		button.setAttribute('title', App.text('packageIsDependency'));
-
-		return;
-	}
-
-	listen(button, 'click', () => {
-		performAction(
-			pkg,
-			PackageManagerController.remove,
-			App.text('packageRemoving')
-		);
-	});
-};
-
-/**
- * Create a card header with dropdown.
- *
- * @param pkg
- * @param href
- * @param container
- */
-const createHeader = (pkg: Package, container: HTMLElement): void => {
-	create(
-		'div',
-		[CSS.cardHeader],
-		{},
-		container,
-		html`
-			<div class="${CSS.cardTitle}">
-				$${pkg.name.split('/')[0]} /<br />$${pkg.name.split('/')[1]}
-			</div>
-			<am-dropdown class="${CSS.cardHeaderDropdown}" ${Attr.right}>
-				<i class="bi bi-three-dots"></i>
-				<div class="${CSS.dropdownItems}">
-					<a
-						href="${pkg.documentation}"
-						class="${CSS.dropdownLink}"
-						target="_blank"
-					>
-						<am-icon-text
-							${Attr.icon}="file-richtext"
-							${Attr.text}="${App.text('packageDocumentation')}"
-						></am-icon-text>
-					</a>
-					<a
-						href="${pkg.repository}"
-						class="${CSS.dropdownLink}"
-						target="_blank"
-					>
-						<am-icon-text
-							${Attr.icon}="git"
-							${Attr.text}="Repository"
-						></am-icon-text>
-					</a>
-					<a
-						href="${pkg.issues}"
-						class="${CSS.dropdownLink}"
-						target="_blank"
-					>
-						<am-icon-text
-							${Attr.icon}="bug"
-							${Attr.text}="Issues"
-						></am-icon-text>
-					</a>
-				</div>
-			</am-dropdown>
-		`
-	);
-};
-
-/**
- * Create a preview container.
- *
- * @param pkg
- * @param href
- * @param container
- * @returns the preview element
- */
-const createPreview = (pkg: Package, container: HTMLElement): void => {
-	const renderIcon = (container: HTMLElement) => {
-		create('i', ['bi', 'bi-box-seam'], {}, container);
-	};
-
-	const link = create(
-		'a',
-		[CSS.cardTeaser],
-		{ href: pkg.documentation, target: '_blank' },
-		container
-	);
-
-	if (pkg.version) {
-		const badgeCls = [CSS.badge];
-		const badgeText = [pkg.version];
-
-		if (pkg.outdated) {
-			badgeText.push('');
-			badgeText.push(pkg.latest);
-		}
-
-		create('span', badgeCls, {}, link, badgeText.join(' '));
-	}
-
-	if (pkg.thumbnail) {
-		const img = create('img', [], { src: pkg.thumbnail }, link);
-
-		listen(img, 'error', () => {
-			img.remove();
-
-			renderIcon(link);
-		});
-
-		return;
-	}
-
-	renderIcon(link);
-};
-
-/**
- * Create the description section.
- *
- * @param pkg
- * @param container
- */
-const createDescription = (pkg: Package, container: HTMLElement): void => {
-	create(
-		'span',
-		[CSS.textLimitRows],
-		{},
-		create('div', [CSS.cardBody], {}, container)
-	).textContent = pkg.description;
-};
-
-/**
- * Create the card footer.
- *
- * @param pkg
- * @param container
- */
-const createFooter = (pkg: Package, container: HTMLElement): void => {
-	const buttons = create('div', [CSS.cardButtons], {}, container);
-
-	if (pkg.installed) {
-		createRemoveButton(pkg, buttons);
-
-		if (pkg.outdated) {
-			createUpdateButton(pkg, buttons);
-		}
-	} else {
-		createInstallButton(pkg, buttons);
-	}
-};
-
-/**
  * The package card component.
  *
  * @extends BaseComponent
@@ -307,6 +101,213 @@ export class PackageCardComponent extends BaseComponent {
 	}
 
 	/**
+	 * Create a card header with dropdown.
+	 *
+	 * @param pkg
+	 * @param href
+	 * @param container
+	 */
+	private createHeader(pkg: Package, container: HTMLElement): void {
+		create(
+			'div',
+			[CSS.cardHeader],
+			{},
+			container,
+			html`
+				<div class="${CSS.cardTitle}">
+					$${pkg.name.split('/')[0]} /<br />$${pkg.name.split('/')[1]}
+				</div>
+				<am-dropdown class="${CSS.cardHeaderDropdown}" ${Attr.right}>
+					<i class="bi bi-three-dots"></i>
+					<div class="${CSS.dropdownItems}">
+						<a
+							href="${pkg.documentation}"
+							class="${CSS.dropdownLink}"
+							target="_blank"
+						>
+							<am-icon-text
+								${Attr.icon}="file-richtext"
+								${Attr.text}="${App.text(
+									'packageDocumentation'
+								)}"
+							></am-icon-text>
+						</a>
+						<a
+							href="${pkg.repository}"
+							class="${CSS.dropdownLink}"
+							target="_blank"
+						>
+							<am-icon-text
+								${Attr.icon}="git"
+								${Attr.text}="Repository"
+							></am-icon-text>
+						</a>
+						<a
+							href="${pkg.issues}"
+							class="${CSS.dropdownLink}"
+							target="_blank"
+						>
+							<am-icon-text
+								${Attr.icon}="bug"
+								${Attr.text}="Issues"
+							></am-icon-text>
+						</a>
+					</div>
+				</am-dropdown>
+			`
+		);
+	}
+
+	/**
+	 * Create the description section.
+	 *
+	 * @param pkg
+	 * @param container
+	 */
+	private createDescription(pkg: Package, container: HTMLElement): void {
+		create(
+			'span',
+			[CSS.textLimitRows],
+			{},
+			create('div', [CSS.cardBody], {}, container)
+		).textContent = pkg.description;
+	}
+
+	/**
+	 * Create the card footer.
+	 *
+	 * @param pkg
+	 * @param container
+	 */
+	private createFooter(pkg: Package, container: HTMLElement): void {
+		const buttons = create('div', [CSS.cardButtons], {}, container);
+
+		if (pkg.installed) {
+			this.createRemoveButton(pkg, buttons);
+
+			if (pkg.outdated) {
+				this.createUpdateButton(pkg, buttons);
+			}
+		} else {
+			this.createInstallButton(pkg, buttons);
+		}
+	}
+
+	/**
+	 * Create an update button.
+	 *
+	 * @param pkg
+	 * @param container
+	 */
+	private createUpdateButton(pkg: Package, container: HTMLElement): void {
+		const button = create('span', [], {}, container);
+
+		create('span', [], {}, button).textContent = App.text('packageUpdate');
+
+		this.listen(button, 'click', () => {
+			performAction(
+				pkg,
+				PackageManagerController.update,
+				App.text('packageUpdating')
+			);
+		});
+	}
+
+	/**
+	 * Create an install button.
+	 *
+	 * @param pkg
+	 * @param container
+	 */
+	private createInstallButton(pkg: Package, container: HTMLElement): void {
+		const button = create('span', [], {}, container);
+
+		create('span', [], {}, button).textContent = App.text('packageInstall');
+
+		this.listen(button, 'click', () => {
+			performAction(
+				pkg,
+				PackageManagerController.install,
+				App.text('packageInstalling')
+			);
+		});
+	}
+
+	/**
+	 * Create an remove button.
+	 *
+	 * @param pkg
+	 * @param container
+	 */
+	private createRemoveButton(pkg: Package, container: HTMLElement): void {
+		const button = create('span', [], {}, container);
+
+		create('span', [], {}, button).textContent = App.text('packageRemove');
+
+		if (pkg.isDependency) {
+			button.setAttribute('disabled', '');
+			button.setAttribute('title', App.text('packageIsDependency'));
+
+			return;
+		}
+
+		this.listen(button, 'click', () => {
+			performAction(
+				pkg,
+				PackageManagerController.remove,
+				App.text('packageRemoving')
+			);
+		});
+	}
+
+	/**
+	 * Create a preview container.
+	 *
+	 * @param pkg
+	 * @param href
+	 * @param container
+	 * @returns the preview element
+	 */
+	private createPreview(pkg: Package, container: HTMLElement): void {
+		const renderIcon = (container: HTMLElement) => {
+			create('i', ['bi', 'bi-box-seam'], {}, container);
+		};
+
+		const link = create(
+			'a',
+			[CSS.cardTeaser],
+			{ href: pkg.documentation, target: '_blank' },
+			container
+		);
+
+		if (pkg.version) {
+			const badgeCls = [CSS.badge];
+			const badgeText = [pkg.version];
+
+			if (pkg.outdated) {
+				badgeText.push('');
+				badgeText.push(pkg.latest);
+			}
+
+			create('span', badgeCls, {}, link, badgeText.join(' '));
+		}
+
+		if (pkg.thumbnail) {
+			const img = create('img', [], { src: pkg.thumbnail }, link);
+
+			this.listen(img, 'error', () => {
+				img.remove();
+
+				renderIcon(link);
+			});
+
+			return;
+		}
+
+		renderIcon(link);
+	}
+
+	/**
 	 * Render the card content for the provided package.
 	 *
 	 * @param pkg
@@ -316,10 +317,10 @@ export class PackageCardComponent extends BaseComponent {
 		this.classList.add(CSS.card);
 		this.classList.toggle(CSS.cardActive, pkg.installed);
 
-		createHeader(pkg, this);
-		createPreview(pkg, this);
-		createDescription(pkg, this);
-		createFooter(pkg, this);
+		this.createHeader(pkg, this);
+		this.createPreview(pkg, this);
+		this.createDescription(pkg, this);
+		this.createFooter(pkg, this);
 	}
 }
 

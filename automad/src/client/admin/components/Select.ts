@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, EventName, html, listen, Undo } from '@/admin/core';
+import { create, CSS, EventName, html, Undo } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { KeyValueMap, SelectComponentOption, UndoValue } from '@/admin/types';
 
@@ -152,11 +152,11 @@ export class SelectComponent extends BaseComponent {
 			);
 		};
 
-		listen(this._select, 'focus blur', toggleFocus);
+		this.listen(this._select, 'focus blur', toggleFocus);
 
 		toggleFocus();
 
-		listen(
+		this.listen(
 			this._select,
 			`change ${EventName.changeByBinding}`,
 			this.updateLabel.bind(this)

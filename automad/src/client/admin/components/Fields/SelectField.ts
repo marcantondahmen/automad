@@ -32,14 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	createSelect,
-	CSS,
-	FieldTag,
-	getPageURL,
-	listen,
-} from '@/admin/core';
+import { App, createSelect, CSS, FieldTag, getPageURL } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -76,7 +69,7 @@ class SelectFieldComponent extends BaseFieldComponent {
 			!!value ? [] : [CSS.textMuted]
 		);
 
-		listen(select, 'change', () => {
+		this.listen(select, 'change', () => {
 			select.classList.toggle(CSS.textMuted, !this.input.value);
 		});
 	}

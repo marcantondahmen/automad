@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { App, Attr, CSS, EventName, listen } from '@/admin/core';
+import { App, Attr, CSS, EventName } from '@/admin/core';
 import {
 	getActiveSection,
 	setActiveSection,
@@ -68,11 +68,8 @@ export class SwitcherLinkComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.addListener(
-			listen(window, EventName.switcherChange, this.toggle.bind(this))
-		);
-
-		this.addListener(listen(this, 'click', this.select.bind(this)));
+		this.listen(window, EventName.switcherChange, this.toggle.bind(this));
+		this.listen(this, 'click', this.select.bind(this));
 	}
 
 	/**

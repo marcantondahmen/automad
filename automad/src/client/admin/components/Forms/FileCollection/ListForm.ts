@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, EventName, fire, listen, queryAll } from '@/admin/core';
+import { create, CSS, EventName, fire, queryAll } from '@/admin/core';
 import { File, KeyValueMap } from '@/admin/types';
 import { FormComponent } from '@/admin/components/Forms/Form';
 
@@ -63,12 +63,10 @@ export class FileCollectionListFormComponent extends FormComponent {
 		this.classList.add(CSS.grid);
 		this.setAttribute('style', '--min: 11.5rem; --aspect: 1.25;');
 
-		this.addListener(
-			listen(
-				window,
-				`${EventName.appStateChange} ${EventName.filesChangeOnServer}`,
-				this.refresh.bind(this)
-			)
+		this.listen(
+			window,
+			`${EventName.appStateChange} ${EventName.filesChangeOnServer}`,
+			this.refresh.bind(this)
 		);
 	}
 

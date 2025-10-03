@@ -39,7 +39,6 @@ import {
 	createField,
 	EventName,
 	FieldTag,
-	listen,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
@@ -57,11 +56,9 @@ class I18nEnableComponent extends BaseComponent {
 			initial: App.system.i18n,
 		});
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				i18nEnabled.value = App.system.i18n;
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			i18nEnabled.value = App.system.i18n;
+		});
 
 		createField(
 			FieldTag.toggleLarge,

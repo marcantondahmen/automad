@@ -33,6 +33,7 @@
  */
 
 import { KeyValueMap, Listener } from '@/admin/types';
+import { listen } from '../core';
 
 /**
  * The Automad base component. All Automad components are based on this class.
@@ -93,8 +94,25 @@ export abstract class BaseComponent extends HTMLElement {
 	 *
 	 * @param listener
 	 */
-	addListener(listener: Listener): void {
+	protected addListener(listener: Listener): void {
 		this.listeners.push(listener);
+	}
+
+	/**
+	 * Create a listener that will be removed on destruction.
+	 *
+	 * @param element - the element to register the event listeners to
+	 * @param eventNamesString - a string of one or more event names separated by a space
+	 * @param callback - the callback
+	 * @param [selector] - the sector to be used as filter
+	 */
+	protected listen(
+		element: HTMLElement | Document | Window,
+		eventNamesString: string,
+		callback: (event: Event) => void,
+		selector: string = ''
+	): void {
+		this.addListener(listen(element, eventNamesString, callback, selector));
 	}
 
 	/**

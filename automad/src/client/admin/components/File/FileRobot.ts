@@ -44,7 +44,6 @@ import {
 	EventName,
 	fire,
 	ImageController,
-	listen,
 } from '@/admin/core';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { BaseComponent } from '@/admin/components/Base';
@@ -74,7 +73,7 @@ class FileRobotComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(this, 'click', () => {
+		this.listen(this, 'click', () => {
 			const modal = this.createModal();
 
 			setTimeout(() => {

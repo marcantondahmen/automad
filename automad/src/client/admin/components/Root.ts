@@ -39,7 +39,6 @@ import {
 	create,
 	getTagFromRoute,
 	waitForPendingRequests,
-	listen,
 	Bindings,
 	initCheckboxToggles,
 	queryAll,
@@ -112,11 +111,9 @@ export class RootComponent extends BaseComponent {
 		await App.bootstrap(this);
 		await this.update();
 
-		this.addListener(
-			listen(window, 'popstate', () => {
-				App.root.update();
-			})
-		);
+		this.listen(window, 'popstate', () => {
+			App.root.update();
+		});
 
 		this.addListener(initEnterKeyHandler());
 		this.addListener(initInputChangeHandler());
@@ -211,13 +208,13 @@ export class RootComponent extends BaseComponent {
 			}
 		};
 
-		this.addListener(
-			listen(document, 'visibilitychange', stateChangeHandler.bind(this))
+		this.listen(
+			document,
+			'visibilitychange',
+			stateChangeHandler.bind(this)
 		);
 
-		this.addListener(
-			listen(window, 'focus', stateChangeHandler.bind(this))
-		);
+		this.listen(window, 'focus', stateChangeHandler.bind(this));
 	}
 
 	/**

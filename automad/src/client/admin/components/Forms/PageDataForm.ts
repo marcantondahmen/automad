@@ -60,7 +60,6 @@ import {
 	getLogger,
 	getPageURL,
 	html,
-	listen,
 	prepareFieldGroups,
 	setDocumentTitle,
 } from '@/admin/core';
@@ -153,17 +152,15 @@ export class PageDataFormComponent extends FormComponent {
 
 		super.init();
 
-		this.addListener(
-			listen(window, EventName.contentPublished, () => {
-				if (!this.bindings) {
-					return;
-				}
+		this.listen(window, EventName.contentPublished, () => {
+			if (!this.bindings) {
+				return;
+			}
 
-				this.bindings.pageDataFetchTimeBinding.value = Math.ceil(
-					new Date().getTime() / 1000
-				);
-			})
-		);
+			this.bindings.pageDataFetchTimeBinding.value = Math.ceil(
+				new Date().getTime() / 1000
+			);
+		});
 	}
 
 	/**

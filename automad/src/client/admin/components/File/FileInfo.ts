@@ -42,7 +42,6 @@ import {
 	FieldTag,
 	FileController,
 	html,
-	listen,
 } from '@/admin/core';
 import { File } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
@@ -63,7 +62,7 @@ export class FileInfoComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(this, 'click', () => {
+		this.listen(this, 'click', () => {
 			if (!this.data) {
 				return;
 			}

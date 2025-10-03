@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { EventName, listen } from '@/admin/core';
+import { EventName } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -47,12 +47,10 @@ export abstract class BaseOutdatedPackagesIndicator extends BaseComponent {
 	connectedCallback(): void {
 		this.render();
 
-		this.addListener(
-			listen(
-				window,
-				EventName.packagesUpdateCheck,
-				this.render.bind(this)
-			)
+		this.listen(
+			window,
+			EventName.packagesUpdateCheck,
+			this.render.bind(this)
 		);
 	}
 

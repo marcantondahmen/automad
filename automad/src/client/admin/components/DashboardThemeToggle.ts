@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS, EventName, html, listen, titleCase } from '@/admin/core';
+import { Attr, create, CSS, EventName, titleCase } from '@/admin/core';
 import { DashboardTheme, getTheme, setTheme } from '@/admin/core/theme';
 import { BaseComponent } from '@/admin/components/Base';
 
@@ -49,12 +49,10 @@ class DashboardThemeToggleComponent extends BaseComponent {
 		this.classList.add(CSS.dashboardThemeToggle);
 		this.render();
 
-		this.addListener(
-			listen(
-				window,
-				EventName.dashboardThemeChange,
-				this.render.bind(this)
-			)
+		this.listen(
+			window,
+			EventName.dashboardThemeChange,
+			this.render.bind(this)
 		);
 	}
 
@@ -98,7 +96,8 @@ class DashboardThemeToggleComponent extends BaseComponent {
 		);
 
 		button.innerHTML = `<i class="bi bi-${icon}"></i>`;
-		listen(button, 'click', () => {
+
+		this.listen(button, 'click', () => {
 			setTimeout(() => {
 				setTheme(theme);
 				this.render();

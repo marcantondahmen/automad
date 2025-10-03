@@ -43,7 +43,6 @@ import {
 	EventName,
 	getPageURL,
 	html,
-	listen,
 	query,
 } from '@/admin/core';
 import { createSortableTreeNodes, treeStyles } from '@/admin/core/tree';
@@ -100,9 +99,7 @@ class PageSelectTreeComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.addListener(
-			listen(window, EventName.appStateChange, this.init.bind(this))
-		);
+		this.listen(window, EventName.appStateChange, this.init.bind(this));
 
 		this.init();
 	}
@@ -136,7 +133,7 @@ class PageSelectTreeComponent extends BaseComponent {
 		const modal = this.closest<ModalComponent>(ModalComponent.TAG_NAME);
 
 		if (modal) {
-			listen(modal, EventName.modalOpen, () => {
+			this.listen(modal, EventName.modalOpen, () => {
 				query<HTMLInputElement>('input', currentNode.label).checked =
 					true;
 			});

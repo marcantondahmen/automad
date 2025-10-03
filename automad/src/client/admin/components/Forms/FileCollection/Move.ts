@@ -40,7 +40,6 @@ import {
 	CSS,
 	getPageURL,
 	html,
-	listen,
 	query,
 } from '@/admin/core';
 import { FormComponent } from '@/admin/components/Forms/Form';
@@ -81,13 +80,13 @@ class FileCollectionMoveComponent extends BaseFileCollectionSubmitComponent {
 
 		let target = getPageURL();
 
-		listen(body, 'change', () => {
+		this.listen(body, 'change', () => {
 			const { targetPage } = collectFieldData(body);
 
 			target = targetPage;
 		});
 
-		listen(button, 'click', () => {
+		this.listen(button, 'click', () => {
 			this.relatedForms.forEach((form: FormComponent) => {
 				form.additionalData = { action: 'move', target };
 				form.submit();

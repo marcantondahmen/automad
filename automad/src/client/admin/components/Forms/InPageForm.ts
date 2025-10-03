@@ -44,7 +44,6 @@ import {
 	FieldTag,
 	getPrefixMap,
 	InPageController,
-	listen,
 	query,
 	setDocumentTitle,
 } from '@/admin/core';
@@ -147,7 +146,7 @@ export class InPageFormComponent extends FormComponent {
 
 		Bindings.connectElements(App.root);
 
-		listen(window, 'keydown', (event: KeyboardEvent) => {
+		this.listen(window, 'keydown', (event: KeyboardEvent) => {
 			if (event.keyCode !== 27) {
 				return;
 			}
@@ -162,7 +161,7 @@ export class InPageFormComponent extends FormComponent {
 			window.location.href = this.bindings.inPageReturnUrlBinding.value;
 		});
 
-		listen(document, 'click', (event: Event) => {
+		this.listen(document, 'click', (event: Event) => {
 			const target = event.target as HTMLElement;
 
 			if (target.contains(this)) {

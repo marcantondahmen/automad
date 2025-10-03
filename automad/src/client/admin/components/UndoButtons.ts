@@ -39,7 +39,6 @@ import {
 	CSS,
 	EventName,
 	getMetaKeyLabel,
-	listen,
 	Undo,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
@@ -58,9 +57,7 @@ class UndoButtonsComponent extends BaseComponent {
 
 		this.render();
 
-		this.addListener(
-			listen(window, EventName.undoStackUpdate, this.render.bind(this))
-		);
+		this.listen(window, EventName.undoStackUpdate, this.render.bind(this));
 	}
 
 	/**
@@ -99,8 +96,8 @@ class UndoButtonsComponent extends BaseComponent {
 			redoButton.setAttribute('disabled', '');
 		}
 
-		listen(undoButton, 'click', Undo.undoHandler);
-		listen(redoButton, 'click', Undo.redoHandler);
+		this.listen(undoButton, 'click', Undo.undoHandler);
+		this.listen(redoButton, 'click', Undo.redoHandler);
 	}
 }
 
