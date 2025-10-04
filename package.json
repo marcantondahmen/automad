@@ -65,7 +65,7 @@
     "photoswipe": "^5.4.2",
     "photoswipe-dynamic-caption-plugin": "^1.2.7",
     "postcss-loader": "^8.1.1",
-    "sortable-tree": "^0.7.2",
+    "sortable-tree": "^0.7.3",
     "sortablejs": "^1.15.0",
     "string-replace-loader": "^3.1.0",
     "swiper": "^11.0.4",
