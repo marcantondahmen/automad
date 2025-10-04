@@ -303,9 +303,8 @@ export class NavTreeComponent extends BaseComponent {
 	 * Remove all event listeners and observers when disconnecting.
 	 */
 	disconnectedCallback(): void {
-		super.disconnectedCallback();
-
 		this.tree.destroy();
+		super.disconnectedCallback();
 	}
 }
 

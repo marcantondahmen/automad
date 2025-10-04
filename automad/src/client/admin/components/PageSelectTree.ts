@@ -89,6 +89,11 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
  */
 class PageSelectTreeComponent extends BaseComponent {
 	/**
+	 * The sortable tree instance.
+	 */
+	private tree: SortableTree;
+
+	/**
 	 * True if the current page should be excluded.
 	 */
 	private get hideCurrent(): boolean {
@@ -116,7 +121,7 @@ class PageSelectTreeComponent extends BaseComponent {
 
 		const nodes = createSortableTreeNodes(pages);
 
-		const tree = new SortableTree({
+		this.tree = new SortableTree({
 			nodes,
 			element: this,
 			initCollapseLevel: 1,
@@ -126,7 +131,8 @@ class PageSelectTreeComponent extends BaseComponent {
 		});
 
 		const currentNode =
-			tree.findNode('url', getPageURL()) || tree.findNode('url', '/');
+			this.tree.findNode('url', getPageURL()) ||
+			this.tree.findNode('url', '/');
 
 		currentNode.reveal();
 
@@ -157,6 +163,14 @@ class PageSelectTreeComponent extends BaseComponent {
 		}
 
 		return pages;
+	}
+
+	/**
+	 * Remove all event listeners and observers when disconnecting.
+	 */
+	disconnectedCallback(): void {
+		this.tree.destroy();
+		super.disconnectedCallback();
 	}
 }
 
