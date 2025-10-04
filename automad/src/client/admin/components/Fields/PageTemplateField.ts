@@ -196,14 +196,8 @@ class PageTemplateSelectComponent extends BaseComponent {
 			);
 		});
 
-		const update = (showProgress: boolean = false) => {
+		const update = () => {
 			label.textContent = select.options[select.selectedIndex].text;
-
-			if (showProgress) {
-				createProgressModal(
-					App.text('switchingTemplateProgress')
-				).open();
-			}
 		};
 
 		this.listen(select, 'change', update.bind(this, true));
@@ -293,7 +287,7 @@ export class PageTemplateFieldComponent extends BaseComponent {
 			);
 		}
 
-		create(
+		const modal = create(
 			'am-modal',
 			[],
 			{ id: 'am-page-template-modal' },
@@ -320,6 +314,10 @@ export class PageTemplateFieldComponent extends BaseComponent {
 		} else {
 			body.textContent = App.text('noThemesFound');
 		}
+
+		this.listen(modal, 'change', () => {
+			createProgressModal(App.text('switchingTemplateProgress')).open();
+		});
 	}
 }
 
