@@ -34,7 +34,7 @@
 
 import { SelectComponent } from '@/admin/components/Select';
 import { create, createSelect, CSS, html, listen } from '@/admin/core';
-import { Listener, SelectComponentOption } from '@/admin/types';
+import { SelectComponentOption } from '@/admin/types';
 import { BaseInline } from './BaseInline';
 
 export abstract class BaseSelectInline extends BaseInline {
@@ -71,11 +71,6 @@ export abstract class BaseSelectInline extends BaseInline {
 	 * The select element.
 	 */
 	private select: SelectComponent;
-
-	/**
-	 * The chanhe listener.
-	 */
-	private listener: Listener = null;
 
 	/**
 	 * Render the menu fields.
@@ -126,7 +121,7 @@ export abstract class BaseSelectInline extends BaseInline {
 			this.select.value = prop;
 		}
 
-		this.listener = listen(this.wrapper, 'change', () => {
+		this.listen(this.wrapper, 'change', () => {
 			node.style.setProperty(this.property, this.select.value);
 		});
 	}
@@ -136,12 +131,5 @@ export abstract class BaseSelectInline extends BaseInline {
 	 */
 	hideActions(): void {
 		this.wrapper.hidden = true;
-	}
-
-	/**
-	 * Cleanup and remove listener.
-	 */
-	clear(): void {
-		this.listener?.remove();
 	}
 }

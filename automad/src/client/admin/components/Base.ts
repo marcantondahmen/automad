@@ -94,7 +94,7 @@ export abstract class BaseComponent extends HTMLElement {
 	 *
 	 * @param listener
 	 */
-	protected addListener(listener: Listener): void {
+	addListener(listener: Listener): void {
 		this.listeners.push(listener);
 	}
 
@@ -106,7 +106,7 @@ export abstract class BaseComponent extends HTMLElement {
 	 * @param callback - the callback
 	 * @param [selector] - the sector to be used as filter
 	 */
-	protected listen(
+	listen(
 		element: HTMLElement | Document | Window,
 		eventNamesString: string,
 		callback: (event: Event) => void,
@@ -122,5 +122,7 @@ export abstract class BaseComponent extends HTMLElement {
 		this.listeners.forEach((listener) => {
 			listener.remove();
 		});
+
+		this.listeners = [];
 	}
 }

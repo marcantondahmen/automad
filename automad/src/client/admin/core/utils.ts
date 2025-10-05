@@ -114,7 +114,7 @@ export const confirm = async (text: string): Promise<boolean> => {
 			resolve(isConfirmed);
 		};
 
-		listen(modal, 'click', execute, 'am-modal-close');
+		modal.listen(modal, 'click', execute, 'am-modal-close');
 	});
 };
 

@@ -182,5 +182,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 		this.listeners.forEach((listener) => {
 			listener.remove();
 		});
+
+		this.listeners = [];
 	}
 }

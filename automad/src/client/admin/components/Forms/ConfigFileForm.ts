@@ -134,7 +134,7 @@ export class ConfigFileFormComponent extends FormComponent {
 		const textarea = query<HTMLTextAreaElement>('textarea', this);
 
 		textarea.value = content;
-		initTabHandler(textarea);
+		this.listeners.push(initTabHandler(textarea));
 
 		Undo.attach({
 			getValueProvider: () => textarea,

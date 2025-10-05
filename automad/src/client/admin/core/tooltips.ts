@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, listen, query, queryAll } from '.';
+import { App, Attr, create, listen, query, queryAll } from '.';
 import Tooltip from 'codex-tooltip';
 import { KeyValueMap } from '@/admin/types';
 
@@ -70,7 +70,7 @@ export const initTooltips = () => {
 	const ui = query('.am-ui');
 	const tooltip = new Tooltip();
 
-	listen(ui, 'mouseover', (event: MouseEvent) => {
+	App.root.listen(ui, 'mouseover', (event: MouseEvent) => {
 		const path = event.path || (event.composedPath && event.composedPath());
 		let target: HTMLElement = null;
 

@@ -45,7 +45,7 @@ import {
 	listen,
 	uniqueId,
 } from '@/admin/core';
-import { KeyValueMap, Listener } from '@/admin/types';
+import { KeyValueMap } from '@/admin/types';
 import { BaseInline } from './BaseInline';
 
 /**
@@ -102,11 +102,6 @@ export class LinkInline extends BaseInline {
 	private targetToggle: ToggleFieldComponent;
 
 	/**
-	 * The chanhe listener.
-	 */
-	private listener: Listener = null;
-
-	/**
 	 * Render the menu fields.
 	 *
 	 * @return the rendered fields
@@ -151,7 +146,7 @@ export class LinkInline extends BaseInline {
 		input.value = node.getAttribute('href') ?? '';
 		checkbox.checked = node.getAttribute('target') == '_blank';
 
-		this.listener = listen(
+		this.listen(
 			this.wrapper,
 			`input ${EventName.autocompleteSelect}`,
 			() => {
@@ -177,12 +172,5 @@ export class LinkInline extends BaseInline {
 	 */
 	hideActions(): void {
 		this.wrapper.hidden = true;
-	}
-
-	/**
-	 * Cleanup and remove listener.
-	 */
-	clear(): void {
-		this.listener?.remove();
 	}
 }

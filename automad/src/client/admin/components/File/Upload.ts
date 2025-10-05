@@ -237,6 +237,11 @@ class UploadComponent extends BaseComponent {
 
 		return form;
 	}
+
+	disconnectedCallback(): void {
+		this.dropzone.destroy();
+		super.disconnectedCallback();
+	}
 }
 
 customElements.define('am-upload', UploadComponent);

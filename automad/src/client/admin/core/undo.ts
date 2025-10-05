@@ -33,7 +33,7 @@
  */
 
 import { UndoCapableField, UndoEntry, UndoValue } from '@/admin/types';
-import { debounce, EventName, fire, keyCombo, listen } from '.';
+import { App, debounce, EventName, fire, keyCombo, listen } from '.';
 
 /**
  * The Undo class provides undo/redo-functionality for all kinds of fields.
@@ -105,8 +105,8 @@ export class Undo {
 	 * @static
 	 */
 	static addListeners(): void {
-		keyCombo('z', Undo.undoHandler);
-		keyCombo('y', Undo.redoHandler);
+		App.root.addListener(keyCombo('z', Undo.undoHandler));
+		App.root.addListener(keyCombo('y', Undo.redoHandler));
 	}
 
 	/**
@@ -255,6 +255,10 @@ class UndoProvider {
 
 		this.undoState = field.query();
 
-		listen(field.getValueProvider(), 'change input', onChange.bind(this));
+		App.root.listen(
+			field.getValueProvider(),
+			'change input',
+			onChange.bind(this)
+		);
 	}
 }

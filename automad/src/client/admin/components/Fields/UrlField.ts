@@ -32,14 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	CSS,
-	create,
-	listen,
-	Binding,
-	createLinkModal,
-	FieldTag,
-} from '@/admin/core';
+import { CSS, create, Binding, createLinkModal, FieldTag } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -78,7 +71,7 @@ class UrlFieldComponent extends BaseFieldComponent {
 
 		new Binding(bindingName, { input });
 
-		listen(button, 'click', () => {
+		this.listen(button, 'click', () => {
 			createLinkModal(bindingName, label);
 		});
 	}

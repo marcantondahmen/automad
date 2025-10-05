@@ -280,6 +280,15 @@ export class EditorJSComponent extends BaseComponent {
 			new DragDrop(this);
 		});
 	}
+
+	/**
+	 * Clean up on diconnect.
+	 */
+	disconnectedCallback(): void {
+		this.editor.destroy();
+
+		super.disconnectedCallback();
+	}
 }
 
 customElements.define(EditorJSComponent.TAG_NAME, EditorJSComponent);

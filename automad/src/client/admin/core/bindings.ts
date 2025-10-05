@@ -33,7 +33,12 @@
  */
 
 import { Attr, create, EventName, fire, getLogger, listen, queryAll } from '.';
-import { BindingOptions, InputElement, KeyValueMap } from '@/admin/types';
+import {
+	BindingOptions,
+	InputElement,
+	KeyValueMap,
+	Listener,
+} from '@/admin/types';
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.
@@ -227,7 +232,14 @@ export class Bindings {
 	 *
 	 * @static
 	 */
-	private static _bindings: KeyValueMap = {};
+	private static bindings: KeyValueMap = {};
+
+	/**
+	 * The listener collection.
+	 *
+	 * @static
+	 */
+	private static listeners: Listener[] = [];
 
 	/**
 	 * Add a binding instance.
@@ -237,7 +249,7 @@ export class Bindings {
 	 * @static
 	 */
 	static add(name: string, binding: Binding) {
-		this._bindings[name] = binding;
+		this.bindings[name] = binding;
 	}
 
 	/**
@@ -247,7 +259,7 @@ export class Bindings {
 	 * @static
 	 */
 	static delete(name: string): void {
-		delete this._bindings[name];
+		delete this.bindings[name];
 	}
 
 	/**
@@ -258,9 +270,9 @@ export class Bindings {
 	 * @static
 	 */
 	static get(name: string): Binding {
-		BindingValidator.track(name, this._bindings[name]);
+		BindingValidator.track(name, this.bindings[name]);
 
-		return this._bindings[name];
+		return this.bindings[name];
 	}
 
 	/**
@@ -270,7 +282,7 @@ export class Bindings {
 	 * @static
 	 */
 	static getBindingNames(): string[] {
-		return Object.keys(this._bindings);
+		return Object.keys(this.bindings);
 	}
 
 	/**
@@ -282,7 +294,7 @@ export class Bindings {
 	static connectElements(container: HTMLElement): void {
 		queryAll(`[${Attr.bind}]`, container).forEach((element) => {
 			const key = element.getAttribute(Attr.bind);
-			const binding: Binding = this._bindings[key];
+			const binding: Binding = this.bindings[key];
 
 			BindingValidator.track(key, binding);
 
@@ -330,7 +342,8 @@ export class Bindings {
 				});
 			};
 
-			listen(binding.input, 'change input', update);
+			this.listeners.push(listen(binding.input, 'change input', update));
+
 			fire('input', binding.input);
 		});
 	}
@@ -341,6 +354,12 @@ export class Bindings {
 	 * @static
 	 */
 	static reset(): void {
-		this._bindings = {};
+		this.bindings = {};
+
+		this.listeners.forEach((listener) => {
+			listener.remove();
+		});
+
+		this.listeners = [];
 	}
 }

@@ -257,6 +257,7 @@ export class NavTreeComponent extends BaseComponent {
 	 */
 	protected init(): void {
 		this.classList.add(CSS.nav);
+		this.tree?.destroy();
 		this.innerHTML = '';
 
 		const pages = Object.values(App.pages);

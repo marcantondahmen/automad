@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, CSS, EventName, listen, queryAll } from '.';
+import { App, Attr, CSS, EventName, queryAll } from '.';
 
 /**
  * Initialize all toggles within a given container and toggle the visibily of their targets accordingly.
@@ -53,7 +53,12 @@ export const initCheckboxToggles = (container: HTMLElement) => {
 			});
 		};
 
-		listen(checkbox, `change ${EventName.changeByBinding}`, toggleTargets);
+		App.root.listen(
+			checkbox,
+			`change ${EventName.changeByBinding}`,
+			toggleTargets
+		);
+
 		toggleTargets();
 	});
 };

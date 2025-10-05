@@ -204,6 +204,7 @@ export class ModalComponent extends BaseComponent {
 		fire(EventName.modalOpen, this);
 
 		this.focusTrap = createFocusTrap(this);
+		this.addListener(this.focusTrap);
 
 		if (!this.hasAttribute(Attr.noFocus)) {
 			const input = query<InputElement>('input, textarea', this);

@@ -365,7 +365,7 @@ export const createImagePickerModal = (
 		`
 	);
 
-	listen(query('button', modal), 'click', () => {
+	modal.listen(query('button', modal), 'click', () => {
 		const inputUrl = query<HTMLInputElement>(`#${idUrl}`, modal);
 
 		onSelect(inputUrl.value);
@@ -422,7 +422,7 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 		App.text('ok')
 	);
 
-	listen(modal, EventName.modalOpen, () => {
+	modal.listen(modal, EventName.modalOpen, () => {
 		autocomplete.input.value = '';
 	});
 
@@ -431,8 +431,8 @@ export const createLinkModal = (bindingName: string, label: string): void => {
 		modal.close();
 	};
 
-	listen(autocomplete, EventName.autocompleteSelect, select);
-	listen(buttonOk, 'click', select);
+	autocomplete.listen(autocomplete, EventName.autocompleteSelect, select);
+	modal.listen(buttonOk, 'click', select);
 
 	setTimeout(() => {
 		modal.open();

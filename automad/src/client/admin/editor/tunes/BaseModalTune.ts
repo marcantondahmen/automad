@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { createGenericModal, CSS, fire, listen, query } from '@/admin/core';
+import { createGenericModal, CSS, fire, query } from '@/admin/core';
 import { BlockTuneConstructorOptions } from '@/admin/types';
 import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
 import { TunesMenuConfig } from 'automad-editorjs/types/tools';
@@ -185,7 +185,7 @@ export abstract class BaseModalTune<DataType> {
 
 		body.appendChild(this.createForm());
 
-		listen(body, 'change', () => {
+		this.api.listeners.on(body, 'change', () => {
 			this.data = this.sanitize(this.getFormData(body));
 		});
 

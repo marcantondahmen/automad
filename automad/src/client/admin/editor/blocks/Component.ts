@@ -76,6 +76,11 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	}
 
 	/**
+	 * The editor instance.
+	 */
+	private editor: EditorJS;
+
+	/**
 	 * Prepare the data that is passed to the constructor.
 	 *
 	 * @param data
@@ -130,7 +135,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			</div>
 		`;
 
-		new EditorJS({
+		this.editor = new EditorJS({
 			data: { blocks: component.blocks },
 			holder: this.wrapper,
 			minHeight: 0,
@@ -216,5 +221,14 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	 */
 	save(): ComponentBlockData {
 		return this.data;
+	}
+
+	/**
+	 * Clean up on destroy.
+	 */
+	destroy(): void {
+		this.editor.destroy();
+
+		super.destroy();
 	}
 }

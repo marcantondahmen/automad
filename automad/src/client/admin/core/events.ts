@@ -135,7 +135,7 @@ export const listen = (
 		.split(' ')
 		.filter((str) => str.length > 0);
 
-	const handler = (event: Event) => {
+	let handler = (event: Event) => {
 		if (!selector) {
 			callback.apply(event.target, [event]);
 			return;
@@ -161,6 +161,8 @@ export const listen = (
 		eventNames.forEach((eventName) => {
 			element.removeEventListener(eventName, handler);
 		});
+
+		handler = null;
 	};
 
 	return { remove };

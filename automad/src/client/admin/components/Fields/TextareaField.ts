@@ -56,7 +56,7 @@ class TextareaFieldComponent extends BaseFieldComponent {
 		textarea.textContent = value;
 
 		this.initAutoResize(textarea);
-		initTabHandler(textarea);
+		this.listeners.push(initTabHandler(textarea));
 	}
 
 	/**

@@ -113,6 +113,7 @@ class PageSelectTreeComponent extends BaseComponent {
 	 * Init the navTree.
 	 */
 	private init(): void {
+		this.tree?.destroy();
 		this.innerHTML = '';
 
 		const pages: PageMetaData[] = this.filterPages(
