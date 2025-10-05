@@ -37,7 +37,7 @@ import { CodeLanguage, KeyValueMap } from '..';
 import {
 	sectionBackgroundBlendModes,
 	sectionBorderStyles,
-} from '@/admin/editor/blocks/Section';
+} from '@/admin/editor/blocks/LayoutSection';
 import { sliderEffects } from '@/admin/editor/blocks/ImageSlideshow';
 import { buttonsJustifyOptions } from '@/admin/editor/blocks/Buttons';
 import { tableOfContentsTypes } from '@/admin/editor/blocks/TableOfContents';
@@ -204,7 +204,7 @@ export interface SectionStyle {
 	overflowHidden: boolean;
 }
 
-export interface SectionBlockData {
+export interface LayoutSectionBlockData {
 	content: KeyValueMap;
 	style: SectionStyle;
 	justify: SectionJustifyContentOption;

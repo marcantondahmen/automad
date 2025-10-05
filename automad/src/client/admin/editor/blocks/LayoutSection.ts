@@ -52,7 +52,7 @@ import {
 import {
 	EditorOutputData,
 	SectionAlignItemsOption,
-	SectionBlockData,
+	LayoutSectionBlockData,
 	SectionJustifyContentOption,
 	SectionStyle,
 	SectionToolbarRadioOptions,
@@ -196,9 +196,9 @@ const createRadioInput = (
 		create(
 			'label',
 			[
-				CSS.editorBlockSectionRadio,
+				CSS.editorBlockLayoutSectionRadio,
 				...(value === selected
-					? [CSS.editorBlockSectionRadioActive]
+					? [CSS.editorBlockLayoutSectionRadioActive]
 					: []),
 			],
 			{ [Attr.tooltip]: App.text(tooltip) },
@@ -216,19 +216,19 @@ const createRadioInput = (
 const toggleActiveRadio = (wrapper: HTMLElement): void => {
 	queryAll<HTMLInputElement>('input', wrapper).forEach((input) => {
 		input.parentElement.classList.toggle(
-			CSS.editorBlockSectionRadioActive,
+			CSS.editorBlockLayoutSectionRadioActive,
 			input.checked
 		);
 	});
 };
 
 /**
- * The Section block that create a new editor inside a parent editor
+ * The Layout-Section block that create a new editor inside a parent editor
  * in order to create nested flexbox layouts.
  *
  * @extends BaseBlock
  */
-export class SectionBlock extends BaseBlock<SectionBlockData> {
+export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 	/**
 	 * The editor holder element.
 	 */
@@ -266,7 +266,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 */
 	static get toolbox() {
 		return {
-			title: App.text('sectionBlockTitle'),
+			title: App.text('layoutSectionBlockTitle'),
 			icon: '<i class="bi bi-layout-three-columns"></i>',
 		};
 	}
@@ -277,7 +277,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 * @param data
 	 * @return the section block data
 	 */
-	protected prepareData(data: SectionBlockData): SectionBlockData {
+	protected prepareData(
+		data: LayoutSectionBlockData
+	): LayoutSectionBlockData {
 		return {
 			content: data.content || {},
 			style: Object.assign({}, styleDefaults, data.style),
@@ -297,7 +299,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	render(): HTMLElement {
 		this.section = create(
 			'div',
-			this.readOnly ? [] : [CSS.editorBlockSection],
+			this.readOnly ? [] : [CSS.editorBlockLayoutSection],
 			{},
 			this.wrapper
 		);
@@ -309,9 +311,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 				{},
 				this.section,
 				html`
-					<span class="${CSS.editorBlockSectionLabel}">
-						${SectionBlock.toolbox.icon}
-						<span>${App.text('sectionBlockTitle')}</span>
+					<span class="${CSS.editorBlockLayoutSectionLabel}">
+						${LayoutSectionBlock.toolbox.icon}
+						<span>${App.text('layoutSectionBlockTitle')}</span>
 					</span>
 				`
 			);
@@ -362,7 +364,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): SectionBlockData {
+	save(): LayoutSectionBlockData {
 		return this.data;
 	}
 
@@ -372,35 +374,35 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private renderToolbar(): void {
 		const toolbar = create(
 			'div',
-			[CSS.editorBlockSectionToolbar],
+			[CSS.editorBlockLayoutSectionToolbar],
 			{},
 			this.section
 		);
 
 		const styleTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
 
 		const justifyTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
 
 		const alignTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
 
 		const sizeTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
@@ -436,7 +438,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		this.listen(this.wrapper, 'click', (event: Event) => {
 			event.stopPropagation();
 
-			queryAll(`.${CSS.editorBlockSectionToolbar}`).forEach(
+			queryAll(`.${CSS.editorBlockLayoutSectionToolbar}`).forEach(
 				(_toolbar) => {
 					_toolbar.classList.toggle(CSS.active, _toolbar == toolbar);
 				}
@@ -483,7 +485,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private renderJustifySelect(toolbar: HTMLElement): void {
 		const wrapper = create(
 			'div',
-			[CSS.editorBlockSectionRadios],
+			[CSS.editorBlockLayoutSectionRadios],
 			{},
 			toolbar
 		);
@@ -519,7 +521,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private renderAlignSelect(toolbar: HTMLElement): void {
 		const wrapper = create(
 			'div',
-			[CSS.editorBlockSectionRadios],
+			[CSS.editorBlockLayoutSectionRadios],
 			{},
 			toolbar
 		);
@@ -708,7 +710,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private setStyle(): void {
 		const { style, gap, justify, align, minBlockWidth } = this.data;
 		const baseClass = CSS.editorStyleBase;
-		const classes: string[] = [CSS.editorBlockSectionEditor];
+		const classes: string[] = [CSS.editorBlockLayoutSectionEditor];
 
 		classes.push(`${baseClass}--justify-${justify}`);
 		classes.push(`${baseClass}--align-${align}`);

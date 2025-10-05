@@ -84,6 +84,10 @@ class Blocks {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $data, Automad $Automad): string {
+		if (!isset($data['blocks'])) {
+			return '';
+		}
+
 		$isSection = self::$isRendering;
 
 		if (!$isSection) {
@@ -93,8 +97,9 @@ class Blocks {
 
 		$flexOpen = false;
 		$html = '';
+		$prepared = self::convertLegacyBlocks($data);
 
-		foreach ($data['blocks'] as $block) {
+		foreach ($prepared['blocks'] as $block) {
 			try {
 				$blockIsFlexItem = false;
 				$stretched = false;
@@ -147,5 +152,26 @@ class Blocks {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Update legacy block data.
+	 *
+	 * @param array{blocks: array<int, BlockData>} $data
+	 * @return array{blocks: array<int, BlockData>}
+	 */
+	private static function convertLegacyBlocks(array $data): array {
+		$data['blocks'] = array_map(
+			function (array $block) {
+				if ($block['type'] == 'section') {
+					$block['type'] = 'layoutSection';
+				}
+
+				return $block;
+			},
+			$data['blocks']
+		);
+
+		return $data;
 	}
 }

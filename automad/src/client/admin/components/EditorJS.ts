@@ -53,6 +53,7 @@ import {
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/admin/editor/inline/TextAlign';
+import { convertLegacyBlocks, removeDeleteComponents } from '../editor/utils';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -86,28 +87,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return The prepared data
 	 */
 	private prepareData(data: EditorOutputData): EditorOutputData {
-		return this.removeDeleteComponents(data);
-	}
-
-	/**
-	 * Remove shared component blocks that have been deleted.
-	 *
-	 * @param data
-	 * @return The filtered data
-	 */
-	private removeDeleteComponents(data: EditorOutputData): EditorOutputData {
-		const componentIds = App.components.map((component) => component.id);
-
-		return {
-			...data,
-			blocks:
-				data?.blocks?.filter((block) => {
-					return (
-						block.type != 'component' ||
-						componentIds.includes(block.data.id ?? '')
-					);
-				}) ?? [],
-		};
+		return removeDeleteComponents(convertLegacyBlocks(data));
 	}
 
 	/**

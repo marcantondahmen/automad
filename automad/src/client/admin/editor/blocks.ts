@@ -50,7 +50,7 @@ import { PagelistBlock } from './blocks/Pagelist';
 import { ParagraphBlock } from './blocks/Paragraph';
 import { QuoteBlock } from './blocks/Quote';
 import { RawBlock } from './blocks/Raw';
-import { SectionBlock } from './blocks/Section';
+import { LayoutSectionBlock } from './blocks/LayoutSection';
 import { SnippetBlock } from './blocks/Snippet';
 import { TableBlock } from './blocks/Table';
 import { TableOfContentsBlock } from './blocks/TableOfContents';
@@ -83,7 +83,7 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			class: HeaderBlock,
 			inlineToolbar: true,
 		},
-		section: { class: SectionBlock, stretchable: true },
+		layoutSection: { class: LayoutSectionBlock, stretchable: true },
 		...component,
 		nestedList: {
 			class: NestedListBlock,

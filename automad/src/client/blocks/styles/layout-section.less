@@ -32,16 +32,16 @@
  * Licensed under the MIT license.
  */
 
-am-section {
+am-layout-section {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 	box-sizing: border-box;
-	color: var(--am-section-color);
+	color: var(--am-layout-section-color);
 	background-color: transparent;
 	background-size: cover;
 	background-position: 50% 50%;
-	border: 0 solid var(--am-section-border-color);
+	border: 0 solid var(--am-layout-section-border-color);
 
 	am-stretched > section > & {
 		padding: 0 var(--am-container-padding);
@@ -91,6 +91,6 @@ am-section {
 	& th,
 	& td,
 	& hr {
-		border-color: var(--am-section-border-color, #f0f0f0) !important;
+		border-color: var(--am-layout-section-border-color, #f0f0f0) !important;
 	}
 }
