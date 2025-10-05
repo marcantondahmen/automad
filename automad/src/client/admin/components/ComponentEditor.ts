@@ -99,11 +99,21 @@ export class ComponentEditorComponent extends BaseComponent {
 	}
 
 	/**
+	 * reconnect a moved editor.
+	 */
+	reconnect(): void {
+		this.init();
+	}
+
+	/**
 	 * Initialize the component when data is set.
 	 */
 	private init(): void {
 		const hasName = this._data.name.length > 0;
 		const nameBindingKey = `component-name-${this._data.id}-${Array.from(this.parentNode?.childNodes ?? [])?.indexOf(this) ?? 0}`;
+
+		Bindings.delete(nameBindingKey);
+
 		const nameBinding = new Binding(nameBindingKey, {
 			onChange: (value) => {
 				this._data.name = value;
@@ -283,7 +293,7 @@ export class ComponentEditorComponent extends BaseComponent {
 		button.setAttribute('disabled', '');
 		modal.open();
 
-		this.listen(
+		modal.listen(
 			input,
 			'input paste cut',
 			debounce(() => {
@@ -295,7 +305,7 @@ export class ComponentEditorComponent extends BaseComponent {
 			}, 100)
 		);
 
-		this.listen(button, 'click', () => {
+		modal.listen(button, 'click', () => {
 			const name = input.value;
 
 			if (name.length) {
@@ -304,7 +314,7 @@ export class ComponentEditorComponent extends BaseComponent {
 			}
 		});
 
-		this.listen(modal, EventName.modalClose, () => {
+		modal.listen(modal, EventName.modalClose, () => {
 			if (input.value.length == 0) {
 				this.remove();
 			}

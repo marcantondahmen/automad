@@ -217,7 +217,9 @@ export class ComponentCollectionFormComponent extends FormComponent {
 						editor.style.removeProperty('pointer-events');
 					});
 				},
-				onChange: () => {
+				onChange: (event) => {
+					(event.item as ComponentEditorComponent).reconnect();
+
 					this.submit();
 				},
 			});
@@ -228,6 +230,14 @@ export class ComponentCollectionFormComponent extends FormComponent {
 
 		this.fetchTime = response.time;
 		this.isInitialized = true;
+	}
+
+	/**
+	 * Remove listeners on disconnect.
+	 */
+	disconnectedCallback(): void {
+		this.sortable?.destroy();
+		super.disconnectedCallback();
 	}
 }
 
