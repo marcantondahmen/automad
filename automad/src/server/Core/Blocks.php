@@ -97,50 +97,42 @@ class Blocks {
 
 		$flexOpen = false;
 		$html = '';
-		$prepared = self::convertLegacyBlocks($data);
 
-		foreach ($prepared['blocks'] as $block) {
-			try {
-				$blockIsFlexItem = false;
-				$stretched = false;
-				$width = '';
+		foreach ($data['blocks'] as $block) {
+			$blockIsFlexItem = false;
+			$stretched = false;
+			$width = '';
 
-				if (isset($block['tunes']['layout'])) {
-					/** @var bool */
-					$stretched = $block['tunes']['layout']['stretched'] ?? false;
-					$width = $block['tunes']['layout']['width'] ?? '';
+			if (isset($block['tunes']['layout'])) {
+				/** @var bool */
+				$stretched = $block['tunes']['layout']['stretched'] ?? false;
+				$width = $block['tunes']['layout']['width'] ?? '';
 
-					$blockIsFlexItem = ($width != '' && !$stretched);
-				}
-
-				if (!$flexOpen && $blockIsFlexItem) {
-					$html .= '<am-flex>';
-					$flexOpen = true;
-				}
-
-				if ($flexOpen && !$blockIsFlexItem) {
-					$html .= '</am-flex>';
-					$flexOpen = false;
-				}
-
-				$blockHtml = call_user_func_array(
-					'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
-					array($block, $Automad)
-				);
-
-				// Stretch block.
-				if ($stretched) {
-					$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
-				} elseif ($width != '') {
-					/** @var string */
-					$w = str_replace('/', '-', $width);
-					$blockHtml = "<am-$w>$blockHtml</am-$w>";
-				}
-
-				$html .= $blockHtml;
-			} catch (\Exception $e) {
-				continue;
+				$blockIsFlexItem = ($width != '' && !$stretched);
 			}
+
+			if (!$flexOpen && $blockIsFlexItem) {
+				$html .= '<am-flex>';
+				$flexOpen = true;
+			}
+
+			if ($flexOpen && !$blockIsFlexItem) {
+				$html .= '</am-flex>';
+				$flexOpen = false;
+			}
+
+			$blockHtml = self::generateBlockHtml($block, $Automad);
+
+			// Stretch block.
+			if ($stretched) {
+				$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
+			} elseif ($width != '') {
+				/** @var string */
+				$w = str_replace('/', '-', $width);
+				$blockHtml = "<am-$w>$blockHtml</am-$w>";
+			}
+
+			$html .= $blockHtml;
 		}
 
 		if ($flexOpen) {
@@ -155,23 +147,45 @@ class Blocks {
 	}
 
 	/**
-	 * Update legacy block data.
+	 * Generate HTML for a single block.
 	 *
-	 * @param array{blocks: array<int, BlockData>} $data
-	 * @return array{blocks: array<int, BlockData>}
+	 * @param BlockData $block
+	 * @param Automad $Automad
+	 * @return string
 	 */
-	private static function convertLegacyBlocks(array $data): array {
-		$data['blocks'] = array_map(
-			function (array $block) {
-				if ($block['type'] == 'section') {
-					$block['type'] = 'layoutSection';
-				}
+	private static function generateBlockHtml(array $block, Automad $Automad): string {
+		try {
+			return call_user_func_array(
+				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
+				array($block, $Automad)
+			);
+		} catch (\TypeError $e) {
+			$block = self::unknownBlockHandler($block);
 
-				return $block;
-			},
-			$data['blocks']
-		);
+			try {
+				return call_user_func_array(
+					'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
+					array($block, $Automad)
+				);
+			} catch (\Throwable $e) {
+				return '';
+			}
+		} catch (\Throwable $e) {
+			return '';
+		}
+	}
 
-		return $data;
+	/**
+	 * Handle unknown blocks.
+	 *
+	 * @param BlockData $block
+	 * @return BlockData
+	 */
+	private static function unknownBlockHandler(array $block): array {
+		if ($block['type'] == 'section') {
+			$block['type'] = 'layoutSection';
+		}
+
+		return $block;
 	}
 }
