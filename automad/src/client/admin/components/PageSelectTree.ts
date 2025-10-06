@@ -170,7 +170,7 @@ class PageSelectTreeComponent extends BaseComponent {
 	 * Remove all event listeners and observers when disconnecting.
 	 */
 	disconnectedCallback(): void {
-		this.tree.destroy();
+		this.tree?.destroy();
 		super.disconnectedCallback();
 	}
 }
