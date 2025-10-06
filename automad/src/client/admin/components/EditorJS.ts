@@ -53,7 +53,7 @@ import {
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/admin/editor/inline/TextAlign';
-import { convertLegacyBlocks, removeDeleteComponents } from '../editor/utils';
+import { removeDeleteComponents, unknownBlockHandler } from '../editor/utils';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -87,7 +87,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return The prepared data
 	 */
 	private prepareData(data: EditorOutputData): EditorOutputData {
-		return removeDeleteComponents(convertLegacyBlocks(data));
+		return removeDeleteComponents(data);
 	}
 
 	/**
@@ -172,7 +172,16 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			onReady: (): void => {
 				this.onRender();
+
+				// Dispatch change directly after being ready
+				// in order to save blocks that have been modified
+				// by the unknownBlockHandler() function.
+				// Only save when there are blocks.
+				if (data?.blocks?.length) {
+					this.editor.blocks.getBlockByIndex(0).dispatchChange();
+				}
 			},
+			unknownBlockHandler,
 			...config,
 		});
 	}

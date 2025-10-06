@@ -33,30 +33,26 @@
  */
 
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
-import { BlockAPI } from 'automad-editorjs';
+import { BlockAPI, OutputBlockData } from 'automad-editorjs';
 import { nanoid } from 'nanoid';
 import { App } from '../core';
 
 /**
- * Make old data sets compatible with current Automad version.
+ * Handle unknown block data.
  *
- * @param blocks
- * @return the converted blocks
+ * @param block
+ * @return the handled block
  */
-export const convertLegacyBlocks = (
-	data: EditorOutputData
-): EditorOutputData => {
-	return {
-		...(data ?? {}),
-		blocks:
-			data?.blocks?.map((block) => {
-				if (block.type == 'section') {
-					block.type = 'layoutSection';
-				}
+export const unknownBlockHandler = (
+	block: OutputBlockData
+): OutputBlockData => {
+	if (block.type == 'section') {
+		block.type = 'layoutSection';
 
-				return block;
-			}) || [],
-	};
+		return block;
+	}
+
+	return null;
 };
 
 /**

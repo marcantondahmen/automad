@@ -50,7 +50,7 @@ import { ComponentBlockData } from '@/admin/types';
 import { getBlockTools } from '../blocks';
 import { BaseBlock } from './BaseBlock';
 import { baseTunes, getBlockTunes } from '../tunes';
-import { convertLegacyBlocks } from '../utils';
+import { unknownBlockHandler } from '../utils';
 
 const getComponent = (id: string) => {
 	return App.components.find((c) => c.id === id);
@@ -137,7 +137,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 		`;
 
 		this.editor = new EditorJS({
-			data: convertLegacyBlocks({ blocks: component.blocks }),
+			data: { blocks: component.blocks },
 			holder: this.wrapper,
 			minHeight: 0,
 			autofocus: false,
@@ -145,6 +145,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			inlineToolbar: [],
 			tunes: baseTunes,
 			readOnly: true,
+			unknownBlockHandler,
 		});
 	}
 
