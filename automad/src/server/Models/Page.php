@@ -317,8 +317,8 @@ class Page {
 		string $parentUrl,
 		int $level
 	): ?Page {
-		$DataStrore = new DataStore($path);
-		$data = $DataStrore->getState(empty(Session::getUsername()));
+		$DataStore = new DataStore($path);
+		$data = $DataStore->getState(empty(Session::getUsername()));
 
 		if (empty($data)) {
 			return null;
