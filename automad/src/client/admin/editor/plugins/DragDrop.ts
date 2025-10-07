@@ -125,20 +125,22 @@ export class DragDrop {
 			this.component
 		);
 
-		handle.setAttribute('draggable', 'true');
+		if (handle) {
+			handle.setAttribute('draggable', 'true');
 
-		this.component.listen(handle, 'dragstart', () => {
-			const block = this.getCurrentBlock();
+			this.component.listen(handle, 'dragstart', () => {
+				const block = this.getCurrentBlock();
 
-			DragDrop.CURRENT = {
-				block,
-				index: getBlockIndex(block.holder),
-			};
-		});
+				DragDrop.CURRENT = {
+					block,
+					index: getBlockIndex(block.holder),
+				};
+			});
 
-		this.component.listen(handle, 'drag', () => {
-			this.editor.toolbar.close();
-		});
+			this.component.listen(handle, 'drag', () => {
+				this.editor.toolbar.close();
+			});
+		}
 
 		this.component.listen(
 			this.component,
@@ -238,7 +240,20 @@ export class DragDrop {
 			targetComponent.editor.caret.setToBlock(targetIndex, 'end');
 		}
 
+		DragDrop.refresh(targetComponent.editor);
+
 		DragDrop.CURRENT = null;
 		DragDrop.TARGET = null;
+	}
+
+	/**
+	 * Re-render editor after a successful move.
+	 *
+	 * @param editor
+	 */
+	private static async refresh(editor: EditorJS): Promise<void> {
+		const saved = await editor.save();
+
+		await editor.render(saved);
 	}
 }

@@ -229,7 +229,9 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	 * Clean up on destroy.
 	 */
 	destroy(): void {
-		this.editor.destroy();
+		try {
+			this.editor.destroy();
+		} catch {}
 
 		super.destroy();
 	}

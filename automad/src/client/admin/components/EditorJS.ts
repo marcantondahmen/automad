@@ -274,7 +274,9 @@ export class EditorJSComponent extends BaseComponent {
 	 * Clean up on diconnect.
 	 */
 	disconnectedCallback(): void {
-		this.editor.destroy();
+		try {
+			this.editor.destroy();
+		} catch {}
 
 		super.disconnectedCallback();
 	}
