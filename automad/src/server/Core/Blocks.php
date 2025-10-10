@@ -70,8 +70,8 @@ class Blocks {
 			return $str;
 		}
 
-		$assets = Asset::css('dist/blocks/main.bundle.css', false) .
-				  Asset::js('dist/blocks/main.bundle.js', false);
+		$assets = Asset::css('dist/build/blocks/index.css', false) .
+				  Asset::js('dist/build/blocks/index.js', false);
 
 		return Head::prepend($str, $assets);
 	}

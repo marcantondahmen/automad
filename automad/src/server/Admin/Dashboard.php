@@ -89,13 +89,8 @@ class Dashboard {
 				>
 				<title>$title</title>
 				{$fn(Asset::icon('dist/favicon.ico'))}
-				{$fn(Asset::css('dist/admin/vendor.bundle.css'))}
-				{$fn(Asset::css('dist/admin/main.bundle.css'))}
-				{$fn(Asset::js('dist/admin/vendor.bundle.js'))}
-				{$fn(Asset::js('dist/admin/vendor.editorjs.bundle.js'))}
-				{$fn(Asset::js('dist/admin/vendor.filerobot.bundle.js'))}
-				{$fn(Asset::js('dist/admin/vendor.toastui.bundle.js'))}
-				{$fn(Asset::js('dist/admin/main.bundle.js'))}
+				{$fn(Asset::css('dist/build/admin/index.css'))}
+				{$fn(Asset::js('dist/build/admin/index.js'))}
 			</head>
 			<body>
 				$body
