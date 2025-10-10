@@ -80,7 +80,7 @@ const commonConfig = {
 		'.woff2': 'file',
 	},
 	define: { DEVELOPMENT: isDev.toString() },
-	plugins: [...(isDev ? [] : [htmlMinifier()]), lessLoader(), postcss()],
+	plugins: [htmlMinifier(), lessLoader(), postcss()],
 };
 
 async function buildAll() {
