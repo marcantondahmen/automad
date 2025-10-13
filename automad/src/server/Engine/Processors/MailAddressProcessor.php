@@ -139,6 +139,8 @@ class MailAddressProcessor {
 	 */
 	private function processBody(array $matches): string {
 		$regexEmail = '[~\w_\.\+\-]+@[\w\.\-]+\.[a-zA-Z]{2,}';
+
+		/** @var string */
 		$body = $matches[0] ?? '';
 
 		$body = preg_replace_callback(
