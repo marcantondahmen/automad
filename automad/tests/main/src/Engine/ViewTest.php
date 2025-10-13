@@ -283,14 +283,14 @@ class ViewTest extends TestCase {
 		};
 
 		return (object) array(
-			'consentJS' => '<script src="' . $asset('/automad/dist/consent/main.bundle.js') . '" type="text/javascript"></script>',
-			'consentCSS' => '<link href="' . $asset('/automad/dist/consent/main.bundle.css') . '" rel="stylesheet">',
-			'blocksJS' => '<script src="' . $asset('/automad/dist/blocks/main.bundle.js') . '" type="text/javascript"></script>',
-			'blocksCSS' => '<link href="' . $asset('/automad/dist/blocks/main.bundle.css') . '" rel="stylesheet">',
-			'mailJS' => '<script src="' . $asset('/automad/dist/mail/main.bundle.js') . '" type="text/javascript"></script>',
-			'mailCSS' => '<link href="' . $asset('/automad/dist/mail/main.bundle.css') . '" rel="stylesheet">',
-			'inPageJS' => '<script src="' . $asset('/automad/dist/inpage/main.bundle.js') . '" type="text/javascript"></script>',
-			'inPageCSS' => '<link href="' . $asset('/automad/dist/inpage/main.bundle.css') . '" rel="stylesheet">',
+			'consentJS' => '<script src="' . $asset('/automad/dist/build/consent/index.js') . '" type="module"></script>',
+			'consentCSS' => '<link href="' . $asset('/automad/dist/build/consent/index.css') . '" rel="stylesheet">',
+			'blocksJS' => '<script src="' . $asset('/automad/dist/build/blocks/index.js') . '" type="module"></script>',
+			'blocksCSS' => '<link href="' . $asset('/automad/dist/build/blocks/index.css') . '" rel="stylesheet">',
+			'mailJS' => '<script src="' . $asset('/automad/dist/build/mail/index.js') . '" type="module"></script>',
+			'mailCSS' => '<link href="' . $asset('/automad/dist/build/mail/index.css') . '" rel="stylesheet">',
+			'inPageJS' => '<script src="' . $asset('/automad/dist/build/inpage/index.js') . '" type="module"></script>',
+			'inPageCSS' => '<link href="' . $asset('/automad/dist/build/inpage/index.css') . '" rel="stylesheet">',
 			'extensionJS' => '<script type="text/javascript" src="' . $asset('/automad/tests/main/packages/vendor/extension/script.js') . '"></script>',
 			'extensionCSS' => '<link href="' . $asset('/automad/tests/main/packages/vendor/extension/styles.css') . '" rel="stylesheet">'
 		);

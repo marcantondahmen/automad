@@ -80,8 +80,8 @@ class ConsentProcessor {
 			return $str;
 		}
 
-		$str = Head::prepend($str, Asset::js('dist/consent/main.bundle.js', false));
-		$str = Head::prepend($str, Asset::css('dist/consent/main.bundle.css', false));
+		$str = Head::prepend($str, Asset::js('dist/build/consent/index.js', false));
+		$str = Head::prepend($str, Asset::css('dist/build/consent/index.css', false));
 
 		$Page = $this->Automad->Context->get();
 

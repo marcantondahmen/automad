@@ -81,8 +81,8 @@ class MailAddressProcessor {
 		) ?? '';
 
 		if ($this->hasMail) {
-			$str = Head::append($str, Asset::css('dist/mail/main.bundle.css', false));
-			$str = Body::append($str, Asset::js('dist/mail/main.bundle.js', false));
+			$str = Head::append($str, Asset::css('dist/build/mail/index.css', false));
+			$str = Body::append($str, Asset::js('dist/build/mail/index.js', false));
 		}
 
 		return $str;
