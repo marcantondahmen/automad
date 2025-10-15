@@ -39,7 +39,6 @@ import {
 	ImageSetData,
 	MasonryItem,
 } from '@/blocks/types';
-import PhotoSwipe from 'photoswipe';
 // @ts-ignore
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 // @ts-ignore
@@ -51,7 +50,6 @@ import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css'
 import arrowPrevSVG from '@/blocks/svg/arrowPrev.svg';
 import arrowNextSVG from '@/blocks/svg/arrowNext.svg';
 import closeSVG from '@/blocks/svg/close.svg';
-import zoomSVG from '@/blocks/svg/zoom.svg';
 
 /**
  * A gallery component for column or row based layouts.
@@ -60,7 +58,7 @@ import zoomSVG from '@/blocks/svg/zoom.svg';
  * @see {@link github https://github.com/dimsemenov/photoswipe}
  * @see {@link captions https://github.com/dimsemenov/photoswipe-dynamic-caption-plugin}
  */
-class GalleryComponent extends HTMLElement {
+export default class Gallery {
 	/**
 	 * The tag name.
 	 *
@@ -74,21 +72,21 @@ class GalleryComponent extends HTMLElement {
 	private data: GalleryData;
 
 	/**
-	 * The class constructor.
+	 * The main parent element.
 	 */
-	constructor() {
-		super();
-	}
+	element: HTMLElement;
 
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The class constructor.
 	 */
-	connectedCallback(): void {
+	constructor(element: HTMLElement) {
+		this.element = element;
+
 		this.data = JSON.parse(
-			decodeURIComponent(this.getAttribute('data') ?? '')
+			decodeURIComponent(this.element.getAttribute('data') ?? '')
 		) as GalleryData;
 
-		this.removeAttribute('data');
+		this.element.removeAttribute('data');
 
 		const layouts = {
 			columns: this.renderColumns,
@@ -117,7 +115,7 @@ class GalleryComponent extends HTMLElement {
 					--am-gallery-gap: ${this.data.settings.gapPx}px;
 				`,
 			},
-			this
+			this.element
 		);
 
 		this.data.imageSets.forEach((imgSet) => {
@@ -146,7 +144,7 @@ class GalleryComponent extends HTMLElement {
 	 */
 	private calculateMasonryRowHeight(): number {
 		const maxRows = 10000;
-		const masonryWidth = this.getBoundingClientRect().width;
+		const masonryWidth = this.element.getBoundingClientRect().width;
 		const { settings, imageSets } = this.data;
 		const colWidth = settings.columnWidthPx;
 		const gap = settings.gapPx;
@@ -166,7 +164,7 @@ class GalleryComponent extends HTMLElement {
 			'div',
 			['am-gallery-masonry'],
 			{ hidden: 'true' },
-			this
+			this.element
 		);
 
 		const items: MasonryItem[] = [];
@@ -210,7 +208,7 @@ class GalleryComponent extends HTMLElement {
 
 		const updateItems = (items: MasonryItem[]) => {
 			const masonryRowHeight = this.calculateMasonryRowHeight();
-			const masonryWidth = this.getBoundingClientRect().width;
+			const masonryWidth = this.element.getBoundingClientRect().width;
 
 			gallery.setAttribute(
 				'style',
@@ -248,7 +246,8 @@ class GalleryComponent extends HTMLElement {
 			if (fillRectangle) {
 				const columns: { [key: number]: MasonryItem[] } = {};
 				const nRows = Math.round(
-					this.getBoundingClientRect().height / masonryRowHeight
+					this.element.getBoundingClientRect().height /
+						masonryRowHeight
 				);
 
 				let columnNumber = 0;
@@ -330,7 +329,7 @@ class GalleryComponent extends HTMLElement {
 				...(fillRectangle ? ['am-gallery-flex--fill'] : []),
 			],
 			{ style: `--am-gallery-gap: ${gapPx}px;` },
-			this
+			this.element
 		);
 
 		const calcWidth = (thumb: {
@@ -500,25 +499,23 @@ class GalleryComponent extends HTMLElement {
 	}
 }
 
-customElements.define(GalleryComponent.TAG_NAME, GalleryComponent);
-
 /**
  * Initialize all galleries at once in order to allow for merged lighbox image sets.
  */
-const initLightbox = (): void => {
+const initLightbox = async (): Promise<void> => {
 	const lightbox = new PhotoSwipeLightbox({
 		gallery: 'body',
-		children: `${GalleryComponent.TAG_NAME} a`,
+		children: `${Gallery.TAG_NAME} a`,
 		showHideAnimationType: 'zoom',
 		showAnimationDuration: 300,
 		hideAnimationDuration: 300,
-		pswpModule: PhotoSwipe,
+		pswpModule: (await import('photoswipe')).default,
 		mainClass: 'am-pswp',
 		bgOpacity: 1,
 		arrowPrevSVG,
 		arrowNextSVG,
 		closeSVG,
-		zoomSVG,
+		zoom: false,
 	});
 
 	new PhotoSwipeDynamicCaption(lightbox, {

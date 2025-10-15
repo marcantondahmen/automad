@@ -34,6 +34,12 @@
 
 import { GalleryBlockData, ImageSlideshowBlockData } from '@/admin/types';
 
+export interface ComponentImplementation {}
+
+export interface ComponentImplementationConstructor {
+	new (element: HTMLElement): ComponentImplementation;
+}
+
 export interface GalleryData {
 	imageSets: {
 		thumb: {

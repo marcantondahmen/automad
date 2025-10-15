@@ -34,32 +34,25 @@
 
 import { queryAll } from '@/common';
 
-class TableOfContentsComponent extends HTMLElement {
+export default class TableOfContentsComponent {
 	/**
-	 * The tag name.
-	 *
-	 * @static
+	 * The main element.
 	 */
-	static TAG_NAME = 'am-table-of-contents';
-
-	/**
-	 * The class constructor.
-	 */
-	constructor() {
-		super();
-	}
+	element: HTMLElement;
 
 	/**
 	 * Get the list type.
 	 */
 	private get listTag(): 'ol' | 'ul' {
-		return this.getAttribute('type') == 'ordered' ? 'ol' : 'ul';
+		return this.element.getAttribute('type') == 'ordered' ? 'ol' : 'ul';
 	}
 
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The class constructor.
 	 */
-	connectedCallback(): void {
+	constructor(element: HTMLElement) {
+		this.element = element;
+
 		if (document.readyState === 'loading') {
 			document.addEventListener(
 				'DOMContentLoaded',
@@ -115,11 +108,6 @@ class TableOfContentsComponent extends HTMLElement {
 			html += `</li></${this.listTag}>`;
 		}
 
-		this.innerHTML = html;
+		this.element.innerHTML = html;
 	}
 }
-
-customElements.define(
-	TableOfContentsComponent.TAG_NAME,
-	TableOfContentsComponent
-);

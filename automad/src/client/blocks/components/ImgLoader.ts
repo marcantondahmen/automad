@@ -40,44 +40,37 @@ import { create } from '@/common';
  * @example
  * <am-img-loader image="..." preload="..." width="200" height="200"></am-img-loader>
  */
-export class ImgLoaderComponent extends HTMLElement {
+export default class ImgLoader {
 	/**
 	 * The class constructor.
 	 */
-	constructor() {
-		super();
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
+	constructor(element: HTMLElement) {
 		const img = create(
 			'img',
 			[],
 			{
-				src: this.getAttribute('image'),
-				alt: this.getAttribute('alt') || '',
-				width: this.getAttribute('width'),
-				height: this.getAttribute('height'),
+				src: element.getAttribute('image'),
+				alt: element.getAttribute('alt') || '',
+				width: element.getAttribute('width'),
+				height: element.getAttribute('height'),
 				loading: 'lazy',
 			},
-			this
+			element
 		);
 
-		if (this.hasAttribute('style')) {
-			img.setAttribute('style', this.getAttribute('style'));
+		if (element.hasAttribute('style')) {
+			img.setAttribute('style', element.getAttribute('style'));
 		}
 
 		const loaded = () => {
-			this.classList.add('am-loaded');
+			element.classList.add('am-loaded');
 
 			setTimeout(() => {
-				this.replaceWith(img);
+				element.replaceWith(img);
 			}, 300);
 		};
 
-		this.style.backgroundImage = `url(${this.getAttribute('preload')})`;
+		element.style.backgroundImage = `url(${element.getAttribute('preload')})`;
 
 		if (img.complete) {
 			loaded();
@@ -86,5 +79,3 @@ export class ImgLoaderComponent extends HTMLElement {
 		}
 	}
 }
-
-customElements.define('am-img-loader', ImgLoaderComponent);
