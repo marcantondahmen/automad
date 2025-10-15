@@ -227,20 +227,20 @@ export class DragDrop {
 
 		if (sourceComponent === targetComponent) {
 			sourceComponent.editor.blocks.move(targetIndex, sourceIndex);
+
+			await DragDrop.refresh(sourceComponent.editor);
+
 			sourceComponent.editor.caret.setToBlock(targetIndex, 'end');
 		} else {
-			sourceComponent.editor.blocks.delete(sourceIndex);
-
-			insertBlock(
+			await insertBlock(
 				DragDrop.CURRENT.block,
 				targetComponent.editor,
 				targetIndex
 			);
 
+			sourceComponent.editor.blocks.delete(sourceIndex);
 			targetComponent.editor.caret.setToBlock(targetIndex, 'end');
 		}
-
-		DragDrop.refresh(targetComponent.editor);
 
 		DragDrop.CURRENT = null;
 		DragDrop.TARGET = null;

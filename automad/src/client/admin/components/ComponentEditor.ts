@@ -99,16 +99,9 @@ export class ComponentEditorComponent extends BaseComponent {
 	}
 
 	/**
-	 * reconnect a moved editor.
-	 */
-	reconnect(): void {
-		this.init();
-	}
-
-	/**
 	 * Initialize the component when data is set.
 	 */
-	private init(): void {
+	init(): void {
 		const hasName = this._data.name.length > 0;
 		const nameBindingKey = `component-name-${this._data.id}-${Array.from(this.parentNode?.childNodes ?? [])?.indexOf(this) ?? 0}`;
 

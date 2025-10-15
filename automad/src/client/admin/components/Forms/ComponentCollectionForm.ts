@@ -218,7 +218,7 @@ export class ComponentCollectionFormComponent extends FormComponent {
 					});
 				},
 				onChange: (event) => {
-					(event.item as ComponentEditorComponent).reconnect();
+					(event.item as ComponentEditorComponent).init();
 
 					this.submit();
 				},
