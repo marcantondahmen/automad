@@ -22,14 +22,14 @@ const entryPoints = [
 	return path.join(__dirname, 'automad/src/client', entry, 'index.ts');
 });
 
-const minify = (html) =>
-	html
-		.replace(/\$\{"([^"]+)"(\s\/\*\s[\w\.\-]+\s\*\/)?\}/g, '$1')
-		.replace(/\s+([\w\$\<`])/g, ' $1')
-		.replace(/\<\s+/g, '<')
-		.replace(/\s+\>/g, '>')
+const minify = (source) =>
+	source
+		.replace(/\/\/\s.*$/gm, ' ')
+		.replace(/\s+/g, ' ')
 		.replace(/\>\s+\</g, '><')
-		.replace(/(^`\s|\s`$)/g, '`');
+		.replace(/(\w\>)\s/g, '$1')
+		.replace(/\s(\<\/\w)/g, '$1')
+		.replace(/`([^`]+)`/g, (_, s) => `\`${s.trim()}\``);
 
 const htmlMinifier = () => {
 	return {
@@ -44,10 +44,7 @@ const htmlMinifier = () => {
 					);
 
 					return {
-						contents: source.replace(
-							/(`[^`]+`)/g,
-							(_, htmlContent) => minify(htmlContent)
-						),
+						contents: minify(source),
 						loader: 'ts',
 					};
 				}
