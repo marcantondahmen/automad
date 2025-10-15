@@ -31,9 +31,9 @@ const minify = (source) =>
 		.replace(/\s(\<\/\w)/g, '$1')
 		.replace(/`([^`]+)`/g, (_, s) => `\`${s.trim()}\``);
 
-const htmlMinifier = () => {
+const tsMinifier = () => {
 	return {
-		name: 'html-minifier',
+		name: 'ts-minifier',
 		setup(build) {
 			build.onLoad(
 				{ filter: /\.ts$/, namespace: 'file' },
@@ -77,7 +77,7 @@ const commonConfig = {
 		'.woff2': 'file',
 	},
 	define: { DEVELOPMENT: isDev.toString() },
-	plugins: [htmlMinifier(), lessLoader(), postcss()],
+	plugins: [lessLoader(), postcss(), tsMinifier()],
 };
 
 async function buildAll() {
