@@ -24,11 +24,15 @@ const entryPoints = [
 
 const minify = (source) =>
 	source
+		// Remove all single line comments in order to safely remove newlines.
 		.replace(/\/\/\s.*$/gm, ' ')
+		// Once replace multiple whitespace chars including newlines to a single space.
 		.replace(/\s+/g, ' ')
-		.replace(/\>\s+\</g, '><')
+		// From here on, on single \s needs to be matched.
+		.replace(/\>\s\</g, '><')
 		.replace(/(\w\>)\s/g, '$1')
 		.replace(/\s(\<\/\w)/g, '$1')
+		// Also trim template strings.
 		.replace(/`([^`]+)`/g, (_, s) => `\`${s.trim()}\``);
 
 const tsMinifier = () => {
@@ -77,7 +81,7 @@ const commonConfig = {
 		'.woff2': 'file',
 	},
 	define: { DEVELOPMENT: isDev.toString() },
-	plugins: [lessLoader(), postcss(), tsMinifier()],
+	plugins: [lessLoader(), postcss(), ...(isDev ? [] : [tsMinifier()])],
 };
 
 async function buildAll() {
