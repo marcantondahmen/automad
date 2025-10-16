@@ -33,7 +33,6 @@
  */
 
 import {
-	App,
 	Attr,
 	create,
 	createEditor,
@@ -120,7 +119,6 @@ export class EditorFieldComponent extends BaseFieldComponent {
 
 					this.value = {
 						blocks: [...blocks],
-						automadVersion: App.version,
 					};
 
 					fire('input', this);

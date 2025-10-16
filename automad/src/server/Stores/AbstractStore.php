@@ -151,7 +151,9 @@ abstract class AbstractStore {
 	 * @return bool
 	 */
 	public function save(): bool {
-		return FileSystem::writeJson($this->file, $this->data);
+		$data = array_merge($this->data, array('automadVersion' => AM_VERSION));
+
+		return FileSystem::writeJson($this->file, $data);
 	}
 
 	/**
