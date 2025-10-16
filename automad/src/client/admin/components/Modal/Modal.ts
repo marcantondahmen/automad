@@ -187,6 +187,10 @@ export class ModalComponent extends BaseComponent {
 
 		if (this.hasAttribute(Attr.destroy)) {
 			setTimeout(() => {
+				this.listeners.forEach(({ remove }) => {
+					remove();
+				});
+
 				this.remove();
 			}, 400);
 		}

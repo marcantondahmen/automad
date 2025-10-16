@@ -33,7 +33,7 @@
  */
 
 import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
-import { CodeLanguage, KeyValueMap } from '..';
+import { CodeLanguage, EditorOutputData } from '..';
 import {
 	sectionBackgroundBlendModes,
 	sectionBorderStyles,
@@ -212,7 +212,7 @@ export interface SectionStyle {
 }
 
 export interface LayoutSectionBlockData {
-	content: KeyValueMap;
+	content: EditorOutputData;
 	style: SectionStyle;
 	justify: SectionJustifyContentOption;
 	align: SectionAlignItemsOption;

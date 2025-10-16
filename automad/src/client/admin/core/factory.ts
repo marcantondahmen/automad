@@ -52,7 +52,6 @@ import {
 	getComponentTargetContainer,
 	getPageURL,
 	html,
-	listen,
 	query,
 	uniqueId,
 } from '.';

@@ -400,6 +400,16 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 
 		this.close();
 	}
+
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		this.itemsFiltered = null;
+		this.items.forEach(({ element }) => {
+			element.remove();
+		});
+		this.items = null;
+	}
 }
 
 customElements.define('am-modal-jumpbar-dialog', ModalJumpbarDialogComponent);

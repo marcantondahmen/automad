@@ -50,7 +50,6 @@ import {
 	uniqueId,
 } from '@/admin/core';
 import {
-	EditorOutputData,
 	SectionAlignItemsOption,
 	LayoutSectionBlockData,
 	SectionJustifyContentOption,
@@ -281,7 +280,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 		data: LayoutSectionBlockData
 	): LayoutSectionBlockData {
 		return {
-			content: data.content || {},
+			content: data.content || { blocks: [] },
 			style: Object.assign({}, styleDefaults, data.style),
 			justify: data.justify || 'start',
 			align: data.align || 'start',
@@ -322,7 +321,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 		const renderEditor = async () => {
 			this.holder = createEditor(
 				this.section,
-				this.data.content as EditorOutputData,
+				this.data.content,
 				{
 					onChange: async (api: API) => {
 						if (this.readOnly) {
@@ -342,8 +341,6 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			await this.holder.editor.isReady;
 
 			if (!this.readOnly) {
-				this.holder.editor.focus();
-
 				this.listen(this.holder, 'paste', (event: Event) => {
 					event.stopPropagation();
 				});

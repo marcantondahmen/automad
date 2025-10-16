@@ -34,8 +34,9 @@
 
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
 import { BlockAPI, OutputBlockData } from 'automad-editorjs';
-import { nanoid } from 'nanoid';
-import { App } from '../core';
+import { App, getLogger } from '../core';
+
+const { nanoid } = await import('nanoid');
 
 /**
  * Handle unknown block data.
@@ -46,6 +47,8 @@ import { App } from '../core';
 export const unknownBlockHandler = (
 	block: OutputBlockData
 ): OutputBlockData => {
+	getLogger().log('Handling unknown block', block);
+
 	if (block.type == 'section') {
 		block.type = 'layoutSection';
 
