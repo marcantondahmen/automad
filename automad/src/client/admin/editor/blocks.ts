@@ -36,6 +36,7 @@ import { KeyValueMap } from '../types';
 import { ButtonsBlock } from './blocks/Buttons';
 import { CalloutBlock } from './blocks/Callout';
 import { CodeBlock } from './blocks/Code';
+import { CollapsibleSectionBlock } from './blocks/CollapsibleSection';
 import { ComponentBlock } from './blocks/Component';
 import { Delimiter } from './blocks/Delimiter';
 import { EmbedBlock } from './blocks/Embed';
@@ -84,6 +85,10 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			inlineToolbar: true,
 		},
 		layoutSection: { class: LayoutSectionBlock, stretchable: true },
+		collapsibleSection: {
+			class: CollapsibleSectionBlock,
+			stretchable: true,
+		},
 		...component,
 		nestedList: {
 			class: NestedListBlock,

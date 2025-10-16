@@ -92,6 +92,13 @@ export interface CodeBlockData {
 	lineNumbers: boolean;
 }
 
+export interface CollapsibleSectionBlockData {
+	title: string;
+	content: EditorOutputData;
+	group: string;
+	collapsed: boolean;
+}
+
 export interface FilelistBlockData {
 	file: string;
 	glob: string;
