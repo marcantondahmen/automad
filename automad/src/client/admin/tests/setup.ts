@@ -1,34 +1,31 @@
+import { vi } from 'vitest';
 import { FieldTag, FormDataProviders } from '@/admin/core';
 
-jest.mock('prismjs', () => {
+vi.mock('prismjs', () => {
 	return {
 		default: { languages: { extend: () => {} } },
 	};
 });
 
-jest.mock('nanoid', () => {
-	return { nanoid: () => 'xxxx' };
-});
-
-jest.mock('@editorjs/embed', () => {
+vi.mock('@editorjs/embed', () => {
 	return {
-		default: jest.fn().mockImplementation(() => {
+		default: vi.fn().mockImplementation(() => {
 			return {};
 		}),
 	};
 });
 
-jest.mock('@editorjs/nested-list', () => {
+vi.mock('@editorjs/nested-list', () => {
 	return {
-		default: jest.fn().mockImplementation(() => {
+		default: vi.fn().mockImplementation(() => {
 			return {};
 		}),
 	};
 });
 
-jest.mock('@editorjs/table', () => {
+vi.mock('@editorjs/table', () => {
 	return {
-		default: jest.fn().mockImplementation(() => {
+		default: vi.fn().mockImplementation(() => {
 			return {};
 		}),
 	};
