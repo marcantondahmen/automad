@@ -33,13 +33,17 @@
  */
 
 .am-c-ed-bl-callout {
-	padding: (@am-card-padding * 0.7) @am-card-padding;
 	border: @am-card-border;
-	border-radius: @am-card-radius;
+	border-radius: @am-form-radius;
 	background-color: hsl(var(--am-clr-background-faded));
 
 	&__title {
-		font-size: 1.25rem;
-		font-weight: 740;
+		padding: (@am-card-padding * 0.7) @am-card-padding;
+		border-bottom: @am-border;
+		font-weight: 670;
+	}
+
+	&__text {
+		padding: (@am-card-padding * 0.7) @am-card-padding;
 	}
 }

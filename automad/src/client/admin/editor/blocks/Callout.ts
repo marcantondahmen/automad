@@ -67,7 +67,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 	 */
 	static get sanitize() {
 		return {
-			title: true,
+			title: {},
 			text: true,
 		};
 	}
@@ -78,7 +78,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 	static get toolbox() {
 		return {
 			title: App.text('callout'),
-			icon: '<i class="bi bi-lightbulb-fill"></i>',
+			icon: '<i class="bi bi-lightbulb"></i>',
 		};
 	}
 
@@ -116,7 +116,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 				[CSS.editorCalloutTitle, 'ce-paragraph'],
 				{
 					contenteditable: this.readOnly ? 'false' : 'true',
-					placeholder: `${App.text('calloutTitle')}`,
+					placeholder: `⚠ ${App.text('calloutTitle')}`,
 				},
 				container,
 				html`${this.data.title}`
