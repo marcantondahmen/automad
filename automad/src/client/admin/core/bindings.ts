@@ -52,12 +52,12 @@ export class Binding {
 	/**
 	 * The modifier function that can optionally be defined to compute the value.
 	 */
-	private modifier: Function;
+	private modifier: (value: any) => any;
 
 	/**
 	 * The onChange handler.
 	 */
-	private onChange: Function;
+	private onChange: (value: any) => any;
 
 	/**
 	 * Set this to true in case there is no input passed in the options and the value

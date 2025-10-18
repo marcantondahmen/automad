@@ -151,6 +151,10 @@ export const enum CSS {
 	editorBlockQuoteText = 'am-c-ed-bl-quote__text',
 	editorBlockQuoteCaption = 'am-c-ed-bl-quote__caption',
 
+	editorBlockCollapsibleSection = 'am-c-ed-bl-collapsible-section',
+	editorBlockCollapsibleSectionLabel = 'am-c-ed-bl-collapsible-section__label',
+	editorBlockCollapsibleSectionEditor = 'am-c-ed-bl-collapsible-section__editor',
+
 	editorBlockLayoutSection = 'am-c-ed-bl-layout-section',
 	editorBlockLayoutSectionLabel = 'am-c-ed-bl-layout-section__label',
 	editorBlockLayoutSectionToolbar = 'am-c-ed-bl-layout-section__toolbar',
