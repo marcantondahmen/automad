@@ -15,12 +15,13 @@
 	</projectFiles>
 	<issueHandlers>
 		<ArgumentTypeCoercion errorLevel="suppress" />
-		<UndefinedConstant errorLevel="suppress" />
-		<UndefinedClass errorLevel="suppress" />
-		<UnresolvableInclude errorLevel="suppress" />
-		<UnsupportedReferenceUsage errorLevel="suppress" />
-		<UnsupportedPropertyReferenceUsage errorLevel="suppress" />
+		<MissingOverrideAttribute errorLevel="suppress" />
 		<MoreSpecificReturnType errorLevel="suppress" />
 		<RiskyTruthyFalsyComparison errorLevel="suppress" />
+		<UndefinedClass errorLevel="suppress" />
+		<UndefinedConstant errorLevel="suppress" />
+		<UnresolvableInclude errorLevel="suppress" />
+		<UnsupportedPropertyReferenceUsage errorLevel="suppress" />
+		<UnsupportedReferenceUsage errorLevel="suppress" />
 	</issueHandlers>
 </psalm>
