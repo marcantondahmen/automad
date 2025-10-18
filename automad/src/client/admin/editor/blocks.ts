@@ -88,6 +88,14 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 		collapsibleSection: {
 			class: CollapsibleSectionBlock,
 			stretchable: true,
+			inlineToolbar: [
+				'bold',
+				'italic',
+				'codeInline',
+				'underline',
+				'strikeThrough',
+				'color',
+			],
 		},
 		...component,
 		nestedList: {

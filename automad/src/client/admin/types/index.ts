@@ -86,7 +86,7 @@ export interface AutocompleteItemData {
 
 export interface BindingOptions {
 	input?: InputElement;
-	modifier?: Function;
+	modifier?: (value: string) => any;
 	initial?: any;
 	onChange?: (value: string) => void;
 }

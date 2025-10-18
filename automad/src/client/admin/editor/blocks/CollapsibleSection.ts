@@ -37,16 +37,19 @@ import {
 	App,
 	Attr,
 	Binding,
-	collectFieldData,
 	create,
 	createEditor,
 	createField,
+	createGenericModal,
 	CSS,
 	FieldTag,
+	getComponentTargetContainer,
+	html,
 	uniqueId,
 } from '@/admin/core';
 import { CollapsibleSectionBlockData } from '@/admin/types';
 import { API } from 'automad-editorjs';
+import { TunesMenuConfig } from 'automad-editorjs/types/tools/index';
 import { BaseBlock } from './BaseBlock';
 
 export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockData> {
@@ -61,9 +64,14 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	private details: HTMLDetailsElement;
 
 	/**
-	 * The form element.
+	 * The group binding.
 	 */
-	private form: HTMLDivElement;
+	private groupBinding: Binding;
+
+	/**
+	 * The group field key and binding name.
+	 */
+	private groupId: string;
 
 	/**
 	 * Sanitizer rules
@@ -90,7 +98,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	static get toolbox() {
 		return {
 			title: App.text('collapsibleSectionBlockTitle'),
-			icon: '<i class="bi bi-caret-down-square"></i>',
+			icon: '<i class="bi bi-view-list"></i>',
 		};
 	}
 
@@ -117,40 +125,71 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	 * @return the rendered element
 	 */
 	render(): HTMLElement {
-		this.form = create('div', [CSS.grid, CSS.gridAuto], {}, this.wrapper);
-
-		createField(FieldTag.input, this.form, {
-			key: uniqueId(),
-			name: 'title',
-			value: this.data.title,
-			label: App.text('collapsibleLabelTitle'),
+		this.wrapper.classList.add(CSS.editorBlockCollapsibleSection);
+		this.groupId = uniqueId();
+		this.groupBinding = new Binding(this.groupId, {
+			initial: this.data.group,
 		});
 
-		const groupFieldId = uniqueId();
-		const groupField = createField(FieldTag.input, this.form, {
-			key: groupFieldId,
-			name: 'group',
-			value: this.data.group,
-			label: App.text('collapsibleLabelGroup'),
-		});
+		const label = create(
+			'span',
+			[CSS.editorBlockCollapsibleSectionLabel],
+			{},
+			create('div', [CSS.flex], {}, this.wrapper),
+			html` ${CollapsibleSectionBlock.toolbox.icon} `
+		);
 
-		new Binding(groupFieldId, {
-			input: groupField.input,
-		});
+		const groupName = create(
+			'span',
+			[CSS.flex, CSS.flexGap, CSS.cursorPointer],
+			{
+				[Attr.bind]: this.groupId,
+				[Attr.tooltip]: App.text('collapsibleTooltipGroup'),
+				placeholder: App.text('collapsibleNoGroup'),
+			},
+			label
+		);
+
+		this.listen(groupName, 'click', this.setGroup.bind(this));
 
 		this.details = create(
 			'details',
 			[],
 			{
-				[Attr.bind]: groupFieldId,
+				[Attr.bind]: this.groupId,
 				[Attr.bindTo]: 'name',
 				...(this.data.collapsed ? {} : { open: '' }),
 			},
-			this.wrapper,
-			`<summary>${App.text('collapsibleLabelDetails')}</summary>`
+			this.wrapper
 		);
 
-		const section = create('div', [], {}, this.details);
+		if (this.readOnly) {
+			create('summary', [], {}, this.details, this.data.title);
+		} else {
+			const title = create(
+				'div',
+				[],
+				{ contenteditable: 'true' },
+				create('summary', [], {}, this.details),
+				this.data.title
+			);
+
+			this.listen(title, 'input', () => {
+				this.data.title = title.textContent;
+			});
+
+			this.listen(title, 'click', (event) => {
+				event.stopPropagation();
+				event.preventDefault();
+			});
+		}
+
+		const section = create(
+			'div',
+			[CSS.editorBlockCollapsibleSectionEditor],
+			{},
+			this.details
+		);
 
 		const renderEditor = async () => {
 			this.holder = createEditor(
@@ -189,6 +228,60 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	}
 
 	/**
+	 * Create the tunes menu configuration.
+	 *
+	 * @return the tunes menu configuration
+	 */
+	renderSettings(): TunesMenuConfig {
+		if (!this.groupId) {
+			return;
+		}
+
+		const label = App.text('collapsibleLabelGroup');
+
+		return {
+			icon: '<i class="bi bi-tag"></i>',
+			label: this.data.group
+				? `${this.data.group}<span class="${CSS.displayNone}">${label}</span>`
+				: `<span class="${CSS.textMuted}">${label}</span>`,
+			closeOnActivate: true,
+			onActivate: this.setGroup.bind(this),
+		};
+	}
+
+	/**
+	 * Show the group name modal window.
+	 */
+	setGroup(): void {
+		const label = App.text('collapsibleLabelGroup');
+		const { modal, body } = createGenericModal(label);
+
+		create(
+			'div',
+			[CSS.textParagraph],
+			{},
+			body,
+			App.text('collapsibleTooltipGroup')
+		);
+
+		const field = createField(FieldTag.input, body, {
+			key: this.groupId,
+			name: 'group',
+			value: this.data.group,
+			label,
+		});
+
+		modal.listen(field.input, 'input', () => {
+			this.data.group = field.input.value;
+			this.groupBinding.value = field.input.value;
+		});
+
+		setTimeout(() => {
+			modal.open();
+		}, 0);
+	}
+
+	/**
 	 * Save the block data.
 	 *
 	 * @return the saved data
@@ -196,7 +289,6 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	save(): CollapsibleSectionBlockData {
 		return {
 			...this.data,
-			...collectFieldData(this.form),
 			collapsed: !this.details.open,
 		};
 	}
