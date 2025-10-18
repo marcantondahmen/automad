@@ -155,24 +155,32 @@ class Blocks {
 	 */
 	private static function generateBlockHtml(array $block, Automad $Automad): string {
 		try {
-			return call_user_func_array(
-				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
-				array($block, $Automad)
-			);
+			return self::renderBlock($block, $Automad);
 		} catch (\TypeError $e) {
 			$block = self::unknownBlockHandler($block);
 
 			try {
-				return call_user_func_array(
-					'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
-					array($block, $Automad)
-				);
-			} catch (\Throwable $e) {
+				return self::renderBlock($block, $Automad);
+			} catch (\Exception $e) {
 				return '';
 			}
-		} catch (\Throwable $e) {
+		} catch (\Exception $e) {
 			return '';
 		}
+	}
+
+	/**
+	 * Render a single block.
+	 *
+	 * @param array $block
+	 * @param Automad $Automad
+	 * @return string the rendered output
+	 */
+	private static function renderBlock(array $block, Automad $Automad): string {
+		return call_user_func_array(
+			'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
+			array($block, $Automad)
+		);
 	}
 
 	/**
