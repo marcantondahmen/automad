@@ -77,7 +77,7 @@ class Dashboard {
 
 		return <<< HTML
 			<!DOCTYPE html>
-			<html lang="$lang" class="am-ui">
+			<html lang="$lang">
 			<head>
 				<meta charset="utf-8">
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
