@@ -43,7 +43,6 @@ import {
 	createGenericModal,
 	CSS,
 	FieldTag,
-	getComponentTargetContainer,
 	html,
 	uniqueId,
 } from '@/admin/core';
@@ -169,7 +168,10 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 			const title = create(
 				'div',
 				[],
-				{ contenteditable: 'true' },
+				{
+					contenteditable: 'true',
+					placeholder: App.text('collapsibleLabelTitle'),
+				},
 				create('summary', [], {}, this.details),
 				this.data.title
 			);
