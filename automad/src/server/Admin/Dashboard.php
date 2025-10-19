@@ -88,9 +88,21 @@ class Dashboard {
 					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				>
 				<title>$title</title>
+				<script>
+					(() => {
+						const systemScheme = 
+							window.matchMedia &&
+							window.matchMedia('(prefers-color-scheme: dark)').matches 
+								? 'dark' 
+								: '';
+
+						const scheme = localStorage.getItem('am-dashboard-theme') || systemScheme;
+							
+						document.documentElement.classList.add(scheme);
+					})();
+				</script>
 				{$fn(Asset::icon('dist/favicon.ico'))}
 				{$fn(Asset::css('dist/build/admin/index.css'))}
-				{$fn(Asset::js('dist/build/admin/theme.js'))}
 				{$fn(Asset::js('dist/build/admin/index.js'))}
 			</head>
 			<body>

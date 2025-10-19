@@ -33,9 +33,38 @@
  */
 
 import { EventName, fire, query } from '.';
-import { DASHBOARD_THEME_KEY, DashboardTheme } from '@/admin/theme';
 
-export * from '@/admin/theme';
+export enum DashboardTheme {
+	light = 'light',
+	lowContrast = 'low-contrast',
+	dark = 'dark',
+}
+
+/**
+ * Note that this value is also used in the Dashboard.php template in order
+ * to avoid flashes when showing the loading animation.
+ */
+const DASHBOARD_THEME_KEY = 'am-dashboard-theme';
+
+/**
+ * Get the color scheme from local storage or system preferences.
+ *
+ * @returns The current color scheme in use
+ */
+export const getTheme = (): DashboardTheme => {
+	const localScheme = localStorage.getItem(DASHBOARD_THEME_KEY);
+
+	if (localScheme) {
+		return localScheme as DashboardTheme;
+	}
+
+	if (
+		window.matchMedia &&
+		window.matchMedia('(prefers-color-scheme: dark)').matches
+	) {
+		return DashboardTheme.dark;
+	}
+};
 
 /**
  * Set the color scheme and apply it to the current page.
