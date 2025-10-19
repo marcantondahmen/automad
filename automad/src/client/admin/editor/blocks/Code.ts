@@ -220,10 +220,6 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 * @return the saved data
 	 */
 	save(): CodeBlockData {
-		return {
-			code: this.editor.codeFlask.getCode(),
-			language: this.data.language,
-			lineNumbers: this.data.lineNumbers,
-		};
+		return this.data;
 	}
 }

@@ -152,8 +152,6 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 	 * @return the saved data
 	 */
 	save(): RawBlockData {
-		return {
-			code: this.editor.codeFlask.getCode(),
-		};
+		return this.data;
 	}
 }
