@@ -37,6 +37,5 @@ export * from './factory';
 export * from './request';
 export * from './routes';
 export * from './sections';
-export * from './theme';
 export * from './types';
 export * from './utils';

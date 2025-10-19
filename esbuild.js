@@ -12,15 +12,15 @@ const year = new Date().getFullYear();
 const banner = `/* Automad ${pkg.version}, (c) ${year} ${pkg.author}, ${pkg.license} license */`;
 
 const entryPoints = [
-	'admin',
-	'blocks',
-	'consent',
-	'inpage',
-	'mail',
-	'prism',
-	'theme',
+	'admin/index.ts',
+	'admin/theme.ts',
+	'blocks/index.ts',
+	'consent/index.ts',
+	'inpage/index.ts',
+	'mail/index.ts',
+	'prism/index.ts',
 ].map((entry) => {
-	return path.join(__dirname, 'automad/src/client', entry, 'index.ts');
+	return path.join(__dirname, 'automad/src/client', entry);
 });
 
 const minify = (source) =>

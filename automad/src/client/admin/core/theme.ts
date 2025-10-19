@@ -32,9 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { DashboardTheme, DASHBOARD_THEME_KEY, EventName, fire, query } from '.';
+import { EventName, fire, query } from '.';
+import { DASHBOARD_THEME_KEY, DashboardTheme } from '@/admin/theme';
 
-export * from '@/common/theme';
+export * from '@/admin/theme';
 
 /**
  * Set the color scheme and apply it to the current page.

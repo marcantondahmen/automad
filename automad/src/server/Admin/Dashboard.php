@@ -90,7 +90,7 @@ class Dashboard {
 				<title>$title</title>
 				{$fn(Asset::icon('dist/favicon.ico'))}
 				{$fn(Asset::css('dist/build/admin/index.css'))}
-				{$fn(Asset::js('dist/build/theme/index.js'))}
+				{$fn(Asset::js('dist/build/admin/theme.js'))}
 				{$fn(Asset::js('dist/build/admin/index.js'))}
 			</head>
 			<body>
