@@ -57,6 +57,7 @@ import { TableBlock } from './blocks/Table';
 import { TableOfContentsBlock } from './blocks/TableOfContents';
 import { VideoBlock } from './blocks/Video';
 import { embedServices } from './embedServices';
+import { TeXBlock } from './blocks/TeX';
 
 /**
  * The blocks used.
@@ -149,6 +150,10 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 		code: {
 			class: CodeBlock,
 			inlineToolbar: false,
+			stretchable: true,
+		},
+		teX: {
+			class: TeXBlock,
 			stretchable: true,
 		},
 		raw: {

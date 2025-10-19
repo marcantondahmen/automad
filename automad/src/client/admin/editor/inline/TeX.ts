@@ -22,22 +22,51 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'blocks/index.less';
-@import 'inline/index.less';
-@import 'tunes/index.less';
+import { KeyValueMap } from '@/admin/types';
+import { BaseInline } from './BaseInline';
 
-@import 'block.less';
-@import 'editor.less';
-@import 'inline.less';
-@import 'popover.less';
-@import 'toolbar.less';
+export class TeXInline extends BaseInline {
+	/**
+	 * The tool title.
+	 *
+	 * @static
+	 */
+	static get title(): string {
+		return 'LaTeX';
+	}
+
+	/**
+	 * The tool sanitize config.
+	 *
+	 * @static
+	 */
+	static get sanitize(): KeyValueMap {
+		return {
+			'am-inline-tex': true,
+		};
+	}
+
+	/**
+	 * The tool tag.
+	 */
+	get icon() {
+		return '<small><strong>∑</strong></small>';
+	}
+
+	/**
+	 * The tool icon.
+	 */
+	get tag() {
+		return 'AM-INLINE-TEX';
+	}
+}

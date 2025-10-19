@@ -26,18 +26,25 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'blocks/index.less';
-@import 'inline/index.less';
-@import 'tunes/index.less';
+am-inline-tex {
+	padding: 1px 4px;
+	font-family: @am-code-font-family;
+	font-weight: 580;
+	color: hsl(var(--am-clr-text-badge));
+	background-color: hsl(var(--am-clr-background-badge));
+	border-radius: 4px;
 
-@import 'block.less';
-@import 'editor.less';
-@import 'inline.less';
-@import 'popover.less';
-@import 'toolbar.less';
+	&:before {
+		content: 'TeX';
+		font-size: 0.7em;
+		opacity: 0.5;
+		padding-right: 0.5em;
+		vertical-align: middle;
+	}
+}

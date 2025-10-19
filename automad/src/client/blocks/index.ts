@@ -49,12 +49,20 @@ const components = [
 		importer: async () => await import('./components/ImgLoader.js'),
 	},
 	{
+		tag: 'am-inline-tex',
+		importer: async () => await import('./components/InlineTex.js'),
+	},
+	{
 		tag: 'am-mail',
 		importer: async () => await import('./components/Mail.js'),
 	},
 	{
 		tag: 'am-table-of-contents',
 		importer: async () => await import('./components/TableOfContents.js'),
+	},
+	{
+		tag: 'am-tex',
+		importer: async () => await import('./components/Tex.js'),
 	},
 ] as const;
 

@@ -261,3 +261,7 @@ export interface VideoBlockData {
 	muted: boolean;
 	caption: string;
 }
+
+export interface TeXBlockData {
+	code: string;
+}

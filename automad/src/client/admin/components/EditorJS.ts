@@ -53,7 +53,11 @@ import {
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/admin/editor/inline/TextAlign';
-import { removeDeleteComponents, unknownBlockHandler } from '../editor/utils';
+import {
+	removeDeleteComponents,
+	unknownBlockHandler,
+} from '@/admin/editor/utils';
+import { TeXInline } from '@/admin/editor/inline/TeX';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -163,6 +167,7 @@ export class EditorJSComponent extends BaseComponent {
 				'lineHeight',
 				'link',
 				'codeInline',
+				'texInline',
 				'underline',
 				'strikeThrough',
 				'color',
@@ -200,6 +205,7 @@ export class EditorJSComponent extends BaseComponent {
 			italic: { class: ItalicInline },
 			link: { class: LinkInline },
 			codeInline: { class: CodeInline },
+			texInline: { class: TeXInline },
 			underline: { class: UnderlineInline },
 			strikeThrough: { class: StrikeThroughInline },
 			color: { class: ColorInline },

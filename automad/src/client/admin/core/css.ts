@@ -168,6 +168,8 @@ export const enum CSS {
 	editorBlockVideoList = 'am-c-ed-bl-video__list',
 	editorBlockVideoListItem = 'am-c-ed-bl-video__list-item',
 
+	editorBlockTex = 'am-c-ed-bl-tex',
+
 	editorTunesLayout = 'am-c-ed-tu-layout',
 	editorTunesLayoutOption = 'am-c-ed-tu-layout__option',
 	editorTunesLayoutOptionActive = 'am-c-ed-tu-layout__option--active',

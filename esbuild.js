@@ -1,6 +1,7 @@
 const pkg = require('./package.json');
 const browserSync = require('browser-sync');
 const { lessLoader } = require('esbuild-plugin-less');
+const { sassPlugin } = require('esbuild-sass-plugin');
 const postcss = require('esbuild-postcss');
 const esbuild = require('esbuild');
 const path = require('path');
@@ -81,7 +82,15 @@ const commonConfig = {
 		'.woff2': 'file',
 	},
 	define: { DEVELOPMENT: isDev.toString() },
-	plugins: [lessLoader(), postcss(), ...(isDev ? [] : [tsMinifier()])],
+	plugins: [
+		lessLoader(),
+		sassPlugin({
+			quietDeps: true,
+			filter: /\.scss/,
+		}),
+		postcss(),
+		...(isDev ? [] : [tsMinifier()]),
+	],
 };
 
 async function buildAll() {

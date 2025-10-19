@@ -22,22 +22,19 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'blocks/index.less';
-@import 'inline/index.less';
-@import 'tunes/index.less';
-
-@import 'block.less';
-@import 'editor.less';
-@import 'inline.less';
-@import 'popover.less';
-@import 'toolbar.less';
+@use 'katex/src/styles/katex' with (
+	$use-ttf: false,
+	$use-woff: false,
+	$use-woff2: true,
+	$font-folder: '../../../../node_modules/katex/dist/fonts'
+);

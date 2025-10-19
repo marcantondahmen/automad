@@ -22,22 +22,33 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'blocks/index.less';
-@import 'inline/index.less';
-@import 'tunes/index.less';
+export default class TexComponent {
+	/**
+	 * The class constructor.
+	 */
+	constructor(element: HTMLElement) {
+		this.render(element);
+	}
 
-@import 'block.less';
-@import 'editor.less';
-@import 'inline.less';
-@import 'popover.less';
-@import 'toolbar.less';
+	async render(element: HTMLElement): Promise<void> {
+		const content = element.textContent;
+		const katex = await import('katex');
+		await import('@/katex/index.js');
+
+		katex.render(content, element, {
+			throwOnError: false,
+			displayMode: true,
+			output: 'html',
+		});
+	}
+}
