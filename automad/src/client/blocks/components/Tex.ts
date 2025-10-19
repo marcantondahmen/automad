@@ -41,6 +41,8 @@ export default class TexComponent {
 	}
 
 	async render(element: HTMLElement): Promise<void> {
+		element.style.display = 'none';
+
 		const content = element.textContent;
 		const katex = await import('katex');
 		await import('@/katex/index.js');
@@ -50,5 +52,7 @@ export default class TexComponent {
 			displayMode: true,
 			output: 'html',
 		});
+
+		element.style.removeProperty('display');
 	}
 }
