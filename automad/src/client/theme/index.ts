@@ -26,17 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-export * from './controllers';
-export * from './factory';
-export * from './request';
-export * from './routes';
-export * from './sections';
-export * from './theme';
-export * from './types';
-export * from './utils';
+import { getTheme } from '@/common/theme';
+
+// Preload the theme from local storage in order to appliy correct preloader colors.
+document.documentElement.classList.add(getTheme());

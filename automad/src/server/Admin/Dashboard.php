@@ -77,7 +77,7 @@ class Dashboard {
 
 		return <<< HTML
 			<!DOCTYPE html>
-			<html lang="$lang">
+			<html lang="$lang" class="am-ui">
 			<head>
 				<meta charset="utf-8">
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -90,6 +90,7 @@ class Dashboard {
 				<title>$title</title>
 				{$fn(Asset::icon('dist/favicon.ico'))}
 				{$fn(Asset::css('dist/build/admin/index.css'))}
+				{$fn(Asset::js('dist/build/theme/index.js'))}
 				{$fn(Asset::js('dist/build/admin/index.js'))}
 			</head>
 			<body>

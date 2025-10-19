@@ -32,35 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { EventName, fire, query } from '.';
+import { DashboardTheme, DASHBOARD_THEME_KEY, EventName, fire, query } from '.';
 
-export enum DashboardTheme {
-	light = 'light',
-	lowContrast = 'low-contrast',
-	dark = 'dark',
-}
-
-const DASHBOARD_THEME_KEY = 'am-dashboard-theme';
-
-/**
- * Get the color scheme from local storage or system preferences.
- *
- * @returns The current color scheme in use
- */
-export const getTheme = (): DashboardTheme => {
-	const localScheme = localStorage.getItem(DASHBOARD_THEME_KEY);
-
-	if (localScheme) {
-		return localScheme as DashboardTheme;
-	}
-
-	if (
-		window.matchMedia &&
-		window.matchMedia('(prefers-color-scheme: dark)').matches
-	) {
-		return DashboardTheme.dark;
-	}
-};
+export * from '@/common/theme';
 
 /**
  * Set the color scheme and apply it to the current page.

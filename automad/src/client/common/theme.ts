@@ -22,7 +22,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -32,62 +32,30 @@
  * Licensed under the MIT license.
  */
 
-// Before all bundles are loaded, center a preloader.
-am-root:not([class]) {
-	position: fixed;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	inset: 0;
-	background: hsl(var(--am-clr-background));
-
-	&:before {
-		--size: 2.25rem;
-		content: '';
-		display: block;
-		width: var(--size);
-		height: var(--size);
-		color: hsl(var(--am-clr-text-muted));
-		border-radius: var(--size);
-		border: 3px solid;
-		border-left-color: transparent;
-		animation: 0.8s linear 0s infinite root-preload;
-	}
+export enum DashboardTheme {
+	light = 'light',
+	lowContrast = 'low-contrast',
+	dark = 'dark',
 }
 
-.am-c-root {
-	&:before {
-		content: '';
-		display: flex;
-		position: absolute;
-		z-index: 9000;
-		inset: 0 ~'calc(100% - var(--progress, 0%))' auto 0;
-		height: 2px;
-		pointer-events: none;
-		opacity: 0;
-		background-color: hsl(var(--am-clr-border-active));
-		transition:
-			opacity 0.2s 0.3s,
-			inset 0.3s;
+export const DASHBOARD_THEME_KEY = 'am-dashboard-theme';
+
+/**
+ * Get the color scheme from local storage or system preferences.
+ *
+ * @returns The current color scheme in use
+ */
+export const getTheme = (): DashboardTheme => {
+	const localScheme = localStorage.getItem(DASHBOARD_THEME_KEY);
+
+	if (localScheme) {
+		return localScheme as DashboardTheme;
 	}
 
-	&--loading {
-		& * {
-			cursor: progress !important;
-		}
-
-		&:before {
-			opacity: 0.95;
-		}
+	if (
+		window.matchMedia &&
+		window.matchMedia('(prefers-color-scheme: dark)').matches
+	) {
+		return DashboardTheme.dark;
 	}
-}
-
-@keyframes root-preload {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	100% {
-		transform: rotate(360deg);
-	}
-}
+};

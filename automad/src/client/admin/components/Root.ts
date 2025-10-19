@@ -104,7 +104,6 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async init(): Promise<void> {
-		document.documentElement.classList.add('am-ui');
 		this.classList.add(CSS.root);
 		initWindowErrorHandler();
 		applyTheme(getTheme());

@@ -18,6 +18,7 @@ const entryPoints = [
 	'inpage',
 	'mail',
 	'prism',
+	'theme',
 ].map((entry) => {
 	return path.join(__dirname, 'automad/src/client', entry, 'index.ts');
 });
