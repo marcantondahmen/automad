@@ -70,17 +70,19 @@ class Gallery extends AbstractBlock {
 		$pixelDensity = 2.5;
 		$settings = array(
 			'layout' => $block['data']['layout'] ?? 'columns',
-			'columnWidthPx' => intval($block['data']['columnWidthPx'] ?? 250),
-			'rowHeightPx' => intval($block['data']['rowHeightPx'] ?? 250),
+			'columnWidthPx' => floatval($block['data']['columnWidthPx'] ?? 250),
+			'rowHeightPx' => floatval($block['data']['rowHeightPx'] ?? 250),
 			'gapPx' => intval($block['data']['gapPx'] ?? 5),
 			'fillRectangle' => $block['data']['fillRectangle'] ?? false,
 		);
 
 		$imageSets = array();
+
+		// The $first image is used for the Str::findFirstImage() method.
 		$first = $block['data']['files'][0];
 
-		$width = $settings['layout'] != 'rows' ? $settings['columnWidthPx'] : 0;
-		$height = $settings['layout'] != 'columns' ? $settings['rowHeightPx'] : 0;
+		$width = $settings['layout'] != 'rows' ? $settings['columnWidthPx'] : 0.0;
+		$height = $settings['layout'] != 'columns' ? $settings['rowHeightPx'] : 0.0;
 
 		foreach ($block['data']['files'] ?? array() as $file) {
 			$imageSets[] = array(
