@@ -44,7 +44,6 @@ import {
 	CSS,
 	FieldTag,
 	html,
-	query,
 	uniqueId,
 } from '@/admin/core';
 import { CollapsibleSectionBlockData } from '@/admin/types';
@@ -64,6 +63,11 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	private details: HTMLDetailsElement;
 
 	/**
+	 * The title element.
+	 */
+	private title: HTMLDivElement;
+
+	/**
 	 * The group binding.
 	 */
 	private groupBinding: Binding;
@@ -78,8 +82,10 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	 */
 	static get sanitize() {
 		return {
-			title: true,
-			content: true,
+			title: {},
+			content: {},
+			collapsed: false,
+			group: false,
 		};
 	}
 
@@ -139,7 +145,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 			[CSS.editorBlockCollapsibleSectionLabel],
 			{},
 			create('div', [CSS.flex], {}, this.wrapper),
-			html` ${CollapsibleSectionBlock.toolbox.icon} `
+			html`${CollapsibleSectionBlock.toolbox.icon}`
 		);
 
 		const groupName = create(
@@ -169,7 +175,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 		if (this.readOnly) {
 			create('summary', [], {}, this.details, this.data.title);
 		} else {
-			const title = create(
+			this.title = create(
 				'div',
 				[],
 				{
@@ -180,11 +186,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 				this.data.title
 			);
 
-			this.listen(title, 'input', () => {
-				this.data.title = title.textContent;
-			});
-
-			this.listen(title, 'click', (event) => {
+			this.listen(this.title, 'click', (event) => {
 				event.stopPropagation();
 				event.preventDefault();
 			});
@@ -295,6 +297,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	save(): CollapsibleSectionBlockData {
 		return {
 			...this.data,
+			title: this.title.innerHTML,
 			collapsed: !this.details.open,
 		};
 	}
