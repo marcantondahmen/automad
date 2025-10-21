@@ -77,7 +77,10 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 	 */
 	static get toolbox() {
 		return {
-			title: App.text('callout'),
+			title: html`
+				${App.text('callout')}
+				<span class="${CSS.displayNone}">alert,note</span>
+			`,
 			icon: '<i class="bi bi-lightbulb"></i>',
 		};
 	}

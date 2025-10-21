@@ -44,6 +44,7 @@ import {
 	CSS,
 	FieldTag,
 	html,
+	query,
 	uniqueId,
 } from '@/admin/core';
 import { CollapsibleSectionBlockData } from '@/admin/types';
@@ -96,7 +97,10 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	 */
 	static get toolbox() {
 		return {
-			title: App.text('collapsibleSectionBlockTitle'),
+			title: html`
+				${App.text('collapsibleSectionBlockTitle')}
+				<span class="${CSS.displayNone}">accordion,faq</span>
+			`,
 			icon: '<i class="bi bi-view-list"></i>',
 		};
 	}

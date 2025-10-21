@@ -42,7 +42,7 @@ export class TeXInline extends BaseInline {
 	 * @static
 	 */
 	static get title(): string {
-		return 'LaTeX';
+		return 'Math';
 	}
 
 	/**

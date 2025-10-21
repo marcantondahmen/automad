@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, debounce, query } from '@/admin/core';
+import { create, CSS, debounce, html, query } from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
 import { TeXBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
@@ -66,7 +66,10 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 	 */
 	static get toolbox() {
 		return {
-			title: 'LaTeX',
+			title: html`
+				Math
+				<span class="${CSS.displayNone}">latex,katex</span>
+			`,
 			icon: '<small><strong>∑</strong></small>',
 		};
 	}
@@ -87,12 +90,7 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 	 * @return the rendered element
 	 */
 	render(): HTMLElement {
-		this.wrapper.classList.add(
-			CSS.flex,
-			CSS.flexColumn,
-			CSS.flexGap,
-			CSS.editorBlockTex
-		);
+		this.wrapper.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 		this.init();
 
 		return this.wrapper;
@@ -105,20 +103,33 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 		const katex = await import('katex');
 		await import('@/katex/index.js');
 
+		const placeholder = 'x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}';
+
 		if (!this.readOnly) {
 			create(
 				'span',
 				[CSS.textMuted, CSS.userSelectNone],
 				{},
 				this.wrapper,
-				TeXBlock.toolbox.title
+				html`
+					<span class="${CSS.iconText}">
+						<strong>∑</strong>
+						<span>${TeXBlock.toolbox.title}</span>
+					</span>
+				`
 			);
 		}
 
 		let preview: HTMLDivElement;
+
 		const container = create(
 			'div',
-			[CSS.flex, CSS.flexColumn],
+			[
+				CSS.flex,
+				CSS.flexColumn,
+				CSS.editorBlockTex,
+				...(this.readOnly ? [CSS.editorBlockTexReadOnly] : []),
+			],
 			{},
 			this.wrapper
 		);
@@ -126,7 +137,12 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 		const renderPreview = debounce(async (): Promise<void> => {
 			preview = preview ?? create('figure', [], {}, container);
 
-			katex.render(this.data.code, preview, {
+			container.classList.toggle(
+				CSS.editorBlockTexPlaceholder,
+				!this.data.code
+			);
+
+			katex.render(this.data.code || placeholder, preview, {
 				throwOnError: false,
 				output: 'html',
 				displayMode: true,
@@ -151,6 +167,7 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 
 					renderPreview();
 				},
+				placeholder,
 				readonly: this.readOnly,
 			});
 
