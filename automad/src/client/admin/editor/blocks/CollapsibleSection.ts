@@ -186,6 +186,18 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 				this.data.title
 			);
 
+			this.listen(this.title, 'keyup', (event: KeyboardEvent) => {
+				if (event.key == ' ') {
+					event.preventDefault();
+				}
+			});
+
+			this.listen(this.title, 'keydown', (event: KeyboardEvent) => {
+				if (event.code == 'Enter') {
+					event.preventDefault();
+				}
+			});
+
 			this.listen(this.title, 'click', (event) => {
 				event.stopPropagation();
 				event.preventDefault();
