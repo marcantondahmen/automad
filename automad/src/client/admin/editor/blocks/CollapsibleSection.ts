@@ -37,6 +37,7 @@ import {
 	App,
 	Attr,
 	Binding,
+	Bindings,
 	create,
 	createEditor,
 	createField,
@@ -243,6 +244,8 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 		};
 
 		renderEditor();
+
+		Bindings.connectElements(this.wrapper);
 
 		return this.wrapper;
 	}
