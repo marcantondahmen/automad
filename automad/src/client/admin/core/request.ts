@@ -36,6 +36,7 @@ import {
 	App,
 	controllerRoute,
 	create,
+	CSS,
 	EventName,
 	fire,
 	getLogger,
@@ -312,6 +313,15 @@ class PendingRequests {
 	}
 
 	/**
+	 * Toggle the cursor style of the root element.
+	 *
+	 * @static
+	 */
+	static toggleCursor(): void {
+		App.root?.classList.toggle(CSS.rootLoading, !this.idle);
+	}
+
+	/**
 	 * Add a request.
 	 *
 	 * @static
@@ -322,6 +332,8 @@ class PendingRequests {
 		}
 
 		this.count++;
+		this.toggleCursor();
+
 		fire(this.EVENT_NAME);
 	}
 
@@ -335,6 +347,7 @@ class PendingRequests {
 
 		setTimeout(() => {
 			this.count--;
+			this.toggleCursor();
 
 			if (this.idle && spinner) {
 				spinner.remove();
