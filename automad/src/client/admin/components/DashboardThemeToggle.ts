@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS, EventName, titleCase } from '@/admin/core';
+import { Attr, create, CSS, EventName, html, titleCase } from '@/admin/core';
 import { DashboardTheme, getTheme, setTheme } from '@/admin/core/theme';
 import { BaseComponent } from '@/admin/components/Base';
 
@@ -90,12 +90,14 @@ class DashboardThemeToggleComponent extends BaseComponent {
 			'span',
 			cls,
 			{
-				[Attr.tooltip]: tooltip,
+				...(this.hasAttribute(Attr.noTooltip)
+					? {}
+					: { [Attr.tooltip]: tooltip }),
 			},
 			this
 		);
 
-		button.innerHTML = `<i class="bi bi-${icon}"></i>`;
+		button.innerHTML = html`<i class="bi bi-${icon}"></i>`;
 
 		this.listen(button, 'click', () => {
 			setTimeout(() => {

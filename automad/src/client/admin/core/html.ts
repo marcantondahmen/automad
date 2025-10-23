@@ -67,6 +67,7 @@ export const enum Attr {
 	noClick = 'am-no-click',
 	noEsc = 'am-no-esc',
 	noFocus = 'am-no-focus',
+	noTooltip = 'am-no-tooltip',
 	page = 'am-page',
 	path = 'am-path',
 	publicationState = 'am-publication-state',

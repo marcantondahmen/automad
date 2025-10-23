@@ -266,7 +266,9 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 							</span>
 						</am-submit>
 					</span>
-					<am-dashboard-theme-toggle></am-dashboard-theme-toggle>
+					<am-dashboard-theme-toggle
+						${Attr.noTooltip}
+					></am-dashboard-theme-toggle>
 				</div>
 			</am-sidebar>
 			<div class="${CSS.layoutDashboardMain}">${main}</div>
