@@ -33,16 +33,18 @@
  */
 
 .am-ui.dark {
+	@hue: 220;
+	@sat: 9%;
 	color-scheme: dark;
 
-	--am-clr-text: 220, 9%, 96%;
-	--am-clr-text-paragraph: 220, 9%, 54%;
+	--am-clr-text: @hue, @sat, 96%;
+	--am-clr-text-paragraph: @hue, @sat, 52%;
 	--am-clr-text-sidebar: var(--am-clr-text-paragraph);
-	--am-clr-text-muted: 220, 9%, 38%;
-	--am-clr-text-hover: 220, 9%, 67%;
-	--am-clr-text-active: 220, 9%, 96%;
-	--am-clr-text-link: 220, 9%, 96%;
-	--am-clr-text-link-hover: 220, 9%, 70%;
+	--am-clr-text-muted: @hue, @sat, 38%;
+	--am-clr-text-hover: @hue, @sat, 67%;
+	--am-clr-text-active: @hue, @sat, 96%;
+	--am-clr-text-link: @hue, @sat, 96%;
+	--am-clr-text-link-hover: @hue, @sat, 70%;
 	--am-clr-text-danger: 6, 96%, 58%;
 	--am-clr-text-primary: var(--am-clr-text);
 	--am-clr-text-selected: var(--am-clr-text);
@@ -50,27 +52,27 @@
 	--am-clr-text-badge: var(--am-clr-text);
 	--am-clr-text-marked: 58, 96%, 17%;
 
-	--am-clr-background: 220, 9%, 6%;
-	--am-clr-background-faded: 220, 9%, 9%;
+	--am-clr-background: @hue, @sat, 7%;
+	--am-clr-background-faded: @hue, @sat, 9%;
 	--am-clr-background-danger: 7, 74%, 5%;
 	--am-clr-background-danger-hover: 7, 74%, 8%;
-	--am-clr-background-primary: 220, 9%, 14%;
-	--am-clr-background-primary-hover: 220, 9%, 17%;
+	--am-clr-background-primary: @hue, @sat, 14%;
+	--am-clr-background-primary-hover: @hue, @sat, 17%;
 	--am-clr-background-selected: var(--am-clr-background-primary);
 	--am-clr-background-selection: var(--am-clr-text);
-	--am-clr-background-badge: 220, 9%, 23%;
-	--am-clr-background-highlight: 220, 9%, 12%;
+	--am-clr-background-badge: @hue, @sat, 23%;
+	--am-clr-background-highlight: @hue, @sat, 12%;
 	--am-clr-background-marked: 58, 84%, 74%;
 
-	--am-clr-border: 220, 9%, 14%;
+	--am-clr-border: @hue, @sat, 14%;
 	--am-clr-border-button: var(--am-clr-border);
-	--am-clr-border-active: 220, 9%, 86%;
+	--am-clr-border-active: @hue, @sat, 86%;
 	--am-clr-border-danger: 6, 68%, 46%;
 
-	--am-clr-outline-active: 220, 9%, 22%;
+	--am-clr-outline-active: @hue, @sat, 22%;
 	--am-clr-outline-danger: 6, 64%, 17%;
 
-	--am-modal-backdrop: hsla(220, 9%, 6%, 56%);
+	--am-modal-backdrop: hsla(@hue, @sat, 6%, 56%);
 
 	--am-shadow: rgba(0, 0, 0, 0.5);
 
