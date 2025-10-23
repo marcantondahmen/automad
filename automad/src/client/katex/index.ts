@@ -32,4 +32,8 @@
  * Licensed under the MIT license.
  */
 
+/**
+ * Note that here a .scss file has to be imported in order to be able
+ * to modify the build output of the katex package.
+ */
 import './index.scss';
