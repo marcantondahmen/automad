@@ -26,28 +26,29 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@import 'block.less';
-@import 'buttons.less';
-@import 'callout.less';
-@import 'collapsible-section.less';
-@import 'delimiter.less';
-@import 'embed.less';
-@import 'flex.less';
-@import 'form.less';
-@import 'gallery.less';
-@import 'image-slideshow.less';
-@import 'img-loader.less';
-@import 'layout-section.less';
-@import 'nested-list.less';
-@import 'paragraph.less';
-@import 'prism.less';
-@import 'quote.less';
-@import 'stretched.less';
-@import 'table.less';
-@import 'variables.less';
+.am-collapsible {
+	interpolate-size: allow-keywords;
+
+	&::details-content {
+		transition:
+			height var(--am-collapsible-duration) ease,
+			content-visibility var(--am-collapsible-duration) ease
+				allow-discrete;
+		height: 0;
+		overflow: clip;
+	}
+
+	&[open]::details-content {
+		height: auto;
+	}
+
+	& > section {
+		padding-top: var(--am-collapsible-gap);
+	}
+}

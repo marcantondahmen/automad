@@ -33,9 +33,14 @@
  */
 
 :root {
+	// Base
+	--am-border-color: rgba(128, 128, 128, 0.2);
+	--am-border-radius: 5px;
+	--am-border-width: 2px;
+
 	// Container
 	--am-block-max-width: 50rem;
-	--am-block-margin-top: 2em;
+	--am-block-margin-top: 1.5em;
 	--am-container-padding: 2rem;
 
 	// Section & Cards
@@ -51,7 +56,7 @@
 	--am-flex-min-block-width: 12rem;
 
 	// Gallery
-	--am-gallery-background: rgba(0, 0, 0, 0.2);
+	--am-gallery-background: rgba(0, 0, 0, 0.75);
 	--am-gallery-controls-color: #ffffff;
 	--am-gallery-grid-item-scale: 100%;
 	--am-gallery-grid-item-background: transparent;
@@ -69,23 +74,63 @@
 
 	// Form
 	--am-form-gap: 1rem;
-	--am-field-gap: 0.25rem;
+	--am-field-gap: 0.5rem;
 
 	--am-input-padding: 0.6rem 1rem;
 	--am-input-color: inherit;
 	--am-input-placeholder-color: #cccccc;
-	--am-input-background: inherit;
-	--am-input-border-radius: 0.4rem;
-	--am-input-border: 2px solid #f0f0f0;
+	--am-input-background: rgba(128, 128, 128, 0.03);
+	--am-input-border-radius: var(--am-border-radius);
+	--am-input-border: var(--am-border-width) solid var(--am-border-color);
 	--am-input-hover-color: var(--am-input-color);
 	--am-input-hover-background: var(--am-input-background);
 	--am-input-hover-border: var(--am-input-border);
 	--am-input-focus-color: var(--am-input-color);
 	--am-input-focus-background: var(--am-input-background);
-	--am-input-focus-border: 2px solid #222222;
-	--am-input-invalid-border: 2px solid #ff4500aa;
+	--am-input-focus-border: var(--am-border-width) solid;
+	--am-input-invalid-border: var(--am-border-width) solid #ff4500aa;
 
 	--am-error-font-weight: bold;
 	--am-error-font-size: 0.85rem;
 	--am-error-color: #ff4500dd;
+
+	// Table
+	--am-table-cell-padding: 0.55em 0.7em;
+	--am-table-border: 1px solid var(--am-border-color);
+	--am-table-border-horizontal: 1px solid var(--am-border-color);
+	--am-table-border-header-horizontal: 2px solid var(--am-border-color);
+	--am-table-heading-font-weight: 750;
+
+	// Paragarph
+	--am-paragraph-large-font-size: 1.5em;
+	--am-paragraph-large-line-height: 1.4;
+
+	// Quote
+	--am-quote-gap: 0.5rem;
+	--am-quote-font-size: 1.25rem;
+	--am-quote-font-style: italic;
+	--am-quote-line-height: 1.4;
+	--am-quote-prefix: '“';
+	--am-quote-suffix: '”';
+
+	// Callout
+	--am-callout-gap: 0.5rem;
+	--am-callout-padding: 0.75rem 1rem;
+	--am-callout-border: 2px solid;
+	--am-callout-radius: var(--am-border-radius);
+	--am-callout-color: inherit;
+	--am-callout-background: inherit;
+	--am-callout-title-font-size: 1em;
+	--am-callout-title-font-weight: 750;
+	--am-callout-title-line-height: inherit;
+
+	// Delimiter
+	--am-hr-border: var(--am-border-width) solid var(--am-border-color);
+
+	// Prism
+	--am-prism-border-radius: var(--am-border-radius);
+
+	// Collapsible
+	--am-collapsible-duration: 0.2s;
+	--am-collapsible-gap: 0.5rem;
 }
