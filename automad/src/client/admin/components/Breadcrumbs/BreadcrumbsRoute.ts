@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, CSS, html, listen, Route } from '@/admin/core';
+import { App, Attr, CSS, html, Route } from '@/admin/core';
 import { BaseBreadcrumbsComponent } from './BaseBreadcrumbs';
 
 /**

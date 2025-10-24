@@ -40,7 +40,6 @@ import {
 	EventName,
 	fire,
 	collectFieldData,
-	listen,
 	query,
 	setFormData,
 	queryAll,
@@ -128,7 +127,7 @@ export class ModalComponent extends BaseComponent {
 		this.classList.add(...this.classes);
 
 		if (!this.hasAttribute(Attr.noClick)) {
-			listen(this, 'click', (event: MouseEvent) => {
+			this.listen(this, 'click', (event: MouseEvent) => {
 				if (this === event.target) {
 					this.close();
 				}
@@ -136,13 +135,11 @@ export class ModalComponent extends BaseComponent {
 		}
 
 		if (!this.hasAttribute(Attr.noEsc)) {
-			this.addListener(
-				listen(window, 'keydown', (event: KeyboardEvent) => {
-					if (this.isOpen && event.keyCode == 27) {
-						this.close();
-					}
-				})
-			);
+			this.listen(window, 'keydown', (event: KeyboardEvent) => {
+				if (this.isOpen && event.keyCode == 27) {
+					this.close();
+				}
+			});
 		}
 	}
 
@@ -190,6 +187,10 @@ export class ModalComponent extends BaseComponent {
 
 		if (this.hasAttribute(Attr.destroy)) {
 			setTimeout(() => {
+				this.listeners.forEach(({ remove }) => {
+					remove();
+				});
+
 				this.remove();
 			}, 400);
 		}
@@ -207,6 +208,7 @@ export class ModalComponent extends BaseComponent {
 		fire(EventName.modalOpen, this);
 
 		this.focusTrap = createFocusTrap(this);
+		this.addListener(this.focusTrap);
 
 		if (!this.hasAttribute(Attr.noFocus)) {
 			const input = query<InputElement>('input, textarea', this);

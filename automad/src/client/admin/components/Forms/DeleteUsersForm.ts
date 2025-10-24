@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, CSS, EventName, html, listen } from '@/admin/core';
+import { App, CSS, EventName, html } from '@/admin/core';
 import { FormComponent } from './Form';
 
 /**
@@ -87,9 +87,7 @@ export class DeleteUsersFormComponent extends FormComponent {
 
 		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
-		this.addListener(
-			listen(window, EventName.appStateChange, render.bind(this))
-		);
+		this.listen(window, EventName.appStateChange, render.bind(this));
 
 		render();
 	}

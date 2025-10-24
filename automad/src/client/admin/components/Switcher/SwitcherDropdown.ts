@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, create, CSS, EventName, html, listen } from '@/admin/core';
+import { Attr, create, CSS, EventName, html } from '@/admin/core';
 import { SwitcherDropdownData, SwitcherDropdownItem } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { getActiveSection } from './Switcher';
@@ -67,9 +67,7 @@ class SwitcherDropdownComponent extends BaseComponent {
 			);
 		};
 
-		this.addListener(
-			listen(window, EventName.switcherChange, toggle.bind(this))
-		);
+		this.listen(window, EventName.switcherChange, toggle.bind(this));
 
 		toggle();
 	}

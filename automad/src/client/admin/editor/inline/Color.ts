@@ -44,7 +44,7 @@ import {
 	listen,
 	uniqueId,
 } from '@/admin/core';
-import { KeyValueMap, Listener } from '@/admin/types';
+import { KeyValueMap } from '@/admin/types';
 import { BaseInline } from './BaseInline';
 
 export class ColorInline extends BaseInline {
@@ -98,11 +98,6 @@ export class ColorInline extends BaseInline {
 	private backgroundColorPicker: ColorFieldComponent;
 
 	/**
-	 * The chanhe listener.
-	 */
-	private listener: Listener = null;
-
-	/**
 	 * Render the menu fields.
 	 *
 	 * @return the rendered fields
@@ -143,7 +138,7 @@ export class ColorInline extends BaseInline {
 			fire('change', this.backgroundColorPicker.input);
 		}
 
-		this.listener = listen(this.wrapper, 'keyup change', () => {
+		this.listen(this.wrapper, 'keyup change', () => {
 			node.style.color = this.textColorPicker.query();
 			node.style.backgroundColor = this.backgroundColorPicker.query();
 		});
@@ -156,12 +151,5 @@ export class ColorInline extends BaseInline {
 	 */
 	hideActions(): void {
 		this.wrapper.hidden = true;
-	}
-
-	/**
-	 * Cleanup and remove listener.
-	 */
-	clear(): void {
-		this.listener?.remove();
 	}
 }

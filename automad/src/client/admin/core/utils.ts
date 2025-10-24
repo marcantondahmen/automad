@@ -34,7 +34,8 @@
 
 import { App, Attr, CSS, create, html, listen, query } from '.';
 import { Listener } from '@/admin/types';
-import { customAlphabet } from 'nanoid';
+
+const { customAlphabet } = await import('nanoid');
 
 /**
  * Return the basename of a path.
@@ -114,7 +115,7 @@ export const confirm = async (text: string): Promise<boolean> => {
 			resolve(isConfirmed);
 		};
 
-		listen(modal, 'click', execute, 'am-modal-close');
+		modal.listen(modal, 'click', execute, 'am-modal-close');
 	});
 };
 

@@ -40,6 +40,10 @@ export enum DashboardTheme {
 	dark = 'dark',
 }
 
+/**
+ * Note that this value is also used in the Dashboard.php template in order
+ * to avoid flashes when showing the loading animation.
+ */
 const DASHBOARD_THEME_KEY = 'am-dashboard-theme';
 
 /**

@@ -1,0 +1,61 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2025 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+am-quote {
+	& blockquote {
+		margin: 0;
+		font-size: var(--am-quote-font-size);
+		font-style: var(--am-quote-font-style);
+		line-height: var(--am-quote-line-height);
+
+		&:before {
+			content: var(--am-quote-prefix);
+		}
+
+		&:after {
+			content: var(--am-quote-suffix);
+		}
+	}
+
+	& figcaption {
+		margin: 0;
+		padding-top: var(--am-quote-gap);
+		font-size: inherit;
+
+		&:before {
+			content: '\2014';
+			padding-right: 0.35em;
+		}
+	}
+}

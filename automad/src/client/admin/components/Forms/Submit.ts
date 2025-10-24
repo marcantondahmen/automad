@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, listen, queryAll, queryParents } from '@/admin/core';
+import { Attr, queryAll, queryParents } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { FormComponent } from './Form';
 
@@ -89,7 +89,7 @@ export class SubmitComponent extends BaseComponent {
 
 		this.setAttribute('tabindex', '0');
 
-		listen(this, 'click', submit.bind(this));
+		this.listen(this, 'click', submit.bind(this));
 	}
 }
 

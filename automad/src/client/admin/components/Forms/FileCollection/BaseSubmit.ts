@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { EventName, listen, queryAll } from '@/admin/core';
+import { EventName, queryAll } from '@/admin/core';
 import { FormComponent } from '@/admin/components/Forms/Form';
 import { SubmitComponent } from '@/admin/components/Forms/Submit';
 
@@ -57,14 +57,11 @@ export abstract class BaseFileCollectionSubmitComponent extends SubmitComponent 
 				);
 			};
 
-			this.addListener(
-				listen(window, EventName.fileCollectionRender, handler)
-			);
-
-			this.addListener(listen(form, 'change', handler));
+			this.listen(window, EventName.fileCollectionRender, handler);
+			this.listen(form, 'change', handler);
 		});
 
-		listen(this, 'click', this.submit.bind(this));
+		this.listen(this, 'click', this.submit.bind(this));
 	}
 
 	/**

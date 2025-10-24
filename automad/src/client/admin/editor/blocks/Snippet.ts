@@ -45,7 +45,6 @@ import {
 	debounce,
 	FieldTag,
 	html,
-	listen,
 	query,
 	uniqueId,
 } from '@/admin/core';
@@ -117,7 +116,7 @@ export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 		this.renderForm(query('.__card', this.wrapper));
 
 		if (!this.readOnly) {
-			listen(
+			this.listen(
 				this.wrapper,
 				'change input',
 				debounce(() => {

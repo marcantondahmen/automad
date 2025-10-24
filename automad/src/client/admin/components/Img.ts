@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, html, listen } from '@/admin/core';
-import { Listener } from '@/admin/types';
+import { create, CSS, html } from '@/admin/core';
 import { BaseComponent } from './Base';
 
 /**
@@ -57,11 +56,6 @@ export class ImgComponent extends BaseComponent {
 	set src(value: string) {
 		this.render(value);
 	}
-
-	/**
-	 * The internal error listener.
-	 */
-	private listener: Listener;
 
 	/**
 	 * The array of observed attributes.
@@ -100,8 +94,8 @@ export class ImgComponent extends BaseComponent {
 	 * Render the element.
 	 */
 	private render(value: string): void {
+		this.disconnectedCallback();
 		this.innerHTML = '';
-		this.listener?.remove();
 
 		if (value.length == 0) {
 			this.innerHTML = this.placeholder('slash-circle');
@@ -111,7 +105,7 @@ export class ImgComponent extends BaseComponent {
 
 		const img = create('img', [], { referrerpolicy: 'no-referrer' }, this);
 
-		this.listener = listen(img, 'error', () => {
+		this.listen(img, 'error', () => {
 			this.innerHTML = this.placeholder('exclamation-triangle');
 		});
 

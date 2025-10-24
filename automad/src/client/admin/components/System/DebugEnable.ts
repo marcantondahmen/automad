@@ -39,7 +39,6 @@ import {
 	createField,
 	EventName,
 	FieldTag,
-	listen,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
@@ -57,11 +56,9 @@ class DebugEnableComponent extends BaseComponent {
 			initial: App.system.debug,
 		});
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				debugEnabled.value = App.system.debug;
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			debugEnabled.value = App.system.debug;
+		});
 
 		createField(
 			FieldTag.toggleLarge,

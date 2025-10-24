@@ -33,7 +33,6 @@
  */
 
 import {
-	App,
 	Attr,
 	create,
 	createEditor,
@@ -42,7 +41,6 @@ import {
 	FieldTag,
 	fire,
 	FormDataProviders,
-	listen,
 	listenToClassChange,
 	query,
 } from '@/admin/core';
@@ -121,7 +119,6 @@ export class EditorFieldComponent extends BaseFieldComponent {
 
 					this.value = {
 						blocks: [...blocks],
-						automadVersion: App.version,
 					};
 
 					fire('input', this);
@@ -239,34 +236,30 @@ export class EditorFieldComponent extends BaseFieldComponent {
 	 */
 	private attachToolbarPositionObservers(): void {
 		// When forward slash is pressed.
-		this.addListener(
-			listen(this, 'keydown', (event: KeyboardEvent) => {
-				if (event.key != '/') {
-					return;
-				}
+		this.listen(this, 'keydown', (event: KeyboardEvent) => {
+			if (event.key != '/') {
+				return;
+			}
+
+			const target = event.target as HTMLElement;
+			const block = target.closest<HTMLElement>('.ce-block');
+
+			LayoutTune.updateToolbarPosition(block);
+		});
+
+		// On mouseover.
+		this.listen(
+			this,
+			'mouseover',
+			debounce((event: Event) => {
+				event.stopPropagation();
 
 				const target = event.target as HTMLElement;
 				const block = target.closest<HTMLElement>('.ce-block');
 
 				LayoutTune.updateToolbarPosition(block);
-			})
-		);
-
-		// On mouseover.
-		this.addListener(
-			listen(
-				this,
-				'mouseover',
-				debounce((event: Event) => {
-					event.stopPropagation();
-
-					const target = event.target as HTMLElement;
-					const block = target.closest<HTMLElement>('.ce-block');
-
-					LayoutTune.updateToolbarPosition(block);
-				}, 10),
-				'.ce-block'
-			)
+			}, 10),
+			'.ce-block'
 		);
 	}
 }

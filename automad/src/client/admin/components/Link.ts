@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { listen, App, Attr } from '@/admin/core';
+import { App, Attr } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -58,7 +58,7 @@ class LinkComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(this, 'click', (event: Event) => {
+		this.listen(this, 'click', (event: Event) => {
 			if (this.elementAttributes[Attr.external]) {
 				window.location.href = this.elementAttributes[Attr.external];
 

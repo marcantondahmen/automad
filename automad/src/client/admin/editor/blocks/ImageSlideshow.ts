@@ -46,7 +46,6 @@ import {
 	EventName,
 	FieldTag,
 	html,
-	listen,
 	uniqueId,
 } from '@/admin/core';
 import {
@@ -192,11 +191,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 				App.text('imageSlideshowBlockSettings')
 			);
 
-			this.api.listeners.on(
-				settingsButton,
-				'click',
-				this.renderModal.bind(this)
-			);
+			this.listen(settingsButton, 'click', this.renderModal.bind(this));
 		}
 
 		const collection = create(
@@ -210,7 +205,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			collection.images = this.data.files;
 
 			if (!this.readOnly) {
-				this.api.listeners.on(collection, 'change', () => {
+				this.listen(collection, 'change', () => {
 					this.data.files = collection.images;
 					this.blockAPI.dispatchChange();
 				});
@@ -233,7 +228,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			modal.open();
 		}, 0);
 
-		listen(modal, 'change', () => {
+		this.listen(modal, 'change', () => {
 			const data = collectFieldData(modal);
 
 			this.data = {
@@ -249,7 +244,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			};
 		});
 
-		listen(modal, EventName.modalClose, () => {
+		this.listen(modal, EventName.modalClose, () => {
 			this.blockAPI.dispatchChange();
 		});
 	}

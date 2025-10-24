@@ -45,7 +45,6 @@ import {
 	fieldGroup,
 	FieldTag,
 	fire,
-	listen,
 	prepareFieldGroups,
 } from '@/admin/core';
 import {
@@ -137,17 +136,15 @@ export class SharedDataFormComponent extends FormComponent {
 
 		super.init();
 
-		this.addListener(
-			listen(window, EventName.contentPublished, () => {
-				if (!this.bindings) {
-					return;
-				}
+		this.listen(window, EventName.contentPublished, () => {
+			if (!this.bindings) {
+				return;
+			}
 
-				this.bindings.sharedDataFetchTimeBinding.value = Math.ceil(
-					new Date().getTime() / 1000
-				);
-			})
-		);
+			this.bindings.sharedDataFetchTimeBinding.value = Math.ceil(
+				new Date().getTime() / 1000
+			);
+		});
 	}
 
 	/**
@@ -244,6 +241,27 @@ export class SharedDataFormComponent extends FormComponent {
 			name: `data[${App.reservedFields.OPEN_GRAPH_IMAGE}]`,
 			label: App.text('openGraphImageShared'),
 		});
+
+		if (App.system.i18n) {
+			create(
+				'input',
+				[],
+				{
+					type: 'hidden',
+					name: `data[${App.reservedFields.LANG_CUSTOM}]`,
+					value: fields[App.reservedFields.LANG_CUSTOM],
+				},
+				this.sections.settings
+			);
+		} else {
+			createField(FieldTag.input, this.sections.settings, {
+				key: App.reservedFields.LANG_CUSTOM,
+				value: fields[App.reservedFields.LANG_CUSTOM],
+				name: `data[${App.reservedFields.LANG_CUSTOM}]`,
+				label: App.text('langAttr'),
+				placeholder: 'en',
+			});
+		}
 
 		createCustomizationFields(fields, this.sections);
 

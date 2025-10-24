@@ -50,7 +50,6 @@ import {
 	EventName,
 	getPageURL,
 	html,
-	listen,
 	notifyError,
 	PageController,
 	query,
@@ -241,13 +240,16 @@ export class NavTreeComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.addListener(
-			listen(window, EventName.appStateChange, this.init.bind(this))
-		);
+		this.listen(window, EventName.appStateChange, this.init.bind(this));
 
 		this.init();
 
-		listen(this, 'dragenter', showSubnodesOnDragover, 'sortable-tree-node');
+		this.listen(
+			this,
+			'dragenter',
+			showSubnodesOnDragover,
+			'sortable-tree-node'
+		);
 	}
 
 	/**
@@ -255,6 +257,7 @@ export class NavTreeComponent extends BaseComponent {
 	 */
 	protected init(): void {
 		this.classList.add(CSS.nav);
+		this.tree?.destroy();
 		this.innerHTML = '';
 
 		const pages = Object.values(App.pages);
@@ -298,12 +301,11 @@ export class NavTreeComponent extends BaseComponent {
 	}
 
 	/**
-	 * Remove all window event listeners and observers when disconnecting.
+	 * Remove all event listeners and observers when disconnecting.
 	 */
 	disconnectedCallback(): void {
+		this.tree?.destroy();
 		super.disconnectedCallback();
-
-		this.tree.destroy();
 	}
 }
 

@@ -32,6 +32,29 @@
  * Licensed under the MIT license.
  */
 
+// Before all bundles are loaded, center a preloader.
+am-root:not([class]) {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	inset: 0;
+	background: hsl(var(--am-clr-background));
+
+	&:before {
+		--size: 2.25rem;
+		content: '';
+		display: block;
+		width: var(--size);
+		height: var(--size);
+		color: hsl(var(--am-clr-text-muted));
+		border-radius: var(--size);
+		border: 3px solid;
+		border-left-color: transparent;
+		animation: 0.8s linear 0s infinite root-preload;
+	}
+}
+
 .am-c-root {
 	&:before {
 		content: '';
@@ -56,5 +79,15 @@
 		&:before {
 			opacity: 0.95;
 		}
+	}
+}
+
+@keyframes root-preload {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
 	}
 }

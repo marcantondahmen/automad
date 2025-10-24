@@ -45,7 +45,6 @@ import {
 	debounce,
 	FieldTag,
 	html,
-	listen,
 	query,
 	uniqueId,
 } from '@/admin/core';
@@ -212,17 +211,17 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			const buttonPrimary = query('.__primary-edit', this.wrapper);
 			const buttonSecondary = query('.__secondary-edit', this.wrapper);
 
-			this.api.listeners.on(
+			this.listen(
 				buttonLayout,
 				'click',
 				this.renderLayoutModal.bind(this)
 			);
 
-			this.api.listeners.on(buttonPrimary, 'click', () => {
+			this.listen(buttonPrimary, 'click', () => {
 				this.renderButtonModal('primary');
 			});
 
-			this.api.listeners.on(buttonSecondary, 'click', () => {
+			this.listen(buttonSecondary, 'click', () => {
 				this.renderButtonModal('secondary');
 			});
 		}
@@ -312,7 +311,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			modal.open();
 		}, 0);
 
-		this.api.listeners.on(
+		this.listen(
 			modal,
 			'change',
 			debounce(() => {
@@ -419,28 +418,30 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			modal.open();
 		}, 0);
 
-		this.addListener(
-			listen(
-				modal,
-				'change input',
-				debounce(() => {
-					this.data = {
-						...this.data,
-						[`${button}Style`]: Object.fromEntries(
-							Object.entries(
-								collectFieldData(styleContainer)
-							).filter(([key, value]) => value.length > 0)
-						),
-						[`${button}Link`]: link.input.value,
-						[`${button}OpenInNewTab`]: (
-							target.input as HTMLInputElement
-						).checked,
-					};
+		this.listen(
+			modal,
+			'change input',
+			debounce(() => {
+				this.data = {
+					...this.data,
+					[`${button}Text`]: query(
+						`[name="${button}Text"]`,
+						this.flex
+					).innerHTML,
+					[`${button}Style`]: Object.fromEntries(
+						Object.entries(collectFieldData(styleContainer)).filter(
+							([key, value]) => value.length > 0
+						)
+					),
+					[`${button}Link`]: link.input.value,
+					[`${button}OpenInNewTab`]: (
+						target.input as HTMLInputElement
+					).checked,
+				};
 
-					this.renderButton(button);
-					this.blockAPI.dispatchChange();
-				}, 50)
-			)
+				this.renderButton(button);
+				this.blockAPI.dispatchChange();
+			}, 50)
 		);
 	}
 

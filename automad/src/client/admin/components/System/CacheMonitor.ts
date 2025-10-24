@@ -32,15 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	Binding,
-	createSelect,
-	CSS,
-	EventName,
-	listen,
-} from '@/admin/core';
+import { App, Attr, Binding, createSelect, CSS, EventName } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -57,11 +49,9 @@ class CacheMonitorComponent extends BaseComponent {
 			initial: App.system.cache.monitorDelay,
 		});
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				cacheMonitorDelay.value = App.system.cache.monitorDelay;
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			cacheMonitorDelay.value = App.system.cache.monitorDelay;
+		});
 
 		createSelect(
 			[

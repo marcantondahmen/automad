@@ -32,7 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import { listen } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal';
 
@@ -59,7 +58,7 @@ class ModalCloseComponent extends BaseComponent {
 			}
 		};
 
-		listen(this, 'click', close.bind(this));
+		this.listen(this, 'click', close.bind(this));
 	}
 }
 

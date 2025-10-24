@@ -39,7 +39,6 @@ import {
 	CSS,
 	fire,
 	html,
-	listen,
 	resizeImageUrl,
 } from '@/admin/core';
 import Sortable from 'sortablejs';
@@ -135,12 +134,10 @@ export class ImageCollectionComponent extends BaseComponent {
 					item
 				);
 
-				this.addListener(
-					listen(deleteButton, 'click', () => {
-						item.remove();
-						fire('change', this);
-					})
-				);
+				this.listen(deleteButton, 'click', () => {
+					item.remove();
+					fire('change', this);
+				});
 			}
 		});
 
@@ -157,20 +154,16 @@ export class ImageCollectionComponent extends BaseComponent {
 				},
 			});
 
-			this.addListener(
-				listen(grid, 'dragover', (event: Event) => {
-					event.preventDefault();
-					event.stopImmediatePropagation();
-				})
-			);
+			this.listen(grid, 'dragover', (event: Event) => {
+				event.preventDefault();
+				event.stopImmediatePropagation();
+			});
 
-			this.addListener(
-				listen(grid, 'click', (event: Event) => {
-					if (event.target === grid) {
-						this.add();
-					}
-				})
-			);
+			this.listen(grid, 'click', (event: Event) => {
+				if (event.target === grid) {
+					this.add();
+				}
+			});
 
 			const addButton = create(
 				'button',
@@ -180,7 +173,7 @@ export class ImageCollectionComponent extends BaseComponent {
 				App.text('addImage')
 			);
 
-			this.addListener(listen(addButton, 'click', this.add.bind(this)));
+			this.listen(addButton, 'click', this.add.bind(this));
 		}
 	}
 

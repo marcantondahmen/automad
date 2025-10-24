@@ -43,7 +43,7 @@ use Automad\Core\Blocks;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The section editor block.
+ * The layout section block.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *
  * @psalm-import-type BlockData from AbstractBlock
  */
-class Section extends AbstractBlock {
+class LayoutSection extends AbstractBlock {
 	/**
 	 * Render a section editor block.
 	 *
@@ -115,15 +115,15 @@ class Section extends AbstractBlock {
 			}
 
 			if (!empty($data['style']['shadow'])) {
-				$styles['boxShadow'] = 'var(--am-section-shadow)';
+				$styles['boxShadow'] = 'var(--am-layout-section-shadow)';
 			}
 
 			if (!empty($data['style']['color'])) {
-				$styles['--am-section-color'] = $data['style']['color'];
+				$styles['--am-layout-section-color'] = $data['style']['color'];
 			}
 
 			if (!empty($data['style']['borderColor'])) {
-				$styles['--am-section-border-color'] = $data['style']['borderColor'];
+				$styles['--am-layout-section-border-color'] = $data['style']['borderColor'];
 			}
 
 			if (!empty($data['style']['card'])) {
@@ -137,9 +137,9 @@ class Section extends AbstractBlock {
 
 		return <<< HTML
 			<section $attr>
-				<am-section $classes $styles>
+				<am-layout-section $classes $styles>
 					$html
-				</am-section>
+				</am-layout-section>
 			</section>
 		HTML;
 	}

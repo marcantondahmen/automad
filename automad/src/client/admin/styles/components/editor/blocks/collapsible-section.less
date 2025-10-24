@@ -1,0 +1,111 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2025 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-ed-bl-collapsible-section {
+	display: flex;
+	flex-direction: column;
+	outline: 2px solid hsl(var(--am-clr-border));
+	border-radius: @am-form-radius;
+
+	& > * {
+		margin: 0;
+	}
+
+	&__label {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 0.4em;
+		height: 1.75rem;
+		padding: 0 0.85em;
+		top: -2px;
+		left: -2px;
+		font-size: @am-small-font-size;
+		font-weight: 560;
+		color: hsl(var(--am-clr-text));
+		background: hsl(var(--am-clr-border));
+		border-top-left-radius: @am-form-radius;
+		user-select: none;
+	}
+
+	& details > summary {
+		display: grid;
+		grid-template-columns: 1.1rem 1fr;
+		padding: (@am-card-padding * 0.7) @am-card-padding;
+
+		&:before {
+			content: '► ';
+			font-size: 0.75em;
+			line-height: 2.2;
+			cursor: pointer;
+		}
+
+		&::marker {
+			content: '';
+		}
+
+		& > [contenteditable] {
+			flex-grow: 1;
+			outline: none !important;
+		}
+	}
+
+	& details[open] > summary:before {
+		content: '▼ ';
+	}
+
+	&__editor {
+		border-top: @am-border;
+
+		& > am-editor-js > .codex-editor {
+			margin: (@am-card-padding * 0.7) 0;
+			padding: 0 @am-card-padding;
+			border: none;
+		}
+	}
+
+	& ::details-content {
+		transition:
+			height 0.3s ease,
+			content-visibility 0.3s ease allow-discrete,
+			overflow 0.3s ease allow-discrete;
+		height: 0;
+		overflow: clip;
+	}
+
+	& [open]::details-content {
+		height: auto;
+		overflow: visible;
+	}
+}

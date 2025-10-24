@@ -45,15 +45,13 @@ import {
 	CSS,
 	FieldTag,
 	html,
-	listen,
 	queryAll,
 	resolveFileUrl,
 	uniqueId,
 } from '@/admin/core';
 import {
-	EditorOutputData,
 	SectionAlignItemsOption,
-	SectionBlockData,
+	LayoutSectionBlockData,
 	SectionJustifyContentOption,
 	SectionStyle,
 	SectionToolbarRadioOptions,
@@ -197,9 +195,9 @@ const createRadioInput = (
 		create(
 			'label',
 			[
-				CSS.editorBlockSectionRadio,
+				CSS.editorBlockLayoutSectionRadio,
 				...(value === selected
-					? [CSS.editorBlockSectionRadioActive]
+					? [CSS.editorBlockLayoutSectionRadioActive]
 					: []),
 			],
 			{ [Attr.tooltip]: App.text(tooltip) },
@@ -217,19 +215,19 @@ const createRadioInput = (
 const toggleActiveRadio = (wrapper: HTMLElement): void => {
 	queryAll<HTMLInputElement>('input', wrapper).forEach((input) => {
 		input.parentElement.classList.toggle(
-			CSS.editorBlockSectionRadioActive,
+			CSS.editorBlockLayoutSectionRadioActive,
 			input.checked
 		);
 	});
 };
 
 /**
- * The Section block that create a new editor inside a parent editor
+ * The Layout-Section block that create a new editor inside a parent editor
  * in order to create nested flexbox layouts.
  *
  * @extends BaseBlock
  */
-export class SectionBlock extends BaseBlock<SectionBlockData> {
+export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 	/**
 	 * The editor holder element.
 	 */
@@ -267,7 +265,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 */
 	static get toolbox() {
 		return {
-			title: App.text('sectionBlockTitle'),
+			title: App.text('layoutSectionBlockTitle'),
 			icon: '<i class="bi bi-layout-three-columns"></i>',
 		};
 	}
@@ -278,9 +276,11 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 * @param data
 	 * @return the section block data
 	 */
-	protected prepareData(data: SectionBlockData): SectionBlockData {
+	protected prepareData(
+		data: LayoutSectionBlockData
+	): LayoutSectionBlockData {
 		return {
-			content: data.content || {},
+			content: data.content || { blocks: [] },
 			style: Object.assign({}, styleDefaults, data.style),
 			justify: data.justify || 'start',
 			align: data.align || 'start',
@@ -298,7 +298,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	render(): HTMLElement {
 		this.section = create(
 			'div',
-			this.readOnly ? [] : [CSS.editorBlockSection],
+			this.readOnly ? [] : [CSS.editorBlockLayoutSection],
 			{},
 			this.wrapper
 		);
@@ -310,9 +310,9 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 				{},
 				this.section,
 				html`
-					<span class="${CSS.editorBlockSectionLabel}">
-						${SectionBlock.toolbox.icon}
-						<span>${App.text('sectionBlockTitle')}</span>
+					<span class="${CSS.editorBlockLayoutSectionLabel}">
+						${LayoutSectionBlock.toolbox.icon}
+						<span>${App.text('layoutSectionBlockTitle')}</span>
 					</span>
 				`
 			);
@@ -321,7 +321,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		const renderEditor = async () => {
 			this.holder = createEditor(
 				this.section,
-				this.data.content as EditorOutputData,
+				this.data.content,
 				{
 					onChange: async (api: API) => {
 						if (this.readOnly) {
@@ -341,9 +341,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			await this.holder.editor.isReady;
 
 			if (!this.readOnly) {
-				this.holder.editor.focus();
-
-				listen(this.holder, 'paste', (event: Event) => {
+				this.listen(this.holder, 'paste', (event: Event) => {
 					event.stopPropagation();
 				});
 
@@ -363,7 +361,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): SectionBlockData {
+	save(): LayoutSectionBlockData {
 		return this.data;
 	}
 
@@ -373,35 +371,35 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private renderToolbar(): void {
 		const toolbar = create(
 			'div',
-			[CSS.editorBlockSectionToolbar],
+			[CSS.editorBlockLayoutSectionToolbar],
 			{},
 			this.section
 		);
 
 		const styleTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
 
 		const justifyTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
 
 		const alignTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
 
 		const sizeTools = create(
 			'div',
-			[CSS.editorBlockSectionToolbarSection],
+			[CSS.editorBlockLayoutSectionToolbarSection],
 			{},
 			toolbar
 		);
@@ -415,7 +413,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 		// Add this hidden input in order to catch the focus after a block has been dragged around.
 		create('input', [CSS.displayNone], {}, toolbar);
 
-		listen(toolbar, 'change', () => {
+		this.listen(toolbar, 'change', () => {
 			this.setStyle();
 		});
 
@@ -434,10 +432,10 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			}, 0);
 		};
 
-		listen(this.wrapper, 'click', (event: Event) => {
+		this.listen(this.wrapper, 'click', (event: Event) => {
 			event.stopPropagation();
 
-			queryAll(`.${CSS.editorBlockSectionToolbar}`).forEach(
+			queryAll(`.${CSS.editorBlockLayoutSectionToolbar}`).forEach(
 				(_toolbar) => {
 					_toolbar.classList.toggle(CSS.active, _toolbar == toolbar);
 				}
@@ -446,17 +444,15 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			setToolbarPosition();
 		});
 
-		this.addListener(
-			listen(document, 'click', (event: Event) => {
-				const target = event.target as HTMLElement;
+		this.listen(document, 'click', (event: Event) => {
+			const target = event.target as HTMLElement;
 
-				if (this.wrapper.contains(target)) {
-					return;
-				}
+			if (this.wrapper.contains(target)) {
+				return;
+			}
 
-				toolbar.classList.remove(CSS.active);
-			})
-		);
+			toolbar.classList.remove(CSS.active);
+		});
 	}
 
 	/**
@@ -473,7 +469,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			'<i class="bi bi-palette2"></i>'
 		);
 
-		listen(button, 'click', () => {
+		this.listen(button, 'click', () => {
 			this.renderStylesModal();
 		});
 	}
@@ -486,7 +482,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private renderJustifySelect(toolbar: HTMLElement): void {
 		const wrapper = create(
 			'div',
-			[CSS.editorBlockSectionRadios],
+			[CSS.editorBlockLayoutSectionRadios],
 			{},
 			toolbar
 		);
@@ -504,7 +500,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			);
 		}
 
-		listen(wrapper, 'change', () => {
+		this.listen(wrapper, 'change', () => {
 			const { justify } = collectFieldData(wrapper);
 
 			this.data.justify = justify as SectionJustifyContentOption;
@@ -522,7 +518,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private renderAlignSelect(toolbar: HTMLElement): void {
 		const wrapper = create(
 			'div',
-			[CSS.editorBlockSectionRadios],
+			[CSS.editorBlockLayoutSectionRadios],
 			{},
 			toolbar
 		);
@@ -540,7 +536,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			);
 		}
 
-		listen(wrapper, 'change', () => {
+		this.listen(wrapper, 'change', () => {
 			const { align } = collectFieldData(wrapper);
 
 			this.data.align = align as SectionAlignItemsOption;
@@ -581,7 +577,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 			group
 		);
 
-		listen(input, 'change', () => {
+		this.listen(input, 'change', () => {
 			this.data[key] = input.value;
 			this.blockAPI.dispatchChange();
 		});
@@ -694,7 +690,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 
 		Bindings.connectElements(body);
 
-		this.api.listeners.on(body, 'change', () => {
+		this.listen(body, 'change', () => {
 			this.data.style = collectFieldData(body) as SectionStyle;
 			this.setStyle();
 			this.blockAPI.dispatchChange();
@@ -711,7 +707,7 @@ export class SectionBlock extends BaseBlock<SectionBlockData> {
 	private setStyle(): void {
 		const { style, gap, justify, align, minBlockWidth } = this.data;
 		const baseClass = CSS.editorStyleBase;
-		const classes: string[] = [CSS.editorBlockSectionEditor];
+		const classes: string[] = [CSS.editorBlockLayoutSectionEditor];
 
 		classes.push(`${baseClass}--justify-${justify}`);
 		classes.push(`${baseClass}--align-${align}`);

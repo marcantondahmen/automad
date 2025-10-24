@@ -40,7 +40,6 @@ import {
 	CSS,
 	getComponentTargetContainer,
 	html,
-	listen,
 	query,
 	Route,
 	Section,
@@ -99,9 +98,13 @@ class MissingEmailAlertComponent extends BaseComponent {
 			`
 		) as ModalComponent;
 
-		listen(query('am-modal-footer am-modal-close', modal), 'click', () => {
-			localStorage.setItem(key, 'ignore');
-		});
+		this.listen(
+			query('am-modal-footer am-modal-close', modal),
+			'click',
+			() => {
+				localStorage.setItem(key, 'ignore');
+			}
+		);
 
 		modal.open();
 	}

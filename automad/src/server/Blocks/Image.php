@@ -68,11 +68,21 @@ class Image extends AbstractBlock {
 		}
 
 		$src = $data['url'];
+		$alt = $data['alt'] ?? '';
 		$ImgLoaderSet = new ImgLoaderSet($src, $Automad);
 
 		// Note that the "src" attribute must be included in order to be able
 		// to find the original source using Str::findFirstImage.
-		$img = "<am-img-loader src=\"$src\" width=\"{$ImgLoaderSet->width}\" height=\"{$ImgLoaderSet->height}\" image=\"{$ImgLoaderSet->image}\" preload=\"{$ImgLoaderSet->preload}\"></am-img-loader>";
+		$img = <<<HTML
+			<am-img-loader 
+				src="$src" 
+				alt="$alt"
+				width="{$ImgLoaderSet->width}" 
+				height="{$ImgLoaderSet->height}" 
+				image="{$ImgLoaderSet->image}" 
+				preload="{$ImgLoaderSet->preload}"
+			></am-img-loader>
+			HTML;
 		$caption = '';
 
 		if (!empty($data['caption'])) {

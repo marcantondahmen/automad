@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, keyCombo, listen } from '@/admin/core';
+import { App, create, keyCombo } from '@/admin/core';
 import { ModalComponent } from './Modal';
 
 /**
@@ -65,7 +65,7 @@ class ModalJumpbarComponent extends ModalComponent {
 			})
 		);
 
-		listen(
+		this.listen(
 			this,
 			'focusout',
 			() => {

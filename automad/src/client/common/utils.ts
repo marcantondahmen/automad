@@ -43,7 +43,7 @@ export const debounce = (
 	callback: (...args: any[]) => void,
 	timeout: number = 50
 ): ((...args: any[]) => void) => {
-	let timer: NodeJS.Timer;
+	let timer: any;
 
 	return (...args: any[]) => {
 		clearTimeout(timer);

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, html, listen, query } from '@/admin/core';
+import { create, CSS, html, query } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -60,7 +60,8 @@ class CheckboxComponent extends BaseComponent {
 			);
 		};
 
-		listen(this, 'input', toggleParent, 'input');
+		this.listen(this, 'input', toggleParent, 'input');
+
 		toggleParent();
 	}
 

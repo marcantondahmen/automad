@@ -38,7 +38,6 @@ import {
 	collectFieldData,
 	create,
 	CSS,
-	listen,
 	query,
 	queryAll,
 } from '@/admin/core';
@@ -314,7 +313,7 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 			});
 		}
 
-		listen(wrapper, 'change', () => {
+		this.api.listeners.on(wrapper, 'change', () => {
 			const { layout } = collectFieldData(wrapper);
 
 			this.selected = layout;

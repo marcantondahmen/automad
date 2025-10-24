@@ -39,7 +39,6 @@ import {
 	debounce,
 	fire,
 	FormDataProviders,
-	listen,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
@@ -121,7 +120,12 @@ class NumberUnitInputComponent extends BaseComponent {
 			fire('change', this);
 		};
 
-		listen(this, 'change input', debounce(merge, 100), 'input, select');
+		this.listen(
+			this,
+			'change input',
+			debounce(merge, 100),
+			'input, select'
+		);
 	}
 }
 

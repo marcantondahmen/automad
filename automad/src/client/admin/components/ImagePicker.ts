@@ -42,7 +42,6 @@ import {
 	EventName,
 	html,
 	ImageCollectionController,
-	listen,
 	requestAPI,
 } from '@/admin/core';
 import { Image } from '@/admin/types';
@@ -92,8 +91,10 @@ class ImagePickerComponent extends BaseComponent {
 		this.binding = Bindings.get(this.elementAttributes[Attr.binding]);
 		this.init();
 
-		this.addListener(
-			listen(window, EventName.filesChangeOnServer, this.init.bind(this))
+		this.listen(
+			window,
+			EventName.filesChangeOnServer,
+			this.init.bind(this)
 		);
 	}
 
@@ -160,7 +161,7 @@ class ImagePickerComponent extends BaseComponent {
 				grid
 			);
 
-			listen(img, 'click', () => {
+			this.listen(img, 'click', () => {
 				this.binding.value = img.getAttribute('value');
 
 				if (modal) {

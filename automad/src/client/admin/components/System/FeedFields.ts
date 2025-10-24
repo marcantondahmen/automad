@@ -39,7 +39,6 @@ import {
 	createField,
 	EventName,
 	FieldTag,
-	listen,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
@@ -57,11 +56,9 @@ class FeedFieldsComponent extends BaseComponent {
 			initial: JSON.stringify(App.system.feed.fields),
 		});
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				feedFields.value = JSON.stringify(App.system.feed.fields);
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			feedFields.value = JSON.stringify(App.system.feed.fields);
+		});
 
 		createField(
 			FieldTag.feedFieldSelect,

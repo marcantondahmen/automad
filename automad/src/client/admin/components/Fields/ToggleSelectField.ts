@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS, FieldTag, html, listen, query } from '@/admin/core';
+import { App, create, CSS, FieldTag, html, query } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -75,7 +75,7 @@ class ToggleSelectFieldComponent extends BaseFieldComponent {
 		const select = query<HTMLSelectElement>('select', wrapper);
 		select.value = (value as string) || '';
 
-		this.addListener(listen(select, 'change', toggle.bind(this)));
+		this.listen(select, 'change', toggle.bind(this));
 		toggle();
 	}
 }

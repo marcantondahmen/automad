@@ -33,14 +33,6 @@
  */
 
 import { SliderData } from '@/blocks/types';
-import Swiper from 'swiper';
-import {
-	Autoplay,
-	EffectFade,
-	EffectFlip,
-	Navigation,
-	Pagination,
-} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -55,14 +47,7 @@ import { create } from '@/common';
  * @see {@link docs https://swiperjs.com}
  * @see {@link github https://github.com/nolimits4web/swiper}
  */
-class SliderComponent extends HTMLElement {
-	/**
-	 * The tag name.
-	 *
-	 * @static
-	 */
-	static TAG_NAME = 'am-image-slideshow';
-
+export default class Slider {
 	/**
 	 * The gallery settings and files.
 	 */
@@ -71,27 +56,26 @@ class SliderComponent extends HTMLElement {
 	/**
 	 * The class constructor.
 	 */
-	constructor() {
-		super();
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
+	constructor(element: HTMLElement) {
 		this.data = JSON.parse(
-			decodeURIComponent(this.getAttribute('data') ?? '')
+			decodeURIComponent(element.getAttribute('data') ?? '')
 		) as SliderData;
 
-		this.removeAttribute('data');
-		this.render();
+		element.removeAttribute('data');
+		this.render(element);
 	}
 
 	/**
 	 * Render the slider.
+	 *
+	 * @param element
 	 */
-	private render(): void {
-		const swiperContainer = create('div', ['swiper'], {}, this);
+	private async render(element: HTMLElement): Promise<void> {
+		const Swiper = (await import('swiper')).default;
+		const { Autoplay, EffectFade, EffectFlip, Navigation, Pagination } =
+			await import('swiper/modules');
+
+		const swiperContainer = create('div', ['swiper'], {}, element);
 		const wrapper = create('div', ['swiper-wrapper'], {}, swiperContainer);
 		const { settings, imageSets } = this.data;
 
@@ -143,5 +127,3 @@ class SliderComponent extends HTMLElement {
 		});
 	}
 }
-
-customElements.define(SliderComponent.TAG_NAME, SliderComponent);

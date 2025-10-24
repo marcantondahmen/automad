@@ -55,7 +55,7 @@
 	&__content {
 		position: relative;
 		width: 100%;
-		padding: 0.2rem 0;
+		padding: 0.4rem 0;
 		max-width: @am-bl-editor-block-max-width !important;
 		outline: 1px dashed transparent;
 		outline-offset: 1px;
@@ -66,6 +66,14 @@
 			max-width: 100% !important;
 			margin: 0;
 		}
+	}
+
+	&:first-child > &__content {
+		padding-top: 3px;
+	}
+
+	&:last-child > &__content {
+		padding-bottom: 0;
 	}
 
 	&--selected &__content {

@@ -95,7 +95,12 @@ const renderDropdown = (): string => {
 
 	if (getPageURL() != '/') {
 		subpageItems = html`
-			<am-form ${Attr.api}="${PageController.duplicate}">
+			<am-form
+				${Attr.api}="${PageController.duplicate}"
+				${Attr.loadingAnimation}="${App.text(
+					'duplicatingPageProgress'
+				)}"
+			>
 				<am-submit class="${CSS.dropdownLink}">
 					<am-icon-text
 						${Attr.icon}="files"

@@ -33,7 +33,7 @@
  */
 
 import { create, query, queryAll } from '@/common';
-import { MailInput } from '../types';
+import { ComponentImplementation, MailInput } from '../types';
 
 const cls = {
 	message: 'am-message',
@@ -61,18 +61,18 @@ const resetInputs = (inputs: MailInput[]): void => {
 /**
  * A simple mail form.
  */
-export class MailComponent extends HTMLElement {
+export default class MailComponent implements ComponentImplementation {
+	/**
+	 * The main element.
+	 */
+	element: HTMLElement;
+
 	/**
 	 * The class constructor.
 	 */
-	constructor() {
-		super();
-	}
+	constructor(element: HTMLElement) {
+		this.element = element;
 
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
 		// Wait 2 second in order prevent spam bot submissions.
 		setTimeout(this.init.bind(this), 2000);
 	}
@@ -81,11 +81,11 @@ export class MailComponent extends HTMLElement {
 	 * Initialize the form.
 	 */
 	private init(): void {
-		const button = query<HTMLButtonElement>('button', this);
-		const inputs = queryAll<MailInput>('[name]', this);
+		const button = query<HTMLButtonElement>('button', this.element);
+		const inputs = queryAll<MailInput>('[name]', this.element);
 
 		button.addEventListener('click', async () => {
-			this.classList.add(cls.validate);
+			this.element.classList.add(cls.validate);
 
 			if (!checkInputs(inputs)) {
 				return;
@@ -101,13 +101,13 @@ export class MailComponent extends HTMLElement {
 
 				if (data.status) {
 					const message =
-						query('p', this) ??
-						create('p', [cls.message], {}, this, '', true);
+						query('p', this.element) ??
+						create('p', [cls.message], {}, this.element, '', true);
 
 					message.textContent = data.status;
 
 					resetInputs(inputs);
-					this.classList.remove(cls.validate);
+					this.element.classList.remove(cls.validate);
 				}
 			} catch {}
 		});
@@ -123,10 +123,8 @@ export class MailComponent extends HTMLElement {
 			formData.append(input.name, input.value);
 		});
 
-		formData.append('id', this.id);
+		formData.append('id', this.element.id);
 
 		return formData;
 	}
 }
-
-customElements.define('am-mail', MailComponent);

@@ -32,15 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Attr,
-	Binding,
-	createSelect,
-	CSS,
-	EventName,
-	listen,
-} from '@/admin/core';
+import { App, Attr, Binding, createSelect, CSS, EventName } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -57,11 +49,9 @@ class CacheLifetimeComponent extends BaseComponent {
 			initial: App.system.cache.lifetime,
 		});
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				cacheLifetime.value = App.system.cache.lifetime;
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			cacheLifetime.value = App.system.cache.lifetime;
+		});
 
 		createSelect(
 			[

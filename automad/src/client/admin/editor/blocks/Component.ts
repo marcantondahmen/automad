@@ -43,7 +43,6 @@ import {
 	EventName,
 	getComponentTargetContainer,
 	html,
-	listen,
 	query,
 	Route,
 } from '@/admin/core';
@@ -51,6 +50,7 @@ import { ComponentBlockData } from '@/admin/types';
 import { getBlockTools } from '../blocks';
 import { BaseBlock } from './BaseBlock';
 import { baseTunes, getBlockTunes } from '../tunes';
+import { unknownBlockHandler } from '../utils';
 
 const getComponent = (id: string) => {
 	return App.components.find((c) => c.id === id);
@@ -75,6 +75,11 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			icon: '<i class="bi bi-boxes"></i>',
 		};
 	}
+
+	/**
+	 * The editor instance.
+	 */
+	private editor: EditorJS;
 
 	/**
 	 * Prepare the data that is passed to the constructor.
@@ -131,7 +136,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			</div>
 		`;
 
-		new EditorJS({
+		this.editor = new EditorJS({
 			data: { blocks: component.blocks },
 			holder: this.wrapper,
 			minHeight: 0,
@@ -140,6 +145,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			inlineToolbar: [],
 			tunes: baseTunes,
 			readOnly: true,
+			unknownBlockHandler,
 		});
 	}
 
@@ -186,7 +192,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 		if (options.length > 0) {
 			const select = createSelect(options, options[0].value, body);
 
-			listen(button, 'click', () => {
+			this.listen(button, 'click', () => {
 				this.data.id = select.value;
 				modal.close();
 			});
@@ -197,7 +203,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 
 		modal.open();
 
-		listen(modal, EventName.modalClose, () => {
+		this.listen(modal, EventName.modalClose, () => {
 			if (!this.data.id) {
 				this.api.blocks.delete(
 					this.api.blocks.getBlockIndex(this.blockAPI.id)
@@ -217,5 +223,16 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	 */
 	save(): ComponentBlockData {
 		return this.data;
+	}
+
+	/**
+	 * Clean up on destroy.
+	 */
+	destroy(): void {
+		try {
+			this.editor.destroy();
+		} catch {}
+
+		super.destroy();
 	}
 }

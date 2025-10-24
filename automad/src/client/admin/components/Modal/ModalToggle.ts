@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Attr, listen, query } from '@/admin/core';
+import { Attr, query } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal';
 
@@ -64,7 +64,7 @@ class ModalToggleComponent extends BaseComponent {
 			modal.toggle();
 		};
 
-		listen(this, 'click', toggle.bind(this));
+		this.listen(this, 'click', toggle.bind(this));
 	}
 }
 

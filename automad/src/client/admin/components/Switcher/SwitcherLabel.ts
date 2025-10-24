@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { Attr, CSS, EventName, listen, query } from '@/admin/core';
+import { Attr, CSS, EventName, query } from '@/admin/core';
 import { getActiveSection, SwitcherComponent } from './Switcher';
 import { SwitcherLinkComponent } from './SwitcherLink';
 
@@ -57,17 +57,15 @@ export class SwitcherLabelComponent extends BaseComponent {
 			}="${getActiveSection()}"]`;
 		};
 
-		this.addListener(
-			listen(window, EventName.switcherChange, () => {
-				// Prefer links in menus and dropdowns before all other links
-				// in order to exclude overview cards as links.
-				this.innerHTML = (
-					query(`${dropdown} ${getLink()}`) ||
-					query(`${menu} ${getLink()}`) ||
-					query(getLink())
-				).innerHTML;
-			})
-		);
+		this.listen(window, EventName.switcherChange, () => {
+			// Prefer links in menus and dropdowns before all other links
+			// in order to exclude overview cards as links.
+			this.innerHTML = (
+				query(`${dropdown} ${getLink()}`) ||
+				query(`${menu} ${getLink()}`) ||
+				query(getLink())
+			).innerHTML;
+		});
 	}
 }
 

@@ -81,6 +81,7 @@ class Fields {
 	const HEIGHT_RESIZED = ':heightResized';
 	const HIDDEN = 'hidden';
 	const LANG = ':lang';
+	const LANG_CUSTOM = 'lang';
 	const LEVEL = ':level';
 	const LOOP_INDEX = ':i';
 	const META_DESCRIPTION = 'metaDescription';
@@ -136,6 +137,7 @@ class Fields {
 		'CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT' => Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT,
 		'DATE' => Fields::DATE,
 		'HIDDEN' => Fields::HIDDEN,
+		'LANG_CUSTOM' => Fields::LANG_CUSTOM,
 		'META_TITLE' => Fields::META_TITLE,
 		'META_DESCRIPTION' => Fields::META_DESCRIPTION,
 		'OPEN_GRAPH_IMAGE' => Fields::OPEN_GRAPH_IMAGE,

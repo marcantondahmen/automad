@@ -39,7 +39,6 @@ import {
 	create,
 	getTagFromRoute,
 	waitForPendingRequests,
-	listen,
 	Bindings,
 	initCheckboxToggles,
 	queryAll,
@@ -55,6 +54,7 @@ import {
 	initInputChangeHandler,
 	applyTheme,
 	getTheme,
+	listen,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal/Modal';
@@ -105,21 +105,19 @@ export class RootComponent extends BaseComponent {
 	 */
 	private async init(): Promise<void> {
 		this.classList.add(CSS.root);
-		this.addListener(initWindowErrorHandler());
+		initWindowErrorHandler();
 		applyTheme(getTheme());
 		this.progressBar(10);
 
 		await App.bootstrap(this);
 		await this.update();
 
-		this.addListener(
-			listen(window, 'popstate', () => {
-				App.root.update();
-			})
-		);
+		listen(window, 'popstate', () => {
+			App.root.update();
+		});
 
-		this.addListener(initEnterKeyHandler());
-		this.addListener(initInputChangeHandler());
+		initEnterKeyHandler();
+		initInputChangeHandler();
 		this.validateSession();
 
 		Undo.addListeners();
@@ -143,6 +141,7 @@ export class RootComponent extends BaseComponent {
 		}
 
 		this.progressBar(20);
+		this.removeListeners();
 
 		App.isReady = false;
 
@@ -211,13 +210,8 @@ export class RootComponent extends BaseComponent {
 			}
 		};
 
-		this.addListener(
-			listen(document, 'visibilitychange', stateChangeHandler.bind(this))
-		);
-
-		this.addListener(
-			listen(window, 'focus', stateChangeHandler.bind(this))
-		);
+		listen(document, 'visibilitychange', stateChangeHandler.bind(this));
+		listen(window, 'focus', stateChangeHandler.bind(this));
 	}
 
 	/**

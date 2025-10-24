@@ -33,11 +33,11 @@
  */
 
 import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
-import { CodeLanguage, KeyValueMap } from '..';
+import { CodeLanguage, EditorOutputData } from '..';
 import {
 	sectionBackgroundBlendModes,
 	sectionBorderStyles,
-} from '@/admin/editor/blocks/Section';
+} from '@/admin/editor/blocks/LayoutSection';
 import { sliderEffects } from '@/admin/editor/blocks/ImageSlideshow';
 import { buttonsJustifyOptions } from '@/admin/editor/blocks/Buttons';
 import { tableOfContentsTypes } from '@/admin/editor/blocks/TableOfContents';
@@ -76,10 +76,27 @@ export interface ButtonsBlockData {
 	secondaryOpenInNewTab?: boolean;
 }
 
+export interface CalloutBlockData {
+	title: string;
+	text: string;
+}
+
+export interface CalloutBlockInputs {
+	title: HTMLDivElement;
+	text: HTMLDivElement;
+}
+
 export interface CodeBlockData {
 	code: string;
 	language: CodeLanguage;
 	lineNumbers: boolean;
+}
+
+export interface CollapsibleSectionBlockData {
+	title: string;
+	content: EditorOutputData;
+	group: string;
+	collapsed: boolean;
 }
 
 export interface FilelistBlockData {
@@ -96,6 +113,7 @@ export interface HeaderBlockData {
 export interface ImageBlockData {
 	url: string;
 	caption: string;
+	alt: string;
 	link: string;
 	openInNewTab: boolean;
 }
@@ -193,8 +211,8 @@ export interface SectionStyle {
 	overflowHidden: boolean;
 }
 
-export interface SectionBlockData {
-	content: KeyValueMap;
+export interface LayoutSectionBlockData {
+	content: EditorOutputData;
 	style: SectionStyle;
 	justify: SectionJustifyContentOption;
 	align: SectionAlignItemsOption;
@@ -242,4 +260,8 @@ export interface VideoBlockData {
 	controls: boolean;
 	muted: boolean;
 	caption: string;
+}
+
+export interface TeXBlockData {
+	code: string;
 }

@@ -34,7 +34,9 @@
 
 import { KeyValueMap } from '../types';
 import { ButtonsBlock } from './blocks/Buttons';
+import { CalloutBlock } from './blocks/Callout';
 import { CodeBlock } from './blocks/Code';
+import { CollapsibleSectionBlock } from './blocks/CollapsibleSection';
 import { ComponentBlock } from './blocks/Component';
 import { Delimiter } from './blocks/Delimiter';
 import { EmbedBlock } from './blocks/Embed';
@@ -49,12 +51,13 @@ import { PagelistBlock } from './blocks/Pagelist';
 import { ParagraphBlock } from './blocks/Paragraph';
 import { QuoteBlock } from './blocks/Quote';
 import { RawBlock } from './blocks/Raw';
-import { SectionBlock } from './blocks/Section';
+import { LayoutSectionBlock } from './blocks/LayoutSection';
 import { SnippetBlock } from './blocks/Snippet';
 import { TableBlock } from './blocks/Table';
 import { TableOfContentsBlock } from './blocks/TableOfContents';
 import { VideoBlock } from './blocks/Video';
 import { embedServices } from './embedServices';
+import { TeXBlock } from './blocks/TeX';
 
 /**
  * The blocks used.
@@ -82,7 +85,19 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			class: HeaderBlock,
 			inlineToolbar: true,
 		},
-		section: { class: SectionBlock, stretchable: true },
+		layoutSection: { class: LayoutSectionBlock, stretchable: true },
+		collapsibleSection: {
+			class: CollapsibleSectionBlock,
+			stretchable: true,
+			inlineToolbar: [
+				'bold',
+				'italic',
+				'codeInline',
+				'underline',
+				'strikeThrough',
+				'color',
+			],
+		},
 		...component,
 		nestedList: {
 			class: NestedListBlock,
@@ -92,6 +107,10 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 			class: TableBlock,
 			inlineToolbar: true,
 			stretchable: true,
+		},
+		callout: {
+			class: CalloutBlock,
+			inlineToolbar: true,
 		},
 		quote: {
 			class: QuoteBlock,
@@ -131,6 +150,10 @@ export const getBlockTools = (isComponentEditor: boolean): KeyValueMap => {
 		code: {
 			class: CodeBlock,
 			inlineToolbar: false,
+			stretchable: true,
+		},
+		teX: {
+			class: TeXBlock,
 			stretchable: true,
 		},
 		raw: {

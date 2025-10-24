@@ -32,9 +32,31 @@
  * Licensed under the MIT license.
  */
 
-import { BaseEditor, KeyValueMap } from '@/admin/types';
-import { BlockAPI } from 'automad-editorjs';
-import { nanoid } from 'nanoid';
+import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
+import { BlockAPI, OutputBlockData } from 'automad-editorjs';
+import { App, getLogger } from '../core';
+
+const { nanoid } = await import('nanoid');
+
+/**
+ * Handle unknown block data.
+ *
+ * @param block
+ * @return the handled block
+ */
+export const unknownBlockHandler = (
+	block: OutputBlockData
+): OutputBlockData => {
+	getLogger().log('Handling unknown block', block);
+
+	if (block.type == 'section') {
+		block.type = 'layoutSection';
+
+		return block;
+	}
+
+	return null;
+};
 
 /**
  * Filter out empty data from an object.
@@ -81,4 +103,27 @@ export const insertBlock = async (
 	);
 
 	editor.blocks.getBlockByIndex(0).dispatchChange();
+};
+
+/**
+ * Remove shared component blocks that have been deleted.
+ *
+ * @param data
+ * @return The filtered data
+ */
+export const removeDeleteComponents = (
+	data: EditorOutputData
+): EditorOutputData => {
+	const componentIds = App.components.map((component) => component.id);
+
+	return {
+		...data,
+		blocks:
+			data?.blocks?.filter((block) => {
+				return (
+					block.type != 'component' ||
+					componentIds.includes(block.data.id ?? '')
+				);
+			}) ?? [],
+	};
 };

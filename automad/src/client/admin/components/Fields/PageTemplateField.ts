@@ -36,10 +36,10 @@ import {
 	App,
 	Attr,
 	create,
+	createProgressModal,
 	CSS,
 	FieldTag,
 	html,
-	listen,
 	query,
 	titleCase,
 } from '@/admin/core';
@@ -200,7 +200,7 @@ class PageTemplateSelectComponent extends BaseComponent {
 			label.textContent = select.options[select.selectedIndex].text;
 		};
 
-		listen(select, 'change', update);
+		this.listen(select, 'change', update.bind(this, true));
 
 		setTimeout(update, 0);
 	}
@@ -287,7 +287,7 @@ export class PageTemplateFieldComponent extends BaseComponent {
 			);
 		}
 
-		create(
+		const modal = create(
 			'am-modal',
 			[],
 			{ id: 'am-page-template-modal' },
@@ -314,6 +314,10 @@ export class PageTemplateFieldComponent extends BaseComponent {
 		} else {
 			body.textContent = App.text('noThemesFound');
 		}
+
+		this.listen(modal, 'change', () => {
+			createProgressModal(App.text('switchingTemplateProgress')).open();
+		});
 	}
 }
 

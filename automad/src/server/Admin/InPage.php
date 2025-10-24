@@ -155,7 +155,7 @@ class InPage {
 			return $expression;
 		};
 
-		$assets = Asset::css('dist/inpage/main.bundle.css') . Asset::js('dist/inpage/main.bundle.js');
+		$assets = Asset::css('dist/build/inpage/index.css') . Asset::js('dist/build/inpage/index.js');
 
 		return Head::append($str, $assets);
 	}

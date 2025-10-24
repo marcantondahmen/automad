@@ -48,7 +48,6 @@ import {
 	FieldTag,
 	fire,
 	html,
-	listen,
 	query,
 	uniqueId,
 } from '@/admin/core';
@@ -102,9 +101,12 @@ export class ComponentEditorComponent extends BaseComponent {
 	/**
 	 * Initialize the component when data is set.
 	 */
-	private init(): void {
+	init(): void {
 		const hasName = this._data.name.length > 0;
 		const nameBindingKey = `component-name-${this._data.id}-${Array.from(this.parentNode?.childNodes ?? [])?.indexOf(this) ?? 0}`;
+
+		Bindings.delete(nameBindingKey);
+
 		const nameBinding = new Binding(nameBindingKey, {
 			onChange: (value) => {
 				this._data.name = value;
@@ -168,11 +170,11 @@ export class ComponentEditorComponent extends BaseComponent {
 
 			this.toggleEditor(editor, toggle, this._data.collapsed);
 
-			listen(toggle, 'click', () => {
+			this.listen(toggle, 'click', () => {
 				this.toggleEditor(editor, toggle, !this._data.collapsed);
 			});
 
-			listen(copy, 'click', () => {
+			this.listen(copy, 'click', () => {
 				const collection =
 					this.closest<ComponentCollectionFormComponent>(
 						ComponentCollectionFormComponent.TAG_NAME
@@ -191,13 +193,13 @@ export class ComponentEditorComponent extends BaseComponent {
 					.fireOnReady();
 			});
 
-			listen(rename, 'click', () => {
+			this.listen(rename, 'click', () => {
 				this.setName((name) => {
 					nameBinding.value = name;
 				});
 			});
 
-			listen(remove, 'click', async () => {
+			this.listen(remove, 'click', async () => {
 				if (
 					await confirm(
 						`${App.text('componentConfirmRemoval')} (${this._data.name})`
@@ -284,7 +286,7 @@ export class ComponentEditorComponent extends BaseComponent {
 		button.setAttribute('disabled', '');
 		modal.open();
 
-		listen(
+		modal.listen(
 			input,
 			'input paste cut',
 			debounce(() => {
@@ -296,7 +298,7 @@ export class ComponentEditorComponent extends BaseComponent {
 			}, 100)
 		);
 
-		listen(button, 'click', () => {
+		modal.listen(button, 'click', () => {
 			const name = input.value;
 
 			if (name.length) {
@@ -305,7 +307,7 @@ export class ComponentEditorComponent extends BaseComponent {
 			}
 		});
 
-		listen(modal, EventName.modalClose, () => {
+		modal.listen(modal, EventName.modalClose, () => {
 			if (input.value.length == 0) {
 				this.remove();
 			}

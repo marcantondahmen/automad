@@ -42,7 +42,6 @@ import {
 	App,
 	Attr,
 	PageController,
-	listen,
 } from '@/admin/core';
 import { KeyValueMap } from '@/admin/types';
 import { BaseBreadcrumbsComponent } from './BaseBreadcrumbs';

@@ -39,7 +39,6 @@ import {
 	createField,
 	EventName,
 	FieldTag,
-	listen,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
@@ -57,11 +56,9 @@ class CacheEnableComponent extends BaseComponent {
 			initial: App.system.cache.enabled,
 		});
 
-		this.addListener(
-			listen(window, EventName.appStateChange, () => {
-				cacheEnabled.value = App.system.cache.enabled;
-			})
-		);
+		this.listen(window, EventName.appStateChange, () => {
+			cacheEnabled.value = App.system.cache.enabled;
+		});
 
 		createField(
 			FieldTag.toggleLarge,

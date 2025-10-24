@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { listen, notifySuccess } from '@/admin/core';
+import { notifySuccess } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -57,7 +57,7 @@ class CopyComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(this, 'click', async () => {
+		this.listen(this, 'click', async () => {
 			await navigator.clipboard.writeText(this.elementAttributes.value);
 			notifySuccess(this.elementAttributes.value);
 		});

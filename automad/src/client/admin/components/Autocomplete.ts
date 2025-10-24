@@ -41,7 +41,6 @@ import {
 import {
 	App,
 	create,
-	listen,
 	debounce,
 	html,
 	EventName,
@@ -157,9 +156,7 @@ export class AutocompleteComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(...this.elementClasses);
 
-		this.addListener(
-			listen(window, EventName.appStateChange, this.init.bind(this))
-		);
+		this.listen(window, EventName.appStateChange, this.init.bind(this));
 
 		this.init();
 	}
@@ -341,11 +338,17 @@ export class AutocompleteComponent extends BaseComponent {
 	 * Register events for the input field.
 	 */
 	protected registerInputEvents(): void {
-		listen(this.input, 'keydown', this.onKeyDownEvent.bind(this));
-		listen(this.input, 'keyup', debounce(this.onKeyUpEvent.bind(this)));
-		listen(this.input, 'focus', this.open.bind(this));
+		this.listen(this.input, 'keydown', this.onKeyDownEvent.bind(this));
 
-		listen(document, 'click', (event: MouseEvent) => {
+		this.listen(
+			this.input,
+			'keyup',
+			debounce(this.onKeyUpEvent.bind(this))
+		);
+
+		this.listen(this.input, 'focus', this.open.bind(this));
+
+		this.listen(document, 'click', (event: MouseEvent) => {
 			if (!this.contains(event.target as Element)) {
 				this.close();
 			}
@@ -356,7 +359,7 @@ export class AutocompleteComponent extends BaseComponent {
 	 * Register events for the dropdown.
 	 */
 	protected registerDropdownEvents(): void {
-		listen(
+		this.listen(
 			this.dropdown,
 			'mouseover',
 			(event: MouseEvent) => {
@@ -365,7 +368,7 @@ export class AutocompleteComponent extends BaseComponent {
 			`.${this.linkClass}`
 		);
 
-		listen(
+		this.listen(
 			this.dropdown,
 			'click',
 			(event: MouseEvent) => {

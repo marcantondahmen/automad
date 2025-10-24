@@ -53,6 +53,11 @@ import {
 	TextAlignLeftInline,
 	TextAlignRightInline,
 } from '@/admin/editor/inline/TextAlign';
+import {
+	removeDeleteComponents,
+	unknownBlockHandler,
+} from '@/admin/editor/utils';
+import { TeXInline } from '@/admin/editor/inline/TeX';
 
 /**
  * A wrapper component for EditorJS that is basically a DOM element that represents an EditorJS instance.
@@ -86,28 +91,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return The prepared data
 	 */
 	private prepareData(data: EditorOutputData): EditorOutputData {
-		return this.removeDeleteComponents(data);
-	}
-
-	/**
-	 * Remove shared component blocks that have been deleted.
-	 *
-	 * @param data
-	 * @return The filtered data
-	 */
-	private removeDeleteComponents(data: EditorOutputData): EditorOutputData {
-		const componentIds = App.components.map((component) => component.id);
-
-		return {
-			...data,
-			blocks:
-				data?.blocks?.filter((block) => {
-					return (
-						block.type != 'component' ||
-						componentIds.includes(block.data.id ?? '')
-					);
-				}) ?? [],
-		};
+		return removeDeleteComponents(data);
 	}
 
 	/**
@@ -183,6 +167,7 @@ export class EditorJSComponent extends BaseComponent {
 				'lineHeight',
 				'link',
 				'codeInline',
+				'texInline',
 				'underline',
 				'strikeThrough',
 				'color',
@@ -192,7 +177,16 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			onReady: (): void => {
 				this.onRender();
+
+				// Dispatch change directly after being ready
+				// in order to save blocks that have been modified
+				// by the unknownBlockHandler() function.
+				// Only save when there are blocks.
+				if (data?.blocks?.length) {
+					this.editor.blocks.getBlockByIndex(0).dispatchChange();
+				}
 			},
+			unknownBlockHandler,
 			...config,
 		});
 	}
@@ -211,6 +205,7 @@ export class EditorJSComponent extends BaseComponent {
 			italic: { class: ItalicInline },
 			link: { class: LinkInline },
 			codeInline: { class: CodeInline },
+			texInline: { class: TeXInline },
 			underline: { class: UnderlineInline },
 			strikeThrough: { class: StrikeThroughInline },
 			color: { class: ColorInline },
@@ -279,6 +274,17 @@ export class EditorJSComponent extends BaseComponent {
 		window.requestIdleCallback(() => {
 			new DragDrop(this);
 		});
+	}
+
+	/**
+	 * Clean up on diconnect.
+	 */
+	disconnectedCallback(): void {
+		try {
+			this.editor.destroy();
+		} catch {}
+
+		super.disconnectedCallback();
 	}
 }
 

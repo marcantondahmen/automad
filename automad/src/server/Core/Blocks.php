@@ -70,8 +70,8 @@ class Blocks {
 			return $str;
 		}
 
-		$assets = Asset::css('dist/blocks/main.bundle.css', false) .
-				  Asset::js('dist/blocks/main.bundle.js', false);
+		$assets = Asset::css('dist/build/blocks/index.css', false) .
+				  Asset::js('dist/build/blocks/index.js', false);
 
 		return Head::prepend($str, $assets);
 	}
@@ -84,6 +84,10 @@ class Blocks {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $data, Automad $Automad): string {
+		if (!isset($data['blocks'])) {
+			return '';
+		}
+
 		$isSection = self::$isRendering;
 
 		if (!$isSection) {
@@ -95,47 +99,40 @@ class Blocks {
 		$html = '';
 
 		foreach ($data['blocks'] as $block) {
-			try {
-				$blockIsFlexItem = false;
-				$stretched = false;
-				$width = '';
+			$blockIsFlexItem = false;
+			$stretched = false;
+			$width = '';
 
-				if (isset($block['tunes']['layout'])) {
-					/** @var bool */
-					$stretched = $block['tunes']['layout']['stretched'] ?? false;
-					$width = $block['tunes']['layout']['width'] ?? '';
+			if (isset($block['tunes']['layout'])) {
+				/** @var bool */
+				$stretched = $block['tunes']['layout']['stretched'] ?? false;
+				$width = $block['tunes']['layout']['width'] ?? '';
 
-					$blockIsFlexItem = ($width != '' && !$stretched);
-				}
-
-				if (!$flexOpen && $blockIsFlexItem) {
-					$html .= '<am-flex>';
-					$flexOpen = true;
-				}
-
-				if ($flexOpen && !$blockIsFlexItem) {
-					$html .= '</am-flex>';
-					$flexOpen = false;
-				}
-
-				$blockHtml = call_user_func_array(
-					'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
-					array($block, $Automad)
-				);
-
-				// Stretch block.
-				if ($stretched) {
-					$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
-				} elseif ($width != '') {
-					/** @var string */
-					$w = str_replace('/', '-', $width);
-					$blockHtml = "<am-$w>$blockHtml</am-$w>";
-				}
-
-				$html .= $blockHtml;
-			} catch (\Exception $e) {
-				continue;
+				$blockIsFlexItem = ($width != '' && !$stretched);
 			}
+
+			if (!$flexOpen && $blockIsFlexItem) {
+				$html .= '<am-flex>';
+				$flexOpen = true;
+			}
+
+			if ($flexOpen && !$blockIsFlexItem) {
+				$html .= '</am-flex>';
+				$flexOpen = false;
+			}
+
+			$blockHtml = self::generateBlockHtml($block, $Automad);
+
+			// Stretch block.
+			if ($stretched) {
+				$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
+			} elseif ($width != '') {
+				/** @var string */
+				$w = str_replace('/', '-', $width);
+				$blockHtml = "<am-$w>$blockHtml</am-$w>";
+			}
+
+			$html .= $blockHtml;
 		}
 
 		if ($flexOpen) {
@@ -147,5 +144,56 @@ class Blocks {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Generate HTML for a single block.
+	 *
+	 * @param BlockData $block
+	 * @param Automad $Automad
+	 * @return string
+	 */
+	private static function generateBlockHtml(array $block, Automad $Automad): string {
+		try {
+			return self::renderBlock($block, $Automad);
+		} catch (\TypeError $e) {
+			$block = self::unknownBlockHandler($block);
+
+			try {
+				return self::renderBlock($block, $Automad);
+			} catch (\Exception $e) {
+				return '';
+			}
+		} catch (\Exception $e) {
+			return '';
+		}
+	}
+
+	/**
+	 * Render a single block.
+	 *
+	 * @param array $block
+	 * @param Automad $Automad
+	 * @return string the rendered output
+	 */
+	private static function renderBlock(array $block, Automad $Automad): string {
+		return call_user_func_array(
+			'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::render',
+			array($block, $Automad)
+		);
+	}
+
+	/**
+	 * Handle unknown blocks.
+	 *
+	 * @param BlockData $block
+	 * @return BlockData
+	 */
+	private static function unknownBlockHandler(array $block): array {
+		if ($block['type'] == 'section') {
+			$block['type'] = 'layoutSection';
+		}
+
+		return $block;
 	}
 }

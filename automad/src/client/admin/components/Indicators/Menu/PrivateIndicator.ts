@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, create, CSS, EventName, getPageURL, listen } from '@/admin/core';
+import { App, create, CSS, EventName, getPageURL } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -47,9 +47,7 @@ class PrivateIndicatorComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(CSS.privacyIndicator);
 
-		this.addListener(
-			listen(window, EventName.appStateChange, this.render.bind(this))
-		);
+		this.listen(window, EventName.appStateChange, this.render.bind(this));
 
 		this.render();
 	}

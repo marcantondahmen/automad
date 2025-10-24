@@ -32,6 +32,10 @@
  * Licensed under the MIT license.
  */
 
+html:not(.am-ui) {
+	color-scheme: light dark;
+}
+
 .am-ui {
 	html&,
 	& body {
@@ -46,6 +50,8 @@
 	}
 
 	html& {
+		interpolate-size: allow-keywords;
+
 		@media screen and (min-width: 960px) {
 			margin-right: ~'calc((100vw - 100%) * -1)';
 			margin-left: 0;

@@ -80,6 +80,8 @@ class ImageSlideshow extends AbstractBlock {
 		);
 
 		$imageSets = array();
+
+		// The $first image is used for the Str::findFirstImage() method.
 		$first = $block['data']['files'][0];
 
 		foreach ($data['files'] ?? array() as $file) {

@@ -43,7 +43,6 @@ import {
 	EventName,
 	getPageURL,
 	html,
-	listen,
 	query,
 } from '@/admin/core';
 import { createSortableTreeNodes, treeStyles } from '@/admin/core/tree';
@@ -90,6 +89,11 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
  */
 class PageSelectTreeComponent extends BaseComponent {
 	/**
+	 * The sortable tree instance.
+	 */
+	private tree: SortableTree;
+
+	/**
 	 * True if the current page should be excluded.
 	 */
 	private get hideCurrent(): boolean {
@@ -100,9 +104,7 @@ class PageSelectTreeComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.addListener(
-			listen(window, EventName.appStateChange, this.init.bind(this))
-		);
+		this.listen(window, EventName.appStateChange, this.init.bind(this));
 
 		this.init();
 	}
@@ -111,6 +113,7 @@ class PageSelectTreeComponent extends BaseComponent {
 	 * Init the navTree.
 	 */
 	private init(): void {
+		this.tree?.destroy();
 		this.innerHTML = '';
 
 		const pages: PageMetaData[] = this.filterPages(
@@ -119,7 +122,7 @@ class PageSelectTreeComponent extends BaseComponent {
 
 		const nodes = createSortableTreeNodes(pages);
 
-		const tree = new SortableTree({
+		this.tree = new SortableTree({
 			nodes,
 			element: this,
 			initCollapseLevel: 1,
@@ -129,14 +132,15 @@ class PageSelectTreeComponent extends BaseComponent {
 		});
 
 		const currentNode =
-			tree.findNode('url', getPageURL()) || tree.findNode('url', '/');
+			this.tree.findNode('url', getPageURL()) ||
+			this.tree.findNode('url', '/');
 
 		currentNode.reveal();
 
 		const modal = this.closest<ModalComponent>(ModalComponent.TAG_NAME);
 
 		if (modal) {
-			listen(modal, EventName.modalOpen, () => {
+			this.listen(modal, EventName.modalOpen, () => {
 				query<HTMLInputElement>('input', currentNode.label).checked =
 					true;
 			});
@@ -160,6 +164,14 @@ class PageSelectTreeComponent extends BaseComponent {
 		}
 
 		return pages;
+	}
+
+	/**
+	 * Remove all event listeners and observers when disconnecting.
+	 */
+	disconnectedCallback(): void {
+		this.tree?.destroy();
+		super.disconnectedCallback();
 	}
 }
 

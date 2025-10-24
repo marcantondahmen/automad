@@ -33,7 +33,6 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { listen } from '@/admin/core';
 import { SidebarComponent } from './Sidebar';
 
 /**
@@ -46,11 +45,9 @@ class SidebarToggleComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.addListener(
-			listen(this, 'click', () => {
-				SidebarComponent.toggle();
-			})
-		);
+		this.listen(this, 'click', () => {
+			SidebarComponent.toggle();
+		});
 	}
 }
 

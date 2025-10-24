@@ -126,6 +126,10 @@ export const enum CSS {
 
 	dropdownArrow = 'am-e-dropdown-arrow',
 
+	editorCallout = 'am-c-ed-bl-callout',
+	editorCalloutTitle = 'am-c-ed-bl-callout__title',
+	editorCalloutText = 'am-c-ed-bl-callout__text',
+
 	editorBlockButtons = 'am-c-ed-bl-buttons',
 	editorBlockButtonsEdit = 'am-c-ed-bl-buttons__edit',
 	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
@@ -147,24 +151,30 @@ export const enum CSS {
 	editorBlockQuoteText = 'am-c-ed-bl-quote__text',
 	editorBlockQuoteCaption = 'am-c-ed-bl-quote__caption',
 
-	editorBlockSection = 'am-c-ed-bl-section',
-	editorBlockSectionLabel = 'am-c-ed-bl-section__label',
-	editorBlockSectionToolbar = 'am-c-ed-bl-section__toolbar',
-	editorBlockSectionToolbarSection = 'am-c-ed-bl-section__toolbar-section',
-	editorBlockSectionEditor = 'am-c-ed-bl-section__editor',
-	editorBlockSectionRadios = 'am-c-ed-bl-section__radios',
-	editorBlockSectionRadio = 'am-c-ed-bl-section__radio',
-	editorBlockSectionRadioActive = 'am-c-ed-bl-section__radio--active',
+	editorBlockCollapsibleSection = 'am-c-ed-bl-collapsible-section',
+	editorBlockCollapsibleSectionLabel = 'am-c-ed-bl-collapsible-section__label',
+	editorBlockCollapsibleSectionEditor = 'am-c-ed-bl-collapsible-section__editor',
+
+	editorBlockLayoutSection = 'am-c-ed-bl-layout-section',
+	editorBlockLayoutSectionLabel = 'am-c-ed-bl-layout-section__label',
+	editorBlockLayoutSectionToolbar = 'am-c-ed-bl-layout-section__toolbar',
+	editorBlockLayoutSectionToolbarSection = 'am-c-ed-bl-layout-section__toolbar-section',
+	editorBlockLayoutSectionEditor = 'am-c-ed-bl-layout-section__editor',
+	editorBlockLayoutSectionRadios = 'am-c-ed-bl-layout-section__radios',
+	editorBlockLayoutSectionRadio = 'am-c-ed-bl-layout-section__radio',
+	editorBlockLayoutSectionRadioActive = 'am-c-ed-bl-layout-section__radio--active',
 
 	editorBlockVideo = 'am-c-ed-bl-video',
 	editorBlockVideoList = 'am-c-ed-bl-video__list',
 	editorBlockVideoListItem = 'am-c-ed-bl-video__list-item',
 
+	editorBlockTex = 'am-c-ed-bl-tex',
+	editorBlockTexReadOnly = 'am-c-ed-bl-tex--readonly',
+	editorBlockTexPlaceholder = 'am-c-ed-bl-tex--placeholder',
+
 	editorTunesLayout = 'am-c-ed-tu-layout',
 	editorTunesLayoutOption = 'am-c-ed-tu-layout__option',
 	editorTunesLayoutOptionActive = 'am-c-ed-tu-layout__option--active',
-
-	editorPopoverForm = 'am-c-ed-popover__form',
 
 	editorStyleBase = 'am-style',
 

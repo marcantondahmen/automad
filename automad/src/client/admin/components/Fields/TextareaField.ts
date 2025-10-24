@@ -32,14 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	create,
-	CSS,
-	debounce,
-	FieldTag,
-	initTabHandler,
-	listen,
-} from '@/admin/core';
+import { create, CSS, debounce, FieldTag, initTabHandler } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -63,7 +56,7 @@ class TextareaFieldComponent extends BaseFieldComponent {
 		textarea.textContent = value;
 
 		this.initAutoResize(textarea);
-		initTabHandler(textarea);
+		this.listeners.push(initTabHandler(textarea));
 	}
 
 	/**
@@ -76,8 +69,8 @@ class TextareaFieldComponent extends BaseFieldComponent {
 			this.fitContent(textarea);
 		}, 50);
 
-		listen(textarea, 'keyup focus focusout drop paste', fit);
-		this.addListener(listen(window, 'resize', fit));
+		this.listen(textarea, 'keyup focus focusout drop paste', fit);
+		this.listen(window, 'resize', fit);
 
 		fit();
 	}

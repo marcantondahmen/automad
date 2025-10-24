@@ -42,7 +42,6 @@ import {
 	FieldTag,
 	fire,
 	html,
-	listen,
 	resizeImageUrl,
 } from '@/admin/core';
 import { ImgComponent } from '../Img';
@@ -87,8 +86,8 @@ class ImageFieldComponent extends BaseFieldComponent {
 			);
 		};
 
-		listen(button, 'click', createModal.bind(this));
-		listen(preview, 'click', createModal.bind(this));
+		this.listen(button, 'click', createModal.bind(this));
+		this.listen(preview, 'click', createModal.bind(this));
 	}
 
 	/**

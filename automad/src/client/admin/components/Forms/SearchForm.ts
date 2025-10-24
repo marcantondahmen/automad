@@ -43,7 +43,6 @@ import {
 	collectFieldData,
 	getSearchParam,
 	html,
-	listen,
 	queryAll,
 	requestAPI,
 	Route,
@@ -197,8 +196,8 @@ export class SearchFormComponent extends BaseComponent {
 			});
 		};
 
-		listen(searchBar, 'input', performSearch, 'input');
-		listen(replaceButton, 'click', performReplace);
+		this.listen(searchBar, 'input', performSearch, 'input');
+		this.listen(replaceButton, 'click', performReplace);
 
 		const toggle = (state: boolean) => {
 			queryAll<HTMLInputElement>('input', resultsContainer).forEach(
@@ -209,11 +208,11 @@ export class SearchFormComponent extends BaseComponent {
 			);
 		};
 
-		listen(checkAll, 'click', () => {
+		this.listen(checkAll, 'click', () => {
 			toggle(true);
 		});
 
-		listen(unCheckAll, 'click', () => {
+		this.listen(unCheckAll, 'click', () => {
 			toggle(false);
 		});
 

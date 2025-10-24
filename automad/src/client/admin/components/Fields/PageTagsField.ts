@@ -44,6 +44,11 @@ import { BaseFieldComponent } from './BaseField';
  */
 class PageTagsFieldComponent extends BaseFieldComponent {
 	/**
+	 * The Tagify instance.
+	 */
+	private tagify: Tagify;
+
+	/**
 	 * Create the input field.
 	 *
 	 * @see {@link tagify https://github.com/yairEO/tagify}
@@ -62,7 +67,7 @@ class PageTagsFieldComponent extends BaseFieldComponent {
 
 		textarea.innerHTML = value;
 
-		const tagify = new Tagify(textarea, {
+		this.tagify = new Tagify(textarea, {
 			whitelist: App.tags,
 			originalInputValueFormat: (tags) =>
 				tags.map((item) => item.value).join(', '),
@@ -74,7 +79,7 @@ class PageTagsFieldComponent extends BaseFieldComponent {
 			},
 		});
 
-		tagify.on('change', (event: Event) => {
+		this.listen(textarea, 'change', () => {
 			const form: PageDataFormComponent =
 				this.closest('am-page-data-form');
 
@@ -82,7 +87,8 @@ class PageTagsFieldComponent extends BaseFieldComponent {
 		});
 
 		// Update global tags in the app state.
-		tagify.on(
+		this.listen(
+			textarea,
 			'change',
 			debounce(() => {
 				const state = State.getInstance();
@@ -96,6 +102,15 @@ class PageTagsFieldComponent extends BaseFieldComponent {
 				);
 			}, 500)
 		);
+	}
+
+	/**
+	 * Destroy Tagify and remove all listeners on disconnect.
+	 */
+	disconnectedCallback(): void {
+		this.tagify.destroy();
+
+		super.disconnectedCallback();
 	}
 }
 

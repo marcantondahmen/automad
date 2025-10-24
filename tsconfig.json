@@ -3,11 +3,13 @@
 		"allowSyntheticDefaultImports": true,
 		"allowJs": true,
 		"checkJs": false,
-		"moduleResolution": "node",
 		"noImplicitAny": true,
 		"preserveConstEnums": false,
 		"resolveJsonModule": true,
-		"target": "es6",
+		"target": "es2020",
+		"module": "esnext",
+		"moduleResolution": "nodenext",
+		"esModuleInterop": true,
 		"outDir": "dist",
 		"paths": {
 			"@/*": ["./automad/src/client/*"]

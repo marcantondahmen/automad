@@ -12,7 +12,7 @@ class SelectionTest extends TestCase {
 	public function dataForTestFilterBreadcrumbsIsEqual() {
 		return array(
 			array('en', '/en/page/subpage', array('/en', '/en/page', '/en/page/subpage')),
-			array('de', '/de/page',array('/de', '/de/page'))
+			array('de', '/de/page', array('/de', '/de/page'))
 		);
 	}
 

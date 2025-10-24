@@ -53,6 +53,7 @@ import {
 	FieldSectionCollection,
 	InputElement,
 	KeyValueMap,
+	Listener,
 } from '@/admin/types';
 
 /**
@@ -614,8 +615,8 @@ export const setFormData = (
  *
  * @param textarea
  */
-export const initTabHandler = (textarea: HTMLTextAreaElement) => {
-	listen(textarea, 'keydown', (event: KeyboardEvent) => {
+export const initTabHandler = (textarea: HTMLTextAreaElement): Listener => {
+	return listen(textarea, 'keydown', (event: KeyboardEvent) => {
 		if (event.keyCode === 9) {
 			event.preventDefault();
 			event.stopPropagation();

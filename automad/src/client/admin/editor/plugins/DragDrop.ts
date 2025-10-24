@@ -33,7 +33,7 @@
  */
 
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { listen, query } from '@/admin/core';
+import { query } from '@/admin/core';
 import EditorJS, { BlockAPI } from 'automad-editorjs';
 import { insertBlock } from '../utils';
 
@@ -125,57 +125,67 @@ export class DragDrop {
 			this.component
 		);
 
-		handle.setAttribute('draggable', 'true');
+		if (handle) {
+			handle.setAttribute('draggable', 'true');
 
-		listen(handle, 'dragstart', () => {
-			const block = this.getCurrentBlock();
+			this.component.listen(handle, 'dragstart', () => {
+				const block = this.getCurrentBlock();
 
-			DragDrop.CURRENT = {
-				block,
-				index: getBlockIndex(block.holder),
-			};
-		});
+				DragDrop.CURRENT = {
+					block,
+					index: getBlockIndex(block.holder),
+				};
+			});
 
-		listen(handle, 'drag', () => {
-			this.editor.toolbar.close();
-		});
+			this.component.listen(handle, 'drag', () => {
+				this.editor.toolbar.close();
+			});
+		}
 
-		listen(this.component, 'dragover', (event: DragEvent) => {
-			event.stopImmediatePropagation();
+		this.component.listen(
+			this.component,
+			'dragover',
+			(event: DragEvent) => {
+				event.stopImmediatePropagation();
 
-			const target = event.target as HTMLElement;
-			const targetBlock = target.closest<HTMLElement>('.ce-block');
+				const target = event.target as HTMLElement;
+				const targetBlock = target.closest<HTMLElement>('.ce-block');
 
-			if (targetBlock) {
-				DragDrop.TARGET = targetBlock;
+				if (targetBlock) {
+					DragDrop.TARGET = targetBlock;
+					setSelection(DragDrop.TARGET);
+
+					return;
+				}
+
+				const targetEditor = target.closest<EditorJSComponent>(
+					EditorJSComponent.TAG_NAME
+				);
+
+				if (!targetEditor) {
+					return;
+				}
+
+				const firstBlock = query<HTMLElement>('.ce-block');
+
+				if (!firstBlock) {
+					return;
+				}
+
+				DragDrop.TARGET = firstBlock;
 				setSelection(DragDrop.TARGET);
-
-				return;
 			}
+		);
 
-			const targetEditor = target.closest<EditorJSComponent>(
-				EditorJSComponent.TAG_NAME
-			);
+		this.component.listen(
+			this.component,
+			'drop',
+			async (event: DragEvent) => {
+				event.stopImmediatePropagation();
 
-			if (!targetEditor) {
-				return;
+				await DragDrop.move();
 			}
-
-			const firstBlock = query<HTMLElement>('.ce-block');
-
-			if (!firstBlock) {
-				return;
-			}
-
-			DragDrop.TARGET = firstBlock;
-			setSelection(DragDrop.TARGET);
-		});
-
-		listen(this.component, 'drop', async (event: DragEvent) => {
-			event.stopImmediatePropagation();
-
-			await DragDrop.move();
-		});
+		);
 	}
 
 	/**
@@ -217,20 +227,33 @@ export class DragDrop {
 
 		if (sourceComponent === targetComponent) {
 			sourceComponent.editor.blocks.move(targetIndex, sourceIndex);
+
+			await DragDrop.refresh(sourceComponent.editor);
+
 			sourceComponent.editor.caret.setToBlock(targetIndex, 'end');
 		} else {
-			sourceComponent.editor.blocks.delete(sourceIndex);
-
-			insertBlock(
+			await insertBlock(
 				DragDrop.CURRENT.block,
 				targetComponent.editor,
 				targetIndex
 			);
 
+			sourceComponent.editor.blocks.delete(sourceIndex);
 			targetComponent.editor.caret.setToBlock(targetIndex, 'end');
 		}
 
 		DragDrop.CURRENT = null;
 		DragDrop.TARGET = null;
+	}
+
+	/**
+	 * Re-render editor after a successful move.
+	 *
+	 * @param editor
+	 */
+	private static async refresh(editor: EditorJS): Promise<void> {
+		const saved = await editor.save();
+
+		await editor.render(saved);
 	}
 }

@@ -32,7 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { create } from '@/admin/core';
+import { create, listen } from '@/admin/core';
+import { Listener } from '@/admin/types';
 import { API, InlineToolConstructorOptions } from 'automad-editorjs';
 
 /**
@@ -79,6 +80,11 @@ export abstract class BaseInline {
 	private button: HTMLElement;
 
 	/**
+	 * Listeners that will be removed on destroy.
+	 */
+	protected listeners: Listener[] = [];
+
+	/**
 	 * The state getter.
 	 */
 	get state() {
@@ -111,6 +117,32 @@ export abstract class BaseInline {
 			null,
 			this.icon
 		);
+	}
+
+	/**
+	 * Add listener.
+	 *
+	 * @param listener
+	 */
+	protected addListener(listener: Listener): void {
+		this.listeners.push(listener);
+	}
+
+	/**
+	 * Create a listener that will be removed on destruction.
+	 *
+	 * @param element - the element to register the event listeners to
+	 * @param eventNamesString - a string of one or more event names separated by a space
+	 * @param callback - the callback
+	 * @param [selector] - the sector to be used as filter
+	 */
+	protected listen(
+		element: HTMLElement | Document | Window,
+		eventNamesString: string,
+		callback: (event: Event) => void,
+		selector: string = ''
+	): void {
+		this.addListener(listen(element, eventNamesString, callback, selector));
 	}
 
 	/**
@@ -218,4 +250,15 @@ export abstract class BaseInline {
 	 * Runs when menu is hidden.
 	 */
 	protected hideActions(): void {}
+
+	/**
+	 * Cleanup and remove listeners.
+	 */
+	clear(): void {
+		this.listeners.forEach((listener) => {
+			listener.remove();
+		});
+
+		this.listeners = [];
+	}
 }

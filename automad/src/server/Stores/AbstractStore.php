@@ -139,6 +139,7 @@ abstract class AbstractStore {
 		$draft = $this->getState(PublicationState::DRAFT);
 		$draft[Fields::TIME_LAST_PUBLISHED] = date(self::DATE_FORMAT);
 
+		$this->data = array();
 		$this->setState(PublicationState::DRAFT, array());
 		$this->setState(PublicationState::PUBLISHED, $draft);
 
@@ -151,6 +152,9 @@ abstract class AbstractStore {
 	 * @return bool
 	 */
 	public function save(): bool {
+		$state = $this->isPublished() ? PublicationState::PUBLISHED : PublicationState::DRAFT;
+		$this->data[$state->value][':automadVersion'] = AM_VERSION;
+
 		return FileSystem::writeJson($this->file, $this->data);
 	}
 

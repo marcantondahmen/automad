@@ -76,7 +76,7 @@ class Asset {
 	 * @return string the script tag
 	 */
 	public static function js(string $file, bool $addBaseUrl = true): string {
-		return '<script src="' . self::link($file, $addBaseUrl) . '" type="text/javascript"></script>';
+		return '<script src="' . self::link($file, $addBaseUrl) . '" type="module"></script>';
 	}
 
 	/**

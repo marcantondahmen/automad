@@ -38,7 +38,6 @@ import {
 	CSS,
 	EventName,
 	html,
-	listen,
 	notifyError,
 	PackageManagerController,
 	requestAPI,
@@ -107,9 +106,7 @@ class PackageListComponent extends BaseComponent {
 
 		this.init();
 
-		this.addListener(
-			listen(window, EventName.packagesChange, this.init.bind(this))
-		);
+		this.listen(window, EventName.packagesChange, this.init.bind(this));
 	}
 
 	/**

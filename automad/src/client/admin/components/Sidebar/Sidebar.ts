@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { CSS, debounce, listen } from '@/admin/core';
+import { CSS, debounce } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -90,9 +90,7 @@ export class SidebarComponent extends BaseComponent {
 		this.setHeight();
 		setTimeout(this.setHeight.bind(this), 0);
 
-		this.addListener(
-			listen(window, 'resize', debounce(this.setHeight.bind(this), 200))
-		);
+		this.listen(window, 'resize', debounce(this.setHeight.bind(this), 200));
 	}
 
 	/**

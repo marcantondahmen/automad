@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { create, CSS, FieldTag, fire, listen } from '@/admin/core';
+import { create, CSS, FieldTag, fire } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -60,12 +60,12 @@ export class ColorFieldComponent extends BaseFieldComponent {
 			create('span', [CSS.inputComboColor], {}, combo)
 		);
 
-		listen(picker, 'change', () => {
+		this.listen(picker, 'change', () => {
 			input.value = picker.value;
 			fire('change', input);
 		});
 
-		listen(input, 'keyup change', () => {
+		this.listen(input, 'keyup change', () => {
 			picker.value = input.value;
 		});
 	}
