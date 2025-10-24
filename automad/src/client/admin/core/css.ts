@@ -176,8 +176,6 @@ export const enum CSS {
 	editorTunesLayoutOption = 'am-c-ed-tu-layout__option',
 	editorTunesLayoutOptionActive = 'am-c-ed-tu-layout__option--active',
 
-	editorPopoverForm = 'am-c-ed-popover__form',
-
 	editorStyleBase = 'am-style',
 
 	feedFieldSelect = 'am-c-feed-field-select',
