@@ -1,8 +1,38 @@
 # Changelog
 
-## [v2.0.0-alpha.46](https://github.com/marcantondahmen/automad/commit/b0116ebc89e99740cead8aa8ce11060c8d4415a2)
+## [v2.0.0-alpha.47](https://github.com/marcantondahmen/automad/commit/55ed3bd43f53357740fe15e8d7e345fbd1d2c2c2)
 
-Tue, 23 Sep 2025 19:02:45 +0200
+Fri, 24 Oct 2025 19:02:59 +0200
+
+### New Features
+
+- add KaTeX block type and support for inline KaTeX ([28d1c7323](https://github.com/marcantondahmen/automad/commit/28d1c7323dec0d700a307a073f89e268debc6b88))
+- add callout block type ([a7ff731af](https://github.com/marcantondahmen/automad/commit/a7ff731af340d0947f5b63e89b5ff9ebc46d8d8a))
+- add collapsible section block type that can also be used as an accordion ([df9a358bf](https://github.com/marcantondahmen/automad/commit/df9a358bfbb800250c5170757b387cb90382487a))
+- add loading animations for page duplication and switching templates ([d96ce5136](https://github.com/marcantondahmen/automad/commit/d96ce5136e13d47379af3a2d6d57a120e58a5af6))
+- add option to add an alt attribute to an image block ([3cef0e9e7](https://github.com/marcantondahmen/automad/commit/3cef0e9e77de18939a79c2b4142a877fd6156ff8))
+- add option to set a document language when language routing is disabled ([a1afd64ec](https://github.com/marcantondahmen/automad/commit/a1afd64ec593b204492a337085464ad660c40b7c))
+- improve default block styles ([ebdba3db7](https://github.com/marcantondahmen/automad/commit/ebdba3db736403098c9b248b8672ef21b52a84f7))
+- improve overscroll behavior of the dashboard sidebar ([b450947ac](https://github.com/marcantondahmen/automad/commit/b450947acd30b22f16e21767c05ae57b6a9e11af))
+- migrate webpack configuration to esbuild for building esm bundles ([a4da35ef1](https://github.com/marcantondahmen/automad/commit/a4da35ef1e5a15b63aeae8ec6c1a7bf08633a16c))
+- show loading cursor also during async fetches ([fcee7a6b7](https://github.com/marcantondahmen/automad/commit/fcee7a6b72bf9c17091dd448fd582dd26ef073d5))
+- store automad version in page data instead of editor data ([d0c295a63](https://github.com/marcantondahmen/automad/commit/d0c295a632fd7691268b93b93918f55803972afb))
+- update automad-editorjs ([42df278b4](https://github.com/marcantondahmen/automad/commit/42df278b460b2c87ccda2e84c6fa7cd969caddd3))
+- update dashboard color schemes ([68c87b912](https://github.com/marcantondahmen/automad/commit/68c87b9125607aacd2d03bc512c4a6c53a5899ce))
+- update sortable tree package ([227c71e22](https://github.com/marcantondahmen/automad/commit/227c71e228001f5339f372218cdaf873c869e70c))
+
+### Bugfixes
+
+- correctly destroy sortable tree instances ([df2e6ae03](https://github.com/marcantondahmen/automad/commit/df2e6ae03c86f35e99da8b1e4ee4ca318c796d98))
+- fix block editor content styles ([ab2c09d9f](https://github.com/marcantondahmen/automad/commit/ab2c09d9f1bc81178d720b7525200ca0177451fd))
+- fix double encoding of ampersand characters in meta tags ([b5c9b3183](https://github.com/marcantondahmen/automad/commit/b5c9b31837e503163c213e346886c890d27edf3a))
+- fix line breaks in table block ([e5a699f67](https://github.com/marcantondahmen/automad/commit/e5a699f67d1f9ac2d38ecb1ad93722bdf89d2d27))
+- fix tagify events ([df9944495](https://github.com/marcantondahmen/automad/commit/df994449575805c2d916a68d29d671b8f540ad7c))
+- improve removal of event listeners on route change ([a72a80f9f](https://github.com/marcantondahmen/automad/commit/a72a80f9ffaa0866acd62bb08ae01fea2d807c23))
+
+## [v2.0.0-alpha.46](https://github.com/marcantondahmen/automad/commit/dfe8a83d3e2f108dcd1b9fbb503371d4060c4839)
+
+Tue, 23 Sep 2025 19:07:13 +0200
 
 ### Bugfixes
 
@@ -687,11 +717,3 @@ Sat, 2 Apr 2022 23:36:28 +0200
 
 - **console**: fix console command error ([3e3682a67](https://github.com/marcantondahmen/automad/commit/3e3682a678bc395ce898b4eb8d88867a7994d8c3))
 - fix PHP 8.1 compatibility issues ([1c2a755da](https://github.com/marcantondahmen/automad/commit/1c2a755da0d83285bb98c017a818affc031104ab))
-
-## [v1.10.5](https://github.com/marcantondahmen/automad/commit/19a36ea95e3b412db1e2ce85f7b357be2e836160)
-
-Sat, 2 Apr 2022 21:48:39 +0200
-
-### Bugfixes
-
-- **ui**: fix messenger error when returning null ([ae1a51d6a](https://github.com/marcantondahmen/automad/commit/ae1a51d6ab5489d8dd37f31c287f4bdda8f59c94))
