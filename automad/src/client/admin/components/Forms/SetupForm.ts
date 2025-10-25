@@ -52,7 +52,7 @@ export class SetupFormComponent extends FormComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback(): void {
+	protected init(): void {
 		this.renderForm();
 	}
 
@@ -78,8 +78,6 @@ export class SetupFormComponent extends FormComponent {
 				download: data.filename,
 			}).click();
 		}
-
-		super.processResponse(response);
 	}
 
 	/**

@@ -214,16 +214,9 @@ export class FormComponent extends BaseComponent {
 	/**
 	 * The form constructor.
 	 */
-	constructor() {
-		super();
-
+	connectedCallback(): void {
 		this.init();
-	}
 
-	/**
-	 * Initialize the form.
-	 */
-	protected init(): void {
 		if (this.initSelf) {
 			this.submit(true);
 		}
@@ -257,6 +250,12 @@ export class FormComponent extends BaseComponent {
 		this.disableSubmitButtons();
 		this.watchChanges();
 	}
+
+	/**
+	 * A custom init method that can be used to extend
+	 * the basic form functionality in a derived class.
+	 */
+	protected init(): void {}
 
 	/**
 	 * Disable submit button for watched forms.
@@ -344,7 +343,7 @@ export class FormComponent extends BaseComponent {
 				this,
 				this.parallel,
 				async (data: KeyValueMap) => {
-					await this.processResponse(data);
+					await this.baseProcessResponse(data);
 
 					if (this.hasAttribute(Attr.event)) {
 						fire(this.getAttribute(Attr.event));
@@ -365,12 +364,21 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
+	 * A custom method the can extend the form functionality for processinf responses
+	 * in a derived form component.
+	 *
+	 * @param response
+	 * @async
+	 */
+	protected async processResponse(response: KeyValueMap): Promise<void> {}
+
+	/**
 	 * Process the response that is received after submitting the form.
 	 *
 	 * @param response
 	 * @async
 	 */
-	protected async processResponse(response: KeyValueMap): Promise<void> {
+	private async baseProcessResponse(response: KeyValueMap): Promise<void> {
 		const { redirect, reload, error, success, debug } = response;
 
 		// Note that empty strings can be used to just soft-reload the dashboard.
@@ -415,6 +423,8 @@ export class FormComponent extends BaseComponent {
 			this.disableSubmitButtons();
 			this.parentModal?.close();
 		}
+
+		await this.processResponse(response);
 	}
 
 	/**

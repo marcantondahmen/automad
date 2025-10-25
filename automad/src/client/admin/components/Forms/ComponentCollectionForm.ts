@@ -52,6 +52,11 @@ import Sortable from 'sortablejs';
 
 export const newComponentButtonClass = 'am-new-component-button';
 
+/**
+ * The component editor form component.
+ *
+ * @extends FormComponent
+ */
 export class ComponentCollectionFormComponent extends FormComponent {
 	/**
 	 * The tag name.
@@ -126,24 +131,6 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	}
 
 	/**
-	 * The function that is called when the form is connected.
-	 */
-	connectedCallback(): void {
-		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
-
-		queryAll(`.${newComponentButtonClass}`).forEach((button) => {
-			this.listen(button, 'click', () => {
-				this.add({
-					id: uniqueId(),
-					name: '',
-					blocks: [],
-					collapsed: false,
-				});
-			});
-		});
-	}
-
-	/**
 	 * Add a component.
 	 *
 	 * @param data
@@ -173,7 +160,18 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	 * Initialize the form.
 	 */
 	protected init(): void {
-		super.init();
+		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
+
+		queryAll(`.${newComponentButtonClass}`).forEach((button) => {
+			this.listen(button, 'click', () => {
+				this.add({
+					id: uniqueId(),
+					name: '',
+					blocks: [],
+					collapsed: false,
+				});
+			});
+		});
 
 		this.listen(window, EventName.contentPublished, () => {
 			this.fetchTime = Math.ceil(new Date().getTime() / 1000);
@@ -187,8 +185,6 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		await super.processResponse(response);
-
 		if (response.data?.components) {
 			this.sortable?.destroy();
 			this.innerHTML = '';

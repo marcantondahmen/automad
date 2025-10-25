@@ -150,8 +150,6 @@ export class PageDataFormComponent extends FormComponent {
 	protected init(): void {
 		this.sections = createFieldSections(this);
 
-		super.init();
-
 		this.listen(window, EventName.contentPublished, () => {
 			if (!this.bindings) {
 				return;
@@ -373,8 +371,6 @@ export class PageDataFormComponent extends FormComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		await super.processResponse(response);
-
 		if (response.code === 404) {
 			this.pageNotFound();
 			getLogger().error('Page not found');

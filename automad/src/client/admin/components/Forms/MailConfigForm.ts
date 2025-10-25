@@ -51,6 +51,11 @@ import { FormComponent } from './Form';
 
 export const transportOptions = ['sendmail', 'smtp'] as const;
 
+/**
+ * The mail config component.
+ *
+ * @extends FormComponent
+ */
 export class MailConfigFormComponent extends FormComponent {
 	/**
 	 * Only enable submit button when input values have changed.
@@ -82,7 +87,7 @@ export class MailConfigFormComponent extends FormComponent {
 	/**
 	 * The function that is called when the form is connected.
 	 */
-	connectedCallback(): void {
+	protected init(): void {
 		this.config = App.system.mail;
 
 		this.listen(window, EventName.appStateChange, () => {

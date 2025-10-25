@@ -67,8 +67,6 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		super.processResponse(response);
-
 		if (!response.data) {
 			return;
 		}

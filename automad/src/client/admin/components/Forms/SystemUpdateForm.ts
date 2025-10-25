@@ -91,8 +91,6 @@ export class SystemUpdateFormComponent extends FormComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		super.processResponse(response);
-
 		if (this.progressModal) {
 			this.progressModal.close();
 		}
