@@ -9,8 +9,7 @@ import { dirname } from 'node:path';
 import path from 'path';
 import fs from 'fs';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const isDev = process.argv.includes('--dev');
 const outdir = path.join(__dirname, 'automad/dist/build');
 const year = new Date().getFullYear();
