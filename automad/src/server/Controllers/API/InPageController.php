@@ -69,7 +69,7 @@ class InPageController {
 		$Page = $Automad->getPage($context);
 
 		if (!$Page) {
-			return $Response->setError(Text::get('pageNotFoundError'));
+			return $Response->setError(Text::get('pageNotFoundError'))->setCode(404);
 		}
 
 		$ThemeCollection = new ThemeCollection();

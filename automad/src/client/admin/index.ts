@@ -82,7 +82,6 @@ import('./components/Forms/FileCollection/ListForm.js');
 import('./components/Forms/Publish/ComponentPublishForm.js');
 import('./components/Forms/Publish/PagePublishForm.js');
 import('./components/Forms/Publish/SharedPublishForm.js');
-import('./components/Forms/ConfigFileForm.js');
 import('./components/Forms/DeleteUsersForm.js');
 import('./components/Forms/Form.js');
 import('./components/Forms/FormError.js');

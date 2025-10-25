@@ -111,7 +111,7 @@ async function startDev() {
 		proxy: 'http://127.0.0.1:8080/automad-development',
 		open: false,
 		notify: false,
-		files: ['**/*.php', '**/dist/**/*.{js,css}'],
+		files: ['**/src/**/*.php', '**/dist/**/*.{js,css}'],
 		serveStatic: [outdir],
 	});
 

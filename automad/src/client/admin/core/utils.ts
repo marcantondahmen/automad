@@ -234,7 +234,7 @@ export const titleCase = (str: string): string => {
  * @see {@link docs https://github.com/ai/nanoid/#readme}
  * @returns the unique id
  */
-export const uniqueId = async () => {
+export const uniqueId = () => {
 	const prefix = customAlphabet(
 		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
 		2
