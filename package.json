@@ -5,6 +5,7 @@
   "author": "Marc Anton Dahmen",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "prettier": {
     "trailingComma": "es5"
   },
@@ -68,7 +69,7 @@
     "swiper": "^11.0.4",
     "toastify-js": "^1.12.0",
     "ts-jest": "^29.0.5",
-    "typescript": "^4.9.4",
+    "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   }
 }
