@@ -35,8 +35,7 @@
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
 import { BlockAPI, OutputBlockData } from 'automad-editorjs';
 import { App, getLogger } from '../core';
-
-const { nanoid } = await import('nanoid');
+import { nanoid } from 'nanoid';
 
 /**
  * Handle unknown block data.

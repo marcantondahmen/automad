@@ -35,6 +35,7 @@
 import 'modern-normalize/modern-normalize.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'sortable-tree/dist/sortable-tree.css';
+import '../katex/index.scss';
 
 import 'dist-font-inter/variable';
 import '@fontsource-variable/jetbrains-mono';
@@ -81,7 +82,6 @@ import('./components/Forms/FileCollection/ListForm.js');
 import('./components/Forms/Publish/ComponentPublishForm.js');
 import('./components/Forms/Publish/PagePublishForm.js');
 import('./components/Forms/Publish/SharedPublishForm.js');
-import('./components/Forms/ConfigFileForm.js');
 import('./components/Forms/DeleteUsersForm.js');
 import('./components/Forms/Form.js');
 import('./components/Forms/FormError.js');

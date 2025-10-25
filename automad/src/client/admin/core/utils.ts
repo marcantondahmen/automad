@@ -34,8 +34,7 @@
 
 import { App, Attr, CSS, create, html, listen, query } from '.';
 import { Listener } from '@/admin/types';
-
-const { customAlphabet } = await import('nanoid');
+import { customAlphabet } from 'nanoid';
 
 /**
  * Return the basename of a path.

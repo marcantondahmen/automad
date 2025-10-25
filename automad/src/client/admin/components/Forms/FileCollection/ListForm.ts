@@ -58,8 +58,6 @@ export class FileCollectionListFormComponent extends FormComponent {
 	 * Initialize the form.
 	 */
 	protected init(): void {
-		super.init();
-
 		this.classList.add(CSS.grid);
 		this.setAttribute('style', '--min: 11.5rem; --aspect: 1.25;');
 
@@ -77,8 +75,6 @@ export class FileCollectionListFormComponent extends FormComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		await super.processResponse(response);
-
 		if (typeof response.data == 'undefined') {
 			return;
 		}

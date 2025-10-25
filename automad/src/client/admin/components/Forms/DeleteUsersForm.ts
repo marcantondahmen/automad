@@ -83,8 +83,6 @@ export class DeleteUsersFormComponent extends FormComponent {
 			this.innerHTML = renderRegisteredUsers();
 		};
 
-		super.init();
-
 		this.classList.add(CSS.flex, CSS.flexColumn, CSS.flexGap);
 
 		this.listen(window, EventName.appStateChange, render.bind(this));

@@ -101,8 +101,6 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 	 */
 	private async init(): Promise<void> {
 		const katex = await import('katex');
-		await import('@/katex/index.js');
-
 		const placeholder = 'x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}';
 
 		if (!this.readOnly) {

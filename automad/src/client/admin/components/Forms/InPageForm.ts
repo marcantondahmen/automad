@@ -114,6 +114,8 @@ export class InPageFormComponent extends FormComponent {
 		this.page = params.get('page');
 		this.context = params.get('context');
 
+		console.log(this.context, 'xxxxx');
+
 		this.additionalData = {
 			field: this.field,
 			context: this.context,
@@ -166,13 +168,8 @@ export class InPageFormComponent extends FormComponent {
 
 			if (target.contains(this)) {
 				query('[contenteditable], input, textarea', this)?.focus();
-				query<EditorJSComponent>(
-					EditorJSComponent.TAG_NAME
-				)?.editor.caret.setToLastBlock('end');
 			}
 		});
-
-		super.init();
 	}
 
 	/**
@@ -183,8 +180,6 @@ export class InPageFormComponent extends FormComponent {
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		this.additionalData.init = false;
-
-		await super.processResponse(response);
 
 		if (response.code !== 200) {
 			return;

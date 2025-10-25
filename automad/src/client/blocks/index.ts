@@ -33,6 +33,7 @@
  */
 
 import './styles/index.less';
+import '../katex/index.scss';
 import { ComponentImplementationConstructor } from './types';
 
 const components = [

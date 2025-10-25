@@ -1,12 +1,15 @@
-const pkg = require('./package.json');
-const browserSync = require('browser-sync');
-const { lessLoader } = require('esbuild-plugin-less');
-const { sassPlugin } = require('esbuild-sass-plugin');
-const postcss = require('esbuild-postcss');
-const esbuild = require('esbuild');
-const path = require('path');
-const fs = require('fs');
+import pkg from './package.json' with { type: 'json' };
+import browserSync from 'browser-sync';
+import { lessLoader } from 'esbuild-plugin-less';
+import { sassPlugin } from 'esbuild-sass-plugin';
+import postcss from 'esbuild-postcss';
+import esbuild from 'esbuild';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+import path from 'path';
+import fs from 'fs';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const isDev = process.argv.includes('--dev');
 const outdir = path.join(__dirname, 'automad/dist/build');
 const year = new Date().getFullYear();
@@ -65,7 +68,7 @@ const commonConfig = {
 	splitting: true,
 	sourcemap: isDev,
 	minify: !isDev,
-	target: ['esnext'],
+	target: ['es2022'],
 	assetNames: '[name]',
 	chunkNames: 'chunks/[name].[hash]',
 	write: true,
@@ -108,7 +111,7 @@ async function startDev() {
 		proxy: 'http://127.0.0.1:8080/automad-development',
 		open: false,
 		notify: false,
-		files: ['**/*.php', '**/dist/**/*.{js,css}'],
+		files: ['**/src/**/*.php', '**/dist/**/*.{js,css}'],
 		serveStatic: [outdir],
 	});
 

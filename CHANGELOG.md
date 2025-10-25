@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.47](https://github.com/marcantondahmen/automad/commit/55ed3bd43f53357740fe15e8d7e345fbd1d2c2c2)
+## [v2.0.0-alpha.48](https://github.com/marcantondahmen/automad/commit/7f876060366ac61db1eab958e813ed6196ec6db1)
 
-Fri, 24 Oct 2025 19:02:59 +0200
+Sat, 25 Oct 2025 19:07:29 +0200
+
+### New Features
+
+- update standard theme ([9a960fc00](https://github.com/marcantondahmen/automad/commit/9a960fc0011ec77772de02931872139b0c5b1313))
+
+## [v2.0.0-alpha.47](https://github.com/marcantondahmen/automad/commit/3eefd64d3b7679c1394acf8891ddacdfa1917578)
+
+Fri, 24 Oct 2025 19:09:30 +0200
 
 ### New Features
 
@@ -708,12 +716,3 @@ Sat, 2 Apr 2022 23:53:44 +0200
 ### Bugfixes
 
 - **cli**: fix cli updates ([284afb0bd](https://github.com/marcantondahmen/automad/commit/284afb0bdbce370b5bc096a19316a0851ca679b6))
-
-## [v1.10.6](https://github.com/marcantondahmen/automad/commit/bbad3ee2100d82f66444ca5f28ad5321895b1dcd)
-
-Sat, 2 Apr 2022 23:36:28 +0200
-
-### Bugfixes
-
-- **console**: fix console command error ([3e3682a67](https://github.com/marcantondahmen/automad/commit/3e3682a678bc395ce898b4eb8d88867a7994d8c3))
-- fix PHP 8.1 compatibility issues ([1c2a755da](https://github.com/marcantondahmen/automad/commit/1c2a755da0d83285bb98c017a818affc031104ab))
