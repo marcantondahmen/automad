@@ -37,6 +37,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import './styles/index.less';
 
-import('./components/InPageDock.js');
-import('./components/InPageEdit.js');
-import('./components/InPagePublish.js');
+import('./components/InPageDock');
+import('./components/InPageEdit');
+import('./components/InPagePublish');
