@@ -13,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const isDev = process.argv.includes('--dev');
 const outdir = path.join(__dirname, 'automad/dist/build');
 const year = new Date().getFullYear();
-const banner = `/* Automad, (c) ${year} ${pkg.author}, ${pkg.license} license */`;
+const banner = `/* Automad, (c) ${pkg.author}, ${pkg.license} license */`;
 
 const entryPoints = [
 	'admin',
