@@ -67,7 +67,7 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 	static get toolbox() {
 		return {
 			title: html`
-				Math
+				Math / TeX
 				<span class="${CSS.displayNone}">latex,katex</span>
 			`,
 			icon: '<small><strong>∑</strong></small>',
