@@ -89,7 +89,7 @@ class Gallery extends AbstractBlock {
 			$imageSets[] = array(
 				'thumb' => new ImgLoaderSet($file, $Automad, $width * $pixelDensity, $height * $pixelDensity, false),
 				'large' => new Img($file, $Automad, 3000, 3000, false),
-				'caption' => Str::markdown(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
+				'caption' => trim(Str::markdown(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file))))
 			);
 		}
 
