@@ -99,7 +99,7 @@ class PackageCollection {
 				$isInstalled = array_key_exists($name, $installed);
 				$isDependency = !array_key_exists($name, $required) && $isInstalled;
 
-				$pkgVersion = $pkg['version'];
+				$pkgVersion = $pkg['version'] ?? '';
 
 				$pkg['outdated'] = $isOutdated;
 				$pkg['isDependency'] = $isDependency;
