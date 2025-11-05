@@ -98,16 +98,16 @@
         },
         {
             "name": "automad/standard-v1",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-standard-v1.git",
-                "reference": "b4c3641b835701d7c87e19c5acc81680b8c59ea6"
+                "reference": "17e91e803041ffd31e84e78ac6742e042a98f532"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-standard-v1/zipball/b4c3641b835701d7c87e19c5acc81680b8c59ea6",
-                "reference": "b4c3641b835701d7c87e19c5acc81680b8c59ea6",
+                "url": "https://api.github.com/repos/automadcms/automad-standard-v1/zipball/17e91e803041ffd31e84e78ac6742e042a98f532",
+                "reference": "17e91e803041ffd31e84e78ac6742e042a98f532",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
             ],
             "support": {
                 "issues": "https://github.com/automadcms/automad-standard-v1/issues",
-                "source": "https://github.com/automadcms/automad-standard-v1/tree/1.0.12"
+                "source": "https://github.com/automadcms/automad-standard-v1/tree/1.0.13"
             },
             "funding": [
                 {
@@ -151,7 +151,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2025-11-01T16:19:47+00:00"
+            "time": "2025-11-05T19:07:40+00:00"
         }
     ],
     "packages-dev": [],
