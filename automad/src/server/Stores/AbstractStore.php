@@ -153,7 +153,7 @@ abstract class AbstractStore {
 	 */
 	public function save(): bool {
 		$state = $this->isPublished() ? PublicationState::PUBLISHED : PublicationState::DRAFT;
-		$this->data[$state->value][':automadVersion'] = AM_VERSION;
+		$this->data[$state->value][Fields::AUTOMAD_VERSION] = AM_VERSION;
 
 		return FileSystem::writeJson($this->file, $this->data);
 	}
