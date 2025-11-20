@@ -487,7 +487,7 @@
 	"systemDebug": "Debug",
 	"systemDebugCardInfo": "Enable debugging in order to identify issues with your installation",
 	"systemDebugEnable": "Debug Mode",
-	"systemDebugInfo": "When debugging is enabled, all of Automad's processes will be logged to your browser's console as well as to <code>.json</code> files inside the temporary directory. Debugging is only needed for development or troubleshooting and should be disabled in all other cases.",
+	"systemDebugInfo": "When debugging is enabled, all of Automad's processes will be logged to your browser's console as well as to JSON files inside the temporary directory. JSON files can be viewed using the <code>log:filter</code> and <code>log:list</code> Automad CLI commands. Debugging is only needed for development or troubleshooting and should be disabled in all other cases.",
 	"systemI18n": "Internationalization",
 	"systemI18nCardInfo": "Enabled and configure multilingual content",
 	"systemI18nDefault": "Default Locale",

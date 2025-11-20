@@ -50,6 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Fields {
+	const AUTOMAD_VERSION = ':automadVersion';
 	const BASENAME = ':basename';
 	const CAPTION = ':caption';
 	const CURRENT_PAGE = ':current';

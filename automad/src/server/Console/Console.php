@@ -154,7 +154,21 @@ class Console {
 		$commands = $this->getCommands();
 
 		if (empty($argv[1])) {
-			echo PHP_EOL . self::clr('title', 'AUTOMAD CONSOLE') . self::clr('version', ' (' . App::VERSION . ')') . PHP_EOL . PHP_EOL;
+			echo self::clr(
+				'title',
+				<<<ASCII
+
+				               _                            _ 
+				    /\        | |                          | |
+				   /  \  _   _| |_ ___  _ __ ___   __ _  __| |
+				  / /\ \| | | | __/ _ \| '_ ` _ \ / _` |/ _` |
+				 / ____ \ |_| | || (_) | | | | | | (_| | (_| |
+				/_/    \_\__,_|\__\___/|_| |_| |_|\__,_|\__,_|
+
+				ASCII . PHP_EOL
+			);
+
+			echo self::clr('version', 'Automad CLI version ' . App::VERSION) . PHP_EOL . PHP_EOL;
 			echo self::clr('heading', 'Usage:') . PHP_EOL;
 			echo self::clr('code', '    php automad/console command [-a value ...] ') . PHP_EOL;
 			$this->help($commands);

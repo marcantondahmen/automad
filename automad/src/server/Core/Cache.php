@@ -234,7 +234,13 @@ class Cache {
 	 */
 	public function getAutomad(): Automad {
 		if ($this->automadObjectCacheIsApproved()) {
-			return $this->readAutomadObjectFromCache();
+			$Automad = $this->readAutomadObjectFromCache();
+
+			if ($Automad) {
+				return $Automad;
+			}
+
+			Debug::log('An error occured while unserializing the Automad cache.');
 		}
 
 		$Automad = Automad::create();
@@ -368,17 +374,6 @@ class Cache {
 	}
 
 	/**
-	 * Read (unserialize) the Automad object from $this->objectCacheFile and update the context to the requested page.
-	 *
-	 * @return Automad Automad object
-	 */
-	public function readAutomadObjectFromCache(): Automad {
-		Debug::log($this->objectCacheFile, 'Reading cached Automad object from');
-
-		return unserialize(strval(file_get_contents($this->objectCacheFile)));
-	}
-
-	/**
 	 * Read the rendered page from the cached version.
 	 *
 	 * @return string The full cached HTML of the page.
@@ -505,6 +500,23 @@ class Cache {
 		Debug::log($file);
 
 		return $file;
+	}
+
+	/**
+	 * Read (unserialize) the Automad object from $this->objectCacheFile and update the context to the requested page.
+	 *
+	 * @return Automad|null Automad object
+	 */
+	private function readAutomadObjectFromCache(): Automad|null {
+		Debug::log($this->objectCacheFile, 'Reading cached Automad object from');
+
+		try {
+			return unserialize(strval(file_get_contents($this->objectCacheFile)));
+		} catch (\Throwable $th) {
+			Cache::clear();
+		}
+
+		return null;
 	}
 
 	/**
