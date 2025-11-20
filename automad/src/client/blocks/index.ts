@@ -39,31 +39,31 @@ import { ComponentImplementationConstructor } from './types';
 const components = [
 	{
 		tag: 'am-gallery',
-		importer: async () => await import('./components/Gallery.js'),
+		importer: async () => await import('./components/Gallery'),
 	},
 	{
 		tag: 'am-image-slideshow',
-		importer: async () => await import('./components/ImageSlideshow.js'),
+		importer: async () => await import('./components/ImageSlideshow'),
 	},
 	{
 		tag: 'am-img-loader',
-		importer: async () => await import('./components/ImgLoader.js'),
+		importer: async () => await import('./components/ImgLoader'),
 	},
 	{
 		tag: 'am-inline-tex',
-		importer: async () => await import('./components/InlineTex.js'),
+		importer: async () => await import('./components/InlineTex'),
 	},
 	{
 		tag: 'am-mail',
-		importer: async () => await import('./components/Mail.js'),
+		importer: async () => await import('./components/Mail'),
 	},
 	{
 		tag: 'am-table-of-contents',
-		importer: async () => await import('./components/TableOfContents.js'),
+		importer: async () => await import('./components/TableOfContents'),
 	},
 	{
 		tag: 'am-tex',
-		importer: async () => await import('./components/Tex.js'),
+		importer: async () => await import('./components/Tex'),
 	},
 ] as const;
 

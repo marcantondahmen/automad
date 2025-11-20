@@ -99,11 +99,13 @@ class PackageCollection {
 				$isInstalled = array_key_exists($name, $installed);
 				$isDependency = !array_key_exists($name, $required) && $isInstalled;
 
+				$pkgVersion = $pkg['version'] ?? '';
+
 				$pkg['outdated'] = $isOutdated;
 				$pkg['isDependency'] = $isDependency;
-				$pkg['latest'] = $isOutdated ? $outdated[$name]['latest'] ?? '' : '';
+				$pkg['latest'] = $isOutdated ? $outdated[$name]['latest'] ?? $pkgVersion : $pkgVersion;
 				$pkg['installed'] = $isInstalled;
-				$pkg['version'] = $isInstalled ? $installed[$name]['version'] ?? '' : '';
+				$pkg['version'] = $isInstalled ? $installed[$name]['version'] ?? $pkgVersion : $pkgVersion;
 			}
 
 			return $pkg;

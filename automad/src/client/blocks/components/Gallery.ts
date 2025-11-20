@@ -51,6 +51,10 @@ import arrowPrevSVG from '@/blocks/svg/arrowPrev.svg';
 import arrowNextSVG from '@/blocks/svg/arrowNext.svg';
 import closeSVG from '@/blocks/svg/close.svg';
 
+const cls = {
+	pswpItem: 'pswp-item',
+};
+
 /**
  * A gallery component for column or row based layouts.
  *
@@ -119,18 +123,28 @@ export default class Gallery {
 		);
 
 		this.data.imageSets.forEach((imgSet) => {
+			const element = create(
+				'div',
+				['am-gallery-grid-item', cls.pswpItem],
+				{
+					style: `--aspect: ${imgSet.thumb.width / imgSet.thumb.height}`,
+				},
+				gallery,
+				this.renderCaption(imgSet)
+			);
+
 			create(
 				'a',
-				['am-gallery-grid-item'],
+				['am-gallery-img-small'],
 				{
 					href: imgSet.large.image,
 					target: '_blank',
 					'data-pswp-width': imgSet.large.width,
 					'data-pswp-height': imgSet.large.height,
-					style: `--aspect: ${imgSet.thumb.width / imgSet.thumb.height}`,
 				},
-				gallery,
-				`<div class="am-gallery-img-small">${this.renderThumb(imgSet)}</div>`
+				element,
+				this.renderThumb(imgSet),
+				true
 			);
 		});
 	}
@@ -179,9 +193,10 @@ export default class Gallery {
 		imageSets.forEach((imgSet) => {
 			const element = create(
 				'div',
-				['am-gallery-masonry-item'],
+				['am-gallery-masonry-item', cls.pswpItem],
 				{},
-				gallery
+				gallery,
+				this.renderCaption(imgSet)
 			);
 
 			create(
@@ -195,7 +210,8 @@ export default class Gallery {
 					'data-cropped': 'true',
 				},
 				element,
-				this.renderThumb(imgSet)
+				this.renderThumb(imgSet),
+				true
 			);
 
 			items.push({
@@ -359,6 +375,14 @@ export default class Gallery {
 			is: ImageSetData,
 			container: HTMLElement
 		): void => {
+			const element = create(
+				'div',
+				[cls.pswpItem],
+				{},
+				container,
+				this.renderCaption(is)
+			);
+
 			create(
 				'a',
 				['am-gallery-img-small'],
@@ -368,8 +392,9 @@ export default class Gallery {
 					'data-pswp-width': is.large.width,
 					'data-pswp-height': is.large.height,
 				},
-				container,
-				this.renderThumb(is)
+				element,
+				this.renderThumb(is),
+				true
 			);
 		};
 
@@ -480,22 +505,32 @@ export default class Gallery {
 	}
 
 	/**
+	 * Render the caption.
+	 *
+	 * @param imgSet
+	 */
+	private renderCaption(imgSet: ImageSetData): string {
+		return imgSet.caption
+			? `<div class="pswp-caption-content">${imgSet.caption}</div>`
+			: '';
+	}
+
+	/**
 	 * Render a thumbnail of an image.
 	 *
 	 * @param imgSet
 	 */
 	private renderThumb(imgSet: ImageSetData): string {
-		const { thumb, caption } = imgSet;
+		const { thumb } = imgSet;
 
 		return `
-		<am-img-loader
-			image="${thumb.image}"
-			preload="${thumb.preload}"
-			width="${Math.round(thumb.width)}"
-			height="${Math.round(thumb.height)}"
-		></am-img-loader>
-		${caption ? `<span class="pswp-caption-content">${caption}</span>` : ''}
-	`;
+			<am-img-loader
+				image="${thumb.image}"
+				preload="${thumb.preload}"
+				width="${Math.round(thumb.width)}"
+				height="${Math.round(thumb.height)}"
+			></am-img-loader>
+		`;
 	}
 }
 
@@ -505,7 +540,7 @@ export default class Gallery {
 const initLightbox = async (): Promise<void> => {
 	const lightbox = new PhotoSwipeLightbox({
 		gallery: 'body',
-		children: `${Gallery.TAG_NAME} a`,
+		children: `${Gallery.TAG_NAME} .${cls.pswpItem}`,
 		showHideAnimationType: 'zoom',
 		showAnimationDuration: 300,
 		hideAnimationDuration: 300,

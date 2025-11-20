@@ -42,6 +42,7 @@ use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
 use Automad\Core\FileUtils;
 use Automad\Core\Resolve;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -88,7 +89,7 @@ class Gallery extends AbstractBlock {
 			$imageSets[] = array(
 				'thumb' => new ImgLoaderSet($file, $Automad, $width * $pixelDensity, $height * $pixelDensity, false),
 				'large' => new Img($file, $Automad, 3000, 3000, false),
-				'caption' => strip_tags(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
+				'caption' => trim(Str::markdown(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file))))
 			);
 		}
 

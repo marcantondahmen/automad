@@ -60,9 +60,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class MetaProcessor {
 	const IMAGE_COLOR_BACKGROUND = '#0e0f11';
 	const IMAGE_COLOR_TEXT = '#f4f4f6';
-	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_700Bold.ttf';
-	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_500Medium.ttf';
+	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/open-graph/Inter_700Bold.ttf';
+	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/open-graph/Inter_500Medium.ttf';
 	const IMAGE_LOGO = AM_BASE_DIR . AM_DIR_SHARED . '/open-graph-logo.png';
+
+	/**
+	 * The Automad instance.
+	 */
+	private Automad $Automad;
 
 	/**
 	 * The current page model.
@@ -80,6 +85,7 @@ class MetaProcessor {
 	 * @param Automad $Automad
 	 */
 	public function __construct(Automad $Automad) {
+		$this->Automad = $Automad;
 		$this->Page = $Automad->Context->get();
 		$this->Shared = $Automad->Shared;
 	}
@@ -224,9 +230,16 @@ class MetaProcessor {
 		$customColorBackground = $this->Page->get(Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND);
 		$hashItems = array($baseUrl, AM_REQUEST, $title, $sitename, $customColorText, $customColorBackground);
 
+		if (!$this->Automad->currentPageExists()) {
+			$title = '404';
+			$hashItems = array($baseUrl, $sitename, $customColorText, $customColorBackground);
+		}
+
 		if (is_readable(MetaProcessor::IMAGE_LOGO)) {
 			$hashItems[] = filemtime(MetaProcessor::IMAGE_LOGO);
 		}
+
+		Debug::log($hashItems, 'Hash items');
 
 		$hash = hash('sha256', join(':', $hashItems));
 		$dir = Cache::DIR_IMAGES;

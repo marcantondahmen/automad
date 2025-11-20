@@ -41,6 +41,7 @@ use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
 use Automad\Core\FileUtils;
 use Automad\Core\Resolve;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -87,7 +88,7 @@ class ImageSlideshow extends AbstractBlock {
 		foreach ($data['files'] ?? array() as $file) {
 			$imageSets[] = array(
 				'imageSet' => new ImgLoaderSet($file, $Automad, $settings['imageWidthPx'], $settings['imageHeightPx'], true),
-				'caption' => strip_tags(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
+				'caption' => Str::markdown(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
 			);
 		}
 
