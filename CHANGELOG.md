@@ -1,8 +1,28 @@
 # Changelog
 
-## [v2.0.0-alpha.48](https://github.com/marcantondahmen/automad/commit/7f876060366ac61db1eab958e813ed6196ec6db1)
+## [v2.0.0-alpha.49](https://github.com/marcantondahmen/automad/commit/978395fb23897d092dd48fb43755cbe8de40c4c4)
 
-Sat, 25 Oct 2025 19:07:29 +0200
+Thu, 20 Nov 2025 09:42:22 +0100
+
+### New Features
+
+- improve default block styles ([241ec683b](https://github.com/marcantondahmen/automad/commit/241ec683baff81304d1123f784b6be4f8f215012))
+- show version numbers of packages that are not installed ([6482517b5](https://github.com/marcantondahmen/automad/commit/6482517b507c6411cb50bee3edce3b86b463e106))
+- support markdown in image captions ([59f74b95a](https://github.com/marcantondahmen/automad/commit/59f74b95a8cfe8ae5cd86ea891f118b87d080446))
+- update standard theme ([3f1431f3c](https://github.com/marcantondahmen/automad/commit/3f1431f3c716c527628540029b53622d3c7e1370))
+- update standard theme ([9ad081603](https://github.com/marcantondahmen/automad/commit/9ad081603afab00f9babd6d8a3d49808c32c99f0))
+
+### Bugfixes
+
+- fix font file location for open-graph image fonts ([2dff676ba](https://github.com/marcantondahmen/automad/commit/2dff676bad05439b5e5de6f9f573a43748ce90de))
+- fix gallery captions that contain links ([4577c81e0](https://github.com/marcantondahmen/automad/commit/4577c81e05f30e0d30b9b6744920e4243755b0ad))
+- fix layout section toolbar tooltips ([c305c7d1b](https://github.com/marcantondahmen/automad/commit/c305c7d1b577b018715f25cd760e9f6d7e091646))
+- fix minor style issues ([95a0206d5](https://github.com/marcantondahmen/automad/commit/95a0206d57271ec10770c87c8142c789cdeca4d1))
+- only create a single open-graph image for all 404 pages ([978395fb2](https://github.com/marcantondahmen/automad/commit/978395fb23897d092dd48fb43755cbe8de40c4c4))
+
+## [v2.0.0-alpha.48](https://github.com/marcantondahmen/automad/commit/d137f256507bd6a43532b1a5d77d52affb4d5dd9)
+
+Sat, 25 Oct 2025 19:18:20 +0200
 
 ### New Features
 
@@ -708,11 +728,3 @@ Thu, 7 Apr 2022 20:00:07 +0200
 ### Bugfixes
 
 - **ui**: fix installation error ([ccd4e841d](https://github.com/marcantondahmen/automad/commit/ccd4e841d165e602d3363645c9de71f9d502f952))
-
-## [v1.10.7](https://github.com/marcantondahmen/automad/commit/b402f7c7ff18f56f418fa196a128884f5c076b57)
-
-Sat, 2 Apr 2022 23:53:44 +0200
-
-### Bugfixes
-
-- **cli**: fix cli updates ([284afb0bd](https://github.com/marcantondahmen/automad/commit/284afb0bdbce370b5bc096a19316a0851ca679b6))
