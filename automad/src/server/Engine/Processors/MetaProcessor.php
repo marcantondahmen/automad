@@ -65,6 +65,11 @@ class MetaProcessor {
 	const IMAGE_LOGO = AM_BASE_DIR . AM_DIR_SHARED . '/open-graph-logo.png';
 
 	/**
+	 * The Automad instance.
+	 */
+	private Automad $Automad;
+
+	/**
 	 * The current page model.
 	 */
 	private Page $Page;
@@ -80,6 +85,7 @@ class MetaProcessor {
 	 * @param Automad $Automad
 	 */
 	public function __construct(Automad $Automad) {
+		$this->Automad = $Automad;
 		$this->Page = $Automad->Context->get();
 		$this->Shared = $Automad->Shared;
 	}
@@ -224,9 +230,16 @@ class MetaProcessor {
 		$customColorBackground = $this->Page->get(Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND);
 		$hashItems = array($baseUrl, AM_REQUEST, $title, $sitename, $customColorText, $customColorBackground);
 
+		if (!$this->Automad->currentPageExists()) {
+			$title = '404';
+			$hashItems = array($baseUrl, $sitename, $customColorText, $customColorBackground);
+		}
+
 		if (is_readable(MetaProcessor::IMAGE_LOGO)) {
 			$hashItems[] = filemtime(MetaProcessor::IMAGE_LOGO);
 		}
+
+		Debug::log($hashItems, 'Hash items');
 
 		$hash = hash('sha256', join(':', $hashItems));
 		$dir = Cache::DIR_IMAGES;
