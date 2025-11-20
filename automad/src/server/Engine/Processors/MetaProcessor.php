@@ -60,8 +60,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class MetaProcessor {
 	const IMAGE_COLOR_BACKGROUND = '#0e0f11';
 	const IMAGE_COLOR_TEXT = '#f4f4f6';
-	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_700Bold.ttf';
-	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/fonts/open-graph/Inter_500Medium.ttf';
+	const IMAGE_FONT_BOLD = AM_BASE_DIR . '/automad/dist/open-graph/Inter_700Bold.ttf';
+	const IMAGE_FONT_REGULAR = AM_BASE_DIR . '/automad/dist/open-graph/Inter_500Medium.ttf';
 	const IMAGE_LOGO = AM_BASE_DIR . AM_DIR_SHARED . '/open-graph-logo.png';
 
 	/**
