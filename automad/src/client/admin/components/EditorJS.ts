@@ -177,14 +177,6 @@ export class EditorJSComponent extends BaseComponent {
 			},
 			onReady: (): void => {
 				this.onRender();
-
-				// Dispatch change directly after being ready
-				// in order to save blocks that have been modified
-				// by the unknownBlockHandler() function.
-				// Only save when there are blocks.
-				if (data?.blocks?.length) {
-					this.editor.blocks.getBlockByIndex(0).dispatchChange();
-				}
 			},
 			unknownBlockHandler,
 			...config,
