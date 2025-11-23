@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-alpha.50](https://github.com/marcantondahmen/automad/commit/1eb4c13d9a81f45f2c9e845dc12d0b19bf82aedd)
+## [v2.0.0-alpha.51](https://github.com/marcantondahmen/automad/commit/f4e4aa438dd7eef018d555ac692f79987d9af9aa)
 
-Thu, 20 Nov 2025 22:18:03 +0100
+Sun, 23 Nov 2025 15:21:58 +0100
+
+### New Features
+
+- **stores**: discard draft whenever user editable content is equal in both publication states ([acc50891e](https://github.com/marcantondahmen/automad/commit/acc50891e41fe074c6f1c09afb8b520522971c68))
+
+## [v2.0.0-alpha.50](https://github.com/marcantondahmen/automad/commit/c53b88c1edc37e44ef1598eeaf7c8c68bae21ecb)
+
+Thu, 20 Nov 2025 22:19:30 +0100
 
 ### New Features
 
@@ -820,18 +828,3 @@ Wed, 24 Nov 2021 09:35:46 +0100
 - **ui**: add feed configuration ui ([686d563d1](https://github.com/marcantondahmen/automad/commit/686d563d11a8cdec881c6053cc01ad6049e76400))
 - **ui**: redesign system settings ui ([aa84f8021](https://github.com/marcantondahmen/automad/commit/aa84f8021a0da6ff8d587e5f384cf6b6a46d1b4d))
 - remove gulp-util and update dependencies ([02ae09d59](https://github.com/marcantondahmen/automad/commit/02ae09d59931fc09f92fb8fd0161147d199031c4))
-
-## [v1.9.4](https://github.com/marcantondahmen/automad/commit/e52d003777a26e28746ab50140a0ebb65f0a28e5)
-
-Thu, 11 Nov 2021 12:06:24 +0100
-
-### New Features
-
-- **themes**: improve color scheme of dark theme ([11c27250f](https://github.com/marcantondahmen/automad/commit/11c27250f46b2ff9b8438289096e48a6b48f4aec))
-- **ui**: allow uppercase letters in custom field names ([0d11fc032](https://github.com/marcantondahmen/automad/commit/0d11fc032d0082a01190c8ed1cf020fdb31445fd))
-
-### Bugfixes
-
-- **core**: fix :current and :currentPath properties of pages that are redirected ([f79a2cfa9](https://github.com/marcantondahmen/automad/commit/f79a2cfa9907334f4615a5dadda09ab7c4fa0635))
-- **ui**: fix overflowing select buttons ([78c3f9a7d](https://github.com/marcantondahmen/automad/commit/78c3f9a7d746422ec9a3e3ae1597b3e96bc5054f))
-- **ui**: fix overflowing toolbox ([bad19924b](https://github.com/marcantondahmen/automad/commit/bad19924b32a58aa65248844fa52b7b0d2df6b23))

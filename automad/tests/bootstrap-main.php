@@ -15,6 +15,7 @@ define('AM_FEED_ENABLED', false);
 define('AM_I18N_ENABLED', false);
 define('AM_REQUEST', '/page');
 define('AM_SERVER', 'http://localhost');
+define('AM_VERSION', '0.0.0');
 
 require_once AM_BASE_DIR . '/automad/src/server/Autoload.php';
 Autoload::init();
