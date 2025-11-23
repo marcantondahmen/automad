@@ -55,7 +55,7 @@ class Console {
 	 */
 	const COLORS = array(
 		'code' => 32,
-		'title' => 35,
+		'title' => 90,
 		'heading' => 33,
 		'text' => 37,
 		'arg' => 34,
@@ -170,7 +170,7 @@ class Console {
 
 			echo self::clr('version', 'Automad CLI version ' . App::VERSION) . PHP_EOL . PHP_EOL;
 			echo self::clr('heading', 'Usage:') . PHP_EOL;
-			echo self::clr('code', '    php automad/console command [-a value ...] ') . PHP_EOL;
+			echo self::clr('code', '    php automad/console command [--arg value ...] ') . PHP_EOL;
 			$this->help($commands);
 			exit(0);
 		}
