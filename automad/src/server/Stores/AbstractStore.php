@@ -152,10 +152,21 @@ abstract class AbstractStore {
 	 * @return bool
 	 */
 	public function save(): bool {
-		$state = $this->isPublished() ? PublicationState::PUBLISHED : PublicationState::DRAFT;
-		$this->data[$state->value][Fields::AUTOMAD_VERSION] = AM_VERSION;
+		if ($this->statesAreEqual()) {
+			// If both states contain the same user editable content, remove draft.
+			$this->setState(PublicationState::DRAFT, array());
+		} else {
+			$state = $this->isPublished() ? PublicationState::PUBLISHED : PublicationState::DRAFT;
+			$this->data[$state->value][Fields::AUTOMAD_VERSION] = AM_VERSION;
+		}
 
-		return FileSystem::writeJson($this->file, $this->data);
+		$success = FileSystem::writeJson($this->file, $this->data);
+
+		if ($success && function_exists('opcache_invalidate')) {
+			opcache_invalidate($this->file, true);
+		}
+
+		return $success;
 	}
 
 	/**
@@ -196,4 +207,31 @@ abstract class AbstractStore {
 	 * @return string
 	 */
 	abstract protected function resolvePath(?string $optionalPath = null): string;
+
+	/**
+	 * Return a new array that only includes user-definable fields.
+	 *
+	 * @param array $data
+	 * @return array
+	 */
+	private function getEditableContent(array $data): array {
+		return array_filter($data, function ($key) {
+			return !str_starts_with($key, ':');
+		}, ARRAY_FILTER_USE_KEY);
+	}
+
+	/**
+	 * Test whether draft and publish states have the same user editable content.
+	 *
+	 * @return bool
+	 */
+	private function statesAreEqual(): bool {
+		$draft = $this->getEditableContent($this->getState(PublicationState::DRAFT) ?? array());
+		$published = $this->getEditableContent($this->getState(PublicationState::PUBLISHED) ?? array());
+
+		ksort($draft);
+		ksort($published);
+
+		return serialize($draft) == serialize($published);
+	}
 }
