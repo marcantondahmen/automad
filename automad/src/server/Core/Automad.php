@@ -270,7 +270,7 @@ class Automad {
 	 * @return Page|null A page object
 	 */
 	private function getRequestedPage(): ?Page {
-		if (strpos(AM_REQUEST, RequestHandler::$apiBase) === 0) {
+		if (strpos(AM_REQUEST, RequestHandler::API_BASE) === 0) {
 			return $this->getPage(Request::post('url'));
 		}
 

@@ -169,7 +169,7 @@ class InPage {
 	private function injectDock(string $str): string {
 		$state = $this->Automad->getPage(AM_REQUEST)?->get(Fields::PUBLICATION_STATE) ?? '';
 		$urlDashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlApi = AM_BASE_INDEX . RequestHandler::$apiBase;
+		$urlApi = AM_BASE_INDEX . RequestHandler::API_BASE;
 		$urlPage = AM_REQUEST;
 		$labelKeys = array(
 			'fieldsSettings',

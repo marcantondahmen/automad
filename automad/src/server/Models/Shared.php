@@ -83,7 +83,7 @@ class Shared {
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
 		// Check whether there is a theme defined in the Shared object data.
-		if (!$this->get(Fields::THEME) && strpos(AM_REQUEST, RequestHandler::$apiBase) !== 0) {
+		if (!$this->get(Fields::THEME) && strpos(AM_REQUEST, RequestHandler::API_BASE) !== 0) {
 			Error::exit('No main theme defined', 'Please define a theme in our shared settings.');
 		}
 	}
