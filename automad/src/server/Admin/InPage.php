@@ -120,6 +120,10 @@ class InPage {
 			return $value;
 		}
 
+		if (strpos(AM_REQUEST, RequestHandler::API_BASE) === 0) {
+			return $value;
+		}
+
 		if ($Context->get()->get(Fields::TEMPLATE) === Page::TEMPLATE_NAME_404) {
 			return $value;
 		}
