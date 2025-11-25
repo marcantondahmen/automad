@@ -204,7 +204,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 * @return true if text is not empty
 	 */
 	validate(data: ParagraphBlockData): boolean {
-		return data.text.trim() !== '';
+		return data.text.replace(/<br>/, '').trim() !== '';
 	}
 
 	/**
