@@ -101,7 +101,7 @@ class MetaProcessor {
 		$content = array_merge(
 			array(
 				'title' => $this->convertHtml(Str::stripTags($this->Page->get(Fields::TITLE) . ' | ' . $this->Shared->get(Fields::SITENAME))),
-				'description' => $this->convertHtml(Str::shorten(Str::stripTags(Str::findFirstParagraph($html)), 150))
+				'description' => $this->convertHtml(Str::shorten(Str::findFirstParagraph($html), 150))
 			),
 			array_filter(
 				array(

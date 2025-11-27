@@ -95,6 +95,7 @@ class PostProcessor {
 		$ConsentProcessor = new ConsentProcessor($this->Automad);
 		$CustomizationProcessor = new CustomizationProcessor($this->Automad);
 
+		$output = $this->InPage->createUI($output);
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
@@ -107,7 +108,6 @@ class PostProcessor {
 		$output = $ConsentProcessor->encodeScript($output);
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
-		$output = $this->InPage->createUI($output);
 
 		return $output;
 	}
