@@ -122,7 +122,7 @@ class LogFilter extends AbstractCommand {
 			$regex = "/$filter/is";
 
 			if (!empty($valueJson)) {
-				if (preg_match($regex, $valueJson) || preg_match($regex, $key)) {
+				if (preg_match($regex, "$key$valueJson")) {
 					echo Console::clr('heading', "$key: ") . PHP_EOL;
 					echo Console::clr('code', $valueJson) . PHP_EOL . PHP_EOL;
 				}
