@@ -41,14 +41,19 @@
 	border-radius: @am-form-radius;
 
 	&__toolbar {
+		interpolate-size: allow-keywords;
 		position: absolute;
-		display: flex;
+		display: none;
 		z-index: 30;
 		top: -3.5rem;
 		height: auto;
 		font-size: 0.85rem;
 		opacity: 0;
 		transition: opacity 0.2s;
+		transition:
+			display 0.2s allow-discrete,
+			overlay 0.2s allow-discrete,
+			opacity 0.2s;
 		pointer-events: none;
 		color: hsl(var(--am-clr-text));
 		background-color: hsl(var(--am-clr-background));
@@ -67,6 +72,7 @@
 		}
 
 		&.am-active {
+			display: flex;
 			opacity: 1;
 			pointer-events: all;
 		}
