@@ -33,7 +33,7 @@
  */
 
 import { Listener } from '@/admin/types';
-import { CSS, getLogger, query, queryAll } from '.';
+import { CSS, getLogger, queryAll } from '.';
 
 /**
  * The object with all custom event that are used by the UI.
@@ -67,39 +67,40 @@ export const enum EventName {
  * @return the created listener
  */
 export const createFocusTrap = (container: HTMLElement): Listener => {
-	const selector =
-		'input:not([type="hidden"]), button, textarea, [contenteditable], [tabindex="0"]';
+	const getElements = () => {
+		return queryAll(
+			'input:not([type="hidden"]), button, textarea, select, a[href], [contenteditable], [tabindex="0"]',
+			container
+		);
+	};
 
-	query(selector, container)?.focus();
+	let current: HTMLElement = undefined;
 
-	return listen(document, 'keydown', (event: KeyboardEvent): void => {
-		if (!(event.key === 'Tab' || event.keyCode === 9)) {
-			return;
-		}
-		const elements = queryAll(selector, container);
-
-		if (elements.length === 0) {
-			event.preventDefault();
-
+	return listen(document, 'keydown', (event: KeyboardEvent) => {
+		if (!(event.key === 'Tab')) {
 			return;
 		}
 
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		event.stopPropagation();
+
+		const elements = getElements();
+		const lastIndex = elements.length - 1;
 		const first = elements[0];
-		const last = elements[elements.length - 1];
+		const last = elements[lastIndex];
 
-		if (event.shiftKey) {
-			if (document.activeElement === first) {
-				event.preventDefault();
-				last.focus();
-			}
-
+		if (!first || !last) {
 			return;
 		}
 
-		if (document.activeElement === last) {
-			event.preventDefault();
-			first.focus();
-		}
+		const currentIndex = elements.indexOf(current ?? first);
+		const nextIndex = currentIndex >= lastIndex ? 0 : currentIndex + 1;
+		const prevIndex = currentIndex <= 0 ? lastIndex : currentIndex - 1;
+		const newIndex = event.shiftKey ? prevIndex : nextIndex;
+
+		current = elements[newIndex];
+		current.focus();
 	});
 };
 

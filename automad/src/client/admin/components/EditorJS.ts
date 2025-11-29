@@ -47,7 +47,7 @@ import { UnderlineInline } from '@/admin/editor/inline/Underline';
 import { DragDrop } from '@/admin/editor/plugins/DragDrop';
 import { EditorOutputData, KeyValueMap } from '@/admin/types';
 import EditorJS, { EditorConfig, I18nDictionary } from 'automad-editorjs';
-import { App, CSS, getLogger, getSlug, Route } from '@/admin/core';
+import { App, Attr, CSS, getLogger, getSlug, query, Route } from '@/admin/core';
 import {
 	TextAlignCenterInline,
 	TextAlignLeftInline,
@@ -179,6 +179,7 @@ export class EditorJSComponent extends BaseComponent {
 				this.onRender();
 			},
 			unknownBlockHandler,
+			canUseKeyboard: () => !query(`[${Attr.modalOpen}]`),
 			...config,
 		});
 	}
