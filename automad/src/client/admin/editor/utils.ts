@@ -33,7 +33,7 @@
  */
 
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
-import { BlockAPI, OutputBlockData } from 'automad-editorjs';
+import { BlockAPI, OutputBlockData } from 'automad-editorjs/types';
 import { App, getLogger } from '../core';
 import { nanoid } from 'nanoid';
 

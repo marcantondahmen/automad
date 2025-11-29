@@ -47,6 +47,11 @@
 		color: hsl(var(--am-clr-text-muted));
 	}
 
+	&:has(:focus) {
+		border-color: hsl(var(--am-clr-border-active));
+		outline: @am-outline-active;
+	}
+
 	&&--inline {
 		display: inline-flex;
 		width: auto;
