@@ -33,9 +33,18 @@
  */
 
 :root {
-	--am-consent-banner-color: #f9fafc;
-	--am-consent-banner-background: #121315;
-	--am-consent-banner-border: rgba(255, 255, 255, 0.06);
+	--am-consent-banner-color: #121315;
+	--am-consent-banner-background: #ffffff;
+	--am-consent-banner-border: rgba(0, 0, 0, 0.08);
+
+	--am-consent-button-primary-color: #ffffff;
+	--am-consent-button-primary-background: #121315;
+	--am-consent-button-primary-border: transparent;
+
+	--am-consent-button-secondary-color: #121315;
+	--am-consent-button-secondary-background: #ffffff;
+	--am-consent-button-secondary-border: rgba(0, 0, 0, 0.09);
+
 	--am-consent-placeholder-color: rgba(120, 123, 132, 0.3);
 	--am-consent-placeholder-background: rgba(120, 123, 132, 0.075);
 }
@@ -48,49 +57,41 @@ am-consent[type='script'] {
 	&-banner {
 		box-sizing: border-box;
 		position: fixed;
-		z-index: 99999;
+		z-index: 9000;
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		column-gap: 0.9em;
-		padding: 1em;
-		left: 0;
+		flex-direction: column;
+		align-items: start;
+		gap: 5px;
 		right: 0;
-		bottom: 0;
-		height: auto;
-		max-width: min(100%, 100vw);
-		font-family: 'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif,
-			system-ui, sans-serif;
-		font-size: 16px;
-		font-weight: 500;
-		line-height: 1.55;
-		text-align: center;
+		margin-right: 20px;
+		bottom: 20px;
+		padding: 10px;
+		width: 20em;
+		font-family:
+			'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif, system-ui,
+			sans-serif;
+		font-size: 14px;
+		font-weight: 540;
+		line-height: 1.4;
 		color: var(--am-consent-banner-color);
 		background-color: var(--am-consent-banner-background);
-		border-top: 1px solid var(--am-consent-banner-border);
+		box-shadow:
+			0 1.25rem 2rem -1rem rgba(0, 0, 0, 0.12),
+			0 0.75rem 1.25rem -0.5rem rgba(0, 0, 0, 0.12);
+		border: 1px solid var(--am-consent-banner-border);
+		border-radius: 13px;
 		user-select: none;
 
 		& > svg {
-			font-size: 1.5em;
+			font-size: 24px;
 			pointer-events: none;
 		}
 
 		& > span {
-			padding: 0.6em 0;
+			padding: 9px 0;
 		}
 
 		&--small {
-			height: 32px;
-			gap: 7px;
-			left: auto;
-			right: 10px;
-			bottom: 10px;
-			padding: 0 7px;
-			font-size: 11px;
-			border-radius: 2em;
-			border: 1px solid var(--am-consent-banner-border);
-
 			& > svg {
 				pointer-events: all;
 				cursor: pointer;
@@ -100,38 +101,41 @@ am-consent[type='script'] {
 					opacity: 0.6;
 				}
 			}
-
-			& > span {
-				@media (max-width: 650px) {
-					display: none;
-				}
-			}
-
-			& > button {
-				padding-right: 5px;
-			}
 		}
 
-		&--small:not(&--open) > :not(svg) {
-			display: none;
+		&--small:not(&--open) {
+			width: auto;
+			padding: 3px;
+			border-radius: 200px;
+
+			& > :not(svg) {
+				display: none;
+			}
 		}
 
 		& a,
 		&__button {
 			padding: 0;
 			font-family: inherit;
-			font-weight: inherit;
+			font-weight: 540;
 			font-size: inherit;
-			line-height: inherit;
+			line-height: 2;
+			padding: 0 1.5em;
+			width: 100%;
 			appearance: none;
 			cursor: pointer;
-			color: inherit;
-			background-color: transparent;
-			border: none;
-			text-decoration: underline;
-			text-underline-offset: 3px;
+			color: var(--am-consent-button-secondary-color);
+			background-color: var(--am-consent-button-secondary-background);
+			border: 2px solid var(--am-consent-button-secondary-border);
+			border-radius: 5px;
 			opacity: 1;
 			transition: opacity 0.2s;
+
+			&--primary {
+				color: var(--am-consent-button-primary-color);
+				background-color: var(--am-consent-button-primary-background);
+				border: 2px solid var(--am-consent-button-primary-border);
+			}
 
 			&:hover {
 				opacity: 0.7;
@@ -149,8 +153,9 @@ am-consent[type='script'] {
 		height: 100%;
 		min-height: 160px;
 		padding: 1.5em;
-		font-family: 'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif,
-			system-ui, sans-serif;
+		font-family:
+			'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif, system-ui,
+			sans-serif;
 		font-size: 14px;
 		font-weight: 600;
 		color: var(--am-consent-placeholder-color, rgba(0, 0, 0, 0.1));

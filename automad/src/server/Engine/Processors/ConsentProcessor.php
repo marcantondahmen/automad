@@ -105,12 +105,30 @@ class ConsentProcessor {
 		$colorText = $Page->get(Fields::CUSTOM_CONSENT_COLOR_TEXT);
 		$colorBackground = $Page->get(Fields::CUSTOM_CONSENT_COLOR_BACKGROUND);
 		$colorBorder = $Page->get(Fields::CUSTOM_CONSENT_COLOR_BORDER);
+
+		$colorPrimaryBackground = $Page->get(Fields::CUSTOM_CONSENT_BUTTON_PRIMARY_COLOR_BACKGROUND);
+		$colorPrimaryBorder = $Page->get(Fields::CUSTOM_CONSENT_BUTTON_PRIMARY_COLOR_BORDER);
+		$colorPrimaryText = $Page->get(Fields::CUSTOM_CONSENT_BUTTON_PRIMARY_COLOR_TEXT);
+
+		$colorSecondaryBackground = $Page->get(Fields::CUSTOM_CONSENT_BUTTON_SECONDARY_COLOR_BACKGROUND);
+		$colorSecondaryBorder = $Page->get(Fields::CUSTOM_CONSENT_BUTTON_SECONDARY_COLOR_BORDER);
+		$colorSecondaryText = $Page->get(Fields::CUSTOM_CONSENT_BUTTON_SECONDARY_COLOR_TEXT);
+
 		$colorPlaceholderText = $Page->get(Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT);
 		$colorPlaceholderBackground = $Page->get(Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND);
 
 		$colors = $colorText ? "--am-consent-banner-color: $colorText;" : '';
 		$colors .= $colorBackground ? "--am-consent-banner-background: $colorBackground;" : '';
 		$colors .= $colorBorder ? "--am-consent-banner-border: $colorBorder;" : '';
+
+		$colors .= $colorPrimaryText ? "--am-consent-button-primary-color: $colorPrimaryText;" : '';
+		$colors .= $colorPrimaryBackground ? "--am-consent-button-primary-background: $colorPrimaryBackground;" : '';
+		$colors .= $colorPrimaryBorder ? "--am-consent-button-primary-border: $colorPrimaryBorder;" : '';
+
+		$colors .= $colorSecondaryText ? "--am-consent-button-secondary-color: $colorSecondaryText;" : '';
+		$colors .= $colorSecondaryBackground ? "--am-consent-button-secondary-background: $colorSecondaryBackground;" : '';
+		$colors .= $colorSecondaryBorder ? "--am-consent-button-secondary-border: $colorSecondaryBorder;" : '';
+
 		$colors .= $colorPlaceholderText ? "--am-consent-placeholder-color: $colorPlaceholderText;" : '';
 		$colors .= $colorPlaceholderBackground ? "--am-consent-placeholder-background: $colorPlaceholderBackground;" : '';
 		$colors = $colors ? "<style>:root { $colors }</style>" : '';
