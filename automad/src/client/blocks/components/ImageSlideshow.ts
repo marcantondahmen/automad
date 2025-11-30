@@ -84,7 +84,7 @@ export default class Slider {
 		create('div', ['swiper-button-next'], {}, swiperContainer);
 
 		imageSets.forEach(({ imageSet, caption }) => {
-			const captionHtml = caption
+			const captionHtml = caption.trim()
 				? `<div class="swiper-caption">${caption}</div>`
 				: '';
 
