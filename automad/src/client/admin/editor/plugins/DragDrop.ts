@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
+import { EditorJS, BlockAPI } from '@/admin/vendor/editorjs';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { query } from '@/admin/core';
-import EditorJS, { BlockAPI } from 'automad-editorjs';
 import { insertBlock } from '../utils';
 
 /**

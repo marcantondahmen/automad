@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
+import { TunesMenuConfig } from '@/admin/vendor/editorjs';
 import { App, CSS, html } from '@/admin/core';
 import { TableOfContentsBlockData } from '@/admin/types';
-import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export const tableOfContentsTypes = ['ordered', 'unordered'] as const;

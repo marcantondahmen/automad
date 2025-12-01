@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { API } from '@/admin/vendor/editorjs';
 import {
 	App,
 	Attr,
@@ -59,7 +60,6 @@ import {
 } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { API } from 'automad-editorjs';
 import iconAlignStart from '@/common/svg/flex/align-start.svg';
 import iconAlignCenter from '@/common/svg/flex/align-center.svg';
 import iconAlignEnd from '@/common/svg/flex/align-end.svg';

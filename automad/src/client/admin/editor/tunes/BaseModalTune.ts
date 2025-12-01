@@ -32,10 +32,9 @@
  * Licensed under the MIT license.
  */
 
+import { API, BlockAPI, ToolConfig, TunesMenuConfig } from '@/admin/vendor/editorjs';
 import { createGenericModal, CSS, fire, query } from '@/admin/core';
 import { BlockTuneConstructorOptions } from '@/admin/types';
-import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
-import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { filterEmptyData } from '../utils';
 
 /**

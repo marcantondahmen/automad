@@ -26,19 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { API, OutputData } from '@/admin/vendor/editorjs';
+import FilerobotImageEditor from 'filerobot-image-editor';
+import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
 
-export interface EditorOutputData extends OutputData {
-	automadVersion?: string;
-}
-
-export interface BaseEditor {
-	saver: API['saver'];
-	blocks: API['blocks'];
-}
+export { FilerobotImageEditor, FilerobotImageEditorConfig };

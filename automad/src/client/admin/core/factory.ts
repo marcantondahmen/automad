@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { EditorConfig } from '@/admin/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import {
 	EditorOutputData,
@@ -62,7 +63,6 @@ import { SharedDataFormComponent } from '@/admin/components/Forms/SharedDataForm
 import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
 import { SelectComponent } from '@/admin/components/Select';
-import { EditorConfig } from 'automad-editorjs';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { Section } from '@/common';
 

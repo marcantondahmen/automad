@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import FilerobotImageEditor from 'filerobot-image-editor';
-import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
+import { FilerobotImageEditor, FilerobotImageEditorConfig } from '@/admin/vendor/filerobot';
 import { KeyValueMap } from '@/admin/types';
 import {
 	App,

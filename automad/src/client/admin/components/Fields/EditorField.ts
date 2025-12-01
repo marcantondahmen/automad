@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { API } from '@/admin/vendor/editorjs';
 import {
 	Attr,
 	create,
@@ -48,7 +49,6 @@ import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData, KeyValueMap, UndoValue } from '@/admin/types';
 import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { API } from 'automad-editorjs';
 import { filterEmptyData } from '@/admin/editor/utils';
 
 /**

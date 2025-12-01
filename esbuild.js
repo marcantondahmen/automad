@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const isDev = process.argv.includes('--dev');
@@ -15,16 +16,50 @@ const outdir = path.join(__dirname, 'automad/dist/build');
 const year = new Date().getFullYear();
 const banner = `/* Automad, (c) ${pkg.author}, ${pkg.license} license */`;
 
-const entryPoints = [
-	'admin',
-	'blocks',
-	'consent',
-	'inpage',
-	'mail',
-	'prism',
-].map((entry) => {
-	return path.join(__dirname, 'automad/src/client', entry, '/index.ts');
-});
+const items = [
+	'admin/index',
+	'admin/vendor/editorjs',
+	'admin/vendor/filerobot',
+	'admin/vendor/toastui',
+	'blocks/index',
+	'consent/index',
+	'inpage/index',
+	'mail/index',
+	'prism/index',
+];
+
+const pathConfig = (items) => {
+	const hash = crypto
+		.createHash('sha256')
+		.update(pkg.version)
+		.digest('hex')
+		.slice(0, 8);
+
+	const entryPoints = items.map((entry) => {
+		return {
+			in: path.join(__dirname, 'automad/src/client', entry),
+			out: entry.replace(/vendor\/(.*)$/, `vendor/$1-${hash}`),
+		};
+	});
+
+	const vendorItems = items.filter((item) => item.includes('vendor'));
+	const alias = {};
+
+	vendorItems.forEach((item) => {
+		const basename = item.replace('admin/vendor/', '');
+		const key = `@/${item}`;
+
+		alias[key] = `./vendor/${basename}-${hash}.js`;
+	});
+
+	const external = vendorItems.map((item) => {
+		const basename = item.replace('admin/vendor/', '');
+
+		return `./vendor/${basename}*`;
+	});
+
+	return { alias, entryPoints, external };
+};
 
 const minify = (source) =>
 	source
@@ -62,21 +97,20 @@ const tsMinifier = () => {
 };
 
 const commonConfig = {
-	entryPoints,
+	...pathConfig(items),
 	bundle: true,
 	format: 'esm',
-	splitting: true,
 	sourcemap: isDev,
 	minify: !isDev,
 	target: ['es2022'],
 	assetNames: '[name]',
-	chunkNames: 'chunks/[name].[hash]',
 	write: true,
 	outdir,
 	banner: {
 		js: banner,
 		css: banner,
 	},
+	legalComments: 'inline',
 	drop: isDev ? [] : ['console'],
 	logLevel: 'info',
 	loader: {

@@ -32,9 +32,13 @@
  * Licensed under the MIT license.
  */
 
+import { API, InlineToolConstructorOptions } from '@/admin/vendor/editorjs';
 import { App, create, query } from '@/admin/core';
-import { KeyValueMap, TextAlignOption, TextAlignSelection } from '@/admin/types';
-import { API, InlineToolConstructorOptions } from 'automad-editorjs';
+import {
+	KeyValueMap,
+	TextAlignOption,
+	TextAlignSelection,
+} from '@/admin/types';
 
 abstract class BaseTextAlignInline {
 	/**

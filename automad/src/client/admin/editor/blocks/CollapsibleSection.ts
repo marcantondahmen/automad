@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { API, TunesMenuConfig } from '@/admin/vendor/editorjs';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import {
 	App,
@@ -48,8 +49,6 @@ import {
 	uniqueId,
 } from '@/admin/core';
 import { CollapsibleSectionBlockData } from '@/admin/types';
-import { API } from 'automad-editorjs';
-import { TunesMenuConfig } from 'automad-editorjs/types/tools/index';
 import { BaseBlock } from './BaseBlock';
 
 export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockData> {

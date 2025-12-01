@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { OutputBlockData } from 'automad-editorjs';
+import { OutputBlockData } from '@/admin/vendor/editorjs';
 
 export interface ComponentEditorData {
 	id: string;
