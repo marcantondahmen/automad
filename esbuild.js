@@ -11,51 +11,65 @@ import fs from 'fs';
 import crypto from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const isDev = process.argv.includes('--dev');
+const clientDir = path.join(__dirname, 'automad/src/client');
 const outdir = path.join(__dirname, 'automad/dist/build');
+const isDev = process.argv.includes('--dev');
 const year = new Date().getFullYear();
 const banner = `/* Automad, (c) ${pkg.author}, ${pkg.license} license */`;
 
-const items = [
-	'admin/index',
-	'admin/vendor/editorjs',
-	'admin/vendor/filerobot',
-	'admin/vendor/toastui',
-	'blocks/index',
-	'consent/index',
-	'inpage/index',
-	'mail/index',
-	'prism/index',
-];
+const hash = crypto
+	.createHash('sha256')
+	.update(pkg.version)
+	.digest('hex')
+	.slice(0, 8);
 
-const pathConfig = (items) => {
-	const hash = crypto
-		.createHash('sha256')
-		.update(pkg.version)
-		.digest('hex')
-		.slice(0, 8);
+const findEntries = (pattern) => {
+	return fs
+		.globSync(`${clientDir}/${pattern}`)
+		.map((f) => f.replace(`${clientDir}/`, '').replace('.ts', ''));
+};
 
-	const entryPoints = items.map((entry) => {
-		return {
-			in: path.join(__dirname, 'automad/src/client', entry),
-			out: entry.replace(/vendor\/(.*)$/, `vendor/$1-${hash}`),
-		};
-	});
+// The main purpose of this function is to automatically create a proper config
+// that handles vendor splitting based on the file system. The function returns
+// a single object that contains the entryPoints, alias and external props for
+// the esbuild configuration. All files matching */index.ts are considered
+// main modules. All files matching vendor/*.ts are considered vendor
+// modules that are split and build seperately.
+// Vendor modules are imported by the main modules and should not be linked
+// to the HTML document. A version hash will be automatically appended to
+// filename in order to invalidate browser caches after a release.
+const pathConfig = () => {
+	const mainEntries = findEntries('*/index.ts');
+	const vendorEntries = findEntries('vendor/*.ts');
 
-	const vendorItems = items.filter((item) => item.includes('vendor'));
+	const entryPoints = [
+		...mainEntries.map((entry) => {
+			return {
+				in: path.join(clientDir, entry),
+				out: entry,
+			};
+		}),
+		...vendorEntries.map((entry) => {
+			// Generate out files with hashes.
+			return {
+				in: path.join(clientDir, entry),
+				out: entry.replace(/vendor\/(.*)$/, `vendor/$1-${hash}`),
+			};
+		}),
+	];
+
 	const alias = {};
 
-	vendorItems.forEach((item) => {
-		const basename = item.replace('admin/vendor/', '');
-		const key = `@/${item}`;
+	// Generate hased aliases according to the out files above.
+	vendorEntries.forEach((entry) => {
+		const key = `@/${entry}`;
 
-		alias[key] = `./vendor/${basename}-${hash}.js`;
+		alias[key] = `../${entry}-${hash}.js`;
 	});
 
-	const external = vendorItems.map((item) => {
-		const basename = item.replace('admin/vendor/', '');
-
-		return `./vendor/${basename}*`;
+	// Also generate a list of files marked as external based on the vendor modules.
+	const external = vendorEntries.map((entry) => {
+		return `../${entry}*`;
 	});
 
 	return { alias, entryPoints, external };
@@ -97,7 +111,7 @@ const tsMinifier = () => {
 };
 
 const commonConfig = {
-	...pathConfig(items),
+	...pathConfig(),
 	bundle: true,
 	format: 'esm',
 	sourcemap: isDev,

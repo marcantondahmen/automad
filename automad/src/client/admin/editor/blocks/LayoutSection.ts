@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API } from '@/admin/vendor/editorjs';
+import { API } from '@/vendor/editorjs';
 import {
 	App,
 	Attr,

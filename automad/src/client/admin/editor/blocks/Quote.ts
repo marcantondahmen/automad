@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { ConversionConfig } from '@/admin/vendor/editorjs';
+import { ConversionConfig } from '@/vendor/editorjs';
 import { App, create, CSS, html } from '@/admin/core';
 import { QuoteBlockData, QuoteBlockInputs } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';

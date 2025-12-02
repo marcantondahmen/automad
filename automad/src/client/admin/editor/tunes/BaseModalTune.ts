@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, BlockAPI, ToolConfig, TunesMenuConfig } from '@/admin/vendor/editorjs';
+import { API, BlockAPI, ToolConfig, TunesMenuConfig } from '@/vendor/editorjs';
 import { createGenericModal, CSS, fire, query } from '@/admin/core';
 import { BlockTuneConstructorOptions } from '@/admin/types';
 import { filterEmptyData } from '../utils';

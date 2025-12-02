@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, InlineToolConstructorOptions } from '@/admin/vendor/editorjs';
+import { API, InlineToolConstructorOptions } from '@/vendor/editorjs';
 import { App, create, query } from '@/admin/core';
 import {
 	KeyValueMap,

@@ -32,7 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { FilerobotImageEditor, FilerobotImageEditorConfig } from '@/admin/vendor/filerobot';
+import {
+	FilerobotImageEditor,
+	FilerobotImageEditorConfig,
+} from '@/vendor/filerobot';
 import { KeyValueMap } from '@/admin/types';
 import {
 	App,

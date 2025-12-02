@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { EditorJS, BlockAPI } from '@/admin/vendor/editorjs';
+import { EditorJS, BlockAPI } from '@/vendor/editorjs';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { query } from '@/admin/core';
 import { insertBlock } from '../utils';

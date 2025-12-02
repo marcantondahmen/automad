@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { EditorJS, EditorConfig, I18nDictionary } from '@/admin/vendor/editorjs';
+import { EditorJS, EditorConfig, I18nDictionary } from '@/vendor/editorjs';
 import { getBlockTools } from '@/admin/editor/blocks';
 import { baseTunes, getBlockTunes } from '@/admin/editor/tunes';
 import { BaseComponent } from '@/admin/components/Base';

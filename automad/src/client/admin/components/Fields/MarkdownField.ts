@@ -40,7 +40,7 @@ import {
 	OpenTagToken,
 	CustomHTMLRenderer,
 	codeSyntaxHighlight,
-} from '@/admin/vendor/toastui';
+} from '@/vendor/toastui';
 import {
 	App,
 	Binding,

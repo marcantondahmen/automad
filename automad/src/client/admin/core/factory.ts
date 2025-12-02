@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { EditorConfig } from '@/admin/vendor/editorjs';
+import { EditorConfig } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import {
 	EditorOutputData,

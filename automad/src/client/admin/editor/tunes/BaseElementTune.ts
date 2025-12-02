@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, BlockAPI, BlockTune, ToolConfig } from '@/admin/vendor/editorjs';
+import { API, BlockAPI, BlockTune, ToolConfig } from '@/vendor/editorjs';
 import { BlockTuneConstructorOptions } from '@/admin/types';
 
 /**

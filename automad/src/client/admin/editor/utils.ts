@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { BlockAPI, OutputBlockData } from '@/admin/vendor/editorjs';
+import { BlockAPI, OutputBlockData } from '@/vendor/editorjs';
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
 import { App, getLogger } from '../core';
 import { nanoid } from 'nanoid';

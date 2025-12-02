@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { OutputBlockData } from '@/admin/vendor/editorjs';
+import { OutputBlockData } from '@/vendor/editorjs';
 
 export interface ComponentEditorData {
 	id: string;

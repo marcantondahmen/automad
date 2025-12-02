@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { TunesMenuConfig } from '@/admin/vendor/editorjs';
+import { TunesMenuConfig } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import {
 	App,

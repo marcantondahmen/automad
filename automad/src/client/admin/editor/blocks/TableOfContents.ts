@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { TunesMenuConfig } from '@/admin/vendor/editorjs';
+import { TunesMenuConfig } from '@/vendor/editorjs';
 import { App, CSS, html } from '@/admin/core';
 import { TableOfContentsBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';

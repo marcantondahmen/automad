@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, TunesMenuConfig } from '@/admin/vendor/editorjs';
+import { API, TunesMenuConfig } from '@/vendor/editorjs';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import {
 	App,
