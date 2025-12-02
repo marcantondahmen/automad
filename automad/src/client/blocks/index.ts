@@ -32,38 +32,48 @@
  * Licensed under the MIT license.
  */
 
-import './styles/index.less';
-import '../katex/index.scss';
 import { ComponentImplementationConstructor } from './types';
+import '../vendor/katex.scss';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-flip';
+import 'photoswipe/style.css';
+import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css';
+import './styles/index.less';
 
 const components = [
 	{
 		tag: 'am-gallery',
-		importer: async () => await import('./components/Gallery'),
+		importer: async () => await import('@/blocks/components/Gallery'),
 	},
 	{
 		tag: 'am-image-slideshow',
-		importer: async () => await import('./components/ImageSlideshow'),
+		importer: async () =>
+			await import('@/blocks/components/ImageSlideshow'),
 	},
 	{
 		tag: 'am-img-loader',
-		importer: async () => await import('./components/ImgLoader'),
+		importer: async () => await import('@/blocks/components/ImgLoader'),
 	},
 	{
 		tag: 'am-inline-tex',
-		importer: async () => await import('./components/InlineTex'),
+		importer: async () => await import('@/blocks/components/InlineTex'),
 	},
 	{
 		tag: 'am-mail',
-		importer: async () => await import('./components/Mail'),
+		importer: async () => await import('@/blocks/components/Mail'),
 	},
 	{
 		tag: 'am-table-of-contents',
-		importer: async () => await import('./components/TableOfContents'),
+		importer: async () =>
+			await import('@/blocks/components/TableOfContents'),
 	},
 	{
 		tag: 'am-tex',
-		importer: async () => await import('./components/Tex'),
+		importer: async () => await import('@/blocks/components/Tex'),
 	},
 ] as const;
 

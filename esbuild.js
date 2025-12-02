@@ -41,6 +41,7 @@ const findEntries = (pattern) => {
 const pathConfig = () => {
 	const mainEntries = findEntries('*/index.ts');
 	const vendorEntries = findEntries('vendor/*.ts');
+	const blockEntries = findEntries('blocks/components/*.ts');
 
 	const entryPoints = [
 		...mainEntries.map((entry) => {
@@ -49,28 +50,46 @@ const pathConfig = () => {
 				out: entry,
 			};
 		}),
-		...vendorEntries.map((entry) => {
-			// Generate out files with hashes.
+		...blockEntries.map((entry) => {
+			// Generate out files with hashes for imported blocks.
 			return {
 				in: path.join(clientDir, entry),
-				out: entry.replace(/vendor\/(.*)$/, `vendor/$1-${hash}`),
+				out: `${entry.replace('components/', '')}-${hash}`,
+			};
+		}),
+		...vendorEntries.map((entry) => {
+			// Generate out files with hashes for vendor modules.
+			return {
+				in: path.join(clientDir, entry),
+				out: `${entry}-${hash}`,
 			};
 		}),
 	];
 
 	const alias = {};
 
-	// Generate hased aliases according to the out files above.
+	// Generate hashed aliases according to the blocks out files above.
+	blockEntries.forEach((entry) => {
+		const key = `@/${entry}`;
+
+		alias[key] = `../${entry.replace('components/', '')}-${hash}.js`;
+	});
+
+	// Generate hashed aliases according to the vendor out files above.
 	vendorEntries.forEach((entry) => {
 		const key = `@/${entry}`;
 
 		alias[key] = `../${entry}-${hash}.js`;
 	});
 
-	// Also generate a list of files marked as external based on the vendor modules.
-	const external = vendorEntries.map((entry) => {
-		return `../${entry}*`;
-	});
+	const external = [
+		// Also generate a list of files marked as external based on the blocks.
+		...blockEntries.map(
+			(entry) => `../${entry.replace('components/', '')}-${hash}.js`
+		),
+		// Also generate a list of files marked as external based on the vendor modules.
+		...vendorEntries.map((entry) => `../${entry}-${hash}.js`),
+	];
 
 	return { alias, entryPoints, external };
 };
