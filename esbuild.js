@@ -1,29 +1,63 @@
-//
-// Esbuild config for Automad
-//
-// This script handles automatic splitting of vendor modules and block classes in order
-// to be able to import those modules asynchronously. Splitting can be controlled entirely
-// by the file structure of the entry points. There are three main catergories:
-//
-// 1. Main "index" Files
-//
-// Index files are the main entry points that are loaded by the actual PHP pages.
-// They have to match the pattern "*/index.ts".
-//
-// 2. Block Classes
-//
-// Block classes are imported dynamically whenever a related web component is connected.
-// They have to match the pattern "blocks/components/*.ts".
-// All class modules are marked as external for esbuild and split into separate files
-// with a hashed filename.
-//
-// 3. Vendor Modules
-//
-// Large vendor modules are also split into separate files and also have hashed
-// filenames. Like blocks, they are also imported by other modules and therefore
-// are not loaded by PHP pages.
-// They have to match the pattern "vendor/*.ts".
-//
+/**
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2025 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ *
+ * ------------------------------
+ *
+ * Esbuild config for Automad
+ *
+ * This script handles automatic splitting of vendor modules and block classes in order
+ * to be able to import those modules asynchronously. Splitting can be controlled entirely
+ * by the file structure of the entry points. There are three main catergories:
+ *
+ * 1. Main "index" Files
+ *
+ * Index files are the main entry points that are loaded by the actual PHP pages.
+ * They have to named "index.ts".
+ *
+ * 2. Block Classes
+ *
+ * Block classes are imported dynamically whenever a related web component is connected.
+ * They have to match the pattern "blocks/components/*.ts".
+ * All class modules are marked as external for esbuild and split into separate files
+ * with a hashed filename.
+ *
+ * 3. Vendor Modules
+ *
+ * Large vendor modules are also split into separate files and also have hashed
+ * filenames. Like blocks, they are also imported by other modules and therefore
+ * are not loaded by PHP pages.
+ * They have to match the pattern "vendor/*.ts".
+ */
 
 import pkg from './package.json' with { type: 'json' };
 import browserSync from 'browser-sync';
