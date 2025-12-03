@@ -1,3 +1,30 @@
+//
+// Esbuild config for Automad
+//
+// This script handles automatic splitting of vendor modules and block classes in order
+// to be able to import those modules asynchronously. Splitting can be controlled entirely
+// by the file structure of the entry points. There are three main catergories:
+//
+// 1. Main "index" Files
+//
+// Index files are the main entry points that are loaded by the actual PHP pages.
+// They have to match the pattern "*/index.ts".
+//
+// 2. Block Classes
+//
+// Block classes are imported dynamically whenever a related web component is connected.
+// They have to match the pattern "blocks/components/*.ts".
+// All class modules are marked as external for esbuild and split into separate files
+// with a hashed filename.
+//
+// 3. Vendor Modules
+//
+// Large vendor modules are also split into separate files and also have hashed
+// filenames. Like blocks, they are also imported by other modules and therefore
+// are not loaded by PHP pages.
+// They have to match the pattern "vendor/*.ts".
+//
+
 import pkg from './package.json' with { type: 'json' };
 import browserSync from 'browser-sync';
 import { lessLoader } from 'esbuild-plugin-less';
@@ -16,12 +43,15 @@ const outdir = path.join(__dirname, 'automad/dist/build');
 const isDev = process.argv.includes('--dev');
 const year = new Date().getFullYear();
 const banner = `/* Automad, (c) ${pkg.author}, ${pkg.license} license */`;
+const hashPlaceholder = '@HASH';
 
-const hash = crypto
-	.createHash('sha256')
-	.update(pkg.version)
-	.digest('hex')
-	.slice(0, 8);
+const fileHash = (buffer, length = 8) => {
+	return crypto
+		.createHash('sha1')
+		.update(buffer)
+		.digest('hex')
+		.slice(0, length);
+};
 
 const findEntries = (pattern) => {
 	return fs
@@ -29,15 +59,6 @@ const findEntries = (pattern) => {
 		.map((f) => f.replace(`${clientDir}/`, '').replace('.ts', ''));
 };
 
-// The main purpose of this function is to automatically create a proper config
-// that handles vendor splitting based on the file system. The function returns
-// a single object that contains the entryPoints, alias and external props for
-// the esbuild configuration. All files matching */index.ts are considered
-// main modules. All files matching vendor/*.ts are considered vendor
-// modules that are split and build seperately.
-// Vendor modules are imported by the main modules and should not be linked
-// to the HTML document. A version hash will be automatically appended to
-// filename in order to invalidate browser caches after a release.
 const pathConfig = () => {
 	const mainEntries = findEntries('*/index.ts');
 	const vendorEntries = findEntries('vendor/*.ts');
@@ -51,47 +72,86 @@ const pathConfig = () => {
 			};
 		}),
 		...blockEntries.map((entry) => {
-			// Generate out files with hashes for imported blocks.
 			return {
 				in: path.join(clientDir, entry),
-				out: `${entry.replace('components/', '')}-${hash}`,
+				out: `${entry.replace('components/', '')}-${hashPlaceholder}`,
 			};
 		}),
 		...vendorEntries.map((entry) => {
-			// Generate out files with hashes for vendor modules.
 			return {
 				in: path.join(clientDir, entry),
-				out: `${entry}-${hash}`,
+				out: `${entry}-${hashPlaceholder}`,
 			};
 		}),
 	];
 
 	const alias = {};
 
-	// Generate hashed aliases according to the blocks out files above.
 	blockEntries.forEach((entry) => {
 		const key = `@/${entry}`;
 
-		alias[key] = `../${entry.replace('components/', '')}-${hash}.js`;
+		alias[key] =
+			`../${entry.replace('components/', '')}-${hashPlaceholder}.js`;
 	});
 
-	// Generate hashed aliases according to the vendor out files above.
 	vendorEntries.forEach((entry) => {
 		const key = `@/${entry}`;
 
-		alias[key] = `../${entry}-${hash}.js`;
+		alias[key] = `../${entry}-${hashPlaceholder}.js`;
 	});
 
 	const external = [
-		// Also generate a list of files marked as external based on the blocks.
 		...blockEntries.map(
-			(entry) => `../${entry.replace('components/', '')}-${hash}.js`
+			(entry) =>
+				`../${entry.replace('components/', '')}-${hashPlaceholder}.js`
 		),
-		// Also generate a list of files marked as external based on the vendor modules.
-		...vendorEntries.map((entry) => `../${entry}-${hash}.js`),
+		...vendorEntries.map((entry) => `../${entry}-${hashPlaceholder}.js`),
 	];
 
 	return { alias, entryPoints, external };
+};
+
+const hashImportsPlugin = () => {
+	return {
+		name: 'hash-imports',
+		setup(build) {
+			build.onEnd(async (result) => {
+				const toBeHashed = fs.globSync(
+					`${outdir}/**/*-${hashPlaceholder}.js`
+				);
+
+				const renameMap = new Map();
+				const relative = (p) =>
+					`../${path.basename(path.dirname(p))}/${path.basename(p)}`;
+
+				toBeHashed.forEach((filePath) => {
+					const buffer = fs.readFileSync(filePath);
+					const hash = fileHash(buffer);
+					const newPath = filePath.replace(hashPlaceholder, hash);
+
+					fs.renameSync(filePath, newPath);
+
+					renameMap.set(relative(filePath), relative(newPath));
+				});
+
+				const outputs = fs.globSync(`${outdir}/**/*.js`);
+
+				outputs.forEach((filePath) => {
+					let content = fs.readFileSync(filePath, 'utf8');
+
+					for (const [oldName, newName] of renameMap) {
+						content = content.replaceAll(oldName, newName);
+					}
+
+					fs.writeFileSync(filePath, content);
+				});
+
+				if (!isDev) {
+					console.log('\nHashed imports:', renameMap);
+				}
+			});
+		},
+	};
 };
 
 const minify = (source) =>
@@ -107,7 +167,7 @@ const minify = (source) =>
 		// Also trim template strings.
 		.replace(/`([^`]+)`/g, (_, s) => `\`${s.trim()}\``);
 
-const tsMinifier = () => {
+const tsMinifierPlugin = () => {
 	return {
 		name: 'ts-minifier',
 		setup(build) {
@@ -152,6 +212,7 @@ const commonConfig = {
 		'.woff2': 'file',
 	},
 	define: { DEVELOPMENT: isDev.toString() },
+	metafile: true,
 	plugins: [
 		lessLoader(),
 		sassPlugin({
@@ -159,7 +220,8 @@ const commonConfig = {
 			filter: /\.scss/,
 		}),
 		postcss(),
-		...(isDev ? [] : [tsMinifier()]),
+		...(isDev ? [] : [tsMinifierPlugin()]),
+		hashImportsPlugin(),
 	],
 };
 
