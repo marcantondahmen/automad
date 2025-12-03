@@ -72,7 +72,7 @@ import fs from 'fs';
 import crypto from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const clientDir = path.join(__dirname, 'automad/src/client');
+const clientSrc = path.join(__dirname, 'automad/src/client');
 const outdir = path.join(__dirname, 'automad/dist/build');
 const isDev = process.argv.includes('--dev');
 const year = new Date().getFullYear();
@@ -89,8 +89,8 @@ const fileHash = (buffer, length = 8) => {
 
 const findEntries = (pattern) => {
 	return fs
-		.globSync(`${clientDir}/${pattern}`)
-		.map((f) => f.replace(`${clientDir}/`, '').replace('.ts', ''));
+		.globSync(`${clientSrc}/${pattern}`)
+		.map((f) => f.replace(`${clientSrc}/`, '').replace('.ts', ''));
 };
 
 const pathConfig = () => {
@@ -101,19 +101,19 @@ const pathConfig = () => {
 	const entryPoints = [
 		...mainEntries.map((entry) => {
 			return {
-				in: path.join(clientDir, entry),
+				in: path.join(clientSrc, entry),
 				out: entry,
 			};
 		}),
 		...blockEntries.map((entry) => {
 			return {
-				in: path.join(clientDir, entry),
+				in: path.join(clientSrc, entry),
 				out: `${entry.replace('components/', '')}-${hashPlaceholder}`,
 			};
 		}),
 		...vendorEntries.map((entry) => {
 			return {
-				in: path.join(clientDir, entry),
+				in: path.join(clientSrc, entry),
 				out: `${entry}-${hashPlaceholder}`,
 			};
 		}),
