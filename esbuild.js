@@ -57,27 +57,28 @@
  * filenames. Like blocks, they are also imported by other modules and therefore
  * are not loaded by PHP pages.
  * They have to match the pattern "vendor/*.ts".
+ *
+ * Note that the common module is not build as an external file.
  */
 
 import pkg from './package.json' with { type: 'json' };
 import browserSync from 'browser-sync';
-import { lessLoader } from 'esbuild-plugin-less';
-import { sassPlugin } from 'esbuild-sass-plugin';
 import postcss from 'esbuild-postcss';
 import esbuild from 'esbuild';
-import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
+import crypto from 'crypto';
 import path from 'path';
 import fs from 'fs';
-import crypto from 'crypto';
+import { lessLoader } from 'esbuild-plugin-less';
+import { sassPlugin } from 'esbuild-sass-plugin';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const clientSrc = path.join(__dirname, 'automad/src/client');
 const outdir = path.join(__dirname, 'automad/dist/build');
 const isDev = process.argv.includes('--dev');
-const year = new Date().getFullYear();
 const banner = `/* Automad, (c) ${pkg.author}, ${pkg.license} license */`;
-const hashPlaceholder = '@HASH';
+const hashPlaceholder = '@hash';
 
 const fileHash = (buffer, length = 8) => {
 	return crypto
@@ -93,8 +94,23 @@ const findEntries = (pattern) => {
 		.map((f) => f.replace(`${clientSrc}/`, '').replace('.ts', ''));
 };
 
+const makeRelative = (file) =>
+	`../${path.basename(path.dirname(file))}/${path.basename(file)}`;
+
+const write = (file, contents) => {
+	fs.mkdirSync(path.dirname(file), {
+		recursive: true,
+	});
+
+	fs.writeFileSync(file, contents);
+	console.log(`   ${makeRelative(file)}`);
+};
+
 const pathConfig = () => {
-	const mainEntries = findEntries('*/index.ts');
+	const mainEntries = findEntries('*/index.ts').filter(
+		(f) => !f.match(/common/)
+	);
+
 	const vendorEntries = findEntries('vendor/*.ts');
 	const blockEntries = findEntries('blocks/components/*.ts');
 
@@ -145,43 +161,118 @@ const pathConfig = () => {
 	return { alias, entryPoints, external };
 };
 
+const outputHashes = new Map();
+
 const hashImportsPlugin = () => {
 	return {
 		name: 'hash-imports',
 		setup(build) {
 			build.onEnd(async (result) => {
-				const toBeHashed = fs.globSync(
-					`${outdir}/**/*-${hashPlaceholder}.js`
+				const outputs = new Map();
+				const hashRegex = new RegExp(
+					`\\.\\.\\/[\\w\\/]*-${hashPlaceholder}\\.js`,
+					'g'
 				);
 
-				const renameMap = new Map();
-				const relative = (p) =>
-					`../${path.basename(path.dirname(p))}/${path.basename(p)}`;
+				result.outputFiles.forEach((out) => {
+					if (out.path.match(/\.js$/)) {
+						const content = new TextDecoder('utf-8').decode(
+							out.contents
+						);
 
-				toBeHashed.forEach((filePath) => {
-					const buffer = fs.readFileSync(filePath);
-					const hash = fileHash(buffer);
-					const newPath = filePath.replace(hashPlaceholder, hash);
+						const pathRelative = makeRelative(out.path);
+						const pathAbsolute = out.path;
+						const hashedImports = content.match(hashRegex) ?? [];
+						const hash = fileHash(content);
 
-					fs.renameSync(filePath, newPath);
-
-					renameMap.set(relative(filePath), relative(newPath));
-				});
-
-				const outputs = fs.globSync(`${outdir}/**/*.js`);
-
-				outputs.forEach((filePath) => {
-					let content = fs.readFileSync(filePath, 'utf8');
-
-					for (const [oldName, newName] of renameMap) {
-						content = content.replaceAll(oldName, newName);
+						outputs.set(pathRelative, {
+							content,
+							hash,
+							pathRelative,
+							pathAbsolute,
+							hashedImports,
+							newPathAbsolute: null,
+						});
+					} else {
+						// Write all non-JS files.
+						if (
+							!outputHashes.get(out.path) ||
+							outputHashes.get(out.path) != out.hash
+						) {
+							write(out.path, out.contents);
+							outputHashes.set(out.path, out.hash);
+						}
 					}
-
-					fs.writeFileSync(filePath, content);
 				});
 
-				if (!isDev) {
-					console.log('\nHashed imports:', renameMap);
+				outputs.forEach((o) => {
+					o.dependents = [];
+
+					outputs.forEach((d) => {
+						if (d.hashedImports?.includes(o.pathRelative)) {
+							o.dependents.push(d.pathRelative);
+						}
+					});
+				});
+
+				while (outputs.size > 0) {
+					let nextKeys = [];
+
+					outputs.forEach((o, key) => {
+						if (
+							o.hashedImports === null ||
+							o.hashedImports?.length == 0
+						) {
+							nextKeys.push(key);
+						}
+					});
+
+					nextKeys.forEach((key) => {
+						const o = outputs.get(key);
+
+						o.newPathAbsolute = o.pathAbsolute.replace(
+							hashPlaceholder,
+							o.hash
+						);
+
+						const newImport = o.pathRelative.replace(
+							hashPlaceholder,
+							o.hash
+						);
+
+						o.dependents.forEach((path) => {
+							const d = outputs.get(path);
+
+							d.content = d.content.replaceAll(
+								o.pathRelative,
+								newImport
+							);
+
+							d.hash = fileHash(d.content);
+							d.hashedImports = d.content.match(hashRegex) ?? [];
+						});
+
+						if (
+							!outputHashes.get(key) ||
+							outputHashes.get(key) != o.hash
+						) {
+							fs.globSync(
+								o.pathAbsolute.replace(
+									/-[a-zA-Z0-9@]+\.js/,
+									'-*.js'
+								)
+							).forEach((f) => {
+								if (fs.existsSync(f)) {
+									fs.unlinkSync(f);
+								}
+							});
+
+							write(o.newPathAbsolute, o.content);
+							outputHashes.set(key, o.hash);
+						}
+
+						outputs.delete(key);
+					});
 				}
 			});
 		},
@@ -227,11 +318,10 @@ const commonConfig = {
 	...pathConfig(),
 	bundle: true,
 	format: 'esm',
-	sourcemap: isDev,
 	minify: !isDev,
 	target: ['es2022'],
 	assetNames: '[name]',
-	write: true,
+	write: false,
 	outdir,
 	banner: {
 		js: banner,
@@ -245,8 +335,8 @@ const commonConfig = {
 		'.woff': 'file',
 		'.woff2': 'file',
 	},
-	define: { DEVELOPMENT: isDev.toString() },
 	metafile: true,
+	define: { DEVELOPMENT: isDev.toString() },
 	plugins: [
 		lessLoader(),
 		sassPlugin({
