@@ -114,6 +114,8 @@ const pathConfig = () => {
 	const vendorEntries = findEntries('vendor/*.ts');
 	const blockEntries = findEntries('blocks/components/*.ts');
 
+	// Prepare the entryPoints by adding a hash placeholder to all
+	// non-index files.
 	const entryPoints = [
 		...mainEntries.map((entry) => {
 			return {
@@ -137,6 +139,8 @@ const pathConfig = () => {
 
 	const alias = {};
 
+	// The items in the alias list are modified by adding the hash placeholder
+	// accordingly  to match the entryPoints config.
 	blockEntries.forEach((entry) => {
 		const key = `@/${entry}`;
 
@@ -150,6 +154,7 @@ const pathConfig = () => {
 		alias[key] = `../${entry}-${hashPlaceholder}.js`;
 	});
 
+	// Now mark all non-index files with their hashed filenames as external.
 	const external = [
 		...blockEntries.map(
 			(entry) =>
@@ -169,95 +174,121 @@ const hashImportsPlugin = () => {
 		setup(build) {
 			build.onEnd(async (result) => {
 				const outputs = new Map();
-				const hashRegex = new RegExp(
+				const placeholderRegex = new RegExp(
 					`\\.\\.\\/[\\w\\/]*-${hashPlaceholder}\\.js`,
 					'g'
 				);
 
-				result.outputFiles.forEach((out) => {
-					if (out.path.match(/\.js$/)) {
+				// First the esbuild output files array is converted
+				// to a custom output map with additional data.
+				result.outputFiles.forEach((outputFile) => {
+					if (outputFile.path.match(/\.js$/)) {
 						const content = new TextDecoder('utf-8').decode(
-							out.contents
+							outputFile.contents
 						);
 
-						const pathRelative = makeRelative(out.path);
-						const pathAbsolute = out.path;
-						const hashedImports = content.match(hashRegex) ?? [];
-						const hash = fileHash(content);
+						const pathRelative = makeRelative(outputFile.path);
+						const pathAbsolute = outputFile.path;
+
+						// Placeholder imports are imports that contain
+						// the @hash placeholder in their path.
+						const placeholderImports =
+							content.match(placeholderRegex) ?? [];
 
 						outputs.set(pathRelative, {
 							content,
-							hash,
 							pathRelative,
 							pathAbsolute,
-							hashedImports,
+							placeholderImports,
 							newPathAbsolute: null,
 						});
 					} else {
-						// Write all non-JS files.
+						// Write all non-JS assets directly and without hashing
+						// since they are not async imported.
 						if (
-							!outputHashes.get(out.path) ||
-							outputHashes.get(out.path) != out.hash
+							!outputHashes.get(outputFile.path) ||
+							outputHashes.get(outputFile.path) != outputFile.hash
 						) {
-							write(out.path, out.contents);
-							outputHashes.set(out.path, out.hash);
+							write(outputFile.path, outputFile.contents);
+							outputHashes.set(outputFile.path, outputFile.hash);
 						}
 					}
 				});
 
-				outputs.forEach((o) => {
-					o.dependents = [];
+				// Now iterate all output files once and store all files
+				// that import it inside the dependents array.
+				outputs.forEach((out) => {
+					out.dependents = [];
 
-					outputs.forEach((d) => {
-						if (d.hashedImports?.includes(o.pathRelative)) {
-							o.dependents.push(d.pathRelative);
+					outputs.forEach((dep) => {
+						if (
+							dep.placeholderImports?.includes(out.pathRelative)
+						) {
+							out.dependents.push(dep.pathRelative);
 						}
 					});
 				});
 
+				// In order to resolve all paths correctly and hash their content
+				// after the contained import placeholders are also resolved
+				// and hashed as well, the output map is processed in a
+				// while loop as longs as it contains elements.
 				while (outputs.size > 0) {
-					let nextKeys = [];
+					let finalizedFiles = [];
 
-					outputs.forEach((o, key) => {
-						if (
-							o.hashedImports === null ||
-							o.hashedImports?.length == 0
-						) {
-							nextKeys.push(key);
+					// During each iteration, all files that do not contain any import
+					// placeholders, are considered clean and finalized" and will be
+					// added to the array of files that can be hashed and processed.
+					outputs.forEach((out, key) => {
+						if (out.placeholderImports.length == 0) {
+							finalizedFiles.push(key);
 						}
 					});
 
-					nextKeys.forEach((key) => {
-						const o = outputs.get(key);
+					// That hash is used to update the file path by replacing
+					// the placeholder with it. Then all references in its dependents are updated as well.
+					finalizedFiles.forEach((key) => {
+						const out = outputs.get(key);
 
-						o.newPathAbsolute = o.pathAbsolute.replace(
+						// When processing the clean and finalized files, first,
+						// a hash of the file content is generated.
+						const hash = fileHash(out.content);
+
+						// That hash is used to update the file path by replacing
+						// the placeholder with it.
+						out.newPathAbsolute = out.pathAbsolute.replace(
 							hashPlaceholder,
-							o.hash
+							hash
 						);
 
-						const newImport = o.pathRelative.replace(
+						const newImport = out.pathRelative.replace(
 							hashPlaceholder,
-							o.hash
+							hash
 						);
 
-						o.dependents.forEach((path) => {
-							const d = outputs.get(path);
+						out.dependents.forEach((path) => {
+							const dep = outputs.get(path);
 
-							d.content = d.content.replaceAll(
-								o.pathRelative,
+							// Then all file references in its dependents are updated as well.
+							dep.content = dep.content.replaceAll(
+								out.pathRelative,
 								newImport
 							);
 
-							d.hash = fileHash(d.content);
-							d.hashedImports = d.content.match(hashRegex) ?? [];
+							// Now the finalized and hashed imports are removed from the
+							// dependent's list of placeholder imports.
+							dep.placeholderImports =
+								dep.content.match(placeholderRegex) ?? [];
 						});
 
 						if (
 							!outputHashes.get(key) ||
-							outputHashes.get(key) != o.hash
+							outputHashes.get(key) != hash
 						) {
+							// In case the hash has changed since the last build or it is
+							// the first build, remove old versions of the file first.
 							fs.globSync(
-								o.pathAbsolute.replace(
+								out.pathAbsolute.replace(
 									/-[a-zA-Z0-9@]+\.js/,
 									'-*.js'
 								)
@@ -267,10 +298,14 @@ const hashImportsPlugin = () => {
 								}
 							});
 
-							write(o.newPathAbsolute, o.content);
-							outputHashes.set(key, o.hash);
+							// Then write the content to the file with the new hashed filename.
+							write(out.newPathAbsolute, out.content);
+
+							// And store the hash in the cross-build map.
+							outputHashes.set(key, hash);
 						}
 
+						// Finally remove the file form the outputs map.
 						outputs.delete(key);
 					});
 				}
