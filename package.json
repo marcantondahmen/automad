@@ -40,7 +40,7 @@
     "@vovayatsyuk/photoswipe-object-position": "^1.0.0",
     "@yaireo/tagify": "^4.17.6",
     "automad-editorjs": "^2.29.0-am.6",
-    "automad-prism-themes": "^0.3.4",
+    "automad-prism-themes": "^0.3.5",
     "autoprefixer": "^10.4.21",
     "bootstrap-icons": "^1.11.1",
     "browser-sync": "^3.0.4",
