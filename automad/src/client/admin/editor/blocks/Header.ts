@@ -33,9 +33,9 @@
  * https://automad.org/license
  */
 
+import { HTMLPasteEvent, TunesMenuConfig } from '@/vendor/editorjs';
 import { App, create, CSS, html, query } from '@/admin/core';
 import { HeaderBlockData } from '@/admin/types';
-import { HTMLPasteEvent, TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export class HeaderBlock extends BaseBlock<HeaderBlockData> {

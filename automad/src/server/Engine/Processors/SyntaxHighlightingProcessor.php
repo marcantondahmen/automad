@@ -77,12 +77,9 @@ class SyntaxHighlightingProcessor {
 			return $str;
 		}
 
-		$theme = $this->Automad->Context->get()->get(Fields::SYNTAX_THEME);
+		$theme = $this->Automad->Context->get()->get(Fields::SYNTAX_THEME) ?: 'base';
 
-		if ($theme && $theme != 'none') {
-			$str = Head::append($str, Asset::css("dist/prism-themes/prism-{$theme}.css", false));
-		}
-
+		$str = Head::append($str, Asset::css("dist/prism-themes/prism-{$theme}.css", false));
 		$str = Head::append($str, Asset::css('dist/build/prism/index.css', false));
 		$str = Body::append($str, Asset::js('dist/build/prism/index.js', false));
 

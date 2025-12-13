@@ -110,7 +110,7 @@ class Routes {
 	 * @param bool $isAuthenticatedUser
 	 */
 	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser): void {
-		$apiBase = RequestHandler::$apiBase;
+		$apiBase = RequestHandler::API_BASE;
 
 		$Router->register(
 			"$apiBase/.*",

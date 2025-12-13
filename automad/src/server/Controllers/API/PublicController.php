@@ -88,12 +88,13 @@ class PublicController {
 					if ($field) {
 						if (strpos($field, '+') === 0) {
 							$value = Blocks::render($Page->get($field, true), $Automad);
-							$content[$field] = $shorten ? Str::shorten($value, $shorten) : $value;
+							$content[$field] = $shorten ? html_entity_decode(Str::shorten($value, $shorten)) : $value;
 						} elseif (strpos($field, 'text') === 0) {
 							$value = Str::markdown($Page->get($field));
-							$content[$field] = $shorten ? Str::shorten($value, $shorten) : $value;
+							$content[$field] = $shorten ? html_entity_decode(Str::shorten($value, $shorten)) : $value;
 						} else {
-							$content[$field] = $Page->get($field);
+							$value = $Page->get($field);
+							$content[$field] = $value;
 						}
 					}
 				}

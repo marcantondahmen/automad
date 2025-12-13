@@ -292,9 +292,7 @@ export class NavTreeComponent extends BaseComponent {
 			const currentNode = this.tree.findNode('url', current);
 
 			currentNode?.reveal();
-			currentNode?.scrollIntoView({
-				block: 'end',
-			});
+			currentNode?.scrollIntoView(true);
 		}
 
 		Bindings.connectElements(this);

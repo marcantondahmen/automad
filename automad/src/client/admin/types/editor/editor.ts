@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, OutputData } from 'automad-editorjs';
+import { API, OutputData } from '@/vendor/editorjs';
 
 export interface EditorOutputData extends OutputData {
 	automadVersion?: string;

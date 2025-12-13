@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
+import { ConversionConfig } from '@/vendor/editorjs';
 import { App, create, CSS, html } from '@/admin/core';
 import { CalloutBlockData, CalloutBlockInputs } from '@/admin/types';
-import { ConversionConfig } from 'automad-editorjs';
 import { BaseBlock } from './BaseBlock';
 
 export class CalloutBlock extends BaseBlock<CalloutBlockData> {

@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import FilerobotImageEditor from 'filerobot-image-editor';
-import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
+import { FilerobotImageEditorConfig } from '@/vendor/filerobot';
 import { KeyValueMap } from '@/admin/types';
 import {
 	App,
@@ -118,7 +117,10 @@ class FileRobotComponent extends BaseComponent {
 	 * @param form
 	 * @param modal
 	 */
-	private initFileRobot(form: FormComponent, modal: ModalComponent): void {
+	private async initFileRobot(
+		form: FormComponent,
+		modal: ModalComponent
+	): Promise<void> {
 		const config = {
 			source: this.elementAttributes[Attr.file],
 			savingPixelRatio: 1,
@@ -146,6 +148,8 @@ class FileRobotComponent extends BaseComponent {
 				close();
 			},
 		};
+
+		const { FilerobotImageEditor } = await import('@/vendor/filerobot');
 
 		const filerobotImageEditor = new FilerobotImageEditor(
 			form,

@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
+import { EditorJS } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
-import EditorJS from 'automad-editorjs';
 import {
 	App,
 	Attr,

@@ -313,20 +313,20 @@ export const createCustomizationFields = (
 		)
 	);
 
+	const cookieColors = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{ style: '--min: 20rem;' },
+		sections.customizations
+	);
+
 	createField(
 		FieldTag.color,
-		sections.customizations,
+		cookieColors,
 		buildFieldProps(
 			'CUSTOM_CONSENT_COLOR_TEXT',
 			App.text('customConsentColorText')
 		)
-	);
-
-	const cookieColors = create(
-		'div',
-		[CSS.grid, CSS.gridAuto],
-		{ style: '--min: 24rem;' },
-		sections.customizations
 	);
 
 	createField(
@@ -344,6 +344,67 @@ export const createCustomizationFields = (
 		buildFieldProps(
 			'CUSTOM_CONSENT_COLOR_BORDER',
 			App.text('customConsentColorBorder')
+		)
+	);
+
+	const cookieButtonColors = create(
+		'div',
+		[CSS.grid, CSS.gridAuto],
+		{ style: '--min: 20rem;' },
+		sections.customizations
+	);
+
+	createField(
+		FieldTag.color,
+		cookieButtonColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_BUTTON_PRIMARY_COLOR_TEXT',
+			App.text('customConsentButtonPrimaryColorText')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookieButtonColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_BUTTON_PRIMARY_COLOR_BACKGROUND',
+			App.text('customConsentButtonPrimaryColorBackground')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookieButtonColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_BUTTON_PRIMARY_COLOR_BORDER',
+			App.text('customConsentButtonPrimaryColorBorder')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookieButtonColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_BUTTON_SECONDARY_COLOR_TEXT',
+			App.text('customConsentButtonSecondaryColorText')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookieButtonColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_BUTTON_SECONDARY_COLOR_BACKGROUND',
+			App.text('customConsentButtonSecondaryColorBackground')
+		)
+	);
+
+	createField(
+		FieldTag.color,
+		cookieButtonColors,
+		buildFieldProps(
+			'CUSTOM_CONSENT_BUTTON_SECONDARY_COLOR_BORDER',
+			App.text('customConsentButtonSecondaryColorBorder')
 		)
 	);
 

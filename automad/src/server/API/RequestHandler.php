@@ -53,13 +53,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class RequestHandler {
+	const API_BASE = '/_api';
 	const REQUEST_KEY_CSRF = '__csrf__';
 	const REQUEST_KEY_JSON = '__json__';
-
-	/**
-	 * The API base route.
-	 */
-	public static string $apiBase = '/_api';
 
 	/**
 	 * The controller namespace.
@@ -146,7 +142,7 @@ class RequestHandler {
 	 * @return string the controller name
 	 */
 	private static function routeController(string $route): string {
-		$route = str_replace(self::$apiBase . '/', '', $route);
+		$route = str_replace(self::API_BASE . '/', '', $route);
 		[$class, $method] = explode('/', $route);
 
 		$class = self::$controllerNamespace . str_replace(' ', '', ucwords(str_replace('-', ' ', $class))) . 'Controller';

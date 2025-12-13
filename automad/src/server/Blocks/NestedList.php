@@ -83,6 +83,10 @@ class NestedList extends AbstractBlock {
 	 * @return string the rendered item
 	 */
 	private static function renderItems(array $items): string {
+		if (empty($items)) {
+			return '';
+		}
+
 		$tag = self::$tag;
 		$html = "<$tag>";
 

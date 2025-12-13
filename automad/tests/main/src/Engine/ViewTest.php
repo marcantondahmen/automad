@@ -33,42 +33,42 @@ class ViewTest extends TestCase {
 			'email_01' => <<< HTML
 						<html lang="en">
 							<head>{$metaTags}
-							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							{$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#">test</a>
 								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
 								<a href="#">test</a>
-							{$assets->mailJS}{$custom->bodyEnd}$dock</body>
+							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'email_02' => <<< HTML
 						<html lang="en">
 							<head>{$metaTags}
-							{$assets->mailCSS}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							{$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head>
 							<body>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
 									<span></span>
 									test<span class="am-at"></span>test<span class="am-dot"></span>com
 								</a>
-							{$assets->mailJS}{$custom->bodyEnd}$dock</body>
+							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'resolve_01' => <<< HTML
 						<html lang="en">
-							<head>{$metaTags}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$metaTags}{$assets->inPageCSS}{$assets->inPageJS}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
-							{$custom->bodyEnd}$dock</body>
+							$dock{$custom->bodyEnd}</body>
 						</html>
 						HTML,
 			'resolve_02' => <<< HTML
 						<html lang="en">
-							<head>{$metaTags}{$custom->head}{$assets->inPageCSS}{$assets->inPageJS}</head>
+							<head>{$metaTags}{$assets->inPageCSS}{$assets->inPageJS}{$custom->head}</head>
 							<body>
 								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
 								<a href="/index.php/page/test">Test</a>
-							{$custom->bodyEnd}$dock</body>
+							$dock{$custom->bodyEnd}</body>
 						</html>
 						HTML
 		);

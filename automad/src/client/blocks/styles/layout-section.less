@@ -47,6 +47,10 @@ am-layout-section {
 		padding: 0 var(--am-container-padding);
 	}
 
+	& > * + * {
+		padding-top: var(--am-flex-gap) !important;
+	}
+
 	&.am-card {
 		box-sizing: border-box;
 		overflow: hidden;
@@ -54,26 +58,12 @@ am-layout-section {
 		padding: 0;
 
 		& > * {
-			margin-top: 0;
-			margin-bottom: 0;
 			padding: var(--am-card-padding);
 		}
 
 		& > am-stretched {
 			padding: 0;
 			margin: 0 !important;
-		}
-
-		& > :not(am-stretched) + * {
-			padding-top: 0;
-		}
-
-		&.am-gap > am-flex {
-			margin: ~'calc(var(--am-card-padding) * -0.5)' !important;
-
-			& > * {
-				padding: ~'calc(var(--am-card-padding) * 0.5)' !important;
-			}
 		}
 	}
 

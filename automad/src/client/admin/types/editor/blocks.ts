@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { API, BlockAPI, ToolConfig } from 'automad-editorjs';
+import { API, BlockAPI, ToolConfig } from '@/vendor/editorjs';
 import { CodeLanguage, EditorOutputData } from '..';
 import {
 	sectionBackgroundBlendModes,

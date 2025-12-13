@@ -125,6 +125,7 @@ const cls = {
 	bannerOpen: 'am-consent-banner--open',
 	bannerSmall: 'am-consent-banner--small',
 	button: 'am-consent-banner__button',
+	buttonPrimary: 'am-consent-banner__button--primary',
 	placeholder: 'am-consent-placeholder',
 };
 
@@ -232,7 +233,7 @@ class ConsentComponent extends HTMLElement {
 		const renderAccept = (): void => {
 			const accept = create(
 				'button',
-				[cls.button],
+				[cls.button, cls.buttonPrimary],
 				{},
 				ConsentComponent.banner,
 				decodeURIComponent(
@@ -269,7 +270,7 @@ class ConsentComponent extends HTMLElement {
 		const renderRevoke = (): void => {
 			const revoke = create(
 				'button',
-				[cls.button],
+				[cls.button, cls.buttonPrimary],
 				{},
 				ConsentComponent.banner,
 				decodeURIComponent(

@@ -33,6 +33,15 @@
  */
 
 import {
+	Editor,
+	LinkMdNode,
+	ToolbarCustomOptions,
+	Context,
+	OpenTagToken,
+	CustomHTMLRenderer,
+	codeSyntaxHighlight,
+} from '@/vendor/toastui';
+import {
 	App,
 	Binding,
 	create,
@@ -48,13 +57,7 @@ import {
 	resolvePageUrl,
 } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
-import Editor, { LinkMdNode } from '@toast-ui/editor';
-import { ToolbarCustomOptions } from '@toast-ui/editor/types/ui';
-import { Context, OpenTagToken } from '@toast-ui/editor/types/toastmark';
-import { CustomHTMLRenderer } from '@toast-ui/editor/dist/toastui-editor-viewer';
 import { Prism } from '@/prism/prism';
-// @ts-ignore
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 
 /**
  * Use a custom renderer to correctly resolve page and image links.
@@ -158,7 +161,7 @@ class MarkdownFieldComponent extends BaseFieldComponent {
 			el,
 			name: label,
 			tooltip: label,
-			onUpdated({ disabled }) {
+			onUpdated({ disabled }: { disabled: boolean }) {
 				disabled
 					? el.setAttribute('disabled', '')
 					: el.removeAttribute('disabled');

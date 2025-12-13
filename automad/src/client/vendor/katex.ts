@@ -32,46 +32,6 @@
  * Licensed under the MIT license.
  */
 
-am-list {
-	& ul,
-	& ol {
-		margin: 0;
-		padding: 0 0 0 1.25rem;
-		list-style-position: outside;
-	}
+import katex from 'katex';
 
-	& ol {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		column-gap: 0.25em;
-		counter-reset: item 0;
-		list-style: none;
-		padding: 0;
-
-		& ol {
-			padding-left: 0.5em;
-		}
-
-		& li {
-			display: contents;
-
-			&:before {
-				grid-column: 1;
-				content: counters(item, '.') '. ';
-				counter-increment: item 1;
-			}
-
-			& > * {
-				grid-column: 2;
-			}
-		}
-	}
-
-	& ul {
-		list-style-type: disc;
-
-		& ul {
-			padding-left: 1.25em;
-		}
-	}
-}
+export { katex };

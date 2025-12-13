@@ -32,46 +32,23 @@
  * Licensed under the MIT license.
  */
 
-am-list {
-	& ul,
-	& ol {
-		margin: 0;
-		padding: 0 0 0 1.25rem;
-		list-style-position: outside;
-	}
+import Editor, {
+	LinkMdNode,
+	ToolbarCustomOptions,
+	Context,
+	OpenTagToken,
+	// @ts-ignore
+} from '@toast-ui/editor';
+// @ts-ignore
+import { CustomHTMLRenderer } from '@toast-ui/editor/dist/toastui-editor-viewer';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 
-	& ol {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		column-gap: 0.25em;
-		counter-reset: item 0;
-		list-style: none;
-		padding: 0;
-
-		& ol {
-			padding-left: 0.5em;
-		}
-
-		& li {
-			display: contents;
-
-			&:before {
-				grid-column: 1;
-				content: counters(item, '.') '. ';
-				counter-increment: item 1;
-			}
-
-			& > * {
-				grid-column: 2;
-			}
-		}
-	}
-
-	& ul {
-		list-style-type: disc;
-
-		& ul {
-			padding-left: 1.25em;
-		}
-	}
-}
+export {
+	Editor,
+	LinkMdNode,
+	ToolbarCustomOptions,
+	Context,
+	OpenTagToken,
+	CustomHTMLRenderer,
+	codeSyntaxHighlight,
+};

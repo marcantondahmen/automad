@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
+import { BlockAPI, OutputBlockData } from '@/vendor/editorjs';
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
-import { BlockAPI, OutputBlockData } from 'automad-editorjs';
 import { App, getLogger } from '../core';
 import { nanoid } from 'nanoid';
 

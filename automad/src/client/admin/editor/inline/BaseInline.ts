@@ -32,9 +32,9 @@
  * Licensed under the MIT license.
  */
 
+import { API, InlineToolConstructorOptions } from '@/vendor/editorjs';
 import { create, listen } from '@/admin/core';
 import { Listener } from '@/admin/types';
-import { API, InlineToolConstructorOptions } from 'automad-editorjs';
 
 /**
  * Define interface with same name in order to merge definition for base class.

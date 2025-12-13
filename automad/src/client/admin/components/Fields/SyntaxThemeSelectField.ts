@@ -62,7 +62,10 @@ class SyntaxThemeSelectFieldComponent extends BaseFieldComponent {
 		const _default = isPage ? '' : defaultTheme;
 		const _value = (value as string) || _default;
 
-		let options = [{ text: '&mdash;', value: 'none' }, ...themes];
+		let options = [
+			{ text: '&mdash;', value: 'base' },
+			...themes.filter((theme) => theme.value != 'base'),
+		];
 
 		if (isPage) {
 			options = [

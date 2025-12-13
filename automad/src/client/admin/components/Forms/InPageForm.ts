@@ -114,8 +114,6 @@ export class InPageFormComponent extends FormComponent {
 		this.page = params.get('page');
 		this.context = params.get('context');
 
-		console.log(this.context, 'xxxxx');
-
 		this.additionalData = {
 			field: this.field,
 			context: this.context,

@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { TunesMenuConfig } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import {
 	App,
@@ -49,7 +50,6 @@ import {
 	VideoCollectionController,
 } from '@/admin/core';
 import { VideoBlockData } from '@/admin/types';
-import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export class VideoBlock extends BaseBlock<VideoBlockData> {

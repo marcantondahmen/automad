@@ -103,6 +103,14 @@ class FilterComponent extends BaseComponent {
 			this.filter(input);
 		});
 
+		this.listen(
+			window,
+			`${EventName.fileCollectionRender} ${EventName.filesChangeOnServer} ${EventName.packagesRender}`,
+			() => {
+				this.filter(input);
+			}
+		);
+
 		this.addListener(
 			keyCombo('k', () => {
 				input.focus();

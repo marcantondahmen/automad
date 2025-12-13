@@ -120,6 +120,10 @@ class InPage {
 			return $value;
 		}
 
+		if (strpos(AM_REQUEST, RequestHandler::API_BASE) === 0) {
+			return $value;
+		}
+
 		if ($Context->get()->get(Fields::TEMPLATE) === Page::TEMPLATE_NAME_404) {
 			return $value;
 		}
@@ -155,7 +159,7 @@ class InPage {
 			return $expression;
 		};
 
-		$assets = Asset::css('dist/build/inpage/index.css') . Asset::js('dist/build/inpage/index.js');
+		$assets = Asset::css('dist/build/inpage/index.css', false) . Asset::js('dist/build/inpage/index.js', false);
 
 		return Head::append($str, $assets);
 	}
@@ -169,7 +173,7 @@ class InPage {
 	private function injectDock(string $str): string {
 		$state = $this->Automad->getPage(AM_REQUEST)?->get(Fields::PUBLICATION_STATE) ?? '';
 		$urlDashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlApi = AM_BASE_INDEX . RequestHandler::$apiBase;
+		$urlApi = AM_BASE_INDEX . RequestHandler::API_BASE;
 		$urlPage = AM_REQUEST;
 		$labelKeys = array(
 			'fieldsSettings',

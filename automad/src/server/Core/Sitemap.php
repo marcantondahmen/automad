@@ -90,7 +90,7 @@ class Sitemap {
 		$server = AM_SERVER;
 		$robots = AM_BASE_DIR . '/robots.txt';
 		$dashboard = AM_PAGE_DASHBOARD;
-		$api = RequestHandler::$apiBase;
+		$api = RequestHandler::API_BASE;
 		$txt = <<< TXT
 			User-agent: *
 			Disallow: $dashboard/*

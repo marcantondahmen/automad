@@ -33,9 +33,9 @@
  * https://automad.org/license
  */
 
+import { HTMLPasteEvent, TunesMenuConfig } from '@/vendor/editorjs';
 import { App, create, CSS, query } from '@/admin/core';
 import { ParagraphBlockData } from '@/admin/types';
-import { HTMLPasteEvent, TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { BaseBlock } from './BaseBlock';
 
 export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
@@ -204,7 +204,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 * @return true if text is not empty
 	 */
 	validate(data: ParagraphBlockData): boolean {
-		return data.text.trim() !== '';
+		return data.text.replace(/<br>/, '').trim() !== '';
 	}
 
 	/**

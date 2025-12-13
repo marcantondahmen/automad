@@ -44,7 +44,7 @@ export default class InlineTexComponent {
 		element.style.display = 'none';
 
 		const content = element.textContent;
-		const katex = await import('katex');
+		const { katex } = await import('@/vendor/katex');
 
 		katex.render(content, element, {
 			throwOnError: false,
