@@ -1,8 +1,8 @@
 # Changelog
 
-## [v2.0.0-alpha.52](https://github.com/marcantondahmen/automad/commit/5662205e0628b00f2994df53651efac3ad03dc91)
+## [v2.0.0-alpha.52](https://github.com/marcantondahmen/automad/commit/493a27e7e2cfd327069d5306c81de858aa3bf96b)
 
-Sat, 13 Dec 2025 20:47:33 +0100
+Sat, 13 Dec 2025 20:58:54 +0100
 
 ### New Features
 
