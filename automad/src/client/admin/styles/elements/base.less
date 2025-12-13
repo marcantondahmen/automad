@@ -51,12 +51,8 @@ html:not(.am-ui) {
 
 	html& {
 		interpolate-size: allow-keywords;
-
-		@media screen and (min-width: 960px) {
-			margin-right: ~'calc((100vw - 100%) * -1)';
-			margin-left: 0;
-			padding-right: 15px;
-		}
+		scrollbar-gutter: stable;
+		.scrollbar;
 	}
 
 	& body {
