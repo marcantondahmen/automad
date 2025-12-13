@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 if [ -z ${BOT_TOKEN} ]; then
 	echo "BOT_TOKEN is not set. Skipping workflow ..."
 	exit 1
