@@ -53,6 +53,7 @@ export const enum EventName {
 	modalOpen = 'AutomadModalOpen',
 	repositoriesChange = 'AutomadRepositoriesChange',
 	packagesChange = 'AutomadPackagesChange',
+	packagesRender = 'AutomadPackagesRender',
 	packagesUpdateCheck = 'AutomadPackagesUpdateCheck',
 	portalChange = 'AutomadPortalChange',
 	switcherChange = 'AutomadSwitcherChange',

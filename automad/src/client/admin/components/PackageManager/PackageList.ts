@@ -37,6 +37,7 @@ import {
 	create,
 	CSS,
 	EventName,
+	fire,
 	html,
 	notifyError,
 	PackageManagerController,
@@ -122,6 +123,8 @@ class PackageListComponent extends BaseComponent {
 
 			card.data = pkg;
 		});
+
+		fire(EventName.packagesRender);
 	}
 }
 

@@ -105,7 +105,7 @@ class FilterComponent extends BaseComponent {
 
 		this.listen(
 			window,
-			`${EventName.fileCollectionRender} ${EventName.filesChangeOnServer}`,
+			`${EventName.fileCollectionRender} ${EventName.filesChangeOnServer} ${EventName.packagesRender}`,
 			() => {
 				this.filter(input);
 			}
