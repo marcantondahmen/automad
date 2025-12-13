@@ -1,8 +1,37 @@
 # Changelog
 
-## [v2.0.0-alpha.51](https://github.com/marcantondahmen/automad/commit/f4e4aa438dd7eef018d555ac692f79987d9af9aa)
+## [v2.0.0-alpha.52](https://github.com/marcantondahmen/automad/commit/befc89fe533db4d2d3beaf9a2c19a9c08306e3a1)
 
-Sun, 23 Nov 2025 15:21:58 +0100
+Sat, 13 Dec 2025 19:50:37 +0100
+
+### New Features
+
+- update cookie banner style and add button color options ([c7a17af12](https://github.com/marcantondahmen/automad/commit/c7a17af1267e0f03b3b5b80a6062cfc8e3ca091e))
+- update inter font and editor-js ([694716dc0](https://github.com/marcantondahmen/automad/commit/694716dc0db7cad93685dd8dea991540ed30220f))
+- update low-contrast dashboard theme ([07cd766d1](https://github.com/marcantondahmen/automad/commit/07cd766d1abb8c9d7d573c01fd7e89317f79d21b))
+- update prism themes ([2288b891e](https://github.com/marcantondahmen/automad/commit/2288b891e0b6836b2a03592679af093ce3ef8456))
+
+### Bugfixes
+
+- disable in-page ui for api routes ([0174edf02](https://github.com/marcantondahmen/automad/commit/0174edf02ff0b3d6afeb3217e92d06bcaf67fd70))
+- fix caption overlay showing up in slideshow when caption is empty ([4a0994d96](https://github.com/marcantondahmen/automad/commit/4a0994d96bbd02add3b13d4d0a90c7ff155cada8))
+- fix card rendering in layout section blocks ([befc89fe5](https://github.com/marcantondahmen/automad/commit/befc89fe533db4d2d3beaf9a2c19a9c08306e3a1))
+- fix code block rendering when no syntax theme is selected ([798ae6198](https://github.com/marcantondahmen/automad/commit/798ae6198ca180f39f00b1ec25b529236fa795d0))
+- fix edge case render issues of in-page editing buttons ([d6f3a30cd](https://github.com/marcantondahmen/automad/commit/d6f3a30cdc4f3efff882ce3d281d8a6bdaa88b8a))
+- fix file filter not being applied after files have been updated ([7b770c31d](https://github.com/marcantondahmen/automad/commit/7b770c31dd0c13532cd908436626ec595e09d960))
+- fix focus trap in modal dialogs that are opened from an editor ([f59f10517](https://github.com/marcantondahmen/automad/commit/f59f10517095eef1bd5c270a0a6b5284520762fe))
+- fix focusing active page in sidebar on reloads ([3faef16e5](https://github.com/marcantondahmen/automad/commit/3faef16e5ea2e948c4c3320731e1a853dd70618d))
+- fix html entities in public pagelist api ([d3a3dd89e](https://github.com/marcantondahmen/automad/commit/d3a3dd89e293c2532d85f3334f027d74d6cb4271))
+- fix item alignment in nested layout section blocks ([b0f3dbaae](https://github.com/marcantondahmen/automad/commit/b0f3dbaaee5718a382e46a9bc737f8d351b2535e))
+- fix list block styles conflict with legacy themes ([8dc34393d](https://github.com/marcantondahmen/automad/commit/8dc34393d6d67bad1bf17b344a2947dc75ebdea4))
+- fix package filter not being applied after installing or removing packages ([88f066276](https://github.com/marcantondahmen/automad/commit/88f066276653c7914f39dd761baa81a173daaf9d))
+- improve log filtering ([9dbca869f](https://github.com/marcantondahmen/automad/commit/9dbca869f02641d65d6da303d25b82adc32fccbc))
+- remove empty nodes from nested list block render output ([4cb752d14](https://github.com/marcantondahmen/automad/commit/4cb752d146638e65e1ab33544fab87979ab3ce00))
+- remove paragraph blocks with only a line break as content ([5d4d89c2c](https://github.com/marcantondahmen/automad/commit/5d4d89c2c7a5f68878ef9216c91b9246806de871))
+
+## [v2.0.0-alpha.51](https://github.com/marcantondahmen/automad/commit/3bfd7bd04690784bbffcb0cb8347a3fc1854dff0)
+
+Sun, 23 Nov 2025 18:38:20 +0100
 
 ### New Features
 
@@ -817,14 +846,3 @@ Fri, 26 Nov 2021 10:26:38 +0100
 ### Bugfixes
 
 - **ui**: fix block editor ui errors when using block templates ([feb09bc2d](https://github.com/marcantondahmen/automad/commit/feb09bc2d6b998d4f1b062c028f1ae273042720b))
-
-## [v1.10.0](https://github.com/marcantondahmen/automad/commit/f631730deb600db7ee9086954943e6b111405f49)
-
-Wed, 24 Nov 2021 09:35:46 +0100
-
-### New Features
-
-- **core**: add feed generator ([0f2d32ace](https://github.com/marcantondahmen/automad/commit/0f2d32acede3c72ef468034dd3113f3ffad25da6))
-- **ui**: add feed configuration ui ([686d563d1](https://github.com/marcantondahmen/automad/commit/686d563d11a8cdec881c6053cc01ad6049e76400))
-- **ui**: redesign system settings ui ([aa84f8021](https://github.com/marcantondahmen/automad/commit/aa84f8021a0da6ff8d587e5f384cf6b6a46d1b4d))
-- remove gulp-util and update dependencies ([02ae09d59](https://github.com/marcantondahmen/automad/commit/02ae09d59931fc09f92fb8fd0161147d199031c4))
