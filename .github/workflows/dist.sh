@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 if [ -z ${BOT_TOKEN} ]; then
 	echo "BOT_TOKEN is not set. Skipping workflow ..."
 	exit 1
@@ -33,13 +35,12 @@ echo "Cloning dist repository ..."
 git clone https://github.com/automadcms/automad-dist.git $distDir
 cd $distDir
 
-git ls-remote --tags 2>/dev/null | grep $srcVersion 1>/dev/null
-
-if [ "$?" == 0 ]; then
-	echo "Tag $srcVersion already exists."
-
-	exit 0
+if git ls-remote --tags --exit-code origin "refs/tags/$srcVersion" >/dev/null; then
+	echo "Tag already exists."
+	exit 1
 fi
+
+echo "Version $srcVersion ..."
 
 cd $srcDir
 
