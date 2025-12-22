@@ -121,6 +121,10 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			// Each filter can be used as @{:filter} within a snippet.
 
 			foreach ($this->Automad->Pagelist->getTags() as $filter) {
+				// Skip tags starting with underscore
+				if (strpos($filter, '_') === 0) {
+					continue;
+				}
 				Debug::log($filter, 'Processing snippet in loop for filter');
 				// Store current filter in the system variable buffer.
 				$this->Automad->Runtime->set(Fields::FILTER, $filter);
@@ -132,6 +136,10 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 			// Tags (of the current page)
 			// Each tag can be used as @{:tag} within a snippet.
 			foreach ($Context->get()->tags as $tag) {
+				// Skip tags starting with underscore
+				if (strpos($tag, '_') === 0) {
+					continue;
+				}
 				Debug::log($tag, 'Processing snippet in loop for tag');
 				// Store current tag in the system variable buffer.
 				$this->Automad->Runtime->set(Fields::TAG, $tag);
