@@ -418,31 +418,24 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			modal.open();
 		}, 0);
 
-		this.listen(
-			modal,
-			'change input',
-			debounce(() => {
-				this.data = {
-					...this.data,
-					[`${button}Text`]: query(
-						`[name="${button}Text"]`,
-						this.flex
-					).innerHTML,
-					[`${button}Style`]: Object.fromEntries(
-						Object.entries(collectFieldData(styleContainer)).filter(
-							([key, value]) => value.length > 0
-						)
-					),
-					[`${button}Link`]: link.input.value,
-					[`${button}OpenInNewTab`]: (
-						target.input as HTMLInputElement
-					).checked,
-				};
+		this.listen(modal, 'change input', () => {
+			this.data = {
+				...this.data,
+				[`${button}Text`]: query(`[name="${button}Text"]`, this.flex)
+					.innerHTML,
+				[`${button}Style`]: Object.fromEntries(
+					Object.entries(collectFieldData(styleContainer)).filter(
+						([key, value]) => value.length > 0
+					)
+				),
+				[`${button}Link`]: link.input.value,
+				[`${button}OpenInNewTab`]: (target.input as HTMLInputElement)
+					.checked,
+			};
 
-				this.renderButton(button);
-				this.blockAPI.dispatchChange();
-			}, 50)
-		);
+			this.renderButton(button);
+			this.blockAPI.dispatchChange();
+		});
 	}
 
 	/**
