@@ -1,76 +1,205 @@
 {
+    "draft": [],
     "published": {
-        "title": "Welcome",
+        "title": "Make it Yours",
+        "date": "2025-08-03T19:08",
+        "checkboxHideTitle": "1",
+        "checkboxHidePreviousAndNextPageNavigation": "1",
+        "checkboxCompactLayout": "1",
         "+hero": {
-            "blocks": [],
-            "automadVersion": "1.10.9"
+            "blocks": []
         },
         "+main": {
             "blocks": [
                 {
-                    "id": "lD9sUJki6gn463oRwjcY_ICq5oQPYZVP",
-                    "type": "paragraph",
+                    "id": "XC1RtC6P4G8ynTdNoMyvpIx2UfYOQCf0",
+                    "type": "layoutSection",
                     "data": {
-                        "text": "You have successfully installed Automad 2.&nbsp;",
-                        "large": false
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "zZ2m397dA7pGtGvY4xDJ7PS6LgHNKgXz",
+                                    "type": "layoutSection",
+                                    "data": {
+                                        "content": {
+                                            "blocks": [
+                                                {
+                                                    "id": "S5qzMl0nwgQIeIKc4-AlMB2aPKBqrDYZ",
+                                                    "type": "header",
+                                                    "data": {
+                                                        "text": "<am-inline-font-size style=\"font-size: 130%;\">Make it Yours</am-inline-font-size>",
+                                                        "level": 1
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": "1/1"
+                                                        },
+                                                        "spacing": {
+                                                            "bottom": "1rem"
+                                                        },
+                                                        "className": "",
+                                                        "id": ""
+                                                    }
+                                                },
+                                                {
+                                                    "id": "sw_CwIxrp7vjUiAp_AfP1iBZ3IqXk1TT",
+                                                    "type": "paragraph",
+                                                    "data": {
+                                                        "text": "Automad is up and running. Log in to the <a href=\"/dashboard\">dashboard</a> and explore the Quick Start&nbsp;Guide. You\u2019ll learn how blocks work, how layouts come together, how pagelists are configured, and how components are built. The rest is just content.&nbsp;",
+                                                        "large": true
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": "1/1"
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "",
+                                                        "id": ""
+                                                    }
+                                                },
+                                                {
+                                                    "id": "JLMS2mPlMo4cvQYhC1xXmrjwC6elWFKz",
+                                                    "type": "buttons",
+                                                    "data": {
+                                                        "primaryText": "Quick Start Guide&nbsp;\u27f6",
+                                                        "primaryLink": "/quick-start-guide",
+                                                        "primaryStyle": {
+                                                            "borderWidth": "2px",
+                                                            "borderRadius": "0.5rem",
+                                                            "paddingVertical": "0.5rem",
+                                                            "paddingHorizontal": "1.5rem"
+                                                        },
+                                                        "primaryOpenInNewTab": false,
+                                                        "secondaryText": "Sign in",
+                                                        "secondaryLink": "/dashboard",
+                                                        "secondaryStyle": [],
+                                                        "secondaryOpenInNewTab": false,
+                                                        "justify": "start",
+                                                        "gap": "1rem"
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": "1/1"
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "buttons",
+                                                        "id": ""
+                                                    }
+                                                },
+                                                {
+                                                    "id": "n0rgHVMIW7iVWGctVkuiCAdFPnv1buGz",
+                                                    "type": "paragraph",
+                                                    "data": {
+                                                        "text": "Built for clarity, performance, and restraint. Automad keeps content simple and structure intentional.",
+                                                        "large": false
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": "3/4"
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "",
+                                                        "id": ""
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "style": {
+                                            "card": false,
+                                            "shadow": false,
+                                            "color": "",
+                                            "backgroundColor": "",
+                                            "backgroundBlendMode": "normal",
+                                            "borderColor": "",
+                                            "borderWidth": "",
+                                            "borderRadius": "",
+                                            "borderStyle": "none",
+                                            "backgroundImage": "",
+                                            "paddingTop": "",
+                                            "paddingBottom": "",
+                                            "overflowHidden": false
+                                        },
+                                        "justify": "start",
+                                        "align": "start",
+                                        "gap": "2.25rem",
+                                        "minBlockWidth": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": {
+                                            "right": "1rem",
+                                            "bottom": "2rem"
+                                        },
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "sQfYI_z-XF8wwoF8Uh8CV3M3YMY5oTp7",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "style": {
+                            "card": false,
+                            "shadow": false,
+                            "color": "",
+                            "backgroundColor": "",
+                            "backgroundBlendMode": "normal",
+                            "borderColor": "",
+                            "borderWidth": "",
+                            "borderRadius": "",
+                            "borderStyle": "none",
+                            "backgroundImage": "",
+                            "paddingTop": "",
+                            "paddingBottom": "",
+                            "overflowHidden": false
+                        },
+                        "justify": "fill-row",
+                        "align": "start",
+                        "gap": "1rem",
+                        "minBlockWidth": "30rem"
                     },
                     "tunes": {
-                        "layout": null,
-                        "spacing": {
-                            "top": "",
-                            "right": "",
-                            "bottom": "",
-                            "left": ""
-                        },
-                        "className": "",
-                        "id": ""
-                    }
-                },
-                {
-                    "id": "NR_n3XqFF94kfN0jka5XGbi_-TBEf9ot",
-                    "type": "buttons",
-                    "data": {
-                        "primaryText": "Visit Dashboard",
-                        "primaryLink": "/dashboard",
-                        "primaryStyle": {
-                            "borderWidth": "2px",
-                            "borderRadius": "0.5rem",
-                            "paddingVertical": "0.5rem",
-                            "paddingHorizontal": "1.5rem"
-                        },
-                        "primaryOpenInNewTab": false,
-                        "secondaryText": "",
-                        "secondaryLink": "",
-                        "secondaryStyle": {
-                            "borderWidth": "2px",
-                            "borderRadius": "0.5rem",
-                            "paddingHorizontal": "1.5rem",
-                            "paddingVertical": "0.5rem"
-                        },
-                        "secondaryOpenInNewTab": true,
-                        "justify": "start",
-                        "gap": "1rem"
-                    },
-                    "tunes": {
-                        "layout": null,
-                        "spacing": {
-                            "top": "",
-                            "right": "",
-                            "bottom": "",
-                            "left": ""
-                        },
-                        "className": "",
-                        "id": ""
+                        "layout": {
+                            "stretched": true,
+                            "width": null
+                        }
                     }
                 }
-            ],
-            "automadVersion": "2.0.0-alpha.1"
+            ]
         },
-        "template": "project",
+        "+footer": {
+            "blocks": []
+        },
+        "template": "page_full_width_left",
         "private": false,
         ":created": "2023-02-17T10:36:01+00:00",
-        ":lastModified": "2024-02-19T15:59:38+00:00",
-        ":lastPublished": "2024-02-19T16:01:31+00:00"
-    },
-    "draft": []
+        ":lastModified": "2025-12-24T11:25:36+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-24T11:25:38+00:00"
+    }
 }

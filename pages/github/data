@@ -1,0 +1,30 @@
+{
+    "draft": [],
+    "published": {
+        "title": "GitHub",
+        "date": "2025-12-20T17:40",
+        "slug": "github",
+        "url": "https://github.com/marcantondahmen/automad",
+        "selectShowPageInNavbar": "link",
+        "selectShowPageInFooter": "secondary",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "1ogvjnloezX2U1JP8mseqnQ1D_uLTq4U",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "The Automad project on GitHub. If you like the project, give it a star!",
+                        "large": false
+                    },
+                    "tunes": []
+                }
+            ]
+        },
+        "template": "page_full_width_centered",
+        "private": false,
+        ":created": "2025-12-20T17:40:27+00:00",
+        ":lastModified": "2025-12-23T19:14:05+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-23T19:14:06+00:00"
+    }
+}

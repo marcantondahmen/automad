@@ -1,0 +1,749 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Using Blocks",
+        "slug": "using-blocks",
+        "selectShowPageInFooter": "primary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "8TYstm3qORgMakfLDYdJJXKRptZKBgWN",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Blocks are the building units of every page. They can hold text, images, galleries, slideshows, or even other blocks, letting you mix and match to create almost anything.",
+                        "large": true
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "Q7zrdn_FJDFYCnPE_EtVj8Zl8UonAsFa",
+                    "type": "header",
+                    "data": {
+                        "text": "Basic Blocks",
+                        "level": 2
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "CLzB0gFwtr4dmSEO6diHqTEnWlQanYlY",
+                    "type": "collapsibleSection",
+                    "data": {
+                        "title": "Text and Structure",
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "UKR7B8Fr5jdOOFOlrYVQtU2oR42JVeN2",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "Aside from headings and paragraphs, Automad ships with a diverse selection of text-based content block types.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "NoOpRGIhwYzTZFUrePPDcumDT_0G4sKc",
+                                    "type": "callout",
+                                    "data": {
+                                        "title": "Important",
+                                        "text": "This is a callout box that makes important content stand out."
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "ejbDds-HOpUQyVyc_Bi6LwsS9uCyugz3",
+                                    "type": "delimiter",
+                                    "data": [],
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "3_v3zEsyYaWEuynXR55DLKtMeikbur9m",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "You can integrate quotes as well and even make them stand out.&nbsp;",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "4vywBxI2uxrEtQrDOGRmq_j_-wzaixMS",
+                                    "type": "quote",
+                                    "data": {
+                                        "text": "Have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary.",
+                                        "caption": "Steve Jobs"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "KPtBc6q0JYZUIMPSh4CIComl5uiXz_rd",
+                                    "type": "delimiter",
+                                    "data": [],
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "6Hk6WnLzOSYhojI1jq3OFuJIej3BfvI6",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "Lists can be nested, they can be ordered or unordered.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "Bu22JO0gENsN234N2dAriJsZ34rAEnny",
+                                    "type": "nestedList",
+                                    "data": {
+                                        "style": "ordered",
+                                        "items": [
+                                            {
+                                                "content": "A list item",
+                                                "items": []
+                                            },
+                                            {
+                                                "content": "Another list item",
+                                                "items": [
+                                                    {
+                                                        "content": "This one is nested",
+                                                        "items": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "content": "The last one",
+                                                "items": []
+                                            }
+                                        ]
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "QZB31gUIoGQdOahOx7YlUV8LOyaFbYBe",
+                                    "type": "delimiter",
+                                    "data": [],
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "dv9yg-NCyj_UCN2Dds_D4skjnArdpiWV",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "Tables can be used to add structured data.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "w8exGGi0d9TInbWLqTDNL0mPn7qo9B_k",
+                                    "type": "table",
+                                    "data": {
+                                        "withHeadings": true,
+                                        "content": [
+                                            [
+                                                "Title Left",
+                                                "Title Right"
+                                            ],
+                                            [
+                                                "Some title here",
+                                                "Some text here"
+                                            ],
+                                            [
+                                                "Text can be <strong>freely</strong> <i>formatted</i> <u>inside</u> tables",
+                                                "Just like any other text"
+                                            ]
+                                        ]
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "group": "blocks",
+                        "collapsed": true
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "SdL7LhcbGLjJX0nWYjIAD_rQ5BgVCIJV",
+                    "type": "collapsibleSection",
+                    "data": {
+                        "title": "Images and Videos",
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "SGvqngLHFooIeaKUFQyGGTznGa5EkaIJ",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "You can add images and videos that are uploaded to your site as well as from external source.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "44zJj8Ka3WqX3_AWbw14sCkGRL9zpbZG",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "GG80Uj5Abe2XiKZGSLRkmLZFjsKcn_NF",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "Images can have captions and also link to other pages.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "GBtnVZLKcc5OWwGh4LTdUBwNbD2Nicr9",
+                                    "type": "video",
+                                    "data": {
+                                        "url": "https://cdn.pixabay.com/video/2022/07/14/124140-730515109_large.mp4",
+                                        "autoplay": true,
+                                        "loop": true,
+                                        "muted": false,
+                                        "controls": true,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "Rg4imjhFPiIfDJBYBkgUo0JwyEFUSPER",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "You can control video settings such as autoplay and looping via the block tunes in the to left corner of the video.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "a99yeXNu6d728Wux2bEopMlA3NTK3OZO",
+                                    "type": "buttons",
+                                    "data": {
+                                        "primaryText": "More about galleries and slideshows",
+                                        "primaryLink": "/quick-start-guide/showing-images",
+                                        "primaryStyle": [],
+                                        "primaryOpenInNewTab": false,
+                                        "secondaryText": "",
+                                        "secondaryLink": "",
+                                        "secondaryStyle": {
+                                            "borderWidth": "2px",
+                                            "borderRadius": "0.5rem",
+                                            "paddingHorizontal": "1.5rem",
+                                            "paddingVertical": "0.5rem"
+                                        },
+                                        "secondaryOpenInNewTab": true,
+                                        "justify": "start",
+                                        "gap": "1rem"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "buttons",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "group": "blocks",
+                        "collapsed": true
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "sQBtcR4pXo9obK2UqB7shsS1V_1pIiz2",
+                    "type": "collapsibleSection",
+                    "data": {
+                        "title": "Embedded Content",
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "_cGtla9flRBHhVkhAlrcIGVWKG1iC-O9",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "Automad supports many external streaming and content platforms. Just paste a link to a video or stream in order embed it into your page.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "qA4iWpwZO0byediJKtSm3tl0QtIGea5E",
+                                    "type": "embed",
+                                    "data": {
+                                        "service": "youtube",
+                                        "source": "https://www.youtube.com/watch?v=BowmU4vzOSI",
+                                        "embed": "https://www.youtube.com/embed/BowmU4vzOSI",
+                                        "width": 16,
+                                        "height": 9,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "_L1aPYEp0iLd-2WpkPz_Zfcc4AEoHmF3",
+                                    "type": "embed",
+                                    "data": {
+                                        "service": "soundcloud",
+                                        "source": "https://soundcloud.com/legowelt-official/ufocus-sins-in-suburbia",
+                                        "embed": "https://w.soundcloud.com/player/?url=https://soundcloud.com/legowelt-official/ufocus-sins-in-suburbia",
+                                        "height": 180,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "WMCJJzF6ZyIZCcianE3XLmlU833485Jg",
+                                    "type": "embed",
+                                    "data": {
+                                        "service": "mixcloud",
+                                        "source": "https://www.mixcloud.com/marcantondahmen/home-session-21/",
+                                        "embed": "https://www.mixcloud.com/widget/iframe/?hide_cover=1&amp;feed=/marcantondahmen/home-session-21/",
+                                        "height": 180,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "group": "blocks",
+                        "collapsed": true
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "hmByZeubB5EdTLFeWtftgmDl_3P2UgRK",
+                    "type": "collapsibleSection",
+                    "data": {
+                        "title": "Navigation",
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "l_RGinp5xZuIqR2n-DRFJtxJBTStpULW",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "Buttons can be used to easily create call-to-action elements.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "5Qd6VkpjrNAzI7SPYJykD0D97EowQzXa",
+                                    "type": "buttons",
+                                    "data": {
+                                        "primaryText": "Hey, click me",
+                                        "primaryLink": "/quick-start-guide/using-blocks#navigation",
+                                        "primaryStyle": {
+                                            "color": "#ffffff",
+                                            "background": "#1c1c1c",
+                                            "borderColor": "#ffffff",
+                                            "hoverColor": "#141414",
+                                            "hoverBackground": "#ffffff",
+                                            "hoverBorderColor": "#242424",
+                                            "borderWidth": "2px",
+                                            "borderRadius": "0.5rem",
+                                            "paddingVertical": "10px",
+                                            "paddingHorizontal": "2rem"
+                                        },
+                                        "primaryOpenInNewTab": false,
+                                        "secondaryText": "",
+                                        "secondaryLink": "",
+                                        "secondaryStyle": {
+                                            "borderWidth": "2px",
+                                            "borderRadius": "0.5rem",
+                                            "paddingHorizontal": "1.5rem",
+                                            "paddingVertical": "0.5rem"
+                                        },
+                                        "secondaryOpenInNewTab": true,
+                                        "justify": "start",
+                                        "gap": "1rem"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "SjF0vqPBmmIdx8pvZumx1LUT5wrC573X",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "You can also quickly embed a table-of-contents list.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "GP008-a9XFE1Fkr0sqN9lf3vKmrlYeh8",
+                                    "type": "tableOfContents",
+                                    "data": {
+                                        "type": "unordered"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "794yovvDTXb7meML_pE18ZUO98mkhps3",
+                                    "type": "buttons",
+                                    "data": {
+                                        "primaryText": "Learn more about advanced navigations here",
+                                        "primaryLink": "/quick-start-guide/configuring-pagelists",
+                                        "primaryStyle": [],
+                                        "primaryOpenInNewTab": false,
+                                        "secondaryText": "",
+                                        "secondaryLink": "",
+                                        "secondaryStyle": {
+                                            "borderWidth": "2px",
+                                            "borderRadius": "0.5rem",
+                                            "paddingHorizontal": "1.5rem",
+                                            "paddingVertical": "0.5rem"
+                                        },
+                                        "secondaryOpenInNewTab": true,
+                                        "justify": "start",
+                                        "gap": "1rem"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "buttons",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "group": "blocks",
+                        "collapsed": true
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "Ym3DtMwQAGe9GSeyq6PaweWACJh-fzJp",
+                    "type": "collapsibleSection",
+                    "data": {
+                        "title": "Code and Math",
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "fhIeVx8WlHjC0NFbx2a1iLfL1C7-MVYK",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "For technical documentations, it is possible to also add code snippets with syntax highlighting. The syntax theme can be defined in the page or global settings.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "isbRfqh29plDXkAsDCfqEmVLc4c6se0C",
+                                    "type": "code",
+                                    "data": {
+                                        "code": "export const filterEmptyData = <T>(data: T): Partial<T> => {\n\tconst filtered: Partial<T> = {};\n\n\tfor (const [key, value] of Object.entries(data)) {\n\t\tif (!!value || value === false) {\n\t\t\tfiltered[key as keyof T] = value;\n\t\t}\n\t}\n\n\treturn filtered;\n};",
+                                        "language": "typescript",
+                                        "lineNumbers": true
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "DCmfLoZbC6JOkA2pdBoAlh06LM7sKWM7",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "For more academic purposes, also basic Math (KaTeX) is supported.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "MmKRZkg5x10jGktFQeYyc-SKRImovtzx",
+                                    "type": "teX",
+                                    "data": {
+                                        "code": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "group": "blocks",
+                        "collapsed": true
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "WG_Ecq6GJNvh4PlDbGiLKzwvPnJbFy7V",
+                    "type": "header",
+                    "data": {
+                        "text": "Advanced Types",
+                        "level": 2
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "pNHnY1dMuAezRu0Cr_O3YU8fuT7DEQtg",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "In addition to the basic blocks, Automad provides more advanced types for complex use cases. <a href=\"/quick-start-guide/creating-layouts\">Layout sections</a>, <a href=\"/quick-start-guide/configuring-pagelists\">pagelists</a>, <a href=\"/quick-start-guide/building-components\">components</a>, template language snippets, an email contact form, and raw HTML or Markdown blocks give you greater flexibility and control.",
+                        "large": false
+                    },
+                    "tunes": []
+                }
+            ]
+        },
+        "customCSS": "pre[class*=language-] {\n  background: var(--std-bg-2) !important;\n}",
+        "template": "page_sidebar",
+        "private": false,
+        ":created": "2025-12-20T17:26:29+00:00",
+        ":lastModified": "2025-12-24T17:04:29+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-24T17:04:29+00:00"
+    }
+}

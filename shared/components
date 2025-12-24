@@ -1,4 +1,25 @@
 {
-    "draft": []
+    "draft": [],
+    "published": {
+        "components": [
+            {
+                "id": "GP0ffng9y3gx5kSiD9ik1bNMnNsrsmN9",
+                "name": "Example Component",
+                "blocks": [
+                    {
+                        "id": "NgfQ4MU8dWhegIOybTwXPGnySwfz2hHB",
+                        "type": "callout",
+                        "data": {
+                            "title": "Hey",
+                            "text": "This is an <i>instance</i> of an example component. <i>Just like the one next to it</i>. Both share the <strong>same content</strong>. You can place here whatever you want. If you change a component in the <a href=\"/dashboard/components\">component editor</a>, all instances are update automatically."
+                        },
+                        "tunes": []
+                    }
+                ],
+                "collapsed": false
+            }
+        ],
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-24T17:22:24+00:00"
+    }
 }
-

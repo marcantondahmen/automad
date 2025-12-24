@@ -1,0 +1,55 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Configuring Pagelists",
+        "slug": "configuring-pagelists",
+        "selectShowPageInFooter": "primary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-06.webp",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "yeFFHqhH5jMc0HX0oq9RziSjiAqXp6kP",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Pagelists automatically display subsets of pages, like project or product overviews. They keep your content structured without repetition.",
+                        "large": true
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "UOw3dNb8VOI8AS7KLNCTPI7eGb7Qmf44",
+                    "type": "pagelist",
+                    "data": {
+                        "excludeCurrent": false,
+                        "excludeHidden": true,
+                        "file": "/automad/automad-standard-lite/blocks/pagelist/grid_image_top.php",
+                        "sortField": ":index",
+                        "sortOrder": "asc",
+                        "type": "all",
+                        "context": "",
+                        "filter": "",
+                        "offset": "0",
+                        "limit": "10",
+                        "matchUrl": "^(\\/quick|https:\\/\\/automad.org$|\\/$)",
+                        "template": ""
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": true,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "2rem"
+                        }
+                    }
+                }
+            ]
+        },
+        "template": "page_full_width_centered",
+        "private": false,
+        ":created": "2025-12-20T17:28:05+00:00",
+        ":lastModified": "2025-12-24T17:15:12+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-24T17:15:13+00:00"
+    }
+}

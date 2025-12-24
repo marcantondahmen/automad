@@ -1,0 +1,81 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Quick Start Guide",
+        "slug": "quick-start-guide",
+        "selectShowPageInNavbar": "link",
+        "selectShowPageInFooter": "secondary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "VVcJ9y-fq8laqX0xHSnr_QohvG6HWc1c",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "This guide walks you through the core building blocks of Automad. Explore the concepts, see examples, and start building your pages with structure, clarity, and flexibility.",
+                        "large": true
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "1psNnhM6YS48Mu8a7LkrI84qaWmlMgJT",
+                    "type": "delimiter",
+                    "data": [],
+                    "tunes": {
+                        "layout": {
+                            "stretched": true,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "1rem",
+                            "bottom": "1rem"
+                        }
+                    }
+                },
+                {
+                    "id": "qBHU2FEhM_y0zfZUfthcHBGHl7Nv0C0I",
+                    "type": "pagelist",
+                    "data": {
+                        "excludeCurrent": false,
+                        "excludeHidden": false,
+                        "file": "/automad/automad-standard-lite/blocks/pagelist/list.php",
+                        "sortField": ":index",
+                        "sortOrder": "asc",
+                        "type": "children",
+                        "context": "",
+                        "filter": "",
+                        "offset": "0",
+                        "limit": "10",
+                        "matchUrl": "",
+                        "template": ""
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": true,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "k1WKpyHPfX4JWqAdYuYM3pL48lB7iw7S",
+                    "type": "callout",
+                    "data": {
+                        "title": "Note",
+                        "text": "All chapters are contained under this page. You can remove the Quick Start Guide anytime to start fresh."
+                    },
+                    "tunes": {
+                        "spacing": {
+                            "top": "2rem"
+                        }
+                    }
+                }
+            ]
+        },
+        "template": "page_full_width_left",
+        "private": false,
+        ":created": "2025-12-20T17:25:08+00:00",
+        ":lastModified": "2025-12-24T17:02:28+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-24T17:02:43+00:00"
+    }
+}

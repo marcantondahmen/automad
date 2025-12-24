@@ -1,0 +1,30 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Sponsor",
+        "date": "2025-12-20T17:35",
+        "slug": "sponsor",
+        "url": "https://automad.org/become-a-sponsor",
+        "selectShowPageInNavbar": "action",
+        "selectShowPageInFooter": "secondary",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "3MfIfVnUmrD68PeGml69elf7YZMwKRLu",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Automad is free and open-source. And thanks to all the sponsors there are no plans to change that. Every donation counts and is much appreciated in order to compensate server costs and maintain further development. There are several options for how to become a sponsor and support Automad.",
+                        "large": false
+                    },
+                    "tunes": []
+                }
+            ]
+        },
+        "template": "page_full_width_centered",
+        "private": false,
+        ":created": "2025-12-20T17:35:26+00:00",
+        ":lastModified": "2025-12-24T14:55:29+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-24T14:55:29+00:00"
+    }
+}
