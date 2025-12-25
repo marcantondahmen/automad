@@ -45,11 +45,11 @@
                 }
             ]
         },
-        "template": "page_full_width_centered",
+        "template": "page_full_width_left",
         "private": false,
         ":created": "2025-12-20T17:28:05+00:00",
-        ":lastModified": "2025-12-25T20:35:40+00:00",
+        ":lastModified": "2025-12-25T20:49:30+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T20:35:41+00:00"
+        ":lastPublished": "2025-12-25T20:49:31+00:00"
     }
 }
