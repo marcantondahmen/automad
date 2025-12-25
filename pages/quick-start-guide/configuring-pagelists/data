@@ -22,7 +22,7 @@
                     "data": {
                         "excludeCurrent": false,
                         "excludeHidden": true,
-                        "file": "/automad/automad-standard-lite/blocks/pagelist/grid_image_top.php",
+                        "file": "/automad/standard-lite/blocks/pagelist/grid_image_top.php",
                         "sortField": ":index",
                         "sortOrder": "asc",
                         "type": "all",
@@ -48,8 +48,8 @@
         "template": "page_full_width_centered",
         "private": false,
         ":created": "2025-12-20T17:28:05+00:00",
-        ":lastModified": "2025-12-24T17:15:12+00:00",
+        ":lastModified": "2025-12-25T20:35:40+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T17:15:13+00:00"
+        ":lastPublished": "2025-12-25T20:35:41+00:00"
     }
 }

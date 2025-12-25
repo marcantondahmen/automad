@@ -2,7 +2,7 @@
     "draft": [],
     "published": {
         "sitename": "New Project",
-        "theme": "automad/automad-standard-lite",
+        "theme": "automad/standard-lite",
         "syntaxTheme": "automad.light-dark",
         "authorContact": "https://marcdahmen.de",
         "selectPageDateFormat": "l, M j, Y",

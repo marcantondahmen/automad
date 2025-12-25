@@ -38,7 +38,7 @@
                     "data": {
                         "excludeCurrent": false,
                         "excludeHidden": false,
-                        "file": "/automad/automad-standard-lite/blocks/pagelist/list.php",
+                        "file": "/automad/standard-lite/blocks/pagelist/list.php",
                         "sortField": ":index",
                         "sortOrder": "asc",
                         "type": "children",
@@ -74,8 +74,8 @@
         "template": "page_full_width_left",
         "private": false,
         ":created": "2025-12-20T17:25:08+00:00",
-        ":lastModified": "2025-12-25T16:01:53+00:00",
+        ":lastModified": "2025-12-25T20:35:26+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T16:01:53+00:00"
+        ":lastPublished": "2025-12-25T20:35:27+00:00"
     }
 }
