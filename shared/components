@@ -11,7 +11,7 @@
                         "type": "callout",
                         "data": {
                             "title": "Hey",
-                            "text": "This is an <i>instance</i> of an example component. <i>Just like the one next to it</i>. Both share the <strong>same content</strong>. You can place here whatever you want. If you change a component in the <a href=\"/dashboard/components\">component editor</a>, all instances are update automatically."
+                            "text": "This example component shares content with the one beside it. Changes in the <a href=\"/dashboard/components\">component editor</a> update all instances automatically, and you can place anything here."
                         },
                         "tunes": []
                     }
@@ -20,6 +20,6 @@
             }
         ],
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T17:22:24+00:00"
+        ":lastPublished": "2025-12-25T13:48:42+00:00"
     }
 }

@@ -81,10 +81,10 @@
                                     }
                                 },
                                 {
-                                    "id": "3_v3zEsyYaWEuynXR55DLKtMeikbur9m",
+                                    "id": "26jPjYWI3QUGpPneOPzn2OwEFs4oiVSq",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "You can integrate quotes as well and even make them stand out.&nbsp;",
+                                        "text": "Quotes are presented with visual emphasis.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -198,7 +198,7 @@
                                     "id": "dv9yg-NCyj_UCN2Dds_D4skjnArdpiWV",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Tables can be used to add structured data.",
+                                        "text": "Tables can be used to display structured data.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -264,7 +264,7 @@
                                     "id": "SGvqngLHFooIeaKUFQyGGTznGa5EkaIJ",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "You can add images and videos that are uploaded to your site as well as from external source.",
+                                        "text": "Add images and videos uploaded to your site or embedded from external sources.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -301,7 +301,7 @@
                                     "id": "GG80Uj5Abe2XiKZGSLRkmLZFjsKcn_NF",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Images can have captions and also link to other pages.",
+                                        "text": "Images can include captions and link to other pages.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -339,7 +339,38 @@
                                     "id": "Rg4imjhFPiIfDJBYBkgUo0JwyEFUSPER",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "You can control video settings such as autoplay and looping via the block tunes in the to left corner of the video.",
+                                        "text": "Video settings like autoplay and looping are controlled via the block settings in the top-left corner.",
+                                        "large": false
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "9ocf_DPGaVLGclYd3e5K8ZiTOvVgjSOQ",
+                                    "type": "delimiter",
+                                    "data": [],
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": null
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "Car9Z9y7pg15pB1tnjQmqBtFjuRpH5VP",
+                                    "type": "paragraph",
+                                    "data": {
+                                        "text": "Collections of images can be showcased using masonry or grid galleries, as well as slideshow blocks.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -405,7 +436,7 @@
                                     "id": "_cGtla9flRBHhVkhAlrcIGVWKG1iC-O9",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Automad supports many external streaming and content platforms. Just paste a link to a video or stream in order embed it into your page.",
+                                        "text": "Automad supports many external platforms. Paste a link to embed videos or streams directly into your page.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -502,7 +533,7 @@
                                     "id": "l_RGinp5xZuIqR2n-DRFJtxJBTStpULW",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Buttons can be used to easily create call-to-action elements.",
+                                        "text": "Use buttons to create clear calls to action.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -523,11 +554,11 @@
                                         "primaryLink": "/quick-start-guide/using-blocks#navigation",
                                         "primaryStyle": {
                                             "color": "#ffffff",
-                                            "background": "#1c1c1c",
+                                            "background": "#101114",
                                             "borderColor": "#ffffff",
-                                            "hoverColor": "#141414",
+                                            "hoverColor": "#101114",
                                             "hoverBackground": "#ffffff",
-                                            "hoverBorderColor": "#242424",
+                                            "hoverBorderColor": "#101114",
                                             "borderWidth": "2px",
                                             "borderRadius": "0.5rem",
                                             "paddingVertical": "10px",
@@ -560,7 +591,7 @@
                                     "id": "SjF0vqPBmmIdx8pvZumx1LUT5wrC573X",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "You can also quickly embed a table-of-contents list.",
+                                        "text": "A table of contents provides dynamic navigation for the current page.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -577,7 +608,7 @@
                                     "id": "GP008-a9XFE1Fkr0sqN9lf3vKmrlYeh8",
                                     "type": "tableOfContents",
                                     "data": {
-                                        "type": "unordered"
+                                        "type": "ordered"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -642,7 +673,7 @@
                                     "id": "fhIeVx8WlHjC0NFbx2a1iLfL1C7-MVYK",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "For technical documentations, it is possible to also add code snippets with syntax highlighting. The syntax theme can be defined in the page or global settings.",
+                                        "text": "Add code snippets with syntax highlighting. Choose a theme per page or globally.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -677,7 +708,7 @@
                                     "id": "DCmfLoZbC6JOkA2pdBoAlh06LM7sKWM7",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "For more academic purposes, also basic Math (KaTeX) is supported.",
+                                        "text": "Add basic math with <i>KaTeX</i> for academic purposes.",
                                         "large": false
                                     },
                                     "tunes": {
@@ -742,8 +773,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:26:29+00:00",
-        ":lastModified": "2025-12-24T17:04:29+00:00",
+        ":lastModified": "2025-12-25T13:39:44+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T17:04:29+00:00"
+        ":lastPublished": "2025-12-25T13:39:44+00:00"
     }
 }

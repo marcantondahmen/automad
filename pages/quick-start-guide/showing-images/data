@@ -91,7 +91,7 @@
                     "id": "IJEDb3wtv2clbNBbksrzheL_4agz8OMR",
                     "type": "paragraph",
                     "data": {
-                        "text": "Galleries can have different layouts such as <i>column-based</i> such as the one above, <i>row-based</i> or <i>grids</i>. The following gallery has a row-based layout.",
+                        "text": "Galleries support <i>column</i>, <i>row</i>, or <i>grid</i> layouts. This example uses a <i>row-based</i> layout.",
                         "large": false
                     },
                     "tunes": []
@@ -121,7 +121,7 @@
                     "tunes": {
                         "layout": {
                             "stretched": false,
-                            "width": ""
+                            "width": null
                         },
                         "spacing": {
                             "top": "1rem",
@@ -133,7 +133,7 @@
                     "id": "WoYal1jKUvdNN4Yk287_TN0ZOcOc4slp",
                     "type": "paragraph",
                     "data": {
-                        "text": "The grid layout can be used to organize images freely surrounded by whitespace.",
+                        "text": "Use the grid layout to arrange images with generous whitespace.",
                         "large": false
                     },
                     "tunes": {
@@ -172,8 +172,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-23T17:09:54+00:00",
-        ":lastModified": "2025-12-24T11:19:01+00:00",
+        ":lastModified": "2025-12-25T13:53:51+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T11:19:02+00:00"
+        ":lastPublished": "2025-12-25T13:53:53+00:00"
     }
 }
