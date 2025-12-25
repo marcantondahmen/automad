@@ -187,6 +187,9 @@
                         "layout": {
                             "stretched": true,
                             "width": null
+                        },
+                        "spacing": {
+                            "bottom": "5rem"
                         }
                     }
                 }
@@ -198,8 +201,8 @@
         "template": "page_full_width_left",
         "private": false,
         ":created": "2023-02-17T10:36:01+00:00",
-        ":lastModified": "2025-12-25T16:14:38+00:00",
+        ":lastModified": "2025-12-25T18:54:09+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T16:14:39+00:00"
+        ":lastPublished": "2025-12-25T18:55:33+00:00"
     }
 }
