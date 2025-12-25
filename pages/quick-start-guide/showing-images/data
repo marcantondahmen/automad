@@ -4,6 +4,7 @@
         "title": "Showing Images",
         "slug": "showing-images",
         "selectShowPageInFooter": "primary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
         "+main": {
             "blocks": [
                 {
@@ -172,8 +173,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-23T17:09:54+00:00",
-        ":lastModified": "2025-12-25T13:53:51+00:00",
+        ":lastModified": "2025-12-25T16:12:03+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T13:53:53+00:00"
+        ":lastPublished": "2025-12-25T16:12:05+00:00"
     }
 }

@@ -2,7 +2,6 @@
     "draft": [],
     "published": {
         "title": "Documentation",
-        "date": "2025-12-20T17:39",
         "slug": "documentation",
         "url": "https://automad.org",
         "selectShowPageInNavbar": "link",
@@ -24,8 +23,8 @@
         "template": "page_full_width_centered",
         "private": false,
         ":created": "2025-12-20T17:39:54+00:00",
-        ":lastModified": "2025-12-24T17:07:09+00:00",
+        ":lastModified": "2025-12-25T16:09:22+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T17:07:10+00:00"
+        ":lastPublished": "2025-12-25T16:09:25+00:00"
     }
 }

@@ -2,10 +2,10 @@
     "draft": [],
     "published": {
         "title": "Make it Yours",
-        "date": "2025-08-03T19:08",
         "checkboxHideTitle": "1",
         "checkboxHidePreviousAndNextPageNavigation": "1",
         "checkboxCompactLayout": "1",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-08.webp",
         "+hero": {
             "blocks": []
         },
@@ -198,8 +198,8 @@
         "template": "page_full_width_left",
         "private": false,
         ":created": "2023-02-17T10:36:01+00:00",
-        ":lastModified": "2025-12-24T11:25:36+00:00",
+        ":lastModified": "2025-12-25T16:14:38+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T11:25:38+00:00"
+        ":lastPublished": "2025-12-25T16:14:39+00:00"
     }
 }

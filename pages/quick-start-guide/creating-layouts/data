@@ -4,7 +4,7 @@
         "title": "Creating Layouts",
         "slug": "creating-layouts",
         "selectShowPageInFooter": "primary",
-        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
         "+main": {
             "blocks": [
                 {
@@ -702,8 +702,8 @@
         "theme": "automad/automad-standard-lite",
         "private": false,
         ":created": "2025-12-20T17:27:10+00:00",
-        ":lastModified": "2025-12-25T13:45:02+00:00",
+        ":lastModified": "2025-12-25T16:13:48+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T13:45:04+00:00"
+        ":lastPublished": "2025-12-25T16:13:49+00:00"
     }
 }

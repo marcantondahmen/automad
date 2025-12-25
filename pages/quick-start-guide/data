@@ -57,7 +57,7 @@
                     }
                 },
                 {
-                    "id": "k1WKpyHPfX4JWqAdYuYM3pL48lB7iw7S",
+                    "id": "pj0rDFSydNRoq7yd1YCxnIskHtwvRdkt",
                     "type": "callout",
                     "data": {
                         "title": "Note",
@@ -74,8 +74,8 @@
         "template": "page_full_width_left",
         "private": false,
         ":created": "2025-12-20T17:25:08+00:00",
-        ":lastModified": "2025-12-24T17:02:28+00:00",
+        ":lastModified": "2025-12-25T16:01:53+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T17:02:43+00:00"
+        ":lastPublished": "2025-12-25T16:01:53+00:00"
     }
 }

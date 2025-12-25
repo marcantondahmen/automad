@@ -4,7 +4,7 @@
         "title": "Building Components",
         "slug": "building-components",
         "selectShowPageInFooter": "primary",
-        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
         "+main": {
             "blocks": [
                 {
@@ -71,7 +71,7 @@
                             "paddingBottom": "",
                             "overflowHidden": false
                         },
-                        "justify": "start",
+                        "justify": "fill-row",
                         "align": "start",
                         "gap": "2rem",
                         "minBlockWidth": ""
@@ -91,8 +91,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:27:34+00:00",
-        ":lastModified": "2025-12-24T17:19:32+00:00",
+        ":lastModified": "2025-12-25T16:12:14+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-24T17:19:34+00:00"
+        ":lastPublished": "2025-12-25T16:12:16+00:00"
     }
 }

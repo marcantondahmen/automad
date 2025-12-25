@@ -624,7 +624,7 @@
                                     "id": "794yovvDTXb7meML_pE18ZUO98mkhps3",
                                     "type": "buttons",
                                     "data": {
-                                        "primaryText": "Learn more about advanced navigations here",
+                                        "primaryText": "More about navigations here",
                                         "primaryLink": "/quick-start-guide/configuring-pagelists",
                                         "primaryStyle": [],
                                         "primaryOpenInNewTab": false,
@@ -773,8 +773,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:26:29+00:00",
-        ":lastModified": "2025-12-25T13:39:44+00:00",
+        ":lastModified": "2025-12-25T16:08:06+00:00",
         ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T13:39:44+00:00"
+        ":lastPublished": "2025-12-25T16:08:09+00:00"
     }
 }
