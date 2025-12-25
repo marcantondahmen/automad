@@ -1,0 +1,16 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Sign In",
+        "hidden": true,
+        "slug": "sign-in",
+        "url": "/dashboard",
+        "selectShowPageInFooter": "secondary",
+        "template": "page_full_width_centered",
+        "private": false,
+        ":created": "2025-12-25T21:01:05+00:00",
+        ":lastModified": "2025-12-25T21:02:01+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-25T21:02:02+00:00"
+    }
+}
