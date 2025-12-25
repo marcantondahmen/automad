@@ -59,6 +59,7 @@ export interface RepositoryCreationData {
 
 export interface Package {
 	name: string;
+	title: string;
 	description: string;
 	thumbnail: string;
 	repository: string;
