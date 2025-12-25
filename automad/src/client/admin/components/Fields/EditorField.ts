@@ -110,15 +110,14 @@ export class EditorFieldComponent extends BaseFieldComponent {
 							return block;
 						}) || [];
 
-					if (
-						JSON.stringify(this.value.blocks) ===
-						JSON.stringify(blocks)
-					) {
+					const blocksJson = JSON.stringify(blocks);
+
+					if (JSON.stringify(this.value.blocks) === blocksJson) {
 						return;
 					}
 
 					this.value = {
-						blocks: [...blocks],
+						blocks: JSON.parse(blocksJson),
 					};
 
 					fire('input', this);

@@ -114,7 +114,7 @@ export class TableOfContentsBlock extends BaseBlock<TableOfContentsBlockData> {
 					this.data.type = 'ordered';
 					this.render();
 				},
-				toggle: 'level',
+				toggle: 'type',
 				isActive: this.data.type == 'ordered',
 			},
 			{
@@ -125,7 +125,7 @@ export class TableOfContentsBlock extends BaseBlock<TableOfContentsBlockData> {
 					this.data.type = 'unordered';
 					this.render();
 				},
-				toggle: 'level',
+				toggle: 'type',
 				isActive: this.data.type == 'unordered',
 			},
 		];

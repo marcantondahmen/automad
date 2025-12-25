@@ -221,7 +221,6 @@ export class ComponentCollectionFormComponent extends FormComponent {
 			});
 		} else {
 			fire(EventName.contentSaved);
-			fire(EventName.appStateRequireUpdate);
 		}
 
 		this.fetchTime = response.time;

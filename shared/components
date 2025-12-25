@@ -1,4 +1,25 @@
 {
-    "draft": []
+    "draft": [],
+    "published": {
+        "components": [
+            {
+                "id": "GP0ffng9y3gx5kSiD9ik1bNMnNsrsmN9",
+                "name": "Example Component",
+                "blocks": [
+                    {
+                        "id": "NgfQ4MU8dWhegIOybTwXPGnySwfz2hHB",
+                        "type": "callout",
+                        "data": {
+                            "title": "Hey",
+                            "text": "This example component shares content with the one beside it. Changes in the <a href=\"/dashboard/components\">component editor</a> update all instances automatically, and you can place anything here."
+                        },
+                        "tunes": []
+                    }
+                ],
+                "collapsed": false
+            }
+        ],
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-25T13:48:42+00:00"
+    }
 }
-

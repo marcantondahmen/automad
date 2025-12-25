@@ -1,0 +1,30 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Documentation",
+        "slug": "documentation",
+        "url": "https://automad.org",
+        "selectShowPageInNavbar": "link",
+        "selectShowPageInFooter": "secondary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "mol_tBhrC8y-4JFDUOfi_7CsWkZRM_Pn",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Read more about Automad in the official docs.",
+                        "large": false
+                    },
+                    "tunes": []
+                }
+            ]
+        },
+        "template": "page_full_width_centered",
+        "private": false,
+        ":created": "2025-12-20T17:39:54+00:00",
+        ":lastModified": "2025-12-25T16:09:22+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-25T16:09:25+00:00"
+    }
+}

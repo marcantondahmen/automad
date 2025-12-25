@@ -20,7 +20,7 @@
     "require": {
         "php": ">=8.2",
         "automad/package-installer": "^1.1",
-        "automad/standard-v1": "^1.0"
+        "automad/standard-lite": "^0.1.0"
     },
     "config": {
         "allow-plugins": {

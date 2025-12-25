@@ -1,0 +1,98 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Building Components",
+        "slug": "building-components",
+        "selectShowPageInFooter": "primary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "vqEmK6nU6LCYbdyra-vi-Nfzar7SM5iv",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Components are sections you can reuse across multiple pages. They maintain consistency and speed up your workflow.",
+                        "large": true
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "iST9TM3hM9mCtLd6oRVwnXG77c3EKm--",
+                    "type": "layoutSection",
+                    "data": {
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "aqMy87U_kfrBdackpXhizhqsn5kKu0Rc",
+                                    "type": "component",
+                                    "data": {
+                                        "id": "GP0ffng9y3gx5kSiD9ik1bNMnNsrsmN9"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "tKmxfjaVtg3WvyYLf198d3aRN9SJ-qCd",
+                                    "type": "component",
+                                    "data": {
+                                        "id": "GP0ffng9y3gx5kSiD9ik1bNMnNsrsmN9"
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "style": {
+                            "card": false,
+                            "shadow": false,
+                            "color": "",
+                            "backgroundColor": "",
+                            "backgroundBlendMode": "normal",
+                            "borderColor": "",
+                            "borderWidth": "",
+                            "borderRadius": "",
+                            "borderStyle": "none",
+                            "backgroundImage": "",
+                            "paddingTop": "",
+                            "paddingBottom": "",
+                            "overflowHidden": false
+                        },
+                        "justify": "fill-row",
+                        "align": "start",
+                        "gap": "2rem",
+                        "minBlockWidth": ""
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "2rem"
+                        }
+                    }
+                }
+            ]
+        },
+        "template": "page_sidebar",
+        "private": false,
+        ":created": "2025-12-20T17:27:34+00:00",
+        ":lastModified": "2025-12-25T16:12:14+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-25T16:12:16+00:00"
+    }
+}

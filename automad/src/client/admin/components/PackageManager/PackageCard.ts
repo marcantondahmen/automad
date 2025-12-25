@@ -114,9 +114,7 @@ export class PackageCardComponent extends BaseComponent {
 			{},
 			container,
 			html`
-				<div class="${CSS.cardTitle}">
-					$${pkg.name.split('/')[0]} /<br />$${pkg.name.split('/')[1]}
-				</div>
+				<div class="${CSS.cardTitle}">$${pkg.title}</div>
 				<am-dropdown class="${CSS.cardHeaderDropdown}" ${Attr.right}>
 					<i class="bi bi-three-dots"></i>
 					<div class="${CSS.dropdownItems}">

@@ -1,0 +1,180 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Showing Images",
+        "slug": "showing-images",
+        "selectShowPageInFooter": "primary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "raHbgL2O6MiT3ih1zko7fo5nkUdPMQkS",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Images can be added individually or in galleries and slideshows. Use them to bring life and clarity to your pages.",
+                        "large": true
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "Kir0_0K58Wkunb9E0aw5ChcNt1GQtvfa",
+                    "type": "imageSlideshow",
+                    "data": {
+                        "files": [
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp"
+                        ],
+                        "imageWidthPx": "800",
+                        "imageHeightPx": "1200",
+                        "gapPx": "2",
+                        "slidesPerView": "1",
+                        "loop": true,
+                        "autoplay": true,
+                        "effect": "slide",
+                        "breakpoints": {
+                            "600": {
+                                "slidesPerView": 2
+                            },
+                            "900": {
+                                "slidesPerView": 3
+                            }
+                        }
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": true,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "1rem"
+                        }
+                    }
+                },
+                {
+                    "id": "OxDabLYws0peymYDf8ggr1PqFKyY45nZ",
+                    "type": "gallery",
+                    "data": {
+                        "files": [
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-08.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-06.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-08.webp"
+                        ],
+                        "layout": "columns",
+                        "columnWidthPx": "250",
+                        "rowHeightPx": 250,
+                        "gapPx": "2",
+                        "fillRectangle": false
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": true,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "2px",
+                            "bottom": "1rem"
+                        }
+                    }
+                },
+                {
+                    "id": "IJEDb3wtv2clbNBbksrzheL_4agz8OMR",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Galleries support <i>column</i>, <i>row</i>, or <i>grid</i> layouts. This example uses a <i>row-based</i> layout.",
+                        "large": false
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "lIg-5IPVSpyBcw9-2iIYFbJ1IBRU--0G",
+                    "type": "gallery",
+                    "data": {
+                        "files": [
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-08.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-06.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp"
+                        ],
+                        "layout": "rows",
+                        "columnWidthPx": "250",
+                        "rowHeightPx": "250",
+                        "gapPx": "2",
+                        "fillRectangle": false
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        },
+                        "spacing": {
+                            "top": "1rem",
+                            "bottom": "1rem"
+                        }
+                    }
+                },
+                {
+                    "id": "WoYal1jKUvdNN4Yk287_TN0ZOcOc4slp",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Use the grid layout to arrange images with generous whitespace.",
+                        "large": false
+                    },
+                    "tunes": {
+                        "spacing": {
+                            "bottom": "5px"
+                        }
+                    }
+                },
+                {
+                    "id": "QUdQvjj2T2n-gBPZBaaVQ_b84UxBNPEa",
+                    "type": "gallery",
+                    "data": {
+                        "files": [
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-08.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
+                            "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp"
+                        ],
+                        "layout": "grid",
+                        "columnWidthPx": "175",
+                        "rowHeightPx": "275",
+                        "gapPx": "16",
+                        "fillRectangle": false
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                }
+            ]
+        },
+        "template": "page_sidebar",
+        "private": false,
+        ":created": "2025-12-23T17:09:54+00:00",
+        ":lastModified": "2025-12-25T16:12:03+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-25T16:12:05+00:00"
+    }
+}

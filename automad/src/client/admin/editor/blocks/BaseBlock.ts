@@ -109,6 +109,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	 * @param options.api
 	 * @param options.config
 	 * @param options.block
+	 * @param options.readOnly
 	 */
 	constructor({
 		data,

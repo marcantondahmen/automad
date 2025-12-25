@@ -42,7 +42,6 @@ import {
 	EventName,
 	FieldTag,
 	html,
-	listen,
 	uniqueId,
 } from '@/admin/core';
 import { KeyValueMap } from '@/admin/types';

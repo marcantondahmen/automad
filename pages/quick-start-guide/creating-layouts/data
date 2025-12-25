@@ -1,0 +1,708 @@
+{
+    "draft": [],
+    "published": {
+        "title": "Creating Layouts",
+        "slug": "creating-layouts",
+        "selectShowPageInFooter": "primary",
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
+        "+main": {
+            "blocks": [
+                {
+                    "id": "21nt9TMRkGFFUZZxc5mcD92Wjw8hNkab",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Layouts define how content flows across your page. Grids and nested sections help you create responsive, balanced designs.",
+                        "large": true
+                    },
+                    "tunes": {
+                        "spacing": {
+                            "bottom": "1rem"
+                        }
+                    }
+                },
+                {
+                    "id": "dlwOXp7CTsfCedWvN4N2p53tcoBdGpA2",
+                    "type": "layoutSection",
+                    "data": {
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "MxR0ooH9mDG6hLFq42pzrWj4d24JbGvN",
+                                    "type": "callout",
+                                    "data": {
+                                        "title": "Hey",
+                                        "text": "The simplest way to use <i>layout sections</i> is to split content into <strong>columns</strong>. Each child element gets a width, allowing columns of different sizes."
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "j8k8UYJrPWWyncqMgxrXoNroGkDV2f_8",
+                                    "type": "layoutSection",
+                                    "data": {
+                                        "content": {
+                                            "blocks": [
+                                                {
+                                                    "id": "TzVutOIW0mSgQRYxp5PJ3JIjCIZChMO9",
+                                                    "type": "header",
+                                                    "data": {
+                                                        "text": "Columns",
+                                                        "level": 2
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": null
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "",
+                                                        "id": ""
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "style": {
+                                            "card": true,
+                                            "shadow": false,
+                                            "color": "",
+                                            "backgroundColor": "",
+                                            "backgroundBlendMode": "normal",
+                                            "borderColor": "",
+                                            "borderWidth": "",
+                                            "borderRadius": "",
+                                            "borderStyle": "none",
+                                            "backgroundImage": "",
+                                            "paddingTop": "",
+                                            "paddingBottom": "",
+                                            "overflowHidden": false
+                                        },
+                                        "justify": "start",
+                                        "align": "start",
+                                        "gap": "",
+                                        "minBlockWidth": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": null,
+                                        "className": "inverted rounded-m",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "style": {
+                            "card": false,
+                            "shadow": false,
+                            "color": "",
+                            "backgroundColor": "",
+                            "backgroundBlendMode": "normal",
+                            "borderColor": "",
+                            "borderWidth": "",
+                            "borderRadius": "",
+                            "borderStyle": "none",
+                            "backgroundImage": "",
+                            "paddingTop": "",
+                            "paddingBottom": "",
+                            "overflowHidden": false
+                        },
+                        "justify": "fill-row",
+                        "align": "stretch",
+                        "gap": "2rem",
+                        "minBlockWidth": "20rem"
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "_4mQCxfMh2CxiQTDvhy9aN8no1WItoE-",
+                    "type": "header",
+                    "data": {
+                        "text": "Nesting Sections",
+                        "level": 2
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "JLGhpspkM4xuI8N2QMCYh-6zQ88bGonU",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Layout sections become powerful when <i>nested</i>. The example below shows how nesting can be used to build a <i>bento-style</i> layout.",
+                        "large": false
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "PUWpgjC_UWGEhxP9CPDB97EbX0V1wa-d",
+                    "type": "layoutSection",
+                    "data": {
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "gjE3QHc72-T1g2fcgg-I8O4WaI0fwB2Z",
+                                    "type": "layoutSection",
+                                    "data": {
+                                        "content": {
+                                            "blocks": [
+                                                {
+                                                    "id": "NgDKLy7Spb1dJ6bD8f_KHh9levpw9p0J",
+                                                    "type": "header",
+                                                    "data": {
+                                                        "text": "Bento Box",
+                                                        "level": 2
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": null
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "",
+                                                        "id": ""
+                                                    }
+                                                },
+                                                {
+                                                    "id": "M4VLDSof8FyHGFIMyzbdXrXSbXxOhX3t",
+                                                    "type": "paragraph",
+                                                    "data": {
+                                                        "text": "The minimum width of elements is defined in the parent layout section. This keeps things <i>responsive</i>.",
+                                                        "large": true
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": null
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "",
+                                                        "id": ""
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "style": {
+                                            "card": true,
+                                            "shadow": false,
+                                            "color": "",
+                                            "backgroundColor": "",
+                                            "backgroundBlendMode": "normal",
+                                            "borderColor": "",
+                                            "borderWidth": "",
+                                            "borderRadius": "",
+                                            "borderStyle": "none",
+                                            "backgroundImage": "",
+                                            "paddingTop": "",
+                                            "paddingBottom": "",
+                                            "overflowHidden": false
+                                        },
+                                        "justify": "fill-row",
+                                        "align": "stretch",
+                                        "gap": "0px",
+                                        "minBlockWidth": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": null,
+                                        "className": "inverted rounded-m",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "m0O9oNIkIrWF2IOAUcJURy0S4ojohXZR",
+                                    "type": "layoutSection",
+                                    "data": {
+                                        "content": {
+                                            "blocks": [
+                                                {
+                                                    "id": "fCqUCtXNBCdeHVfg7FZ7x97JEjo1zJ7r",
+                                                    "type": "image",
+                                                    "data": {
+                                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+                                                        "alt": "",
+                                                        "link": "",
+                                                        "openInNewTab": false,
+                                                        "caption": ""
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": "1/1"
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "rounded-m",
+                                                        "id": ""
+                                                    }
+                                                },
+                                                {
+                                                    "id": "S7t_qPypeH3Bsv13RG9yAjfbETVCNJ2c",
+                                                    "type": "layoutSection",
+                                                    "data": {
+                                                        "content": {
+                                                            "blocks": [
+                                                                {
+                                                                    "id": "GbyDPi_x9kB1p7r8QTHisz-64LvbHN2l",
+                                                                    "type": "callout",
+                                                                    "data": {
+                                                                        "title": "Hey",
+                                                                        "text": "While the top box is just an image, this one is a deeply <i>nested layout section</i>. This allows for fine-grained, isolated control over its styling."
+                                                                    },
+                                                                    "tunes": {
+                                                                        "layout": {
+                                                                            "stretched": false,
+                                                                            "width": null
+                                                                        },
+                                                                        "spacing": null,
+                                                                        "className": "",
+                                                                        "id": ""
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "style": {
+                                                            "card": false,
+                                                            "shadow": false,
+                                                            "color": "",
+                                                            "backgroundColor": "",
+                                                            "backgroundBlendMode": "normal",
+                                                            "borderColor": "",
+                                                            "borderWidth": "",
+                                                            "borderRadius": "",
+                                                            "borderStyle": "none",
+                                                            "backgroundImage": "",
+                                                            "paddingTop": "",
+                                                            "paddingBottom": "",
+                                                            "overflowHidden": false
+                                                        },
+                                                        "justify": "fill-row",
+                                                        "align": "stretch",
+                                                        "gap": "",
+                                                        "minBlockWidth": ""
+                                                    },
+                                                    "tunes": {
+                                                        "layout": {
+                                                            "stretched": false,
+                                                            "width": "1/1"
+                                                        },
+                                                        "spacing": null,
+                                                        "className": "",
+                                                        "id": ""
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "style": {
+                                            "card": false,
+                                            "shadow": false,
+                                            "color": "",
+                                            "backgroundColor": "",
+                                            "backgroundBlendMode": "normal",
+                                            "borderColor": "",
+                                            "borderWidth": "",
+                                            "borderRadius": "",
+                                            "borderStyle": "none",
+                                            "backgroundImage": "",
+                                            "paddingTop": "",
+                                            "paddingBottom": "",
+                                            "overflowHidden": false
+                                        },
+                                        "justify": "fill-row",
+                                        "align": "stretch",
+                                        "gap": "2rem",
+                                        "minBlockWidth": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/2"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "style": {
+                            "card": false,
+                            "shadow": false,
+                            "color": "",
+                            "backgroundColor": "",
+                            "backgroundBlendMode": "normal",
+                            "borderColor": "",
+                            "borderWidth": "",
+                            "borderRadius": "",
+                            "borderStyle": "none",
+                            "backgroundImage": "",
+                            "paddingTop": "",
+                            "paddingBottom": "",
+                            "overflowHidden": false
+                        },
+                        "justify": "fill-row",
+                        "align": "stretch",
+                        "gap": "2rem",
+                        "minBlockWidth": "20rem"
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "yTpdrR7luxeCoxf1YV7V_KdXP_xcBAVJ",
+                    "type": "header",
+                    "data": {
+                        "text": "Alignment and Spacing",
+                        "level": 2
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "ZuZgXOMDKvQu7V3IU6UGb1-IzrPqdW5F",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Alignment and spacing are controlled directly from the section toolbar. You can define gaps and set a minimum child width \u2014 the key to <i>responsive</i> layouts.",
+                        "large": false
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "cad1BRaiscsot27THkxuDZzK5CVjKao6",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "The example below shows how elements align vertically and horizontally. It starts with the vertical defaults, while horizontal alignment uses the <i>\u201cstretch to fill row\u201d</i> option.",
+                        "large": false
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "glD-RkJJvs__q3Dt1Vzk8nu7erQzMuAZ",
+                    "type": "layoutSection",
+                    "data": {
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "PJpM-PGolcMAaZcbvR8NCkAiaG-fl0vs",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "Erv3TlMN0UEqsmeMWcTkJjBHTOP988X3",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-06.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "ZPc9xaPNcCfFAOrYYRdsDFKwS_TAOwtU",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "style": {
+                            "card": false,
+                            "shadow": false,
+                            "color": "",
+                            "backgroundColor": "",
+                            "backgroundBlendMode": "normal",
+                            "borderColor": "",
+                            "borderWidth": "",
+                            "borderRadius": "",
+                            "borderStyle": "none",
+                            "backgroundImage": "",
+                            "paddingTop": "",
+                            "paddingBottom": "",
+                            "overflowHidden": false
+                        },
+                        "justify": "fill-row",
+                        "align": "stretch",
+                        "gap": "2rem",
+                        "minBlockWidth": "5rem"
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "uBsZt2x2hbZSBmWf4dYo6kmnzcGxT2jn",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Now again a similar example, but this time the children are centered vertically.",
+                        "large": false
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "U5PWTqqdod0CDFQZMHphdHxS640GEbg5",
+                    "type": "layoutSection",
+                    "data": {
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "PJpM-PGolcMAaZcbvR8NCkAiaG-fl0vs",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "Erv3TlMN0UEqsmeMWcTkJjBHTOP988X3",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "S984Y63KNq2KLnDT0q_ZOn1g3z2XcJRw",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "style": {
+                            "card": false,
+                            "shadow": false,
+                            "color": "",
+                            "backgroundColor": "",
+                            "backgroundBlendMode": "normal",
+                            "borderColor": "",
+                            "borderWidth": "",
+                            "borderRadius": "",
+                            "borderStyle": "none",
+                            "backgroundImage": "",
+                            "paddingTop": "",
+                            "paddingBottom": "",
+                            "overflowHidden": false
+                        },
+                        "justify": "fill-row",
+                        "align": "center",
+                        "gap": "2rem",
+                        "minBlockWidth": "5rem"
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        }
+                    }
+                },
+                {
+                    "id": "T9iwDkCmRrpanxU6PqfGjSYNYzNo0qa_",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Elements can be distributed horizontally in ways other than <i>stretch</i>, for example <i>\"space around\"</i>. They align at the <i>bottom</i> and both have a width of 1/4.",
+                        "large": false
+                    },
+                    "tunes": []
+                },
+                {
+                    "id": "cz2iPpSCALe0NBUMyobeSb2wtc5WxXK1",
+                    "type": "layoutSection",
+                    "data": {
+                        "content": {
+                            "blocks": [
+                                {
+                                    "id": "PJpM-PGolcMAaZcbvR8NCkAiaG-fl0vs",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "Erv3TlMN0UEqsmeMWcTkJjBHTOP988X3",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                },
+                                {
+                                    "id": "Cu3hhOiBuSKbpjXKNekvOB1030XGcbWJ",
+                                    "type": "image",
+                                    "data": {
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
+                                        "alt": "",
+                                        "link": "",
+                                        "openInNewTab": false,
+                                        "caption": ""
+                                    },
+                                    "tunes": {
+                                        "layout": {
+                                            "stretched": false,
+                                            "width": "1/4"
+                                        },
+                                        "spacing": null,
+                                        "className": "",
+                                        "id": ""
+                                    }
+                                }
+                            ]
+                        },
+                        "style": {
+                            "card": true,
+                            "shadow": false,
+                            "color": "",
+                            "backgroundColor": "",
+                            "backgroundBlendMode": "normal",
+                            "borderColor": "",
+                            "borderWidth": "",
+                            "borderRadius": "",
+                            "borderStyle": "none",
+                            "backgroundImage": "",
+                            "paddingTop": "",
+                            "paddingBottom": "",
+                            "overflowHidden": false
+                        },
+                        "justify": "space-evenly",
+                        "align": "end",
+                        "gap": "2rem",
+                        "minBlockWidth": "5rem"
+                    },
+                    "tunes": {
+                        "layout": {
+                            "stretched": false,
+                            "width": null
+                        },
+                        "className": "border rounded-m"
+                    }
+                }
+            ]
+        },
+        "template": "page_sidebar",
+        "private": false,
+        ":created": "2025-12-20T17:27:10+00:00",
+        ":lastModified": "2025-12-25T20:54:32+00:00",
+        ":automadVersion": "2.0.0-alpha.53",
+        ":lastPublished": "2025-12-25T20:54:34+00:00"
+    }
+}

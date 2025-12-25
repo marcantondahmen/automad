@@ -1,8 +1,25 @@
 # Changelog
 
-## [v2.0.0-alpha.53](https://github.com/marcantondahmen/automad/commit/b203c8aaf2c836775ef7620b4e36c83ae34099e6)
+## [v2.0.0-beta.1](https://github.com/marcantondahmen/automad/commit/47e1cc95218f58fb022e4497ef4a9ca65d4a2ff6)
 
-Sun, 14 Dec 2025 12:00:08 +0100
+Thu, 25 Dec 2025 22:22:51 +0100
+
+### New Features
+
+- add better styling for ordered table of contents ([d38cb028a](https://github.com/marcantondahmen/automad/commit/d38cb028a1466d5583eaf2cd5369e844a7ea1679))
+- add sample content including quick start guide ([005978d2a](https://github.com/marcantondahmen/automad/commit/005978d2a2425c90a6189fb4333791a780e9ae48))
+- replace legacy theme with new standard lite theme ([eba5eeed8](https://github.com/marcantondahmen/automad/commit/eba5eeed8f437439dd8a56d4a4a34d60f9b3aa33))
+
+### Bugfixes
+
+- fix callout block title in conversion dropdown ([ec36ab4b2](https://github.com/marcantondahmen/automad/commit/ec36ab4b268309b9556cf4f0076902d73086d98a))
+- fix change detection in block data objects ([600d0eee2](https://github.com/marcantondahmen/automad/commit/600d0eee2556e89de8acce75ad2dc4a7b17ce015))
+- fix inline tool issues caused by state update events inside component editor ([71d167ea5](https://github.com/marcantondahmen/automad/commit/71d167ea562f01806c65233713b96ecb46177616))
+- fix layout section layouts for default sized content ([f20a64da0](https://github.com/marcantondahmen/automad/commit/f20a64da089e72ed7daafbd856b328d836bd27ca))
+
+## [v2.0.0-alpha.53](https://github.com/marcantondahmen/automad/commit/ea6604c91b191a997e6ca89aabe922bb1a6f8dda)
+
+Sun, 14 Dec 2025 12:02:04 +0100
 
 ### Bugfixes
 
@@ -834,11 +851,3 @@ Fri, 1 Apr 2022 16:42:24 +0200
 
 - **core**: fix deprecation warning for preg_split() ([87dd50597](https://github.com/marcantondahmen/automad/commit/87dd5059720805f7ad386c696977d40dede71b3e))
 - **core**: fix php 8.1 compatibility issues with trim() and strip_tags() ([5dee18a21](https://github.com/marcantondahmen/automad/commit/5dee18a21ca85af24457a4a0ee22cdee8201101b))
-
-## [v1.10.2](https://github.com/marcantondahmen/automad/commit/4d7f852678919babc453c8d65f801a8b7c106f58)
-
-Thu, 31 Mar 2022 18:52:37 +0200
-
-### Bugfixes
-
-- **system**: fix fetching packages from the packagist api ([8b53ae63d](https://github.com/marcantondahmen/automad/commit/8b53ae63d4e32343cc1f428259ec4bd719cccc84))

@@ -26,41 +26,12 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2025 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-.am-block {
-	display: block;
-	box-sizing: border-box;
-	width: 100%;
-	max-width: var(--am-block-max-width);
-	margin: 0 auto;
-
-	* + & {
-		margin-top: var(--am-block-margin-top);
-	}
-
-	& > figure:not(&) {
-		margin: 0 !important;
-	}
-
-	& > figure {
-		padding: 0 !important;
-	}
-
-	figure& {
-		display: flex;
-		flex-direction: column;
-	}
-
-	& figcaption {
-		padding: var(--am-caption-space) 0 0 0;
-	}
-
-	& video {
-		width: 100%;
-	}
+am-table-of-contents {
+	&:extend(am-list all);
 }
