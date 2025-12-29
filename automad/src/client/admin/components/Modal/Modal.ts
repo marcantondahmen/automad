@@ -85,11 +85,6 @@ export class ModalComponent extends BaseComponent {
 	protected readonly classes = [CSS.modal];
 
 	/**
-	 * The form data of the form controls included in the modal.
-	 */
-	private formData: KeyValueMap;
-
-	/**
 	 * The internal focus trap listener.
 	 */
 	private focusTrap: Listener;
@@ -173,7 +168,6 @@ export class ModalComponent extends BaseComponent {
 		this.removeAttribute(Attr.modalOpen);
 		this.toggleBodyOverflow();
 		this.unlockNavigation();
-		this.restoreInitialFormData();
 
 		fire(EventName.modalClose, this);
 
@@ -203,7 +197,6 @@ export class ModalComponent extends BaseComponent {
 		this.setAttribute(Attr.modalOpen, '');
 		this.toggleBodyOverflow();
 		this.lockNavigation();
-		this.saveInitialFormData();
 
 		fire(EventName.modalOpen, this);
 
@@ -222,20 +215,6 @@ export class ModalComponent extends BaseComponent {
 				input.value = value;
 			}
 		}
-	}
-
-	/**
-	 * Save the initial form values on opening.
-	 */
-	protected saveInitialFormData(): void {
-		this.formData = collectFieldData(this);
-	}
-
-	/**
-	 * Restore the initial form data when modal was opened.
-	 */
-	protected restoreInitialFormData(): void {
-		setFormData(this.formData, this);
 	}
 }
 
