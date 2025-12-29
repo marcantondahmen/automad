@@ -67,7 +67,7 @@ export const filterEmptyData = <T>(data: T): Partial<T> => {
 	const filtered: Partial<T> = {};
 
 	for (const [key, value] of Object.entries(data)) {
-		if (!!value || value === false) {
+		if (!!value || value === false || value === '0' || value === 0) {
 			filtered[key as keyof T] = value;
 		}
 	}
