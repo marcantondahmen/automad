@@ -33,7 +33,7 @@
  */
 
 import { API, BlockAPI, ToolConfig, TunesMenuConfig } from '@/vendor/editorjs';
-import { createGenericModal, CSS, fire, query } from '@/admin/core';
+import { createGenericModal, CSS, debounce, fire, query } from '@/admin/core';
 import { BlockTuneConstructorOptions } from '@/admin/types';
 import { filterEmptyData } from '../utils';
 
@@ -181,12 +181,14 @@ export abstract class BaseModalTune<DataType> {
 	 */
 	protected onActivate(): void {
 		const { modal, body } = createGenericModal(this.title);
+		const onChange = debounce(() => {
+			this.data = this.sanitize(this.getFormData(body));
+		}, 100);
 
 		body.appendChild(this.createForm());
 
-		this.api.listeners.on(body, 'change', () => {
-			this.data = this.sanitize(this.getFormData(body));
-		});
+		this.api.listeners.on(body, 'change', onChange);
+		this.api.listeners.on(body, 'input', onChange);
 
 		setTimeout(() => {
 			modal.open();
