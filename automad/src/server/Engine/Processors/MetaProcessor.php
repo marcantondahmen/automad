@@ -42,6 +42,7 @@ use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\I18n;
+use Automad\Core\Resolve;
 use Automad\Core\Str;
 use Automad\Engine\Document\Head;
 use Automad\Models\Page;
@@ -115,7 +116,13 @@ class MetaProcessor {
 		$html = $this->addIcons($html);
 
 		if ($ogImage = $this->Page->get(Fields::OPEN_GRAPH_IMAGE)) {
-			$ogImage = AM_SERVER . AM_BASE_URL . $ogImage;
+			$ogImage = (strpos($ogImage, '://') !== false)
+				? $ogImage
+				: Resolve::absoluteUrlToDomain(
+					(strpos($ogImage, '/') === 0)
+						? $ogImage
+						: Resolve::relativeUrlToBase($ogImage, $this->Page)
+				);
 		} else {
 			$ogImage = $this->createOpenGraphImage();
 		}
