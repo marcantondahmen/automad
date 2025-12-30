@@ -190,6 +190,10 @@ abstract class AbstractStore {
 				return strlen($value);
 			}
 
+			if (is_array($value) && isset($value['blocks']) && empty($value['blocks'])) {
+				return false;
+			}
+
 			return true;
 		});
 
