@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-beta.3](https://github.com/marcantondahmen/automad/commit/2e0bb977d1affecb307075766d6849e45dd58310)
+## [v2.0.0-beta.4](https://github.com/marcantondahmen/automad/commit/020af6c47f193285e92bc435d66b79600ab8fa10)
 
-Mon, 29 Dec 2025 10:24:03 +0100
+Tue, 30 Dec 2025 10:08:14 +0100
+
+### New Features
+
+- update standard lite theme ([020af6c47](https://github.com/marcantondahmen/automad/commit/020af6c47f193285e92bc435d66b79600ab8fa10))
+
+### Bugfixes
+
+- fix global defaults when page blocks have been deleted ([fc859c239](https://github.com/marcantondahmen/automad/commit/fc859c239b2d290e567d2ed2c8056aff98178418))
+
+## [v2.0.0-beta.3](https://github.com/marcantondahmen/automad/commit/6ed2dd73297385655ebcab749be03697e68c879e)
+
+Mon, 29 Dec 2025 10:27:45 +0100
 
 ### Bugfixes
 
@@ -890,14 +902,3 @@ Fri, 26 Nov 2021 10:26:38 +0100
 ### Bugfixes
 
 - **ui**: fix block editor ui errors when using block templates ([feb09bc2d](https://github.com/marcantondahmen/automad/commit/feb09bc2d6b998d4f1b062c028f1ae273042720b))
-
-## [v1.10.0](https://github.com/marcantondahmen/automad/commit/f631730deb600db7ee9086954943e6b111405f49)
-
-Wed, 24 Nov 2021 09:35:46 +0100
-
-### New Features
-
-- **core**: add feed generator ([0f2d32ace](https://github.com/marcantondahmen/automad/commit/0f2d32acede3c72ef468034dd3113f3ffad25da6))
-- **ui**: add feed configuration ui ([686d563d1](https://github.com/marcantondahmen/automad/commit/686d563d11a8cdec881c6053cc01ad6049e76400))
-- **ui**: redesign system settings ui ([aa84f8021](https://github.com/marcantondahmen/automad/commit/aa84f8021a0da6ff8d587e5f384cf6b6a46d1b4d))
-- remove gulp-util and update dependencies ([02ae09d59](https://github.com/marcantondahmen/automad/commit/02ae09d59931fc09f92fb8fd0161147d199031c4))
