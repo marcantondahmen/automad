@@ -41,7 +41,7 @@
 	grid-template-columns: repeat(var(--repeat), minmax(var(--min), 1fr));
 	gap: var(--gap);
 
-	* + & {
+	*:not(hr) + & {
 		margin-top: var(--gap);
 	}
 

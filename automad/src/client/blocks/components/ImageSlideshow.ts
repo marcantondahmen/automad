@@ -73,9 +73,11 @@ export default class Slider {
 		const wrapper = create('div', ['swiper-wrapper'], {}, swiperContainer);
 		const { settings, imageSets } = this.data;
 
-		create('div', ['swiper-pagination'], {}, swiperContainer);
-		create('div', ['swiper-button-prev'], {}, swiperContainer);
-		create('div', ['swiper-button-next'], {}, swiperContainer);
+		if (!settings.hideControls) {
+			create('div', ['swiper-pagination'], {}, swiperContainer);
+			create('div', ['swiper-button-prev'], {}, swiperContainer);
+			create('div', ['swiper-button-next'], {}, swiperContainer);
+		}
 
 		imageSets.forEach(({ imageSet, caption }) => {
 			const captionHtml = caption.trim()
@@ -99,20 +101,30 @@ export default class Slider {
 			);
 		});
 
+		const autoplay = !!settings.autoplay
+			? { delay: settings.delay ?? 3000 }
+			: false;
+
+		console.log('xx', settings);
+
 		new Swiper(swiperContainer, {
 			modules: [Autoplay, EffectFade, EffectFlip, Navigation, Pagination],
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true,
-			},
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev',
-			},
+			...(settings.hideControls
+				? {}
+				: {
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true,
+						},
+						navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev',
+						},
+					}),
 			grabCursor: true,
 			speed: 300,
 			loop: settings.loop ?? true,
-			autoplay: settings.autoplay ?? false,
+			autoplay,
 			effect: settings.effect ?? 'slide',
 			slidesPerView: settings.slidesPerView || 1,
 			spaceBetween: settings.gapPx ?? 0,

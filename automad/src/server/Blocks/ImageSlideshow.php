@@ -72,11 +72,13 @@ class ImageSlideshow extends AbstractBlock {
 		$settings = array(
 			'imageWidthPx' => $data['imageWidthPx'] ?? 1200,
 			'imageHeightPx' => $data['imageHeightPx'] ?? 780,
-			'gapPx' => $data['gapPx'] ?? 30,
+			'gapPx' => $data['gapPx'] ?? 0,
 			'slidesPerView' => $data['slidesPerView'] ?? 1,
 			'loop' => $data['loop'] ?? true,
 			'autoplay' => $data['autoplay'] ?? false,
 			'effect' => $data['effect'] ?? 'slide',
+			'delay' => $data['delay'] ?? 3000,
+			'hideControls' => $data['hideControls'] ?? false,
 			'breakpoints' => $data['breakpoints'] ?? array()
 		);
 
