@@ -138,11 +138,13 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			files: data.files || [],
 			imageWidthPx: data.imageWidthPx || 1200,
 			imageHeightPx: data.imageHeightPx || 780,
-			gapPx: data.gapPx || 30,
+			gapPx: data.gapPx || 0,
 			slidesPerView: data.slidesPerView || 1,
 			loop: data.loop ?? true,
 			autoplay: data.autoplay ?? false,
 			effect: data.effect ?? 'slide',
+			hideControls: data.hideControls ?? false,
+			delay: data.delay ?? 300,
 			breakpoints: data.breakpoints ?? {
 				600: {
 					slidesPerView: 2,
@@ -240,6 +242,8 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 				loop: data.loop ?? false,
 				autoplay: data.autoplay ?? false,
 				effect: data.effect,
+				delay: data.delay,
+				hideControls: data.hideControls,
 				breakpoints: stringToBreakpoints(data.breakpointsString),
 			};
 		});
@@ -268,19 +272,37 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			body
 		);
 
-		createField(FieldTag.toggle, body, {
+		const settings = create('div', [CSS.grid, CSS.gridAuto], {}, body);
+
+		createField(FieldTag.toggle, settings, {
 			name: 'loop',
 			value: this.data.loop,
 			key: uniqueId(),
 			label: App.text('imageSlideshowBlockLoop'),
 		});
 
-		createField(FieldTag.toggle, body, {
+		createField(FieldTag.toggle, settings, {
 			name: 'autoplay',
 			value: this.data.autoplay,
 			key: uniqueId(),
 			label: App.text('imageSlideshowBlockAutoplay'),
 		});
+
+		createField(FieldTag.toggle, settings, {
+			name: 'hideControls',
+			value: this.data.hideControls,
+			key: uniqueId(),
+			label: App.text('imageSlideshowBlockHideControls'),
+		});
+
+		createField(FieldTag.number, settings, {
+			name: 'delay',
+			value: this.data.delay,
+			key: uniqueId(),
+			label: `${App.text('imageSlideshowBlockDelay')} (ms)`,
+		});
+
+		create('hr', [], {}, body);
 
 		const dimensions = create('div', [CSS.grid, CSS.gridAuto], {}, body);
 		const layout = create('div', [CSS.grid, CSS.gridAuto], {}, body);

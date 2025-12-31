@@ -242,6 +242,8 @@ export interface ImageSlideshowBlockData {
 	autoplay: boolean;
 	effect: (typeof sliderEffects)[number];
 	breakpoints: ImageSlideshowBreakpoints;
+	delay: number;
+	hideControls: boolean;
 }
 
 export interface SnippetBlockData {

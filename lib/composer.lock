@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-language-packs.git",
-                "reference": "be312825722f68140ce702117b065159e444c86c"
+                "reference": "9b5964869daf5300e0b877ba16cbbc563394b070"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/be312825722f68140ce702117b065159e444c86c",
-                "reference": "be312825722f68140ce702117b065159e444c86c",
+                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/9b5964869daf5300e0b877ba16cbbc563394b070",
+                "reference": "9b5964869daf5300e0b877ba16cbbc563394b070",
                 "shasum": ""
             },
             "default-branch": true,
@@ -55,7 +55,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2025-11-29T16:11:11+00:00"
+            "time": "2025-12-31T12:23:08+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
