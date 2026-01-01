@@ -102,10 +102,8 @@ export default class Slider {
 		});
 
 		const autoplay = !!settings.autoplay
-			? { delay: settings.delay ?? 3000 }
+			? { delay: settings.delay || 3000 }
 			: false;
-
-		console.log('xx', settings);
 
 		new Swiper(swiperContainer, {
 			modules: [Autoplay, EffectFade, EffectFlip, Navigation, Pagination],
