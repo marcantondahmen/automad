@@ -101,7 +101,7 @@ class Dashboard {
 						document.documentElement.classList.add(scheme);
 					})();
 				</script>
-				{$fn(Asset::icon('dist/favicon.ico'))}
+				{$fn(Asset::favicons())}
 				{$fn(Asset::css('dist/build/admin/index.css'))}
 				{$fn(Asset::js('dist/build/admin/index.js'))}
 			</head>

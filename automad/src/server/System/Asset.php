@@ -58,14 +58,15 @@ class Asset {
 	}
 
 	/**
-	 * Render an icon link tag.
+	 * Render favicon link tags.
 	 *
-	 * @param string $file
-	 * @param bool $addBaseUrl
 	 * @return string the script tag
 	 */
-	public static function icon(string $file, bool $addBaseUrl = true): string {
-		return '<link href="' . self::link($file, $addBaseUrl) . '" rel="shortcut icon" type="image/x-icon">';
+	public static function favicons(): string {
+		$html = '<link href="' . self::link('dist/favicon.svg', true) . '" rel="icon" type="image/svg+xml">';
+		$html .= '<link href="' . self::link('dist/favicon.ico', true) . '" rel="alternate icon" type="image/x-icon" sizes="32x32">';
+
+		return $html;
 	}
 
 	/**

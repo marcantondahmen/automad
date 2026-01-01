@@ -40,6 +40,11 @@
 	outline: 1px dashed hsl(var(--am-clr-border));
 	border-radius: @am-form-radius;
 
+	// Compensate height difference when an id or class tune is used.
+	.ce-block__content:has(> span > .am-e-badge):has(> div > &) {
+		padding-bottom: 2.5rem;
+	}
+
 	&__toolbar {
 		interpolate-size: allow-keywords;
 		position: absolute;

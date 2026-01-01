@@ -335,7 +335,11 @@ class Config {
 				strpos(strtolower($serverSoftware), 'apache') !== false &&
 				file_exists(AM_BASE_DIR . '/.htaccess')
 			) ||
-			strpos(strtolower($serverSoftware), 'nginx') !== false
+			(
+				strpos(strtolower($serverSoftware), 'litespeed') !== false &&
+				file_exists(AM_BASE_DIR . '/.htaccess')
+			) ||
+				strpos(strtolower($serverSoftware), 'nginx') !== false
 		);
 
 		Debug::log('Pretty URLs are ' . ($hasPrettyUrls ? 'enabled' : 'disbaled'));

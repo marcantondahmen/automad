@@ -35,6 +35,8 @@
                         "loop": true,
                         "autoplay": true,
                         "effect": "slide",
+                        "hideControls": false,
+                        "delay": 3000,
                         "breakpoints": {
                             "600": {
                                 "slidesPerView": 2
@@ -174,7 +176,7 @@
         "private": false,
         ":created": "2025-12-23T17:09:54+00:00",
         ":lastModified": "2025-12-25T16:12:03+00:00",
-        ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T16:12:05+00:00"
+        ":automadVersion": "2.0.0-beta.5",
+        ":lastPublished": "2025-12-31T16:50:48+00:00"
     }
 }

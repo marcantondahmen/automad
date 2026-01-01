@@ -1,8 +1,25 @@
 # Changelog
 
-## [v2.0.0-beta.5](https://github.com/marcantondahmen/automad/commit/54e6ef851da718578a2d7aa1dbdeeea580d110b0)
+## [v2.0.0-beta.6](https://github.com/marcantondahmen/automad/commit/84dbcda5bfd0048c7e338c32223e2f23656fa7b2)
 
-Wed, 31 Dec 2025 13:38:48 +0100
+Thu, 1 Jan 2026 15:25:50 +0100
+
+### New Features
+
+- add official support for litespeed servers ([579401411](https://github.com/marcantondahmen/automad/commit/5794014119ba6f136969ee2c43cb46a91b5bda9b))
+- add svg favicon for dashboard ([fe4d6f33e](https://github.com/marcantondahmen/automad/commit/fe4d6f33e2a901a0ee8ece6ba25befc8734596ef))
+- update quick start guide ([17a89768c](https://github.com/marcantondahmen/automad/commit/17a89768c311852970dba890539f8e99c3cbcf15))
+- update standard lite theme ([4dcc4074c](https://github.com/marcantondahmen/automad/commit/4dcc4074c58da9b9d57de16be04151e8ed8ae957))
+
+### Bugfixes
+
+- fix default image slideshow speed ([a8bec8cb2](https://github.com/marcantondahmen/automad/commit/a8bec8cb2eba3abd612127194b9de9182cee3f8f))
+- fix overlapping layout sections when using id or class tunes ([84dbcda5b](https://github.com/marcantondahmen/automad/commit/84dbcda5bfd0048c7e338c32223e2f23656fa7b2))
+- fix z-index issues when using the inline toolbar in a block that is followed by a component ([8ee8ea1fd](https://github.com/marcantondahmen/automad/commit/8ee8ea1fd27aaa973f05a7e5cd90a6c8fc50854f))
+
+## [v2.0.0-beta.5](https://github.com/marcantondahmen/automad/commit/9b8583cb0590f60e2b49b563ec4bd52fdb0c70f3)
+
+Wed, 31 Dec 2025 13:41:29 +0100
 
 ### New Features
 
@@ -891,11 +908,3 @@ Fri, 1 Apr 2022 16:42:24 +0200
 
 - **core**: fix deprecation warning for preg_split() ([87dd50597](https://github.com/marcantondahmen/automad/commit/87dd5059720805f7ad386c696977d40dede71b3e))
 - **core**: fix php 8.1 compatibility issues with trim() and strip_tags() ([5dee18a21](https://github.com/marcantondahmen/automad/commit/5dee18a21ca85af24457a4a0ee22cdee8201101b))
-
-## [v1.10.2](https://github.com/marcantondahmen/automad/commit/4d7f852678919babc453c8d65f801a8b7c106f58)
-
-Thu, 31 Mar 2022 18:52:37 +0200
-
-### Bugfixes
-
-- **system**: fix fetching packages from the packagist api ([8b53ae63d](https://github.com/marcantondahmen/automad/commit/8b53ae63d4e32343cc1f428259ec4bd719cccc84))
