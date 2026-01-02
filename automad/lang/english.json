@@ -584,6 +584,7 @@
 	"unorderedList": "Unordered list",
 	"unsupportedFileTypeError": "Unsupported file type",
 	"unusedField": "currently unused",
+	"unusedFieldRemove": "Remove",
 	"uploadCancelled": "The upload has been cancelled",
 	"uploadImageError": "Error while uploading the image.",
 	"uploadWatermark": "Upload watermark",

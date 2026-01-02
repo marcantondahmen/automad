@@ -116,7 +116,7 @@ export const createField = (
 		fieldType,
 		cls,
 		attributes,
-		allowModal
+		allowModal && !data.isUnused
 			? create(
 					'am-modal-field',
 					[],

@@ -39,10 +39,12 @@ import {
 	createIdFromField,
 	createLabelFromField,
 	CSS,
+	fire,
 	html,
 	htmlSpecialChars,
 	query,
 	queryAll,
+	queryParents,
 	Undo,
 } from '@/admin/core';
 import {
@@ -211,13 +213,30 @@ export abstract class BaseFieldComponent
 		const element = create('label', [CSS.fieldLabel], attributes, wrapper);
 
 		create('span', [], {}, element).innerHTML = isUnused
-			? html`${label} — ${App.text('unusedField')} &nbsp;`
+			? html`${label} — ${App.text('unusedField')}`
 			: label;
 
 		if (tooltip) {
 			create('i', ['bi', 'bi-lightbulb'], {}, element);
 
 			element.setAttribute(Attr.tooltip, tooltip);
+		}
+
+		if (isUnused) {
+			const removeButton = create(
+				'a',
+				[CSS.cursorPointer],
+				{ [Attr.tooltip]: App.text('unusedFieldRemove') },
+				element,
+				'⊗'
+			);
+
+			this.listen(removeButton, 'click', () => {
+				this.mutate('');
+				fire('change', this.getValueProvider());
+
+				this.remove();
+			});
 		}
 	}
 
