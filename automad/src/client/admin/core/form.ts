@@ -490,6 +490,7 @@ export const createLabelFromField = (key: string): string => {
 export const fieldGroup = ({
 	section,
 	fields,
+	unused,
 	tooltips,
 	themeOptions,
 	labels,
@@ -512,45 +513,51 @@ export const fieldGroup = ({
 
 	const prefixMap = getPrefixMap(!!shared);
 
-	Object.keys(fields).forEach((name) => {
-		if (
-			Object.values(App.reservedFields).includes(name) ||
-			name.startsWith(':')
-		) {
-			return;
-		}
-
-		let fieldType: FieldTag = FieldTag.textarea;
-		let placeholder = '';
-
-		for (const [prefix, value] of Object.entries(prefixMap)) {
-			if (name.startsWith(prefix)) {
-				fieldType = value;
-				break;
+	const createFields = (f: KeyValueMap, isUnused: boolean = false): void => {
+		Object.keys(f).forEach((name) => {
+			if (
+				Object.values(App.reservedFields).includes(name) ||
+				name.startsWith(':')
+			) {
+				return;
 			}
-		}
 
-		if (shared) {
-			placeholder = shared[name];
-		}
+			let fieldType: FieldTag = FieldTag.textarea;
+			let placeholder = '';
 
-		createField(
-			fieldType,
-			section,
-			{
-				key: name,
-				value: fields[name],
-				tooltip: tooltips[name],
-				options: themeOptions[name] ?? null,
-				label: labels[name] ?? null,
-				name: `data[${name}]`,
-				placeholder,
-			},
-			[],
-			{},
-			[FieldTag.editor, FieldTag.markdown].includes(fieldType)
-		);
-	});
+			for (const [prefix, value] of Object.entries(prefixMap)) {
+				if (name.startsWith(prefix)) {
+					fieldType = value;
+					break;
+				}
+			}
+
+			if (shared) {
+				placeholder = shared[name];
+			}
+
+			createField(
+				fieldType,
+				section,
+				{
+					key: name,
+					value: f[name],
+					tooltip: tooltips[name] ?? null,
+					options: themeOptions[name] ?? null,
+					label: labels[name] ?? null,
+					name: `data[${name}]`,
+					placeholder,
+					isUnused,
+				},
+				[],
+				{},
+				[FieldTag.editor, FieldTag.markdown].includes(fieldType)
+			);
+		});
+	};
+
+	createFields(fields);
+	createFields(unused, true);
 };
 
 /**

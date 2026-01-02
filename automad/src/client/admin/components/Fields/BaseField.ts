@@ -39,9 +39,12 @@ import {
 	createIdFromField,
 	createLabelFromField,
 	CSS,
+	fire,
+	html,
 	htmlSpecialChars,
 	query,
 	queryAll,
+	queryParents,
 	Undo,
 } from '@/admin/core';
 import {
@@ -105,6 +108,7 @@ export abstract class BaseFieldComponent
 	 * @param params.label
 	 * @param params.placeholder
 	 * @param params.isInPage
+	 * @param params.isUnused
 	 */
 	set data({
 		key,
@@ -116,6 +120,7 @@ export abstract class BaseFieldComponent
 		label,
 		placeholder,
 		isInPage,
+		isUnused,
 	}: FieldInitData) {
 		id = id ?? createIdFromField(key);
 		value = typeof value === 'undefined' ? '' : value;
@@ -133,6 +138,7 @@ export abstract class BaseFieldComponent
 			options,
 			placeholder,
 			isInPage,
+			isUnused,
 		};
 
 		this.create();
@@ -187,7 +193,7 @@ export abstract class BaseFieldComponent
 	 * Create a label.
 	 */
 	protected createLabel(): void {
-		const { label, tooltip, isInPage } = this._data;
+		const { label, tooltip, isInPage, isUnused } = this._data;
 
 		if (isInPage) {
 			return;
@@ -206,12 +212,31 @@ export abstract class BaseFieldComponent
 		const wrapper = create('div', [], {}, this);
 		const element = create('label', [CSS.fieldLabel], attributes, wrapper);
 
-		create('span', [], {}, element).textContent = label;
+		create('span', [], {}, element).innerHTML = isUnused
+			? html`${label} — ${App.text('unusedField')}`
+			: label;
 
 		if (tooltip) {
 			create('i', ['bi', 'bi-lightbulb'], {}, element);
 
 			element.setAttribute(Attr.tooltip, tooltip);
+		}
+
+		if (isUnused) {
+			const removeButton = create(
+				'a',
+				[CSS.cursorPointer],
+				{ [Attr.tooltip]: App.text('unusedFieldRemove') },
+				element,
+				'⊗'
+			);
+
+			this.listen(removeButton, 'click', () => {
+				this.mutate('');
+				fire('change', this.getValueProvider());
+
+				this.remove();
+			});
 		}
 	}
 

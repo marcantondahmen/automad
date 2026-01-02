@@ -179,13 +179,14 @@ export class SharedDataFormComponent extends FormComponent {
 	 * @param response
 	 */
 	private render(response: KeyValueMap): void {
-		const { fields } = response.data;
+		const { fields, unused } = response.data;
 		const themeKey = App.reservedFields.THEME;
 		const mainTheme = fields[themeKey] || Object.keys(App.themes)[0];
 		const labels = App.themes[mainTheme]?.labels ?? {};
 		const tooltips = App.themes[mainTheme]?.tooltips ?? {};
 		const themeOptions = App.themes[mainTheme]?.options ?? {};
 		const fieldGroups = prepareFieldGroups(fields);
+		const unusedFieldGroups = prepareFieldGroups(unused);
 
 		create(
 			'input',
@@ -265,6 +266,7 @@ export class SharedDataFormComponent extends FormComponent {
 			fieldGroup({
 				section: this.sections[item],
 				fields: fieldGroups[item],
+				unused: unusedFieldGroups[item],
 				labels,
 				tooltips,
 				themeOptions,

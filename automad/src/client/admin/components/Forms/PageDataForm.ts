@@ -413,7 +413,7 @@ export class PageDataFormComponent extends FormComponent {
 	 * @param response
 	 */
 	private render(response: KeyValueMap): void {
-		const { url, fields, shared, template, readme } = response.data;
+		const { url, fields, unused, shared, template, readme } = response.data;
 
 		if (!fields) {
 			return;
@@ -449,6 +449,7 @@ export class PageDataFormComponent extends FormComponent {
 		const themeOptions = theme?.options ?? {};
 
 		const fieldGroups = prepareFieldGroups(fields);
+		const unusedFieldGroups = prepareFieldGroups(unused);
 
 		this.mainSettings({
 			section: this.sections.settings,
@@ -465,6 +466,7 @@ export class PageDataFormComponent extends FormComponent {
 			fieldGroup({
 				section: this.sections[item],
 				fields: fieldGroups[item],
+				unused: unusedFieldGroups[item],
 				labels,
 				tooltips,
 				themeOptions,

@@ -63,6 +63,7 @@ export interface TemplateFieldData {
 export interface FieldGroupData {
 	section: SwitcherSectionComponent;
 	fields: KeyValueMap;
+	unused: KeyValueMap;
 	tooltips: KeyValueMap;
 	themeOptions: ThemeOptions;
 	labels: KeyValueMap;
@@ -80,6 +81,7 @@ export interface FieldInitData {
 	label?: string;
 	placeholder?: string | number | KeyValueMap | boolean;
 	isInPage?: boolean;
+	isUnused?: boolean;
 }
 
 export interface FieldRenderData extends Omit<FieldInitData, 'key'> {

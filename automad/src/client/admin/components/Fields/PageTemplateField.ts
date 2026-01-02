@@ -306,7 +306,6 @@ export class PageTemplateFieldComponent extends BaseComponent {
 
 		if (Object.keys(App.themes).length > 0) {
 			body.innerHTML = html`
-				<p>${App.text('pageTemplatePurgeUnusedInfo')}</p>
 				<am-page-template-select
 					value="${selectedTemplate}"
 				></am-page-template-select>
@@ -316,7 +315,18 @@ export class PageTemplateFieldComponent extends BaseComponent {
 		}
 
 		this.listen(modal, 'change', () => {
-			createProgressModal(App.text('switchingTemplateProgress')).open();
+			create(
+				'p',
+				[CSS.textMuted],
+				{},
+				body,
+				html`
+					<div class="${CSS.flex} ${CSS.flexAlignCenter}">
+						<am-spinner class="${CSS.textMuted}"></am-spinner>
+						${App.text('switchingTemplateProgress')}
+					</div>
+				`
+			);
 		});
 	}
 }
