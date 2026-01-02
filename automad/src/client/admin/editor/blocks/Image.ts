@@ -200,7 +200,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 		this.caption = create(
 			'div',
-			['cdx-block', 'ce-paragraph'],
+			['ce-paragraph'],
 			{
 				contenteditable: this.readOnly ? 'false' : 'true',
 				placeholder: App.text('caption'),
