@@ -315,7 +315,18 @@ export class PageTemplateFieldComponent extends BaseComponent {
 		}
 
 		this.listen(modal, 'change', () => {
-			createProgressModal(App.text('switchingTemplateProgress')).open();
+			create(
+				'p',
+				[CSS.textMuted],
+				{},
+				body,
+				html`
+					<div class="${CSS.flex} ${CSS.flexAlignCenter}">
+						<am-spinner class="${CSS.textMuted}"></am-spinner>
+						${App.text('switchingTemplateProgress')}
+					</div>
+				`
+			);
 		});
 	}
 }
