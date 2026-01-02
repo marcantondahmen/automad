@@ -178,11 +178,14 @@ class PageController {
 			$supportedFields
 		);
 
+		$unusedFields = array_diff($data, $fields);
+
 		return $Response->setData(
 			array(
 				'url' => $Page->origUrl,
 				'template' => $Page->getTemplate(),
 				'fields' => $fields,
+				'unused' => $unusedFields,
 				'shared' => $Automad->Shared->data,
 				'readme' => isset($Theme) ? $Theme->readme : ''
 			)

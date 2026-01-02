@@ -78,9 +78,7 @@ class MainThemeFieldComponent extends BaseFieldComponent {
 			html`
 				<am-modal-dialog>
 					<am-modal-header>${label}</am-modal-header>
-					<am-modal-body>
-						<p>${App.text('themePurgeUnusedInfo')}</p>
-					</am-modal-body>
+					<am-modal-body></am-modal-body>
 				</am-modal-dialog>
 			`
 		) as ModalComponent;

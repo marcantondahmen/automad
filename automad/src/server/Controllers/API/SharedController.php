@@ -100,7 +100,9 @@ class SharedController {
 			$supportedFields
 		);
 
-		return $Response->setData(array('fields' => $fields));
+		$unusedFields = array_diff($Shared->data, $fields);
+
+		return $Response->setData(array('fields' => $fields, 'unused' => $unusedFields));
 	}
 
 	/**
