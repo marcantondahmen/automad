@@ -78,7 +78,7 @@ class FilterComponent extends BaseComponent {
 	protected get targetSelector(): string {
 		return (
 			this.getAttribute(Attr.target) ||
-			`section [${Attr.api}] .${CSS.field}:not(am-title-field):not(.${CSS.card} .${CSS.field}), .${CSS.card}, .${CSS.alert}, .${CSS.grid}, hr, p`
+			`section [${Attr.api}] .${CSS.field}:not(am-title-field):not(.${CSS.card} .${CSS.field}, .${CSS.modalField} .${CSS.field}), .${CSS.modalField}, .${CSS.card}, .${CSS.alert}, .${CSS.grid}, hr, p`
 		);
 	}
 
