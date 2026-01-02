@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.6](https://github.com/marcantondahmen/automad/commit/84dbcda5bfd0048c7e338c32223e2f23656fa7b2)
+## [v2.0.0-beta.7](https://github.com/marcantondahmen/automad/commit/2283e6bdc767f8cc89c5e4bd02109bb6a2c0cdae)
 
-Thu, 1 Jan 2026 15:25:50 +0100
+Fri, 2 Jan 2026 22:09:42 +0100
+
+### New Features
+
+- add remove button for unused content ([44a23f587](https://github.com/marcantondahmen/automad/commit/44a23f587662f9b50a5d259f0654a40ed439f776))
+- keep incompatible content when switching themes or templates ([e87f7fdcc](https://github.com/marcantondahmen/automad/commit/e87f7fdccc95341cd6afe25c334f94d08a046129))
+- update standard lite theme ([2283e6bdc](https://github.com/marcantondahmen/automad/commit/2283e6bdc767f8cc89c5e4bd02109bb6a2c0cdae))
+
+### Bugfixes
+
+- fix content filtering ([8c40279a6](https://github.com/marcantondahmen/automad/commit/8c40279a6a62eea7ba83e0c48093821b5dcacdb2))
+
+## [v2.0.0-beta.6](https://github.com/marcantondahmen/automad/commit/22522dbadd8b4eed189ce7645cd8da46097148ac)
+
+Thu, 1 Jan 2026 15:32:23 +0100
 
 ### New Features
 
@@ -899,12 +913,3 @@ Sat, 2 Apr 2022 21:36:15 +0200
 - **core**: fix overriding config for tests ([8b9e4b3ed](https://github.com/marcantondahmen/automad/commit/8b9e4b3ed51f2c3f0c138ed989a67e9f5d54a3f8))
 - **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
 - fix passing null as non-nullable function parameters ([3822317d3](https://github.com/marcantondahmen/automad/commit/3822317d304dc7e4dfe80e42c734e8309658a5d7))
-
-## [v1.10.3](https://github.com/marcantondahmen/automad/commit/f65ff67cce39173cea76ca3165f2b9c9deba8b59)
-
-Fri, 1 Apr 2022 16:42:24 +0200
-
-### Bugfixes
-
-- **core**: fix deprecation warning for preg_split() ([87dd50597](https://github.com/marcantondahmen/automad/commit/87dd5059720805f7ad386c696977d40dede71b3e))
-- **core**: fix php 8.1 compatibility issues with trim() and strip_tags() ([5dee18a21](https://github.com/marcantondahmen/automad/commit/5dee18a21ca85af24457a4a0ee22cdee8201101b))
