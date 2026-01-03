@@ -45,6 +45,7 @@ export const enum Attr {
 	bind = 'am-bind',
 	bindTo = 'am-bind-to',
 	binding = 'am-binding-name',
+	clearForm = 'am-clear-form',
 	confirm = 'am-confirm',
 	data = 'am-data',
 	destroy = 'am-destroy',
