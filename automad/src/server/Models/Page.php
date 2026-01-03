@@ -709,6 +709,8 @@ class Page {
 			$tags = array_map(function (string $tag) {
 				return trim(Str::stripTags($tag));
 			}, $tags);
+
+			sort($tags);
 		}
 
 		return $tags;
