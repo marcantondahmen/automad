@@ -131,7 +131,7 @@ export const renderUsersSection = (): string => {
 			</span>
 		</div>
 		<!-- Modals -->
-		<am-modal id="am-change-password-modal">
+		<am-modal id="am-change-password-modal" ${Attr.clearForm}>
 			<am-form
 				class="${CSS.modalDialog}"
 				${Attr.api}="${UserController.changePassword}"
@@ -216,7 +216,7 @@ export const renderUsersSection = (): string => {
 				</am-modal-footer>
 			</am-modal-dialog>
 		</am-modal>
-		<am-modal id="am-add-user-modal">
+		<am-modal id="am-add-user-modal" ${Attr.clearForm}>
 			<am-form
 				class="${CSS.modalDialog}"
 				${Attr.api}="${UserCollectionController.createUser}"
@@ -272,7 +272,7 @@ export const renderUsersSection = (): string => {
 				</am-modal-footer>
 			</am-form>
 		</am-modal>
-		<am-modal id="am-invite-user-modal">
+		<am-modal id="am-invite-user-modal" ${Attr.clearForm}>
 			<am-form
 				class="${CSS.modalDialog}"
 				${Attr.api}="${UserCollectionController.inviteUser}"
