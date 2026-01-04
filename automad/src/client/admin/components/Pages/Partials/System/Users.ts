@@ -99,16 +99,14 @@ export const renderUsersSection = (): string => {
 							class="${CSS.button}"
 							${Attr.modal}="#am-registered-users-modal"
 						>
-							<span class="${CSS.iconText}">
-								<span
-									class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
-								>
-									<span>
-										${App.text('systemUsersRegistered')}
-									</span>
-									<span class="${CSS.badge}">
-										<am-user-count-indicator></am-user-count-indicator>
-									</span>
+							<span
+								class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
+							>
+								<span>
+									${App.text('systemUsersRegistered')}
+								</span>
+								<span class="${CSS.badge}">
+									<am-user-count-indicator></am-user-count-indicator>
 								</span>
 							</span>
 						</am-modal-toggle>
