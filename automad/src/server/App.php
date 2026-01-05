@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class App {
-	const VERSION = '2.0.0-beta.7';
+	const VERSION = '2.0.0-beta.8';
 
 	/**
 	 * Required PHP version.
@@ -152,7 +152,7 @@ class App {
 	 * Initialize a PHP session.
 	 */
 	private function startSession(): void {
-		session_name('Automad-' . md5(AM_BASE_DIR));
+		session_name('Automad-' . md5(AM_BASE_DIR . AM_SESSION_COOKIE_SALT));
 		session_set_cookie_params(0, AM_BASE_URL ?: '/', '', false, true);
 		session_start();
 	}

@@ -36,7 +36,7 @@ import { App, Attr, CSS, EventName, FileController, html } from '@/admin/core';
 
 export const renderFileImportModal = (): string => {
 	return html`
-		<am-modal id="am-file-import-modal">
+		<am-modal id="am-file-import-modal" ${Attr.clearForm}>
 			<am-modal-dialog>
 				<am-form
 					${Attr.api}="${FileController.import}"

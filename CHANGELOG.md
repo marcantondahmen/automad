@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-beta.7](https://github.com/marcantondahmen/automad/commit/2283e6bdc767f8cc89c5e4bd02109bb6a2c0cdae)
+## [v2.0.0-beta.8](https://github.com/marcantondahmen/automad/commit/5432b6ddd610567dc1d2a8e5fdd691815c7d33f7)
 
-Fri, 2 Jan 2026 22:09:42 +0100
+Mon, 5 Jan 2026 19:37:44 +0100
+
+### New Features
+
+- add option to sign out all users ([5432b6ddd](https://github.com/marcantondahmen/automad/commit/5432b6ddd610567dc1d2a8e5fdd691815c7d33f7))
+- sort tags ([8fb6724bc](https://github.com/marcantondahmen/automad/commit/8fb6724bc17aa9e7c11a3ecbff14356b974e95cd))
+
+### Bugfixes
+
+- clear import form when closing modal ([092ef15f3](https://github.com/marcantondahmen/automad/commit/092ef15f3f2e6ea6a2855eab0e89a0c9ef768c68))
+- clear user forms when modal closes ([75d8cbc13](https://github.com/marcantondahmen/automad/commit/75d8cbc134e2b6816cccb9548f625cf32a2a6cdd))
+- fix select field rendering after switching to incompatible themes ([e3ca0dfe2](https://github.com/marcantondahmen/automad/commit/e3ca0dfe21e3eed80758b8f21725ecc8797bb822))
+- improve gallery rendering stability ([e5cce8660](https://github.com/marcantondahmen/automad/commit/e5cce86608d92ed8e613ea016348f976ec049d66))
+
+## [v2.0.0-beta.7](https://github.com/marcantondahmen/automad/commit/d28ad2dee88d8c5555eb55409c555d843727efa3)
+
+Fri, 2 Jan 2026 22:15:33 +0100
 
 ### New Features
 
@@ -899,17 +915,3 @@ Sat, 2 Apr 2022 21:48:39 +0200
 ### Bugfixes
 
 - **ui**: fix messenger error when returning null ([ae1a51d6a](https://github.com/marcantondahmen/automad/commit/ae1a51d6ab5489d8dd37f31c287f4bdda8f59c94))
-
-## [v1.10.4](https://github.com/marcantondahmen/automad/commit/0255fad39ac3a534a97164521b423839fa82a2bb)
-
-Sat, 2 Apr 2022 21:36:15 +0200
-
-### Breaking Changes
-
-- **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
-
-### Bugfixes
-
-- **core**: fix overriding config for tests ([8b9e4b3ed](https://github.com/marcantondahmen/automad/commit/8b9e4b3ed51f2c3f0c138ed989a67e9f5d54a3f8))
-- **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
-- fix passing null as non-nullable function parameters ([3822317d3](https://github.com/marcantondahmen/automad/commit/3822317d304dc7e4dfe80e42c734e8309658a5d7))

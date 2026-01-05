@@ -39,12 +39,10 @@ import {
 	CSS,
 	EventName,
 	fire,
-	collectFieldData,
 	query,
-	setFormData,
 	queryAll,
 } from '@/admin/core';
-import { InputElement, KeyValueMap, Listener } from '@/admin/types';
+import { InputElement, Listener } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -54,6 +52,7 @@ import { BaseComponent } from '@/admin/components/Base';
  * - Attr.noClick - Disable closing the modal by clicking on the overlay
  * - Attr.destroy - Self destroy on close
  * - Attr.noFocus - don't focus first input
+ * - Attr.clearForm - clearForm on close
  *
  * @example
  * <am-modal-toggle ${Attr.modal}="#modal">
@@ -178,6 +177,14 @@ export class ModalComponent extends BaseComponent {
 				input.classList.remove(CSS.validate);
 			});
 		}, 400);
+
+		if (this.hasAttribute(Attr.clearForm)) {
+			queryAll<HTMLInputElement>(
+				'input[type="text"], input[type="email"], input[type="password"], textarea'
+			).forEach((input) => {
+				input.value = '';
+			});
+		}
 
 		if (this.hasAttribute(Attr.destroy)) {
 			setTimeout(() => {

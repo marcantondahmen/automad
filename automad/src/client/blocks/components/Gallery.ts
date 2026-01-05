@@ -323,11 +323,9 @@ export default class Gallery {
 			gallery.removeAttribute('hidden');
 		};
 
-		const debounced = debounce(updateItems.bind(this, items), 50);
+		updateItems(items);
 
-		setTimeout(debounced, 0);
-		window.addEventListener('resize', debounced);
-		window.addEventListener('load', debounced);
+		this.initUpdateListeners(debounce(updateItems.bind(this, items), 50));
 	}
 
 	/**
@@ -496,10 +494,21 @@ export default class Gallery {
 
 		updateItems();
 
-		const debounced = debounce(updateItems.bind(this), 50);
+		this.initUpdateListeners(debounce(updateItems.bind(this), 50));
+	}
+
+	/**
+	 * Register listeners to run a debounced update function.
+	 *
+	 * @param debounced
+	 */
+	private initUpdateListeners(debounced: (...args: any[]) => void): void {
+		setTimeout(debounced, 0);
 
 		window.addEventListener('resize', debounced);
-		window.addEventListener('load', debounced);
+		window.addEventListener('orientationchange', debounced);
+
+		this.element.addEventListener('load', debounced, true);
 	}
 
 	/**

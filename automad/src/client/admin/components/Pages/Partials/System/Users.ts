@@ -35,6 +35,7 @@
 import {
 	App,
 	Attr,
+	ConfigController,
 	createField,
 	CSS,
 	EventName,
@@ -99,16 +100,14 @@ export const renderUsersSection = (): string => {
 							class="${CSS.button}"
 							${Attr.modal}="#am-registered-users-modal"
 						>
-							<span class="${CSS.iconText}">
-								<span
-									class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
-								>
-									<span>
-										${App.text('systemUsersRegistered')}
-									</span>
-									<span class="${CSS.badge}">
-										<am-user-count-indicator></am-user-count-indicator>
-									</span>
+							<span
+								class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
+							>
+								<span>
+									${App.text('systemUsersRegistered')}
+								</span>
+								<span class="${CSS.badge}">
+									<am-user-count-indicator></am-user-count-indicator>
 								</span>
 							</span>
 						</am-modal-toggle>
@@ -129,9 +128,33 @@ export const renderUsersSection = (): string => {
 					</span>
 				</span>
 			</span>
+
+			<span class="${CSS.card}">
+				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					${App.text('systemUsersSignOutAllInfo')}
+				</span>
+				<am-form
+					class="${CSS.cardForm}"
+					${Attr.api}="${ConfigController.update}"
+					${Attr.confirm}="${App.text(
+						'systemUsersSignOutAllConfirm'
+					)}"
+				>
+					<input
+						type="hidden"
+						name="type"
+						value="sessionCookieSalt"
+					/>
+					<span class="${CSS.cardFormButtons}">
+						<am-submit class="${CSS.button}">
+							<span>${App.text('systemUsersSignOutAll')}</span>
+						</am-submit>
+					</span>
+				</am-form>
+			</span>
 		</div>
 		<!-- Modals -->
-		<am-modal id="am-change-password-modal">
+		<am-modal id="am-change-password-modal" ${Attr.clearForm}>
 			<am-form
 				class="${CSS.modalDialog}"
 				${Attr.api}="${UserController.changePassword}"
@@ -216,7 +239,7 @@ export const renderUsersSection = (): string => {
 				</am-modal-footer>
 			</am-modal-dialog>
 		</am-modal>
-		<am-modal id="am-add-user-modal">
+		<am-modal id="am-add-user-modal" ${Attr.clearForm}>
 			<am-form
 				class="${CSS.modalDialog}"
 				${Attr.api}="${UserCollectionController.createUser}"
@@ -272,7 +295,7 @@ export const renderUsersSection = (): string => {
 				</am-modal-footer>
 			</am-form>
 		</am-modal>
-		<am-modal id="am-invite-user-modal">
+		<am-modal id="am-invite-user-modal" ${Attr.clearForm}>
 			<am-form
 				class="${CSS.modalDialog}"
 				${Attr.api}="${UserCollectionController.inviteUser}"

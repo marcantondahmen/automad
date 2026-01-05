@@ -68,7 +68,14 @@
 			display: none;
 		}
 
-		&:hover,
+		&:hover {
+			background-color: hsl(var(--am-clr-background-highlight));
+		}
+
+		&:active {
+			background-color: hsl(var(--am-clr-background-faded));
+		}
+
 		&--active {
 			color: hsl(var(--am-clr-text));
 			background-color: hsl(var(--am-clr-background-highlight));

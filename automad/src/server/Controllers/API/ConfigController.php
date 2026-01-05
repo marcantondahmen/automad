@@ -105,6 +105,12 @@ class ConfigController {
 				$Response->setReload(true);
 
 				break;
+
+			case 'sessionCookieSalt':
+				$config['AM_SESSION_COOKIE_SALT'] = substr(str_shuffle(MD5(microtime())), 0, 10);
+				$Response->setReload(true);
+
+				break;
 		}
 
 		if (Config::write($config)) {
