@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.8](https://github.com/marcantondahmen/automad/commit/5432b6ddd610567dc1d2a8e5fdd691815c7d33f7)
+## [v2.0.0-beta.9](https://github.com/marcantondahmen/automad/commit/ac1cc83e6982d1022a05435c5016dd07311bff88)
 
-Mon, 5 Jan 2026 19:37:44 +0100
+Mon, 5 Jan 2026 21:32:48 +0100
+
+### Bugfixes
+
+- fix gallery lightbox issues on mobile devices ([ac1cc83e6](https://github.com/marcantondahmen/automad/commit/ac1cc83e6982d1022a05435c5016dd07311bff88))
+
+## [v2.0.0-beta.8](https://github.com/marcantondahmen/automad/commit/9a3effdbf9cee42901cc89541e4c8de7caeaeebe)
+
+Mon, 5 Jan 2026 20:10:55 +0100
 
 ### New Features
 
@@ -907,11 +915,3 @@ Sat, 2 Apr 2022 23:36:28 +0200
 
 - **console**: fix console command error ([3e3682a67](https://github.com/marcantondahmen/automad/commit/3e3682a678bc395ce898b4eb8d88867a7994d8c3))
 - fix PHP 8.1 compatibility issues ([1c2a755da](https://github.com/marcantondahmen/automad/commit/1c2a755da0d83285bb98c017a818affc031104ab))
-
-## [v1.10.5](https://github.com/marcantondahmen/automad/commit/19a36ea95e3b412db1e2ce85f7b357be2e836160)
-
-Sat, 2 Apr 2022 21:48:39 +0200
-
-### Bugfixes
-
-- **ui**: fix messenger error when returning null ([ae1a51d6a](https://github.com/marcantondahmen/automad/commit/ae1a51d6ab5489d8dd37f31c287f4bdda8f59c94))
