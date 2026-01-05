@@ -46,10 +46,26 @@ class SelectFieldComponent extends BaseFieldComponent {
 	 */
 	createInput(): void {
 		const { name, id, value, options, placeholder } = this._data;
-		const opt = Object.keys(options).map((key: string) => ({
-			value: key,
-			text: options[key],
-		}));
+
+		// Use this fallback when a theme is used that doesn't support this select field
+		// and therefore doesn't provide valid options.
+		const fallback = !!value
+			? [
+					{
+						value:
+							typeof value === 'string'
+								? value
+								: JSON.stringify(value),
+					},
+				]
+			: [];
+
+		const opt = !!options
+			? Object.keys(options).map((key: string) => ({
+					value: key,
+					text: options[key],
+				}))
+			: fallback;
 
 		const select = createSelect(
 			[
