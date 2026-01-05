@@ -505,10 +505,9 @@ export default class Gallery {
 	private initUpdateListeners(debounced: (...args: any[]) => void): void {
 		setTimeout(debounced, 0);
 
-		window.addEventListener('resize', debounced);
 		window.addEventListener('orientationchange', debounced);
-
-		this.element.addEventListener('load', debounced, true);
+		window.addEventListener('resize', debounced);
+		window.addEventListener('load', debounced);
 	}
 
 	/**
