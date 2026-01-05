@@ -179,6 +179,9 @@ class Config {
 		self::set('AM_PERM_DIR', 0755);
 		self::set('AM_PERM_FILE', 0644);
 
+		// Session cookie name salt that can be used to trigger a sign-out-all.
+		self::set('AM_SESSION_COOKIE_SALT', '');
+
 		// Define all constants which are not defined yet by the config file.
 		// DIR
 		self::set('AM_DIR_PAGES', '/pages');

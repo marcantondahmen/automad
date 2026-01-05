@@ -35,6 +35,7 @@
 import {
 	App,
 	Attr,
+	ConfigController,
 	createField,
 	CSS,
 	EventName,
@@ -126,6 +127,30 @@ export const renderUsersSection = (): string => {
 						</am-modal-toggle>
 					</span>
 				</span>
+			</span>
+
+			<span class="${CSS.card}">
+				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					${App.text('systemUsersSignOutAllInfo')}
+				</span>
+				<am-form
+					class="${CSS.cardForm}"
+					${Attr.api}="${ConfigController.update}"
+					${Attr.confirm}="${App.text(
+						'systemUsersSignOutAllConfirm'
+					)}"
+				>
+					<input
+						type="hidden"
+						name="type"
+						value="sessionCookieSalt"
+					/>
+					<span class="${CSS.cardFormButtons}">
+						<am-submit class="${CSS.button}">
+							<span>${App.text('systemUsersSignOutAll')}</span>
+						</am-submit>
+					</span>
+				</am-form>
 			</span>
 		</div>
 		<!-- Modals -->

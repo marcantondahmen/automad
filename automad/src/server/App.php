@@ -152,7 +152,7 @@ class App {
 	 * Initialize a PHP session.
 	 */
 	private function startSession(): void {
-		session_name('Automad-' . md5(AM_BASE_DIR));
+		session_name('Automad-' . md5(AM_BASE_DIR . AM_SESSION_COOKIE_SALT));
 		session_set_cookie_params(0, AM_BASE_URL ?: '/', '', false, true);
 		session_start();
 	}
