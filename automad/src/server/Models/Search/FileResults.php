@@ -47,6 +47,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class FileResults {
 	/**
+	 * The the count of results in a file.
+	 */
+	public int $count;
+
+	/**
 	 * The array of `FieldResults`.
 	 *
 	 * @see FieldResults
@@ -76,5 +81,10 @@ class FileResults {
 		$this->fieldResultsArray = $fieldResultsArray;
 		$this->path = $path;
 		$this->url = $url;
+		$this->count = 0;
+
+		foreach ($fieldResultsArray as $fieldResults) {
+			$this->count += count($fieldResults->matches);
+		}
 	}
 }
