@@ -3,13 +3,14 @@
 namespace Automad\Models\Search;
 
 use Automad\Test\Mock;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @testdox Automad\Models\Search\Search
  */
 class SearchTest extends TestCase {
-	public function dataForTestSearchPerFileIsSame() {
+	public static function dataForTestSearchPerFileIsSame() {
 		return array(
 			array(
 				'simple',
@@ -285,14 +286,7 @@ class SearchTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestSearchPerFileIsSame
-	 * @testdox searchPerFile()
-	 * @param mixed $searchValue
-	 * @param mixed $isRegex
-	 * @param mixed $isCaseSensitive
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestSearchPerFileIsSame')]
 	public function testSearchPerFileIsSame($searchValue, $isRegex, $isCaseSensitive, $expected) {
 		$Mock = new Mock();
 		$Automad = $Mock->createAutomad('default');

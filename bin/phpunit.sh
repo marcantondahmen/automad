@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PHPUNIT_PHAR=phpunit-9.6.22.phar
+PHPUNIT_PHAR=phpunit-12.5.4.phar
 
 if [[ ! -f "$PHPUNIT_PHAR" ]]; then
 	curl -L https://phar.phpunit.de/$PHPUNIT_PHAR --output $PHPUNIT_PHAR

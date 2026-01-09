@@ -3,13 +3,11 @@
 namespace Automad\Engine;
 
 use Automad\Test\Mock;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\Extension
- */
 class ExtensionTest extends TestCase {
-	public function dataForTestGetAssetsIsEqual() {
+	public static function dataForTestGetAssetsIsEqual() {
 		return array(
 			array(
 				array(
@@ -24,11 +22,7 @@ class ExtensionTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestGetAssetsIsEqual
-	 * @testdox getAssets() matches: $expected
-	 * @param array $expected
-	 */
+	#[DataProvider('dataForTestGetAssetsIsEqual')]
 	public function testGetAssetsIsEqual(array $expected) {
 		$Mock = new Mock();
 		$AutomadMock = $Mock->createAutomad();
@@ -40,9 +34,6 @@ class ExtensionTest extends TestCase {
 		$this->assertEquals(json_encode($assets), json_encode($expected));
 	}
 
-	/**
-	 * @testdox getAssets() matches: $expected
-	 */
 	public function testGetOutputIsEqual() {
 		$Mock = new Mock();
 		$AutomadMock = $Mock->createAutomad();

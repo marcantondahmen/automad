@@ -4,13 +4,11 @@ namespace Automad\Console;
 
 use Automad\Console\Commands\ConfigSet;
 use Automad\Console\Commands\UserCreate;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Console\ArgumentCollection
- */
 class ArgumentCollectionTest extends TestCase {
-	public function dataForTestParseArgvIsEqual() {
+	public static function dataForTestParseArgvIsEqual() {
 		return array(
 			array(
 				ConfigSet::class,
@@ -33,7 +31,7 @@ class ArgumentCollectionTest extends TestCase {
 		);
 	}
 
-	public function dataForTestValidateArgvIsEqual() {
+	public static function dataForTestValidateArgvIsEqual() {
 		return array(
 			array(
 				ConfigSet::class,
@@ -53,14 +51,7 @@ class ArgumentCollectionTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestParseArgvIsEqual
-	 * @testdox parseArgv($argv) equals $expected
-	 * @param string $cls
-	 * @param array $argv
-	 * @param array $expected
-	 * @param bool $expectedSuccess
-	 */
+	#[DataProvider('dataForTestParseArgvIsEqual')]
 	public function testParseArgvIsEqual($cls, $argv, $expected, $expectedSuccess) {
 		$command = new $cls();
 
@@ -79,13 +70,7 @@ class ArgumentCollectionTest extends TestCase {
 		$this->assertEquals($success, $expectedSuccess);
 	}
 
-	/**
-	 * @dataProvider dataForTestValidateArgvIsEqual
-	 * @testdox validateArgv($argv) equals $expected
-	 * @param string $cls
-	 * @param array $argv
-	 * @param bool $expected
-	 */
+	#[DataProvider('dataForTestValidateArgvIsEqual')]
 	public function testValidateArgvIsEqual($cls, $argv, $expected) {
 		$command = new $cls();
 

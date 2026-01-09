@@ -39,7 +39,6 @@ namespace Automad\Test;
 use Automad\Core\Automad;
 use Automad\Models\Page;
 use Automad\Models\Shared;
-use PHPUnit\Framework\TestCase;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -50,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Mock extends TestCase {
+class Mock {
 	/**
 	 * Create a mock of the Automad object with a single page.
 	 * A template can be passed optionally to the page.

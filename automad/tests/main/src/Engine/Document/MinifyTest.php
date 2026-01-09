@@ -2,13 +2,11 @@
 
 namespace Automad\Engine\Document;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\Document\Minify
- */
 class MinifyTest extends TestCase {
-	public function dataForTestCssIsEqual() {
+	public static function dataForTestCssIsEqual() {
 		return array(
 			array(
 				<<< CSS
@@ -43,11 +41,7 @@ class MinifyTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestCssIsEqual
-	 * @param mixed $css
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestCssIsEqual')]
 	public function testCssIsEqual($css, $expected) {
 		/** @disregard */
 		$this->assertEquals(Minify::css($css), $expected);

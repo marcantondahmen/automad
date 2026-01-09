@@ -2,13 +2,11 @@
 
 namespace Automad\Engine\Document;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\Document\Head
- */
 class HeadTest extends TestCase {
-	public function dataForTestAppendIsEqual() {
+	public static function dataForTestAppendIsEqual() {
 		return array(
 			array(
 				<<< HTML
@@ -63,7 +61,7 @@ class HeadTest extends TestCase {
 		);
 	}
 
-	public function dataForTestPrependIsEqual() {
+	public static function dataForTestPrependIsEqual() {
 		return array(
 			array(
 				<<< HTML
@@ -118,23 +116,13 @@ class HeadTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestAppendIsEqual
-	 * @param mixed $doc
-	 * @param mixed $tag
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestAppendIsEqual')]
 	public function testAppendIsEqual($doc, $tag, $expected) {
 		/** @disregard */
 		$this->assertEquals(Head::append($doc, $tag), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestPrependIsEqual
-	 * @param mixed $doc
-	 * @param mixed $tag
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestPrependIsEqual')]
 	public function testPrependIsEqual($doc, $tag, $expected) {
 		/** @disregard */
 		$this->assertEquals(Head::prepend($doc, $tag), $expected);

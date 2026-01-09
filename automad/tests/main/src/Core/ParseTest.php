@@ -2,13 +2,11 @@
 
 namespace Automad\Core;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Core\Parse
- */
 class ParseTest extends TestCase {
-	public function dataForTestCsvIsSame() {
+	public static function dataForTestCsvIsSame() {
 		return array(
 			array(
 				'jpg, png, gif',
@@ -17,7 +15,7 @@ class ParseTest extends TestCase {
 		);
 	}
 
-	public function dataForTestJsonOptionsIsSame() {
+	public static function dataForTestJsonOptionsIsSame() {
 		return array(
 			array(
 				'{ key1: "Value", key2: 10 }',
@@ -36,23 +34,13 @@ class ParseTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestCsvIsSame
-	 * @testdox csv("$str")
-	 * @param mixed $str
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestCsvIsSame')]
 	public function testCsvIsSame($str, $expected) {
 		/** @disregard */
 		$this->assertSame(Parse::csv($str), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestJsonOptionsIsSame
-	 * @testdox jsonOptions($str)
-	 * @param mixed $str
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestJsonOptionsIsSame')]
 	public function testJsonOptionsIsSame($str, $expected) {
 		/** @disregard */
 		$this->assertSame(Parse::jsonOptions($str), $expected);

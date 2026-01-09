@@ -2,13 +2,11 @@
 
 namespace Automad\Engine\Document;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\Document\Body
- */
 class BodyTest extends TestCase {
-	public function dataForTestAppendIsEqual() {
+	public static function dataForTestAppendIsEqual() {
 		return array(
 			array(
 				<<< HTML
@@ -38,12 +36,7 @@ class BodyTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestAppendIsEqual
-	 * @param mixed $doc
-	 * @param mixed $tag
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestAppendIsEqual')]
 	public function testAppendIsEqual($doc, $tag, $expected) {
 		/** @disregard */
 		$this->assertEquals(Body::append($doc, $tag), $expected);
