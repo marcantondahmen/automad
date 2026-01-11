@@ -238,14 +238,14 @@ class Error {
 			}
 
 			$levels = array(
-				E_DEPRECATED => 'DEPRECATED',
-				E_USER_DEPRECATED => 'USER_DEPRECATED',
-				E_WARNING => 'WARNING',
-				E_USER_WARNING => 'USER_WARNING',
-				E_NOTICE => 'NOTICE'
+				E_DEPRECATED => '🟠 [DEPRECATED]',
+				E_USER_DEPRECATED => '🟠 [USER_DEPRECATED]',
+				E_WARNING => '🔴 [WARNING]',
+				E_USER_WARNING => '🔴 [USER_WARNING]',
+				E_NOTICE => '🟡 [NOTICE]'
 			);
 
-			Debug::log("$message in $file line $line", '[' . $levels[$serverity] . ']');
+			Debug::log("$message in $file line $line", $levels[$serverity]);
 		});
 	}
 }

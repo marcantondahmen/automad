@@ -153,7 +153,7 @@ class Debug {
 		// To get a clean array with only the relevant Automad methods in the backtrace.
 		$ignoreFunctions = array('log', __NAMESPACE__ . '\{closure}');
 		$backtrace = array_filter($backtraceAll, function ($item) use ($ignoreFunctions) {
-			return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions));
+			return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions) && !preg_match('/Error/', $item['class']));
 		});
 
 		// If class, type & method exist, use them to build the description prefix. Else use just the file name from the full backtrace.
