@@ -45,6 +45,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\I18n;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
+use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
 use Automad\System\Fields;
 
@@ -99,6 +100,7 @@ class PostProcessor {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->setLanguage($output);
 		$output = $this->resizeImages($output);
+		$output = $this->addDebugIndicator($output);
 		$output = Blocks::injectAssets($output);
 		$output = $MailAddressProcessor->obfuscate($output);
 		$output = $SyntaxHighlightingProcessor->addAssets($output);
@@ -134,6 +136,50 @@ class PostProcessor {
 			},
 			$str
 		) ?? '';
+	}
+
+	/**
+	 * Whenever debugging is enabled, add a debug indicator to the rendered output.
+	 *
+	 * @param string $output
+	 * @return string
+	 */
+	private function addDebugIndicator(string $output): string {
+		if (!AM_DEBUG_ENABLED) {
+			return $output;
+		}
+
+		$dashboard = AM_PAGE_DASHBOARD;
+
+		$html = <<< HTML
+		<a 
+			href="$dashboard/system?section=debug"
+			title="Debugging is currently enabled and can be disabled in the system settings"
+			style="
+				position: fixed; 
+				z-index: 9000;
+				display: flex; 
+				justify-content: center;
+				align-items: center;
+				bottom: 24px; 
+				left: 24px; 
+				width: 46px;
+				height: 46px;
+				border-radius: 100%;
+				color: hsl(220 9 96);
+				background-color: hsl(220 9 6 / 0.48);
+				border: 1px solid hsl(220 9 96 / 0.14);
+				backdrop-filter: blur(9px);
+			"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+				<path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A5 5 0 0 0 3 6h10a5 5 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A5 5 0 0 0 8 1a5 5 0 0 0-2.731.811l-.29-.956z"/>
+				<path d="M13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975"/>
+			</svg>
+		</a>
+		HTML;
+
+		return Body::append($output, $html);
 	}
 
 	/**
