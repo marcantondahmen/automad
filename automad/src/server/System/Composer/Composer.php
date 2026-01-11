@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Composer {
 	const COMPOSER_FILE = AM_BASE_DIR . '/composer.json';
-	const COMPOSER_VERSION = '2.8.6';
+	const COMPOSER_VERSION = '2.9.3';
 	const INSTALL_DIR = AM_BASE_DIR . AM_DIR_CACHE . '/composer';
 
 	/**
