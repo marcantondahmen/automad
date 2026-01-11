@@ -107,14 +107,18 @@ class Debug {
 	 * @return string The Javascript console log
 	 */
 	public static function consoleLog(): string {
-		if (!self::$browserIsEnabled) {
+		if (!AM_DEBUG_ENABLED) {
 			return '';
 		}
 
 		$html = '<script type="text/javascript">';
 
-		foreach (self::$buffer as $key => $value) {
-			$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');';
+		if (self::$browserIsEnabled) {
+			foreach (self::$buffer as $key => $value) {
+				$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');';
+			}
+		} else {
+			$html .= 'console.warn("Debugging is enabled. Enable log forwarding in the system settings in order inspect the debug log inside the browser console.");';
 		}
 
 		$html .= '</script>';

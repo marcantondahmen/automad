@@ -98,7 +98,7 @@ class App {
 
 		Debug::postRender();
 
-		if (Debug::$browserIsEnabled) {
+		if (AM_DEBUG_ENABLED) {
 			$output = Body::append($output, Debug::consoleLog());
 		}
 
