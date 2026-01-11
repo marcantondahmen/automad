@@ -39,6 +39,7 @@ namespace Automad\Controllers\API;
 use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\Debug;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
 use Automad\Core\Request;
@@ -100,7 +101,10 @@ class SharedController {
 			$supportedFields
 		);
 
-		$unusedFields = array_diff($Shared->data, $fields);
+		$unusedKeys = array_diff(array_keys($Shared->data), array_keys($fields));
+		$unusedFields = array_intersect_key($Shared->data, array_fill_keys($unusedKeys, ''));
+
+		Debug::log($unusedFields, 'Unused data');
 
 		return $Response->setData(array('fields' => $fields, 'unused' => $unusedFields));
 	}
