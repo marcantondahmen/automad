@@ -422,7 +422,6 @@ class FileSystem {
 			$umask = umask(0);
 			$return = mkdir($path, AM_PERM_DIR, true);
 			umask($umask);
-			Debug::log($path, 'Created');
 
 			return $return;
 		}

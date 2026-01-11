@@ -246,8 +246,6 @@ class MetaProcessor {
 			$hashItems[] = filemtime(MetaProcessor::IMAGE_LOGO);
 		}
 
-		Debug::log($hashItems, 'Hash items');
-
 		$hash = hash('sha256', join(':', $hashItems));
 		$dir = Cache::DIR_IMAGES;
 		$name = "og-$hash.png";
@@ -255,13 +253,13 @@ class MetaProcessor {
 		$url = "$baseUrl$dir/$name";
 		$file = "$baseDir$dir/$name";
 
+		Debug::log($hashItems, 'Cache is validated for these hashed items');
+
 		if (is_readable($file)) {
 			Debug::log($name, 'Using cached image');
 
 			return $url;
 		}
-
-		Debug::log($hashItems, 'Generate new image');
 
 		$width = 1280;
 		$height = 640;

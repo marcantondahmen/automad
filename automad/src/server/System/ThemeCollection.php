@@ -66,7 +66,7 @@ class ThemeCollection {
 	public function __construct() {
 		$this->composerInstalled = $this->getComposerInstalled();
 		$this->themes = $this->collectThemes();
-		Debug::log($this->themes, 'New instance created');
+		Debug::log(array_keys($this->themes), 'New instance created');
 	}
 
 	/**

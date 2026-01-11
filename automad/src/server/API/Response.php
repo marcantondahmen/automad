@@ -98,8 +98,6 @@ class Response {
 	 * The output constructor.
 	 */
 	public function __construct() {
-		Debug::log('Instanciated new Response instance');
-
 		$this->setCode(200);
 	}
 

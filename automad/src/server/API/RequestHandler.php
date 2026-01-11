@@ -131,8 +131,6 @@ class RequestHandler {
 			$_POST = array_merge($_POST, json_decode($json, true));
 			unset($_POST[self::REQUEST_KEY_JSON]);
 		}
-
-		Debug::log($_POST);
 	}
 
 	/**

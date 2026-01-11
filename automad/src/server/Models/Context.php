@@ -94,6 +94,6 @@ class Context {
 		}
 
 		$this->Page = $Page;
-		Debug::log($Page, $Page->origUrl);
+		Debug::log($Page->origUrl);
 	}
 }
