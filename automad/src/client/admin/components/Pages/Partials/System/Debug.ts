@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { App, Attr, ConfigController, EventName, html } from '@/admin/core';
+import {
+	App,
+	Attr,
+	ConfigController,
+	CSS,
+	EventName,
+	html,
+} from '@/admin/core';
 
 /**
  * Render the debug section.
@@ -42,6 +49,7 @@ import { App, Attr, ConfigController, EventName, html } from '@/admin/core';
 export const renderDebugSection = (): string => {
 	return html`
 		<am-form
+			class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
 			${Attr.api}="${ConfigController.update}"
 			${Attr.event}="${EventName.appStateRequireUpdate}"
 			${Attr.auto}
@@ -50,6 +58,11 @@ export const renderDebugSection = (): string => {
 			<div>
 				<p>${App.text('systemDebugInfo')}</p>
 				<am-debug-enable></am-debug-enable>
+			</div>
+			<div class="am-debug-settings">
+				<p>${App.text('systemDebugHelp')}</p>
+				<pre><code>php automad/console log:path --help</code></pre>
+				<am-debug-browser></am-debug-browser>
 			</div>
 		</am-form>
 	`;

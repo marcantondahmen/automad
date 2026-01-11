@@ -46,9 +46,9 @@ class NavbarDebugIndicatorComponent extends BaseStateIndicatorComponent {
 	 * Render the state element.
 	 */
 	render(): void {
-		this.classList.toggle(CSS.displayNone, !App.system.debug);
+		this.classList.toggle(CSS.displayNone, !App.system.debug.enabled);
 
-		if (App.system.debug) {
+		if (App.system.debug.enabled) {
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"

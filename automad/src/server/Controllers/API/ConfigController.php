@@ -81,6 +81,7 @@ class ConfigController {
 					$Response->setError(Text::get('permissionsDeniedError'));
 				} else {
 					$config['AM_DEBUG_ENABLED'] = !empty(Request::post('debugEnabled'));
+					$config['AM_DEBUG_BROWSER'] = !empty(Request::post('debugBrowser'));
 				}
 
 				break;

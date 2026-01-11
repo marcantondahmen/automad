@@ -44,7 +44,6 @@ import {
 	htmlSpecialChars,
 	query,
 	queryAll,
-	queryParents,
 	Undo,
 } from '@/admin/core';
 import {

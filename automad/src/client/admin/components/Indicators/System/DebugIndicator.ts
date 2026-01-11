@@ -59,7 +59,7 @@ class SystemDebugIndicatorComponent extends BaseActivationIndicatorComponent {
 	 * The state getter.
 	 */
 	protected get state(): boolean | number {
-		return App.system.debug;
+		return App.system.debug.enabled;
 	}
 }
 

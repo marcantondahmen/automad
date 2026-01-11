@@ -113,7 +113,10 @@ class State {
 					'lifetime' => AM_CACHE_LIFETIME,
 					'monitorDelay' => AM_CACHE_MONITOR_DELAY
 				),
-				'debug' => AM_DEBUG_ENABLED,
+				'debug' => array(
+					'enabled' => AM_DEBUG_ENABLED,
+					'browser' => AM_DEBUG_BROWSER
+				),
 				'feed' => array(
 					'enabled' => AM_FEED_ENABLED,
 					'fields' => Parse::csv(AM_FEED_FIELDS)
