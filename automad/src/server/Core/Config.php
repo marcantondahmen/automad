@@ -55,6 +55,9 @@ class Config {
 	const ENV_VARS = array(
 		'AM_ALLOWED_FILE_TYPES',
 		'AM_DEBUG_ENABLED',
+		'AM_DEBUG_BROWSER',
+		'AM_DEBUG_LOG_PATH',
+		'AM_DEBUG_LOG_MAX_SIZE',
 		'AM_CACHE_ENABLED',
 		'AM_CACHE_MONITOR_DELAY',
 		'AM_CACHE_LIFETIME',
@@ -151,6 +154,9 @@ class Config {
 	private static function fromDefaults(): void {
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);
+		self::set('AM_DEBUG_BROWSER', false);
+		self::set('AM_DEBUG_LOG_PATH', FileSystem::getSystemTmpDir() . '/automad/' . basename(AM_BASE_DIR) . '-' . substr(sha1(AM_BASE_DIR), 0, 8) . '.log');
+		self::set('AM_DEBUG_LOG_MAX_SIZE', 10000);
 
 		// The server protocol, port and name.
 		self::set('AM_SERVER', Server::getHost());

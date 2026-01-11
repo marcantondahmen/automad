@@ -287,6 +287,25 @@ class FileSystem {
 	}
 
 	/**
+	 * Return the path of the temp dir if it is writable by the webserver.
+	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
+	 * while other locations like '/var/tmp' do not get purged by the system.
+	 * But since '/tmp' is only available on macos and linux,
+	 * sys_get_temp_dir() is used as fallback.
+	 *
+	 * @return string The path to the temp dir
+	 */
+	public static function getSystemTmpDir(): string {
+		$tmp = '/tmp';
+
+		if (is_writable($tmp)) {
+			return $tmp;
+		}
+
+		return rtrim(sys_get_temp_dir(), '/');
+	}
+
+	/**
 	 * Generate a dedicated cache directory for a single installation on a server based on its base directory
 	 * that can be used to cache files that should not be exposed to the public.
 	 *
@@ -629,24 +648,5 @@ class FileSystem {
 	 */
 	public static function writeJson(string $file, array $data): bool {
 		return self::write($file, strval(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
-	}
-
-	/**
-	 * Return the path of the temp dir if it is writable by the webserver.
-	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
-	 * while other locations like '/var/tmp' do not get purged by the system.
-	 * But since '/tmp' is only available on macos and linux,
-	 * sys_get_temp_dir() is used as fallback.
-	 *
-	 * @return string The path to the temp dir
-	 */
-	private static function getSystemTmpDir(): string {
-		$tmp = '/tmp';
-
-		if (is_writable($tmp)) {
-			return $tmp;
-		}
-
-		return rtrim(sys_get_temp_dir(), '/');
 	}
 }

@@ -3,6 +3,7 @@
 namespace Automad\Console;
 
 use Automad\Console\Commands\ConfigSet;
+use Automad\Console\Commands\LogPath;
 use Automad\Console\Commands\UserCreate;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -51,6 +52,29 @@ class ArgumentCollectionTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestValueIsEqual() {
+		return array(
+			array(
+				ConfigSet::class,
+				array('automad/console', 'config:set', '--key', 'AM_KEY', '--value', 'value'),
+				'key',
+				'AM_KEY'
+			),
+			array(
+				LogPath::class,
+				array('automad/console', 'log:path', '--help'),
+				'help',
+				''
+			),
+			array(
+				LogPath::class,
+				array('automad/console', 'log:path'),
+				'help',
+				null
+			),
+		);
+	}
+
 	#[DataProvider('dataForTestParseArgvIsEqual')]
 	public function testParseArgvIsEqual($cls, $argv, $expected, $expectedSuccess) {
 		$command = new $cls();
@@ -80,5 +104,14 @@ class ArgumentCollectionTest extends TestCase {
 		$this->assertEquals($command->ArgumentCollection->validateArgv($argv), $expected);
 
 		ob_end_clean();
+	}
+
+	#[DataProvider('dataForTestValueIsEqual')]
+	public function testValueIsEqual($cls, $argv, $arg, $expected) {
+		$command = new $cls();
+		$command->ArgumentCollection->parseArgv($argv);
+
+		/** @disregard */
+		$this->assertEquals($command->ArgumentCollection->get($arg)->value, $expected);
 	}
 }

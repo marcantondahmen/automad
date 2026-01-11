@@ -51,6 +51,11 @@ class Debug {
 	const DIR_LOGS = '/logs';
 
 	/**
+	 * This will be true if logging and browser logging are enabled.
+	 */
+	public static bool $browserIsEnabled = false;
+
+	/**
 	 * Log buffer.
 	 */
 	private static array $buffer = array();
@@ -61,9 +66,37 @@ class Debug {
 	private static int $index = 0;
 
 	/**
+	 * This will be set to true if logging is enabled and there is an actual request.
+	 */
+	private static bool $isEnabled = false;
+
+	/**
 	 * Timestamp when script started.
 	 */
 	private static ?float $time = null;
+
+	/**
+	 * Enable full error reporting, when debugging is enabled.
+	 */
+	public static function setup(): void {
+		self::$isEnabled = AM_DEBUG_ENABLED && !defined('STDIN');
+		self::$browserIsEnabled = self::$isEnabled && AM_DEBUG_BROWSER;
+
+		if (self::$isEnabled) {
+			error_reporting(E_ALL);
+			ini_set('display_errors', '0');
+			ini_set('log_errors', 1);
+			ini_set('error_log', AM_DEBUG_LOG_PATH);
+
+			if (!file_exists(dirname(AM_DEBUG_LOG_PATH))) {
+				mkdir(dirname(AM_DEBUG_LOG_PATH), 0755, true);
+			}
+
+			self::sliceLogFile();
+		} else {
+			error_reporting(E_ERROR);
+		}
+	}
 
 	/**
 	 * Stop timer, calculate execution time, get user & server constants
@@ -72,21 +105,9 @@ class Debug {
 	 * @return string The Javascript console log
 	 */
 	public static function consoleLog(): string {
-		if (!AM_DEBUG_ENABLED) {
+		if (!self::$browserIsEnabled) {
 			return '';
 		}
-
-		// Stop timer.
-		self::timerStop();
-
-		// Memory usage.
-		self::memory();
-
-		// Disk usage.
-		self::diskUsage();
-
-		// Get last error.
-		self::log(error_get_last(), 'Last error');
 
 		$html = '<script type="text/javascript">' . "\n";
 
@@ -100,43 +121,23 @@ class Debug {
 	}
 
 	/**
-	 * Enable full error reporting, when debugging is enabled.
+	 * Log disk usage.
 	 */
-	public static function errorReporting(): void {
-		if (AM_DEBUG_ENABLED) {
-			error_reporting(E_ALL);
-			ini_set('display_errors', '1');
-		} else {
-			error_reporting(E_ERROR);
+	public static function diskUsage(): void {
+		if (!self::$isEnabled) {
+			return;
 		}
+
+		self::log(round(FileSystem::diskUsage(), 2), 'Disk usage (M)');
 	}
 
 	/**
-	 * Return the buffer array.
+	 * Return the buffer array, used in API calls.
 	 *
 	 * @return array The log buffer array
 	 */
 	public static function getLog(): array {
 		return self::$buffer;
-	}
-
-	/**
-	 * Write log and configuration dump to json files.
-	 */
-	public static function json(): void {
-		if (!AM_DEBUG_ENABLED) {
-			return;
-		}
-
-		$file = AM_DIR_TMP . self::DIR_LOGS . AM_REQUEST . '/log.json';
-
-		$definedConstants = get_defined_constants(true);
-		/** @var array<string, string> */
-		$userConstants = $definedConstants['user'];
-
-		ksort($userConstants);
-
-		FileSystem::writeJson($file, array_merge(self::$buffer, array('config' => $userConstants, 'server' => $_SERVER)));
 	}
 
 	/**
@@ -146,12 +147,9 @@ class Debug {
 	 * @param string $description (Basic info, class, method etc.)
 	 */
 	public static function log($element, string $description = ''): void {
-		if (!AM_DEBUG_ENABLED) {
+		if (!self::$isEnabled) {
 			return;
 		}
-
-		// Start timer. self::timerStart() only saves the time on the first call.
-		self::timerStart();
 
 		// Get backtrace.
 		$backtraceAll = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
@@ -167,51 +165,66 @@ class Debug {
 		if (count($backtrace) > 0) {
 			// When the backtrace array got reduced to the actually relevant items in the backtrace, take the first element (the one calling Debug::log()).
 			$backtrace = array_shift($backtrace);
-			$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '(): ';
+			$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '()';
 		} else {
-			$prefix = basename($backtraceAll[0]['file'] ?? '') . ': ';
+			$prefix = basename($backtraceAll[0]['file'] ?? '');
 		}
 
-		// Prepend the method to $description.
-		$description = self::$index . ': ' . trim($prefix . $description, ': ');
+		$request = defined('AM_REQUEST') ? AM_REQUEST . ' => ' : '';
+		error_log(trim($description . ': ' . (is_string($element) ? $element : json_encode($element, JSON_UNESCAPED_SLASHES)), ': '));
 
-		self::$buffer[$description] = $element;
-
+		$key = self::$index . ': ' . trim($prefix . ': ' . $description, ': ');
+		self::$buffer[$key] = $element;
 		self::$index++;
-	}
-
-	/**
-	 * Log disk usage.
-	 */
-	private static function diskUsage(): void {
-		self::log(round(FileSystem::diskUsage(), 2), 'Disk usage (M)');
 	}
 
 	/**
 	 * Provide info about memory usage.
 	 */
-	private static function memory(): void {
+	public static function memoryUsage(): void {
+		if (!self::$isEnabled) {
+			return;
+		}
+
 		self::log(round((memory_get_peak_usage(true) / 1048576), 2), 'Peak memory useage (M)');
 	}
 
 	/**
 	 * Start the timer on the first call to calculate the execution time when consoleLog() gets called.
 	 */
-	private static function timerStart(): void {
-		// Only save time on first call.
-		if (!self::$time) {
-			self::$time = microtime(true);
-			self::log(date('d. M Y, H:i:s'));
+	public static function timerStart(): void {
+		if (!self::$isEnabled) {
+			return;
 		}
+
+		self::$time = microtime(true);
 	}
 
 	/**
 	 * Stop the timer and log the execution time.
 	 */
-	private static function timerStop(): void {
-		if (self::$time) {
-			$executionTime = microtime(true) - self::$time;
-			self::log(round($executionTime, 6), 'Time for execution (seconds)');
+	public static function timerStop(): void {
+		if (!self::$isEnabled) {
+			return;
+		}
+
+		$executionTime = microtime(true) - self::$time;
+		self::log(round($executionTime, 6), 'Time for execution (seconds)');
+	}
+
+	/**
+	 * Keep the log file size below a given limit.
+	 */
+	private static function sliceLogFile(): void {
+		$lines = file(AM_DEBUG_LOG_PATH, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+		if ($lines === false) {
+			return;
+		}
+
+		if (count($lines) > AM_DEBUG_LOG_MAX_SIZE) {
+			$lines = array_slice($lines, -AM_DEBUG_LOG_MAX_SIZE);
+			file_put_contents(AM_DEBUG_LOG_PATH, implode(PHP_EOL, $lines) . PHP_EOL, LOCK_EX);
 		}
 	}
 }

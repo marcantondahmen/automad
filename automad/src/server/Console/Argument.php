@@ -64,7 +64,7 @@ class Argument {
 	/**
 	 * The value.
 	 */
-	public string $value;
+	public string|null $value;
 
 	/**
 	 * The constructor.
@@ -77,6 +77,8 @@ class Argument {
 		$this->name = $name;
 		$this->description = $description;
 		$this->required = $required;
-		$this->value = '';
+
+		// Default to null if arg is used as flag without value.
+		$this->value = null;
 	}
 }

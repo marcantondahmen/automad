@@ -85,7 +85,8 @@ class App {
 		date_default_timezone_set(@date_default_timezone_get());
 
 		Config::init();
-		Debug::errorReporting();
+		Debug::setup();
+		Debug::timerStart();
 
 		$this->setOpenBaseDir();
 
@@ -95,9 +96,11 @@ class App {
 		$this->startSession();
 
 		$output = $this->render(AM_REQUEST);
+		Debug::timerStop();
+		Debug::memoryUsage();
+		Debug::diskUsage();
 
-		if (AM_DEBUG_ENABLED) {
-			Debug::json();
+		if (Debug::$browserIsEnabled) {
 			$output = Body::append($output, Debug::consoleLog());
 		}
 
