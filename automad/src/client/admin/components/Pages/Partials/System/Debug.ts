@@ -60,8 +60,9 @@ export const renderDebugSection = (): string => {
 				<am-debug-enable></am-debug-enable>
 			</div>
 			<div class="am-debug-settings">
-				<p>${App.text('systemDebugHelp')}</p>
-				<pre><code>php automad/console log:path --help</code></pre>
+				<p>${App.text('systemDebugFileHelp')}</p>
+				<pre><code>tail -n +1 -F $(php automad/console log:path)</code></pre>
+				<p>${App.text('systemDebugBrowserHelp')}</p>
 				<am-debug-browser></am-debug-browser>
 			</div>
 		</am-form>
