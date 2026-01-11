@@ -252,6 +252,10 @@ export const requestAPI = async (
 		log.error(controller, responseData.exception);
 	}
 
+	if (!!responseData.debug) {
+		console.log({ [controller]: responseData.debug });
+	}
+
 	return responseData;
 };
 

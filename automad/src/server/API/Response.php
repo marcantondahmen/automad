@@ -156,7 +156,7 @@ class Response {
 	 * @return Response
 	 */
 	public function setDebug(array $log): Response {
-		if (!empty($log)) {
+		if (!empty($log) && Debug::$browserIsEnabled) {
 			$this->debug = $log;
 		}
 

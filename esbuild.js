@@ -363,7 +363,7 @@ const commonConfig = {
 		css: banner,
 	},
 	legalComments: 'inline',
-	drop: isDev ? [] : ['console'],
+	pure: isDev ? [] : ['console.warn'],
 	logLevel: 'info',
 	loader: {
 		'.svg': 'text',
