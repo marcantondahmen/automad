@@ -86,7 +86,6 @@ class App {
 
 		Config::init();
 		Debug::setup();
-		Debug::timerStart();
 
 		$this->setOpenBaseDir();
 
@@ -96,9 +95,8 @@ class App {
 		$this->startSession();
 
 		$output = $this->render(AM_REQUEST);
-		Debug::timerStop();
-		Debug::memoryUsage();
-		Debug::diskUsage();
+
+		Debug::postRender();
 
 		if (Debug::$browserIsEnabled) {
 			$output = Body::append($output, Debug::consoleLog());

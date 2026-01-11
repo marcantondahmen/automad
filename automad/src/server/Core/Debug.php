@@ -87,12 +87,14 @@ class Debug {
 			ini_set('display_errors', '0');
 			ini_set('log_errors', 1);
 			ini_set('error_log', AM_DEBUG_LOG_PATH);
+			ini_set('ignore_repeated_errors', 1);
 
 			if (!file_exists(dirname(AM_DEBUG_LOG_PATH))) {
 				mkdir(dirname(AM_DEBUG_LOG_PATH), 0755, true);
 			}
 
-			self::sliceLogFile();
+			self::timerStart();
+			self::log(AM_DIR_TMP, 'AM_DIR_TMP');
 		} else {
 			error_reporting(E_ERROR);
 		}
@@ -109,26 +111,15 @@ class Debug {
 			return '';
 		}
 
-		$html = '<script type="text/javascript">' . "\n";
+		$html = '<script type="text/javascript">';
 
 		foreach (self::$buffer as $key => $value) {
-			$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');' . "\n";
+			$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');';
 		}
 
-		$html .= '</script>' . "\n";
+		$html .= '</script>';
 
 		return $html;
-	}
-
-	/**
-	 * Log disk usage.
-	 */
-	public static function diskUsage(): void {
-		if (!self::$isEnabled) {
-			return;
-		}
-
-		self::log(round(FileSystem::diskUsage(), 2), 'Disk usage (M)');
 	}
 
 	/**
@@ -171,7 +162,9 @@ class Debug {
 		}
 
 		$request = defined('AM_REQUEST') ? AM_REQUEST . ' => ' : '';
-		error_log(trim($description . ': ' . (is_string($element) ? $element : json_encode($element, JSON_UNESCAPED_SLASHES)), ': '));
+		$elementStr = is_string($element) ? $element : json_encode($element, JSON_UNESCAPED_SLASHES);
+
+		error_log($request . join(': ', array_filter(array($prefix, $description, $elementStr), 'strlen')));
 
 		$key = self::$index . ': ' . trim($prefix . ': ' . $description, ': ');
 		self::$buffer[$key] = $element;
@@ -179,52 +172,62 @@ class Debug {
 	}
 
 	/**
+	 * Run after rendering a page.
+	 */
+	public static function postRender(): void {
+		if (!self::$isEnabled) {
+			return;
+		}
+
+		self::memoryUsage();
+		self::diskUsage();
+		self::timerStop();
+		self::reduceLogFile();
+	}
+
+	/**
+	 * Log disk usage.
+	 */
+	private static function diskUsage(): void {
+		self::log(round(FileSystem::diskUsage(), 2), 'Disk usage (M)');
+	}
+
+	/**
 	 * Provide info about memory usage.
 	 */
-	public static function memoryUsage(): void {
-		if (!self::$isEnabled) {
-			return;
-		}
-
+	private static function memoryUsage(): void {
 		self::log(round((memory_get_peak_usage(true) / 1048576), 2), 'Peak memory useage (M)');
-	}
-
-	/**
-	 * Start the timer on the first call to calculate the execution time when consoleLog() gets called.
-	 */
-	public static function timerStart(): void {
-		if (!self::$isEnabled) {
-			return;
-		}
-
-		self::$time = microtime(true);
-	}
-
-	/**
-	 * Stop the timer and log the execution time.
-	 */
-	public static function timerStop(): void {
-		if (!self::$isEnabled) {
-			return;
-		}
-
-		$executionTime = microtime(true) - self::$time;
-		self::log(round($executionTime, 6), 'Time for execution (seconds)');
 	}
 
 	/**
 	 * Keep the log file size below a given limit.
 	 */
-	private static function sliceLogFile(): void {
-		$lines = file(AM_DEBUG_LOG_PATH, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+	private static function reduceLogFile(): void {
+		$lines = file(AM_DEBUG_LOG_PATH);
 
 		if ($lines === false) {
 			return;
 		}
 
 		if (count($lines) > AM_DEBUG_LOG_MAX_SIZE) {
+			$lines = array_unique($lines);
 			$lines = array_slice($lines, -AM_DEBUG_LOG_MAX_SIZE);
 			file_put_contents(AM_DEBUG_LOG_PATH, implode(PHP_EOL, $lines) . PHP_EOL, LOCK_EX);
 		}
+	}
+
+	/**
+	 * Start the timer on the first call to calculate the execution time when consoleLog() gets called.
+	 */
+	private static function timerStart(): void {
+		self::$time = microtime(true);
+	}
+
+	/**
+	 * Stop the timer and log the execution time.
+	 */
+	private static function timerStop(): void {
+		$executionTime = microtime(true) - self::$time;
+		self::log(round($executionTime, 6), 'Time for execution (seconds)');
 	}
 }

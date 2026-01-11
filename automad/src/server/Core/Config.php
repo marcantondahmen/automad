@@ -152,10 +152,13 @@ class Config {
 	 * Define default values for all constants that are not overriden.
 	 */
 	private static function fromDefaults(): void {
+		// First define the temp directory since that is required for logging.
+		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
+
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);
 		self::set('AM_DEBUG_BROWSER', false);
-		self::set('AM_DEBUG_LOG_PATH', FileSystem::getSystemTmpDir() . '/automad/' . basename(AM_BASE_DIR) . '-' . substr(sha1(AM_BASE_DIR), 0, 8) . '.log');
+		self::set('AM_DEBUG_LOG_PATH', AM_DIR_TMP . '/debug_log');
 		self::set('AM_DEBUG_LOG_MAX_SIZE', 10000);
 
 		// The server protocol, port and name.
@@ -194,7 +197,6 @@ class Config {
 		self::set('AM_DIR_SHARED', '/shared');
 		self::set('AM_DIR_PACKAGES', '/packages');
 		self::set('AM_DIR_CACHE', '/cache');
-		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE
