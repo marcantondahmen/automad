@@ -161,15 +161,18 @@ class PostProcessor {
 				display: flex; 
 				justify-content: center;
 				align-items: center;
-				bottom: 24px; 
-				left: 24px; 
-				width: 46px;
-				height: 46px;
+				bottom: 25px; 
+				left: 25px; 
+				width: 48px;
+				height: 48px;
 				border-radius: 100%;
 				color: hsl(220 9 96);
 				background-color: hsl(220 9 6 / 0.48);
 				border: 1px solid hsl(220 9 96 / 0.14);
 				backdrop-filter: blur(9px);
+				box-shadow:
+					0 5px 20px rgba(0, 0, 0, 0.12),
+					0 22px 40px -10px rgba(0, 0, 0, 0.45);
 			"
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
