@@ -12,6 +12,7 @@ define('AM_DIR_SHARED', '/automad/tests/i18n/shared');
 define('AM_FILE_UI_TRANSLATION', '');
 define('AM_FEED_ENABLED', false);
 define('AM_I18N_ENABLED', true);
+define('AM_DEBUG_ENABLED', false);
 define('AM_REQUEST', '/');
 
 require_once AM_BASE_DIR . '/automad/src/server/Autoload.php';
