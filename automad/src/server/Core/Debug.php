@@ -166,7 +166,7 @@ class Debug {
 		}
 
 		$request = defined('AM_REQUEST') ? AM_REQUEST . ' => ' : '';
-		$elementStr = is_string($element) ? $element : json_encode($element, JSON_UNESCAPED_SLASHES);
+		$elementStr = is_string($element) ? $element : strval(json_encode($element, JSON_UNESCAPED_SLASHES));
 
 		error_log($request . join(': ', array_filter(array($prefix, $description, $elementStr), 'strlen')));
 
@@ -215,8 +215,8 @@ class Debug {
 
 		if (count($lines) > AM_DEBUG_LOG_MAX_SIZE) {
 			$lines = array_unique($lines);
-			$lines = array_slice($lines, -AM_DEBUG_LOG_MAX_SIZE);
-			file_put_contents(AM_DEBUG_LOG_PATH, implode(PHP_EOL, $lines) . PHP_EOL, LOCK_EX);
+			$lines = array_slice($lines, intval(AM_DEBUG_LOG_MAX_SIZE) * -1);
+			file_put_contents(AM_DEBUG_LOG_PATH, implode('', $lines) . PHP_EOL, LOCK_EX);
 		}
 	}
 
