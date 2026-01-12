@@ -52,6 +52,12 @@ class Argument {
 	public readonly string $description;
 
 	/**
+	 * True if argument is used.
+	 * This can be used to identify flags that don't have a value.
+	 */
+	public bool $isInArgv;
+
+	/**
 	 * The argument name.
 	 */
 	public readonly string $name;
@@ -64,7 +70,7 @@ class Argument {
 	/**
 	 * The value.
 	 */
-	public string|null $value;
+	public string $value;
 
 	/**
 	 * The constructor.
@@ -77,8 +83,7 @@ class Argument {
 		$this->name = $name;
 		$this->description = $description;
 		$this->required = $required;
-
-		// Default to null if arg is used as flag without value.
-		$this->value = null;
+		$this->value = '';
+		$this->isInArgv = false;
 	}
 }

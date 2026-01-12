@@ -92,7 +92,7 @@ class LogPath extends AbstractCommand {
 	 * @return int exit code
 	 */
 	public function run(): int {
-		if ($this->ArgumentCollection->get('help')->value !== null) {
+		if ($this->ArgumentCollection->isInArgv('help')) {
 			echo Console::clr('heading', 'Logfile path: ') . PHP_EOL . Console::clr('code', AM_DEBUG_LOG_PATH) . PHP_EOL . PHP_EOL;
 			echo Console::clr('text', 'You can use the following command to follow the log file on Linux or macOS:') . PHP_EOL;
 			echo Console::clr('code', 'tail -F $(php automad/console log:path)') . PHP_EOL . PHP_EOL;
