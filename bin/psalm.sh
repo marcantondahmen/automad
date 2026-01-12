@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PSALM_VERSION=6.1.0
+PSALM_VERSION=6.14.3
 PSALM_PHAR=psalm-${PSALM_VERSION}.phar
 PHP_BIN=php
 
