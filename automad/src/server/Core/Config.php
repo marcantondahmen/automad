@@ -152,7 +152,9 @@ class Config {
 	 * Define default values for all constants that are not overriden.
 	 */
 	private static function fromDefaults(): void {
-		// First define the temp directory since that is required for logging.
+		// First define permsissions and temp directory since they are required for logging.
+		self::set('AM_PERM_DIR', 0755);
+		self::set('AM_PERM_FILE', 0644);
 		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
 
 		// Define debugging already here to be available when parsing the request.
@@ -183,10 +185,6 @@ class Config {
 
 		// An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
 		self::set('AM_BASE_SITEMAP', '');
-
-		// PERMISSIONS
-		self::set('AM_PERM_DIR', 0755);
-		self::set('AM_PERM_FILE', 0644);
 
 		// Session cookie name salt that can be used to trigger a sign-out-all.
 		self::set('AM_SESSION_COOKIE_SALT', '');
