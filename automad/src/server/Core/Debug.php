@@ -49,6 +49,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Debug {
 	const DIR_LOGS = '/logs';
+	const LEVEL_LOG = 'log';
+	const LEVEL_WARN = 'warn';
 
 	/**
 	 * This will be true if logging and browser logging are enabled.
@@ -82,12 +84,13 @@ class Debug {
 		self::$isEnabled = AM_DEBUG_ENABLED && !defined('STDIN');
 		self::$browserIsEnabled = self::$isEnabled && AM_DEBUG_BROWSER;
 
+		ini_set('error_log', AM_DEBUG_LOG_PATH);
+		ini_set('ignore_repeated_errors', 1);
+
 		if (self::$isEnabled) {
 			error_reporting(E_ALL);
-			ini_set('display_errors', '0');
+			ini_set('display_errors', '1');
 			ini_set('log_errors', 1);
-			ini_set('error_log', AM_DEBUG_LOG_PATH);
-			ini_set('ignore_repeated_errors', 1);
 
 			if (!file_exists(dirname(AM_DEBUG_LOG_PATH))) {
 				mkdir(dirname(AM_DEBUG_LOG_PATH), 0755, true);
@@ -96,6 +99,7 @@ class Debug {
 			self::timerStart();
 			self::log(AM_DIR_TMP, 'AM_DIR_TMP');
 		} else {
+			ini_set('display_errors', '0');
 			error_reporting(E_ERROR);
 		}
 	}
@@ -136,13 +140,48 @@ class Debug {
 	}
 
 	/**
-	 * Log any kind of variable and append it to the $buffer array.
+	 * Log a debug entry.
+	 *
+	 * @param mixed $element
+	 * @param string $description
+	 */
+	public static function log($element, string $description = ''): void {
+		self::addEntry($element, $description, self::LEVEL_LOG);
+	}
+
+	/**
+	 * Run after rendering a page.
+	 */
+	public static function postRender(): void {
+		if (!self::$isEnabled) {
+			return;
+		}
+
+		self::memoryUsage();
+		self::diskUsage();
+		self::timerStop();
+		self::reduceLogFile();
+	}
+
+	/**
+	 * Log a warning.
+	 *
+	 * @param mixed $element
+	 * @param string $description
+	 */
+	public static function warn($element, string $description = ''): void {
+		self::addEntry($element, $description, self::LEVEL_WARN);
+	}
+
+	/**
+	 * And an entry to the log file an optionally to the console buffer depending on the level and whether log forwarding is enabled or not.
 	 *
 	 * @param mixed $element (The actual content to log)
 	 * @param string $description (Basic info, class, method etc.)
+	 * @param string $level
 	 */
-	public static function log($element, string $description = ''): void {
-		if (!self::$isEnabled) {
+	private static function addEntry($element, string $description, string $level): void {
+		if (!self::$isEnabled && $level !== self::LEVEL_WARN) {
 			return;
 		}
 
@@ -170,23 +209,11 @@ class Debug {
 
 		error_log($request . join(': ', array_filter(array($prefix, $description, $elementStr), 'strlen')));
 
-		$key = self::$index . ': ' . trim($prefix . ': ' . $description, ': ');
-		self::$buffer[$key] = $element;
-		self::$index++;
-	}
-
-	/**
-	 * Run after rendering a page.
-	 */
-	public static function postRender(): void {
-		if (!self::$isEnabled) {
-			return;
+		if (self::$browserIsEnabled) {
+			$key = self::$index . ': ' . trim($prefix . ': ' . $description, ': ');
+			self::$buffer[$key] = $element;
+			self::$index++;
 		}
-
-		self::memoryUsage();
-		self::diskUsage();
-		self::timerStop();
-		self::reduceLogFile();
 	}
 
 	/**
@@ -207,7 +234,7 @@ class Debug {
 	 * Keep the log file size below a given limit.
 	 */
 	private static function reduceLogFile(): void {
-		$lines = file(AM_DEBUG_LOG_PATH);
+		$lines = file(AM_DEBUG_LOG_PATH, FILE_IGNORE_NEW_LINES);
 
 		if ($lines === false) {
 			return;
@@ -216,7 +243,7 @@ class Debug {
 		if (count($lines) > AM_DEBUG_LOG_MAX_SIZE) {
 			$lines = array_unique($lines);
 			$lines = array_slice($lines, intval(AM_DEBUG_LOG_MAX_SIZE) * -1);
-			file_put_contents(AM_DEBUG_LOG_PATH, implode('', $lines) . PHP_EOL, LOCK_EX);
+			file_put_contents(AM_DEBUG_LOG_PATH, implode(PHP_EOL, $lines) . PHP_EOL, LOCK_EX);
 		}
 	}
 

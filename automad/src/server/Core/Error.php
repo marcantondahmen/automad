@@ -245,7 +245,7 @@ class Error {
 				E_NOTICE => '🟡 [NOTICE]'
 			);
 
-			Debug::log("$message in $file line $line", $levels[$serverity]);
+			Debug::warn("$message in $file line $line", $levels[$serverity]);
 		});
 	}
 }
