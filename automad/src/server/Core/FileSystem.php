@@ -174,7 +174,7 @@ class FileSystem {
 			}
 		}
 
-		return round($bytes / (1024 * 1024), 2);
+		return round($bytes / (1024.0 * 1024.0), 2);
 	}
 
 	/**
@@ -218,10 +218,10 @@ class FileSystem {
 		$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
 
 		for ($i = 0; $bytes > 1024 && $i <= 4; $i++) {
-			$bytes = $bytes / 1204;
+			$bytes = floatval($bytes) / 1024.0;
 		}
 
-		return round(intval($bytes), 2) . ' ' . $units[$i];
+		return strval(round(floatval($bytes), 2)) . ' ' . $units[$i];
 	}
 
 	/**

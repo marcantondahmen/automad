@@ -178,7 +178,7 @@ class Debug {
 	 *
 	 * @param mixed $element (The actual content to log)
 	 * @param string $description (Basic info, class, method etc.)
-	 * @param string $level
+	 * @param 'log'|'warn' $level
 	 */
 	private static function addEntry($element, string $description, string $level): void {
 		if (!self::$isEnabled && $level !== self::LEVEL_WARN) {

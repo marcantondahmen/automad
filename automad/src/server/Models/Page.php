@@ -627,9 +627,9 @@ class Page {
 	 * Set a page data value.
 	 *
 	 * @param string $field
-	 * @param string $value
+	 * @param mixed $value
 	 */
-	public function set(string $field, string $value): void {
+	public function set(string $field, mixed $value): void {
 		$this->data[$field] = $value;
 	}
 
