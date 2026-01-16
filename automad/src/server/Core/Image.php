@@ -131,6 +131,10 @@ class Image {
 
 		ini_set('memory_limit', '-1');
 
+		if (!is_readable($originalFile) || !is_file($originalFile)) {
+			return;
+		}
+
 		$getimagesize = @getimagesize($originalFile);
 
 		if (!$getimagesize) {
