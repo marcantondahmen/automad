@@ -86,11 +86,11 @@ class Debug {
 
 		ini_set('error_log', AM_DEBUG_LOG_PATH);
 		ini_set('ignore_repeated_errors', 1);
+		ini_set('display_errors', '0');
+		ini_set('log_errors', 1);
 
 		if (self::$isEnabled) {
 			error_reporting(E_ALL);
-			ini_set('display_errors', '1');
-			ini_set('log_errors', 1);
 
 			if (!file_exists(dirname(AM_DEBUG_LOG_PATH))) {
 				mkdir(dirname(AM_DEBUG_LOG_PATH), 0755, true);
@@ -99,7 +99,6 @@ class Debug {
 			self::timerStart();
 			self::log(AM_DIR_TMP, 'AM_DIR_TMP');
 		} else {
-			ini_set('display_errors', '0');
 			error_reporting(E_ERROR);
 		}
 	}
