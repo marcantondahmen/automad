@@ -189,7 +189,7 @@ class Debug {
 
 		// Remove all backtrace items without any class defined (standard PHP functions) and the items with the functions Debug::log() and {closure}
 		// To get a clean array with only the relevant Automad methods in the backtrace.
-		$ignoreFunctions = array('log', __NAMESPACE__ . '\{closure}');
+		$ignoreFunctions = array('addEntry', 'log', 'warn', __NAMESPACE__ . '\{closure}');
 		$backtrace = array_filter($backtraceAll, function ($item) use ($ignoreFunctions) {
 			return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions) && !preg_match('/Error/', $item['class']));
 		});
