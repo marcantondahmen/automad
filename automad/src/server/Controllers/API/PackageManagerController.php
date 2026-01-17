@@ -167,6 +167,7 @@ class PackageManagerController {
 		}
 
 		Cache::clear();
+		PackageCollection::clearOutdatedCache();
 
 		return $Response->setSuccess(Text::get('packageInstalledSuccess') . '<br>' . $package);
 	}
@@ -199,6 +200,7 @@ class PackageManagerController {
 		}
 
 		Cache::clear();
+		PackageCollection::clearOutdatedCache();
 
 		return $Response->setSuccess(Text::get('deteledSuccess') . '<br>' . $package);
 	}
@@ -297,6 +299,7 @@ class PackageManagerController {
 			}
 
 			Cache::clear();
+			PackageCollection::clearOutdatedCache();
 
 			return $Response->setSuccess(Text::get('packageUpdatedSuccess') . '<br>' . $package);
 		}
@@ -320,6 +323,7 @@ class PackageManagerController {
 		}
 
 		Cache::clear();
+		PackageCollection::clearOutdatedCache();
 
 		return $Response->setSuccess(Text::get('packageUpdatedAllSuccess'));
 	}
