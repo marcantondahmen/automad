@@ -226,7 +226,7 @@ class Debug {
 	 * Provide info about memory usage.
 	 */
 	private static function memoryUsage(): void {
-		self::log(round((memory_get_peak_usage(true) / 1048576), 2), 'Peak memory useage (M)');
+		self::log(round((memory_get_peak_usage(true) / 1048576), 2), 'Peak memory usage (M)');
 	}
 
 	/**
