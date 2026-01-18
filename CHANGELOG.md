@@ -1,8 +1,38 @@
 # Changelog
 
-## [v2.0.0-beta.9](https://github.com/marcantondahmen/automad/commit/ac1cc83e6982d1022a05435c5016dd07311bff88)
+## [v2.0.0-beta.10](https://github.com/marcantondahmen/automad/commit/c88d888bd546490a479c19c28a3a3b937d474df3)
 
-Mon, 5 Jan 2026 21:32:48 +0100
+Sun, 18 Jan 2026 11:38:37 +0100
+
+### New Features
+
+- add debugging indicator to pages when debug mode is enabled ([a3ba622e8](https://github.com/marcantondahmen/automad/commit/a3ba622e849b9efde0066d7ece57a88ba9eb9844))
+- add result count on file basis to search ([7208905b5](https://github.com/marcantondahmen/automad/commit/7208905b59a8891106b2f5bceed0b7f11945786f))
+- always log warnings and notices ([5b0e9b5d1](https://github.com/marcantondahmen/automad/commit/5b0e9b5d1819d06d622c35514a231b27e319c1b5))
+- cache outdated packages when searching for package updates ([11cfecf32](https://github.com/marcantondahmen/automad/commit/11cfecf32ad452c529f83893f924f48626e03a2c))
+- improve debugging and logging to files ([f941108fe](https://github.com/marcantondahmen/automad/commit/f941108fe513fa8f09a1c2cee2974de4d4f84ea7))
+- improve debugging config ui ([428051cd2](https://github.com/marcantondahmen/automad/commit/428051cd25ddab24ce2bd6f9d89f454f3a0ccd08))
+- reduce logging in dashboard forms ([d1f7bdf8b](https://github.com/marcantondahmen/automad/commit/d1f7bdf8b70b419d5458c84ecc48f3fe6ba9643c))
+- reduce logging in debug mode ([3716148b4](https://github.com/marcantondahmen/automad/commit/3716148b40b406891f93a5efe727b36923336031))
+- remove curl_close calls in order to be php 8.5 compatible ([e9deed671](https://github.com/marcantondahmen/automad/commit/e9deed671e8d4b12f80667125a531f94cf23fc61))
+- replace copy button text with icons in code blocks ([6f949ae91](https://github.com/marcantondahmen/automad/commit/6f949ae91e7c7b668746bb93ddf9b35e1bc38175))
+- show warning in the browser console if debugging is only enabled using log files ([877c03135](https://github.com/marcantondahmen/automad/commit/877c03135368efecd4c07fe75a9bd8f1b1af164f))
+- update cocur/slugify to version 4.7.1 ([c88d888bd](https://github.com/marcantondahmen/automad/commit/c88d888bd546490a479c19c28a3a3b937d474df3))
+- update composer to version 2.9.3 ([ae8a82c1d](https://github.com/marcantondahmen/automad/commit/ae8a82c1d3078f88380b1add6f2174ec4ffcaa65))
+- update console commands for debug log handling ([96fab3d67](https://github.com/marcantondahmen/automad/commit/96fab3d67b75be5843f8e6740355ca02739eef36))
+- update standard lite theme ([3a66fb9f4](https://github.com/marcantondahmen/automad/commit/3a66fb9f462c65368fafe40197cefe3db9675052))
+
+### Bugfixes
+
+- fix debug log forwarding from api requests to browser console ([cffa1a051](https://github.com/marcantondahmen/automad/commit/cffa1a051434bd46f35b280b9a0b4fb626d9558d))
+- fix table block layout ([4334e901d](https://github.com/marcantondahmen/automad/commit/4334e901de1d4818ef1cc93920c6f7b1993fbd29))
+- fix text align tooltips ([447db5361](https://github.com/marcantondahmen/automad/commit/447db5361319e86e9415de54778a4ceb27a06566))
+- fix unused data fields handling ([ae97e0629](https://github.com/marcantondahmen/automad/commit/ae97e06297ca9d630712f1a27c8b2c92cab4be40))
+- fix warnings when creating image instance with invalid file path ([55b262cab](https://github.com/marcantondahmen/automad/commit/55b262cab242993146508e918333273b53962e41))
+
+## [v2.0.0-beta.9](https://github.com/marcantondahmen/automad/commit/18b53698a6a2ce19a094cbeab38682efeb2f99b7)
+
+Mon, 5 Jan 2026 21:35:17 +0100
 
 ### Bugfixes
 
@@ -906,12 +936,3 @@ Sat, 2 Apr 2022 23:53:44 +0200
 ### Bugfixes
 
 - **cli**: fix cli updates ([284afb0bd](https://github.com/marcantondahmen/automad/commit/284afb0bdbce370b5bc096a19316a0851ca679b6))
-
-## [v1.10.6](https://github.com/marcantondahmen/automad/commit/bbad3ee2100d82f66444ca5f28ad5321895b1dcd)
-
-Sat, 2 Apr 2022 23:36:28 +0200
-
-### Bugfixes
-
-- **console**: fix console command error ([3e3682a67](https://github.com/marcantondahmen/automad/commit/3e3682a678bc395ce898b4eb8d88867a7994d8c3))
-- fix PHP 8.1 compatibility issues ([1c2a755da](https://github.com/marcantondahmen/automad/commit/1c2a755da0d83285bb98c017a818affc031104ab))
