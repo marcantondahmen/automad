@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.10](https://github.com/marcantondahmen/automad/commit/c88d888bd546490a479c19c28a3a3b937d474df3)
+## [v2.0.0-beta.11](https://github.com/marcantondahmen/automad/commit/e9dfc21cd8517a2b7e7257b48e42bf1c48cbda49)
 
-Sun, 18 Jan 2026 11:38:37 +0100
+Sun, 18 Jan 2026 17:23:32 +0100
+
+### Bugfixes
+
+- fix code editor styles ([7fec19884](https://github.com/marcantondahmen/automad/commit/7fec19884bb665f5313878a5f7de6ad648a476a6))
+
+## [v2.0.0-beta.10](https://github.com/marcantondahmen/automad/commit/26fe7a7614af1007056652e062cddd527f154466)
+
+Sun, 18 Jan 2026 11:41:41 +0100
 
 ### New Features
 
@@ -928,11 +936,3 @@ Thu, 7 Apr 2022 20:00:07 +0200
 ### Bugfixes
 
 - **ui**: fix installation error ([ccd4e841d](https://github.com/marcantondahmen/automad/commit/ccd4e841d165e602d3363645c9de71f9d502f952))
-
-## [v1.10.7](https://github.com/marcantondahmen/automad/commit/b402f7c7ff18f56f418fa196a128884f5c076b57)
-
-Sat, 2 Apr 2022 23:53:44 +0200
-
-### Bugfixes
-
-- **cli**: fix cli updates ([284afb0bd](https://github.com/marcantondahmen/automad/commit/284afb0bdbce370b5bc096a19316a0851ca679b6))
