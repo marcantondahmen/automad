@@ -148,7 +148,7 @@ html:not(.am-ui) {
 		font-weight: @am-small-font-weight;
 	}
 
-	& code {
+	& code:not([class]) {
 		font-family: @am-code-font-family;
 		padding: 0.1rem 0.35rem;
 		color: hsl(var(--am-prism-1));
@@ -156,7 +156,7 @@ html:not(.am-ui) {
 		border-radius: 0.3rem;
 	}
 
-	& pre {
+	& pre:not([class]) {
 		padding: 1rem 1.5rem;
 		margin: @am-base-margin-y 0;
 		background-color: hsl(var(--am-clr-background-faded));

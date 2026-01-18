@@ -35,7 +35,6 @@
 .am-f-codeflask {
 	@padding: 1rem;
 	position: relative;
-	overflow: hidden;
 	height: auto;
 
 	& .codeflask {
@@ -45,6 +44,10 @@
 		background-color: hsl(var(--am-clr-background-faded));
 		border-radius: @am-form-radius;
 		border: @am-form-border;
+		outline: @am-outline;
+		transition:
+			border 0.2s,
+			outline 0.2s;
 
 		&__textarea {
 			position: absolute;
@@ -110,6 +113,11 @@
 
 		&:has(pre > code:not(:empty)) &__placeholder {
 			display: none;
+		}
+
+		&:has(:focus) .codeflask {
+			border-color: hsl(var(--am-clr-border-active));
+			outline: @am-outline-active;
 		}
 	}
 }
