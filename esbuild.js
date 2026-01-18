@@ -62,18 +62,17 @@
  */
 
 import pkg from './package.json' with { type: 'json' };
-import browserSync from 'browser-sync';
-import postcss from 'esbuild-postcss';
 import esbuild from 'esbuild';
-import crypto from 'crypto';
-import path from 'path';
-import fs from 'fs';
+import postcss from 'esbuild-postcss';
+import browserSync from 'browser-sync';
 import { lessLoader } from 'esbuild-plugin-less';
 import { sassPlugin } from 'esbuild-sass-plugin';
 import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
+import crypto from 'node:crypto';
+import path from 'node:path';
+import fs from 'node:fs';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const clientSrc = path.join(__dirname, 'automad/src/client');
 const outdir = path.join(__dirname, 'automad/dist/build');
 const isDev = process.argv.includes('--dev');
