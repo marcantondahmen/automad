@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2025 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -39,25 +39,23 @@ namespace Automad\Console\Commands;
 use Automad\Console\Argument;
 use Automad\Console\ArgumentCollection;
 use Automad\Console\Console;
-use Automad\Core\FileSystem;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The log:filter command.
+ * The log:path command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class LogFilter extends AbstractCommand {
+class LogPath extends AbstractCommand {
 	/**
 	 * The constructor.
 	 */
 	public function __construct() {
 		$this->ArgumentCollection = new ArgumentCollection(array(
-			new Argument('route', 'The route that is logged', true),
-			new Argument('filter', 'The filter regex', true)
+			new Argument('help', ''),
 		));
 	}
 
@@ -67,7 +65,7 @@ class LogFilter extends AbstractCommand {
 	 * @return string the command description
 	 */
 	public function description(): string {
-		return 'Filter the log by regex.';
+		return 'The debug log path. Can be used with <tail> as shown in help.';
 	}
 
 	/**
@@ -76,7 +74,7 @@ class LogFilter extends AbstractCommand {
 	 * @return string the command example
 	 */
 	public function example(): string {
-		return 'php automad/console log:filter --route /page --filter "cache page"';
+		return 'php automad/console log:path';
 	}
 
 	/**
@@ -85,7 +83,7 @@ class LogFilter extends AbstractCommand {
 	 * @return string the command name
 	 */
 	public function name(): string {
-		return 'log:filter';
+		return 'log:path';
 	}
 
 	/**
@@ -94,40 +92,17 @@ class LogFilter extends AbstractCommand {
 	 * @return int exit code
 	 */
 	public function run(): int {
-		$route = $this->ArgumentCollection->value('route');
-		$filter = preg_quote($this->ArgumentCollection->value('filter'));
-		$filter = preg_replace('/\s+/s', '.*', $filter);
+		if ($this->ArgumentCollection->isInArgv('help')) {
+			echo Console::clr('heading', 'Logfile path: ') . PHP_EOL . Console::clr('code', AM_DEBUG_LOG_PATH) . PHP_EOL . PHP_EOL;
+			echo Console::clr('text', 'You can use the following command to follow the log file on Linux or macOS:') . PHP_EOL;
+			echo Console::clr('code', 'tail -F $(php automad/console log:path)') . PHP_EOL . PHP_EOL;
+			echo Console::clr('text', 'You can filter the log using grep:') . PHP_EOL;
+			echo Console::clr('code', 'tail -n +1 -F $(php automad/console log:path) | grep "Config"') . PHP_EOL;
 
-		$tmp = FileSystem::getTmpDir();
-		$logs = "$tmp/logs";
-		$log = rtrim($logs . $route, '/') . '/log.json';
-
-		if (!is_readable($log)) {
-			echo Console::clr('error', "A log file for $route was not found.") . PHP_EOL;
-
-			return 1;
+			return 0;
 		}
 
-		$json = file_get_contents($log);
-
-		if (empty($json)) {
-			return 1;
-		}
-
-		$data = json_decode($json, true);
-
-		foreach ($data as $key => $value) {
-			$valueJson = json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-			$regex = "/$filter/is";
-
-			if (!empty($valueJson)) {
-				if (preg_match($regex, "$key$valueJson")) {
-					echo Console::clr('heading', "$key: ") . PHP_EOL;
-					echo Console::clr('code', $valueJson) . PHP_EOL . PHP_EOL;
-				}
-			}
-		}
+		echo AM_DEBUG_LOG_PATH . PHP_EOL;
 
 		return 0;
 	}

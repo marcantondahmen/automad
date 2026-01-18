@@ -6,9 +6,6 @@ use Automad\Core\PublicationState;
 use Automad\System\Fields;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Stores\ComponentStore
- */
 class ComponentStoreTest extends TestCase {
 	private $bak =  AM_BASE_DIR . AM_DIR_SHARED . '/components.bak';
 
@@ -27,9 +24,6 @@ class ComponentStoreTest extends TestCase {
 		rename($this->bak, $this->file);
 	}
 
-	/**
-	 * @testdox Test component store
-	 */
 	public function testComponentStoreIsEqual() {
 		$ComponentStore = new ComponentStore();
 		$data = array();

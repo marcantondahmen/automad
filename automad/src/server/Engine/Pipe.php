@@ -151,7 +151,7 @@ class Pipe {
 				break;
 		}
 
-		Debug::log($result, $value . $operator . $number);
+		Debug::log($result, strval($value) . $operator . strval($number));
 
 		return strval($result);
 	}

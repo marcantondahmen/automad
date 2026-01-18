@@ -174,7 +174,7 @@ class FileSystem {
 			}
 		}
 
-		return round($bytes / (1024 * 1024), 2);
+		return round($bytes / (1024.0 * 1024.0), 2);
 	}
 
 	/**
@@ -218,10 +218,10 @@ class FileSystem {
 		$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
 
 		for ($i = 0; $bytes > 1024 && $i <= 4; $i++) {
-			$bytes = $bytes / 1204;
+			$bytes = floatval($bytes) / 1024.0;
 		}
 
-		return round(intval($bytes), 2) . ' ' . $units[$i];
+		return strval(round(floatval($bytes), 2)) . ' ' . $units[$i];
 	}
 
 	/**
@@ -284,6 +284,25 @@ class FileSystem {
 		} else {
 			return AM_BASE_DIR . AM_DIR_SHARED . '/';
 		}
+	}
+
+	/**
+	 * Return the path of the temp dir if it is writable by the webserver.
+	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
+	 * while other locations like '/var/tmp' do not get purged by the system.
+	 * But since '/tmp' is only available on macos and linux,
+	 * sys_get_temp_dir() is used as fallback.
+	 *
+	 * @return string The path to the temp dir
+	 */
+	public static function getSystemTmpDir(): string {
+		$tmp = '/tmp';
+
+		if (is_writable($tmp)) {
+			return $tmp;
+		}
+
+		return rtrim(sys_get_temp_dir(), '/');
 	}
 
 	/**
@@ -403,7 +422,6 @@ class FileSystem {
 			$umask = umask(0);
 			$return = mkdir($path, AM_PERM_DIR, true);
 			umask($umask);
-			Debug::log($path, 'Created');
 
 			return $return;
 		}
@@ -629,24 +647,5 @@ class FileSystem {
 	 */
 	public static function writeJson(string $file, array $data): bool {
 		return self::write($file, strval(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
-	}
-
-	/**
-	 * Return the path of the temp dir if it is writable by the webserver.
-	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
-	 * while other locations like '/var/tmp' do not get purged by the system.
-	 * But since '/tmp' is only available on macos and linux,
-	 * sys_get_temp_dir() is used as fallback.
-	 *
-	 * @return string The path to the temp dir
-	 */
-	private static function getSystemTmpDir(): string {
-		$tmp = '/tmp';
-
-		if (is_writable($tmp)) {
-			return $tmp;
-		}
-
-		return rtrim(sys_get_temp_dir(), '/');
 	}
 }

@@ -79,6 +79,22 @@ class ArgumentCollection {
 	}
 
 	/**
+	 * Test whether an arguments does exist in argv. This also returns false if the arg is not a valid one.
+	 *
+	 * @param string $name
+	 * @return bool
+	 */
+	public function isInArgv(string $name): bool {
+		$Argument = $this->get($name);
+
+		if ($Argument) {
+			return $Argument->isInArgv;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Parse value string.
 	 *
 	 * @param array $argv
@@ -107,6 +123,7 @@ class ArgumentCollection {
 
 				if ($Argument) {
 					$Argument->value = str_starts_with($next, '--') ? '' : $next;
+					$Argument->isInArgv = true;
 				}
 			}
 		}

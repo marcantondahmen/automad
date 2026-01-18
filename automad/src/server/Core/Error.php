@@ -97,7 +97,6 @@ class Error {
 
 		set_exception_handler(
 			function ($error) {
-				Debug::json();
 				$Response = new Response();
 
 				$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
@@ -232,10 +231,21 @@ class Error {
 				$serverity != E_DEPRECATED &&
 				$serverity != E_USER_DEPRECATED &&
 				$serverity != E_USER_WARNING &&
-				$serverity != E_WARNING
+				$serverity != E_WARNING &&
+				$serverity != E_NOTICE
 			) {
 				throw new ErrorException($message, 0, $serverity, $file, $line);
 			}
+
+			$levels = array(
+				E_DEPRECATED => '🟠 [DEPRECATED]',
+				E_USER_DEPRECATED => '🟠 [USER_DEPRECATED]',
+				E_WARNING => '🔴 [WARNING]',
+				E_USER_WARNING => '🔴 [USER_WARNING]',
+				E_NOTICE => '🟡 [NOTICE]'
+			);
+
+			Debug::warn("$message in $file line $line", $levels[$serverity]);
 		});
 	}
 }

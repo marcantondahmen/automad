@@ -37,6 +37,7 @@
 namespace Automad\System;
 
 use Automad\API\Response;
+use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\System\Composer\Composer;
@@ -51,10 +52,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class PackageCollection {
+	const FILE_OUTDATED_CACHE =	AM_DIR_TMP . '/' . 'outdated_packages';
+	const OUTDATED_CACHE_LIFETIME = 600;
+
 	/**
 	 * The cached array of items in the packages directory.
 	 */
 	private static array $packageDirectoryItems = array();
+
+	/**
+	 * Clear the outdated cache.
+	 */
+	public static function clearOutdatedCache(): void {
+		Debug::log('Clearing package update cache ...');
+
+		unlink(self::FILE_OUTDATED_CACHE);
+	}
 
 	/**
 	 * Get the full list of available packages and their install/update state.
@@ -118,16 +131,31 @@ class PackageCollection {
 	 * @return array the response object
 	 */
 	public static function getOutdated(): array {
+		$outdatedMtime = is_readable(self::FILE_OUTDATED_CACHE)
+			? intval(filemtime(self::FILE_OUTDATED_CACHE))
+			: 0;
+
+		if ($outdatedMtime + self::OUTDATED_CACHE_LIFETIME > time()) {
+			Debug::log('Reading outdated packages from cache ...');
+
+			return FileSystem::readJson(self::FILE_OUTDATED_CACHE);
+		}
+
+		Debug::log('Searching for package updates ...');
+
 		$Composer = new Composer();
 		$Messenger = new Messenger();
 		$buffer = $Composer->run('show -oD -f json', $Messenger);
 		$decoded = $Messenger->getData();
+		$outdated = array();
 
 		if ($decoded && !empty($decoded['installed'])) {
-			return $decoded['installed'];
+			$outdated = $decoded['installed'];
 		}
 
-		return array();
+		FileSystem::writeJson(self::FILE_OUTDATED_CACHE, $outdated);
+
+		return $outdated;
 	}
 
 	/**

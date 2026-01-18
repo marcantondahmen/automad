@@ -131,6 +131,10 @@ class Image {
 
 		ini_set('memory_limit', '-1');
 
+		if (!is_readable($originalFile) || !is_file($originalFile)) {
+			return;
+		}
+
 		$getimagesize = @getimagesize($originalFile);
 
 		if (!$getimagesize) {
@@ -186,7 +190,7 @@ class Image {
 				}
 
 				// crop X
-				$x = ($this->originalWidth - ($this->originalHeight * $requestedAspect)) / 2;
+				$x = (floatval($this->originalWidth) - ($this->originalHeight * $requestedAspect)) / 2.0;
 				$y = 0;
 			} else {
 				if ($this->requestedHeight < $this->originalHeight) {
@@ -204,7 +208,7 @@ class Image {
 
 				// crop X
 				$x = 0;
-				$y = ($this->originalHeight - ($this->originalWidth / $requestedAspect)) / 2;
+				$y = (floatval($this->originalHeight) - ($this->originalWidth / $requestedAspect)) / 2.0;
 			}
 		} else {
 			// No cropping
@@ -285,8 +289,8 @@ class Image {
 			$this->cropY,
 			$this->width,
 			$this->height,
-			(int) round($this->originalWidth - (2 * $this->cropX)),
-			(int) round($this->originalHeight - (2 * $this->cropY))
+			(int) round($this->originalWidth - floatval(2 * $this->cropX)),
+			(int) round($this->originalHeight - floatval(2 * $this->cropY))
 		);
 
 		Debug::log($this, 'Saving "' . $this->fileFullPath . '"');

@@ -86,7 +86,6 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 
 			// Get pages.
 			$pages = $this->Automad->Pagelist->getPages();
-			Debug::log($pages, 'Foreach in pagelist loop');
 
 			// Shelve context page and pagelist config.
 			$contextShelf = $Context->get();

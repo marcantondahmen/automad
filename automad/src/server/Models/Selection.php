@@ -157,7 +157,8 @@ class Selection {
 
 				if ($FileResult->url) {
 					$Page = $this->selection[$FileResult->url];
-					$Page->set(Fields::SEARCH_CONTEXT, implode(' ... ', $context));
+					$Page->set(Fields::SEARCH_RESULTS_CONTEXT, implode(' ... ', $context));
+					$Page->set(Fields::SEARCH_RESULTS_COUNT, $FileResult->count);
 					$filtered[$FileResult->url] = $Page;
 				}
 			}

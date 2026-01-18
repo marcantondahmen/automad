@@ -74,7 +74,7 @@ class CacheController {
 		$tempDir = FileSystem::purgeCache();
 
 		if ($tempDir) {
-			Debug::log($tempDir, 'temp directory');
+			Debug::log($tempDir, 'Temp directory');
 
 			return $Response->setSuccess(Text::get('cachePurgedSuccess'));
 		}

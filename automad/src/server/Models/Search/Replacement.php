@@ -153,7 +153,6 @@ class Replacement {
 	 * @return array the processed data array
 	 */
 	private function replaceInData(array $data, array $fields): array {
-		Debug::log($data);
 		foreach ($fields as $field) {
 			if (str_starts_with($field, '+') && is_array($data[$field])) {
 				$data[$field]['blocks'] = $this->replaceInBlocksRecursively($data[$field]['blocks']);

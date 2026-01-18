@@ -3,18 +3,39 @@
 namespace Automad\Console;
 
 use Automad\Console\Commands\ConfigSet;
+use Automad\Console\Commands\LogPath;
 use Automad\Console\Commands\UserCreate;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Console\ArgumentCollection
- */
 class ArgumentCollectionTest extends TestCase {
-	public function dataForTestParseArgvIsEqual() {
+	public static function dataForTestIsInArgvIsEqual() {
+		return array(
+			array(
+				LogPath::class,
+				array('automad/console', 'log:path', '--help', '--arg', 'value'),
+				'help',
+				true,
+			),
+			array(
+				LogPath::class,
+				array('automad/console', 'log:path', '--help', '--not-in-collection', 'value', '--flag'),
+				'not-in-collection',
+				false, // Return false for args that are not in the ArgumentCollection.
+			),
+			array(
+				ConfigSet::class,
+				array('automad/console', 'config:set', '--key', 'AM_KEY', '--flag', '--value', 'value'),
+				'help',
+				false,
+			)
+		);
+	}
+	public static function dataForTestParseArgvIsEqual() {
 		return array(
 			array(
 				ConfigSet::class,
-				array('automad/console', 'config:set', '--key', 'AM_KEY', '--value', 'value'),
+				array('automad/console', 'config:set', '--test', '--key', 'AM_KEY', '--value', 'value'),
 				array('key=AM_KEY', 'value=value'),
 				true
 			),
@@ -26,14 +47,14 @@ class ArgumentCollectionTest extends TestCase {
 			),
 			array(
 				UserCreate::class,
-				array('automad/console', 'user:create', '--email', 'test@test.local'),
+				array('automad/console', 'user:create', '--invalid', '--email', 'test@test.local'),
 				array('email=test@test.local', 'username=', 'password='),
 				true
 			)
 		);
 	}
 
-	public function dataForTestValidateArgvIsEqual() {
+	public static function dataForTestValidateArgvIsEqual() {
 		return array(
 			array(
 				ConfigSet::class,
@@ -53,14 +74,39 @@ class ArgumentCollectionTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestParseArgvIsEqual
-	 * @testdox parseArgv($argv) equals $expected
-	 * @param string $cls
-	 * @param array $argv
-	 * @param array $expected
-	 * @param bool $expectedSuccess
-	 */
+	public static function dataForTestValueIsSame() {
+		return array(
+			array(
+				ConfigSet::class,
+				array('automad/console', 'config:set', '--key', 'AM_KEY', '--value', 'value'),
+				'key',
+				'AM_KEY'
+			),
+			array(
+				LogPath::class,
+				array('automad/console', 'log:path', '--help'),
+				'help',
+				''
+			),
+			array(
+				LogPath::class,
+				array('automad/console', 'log:path'),
+				'help',
+				''
+			),
+		);
+	}
+
+	#[DataProvider('dataForTestIsInArgvIsEqual')]
+	public function testIsInArgvIsEqual($cls, $argv, $arg, $expected) {
+		$command = new $cls();
+		$command->ArgumentCollection->parseArgv($argv);
+
+		/** @disregard */
+		$this->assertSame($command->ArgumentCollection->isInArgv($arg), $expected);
+	}
+
+	#[DataProvider('dataForTestParseArgvIsEqual')]
 	public function testParseArgvIsEqual($cls, $argv, $expected, $expectedSuccess) {
 		$command = new $cls();
 
@@ -79,13 +125,7 @@ class ArgumentCollectionTest extends TestCase {
 		$this->assertEquals($success, $expectedSuccess);
 	}
 
-	/**
-	 * @dataProvider dataForTestValidateArgvIsEqual
-	 * @testdox validateArgv($argv) equals $expected
-	 * @param string $cls
-	 * @param array $argv
-	 * @param bool $expected
-	 */
+	#[DataProvider('dataForTestValidateArgvIsEqual')]
 	public function testValidateArgvIsEqual($cls, $argv, $expected) {
 		$command = new $cls();
 
@@ -95,5 +135,14 @@ class ArgumentCollectionTest extends TestCase {
 		$this->assertEquals($command->ArgumentCollection->validateArgv($argv), $expected);
 
 		ob_end_clean();
+	}
+
+	#[DataProvider('dataForTestValueIsSame')]
+	public function testValueIsSame($cls, $argv, $arg, $expected) {
+		$command = new $cls();
+		$command->ArgumentCollection->parseArgv($argv);
+
+		/** @disregard */
+		$this->assertSame($command->ArgumentCollection->value($arg), $expected);
 	}
 }

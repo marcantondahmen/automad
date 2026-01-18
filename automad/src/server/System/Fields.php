@@ -104,7 +104,8 @@ class Fields {
 	const PATH = ':path';
 	const PRIVATE = 'private';
 	const PUBLICATION_STATE = ':publicationState';
-	const SEARCH_CONTEXT = ':searchContext';
+	const SEARCH_RESULTS_CONTEXT = ':searchResultsContext';
+	const SEARCH_RESULTS_COUNT = ':searchResultsCount';
 	const SITENAME = 'sitename';
 	const SLUG = 'slug';
 	const SYNTAX_THEME = 'syntaxTheme';

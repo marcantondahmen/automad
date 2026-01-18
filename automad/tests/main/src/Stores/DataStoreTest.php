@@ -6,9 +6,6 @@ use Automad\Core\PublicationState;
 use Automad\System\Fields;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Stores\DataStore
- */
 class DataStoreTest extends TestCase {
 	private $bak =  AM_BASE_DIR . AM_DIR_SHARED . '/data.bak';
 
@@ -27,9 +24,6 @@ class DataStoreTest extends TestCase {
 		rename($this->bak, $this->file);
 	}
 
-	/**
-	 * @testdox Test shared data store
-	 */
 	public function testSharedDataStoreIsEqual() {
 		$DataStore = new DataStore();
 		$data = $DataStore->getState(PublicationState::DRAFT);

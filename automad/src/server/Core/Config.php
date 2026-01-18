@@ -55,6 +55,9 @@ class Config {
 	const ENV_VARS = array(
 		'AM_ALLOWED_FILE_TYPES',
 		'AM_DEBUG_ENABLED',
+		'AM_DEBUG_BROWSER',
+		'AM_DEBUG_LOG_PATH',
+		'AM_DEBUG_LOG_MAX_SIZE',
 		'AM_CACHE_ENABLED',
 		'AM_CACHE_MONITOR_DELAY',
 		'AM_CACHE_LIFETIME',
@@ -149,8 +152,16 @@ class Config {
 	 * Define default values for all constants that are not overriden.
 	 */
 	private static function fromDefaults(): void {
+		// First define permsissions and temp directory since they are required for logging.
+		self::set('AM_PERM_DIR', 0755);
+		self::set('AM_PERM_FILE', 0644);
+		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
+
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);
+		self::set('AM_DEBUG_BROWSER', false);
+		self::set('AM_DEBUG_LOG_PATH', AM_DIR_TMP . '/debug_log');
+		self::set('AM_DEBUG_LOG_MAX_SIZE', 10000);
 
 		// The server protocol, port and name.
 		self::set('AM_SERVER', Server::getHost());
@@ -175,10 +186,6 @@ class Config {
 		// An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
 		self::set('AM_BASE_SITEMAP', '');
 
-		// PERMISSIONS
-		self::set('AM_PERM_DIR', 0755);
-		self::set('AM_PERM_FILE', 0644);
-
 		// Session cookie name salt that can be used to trigger a sign-out-all.
 		self::set('AM_SESSION_COOKIE_SALT', '');
 
@@ -188,7 +195,6 @@ class Config {
 		self::set('AM_DIR_SHARED', '/shared');
 		self::set('AM_DIR_PACKAGES', '/packages');
 		self::set('AM_DIR_CACHE', '/cache');
-		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE

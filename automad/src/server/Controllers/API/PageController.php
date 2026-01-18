@@ -178,7 +178,10 @@ class PageController {
 			$supportedFields
 		);
 
-		$unusedFields = array_diff($data, $fields);
+		$unusedKeys = array_diff(array_keys($data), array_keys($fields));
+		$unusedFields = array_intersect_key($data, array_fill_keys($unusedKeys, ''));
+
+		Debug::log($unusedFields, 'Unused data');
 
 		return $Response->setData(
 			array(
@@ -352,8 +355,8 @@ class PageController {
 		);
 
 		$Response->setRedirect(Page::dashboardUrlByPath($newPagePath));
-		Debug::log($Page->path, 'page');
-		Debug::log($dest->path, 'destination');
+		Debug::log($Page->path, 'Page');
+		Debug::log($dest->path, 'Destination');
 
 		Cache::clear();
 

@@ -5,17 +5,18 @@ namespace Automad\Engine;
 use Automad\App;
 use Automad\Core\Session;
 use Automad\Test\Mock;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\View
- */
+#[RunTestsInSeparateProcesses]
 class ViewTest extends TestCase {
-	public function dataForTestInPageRenderIsEqual() {
+	public static function dataForTestInPageRenderIsEqual() {
 		$data = array();
-		$metaTags = $this->getMetaTags();
-		$assets = $this->getAssets();
-		$custom = $this->getCustomizations();
+		$metaTags = self::getMetaTags();
+		$assets = self::getAssets();
+		$custom = self::getCustomizations();
 		$pagesDir = AM_DIR_PAGES;
 		$csrf = Session::getCsrfToken();
 		$dock = <<< HTML
@@ -83,11 +84,11 @@ class ViewTest extends TestCase {
 		return $data;
 	}
 
-	public function dataForTestRenderIsEqual() {
+	public static function dataForTestRenderIsEqual() {
 		$data = array();
-		$metaTags = $this->getMetaTags();
-		$assets = $this->getAssets();
-		$custom = $this->getCustomizations();
+		$metaTags = self::getMetaTags();
+		$assets = self::getAssets();
+		$custom = self::getCustomizations();
 		$pagesDir = AM_DIR_PAGES;
 
 		$templates = array(
@@ -239,13 +240,8 @@ class ViewTest extends TestCase {
 		return $data;
 	}
 
-	/**
-	 * @dataProvider dataForTestInPageRenderIsEqual
-	 * @testdox render $template: $expected
-	 * @runInSeparateProcess
-	 * @param mixed $template
-	 * @param mixed $expected
-	 */
+	#[PreserveGlobalState(true)]
+	#[DataProvider('dataForTestInPageRenderIsEqual')]
 	public function testInPageRenderIsEqual($template, $expected) {
 		$_SESSION['username'] = 'test';
 
@@ -260,13 +256,7 @@ class ViewTest extends TestCase {
 		$this->assertEquals($expected, $rendered);
 	}
 
-	/**
-	 * @dataProvider dataForTestRenderIsEqual
-	 * @testdox render $template: $expected
-	 * @runInSeparateProcess
-	 * @param mixed $template
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestRenderIsEqual')]
 	public function testRenderIsEqual($template, $expected) {
 		$Mock = new Mock();
 		$View = new View($Mock->createAutomad($template));
@@ -277,7 +267,7 @@ class ViewTest extends TestCase {
 		$this->assertEquals($expected, $rendered);
 	}
 
-	private function getAssets(): object {
+	private static function getAssets(): object {
 		$asset = function (string $file): string {
 			return $file . '?m=' . filemtime(AM_BASE_DIR . $file);
 		};
@@ -296,14 +286,14 @@ class ViewTest extends TestCase {
 		);
 	}
 
-	private function getCustomizations(): object {
+	private static function getCustomizations(): object {
 		return (object) array(
 			'head' => '<title>html head</title><script>javascript head</script><style>custom css</style>',
 			'bodyEnd' => '<p>html body end</p><script>javascript body end</script>'
 		);
 	}
 
-	private function getMetaTags(): string {
+	private static function getMetaTags(): string {
 		return '<meta name="Generator" content="Automad ' . App::VERSION . '">' .
 			'<link rel="canonical" href="' . AM_SERVER . AM_BASE_INDEX . AM_REQUEST . '">' .
 			'<meta charset="utf-8">' .

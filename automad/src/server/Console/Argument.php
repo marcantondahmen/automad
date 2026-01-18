@@ -52,6 +52,12 @@ class Argument {
 	public readonly string $description;
 
 	/**
+	 * True if argument is used.
+	 * This can be used to identify flags that don't have a value.
+	 */
+	public bool $isInArgv;
+
+	/**
 	 * The argument name.
 	 */
 	public readonly string $name;
@@ -78,5 +84,6 @@ class Argument {
 		$this->description = $description;
 		$this->required = $required;
 		$this->value = '';
+		$this->isInArgv = false;
 	}
 }

@@ -2,13 +2,11 @@
 
 namespace Automad\Engine;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\PatternAssembly
- */
 class PatternAssemblyTest extends TestCase {
-	public function dataForTestCsvIsSame() {
+	public static function dataForTestCsvIsSame() {
 		return array(
 			array(
 				'"String", 10, @{ var | function (parameter, @{ var }) }',
@@ -36,7 +34,7 @@ class PatternAssemblyTest extends TestCase {
 		);
 	}
 
-	public function dataForTestExpressionHasArraySubset() {
+	public static function dataForTestExpressionHasArraySubset() {
 		return array(
 			array(
 				'@{ var } > 5',
@@ -66,7 +64,7 @@ class PatternAssemblyTest extends TestCase {
 		);
 	}
 
-	public function dataForTestKeyValueHasArraySubset() {
+	public static function dataForTestKeyValueHasArraySubset() {
 		return array(
 			array(
 				'{ "key1": false, key2: @{ var | function ("param") }, key3: "\"Quoted\" Text" }',
@@ -96,7 +94,7 @@ class PatternAssemblyTest extends TestCase {
 		);
 	}
 
-	public function dataForTestMarkupHasArraySubset() {
+	public static function dataForTestMarkupHasArraySubset() {
 		return array(
 			array(
 				'<@ path/to/file.php @>',
@@ -159,7 +157,7 @@ class PatternAssemblyTest extends TestCase {
 		);
 	}
 
-	public function dataForTestPipeHasArraySubset() {
+	public static function dataForTestPipeHasArraySubset() {
 		return array(
 			array(
 				'| function (boolean, "string", 10, @{ var | sanitize }) | +5',
@@ -178,7 +176,7 @@ class PatternAssemblyTest extends TestCase {
 		);
 	}
 
-	public function dataForTestVariableHasArraySubset() {
+	public static function dataForTestVariableHasArraySubset() {
 		return array(
 			array(
 				'@{ variable | 100 }',
@@ -199,12 +197,7 @@ class PatternAssemblyTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestCsvIsSame
-	 * @testdox csv() matches: $str
-	 * @param mixed $str
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestCsvIsSame')]
 	public function testCsvIsSame($str, $expected) {
 		$result = array();
 
@@ -220,13 +213,7 @@ class PatternAssemblyTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider dataForTestExpressionHasArraySubset
-	 * @testdox expression("$prefix") matches: $str
-	 * @param mixed $str
-	 * @param mixed $prefix
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestExpressionHasArraySubset')]
 	public function testExpressionHasArraySubset($str, $prefix, $expected) {
 		preg_match_all('/' . PatternAssembly::expression($prefix) . '/', $str, $matches, PREG_SET_ORDER);
 
@@ -238,12 +225,7 @@ class PatternAssemblyTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider dataForTestKeyValueHasArraySubset
-	 * @testdox keyValue() matches: $str
-	 * @param mixed $str
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestKeyValueHasArraySubset')]
 	public function testKeyValueHasArraySubset($str, $expected) {
 		preg_match_all('/' . PatternAssembly::keyValue() . '/is', $str, $matches, PREG_SET_ORDER);
 
@@ -255,13 +237,7 @@ class PatternAssemblyTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider dataForTestMarkupHasArraySubset
-	 * @testdox markup() matches: $str
-	 * @param mixed $str
-	 * @param mixed $expected
-	 * @param mixed $prefix
-	 */
+	#[DataProvider('dataForTestMarkupHasArraySubset')]
 	public function testMarkupHasArraySubset($str, $expected) {
 		preg_match_all('/' . PatternAssembly::template() . '/is', $str, $matches, PREG_SET_ORDER);
 
@@ -273,13 +249,7 @@ class PatternAssemblyTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider dataForTestPipeHasArraySubset
-	 * @testdox pipe("$prefix") matches: $str
-	 * @param mixed $str
-	 * @param mixed $prefix
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestPipeHasArraySubset')]
 	public function testPipeHasArraySubset($str, $prefix, $expected) {
 		preg_match_all('/' . PatternAssembly::pipe($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
 
@@ -291,13 +261,7 @@ class PatternAssemblyTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider dataForTestVariableHasArraySubset
-	 * @testdox variable("$prefix") matches: $str
-	 * @param mixed $str
-	 * @param mixed $prefix
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestVariableHasArraySubset')]
 	public function testVariableHasArraySubset($str, $prefix, $expected) {
 		preg_match_all('/' . PatternAssembly::variable($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
 

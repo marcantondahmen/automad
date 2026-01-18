@@ -38,7 +38,6 @@ namespace Automad\Models;
 
 use Automad\API\RequestHandler;
 use Automad\Core\Cache;
-use Automad\Core\Debug;
 use Automad\Core\Error;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
@@ -79,8 +78,6 @@ class Shared {
 			$defaults,
 			$DataStore->getState(empty(Session::getUsername())) ?? array()
 		);
-
-		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
 		// Check whether there is a theme defined in the Shared object data.
 		if (!$this->get(Fields::THEME) && strpos(AM_REQUEST, RequestHandler::API_BASE) !== 0) {

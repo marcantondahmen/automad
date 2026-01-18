@@ -2,13 +2,11 @@
 
 namespace Automad\Core;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Core\Str
- */
 class StrTest extends TestCase {
-	public function dataForTestDateFormatEqual() {
+	public static function dataForTestDateFormatEqual() {
 		return array(
 			array('2025-04-05T14:39:57+00:00', 'l, j. F Y', 'de', 'Samstag, 5. April 2025'),
 			array('2025-04-05T14:39:57+00:00', 'l, j. F Y', 'fr', 'samedi, 5. avril 2025'),
@@ -19,14 +17,14 @@ class StrTest extends TestCase {
 		);
 	}
 
-	public function dataForTestDefIsEqual() {
+	public static function dataForTestDefIsEqual() {
 		return array(
 			array('', 'Some string.', 'Some string.'),
 			array('Not empty.', 'Some string.', 'Not empty.')
 		);
 	}
 
-	public function dataForTestFindFirstImageIsEqual() {
+	public static function dataForTestFindFirstImageIsEqual() {
 		return array(
 			array(<<<HTML
 				Test
@@ -59,7 +57,7 @@ class StrTest extends TestCase {
 		);
 	}
 
-	public function dataForTestSanitizeIsEqual() {
+	public static function dataForTestSanitizeIsEqual() {
 		return array(
 			array('Some string.', true, 100, 'some-string'),
 			array('Some very long sentence, with a comma.', true, 10, 'some-very'),
@@ -76,7 +74,7 @@ class StrTest extends TestCase {
 		);
 	}
 
-	public function dataForTestShortenIsEqual() {
+	public static function dataForTestShortenIsEqual() {
 		return array(
 			array('Some long string.', 3, ' ...', 'Som ...'),
 			array('Some long string.', 8, ' ...', 'Some ...'),
@@ -87,116 +85,67 @@ class StrTest extends TestCase {
 		);
 	}
 
-	public function dataForTestStripEndIsEqual() {
+	public static function dataForTestStripEndIsEqual() {
 		return array(
 			array('some test test test', 'test', 'some test test ')
 		);
 	}
 
-	public function dataForTestStripStartIsEqual() {
+	public static function dataForTestStripStartIsEqual() {
 		return array(
 			array('test test test string', 'test', ' test test string')
 		);
 	}
 
-	public function dataForTestStripTagsIsEqual() {
+	public static function dataForTestStripTagsIsEqual() {
 		return array(
 			array('	<div>Test</div>', 'Test')
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestDateFormatEqual
-	 * @testdox dateFormat($date, $format, $locale) equals "$expected"
-	 * @param mixed $date
-	 * @param mixed $format
-	 * @param mixed $locale
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestDateFormatEqual')]
 	public function testDateFormatIsEqual($date, $format, $locale, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::dateFormat($date, $format, $locale), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestDefIsEqual
-	 * @testdox def("$str", "$defaultValue") equals "$expected"
-	 * @param mixed $str
-	 * @param mixed $defaultValue
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestDefIsEqual')]
 	public function testDefIsEqual($str, $defaultValue, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::def($str, $defaultValue), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestFindFirstImageIsEqual
-	 * @testdox findFirstImage($str) equals "$expected"
-	 * @param mixed $str
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestFindFirstImageIsEqual')]
 	public function testFindFirstImageIsEqual($str, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::findFirstImage($str), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestSanitizeIsEqual
-	 * @testdox sanitize("$str", $removeDots, $maxChars) equals "$expected"
-	 * @param mixed $str
-	 * @param mixed $removeDots
-	 * @param mixed $maxChars
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestSanitizeIsEqual')]
 	public function testSanitizeIsEqual($str, $removeDots, $maxChars, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::sanitize($str, $removeDots, $maxChars), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestShortenIsEqual
-	 * @testdox shorten("$str", $maxChars, "$ellipsis") equals "$expected"
-	 * @param mixed $str
-	 * @param mixed $maxChars
-	 * @param mixed $ellipsis
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestShortenIsEqual')]
 	public function testShortenIsEqual($str, $maxChars, $ellipsis, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::shorten($str, $maxChars, $ellipsis), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestStripEndIsEqual
-	 * @testdox stripEnd("$str", "$end") equals "$expected"
-	 * @param mixed $str
-	 * @param mixed $end
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestStripEndIsEqual')]
 	public function testStripEndIsEqual($str, $end, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::stripEnd($str, $end), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestStripStartIsEqual
-	 * @testdox stripStart("$str", "$start") equals "$expected"
-	 * @param mixed $str
-	 * @param mixed $start
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestStripStartIsEqual')]
 	public function testStripStartIsEqual($str, $start, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::stripStart($str, $start), $expected);
 	}
 
-	/**
-	 * @dataProvider dataForTestStripTagsIsEqual
-	 * @testdox stripTags("$str") equals "$expected"
-	 * @param mixed $str
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestStripTagsIsEqual')]
 	public function testStripTagsIsEqual($str, $expected) {
 		/** @disregard */
 		$this->assertEquals(Str::stripTags($str), $expected);

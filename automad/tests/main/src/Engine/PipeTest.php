@@ -2,13 +2,11 @@
 
 namespace Automad\Engine;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\Pipe
- */
 class PipeTest extends TestCase {
-	public function dataForTestProcessIsEqual() {
+	public static function dataForTestProcessIsEqual() {
 		return array(
 			array(
 				'',
@@ -45,12 +43,7 @@ class PipeTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestProcessIsEqual
-	 * @param mixed $value
-	 * @param mixed $functions
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestProcessIsEqual')]
 	public function testProcessIsEqual($value, $functions, $expected) {
 		/** @disregard */
 		$this->assertEquals(Pipe::process($value, $functions), $expected);

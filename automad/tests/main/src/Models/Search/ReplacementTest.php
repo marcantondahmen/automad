@@ -3,13 +3,11 @@
 namespace Automad\Models\Search;
 
 use Automad\Test\Data;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Models\Search\Replacement
- */
 class ReplacementTest extends TestCase {
-	public function dataForTestReplaceInDataIsSame() {
+	public static function dataForTestReplaceInDataIsSame() {
 		return array(
 			// Blocks, no regex, not case sensitive.
 			array(
@@ -74,22 +72,11 @@ class ReplacementTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestReplaceInDataIsSame
-	 * @testdox replaceInData()
-	 * @param mixed $searchValue
-	 * @param mixed $replaceValue
-	 * @param mixed $isRegex
-	 * @param mixed $isCaseSensitive
-	 * @param mixed $keys
-	 * @param mixed $data
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestReplaceInDataIsSame')]
 	public function testReplaceInDataIsSame($searchValue, $replaceValue, $isRegex, $isCaseSensitive, $keys, $data, $expected) {
 		$ReplacementReflection = new \ReflectionClass(Replacement::class);
 
 		$replaceInData = $ReplacementReflection->getMethod('replaceInData');
-		$replaceInData->setAccessible(true);
 
 		$Replacement = new Replacement(
 			$searchValue,

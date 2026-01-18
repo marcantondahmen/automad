@@ -85,7 +85,6 @@ class Fetch {
 			$success = false;
 		}
 
-		curl_close($curl);
 		fclose($fp);
 
 		return $success;
@@ -123,8 +122,6 @@ class Fetch {
 		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl) && is_string($output)) {
 			$data = $output;
 		}
-
-		curl_close($curl);
 
 		return $data;
 	}

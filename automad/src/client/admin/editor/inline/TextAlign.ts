@@ -269,7 +269,7 @@ export class TextAlignCenterInline extends BaseTextAlignInline {
 	 * @static
 	 */
 	static get title(): string {
-		return App.text('alignLeft');
+		return App.text('alignCenter');
 	}
 }
 
@@ -285,6 +285,6 @@ export class TextAlignRightInline extends BaseTextAlignInline {
 	 * @static
 	 */
 	static get title(): string {
-		return App.text('alignLeft');
+		return App.text('alignRight');
 	}
 }

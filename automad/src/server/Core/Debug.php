@@ -49,6 +49,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Debug {
 	const DIR_LOGS = '/logs';
+	const LEVEL_LOG = 'log';
+	const LEVEL_WARN = 'warn';
+
+	/**
+	 * This will be true if logging and browser logging are enabled.
+	 */
+	public static bool $browserIsEnabled = false;
 
 	/**
 	 * Log buffer.
@@ -61,9 +68,40 @@ class Debug {
 	private static int $index = 0;
 
 	/**
+	 * This will be set to true if logging is enabled and there is an actual request.
+	 */
+	private static bool $isEnabled = false;
+
+	/**
 	 * Timestamp when script started.
 	 */
 	private static ?float $time = null;
+
+	/**
+	 * Enable full error reporting, when debugging is enabled.
+	 */
+	public static function setup(): void {
+		self::$isEnabled = AM_DEBUG_ENABLED && !defined('STDIN');
+		self::$browserIsEnabled = self::$isEnabled && AM_DEBUG_BROWSER;
+
+		ini_set('error_log', AM_DEBUG_LOG_PATH);
+		ini_set('ignore_repeated_errors', 1);
+		ini_set('display_errors', '0');
+		ini_set('log_errors', 1);
+
+		if (self::$isEnabled) {
+			error_reporting(E_ALL);
+
+			if (!file_exists(dirname(AM_DEBUG_LOG_PATH))) {
+				mkdir(dirname(AM_DEBUG_LOG_PATH), 0755, true);
+			}
+
+			self::timerStart();
+			self::log(AM_DIR_TMP, 'AM_DIR_TMP');
+		} else {
+			error_reporting(E_ERROR);
+		}
+	}
 
 	/**
 	 * Stop timer, calculate execution time, get user & server constants
@@ -76,43 +114,23 @@ class Debug {
 			return '';
 		}
 
-		// Stop timer.
-		self::timerStop();
+		$html = '<script type="text/javascript">';
 
-		// Memory usage.
-		self::memory();
-
-		// Disk usage.
-		self::diskUsage();
-
-		// Get last error.
-		self::log(error_get_last(), 'Last error');
-
-		$html = '<script type="text/javascript">' . "\n";
-
-		foreach (self::$buffer as $key => $value) {
-			$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');' . "\n";
+		if (self::$browserIsEnabled) {
+			foreach (self::$buffer as $key => $value) {
+				$html .= 'console.log(' . strval(json_encode(array($key => $value))) . ');';
+			}
+		} else {
+			$html .= 'console.warn("Debugging is enabled. Enable log forwarding in the system settings in order inspect the debug log inside the browser console.");';
 		}
 
-		$html .= '</script>' . "\n";
+		$html .= '</script>';
 
 		return $html;
 	}
 
 	/**
-	 * Enable full error reporting, when debugging is enabled.
-	 */
-	public static function errorReporting(): void {
-		if (AM_DEBUG_ENABLED) {
-			error_reporting(E_ALL);
-			ini_set('display_errors', '1');
-		} else {
-			error_reporting(E_ERROR);
-		}
-	}
-
-	/**
-	 * Return the buffer array.
+	 * Return the buffer array, used in API calls.
 	 *
 	 * @return array The log buffer array
 	 */
@@ -121,63 +139,80 @@ class Debug {
 	}
 
 	/**
-	 * Write log and configuration dump to json files.
+	 * Log a debug entry.
+	 *
+	 * @param mixed $element
+	 * @param string $description
 	 */
-	public static function json(): void {
-		if (!AM_DEBUG_ENABLED) {
-			return;
-		}
-
-		$file = AM_DIR_TMP . self::DIR_LOGS . AM_REQUEST . '/log.json';
-
-		$definedConstants = get_defined_constants(true);
-		/** @var array<string, string> */
-		$userConstants = $definedConstants['user'];
-
-		ksort($userConstants);
-
-		FileSystem::writeJson($file, array_merge(self::$buffer, array('config' => $userConstants, 'server' => $_SERVER)));
+	public static function log($element, string $description = ''): void {
+		self::addEntry($element, $description, self::LEVEL_LOG);
 	}
 
 	/**
-	 * Log any kind of variable and append it to the $buffer array.
-	 *
-	 * @param mixed $element (The actual content to log)
-	 * @param string $description (Basic info, class, method etc.)
+	 * Run after rendering a page.
 	 */
-	public static function log($element, string $description = ''): void {
-		if (!AM_DEBUG_ENABLED) {
+	public static function postRender(): void {
+		if (!self::$isEnabled) {
 			return;
 		}
 
-		// Start timer. self::timerStart() only saves the time on the first call.
-		self::timerStart();
+		self::memoryUsage();
+		self::diskUsage();
+		self::timerStop();
+		self::reduceLogFile();
+	}
+
+	/**
+	 * Log a warning.
+	 *
+	 * @param mixed $element
+	 * @param string $description
+	 */
+	public static function warn($element, string $description = ''): void {
+		self::addEntry($element, $description, self::LEVEL_WARN);
+	}
+
+	/**
+	 * And an entry to the log file an optionally to the console buffer depending on the level and whether log forwarding is enabled or not.
+	 *
+	 * @param mixed $element (The actual content to log)
+	 * @param string $description (Basic info, class, method etc.)
+	 * @param 'log'|'warn' $level
+	 */
+	private static function addEntry($element, string $description, string $level): void {
+		if (!self::$isEnabled && $level !== self::LEVEL_WARN) {
+			return;
+		}
 
 		// Get backtrace.
 		$backtraceAll = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
 
 		// Remove all backtrace items without any class defined (standard PHP functions) and the items with the functions Debug::log() and {closure}
 		// To get a clean array with only the relevant Automad methods in the backtrace.
-		$ignoreFunctions = array('log', __NAMESPACE__ . '\{closure}');
+		$ignoreFunctions = array('addEntry', 'log', 'warn', __NAMESPACE__ . '\{closure}');
 		$backtrace = array_filter($backtraceAll, function ($item) use ($ignoreFunctions) {
-			return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions));
+			return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions) && !preg_match('/Error/', $item['class']));
 		});
 
 		// If class, type & method exist, use them to build the description prefix. Else use just the file name from the full backtrace.
 		if (count($backtrace) > 0) {
 			// When the backtrace array got reduced to the actually relevant items in the backtrace, take the first element (the one calling Debug::log()).
 			$backtrace = array_shift($backtrace);
-			$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '(): ';
+			$prefix = basename(str_replace('\\', '/', $backtrace['class'] ?? '')) . ($backtrace['type'] ?? '') . $backtrace['function'] . '()';
 		} else {
-			$prefix = basename($backtraceAll[0]['file'] ?? '') . ': ';
+			$prefix = basename($backtraceAll[0]['file'] ?? '');
 		}
 
-		// Prepend the method to $description.
-		$description = self::$index . ': ' . trim($prefix . $description, ': ');
+		$request = defined('AM_REQUEST') ? AM_REQUEST . ' => ' : '';
+		$elementStr = is_string($element) ? $element : strval(json_encode($element, JSON_UNESCAPED_SLASHES));
 
-		self::$buffer[$description] = $element;
+		error_log($request . join(': ', array_filter(array($prefix, $description, $elementStr), 'strlen')));
 
-		self::$index++;
+		if (self::$browserIsEnabled) {
+			$key = self::$index . ': ' . trim($prefix . ': ' . $description, ': ');
+			self::$buffer[$key] = $element;
+			self::$index++;
+		}
 	}
 
 	/**
@@ -190,28 +225,39 @@ class Debug {
 	/**
 	 * Provide info about memory usage.
 	 */
-	private static function memory(): void {
-		self::log(round((memory_get_peak_usage(true) / 1048576), 2), 'Peak memory useage (M)');
+	private static function memoryUsage(): void {
+		self::log(round((memory_get_peak_usage(true) / 1048576), 2), 'Peak memory usage (M)');
+	}
+
+	/**
+	 * Keep the log file size below a given limit.
+	 */
+	private static function reduceLogFile(): void {
+		$lines = file(AM_DEBUG_LOG_PATH, FILE_IGNORE_NEW_LINES);
+
+		if ($lines === false) {
+			return;
+		}
+
+		if (count($lines) > AM_DEBUG_LOG_MAX_SIZE) {
+			$lines = array_unique($lines);
+			$lines = array_slice($lines, intval(AM_DEBUG_LOG_MAX_SIZE) * -1);
+			file_put_contents(AM_DEBUG_LOG_PATH, implode(PHP_EOL, $lines) . PHP_EOL, LOCK_EX);
+		}
 	}
 
 	/**
 	 * Start the timer on the first call to calculate the execution time when consoleLog() gets called.
 	 */
 	private static function timerStart(): void {
-		// Only save time on first call.
-		if (!self::$time) {
-			self::$time = microtime(true);
-			self::log(date('d. M Y, H:i:s'));
-		}
+		self::$time = microtime(true);
 	}
 
 	/**
 	 * Stop the timer and log the execution time.
 	 */
 	private static function timerStop(): void {
-		if (self::$time) {
-			$executionTime = microtime(true) - self::$time;
-			self::log(round($executionTime, 6), 'Time for execution (seconds)');
-		}
+		$executionTime = microtime(true) - self::$time;
+		self::log(round($executionTime, 6), 'Time for execution (seconds)');
 	}
 }

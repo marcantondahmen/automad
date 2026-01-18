@@ -413,12 +413,6 @@ export class FormComponent extends BaseComponent {
 			notifySuccess(success);
 		}
 
-		if (debug && debug instanceof Array) {
-			debug.forEach((item) => {
-				getLogger().log(this.api, item);
-			});
-		}
-
 		if (!error) {
 			this.disableSubmitButtons();
 			this.parentModal?.close();

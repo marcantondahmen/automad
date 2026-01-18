@@ -311,6 +311,7 @@ class Search {
 			Fields::PRIVATE,
 			Fields::TEMPLATE,
 			Fields::THEME,
+			Fields::SYNTAX_THEME,
 			Fields::URL,
 			Fields::CUSTOM_CONSENT_ACCEPT,
 			Fields::CUSTOM_CONSENT_COLOR_BACKGROUND,

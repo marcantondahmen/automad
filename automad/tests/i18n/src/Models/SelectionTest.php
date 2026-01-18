@@ -3,34 +3,27 @@
 namespace Automad\Models;
 
 use Automad\Core\Session;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Models\Selection
- */
+#[RunTestsInSeparateProcesses]
 class SelectionTest extends TestCase {
-	public function dataForTestFilterBreadcrumbsIsEqual() {
+	public static function dataForTestFilterBreadcrumbsIsEqual() {
 		return array(
 			array('en', '/en/page/subpage', array('/en', '/en/page', '/en/page/subpage')),
 			array('de', '/de/page', array('/de', '/de/page'))
 		);
 	}
 
-	public function dataForTestFilterCurrentLanguageIsEqual() {
+	public static function dataForTestFilterCurrentLanguageIsEqual() {
 		return array(
 			array('en', array('/', '/en', '/en/page', '/en/page/subpage')),
 			array('de', array('/', '/de', '/de/page'))
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestFilterBreadcrumbsIsEqual
-	 * @testdox Test filterBreadcrumbs method
-	 * @runInSeparateProcess
-	 * @param string $lang
-	 * @param string $url
-	 * @param array $expected
-	 */
+	#[DataProvider('dataForTestFilterBreadcrumbsIsEqual')]
 	public function testFilterBreadcrumbsIsEqual(string $lang, string $url, array $expected): void {
 		$_SESSION[Session::I18N_LANG] = 'en';
 
@@ -47,13 +40,7 @@ class SelectionTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestFilterCurrentLanguageIsEqual
-	 * @testdox Test filterCurrentLanguage method
-	 * @runInSeparateProcess
-	 * @param string $lang
-	 * @param array $expected
-	 */
+	#[DataProvider('dataForTestFilterCurrentLanguageIsEqual')]
 	public function testFilterCurrentLanguageIsEqual($lang, $expected): void {
 		$_SESSION[Session::I18N_LANG] = $lang;
 

@@ -158,6 +158,7 @@ import('./components/Switcher/SwitcherSection');
 import('./components/System/CacheEnable');
 import('./components/System/CacheLifetime');
 import('./components/System/CacheMonitor');
+import('./components/System/DebugBrowser');
 import('./components/System/DebugEnable');
 import('./components/System/FeedEnable');
 import('./components/System/FeedFields');

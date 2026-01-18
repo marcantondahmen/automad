@@ -156,6 +156,19 @@ html:not(.am-ui) {
 		border-radius: 0.3rem;
 	}
 
+	& pre {
+		padding: 1rem 1.5rem;
+		margin: @am-base-margin-y 0;
+		background-color: hsl(var(--am-clr-background-faded));
+		border: @am-form-border;
+		border-radius: @am-form-radius;
+
+		& > code {
+			padding: 0;
+			color: hsl(var(--am-prism-2));
+		}
+	}
+
 	& strong {
 		font-weight: 620;
 	}

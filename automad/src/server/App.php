@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class App {
-	const VERSION = '2.0.0-beta.9';
+	const VERSION = '2.0.0-beta.10';
 
 	/**
 	 * Required PHP version.
@@ -85,7 +85,7 @@ class App {
 		date_default_timezone_set(@date_default_timezone_get());
 
 		Config::init();
-		Debug::errorReporting();
+		Debug::setup();
 
 		$this->setOpenBaseDir();
 
@@ -96,8 +96,9 @@ class App {
 
 		$output = $this->render(AM_REQUEST);
 
+		Debug::postRender();
+
 		if (AM_DEBUG_ENABLED) {
-			Debug::json();
 			$output = Body::append($output, Debug::consoleLog());
 		}
 

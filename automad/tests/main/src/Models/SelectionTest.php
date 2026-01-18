@@ -5,13 +5,7 @@ namespace Automad\Models;
 use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Models\Selection
- */
 class SelectionTest extends TestCase {
-	/**
-	 * @testdox Test filterBreadcrumbs method
-	 */
 	public function testFilterBreadcrumbsIsEqual() {
 		$Mock = new Mock();
 		$Automad = $Mock->createAutomad();

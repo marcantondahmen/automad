@@ -4,13 +4,11 @@ namespace Automad\Blocks\Utils;
 
 use Automad\Core\Blocks;
 use Automad\Test\Mock;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Blocks\Utils\Attr
- */
 class AttrTest extends TestCase {
-	public function dataForTestUniqueIdsIsSame() {
+	public static function dataForTestUniqueIdsIsSame() {
 		return array(
 			array(
 				json_decode(<<< JSON
@@ -143,12 +141,7 @@ class AttrTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestUniqueIdsIsSame
-	 * @testdox test block ids to be unique
-	 * @param array $data
-	 * @param string $html
-	 */
+	#[DataProvider('dataForTestUniqueIdsIsSame')]
 	public function testUniqueIdsIsSame(array $data, string $html) {
 		$Mock = new Mock();
 

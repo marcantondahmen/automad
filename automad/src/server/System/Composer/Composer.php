@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Composer {
 	const COMPOSER_FILE = AM_BASE_DIR . '/composer.json';
-	const COMPOSER_VERSION = '2.8.6';
+	const COMPOSER_VERSION = '2.9.3';
 	const INSTALL_DIR = AM_BASE_DIR . AM_DIR_CACHE . '/composer';
 
 	/**
@@ -195,10 +195,11 @@ class Composer {
 			}
 		}
 
+		/** @var string */
 		$bufferJsonOnly = preg_replace('/^[^\{]*(\{.*\})[^\}]*$/is', '$1', $buffer) ?? '';
 		$bufferJsonOnly = preg_replace('/\s+/is', ' ', $bufferJsonOnly) ?? '';
 
-		Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
+		Debug::log(strval(round(floatval(memory_get_peak_usage()) / 1024.0 / 1024.0)) . ' mb', 'Memory used');
 		Debug::log($bufferJsonOnly, 'Buffer JSON only');
 
 		$Messenger->setData(json_decode($bufferJsonOnly, true) ?? array());

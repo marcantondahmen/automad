@@ -53,6 +53,11 @@ interface CacheSettings {
 	monitorDelay: number;
 }
 
+interface DebugSettings {
+	enabled: Enabled;
+	browser: Enabled;
+}
+
 interface FeedSettings {
 	enabled: Enabled;
 	fields: string;
@@ -75,7 +80,7 @@ interface UserSettings {
 
 export interface SystemSettings {
 	cache: CacheSettings;
-	debug: Enabled;
+	debug: DebugSettings;
 	feed: FeedSettings;
 	i18n: Enabled;
 	mail: MailConfig;

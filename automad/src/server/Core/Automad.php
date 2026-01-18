@@ -114,7 +114,7 @@ class Automad {
 		$this->Shared = $Shared;
 		$this->ComponentCollection = new ComponentCollection();
 
-		Debug::log(array('Shared' => $this->Shared, 'Pages' => $this->pages), 'New instance created');
+		Debug::log('New instance created');
 
 		$this->init();
 	}
@@ -135,7 +135,7 @@ class Automad {
 	 * Set new Context after being restored from cache.
 	 */
 	public function __wakeup(): void {
-		Debug::log(get_object_vars($this), 'Automad object was unserialized');
+		Debug::log('Automad object was unserialized');
 
 		$this->init();
 	}

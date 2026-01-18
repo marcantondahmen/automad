@@ -3,13 +3,11 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Test\Mock;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @testdox Automad\Engine\Processors\CustomizationProcessor
- */
 class CustomizationProcessorTest extends TestCase {
-	public function dataForTestAddIsEqual() {
+	public static function dataForTestAddIsEqual() {
 		return array(
 			array(
 				array(
@@ -62,12 +60,7 @@ class CustomizationProcessorTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider dataForTestAddIsEqual
-	 * @param mixed $customPage
-	 * @param mixed $customShared
-	 * @param mixed $expected
-	 */
+	#[DataProvider('dataForTestAddIsEqual')]
 	public function testAddIsEqual($customPage, $customShared, $expected) {
 		$Mock = new Mock();
 		$Automad = $Mock->createAutomad();
