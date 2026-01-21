@@ -47,10 +47,6 @@ am-layout-section {
 		padding: 0 var(--am-container-padding);
 	}
 
-	& > * + * {
-		padding-top: var(--am-flex-gap) !important;
-	}
-
 	&.am-card {
 		box-sizing: border-box;
 		overflow: hidden;
@@ -116,6 +112,12 @@ am-flex {
 		min-width: ~'min(100%, var(--am-flex-min-block-width))';
 		margin: 0;
 		padding: ~'calc(var(--am-flex-gap) * 0.5)';
+	}
+
+	// Make gaps work when a normal block with a default width
+	// is followed by an am-flex element.
+	:not(&) + & {
+		margin-top: ~'calc((var(--am-flex-gap) * -0.5) + var(--am-block-margin-top))';
 	}
 
 	& .am-block {

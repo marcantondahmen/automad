@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-beta.11](https://github.com/marcantondahmen/automad/commit/e9dfc21cd8517a2b7e7257b48e42bf1c48cbda49)
+## [v2.0.0-beta.12](https://github.com/marcantondahmen/automad/commit/c61564b33e12dfa6b2a048fec89ed9c1a56544ad)
 
-Sun, 18 Jan 2026 17:23:32 +0100
+Wed, 21 Jan 2026 22:58:44 +0100
+
+### New Features
+
+- update standard lite theme ([c61564b33](https://github.com/marcantondahmen/automad/commit/c61564b33e12dfa6b2a048fec89ed9c1a56544ad))
+
+### Bugfixes
+
+- spacing between elements with automatic width inside layout sections ([aa52563d6](https://github.com/marcantondahmen/automad/commit/aa52563d6b57dac42ae10baba345e2c6c8e6c8e0))
+
+## [v2.0.0-beta.11](https://github.com/marcantondahmen/automad/commit/d19e2e0613bafe62eb41f13b1894116aecd2f2fa)
+
+Sun, 18 Jan 2026 17:25:20 +0100
 
 ### Bugfixes
 
@@ -928,11 +940,3 @@ Tue, 19 Apr 2022 10:24:13 +0200
 ### Bugfixes
 
 - **engine**: fix type error caused by pipe extensions that may return null ([19ec92256](https://github.com/marcantondahmen/automad/commit/19ec92256bf5d02e15065af1ddb818c3117fec56))
-
-## [v1.10.8](https://github.com/marcantondahmen/automad/commit/7e4ed8f52aa6cdb8c068e53f8bb2a1335a45be56)
-
-Thu, 7 Apr 2022 20:00:07 +0200
-
-### Bugfixes
-
-- **ui**: fix installation error ([ccd4e841d](https://github.com/marcantondahmen/automad/commit/ccd4e841d165e602d3363645c9de71f9d502f952))

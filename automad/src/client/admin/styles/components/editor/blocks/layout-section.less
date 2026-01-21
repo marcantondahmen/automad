@@ -165,6 +165,16 @@
 			flex-basis: 100%;
 			flex-grow: 0;
 			min-width: ~'min(100%, var(--minBlockWidth, 8rem))';
+
+			// Make gaps work when flex elements that have a particular fractional width
+			// are followed by elements with a default width or vice versa.
+			&:not([am-width]) > * {
+				margin-block: ~'calc(var(--space) * -1)';
+			}
+
+			&:not([am-width]) + :not([am-width]) > * {
+				margin-top: 0;
+			}
 		}
 
 		& [am-width] {
