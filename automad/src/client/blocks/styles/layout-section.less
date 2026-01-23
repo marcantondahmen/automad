@@ -51,15 +51,19 @@ am-layout-section {
 		box-sizing: border-box;
 		overflow: hidden;
 		box-shadow: none;
-		padding: 0;
-
-		& > * {
-			padding: var(--am-card-padding);
-		}
+		padding: var(--am-card-padding);
 
 		& > am-stretched {
-			padding: 0;
-			margin: 0 !important;
+			--margin: ~'calc(var(--am-card-padding) * -1)';
+			margin-inline: var(--margin) !important;
+
+			&:first-child {
+				margin-top: var(--margin) !important;
+			}
+
+			&:last-child {
+				margin-bottom: var(--margin) !important;
+			}
 		}
 	}
 

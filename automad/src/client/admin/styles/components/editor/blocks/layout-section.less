@@ -169,11 +169,17 @@
 			// Make gaps work when flex elements that have a particular fractional width
 			// are followed by elements with a default width or vice versa.
 			&:not([am-width]) > * {
-				margin-block: ~'calc(var(--space) * -1)';
+				margin-top: ~'calc(var(--space) * -1)';
+				margin-bottom: ~'calc(var(--space) * -1)';
 			}
 
+			&:not([am-width]):first-child > *,
 			&:not([am-width]) + :not([am-width]) > * {
 				margin-top: 0;
+			}
+
+			&:not([am-width]):last-child > * {
+				margin-bottom: 0;
 			}
 		}
 
@@ -261,8 +267,28 @@
 				box-shadow: @am-shadow;
 			}
 
+			&--overflow-hidden > .codex-editor > .codex-editor__redactor {
+				overflow: clip;
+			}
+
 			&--card > .codex-editor > .codex-editor__redactor {
-				padding: 1rem;
+				padding: @am-bl-editor-card-padding;
+
+				& > .am-style--stretched {
+					display: flex;
+					flex-basis: auto;
+					max-width: none !important;
+					width: ~'calc(100% + 200rem)' !important;
+					margin-inline: -@am-bl-editor-card-padding !important;
+
+					&:first-child {
+						margin-top: ~'calc((@{am-bl-editor-card-padding} + @{am-bl-editor-block-padding-y}) * -1)' !important;
+					}
+
+					& > * > * > [contenteditable] {
+						padding-inline: @am-bl-editor-card-padding;
+					}
+				}
 			}
 
 			&--match-height {
@@ -285,9 +311,12 @@
 			background-blend-mode: var(--backgroundBlendMode, normal);
 			background-size: cover;
 			background-position: center center;
-			border-radius: var(--borderRadius, 0);
-			border: var(--borderWidth, 0) var(--borderStyle, none)
-				var(--borderColor, currentColor);
+
+			& > .codex-editor__redactor {
+				border-radius: var(--borderRadius, 0);
+				border: var(--borderWidth, 0) var(--borderStyle, none)
+					var(--borderColor, currentColor);
+			}
 		}
 	}
 }

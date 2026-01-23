@@ -55,16 +55,16 @@
         },
         {
             "name": "automad/standard-lite",
-            "version": "0.1.10",
+            "version": "0.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-standard-lite.git",
-                "reference": "de1e389e33188650cc753157ad3ffac6f691b077"
+                "reference": "fd2a850260ac05e640658c1ea9c137285f1fc2b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-standard-lite/zipball/de1e389e33188650cc753157ad3ffac6f691b077",
-                "reference": "de1e389e33188650cc753157ad3ffac6f691b077",
+                "url": "https://api.github.com/repos/automadcms/automad-standard-lite/zipball/fd2a850260ac05e640658c1ea9c137285f1fc2b7",
+                "reference": "fd2a850260ac05e640658c1ea9c137285f1fc2b7",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
             ],
             "support": {
                 "issues": "https://github.com/automadcms/automad-standard-lite/issues",
-                "source": "https://github.com/automadcms/automad-standard-lite/tree/0.1.10"
+                "source": "https://github.com/automadcms/automad-standard-lite/tree/0.1.11"
             },
             "funding": [
                 {
@@ -107,7 +107,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-01-21T21:55:20+00:00"
+            "time": "2026-01-23T20:15:10+00:00"
         }
     ],
     "packages-dev": [],
