@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-beta.12](https://github.com/marcantondahmen/automad/commit/c61564b33e12dfa6b2a048fec89ed9c1a56544ad)
+## [v2.0.0-beta.13](https://github.com/marcantondahmen/automad/commit/244a881ecbd62fc4b88fe13f9369775a8bef8703)
 
-Wed, 21 Jan 2026 22:58:44 +0100
+Fri, 23 Jan 2026 21:27:11 +0100
+
+### New Features
+
+- update standard lite theme ([8d8eb7067](https://github.com/marcantondahmen/automad/commit/8d8eb70671f9b81e2911f610e29904566be905fe))
+
+### Bugfixes
+
+- fix rendering of layout section content that is optimized for cards ([244a881ec](https://github.com/marcantondahmen/automad/commit/244a881ecbd62fc4b88fe13f9369775a8bef8703))
+
+## [v2.0.0-beta.12](https://github.com/marcantondahmen/automad/commit/21acc639b0e2c31b6706141af10564d47699ca16)
+
+Wed, 21 Jan 2026 23:04:31 +0100
 
 ### New Features
 
@@ -932,11 +944,3 @@ Mon, 19 Feb 2024 19:44:14 +0100
 - remove headless mode feature ([c79b377c8](https://github.com/marcantondahmen/automad/commit/c79b377c8e1dd2a815f46e7728aaa9ab7cce025b))
 - use .json instead of .txt files to store page and shared data ([96a1f184a](https://github.com/marcantondahmen/automad/commit/96a1f184ab0435c82a1a382a8c3b8de5e3a2751d))
 - use symfony/mailer for sending emails ([5efeb8e](https://github.com/marcantondahmen/automad/commit/5efeb8eb083544f7c437ea8c0540e2ea2895f0e6))
-
-## [v1.10.9](https://github.com/marcantondahmen/automad/commit/776a2d12b817bdc4eb29dbade1fc3039c9dc8b9d)
-
-Tue, 19 Apr 2022 10:24:13 +0200
-
-### Bugfixes
-
-- **engine**: fix type error caused by pipe extensions that may return null ([19ec92256](https://github.com/marcantondahmen/automad/commit/19ec92256bf5d02e15065af1ddb818c3117fec56))
