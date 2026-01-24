@@ -63,9 +63,9 @@
 
 import pkg from './package.json' with { type: 'json' };
 import esbuild from 'esbuild';
+import less from 'less';
 import postcss from 'esbuild-postcss';
 import browserSync from 'browser-sync';
-import { lessLoader } from 'esbuild-plugin-less';
 import { sassPlugin } from 'esbuild-sass-plugin';
 import { fileURLToPath } from 'node:url';
 import crypto from 'node:crypto';
@@ -76,8 +76,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const clientSrc = path.join(__dirname, 'automad/src/client');
 const outdir = path.join(__dirname, 'automad/dist/build');
 const isDev = process.argv.includes('--dev');
-const banner = `/* Automad, (c) ${pkg.author}, ${pkg.license} license */`;
 const hashPlaceholder = '@hash';
+const banner = `/* This file is part of Automad. Copyright and license info at the end. */`;
+const licenseAutomad = `
+/*!
+ * AUTOMAD
+ *
+ * Copyright (c) ${new Date().getFullYear()} ${pkg.author}
+ * https://marcdahmen.de
+ *
+ * Licensed under the ${pkg.license} license
+ */
+`;
 
 const fileHash = (buffer, length = 8) => {
 	return crypto
@@ -313,6 +323,14 @@ const hashImportsPlugin = () => {
 	};
 };
 
+const injectLicense = (path) => {
+	if (path.match(/automad/) && !path.match(/vendor/)) {
+		return licenseAutomad;
+	}
+
+	return '';
+};
+
 const minify = (source) =>
 	source
 		// Remove all single line comments in order to safely remove newlines.
@@ -326,9 +344,9 @@ const minify = (source) =>
 		// Also trim template strings.
 		.replace(/`([^`]+)`/g, (_, s) => `\`${s.trim()}\``);
 
-const tsMinifierPlugin = () => {
+const tsOnLoadPlugin = () => {
 	return {
-		name: 'ts-minifier',
+		name: 'ts-on-load',
 		setup(build) {
 			build.onLoad(
 				{ filter: /\.ts$/, namespace: 'file' },
@@ -339,8 +357,34 @@ const tsMinifierPlugin = () => {
 					);
 
 					return {
-						contents: minify(source),
+						contents: injectLicense(args.path) + minify(source),
 						loader: 'ts',
+					};
+				}
+			);
+		},
+	};
+};
+
+const lessOnLoadPlugin = () => {
+	return {
+		name: 'less-on-load',
+		setup(build) {
+			build.onLoad(
+				{ filter: /\.less$/, namespace: 'file' },
+				async (args) => {
+					const source = await fs.promises.readFile(
+						args.path,
+						'utf8'
+					);
+
+					const { css } = await less.render(source, {
+						filename: args.path,
+					});
+
+					return {
+						contents: injectLicense(args.path) + css,
+						loader: 'css',
 					};
 				}
 			);
@@ -361,7 +405,7 @@ const commonConfig = {
 		js: banner,
 		css: banner,
 	},
-	legalComments: 'inline',
+	legalComments: 'eof',
 	pure: isDev ? [] : ['console.warn'],
 	logLevel: 'info',
 	loader: {
@@ -372,13 +416,13 @@ const commonConfig = {
 	metafile: true,
 	define: { DEVELOPMENT: isDev.toString() },
 	plugins: [
-		lessLoader(),
+		lessOnLoadPlugin(),
 		sassPlugin({
 			quietDeps: true,
 			filter: /\.scss/,
 		}),
 		postcss(),
-		...(isDev ? [] : [tsMinifierPlugin()]),
+		...(isDev ? [] : [tsOnLoadPlugin()]),
 		hashImportsPlugin(),
 	],
 };
