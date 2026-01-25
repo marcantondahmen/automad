@@ -335,7 +335,7 @@ const hashImportsPlugin = () => {
  * For all files inside that the Automad src directory
  * that are not in vendor, a license comment is returned.
  */
-const injectLicense = (path) => {
+const generateLicense = (path) => {
 	if (path.match(/automad\/src\/client/) && !path.match(/vendor/)) {
 		return licenseAutomad;
 	}
@@ -376,7 +376,7 @@ const tsOnLoadPlugin = () => {
 					);
 
 					return {
-						contents: injectLicense(args.path) + minifyTs(source),
+						contents: generateLicense(args.path) + minifyTs(source),
 						loader: 'ts',
 					};
 				}
@@ -407,7 +407,7 @@ const lessOnLoadPlugin = () => {
 					});
 
 					return {
-						contents: injectLicense(args.path) + css,
+						contents: generateLicense(args.path) + css,
 						watchFiles: imports,
 						loader: 'css',
 					};
