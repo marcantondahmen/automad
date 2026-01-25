@@ -1,8 +1,17 @@
 # Changelog
 
-## [v2.0.0-beta.13](https://github.com/marcantondahmen/automad/commit/244a881ecbd62fc4b88fe13f9369775a8bef8703)
+## [v2.0.0-beta.14](https://github.com/marcantondahmen/automad/commit/8f64e4b7d7bcbba1dbfad6872f03485e964c5199)
 
-Fri, 23 Jan 2026 21:27:11 +0100
+Sun, 25 Jan 2026 19:18:57 +0100
+
+### Bugfixes
+
+- editor borders inside layout sections ([daa825178](https://github.com/marcantondahmen/automad/commit/daa8251781e531d094722bf52c737efb1fd6122d))
+- fix hidden layout toolbars of a nested layout sections inside cards with overflow hidden ([4d9d80feb](https://github.com/marcantondahmen/automad/commit/4d9d80feb3452d83f72cde531404c5da52140402))
+
+## [v2.0.0-beta.13](https://github.com/marcantondahmen/automad/commit/ef4a886501daba127911efb77888e0b28d888be9)
+
+Fri, 23 Jan 2026 21:32:48 +0100
 
 ### New Features
 
@@ -909,38 +918,3 @@ Sat, 24 Feb 2024 22:43:44 +0100
 ### Bugfixes
 
 - fix homepage links for empty base urls ([22f35c4a5](https://github.com/marcantondahmen/automad/commit/22f35c4a5ac88bcfa55c5e254061ff8e59a22423))
-
-## [v2.0.0-alpha.1](https://github.com/marcantondahmen/automad/commit/46ba17b955e9905c79a07b3673af40f1c4c30f71)
-
-Mon, 19 Feb 2024 19:44:14 +0100
-
-### Breaking Changes
-
-- **ui**: pages can be sorted and moved directly in the sidebar ([4579f83e1](https://github.com/marcantondahmen/automad/commit/4579f83e1d4bc5affb5dde7dc3a506c7e45e140f))
-- change minimum required PHP version to 8.2 ([5efeb8e](https://github.com/marcantondahmen/automad/commit/5efeb8eb083544f7c437ea8c0540e2ea2895f0e6))
-- remove headless mode feature ([c79b377c8](https://github.com/marcantondahmen/automad/commit/c79b377c8e1dd2a815f46e7728aaa9ab7cce025b))
-
-### New Features
-
-- **blocks**: add align items layout option for section blocks ([f7b7bed25](https://github.com/marcantondahmen/automad/commit/f7b7bed25119968cd8a0e67e60d633dc0052f3ae))
-- **blocks**: add block duplication tune ([e52be1a57](https://github.com/marcantondahmen/automad/commit/e52be1a57ee0e64a455880a1f07a7ebedb4ee92a))
-- **core**: add debug logging to json files ([fa2821212](https://github.com/marcantondahmen/automad/commit/fa2821212b1f77ef0927eb7292ffec3329d10481))
-- **core**: add draft and published states for pages and shared content ([d1b539d57](https://github.com/marcantondahmen/automad/commit/d1b539d5754f8438ef854a1a2c3b3564edfb886e))
-- **core**: add i18n support for multilingual sites ([b3f0bb505](https://github.com/marcantondahmen/automad/commit/b3f0bb505c71907179d920002ce47cf388ed8cf1))
-- **core**: add support for webp images ([19cc81574](https://github.com/marcantondahmen/automad/commit/19cc81574c48c8b6b4560e1acd1c78383a8f09a2))
-- **dashboard**: store translations in json files ([f3deae501](https://github.com/marcantondahmen/automad/commit/f3deae5010b53f38c75d78dd008321d0394ca508))
-- **ui**: add FileRobot image editor ([4bcf9bd52](https://github.com/marcantondahmen/automad/commit/4bcf9bd52bad5eb11eb859d99a329099cfcdbef3))
-- **ui**: add dark mode for dashboard ([da343b8f9](https://github.com/marcantondahmen/automad/commit/da343b8f9011c06db72e861bf723363c954e1d85))
-- **ui**: add field and file filter ([2ecf1c0b4](https://github.com/marcantondahmen/automad/commit/2ecf1c0b4a9a7173b3ccfdbe05d02222ed38b841))
-- **ui**: add password requirements check ([83e097103](https://github.com/marcantondahmen/automad/commit/83e097103b3cc0ac70a99e55fdb715d45ef75a3f))
-- **ui**: implement undo functionality ([053a9c3f2](https://github.com/marcantondahmen/automad/commit/053a9c3f2c54e8a494a08e79011cc4a4cfd00f4b))
-- **ui**: pages can be sorted and moved directly in the sidebar ([4579f83e1](https://github.com/marcantondahmen/automad/commit/4579f83e1d4bc5affb5dde7dc3a506c7e45e140f))
-- **ui**: remove UIkit from Composer dependencies ([93a2bb7ee](https://github.com/marcantondahmen/automad/commit/93a2bb7ee0637dd6392e1f94fe076f49d0f88eca))
-- **ui**: remove jQuery from NPM dependencies ([989b21fe5](https://github.com/marcantondahmen/automad/commit/989b21fe598fcc24d3f8383a21d2410559cebf02))
-- add ability to restore deleted pages ([c4067bac3](https://github.com/marcantondahmen/automad/commit/c4067bac3fb74ebecdb99e9dddce43495185e7a6))
-- add result context when searching for pages ([63e838e88](https://github.com/marcantondahmen/automad/commit/63e838e88957ad47d98f66a0a05c6bb6c015a45d))
-- add version history for pages ([2b139fba7](https://github.com/marcantondahmen/automad/commit/2b139fba7912608377e8626a5197a05c4d26d404))
-- allow for running Automad behind a proxy ([414dd5aa2](https://github.com/marcantondahmen/automad/commit/414dd5aa24df1427fccd0ff7d722b3a528a57cd6))
-- remove headless mode feature ([c79b377c8](https://github.com/marcantondahmen/automad/commit/c79b377c8e1dd2a815f46e7728aaa9ab7cce025b))
-- use .json instead of .txt files to store page and shared data ([96a1f184a](https://github.com/marcantondahmen/automad/commit/96a1f184ab0435c82a1a382a8c3b8de5e3a2751d))
-- use symfony/mailer for sending emails ([5efeb8e](https://github.com/marcantondahmen/automad/commit/5efeb8eb083544f7c437ea8c0540e2ea2895f0e6))
