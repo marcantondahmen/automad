@@ -36,7 +36,7 @@ import {
 	SortableTreeKeyValue,
 	SortableTreeNodeData,
 	SortableTreeStyles,
-} from 'sortable-tree';
+} from '@/vendor/sortable-tree';
 import { PageMetaData } from '@/admin/types';
 import { App } from '.';
 

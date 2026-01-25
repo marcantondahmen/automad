@@ -44,7 +44,7 @@ import {
 	requestAPI,
 } from '@/admin/core';
 import { PublishControllers } from '@/admin/types';
-import Tooltip from 'codex-tooltip';
+import { Tooltip } from '@/vendor/tooltip';
 import { BaseComponent } from '../../Base';
 import { SubmitComponent } from '../Submit';
 

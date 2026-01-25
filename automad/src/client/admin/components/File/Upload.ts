@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import Dropzone, { DropzoneFile, DropzoneOptions } from 'dropzone';
+import { Dropzone, DropzoneFile, DropzoneOptions } from '@/vendor/dropzone';
 import {
 	App,
 	Attr,

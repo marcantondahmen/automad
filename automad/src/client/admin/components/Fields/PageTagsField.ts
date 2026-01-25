@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import Tagify from '@yaireo/tagify';
+import { Tagify } from '@/vendor/tagify';
 import { App, create, CSS, debounce, FieldTag, State } from '@/admin/core';
 import { PageDataFormComponent } from '@/admin/components/Forms/PageDataForm';
 import { BaseFieldComponent } from './BaseField';

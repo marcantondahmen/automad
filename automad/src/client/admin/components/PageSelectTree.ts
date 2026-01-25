@@ -32,10 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import SortableTree, {
+import {
+	SortableTree,
 	SortableTreeKeyValue,
 	SortableTreeRenderLabelFunction,
-} from 'sortable-tree';
+} from '@/vendor/sortable-tree';
 import {
 	App,
 	Attr,
