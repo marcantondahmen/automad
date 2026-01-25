@@ -32,9 +32,8 @@
  * Licensed under the MIT license.
  */
 
-// @ts-ignore
-import NestedList from '@editorjs/nested-list';
 import { App } from '@/admin/core';
+import { NestedList } from '@/vendor/editorjs';
 
 export class NestedListBlock extends NestedList {
 	/**

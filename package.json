@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-beta.13",
+  "version": "2.0.0-beta.14",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -51,7 +51,6 @@
     "draggabilly": "^3.0.0",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.25.10",
-    "esbuild-plugin-less": "^1.3.27",
     "esbuild-postcss": "^0.0.4",
     "esbuild-sass-plugin": "^3.3.1",
     "file-loader": "^6.2.0",

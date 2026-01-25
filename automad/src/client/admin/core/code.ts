@@ -32,10 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { CodeEditorData, CodeLanguage } from '@/admin/types';
-import CodeFlask from 'codeflask';
+import { CodeEditorData } from '@/admin/types';
 import { create, CSS, debounce, getLogger, html } from '@/admin/core';
 import { Prism, Languages } from '@/prism/prism';
+import { CodeFlask } from '@/vendor/codeflask';
 
 /**
  * A thin wrapper around CodeFlask.

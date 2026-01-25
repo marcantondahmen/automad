@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, create, query, queryAll } from '.';
-import Tooltip from 'codex-tooltip';
+import { Tooltip } from '@/vendor/tooltip';
 import { KeyValueMap } from '@/admin/types';
 
 const getTooltipOptions = (element: HTMLElement): KeyValueMap => {

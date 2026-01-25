@@ -33,8 +33,7 @@
  */
 
 import { App } from '@/admin/core';
-// @ts-ignore
-import Table from '@editorjs/table';
+import { Table } from '@/vendor/editorjs';
 
 export class TableBlock extends Table {
 	/**
