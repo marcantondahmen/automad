@@ -336,11 +336,11 @@ const hashImportsPlugin = () => {
  * that are not in vendor, a license comment is returned.
  */
 const generateLicense = (path) => {
-	if (path.match(/automad\/src\/client/) && !path.match(/vendor/)) {
-		return licenseAutomad;
+	if (path.match(/(vendor|node_modules)/)) {
+		return '';
 	}
 
-	return '';
+	return licenseAutomad;
 };
 
 /**
