@@ -30,9 +30,9 @@
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
- *
- * ------------------------------
- *
+ */
+
+/*
  * Esbuild config for Automad
  *
  * This script handles automatic splitting of vendor modules and block classes in order
@@ -80,12 +80,10 @@ const hashPlaceholder = '@hash';
 const banner = `/* This file is part of Automad. Copyright and license info at the end. */`;
 const licenseAutomad = `
 /*!
- * AUTOMAD
- *
- * Copyright (c) ${new Date().getFullYear()} ${pkg.author}
- * https://marcdahmen.de
- *
- * Licensed under the ${pkg.license} license
+ * Automad (https://automad.org)
+ * 
+ * Copyright (c) ${new Date().getFullYear()} ${pkg.author} (https://marcdahmen.de)
+ * Automad is licensed under the ${pkg.license} license
  */
 `;
 
@@ -115,6 +113,9 @@ const write = (file, contents) => {
 	console.log(`   ${makeRelative(file)}`);
 };
 
+/**
+ * Create a path configuration including entry points, external files and aliases.
+ */
 const pathConfig = () => {
 	const mainEntries = findEntries('*/index.ts').filter(
 		(f) => !f.match(/common/)
@@ -175,8 +176,14 @@ const pathConfig = () => {
 	return { alias, entryPoints, external };
 };
 
+/**
+ * The output hash map that can be used across build steps in dev mode.
+ */
 const outputHashes = new Map();
 
+/**
+ * A plugin that hashes output files and updates import statments accordingly.
+ */
 const hashImportsPlugin = () => {
 	return {
 		name: 'hash-imports',
@@ -184,7 +191,7 @@ const hashImportsPlugin = () => {
 			build.onEnd(async (result) => {
 				const outputs = new Map();
 				const placeholderRegex = new RegExp(
-					`\\.\\.\\/[\\w\\/]*-${hashPlaceholder}\\.js`,
+					`\\.\\.\\/[\\w\\/-]*-${hashPlaceholder}\\.js`,
 					'g'
 				);
 
@@ -323,15 +330,23 @@ const hashImportsPlugin = () => {
 	};
 };
 
+/**
+ * Return a license comment based on a file path.
+ * For all files inside that the Automad src directory
+ * that are not in vendor, a license comment is returned.
+ */
 const injectLicense = (path) => {
-	if (path.match(/automad/) && !path.match(/vendor/)) {
+	if (path.match(/automad\/src\/client/) && !path.match(/vendor/)) {
 		return licenseAutomad;
 	}
 
 	return '';
 };
 
-const minify = (source) =>
+/**
+ * Minify TS file and especially included string litrals.
+ */
+const minifyTs = (source) =>
 	source
 		// Remove all single line comments in order to safely remove newlines.
 		.replace(/\/\/\s.*$/gm, ' ')
@@ -344,6 +359,10 @@ const minify = (source) =>
 		// Also trim template strings.
 		.replace(/`([^`]+)`/g, (_, s) => `\`${s.trim()}\``);
 
+/**
+ * A plugin that minifies TS code with string literals and
+ * injects a license comment for Automad entry points.
+ */
 const tsOnLoadPlugin = () => {
 	return {
 		name: 'ts-on-load',
@@ -357,7 +376,7 @@ const tsOnLoadPlugin = () => {
 					);
 
 					return {
-						contents: injectLicense(args.path) + minify(source),
+						contents: injectLicense(args.path) + minifyTs(source),
 						loader: 'ts',
 					};
 				}
@@ -366,6 +385,9 @@ const tsOnLoadPlugin = () => {
 	};
 };
 
+/**
+ * Build less files and inject license comment for Automad entry points.
+ */
 const lessOnLoadPlugin = () => {
 	return {
 		name: 'less-on-load',
@@ -378,12 +400,15 @@ const lessOnLoadPlugin = () => {
 						'utf8'
 					);
 
-					const { css } = await less.render(source, {
+					// https://lesscss.org/usage/#programmatic-usage
+					const { css, imports } = await less.render(source, {
+						// Set this in order to resolve imports
 						filename: args.path,
 					});
 
 					return {
 						contents: injectLicense(args.path) + css,
+						watchFiles: imports,
 						loader: 'css',
 					};
 				}
@@ -392,6 +417,39 @@ const lessOnLoadPlugin = () => {
 	};
 };
 
+/**
+ * Minify SVG files.
+ */
+const minifySvg = (source) =>
+	source
+		// remove XML / HTML comments
+		.replace(/<!--[\s\S]*?-->/g, '')
+		// collapse whitespace
+		.replace(/\s+/g, ' ')
+		// remove space between tags
+		.replace(/>\s+</g, '><')
+		.trim();
+
+/**
+ * A plugin that minifies SVG files.
+ */
+const svgOnLoadPlugin = () => ({
+	name: 'svg-on-load',
+	setup(build) {
+		build.onLoad({ filter: /\.svg$/ }, async (args) => {
+			const source = await fs.promises.readFile(args.path, 'utf8');
+
+			return {
+				contents: minifySvg(source),
+				loader: 'text', // still inline as string
+			};
+		});
+	},
+});
+
+/**
+ * A common config shared between build and dev mode.
+ */
 const commonConfig = {
 	...pathConfig(),
 	bundle: true,
@@ -416,6 +474,7 @@ const commonConfig = {
 	metafile: true,
 	define: { DEVELOPMENT: isDev.toString() },
 	plugins: [
+		svgOnLoadPlugin(),
 		lessOnLoadPlugin(),
 		sassPlugin({
 			quietDeps: true,
