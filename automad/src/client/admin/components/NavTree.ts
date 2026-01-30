@@ -292,8 +292,27 @@ export class NavTreeComponent extends BaseComponent {
 		if (current) {
 			const currentNode = this.tree.findNode('url', current);
 
-			currentNode?.reveal();
-			currentNode?.scrollIntoView(true);
+			if (currentNode) {
+				currentNode.reveal();
+
+				const label = query(`.${CSS.treeLabel}`, currentNode);
+
+				setTimeout(() => {
+					const rect = label?.getBoundingClientRect();
+
+					if (!rect) {
+						return;
+					}
+
+					if (rect.top < 80 || rect.bottom > window.innerHeight) {
+						label?.scrollIntoView({
+							behavior: 'smooth',
+							block: 'nearest',
+							inline: 'nearest',
+						});
+					}
+				}, 250);
+			}
 		}
 
 		Bindings.connectElements(this);

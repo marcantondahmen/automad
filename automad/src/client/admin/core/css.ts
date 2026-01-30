@@ -356,6 +356,17 @@ export const enum CSS {
 	toggleOff = 'am-f-toggle--off',
 	toggleDefaultOn = 'am-f-toggle--default-on',
 
+	tree = 'am-c-tree',
+	treeCollapse = 'am-c-tree__collapse',
+	treeLabel = 'am-c-tree__label',
+	treeNode = 'am-c-tree__node',
+	treeNodeDragging = 'am-c-tree__node--dragging',
+	treeNodeDropAfter = 'am-c-tree__node--drop-after',
+	treeNodeDropBefore = 'am-c-tree__node--drop-before',
+	treeNodeDropInside = 'am-c-tree__node--drop-inside',
+	treeNodeHover = 'am-c-tree__node--hover',
+	treeSubnodes = 'am-c-tree__subnodes',
+
 	upload = 'am-c-upload',
 	uploadDropzone = 'am-c-upload__dropzone',
 	uploadPreviews = 'am-c-upload__previews',

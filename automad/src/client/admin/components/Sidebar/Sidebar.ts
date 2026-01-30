@@ -69,6 +69,13 @@ export class SidebarComponent extends BaseComponent {
 	static open = false;
 
 	/**
+	 * The scoll cache that saves the scroll positions between route changes.
+	 *
+	 * @static
+	 */
+	static savedScroll = 0;
+
+	/**
 	 * Toggle the sidebar from anywhere.
 	 *
 	 * @param [state]
@@ -88,9 +95,21 @@ export class SidebarComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.setHeight();
-		setTimeout(this.setHeight.bind(this), 0);
 
-		this.listen(window, 'resize', debounce(this.setHeight.bind(this), 200));
+		setTimeout(() => {
+			this.setHeight();
+			this.scrollTo(0, SidebarComponent.savedScroll);
+
+			this.listen(
+				window,
+				'resize',
+				debounce(this.setHeight.bind(this), 200)
+			);
+
+			this.listen(this, 'scroll', () => {
+				SidebarComponent.savedScroll = this.scrollTop;
+			});
+		}, 0);
 	}
 
 	/**

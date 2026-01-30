@@ -38,7 +38,7 @@ import {
 	SortableTreeStyles,
 } from '@/vendor/sortable-tree';
 import { PageMetaData } from '@/admin/types';
-import { App } from '.';
+import { App, CSS } from '.';
 
 /**
  * Create the nodes object that is used to build a SortableTree instance.
@@ -109,14 +109,14 @@ const createParentMap = (
  * The custom classes that are used for the sortable tree.
  */
 export const treeStyles: SortableTreeStyles = {
-	tree: 'am-c-tree',
-	node: 'am-c-tree__node',
-	nodeHover: 'am-c-tree__node--hover',
-	nodeDragging: 'am-c-tree__node--dragging',
-	nodeDropBefore: 'am-c-tree__node--drop-before',
-	nodeDropInside: 'am-c-tree__node--drop-inside',
-	nodeDropAfter: 'am-c-tree__node--drop-after',
-	label: 'am-c-tree__label',
-	subnodes: 'am-c-tree__subnodes',
-	collapse: 'am-c-tree__collapse',
+	tree: CSS.tree,
+	node: CSS.treeNode,
+	nodeHover: CSS.treeNodeHover,
+	nodeDragging: CSS.treeNodeDragging,
+	nodeDropBefore: CSS.treeNodeDropBefore,
+	nodeDropInside: CSS.treeNodeDropInside,
+	nodeDropAfter: CSS.treeNodeDropAfter,
+	label: CSS.treeLabel,
+	subnodes: CSS.treeSubnodes,
+	collapse: CSS.treeCollapse,
 };
