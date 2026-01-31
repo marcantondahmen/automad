@@ -332,6 +332,7 @@ export const enum CSS {
 
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',
+	rootPending = 'am-c-root--pending',
 
 	select = 'am-f-select',
 	selectInline = 'am-f-select--inline',
