@@ -55,6 +55,7 @@ import {
 	applyTheme,
 	getTheme,
 	listen,
+	transition,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal/Modal';
@@ -167,21 +168,23 @@ export class RootComponent extends BaseComponent {
 
 		this.progressBar(80);
 
-		this.innerHTML = '';
-		this.appendChild(page);
+		transition(async () => {
+			this.innerHTML = '';
+			this.appendChild(page);
 
-		await waitForPendingRequests();
+			await waitForPendingRequests();
 
-		Bindings.connectElements(this);
-		initCheckboxToggles(this);
+			Bindings.connectElements(this);
+			initCheckboxToggles(this);
 
-		App.checkForSystemUpdate();
-		App.checkForOutdatedPackages();
-		App.restoreFilterAndScroll();
+			App.checkForSystemUpdate();
+			App.checkForOutdatedPackages();
+			App.restoreFilterAndScroll();
 
-		this.progressBar(100);
+			this.progressBar(100);
 
-		App.isReady = true;
+			App.isReady = true;
+		});
 	}
 
 	/**

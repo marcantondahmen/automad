@@ -26,31 +26,24 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2025 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-export * from '@/common';
-
-export * from './app';
-export * from './bindings';
-export * from './css';
-export * from './date';
-export * from './events';
-export * from './factory';
-export * from './form';
-export * from './html';
-export * from './logger';
-export * from './notify';
-export * from './request';
-export * from './router';
-export * from './state';
-export * from './theme';
-export * from './toggles';
-export * from './tooltips';
-export * from './transition';
-export * from './undo';
-export * from './url';
-export * from './utils';
+/**
+ * Transition dom changes when supported.
+ *
+ * @param update
+ */
+export const transition = (update: () => void): void => {
+	if (
+		document.startViewTransition &&
+		!window.matchMedia('(prefers-reduced-motion: reduce)').matches
+	) {
+		document.startViewTransition(update);
+	} else {
+		update();
+	}
+};
