@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.14](https://github.com/marcantondahmen/automad/commit/8f64e4b7d7bcbba1dbfad6872f03485e964c5199)
+## [v2.0.0-beta.15](https://github.com/marcantondahmen/automad/commit/1c7fade4e101f3a236e9af3db0adcb867f982027)
 
-Sun, 25 Jan 2026 19:18:57 +0100
+Sat, 31 Jan 2026 17:42:15 +0100
+
+### New Features
+
+- implement page transitions for dashboard pages ([ddcd541f1](https://github.com/marcantondahmen/automad/commit/ddcd541f10002f902ec5575bd41f18621090136a))
+
+### Bugfixes
+
+- fix custom foreground colors in layout section blocks inside block editor ([47e4b0310](https://github.com/marcantondahmen/automad/commit/47e4b0310627ff0e4b8d5012505355be5aaa3f9d))
+- fix layout shift when changing to a page route inside the dashboard ([676056dc0](https://github.com/marcantondahmen/automad/commit/676056dc0347b2c3ae29d5e7fdd6c82af520756a))
+- fix progress bar showing up on background api requests ([1c7fade4e](https://github.com/marcantondahmen/automad/commit/1c7fade4e101f3a236e9af3db0adcb867f982027))
+
+## [v2.0.0-beta.14](https://github.com/marcantondahmen/automad/commit/493a2bd1cc9e236cd902c141aab3e3fb0be7ee21)
+
+Sun, 25 Jan 2026 19:21:04 +0100
 
 ### Bugfixes
 
@@ -906,15 +920,3 @@ Thu, 29 Feb 2024 21:03:22 +0100
 ### Bugfixes
 
 - fix syntax highlighting colors ([d40291c37](https://github.com/marcantondahmen/automad/commit/d40291c376fdfd36fcec8961927d28148d3475ea))
-
-## [v2.0.0-alpha.2](https://github.com/marcantondahmen/automad/commit/0b38cec48ca28bd6e6c78f9686e612923fcaefe0)
-
-Sat, 24 Feb 2024 22:43:44 +0100
-
-### New Features
-
-- add option to install Automad manually ([6f0ee3a96](https://github.com/marcantondahmen/automad/commit/6f0ee3a96542fb26de6816430938ba2c5283f1df))
-
-### Bugfixes
-
-- fix homepage links for empty base urls ([22f35c4a5](https://github.com/marcantondahmen/automad/commit/22f35c4a5ac88bcfa55c5e254061ff8e59a22423))

@@ -322,7 +322,7 @@ class PendingRequests {
 	 * @static
 	 */
 	static toggleCursor(): void {
-		App.root?.classList.toggle(CSS.rootLoading, !this.idle);
+		App.root?.classList.toggle(CSS.rootPending, !this.idle);
 	}
 
 	/**

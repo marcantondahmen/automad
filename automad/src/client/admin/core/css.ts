@@ -332,6 +332,7 @@ export const enum CSS {
 
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',
+	rootPending = 'am-c-root--pending',
 
 	select = 'am-f-select',
 	selectInline = 'am-f-select--inline',
@@ -355,6 +356,17 @@ export const enum CSS {
 	toggleOn = 'am-f-toggle--on',
 	toggleOff = 'am-f-toggle--off',
 	toggleDefaultOn = 'am-f-toggle--default-on',
+
+	tree = 'am-c-tree',
+	treeCollapse = 'am-c-tree__collapse',
+	treeLabel = 'am-c-tree__label',
+	treeNode = 'am-c-tree__node',
+	treeNodeDragging = 'am-c-tree__node--dragging',
+	treeNodeDropAfter = 'am-c-tree__node--drop-after',
+	treeNodeDropBefore = 'am-c-tree__node--drop-before',
+	treeNodeDropInside = 'am-c-tree__node--drop-inside',
+	treeNodeHover = 'am-c-tree__node--hover',
+	treeSubnodes = 'am-c-tree__subnodes',
 
 	upload = 'am-c-upload',
 	uploadDropzone = 'am-c-upload__dropzone',
