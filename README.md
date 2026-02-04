@@ -22,9 +22,6 @@ A flat-file content management system and template engine.
 
 In case you quickly want to try out Automad without setting up a server first, just check out the [live demo](https://try.automad.org) for free. There is no sign-up required and you can start exploring new features right in away in your personal demo instance.
 
-> [!IMPORTANT]
-> Please note that in order to keep hosting costs under control, all demos are running on **minimal hardware** and expire after one hour.
-
 ## Installation
 
 Note that this repository only contains source code. Please follow the instructions below in order to install a fully bundled version of Automad using [Docker](https://github.com/automadcms/automad-docker) or [Composer](https://packagist.org/packages/automad/automad).
@@ -67,17 +64,9 @@ In case you are not able to use Docker or Composer, you can also deploy Automad 
 2. Make sure the PHP process has the permissions to write to the document root and its subdirectories including all installed files.
 3. Visit the `/dashboard` route of your site and create the first user.
 
-## Migrating Content
-
-In order to migrate an old Automad installation to the new version 2, please follow the [migration giude](https://automad.org/version-2#migration) in the documentation.
-
 ## Documentation
 
 Take a look at the [documentation](https://automad.org) to get started with Automad.
-
-## Packages
-
-Visit the [Automad package browser](https://packages.automad.org) to get free themes and extensions for your Automad site.
 
 ## Community
 
@@ -85,15 +74,15 @@ Join the community, ask questions or start a discussion on the Automad [discussi
 
 ## Contributing
 
+> [!IMPORTANT]
+> Please note that pull requests to this repository are not accepted and will not be merged.
+
 In case you are interested in contributing, the following types of contribution are welcome:
 
 - Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
-- [Publishing packages](https://automad.org/developer-guide/publishing-packages) like themes or extensions to the Automad package [browser](https://packages.automad.org)
-- Giving feedback and helping to grow a [community](https://automad.org/discuss)
+- Giving feedback and helping to grow a [community](https://github.com/orgs/automadcms/discussions)
 - Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
 - Reporting [security vulnerabilities](https://github.com/marcantondahmen/automad/security)
-
-However, I do not exclude at this point using parts of Automad's source in future projects under different licenses. In order to avoid having to ask anybody for permission when doing so, I will not accept any contributions to **this** repository. Please understand that pull requests will therefore be ignored.
 
 ## Text Editors Plugins
 
@@ -106,5 +95,5 @@ To make the development of themes more efficient, plugins providing syntax highl
 
 ---
 
-© 2013-2025 [Marc Anton Dahmen](https://marcdahmen.de)  
+© 2013-2026 [Marc Anton Dahmen](https://marcdahmen.de)  
 Released under the [MIT license](https://automad.org/license)
