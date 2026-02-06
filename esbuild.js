@@ -84,7 +84,7 @@ const licenseAutomad = `
  * 
  * Copyright (c) ${new Date().getFullYear()} ${pkg.author} (https://marcdahmen.de)
  * See LICENSE.md for license information:
- * https://github.com/marcantondahmen/automad/blob/${pkg.version}/LICENSE.md
+ * https://github.com/marcantondahmen/automad/blob/v2/LICENSE.md
  */
 `;
 
