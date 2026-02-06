@@ -335,23 +335,15 @@ class Config {
 	 * @return string
 	 */
 	private static function getIndex(): string {
-		$serverSoftware = $_SERVER['SERVER_SOFTWARE'] ?? '';
-
-		Debug::log($serverSoftware, 'Server Software');
+		$serverSoftware = strtolower($_SERVER['SERVER_SOFTWARE'] ?? '');
+		$htaccess = file_exists(AM_BASE_DIR . '/.htaccess');
 
 		$hasPrettyUrls = (
-			(
-				strpos(strtolower($serverSoftware), 'apache') !== false &&
-				file_exists(AM_BASE_DIR . '/.htaccess')
-			) ||
-			(
-				strpos(strtolower($serverSoftware), 'litespeed') !== false &&
-				file_exists(AM_BASE_DIR . '/.htaccess')
-			) ||
-				strpos(strtolower($serverSoftware), 'nginx') !== false
+			(strpos($serverSoftware, 'apache') !== false && $htaccess) ||
+			(strpos($serverSoftware, 'litespeed') !== false && $htaccess) ||
+			strpos($serverSoftware, 'nginx') !== false ||
+			php_sapi_name() === 'cli-server'
 		);
-
-		Debug::log('Pretty URLs are ' . ($hasPrettyUrls ? 'enabled' : 'disbaled'));
 
 		return $hasPrettyUrls ? '' : '/index.php';
 	}

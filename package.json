@@ -19,6 +19,7 @@
     "phpunit": "bash bin/phpunit.sh",
     "prebuild": "bash bin/prebuild.sh",
     "psalm": "bash bin/psalm.sh",
+    "serve": "php -S localhost:8000",
     "test": "npm run phpunit && npm run psalm && npm run vitest"
   },
   "devDependencies": {
