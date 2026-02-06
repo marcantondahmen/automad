@@ -83,7 +83,8 @@ const licenseAutomad = `
  * Automad (https://automad.org)
  * 
  * Copyright (c) ${new Date().getFullYear()} ${pkg.author} (https://marcdahmen.de)
- * Automad is licensed under the ${pkg.license} license
+ * See LICENSE.md for license information:
+ * https://github.com/marcantondahmen/automad/blob/${pkg.version}/LICENSE.md
  */
 `;
 
