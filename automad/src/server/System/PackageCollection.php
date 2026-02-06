@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2023-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\System;
@@ -48,8 +47,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The PackageCollection class provides all methods required for handling the packgae collection.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2023-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2023-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class PackageCollection {
 	const FILE_OUTDATED_CACHE =	AM_DIR_TMP . '/' . 'outdated_packages';

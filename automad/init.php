@@ -30,8 +30,7 @@
  * Copyright (c) 2013-2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 defined('AUTOMAD') or die('Direct access not permitted!');

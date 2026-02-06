@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2025 by Marc Anton Dahmen
+ * Copyright (c) 2025-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Console\Commands;
@@ -47,8 +46,8 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * The config:unset command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class ConfigUnset extends AbstractCommand {
 	/**

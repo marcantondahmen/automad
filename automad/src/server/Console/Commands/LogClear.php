@@ -30,8 +30,7 @@
  * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Console\Commands;
@@ -45,7 +44,7 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @license See LICENSE.md for license information
  */
 class LogClear extends AbstractCommand {
 	/**

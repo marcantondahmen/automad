@@ -28,11 +28,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2018-2020 by Marc Anton Dahmen
+ * Copyright (c) 2018-2026 by Marc Anton Dahmen
  * http://marcdahmen.de
  *
- * Licensed under the MIT license.
- * http://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 use Automad\Autoload;
