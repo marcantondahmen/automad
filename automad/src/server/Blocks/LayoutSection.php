@@ -69,7 +69,7 @@ class LayoutSection extends AbstractBlock {
 		$defaultStyles = array(
 			'backgroundColor' => '',
 			'backgroundBlendMode' => '',
-			'borderWidth' => '0px',
+			'borderWidth' => '',
 			'borderRadius' => '',
 			'borderStyle' => '',
 			'paddingTop' => '',

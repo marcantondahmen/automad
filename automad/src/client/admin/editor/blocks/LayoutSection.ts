@@ -60,6 +60,7 @@ import {
 } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
+import { filterEmptyData } from '../utils';
 import iconAlignStart from '@/common/svg/flex/align-start.svg';
 import iconAlignCenter from '@/common/svg/flex/align-center.svg';
 import iconAlignEnd from '@/common/svg/flex/align-end.svg';
@@ -116,7 +117,6 @@ export const sectionAlignItemsOptions: SectionToolbarRadioOptions<SectionAlignIt
  * Background blend modes for the section's background image.
  */
 export const sectionBackgroundBlendModes = [
-	'normal',
 	'multiply',
 	'screen',
 	'overlay',
@@ -138,7 +138,6 @@ export const sectionBackgroundBlendModes = [
  * Border styles for sections.
  */
 export const sectionBorderStyles = [
-	'none',
 	'solid',
 	'dashed',
 	'dotted',
@@ -151,19 +150,19 @@ export const sectionBorderStyles = [
  * Section style defaults.
  */
 export const styleDefaults: SectionStyle = {
-	card: false,
-	shadow: false,
+	card: null,
+	shadow: null,
 	color: '',
 	backgroundColor: '',
-	backgroundBlendMode: 'normal',
+	backgroundBlendMode: '',
 	borderColor: '',
 	borderWidth: '',
 	borderRadius: '',
-	borderStyle: 'none',
+	borderStyle: '',
 	backgroundImage: '',
 	paddingTop: '',
 	paddingBottom: '',
-	overflowHidden: false,
+	overflowHidden: null,
 } as const;
 
 /**
@@ -362,7 +361,10 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 	 * @return the saved data
 	 */
 	save(): LayoutSectionBlockData {
-		return this.data;
+		return filterEmptyData({
+			...this.data,
+			style: filterEmptyData(this.data.style),
+		});
 	}
 
 	/**
@@ -630,15 +632,18 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 		);
 
 		createSelect(
-			sectionBorderStyles.reduce(
-				(
-					res: SelectComponentOption[],
-					style: string
-				): SelectComponentOption[] => {
-					return [...res, { value: style }];
-				},
-				[]
-			),
+			[
+				{ value: '', text: 'none' },
+				...sectionBorderStyles.reduce(
+					(
+						res: SelectComponentOption[],
+						style: string
+					): SelectComponentOption[] => {
+						return [...res, { value: style, text: style }];
+					},
+					[]
+				),
+			],
 			this.data.style.borderStyle,
 			borderStyle,
 			'borderStyle',
@@ -665,15 +670,18 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 		);
 
 		createSelect(
-			sectionBackgroundBlendModes.reduce(
-				(
-					res: SelectComponentOption[],
-					mode: string
-				): SelectComponentOption[] => {
-					return [...res, { value: mode }];
-				},
-				[]
-			),
+			[
+				{ value: '', text: 'normal' },
+				...sectionBackgroundBlendModes.reduce(
+					(
+						res: SelectComponentOption[],
+						mode: string
+					): SelectComponentOption[] => {
+						return [...res, { value: mode, text: mode }];
+					},
+					[]
+				),
+			],
 			this.data.style.backgroundBlendMode,
 			blendMode,
 			'backgroundBlendMode',
