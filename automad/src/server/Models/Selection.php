@@ -42,6 +42,7 @@ use Automad\Core\Str;
 use Automad\Models\Search\FieldResults;
 use Automad\Models\Search\FileResults;
 use Automad\Models\Search\Search;
+use Automad\Models\Search\SearchIndexCache;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -135,9 +136,9 @@ class Selection {
 	 * Filter $this->selection by multiple keywords (a search string), if $str is not empty.
 	 *
 	 * @param string $str
-	 * @param ComponentCollection $ComponentCollection
+	 * @param SearchIndexCache $SearchIndexCache
 	 */
-	public function filterByKeywords(string $str, ComponentCollection $ComponentCollection): void {
+	public function filterByKeywords(string $str, SearchIndexCache $SearchIndexCache): void {
 		if (!$str) {
 			return;
 		}
@@ -153,7 +154,7 @@ class Selection {
 
 		$patternContext = '(' . join('|', $keywordsQuoted) . ')';
 
-		$SearchPages = new Search($patterFindPages, true, false, $this->selection, $ComponentCollection, null, true);
+		$SearchPages = new Search($patterFindPages, true, false, $this->selection, $SearchIndexCache, true);
 		$fileResultsArray = $SearchPages->searchPerFile();
 		$filtered = array();
 
@@ -164,11 +165,15 @@ class Selection {
 			}
 		}
 
-		$SearchContext = new Search($patternContext, true, false, $filtered, $ComponentCollection, null, true);
+		$SearchContext = new Search($patternContext, true, false, $filtered, $SearchIndexCache, true);
 		$fileResultsArray = array_filter($SearchContext->searchPerFile(), fn (FileResults $FileResult) => !empty($FileResult->url));
 		$filtered = array();
 
 		foreach ($fileResultsArray as $FileResult) {
+			if (empty($FileResult->url)) {
+				continue;
+			}
+
 			$context = array_map(fn (FieldResults $FieldResult): string => $FieldResult->context, $FileResult->fieldResultsArray);
 
 			$Page = $this->selection[$FileResult->url];

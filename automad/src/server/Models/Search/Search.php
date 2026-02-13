@@ -35,13 +35,10 @@
 
 namespace Automad\Models\Search;
 
-use Automad\Core\Blocks;
 use Automad\Core\Str;
 use Automad\Core\Value;
-use Automad\Models\ComponentCollection;
 use Automad\Models\Page;
 use Automad\Models\Shared;
-use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,47 +50,20 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Search {
-	const IGNORED = array(
-		Fields::HIDDEN,
-		Fields::PRIVATE,
-		Fields::TEMPLATE,
-		Fields::THEME,
-		Fields::SYNTAX_THEME,
-		Fields::URL,
-		Fields::CUSTOM_CONSENT_ACCEPT,
-		Fields::CUSTOM_CONSENT_COLOR_BACKGROUND,
-		Fields::CUSTOM_CONSENT_COLOR_BORDER,
-		Fields::CUSTOM_CONSENT_COLOR_TEXT,
-		Fields::CUSTOM_CONSENT_DECLINE,
-		Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_BACKGROUND,
-		Fields::CUSTOM_CONSENT_PLACEHOLDER_COLOR_TEXT,
-		Fields::CUSTOM_CONSENT_PLACEHOLDER_TEXT,
-		Fields::CUSTOM_CONSENT_REVOKE,
-		Fields::CUSTOM_CONSENT_TEXT,
-		Fields::CUSTOM_CONSENT_TOOLTIP,
-		Fields::CUSTOM_CSS,
-		Fields::CUSTOM_HTML_BODY_END,
-		Fields::CUSTOM_HTML_HEAD,
-		Fields::CUSTOM_JS_BODY_END,
-		Fields::CUSTOM_JS_HEAD,
-		Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_BACKGROUND,
-		Fields::CUSTOM_OPEN_GRAPH_IMAGE_COLOR_TEXT,
-	);
-
-	/**
-	 * The ComponentCollection instance.
-	 */
-	private ComponentCollection $ComponentCollection;
-
 	/**
 	 * The pages array to search in.
 	 */
-	private array $pages;
+	private array $pagesToSearch;
 
 	/**
 	 * The search regex flags.
 	 */
 	private string $regexFlags;
+
+	/**
+	 * The search index instance.
+	 */
+	private SearchIndex $SearchIndex;
 
 	/**
 	 * The search value.
@@ -116,26 +86,23 @@ class Search {
 	 * @param string $searchValue
 	 * @param bool $isRegex
 	 * @param bool $isCaseSensitive
-	 * @param array<string, Page> $pages
-	 * @param ComponentCollection $ComponentCollection
-	 * @param Shared|null $Shared
+	 * @param array<string, Page> $pagesToSearch
 	 * @param bool|null $stripTags
+	 * @param SearchIndexCache $SearchIndexCache
 	 */
 	public function __construct(
 		string $searchValue,
 		bool $isRegex,
 		bool $isCaseSensitive,
-		array $pages,
-		ComponentCollection $ComponentCollection,
-		?Shared $Shared,
+		array $pagesToSearch,
+		SearchIndexCache $SearchIndexCache,
 		?bool $stripTags = false
 	) {
 		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'ims';
-		$this->pages = $pages;
-		$this->Shared = $Shared;
-		$this->ComponentCollection = $ComponentCollection;
+		$this->pagesToSearch = $pagesToSearch;
 		$this->stripTags = $stripTags;
+		$this->SearchIndex = $SearchIndexCache->getIndex();
 
 		if ($isRegex) {
 			$this->searchValue = str_replace('/', '\/', $searchValue);
@@ -174,15 +141,15 @@ class Search {
 			return $resultsPerFile;
 		}
 
-		$sharedData = $this->Shared?->data ?? array();
-
-		if ($fieldResultsArray = $this->searchData($sharedData)) {
+		if ($fieldResultsArray = $this->searchData($this->SearchIndex->sharedEntry->fields)) {
 			$resultsPerFile[] = new FileResults($fieldResultsArray, null, null);
 		}
 
-		foreach ($this->pages as $Page) {
-			if ($fieldResultsArray = $this->searchData($Page->data)) {
-				$resultsPerFile[] = new FileResults($fieldResultsArray, $Page->path, $Page->origUrl);
+		foreach ($this->pagesToSearch as $Page) {
+			if ($SearchIndexEntry = $this->SearchIndex->getPageEntry($Page->path)) {
+				if ($fieldResultsArray = $this->searchData($SearchIndexEntry->fields)) {
+					$resultsPerFile[] = new FileResults($fieldResultsArray, $SearchIndexEntry->path, $SearchIndexEntry->origUrl);
+				}
 			}
 		}
 
@@ -198,10 +165,6 @@ class Search {
 	 * @return FieldResults|null the field results
 	 */
 	public function searchTextField(string $field, string $content): ?FieldResults {
-		if (preg_match('/^(:|date|checkbox|tags|color)/', $field) || in_array($field, Search::IGNORED)) {
-			return null;
-		}
-
 		if ($this->stripTags) {
 			$content = Str::stripTags($content);
 		}
@@ -229,7 +192,7 @@ class Search {
 					$parts[] = preg_replace(
 						'/\s+/',
 						' ',
-						trim(preg_replace($searchRegex, '<mark>$0</mark>', htmlspecialchars($ctx[0])))
+						trim(preg_replace($searchRegex, '<mark>$0</mark>', htmlspecialchars($ctx[0])) ?? '')
 					);
 				}
 			}
@@ -251,24 +214,13 @@ class Search {
 	 * array of `FieldResults`.
 	 *
 	 * @see FieldResults
-	 * @param array<string, array{blocks: mixed}|string> $data
+	 * @param array<string, string> $data
 	 * @return array<FieldResults> an array of `FieldResults` resultss
 	 */
 	private function searchData(array $data): array {
 		$fieldResults = array();
 
-		foreach ($data as $field => $raw) {
-			$value = '';
-
-			if (str_starts_with($field, '+')) {
-				try {
-					$value = Blocks::toString($raw['blocks'], $this->ComponentCollection);
-				} catch (Exception $error) {
-				}
-			} else {
-				$value = Value::asString($raw);
-			}
-
+		foreach ($data as $field => $value) {
 			$FieldResults = $this->searchTextField($field, $value);
 
 			if (!empty($FieldResults)) {

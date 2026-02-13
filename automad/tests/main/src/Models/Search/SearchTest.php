@@ -290,8 +290,7 @@ class SearchTest extends TestCase {
 			$isRegex,
 			$isCaseSensitive,
 			$Automad->getPages(),
-			$Automad->ComponentCollection,
-			$Automad->Shared
+			$Automad->SearchIndexCache
 		);
 
 		$flags = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES;

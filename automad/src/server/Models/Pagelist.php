@@ -36,6 +36,7 @@
 namespace Automad\Models;
 
 use Automad\Core\Debug;
+use Automad\Models\Search\SearchIndexCache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,11 +52,6 @@ class Pagelist {
 	 * The collection of all existing pages.
 	 */
 	private array $collection;
-
-	/**
-	 * The ComponentCollection instance.
-	 */
-	private ComponentCollection $ComponentCollection;
 
 	/**
 	 * The context.
@@ -132,6 +128,11 @@ class Pagelist {
 	private mixed $search;
 
 	/**
+	 * The search index cache instance.
+	 */
+	private SearchIndexCache $SearchIndexCache;
+
+	/**
 	 * The sort options string.
 	 */
 	private mixed $sort;
@@ -151,12 +152,12 @@ class Pagelist {
 	 *
 	 * @param array $collection
 	 * @param Context $Context
-	 * @param ComponentCollection $ComponentCollection
+	 * @param SearchIndexCache $SearchIndexCache
 	 */
-	public function __construct(array $collection, Context $Context, ComponentCollection $ComponentCollection) {
+	public function __construct(array $collection, Context $Context, SearchIndexCache $SearchIndexCache) {
 		$this->collection = $collection;
 		$this->Context = $Context;
-		$this->ComponentCollection = $ComponentCollection;
+		$this->SearchIndexCache = $SearchIndexCache;
 		$this->config($this->defaults);
 	}
 
@@ -334,7 +335,7 @@ class Pagelist {
 		// Note that there must be a strict comparison, since the type could be (false or 0).
 		if ($this->type !== 'breadcrumbs') {
 			$Selection->filterByTemplate($this->template);
-			$Selection->filterByKeywords($this->search, $this->ComponentCollection);
+			$Selection->filterByKeywords($this->search, $this->SearchIndexCache);
 			$Selection->match(json_decode($this->match, true));
 		}
 

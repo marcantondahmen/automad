@@ -91,8 +91,7 @@ class SearchController {
 			$isRegex,
 			$isCaseSensitive,
 			$Automad->getPages(),
-			$Automad->ComponentCollection,
-			$Automad->Shared
+			$Automad->SearchIndexCache
 		);
 
 		$fileResultsArray = $Search->searchPerFile();
