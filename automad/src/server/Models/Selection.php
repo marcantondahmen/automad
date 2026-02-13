@@ -39,6 +39,8 @@ use Automad\Core\Debug;
 use Automad\Core\I18n;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\Models\Search\FieldResults;
+use Automad\Models\Search\FileResults;
 use Automad\Models\Search\Search;
 use Automad\System\Fields;
 
@@ -133,34 +135,47 @@ class Selection {
 	 * Filter $this->selection by multiple keywords (a search string), if $str is not empty.
 	 *
 	 * @param string $str
+	 * @param ComponentCollection $ComponentCollection
 	 */
-	public function filterByKeywords(string $str): void {
+	public function filterByKeywords(string $str, ComponentCollection $ComponentCollection): void {
 		if (!$str) {
 			return;
 		}
 
-		$filtered = $this->selection;
 		$keywords = explode(' ', str_replace('/', ' ', Str::stripTags($str)));
+		$keywordsQuoted = array_map(fn (string $keyword): string => preg_quote(trim($keyword)), $keywords);
 
-		foreach ($keywords as $keyword) {
-			$Search = new Search($keyword, false, false, $filtered, null, true);
-			$fileResultsArray = $Search->searchPerFile();
-			$filtered = array();
+		$patterFindPages = '^';
 
-			foreach ($fileResultsArray as $FileResult) {
-				$context = array();
+		foreach ($keywordsQuoted as $keyword) {
+			$patterFindPages .= '(?=.*' . $keyword . ')';
+		}
 
-				foreach ($FileResult->fieldResultsArray as $FieldResult) {
-					$context[] = $FieldResult->context;
-				}
+		$patternContext = '(' . join('|', $keywordsQuoted) . ')';
 
-				if ($FileResult->url) {
-					$Page = $this->selection[$FileResult->url];
-					$Page->set(Fields::SEARCH_RESULTS_CONTEXT, implode(' ... ', $context));
-					$Page->set(Fields::SEARCH_RESULTS_COUNT, $FileResult->count);
-					$filtered[$FileResult->url] = $Page;
-				}
+		$SearchPages = new Search($patterFindPages, true, false, $this->selection, $ComponentCollection, null, true);
+		$fileResultsArray = $SearchPages->searchPerFile();
+		$filtered = array();
+
+		foreach ($fileResultsArray as $FileResult) {
+			if ($FileResult->url) {
+				$Page = $this->selection[$FileResult->url];
+				$filtered[$FileResult->url] = $Page;
 			}
+		}
+
+		$SearchContext = new Search($patternContext, true, false, $filtered, $ComponentCollection, null, true);
+		$fileResultsArray = array_filter($SearchContext->searchPerFile(), fn (FileResults $FileResult) => !empty($FileResult->url));
+		$filtered = array();
+
+		foreach ($fileResultsArray as $FileResult) {
+			$context = array_map(fn (FieldResults $FieldResult): string => $FieldResult->context, $FileResult->fieldResultsArray);
+
+			$Page = $this->selection[$FileResult->url];
+			$Page->set(Fields::SEARCH_RESULTS_CONTEXT, implode(' ... ', $context));
+			$Page->set(Fields::SEARCH_RESULTS_COUNT, $FileResult->count);
+
+			$filtered[$FileResult->url] = $Page;
 		}
 
 		$this->selection = $filtered;

@@ -28,7 +28,7 @@
 					}
 				},
 				{
-					"type": "section",
+					"type": "layoutSection",
 					"data": {
 						"content": {
 							"time": 1627118702124,
@@ -51,7 +51,7 @@
 					}
 				},
 				{
-					"type": "lists",
+					"type": "nestedList",
 					"data": {
 						"style": "ordered",
 						"items": [

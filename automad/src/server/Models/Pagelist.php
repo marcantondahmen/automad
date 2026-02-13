@@ -53,6 +53,11 @@ class Pagelist {
 	private array $collection;
 
 	/**
+	 * The ComponentCollection instance.
+	 */
+	private ComponentCollection $ComponentCollection;
+
+	/**
 	 * The context.
 	 */
 	private Context $Context;
@@ -146,10 +151,12 @@ class Pagelist {
 	 *
 	 * @param array $collection
 	 * @param Context $Context
+	 * @param ComponentCollection $ComponentCollection
 	 */
-	public function __construct(array $collection, Context $Context) {
+	public function __construct(array $collection, Context $Context, ComponentCollection $ComponentCollection) {
 		$this->collection = $collection;
 		$this->Context = $Context;
+		$this->ComponentCollection = $ComponentCollection;
 		$this->config($this->defaults);
 	}
 
@@ -327,7 +334,7 @@ class Pagelist {
 		// Note that there must be a strict comparison, since the type could be (false or 0).
 		if ($this->type !== 'breadcrumbs') {
 			$Selection->filterByTemplate($this->template);
-			$Selection->filterByKeywords($this->search);
+			$Selection->filterByKeywords($this->search, $this->ComponentCollection);
 			$Selection->match(json_decode($this->match, true));
 		}
 

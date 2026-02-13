@@ -289,7 +289,7 @@ class Automad {
 	 */
 	private function init(): void {
 		$this->Context = new Context($this->getRequestedPage());
-		$this->Pagelist = new Pagelist($this->pages, $this->Context);
+		$this->Pagelist = new Pagelist($this->pages, $this->Context, $this->ComponentCollection);
 		$this->Filelist = new Filelist($this->Context);
 		$this->Runtime = new Runtime($this->Filelist, $this->Pagelist, $this->Context);
 	}

@@ -91,6 +91,7 @@ class SearchController {
 			$isRegex,
 			$isCaseSensitive,
 			$Automad->getPages(),
+			$Automad->ComponentCollection,
 			$Automad->Shared
 		);
 
