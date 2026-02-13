@@ -36,6 +36,7 @@
 namespace Automad\Models\Search;
 
 use Automad\Core\Blocks;
+use Automad\Core\Debug;
 use Automad\Core\Value;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Page;
@@ -146,6 +147,8 @@ class SearchIndex {
 	 * Build the index.
 	 */
 	private function build(): void {
+		Debug::log('Building new search index');
+
 		$this->addData($this->sharedEntry, $this->Shared->data);
 
 		foreach ($this->pages as $Page) {
