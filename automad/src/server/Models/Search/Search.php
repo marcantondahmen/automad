@@ -114,21 +114,6 @@ class Search {
 	}
 
 	/**
-	 * Append an item to a given array only in case it is an results.
-	 *
-	 * @param array<FieldResults> $resultsArray
-	 * @param FieldResults|null $results
-	 * @return array<FieldResults> the results array
-	 */
-	public function appendFieldResults(array $resultsArray, ?FieldResults $results): array {
-		if (is_a($results, FieldResults::class)) {
-			$resultsArray[] = $results;
-		}
-
-		return $resultsArray;
-	}
-
-	/**
 	 * Perform a search in all data arrays and return an array with `FileResults`.
 	 *
 	 * @see FileResults
