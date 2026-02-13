@@ -36,6 +36,7 @@
 namespace Automad\Blocks;
 
 use Automad\Core\Automad;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -74,4 +75,13 @@ abstract class AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	abstract public static function render(array $block, Automad $Automad): string;
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	abstract public static function toString(array $block, ComponentCollection $ComponentCollection): string;
 }

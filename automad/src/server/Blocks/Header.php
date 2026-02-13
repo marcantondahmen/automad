@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Str;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -67,5 +68,16 @@ class Header extends AbstractBlock {
 		$text =	htmlspecialchars_decode($block['data']['text']);
 
 		return "<h{$block['data']['level']} $attr>$text</h{$block['data']['level']}>";
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return $block['data']['text'] ?? '';
 	}
 }

@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -80,5 +81,16 @@ class Video extends AbstractBlock {
 				$caption
 			</figure>
 		HTML;
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return $block['data']['caption'] ?? '';
 	}
 }

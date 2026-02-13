@@ -37,6 +37,7 @@ namespace Automad\Core;
 
 use Automad\Blocks\Utils\Attr;
 use Automad\Engine\Document\Head;
+use Automad\Models\ComponentCollection;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -143,6 +144,46 @@ class Blocks {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Return the string representation of an array of blocks.
+	 *
+	 * @param BlockData[] $blocks
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $blocks, ComponentCollection $ComponentCollection): string {
+		if (empty($blocks)) {
+			return '';
+		}
+
+		$blockToString = function (array $block) use ($ComponentCollection, &$blockToString): string {
+			return call_user_func_array(
+				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::toString',
+				array($block, $ComponentCollection)
+			);
+		};
+
+		$content = array();
+
+		foreach ($blocks as $block) {
+			if (!empty($block['type']) && !empty($block['data'])) {
+				try {
+					$content[] = $blockToString($block);
+				} catch (\TypeError $e) {
+					$block = self::unknownBlockHandler($block);
+
+					try {
+						$content[] = $blockToString($block);
+					} catch (\Exception $e) {
+					}
+				} catch (\Exception $e) {
+				}
+			}
+		}
+
+		return preg_replace('/\s+/', ' ', join(' ', $content)) ?? '';
 	}
 
 	/**

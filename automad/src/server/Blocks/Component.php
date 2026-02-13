@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -66,5 +67,19 @@ class Component extends AbstractBlock {
 		}
 
 		return '<div ' . Attr::render($block['tunes']) . '>' . Blocks::render($component, $Automad) . '</div>';
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		$component = $ComponentCollection->getComponent($block['data']['id']);
+		$blocks = $component['blocks'] ?? array();
+
+		return Blocks::toString($blocks, $ComponentCollection);
 	}
 }

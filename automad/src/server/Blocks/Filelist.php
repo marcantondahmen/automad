@@ -37,6 +37,7 @@ namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -86,5 +87,16 @@ class Filelist extends AbstractBlock {
 		);
 
 		return "<am-filelist $attr>$html</am-filelist>";
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return '';
 	}
 }

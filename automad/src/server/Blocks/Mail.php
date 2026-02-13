@@ -39,6 +39,7 @@ use Automad\API\Response;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Text;
+use Automad\Models\ComponentCollection;
 use Automad\System\Mail as SystemMail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -142,5 +143,16 @@ class Mail extends AbstractBlock {
 				<button class="am-button">{$data['labelSend']}</button>	
 			</am-mail>
 		HTML;
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return '';
 	}
 }

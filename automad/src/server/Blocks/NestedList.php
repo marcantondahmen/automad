@@ -37,6 +37,7 @@ namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -73,6 +74,39 @@ class NestedList extends AbstractBlock {
 		$attr = Attr::render($block['tunes']);
 
 		return "<am-list $attr>$html</am-list>";
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		$fn = function (array $item) use (&$fn): string {
+			$strings = array();
+
+			if (isset($item['content']) && strlen($item['content'])) {
+				$strings[] = $item['content'];
+
+				if (!empty($item['items'])) {
+					foreach ($item['items'] as $child) {
+						$strings[] = $fn($child);
+					}
+				}
+			}
+
+			return join(' ', $strings);
+		};
+
+		$strings = array();
+
+		foreach ($block['data']['items'] as $item) {
+			$strings[] = $fn($item);
+		}
+
+		return join(' ', $strings);
 	}
 
 	/**

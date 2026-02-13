@@ -37,6 +37,7 @@ namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -68,5 +69,16 @@ class Paragraph extends AbstractBlock {
 		$attr = Attr::render($block['tunes'], $classes);
 
 		return "<p $attr>$text</p>";
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return $block['data']['text'] ?? '';
 	}
 }

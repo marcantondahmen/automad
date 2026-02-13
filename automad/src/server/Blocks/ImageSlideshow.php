@@ -41,6 +41,7 @@ use Automad\Core\Automad;
 use Automad\Core\FileUtils;
 use Automad\Core\Resolve;
 use Automad\Core\Str;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -97,5 +98,16 @@ class ImageSlideshow extends AbstractBlock {
 		$attr = Attr::render($block['tunes']);
 
 		return "<am-image-slideshow first=\"$first\" $attr data=\"$json\"></am-image-slideshow>";
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return '';
 	}
 }

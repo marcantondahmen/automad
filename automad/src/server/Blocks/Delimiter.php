@@ -37,6 +37,7 @@ namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -59,5 +60,16 @@ class Delimiter extends AbstractBlock {
 	 */
 	public static function render(array $block, Automad $Automad): string {
 		return '<div ' . Attr::render($block['tunes']) . '><hr></div>';
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return '';
 	}
 }

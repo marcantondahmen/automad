@@ -37,6 +37,7 @@ namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,7 +62,7 @@ class Table extends AbstractBlock {
 		$attr = Attr::render($block['tunes']);
 		$data = $block['data'];
 		$html = "<am-table $attr><table>";
-		$rows = (array) $data['content'];
+		$rows = $data['content'] ?? array();
 
 		if (!empty($data['withHeadings'])) {
 			$firstRow = array_shift($rows) ?? array();
@@ -93,5 +94,23 @@ class Table extends AbstractBlock {
 		$html .= '</table></am-table>';
 
 		return $html;
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		$rows = $block['data']['content'] ?? array();
+		$cells = array();
+
+		foreach ($rows as $row) {
+			$cells = array_merge($cells, $row);
+		}
+
+		return join(' ', $cells);
 	}
 }

@@ -37,6 +37,7 @@ namespace Automad\Blocks;
 
 use Automad\Core\Automad;
 use Automad\Engine\Processors\TemplateProcessor;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -46,6 +47,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
+ *
+ * @psalm-import-type BlockData from AbstractBlock
  */
 class Snippet {
 	/**
@@ -94,5 +97,16 @@ class Snippet {
 		self::$snippetIsRendering = false;
 
 		return $output;
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		return '';
 	}
 }

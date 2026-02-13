@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -141,5 +142,19 @@ class LayoutSection extends AbstractBlock {
 				</am-layout-section>
 			</section>
 		HTML;
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		$content = $block['data']['content'] ?? array();
+		$blocks = $content['blocks'] ?? array();
+
+		return Blocks::toString($blocks, $ComponentCollection);
 	}
 }
