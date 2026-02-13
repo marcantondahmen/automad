@@ -38,7 +38,6 @@ namespace Automad\Models\Search;
 use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\Page;
-use Automad\Models\Shared;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -69,11 +68,6 @@ class Search {
 	 * The search value.
 	 */
 	private string $searchValue;
-
-	/**
-	 * The optional Shared object.
-	 */
-	private ?Shared $Shared;
 
 	/**
 	 * Strip tags before performing search.
