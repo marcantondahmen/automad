@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -94,6 +95,34 @@ class Table extends AbstractBlock {
 		$html .= '</table></am-table>';
 
 		return $html;
+	}
+
+	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		if (empty($block['data']['content'])) {
+			return $block;
+		}
+
+		$block['data']['content'] = array_map(function (array $row) use ($searchRegex, $replace): array {
+			return array_map(fn (string $item) => Replacement::replace($item, $searchRegex, $replace), $row);
+		}, $block['data']['content']);
+
+		return $block;
 	}
 
 	/**

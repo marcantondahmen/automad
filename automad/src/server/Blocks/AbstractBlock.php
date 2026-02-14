@@ -77,6 +77,24 @@ abstract class AbstractBlock {
 	abstract public static function render(array $block, Automad $Automad): string;
 
 	/**
+	 * Search and replace inside a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	abstract public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array;
+
+	/**
 	 * Return a searchable string representation of a block.
 	 *
 	 * @param BlockData $block

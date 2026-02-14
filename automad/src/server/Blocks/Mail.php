@@ -40,6 +40,7 @@ use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Text;
 use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 use Automad\System\Mail as SystemMail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -143,6 +144,43 @@ class Mail extends AbstractBlock {
 				<button class="am-button">{$data['labelSend']}</button>	
 			</am-mail>
 		HTML;
+	}
+
+	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		$block['data'] = Replacement::replaceInBlockFields(
+			$block['data'],
+			array(
+				'error',
+				'errorAddress',
+				'errorBody',
+				'errorSubject',
+				'labelAddress',
+				'labelBody',
+				'labelSend',
+				'labelSubject',
+				'success'
+			),
+			$searchRegex,
+			$replace
+		);
+
+		return $block;
 	}
 
 	/**

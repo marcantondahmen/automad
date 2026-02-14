@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -128,6 +129,33 @@ class Embed extends AbstractBlock {
 		$attr = Attr::render($block['tunes'], array('am-embed-' . $data['service']));
 
 		return "<am-embed $attr><figure>$html</figure></am-embed>";
+	}
+
+	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		$block['data'] = Replacement::replaceInBlockFields(
+			$block['data'],
+			array('caption'),
+			$searchRegex,
+			$replace
+		);
+
+		return $block;
 	}
 
 	/**

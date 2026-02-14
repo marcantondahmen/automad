@@ -39,6 +39,7 @@ use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem;
 use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -81,6 +82,33 @@ class Video extends AbstractBlock {
 				$caption
 			</figure>
 		HTML;
+	}
+
+	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		$block['data'] = Replacement::replaceInBlockFields(
+			$block['data'],
+			array('url', 'caption'),
+			$searchRegex,
+			$replace
+		);
+
+		return $block;
 	}
 
 	/**

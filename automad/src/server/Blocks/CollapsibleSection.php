@@ -87,6 +87,38 @@ class CollapsibleSection extends AbstractBlock {
 	}
 
 	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		if (!isset($block['data']['content']['blocks'])) {
+			return $block;
+		}
+
+		$block['data']['content']['blocks'] = Blocks::replace(
+			$block['data']['content']['blocks'],
+			$ComponentCollection,
+			$searchRegex,
+			$replace,
+			$replaceInPublishedComponent
+		);
+
+		return $block;
+	}
+
+	/**
 	 * Return a searchable string representation of a block.
 	 *
 	 * @param BlockData $block

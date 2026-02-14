@@ -147,6 +147,37 @@ class Blocks {
 	}
 
 	/**
+	 * Search and replace in blocks.
+	 *
+	 * @param BlockData[] $blocks
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData[]
+	 */
+	public static function replace(
+		array $blocks,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		if (empty($blocks)) {
+			return array();
+		}
+
+		$replaceInBlock = function (array $block) use ($ComponentCollection, $searchRegex, $replace, $replaceInPublishedComponent): array {
+			return call_user_func_array(
+				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::replace',
+				array($block, $ComponentCollection, $searchRegex, $replace, $replaceInPublishedComponent)
+			);
+		};
+
+		return array_map(fn (array $block): array => $replaceInBlock($block), $blocks);
+	}
+
+	/**
 	 * Return the string representation of an array of blocks.
 	 *
 	 * @param BlockData[] $blocks

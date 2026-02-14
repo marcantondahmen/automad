@@ -63,6 +63,26 @@ class Delimiter extends AbstractBlock {
 	}
 
 	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		return $block;
+	}
+
+	/**
 	 * Return a searchable string representation of a block.
 	 *
 	 * @param BlockData $block

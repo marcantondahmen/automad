@@ -42,6 +42,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\Resolve;
 use Automad\Core\Str;
 use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -98,6 +99,32 @@ class ImageSlideshow extends AbstractBlock {
 		$attr = Attr::render($block['tunes']);
 
 		return "<am-image-slideshow first=\"$first\" $attr data=\"$json\"></am-image-slideshow>";
+	}
+
+	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		if (empty($block['data']['files'])) {
+			return $block;
+		}
+
+		$block['data']['files'] = array_map(fn (string $file) => Replacement::replace($file, $searchRegex, $replace), $block['data']['files']);
+
+		return $block;
 	}
 
 	/**

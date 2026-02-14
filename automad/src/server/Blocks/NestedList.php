@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -77,6 +78,42 @@ class NestedList extends AbstractBlock {
 	}
 
 	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		$replaceInItem = function (array $item) use (&$replaceInItem, $searchRegex, $replace): array {
+			if (isset($item['content'])) {
+				$item['content'] = Replacement::replace($item['content'], $searchRegex, $replace);
+
+				if (!empty($item['items'])) {
+					foreach ($item['items'] as $index => $value) {
+						$item['items'][$index] = $replaceInItem($value);
+					}
+				}
+			}
+
+			return $item;
+		};
+
+		$block['data']['items'] = array_map(fn (array $item) => $replaceInItem($item), $block['data']['items']);
+
+		return $block;
+	}
+
+	/**
 	 * Return a searchable string representation of a block.
 	 *
 	 * @param BlockData $block
@@ -84,7 +121,7 @@ class NestedList extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
-		$fn = function (array $item) use (&$fn): string {
+		$itemToString = function (array $item) use (&$itemToString): string {
 			$strings = array();
 
 			if (isset($item['content']) && strlen($item['content'])) {
@@ -92,7 +129,7 @@ class NestedList extends AbstractBlock {
 
 				if (!empty($item['items'])) {
 					foreach ($item['items'] as $child) {
-						$strings[] = $fn($child);
+						$strings[] = $itemToString($child);
 					}
 				}
 			}
@@ -103,7 +140,7 @@ class NestedList extends AbstractBlock {
 		$strings = array();
 
 		foreach ($block['data']['items'] as $item) {
-			$strings[] = $fn($item);
+			$strings[] = $itemToString($item);
 		}
 
 		return join(' ', $strings);
