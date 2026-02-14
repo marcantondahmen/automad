@@ -35,9 +35,11 @@
 
 namespace Automad\Models\Search;
 
+use Automad\Core\Blocks;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\PublicationState;
+use Automad\Models\ComponentCollection;
 use Automad\Stores\DataStore;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,9 +53,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Replacement {
 	/**
-	 * The search regex flags.
+	 * The ComponentCollection instance.
 	 */
-	private string $regexFlags;
+	private ComponentCollection $ComponentCollection;
+
+	/**
+	 * If true also published content is searched.
+	 */
+	private bool $replaceInPublished;
 
 	/**
 	 * The replace value.
@@ -61,9 +68,9 @@ class Replacement {
 	private string $replaceValue;
 
 	/**
-	 * The search value.
+	 * The search regex.
 	 */
-	private string $searchValue;
+	private string $searchRegex;
 
 	/**
 	 * Initialize a new replacement model.
@@ -72,20 +79,73 @@ class Replacement {
 	 * @param string $replaceValue
 	 * @param bool $isRegex
 	 * @param bool $isCaseSensitive
+	 * @param ComponentCollection $ComponentCollection
+	 * @param bool $replaceInPublished
 	 */
-	public function __construct(string $searchValue, string $replaceValue, bool $isRegex, bool $isCaseSensitive) {
-		$this->searchValue = preg_quote($searchValue, '/');
-		$this->regexFlags = 'ims';
+	public function __construct(
+		string $searchValue,
+		string $replaceValue,
+		bool $isRegex,
+		bool $isCaseSensitive,
+		ComponentCollection $ComponentCollection,
+		bool $replaceInPublished
+	) {
+		$searchValue = preg_quote($searchValue, '/');
+		$regexFlags = 'ims';
 
 		if ($isRegex) {
-			$this->searchValue = str_replace('/', '\/', $searchValue);
+			$searchValue = str_replace('/', '\/', $searchValue);
 		}
 
 		if ($isCaseSensitive) {
-			$this->regexFlags = 'ms';
+			$regexFlags = 'ms';
 		}
 
+		$this->searchRegex = '/' . $searchValue . '/' . $regexFlags;
 		$this->replaceValue = $replaceValue;
+		$this->ComponentCollection = $ComponentCollection;
+		$this->replaceInPublished = $replaceInPublished;
+	}
+
+	/**
+	 * Replace a string.
+	 *
+	 * @param mixed $value
+	 * @param string $searchRegex
+	 * @param string $replaceValue
+	 * @return string
+	 */
+	public static function replace(string $value, string $searchRegex, string $replaceValue): string {
+		if (!is_string($value)) {
+			return '';
+		}
+
+		return preg_replace(
+			$searchRegex,
+			$replaceValue,
+			$value
+		) ?? '';
+	}
+
+	/**
+	 * Search and replace in selected fields in a data array.
+	 *
+	 * @param array<string, string> $data
+	 * @param array $fields
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @return array<string, string>
+	 */
+	public static function replaceInBlockFields(array $data, array $fields, string $searchRegex, string $replace): array {
+		foreach ($fields as $field) {
+			if (empty($data[$field])) {
+				continue;
+			}
+
+			$data[$field] = Replacement::replace($data[$field], $searchRegex, $replace);
+		}
+
+		return $data;
 	}
 
 	/**
@@ -108,9 +168,11 @@ class Replacement {
 			$draft = $this->replaceInData($draft, $FileFields->fields);
 			$DataStore->setState(PublicationState::DRAFT, $draft);
 
-			$published = $DataStore->getState(PublicationState::PUBLISHED) ?? array();
-			$published = $this->replaceInData($published, $FileFields->fields);
-			$DataStore->setState(PublicationState::PUBLISHED, $published);
+			if ($this->replaceInPublished) {
+				$published = $DataStore->getState(PublicationState::PUBLISHED) ?? array();
+				$published = $this->replaceInData($published, $FileFields->fields);
+				$DataStore->setState(PublicationState::PUBLISHED, $published);
+			}
 
 			$DataStore->save();
 		}
@@ -118,30 +180,6 @@ class Replacement {
 		Cache::clear();
 
 		return true;
-	}
-
-	/**
-	 * Replace matches in block data recursively.
-	 *
-	 * @param array<array{type: string, data: array}> $blocks
-	 * @return array the processed blocks
-	 */
-	private function replaceInBlocksRecursively(array $blocks): array {
-		foreach ($blocks as $index => $block) {
-			if ($block['type'] == 'section' && isset($block['data']['content']['blocks'])) {
-				$block['data']['content']['blocks'] = $this->replaceInBlocksRecursively($block['data']['content']['blocks']);
-			} else {
-				foreach ($block['data'] as $key => $value) {
-					if (Search::isValidBlockProperty($key)) {
-						$block['data'][$key] = $this->replaceInValueRecursively($value);
-					}
-				}
-			}
-
-			$blocks[$index] = $block;
-		}
-
-		return $blocks;
 	}
 
 	/**
@@ -154,53 +192,18 @@ class Replacement {
 	private function replaceInData(array $data, array $fields): array {
 		foreach ($fields as $field) {
 			if (str_starts_with($field, '+') && is_array($data[$field])) {
-				$data[$field]['blocks'] = $this->replaceInBlocksRecursively($data[$field]['blocks']);
-
-				Debug::log($data[$field]['blocks'], 'Blocks');
+				$data[$field]['blocks'] = Blocks::replace(
+					$data[$field]['blocks'],
+					$this->ComponentCollection,
+					$this->searchRegex,
+					$this->replaceValue,
+					$this->replaceInPublished
+				);
 			} else {
-				$data[$field] = $this->replaceString($data[$field]);
+				$data[$field] = Replacement::replace($data[$field], $this->searchRegex, $this->replaceValue);
 			}
 		}
 
 		return $data;
-	}
-
-	/**
-	 * Replace searched string in a value that is either a string or an multidimensional array of strings.
-	 *
-	 * @param mixed $value
-	 * @return mixed $value
-	 */
-	private function replaceInValueRecursively(mixed $value): mixed {
-		if (is_array($value)) {
-			$array = array();
-
-			foreach ($value as $key => $item) {
-				$array[$key] = $this->replaceInValueRecursively($item);
-			}
-
-			return $array;
-		}
-
-		return $this->replaceString($value);
-	}
-
-	/**
-	 * Check whether a value is a string and then perfom a replace.
-	 *
-	 * @param mixed $value
-	 * @return mixed
-	 * @psalm-return ($value is string ? string : mixed)
-	 */
-	private function replaceString(mixed $value): mixed {
-		if (is_string($value)) {
-			return preg_replace(
-				'/' . $this->searchValue . '/' . $this->regexFlags,
-				$this->replaceValue,
-				$value
-			) ?? '';
-		}
-
-		return $value;
 	}
 }

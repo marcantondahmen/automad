@@ -35,6 +35,7 @@
 
 namespace Automad\Models;
 
+use Automad\Core\Blocks;
 use Automad\Core\PublicationState;
 use Automad\Core\Session;
 use Automad\Stores\ComponentStore;
@@ -64,6 +65,11 @@ class ComponentCollection {
 	private array $collection;
 
 	/**
+	 * The component store instance.
+	 */
+	private ComponentStore $ComponentStore;
+
+	/**
 	 * The publication state.
 	 */
 	private string $publicationState;
@@ -72,12 +78,12 @@ class ComponentCollection {
 	 * The collection constructor.
 	 */
 	public function __construct() {
-		$ComponentStore = new ComponentStore();
+		$this->ComponentStore = new ComponentStore();
 
-		$state = $ComponentStore->getState(empty(Session::getUsername())) ?? array('components' => array());
+		$state = $this->ComponentStore->getState(empty(Session::getUsername())) ?? array('components' => array());
 
 		$this->collection = $state['components'];
-		$this->publicationState = $ComponentStore->isPublished() ? PublicationState::PUBLISHED->value : PublicationState::DRAFT->value;
+		$this->publicationState = $this->ComponentStore->isPublished() ? PublicationState::PUBLISHED->value : PublicationState::DRAFT->value;
 	}
 
 	/**
@@ -114,5 +120,44 @@ class ComponentCollection {
 	 */
 	public function getPublicationState(): string {
 		return $this->publicationState;
+	}
+
+	/**
+	 * Search and replace inside a component.
+	 *
+	 * @param string $id
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublished
+	 */
+	public function replaceInComponent(string $id, string $searchRegex, string $replace, bool $replaceInPublished): void {
+		$replaceInState = function (PublicationState $PublicationState) use ($id, $searchRegex, $replace, $replaceInPublished): void {
+			$state = $this->ComponentStore->getState($PublicationState);
+
+			if (empty($state) || empty($state['components'])) {
+				return;
+			}
+
+			$state['components'] = array_map(function (array $component) use ($id, $searchRegex, $replace, $replaceInPublished): array {
+				if ($id !== $component['id']) {
+					return $component;
+				}
+
+				$component['blocks'] = Blocks::replace($component['blocks'], $this, $searchRegex, $replace, $replaceInPublished);
+
+				return $component;
+			}, $state['components']);
+
+			$this->ComponentStore->setState($PublicationState, $state);
+		};
+
+		$replaceInState(PublicationState::DRAFT);
+
+		if ($replaceInPublished) {
+			$replaceInState(PublicationState::PUBLISHED);
+		}
+
+		$this->ComponentStore->save();
+		$this->collection = ($this->ComponentStore->getState(PublicationState::DRAFT) ?? array('components' => array()))['components'];
 	}
 }

@@ -159,6 +159,7 @@ class Selection {
 		$filtered = array();
 
 		foreach ($fileResultsArray as $FileResult) {
+			// Ignore shared results here.
 			if ($FileResult->url) {
 				$Page = $this->selection[$FileResult->url];
 				$filtered[$FileResult->url] = $Page;

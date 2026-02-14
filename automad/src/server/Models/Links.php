@@ -78,7 +78,7 @@ class Links {
 			}
 		}
 
-		$Replacement = new Replacement($searchValue, $replaceValue, true, false);
+		$Replacement = new Replacement($searchValue, $replaceValue, true, false, $Automad->ComponentCollection, true);
 		$Replacement->replaceInFiles($fileFieldsArray);
 	}
 }

@@ -61,6 +61,8 @@ class SearchController {
 	 */
 	public static function searchReplace(): Response {
 		$Response = new Response();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 
 		$isRegex = filter_var(Request::post('isRegex'), FILTER_VALIDATE_BOOL);
 		$isCaseSensitive = filter_var(Request::post('isCaseSensitive'), FILTER_VALIDATE_BOOL);
@@ -74,7 +76,9 @@ class SearchController {
 				Request::post('searchValue'),
 				Request::post('replaceValue'),
 				$isRegex,
-				$isCaseSensitive
+				$isCaseSensitive,
+				$Automad->ComponentCollection,
+				false
 			);
 
 			foreach ($files as $path => $fieldsCsv) {
@@ -82,10 +86,11 @@ class SearchController {
 			}
 
 			$Replacement->replaceInFiles($fileFieldsArray);
+
+			// Recreate Automad instance after changing conten on disk.
+			$Automad = $Cache->getAutomad();
 		}
 
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
 		$Search = new Search(
 			Request::post('searchValue'),
 			$isRegex,
