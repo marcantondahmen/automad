@@ -110,6 +110,6 @@ class Image extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
-		return $block['data']['caption'] ?? '';
+		return trim(($block['data']['url']) . ' ' . ($block['data']['caption'] ?? ''));
 	}
 }

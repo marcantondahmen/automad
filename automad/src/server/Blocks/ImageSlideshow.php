@@ -108,6 +108,6 @@ class ImageSlideshow extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
-		return '';
+		return join(' ', $block['data']['files'] ?? array());
 	}
 }
