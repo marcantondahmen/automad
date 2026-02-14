@@ -158,7 +158,7 @@ class Blocks {
 			return '';
 		}
 
-		$blockToString = function (array $block) use ($ComponentCollection, &$blockToString): string {
+		$blockToString = function (array $block) use ($ComponentCollection): string {
 			return call_user_func_array(
 				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::toString',
 				array($block, $ComponentCollection)
