@@ -90,18 +90,18 @@ class Replacement {
 		ComponentCollection $ComponentCollection,
 		bool $replaceInPublished
 	) {
-		$searchValue = preg_quote($searchValue, '/');
+		$searchValuePrepared = preg_quote($searchValue, '/');
 		$regexFlags = 'ims';
 
 		if ($isRegex) {
-			$searchValue = str_replace('/', '\/', $searchValue);
+			$searchValuePrepared = str_replace('/', '\/', $searchValue);
 		}
 
 		if ($isCaseSensitive) {
 			$regexFlags = 'ms';
 		}
 
-		$this->searchRegex = '/' . $searchValue . '/' . $regexFlags;
+		$this->searchRegex = '/' . $searchValuePrepared . '/' . $regexFlags;
 		$this->replaceValue = $replaceValue;
 		$this->ComponentCollection = $ComponentCollection;
 		$this->replaceInPublished = $replaceInPublished;
