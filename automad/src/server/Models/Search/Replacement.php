@@ -212,7 +212,7 @@ class Replacement {
 					$this->replaceInPublished
 				);
 			} else {
-				$data[$field] = Replacement::replace($data[$field], $this->searchRegex, $this->replaceValue);
+				$data[$field] = Replacement::replace($data[$field] ?? '', $this->searchRegex, $this->replaceValue);
 			}
 		}
 
