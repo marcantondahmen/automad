@@ -39,6 +39,7 @@ use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -103,16 +104,21 @@ class CollapsibleSection extends AbstractBlock {
 		string $replace,
 		bool $replaceInPublishedComponent
 	): array {
-		if (!isset($block['data']['content']['blocks'])) {
-			return $block;
+		if (isset($block['data']['content']['blocks'])) {
+			$block['data']['content']['blocks'] = Blocks::replace(
+				$block['data']['content']['blocks'],
+				$ComponentCollection,
+				$searchRegex,
+				$replace,
+				$replaceInPublishedComponent
+			);
 		}
 
-		$block['data']['content']['blocks'] = Blocks::replace(
-			$block['data']['content']['blocks'],
-			$ComponentCollection,
+		$block['data'] = Replacement::replaceInBlockFields(
+			$block['data'],
+			array('title'),
 			$searchRegex,
-			$replace,
-			$replaceInPublishedComponent
+			$replace
 		);
 
 		return $block;
@@ -126,9 +132,17 @@ class CollapsibleSection extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
-		$content = $block['data']['content'] ?? array();
-		$blocks = $content['blocks'] ?? array();
+		$title = '';
+		$blocks = array();
 
-		return Blocks::toString($blocks, $ComponentCollection);
+		if (isset($block['data']['content']['blocks']) && is_array($block['data']['content']['blocks'])) {
+			$blocks = $block['data']['content']['blocks'];
+		}
+
+		if (isset($block['data']['title']) && is_string($block['data']['title'])) {
+			$title = $block['data']['title'];
+		}
+
+		return trim($title . ' ' . Blocks::toString($blocks, $ComponentCollection));
 	}
 }
