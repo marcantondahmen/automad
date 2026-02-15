@@ -122,7 +122,7 @@ class Image extends AbstractBlock {
 	): array {
 		$block['data'] = Replacement::replaceInBlockFields(
 			$block['data'],
-			array('url', 'caption'),
+			array('url', 'alt', 'caption'),
 			$searchRegex,
 			$replace
 		);
@@ -138,6 +138,10 @@ class Image extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
-		return trim(($block['data']['url']) . ' ' . ($block['data']['caption'] ?? ''));
+		if (!isset($block['data'])) {
+			return '';
+		}
+
+		return trim(($block['data']['url'] ?? '') . ' ' . ($block['data']['alt'] ?? '') . ' ' . ($block['data']['caption'] ?? ''));
 	}
 }
