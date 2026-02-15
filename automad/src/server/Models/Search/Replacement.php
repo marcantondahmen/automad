@@ -90,6 +90,21 @@ class Replacement {
 		ComponentCollection $ComponentCollection,
 		bool $replaceInPublished
 	) {
+		$this->searchRegex = Replacement::buildRegex($searchValue, $isRegex, $isCaseSensitive);
+		$this->replaceValue = $replaceValue;
+		$this->ComponentCollection = $ComponentCollection;
+		$this->replaceInPublished = $replaceInPublished;
+	}
+
+	/**
+	 * Build the search regex for replacements.
+	 *
+	 * @param string $searchValue
+	 * @param bool $isRegex
+	 * @param bool $isCaseSensitive
+	 * @return string
+	 */
+	public static function buildRegex(string $searchValue, bool $isRegex, bool $isCaseSensitive): string {
 		$searchValuePrepared = preg_quote($searchValue, '/');
 		$regexFlags = 'ims';
 
@@ -101,10 +116,7 @@ class Replacement {
 			$regexFlags = 'ms';
 		}
 
-		$this->searchRegex = '/' . $searchValuePrepared . '/' . $regexFlags;
-		$this->replaceValue = $replaceValue;
-		$this->ComponentCollection = $ComponentCollection;
-		$this->replaceInPublished = $replaceInPublished;
+		return '/' . $searchValuePrepared . '/' . $regexFlags;
 	}
 
 	/**
