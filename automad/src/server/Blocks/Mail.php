@@ -55,6 +55,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Mail extends AbstractBlock {
+	const FIELDS = array(
+		'to',
+		'labelAddress',
+		'errorAddress',
+		'labelSubject',
+		'errorSubject',
+		'labelBody',
+		'errorBody',
+		'labelSend',
+		'error',
+		'success'
+	);
+
 	/**
 	 * Render a mail form block.
 	 *
@@ -165,17 +178,7 @@ class Mail extends AbstractBlock {
 	): array {
 		$block['data'] = Replacement::replaceInBlockFields(
 			$block['data'],
-			array(
-				'error',
-				'errorAddress',
-				'errorBody',
-				'errorSubject',
-				'labelAddress',
-				'labelBody',
-				'labelSend',
-				'labelSubject',
-				'success'
-			),
+			self::FIELDS,
 			$searchRegex,
 			$replace
 		);
@@ -191,6 +194,10 @@ class Mail extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
-		return '';
+		if (!isset($block['data']) || !is_array($block['data'])) {
+			return '';
+		}
+
+		return join(' ', array_map(fn (string $field): string => $block['data'][$field], self::FIELDS));
 	}
 }
