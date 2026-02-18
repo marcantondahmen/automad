@@ -26,10 +26,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2025 by Marc Anton Dahmen
+ * Copyright (c) 2025-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
+ * See LICENSE.md for license information.
  */
 
 /*
@@ -83,7 +83,7 @@ const licenseAutomad = `
  * Automad (https://automad.org)
  * 
  * Copyright (c) ${new Date().getFullYear()} ${pkg.author} (https://marcdahmen.de)
- * Automad is licensed under the ${pkg.license} license
+ * See LICENSE.md for license information.
  */
 `;
 

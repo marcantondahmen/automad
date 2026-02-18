@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2025 by Marc Anton Dahmen
+ * Copyright (c) 2022-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\System;
@@ -42,8 +41,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Asset handles loading and cache busting assets that are located in the automad directory.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2022-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2022-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class Asset {
 	/**

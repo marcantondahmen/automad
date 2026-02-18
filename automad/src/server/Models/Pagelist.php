@@ -27,16 +27,16 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2025 by Marc Anton Dahmen
+ * Copyright (c) 2013-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Models;
 
 use Automad\Core\Debug;
+use Automad\Models\Search\SearchIndexCache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -44,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * A Pagelist object represents a set of Page objects (matching certain criterias).
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2013-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class Pagelist {
 	/**
@@ -128,6 +128,11 @@ class Pagelist {
 	private mixed $search;
 
 	/**
+	 * The search index cache instance.
+	 */
+	private SearchIndexCache $SearchIndexCache;
+
+	/**
 	 * The sort options string.
 	 */
 	private mixed $sort;
@@ -147,10 +152,12 @@ class Pagelist {
 	 *
 	 * @param array $collection
 	 * @param Context $Context
+	 * @param SearchIndexCache $SearchIndexCache
 	 */
-	public function __construct(array $collection, Context $Context) {
+	public function __construct(array $collection, Context $Context, SearchIndexCache $SearchIndexCache) {
 		$this->collection = $collection;
 		$this->Context = $Context;
+		$this->SearchIndexCache = $SearchIndexCache;
 		$this->config($this->defaults);
 	}
 
@@ -328,7 +335,7 @@ class Pagelist {
 		// Note that there must be a strict comparison, since the type could be (false or 0).
 		if ($this->type !== 'breadcrumbs') {
 			$Selection->filterByTemplate($this->template);
-			$Selection->filterByKeywords($this->search);
+			$Selection->filterByKeywords($this->search, $this->SearchIndexCache);
 			$Selection->match(json_decode($this->match, true));
 		}
 

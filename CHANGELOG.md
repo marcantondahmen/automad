@@ -1,8 +1,24 @@
-# Changelog
+## [v2.0.0-beta.16](https://github.com/marcantondahmen/automad/commit/329a92b434d7950f065feab72727a6021c5a3760)
 
-## [v2.0.0-beta.15](https://github.com/marcantondahmen/automad/commit/1c7fade4e101f3a236e9af3db0adcb867f982027)
+Wed, 18 Feb 2026 11:27:33 +0100
 
-Sat, 31 Jan 2026 17:42:15 +0100
+### New Features
+
+- add official support for php's built-in web server ([f9f7c6b8b](https://github.com/marcantondahmen/automad/commit/f9f7c6b8b6305707113c52da60294562b86e739a))
+- change license from mit to o'saasy ([8b99b447e](https://github.com/marcantondahmen/automad/commit/8b99b447e6fdccdeb6633a456e472196683c3e6f))
+- filter out empty layout section styles in order to reduce data file size ([eab5e270f](https://github.com/marcantondahmen/automad/commit/eab5e270f0fe13f84569be87022b190588dcdcd2))
+- implement search index caching ([37d71e9e1](https://github.com/marcantondahmen/automad/commit/37d71e9e15136ef7a1c7e122ce8b1292abb488cc))
+- improve content search ([5170315bc](https://github.com/marcantondahmen/automad/commit/5170315bce0791e5ae99e21c2b6c9beed3355fae))
+- improve replacement inside block data ([e17b6599a](https://github.com/marcantondahmen/automad/commit/e17b6599a1c26f2c59710b9ed93f0ea1413345df))
+- update prism themes ([894ef189e](https://github.com/marcantondahmen/automad/commit/894ef189ecf162f2e0c8d908f14edef9e4e9c931))
+
+### Bugfixes
+
+- fix code block margins ([329a92b43](https://github.com/marcantondahmen/automad/commit/329a92b434d7950f065feab72727a6021c5a3760))
+
+## [v2.0.0-beta.15](https://github.com/marcantondahmen/automad/commit/25743a400d0a820fd70bc8d38cd7e86b6939ae71)
+
+Sun, 1 Feb 2026 16:55:13 +0100
 
 ### New Features
 
@@ -920,3 +936,145 @@ Thu, 29 Feb 2024 21:03:22 +0100
 ### Bugfixes
 
 - fix syntax highlighting colors ([d40291c37](https://github.com/marcantondahmen/automad/commit/d40291c376fdfd36fcec8961927d28148d3475ea))
+
+## [v2.0.0-alpha.2](https://github.com/marcantondahmen/automad/commit/0b38cec48ca28bd6e6c78f9686e612923fcaefe0)
+
+Sat, 24 Feb 2024 22:43:44 +0100
+
+### New Features
+
+- add option to install Automad manually ([6f0ee3a96](https://github.com/marcantondahmen/automad/commit/6f0ee3a96542fb26de6816430938ba2c5283f1df))
+
+### Bugfixes
+
+- fix homepage links for empty base urls ([22f35c4a5](https://github.com/marcantondahmen/automad/commit/22f35c4a5ac88bcfa55c5e254061ff8e59a22423))
+
+## [v2.0.0-alpha.1](https://github.com/marcantondahmen/automad/commit/46ba17b955e9905c79a07b3673af40f1c4c30f71)
+
+Mon, 19 Feb 2024 19:44:14 +0100
+
+### Breaking Changes
+
+- **ui**: pages can be sorted and moved directly in the sidebar ([4579f83e1](https://github.com/marcantondahmen/automad/commit/4579f83e1d4bc5affb5dde7dc3a506c7e45e140f))
+- change minimum required PHP version to 8.2 ([5efeb8e](https://github.com/marcantondahmen/automad/commit/5efeb8eb083544f7c437ea8c0540e2ea2895f0e6))
+- remove headless mode feature ([c79b377c8](https://github.com/marcantondahmen/automad/commit/c79b377c8e1dd2a815f46e7728aaa9ab7cce025b))
+
+### New Features
+
+- **blocks**: add align items layout option for section blocks ([f7b7bed25](https://github.com/marcantondahmen/automad/commit/f7b7bed25119968cd8a0e67e60d633dc0052f3ae))
+- **blocks**: add block duplication tune ([e52be1a57](https://github.com/marcantondahmen/automad/commit/e52be1a57ee0e64a455880a1f07a7ebedb4ee92a))
+- **core**: add debug logging to json files ([fa2821212](https://github.com/marcantondahmen/automad/commit/fa2821212b1f77ef0927eb7292ffec3329d10481))
+- **core**: add draft and published states for pages and shared content ([d1b539d57](https://github.com/marcantondahmen/automad/commit/d1b539d5754f8438ef854a1a2c3b3564edfb886e))
+- **core**: add i18n support for multilingual sites ([b3f0bb505](https://github.com/marcantondahmen/automad/commit/b3f0bb505c71907179d920002ce47cf388ed8cf1))
+- **core**: add support for webp images ([19cc81574](https://github.com/marcantondahmen/automad/commit/19cc81574c48c8b6b4560e1acd1c78383a8f09a2))
+- **dashboard**: store translations in json files ([f3deae501](https://github.com/marcantondahmen/automad/commit/f3deae5010b53f38c75d78dd008321d0394ca508))
+- **ui**: add FileRobot image editor ([4bcf9bd52](https://github.com/marcantondahmen/automad/commit/4bcf9bd52bad5eb11eb859d99a329099cfcdbef3))
+- **ui**: add dark mode for dashboard ([da343b8f9](https://github.com/marcantondahmen/automad/commit/da343b8f9011c06db72e861bf723363c954e1d85))
+- **ui**: add field and file filter ([2ecf1c0b4](https://github.com/marcantondahmen/automad/commit/2ecf1c0b4a9a7173b3ccfdbe05d02222ed38b841))
+- **ui**: add password requirements check ([83e097103](https://github.com/marcantondahmen/automad/commit/83e097103b3cc0ac70a99e55fdb715d45ef75a3f))
+- **ui**: implement undo functionality ([053a9c3f2](https://github.com/marcantondahmen/automad/commit/053a9c3f2c54e8a494a08e79011cc4a4cfd00f4b))
+- **ui**: pages can be sorted and moved directly in the sidebar ([4579f83e1](https://github.com/marcantondahmen/automad/commit/4579f83e1d4bc5affb5dde7dc3a506c7e45e140f))
+- **ui**: remove UIkit from Composer dependencies ([93a2bb7ee](https://github.com/marcantondahmen/automad/commit/93a2bb7ee0637dd6392e1f94fe076f49d0f88eca))
+- **ui**: remove jQuery from NPM dependencies ([989b21fe5](https://github.com/marcantondahmen/automad/commit/989b21fe598fcc24d3f8383a21d2410559cebf02))
+- add ability to restore deleted pages ([c4067bac3](https://github.com/marcantondahmen/automad/commit/c4067bac3fb74ebecdb99e9dddce43495185e7a6))
+- add result context when searching for pages ([63e838e88](https://github.com/marcantondahmen/automad/commit/63e838e88957ad47d98f66a0a05c6bb6c015a45d))
+- add version history for pages ([2b139fba7](https://github.com/marcantondahmen/automad/commit/2b139fba7912608377e8626a5197a05c4d26d404))
+- allow for running Automad behind a proxy ([414dd5aa2](https://github.com/marcantondahmen/automad/commit/414dd5aa24df1427fccd0ff7d722b3a528a57cd6))
+- remove headless mode feature ([c79b377c8](https://github.com/marcantondahmen/automad/commit/c79b377c8e1dd2a815f46e7728aaa9ab7cce025b))
+- use .json instead of .txt files to store page and shared data ([96a1f184a](https://github.com/marcantondahmen/automad/commit/96a1f184ab0435c82a1a382a8c3b8de5e3a2751d))
+- use symfony/mailer for sending emails ([5efeb8e](https://github.com/marcantondahmen/automad/commit/5efeb8eb083544f7c437ea8c0540e2ea2895f0e6))
+
+## [v1.10.9](https://github.com/marcantondahmen/automad/commit/776a2d12b817bdc4eb29dbade1fc3039c9dc8b9d)
+
+Tue, 19 Apr 2022 10:24:13 +0200
+
+### Bugfixes
+
+- **engine**: fix type error caused by pipe extensions that may return null ([19ec92256](https://github.com/marcantondahmen/automad/commit/19ec92256bf5d02e15065af1ddb818c3117fec56))
+
+## [v1.10.8](https://github.com/marcantondahmen/automad/commit/7e4ed8f52aa6cdb8c068e53f8bb2a1335a45be56)
+
+Thu, 7 Apr 2022 20:00:07 +0200
+
+### Bugfixes
+
+- **ui**: fix installation error ([ccd4e841d](https://github.com/marcantondahmen/automad/commit/ccd4e841d165e602d3363645c9de71f9d502f952))
+
+## [v1.10.7](https://github.com/marcantondahmen/automad/commit/b402f7c7ff18f56f418fa196a128884f5c076b57)
+
+Sat, 2 Apr 2022 23:53:44 +0200
+
+### Bugfixes
+
+- **cli**: fix cli updates ([284afb0bd](https://github.com/marcantondahmen/automad/commit/284afb0bdbce370b5bc096a19316a0851ca679b6))
+
+## [v1.10.6](https://github.com/marcantondahmen/automad/commit/bbad3ee2100d82f66444ca5f28ad5321895b1dcd)
+
+Sat, 2 Apr 2022 23:36:28 +0200
+
+### Bugfixes
+
+- **console**: fix console command error ([3e3682a67](https://github.com/marcantondahmen/automad/commit/3e3682a678bc395ce898b4eb8d88867a7994d8c3))
+- fix PHP 8.1 compatibility issues ([1c2a755da](https://github.com/marcantondahmen/automad/commit/1c2a755da0d83285bb98c017a818affc031104ab))
+
+## [v1.10.5](https://github.com/marcantondahmen/automad/commit/19a36ea95e3b412db1e2ce85f7b357be2e836160)
+
+Sat, 2 Apr 2022 21:48:39 +0200
+
+### Bugfixes
+
+- **ui**: fix messenger error when returning null ([ae1a51d6a](https://github.com/marcantondahmen/automad/commit/ae1a51d6ab5489d8dd37f31c287f4bdda8f59c94))
+
+## [v1.10.4](https://github.com/marcantondahmen/automad/commit/0255fad39ac3a534a97164521b423839fa82a2bb)
+
+Sat, 2 Apr 2022 21:36:15 +0200
+
+### Breaking Changes
+
+- **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
+
+### Bugfixes
+
+- **core**: fix overriding config for tests ([8b9e4b3ed](https://github.com/marcantondahmen/automad/commit/8b9e4b3ed51f2c3f0c138ed989a67e9f5d54a3f8))
+- **core**: replace strftime() with IntlDateFormatter instance ([3428c8456](https://github.com/marcantondahmen/automad/commit/3428c8456d9ea5092e6e83f7cb9ac70bd881cf49))
+- fix passing null as non-nullable function parameters ([3822317d3](https://github.com/marcantondahmen/automad/commit/3822317d304dc7e4dfe80e42c734e8309658a5d7))
+
+## [v1.10.3](https://github.com/marcantondahmen/automad/commit/f65ff67cce39173cea76ca3165f2b9c9deba8b59)
+
+Fri, 1 Apr 2022 16:42:24 +0200
+
+### Bugfixes
+
+- **core**: fix deprecation warning for preg_split() ([87dd50597](https://github.com/marcantondahmen/automad/commit/87dd5059720805f7ad386c696977d40dede71b3e))
+- **core**: fix php 8.1 compatibility issues with trim() and strip_tags() ([5dee18a21](https://github.com/marcantondahmen/automad/commit/5dee18a21ca85af24457a4a0ee22cdee8201101b))
+
+## [v1.10.2](https://github.com/marcantondahmen/automad/commit/4d7f852678919babc453c8d65f801a8b7c106f58)
+
+Thu, 31 Mar 2022 18:52:37 +0200
+
+### Bugfixes
+
+- **system**: fix fetching packages from the packagist api ([8b53ae63d](https://github.com/marcantondahmen/automad/commit/8b53ae63d4e32343cc1f428259ec4bd719cccc84))
+
+## [v1.10.1](https://github.com/marcantondahmen/automad/commit/b538f5eb6ab097452c2b7d8498417ebe39d2a861)
+
+Fri, 26 Nov 2021 10:26:38 +0100
+
+### New Features
+
+- **system**: add optional AM_SERVER constant in order to allow customizations of URLs generated by Server::url() ([ea70b0728](https://github.com/marcantondahmen/automad/commit/ea70b07287f64255f119eb666a523e987219d07e))
+
+### Bugfixes
+
+- **ui**: fix block editor ui errors when using block templates ([feb09bc2d](https://github.com/marcantondahmen/automad/commit/feb09bc2d6b998d4f1b062c028f1ae273042720b))
+
+## [v1.10.0](https://github.com/marcantondahmen/automad/commit/f631730deb600db7ee9086954943e6b111405f49)
+
+Wed, 24 Nov 2021 09:35:46 +0100
+
+### New Features
+
+- **core**: add feed generator ([0f2d32ace](https://github.com/marcantondahmen/automad/commit/0f2d32acede3c72ef468034dd3113f3ffad25da6))
+- **ui**: add feed configuration ui ([686d563d1](https://github.com/marcantondahmen/automad/commit/686d563d11a8cdec881c6053cc01ad6049e76400))
+- **ui**: redesign system settings ui ([aa84f8021](https://github.com/marcantondahmen/automad/commit/aa84f8021a0da6ff8d587e5f384cf6b6a46d1b4d))
+- remove gulp-util and update dependencies ([02ae09d59](https://github.com/marcantondahmen/automad/commit/02ae09d59931fc09f92fb8fd0161147d199031c4))

@@ -3,6 +3,7 @@
 namespace Automad\Models\Search;
 
 use Automad\Test\Data;
+use Automad\Test\Mock;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -74,15 +75,18 @@ class ReplacementTest extends TestCase {
 
 	#[DataProvider('dataForTestReplaceInDataIsSame')]
 	public function testReplaceInDataIsSame($searchValue, $replaceValue, $isRegex, $isCaseSensitive, $keys, $data, $expected) {
+		$Mock = new Mock();
+		$Automad = $Mock->createAutomad('default');
 		$ReplacementReflection = new \ReflectionClass(Replacement::class);
-
 		$replaceInData = $ReplacementReflection->getMethod('replaceInData');
 
 		$Replacement = new Replacement(
 			$searchValue,
 			$replaceValue,
 			$isRegex,
-			$isCaseSensitive
+			$isCaseSensitive,
+			$Automad->ComponentCollection,
+			false
 		);
 
 		$replacedData = $replaceInData->invokeArgs($Replacement, array($data, $keys));

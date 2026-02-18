@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2025 by Marc Anton Dahmen
+ * Copyright (c) 2013-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Core;
@@ -74,8 +73,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * In case the page and the Automad object are deprecated, after creating both, they can be saved to cache using writePageToCache() and writeAutomadObjectToCache().
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2013-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class Cache {
 	const DIR_IMAGES = AM_DIR_CACHE . '/images';

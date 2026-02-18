@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2025 by Marc Anton Dahmen
+ * Copyright (c) 2020-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Blocks;
@@ -39,6 +38,8 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
+use Automad\Models\ComponentCollection;
+use Automad\Models\Search\Replacement;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -46,8 +47,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The image block.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  *
  * @psalm-import-type BlockData from AbstractBlock
  */
@@ -100,5 +101,47 @@ class Image extends AbstractBlock {
 				$caption
 			</figure>
 		HTML;
+	}
+
+	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		$block['data'] = Replacement::replaceInBlockFields(
+			$block['data'],
+			array('url', 'alt', 'caption'),
+			$searchRegex,
+			$replace
+		);
+
+		return $block;
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		if (!isset($block['data'])) {
+			return '';
+		}
+
+		return trim(($block['data']['url'] ?? '') . ' ' . ($block['data']['alt'] ?? '') . ' ' . ($block['data']['caption'] ?? ''));
 	}
 }

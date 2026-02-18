@@ -127,7 +127,7 @@ class AttrTest extends TestCase {
 					<h2 id="headline" class="am-block">Headline</h2>
 					<p class="am-block">Text</p>	
 					<section class="am-block">
-						<am-layout-section class="am-justify-start am-align-normal" style="border-width: 0px;">
+						<am-layout-section class="am-justify-start am-align-normal" >
 							<h2 id="headline-1" class="am-block">Headline</h2>
 							<p class="am-block">Text</p>
 						</am-layout-section>

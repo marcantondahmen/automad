@@ -36,7 +36,7 @@ class SearchTest extends TestCase {
 						"count": 3,
 						"fieldResultsArray": [
 							{
-								"context": "A <mark>Simple</mark> First Column Table Header ... A <mark>simple</mark> paragraph text ... Another <mark>simple<\/mark> item",
+								"context": "A header block text A <mark>Simple</mark> First Column Table Header Second Column Table ... and column First table row and second column A <mark>simple</mark> paragraph text List item Second list item A ... list Second level Third level item Another <mark>simple</mark> item Some text containing the word me and the",
 								"field": "+main",
 								"matches": [
 									"Simple",
@@ -61,7 +61,7 @@ class SearchTest extends TestCase {
 						"count": 1,
 						"fieldResultsArray": [
 							{
-								"context": "A <mark>Simple</mark> First Column Table Header",
+								"context": "A header block text A <mark>Simple</mark> First Column Table Header Second Column Table",
 								"field": "+main",
 								"matches": [
 									"Simple"
@@ -84,7 +84,7 @@ class SearchTest extends TestCase {
 						"count": 1,
 						"fieldResultsArray": [
 							{
-								"context": "A <mark>Simple First Column Table</mark> Header",
+								"context": "A header block text A <mark>Simple First Column Table</mark> Header Second Column Table Header First table row",
 								"field": "+main",
 								"matches": [
 									"Simple First Column Table"
@@ -136,7 +136,7 @@ class SearchTest extends TestCase {
 						"count": 4,
 						"fieldResultsArray": [
 							{
-								"context": "A Simple First Column <mark>Table Header</mark> ... Second Column <mark>Table Header</mark> ... First <mark>table row</mark> and column ... First <mark>table row</mark> and second column",
+								"context": "A header block text A Simple First Column <mark>Table Header</mark> Second Column <mark>Table Header</mark> First <mark>table row</mark> and ... First <mark>table row</mark> and second column A simple paragraph text List",
 								"field": "+main",
 								"matches": [
 									"Table Header",
@@ -162,7 +162,7 @@ class SearchTest extends TestCase {
 						"count": 1,
 						"fieldResultsArray": [
 							{
-								"context": "<mark>Third level</mark> item",
+								"context": "item Second list item A nested list Second level <mark>Third level</mark> item Another simple item Some text containing the",
 								"field": "+main",
 								"matches": [
 									"Third level"
@@ -199,7 +199,7 @@ class SearchTest extends TestCase {
 						"url": null
 					},
 					{
-						"count": 5,
+						"count": 4,
 						"fieldResultsArray": [
 							{
 								"context": "<mark>Test</mark> String",
@@ -217,13 +217,8 @@ class SearchTest extends TestCase {
 								"matches": ["test"]
 							},
 							{
-								"context": "&lt;@ snippet <mark>test</mark> @&gt; derived by user &lt;@ end @&gt;",
-								"field": "+snippet",
-								"matches": ["test"]
-							},
-							{
-								"context": "&lt;@ snippet <mark>test</mark> @&gt;&lt;@ set { custom: &#039;snippet value&#039; } @&gt;&lt;@ end @&gt;",
-								"field": "+setInSnippet",
+								"context": "Component <mark>test</mark>",
+								"field": "+component",
 								"matches": ["test"]
 							}
 						],
@@ -252,12 +247,12 @@ class SearchTest extends TestCase {
 				<<< JSON
 				[
 					{
-						"count": 2,
+						"count": 3,
 						"fieldResultsArray": [
 							{
-								"context": "A longer paragraph that includes not only the <mark>word</mark> find but also the word me.",
+								"context": "A longer paragraph that includes not only the <mark>word</mark> find but also the <mark>word</mark> me.",
 								"field": "findMe",
-								"matches": ["word"]
+								"matches": ["word", "word"]
 							},
 							{
 								"context": "This paragraph only contains the <mark>word</mark> find and no other search term.",
@@ -269,12 +264,12 @@ class SearchTest extends TestCase {
 						"url": "/page"
 					},
 					{
-						"count": 1,
+						"count": 2,
 						"fieldResultsArray": [
 							{
-								"context": "Some text containing the word me and the <mark>word</mark> find nested in the list",
+								"context": "item Another simple item Some text containing the <mark>word</mark> me and the <mark>word</mark> find nested in the list",
 								"field": "+main",
-								"matches": ["word"]
+								"matches": ["word", "word"]
 							}
 						],
 						"path": "/blocks-slug/",
@@ -295,7 +290,7 @@ class SearchTest extends TestCase {
 			$isRegex,
 			$isCaseSensitive,
 			$Automad->getPages(),
-			$Automad->Shared
+			$Automad->SearchIndexCache
 		);
 
 		$flags = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES;

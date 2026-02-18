@@ -26,10 +26,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2021-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
+ * See LICENSE.md for license information.
  */
 
 import { App, create, CSS, FieldTag, html, query } from '@/admin/core';

@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2014-2025 by Marc Anton Dahmen
+ * Copyright (c) 2014-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Core;
@@ -45,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Config class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2014-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2014-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class Config {
 	/**
@@ -335,23 +334,15 @@ class Config {
 	 * @return string
 	 */
 	private static function getIndex(): string {
-		$serverSoftware = $_SERVER['SERVER_SOFTWARE'] ?? '';
-
-		Debug::log($serverSoftware, 'Server Software');
+		$serverSoftware = strtolower($_SERVER['SERVER_SOFTWARE'] ?? '');
+		$htaccess = file_exists(AM_BASE_DIR . '/.htaccess');
 
 		$hasPrettyUrls = (
-			(
-				strpos(strtolower($serverSoftware), 'apache') !== false &&
-				file_exists(AM_BASE_DIR . '/.htaccess')
-			) ||
-			(
-				strpos(strtolower($serverSoftware), 'litespeed') !== false &&
-				file_exists(AM_BASE_DIR . '/.htaccess')
-			) ||
-				strpos(strtolower($serverSoftware), 'nginx') !== false
+			(strpos($serverSoftware, 'apache') !== false && $htaccess) ||
+			(strpos($serverSoftware, 'litespeed') !== false && $htaccess) ||
+			strpos($serverSoftware, 'nginx') !== false ||
+			php_sapi_name() === 'cli-server'
 		);
-
-		Debug::log('Pretty URLs are ' . ($hasPrettyUrls ? 'enabled' : 'disbaled'));
 
 		return $hasPrettyUrls ? '' : '/index.php';
 	}

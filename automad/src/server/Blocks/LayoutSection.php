@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2021-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Blocks;
@@ -39,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
+use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -46,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The layout section block.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  *
  * @psalm-import-type BlockData from AbstractBlock
  */
@@ -70,7 +70,7 @@ class LayoutSection extends AbstractBlock {
 		$defaultStyles = array(
 			'backgroundColor' => '',
 			'backgroundBlendMode' => '',
-			'borderWidth' => '0px',
+			'borderWidth' => '',
 			'borderRadius' => '',
 			'borderStyle' => '',
 			'paddingTop' => '',
@@ -142,5 +142,51 @@ class LayoutSection extends AbstractBlock {
 				</am-layout-section>
 			</section>
 		HTML;
+	}
+
+	/**
+	 * Search and replace inside block data.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $searchRegex
+	 * @param string $replace
+	 * @param bool $replaceInPublishedComponent
+	 * @return BlockData
+	 */
+	public static function replace(
+		array $block,
+		ComponentCollection $ComponentCollection,
+		string $searchRegex,
+		string $replace,
+		bool $replaceInPublishedComponent
+	): array {
+		if (!isset($block['data']['content']['blocks'])) {
+			return $block;
+		}
+
+		$block['data']['content']['blocks'] = Blocks::replace(
+			$block['data']['content']['blocks'],
+			$ComponentCollection,
+			$searchRegex,
+			$replace,
+			$replaceInPublishedComponent
+		);
+
+		return $block;
+	}
+
+	/**
+	 * Return a searchable string representation of a block.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return string
+	 */
+	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		$content = $block['data']['content'] ?? array();
+		$blocks = $content['blocks'] ?? array();
+
+		return Blocks::toString($blocks, $ComponentCollection);
 	}
 }

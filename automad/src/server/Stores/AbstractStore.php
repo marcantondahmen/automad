@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2024-2025 by Marc Anton Dahmen
+ * Copyright (c) 2024-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Stores;
@@ -46,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * A store class handles the reading of JSON formatted data files.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2024-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2024-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 abstract class AbstractStore {
 	const DATE_FORMAT = 'c';

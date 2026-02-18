@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2021-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Core;
@@ -47,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Feed class handles the rendering of the feed.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class Feed {
 	/**

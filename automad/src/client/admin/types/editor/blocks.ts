@@ -26,10 +26,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2023-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
+ * See LICENSE.md for license information.
  */
 
 import { API, BlockAPI, ToolConfig } from '@/vendor/editorjs';
@@ -196,28 +196,28 @@ export type SectionBackgroundBlendMode =
 export type SectionBorderStyle = (typeof sectionBorderStyles)[number];
 
 export interface SectionStyle {
-	card: boolean;
-	shadow: boolean;
-	color: string;
-	backgroundColor: string;
-	backgroundBlendMode: SectionBackgroundBlendMode;
-	borderColor: string;
-	borderWidth: string;
-	borderRadius: string;
-	borderStyle: SectionBorderStyle;
-	backgroundImage: string;
-	paddingTop: string;
-	paddingBottom: string;
-	overflowHidden: boolean;
+	card?: boolean;
+	shadow?: boolean;
+	color?: string;
+	backgroundColor?: string;
+	backgroundBlendMode?: SectionBackgroundBlendMode | '';
+	borderColor?: string;
+	borderWidth?: string;
+	borderRadius?: string;
+	borderStyle?: SectionBorderStyle | '';
+	backgroundImage?: string;
+	paddingTop?: string;
+	paddingBottom?: string;
+	overflowHidden?: boolean;
 }
 
 export interface LayoutSectionBlockData {
-	content: EditorOutputData;
-	style: SectionStyle;
-	justify: SectionJustifyContentOption;
-	align: SectionAlignItemsOption;
-	gap: string;
-	minBlockWidth: string;
+	content?: EditorOutputData;
+	style?: SectionStyle;
+	justify?: SectionJustifyContentOption;
+	align?: SectionAlignItemsOption;
+	gap?: string;
+	minBlockWidth?: string;
 }
 
 export interface ComponentBlockData {

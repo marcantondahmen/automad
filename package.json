@@ -1,9 +1,8 @@
 {
   "name": "automad",
-  "version": "2.0.0-beta.15",
+  "version": "2.0.0-beta.16",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
-  "license": "MIT",
   "private": true,
   "type": "module",
   "prettier": {
@@ -19,6 +18,7 @@
     "phpunit": "bash bin/phpunit.sh",
     "prebuild": "bash bin/prebuild.sh",
     "psalm": "bash bin/psalm.sh",
+    "serve": "php -S localhost:8000",
     "test": "npm run phpunit && npm run psalm && npm run vitest"
   },
   "devDependencies": {
@@ -40,7 +40,7 @@
     "@vovayatsyuk/photoswipe-object-position": "^1.0.0",
     "@yaireo/tagify": "^4.17.6",
     "automad-editorjs": "^2.29.0-am.7",
-    "automad-prism-themes": "^0.3.6",
+    "automad-prism-themes": "^0.3.7",
     "autoprefixer": "^10.4.21",
     "bootstrap-icons": "^1.11.1",
     "browser-sync": "^3.0.4",

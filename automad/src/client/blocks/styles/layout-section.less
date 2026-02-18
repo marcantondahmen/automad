@@ -26,10 +26,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2023-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
+ * See LICENSE.md for license information.
  */
 
 am-layout-section {
@@ -41,7 +41,8 @@ am-layout-section {
 	background-color: transparent;
 	background-size: cover;
 	background-position: 50% 50%;
-	border: 0 solid var(--am-layout-section-border-color);
+	border-width: 0;
+	border-color: var(--am-layout-section-border-color, transparent);
 
 	am-stretched > section > & {
 		padding: 0 var(--am-container-padding);

@@ -26,10 +26,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2023-2025 by Marc Anton Dahmen
+ * Copyright (c) 2023-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
+ * See LICENSE.md for license information.
  */
 
 @layout-section: am-c-ed-bl-layout-section;
@@ -317,8 +317,6 @@
 
 		.ce-block & > .codex-editor {
 			height: 100%;
-			padding-top: var(--paddingTop);
-			padding-bottom: var(--paddingBottom);
 			background-color: var(--backgroundColor, inherit);
 			background-image: var(--backgroundImage);
 			background-blend-mode: var(--backgroundBlendMode, normal);
@@ -327,6 +325,8 @@
 			border: none;
 
 			& > .codex-editor__redactor {
+				padding-top: var(--paddingTop);
+				padding-bottom: ~'max(var(--paddingBottom, 50px), 50px)' !important;
 				border-radius: var(--borderRadius, 0);
 				border: var(--borderWidth, 0) var(--borderStyle, none)
 					var(--borderColor, currentColor);

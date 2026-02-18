@@ -29,7 +29,7 @@
  * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
+ * See LICENSE.md for license information.
  */
 
 import CodeFlask from 'codeflask';

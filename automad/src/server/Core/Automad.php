@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2013-2025 by Marc Anton Dahmen
+ * Copyright (c) 2013-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Core;
@@ -44,6 +43,7 @@ use Automad\Models\Filelist;
 use Automad\Models\Page;
 use Automad\Models\PageCollection;
 use Automad\Models\Pagelist;
+use Automad\Models\Search\SearchIndexCache;
 use Automad\Models\Shared;
 use Automad\System\Fields;
 
@@ -54,8 +54,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * A Automad object is the "main" object. It consists of many single Page objects, the Shared object and holds also additional data like the Filelist and Pagelist objects.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2013-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2013-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class Automad {
 	/**
@@ -90,6 +90,11 @@ class Automad {
 	public Runtime $Runtime;
 
 	/**
+	 * The search index cache instance.
+	 */
+	public SearchIndexCache $SearchIndexCache;
+
+	/**
 	 * Automad's Shared object.
 	 *
 	 * The Shared object is passed also to all Page objects to allow for access of global data from within a page without needing access to the full Automad object.
@@ -113,10 +118,9 @@ class Automad {
 		$this->pages = $pages;
 		$this->Shared = $Shared;
 		$this->ComponentCollection = new ComponentCollection();
+		$this->init();
 
 		Debug::log('New instance created');
-
-		$this->init();
 	}
 
 	/**
@@ -290,7 +294,8 @@ class Automad {
 	 */
 	private function init(): void {
 		$this->Context = new Context($this->getRequestedPage());
-		$this->Pagelist = new Pagelist($this->pages, $this->Context);
+		$this->SearchIndexCache = new SearchIndexCache($this->pages, $this->Shared, $this->ComponentCollection);
+		$this->Pagelist = new Pagelist($this->pages, $this->Context, $this->SearchIndexCache);
 		$this->Filelist = new Filelist($this->Context);
 		$this->Runtime = new Runtime($this->Filelist, $this->Pagelist, $this->Context);
 	}

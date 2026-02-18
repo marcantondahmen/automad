@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2025 by Marc Anton Dahmen
+ * Copyright (c) 2025-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\System\Composer\RepositoryAdapters;
@@ -47,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The abstract Composer repository adapter.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 abstract class AbstractAdapter {
 	const KEYS = array('description', 'autoload', 'require', 'type');

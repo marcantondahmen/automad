@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2021-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad;
@@ -52,11 +51,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * and displaying the final output for a request.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class App {
-	const VERSION = '2.0.0-beta.15';
+	const VERSION = '2.0.0-beta.16';
 
 	/**
 	 * Required PHP version.

@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-      - run: bash bin/changelog.sh 1 >body.md
+      - run: bash bin/changelog.sh latest >body.md
       - uses: ncipollo/release-action@v1
         with:
           bodyFile: 'body.md'

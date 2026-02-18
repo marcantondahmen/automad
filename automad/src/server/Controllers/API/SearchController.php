@@ -27,11 +27,10 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2025 by Marc Anton Dahmen
+ * Copyright (c) 2021-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
- * Licensed under the MIT license.
- * https://automad.org/license
+ * See LICENSE.md for license information.
  */
 
 namespace Automad\Controllers\API;
@@ -51,8 +50,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Search controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2025 by Marc Anton Dahmen - https://marcdahmen.de
- * @license MIT license - https://automad.org/license
+ * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
 class SearchController {
 	/**
@@ -62,6 +61,8 @@ class SearchController {
 	 */
 	public static function searchReplace(): Response {
 		$Response = new Response();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 
 		$isRegex = filter_var(Request::post('isRegex'), FILTER_VALIDATE_BOOL);
 		$isCaseSensitive = filter_var(Request::post('isCaseSensitive'), FILTER_VALIDATE_BOOL);
@@ -75,7 +76,9 @@ class SearchController {
 				Request::post('searchValue'),
 				Request::post('replaceValue'),
 				$isRegex,
-				$isCaseSensitive
+				$isCaseSensitive,
+				$Automad->ComponentCollection,
+				false
 			);
 
 			foreach ($files as $path => $fieldsCsv) {
@@ -83,16 +86,17 @@ class SearchController {
 			}
 
 			$Replacement->replaceInFiles($fileFieldsArray);
+
+			// Recreate Automad instance after changing conten on disk.
+			$Automad = $Cache->getAutomad();
 		}
 
-		$Cache = new Cache();
-		$Automad = $Cache->getAutomad();
 		$Search = new Search(
 			Request::post('searchValue'),
 			$isRegex,
 			$isCaseSensitive,
 			$Automad->getPages(),
-			$Automad->Shared
+			$Automad->SearchIndexCache
 		);
 
 		$fileResultsArray = $Search->searchPerFile();
