@@ -42,7 +42,6 @@ use Automad\Core\Session;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Page;
 use Automad\Models\Shared;
-use Exception;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -89,7 +88,7 @@ class SearchIndexCache {
 
 			try {
 				return unserialize(strval(file_get_contents($path)));
-			} catch (Exception $e) {
+			} catch (\Throwable $th) {
 				Debug::log('Error loading search index from cache');
 			}
 		}
