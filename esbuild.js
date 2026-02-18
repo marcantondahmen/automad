@@ -83,8 +83,7 @@ const licenseAutomad = `
  * Automad (https://automad.org)
  * 
  * Copyright (c) ${new Date().getFullYear()} ${pkg.author} (https://marcdahmen.de)
- * See LICENSE.md for license information:
- * https://github.com/marcantondahmen/automad/blob/v2/LICENSE.md
+ * See LICENSE.md for license information.
  */
 `;
 
