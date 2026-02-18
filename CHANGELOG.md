@@ -1,3 +1,5 @@
+# Changelog
+
 ## [v2.0.0-beta.16](https://github.com/marcantondahmen/automad/commit/329a92b434d7950f065feab72727a6021c5a3760)
 
 Wed, 18 Feb 2026 11:27:33 +0100
