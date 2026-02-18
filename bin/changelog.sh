@@ -1,27 +1,28 @@
 #!/bin/env bash
 
-# Use this script to generate a changelog for a defined number of releases
+# Use this script to generate a changelog starting from a defined date
 # or to generate the release note for a singe tag.
 #
-# bash bin/changelog.sh <num> [<tag>]
+# bash bin/changelog.sh <log|latest> [tag]
 #
-# This example generates a changelog for the last 25 releases and
+# This example generates a changelog for all releases after 2021-11-11 and
 # also groupes all "unreleased" changes under the version 2.0.0 on top
 # of the changelog. This is useful when create release notes during the local
 # release process, just before the actual tag 2.0.0 is created.
 #
-# bash bin/changelog.sh 25 2.0.0 >CHANGELOG.md
+# bash bin/changelog.sh log 2.0.0 >CHANGELOG.md
 #
 # In order to create the body of the release notes for just the last tag,
 # the following example can be used:
 #
-# bash bin/changelog.sh 1 >body.md
+# bash bin/changelog.sh latest >body.md
 
 githubUser=marcantondahmen
 githubProject=automad
 commitUrlFormat="https://github.com/$githubUser/$githubProject/commit/%H"
 commitLinkFormat="[%h]($commitUrlFormat)"
 logFormat="%s ($commitLinkFormat)"
+changeLogStartDate="2021-11-11"
 
 getCommitsBetween() {
 	git log --format="$logFormat" "$1".."$2"
@@ -50,7 +51,7 @@ generateSection() {
 
 }
 
-generateLogBetween() {
+generateReleaseSections() {
 	readarray -t output < <(git log --grep="BREAKING" --grep="!:" --format="$logFormat" "$1".."$2")
 	generateSection "Breaking Changes" "${output[@]}"
 
@@ -61,24 +62,12 @@ generateLogBetween() {
 	generateSection "Bugfixes" "${output[@]}"
 }
 
-generateChangelog() {
-	number=$1
-	newTag=$2
-	maxReleases=$((number + 1))
-
-	if [[ $number > 1 ]]; then
-		echo "# Changelog"
-		echo
-	fi
-
+# Create release notes for the last tag.
+releaseNotesForLatestTag() {
 	current=''
 	previous=''
 
-	if [[ ! -z $newTag ]]; then
-		previous=HEAD
-	fi
-
-	for tag in $(git tag --sort=-version:refname | head -n $maxReleases); do
+	for tag in $(git tag --sort=-version:refname | head -n 2); do
 		current=$previous
 		previous=$tag
 
@@ -86,25 +75,54 @@ generateChangelog() {
 			continue
 		fi
 
-		release=$(generateLogBetween $previous $current)
+		release=$(generateReleaseSections $previous $current)
 
 		if [[ -z "$release" ]]; then
 			release="Minor changes and fixes."
 		fi
 
-		if [[ $number > 1 ]]; then
-			title=$current
+		echo "$release"
+		echo
+	done
+}
 
-			if [[ "$current" == "HEAD" ]]; then
-				title=$newTag
-			fi
+# Create a changlog for all tags after a given date before a relase and
+# also include changes for the upcoming release.
+changelogForNextTag() {
+	newTag=$1
 
-			echo "## [v$title]($(git log -1 --format="$commitUrlFormat" $current))"
-			echo
-			echo "$(git log -1 --format="%aD" $current)"
-			echo
+	if [[ -z $newTag ]]; then
+		echo "The new tag is missing." 1>&2
+		exit 1
+	fi
+
+	current=''
+	previous=HEAD
+
+	for tag in $(git log --since $changeLogStartDate --tags --no-walk --format=%S); do
+		current=$previous
+		previous=$tag
+
+		if [[ -z "$current" ]]; then
+			continue
 		fi
 
+		release=$(generateReleaseSections $previous $current)
+
+		if [[ -z "$release" ]]; then
+			release="Minor changes and fixes."
+		fi
+
+		title=$current
+
+		if [[ "$current" == "HEAD" ]]; then
+			title=$newTag
+		fi
+
+		echo "## [v$title]($(git log -1 --format="$commitUrlFormat" $current))"
+		echo
+		echo "$(git log -1 --format="%aD" $current)"
+		echo
 		echo "$release"
 		echo
 	done
@@ -142,4 +160,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias sed="$(brew --prefix)/bin/gsed"
 fi
 
-patch "$(generateChangelog $1 $2)"
+case $1 in
+log)
+	patch "$(changelogForNextTag $2)"
+	;;
+
+latest)
+	patch "$(releaseNotesForLatestTag)"
+	;;
+*)
+	echo "Please choose between [log] or [latest]." 1>&2
+	;;
+esac
