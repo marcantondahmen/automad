@@ -41,6 +41,7 @@ import {
 } from '@/vendor/editorjs';
 import { create, listen } from '@/admin/core';
 import { KeyValueMap, Listener } from '@/admin/types';
+import { MoveEvent } from 'automad-editorjs/types/tools';
 
 /**
  * The abstract base block class.
@@ -175,6 +176,18 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	 * @return the saved data
 	 */
 	abstract save(): BlockToolData<DataType>;
+
+	/**
+	 * Rerender when being moved around.
+	 *
+	 * @param event
+	 */
+	moved(event: MoveEvent): void {
+		this.data = this.save();
+
+		this.wrapper.innerHTML = '';
+		this.render();
+	}
 
 	/**
 	 * Remove listeners.
