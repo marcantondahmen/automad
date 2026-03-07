@@ -48,7 +48,6 @@ import {
 	setDocumentTitle,
 } from '@/admin/core';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
-import { EditorJSComponent } from '@/admin/components/EditorJS';
 
 /**
  * The InPage editing form element.

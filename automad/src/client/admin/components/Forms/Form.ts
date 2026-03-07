@@ -380,7 +380,7 @@ export class FormComponent extends BaseComponent {
 	 * @async
 	 */
 	private async baseProcessResponse(response: KeyValueMap): Promise<void> {
-		const { redirect, reload, error, success, debug } = response;
+		const { redirect, reload, error, success } = response;
 
 		// Note that empty strings can be used to just soft-reload the dashboard.
 		if (typeof redirect != 'undefined') {
