@@ -295,7 +295,7 @@ class PendingRequests {
 	/**
 	 * The event name that is used when the count changes.
 	 * Note that this should be kept inside the class and not in the EventName enum,
-	 * sicne it is not shared between modules.
+	 * since it is not shared between modules.
 	 *
 	 * @static
 	 * @readonly
