@@ -268,7 +268,9 @@ export const waitForPendingRequests = async (): Promise<any> => {
 	return new Promise((resolve, reject) => {
 		const checkPendingRequests = () => {
 			if (PendingRequests.idle) {
-				resolve(true);
+				setTimeout(() => {
+					resolve(true);
+				}, 0);
 
 				window.removeEventListener(
 					PendingRequests.EVENT_NAME,
