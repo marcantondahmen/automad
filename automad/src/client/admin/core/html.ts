@@ -75,6 +75,7 @@ export const enum Attr {
 	portal = 'am-portal',
 	right = 'am-right',
 	section = 'am-section',
+	serial = 'am-serial',
 	target = 'am-target',
 	text = 'am-text',
 	toggle = 'am-toggle',
