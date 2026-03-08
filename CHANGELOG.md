@@ -1,8 +1,26 @@
 # Changelog
 
-## [v2.0.0-beta.16](https://github.com/marcantondahmen/automad/commit/329a92b434d7950f065feab72727a6021c5a3760)
+## [v2.0.0-beta.17](https://github.com/marcantondahmen/automad/commit/f3ee7c078fc7cd228688a7a3051b26a3467a0647)
 
-Wed, 18 Feb 2026 11:27:33 +0100
+Sun, 8 Mar 2026 20:29:34 +0100
+
+### New Features
+
+- **ui**: make component block collapsible in editor ([93bd3bde9](https://github.com/marcantondahmen/automad/commit/93bd3bde934420369f63a45e9682f7531f26bf2b))
+- update standard lite theme ([4b87b4a6a](https://github.com/marcantondahmen/automad/commit/4b87b4a6a6a4bdaae2511c04f05f2f5325fe18a1))
+
+### Bugfixes
+
+- don't focus blocks in collapsible sections on load ([90043c12d](https://github.com/marcantondahmen/automad/commit/90043c12dc844eae2048afa84422ca2579b188ad))
+- fix horizontal scrolling of sidebar on touch devices ([73db6c6c1](https://github.com/marcantondahmen/automad/commit/73db6c6c1ae5bf82e4e7ee688a5fea6b7740dba0))
+- fix redundant saving of block data on first render ([9fa3d9fd7](https://github.com/marcantondahmen/automad/commit/9fa3d9fd7a5db4c2fd48661b80de31e31b578504))
+- fix render issues when blocks are being moved using the tunes dropdown ([22dc8b12c](https://github.com/marcantondahmen/automad/commit/22dc8b12cfe1d1b2aa1c1e77b20683828e497323))
+- fix text overflow in class and id badges ([d9e932c52](https://github.com/marcantondahmen/automad/commit/d9e932c52c0b7c042008bb1dc5f3d48276bc9472))
+- make publish requests wait for other api requests in order to prevent publishing during auto saving ([e88124273](https://github.com/marcantondahmen/automad/commit/e8812427302049e261a9030da2fbcdb68655d0eb))
+
+## [v2.0.0-beta.16](https://github.com/marcantondahmen/automad/commit/8149c137a70177a92a57125a53ad8964fc8691b4)
+
+Wed, 18 Feb 2026 11:32:51 +0100
 
 ### New Features
 
@@ -1069,14 +1087,3 @@ Fri, 26 Nov 2021 10:26:38 +0100
 ### Bugfixes
 
 - **ui**: fix block editor ui errors when using block templates ([feb09bc2d](https://github.com/marcantondahmen/automad/commit/feb09bc2d6b998d4f1b062c028f1ae273042720b))
-
-## [v1.10.0](https://github.com/marcantondahmen/automad/commit/f631730deb600db7ee9086954943e6b111405f49)
-
-Wed, 24 Nov 2021 09:35:46 +0100
-
-### New Features
-
-- **core**: add feed generator ([0f2d32ace](https://github.com/marcantondahmen/automad/commit/0f2d32acede3c72ef468034dd3113f3ffad25da6))
-- **ui**: add feed configuration ui ([686d563d1](https://github.com/marcantondahmen/automad/commit/686d563d11a8cdec881c6053cc01ad6049e76400))
-- **ui**: redesign system settings ui ([aa84f8021](https://github.com/marcantondahmen/automad/commit/aa84f8021a0da6ff8d587e5f384cf6b6a46d1b4d))
-- remove gulp-util and update dependencies ([02ae09d59](https://github.com/marcantondahmen/automad/commit/02ae09d59931fc09f92fb8fd0161147d199031c4))
