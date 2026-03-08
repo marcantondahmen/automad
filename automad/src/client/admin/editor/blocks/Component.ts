@@ -121,24 +121,41 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 			CSS.userSelectNone
 		);
 
-		this.wrapper.innerHTML = html`
-			<div class="${CSS.editorBlockComponentLabel}">
-				${ComponentBlock.toolbox.icon}
-				<span>${component.name}</span>
-			</div>
-			<div class="${CSS.editorBlockComponentOverlay}">
-				<am-link
-					class="${CSS.button} ${CSS.buttonPrimary}"
-					${Attr.target}="${Route.components}"
-				>
-					${App.text('openComponentEditor')}
-				</am-link>
-			</div>
-		`;
+		const details = create(
+			'details',
+			[CSS.editorBlockComponentDetails],
+			{},
+			this.wrapper,
+			html`
+				<summary class=${CSS.editorBlockComponentSummary}>
+					<div>
+						${ComponentBlock.toolbox.icon}
+						<span>${component.name}</span>
+					</div>
+				</summary>
+			`
+		);
+
+		const holder = create(
+			'div',
+			[CSS.editorBlockComponentContent],
+			{},
+			details,
+			html`
+				<div class="${CSS.editorBlockComponentOverlay}">
+					<am-link
+						class="${CSS.button} ${CSS.buttonPrimary}"
+						${Attr.target}="${Route.components}"
+					>
+						${App.text('openComponentEditor')}
+					</am-link>
+				</div>
+			`
+		);
 
 		this.editor = new EditorJS({
+			holder,
 			data: { blocks: component.blocks },
-			holder: this.wrapper,
 			minHeight: 0,
 			autofocus: false,
 			tools: { ...getBlockTools(true), ...getBlockTunes(false) },
