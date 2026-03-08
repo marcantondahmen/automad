@@ -177,6 +177,7 @@ export const enum CSS {
 	editorTunesLayout = 'am-c-ed-tu-layout',
 	editorTunesLayoutOption = 'am-c-ed-tu-layout__option',
 	editorTunesLayoutOptionActive = 'am-c-ed-tu-layout__option--active',
+	editorTunesAttributeBadges = 'am-c-ed-tu-attribute-badges',
 
 	editorStyleBase = 'am-style',
 
