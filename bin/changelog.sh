@@ -96,6 +96,9 @@ changelogForNextTag() {
 		exit 1
 	fi
 
+	echo "# Changelog"
+	echo
+
 	current=''
 	previous=HEAD
 

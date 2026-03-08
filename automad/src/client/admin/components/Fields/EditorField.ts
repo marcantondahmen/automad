@@ -49,7 +49,7 @@ import { BaseFieldComponent } from './BaseField';
 import { EditorOutputData, KeyValueMap, UndoValue } from '@/admin/types';
 import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { filterEmptyData } from '@/admin/editor/utils';
+import { filterEmptyData, outputIsEqual } from '@/admin/editor/utils';
 
 /**
  * A block editor field.
@@ -110,14 +110,12 @@ export class EditorFieldComponent extends BaseFieldComponent {
 							return block;
 						}) || [];
 
-					const blocksJson = JSON.stringify(blocks);
-
-					if (JSON.stringify(this.value.blocks) === blocksJson) {
+					if (outputIsEqual(blocks, this.value.blocks)) {
 						return;
 					}
 
 					this.value = {
-						blocks: JSON.parse(blocksJson),
+						blocks: JSON.parse(JSON.stringify(blocks)),
 					};
 
 					fire('input', this);

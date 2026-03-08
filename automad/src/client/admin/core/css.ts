@@ -135,7 +135,9 @@ export const enum CSS {
 	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
 
 	editorBlockComponent = 'am-c-ed-bl-component',
-	editorBlockComponentLabel = 'am-c-ed-bl-component__label',
+	editorBlockComponentDetails = 'am-c-ed-bl-component__details',
+	editorBlockComponentSummary = 'am-c-ed-bl-component__summary',
+	editorBlockComponentContent = 'am-c-ed-bl-component__content',
 	editorBlockComponentOverlay = 'am-c-ed-bl-component__overlay',
 
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
@@ -175,6 +177,7 @@ export const enum CSS {
 	editorTunesLayout = 'am-c-ed-tu-layout',
 	editorTunesLayoutOption = 'am-c-ed-tu-layout__option',
 	editorTunesLayoutOptionActive = 'am-c-ed-tu-layout__option--active',
+	editorTunesAttributeBadges = 'am-c-ed-tu-attribute-badges',
 
 	editorStyleBase = 'am-style',
 

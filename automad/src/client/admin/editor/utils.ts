@@ -58,6 +58,39 @@ export const unknownBlockHandler = (
 };
 
 /**
+ * Sanitize and compare editor output data. Note that data returned by the API
+ * use [] to represent both, empty arrays and empty objects. This function
+ * removes empty objects and arrays during stringification in order to
+ * correctly compare the content.
+ *
+ * @param a
+ * @param b
+ * @return true if both objects are the same
+ */
+export const outputIsEqual = (a: KeyValueMap, b: KeyValueMap): boolean => {
+	// Remove empty arrays and objects that differ in shape
+	// when being returned by the API.
+	const replacer = (_: any, value: any): any => {
+		if (Array.isArray(value) && value.length === 0) {
+			return undefined;
+		}
+
+		if (
+			value &&
+			typeof value === 'object' &&
+			!Array.isArray(value) &&
+			Object.keys(value).length === 0
+		) {
+			return undefined;
+		}
+
+		return value;
+	};
+
+	return JSON.stringify(a, replacer) == JSON.stringify(b, replacer);
+};
+
+/**
  * Filter out empty data from an object.
  *
  * @param data

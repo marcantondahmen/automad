@@ -34,9 +34,7 @@
 
 import { fractions } from '@/admin/editor/tunes/Layout';
 
-export type ClassTuneData = string;
-
-export type IdTuneData = string;
+export type AttributeTuneData = string;
 
 export interface SpacingTuneData {
 	top: string;

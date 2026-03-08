@@ -280,7 +280,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 	): LayoutSectionBlockData {
 		return {
 			content: data.content || { blocks: [] },
-			style: Object.assign({}, styleDefaults, data.style),
+			style: { ...styleDefaults, ...data.style },
 			justify: data.justify || 'start',
 			align: data.align || 'start',
 			gap: data.gap !== undefined ? data.gap : '',

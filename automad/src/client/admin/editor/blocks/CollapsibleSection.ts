@@ -234,8 +234,6 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 			await this.holder.editor.isReady;
 
 			if (!this.readOnly) {
-				this.holder.editor.focus();
-
 				this.listen(this.holder, 'paste', (event: Event) => {
 					event.stopPropagation();
 				});

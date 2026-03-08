@@ -104,7 +104,9 @@ class PublicController {
 		) : $Pagelist->getPages();
 
 		$items = array_map(function ($item) {
-			$item[Fields::URL] = Resolve::absoluteUrlToRoot($item[Fields::URL]);
+			if (!empty($item[Fields::URL])) {
+				$item[Fields::URL] = Resolve::absoluteUrlToRoot($item[Fields::URL]);
+			}
 
 			return $item;
 		}, $items);

@@ -60,7 +60,7 @@ import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
 import { FormErrorComponent } from './FormError';
 
-export const autoSubmitTimeout = 750;
+export const autoSubmitTimeout = 200;
 
 const debounced = debounce(
 	async (callback: (...args: any[]) => void): Promise<void> => {
@@ -81,6 +81,7 @@ const debounced = debounce(
  * - Attr.auto - automatically submit form on change
  * - Attr.watch - disable submit buttons until changes are made
  * - Attr.loadingAnimation - show a loading animation during requests
+ * - Attr.serial - wait for other pending requests
  *
  * Focus the first input of a for when being connected:
  *
@@ -128,7 +129,7 @@ export class FormComponent extends BaseComponent {
 	 * Allow parallel requests.
 	 */
 	protected get parallel(): boolean {
-		return true;
+		return !this.hasAttribute(Attr.serial);
 	}
 
 	/**
@@ -379,7 +380,7 @@ export class FormComponent extends BaseComponent {
 	 * @async
 	 */
 	private async baseProcessResponse(response: KeyValueMap): Promise<void> {
-		const { redirect, reload, error, success, debug } = response;
+		const { redirect, reload, error, success } = response;
 
 		// Note that empty strings can be used to just soft-reload the dashboard.
 		if (typeof redirect != 'undefined') {

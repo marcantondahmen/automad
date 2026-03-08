@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-beta.16",
+  "version": "2.0.0-beta.17",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "private": true,
@@ -18,6 +18,7 @@
     "phpunit": "bash bin/phpunit.sh",
     "prebuild": "bash bin/prebuild.sh",
     "psalm": "bash bin/psalm.sh",
+    "release": "bash bin/release.sh",
     "serve": "php -S localhost:8000",
     "test": "npm run phpunit && npm run psalm && npm run vitest"
   },

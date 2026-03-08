@@ -268,7 +268,9 @@ export const waitForPendingRequests = async (): Promise<any> => {
 	return new Promise((resolve, reject) => {
 		const checkPendingRequests = () => {
 			if (PendingRequests.idle) {
-				resolve(true);
+				setTimeout(() => {
+					resolve(true);
+				}, 0);
 
 				window.removeEventListener(
 					PendingRequests.EVENT_NAME,
@@ -293,7 +295,7 @@ class PendingRequests {
 	/**
 	 * The event name that is used when the count changes.
 	 * Note that this should be kept inside the class and not in the EventName enum,
-	 * sicne it is not shared between modules.
+	 * since it is not shared between modules.
 	 *
 	 * @static
 	 * @readonly

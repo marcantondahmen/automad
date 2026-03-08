@@ -134,6 +134,7 @@ export abstract class BasePublishFormComponent extends BaseComponent {
 			[],
 			{
 				[Attr.watch]: '',
+				[Attr.serial]: '',
 				[Attr.api]: this.controllers().publish,
 				[Attr.event]: EventName.contentPublished,
 			},
