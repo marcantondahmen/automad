@@ -22,7 +22,7 @@ githubProject=automad
 commitUrlFormat="https://github.com/$githubUser/$githubProject/commit/%H"
 commitLinkFormat="[%h]($commitUrlFormat)"
 logFormat="%s ($commitLinkFormat)"
-changeLogStartDate="2021-11-11"
+changeLogStartDate="2022-04-18"
 
 getCommitsBetween() {
 	git log --format="$logFormat" "$1".."$2"

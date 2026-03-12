@@ -89,6 +89,7 @@ class State {
 		$themes = $ThemeCollection->getThemes();
 		$Cache = new Cache();
 		$MailConfig = new MailConfig();
+		$Automad->Pagelist->config(array('excludeHidden' => false));
 
 		$data = array(
 			'allowedFileTypes' => FileUtils::allowedFileTypes(),

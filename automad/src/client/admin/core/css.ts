@@ -92,6 +92,7 @@ export const enum CSS {
 	componentEditorName = 'am-c-component-editor__name',
 	componentEditorTools = 'am-c-component-editor__tools',
 	componentEditorHandle = 'am-c-component-editor__handle',
+	componentEditorDetails = 'am-c-component-editor__details',
 	componentEditorMain = 'am-c-component-editor__main',
 
 	componentsStickySection = 'am-c-components__sticky-section',

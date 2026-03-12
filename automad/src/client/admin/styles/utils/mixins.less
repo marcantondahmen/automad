@@ -39,6 +39,22 @@
 	}
 }
 
+.details-transition() {
+	&::details-content {
+		transition:
+			height 0.3s ease,
+			content-visibility 0.3s ease allow-discrete,
+			overflow 0.3s ease allow-discrete;
+		height: 0;
+		overflow: clip;
+	}
+
+	&[open]::details-content {
+		height: auto;
+		overflow: visible;
+	}
+}
+
 .scrollbar() {
 	scrollbar-width: thin;
 	scrollbar-color: hsl(from hsl(var(--am-clr-text-muted)) h s l / 0.4)

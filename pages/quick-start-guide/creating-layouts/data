@@ -71,22 +71,12 @@
                                         "style": {
                                             "card": true,
                                             "shadow": false,
-                                            "color": "",
-                                            "backgroundColor": "",
                                             "backgroundBlendMode": "normal",
-                                            "borderColor": "",
-                                            "borderWidth": "",
-                                            "borderRadius": "",
                                             "borderStyle": "none",
-                                            "backgroundImage": "",
-                                            "paddingTop": "",
-                                            "paddingBottom": "",
                                             "overflowHidden": false
                                         },
                                         "justify": "start",
-                                        "align": "start",
-                                        "gap": "",
-                                        "minBlockWidth": ""
+                                        "align": "start"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -103,16 +93,8 @@
                         "style": {
                             "card": false,
                             "shadow": false,
-                            "color": "",
-                            "backgroundColor": "",
                             "backgroundBlendMode": "normal",
-                            "borderColor": "",
-                            "borderWidth": "",
-                            "borderRadius": "",
                             "borderStyle": "none",
-                            "backgroundImage": "",
-                            "paddingTop": "",
-                            "paddingBottom": "",
                             "overflowHidden": false
                         },
                         "justify": "fill-row",
@@ -196,22 +178,13 @@
                                         "style": {
                                             "card": true,
                                             "shadow": false,
-                                            "color": "",
-                                            "backgroundColor": "",
                                             "backgroundBlendMode": "normal",
-                                            "borderColor": "",
-                                            "borderWidth": "",
-                                            "borderRadius": "",
                                             "borderStyle": "none",
-                                            "backgroundImage": "",
-                                            "paddingTop": "",
-                                            "paddingBottom": "",
                                             "overflowHidden": false
                                         },
                                         "justify": "fill-row",
                                         "align": "stretch",
-                                        "gap": "0px",
-                                        "minBlockWidth": ""
+                                        "gap": "0px"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -277,22 +250,12 @@
                                                         "style": {
                                                             "card": false,
                                                             "shadow": false,
-                                                            "color": "",
-                                                            "backgroundColor": "",
                                                             "backgroundBlendMode": "normal",
-                                                            "borderColor": "",
-                                                            "borderWidth": "",
-                                                            "borderRadius": "",
                                                             "borderStyle": "none",
-                                                            "backgroundImage": "",
-                                                            "paddingTop": "",
-                                                            "paddingBottom": "",
                                                             "overflowHidden": false
                                                         },
                                                         "justify": "fill-row",
-                                                        "align": "stretch",
-                                                        "gap": "",
-                                                        "minBlockWidth": ""
+                                                        "align": "stretch"
                                                     },
                                                     "tunes": {
                                                         "layout": {
@@ -309,22 +272,13 @@
                                         "style": {
                                             "card": false,
                                             "shadow": false,
-                                            "color": "",
-                                            "backgroundColor": "",
                                             "backgroundBlendMode": "normal",
-                                            "borderColor": "",
-                                            "borderWidth": "",
-                                            "borderRadius": "",
                                             "borderStyle": "none",
-                                            "backgroundImage": "",
-                                            "paddingTop": "",
-                                            "paddingBottom": "",
                                             "overflowHidden": false
                                         },
                                         "justify": "fill-row",
                                         "align": "stretch",
-                                        "gap": "2rem",
-                                        "minBlockWidth": ""
+                                        "gap": "2rem"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -341,16 +295,8 @@
                         "style": {
                             "card": false,
                             "shadow": false,
-                            "color": "",
-                            "backgroundColor": "",
                             "backgroundBlendMode": "normal",
-                            "borderColor": "",
-                            "borderWidth": "",
-                            "borderRadius": "",
                             "borderStyle": "none",
-                            "backgroundImage": "",
-                            "paddingTop": "",
-                            "paddingBottom": "",
                             "overflowHidden": false
                         },
                         "justify": "fill-row",
@@ -463,16 +409,8 @@
                         "style": {
                             "card": false,
                             "shadow": false,
-                            "color": "",
-                            "backgroundColor": "",
                             "backgroundBlendMode": "normal",
-                            "borderColor": "",
-                            "borderWidth": "",
-                            "borderRadius": "",
                             "borderStyle": "none",
-                            "backgroundImage": "",
-                            "paddingTop": "",
-                            "paddingBottom": "",
                             "overflowHidden": false
                         },
                         "justify": "fill-row",
@@ -567,16 +505,8 @@
                         "style": {
                             "card": false,
                             "shadow": false,
-                            "color": "",
-                            "backgroundColor": "",
                             "backgroundBlendMode": "normal",
-                            "borderColor": "",
-                            "borderWidth": "",
-                            "borderRadius": "",
                             "borderStyle": "none",
-                            "backgroundImage": "",
-                            "paddingTop": "",
-                            "paddingBottom": "",
                             "overflowHidden": false
                         },
                         "justify": "fill-row",
@@ -671,16 +601,8 @@
                         "style": {
                             "card": true,
                             "shadow": false,
-                            "color": "",
-                            "backgroundColor": "",
                             "backgroundBlendMode": "normal",
-                            "borderColor": "",
-                            "borderWidth": "",
-                            "borderRadius": "",
                             "borderStyle": "none",
-                            "backgroundImage": "",
-                            "paddingTop": "",
-                            "paddingBottom": "",
                             "overflowHidden": false
                         },
                         "justify": "space-evenly",
@@ -701,8 +623,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:27:10+00:00",
-        ":lastModified": "2025-12-25T20:54:32+00:00",
-        ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T20:54:34+00:00"
+        ":lastModified": "2026-03-12T18:35:43+00:00",
+        ":automadVersion": "2.0.0-beta.17",
+        ":lastPublished": "2026-03-12T18:35:44+00:00"
     }
 }

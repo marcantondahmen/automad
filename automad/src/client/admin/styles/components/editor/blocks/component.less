@@ -37,21 +37,11 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	outline: 2px solid hsl(var(--am-clr-border));
-	border-radius: @am-form-radius;
 
-	&__details::details-content {
-		transition:
-			height 0.3s ease,
-			content-visibility 0.3s ease allow-discrete,
-			overflow 0.3s ease allow-discrete;
-		height: 0;
-		overflow: clip;
-	}
-
-	&__details[open]::details-content {
-		height: auto;
-		overflow: visible;
+	&__details {
+		outline: 2px solid hsl(var(--am-clr-border));
+		border-radius: @am-form-radius;
+		.details-transition;
 	}
 
 	&__summary {
