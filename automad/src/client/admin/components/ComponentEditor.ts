@@ -135,8 +135,18 @@ export class ComponentEditorComponent extends BaseComponent {
 						<i class="bi bi-grip-vertical"></i>
 					</div>
 				</div>
-				<div class="${CSS.componentEditorMain}"></div>
 			`;
+
+			const details = create(
+				'details',
+				[CSS.componentEditorDetails],
+				{},
+				this,
+				html`
+					<summary></summary>
+					<div class="${CSS.componentEditorMain}"></div>
+				`
+			);
 
 			Bindings.connectElements(this);
 
@@ -168,10 +178,10 @@ export class ComponentEditorComponent extends BaseComponent {
 				'<i class="bi bi-trash3"></i>'
 			);
 
-			this.toggleEditor(editor, toggle, this._data.collapsed);
+			this.toggleEditor(details, toggle, this._data.collapsed);
 
 			this.listen(toggle, 'click', () => {
-				this.toggleEditor(editor, toggle, !this._data.collapsed);
+				this.toggleEditor(details, toggle, !this._data.collapsed);
 			});
 
 			this.listen(copy, 'click', () => {
@@ -252,7 +262,7 @@ export class ComponentEditorComponent extends BaseComponent {
 	 * @param state
 	 */
 	private toggleEditor(
-		body: HTMLElement,
+		details: HTMLDetailsElement,
 		toggle: HTMLElement,
 		collapsed: boolean
 	): void {
@@ -260,7 +270,7 @@ export class ComponentEditorComponent extends BaseComponent {
 
 		this._data.collapsed = collapsed;
 
-		body.classList.toggle(CSS.displayNone, this._data.collapsed);
+		details.open = !this._data.collapsed;
 		icon.className = `bi bi-chevron-${this._data.collapsed ? 'right' : 'down'}`;
 
 		fire('change', this.editor);
@@ -276,6 +286,7 @@ export class ComponentEditorComponent extends BaseComponent {
 			App.text('componentName'),
 			App.text('ok')
 		);
+
 		const input = create(
 			'input',
 			[CSS.input],
@@ -284,7 +295,6 @@ export class ComponentEditorComponent extends BaseComponent {
 		);
 
 		button.setAttribute('disabled', '');
-		modal.open();
 
 		modal.listen(
 			input,
@@ -312,6 +322,8 @@ export class ComponentEditorComponent extends BaseComponent {
 				this.remove();
 			}
 		});
+
+		setTimeout(() => modal.open(), 0);
 	}
 }
 
