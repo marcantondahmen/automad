@@ -59,22 +59,13 @@
                         "style": {
                             "card": false,
                             "shadow": false,
-                            "color": "",
-                            "backgroundColor": "",
                             "backgroundBlendMode": "normal",
-                            "borderColor": "",
-                            "borderWidth": "",
-                            "borderRadius": "",
                             "borderStyle": "none",
-                            "backgroundImage": "",
-                            "paddingTop": "",
-                            "paddingBottom": "",
                             "overflowHidden": false
                         },
                         "justify": "fill-row",
                         "align": "start",
-                        "gap": "2rem",
-                        "minBlockWidth": ""
+                        "gap": "2rem"
                     },
                     "tunes": {
                         "layout": {
@@ -91,8 +82,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:27:34+00:00",
-        ":lastModified": "2025-12-25T16:12:14+00:00",
-        ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T16:12:16+00:00"
+        ":lastModified": "2026-03-12T18:35:51+00:00",
+        ":automadVersion": "2.0.0-beta.17",
+        ":lastPublished": "2026-03-12T18:35:54+00:00"
     }
 }
