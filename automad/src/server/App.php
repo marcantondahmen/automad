@@ -55,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class App {
-	const VERSION = '2.0.0-beta.17';
+	const VERSION = '2.0.0-beta.18';
 
 	/**
 	 * Required PHP version.
