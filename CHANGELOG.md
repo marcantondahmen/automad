@@ -1,8 +1,19 @@
 # Changelog
 
-## [v2.0.0-beta.18](https://github.com/marcantondahmen/automad/commit/ddf5efe93c8b7a19121ba2709e692e285cb9bfa3)
+## [v2.0.0-beta.19](https://github.com/marcantondahmen/automad/commit/c2c0628ca438b94371c62f64c7def1573beb2547)
 
-Thu, 12 Mar 2026 19:37:10 +0100
+Sun, 15 Mar 2026 11:12:17 +0100
+
+### Bugfixes
+
+- fix attribute tunes rendering ([e4c471807](https://github.com/marcantondahmen/automad/commit/e4c471807c6fa1624648a1214d41757272444ba1))
+- fix errors during block rendering for layout sections and nested lists ([c2c0628ca](https://github.com/marcantondahmen/automad/commit/c2c0628ca438b94371c62f64c7def1573beb2547))
+- fix rendering of nested layout sections with class or id attributes in block editor ([6f1ac09ff](https://github.com/marcantondahmen/automad/commit/6f1ac09ff7fe73837577e430f8255132ebcdf3fc))
+- update sample content ([7debe6ee7](https://github.com/marcantondahmen/automad/commit/7debe6ee772e77fa0a7d931aca3814eddced0b47))
+
+## [v2.0.0-beta.18](https://github.com/marcantondahmen/automad/commit/4a16d8c3a7d38dc6e17e8010029cda59497c6ad8)
+
+Thu, 12 Mar 2026 19:40:41 +0100
 
 ### New Features
 

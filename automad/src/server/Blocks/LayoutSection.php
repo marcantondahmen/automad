@@ -81,7 +81,7 @@ class LayoutSection extends AbstractBlock {
 
 		/** @var array<non-empty-literal-string, string> */
 		$styles = array_intersect_key(
-			array_filter(array_merge($defaultStyles, array_filter($data['style']))),
+			array_filter(array_merge($defaultStyles, array_filter($data['style'] ?? array()))),
 			$defaultStyles
 		);
 

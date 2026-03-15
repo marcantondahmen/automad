@@ -53,6 +53,8 @@
 	}
 
 	&__content {
+		display: flex;
+		flex-direction: column;
 		position: relative;
 		width: 100%;
 		padding: @am-bl-editor-block-padding-y 0;
@@ -66,10 +68,6 @@
 			max-width: 100% !important;
 			margin: 0;
 		}
-	}
-
-	&:last-child > &__content {
-		padding-bottom: 0;
 	}
 
 	&--selected &__content {
@@ -104,6 +102,8 @@
 }
 
 .cdx-block {
+	display: flex;
+	flex-direction: column;
 	padding: 0;
 	height: 100%;
 }

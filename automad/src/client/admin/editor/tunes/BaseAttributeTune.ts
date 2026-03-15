@@ -135,24 +135,36 @@ export abstract class BaseAttributeTune extends BaseModalTune<AttributeTuneData>
 	 * @return the element
 	 */
 	protected wrap(blockElement: HTMLElement): HTMLElement {
-		if (!this.data.length) {
-			return blockElement;
-		}
+		const clsBadges = '__badges';
+		const clsBadgeContainer = `__${this.getAttrName()}`;
+
+		const queryBadgeContainer = () => {
+			return query(
+				`:scope > .${clsBadges} > .${clsBadgeContainer}`,
+				blockElement
+			);
+		};
 
 		const badges =
-			query('.__badges', blockElement) ??
+			query(`:scope > .${clsBadges}`, blockElement) ??
 			create(
 				'span',
-				['__badges', CSS.editorTunesAttributeBadges],
+				[clsBadges, CSS.editorTunesAttributeBadges],
 				{},
 				blockElement,
 				'',
 				true
 			);
 
+		if (!this.data.length) {
+			queryBadgeContainer()?.remove();
+
+			return blockElement;
+		}
+
 		const badgeContainer =
-			query(`.__${this.getAttrName()}`, badges) ??
-			create('span', [`__${this.getAttrName()}`], {}, badges, '', true);
+			queryBadgeContainer() ??
+			create('span', [clsBadgeContainer], {}, badges, '', true);
 
 		badgeContainer.innerHTML = this.data
 			? html`

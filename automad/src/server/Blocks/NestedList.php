@@ -149,10 +149,10 @@ class NestedList extends AbstractBlock {
 	/**
 	 * Render list items.
 	 *
-	 * @param array $items
+	 * @param array|null $items
 	 * @return string the rendered item
 	 */
-	private static function renderItems(array $items): string {
+	private static function renderItems(array|null $items): string {
 		if (empty($items)) {
 			return '';
 		}
