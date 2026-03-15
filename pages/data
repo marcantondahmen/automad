@@ -6,9 +6,6 @@
         "checkboxHidePreviousAndNextPageNavigation": "1",
         "checkboxCompactLayout": "1",
         "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-08.webp",
-        "+hero": {
-            "blocks": []
-        },
         "+main": {
             "blocks": [
                 {
@@ -111,22 +108,13 @@
                                         "style": {
                                             "card": false,
                                             "shadow": false,
-                                            "color": "",
-                                            "backgroundColor": "",
                                             "backgroundBlendMode": "normal",
-                                            "borderColor": "",
-                                            "borderWidth": "",
-                                            "borderRadius": "",
                                             "borderStyle": "none",
-                                            "backgroundImage": "",
-                                            "paddingTop": "",
-                                            "paddingBottom": "",
                                             "overflowHidden": false
                                         },
                                         "justify": "start",
                                         "align": "start",
-                                        "gap": "2.25rem",
-                                        "minBlockWidth": ""
+                                        "gap": "2.25rem"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -166,16 +154,8 @@
                         "style": {
                             "card": false,
                             "shadow": false,
-                            "color": "",
-                            "backgroundColor": "",
                             "backgroundBlendMode": "normal",
-                            "borderColor": "",
-                            "borderWidth": "",
-                            "borderRadius": "",
                             "borderStyle": "none",
-                            "backgroundImage": "",
-                            "paddingTop": "",
-                            "paddingBottom": "",
                             "overflowHidden": false
                         },
                         "justify": "fill-row",
@@ -195,14 +175,11 @@
                 }
             ]
         },
-        "+footer": {
-            "blocks": []
-        },
         "template": "page_full_width_left",
         "private": false,
         ":created": "2023-02-17T10:36:01+00:00",
-        ":lastModified": "2025-12-25T18:54:09+00:00",
-        ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T18:55:33+00:00"
+        ":lastModified": "2026-02-14T17:12:42+00:00",
+        ":automadVersion": "2.0.0-beta.15",
+        ":lastPublished": "2026-03-15T10:02:16+00:00"
     }
 }
