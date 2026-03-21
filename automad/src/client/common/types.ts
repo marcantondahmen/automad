@@ -38,7 +38,6 @@ export interface KeyValueMap {
 
 export interface APIResponse {
 	code: 200 | 403 | 500;
-	time: number;
 	data?: KeyValueMap;
 	debug?: KeyValueMap;
 	error?: string;

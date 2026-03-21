@@ -49,6 +49,7 @@ import {
 	queryAll,
 	requestAPI,
 	createProgressModal,
+	AppController,
 } from '@/admin/core';
 import {
 	DeduplicationSettings,
@@ -177,6 +178,13 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
+	 * Optionally set a controller lock for a given instance id and context.
+	 */
+	protected get setLock(): boolean {
+		return false;
+	}
+
+	/**
 	 * All related submit buttons.
 	 */
 	protected get submitButtons(): HTMLElement[] {
@@ -202,6 +210,10 @@ export class FormComponent extends BaseComponent {
 			data.url = pageUrl;
 		}
 
+		if (this.setLock) {
+			data.instanceId = App.instanceId;
+		}
+
 		return data;
 	}
 
@@ -218,6 +230,14 @@ export class FormComponent extends BaseComponent {
 	 * The form constructor.
 	 */
 	async connectedCallback(): Promise<void> {
+		if (this.setLock) {
+			await requestAPI(AppController.setLock, {
+				controller: this.api,
+				url: getPageURL(),
+				lockInstanceId: App.instanceId,
+			});
+		}
+
 		this.init();
 
 		if (this.initSelf) {

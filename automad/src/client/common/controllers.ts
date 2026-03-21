@@ -36,6 +36,7 @@ export const enum AppController {
 	bootstrap = 'AppController::bootstrap',
 	getServerInfo = 'AppController::getServerInfo',
 	updateState = 'AppController::updateState',
+	setLock = 'AppController::setLock',
 }
 
 export const enum CacheController {

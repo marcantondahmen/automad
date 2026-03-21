@@ -34,7 +34,6 @@
 
 import {
 	App,
-	Attr,
 	Binding,
 	collectFieldData,
 	create,
@@ -52,25 +51,8 @@ import {
 	FieldSectionCollection,
 	FieldSectionName,
 	KeyValueMap,
-	SharedBindings,
 } from '@/admin/types';
 import { FormComponent } from './Form';
-
-/**
- * Init all URL and slug related bindings.
- *
- * @param response
- * @return the page bindings object
- */
-const createBindings = (response: KeyValueMap): SharedBindings => {
-	const sharedDataFetchTimeBinding = new Binding('sharedDataFetchTime', {
-		initial: response.time,
-	});
-
-	return {
-		sharedDataFetchTimeBinding,
-	};
-};
 
 /**
  * The shared data form element.
@@ -86,13 +68,7 @@ export class SharedDataFormComponent extends FormComponent {
 	 */
 	protected get deduplicationSettings(): DeduplicationSettings {
 		return {
-			getFormData: (element) => {
-				const data = collectFieldData(element);
-
-				data.dataFetchTime = null;
-
-				return data;
-			},
+			getFormData: (element) => collectFieldData(element),
 			enabled: true,
 		};
 	}
@@ -101,11 +77,6 @@ export class SharedDataFormComponent extends FormComponent {
 	 * The section collection object.
 	 */
 	private sections: FieldSectionCollection;
-
-	/**
-	 * The bindings object.
-	 */
-	private bindings: SharedBindings;
 
 	/**
 	 * Wait for pending requests.
@@ -129,20 +100,17 @@ export class SharedDataFormComponent extends FormComponent {
 	}
 
 	/**
+	 * Set a lock for this controller.
+	 */
+	protected get setLock(): boolean {
+		return true;
+	}
+
+	/**
 	 * Initialize the form.
 	 */
 	protected init(): void {
 		this.sections = createFieldSections(this);
-
-		this.listen(window, EventName.contentPublished, () => {
-			if (!this.bindings) {
-				return;
-			}
-
-			this.bindings.sharedDataFetchTimeBinding.value = Math.ceil(
-				new Date().getTime() / 1000
-			);
-		});
 	}
 
 	/**
@@ -158,16 +126,8 @@ export class SharedDataFormComponent extends FormComponent {
 
 		fire(EventName.contentSaved);
 
-		if (this.bindings) {
-			this.bindings.sharedDataFetchTimeBinding.value = response.time;
-		}
-
 		if (!response.data) {
 			return;
-		}
-
-		if (!this.bindings) {
-			this.bindings = createBindings(response);
 		}
 
 		this.render(response);
@@ -187,18 +147,6 @@ export class SharedDataFormComponent extends FormComponent {
 		const themeOptions = App.themes[mainTheme]?.options ?? {};
 		const fieldGroups = prepareFieldGroups(fields);
 		const unusedFieldGroups = prepareFieldGroups(unused);
-
-		create(
-			'input',
-			[],
-			{
-				type: 'hidden',
-				[Attr.bind]: 'sharedDataFetchTime',
-				[Attr.bindTo]: 'value',
-				name: 'dataFetchTime',
-			},
-			this
-		);
 
 		const sitenameField = createField(
 			FieldTag.title,

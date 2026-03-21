@@ -84,6 +84,13 @@ export class InPageFormComponent extends FormComponent {
 	}
 
 	/**
+	 * Set a lock for this controller.
+	 */
+	protected get setLock(): boolean {
+		return true;
+	}
+
+	/**
 	 * The field name.
 	 */
 	private field: string;
@@ -219,8 +226,6 @@ export class InPageFormComponent extends FormComponent {
 			name: 'value',
 			isInPage: true,
 		});
-
-		this.additionalData['dataFetchTime'] = response.time;
 	}
 }
 

@@ -36,11 +36,13 @@
 namespace Automad\Controllers\API;
 
 use Automad\Admin\State;
+use Automad\API\ControllerLock;
 use Automad\API\Response;
 use Automad\API\ResponseCache;
 use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem;
+use Automad\Core\Request;
 use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Core\Text;
@@ -103,6 +105,23 @@ class AppController {
 			'diskUsage' => FileSystem::diskUsage(),
 			'diskQuota' => AM_DISK_QUOTA
 		));
+	}
+
+	/**
+	 * Set a lock for a given controller and context to a unique instance id.
+	 *
+	 * @return Response
+	 */
+	public static function setLock(): Response {
+		$Response = new Response();
+
+		ControllerLock::set(
+			Request::post('controller'),
+			Request::post('url'),
+			Request::post('lockInstanceId')
+		);
+
+		return $Response;
 	}
 
 	/**

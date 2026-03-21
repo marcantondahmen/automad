@@ -73,17 +73,12 @@ import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
  * @return the page bindings object
  */
 const createBindings = (response: KeyValueMap): PageBindings => {
-	const pageDataFetchTimeBinding = new Binding('pageDataFetchTime', {
-		initial: response.time,
-	});
-
 	const slugBinding = new Binding('pageSlug', {
 		initial: response.data.fields[App.reservedFields.SLUG],
 	});
 
 	return {
 		slugBinding,
-		pageDataFetchTimeBinding,
 	};
 };
 
@@ -102,13 +97,7 @@ export class PageDataFormComponent extends FormComponent {
 	 */
 	protected get deduplicationSettings(): DeduplicationSettings {
 		return {
-			getFormData: (element) => {
-				const data = collectFieldData(element);
-
-				data.dataFetchTime = null;
-
-				return data;
-			},
+			getFormData: (element) => collectFieldData(element),
 			enabled: true,
 		};
 	}
@@ -145,6 +134,13 @@ export class PageDataFormComponent extends FormComponent {
 	}
 
 	/**
+	 * Set a lock for this controller.
+	 */
+	protected get setLock(): boolean {
+		return true;
+	}
+
+	/**
 	 * Initialize the form.
 	 */
 	protected init(): void {
@@ -154,10 +150,6 @@ export class PageDataFormComponent extends FormComponent {
 			if (!this.bindings) {
 				return;
 			}
-
-			this.bindings.pageDataFetchTimeBinding.value = Math.ceil(
-				new Date().getTime() / 1000
-			);
 		});
 	}
 
@@ -384,10 +376,6 @@ export class PageDataFormComponent extends FormComponent {
 
 		fire(EventName.contentSaved);
 
-		if (this.bindings) {
-			this.bindings.pageDataFetchTimeBinding.value = response.time;
-		}
-
 		if (!response.data) {
 			return;
 		}
@@ -418,18 +406,6 @@ export class PageDataFormComponent extends FormComponent {
 		if (!fields) {
 			return;
 		}
-
-		create(
-			'input',
-			[],
-			{
-				type: 'hidden',
-				[Attr.bind]: 'pageDataFetchTime',
-				[Attr.bindTo]: 'value',
-				name: 'dataFetchTime',
-			},
-			this
-		);
 
 		const themeKey = App.reservedFields.THEME;
 		const themes = App.themes;

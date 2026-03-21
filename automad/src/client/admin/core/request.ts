@@ -235,7 +235,7 @@ export const requestAPI = async (
 			notifyError(`${App.text('fetchingDataError')} (${route})`);
 		}
 
-		responseData = { code: 500, time: 0 };
+		responseData = { code: 500 };
 	}
 
 	abortListener.remove();

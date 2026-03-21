@@ -42,7 +42,6 @@ use Automad\Core\Debug;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
 use Automad\Core\Request;
-use Automad\Core\Text;
 use Automad\Stores\DataStore;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
@@ -70,10 +69,6 @@ class SharedController {
 		$DataStore = new DataStore();
 
 		if (!empty($data) && is_array($data)) {
-			if (filemtime($DataStore->getFile()) > Request::post('dataFetchTime')) {
-				return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
-			}
-
 			$Messenger = new Messenger();
 
 			$Response->setReload($Shared->save($data, $Messenger));

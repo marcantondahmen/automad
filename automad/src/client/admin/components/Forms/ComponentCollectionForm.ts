@@ -33,6 +33,7 @@
  */
 
 import {
+	App,
 	create,
 	CSS,
 	EventName,
@@ -80,15 +81,17 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	}
 
 	/**
+	 * Set a lock for this controller.
+	 */
+	protected get setLock(): boolean {
+		return true;
+	}
+
+	/**
 	 * This is false until the first request was made and the store components are rendered
 	 * in order to prevent submitting an empty form and therefore deleting the components store.
 	 */
 	private isInitialized = false;
-
-	/**
-	 * The time of the latest fetch.
-	 */
-	private fetchTime: number;
 
 	/**
 	 * The sortable instance.
@@ -100,13 +103,7 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	 */
 	protected get deduplicationSettings(): DeduplicationSettings {
 		return {
-			getFormData: () => {
-				const data = this.formData;
-
-				data.fetchTime = null;
-
-				return data;
-			},
+			getFormData: () => this.formData,
 			enabled: true,
 		};
 	}
@@ -115,31 +112,33 @@ export class ComponentCollectionFormComponent extends FormComponent {
 	 * The form data object.
 	 */
 	get formData(): KeyValueMap {
-		if (!this.isInitialized) {
-			return {};
+		const data: KeyValueMap = {
+			instanceId: App.instanceId,
+		};
+
+		if (this.isInitialized) {
+			const componentEditors = queryAll<ComponentEditorComponent>(
+				ComponentEditorComponent.TAG_NAME,
+				this
+			);
+
+			data.components = componentEditors.map((editor) => editor.data);
 		}
 
-		const componentEditors = queryAll<ComponentEditorComponent>(
-			ComponentEditorComponent.TAG_NAME,
-			this
-		);
-
-		return {
-			components: componentEditors.map((editor) => editor.data),
-			fetchTime: this.fetchTime,
-		};
+		return data;
 	}
 
 	/**
 	 * Add a component.
 	 *
+	 * @async
 	 * @param data
 	 * @param [insertAfter]
 	 */
-	add(
+	async add(
 		data: ComponentEditorData,
 		insertAfter: ComponentEditorComponent | null = null
-	): ComponentEditorComponent {
+	): Promise<ComponentEditorComponent> {
 		const component = create(
 			ComponentEditorComponent.TAG_NAME,
 			[],
@@ -151,7 +150,7 @@ export class ComponentCollectionFormComponent extends FormComponent {
 			insertAfter.insertAdjacentElement('afterend', component);
 		}
 
-		component.data = data;
+		await component.setData(data);
 
 		return component;
 	}
@@ -172,10 +171,6 @@ export class ComponentCollectionFormComponent extends FormComponent {
 				});
 			});
 		});
-
-		this.listen(window, EventName.contentPublished, () => {
-			this.fetchTime = Math.ceil(new Date().getTime() / 1000);
-		});
 	}
 
 	/**
@@ -189,10 +184,12 @@ export class ComponentCollectionFormComponent extends FormComponent {
 			this.sortable?.destroy();
 			this.innerHTML = '';
 
-			response.data.components.forEach(
-				(component: ComponentEditorData) => {
-					this.add(component);
-				}
+			await Promise.all(
+				response.data.components.map(
+					async (component: ComponentEditorData) => {
+						await this.add(component);
+					}
+				)
 			);
 
 			this.sortable = new Sortable(this, {
@@ -223,7 +220,6 @@ export class ComponentCollectionFormComponent extends FormComponent {
 			fire(EventName.contentSaved);
 		}
 
-		this.fetchTime = response.time;
 		this.isInitialized = true;
 	}
 
