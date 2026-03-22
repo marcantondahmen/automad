@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.20](https://github.com/marcantondahmen/automad/commit/60cd2624d58bd043b5c245c8038881663fbfb81a)
+## [v2.0.0-beta.21](https://github.com/marcantondahmen/automad/commit/c0ce3c1e46cd03e913ebb0c833c12c64b312df75)
 
-Sun, 22 Mar 2026 18:08:12 +0100
+Sun, 22 Mar 2026 18:20:08 +0100
+
+### Bugfixes
+
+- prevent accidential dropping components onto an editor instance as block inside the component editor ([c0ce3c1e4](https://github.com/marcantondahmen/automad/commit/c0ce3c1e46cd03e913ebb0c833c12c64b312df75))
+
+## [v2.0.0-beta.20](https://github.com/marcantondahmen/automad/commit/4661dd0340b7da67c39008dbdf08864a3951908d)
+
+Sun, 22 Mar 2026 18:11:24 +0100
 
 ### New Features
 
