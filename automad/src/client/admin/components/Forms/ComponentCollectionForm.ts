@@ -203,14 +203,18 @@ export class ComponentCollectionFormComponent extends FormComponent {
 				dragClass: CSS.componentEditorDrag,
 				direction: 'vertical',
 				onStart: () => {
-					queryAll(`${FieldTag.editor}`, this).forEach((editor) => {
-						editor.style.pointerEvents = 'none';
-					});
+					queryAll(`.${CSS.componentEditorMain}`, this).forEach(
+						(editor) => {
+							editor.style.pointerEvents = 'none';
+						}
+					);
 				},
 				onEnd: () => {
-					queryAll(`${FieldTag.editor}`, this).forEach((editor) => {
-						editor.style.removeProperty('pointer-events');
-					});
+					queryAll(`.${CSS.componentEditorMain}`, this).forEach(
+						(editor) => {
+							editor.style.removeProperty('pointer-events');
+						}
+					);
 				},
 				onChange: async (event) => {
 					const editor = event.item as ComponentEditorComponent;
