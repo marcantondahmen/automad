@@ -49,5 +49,6 @@ export interface APIResponse {
 	};
 	redirect?: URL;
 	reload?: boolean;
+	reloadDialog?: string;
 	success?: string;
 }

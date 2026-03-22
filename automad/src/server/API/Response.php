@@ -84,6 +84,11 @@ class Response {
 	private ?bool $reload = null;
 
 	/**
+	 * The output buffer used to store the reload dialog text.
+	 */
+	private ?string $reloadDialog = null;
+
+	/**
 	 * The output buffer used for success notifications.
 	 */
 	private ?string $success = null;
@@ -198,6 +203,19 @@ class Response {
 	 */
 	public function setReload(bool $value): Response {
 		$this->reload = $value;
+
+		return $this;
+	}
+
+	/**
+	 * Set the reloadDialog property.
+	 *
+	 * @see $reloadDialog
+	 * @param string $value
+	 * @return Response
+	 */
+	public function setReloadDialog(string $value): Response {
+		$this->reloadDialog = $value;
 
 		return $this;
 	}

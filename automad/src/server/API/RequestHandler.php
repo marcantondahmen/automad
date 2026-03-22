@@ -94,7 +94,7 @@ class RequestHandler {
 		)) {
 			$Response = new Response();
 			$Response->setCode(403);
-			$Response->setError(Text::get('preventDataOverwritingError'));
+			$Response->setReloadDialog(Text::get('preventDataOverwritingError'));
 
 			return $Response->json();
 		}
