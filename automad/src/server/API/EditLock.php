@@ -41,13 +41,21 @@ use Automad\Core\Str;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Lock class handles locking of controllers by a given app instance id.
+ * The EditLock class handles locking of controllers by a given app instance id.
+ *
+ * Locks follow a quite simple concept where a form component can be configured to aquire
+ * a lock for an endpoint in combination with an optional resource (the URL of a page).
+ * Locks are aquired once when a form is connected to the DOM.
+ *
+ * Whenever a form is connected in another tab or browser afterwards, that new instance will
+ * aquire the lock and the previously used form has no access anymore.
+ * The last connected form always owns the lock.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class ControllerLock {
+class EditLock {
 	const DIR = AM_DIR_TMP . '/locks';
 
 	/**

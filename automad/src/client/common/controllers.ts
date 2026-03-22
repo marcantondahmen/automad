@@ -36,7 +36,6 @@ export const enum AppController {
 	bootstrap = 'AppController::bootstrap',
 	getServerInfo = 'AppController::getServerInfo',
 	updateState = 'AppController::updateState',
-	setLock = 'AppController::setLock',
 }
 
 export const enum CacheController {
@@ -46,6 +45,10 @@ export const enum CacheController {
 
 export const enum ConfigController {
 	update = 'ConfigController::update',
+}
+
+export const enum EditLockController {
+	set = 'EditLockController::set',
 }
 
 export const enum FileCollectionController {

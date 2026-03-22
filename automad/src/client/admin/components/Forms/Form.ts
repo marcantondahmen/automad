@@ -49,7 +49,7 @@ import {
 	queryAll,
 	requestAPI,
 	createProgressModal,
-	AppController,
+	EditLockController,
 } from '@/admin/core';
 import {
 	DeduplicationSettings,
@@ -231,7 +231,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	async connectedCallback(): Promise<void> {
 		if (this.setLock) {
-			await requestAPI(AppController.setLock, {
+			await requestAPI(EditLockController.set, {
 				controller: this.api,
 				url: getPageURL(),
 				lockInstanceId: App.instanceId,
