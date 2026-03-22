@@ -82,8 +82,6 @@ export class ComponentEditorComponent extends BaseComponent {
 	 * The component data getter.
 	 */
 	get data(): ComponentEditorData {
-		this._data.blocks = this.editor.value.blocks;
-
 		return this._data;
 	}
 
@@ -235,6 +233,12 @@ export class ComponentEditorComponent extends BaseComponent {
 			}) as EditorFieldComponent;
 
 			await this.editor.editorJS.editor.isReady;
+
+			this.listen(this.editor, 'change', () => {
+				this._data.blocks = this.editor.value.blocks;
+
+				fire('change', this);
+			});
 		};
 
 		if (hasName) {
@@ -253,8 +257,6 @@ export class ComponentEditorComponent extends BaseComponent {
 	 */
 	fireOnReady(): void {
 		setTimeout(async () => {
-			await this.editor.editorJS.editor.isReady;
-
 			fire('change', this.editor);
 		}, 0);
 	}

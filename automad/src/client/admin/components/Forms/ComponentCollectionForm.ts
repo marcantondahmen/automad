@@ -122,7 +122,9 @@ export class ComponentCollectionFormComponent extends FormComponent {
 				this
 			);
 
-			data.components = componentEditors.map((editor) => editor.data);
+			data.components = componentEditors
+				.map((editor) => editor.data)
+				.filter((editor) => !!editor);
 		}
 
 		return data;
@@ -210,10 +212,11 @@ export class ComponentCollectionFormComponent extends FormComponent {
 						editor.style.removeProperty('pointer-events');
 					});
 				},
-				onChange: (event) => {
-					(event.item as ComponentEditorComponent).init();
+				onChange: async (event) => {
+					const editor = event.item as ComponentEditorComponent;
 
-					this.submit();
+					await editor.init();
+					fire('change', this);
 				},
 			});
 		} else {
