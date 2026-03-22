@@ -128,4 +128,9 @@
 			padding: 0.7rem;
 		}
 	}
+
+	// Prevent accidential drops into an editor.
+	*:has(> &--ghost) &__main {
+		pointer-events: none !important;
+	}
 }
