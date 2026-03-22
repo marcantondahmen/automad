@@ -47,6 +47,10 @@ export const enum ConfigController {
 	update = 'ConfigController::update',
 }
 
+export const enum EditLockController {
+	set = 'EditLockController::set',
+}
+
 export const enum FileCollectionController {
 	list = 'FileCollectionController::list',
 	upload = 'FileCollectionController::upload',

@@ -70,7 +70,6 @@ export interface Pages {
 }
 
 export interface PageBindings {
-	pageDataFetchTimeBinding: Binding;
 	slugBinding: Binding;
 }
 

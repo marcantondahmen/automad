@@ -38,6 +38,7 @@ import {
 	deleteSearchParam,
 	EventName,
 	fire,
+	getLogger,
 	getSearchParam,
 	listen,
 	PackageManagerController,
@@ -46,6 +47,7 @@ import {
 	setSearchParam,
 	State,
 	SystemController,
+	uniqueId,
 } from '.';
 import {
 	InputElement,
@@ -75,6 +77,13 @@ export class App {
 	): KeyValueMap[keyof KeyValueMap] {
 		return State.getInstance().get(key);
 	}
+
+	/**
+	 * The unique id that can identify a loaded dashboard accross route changes until the next page load.
+	 *
+	 * @static
+	 */
+	static instanceId: string = '';
 
 	/**
 	 * The internal state of the nav.
@@ -350,6 +359,9 @@ export class App {
 		App.baseIndex = root.elementAttributes['base-index'];
 		App.baseURL = root.elementAttributes['base-url'];
 		App.apiURL = `${App.baseIndex}/_api`;
+		App.instanceId = uniqueId();
+
+		getLogger().log('App instance ID', App.instanceId);
 
 		const { data } = await requestAPI(AppController.bootstrap);
 		const state = State.getInstance();

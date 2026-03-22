@@ -54,7 +54,7 @@ import {
 	TextAlignRightInline,
 } from '@/admin/editor/inline/TextAlign';
 import {
-	removeDeleteComponents,
+	removeDeletedComponents,
 	unknownBlockHandler,
 } from '@/admin/editor/utils';
 import { TeXInline } from '@/admin/editor/inline/TeX';
@@ -91,7 +91,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * @return The prepared data
 	 */
 	private prepareData(data: EditorOutputData): EditorOutputData {
-		return removeDeleteComponents(data);
+		return removeDeletedComponents(data);
 	}
 
 	/**
@@ -123,7 +123,8 @@ export class EditorJSComponent extends BaseComponent {
 		} catch (error) {
 			getLogger().error(
 				'Error creating a new EditorJS instance with given data. Creating a fresh instance without data.',
-				data
+				data,
+				error
 			);
 			this.editor = createEditor();
 		}

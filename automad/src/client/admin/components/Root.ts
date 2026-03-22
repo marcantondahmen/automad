@@ -172,7 +172,7 @@ export class RootComponent extends BaseComponent {
 			this.innerHTML = '';
 			this.appendChild(page);
 
-			await waitForPendingRequests();
+			await this.waitForReady();
 
 			Bindings.connectElements(this);
 			initCheckboxToggles(this);
@@ -185,6 +185,21 @@ export class RootComponent extends BaseComponent {
 
 			App.isReady = true;
 		});
+	}
+
+	/**
+	 * Awaits cascading requests to finish.
+	 *
+	 * @async
+	 */
+	private async waitForReady(): Promise<void> {
+		await waitForPendingRequests();
+
+		await new Promise((resolve) => {
+			setTimeout(resolve, 0);
+		});
+
+		await waitForPendingRequests();
 	}
 
 	/**

@@ -82,26 +82,27 @@ export class ComponentEditorComponent extends BaseComponent {
 	 * The component data getter.
 	 */
 	get data(): ComponentEditorData {
-		this._data.blocks = this.editor.value.blocks;
-
 		return this._data;
 	}
 
 	/**
-	 * The component data setter.
+	 * An async function that sets the component data and waits for its initialization.
 	 *
+	 * @async
 	 * @param data
 	 */
-	set data(data: ComponentEditorData) {
+	async setData(data: ComponentEditorData): Promise<void> {
 		this._data = data;
 
-		setTimeout(this.init.bind(this), 0);
+		await this.init();
 	}
 
 	/**
 	 * Initialize the component when data is set.
+	 *
+	 * @async
 	 */
-	init(): void {
+	async init(): Promise<void> {
 		const hasName = this._data.name.length > 0;
 		const nameBindingKey = `component-name-${this._data.id}-${Array.from(this.parentNode?.childNodes ?? [])?.indexOf(this) ?? 0}`;
 
@@ -184,14 +185,14 @@ export class ComponentEditorComponent extends BaseComponent {
 				this.toggleEditor(details, toggle, !this._data.collapsed);
 			});
 
-			this.listen(copy, 'click', () => {
+			this.listen(copy, 'click', async () => {
 				const collection =
 					this.closest<ComponentCollectionFormComponent>(
 						ComponentCollectionFormComponent.TAG_NAME
 					);
 
-				collection
-					.add(
+				(
+					await collection.add(
 						{
 							id: uniqueId(),
 							name: `${this._data.name} (${App.text('componentCopy')})`,
@@ -200,7 +201,7 @@ export class ComponentEditorComponent extends BaseComponent {
 						},
 						this
 					)
-					.fireOnReady();
+				).fireOnReady();
 			});
 
 			this.listen(rename, 'click', () => {
@@ -230,14 +231,22 @@ export class ComponentEditorComponent extends BaseComponent {
 				key: '',
 				label: '',
 			}) as EditorFieldComponent;
+
+			await this.editor.editorJS.editor.isReady;
+
+			this.listen(this.editor, 'change', () => {
+				this._data.blocks = this.editor.value.blocks;
+
+				fire('change', this);
+			});
 		};
 
 		if (hasName) {
-			setupEditor();
+			await setupEditor();
 		} else {
-			this.setName((name) => {
+			this.setName(async (name) => {
 				nameBinding.value = name;
-				setupEditor();
+				await setupEditor();
 				this.fireOnReady();
 			});
 		}
@@ -248,8 +257,6 @@ export class ComponentEditorComponent extends BaseComponent {
 	 */
 	fireOnReady(): void {
 		setTimeout(async () => {
-			await this.editor.editorJS.editor.isReady;
-
 			fire('change', this.editor);
 		}, 0);
 	}

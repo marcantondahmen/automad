@@ -34,6 +34,7 @@
 
 import {
 	App,
+	confirm,
 	controllerRoute,
 	create,
 	CSS,
@@ -235,7 +236,7 @@ export const requestAPI = async (
 			notifyError(`${App.text('fetchingDataError')} (${route})`);
 		}
 
-		responseData = { code: 500, time: 0 };
+		responseData = { code: 500 };
 	}
 
 	abortListener.remove();
@@ -254,6 +255,12 @@ export const requestAPI = async (
 
 	if (!!responseData.debug) {
 		console.log({ [controller]: responseData.debug });
+	}
+
+	if (!!responseData.reloadDialog) {
+		if (await confirm(responseData.reloadDialog)) {
+			App.reload();
+		}
 	}
 
 	return responseData;

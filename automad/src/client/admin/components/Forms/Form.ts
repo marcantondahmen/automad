@@ -49,6 +49,7 @@ import {
 	queryAll,
 	requestAPI,
 	createProgressModal,
+	EditLockController,
 } from '@/admin/core';
 import {
 	DeduplicationSettings,
@@ -68,6 +69,8 @@ const debounced = debounce(
 	},
 	autoSubmitTimeout
 );
+
+const stringifyFormData = (data: KeyValueMap): string => JSON.stringify(data);
 
 /**
  * A basic form.
@@ -120,7 +123,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected get deduplicationSettings(): DeduplicationSettings {
 		return {
-			getFormData: null,
+			getFormData: () => null,
 			enabled: false,
 		};
 	}
@@ -175,6 +178,13 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
+	 * Optionally set a controller lock for a given instance id and context.
+	 */
+	protected get setLock(): boolean {
+		return false;
+	}
+
+	/**
 	 * All related submit buttons.
 	 */
 	protected get submitButtons(): HTMLElement[] {
@@ -200,6 +210,10 @@ export class FormComponent extends BaseComponent {
 			data.url = pageUrl;
 		}
 
+		if (this.setLock) {
+			data.instanceId = App.instanceId;
+		}
+
 		return data;
 	}
 
@@ -215,11 +229,25 @@ export class FormComponent extends BaseComponent {
 	/**
 	 * The form constructor.
 	 */
-	connectedCallback(): void {
+	async connectedCallback(): Promise<void> {
+		if (this.setLock) {
+			await requestAPI(EditLockController.set, {
+				controller: this.api,
+				url: getPageURL(),
+				lockInstanceId: App.instanceId,
+			});
+		}
+
 		this.init();
 
 		if (this.initSelf) {
-			this.submit(true);
+			await this.submit(true);
+
+			if (this.deduplicationSettings.enabled) {
+				this.lastSubmittedFormData = stringifyFormData(
+					this.deduplicationSettings.getFormData(this)
+				);
+			}
 		}
 
 		if (this.loadingAnimationMessage) {
@@ -283,17 +311,18 @@ export class FormComponent extends BaseComponent {
 		}
 
 		const data = this.deduplicationSettings.getFormData(this);
+		const stringifiedData = stringifyFormData(data);
 
 		if (
 			Object.keys(data).length &&
-			JSON.stringify(data) === this.lastSubmittedFormData
+			stringifiedData === this.lastSubmittedFormData
 		) {
 			getLogger().log('Form data has not changed');
 
 			return true;
 		}
 
-		this.lastSubmittedFormData = JSON.stringify(data);
+		this.lastSubmittedFormData = stringifiedData;
 
 		return false;
 	}

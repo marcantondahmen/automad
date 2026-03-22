@@ -44,7 +44,6 @@ export * from './field';
 export * from './package';
 export * from './page';
 export * from './search';
-export * from './shared';
 export * from './switcher';
 export * from './system';
 export * from './undo';

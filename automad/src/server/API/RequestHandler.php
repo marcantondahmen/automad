@@ -41,6 +41,7 @@ use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Session;
 use Automad\Core\Str;
+use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -76,6 +77,7 @@ class RequestHandler {
 	 */
 	public static function getResponse(): string {
 		Error::setJsonResponseHandler();
+		self::convertJsonPost();
 
 		header('Content-Type: application/json; charset=utf-8');
 
@@ -85,23 +87,37 @@ class RequestHandler {
 
 		Debug::log($controller, AM_REQUEST);
 
-		if (self::classFileExists($class) && method_exists($class, $method)) {
-			$Messenger = new Messenger();
+		if (EditLock::isLocked(
+			Str::stripStart($controller, self::$controllerNamespace),
+			Request::post('url'),
+			Request::post('instanceId')
+		)) {
+			$Response = new Response();
+			$Response->setCode(403);
+			$Response->setReloadDialog(Text::get('preventDataOverwritingError'));
 
-			if (self::validate($controller, $Messenger)) {
-				self::convertJsonPost();
-				$Response = call_user_func($controller);
-			} else {
-				$Response = new Response();
-				$Response->setCode(403);
-				$Response->setError($Messenger->getError());
-			}
-		} else {
+			return $Response->json();
+		}
+
+		if (!self::classFileExists($class) || !method_exists($class, $method)) {
 			$Response = new Response();
 			$Response->setCode(404);
 			$Response->setError('Invalid API route: ' . AM_REQUEST . ' [' . $controller . ']');
+
+			return $Response->json();
 		}
 
+		$Messenger = new Messenger();
+
+		if (!self::validate($controller, $Messenger)) {
+			$Response = new Response();
+			$Response->setCode(403);
+			$Response->setError($Messenger->getError());
+
+			return $Response->json();
+		}
+
+		$Response = call_user_func($controller);
 		$Response->setDebug(Debug::getLog());
 
 		return $Response->json();

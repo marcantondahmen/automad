@@ -86,10 +86,6 @@ class InPageController {
 			return $Response->setData(array('value'=> $Page->data[$field] ?? ''));
 		}
 
-		if (filemtime($Page->getFile()) > Request::post('dataFetchTime')) {
-			return $Response->setError(Text::get('preventDataOverwritingError'))->setCode(403);
-		}
-
 		$Page->updateField($field, Request::post('value'));
 
 		return $Response->setData(array('saved' => true));

@@ -143,7 +143,7 @@ export const insertBlock = async (
  * @param data
  * @return The filtered data
  */
-export const removeDeleteComponents = (
+export const removeDeletedComponents = (
 	data: EditorOutputData
 ): EditorOutputData => {
 	const componentIds = App.components.map((component) => component.id);
