@@ -1,8 +1,25 @@
 # Changelog
 
-## [v2.0.0-beta.19](https://github.com/marcantondahmen/automad/commit/c2c0628ca438b94371c62f64c7def1573beb2547)
+## [v2.0.0-beta.20](https://github.com/marcantondahmen/automad/commit/60cd2624d58bd043b5c245c8038881663fbfb81a)
 
-Sun, 15 Mar 2026 11:12:17 +0100
+Sun, 22 Mar 2026 18:08:12 +0100
+
+### New Features
+
+- implement a more stable controller locking for selected routes in order to prevent overwriting changes when working on the same data in different browser tabs ([d5e063362](https://github.com/marcantondahmen/automad/commit/d5e0633624e046cd34d96c4d50d8fbbc5a46f47d))
+- show reload confirmation dialog instead of error notification when a page is locked by another instance ([b4212a431](https://github.com/marcantondahmen/automad/commit/b4212a43145202f121ef9f03f5d367f41a9a4c32))
+
+### Bugfixes
+
+- fix component editor issues when sorting components ([f5d7f9cca](https://github.com/marcantondahmen/automad/commit/f5d7f9ccad355e95a322146e0c4a3aa62dea9998))
+- fix height of nested blocks with a default width in a vertically stretched layout ([6381ab2dd](https://github.com/marcantondahmen/automad/commit/6381ab2dd60bba163c51f6781caa1b428962c64f))
+- fix restoring filters and scroll position on window reloads ([8e3b09111](https://github.com/marcantondahmen/automad/commit/8e3b09111cdeadf3304095165a709bc071c29caf))
+- fix saving data twice on first change after page load ([a47ff84d5](https://github.com/marcantondahmen/automad/commit/a47ff84d532db5a58563d310e919840570a18f8c))
+- reset border styles for nested layout sections in editor ([d234da75e](https://github.com/marcantondahmen/automad/commit/d234da75eeffafb34d765c086620873835c45785))
+
+## [v2.0.0-beta.19](https://github.com/marcantondahmen/automad/commit/59e7ffea3a0a439bdc1eb7cd1c14d44e3f3cf906)
+
+Sun, 15 Mar 2026 17:03:27 +0100
 
 ### Bugfixes
 
