@@ -68,6 +68,7 @@ class CacheEnableComponent extends BaseComponent {
 				value: App.system.cache.enabled,
 				name: 'cacheEnabled',
 				label: App.text('systemCacheEnable'),
+				envKey: 'AM_CACHE_ENABLED',
 			},
 			[],
 			{

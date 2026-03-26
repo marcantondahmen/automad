@@ -110,7 +110,12 @@ export class MailConfigFormComponent extends FormComponent {
 			transportOptions.map((opt) => ({ value: opt })),
 			data.transport,
 			mailFields,
-			'transport'
+			'transport',
+			null,
+			null,
+			[],
+			{},
+			'AM_MAIL_TRANSPORT'
 		);
 
 		createField(FieldTag.email, mailFields, {
@@ -119,6 +124,7 @@ export class MailConfigFormComponent extends FormComponent {
 			value: data.from,
 			label: `${App.text('emailFrom')} (From)`,
 			placeholder: data.fromDefault,
+			envKey: 'AM_MAIL_FROM',
 		});
 
 		const smtpCard = create('div', [CSS.card], {}, this);
@@ -146,6 +152,7 @@ export class MailConfigFormComponent extends FormComponent {
 				name: 'smtpServer',
 				value: data.smtpServer,
 				label: 'SMTP Server',
+				envKey: 'AM_MAIL_SMTP_SERVER',
 			},
 			[],
 			{ pattern: '^\\S*$' }
@@ -159,6 +166,7 @@ export class MailConfigFormComponent extends FormComponent {
 				name: 'smtpPort',
 				value: data.smtpPort,
 				label: 'SMTP Port',
+				envKey: 'AM_MAIL_SMTP_PORT',
 			},
 			[],
 			{ pattern: '^\\d{0,5}$' }
@@ -172,20 +180,27 @@ export class MailConfigFormComponent extends FormComponent {
 				name: 'smtpUsername',
 				value: data.smtpUsername,
 				label: `SMTP ${App.text('username')}`,
+				envKey: 'AM_MAIL_SMTP_USERNAME',
 			},
 			[],
 			{ pattern: '^\\S*$' }
 		);
 
-		createField(FieldTag.input, smtpCardForm, {
-			key: 'smtpPassword',
-			name: 'smtpPassword',
-			value: '',
-			label: `SMTP ${App.text('password')}`,
-			placeholder: App.system.mail.smtpPasswordIsSet
-				? App.text('systemMailSmtpPasswordPlaceholder')
-				: '',
-		});
+		createField(
+			FieldTag.input,
+			smtpCardForm,
+			{
+				key: 'smtpPassword',
+				name: 'smtpPassword',
+				value: '',
+				label: `SMTP ${App.text('password')}`,
+				placeholder: App.system.mail.smtpPasswordIsSet
+					? App.text('systemMailSmtpPasswordPlaceholder')
+					: '',
+				envKey: 'AM_MAIL_SMTP_PASSWORD',
+			},
+			[]
+		);
 
 		toggleSmtpCard();
 

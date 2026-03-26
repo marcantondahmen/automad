@@ -80,10 +80,11 @@ export interface FieldInitData {
 	options?: KeyValueMap;
 	label?: string;
 	placeholder?: string | number | KeyValueMap | boolean;
-	isInPage?: boolean;
 	isUnused?: boolean;
+	envKey?: string;
+	hideLabel?: boolean;
 }
 
-export interface FieldRenderData extends Omit<FieldInitData, 'key'> {
+export interface FieldRenderData extends Omit<FieldInitData, 'key' | 'envKey'> {
 	id: string;
 }

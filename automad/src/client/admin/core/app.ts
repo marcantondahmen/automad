@@ -132,8 +132,8 @@ export class App {
 	 *
 	 * @static
 	 */
-	static get isCloud(): boolean {
-		return App.getState('cloudMode');
+	static get envKeys(): string[] {
+		return App.getState('envKeys');
 	}
 
 	/**

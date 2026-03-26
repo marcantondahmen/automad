@@ -479,6 +479,7 @@ export const createProgressModal = (text: string): ModalComponent => {
  * @param prefix
  * @param cls
  * @param attributes
+ * @param envKey
  * @returns the created component
  */
 export const createSelect = (
@@ -489,7 +490,8 @@ export const createSelect = (
 	id: string = null,
 	prefix: string = '',
 	cls: string[] = [],
-	attributes: KeyValueMap = {}
+	attributes: KeyValueMap = {},
+	envKey: string = ''
 ): SelectComponent => {
 	const select = create(SelectComponent.TAG_NAME, cls, {}, parent);
 
@@ -501,7 +503,7 @@ export const createSelect = (
 		attributes['id'] = id;
 	}
 
-	select.init(options, selected, prefix, attributes);
+	select.init(options, selected, prefix, attributes, envKey);
 
 	return select;
 };

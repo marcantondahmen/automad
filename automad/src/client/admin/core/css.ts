@@ -191,6 +191,7 @@ export const enum CSS {
 	feedFieldSelectItemDrag = 'am-c-feed-field-select__item--drag',
 
 	field = 'am-c-field',
+	fieldEnvDefined = 'am-c-field--env-defined',
 	fieldLabel = 'am-c-field__label',
 
 	filter = 'am-c-filter',

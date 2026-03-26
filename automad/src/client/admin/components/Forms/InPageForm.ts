@@ -224,7 +224,7 @@ export class InPageFormComponent extends FormComponent {
 			key: this.field,
 			value: response.data.value,
 			name: 'value',
-			isInPage: true,
+			hideLabel: true,
 		});
 	}
 }

@@ -63,10 +63,6 @@ class MailConfigController {
 	public static function reset(): Response {
 		$Response = new Response();
 
-		if (AM_CLOUD_MODE_ENABLED) {
-			return $Response->setError(Text::get('permissionsDeniedError'));
-		}
-
 		MailConfig::reset();
 		Cache::clear();
 
@@ -81,10 +77,6 @@ class MailConfigController {
 	public static function save(): Response {
 		$Response = new Response();
 		$transport = Request::post('transport');
-
-		if (AM_CLOUD_MODE_ENABLED) {
-			return $Response->setError(Text::get('permissionsDeniedError'));
-		}
 
 		if (empty($transport)) {
 			return $Response;

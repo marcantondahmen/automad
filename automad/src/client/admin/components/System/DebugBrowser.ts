@@ -32,7 +32,14 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Binding, create, CSS, EventName, html } from '@/admin/core';
+import {
+	App,
+	Attr,
+	Binding,
+	createField,
+	EventName,
+	FieldTag,
+} from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -53,24 +60,23 @@ class DebugBrowserComponent extends BaseComponent {
 			debugEnabled.value = App.system.debug.browser;
 		});
 
-		create(
-			'div',
-			[CSS.toggle, CSS.toggleButton],
-			{},
+		createField(
+			FieldTag.toggle,
 			this,
-			html`
-				<input
-					type="checkbox"
-					name="debugBrowser"
-					id="am-debug-browser"
-					value="1"
-					${App.system.debug.browser ? 'checked' : ''}
-				/>
-				<label for="am-debug-browser">
-					<i class="bi"></i>
-					<span>${App.text('systemDebugBrowser')}</span>
-				</label>
-			`
+			{
+				key: 'debugBrowser',
+				value: App.system.debug.browser,
+				name: 'debugBrowser',
+				label: App.text('systemDebugBrowser'),
+				envKey: 'AM_DEBUG_BROWSER',
+				hideLabel: true,
+			},
+			[],
+			{
+				[Attr.toggle]: '.am-debug-settings',
+				[Attr.bind]: 'debugEnabled',
+				[Attr.bindTo]: 'checked',
+			}
 		);
 	}
 }

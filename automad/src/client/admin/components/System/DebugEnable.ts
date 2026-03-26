@@ -68,6 +68,7 @@ class DebugEnableComponent extends BaseComponent {
 				value: App.system.debug.enabled,
 				name: 'debugEnabled',
 				label: App.text('systemDebugEnable'),
+				envKey: 'AM_DEBUG_ENABLED',
 			},
 			[],
 			{
