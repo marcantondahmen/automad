@@ -80,17 +80,17 @@
 	}
 
 	&__node--drop-before > &__label:after {
-		border-top-color: hsl(var(--am-clr-border-active));
+		border-top-color: hsl(var(--am-clr-border-drag-over));
 		transition-delay: 0s;
 	}
 
 	&__node--drop-after > &__label:after {
-		border-bottom-color: hsl(var(--am-clr-border-active));
+		border-bottom-color: hsl(var(--am-clr-border-drag-over));
 		transition-delay: 0s;
 	}
 
 	&__node--drop-inside > &__label > * > * {
-		border-color: hsl(from hsl(var(--am-clr-text-muted)) h s l / 0.5);
+		border-color: hsl(var(--am-clr-border-drag-over));
 	}
 
 	&__collapse {
