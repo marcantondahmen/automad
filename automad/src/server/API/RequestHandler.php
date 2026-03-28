@@ -88,8 +88,7 @@ class RequestHandler {
 		Debug::log($controller, AM_REQUEST);
 
 		if (EditLock::isLocked(
-			Str::stripStart($controller, self::$controllerNamespace),
-			Request::post('url'),
+			Request::post('lockHandle'),
 			Request::post('instanceId')
 		)) {
 			$Response = new Response();

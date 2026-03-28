@@ -266,6 +266,12 @@ class Cache {
 			// $arrayDirsAndFiles will collect all relevant files and dirs to be monitored for changes.
 			$arrayDirsAndFiles = array();
 
+			$envFile = AM_BASE_DIR . '/.env';
+
+			if (is_readable($envFile)) {
+				$arrayDirsAndFiles[] = $envFile;
+			}
+
 			// The following directories are monitored for any changes.
 			$monitoredDirs = array(AM_DIR_PAGES, AM_DIR_PACKAGES, AM_DIR_SHARED, '/config');
 

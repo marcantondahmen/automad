@@ -258,7 +258,7 @@ export const requestAPI = async (
 	}
 
 	if (!!responseData.reloadDialog) {
-		if (await confirm(responseData.reloadDialog)) {
+		if (await confirm(responseData.reloadDialog, App.text('reload'))) {
 			App.reload();
 		}
 	}

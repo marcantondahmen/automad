@@ -40,6 +40,7 @@ use Automad\API\Response;
 use Automad\API\ResponseCache;
 use Automad\App;
 use Automad\Core\Automad;
+use Automad\Core\Config;
 use Automad\Core\FileSystem;
 use Automad\Core\Session;
 use Automad\Core\Str;
@@ -67,8 +68,8 @@ class AppController {
 			$Automad = Automad::fromCache();
 
 			return $Response->setData(array(
-				'cloudMode' => AM_CLOUD_MODE_ENABLED,
 				'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
+				'envKeys' => Config::$envKeys,
 				'languages' => self::getLanguages(),
 				'reservedFields' => Fields::$reserved,
 				'fileTypes' => array(

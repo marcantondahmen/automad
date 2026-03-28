@@ -61,33 +61,6 @@ import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
  * The system settings sections data.
  */
 const getSystemSections = (): SystemSectionData[] => {
-	const mail = App.isCloud
-		? []
-		: [
-				{
-					section: Section.mail,
-					icon: 'envelope-at',
-					title: App.text('systemMail'),
-					info: App.text('systemMailCardInfo'),
-					state: '<am-system-mail-indicator></am-system-mail-indicator>',
-					render: renderMailSection,
-					narrowIcon: false,
-				},
-			];
-
-	const debug = App.isCloud
-		? []
-		: [
-				{
-					section: Section.debug,
-					icon: 'bug',
-					title: App.text('systemDebug'),
-					info: App.text('systemDebugCardInfo'),
-					state: '<am-system-debug-indicator></am-system-debug-indicator>',
-					render: renderDebugSection,
-				},
-			];
-
 	return [
 		{
 			section: Section.cache,
@@ -120,7 +93,15 @@ const getSystemSections = (): SystemSectionData[] => {
 			state: '<am-system-feed-indicator></am-system-feed-indicator>',
 			render: renderFeedSection,
 		},
-		...mail,
+		{
+			section: Section.mail,
+			icon: 'envelope-at',
+			title: App.text('systemMail'),
+			info: App.text('systemMailCardInfo'),
+			state: '<am-system-mail-indicator></am-system-mail-indicator>',
+			render: renderMailSection,
+			narrowIcon: false,
+		},
 		{
 			section: Section.i18n,
 			icon: 'globe',
@@ -143,7 +124,14 @@ const getSystemSections = (): SystemSectionData[] => {
 			`,
 			render: renderLanguageSection,
 		},
-		...debug,
+		{
+			section: Section.debug,
+			icon: 'bug',
+			title: App.text('systemDebug'),
+			info: App.text('systemDebugCardInfo'),
+			state: '<am-system-debug-indicator></am-system-debug-indicator>',
+			render: renderDebugSection,
+		},
 		{
 			section: Section.update,
 			icon: 'arrow-repeat',
@@ -246,10 +234,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 				<div class="${CSS.grid}" style="--min: 17rem;">
 					${this.renderOverviewCards(this.sectionData.slice(0, 2))}
 				</div>
-				<div
-					class="${CSS.grid}"
-					style="--min: ${App.isCloud ? `17` : `13`}rem;"
-				>
+				<div class="${CSS.grid}" style="--min: 13rem;">
 					${this.renderOverviewCards(this.sectionData.slice(2, 8))}
 				</div>
 			</am-switcher-section>

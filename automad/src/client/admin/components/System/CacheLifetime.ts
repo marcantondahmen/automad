@@ -53,13 +53,17 @@ class CacheLifetimeComponent extends BaseComponent {
 			cacheLifetime.value = App.system.cache.lifetime;
 		});
 
+		const options = [3600, 21600, 43200, 86400];
+
+		if (!options.includes(App.system.cache.lifetime)) {
+			options.push(App.system.cache.lifetime);
+		}
+
 		createSelect(
-			[
-				{ value: 3600, text: '1 h' },
-				{ value: 21600, text: '6 h' },
-				{ value: 43200, text: '12 h' },
-				{ value: 86400, text: '24 h' },
-			],
+			options.map((o) => ({
+				value: o,
+				text: `${Math.round(o / 60 / 60)} h`,
+			})),
 			`${App.system.cache.lifetime}`,
 			this,
 			'cacheLifetime',
@@ -69,7 +73,8 @@ class CacheLifetimeComponent extends BaseComponent {
 			{
 				[Attr.bind]: 'cacheLifetime',
 				[Attr.bindTo]: 'value',
-			}
+			},
+			'AM_CACHE_LIFETIME'
 		);
 	}
 }

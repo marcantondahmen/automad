@@ -33,35 +33,60 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\System;
 
-use Automad\API\EditLock;
-use Automad\API\Response;
-use Automad\Core\Request;
+use Automad\Core\Config;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The EditLock controller handles handles setting locks on resources accessed via API controllers.
+ * The config data model.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class EditLockController {
+class ConfigFile {
 	/**
-	 * Set a lock for a given controller and context to a unique instance id.
-	 *
-	 * @return Response
+	 * The array with the loaded settings.
 	 */
-	public static function set(): Response {
-		$Response = new Response();
+	private array $data;
 
-		EditLock::set(
-			Request::post('setLockHandle'),
-			Request::post('setInstanceId')
-		);
+	/**
+	 * The configuration name.
+	 */
+	private string $name;
 
-		return $Response;
+	/**
+	 * The constructor.
+	 *
+	 * @param string $name
+	 */
+	public function __construct(string $name = '') {
+		$this->data = Config::read($name);
+		$this->name = $name;
+	}
+
+	/**
+	 * Set a value in a given config array only it is not define in the server environment.
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	public function set(string $key, mixed $value): void {
+		if (!in_array($key, Config::$envKeys)) {
+			$this->data[$key] = $value;
+		}
+	}
+
+	/**
+	 * Write the config file.
+	 *
+	 * @return bool
+	 */
+	public function write(): bool {
+		ksort($this->data);
+
+		return Config::write($this->data, $this->name);
 	}
 }

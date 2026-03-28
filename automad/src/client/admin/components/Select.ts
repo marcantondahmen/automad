@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { create, CSS, EventName, html, Undo } from '@/admin/core';
+import { App, Attr, create, CSS, EventName, html, Undo } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { KeyValueMap, SelectComponentOption, UndoValue } from '@/admin/types';
 
@@ -130,13 +130,30 @@ export class SelectComponent extends BaseComponent {
 
 	/**
 	 * Get the initial value and register the event listener.
+	 *
+	 * @param options
+	 * @param selected
+	 * @param prefix
+	 * @param attributes
+	 * @param envKey
 	 */
 	public init(
 		options: SelectComponentOption[],
 		selected: string,
 		prefix: string,
-		attributes: KeyValueMap
+		attributes: KeyValueMap,
+		envKey: string = ''
 	): void {
+		const isEnvDefined = App.envKeys.includes(envKey);
+
+		if (isEnvDefined) {
+			attributes = {
+				...attributes,
+				disabled: '',
+				[Attr.tooltip]: App.text('definedInServerEnv'),
+			};
+		}
+
 		this.innerHTML = prefix;
 
 		this.label = create('span', [], {}, this);
@@ -144,6 +161,12 @@ export class SelectComponent extends BaseComponent {
 
 		this.options = options;
 		this.value = selected;
+
+		if (isEnvDefined) {
+			this.classList.add(CSS.fieldEnvDefined);
+
+			return;
+		}
 
 		const toggleFocus = () => {
 			this.classList.toggle(

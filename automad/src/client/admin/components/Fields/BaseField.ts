@@ -88,6 +88,11 @@ export abstract class BaseFieldComponent
 	protected _data: FieldRenderData;
 
 	/**
+	 * True if the field controls a system setting that is defined in the server environment.
+	 */
+	private isEnvDefined: boolean;
+
+	/**
 	 * Get the actual field input element.
 	 */
 	get input(): InputElement {
@@ -106,8 +111,9 @@ export abstract class BaseFieldComponent
 	 * @param params.options
 	 * @param params.label
 	 * @param params.placeholder
-	 * @param params.isInPage
 	 * @param params.isUnused
+	 * @param params.envKey
+	 * @param params.hideLabel
 	 */
 	set data({
 		key,
@@ -118,15 +124,18 @@ export abstract class BaseFieldComponent
 		options,
 		label,
 		placeholder,
-		isInPage,
 		isUnused,
+		envKey,
+		hideLabel,
 	}: FieldInitData) {
+		this.isEnvDefined = App.envKeys.includes(envKey || '');
+
 		id = id ?? createIdFromField(key);
 		value = typeof value === 'undefined' ? '' : value;
 		tooltip = htmlSpecialChars(tooltip || '');
 		label = label || createLabelFromField(key);
 		placeholder = placeholder || '';
-		isInPage = isInPage ?? false;
+		hideLabel = hideLabel ?? false;
 
 		this._data = {
 			name,
@@ -136,8 +145,8 @@ export abstract class BaseFieldComponent
 			tooltip,
 			options,
 			placeholder,
-			isInPage,
 			isUnused,
+			hideLabel,
 		};
 
 		this.create();
@@ -185,6 +194,15 @@ export abstract class BaseFieldComponent
 		this.createInput();
 		this.applyAttributes();
 
+		if (this.isEnvDefined) {
+			this.classList.add(CSS.fieldEnvDefined);
+			this.input.setAttribute('disabled', '');
+			this.input.parentElement.setAttribute(
+				Attr.tooltip,
+				App.text('definedInServerEnv')
+			);
+		}
+
 		Undo.attach(this);
 	}
 
@@ -192,9 +210,9 @@ export abstract class BaseFieldComponent
 	 * Create a label.
 	 */
 	protected createLabel(): void {
-		const { label, tooltip, isInPage, isUnused } = this._data;
+		const { label, tooltip, isUnused, hideLabel } = this._data;
 
-		if (isInPage) {
+		if (hideLabel) {
 			return;
 		}
 

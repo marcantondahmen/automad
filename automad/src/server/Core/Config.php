@@ -81,11 +81,17 @@ class Config {
 	const FILE = AM_BASE_DIR . '/config/config.php';
 
 	/**
+	 * All config keys that are defined outside the config.php files
+	 * in the server's environment are tracked here.
+	 */
+	public static array $envKeys = array();
+
+	/**
 	 * Initialize the main config by merging all available sources.
 	 */
 	public static function init(): void {
-		self::fromFile();
 		self::fromEnv();
+		self::fromFile();
 		self::fromDefaults();
 	}
 
@@ -258,10 +264,6 @@ class Config {
 		self::set('AM_MAINTENANCE_MODE_ENABLED', false);
 		self::set('AM_MAINTENANCE_MODE_TEXT', Text::get('maintenanceModeText'));
 
-		// Cloud mode
-		// Enable this in order to define fixed settings for caching, email etc.
-		self::set('AM_CLOUD_MODE_ENABLED', false);
-
 		// Mail
 		self::set('AM_MAIL_TRANSPORT', MailConfig::DEFAULT_TRANSPORT);
 		self::set('AM_MAIL_FROM', MailConfig::getDefaultFrom());
@@ -285,15 +287,28 @@ class Config {
 	 * Merge settings that can be defined as environment variables with config.
 	 */
 	private static function fromEnv(): void {
+		$envFile = AM_BASE_DIR . '/.env';
+
+		if (is_readable($envFile)) {
+			$env = parse_ini_file($envFile);
+
+			if (!empty($env)) {
+				foreach ($env as $key => $value) {
+					putenv("$key=$value");
+				}
+			}
+		}
+
 		foreach (self::ENV_VARS as $key) {
 			$value = getenv($key);
 
-			if (is_numeric($value)) {
-				$value = floatval($value);
-			}
+			if (strlen(strval($value))) {
+				if (is_numeric($value)) {
+					$value = floatval($value);
+				}
 
-			if (!empty($value)) {
 				self::set($key, $value);
+				self::$envKeys[] = $key;
 			}
 		}
 	}

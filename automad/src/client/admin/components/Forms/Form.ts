@@ -50,6 +50,7 @@ import {
 	requestAPI,
 	createProgressModal,
 	EditLockController,
+	getSlug,
 } from '@/admin/core';
 import {
 	DeduplicationSettings,
@@ -211,6 +212,7 @@ export class FormComponent extends BaseComponent {
 		}
 
 		if (this.setLock) {
+			data.lockHandle = this.lockHandle;
 			data.instanceId = App.instanceId;
 		}
 
@@ -227,14 +229,22 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
+	 * Generate lock handle for current route.
+	 */
+	private get lockHandle(): string {
+		const url = getPageURL();
+
+		return !!url ? `page-${url}` : getSlug();
+	}
+
+	/**
 	 * The form constructor.
 	 */
 	async connectedCallback(): Promise<void> {
 		if (this.setLock) {
 			await requestAPI(EditLockController.set, {
-				controller: this.api,
-				url: getPageURL(),
-				lockInstanceId: App.instanceId,
+				setLockHandle: this.lockHandle,
+				setInstanceId: App.instanceId,
 			});
 		}
 

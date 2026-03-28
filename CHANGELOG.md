@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-beta.21](https://github.com/marcantondahmen/automad/commit/c0ce3c1e46cd03e913ebb0c833c12c64b312df75)
+## [v2.0.0-beta.22](https://github.com/marcantondahmen/automad/commit/148b42a70a5584700a5ea7e245a5f56f82de8ef8)
 
-Sun, 22 Mar 2026 18:20:08 +0100
+Sat, 28 Mar 2026 20:37:25 +0100
+
+### New Features
+
+- add support for .env files in local development setups ([fae41956c](https://github.com/marcantondahmen/automad/commit/fae41956c598e8312328375aaf2876bf3f50272e))
+
+### Bugfixes
+
+- fix edit locks when working on a page using the dashboard and in-page editing at the same time ([307846e36](https://github.com/marcantondahmen/automad/commit/307846e3664cccc098d51ef02830155c536e5e50))
+
+## [v2.0.0-beta.21](https://github.com/marcantondahmen/automad/commit/28cc50da9e26480023960c836dcdd5886b583c89)
+
+Sun, 22 Mar 2026 18:21:31 +0100
 
 ### Bugfixes
 

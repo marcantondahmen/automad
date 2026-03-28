@@ -47,6 +47,35 @@
 		}
 	}
 
+	&--env-defined {
+		display: flex;
+		outline-offset: 0.3rem;
+		outline: 1px dashed transparent !important;
+		border-radius: @am-form-radius;
+		transition: outline 0.2s;
+
+		&:hover {
+			outline-color: hsl(
+				from hsl(var(--am-clr-text-muted)) h s l / 0.5
+			) !important;
+		}
+
+		& span:after {
+			content: '' !important;
+			padding-left: 0.6rem;
+			font-size: 0.8em;
+			font-weight: 600;
+		}
+
+		&:after {
+			display: none !important;
+		}
+
+		& * {
+			cursor: not-allowed !important;
+		}
+	}
+
 	&__label {
 		display: inline-flex;
 		align-items: center;

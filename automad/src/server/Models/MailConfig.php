@@ -35,8 +35,8 @@
 
 namespace Automad\Models;
 
-use Automad\Core\Automad;
 use Automad\Core\Config;
+use Automad\System\ConfigFile;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -127,15 +127,15 @@ class MailConfig {
 	 * @return bool
 	 */
 	public function save(): bool {
-		$config = Config::read(MailConfig::CONFIG_NAME);
+		$ConfigFile = new ConfigFile(MailConfig::CONFIG_NAME);
 
-		$config['AM_MAIL_TRANSPORT'] = $this->transport;
-		$config['AM_MAIL_FROM'] = $this->from;
-		$config['AM_MAIL_SMTP_SERVER'] = $this->smtpServer;
-		$config['AM_MAIL_SMTP_USERNAME'] = $this->smtpUsername;
-		$config['AM_MAIL_SMTP_PASSWORD'] = $this->smtpPassword;
-		$config['AM_MAIL_SMTP_PORT'] = $this->smtpPort;
+		$ConfigFile->set('AM_MAIL_TRANSPORT', $this->transport);
+		$ConfigFile->set('AM_MAIL_FROM', $this->from);
+		$ConfigFile->set('AM_MAIL_SMTP_SERVER', $this->smtpServer);
+		$ConfigFile->set('AM_MAIL_SMTP_USERNAME', $this->smtpUsername);
+		$ConfigFile->set('AM_MAIL_SMTP_PASSWORD', $this->smtpPassword);
+		$ConfigFile->set('AM_MAIL_SMTP_PORT', $this->smtpPort);
 
-		return Config::write($config, MailConfig::CONFIG_NAME);
+		return $ConfigFile->write();
 	}
 }

@@ -41,6 +41,7 @@ use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\Core\Text;
+use Automad\System\ConfigFile;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -59,62 +60,52 @@ class ConfigController {
 	 */
 	public static function update(): Response {
 		$Response = new Response();
-
-		$config = Config::read();
-		ksort($config);
+		$ConfigFile = new ConfigFile();
 
 		switch (Request::post('type')) {
 			case 'cache':
-				if (AM_CLOUD_MODE_ENABLED) {
-					$Response->setError(Text::get('permissionsDeniedError'));
-				} else {
-					$config['AM_CACHE_ENABLED'] = !empty(Request::post('cacheEnabled'));
-					$config['AM_CACHE_MONITOR_DELAY'] = intval(Request::post('cacheMonitorDelay'));
-					$config['AM_CACHE_LIFETIME'] = intval(Request::post('cacheLifetime'));
-				}
+				$ConfigFile->set('AM_CACHE_ENABLED', !empty(Request::post('cacheEnabled')));
+				$ConfigFile->set('AM_CACHE_MONITOR_DELAY', intval(Request::post('cacheMonitorDelay')));
+				$ConfigFile->set('AM_CACHE_LIFETIME', intval(Request::post('cacheLifetime')));
 
 				break;
 
 			case 'debug':
-				if (AM_CLOUD_MODE_ENABLED) {
-					$Response->setError(Text::get('permissionsDeniedError'));
-				} else {
-					$config['AM_DEBUG_ENABLED'] = !empty(Request::post('debugEnabled'));
-					$config['AM_DEBUG_BROWSER'] = !empty(Request::post('debugBrowser'));
-				}
+				$ConfigFile->set('AM_DEBUG_ENABLED', !empty(Request::post('debugEnabled')));
+				$ConfigFile->set('AM_DEBUG_BROWSER', !empty(Request::post('debugBrowser')));
 
 				break;
 
 			case 'feed':
-				$config['AM_FEED_ENABLED'] = !empty(Request::post('feedEnabled'));
-				$config['AM_FEED_FIELDS'] = '';
+				$ConfigFile->set('AM_FEED_ENABLED', !empty(Request::post('feedEnabled')));
+				$ConfigFile->set('AM_FEED_FIELDS', '');
 
 				if ($fields = Request::post('feedFields')) {
-					$config['AM_FEED_FIELDS'] = join(', ', array_unique(json_decode($fields)));
+					$ConfigFile->set('AM_FEED_FIELDS', join(', ', array_unique(json_decode($fields))));
 				}
 
 				break;
 
 			case 'i18n':
-				$config['AM_I18N_ENABLED'] = !empty(Request::post('i18nEnabled'));
+				$ConfigFile->set('AM_I18N_ENABLED', !empty(Request::post('i18nEnabled')));
 
 				break;
 
 			case 'translation':
-				$config['AM_FILE_UI_TRANSLATION'] = Request::post('translation');
+				$ConfigFile->set('AM_FILE_UI_TRANSLATION', Request::post('translation'));
 				$Response->setReload(true);
 
 				break;
 
 			case 'sessionCookieSalt':
-				$config['AM_SESSION_COOKIE_SALT'] = substr(str_shuffle(MD5(microtime())), 0, 10);
+				$ConfigFile->set('AM_SESSION_COOKIE_SALT', substr(str_shuffle(MD5(microtime())), 0, 10));
 				$Response->setReload(true);
 
 				break;
 		}
 
-		if (Config::write($config)) {
-			Debug::log($config, 'Updated config file');
+		if ($ConfigFile->write()) {
+			Debug::log('Updated config file');
 			Cache::clear();
 		} else {
 			$Response->setError(Text::get('permissionsDeniedError'));
