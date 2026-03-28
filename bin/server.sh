@@ -12,13 +12,14 @@ start() {
 	nohup php -S $URL >"$LOG_FILE" 2>&1 &
 	echo $! >"$PID_FILE"
 	echo -e "  \033[0;32m Started PHP server\033[0m\n"
-	echo -e "  \033[0;34m Server output in:     \033[0;35m${LOG_FILE}\033[0m"
+	echo -e "  \033[0;34m Server output in:     \033[0;35m$(pwd)/${LOG_FILE}\033[0m"
 	echo -e "  \033[0;34m Site is running at:   \033[0;35mhttp://${URL}\033[0m"
 }
 
 stop() {
 	if [ -f "$PID_FILE" ]; then
-		kill $(cat "$PID_FILE") && rm "$PID_FILE"
+		kill $(cat "$PID_FILE") 2>/dev/null
+		rm "$PID_FILE"
 		echo -e "  \033[0;32m Stopped PHP server\033[0m"
 	else
 		echo -e "  \033[0;31m No PID file found\033[0m"

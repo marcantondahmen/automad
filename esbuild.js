@@ -498,7 +498,7 @@ async function startDev() {
 	bs.init({
 		host: 'localhost',
 		port: 3000,
-		proxy: 'http://127.0.0.1:8080/automad-development',
+		proxy: 'http://localhost:8000',
 		open: false,
 		notify: false,
 		files: ['**/src/**/*.php', '**/dist/**/*.{js,css}'],

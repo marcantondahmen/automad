@@ -11,7 +11,7 @@
   "scripts": {
     "build": "npm run prebuild && node esbuild.js",
     "bump-year": "bash bin/bump-year.sh",
-    "dev": "npm run prebuild && node esbuild.js --dev",
+    "dev": "bash bin/dev.sh",
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket 2&>/dev/null",
     "vitest": "vitest --run",
     "vitest:watch": "vitest",
