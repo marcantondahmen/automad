@@ -60,9 +60,14 @@ export const blockTemplateName = (path: string): string => {
  * A simple confirmation modal.
  *
  * @param text
+ * @param [confirm]
+ * @return A promise that reolves to true when user confirms
  * @async
  */
-export const confirm = async (text: string): Promise<boolean> => {
+export const confirm = async (
+	text: string,
+	confirm: string | null = null
+): Promise<boolean> => {
 	let modal = create(
 		'am-modal',
 		[],
@@ -86,7 +91,7 @@ export const confirm = async (text: string): Promise<boolean> => {
 					${Attr.confirm}
 					class="${CSS.button} ${CSS.buttonPrimary}"
 				>
-					${App.text('ok')}
+					${confirm || App.text('ok')}
 				</am-modal-close>
 			</am-modal-footer>
 		</am-modal-dialog>
