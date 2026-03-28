@@ -60,12 +60,10 @@ class ConfigController {
 	 */
 	public static function update(): Response {
 		$Response = new Response();
-
 		$ConfigFile = new ConfigFile();
 
 		switch (Request::post('type')) {
 			case 'cache':
-
 				$ConfigFile->set('AM_CACHE_ENABLED', !empty(Request::post('cacheEnabled')));
 				$ConfigFile->set('AM_CACHE_MONITOR_DELAY', intval(Request::post('cacheMonitorDelay')));
 				$ConfigFile->set('AM_CACHE_LIFETIME', intval(Request::post('cacheLifetime')));
