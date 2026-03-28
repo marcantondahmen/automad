@@ -19,7 +19,8 @@
     "prebuild": "bash bin/prebuild.sh",
     "psalm": "bash bin/psalm.sh",
     "release": "bash bin/release.sh",
-    "serve": "php -S localhost:8000",
+    "server:start": "bash bin/server.sh start",
+    "server:stop": "bash bin/server.sh stop",
     "test": "npm run phpunit && npm run psalm && npm run vitest"
   },
   "devDependencies": {
