@@ -58,9 +58,8 @@ class EditLockController {
 		$Response = new Response();
 
 		EditLock::set(
-			Request::post('controller'),
-			Request::post('url'),
-			Request::post('lockInstanceId')
+			Request::post('setLockHandle'),
+			Request::post('setInstanceId')
 		);
 
 		return $Response;

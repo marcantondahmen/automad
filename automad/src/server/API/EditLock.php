@@ -36,7 +36,6 @@
 namespace Automad\API;
 
 use Automad\Core\FileSystem;
-use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,17 +60,16 @@ class EditLock {
 	/**
 	 * Verify locked controller.
 	 *
-	 * @param string $controller
-	 * @param string $url
+	 * @param string $handle
 	 * @param string $instanceId
 	 * @return bool
 	 */
-	public static function isLocked(string $controller, string $url, string $instanceId): bool {
+	public static function isLocked(string $handle, string $instanceId): bool {
 		if (empty($instanceId)) {
 			return false;
 		}
 
-		$lockFile = self::getLockFile($controller, $url);
+		$lockFile = self::getLockFile($handle);
 
 		if (!is_readable($lockFile)) {
 			return false;
@@ -85,26 +83,21 @@ class EditLock {
 	/**
 	 * Set a lock.
 	 *
-	 * @param string $controller
-	 * @param string $url
+	 * @param string $handle
 	 * @param string $instanceId
 	 * @return bool
 	 */
-	public static function set(string $controller, string $url, string $instanceId): bool {
-		return FileSystem::write(self::getLockFile($controller, $url), $instanceId);
+	public static function set(string $handle, string $instanceId): bool {
+		return FileSystem::write(self::getLockFile($handle), $instanceId);
 	}
 
 	/**
-	 * Get the lock file path for a given controller and url.
+	 * Get the lock file path for a given lock handle.
 	 *
-	 * @param string $controller
-	 * @param string $url
+	 * @param string $handle
 	 * @return string
 	 */
-	private static function getLockFile(string $controller, string $url): string {
-		$controller = Str::sanitize($controller);
-		$lockFileName = $url ? $controller . '-' . md5($url) . '.lock' : "{$controller}.lock";
-
-		return self::DIR . "/$lockFileName";
+	private static function getLockFile(string $handle): string {
+		return self::DIR . '/' . sha1($handle) . '.lock';
 	}
 }
