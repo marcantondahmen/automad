@@ -225,6 +225,8 @@ export class DragDrop {
 		const targetComponent = getParentEditorComponent(targetBlock);
 		const targetIndex = getBlockIndex(targetBlock);
 
+		const scrolled = window.scrollY;
+
 		if (sourceComponent === targetComponent) {
 			sourceComponent.editor.blocks.move(targetIndex, sourceIndex);
 
@@ -244,6 +246,10 @@ export class DragDrop {
 
 		DragDrop.CURRENT = null;
 		DragDrop.TARGET = null;
+
+		setTimeout(() => {
+			window.scrollTo(0, scrolled);
+		}, 0);
 	}
 
 	/**

@@ -166,14 +166,6 @@ export class InPageFormComponent extends FormComponent {
 
 			window.location.href = this.bindings.inPageReturnUrlBinding.value;
 		});
-
-		this.listen(document, 'click', (event: Event) => {
-			const target = event.target as HTMLElement;
-
-			if (target.contains(this)) {
-				query('[contenteditable], input, textarea', this)?.focus();
-			}
-		});
 	}
 
 	/**

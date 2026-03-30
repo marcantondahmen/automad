@@ -33,7 +33,7 @@
  */
 
 import { UndoCapableField, UndoEntry, UndoValue } from '@/admin/types';
-import { App, debounce, EventName, fire, keyCombo, listen } from '.';
+import { App, debounce, EventName, fire, keyCombo } from '.';
 
 /**
  * The Undo class provides undo/redo-functionality for all kinds of fields.

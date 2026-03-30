@@ -1,8 +1,19 @@
 # Changelog
 
-## [v2.0.0-beta.22](https://github.com/marcantondahmen/automad/commit/148b42a70a5584700a5ea7e245a5f56f82de8ef8)
+## [v2.0.0-beta.23](https://github.com/marcantondahmen/automad/commit/482ca9fc50807a2a432f000c55fbe08da088da28)
 
-Sat, 28 Mar 2026 20:37:25 +0100
+Mon, 30 Mar 2026 19:27:50 +0200
+
+### Bugfixes
+
+- fix auto saving in component editor ([b7cdcf207](https://github.com/marcantondahmen/automad/commit/b7cdcf207889ff6d59155a9a7403f043d2dd8477))
+- fix focus of first block when clicking outside of editor in in-page edit mode ([8db8f9b3e](https://github.com/marcantondahmen/automad/commit/8db8f9b3ed5b11ac69285334ef1aee718415baa2))
+- fix jumping scroll positions on drag and drop events and during undo and redo mutations ([e55d9f6b0](https://github.com/marcantondahmen/automad/commit/e55d9f6b05ed094505519ffb09212aad41789a7c))
+- make buttons block wrap ([a52afbbca](https://github.com/marcantondahmen/automad/commit/a52afbbca334142a8c57eb829f027fb0b8189455))
+
+## [v2.0.0-beta.22](https://github.com/marcantondahmen/automad/commit/1d1e79433a6a97a19236f1a69892b58a85fee8ce)
+
+Sat, 28 Mar 2026 20:41:32 +0100
 
 ### New Features
 

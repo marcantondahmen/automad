@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class EditLockController {
 	/**
-	 * Set a lock for a given controller and context to a unique instance id.
+	 * Set a lock for a given handle to a unique instance id.
 	 *
 	 * @return Response
 	 */
