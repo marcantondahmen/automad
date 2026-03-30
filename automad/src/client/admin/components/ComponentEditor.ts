@@ -234,7 +234,7 @@ export class ComponentEditorComponent extends BaseComponent {
 
 			await this.editor.editorJS.editor.isReady;
 
-			this.listen(this.editor, 'change', () => {
+			this.listen(this.editor, 'input', () => {
 				this._data.blocks = this.editor.value.blocks;
 
 				fire('change', this);
