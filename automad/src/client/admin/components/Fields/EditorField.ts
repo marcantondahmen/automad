@@ -143,6 +143,8 @@ export class EditorFieldComponent extends BaseFieldComponent {
 	 * @param value
 	 */
 	async mutate(value: UndoValue): Promise<void> {
+		const scrolled = window.scrollY;
+
 		this.value = value;
 
 		if (value.blocks?.length > 0) {
@@ -150,6 +152,8 @@ export class EditorFieldComponent extends BaseFieldComponent {
 		} else {
 			this.editorJS.editor.clear();
 		}
+
+		window.scrollTo(0, scrolled);
 
 		this.editorJS.onRender();
 	}
