@@ -749,7 +749,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 		].forEach((prop: string) => {
 			const value = style[prop as keyof SectionStyle];
 
-			if (value.toString().length) {
+			if (value?.toString().length) {
 				inline.push(`--${prop}: ${value};`);
 			}
 		});
