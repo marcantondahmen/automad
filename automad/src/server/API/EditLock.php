@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The EditLock class handles locking of controllers by a given app instance id.
  *
  * Locks follow a quite simple concept where a form component can be configured to aquire
- * a lock for an endpoint in combination with an optional resource (the URL of a page).
+ * a lock for a specific handle that is either a resource (the URL of a page) or a dashboard route.
  * Locks are aquired once when a form is connected to the DOM.
  *
  * Whenever a form is connected in another tab or browser afterwards, that new instance will
