@@ -87,7 +87,7 @@ class SystemController {
 			'items' => Update::items()
 		);
 
-		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
+		if (Update::isDisabled()) {
 			$data['state'] = 'disabled';
 
 			return $Response->setData($data);
