@@ -189,6 +189,11 @@ export const requestAPI = async (
 	callback: Function = null,
 	cancelable: boolean = false
 ): Promise<APIResponse> => {
+	// Prevent stacking of requesting the same controller over and over again.
+	// Pending requests to a controller will be aborted as soon as a new
+	// request is made to the same controller.
+	PendingRequests.abort(controller);
+
 	if (!parallel) {
 		while (!PendingRequests.idle) {
 			await waitForPendingRequests();
@@ -217,6 +222,8 @@ export const requestAPI = async (
 		abortListener.remove();
 	});
 
+	PendingRequests.registerAbortController(controller, abortController);
+
 	const route = controllerRoute(controller);
 
 	try {
@@ -241,6 +248,7 @@ export const requestAPI = async (
 
 	abortListener.remove();
 	PendingRequests.remove();
+	PendingRequests.removeAbortController(controller);
 
 	const log = getLogger();
 
@@ -310,6 +318,17 @@ class PendingRequests {
 	static readonly EVENT_NAME = 'AutomadPendingRequestsChange';
 
 	/**
+	 * The map of pending controllers.
+	 *
+	 * @static
+	 * @readonly
+	 */
+	static readonly abortControllers: Record<
+		string,
+		AbortController | undefined
+	> = {};
+
+	/**
 	 * The number of currently pending requests.
 	 *
 	 * @static
@@ -323,6 +342,18 @@ class PendingRequests {
 	 */
 	static get idle(): boolean {
 		return this.count <= 0;
+	}
+
+	/**
+	 * Abort a request for a given controller.
+	 *
+	 * @static
+	 * @param controller
+	 */
+	static abort(controller: string): void {
+		this.abortControllers[controller]?.abort();
+
+		this.removeAbortController(controller);
 	}
 
 	/**
@@ -351,6 +382,20 @@ class PendingRequests {
 	}
 
 	/**
+	 * Register a abort controller for a given controller route.
+	 *
+	 * @static
+	 * @param controller
+	 * @param abortController
+	 */
+	static registerAbortController(
+		controller: string,
+		abortController: AbortController
+	): void {
+		this.abortControllers[controller] = abortController;
+	}
+
+	/**
 	 * Remove a request.
 	 *
 	 * @static
@@ -368,5 +413,15 @@ class PendingRequests {
 
 			fire(this.EVENT_NAME);
 		}, 0);
+	}
+
+	/**
+	 * Remove the abort controller for a given controller.
+	 *
+	 * @static
+	 * @param controller
+	 */
+	static removeAbortController(controller: string): void {
+		delete this.abortControllers[controller];
 	}
 }
