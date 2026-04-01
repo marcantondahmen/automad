@@ -645,6 +645,6 @@ class FileSystem {
 	 * @return bool
 	 */
 	public static function writeJson(string $file, array $data): bool {
-		return self::write($file, strval(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
+		return self::write($file, strval(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)));
 	}
 }
