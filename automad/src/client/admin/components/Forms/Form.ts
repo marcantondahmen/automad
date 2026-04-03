@@ -62,7 +62,7 @@ import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
 import { FormErrorComponent } from './FormError';
 
-export const autoSubmitTimeout = 200;
+export const autoSubmitTimeout = 350;
 
 const debounced = debounce(
 	async (callback: (...args: any[]) => void): Promise<void> => {

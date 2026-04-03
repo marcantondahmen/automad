@@ -76,6 +76,15 @@ class Update {
 	}
 
 	/**
+	 * Check if updates are disabled for the installation.
+	 *
+	 * @return bool
+	 */
+	public static function isDisabled(): bool {
+		return file_exists(AM_BASE_DIR . '/.no-updates');
+	}
+
+	/**
 	 * Get items to be updated from config.
 	 *
 	 * @return array The array of items to be updated or false on error

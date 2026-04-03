@@ -532,7 +532,7 @@
 	"systemUpdateCardInfo": "Update Automad to the latest available version",
 	"systemUpdateConnectionError": "Can't connect to the update server! This could typically be caused by a wrong update configuration (config/config.php), a SSL certificate error or a missing cURL library.",
 	"systemUpdateCurrentVersion": "Your currently installed version is",
-	"systemUpdateDisabled": "Can't run updates within the development repository!",
+	"systemUpdateDisabled": "System updates are disabled!",
 	"systemUpdateDownloadError": "Download of update failed!",
 	"systemUpdateFailedError": "Update failed! Please restore your installation from a backup.",
 	"systemUpdateItems": "Note that the following files and directories are affected by the update:",

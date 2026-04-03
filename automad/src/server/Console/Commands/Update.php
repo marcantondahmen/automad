@@ -82,8 +82,8 @@ class Update extends AbstractCommand {
 	 * @return int exit code
 	 */
 	public function run(): int {
-		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
-			echo Console::clr('error', 'Can\'t run updates within the development repository!') . PHP_EOL;
+		if (\Automad\System\Update::isDisabled()) {
+			echo Console::clr('error', 'System updates are disabled') . PHP_EOL;
 
 			return 1;
 		}

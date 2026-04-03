@@ -101,6 +101,7 @@ class MailAddressProcessor {
 	 * Encrypt an email address using a given key with a simple xor algorithm.
 	 * Based on https://github.com/sathoro/php-xor-cipher/blob/master/XORCipher.php
 	 *
+	 * @psalm-suppress InvalidArrayOffset
 	 * @param string $str
 	 * @param string $key
 	 * @return string
