@@ -189,12 +189,12 @@ export const requestAPI = async (
 	callback: Function = null,
 	cancelable: boolean = false
 ): Promise<APIResponse> => {
-	// Prevent stacking of requesting the same controller over and over again.
-	// Pending requests to a controller will be aborted as soon as a new
-	// request is made to the same controller.
-	PendingRequests.abort(controller);
-
 	if (!parallel) {
+		// Prevent stacking of non-parallel requests to the same controller over and over again.
+		// Pending requests to a controller will be aborted as soon as a new
+		// request is made to the same controller.
+		PendingRequests.abort(controller);
+
 		while (!PendingRequests.idle) {
 			await waitForPendingRequests();
 		}
@@ -352,8 +352,9 @@ class PendingRequests {
 	 */
 	static abort(controller: string): void {
 		this.abortControllers[controller]?.abort();
-
 		this.removeAbortController(controller);
+
+		getLogger().log(controller);
 	}
 
 	/**
