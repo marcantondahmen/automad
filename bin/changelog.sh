@@ -55,10 +55,10 @@ generateReleaseSections() {
 	readarray -t output < <(git log --grep="BREAKING" --grep="!:" --format="$logFormat" "$1".."$2")
 	generateSection "Breaking Changes" "${output[@]}"
 
-	readarray -t output < <(getCommitsBetween $1 $2 | grep -E '^feat.*\: ')
+	readarray -t output < <(getCommitsBetween $1 $2 | grep -E '^feat.*: ')
 	generateSection "New Features" "${output[@]}"
 
-	readarray -t output < <(getCommitsBetween $1 $2 | grep -E '^fix.*\: ')
+	readarray -t output < <(getCommitsBetween $1 $2 | grep -E '^fix.*: ')
 	generateSection "Bugfixes" "${output[@]}"
 }
 
