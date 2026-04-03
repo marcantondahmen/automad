@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.24](https://github.com/marcantondahmen/automad/commit/7a44ea5ee6df2773403cdfe8deb6b84a3cc65560)
+## [v2.0.0-beta.25](https://github.com/marcantondahmen/automad/commit/ef05b7ca3be87e79b76e6523232ce808b5a421f8)
 
-Fri, 3 Apr 2026 11:02:25 +0200
+Fri, 3 Apr 2026 21:56:57 +0200
+
+### Bugfixes
+
+- fix empty list of page images inside image picker dialogs ([ef05b7ca](https://github.com/marcantondahmen/automad/commit/ef05b7ca3be87e79b76e6523232ce808b5a421f8))
+
+## [v2.0.0-beta.24](https://github.com/marcantondahmen/automad/commit/dc09e8b9badd4b1086a787e12d040b98999b56bc)
+
+Fri, 3 Apr 2026 11:04:45 +0200
 
 ### New Features
 
