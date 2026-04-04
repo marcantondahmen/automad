@@ -14,13 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.5'
       - name: Checkout
-        uses: actions/checkout@v4
-      - run: chmod +x .github/workflows/dist.sh && bash .github/workflows/dist.sh
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - run: bash .github/workflows/dist.sh
