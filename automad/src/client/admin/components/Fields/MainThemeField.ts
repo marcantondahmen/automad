@@ -66,7 +66,10 @@ class MainThemeFieldComponent extends BaseFieldComponent {
 		const options: SelectComponentOption[] = [];
 
 		themes.forEach((theme) => {
-			options.push({ text: theme.name, value: theme.path });
+			options.push({
+				text: `${theme.name} (${theme.path})`,
+				value: theme.path,
+			});
 		});
 
 		const modalId = uniqueId();
@@ -103,7 +106,7 @@ class MainThemeFieldComponent extends BaseFieldComponent {
 			],
 			{ [Attr.modal]: `#${modalId}` },
 			this,
-			`<i class="bi bi-box-seam"></i>${selectedTheme.name}`
+			`<i class="bi bi-box-seam"></i>${selectedTheme.name} (${selectedTheme.path})`
 		);
 
 		const links = create('div', [CSS.flex, CSS.flexColumn], {}, this);

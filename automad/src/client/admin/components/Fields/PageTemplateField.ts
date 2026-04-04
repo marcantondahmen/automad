@@ -36,7 +36,6 @@ import {
 	App,
 	Attr,
 	create,
-	createProgressModal,
 	CSS,
 	FieldTag,
 	html,
@@ -185,7 +184,12 @@ class PageTemplateSelectComponent extends BaseComponent {
 		createOptions(mainTheme?.templates ?? [], mainGroup, selectedTemplate);
 
 		Object.values(themes).forEach((theme: KeyValueMap) => {
-			const group = create('optgroup', [], { label: theme.name }, select);
+			const group = create(
+				'optgroup',
+				[],
+				{ label: `${theme.name} (${theme.path})` },
+				select
+			);
 
 			createOptions(
 				theme.templates,
