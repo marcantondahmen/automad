@@ -77,6 +77,7 @@ class App {
 		Error::setHtmlOutputHandler();
 
 		$this->runVersionCheck();
+		$this->runExtensionsCheck();
 
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
@@ -116,6 +117,28 @@ class App {
 		$callable = $Router->get($request);
 
 		return $callable();
+	}
+
+	/**
+	 * Run basic PHP extensions check.
+	 */
+	private function runExtensionsCheck(): void {
+		$requirements = array(
+			'curl_version' => '<code>curl</code> extension',
+			'gd_info' => 'GD library'
+		);
+
+		foreach ($requirements as $func => $name) {
+			if (!function_exists($func)) {
+				Error::exit(
+					"The $name is missing",
+					<<<HTML
+					Please make sure the $name for your currently used PHP version is properly installed on your system 
+					and enabled in your <code>php.ini</code> file.
+					HTML
+				);
+			}
+		}
 	}
 
 	/**
