@@ -62,7 +62,7 @@ const templateName = (template: string, themeName: string = ''): string => {
 		.reverse()[0]
 		.replace(/\.php$/g, '');
 
-	return titleCase([themeName, templateName].join('/'));
+	return [themeName, titleCase(templateName)].join(' / ');
 };
 
 /**
@@ -111,7 +111,7 @@ const themeStatus = ({
 
 	if (typeof themes[fields[themeKey]] != 'undefined') {
 		appliedTheme = themes[fields[themeKey]];
-		buttonLabel = titleCase(`${appliedTheme.name}/${selectedTemplate}`);
+		buttonLabel = `${appliedTheme.name} / ${titleCase(selectedTemplate)}`;
 		selectedTemplate = templatePath(template, appliedTheme.path);
 	}
 
@@ -169,7 +169,7 @@ class PageTemplateSelectComponent extends BaseComponent {
 		const mainTheme =
 			App.themes[App.mainTheme] || App.themes[Object.keys(App.themes)[0]];
 		const themes = App.themes;
-		const label = create('span', [], {}, this);
+		const label = create('span', [CSS.textTruncateLeft], {}, this);
 		const select = create(
 			'select',
 			[],
@@ -184,12 +184,7 @@ class PageTemplateSelectComponent extends BaseComponent {
 		createOptions(mainTheme?.templates ?? [], mainGroup, selectedTemplate);
 
 		Object.values(themes).forEach((theme: KeyValueMap) => {
-			const group = create(
-				'optgroup',
-				[],
-				{ label: `${theme.name} (${theme.path})` },
-				select
-			);
+			const group = create('optgroup', [], { label: theme.name }, select);
 
 			createOptions(
 				theme.templates,
@@ -262,12 +257,12 @@ export class PageTemplateFieldComponent extends BaseComponent {
 			<label class="${CSS.fieldLabel}">${App.text('pageTemplate')}</label>
 			<am-modal-toggle
 				${Attr.modal}="#am-page-template-modal"
-				class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.cursorPointer}"
+				class="${CSS.input} ${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexBetween} ${CSS.flexGap} ${CSS.cursorPointer}"
 			>
-				<am-icon-text
-					${Attr.icon}="${buttonIcon}"
-					${Attr.text}="${buttonLabel}"
-				></am-icon-text>
+				<span class="${CSS.iconText}">
+					<i class="bi bi-${buttonIcon}"></i>
+					<span class="${CSS.textTruncateLeft}">${buttonLabel}</span>
+				</span>
 				<i class="bi bi-pen"></i>
 			</am-modal-toggle>
 		`;

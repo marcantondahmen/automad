@@ -67,7 +67,7 @@ class MainThemeFieldComponent extends BaseFieldComponent {
 
 		themes.forEach((theme) => {
 			options.push({
-				text: `${theme.name} (${theme.path})`,
+				text: theme.name,
 				value: theme.path,
 			});
 		});
@@ -106,7 +106,7 @@ class MainThemeFieldComponent extends BaseFieldComponent {
 			],
 			{ [Attr.modal]: `#${modalId}` },
 			this,
-			`<i class="bi bi-box-seam"></i>${selectedTheme.name} (${selectedTheme.path})`
+			`<i class="bi bi-box-seam"></i>${selectedTheme.name}`
 		);
 
 		const links = create('div', [CSS.flex, CSS.flexColumn], {}, this);

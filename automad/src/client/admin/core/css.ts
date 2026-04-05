@@ -353,6 +353,7 @@ export const enum CSS {
 	textMuted = 'am-u-text-muted',
 	textParagraph = 'am-u-text-paragraph',
 	textLimitRows = 'am-u-text-limit-rows',
+	textTruncateLeft = 'am-u-text-truncate-left',
 
 	toggle = 'am-f-toggle',
 	toggleButton = 'am-f-toggle--button',
