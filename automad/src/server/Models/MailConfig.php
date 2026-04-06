@@ -118,7 +118,7 @@ class MailConfig {
 		$ConfigFile->set('AM_MAIL_SMTP_PASSWORD', '');
 		$ConfigFile->set('AM_MAIL_SMTP_PORT', self::DEFAULT_PORT);
 
-		return ConfigFile->write();
+		return $ConfigFile->write();
 	}
 
 	/**
