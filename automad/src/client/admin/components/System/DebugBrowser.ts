@@ -32,14 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import {
-	App,
-	Attr,
-	Binding,
-	createField,
-	EventName,
-	FieldTag,
-} from '@/admin/core';
+import { App, Binding, createField, EventName, FieldTag } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**
