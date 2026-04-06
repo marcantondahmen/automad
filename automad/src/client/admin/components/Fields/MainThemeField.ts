@@ -66,7 +66,10 @@ class MainThemeFieldComponent extends BaseFieldComponent {
 		const options: SelectComponentOption[] = [];
 
 		themes.forEach((theme) => {
-			options.push({ text: theme.name, value: theme.path });
+			options.push({
+				text: theme.name,
+				value: theme.path,
+			});
 		});
 
 		const modalId = uniqueId();

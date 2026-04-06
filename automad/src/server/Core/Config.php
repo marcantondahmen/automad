@@ -36,6 +36,7 @@
 namespace Automad\Core;
 
 use Automad\Models\MailConfig;
+use Automad\System\ConfigFile;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -96,30 +97,6 @@ class Config {
 	}
 
 	/**
-	 * Read configuration overrides as JSON string form PHP or JSON file
-	 * and decode the returned string. Note that now the configuration is stored in
-	 * PHP files instead of JSON files to make it less easy to access from outside.
-	 *
-	 * @param string $name
-	 * @return array The configuration array
-	 */
-	public static function read(string $name = ''): array {
-		$json = false;
-		$config = array();
-		$file = self::getConfigPath($name);
-
-		if (is_readable($file)) {
-			$json = require $file;
-		}
-
-		if ($json) {
-			$config = json_decode($json, true);
-		}
-
-		return $config;
-	}
-
-	/**
 	 * Define constant, if not defined already.
 	 *
 	 * @param string $name
@@ -129,28 +106,6 @@ class Config {
 		if (!defined($name)) {
 			define($name, $value);
 		}
-	}
-
-	/**
-	 * Write the configuration file.
-	 *
-	 * @param array $config
-	 * @param string $name
-	 * @return bool True on success
-	 */
-	public static function write(array $config, string $name = ''): bool {
-		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
-		$file = self::getConfigPath($name);
-		$success = FileSystem::write($file, $content);
-
-		Debug::log($file);
-
-		if ($success && function_exists('opcache_invalidate')) {
-			opcache_invalidate($file, true);
-		}
-
-		return $success;
 	}
 
 	/**
@@ -327,20 +282,10 @@ class Config {
 			$configName = Str::stripEnd($configName, 'php');
 			$configName = trim($configName, '.');
 
-			foreach (self::read($configName) as $name => $value) {
+			foreach (ConfigFile::read($configName) as $name => $value) {
 				self::set($name, $value);
 			}
 		}
-	}
-
-	/**
-	 * Get the config path for a given optional name.
-	 *
-	 * @param string $name
-	 * @return string
-	 */
-	private static function getConfigPath(string $name): string {
-		return $name ? AM_BASE_DIR . '/config/config.' . $name . '.php' : Config::FILE;
 	}
 
 	/**

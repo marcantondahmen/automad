@@ -102,7 +102,7 @@ class ThemeCollection {
 	 * To be a valid theme, a directory must contain a "theme.json" file and at least one ".php" file.
 	 *
 	 * @param string|null $path
-	 * @return array An array containing all themes as objects.
+	 * @return array<string, Theme> An array containing all themes as objects.
 	 */
 	private function collectThemes(?string $path = null): array {
 		if (!$path) {
@@ -127,7 +127,19 @@ class ThemeCollection {
 			}
 		}
 
-		return $themes;
+		$uniqueThemes = array();
+
+		// Append path to theme name in case multiple version of the same theme are installed.
+		foreach ($themes as $path => $Theme) {
+			if (count(array_filter($themes, fn ($th) => $Theme->name == $th->name)) > 1) {
+				$uniqueTheme = clone $Theme;
+
+				$uniqueTheme->name = "$Theme->name ($Theme->path)";
+				$uniqueThemes[$path] = $uniqueTheme;
+			}
+		}
+
+		return array_merge($themes, $uniqueThemes);
 	}
 
 	/**

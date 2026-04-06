@@ -38,7 +38,7 @@ namespace Automad\Console\Commands;
 use Automad\Console\Argument;
 use Automad\Console\ArgumentCollection;
 use Automad\Console\Console;
-use Automad\Core\Config as CoreConfig;
+use Automad\System\ConfigFile;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -92,7 +92,7 @@ class ConfigUnset extends AbstractCommand {
 	 * @return int exit code
 	 */
 	public function run(): int {
-		$config = CoreConfig::read();
+		$ConfigFile = new ConfigFile();
 		$key = $this->ArgumentCollection->value('key');
 
 		if (strlen($key) == 0) {
@@ -101,9 +101,8 @@ class ConfigUnset extends AbstractCommand {
 			return 1;
 		}
 
-		unset($config[$key]);
-		$success = CoreConfig::write($config);
+		$ConfigFile->unset($key);
 
-		return $success ? 0 : 1;
+		return $ConfigFile->write() ? 0 : 1;
 	}
 }

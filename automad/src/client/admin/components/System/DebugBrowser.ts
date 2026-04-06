@@ -32,14 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import {
-	App,
-	Attr,
-	Binding,
-	createField,
-	EventName,
-	FieldTag,
-} from '@/admin/core';
+import { App, Binding, createField, EventName, FieldTag } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
 /**
@@ -52,32 +45,22 @@ class DebugBrowserComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const debugEnabled = new Binding('debugBrowser', {
+		const debugBrowser = new Binding('debugBrowser', {
 			initial: App.system.debug.browser,
 		});
 
 		this.listen(window, EventName.appStateChange, () => {
-			debugEnabled.value = App.system.debug.browser;
+			debugBrowser.value = App.system.debug.browser;
 		});
 
-		createField(
-			FieldTag.toggle,
-			this,
-			{
-				key: 'debugBrowser',
-				value: App.system.debug.browser,
-				name: 'debugBrowser',
-				label: App.text('systemDebugBrowser'),
-				envKey: 'AM_DEBUG_BROWSER',
-				hideLabel: true,
-			},
-			[],
-			{
-				[Attr.toggle]: '.am-debug-settings',
-				[Attr.bind]: 'debugEnabled',
-				[Attr.bindTo]: 'checked',
-			}
-		);
+		createField(FieldTag.toggle, this, {
+			key: 'debugBrowser',
+			value: App.system.debug.browser,
+			name: 'debugBrowser',
+			label: App.text('systemDebugBrowser'),
+			envKey: 'AM_DEBUG_BROWSER',
+			hideLabel: true,
+		});
 	}
 }
 

@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.25](https://github.com/marcantondahmen/automad/commit/ef05b7ca3be87e79b76e6523232ce808b5a421f8)
+## [v2.0.0-beta.26](https://github.com/marcantondahmen/automad/commit/4c3fe37b5d5ae5bf299a317ade37b52f154c7c5c)
 
-Fri, 3 Apr 2026 21:56:57 +0200
+Mon, 6 Apr 2026 13:12:19 +0200
+
+### New Features
+
+- improve theme and template selection ui ([dccbe252](https://github.com/marcantondahmen/automad/commit/dccbe252d1f308e58bb7b3c091c933f8aa7857b9))
+- run extensions check on start ([f1142828](https://github.com/marcantondahmen/automad/commit/f1142828d3ccf0bb1a991ba058c992c9d6515695))
+- show theme path in theme and template select fields ([0eabcb1c](https://github.com/marcantondahmen/automad/commit/0eabcb1c6c6b2369d0f8b04b77fcf3a46f825d04))
+
+### Bugfixes
+
+- fix debug settings ui ([6a661772](https://github.com/marcantondahmen/automad/commit/6a66177276d2aab51f182f518e88b63b006c4cbe))
+
+## [v2.0.0-beta.25](https://github.com/marcantondahmen/automad/commit/9d3049175d056b32c79e97cd3a75d11aed7e2ca5)
+
+Fri, 3 Apr 2026 22:41:40 +0200
 
 ### Bugfixes
 

@@ -109,16 +109,16 @@ class MailConfig {
 	 * @return bool
 	 */
 	public static function reset(): bool {
-		$config = Config::read(MailConfig::CONFIG_NAME);
+		$ConfigFile = new ConfigFile(MailConfig::CONFIG_NAME);
 
-		$config['AM_MAIL_TRANSPORT'] = self::DEFAULT_TRANSPORT;
-		$config['AM_MAIL_FROM'] = '';
-		$config['AM_MAIL_SMTP_SERVER'] = '';
-		$config['AM_MAIL_SMTP_USERNAME'] = '';
-		$config['AM_MAIL_SMTP_PASSWORD'] = '';
-		$config['AM_MAIL_SMTP_PORT'] = self::DEFAULT_PORT;
+		$ConfigFile->set('AM_MAIL_TRANSPORT', self::DEFAULT_TRANSPORT);
+		$ConfigFile->set('AM_MAIL_FROM', '');
+		$ConfigFile->set('AM_MAIL_SMTP_SERVER', '');
+		$ConfigFile->set('AM_MAIL_SMTP_USERNAME', '');
+		$ConfigFile->set('AM_MAIL_SMTP_PASSWORD', '');
+		$ConfigFile->set('AM_MAIL_SMTP_PORT', self::DEFAULT_PORT);
 
-		return Config::write($config, MailConfig::CONFIG_NAME);
+		return $ConfigFile->write();
 	}
 
 	/**
