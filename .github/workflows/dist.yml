@@ -23,6 +23,5 @@ jobs:
           php-version: '8.5'
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - run: bash .github/workflows/dist.sh
+      - name: Build and push
+        run: bash .github/workflows/dist.sh
