@@ -373,7 +373,7 @@ export class FormComponent extends BaseComponent {
 			input.classList.add(CSS.validate);
 		});
 
-		if (this.verifyRequired()) {
+		if (this.validateInputs()) {
 			queryAll(`.${CSS.validate}`, this).forEach((input) => {
 				input.classList.remove(CSS.validate);
 			});
@@ -507,13 +507,20 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
-	 * Verifies that all required fields have values.
+	 * Verifies that all required fields have values and all fields are validated.
 	 *
-	 * @returns true if all required fields have values
+	 * @returns true if all required fields have values and all values are valid
 	 */
-	private verifyRequired(): boolean {
+	private validateInputs(): boolean {
+		const invalidInputs = queryAll<InputElement>(':invalid', this);
 		const requiredInputs = queryAll<InputElement>('[required]', this);
 		const requiredEmpty: InputElement[] = [];
+
+		if (invalidInputs.length) {
+			invalidInputs[0].focus();
+
+			return false;
+		}
 
 		requiredInputs.forEach((input) => {
 			if (!input.value.trim()) {
@@ -523,6 +530,7 @@ export class FormComponent extends BaseComponent {
 
 		if (requiredEmpty.length) {
 			requiredEmpty[0].focus();
+
 			return false;
 		}
 
