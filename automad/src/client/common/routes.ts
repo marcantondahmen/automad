@@ -35,6 +35,7 @@
 export enum Route {
 	setup = 'setup',
 	login = 'login',
+	verifytotp = 'verifytotp',
 	resetpassword = 'resetpassword',
 	search = 'search',
 	home = 'home',

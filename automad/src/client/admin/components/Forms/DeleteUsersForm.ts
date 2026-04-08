@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, CSS, EventName, html } from '@/admin/core';
+import { App, Attr, CSS, EventName, html } from '@/admin/core';
 import { FormComponent } from './Form';
 
 /**
@@ -51,6 +51,17 @@ const renderRegisteredUsers = (): string => {
 					`
 				: html`<am-checkbox name="delete[${user.name}]"></am-checkbox>`;
 
+		const totpBadge = user.totpIsConfigured
+			? html`
+					<i
+						class="bi bi-shield-check"
+						${Attr.tooltip}="${App.text(
+							'systemUsersTotpIsEnabled'
+						)}"
+					></i>
+				`
+			: '';
+
 		return html`
 			${output}
 			<span class="${CSS.card}">
@@ -61,7 +72,11 @@ const renderRegisteredUsers = (): string => {
 						<span class="${CSS.flexItemGrow}">
 							${user.name} (${user.email})
 						</span>
-						${checkbox}
+						<span
+							class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
+						>
+							${totpBadge}${checkbox}
+						</span>
 					</span>
 				</span>
 			</span>

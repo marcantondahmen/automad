@@ -36,6 +36,7 @@
 namespace Automad\Core;
 
 use Automad\Models\UserCollection;
+use Automad\System\TOTP;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,6 +52,9 @@ class Session {
 	const DATA_KEY = 'data';
 	const I18N_LANG = 'lang';
 	const RESET_TOKEN_KEY = 'reset';
+	const TOTP_LOGIN_SECRET_KEY = 'totpLoginSecret';
+	const TOTP_LOGIN_USERNAME_KEY = 'totpLoginUsername';
+	const TOTP_SETUP_SECRET_KEY = 'totpSetupSecret';
 	const USERNAME_KEY = 'username';
 
 	/**
@@ -108,9 +112,11 @@ class Session {
 		}
 
 		if ($User->verifyPassword($password)) {
-			session_regenerate_id(true);
-			$_SESSION[self::USERNAME_KEY] = $User->name;
-			self::createCsrfToken();
+			if ($User->totpIsConfigured()) {
+				$User->setPendingTotpVerificationSession();
+			} else {
+				self::startUserSession($User->name);
+			}
 
 			return true;
 		}
@@ -132,6 +138,14 @@ class Session {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Reset the pending TOTP verification session variables.
+	 */
+	public static function resetTotpVerification(): void {
+		unset($_SESSION[self::TOTP_LOGIN_SECRET_KEY]);
+		unset($_SESSION[self::TOTP_LOGIN_USERNAME_KEY]);
 	}
 
 	/**
@@ -159,6 +173,27 @@ class Session {
 	}
 
 	/**
+	 * Verify pending TOTP code in session in order to finish sign-in process.
+	 *
+	 * @param string $code
+	 * @return bool
+	 */
+	public static function verifyTotp(string $code): bool {
+		if (empty($_SESSION[self::TOTP_LOGIN_SECRET_KEY]) || empty($_SESSION[self::TOTP_LOGIN_USERNAME_KEY])) {
+			return false;
+		}
+
+		if (TOTP::verify($_SESSION[self::TOTP_LOGIN_SECRET_KEY], $code)) {
+			self::startUserSession($_SESSION[self::TOTP_LOGIN_USERNAME_KEY]);
+			self::resetTotpVerification();
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Create a CSRF protection token.
 	 *
 	 * @return string the created token
@@ -167,5 +202,16 @@ class Session {
 		$_SESSION[self::CSRF_TOKEN_KEY] = bin2hex(random_bytes(32));
 
 		return $_SESSION[self::CSRF_TOKEN_KEY];
+	}
+
+	/**
+	 * Start a new authenticated user session.
+	 *
+	 * @param string $username
+	 */
+	private static function startUserSession(string $username): void {
+		session_regenerate_id(true);
+		$_SESSION[self::USERNAME_KEY] = $username;
+		self::createCsrfToken();
 	}
 }

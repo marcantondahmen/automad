@@ -74,6 +74,7 @@ export const renderUsersSection = (): string => {
 								value="${App.user.email}"
 							></am-user-email>
 						</span>
+						<am-totp-config></am-totp-config>
 						<span class="${CSS.cardFormButtons}">
 							<am-submit class="${CSS.button}">
 								<span>${App.text('save')}</span>

@@ -51,6 +51,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class SessionController {
 	/**
+	 * Cancel a pending TOTP verification.
+	 *
+	 * @return Response
+	 */
+	public static function cancelTotpVerification(): Response {
+		$Response = new Response();
+
+		Session::resetTotpVerification();
+
+		return $Response->setReload(true);
+	}
+
+	/**
 	 * Verify login information based on $_POST.
 	 *
 	 * @return Response the Response object
@@ -74,7 +87,7 @@ class SessionController {
 		$Response = new Response();
 
 		if (Session::logout()) {
-			$Response->setSuccess(Text::get('signedOutSuccess'))->setRedirect('login');
+			$Response->setSuccess(Text::get('signedOutSuccess'))->setReload(true);
 		}
 
 		return $Response;
@@ -90,5 +103,20 @@ class SessionController {
 		$Response->setSuccess('OK');
 
 		return $Response;
+	}
+
+	/**
+	 * Verify a TOTP code and sign user in.
+	 *
+	 * @return Response
+	 */
+	public static function verifyTotp(): Response {
+		$Response = new Response();
+
+		if (Session::verifyTotp(Request::post('code'))) {
+			return $Response->setReload(true);
+		}
+
+		return $Response->setError(Text::get('verifyTotpError'));
 	}
 }

@@ -59,6 +59,8 @@ class UserCollection {
 
 	/**
 	 * The collection of existing user objects.
+	 *
+	 * @var User[]
 	 */
 	private array $users;
 
@@ -264,7 +266,14 @@ class UserCollection {
 	 * @return array the user collection array
 	 */
 	public function getCollection(): array {
-		return $this->users;
+		return array_map(
+			fn (User $User) => array(
+				'name' => $User->name,
+				'email' => $User->email,
+				'totpIsConfigured' => $User->totpIsConfigured()
+			),
+			$this->users
+		);
 	}
 
 	/**
@@ -324,6 +333,24 @@ class UserCollection {
 		$message = InvitationEmail::render($website, $username, $link);
 
 		return Mail::send($email, $subject, $message, null, $Messenger);
+	}
+
+	/**
+	 * Set the TOTP secret for current user.
+	 *
+	 * @param string $secret
+	 * @return bool
+	 */
+	public function setCurrentUserTotpSecret(string $secret): bool {
+		$id = $this->getUserId(Session::getUsername());
+
+		if (is_null($id) || empty($this->users[$id])) {
+			return false;
+		}
+
+		$this->users[$id]->setTotpSecret($secret);
+
+		return true;
 	}
 
 	/**

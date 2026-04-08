@@ -40,7 +40,9 @@ use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Session;
 use Automad\Core\Text;
+use Automad\Models\User;
 use Automad\Models\UserCollection;
+use Automad\System\TOTP;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -175,6 +177,77 @@ class UserController {
 		}
 
 		return $Response->setError($Messenger->getError());
+	}
+
+	/**
+	 * Confirm TOTP setup.
+	 *
+	 * @return Response
+	 */
+	public static function totpConfirmSetup(): Response {
+		$Response = new Response();
+		$Messenger = new Messenger();
+		$code = Request::post('code');
+
+		$confirmed = TOTP::confirmSetup($code, $Messenger);
+
+		return $Response->setError($Messenger->getError())->setData(array('confirmed' => $confirmed));
+	}
+
+	/**
+	 * Disable TOTP verification.
+	 *
+	 * @return Response
+	 */
+	public static function totpDisable(): Response {
+		$Response = new Response();
+		$Messenger = new Messenger();
+
+		if (!Request::post('disableTotp')) {
+			return $Response->setCode(403);
+		}
+
+		$disabled = TOTP::disable($Messenger);
+
+		if (!$disabled) {
+			$Response->setError($Messenger->getError())->setCode(500);
+		}
+
+		return $Response->setError($Messenger->getError())->setData(array('disabled' => $disabled));
+	}
+
+	/**
+	 * Test if a TOTP is configured for the current user.
+	 *
+	 * @return Response
+	 */
+	public static function totpIsConfigured(): Response {
+		$Response = new Response();
+		$User = User::getCurrent();
+
+		if (!$User) {
+			return $Response;
+		}
+
+		return $Response->setData(array('totpIsConfigured' => $User->totpIsConfigured()));
+	}
+
+	/**
+	 * Start the TOTP setup process.
+	 *
+	 * @return Response
+	 */
+	public static function totpSetup(): Response {
+		$Response = new Response();
+		$User = User::getCurrent();
+
+		if (empty($User)) {
+			return $Response;
+		}
+
+		$Response->setData(TOTP::setup($User->name));
+
+		return $Response;
 	}
 
 	/**

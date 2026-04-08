@@ -145,6 +145,7 @@ import('./components/Pages/Setup');
 import('./components/Pages/Shared');
 import('./components/Pages/System');
 import('./components/Pages/Trash');
+import('./components/Pages/VerifyTotp');
 
 import('./components/Sidebar/Sidebar');
 import('./components/Sidebar/SidebarToggle');
@@ -195,4 +196,5 @@ import('./components/PageSelectTree');
 import('./components/Root');
 import('./components/Select');
 import('./components/Spinner');
+import('./components/TotpConfig');
 import('./components/UndoButtons');
