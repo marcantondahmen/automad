@@ -72,7 +72,7 @@ class TOTP {
 
 		$_SESSION[Session::TOTP_SETUP_SECRET_KEY] = $secret;
 
-		$renderer = new GDLibRenderer(400);
+		$renderer = new GDLibRenderer(400, 2);
 		$writer = new Writer($renderer);
 		$qr = base64_encode($writer->writeString($uri));
 

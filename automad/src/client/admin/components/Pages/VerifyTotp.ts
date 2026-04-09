@@ -73,7 +73,7 @@ export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 				<div class="${CSS.card}">
 					<div class="${CSS.cardForm}">
 						<input
-							class="${CSS.input}"
+							class="${CSS.input} ${CSS.inputTotp}"
 							name="code"
 							type="text"
 							maxlength="6"
@@ -83,12 +83,6 @@ export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 							required
 						/>
 						<div class="${CSS.cardFormButtons}">
-							<am-link
-								${Attr.target}="${Route.resetpassword}"
-								class="${CSS.button}"
-							>
-								${App.text('forgotPassword')}
-							</am-link>
 							<am-submit
 								class="${CSS.button} ${CSS.buttonPrimary}"
 							>
@@ -98,11 +92,22 @@ export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 					</div>
 				</div>
 			</am-form>
-			<am-form ${Attr.api}="${SessionController.cancelTotpVerification}">
-				<am-submit class="${CSS.button}">
-					${App.text('cancel')}
-				</am-submit>
-			</am-form>
+			<p>
+				<am-form
+					${Attr.api}="${SessionController.cancelTotpVerification}"
+				>
+					<am-submit class="${CSS.link}">
+						${App.text('verifyTotpCancel')}
+					</am-submit>
+				</am-form>
+				<br />
+				<am-link
+					${Attr.target}="${Route.accountrecovery}"
+					class="${CSS.link}"
+				>
+					${App.text('troubleSigningIn')}
+				</am-link>
+			</p>
 		`;
 	}
 }

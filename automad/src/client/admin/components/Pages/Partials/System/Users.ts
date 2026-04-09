@@ -52,108 +52,94 @@ import {
  */
 export const renderUsersSection = (): string => {
 	return html`
-		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
-			<am-form
-				${Attr.api}="${UserController.edit}"
-				${Attr.event}="${EventName.appStateRequireUpdate}"
-				${Attr.watch}
-			>
-				<am-form-error></am-form-error>
-				<span class="${CSS.card}">
-					<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-						${App.text('systemUsersInfo')}
-					</span>
-					<span
-						class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
-					>
-						<span class="${CSS.flex} ${CSS.flexColumn}">
-							<am-user-name
-								value="${App.user.name}"
-							></am-user-name>
-							<am-user-email
-								value="${App.user.email}"
-							></am-user-email>
-						</span>
-						<am-totp-config></am-totp-config>
-						<span class="${CSS.cardFormButtons}">
-							<am-submit class="${CSS.button}">
-								<span>${App.text('save')}</span>
-							</am-submit>
-							<am-modal-toggle
-								class="${CSS.button} ${CSS.buttonPrimary}"
-								${Attr.modal}="#am-change-password-modal"
-							>
-								<span>
-									${App.text('systemUsersChangePassword')}
-								</span>
-							</am-modal-toggle>
-						</span>
-					</span>
-				</span>
-			</am-form>
+		<am-form
+			${Attr.api}="${UserController.edit}"
+			${Attr.event}="${EventName.appStateRequireUpdate}"
+			${Attr.watch}
+		>
+			<h2 class="${CSS.marginTopNone}">
+				${App.text('systemUsersYourAccountHeading')}
+			</h2>
+			<p>${App.text('systemUsersYourAccountText')}</p>
+			<am-form-error></am-form-error>
 			<span class="${CSS.card}">
-				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('systemUsersRegisteredInfo')}
-				</span>
-				<span class="${CSS.cardForm}">
+				<span
+					class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+				>
+					<span class="${CSS.flex} ${CSS.flexColumn}">
+						<am-user-name value="${App.user.name}"></am-user-name>
+						<am-user-email
+							value="${App.user.email}"
+						></am-user-email>
+					</span>
 					<span class="${CSS.cardFormButtons}">
+						<am-submit class="${CSS.button}">
+							<span>${App.text('save')}</span>
+						</am-submit>
 						<am-modal-toggle
-							class="${CSS.button}"
-							${Attr.modal}="#am-registered-users-modal"
+							class="${CSS.button} ${CSS.buttonPrimary}"
+							${Attr.modal}="#am-change-password-modal"
 						>
-							<span
-								class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
-							>
-								<span>
-									${App.text('systemUsersRegistered')}
-								</span>
-								<span class="${CSS.badge}">
-									<am-user-count-indicator></am-user-count-indicator>
-								</span>
+							<span>
+								${App.text('systemUsersChangePassword')}
 							</span>
 						</am-modal-toggle>
 					</span>
-					<span class="${CSS.cardFormButtons}">
-						<am-modal-toggle
-							class="${CSS.button}"
-							${Attr.modal}="#am-add-user-modal"
-						>
-							<span>${App.text('systemUsersAdd')}</span>
-						</am-modal-toggle>
-						<am-modal-toggle
-							class="${CSS.button}"
-							${Attr.modal}="#am-invite-user-modal"
-						>
-							<span>${App.text('systemUsersInvite')}</span>
-						</am-modal-toggle>
-					</span>
 				</span>
 			</span>
+		</am-form>
 
-			<span class="${CSS.card}">
-				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('systemUsersSignOutAllInfo')}
+		<h2>${App.text('systemUsersTotpHeading')}</h2>
+		<p>${App.text('systemUsersTotpText')}</p>
+		<am-totp-config></am-totp-config>
+
+		<h2>${App.text('systemUsersCollaborateHeading')}</h2>
+		<p>${App.text('systemUsersCollaborateText')}</p>
+		<span class="${CSS.card}">
+			<span class="${CSS.cardForm}">
+				<span class="${CSS.cardFormButtons}">
+					<am-modal-toggle
+						class="${CSS.button}"
+						${Attr.modal}="#am-registered-users-modal"
+					>
+						<span
+							class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
+						>
+							<span> ${App.text('systemUsersRegistered')} </span>
+							<span class="${CSS.badge}">
+								<am-user-count-indicator></am-user-count-indicator>
+							</span>
+						</span>
+					</am-modal-toggle>
 				</span>
-				<am-form
-					class="${CSS.cardForm}"
-					${Attr.api}="${ConfigController.update}"
-					${Attr.confirm}="${App.text(
-						'systemUsersSignOutAllConfirm'
-					)}"
-				>
-					<input
-						type="hidden"
-						name="type"
-						value="sessionCookieSalt"
-					/>
-					<span class="${CSS.cardFormButtons}">
-						<am-submit class="${CSS.button}">
-							<span>${App.text('systemUsersSignOutAll')}</span>
-						</am-submit>
-					</span>
-				</am-form>
+				<span class="${CSS.cardFormButtons}">
+					<am-modal-toggle
+						class="${CSS.button}"
+						${Attr.modal}="#am-add-user-modal"
+					>
+						<span>${App.text('systemUsersAdd')}</span>
+					</am-modal-toggle>
+					<am-modal-toggle
+						class="${CSS.button} ${CSS.buttonPrimary}"
+						${Attr.modal}="#am-invite-user-modal"
+					>
+						<span>${App.text('systemUsersInvite')}</span>
+					</am-modal-toggle>
+				</span>
 			</span>
-		</div>
+		</span>
+
+		<p>${App.text('systemUsersSignOutAllInfo')}</p>
+		<am-form
+			${Attr.api}="${ConfigController.update}"
+			${Attr.confirm}="${App.text('systemUsersSignOutAllConfirm')}"
+		>
+			<input type="hidden" name="type" value="sessionCookieSalt" />
+			<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+				<span>${App.text('systemUsersSignOutAll')}</span>
+			</am-submit>
+		</am-form>
+
 		<!-- Modals -->
 		<am-modal id="am-change-password-modal" ${Attr.clearForm}>
 			<am-form

@@ -87,12 +87,6 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 							required
 						/>
 						<div class="${CSS.cardFormButtons}">
-							<am-link
-								${Attr.target}="${Route.resetpassword}"
-								class="${CSS.button}"
-							>
-								${App.text('forgotPassword')}
-							</am-link>
 							<am-submit
 								class="${CSS.button} ${CSS.buttonPrimary}"
 							>
@@ -102,6 +96,14 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 					</div>
 				</div>
 			</am-form>
+			<p>
+				<am-link
+					${Attr.target}="${Route.accountrecovery}"
+					class="${CSS.link}"
+				>
+					${App.text('troubleSigningIn')}
+				</am-link>
+			</p>
 		`;
 	}
 }

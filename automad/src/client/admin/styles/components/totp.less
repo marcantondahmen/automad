@@ -22,54 +22,40 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import {
-	App,
-	Attr,
-	getTagFromRoute,
-	html,
-	Route,
-	UserController,
-} from '@/admin/core';
-import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
+.am-c-totp {
+	display: flex;
+	flex-direction: column;
+	gap: @am-flex-gap;
 
-/**
- * The password reset view.
- *
- * @extends BaseCenteredLayoutComponent
- */
-export class ResetPasswordComponent extends BaseCenteredLayoutComponent {
-	/**
-	 * Set the page title that is used a document title suffix.
-	 */
-	protected get pageTitle(): string {
-		return App.text('resetPassword');
+	&__qr {
+		border-radius: @am-form-radius;
+		border: @am-form-border;
+		overflow: hidden;
 	}
 
-	/**
-	 * Render the main partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderMainPartial(): string {
-		return html`
-			<am-reset-password-form
-				${Attr.api}="${UserController.resetPassword}"
-			></am-reset-password-form>
-		`;
+	&__secret {
+		appearance: none;
+		font-family: @am-code-font-family;
+		line-height: 1;
+		padding: 1rem;
+		text-align: center;
+		color: hsl(var(--am-clr-text));
+		background-color: hsl(var(--am-clr-background-faded));
+		border-radius: @am-form-radius;
+		border: @am-form-border;
+
+		&:focus {
+			outline: none;
+		}
 	}
 }
-
-customElements.define(
-	getTagFromRoute(Route.resetpassword),
-	ResetPasswordComponent
-);

@@ -166,7 +166,7 @@ export const enum UserCollectionController {
 export const enum UserController {
 	changePassword = 'UserController::changePassword',
 	edit = 'UserController::edit',
-	resetPassword = 'UserController::resetPassword',
+	accountRecovery = 'UserController::accountRecovery',
 	totpIsConfigured = 'UserController::totpIsConfigured',
 	totpSetup = 'UserController::totpSetup',
 	totpConfirmSetup = 'UserController::totpConfirmSetup',

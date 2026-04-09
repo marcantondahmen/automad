@@ -71,7 +71,7 @@ class Routes {
 		'session/login',
 		'session/validate',
 		'app/bootstrap',
-		'user/reset-password',
+		'user/account-recovery',
 		'user-collection/create-first-user'
 	);
 

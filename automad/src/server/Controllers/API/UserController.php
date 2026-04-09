@@ -55,6 +55,68 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class UserController {
 	/**
+	 * Reset a user password by email.
+	 *
+	 * @return Response the Response object
+	 */
+	public static function accountRecovery(): Response {
+		$Response = new Response();
+		$UserCollection = new UserCollection();
+		$Messenger = new Messenger();
+
+		// Only one field will be defined, so they can just be concatenated here.
+		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
+
+		$token = trim(Request::post('token'));
+		$newPassword1 = Request::post('password1');
+		$newPassword2 = Request::post('password2');
+
+		$User = $UserCollection->getUser($nameOrEmail);
+
+		if ($nameOrEmail && !$User) {
+			return $Response->setError(Text::get('userNotFoundError'));
+		}
+
+		if (!$User) {
+			return $Response->setData(array('state' => 'requestToken'));
+		}
+
+		$responseData = array('username' => $User->name);
+
+		if ($token && $newPassword1 && $newPassword2) {
+			if (!self::verifyPasswordRequirements($newPassword1)) {
+				$responseData['state'] = 'setPassword';
+
+				return $Response->setData($responseData)->setError(self::generatePasswordRequirementsError());
+			}
+
+			if ($User->verifyPasswordResetToken($token)) {
+				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
+					$responseData['state'] = 'success';
+
+					return $Response->setData($responseData);
+				}
+
+				$responseData['state'] = 'setPassword';
+
+				return $Response->setData($responseData)->setError($Messenger->getError());
+			}
+
+			$responseData['state'] = 'setPassword';
+
+			return $Response->setData($responseData)->setError(Text::get('passwordResetVerificationError'));
+		}
+
+		if ($User->sendPasswordResetToken($Messenger)) {
+			$responseData['state'] = 'setPassword';
+
+			return $Response->setData($responseData);
+		}
+
+		return $Response->setError($Messenger->getError());
+	}
+
+	/**
 	 * Change the password of the currently logged in user based on $_POST.
 	 *
 	 * @return Response the response object
@@ -112,68 +174,6 @@ class UserController {
 			if ($UserCollection->save($Messenger)) {
 				return $Response->setSuccess(Text::get('savedSuccess'));
 			}
-		}
-
-		return $Response->setError($Messenger->getError());
-	}
-
-	/**
-	 * Reset a user password by email.
-	 *
-	 * @return Response the Response object
-	 */
-	public static function resetPassword(): Response {
-		$Response = new Response();
-		$UserCollection = new UserCollection();
-		$Messenger = new Messenger();
-
-		// Only one field will be defined, so they can just be concatenated here.
-		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
-
-		$token = trim(Request::post('token'));
-		$newPassword1 = Request::post('password1');
-		$newPassword2 = Request::post('password2');
-
-		$User = $UserCollection->getUser($nameOrEmail);
-
-		if ($nameOrEmail && !$User) {
-			return $Response->setError(Text::get('userNotFoundError'));
-		}
-
-		if (!$User) {
-			return $Response->setData(array('state' => 'requestToken'));
-		}
-
-		$responseData = array('username' => $User->name);
-
-		if ($token && $newPassword1 && $newPassword2) {
-			if (!self::verifyPasswordRequirements($newPassword1)) {
-				$responseData['state'] = 'setPassword';
-
-				return $Response->setData($responseData)->setError(self::generatePasswordRequirementsError());
-			}
-
-			if ($User->verifyPasswordResetToken($token)) {
-				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
-					$responseData['state'] = 'success';
-
-					return $Response->setData($responseData);
-				}
-
-				$responseData['state'] = 'setPassword';
-
-				return $Response->setData($responseData)->setError($Messenger->getError());
-			}
-
-			$responseData['state'] = 'setPassword';
-
-			return $Response->setData($responseData)->setError(Text::get('passwordResetVerificationError'));
-		}
-
-		if ($User->sendPasswordResetToken($Messenger)) {
-			$responseData['state'] = 'setPassword';
-
-			return $Response->setData($responseData);
 		}
 
 		return $Response->setError($Messenger->getError());

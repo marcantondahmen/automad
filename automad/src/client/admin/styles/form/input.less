@@ -80,6 +80,50 @@
 		border-radius: 0.475rem;
 	}
 
+	&--totp {
+		--bg: hsl(var(--am-clr-background-faded));
+		--am-clr-text-danger: var(--am-clr-text);
+		--am-clr-border-danger: var(--am-clr-border);
+		--am-clr-outline-danger: transparent;
+		--am-clr-background-danger: var(--am-clr-background);
+		font-family: @am-code-font-family;
+		font-weight: 530;
+		font-size: 1.5em;
+		letter-spacing: 1.425em;
+		padding-left: 3em;
+		height: 3.3em;
+		max-width: none;
+		transition: all 0.2s;
+		background: linear-gradient(
+			to right,
+			var(--bg) ~'calc((100% / 6) - 2px)',
+			transparent ~'calc((100% / 6) - 2px)' ~'calc((100% / 6) + 2px)',
+			var(--bg) ~'calc((100% / 6) + 2px)' ~'calc(((100% / 6) * 2) - 2px)',
+			transparent ~'calc(((100% / 6) * 2) - 2px)'
+				~'calc(((100% / 6) * 2) + 2px)',
+			var(--bg) ~'calc(((100% / 6) * 2) + 2px)'
+				~'calc(((100% / 6) * 3) - 2px)',
+			transparent ~'calc(((100% / 6) * 3) - 2px)'
+				~'calc(((100% / 6) * 3) + 2px)',
+			var(--bg) ~'calc(((100% / 6) * 3) + 2px)'
+				~'calc(((100% / 6) * 4) - 2px)',
+			transparent ~'calc(((100% / 6) * 4) - 2px)'
+				~'calc(((100% / 6) * 4) + 2px)',
+			var(--bg) ~'calc(((100% / 6) * 4) + 2px)'
+				~'calc(((100% / 6) * 5) - 2px)',
+			transparent ~'calc(((100% / 6) * 5) - 2px)'
+				~'calc(((100% / 6) * 5) + 2px)',
+			var(--bg) ~'calc(((100% / 6) * 5) + 2px)' 100%
+		);
+		background-repeat: no-repeat;
+		background-size: 12em 2.4em;
+		background-position: center;
+
+		&:focus {
+			--am-clr-border-danger: var(--am-clr-border-active);
+		}
+	}
+
 	div&,
 	textarea& {
 		min-height: 6.2rem;

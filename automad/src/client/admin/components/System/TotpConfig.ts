@@ -36,15 +36,18 @@ import { BaseComponent } from '@/admin/components/Base';
 import { create, query, UserController } from '@/common';
 import {
 	App,
+	Attr,
 	confirm,
 	CSS,
+	EventName,
+	fire,
 	getComponentTargetContainer,
 	html,
 	notifyError,
 	notifySuccess,
 	requestAPI,
-} from '../core';
-import { ModalComponent } from './Modal/Modal';
+} from '@/admin/core';
+import { ModalComponent } from '@/admin/components/Modal/Modal';
 
 /**
  * A TOTP config component.
@@ -75,11 +78,18 @@ class TotpConfigComponent extends BaseComponent {
 	 * @async
 	 */
 	private async setup(): Promise<void> {
-		this.innerHTML = '';
+		this.innerHTML = html`
+			<p>
+				<am-icon-text
+					${Attr.icon}="shield-slash"
+					${Attr.text}="${App.text('systemUsersTotpIsDisabled')}"
+				></am-icon-text>
+			</p>
+		`;
 
 		const modalButton = create(
 			'button',
-			[CSS.button],
+			[CSS.button, CSS.buttonPrimary],
 			{},
 			this,
 			App.text('systemUsersTotpConfigure')
@@ -100,27 +110,18 @@ class TotpConfigComponent extends BaseComponent {
 			{},
 			getComponentTargetContainer(),
 			html`
-				<am-modal-dialog>
+				<am-modal-dialog class="${CSS.modalDialogTotp}">
 					<am-modal-header>
 						${App.text('systemUsersTotpConfigure')}
 					</am-modal-header>
 					<am-modal-body>
 						<am-spinner></am-spinner>
 					</am-modal-body>
-					<am-modal-footer>
-						<button
-							class="${CSS.button} ${CSS.buttonPrimary}"
-							disabled
-						>
-							${App.text('systemUsersTotpConfigureDialogButton')}
-						</button>
-					</am-modal-footer>
 				</am-modal-dialog>
 			`
 		) as ModalComponent;
 
 		const body = query('am-modal-body', modal);
-		const button = query<HTMLButtonElement>('button', modal);
 
 		setTimeout(async () => {
 			modal.open();
@@ -129,8 +130,21 @@ class TotpConfigComponent extends BaseComponent {
 
 			body.innerHTML = '';
 
-			create('img', [], { src: data.qr }, body);
-			create('p', [], {}, body, data.secret);
+			const totp = create('div', [CSS.totp], {}, body);
+
+			create('img', [CSS.totpQr], { src: data.qr }, totp);
+
+			const secretBox = create(
+				'input',
+				[CSS.totpSecret],
+				{ readonly: '', value: data.secret },
+				totp
+			);
+
+			this.listen(secretBox, 'click', () => {
+				secretBox.select();
+			});
+
 			create(
 				'p',
 				[],
@@ -139,17 +153,26 @@ class TotpConfigComponent extends BaseComponent {
 				App.text('systemUsersTotpConfigureDialogText')
 			);
 
+			const form = create(
+				'div',
+				[CSS.flex, CSS.flexColumn, CSS.flexGap],
+				{},
+				body
+			);
+
 			const input = create(
 				'input',
-				[CSS.input, CSS.validate],
+				[CSS.input, CSS.inputTotp],
 				{
 					maxlength: 6,
 					pattern: '[0-9]{6}',
 					inputmode: 'numeric',
 					autocomplete: 'one-time-code',
 				},
-				body
+				form
 			);
+
+			input.focus();
 
 			this.listen(input, 'input', () => {
 				if (input.value.length == 6) {
@@ -158,6 +181,14 @@ class TotpConfigComponent extends BaseComponent {
 					button.disabled = true;
 				}
 			});
+
+			const button = create(
+				'button',
+				[CSS.button, CSS.buttonPrimary, CSS.flexItemGrow],
+				{ disabled: '' },
+				form,
+				App.text('systemUsersTotpConfigureDialogButton')
+			);
 
 			this.listen(button, 'click', async () => {
 				button.classList.add(CSS.buttonLoading);
@@ -170,9 +201,8 @@ class TotpConfigComponent extends BaseComponent {
 				button.classList.remove(CSS.buttonLoading);
 
 				if (response.data?.confirmed) {
-					notifySuccess(
-						App.text('systemUsersTotpConfiguredSuccessfully')
-					);
+					notifySuccess(App.text('systemUsersTotpConfigureSuccess'));
+					fire(EventName.appStateRequireUpdate);
 
 					modal.close();
 
@@ -194,7 +224,14 @@ class TotpConfigComponent extends BaseComponent {
 	 * @async
 	 */
 	private async disable(): Promise<void> {
-		this.innerHTML = '';
+		this.innerHTML = html`
+			<p>
+				<am-icon-text
+					${Attr.icon}="shield-fill-check"
+					${Attr.text}="${App.text('systemUsersTotpIsEnabled')}"
+				></am-icon-text>
+			</p>
+		`;
 
 		const disableButton = create(
 			'button',
@@ -224,6 +261,7 @@ class TotpConfigComponent extends BaseComponent {
 
 			if (response.data?.disabled) {
 				notifySuccess(App.text('systemUsersTotpDisabledSuccessfully'));
+				fire(EventName.appStateRequireUpdate);
 				this.setup();
 			}
 		});
