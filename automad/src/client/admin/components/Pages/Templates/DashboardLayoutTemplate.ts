@@ -140,7 +140,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 									target="_blank"
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 								>
-									<i class="bi bi-book"></i>
+									<i class="bi bi-file-earmark-text"></i>
 									<span>${App.text('documentation')}</span>
 								</a>
 								<am-link
