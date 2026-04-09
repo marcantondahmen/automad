@@ -235,7 +235,7 @@ class TotpConfigComponent extends BaseComponent {
 
 		const disableButton = create(
 			'button',
-			[CSS.button],
+			[CSS.button, CSS.buttonDanger],
 			{},
 			this,
 			App.text('systemUsersTotpDisable')

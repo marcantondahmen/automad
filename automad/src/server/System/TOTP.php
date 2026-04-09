@@ -37,6 +37,7 @@ namespace Automad\System;
 
 use Automad\Core\Messenger;
 use Automad\Core\Session;
+use Automad\Core\Text;
 use Automad\Models\UserCollection;
 use BaconQrCode\Renderer\GDLibRenderer;
 use BaconQrCode\Writer;
@@ -107,7 +108,7 @@ class TOTP {
 			return $UserCollection->save($Messenger);
 		}
 
-		$Messenger->setError('WRONG CODE');
+		$Messenger->setError(Text::get('verifyTotpError'));
 
 		return false;
 	}
