@@ -289,7 +289,6 @@ export const enum CSS {
 	modalHeader = 'am-c-modal__header',
 	modalClose = 'am-c-modal__close',
 	modalBody = 'am-c-modal__body',
-	modalCode = 'am-c-modal__code',
 	modalFooter = 'am-c-modal__footer',
 	modalSpinner = 'am-c-modal__spinner',
 	modalSpinnerIcon = 'am-c-modal__spinner-icon',
