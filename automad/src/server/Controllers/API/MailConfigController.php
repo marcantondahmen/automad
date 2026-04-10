@@ -36,10 +36,10 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Auth\Session;
 use Automad\Core\Cache;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
-use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;

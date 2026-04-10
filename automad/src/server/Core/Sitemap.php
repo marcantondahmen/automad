@@ -36,7 +36,7 @@
 namespace Automad\Core;
 
 use Automad\API\RequestHandler;
-use Automad\System\Server;
+use Automad\Auth\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

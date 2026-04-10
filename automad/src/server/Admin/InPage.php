@@ -36,9 +36,9 @@
 namespace Automad\Admin;
 
 use Automad\API\RequestHandler;
+use Automad\Auth\Session;
 use Automad\Core\Automad;
 use Automad\Core\Error;
-use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;

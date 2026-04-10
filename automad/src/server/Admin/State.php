@@ -35,12 +35,12 @@
 
 namespace Automad\Admin;
 
+use Automad\Auth\User;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Models\MailConfig;
-use Automad\Models\User;
 use Automad\Models\UserCollection;
 use Automad\System\Fields;
 use Automad\System\PackageCollection;

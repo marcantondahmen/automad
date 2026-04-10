@@ -35,10 +35,10 @@
 
 namespace Automad\Models;
 
+use Automad\Auth\Session;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
-use Automad\Core\Session;
 use Automad\Core\Sitemap;
 use Automad\Core\Str;
 use Automad\Routes;

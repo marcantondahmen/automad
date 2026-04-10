@@ -36,8 +36,8 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Auth\Session;
 use Automad\Core\Request;
-use Automad\Core\Session;
 use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

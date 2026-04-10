@@ -36,11 +36,11 @@
 namespace Automad\Models;
 
 use Automad\API\RequestHandler;
+use Automad\Auth\Session;
 use Automad\Core\Cache;
 use Automad\Core\Error;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
-use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\Core\Value;
 use Automad\Stores\DataStore;

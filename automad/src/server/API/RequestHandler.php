@@ -35,11 +35,11 @@
 
 namespace Automad\API;
 
+use Automad\Auth\Session;
 use Automad\Core\Debug;
 use Automad\Core\Error;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
-use Automad\Core\Session;
 use Automad\Core\Str;
 use Automad\Core\Text;
 

@@ -33,14 +33,13 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Models;
+namespace Automad\Auth;
 
 use Automad\Admin\Templates\PasswordResetEmail;
 use Automad\Core\Messenger;
-use Automad\Core\Session;
 use Automad\Core\Text;
+use Automad\Models\UserCollection;
 use Automad\System\Mail;
-use Automad\System\TOTP;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

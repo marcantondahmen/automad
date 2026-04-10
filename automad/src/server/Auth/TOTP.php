@@ -33,10 +33,9 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System;
+namespace Automad\Auth;
 
 use Automad\Core\Messenger;
-use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\Models\UserCollection;
 use BaconQrCode\Renderer\GDLibRenderer;

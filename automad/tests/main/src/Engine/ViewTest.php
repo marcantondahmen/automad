@@ -3,7 +3,7 @@
 namespace Automad\Engine;
 
 use Automad\App;
-use Automad\Core\Session;
+use Automad\Auth\Session;
 use Automad\Test\Mock;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;

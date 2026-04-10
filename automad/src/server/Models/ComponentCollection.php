@@ -35,9 +35,9 @@
 
 namespace Automad\Models;
 
+use Automad\Auth\Session;
 use Automad\Core\Blocks;
 use Automad\Core\PublicationState;
-use Automad\Core\Session;
 use Automad\Stores\ComponentStore;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

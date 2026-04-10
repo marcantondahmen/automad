@@ -36,10 +36,11 @@
 namespace Automad\Models;
 
 use Automad\Admin\Templates\InvitationEmail;
+use Automad\Auth\Session;
+use Automad\Auth\User;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
-use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\System\Mail;
 
@@ -67,7 +68,7 @@ class UserCollection {
 	/**
 	 * The class name of the user type.
 	 */
-	private string $userType = 'Automad\Models\User';
+	private string $userType = 'Automad\Auth\User';
 
 	/**
 	 * The replacement for the user type class in a serialized string.

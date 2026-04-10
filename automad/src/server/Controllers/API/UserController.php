@@ -36,13 +36,13 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Auth\Session;
+use Automad\Auth\TOTP;
+use Automad\Auth\User;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
-use Automad\Core\Session;
 use Automad\Core\Text;
-use Automad\Models\User;
 use Automad\Models\UserCollection;
-use Automad\System\TOTP;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

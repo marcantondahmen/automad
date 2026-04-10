@@ -33,10 +33,9 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Core;
+namespace Automad\Auth;
 
 use Automad\Models\UserCollection;
-use Automad\System\TOTP;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
