@@ -73,7 +73,7 @@ export interface MailConfig {
 	smtpPasswordIsSet: boolean;
 }
 
-interface UserProps {
+export interface User {
 	name: string;
 	email: string;
 	totpIsConfigured: boolean;
@@ -86,7 +86,7 @@ export interface SystemSettings {
 	i18n: Enabled;
 	mail: MailConfig;
 	translation: string;
-	users: UserProps[];
+	users: User[];
 	tempDirectory: string;
 }
 
@@ -95,9 +95,4 @@ export interface SystemUpdateResponse {
 	current: string;
 	latest: string;
 	items: string[];
-}
-
-export interface User {
-	name: string;
-	email: string;
 }

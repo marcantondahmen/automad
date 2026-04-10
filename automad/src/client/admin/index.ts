@@ -113,6 +113,7 @@ import('./components/Indicators/System/I18nIndicator');
 import('./components/Indicators/System/MailIndicator');
 import('./components/Indicators/System/SystemUpdateIndicator');
 import('./components/Indicators/System/UserCountIndicator');
+import('./components/Indicators/System/UserTotpConfigured');
 
 import('./components/Modal/Modal');
 import('./components/Modal/ModalBody');

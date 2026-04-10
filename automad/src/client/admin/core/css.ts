@@ -206,6 +206,7 @@ export const enum CSS {
 	flexGapLarge = 'am-u-flex--gap-large',
 	flexBetween = 'am-u-flex--between',
 	flexCenter = 'am-u-flex--center',
+	flexWrap = 'am-u-flex--wrap',
 	flexItemGrow = 'am-u-flex__item-grow',
 
 	formGroup = 'am-f-group',

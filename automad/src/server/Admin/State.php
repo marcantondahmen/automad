@@ -39,8 +39,8 @@ use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
-use Automad\Core\Session;
 use Automad\Models\MailConfig;
+use Automad\Models\User;
 use Automad\Models\UserCollection;
 use Automad\System\Fields;
 use Automad\System\PackageCollection;
@@ -90,6 +90,7 @@ class State {
 		$Cache = new Cache();
 		$MailConfig = new MailConfig();
 		$Automad->Pagelist->config(array('excludeHidden' => false));
+		$User = User::getCurrent();
 
 		$data = array(
 			'allowedFileTypes' => FileUtils::allowedFileTypes(),
@@ -136,7 +137,11 @@ class State {
 			),
 			'tags' => $Automad->Pagelist->getTags(),
 			'themes' => $themes,
-			'user' => $UserCollection->getUser(Session::getUsername())
+			'user' =>  array(
+				'name' => $User->name ?? '',
+				'email' => $User->email ?? '',
+				'totpIsConfigured' => !empty($User) ? $User->totpIsConfigured() : false
+			)
 		);
 
 		return $data;

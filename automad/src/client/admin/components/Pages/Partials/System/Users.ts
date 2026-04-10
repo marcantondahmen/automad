@@ -61,74 +61,76 @@ export const renderUsersSection = (): string => {
 				${App.text('systemUsersYourAccountHeading')}
 			</h2>
 			<p>${App.text('systemUsersYourAccountText')}</p>
-			<am-form-error></am-form-error>
-			<span class="${CSS.card}">
-				<span
-					class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
-				>
-					<span class="${CSS.flex} ${CSS.flexColumn}">
-						<am-user-name value="${App.user.name}"></am-user-name>
-						<am-user-email
-							value="${App.user.email}"
-						></am-user-email>
-					</span>
-					<span class="${CSS.cardFormButtons}">
-						<am-submit class="${CSS.button}">
-							<span>${App.text('save')}</span>
-						</am-submit>
-						<am-modal-toggle
-							class="${CSS.button} ${CSS.buttonPrimary}"
-							${Attr.modal}="#am-change-password-modal"
-						>
-							<span>
-								${App.text('systemUsersChangePassword')}
-							</span>
-						</am-modal-toggle>
+			<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap}">
+				<am-form-error></am-form-error>
+				<span class="${CSS.card}">
+					<span
+						class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+					>
+						<span class="${CSS.flex} ${CSS.flexColumn}">
+							<am-user-name
+								value="${App.user.name}"
+							></am-user-name>
+							<am-user-email
+								value="${App.user.email}"
+							></am-user-email>
+						</span>
 					</span>
 				</span>
-			</span>
+				<div>
+					<am-submit class="${CSS.button}">
+						<span>${App.text('systemUsersYourAccountSave')}</span>
+					</am-submit>
+				</div>
+			</div>
 		</am-form>
 
-		<h2>${App.text('systemUsersTotpHeading')}</h2>
+		<h2>${App.text('systemUsersChangePasswordHeading')}</h2>
+		<p>${App.text('systemUsersChangePasswordText')}</p>
+		<am-modal-toggle
+			class="${CSS.button} ${CSS.buttonPrimary}"
+			${Attr.modal}="#am-change-password-modal"
+		>
+			<span> ${App.text('systemUsersChangePassword')} </span>
+		</am-modal-toggle>
+
+		<h2 class="${CSS.flex} ${CSS.flexGap}">
+			${App.text('systemUsersTotpHeading')}
+			<am-user-totp-configured-indicator></am-user-totp-configured-indicator>
+		</h2>
 		<p>${App.text('systemUsersTotpText')}</p>
 		<am-totp-config></am-totp-config>
 
 		<h2>${App.text('systemUsersCollaborateHeading')}</h2>
 		<p>${App.text('systemUsersCollaborateText')}</p>
-		<span class="${CSS.card}">
-			<span class="${CSS.cardForm}">
-				<span class="${CSS.cardFormButtons}">
-					<am-modal-toggle
-						class="${CSS.button}"
-						${Attr.modal}="#am-registered-users-modal"
-					>
-						<span
-							class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
-						>
-							<span> ${App.text('systemUsersRegistered')} </span>
-							<span class="${CSS.badge}">
-								<am-user-count-indicator></am-user-count-indicator>
-							</span>
-						</span>
-					</am-modal-toggle>
+		<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexWrap}">
+			<am-modal-toggle
+				class="${CSS.button} ${CSS.buttonPrimary}"
+				${Attr.modal}="#am-invite-user-modal"
+			>
+				<span>${App.text('systemUsersCollaborateInvite')}</span>
+			</am-modal-toggle>
+			<am-modal-toggle
+				class="${CSS.button}"
+				${Attr.modal}="#am-registered-users-modal"
+			>
+				<span class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}">
+					<span> ${App.text('systemUsersCollaborateManage')} </span>
+					<span class="${CSS.badge}">
+						<am-user-count-indicator></am-user-count-indicator>
+					</span>
 				</span>
-				<span class="${CSS.cardFormButtons}">
-					<am-modal-toggle
-						class="${CSS.button}"
-						${Attr.modal}="#am-add-user-modal"
-					>
-						<span>${App.text('systemUsersAdd')}</span>
-					</am-modal-toggle>
-					<am-modal-toggle
-						class="${CSS.button} ${CSS.buttonPrimary}"
-						${Attr.modal}="#am-invite-user-modal"
-					>
-						<span>${App.text('systemUsersInvite')}</span>
-					</am-modal-toggle>
-				</span>
-			</span>
+			</am-modal-toggle>
 		</span>
-
+		<p>
+			<am-modal-toggle
+				class="${CSS.link}"
+				${Attr.modal}="#am-add-user-modal"
+			>
+				<span>${App.text('systemUsersCollaborateCreate')}</span>
+			</am-modal-toggle>
+		</p>
+		<hr />
 		<p>${App.text('systemUsersSignOutAllInfo')}</p>
 		<am-form
 			${Attr.api}="${ConfigController.update}"
@@ -203,9 +205,10 @@ export const renderUsersSection = (): string => {
 		<am-modal id="am-registered-users-modal" nofocus>
 			<am-modal-dialog>
 				<am-modal-header>
-					${App.text('systemUsersRegistered')}
+					${App.text('systemUsersCollaborateManageHeading')}
 				</am-modal-header>
 				<am-modal-body>
+					<p>${App.text('systemUsersCollaborateManageText')}</p>
 					<am-delete-users-form
 						${Attr.api}="${UserCollectionController.edit}"
 						${Attr.event}="${EventName.appStateRequireUpdate}"
@@ -221,7 +224,7 @@ export const renderUsersSection = (): string => {
 						${Attr.form}="${UserCollectionController.edit}"
 						disabled
 					>
-						${App.text('deleteSelection')}
+						${App.text('systemUsersCollaborateRemoveSelected')}
 					</am-submit>
 				</am-modal-footer>
 			</am-modal-dialog>
@@ -233,9 +236,10 @@ export const renderUsersSection = (): string => {
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
 				<am-modal-header>
-					${App.text('systemUsersAdd')}
+					${App.text('systemUsersCollaborateCreateHeading')}
 				</am-modal-header>
 				<am-modal-body>
+					<p>${App.text('systemUsersCollaborateCreateText')}</p>
 					<am-form-error></am-form-error>
 					<div>
 						<am-user-name></am-user-name>
@@ -277,7 +281,7 @@ export const renderUsersSection = (): string => {
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
-						${App.text('systemUsersAdd')}
+						${App.text('systemUsersCollaborateCreateButton')}
 					</am-submit>
 				</am-modal-footer>
 			</am-form>
@@ -289,9 +293,10 @@ export const renderUsersSection = (): string => {
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
 				<am-modal-header>
-					${App.text('systemUsersInvite')}
+					${App.text('systemUsersCollaborateInviteHeading')}
 				</am-modal-header>
 				<am-modal-body>
+					<p>${App.text('systemUsersCollaborateInviteText')}</p>
 					<am-form-error></am-form-error>
 					<div>
 						<am-user-name></am-user-name>

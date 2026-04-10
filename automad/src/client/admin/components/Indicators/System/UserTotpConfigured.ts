@@ -22,52 +22,38 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-.am-u-flex {
-	display: flex;
+import { App, html } from '@/admin/core';
+import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
 
-	&--gap {
-		gap: @am-flex-gap;
-	}
+/**
+ * A user totp configured indicator.
+ *
+ * @extends BaseUpdateIndicatorComponent
+ */
+class UserTotpConfiguredIndicatorComponent extends BaseStateIndicatorComponent {
+	/**
+	 * Render the state element.
+	 */
+	render(): void {
+		const icon = App.user.totpIsConfigured
+			? 'shield-fill-check'
+			: 'shield-slash';
 
-	&--gap-large {
-		gap: @am-base-margin-y;
-	}
-
-	&--column {
-		flex-direction: column;
-	}
-
-	&--align-center {
-		align-items: center;
-	}
-
-	&--align-baseline {
-		align-items: baseline;
-	}
-
-	&--between {
-		justify-content: space-between;
-	}
-
-	&--center {
-		justify-content: center;
-	}
-
-	&--wrap {
-		flex-wrap: wrap;
-	}
-
-	&__item-grow {
-		flex-grow: 1;
+		this.innerHTML = html`<i class="bi bi-${icon}"></i>`;
 	}
 }
+
+customElements.define(
+	'am-user-totp-configured-indicator',
+	UserTotpConfiguredIndicatorComponent
+);
