@@ -58,7 +58,6 @@
 	color: hsl(var(--text));
 	background-color: hsl(var(--bg));
 	border: @am-button-border-width solid hsl(var(--border));
-	outline: @am-outline;
 	transition:
 		color 0.2s,
 		background 0.2s,
@@ -106,7 +105,6 @@
 
 	&:focus:not(&--loading):not([disabled]),
 	&.am-focus:not(&--loading) {
-		outline: @am-outline-active;
 		border: @am-button-border-width solid hsl(var(--am-clr-border-active));
 	}
 
