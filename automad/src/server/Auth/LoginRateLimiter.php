@@ -108,7 +108,7 @@ class LoginRateLimiter {
 		if ($data['blockedUntil'] > time()) {
 			$Response = new Response();
 
-			exit($Response->setError(Text::get('loginRateLimiterError'))->setCode(429)->json());
+			exit($Response->setError(Text::get('signInRateLimitError'))->setCode(429)->json());
 		};
 	}
 
