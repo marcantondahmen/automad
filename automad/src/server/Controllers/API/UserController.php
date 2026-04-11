@@ -36,6 +36,7 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Auth\LoginRateLimiter;
 use Automad\Auth\Session;
 use Automad\Auth\TOTP;
 use Automad\Auth\User;
@@ -93,6 +94,8 @@ class UserController {
 			if ($User->verifyPasswordResetToken($token)) {
 				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
 					$responseData['state'] = 'success';
+
+					LoginRateLimiter::reset($User->name);
 
 					return $Response->setData($responseData);
 				}
