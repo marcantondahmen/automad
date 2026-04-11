@@ -110,6 +110,8 @@ class Session {
 			return false;
 		}
 
+		LoginRateLimiter::verifyAccess($User->name);
+
 		if ($User->verifyPassword($password)) {
 			if ($User->totpIsConfigured()) {
 				$User->setPendingTotpVerificationSession();
@@ -119,6 +121,8 @@ class Session {
 
 			return true;
 		}
+
+		LoginRateLimiter::registerFailure($User->name);
 
 		return false;
 	}
@@ -182,12 +186,18 @@ class Session {
 			return false;
 		}
 
+		$username = $_SESSION[self::TOTP_LOGIN_USERNAME_KEY];
+
+		LoginRateLimiter::verifyAccess($username);
+
 		if (TOTP::verify($_SESSION[self::TOTP_LOGIN_SECRET_KEY], $code)) {
-			self::startUserSession($_SESSION[self::TOTP_LOGIN_USERNAME_KEY]);
+			self::startUserSession($username);
 			self::resetTotpVerification();
 
 			return true;
 		}
+
+		LoginRateLimiter::registerFailure($username);
 
 		return false;
 	}
@@ -212,5 +222,7 @@ class Session {
 		session_regenerate_id(true);
 		$_SESSION[self::USERNAME_KEY] = $username;
 		self::createCsrfToken();
+
+		LoginRateLimiter::reset($username);
 	}
 }

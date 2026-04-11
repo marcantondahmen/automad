@@ -276,6 +276,7 @@
 	"linkVideo": "Link a video",
 	"list": "List",
 	"loading": "Loading...",
+	"loginRateLimiterError": "Sign-in temporarily blocked due to too many failed attempts. Please try again later.",
 	"mailBlockAddressFieldError": "Address field error",
 	"mailBlockAddressFieldLabel": "Address field label",
 	"mailBlockBodyFieldError": "Body field error",

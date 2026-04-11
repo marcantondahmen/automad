@@ -236,6 +236,9 @@ class Config {
 
 		// Disable cookie consent banner.
 		self::set('AM_CONSENT_CHECK_ENABLED', true);
+
+		// The path where rate limiter data is stored.
+		self::set('AM_LOGIN_RATE_LIMITER_PATH', AM_DIR_TMP . '/login_rate_limiter');
 	}
 
 	/**
