@@ -88,7 +88,7 @@ export const renderUsersSection = (): string => {
 		<h2>${App.text('systemUsersChangePasswordHeading')}</h2>
 		<p>${App.text('systemUsersChangePasswordText')}</p>
 		<am-modal-toggle
-			class="${CSS.button} ${CSS.buttonPrimary}"
+			class="${CSS.button}"
 			${Attr.modal}="#am-change-password-modal"
 		>
 			<span> ${App.text('systemUsersChangePassword')} </span>
@@ -105,7 +105,7 @@ export const renderUsersSection = (): string => {
 		<p>${App.text('systemUsersCollaborateText')}</p>
 		<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexWrap}">
 			<am-modal-toggle
-				class="${CSS.button} ${CSS.buttonPrimary}"
+				class="${CSS.button}"
 				${Attr.modal}="#am-invite-user-modal"
 			>
 				<span>${App.text('systemUsersCollaborateInvite')}</span>
@@ -137,7 +137,7 @@ export const renderUsersSection = (): string => {
 			${Attr.confirm}="${App.text('systemUsersSignOutAllConfirm')}"
 		>
 			<input type="hidden" name="type" value="sessionCookieSalt" />
-			<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+			<am-submit class="${CSS.button}">
 				<span>${App.text('systemUsersSignOutAll')}</span>
 			</am-submit>
 		</am-form>

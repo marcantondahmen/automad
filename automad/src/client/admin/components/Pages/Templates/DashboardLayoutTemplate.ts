@@ -147,7 +147,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 									${Attr.target}="${Route.system}?section=${Section.users}"
 								>
-									<i class="bi bi-people"></i>
+									<i class="bi bi-person-badge"></i>
 									<span>${App.text('systemUsers')}</span>
 								</am-link>
 								<span class="${CSS.dropdownLabel}">
