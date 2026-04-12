@@ -61,7 +61,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Page {
-	const TEMPLATE_FILE_DEFAULT = 'standard/light/sidebar_left.php';
 	const TEMPLATE_NAME_404 = 'page_not_found';
 	const TRASH_DIRECTORY = '/.trash';
 
@@ -424,13 +423,8 @@ class Page {
 	 */
 	public function getTemplate(): string {
 		$packages = AM_BASE_DIR . AM_DIR_PACKAGES . '/';
-		$templatePath = $packages . $this->get(Fields::THEME) . '/' . $this->template . '.php';
 
-		if (file_exists($templatePath)) {
-			return $templatePath;
-		}
-
-		return $packages . Page::TEMPLATE_FILE_DEFAULT;
+		return $packages . $this->get(Fields::THEME) . '/' . $this->template . '.php';
 	}
 
 	/**
