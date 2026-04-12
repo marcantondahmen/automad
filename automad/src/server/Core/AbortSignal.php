@@ -27,54 +27,56 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2018-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-namespace Automad;
+namespace Automad\Core;
+
+use RuntimeException;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Autoload class.
+ * The AbortException class is used to immediatly stop execution in a safe way.
+ * It can be used in order to end a request based on application logic in
+ * contrast to a server error. Therefore this exception will trigger
+ * a custom exception handler without returning a back trace.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2018-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class Autoload {
+class AbortSignal extends RuntimeException {
 	/**
-	 * Init the autoloader.
+	 * The body for more details that can be used when printing error pages.
 	 */
-	public static function init(): void {
-		$vendors = array(
-			AM_BASE_DIR . '/lib/vendor/autoload.php',
-			AM_BASE_DIR . '/vendor/autoload.php'
-		);
+	private string $details;
 
-		foreach ($vendors as $file) {
-			if (!is_readable($file)) {
-				App::exit(
-					'Missing dependencies',
-					'Please run the command <code>composer install</code> inside the directory ' . dirname(dirname($file)) . '.'
-				);
-			}
+	/**
+	 * The constructor.
+	 *
+	 * @param string $message
+	 * @param string $details
+	 * @param int $code
+	 */
+	public function __construct(
+		string $message = '',
+		string $details = '',
+		int $code = 400
+	) {
+		parent::__construct($message, $code);
+		$this->details = $details;
+	}
 
-			require_once $file;
-		}
-
-		spl_autoload_register(function ($class) {
-			$prefix = 'Automad\\';
-
-			if (strpos($class, $prefix) === 0) {
-				$file = AM_BASE_DIR . '/automad/src/server/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
-
-				if (file_exists($file)) {
-					require_once $file;
-				}
-			}
-		});
+	/**
+	 * The details getter.
+	 *
+	 * @return string
+	 */
+	public function getDetails(): string {
+		return $this->details;
 	}
 }

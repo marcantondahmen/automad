@@ -36,6 +36,7 @@
 namespace Automad\Core;
 
 use Automad\API\RequestHandler;
+use Automad\App;
 use Automad\Engine\Delimiters;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Context;
@@ -247,15 +248,16 @@ class Automad {
 			$output = ob_get_contents();
 			ob_end_clean();
 		} else {
-			$template = Str::stripStart($file, AM_BASE_DIR . AM_DIR_PACKAGES);
+			$template = Str::stripStart($file, AM_BASE_DIR . AM_DIR_PACKAGES . '/');
 			$title = $Automad->Context->get()->get(Fields::TITLE);
 			$url = $Automad->Context->get()->get(Fields::URL);
 			$dashboard = AM_BASE_URL . AM_PAGE_DASHBOARD;
 			$output = '';
-			Error::exit(
+
+			App::exit(
 				'Template missing!',
 				<<< HTML
-				Template <code>$template</code> for page <strong>$title</strong> <code>$url</code> 
+				Template <code>$template</code> for page <strong>"$title"</strong> 
 				is missing! Make sure you have selected an existing template for this page!
 				<br>
 				<br>

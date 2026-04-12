@@ -35,7 +35,7 @@
 
 namespace Automad\Auth;
 
-use Automad\API\Response;
+use Automad\App;
 use Automad\Core\FileSystem;
 use Automad\Core\Text;
 
@@ -106,9 +106,7 @@ class LoginRateLimiter {
 		$data = self::read($file);
 
 		if ($data['blockedUntil'] > time()) {
-			$Response = new Response();
-
-			exit($Response->setError(Text::get('signInRateLimitError'))->setCode(429)->json());
+			App::exit(Text::get('signInRateLimitError'), '', 429);
 		};
 	}
 

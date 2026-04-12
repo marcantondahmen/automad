@@ -49,19 +49,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Error {
 	/**
-	 *	Display an error message and exit.
-	 *
-	 * @param string $title
-	 * @param string $message
-	 */
-	public static function exit(string $title, string $message): void {
-		http_response_code(500);
-
-		self::printError($title, $message);
-		exit(1);
-	}
-
-	/**
 	 * Set error handlers that output styled error messages on HTML pages.
 	 */
 	public static function setHtmlOutputHandler(): void {
@@ -72,16 +59,22 @@ class Error {
 
 		set_exception_handler(
 			function ($error) {
-				http_response_code(500);
+				if ($error instanceof AbortSignal) {
+					http_response_code($error->getCode());
 
-				$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
-				$line = $error->getLine();
+					self::printError($error->getMessage(), $error->getDetails());
+				} else {
+					http_response_code(500);
 
-				self::printError(
-					$error->getMessage(),
-					"In file $file<br>on line $line",
-					$error->getTrace()
-				);
+					$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
+					$line = $error->getLine();
+
+					self::printError(
+						$error->getMessage(),
+						"In file $file<br>on line $line",
+						$error->getTrace()
+					);
+				}
 
 				exit(1);
 			}
@@ -98,17 +91,21 @@ class Error {
 			function ($error) {
 				$Response = new Response();
 
-				$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
-				$line = $error->getLine();
+				if ($error instanceof AbortSignal) {
+					$Response->setError($error->getMessage())->setCode($error->getCode());
+				} else {
+					$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
+					$line = $error->getLine();
 
-				$json = $Response->setException(array(
-					'message' => $error->getMessage(),
-					'file' => $error->getFile(),
-					'line' => $error->getLine(),
-					'trace' => $error->getTrace()
-				))->setCode(500)->json();
+					$Response->setException(array(
+						'message' => $error->getMessage(),
+						'file' => $error->getFile(),
+						'line' => $error->getLine(),
+						'trace' => $error->getTrace()
+					))->setCode(500);
+				}
 
-				exit($json);
+				exit($Response->json());
 			}
 		);
 	}
@@ -116,11 +113,11 @@ class Error {
 	/**
 	 * Print a stlyed error message.
 	 *
-	 * @param string $title
 	 * @param string $message
+	 * @param string $details
 	 * @param array|null $trace
 	 */
-	private static function printError(string $title, string $message, ?array $trace = null): void {
+	private static function printError(string $message, string $details, ?array $trace = null): void {
 		$code = '';
 
 		if ($trace) {
@@ -132,7 +129,7 @@ class Error {
 			<!DOCTYPE html>
 			<html>
 				<head>
-					<title>Error: $title</title>
+					<title>Error: $message</title>
 					<style>
 						:root {
 							--color: hsl(6, 96%, 60%);
@@ -212,8 +209,8 @@ class Error {
 				</head>
 				<body>
 					<main>
-						<h1>$title</h1>
-						<p>$message</p>
+						<h1>$message</h1>
+						<p>$details</p>
 						$code
 					</main>
 				</body>

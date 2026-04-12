@@ -36,9 +36,9 @@
 namespace Automad\Models;
 
 use Automad\API\RequestHandler;
+use Automad\App;
 use Automad\Auth\Session;
 use Automad\Core\Cache;
-use Automad\Core\Error;
 use Automad\Core\Messenger;
 use Automad\Core\PublicationState;
 use Automad\Core\Text;
@@ -80,7 +80,7 @@ class Shared {
 
 		// Check whether there is a theme defined in the Shared object data.
 		if (!$this->get(Fields::THEME) && strpos(AM_REQUEST, RequestHandler::API_BASE) !== 0) {
-			Error::exit('No main theme defined', 'Please define a theme in our shared settings.');
+			App::exit('No main theme defined', 'Please define a theme in our shared settings.');
 		}
 	}
 
