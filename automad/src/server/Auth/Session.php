@@ -107,6 +107,9 @@ class Session {
 		$User = $UserCollection->getUser($nameOrEmail);
 
 		if (empty($User)) {
+			LoginRateLimiter::verifyAccess($nameOrEmail);
+			LoginRateLimiter::registerFailure($nameOrEmail);
+
 			return false;
 		}
 
