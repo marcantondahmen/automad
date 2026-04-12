@@ -43,7 +43,6 @@ import {
 	getLogger,
 	collectFieldData,
 	getPageURL,
-	notifyError,
 	notifySuccess,
 	query,
 	queryAll,
@@ -51,6 +50,8 @@ import {
 	createProgressModal,
 	EditLockController,
 	getSlug,
+	findFormErrorElement,
+	notifyFormError,
 } from '@/admin/core';
 import {
 	DeduplicationSettings,
@@ -60,7 +61,6 @@ import {
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
-import { FormErrorComponent } from './FormError';
 
 export const autoSubmitTimeout = 350;
 
@@ -430,24 +430,12 @@ export class FormComponent extends BaseComponent {
 			App.reload();
 		}
 
-		setTimeout(() => {
-			const errorContainer = query<FormErrorComponent>(
-				FormErrorComponent.TAG_NAME,
-				this
-			);
-
-			if (errorContainer) {
-				errorContainer.message = error ?? '';
-			}
-
-			if (error) {
-				if (!errorContainer) {
-					notifyError(error);
-				}
-
+		if (error) {
+			setTimeout(() => {
+				notifyFormError(error, findFormErrorElement(this));
 				getLogger().error(error);
-			}
-		}, 0);
+			}, 0);
+		}
 
 		if (success) {
 			notifySuccess(success);

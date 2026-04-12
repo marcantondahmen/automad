@@ -41,6 +41,7 @@ import {
 	getPageURL,
 	html,
 	listen,
+	notifyError,
 	query,
 	queryAll,
 	Route,
@@ -55,6 +56,8 @@ import {
 	KeyValueMap,
 	Listener,
 } from '@/admin/types';
+import { FormComponent } from '../components/Forms/Form';
+import { FormErrorComponent } from '../components/Forms/FormError';
 
 /**
  * The tag names enum for fields.
@@ -132,6 +135,37 @@ export class FormDataProviders {
 		}
 	}
 }
+
+/**
+ * Collect all the form data from a given container.
+ *
+ * @param container
+ * @returns the collected form data
+ */
+export const collectFieldData = (container: HTMLElement): KeyValueMap => {
+	const data: KeyValueMap = {};
+
+	queryAll<HTMLInputElement>(FormDataProviders.selector, container).forEach(
+		(input) => {
+			const type = input.getAttribute('type');
+			const name = input.getAttribute('name');
+			const isCheckbox = ['checkbox', 'radio'].includes(type);
+
+			if ((!isCheckbox || input.checked) && name) {
+				let value =
+					isCheckbox && input.value === '1' ? true : input.value;
+
+				if (typeof value == 'string') {
+					value = value.trim();
+				}
+
+				data[name] = value;
+			}
+		}
+	);
+
+	return data;
+};
 
 /**
  * Create all custom CSS and JS fields.
@@ -561,34 +595,19 @@ export const fieldGroup = ({
 };
 
 /**
- * Collect all the form data from a given container.
+ * Find a form error container if possible.
  *
- * @param container
- * @returns the collected form data
+ * @param obj
+ * @return the form error element or null
  */
-export const collectFieldData = (container: HTMLElement): KeyValueMap => {
-	const data: KeyValueMap = {};
+export const findFormErrorElement = (
+	obj: FormComponent | KeyValueMap
+): FormErrorComponent | null => {
+	if (obj instanceof HTMLElement) {
+		return query<FormErrorComponent>(FormErrorComponent.TAG_NAME, obj);
+	}
 
-	queryAll<HTMLInputElement>(FormDataProviders.selector, container).forEach(
-		(input) => {
-			const type = input.getAttribute('type');
-			const name = input.getAttribute('name');
-			const isCheckbox = ['checkbox', 'radio'].includes(type);
-
-			if ((!isCheckbox || input.checked) && name) {
-				let value =
-					isCheckbox && input.value === '1' ? true : input.value;
-
-				if (typeof value == 'string') {
-					value = value.trim();
-				}
-
-				data[name] = value;
-			}
-		}
-	);
-
-	return data;
+	return null;
 };
 
 /**
@@ -609,6 +628,25 @@ export const getPrefixMap = (hasSharedDefaults: boolean) => {
 		text: FieldTag.markdown,
 		url: FieldTag.url,
 	} as const;
+};
+
+/**
+ * Notifies form errors or outputs them in a form error component.
+ *
+ * @param message
+ * @param formErrorComponent
+ */
+export const notifyFormError = (
+	message: string,
+	formErrorComponent: FormErrorComponent | null
+): void => {
+	if (formErrorComponent) {
+		formErrorComponent.message = message;
+
+		return;
+	}
+
+	notifyError(message);
 };
 
 /**
