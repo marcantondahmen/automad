@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-beta.26",
+  "version": "2.0.0-beta.27",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "private": true,
@@ -21,7 +21,8 @@
     "release": "bash bin/release.sh",
     "server:start": "bash bin/server.sh start",
     "server:stop": "bash bin/server.sh stop",
-    "test": "npm run phpunit && npm run psalm && npm run vitest"
+    "test": "npm run phpunit && npm run psalm && npm run vitest",
+    "unused": "bash bin/find-unused.sh"
   },
   "devDependencies": {
     "@editorjs/embed": "^2.7.6",

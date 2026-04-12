@@ -173,14 +173,15 @@ export class ModalComponent extends BaseComponent {
 		this.focusTrap.remove();
 
 		setTimeout(() => {
-			queryAll(`.${CSS.validate}`).forEach((input) => {
+			queryAll(`.${CSS.validate}`, this).forEach((input) => {
 				input.classList.remove(CSS.validate);
 			});
 		}, 400);
 
 		if (this.hasAttribute(Attr.clearForm)) {
 			queryAll<HTMLInputElement>(
-				'input[type="text"], input[type="email"], input[type="password"], textarea'
+				'input[type="text"], input[type="email"], input[type="password"], textarea',
+				this
 			).forEach((input) => {
 				input.value = '';
 			});

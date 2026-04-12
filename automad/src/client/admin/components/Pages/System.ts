@@ -78,7 +78,7 @@ const getSystemSections = (): SystemSectionData[] => {
 			info: App.text('systemUsersCardInfo'),
 			state: html`
 				<span class="${CSS.textMuted}">
-					${App.text('systemUsersRegistered')}:
+					${App.text('systemUsersCollaborateManage')}:
 					<am-user-count-indicator></am-user-count-indicator>
 				</span>
 			`,

@@ -81,6 +81,10 @@
 			max-width: 20rem;
 		}
 
+		&--totp {
+			max-width: 27rem;
+		}
+
 		&--fullscreen {
 			position: fixed;
 			padding: 0;
@@ -129,23 +133,6 @@
 
 	& &__body hr {
 		margin: @am-modal-padding -@am-modal-padding;
-	}
-
-	&__code {
-		box-sizing: border-box;
-		width: 100%;
-		height: ~'calc(100vh - 15rem)';
-		padding: 0.5rem @am-form-padding-x;
-		font-family: @am-code-font-family;
-		line-height: 1.65;
-		color: hsl(var(--am-clr-text-paragraph));
-		background-color: @am-form-background;
-		outline: none;
-		border: none;
-		border-radius: 0;
-		border-bottom-left-radius: @radius-inner;
-		border-bottom-right-radius: @radius-inner;
-		resize: none;
 	}
 
 	&__footer {

@@ -6,7 +6,9 @@
         "symfony/mailer": "^7.0",
         "automad/language-packs": "dev-master",
         "cocur/slugify": "^4.6",
-        "nesbot/carbon": "^3.9"
+        "nesbot/carbon": "^3.9",
+        "spomky-labs/otphp": "^11.4",
+        "bacon/bacon-qr-code": "^3.1"
     },
     "config": {
         "preferred-install": {

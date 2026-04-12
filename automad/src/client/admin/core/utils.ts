@@ -73,8 +73,6 @@ export const confirm = async (
 		[],
 		{
 			[Attr.destroy]: '',
-			[Attr.noClick]: '',
-			[Attr.noEsc]: '',
 			style: 'z-index: 2000;',
 		},
 		getComponentTargetContainer()

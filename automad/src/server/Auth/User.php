@@ -33,12 +33,12 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Models;
+namespace Automad\Auth;
 
 use Automad\Admin\Templates\PasswordResetEmail;
 use Automad\Core\Messenger;
-use Automad\Core\Session;
 use Automad\Core\Text;
+use Automad\Models\UserCollection;
 use Automad\System\Mail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -67,6 +67,11 @@ class User {
 	private string $passwordHash = '';
 
 	/**
+	 * The 2FA secret or an empty string.
+	 */
+	private string $totpSecret = '';
+
+	/**
 	 * The constructor.
 	 *
 	 * @param string $name
@@ -88,7 +93,8 @@ class User {
 		return array(
 			'name' => $this->name,
 			'email' => $this->email,
-			'passwordHash' => $this->passwordHash
+			'passwordHash' => $this->passwordHash,
+			'totpSecret' => $this->totpSecret
 		);
 	}
 
@@ -103,6 +109,7 @@ class User {
 		$this->name = $properties['name'];
 		$this->email = $properties['email'];
 		$this->passwordHash = $properties['passwordHash'];
+		$this->totpSecret = $properties['totpSecret'] ?? '';
 	}
 
 	/**
@@ -138,6 +145,17 @@ class User {
 	}
 
 	/**
+	 * Get the current user.
+	 *
+	 * @return User|null
+	 */
+	public static function getCurrent(): User | null {
+		$UserCollection = new UserCollection();
+
+		return $UserCollection->getUser(Session::getUsername());
+	}
+
+	/**
 	 * Get a hashed version of a user password.
 	 *
 	 * @return string the hashed password
@@ -168,6 +186,8 @@ class User {
 		}
 
 		$this->setPasswordHash($newPassword1);
+		$this->setTotpSecret('');
+		Session::resetTotpVerification();
 
 		if (!$UserCollection->save($Messenger)) {
 			return false;
@@ -211,6 +231,32 @@ class User {
 	 */
 	public function setPasswordHash(string $password): void {
 		$this->passwordHash = $this->hash($password);
+	}
+
+	/**
+	 * Set the session variables that are requrired for a pending TOTP verification.
+	 */
+	public function setPendingTotpVerificationSession(): void {
+		$_SESSION[Session::TOTP_LOGIN_SECRET_KEY] = $this->totpSecret;
+		$_SESSION[Session::TOTP_LOGIN_USERNAME_KEY] = $this->name;
+	}
+
+	/**
+	 * Set the TOTP secret.
+	 *
+	 * @param string $secret
+	 */
+	public function setTotpSecret(string $secret): void {
+		$this->totpSecret = $secret;
+	}
+
+	/**
+	 * Get the TOTP configuration status.
+	 *
+	 * @return bool
+	 */
+	public function totpIsConfigured(): bool {
+		return !empty($this->totpSecret);
 	}
 
 	/**

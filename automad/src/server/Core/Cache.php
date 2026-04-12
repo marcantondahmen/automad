@@ -36,6 +36,7 @@
 namespace Automad\Core;
 
 use Automad\App;
+use Automad\Auth\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

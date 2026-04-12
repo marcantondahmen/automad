@@ -38,6 +38,7 @@ namespace Automad;
 use Automad\Admin\Dashboard;
 use Automad\API\RequestHandler;
 use Automad\API\Response;
+use Automad\Auth\Session;
 use Automad\Controllers\ImageController;
 use Automad\Controllers\PageController;
 use Automad\Core\Cache;
@@ -45,7 +46,6 @@ use Automad\Core\Feed;
 use Automad\Core\I18n;
 use Automad\Core\Parse;
 use Automad\Core\Router;
-use Automad\Core\Session;
 use Automad\Models\UserCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -71,7 +71,7 @@ class Routes {
 		'session/login',
 		'session/validate',
 		'app/bootstrap',
-		'user/reset-password',
+		'user/account-recovery',
 		'user-collection/create-first-user'
 	);
 
@@ -82,10 +82,11 @@ class Routes {
 	 */
 	public static function init(Router $Router): void {
 		$isAuthenticatedUser = AM_PAGE_DASHBOARD && Session::getUsername();
+		$hasPendingTotpVerification = AM_PAGE_DASHBOARD && !empty($_SESSION[Session::TOTP_LOGIN_SECRET_KEY]);
 
 		self::registerResizeRoute($Router, $isAuthenticatedUser);
-		self::registerAPIRoutes($Router, $isAuthenticatedUser);
-		self::registerDashboardRoutes($Router, $isAuthenticatedUser);
+		self::registerAPIRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
+		self::registerDashboardRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerFeedRoute($Router);
 		self::registerPageRoutes($Router);
 
@@ -107,8 +108,9 @@ class Routes {
 	 *
 	 * @param Router $Router
 	 * @param bool $isAuthenticatedUser
+	 * @param bool $pendingTotp
 	 */
-	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser): void {
+	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
 		$apiBase = RequestHandler::API_BASE;
 
 		$Router->register(
@@ -133,6 +135,14 @@ class Routes {
 		);
 
 		$Router->register(
+			"$apiBase/session/(verify-totp|cancel-totp-verification)",
+			function () {
+				return RequestHandler::getResponse();
+			},
+			$pendingTotp
+		);
+
+		$Router->register(
 			"$apiBase/(" . join('|', self::$publicAPIRoutes) . ')',
 			function () {
 				return RequestHandler::getResponse();
@@ -146,7 +156,7 @@ class Routes {
 				header('Content-Type: application/json; charset=utf-8');
 
 				$Response = new Response();
-				$Response->setRedirect('login');
+				$Response->setData(array('message' => 'No session'));
 
 				exit($Response->json());
 			},
@@ -159,8 +169,9 @@ class Routes {
 	 *
 	 * @param Router $Router
 	 * @param bool $isAuthenticatedUser
+	 * @param bool $pendingTotp
 	 */
-	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser): void {
+	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
 		$hasAccounts = is_readable(UserCollection::FILE_ACCOUNTS);
 
 		$Router->register(
@@ -188,7 +199,23 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(login|resetpassword)',
+			AM_PAGE_DASHBOARD . '/(verifytotp|resetpassword)',
+			function () {
+				return Dashboard::render();
+			},
+			$pendingTotp
+		);
+
+		$Router->register(
+			AM_PAGE_DASHBOARD . '/.*',
+			function () {
+				self::redirectDashboard('/verifytotp');
+			},
+			$pendingTotp
+		);
+
+		$Router->register(
+			AM_PAGE_DASHBOARD . '/(login|resetpassword|verifytotp)',
 			function () {
 				self::redirectDashboard('/home');
 			},

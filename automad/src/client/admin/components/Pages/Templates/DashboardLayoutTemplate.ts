@@ -140,14 +140,14 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 									target="_blank"
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 								>
-									<i class="bi bi-book"></i>
+									<i class="bi bi-file-earmark-text"></i>
 									<span>${App.text('documentation')}</span>
 								</a>
 								<am-link
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 									${Attr.target}="${Route.system}?section=${Section.users}"
 								>
-									<i class="bi bi-people"></i>
+									<i class="bi bi-person-badge"></i>
 									<span>${App.text('systemUsers')}</span>
 								</am-link>
 								<span class="${CSS.dropdownLabel}">

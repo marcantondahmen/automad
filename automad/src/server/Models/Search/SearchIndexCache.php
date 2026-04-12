@@ -35,10 +35,10 @@
 
 namespace Automad\Models\Search;
 
+use Automad\Auth\Session;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
-use Automad\Core\Session;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Page;
 use Automad\Models\Shared;

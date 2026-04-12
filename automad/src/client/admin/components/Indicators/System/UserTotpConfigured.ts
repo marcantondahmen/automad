@@ -22,44 +22,38 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-@import 'editor/index.less';
-@import 'markdown/index.less';
+import { App, html } from '@/admin/core';
+import { BaseStateIndicatorComponent } from '../BaseStateIndicator';
 
-@import 'alert.less';
-@import 'breadcrumbs.less';
-@import 'card.less';
-@import 'component-editor.less';
-@import 'components.less';
-@import 'dashboard-theme-toggle.less';
-@import 'dropdown.less';
-@import 'feed-field-select.less';
-@import 'field.less';
-@import 'file-robot.less';
-@import 'filter.less';
-@import 'icon-text.less';
-@import 'image-collection.less';
-@import 'image-picker.less';
-@import 'image-select.less';
-@import 'menu.less';
-@import 'modal-field.less';
-@import 'modal.less';
-@import 'nav.less';
-@import 'navbar.less';
-@import 'notify.less';
-@import 'privacy-indicator.less';
-@import 'root.less';
-@import 'spinner.less';
-@import 'switcher.less';
-@import 'totp.less';
-@import 'tree.less';
-@import 'upload.less';
+/**
+ * A user totp configured indicator.
+ *
+ * @extends BaseUpdateIndicatorComponent
+ */
+class UserTotpConfiguredIndicatorComponent extends BaseStateIndicatorComponent {
+	/**
+	 * Render the state element.
+	 */
+	render(): void {
+		const icon = App.user.totpIsConfigured
+			? 'shield-fill-check'
+			: 'shield-slash';
+
+		this.innerHTML = html`<i class="bi bi-${icon}"></i>`;
+	}
+}
+
+customElements.define(
+	'am-user-totp-configured-indicator',
+	UserTotpConfiguredIndicatorComponent
+);

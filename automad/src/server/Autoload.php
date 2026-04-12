@@ -35,8 +35,6 @@
 
 namespace Automad;
 
-use Automad\Core\Error;
-
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -56,9 +54,9 @@ class Autoload {
 			AM_BASE_DIR . '/vendor/autoload.php'
 		);
 
-		foreach($vendors as $file) {
+		foreach ($vendors as $file) {
 			if (!is_readable($file)) {
-				Error::exit(
+				App::exit(
 					'Missing dependencies',
 					'Please run the command <code>composer install</code> inside the directory ' . dirname(dirname($file)) . '.'
 				);

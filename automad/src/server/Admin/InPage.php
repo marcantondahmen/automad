@@ -36,9 +36,9 @@
 namespace Automad\Admin;
 
 use Automad\API\RequestHandler;
+use Automad\App;
+use Automad\Auth\Session;
 use Automad\Core\Automad;
-use Automad\Core\Error;
-use Automad\Core\Session;
 use Automad\Core\Text;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
@@ -259,7 +259,7 @@ class InPage {
 	 */
 	private function validateTemplate(string $str): void {
 		if (!preg_match('#<html[^>]*?>.*?<head[^>]*?>.*?</head>.*?<body[^>]*?>.*?</body>.*?</html>#mis', $str)) {
-			Error::exit(
+			App::exit(
 				'Invalid Template Structure',
 				<<< HTML
 					A template must have a valid HTML structure including an outer 

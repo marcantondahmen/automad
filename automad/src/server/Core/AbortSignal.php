@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2018-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
@@ -35,47 +35,48 @@
 
 namespace Automad\Core;
 
-use Automad\Auth\Session;
+use RuntimeException;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The SessionData class handles setting and getting items of $_SESSION[Session::DATA_KEY].
+ * The AbortException class is used to immediatly stop execution in a safe way.
+ * It can be used in order to end a request based on application logic in
+ * contrast to a server error. Therefore this exception will trigger
+ * a custom exception handler without returning a back trace.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2018-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class SessionData {
+class AbortSignal extends RuntimeException {
 	/**
-	 * Get the session data array or just one value in case $key is defined.
-	 *
-	 * @param string|null $key
-	 * @return mixed The data array or a single value
+	 * The body for more details that can be used when printing error pages.
 	 */
-	public static function get(?string $key = null): mixed {
-		if (!isset($_SESSION[Session::DATA_KEY])) {
-			$_SESSION[Session::DATA_KEY] = array();
-		}
+	private string $details;
 
-		if ($key) {
-			return $_SESSION[Session::DATA_KEY][$key] ?? '';
-		}
-
-		return $_SESSION[Session::DATA_KEY];
+	/**
+	 * The constructor.
+	 *
+	 * @param string $message
+	 * @param string $details
+	 * @param int $code
+	 */
+	public function __construct(
+		string $message = '',
+		string $details = '',
+		int $code = 400
+	) {
+		parent::__construct($message, $code);
+		$this->details = $details;
 	}
 
 	/**
-	 * Set a key/value pair in the session data array.
+	 * The details getter.
 	 *
-	 * @param string $key
-	 * @param mixed $value
+	 * @return string
 	 */
-	public static function set(string $key, $value): void {
-		if (!isset($_SESSION[Session::DATA_KEY])) {
-			$_SESSION[Session::DATA_KEY] = array();
-		}
-
-		$_SESSION[Session::DATA_KEY][$key] = $value;
+	public function getDetails(): string {
+		return $this->details;
 	}
 }

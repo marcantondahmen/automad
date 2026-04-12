@@ -133,6 +133,8 @@ export const enum SessionController {
 	login = 'SessionController::login',
 	logout = 'SessionController::logout',
 	validate = 'SessionController::validate',
+	verifyTotp = 'SessionController::verifyTotp',
+	cancelTotpVerification = 'SessionController::cancelTotpVerification',
 }
 
 export const enum SharedController {
@@ -164,7 +166,11 @@ export const enum UserCollectionController {
 export const enum UserController {
 	changePassword = 'UserController::changePassword',
 	edit = 'UserController::edit',
-	resetPassword = 'UserController::resetPassword',
+	accountRecovery = 'UserController::accountRecovery',
+	totpIsConfigured = 'UserController::totpIsConfigured',
+	totpSetup = 'UserController::totpSetup',
+	totpConfirmSetup = 'UserController::totpConfirmSetup',
+	totpDisable = 'UserController::totpDisable',
 }
 
 export const enum VideoCollectionController {

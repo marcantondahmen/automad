@@ -206,6 +206,7 @@ export const enum CSS {
 	flexGapLarge = 'am-u-flex--gap-large',
 	flexBetween = 'am-u-flex--between',
 	flexCenter = 'am-u-flex--center',
+	flexWrap = 'am-u-flex--wrap',
 	flexItemGrow = 'am-u-flex__item-grow',
 
 	formGroup = 'am-f-group',
@@ -241,6 +242,7 @@ export const enum CSS {
 
 	input = 'am-f-input',
 	inputTitle = 'am-f-input--title',
+	inputTotp = 'am-f-input--totp',
 	inputCombo = 'am-f-input-combo',
 	inputComboColor = 'am-f-input-combo__color',
 	inputComboButton = 'am-f-input-combo__button',
@@ -275,6 +277,8 @@ export const enum CSS {
 	layoutInPageMain = 'am-l-inpage__main',
 	layoutInPageContent = 'am-l-inpage__content',
 
+	link = 'am-e-link',
+
 	mdEditor = 'am-c-md-editor',
 	mdEditorFocus = 'am-c-md-editor--focus',
 
@@ -285,11 +289,11 @@ export const enum CSS {
 	modalDialog = 'am-c-modal__dialog',
 	modalDialogLarge = 'am-c-modal__dialog--large',
 	modalDialogSmall = 'am-c-modal__dialog--small',
+	modalDialogTotp = 'am-c-modal__dialog--totp',
 	modalDialogFullscreen = 'am-c-modal__dialog--fullscreen',
 	modalHeader = 'am-c-modal__header',
 	modalClose = 'am-c-modal__close',
 	modalBody = 'am-c-modal__body',
-	modalCode = 'am-c-modal__code',
 	modalFooter = 'am-c-modal__footer',
 	modalSpinner = 'am-c-modal__spinner',
 	modalSpinnerIcon = 'am-c-modal__spinner-icon',
@@ -342,6 +346,8 @@ export const enum CSS {
 	select = 'am-f-select',
 	selectInline = 'am-f-select--inline',
 
+	marginTopNone = 'am-u-margin-top-none',
+
 	spinner = 'am-c-spinner',
 
 	switcherSection = 'am-c-switcher-section',
@@ -362,6 +368,10 @@ export const enum CSS {
 	toggleOn = 'am-f-toggle--on',
 	toggleOff = 'am-f-toggle--off',
 	toggleDefaultOn = 'am-f-toggle--default-on',
+
+	totp = 'am-c-totp',
+	totpQr = 'am-c-totp__qr',
+	totpSecret = 'am-c-totp__secret',
 
 	tree = 'am-c-tree',
 	treeCollapse = 'am-c-tree__collapse',

@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
@@ -34,4 +34,18 @@
 
 am-link {
 	cursor: pointer;
+}
+
+.am-e-link {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	opacity: 1;
+	cursor: pointer;
+	transition: opacity 0.2s;
+
+	&:hover {
+		opacity: 0.7;
+		text-underline-offset: 5px;
+	}
 }

@@ -39,10 +39,12 @@ import {
 	create,
 	CSS,
 	EventName,
+	findFormErrorElement,
 	fire,
 	getLogger,
 	listen,
 	notifyError,
+	notifyFormError,
 	query,
 	RequestKey,
 } from '.';
@@ -240,7 +242,10 @@ export const requestAPI = async (
 		}
 	} catch (error) {
 		if (!error.message.includes('aborted')) {
-			notifyError(`${App.text('fetchingDataError')} (${route})`);
+			notifyFormError(
+				`${App.text('fetchingDataError')} (${route})`,
+				findFormErrorElement(dataOrForm)
+			);
 		}
 
 		responseData = { code: 500 };
@@ -256,7 +261,10 @@ export const requestAPI = async (
 	log.response(controller, responseData);
 
 	if (typeof responseData.exception != 'undefined') {
-		notifyError(responseData.exception.message);
+		notifyFormError(
+			responseData.exception.message,
+			findFormErrorElement(dataOrForm)
+		);
 
 		log.error(controller, responseData.exception);
 	}

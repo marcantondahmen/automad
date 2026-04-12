@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.26](https://github.com/marcantondahmen/automad/commit/4c3fe37b5d5ae5bf299a317ade37b52f154c7c5c)
+## [v2.0.0-beta.27](https://github.com/marcantondahmen/automad/commit/3e26371c253034f7ca73d2fa470f1c75c0cb0a76)
 
-Mon, 6 Apr 2026 13:12:19 +0200
+Sun, 12 Apr 2026 20:28:19 +0200
+
+### New Features
+
+- add optional two factor authentication with totp ([64b1892f](https://github.com/marcantondahmen/automad/commit/64b1892f1787c0bf5ae4ecf26bdbf3aeb5d18e7d))
+- implement rate limiting for failed sign-in attempts ([fea5667a](https://github.com/marcantondahmen/automad/commit/fea5667a2100000a04bca19fcf8b502800092ac1))
+- improve account recovery flow and account settings ui ([a3bd987e](https://github.com/marcantondahmen/automad/commit/a3bd987e69b8ba8cc14ff2d5e49a8540d4820311))
+
+### Bugfixes
+
+- fix empty forms when closing a modal dialog on same page ([e54cd378](https://github.com/marcantondahmen/automad/commit/e54cd37852d0119f11f87339aaf431ea4b15b486))
+
+## [v2.0.0-beta.26](https://github.com/marcantondahmen/automad/commit/cc81a0588c2ae9e7d445796320ac174fc82f8ca5)
+
+Mon, 6 Apr 2026 13:44:34 +0200
 
 ### New Features
 

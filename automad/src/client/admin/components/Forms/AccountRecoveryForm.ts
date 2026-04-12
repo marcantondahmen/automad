@@ -41,7 +41,7 @@ import { FormComponent } from './Form';
  *
  * @extends FormComponent
  */
-export class ResetPasswordFormComponent extends FormComponent {
+export class AccountRecoveryFormComponent extends FormComponent {
 	/**
 	 * The states object maps states to render methods.
 	 */
@@ -85,11 +85,11 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderRequestToken(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<h2>${App.text('resetPassword')}</h2>
+			<h2>${App.text('accountRecoveryStartHeading')}</h2>
 			<am-form-error></am-form-error>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('passwordResetEnterNameOrEmail')}
+					${App.text('accountRecoveryStartText')}
 				</div>
 				<div class="${CSS.cardForm}">
 					<input
@@ -100,18 +100,17 @@ export class ResetPasswordFormComponent extends FormComponent {
 						placeholder="${App.text('usernameOrEmail')}"
 					/>
 					<div class="${CSS.cardFormButtons}">
-						<am-link
-							class="${CSS.button}"
-							${Attr.target}="${Route.login}"
-						>
-							${App.text('cancel')}
-						</am-link>
 						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
-							${App.text('submit')}
+							${App.text('accountRecoveryStartButton')}
 						</am-submit>
 					</div>
 				</div>
 			</div>
+			<p>
+				<am-link class="${CSS.link}" ${Attr.target}="${Route.login}">
+					${App.text('accountRecoveryCancel')}
+				</am-link>
+			</p>
 		`;
 	}
 
@@ -122,11 +121,11 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSetPassword(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<h2>${App.text('resetPassword')}</h2>
+			<h2>${App.text('accountRecoveryNewPasswordHeading')}</h2>
 			<am-form-error></am-form-error>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('passwordResetEnterNewPassword')}
+					${App.text('accountRecoveryNewPasswordText')}
 				</div>
 				<div class="${CSS.cardForm}">
 					<input
@@ -165,18 +164,17 @@ export class ResetPasswordFormComponent extends FormComponent {
 						value="${data.username}"
 					/>
 					<div class="${CSS.cardFormButtons}">
-						<am-link
-							class="${CSS.button}"
-							${Attr.target}="${Route.login}"
-						>
-							${App.text('cancel')}
-						</am-link>
 						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('passwordResetSave')}
 						</am-submit>
 					</div>
 				</div>
 			</div>
+			<p>
+				<am-link class="${CSS.link}" ${Attr.target}="${Route.login}">
+					${App.text('accountRecoveryCancel')}
+				</am-link>
+			</p>
 		`;
 	}
 
@@ -187,10 +185,10 @@ export class ResetPasswordFormComponent extends FormComponent {
 	 */
 	private renderSuccess(data: KeyValueMap): void {
 		this.innerHTML = html`
-			<h2>${App.text('resetPassword')}</h2>
+			<h2>${App.text('accountRecoverySuccessHeading')}</h2>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('passwordChangedSuccess')}
+					${App.text('accountRecoverySuccessText')}
 				</div>
 				<div class="${CSS.cardForm}">
 					<am-link
@@ -205,4 +203,4 @@ export class ResetPasswordFormComponent extends FormComponent {
 	}
 }
 
-customElements.define('am-reset-password-form', ResetPasswordFormComponent);
+customElements.define('am-account-recovery-form', AccountRecoveryFormComponent);

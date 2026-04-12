@@ -52,17 +52,18 @@ import {
  */
 export const renderUsersSection = (): string => {
 	return html`
-		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
-			<am-form
-				${Attr.api}="${UserController.edit}"
-				${Attr.event}="${EventName.appStateRequireUpdate}"
-				${Attr.watch}
-			>
+		<am-form
+			${Attr.api}="${UserController.edit}"
+			${Attr.event}="${EventName.appStateRequireUpdate}"
+			${Attr.watch}
+		>
+			<h2 class="${CSS.marginTopNone}">
+				${App.text('systemUsersYourAccountHeading')}
+			</h2>
+			<p>${App.text('systemUsersYourAccountText')}</p>
+			<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap}">
 				<am-form-error></am-form-error>
 				<span class="${CSS.card}">
-					<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-						${App.text('systemUsersInfo')}
-					</span>
 					<span
 						class="${CSS.cardForm} ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
 					>
@@ -74,85 +75,73 @@ export const renderUsersSection = (): string => {
 								value="${App.user.email}"
 							></am-user-email>
 						</span>
-						<span class="${CSS.cardFormButtons}">
-							<am-submit class="${CSS.button}">
-								<span>${App.text('save')}</span>
-							</am-submit>
-							<am-modal-toggle
-								class="${CSS.button} ${CSS.buttonPrimary}"
-								${Attr.modal}="#am-change-password-modal"
-							>
-								<span>
-									${App.text('systemUsersChangePassword')}
-								</span>
-							</am-modal-toggle>
-						</span>
 					</span>
 				</span>
-			</am-form>
-			<span class="${CSS.card}">
-				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('systemUsersRegisteredInfo')}
-				</span>
-				<span class="${CSS.cardForm}">
-					<span class="${CSS.cardFormButtons}">
-						<am-modal-toggle
-							class="${CSS.button}"
-							${Attr.modal}="#am-registered-users-modal"
-						>
-							<span
-								class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}"
-							>
-								<span>
-									${App.text('systemUsersRegistered')}
-								</span>
-								<span class="${CSS.badge}">
-									<am-user-count-indicator></am-user-count-indicator>
-								</span>
-							</span>
-						</am-modal-toggle>
-					</span>
-					<span class="${CSS.cardFormButtons}">
-						<am-modal-toggle
-							class="${CSS.button}"
-							${Attr.modal}="#am-add-user-modal"
-						>
-							<span>${App.text('systemUsersAdd')}</span>
-						</am-modal-toggle>
-						<am-modal-toggle
-							class="${CSS.button}"
-							${Attr.modal}="#am-invite-user-modal"
-						>
-							<span>${App.text('systemUsersInvite')}</span>
-						</am-modal-toggle>
-					</span>
-				</span>
-			</span>
+				<div>
+					<am-submit class="${CSS.button}">
+						<span>${App.text('systemUsersYourAccountSave')}</span>
+					</am-submit>
+				</div>
+			</div>
+		</am-form>
 
-			<span class="${CSS.card}">
-				<span class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('systemUsersSignOutAllInfo')}
-				</span>
-				<am-form
-					class="${CSS.cardForm}"
-					${Attr.api}="${ConfigController.update}"
-					${Attr.confirm}="${App.text(
-						'systemUsersSignOutAllConfirm'
-					)}"
-				>
-					<input
-						type="hidden"
-						name="type"
-						value="sessionCookieSalt"
-					/>
-					<span class="${CSS.cardFormButtons}">
-						<am-submit class="${CSS.button}">
-							<span>${App.text('systemUsersSignOutAll')}</span>
-						</am-submit>
+		<h2>${App.text('systemUsersChangePasswordHeading')}</h2>
+		<p>${App.text('systemUsersChangePasswordText')}</p>
+		<am-modal-toggle
+			class="${CSS.button}"
+			${Attr.modal}="#am-change-password-modal"
+		>
+			<span> ${App.text('systemUsersChangePassword')} </span>
+		</am-modal-toggle>
+
+		<h2 class="${CSS.flex} ${CSS.flexGap}">
+			${App.text('systemUsersTotpHeading')}
+			<am-user-totp-configured-indicator></am-user-totp-configured-indicator>
+		</h2>
+		<p>${App.text('systemUsersTotpText')}</p>
+		<am-totp-config></am-totp-config>
+
+		<h2>${App.text('systemUsersCollaborateHeading')}</h2>
+		<p>${App.text('systemUsersCollaborateText')}</p>
+		<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexWrap}">
+			<am-modal-toggle
+				class="${CSS.button}"
+				${Attr.modal}="#am-invite-user-modal"
+			>
+				<span>${App.text('systemUsersCollaborateInvite')}</span>
+			</am-modal-toggle>
+			<am-modal-toggle
+				class="${CSS.button}"
+				${Attr.modal}="#am-registered-users-modal"
+			>
+				<span class="${CSS.flex} ${CSS.flexAlignCenter} ${CSS.flexGap}">
+					<span> ${App.text('systemUsersCollaborateManage')} </span>
+					<span class="${CSS.badge}">
+						<am-user-count-indicator></am-user-count-indicator>
 					</span>
-				</am-form>
-			</span>
-		</div>
+				</span>
+			</am-modal-toggle>
+		</span>
+		<p>
+			<am-modal-toggle
+				class="${CSS.link}"
+				${Attr.modal}="#am-add-user-modal"
+			>
+				<span>${App.text('systemUsersCollaborateCreate')}</span>
+			</am-modal-toggle>
+		</p>
+		<hr />
+		<p>${App.text('systemUsersSignOutAllInfo')}</p>
+		<am-form
+			${Attr.api}="${ConfigController.update}"
+			${Attr.confirm}="${App.text('systemUsersSignOutAllConfirm')}"
+		>
+			<input type="hidden" name="type" value="sessionCookieSalt" />
+			<am-submit class="${CSS.button}">
+				<span>${App.text('systemUsersSignOutAll')}</span>
+			</am-submit>
+		</am-form>
+
 		<!-- Modals -->
 		<am-modal id="am-change-password-modal" ${Attr.clearForm}>
 			<am-form
@@ -216,9 +205,10 @@ export const renderUsersSection = (): string => {
 		<am-modal id="am-registered-users-modal" nofocus>
 			<am-modal-dialog>
 				<am-modal-header>
-					${App.text('systemUsersRegistered')}
+					${App.text('systemUsersCollaborateManageHeading')}
 				</am-modal-header>
 				<am-modal-body>
+					<p>${App.text('systemUsersCollaborateManageText')}</p>
 					<am-delete-users-form
 						${Attr.api}="${UserCollectionController.edit}"
 						${Attr.event}="${EventName.appStateRequireUpdate}"
@@ -234,7 +224,7 @@ export const renderUsersSection = (): string => {
 						${Attr.form}="${UserCollectionController.edit}"
 						disabled
 					>
-						${App.text('deleteSelection')}
+						${App.text('systemUsersCollaborateRemoveSelected')}
 					</am-submit>
 				</am-modal-footer>
 			</am-modal-dialog>
@@ -246,9 +236,10 @@ export const renderUsersSection = (): string => {
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
 				<am-modal-header>
-					${App.text('systemUsersAdd')}
+					${App.text('systemUsersCollaborateCreateHeading')}
 				</am-modal-header>
 				<am-modal-body>
+					<p>${App.text('systemUsersCollaborateCreateText')}</p>
 					<am-form-error></am-form-error>
 					<div>
 						<am-user-name></am-user-name>
@@ -290,7 +281,7 @@ export const renderUsersSection = (): string => {
 						${App.text('close')}
 					</am-modal-close>
 					<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
-						${App.text('systemUsersAdd')}
+						${App.text('systemUsersCollaborateCreateButton')}
 					</am-submit>
 				</am-modal-footer>
 			</am-form>
@@ -302,9 +293,10 @@ export const renderUsersSection = (): string => {
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			>
 				<am-modal-header>
-					${App.text('systemUsersInvite')}
+					${App.text('systemUsersCollaborateInviteHeading')}
 				</am-modal-header>
 				<am-modal-body>
+					<p>${App.text('systemUsersCollaborateInviteText')}</p>
 					<am-form-error></am-form-error>
 					<div>
 						<am-user-name></am-user-name>

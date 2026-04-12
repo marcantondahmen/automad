@@ -35,6 +35,7 @@
 
 namespace Automad;
 
+use Automad\Core\AbortSignal;
 use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\Error;
@@ -55,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class App {
-	const VERSION = '2.0.0-beta.26';
+	const VERSION = '2.0.0-beta.27';
 
 	/**
 	 * Required PHP version.
@@ -71,15 +72,17 @@ class App {
 		define('AM_VERSION', App::VERSION);
 
 		require_once __DIR__ . '/Core/FileSystem.php';
+		require_once __DIR__ . '/Core/AbortSignal.php';
+		require_once __DIR__ . '/Core/Error.php';
+		require_once __DIR__ . '/Autoload.php';
+
 		define('AM_BASE_DIR', FileSystem::normalizeSlashes(dirname(dirname(dirname(__DIR__)))));
 
-		require_once __DIR__ . '/Core/Error.php';
 		Error::setHtmlOutputHandler();
 
 		$this->runVersionCheck();
 		$this->runExtensionsCheck();
 
-		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
 
 		date_default_timezone_set(@date_default_timezone_get());
@@ -103,6 +106,17 @@ class App {
 		}
 
 		exit($output);
+	}
+
+	/**
+	 *	Throw an AbortSignal exception.
+	 *
+	 * @param string $message
+	 * @param string $details
+	 * @param int $code
+	 */
+	public static function exit(string $message, string $details = '', int $code = 500): void {
+		throw new AbortSignal($message, $details, $code);
 	}
 
 	/**
@@ -130,7 +144,7 @@ class App {
 
 		foreach ($requirements as $func => $name) {
 			if (!function_exists($func)) {
-				Error::exit(
+				App::exit(
 					"The $name is missing",
 					<<<HTML
 					Please make sure the $name for your currently used PHP version is properly installed on your system 
@@ -146,7 +160,7 @@ class App {
 	 */
 	private function runPermissionCheck(): void {
 		if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
-			Error::exit('Permission denied', 'The "' . AM_DIR_CACHE . '" directory must be writable by the web server.');
+			App::exit('Permission denied', 'The "' . AM_DIR_CACHE . '" directory must be writable by the web server.');
 		}
 	}
 
@@ -155,7 +169,7 @@ class App {
 	 */
 	private function runVersionCheck(): void {
 		if (version_compare(PHP_VERSION, $this->requiredPhpVersion, '<')) {
-			Error::exit('PHP out of date', "Please update your PHP version to $this->requiredPhpVersion or newer.");
+			App::exit('PHP out of date', "Please update your PHP version to $this->requiredPhpVersion or newer.");
 		}
 	}
 

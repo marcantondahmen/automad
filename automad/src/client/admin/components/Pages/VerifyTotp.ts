@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
@@ -44,16 +44,16 @@ import {
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
- * The login view.
+ * The totp verify view.
  *
  * @extends BaseCenteredLayoutComponent
  */
-export class LoginComponent extends BaseCenteredLayoutComponent {
+export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
 	protected get pageTitle(): string {
-		return App.text('signIn');
+		return App.text('verifyTotpButton');
 	}
 
 	/**
@@ -63,9 +63,9 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<h2>$${App.sitename} &mdash; ${App.text('signIn')}</h2>
+			<h2>${App.text('verifyTotpHeading')}</h2>
 			<am-form
-				${Attr.api}="${SessionController.login}"
+				${Attr.api}="${SessionController.verifyTotp}"
 				${Attr.focus}
 				${Attr.enter}
 			>
@@ -73,30 +73,34 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 				<div class="${CSS.card}">
 					<div class="${CSS.cardForm}">
 						<input
-							class="${CSS.input}"
+							class="${CSS.input} ${CSS.inputTotp}"
+							name="code"
 							type="text"
-							name="name-or-email"
-							placeholder="${App.text('usernameOrEmail')}"
-							required
-						/>
-						<input
-							class="${CSS.input}"
-							type="password"
-							name="password"
-							placeholder="${App.text('password')}"
+							maxlength="6"
+							inputmode="numeric"
+							autocomplete="one-time-code"
+							pattern="[0-9]{6}"
 							required
 						/>
 						<div class="${CSS.cardFormButtons}">
 							<am-submit
 								class="${CSS.button} ${CSS.buttonPrimary}"
 							>
-								${App.text('signIn')}
+								${App.text('verifyTotpButton')}
 							</am-submit>
 						</div>
 					</div>
 				</div>
 			</am-form>
 			<p>
+				<am-form
+					${Attr.api}="${SessionController.cancelTotpVerification}"
+				>
+					<am-submit class="${CSS.link}">
+						${App.text('verifyTotpCancel')}
+					</am-submit>
+				</am-form>
+				<br />
 				<am-link
 					${Attr.target}="${Route.accountrecovery}"
 					class="${CSS.link}"
@@ -108,4 +112,4 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.login), LoginComponent);
+customElements.define(getTagFromRoute(Route.verifytotp), VerifyTotpComponent);
