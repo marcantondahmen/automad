@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.27](https://github.com/marcantondahmen/automad/commit/3e26371c253034f7ca73d2fa470f1c75c0cb0a76)
+## [v2.0.0-beta.28](https://github.com/marcantondahmen/automad/commit/4ff284fe9dd5e38c014dfba0018bac5eac0e91d1)
 
-Sun, 12 Apr 2026 20:28:19 +0200
+Thu, 30 Apr 2026 10:23:59 +0200
+
+### Bugfixes
+
+- fix public access to the user-collection/create-first-user api route after the first user has been created ([4ff284fe](https://github.com/marcantondahmen/automad/commit/4ff284fe9dd5e38c014dfba0018bac5eac0e91d1))
+
+## [v2.0.0-beta.27](https://github.com/marcantondahmen/automad/commit/6e97e9d6a8e33380428ceed04b61bcb8109d6464)
+
+Sun, 12 Apr 2026 20:41:57 +0200
 
 ### New Features
 
