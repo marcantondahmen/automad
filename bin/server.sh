@@ -5,7 +5,7 @@ URL="localhost:8000"
 
 start() {
 	if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
-		echo -e "  \033[0;32m Server already running\033[0m"
+		echo -e "\n  \033[0;32m Server already running\033[0m"
 		return
 	fi
 
@@ -15,7 +15,7 @@ start() {
 
 	sleep 0.5
 
-	if ! kill -0 "$PID" 2>/dev/null; then
+	if ! kill -0 "$pid" 2>/dev/null; then
 		echo -e "\n  \033[0;31m Server failed to start\033[0m\n"
 		cat "$LOG_FILE"
 		exit 1
@@ -25,7 +25,7 @@ start() {
 
 	echo "$pid $startTime" >"$PID_FILE"
 
-	echo -e "  \033[0;32m Started PHP server\033[0m\n"
+	echo -e "\n  \033[0;32m Started PHP server\033[0m\n"
 	echo -e "  \033[0;34m Server output in:     \033[0;35m$(pwd)/${LOG_FILE}\033[0m"
 	echo -e "  \033[0;34m Site is running at:   \033[0;35mhttp://${URL}\033[0m"
 }
@@ -44,9 +44,9 @@ stop() {
 
 		rm "$PID_FILE"
 
-		echo -e "  \033[0;32m Stopped PHP server\033[0m"
+		echo -e "\n  \033[0;32m Stopped PHP server\033[0m"
 	else
-		echo -e "  \033[0;31m No PID file found\033[0m"
+		echo -e "\n  \033[0;31m No PID file found\033[0m"
 	fi
 }
 
