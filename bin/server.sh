@@ -12,6 +12,15 @@ start() {
 	nohup php -S $URL >"$LOG_FILE" 2>&1 &
 
 	pid=$!
+
+	sleep 0.5
+
+	if ! kill -0 "$PID" 2>/dev/null; then
+		echo -e "\n  \033[0;31m Server failed to start\033[0m\n"
+		cat "$LOG_FILE"
+		exit 1
+	fi
+
 	startTime=$(awk '{print $22}' "/proc/$pid/stat")
 
 	echo "$pid $startTime" >"$PID_FILE"
