@@ -3,6 +3,15 @@ PID_FILE=".php-server.pid"
 LOG_FILE=".php-server.log"
 URL="localhost:8000"
 
+getProcessStartTime() {
+	local processId="$1"
+
+	startTime=$(ps -p "$processId" -o lstart= | tr -s ' ')
+	startTime=${startTime// /-}
+
+	echo $startTime
+}
+
 start() {
 	if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
 		echo -e "\n  \033[0;32m Server already running\033[0m"
@@ -21,7 +30,7 @@ start() {
 		exit 1
 	fi
 
-	startTime=$(awk '{print $22}' "/proc/$pid/stat")
+	startTime=$(getProcessStartTime "$pid")
 
 	echo "$pid $startTime" >"$PID_FILE"
 
@@ -35,7 +44,7 @@ stop() {
 		read storedPid storedStart <"$PID_FILE"
 
 		if [[ -d "/proc/$storedPid" ]]; then
-			currentStart=$(awk '{print $22}' "/proc/$storedPid/stat")
+			currentStart=$(getProcessStartTime "$storedPid")
 
 			if [[ "$currentStart" == "$storedStart" ]]; then
 				kill -TERM "$storedPid" 2>/dev/null
