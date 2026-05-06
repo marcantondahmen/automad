@@ -416,7 +416,7 @@ class FileSystem {
 	 * @param string $path
 	 * @return bool True on success, else false
 	 */
-	public static function makeDir(string $path) {
+	public static function makeDir(string $path): bool {
 		if (!file_exists($path)) {
 			$umask = umask(0);
 			$return = mkdir($path, AM_PERM_DIR, true);
