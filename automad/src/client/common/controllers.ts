@@ -166,11 +166,11 @@ export const enum UserCollectionController {
 export const enum UserController {
 	changePassword = 'UserController::changePassword',
 	edit = 'UserController::edit',
-	accountRecovery = 'UserController::accountRecovery',
-	totpIsConfigured = 'UserController::totpIsConfigured',
-	totpSetup = 'UserController::totpSetup',
+	resetPassword = 'UserController::resetPassword',
 	totpConfirmSetup = 'UserController::totpConfirmSetup',
 	totpDisable = 'UserController::totpDisable',
+	totpIsConfigured = 'UserController::totpIsConfigured',
+	totpSetup = 'UserController::totpSetup',
 }
 
 export const enum VideoCollectionController {

@@ -97,10 +97,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 				</div>
 			</am-form>
 			<p>
-				<am-link
-					${Attr.target}="${Route.accountrecovery}"
-					class="${CSS.link}"
-				>
+				<am-link ${Attr.target}="${Route.password}" class="${CSS.link}">
 					${App.text('troubleSigningIn')}
 				</am-link>
 			</p>
