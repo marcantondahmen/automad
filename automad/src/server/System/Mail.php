@@ -71,9 +71,12 @@ class Mail {
 	public static function send(string $to, string $subject, string $message, ?string $replyTo = null, ?Messenger $Messenger = null): bool {
 		$MailConfig = new MailConfig();
 
+		$smtpUsername = rawurlencode($MailConfig->smtpUsername);
+		$smtpPassword = rawurlencode($MailConfig->smtpPassword);
+
 		$dsn = $MailConfig->transport === 'sendmail'
 			? 'sendmail://default'
-			: "smtp://{$MailConfig->smtpUsername}:{$MailConfig->smtpPassword}@{$MailConfig->smtpServer}:{$MailConfig->smtpPort}";
+			: "smtp://{$smtpUsername}:{$smtpPassword}@{$MailConfig->smtpServer}:{$MailConfig->smtpPort}";
 
 		$transport = Transport::fromDsn($dsn);
 		$mailer = new Mailer($transport);
