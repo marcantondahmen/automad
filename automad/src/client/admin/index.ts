@@ -90,6 +90,7 @@ import('./components/Forms/HistoryModalForm');
 import('./components/Forms/InPageForm');
 import('./components/Forms/MailConfigForm');
 import('./components/Forms/PageDataForm');
+import('./components/Forms/RequestPasswordResetTokenForm');
 import('./components/Forms/ResetPasswordForm');
 import('./components/Forms/SearchForm');
 import('./components/Forms/SetupForm');
@@ -145,6 +146,7 @@ import('./components/Pages/Search');
 import('./components/Pages/Setup');
 import('./components/Pages/Shared');
 import('./components/Pages/System');
+import('./components/Pages/Token');
 import('./components/Pages/Trash');
 import('./components/Pages/VerifyTotp');
 

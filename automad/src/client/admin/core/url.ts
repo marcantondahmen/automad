@@ -68,6 +68,15 @@ export const getSearchParam = (param: string): string => {
 };
 
 /**
+ * URL is an invite and not a user requested password reset.
+ *
+ * @returns bool
+ */
+export const isInvite = () => {
+	return getSearchParam('type') === 'invitation';
+};
+
+/**
  * Build a resize url.
  *
  * @param url

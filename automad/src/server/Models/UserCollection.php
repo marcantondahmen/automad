@@ -35,7 +35,7 @@
 
 namespace Automad\Models;
 
-use Automad\Admin\Templates\InvitationEmail;
+use Automad\Admin\Email\InvitationEmail;
 use Automad\Auth\Session;
 use Automad\Auth\User;
 use Automad\Core\Cache;
@@ -328,10 +328,8 @@ class UserCollection {
 	 * @return bool true on success
 	 */
 	public function sendInvitation(string $username, string $email, Messenger $Messenger): bool {
-		$website = $_SERVER['SERVER_NAME'] ?? '' . AM_BASE_URL;
-		$link = AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/password?action=create&username=' . urlencode($username);
-		$subject = 'Automad: ' . Text::get('emailInviteSubject');
-		$message = InvitationEmail::render($website, $username, $link);
+		$subject = Text::get('emailInviteSubject');
+		$message = InvitationEmail::render($username);
 
 		return Mail::send($email, $subject, $message, null, $Messenger);
 	}

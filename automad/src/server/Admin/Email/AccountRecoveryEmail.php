@@ -44,35 +44,33 @@ use Automad\Core\Text;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * An invitation email template.
+ * A password reset email template.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class InvitationEmail {
+class AccountRecoveryEmail {
 	/**
-	 * Render an invitation email body.
+	 * Render a password reset email body.
 	 *
 	 * @param string $username
-	 * @return string The rendered invitation email body
+	 * @param string $token
+	 * @return string The rendered password reset email body
 	 */
-	public static function render(string $username): string {
+	public static function render(string $username, string $token): string {
 		$Text = Text::getObject();
 		$website = $_SERVER['SERVER_NAME'] ?? AM_BASE_URL;
 
 		return Body::render(
 			array(
 				Heading::render("$Text->emailHello $username"),
-				Paragraph::render(str_replace(
-					array('{1}', '{2}'),
-					array("<b>$website</b>", "<b>«{$username}»</b>"),
-					Text::get('emailInviteText')
-				)),
+				Paragraph::render(str_replace('{}', "<b>$website</b>", Text::get('emailAccountRecoveryTextTop'))),
 				Button::render(
-					$Text->emailInviteButton,
-					AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/token?type=invitation&username=' . urlencode($username)
+					$Text->emailAccountRecoveryButton,
+					AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/password?username=' . urlencode($username) . '&token=' . urlencode($token)
 				),
+				Paragraph::render($Text->emailAccountRecoveryTextBottom),
 				Paragraph::render($Text->emailAutomatic)
 			)
 		);

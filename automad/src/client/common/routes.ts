@@ -33,17 +33,18 @@
  */
 
 export enum Route {
-	setup = 'setup',
-	login = 'login',
-	verifytotp = 'verifytotp',
-	password = 'password',
-	search = 'search',
+	components = 'components',
 	home = 'home',
-	system = 'system',
-	shared = 'shared',
+	inpage = 'inpage',
+	login = 'login',
 	packages = 'packages',
 	page = 'page',
+	password = 'password',
+	search = 'search',
+	setup = 'setup',
+	shared = 'shared',
+	system = 'system',
+	token = 'token',
 	trash = 'trash',
-	inpage = 'inpage',
-	components = 'components',
+	verifytotp = 'verifytotp',
 }

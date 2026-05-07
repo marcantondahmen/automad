@@ -71,6 +71,7 @@ class Routes {
 		'session/login',
 		'session/validate',
 		'app/bootstrap',
+		'user/request-password-reset-token',
 		'user/reset-password',
 		'user-collection/create-first-user'
 	);
@@ -199,7 +200,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(verifytotp|password)',
+			AM_PAGE_DASHBOARD . '/(verifytotp|token|password)',
 			function () {
 				return Dashboard::render();
 			},
@@ -215,7 +216,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(login|password|verifytotp)',
+			AM_PAGE_DASHBOARD . '/(login|token|password|verifytotp)',
 			function () {
 				self::redirectDashboard('/home');
 			},
@@ -223,7 +224,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(login|password)',
+			AM_PAGE_DASHBOARD . '/(login|token|password)',
 			function () {
 				return Dashboard::render();
 			},

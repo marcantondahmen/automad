@@ -37,11 +37,11 @@ import {
 	Attr,
 	getTagFromRoute,
 	html,
+	isInvite,
 	Route,
 	UserController,
 } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
-import { isInvite } from '@/admin/components/Forms/ResetPasswordForm';
 
 /**
  * The password create/reset view.
@@ -54,8 +54,8 @@ export class PasswordComponent extends BaseCenteredLayoutComponent {
 	 */
 	protected get pageTitle(): string {
 		return isInvite()
-			? App.text('createPassword')
-			: App.text('resetPassword');
+			? App.text('completeAccountSetup')
+			: App.text('accountRecovery');
 	}
 
 	/**
