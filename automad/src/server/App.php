@@ -109,7 +109,7 @@ class App {
 	}
 
 	/**
-	 *	Throw an AbortSignal exception.
+	 * Throw an AbortSignal exception.
 	 *
 	 * @param string $message
 	 * @param string $details
