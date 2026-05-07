@@ -44,19 +44,19 @@ use Automad\Core\Text;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A password reset email template.
+ * An account setup completion email template.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
 class AccountSetupEmail {
 	/**
-	 * Render a password reset email body.
+	 * Render an account setup completion email body.
 	 *
 	 * @param string $username
 	 * @param string $token
-	 * @return string The rendered password reset email body
+	 * @return string The rendered email body
 	 */
 	public static function render(string $username, string $token): string {
 		$Text = Text::getObject();
