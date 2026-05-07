@@ -27,54 +27,42 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Admin\Templates;
-
-use Automad\Core\Text;
+namespace Automad\Admin\Email\Components;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A password reset email body.
+ * An email heading component.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class PasswordResetEmail extends AbstractEmailBody {
+class Heading {
 	/**
-	 * Render a password reset email body.
+	 * Render the email heading.
 	 *
-	 * @param string $website
-	 * @param string $username
-	 * @param string $token
-	 * @return string The rendered password reset email body
+	 * @param string $text
+	 * @return string
 	 */
-	public static function render(string $website, string $username, string $token): string {
-		$h1Style = self::$h1Style;
-		$pStyle = self::$paragraphStyle;
-		$codeStyle = self::$codeStyle;
-		$Text = Text::getObject();
-		$textTop = str_replace('{}', "<b>$website</b>", Text::get('emailResetPasswordTextTop'));
-
-		$content = <<< HTML
-			<h1 $h1Style>$Text->emailHello $username,</h1>
-			<p $pStyle>
-				$textTop
-			</p>
-			<p $codeStyle>
-				$token
-			</p>
-			<p $pStyle>
-				$Text->emailResetPasswordTextBottom
-			</p>
-		HTML;
-
-		return self::body($content);
+	public static function render(string $text): string {
+		return <<<HTML
+			<h1
+				style="
+					font-weight: bold;
+					margin: 0;
+					font-size: 16px;
+					padding: 16px 24px 0px 24px;
+				"
+			>
+				$text,
+			</h1>
+			HTML;
 	}
 }

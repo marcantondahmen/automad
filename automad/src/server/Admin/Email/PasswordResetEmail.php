@@ -33,62 +33,43 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Admin\Templates;
+namespace Automad\Admin\Email;
 
+use Automad\Admin\Email\Components\Body;
+use Automad\Admin\Email\Components\Code;
+use Automad\Admin\Email\Components\Heading;
+use Automad\Admin\Email\Components\Paragraph;
 use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * An invitation email body.
+ * A password reset email template.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class InvitationEmail extends AbstractEmailBody {
+class PasswordResetEmail {
 	/**
-	 * Render an invitation email body.
+	 * Render a password reset email body.
 	 *
-	 * @param string $website
 	 * @param string $username
-	 * @param string $link
-	 * @return string The rendered invitation email body
+	 * @param string $token
+	 * @return string The rendered password reset email body
 	 */
-	public static function render(string $website, string $username, string $link): string {
-		$h1Style = self::$h1Style;
-		$pStyle = self::$paragraphStyle;
-		$codeStyle = self::$codeStyle;
+	public static function render(string $username, string $token): string {
 		$Text = Text::getObject();
-		$inviteText = str_replace('{}', "<b>$website</b>", Text::get('emailInviteText'));
+		$website = $_SERVER['SERVER_NAME'] ?? AM_BASE_URL;
 
-		$content = <<< HTML
-			<h1 $h1Style>$Text->emailHello $username,</h1>
-			<p $pStyle>
-				$inviteText
-			</p>
-			<p $codeStyle>
-				$Text->username: $username
-			</p>
-			<p $pStyle>
-				<a 
-				href="$link" 
-				style="
-					display: block;
-					text-align: center; 
-					margin: 0 0 20px 0; 
-					color: #ffffff;
-					background-color: #121212;
-					border-radius: 6px; 
-					text-decoration: none;
-					font-size: 18px; 
-					line-height: 48px;
-				">
-					$Text->emailInviteButton
-				</a>
-			</p>
-		HTML;
-
-		return self::body($content);
+		return Body::render(
+			array(
+				Heading::render("$Text->emailHello $username"),
+				Paragraph::render(str_replace('{}', "<b>$website</b>", Text::get('emailResetPasswordTextTop'))),
+				Code::render($token),
+				Paragraph::render($Text->emailResetPasswordTextBottom),
+				Paragraph::render($Text->emailAutomatic)
+			)
+		);
 	}
 }

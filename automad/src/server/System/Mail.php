@@ -42,6 +42,8 @@ use Automad\Models\MailConfig;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\File;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,6 +55,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Mail {
+	const LOGO = AM_BASE_DIR . '/automad/assets/logo-email.png';
+	const LOGO_CID = 'logo@automad';
+
 	/**
 	 * Save status to avoid a second trigger for example in pagelists or teaser snippets.
 	 */
@@ -82,13 +87,19 @@ class Mail {
 		$mailer = new Mailer($transport);
 
 		$email = (new Email())
-			->from($MailConfig->from)
+			->from("Automad <$MailConfig->from>")
 			->to($to)
 			->subject($subject)
 			->html($message);
 
 		if ($replyTo) {
 			$email->replyTo($replyTo);
+		}
+
+		if (preg_match('/src="cid:' . self::LOGO_CID . '"/', $message)) {
+			$part = new DataPart(new File(self::LOGO));
+			$part->setContentId(self::LOGO_CID);
+			$email->addPart($part->asInline());
 		}
 
 		try {
