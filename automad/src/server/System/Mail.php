@@ -158,7 +158,7 @@ class Mail {
 
 		// Prepare mail.
 		$subject = $Automad->Shared->get(Fields::SITENAME) . ': ' . strip_tags($_POST[$subject]);
-		$message = strip_tags($_POST[$message]);
+		$message = nl2br(strip_tags($_POST[$message]));
 
 		// Note that "$from" means in this context "reply to".
 		if (self::send($data['to'], $subject, $message, $_POST[$from])) {
