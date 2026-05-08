@@ -63,10 +63,10 @@ class Button {
 				<a
 					href="$href"
 					style="
-						color: #101113;
+						color: #101113 !important;
 						font-size: 16px;
 						font-weight: bold;
-						background-color: #ffffff;
+						background-color: #fafbfd !important;
 						border-radius: 4px;
 						display: inline-block;
 						padding: 10px 26px;
