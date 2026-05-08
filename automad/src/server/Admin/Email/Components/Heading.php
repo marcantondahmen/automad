@@ -55,7 +55,7 @@ class Heading {
 		return <<<HTML
 			<h1
 				style="
-					font-weight: bold;
+					font-weight: normal;
 					margin: 0;
 					font-size: 16px;
 					padding: 16px 24px 0px 24px;

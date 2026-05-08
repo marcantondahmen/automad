@@ -56,7 +56,7 @@ class Paragraph {
 			<div
 				style="
 					font-weight: normal;
-					padding: 16px 24px 16px 24px;
+					padding: 16px 24px 0px 24px;
 				"
 			>
 				$text

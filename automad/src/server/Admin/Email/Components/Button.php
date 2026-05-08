@@ -57,16 +57,16 @@ class Button {
 			<div
 				style="
 					text-align: left;
-					padding: 16px 24px 16px 24px;
+					padding: 32px 24px 16px 24px;
 				"
 			>
 				<a
 					href="$href"
 					style="
-						color: #ffffff;
+						color: #101113;
 						font-size: 16px;
 						font-weight: bold;
-						background-color: #202327;
+						background-color: #ffffff;
 						border-radius: 4px;
 						display: inline-block;
 						padding: 10px 26px;

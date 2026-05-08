@@ -111,7 +111,7 @@ class Body {
 											/>
 										</div>
 										$content
-										<div style="padding: 16px 24px 16px 24px">
+										<div style="padding: 32px 24px 16px 24px">
 											<hr
 												style="
 													width: 100%;
