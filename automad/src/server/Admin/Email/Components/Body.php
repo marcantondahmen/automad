@@ -117,7 +117,7 @@ class Body {
 							<tbody>
 								<tr style="width: 100%">
 									<td>
-										<div style="padding: 16px 24px 32px 24px">
+										<div style="padding: 24px 24px 24px 24px">
 											<img
 												alt="Automad logo"
 												src="cid:$cid"
