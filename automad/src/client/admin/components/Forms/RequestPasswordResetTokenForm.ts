@@ -158,6 +158,9 @@ export class RequestPasswordResetTokenFormComponent extends FormComponent {
 		this.innerHTML = html`
 			<h2>${text().successHeading}</h2>
 			<div class="${CSS.card}">
+				<div class="${CSS.cardIcon}">
+					<i class="bi bi-envelope-paper"></i>
+				</div>
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 					${text().successText}
 				</div>
