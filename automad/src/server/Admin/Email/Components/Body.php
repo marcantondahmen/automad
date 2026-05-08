@@ -63,18 +63,40 @@ class Body {
 		return <<<HTML
 			<!doctype html>
 			<html>
-				<body style="background-color: #101113; margin: 0;">
+				<head>
+					<meta charset="utf-8">
+					<meta name="color-scheme" content="dark">
+					<meta name="supported-color-schemes" content="dark">
+					<style>
+						body,
+						table,
+						td {
+								background: #101113 !important;
+								color: #fafbfd !important;
+						}
+
+						a {
+								color: inherit !important;
+						}
+					</style>
+				</head>
+				<body 
+					style="
+						background-color: #101113 !important; 
+						color: #fafbfd !important;
+						margin: 0;
+					"
+				>
 					<div
 						style="
-							background-color: #101113;
-							color: #ffffff;
+							background-color: #101113 !important;
+							color: #fafbfd !important;
 							font-family: -apple-system, BlinkMacSystemFont, Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, system-ui, sans-serif;
 							font-size: 16px;
 							font-weight: 400;
-							letter-spacing: 0.15008px;
 							line-height: 1.5;
 							margin: 0;
-							padding: 32px 0;
+							padding: 0;
 							min-height: 100%;
 							width: 100%;
 						"
@@ -85,7 +107,7 @@ class Body {
 							style="
 								margin: 0 auto;
 								max-width: 600px;
-								background-color: #101113;
+								background-color: #101113 !important;
 							"
 							role="presentation"
 							cellspacing="0"
@@ -95,7 +117,7 @@ class Body {
 							<tbody>
 								<tr style="width: 100%">
 									<td>
-										<div style="padding: 24px 24px 32px 24px">
+										<div style="padding: 24px 24px 24px 24px">
 											<img
 												alt="Automad logo"
 												src="cid:$cid"
@@ -111,12 +133,12 @@ class Body {
 											/>
 										</div>
 										$content
-										<div style="padding: 32px 24px 16px 24px">
+										<div style="padding: 32px 24px 12px 24px">
 											<hr
 												style="
 													width: 100%;
 													border: none;
-													border-top: 2px solid #2a2b2e;
+													border-top: 1px solid #2a2b2e;
 													margin: 0;
 												"
 											/>
@@ -125,7 +147,7 @@ class Body {
 											style="
 												color: #5a5b5e;
 												font-weight: normal;
-												padding: 16px 24px 20px 24px;
+												padding: 16px 24px 16px 24px;
 											"
 										>
 											Automad on $website
