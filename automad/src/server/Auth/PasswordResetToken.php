@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class PasswordResetToken {
-	const LIFETIME = 300;
+	const LIFETIME = 3600;
 	const TOKEN_DIR = AM_DIR_TMP . '/password_reset_tokens';
 
 	/**
@@ -110,6 +110,8 @@ class PasswordResetToken {
 		}
 
 		if ($PasswordResetToken->expires < time()) {
+			self::reset($username);
+
 			return false;
 		}
 
