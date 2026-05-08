@@ -1,8 +1,25 @@
 # Changelog
 
-## [v2.0.0-beta.28](https://github.com/marcantondahmen/automad/commit/4ff284fe9dd5e38c014dfba0018bac5eac0e91d1)
+## [v2.0.0-beta.29](https://github.com/marcantondahmen/automad/commit/5e6d78703e35536fb4773c88f9ce51bc11a25da2)
 
-Thu, 30 Apr 2026 10:23:59 +0200
+Fri, 8 May 2026 04:38:22 +0200
+
+### New Features
+
+- create cache directory if needed ([c5b673cb](https://github.com/marcantondahmen/automad/commit/c5b673cbb3df64988068ff8d34c51bf007e20a83))
+- improve invitation and account recovery flow ([3e12340f](https://github.com/marcantondahmen/automad/commit/3e12340f00c7b7bf125e64dbd9bdc640d005e654))
+- improve user invitation flow ([c32aa631](https://github.com/marcantondahmen/automad/commit/c32aa631b6e3e46bb591adb5599bfd61a2d87d25))
+- update design of configuration test emails ([77793120](https://github.com/marcantondahmen/automad/commit/7779312090ac8cad26368979d762915b2666a6b0))
+- update design of email templates ([52f316e1](https://github.com/marcantondahmen/automad/commit/52f316e130563dfbeca4f87eb933611079e53264))
+
+### Bugfixes
+
+- fix formatting of multiline messages that are sent via mail forms ([0d555e5e](https://github.com/marcantondahmen/automad/commit/0d555e5eea852b88240f5148aaecebc6a4916d99))
+- properly encode mailer dsn components ([4fb08ad5](https://github.com/marcantondahmen/automad/commit/4fb08ad55dd69865110b75b7db531bd4300492d1))
+
+## [v2.0.0-beta.28](https://github.com/marcantondahmen/automad/commit/a8d385b6fe4a97ae6014d7651b063df6cee7f126)
+
+Thu, 30 Apr 2026 10:30:28 +0200
 
 ### Bugfixes
 
