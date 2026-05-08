@@ -96,7 +96,7 @@ class Body {
 							font-weight: 400;
 							line-height: 1.5;
 							margin: 0;
-							padding: 32px 0;
+							padding: 0;
 							min-height: 100%;
 							width: 100%;
 						"
