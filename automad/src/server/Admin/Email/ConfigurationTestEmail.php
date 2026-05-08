@@ -59,7 +59,8 @@ class ConfigurationTestEmail {
 		return Body::render(
 			array(
 				Heading::render(Text::get('emailTestSuccessHeading')),
-				Paragraph::render(Text::get('emailTestSuccessText'))
+				Paragraph::render(Text::get('emailTestSuccessText')),
+				Paragraph::render(Text::get('emailAutomatic'))
 			)
 		);
 	}
