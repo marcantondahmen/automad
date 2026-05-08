@@ -35,6 +35,7 @@
 
 namespace Automad\Controllers\API;
 
+use Automad\Admin\Email\ConfigurationTestEmail;
 use Automad\API\Response;
 use Automad\Auth\Session;
 use Automad\Core\Cache;
@@ -123,7 +124,7 @@ class MailConfigController {
 		}
 
 		$Messenger = new Messenger();
-		$success = Mail::send($to, 'Automad Mail Config Test', '<h1>Success</h1>', null, $Messenger);
+		$success = Mail::send($to, Text::get('emailTestSuccessSubject'), ConfigurationTestEmail::render(), null, $Messenger);
 
 		if ($success) {
 			return $Response->setSuccess(Text::get('systemMailSendTestSuccess') . ' ' . $to);

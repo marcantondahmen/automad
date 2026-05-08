@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class App {
-	const VERSION = '2.0.0-beta.28';
+	const VERSION = '2.0.0-beta.29';
 
 	/**
 	 * Required PHP version.
@@ -94,7 +94,7 @@ class App {
 
 		define('AM_REQUEST', Request::page());
 
-		$this->runPermissionCheck();
+		$this->prepareCache();
 		$this->startSession();
 
 		$output = $this->render(AM_REQUEST);
@@ -109,7 +109,7 @@ class App {
 	}
 
 	/**
-	 *	Throw an AbortSignal exception.
+	 * Throw an AbortSignal exception.
 	 *
 	 * @param string $message
 	 * @param string $details
@@ -117,6 +117,23 @@ class App {
 	 */
 	public static function exit(string $message, string $details = '', int $code = 500): void {
 		throw new AbortSignal($message, $details, $code);
+	}
+
+	/**
+	 * Run a basic permission check on the cache directory.
+	 */
+	private function prepareCache(): void {
+		if (is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
+			return;
+		}
+
+		if (FileSystem::makeDir(AM_BASE_DIR . AM_DIR_CACHE)) {
+			if (is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
+				return;
+			}
+		}
+
+		App::exit('Permission denied', 'The "' . AM_DIR_CACHE . '" directory must be writable by the web server.');
 	}
 
 	/**
@@ -152,15 +169,6 @@ class App {
 					HTML
 				);
 			}
-		}
-	}
-
-	/**
-	 * Run a basic permission check on the cache directory.
-	 */
-	private function runPermissionCheck(): void {
-		if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
-			App::exit('Permission denied', 'The "' . AM_DIR_CACHE . '" directory must be writable by the web server.');
 		}
 	}
 

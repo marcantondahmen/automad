@@ -50,18 +50,10 @@ class Session {
 	const CSRF_TOKEN_KEY = 'csrf';
 	const DATA_KEY = 'data';
 	const I18N_LANG = 'lang';
-	const RESET_TOKEN_KEY = 'reset';
 	const TOTP_LOGIN_SECRET_KEY = 'totpLoginSecret';
 	const TOTP_LOGIN_USERNAME_KEY = 'totpLoginUsername';
 	const TOTP_SETUP_SECRET_KEY = 'totpSetupSecret';
 	const USERNAME_KEY = 'username';
-
-	/**
-	 * Clears the reset token hash
-	 */
-	public static function clearResetTokenHash(): void {
-		unset($_SESSION[self::RESET_TOKEN_KEY]);
-	}
 
 	/**
 	 * Get the CSRF token for the current session.
@@ -70,20 +62,6 @@ class Session {
 	 */
 	public static function getCsrfToken(): string {
 		return $_SESSION[self::CSRF_TOKEN_KEY] ?? self::createCsrfToken();
-	}
-
-	/**
-	 * Return the reset token hash for a given user.
-	 *
-	 * @param string $username
-	 * @return string the token hash
-	 */
-	public static function getResetTokenHash(string $username): string {
-		if (isset($_SESSION[self::RESET_TOKEN_KEY])) {
-			return $_SESSION[self::RESET_TOKEN_KEY][$username] ?? '';
-		}
-
-		return '';
 	}
 
 	/**
@@ -152,16 +130,6 @@ class Session {
 	public static function resetTotpVerification(): void {
 		unset($_SESSION[self::TOTP_LOGIN_SECRET_KEY]);
 		unset($_SESSION[self::TOTP_LOGIN_USERNAME_KEY]);
-	}
-
-	/**
-	 * Set the reset token hash for a given user.
-	 *
-	 * @param string $username
-	 * @param string $tokenHash
-	 */
-	public static function setResetTokenHash(string $username, string $tokenHash): void {
-		$_SESSION[self::RESET_TOKEN_KEY] = array($username => $tokenHash);
 	}
 
 	/**

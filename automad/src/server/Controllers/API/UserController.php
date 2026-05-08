@@ -37,6 +37,7 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Auth\LoginRateLimiter;
+use Automad\Auth\PasswordResetToken;
 use Automad\Auth\Session;
 use Automad\Auth\TOTP;
 use Automad\Auth\User;
@@ -55,70 +56,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class UserController {
-	/**
-	 * Reset a user password by email.
-	 *
-	 * @return Response the Response object
-	 */
-	public static function accountRecovery(): Response {
-		$Response = new Response();
-		$UserCollection = new UserCollection();
-		$Messenger = new Messenger();
-
-		// Only one field will be defined, so they can just be concatenated here.
-		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
-
-		$token = trim(Request::post('token'));
-		$newPassword1 = Request::post('password1');
-		$newPassword2 = Request::post('password2');
-
-		$User = $UserCollection->getUser($nameOrEmail);
-
-		if ($nameOrEmail && !$User) {
-			return $Response->setError(Text::get('userNotFoundError'));
-		}
-
-		if (!$User) {
-			return $Response->setData(array('state' => 'requestToken'));
-		}
-
-		$responseData = array('username' => $User->name);
-
-		if ($token && $newPassword1 && $newPassword2) {
-			if (!self::verifyPasswordRequirements($newPassword1)) {
-				$responseData['state'] = 'setPassword';
-
-				return $Response->setData($responseData)->setError(self::generatePasswordRequirementsError());
-			}
-
-			if ($User->verifyPasswordResetToken($token)) {
-				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
-					$responseData['state'] = 'success';
-
-					LoginRateLimiter::reset($User->name);
-
-					return $Response->setData($responseData);
-				}
-
-				$responseData['state'] = 'setPassword';
-
-				return $Response->setData($responseData)->setError($Messenger->getError());
-			}
-
-			$responseData['state'] = 'setPassword';
-
-			return $Response->setData($responseData)->setError(Text::get('passwordResetVerificationError'));
-		}
-
-		if ($User->sendPasswordResetToken($Messenger)) {
-			$responseData['state'] = 'setPassword';
-
-			return $Response->setData($responseData);
-		}
-
-		return $Response->setError($Messenger->getError());
-	}
-
 	/**
 	 * Change the password of the currently logged in user based on $_POST.
 	 *
@@ -177,6 +114,72 @@ class UserController {
 			if ($UserCollection->save($Messenger)) {
 				return $Response->setSuccess(Text::get('savedSuccess'));
 			}
+		}
+
+		return $Response->setError($Messenger->getError());
+	}
+
+	/**
+	 * Request a password reset token.
+	 *
+	 * @return Response the Response object
+	 */
+	public static function requestPasswordResetToken(): Response {
+		$Response = new Response();
+		$UserCollection = new UserCollection();
+		$Messenger = new Messenger();
+
+		// Only one field will be defined, so they can just be concatenated here.
+		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
+
+		$User = $UserCollection->getUser($nameOrEmail);
+
+		if (!$User) {
+			return $Response->setError(Text::get('userNotFoundError'));
+		}
+
+		if ($User->sendPasswordResetToken(Request::post('type'), $Messenger)) {
+			return $Response->setData(array('success' => true));
+		}
+
+		return $Response->setError($Messenger->getError());
+	}
+
+	/**
+	 * Reset a user password.
+	 *
+	 * @return Response the Response object
+	 */
+	public static function resetPassword(): Response {
+		$Response = new Response();
+		$UserCollection = new UserCollection();
+		$Messenger = new Messenger();
+		$token = trim(Request::post('token'));
+		$newPassword1 = Request::post('password1');
+		$newPassword2 = Request::post('password2');
+		$User = $UserCollection->getUser(Request::post('username'));
+
+		if (!$User) {
+			return $Response->setError(Text::get('userNotFoundError'));
+		}
+
+		if ($token && $newPassword1 && $newPassword2) {
+			if (!self::verifyPasswordRequirements($newPassword1)) {
+				return $Response->setError(self::generatePasswordRequirementsError());
+			}
+
+			if ($User->verifyPasswordResetToken($token)) {
+				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
+					LoginRateLimiter::reset($User->name);
+					PasswordResetToken::reset($User->name);
+
+					return $Response->setData(array('success' => true));
+				}
+
+				return $Response->setError($Messenger->getError());
+			}
+
+			return $Response->setData(array('invalid' => true));
 		}
 
 		return $Response->setError($Messenger->getError());

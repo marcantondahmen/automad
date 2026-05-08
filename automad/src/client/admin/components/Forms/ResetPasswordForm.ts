@@ -32,34 +32,67 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, getSearchParam, html, Route } from '@/admin/core';
+import {
+	App,
+	Attr,
+	CSS,
+	getSearchParam,
+	html,
+	isInvite,
+	Route,
+} from '@/admin/core';
 import { KeyValueMap } from '@/admin/types';
 import { FormComponent } from './Form';
 
+const text = () => {
+	return isInvite()
+		? {
+				newPasswordHeading: App.text(
+					'completeAccountSetupNewPasswordHeading'
+				),
+				newPasswordText: App.text(
+					'completeAccountSetupNewPasswordText'
+				),
+				successHeading: App.text('completeAccountSetupSuccessHeading'),
+				successText: App.text('completeAccountSetupSuccessText'),
+				invalidHeading: App.text('completeAccountSetupInvalidHeading'),
+				invalidText: App.text('completeAccountSetupInvalidText'),
+				invalidButton: App.text('completeAccountSetupInvalidButton'),
+			}
+		: {
+				newPasswordHeading: App.text(
+					'accountRecoveryNewPasswordHeading'
+				),
+				newPasswordText: App.text('accountRecoveryNewPasswordText'),
+				successHeading: App.text('accountRecoverySuccessHeading'),
+				successText: App.text('accountRecoverySuccessText'),
+				invalidHeading: App.text('accountRecoveryInvalidHeading'),
+				invalidText: App.text('accountRecoveryInvalidText'),
+				invalidButton: App.text('accountRecoveryInvalidButton'),
+			};
+};
+
+const cancel = () => {
+	return isInvite()
+		? ''
+		: html`
+				<p>
+					<am-link
+						class="${CSS.link}"
+						${Attr.target}="${Route.login}"
+					>
+						${App.text('accountRecoveryCancel')}
+					</am-link>
+				</p>
+			`;
+};
+
 /**
- * The delete users form.
+ * The password reset form.
  *
  * @extends FormComponent
  */
-export class AccountRecoveryFormComponent extends FormComponent {
-	/**
-	 * The states object maps states to render methods.
-	 */
-	private get states(): KeyValueMap {
-		return {
-			success: this.renderSuccess,
-			setPassword: this.renderSetPassword,
-			requestToken: this.renderRequestToken,
-		};
-	}
-
-	/**
-	 * The form inits itself when created.
-	 */
-	protected get initSelf(): boolean {
-		return true;
-	}
-
+export class ResetPasswordFormComponent extends FormComponent {
 	/**
 	 * Process the response that is received after submitting the form.
 	 *
@@ -67,77 +100,27 @@ export class AccountRecoveryFormComponent extends FormComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		if (!response.data) {
-			return;
+		if (response.data?.success) {
+			this.renderSuccess();
 		}
 
-		const data = response.data;
-
-		if (data.state && Object.keys(this.states).includes(data.state)) {
-			this.states[data.state].apply(this, [data]);
+		if (response.data?.invalid) {
+			this.renderInvalid();
 		}
 	}
 
 	/**
-	 * Render the token request form.
-	 *
-	 * @param data
+	 * Render the initial form.
 	 */
-	private renderRequestToken(data: KeyValueMap): void {
+	protected init(): void {
 		this.innerHTML = html`
-			<h2>${App.text('accountRecoveryStartHeading')}</h2>
+			<h2>${text().newPasswordHeading}</h2>
 			<am-form-error></am-form-error>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('accountRecoveryStartText')}
+					${text().newPasswordText}
 				</div>
 				<div class="${CSS.cardForm}">
-					<input
-						type="text"
-						class="${CSS.input}"
-						name="name-or-email"
-						value="$${getSearchParam('username')}"
-						placeholder="${App.text('usernameOrEmail')}"
-					/>
-					<div class="${CSS.cardFormButtons}">
-						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
-							${App.text('accountRecoveryStartButton')}
-						</am-submit>
-					</div>
-				</div>
-			</div>
-			<p>
-				<am-link class="${CSS.link}" ${Attr.target}="${Route.login}">
-					${App.text('accountRecoveryCancel')}
-				</am-link>
-			</p>
-		`;
-	}
-
-	/**
-	 * Render the password form.
-	 *
-	 * @param data
-	 */
-	private renderSetPassword(data: KeyValueMap): void {
-		this.innerHTML = html`
-			<h2>${App.text('accountRecoveryNewPasswordHeading')}</h2>
-			<am-form-error></am-form-error>
-			<div class="${CSS.card}">
-				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('accountRecoveryNewPasswordText')}
-				</div>
-				<div class="${CSS.cardForm}">
-					<input
-						type="text"
-						class="${CSS.input}"
-						name="token"
-						autocomplete="reset-token"
-						placeholder="${App.text('passwordResetToken')}"
-						${Attr.tooltip}="${App.text('passwordResetToken')}"
-						${Attr.tooltipOptions}="placement: top"
-						required
-					/>
 					<input
 						type="password"
 						class="${CSS.input}"
@@ -158,11 +141,6 @@ export class AccountRecoveryFormComponent extends FormComponent {
 						${Attr.tooltipOptions}="placement: top"
 						required
 					/>
-					<input
-						type="hidden"
-						name="username"
-						value="${data.username}"
-					/>
 					<div class="${CSS.cardFormButtons}">
 						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
 							${App.text('passwordResetSave')}
@@ -170,25 +148,30 @@ export class AccountRecoveryFormComponent extends FormComponent {
 					</div>
 				</div>
 			</div>
-			<p>
-				<am-link class="${CSS.link}" ${Attr.target}="${Route.login}">
-					${App.text('accountRecoveryCancel')}
-				</am-link>
-			</p>
+			${cancel()}
+			<input
+				type="hidden"
+				name="token"
+				value="${getSearchParam('token')}"
+				required
+			/>
+			<input
+				type="hidden"
+				name="username"
+				value="${getSearchParam('username')}"
+			/>
 		`;
 	}
 
 	/**
 	 * Render the success message.
-	 *
-	 * @param data
 	 */
-	private renderSuccess(data: KeyValueMap): void {
+	private renderSuccess(): void {
 		this.innerHTML = html`
-			<h2>${App.text('accountRecoverySuccessHeading')}</h2>
+			<h2>${text().successHeading}</h2>
 			<div class="${CSS.card}">
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${App.text('accountRecoverySuccessText')}
+					${text().successText}
 				</div>
 				<div class="${CSS.cardForm}">
 					<am-link
@@ -201,6 +184,28 @@ export class AccountRecoveryFormComponent extends FormComponent {
 			</div>
 		`;
 	}
+
+	/**
+	 * Render the invalid token message.
+	 */
+	private renderInvalid(): void {
+		this.innerHTML = html`
+			<h2>${text().invalidHeading}</h2>
+			<div class="${CSS.card}">
+				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
+					${text().invalidText}
+				</div>
+				<div class="${CSS.cardForm}">
+					<am-link
+						class="${CSS.button} ${CSS.buttonPrimary}"
+						${Attr.target}="${Route.token}"
+					>
+						${text().invalidButton}
+					</am-link>
+				</div>
+			</div>
+		`;
+	}
 }
 
-customElements.define('am-account-recovery-form', AccountRecoveryFormComponent);
+customElements.define('am-reset-password-form', ResetPasswordFormComponent);

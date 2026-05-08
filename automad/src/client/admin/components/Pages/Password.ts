@@ -37,22 +37,25 @@ import {
 	Attr,
 	getTagFromRoute,
 	html,
+	isInvite,
 	Route,
 	UserController,
 } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
- * The password reset view.
+ * The password create/reset view.
  *
  * @extends BaseCenteredLayoutComponent
  */
-export class AccountRecoveryComponent extends BaseCenteredLayoutComponent {
+export class PasswordComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
 	protected get pageTitle(): string {
-		return App.text('accountRecovery');
+		return isInvite()
+			? App.text('completeAccountSetup')
+			: App.text('accountRecovery');
 	}
 
 	/**
@@ -62,14 +65,11 @@ export class AccountRecoveryComponent extends BaseCenteredLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<am-account-recovery-form
-				${Attr.api}="${UserController.accountRecovery}"
-			></am-account-recovery-form>
+			<am-reset-password-form
+				${Attr.api}="${UserController.resetPassword}"
+			></am-reset-password-form>
 		`;
 	}
 }
 
-customElements.define(
-	getTagFromRoute(Route.accountrecovery),
-	AccountRecoveryComponent
-);
+customElements.define(getTagFromRoute(Route.password), PasswordComponent);

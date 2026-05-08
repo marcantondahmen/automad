@@ -42,6 +42,8 @@ use Automad\Models\MailConfig;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\File;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,6 +55,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Mail {
+	const LOGO = AM_BASE_DIR . '/automad/assets/logo-email.png';
+	const LOGO_CID = 'logo@automad';
+
 	/**
 	 * Save status to avoid a second trigger for example in pagelists or teaser snippets.
 	 */
@@ -71,21 +76,30 @@ class Mail {
 	public static function send(string $to, string $subject, string $message, ?string $replyTo = null, ?Messenger $Messenger = null): bool {
 		$MailConfig = new MailConfig();
 
+		$smtpUsername = rawurlencode($MailConfig->smtpUsername);
+		$smtpPassword = rawurlencode($MailConfig->smtpPassword);
+
 		$dsn = $MailConfig->transport === 'sendmail'
 			? 'sendmail://default'
-			: "smtp://{$MailConfig->smtpUsername}:{$MailConfig->smtpPassword}@{$MailConfig->smtpServer}:{$MailConfig->smtpPort}";
+			: "smtp://{$smtpUsername}:{$smtpPassword}@{$MailConfig->smtpServer}:{$MailConfig->smtpPort}";
 
 		$transport = Transport::fromDsn($dsn);
 		$mailer = new Mailer($transport);
 
 		$email = (new Email())
-			->from($MailConfig->from)
+			->from("Automad <$MailConfig->from>")
 			->to($to)
 			->subject($subject)
 			->html($message);
 
 		if ($replyTo) {
 			$email->replyTo($replyTo);
+		}
+
+		if (preg_match('/src="cid:' . self::LOGO_CID . '"/', $message)) {
+			$part = new DataPart(new File(self::LOGO));
+			$part->setContentId(self::LOGO_CID);
+			$email->addPart($part->asInline());
 		}
 
 		try {
@@ -144,7 +158,7 @@ class Mail {
 
 		// Prepare mail.
 		$subject = $Automad->Shared->get(Fields::SITENAME) . ': ' . strip_tags($_POST[$subject]);
-		$message = strip_tags($_POST[$message]);
+		$message = nl2br(strip_tags($_POST[$message]));
 
 		// Note that "$from" means in this context "reply to".
 		if (self::send($data['to'], $subject, $message, $_POST[$from])) {

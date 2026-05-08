@@ -33,48 +33,46 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Admin\Templates;
+namespace Automad\Admin\Email;
 
+use Automad\Admin\Email\Components\Body;
+use Automad\Admin\Email\Components\Button;
+use Automad\Admin\Email\Components\Heading;
+use Automad\Admin\Email\Components\Paragraph;
 use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A password reset email body.
+ * An account recovery email template.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class PasswordResetEmail extends AbstractEmailBody {
+class AccountRecoveryEmail {
 	/**
-	 * Render a password reset email body.
+	 * Render an account recovery email body.
 	 *
-	 * @param string $website
 	 * @param string $username
 	 * @param string $token
-	 * @return string The rendered password reset email body
+	 * @return string The rendered email body
 	 */
-	public static function render(string $website, string $username, string $token): string {
-		$h1Style = self::$h1Style;
-		$pStyle = self::$paragraphStyle;
-		$codeStyle = self::$codeStyle;
+	public static function render(string $username, string $token): string {
 		$Text = Text::getObject();
-		$textTop = str_replace('{}', "<b>$website</b>", Text::get('emailResetPasswordTextTop'));
+		$website = $_SERVER['SERVER_NAME'] ?? AM_BASE_URL;
 
-		$content = <<< HTML
-			<h1 $h1Style>$Text->emailHello $username,</h1>
-			<p $pStyle>
-				$textTop
-			</p>
-			<p $codeStyle>
-				$token
-			</p>
-			<p $pStyle>
-				$Text->emailResetPasswordTextBottom
-			</p>
-		HTML;
-
-		return self::body($content);
+		return Body::render(
+			array(
+				Heading::render("$Text->emailHello $username"),
+				Paragraph::render(str_replace('{}', "<b>$website</b>", Text::get('emailAccountRecoveryTextTop'))),
+				Button::render(
+					$Text->emailAccountRecoveryButton,
+					AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/password?username=' . urlencode($username) . '&token=' . urlencode($token)
+				),
+				Paragraph::render($Text->emailAccountRecoveryTextBottom),
+				Paragraph::render($Text->emailAutomatic)
+			)
+		);
 	}
 }

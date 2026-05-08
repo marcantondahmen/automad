@@ -101,10 +101,7 @@ export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 					</am-submit>
 				</am-form>
 				<br />
-				<am-link
-					${Attr.target}="${Route.accountrecovery}"
-					class="${CSS.link}"
-				>
+				<am-link ${Attr.target}="${Route.token}" class="${CSS.link}">
 					${App.text('troubleSigningIn')}
 				</am-link>
 			</p>

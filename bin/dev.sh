@@ -17,7 +17,7 @@ stty -echoctl
 echo -e "[Prebuild] Running prebuild tasks ..."
 bash bin/prebuild.sh
 
-echo -e "[PHP] starting server ...\n"
+echo -e "[PHP] starting server ..."
 bash bin/server.sh start
 
 echo -e "\n[Esbuild] starting esbuild ...\n"

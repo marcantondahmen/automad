@@ -35,7 +35,8 @@
 
 namespace Automad\Auth;
 
-use Automad\Admin\Templates\PasswordResetEmail;
+use Automad\Admin\Email\AccountRecoveryEmail;
+use Automad\Admin\Email\AccountSetupEmail;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
 use Automad\Models\UserCollection;
@@ -193,18 +194,17 @@ class User {
 			return false;
 		}
 
-		Session::clearResetTokenHash();
-
 		return true;
 	}
 
 	/**
 	 * Send password reset token and store it in session.
 	 *
+	 * @param string $type
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function sendPasswordResetToken(Messenger $Messenger): bool {
+	public function sendPasswordResetToken(string $type, Messenger $Messenger): bool {
 		$email = $this->email;
 
 		if (!$email) {
@@ -213,13 +213,17 @@ class User {
 			return false;
 		}
 
-		$token = strtoupper(substr(hash('sha256', microtime() . $this->getPasswordHash()), 0, 16));
-		$tokenHash = password_hash($token, PASSWORD_DEFAULT);
-		Session::setResetTokenHash($this->name, $tokenHash);
+		$token = PasswordResetToken::generate();
 
-		$website = $_SERVER['SERVER_NAME'] ?? '' . AM_BASE_URL;
-		$subject = 'Automad: ' . Text::get('emailResetPasswordSubject');
-		$message = PasswordResetEmail::render($website, $this->name, $token);
+		new PasswordResetToken($this->name, $token);
+
+		$isInvitation = $type === 'invitation';
+
+		$subject = $isInvitation ? Text::get('emailAccountSetupSubject') : Text::get('emailAccountRecoverySubject');
+
+		$message = $isInvitation ?
+			AccountSetupEmail::render($this->name, $token) :
+			AccountRecoveryEmail::render($this->name, $token);
 
 		return Mail::send($email, $subject, $message, null, $Messenger);
 	}
@@ -272,19 +276,13 @@ class User {
 	}
 
 	/**
-	 * Verify if the passed username/toke combination matches a token hash in the session data array.
+	 * Verify if the passed username/token combination matches a token hash in the session data array.
 	 *
 	 * @param string $token
 	 * @return bool true if verified
 	 */
 	public function verifyPasswordResetToken(string $token): bool {
-		$tokenHash = Session::getResetTokenHash($this->name);
-
-		if ($tokenHash) {
-			return password_verify($token, $tokenHash);
-		}
-
-		return false;
+		return PasswordResetToken::verify($this->name, $token);
 	}
 
 	/**
