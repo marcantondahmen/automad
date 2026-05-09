@@ -26,46 +26,57 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import { App, create, CSS, EventName, getPageURL } from '@/admin/core';
-import { BaseComponent } from '@/admin/components/Base';
+import { create, InPageController } from '@/common';
+import { inPageRequest } from '../request';
+import { saveScrollPosition } from '../sessionStore';
+import { BaseInPageComponent } from './BaseInPageComponent';
 
 /**
- * A private indicator badge for pages.
- *
- * @extends BaseComponent
+ * The InPage edit toggle component.
  */
-class PrivateIndicatorComponent extends BaseComponent {
+export class InPageToggleComponent extends BaseInPageComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback(): void {
-		this.classList.add(CSS.privacyIndicator);
+	connectedCallback() {
+		const api = this.getAttr('api');
+		const csrf = this.getAttr('csrf');
+		const enabled = parseInt(this.getAttr('editing')) === 1;
 
-		this.listen(window, EventName.appStateChange, this.render.bind(this));
+		const toggle = async (): Promise<void> => {
+			const data = await inPageRequest(
+				api,
+				InPageController.toggle,
+				csrf,
+				{
+					enabled: !enabled,
+				}
+			);
 
-		this.render();
-	}
+			if (data.code != 200) {
+				return;
+			}
 
-	/**
-	 * Render the indicator.
-	 */
-	private render(): void {
-		const url = getPageURL();
+			saveScrollPosition();
 
-		this.innerHTML = '';
+			window.location.reload();
+		};
 
-		if (App.pages[url]?.private) {
-			create('i', ['bi', 'bi-eye-slash-fill'], {}, this);
-		} else {
-			create('i', ['bi', 'bi-eye'], {}, this);
-		}
+		create(
+			'i',
+			['bi', `bi-toggle-${enabled ? 'on' : 'off'}`],
+			{},
+			create('span', [], {}, this)
+		);
+
+		this.addEventListener('click', toggle.bind(this));
 	}
 }
 
-customElements.define('am-private-indicator', PrivateIndicatorComponent);
+customElements.define('am-inpage-toggle', InPageToggleComponent);

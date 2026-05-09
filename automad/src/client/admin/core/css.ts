@@ -284,6 +284,7 @@ export const enum CSS {
 
 	menu = 'am-c-menu',
 	menuItem = 'am-c-menu__item',
+	menuItemIcon = 'am-c-menu__item--icon',
 
 	modal = 'am-c-modal',
 	modalDialog = 'am-c-modal__dialog',
@@ -336,8 +337,6 @@ export const enum CSS {
 	platformSelectOption = 'am-f-platform-select__option',
 	platformSelectIcon = 'am-f-platform-select__icon',
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
-
-	privacyIndicator = 'am-c-privacy-indicator',
 
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',

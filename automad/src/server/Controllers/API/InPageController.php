@@ -36,6 +36,7 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Auth\Session;
 use Automad\Core\Automad;
 use Automad\Core\Request;
 use Automad\Core\Text;
@@ -114,6 +115,19 @@ class InPageController {
 				return $Response->setRedirect(AM_BASE_INDEX . $Page->origUrl);
 			}
 		}
+
+		return $Response;
+	}
+
+	/**
+	 * Toggle in-page editing for current session.
+	 *
+	 * @return Response
+	 */
+	public static function toggle(): Response {
+		$Response = new Response();
+
+		Session::toggleInPageEditing(Request::post('enabled'));
 
 		return $Response;
 	}

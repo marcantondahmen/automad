@@ -60,7 +60,7 @@ import { ModalComponent } from './Modal/Modal';
 const renderLabelFunction: SortableTreeRenderLabelFunction = (
 	data: SortableTreeKeyValue
 ): string => {
-	const icon = data.private ? 'eye-slash-fill' : 'folder2';
+	const icon = data.private ? 'ban-fill' : 'folder2';
 
 	return html`
 		<label class="${CSS.navItem}">

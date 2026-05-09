@@ -77,6 +77,7 @@ export const enum ImageController {
 export const enum InPageController {
 	edit = 'InPageController::edit',
 	publish = 'InPageController::publish',
+	toggle = 'InPageController::toggle',
 }
 
 export const enum MailConfigController {

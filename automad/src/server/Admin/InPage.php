@@ -100,7 +100,10 @@ class InPage {
 
 			$str = $this->injectAssets($str);
 			$str = $this->injectDock($str);
-			$str = $this->processEditButtons($str);
+
+			if (Session::inPageEditingIsEnabled()) {
+				$str = $this->processEditButtons($str);
+			}
 		}
 
 		return $str;
@@ -127,8 +130,8 @@ class InPage {
 			return $value;
 		}
 
-		// Only inject button if $key is no runtime var and a user is logged in.
-		if (preg_match('/^(\+|\w)/', $field) && Session::getUsername()) {
+		// Only inject button if $key is no runtime var, a user is logged in and has editing enabled.
+		if (preg_match('/^(\+|\w)/', $field) && Session::inPageEditingIsEnabled()) {
 			$data = base64_encode(
 				strval(
 					json_encode(array(
@@ -171,17 +174,21 @@ class InPage {
 	 */
 	private function injectDock(string $str): string {
 		$state = $this->Automad->getPage(AM_REQUEST)?->get(Fields::PUBLICATION_STATE) ?? '';
+		$editing = Session::inPageEditingIsEnabled();
 		$urlDashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		$urlApi = AM_BASE_INDEX . RequestHandler::API_BASE;
 		$urlPage = AM_REQUEST;
 		$labelKeys = array(
 			'fieldsSettings',
 			'fieldsContent',
+			'fieldsCustomizations',
 			'uploadedFiles',
-			'publish'
+			'publish',
+			'inPageEditEnable',
+			'inPageEditDisable'
 		);
 
-		$labels = urlencode(
+		$labels = rawurlencode(
 			strval(
 				json_encode(
 					array_reduce($labelKeys, function ($result, $key): array {
@@ -203,6 +210,7 @@ class InPage {
 				url="$urlPage"
 				state="$state"
 				labels="$labels"
+				editing="$editing"
 			></am-inpage-dock>
 			HTML;
 
@@ -235,7 +243,6 @@ class InPage {
 			$value = $this->processEditButtons($matches[2]);
 			$data = json_decode(base64_decode($base64Data));
 			$label = Text::get('edit');
-			$placeholder = !$value ? 'placeholder="' . Text::get('inPagePlaceholder') . '"' : '';
 
 			return <<< HTML
 				<am-inpage-edit
@@ -244,7 +251,6 @@ class InPage {
 					field="{$data->field}"
 					page="{$data->page}"
 					label="$label"
-					$placeholder
 				>$value</am-inpage-edit>
 				HTML;
 		}, $str) ?? '';

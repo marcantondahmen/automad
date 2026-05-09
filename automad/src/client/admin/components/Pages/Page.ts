@@ -251,9 +251,13 @@ const renderMenu = (): string => {
 					</am-dropdown>
 				</am-switcher>
 				<am-filter placeholder="filterContent"></am-filter>
-				<am-private-indicator
-					class="${CSS.displaySmallNone}"
-				></am-private-indicator>
+				<a
+					href="${App.baseIndex}${getPageURL()}"
+					class="${CSS.displaySmallNone} ${CSS.menuItem} ${CSS.menuItemIcon}"
+					${Attr.tooltip}="${App.text('inPageEdit')}"
+				>
+					<i class="bi bi-eye"></i>
+				</a>
 				${renderDropdown()}
 			</div>
 		</section>

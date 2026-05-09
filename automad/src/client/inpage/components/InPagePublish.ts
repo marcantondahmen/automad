@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { InPageController } from '@/common';
+import { create, InPageController } from '@/common';
 import { inPageRequest } from '../request';
 import { saveScrollPosition } from '../sessionStore';
 import { BaseInPageComponent } from './BaseInPageComponent';
@@ -75,7 +75,12 @@ export class InPagePublishComponent extends BaseInPageComponent {
 			window.location.reload();
 		};
 
-		this.textContent = this.getAttr('label');
+		create(
+			'i',
+			['bi', 'bi-check-circle'],
+			{},
+			create('span', [], {}, this)
+		);
 
 		if (state === 'draft') {
 			this.addEventListener('click', publish);

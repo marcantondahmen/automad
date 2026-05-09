@@ -50,6 +50,7 @@ class Session {
 	const CSRF_TOKEN_KEY = 'csrf';
 	const DATA_KEY = 'data';
 	const I18N_LANG = 'lang';
+	const IN_PAGE_EDITING_ENABLED = 'inPageEditingEnabled';
 	const TOTP_LOGIN_SECRET_KEY = 'totpLoginSecret';
 	const TOTP_LOGIN_USERNAME_KEY = 'totpLoginUsername';
 	const TOTP_SETUP_SECRET_KEY = 'totpSetupSecret';
@@ -71,6 +72,15 @@ class Session {
 	 */
 	public static function getUsername(): string {
 		return $_SESSION[self::USERNAME_KEY] ?? '';
+	}
+
+	/**
+	 * Check whether inPageEditing is enabled.
+	 *
+	 * @return bool
+	 */
+	public static function inPageEditingIsEnabled(): bool {
+		return self::getUsername() && ($_SESSION[self::IN_PAGE_EDITING_ENABLED] ?? 0);
 	}
 
 	/**
@@ -130,6 +140,15 @@ class Session {
 	public static function resetTotpVerification(): void {
 		unset($_SESSION[self::TOTP_LOGIN_SECRET_KEY]);
 		unset($_SESSION[self::TOTP_LOGIN_USERNAME_KEY]);
+	}
+
+	/**
+	 * Toggle inPageEditing in session.
+	 *
+	 * @param bool $isEnabled
+	 */
+	public static function toggleInPageEditing(bool $isEnabled): void {
+		$_SESSION[self::IN_PAGE_EDITING_ENABLED] = $isEnabled;
 	}
 
 	/**

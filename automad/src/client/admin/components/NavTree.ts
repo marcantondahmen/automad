@@ -97,7 +97,7 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 			: App.system.i18n && data.parentUrl === '/'
 				? 'translate'
 				: data.private
-					? 'eye-slash-fill'
+					? 'ban-fill'
 					: 'file-earmark-text';
 
 	const titleBinding = active
