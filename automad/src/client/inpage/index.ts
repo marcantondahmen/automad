@@ -40,3 +40,4 @@ import './styles/index.less';
 import('./components/InPageDock');
 import('./components/InPageEdit');
 import('./components/InPagePublish');
+import('./components/InPageToggle');

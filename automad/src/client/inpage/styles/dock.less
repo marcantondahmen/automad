@@ -61,7 +61,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 18px;
+		width: 22px;
 		color: @am-inpage-color-muted;
 		cursor: grab;
 
@@ -78,6 +78,7 @@
 		color: @am-inpage-color;
 		background-color: transparent;
 		transition: color 0.2s;
+		cursor: pointer;
 
 		& .bi {
 			font-size: 21px;
@@ -97,6 +98,7 @@
 			font-size: 12px;
 			font-weight: 560;
 			line-height: 20px;
+			white-space: nowrap;
 			color: @am-inpage-color;
 			border-radius: 4px;
 			pointer-events: none;
@@ -107,6 +109,32 @@
 		&:hover:before {
 			opacity: 1;
 		}
+
+		&[disabled] {
+			color: @am-inpage-color-muted;
+			cursor: not-allowed;
+		}
+
+		&--toggle-highlight {
+			position: relative;
+
+			&:after {
+				content: '';
+				position: absolute;
+				z-index: -1;
+				inset: 11px 5px 12px 5px;
+				border-radius: 20px;
+				background-color: hsl(214 100% 58%);
+				mix-blend-mode: screen;
+				animation: 1.15s ease-in-out alternate infinite
+					dock-toggle-highlight;
+			}
+		}
+	}
+
+	& &__separator {
+		margin: 0 6px;
+		border-left: @am-inpage-border;
 	}
 
 	&__logo {
@@ -125,5 +153,15 @@
 			color: inherit;
 			transform: scale(0.99);
 		}
+	}
+}
+
+@keyframes dock-toggle-highlight {
+	0% {
+		transform: scale(0.95);
+	}
+
+	100% {
+		transform: scale(1.05);
 	}
 }

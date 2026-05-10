@@ -1,5 +1,6 @@
 /automad/legacy
 /automad/src/client/blocks/legacy
+/automad/tests/main/config
 /lib/vendor
 /packages
 /pages

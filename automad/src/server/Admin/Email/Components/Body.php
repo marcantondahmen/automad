@@ -85,6 +85,7 @@ class Body {
 						background-color: #101113 !important; 
 						color: #fafbfd !important;
 						margin: 0;
+						padding: 0;
 					"
 				>
 					<div
@@ -147,7 +148,7 @@ class Body {
 											style="
 												color: #5a5b5e;
 												font-weight: normal;
-												padding: 16px 24px 16px 24px;
+												padding: 16px 24px 24px 24px;
 											"
 										>
 											Automad on $website

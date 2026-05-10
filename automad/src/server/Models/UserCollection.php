@@ -54,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class UserCollection {
-	const FILE_ACCOUNTS = AM_BASE_DIR . '/config/accounts.php';
+	const FILE_ACCOUNTS = AM_FILE_ACCOUNTS;
 	const VALID_EMAIL_REGEX = '/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/';
 	const VALID_USERNAME_REGEX = '/^[a-z0-9][a-z0-9_\-]+[a-z0-9]$/s';
 

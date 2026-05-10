@@ -53,14 +53,14 @@ export class InPageDockComponent extends BaseInPageComponent {
 	connectedCallback(): void {
 		this.classList.add('am-inpage-dock');
 
-		restoreScrollPosition();
-
 		const csrf = this.getAttr('csrf');
 		const api = this.getAttr('api');
 		const dashboard = this.getAttr('dashboard');
 		const url = this.getAttr('url');
 		const state = this.getAttr('state');
 		const labels = JSON.parse(decodeURIComponent(this.getAttr('labels')));
+		const editing = this.getAttr('editing');
+		const editingEnabled = parseInt(editing) === 1;
 
 		const container = create(
 			'div',
@@ -78,6 +78,8 @@ export class InPageDockComponent extends BaseInPageComponent {
 		);
 
 		this.initDrag(container, handle);
+
+		create('span', ['am-inpage-dock__separator'], {}, container);
 
 		create(
 			'div',
@@ -115,14 +117,44 @@ export class InPageDockComponent extends BaseInPageComponent {
 
 		createPageLink('ui-checks', Section.settings, labels.fieldsSettings);
 		createPageLink('body-text', Section.text, labels.fieldsContent);
+		createPageLink(
+			'transparency',
+			Section.customizations,
+			labels.fieldsCustomizations
+		);
 		createPageLink('grid', Section.files, labels.uploadedFiles);
+
+		create('span', ['am-inpage-dock__separator'], {}, container);
 
 		create(
 			'am-inpage-publish',
-			[],
-			{ state, url, api, csrf, label: labels.publish },
+			['am-inpage-dock__item'],
+			{ state, url, api, csrf, 'data-tooltip': labels.publish },
 			container
 		);
+
+		create(
+			'am-inpage-toggle',
+			[
+				'am-inpage-dock__item',
+				...(editingEnabled
+					? []
+					: ['am-inpage-dock__item--toggle-highlight']),
+			],
+			{
+				api,
+				csrf,
+				editing,
+				'data-tooltip': editingEnabled
+					? labels.inPageEditDisable
+					: labels.inPageEditEnable,
+			},
+			container
+		);
+
+		setTimeout(() => {
+			restoreScrollPosition();
+		}, 0);
 	}
 
 	/**

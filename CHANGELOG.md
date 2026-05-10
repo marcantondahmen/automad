@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-beta.30](https://github.com/marcantondahmen/automad/commit/8b9df8deefd967bb51ae295f9d6f33c838cb0bfa)
+## [v2.0.0-beta.31](https://github.com/marcantondahmen/automad/commit/a7c4b9459ef02cff4ae0f6d4ca6e2349f438f1a8)
 
-Fri, 8 May 2026 12:27:19 +0200
+Sun, 10 May 2026 12:28:25 +0200
+
+### New Features
+
+- add option to disable in-page edit mode in page previews ([644c5aeab](https://github.com/marcantondahmen/automad/commit/644c5aeabfc56952f0a00c491453cbaae1f3a4c3))
+
+### Bugfixes
+
+- fix email template styling ([99736f93b](https://github.com/marcantondahmen/automad/commit/99736f93be5883ef8a788e27f4efc92167e438ad))
+
+## [v2.0.0-beta.30](https://github.com/marcantondahmen/automad/commit/49b7361b10dcfe671798b826933bcb8c76a7c6fd)
+
+Fri, 8 May 2026 12:29:17 +0200
 
 ### Bugfixes
 
