@@ -135,7 +135,12 @@ export class InPageDockComponent extends BaseInPageComponent {
 
 		create(
 			'am-inpage-toggle',
-			['am-inpage-dock__item', 'am-inpage-dock__item--toggle-highlight'],
+			[
+				'am-inpage-dock__item',
+				...(editingEnabled
+					? []
+					: ['am-inpage-dock__item--toggle-highlight']),
+			],
 			{
 				api,
 				csrf,

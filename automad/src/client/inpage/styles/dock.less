@@ -122,12 +122,11 @@
 				content: '';
 				position: absolute;
 				z-index: -1;
-				inset: 9px 2px 10px 2px;
+				inset: 12px 6px 13px 6px;
 				border-radius: 20px;
-				border: 2px solid hsl(214 100% 64%);
-				background-color: hsl(214 100% 64% / 0.64);
-				mix-blend-mode: hard-light;
-				animation: 1.75s ease-in-out alternate infinite
+				background-color: hsl(214 100% 58%);
+				mix-blend-mode: screen;
+				animation: 1.15s ease-in-out alternate infinite
 					dock-toggle-highlight;
 			}
 		}
@@ -159,10 +158,10 @@
 
 @keyframes dock-toggle-highlight {
 	0% {
-		opacity: 0.6;
+		transform: scale(1);
 	}
 
 	100% {
-		opacity: 1;
+		transform: scale(1.1);
 	}
 }
