@@ -26,7 +26,8 @@ class ViewTest extends TestCase {
 				dashboard="/index.php/dashboard"
 				url="/page"
 				state="draft"
-				labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22publish%22%3A%22Publish%22%7D"
+				labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22fieldsCustomizations%22%3A%22Customizations%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22publish%22%3A%22Publish%22%2C%22inPageEditEnable%22%3A%22Enable%20Editing%22%2C%22inPageEditDisable%22%3A%22Disable%20Editing%22%7D"
+				editing="1"
 			></am-inpage-dock>
 			HTML;
 
@@ -244,6 +245,7 @@ class ViewTest extends TestCase {
 	#[DataProvider('dataForTestInPageRenderIsEqual')]
 	public function testInPageRenderIsEqual($template, $expected) {
 		$_SESSION['username'] = 'test';
+		$_SESSION[Session::IN_PAGE_EDITING_ENABLED] = 1;
 
 		$Mock = new Mock();
 		$View = new View($Mock->createAutomad($template));
