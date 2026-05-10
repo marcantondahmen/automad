@@ -158,6 +158,7 @@ class Config {
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE
+		self::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 		self::set('AM_FILE_UI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
 		self::set(
 			'AM_ALLOWED_FILE_TYPES',

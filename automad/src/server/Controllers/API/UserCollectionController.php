@@ -36,7 +36,6 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\App;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
@@ -58,11 +57,11 @@ class UserCollectionController {
 	 * @return Response the response object
 	 */
 	public static function createFirstUser(): Response {
-		if (is_readable(UserCollection::FILE_ACCOUNTS)) {
-			App::exit('Another user has been created already', '', 403);
-		}
-
 		$Response = new Response();
+
+		if (is_readable(UserCollection::FILE_ACCOUNTS)) {
+			return $Response->setError('Another user has been created already')->setCode(403);
+		}
 
 		if (empty($_POST)) {
 			return $Response;
