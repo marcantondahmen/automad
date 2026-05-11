@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.31](https://github.com/marcantondahmen/automad/commit/a7c4b9459ef02cff4ae0f6d4ca6e2349f438f1a8)
+## [v2.0.0-beta.32](https://github.com/marcantondahmen/automad/commit/8713cccebb050201735f8cf91d8e6d794300466f)
 
-Sun, 10 May 2026 12:28:25 +0200
+Mon, 11 May 2026 11:40:57 +0200
+
+### Bugfixes
+
+- fix dashboard navigation being locked when api request has failed due to bad connection ([a78951362](https://github.com/marcantondahmen/automad/commit/a789513622579b9183d61e0020e97d296c778a55))
+
+## [v2.0.0-beta.31](https://github.com/marcantondahmen/automad/commit/c7bbdb71cd2b384dd258035392869077ff9b4f55)
+
+Sun, 10 May 2026 12:32:26 +0200
 
 ### New Features
 
