@@ -388,13 +388,11 @@ export class FormComponent extends BaseComponent {
 					if (this.hasAttribute(Attr.event)) {
 						fire(this.getAttribute(Attr.event));
 					}
-
-					App.removeNavigationLock(lockId);
 				}
 			);
-		} else {
-			App.removeNavigationLock(lockId);
 		}
+
+		App.removeNavigationLock(lockId);
 
 		this.submitButtons.forEach((button) => {
 			button.classList.remove(CSS.buttonLoading);
