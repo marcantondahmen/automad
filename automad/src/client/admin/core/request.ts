@@ -43,7 +43,6 @@ import {
 	fire,
 	getLogger,
 	listen,
-	notifyError,
 	notifyFormError,
 	query,
 	RequestKey,
