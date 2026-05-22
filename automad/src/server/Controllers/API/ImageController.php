@@ -42,6 +42,7 @@ use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\Image;
+use Automad\System\DiskUsage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,7 +62,7 @@ class ImageController {
 	public static function save(): Response {
 		$Response = new Response();
 
-		if (FileSystem::diskQuotaExceeded()) {
+		if (DiskUsage::quotaExceeded()) {
 			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
 		}
 
