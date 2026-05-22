@@ -208,8 +208,6 @@ class User {
 		$email = $this->email;
 
 		if (!$email) {
-			$Messenger->setError(Text::get('error_user_no_email'));
-
 			return false;
 		}
 
