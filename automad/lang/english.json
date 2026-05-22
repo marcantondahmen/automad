@@ -14,7 +14,7 @@
 	"accountRecoverySuccessHeading": "Account recovered",
 	"accountRecoverySuccessText": "Your password has been updated and two-factor authentication has been disabled. You can now sign in and set up 2FA again.",
 	"accountRecoveryTokenSentHeading": "Check your email",
-	"accountRecoveryTokenSentText": "A verification email has been sent to your inbox. Click the link in the email to set a new password and complete account recovery.",
+	"accountRecoveryTokenSentText": "If the provided username or email matches an account, a verification email has been sent to your inbox. Click the link in the email to set a new password and complete account recovery.",
 	"add": "Add",
 	"addImage": "Add image",
 	"addPage": "Add Page",

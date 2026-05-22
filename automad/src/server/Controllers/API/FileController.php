@@ -36,11 +36,11 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\File;
+use Automad\System\DiskUsage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -82,7 +82,7 @@ class FileController {
 		$Response = new Response();
 		$Messenger = new Messenger();
 
-		if (FileSystem::diskQuotaExceeded()) {
+		if (DiskUsage::quotaExceeded()) {
 			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
 		}
 

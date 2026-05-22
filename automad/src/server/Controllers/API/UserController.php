@@ -134,11 +134,8 @@ class UserController {
 
 		$User = $UserCollection->getUser($nameOrEmail);
 
-		if (!$User) {
-			return $Response->setError(Text::get('userNotFoundError'));
-		}
-
-		if ($User->sendPasswordResetToken(Request::post('type'), $Messenger)) {
+		// Also return success when user doesn't exist.
+		if (!$User || $User->sendPasswordResetToken(Request::post('type'), $Messenger)) {
 			return $Response->setData(array('success' => true));
 		}
 

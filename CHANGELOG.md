@@ -1,8 +1,17 @@
 # Changelog
 
-## [v2.0.0-beta.32](https://github.com/marcantondahmen/automad/commit/8713cccebb050201735f8cf91d8e6d794300466f)
+## [v2.0.0-beta.33](https://github.com/marcantondahmen/automad/commit/01d123edd54ae375acffbc8e3b14d25713f7f793)
 
-Mon, 11 May 2026 11:40:57 +0200
+Fri, 22 May 2026 21:46:37 +0200
+
+### New Features
+
+- also return success on account recovery token requests when user doesn't exist ([eac0b05da](https://github.com/marcantondahmen/automad/commit/eac0b05dafdb0ddf8b9139dad8929aaba86568ca))
+- improve editing performance by caching disk usage information ([d1238cc15](https://github.com/marcantondahmen/automad/commit/d1238cc15e8f6716bddb72a53aa970b9c60cc218))
+
+## [v2.0.0-beta.32](https://github.com/marcantondahmen/automad/commit/d9dc838ab916ae566f6726409ccb2bb20b529c48)
+
+Mon, 11 May 2026 11:44:31 +0200
 
 ### Bugfixes
 
