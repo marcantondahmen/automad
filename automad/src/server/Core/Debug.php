@@ -35,6 +35,8 @@
 
 namespace Automad\Core;
 
+use Automad\System\DiskUsage;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -218,7 +220,7 @@ class Debug {
 	 * Log disk usage.
 	 */
 	private static function diskUsage(): void {
-		self::log(round(FileSystem::diskUsage(), 2), 'Disk usage (M)');
+		self::log(round(DiskUsage::calculate(), 2), 'Disk usage (M)');
 	}
 
 	/**

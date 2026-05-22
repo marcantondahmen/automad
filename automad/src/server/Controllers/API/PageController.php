@@ -47,6 +47,7 @@ use Automad\Core\Text;
 use Automad\Models\Page;
 use Automad\Models\Selection;
 use Automad\Stores\DataStore;
+use Automad\System\DiskUsage;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
 
@@ -68,7 +69,7 @@ class PageController {
 	public static function add(): Response {
 		$Response = new Response();
 
-		if (FileSystem::diskQuotaExceeded()) {
+		if (DiskUsage::quotaExceeded()) {
 			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
 		}
 
@@ -255,7 +256,7 @@ class PageController {
 	public static function duplicate(): Response {
 		$Response = new Response();
 
-		if (FileSystem::diskQuotaExceeded()) {
+		if (DiskUsage::quotaExceeded()) {
 			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
 		}
 
@@ -435,7 +436,7 @@ class PageController {
 	private static function save(Page $Page, array $data): Response {
 		$Response = new Response();
 
-		if (FileSystem::diskQuotaExceeded()) {
+		if (DiskUsage::quotaExceeded()) {
 			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
 		}
 

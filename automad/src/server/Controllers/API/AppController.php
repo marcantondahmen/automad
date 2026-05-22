@@ -45,6 +45,7 @@ use Automad\Core\Config;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
 use Automad\Core\Text;
+use Automad\System\DiskUsage;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -101,7 +102,7 @@ class AppController {
 			'phpVersion' => phpversion(),
 			'phpSapiName' => php_sapi_name(),
 			'memoryLimit' => ini_get('memory_limit'),
-			'diskUsage' => FileSystem::diskUsage(),
+			'diskUsage' => DiskUsage::calculate(),
 			'diskQuota' => AM_DISK_QUOTA
 		));
 	}
