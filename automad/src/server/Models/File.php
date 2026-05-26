@@ -149,7 +149,7 @@ class File {
 			Debug::log($importUrl, 'Local URL');
 		}
 
-		$data = Fetch::get($importUrl);
+		$data = Fetch::request($importUrl);
 
 		if (empty($data)) {
 			$Messenger->setError(Text::get('importFailedError'));

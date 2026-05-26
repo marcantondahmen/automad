@@ -90,14 +90,15 @@ class Fetch {
 	}
 
 	/**
-	 * A cURL GET request.
+	 * A generic curl request.
 	 *
 	 * @param string $url
 	 * @param array $headers
-	 * @return string The output from the cURL get request
+	 * @param array|null $data
+	 * @return string The output from the cURL post request
 	 */
-	public static function get(string $url, array $headers = array()): string {
-		$data = '';
+	public static function request(string $url, array $headers = array(), array|null $data = null): string {
+		$responseData = '';
 
 		$options = array(
 			CURLOPT_HTTPHEADER => $headers,
@@ -109,6 +110,11 @@ class Fetch {
 			CURLOPT_URL => $url
 		);
 
+		if (is_array($data)) {
+			$options[CURLOPT_POST] = true;
+			$options[CURLOPT_POSTFIELDS] = json_encode($data);
+		}
+
 		$curl = curl_init();
 
 		if (!$curl) {
@@ -119,9 +125,9 @@ class Fetch {
 		$output = curl_exec($curl);
 
 		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl) && is_string($output)) {
-			$data = $output;
+			$responseData = $output;
 		}
 
-		return $data;
+		return $responseData;
 	}
 }

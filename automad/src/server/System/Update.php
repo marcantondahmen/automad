@@ -68,7 +68,7 @@ class Update {
 	 * @return string Version number or false on error.
 	 */
 	public static function getVersion(): string {
-		$version = trim(Fetch::get(Update::RAW_URL . '/VERSION'));
+		$version = trim(Fetch::request(Update::RAW_URL . '/VERSION'));
 
 		Debug::log($version);
 
@@ -239,7 +239,7 @@ class Update {
 		$requiredVersion = '';
 		$composerFileUrl = Update::RAW_URL . '/composer.json';
 
-		$composerJson = Fetch::get($composerFileUrl);
+		$composerJson = Fetch::request($composerFileUrl);
 
 		if (!$composerJson) {
 			return $requiredVersion;
