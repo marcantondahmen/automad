@@ -26,36 +26,52 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import { BaseComponent } from '@/admin/components/Base';
-import { debounce, EventName } from '@/admin/core';
+import {
+	AiProviderController,
+	App,
+	Attr,
+	CSS,
+	html,
+	requestAPI,
+} from '@/admin/core';
+import { BaseStateIndicatorComponent } from './BaseStateIndicator';
 
 /**
- * The abstract base state component.
+ * The base AI validation indicator.
  *
- * @extends BaseComponent
+ * @extends BaseUpdateIndicatorComponent
  */
-export abstract class BaseStateIndicatorComponent extends BaseComponent {
+export abstract class BaseAiValidationIndicator extends BaseStateIndicatorComponent {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The validation endpoint.
 	 */
-	connectedCallback(): void {
-		this.render();
-
-		this.listen(
-			window,
-			EventName.appStateChange,
-			debounce(this.render.bind(this), 200)
-		);
-	}
+	abstract getController(): AiProviderController;
 
 	/**
 	 * Render the state element.
 	 */
-	protected abstract render(): void;
+	render(): void {
+		const id = this.getAttribute(Attr.aiProviderId);
+
+		const validate = async () => {
+			const { data } = await requestAPI(this.getController(), { id });
+			const cls = data?.isValid
+				? `bi bi-check-circle`
+				: `bi bi-slash-circle ${CSS.textDanger}`;
+
+			this.innerHTML = html`<i class="${cls}"></i>`;
+		};
+
+		this.innerHTML = html`<i class="bi bi-circle"></i>`;
+
+		if (App.system.ai.enabled) {
+			validate();
+		}
+	}
 }

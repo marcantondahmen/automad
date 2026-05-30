@@ -32,6 +32,20 @@
  * See LICENSE.md for license information.
  */
 
+export const enum AiAssistanceController {
+	text = 'AiAssistanceController::text',
+}
+
+export const enum AiProviderController {
+	getModels = 'AiProviderController::getModels',
+	getProviders = 'AiProviderController::getProviders',
+	remove = 'AiProviderController::remove',
+	setApiKey = 'AiProviderController::setApiKey',
+	setModel = 'AiProviderController::setModel',
+	validateApiKey = 'AiProviderController::validateApiKey',
+	validateModel = 'AiProviderController::validateModel',
+}
+
 export const enum AppController {
 	bootstrap = 'AppController::bootstrap',
 	getServerInfo = 'AppController::getServerInfo',

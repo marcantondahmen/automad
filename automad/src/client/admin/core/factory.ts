@@ -212,13 +212,17 @@ export const createFormModal = (
  * @param title
  * @param [buttonText]
  * @param [destroy]
+ * @param [onClick]
  * @return an object that contains the modal, body and closing button
  */
 export const createGenericModal = (
 	title: string,
 	buttonText: string = App.text('close'),
-	destroy: boolean = true
-): { modal: ModalComponent; body: HTMLElement; button: HTMLElement } => {
+	destroy: boolean = true,
+	onClick: (modal: ModalComponent) => void = (modal) => {
+		modal.close();
+	}
+): { modal: ModalComponent; body: HTMLElement; button: HTMLButtonElement } => {
 	const attr: KeyValueMap = {};
 
 	if (destroy) {
@@ -235,16 +239,20 @@ export const createGenericModal = (
 				<am-modal-header>${title}</am-modal-header>
 				<am-modal-body></am-modal-body>
 				<am-modal-footer>
-					<am-modal-close class="${CSS.button} ${CSS.buttonPrimary}">
+					<button class="${CSS.button} ${CSS.buttonPrimary}">
 						${buttonText}
-					</am-modal-close>
+					</button>
 				</am-modal-footer>
 			</am-modal-dialog>
 		`
 	) as ModalComponent;
 
 	const body = query('am-modal-body', modal);
-	const button = query('am-modal-footer am-modal-close', modal);
+	const button = query<HTMLButtonElement>('am-modal-footer button', modal);
+
+	modal.listen(button, 'click', () => {
+		onClick(modal);
+	});
 
 	return { modal, body, button };
 };

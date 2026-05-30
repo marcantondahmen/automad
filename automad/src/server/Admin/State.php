@@ -109,6 +109,10 @@ class State {
 				'snippets' => PackageCollection::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/'),
 			),
 			'system' => array(
+				'ai' => array(
+					'enabled' => AM_AI_ASSISTANCE_ENABLED,
+					'activeProviderId' => AM_AI_PROVIDER_ID
+				),
 				'cache' => array(
 					'enabled' => AM_CACHE_ENABLED,
 					'lifetime' => AM_CACHE_LIFETIME,

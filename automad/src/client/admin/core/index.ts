@@ -34,6 +34,7 @@
 
 export * from '@/common';
 
+export * from './ai';
 export * from './app';
 export * from './bindings';
 export * from './css';

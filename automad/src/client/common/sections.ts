@@ -33,6 +33,7 @@
  */
 
 export const enum Section {
+	ai = 'ai',
 	cache = 'cache',
 	config = 'config',
 	customizations = 'customizations',

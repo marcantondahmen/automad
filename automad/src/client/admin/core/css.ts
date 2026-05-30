@@ -353,6 +353,7 @@ export const enum CSS {
 	switcherSectionActive = 'am-c-switcher-section--active',
 
 	textActive = 'am-u-text-active',
+	textDanger = 'am-u-text-danger',
 	textLink = 'am-u-text-link',
 	textMono = 'am-u-text-mono',
 	textMuted = 'am-u-text-muted',

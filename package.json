@@ -46,7 +46,7 @@
     "automad-editorjs": "^2.29.0-am.8",
     "automad-prism-themes": "^0.3.7",
     "autoprefixer": "^10.4.21",
-    "bootstrap-icons": "^1.11.1",
+    "bootstrap-icons": "^1.13.1",
     "browser-sync": "^3.0.4",
     "codeflask": "^1.4.1",
     "codex-tooltip": "^1.0.5",

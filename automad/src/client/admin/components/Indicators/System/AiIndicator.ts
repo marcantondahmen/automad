@@ -26,36 +26,44 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import { BaseComponent } from '@/admin/components/Base';
-import { debounce, EventName } from '@/admin/core';
+import { App } from '@/admin/core';
+import { BaseActivationIndicatorComponent } from '@/admin/components/Indicators/BaseActivationIndicator';
 
 /**
- * The abstract base state component.
+ * AI state indicator component.
  *
- * @extends BaseComponent
+ * @extends BaseActivationIndicatorComponent
  */
-export abstract class BaseStateIndicatorComponent extends BaseComponent {
+class SystemAiAssistanceIndicatorComponent extends BaseActivationIndicatorComponent {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The enabled text.
 	 */
-	connectedCallback(): void {
-		this.render();
-
-		this.listen(
-			window,
-			EventName.appStateChange,
-			debounce(this.render.bind(this), 200)
-		);
+	protected get textOn(): string {
+		return App.text('aiEnabled');
 	}
 
 	/**
-	 * Render the state element.
+	 * The disabled text.
 	 */
-	protected abstract render(): void;
+	protected get textOff(): string {
+		return App.text('aiDisabled');
+	}
+
+	/**
+	 * The state getter.
+	 */
+	protected get state(): boolean | number {
+		return App.system.ai.enabled;
+	}
 }
+
+customElements.define(
+	'am-system-ai-assistance-indicator',
+	SystemAiAssistanceIndicatorComponent
+);
