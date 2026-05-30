@@ -214,4 +214,13 @@ class OpenAiProvider extends AbstractProvider {
 	protected function getName(): string {
 		return 'OpenAi';
 	}
+
+	/**
+	 * Get provider website.
+	 *
+	 * @return string
+	 */
+	protected function getWebsite(): string {
+		return 'https://openai.com';
+	}
 }

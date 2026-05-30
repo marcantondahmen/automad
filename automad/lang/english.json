@@ -529,6 +529,7 @@
 	"systemAiProviderModelModalTitle": "AI model",
 	"systemAiProviderRemove": "Remove configuration",
 	"systemAiProviderRemoveConfirm": "Do you really want to remove this provider configuration and its associated API key?",
+	"systemAiProviderSetup": "Configure provider",
 	"systemCache": "Cache",
 	"systemCacheCardInfo": "Clear the cache, purge cached items or change caching settings",
 	"systemCacheClear": "Clear cache",

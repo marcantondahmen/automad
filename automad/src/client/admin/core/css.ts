@@ -66,6 +66,7 @@ export const enum CSS {
 	cardHeaderDropdown = 'am-c-card__header-dropdown',
 	cardTeaser = 'am-c-card__teaser',
 	cardTitle = 'am-c-card__title',
+	cardDelete = 'am-c-card__delete',
 	cardBody = 'am-c-card__body',
 	cardBodyLarge = 'am-c-card__body--large',
 	cardButtons = 'am-c-card__buttons',

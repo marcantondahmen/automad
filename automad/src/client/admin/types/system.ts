@@ -53,6 +53,7 @@ export interface AiProvider {
 	icon: string;
 	model: string;
 	apiKeyHelp: string;
+	website: string;
 	isConfigured: boolean;
 }
 

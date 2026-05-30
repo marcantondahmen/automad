@@ -66,6 +66,8 @@ class AiProviderSetupComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		this.classList.add(CSS.grid);
+		this.setAttribute('style', '--min: 17rem;');
 		this.render();
 
 		this.listen(window, EventName.appStateChange, this.render.bind(this));
@@ -83,9 +85,9 @@ class AiProviderSetupComponent extends BaseComponent {
 			return;
 		}
 
-		this.innerHTML = '<am-spinner></am-spinner>';
-
 		const providers = await getAiProviders();
+
+		this.innerHTML = '';
 
 		providers.forEach((provider: AiProvider) => {
 			this.renderProvider(provider);
@@ -108,19 +110,49 @@ class AiProviderSetupComponent extends BaseComponent {
 	}
 
 	/**
+	 * Render the card header for a given provider.
+	 *
+	 * @param provider
+	 * @return the rendered header
+	 */
+	private renderCardHeader(provider: AiProvider): string {
+		return html`
+			<span class="${CSS.cardIcon}">${provider.icon}</span>
+			<div class="${CSS.cardTitle}">${provider.name}</div>
+			<div class="${CSS.cardBody}">
+				<a
+					href="${provider.website}"
+					class="${CSS.textParagraph}"
+					target="_blank"
+				>
+					${provider.website}
+				</a>
+			</div>
+		`;
+	}
+
+	/**
 	 * Render the card for a non-configured provider that starts the setup.
 	 *
 	 * @param provider
 	 */
 	private renderSetupCard(provider: AiProvider): void {
-		this.innerHTML = '';
-
-		const button = create(
-			'button',
-			[CSS.button],
+		const card = create(
+			'div',
+			[CSS.card],
 			{},
 			this,
-			`Setup ${provider.name}`
+			this.renderCardHeader(provider)
+		);
+
+		const buttons = create('div', [CSS.cardButtons], {}, card);
+
+		const button = create(
+			'span',
+			[],
+			{},
+			buttons,
+			App.text('systemAiProviderSetup')
 		);
 
 		this.listen(
@@ -140,32 +172,29 @@ class AiProviderSetupComponent extends BaseComponent {
 	 * @param provider
 	 */
 	private renderConfigCard(provider: AiProvider): void {
-		this.innerHTML = '';
-
 		const card = create(
 			'div',
 			[CSS.card],
 			{},
 			this,
-			html`
-				${provider.icon}
-				<p>${provider.name}</p>
-			`
+			this.renderCardHeader(provider)
 		);
 
+		const buttons = create('div', [CSS.cardButtons], {}, card);
+
 		const removeButton = create(
-			'button',
-			[CSS.button],
-			{},
+			'span',
+			[CSS.cardDelete],
+			{ [Attr.tooltip]: App.text('systemAiProviderRemove') },
 			card,
-			App.text('systemAiProviderRemove')
+			'<i class="bi bi-trash3"></i>'
 		);
 
 		const setNewApiKeyButton = create(
-			'button',
-			[CSS.button],
+			'span',
+			[],
 			{},
-			card,
+			buttons,
 			html`
 				<span>${App.text('systemAiChangeApiKey')}</span>
 				<am-ai-api-key-validation-indicator
@@ -175,10 +204,10 @@ class AiProviderSetupComponent extends BaseComponent {
 		);
 
 		const changeModelButton = create(
-			'button',
-			[CSS.button],
+			'span',
+			[],
 			{},
-			card,
+			buttons,
 			html`
 				<span>${provider.model}</span>
 				<am-ai-model-validation-indicator

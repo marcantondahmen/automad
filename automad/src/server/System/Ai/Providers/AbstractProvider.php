@@ -95,6 +95,7 @@ abstract class AbstractProvider {
 			'icon' => $this->getIcon(),
 			'model' => $this->ProviderConfig->model,
 			'apiKeyHelp' => $this->getApiKeyHelp(),
+			'website' => $this->getWebsite(),
 			'isConfigured' => $this->isConfigured()
 		);
 	}
@@ -239,6 +240,13 @@ abstract class AbstractProvider {
 	 * @return string
 	 */
 	abstract protected function getName(): string;
+
+	/**
+	 * Get provider website.
+	 *
+	 * @return string
+	 */
+	abstract protected function getWebsite(): string;
 
 	/**
 	 * Make a provider api request.
