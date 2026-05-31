@@ -181,84 +181,96 @@ export class AiAssistance extends BasePlugin {
 				return { value: p.id, text: p.name };
 			});
 
-		if (!providers.length) {
-			renderErrorModal(
-				App.text('aiAssistanceNoProviderErrorTitle'),
-				App.text('aiAssistanceNoProviderErrorBody')
+		if (providers.length > 0) {
+			const form = create('div', [CSS.aiAssistanceForm], {}, details);
+
+			const prompt = create<HTMLTextAreaElement>(
+				'textarea',
+				[CSS.aiAssistancePrompt],
+				{},
+				form
 			);
 
-			return;
+			const footer = create(
+				'div',
+				[CSS.aiAssistanceFormFooter],
+				{},
+				form
+			);
+
+			const select = createSelect(
+				providers,
+				App.system.ai.activeProviderId || providers[0].value,
+				footer,
+				null,
+				null,
+				null,
+				[CSS.aiAssistanceSelect]
+			);
+
+			const buttons = create('div', [CSS.flex], {}, footer);
+
+			const submit = create(
+				'span',
+				[CSS.aiAssistanceButton],
+				{},
+				buttons,
+				'<i class="bi bi-arrow-up-circle-fill"></i>'
+			);
+
+			const close = create(
+				'span',
+				[CSS.aiAssistanceButton],
+				{},
+				buttons,
+				'<i class="bi bi-robot"></i>'
+			);
+
+			this.component.listen(submit, 'click', async () => {
+				const success = await this.generate(
+					prompt.value,
+					select.select.value
+				);
+
+				if (!success) {
+					renderErrorModal(
+						App.text('aiAssistanceRequestErrorTitle'),
+						App.text('aiAssistanceRequestErrorBody')
+					);
+
+					return;
+				}
+
+				prompt.value = '';
+				details.open = false;
+			});
+
+			this.component.listen(close, 'click', async () => {
+				details.open = false;
+			});
+
+			this.component.listen(details, 'toggle', () => {
+				setTimeout(() => {
+					if (details.open) {
+						prompt.focus();
+					} else {
+						prompt.blur();
+					}
+				}, 0);
+			});
 		}
 
-		const form = create('div', [CSS.aiAssistanceForm], {}, details);
-
-		const prompt = create<HTMLTextAreaElement>(
-			'textarea',
-			[CSS.aiAssistancePrompt],
-			{},
-			form
-		);
-
-		const footer = create('div', [CSS.aiAssistanceFormFooter], {}, form);
-
-		const select = createSelect(
-			providers,
-			App.system.ai.activeProviderId || providers[0].value,
-			footer,
-			null,
-			null,
-			null,
-			[CSS.aiAssistanceSelect]
-		);
-
-		const buttons = create('div', [CSS.flex], {}, footer);
-
-		const submit = create(
-			'span',
-			[CSS.aiAssistanceButton],
-			{},
-			buttons,
-			'<i class="bi bi-arrow-up-circle-fill"></i>'
-		);
-
-		const close = create(
-			'span',
-			[CSS.aiAssistanceButton],
-			{},
-			buttons,
-			'<i class="bi bi-robot"></i>'
-		);
-
-		this.component.listen(submit, 'click', async () => {
-			const success = await this.generate(
-				prompt.value,
-				select.select.value
-			);
-
-			if (!success) {
+		this.component.listen(details, 'toggle', () => {
+			if (details.open && !providers.length) {
 				renderErrorModal(
-					App.text('aiAssistanceRequestErrorTitle'),
-					App.text('aiAssistanceRequestErrorBody')
+					App.text('aiAssistanceNoProviderErrorTitle'),
+					App.text('aiAssistanceNoProviderErrorBody')
 				);
+
+				details.open = false;
 
 				return;
 			}
-
-			prompt.value = '';
-		});
-
-		this.component.listen(close, 'click', async () => {
-			details.open = false;
-		});
-
-		this.component.listen(details, 'toggle', () => {
-			setTimeout(() => {
-				if (details.open) {
-					prompt.focus();
-				} else {
-					prompt.blur();
-				}
-			}, 10);
 		});
 	}
 
