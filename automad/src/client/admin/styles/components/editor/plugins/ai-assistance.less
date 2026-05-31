@@ -46,6 +46,7 @@
 	pointer-events: none;
 	transition: opacity 0.2s;
 
+	&--pending &,
 	am-editor-js:not(:has(am-editor-js:hover)):hover > &,
 	&:has(textarea:focus) {
 		pointer-events: all;
@@ -70,8 +71,9 @@
 		color: hsl(var(--am-clr-text-paragraph));
 		cursor: pointer;
 		user-select: none;
-		transition: opacity 0.2s;
 		box-shadow: @am-shadow;
+		opacity: 1;
+		transition: opacity 0.2s;
 		.animated-border(120%, 120%, @border, (@toggleSize / 2));
 
 		details[open] > summary & {
@@ -91,6 +93,7 @@
 		border-radius: (@toggleSize / 2);
 		box-shadow: @am-shadow;
 		.animated-border(150%, 400%, @border, (@toggleSize / 2));
+		.details-transition;
 	}
 
 	&__prompt {
@@ -139,9 +142,13 @@
 		width: ~'calc(@{toggleSize} - @{border} - @{border})';
 		height: ~'calc(@{toggleSize} - @{border} - @{border})';
 		font-size: @iconFontSize;
-		cursor: pointer;
 		border-left: @am-border;
 		transition: color 0.2s;
+
+		&,
+		.am-c-root--pending & {
+			cursor: pointer !important;
+		}
 
 		&:hover {
 			color: hsl(var(--am-clr-text-muted));

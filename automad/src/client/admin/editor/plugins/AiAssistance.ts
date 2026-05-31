@@ -120,12 +120,46 @@ const renderErrorModal = (title: string, content: string): void => {
  */
 export class AiAssistance extends BasePlugin {
 	/**
+	 * The name for the event that is triggered on any generational request state change.
+	 *
+	 * @static
+	 */
+	static EVENT_NAME = 'AutomadAiAssitanceGenerateStateChange';
+
+	/**
 	 * The class name for AI assistance buttons.
 	 * This class is only used for selection and not for styling.
 	 *
 	 * @static
 	 */
 	private static CLS = '__ai';
+
+	/**
+	 * Indicates a pending generation response.
+	 */
+	private _pending: boolean = false;
+
+	/**
+	 * The state setter.
+	 */
+	private set pending(state: boolean) {
+		this._pending = state;
+		this.component.classList.toggle(CSS.aiAssistancePending, state);
+
+		fire(AiAssistance.EVENT_NAME, this.component);
+	}
+
+	/**
+	 * The state setter.
+	 */
+	private get pending() {
+		return this._pending;
+	}
+
+	/**
+	 * The AbortController for stopping long running generations.
+	 */
+	private abortController: AbortController | null = null;
 
 	/**
 	 * The currently select blocks.
@@ -218,6 +252,14 @@ export class AiAssistance extends BasePlugin {
 				'<i class="bi bi-arrow-up-circle-fill"></i>'
 			);
 
+			const stop = create(
+				'span',
+				[CSS.aiAssistanceButton, CSS.displayNone],
+				{},
+				buttons,
+				'<i class="bi bi-stop-circle-fill"></i>'
+			);
+
 			const close = create(
 				'span',
 				[CSS.aiAssistanceButton],
@@ -226,10 +268,22 @@ export class AiAssistance extends BasePlugin {
 				'<i class="bi bi-robot"></i>'
 			);
 
+			this.component.listen(
+				this.component,
+				AiAssistance.EVENT_NAME,
+				() => {
+					submit.classList.toggle(CSS.displayNone, this.pending);
+					stop.classList.toggle(CSS.displayNone, !this.pending);
+				}
+			);
+
 			this.component.listen(submit, 'click', async () => {
+				this.abortController = new AbortController();
+
 				const success = await this.generate(
 					prompt.value,
-					select.select.value
+					select.select.value,
+					this.abortController
 				);
 
 				if (!success) {
@@ -242,11 +296,22 @@ export class AiAssistance extends BasePlugin {
 				}
 
 				prompt.value = '';
-				details.open = false;
+			});
+
+			this.component.listen(stop, 'click', async () => {
+				const value = prompt.value;
+
+				this.abortController.abort();
+
+				setTimeout(() => {
+					prompt.value = value;
+				}, 0);
 			});
 
 			this.component.listen(close, 'click', async () => {
-				details.open = false;
+				if (!this.pending) {
+					details.open = false;
+				}
 			});
 
 			this.component.listen(details, 'toggle', () => {
@@ -268,8 +333,6 @@ export class AiAssistance extends BasePlugin {
 				);
 
 				details.open = false;
-
-				return;
 			}
 		});
 	}
@@ -279,18 +342,34 @@ export class AiAssistance extends BasePlugin {
 	 *
 	 * @param prompt
 	 * @param providerId
+	 * @param abortController
 	 * @return true on success
 	 * @async
 	 */
 	private async generate(
 		prompt: string,
-		providerId: string
+		providerId: string,
+		abortController: AbortController
 	): Promise<boolean> {
-		const { data, error } = await requestAPI(AiAssistanceController.text, {
-			providerId,
-			prompt,
-			context: await this.getContext(),
-		});
+		this.pending = true;
+
+		const lockId = App.addNavigationLock();
+
+		const { data, error } = await requestAPI(
+			AiAssistanceController.text,
+			{
+				providerId,
+				prompt,
+				context: await this.getContext(),
+			},
+			true,
+			null,
+			true,
+			abortController
+		);
+
+		App.removeNavigationLock(lockId);
+		this.pending = false;
 
 		if (error) {
 			return false;
@@ -448,6 +527,8 @@ export class AiAssistance extends BasePlugin {
 			'mouseup',
 			debounce(() => {
 				const sel = window.getSelection();
+
+				// console.log('xxx', this.editor.blocks.getCurrentBlockIndex());
 
 				this.selectedRange = sel.rangeCount
 					? sel.getRangeAt(0).cloneRange()

@@ -41,6 +41,7 @@ export const enum CSS {
 	validate = 'am-validate',
 
 	aiAssistance = 'ai-assistance',
+	aiAssistancePending = 'ai-assistance--pending',
 	aiAssistanceToggle = 'ai-assistance__toggle',
 	aiAssistanceForm = 'ai-assistance__form',
 	aiAssistanceFormFooter = 'ai-assistance__form-footer',
