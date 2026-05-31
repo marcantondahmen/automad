@@ -172,6 +172,11 @@ export class AiAssistance extends BasePlugin {
 	private selectedRange: Range = null;
 
 	/**
+	 * The last clicked block index.
+	 */
+	private lastFocusedBlockIndex: number | null = null;
+
+	/**
 	 * The actual plugin implementation.
 	 */
 	protected init(): void {
@@ -447,6 +452,12 @@ export class AiAssistance extends BasePlugin {
 	 * @async
 	 */
 	private async insertBlocks(content: string): Promise<void> {
+		if (this.lastFocusedBlockIndex !== null) {
+			this.editor.caret.setToBlock(this.lastFocusedBlockIndex);
+		} else {
+			this.editor.caret.setToLastBlock();
+		}
+
 		this.editor.blocks.insert();
 
 		await this.editor.paste.processText(content, true);
@@ -524,12 +535,19 @@ export class AiAssistance extends BasePlugin {
 		this.component.listen(
 			this.component,
 			'mouseup',
-			debounce(() => {
-				const sel = window.getSelection();
+			debounce((event: MouseEvent) => {
+				const target = event.target as HTMLElement;
 
-				this.selectedRange = sel.rangeCount
-					? sel.getRangeAt(0).cloneRange()
-					: null;
+				if (target.closest('[contenteditable]')) {
+					const sel = window.getSelection();
+
+					this.selectedRange = sel.rangeCount
+						? sel.getRangeAt(0).cloneRange()
+						: null;
+
+					this.lastFocusedBlockIndex =
+						this.editor.blocks.getCurrentBlockIndex();
+				}
 
 				this.selectedBlocks = this.editor.blockSelection.selectedBlocks;
 			})
