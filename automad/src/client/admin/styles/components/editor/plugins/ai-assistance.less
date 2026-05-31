@@ -46,6 +46,10 @@
 	pointer-events: none;
 	transition: opacity 0.2s;
 
+	&-context {
+		background-color: hsl(var(--am-clr-background-highlight));
+	}
+
 	&--pending &,
 	am-editor-js:not(:has(am-editor-js:hover)):hover > &,
 	&:has(textarea:focus) {

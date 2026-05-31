@@ -124,7 +124,7 @@ export class AiAssistance extends BasePlugin {
 	 *
 	 * @static
 	 */
-	static EVENT_NAME = 'AutomadAiAssitanceGenerateStateChange';
+	private static EVENT_NAME = 'AutomadAiAssitanceGenerateStateChange';
 
 	/**
 	 * The class name for AI assistance buttons.
@@ -329,9 +329,15 @@ export class AiAssistance extends BasePlugin {
 					}
 				}, 0);
 			});
+
+			this.component.listen(prompt, 'focus', () => {
+				this.toggleSelectedBlockHighlighting(true);
+			});
 		}
 
 		this.component.listen(details, 'toggle', () => {
+			this.toggleSelectedBlockHighlighting(details.open);
+
 			if (details.open && !providers.length) {
 				renderErrorModal(
 					App.text('aiAssistanceNoProviderErrorTitle'),
@@ -340,6 +346,21 @@ export class AiAssistance extends BasePlugin {
 
 				details.open = false;
 			}
+		});
+	}
+
+	/**
+	 * Toggle highlighting of selected blocks.
+	 *
+	 * @param state
+	 */
+	private toggleSelectedBlockHighlighting(state: boolean): void {
+		queryAll(`.${CSS.aiAssistanceContext}`).forEach((block) => {
+			block.classList.remove(CSS.aiAssistanceContext);
+		});
+
+		this.selectedBlocks.forEach((block: { holder: HTMLElement }) => {
+			block.holder.classList.toggle(CSS.aiAssistanceContext, state);
 		});
 	}
 
@@ -549,7 +570,12 @@ export class AiAssistance extends BasePlugin {
 						this.editor.blocks.getCurrentBlockIndex();
 				}
 
-				this.selectedBlocks = this.editor.blockSelection.selectedBlocks;
+				if (!target.closest(`.${AiAssistance.CLS}`)) {
+					this.selectedBlocks =
+						this.editor.blockSelection.selectedBlocks;
+
+					this.toggleSelectedBlockHighlighting(false);
+				}
 			})
 		);
 	}
