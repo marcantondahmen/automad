@@ -274,6 +274,7 @@ export class AiAssistance extends BasePlugin {
 				() => {
 					submit.classList.toggle(CSS.displayNone, this.pending);
 					stop.classList.toggle(CSS.displayNone, !this.pending);
+					prompt.disabled = this.pending;
 				}
 			);
 

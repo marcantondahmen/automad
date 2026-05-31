@@ -82,6 +82,7 @@
 	}
 
 	&__form {
+		--speed: 2s;
 		position: absolute;
 		z-index: 5;
 		display: flex;
@@ -92,8 +93,12 @@
 		bottom: 5px;
 		border-radius: (@toggleSize / 2);
 		box-shadow: @am-shadow;
-		.animated-border(150%, 400%, @border, (@toggleSize / 2));
+		.animated-border(150%, 400%, @border, (@toggleSize / 2), var(--speed));
 		.details-transition;
+	}
+
+	&--pending &__form {
+		--speed: 0.75s;
 	}
 
 	&__prompt {

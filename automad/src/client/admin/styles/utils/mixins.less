@@ -61,7 +61,7 @@
 		hsl(var(--am-clr-background));
 }
 
-.animated-border(@percW, @percH, @border, @radius) {
+.animated-border(@percW, @percH, @border, @radius, @speed: 2s) {
 	overflow: hidden;
 
 	&:before {
@@ -85,7 +85,7 @@
 			hsl(var(--am-clr-text-paragraph)),
 			hsl(var(--am-clr-background-faded))
 		);
-		animation: animatedBorderRotate 2s linear infinite;
+		animation: animatedBorderRotate @speed linear infinite;
 	}
 
 	&:after {
