@@ -447,9 +447,7 @@ export class AiAssistance extends BasePlugin {
 	 * @async
 	 */
 	private async insertBlocks(content: string): Promise<void> {
-		this.editor.caret.setToLastBlock();
 		this.editor.blocks.insert();
-		this.editor.caret.setToLastBlock();
 
 		await this.editor.paste.processText(content, true);
 
@@ -528,8 +526,6 @@ export class AiAssistance extends BasePlugin {
 			'mouseup',
 			debounce(() => {
 				const sel = window.getSelection();
-
-				// console.log('xxx', this.editor.blocks.getCurrentBlockIndex());
 
 				this.selectedRange = sel.rangeCount
 					? sel.getRangeAt(0).cloneRange()
