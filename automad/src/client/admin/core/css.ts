@@ -40,6 +40,14 @@ export const enum CSS {
 	focus = 'am-focus',
 	validate = 'am-validate',
 
+	aiAssistance = 'ai-assistance',
+	aiAssistanceToggle = 'ai-assistance__toggle',
+	aiAssistanceForm = 'ai-assistance__form',
+	aiAssistanceFormFooter = 'ai-assistance__form-footer',
+	aiAssistancePrompt = 'ai-assistance__prompt',
+	aiAssistanceSelect = 'ai-assistance__select',
+	aiAssistanceButton = 'ai-assistance__button',
+
 	alert = 'am-c-alert',
 	alertDanger = 'am-c-alert--danger',
 	alertIcon = 'am-c-alert__icon',

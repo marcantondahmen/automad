@@ -34,13 +34,14 @@
 
 import {
 	App,
-	createField,
 	createGenericModal,
 	createSelect,
+	CSS,
 	EventName,
 	FieldTag,
 	fire,
 	getAiProviders,
+	html,
 	requestAPI,
 } from '@/admin/core';
 import {
@@ -59,6 +60,62 @@ import { AiProvider } from '@/admin/types';
 import { EditorFieldComponent } from '@/admin/components/Fields/EditorField';
 
 /**
+ * Navigate to the AI settings page.
+ */
+const openSettings = (): void => {
+	const base = `${window.location.origin}${App.dashboardURL}/`;
+
+	App.root.setView(new URL(`${Route.system}?section=${Section.ai}`, base));
+};
+
+/**
+ * Get all page blocks.
+ *
+ * @return all blocks of the currentr page
+ * @async
+ */
+const getAllPageBlocks = async (): Promise<BlockToolData[]> => {
+	const editorFields = queryAll<EditorFieldComponent>(FieldTag.editor);
+
+	const savedEditors = await Promise.all(
+		editorFields.map(async (field) => {
+			const editor = field.editorJS.editor;
+
+			return await editor.save();
+		})
+	);
+
+	const blocks = savedEditors.reduce((acc, data) => {
+		acc = [...acc, ...data.blocks];
+
+		return acc;
+	}, []);
+
+	return blocks;
+};
+
+/**
+ * Render an error modal dialog.
+ *
+ * @param title
+ * @param content
+ */
+const renderErrorModal = (title: string, content: string): void => {
+	const { modal, body } = createGenericModal(
+		title,
+		App.text('aiAssistanceOpenSettings'),
+		true,
+		openSettings
+	);
+
+	body.innerHTML = content;
+
+	setTimeout(() => {
+		modal.open();
+	}, 0);
+};
+
+/**
  * The AI extension for EditorJS.
  */
 export class AiAssistance extends BasePlugin {
@@ -68,7 +125,7 @@ export class AiAssistance extends BasePlugin {
 	 *
 	 * @static
 	 */
-	private static BUTTON_CLASS = '__ai';
+	private static CLS = '__ai';
 
 	/**
 	 * The currently select blocks.
@@ -89,81 +146,35 @@ export class AiAssistance extends BasePlugin {
 		}
 
 		// Exit early on re-renders, for example on undo or redo.
-		if (query(`:scope > .${AiAssistance.BUTTON_CLASS}`, this.component)) {
+		if (query(`:scope > .${AiAssistance.CLS}`, this.component)) {
 			return;
 		}
 
-		const button = create(
-			'span',
-			[AiAssistance.BUTTON_CLASS],
-			{},
+		const details = create(
+			'details',
+			[AiAssistance.CLS, CSS.aiAssistance],
+			{ name: 'am-ai-assistance' },
 			this.component,
-			'Ai Assistance <i class="bi bi-stars"></i>'
+			html`
+				<summary>
+					<span class="${CSS.aiAssistanceToggle}">
+						<i class="bi bi-robot"></i>
+					</span>
+				</summary>
+			`
 		);
 
-		this.component.listen(
-			button,
-			'mousedown selectionchange',
-			(event: Event) => {
-				event.preventDefault();
-
-				this.renderModal();
-			}
-		);
-
-		this.component.listen(
-			this.component,
-			'mouseup',
-			debounce(() => {
-				const sel = window.getSelection();
-
-				this.selectedRange = sel.rangeCount
-					? sel.getRangeAt(0).cloneRange()
-					: null;
-
-				this.selectedBlocks = this.editor.blockSelection.selectedBlocks;
-			})
-		);
-	}
-
-	/**
-	 * Navigate to the AI settings page.
-	 */
-	private openSettings(): void {
-		const base = `${window.location.origin}${App.dashboardURL}/`;
-
-		App.root.setView(
-			new URL(`${Route.system}?section=${Section.ai}`, base)
-		);
-	}
-
-	/**
-	 * Render an error modal dialog.
-	 *
-	 * @param title
-	 * @param content
-	 */
-	private renderErrorModal(title: string, content: string): void {
-		const { modal, body } = createGenericModal(
-			title,
-			App.text('aiAssistanceOpenSettings'),
-			true,
-			this.openSettings.bind(this)
-		);
-
-		body.innerHTML = content;
-
-		setTimeout(() => {
-			modal.open();
-		}, 0);
+		this.renderForm(details);
+		this.initSelectionListener();
 	}
 
 	/**
 	 * Render the prompt input dialog.
 	 *
+	 * @param details
 	 * @async
 	 */
-	private async renderModal(): Promise<void> {
+	private async renderForm(details: HTMLDetailsElement): Promise<void> {
 		const providers = (await getAiProviders())
 			.filter((p: AiProvider) => p.isConfigured)
 			.map((p: AiProvider) => {
@@ -171,7 +182,7 @@ export class AiAssistance extends BasePlugin {
 			});
 
 		if (!providers.length) {
-			this.renderErrorModal(
+			renderErrorModal(
 				App.text('aiAssistanceNoProviderErrorTitle'),
 				App.text('aiAssistanceNoProviderErrorBody')
 			);
@@ -179,45 +190,76 @@ export class AiAssistance extends BasePlugin {
 			return;
 		}
 
+		const form = create('div', [CSS.aiAssistanceForm], {}, details);
+
+		const prompt = create<HTMLTextAreaElement>(
+			'textarea',
+			[CSS.aiAssistancePrompt],
+			{},
+			form
+		);
+
+		const footer = create('div', [CSS.aiAssistanceFormFooter], {}, form);
+
 		const select = createSelect(
 			providers,
-			App.system.ai.activeProviderId || providers[0].value
+			App.system.ai.activeProviderId || providers[0].value,
+			footer,
+			null,
+			null,
+			null,
+			[CSS.aiAssistanceSelect]
 		);
 
-		const prompt = createField(FieldTag.textarea, null, {
-			key: 'am-ai-prompt',
-			label: 'Prompt',
-			name: 'prompt',
-			value: '',
-		});
+		const buttons = create('div', [CSS.flex], {}, footer);
 
-		const { modal, body } = createGenericModal(
-			'Prompt',
-			'Ok',
-			true,
-			async () => {
-				const success = await this.generate(
-					prompt.query(),
-					select.select.value
+		const submit = create(
+			'span',
+			[CSS.aiAssistanceButton],
+			{},
+			buttons,
+			'<i class="bi bi-arrow-up-circle-fill"></i>'
+		);
+
+		const close = create(
+			'span',
+			[CSS.aiAssistanceButton],
+			{},
+			buttons,
+			'<i class="bi bi-robot"></i>'
+		);
+
+		this.component.listen(submit, 'click', async () => {
+			const success = await this.generate(
+				prompt.value,
+				select.select.value
+			);
+
+			if (!success) {
+				renderErrorModal(
+					App.text('aiAssistanceRequestErrorTitle'),
+					App.text('aiAssistanceRequestErrorBody')
 				);
 
-				modal.close();
-
-				if (!success) {
-					this.renderErrorModal(
-						App.text('aiAssistanceRequestErrorTitle'),
-						App.text('aiAssistanceRequestErrorBody')
-					);
-				}
+				return;
 			}
-		);
 
-		body.appendChild(select);
-		body.appendChild(prompt);
+			prompt.value = '';
+		});
 
-		setTimeout(() => {
-			modal.open();
-		}, 0);
+		this.component.listen(close, 'click', async () => {
+			details.open = false;
+		});
+
+		this.component.listen(details, 'toggle', () => {
+			setTimeout(() => {
+				if (details.open) {
+					prompt.focus();
+				} else {
+					prompt.blur();
+				}
+			}, 10);
+		});
 	}
 
 	/**
@@ -300,36 +342,10 @@ export class AiAssistance extends BasePlugin {
 		}
 
 		if (!context.text && !context.blocks?.length) {
-			context.blocks = await this.getAllPageBlocks();
+			context.blocks = await getAllPageBlocks();
 		}
 
 		return context;
-	}
-
-	/**
-	 * Get all page blocks.
-	 *
-	 * @return all blocks of the currentr page
-	 * @async
-	 */
-	private async getAllPageBlocks(): Promise<BlockToolData[]> {
-		const editorFields = queryAll<EditorFieldComponent>(FieldTag.editor);
-
-		const savedEditors = await Promise.all(
-			editorFields.map(async (field) => {
-				const editor = field.editorJS.editor;
-
-				return await editor.save();
-			})
-		);
-
-		const blocks = savedEditors.reduce((acc, data) => {
-			acc = [...acc, ...data.blocks];
-
-			return acc;
-		}, []);
-
-		return blocks;
 	}
 
 	/**
@@ -409,5 +425,24 @@ export class AiAssistance extends BasePlugin {
 		this.selectedRange = sel.getRangeAt(0).cloneRange();
 
 		fire('input', this.component);
+	}
+
+	/**
+	 * Init the block and text selection listener.
+	 */
+	private initSelectionListener(): void {
+		this.component.listen(
+			this.component,
+			'mouseup',
+			debounce(() => {
+				const sel = window.getSelection();
+
+				this.selectedRange = sel.rangeCount
+					? sel.getRangeAt(0).cloneRange()
+					: null;
+
+				this.selectedBlocks = this.editor.blockSelection.selectedBlocks;
+			})
+		);
 	}
 }

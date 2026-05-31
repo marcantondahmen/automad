@@ -1,0 +1,150 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+.ai-assistance {
+	@border: 2px;
+	@toggleSize: 3.35rem;
+	@iconFontSize: 1.25rem;
+	position: sticky;
+	z-index: 100;
+	display: flex;
+	align-items: end;
+	bottom: 0;
+	right: 0;
+	height: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s;
+
+	am-editor-js:not(:has(am-editor-js:hover)):hover > &,
+	&:has(textarea:focus) {
+		pointer-events: all;
+		opacity: 1;
+	}
+
+	& > summary::marker {
+		content: '';
+	}
+
+	&__toggle {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		bottom: 5px;
+		right: 5px;
+		width: @toggleSize;
+		height: @toggleSize;
+		border-radius: (@toggleSize / 2);
+		font-size: @iconFontSize;
+		color: hsl(var(--am-clr-text-paragraph));
+		cursor: pointer;
+		user-select: none;
+		transition: opacity 0.2s;
+		box-shadow: @am-shadow;
+		.animated-border(120%, 120%, @border, (@toggleSize / 2));
+
+		details[open] > summary & {
+			opacity: 0;
+		}
+	}
+
+	&__form {
+		position: absolute;
+		z-index: 5;
+		display: flex;
+		flex-direction: column;
+		padding: @border;
+		width: 28rem;
+		right: 5px;
+		bottom: 5px;
+		border-radius: (@toggleSize / 2);
+		box-shadow: @am-shadow;
+		.animated-border(150%, 400%, @border, (@toggleSize / 2));
+	}
+
+	&__prompt {
+		padding: 1.25rem;
+		height: 6.5rem;
+		overflow-y: hidden;
+		font-family: @am-code-font-family;
+		line-height: 1.65;
+		background-color: hsl(var(--am-clr-background-faded));
+		border-top-left-radius: ~'calc((@{toggleSize} / 2) - @{border})';
+		border-top-right-radius: ~'calc((@{toggleSize} / 2) - @{border})';
+		border: none;
+		border-bottom: @am-border;
+		outline: none !important;
+		appearance: none;
+		resize: none;
+		scrollbar-width: thin !important;
+	}
+
+	&__form-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: end;
+		gap: 0.4rem;
+		height: ~'calc(@{toggleSize} - @{border} - @{border})';
+	}
+
+	&__select.am-f-select {
+		width: auto;
+		height: 100%;
+		margin-left: 0.5rem;
+		border: none !important;
+		outline: none !important;
+		background-color: transparent;
+		transition: color 0.2s;
+
+		&:hover {
+			color: hsl(var(--am-clr-text-muted));
+		}
+	}
+
+	&__button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: ~'calc(@{toggleSize} - @{border} - @{border})';
+		height: ~'calc(@{toggleSize} - @{border} - @{border})';
+		font-size: @iconFontSize;
+		cursor: pointer;
+		border-left: @am-border;
+		transition: color 0.2s;
+
+		&:hover {
+			color: hsl(var(--am-clr-text-muted));
+		}
+	}
+}

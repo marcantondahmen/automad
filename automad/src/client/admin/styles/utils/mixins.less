@@ -60,3 +60,49 @@
 	scrollbar-color: hsl(from hsl(var(--am-clr-text-muted)) h s l / 0.4)
 		hsl(var(--am-clr-background));
 }
+
+.animated-border(@percW, @percH, @border, @radius) {
+	overflow: hidden;
+
+	&:before {
+		content: '';
+		position: absolute;
+		z-index: -2;
+		left: (-@percW / 2) + 50%;
+		top: (-@percH / 2) + 50%;
+		width: @percW;
+		height: @percH;
+		background-repeat: no-repeat;
+		background-size:
+			100% 100%,
+			50% 50%;
+		background-position:
+			0 0,
+			100% 0,
+			100% 100%,
+			0 100%;
+		background-image: linear-gradient(
+			hsl(var(--am-clr-text-paragraph)),
+			hsl(var(--am-clr-background-faded))
+		);
+		animation: animatedBorderRotate 2s linear infinite;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		left: @border;
+		top: @border;
+		width: ~'calc(100% - @{border} - @{border})';
+		height: ~'calc(100% - @{border} - @{border})';
+		background-color: hsl(var(--am-clr-background));
+		border-radius: ~'calc(@{radius} - @{border})';
+	}
+}
+
+@keyframes animatedBorderRotate {
+	100% {
+		transform: rotate(1turn);
+	}
+}
