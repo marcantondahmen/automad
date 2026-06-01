@@ -88,7 +88,7 @@ const getSystemSections = (): SystemSectionData[] => {
 		},
 		{
 			section: Section.ai,
-			icon: 'stars',
+			icon: 'robot',
 			title: App.text('systemAi'),
 			info: App.text('systemAiCardInfo'),
 			state: '<am-system-ai-assistance-indicator></am-system-ai-assistance-indicator>',
