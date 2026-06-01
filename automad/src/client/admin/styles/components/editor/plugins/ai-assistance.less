@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 .ai-assistance {
-	@border: 2px;
+	@border: 3px;
 	@toggleSize: 3.35rem;
 	@iconFontSize: 1.25rem;
 	position: sticky;
@@ -48,6 +48,8 @@
 
 	&-context {
 		background-color: hsl(var(--am-clr-background-highlight));
+		outline: @am-border;
+		border-radius: @am-form-radius;
 	}
 
 	&--pending &,
@@ -115,11 +117,22 @@
 		border-top-left-radius: ~'calc((@{toggleSize} / 2) - @{border})';
 		border-top-right-radius: ~'calc((@{toggleSize} / 2) - @{border})';
 		border: none;
-		border-bottom: @am-border;
 		outline: none !important;
 		appearance: none;
 		resize: none;
 		scrollbar-width: thin !important;
+	}
+
+	&__selection:not(:empty) {
+		padding: 0.75rem 1.25rem;
+		padding-bottom: 0;
+		margin-bottom: 0.75rem;
+		font-size: @am-small-font-size;
+		line-height: @am-small-line-height;
+		font-weight: @am-small-font-weight;
+		font-style: italic;
+		color: hsl(var(--am-clr-text-muted));
+		border-top: @am-border;
 	}
 
 	&__form-footer {
@@ -128,12 +141,13 @@
 		align-items: end;
 		gap: 0.4rem;
 		height: ~'calc(@{toggleSize} - @{border} - @{border})';
+		border-top: @am-border;
 	}
 
 	&__select.am-f-select {
 		width: auto;
 		height: 100%;
-		margin-left: 0.5rem;
+		margin-left: 0.25rem;
 		border: none !important;
 		outline: none !important;
 		background-color: transparent;

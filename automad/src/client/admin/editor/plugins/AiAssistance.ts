@@ -34,6 +34,9 @@
 
 import {
 	App,
+	Attr,
+	Binding,
+	Bindings,
 	createGenericModal,
 	createSelect,
 	CSS,
@@ -135,6 +138,13 @@ export class AiAssistance extends BasePlugin {
 	private static CLS = '__ai';
 
 	/**
+	 * The binding name for the context display in the prompt form.
+	 *
+	 * @static
+	 */
+	private static SELECTION_BINDING = 'aiSelectionBinding';
+
+	/**
 	 * Indicates a pending generation response.
 	 */
 	private _pending: boolean = false;
@@ -230,6 +240,17 @@ export class AiAssistance extends BasePlugin {
 				form
 			);
 
+			create(
+				'div',
+				[CSS.aiAssistanceSelection, CSS.textLimitRows],
+				{
+					[Attr.bind]: AiAssistance.SELECTION_BINDING,
+				},
+				form
+			);
+
+			Bindings.connectElements(this.component);
+
 			const footer = create(
 				'div',
 				[CSS.aiAssistanceFormFooter],
@@ -262,7 +283,7 @@ export class AiAssistance extends BasePlugin {
 				[CSS.aiAssistanceButton, CSS.displayNone],
 				{},
 				buttons,
-				'<i class="bi bi-stop-circle-fill"></i>'
+				'<i class="bi bi-stop-circle"></i>'
 			);
 
 			const close = create(
@@ -270,7 +291,7 @@ export class AiAssistance extends BasePlugin {
 				[CSS.aiAssistanceButton],
 				{},
 				buttons,
-				'<i class="bi bi-robot"></i>'
+				'<i class="bi bi-x-lg"></i>'
 			);
 
 			this.component.listen(
@@ -304,7 +325,7 @@ export class AiAssistance extends BasePlugin {
 				prompt.value = '';
 			});
 
-			this.component.listen(stop, 'click', async () => {
+			const abort = async () => {
 				const value = prompt.value;
 
 				this.abortController.abort();
@@ -312,11 +333,22 @@ export class AiAssistance extends BasePlugin {
 				setTimeout(() => {
 					prompt.value = value;
 				}, 0);
-			});
+			};
+
+			this.component.listen(stop, 'click', abort.bind(this));
 
 			this.component.listen(close, 'click', async () => {
 				if (!this.pending) {
 					details.open = false;
+				}
+			});
+
+			this.component.listen(window, 'keydown', (event: KeyboardEvent) => {
+				if (details.open) {
+					if (event.key === 'Escape') {
+						details.open = false;
+						abort();
+					}
 				}
 			});
 
@@ -355,6 +387,10 @@ export class AiAssistance extends BasePlugin {
 	 * @param state
 	 */
 	private toggleSelectedBlockHighlighting(state: boolean): void {
+		if (this.pending) {
+			return;
+		}
+
 		queryAll(`.${CSS.aiAssistanceContext}`).forEach((block) => {
 			block.classList.remove(CSS.aiAssistanceContext);
 		});
@@ -553,10 +589,19 @@ export class AiAssistance extends BasePlugin {
 	 * Init the block and text selection listener.
 	 */
 	private initSelectionListener(): void {
+		const selectionBinding = new Binding(
+			AiAssistance.SELECTION_BINDING,
+			{}
+		);
+
 		this.component.listen(
 			this.component,
 			'mouseup',
 			debounce((event: MouseEvent) => {
+				if (this.pending) {
+					return;
+				}
+
 				const target = event.target as HTMLElement;
 
 				if (target.closest('[contenteditable]')) {
@@ -565,6 +610,9 @@ export class AiAssistance extends BasePlugin {
 					this.selectedRange = sel.rangeCount
 						? sel.getRangeAt(0).cloneRange()
 						: null;
+
+					selectionBinding.value =
+						this.selectedRange?.toString() || '';
 
 					this.lastFocusedBlockIndex =
 						this.editor.blocks.getCurrentBlockIndex();

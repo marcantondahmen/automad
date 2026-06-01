@@ -46,6 +46,7 @@ export const enum CSS {
 	aiAssistanceForm = 'ai-assistance__form',
 	aiAssistanceFormFooter = 'ai-assistance__form-footer',
 	aiAssistancePrompt = 'ai-assistance__prompt',
+	aiAssistanceSelection = 'ai-assistance__selection',
 	aiAssistanceSelect = 'ai-assistance__select',
 	aiAssistanceButton = 'ai-assistance__button',
 	aiAssistanceContext = 'ai-assistance-context',
