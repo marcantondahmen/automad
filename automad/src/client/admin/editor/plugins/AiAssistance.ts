@@ -391,12 +391,12 @@ export class AiAssistance extends BasePlugin {
 			return;
 		}
 
-		queryAll(`.${CSS.aiAssistanceContext}`).forEach((block) => {
-			block.classList.remove(CSS.aiAssistanceContext);
+		queryAll(`.${CSS.aiAssistanceSelectedBlock}`).forEach((block) => {
+			block.classList.remove(CSS.aiAssistanceSelectedBlock);
 		});
 
 		this.selectedBlocks.forEach((block: { holder: HTMLElement }) => {
-			block.holder.classList.toggle(CSS.aiAssistanceContext, state);
+			block.holder.classList.toggle(CSS.aiAssistanceSelectedBlock, state);
 		});
 	}
 

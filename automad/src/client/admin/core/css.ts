@@ -49,7 +49,7 @@ export const enum CSS {
 	aiAssistanceSelection = 'ai-assistance__selection',
 	aiAssistanceSelect = 'ai-assistance__select',
 	aiAssistanceButton = 'ai-assistance__button',
-	aiAssistanceContext = 'ai-assistance-context',
+	aiAssistanceSelectedBlock = 'ai-assistance-selected-block',
 
 	alert = 'am-c-alert',
 	alertDanger = 'am-c-alert--danger',
