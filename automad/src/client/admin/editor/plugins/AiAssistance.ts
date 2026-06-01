@@ -58,7 +58,7 @@ import {
 } from '@/common';
 import { BlockToolData, EditorJS } from '@/vendor/editorjs';
 import { BasePlugin } from './BasePlugin';
-import { AiContext } from '@/admin/types/editor/plugins';
+import { AiTarget } from '@/admin/types/editor/plugins';
 import { AiProvider } from '@/admin/types';
 import { EditorFieldComponent } from '@/admin/components/Fields/EditorField';
 
@@ -423,7 +423,8 @@ export class AiAssistance extends BasePlugin {
 			{
 				providerId,
 				prompt,
-				context: await this.getContext(),
+				context: await getAllPageBlocks(),
+				target: await this.getTarget(),
 			},
 			true,
 			null,
@@ -467,13 +468,13 @@ export class AiAssistance extends BasePlugin {
 	}
 
 	/**
-	 * Get the context for the current request.
+	 * Get the target content to be transformed for the current request.
 	 *
 	 * @return the current context object
 	 * @async
 	 */
-	private async getContext(): Promise<AiContext> {
-		const context: AiContext = {
+	private async getTarget(): Promise<AiTarget> {
+		const target: AiTarget = {
 			text: this.selectedRange?.toString() || '',
 			blocks: [],
 		};
@@ -490,16 +491,12 @@ export class AiAssistance extends BasePlugin {
 				[]
 			);
 
-			context.blocks = saved.blocks.filter((b: BlockToolData) =>
+			target.blocks = saved.blocks.filter((b: BlockToolData) =>
 				selectedBlockIds.includes(b.id)
 			);
 		}
 
-		if (!context.text && !context.blocks?.length) {
-			context.blocks = await getAllPageBlocks();
-		}
-
-		return context;
+		return target;
 	}
 
 	/**
@@ -611,11 +608,10 @@ export class AiAssistance extends BasePlugin {
 						? sel.getRangeAt(0).cloneRange()
 						: null;
 
-					selectionBinding.value =
-						this.selectedRange?.toString() || '';
-
 					this.lastFocusedBlockIndex =
 						this.editor.blocks.getCurrentBlockIndex();
+
+					this.selectedBlocks = [];
 				}
 
 				if (!target.closest(`.${AiAssistance.CLS}`)) {
@@ -624,6 +620,12 @@ export class AiAssistance extends BasePlugin {
 
 					this.toggleSelectedBlockHighlighting(false);
 				}
+
+				if (this.selectedBlocks.length > 0) {
+					this.selectedRange = null;
+				}
+
+				selectionBinding.value = this.selectedRange?.toString() || '';
 			})
 		);
 	}

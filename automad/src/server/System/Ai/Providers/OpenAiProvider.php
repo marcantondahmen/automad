@@ -113,28 +113,39 @@ class OpenAiProvider extends AbstractProvider {
 	 * Make a request to the provider's text endpoint.
 	 *
 	 * @param string $prompt
+	 * @param string $target
 	 * @param string $context
 	 * @param Messenger $Messenger
 	 * @return string
 	 */
-	public function requestTextApi(string $prompt, string $context, Messenger $Messenger): string {
+	public function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string {
 		$response = $this->requestProviderApi(
 			'/responses',
 			array(
 				'model' => $this->ProviderConfig->model,
 				'instructions' => $this->getInstructions(),
 				'input' => <<<XML
-					<task>
+					TASK:
 					$prompt
-					</task>
-						
-					<content>
-					$context
-					</content>
 
-					<output>
-					Return only the rewritten or generated text and HTML.
-					</output>
+					---
+
+					TARGET:
+					$target
+
+					---
+
+					PAGE_CONTEXT:
+					$context
+
+					---
+
+					RULES:
+					- PAGE_CONTEXT is reference only.
+					- Never rewrite or return PAGE_CONTEXT.
+					- Only modify TARGET.
+					- If TARGET is empty, generate only the requested insertion.
+					- Return only the content that should be inserted or replace TARGET.
 					XML
 			),
 			$Messenger

@@ -69,9 +69,17 @@ class AiAssistanceController {
 		$Automad = Automad::fromCache();
 		$prompt = Request::post('prompt');
 		$providerId = Request::post('providerId');
-		$contextData = Request::post('context');
-		$context = $contextData['text'] ?? '';
-		$context .= Blocks::render(array('blocks' => $contextData['blocks']), $Automad);
+		$contextBlocks = Request::post('context');
+		$targetData = Request::post('target');
+
+		if (empty($contextBlocks) || empty($targetData)) {
+			return $Response;
+		}
+
+		$context = Blocks::render(array('blocks' => $contextBlocks), $Automad);
+
+		$target = $targetData['text'] ?? '';
+		$target .= 	Blocks::render(array('blocks' => $targetData['blocks']), $Automad);
 
 		$ProviderCollection = new ProviderCollection();
 		$provider = $ProviderCollection->getProvider($providerId);
@@ -84,7 +92,7 @@ class AiAssistanceController {
 		$ConfigFile->set('AM_AI_PROVIDER_ID', $providerId);
 		$ConfigFile->write();
 
-		$Response->setData(array('output' => $provider->requestTextApi($prompt, $context, $Messenger)));
+		$Response->setData(array('output' => $provider->requestTextApi($prompt, $target, $context, $Messenger)));
 
 		return $Response->setError($Messenger->getError());
 	}

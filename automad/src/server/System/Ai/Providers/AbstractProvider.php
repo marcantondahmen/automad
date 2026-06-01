@@ -127,11 +127,12 @@ abstract class AbstractProvider {
 	 * Make a request to the provider's text endpoint.
 	 *
 	 * @param string $prompt
+	 * @param string $target
 	 * @param string $context
 	 * @param Messenger $Messenger
 	 * @return string
 	 */
-	abstract public function requestTextApi(string $prompt, string $context, Messenger $Messenger): string;
+	abstract public function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string;
 
 	/**
 	 * Set a provider api key.

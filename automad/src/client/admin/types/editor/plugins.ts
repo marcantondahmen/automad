@@ -34,7 +34,7 @@
 
 import { BlockToolData } from 'automad-editorjs';
 
-export interface AiContext {
+export interface AiTarget {
 	text: string;
 	blocks: BlockToolData[];
 }
