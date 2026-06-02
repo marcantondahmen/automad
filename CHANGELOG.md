@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.35](https://github.com/marcantondahmen/automad/commit/c89c1eff7308b588cb18c49bfe5c828c5e049f36)
+## [v2.0.0-beta.36](https://github.com/marcantondahmen/automad/commit/180984108f21b71c57a39acbbcaf4e96f065d464)
 
-Tue, 2 Jun 2026 20:44:15 +0200
+Tue, 2 Jun 2026 21:31:12 +0200
+
+### New Features
+
+- show count of selected blocks in ai assistance prompt ui ([180984108](https://github.com/marcantondahmen/automad/commit/180984108f21b71c57a39acbbcaf4e96f065d464))
+
+## [v2.0.0-beta.35](https://github.com/marcantondahmen/automad/commit/c59a7aebda4f74e28fa54087aea1f9481fedd65a)
+
+Tue, 2 Jun 2026 20:50:37 +0200
 
 ### Bugfixes
 
