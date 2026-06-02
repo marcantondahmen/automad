@@ -47,6 +47,21 @@ export interface SystemSectionData {
 	narrowIcon?: boolean;
 }
 
+export interface AiProvider {
+	id: string;
+	name: string;
+	icon: string;
+	model: string;
+	apiKeyHelp: string;
+	website: string;
+	isConfigured: boolean;
+}
+
+interface AiSettings {
+	enabled: boolean;
+	activeProviderId: string;
+}
+
 interface CacheSettings {
 	enabled: Enabled;
 	lifetime: number;
@@ -80,6 +95,7 @@ export interface User {
 }
 
 export interface SystemSettings {
+	ai: AiSettings;
 	cache: CacheSettings;
 	debug: DebugSettings;
 	feed: FeedSettings;

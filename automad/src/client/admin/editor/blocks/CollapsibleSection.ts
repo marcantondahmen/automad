@@ -83,7 +83,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	static get sanitize() {
 		return {
 			title: {},
-			content: {},
+			content: true,
 			collapsed: false,
 			group: false,
 		};

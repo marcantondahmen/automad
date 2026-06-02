@@ -47,6 +47,7 @@ import {
 	SystemSectionData,
 } from '@/admin/types';
 import { Section } from '@/common';
+import { renderAiSection } from './Partials/System/Ai';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderDebugSection } from './Partials/System/Debug';
 import { renderFeedSection } from './Partials/System/Feed';
@@ -84,6 +85,15 @@ const getSystemSections = (): SystemSectionData[] => {
 			`,
 			render: renderUsersSection,
 			narrowIcon: true,
+		},
+		{
+			section: Section.ai,
+			icon: 'robot',
+			title: App.text('systemAi'),
+			info: App.text('systemAiCardInfo'),
+			state: '<am-system-ai-assistance-indicator></am-system-ai-assistance-indicator>',
+			render: renderAiSection,
+			narrowIcon: false,
 		},
 		{
 			section: Section.feed,
@@ -231,11 +241,8 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 	private renderOverviewSection(): string {
 		return html`
 			<am-switcher-section name="${Section.overview}">
-				<div class="${CSS.grid}" style="--min: 17rem;">
-					${this.renderOverviewCards(this.sectionData.slice(0, 2))}
-				</div>
 				<div class="${CSS.grid}" style="--min: 13rem;">
-					${this.renderOverviewCards(this.sectionData.slice(2, 8))}
+					${this.renderOverviewCards(this.sectionData)}
 				</div>
 			</am-switcher-section>
 		`;

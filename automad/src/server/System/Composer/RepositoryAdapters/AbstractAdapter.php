@@ -81,7 +81,7 @@ abstract class AbstractAdapter {
 	 * @param Messenger $Messenger
 	 */
 	public function __construct(string $name, string $repositoryUrl, string $branch, Messenger $Messenger) {
-		$composerJson = Fetch::get($this->getComposerJsonUrl($repositoryUrl, $branch), $this->getHeaders());
+		$composerJson = Fetch::request($this->getComposerJsonUrl($repositoryUrl, $branch), $this->getHeaders());
 
 		Debug::log($composerJson, 'composer.json');
 

@@ -40,6 +40,17 @@ export const enum CSS {
 	focus = 'am-focus',
 	validate = 'am-validate',
 
+	aiAssistance = 'ai-assistance',
+	aiAssistancePending = 'ai-assistance--pending',
+	aiAssistanceToggle = 'ai-assistance__toggle',
+	aiAssistanceForm = 'ai-assistance__form',
+	aiAssistanceFormFooter = 'ai-assistance__form-footer',
+	aiAssistancePrompt = 'ai-assistance__prompt',
+	aiAssistanceSelection = 'ai-assistance__selection',
+	aiAssistanceSelect = 'ai-assistance__select',
+	aiAssistanceButton = 'ai-assistance__button',
+	aiAssistanceSelectedBlock = 'ai-assistance-selected-block',
+
 	alert = 'am-c-alert',
 	alertDanger = 'am-c-alert--danger',
 	alertIcon = 'am-c-alert__icon',
@@ -66,6 +77,7 @@ export const enum CSS {
 	cardHeaderDropdown = 'am-c-card__header-dropdown',
 	cardTeaser = 'am-c-card__teaser',
 	cardTitle = 'am-c-card__title',
+	cardDelete = 'am-c-card__delete',
 	cardBody = 'am-c-card__body',
 	cardBodyLarge = 'am-c-card__body--large',
 	cardButtons = 'am-c-card__buttons',
@@ -217,6 +229,7 @@ export const enum CSS {
 	gridAuto = 'am-l-grid--auto',
 
 	iconText = 'am-c-icon-text',
+	iconFixedWidth = 'am-u-icon-fixed-width',
 
 	img = 'am-e-img',
 	imgError = 'am-e-img__error',
@@ -353,6 +366,7 @@ export const enum CSS {
 	switcherSectionActive = 'am-c-switcher-section--active',
 
 	textActive = 'am-u-text-active',
+	textDanger = 'am-u-text-danger',
 	textLink = 'am-u-text-link',
 	textMono = 'am-u-text-mono',
 	textMuted = 'am-u-text-muted',

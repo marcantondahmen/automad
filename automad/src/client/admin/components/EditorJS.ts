@@ -45,6 +45,7 @@ import { LineHeightInline } from '@/admin/editor/inline/LineHeight';
 import { LinkInline } from '@/admin/editor/inline/Link';
 import { StrikeThroughInline } from '@/admin/editor/inline/StrikeThrough';
 import { UnderlineInline } from '@/admin/editor/inline/Underline';
+import { AiAssistance } from '@/admin/editor/plugins/AiAssistance';
 import { DragDrop } from '@/admin/editor/plugins/DragDrop';
 import { EditorOutputData, KeyValueMap } from '@/admin/types';
 import { App, Attr, CSS, getLogger, getSlug, query, Route } from '@/admin/core';
@@ -266,6 +267,7 @@ export class EditorJSComponent extends BaseComponent {
 	 */
 	onRender(): void {
 		window.requestIdleCallback(() => {
+			new AiAssistance(this);
 			new DragDrop(this);
 		});
 	}

@@ -70,11 +70,18 @@
 		}
 	}
 
+	&.ai-assistance-selected-block,
+	&--selected {
+		background-color: hsl(var(--am-clr-background-highlight));
+		outline: @am-border;
+		border-radius: @am-form-radius;
+	}
+
 	&--selected &__content {
 		background-color: transparent;
 
 		& > .cdx-block {
-			background-color: hsl(var(--am-clr-background-highlight));
+			background-color: transparent;
 		}
 	}
 

@@ -26,36 +26,27 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import { BaseComponent } from '@/admin/components/Base';
-import { debounce, EventName } from '@/admin/core';
+import { AiProviderController } from '@/common';
+import { AiProvider } from '../types';
+import { requestAPI } from './request';
 
 /**
- * The abstract base state component.
+ * Get the list aof available AI providers.
  *
- * @extends BaseComponent
+ * @return the list of providers.
  */
-export abstract class BaseStateIndicatorComponent extends BaseComponent {
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.render();
+export const getAiProviders = async (): Promise<AiProvider[]> => {
+	const { data } = await requestAPI(AiProviderController.getProviders);
 
-		this.listen(
-			window,
-			EventName.appStateChange,
-			debounce(this.render.bind(this), 200)
-		);
+	if (!data) {
+		return [];
 	}
 
-	/**
-	 * Render the state element.
-	 */
-	protected abstract render(): void;
-}
+	return data as AiProvider[];
+};

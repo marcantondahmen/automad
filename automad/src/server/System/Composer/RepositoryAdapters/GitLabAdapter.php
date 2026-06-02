@@ -72,7 +72,7 @@ class GitLabAdapter extends AbstractAdapter {
 	protected function getComposerJsonUrl(string $repositoryUrl, string $branch): string {
 		$repo = basename(dirname($repositoryUrl)) . '/' . basename($repositoryUrl);
 		$gitlabBase = Str::stripEnd($repositoryUrl, '/' . $repo);
-		$project = json_decode(Fetch::get("$gitlabBase/api/v4/projects/" . urlencode($repo), $this->getHeaders()), true);
+		$project = json_decode(Fetch::request("$gitlabBase/api/v4/projects/" . urlencode($repo), $this->getHeaders()), true);
 		$id = $project['id'];
 
 		return "{$gitlabBase}/api/v4/projects/$id/repository/files/composer.json/raw?ref=$branch";

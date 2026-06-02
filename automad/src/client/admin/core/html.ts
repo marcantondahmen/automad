@@ -39,6 +39,7 @@ import { KeyValueMap } from '@/admin/types';
  * A whitelist of custom component attributes.
  */
 export const enum Attr {
+	aiProviderId = 'am-ai-provider-id',
 	api = 'am-api',
 	auto = 'am-auto',
 	badge = 'am-badge',

@@ -53,7 +53,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class DiskUsage {
-	const CACHE_LIFETIME = 300;
+	const CACHE_LIFETIME = 3600;
 	const FILE_CACHE = AM_DIR_TMP . '/disk_usage';
 
 	/**

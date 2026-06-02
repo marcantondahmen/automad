@@ -74,7 +74,7 @@ class PackageCollection {
 	 * @return array the list of packages
 	 */
 	public static function get(): array {
-		$apiResponse = Fetch::get(AM_PACKAGE_REGISTRY);
+		$apiResponse = Fetch::request(AM_PACKAGE_REGISTRY);
 
 		if (empty($apiResponse)) {
 			return array();

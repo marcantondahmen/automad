@@ -26,36 +26,32 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import { BaseComponent } from '@/admin/components/Base';
-import { debounce, EventName } from '@/admin/core';
+import { AiProviderController } from '@/admin/core';
+import { BaseAiValidationIndicator } from '../BaseAiValidationIndicator';
 
 /**
- * The abstract base state component.
+ * An AI provider api key validation indicator.
  *
- * @extends BaseComponent
+ * @extends BaseUpdateIndicatorComponent
  */
-export abstract class BaseStateIndicatorComponent extends BaseComponent {
+class AiApiKeyValidationIndicator extends BaseAiValidationIndicator {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The validation endpoint.
+	 *
+	 * @return the endpoint
 	 */
-	connectedCallback(): void {
-		this.render();
-
-		this.listen(
-			window,
-			EventName.appStateChange,
-			debounce(this.render.bind(this), 200)
-		);
+	getController(): AiProviderController {
+		return AiProviderController.validateApiKey;
 	}
-
-	/**
-	 * Render the state element.
-	 */
-	protected abstract render(): void;
 }
+
+customElements.define(
+	'am-ai-api-key-validation-indicator',
+	AiApiKeyValidationIndicator
+);

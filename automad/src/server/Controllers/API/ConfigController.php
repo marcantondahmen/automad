@@ -63,6 +63,11 @@ class ConfigController {
 		$ConfigFile = new ConfigFile();
 
 		switch (Request::post('type')) {
+			case 'ai':
+				$ConfigFile->set('AM_AI_ASSISTANCE_ENABLED', !empty(Request::post('aiAssitanceEnabled')));
+
+				break;
+
 			case 'cache':
 				$ConfigFile->set('AM_CACHE_ENABLED', !empty(Request::post('cacheEnabled')));
 				$ConfigFile->set('AM_CACHE_MONITOR_DELAY', intval(Request::post('cacheMonitorDelay')));

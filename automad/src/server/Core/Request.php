@@ -121,7 +121,7 @@ class Request {
 
 	/**
 	 * Return value by key in the $_POST array or any empty string, if that key doesn't exist.
-	 * Note: Since this method always returns a string, it should not be used to test whether a key exists in $_POST.
+	 * Note: Since this method always returns at least a string, it should not be used to test whether a key exists in $_POST.
 	 *
 	 * @param string $key
 	 * @return mixed The value for the requested key

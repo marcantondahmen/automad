@@ -180,6 +180,7 @@ export const request = async (
  * @param [parallel]
  * @param [callback]
  * @param [cancelable]
+ * @param [abortController]
  * @returns the Promise
  * @async
  */
@@ -188,7 +189,8 @@ export const requestAPI = async (
 	dataOrForm: KeyValueMap | FormComponent = null,
 	parallel: boolean = true,
 	callback: Function = null,
-	cancelable: boolean = false
+	cancelable: boolean = false,
+	custsomAbortController: AbortController = null
 ): Promise<APIResponse> => {
 	if (!parallel) {
 		// Prevent stacking of non-parallel requests to the same controller over and over again.
@@ -214,7 +216,7 @@ export const requestAPI = async (
 		data = transformToTree(data);
 	}
 
-	const abortController = new AbortController();
+	const abortController = custsomAbortController || new AbortController();
 	const abortListener = listen(window, EventName.beforeUpdateView, () => {
 		if (cancelable) {
 			abortController.abort();

@@ -34,6 +34,7 @@
 
 .am-c-card {
 	@radius-inner: ~'calc(@{am-card-radius} - 1px)';
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	border-radius: @am-card-radius;
@@ -79,6 +80,19 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	&__delete {
+		position: absolute;
+		padding: @am-card-padding;
+		right: 0;
+		color: hsl(var(--am-clr-text-muted));
+		cursor: pointer;
+		transition: color 0.2s;
+
+		&:hover {
+			color: hsl(var(--am-clr-text));
+		}
 	}
 
 	&__header {
