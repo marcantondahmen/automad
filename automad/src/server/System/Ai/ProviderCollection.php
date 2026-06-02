@@ -36,6 +36,7 @@
 namespace Automad\System\Ai;
 
 use Automad\System\Ai\Providers\AbstractProvider;
+use Automad\System\Ai\Providers\ClaudeProvider;
 use Automad\System\Ai\Providers\OpenAiProvider;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -59,9 +60,11 @@ class ProviderCollection {
 	 * The constructor.
 	 */
 	public function __construct() {
+		$ClaudeProvider = new ClaudeProvider();
 		$OpenAiProvider = new OpenAiProvider();
 
 		$this->providers = array(
+			$ClaudeProvider->getId() => $ClaudeProvider,
 			$OpenAiProvider->getId() => $OpenAiProvider
 		);
 	}
