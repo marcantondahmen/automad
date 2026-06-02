@@ -206,7 +206,10 @@ export class AiAssistance extends BasePlugin {
 			this.component,
 			html`
 				<summary>
-					<span class="${CSS.aiAssistanceToggle}">
+					<span
+						class="${CSS.aiAssistanceToggle}"
+						${Attr.tooltip}="${App.text('systemAi')}"
+					>
 						<i class="bi bi-robot"></i>
 					</span>
 				</summary>
@@ -270,10 +273,18 @@ export class AiAssistance extends BasePlugin {
 
 			const buttons = create('div', [CSS.flex], {}, footer);
 
+			const settings = create(
+				'span',
+				[CSS.aiAssistanceButton, CSS.textMuted],
+				{ [Attr.tooltip]: App.text('aiAssistanceOpenSettings') },
+				buttons,
+				'<i class="bi bi-sliders"></i>'
+			);
+
 			const submit = create(
 				'span',
 				[CSS.aiAssistanceButton],
-				{},
+				{ [Attr.tooltip]: App.text('submit') },
 				buttons,
 				'<i class="bi bi-arrow-up-circle-fill"></i>'
 			);
@@ -289,7 +300,7 @@ export class AiAssistance extends BasePlugin {
 			const close = create(
 				'span',
 				[CSS.aiAssistanceButton],
-				{},
+				{ [Attr.tooltip]: App.text('close') },
 				buttons,
 				'<i class="bi bi-x-lg"></i>'
 			);
@@ -303,6 +314,8 @@ export class AiAssistance extends BasePlugin {
 					prompt.disabled = this.pending;
 				}
 			);
+
+			this.component.listen(settings, 'click', openSettings);
 
 			this.component.listen(submit, 'click', async () => {
 				this.abortController = new AbortController();
