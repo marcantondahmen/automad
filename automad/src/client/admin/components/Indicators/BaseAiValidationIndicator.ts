@@ -61,19 +61,20 @@ export abstract class BaseAiValidationIndicator extends BaseStateIndicatorCompon
 
 		const validate = async () => {
 			const { data } = await requestAPI(this.getController(), { id });
+
 			const cls = data?.isValid
-				? `bi bi-check-circle`
-				: `bi bi-slash-circle ${CSS.textDanger}`;
+				? `bi bi-check-circle-fill`
+				: `bi bi-slash-circle-fill ${CSS.textDanger}`;
 
 			this.innerHTML = html`<i class="${cls} ${CSS.iconFixedWidth}"></i>`;
 		};
 
 		this.innerHTML = html`<i
-			class="bi bi-circle ${CSS.iconFixedWidth}"
+			class="bi bi-dash-circle ${CSS.iconFixedWidth} ${CSS.textMuted}"
 		></i>`;
 
 		if (App.system.ai.enabled) {
-			validate();
+			setTimeout(validate, 5000);
 		}
 	}
 }
