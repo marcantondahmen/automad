@@ -625,6 +625,7 @@ export class AiAssistance extends BasePlugin {
 						this.editor.blocks.getCurrentBlockIndex();
 
 					this.selectedBlocks = [];
+					this.toggleSelectedBlockHighlighting(false);
 
 					selectionBinding.value =
 						this.selectedRange?.toString() || '';
@@ -633,14 +634,14 @@ export class AiAssistance extends BasePlugin {
 				if (!target.closest(`.${AiAssistance.CLS}`)) {
 					this.selectedBlocks =
 						this.editor.blockSelection.selectedBlocks;
-
-					this.toggleSelectedBlockHighlighting(false);
 				}
 
 				if (this.selectedBlocks.length > 0) {
+					const count = this.selectedBlocks.length;
+
+					selectionBinding.value = `↪ ${count} ${count > 1 ? App.text('blocks') : App.text('block')}`;
+
 					this.selectedRange = null;
-					selectionBinding.value =
-						this.selectedRange?.toString() || '';
 				}
 			})
 		);
