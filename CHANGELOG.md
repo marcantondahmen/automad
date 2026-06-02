@@ -1,8 +1,17 @@
 # Changelog
 
-## [v2.0.0-beta.34](https://github.com/marcantondahmen/automad/commit/52d1b084be1c87c3db2a99f37fd086e6fd0c34ad)
+## [v2.0.0-beta.35](https://github.com/marcantondahmen/automad/commit/c89c1eff7308b588cb18c49bfe5c828c5e049f36)
 
-Tue, 2 Jun 2026 19:59:10 +0200
+Tue, 2 Jun 2026 20:44:15 +0200
+
+### Bugfixes
+
+- fix display for selected content in ai assistance prompt ui ([128080622](https://github.com/marcantondahmen/automad/commit/128080622c2868d108ca6c472adf282dfa0f1d3e))
+- fix z-index of ai assistance ui ([c89c1eff7](https://github.com/marcantondahmen/automad/commit/c89c1eff7308b588cb18c49bfe5c828c5e049f36))
+
+## [v2.0.0-beta.34](https://github.com/marcantondahmen/automad/commit/ac9347de71cc694f1cfd6de6666c4b5e2ca6c0e8)
+
+Tue, 2 Jun 2026 20:04:57 +0200
 
 ### New Features
 
