@@ -229,6 +229,7 @@ export const enum CSS {
 	gridAuto = 'am-l-grid--auto',
 
 	iconText = 'am-c-icon-text',
+	iconFixedWidth = 'am-u-icon-fixed-width',
 
 	img = 'am-e-img',
 	imgError = 'am-e-img__error',

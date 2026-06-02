@@ -65,10 +65,12 @@ export abstract class BaseAiValidationIndicator extends BaseStateIndicatorCompon
 				? `bi bi-check-circle`
 				: `bi bi-slash-circle ${CSS.textDanger}`;
 
-			this.innerHTML = html`<i class="${cls}"></i>`;
+			this.innerHTML = html`<i class="${cls} ${CSS.iconFixedWidth}"></i>`;
 		};
 
-		this.innerHTML = html`<i class="bi bi-circle"></i>`;
+		this.innerHTML = html`<i
+			class="bi bi-circle ${CSS.iconFixedWidth}"
+		></i>`;
 
 		if (App.system.ai.enabled) {
 			validate();

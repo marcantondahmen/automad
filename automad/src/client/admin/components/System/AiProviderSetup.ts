@@ -56,6 +56,14 @@ import {
 import { BaseComponent } from '../Base';
 import { AiProvider, APIResponse } from '@/admin/types';
 
+const modelDisplayName = (model: string): string =>
+	model
+		.replace(/(\d)-(\d)/g, '$1.$2')
+		.replace(/-/g, ' ')
+		.split(' ')
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(' ');
+
 /**
  * The AI provider setup component.
  *
@@ -190,9 +198,22 @@ class AiProviderSetupComponent extends BaseComponent {
 			'<i class="bi bi-trash3"></i>'
 		);
 
+		const changeModelButton = create(
+			'span',
+			[CSS.flex, CSS.flexGap],
+			{},
+			buttons,
+			html`
+				<span>${modelDisplayName(provider.model)}</span>
+				<am-ai-model-validation-indicator
+					${Attr.aiProviderId}="${provider.id}"
+				></am-ai-model-validation-indicator>
+			`
+		);
+
 		const setNewApiKeyButton = create(
 			'span',
-			[],
+			[CSS.flex, CSS.flexGap],
 			{},
 			buttons,
 			html`
@@ -200,19 +221,6 @@ class AiProviderSetupComponent extends BaseComponent {
 				<am-ai-api-key-validation-indicator
 					${Attr.aiProviderId}="${provider.id}"
 				></am-ai-api-key-validation-indicator>
-			`
-		);
-
-		const changeModelButton = create(
-			'span',
-			[],
-			{},
-			buttons,
-			html`
-				<span>${provider.model}</span>
-				<am-ai-model-validation-indicator
-					${Attr.aiProviderId}="${provider.id}"
-				></am-ai-model-validation-indicator>
 			`
 		);
 
@@ -353,7 +361,10 @@ class AiProviderSetupComponent extends BaseComponent {
 			}
 
 			const select = createSelect(
-				models.map((value: string) => ({ value })),
+				models.map((value: string) => ({
+					value,
+					text: modelDisplayName(value),
+				})),
 				provider.model || models[0]
 			);
 
