@@ -2,6 +2,7 @@
 
 namespace Automad\Controllers\API;
 
+use Automad\Core\FileSystem;
 use Automad\Models\UserCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +19,7 @@ class UserCollectionControllerTest extends TestCase {
 		/** @disregard */
 		$this->assertSame($data->code, 200);
 
-		touch(UserCollection::FILE_ACCOUNTS);
+		FileSystem::write(UserCollection::FILE_ACCOUNTS, '');
 
 		$Response = UserCollectionController::createFirstUser();
 		$json = $Response->json();
