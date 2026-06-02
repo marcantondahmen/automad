@@ -625,6 +625,9 @@ export class AiAssistance extends BasePlugin {
 						this.editor.blocks.getCurrentBlockIndex();
 
 					this.selectedBlocks = [];
+
+					selectionBinding.value =
+						this.selectedRange?.toString() || '';
 				}
 
 				if (!target.closest(`.${AiAssistance.CLS}`)) {
@@ -636,9 +639,9 @@ export class AiAssistance extends BasePlugin {
 
 				if (this.selectedBlocks.length > 0) {
 					this.selectedRange = null;
+					selectionBinding.value =
+						this.selectedRange?.toString() || '';
 				}
-
-				selectionBinding.value = this.selectedRange?.toString() || '';
 			})
 		);
 	}
