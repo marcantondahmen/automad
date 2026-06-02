@@ -72,7 +72,7 @@ class AiAssistanceController {
 		$contextBlocks = Request::post('context');
 		$targetData = Request::post('target');
 
-		if (empty($contextBlocks) || empty($targetData)) {
+		if (!is_array($contextBlocks) || !is_array($targetData)) {
 			return $Response;
 		}
 
