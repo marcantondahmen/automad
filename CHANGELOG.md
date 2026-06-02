@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.36](https://github.com/marcantondahmen/automad/commit/180984108f21b71c57a39acbbcaf4e96f065d464)
+## [v2.0.0-beta.37](https://github.com/marcantondahmen/automad/commit/8c19c19fedd220cea58d9a1f98f7d51a84a988bc)
 
-Tue, 2 Jun 2026 21:31:12 +0200
+Tue, 2 Jun 2026 21:59:07 +0200
+
+### Bugfixes
+
+- fix selection preview binding issue in ai assistance ui ([8c19c19fe](https://github.com/marcantondahmen/automad/commit/8c19c19fedd220cea58d9a1f98f7d51a84a988bc))
+
+## [v2.0.0-beta.36](https://github.com/marcantondahmen/automad/commit/c3eda0bba772aefc98f6296227b225326944721d)
+
+Tue, 2 Jun 2026 21:35:02 +0200
 
 ### New Features
 
