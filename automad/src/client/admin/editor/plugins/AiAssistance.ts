@@ -46,6 +46,7 @@ import {
 	getAiProviders,
 	html,
 	requestAPI,
+	uniqueId,
 } from '@/admin/core';
 import {
 	AiAssistanceController,
@@ -138,13 +139,6 @@ export class AiAssistance extends BasePlugin {
 	private static CLS = '__ai';
 
 	/**
-	 * The binding name for the context display in the prompt form.
-	 *
-	 * @static
-	 */
-	private static SELECTION_BINDING = 'aiSelectionBinding';
-
-	/**
 	 * Indicates a pending generation response.
 	 */
 	private _pending: boolean = false;
@@ -216,17 +210,23 @@ export class AiAssistance extends BasePlugin {
 			`
 		);
 
-		this.renderForm(details);
-		this.initSelectionListener();
+		const selectionBindingName = `aiSelection-${uniqueId()}`;
+
+		this.initSelectionListener(selectionBindingName);
+		this.renderForm(details, selectionBindingName);
 	}
 
 	/**
 	 * Render the prompt input dialog.
 	 *
 	 * @param details
+	 * @param selectionBindingName
 	 * @async
 	 */
-	private async renderForm(details: HTMLDetailsElement): Promise<void> {
+	private async renderForm(
+		details: HTMLDetailsElement,
+		selectionBindingName: string
+	): Promise<void> {
 		const providers = (await getAiProviders())
 			.filter((p: AiProvider) => p.isConfigured)
 			.map((p: AiProvider) => {
@@ -247,7 +247,7 @@ export class AiAssistance extends BasePlugin {
 				'div',
 				[CSS.aiAssistanceSelection, CSS.textLimitRows],
 				{
-					[Attr.bind]: AiAssistance.SELECTION_BINDING,
+					[Attr.bind]: selectionBindingName,
 				},
 				form
 			);
@@ -597,12 +597,11 @@ export class AiAssistance extends BasePlugin {
 
 	/**
 	 * Init the block and text selection listener.
+	 *
+	 * @param selectionBindingName
 	 */
-	private initSelectionListener(): void {
-		const selectionBinding = new Binding(
-			AiAssistance.SELECTION_BINDING,
-			{}
-		);
+	private initSelectionListener(selectionBindingName: string): void {
+		const selectionBinding = new Binding(selectionBindingName, {});
 
 		this.component.listen(
 			this.component,
