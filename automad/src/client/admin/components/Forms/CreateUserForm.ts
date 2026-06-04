@@ -48,7 +48,7 @@ import { FormComponent } from './Form';
  *
  * @extends FormComponent
  */
-export class SetupFormComponent extends FormComponent {
+export class CreateUserFormComponent extends FormComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
@@ -171,4 +171,4 @@ export class SetupFormComponent extends FormComponent {
 	}
 }
 
-customElements.define('am-setup-form', SetupFormComponent);
+customElements.define('am-create-user-form', CreateUserFormComponent);

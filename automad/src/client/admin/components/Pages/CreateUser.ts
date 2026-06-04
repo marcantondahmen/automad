@@ -42,11 +42,11 @@ import {
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
- * The setup view.
+ * The create user view.
  *
  * @extends BaseCenteredLayoutComponent
  */
-export class SetupComponent extends BaseCenteredLayoutComponent {
+export class CreateUserComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -63,13 +63,13 @@ export class SetupComponent extends BaseCenteredLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<am-setup-form
+			<am-create-user-form
 				${Attr.api}="${UserCollectionController.createFirstUser}"
 				${Attr.focus}
 				${Attr.enter}
-			></am-setup-form>
+			></am-create-user-form>
 		`;
 	}
 }
 
-customElements.define(getTagFromRoute(Route.setup), SetupComponent);
+customElements.define(getTagFromRoute(Route.createuser), CreateUserComponent);

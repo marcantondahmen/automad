@@ -176,7 +176,7 @@ class Routes {
 		$hasAccounts = is_readable(UserCollection::FILE_ACCOUNTS);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/setup',
+			AM_PAGE_DASHBOARD . '/createuser',
 			function () {
 				return Dashboard::render();
 			},
@@ -186,13 +186,13 @@ class Routes {
 		$Router->register(
 			AM_PAGE_DASHBOARD . '(/.*)?',
 			function () {
-				self::redirectDashboard('/setup');
+				self::redirectDashboard('/createuser');
 			},
 			!$hasAccounts
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/setup',
+			AM_PAGE_DASHBOARD . '/createuser',
 			function () {
 				self::redirectDashboard('/login');
 			},

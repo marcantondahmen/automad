@@ -83,6 +83,7 @@ import('./components/Forms/Publish/ComponentPublishForm');
 import('./components/Forms/Publish/PagePublishForm');
 import('./components/Forms/Publish/SharedPublishForm');
 import('./components/Forms/ComponentCollectionForm');
+import('./components/Forms/CreateUserForm');
 import('./components/Forms/DeleteUsersForm');
 import('./components/Forms/Form');
 import('./components/Forms/FormError');
@@ -93,7 +94,6 @@ import('./components/Forms/PageDataForm');
 import('./components/Forms/RequestPasswordResetTokenForm');
 import('./components/Forms/ResetPasswordForm');
 import('./components/Forms/SearchForm');
-import('./components/Forms/SetupForm');
 import('./components/Forms/SharedDataForm');
 import('./components/Forms/Submit');
 import('./components/Forms/SystemUpdateForm');
@@ -138,6 +138,7 @@ import('./components/PackageManager/RepositoryList');
 import('./components/PackageManager/UpdateAllPackages');
 
 import('./components/Pages/Components');
+import('./components/Pages/CreateUser');
 import('./components/Pages/Home');
 import('./components/Pages/InPage');
 import('./components/Pages/Login');
@@ -145,13 +146,11 @@ import('./components/Pages/Packages');
 import('./components/Pages/Page');
 import('./components/Pages/Password');
 import('./components/Pages/Search');
-import('./components/Pages/Setup');
 import('./components/Pages/Shared');
 import('./components/Pages/System');
 import('./components/Pages/Token');
 import('./components/Pages/Trash');
 import('./components/Pages/VerifyTotp');
-
 import('./components/Sidebar/Sidebar');
 import('./components/Sidebar/SidebarToggle');
 
