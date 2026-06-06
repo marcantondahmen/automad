@@ -48,7 +48,8 @@
 
 	&--pending &,
 	am-editor-js:not(:has(am-editor-js:hover)):hover > &,
-	&:has(textarea:focus) {
+	&:has(textarea:focus),
+	&[open] {
 		pointer-events: all;
 		opacity: 1;
 	}
