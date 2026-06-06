@@ -42,6 +42,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;
+use Automad\System\Ai\ProviderCollection;
 use Automad\System\Fields;
 use Automad\System\PackageCollection;
 use Automad\System\ThemeCollection;
@@ -84,6 +85,7 @@ class State {
 	 */
 	private function create(): array {
 		$Automad = Automad::fromCache();
+		$ProviderCollection = new ProviderCollection();
 		$UserCollection = new UserCollection();
 		$ThemeCollection = new ThemeCollection();
 		$themes = $ThemeCollection->getThemes();
@@ -111,7 +113,8 @@ class State {
 			'system' => array(
 				'ai' => array(
 					'enabled' => AM_AI_ASSISTANCE_ENABLED,
-					'activeProviderId' => AM_AI_PROVIDER_ID
+					'activeProviderId' => AM_AI_PROVIDER_ID,
+					'providers' => $ProviderCollection->getPublicDetails()
 				),
 				'cache' => array(
 					'enabled' => AM_CACHE_ENABLED,

@@ -43,7 +43,6 @@ import {
 	EventName,
 	FieldTag,
 	fire,
-	getAiProviders,
 	html,
 	requestAPI,
 	uniqueId,
@@ -221,13 +220,12 @@ export class AiAssistance extends BasePlugin {
 	 *
 	 * @param details
 	 * @param selectionBindingName
-	 * @async
 	 */
-	private async renderForm(
+	private renderForm(
 		details: HTMLDetailsElement,
 		selectionBindingName: string
-	): Promise<void> {
-		const providers = (await getAiProviders())
+	): void {
+		const providers = App.system.ai.providers
 			.filter((p: AiProvider) => p.isConfigured)
 			.map((p: AiProvider) => {
 				return { value: p.id, text: p.name };

@@ -47,7 +47,6 @@ import {
 	FieldTag,
 	findFormErrorElement,
 	fire,
-	getAiProviders,
 	html,
 	notifyFormError,
 	query,
@@ -83,17 +82,15 @@ class AiProviderSetupComponent extends BaseComponent {
 
 	/**
 	 * Render all provider cards.
-	 *
-	 * @async
 	 */
-	private async render(): Promise<void> {
+	private render(): void {
 		if (!App.system.ai.enabled) {
 			this.innerHTML = '';
 
 			return;
 		}
 
-		const providers = await getAiProviders();
+		const providers = App.system.ai.providers;
 
 		this.innerHTML = '';
 

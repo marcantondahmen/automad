@@ -38,7 +38,6 @@ export const enum AiAssistanceController {
 
 export const enum AiProviderController {
 	getModels = 'AiProviderController::getModels',
-	getProviders = 'AiProviderController::getProviders',
 	remove = 'AiProviderController::remove',
 	setApiKey = 'AiProviderController::setApiKey',
 	setModel = 'AiProviderController::setModel',
