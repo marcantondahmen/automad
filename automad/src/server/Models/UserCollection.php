@@ -55,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class UserCollection {
 	const FILE_ACCOUNTS = AM_FILE_ACCOUNTS;
-	const VALID_EMAIL_REGEX = '/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/';
+	const VALID_EMAIL_REGEX = '/^[a-zA-Z0-9]+[\w_\.\-\+]*@[\w_\.\-]+\.[a-zA-Z]+$/';
 	const VALID_USERNAME_REGEX = '/^[a-z0-9][a-z0-9_\-]+[a-z0-9]$/s';
 
 	/**
