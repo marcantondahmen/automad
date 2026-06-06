@@ -16,7 +16,7 @@ findUnusedText() {
 
 	local code="$js$php$md"
 
-	grep -o -P '^\s*"\K[a-zA-Z]+' $lang | sort -u | while read -r item; do
+	grep -o -E '^[[:space:]]*"[a-zA-Z]+' $lang | sed 's/[[:space:]]*"//' | sort -u | while read -r item; do
 		if [[ ! $(echo "$code" | grep "$item") ]]; then
 			echo "  $item"
 		fi
