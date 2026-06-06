@@ -42,7 +42,7 @@ use Automad\System\Ai\ProviderCollection;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The setup class.
+ * The setup wizard class.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -78,10 +78,21 @@ class SetupWizard {
 			$items[] = 'mailConfig';
 		}
 
-		if (empty($providers)) {
+		if (empty($providers) && AM_AI_ASSISTANCE_ENABLED) {
 			$items[] = 'ai';
 		}
 
 		return $items;
+	}
+
+	/**
+	 * This function checks for existence of the COMPLETED_FILE inside the /automad
+	 * directory. This file is created when the wizard is completed and will be removed
+	 * on system updates.
+	 *
+	 * @return bool
+	 */
+	public static function isCompleted(): bool {
+		return is_readable(self::COMPLETED_FILE);
 	}
 }

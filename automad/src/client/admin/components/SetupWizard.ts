@@ -224,7 +224,7 @@ class SetupWizardComponent extends BaseComponent {
 			});
 		});
 
-		this.listen(buttonFinish, 'click', this.finish);
+		this.listen(buttonFinish, 'click', this.confirmFinish.bind(this));
 
 		this.currentIndex = 0;
 	}
@@ -258,11 +258,11 @@ class SetupWizardComponent extends BaseComponent {
 	}
 
 	/**
-	 * Finish the wizard.
+	 * Show confirmation dialog and then finish the wizard.
 	 *
 	 * @async
 	 */
-	private async finish(): Promise<void> {
+	private async confirmFinish(): Promise<void> {
 		if (
 			!(await confirm(
 				App.text('wizardFinishDialogText'),
@@ -272,6 +272,15 @@ class SetupWizardComponent extends BaseComponent {
 			return;
 		}
 
+		await this.finish();
+	}
+
+	/**
+	 * Finish the wizard.
+	 *
+	 * @async
+	 */
+	private async finish(): Promise<void> {
 		await requestAPI(SetupWizardController.finish, { finish: true });
 
 		const base = `${window.location.origin}${App.dashboardURL}/`;

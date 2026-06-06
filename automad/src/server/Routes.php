@@ -175,7 +175,7 @@ class Routes {
 	 */
 	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
 		$hasAccounts = is_readable(UserCollection::FILE_ACCOUNTS);
-		$setupCompleted = is_readable(SetupWizard::COMPLETED_FILE);
+		$setupCompleted = SetupWizard::isCompleted();
 
 		$Router->register(
 			AM_PAGE_DASHBOARD . '/setup',
