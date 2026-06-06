@@ -57,9 +57,7 @@ export const renderUsersSection = (): string => {
 			${Attr.event}="${EventName.appStateRequireUpdate}"
 			${Attr.watch}
 		>
-			<h2 class="${CSS.marginTopNone}">
-				${App.text('systemUsersYourAccountHeading')}
-			</h2>
+			<h2>${App.text('systemUsersYourAccountHeading')}</h2>
 			<p>${App.text('systemUsersYourAccountText')}</p>
 			<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap}">
 				<am-form-error></am-form-error>

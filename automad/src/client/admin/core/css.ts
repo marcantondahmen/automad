@@ -359,8 +359,6 @@ export const enum CSS {
 	select = 'am-f-select',
 	selectInline = 'am-f-select--inline',
 
-	marginTopNone = 'am-u-margin-top-none',
-
 	spinner = 'am-c-spinner',
 
 	switcherSection = 'am-c-switcher-section',
