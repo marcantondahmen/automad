@@ -432,7 +432,6 @@
 	"passwordRepeatError": "Please enter twice the same new password!",
 	"passwordRequirementsError": "A password must at least contain one character of {1} and has a minimum length of {2} characters.",
 	"passwordResetSave": "Save password",
-	"passwordResetToken": "Authentication token",
 	"passwordReuseError": "Don't reuse your old password!",
 	"penTool": "Pen",
 	"permissionsDeniedError": "Permissions denied",
