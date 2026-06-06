@@ -77,16 +77,15 @@ class Fetch {
 
 		curl_setopt_array($curl, $options);
 		curl_exec($curl);
-
-		$success = true;
-
-		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
-			$success = false;
-		}
-
 		fclose($fp);
 
-		return $success;
+		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
+			unlink($file);
+
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
