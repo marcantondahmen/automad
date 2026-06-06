@@ -41,7 +41,17 @@ After successfully being authenticated, the _username_ and a _csrf token_ will b
 
 ### Implications for Security
 
-In order to fully understand possible attack vectors and the severity of reported vulnerabilities, one has to take the architectural concept, the way sessions work in Automad and the limitation of the visitor role into account. Generally, vulnerabilities can be broken down into two categories &mdash; _XSS (cross-site-scripting)_ and _CSRF (cross-site-request-forgery)_.
+In order to fully understand possible attack vectors and the severity of reported vulnerabilities, one has to take the architectural concept, the way sessions work in Automad and the distinction between visitors and admins into account. In particular, it is important to understand which actions are available to visitors, which actions require administrative privileges and where actual security boundaries exist.
+
+#### Administrative Capabilities
+
+Admins are fully trusted users that are granted complete control over an Automad installation by design. Among other things, admins can create and modify content, change configuration, install Composer packages, install and modify templates, deploy extensions and execute arbitrary PHP and JavaScript code as part of normal site development and maintenance workflows.
+
+As a consequence, reports that require authenticated admin access and only demonstrate actions that could already be performed through custom templates, extensions, Composer packages, arbitrary PHP code or other administrative capabilities are generally not considered security vulnerabilities.
+
+Such reports do not constitute privilege escalation, authentication bypass, unauthorized access or a security boundary violation. To be considered a security vulnerability, a report must demonstrate that an attacker can gain capabilities beyond those already granted to an authenticated admin or affect visitors without administrative privileges.
+
+Please make sure that you understand Automad's architecture and security model before submitting a report.
 
 #### XSS
 
