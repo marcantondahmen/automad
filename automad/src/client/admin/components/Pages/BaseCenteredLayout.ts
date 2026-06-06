@@ -52,6 +52,7 @@ export abstract class BaseCenteredLayoutComponent extends BaseLayoutComponent {
 	 */
 	protected partials: Partials = {
 		main: this.renderMainPartial(),
+		variant: this.getVariant(),
 	};
 
 	/**
@@ -60,4 +61,13 @@ export abstract class BaseCenteredLayoutComponent extends BaseLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected abstract renderMainPartial(): string;
+
+	/**
+	 * Use a custom variant class for the centered content.
+	 *
+	 * @return the variant css class
+	 */
+	protected getVariant(): string {
+		return '';
+	}
 }

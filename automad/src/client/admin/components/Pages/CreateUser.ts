@@ -26,27 +26,50 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2026 by Marc Anton Dahmen
+ * Copyright (c) 2022-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import { AiProviderController } from '@/common';
-import { AiProvider } from '../types';
-import { requestAPI } from './request';
+import {
+	Attr,
+	getTagFromRoute,
+	html,
+	Route,
+	UserCollectionController,
+} from '@/admin/core';
+import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
- * Get the list aof available AI providers.
+ * The create user view.
  *
- * @return the list of providers.
+ * @extends BaseCenteredLayoutComponent
  */
-export const getAiProviders = async (): Promise<AiProvider[]> => {
-	const { data } = await requestAPI(AiProviderController.getProviders);
-
-	if (!data) {
-		return [];
+export class CreateUserComponent extends BaseCenteredLayoutComponent {
+	/**
+	 * Set the page title that is used a document title suffix.
+	 */
+	protected get pageTitle(): string {
+		// Setup happens before a user can set a language.
+		// Therefore the title will be by default in English.
+		return 'Create User';
 	}
 
-	return data as AiProvider[];
-};
+	/**
+	 * Render the main partial.
+	 *
+	 * @returns the rendered HTML
+	 */
+	protected renderMainPartial(): string {
+		return html`
+			<am-create-user-form
+				${Attr.api}="${UserCollectionController.createFirstUser}"
+				${Attr.focus}
+				${Attr.enter}
+			></am-create-user-form>
+		`;
+	}
+}
+
+customElements.define(getTagFromRoute(Route.createuser), CreateUserComponent);

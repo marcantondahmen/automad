@@ -1,8 +1,18 @@
 # Changelog
 
-## [v2.0.0-beta.37](https://github.com/marcantondahmen/automad/commit/8c19c19fedd220cea58d9a1f98f7d51a84a988bc)
+## [v2.0.0-beta.38](https://github.com/marcantondahmen/automad/commit/6fea03e6f009b332a65f620bf727ae25db8576b6)
 
-Tue, 2 Jun 2026 21:59:07 +0200
+Sat, 6 Jun 2026 21:44:32 +0200
+
+### New Features
+
+- add setup wizard for new installations and after system updates ([9be052c4c](https://github.com/marcantondahmen/automad/commit/9be052c4ca7697a42725b22ffdb366d2aa639bff))
+- include + into regex for valid email addresses ([fafec3c71](https://github.com/marcantondahmen/automad/commit/fafec3c718c01f9d64d00a20e4747fbb19b600fc))
+- update standard-lite theme ([6fea03e6f](https://github.com/marcantondahmen/automad/commit/6fea03e6f009b332a65f620bf727ae25db8576b6))
+
+## [v2.0.0-beta.37](https://github.com/marcantondahmen/automad/commit/c24eb96ee1c9743d568e33a376dea2263af5c22a)
+
+Tue, 2 Jun 2026 22:01:05 +0200
 
 ### Bugfixes
 

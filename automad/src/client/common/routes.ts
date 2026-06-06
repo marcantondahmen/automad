@@ -34,6 +34,7 @@
 
 export enum Route {
 	components = 'components',
+	createuser = 'createuser',
 	home = 'home',
 	inpage = 'inpage',
 	login = 'login',
@@ -41,10 +42,10 @@ export enum Route {
 	page = 'page',
 	password = 'password',
 	search = 'search',
-	setup = 'setup',
 	shared = 'shared',
 	system = 'system',
 	token = 'token',
 	trash = 'trash',
 	verifytotp = 'verifytotp',
+	setup = 'setup',
 }

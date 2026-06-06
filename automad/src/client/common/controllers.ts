@@ -38,7 +38,6 @@ export const enum AiAssistanceController {
 
 export const enum AiProviderController {
 	getModels = 'AiProviderController::getModels',
-	getProviders = 'AiProviderController::getProviders',
 	remove = 'AiProviderController::remove',
 	setApiKey = 'AiProviderController::setApiKey',
 	setModel = 'AiProviderController::setModel',
@@ -55,6 +54,13 @@ export const enum AppController {
 export const enum CacheController {
 	clear = 'CacheController::clear',
 	purge = 'CacheController::purge',
+}
+
+export const enum ComponentController {
+	data = 'ComponentController::data',
+	publish = 'ComponentController::publish',
+	getPublicationState = 'ComponentController::getPublicationState',
+	discardDraft = 'ComponentController::discardDraft',
 }
 
 export const enum ConfigController {
@@ -159,11 +165,9 @@ export const enum SharedController {
 	discardDraft = 'SharedController::discardDraft',
 }
 
-export const enum ComponentController {
-	data = 'ComponentController::data',
-	publish = 'ComponentController::publish',
-	getPublicationState = 'ComponentController::getPublicationState',
-	discardDraft = 'ComponentController::discardDraft',
+export const enum SetupWizardController {
+	getSteps = 'SetupWizardController::getSteps',
+	finish = 'SetupWizardController::finish',
 }
 
 export const enum SystemController {

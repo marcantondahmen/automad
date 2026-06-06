@@ -206,23 +206,34 @@ export class MailConfigFormComponent extends FormComponent {
 
 		this.listen(transportSelect, 'change', toggleSmtpCard);
 
-		const footer = create('div', [CSS.flex, CSS.flexGap], {}, this);
+		const footer = create(
+			'div',
+			[CSS.flex, CSS.flexGap, CSS.flexWrap],
+			{},
+			this
+		);
 
-		create(
-			'am-submit',
+		const sendTestMail = create<HTMLButtonElement>(
+			'button',
 			[CSS.button, CSS.buttonPrimary],
-			{ disabled: 'true' },
+			{},
 			footer,
-			App.text('save')
+			App.text('systemMailSaveSendTest')
 		);
 
 		const reset = create(
 			'button',
-			[CSS.button, CSS.buttonDanger],
+			[CSS.button],
 			{},
 			footer,
 			App.text('reset')
 		);
+
+		this.listen(sendTestMail, 'click', async () => {
+			await this.submit();
+
+			await requestAPI(MailConfigController.test);
+		});
 
 		this.listen(reset, 'click', async () => {
 			if (!(await confirm(App.text('systemMailReset')))) {

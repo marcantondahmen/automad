@@ -47,6 +47,7 @@ use Automad\Core\I18n;
 use Automad\Core\Parse;
 use Automad\Core\Router;
 use Automad\Models\UserCollection;
+use Automad\System\SetupWizard;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -174,9 +175,26 @@ class Routes {
 	 */
 	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
 		$hasAccounts = is_readable(UserCollection::FILE_ACCOUNTS);
+		$setupCompleted = SetupWizard::isCompleted();
 
 		$Router->register(
 			AM_PAGE_DASHBOARD . '/setup',
+			function () {
+				return Dashboard::render();
+			},
+			$isAuthenticatedUser && !$setupCompleted
+		);
+
+		$Router->register(
+			AM_PAGE_DASHBOARD . '(/.*)?',
+			function () {
+				self::redirectDashboard('/setup');
+			},
+			$isAuthenticatedUser && !$setupCompleted
+		);
+
+		$Router->register(
+			AM_PAGE_DASHBOARD . '/createuser',
 			function () {
 				return Dashboard::render();
 			},
@@ -186,13 +204,13 @@ class Routes {
 		$Router->register(
 			AM_PAGE_DASHBOARD . '(/.*)?',
 			function () {
-				self::redirectDashboard('/setup');
+				self::redirectDashboard('/createuser');
 			},
 			!$hasAccounts
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/setup',
+			AM_PAGE_DASHBOARD . '/createuser',
 			function () {
 				self::redirectDashboard('/login');
 			},

@@ -26,19 +26,13 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import {
-	Attr,
-	getTagFromRoute,
-	html,
-	Route,
-	UserCollectionController,
-} from '@/admin/core';
+import { App, CSS, getTagFromRoute, html, Route } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
@@ -51,9 +45,14 @@ export class SetupComponent extends BaseCenteredLayoutComponent {
 	 * Set the page title that is used a document title suffix.
 	 */
 	protected get pageTitle(): string {
-		// Setup happens before a user can set a language.
-		// Therefore the title will be by default in English.
-		return 'Create User';
+		return App.text('wizardTitle');
+	}
+
+	/**
+	 * The wide variant class.
+	 */
+	protected getVariant(): string {
+		return CSS.layoutCenteredWide;
 	}
 
 	/**
@@ -62,13 +61,7 @@ export class SetupComponent extends BaseCenteredLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return html`
-			<am-setup-form
-				${Attr.api}="${UserCollectionController.createFirstUser}"
-				${Attr.focus}
-				${Attr.enter}
-			></am-setup-form>
-		`;
+		return html`<am-setup-wizard></am-setup-wizard>`;
 	}
 }
 

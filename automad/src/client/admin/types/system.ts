@@ -60,6 +60,7 @@ export interface AiProvider {
 interface AiSettings {
 	enabled: boolean;
 	activeProviderId: string;
+	providers: AiProvider[];
 }
 
 interface CacheSettings {

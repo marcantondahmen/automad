@@ -86,18 +86,6 @@ class AiProviderController {
 	}
 
 	/**
-	 * Get a list of providers.
-	 *
-	 * @return Response
-	 */
-	public static function getProviders(): Response {
-		$Response = new Response();
-		$ProviderCollection = new ProviderCollection();
-
-		return $Response->setData($ProviderCollection->getPublicDetails());
-	}
-
-	/**
 	 * Remove a config for a provider.
 	 */
 	public static function remove(): Response {
