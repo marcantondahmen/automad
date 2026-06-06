@@ -263,6 +263,7 @@ export const enum CSS {
 	keyCombo = 'am-e-key-combo',
 
 	layoutCentered = 'am-l-centered',
+	layoutCenteredWide = 'am-l-centered--wide',
 	layoutCenteredNavbar = 'am-l-centered__navbar',
 	layoutCenteredMain = 'am-l-centered__main',
 	layoutCenteredContent = 'am-l-centered__content',

@@ -70,6 +70,16 @@ class ConfigFile {
 	}
 
 	/**
+	 * Get the config path for a given optional name.
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	public static function getConfigPath(string $name): string {
+		return $name ? AM_BASE_DIR . '/config/config.' . $name . '.php' : Config::FILE;
+	}
+
+	/**
 	 * Read configuration overrides as JSON string form PHP or JSON file
 	 * and decode the returned string. Note that now the configuration is stored in
 	 * PHP files instead of JSON files to make it less easy to access from outside.
@@ -142,15 +152,5 @@ class ConfigFile {
 		}
 
 		return $success;
-	}
-
-	/**
-	 * Get the config path for a given optional name.
-	 *
-	 * @param string $name
-	 * @return string
-	 */
-	private static function getConfigPath(string $name): string {
-		return $name ? AM_BASE_DIR . '/config/config.' . $name . '.php' : Config::FILE;
 	}
 }

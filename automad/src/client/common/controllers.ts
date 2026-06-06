@@ -56,6 +56,13 @@ export const enum CacheController {
 	purge = 'CacheController::purge',
 }
 
+export const enum ComponentController {
+	data = 'ComponentController::data',
+	publish = 'ComponentController::publish',
+	getPublicationState = 'ComponentController::getPublicationState',
+	discardDraft = 'ComponentController::discardDraft',
+}
+
 export const enum ConfigController {
 	update = 'ConfigController::update',
 }
@@ -158,11 +165,9 @@ export const enum SharedController {
 	discardDraft = 'SharedController::discardDraft',
 }
 
-export const enum ComponentController {
-	data = 'ComponentController::data',
-	publish = 'ComponentController::publish',
-	getPublicationState = 'ComponentController::getPublicationState',
-	discardDraft = 'ComponentController::discardDraft',
+export const enum SetupWizardController {
+	getSteps = 'SetupWizardController::getSteps',
+	finish = 'SetupWizardController::finish',
 }
 
 export const enum SystemController {

@@ -1,3 +1,4 @@
+<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -26,26 +27,51 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-export enum Route {
-	components = 'components',
-	createuser = 'createuser',
-	home = 'home',
-	inpage = 'inpage',
-	login = 'login',
-	packages = 'packages',
-	page = 'page',
-	password = 'password',
-	search = 'search',
-	shared = 'shared',
-	system = 'system',
-	token = 'token',
-	trash = 'trash',
-	verifytotp = 'verifytotp',
-	setup = 'setup',
+namespace Automad\Controllers\API;
+
+use Automad\API\Response;
+use Automad\Core\Request;
+use Automad\System\SetupWizard;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+/**
+ * The setup wizard controller.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
+ */
+class SetupWizardController {
+	/**
+	 * Finish the wizard.
+	 *
+	 * @return Response
+	 */
+	public static function finish(): Response {
+		$Response = new Response();
+
+		if (Request::post('finish')) {
+			SetupWizard::finish();
+		}
+
+		return $Response;
+	}
+
+	/**
+	 * Get a list of required setup steps.
+	 *
+	 * @return Response
+	 */
+	public static function getSteps(): Response {
+		$Response = new Response();
+
+		return $Response->setData(array('steps' => SetupWizard::getSteps()));
+	}
 }

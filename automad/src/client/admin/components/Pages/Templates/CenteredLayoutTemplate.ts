@@ -35,9 +35,9 @@
 import { App, Attr, CSS, html } from '@/admin/core';
 import { Partials } from '@/admin/types';
 
-export const centered = ({ main }: Partials): string => {
+export const centered = ({ main, variant }: Partials): string => {
 	return html`
-		<div class="${CSS.layoutCentered}">
+		<div class="${CSS.layoutCentered} ${variant}">
 			<div class="${CSS.layoutCenteredNavbar}">
 				<nav class="${CSS.navbar}">
 					<a href="${App.baseIndex || '/'}" class="${CSS.navbarItem}">

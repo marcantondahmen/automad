@@ -32,7 +32,14 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, EventName, MailConfigController } from '@/admin/core';
+import {
+	App,
+	Attr,
+	CSS,
+	EventName,
+	html,
+	MailConfigController,
+} from '@/admin/core';
 
 /**
  * Render the email section.
@@ -40,18 +47,13 @@ import { App, Attr, CSS, EventName, MailConfigController } from '@/admin/core';
  * @returns the rendered HTML
  */
 export const renderMailSection = (): string => {
-	return `
+	return html`
 		<p>${App.text('systemMailInfo')}</p>
 		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
-			<am-mail-config-form 
+			<am-mail-config-form
 				${Attr.api}="${MailConfigController.save}"
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 			></am-mail-config-form>
-			<am-form ${Attr.api}=${MailConfigController.test}>
-				<am-submit class="${CSS.button}">
-					${App.text('systemMailSendTest')}
-				</am-submit>
-			</am-form>
 		</div>
 	`;
 };

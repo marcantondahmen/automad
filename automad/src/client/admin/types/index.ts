@@ -186,6 +186,8 @@ export interface SelectComponentOption {
 	text?: string;
 }
 
+export type SetupWizardStep = 'ai' | 'mailConfig';
+
 export interface ThemeOptions {
 	[key: string]: KeyValueMap;
 }
