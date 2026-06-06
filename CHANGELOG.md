@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.38](https://github.com/marcantondahmen/automad/commit/6fea03e6f009b332a65f620bf727ae25db8576b6)
+## [v2.0.0-beta.39](https://github.com/marcantondahmen/automad/commit/010aa631cdd13a7f3a10d5057a9577ec4d03f727)
 
-Sat, 6 Jun 2026 21:44:32 +0200
+Sat, 6 Jun 2026 22:48:16 +0200
+
+### Bugfixes
+
+- fix dashboard heading spacing ([010aa631c](https://github.com/marcantondahmen/automad/commit/010aa631cdd13a7f3a10d5057a9577ec4d03f727))
+
+## [v2.0.0-beta.38](https://github.com/marcantondahmen/automad/commit/d62aae21b0328a700df54342311fb86c6e5f149a)
+
+Sat, 6 Jun 2026 22:07:17 +0200
 
 ### New Features
 
