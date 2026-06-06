@@ -136,7 +136,9 @@ export class HomeComponent extends BaseDashboardLayoutComponent {
 						</div>
 						${systemInfo()}
 						<div>
-							<h2>${App.text('recentlyEditedPages')}</h2>
+							<h2 class="${CSS.baseHomeH2}">
+								${App.text('recentlyEditedPages')}
+							</h2>
 							<div>
 								<am-recently-edited-pages></am-recently-edited-pages>
 							</div>

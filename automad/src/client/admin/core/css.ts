@@ -60,6 +60,7 @@ export const enum CSS {
 	badgeMuted = 'am-e-badge--muted',
 
 	baseHomeH1 = 'am-e-base-home-h1',
+	baseHomeH2 = 'am-e-base-home-h2',
 
 	breadcrumbs = 'am-c-breadcrumbs',
 	breadcrumbsItem = 'am-c-breadcrumbs__item',

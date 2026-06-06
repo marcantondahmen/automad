@@ -92,15 +92,16 @@ html:not(.am-ui) {
 	}
 
 	& h2 {
-		margin-top: 1.75em;
+		margin-top: 0;
 		margin-bottom: 1em;
 		font-size: 1.36rem;
 		line-height: 1.3;
 		font-weight: 480;
+	}
 
-		&:first-child {
-			margin-top: 0;
-		}
+	& * + h2,
+	& h2.am-e-base-home-h2 {
+		margin-top: 1.75rem;
 	}
 
 	& a,
