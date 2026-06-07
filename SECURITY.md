@@ -1,6 +1,6 @@
 # Reporting Vulnerabilities
 
-Security should be taken seriously whenever private data and/or the digital distribution of any data is at play. Automad is **no exception** here.
+Security should be taken seriously whenever private data and/or the digital distribution of any data is at play. Automad is _no exception_ here.
 
 Whenever you encounter a security vulnerability, please feel free to [report it privately](https://github.com/marcantondahmen/automad/security/advisories/new) and provide the following information:
 
@@ -9,7 +9,25 @@ Whenever you encounter a security vulnerability, please feel free to [report it 
 - All required steps in order to enable an attacker to exploit the vulnerability
 
 > [!IMPORTANT]
-> Please note that pull-requests for this repository will be ignored as stated in the README.
+> Please review this document in its entirety before submitting a report. Reports that do not take Automad's architecture and security model into account may be classified as invalid after triage.
+
+Please note that pull-requests for this repository will be ignored as stated in the `README.md`.
+
+---
+
+## Table of Contents
+
+<!-- vim-markdown-toc GFM -->
+
+- [Quality of Reports](#quality-of-reports)
+- [Architecture](#architecture)
+  - [Users and Roles](#users-and-roles)
+  - [Sessions](#sessions)
+- [Implications for Security](#implications-for-security)
+  - [XSS](#xss)
+  - [CSRF](#csrf)
+
+<!-- vim-markdown-toc -->
 
 ## Quality of Reports
 
@@ -39,23 +57,24 @@ Regarding Automad's core functionality, the session is only used to verify wheth
 
 After successfully being authenticated, the _username_ and a _csrf token_ will be stored in a user's session. During password reset requests a reset token may be stored temporarily as well. Automad itself will not store any other data than the aforementioned.
 
-### Implications for Security
+## Implications for Security
 
-In order to fully understand possible attack vectors and the severity of reported vulnerabilities, one has to take the architectural concept, the way sessions work in Automad and the distinction between visitors and admins into account. In particular, it is important to understand which actions are available to visitors, which actions require administrative privileges and where actual security boundaries exist.
+In order to fully understand possible attack vectors and the severity of reported vulnerabilities, one has to take Automad's architecture, session model and distinction between visitors and admins into account.
 
-#### Administrative Capabilities
+Admins are fully trusted users that are granted complete control over an Automad installation by design. Among other things, admins can create and modify content, change configuration, install PHP packages and templates using Composer or add JavaScript code to pages as part of normal site development and maintenance workflows.
 
-Admins are fully trusted users that are granted complete control over an Automad installation by design. Among other things, admins can create and modify content, change configuration, install Composer packages, install and modify templates, deploy extensions and execute arbitrary PHP and JavaScript code as part of normal site development and maintenance workflows.
+As a consequence, reports that require authenticated admin access and only demonstrate actions that could already be performed through existing administrative capabilities are generally not considered security vulnerabilities.
 
-As a consequence, reports that require authenticated admin access and only demonstrate actions that could already be performed through custom templates, extensions, Composer packages, arbitrary PHP code or other administrative capabilities are generally not considered security vulnerabilities.
+To be considered a security vulnerability, _a report must demonstrate a security boundary violation_ such as privilege escalation, authentication bypass, unauthorized access, or the ability to gain capabilities beyond those already granted to an admin.
 
-Such reports do not constitute privilege escalation, authentication bypass, unauthorized access or a security boundary violation. To be considered a security vulnerability, a report must demonstrate that an attacker can gain capabilities beyond those already granted to an authenticated admin or affect visitors without administrative privileges.
+> [!IMPORTANT]
+> Please make sure that you understand Automad's architecture and security model before submitting a report.
 
-Please make sure that you understand Automad's architecture and security model before submitting a report.
+The following sections explain how these principles apply to the most commonly reported vulnerability classes in Automad.
 
-#### XSS
+### XSS
 
-In general, XSS attacks imply that an **unauthorized** user can store malicious code in some kind of data store due to the lack of sanitization of user input. This code is then typically executed in the browser by other users and can therefore be used for stealing user related data such as cookies. Typically forum software or commenting systems are exposed to such attack vectors since anybody can register and post content. In such scenarios a proper sanitization of user input is mandatory.
+In general, XSS attacks imply that an _unauthorized_ user can store malicious code in some kind of data store due to the lack of sanitization of user input. This code is then typically executed in the browser by other users and can therefore be used for stealing user related data such as cookies. Typically forum software or commenting systems are exposed to such attack vectors since anybody can register and post content. In such scenarios a proper sanitization of user input is mandatory.
 
 In Automad this kind of attacks are technically not possible due to the nature of the underlying architecture. The input of unprivileged users such as visitors is never stored or used in any way to permanently alter the system as it would be the case in a commenting system or forum.
 
@@ -63,6 +82,6 @@ As previously described, only admins can create, update or delete content. Pleas
 
 Therefore the only type of user that can act as a malicious party are admins. Since visitors have no session data on the server or inside of the cookie, even a hacked admin account can't steal relevant data. This alone renders XSS attacks useless.
 
-#### CSRF
+### CSRF
 
 In contrast to XSS attacks, CSRF attacks potentially pose a real threat. Automad has standard measures in place in order to prevent CSRF attacks.
