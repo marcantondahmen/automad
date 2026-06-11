@@ -68,6 +68,12 @@ class ImageSlideshow extends AbstractBlock {
 			return '';
 		}
 
+		$files = FileUtils::filterExisting($block['data']['files'], $Automad->Context->get()->path);
+
+		if (empty($files)) {
+			return '';
+		}
+
 		$data = $block['data'];
 
 		$settings = array(
@@ -86,9 +92,9 @@ class ImageSlideshow extends AbstractBlock {
 		$imageSets = array();
 
 		// The $first image is used for the Str::findFirstImage() method.
-		$first = $block['data']['files'][0];
+		$first = $files[0];
 
-		foreach ($data['files'] ?? array() as $file) {
+		foreach ($files as $file) {
 			$imageSets[] = array(
 				'imageSet' => new ImgLoaderSet($file, $Automad, $settings['imageWidthPx'], $settings['imageHeightPx'], true),
 				'caption' => Str::markdown(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
