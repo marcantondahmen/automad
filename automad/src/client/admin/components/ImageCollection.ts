@@ -170,7 +170,7 @@ export class ImageCollectionComponent extends BaseComponent {
 				[CSS.button, CSS.imageCollectionAdd],
 				{},
 				this,
-				App.text('addImage')
+				App.text('addImages')
 			);
 
 			this.listen(addButton, 'click', this.add.bind(this));
@@ -181,11 +181,16 @@ export class ImageCollectionComponent extends BaseComponent {
 	 * Open the image picker in order to add an image to the collection.
 	 */
 	private add(): void {
-		createImagePickerModal((file) => {
-			this.images = [...this.images, file];
+		createImagePickerModal(
+			(files) => {
+				this.images = [...this.images, ...files];
 
-			fire('change', this);
-		}, App.text('addImage'));
+				fire('change', this);
+			},
+			App.text('addImages'),
+			'',
+			true
+		);
 	}
 }
 

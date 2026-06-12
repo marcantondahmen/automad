@@ -342,7 +342,7 @@ export class SearchFormComponent extends BaseComponent {
 			toggles
 		);
 
-		checkAll.textContent = App.text('searchReplaceCheckAll');
+		checkAll.textContent = App.text('selectAll');
 
 		const unCheckAll = create(
 			'span',
@@ -351,7 +351,7 @@ export class SearchFormComponent extends BaseComponent {
 			toggles
 		);
 
-		unCheckAll.textContent = App.text('searchReplaceUncheckAll');
+		unCheckAll.textContent = App.text('selectNone');
 
 		return {
 			replaceButton,

@@ -77,7 +77,11 @@ class ImageFieldComponent extends BaseFieldComponent {
 
 		const createModal = (): void => {
 			createImagePickerModal(
-				(value) => {
+				([value]) => {
+					if (!value) {
+						return;
+					}
+
 					input.value = value;
 					fire('change', input);
 				},
