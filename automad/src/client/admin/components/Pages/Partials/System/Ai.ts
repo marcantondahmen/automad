@@ -55,15 +55,31 @@ export const renderAiSection = (): string => {
 				${Attr.event}="${EventName.appStateRequireUpdate}"
 				${Attr.auto}
 			>
-				<input type="hidden" name="type" value="ai" />
+				<input type="hidden" name="type" value="aiEnabled" />
 				<div>
 					<p>${App.text('systemAiInfo')}</p>
 					<am-ai-assistance-enable></am-ai-assistance-enable>
 				</div>
 			</am-form>
-			<div class="am-ai-provider-setup">
-				<p>${App.text('systemAiProviderInfo')}</p>
+			<div class="am-ai-setup">
+				<h2>${App.text('systemAiProviderHeading')}</h2>
+				<p>${App.text('systemAiProviderText')}</p>
 				<am-ai-provider-setup></am-ai-provider-setup>
+				<h2>${App.text('systemAiInstructionsHeading')}</h2>
+				<p>${App.text('systemAiInstructionsText')}</p>
+				<am-form
+					class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGap}"
+					${Attr.api}="${ConfigController.update}"
+					${Attr.watch}
+				>
+					<input type="hidden" name="type" value="aiInstructions" />
+					<am-ai-assistance-instructions></am-ai-assistance-instructions>
+					<div>
+						<am-submit class="${CSS.button} ${CSS.buttonPrimary}">
+							${App.text('save')}
+						</am-submit>
+					</div>
+				</am-form>
 			</div>
 		</div>
 	`;

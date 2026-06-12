@@ -162,6 +162,7 @@ import('./components/Switcher/SwitcherLink');
 import('./components/Switcher/SwitcherSection');
 
 import('./components/System/AiAssistanceEnable');
+import('./components/System/AiAssistanceInstructions');
 import('./components/System/AiProviderSetup');
 import('./components/System/CacheEnable');
 import('./components/System/CacheLifetime');

@@ -113,6 +113,7 @@ class State {
 			'system' => array(
 				'ai' => array(
 					'enabled' => AM_AI_ASSISTANCE_ENABLED,
+					'instructions' => AM_AI_ASSISTANCE_INSTRUCTIONS,
 					'activeProviderId' => AM_AI_PROVIDER_ID,
 					'providers' => $ProviderCollection->getPublicDetails()
 				),

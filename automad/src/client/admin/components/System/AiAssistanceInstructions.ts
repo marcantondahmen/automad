@@ -43,40 +43,44 @@ import {
 import { BaseComponent } from '../Base';
 
 /**
- * A wrapper element for initializing the AI enable checkbox.
+ * A wrapper element for initializing the AI instructions editor.
  *
  * @extends BaseComponent
  */
-class AiAssistanceEnableComponent extends BaseComponent {
+class AiAssistanceInstructionsComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const aiAssitanceEnabled = new Binding('aiAssitanceEnabled', {
-			initial: App.system.ai.enabled,
+		const aiAssitanceInstructions = new Binding('aiAssitanceInstructions', {
+			initial: App.system.ai.instructions,
 		});
 
 		this.listen(window, EventName.appStateChange, () => {
-			aiAssitanceEnabled.value = App.system.ai.enabled;
+			aiAssitanceInstructions.value = App.system.ai.instructions;
 		});
 
 		createField(
-			FieldTag.toggleLarge,
+			FieldTag.code,
 			this,
 			{
-				key: 'aiAssitanceEnabled',
-				value: App.system.ai.enabled,
-				name: 'aiAssitanceEnabled',
-				label: App.text('systemAi'),
+				key: 'aiAssitanceInstructions',
+				value: App.system.ai.instructions,
+				name: 'aiAssitanceInstructions',
+				hideLabel: true,
+				placeholder:
+					'Use a professional, concise, and friendly writing style.',
 			},
 			[],
 			{
-				[Attr.toggle]: '.am-ai-setup',
-				[Attr.bind]: 'aiAssitanceEnabled',
-				[Attr.bindTo]: 'checked',
+				[Attr.bind]: 'aiAssitanceInstructions',
+				[Attr.bindTo]: 'value',
 			}
 		);
 	}
 }
 
-customElements.define('am-ai-assistance-enable', AiAssistanceEnableComponent);
+customElements.define(
+	'am-ai-assistance-instructions',
+	AiAssistanceInstructionsComponent
+);

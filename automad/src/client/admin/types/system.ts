@@ -59,6 +59,7 @@ export interface AiProvider {
 
 interface AiSettings {
 	enabled: boolean;
+	instructions: string;
 	activeProviderId: string;
 	providers: AiProvider[];
 }

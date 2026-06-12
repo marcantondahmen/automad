@@ -141,7 +141,9 @@ class ConfigFile {
 		ksort($this->data);
 
 		$json = json_encode($this->data, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
+		// Note that instead of heredoc, nowdoc is used to generate the returned JSON
+		// in order to handle multiline strings correctly.
+		$content = "<?php return <<< 'JSON'\r\n$json\r\nJSON;\r\n";
 		$file = ConfigFile::getConfigPath($this->name);
 		$success = FileSystem::write($file, $content);
 

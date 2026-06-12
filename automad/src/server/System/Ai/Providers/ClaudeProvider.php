@@ -129,29 +129,7 @@ class ClaudeProvider extends AbstractProvider {
 				'thinking' => array('type' => 'disabled'),
 				'messages' => array(
 					array(
-						'content' => <<<XML
-							TASK:
-							$prompt
-
-							---
-
-							TARGET:
-							$target
-
-							---
-
-							PAGE_CONTEXT:
-							$context
-
-							---
-
-							RULES:
-							- PAGE_CONTEXT is reference only.
-							- Never rewrite or return PAGE_CONTEXT.
-							- Only modify TARGET.
-							- If TARGET is empty, generate only the requested insertion.
-							- Return only the content that should be inserted or replace TARGET.
-							XML,
+						'content' => $this->composePrompt($prompt, $target, $context),
 						'role' => 'user'
 					)
 				)
@@ -159,7 +137,7 @@ class ClaudeProvider extends AbstractProvider {
 			$Messenger
 		);
 
-		if ($response['error']) {
+		if (!empty($response['error'])) {
 			$Messenger->setError($response['error']);
 			Debug::warn($response);
 
