@@ -61,6 +61,7 @@ import { BasePlugin } from './BasePlugin';
 import { AiTarget } from '@/admin/types/editor/plugins';
 import { AiProvider } from '@/admin/types';
 import { EditorFieldComponent } from '@/admin/components/Fields/EditorField';
+import { EditorJSComponent } from '@/admin/components/EditorJS';
 
 /**
  * Navigate to the AI settings page.
@@ -610,8 +611,14 @@ export class AiAssistance extends BasePlugin {
 				}
 
 				const target = event.target as HTMLElement;
+				const containingEditor = target.closest(
+					EditorJSComponent.TAG_NAME
+				);
 
-				if (target.closest('[contenteditable]')) {
+				if (
+					target.closest('[contenteditable]') &&
+					this.component === containingEditor
+				) {
 					const sel = window.getSelection();
 
 					this.selectedRange = sel.rangeCount
