@@ -244,12 +244,21 @@ export const initInputChangeHandler = (): Listener => {
  * @return the listener
  */
 export const initWindowErrorHandler = (): Listener => {
-	const muted = ['InvalidStateError', 'TypeError'];
+	const muted = ['AbortError', 'InvalidStateError', 'TypeError'];
 
-	return listen(window, 'error', (event: ErrorEvent) => {
-		if (muted.includes(event.error.name)) {
-			getLogger().log(event.error);
-			event.preventDefault();
+	return listen(
+		window,
+		'error unhandledrejection',
+		(event: ErrorEvent | PromiseRejectionEvent): void => {
+			if (event instanceof PromiseRejectionEvent) {
+				getLogger().log(event.reason);
+				event.preventDefault();
+			} else {
+				if (muted.includes(event?.error.name)) {
+					getLogger().log(event.error);
+					event.preventDefault();
+				}
+			}
 		}
-	});
+	);
 };

@@ -1,8 +1,23 @@
 # Changelog
 
-## [v2.0.0-beta.39](https://github.com/marcantondahmen/automad/commit/010aa631cdd13a7f3a10d5057a9577ec4d03f727)
+## [v2.0.0-beta.40](https://github.com/marcantondahmen/automad/commit/39018822d41d99e7b90d8cd5314a31aecec1b516)
 
-Sat, 6 Jun 2026 22:48:16 +0200
+Sat, 13 Jun 2026 12:37:22 +0200
+
+### New Features
+
+- add option to define custom system instructions for ai providers ([ae514d747](https://github.com/marcantondahmen/automad/commit/ae514d747fe41277436e15b63f555cd8a3097c8a))
+- allow selection of multiple images at once in gallery and slideshow blocks ([d2355354a](https://github.com/marcantondahmen/automad/commit/d2355354abf4eb8339914b5d964cb799207d3c75))
+- improve ui view transitions ([2d7866c62](https://github.com/marcantondahmen/automad/commit/2d7866c629431e371c6aa18ce72c27b49cd5c219))
+
+### Bugfixes
+
+- filter galleries and slideshows to only include existing files ([40eb219ba](https://github.com/marcantondahmen/automad/commit/40eb219bacfbb258afdd74b56a81c272841dca90))
+- fix unnecessary api key and model validation requests in ai provider settings ([1ae46eecb](https://github.com/marcantondahmen/automad/commit/1ae46eecbb7b16fc9818761f69a539e303ff7cc9))
+
+## [v2.0.0-beta.39](https://github.com/marcantondahmen/automad/commit/daf345883289094725d073adbc24e7f1d6cf5fad)
+
+Sat, 6 Jun 2026 22:50:31 +0200
 
 ### Bugfixes
 

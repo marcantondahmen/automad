@@ -68,11 +68,10 @@ class AiAssistanceEnableComponent extends BaseComponent {
 				value: App.system.ai.enabled,
 				name: 'aiAssitanceEnabled',
 				label: App.text('systemAi'),
-				envKey: 'AM_AI_ASSISTANCE_ENABLED',
 			},
 			[],
 			{
-				[Attr.toggle]: '.am-ai-provider-setup',
+				[Attr.toggle]: '.am-ai-setup',
 				[Attr.bind]: 'aiAssitanceEnabled',
 				[Attr.bindTo]: 'checked',
 			}

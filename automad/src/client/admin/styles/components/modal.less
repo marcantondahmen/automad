@@ -35,6 +35,7 @@
 .am-c-modal {
 	@jumpbar-padding: 3px;
 	@radius-inner: ~'calc(@{am-modal-radius} - 1px)';
+	@padding-bottom: 2rem;
 	display: block;
 	position: fixed;
 	z-index: 500;
@@ -42,7 +43,8 @@
 	height: 100vh;
 	max-height: 100vh;
 	inset: 0;
-	padding: 4rem var(--am-body-padding-x) 2rem var(--am-body-padding-x);
+	padding: 4rem var(--am-body-padding-x) @padding-bottom
+		var(--am-body-padding-x);
 	background-color: var(--am-modal-backdrop);
 	transform: translateY(-100%);
 	opacity: 0;
@@ -140,6 +142,16 @@
 		justify-content: end;
 		align-items: center;
 		gap: @am-flex-gap;
+
+		&--sticky {
+			position: sticky;
+			z-index: 100;
+			bottom: -@padding-bottom;
+			margin-block: @am-modal-radius;
+			padding-block: ~'calc(@{am-modal-padding} - @{am-modal-radius})';
+			pointer-events: all;
+			.blur;
+		}
 	}
 
 	&__spinner {

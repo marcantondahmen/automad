@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { App, Attr, CSS, EventName } from '@/admin/core';
+import { App, Attr, CSS, EventName, transition } from '@/admin/core';
 import {
 	getActiveSection,
 	setActiveSection,
@@ -90,7 +90,9 @@ export class SwitcherLinkComponent extends BaseComponent {
 			return;
 		}
 
-		setActiveSection(this.elementAttributes[Attr.section]);
+		transition(
+			setActiveSection.bind(null, this.elementAttributes[Attr.section])
+		);
 	}
 }
 

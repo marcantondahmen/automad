@@ -124,34 +124,12 @@ class OpenAiProvider extends AbstractProvider {
 			array(
 				'model' => $this->ProviderConfig->model,
 				'instructions' => $this->getInstructions(),
-				'input' => <<<XML
-					TASK:
-					$prompt
-
-					---
-
-					TARGET:
-					$target
-
-					---
-
-					PAGE_CONTEXT:
-					$context
-
-					---
-
-					RULES:
-					- PAGE_CONTEXT is reference only.
-					- Never rewrite or return PAGE_CONTEXT.
-					- Only modify TARGET.
-					- If TARGET is empty, generate only the requested insertion.
-					- Return only the content that should be inserted or replace TARGET.
-					XML
+				'input' => $this->composePrompt($prompt, $target, $context)
 			),
 			$Messenger
 		);
 
-		if ($response['error']) {
+		if (!empty($response['error'])) {
 			$Messenger->setError($response['error']);
 			Debug::warn($response);
 

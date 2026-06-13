@@ -240,6 +240,7 @@ class Config {
 
 		// AI assistance.
 		self::set('AM_AI_ASSISTANCE_ENABLED', true);
+		self::set('AM_AI_ASSISTANCE_INSTRUCTIONS', '');
 		self::set('AM_AI_PROVIDER_ID', '');
 
 		// The path where rate limiter data is stored.

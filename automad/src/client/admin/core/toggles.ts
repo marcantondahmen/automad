@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, EventName, queryAll } from '.';
+import { App, Attr, CSS, EventName, queryAll, transition } from '.';
 
 /**
  * Initialize all toggles within a given container and toggle the visibily of their targets accordingly.
@@ -56,7 +56,7 @@ export const initCheckboxToggles = (container: HTMLElement) => {
 		App.root.listen(
 			checkbox,
 			`change ${EventName.changeByBinding}`,
-			toggleTargets
+			transition.bind(null, toggleTargets)
 		);
 
 		toggleTargets();

@@ -44,11 +44,11 @@ import {
 import {
 	App,
 	Attr,
-	Binding,
 	Bindings,
 	CSS,
 	EventName,
 	FieldTag,
+	collectFieldData,
 	create,
 	getComponentTargetContainer,
 	getPageURL,
@@ -64,7 +64,7 @@ import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
 import { SelectComponent } from '@/admin/components/Select';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { Section } from '@/common';
+import { debounce, queryAll, Section } from '@/common';
 
 /**
  * Create a new EditorJSComponent element.
@@ -263,11 +263,13 @@ export const createGenericModal = (
  * @param onSelect
  * @param label
  * @param [url]
+ * @param [isMultiSelect]
  */
 export const createImagePickerModal = (
-	onSelect: (value: string) => void,
+	onSelect: (files: string[]) => void,
 	label: string,
-	url: string = ''
+	url: string = '',
+	isMultiSelect: boolean = false
 ): void => {
 	const modal = create(
 		ModalComponent.TAG_NAME,
@@ -276,37 +278,51 @@ export const createImagePickerModal = (
 		getComponentTargetContainer()
 	);
 
-	const pickerBindingName = `imagePickerModal-temp-${uniqueId()}`;
 	const idUrl = uniqueId();
+	const idUrlButton = uniqueId();
 	const idWidth = uniqueId();
 	const idHeight = uniqueId();
-
+	const idSelectButton = uniqueId();
 	const pageUrl = getPageURL();
+	const multipleAttr = isMultiSelect ? Attr.multiple : '';
 
-	new Binding(pickerBindingName, {
-		onChange: (value) => {
-			const inputWidth = query<HTMLInputElement>(`#${idWidth}`);
-			const inputHeight = query<HTMLInputElement>(`#${idHeight}`);
-			const width = inputWidth.value;
-			const height = inputHeight.value;
-			const querystring =
-				width && height && !value.match(/\:\/\//)
-					? `?${width}x${height}`
-					: '';
-
-			onSelect(`${value}${querystring}`);
-
-			Bindings.delete(pickerBindingName);
-			modal.close();
-		},
-	});
+	const resizeForm = isMultiSelect
+		? ''
+		: html`
+				<div class="${CSS.flex} ${CSS.flexGap}">
+					<div class="${CSS.flexItemGrow}">
+						<div class="${CSS.field}">
+							<label class="${CSS.fieldLabel}">
+								${App.text('resizeWidthTitle')}
+							</label>
+							<input
+								type="number"
+								class="${CSS.input}"
+								id="${idWidth}"
+							/>
+						</div>
+					</div>
+					<div class="${CSS.flexItemGrow}">
+						<div class="${CSS.field} ${CSS.flexItemGrow}">
+							<label class="${CSS.fieldLabel}">
+								${App.text('resizeHeightTitle')}
+							</label>
+							<input
+								type="number"
+								class="${CSS.input}"
+								id="${idHeight}"
+							/>
+						</div>
+					</div>
+				</div>
+			`;
 
 	const pageImagePicker = pageUrl
 		? html`
 				<am-image-picker
 					${Attr.page}="${pageUrl}"
 					${Attr.label}="${App.text('pageImages')}"
-					${Attr.binding}="${pickerBindingName}"
+					${multipleAttr}
 				></am-image-picker>
 			`
 		: '';
@@ -320,64 +336,108 @@ export const createImagePickerModal = (
 			<am-modal-header>${label}</am-modal-header>
 			<am-modal-body>
 				<p>${App.text('linkImage')}</p>
-				<span class="${CSS.formGroup}">
+				<span
+					class="${CSS.flex} ${CSS.flexGap} ${CSS.flexColumn} ${CSS.flexAlignEnd}"
+				>
 					<input
 						id="${idUrl}"
 						type="text"
-						class="${CSS.input} ${CSS.formGroupItem}"
+						class="${CSS.input}"
 						value="${url}"
 						placeholder="${App.text('url')}"
 					/>
-					<button class="${CSS.button} ${CSS.formGroupItem}">
-						${App.text('ok')}
+					<button
+						id="${idUrlButton}"
+						class="${CSS.button} ${CSS.buttonPrimary}"
+					>
+						${App.text('linkExternalImage')}
 					</button>
 				</span>
 				<hr />
 				<div>
 					<p>${App.text('useUploadedImage')}</p>
 					<am-upload></am-upload>
-					<div class="${CSS.flex} ${CSS.flexGap}">
-						<div class="${CSS.flexItemGrow}">
-							<div class="${CSS.field}">
-								<label class="${CSS.fieldLabel}">
-									${App.text('resizeWidthTitle')}
-								</label>
-								<input
-									type="number"
-									class="${CSS.input}"
-									id="${idWidth}"
-								/>
-							</div>
-						</div>
-						<div class="${CSS.flexItemGrow}">
-							<div class="${CSS.field} ${CSS.flexItemGrow}">
-								<label class="${CSS.fieldLabel}">
-									${App.text('resizeHeightTitle')}
-								</label>
-								<input
-									type="number"
-									class="${CSS.input}"
-									id="${idHeight}"
-								/>
-							</div>
-						</div>
-					</div>
-					${pageImagePicker}
+					${resizeForm} ${pageImagePicker}
 					<am-image-picker
 						${Attr.label}="${App.text('sharedImages')}"
-						${Attr.binding}="${pickerBindingName}"
+						${multipleAttr}
 					></am-image-picker>
 				</div>
 			</am-modal-body>
+			<am-modal-footer class="${CSS.modalFooterSticky}">
+				<am-modal-close class="${CSS.button}">
+					${App.text('close')}
+				</am-modal-close>
+				<button
+					id="${idSelectButton}"
+					class="${CSS.button} ${CSS.buttonPrimary}"
+					disabled
+				>
+					${isMultiSelect
+						? App.text('addSelectedImages')
+						: App.text('selectImage')}
+				</button>
+			</am-modal-footer>
 		`
 	);
 
-	modal.listen(query('button', modal), 'click', () => {
-		const inputUrl = query<HTMLInputElement>(`#${idUrl}`, modal);
+	const urlInput = query<HTMLInputElement>(`#${idUrl}`, modal);
+	const urlButton = query<HTMLButtonElement>(`#${idUrlButton}`, modal);
+	const selectButton = query<HTMLButtonElement>(`#${idSelectButton}`, modal);
 
-		onSelect(inputUrl.value);
+	const getResizeQuery = (file: string) => {
+		const inputWidth = query<HTMLInputElement>(`#${idWidth}`);
+		const inputHeight = query<HTMLInputElement>(`#${idHeight}`);
+		const width = inputWidth.value;
+		const height = inputHeight.value;
 
-		Bindings.delete(pickerBindingName);
+		return `${file}${
+			width && height && !file.match(/\:\/\//)
+				? `?${width}x${height}`
+				: ''
+		}`;
+	};
+
+	const getSelection = () => {
+		return queryAll('am-image-picker', modal).reduce(
+			(acc, picker) => [
+				...acc,
+				...Object.values(collectFieldData(picker)),
+			],
+			[]
+		);
+	};
+
+	modal.listen(urlButton, 'click', () => {
+		onSelect([urlInput.value]);
+
+		modal.close();
+	});
+
+	modal.listen(
+		modal,
+		'change',
+		debounce(() => {
+			if (getSelection().length) {
+				selectButton.removeAttribute('disabled');
+
+				return;
+			}
+
+			selectButton.setAttribute('disabled', '');
+		}),
+		'input[type]'
+	);
+
+	modal.listen(selectButton, 'click', () => {
+		const files = getSelection();
+
+		if (!files.length) {
+			return;
+		}
+
+		onSelect(isMultiSelect ? files : [getResizeQuery(files[0])]);
+
 		modal.close();
 	});
 

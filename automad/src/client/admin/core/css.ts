@@ -212,13 +212,14 @@ export const enum CSS {
 	filterKeyCombo = 'am-c-filter__key-combo',
 
 	flex = 'am-u-flex',
-	flexAlignCenter = 'am-u-flex--align-center',
 	flexAlignBaseline = 'am-u-flex--align-baseline',
+	flexAlignCenter = 'am-u-flex--align-center',
+	flexAlignEnd = 'am-u-flex--align-end',
 	flexColumn = 'am-u-flex--column',
-	flexGap = 'am-u-flex--gap',
-	flexGapLarge = 'am-u-flex--gap-large',
 	flexBetween = 'am-u-flex--between',
 	flexCenter = 'am-u-flex--center',
+	flexGap = 'am-u-flex--gap',
+	flexGapLarge = 'am-u-flex--gap-large',
 	flexWrap = 'am-u-flex--wrap',
 	flexItemGrow = 'am-u-flex__item-grow',
 
@@ -248,7 +249,8 @@ export const enum CSS {
 	imageCollectionGroup = 'am-c-image-collection-group',
 
 	imagePicker = 'am-c-image-picker',
-	imagePickerImage = 'am-c-image-picker__image',
+	imagePickerItem = 'am-c-image-picker__item',
+	imagePickerSelectButton = 'am-c-image-picker__select-button',
 
 	imageSelect = 'am-c-image-select',
 	imageSelectPreview = 'am-c-image-select__preview',
@@ -311,6 +313,7 @@ export const enum CSS {
 	modalClose = 'am-c-modal__close',
 	modalBody = 'am-c-modal__body',
 	modalFooter = 'am-c-modal__footer',
+	modalFooterSticky = 'am-c-modal__footer--sticky',
 	modalSpinner = 'am-c-modal__spinner',
 	modalSpinnerIcon = 'am-c-modal__spinner-icon',
 	modalSpinnerText = 'am-c-modal__spinner-text',

@@ -32,26 +32,55 @@
  * See LICENSE.md for license information.
  */
 
-import { AiProviderController } from '@/admin/core';
-import { BaseAiValidationIndicator } from '../BaseAiValidationIndicator';
+import {
+	App,
+	Attr,
+	Binding,
+	createField,
+	EventName,
+	FieldTag,
+} from '@/admin/core';
+import { BaseComponent } from '../Base';
 
 /**
- * An AI provider api key validation indicator.
+ * A wrapper element for initializing the AI instructions editor.
  *
- * @extends BaseUpdateIndicatorComponent
+ * @extends BaseComponent
  */
-class AiApiKeyValidationIndicator extends BaseAiValidationIndicator {
+class AiAssistanceInstructionsComponent extends BaseComponent {
 	/**
-	 * The validation endpoint.
-	 *
-	 * @return the endpoint
+	 * The callback function used when an element is created in the DOM.
 	 */
-	getController(): AiProviderController {
-		return AiProviderController.validateApiKey;
+	connectedCallback(): void {
+		const aiAssitanceInstructions = new Binding('aiAssitanceInstructions', {
+			initial: App.system.ai.instructions,
+		});
+
+		this.listen(window, EventName.appStateChange, () => {
+			aiAssitanceInstructions.value = App.system.ai.instructions;
+		});
+
+		createField(
+			FieldTag.code,
+			this,
+			{
+				key: 'aiAssitanceInstructions',
+				value: App.system.ai.instructions,
+				name: 'aiAssitanceInstructions',
+				hideLabel: true,
+				placeholder:
+					'Use a professional, concise, and friendly writing style.',
+			},
+			[],
+			{
+				[Attr.bind]: 'aiAssitanceInstructions',
+				[Attr.bindTo]: 'value',
+			}
+		);
 	}
 }
 
 customElements.define(
-	'am-ai-api-key-validation-indicator',
-	AiApiKeyValidationIndicator
+	'am-ai-assistance-instructions',
+	AiAssistanceInstructionsComponent
 );

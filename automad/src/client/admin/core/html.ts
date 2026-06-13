@@ -65,6 +65,7 @@ export const enum Attr {
 	min = 'am-min',
 	modal = 'am-modal',
 	modalOpen = 'am-modal-open',
+	multiple = 'am-multiple',
 	narrow = 'am-narrow',
 	noClick = 'am-no-click',
 	noEsc = 'am-no-esc',

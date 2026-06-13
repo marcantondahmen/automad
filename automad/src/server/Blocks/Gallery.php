@@ -69,6 +69,12 @@ class Gallery extends AbstractBlock {
 			return '';
 		}
 
+		$files = FileUtils::filterExisting($block['data']['files'], $Automad->Context->get()->path);
+
+		if (empty($files)) {
+			return '';
+		}
+
 		$pixelDensity = 2.5;
 		$settings = array(
 			'layout' => $block['data']['layout'] ?? 'columns',
@@ -81,12 +87,12 @@ class Gallery extends AbstractBlock {
 		$imageSets = array();
 
 		// The $first image is used for the Str::findFirstImage() method.
-		$first = $block['data']['files'][0];
+		$first = $files[0];
 
 		$width = $settings['layout'] != 'rows' ? $settings['columnWidthPx'] : 0.0;
 		$height = $settings['layout'] != 'columns' ? $settings['rowHeightPx'] : 0.0;
 
-		foreach ($block['data']['files'] ?? array() as $file) {
+		foreach ($files as $file) {
 			$imageSets[] = array(
 				'thumb' => new ImgLoaderSet($file, $Automad, $width * $pixelDensity, $height * $pixelDensity, false),
 				'large' => new Img($file, $Automad, 3000, 3000, false),

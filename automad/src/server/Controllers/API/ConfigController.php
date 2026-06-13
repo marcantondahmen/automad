@@ -63,8 +63,13 @@ class ConfigController {
 		$ConfigFile = new ConfigFile();
 
 		switch (Request::post('type')) {
-			case 'ai':
+			case 'aiEnabled':
 				$ConfigFile->set('AM_AI_ASSISTANCE_ENABLED', !empty(Request::post('aiAssitanceEnabled')));
+
+				break;
+
+			case 'aiInstructions':
+				$ConfigFile->set('AM_AI_ASSISTANCE_INSTRUCTIONS', Request::post('aiAssitanceInstructions'));
 
 				break;
 

@@ -200,6 +200,76 @@ abstract class AbstractProvider {
 	}
 
 	/**
+	 * Compose the actual prompt that is send to the provider API.
+	 *
+	 * @param string $prompt
+	 * @param string $target
+	 * @param string $context
+	 * @return string
+	 */
+	protected function composePrompt(string $prompt, string $target, string $context): string {
+		if (empty($prompt)) {
+			return '';
+		}
+
+		$prompt = <<<TEXT
+			TASK:
+			$prompt
+			TEXT;
+
+		$rulesArray = array();
+		$rules = '';
+
+		if (!empty($target)) {
+			$rulesArray[] = 'Only modify TARGET.';
+			$rulesArray[] = 'Return only the content that should be inserted or replace TARGET.';
+
+			$target = <<<TEXT
+
+				---
+
+				TARGET:
+				$target
+				TEXT;
+		}
+
+		if (!empty($context)) {
+			$rulesArray[] = 'PAGE_CONTEXT is reference only.';
+			$rulesArray[] = 'Never rewrite or return PAGE_CONTEXT.';
+
+			$context = <<<TEXT
+
+				---
+
+				PAGE_CONTEXT:
+				$context
+				TEXT;
+		}
+
+		if (!empty($rulesArray)) {
+			$rules = trim(join('\n- ', $rulesArray));
+			$rules = <<<TEXT
+				
+				---
+
+				RULES: 
+				$rules
+				TEXT;
+		}
+
+		$composed = <<<TEXT
+			$prompt
+			$target
+			$context
+			$rules
+			TEXT;
+
+		Debug::log($composed, 'Composed prompt');
+
+		return $composed;
+	}
+
+	/**
 	 * The api base url.
 	 *
 	 * @return string
@@ -219,12 +289,15 @@ abstract class AbstractProvider {
 	 * @return string
 	 */
 	protected function getInstructions(): string {
-		return <<<TEXT
+		$customInstruction = AM_AI_ASSISTANCE_INSTRUCTIONS;
+
+		$instructions = trim(<<<TEXT
 			You are a CMS text processor.
 
-			Return only the final generated or transformed text as HTML.
+			Return only the final generated or transformed content as valid HTML markup.
 			Preserve formatting.
 			Preserve the original language.
+			No Markdown.
 
 			Do not:
 			- explain changes
@@ -232,7 +305,13 @@ abstract class AbstractProvider {
 			- add labels
 			- mention the task
 			- wrap the result in quotes
-		TEXT;
+
+			$customInstruction
+			TEXT);
+
+		Debug::log($instructions, 'Instructions');
+
+		return $instructions;
 	}
 
 	/**

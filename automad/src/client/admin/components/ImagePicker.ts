@@ -35,18 +35,17 @@
 import {
 	App,
 	Attr,
-	Binding,
-	Bindings,
 	create,
 	CSS,
 	EventName,
+	fire,
 	html,
 	ImageCollectionController,
+	queryAll,
 	requestAPI,
 } from '@/admin/core';
 import { Image } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
-import { ModalComponent } from './Modal/Modal';
 
 /**
  * An image picker component.
@@ -54,26 +53,27 @@ import { ModalComponent } from './Modal/Modal';
  * @example
  * <am-image-picker
  *     ${Attr.label}="Shared Files"
- *     ${Attr.binding}="bindingName"
  * ></am-image-picker>
  * <am-image-picker
  *      ${Attr.page}="url"
  *      ${Attr.label}="Page Files"
- *      ${Attr.binding}="bindingName"
+ *      ${Attr.multiple}
  * ></am-image-picker>
  *
  * @extends BaseComponent
  */
 class ImagePickerComponent extends BaseComponent {
 	/**
-	 * The binding that refers to the actual picked value.
-	 */
-	private binding: Binding = null;
-
-	/**
 	 * The wrapper element.
 	 */
 	private wrapper: HTMLElement;
+
+	/**
+	 * True if picker is a multi-select picker.
+	 */
+	private get isMultiSelect(): boolean {
+		return this.hasAttribute(Attr.multiple);
+	}
 
 	/**
 	 * The array of observed attributes.
@@ -81,14 +81,13 @@ class ImagePickerComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return [Attr.page, Attr.label, Attr.binding];
+		return [Attr.page, Attr.label];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.binding = Bindings.get(this.elementAttributes[Attr.binding]);
 		this.init();
 
 		this.listen(
@@ -106,12 +105,26 @@ class ImagePickerComponent extends BaseComponent {
 	private async init(): Promise<void> {
 		this.classList.add(CSS.field);
 
+		const header = create(
+			'div',
+			[CSS.flex, CSS.flexBetween, CSS.flexAlignCenter],
+			{},
+			this
+		);
+
 		if (this.elementAttributes[Attr.label]) {
-			create('label', [CSS.fieldLabel], {}, this).textContent =
-				this.elementAttributes[Attr.label];
+			create(
+				'label',
+				[CSS.fieldLabel],
+				{},
+				header,
+				this.elementAttributes[Attr.label]
+			);
 
 			this.removeAttribute(Attr.label);
 		}
+
+		this.renderSelectButtons(header);
 
 		this.wrapper =
 			this.wrapper ??
@@ -140,6 +153,58 @@ class ImagePickerComponent extends BaseComponent {
 	}
 
 	/**
+	 * Renders the select all/none buttons.
+	 *
+	 * @param container
+	 */
+	private renderSelectButtons(container: HTMLElement): void {
+		if (!this.isMultiSelect) {
+			return;
+		}
+
+		const buttons = create(
+			'div',
+			[CSS.flex, CSS.flexGap, CSS.flexAlignCenter],
+			{},
+			container
+		);
+
+		const selectAll = create(
+			'span',
+			[CSS.imagePickerSelectButton],
+			{ [Attr.tooltip]: App.text('selectAll') },
+			buttons,
+			'<i class="bi bi-check-circle"></i>'
+		);
+
+		this.listen(selectAll, 'click', () => {
+			queryAll<HTMLInputElement>('input[type="checkbox"]', this).forEach(
+				(input) => {
+					input.checked = true;
+					fire('change', input);
+				}
+			);
+		});
+
+		const selectNone = create(
+			'span',
+			[CSS.imagePickerSelectButton],
+			{ [Attr.tooltip]: App.text('selectNone') },
+			buttons,
+			'<i class="bi bi-x-circle"></i>'
+		);
+
+		this.listen(selectNone, 'click', () => {
+			queryAll<HTMLInputElement>('input[type="checkbox"]', this).forEach(
+				(input) => {
+					input.checked = false;
+					fire('change', input);
+				}
+			);
+		});
+	}
+
+	/**
 	 * Render the image grid.
 	 *
 	 * @param images
@@ -147,27 +212,25 @@ class ImagePickerComponent extends BaseComponent {
 	private renderGrid(images: Image[], wrapper: HTMLElement) {
 		const grid = create('div', [CSS.imagePicker], {}, wrapper);
 		const base = this.elementAttributes[Attr.page] ? '' : '/shared/';
-		const modal = this.closest<ModalComponent>('am-modal') || null;
 
 		images.forEach((image: Image) => {
-			const img = create(
-				'img',
-				[CSS.imagePickerImage],
-				{
-					src: image.thumbnail,
-					value: `${base}${image.name}`,
-					[Attr.tooltip]: image.name,
-				},
-				grid
+			create(
+				'label',
+				[CSS.imagePickerItem],
+				{ [Attr.tooltip]: image.name },
+				grid,
+				html`
+					<input
+						type="${this.isMultiSelect ? 'checkbox' : 'radio'}"
+						name="${this.isMultiSelect
+							? `${base}${image.name}`
+							: 'selected'}"
+						value="${base}${image.name}"
+					/>
+					<span><i class="bi bi-check"></i></span>
+					<img src="${image.thumbnail}" />
+				`
 			);
-
-			this.listen(img, 'click', () => {
-				this.binding.value = img.getAttribute('value');
-
-				if (modal) {
-					modal.close();
-				}
-			});
 		});
 	}
 }

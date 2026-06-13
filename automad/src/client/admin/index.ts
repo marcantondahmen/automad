@@ -106,9 +106,7 @@ import('./components/Indicators/Navbar/DebugIndicator');
 import('./components/Indicators/Navbar/OutdatedPackagesIndicator');
 import('./components/Indicators/Navbar/SystemUpdateIndicator');
 import('./components/Indicators/Sidebar/OutdatedPackagesIndicator');
-import('./components/Indicators/System/AiApiKeyValidationIndicator');
 import('./components/Indicators/System/AiIndicator');
-import('./components/Indicators/System/AiModelValidationIndicator');
 import('./components/Indicators/System/CacheIndicator');
 import('./components/Indicators/System/DebugIndicator');
 import('./components/Indicators/System/FeedIndicator');
@@ -162,6 +160,7 @@ import('./components/Switcher/SwitcherLink');
 import('./components/Switcher/SwitcherSection');
 
 import('./components/System/AiAssistanceEnable');
+import('./components/System/AiAssistanceInstructions');
 import('./components/System/AiProviderSetup');
 import('./components/System/CacheEnable');
 import('./components/System/CacheLifetime');
