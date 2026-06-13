@@ -55,6 +55,12 @@ import {
 import { BaseComponent } from '../Base';
 import { AiProvider, APIResponse } from '@/admin/types';
 
+/**
+ * Format model names for usage as button labels.
+ *
+ * @param model
+ * @return the formatted name
+ */
 const modelDisplayName = (model: string): string =>
 	model
 		.replace(/(\d)-(\d)/g, '$1.$2')
@@ -62,6 +68,48 @@ const modelDisplayName = (model: string): string =>
 		.split(' ')
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(' ');
+
+/**
+ * Create a validator badge for model and api key validation.
+ * This should handled inside this module and not by a dedicated
+ * indicator component since it should only make api requests
+ * when being rendered and not on state changes.
+ *
+ * @param container
+ * @param controller
+ * @param id
+ * @async
+ */
+const createValidationBadge = async (
+	container: HTMLElement,
+	controller: AiProviderController,
+	id: string
+): Promise<void> => {
+	const badge = create(
+		'span',
+		[],
+		{},
+		container,
+
+		html`<i
+			class="bi bi-dash-circle ${CSS.iconFixedWidth} ${CSS.textMuted}"
+		></i>`
+	);
+
+	const validate = async () => {
+		const { data } = await requestAPI(controller, { id });
+
+		const cls = data?.isValid
+			? `bi bi-check-circle-fill`
+			: `bi bi-slash-circle-fill ${CSS.textDanger}`;
+
+		badge.innerHTML = html`<i class="${cls} ${CSS.iconFixedWidth}"></i>`;
+	};
+
+	if (App.system.ai.enabled) {
+		setTimeout(validate, 5000);
+	}
+};
 
 /**
  * The AI provider setup component.
@@ -198,12 +246,13 @@ class AiProviderSetupComponent extends BaseComponent {
 			[CSS.flex, CSS.flexGap],
 			{},
 			buttons,
-			html`
-				<span>${modelDisplayName(provider.model)}</span>
-				<am-ai-model-validation-indicator
-					${Attr.aiProviderId}="${provider.id}"
-				></am-ai-model-validation-indicator>
-			`
+			html`<span>${modelDisplayName(provider.model)}</span>`
+		);
+
+		createValidationBadge(
+			changeModelButton,
+			AiProviderController.validateModel,
+			provider.id
 		);
 
 		const setNewApiKeyButton = create(
@@ -211,12 +260,13 @@ class AiProviderSetupComponent extends BaseComponent {
 			[CSS.flex, CSS.flexGap],
 			{},
 			buttons,
-			html`
-				<span>${App.text('systemAiChangeApiKey')}</span>
-				<am-ai-api-key-validation-indicator
-					${Attr.aiProviderId}="${provider.id}"
-				></am-ai-api-key-validation-indicator>
-			`
+			html`<span>${App.text('systemAiChangeApiKey')}</span>`
+		);
+
+		createValidationBadge(
+			setNewApiKeyButton,
+			AiProviderController.validateApiKey,
+			provider.id
 		);
 
 		this.listen(
