@@ -531,7 +531,7 @@
 	"systemAiOpenAiSetupHelp": "Using OpenAI requires an account on their <a href='{urlPlatform}' target='_blank'>API platform page</a>, an active billing setup, and a valid API key, which can be managed <a href='{urlApiKeys}' target='_blank'>here</a>.",
 	"systemAiProviderApiKeyModalButton": "Validate and save",
 	"systemAiProviderApiKeyModalTitle": "API Key",
-	"systemAiProviderHeading": "Providers",
+	"systemAiProviderHeading": "AI Providers",
 	"systemAiProviderText": "Configure one or more AI providers below by adding an API key and selecting the models you want to make available in the editor.",
 	"systemAiProviderModelModalHelp": "Select the AI model that should be used for AI-assisted writing.",
 	"systemAiProviderModelModalTitle": "AI model",
