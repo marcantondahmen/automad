@@ -74,7 +74,7 @@ export abstract class BaseAiValidationIndicator extends BaseStateIndicatorCompon
 		></i>`;
 
 		if (App.system.ai.enabled) {
-			setTimeout(validate, 5000);
+			setTimeout(validate, 2000);
 		}
 	}
 }

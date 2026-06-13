@@ -85,8 +85,6 @@ class AiProviderSetupComponent extends BaseComponent {
 	 */
 	private render(): void {
 		if (!App.system.ai.enabled) {
-			this.innerHTML = '';
-
 			return;
 		}
 

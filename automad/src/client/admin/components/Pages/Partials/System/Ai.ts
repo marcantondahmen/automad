@@ -62,7 +62,6 @@ export const renderAiSection = (): string => {
 				</div>
 			</am-form>
 			<div class="am-ai-setup">
-				<h2>${App.text('systemAiProviderHeading')}</h2>
 				<p>${App.text('systemAiProviderText')}</p>
 				<am-ai-provider-setup></am-ai-provider-setup>
 				<h2>${App.text('systemAiInstructionsHeading')}</h2>
