@@ -40,17 +40,6 @@ export const enum CSS {
 	focus = 'am-focus',
 	validate = 'am-validate',
 
-	aiAssistance = 'ai-assistance',
-	aiAssistancePending = 'ai-assistance--pending',
-	aiAssistanceToggle = 'ai-assistance__toggle',
-	aiAssistanceForm = 'ai-assistance__form',
-	aiAssistanceFormFooter = 'ai-assistance__form-footer',
-	aiAssistancePrompt = 'ai-assistance__prompt',
-	aiAssistanceSelection = 'ai-assistance__selection',
-	aiAssistanceSelect = 'ai-assistance__select',
-	aiAssistanceButton = 'ai-assistance__button',
-	aiAssistanceSelectedBlock = 'ai-assistance-selected-block',
-
 	alert = 'am-c-alert',
 	alertDanger = 'am-c-alert--danger',
 	alertIcon = 'am-c-alert__icon',
@@ -140,13 +129,27 @@ export const enum CSS {
 
 	dropdownArrow = 'am-e-dropdown-arrow',
 
-	editorCallout = 'am-c-ed-bl-callout',
-	editorCalloutTitle = 'am-c-ed-bl-callout__title',
-	editorCalloutText = 'am-c-ed-bl-callout__text',
+	editorAiAssistance = 'am-c-editor-ai-assistance',
+	editorAiAssistanceHidden = 'am-c-editor-ai-assistance--hidden',
+	editorAiAssistancePending = 'am-c-editor-ai-assistance--pending',
+	editorAiAssistanceToggle = 'am-c-editor-ai-assistance__toggle',
+	editorAiAssistanceForm = 'am-c-editor-ai-assistance__form',
+	editorAiAssistanceFormFooter = 'am-c-editor-ai-assistance__form-footer',
+	editorAiAssistancePrompt = 'am-c-editor-ai-assistance__prompt',
+	editorAiAssistanceSelection = 'am-c-editor-ai-assistance__selection',
+	editorAiAssistanceSelect = 'am-c-editor-ai-assistance__select',
+	editorAiAssistanceButton = 'am-c-editor-ai-assistance__button',
+	editorAiAssistanceButtonDisabled = 'am-c-editor-ai-assistance__button--disabled',
+	editorAiAssistanceSelectedEditor = 'am-c-editor-ai-assistance-selected-editor',
+	editorAiAssistanceSelectedBlock = 'am-c-editor-ai-assistance-selected-block',
 
 	editorBlockButtons = 'am-c-ed-bl-buttons',
 	editorBlockButtonsEdit = 'am-c-ed-bl-buttons__edit',
 	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
+
+	editorBlockCallout = 'am-c-ed-bl-callout',
+	editorBlockCalloutTitle = 'am-c-ed-bl-callout__title',
+	editorBlockCalloutText = 'am-c-ed-bl-callout__text',
 
 	editorBlockComponent = 'am-c-ed-bl-component',
 	editorBlockComponentDetails = 'am-c-ed-bl-component__details',

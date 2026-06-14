@@ -184,6 +184,7 @@ import('./components/Copy');
 import('./components/CustomIconCheckbox');
 import('./components/DashboardThemeToggle');
 import('./components/Dropdown');
+import('./components/EditorAiAssistance');
 import('./components/EditorJS');
 import('./components/EmbedService');
 import('./components/Filter');

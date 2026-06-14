@@ -1,8 +1,20 @@
 # Changelog
 
-## [v2.0.0-beta.40](https://github.com/marcantondahmen/automad/commit/39018822d41d99e7b90d8cd5314a31aecec1b516)
+## [v2.0.0-beta.41](https://github.com/marcantondahmen/automad/commit/99bdc139b6f07fbad2d12a2f827eaea13467c9ae)
 
-Sat, 13 Jun 2026 12:37:22 +0200
+Sun, 14 Jun 2026 17:42:00 +0200
+
+### New Features
+
+- improve ai assistance user experience ([55e1b8039](https://github.com/marcantondahmen/automad/commit/55e1b80391506d8530d24c53170c14db48e6cdf9))
+
+### Bugfixes
+
+- scope text selection of ai assisted writing to the containing editor ([8ebf34098](https://github.com/marcantondahmen/automad/commit/8ebf3409892cd37b2068cef208b3dec82928d7dc))
+
+## [v2.0.0-beta.40](https://github.com/marcantondahmen/automad/commit/1e0f2a121083a0a9b8c2a01c6957a9d4818f3b05)
+
+Sat, 13 Jun 2026 12:44:31 +0200
 
 ### New Features
 
