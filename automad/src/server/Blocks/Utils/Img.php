@@ -54,17 +54,17 @@ class Img {
 	/**
 	 * The resized image height.
 	 */
-	public float $height;
+	public float $height = 0;
 
 	/**
 	 * The url to the actual large image.
 	 */
-	public string $image;
+	public string $image = '';
 
 	/**
 	 * The resized image width.
 	 */
-	public float $width;
+	public float $width = 0;
 
 	/**
 	 * The specified $file can either be a remote URL or a local path.
@@ -83,11 +83,15 @@ class Img {
 			$file = Resolve::filePath($Automad->Context->get()->path, $file);
 		}
 
+		if (empty($file) || !is_readable($file)) {
+			return;
+		}
+
 		preg_match('/(\/[\w\.\-\/]+(?:' . join('|', FileSystem::FILE_TYPES_IMAGE) . '))(\?(\d+)x(\d+))?/is', $file, $matches);
 
 		$Image = new Image($matches[1], $matches[3] ?? $width, $matches[4] ?? $height, $crop);
 
-		$this->image = AM_BASE_URL . $Image->file;
+		$this->image = $Image->file ? AM_BASE_URL . $Image->file : '';
 		$this->width = $Image->width;
 		$this->height = $Image->height;
 	}

@@ -125,18 +125,4 @@ class FileUtils {
 	public static function fileIsImage(string $file): bool {
 		return (in_array(FileSystem::getExtension($file), FileSystem::FILE_TYPES_IMAGE));
 	}
-
-	/**
-	 * Filter an array of files by existence.
-	 *
-	 * @param array $files
-	 * @param string $pagePath
-	 * @return array
-	 */
-	public static function filterExisting(array $files, string $pagePath): array {
-		return array_filter(
-			$files,
-			fn (string $file) => is_readable(Resolve::filePath($pagePath, $file))
-		);
-	}
 }

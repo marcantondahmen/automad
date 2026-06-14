@@ -69,11 +69,7 @@ class Gallery extends AbstractBlock {
 			return '';
 		}
 
-		$files = FileUtils::filterExisting($block['data']['files'], $Automad->Context->get()->path);
-
-		if (empty($files)) {
-			return '';
-		}
+		$files = $block['data']['files'];
 
 		$pixelDensity = 2.5;
 		$settings = array(
@@ -99,6 +95,8 @@ class Gallery extends AbstractBlock {
 				'caption' => trim(Str::markdown(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file))))
 			);
 		}
+
+		$imageSets = array_filter($imageSets, fn ($imageSet) => !empty($imageSet['large']->image));
 
 		$json = rawurlencode(strval(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES)));
 		$attr = Attr::render($block['tunes']);
