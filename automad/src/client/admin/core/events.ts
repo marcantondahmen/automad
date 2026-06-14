@@ -39,6 +39,7 @@ import { CSS, getLogger, queryAll } from '.';
  * The object with all custom event that are used by the UI.
  */
 export const enum EventName {
+	aiRuntimeStateChange = 'AutomadAiRuntimeStateChange',
 	appStateChange = 'AutomadAppStateChange',
 	appStateRequireUpdate = 'AutomadAppStateRequireUpdate',
 	autocompleteSelect = 'AutomadAutocompleteSelect',

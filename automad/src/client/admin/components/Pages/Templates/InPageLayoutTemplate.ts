@@ -83,5 +83,6 @@ export const inPage = ({ main }: Partials): string => {
 				<div class="${CSS.layoutInPageContent}">${main}</div>
 			</div>
 		</div>
+		<am-editor-ai-assistance></am-editor-ai-assistance>
 	`;
 };

@@ -31,31 +31,63 @@
  *
  * See LICENSE.md for license information.
  */
-.ai-assistance {
+
+.am-c-editor-ai-assistance {
 	@border: 3px;
 	@toggleSize: 3.35rem;
 	@iconFontSize: 1.25rem;
-	position: sticky;
-	z-index: 2;
-	display: flex;
-	align-items: end;
-	bottom: 0;
-	right: 0;
-	height: 0;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.2s;
 
-	&--pending &,
-	am-editor-js:not(:has(am-editor-js:hover)):hover > &,
-	&:has(textarea:focus),
-	&[open] {
-		pointer-events: all;
-		opacity: 1;
+	position: fixed;
+	z-index: 100;
+	justify-content: end;
+	display: flex;
+	inset: auto 10px 22px auto;
+	width: auto;
+	opacity: 1;
+	transform: translateY(0);
+	transition:
+		opacity 0.2s,
+		transform 0.2s ease-in-out;
+
+	&-selected-editor > .codex-editor > .codex-editor__redactor {
+		background-color: hsl(var(--am-clr-background-faded)) !important;
+		outline: @am-border !important;
+		border-radius: @am-form-radius;
 	}
 
-	& > summary::marker {
-		content: '';
+	&-selected-block {
+		background-color: hsl(var(--am-clr-background-highlight));
+		outline: @am-border;
+		border-radius: @am-form-radius;
+	}
+
+	&--hidden {
+		opacity: 0;
+		transform: translateY(100px);
+		pointer-events: none;
+	}
+
+	& > details {
+		&::details-content {
+			transition:
+				opacity 0.2s,
+				transform 0.2s,
+				content-visibility 0.2s ease allow-discrete,
+				overflow 0.2s ease allow-discrete;
+			transform: translateY(100px);
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		&[open]::details-content {
+			transform: translateY(0);
+			opacity: 1;
+			pointer-events: all;
+		}
+
+		& > summary::marker {
+			content: '';
+		}
 	}
 
 	&__toggle {
@@ -63,39 +95,46 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		bottom: 5px;
-		right: 5px;
-		width: @toggleSize;
+		gap: @am-flex-gap;
+		bottom: 0;
+		right: 0;
+		width: auto;
 		height: @toggleSize;
+		padding: 0 1.15rem 0 1.4rem;
 		border-radius: (@toggleSize / 2);
 		font-size: @iconFontSize;
 		color: hsl(var(--am-clr-text-paragraph));
 		cursor: pointer;
 		user-select: none;
 		box-shadow: @am-shadow;
+		transform: translateY(0);
 		opacity: 1;
-		transition: opacity 0.2s;
-		.animated-border(120%, 120%, @border, (@toggleSize / 2));
+		transition:
+			opacity 0.2s,
+			transform 0.2s;
+		.animated-border(300%, 300%, @border, (@toggleSize / 2));
+
+		& small {
+			white-space: nowrap;
+		}
 
 		details[open] > summary & {
+			transform: translateY(100px);
 			opacity: 0;
 		}
 	}
 
 	&__form {
 		--speed: 2s;
-		position: absolute;
+		position: relative;
 		z-index: 5;
 		display: flex;
 		flex-direction: column;
 		padding: @border;
-		width: 28rem;
-		right: 5px;
-		bottom: 5px;
-		border-radius: (@toggleSize / 2);
+		width: 32rem;
+		max-width: 80vw;
 		box-shadow: @am-shadow;
 		.animated-border(150%, 400%, @border, (@toggleSize / 2), var(--speed));
-		.details-transition;
 	}
 
 	&--pending &__form {
@@ -104,8 +143,8 @@
 
 	&__prompt {
 		padding: 1.25rem;
-		height: 6.5rem;
-		overflow-y: hidden;
+		height: 10rem;
+		overflow-y: scroll;
 		font-family: @am-code-font-family;
 		line-height: 1.65;
 		background-color: hsl(var(--am-clr-background-faded));
@@ -115,7 +154,7 @@
 		outline: none !important;
 		appearance: none;
 		resize: none;
-		scrollbar-width: thin !important;
+		scrollbar-width: none;
 	}
 
 	&__selection:not(:empty) {
@@ -170,6 +209,12 @@
 
 		&:hover {
 			color: hsl(var(--am-clr-text-muted));
+		}
+
+		&--disabled {
+			pointer-events: none;
+			color: hsl(var(--am-clr-text-muted));
+			cursor: default !important;
 		}
 	}
 }

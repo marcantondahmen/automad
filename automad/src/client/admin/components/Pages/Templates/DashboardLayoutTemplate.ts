@@ -283,6 +283,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 				</am-modal-toggle>
 			</footer>
 		</div>
+		<am-editor-ai-assistance></am-editor-ai-assistance>
 		<!-- Sign out form -->
 		<am-form ${Attr.api}="${SessionController.logout}"></am-form>
 		<!-- Jumpbar Modal -->
