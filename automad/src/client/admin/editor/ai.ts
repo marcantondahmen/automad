@@ -41,12 +41,14 @@ import {
 	FieldTag,
 	fire,
 	getLogger,
+	query,
 	queryAll,
 	requestAPI,
 } from '@/admin/core';
 import { AiRuntimeState, AiTarget } from '@/admin/types/editor/plugins';
 import { BlockToolData } from 'automad-editorjs';
-import { EditorFieldComponent } from '../components/Fields/EditorField';
+import { EditorFieldComponent } from '@/admin/components/Fields/EditorField';
+import { EditorAiAssistanceComponent } from '@/admin/components/EditorAiAssistance';
 
 /**
  * Get all page blocks.
@@ -252,6 +254,10 @@ export class AiRuntime {
 	 * @param active
 	 */
 	toggleSelectionHighlighting(active: boolean = true): void {
+		const details = query<HTMLDetailsElement>(
+			`${EditorAiAssistanceComponent.TAG_NAME} > details`
+		);
+
 		setTimeout(() => {
 			queryAll(`.${CSS.editorAiAssistanceSelectedEditor}`).forEach(
 				(editor) => {
@@ -267,7 +273,7 @@ export class AiRuntime {
 				}
 			);
 
-			if (active) {
+			if (active && details.open) {
 				this.state?.component.classList.add(
 					CSS.editorAiAssistanceSelectedEditor
 				);
