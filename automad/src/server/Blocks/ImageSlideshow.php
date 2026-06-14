@@ -68,13 +68,8 @@ class ImageSlideshow extends AbstractBlock {
 			return '';
 		}
 
-		$files = FileUtils::filterExisting($block['data']['files'], $Automad->Context->get()->path);
-
-		if (empty($files)) {
-			return '';
-		}
-
 		$data = $block['data'];
+		$files = $data['files'];
 
 		$settings = array(
 			'imageWidthPx' => $data['imageWidthPx'] ?? 1200,
@@ -100,6 +95,8 @@ class ImageSlideshow extends AbstractBlock {
 				'caption' => Str::markdown(FileUtils::caption(Resolve::filePath($Automad->Context->get()->path, $file)))
 			);
 		}
+
+		$imageSets = array_filter($imageSets, fn ($imageSet) => !empty($imageSet['imageSet']->image));
 
 		$json = rawurlencode(strval(json_encode(array('imageSets' => $imageSets, 'settings' => $settings), JSON_UNESCAPED_SLASHES)));
 		$attr = Attr::render($block['tunes']);

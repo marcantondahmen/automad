@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.42](https://github.com/marcantondahmen/automad/commit/b4230653331b1da4a192600c1be240432625f91b)
+## [v2.0.0-beta.43](https://github.com/marcantondahmen/automad/commit/5814fd5fd37c8260b4edbab1cda460f6ae3fa07b)
 
-Sun, 14 Jun 2026 19:31:58 +0200
+Sun, 14 Jun 2026 20:35:51 +0200
+
+### Bugfixes
+
+- fix filtering of missing images in galleries and slideshows ([5814fd5fd](https://github.com/marcantondahmen/automad/commit/5814fd5fd37c8260b4edbab1cda460f6ae3fa07b))
+
+## [v2.0.0-beta.42](https://github.com/marcantondahmen/automad/commit/4862c34453c3aed2c37f784653167a476b150b61)
+
+Sun, 14 Jun 2026 19:35:18 +0200
 
 ### Bugfixes
 

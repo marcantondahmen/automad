@@ -37,8 +37,6 @@ namespace Automad\Blocks\Utils;
 
 use Automad\Core\Automad;
 use Automad\Core\Image;
-use Automad\Core\RemoteFile;
-use Automad\Core\Resolve;
 use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -64,7 +62,7 @@ class ImgLoaderSet {
 	/**
 	 * The url to the tiny blurred placeholder image.
 	 */
-	public string $preload;
+	public string $preload = '';
 
 	/**
 	 * The resized image width.
@@ -87,6 +85,10 @@ class ImgLoaderSet {
 		$this->image = $Img->image;
 		$this->width = $Img->width;
 		$this->height = $Img->height;
+
+		if (empty($this->image)) {
+			return;
+		}
 
 		$Preload = new Image(AM_BASE_DIR . Str::stripStart($Img->image, AM_BASE_URL), 20);
 		$this->preload = AM_BASE_URL . $Preload->file;
