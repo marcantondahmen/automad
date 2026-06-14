@@ -12,11 +12,22 @@ getProcessStartTime() {
 	echo $startTime
 }
 
+killPortBlockingProcess() {
+	local portBlockingProcessId=$(pgrep -af "$URL")
+
+	if [ ! -z $portBlockingProcessId ]; then
+		echo -e "\n  \033[0;31m Port in use. Killing blocking process ...\033[0m"
+		kill $portBlockingProcessId
+	fi
+}
+
 start() {
 	if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
 		echo -e "\n  \033[0;32m Server already running\033[0m"
 		return
 	fi
+
+	killPortBlockingProcess
 
 	nohup php -S $URL >"$LOG_FILE" 2>&1 &
 

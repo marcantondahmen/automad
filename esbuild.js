@@ -400,17 +400,21 @@ const lessOnLoadPlugin = () => {
 						'utf8'
 					);
 
-					// https://lesscss.org/usage/#programmatic-usage
-					const { css, imports } = await less.render(source, {
-						// Set this in order to resolve imports
-						filename: args.path,
-					});
+					try {
+						// https://lesscss.org/usage/#programmatic-usage
+						const { css, imports } = await less.render(source, {
+							// Set this in order to resolve imports
+							filename: args.path,
+						});
 
-					return {
-						contents: generateLicense(args.path) + css,
-						watchFiles: imports,
-						loader: 'css',
-					};
+						return {
+							contents: generateLicense(args.path) + css,
+							watchFiles: imports,
+							loader: 'css',
+						};
+					} catch (error) {
+						process.exit(1);
+					}
 				}
 			);
 		},
