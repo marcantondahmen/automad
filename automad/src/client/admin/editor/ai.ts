@@ -190,22 +190,22 @@ export class AiRuntime {
 		const contentManager = new AiContentManager(this.state);
 
 		if (this.state.selectedBlocks.length) {
-			contentManager.replaceBlocks(output);
-
-			return true;
-		}
-
-		if (
+			await contentManager.replaceBlocks(output);
+		} else if (
 			this.state.selectedRange !== null &&
 			this.state.selectedRange.startOffset !=
 				this.state.selectedRange.endOffset
 		) {
 			contentManager.replaceRange(output);
-
-			return true;
+		} else {
+			await contentManager.insertBlocks(output);
 		}
 
-		contentManager.insertBlocks(output);
+		this.setState(null);
+
+		setTimeout(() => {
+			fire('input', this.state.component);
+		}, 200);
 
 		return true;
 	}
@@ -353,8 +353,6 @@ class AiContentManager {
 		this.state.component.editor.blocks.insert();
 
 		await this.state.component.editor.paste.processText(content, true);
-
-		fire('input', this.state.component);
 	}
 
 	/**
@@ -381,8 +379,6 @@ class AiContentManager {
 		this.state.component.editor.caret.setToBlock(firstBlockIndex);
 
 		await this.state.component.editor.paste.processText(content, true);
-
-		fire('input', this.state.component);
 	}
 
 	/**
@@ -416,7 +412,5 @@ class AiContentManager {
 		sel.addRange(range);
 
 		this.state.selectedRange = sel.getRangeAt(0).cloneRange();
-
-		fire('input', this.state.component);
 	}
 }
