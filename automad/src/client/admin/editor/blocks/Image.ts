@@ -280,7 +280,9 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 */
 	private pickImage(): void {
 		createImagePickerModal(
-			this.setImage.bind(this),
+			([url]) => {
+				this.setImage(url);
+			},
 			App.text('selectImage'),
 			this.data.url
 		);

@@ -190,7 +190,7 @@ class MarkdownFieldComponent extends BaseFieldComponent {
 			'image',
 			App.text('insertImage'),
 			() => {
-				createImagePickerModal((value) => {
+				createImagePickerModal(([value]) => {
 					if (value) {
 						this.editor.insertText(`\r\n![](${value})`);
 					}

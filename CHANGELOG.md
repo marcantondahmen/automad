@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.41](https://github.com/marcantondahmen/automad/commit/99bdc139b6f07fbad2d12a2f827eaea13467c9ae)
+## [v2.0.0-beta.42](https://github.com/marcantondahmen/automad/commit/b4230653331b1da4a192600c1be240432625f91b)
 
-Sun, 14 Jun 2026 17:42:00 +0200
+Sun, 14 Jun 2026 19:31:58 +0200
+
+### Bugfixes
+
+- fix image picker for single images ([b42306533](https://github.com/marcantondahmen/automad/commit/b4230653331b1da4a192600c1be240432625f91b))
+
+## [v2.0.0-beta.41](https://github.com/marcantondahmen/automad/commit/7b9755bfd3bc30f54b7bbdbe2ee692656635b834)
+
+Sun, 14 Jun 2026 17:45:32 +0200
 
 ### New Features
 
