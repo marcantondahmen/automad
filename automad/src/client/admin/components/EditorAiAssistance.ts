@@ -215,7 +215,7 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 			'span',
 			[CSS.editorAiAssistanceButton],
 			{
-				[Attr.tooltip]: App.text('submit'),
+				[Attr.tooltip]: `${App.text('submit')}<br>⇧ + Enter`,
 				[Attr.tooltipOptions]: 'placement:top',
 			},
 			buttons,
@@ -237,6 +237,25 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 			buttons,
 			'<i class="bi bi-x-lg"></i>'
 		);
+
+		const generate = async () => {
+			const success = await AiRuntime.get().generate(
+				prompt.value,
+				select.select.value
+			);
+
+			if (!success) {
+				renderErrorModal(
+					App.text('aiAssistanceRequestErrorTitle'),
+					App.text('aiAssistanceRequestErrorBody')
+				);
+
+				return;
+			}
+
+			prompt.value = '';
+			fire('input', prompt);
+		};
 
 		const abort = async () => {
 			const value = prompt.value;
@@ -272,24 +291,28 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 			);
 		});
 
+		this.listen(details, 'toggle', () => {
+			setTimeout(() => {
+				if (details.open) {
+					prompt.focus();
+				} else {
+					prompt.blur();
+				}
+			}, 0);
+		});
+
 		this.listen(settings, 'click', openSettings);
 
-		this.listen(submit, 'click', async () => {
-			const success = await AiRuntime.get().generate(
-				prompt.value,
-				select.select.value
-			);
+		this.listen(submit, 'click', generate);
 
-			if (!success) {
-				renderErrorModal(
-					App.text('aiAssistanceRequestErrorTitle'),
-					App.text('aiAssistanceRequestErrorBody')
-				);
+		this.listen(prompt, 'keydown', (event: KeyboardEvent) => {
+			if (event.key === 'Enter' && event.shiftKey) {
+				event.preventDefault();
 
-				return;
+				if (!!prompt.value) {
+					generate();
+				}
 			}
-
-			prompt.value = '';
 		});
 
 		this.listen(prompt, 'input', () => {
@@ -301,14 +324,6 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 
 		fire('input', prompt);
 
-		this.listen(stop, 'click', abort.bind(this));
-
-		this.listen(close, 'click', async () => {
-			if (!AiRuntime.get().pending) {
-				details.open = false;
-			}
-		});
-
 		this.listen(prompt, 'focus', () => {
 			AiRuntime.get().toggleSelectionHighlighting(true);
 		});
@@ -317,14 +332,12 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 			AiRuntime.get().toggleSelectionHighlighting(false);
 		});
 
-		this.listen(details, 'toggle', () => {
-			setTimeout(() => {
-				if (details.open) {
-					prompt.focus();
-				} else {
-					prompt.blur();
-				}
-			}, 0);
+		this.listen(stop, 'click', abort.bind(this));
+
+		this.listen(close, 'click', async () => {
+			if (!AiRuntime.get().pending) {
+				details.open = false;
+			}
 		});
 
 		Bindings.connectElements(this);
