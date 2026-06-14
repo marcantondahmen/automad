@@ -140,13 +140,14 @@ export const enum CSS {
 
 	dropdownArrow = 'am-e-dropdown-arrow',
 
-	editorCallout = 'am-c-ed-bl-callout',
-	editorCalloutTitle = 'am-c-ed-bl-callout__title',
-	editorCalloutText = 'am-c-ed-bl-callout__text',
 
 	editorBlockButtons = 'am-c-ed-bl-buttons',
 	editorBlockButtonsEdit = 'am-c-ed-bl-buttons__edit',
 	editorBlockButtonsButton = 'am-c-ed-bl-buttons__button',
+
+	editorBlockCallout = 'am-c-ed-bl-callout',
+	editorBlockCalloutTitle = 'am-c-ed-bl-callout__title',
+	editorBlockCalloutText = 'am-c-ed-bl-callout__text',
 
 	editorBlockComponent = 'am-c-ed-bl-component',
 	editorBlockComponentDetails = 'am-c-ed-bl-component__details',

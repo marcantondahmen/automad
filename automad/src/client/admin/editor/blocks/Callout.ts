@@ -105,7 +105,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 	render(): HTMLElement {
 		const container = create(
 			'div',
-			[CSS.editorCallout, CSS.flex, CSS.flexColumn],
+			[CSS.editorBlockCallout, CSS.flex, CSS.flexColumn],
 			{},
 			this.wrapper
 		);
@@ -113,7 +113,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 		this.inputs = {
 			title: create(
 				'div',
-				[CSS.editorCalloutTitle, 'ce-paragraph'],
+				[CSS.editorBlockCalloutTitle, 'ce-paragraph'],
 				{
 					contenteditable: this.readOnly ? 'false' : 'true',
 					placeholder: `⚠ ${App.text('calloutTitle')}`,
@@ -123,7 +123,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 			),
 			text: create(
 				'div',
-				[CSS.editorCalloutText, 'ce-paragraph'],
+				[CSS.editorBlockCalloutText, 'ce-paragraph'],
 				{
 					contenteditable: this.readOnly ? 'false' : 'true',
 					placeholder: App.text('calloutText'),
