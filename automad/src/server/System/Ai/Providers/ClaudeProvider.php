@@ -219,6 +219,6 @@ class ClaudeProvider extends AbstractProvider {
 	 * @return string
 	 */
 	protected function getWebsite(): string {
-		return 'https://www.anthropic.com/';
+		return 'https://www.anthropic.com';
 	}
 }
