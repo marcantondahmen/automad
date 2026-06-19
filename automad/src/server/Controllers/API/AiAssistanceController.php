@@ -92,7 +92,7 @@ class AiAssistanceController {
 		$ConfigFile->set('AM_AI_PROVIDER_ID', $providerId);
 		$ConfigFile->write();
 
-		$Response->setData(array('output' => $provider->requestTextApi($prompt, $target, $context, $Messenger)));
+		$Response->setData(array('output' => $provider->generate($prompt, $target, $context, $Messenger)));
 
 		return $Response->setError($Messenger->getError());
 	}
