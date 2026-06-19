@@ -45,7 +45,6 @@ import {
 	initTooltips,
 	requestAPI,
 	Attr,
-	initEnterKeyHandler,
 	initWindowErrorHandler,
 	fire,
 	EventName,
@@ -117,7 +116,6 @@ export class RootComponent extends BaseComponent {
 			App.root.update();
 		});
 
-		initEnterKeyHandler();
 		initInputChangeHandler();
 		this.validateSession();
 

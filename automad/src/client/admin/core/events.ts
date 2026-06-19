@@ -209,19 +209,6 @@ export const listenToClassChange = (
 };
 
 /**
- * Make any focused element clickable using the enter key.
- *
- * @return the listener
- */
-export const initEnterKeyHandler = (): Listener => {
-	return listen(document, 'keydown', (event: KeyboardEvent): void => {
-		if (event.keyCode == 13) {
-			(document.activeElement as HTMLButtonElement).click();
-		}
-	});
-};
-
-/**
  * Add validate class to changed input field.
  *
  * @returns the listener
