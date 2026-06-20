@@ -111,57 +111,6 @@ class ClaudeProvider extends AbstractProvider {
 	}
 
 	/**
-	 * Make a request to the provider's text endpoint.
-	 *
-	 * @param string $prompt
-	 * @param string $target
-	 * @param string $context
-	 * @param Messenger $Messenger
-	 * @return string
-	 */
-	public function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string {
-		$response = $this->requestProviderApi(
-			'/messages',
-			array(
-				'max_tokens' => 2048,
-				'model' => $this->ProviderConfig->model,
-				'system' => array(array('text' => $this->getInstructions(), 'type' => 'text')),
-				'thinking' => array('type' => 'disabled'),
-				'messages' => array(
-					array(
-						'content' => $this->composePrompt($prompt, $target, $context),
-						'role' => 'user'
-					)
-				)
-			),
-			$Messenger
-		);
-
-		if (!empty($response['error'])) {
-			$Messenger->setError($response['error']);
-			Debug::warn($response);
-
-			return '';
-		}
-
-		if (empty($response['content'])) {
-			return '';
-		}
-
-		$text = array();
-
-		foreach ($response['content'] ?? array() as $content) {
-			if (($content['type'] ?? null) === 'text') {
-				$text[] = $content['text'] ?? '';
-			}
-		}
-
-		Debug::log($response, 'Claude response');
-
-		return implode("\n", $text);
-	}
-
-	/**
 	 * Validate the saved api key.
 	 *
 	 * @param string $apiKey
@@ -219,6 +168,57 @@ class ClaudeProvider extends AbstractProvider {
 	 * @return string
 	 */
 	protected function getWebsite(): string {
-		return 'https://www.anthropic.com/';
+		return 'https://www.anthropic.com';
+	}
+
+	/**
+	 * Make a request to the provider's text endpoint.
+	 *
+	 * @param string $prompt
+	 * @param string $target
+	 * @param string $context
+	 * @param Messenger $Messenger
+	 * @return string
+	 */
+	protected function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string {
+		$response = $this->requestProviderApi(
+			'/messages',
+			array(
+				'max_tokens' => 32000,
+				'model' => $this->ProviderConfig->model,
+				'system' => array(array('text' => $this->getInstructions(), 'type' => 'text')),
+				'thinking' => array('type' => 'disabled'),
+				'messages' => array(
+					array(
+						'content' => $this->composePrompt($prompt, $target, $context),
+						'role' => 'user'
+					)
+				)
+			),
+			$Messenger
+		);
+
+		if (!empty($response['error'])) {
+			$Messenger->setError($response['error']);
+			Debug::warn($response);
+
+			return '';
+		}
+
+		if (empty($response['content'])) {
+			return '';
+		}
+
+		$text = array();
+
+		foreach ($response['content'] ?? array() as $content) {
+			if (($content['type'] ?? null) === 'text') {
+				$text[] = $content['text'] ?? '';
+			}
+		}
+
+		Debug::log($response, 'Claude response');
+
+		return implode("\n", $text);
 	}
 }

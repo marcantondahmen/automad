@@ -110,56 +110,6 @@ class OpenAiProvider extends AbstractProvider {
 	}
 
 	/**
-	 * Make a request to the provider's text endpoint.
-	 *
-	 * @param string $prompt
-	 * @param string $target
-	 * @param string $context
-	 * @param Messenger $Messenger
-	 * @return string
-	 */
-	public function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string {
-		$response = $this->requestProviderApi(
-			'/responses',
-			array(
-				'model' => $this->ProviderConfig->model,
-				'instructions' => $this->getInstructions(),
-				'input' => $this->composePrompt($prompt, $target, $context)
-			),
-			$Messenger
-		);
-
-		if (!empty($response['error'])) {
-			$Messenger->setError($response['error']);
-			Debug::warn($response);
-
-			return '';
-		}
-
-		if (empty($response['output'])) {
-			return '';
-		}
-
-		$text = array();
-
-		foreach ($response['output'] ?? array() as $output) {
-			if (($output['type'] ?? null) !== 'message') {
-				continue;
-			}
-
-			foreach ($output['content'] ?? array() as $content) {
-				if (($content['type'] ?? null) === 'output_text') {
-					$text[] = $content['text'] ?? '';
-				}
-			}
-		}
-
-		Debug::log($response, 'OpenAI response');
-
-		return implode("\n", $text);
-	}
-
-	/**
 	 * Validate the saved api key.
 	 *
 	 * @param string $apiKey
@@ -211,5 +161,55 @@ class OpenAiProvider extends AbstractProvider {
 	 */
 	protected function getWebsite(): string {
 		return 'https://openai.com';
+	}
+
+	/**
+	 * Make a request to the provider's text endpoint.
+	 *
+	 * @param string $prompt
+	 * @param string $target
+	 * @param string $context
+	 * @param Messenger $Messenger
+	 * @return string
+	 */
+	protected function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string {
+		$response = $this->requestProviderApi(
+			'/responses',
+			array(
+				'model' => $this->ProviderConfig->model,
+				'instructions' => $this->getInstructions(),
+				'input' => $this->composePrompt($prompt, $target, $context)
+			),
+			$Messenger
+		);
+
+		if (!empty($response['error'])) {
+			$Messenger->setError($response['error']);
+			Debug::warn($response);
+
+			return '';
+		}
+
+		if (empty($response['output'])) {
+			return '';
+		}
+
+		$text = array();
+
+		foreach ($response['output'] ?? array() as $output) {
+			if (($output['type'] ?? null) !== 'message') {
+				continue;
+			}
+
+			foreach ($output['content'] ?? array() as $content) {
+				if (($content['type'] ?? null) === 'output_text') {
+					$text[] = $content['text'] ?? '';
+				}
+			}
+		}
+
+		Debug::log($response, 'OpenAI response');
+
+		return implode("\n", $text);
 	}
 }

@@ -37,6 +37,7 @@ namespace Automad\System\Ai\Providers;
 
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
+use Automad\Core\Str;
 use Automad\System\Ai\ProviderConfig;
 use Automad\System\Fetch;
 
@@ -60,6 +61,24 @@ abstract class AbstractProvider {
 	 */
 	public function __construct() {
 		$this->ProviderConfig = ProviderConfig::load($this->getId()) ?? new ProviderConfig($this->getId());
+	}
+
+	/**
+	 * Generate text.
+	 *
+	 * @param string $prompt
+	 * @param string $target
+	 * @param string $context
+	 * @param Messenger $Messenger
+	 * @return string
+	 */
+	public function generate(string $prompt, string $target, string $context, Messenger $Messenger): string {
+		$output = $this->requestTextApi($prompt, $target, $context, $Messenger);
+
+		$output = Str::stripStart($output, '```html');
+		$output = Str::stripEnd($output, '```');
+
+		return trim($output);
 	}
 
 	/**
@@ -122,17 +141,6 @@ abstract class AbstractProvider {
 	public function remove(): void {
 		$this->ProviderConfig->delete();
 	}
-
-	/**
-	 * Make a request to the provider's text endpoint.
-	 *
-	 * @param string $prompt
-	 * @param string $target
-	 * @param string $context
-	 * @param Messenger $Messenger
-	 * @return string
-	 */
-	abstract public function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string;
 
 	/**
 	 * Set a provider api key.
@@ -303,6 +311,7 @@ abstract class AbstractProvider {
 			- explain changes
 			- add introductions
 			- add labels
+			- add markdown
 			- mention the task
 			- wrap the result in quotes
 
@@ -349,4 +358,15 @@ abstract class AbstractProvider {
 
 		return $response;
 	}
+
+	/**
+	 * Make a request to the provider's text endpoint.
+	 *
+	 * @param string $prompt
+	 * @param string $target
+	 * @param string $context
+	 * @param Messenger $Messenger
+	 * @return string
+	 */
+	abstract protected function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string;
 }

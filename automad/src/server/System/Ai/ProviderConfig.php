@@ -99,7 +99,7 @@ class ProviderConfig {
 		}
 
 		try {
-			return unserialize(strval(file_get_contents($path)));
+			return unserialize(trim(strval(file_get_contents($path))));
 		} catch (\Throwable $th) {
 			return null;
 		}

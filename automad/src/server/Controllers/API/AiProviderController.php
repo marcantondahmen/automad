@@ -36,6 +36,7 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Core\Cache;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\System\Ai\ProviderCollection;
@@ -106,6 +107,8 @@ class AiProviderController {
 
 		$provider->remove();
 
+		Cache::clear();
+
 		return $Response;
 	}
 
@@ -137,6 +140,8 @@ class AiProviderController {
 
 		$provider->setApiKey($apiKey);
 
+		Cache::clear();
+
 		return $Response;
 	}
 
@@ -163,6 +168,8 @@ class AiProviderController {
 		}
 
 		$provider->setModel($model);
+
+		Cache::clear();
 
 		return $Response;
 	}
