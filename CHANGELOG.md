@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-beta.43](https://github.com/marcantondahmen/automad/commit/5814fd5fd37c8260b4edbab1cda460f6ae3fa07b)
+## [v2.0.0-beta.44](https://github.com/marcantondahmen/automad/commit/5719c15ba70ffba792a21759de3e87be48151e96)
 
-Sun, 14 Jun 2026 20:35:51 +0200
+Sat, 20 Jun 2026 11:46:22 +0200
+
+### New Features
+
+- update standard lite theme ([9a863a771](https://github.com/marcantondahmen/automad/commit/9a863a77134c2959683d62804c238118a4ea3652))
+
+### Bugfixes
+
+- clear cache when changing ai provider settings in order to display changes correctly ([03f0fc3df](https://github.com/marcantondahmen/automad/commit/03f0fc3df1b69bd80e8606b117eec7063492dfa9))
+- fix height calculation of auto-sized textareas ([a4f8c7511](https://github.com/marcantondahmen/automad/commit/a4f8c7511f806632efbcbea4fe2c4701501fae16))
+- fix selecting a tag from dropdown when using the enter key ([319ba32d1](https://github.com/marcantondahmen/automad/commit/319ba32d1d6aeb3c88eff44cdabd5b70e3fddd72))
+- fix warning when unserializing ai provider configs ([b5fb2751b](https://github.com/marcantondahmen/automad/commit/b5fb2751b55b884bbfde9363ef5efd880b1466d5))
+- remove markdown code blocks from ai assistance output ([f7904fed1](https://github.com/marcantondahmen/automad/commit/f7904fed178e6062bbb8b53be7dac54c05aa4136))
+
+## [v2.0.0-beta.43](https://github.com/marcantondahmen/automad/commit/f652576a419b0b2993815e480228f74a1da6f510)
+
+Sun, 14 Jun 2026 20:39:14 +0200
 
 ### Bugfixes
 
