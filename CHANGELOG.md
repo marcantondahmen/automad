@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.44](https://github.com/marcantondahmen/automad/commit/5719c15ba70ffba792a21759de3e87be48151e96)
+## [v2.0.0-beta.45](https://github.com/marcantondahmen/automad/commit/b2c28bbe32258abf10b49cab6f8de58bf2417d0a)
 
-Sat, 20 Jun 2026 11:46:22 +0200
+Sun, 5 Jul 2026 17:11:37 +0200
+
+### New Features
+
+- update standard lite theme to version 0.2.0 ([b2c28bbe3](https://github.com/marcantondahmen/automad/commit/b2c28bbe32258abf10b49cab6f8de58bf2417d0a))
+
+## [v2.0.0-beta.44](https://github.com/marcantondahmen/automad/commit/f8b63dc9b17efb09f2f3f2c6e6db3e3f80ff6aaf)
+
+Sat, 20 Jun 2026 11:48:40 +0200
 
 ### New Features
 
