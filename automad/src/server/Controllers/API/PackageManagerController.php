@@ -300,6 +300,12 @@ class PackageManagerController {
 			Cache::clear();
 			PackageCollection::clearOutdatedCache();
 
+			foreach (PackageCollection::getOutdated() as $pkg) {
+				if ($pkg['name'] == $package) {
+					return $Response->setError(Text::get('packageUpdateVersionConstraint'));
+				}
+			}
+
 			return $Response->setSuccess(Text::get('packageUpdatedSuccess') . '<br>' . $package);
 		}
 
@@ -323,6 +329,20 @@ class PackageManagerController {
 
 		Cache::clear();
 		PackageCollection::clearOutdatedCache();
+
+		$outdated = array_map(fn ($pkg): string => $pkg['name'], PackageCollection::getOutdated());
+
+		if (!empty($outdated)) {
+			$list = array_reduce($outdated, function (string $acc, string $name) {
+				$acc .= "<li>$name</li>";
+
+				return $acc;
+			}, '');
+
+			$error = str_replace('{}', "<ul>$list</ul>", Text::get('packageUpdateAllVersionConstraint'));
+
+			return $Response->setError($error);
+		}
 
 		return $Response->setSuccess(Text::get('packageUpdatedAllSuccess'));
 	}
