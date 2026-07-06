@@ -382,6 +382,8 @@
 	"packageIsDependency": "This package is a dependency of another package and therefore cannot be removed.",
 	"packageIsDependencyError": "The package is required by another package.",
 	"packageRegistryFetchError": "The package registry is currently unavailable.",
+	"packageUpdateVersionConstraint": "A new major version of this package is available. Major releases may include breaking changes and are therefore not installed automatically. To upgrade, remove the package and install it again.",
+	"packageUpdateAllVersionConstraint": "Some packages were not updated automatically because new major versions are available: {} Major releases may include breaking changes. To upgrade these packages, remove each one and install it again.",
 	"packageRemove": "Remove",
 	"packageRemoving": "Removing package ...",
 	"packageUpdate": "Update",
