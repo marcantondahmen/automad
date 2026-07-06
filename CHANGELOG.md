@@ -1,8 +1,17 @@
 # Changelog
 
-## [v2.0.0-beta.45](https://github.com/marcantondahmen/automad/commit/b2c28bbe32258abf10b49cab6f8de58bf2417d0a)
+## [v2.0.0-beta.46](https://github.com/marcantondahmen/automad/commit/901c83116b9db168c658a93163aaca594fed7c15)
 
-Sun, 5 Jul 2026 17:11:37 +0200
+Mon, 6 Jul 2026 20:02:15 +0200
+
+### New Features
+
+- show notification if a package was not updated due to version constraints ([3fb922077](https://github.com/marcantondahmen/automad/commit/3fb922077d3d2284f6354cb1b4f38d3b7e3b3e9a))
+- update standard lite theme ([47e69ac26](https://github.com/marcantondahmen/automad/commit/47e69ac2639a2adb48548f78cdbe0acfa152551a))
+
+## [v2.0.0-beta.45](https://github.com/marcantondahmen/automad/commit/327cb9772549a6b088277ad41746c90c7b9b60fb)
+
+Sun, 5 Jul 2026 17:15:23 +0200
 
 ### New Features
 
