@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { create, CSS, FieldTag } from '@/admin/core';
+import { create, CSS, FieldTag, fire } from '@/admin/core';
 import { BaseFieldComponent } from './BaseField';
 
 /**
@@ -48,12 +48,19 @@ class DateFieldComponent extends BaseFieldComponent {
 		const { name, id, value, placeholder } = this._data;
 		const date = (value as string).match(/[\d-]+T\d\d:\d\d/)?.[0] ?? '';
 
-		create(
+		const input = create(
 			'input',
 			[CSS.input],
 			{ id, name, value: date, type: 'datetime-local', placeholder },
 			this
 		);
+
+		this.listen(input, 'keyup', () => {
+			if (!input.value) {
+				this.mutate(null);
+				fire('change', this);
+			}
+		});
 	}
 }
 
