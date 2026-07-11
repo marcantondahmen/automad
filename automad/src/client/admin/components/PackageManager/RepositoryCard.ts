@@ -115,26 +115,34 @@ export class RepositoryCardComponent extends BaseComponent {
 							${Attr.text}="${data.branch}"
 						></am-icon-text>
 					</a>
-					<div
-						class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
-					>
-						<a
-							href="${data.commit.url}"
-							class="${CSS.badge} ${CSS.badgeMuted} ${CSS.flexGap}"
-							target="_blank"
-							${Attr.tooltip}="${encodeURIComponent(
-								data.commit.message
-							)}"
-							${Attr.tooltipOptions}="placement:top"
-						>
-							<i class="bi bi-record-circle"></i>
-							<span class="${CSS.textMono}">
-								${data.commit.hash.slice(0, 8)}
-							</span>
-							&mdash;
-							<span>${dateFormat(data.commit.timestamp)}</span>
-						</a>
-					</div>
+					${!!data.commit
+						? html`
+								<div
+									class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
+								>
+									<a
+										href="${data.commit?.url}"
+										class="${CSS.badge} ${CSS.badgeMuted} ${CSS.flexGap}"
+										target="_blank"
+										${Attr.tooltip}="${encodeURIComponent(
+											data.commit?.message
+										)}"
+										${Attr.tooltipOptions}="placement:top"
+									>
+										<i class="bi bi-record-circle"></i>
+										<span class="${CSS.textMono}">
+											${data.commit?.hash.slice(0, 8)}
+										</span>
+										&mdash;
+										<span
+											>${dateFormat(
+												data.commit?.timestamp
+											)}</span
+										>
+									</a>
+								</div>
+							`
+						: ''}
 				</div>
 			`
 		);

@@ -119,7 +119,7 @@ class RepositoryCollection {
 				'repositoryUrl' => $package['repositoryUrl'] ?? '',
 				'branch' => $package['branch'] ?? '',
 				'installed' => $package['installed'] ?? '',
-				'commit' => $package['commit']
+				'commit' => $package['commit'] ?? null
 			);
 		}, $config['repositories']);
 

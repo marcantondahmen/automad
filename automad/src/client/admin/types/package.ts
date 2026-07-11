@@ -53,7 +53,7 @@ export interface Repository {
 		message: string;
 		timestamp: string;
 		url: string;
-	};
+	} | null;
 }
 
 export interface RepositoryCreationData {

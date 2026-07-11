@@ -42,7 +42,7 @@
 	align-items: center;
 	gap: 0.35em;
 	font-size: 0.75rem;
-	line-height: 1.15;
+	line-height: 1.2;
 	min-width: 2.65em;
 	max-width: 100%;
 	padding: 0.4em 0.85em 0.3em 0.85em;
@@ -56,6 +56,10 @@
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+	}
+
+	&:has(> .bi:first-child) {
+		padding-left: 0.55em;
 	}
 
 	[class*='--danger'] & {
