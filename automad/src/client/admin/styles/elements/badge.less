@@ -66,5 +66,13 @@
 	&--muted {
 		--text: var(--am-clr-text-muted);
 		--bg: var(--am-clr-background-faded);
+
+		a& {
+			transition: color 0.2s;
+		}
+
+		a&:hover {
+			--text: var(--am-clr-text-paragraph);
+		}
 	}
 }

@@ -38,6 +38,7 @@ namespace Automad\System\Composer\RepositoryAdapters;
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
+use Automad\System\Composer\Commit;
 use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -48,6 +49,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
+ *
+ * @psalm-type Commit = array{
+ *		hash: string,
+ *		message: string,
+ *		timestamp: string,
+ *		url: string
+ *	}
  */
 abstract class AbstractAdapter {
 	const KEYS = array('description', 'autoload', 'require', 'type');
@@ -97,6 +105,8 @@ abstract class AbstractAdapter {
 
 	/**
 	 * Return the generated config.
+	 *
+	 * @return array
 	 */
 	public function getConfig(): array {
 		$config = array(
@@ -109,6 +119,7 @@ abstract class AbstractAdapter {
 					'type' => 'zip'
 				),
 				'branch' => $this->branch,
+				'commit' => $this->getLatestCommit($this->repositoryUrl, $this->branch),
 				'repositoryUrl' => $this->repositoryUrl,
 				'platform' => $this->getPlatformType()
 			)
@@ -122,6 +133,15 @@ abstract class AbstractAdapter {
 
 		return $config;
 	}
+
+	/**
+	 * Get latest commit details.
+	 *
+	 * @param string $repositoryUrl
+	 * @param string $branch
+	 * @return Commit
+	 */
+	abstract public function getLatestCommit(string $repositoryUrl, string $branch): array;
 
 	/**
 	 * Generate the archive URL.

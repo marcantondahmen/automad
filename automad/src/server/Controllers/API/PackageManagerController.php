@@ -362,7 +362,7 @@ class PackageManagerController {
 
 		$Composer = new Composer();
 		$Messenger = new Messenger();
-		$ref = RepositoryCollection::getPackageVersion($name);
+		$ref = RepositoryCollection::getPackageBranch($name);
 
 		$exitCode = $Composer->run("remove $name", $Messenger);
 
@@ -376,8 +376,10 @@ class PackageManagerController {
 			return $Response->setError($Messenger->getError());
 		}
 
+		RepositoryCollection::updateCommitDetails($name, $Messenger);
+
 		Cache::clear();
 
-		return $Response->setSuccess(Text::get('repositoryUpdateSuccess'));
+		return $Response->setSuccess(Text::get('repositoryUpdateSuccess'))->setError($Messenger->getError());
 	}
 }

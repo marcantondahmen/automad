@@ -48,6 +48,12 @@ export interface Repository {
 	description: string;
 	repositoryUrl: string;
 	branch: string;
+	commit: {
+		hash: string;
+		message: string;
+		timestamp: string;
+		url: string;
+	};
 }
 
 export interface RepositoryCreationData {
