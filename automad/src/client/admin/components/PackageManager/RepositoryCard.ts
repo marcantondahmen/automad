@@ -127,7 +127,7 @@ export class RepositoryCardComponent extends BaseComponent {
 										${Attr.tooltip}="${encodeURIComponent(
 											data.commit?.message
 										)}"
-										${Attr.tooltipOptions}="placement:top"
+										${Attr.tooltipOptions}="placement:right"
 									>
 										<i class="bi bi-record-circle"></i>
 										<span class="${CSS.textMono}">
