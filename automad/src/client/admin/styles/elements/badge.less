@@ -42,7 +42,7 @@
 	align-items: center;
 	gap: 0.35em;
 	font-size: 0.75rem;
-	line-height: 1.15;
+	line-height: 1.2;
 	min-width: 2.65em;
 	max-width: 100%;
 	padding: 0.4em 0.85em 0.3em 0.85em;
@@ -58,6 +58,10 @@
 		text-overflow: ellipsis;
 	}
 
+	&:has(> .bi:first-child) {
+		padding-left: 0.55em;
+	}
+
 	[class*='--danger'] & {
 		--text: var(--am-clr-background-danger);
 		--bg: var(--am-clr-text-danger);
@@ -66,5 +70,13 @@
 	&--muted {
 		--text: var(--am-clr-text-muted);
 		--bg: var(--am-clr-background-faded);
+
+		a& {
+			transition: color 0.2s;
+		}
+
+		a&:hover {
+			--text: var(--am-clr-text-paragraph);
+		}
 	}
 }

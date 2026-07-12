@@ -35,7 +35,6 @@
 
 namespace Automad\System\Composer;
 
-use Automad\Core\Automad;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
 use Automad\System\Composer\RepositoryAdapters\AbstractAdapter;
@@ -119,7 +118,8 @@ class RepositoryCollection {
 				'description' => $repo['package']['description'] ?? '',
 				'repositoryUrl' => $package['repositoryUrl'] ?? '',
 				'branch' => $package['branch'] ?? '',
-				'installed' => $package['installed'] ?? ''
+				'installed' => $package['installed'] ?? '',
+				'commit' => $package['commit'] ?? null
 			);
 		}, $config['repositories']);
 
@@ -132,7 +132,7 @@ class RepositoryCollection {
 	 * @param string $name
 	 * @return string
 	 */
-	public static function getPackageVersion(string $name): string {
+	public static function getPackageBranch(string $name): string {
 		$config = Composer::readConfig();
 
 		if (!isset($config['repositories'])) {
@@ -173,6 +173,46 @@ class RepositoryCollection {
 
 		if (empty($config['repositories'])) {
 			unset($config['repositories']);
+		}
+
+		return Composer::writeConfig($config);
+	}
+
+	/**
+	 * Update the commit details in a repository package config.
+	 *
+	 * @param string $name
+	 * @param Messenger $Messenger
+	 * @return bool
+	 */
+	public static function updateCommitDetails(string $name, Messenger $Messenger): bool {
+		$config = Composer::readConfig();
+
+		if (!isset($config['repositories'])) {
+			$Messenger->setError(Text::get('repositoryUpdateCommitError'));
+
+			return false;
+		}
+
+		foreach ($config['repositories'] as $index => $repo) {
+			if (isset($repo['package']['platform']) && isset($repo['package']['repositoryUrl']) && isset($repo['package']['branch'])) {
+				if ($name == $repo['package']['name']) {
+					$RepositoryAdapter = self::getRepositoryAdapter(
+						$repo['package']['platform'],
+						$name,
+						$repo['package']['repositoryUrl'],
+						$repo['package']['branch'],
+						$Messenger
+					);
+
+					$config['repositories'][$index]['package']['commit'] = $RepositoryAdapter->getLatestCommit(
+						$repo['package']['repositoryUrl'],
+						$repo['package']['branch']
+					);
+				}
+			} else {
+				$Messenger->setError(Text::get('repositoryUpdateCommitError'));
+			}
 		}
 
 		return Composer::writeConfig($config);

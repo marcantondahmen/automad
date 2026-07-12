@@ -38,6 +38,7 @@ import {
 	createFormModal,
 	createProgressModal,
 	CSS,
+	dateFormat,
 	EventName,
 	fire,
 	html,
@@ -88,27 +89,61 @@ export class RepositoryCardComponent extends BaseComponent {
 				<span class="${CSS.cardIcon}">
 					<i class="bi bi-${data.platform}"></i>
 				</span>
-				<div class=${CSS.cardTitle}>${data.name}</div>
 				<a
 					href="${data.repositoryUrl}"
-					class="${CSS.cardBody}"
+					class="${CSS.cardTitle}"
 					target="_blank"
 				>
-					<am-icon-text
-						${Attr.icon}="chat-left"
-						${Attr.text}="${data.description}"
-						title="${data.description}"
-					></am-icon-text>
-					<am-icon-text
-						${Attr.icon}="box-seam"
-						${Attr.text}="${data.repositoryUrl}"
-						title="${data.repositoryUrl}"
-					></am-icon-text>
-					<am-icon-text
-						${Attr.icon}="tag"
-						${Attr.text}="${data.branch}"
-					></am-icon-text>
+					${data.name}
 				</a>
+				<div class="${CSS.cardBody} ${CSS.flexGapLarge}">
+					<a
+						href="${data.repositoryUrl}"
+						class="${CSS.flex} ${CSS.flexColumn} ${CSS.textParagraph}"
+						target="_blank"
+					>
+						<am-icon-text
+							${Attr.icon}="chat-left"
+							${Attr.text}="${data.description}"
+						></am-icon-text>
+						<am-icon-text
+							${Attr.icon}="box-seam"
+							${Attr.text}="${data.repositoryUrl}"
+						></am-icon-text>
+						<am-icon-text
+							${Attr.icon}="tag"
+							${Attr.text}="${data.branch}"
+						></am-icon-text>
+					</a>
+					${!!data.commit
+						? html`
+								<div
+									class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
+								>
+									<a
+										href="${data.commit?.url}"
+										class="${CSS.badge} ${CSS.badgeMuted} ${CSS.flexGap}"
+										target="_blank"
+										${Attr.tooltip}="${encodeURIComponent(
+											data.commit?.message
+										)}"
+										${Attr.tooltipOptions}="placement:right"
+									>
+										<i class="bi bi-record-circle"></i>
+										<span class="${CSS.textMono}">
+											${data.commit?.hash.slice(0, 8)}
+										</span>
+										&mdash;
+										<span
+											>${dateFormat(
+												data.commit?.timestamp
+											)}</span
+										>
+									</a>
+								</div>
+							`
+						: ''}
+				</div>
 			`
 		);
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "779c61d1d64d953e0dfdcaba28bf107c",
+    "content-hash": "c15f19c0525444d0ebd43ff9f95193ac",
     "packages": [
         {
             "name": "automad/package-installer",
@@ -55,16 +55,16 @@
         },
         {
             "name": "automad/standard-lite",
-            "version": "0.2.2",
+            "version": "0.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-standard-lite.git",
-                "reference": "8db2d4689ae191b45fb8faa5286a0138cf0748a1"
+                "reference": "927e284538985a30dcc6d3066dea0cea0e83c302"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-standard-lite/zipball/8db2d4689ae191b45fb8faa5286a0138cf0748a1",
-                "reference": "8db2d4689ae191b45fb8faa5286a0138cf0748a1",
+                "url": "https://api.github.com/repos/automadcms/automad-standard-lite/zipball/927e284538985a30dcc6d3066dea0cea0e83c302",
+                "reference": "927e284538985a30dcc6d3066dea0cea0e83c302",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
             ],
             "support": {
                 "issues": "https://github.com/automadcms/automad-standard-lite/issues",
-                "source": "https://github.com/automadcms/automad-standard-lite/tree/0.2.2"
+                "source": "https://github.com/automadcms/automad-standard-lite/tree/0.2.5"
             },
             "funding": [
                 {
@@ -107,7 +107,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-07-06T17:58:53+00:00"
+            "time": "2026-07-12T09:43:09+00:00"
         }
     ],
     "packages-dev": [],

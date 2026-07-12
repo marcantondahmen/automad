@@ -97,7 +97,7 @@ export const initTooltips = () => {
 			if (content) {
 				tooltip.show(
 					target,
-					create('span', [], {}, null, content),
+					create('span', [], {}, null, decodeURIComponent(content)),
 					options
 				);
 			}

@@ -36,6 +36,7 @@
 namespace Automad\System\Composer\RepositoryAdapters;
 
 use Automad\System\Composer\Auth;
+use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -45,8 +46,31 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
+ *
+ * @psalm-import-type Commit from AbstractAdapter
  */
 class GitHubAdapter extends AbstractAdapter {
+	/**
+	 * Get latest commit details.
+	 *
+	 * @param string $repositoryUrl
+	 * @param string $branch
+	 * @return Commit
+	 */
+	public function getLatestCommit(string $repositoryUrl, string $branch): array {
+		$repo = basename(dirname($repositoryUrl)) . '/' . basename($repositoryUrl);
+
+		$json = Fetch::request("https://api.github.com/repos/{$repo}/branches/{$branch}", $this->getHeaders());
+		$data = json_decode($json);
+
+		return array(
+			'hash' => $data->commit->sha ?? '',
+			'message' => $data->commit->commit->message ?? '',
+			'timestamp' => $data->commit->commit->committer->date ?? '',
+			'url' => $data->commit->html_url ?? ''
+		);
+	}
+
 	/**
 	 * Generate the archive URL.
 	 *
