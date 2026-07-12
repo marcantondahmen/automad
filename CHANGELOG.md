@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.46](https://github.com/marcantondahmen/automad/commit/901c83116b9db168c658a93163aaca594fed7c15)
+## [v2.0.0-beta.47](https://github.com/marcantondahmen/automad/commit/28a5e345188828c815c1ae0472789587e18449fb)
 
-Mon, 6 Jul 2026 20:02:15 +0200
+Sun, 12 Jul 2026 11:57:58 +0200
+
+### New Features
+
+- show latest commit details of private repository packages ([e6b241fe0](https://github.com/marcantondahmen/automad/commit/e6b241fe094238471765e8fd7194a103597e24e3))
+- show relative dates ([bc3098994](https://github.com/marcantondahmen/automad/commit/bc30989944d92c752b8ac7b213ccdcfa0478bf7a))
+- update standard lite theme ([925f40e94](https://github.com/marcantondahmen/automad/commit/925f40e948a5efe6df38e1fc5b0b5bbd62afe27e))
+
+### Bugfixes
+
+- fix change event not being fired when clearing date field ([58213b762](https://github.com/marcantondahmen/automad/commit/58213b7625f99762767967077ee78b6ce7bab9b7))
+
+## [v2.0.0-beta.46](https://github.com/marcantondahmen/automad/commit/d5ed72c6e462b39125b828f865b8cc235a415e7b)
+
+Mon, 6 Jul 2026 20:05:06 +0200
 
 ### New Features
 
