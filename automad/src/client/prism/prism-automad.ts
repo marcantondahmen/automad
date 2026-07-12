@@ -60,7 +60,7 @@ export const PrismAutomad: Prism.Grammar = Prism.languages.extend('html', {
 		pattern: new RegExp('<@.+?@>', 's'),
 		inside: {
 			keyword: {
-				pattern: /(for|foreach|if|else|end|snippet|with)/,
+				pattern: /(foreach|for|if|else|end|snippet|with)/,
 			},
 			boolean: {
 				pattern: /(true|false)/,
