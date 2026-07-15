@@ -91,6 +91,11 @@ export class InPageFormComponent extends FormComponent {
 	}
 
 	/**
+	 * Track if the form has changed.
+	 */
+	private hasChanged: boolean = false;
+
+	/**
 	 * The field name.
 	 */
 	private field: string;
@@ -166,6 +171,35 @@ export class InPageFormComponent extends FormComponent {
 
 			window.location.href = this.bindings.inPageReturnUrlBinding.value;
 		});
+
+		this.listen(window, 'beforeunload', (event: Event) => {
+			if (!this.hasChanged) {
+				return;
+			}
+
+			event.preventDefault();
+		});
+	}
+
+	/**
+	 * The callback that is called when a form input has changed.
+	 */
+	onChange(): void {
+		super.onChange();
+
+		this.hasChanged = true;
+	}
+
+	/**
+	 * Submit the form.
+	 *
+	 * @param skipConfirmOnInit
+	 * @async
+	 */
+	async submit(skipConfirmOnInit?: boolean): Promise<void> {
+		this.hasChanged = false;
+
+		await super.submit(skipConfirmOnInit);
 	}
 
 	/**
