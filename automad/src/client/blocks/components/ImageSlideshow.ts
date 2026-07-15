@@ -123,6 +123,7 @@ export default class Slider {
 			speed: 300,
 			loop: settings.loop ?? true,
 			autoplay,
+			autoHeight: false,
 			effect: settings.effect ?? 'slide',
 			slidesPerView: settings.slidesPerView || 1,
 			spaceBetween: settings.gapPx ?? 0,

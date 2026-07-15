@@ -32,30 +32,37 @@
  * See LICENSE.md for license information.
  */
 
-am-image-slideshow {
-	--swiper-navigation-size: 42px;
-	--swiper-navigation-top-offset: 50%;
-	--swiper-navigation-sides-offset: 0;
-	--swiper-navigation-color: var(--am-image-slideshow-controls-color);
-
-	--swiper-pagination-color: var(--am-image-slideshow-controls-color);
-	--swiper-pagination-left: auto;
-	--swiper-pagination-right: 8px;
-	--swiper-pagination-bottom: 8px;
-	--swiper-pagination-top: auto;
-	--swiper-pagination-fraction-color: inherit;
-	--swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
-	--swiper-pagination-progressbar-size: 4px;
-	--swiper-pagination-bullet-size: 10px;
-	--swiper-pagination-bullet-width: 10px;
-	--swiper-pagination-bullet-height: 10px;
-	--swiper-pagination-bullet-inactive-color: var(
-		--am-image-slideshow-controls-color
+.swiper-ui-background() {
+	background-color: hsl(
+		from var(--am-image-slideshow-ui-background) h s l /
+			var(--am-image-slideshow-ui-background-opacity)
 	);
-	--swiper-pagination-bullet-inactive-opacity: 0.2;
-	--swiper-pagination-bullet-opacity: 1;
-	--swiper-pagination-bullet-horizontal-gap: 5px;
-	--swiper-pagination-bullet-vertical-gap: 5px;
+	backdrop-filter: blur(var(--am-image-slideshow-ui-backdrop-blur));
+}
+
+.swiper-icon-mask(@path) {
+	mask: data-uri('image/svg+xml;charset=UTF-8', @path);
+	mask-repeat: no-repeat no-repeat;
+	mask-position: center center;
+	mask-size: 75%;
+}
+
+am-image-slideshow {
+	--swiper-navigation-size: 38px;
+	--swiper-navigation-border-radius: 6px;
+	--swiper-navigation-top-offset: 50%;
+	--swiper-navigation-sides-offset: 12px;
+	--swiper-navigation-color: var(--am-image-slideshow-ui-color);
+
+	--swiper-pagination-bottom: 12px;
+	--swiper-pagination-gap: 4px;
+	--swiper-pagination-color: var(--am-image-slideshow-ui-color);
+	--swiper-pagination-bullet-size: 8px;
+	--swiper-pagination-bullet-inactive-color: var(
+		--am-image-slideshow-ui-color
+	);
+	--swiper-pagination-bullet-opacity: 0.8;
+	--swiper-pagination-bullet-inactive-opacity: 0.4;
 
 	& .swiper-slide {
 		display: flex;
@@ -66,15 +73,30 @@ am-image-slideshow {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		width: 42px;
-		height: 42px;
+		width: var(--swiper-navigation-size);
+		height: var(--swiper-navigation-size);
+		margin-inline: 0;
+		border-radius: var(--swiper-navigation-border-radius);
 		opacity: 0;
 		transition: opacity 0.2s;
-		background-color: var(--am-image-slideshow-controls-background);
+		.swiper-ui-background;
 
 		&:after {
-			font-size: 24px !important;
+			content: '';
+			display: flex;
+			position: absolute;
+			inset: 0;
+			opacity: var(--swiper-pagination-bullet-opacity);
+			background-color: var(--am-image-slideshow-ui-color);
 		}
+	}
+
+	& .swiper-button-prev:after {
+		.swiper-icon-mask('../svg/arrowPrev.svg');
+	}
+
+	& .swiper-button-next:after {
+		.swiper-icon-mask('../svg/arrowNext.svg');
 	}
 
 	&:hover .swiper-button-prev,
@@ -82,8 +104,31 @@ am-image-slideshow {
 		opacity: 1;
 	}
 
-	& .swiper-pagination-bullet {
-		outline: var(--am-image-slideshow-controls-background) solid 2px;
+	& .swiper-horizontal > .swiper-pagination-bullets {
+		display: flex;
+		align-items: center;
+		gap: var(--swiper-pagination-gap);
+		left: 50%;
+		transform: translateX(-50%);
+		width: auto;
+		max-width: 90%;
+		line-height: 0;
+		padding: var(--swiper-pagination-gap);
+		border-radius: calc(2 * var(--swiper-pagination-bullet-size));
+		.swiper-ui-background;
+
+		& .swiper-pagination-bullet {
+			margin: 0;
+			padding: 0;
+			border-radius: var(--swiper-pagination-bullet-size);
+			transition:
+				width 0.4s ease-out,
+				opacity 0.4s ease-out;
+
+			&-active {
+				width: calc(3 * var(--swiper-pagination-bullet-size));
+			}
+		}
 	}
 
 	& .swiper-caption {
@@ -95,13 +140,13 @@ am-image-slideshow {
 		left: 0;
 		right: 0;
 		padding: var(--am-image-slideshow-caption-padding);
-		color: var(--am-image-slideshow-caption-color);
-		background-color: var(--am-image-slideshow-caption-background);
+		color: var(--am-image-slideshow-ui-color);
 		font-size: var(--am-image-slideshow-caption-font-size);
 		font-weight: var(--am-image-slideshow-caption-font-weight);
 		line-height: var(--am-image-slideshow-caption-line-height);
 		opacity: 0;
 		transition: opacity 0.2s;
+		.swiper-ui-background;
 
 		& > :first-child {
 			margin-top: 0;

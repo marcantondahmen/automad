@@ -120,15 +120,18 @@
 }
 
 svg.am-pswp__icon {
-	color: var(--am-gallery-controls-color);
+	color: var(--am-gallery-ui-color);
 }
 
 .am-pswp.pswp {
-	--pswp-bg: var(--am-gallery-background);
+	--pswp-bg: hsl(
+		from var(--am-gallery-ui-background) h s l /
+			var(--am-gallery-ui-background-opacity)
+	);
 
 	& .pswp__counter,
 	& .pswp__dynamic-caption {
-		color: var(--am-gallery-controls-color);
+		color: var(--am-gallery-ui-color);
 		text-shadow: none;
 	}
 }
