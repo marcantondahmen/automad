@@ -96,7 +96,7 @@ export class RepositoryCardComponent extends BaseComponent {
 				>
 					${data.name}
 				</a>
-				<div class="${CSS.cardBody} ${CSS.flexGapLarge}">
+				<div class="${CSS.cardBody} ${CSS.flexGap}">
 					<a
 						href="${data.repositoryUrl}"
 						class="${CSS.flex} ${CSS.flexColumn} ${CSS.textParagraph}"
@@ -117,9 +117,7 @@ export class RepositoryCardComponent extends BaseComponent {
 					</a>
 					${!!data.commit
 						? html`
-								<div
-									class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
-								>
+								<div>
 									<a
 										href="${data.commit?.url}"
 										class="${CSS.badge} ${CSS.badgeMuted} ${CSS.flexGap}"
