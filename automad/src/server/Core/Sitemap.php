@@ -37,6 +37,7 @@ namespace Automad\Core;
 
 use Automad\API\RequestHandler;
 use Automad\Auth\Session;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -75,7 +76,7 @@ class Sitemap {
 
 		foreach ($collection as $Page) {
 			// Only include "real" URLs and not aliases.
-			if (strpos($Page->url, '/') === 0) {
+			if ($Page->url === $Page->get(Fields::ORIG_URL)) {
 				$xml .= "<url><loc>{$base}{$Page->url}</loc></url>";
 			}
 		}
