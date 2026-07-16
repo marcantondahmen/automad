@@ -42,10 +42,10 @@
 	align-items: center;
 	gap: 0.35em;
 	font-size: 0.75rem;
-	line-height: 1.2;
-	min-width: 2.65em;
+	line-height: 1;
+	min-width: 2.5em;
 	max-width: 100%;
-	padding: 0.4em 0.85em 0.3em 0.85em;
+	padding: 0.45em 0.8em;
 	border-radius: 100px;
 	color: hsl(var(--text));
 	background-color: hsl(var(--bg));
@@ -70,6 +70,7 @@
 	&--muted {
 		--text: var(--am-clr-text-muted);
 		--bg: var(--am-clr-background-faded);
+		border: @am-border;
 
 		a& {
 			transition: color 0.2s;

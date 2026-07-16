@@ -228,7 +228,12 @@ class MetaProcessor {
 	 * @return string Return the image URL
 	 */
 	private function createOpenGraphImage(): string {
-		$title = $this->Page->get(Fields::TITLE);
+		$title = $this->Page->get(Fields::OPEN_GRAPH_TITLE);
+
+		if (empty($title)) {
+			$title = $this->Page->get(Fields::TITLE);
+		}
+
 		$sitename = $this->Shared->get(Fields::SITENAME);
 		$baseDir = AM_BASE_DIR;
 		$baseUrl = AM_SERVER . AM_BASE_URL;

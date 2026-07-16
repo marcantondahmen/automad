@@ -369,6 +369,7 @@
 	"openComponentEditor": "Open component editor",
 	"openGraphImage": "Open-Graph Image (leave blank in order to use the automatically generated image)",
 	"openGraphImageShared": "Open-Graph Image (overrides automatically generated open-graph images sitewide)",
+	"openGraphTitle": "Custom title that is displayed on the generated open-graph image",
 	"openInNewTab": "Open in a new tab",
 	"optimizeContentForCards": "Optimize content for cards",
 	"orderedList": "Ordered list",

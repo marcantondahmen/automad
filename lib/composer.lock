@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/automadcms/automad-language-packs.git",
-                "reference": "e07a8917d3c956b6128986172b46cfb5a121e819"
+                "reference": "9d6fd8830c8933ca5272d804cd5354ac7e088729"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/e07a8917d3c956b6128986172b46cfb5a121e819",
-                "reference": "e07a8917d3c956b6128986172b46cfb5a121e819",
+                "url": "https://api.github.com/repos/automadcms/automad-language-packs/zipball/9d6fd8830c8933ca5272d804cd5354ac7e088729",
+                "reference": "9d6fd8830c8933ca5272d804cd5354ac7e088729",
                 "shasum": ""
             },
             "default-branch": true,
@@ -55,7 +55,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-07-11T16:32:09+00:00"
+            "time": "2026-07-16T17:15:27+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
