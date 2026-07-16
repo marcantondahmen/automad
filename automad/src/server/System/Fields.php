@@ -94,6 +94,7 @@ class Fields {
 	const META_TITLE = 'metaTitle';
 	const NOW = ':now';
 	const OPEN_GRAPH_IMAGE = 'openGraphImage';
+	const OPEN_GRAPH_TITLE = 'openGraphTitle';
 	const ORIG_URL = ':origUrl';
 	const PAGE_INDEX = ':index';
 	const PAGELIST_COUNT = ':pagelistCount';
@@ -155,6 +156,7 @@ class Fields {
 		'META_TITLE' => Fields::META_TITLE,
 		'META_DESCRIPTION' => Fields::META_DESCRIPTION,
 		'OPEN_GRAPH_IMAGE' => Fields::OPEN_GRAPH_IMAGE,
+		'OPEN_GRAPH_TITLE' => Fields::OPEN_GRAPH_TITLE,
 		'PRIVATE' => Fields::PRIVATE,
 		'PUBLICATION_STATE' => Fields::PUBLICATION_STATE,
 		'SITENAME' => Fields::SITENAME,

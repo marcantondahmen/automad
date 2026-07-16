@@ -336,6 +336,12 @@ export class PageDataFormComponent extends FormComponent {
 		);
 
 		createMainField(
+			FieldTag.input,
+			App.reservedFields.OPEN_GRAPH_TITLE,
+			App.text('openGraphTitle')
+		);
+
+		createMainField(
 			FieldTag.image,
 			App.reservedFields.OPEN_GRAPH_IMAGE,
 			App.text('openGraphImage')
