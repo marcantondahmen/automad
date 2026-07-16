@@ -1,8 +1,24 @@
 # Changelog
 
-## [v2.0.0-beta.47](https://github.com/marcantondahmen/automad/commit/28a5e345188828c815c1ae0472789587e18449fb)
+## [v2.0.0-beta.48](https://github.com/marcantondahmen/automad/commit/f542c98275e53da3b46e9f9c482228cd042ff10f)
 
-Sun, 12 Jul 2026 11:57:58 +0200
+Thu, 16 Jul 2026 19:37:31 +0200
+
+### New Features
+
+- add option to set a custom title that is displayed on open-graph images ([73e8fb6e4](https://github.com/marcantondahmen/automad/commit/73e8fb6e4578ad7b8b16990019dd6226f8c17ed8))
+- update image slideshow and gallery block ui ([37ee8da29](https://github.com/marcantondahmen/automad/commit/37ee8da29a2c0290f7c739f6b8d16761900fb24b))
+- update standard lite theme ([f542c9827](https://github.com/marcantondahmen/automad/commit/f542c98275e53da3b46e9f9c482228cd042ff10f))
+- wait for confirmation before discarding unsaved changes in the in-page editing dialog ([6c574cfb4](https://github.com/marcantondahmen/automad/commit/6c574cfb45a9fb067e883a36086c6a593b074575))
+
+### Bugfixes
+
+- exclude aliases from sitemap.xml ([0807eaf07](https://github.com/marcantondahmen/automad/commit/0807eaf07f136214a27c1532107e65fefc73f8d4))
+- fix syntax highlighting of foreach keyword in automad language ([b18246a5e](https://github.com/marcantondahmen/automad/commit/b18246a5ec38eda64f44ab6d61b70f4a22dd13ab))
+
+## [v2.0.0-beta.47](https://github.com/marcantondahmen/automad/commit/9b22f9a7cc1df09a3f882334244145f9206fc6ad)
+
+Sun, 12 Jul 2026 12:00:13 +0200
 
 ### New Features
 
