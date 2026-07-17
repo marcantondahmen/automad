@@ -37,7 +37,7 @@ import Prism from 'prismjs';
 const stringDefinition = { pattern: /('([^']|\\')*'|"([^"]|\\")*")/ };
 
 const variableDefinition = {
-	pattern: new RegExp('@{.+}', 's'),
+	pattern: new RegExp('@{.+?}', 's'),
 	greedy: true,
 	inside: {
 		punctuation: /[\|\(\)\{\}]+/,
