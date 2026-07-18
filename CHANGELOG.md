@@ -1,8 +1,21 @@
 # Changelog
 
-## [v2.0.0-beta.48](https://github.com/marcantondahmen/automad/commit/f542c98275e53da3b46e9f9c482228cd042ff10f)
+## [v2.0.0-beta.49](https://github.com/marcantondahmen/automad/commit/ef38ad1d6590d0a9208812981bb907f9074f1257)
 
-Thu, 16 Jul 2026 19:37:31 +0200
+Sat, 18 Jul 2026 17:42:18 +0200
+
+### New Features
+
+- update standard lite theme ([ef38ad1d6](https://github.com/marcantondahmen/automad/commit/ef38ad1d6590d0a9208812981bb907f9074f1257))
+
+### Bugfixes
+
+- fix automad prism grammar ([8db618a29](https://github.com/marcantondahmen/automad/commit/8db618a298340d4ebf65761d15023bd1c35db94a))
+- fix focus of ai assistance prompt when opening it ([bfd4391c7](https://github.com/marcantondahmen/automad/commit/bfd4391c7121a781a7d176517b584429bfbf3856))
+
+## [v2.0.0-beta.48](https://github.com/marcantondahmen/automad/commit/0a2e57f010fad719dda4781a92323e0624d80f5f)
+
+Thu, 16 Jul 2026 19:40:21 +0200
 
 ### New Features
 
