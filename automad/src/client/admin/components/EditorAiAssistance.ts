@@ -294,7 +294,9 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 		this.listen(details, 'toggle', () => {
 			setTimeout(() => {
 				if (details.open) {
-					prompt.focus();
+					setTimeout(() => {
+						prompt.focus();
+					}, 250);
 				} else {
 					prompt.blur();
 				}
