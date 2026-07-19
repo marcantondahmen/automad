@@ -45,6 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class FileResults {
+	const KEY_SHARED = '@shared';
+
 	/**
 	 * The the count of results in a file.
 	 */
@@ -78,8 +80,8 @@ class FileResults {
 	 */
 	public function __construct(array $fieldResultsArray, ?string $path, ?string $url) {
 		$this->fieldResultsArray = $fieldResultsArray;
-		$this->path = $path;
-		$this->url = $url;
+		$this->path = $path ?? self::KEY_SHARED;
+		$this->url = $url ?? '';
 		$this->count = 0;
 
 		foreach ($fieldResultsArray as $fieldResults) {

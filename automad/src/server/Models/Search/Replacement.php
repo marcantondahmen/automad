@@ -174,7 +174,8 @@ class Replacement {
 		}
 
 		foreach ($fileFieldsArray as $FileFields) {
-			$DataStore = new DataStore($FileFields->path);
+			$path = $FileFields->path === FileResults::KEY_SHARED ? null : $FileFields->path;
+			$DataStore = new DataStore($path);
 
 			$draft = $DataStore->getState(PublicationState::DRAFT) ?? array();
 			$draft = $this->replaceInData($draft, $FileFields->fields);

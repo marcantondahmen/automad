@@ -114,8 +114,8 @@ class SearchTest extends TestCase {
 								]
 							}
 						],
-						"path": null,
-						"url": null
+						"path": "@shared",
+						"url": ""
 					}
 				]
 				JSON
@@ -195,8 +195,8 @@ class SearchTest extends TestCase {
 								"matches": ["test"]
 							}
 						],
-						"path": null,
-						"url": null
+						"path": "@shared",
+						"url": ""
 					},
 					{
 						"count": 4,
