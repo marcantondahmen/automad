@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.50](https://github.com/marcantondahmen/automad/commit/395d62584987b5fb149a9b322b8206b708f57818)
+## [v2.0.0-beta.51](https://github.com/marcantondahmen/automad/commit/7dcd32525c6eb38b2f0f9c83a5536077d86ce279)
 
-Sun, 19 Jul 2026 12:24:34 +0200
+Sun, 19 Jul 2026 15:53:13 +0200
+
+### Bugfixes
+
+- fix search and replace in shared data ([ce9789472](https://github.com/marcantondahmen/automad/commit/ce97894725bf17a46586f45e2f1f9b1e43198057))
+
+## [v2.0.0-beta.50](https://github.com/marcantondahmen/automad/commit/3e88122efeb22c8147912f8457ba61ee1e45afb6)
+
+Sun, 19 Jul 2026 14:57:18 +0200
 
 ### Bugfixes
 
