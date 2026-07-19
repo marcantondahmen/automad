@@ -50,6 +50,16 @@ class ReplacementTest extends TestCase {
 				Data::load('/text'),
 				Data::load('/text-replaced')
 			),
+			// HTML, no regex, not case sensitive.
+			array(
+				'&nbsp;',
+				' ',
+				false,
+				false,
+				array('html'),
+				Data::load('/html'),
+				Data::load('/html-replaced')
+			),
 			// Text, no regex, case sensitive.
 			array(
 				'/url/To/page',
