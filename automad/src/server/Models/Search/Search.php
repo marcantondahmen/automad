@@ -70,6 +70,11 @@ class Search {
 	private string $searchValue;
 
 	/**
+	 * The search value with encoded HTML special characters.
+	 */
+	private string $searchValueSafeHtml;
+
+	/**
 	 * Strip tags before performing search.
 	 */
 	private ?bool $stripTags;
@@ -93,6 +98,7 @@ class Search {
 		?bool $stripTags = false
 	) {
 		$this->searchValue = preg_quote($searchValue, '/');
+		$this->searchValueSafeHtml = preg_quote(htmlspecialchars($searchValue), '/');
 		$this->regexFlags = 'ims';
 		$this->pagesToSearch = $pagesToSearch;
 		$this->stripTags = $stripTags;
@@ -100,6 +106,7 @@ class Search {
 
 		if ($isRegex) {
 			$this->searchValue = str_replace('/', '\/', $searchValue);
+			$this->searchValueSafeHtml = str_replace('/', '\/', htmlspecialchars($searchValue));
 		}
 
 		if ($isCaseSensitive) {
@@ -150,6 +157,7 @@ class Search {
 
 		$contextRegex = '/(?:^|\s).{0,50}' . $this->searchValue . '.{0,50}(?:\s|$)/' . $this->regexFlags;
 		$searchRegex = '/' . $this->searchValue . '/' . $this->regexFlags;
+		$searchRegexSafeHtml = '/' . $this->searchValueSafeHtml . '/' . $this->regexFlags;
 
 		preg_match_all(
 			$contextRegex,
@@ -171,7 +179,7 @@ class Search {
 					$parts[] = preg_replace(
 						'/\s+/',
 						' ',
-						trim(preg_replace($searchRegex, '<mark>$0</mark>', htmlspecialchars($ctx[0])) ?? '')
+						trim(preg_replace($searchRegexSafeHtml, '<mark>$0</mark>', htmlspecialchars($ctx[0])) ?? '')
 					);
 				}
 			}

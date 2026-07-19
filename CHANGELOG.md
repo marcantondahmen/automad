@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.49](https://github.com/marcantondahmen/automad/commit/ef38ad1d6590d0a9208812981bb907f9074f1257)
+## [v2.0.0-beta.50](https://github.com/marcantondahmen/automad/commit/395d62584987b5fb149a9b322b8206b708f57818)
 
-Sat, 18 Jul 2026 17:42:18 +0200
+Sun, 19 Jul 2026 12:24:34 +0200
+
+### Bugfixes
+
+- fix search and replace with html special characters ([395d62584](https://github.com/marcantondahmen/automad/commit/395d62584987b5fb149a9b322b8206b708f57818))
+
+## [v2.0.0-beta.49](https://github.com/marcantondahmen/automad/commit/c1c0bbe84dbca1ee70db59d5b89967d0193da1b1)
+
+Sat, 18 Jul 2026 17:45:06 +0200
 
 ### New Features
 
