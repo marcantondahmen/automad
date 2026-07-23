@@ -44,6 +44,7 @@ use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Str;
 use Automad\Core\Text;
+use Automad\System\DiskUsage;
 use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -173,6 +174,7 @@ class File {
 		}
 
 		FileSystem::write($path, $data);
+		DiskUsage::refresh();
 		Cache::clear();
 
 		if (!FileSystem::isAllowedFileType($path)) {
