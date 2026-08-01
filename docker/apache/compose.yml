@@ -1,0 +1,12 @@
+name: automad-dev-apache
+
+services:
+  app:
+    build: .
+    ports:
+      - 8888:80
+    user: ${USER_ID}:${GROUP_ID}
+    volumes:
+      - ../../:/app
+      - ../php.ini:/usr/local/etc/php/conf.d/automad-dev.ini:ro
+      - ./apache.conf:/etc/apache2/sites-available/000-default.conf:ro

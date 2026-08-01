@@ -1,0 +1,16 @@
+name: automad-dev-frankenphp
+
+services:
+  app:
+    image: automad-dev-frankenphp
+    build:
+      context: .
+    user: ${USER_ID}:${GROUP_ID}
+    ports:
+      - 8888:80
+    environment:
+      XDG_CONFIG_HOME: /tmp/.config
+      XDG_DATA_HOME: /tmp/.local/share
+    volumes:
+      - ../../:/app
+      - ../php.ini:/usr/local/etc/php/conf.d/automad-dev.ini:ro

@@ -1,0 +1,20 @@
+name: automad-dev-caddy
+
+services:
+  caddy:
+    image: caddy:2
+    ports:
+      - 8888:80
+    volumes:
+      - ../../:/app
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - php
+
+  php:
+    image: automad-dev-caddy-php
+    build: .
+    user: ${USER_ID}:${GROUP_ID}
+    volumes:
+      - ../../:/app
+      - ../php.ini:/usr/local/etc/php/conf.d/automad-dev.ini:ro
