@@ -34,6 +34,7 @@
 
 import { EditorConfig } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
+import { ModalFieldComponent } from '@/admin/components/Modal/ModalField';
 import {
 	EditorOutputData,
 	FieldInitData,
@@ -118,7 +119,7 @@ export const createField = (
 		attributes,
 		allowModal && !data.isUnused
 			? create(
-					'am-modal-field',
+					ModalFieldComponent.TAG_NAME,
 					[],
 					{
 						[Attr.page]: getPageURL(),
