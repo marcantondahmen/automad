@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Route } from '.';
+import { App, routes } from '.';
 
 /**
  * Get the page slug from a dashboard URL.
@@ -46,13 +46,18 @@ export const getSlug = (): string => {
 };
 
 /**
- * Test whether a route is in the routes array.
+ * Test whether a route is in the routes object.
  *
  * @param route
  * @returns true if the route is a defined route
  */
 const isValidRoute = (route: string) => {
-	return route && route in Route;
+	return (
+		!!route &&
+		Object.values(routes).includes(
+			route as (typeof routes)[keyof typeof routes]
+		)
+	);
 };
 
 /**
@@ -68,7 +73,7 @@ export const getValidRouteOrRedirect = (): string => {
 		return slug;
 	}
 
-	window.location.href = `${App.dashboardURL}/${Route.home}`;
+	window.location.href = `${App.dashboardURL}/${routes.home}`;
 };
 
 /**

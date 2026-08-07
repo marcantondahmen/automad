@@ -102,7 +102,7 @@ export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 				</am-form>
 				<br />
 				<am-link
-					${Attr.target}="${routes.verificationcode}"
+					${Attr.target}="${routes.getVerificationCode}"
 					class="${CSS.link}"
 				>
 					${App.text('troubleSigningIn')}
@@ -112,4 +112,4 @@ export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(routes.verifytotp), VerifyTotpComponent);
+customElements.define(getTagFromRoute(routes.verifyTotp), VerifyTotpComponent);

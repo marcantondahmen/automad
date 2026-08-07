@@ -34,17 +34,18 @@
 
 export const routes = {
 	components: 'components',
-	createuser: 'createuser',
+	createUser: 'create-user',
+	getVerificationCode: 'get-verification-code',
 	home: 'home',
 	inpage: 'inpage',
 	login: 'login',
 	packages: 'packages',
 	page: 'page',
-	password: 'password',
 	search: 'search',
+	setPassword: 'set-password',
+	setup: 'setup',
 	shared: 'shared',
 	system: 'system',
 	trash: 'trash',
-	verifytotp: 'verifytotp',
-	setup: 'setup',
+	verifyTotp: 'verify-totp',
 } as const;

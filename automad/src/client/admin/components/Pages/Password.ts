@@ -72,4 +72,4 @@ export class PasswordComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(routes.password), PasswordComponent);
+customElements.define(getTagFromRoute(routes.setPassword), PasswordComponent);

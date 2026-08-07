@@ -72,4 +72,4 @@ export class CreateUserComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(routes.createuser), CreateUserComponent);
+customElements.define(getTagFromRoute(routes.createUser), CreateUserComponent);
