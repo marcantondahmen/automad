@@ -147,7 +147,7 @@ class PasswordResetCode {
 		}
 
 		if ($PasswordResetCode->attempts >= self::MAX_ATTEMPTS) {
-			$Messanger->setError(Text::get('passwordResetCodeMaxAttempts'));
+			$Messanger->setError(Text::get('passwordResetCodeFailedAttemptsLimit'));
 
 			return false;
 		}
