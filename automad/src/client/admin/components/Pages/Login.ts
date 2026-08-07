@@ -98,7 +98,7 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 			</am-form>
 			<p>
 				<am-link
-					${Attr.target}="${routes.getVerificationCode}"
+					${Attr.target}="${routes.requestVerificationCode}"
 					class="${CSS.link}"
 				>
 					${App.text('troubleSigningIn')}

@@ -142,14 +142,15 @@ import('./components/Pages/InPage');
 import('./components/Pages/Login');
 import('./components/Pages/Packages');
 import('./components/Pages/Page');
-import('./components/Pages/Password');
+import('./components/Pages/RequestVerificationCode');
 import('./components/Pages/Search');
+import('./components/Pages/SetPassword');
 import('./components/Pages/Setup');
 import('./components/Pages/Shared');
 import('./components/Pages/System');
 import('./components/Pages/Trash');
-import('./components/Pages/VerificationCode');
 import('./components/Pages/VerifyTotp');
+
 import('./components/Sidebar/Sidebar');
 import('./components/Sidebar/SidebarToggle');
 

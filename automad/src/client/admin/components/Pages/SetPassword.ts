@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2026 by Marc Anton Dahmen
+ * Copyright (c) 2022-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
@@ -44,11 +44,11 @@ import {
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
- * The password reset code request view.
+ * The password create/reset view.
  *
  * @extends BaseCenteredLayoutComponent
  */
-class VerificationCodeComponent extends BaseCenteredLayoutComponent {
+class SetPasswordComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -65,15 +65,14 @@ class VerificationCodeComponent extends BaseCenteredLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		return html`
-			<am-request-password-reset-code-form
-				${Attr.api}="${UserController.requestPasswordResetCode}"
-			>
-			</am-request-password-reset-code-form>
+			<am-reset-password-form
+				${Attr.api}="${UserController.resetPassword}"
+			></am-reset-password-form>
 		`;
 	}
 }
 
 customElements.define(
-	getTagFromRoute(routes.getVerificationCode),
-	VerificationCodeComponent
+	getTagFromRoute(routes.setPassword),
+	SetPasswordComponent
 );

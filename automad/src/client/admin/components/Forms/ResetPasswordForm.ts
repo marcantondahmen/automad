@@ -161,7 +161,7 @@ class ResetPasswordFormComponent extends FormComponent {
 				${cancel()}
 				<am-link
 					class="${CSS.link}"
-					${Attr.target}="${routes.getVerificationCode}${window
+					${Attr.target}="${routes.requestVerificationCode}${window
 						.location.search}"
 				>
 					${App.text('passwordResetCodeResend')}

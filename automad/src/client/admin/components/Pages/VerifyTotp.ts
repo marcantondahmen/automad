@@ -102,7 +102,7 @@ export class VerifyTotpComponent extends BaseCenteredLayoutComponent {
 				</am-form>
 				<br />
 				<am-link
-					${Attr.target}="${routes.getVerificationCode}"
+					${Attr.target}="${routes.requestVerificationCode}"
 					class="${CSS.link}"
 				>
 					${App.text('troubleSigningIn')}

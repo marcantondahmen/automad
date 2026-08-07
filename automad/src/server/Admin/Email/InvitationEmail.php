@@ -72,7 +72,7 @@ class InvitationEmail {
 				)),
 				Button::render(
 					$Text->emailInviteButton,
-					$hostname . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/get-verification-code?username=' . urlencode($username) . '&type=invitation'
+					$hostname . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/request-verification-code?username=' . urlencode($username) . '&type=invitation'
 				),
 				Paragraph::render($Text->emailAutomatic)
 			),

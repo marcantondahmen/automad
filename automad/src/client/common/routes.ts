@@ -35,12 +35,12 @@
 export const routes = {
 	components: 'components',
 	createUser: 'create-user',
-	getVerificationCode: 'get-verification-code',
 	home: 'home',
 	inpage: 'inpage',
 	login: 'login',
 	packages: 'packages',
 	page: 'page',
+	requestVerificationCode: 'request-verification-code',
 	search: 'search',
 	setPassword: 'set-password',
 	setup: 'setup',

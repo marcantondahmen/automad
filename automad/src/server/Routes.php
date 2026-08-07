@@ -218,7 +218,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(verify-totp|get-verification-code|set-password)',
+			AM_PAGE_DASHBOARD . '/(verify-totp|request-verification-code|set-password)',
 			function () {
 				return Dashboard::render();
 			},
@@ -234,7 +234,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(login|get-verification-code|set-password|verify-totp)',
+			AM_PAGE_DASHBOARD . '/(login|request-verification-code|set-password|verify-totp)',
 			function () {
 				self::redirectDashboard('/home');
 			},
@@ -242,7 +242,7 @@ class Routes {
 		);
 
 		$Router->register(
-			AM_PAGE_DASHBOARD . '/(login|get-verification-code|set-password)',
+			AM_PAGE_DASHBOARD . '/(login|request-verification-code|set-password)',
 			function () {
 				return Dashboard::render();
 			},
