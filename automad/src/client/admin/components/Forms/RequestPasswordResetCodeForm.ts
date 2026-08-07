@@ -39,7 +39,7 @@ import {
 	getSearchParam,
 	html,
 	isInvite,
-	Route,
+	routes,
 } from '@/admin/core';
 import { KeyValueMap } from '@/admin/types';
 import { FormComponent } from './Form';
@@ -47,22 +47,20 @@ import { FormComponent } from './Form';
 const text = () => {
 	return isInvite()
 		? {
-				startButton: App.text('completeAccountSetupRequestTokenButton'),
+				startButton: App.text('completeAccountSetupRequestCodeButton'),
 				startHeading: App.text(
-					'completeAccountSetupRequestTokenHeading'
+					'completeAccountSetupRequestCodeHeading'
 				),
-				startText: App.text('completeAccountSetupRequestTokenText'),
-				successHeading: App.text(
-					'completeAccountSetupTokenSentHeading'
-				),
-				successText: App.text('completeAccountSetupTokenSentText'),
+				startText: App.text('completeAccountSetupRequestCodeText'),
+				successHeading: App.text('completeAccountSetupCodeSentHeading'),
+				successText: App.text('completeAccountSetupCodeSentText'),
 			}
 		: {
-				startButton: App.text('accountRecoveryRequestTokenButton'),
-				startHeading: App.text('accountRecoveryRequestTokenHeading'),
-				startText: App.text('accountRecoveryRequestTokenText'),
-				successHeading: App.text('accountRecoveryTokenSentHeading'),
-				successText: App.text('accountRecoveryTokenSentText'),
+				startButton: App.text('accountRecoveryRequestCodeButton'),
+				startHeading: App.text('accountRecoveryRequestCodeHeading'),
+				startText: App.text('accountRecoveryRequestCodeText'),
+				successHeading: App.text('accountRecoveryCodeSentHeading'),
+				successText: App.text('accountRecoveryCodeSentText'),
 			};
 };
 
@@ -73,7 +71,7 @@ const cancel = () => {
 				<p>
 					<am-link
 						class="${CSS.link}"
-						${Attr.target}="${Route.login}"
+						${Attr.target}="${routes.login}"
 					>
 						${App.text('accountRecoveryCancel')}
 					</am-link>
@@ -86,7 +84,7 @@ const cancel = () => {
  *
  * @extends FormComponent
  */
-export class RequestPasswordResetTokenFormComponent extends FormComponent {
+class RequestPasswordResetCodeFormComponent extends FormComponent {
 	/**
 	 * Process the response that is received after submitting the form.
 	 *
@@ -95,7 +93,7 @@ export class RequestPasswordResetTokenFormComponent extends FormComponent {
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		if (response.data?.success) {
-			this.renderSuccess();
+			this.renderSuccess(response.data.username);
 		}
 	}
 
@@ -153,8 +151,19 @@ export class RequestPasswordResetTokenFormComponent extends FormComponent {
 
 	/**
 	 * Render the success message.
+	 *
+	 * @param username
 	 */
-	private renderSuccess(): void {
+	private renderSuccess(username: string): void {
+		const params = new URLSearchParams(window.location.search);
+
+		if (!!username) {
+			params.set('username', username);
+		}
+
+		const query = params.toString();
+		const continueLink = `${routes.setPassword}${query ? `?${query}` : ''}`;
+
 		this.innerHTML = html`
 			<h2>${text().successHeading}</h2>
 			<div class="${CSS.card}">
@@ -164,12 +173,19 @@ export class RequestPasswordResetTokenFormComponent extends FormComponent {
 				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
 					${text().successText}
 				</div>
+				<div class="${CSS.cardForm}">
+					<a
+						href="${continueLink}"
+						class="${CSS.button} ${CSS.buttonPrimary}"
+						>${App.text('continue')}</a
+					>
+				</div>
 			</div>
 		`;
 	}
 }
 
 customElements.define(
-	'am-request-password-reset-token-form',
-	RequestPasswordResetTokenFormComponent
+	'am-request-password-reset-code-form',
+	RequestPasswordResetCodeFormComponent
 );

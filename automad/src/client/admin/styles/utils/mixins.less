@@ -39,6 +39,28 @@
 	}
 }
 
+.otp-input(@fields, @letterSpacing) {
+	@gap: 2px;
+	@charWidth: ~'calc(1ch + @{letterSpacing} * 1.005)';
+	@bg: hsl(var(--am-clr-background-faded));
+
+	padding-left: ~'calc((100% - (@{charWidth} * @{fields}) + @{letterSpacing}) / 2 - @{gap})';
+	font-family: @am-code-font-family;
+	letter-spacing: @letterSpacing;
+
+	background: repeating-linear-gradient(
+		to right,
+		@bg 0,
+		@bg ~'calc(@{charWidth} - @{gap})',
+		transparent ~'calc(@{charWidth} - @{gap})',
+		transparent @charWidth;
+	);
+
+	background-repeat: no-repeat;
+	background-size: ~'calc(@{charWidth} * @{fields})' 2.4em;
+	background-position: center;
+}
+
 .details-transition() {
 	&::details-content {
 		transition:

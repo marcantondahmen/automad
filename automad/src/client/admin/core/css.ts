@@ -262,6 +262,7 @@ export const enum CSS {
 	input = 'am-f-input',
 	inputTitle = 'am-f-input--title',
 	inputTotp = 'am-f-input--totp',
+	inputResetCode = 'am-f-input--reset-code',
 	inputCombo = 'am-f-input-combo',
 	inputComboColor = 'am-f-input-combo__color',
 	inputComboButton = 'am-f-input-combo__button',

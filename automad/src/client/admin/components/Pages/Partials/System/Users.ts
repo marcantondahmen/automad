@@ -45,6 +45,12 @@ import {
 	UserController,
 } from '@/admin/core';
 
+const getOrigin = () => {
+	const { protocol, hostname, port } = window.location;
+
+	return `${protocol}//${hostname}${port ? `:${port}` : ''}`;
+};
+
 /**
  * Render the user section.
  *
@@ -299,6 +305,11 @@ export const renderUsersSection = (): string => {
 					<div>
 						<am-user-name></am-user-name>
 						<am-user-email></am-user-email>
+						<input
+							type="hidden"
+							name="origin"
+							value="${getOrigin()}"
+						/>
 					</div>
 				</am-modal-body>
 				<am-modal-footer>

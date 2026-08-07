@@ -65,7 +65,7 @@ class Button {
 					style="
 						color: #101113 !important;
 						font-size: 16px;
-						font-weight: bold;
+						font-weight: 500;
 						background-color: #fafbfd !important;
 						border-radius: 4px;
 						display: inline-block;
