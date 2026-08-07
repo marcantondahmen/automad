@@ -38,7 +38,7 @@ import {
 	getTagFromRoute,
 	html,
 	isInvite,
-	Route,
+	routes,
 	UserController,
 } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
@@ -72,4 +72,4 @@ export class PasswordComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.password), PasswordComponent);
+customElements.define(getTagFromRoute(routes.password), PasswordComponent);

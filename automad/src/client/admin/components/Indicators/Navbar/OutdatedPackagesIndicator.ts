@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, html, Route, Section } from '@/admin/core';
+import { App, Attr, CSS, html, routes, Section } from '@/admin/core';
 import { BaseOutdatedPackagesIndicator } from '../BaseOutdatedPackagesIndicator';
 
 /**
@@ -53,7 +53,7 @@ class NavbarOutdatedPackagesIndicatorComponent extends BaseOutdatedPackagesIndic
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					${Attr.target}="${Route.packages}?section=${Section.packages}"
+					${Attr.target}="${routes.packages}?section=${Section.packages}"
 					${Attr.tooltip}="${App.text('packagesUpdatesAvailable')}"
 				>
 					<i class="bi bi-box-seam"></i>

@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, html, Route } from '@/admin/core';
+import { App, Attr, CSS, html, routes } from '@/admin/core';
 import { Section } from '@/common';
 import { BaseStateIndicatorComponent } from '@/admin/components/Indicators/BaseStateIndicator';
 
@@ -52,7 +52,7 @@ class NavbarDebugIndicatorComponent extends BaseStateIndicatorComponent {
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					${Attr.target}="${Route.system}?section=${Section.debug}"
+					${Attr.target}="${routes.system}?section=${Section.debug}"
 					${Attr.tooltip}="${App.text('debugEnabled')}"
 				>
 					<i class="bi bi-bug"></i>

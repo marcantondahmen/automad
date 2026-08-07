@@ -38,7 +38,7 @@ import {
 	CSS,
 	getTagFromRoute,
 	html,
-	Route,
+	routes,
 	ComponentController,
 } from '@/admin/core';
 import { newComponentButtonClass } from '@/admin/components/Forms/ComponentCollectionForm';
@@ -66,7 +66,7 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 	protected renderMainPartial(): string {
 		return html`
 			<am-breadcrumbs-route
-				${Attr.target}="${Route.components}"
+				${Attr.target}="${routes.components}"
 				${Attr.text}="${this.pageTitle}"
 			></am-breadcrumbs-route>
 			<section
@@ -114,4 +114,4 @@ class ComponentsComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.components), ComponentsComponent);
+customElements.define(getTagFromRoute(routes.components), ComponentsComponent);

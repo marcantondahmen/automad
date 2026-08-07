@@ -39,7 +39,7 @@ import {
 	FileCollectionController,
 	getTagFromRoute,
 	html,
-	Route,
+	routes,
 	SharedController,
 } from '@/admin/core';
 import { Section } from '@/common';
@@ -144,7 +144,7 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 	protected renderMainPartial(): string {
 		return html`
 			<am-breadcrumbs-route
-				${Attr.target}="${Route.shared}"
+				${Attr.target}="${routes.shared}"
 				${Attr.text}="${this.pageTitle}"
 			></am-breadcrumbs-route>
 			${renderMenu()}
@@ -224,4 +224,4 @@ export class SharedComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.shared), SharedComponent);
+customElements.define(getTagFromRoute(routes.shared), SharedComponent);

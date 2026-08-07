@@ -36,7 +36,7 @@ import {
 	requestAPI,
 	getPageURL,
 	create,
-	Route,
+	routes,
 	html,
 	CSS,
 	App,
@@ -71,7 +71,7 @@ class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 		create(
 			'am-link',
 			[CSS.breadcrumbsItem],
-			{ [Attr.target]: Route.home },
+			{ [Attr.target]: routes.home },
 			container,
 			App.text('dashboardTitle')
 		);
@@ -111,7 +111,7 @@ class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 		}
 
 		data.forEach((page: KeyValueMap, index: number) => {
-			const target = `${Route.page}?url=${encodeURIComponent(page.url)}`;
+			const target = `${routes.page}?url=${encodeURIComponent(page.url)}`;
 
 			const link = create(
 				'am-link',

@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, getTagFromRoute, html, Route } from '@/admin/core';
+import { App, Attr, CSS, getTagFromRoute, html, routes } from '@/admin/core';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**
@@ -56,7 +56,7 @@ export class SearchComponent extends BaseDashboardLayoutComponent {
 	protected renderMainPartial(): string {
 		return html`
 			<am-breadcrumbs-route
-				${Attr.target}="${Route.search}"
+				${Attr.target}="${routes.search}"
 				${Attr.text}="${this.pageTitle}"
 				${Attr.narrow}
 			></am-breadcrumbs-route>
@@ -71,4 +71,4 @@ export class SearchComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.search), SearchComponent);
+customElements.define(getTagFromRoute(routes.search), SearchComponent);

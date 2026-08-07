@@ -45,7 +45,7 @@ import {
 	html,
 	queryAll,
 	requestAPI,
-	Route,
+	routes,
 	SearchController,
 } from '@/admin/core';
 import { FieldResults, FileResults, KeyValueMap } from '@/admin/types';
@@ -98,8 +98,8 @@ const renderFileCard = (fileResults: FileResults): string => {
 				>
 					<am-link
 						${Attr.target}="${path
-							? `${Route.page}?url=${url}`
-							: Route.shared}"
+							? `${routes.page}?url=${url}`
+							: routes.shared}"
 						class="${CSS.iconText} ${CSS.textLink}"
 					>
 						<i class="bi bi-file-earmark-text"></i>

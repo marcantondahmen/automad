@@ -44,7 +44,7 @@ import {
 	fire,
 	html,
 } from '@/admin/core';
-import { create, Route, Section } from '@/common';
+import { create, routes, Section } from '@/common';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { AiProvider, SelectComponentOption } from '@/admin/types';
 import { AiRuntime } from '@/admin/editor/ai';
@@ -56,7 +56,7 @@ import { BaseComponent } from './Base';
 const openSettings = (): void => {
 	const base = `${window.location.origin}${App.dashboardURL}/`;
 
-	App.root.setView(new URL(`${Route.system}?section=${Section.ai}`, base));
+	App.root.setView(new URL(`${routes.system}?section=${Section.ai}`, base));
 };
 
 /**

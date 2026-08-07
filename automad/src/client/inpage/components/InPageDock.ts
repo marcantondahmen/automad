@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { create, Route, Section } from '@/common';
+import { create, routes, Section } from '@/common';
 import logo from '@/common/svg/logo.svg';
 import {
 	restoreDockPosition,
@@ -107,7 +107,7 @@ export class InPageDockComponent extends BaseInPageComponent {
 					'a',
 					['am-inpage-dock__item'],
 					{
-						href: `${dashboard}/${Route.page}?url=${encodeURIComponent(url)}&section=${section}`,
+						href: `${dashboard}/${routes.page}?url=${encodeURIComponent(url)}&section=${section}`,
 						'data-tooltip': tooltip,
 					},
 					container

@@ -39,7 +39,7 @@ import {
 	CSS,
 	getTagFromRoute,
 	html,
-	Route,
+	routes,
 	Section,
 } from '@/admin/core';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
@@ -81,7 +81,7 @@ export class PackagesComponent extends BaseDashboardLayoutComponent {
 
 		return html`
 			<am-breadcrumbs-route
-				${Attr.target}="${Route.packages}"
+				${Attr.target}="${routes.packages}"
 				${Attr.text}="${this.pageTitle}"
 			></am-breadcrumbs-route>
 			${menu.outerHTML}
@@ -140,4 +140,4 @@ export class PackagesComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.packages), PackagesComponent);
+customElements.define(getTagFromRoute(routes.packages), PackagesComponent);

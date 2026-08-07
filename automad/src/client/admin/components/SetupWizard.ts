@@ -42,7 +42,7 @@ import {
 	fire,
 	html,
 	requestAPI,
-	Route,
+	routes,
 	SetupWizardController,
 	transition,
 } from '@/admin/core';
@@ -285,7 +285,7 @@ class SetupWizardComponent extends BaseComponent {
 
 		const base = `${window.location.origin}${App.dashboardURL}/`;
 
-		App.root.setView(new URL(Route.home, base));
+		App.root.setView(new URL(routes.home, base));
 	}
 }
 

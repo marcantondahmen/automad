@@ -36,7 +36,7 @@ import {
 	Attr,
 	getTagFromRoute,
 	html,
-	Route,
+	routes,
 	UserCollectionController,
 } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
@@ -72,4 +72,4 @@ export class CreateUserComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.createuser), CreateUserComponent);
+customElements.define(getTagFromRoute(routes.createuser), CreateUserComponent);
