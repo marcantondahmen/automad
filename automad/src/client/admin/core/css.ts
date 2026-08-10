@@ -360,6 +360,11 @@ export const enum CSS {
 	platformSelectIcon = 'am-f-platform-select__icon',
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
 
+	responsiveImageSettings = 'am-c-responsive-image-settings',
+	responsiveImageSettingsPreview = 'am-c-responsive-image-settings__preview',
+	responsiveImageSettingsPreviewItem = 'am-c-responsive-image-settings__preview-item',
+	responsiveImageSettingsFocalPoint = 'am-c-responsive-image-settings__focal-point',
+
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',
 	rootPending = 'am-c-root--pending',

@@ -50,13 +50,20 @@ import {
 	html,
 	ImageController,
 	notifyError,
+	query,
 	requestAPI,
 	resolveFileUrl,
 	uniqueId,
 } from '@/admin/core';
 import { ImageBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+import { ResponsiveImageSettingsComponent } from '@/admin/components/ResponsiveImageSettings';
 
+/**
+ * The image block.
+ *
+ * @extends BaseBlock
+ */
 export class ImageBlock extends BaseBlock<ImageBlockData> {
 	/**
 	 * Sanitizer settings.
@@ -70,6 +77,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			alt: true,
 			openInNewTab: false,
 			caption: {},
+			breakpoints: false,
 		};
 	}
 
@@ -123,6 +131,8 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 * @param data.link
 	 * @param data.openInNewTab
 	 * @param data.caption
+	 * @param data.breakpoints
+	 * @param data.focalPoint
 	 * @return the image block data
 	 */
 	protected prepareData(data: ImageBlockData): ImageBlockData {
@@ -132,6 +142,8 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			link: data.link || '',
 			openInNewTab: data.openInNewTab || false,
 			caption: data.caption || '',
+			breakpoints: data.breakpoints || {},
+			focalPoint: data.focalPoint || null,
 		};
 	}
 
@@ -143,6 +155,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	private setImage(url: string): void {
 		this.data.url = url;
 		this.img.src = resolveFileUrl(url);
+		this.renderResponsiveStyles();
 	}
 
 	/**
@@ -177,6 +190,14 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				'<i class="bi bi-images"></i>'
 			);
 
+			const responsive = create(
+				'button',
+				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+				{ [Attr.tooltip]: App.text('imageBlockResponsiveSettings') },
+				buttons,
+				'<i class="bi bi-phone-fill"></i>'
+			);
+
 			const alt = create(
 				'button',
 				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
@@ -194,6 +215,11 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			);
 
 			this.listen(select, 'click', this.pickImage.bind(this));
+			this.listen(
+				responsive,
+				'click',
+				this.createResponsiveModal.bind(this)
+			);
 			this.listen(alt, 'click', this.createAltModal.bind(this));
 			this.listen(link, 'click', this.createLinkModal.bind(this));
 		}
@@ -281,11 +307,93 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	private pickImage(): void {
 		createImagePickerModal(
 			([url]) => {
+				this.data.breakpoints = {};
+				this.data.focalPoint = null;
 				this.setImage(url);
 			},
 			App.text('selectImage'),
 			this.data.url
 		);
+	}
+
+	/**
+	 * Render the local style tag with the responsive settings.
+	 */
+	private renderResponsiveStyles(): void {
+		const styleWrapper =
+			query('style', this.wrapper) ||
+			create('style', [], {}, this.wrapper);
+
+		const cls = `image-${this.blockAPI.id}`;
+
+		this.wrapper.classList.add(cls);
+
+		let styles = `
+			.${cls} {
+				container-type: inline-size;
+				container-name: ${cls};
+			}
+		`;
+
+		const { x, y } = this.data.focalPoint || { x: 50, y: 50 };
+
+		const maxWidths = Object.keys(this.data.breakpoints).sort((a, b) =>
+			b.localeCompare(a, undefined, { numeric: true })
+		);
+
+		maxWidths.forEach((maxWidth) => {
+			const { aspectRatio } = this.data.breakpoints[maxWidth];
+
+			if (aspectRatio) {
+				styles += `
+					@container ${cls} (max-width: ${maxWidth}px) {
+						.${cls} img {
+							aspect-ratio: ${aspectRatio};
+							object-fit: cover;
+							object-position: ${x}% ${y}%;
+						}
+					}
+				`;
+			}
+		});
+
+		styleWrapper.textContent = styles;
+	}
+
+	/**
+	 * Create the responsive settings modal.
+	 */
+	private createResponsiveModal(): void {
+		const { modal, body } = createGenericModal(
+			App.text('imageBlockResponsiveSettings')
+		);
+
+		query(`.${CSS.modalDialog}`, modal).classList.add(CSS.modalDialogLarge);
+
+		const responsiveSettings = create<ResponsiveImageSettingsComponent>(
+			ResponsiveImageSettingsComponent.TAG_NAME,
+			[],
+			{},
+			body
+		);
+
+		responsiveSettings.init(
+			this.data.url,
+			this.data.breakpoints,
+			this.data.focalPoint
+		);
+
+		modal.listen(responsiveSettings, 'change', () => {
+			this.data.breakpoints = responsiveSettings.breakpoints;
+			this.data.focalPoint = responsiveSettings.focalPoint;
+
+			this.renderResponsiveStyles();
+			this.blockAPI.dispatchChange();
+		});
+
+		setTimeout(() => {
+			modal.open();
+		});
 	}
 
 	/**

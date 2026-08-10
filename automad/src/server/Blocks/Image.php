@@ -61,7 +61,6 @@ class Image extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
-		$attr = Attr::render($block['tunes']);
 		$data = $block['data'];
 
 		if (empty($data['url'])) {
@@ -95,9 +94,54 @@ class Image extends AbstractBlock {
 			$img = "<a href=\"{$data['link']}\"{$target}>$img</a>";
 		}
 
+		$styles = '';
+		$classes = array();
+
+		if (
+			!empty($data['focalPoint']['x'])
+			&& !empty($data['focalPoint']['y'])
+			&& !empty($data['breakpoints'])
+			&& is_array($data['breakpoints'])
+		) {
+			$uniqueName = "image-{$block['id']}";
+			$classes[] = $uniqueName;
+			$styles = <<<HTML
+				.{$uniqueName} {
+					container-type: inline-size;
+					container-name: {$uniqueName};
+				}
+
+				HTML;
+
+			krsort($data['breakpoints'], SORT_NATURAL);
+
+			foreach ($data['breakpoints'] as $maxWidth => $breakpoint) {
+				// Note that "& *" is here used as selector for both,
+				// the img as well as the am-img-loader tags.
+				$styles .= <<<HTML
+					@container $uniqueName (max-width: {$maxWidth}px) {
+						.{$uniqueName} * {
+							aspect-ratio: {$breakpoint['aspectRatio']};
+							object-fit: cover;
+							object-position: {$data['focalPoint']['x']}% {$data['focalPoint']['y']}%;	
+							background-size: cover;
+							background-repeat: no-repeat;	
+							background-position: {$data['focalPoint']['x']}% {$data['focalPoint']['y']}%;	
+						}	
+					}
+
+					HTML;
+			}
+
+			$styles = "<style>$styles</style>";
+		}
+
+		$attr = Attr::render($block['tunes'], $classes);
+
 		return <<< HTML
 			<figure $attr>
-				$img
+				$img 
+				$styles
 				$caption
 			</figure>
 		HTML;

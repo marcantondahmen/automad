@@ -33,7 +33,12 @@
  */
 
 import { API, BlockAPI, ToolConfig } from '@/vendor/editorjs';
-import { CodeLanguage, EditorOutputData } from '..';
+import {
+	CodeLanguage,
+	EditorOutputData,
+	ImageBreakpoints,
+	ImageFocalPoint,
+} from '..';
 import {
 	sectionBackgroundBlendModes,
 	sectionBorderStyles,
@@ -99,6 +104,10 @@ export interface CollapsibleSectionBlockData {
 	collapsed: boolean;
 }
 
+export interface ComponentBlockData {
+	id: string;
+}
+
 export interface FilelistBlockData {
 	file: string;
 	glob: string;
@@ -110,14 +119,6 @@ export interface HeaderBlockData {
 	text: string;
 }
 
-export interface ImageBlockData {
-	url: string;
-	caption: string;
-	alt: string;
-	link: string;
-	openInNewTab: boolean;
-}
-
 export type GalleryLayout = 'columns' | 'rows' | 'grid';
 
 export interface GalleryBlockData {
@@ -127,6 +128,38 @@ export interface GalleryBlockData {
 	rowHeightPx: number;
 	gapPx: number;
 	fillRectangle: boolean;
+}
+
+export interface ImageBlockData {
+	url: string;
+	caption: string;
+	alt: string;
+	link: string;
+	openInNewTab: boolean;
+	breakpoints: ImageBreakpoints;
+	focalPoint: ImageFocalPoint | null;
+}
+
+export interface ImageSlideshowBreakpoint {
+	slidesPerView: number;
+}
+
+export interface ImageSlideshowBreakpoints {
+	[minWidth: string]: ImageSlideshowBreakpoint;
+}
+
+export interface ImageSlideshowBlockData {
+	files: string[];
+	imageWidthPx: number;
+	imageHeightPx: number;
+	gapPx: number;
+	slidesPerView: number;
+	loop: boolean;
+	autoplay: boolean;
+	effect: (typeof sliderEffects)[number];
+	breakpoints: ImageSlideshowBreakpoints;
+	delay: number;
+	hideControls: boolean;
 }
 
 export interface MailBlockData {
@@ -218,32 +251,6 @@ export interface LayoutSectionBlockData {
 	align?: SectionAlignItemsOption;
 	gap?: string;
 	minBlockWidth?: string;
-}
-
-export interface ComponentBlockData {
-	id: string;
-}
-
-export interface ImageSlideshowBreakpoint {
-	slidesPerView: number;
-}
-
-export interface ImageSlideshowBreakpoints {
-	[minWidth: string]: ImageSlideshowBreakpoint;
-}
-
-export interface ImageSlideshowBlockData {
-	files: string[];
-	imageWidthPx: number;
-	imageHeightPx: number;
-	gapPx: number;
-	slidesPerView: number;
-	loop: boolean;
-	autoplay: boolean;
-	effect: (typeof sliderEffects)[number];
-	breakpoints: ImageSlideshowBreakpoints;
-	delay: number;
-	hideControls: boolean;
 }
 
 export interface SnippetBlockData {

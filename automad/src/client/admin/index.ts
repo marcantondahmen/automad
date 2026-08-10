@@ -202,6 +202,7 @@ import('./components/NavItem');
 import('./components/NavTree');
 import('./components/NumberUnitInput');
 import('./components/PageSelectTree');
+import('./components/ResponsiveImageSettings');
 import('./components/Root');
 import('./components/Select');
 import('./components/SetupWizard');

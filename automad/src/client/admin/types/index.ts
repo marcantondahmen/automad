@@ -100,6 +100,18 @@ export interface Image {
 	thumbnail: string;
 }
 
+export interface ImageBreakpoints {
+	[maxWidth: string]: {
+		// "width/height"
+		aspectRatio: string;
+	};
+}
+
+export interface ImageFocalPoint {
+	x: number;
+	y: number;
+}
+
 export interface JumpbarItemData {
 	value: string;
 	title: string;

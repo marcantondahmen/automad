@@ -1,0 +1,101 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+
+.am-c-responsive-image-settings {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+	grid-template-rows: auto 1fr;
+	gap: 2rem;
+
+	& > div {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: subgrid;
+		grid-row: span 2;
+		gap: 1rem;
+	}
+
+	&__preview {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+		gap: 0.5rem;
+
+		&-item {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			& img {
+				max-height: 10rem;
+				object-fit: cover;
+				object-position: var(--x, 50%) var(--y, 50%);
+			}
+		}
+	}
+
+	&__focal-point {
+		@size: 20px;
+		position: relative;
+		display: flex;
+
+		& img {
+			display: flex;
+			user-select: none;
+			pointer-events: none;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			z-index: 10;
+			inset: 0;
+			background-color: hsl(var(--am-clr-background), 20%);
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			z-index: 20;
+			top: var(--y, 50%);
+			left: var(--x, 50%);
+			transform: translate3d(-50%, -50%, 0);
+			width: @size;
+			height: @size;
+			background-color: hsl(var(--am-clr-text-danger));
+			border: 1px solid hsl(var(--am-clr-border-danger));
+			border-radius: 100%;
+		}
+	}
+}
