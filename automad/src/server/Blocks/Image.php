@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
+use Automad\Engine\Document\Minify;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Search\Replacement;
 
@@ -133,6 +134,7 @@ class Image extends AbstractBlock {
 					HTML;
 			}
 
+			$styles = Minify::css($styles);
 			$styles = "<style>$styles</style>";
 		}
 

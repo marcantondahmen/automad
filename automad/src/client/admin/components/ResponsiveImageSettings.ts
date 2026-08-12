@@ -379,12 +379,7 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 			[CSS.button],
 			{},
 			area,
-			html`
-				<am-icon-text
-					${Attr.icon}="x-lg"
-					${Attr.text}="${App.text('responsiveImageResetFocalPoint')}"
-				></am-icon-text>
-			`
+			App.text('responsiveImageResetFocalPoint')
 		);
 
 		this.listen(reset, 'click', () => {

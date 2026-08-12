@@ -254,12 +254,6 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				this.createResponsiveModal.bind(this)
 			);
 
-			this.listen(
-				this.img,
-				'click',
-				this.createResponsiveModal.bind(this)
-			);
-
 			this.listen(alt, 'click', this.createAltModal.bind(this));
 			this.listen(link, 'click', this.createLinkModal.bind(this));
 		}
