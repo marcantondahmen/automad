@@ -153,7 +153,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 */
 	save(): ParagraphBlockData {
 		return {
-			text: this.content,
+			text: this.content.replace('&nbsp;', ' '),
 			large: this.data.large,
 		};
 	}
