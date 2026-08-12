@@ -440,7 +440,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			value: this.data.alt,
 			name: 'alt',
 			key: uniqueId(),
-			label: 'alt',
+			hideLabel: true,
 		});
 
 		this.listen(
