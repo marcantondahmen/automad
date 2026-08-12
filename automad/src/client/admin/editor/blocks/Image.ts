@@ -58,6 +58,7 @@ import {
 import { ImageBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { ResponsiveImageSettingsComponent } from '@/admin/components/ResponsiveImageSettings';
+import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 
 /**
  * The image block.
@@ -193,7 +194,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			const responsive = create(
 				'button',
 				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
-				{ [Attr.tooltip]: App.text('imageBlockResponsiveSettings') },
+				{ [Attr.tooltip]: App.text('responsiveImageSettings') },
 				buttons,
 				'<i class="bi bi-phone-fill"></i>'
 			);
@@ -365,7 +366,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 */
 	private createResponsiveModal(): void {
 		const { modal, body } = createGenericModal(
-			App.text('imageBlockResponsiveSettings')
+			App.text('responsiveImageSettings')
 		);
 
 		query(`.${CSS.modalDialog}`, modal).classList.add(CSS.modalDialogLarge);
@@ -461,6 +462,40 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 		setTimeout(() => {
 			modal.open();
 		});
+	}
+
+	/**
+	 * Create the tunes menu configuration.
+	 *
+	 * @return the tunes menu configuration
+	 */
+	renderSettings(): TunesMenuConfig {
+		return [
+			{
+				icon: '<i class="bi bi-phone-flip"></i>',
+				label: App.text('responsiveImageSettings'),
+				closeOnActivate: true,
+				onActivate: () => {
+					this.createResponsiveModal();
+				},
+			},
+			{
+				icon: '<i class="bi bi-tag"></i>',
+				label: App.text('altAttr'),
+				closeOnActivate: true,
+				onActivate: () => {
+					this.createAltModal();
+				},
+			},
+			{
+				icon: '<i class="bi bi-link"></i>',
+				label: App.text('link'),
+				closeOnActivate: true,
+				onActivate: () => {
+					this.createLinkModal();
+				},
+			},
+		];
 	}
 
 	/**
