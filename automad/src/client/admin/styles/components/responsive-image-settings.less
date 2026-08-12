@@ -33,69 +33,166 @@
  */
 
 .am-c-responsive-image-settings {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-	grid-template-rows: auto 1fr;
+	display: flex;
+	flex-direction: column;
 	gap: 2rem;
 
-	& > div {
+	@media (min-width: 1050px) {
 		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: subgrid;
-		grid-row: span 2;
-		gap: 1rem;
+		/* prettier-ignore */
+		grid-template-rows: 
+			[breakpoints-help focal-point-help]
+			auto
+			[breakpoints focal-point]
+			auto
+			[preview]
+			1fr
+			[bottom];
+		/* prettier-ignore */
+		grid-template-columns: 
+			[left-1] 1fr [left-2] 1fr [right];
+	}
+
+	&__area {
+		&--breakpoints-help {
+			grid-row: breakpoints-help;
+			grid-column: left-1;
+		}
+
+		&--breakpoints {
+			grid-row: breakpoints;
+			grid-column: left-1;
+		}
+
+		&--preview {
+			grid-row: preview;
+			grid-column: left-1;
+		}
+
+		&--focal-point-help {
+			grid-row: focal-point-help;
+			grid-column: left-2;
+		}
+
+		&--focal-point {
+			grid-row: focal-point / bottom;
+			grid-column: left-2;
+		}
+	}
+
+	&__focal-point {
+		@picker-height: ~'clamp(16rem, calc(100vh - 10rem), 28rem)';
+		@point-size: 25px;
+
+		&-wrapper {
+			display: grid;
+			place-items: center;
+			width: 100%;
+			max-height: @picker-height;
+			border: @am-border;
+			border-radius: @am-form-radius;
+			background-color: hsl(var(--am-clr-background-faded));
+			overflow: hidden;
+		}
+
+		&-picker {
+			position: relative;
+			cursor: crosshair;
+			outline: @am-border;
+
+			& img {
+				display: flex;
+				max-width: 100%;
+				max-height: @picker-height;
+				user-select: none;
+				pointer-events: none;
+			}
+
+			&:before {
+				content: '';
+				position: absolute;
+				z-index: 10;
+				inset: 0;
+				opacity: 0.8;
+				backdrop-filter: blur(16px);
+
+				mask-image: radial-gradient(
+					circle at var(--x, 50%) var(--y, 50%),
+					transparent 0%,
+					black 45%,
+					black 100%
+				);
+			}
+		}
+
+		&-marker {
+			position: absolute;
+			z-index: 20;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			top: var(--y, 50%);
+			left: var(--x, 50%);
+			transform: translate3d(-50%, -50%, 0);
+			width: @point-size;
+			height: @point-size;
+			color: hsl(var(--am-clr-background));
+			background-color: hsl(var(--am-clr-text));
+			border: @am-border;
+			border-radius: 100%;
+
+			&:after {
+				content: '';
+				display: flex;
+				width: @point-size;
+				height: @point-size;
+				background-color: currentColor;
+
+				mask: data-uri(
+					'image/svg+xml;charset=UTF-8',
+					'../../common/svg/focal-point/marker.svg'
+				);
+				mask-repeat: no-repeat no-repeat;
+				mask-position: center center;
+				mask-size: 68%;
+			}
+		}
 	}
 
 	&__preview {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
-		gap: 0.5rem;
+		align-self: start;
+		gap: 1rem;
 
 		&-item {
+			position: relative;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+			border: @am-border;
+			border-radius: @am-form-radius;
+			background-color: hsl(var(--am-clr-background-faded));
+			overflow: hidden;
 
 			& img {
-				max-height: 10rem;
+				max-height: 12rem;
 				object-fit: cover;
 				object-position: var(--x, 50%) var(--y, 50%);
+				outline: @am-border;
 			}
-		}
-	}
 
-	&__focal-point {
-		@size: 20px;
-		position: relative;
-		display: flex;
-
-		& img {
-			display: flex;
-			user-select: none;
-			pointer-events: none;
-		}
-
-		&:before {
-			content: '';
-			position: absolute;
-			z-index: 10;
-			inset: 0;
-			background-color: hsl(var(--am-clr-background), 20%);
-		}
-
-		&:after {
-			content: '';
-			position: absolute;
-			z-index: 20;
-			top: var(--y, 50%);
-			left: var(--x, 50%);
-			transform: translate3d(-50%, -50%, 0);
-			width: @size;
-			height: @size;
-			background-color: hsl(var(--am-clr-text-danger));
-			border: 1px solid hsl(var(--am-clr-border-danger));
-			border-radius: 100%;
+			& small {
+				position: absolute;
+				inset: auto auto 0.35em auto;
+				padding: 0.25em 1.2em;
+				font-family: @am-code-font-family;
+				color: hsl(var(--am-clr-text));
+				background-color: hsl(var(--am-clr-background));
+				border-radius: 2rem;
+				border: @am-border;
+			}
 		}
 	}
 }

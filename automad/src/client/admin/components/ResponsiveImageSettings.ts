@@ -124,8 +124,9 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 	 * The tag name.
 	 *
 	 * @static
+	 * @readonly
 	 */
-	static TAG_NAME = 'am-responsive-image-settings';
+	static readonly TAG_NAME = 'am-responsive-image-settings';
 
 	/**
 	 * The preview container element.
@@ -188,13 +189,10 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 		this._breakpoints = breakpoints;
 		this._focalPoint = focalPoint;
 
-		const left = create('div', [], {}, this);
-		const right = create('div', [], {}, this);
+		this.createBreakpointsInput();
+		this.createFocalPointPicker();
 
-		this.createBreakpointsInput(left);
-		this.preview = this.createPreview(left);
-
-		this.createFocalPointPicker(right);
+		this.preview = this.createPreview();
 
 		this.update();
 	}
@@ -231,7 +229,7 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 						src="${this.image}"
 						style="aspect-ratio: ${item.aspectRatio}"
 					/>
-					<div>${maxWidth}</div>
+					<small>${maxWidth}:${item.aspectRatio}</small>
 				`
 			);
 		}
@@ -239,42 +237,84 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 
 	/**
 	 * The breakpoints input.
-	 *
-	 * @param container
 	 */
-	private createBreakpointsInput(container: HTMLElement): void {
+	private createBreakpointsInput(): void {
 		create(
 			'small',
-			[],
+			[CSS.responsiveImageSettingsAreaBreakpointsHelp],
 			{},
-			container,
+			this,
 			App.text('responsiveImageBreakpointsHelp')
 		);
 
-		const fieldWrapper = create('div', [], {}, container);
+		const fieldWrapper = create(
+			'div',
+			[CSS.responsiveImageSettingsAreaBreakpoints],
+			{},
+			this
+		);
 
-		create(
+		const inputField = create(
 			'div',
 			[CSS.field],
 			{
 				[Attr.error]: App.text('responsiveImageBreakpointsError'),
 			},
-			fieldWrapper,
-			html`
-				<label class="${CSS.fieldLabel}">
-					${App.text('responsiveImageBreakpoints')} &mdash;
-					<span class="${CSS.textMono}">px:w/h px:w/h ...</span>
-				</label>
-				<input
-					class="${CSS.input} ${CSS.textMono}"
-					type="text"
-					value="${breakpointsToString(this.breakpoints)}"
-					name="breakpointsString"
-					placeholder="600:1/1 900:2/3"
-					pattern="([1-9][0-9]+:[0-9.]+/[0-9.]+( |$))*"
-				/>
-			`
+			fieldWrapper
 		);
+
+		const input = create<HTMLInputElement>(
+			'input',
+			[CSS.input, CSS.textMono],
+			{
+				type: 'text',
+				value: breakpointsToString(this.breakpoints),
+				name: 'breakpointsString',
+				placeholder: '600:1/1 900:2/3',
+				pattern: '([1-9][0-9]+:[0-9.]+/[0-9.]+( |$))*',
+			},
+			inputField
+		);
+
+		const presetsField = create(
+			'div',
+			[CSS.field, CSS.flex, CSS.flexColumn],
+			{},
+			fieldWrapper
+		);
+
+		create(
+			'label',
+			[CSS.fieldLabel],
+			{},
+			presetsField,
+			App.text('responsiveImageBreakpointsPresets')
+		);
+
+		const presetButtons = create('div', [CSS.formGroup], {}, presetsField);
+		const presets = ['500:2/3', '700:1/1', '900:4/3'];
+
+		presets.forEach((p) => {
+			const button = create(
+				'button',
+				[
+					CSS.button,
+					CSS.formGroupItem,
+					CSS.textMono,
+					CSS.flexItemGrow,
+					CSS.textMuted,
+				],
+				{},
+				presetButtons,
+				p
+			);
+
+			this.listen(button, 'click', () => {
+				input.value = `${input.value} ${p}`.trim();
+
+				fire('input', input);
+			});
+		});
 
 		this.listen(
 			fieldWrapper,
@@ -289,33 +329,62 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 
 	/**
 	 * The focal point picker.
-	 *
-	 * @param container
 	 */
-	private createFocalPointPicker(container: HTMLElement): void {
+	private createFocalPointPicker(): void {
 		create(
 			'small',
-			[],
+			[CSS.responsiveImageSettingsAreaFocalPointHelp],
 			{},
-			container,
+			this,
 			App.text('responsiveImageFocalPointHelp')
 		);
 
-		const picker = create<HTMLDivElement>(
+		const area = create(
 			'div',
-			[CSS.responsiveImageSettingsFocalPoint],
+			[
+				CSS.responsiveImageSettingsAreaFocalPoint,
+				CSS.flex,
+				CSS.flexColumn,
+				CSS.flexGap,
+			],
 			{},
-			container
+			this
+		);
+
+		const wrapper = create(
+			'div',
+			[CSS.responsiveImageSettingsFocalPointWrapper],
+			{},
+			area
+		);
+
+		const picker = create(
+			'div',
+			[CSS.responsiveImageSettingsFocalPointPicker],
+			{},
+			wrapper
 		);
 
 		const img = create('img', [], { src: this.image }, picker);
 
+		create(
+			'span',
+			[CSS.responsiveImageSettingsFocalPointMarker],
+			{},
+			picker
+		);
+
 		const reset = create(
 			'button',
-			[],
+			[CSS.button],
 			{},
-			container,
-			App.text('responsiveImageResetFocalPoint')
+			area,
+			html`
+				<am-icon-text
+					${Attr.icon}="x-lg"
+					${Attr.text}="${App.text('responsiveImageResetFocalPoint')}"
+				></am-icon-text>
+			`
 		);
 
 		this.listen(reset, 'click', () => {
@@ -344,15 +413,17 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 	/**
 	 * The preview container.
 	 *
-	 * @param container
 	 * @return the preview container
 	 */
-	private createPreview(container: HTMLElement): HTMLElement {
+	private createPreview(): HTMLElement {
 		return create(
 			'div',
-			[CSS.responsiveImageSettingsPreview],
+			[
+				CSS.responsiveImageSettingsAreaPreview,
+				CSS.responsiveImageSettingsPreview,
+			],
 			{},
-			container
+			this
 		);
 	}
 }

@@ -361,9 +361,16 @@ export const enum CSS {
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
 
 	responsiveImageSettings = 'am-c-responsive-image-settings',
+	responsiveImageSettingsAreaBreakpointsHelp = 'am-c-responsive-image-settings__area--breakpoints-help',
+	responsiveImageSettingsAreaBreakpoints = 'am-c-responsive-image-settings__area--breakpoints',
+	responsiveImageSettingsAreaFocalPointHelp = 'am-c-responsive-image-settings__area--focal-point-help',
+	responsiveImageSettingsAreaFocalPoint = 'am-c-responsive-image-settings__area--focal-point',
+	responsiveImageSettingsAreaPreview = 'am-c-responsive-image-settings__area--preview',
+	responsiveImageSettingsFocalPointWrapper = 'am-c-responsive-image-settings__focal-point-wrapper',
+	responsiveImageSettingsFocalPointPicker = 'am-c-responsive-image-settings__focal-point-picker',
+	responsiveImageSettingsFocalPointMarker = 'am-c-responsive-image-settings__focal-point-marker',
 	responsiveImageSettingsPreview = 'am-c-responsive-image-settings__preview',
 	responsiveImageSettingsPreviewItem = 'am-c-responsive-image-settings__preview-item',
-	responsiveImageSettingsFocalPoint = 'am-c-responsive-image-settings__focal-point',
 
 	root = 'am-c-root',
 	rootLoading = 'am-c-root--loading',

@@ -59,6 +59,7 @@ import { ImageBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { ResponsiveImageSettingsComponent } from '@/admin/components/ResponsiveImageSettings';
 import { TunesMenuConfig } from 'automad-editorjs/types/tools';
+import { DropdownComponent } from '@/admin/components/Dropdown';
 
 /**
  * The image block.
@@ -191,36 +192,74 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				'<i class="bi bi-images"></i>'
 			);
 
+			const dropdown = create(
+				DropdownComponent.TAG_NAME,
+				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
+				{},
+				buttons,
+				'<i class="bi bi-sliders"></i>'
+			);
+
+			const dropdownItems = create(
+				'div',
+				[CSS.dropdownItems],
+				{},
+				dropdown
+			);
+
 			const responsive = create(
 				'button',
-				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
-				{ [Attr.tooltip]: App.text('responsiveImageSettings') },
-				buttons,
-				'<i class="bi bi-phone-fill"></i>'
+				[CSS.dropdownLink],
+				{},
+				dropdownItems,
+				html`
+					<am-icon-text
+						${Attr.icon}="crosshair"
+						${Attr.text}="${App.text('responsiveImageSettings')}"
+					></am-icon-text>
+				`
 			);
 
 			const alt = create(
 				'button',
-				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
-				{ [Attr.tooltip]: App.text('altAttr') },
-				buttons,
-				'<i class="bi bi-tag-fill"></i>'
+				[CSS.dropdownLink],
+				{},
+				dropdownItems,
+				html`
+					<am-icon-text
+						${Attr.icon}="tag"
+						${Attr.text}="${App.text('altAttr')}"
+					></am-icon-text>
+				`
 			);
 
 			const link = create(
 				'button',
-				[CSS.button, CSS.buttonIcon, CSS.formGroupItem],
-				{ [Attr.tooltip]: App.text('link') },
-				buttons,
-				'<i class="bi bi-link"></i>'
+				[CSS.dropdownLink],
+				{},
+				dropdownItems,
+				html`
+					<am-icon-text
+						${Attr.icon}="link"
+						${Attr.text}="${App.text('link')}"
+					></am-icon-text>
+				`
 			);
 
 			this.listen(select, 'click', this.pickImage.bind(this));
+
 			this.listen(
 				responsive,
 				'click',
 				this.createResponsiveModal.bind(this)
 			);
+
+			this.listen(
+				this.img,
+				'click',
+				this.createResponsiveModal.bind(this)
+			);
+
 			this.listen(alt, 'click', this.createAltModal.bind(this));
 			this.listen(link, 'click', this.createLinkModal.bind(this));
 		}
@@ -472,7 +511,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	renderSettings(): TunesMenuConfig {
 		return [
 			{
-				icon: '<i class="bi bi-phone-flip"></i>',
+				icon: '<i class="bi bi-crosshair"></i>',
 				label: App.text('responsiveImageSettings'),
 				closeOnActivate: true,
 				onActivate: () => {
