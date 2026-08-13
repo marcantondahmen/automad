@@ -36,8 +36,8 @@ import { API, BlockAPI, ToolConfig } from '@/vendor/editorjs';
 import {
 	CodeLanguage,
 	EditorOutputData,
-	ImageBreakpoints,
-	ImageFocalPoint,
+	AspectRatioBreakpoints,
+	FocalPoint,
 } from '..';
 import {
 	sectionBackgroundBlendModes,
@@ -136,8 +136,8 @@ export interface ImageBlockData {
 	alt: string;
 	link: string;
 	openInNewTab: boolean;
-	breakpoints: ImageBreakpoints;
-	focalPoint: ImageFocalPoint | null;
+	breakpoints: AspectRatioBreakpoints;
+	focalPoint: FocalPoint | null;
 }
 
 export interface ImageSlideshowBreakpoint {
@@ -229,16 +229,19 @@ export type SectionBackgroundBlendMode =
 export type SectionBorderStyle = (typeof sectionBorderStyles)[number];
 
 export interface SectionStyle {
+	aspectRatio?: string;
+	aspectRatioBreakpoints?: AspectRatioBreakpoints;
 	card?: boolean;
 	shadow?: boolean;
 	color?: string;
-	backgroundColor?: string;
 	backgroundBlendMode?: SectionBackgroundBlendMode | '';
+	backgroundColor?: string;
+	backgroundImage?: string;
+	backgroundImageFocalPoint?: FocalPoint | null;
 	borderColor?: string;
 	borderWidth?: string;
 	borderRadius?: string;
 	borderStyle?: SectionBorderStyle | '';
-	backgroundImage?: string;
 	paddingTop?: string;
 	paddingBottom?: string;
 	overflowHidden?: boolean;

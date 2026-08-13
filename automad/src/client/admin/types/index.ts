@@ -72,6 +72,12 @@ declare global {
 	}
 }
 
+export interface AspectRatioBreakpoints {
+	[maxWidth: string]: {
+		aspectRatio: string;
+	};
+}
+
 export interface AutocompleteItem {
 	element: HTMLElement;
 	value: string;
@@ -100,14 +106,7 @@ export interface Image {
 	thumbnail: string;
 }
 
-export interface ImageBreakpoints {
-	[maxWidth: string]: {
-		// "width/height"
-		aspectRatio: string;
-	};
-}
-
-export interface ImageFocalPoint {
+export interface FocalPoint {
 	x: number;
 	y: number;
 }

@@ -189,6 +189,7 @@ import('./components/EditorAiAssistance');
 import('./components/EditorJS');
 import('./components/EmbedService');
 import('./components/Filter');
+import('./components/FocalPointPicker');
 import('./components/IconText');
 import('./components/ImageCollection');
 import('./components/ImagePicker');

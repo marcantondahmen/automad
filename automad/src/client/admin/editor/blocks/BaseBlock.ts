@@ -80,7 +80,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	/**
 	 * The tool's data.
 	 */
-	protected data: DataType;
+	protected data: Partial<DataType>;
 
 	/**
 	 * The tool configuration.
@@ -175,7 +175,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	 *
 	 * @return the saved data
 	 */
-	abstract save(): BlockToolData<DataType>;
+	abstract save(): Partial<BlockToolData<DataType>>;
 
 	/**
 	 * Rerender when being moved around.

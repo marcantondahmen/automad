@@ -288,6 +288,7 @@ export abstract class BaseFieldComponent
 				Attr.toggle,
 				'disabled',
 				'pattern',
+				'placeholder',
 			].forEach((attribute) => {
 				if (this.hasAttribute(attribute)) {
 					input.setAttribute(attribute, this.getAttribute(attribute));

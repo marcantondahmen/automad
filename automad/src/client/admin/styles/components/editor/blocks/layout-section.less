@@ -127,6 +127,39 @@
 		}
 	}
 
+	&__styles {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto auto;
+		gap: 2rem;
+
+		&-area {
+			&--top-left {
+				grid-column: 1;
+				grid-row: 1;
+			}
+
+			&--top-right {
+				grid-column: 2;
+				grid-row: 1;
+			}
+
+			&--bottom-left {
+				grid-column: 1;
+				grid-row: 2;
+
+				align-self: end;
+			}
+
+			&--bottom-right {
+				grid-column: 2;
+				grid-row: 2;
+
+				align-self: end;
+			}
+		}
+	}
+
 	&__label {
 		position: relative;
 		display: flex;
@@ -318,11 +351,13 @@
 
 		.ce-block & > .codex-editor {
 			height: 100%;
+			aspect-ratio: var(--aspect-ratio, auto);
 			background-color: var(--backgroundColor, inherit);
 			background-image: var(--backgroundImage);
 			background-blend-mode: var(--backgroundBlendMode, normal);
 			background-size: cover;
-			background-position: center center;
+			background-position: var(--focalPointX, 50%) var(--focalPointY, 50%);
+			background-repeat: no-repeat;
 			border: none;
 			border-radius: var(--borderRadius, 0);
 

@@ -99,8 +99,15 @@ export const outputIsEqual = (a: KeyValueMap, b: KeyValueMap): boolean => {
 export const filterEmptyData = <T>(data: T): Partial<T> => {
 	const filtered: Partial<T> = {};
 
+	if (!data) {
+		return filtered;
+	}
+
 	for (const [key, value] of Object.entries(data)) {
-		if (!!value || value === false || value === '0' || value === 0) {
+		if (
+			(!!value || value === false || value === '0' || value === 0) &&
+			JSON.stringify(value) !== '{}'
+		) {
 			filtered[key as keyof T] = value;
 		}
 	}

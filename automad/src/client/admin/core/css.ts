@@ -182,6 +182,11 @@ export const enum CSS {
 	editorBlockLayoutSectionRadios = 'am-c-ed-bl-layout-section__radios',
 	editorBlockLayoutSectionRadio = 'am-c-ed-bl-layout-section__radio',
 	editorBlockLayoutSectionRadioActive = 'am-c-ed-bl-layout-section__radio--active',
+	editorBlockLayoutSectionStyles = 'am-c-ed-bl-layout-section__styles',
+	editorBlockLayoutSectionStylesAreaTopLeft = 'am-c-ed-bl-layout-section__styles-area--top-left',
+	editorBlockLayoutSectionStylesAreaTopRight = 'am-c-ed-bl-layout-section__styles-area--top-right',
+	editorBlockLayoutSectionStylesAreaBottomLeft = 'am-c-ed-bl-layout-section__styles-area--bottom-left',
+	editorBlockLayoutSectionStylesAreaBottomRight = 'am-c-ed-bl-layout-section__styles-area--bottom-right',
 
 	editorBlockVideo = 'am-c-ed-bl-video',
 	editorBlockVideoList = 'am-c-ed-bl-video__list',
@@ -225,6 +230,11 @@ export const enum CSS {
 	flexGapLarge = 'am-u-flex--gap-large',
 	flexWrap = 'am-u-flex--wrap',
 	flexItemGrow = 'am-u-flex__item-grow',
+
+	focalPoint = 'am-c-focal-point',
+	focalPointWrapper = 'am-c-focal-point__wrapper',
+	focalPointPicker = 'am-c-focal-point__picker',
+	focalPointMarker = 'am-c-focal-point__marker',
 
 	formGroup = 'am-f-group',
 	formGroupItem = 'am-f-group__item',
@@ -366,9 +376,6 @@ export const enum CSS {
 	responsiveImageSettingsAreaFocalPointHelp = 'am-c-responsive-image-settings__area--focal-point-help',
 	responsiveImageSettingsAreaFocalPoint = 'am-c-responsive-image-settings__area--focal-point',
 	responsiveImageSettingsAreaPreview = 'am-c-responsive-image-settings__area--preview',
-	responsiveImageSettingsFocalPointWrapper = 'am-c-responsive-image-settings__focal-point-wrapper',
-	responsiveImageSettingsFocalPointPicker = 'am-c-responsive-image-settings__focal-point-picker',
-	responsiveImageSettingsFocalPointMarker = 'am-c-responsive-image-settings__focal-point-marker',
 	responsiveImageSettingsPreview = 'am-c-responsive-image-settings__preview',
 	responsiveImageSettingsPreviewItem = 'am-c-responsive-image-settings__preview-item',
 

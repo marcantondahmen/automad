@@ -60,6 +60,7 @@ import { BaseBlock } from './BaseBlock';
 import { ResponsiveImageSettingsComponent } from '@/admin/components/ResponsiveImageSettings';
 import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { DropdownComponent } from '@/admin/components/Dropdown';
+import { filterEmptyData } from '../utils';
 
 /**
  * The image block.
@@ -536,9 +537,9 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): ImageBlockData {
+	save(): Partial<ImageBlockData> {
 		this.data.caption = this.caption.innerHTML || '';
 
-		return this.data;
+		return filterEmptyData(this.data);
 	}
 }
