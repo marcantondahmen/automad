@@ -399,6 +399,7 @@ export const enum CSS {
 	textParagraph = 'am-u-text-paragraph',
 	textLimitRows = 'am-u-text-limit-rows',
 	textTruncateLeft = 'am-u-text-truncate-left',
+	textWrapPretty = 'am-u-text-wrap-pretty',
 
 	toggle = 'am-f-toggle',
 	toggleButton = 'am-f-toggle--button',

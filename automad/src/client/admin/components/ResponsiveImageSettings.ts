@@ -176,7 +176,10 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 	private createBreakpointsInput(): void {
 		create(
 			'small',
-			[CSS.responsiveImageSettingsAreaBreakpointsHelp],
+			[
+				CSS.responsiveImageSettingsAreaBreakpointsHelp,
+				CSS.textWrapPretty,
+			],
 			{},
 			this,
 			App.text('aspectRatioBreakpointsHelp')
@@ -270,7 +273,7 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 	private createFocalPointPicker(): void {
 		create(
 			'small',
-			[CSS.responsiveImageSettingsAreaFocalPointHelp],
+			[CSS.responsiveImageSettingsAreaFocalPointHelp, CSS.textWrapPretty],
 			{},
 			this,
 			App.text('focalPointHelp')

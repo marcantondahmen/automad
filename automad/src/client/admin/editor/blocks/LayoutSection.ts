@@ -478,7 +478,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			[CSS.button, CSS.buttonIcon, CSS.buttonPrimary],
 			{ [Attr.tooltip]: App.text('editLayoutSectionStyles') },
 			toolbar,
-			'<i class="bi bi-palette2"></i>'
+			'<i class="bi bi-sliders"></i>'
 		);
 
 		this.listen(button, 'click', () => {
@@ -635,7 +635,13 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 
 		const areaBottomRight = create(
 			'div',
-			[CSS.editorBlockLayoutSectionStylesAreaBottomRight],
+			[
+				CSS.editorBlockLayoutSectionStylesAreaBottomRight,
+				CSS.flex,
+				CSS.flexColumn,
+				CSS.flexBetween,
+				CSS.flexGapLarge,
+			],
 			{},
 			grid
 		);
@@ -676,7 +682,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 		const group3 = create(
 			'div',
 			[CSS.grid, CSS.gridAuto],
-			{},
+			{ style: '--min: 10rem;' },
 			areaTopRight
 		);
 
@@ -714,25 +720,44 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 
 		field(FieldTag.color, 'borderColor', 'borderColor', group3);
 
-		const aspectRatioWrapper = create('div', [], {}, areaBottomLeft);
+		const group4 = create(
+			'div',
+			[CSS.grid, CSS.gridAuto],
+			{},
+			areaTopRight
+		);
 
-		field(
-			FieldTag.input,
-			'aspectRatio',
-			'aspectRatio',
-			aspectRatioWrapper,
-			{
-				pattern: '[0-9.]+/[0-9.]+',
-				placeholder: '16/9',
-				[Attr.error]: App.text('aspectRatioError'),
-			}
+		field(FieldTag.numberUnit, 'borderWidth', 'borderWidth', group4);
+		field(FieldTag.numberUnit, 'borderRadius', 'borderRadius', group4);
+
+		const group5 = create(
+			'div',
+			[CSS.grid, CSS.gridAuto],
+			{},
+			areaTopRight
+		);
+
+		field(FieldTag.numberUnit, 'paddingTop', 'paddingTop', group5);
+		field(FieldTag.numberUnit, 'paddingBottom', 'paddingBottom', group5);
+
+		field(FieldTag.input, 'aspectRatio', 'aspectRatio', areaBottomRight, {
+			pattern: '[0-9.]+/[0-9.]+',
+			placeholder: '16/9',
+			[Attr.error]: App.text('aspectRatioError'),
+		});
+
+		const breakpointsWrapper = create(
+			'div',
+			[CSS.flex, CSS.flexColumn],
+			{},
+			areaBottomRight
 		);
 
 		create(
 			'small',
-			[],
+			[CSS.textWrapPretty],
 			{},
-			aspectRatioWrapper,
+			breakpointsWrapper,
 			App.text('aspectRatioBreakpointsHelp')
 		);
 
@@ -753,7 +778,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 				{
 					[Attr.error]: App.text('aspectRatioBreakpointsError'),
 				},
-				aspectRatioWrapper
+				breakpointsWrapper
 			)
 		);
 
@@ -764,30 +789,12 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			fire('change', body);
 		});
 
-		const imageWrapper = create(
-			'div',
-			[CSS.flex, CSS.flexColumn, CSS.flexGap],
-			{},
-			areaBottomRight
-		);
-
-		field(
-			FieldTag.image,
-			'backgroundImage',
-			'backgroundImage',
-			imageWrapper
-		);
-
-		const focalPointButton = this.createFocalPointButton(imageWrapper);
-
-		focalPointButton.disabled = !this.data.style?.backgroundImage;
-
 		const blendModeId = uniqueId();
 		const blendMode = create(
 			'div',
 			[CSS.field],
 			{},
-			areaBottomRight,
+			areaBottomLeft,
 			html`
 				<div>
 					<label for="${blendModeId}" class="${CSS.fieldLabel}">
@@ -816,24 +823,17 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			blendModeId
 		);
 
-		const group4 = create(
-			'div',
-			[CSS.grid, CSS.gridAuto],
-			{},
-			areaTopRight
-		);
-		field(FieldTag.numberUnit, 'borderWidth', 'borderWidth', group4);
-		field(FieldTag.numberUnit, 'borderRadius', 'borderRadius', group4);
-
-		const group5 = create(
-			'div',
-			[CSS.grid, CSS.gridAuto],
-			{},
-			areaTopRight
+		const backgroundImageField = field(
+			FieldTag.image,
+			'backgroundImage',
+			'backgroundImage',
+			areaBottomLeft
 		);
 
-		field(FieldTag.numberUnit, 'paddingTop', 'paddingTop', group5);
-		field(FieldTag.numberUnit, 'paddingBottom', 'paddingBottom', group5);
+		const focalPointButton =
+			this.createFocalPointButton(backgroundImageField);
+
+		focalPointButton.disabled = !this.data.style?.backgroundImage;
 
 		Bindings.connectElements(body);
 
