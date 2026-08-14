@@ -281,42 +281,9 @@ export const createImagePickerModal = (
 
 	const idUrl = uniqueId();
 	const idUrlButton = uniqueId();
-	const idWidth = uniqueId();
-	const idHeight = uniqueId();
 	const idSelectButton = uniqueId();
 	const pageUrl = getPageURL();
 	const multipleAttr = isMultiSelect ? Attr.multiple : '';
-
-	const resizeForm = isMultiSelect
-		? ''
-		: html`
-				<div class="${CSS.flex} ${CSS.flexGap}">
-					<div class="${CSS.flexItemGrow}">
-						<div class="${CSS.field}">
-							<label class="${CSS.fieldLabel}">
-								${App.text('resizeWidthTitle')}
-							</label>
-							<input
-								type="number"
-								class="${CSS.input}"
-								id="${idWidth}"
-							/>
-						</div>
-					</div>
-					<div class="${CSS.flexItemGrow}">
-						<div class="${CSS.field} ${CSS.flexItemGrow}">
-							<label class="${CSS.fieldLabel}">
-								${App.text('resizeHeightTitle')}
-							</label>
-							<input
-								type="number"
-								class="${CSS.input}"
-								id="${idHeight}"
-							/>
-						</div>
-					</div>
-				</div>
-			`;
 
 	const pageImagePicker = pageUrl
 		? html`
@@ -358,7 +325,7 @@ export const createImagePickerModal = (
 				<div>
 					<p>${App.text('useUploadedImage')}</p>
 					<am-upload></am-upload>
-					${resizeForm} ${pageImagePicker}
+					${pageImagePicker}
 					<am-image-picker
 						${Attr.label}="${App.text('sharedImages')}"
 						${multipleAttr}
@@ -385,19 +352,6 @@ export const createImagePickerModal = (
 	const urlInput = query<HTMLInputElement>(`#${idUrl}`, modal);
 	const urlButton = query<HTMLButtonElement>(`#${idUrlButton}`, modal);
 	const selectButton = query<HTMLButtonElement>(`#${idSelectButton}`, modal);
-
-	const getResizeQuery = (file: string) => {
-		const inputWidth = query<HTMLInputElement>(`#${idWidth}`);
-		const inputHeight = query<HTMLInputElement>(`#${idHeight}`);
-		const width = inputWidth.value;
-		const height = inputHeight.value;
-
-		return `${file}${
-			width && height && !file.match(/\:\/\//)
-				? `?${width}x${height}`
-				: ''
-		}`;
-	};
 
 	const getSelection = () => {
 		return queryAll('am-image-picker', modal).reduce(
@@ -437,7 +391,7 @@ export const createImagePickerModal = (
 			return;
 		}
 
-		onSelect(isMultiSelect ? files : [getResizeQuery(files[0])]);
+		onSelect(files);
 
 		modal.close();
 	});
