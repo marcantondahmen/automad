@@ -139,7 +139,7 @@ export class HeaderBlock extends BaseBlock<HeaderBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): HeaderBlockData {
+	getData(): HeaderBlockData {
 		return {
 			text: this.content,
 			level: this.data.level,

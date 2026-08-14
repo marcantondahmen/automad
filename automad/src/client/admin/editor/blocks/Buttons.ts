@@ -108,21 +108,14 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * @return the slider block data
 	 */
 	protected prepareData(data: ButtonsBlockData): ButtonsBlockData {
-		const defaultStyle: ButtonsBlockButtonStyle = {
-			borderWidth: '2px',
-			borderRadius: '0.5rem',
-			paddingHorizontal: '1.5rem',
-			paddingVertical: '0.5rem',
-		};
-
 		return {
 			primaryText: data.primaryText || 'Button',
 			primaryLink: data.primaryLink || '',
-			primaryStyle: data.primaryStyle ?? defaultStyle,
+			primaryStyle: data.primaryStyle ?? {},
 			primaryOpenInNewTab: data.primaryOpenInNewTab ?? true,
 			secondaryText: data.secondaryText || '',
 			secondaryLink: data.secondaryLink || '',
-			secondaryStyle: data.secondaryStyle ?? defaultStyle,
+			secondaryStyle: data.secondaryStyle ?? {},
 			secondaryOpenInNewTab: data.secondaryOpenInNewTab ?? true,
 			justify: data.justify ?? 'start',
 			gap: data.gap ?? '1rem',
@@ -233,7 +226,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 * Update the flex properties.
 	 */
 	private updateLayout(): void {
-		this.wrapper.style.justifyContent = this.data.justify;
+		this.flex.style.justifyContent = this.data.justify;
 		this.flex.style.gap = this.data.gap;
 	}
 
@@ -443,7 +436,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): ButtonsBlockData {
+	getData(): ButtonsBlockData {
 		return {
 			...this.data,
 			primaryText: query('[name="primaryText"]', this.flex).innerHTML,

@@ -358,7 +358,7 @@ export class PagelistBlock extends BaseBlock<PagelistBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): PagelistBlockData {
+	getData(): PagelistBlockData {
 		const data = collectFieldData(this.wrapper) as PagelistBlockData;
 
 		return {

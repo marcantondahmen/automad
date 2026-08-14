@@ -238,7 +238,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): ComponentBlockData {
+	getData(): ComponentBlockData {
 		return this.data;
 	}
 

@@ -37,11 +37,11 @@ import {
 	BlockAPI,
 	BlockTool,
 	BlockToolConstructorOptions,
-	BlockToolData,
 } from '@/vendor/editorjs';
 import { create, listen } from '@/admin/core';
 import { KeyValueMap, Listener } from '@/admin/types';
 import { MoveEvent } from 'automad-editorjs/types/tools';
+import { filterEmptyData } from '../utils';
 
 /**
  * The abstract base block class.
@@ -80,7 +80,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	/**
 	 * The tool's data.
 	 */
-	protected data: Partial<DataType>;
+	protected data: DataType;
 
 	/**
 	 * The tool configuration.
@@ -171,11 +171,23 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	abstract render(): HTMLElement;
 
 	/**
-	 * Save the block data.
+	 * Get the full block data set.
 	 *
 	 * @return the saved data
 	 */
-	abstract save(): Partial<BlockToolData<DataType>>;
+	abstract getData(): DataType;
+
+	/**
+	 * Filter and save the block data. This method is not supposed to be implemented
+	 * in derived classes. In order to actually save data form a block, the getData
+	 * method must be implemented instead.
+	 *
+	 * @see getData()
+	 * @return the filtered data
+	 */
+	save(): Partial<DataType> {
+		return filterEmptyData(this.getData());
+	}
 
 	/**
 	 * Rerender when being moved around.
@@ -183,7 +195,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	 * @param event
 	 */
 	moved(event: MoveEvent): void {
-		this.data = this.save();
+		this.data = this.getData();
 
 		this.wrapper.innerHTML = '';
 		this.render();

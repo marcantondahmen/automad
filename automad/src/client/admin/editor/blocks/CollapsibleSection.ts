@@ -307,7 +307,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	 *
 	 * @return the saved data
 	 */
-	save(): CollapsibleSectionBlockData {
+	getData(): CollapsibleSectionBlockData {
 		return {
 			...this.data,
 			title: this.title.innerHTML,

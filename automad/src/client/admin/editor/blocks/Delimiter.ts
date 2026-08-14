@@ -63,7 +63,7 @@ export class Delimiter extends BaseBlock<object> {
 	 *
 	 * @return the saved data
 	 */
-	save(): object {
+	getData(): object {
 		return {};
 	}
 }

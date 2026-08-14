@@ -370,11 +370,11 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): LayoutSectionBlockData {
-		return filterEmptyData({
+	getData(): LayoutSectionBlockData {
+		return {
 			...this.data,
 			style: filterEmptyData(this.data.style),
-		});
+		};
 	}
 
 	/**

@@ -207,7 +207,7 @@ export class FilelistBlock extends BaseBlock<FilelistBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): FilelistBlockData {
+	getData(): FilelistBlockData {
 		return collectFieldData(this.wrapper) as FilelistBlockData;
 	}
 }

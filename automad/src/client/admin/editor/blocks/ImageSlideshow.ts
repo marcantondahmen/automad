@@ -394,7 +394,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): ImageSlideshowBlockData {
+	getData(): ImageSlideshowBlockData {
 		return this.data;
 	}
 }

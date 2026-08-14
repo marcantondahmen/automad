@@ -186,7 +186,7 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): TeXBlockData {
+	getData() {
 		return this.data;
 	}
 }

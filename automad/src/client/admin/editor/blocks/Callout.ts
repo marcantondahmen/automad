@@ -141,7 +141,7 @@ export class CalloutBlock extends BaseBlock<CalloutBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): CalloutBlockData {
+	getData(): CalloutBlockData {
 		return {
 			title: this.inputs.title.innerHTML,
 			text: this.inputs.text.innerHTML,

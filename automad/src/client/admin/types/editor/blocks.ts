@@ -75,10 +75,10 @@ export interface ButtonsBlockData {
 	primaryLink: string;
 	primaryStyle: ButtonsBlockButtonStyle;
 	primaryOpenInNewTab: boolean;
-	secondaryText?: string;
-	secondaryLink?: string;
-	secondaryStyle?: ButtonsBlockButtonStyle;
-	secondaryOpenInNewTab?: boolean;
+	secondaryText: string;
+	secondaryLink: string;
+	secondaryStyle: ButtonsBlockButtonStyle;
+	secondaryOpenInNewTab: boolean;
 }
 
 export interface CalloutBlockData {
@@ -248,12 +248,12 @@ export interface SectionStyle {
 }
 
 export interface LayoutSectionBlockData {
-	content?: EditorOutputData;
-	style?: SectionStyle;
-	justify?: SectionJustifyContentOption;
-	align?: SectionAlignItemsOption;
-	gap?: string;
-	minBlockWidth?: string;
+	content: EditorOutputData;
+	style: SectionStyle;
+	justify: SectionJustifyContentOption;
+	align: SectionAlignItemsOption;
+	gap: string;
+	minBlockWidth: string;
 }
 
 export interface SnippetBlockData {
