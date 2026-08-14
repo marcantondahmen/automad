@@ -34,7 +34,7 @@
 
 .am-f-toggle {
 	display: flex;
-	color: hsl(var(--am-clr-text));
+	color: var(--am-clr-text);
 
 	& input {
 		display: none;
@@ -64,7 +64,7 @@
 			width: 100%;
 			padding: 0 @am-form-padding-x;
 			font-weight: @am-base-font-weight;
-			background-color: hsl(var(--am-clr-background-faded));
+			background-color: var(--am-clr-background-faded);
 		}
 
 		& .bi {
@@ -76,7 +76,7 @@
 		position: relative;
 
 		& label {
-			color: hsl(var(--am-clr-text-muted));
+			color: var(--am-clr-text-muted);
 		}
 
 		& select {
@@ -90,13 +90,13 @@
 
 	&--on label,
 	&--button :checked + label {
-		color: hsl(var(--am-clr-text-active));
-		border-color: hsl(var(--am-clr-border-active));
-		background-color: hsl(var(--am-clr-background-highlight));
+		color: var(--am-clr-text-active);
+		border-color: var(--am-clr-border-active);
+		background-color: var(--am-clr-background-highlight);
 	}
 
 	&--off label {
-		color: hsl(var(--am-clr-text));
+		color: var(--am-clr-text);
 	}
 
 	& .bi:before,
@@ -112,7 +112,7 @@
 	}
 
 	& [disabled] + label {
-		color: hsl(var(--am-clr-text-muted));
-		border-color: hsl(var(--am-clr-border));
+		color: var(--am-clr-text-muted);
+		border-color: var(--am-clr-border);
 	}
 }

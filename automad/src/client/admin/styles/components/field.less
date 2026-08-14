@@ -56,9 +56,8 @@
 		transition: outline 0.2s;
 
 		&:hover {
-			outline-color: hsl(
-				from hsl(var(--am-clr-text-muted)) h s l / 0.5
-			) !important;
+			/* prettier-ignore */
+			outline-color: hsl(from var(--am-clr-text-muted) h s l / 0.5) !important;
 		}
 
 		& span:after {
@@ -84,7 +83,7 @@
 		font-size: @am-small-font-size;
 		font-weight: @am-small-font-weight;
 		line-height: @am-small-line-height;
-		color: hsl(var(--am-clr-text-paragraph));
+		color: var(--am-clr-text-paragraph);
 		user-select: none;
 	}
 
@@ -93,11 +92,11 @@
 		font-size: @am-small-font-size;
 		font-weight: @am-small-font-weight;
 		line-height: @am-small-line-height;
-		color: hsl(var(--am-clr-text-danger));
+		color: var(--am-clr-text-danger);
 	}
 
 	&:not(:has(&)):has(.am-validate:invalid) &__label {
-		color: hsl(var(--am-clr-text-danger));
+		color: var(--am-clr-text-danger);
 
 		&:after {
 			&:extend(.am-bi);

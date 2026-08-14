@@ -34,7 +34,8 @@
 
 .blur() {
 	@supports (backdrop-filter: blur(@am-backdrop-radius)) {
-		background-color: hsla(var(--am-clr-background), @am-backdrop-opacity);
+		/* prettier-ignore */
+		background-color: hsl(from var(--am-clr-background) h s l / @am-backdrop-opacity);
 		backdrop-filter: blur(@am-backdrop-radius);
 	}
 }
@@ -42,7 +43,7 @@
 .otp-input(@fields, @letterSpacing) {
 	@gap: 2px;
 	@charWidth: ~'calc(1ch + @{letterSpacing} * 1.005)';
-	@bg: hsl(var(--am-clr-background-faded));
+	@bg: var(--am-clr-background-faded);
 
 	padding-left: ~'calc((100% - (@{charWidth} * @{fields}) + @{letterSpacing}) / 2 - @{gap})';
 	font-family: @am-code-font-family;
@@ -79,8 +80,8 @@
 
 .scrollbar() {
 	scrollbar-width: thin;
-	scrollbar-color: hsl(from hsl(var(--am-clr-text-muted)) h s l / 0.4)
-		hsl(var(--am-clr-background));
+	scrollbar-color: hsl(from var(--am-clr-text-muted) h s l / 0.4)
+		var(--am-clr-background);
 }
 
 .animated-border(@percW, @percH, @border, @radius, @speed: 2s) {
@@ -105,8 +106,8 @@
 			100% 100%,
 			0 100%;
 		background-image: linear-gradient(
-			hsl(var(--am-clr-text-paragraph)),
-			hsl(var(--am-clr-background-faded))
+			var(--am-clr-text-paragraph),
+			var(--am-clr-background-faded)
 		);
 		animation: animatedBorderRotate @speed linear infinite;
 	}
@@ -119,7 +120,7 @@
 		top: @border;
 		width: ~'calc(100% - @{border} - @{border})';
 		height: ~'calc(100% - @{border} - @{border})';
-		background-color: hsl(var(--am-clr-background));
+		background-color: var(--am-clr-background);
 		border-radius: ~'calc(@{radius} - @{border})';
 	}
 }

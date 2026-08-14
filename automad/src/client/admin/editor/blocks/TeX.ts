@@ -144,7 +144,7 @@ export class TeXBlock extends BaseBlock<TeXBlockData> {
 				throwOnError: false,
 				output: 'html',
 				displayMode: true,
-				errorColor: 'hsl(var(--am-clr-text-danger))',
+				errorColor: 'var(--am-clr-text-danger)',
 			});
 		}, 500);
 

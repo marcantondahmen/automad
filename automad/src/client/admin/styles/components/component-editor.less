@@ -39,7 +39,7 @@
 	border-radius: @am-bl-editor-radius;
 
 	&--ghost {
-		border-color: hsl(var(--am-clr-border-active));
+		border-color: var(--am-clr-border-active);
 	}
 
 	&--drag {
@@ -52,7 +52,7 @@
 	}
 
 	&--chosen {
-		background-color: hsl(var(--am-clr-background-faded));
+		background-color: var(--am-clr-background-faded);
 		box-shadow: @am-shadow;
 	}
 
@@ -87,13 +87,13 @@
 		gap: 0.3rem;
 
 		& > * {
-			color: hsl(var(--am-clr-text-muted));
+			color: var(--am-clr-text-muted);
 			padding: 0.35rem;
 			cursor: pointer;
 			transition: color 0.2s;
 
 			&:hover {
-				color: hsl(var(--am-clr-text));
+				color: var(--am-clr-text);
 			}
 		}
 	}

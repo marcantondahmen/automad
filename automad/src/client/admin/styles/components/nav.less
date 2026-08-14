@@ -46,7 +46,7 @@
 		font-size: @am-small-font-size;
 		padding: 0.5rem ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
 		padding-bottom: 0.7rem;
-		color: hsl(var(--am-clr-text-sidebar));
+		color: var(--am-clr-text-sidebar);
 		user-select: none;
 	}
 
@@ -67,19 +67,19 @@
 		> &__link:after {
 		content: '●';
 		font-size: 0.8rem;
-		color: hsl(var(--am-clr-text-muted));
+		color: var(--am-clr-text-muted);
 	}
 
 	&__item[am-publication-state*='draft'] > &__link:after {
 		content: '●';
 		font-size: 0.8rem;
-		color: hsl(var(--am-clr-text)) !important;
+		color: var(--am-clr-text) !important;
 	}
 
 	&__item--active[am-publication-state*='draft'] > &__link:after {
 		content: '●';
 		font-size: 0.8rem;
-		color: hsl(var(--am-clr-text-primary)) !important;
+		color: var(--am-clr-text-primary) !important;
 	}
 
 	&__link {

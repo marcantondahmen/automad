@@ -67,7 +67,7 @@
 		max-width: 38rem;
 		margin: 0 auto;
 		padding: 0;
-		background-color: hsl(var(--am-clr-background));
+		background-color: var(--am-clr-background);
 		border-radius: @am-modal-radius;
 		border: @am-modal-border;
 		box-shadow:
@@ -123,14 +123,14 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		color: hsl(var(--am-clr-text));
+		color: var(--am-clr-text);
 		border-bottom: @am-border;
 	}
 
 	&__body {
 		display: flex;
 		flex-direction: column;
-		color: hsl(var(--am-clr-text-paragraph));
+		color: var(--am-clr-text-paragraph);
 	}
 
 	& &__body hr {
@@ -175,7 +175,7 @@
 				width: @size;
 				height: @size;
 				border-radius: @size;
-				border: 0.2rem solid hsl(var(--am-clr-text-active));
+				border: 0.2rem solid var(--am-clr-text-active);
 				border-left-color: transparent;
 				animation: 1.5s linear 0s infinite modal-spinner;
 			}
@@ -183,7 +183,7 @@
 
 		&-text {
 			flex-grow: 1;
-			color: hsl(var(--am-clr-text-paragraph));
+			color: var(--am-clr-text-paragraph);
 		}
 	}
 
@@ -198,13 +198,13 @@
 			border: none;
 			border-top-left-radius: @radius-inner;
 			border-top-right-radius: @radius-inner;
-			color: hsl(var(--am-clr-text));
+			color: var(--am-clr-text);
 			background-color: @am-form-background;
 			transition: all 0.2s;
 			outline: @am-outline;
 
 			&::placeholder {
-				color: hsl(var(--am-clr-text-muted));
+				color: var(--am-clr-text-muted);
 			}
 		}
 
@@ -228,14 +228,14 @@
 			line-height: 2.6;
 			text-decoration: none;
 			cursor: pointer;
-			color: hsl(var(--am-clr-text));
-			background-color: hsl(var(--am-clr-background));
+			color: var(--am-clr-text);
+			background-color: var(--am-clr-background);
 			border-radius: 0.35rem;
 			transition: all 0.2s;
 
 			&.am-active {
-				color: hsl(var(--am-clr-text-selected));
-				background-color: hsl(var(--am-clr-background-selected));
+				color: var(--am-clr-text-selected);
+				background-color: var(--am-clr-background-selected);
 			}
 
 			& > * {
@@ -285,7 +285,7 @@
 		}
 
 		&:hover {
-			color: hsl(var(--am-clr-text-hover));
+			color: var(--am-clr-text-hover);
 		}
 	}
 }

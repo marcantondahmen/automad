@@ -50,8 +50,8 @@ html:not(.am-ui) {
 		font-size: var(--am-base-font-size);
 		font-weight: @am-base-font-weight;
 		line-height: @am-base-line-height;
-		color: hsl(var(--am-clr-text));
-		background-color: hsl(var(--am-clr-background));
+		color: var(--am-clr-text);
+		background-color: var(--am-clr-background);
 	}
 
 	html& {
@@ -114,10 +114,10 @@ html:not(.am-ui) {
 	}
 
 	& a:not([class]) {
-		color: hsl(var(--am-clr-text-link));
+		color: var(--am-clr-text-link);
 
 		&:hover {
-			color: hsl(var(--am-clr-text-link-hover));
+			color: var(--am-clr-text-link-hover);
 		}
 	}
 
@@ -135,7 +135,7 @@ html:not(.am-ui) {
 	& p {
 		margin: 0;
 		max-width: @am-main-width-narrow;
-		color: hsl(var(--am-clr-text-paragraph));
+		color: var(--am-clr-text-paragraph);
 		text-wrap: pretty;
 
 		&:not(:last-child) {
@@ -162,21 +162,21 @@ html:not(.am-ui) {
 	& code:not([class]) {
 		font-family: @am-code-font-family;
 		padding: 0.1rem 0.35rem;
-		color: hsl(var(--am-prism-1));
-		background-color: hsl(var(--am-clr-background-faded));
+		color: var(--am-prism-1);
+		background-color: var(--am-clr-background-faded);
 		border-radius: 0.3rem;
 	}
 
 	& pre:not([class]) {
 		padding: 1rem 1.5rem;
 		margin: @am-base-margin-y 0;
-		background-color: hsl(var(--am-clr-background-faded));
+		background-color: var(--am-clr-background-faded);
 		border: @am-form-border;
 		border-radius: @am-form-radius;
 
 		& > code {
 			padding: 0;
-			color: hsl(var(--am-prism-2));
+			color: var(--am-prism-2);
 		}
 	}
 
@@ -186,18 +186,18 @@ html:not(.am-ui) {
 
 	& mark {
 		padding: 0.075em 0.15em;
-		color: hsl(var(--am-clr-text-marked));
-		background-color: hsl(var(--am-clr-background-marked));
+		color: var(--am-clr-text-marked);
+		background-color: var(--am-clr-background-marked);
 		border-radius: 0.15em;
 	}
 
 	& footer {
-		color: hsl(var(--am-clr-text-paragraph));
+		color: var(--am-clr-text-paragraph);
 	}
 
 	& ::selection {
-		color: hsl(var(--am-clr-text-selection));
-		background-color: hsl(var(--am-clr-background-selection));
+		color: var(--am-clr-text-selection);
+		background-color: var(--am-clr-background-selection);
 	}
 
 	& [disabled] {

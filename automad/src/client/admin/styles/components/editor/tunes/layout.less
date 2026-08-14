@@ -52,9 +52,9 @@
 		align-items: center;
 		height: 2.3rem;
 		cursor: pointer;
-		color: hsl(var(--am-clr-text-muted));
+		color: var(--am-clr-text-muted);
 		border-radius: 3px;
-		background-color: hsl(var(--am-clr-background));
+		background-color: var(--am-clr-background);
 		transition:
 			color 0.2s,
 			background-color 0.2s;
@@ -69,16 +69,16 @@
 		}
 
 		&:hover {
-			background-color: hsl(var(--am-clr-background-highlight));
+			background-color: var(--am-clr-background-highlight);
 		}
 
 		&:active {
-			background-color: hsl(var(--am-clr-background-faded));
+			background-color: var(--am-clr-background-faded);
 		}
 
 		&--active {
-			color: hsl(var(--am-clr-text));
-			background-color: hsl(var(--am-clr-background-highlight));
+			color: var(--am-clr-text);
+			background-color: var(--am-clr-background-highlight);
 		}
 	}
 }
