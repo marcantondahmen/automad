@@ -67,7 +67,7 @@ import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
 import { FocalPointPickerComponent } from '@/admin/components/FocalPointPicker';
-import { filterEmptyData } from '../utils';
+import { filterEmptyData, saveEditorBlocks } from '../utils';
 import iconAlignStart from '@/common/svg/flex/align-start.svg';
 import iconAlignCenter from '@/common/svg/flex/align-center.svg';
 import iconAlignEnd from '@/common/svg/flex/align-end.svg';
@@ -337,7 +337,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 							return;
 						}
 
-						const { blocks } = await api.saver.save();
+						const blocks = await saveEditorBlocks(api);
 
 						this.data.content = { blocks };
 						this.blockAPI.dispatchChange();

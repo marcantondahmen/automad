@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { BlockAPI, OutputBlockData } from '@/vendor/editorjs';
+import { API, BlockAPI, OutputBlockData } from '@/vendor/editorjs';
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
 import { App, getLogger } from '../core';
 import { nanoid } from 'nanoid';
@@ -113,6 +113,26 @@ export const filterEmptyData = <T>(data: T): Partial<T> => {
 	}
 
 	return filtered;
+};
+
+/**
+ * Get blocks data from editor.
+ *
+ * @param api
+ * @return the blocks
+ */
+export const saveEditorBlocks = async (
+	api: API
+): Promise<OutputBlockData[]> => {
+	const { blocks } = (await api.saver.save()) as EditorOutputData;
+
+	return (
+		blocks?.map((block) => {
+			block.tunes = filterEmptyData(block.tunes ?? {});
+
+			return block;
+		}) || []
+	);
 };
 
 /**
