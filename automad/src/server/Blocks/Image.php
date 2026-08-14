@@ -99,9 +99,7 @@ class Image extends AbstractBlock {
 		$classes = array();
 
 		if (
-			!empty($data['focalPoint']['x'])
-			&& !empty($data['focalPoint']['y'])
-			&& !empty($data['breakpoints'])
+			!empty($data['breakpoints'])
 			&& is_array($data['breakpoints'])
 		) {
 			$uniqueName = "image-{$block['id']}";
@@ -114,6 +112,11 @@ class Image extends AbstractBlock {
 
 				HTML;
 
+			$focalPoint = array_merge(
+				array('x' => '50', 'y' => '50'),
+				$data['focalPoint'] ?? array()
+			);
+
 			krsort($data['breakpoints'], SORT_NATURAL);
 
 			foreach ($data['breakpoints'] as $maxWidth => $breakpoint) {
@@ -124,10 +127,10 @@ class Image extends AbstractBlock {
 						.{$uniqueName} * {
 							aspect-ratio: {$breakpoint['aspectRatio']};
 							object-fit: cover;
-							object-position: {$data['focalPoint']['x']}% {$data['focalPoint']['y']}%;	
+							object-position: {$focalPoint['x']}% {$focalPoint['y']}%;	
 							background-size: cover;
 							background-repeat: no-repeat;	
-							background-position: {$data['focalPoint']['x']}% {$data['focalPoint']['y']}%;	
+							background-position: {$focalPoint['x']}% {$focalPoint['y']}%;	
 						}	
 					}
 
