@@ -42,23 +42,24 @@
 
 .otp-input(@fields, @letterSpacing) {
 	@gap: 2px;
-	@charWidth: ~'calc(1ch + @{letterSpacing} * 1.005)';
+	@charWidth: calc(1ch + @letterSpacing * 1.005);
 	@bg: var(--am-clr-background-faded);
 
-	padding-left: ~'calc((100% - (@{charWidth} * @{fields}) + @{letterSpacing}) / 2 - @{gap})';
+	/* prettier-ignore */
+	padding-left: calc((100% - (@charWidth * @fields) + @letterSpacing) / 2 - @gap);
 	font-family: @am-code-font-family;
 	letter-spacing: @letterSpacing;
 
 	background: repeating-linear-gradient(
 		to right,
 		@bg 0,
-		@bg ~'calc(@{charWidth} - @{gap})',
-		transparent ~'calc(@{charWidth} - @{gap})',
+		@bg calc(@charWidth - @gap),
+		transparent calc(@charWidth - @gap),
 		transparent @charWidth;
 	);
 
 	background-repeat: no-repeat;
-	background-size: ~'calc(@{charWidth} * @{fields})' 2.4em;
+	background-size: calc(@charWidth * @fields) 2.4em;
 	background-position: center;
 }
 
@@ -118,10 +119,10 @@
 		z-index: -1;
 		left: @border;
 		top: @border;
-		width: ~'calc(100% - @{border} - @{border})';
-		height: ~'calc(100% - @{border} - @{border})';
+		width: calc(100% - @border - @border);
+		height: calc(100% - @border - @border);
 		background-color: var(--am-clr-background);
-		border-radius: ~'calc(@{radius} - @{border})';
+		border-radius: calc(@radius - @border);
 	}
 }
 

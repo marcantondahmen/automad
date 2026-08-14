@@ -39,7 +39,8 @@
 	border: @am-modal-border;
 	border-radius: @am-bl-editor-toolbar-radius;
 	box-shadow: @am-shadow;
-	min-height: ~'calc(@{am-bl-editor-inline-toolbar-height} + (2 * @{am-modal-border-width}))';
+	/* prettier-ignore */
+	min-height: calc(@am-bl-editor-inline-toolbar-height + (2 * @am-modal-border-width));
 
 	&__toggler-and-button-wrapper {
 		display: flex;

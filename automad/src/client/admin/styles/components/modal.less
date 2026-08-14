@@ -34,7 +34,7 @@
 
 .am-c-modal {
 	@jumpbar-padding: 3px;
-	@radius-inner: ~'calc(@{am-modal-radius} - 1px)';
+	@radius-inner: calc(@am-modal-radius - 1px);
 	@padding-bottom: 2rem;
 	display: block;
 	position: fixed;
@@ -148,7 +148,7 @@
 			z-index: 100;
 			bottom: -@padding-bottom;
 			margin-block: @am-modal-radius;
-			padding-block: ~'calc(@{am-modal-padding} - @{am-modal-radius})';
+			padding-block: calc(@am-modal-padding - @am-modal-radius);
 			pointer-events: all;
 			.blur;
 		}
@@ -261,7 +261,7 @@
 				content: '';
 				position: absolute;
 				display: block;
-				width: ~'calc(100% + (2 * @{jumpbar-padding}))';
+				width: calc(100% + (2 * @jumpbar-padding));
 				margin-left: -@jumpbar-padding;
 				margin-right: -@jumpbar-padding;
 				left: 0;

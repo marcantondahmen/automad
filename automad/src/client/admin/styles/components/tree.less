@@ -37,7 +37,7 @@
 	flex-direction: column;
 	flex-grow: 1;
 	max-width: 100%;
-	--st-label-height: ~'calc(@{am-nav-item-line-height} + @{am-border-width})';
+	--st-label-height: calc(@am-nav-item-line-height + @am-border-width);
 	--st-subnodes-padding-left: 1.1rem;
 	--st-collapse-icon-height: var(--st-label-height);
 	--st-collapse-icon-width: 1.2rem;
@@ -63,7 +63,7 @@
 			content: '';
 			position: absolute;
 			z-index: 5;
-			inset: -1px ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
+			inset: -1px calc(var(--am-body-padding-x) - @am-nav-padding-x);
 			border-top: 2px solid transparent;
 			border-bottom: 2px solid transparent;
 			transition: border-color 0.2s 0.2s;

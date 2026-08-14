@@ -146,8 +146,8 @@
 		font-family: @am-code-font-family;
 		line-height: 1.65;
 		background-color: var(--am-clr-background-faded);
-		border-top-left-radius: ~'calc((@{toggleSize} / 2) - @{border})';
-		border-top-right-radius: ~'calc((@{toggleSize} / 2) - @{border})';
+		border-top-left-radius: calc((@toggleSize / 2) - @border);
+		border-top-right-radius: calc((@toggleSize / 2) - @border);
 		border: none;
 		outline: none !important;
 		appearance: none;
@@ -172,7 +172,7 @@
 		justify-content: space-between;
 		align-items: end;
 		gap: 0.4rem;
-		height: ~'calc(@{toggleSize} - @{border} - @{border})';
+		height: calc(@toggleSize - @border - @border);
 		border-top: @am-border;
 	}
 
@@ -194,8 +194,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: ~'calc(@{toggleSize} - @{border} - @{border})';
-		height: ~'calc(@{toggleSize} - @{border} - @{border})';
+		width: calc(@toggleSize - @border - @border);
+		height: calc(@toggleSize - @border - @border);
 		font-size: @iconFontSize;
 		border-left: @am-border;
 		transition: color 0.2s;

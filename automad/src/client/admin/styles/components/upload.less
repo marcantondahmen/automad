@@ -93,7 +93,10 @@
 
 	& .dz-preview {
 		display: grid;
-		grid-template-columns: @upload-thumbnail-size ~'calc(100% - @{upload-thumbnail-size} - @{upload-preview-padding})';
+		/* prettier-ignore */
+		grid-template-columns: 
+			@upload-thumbnail-size 
+			calc(100% - @upload-thumbnail-size - @upload-preview-padding);
 		grid-template-rows: repeat(3, (@upload-thumbnail-size / 3));
 		column-gap: @upload-preview-padding;
 		box-sizing: content-box;

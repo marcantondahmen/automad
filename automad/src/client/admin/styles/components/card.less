@@ -33,7 +33,7 @@
  */
 
 .am-c-card {
-	@radius-inner: ~'calc(@{am-card-radius} - 1px)';
+	@radius-inner: calc(@am-card-radius - 1px);
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -192,8 +192,8 @@
 		border-top: @am-border;
 
 		&:last-child {
-			border-bottom-left-radius: ~'calc(@{am-card-radius} - 1px)';
-			border-bottom-right-radius: ~'calc(@{am-card-radius} - 1px)';
+			border-bottom-left-radius: calc(@am-card-radius - 1px);
+			border-bottom-right-radius: calc(@am-card-radius - 1px);
 		}
 
 		& .bi {
@@ -244,8 +244,8 @@
 	& > &__buttons {
 		display: flex;
 		overflow: hidden;
-		border-bottom-left-radius: ~'calc(@{am-card-radius} - 1px)';
-		border-bottom-right-radius: ~'calc(@{am-card-radius} - 1px)';
+		border-bottom-left-radius: calc(@am-card-radius - 1px);
+		border-bottom-right-radius: calc(@am-card-radius - 1px);
 
 		& > * {
 			flex: 1;

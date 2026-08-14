@@ -219,13 +219,13 @@
 			position: relative;
 			flex-basis: 100%;
 			flex-grow: 0;
-			min-width: ~'min(100%, var(--minBlockWidth, 8rem))';
+			min-width: min(100%, var(--minBlockWidth, 8rem));
 
 			// Make gaps work when flex elements that have a particular fractional width
 			// are followed by elements with a default width or vice versa.
 			&:not([am-width]) > * {
-				margin-top: ~'calc(var(--space) * -1)';
-				margin-bottom: ~'calc(var(--space) * -1)';
+				margin-top: calc(var(--space) * -1);
+				margin-bottom: calc(var(--space) * -1);
 			}
 
 			&:not([am-width]):first-child > *,
@@ -332,7 +332,7 @@
 				> .am-style--stretched:first-child:not(:has(.@{layout-section}))
 				.ce-block__content
 				.cdx-block {
-				--radius: ~'calc(var(--borderRadius, 0) - var(--borderWidth, 0))';
+				--radius: calc(var(--borderRadius, 0) - var(--borderWidth, 0));
 				border-top-left-radius: var(--radius);
 				border-top-right-radius: var(--radius);
 				overflow: hidden;
@@ -345,11 +345,12 @@
 					display: flex;
 					flex-basis: auto;
 					max-width: none !important;
-					width: ~'calc(100% + 200rem)' !important;
+					width: calc(100% + 200rem) !important;
 					margin-inline: -@am-bl-editor-card-padding !important;
 
 					&:first-child {
-						margin-top: ~'calc((@{am-bl-editor-card-padding} + @{am-bl-editor-block-padding-y}) * -1)' !important;
+						/* prettier-ignore */
+						margin-top: calc((@am-bl-editor-card-padding + @am-bl-editor-block-padding-y) * -1) !important;
 					}
 
 					& > * > * > [contenteditable] {
@@ -382,7 +383,8 @@
 
 			& > .codex-editor__redactor {
 				padding-top: var(--paddingTop);
-				padding-bottom: ~'max(var(--paddingBottom, 50px), 50px)' !important;
+				/* prettier-ignore */
+				padding-bottom: max(var(--paddingBottom, 50px), 50px) !important;
 				border-radius: var(--borderRadius, 0);
 				border: var(--borderWidth, 0) var(--borderStyle, none)
 					var(--borderColor, currentColor);
