@@ -32,22 +32,8 @@
  * See LICENSE.md for license information.
  */
 
-am-link {
-	cursor: pointer;
-}
-
-.am-e-link {
-	color: inherit;
-	text-decoration: underline;
-	text-underline-offset: 3px;
-	opacity: 1;
-	cursor: pointer;
-	transition:
-		opacity 0.2s,
-		text-underline-offset 0.2s;
-
-	&:hover {
-		opacity: 0.7;
-		text-underline-offset: 5px;
+.am-e-rich-text {
+	& a {
+		&:extend(.am-e-link all);
 	}
 }

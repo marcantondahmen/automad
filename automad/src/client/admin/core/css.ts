@@ -370,6 +370,8 @@ export const enum CSS {
 	platformSelectIcon = 'am-f-platform-select__icon',
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
 
+	richText = 'am-e-rich-text',
+
 	responsiveImageSettings = 'am-c-responsive-image-settings',
 	responsiveImageSettingsAreaBreakpointsHelp = 'am-c-responsive-image-settings__area--breakpoints-help',
 	responsiveImageSettingsAreaBreakpoints = 'am-c-responsive-image-settings__area--breakpoints',

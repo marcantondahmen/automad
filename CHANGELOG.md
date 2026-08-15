@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.52](https://github.com/marcantondahmen/automad/commit/f3de526c09ab91934f6ff20ac0dc3ec308aab0d9)
+## [v2.0.0-beta.53](https://github.com/marcantondahmen/automad/commit/3ea162f81492a63ef596ca1910645bc02d4229dc)
 
-Sat, 15 Aug 2026 17:31:40 +0200
+Sat, 15 Aug 2026 23:06:10 +0200
+
+### Bugfixes
+
+- fix link styles in dashboard ([3ea162f81](https://github.com/marcantondahmen/automad/commit/3ea162f81492a63ef596ca1910645bc02d4229dc))
+
+## [v2.0.0-beta.52](https://github.com/marcantondahmen/automad/commit/f6f910f11ab7d5f53185c8abddaa7004c43f7f28)
+
+Sat, 15 Aug 2026 17:36:14 +0200
 
 ### New Features
 

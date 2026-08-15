@@ -330,7 +330,7 @@ class AiProviderSetupComponent extends BaseComponent {
 		);
 
 		create('am-form-error', [], {}, body);
-		create('span', [], {}, body, provider.apiKeyHelp);
+		create('span', [CSS.richText], {}, body, provider.apiKeyHelp);
 		body.appendChild(apiKeyInput);
 		button.disabled = true;
 
