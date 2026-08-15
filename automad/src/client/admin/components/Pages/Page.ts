@@ -41,7 +41,7 @@ import {
 	getTagFromRoute,
 	html,
 	PageController,
-	Route,
+	routes,
 } from '@/admin/core';
 import { HistoryModalFormComponent } from '@/admin/components/Forms/HistoryModalForm';
 import { Section } from '@/common';
@@ -293,7 +293,7 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 							${Attr.text}="i18nEnabled"
 						></am-alert>
 						<am-link
-							${Attr.target}="${Route.system}?section=${Section.i18n}"
+							${Attr.target}="${routes.system}?section=${Section.i18n}"
 							class="${CSS.button}"
 						>
 							${App.text('systemI18n')}
@@ -382,4 +382,4 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.page), PageComponent);
+customElements.define(getTagFromRoute(routes.page), PageComponent);

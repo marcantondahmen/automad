@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, html, Route } from '@/admin/core';
+import { App, Attr, CSS, html, routes } from '@/admin/core';
 import { Section } from '@/common';
 import { BaseUpdateIndicatorComponent } from '@/admin/components/Indicators/BaseUpdateIndicator';
 
@@ -55,7 +55,7 @@ class NavbarUpdateIndicatorComponent extends BaseUpdateIndicatorComponent {
 			this.innerHTML = html`
 				<am-link
 					class="${CSS.navbarItem}"
-					${Attr.target}="${Route.system}?section=${Section.update}"
+					${Attr.target}="${routes.system}?section=${Section.update}"
 					${Attr.tooltip}="${App.text('systemUpdateTooltip')}"
 				>
 					<i class="bi bi-download"></i>

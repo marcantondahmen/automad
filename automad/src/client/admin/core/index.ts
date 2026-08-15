@@ -35,6 +35,7 @@
 export * from '@/common';
 
 export * from './app';
+export * from './aspectRatios';
 export * from './bindings';
 export * from './css';
 export * from './date';

@@ -310,6 +310,8 @@ class Config {
 			(strpos($serverSoftware, 'apache') !== false && $htaccess) ||
 			(strpos($serverSoftware, 'litespeed') !== false && $htaccess) ||
 			strpos($serverSoftware, 'nginx') !== false ||
+			strpos($serverSoftware, 'caddy') !== false ||
+			strpos($serverSoftware, 'frankenphp') !== false ||
 			php_sapi_name() === 'cli-server'
 		);
 

@@ -50,6 +50,7 @@ import {
 } from '@/admin/core';
 import { CollapsibleSectionBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+import { saveEditorBlocks } from '../utils';
 
 export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockData> {
 	/**
@@ -221,7 +222,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 							return;
 						}
 
-						const { blocks } = await api.saver.save();
+						const blocks = await saveEditorBlocks(api);
 
 						this.data.content = { blocks };
 						this.blockAPI.dispatchChange();
@@ -306,7 +307,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 	 *
 	 * @return the saved data
 	 */
-	save(): CollapsibleSectionBlockData {
+	getData(): CollapsibleSectionBlockData {
 		return {
 			...this.data,
 			title: this.title.innerHTML,

@@ -39,7 +39,7 @@ import {
 	html,
 	InputPattern,
 	KeyValueMap,
-	Route,
+	routes,
 } from '@/admin/core';
 import { FormComponent } from './Form';
 
@@ -159,7 +159,7 @@ export class CreateUserFormComponent extends FormComponent {
 				<div class="${CSS.cardForm}">
 					<div class="${CSS.cardFormButtons}">
 						<a
-							href="./${Route.login}"
+							href="./${routes.login}"
 							class="${CSS.button} ${CSS.buttonPrimary}"
 						>
 							I have uploaded the file, let me sign in!

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 PID_FILE=".php-server.pid"
 LOG_FILE=".php-server.log"
 URL="localhost:8000"

@@ -324,12 +324,14 @@ class UserCollection {
 	 *
 	 * @param string $username
 	 * @param string $email
+	 * @param string $sitename
+	 * @param string $origin
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function sendInvitation(string $username, string $email, Messenger $Messenger): bool {
+	public function sendInvitation(string $username, string $email, string $sitename, string $origin, Messenger $Messenger): bool {
 		$subject = Text::get('emailInviteSubject');
-		$message = InvitationEmail::render($username);
+		$message = InvitationEmail::render($username, $sitename, $origin);
 
 		return Mail::send($email, $subject, $message, null, $Messenger);
 	}

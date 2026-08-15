@@ -38,12 +38,14 @@ namespace Automad\Controllers\API;
 use Automad\Admin\Email\ConfigurationTestEmail;
 use Automad\API\Response;
 use Automad\Auth\Session;
+use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;
+use Automad\System\Fields;
 use Automad\System\Mail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -118,13 +120,21 @@ class MailConfigController {
 		$UserCollection = new UserCollection();
 		$User = $UserCollection->getUser(Session::getUsername());
 		$to = $User->email ?? '';
+		$Automad = Automad::fromCache();
+		$sitename = $Automad->Shared->get(Fields::SITENAME);
 
 		if (!$to) {
 			return $Response->setError(Text::get('systemMailSendTestNoEmail'));
 		}
 
 		$Messenger = new Messenger();
-		$success = Mail::send($to, Text::get('emailTestSuccessSubject'), ConfigurationTestEmail::render(), null, $Messenger);
+		$success = Mail::send(
+			$to,
+			Text::get('emailTestSuccessSubject'),
+			ConfigurationTestEmail::render($sitename),
+			null,
+			$Messenger
+		);
 
 		if ($success) {
 			return $Response->setSuccess(Text::get('systemMailSendTestSuccess') . ' ' . $to);

@@ -41,7 +41,8 @@
 
 	am-sidebar & {
 		justify-content: start;
-		padding-left: ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x} - 0.3rem)';
+		/* prettier-ignore */
+		padding-left: calc(var(--am-body-padding-x) - @am-nav-padding-x - 0.3rem);
 		padding-top: 1rem;
 	}
 
@@ -51,7 +52,7 @@
 		align-items: center;
 		width: 2.5rem;
 		height: 2.5rem;
-		color: hsl(var(--am-clr-text));
+		color: var(--am-clr-text);
 		cursor: pointer;
 		border-radius: 0.25rem;
 		transition:
@@ -59,13 +60,13 @@
 			background-color 0.2s;
 
 		&:hover {
-			color: hsl(var(--am-clr-text));
-			background-color: hsl(var(--am-clr-background-faded));
+			color: var(--am-clr-text);
+			background-color: var(--am-clr-background-faded);
 		}
 
 		&--active {
-			color: hsl(var(--am-clr-text-selected));
-			background-color: hsl(var(--am-clr-background-selected));
+			color: var(--am-clr-text-selected);
+			background-color: var(--am-clr-background-selected);
 		}
 	}
 

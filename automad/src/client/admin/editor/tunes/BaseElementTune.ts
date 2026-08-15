@@ -34,6 +34,7 @@
 
 import { API, BlockAPI, BlockTune, ToolConfig } from '@/vendor/editorjs';
 import { BlockTuneConstructorOptions } from '@/admin/types';
+import { filterEmptyData } from '../utils';
 
 /**
  * The abstract base tune class that returns an element on render.
@@ -52,7 +53,7 @@ export abstract class BaseElementTune<DataType> implements BlockTune {
 	/**
 	 * The tune data.
 	 */
-	protected data: DataType;
+	protected data: Partial<DataType>;
 
 	/**
 	 * The tool configuration.
@@ -113,8 +114,8 @@ export abstract class BaseElementTune<DataType> implements BlockTune {
 	 *
 	 * @return the saved data
 	 */
-	save(): DataType {
-		return this.data;
+	save(): Partial<DataType> {
+		return filterEmptyData(this.data);
 	}
 
 	/**

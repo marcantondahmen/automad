@@ -1,0 +1,15 @@
+name: automad-dev-litespeed
+
+services:
+  app:
+    image: automad-dev-litespeed
+    build:
+      context: .
+      args:
+        UID: ${USER_ID}
+        GID: ${GROUP_ID}
+    ports:
+      - 8888:8088
+    volumes:
+      - ../../:/app
+      - ../php.ini:/usr/local/lsws/lsphp84/etc/php/8.4/litespeed/php.ini:ro

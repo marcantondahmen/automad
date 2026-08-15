@@ -248,8 +248,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -269,12 +268,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -282,19 +277,12 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -306,12 +294,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -322,17 +306,12 @@
                                         "autoplay": true,
                                         "loop": true,
                                         "muted": true,
-                                        "controls": true,
-                                        "caption": ""
+                                        "controls": true
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -344,12 +323,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -358,12 +333,8 @@
                                     "data": [],
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -375,12 +346,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -391,8 +358,6 @@
                                         "primaryLink": "/quick-start-guide/showing-images",
                                         "primaryStyle": [],
                                         "primaryOpenInNewTab": false,
-                                        "secondaryText": "",
-                                        "secondaryLink": "",
                                         "secondaryStyle": {
                                             "borderWidth": "2px",
                                             "borderRadius": "0.5rem",
@@ -405,12 +370,9 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
+                                            "stretched": false
                                         },
-                                        "spacing": null,
-                                        "className": "buttons",
-                                        "id": ""
+                                        "className": "buttons"
                                     }
                                 }
                             ]
@@ -420,8 +382,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -517,8 +478,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -657,8 +617,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -678,12 +637,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -696,12 +651,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -713,12 +664,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -729,12 +676,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 }
                             ]
@@ -744,8 +687,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -769,12 +711,11 @@
                 }
             ]
         },
-        "customCSS": "pre[class*=language-] {\n  background: var(--std-bg-2) !important;\n}",
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:26:29+00:00",
-        ":lastModified": "2025-12-25T16:08:06+00:00",
-        ":automadVersion": "2.0.0-beta.9",
-        ":lastPublished": "2026-01-11T18:16:21+00:00"
+        ":lastModified": "2026-08-15T15:25:24+00:00",
+        ":automadVersion": "2.0.0-beta.51",
+        ":lastPublished": "2026-08-15T15:25:26+00:00"
     }
 }

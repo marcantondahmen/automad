@@ -38,7 +38,7 @@ import {
 	CSS,
 	getTagFromRoute,
 	html,
-	Route,
+	routes,
 	SessionController,
 } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
@@ -97,7 +97,10 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 				</div>
 			</am-form>
 			<p>
-				<am-link ${Attr.target}="${Route.token}" class="${CSS.link}">
+				<am-link
+					${Attr.target}="${routes.requestVerificationCode}"
+					class="${CSS.link}"
+				>
 					${App.text('troubleSigningIn')}
 				</am-link>
 			</p>
@@ -105,4 +108,4 @@ export class LoginComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.login), LoginComponent);
+customElements.define(getTagFromRoute(routes.login), LoginComponent);

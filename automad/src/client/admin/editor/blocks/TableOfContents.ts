@@ -95,7 +95,7 @@ export class TableOfContentsBlock extends BaseBlock<TableOfContentsBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): TableOfContentsBlockData {
+	getData(): TableOfContentsBlockData {
 		return this.data;
 	}
 

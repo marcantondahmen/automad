@@ -44,9 +44,9 @@
 
 	&__label {
 		font-size: @am-small-font-size;
-		padding: 0.5rem ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
+		padding: 0.5rem calc(var(--am-body-padding-x) - @am-nav-padding-x);
 		padding-bottom: 0.7rem;
-		color: hsl(var(--am-clr-text-sidebar));
+		color: var(--am-clr-text-sidebar);
 		user-select: none;
 	}
 
@@ -67,19 +67,19 @@
 		> &__link:after {
 		content: '●';
 		font-size: 0.8rem;
-		color: hsl(var(--am-clr-text-muted));
+		color: var(--am-clr-text-muted);
 	}
 
 	&__item[am-publication-state*='draft'] > &__link:after {
 		content: '●';
 		font-size: 0.8rem;
-		color: hsl(var(--am-clr-text)) !important;
+		color: var(--am-clr-text) !important;
 	}
 
 	&__item--active[am-publication-state*='draft'] > &__link:after {
 		content: '●';
 		font-size: 0.8rem;
-		color: hsl(var(--am-clr-text-primary)) !important;
+		color: var(--am-clr-text-primary) !important;
 	}
 
 	&__link {
@@ -91,12 +91,13 @@
 		gap: @am-flex-gap;
 		margin-bottom: @am-border-width;
 		padding: 0 1rem;
-		padding-left: ~'calc(var(--am-body-padding-x) - @{am-nav-padding-x})';
+		padding-left: calc(var(--am-body-padding-x) - @am-nav-padding-x);
 		color: @am-nav-item-clr;
 		text-decoration: none;
 		border-radius: @am-nav-item-radius;
 		border: @am-border-width dashed transparent;
-		line-height: ~'calc(@{am-nav-item-line-height} - @{am-border-width} - @{am-border-width})';
+		/* prettier-ignore */
+		line-height: calc(@am-nav-item-line-height - @am-border-width - @am-border-width);
 		height: @am-nav-item-line-height;
 		cursor: pointer;
 		outline: @am-outline;

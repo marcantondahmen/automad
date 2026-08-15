@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { BlockAPI, OutputBlockData } from '@/vendor/editorjs';
+import { API, BlockAPI, OutputBlockData } from '@/vendor/editorjs';
 import { BaseEditor, EditorOutputData, KeyValueMap } from '@/admin/types';
 import { App, getLogger } from '../core';
 import { nanoid } from 'nanoid';
@@ -99,13 +99,40 @@ export const outputIsEqual = (a: KeyValueMap, b: KeyValueMap): boolean => {
 export const filterEmptyData = <T>(data: T): Partial<T> => {
 	const filtered: Partial<T> = {};
 
+	if (!data) {
+		return filtered;
+	}
+
 	for (const [key, value] of Object.entries(data)) {
-		if (!!value || value === false || value === '0' || value === 0) {
+		if (
+			(!!value || value === false || value === '0' || value === 0) &&
+			JSON.stringify(value) !== '{}'
+		) {
 			filtered[key as keyof T] = value;
 		}
 	}
 
 	return filtered;
+};
+
+/**
+ * Get blocks data from editor.
+ *
+ * @param api
+ * @return the blocks
+ */
+export const saveEditorBlocks = async (
+	api: API
+): Promise<OutputBlockData[]> => {
+	const { blocks } = (await api.saver.save()) as EditorOutputData;
+
+	return (
+		blocks?.map((block) => {
+			block.tunes = filterEmptyData(block.tunes ?? {});
+
+			return block;
+		}) || []
+	);
 };
 
 /**

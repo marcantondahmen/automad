@@ -48,10 +48,10 @@
 		margin-bottom: 1.25rem;
 		text-align: center;
 		line-height: 1.35;
-		color: hsl(var(--am-clr-text-muted));
-		background-color: hsl(var(--am-clr-background-faded));
+		color: var(--am-clr-text-muted);
+		background-color: var(--am-clr-background-faded);
 		border-radius: @am-card-radius;
-		border: @am-button-border-width dashed hsl(var(--am-clr-border));
+		border: @am-button-border-width dashed var(--am-clr-border);
 		cursor: pointer;
 		transition:
 			color 0.2s,
@@ -60,13 +60,13 @@
 			outline 0.2s;
 
 		&:hover {
-			color: hsl(var(--am-clr-text-paragraph));
+			color: var(--am-clr-text-paragraph);
 		}
 
 		&.dz-drag-hover {
-			color: hsl(var(--am-clr-text-active));
-			background-color: hsl(var(--am-clr-outline-active));
-			border: 1px solid hsl(var(--am-clr-border-active));
+			color: var(--am-clr-text-active);
+			background-color: var(--am-clr-outline-active);
+			border: 1px solid var(--am-clr-border-active);
 			outline: @am-outline-active;
 		}
 
@@ -93,7 +93,10 @@
 
 	& .dz-preview {
 		display: grid;
-		grid-template-columns: @upload-thumbnail-size ~'calc(100% - @{upload-thumbnail-size} - @{upload-preview-padding})';
+		/* prettier-ignore */
+		grid-template-columns: 
+			@upload-thumbnail-size 
+			calc(100% - @upload-thumbnail-size - @upload-preview-padding);
 		grid-template-rows: repeat(3, (@upload-thumbnail-size / 3));
 		column-gap: @upload-preview-padding;
 		box-sizing: content-box;
@@ -112,7 +115,7 @@
 			height: @upload-thumbnail-size;
 			border-radius: 0.3rem;
 			overflow: hidden;
-			background-color: hsl(var(--am-clr-background-faded));
+			background-color: var(--am-clr-background-faded);
 			border: @am-border;
 
 			& > img {
@@ -128,7 +131,7 @@
 
 			display: flex;
 			flex-direction: column-reverse;
-			color: hsl(var(--am-clr-text-paragraph));
+			color: var(--am-clr-text-paragraph);
 
 			& > .dz-filename {
 				white-space: nowrap;
@@ -137,7 +140,7 @@
 			}
 
 			& > .dz-size {
-				color: hsl(var(--am-clr-text-muted));
+				color: var(--am-clr-text-muted);
 			}
 		}
 
@@ -151,12 +154,12 @@
 			inset: 42% 10%;
 			overflow: hidden;
 			border-radius: 2rem;
-			border: 2px solid hsl(var(--am-clr-text-primary));
-			background-color: hsl(var(--am-clr-text-primary));
+			border: 2px solid var(--am-clr-text-primary);
+			background-color: var(--am-clr-text-primary);
 			opacity: 1;
 
 			& .dz-upload {
-				background-color: hsl(var(--am-clr-background-primary));
+				background-color: var(--am-clr-background-primary);
 				display: block;
 				position: relative;
 				height: 100%;
@@ -170,11 +173,11 @@
 			grid-row: 3 / 4;
 			align-self: end;
 			text-decoration: none;
-			color: hsl(var(--am-clr-text-link));
+			color: var(--am-clr-text-link);
 			transition: color 0.2s;
 
 			&:hover {
-				color: hsl(var(--am-clr-text-link-hover));
+				color: var(--am-clr-text-link-hover);
 			}
 		}
 

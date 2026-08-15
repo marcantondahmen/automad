@@ -284,7 +284,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): GalleryBlockData {
+	getData(): GalleryBlockData {
 		return this.data;
 	}
 }

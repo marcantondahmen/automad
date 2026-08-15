@@ -278,7 +278,7 @@ export class MailBlock extends BaseBlock<MailBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): MailBlockData {
+	getData(): MailBlockData {
 		return collectFieldData(this.wrapper) as MailBlockData;
 	}
 }

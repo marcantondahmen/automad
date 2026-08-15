@@ -48,7 +48,7 @@ import { BaseComponent } from '@/admin/components/Base';
  *
  * @extends BaseComponent
  */
-class DropdownComponent extends BaseComponent {
+export class DropdownComponent extends BaseComponent {
 	/**
 	 * The tag name.
 	 *
@@ -64,16 +64,21 @@ class DropdownComponent extends BaseComponent {
 		this.classList.add(CSS.dropdown);
 		this.classList.toggle(CSS.dropdownRight, this.hasAttribute(Attr.right));
 
-		this.listen(window, 'click', (event: MouseEvent) => {
+		this.listen(this, 'click', (event: MouseEvent) => {
+			event.stopPropagation();
+			event.preventDefault();
+
+			this.classList.toggle(CSS.dropdownOpen);
+		});
+
+		this.listen(window, 'mousedown', (event: MouseEvent) => {
 			if (
-				event.target === this ||
-				queryParents(
+				event.target !== this &&
+				!queryParents(
 					DropdownComponent.TAG_NAME,
 					event.target as HTMLElement
 				).includes(this)
 			) {
-				this.classList.toggle(CSS.dropdownOpen);
-			} else {
 				this.classList.remove(CSS.dropdownOpen);
 			}
 		});

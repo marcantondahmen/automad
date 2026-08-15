@@ -37,14 +37,16 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Auth\LoginRateLimiter;
-use Automad\Auth\PasswordResetToken;
+use Automad\Auth\PasswordResetCode;
 use Automad\Auth\Session;
 use Automad\Auth\TOTP;
 use Automad\Auth\User;
+use Automad\Core\Automad;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\UserCollection;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -120,14 +122,16 @@ class UserController {
 	}
 
 	/**
-	 * Request a password reset token.
+	 * Request a password reset code.
 	 *
 	 * @return Response the Response object
 	 */
-	public static function requestPasswordResetToken(): Response {
+	public static function requestPasswordResetCode(): Response {
 		$Response = new Response();
 		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
+		$Automad = Automad::fromCache();
+		$sitename = $Automad->Shared->get(Fields::SITENAME);
 
 		// Only one field will be defined, so they can just be concatenated here.
 		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
@@ -135,8 +139,8 @@ class UserController {
 		$User = $UserCollection->getUser($nameOrEmail);
 
 		// Also return success when user doesn't exist.
-		if (!$User || $User->sendPasswordResetToken(Request::post('type'), $Messenger)) {
-			return $Response->setData(array('success' => true));
+		if (!$User || $User->sendPasswordResetCode(Request::post('type'), $sitename, $Messenger)) {
+			return $Response->setData(array('success' => true, 'username' => $User?->name ?? ''));
 		}
 
 		return $Response->setError($Messenger->getError());
@@ -151,7 +155,7 @@ class UserController {
 		$Response = new Response();
 		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
-		$token = trim(Request::post('token'));
+		$code = trim(Request::post('code'));
 		$newPassword1 = Request::post('password1');
 		$newPassword2 = Request::post('password2');
 		$User = $UserCollection->getUser(Request::post('username'));
@@ -160,23 +164,22 @@ class UserController {
 			return $Response->setError(Text::get('userNotFoundError'));
 		}
 
-		if ($token && $newPassword1 && $newPassword2) {
-			if (!self::verifyPasswordRequirements($newPassword1)) {
-				return $Response->setError(self::generatePasswordRequirementsError());
-			}
+		if (empty($code)) {
+			return $Response->setError(Text::get('passwordResetCodeInvalidError'));
+		}
 
-			if ($User->verifyPasswordResetToken($token)) {
-				if ($User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)) {
-					LoginRateLimiter::reset($User->name);
-					PasswordResetToken::reset($User->name);
+		if (empty($newPassword1) || empty($newPassword2) || !self::verifyPasswordRequirements($newPassword1)) {
+			return $Response->setError(self::generatePasswordRequirementsError());
+		}
 
-					return $Response->setData(array('success' => true));
-				}
+		if (
+			$User->verifyPasswordResetCode($code, $Messenger)
+			&& $User->resetPassword($newPassword1, $newPassword2, $UserCollection, $Messenger)
+		) {
+			LoginRateLimiter::reset($User->name);
+			PasswordResetCode::reset($User->name);
 
-				return $Response->setError($Messenger->getError());
-			}
-
-			return $Response->setData(array('invalid' => true));
+			return $Response->setData(array('success' => true));
 		}
 
 		return $Response->setError($Messenger->getError());

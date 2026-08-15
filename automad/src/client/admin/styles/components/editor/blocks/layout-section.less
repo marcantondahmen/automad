@@ -39,7 +39,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	outline: 1px dashed hsl(var(--am-clr-border));
+	outline: 1px dashed var(--am-clr-border);
 	border-radius: @am-form-radius;
 
 	&__toolbar {
@@ -57,8 +57,8 @@
 			overlay 0.2s allow-discrete,
 			opacity 0.2s;
 		pointer-events: none;
-		color: hsl(var(--am-clr-text));
-		background-color: hsl(var(--am-clr-background));
+		color: var(--am-clr-text);
+		background-color: var(--am-clr-background);
 		border-radius: @am-bl-editor-toolbar-radius;
 		border: @am-modal-border;
 		box-shadow: @am-shadow;
@@ -98,7 +98,7 @@
 		align-items: center;
 		padding: 0 8px;
 		cursor: pointer;
-		color: hsl(var(--am-clr-text-muted));
+		color: var(--am-clr-text-muted);
 		border-radius: 3px;
 		transition:
 			color 0.2s,
@@ -114,16 +114,68 @@
 		}
 
 		&:hover {
-			background-color: hsl(var(--am-clr-background-highlight));
+			background-color: var(--am-clr-background-highlight);
 		}
 
 		&:active {
-			background-color: hsl(var(--am-clr-background-faded));
+			background-color: var(--am-clr-background-faded);
 		}
 
 		&--active {
-			color: hsl(var(--am-clr-text));
-			background-color: hsl(var(--am-clr-background-highlight));
+			color: var(--am-clr-text);
+			background-color: var(--am-clr-background-highlight);
+		}
+	}
+
+	&__styles {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		&-area--top-left,
+		&-area--top-right {
+			position: relative;
+			margin-bottom: 1rem;
+			padding-bottom: 2rem;
+
+			&:after {
+				content: '';
+				position: absolute;
+				display: flex;
+				inset: auto 0 0 0;
+				margin-inline: -@am-modal-padding;
+				border-bottom: @am-border;
+			}
+		}
+
+		@media (min-width: @am-breakpoint-small-max) {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: auto auto;
+			column-gap: 2rem;
+			row-gap: 0;
+
+			&-area {
+				&--top-left {
+					grid-column: 1;
+					grid-row: 1;
+				}
+
+				&--top-right {
+					grid-column: 2;
+					grid-row: 1;
+				}
+
+				&--bottom-left {
+					grid-column: 1;
+					grid-row: 2;
+				}
+
+				&--bottom-right {
+					grid-column: 2;
+					grid-row: 2;
+				}
+			}
 		}
 	}
 
@@ -138,8 +190,8 @@
 		left: -1px;
 		font-size: @am-small-font-size;
 		font-weight: 560;
-		color: hsl(var(--am-clr-text));
-		background: hsl(var(--am-clr-border));
+		color: var(--am-clr-text);
+		background: var(--am-clr-border);
 		border-top-left-radius: @am-form-radius;
 		cursor: pointer;
 	}
@@ -167,13 +219,13 @@
 			position: relative;
 			flex-basis: 100%;
 			flex-grow: 0;
-			min-width: ~'min(100%, var(--minBlockWidth, 8rem))';
+			min-width: min(100%, var(--minBlockWidth, 8rem));
 
 			// Make gaps work when flex elements that have a particular fractional width
 			// are followed by elements with a default width or vice versa.
 			&:not([am-width]) > * {
-				margin-top: ~'calc(var(--space) * -1)';
-				margin-bottom: ~'calc(var(--space) * -1)';
+				margin-top: calc(var(--space) * -1);
+				margin-bottom: calc(var(--space) * -1);
 			}
 
 			&:not([am-width]):first-child > *,
@@ -280,7 +332,7 @@
 				> .am-style--stretched:first-child:not(:has(.@{layout-section}))
 				.ce-block__content
 				.cdx-block {
-				--radius: ~'calc(var(--borderRadius, 0) - var(--borderWidth, 0))';
+				--radius: calc(var(--borderRadius, 0) - var(--borderWidth, 0));
 				border-top-left-radius: var(--radius);
 				border-top-right-radius: var(--radius);
 				overflow: hidden;
@@ -293,11 +345,12 @@
 					display: flex;
 					flex-basis: auto;
 					max-width: none !important;
-					width: ~'calc(100% + 200rem)' !important;
+					width: calc(100% + 200rem) !important;
 					margin-inline: -@am-bl-editor-card-padding !important;
 
 					&:first-child {
-						margin-top: ~'calc((@{am-bl-editor-card-padding} + @{am-bl-editor-block-padding-y}) * -1)' !important;
+						/* prettier-ignore */
+						margin-top: calc((@am-bl-editor-card-padding + @am-bl-editor-block-padding-y) * -1) !important;
 					}
 
 					& > * > * > [contenteditable] {
@@ -318,17 +371,20 @@
 
 		.ce-block & > .codex-editor {
 			height: 100%;
+			aspect-ratio: var(--aspect-ratio, auto);
 			background-color: var(--backgroundColor, inherit);
 			background-image: var(--backgroundImage);
 			background-blend-mode: var(--backgroundBlendMode, normal);
 			background-size: cover;
-			background-position: center center;
+			background-position: var(--focalPointX, 50%) var(--focalPointY, 50%);
+			background-repeat: no-repeat;
 			border: none;
 			border-radius: var(--borderRadius, 0);
 
 			& > .codex-editor__redactor {
 				padding-top: var(--paddingTop);
-				padding-bottom: ~'max(var(--paddingBottom, 50px), 50px)' !important;
+				/* prettier-ignore */
+				padding-bottom: max(var(--paddingBottom, 50px), 50px) !important;
 				border-radius: var(--borderRadius, 0);
 				border: var(--borderWidth, 0) var(--borderStyle, none)
 					var(--borderColor, currentColor);

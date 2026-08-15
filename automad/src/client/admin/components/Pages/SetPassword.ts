@@ -38,7 +38,7 @@ import {
 	getTagFromRoute,
 	html,
 	isInvite,
-	Route,
+	routes,
 	UserController,
 } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
@@ -48,7 +48,7 @@ import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
  *
  * @extends BaseCenteredLayoutComponent
  */
-export class PasswordComponent extends BaseCenteredLayoutComponent {
+class SetPasswordComponent extends BaseCenteredLayoutComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
@@ -72,4 +72,7 @@ export class PasswordComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.password), PasswordComponent);
+customElements.define(
+	getTagFromRoute(routes.setPassword),
+	SetPasswordComponent
+);

@@ -41,7 +41,7 @@ import {
 	getComponentTargetContainer,
 	html,
 	query,
-	Route,
+	routes,
 	Section,
 } from '../core';
 import { ModalComponent } from './Modal/Modal';
@@ -89,7 +89,7 @@ class MissingEmailAlertComponent extends BaseComponent {
 						</am-modal-close>
 						<a
 							class="${CSS.button} ${CSS.buttonPrimary}"
-							href="${App.dashboardURL}/${Route.system}?section=${Section.users}"
+							href="${App.dashboardURL}/${routes.system}?section=${Section.users}"
 						>
 							${App.text('missingEmailAlertOpenSettings')}
 						</a>

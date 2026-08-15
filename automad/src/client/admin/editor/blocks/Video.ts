@@ -392,7 +392,7 @@ export class VideoBlock extends BaseBlock<VideoBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): VideoBlockData {
+	getData(): VideoBlockData {
 		this.data.caption = this.caption.innerHTML || '';
 
 		return this.data;

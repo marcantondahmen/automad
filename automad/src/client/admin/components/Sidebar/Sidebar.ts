@@ -84,7 +84,7 @@ export class SidebarComponent extends BaseComponent {
 	static toggle(state?: boolean): void {
 		const open = state ?? !SidebarComponent.open;
 
-		document.body.classList.toggle(CSS.lauoutDashboardSidebarOpen, open);
+		document.body.classList.toggle(CSS.layoutDashboardSidebarOpen, open);
 		document.body.classList.toggle(CSS.overflowHidden, open);
 
 		SidebarComponent.open = open;

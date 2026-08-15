@@ -41,7 +41,7 @@
 		position: relative;
 		height: auto;
 		overflow: hidden;
-		background-color: hsl(var(--am-clr-background-faded));
+		background-color: var(--am-clr-background-faded);
 		border-radius: @am-form-radius;
 		border: @am-form-border;
 		outline: @am-outline;
@@ -52,8 +52,8 @@
 		&__textarea {
 			position: absolute;
 			overflow: hidden;
-			color: hsl(var(--am-clr-background-faded));
-			caret-color: hsl(var(--am-clr-text));
+			color: var(--am-clr-background-faded);
+			caret-color: var(--am-clr-text);
 		}
 
 		&__pre,
@@ -92,17 +92,17 @@
 		}
 
 		& ::selection {
-			background-color: hsla(var(--am-clr-text), 0.1);
+			background-color: hsl(from var(--am-clr-text) h s l / 0.1);
 		}
 	}
 
 	&__placeholder.codeflask__pre {
 		position: absolute;
 		margin: 0;
-		padding: ~'calc(@{padding} + @{am-form-border-width})';
+		padding: calc(@padding + @am-form-border-width);
 		display: none;
 		inset: 0;
-		color: hsl(var(--am-clr-text-muted));
+		color: var(--am-clr-text-muted);
 		pointer-events: none;
 	}
 
@@ -116,7 +116,7 @@
 		}
 
 		&:has(:focus) .codeflask {
-			border-color: hsl(var(--am-clr-border-active));
+			border-color: var(--am-clr-border-active);
 		}
 	}
 }

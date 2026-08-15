@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
+use Automad\Engine\Document\Minify;
 use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -78,6 +79,7 @@ class LayoutSection extends AbstractBlock {
 		);
 
 		$classes = array();
+		$wrapperClasses = array();
 
 		/** @var array<non-empty-literal-string, string> */
 		$styles = array_intersect_key(
@@ -102,36 +104,80 @@ class LayoutSection extends AbstractBlock {
 		}
 
 		if (!empty($data['style'])) {
-			if (!empty($data['style']['backgroundImage'])) {
-				$styles['backgroundImage'] = "url('{$data['style']['backgroundImage']}')";
+			$style = $data['style'];
+
+			if (!empty($style['backgroundImage'])) {
+				$styles['backgroundImage'] = "url('{$style['backgroundImage']}')";
 			}
 
-			if (!empty($data['style']['overflowHidden'])) {
+			if (!empty($style['backgroundImageFocalPoint'])) {
+				$x = $style['backgroundImageFocalPoint']['x'] ?? '50';
+				$y = $style['backgroundImageFocalPoint']['y'] ?? '50';
+
+				$styles['backgroundPosition'] = "{$x}% {$y}%";
+			}
+
+			if (!empty($style['aspectRatio'])) {
+				$styles['aspectRatio'] = $style['aspectRatio'];
+			}
+
+			if (!empty($style['aspectRatioBreakpoints'])) {
+				$breakpoints = $style['aspectRatioBreakpoints'];
+
+				$uniqueName = "section-{$block['id']}";
+				$wrapperClasses[] = $uniqueName;
+
+				$css = <<<HTML
+					.{$uniqueName} {
+						container-type: inline-size;
+						container-name: {$uniqueName};
+					}
+
+					HTML;
+
+				krsort($breakpoints, SORT_NATURAL);
+
+				foreach ($breakpoints as $maxWidth => $breakpoint) {
+					$css .= <<<HTML
+						@container $uniqueName (max-width: {$maxWidth}px) {
+							.{$uniqueName} am-layout-section {
+								aspect-ratio: {$breakpoint['aspectRatio']} !important;
+							}	
+						}
+
+						HTML;
+				}
+
+				$css = Minify::css($css);
+				$html .= "<style>$css</style>";
+			}
+
+			if (!empty($style['overflowHidden'])) {
 				$styles['overflow'] = 'hidden';
 			}
 
-			if (!empty($data['style']['matchRowHeight'])) {
+			if (!empty($style['matchRowHeight'])) {
 				$styles['height'] = '100%';
 			}
 
-			if (!empty($data['style']['shadow'])) {
+			if (!empty($style['shadow'])) {
 				$styles['boxShadow'] = 'var(--am-layout-section-shadow)';
 			}
 
-			if (!empty($data['style']['color'])) {
-				$styles['--am-layout-section-color'] = $data['style']['color'];
+			if (!empty($style['color'])) {
+				$styles['--am-layout-section-color'] = $style['color'];
 			}
 
-			if (!empty($data['style']['borderColor'])) {
-				$styles['--am-layout-section-border-color'] = $data['style']['borderColor'];
+			if (!empty($style['borderColor'])) {
+				$styles['--am-layout-section-border-color'] = $style['borderColor'];
 			}
 
-			if (!empty($data['style']['card'])) {
+			if (!empty($style['card'])) {
 				$classes[] = 'am-card';
 			}
 		}
 
-		$attr = Attr::render($block['tunes']);
+		$attr = Attr::render($block['tunes'], $wrapperClasses);
 		$classes = Attr::renderClasses($classes);
 		$styles = Attr::renderStyles($styles);
 

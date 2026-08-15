@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, html, Route } from '@/admin/core';
+import { App, Attr, CSS, html, routes } from '@/admin/core';
 import { BaseBreadcrumbsComponent } from './BaseBreadcrumbs';
 
 /**
@@ -74,7 +74,7 @@ class BreadcrumbsRouteComponent extends BaseBreadcrumbsComponent {
 				<div class="${CSS.breadcrumbs}">
 					<am-link
 						class="${CSS.breadcrumbsItem}"
-						${Attr.target}="${Route.home}"
+						${Attr.target}="${routes.home}"
 					>
 						<span>${App.text('dashboardTitle')}</span>
 					</am-link>

@@ -40,8 +40,8 @@
 	height: 100%;
 	width: 100%;
 	max-width: 100%;
-	padding: 1rem
-		~'calc(var(--am-body-padding-x) - @{am-navbar-item-padding-x})';
+	/* prettier-ignore */
+	padding: 1rem calc(var(--am-body-padding-x) - @am-navbar-item-padding-x);
 
 	&__group {
 		display: flex;
@@ -60,7 +60,7 @@
 		font-size: @am-navbar-font-size;
 		font-weight: 520;
 		line-height: 1.8;
-		color: hsl(var(--am-clr-text));
+		color: var(--am-clr-text);
 		transition: color 0.2s;
 		user-select: none;
 		cursor: pointer;
@@ -73,7 +73,7 @@
 		}
 
 		&:hover {
-			color: hsl(var(--am-clr-text-hover));
+			color: var(--am-clr-text-hover);
 		}
 
 		& .bi {
@@ -100,7 +100,7 @@
 		font-size: 1rem;
 
 		&:not([disabled]) {
-			border-color: hsl(var(--am-clr-border-active));
+			border-color: var(--am-clr-border-active);
 		}
 	}
 }

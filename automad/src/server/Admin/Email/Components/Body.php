@@ -52,12 +52,12 @@ class Body {
 	 * Render the email body.
 	 *
 	 * @param string[] $components
+	 * @param string $sitename
 	 * @return string
 	 */
-	public static function render(array $components): string {
+	public static function render(array $components, string $sitename): string {
 		$Text = Text::getObject();
 		$cid = Mail::LOGO_CID;
-		$website = $_SERVER['SERVER_NAME'] ?? AM_BASE_URL;
 		$content = join('', $components);
 
 		return <<<HTML
@@ -139,19 +139,19 @@ class Body {
 												style="
 													width: 100%;
 													border: none;
-													border-top: 1px solid #2a2b2e;
+													border-top: 1px solid #202327;
 													margin: 0;
 												"
 											/>
 										</div>
 										<div
 											style="
-												color: #5a5b5e;
+												color: #7a8190;
 												font-weight: normal;
 												padding: 16px 24px 24px 24px;
 											"
 										>
-											Automad on $website
+											Automad &mdash; $sitename
 										</div>
 									</td>
 								</tr>

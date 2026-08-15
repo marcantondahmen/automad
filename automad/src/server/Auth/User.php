@@ -198,30 +198,31 @@ class User {
 	}
 
 	/**
-	 * Send password reset token and store it in session.
+	 * Send password reset code and store it in session.
 	 *
 	 * @param string $type
+	 * @param string $sitename
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function sendPasswordResetToken(string $type, Messenger $Messenger): bool {
+	public function sendPasswordResetCode(string $type, string $sitename, Messenger $Messenger): bool {
 		$email = $this->email;
 
 		if (!$email) {
 			return false;
 		}
 
-		$token = PasswordResetToken::generate();
+		$code = PasswordResetCode::generate();
 
-		new PasswordResetToken($this->name, $token);
+		new PasswordResetCode($this->name, $code);
 
 		$isInvitation = $type === 'invitation';
 
 		$subject = $isInvitation ? Text::get('emailAccountSetupSubject') : Text::get('emailAccountRecoverySubject');
 
 		$message = $isInvitation ?
-			AccountSetupEmail::render($this->name, $token) :
-			AccountRecoveryEmail::render($this->name, $token);
+			AccountSetupEmail::render($this->name, $code, $sitename) :
+			AccountRecoveryEmail::render($this->name, $code, $sitename);
 
 		return Mail::send($email, $subject, $message, null, $Messenger);
 	}
@@ -274,13 +275,14 @@ class User {
 	}
 
 	/**
-	 * Verify if the passed username/token combination matches a token hash in the session data array.
+	 * Verify if the passed username/code combination matches a code hash in the session data array.
 	 *
-	 * @param string $token
+	 * @param string $code
+	 * @param Messenger $Messenger
 	 * @return bool true if verified
 	 */
-	public function verifyPasswordResetToken(string $token): bool {
-		return PasswordResetToken::verify($this->name, $token);
+	public function verifyPasswordResetCode(string $code, Messenger $Messenger): bool {
+		return PasswordResetCode::verify($this->name, $code, $Messenger);
 	}
 
 	/**

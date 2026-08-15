@@ -33,7 +33,12 @@
  */
 
 import { API, BlockAPI, ToolConfig } from '@/vendor/editorjs';
-import { CodeLanguage, EditorOutputData } from '..';
+import {
+	CodeLanguage,
+	EditorOutputData,
+	AspectRatioBreakpoints,
+	FocalPoint,
+} from '..';
 import {
 	sectionBackgroundBlendModes,
 	sectionBorderStyles,
@@ -70,10 +75,10 @@ export interface ButtonsBlockData {
 	primaryLink: string;
 	primaryStyle: ButtonsBlockButtonStyle;
 	primaryOpenInNewTab: boolean;
-	secondaryText?: string;
-	secondaryLink?: string;
-	secondaryStyle?: ButtonsBlockButtonStyle;
-	secondaryOpenInNewTab?: boolean;
+	secondaryText: string;
+	secondaryLink: string;
+	secondaryStyle: ButtonsBlockButtonStyle;
+	secondaryOpenInNewTab: boolean;
 }
 
 export interface CalloutBlockData {
@@ -99,6 +104,10 @@ export interface CollapsibleSectionBlockData {
 	collapsed: boolean;
 }
 
+export interface ComponentBlockData {
+	id: string;
+}
+
 export interface FilelistBlockData {
 	file: string;
 	glob: string;
@@ -110,14 +119,6 @@ export interface HeaderBlockData {
 	text: string;
 }
 
-export interface ImageBlockData {
-	url: string;
-	caption: string;
-	alt: string;
-	link: string;
-	openInNewTab: boolean;
-}
-
 export type GalleryLayout = 'columns' | 'rows' | 'grid';
 
 export interface GalleryBlockData {
@@ -127,6 +128,38 @@ export interface GalleryBlockData {
 	rowHeightPx: number;
 	gapPx: number;
 	fillRectangle: boolean;
+}
+
+export interface ImageBlockData {
+	url: string;
+	caption: string;
+	alt: string;
+	link: string;
+	openInNewTab: boolean;
+	breakpoints: AspectRatioBreakpoints;
+	focalPoint: FocalPoint | null;
+}
+
+export interface ImageSlideshowBreakpoint {
+	slidesPerView: number;
+}
+
+export interface ImageSlideshowBreakpoints {
+	[minWidth: string]: ImageSlideshowBreakpoint;
+}
+
+export interface ImageSlideshowBlockData {
+	files: string[];
+	imageWidthPx: number;
+	imageHeightPx: number;
+	gapPx: number;
+	slidesPerView: number;
+	loop: boolean;
+	autoplay: boolean;
+	effect: (typeof sliderEffects)[number];
+	breakpoints: ImageSlideshowBreakpoints;
+	delay: number;
+	hideControls: boolean;
 }
 
 export interface MailBlockData {
@@ -196,54 +229,31 @@ export type SectionBackgroundBlendMode =
 export type SectionBorderStyle = (typeof sectionBorderStyles)[number];
 
 export interface SectionStyle {
+	aspectRatio?: string;
+	aspectRatioBreakpoints?: AspectRatioBreakpoints;
 	card?: boolean;
 	shadow?: boolean;
 	color?: string;
-	backgroundColor?: string;
 	backgroundBlendMode?: SectionBackgroundBlendMode | '';
+	backgroundColor?: string;
+	backgroundImage?: string;
+	backgroundImageFocalPoint?: FocalPoint | null;
 	borderColor?: string;
 	borderWidth?: string;
 	borderRadius?: string;
 	borderStyle?: SectionBorderStyle | '';
-	backgroundImage?: string;
 	paddingTop?: string;
 	paddingBottom?: string;
 	overflowHidden?: boolean;
 }
 
 export interface LayoutSectionBlockData {
-	content?: EditorOutputData;
-	style?: SectionStyle;
-	justify?: SectionJustifyContentOption;
-	align?: SectionAlignItemsOption;
-	gap?: string;
-	minBlockWidth?: string;
-}
-
-export interface ComponentBlockData {
-	id: string;
-}
-
-export interface ImageSlideshowBreakpoint {
-	slidesPerView: number;
-}
-
-export interface ImageSlideshowBreakpoints {
-	[minWidth: string]: ImageSlideshowBreakpoint;
-}
-
-export interface ImageSlideshowBlockData {
-	files: string[];
-	imageWidthPx: number;
-	imageHeightPx: number;
-	gapPx: number;
-	slidesPerView: number;
-	loop: boolean;
-	autoplay: boolean;
-	effect: (typeof sliderEffects)[number];
-	breakpoints: ImageSlideshowBreakpoints;
-	delay: number;
-	hideControls: boolean;
+	content: EditorOutputData;
+	style: SectionStyle;
+	justify: SectionJustifyContentOption;
+	align: SectionAlignItemsOption;
+	gap: string;
+	minBlockWidth: string;
 }
 
 export interface SnippetBlockData {

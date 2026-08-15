@@ -39,7 +39,7 @@ am-root:not([class]) {
 	justify-content: center;
 	align-items: center;
 	inset: 0;
-	background: hsl(var(--am-clr-background));
+	background: var(--am-clr-background);
 
 	&:before {
 		--size: 2.25rem;
@@ -47,7 +47,7 @@ am-root:not([class]) {
 		display: block;
 		width: var(--size);
 		height: var(--size);
-		color: hsl(var(--am-clr-text-muted));
+		color: var(--am-clr-text-muted);
 		border-radius: var(--size);
 		border: 3px solid;
 		border-left-color: transparent;
@@ -61,11 +61,11 @@ am-root:not([class]) {
 		display: flex;
 		position: absolute;
 		z-index: 9000;
-		inset: 0 ~'calc(100% - var(--progress, 0%))' auto 0;
+		inset: 0 calc(100% - var(--progress, 0%)) auto 0;
 		height: 2px;
 		pointer-events: none;
 		opacity: 0;
-		background-color: hsl(var(--am-clr-border-active));
+		background-color: var(--am-clr-border-active);
 		transition:
 			opacity 0.2s 0.3s,
 			inset 0.3s;

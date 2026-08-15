@@ -38,6 +38,7 @@ namespace Automad\Blocks;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
+use Automad\Engine\Document\Minify;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Search\Replacement;
 
@@ -61,7 +62,6 @@ class Image extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
-		$attr = Attr::render($block['tunes']);
 		$data = $block['data'];
 
 		if (empty($data['url'])) {
@@ -95,9 +95,58 @@ class Image extends AbstractBlock {
 			$img = "<a href=\"{$data['link']}\"{$target}>$img</a>";
 		}
 
+		$styles = '';
+		$classes = array();
+
+		if (
+			!empty($data['breakpoints'])
+			&& is_array($data['breakpoints'])
+		) {
+			$uniqueName = "image-{$block['id']}";
+			$classes[] = $uniqueName;
+			$styles = <<<HTML
+				.{$uniqueName} {
+					container-type: inline-size;
+					container-name: {$uniqueName};
+				}
+
+				HTML;
+
+			$focalPoint = array_merge(
+				array('x' => '50', 'y' => '50'),
+				$data['focalPoint'] ?? array()
+			);
+
+			krsort($data['breakpoints'], SORT_NATURAL);
+
+			foreach ($data['breakpoints'] as $maxWidth => $breakpoint) {
+				// Note that "& *" is here used as selector for both,
+				// the img as well as the am-img-loader tags.
+				$styles .= <<<HTML
+					@container $uniqueName (max-width: {$maxWidth}px) {
+						.{$uniqueName} * {
+							aspect-ratio: {$breakpoint['aspectRatio']};
+							object-fit: cover;
+							object-position: {$focalPoint['x']}% {$focalPoint['y']}%;	
+							background-size: cover;
+							background-repeat: no-repeat;	
+							background-position: {$focalPoint['x']}% {$focalPoint['y']}%;	
+						}	
+					}
+
+					HTML;
+			}
+
+			$styles = Minify::css($styles);
+			$styles = "<style>$styles</style>";
+		}
+
+		$attr = Attr::render($block['tunes'], $classes);
+
 		return <<< HTML
 			<figure $attr>
-				$img
+				$img 
+				$styles
 				$caption
 			</figure>
 		HTML;

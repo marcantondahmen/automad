@@ -72,11 +72,6 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 	}
 
 	/**
-	 * The CodeFlask instance.
-	 */
-	private editor: CodeEditor;
-
-	/**
 	 * Prepare the data that is passed to the constructor.
 	 *
 	 * @param data
@@ -125,7 +120,7 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 	 * @param editor
 	 */
 	private initEditor(container: HTMLDivElement): void {
-		this.editor = new CodeEditor({
+		new CodeEditor({
 			element: container,
 			code: this.data.code,
 			language: 'html',
@@ -151,7 +146,7 @@ export class RawBlock extends BaseBlock<RawBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): RawBlockData {
+	getData(): RawBlockData {
 		return this.data;
 	}
 }

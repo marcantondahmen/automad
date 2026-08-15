@@ -56,8 +56,8 @@
 			border-radius: @am-card-radius;
 			cursor: pointer;
 			user-select: none;
-			color: hsl(var(--am-clr-text-muted));
-			background-color: hsl(var(--am-clr-background-faded));
+			color: var(--am-clr-text-muted);
+			background-color: var(--am-clr-background-faded);
 			transition:
 				color 0.2s,
 				background-color 0.2s,
@@ -65,9 +65,9 @@
 		}
 
 		& input:checked + label {
-			color: hsl(var(--am-clr-text));
-			background-color: hsl(var(--am-clr-background));
-			border-color: hsl(var(--am-clr-border-active));
+			color: var(--am-clr-text);
+			background-color: var(--am-clr-background);
+			border-color: var(--am-clr-border-active);
 			outline: @am-outline-active;
 		}
 	}

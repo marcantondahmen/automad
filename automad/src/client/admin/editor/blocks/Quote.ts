@@ -142,7 +142,7 @@ export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): QuoteBlockData {
+	getData(): QuoteBlockData {
 		return {
 			text: this.inputs.text.innerHTML,
 			caption: this.inputs.caption.innerHTML,

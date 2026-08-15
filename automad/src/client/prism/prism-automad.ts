@@ -34,14 +34,30 @@
 
 import Prism from 'prismjs';
 
-const stringDefinition = { pattern: /('([^']|\\')*'|"([^"]|\\")*")/ };
-
-const variableDefinition = {
-	pattern: new RegExp('@{.+?}', 's'),
-	greedy: true,
-	inside: {
-		punctuation: /[\|\(\)\{\}]+/,
-		string: stringDefinition,
+const common = {
+	number: {
+		pattern: /\d(.\d+)?/,
+	},
+	operator: {
+		pattern: /(\+(?![a-z])|[\-\/\*\!]|not)/,
+	},
+	boolean: {
+		pattern: /(true|false)/,
+	},
+	string: { pattern: /('([^']|\\')*'|"([^"]|\\")*")/ },
+	builtin: {
+		pattern: /(\|\s+)\w+/,
+		lookbehind: true,
+	},
+	variable: {
+		pattern: /(@\{\s*)[\w\?%\+\:]+/,
+		lookbehind: true,
+	},
+	punctuation: {
+		pattern: /[.,;\(\)=]/,
+	},
+	symbol: {
+		pattern: /(@?\{|\}|\||~)/,
 	},
 };
 
@@ -52,71 +68,23 @@ const variableDefinition = {
  * @see {@link tokens https://prismjs.com/tokens.html}
  * @see {@link api https://prismjs.com/docs/}
  */
-export const PrismAutomad: Prism.Grammar = Prism.languages.extend('html', {
+export const PrismAutomad = Prism.languages.insertBefore('html', 'tag', {
 	comment: {
-		pattern: new RegExp('<#.+?#>', 's'),
+		pattern: /<#.+?#>/s,
 	},
 	function: {
-		pattern: new RegExp('<@.+?@>', 's'),
+		pattern: /<@.+?@>/s,
 		inside: {
+			'type-hint': /(pagelist|filelist|tags|filters)/,
 			keyword: {
-				pattern: /(foreach|for|if|else|end|snippet|with)/,
-			},
-			boolean: {
-				pattern: /(true|false)/,
+				pattern: /(<@\s+)\w+/,
+				lookbehind: true,
 			},
 			property: {
-				pattern: /[\w\:]+\:/,
+				pattern: /[\w\:%]+\:\s/,
 			},
-			variable: variableDefinition,
-			string: stringDefinition,
-			punctuation: {
-				pattern: /[\:\{\}\(\)]/,
-			},
+			...common,
 		},
 	},
-	number: {
-		pattern: /\d(.\d+)?/,
-	},
-	operator: {
-		pattern: /([\+\-\/\*\!]|not)/,
-	},
-	tag: {
-		pattern:
-			/<\/?(?!\d)[^\s@>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/,
-		greedy: true,
-		inside: {
-			tag: {
-				pattern: /^<\/?[^\s>\/]+/,
-				inside: {
-					punctuation: /^<\/?/,
-					namespace: /^[^\s>\/:]+:/,
-				},
-			},
-			'special-attr': [],
-			'attr-value': {
-				pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,
-				inside: {
-					punctuation: [
-						{
-							pattern: /^=/,
-							alias: 'attr-equals',
-						},
-						{
-							pattern: /^(\s*)["']|["']$/,
-							lookbehind: true,
-						},
-					],
-				},
-			},
-			punctuation: /\/?>/,
-			'attr-name': {
-				pattern: /[^\s>\/]+/,
-				inside: {
-					namespace: /^[^\s>\/:]+:/,
-				},
-			},
-		},
-	},
-	variable: variableDefinition,
+	...common,
 });

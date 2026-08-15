@@ -39,7 +39,7 @@
 	height: 100%;
 
 	&__details {
-		outline: 2px solid hsl(var(--am-clr-border));
+		outline: 2px solid var(--am-clr-border);
 		border-radius: @am-form-radius;
 		.details-transition;
 	}
@@ -70,7 +70,7 @@
 	&__content {
 		position: relative;
 		padding: @am-card-padding;
-		padding-top: ~'calc(@{am-card-padding} - @{am-bl-editor-block-padding-y})';
+		padding-top: calc(@am-card-padding - @am-bl-editor-block-padding-y);
 		border-top: @am-border;
 		min-height: 5.5rem;
 	}

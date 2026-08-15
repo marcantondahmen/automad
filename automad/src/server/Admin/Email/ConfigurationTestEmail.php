@@ -53,15 +53,17 @@ class ConfigurationTestEmail {
 	/**
 	 * Render a test email body.
 	 *
+	 * @param string $sitename
 	 * @return string The rendered email body
 	 */
-	public static function render(): string {
+	public static function render(string $sitename): string {
 		return Body::render(
 			array(
 				Heading::render(Text::get('emailTestSuccessHeading')),
 				Paragraph::render(Text::get('emailTestSuccessText')),
 				Paragraph::render(Text::get('emailAutomatic'))
-			)
+			),
+			$sitename
 		);
 	}
 }

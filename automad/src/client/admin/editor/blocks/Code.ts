@@ -83,11 +83,6 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	}
 
 	/**
-	 * The CodeFlask instance.
-	 */
-	private editor: CodeEditor;
-
-	/**
 	 * Prepare the data that is passed to the constructor.
 	 *
 	 * @param data
@@ -199,7 +194,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 * @param editor
 	 */
 	private initEditor(container: HTMLDivElement): void {
-		this.editor = new CodeEditor({
+		new CodeEditor({
 			element: container,
 			code: this.data.code,
 			language: this.data.language,
@@ -219,7 +214,7 @@ export class CodeBlock extends BaseBlock<CodeBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): CodeBlockData {
+	getData(): CodeBlockData {
 		return this.data;
 	}
 }

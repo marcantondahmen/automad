@@ -39,7 +39,7 @@ import {
 	CSS,
 	getTagFromRoute,
 	html,
-	Route,
+	routes,
 } from '@/admin/core';
 import {
 	SwitcherDropdownData,
@@ -199,7 +199,7 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 
 		return html`
 			<am-breadcrumbs-route
-				${Attr.target}="${Route.system}"
+				${Attr.target}="${routes.system}"
 				${Attr.text}="${this.pageTitle}"
 				${Attr.narrow}
 			></am-breadcrumbs-route>
@@ -285,4 +285,4 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.system), SystemComponent);
+customElements.define(getTagFromRoute(routes.system), SystemComponent);

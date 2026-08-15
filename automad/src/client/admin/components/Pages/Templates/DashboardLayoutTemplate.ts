@@ -41,7 +41,7 @@ import {
 	getSlug,
 	html,
 	PageController,
-	Route,
+	routes,
 	SessionController,
 	titleCase,
 } from '@/admin/core';
@@ -56,7 +56,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 			>
 				<div class="${CSS.navbar}">
 					<am-link
-						${Attr.target}="${Route.home}"
+						${Attr.target}="${routes.home}"
 						class="${CSS.navbarItem}"
 					>
 						<am-logo></am-logo>
@@ -76,7 +76,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 			>
 				<div class="${CSS.navbar}">
 					<am-link
-						${Attr.target}="${Route.home}"
+						${Attr.target}="${routes.home}"
 						class="${CSS.displayMedium} ${CSS.navbarItem}"
 					>
 						<am-logo></am-logo>
@@ -145,7 +145,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 								</a>
 								<am-link
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
-									${Attr.target}="${Route.system}?section=${Section.users}"
+									${Attr.target}="${routes.system}?section=${Section.users}"
 								>
 									<i class="bi bi-person-badge"></i>
 									<span>${App.text('systemUsers')}</span>
@@ -199,21 +199,21 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 						</a>
 					</span>
 					<am-nav-item
-						${Attr.page}="${Route.search}"
+						${Attr.page}="${routes.search}"
 						${Attr.icon}="search"
 						${Attr.text}="searchTitle"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="${Route.system}"
+						${Attr.page}="${routes.system}"
 						${Attr.icon}="sliders"
 						${Attr.text}="systemTitle"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="${Route.shared}"
+						${Attr.page}="${routes.shared}"
 						${Attr.icon}="asterisk"
 						${Attr.text}="sharedTitle"
 						${Attr.publicationState}="${App.sharedPublicationState}"
-						${(getSlug() as Route) == Route.shared
+						${(getSlug() as Route) == routes.shared
 							? `
 								${Attr.bind}="publicationState"
 								${Attr.bindTo}="${Attr.publicationState}"
@@ -221,11 +221,11 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 							: ''}
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="${Route.components}"
+						${Attr.page}="${routes.components}"
 						${Attr.icon}="boxes"
 						${Attr.text}="componentsTitle"
 						${Attr.publicationState}="${App.componentsPublicationState}"
-						${(getSlug() as Route) == Route.components
+						${(getSlug() as Route) == routes.components
 							? `
 								${Attr.bind}="publicationState"
 								${Attr.bindTo}="${Attr.publicationState}"
@@ -233,13 +233,13 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 							: ''}
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="${Route.packages}"
+						${Attr.page}="${routes.packages}"
 						${Attr.icon}="box-seam"
 						${Attr.text}="packagesTitle"
 						${Attr.badge}="am-sidebar-outdated-packages-indicator"
 					></am-nav-item>
 					<am-nav-item
-						${Attr.page}="${Route.trash}"
+						${Attr.page}="${routes.trash}"
 						${Attr.icon}="trash3"
 						${Attr.text}="trashTitle"
 					></am-nav-item>

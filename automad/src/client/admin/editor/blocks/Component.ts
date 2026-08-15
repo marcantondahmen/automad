@@ -44,7 +44,7 @@ import {
 	getComponentTargetContainer,
 	html,
 	query,
-	Route,
+	routes,
 } from '@/admin/core';
 import { ComponentBlockData } from '@/admin/types';
 import { getBlockTools } from '../blocks';
@@ -145,7 +145,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 				<div class="${CSS.editorBlockComponentOverlay}">
 					<am-link
 						class="${CSS.button} ${CSS.buttonPrimary}"
-						${Attr.target}="${Route.components}"
+						${Attr.target}="${routes.components}"
 					>
 						${App.text('openComponentEditor')}
 					</am-link>
@@ -183,7 +183,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 					<am-modal-body></am-modal-body>
 					<am-modal-footer>
 						<a
-							href="${App.dashboardURL}/${Route.components}"
+							href="${App.dashboardURL}/${routes.components}"
 							class="${CSS.button}"
 						>
 							${App.text('openComponentEditor')}
@@ -238,7 +238,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): ComponentBlockData {
+	getData(): ComponentBlockData {
 		return this.data;
 	}
 

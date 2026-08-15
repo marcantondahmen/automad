@@ -1,8 +1,32 @@
 # Changelog
 
-## [v2.0.0-beta.51](https://github.com/marcantondahmen/automad/commit/7dcd32525c6eb38b2f0f9c83a5536077d86ce279)
+## [v2.0.0-beta.52](https://github.com/marcantondahmen/automad/commit/f3de526c09ab91934f6ff20ac0dc3ec308aab0d9)
 
-Sun, 19 Jul 2026 15:53:13 +0200
+Sat, 15 Aug 2026 17:31:40 +0200
+
+### New Features
+
+- add responsive image settings with breakpoints and focal point ([57b081416](https://github.com/marcantondahmen/automad/commit/57b081416ee75607c41407716c6eeab8711416a3))
+- add support for caddy and frankenphp web servers ([867053a16](https://github.com/marcantondahmen/automad/commit/867053a16c4a474cb46a113a5bd41659fc8f521f))
+- filter saved block data and reduce data file sizes ([3cb40dc56](https://github.com/marcantondahmen/automad/commit/3cb40dc562b0a5ace83a0bc3bdefb686cb175bb0))
+- implement background image focal point and responsive aspect ratios for layout sections ([429975a7a](https://github.com/marcantondahmen/automad/commit/429975a7a1315f2f4055b7a97ce20b927e50ad67))
+- improve account recovery and setup completion flow ([36ab98922](https://github.com/marcantondahmen/automad/commit/36ab989224e9835ee390fdbee6b71b6eb7fe2c05))
+- improve disk usage calculation and quota handling ([0e3c2da63](https://github.com/marcantondahmen/automad/commit/0e3c2da632380e19e0c525709823dd929f4dc8c4))
+- support query string parameters in email links ([0e1c759b0](https://github.com/marcantondahmen/automad/commit/0e1c759b01be89886c22e1a1d10a171b8481489e))
+- update editorjs ([b2fa009a8](https://github.com/marcantondahmen/automad/commit/b2fa009a8966e3e594809efd5a13d4e0c20d08c0))
+- update prism themes ([2a10556ec](https://github.com/marcantondahmen/automad/commit/2a10556ec2ce4dd0f2ddfb60f459309bab5bf990))
+- update standard lite theme ([aeb4c61b5](https://github.com/marcantondahmen/automad/commit/aeb4c61b58c4027b6428ff54b9051eb4c7385ead))
+
+### Bugfixes
+
+- fix automad language syntax highlighting grammar ([25357f304](https://github.com/marcantondahmen/automad/commit/25357f304f9a4d458a278e6e5f177303bf280d96))
+- fix modal field buttons ([6d7974296](https://github.com/marcantondahmen/automad/commit/6d7974296bbbac99fc55226b7a031267a96edc13))
+- remove resize feature from image picker ([7d90332f2](https://github.com/marcantondahmen/automad/commit/7d90332f2a68359bca031e959e9d191ac8846290))
+- replace &nbsp; with normal whitespace and fix hyperlink arrows in blocks ([991ba785d](https://github.com/marcantondahmen/automad/commit/991ba785dbaa2aa771bdec559a3649833ec2e9a1))
+
+## [v2.0.0-beta.51](https://github.com/marcantondahmen/automad/commit/fe6d332b9eae41c86e7fad228b2a07ca935b31ce)
+
+Sun, 19 Jul 2026 15:55:09 +0200
 
 ### Bugfixes
 

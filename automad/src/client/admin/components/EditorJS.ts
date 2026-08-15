@@ -48,7 +48,15 @@ import { UnderlineInline } from '@/admin/editor/inline/Underline';
 import { AiAssistance } from '@/admin/editor/plugins/AiAssistance';
 import { DragDrop } from '@/admin/editor/plugins/DragDrop';
 import { EditorOutputData, KeyValueMap } from '@/admin/types';
-import { App, Attr, CSS, getLogger, getSlug, query, Route } from '@/admin/core';
+import {
+	App,
+	Attr,
+	CSS,
+	getLogger,
+	getSlug,
+	query,
+	routes,
+} from '@/admin/core';
 import {
 	TextAlignCenterInline,
 	TextAlignLeftInline,
@@ -82,7 +90,7 @@ export class EditorJSComponent extends BaseComponent {
 	 * Return true if the editor is place in the shared component page.
 	 */
 	private get isComponentEditor() {
-		return getSlug() === Route.components;
+		return getSlug() === routes.components;
 	}
 
 	/**

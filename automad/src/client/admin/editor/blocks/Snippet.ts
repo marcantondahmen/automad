@@ -183,7 +183,7 @@ export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): SnippetBlockData {
+	getData(): SnippetBlockData {
 		return collectFieldData(this.wrapper) as SnippetBlockData;
 	}
 }

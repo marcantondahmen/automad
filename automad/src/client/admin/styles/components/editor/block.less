@@ -71,7 +71,7 @@
 	}
 
 	&--selected {
-		background-color: hsl(var(--am-clr-background-highlight));
+		background-color: var(--am-clr-background-highlight);
 		outline: @am-border;
 		border-radius: @am-form-radius;
 	}
@@ -92,12 +92,12 @@
 	}
 
 	.am-ui &--drop-target > &__content {
-		outline-color: hsl(var(--am-clr-text));
+		outline-color: var(--am-clr-text);
 	}
 
 	& [placeholder]:empty:before {
 		content: attr(placeholder);
-		color: hsl(var(--am-clr-text-muted)) !important;
+		color: var(--am-clr-text-muted) !important;
 	}
 
 	& .am-e-badge {

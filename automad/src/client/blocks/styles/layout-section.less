@@ -55,7 +55,7 @@ am-layout-section {
 		padding: var(--am-card-padding);
 
 		& > am-stretched {
-			--margin: ~'calc(var(--am-card-padding) * -1)';
+			--margin: calc(var(--am-card-padding) * -1);
 			margin-inline: var(--margin) !important;
 
 			&:first-child {
@@ -111,22 +111,23 @@ am-flex {
 	display: flex;
 	flex-wrap: wrap;
 	max-width: none !important;
-	height: ~'calc(var(--am-flex-gap) + 100%)';
-	margin: ~'calc(var(--am-flex-gap) * -0.5)';
+	height: calc(var(--am-flex-gap) + 100%);
+	margin: calc(var(--am-flex-gap) * -0.5);
 
 	& > * {
 		box-sizing: border-box;
 		flex-grow: 0;
 		max-width: none;
-		min-width: ~'min(100%, var(--am-flex-min-block-width))';
+		min-width: min(100%, var(--am-flex-min-block-width));
 		margin: 0;
-		padding: ~'calc(var(--am-flex-gap) * 0.5)';
+		padding: calc(var(--am-flex-gap) * 0.5);
 	}
 
 	// Make gaps work when a normal block with a default width
 	// is followed by an am-flex element.
 	:not(&) + & {
-		margin-top: ~'calc((var(--am-flex-gap) * -0.5) + var(--am-block-margin-top))';
+		/* prettier-ignore */
+		margin-top: calc((var(--am-flex-gap) * -0.5) + var(--am-block-margin-top));
 	}
 
 	& .am-block {

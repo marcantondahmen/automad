@@ -39,7 +39,7 @@ import {
 	dateFormat,
 	getTagFromRoute,
 	html,
-	Route,
+	routes,
 } from '@/admin/core';
 import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
@@ -61,7 +61,7 @@ const systemInfo = (): string => {
 					class="${CSS.textMuted}"
 				></am-icon-text>
 				<am-link
-					${Attr.target}="${Route.system}?section=${Section.cache}"
+					${Attr.target}="${routes.system}?section=${Section.cache}"
 				>
 					<am-system-cache-indicator></am-system-cache-indicator>
 				</am-link>
@@ -129,7 +129,7 @@ export class HomeComponent extends BaseDashboardLayoutComponent {
 							<h1 class="${CSS.baseHomeH1}">${App.sitename}</h1>
 							<am-link
 								class="${CSS.textMuted}"
-								${Attr.target}="${Route.shared}"
+								${Attr.target}="${routes.shared}"
 							>
 								<i class="bi bi-pencil"></i>
 							</am-link>
@@ -150,4 +150,4 @@ export class HomeComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.home), HomeComponent);
+customElements.define(getTagFromRoute(routes.home), HomeComponent);

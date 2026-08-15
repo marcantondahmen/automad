@@ -36,10 +36,12 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Core\Automad;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\UserCollection;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -155,9 +157,12 @@ class UserCollectionController {
 		$Response = new Response();
 		$UserCollection = new UserCollection();
 		$Messenger = new Messenger();
+		$Automad = Automad::fromCache();
+		$sitename = $Automad->Shared->get(Fields::SITENAME);
 
 		$username = trim(Request::post('username'));
 		$email = trim(Request::post('email'));
+		$origin = Request::post('origin');
 		$password = str_shuffle(sha1(microtime()));
 
 		if (!$UserCollection->createUser($username, $password, $password, $email, $Messenger)) {
@@ -168,7 +173,7 @@ class UserCollectionController {
 			return $Response->setError($Messenger->getError());
 		}
 
-		if (!$UserCollection->sendInvitation($username, $email, $Messenger)) {
+		if (!$UserCollection->sendInvitation($username, $email, $sitename, $origin, $Messenger)) {
 			return $Response->setError($Messenger->getError());
 		}
 

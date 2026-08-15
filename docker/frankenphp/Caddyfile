@@ -1,0 +1,11 @@
+{
+	frankenphp
+	auto_https off
+}
+
+localhost:80 {
+	root * /app
+
+	encode zstd gzip
+	php_server
+}

@@ -1,3 +1,4 @@
+<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -32,45 +33,39 @@
  * See LICENSE.md for license information.
  */
 
-import {
-	App,
-	Attr,
-	getTagFromRoute,
-	html,
-	isInvite,
-	Route,
-	UserController,
-} from '@/admin/core';
-import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
+namespace Automad\Admin\Email\Components;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The password reset token request view.
+ * A code component.
  *
- * @extends BaseCenteredLayoutComponent
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
  */
-class TokenComponent extends BaseCenteredLayoutComponent {
+class Code {
 	/**
-	 * Set the page title that is used a document title suffix.
-	 */
-	protected get pageTitle(): string {
-		return isInvite()
-			? App.text('completeAccountSetup')
-			: App.text('accountRecovery');
-	}
-
-	/**
-	 * Render the main partial.
+	 * Render the code field.
 	 *
-	 * @returns the rendered HTML
+	 * @param string $code
+	 * @return string
 	 */
-	protected renderMainPartial(): string {
-		return html`
-			<am-request-password-reset-token-form
-				${Attr.api}="${UserController.requestPasswordResetToken}"
+	public static function render(string $code): string {
+		return <<<HTML
+			<div
+				style="
+					padding: 16px 24px 0px 24px;
+				"
 			>
-			</am-request-password-reset-token-form>
-		`;
+				<div
+					style="
+						font-size: 24px; 
+						font-weight: bold; 
+						letter-spacing: 0.35em;
+					"
+				>$code</div>
+			</div>
+			HTML;
 	}
 }
-
-customElements.define(getTagFromRoute(Route.token), TokenComponent);

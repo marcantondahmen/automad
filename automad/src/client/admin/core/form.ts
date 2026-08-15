@@ -44,7 +44,7 @@ import {
 	notifyError,
 	query,
 	queryAll,
-	Route,
+	routes,
 	Section,
 	titleCase,
 } from '.';
@@ -210,7 +210,7 @@ export const createCustomizationFields = (
 					<div>${App.text('customizationMerge')}</div>
 					<div>
 						<am-link
-							${Attr.target}="${Route.shared}?section=${Section.customizations}"
+							${Attr.target}="${routes.shared}?section=${Section.customizations}"
 							class="${CSS.button} ${CSS.buttonPrimary}"
 						>
 							${App.text('sharedTitle')}

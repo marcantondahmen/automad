@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, CSS, getTagFromRoute, html, Route } from '@/admin/core';
+import { App, CSS, getTagFromRoute, html, routes } from '@/admin/core';
 import { BaseCenteredLayoutComponent } from './BaseCenteredLayout';
 
 /**
@@ -65,4 +65,4 @@ export class SetupComponent extends BaseCenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.setup), SetupComponent);
+customElements.define(getTagFromRoute(routes.setup), SetupComponent);

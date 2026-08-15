@@ -56,7 +56,7 @@ import {
 	query,
 	queryAll,
 	requestAPI,
-	Route,
+	routes,
 } from '@/admin/core';
 import { createSortableTreeNodes, treeStyles } from '@/admin/core/tree';
 import { KeyValueMap, PageMetaData } from '@/admin/types';
@@ -117,7 +117,7 @@ const renderLabelFunction: SortableTreeRenderLabelFunction = (
 		>
 			<am-link
 				class="${CSS.navLink}"
-				${Attr.target}="${Route.page}?url=${encodeURIComponent(
+				${Attr.target}="${routes.page}?url=${encodeURIComponent(
 					data.url as string
 				)}"
 			>

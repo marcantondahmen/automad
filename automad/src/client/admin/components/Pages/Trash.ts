@@ -39,7 +39,7 @@ import {
 	getTagFromRoute,
 	html,
 	PageTrashController,
-	Route,
+	routes,
 } from '@/admin/core';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
@@ -64,7 +64,7 @@ export class TrashComponent extends BaseDashboardLayoutComponent {
 	protected renderMainPartial(): string {
 		return html`
 			<am-breadcrumbs-route
-				${Attr.target}="${Route.trash}"
+				${Attr.target}="${routes.trash}"
 				${Attr.text}="${this.pageTitle}"
 				${Attr.narrow}
 			></am-breadcrumbs-route>
@@ -96,4 +96,4 @@ export class TrashComponent extends BaseDashboardLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Route.trash), TrashComponent);
+customElements.define(getTagFromRoute(routes.trash), TrashComponent);

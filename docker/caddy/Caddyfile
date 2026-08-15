@@ -1,0 +1,11 @@
+{
+	auto_https off
+}
+
+localhost:80 {
+	root * /app
+
+	php_fastcgi php:9000
+	file_server
+	encode gzip zstd
+}

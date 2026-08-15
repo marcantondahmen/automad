@@ -41,10 +41,10 @@
 		border-color 0.2s;
 	outline: @am-outline;
 	border-radius: @am-md-editor-radius;
-	background-color: hsl(var(--am-clr-background-faded));
+	background-color: var(--am-clr-background-faded);
 
 	&--focus {
-		border-color: hsl(var(--am-clr-border-active));
+		border-color: var(--am-clr-border-active);
 	}
 }
 
@@ -88,7 +88,7 @@
 		display: none;
 		height: 100%;
 		width: 1px;
-		background-color: hsl(var(--am-clr-border));
+		background-color: var(--am-clr-border);
 		position: absolute;
 		left: 50%;
 	}
@@ -123,13 +123,13 @@
 	}
 
 	&-md-preview-highlight {
-		background-color: hsl(var(--am-clr-background-highlight));
+		background-color: var(--am-clr-background-highlight);
 	}
 
 	&-main-container {
 		position: relative;
 		line-height: @am-base-line-height;
-		color: hsl(var(--am-clr-text));
+		color: var(--am-clr-text);
 		width: 100%;
 		height: inherit;
 	}

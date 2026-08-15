@@ -32,20 +32,20 @@
  * See LICENSE.md for license information.
  */
 
-export enum Route {
-	components = 'components',
-	createuser = 'createuser',
-	home = 'home',
-	inpage = 'inpage',
-	login = 'login',
-	packages = 'packages',
-	page = 'page',
-	password = 'password',
-	search = 'search',
-	shared = 'shared',
-	system = 'system',
-	token = 'token',
-	trash = 'trash',
-	verifytotp = 'verifytotp',
-	setup = 'setup',
-}
+export const routes = {
+	components: 'components',
+	createUser: 'create-user',
+	home: 'home',
+	inpage: 'inpage',
+	login: 'login',
+	packages: 'packages',
+	page: 'page',
+	requestVerificationCode: 'request-verification-code',
+	search: 'search',
+	setPassword: 'set-password',
+	setup: 'setup',
+	shared: 'shared',
+	system: 'system',
+	trash: 'trash',
+	verifyTotp: 'verify-totp',
+} as const;

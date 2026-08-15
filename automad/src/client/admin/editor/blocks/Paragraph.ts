@@ -151,9 +151,9 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 *
 	 * @return the saved data
 	 */
-	save(): ParagraphBlockData {
+	getData(): ParagraphBlockData {
 		return {
-			text: this.content,
+			text: this.content.replaceAll('&nbsp;', ' '),
 			large: this.data.large,
 		};
 	}
@@ -203,7 +203,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 * @return true if text is not empty
 	 */
 	validate(data: ParagraphBlockData): boolean {
-		return data.text.replace(/<br>/, '').trim() !== '';
+		return (data.text?.replace(/<br>/, '').trim() ?? '') !== '';
 	}
 
 	/**

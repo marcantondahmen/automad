@@ -55,26 +55,28 @@ class InvitationEmail {
 	 * Render an invitation email body.
 	 *
 	 * @param string $username
+	 * @param string $sitename
+	 * @param string $hostname
 	 * @return string The rendered invitation email body
 	 */
-	public static function render(string $username): string {
+	public static function render(string $username, string $sitename, string $hostname): string {
 		$Text = Text::getObject();
-		$website = $_SERVER['SERVER_NAME'] ?? AM_BASE_URL;
 
 		return Body::render(
 			array(
 				Heading::render("$Text->emailHello $username"),
 				Paragraph::render(str_replace(
 					array('{1}', '{2}'),
-					array("<b>$website</b>", "<b>«{$username}»</b>"),
+					array("<b>$sitename</b>", "<b>«{$username}»</b>"),
 					Text::get('emailInviteText')
 				)),
 				Button::render(
 					$Text->emailInviteButton,
-					AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/token?type=invitation&username=' . urlencode($username)
+					$hostname . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/request-verification-code?username=' . urlencode($username) . '&type=invitation'
 				),
 				Paragraph::render($Text->emailAutomatic)
-			)
+			),
+			$sitename
 		);
 	}
 }

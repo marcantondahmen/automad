@@ -36,7 +36,7 @@
 namespace Automad\Admin\Email;
 
 use Automad\Admin\Email\Components\Body;
-use Automad\Admin\Email\Components\Button;
+use Automad\Admin\Email\Components\Code;
 use Automad\Admin\Email\Components\Heading;
 use Automad\Admin\Email\Components\Paragraph;
 use Automad\Core\Text;
@@ -55,24 +55,22 @@ class AccountRecoveryEmail {
 	 * Render an account recovery email body.
 	 *
 	 * @param string $username
-	 * @param string $token
+	 * @param string $code
+	 * @param string $sitename
 	 * @return string The rendered email body
 	 */
-	public static function render(string $username, string $token): string {
+	public static function render(string $username, string $code, string $sitename): string {
 		$Text = Text::getObject();
-		$website = $_SERVER['SERVER_NAME'] ?? AM_BASE_URL;
 
 		return Body::render(
 			array(
 				Heading::render("$Text->emailHello $username"),
-				Paragraph::render(str_replace('{}', "<b>$website</b>", Text::get('emailAccountRecoveryTextTop'))),
-				Button::render(
-					$Text->emailAccountRecoveryButton,
-					AM_SERVER . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/password?username=' . urlencode($username) . '&token=' . urlencode($token)
-				),
+				Paragraph::render(str_replace('{}', "<b>«{$sitename}»</b>", Text::get('emailAccountRecoveryTextTop'))),
+				Code::render($code),
 				Paragraph::render($Text->emailAccountRecoveryTextBottom),
 				Paragraph::render($Text->emailAutomatic)
-			)
+			),
+			$sitename
 		);
 	}
 }

@@ -32,10 +32,7 @@
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/2"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -48,20 +45,17 @@
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/2"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 }
                             ]
                         },
                         "style": {
-                            "card": false,
-                            "shadow": false,
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
-                            "overflowHidden": false
+                            "card": false,
+                            "overflowHidden": false,
+                            "shadow": false
                         },
                         "justify": "fill-row",
                         "align": "start",
@@ -69,8 +63,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         },
                         "spacing": {
                             "top": "2rem"
@@ -82,8 +75,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:27:34+00:00",
-        ":lastModified": "2026-03-12T18:35:51+00:00",
-        ":automadVersion": "2.0.0-beta.17",
-        ":lastPublished": "2026-03-12T18:35:54+00:00"
+        ":lastModified": "2026-08-15T15:27:39+00:00",
+        ":automadVersion": "2.0.0-beta.51",
+        ":lastPublished": "2026-08-15T15:27:41+00:00"
     }
 }

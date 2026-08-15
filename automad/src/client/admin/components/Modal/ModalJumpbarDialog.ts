@@ -33,7 +33,7 @@
  */
 
 import { JumpbarItemData, KeyValueMap, PageMetaData } from '@/admin/types';
-import { App, Attr, create, CSS, html, Route } from '@/admin/core';
+import { App, Attr, create, CSS, html, routes } from '@/admin/core';
 import { Section } from '@/common';
 import { AutocompleteComponent } from '../Autocomplete';
 
@@ -45,7 +45,7 @@ import { AutocompleteComponent } from '../Autocomplete';
 const searchData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Route.search,
+			target: routes.search,
 			value: App.text('searchTitle'),
 			title: App.text('searchTitle'),
 			icon: 'search',
@@ -83,7 +83,7 @@ const settingsData = (): JumpbarItemData[] => {
 		icon: string
 	): JumpbarItemData => {
 		return {
-			target: `${Route.system}?section=${section}`,
+			target: `${routes.system}?section=${section}`,
 			value: `${App.text('systemTitle')} ${App.text(title)}`,
 			title: App.text(title),
 			subtitle: App.text('systemTitle'),
@@ -115,7 +115,7 @@ const settingsData = (): JumpbarItemData[] => {
 const sharedData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Route.shared,
+			target: routes.shared,
 			value: App.text('sharedTitle'),
 			title: App.text('sharedTitle'),
 			icon: 'file-earmark-medical',
@@ -132,7 +132,7 @@ const sharedData = (): JumpbarItemData[] => {
 const componentsData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Route.components,
+			target: routes.components,
 			value: App.text('componentsTitle'),
 			title: App.text('componentsTitle'),
 			icon: 'boxes',
@@ -149,14 +149,14 @@ const componentsData = (): JumpbarItemData[] => {
 const packagesData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: `${Route.packages}?section=${Section.packages}`,
+			target: `${routes.packages}?section=${Section.packages}`,
 			value: App.text('packagesSwitcherTitle'),
 			title: App.text('packagesSwitcherTitle'),
 			icon: 'box-seam',
 			cls: [CSS.modalJumpbarDividerPackages],
 		},
 		{
-			target: `${Route.packages}?section=${Section.repositories}`,
+			target: `${routes.packages}?section=${Section.repositories}`,
 			value: `${App.text('repositoriesSwitcherTitle')} (packages)`,
 			title: App.text('repositoriesSwitcherTitle'),
 			icon: 'git',
@@ -173,7 +173,7 @@ const packagesData = (): JumpbarItemData[] => {
 const trashData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Route.trash,
+			target: routes.trash,
 			value: App.text('trashTitle'),
 			title: App.text('trashTitle'),
 			icon: 'trash3',
@@ -203,7 +203,7 @@ const pagesData = (): JumpbarItemData[] => {
 		const icon = page.private ? 'eye-slash-fill' : 'file-earmark-text';
 
 		data.push({
-			target: `${Route.page}?url=${page.url}`,
+			target: `${routes.page}?url=${page.url}`,
 			value: `${page.title} ${page.url}`,
 			title: page.title,
 			subtitle: page.url,
@@ -347,7 +347,7 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 
 		search.element.setAttribute(
 			Attr.target,
-			`${Route.search}?search=${encodeURIComponent(
+			`${routes.search}?search=${encodeURIComponent(
 				this.input.value
 			).replace(/%20/g, '+')}`
 		);

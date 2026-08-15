@@ -39,7 +39,7 @@ import {
 	getSearchParam,
 	html,
 	isInvite,
-	Route,
+	routes,
 } from '@/admin/core';
 import { KeyValueMap } from '@/admin/types';
 import { FormComponent } from './Form';
@@ -53,22 +53,24 @@ const text = () => {
 				newPasswordText: App.text(
 					'completeAccountSetupNewPasswordText'
 				),
+				newPasswordCode: App.text(
+					'completeAccountSetupNewPasswordCode'
+				),
+				newPasswordEnter: App.text(
+					'completeAccountSetupNewPasswordEnter'
+				),
 				successHeading: App.text('completeAccountSetupSuccessHeading'),
 				successText: App.text('completeAccountSetupSuccessText'),
-				invalidHeading: App.text('completeAccountSetupInvalidHeading'),
-				invalidText: App.text('completeAccountSetupInvalidText'),
-				invalidButton: App.text('completeAccountSetupInvalidButton'),
 			}
 		: {
 				newPasswordHeading: App.text(
 					'accountRecoveryNewPasswordHeading'
 				),
 				newPasswordText: App.text('accountRecoveryNewPasswordText'),
+				newPasswordCode: App.text('accountRecoveryNewPasswordCode'),
+				newPasswordEnter: App.text('accountRecoveryNewPasswordEnter'),
 				successHeading: App.text('accountRecoverySuccessHeading'),
 				successText: App.text('accountRecoverySuccessText'),
-				invalidHeading: App.text('accountRecoveryInvalidHeading'),
-				invalidText: App.text('accountRecoveryInvalidText'),
-				invalidButton: App.text('accountRecoveryInvalidButton'),
 			};
 };
 
@@ -76,14 +78,9 @@ const cancel = () => {
 	return isInvite()
 		? ''
 		: html`
-				<p>
-					<am-link
-						class="${CSS.link}"
-						${Attr.target}="${Route.login}"
-					>
-						${App.text('accountRecoveryCancel')}
-					</am-link>
-				</p>
+				<am-link class="${CSS.link}" ${Attr.target}="${routes.login}">
+					${App.text('accountRecoveryCancel')}
+				</am-link>
 			`;
 };
 
@@ -92,7 +89,7 @@ const cancel = () => {
  *
  * @extends FormComponent
  */
-export class ResetPasswordFormComponent extends FormComponent {
+class ResetPasswordFormComponent extends FormComponent {
 	/**
 	 * Process the response that is received after submitting the form.
 	 *
@@ -102,10 +99,6 @@ export class ResetPasswordFormComponent extends FormComponent {
 	protected async processResponse(response: KeyValueMap): Promise<void> {
 		if (response.data?.success) {
 			this.renderSuccess();
-		}
-
-		if (response.data?.invalid) {
-			this.renderInvalid();
 		}
 	}
 
@@ -121,6 +114,22 @@ export class ResetPasswordFormComponent extends FormComponent {
 					${text().newPasswordText}
 				</div>
 				<div class="${CSS.cardForm}">
+					<div class="${CSS.textParagraph}">
+						<p>${text().newPasswordCode}</p>
+					</div>
+					<input
+						class="${CSS.input} ${CSS.inputResetCode}"
+						type="text"
+						name="code"
+						maxlength="8"
+						pattern="[0-9A-Z]{8}"
+						required
+					/>
+				</div>
+				<div class="${CSS.cardForm}">
+					<div class="${CSS.textParagraph}">
+						<p>${text().newPasswordEnter}</p>
+					</div>
 					<input
 						type="password"
 						class="${CSS.input}"
@@ -148,13 +157,16 @@ export class ResetPasswordFormComponent extends FormComponent {
 					</div>
 				</div>
 			</div>
-			${cancel()}
-			<input
-				type="hidden"
-				name="token"
-				value="${getSearchParam('token')}"
-				required
-			/>
+			<p class="${CSS.flex} ${CSS.flexColumn}">
+				${cancel()}
+				<am-link
+					class="${CSS.link}"
+					${Attr.target}="${routes.requestVerificationCode}${window
+						.location.search}"
+				>
+					${App.text('passwordResetCodeResend')}
+				</am-link>
+			</p>
 			<input
 				type="hidden"
 				name="username"
@@ -176,31 +188,9 @@ export class ResetPasswordFormComponent extends FormComponent {
 				<div class="${CSS.cardForm}">
 					<am-link
 						class="${CSS.button} ${CSS.buttonPrimary}"
-						${Attr.target}="${Route.login}"
+						${Attr.target}="${routes.login}"
 					>
 						${App.text('signIn')}
-					</am-link>
-				</div>
-			</div>
-		`;
-	}
-
-	/**
-	 * Render the invalid token message.
-	 */
-	private renderInvalid(): void {
-		this.innerHTML = html`
-			<h2>${text().invalidHeading}</h2>
-			<div class="${CSS.card}">
-				<div class="${CSS.cardBody} ${CSS.cardBodyLarge}">
-					${text().invalidText}
-				</div>
-				<div class="${CSS.cardForm}">
-					<am-link
-						class="${CSS.button} ${CSS.buttonPrimary}"
-						${Attr.target}="${Route.token}"
-					>
-						${text().invalidButton}
 					</am-link>
 				</div>
 			</div>

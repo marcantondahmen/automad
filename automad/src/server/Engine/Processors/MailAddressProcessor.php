@@ -138,7 +138,7 @@ class MailAddressProcessor {
 	 * @return string
 	 */
 	private function processBody(array $matches): string {
-		$regexEmail = '[~\w_\.\+\-]+@[\w\.\-]+\.[a-zA-Z]{2,}';
+		$regexEmail = '[~\w_\.\+\-]+@[\w\.\-]+\.[a-zA-Z]{2,}(\?[\w%&=_-]+)?';
 
 		/** @var string */
 		$body = $matches[0] ?? '';

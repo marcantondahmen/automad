@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import Embed from '@editorjs/embed';
+import { Embed } from '@/vendor/editorjs';
 
 export class EmbedBlock extends Embed {
 	/**

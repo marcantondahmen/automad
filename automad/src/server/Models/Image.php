@@ -40,6 +40,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
 use Automad\Core\Text;
+use Automad\System\DiskUsage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -77,5 +78,7 @@ class Image {
 		if (FileSystem::write($name, $data) === false) {
 			$Messenger->setError(Text::get('couldNotSaveError') . ' ' . $name);
 		}
+
+		DiskUsage::refresh();
 	}
 }

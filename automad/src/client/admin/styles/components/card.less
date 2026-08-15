@@ -33,7 +33,7 @@
  */
 
 .am-c-card {
-	@radius-inner: ~'calc(@{am-card-radius} - 1px)';
+	@radius-inner: calc(@am-card-radius - 1px);
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -51,7 +51,7 @@
 	}
 
 	&--active {
-		border-color: hsl(var(--am-clr-border-active));
+		border-color: var(--am-clr-border-active);
 		outline: @am-outline-active;
 	}
 
@@ -62,7 +62,7 @@
 		cursor: pointer;
 
 		&:hover {
-			border-color: hsl(var(--am-clr-border-button));
+			border-color: var(--am-clr-border-button);
 			box-shadow:
 				0 0.4rem 1.2rem var(--am-shadow),
 				0 3.7rem 3.5rem -3.2rem var(--am-shadow);
@@ -77,7 +77,7 @@
 		padding-bottom: 0.4rem;
 		font-size: 1rem;
 		font-weight: 560;
-		color: hsl(var(--am-clr-text));
+		color: var(--am-clr-text);
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -87,12 +87,12 @@
 		position: absolute;
 		padding: @am-card-padding;
 		right: 0;
-		color: hsl(var(--am-clr-text-muted));
+		color: var(--am-clr-text-muted);
 		cursor: pointer;
 		transition: color 0.2s;
 
 		&:hover {
-			color: hsl(var(--am-clr-text));
+			color: var(--am-clr-text);
 		}
 	}
 
@@ -117,7 +117,7 @@
 		display: flex;
 		flex-direction: column;
 		padding: @am-card-padding;
-		color: hsl(var(--am-clr-text-paragraph));
+		color: var(--am-clr-text-paragraph);
 		text-wrap: pretty;
 
 		&:not(&--large) {
@@ -142,8 +142,8 @@
 		border-top: @am-border;
 		border-bottom: @am-border;
 		font-size: 2.75rem;
-		color: hsl(var(--am-clr-text));
-		background-color: hsl(var(--am-clr-background-faded));
+		color: var(--am-clr-text);
+		background-color: var(--am-clr-background-faded);
 
 		& > img {
 			object-fit: cover;
@@ -173,7 +173,7 @@
 		padding-bottom: 0.4rem;
 		font-size: 1.8rem;
 		line-height: 2.2rem;
-		color: hsl(var(--am-clr-text));
+		color: var(--am-clr-text);
 
 		&--narrow {
 			margin-left: -0.1em;
@@ -188,12 +188,12 @@
 		font-size: @am-small-font-size;
 		font-weight: @am-small-font-weight;
 		line-height: @am-small-line-height;
-		background-color: hsl(var(--am-clr-background-faded));
+		background-color: var(--am-clr-background-faded);
 		border-top: @am-border;
 
 		&:last-child {
-			border-bottom-left-radius: ~'calc(@{am-card-radius} - 1px)';
-			border-bottom-right-radius: ~'calc(@{am-card-radius} - 1px)';
+			border-bottom-left-radius: calc(@am-card-radius - 1px);
+			border-bottom-right-radius: calc(@am-card-radius - 1px);
 		}
 
 		& .bi {
@@ -209,14 +209,14 @@
 
 		&-item {
 			padding: (@am-card-padding * 0.82) @am-card-padding;
-			color: hsl(var(--am-clr-text-paragraph));
+			color: var(--am-clr-text-paragraph);
 
 			& + & {
 				border-top: @am-border;
 			}
 
 			&--faded {
-				background-color: hsl(var(--am-clr-background-faded));
+				background-color: var(--am-clr-background-faded);
 			}
 		}
 	}
@@ -244,8 +244,8 @@
 	& > &__buttons {
 		display: flex;
 		overflow: hidden;
-		border-bottom-left-radius: ~'calc(@{am-card-radius} - 1px)';
-		border-bottom-right-radius: ~'calc(@{am-card-radius} - 1px)';
+		border-bottom-left-radius: calc(@am-card-radius - 1px);
+		border-bottom-right-radius: calc(@am-card-radius - 1px);
 
 		& > * {
 			flex: 1;
@@ -262,8 +262,8 @@
 			font-size: @am-small-font-size;
 			font-weight: 580;
 			text-decoration: none;
-			color: hsl(var(--am-clr-text)) !important;
-			background-color: hsl(var(--am-clr-background));
+			color: var(--am-clr-text) !important;
+			background-color: var(--am-clr-background);
 			outline: @am-outline;
 			transition: background-color 0.2s;
 			border: none;
@@ -281,13 +281,13 @@
 
 			&:hover,
 			&:active {
-				background-color: hsl(var(--am-clr-background-faded));
+				background-color: var(--am-clr-background-faded);
 			}
 
 			&[disabled] {
 				cursor: default;
-				color: hsl(var(--am-clr-text-muted)) !important;
-				background-color: hsl(var(--am-clr-background));
+				color: var(--am-clr-text-muted) !important;
+				background-color: var(--am-clr-background);
 			}
 
 			& .bi {
