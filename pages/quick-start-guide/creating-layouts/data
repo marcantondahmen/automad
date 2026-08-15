@@ -37,10 +37,7 @@
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/2"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -69,11 +66,11 @@
                                             ]
                                         },
                                         "style": {
-                                            "card": true,
-                                            "shadow": false,
                                             "backgroundBlendMode": "normal",
                                             "borderStyle": "none",
-                                            "overflowHidden": false
+                                            "card": true,
+                                            "overflowHidden": false,
+                                            "shadow": false
                                         },
                                         "justify": "start",
                                         "align": "start"
@@ -83,19 +80,17 @@
                                             "stretched": false,
                                             "width": "1/2"
                                         },
-                                        "spacing": null,
-                                        "className": "inverted rounded-m",
-                                        "id": ""
+                                        "className": "inverted rounded-m"
                                     }
                                 }
                             ]
                         },
                         "style": {
-                            "card": false,
-                            "shadow": false,
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
-                            "overflowHidden": false
+                            "card": false,
+                            "overflowHidden": false,
+                            "shadow": false
                         },
                         "justify": "fill-row",
                         "align": "stretch",
@@ -104,8 +99,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -176,11 +170,11 @@
                                             ]
                                         },
                                         "style": {
-                                            "card": true,
-                                            "shadow": false,
                                             "backgroundBlendMode": "normal",
                                             "borderStyle": "none",
-                                            "overflowHidden": false
+                                            "card": true,
+                                            "overflowHidden": false,
+                                            "shadow": false
                                         },
                                         "justify": "fill-row",
                                         "align": "stretch",
@@ -191,9 +185,7 @@
                                             "stretched": false,
                                             "width": "1/2"
                                         },
-                                        "spacing": null,
-                                        "className": "inverted rounded-m",
-                                        "id": ""
+                                        "className": "inverted rounded-m"
                                     }
                                 },
                                 {
@@ -207,19 +199,14 @@
                                                     "type": "image",
                                                     "data": {
                                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
-                                                        "alt": "",
-                                                        "link": "",
-                                                        "openInNewTab": false,
-                                                        "caption": ""
+                                                        "openInNewTab": false
                                                     },
                                                     "tunes": {
                                                         "layout": {
                                                             "stretched": false,
                                                             "width": "1/1"
                                                         },
-                                                        "spacing": null,
-                                                        "className": "rounded-m",
-                                                        "id": ""
+                                                        "className": "rounded-m"
                                                     }
                                                 },
                                                 {
@@ -248,11 +235,11 @@
                                                             ]
                                                         },
                                                         "style": {
-                                                            "card": false,
-                                                            "shadow": false,
                                                             "backgroundBlendMode": "normal",
                                                             "borderStyle": "none",
-                                                            "overflowHidden": false
+                                                            "card": false,
+                                                            "overflowHidden": false,
+                                                            "shadow": false
                                                         },
                                                         "justify": "fill-row",
                                                         "align": "stretch"
@@ -261,20 +248,17 @@
                                                         "layout": {
                                                             "stretched": false,
                                                             "width": "1/1"
-                                                        },
-                                                        "spacing": null,
-                                                        "className": "",
-                                                        "id": ""
+                                                        }
                                                     }
                                                 }
                                             ]
                                         },
                                         "style": {
-                                            "card": false,
-                                            "shadow": false,
                                             "backgroundBlendMode": "normal",
                                             "borderStyle": "none",
-                                            "overflowHidden": false
+                                            "card": false,
+                                            "overflowHidden": false,
+                                            "shadow": false
                                         },
                                         "justify": "fill-row",
                                         "align": "stretch",
@@ -284,20 +268,17 @@
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/2"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 }
                             ]
                         },
                         "style": {
-                            "card": false,
-                            "shadow": false,
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
-                            "overflowHidden": false
+                            "card": false,
+                            "overflowHidden": false,
+                            "shadow": false
                         },
                         "justify": "fill-row",
                         "align": "stretch",
@@ -306,8 +287,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -349,19 +329,13 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -369,19 +343,13 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-06.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -389,29 +357,23 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 }
                             ]
                         },
                         "style": {
-                            "card": false,
-                            "shadow": false,
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
-                            "overflowHidden": false
+                            "card": false,
+                            "overflowHidden": false,
+                            "shadow": false
                         },
                         "justify": "fill-row",
                         "align": "stretch",
@@ -420,8 +382,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -445,19 +406,13 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -465,19 +420,13 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -485,29 +434,23 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 }
                             ]
                         },
                         "style": {
-                            "card": false,
-                            "shadow": false,
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
-                            "overflowHidden": false
+                            "card": false,
+                            "overflowHidden": false,
+                            "shadow": false
                         },
                         "justify": "fill-row",
                         "align": "center",
@@ -516,8 +459,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 },
@@ -541,19 +483,13 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -561,19 +497,13 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -581,29 +511,23 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/4"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 }
                             ]
                         },
                         "style": {
-                            "card": true,
-                            "shadow": false,
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
-                            "overflowHidden": false
+                            "card": true,
+                            "overflowHidden": false,
+                            "shadow": false
                         },
                         "justify": "space-evenly",
                         "align": "end",
@@ -612,8 +536,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         },
                         "className": "border rounded-m"
                     }
@@ -623,8 +546,8 @@
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:27:10+00:00",
-        ":lastModified": "2026-03-12T18:35:43+00:00",
-        ":automadVersion": "2.0.0-beta.17",
-        ":lastPublished": "2026-03-12T18:35:44+00:00"
+        ":lastModified": "2026-08-15T15:27:24+00:00",
+        ":automadVersion": "2.0.0-beta.51",
+        ":lastPublished": "2026-08-15T15:27:27+00:00"
     }
 }

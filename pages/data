@@ -106,11 +106,11 @@
                                             ]
                                         },
                                         "style": {
-                                            "card": false,
-                                            "shadow": false,
                                             "backgroundBlendMode": "normal",
                                             "borderStyle": "none",
-                                            "overflowHidden": false
+                                            "card": false,
+                                            "overflowHidden": false,
+                                            "shadow": false
                                         },
                                         "justify": "start",
                                         "align": "start",
@@ -124,9 +124,7 @@
                                         "spacing": {
                                             "right": "1rem",
                                             "bottom": "2rem"
-                                        },
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 },
                                 {
@@ -134,29 +132,23 @@
                                     "type": "image",
                                     "data": {
                                         "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
-                                        "alt": "",
-                                        "link": "",
-                                        "openInNewTab": false,
-                                        "caption": ""
+                                        "openInNewTab": false
                                     },
                                     "tunes": {
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/2"
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                        }
                                     }
                                 }
                             ]
                         },
                         "style": {
-                            "card": false,
-                            "shadow": false,
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
-                            "overflowHidden": false
+                            "card": false,
+                            "overflowHidden": false,
+                            "shadow": false
                         },
                         "justify": "fill-row",
                         "align": "start",
@@ -165,8 +157,7 @@
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": true,
-                            "width": null
+                            "stretched": true
                         },
                         "spacing": {
                             "bottom": "5rem"
@@ -178,8 +169,8 @@
         "template": "page_full_width_left",
         "private": false,
         ":created": "2023-02-17T10:36:01+00:00",
-        ":lastModified": "2026-02-14T17:12:42+00:00",
-        ":automadVersion": "2.0.0-beta.15",
-        ":lastPublished": "2026-03-15T10:02:16+00:00"
+        ":lastModified": "2026-08-15T15:26:54+00:00",
+        ":automadVersion": "2.0.0-beta.51",
+        ":lastPublished": "2026-08-15T15:26:55+00:00"
     }
 }
