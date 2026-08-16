@@ -61,7 +61,7 @@ class ModalToggleComponent extends BaseComponent {
 				this.elementAttributes[Attr.modal]
 			);
 
-			modal.toggle();
+			modal?.toggle();
 		};
 
 		this.listen(this, 'click', toggle.bind(this));

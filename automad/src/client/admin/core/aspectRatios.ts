@@ -43,9 +43,12 @@ import { AspectRatioBreakpoints } from '@/admin/types';
 export const aspectRatioBreakpointsToString = (
 	breakpoints: AspectRatioBreakpoints
 ): string => {
-	return Object.keys(breakpoints).reduce((out: string, maxWidth: string) => {
-		return `${out} ${maxWidth}:${breakpoints[maxWidth].aspectRatio}`.trim();
-	}, '');
+	return Object.keys(breakpoints ?? {}).reduce(
+		(out: string, maxWidth: string) => {
+			return `${out} ${maxWidth}:${breakpoints[maxWidth].aspectRatio}`.trim();
+		},
+		''
+	);
 };
 
 /**
@@ -59,7 +62,7 @@ export const aspectRatioBreakpointsFromString = (
 ): AspectRatioBreakpoints => {
 	const breakpoints: AspectRatioBreakpoints = {};
 
-	breakpointsString.split(' ').forEach((pair: string) => {
+	breakpointsString?.split(' ').forEach((pair: string) => {
 		const [maxWidth, aspectRatio] = pair.split(':');
 
 		if (!maxWidth || !aspectRatio) {

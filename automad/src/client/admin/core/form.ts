@@ -69,6 +69,7 @@ export const enum FieldTag {
 	editor = 'am-editor-field',
 	email = 'am-email-field',
 	feedFieldSelect = 'am-feed-field-select-field',
+	focalPoint = 'am-focal-point-field',
 	image = 'am-image-field',
 	input = 'am-input-field',
 	mainTheme = 'am-main-theme-field',

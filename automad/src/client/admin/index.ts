@@ -51,6 +51,7 @@ import('./components/Fields/DateField');
 import('./components/Fields/EditorField');
 import('./components/Fields/EmailField');
 import('./components/Fields/FeedFieldSelectField');
+import('./components/Fields/FocalPointField');
 import('./components/Fields/ImageField');
 import('./components/Fields/InputField');
 import('./components/Fields/MainThemeField');
