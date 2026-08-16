@@ -46,6 +46,7 @@ import {
 	createGenericModal,
 	createSelect,
 	CSS,
+	debounce,
 	FieldTag,
 	fire,
 	html,
@@ -66,7 +67,6 @@ import {
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
-import { FocalPointPickerComponent } from '@/admin/components/FocalPointPicker';
 import { filterEmptyData, saveEditorBlocks } from '../utils';
 import iconAlignStart from '@/common/svg/flex/align-start.svg';
 import iconAlignCenter from '@/common/svg/flex/align-center.svg';
@@ -80,6 +80,7 @@ import iconJustifyBetween from '@/common/svg/flex/justify-between.svg';
 import iconJustifyEvenly from '@/common/svg/flex/justify-evenly.svg';
 import iconGap from '@/common/svg/flex/gap.svg';
 import iconMin from '@/common/svg/flex/min.svg';
+import { FocalPointFieldComponent } from '@/admin/components/Fields/FocalPointField';
 
 /**
  * The flexbox option for "justify-content".
@@ -646,13 +647,13 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			grid
 		);
 
-		const field = (
+		const field = <T extends BaseFieldComponent = BaseFieldComponent>(
 			type: FieldTag,
 			name: keyof SectionStyle,
 			text: string,
 			parent: HTMLElement,
 			attributes: KeyValueMap = {}
-		): BaseFieldComponent => {
+		): T => {
 			return createField(
 				type,
 				parent,
@@ -664,7 +665,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 				},
 				[],
 				attributes
-			);
+			) as T;
 		};
 
 		field(FieldTag.toggle, 'card', 'optimizeContentForCards', areaTopLeft);
@@ -823,88 +824,39 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			blendModeId
 		);
 
-		const backgroundImageField = field(
+		field(
 			FieldTag.image,
 			'backgroundImage',
 			'backgroundImage',
 			areaBottomLeft
 		);
 
-		const focalPointButton =
-			this.createFocalPointButton(backgroundImageField);
+		const focalPointField = field<FocalPointFieldComponent>(
+			FieldTag.focalPoint,
+			'backgroundImageFocalPoint',
+			'focalPoint',
+			areaBottomLeft
+		);
 
-		focalPointButton.disabled = !this.data.style?.backgroundImage;
+		focalPointField.image = this.data.style?.backgroundImage;
 
 		Bindings.connectElements(body);
 
-		this.listen(body, 'change', () => {
-			this.data.style = {
-				...this.data.style,
-				...collectFieldData(body),
-			} as SectionStyle;
-			this.setStyle();
-			focalPointButton.disabled = !this.data.style?.backgroundImage;
-			this.blockAPI.dispatchChange();
-		});
+		this.listen(
+			body,
+			'change input',
+			debounce(() => {
+				this.data.style = collectFieldData(body);
+				this.setStyle();
+				this.blockAPI.dispatchChange();
+
+				focalPointField.image = this.data.style?.backgroundImage;
+			})
+		);
 
 		setTimeout(() => {
 			modal.open();
 		});
-	}
-
-	/**
-	 * Create the focal point edit button and modal dialog.
-	 *
-	 * @param container
-	 * @return the created button
-	 */
-	private createFocalPointButton(container: HTMLElement): HTMLButtonElement {
-		const createFocalPointModal = () => {
-			if (!this.data.style?.backgroundImage) {
-				return;
-			}
-
-			const { modal, body } = createGenericModal(App.text('focalPoint'));
-
-			const picker = create<FocalPointPickerComponent>(
-				FocalPointPickerComponent.TAG_NAME,
-				[],
-				{},
-				body
-			);
-
-			picker.init(
-				this.data.style.backgroundImage,
-				this.data.style.backgroundImageFocalPoint
-			);
-
-			modal.listen(picker, 'change', () => {
-				this.data.style.backgroundImageFocalPoint = picker.value;
-
-				this.setStyle();
-				this.blockAPI.dispatchChange();
-			});
-
-			setTimeout(() => {
-				modal.open();
-			}, 0);
-		};
-
-		const focalPointButton = create<HTMLButtonElement>(
-			'button',
-			[CSS.button, CSS.buttonPrimary],
-			{},
-			container,
-			App.text('focalPoint')
-		);
-
-		this.listen(
-			focalPointButton,
-			'click',
-			createFocalPointModal.bind(this)
-		);
-
-		return focalPointButton;
 	}
 
 	/**
@@ -1001,7 +953,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 		`;
 
 		const maxWidths = Object.keys(
-			this.data.style?.aspectRatioBreakpoints
+			this.data.style?.aspectRatioBreakpoints ?? {}
 		).sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
 
 		maxWidths.forEach((maxWidth) => {

@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.53](https://github.com/marcantondahmen/automad/commit/3ea162f81492a63ef596ca1910645bc02d4229dc)
+## [v2.0.0-beta.54](https://github.com/marcantondahmen/automad/commit/6fb5e48e2c36957b60b7e58e154d848e2c5a5d78)
 
-Sat, 15 Aug 2026 23:06:10 +0200
+Sun, 16 Aug 2026 17:55:24 +0200
+
+### Bugfixes
+
+- fix toggles in layout section style dialog and refactor the section focal point field ([6fb5e48e2](https://github.com/marcantondahmen/automad/commit/6fb5e48e2c36957b60b7e58e154d848e2c5a5d78))
+
+## [v2.0.0-beta.53](https://github.com/marcantondahmen/automad/commit/5651d20dd27252627ebefb03cf02a8dc691c0f8e)
+
+Sat, 15 Aug 2026 23:07:45 +0200
 
 ### Bugfixes
 
