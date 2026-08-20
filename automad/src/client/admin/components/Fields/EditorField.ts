@@ -226,30 +226,29 @@ export class EditorFieldComponent extends BaseFieldComponent {
 	 * listeners and observers after changing views.
 	 */
 	private attachToolbarPositionObservers(): void {
+		const handler = debounce((event: Event) => {
+			event.stopPropagation();
+
+			const target = event.target as HTMLElement;
+			const block = target.closest<HTMLElement>('.ce-block');
+
+			LayoutTune.updateToolbarPosition(block);
+		}, 5);
+
 		// When forward slash is pressed.
 		this.listen(this, 'keydown', (event: KeyboardEvent) => {
 			if (event.key != '/') {
 				return;
 			}
 
-			const target = event.target as HTMLElement;
-			const block = target.closest<HTMLElement>('.ce-block');
-
-			LayoutTune.updateToolbarPosition(block);
+			handler(event);
 		});
 
 		// On mouseover.
 		this.listen(
 			this,
-			'mouseover',
-			debounce((event: Event) => {
-				event.stopPropagation();
-
-				const target = event.target as HTMLElement;
-				const block = target.closest<HTMLElement>('.ce-block');
-
-				LayoutTune.updateToolbarPosition(block);
-			}, 10),
+			'mouseover mousemove',
+			handler.bind(this),
 			'.ce-block'
 		);
 	}
