@@ -134,7 +134,7 @@ class FileCardComponent extends BaseComponent {
 					class="${CSS.cardTeaser} ${CSS.cursorPointer}"
 					${Attr.tooltip}="$${file.basename}"
 				>
-					<img src="${file.thumbnail}" />
+					<img src="${file.thumbnail}" loading="lazy" />
 				</am-file-robot>
 			`;
 		}
