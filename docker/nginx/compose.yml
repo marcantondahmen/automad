@@ -4,7 +4,7 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - 8888:80
+      - 8000:80
     depends_on:
       - php
     volumes:

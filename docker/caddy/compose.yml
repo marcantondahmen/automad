@@ -4,7 +4,7 @@ services:
   caddy:
     image: caddy:2
     ports:
-      - 8888:80
+      - 8000:80
     volumes:
       - ../../:/app
       - ./Caddyfile:/etc/caddy/Caddyfile:ro

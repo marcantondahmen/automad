@@ -7,7 +7,7 @@ services:
       context: .
     user: ${USER_ID}:${GROUP_ID}
     ports:
-      - 8888:80
+      - 8000:80
     environment:
       XDG_CONFIG_HOME: /tmp/.config
       XDG_DATA_HOME: /tmp/.local/share

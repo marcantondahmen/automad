@@ -1,5 +1,21 @@
 #!/bin/bash
 
+cleanup() {
+	# Show again ctrl c
+	stty -echoctl
+	echo -e "[Docker] compose down ..."
+	docker compose down
+}
+
+# Always run cleanup when script exits
+# and also handle Ctrl+c
+trap cleanup EXIT
+
+# Hide ctrl c
+stty -echoctl
+
+REPO=$(pwd)
+
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 
 export USER_ID=$(id -u)
@@ -18,10 +34,17 @@ dir=$(
 
 cd "$dir"
 
-printf '\033]0;Automad - %s\007' "docker:$dir"
+printf '\033]0;Automad - %s\007' "docker:$dir:dev"
 
 if [ -n "${TMUX:-}" ]; then
-	tmux rename-window "docker:$dir"
+	tmux rename-window "docker:$dir:dev"
 fi
 
-docker compose up --build
+echo -e "[Docker] compose up ..."
+docker compose up --build -d
+
+echo -e "[Prebuild] Running prebuild tasks ..."
+bash bin/prebuild.sh
+
+echo -e "\n[Esbuild] starting esbuild ...\n"
+node ${REPO}/esbuild.js --dev
