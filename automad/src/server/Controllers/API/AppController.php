@@ -102,6 +102,7 @@ class AppController {
 			'phpVersion' => phpversion(),
 			'phpSapiName' => php_sapi_name(),
 			'memoryLimit' => ini_get('memory_limit'),
+			'imageProcessor' => AM_IMG_PROCESSOR,
 			'diskUsage' => DiskUsage::calculate(),
 			'diskQuota' => AM_DISK_QUOTA
 		));
