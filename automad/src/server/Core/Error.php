@@ -181,6 +181,7 @@ class Error {
 							line-height: 1.45;
 							margin: 0 0 20px 0;
 							overflow-wrap: break-word;
+							text-wrap: pretty;
 						}
 
 						pre {
