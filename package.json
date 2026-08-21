@@ -12,7 +12,7 @@
     "build": "npm run prebuild && node esbuild.js",
     "bump-year": "bash bin/bump-year.sh",
     "dev": "bash bin/dev.sh",
-    "docker": "bash docker/run.sh",
+    "dev:docker": "bash bin/dev-docker.sh",
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket",
     "mailpit": "docker run -d --restart unless-stopped --name=mailpit -p 8025:8025 -p 1025:1025 axllent/mailpit",
     "phpunit": "bash bin/phpunit.sh",

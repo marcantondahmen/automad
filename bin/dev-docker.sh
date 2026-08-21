@@ -14,9 +14,9 @@ trap cleanup EXIT
 # Hide ctrl c
 stty -echoctl
 
-REPO=$(pwd)
+repo=$(pwd)
 
-cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+cd $repo/docker
 
 export USER_ID=$(id -u)
 export GROUP_ID=$(id -g)
@@ -34,10 +34,12 @@ dir=$(
 
 cd "$dir"
 
-printf '\033]0;Automad - %s\007' "docker:$dir:dev"
+title="dev:docker:$dir"
+
+printf '\033]0;Automad - %s\007' "$title"
 
 if [ -n "${TMUX:-}" ]; then
-	tmux rename-window "docker:$dir:dev"
+	tmux rename-window "$title"
 fi
 
 echo -e "[Docker] compose up ..."
@@ -47,4 +49,4 @@ echo -e "[Prebuild] Running prebuild tasks ..."
 bash bin/prebuild.sh
 
 echo -e "\n[Esbuild] starting esbuild ...\n"
-node ${REPO}/esbuild.js --dev
+node $repo/esbuild.js --dev
