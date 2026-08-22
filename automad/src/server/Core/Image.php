@@ -212,12 +212,7 @@ class Image {
 			$this->originalFile,
 			$this->fileFullPath,
 			$this->width,
-			$this->height,
-			$this->originalWidth,
-			$this->originalHeight,
-			$this->requestedWidth,
-			$this->requestedHeight,
-			$this->crop
+			$this->height
 		);
 
 		chmod($this->fileFullPath, AM_PERM_FILE);

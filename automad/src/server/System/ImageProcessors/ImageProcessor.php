@@ -52,22 +52,12 @@ interface ImageProcessor {
 	 * @param string $output
 	 * @param int $newWidth
 	 * @param int $newHeight
-	 * @param int $originalWidth
-	 * @param int $originalHeight
-	 * @param int $requestedWidth
-	 * @param int $requestedHeight
-	 * @param bool $crop
 	 * @return bool
 	 */
 	public function resize(
 		string $path,
 		string $output,
 		int $newWidth,
-		int $newHeight,
-		int $originalWidth,
-		int $originalHeight,
-		int $requestedWidth,
-		int $requestedHeight,
-		bool $crop
+		int $newHeight
 	): bool;
 }

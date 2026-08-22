@@ -54,29 +54,22 @@ class GdProcessor implements ImageProcessor {
 	 * @param string $output
 	 * @param int $newWidth
 	 * @param int $newHeight
-	 * @param int $originalWidth
-	 * @param int $originalHeight
-	 * @param int $requestedWidth
-	 * @param int $requestedHeight
-	 * @param bool $crop
 	 * @return bool
 	 */
 	public function resize(
 		string $path,
 		string $output,
 		int $newWidth,
-		int $newHeight,
-		int $originalWidth,
-		int $originalHeight,
-		int $requestedWidth,
-		int $requestedHeight,
-		bool $crop
+		int $newHeight
 	): bool {
 		$getimagesize = @getimagesize($path);
 
 		if (!$getimagesize) {
 			return false;
 		}
+
+		$originalWidth = $getimagesize[0];
+		$originalHeight = $getimagesize[1];
 
 		$type = $getimagesize['mime'];
 
@@ -107,27 +100,26 @@ class GdProcessor implements ImageProcessor {
 			return false;
 		}
 
-		$x = 0;
-		$y = 0;
+		$cropX = 0;
+		$cropY = 0;
 
-		if ($crop) {
-			$originalAspect = $originalWidth / $originalHeight;
-			$requestedAspect = $requestedWidth / $requestedHeight;
+		$newAspect = round($newWidth / $newHeight, 3);
+		$originalAspect = round($originalWidth / $originalHeight, 3);
 
-			if ($originalAspect > $requestedAspect) {
+		if ($newAspect !== $originalAspect) {
+			if ($originalAspect > $newAspect) {
 				if ($newHeight > $originalHeight) {
 					$requestedAspect = $newWidth / $newHeight;
 				}
 
-				$x = Image::pixels((floatval($originalWidth) - (floatval($originalHeight) * floatval($requestedAspect))) / 2.0);
+				$cropX = Image::pixels((floatval($originalWidth) - (floatval($originalHeight) * floatval($newAspect))) / 2.0);
 			} else {
 				if ($newWidth > $originalWidth) {
 					$requestedAspect = $newWidth / $newHeight;
 				}
 
-				$y = Image::pixels((floatval($originalHeight) - (floatval($originalWidth) / floatval($requestedAspect))) / 2.0);
+				$cropY = Image::pixels((floatval($originalHeight) - (floatval($originalWidth) / floatval($newAspect))) / 2.0);
 			}
-			// exit((string) json_encode(array('x' => $x, 'y' => $y, 'aspect' => $requestedAspect, 'ow' => $originalWidth, 'oh' => $originalHeight)));
 		}
 
 		$dest = imagecreatetruecolor($newWidth, $newHeight);
@@ -143,12 +135,12 @@ class GdProcessor implements ImageProcessor {
 			$src,
 			0,
 			0,
-			$x,
-			$y,
+			$cropX,
+			$cropY,
 			$newWidth,
 			$newHeight,
-			Image::pixels($originalWidth - (2 * intval($x))),
-			Image::pixels($originalHeight - (2 * intval($y)))
+			Image::pixels($originalWidth - (2 * intval($cropX))),
+			Image::pixels($originalHeight - (2 * intval($cropY)))
 		);
 
 		switch ($type) {
