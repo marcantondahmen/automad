@@ -37,9 +37,9 @@ namespace Automad\Blocks\Utils;
 
 use Automad\Core\Automad;
 use Automad\Core\Image;
-use Automad\Core\RemoteFile;
 use Automad\Core\Resolve;
 use Automad\System\FileSystem;
+use Automad\System\RemoteFile;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

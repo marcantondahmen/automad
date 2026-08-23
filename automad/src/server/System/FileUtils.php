@@ -37,7 +37,6 @@ namespace Automad\System;
 
 use Automad\Core\Debug;
 use Automad\Core\Parse;
-use Automad\Core\RemoteFile;
 use Automad\Core\Resolve;
 use Automad\Core\Str;
 use Automad\Models\Page;
