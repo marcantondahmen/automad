@@ -21,7 +21,9 @@
     "release": "bash bin/release.sh",
     "server:start": "bash bin/server.sh start",
     "server:stop": "bash bin/server.sh stop",
-    "test": "npm run phpunit && npm run psalm && npm run vitest",
+    "test": "npm run phpunit && npm run psalm && npm run typecheck && npm run vitest",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch",
     "unused": "bash bin/find-unused.sh",
     "vitest": "vitest --run",
     "vitest:watch": "vitest"

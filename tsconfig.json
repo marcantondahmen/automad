@@ -3,6 +3,7 @@
 		"allowSyntheticDefaultImports": true,
 		"allowJs": true,
 		"checkJs": false,
+		"skipLibCheck": true,
 		"noImplicitAny": true,
 		"preserveConstEnums": false,
 		"resolveJsonModule": true,
