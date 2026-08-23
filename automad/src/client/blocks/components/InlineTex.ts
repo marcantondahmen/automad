@@ -32,7 +32,9 @@
  * See LICENSE.md for license information.
  */
 
-export default class InlineTexComponent {
+import type { ComponentImplementation } from '../types';
+
+export default class InlineTexComponent implements ComponentImplementation {
 	/**
 	 * The class constructor.
 	 */

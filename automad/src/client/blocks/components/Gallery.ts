@@ -33,12 +33,6 @@
  */
 
 import { create, debounce } from '@/common';
-import {
-	GalleryData,
-	GalleryRow,
-	ImageSetData,
-	MasonryItem,
-} from '@/blocks/types';
 // @ts-ignore
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 // @ts-ignore
@@ -48,6 +42,40 @@ import ObjectPosition from '@vovayatsyuk/photoswipe-object-position';
 import arrowPrevSVG from '@/blocks/svg/arrowPrev.svg';
 import arrowNextSVG from '@/blocks/svg/arrowNext.svg';
 import closeSVG from '@/blocks/svg/close.svg';
+import type { GalleryBlockData } from '@/admin/editor/blocks/Gallery';
+import type { ComponentImplementation } from '../types';
+
+interface GalleryData {
+	imageSets: {
+		thumb: {
+			image: string;
+			width: number;
+			height: number;
+			preload: string;
+		};
+		large: {
+			image: string;
+			width: number;
+			height: number;
+		};
+		caption: string;
+	}[];
+	settings: Omit<GalleryBlockData, 'files'>;
+}
+
+type ImageSetData = GalleryData['imageSets'][number];
+
+interface GalleryRow {
+	width: number;
+	imageSets: ImageSetData[];
+}
+
+interface MasonryItem {
+	element: HTMLElement;
+	rowSpan: number;
+	height: number;
+	thumbHeight: number;
+}
 
 const cls = {
 	pswpItem: 'pswp-item',
@@ -60,7 +88,7 @@ const cls = {
  * @see {@link github https://github.com/dimsemenov/photoswipe}
  * @see {@link captions https://github.com/dimsemenov/photoswipe-dynamic-caption-plugin}
  */
-export default class Gallery {
+export default class Gallery implements ComponentImplementation {
 	/**
 	 * The tag name.
 	 *
