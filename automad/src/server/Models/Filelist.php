@@ -36,7 +36,7 @@
 namespace Automad\Models;
 
 use Automad\Core\Debug;
-use Automad\Core\FileUtils;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

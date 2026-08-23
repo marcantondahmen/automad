@@ -36,11 +36,11 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
-use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\System\Fields;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

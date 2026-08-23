@@ -39,11 +39,11 @@ use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\Img;
 use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
-use Automad\Core\FileUtils;
 use Automad\Core\Resolve;
 use Automad\Core\Str;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Search\Replacement;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

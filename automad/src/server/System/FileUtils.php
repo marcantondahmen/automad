@@ -33,10 +33,14 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Core;
+namespace Automad\System;
 
+use Automad\Core\Debug;
+use Automad\Core\Parse;
+use Automad\Core\RemoteFile;
+use Automad\Core\Resolve;
+use Automad\Core\Str;
 use Automad\Models\Page;
-use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

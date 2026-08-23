@@ -38,13 +38,13 @@ namespace Automad\Models;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\System\DiskUsage;
 use Automad\System\FileSystem;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

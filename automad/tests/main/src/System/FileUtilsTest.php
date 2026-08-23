@@ -1,6 +1,6 @@
 <?php
 
-namespace Automad\Core;
+namespace Automad\System;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
