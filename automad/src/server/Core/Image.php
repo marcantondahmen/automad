@@ -72,6 +72,11 @@ class Image {
 	public int $originalWidth = 0;
 
 	/**
+	 * The image type.
+	 */
+	public string $type;
+
+	/**
 	 * The width of the generated image.
 	 */
 	public int $width = 0;
@@ -133,6 +138,7 @@ class Image {
 
 		$this->originalWidth = $getimagesize[0];
 		$this->originalHeight = $getimagesize[1];
+		$this->type = $getimagesize['mime'];
 
 		$this->requestedWidth = self::pixels($requestedWidth ? $requestedWidth : $this->originalWidth);
 		$this->requestedHeight = self::pixels($requestedHeight ? $requestedHeight : $this->originalHeight);
