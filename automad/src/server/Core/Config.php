@@ -37,6 +37,7 @@ namespace Automad\Core;
 
 use Automad\Models\MailConfig;
 use Automad\System\ConfigFile;
+use Automad\System\FileSystem;
 use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

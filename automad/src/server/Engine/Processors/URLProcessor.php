@@ -36,7 +36,7 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Admin\InPage;
-use Automad\Core\FileSystem;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

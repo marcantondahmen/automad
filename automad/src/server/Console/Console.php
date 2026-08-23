@@ -37,7 +37,7 @@ namespace Automad\Console;
 
 use Automad\App;
 use Automad\Console\Commands\AbstractCommand;
-use Automad\Core\FileSystem;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 

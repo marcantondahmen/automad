@@ -38,8 +38,8 @@ namespace Automad\Controllers\API;
 use Automad\API\Response;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Automad\Core\Text;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

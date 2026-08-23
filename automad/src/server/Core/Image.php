@@ -35,6 +35,7 @@
 
 namespace Automad\Core;
 
+use Automad\System\FileSystem;
 use Automad\System\ImageProcessors\GdProcessor;
 use Automad\System\ImageProcessors\ImagickProcessor;
 

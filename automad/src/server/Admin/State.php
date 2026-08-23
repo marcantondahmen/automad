@@ -45,6 +45,7 @@ use Automad\Models\UserCollection;
 use Automad\System\Ai\ProviderCollection;
 use Automad\System\Fields;
 use Automad\System\PackageCollection;
+use Automad\System\Theme;
 use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

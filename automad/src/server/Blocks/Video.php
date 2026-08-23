@@ -37,9 +37,9 @@ namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
-use Automad\Core\FileSystem;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Search\Replacement;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -35,8 +35,6 @@
 
 namespace Automad\System;
 
-use Automad\Core\FileSystem;
-
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**

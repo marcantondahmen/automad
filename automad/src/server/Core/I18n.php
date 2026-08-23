@@ -37,6 +37,7 @@ namespace Automad\Core;
 
 use Automad\Auth\Session;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

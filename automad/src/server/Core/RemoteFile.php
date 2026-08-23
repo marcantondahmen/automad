@@ -36,6 +36,7 @@
 namespace Automad\Core;
 
 use Automad\System\Fetch;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

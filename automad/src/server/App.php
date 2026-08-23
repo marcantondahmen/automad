@@ -39,10 +39,10 @@ use Automad\Core\AbortSignal;
 use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\Error;
-use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Core\Router;
 use Automad\Engine\Document\Body;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -71,7 +71,7 @@ class App {
 	public function __construct() {
 		define('AM_VERSION', App::VERSION);
 
-		require_once __DIR__ . '/Core/FileSystem.php';
+		require_once __DIR__ . '/System/FileSystem.php';
 		require_once __DIR__ . '/Core/AbortSignal.php';
 		require_once __DIR__ . '/Core/Error.php';
 		require_once __DIR__ . '/Autoload.php';

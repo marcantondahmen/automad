@@ -39,7 +39,6 @@ use Automad\API\Response;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\PublicationState;
 use Automad\Core\Request;
@@ -49,6 +48,7 @@ use Automad\Models\Selection;
 use Automad\Stores\DataStore;
 use Automad\System\DiskUsage;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
 use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

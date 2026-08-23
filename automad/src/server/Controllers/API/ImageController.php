@@ -37,12 +37,12 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Automad;
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Models\Image;
 use Automad\System\DiskUsage;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

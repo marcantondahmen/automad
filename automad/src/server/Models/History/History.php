@@ -37,9 +37,7 @@ namespace Automad\Models\History;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-use Automad\Core\Automad;
 use Automad\Core\Cache;
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\PageIndex;
 use Automad\Core\PublicationState;
@@ -48,6 +46,7 @@ use Automad\Core\Text;
 use Automad\Models\Page;
 use Automad\Stores\DataStore;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
 
 /**
  * The page history class.

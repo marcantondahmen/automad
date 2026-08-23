@@ -35,9 +35,9 @@
 
 namespace Automad\Auth;
 
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

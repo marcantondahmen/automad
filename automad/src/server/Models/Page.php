@@ -39,7 +39,6 @@ use Automad\Auth\Session;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\PublicationState;
@@ -48,6 +47,7 @@ use Automad\Core\Value;
 use Automad\Models\History\History;
 use Automad\Stores\DataStore;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

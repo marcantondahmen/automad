@@ -2,8 +2,8 @@
 
 namespace Automad\Controllers\API;
 
-use Automad\Core\FileSystem;
 use Automad\Models\UserCollection;
+use Automad\System\FileSystem;
 use PHPUnit\Framework\TestCase;
 
 class UserCollectionControllerTest extends TestCase {

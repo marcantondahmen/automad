@@ -38,10 +38,10 @@ namespace Automad\Controllers\API;
 use Automad\API\Response;
 use Automad\API\ResponseCache;
 use Automad\Core\Automad;
-use Automad\Core\FileSystem;
 use Automad\Core\Image;
 use Automad\Models\Selection;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
