@@ -48,9 +48,16 @@ import {
 	html,
 	uniqueId,
 } from '@/admin/core';
-import { CollapsibleSectionBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { saveEditorBlocks } from '../utils';
+import type { EditorOutputData } from '../types';
+
+interface CollapsibleSectionBlockData {
+	title: string;
+	content: EditorOutputData;
+	group: string;
+	collapsed: boolean;
+}
 
 export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockData> {
 	/**

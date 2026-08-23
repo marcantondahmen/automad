@@ -32,7 +32,8 @@
  * See LICENSE.md for license information.
  */
 
-import { GalleryBlockData, ImageSlideshowBlockData } from '@/admin/types';
+import type { GalleryBlockData } from '@/admin/editor/blocks/Gallery';
+import type { ImageSlideshowBlockData } from '@/admin/editor/blocks/ImageSlideshow';
 
 export interface ComponentImplementation {}
 

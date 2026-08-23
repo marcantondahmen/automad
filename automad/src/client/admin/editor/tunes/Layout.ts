@@ -41,7 +41,6 @@ import {
 	query,
 	queryAll,
 } from '@/admin/core';
-import { LayoutFraction, LayoutOption, LayoutTuneData } from '@/admin/types';
 import { getBlockTools } from '../blocks';
 import { BaseElementTune } from './BaseElementTune';
 import layout11 from '@/common/svg/layout/layout-1-1.svg';
@@ -52,6 +51,19 @@ import layout23 from '@/common/svg/layout/layout-2-3.svg';
 import layout34 from '@/common/svg/layout/layout-3-4.svg';
 import layoutDefault from '@/common/svg/layout/layout-default.svg';
 import layoutStretched from '@/common/svg/layout/layout-stretched.svg';
+
+type LayoutFraction = (typeof fractions)[number];
+
+interface LayoutOption {
+	layout: LayoutFraction | 'stretched' | '';
+	tooltip: string;
+	icon: string;
+}
+
+interface LayoutTuneData {
+	stretched: boolean;
+	width: LayoutFraction | '';
+}
 
 /**
  * The fractions that can be used as width.

@@ -34,11 +34,6 @@
 
 export * from '@/common/types';
 
-export * from './editor/blocks';
-export * from './editor/editor';
-export * from './editor/inline';
-export * from './editor/tunes';
-export * from './code';
 export * from './components';
 export * from './field';
 export * from './package';

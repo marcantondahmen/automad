@@ -42,8 +42,21 @@ import {
 	html,
 	uniqueId,
 } from '@/admin/core';
-import { KeyValueMap, MailBlockData } from '@/admin/types';
+import { KeyValueMap } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+interface MailBlockData {
+	to: string;
+	error: string;
+	success: string;
+	errorAddress: string;
+	labelAddress: string;
+	errorSubject: string;
+	labelSubject: string;
+	errorBody: string;
+	labelBody: string;
+	labelSend: string;
+}
 
 export class MailBlock extends BaseBlock<MailBlockData> {
 	/**

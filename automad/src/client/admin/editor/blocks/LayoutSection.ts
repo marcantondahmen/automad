@@ -56,13 +56,10 @@ import {
 	uniqueId,
 } from '@/admin/core';
 import {
-	SectionAlignItemsOption,
-	LayoutSectionBlockData,
-	SectionJustifyContentOption,
-	SectionStyle,
-	SectionToolbarRadioOptions,
 	SelectComponentOption,
 	KeyValueMap,
+	AspectRatioBreakpoints,
+	FocalPoint,
 } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
@@ -81,6 +78,53 @@ import iconJustifyEvenly from '@/common/svg/flex/justify-evenly.svg';
 import iconGap from '@/common/svg/flex/gap.svg';
 import iconMin from '@/common/svg/flex/min.svg';
 import { FocalPointFieldComponent } from '@/admin/components/Fields/FocalPointField';
+import { EditorOutputData } from '../types';
+
+type SectionToolbarRadioOptions<T extends string> = {
+	[key in T]: { icon: string; tooltip: string };
+};
+
+type SectionJustifyContentOption =
+	| 'start'
+	| 'center'
+	| 'end'
+	| 'space-between'
+	| 'space-evenly'
+	| 'fill-row';
+
+type SectionAlignItemsOption = 'start' | 'center' | 'end' | 'stretch';
+
+type SectionBackgroundBlendMode = (typeof sectionBackgroundBlendModes)[number];
+
+type SectionBorderStyle = (typeof sectionBorderStyles)[number];
+
+interface SectionStyle {
+	aspectRatio?: string;
+	aspectRatioBreakpoints?: AspectRatioBreakpoints;
+	card?: boolean;
+	shadow?: boolean;
+	color?: string;
+	backgroundBlendMode?: SectionBackgroundBlendMode | '';
+	backgroundColor?: string;
+	backgroundImage?: string;
+	backgroundImageFocalPoint?: FocalPoint | null;
+	borderColor?: string;
+	borderWidth?: string;
+	borderRadius?: string;
+	borderStyle?: SectionBorderStyle | '';
+	paddingTop?: string;
+	paddingBottom?: string;
+	overflowHidden?: boolean;
+}
+
+interface LayoutSectionBlockData {
+	content: EditorOutputData;
+	style: SectionStyle;
+	justify: SectionJustifyContentOption;
+	align: SectionAlignItemsOption;
+	gap: string;
+	minBlockWidth: string;
+}
 
 /**
  * The flexbox option for "justify-content".

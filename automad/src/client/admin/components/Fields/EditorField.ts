@@ -45,11 +45,12 @@ import {
 	listenToClassChange,
 	query,
 } from '@/admin/core';
+import { outputIsEqual, saveEditorBlocks } from '@/admin/editor/utils';
 import { BaseFieldComponent } from './BaseField';
-import { EditorOutputData, UndoValue } from '@/admin/types';
+import { UndoValue } from '@/admin/types';
 import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { outputIsEqual, saveEditorBlocks } from '@/admin/editor/utils';
+import type { EditorOutputData } from '@/admin/editor/types';
 
 /**
  * A block editor field.

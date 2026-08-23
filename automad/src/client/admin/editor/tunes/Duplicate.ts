@@ -34,8 +34,8 @@
 
 import { API, BlockAPI, BlockTune, TunesMenuConfig } from '@/vendor/editorjs';
 import { App } from '@/admin/core';
-import { BlockTuneConstructorOptions } from '@/admin/types';
 import { insertBlock } from '../utils';
+import { BlockTuneConstructorOptions } from '../types';
 
 /**
  * Duplicate blocks tune.

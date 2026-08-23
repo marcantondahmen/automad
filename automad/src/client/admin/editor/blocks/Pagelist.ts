@@ -50,15 +50,25 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { PagelistBlockData, SelectComponentOption } from '@/admin/types';
+import { SelectComponentOption } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
-export const pagelistTypes = [
-	'all',
-	'children',
-	'related',
-	'siblings',
-] as const;
+interface PagelistBlockData {
+	file: string;
+	context: string;
+	sortField: string;
+	sortOrder: 'asc' | 'desc';
+	type: (typeof pagelistTypes)[number];
+	excludeHidden: boolean;
+	excludeCurrent: boolean;
+	matchUrl: string;
+	filter: string;
+	template: string;
+	limit: number;
+	offset: number;
+}
+
+const pagelistTypes = ['all', 'children', 'related', 'siblings'] as const;
 
 const defaultFile = 'default';
 

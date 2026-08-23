@@ -34,7 +34,7 @@
 
 import { App } from '@/admin/core';
 import { BaseAttributeTune } from './BaseAttributeTune';
-import { AttributeTuneData } from '@/admin/types';
+import type { AttributeTuneData } from '../types';
 
 export class ClassTune extends BaseAttributeTune {
 	/**

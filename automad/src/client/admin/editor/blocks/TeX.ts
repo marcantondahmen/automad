@@ -34,8 +34,11 @@
 
 import { create, CSS, debounce, html, query } from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
-import { TeXBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+interface TeXBlockData {
+	code: string;
+}
 
 export class TeXBlock extends BaseBlock<TeXBlockData> {
 	/**

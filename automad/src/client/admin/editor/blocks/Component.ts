@@ -46,11 +46,14 @@ import {
 	query,
 	routes,
 } from '@/admin/core';
-import { ComponentBlockData } from '@/admin/types';
 import { getBlockTools } from '../blocks';
 import { BaseBlock } from './BaseBlock';
 import { baseTunes, getBlockTunes } from '../tunes';
 import { unknownBlockHandler } from '../utils';
+
+interface ComponentBlockData {
+	id: string;
+}
 
 const getComponent = (id: string) => {
 	return App.components.find((c) => c.id === id);

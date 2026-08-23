@@ -36,7 +36,6 @@ import { EditorConfig } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { ModalFieldComponent } from '@/admin/components/Modal/ModalField';
 import {
-	EditorOutputData,
 	FieldInitData,
 	FieldSectionCollection,
 	KeyValueMap,
@@ -66,6 +65,7 @@ import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
 import { SelectComponent } from '@/admin/components/Select';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { debounce, queryAll, Section } from '@/common';
+import type { EditorOutputData } from '@/admin/editor/types';
 
 /**
  * Create a new EditorJSComponent element.

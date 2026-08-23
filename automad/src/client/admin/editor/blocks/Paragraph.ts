@@ -34,8 +34,12 @@
 
 import { HTMLPasteEvent, TunesMenuConfig } from '@/vendor/editorjs';
 import { App, create, CSS, query } from '@/admin/core';
-import { ParagraphBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+interface ParagraphBlockData {
+	text: string;
+	large: boolean;
+}
 
 export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	/**

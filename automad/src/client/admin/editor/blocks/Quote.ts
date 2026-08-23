@@ -34,8 +34,17 @@
 
 import { ConversionConfig } from '@/vendor/editorjs';
 import { App, create, CSS, html } from '@/admin/core';
-import { QuoteBlockData, QuoteBlockInputs } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+interface QuoteBlockData {
+	text: string;
+	caption: string;
+}
+
+interface QuoteBlockInputs {
+	text: HTMLDivElement;
+	caption: HTMLDivElement;
+}
 
 export class QuoteBlock extends BaseBlock<QuoteBlockData> {
 	/**

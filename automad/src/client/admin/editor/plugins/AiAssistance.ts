@@ -34,10 +34,10 @@
 
 import { debounce } from '@/common';
 import { App } from '@/admin/core';
-import { AiRuntimeState } from '@/admin/types/editor/plugins';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { BasePlugin } from './BasePlugin';
 import { AiRuntime } from '@/admin/editor/ai';
+import type { AiRuntimeState } from '../types';
 
 /**
  * The AI extension for EditorJS.

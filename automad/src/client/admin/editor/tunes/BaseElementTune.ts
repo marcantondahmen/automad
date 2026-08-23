@@ -33,8 +33,8 @@
  */
 
 import { API, BlockAPI, BlockTune, ToolConfig } from '@/vendor/editorjs';
-import { BlockTuneConstructorOptions } from '@/admin/types';
 import { filterEmptyData } from '../utils';
+import { BlockTuneConstructorOptions } from '../types';
 
 /**
  * The abstract base tune class that returns an element on render.

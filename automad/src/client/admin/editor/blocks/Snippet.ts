@@ -48,8 +48,13 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { SelectComponentOption, SnippetBlockData } from '@/admin/types';
+import { SelectComponentOption } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+export interface SnippetBlockData {
+	file: string;
+	snippet: string;
+}
 
 export class SnippetBlock extends BaseBlock<SnippetBlockData> {
 	/**

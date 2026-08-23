@@ -42,8 +42,8 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { AttributeTuneData } from '@/admin/types';
 import { BaseModalTune } from './BaseModalTune';
+import type { AttributeTuneData } from '../types';
 
 export abstract class BaseAttributeTune extends BaseModalTune<AttributeTuneData> {
 	/**

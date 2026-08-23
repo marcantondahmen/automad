@@ -48,10 +48,35 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { ButtonsBlockButtonStyle, ButtonsBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
-export const buttonsJustifyOptions = ['start', 'center', 'end'] as const;
+interface ButtonsBlockButtonStyle {
+	color?: string;
+	background?: string;
+	borderColor?: string;
+	hoverColor?: string;
+	hoverBackground?: string;
+	hoverBorderColor?: string;
+	borderWidth?: string;
+	borderRadius?: string;
+	paddingHorizontal?: string;
+	paddingVertical?: string;
+}
+
+interface ButtonsBlockData {
+	justify: (typeof buttonsJustifyOptions)[number];
+	gap: string;
+	primaryText: string;
+	primaryLink: string;
+	primaryStyle: ButtonsBlockButtonStyle;
+	primaryOpenInNewTab: boolean;
+	secondaryText: string;
+	secondaryLink: string;
+	secondaryStyle: ButtonsBlockButtonStyle;
+	secondaryOpenInNewTab: boolean;
+}
+
+const buttonsJustifyOptions = ['start', 'center', 'end'] as const;
 
 /**
  * A buttons block.
