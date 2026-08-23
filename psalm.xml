@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <psalm
 	errorLevel="3"
+	autoloader="psalm-autoloader.php"
 	resolveFromConfigFile="true"
 	hoistConstants="true"
 	findUnusedVariablesAndParams="false"
@@ -18,7 +19,6 @@
 		<MissingOverrideAttribute errorLevel="suppress" />
 		<MoreSpecificReturnType errorLevel="suppress" />
 		<RiskyTruthyFalsyComparison errorLevel="suppress" />
-		<UndefinedClass errorLevel="suppress" />
 		<UndefinedConstant errorLevel="suppress" />
 		<UnresolvableInclude errorLevel="suppress" />
 		<UnsupportedPropertyReferenceUsage errorLevel="suppress" />
