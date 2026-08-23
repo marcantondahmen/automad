@@ -63,15 +63,15 @@ class Str {
 			return '';
 		}
 
-		Carbon::setLocale($locale ?? 'en');
+		try {
+			Carbon::setLocale($locale ?? 'en');
 
-		$date = Carbon::parse($date);
+			$date = Carbon::parse($date);
 
-		if (!$date) {
+			return $date->translatedFormat($format);
+		} catch (\Throwable $th) {
 			return '';
 		}
-
-		return $date->translatedFormat($format);
 	}
 
 	/**
