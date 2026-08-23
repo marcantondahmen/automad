@@ -43,9 +43,10 @@ import {
 	PackageManagerController,
 	requestAPI,
 } from '@/admin/core';
-import { KeyValueMap, Package } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { PackageCardComponent } from './PackageCard';
+import type { KeyValueMap } from '@/admin/types';
+import type { Package } from './types';
 
 /**
  * Get and sort all required package data in order to generate the package card grid.

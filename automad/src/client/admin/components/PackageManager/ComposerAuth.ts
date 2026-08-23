@@ -45,8 +45,15 @@ import {
 	notifySuccess,
 	requestAPI,
 } from '@/admin/core';
-import { ComposerAuth } from '@/admin/types';
 import { create, PackageManagerController } from '@/common';
+
+export interface ComposerAuth {
+	githubToken: string;
+	githubTokenIsSet: boolean;
+	gitlabUrl: string;
+	gitlabToken: string;
+	gitlabTokenIsSet: boolean;
+}
 
 /**
  * Create the config modal.

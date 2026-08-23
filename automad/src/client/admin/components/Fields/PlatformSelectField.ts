@@ -33,9 +33,10 @@
  */
 
 import { CSS, FieldTag, html } from '@/admin/core';
-import { InputElement, RepositoryPlatform } from '@/admin/types';
 import { create, query } from '@/common';
 import { BaseFieldComponent } from './BaseField';
+import type { InputElement } from '@/admin/types';
+import type { RepositoryPlatform } from '@/admin/components/PackageManager/types';
 
 /**
  * The git platform selector component.

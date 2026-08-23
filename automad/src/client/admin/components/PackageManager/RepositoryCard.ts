@@ -46,9 +46,9 @@ import {
 	notifySuccess,
 	requestAPI,
 } from '@/admin/core';
-import { Repository } from '@/admin/types';
 import { create, PackageManagerController } from '@/common';
 import { BaseComponent } from '../Base';
+import type { Repository } from './types';
 
 /**
  * The package repository card component.

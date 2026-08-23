@@ -34,8 +34,6 @@
 
 export * from '@/common/types';
 
-export * from './components';
-export * from './package';
 export * from './page';
 export * from './search';
 export * from './switcher';

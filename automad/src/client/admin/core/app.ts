@@ -49,17 +49,17 @@ import {
 	SystemController,
 	uniqueId,
 } from '.';
-import {
+import type {
 	InputElement,
 	KeyValueMap,
 	PackageDirectoryItems,
 	Pages,
-	ComponentEditorData,
 	SystemSettings,
 	ThemeCollection,
 	User,
 	PublicationState,
 } from '@/admin/types';
+import type { ComponentEditorData } from '@/admin/components/ComponentEditor';
 
 /**
  * The static class that provides the app state and root element to be used across the application.
