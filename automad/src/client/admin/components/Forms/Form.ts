@@ -53,14 +53,11 @@ import {
 	findFormErrorElement,
 	notifyFormError,
 } from '@/admin/core';
-import {
-	DeduplicationSettings,
-	InputElement,
-	KeyValueMap,
-} from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { SubmitComponent } from './Submit';
+import type { InputElement, KeyValueMap } from '@/admin/types';
+import type { DeduplicationSettings } from './types';
 
 export const autoSubmitTimeout = 350;
 

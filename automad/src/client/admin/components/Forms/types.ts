@@ -32,8 +32,13 @@
  * See LICENSE.md for license information.
  */
 
-import { KeyValueMap, ThemeOptions } from '.';
-import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
+import type { KeyValueMap, ThemeOptions } from '@/admin/types';
+import type { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
+
+export interface DeduplicationSettings {
+	getFormData: (element: HTMLElement) => KeyValueMap;
+	enabled: boolean;
+}
 
 export type FieldSectionName = 'settings' | 'text' | 'customizations';
 
@@ -45,21 +50,6 @@ export type FieldGroups = {
 	[name in FieldSectionName]: KeyValueMap;
 };
 
-export type InputElement = HTMLInputElement | HTMLTextAreaElement;
-
-export interface TemplateButtonStatus {
-	buttonLabel: string;
-	buttonIcon: string;
-	selectedTemplate: string;
-}
-
-export interface TemplateFieldData {
-	fields: KeyValueMap;
-	template: string;
-	themeKey: string;
-	readme: string;
-}
-
 export interface FieldGroupData {
 	section: SwitcherSectionComponent;
 	fields: KeyValueMap;
@@ -69,22 +59,4 @@ export interface FieldGroupData {
 	labels: KeyValueMap;
 	renderEmptyAlert: boolean;
 	shared?: KeyValueMap;
-}
-
-export interface FieldInitData {
-	key: string;
-	value: string | number | KeyValueMap | boolean;
-	name: string;
-	id?: string;
-	tooltip?: string;
-	options?: KeyValueMap;
-	label?: string;
-	placeholder?: string | number | KeyValueMap | boolean;
-	isUnused?: boolean;
-	envKey?: string;
-	hideLabel?: boolean;
-}
-
-export interface FieldRenderData extends Omit<FieldInitData, 'key' | 'envKey'> {
-	id: string;
 }

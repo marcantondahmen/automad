@@ -35,7 +35,6 @@
 export * from '@/common/types';
 
 export * from './components';
-export * from './field';
 export * from './package';
 export * from './page';
 export * from './search';
@@ -49,7 +48,7 @@ import {
 	ComponentController,
 	SharedController,
 } from '@/common';
-import { PageMetaData, InputElement } from '.';
+import { PageMetaData } from '.';
 
 declare global {
 	const DEVELOPMENT: boolean;
@@ -91,15 +90,12 @@ export interface BindingOptions {
 	onChange?: (value: string) => void;
 }
 
-export interface DeduplicationSettings {
-	getFormData: (element: HTMLElement) => KeyValueMap;
-	enabled: boolean;
-}
-
 export interface Image {
 	name: string;
 	thumbnail: string;
 }
+
+export type InputElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface FocalPoint {
 	x: number;

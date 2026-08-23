@@ -42,12 +42,21 @@ import {
 	query,
 	titleCase,
 } from '@/admin/core';
-import {
-	KeyValueMap,
-	TemplateButtonStatus,
-	TemplateFieldData,
-} from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+import type { KeyValueMap } from '@/admin/types';
+
+interface TemplateButtonStatus {
+	buttonLabel: string;
+	buttonIcon: string;
+	selectedTemplate: string;
+}
+
+interface TemplateFieldData {
+	fields: KeyValueMap;
+	template: string;
+	themeKey: string;
+	readme: string;
+}
 
 /**
  * Beautify a template path to be used as name.

@@ -32,15 +32,6 @@
  * See LICENSE.md for license information.
  */
 
-import {
-	DeduplicationSettings,
-	FieldSectionCollection,
-	FieldSectionName,
-	KeyValueMap,
-	PageBindings,
-	PageMainSettingsData,
-	Theme,
-} from '@/admin/types';
 import { FormComponent } from './Form';
 import {
 	App,
@@ -65,6 +56,17 @@ import {
 } from '@/admin/core';
 import { PageTemplateFieldComponent } from '@/admin/components/Fields/PageTemplateField';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
+import type {
+	KeyValueMap,
+	PageBindings,
+	PageMainSettingsData,
+	Theme,
+} from '@/admin/types';
+import type {
+	DeduplicationSettings,
+	FieldSectionCollection,
+	FieldSectionName,
+} from './types';
 
 /**
  * Init all URL and slug related bindings.

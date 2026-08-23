@@ -37,19 +37,15 @@ import {
 	create,
 	CSS,
 	EventName,
-	FieldTag,
 	fire,
 	queryAll,
 	uniqueId,
 } from '@/admin/core';
 import { ComponentEditorComponent } from '@/admin/components/ComponentEditor';
 import { FormComponent } from './Form';
-import {
-	KeyValueMap,
-	ComponentEditorData,
-	DeduplicationSettings,
-} from '@/admin/types';
 import Sortable from 'sortablejs';
+import type { KeyValueMap, ComponentEditorData } from '@/admin/types';
+import type { DeduplicationSettings } from './types';
 
 export const newComponentButtonClass = 'am-new-component-button';
 

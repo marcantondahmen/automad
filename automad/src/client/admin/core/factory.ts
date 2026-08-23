@@ -36,12 +36,6 @@ import { EditorConfig } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { ModalFieldComponent } from '@/admin/components/Modal/ModalField';
 import {
-	FieldInitData,
-	FieldSectionCollection,
-	KeyValueMap,
-	SelectComponentOption,
-} from '@/admin/types';
-import {
 	App,
 	Attr,
 	Bindings,
@@ -56,16 +50,21 @@ import {
 	query,
 	uniqueId,
 } from '.';
+import { debounce, queryAll, Section } from '@/common';
 import { PageDataFormComponent } from '@/admin/components/Forms/PageDataForm';
 import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
 import { FormComponent } from '@/admin/components/Forms/Form';
 import { SharedDataFormComponent } from '@/admin/components/Forms/SharedDataForm';
 import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
-import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
+import {
+	BaseFieldComponent,
+	type FieldInitData,
+} from '@/admin/components/Fields/BaseField';
 import { SelectComponent } from '@/admin/components/Select';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { debounce, queryAll, Section } from '@/common';
+import type { KeyValueMap, SelectComponentOption } from '@/admin/types';
 import type { EditorOutputData } from '@/admin/editor/types';
+import type { FieldSectionCollection } from '@/admin/components/Forms/types';
 
 /**
  * Create a new EditorJSComponent element.

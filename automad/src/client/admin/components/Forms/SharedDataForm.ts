@@ -46,13 +46,13 @@ import {
 	fire,
 	prepareFieldGroups,
 } from '@/admin/core';
-import {
+import { FormComponent } from './Form';
+import type { KeyValueMap } from '@/admin/types';
+import type {
 	DeduplicationSettings,
 	FieldSectionCollection,
 	FieldSectionName,
-	KeyValueMap,
-} from '@/admin/types';
-import { FormComponent } from './Form';
+} from './types';
 
 /**
  * The shared data form element.

@@ -46,15 +46,31 @@ import {
 	queryAll,
 	Undo,
 } from '@/admin/core';
-import {
-	FieldInitData,
-	FieldRenderData,
+import { BaseComponent } from '@/admin/components/Base';
+import type {
 	InputElement,
 	KeyValueMap,
 	UndoCapableField,
 	UndoValue,
 } from '@/admin/types';
-import { BaseComponent } from '@/admin/components/Base';
+
+export interface FieldInitData {
+	key: string;
+	value: string | number | KeyValueMap | boolean;
+	name: string;
+	id?: string;
+	tooltip?: string;
+	options?: KeyValueMap;
+	label?: string;
+	placeholder?: string | number | KeyValueMap | boolean;
+	isUnused?: boolean;
+	envKey?: string;
+	hideLabel?: boolean;
+}
+
+interface FieldRenderData extends Omit<FieldInitData, 'key' | 'envKey'> {
+	id: string;
+}
 
 /**
  * A standard input field with a label.

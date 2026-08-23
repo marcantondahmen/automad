@@ -48,16 +48,14 @@ import {
 	Section,
 	titleCase,
 } from '.';
-import {
+import { FormComponent } from '../components/Forms/Form';
+import { FormErrorComponent } from '../components/Forms/FormError';
+import type { InputElement, KeyValueMap, Listener } from '@/admin/types';
+import type {
 	FieldGroupData,
 	FieldGroups,
 	FieldSectionCollection,
-	InputElement,
-	KeyValueMap,
-	Listener,
-} from '@/admin/types';
-import { FormComponent } from '../components/Forms/Form';
-import { FormErrorComponent } from '../components/Forms/FormError';
+} from '@/admin/components/Forms/types';
 
 /**
  * The tag names enum for fields.
