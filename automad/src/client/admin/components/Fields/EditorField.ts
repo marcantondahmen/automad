@@ -44,10 +44,10 @@ import {
 	FormDataProviders,
 	listenToClassChange,
 	query,
+	type UndoValue,
 } from '@/admin/core';
 import { outputIsEqual, saveEditorBlocks } from '@/admin/editor/utils';
 import { BaseFieldComponent } from './BaseField';
-import { UndoValue } from '@/admin/types';
 import { LayoutTune } from '@/admin/editor/tunes/Layout';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import type { EditorOutputData } from '@/admin/editor/types';

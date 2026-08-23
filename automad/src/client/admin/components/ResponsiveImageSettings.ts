@@ -44,10 +44,11 @@ import {
 	fire,
 	html,
 	resolveFileUrl,
+	type AspectRatioBreakpoints,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
-import { AspectRatioBreakpoints, FocalPoint } from '@/admin/types';
 import { FocalPointPickerComponent } from './FocalPointPicker';
+import type { FocalPoint } from '@/admin/types';
 
 /**
  * A responsive image settings editor component.

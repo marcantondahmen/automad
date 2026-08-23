@@ -40,10 +40,11 @@ import {
 	FieldTag,
 	fire,
 	FormDataProviders,
+	type UndoValue,
 } from '@/admin/core';
-import { FocalPoint, UndoValue } from '@/admin/types';
 import { BaseFieldComponent } from './BaseField';
 import { FocalPointPickerComponent } from '../FocalPointPicker';
+import type { FocalPoint } from '@/admin/types';
 
 /**
  * A focal point field.

@@ -33,8 +33,8 @@
  */
 
 import { App, createSelect, CSS } from '@/admin/core';
-import { SelectComponentOption } from '@/admin/types';
 import { BaseComponent } from '../Base';
+import type { SelectComponentOption } from '@/admin/components/Select';
 
 /**
  * A wrapper element for initializing the language select field.

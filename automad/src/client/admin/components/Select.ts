@@ -32,9 +32,23 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, create, CSS, EventName, html, Undo } from '@/admin/core';
+import {
+	App,
+	Attr,
+	create,
+	CSS,
+	EventName,
+	html,
+	Undo,
+	type UndoValue,
+} from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
-import { KeyValueMap, SelectComponentOption, UndoValue } from '@/admin/types';
+import type { KeyValueMap } from '@/admin/types';
+
+export interface SelectComponentOption {
+	value: string | number;
+	text?: string;
+}
 
 /**
  * An advanced select component. The component inner HTML has to contain a single span

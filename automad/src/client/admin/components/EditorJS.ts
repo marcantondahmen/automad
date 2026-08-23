@@ -47,7 +47,6 @@ import { StrikeThroughInline } from '@/admin/editor/inline/StrikeThrough';
 import { UnderlineInline } from '@/admin/editor/inline/Underline';
 import { AiAssistance } from '@/admin/editor/plugins/AiAssistance';
 import { DragDrop } from '@/admin/editor/plugins/DragDrop';
-import { KeyValueMap } from '@/admin/types';
 import {
 	App,
 	Attr,
@@ -67,6 +66,7 @@ import {
 	unknownBlockHandler,
 } from '@/admin/editor/utils';
 import { TeXInline } from '@/admin/editor/inline/TeX';
+import type { KeyValueMap } from '@/admin/types';
 import type { EditorOutputData } from '@/admin/editor/types';
 
 /**

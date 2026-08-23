@@ -42,8 +42,8 @@ import {
 	html,
 	uniqueId,
 } from '@/admin/core';
-import { KeyValueMap } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+import type { KeyValueMap } from '@/admin/types';
 
 interface MailBlockData {
 	to: string;

@@ -33,10 +33,24 @@
  */
 
 import { Attr, create, CSS, EventName, html } from '@/admin/core';
-import { SwitcherDropdownData, SwitcherDropdownItem } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { getActiveSection } from './Switcher';
 import { Section } from '@/common';
+
+export interface SwitcherDropdownData {
+	overview: SwitcherDropdownOverview;
+	items: SwitcherDropdownItem[];
+}
+
+export interface SwitcherDropdownItem {
+	title: string;
+	section: Section;
+}
+
+interface SwitcherDropdownOverview {
+	icon: string;
+	section: Section;
+}
 
 /**
  * The system menu switcher wrapper.

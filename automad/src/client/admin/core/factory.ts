@@ -60,11 +60,14 @@ import {
 	BaseFieldComponent,
 	type FieldInitData,
 } from '@/admin/components/Fields/BaseField';
-import { SelectComponent } from '@/admin/components/Select';
+import {
+	SelectComponent,
+	type SelectComponentOption,
+} from '@/admin/components/Select';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import type { KeyValueMap, SelectComponentOption } from '@/admin/types';
-import type { EditorOutputData } from '@/admin/editor/types';
+import type { KeyValueMap } from '@/admin/types';
 import type { FieldSectionCollection } from '@/admin/components/Forms/types';
+import type { EditorOutputData } from '@/admin/editor/types';
 
 /**
  * Create a new EditorJSComponent element.

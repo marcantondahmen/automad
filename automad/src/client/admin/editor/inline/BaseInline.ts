@@ -32,9 +32,9 @@
  * See LICENSE.md for license information.
  */
 
-import { API, InlineToolConstructorOptions } from '@/vendor/editorjs';
 import { create, listen } from '@/admin/core';
-import { Listener } from '@/admin/types';
+import type { API, InlineToolConstructorOptions } from '@/vendor/editorjs';
+import type { Listener } from '@/admin/types';
 
 /**
  * Define interface with same name in order to merge definition for base class.

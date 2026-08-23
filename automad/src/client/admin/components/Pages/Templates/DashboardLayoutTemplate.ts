@@ -45,8 +45,8 @@ import {
 	SessionController,
 	titleCase,
 } from '@/admin/core';
-import { Partials } from '@/admin/types';
 import { Section } from '@/common';
+import type { Partials } from '../BaseLayout';
 
 export const dashboardLayout = ({ main, publishForm }: Partials) => {
 	return html`

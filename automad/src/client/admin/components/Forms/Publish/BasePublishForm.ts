@@ -43,10 +43,10 @@ import {
 	KeyValueMap,
 	requestAPI,
 } from '@/admin/core';
-import { PublishControllers } from '@/admin/types';
 import { Tooltip } from '@/vendor/tooltip';
 import { BaseComponent } from '../../Base';
 import { SubmitComponent } from '../Submit';
+import type { PublishControllers } from './types';
 
 const enable = (button: SubmitComponent): void => {
 	if (button.hasAttribute('disabled')) {

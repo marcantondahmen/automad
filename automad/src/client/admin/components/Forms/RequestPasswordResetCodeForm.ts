@@ -41,8 +41,8 @@ import {
 	isInvite,
 	routes,
 } from '@/admin/core';
-import { KeyValueMap } from '@/admin/types';
 import { FormComponent } from './Form';
+import type { KeyValueMap } from '@/admin/types';
 
 const text = () => {
 	return isInvite()

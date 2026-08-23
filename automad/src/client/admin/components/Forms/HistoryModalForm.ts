@@ -46,9 +46,9 @@ import {
 	HistoryController,
 	dateFormat,
 } from '@/admin/core';
-import { SelectComponentOption } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
+import type { SelectComponentOption } from '@/admin/components/Select';
 
 export class HistoryModalFormComponent extends BaseComponent {
 	/**

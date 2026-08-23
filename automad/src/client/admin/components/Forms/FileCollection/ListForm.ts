@@ -33,8 +33,9 @@
  */
 
 import { create, CSS, EventName, fire, queryAll } from '@/admin/core';
-import { File, KeyValueMap } from '@/admin/types';
 import { FormComponent } from '@/admin/components/Forms/Form';
+import type { KeyValueMap } from '@/admin/types';
+import type { File } from '@/admin/components/File/types';
 
 /**
  * The file collection form component.

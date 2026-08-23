@@ -32,9 +32,12 @@
  * See LICENSE.md for license information.
  */
 
-import { AutocompleteItemData, KeyValueMap, PageMetaData } from '@/admin/types';
 import { App, create, html, Attr } from '@/admin/core';
-import { AutocompleteComponent } from './Autocomplete';
+import type { KeyValueMap, PageMetaData } from '@/admin/types';
+import {
+	AutocompleteComponent,
+	type AutocompleteItemData,
+} from './Autocomplete';
 
 /**
  * Compile the autocompletion data.

@@ -32,8 +32,17 @@
  * See LICENSE.md for license information.
  */
 
-import { KeyValueMap, Logger } from '@/admin/types';
 import { App } from '.';
+import type { KeyValueMap } from '@/admin/types';
+
+interface Logger {
+	error: (...args: any[]) => void;
+	log: (...args: any[]) => void;
+	request: (url: string, data: KeyValueMap) => void;
+	response: (url: string, data: KeyValueMap) => void;
+	bindingInfo: (label: string, data: KeyValueMap) => void;
+	bindingSuccess: (text: string) => void;
+}
 
 /**
  * The logger factory.

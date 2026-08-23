@@ -33,8 +33,8 @@
  */
 
 import { App, Attr, CSS, create, html, listen, query } from '.';
-import { Listener } from '@/admin/types';
 import { customAlphabet } from 'nanoid';
+import type { Listener } from '@/admin/types';
 
 /**
  * Return the basename of a path.

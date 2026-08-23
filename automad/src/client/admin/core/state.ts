@@ -33,8 +33,8 @@
  */
 
 import { RootComponent } from '@/admin/components/Root';
-import { KeyValueMap } from '@/admin/types';
 import { EventName, fire, getLogger } from '.';
+import type { KeyValueMap } from '@/admin/types';
 
 /**
  * The Application State container singelton class.

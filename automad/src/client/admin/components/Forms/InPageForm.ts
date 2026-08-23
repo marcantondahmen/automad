@@ -32,7 +32,6 @@
  * See LICENSE.md for license information.
  */
 
-import { InPageBindings, KeyValueMap } from '@/admin/types';
 import { FormComponent } from './Form';
 import {
 	App,
@@ -48,6 +47,14 @@ import {
 	setDocumentTitle,
 } from '@/admin/core';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
+import type { KeyValueMap } from '@/admin/types';
+
+interface InPageBindings {
+	inPageReturnUrlBinding: Binding;
+	inPageTitleBinding: Binding;
+	inPageContextUrlBinding: Binding;
+	inPageFieldBinding: Binding;
+}
 
 /**
  * The InPage editing form element.

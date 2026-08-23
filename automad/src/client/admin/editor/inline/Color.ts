@@ -41,11 +41,10 @@ import {
 	CSS,
 	FieldTag,
 	fire,
-	listen,
 	uniqueId,
 } from '@/admin/core';
-import { KeyValueMap } from '@/admin/types';
 import { BaseInline } from './BaseInline';
+import type { KeyValueMap } from '@/admin/types';
 
 export class ColorInline extends BaseInline {
 	/**

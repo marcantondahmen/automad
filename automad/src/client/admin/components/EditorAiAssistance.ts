@@ -46,9 +46,10 @@ import {
 } from '@/admin/core';
 import { create, routes, Section } from '@/common';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { AiProvider, SelectComponentOption } from '@/admin/types';
 import { AiRuntime } from '@/admin/editor/ai';
 import { BaseComponent } from './Base';
+import type { AiProvider } from '@/admin/components/System/AiProviderSetup';
+import type { SelectComponentOption } from './Select';
 
 /**
  * Navigate to the AI settings page.

@@ -47,9 +47,9 @@ import {
 	query,
 } from '@/admin/core';
 import { createSortableTreeNodes, treeStyles } from '@/admin/core/tree';
-import { PageMetaData } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from './Modal/Modal';
+import type { PageMetaData } from '@/admin/types';
 
 /**
  * The render function that renders the label HTML.

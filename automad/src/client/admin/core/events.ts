@@ -32,8 +32,8 @@
  * See LICENSE.md for license information.
  */
 
-import { Listener } from '@/admin/types';
 import { CSS, getLogger, queryAll } from '.';
+import type { Listener } from '@/admin/types';
 
 /**
  * The object with all custom event that are used by the UI.

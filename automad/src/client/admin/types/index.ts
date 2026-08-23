@@ -34,19 +34,7 @@
 
 export * from '@/common/types';
 
-export * from './page';
-export * from './search';
-export * from './switcher';
-export * from './system';
-export * from './undo';
-
-import {
-	KeyValueMap,
-	PageController,
-	ComponentController,
-	SharedController,
-} from '@/common';
-import { PageMetaData } from '.';
+import type { KeyValueMap } from '@/common';
 
 declare global {
 	const DEVELOPMENT: boolean;
@@ -64,35 +52,6 @@ declare global {
 	}
 }
 
-export interface AspectRatioBreakpoints {
-	[maxWidth: string]: {
-		aspectRatio: string;
-	};
-}
-
-export interface AutocompleteItem {
-	element: HTMLElement;
-	value: string;
-	item: KeyValueMap;
-}
-
-export interface AutocompleteItemData {
-	value: string;
-	title: string;
-}
-
-export interface BindingOptions {
-	input?: InputElement;
-	modifier?: (value: string) => any;
-	initial?: any;
-	onChange?: (value: string) => void;
-}
-
-export interface Image {
-	name: string;
-	thumbnail: string;
-}
-
 export type InputElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface FocalPoint {
@@ -100,62 +59,8 @@ export interface FocalPoint {
 	y: number;
 }
 
-export interface JumpbarItemData {
-	value: string;
-	title: string;
-	icon: string;
-	subtitle?: string;
-	target?: string;
-	external?: string;
-	cls?: string[];
-}
-
-export interface EmbedServiceData {
-	[key: string]: {
-		cls: string[];
-		script: string;
-		getId: (src: string) => string;
-	};
-}
-
-export interface File {
-	basename: string;
-	extension: string;
-	mtime: string;
-	size: string;
-	path: string;
-	url: string;
-	caption: string;
-	thumbnail?: string;
-	width?: number;
-	height?: number;
-}
-
 export interface Listener {
 	remove: () => void;
-}
-
-export interface Logger {
-	error: (...args: any[]) => void;
-	log: (...args: any[]) => void;
-	request: (url: string, data: KeyValueMap) => void;
-	response: (url: string, data: KeyValueMap) => void;
-	bindingInfo: (label: string, data: KeyValueMap) => void;
-	bindingSuccess: (text: string) => void;
-}
-
-export interface NavTreeItem {
-	wrapper: HTMLElement;
-	summary: HTMLElement;
-	children: HTMLElement;
-	page: PageMetaData;
-}
-
-export interface NotifyOptions {
-	message: string;
-	icon: string;
-	duration: number;
-	className?: string;
 }
 
 export interface PackageDirectoryItems {
@@ -164,29 +69,22 @@ export interface PackageDirectoryItems {
 	snippets: string[];
 }
 
-export interface Partials {
-	[key: string]: string;
+export interface PageMetaData {
+	title: string;
+	index: string;
+	url: string;
+	path: string;
+	parentUrl: string;
+	private: boolean;
+	lastModified: string;
+	publicationState: 'published' | 'draft';
 }
 
-type PublishController =
-	| PageController
-	| SharedController
-	| ComponentController;
-
-export interface PublishControllers {
-	state: PublishController;
-	discard: PublishController;
-	publish: PublishController;
+export interface Pages {
+	[key: string]: PageMetaData;
 }
 
 export type PublicationState = 'draft' | 'published';
-
-export interface SelectComponentOption {
-	value: string | number;
-	text?: string;
-}
-
-export type SetupWizardStep = 'ai' | 'mailConfig';
 
 export interface ThemeOptions {
 	[key: string]: KeyValueMap;

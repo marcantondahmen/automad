@@ -54,16 +54,12 @@ import {
 	queryAll,
 	resolveFileUrl,
 	uniqueId,
+	type AspectRatioBreakpoints,
 } from '@/admin/core';
-import {
-	SelectComponentOption,
-	KeyValueMap,
-	AspectRatioBreakpoints,
-	FocalPoint,
-} from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
+import { FocalPointFieldComponent } from '@/admin/components/Fields/FocalPointField';
 import { filterEmptyData, saveEditorBlocks } from '../utils';
 import iconAlignStart from '@/common/svg/flex/align-start.svg';
 import iconAlignCenter from '@/common/svg/flex/align-center.svg';
@@ -77,8 +73,9 @@ import iconJustifyBetween from '@/common/svg/flex/justify-between.svg';
 import iconJustifyEvenly from '@/common/svg/flex/justify-evenly.svg';
 import iconGap from '@/common/svg/flex/gap.svg';
 import iconMin from '@/common/svg/flex/min.svg';
-import { FocalPointFieldComponent } from '@/admin/components/Fields/FocalPointField';
-import { EditorOutputData } from '../types';
+import type { EditorOutputData } from '../types';
+import type { KeyValueMap, FocalPoint } from '@/admin/types';
+import type { SelectComponentOption } from '@/admin/components/Select';
 
 type SectionToolbarRadioOptions<T extends string> = {
 	[key in T]: { icon: string; tooltip: string };

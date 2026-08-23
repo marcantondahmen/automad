@@ -32,19 +32,55 @@
  * See LICENSE.md for license information.
  */
 
-import { Section } from '@/common';
+import type { MailConfig } from '@/admin/components/Forms/MailConfigForm';
+import type { AiProvider } from './AiProviderSetup';
 
-export interface SwitcherDropdownData {
-	overview: SwitcherDropdownOverview;
-	items: SwitcherDropdownItem[];
+type Enabled = boolean | 0 | 1;
+
+interface AiSettings {
+	enabled: boolean;
+	instructions: string;
+	activeProviderId: string;
+	providers: AiProvider[];
 }
 
-export interface SwitcherDropdownItem {
-	title: string;
-	section: Section;
+interface CacheSettings {
+	enabled: Enabled;
+	lifetime: number;
+	monitorDelay: number;
 }
 
-interface SwitcherDropdownOverview {
-	icon: string;
-	section: Section;
+interface DebugSettings {
+	enabled: Enabled;
+	browser: Enabled;
+}
+
+interface FeedSettings {
+	enabled: Enabled;
+	fields: string;
+}
+
+export interface User {
+	name: string;
+	email: string;
+	totpIsConfigured: boolean;
+}
+
+export interface SystemSettings {
+	ai: AiSettings;
+	cache: CacheSettings;
+	debug: DebugSettings;
+	feed: FeedSettings;
+	i18n: Enabled;
+	mail: MailConfig;
+	translation: string;
+	users: User[];
+	tempDirectory: string;
+}
+
+export interface SystemUpdateResponse {
+	state: string;
+	current: string;
+	latest: string;
+	items: string[];
 }

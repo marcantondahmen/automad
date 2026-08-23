@@ -32,8 +32,8 @@
  * See LICENSE.md for license information.
  */
 
-import { KeyValueMap } from '@/admin/types';
 import { BaseInline } from './BaseInline';
+import type { KeyValueMap } from '@/admin/types';
 
 export class TeXInline extends BaseInline {
 	/**

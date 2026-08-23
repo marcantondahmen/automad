@@ -59,8 +59,8 @@ import {
 	routes,
 } from '@/admin/core';
 import { createSortableTreeNodes, treeStyles } from '@/admin/core/tree';
-import { KeyValueMap, PageMetaData } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+import type { KeyValueMap, PageMetaData } from '@/admin/types';
 
 /**
  * Handle responses when moving pages.

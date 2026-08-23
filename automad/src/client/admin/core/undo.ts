@@ -32,8 +32,20 @@
  * See LICENSE.md for license information.
  */
 
-import { UndoCapableField, UndoEntry, UndoValue } from '@/admin/types';
 import { App, debounce, EventName, fire, keyCombo } from '.';
+
+export type UndoValue = any;
+
+export interface UndoCapableField {
+	getValueProvider: () => HTMLElement;
+	mutate: (value: UndoValue) => void | Promise<void>;
+	query: () => UndoValue;
+}
+
+interface UndoEntry {
+	undo: () => void;
+	redo: () => void;
+}
 
 /**
  * The Undo class provides undo/redo-functionality for all kinds of fields.

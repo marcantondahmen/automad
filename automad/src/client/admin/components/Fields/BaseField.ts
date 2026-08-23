@@ -45,14 +45,11 @@ import {
 	query,
 	queryAll,
 	Undo,
+	type UndoCapableField,
+	type UndoValue,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
-import type {
-	InputElement,
-	KeyValueMap,
-	UndoCapableField,
-	UndoValue,
-} from '@/admin/types';
+import type { InputElement, KeyValueMap } from '@/admin/types';
 
 export interface FieldInitData {
 	key: string;

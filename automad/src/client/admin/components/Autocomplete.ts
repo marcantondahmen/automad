@@ -34,11 +34,6 @@
 
 import { BaseComponent } from '@/admin/components/Base';
 import {
-	AutocompleteItem,
-	AutocompleteItemData,
-	KeyValueMap,
-} from '@/admin/types';
-import {
 	App,
 	create,
 	debounce,
@@ -48,6 +43,18 @@ import {
 	fire,
 	Attr,
 } from '@/admin/core';
+import type { KeyValueMap } from '@/admin/types';
+
+interface AutocompleteItem {
+	element: HTMLElement;
+	value: string;
+	item: KeyValueMap;
+}
+
+export interface AutocompleteItemData {
+	value: string;
+	title: string;
+}
 
 /**
  * An input field with page autocompletion.

@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, CSS, html, InPageController } from '@/admin/core';
-import { Partials } from '@/admin/types';
+import type { Partials } from '../BaseLayout';
 
 export const inPage = ({ main }: Partials): string => {
 	return html`

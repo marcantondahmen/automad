@@ -33,9 +33,9 @@
  */
 
 import { App } from '@/admin/core';
-import { PublishControllers } from '@/admin/types';
 import { KeyValueMap, ComponentController } from '@/common';
 import { BasePublishFormComponent } from './BasePublishForm';
+import type { PublishControllers } from './types';
 
 /**
  * The component publish button and form for the navbar.

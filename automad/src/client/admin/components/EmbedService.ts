@@ -34,7 +34,14 @@
 
 import { BaseComponent } from '@/admin/components/Base';
 import { create, CSS, html } from '../core';
-import { EmbedServiceData } from '../types';
+
+interface EmbedServiceData {
+	[key: string]: {
+		cls: string[];
+		script: string;
+		getId: (src: string) => string;
+	};
+}
 
 const services: EmbedServiceData = {
 	twitter: {

@@ -34,7 +34,13 @@
 
 import Toastify from 'toastify-js';
 import { query, create, CSS } from '.';
-import { NotifyOptions } from '@/admin/types';
+
+interface NotifyOptions {
+	message: string;
+	icon: string;
+	duration: number;
+	className?: string;
+}
 
 const defaults: Toastify.Options = {
 	close: false,

@@ -32,8 +32,8 @@
  * See LICENSE.md for license information.
  */
 
-import { KeyValueMap, Listener } from '@/admin/types';
 import { listen } from '../core';
+import type { KeyValueMap, Listener } from '@/admin/types';
 
 /**
  * The Automad base component. All Automad components are based on this class.

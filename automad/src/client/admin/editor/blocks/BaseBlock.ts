@@ -39,9 +39,9 @@ import {
 	BlockToolConstructorOptions,
 } from '@/vendor/editorjs';
 import { create, listen } from '@/admin/core';
-import { KeyValueMap, Listener } from '@/admin/types';
 import { MoveEvent } from 'automad-editorjs/types/tools';
 import { filterEmptyData } from '../utils';
+import type { KeyValueMap, Listener } from '@/admin/types';
 
 /**
  * The abstract base block class.

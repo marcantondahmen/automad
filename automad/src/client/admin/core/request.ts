@@ -48,7 +48,7 @@ import {
 	RequestKey,
 } from '.';
 import { FormComponent } from '@/admin/components/Forms/Form';
-import { KeyValueMap, APIResponse } from '@/admin/types';
+import type { KeyValueMap, APIResponse } from '@/admin/types';
 
 /**
  * Get the current CSRF token that is stored in the meta tag.

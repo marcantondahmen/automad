@@ -32,11 +32,11 @@
  * See LICENSE.md for license information.
  */
 
-import { API, BlockAPI, OutputBlockData } from '@/vendor/editorjs';
-import { KeyValueMap } from '@/admin/types';
 import { App, getLogger } from '../core';
 import { nanoid } from 'nanoid';
-import { EditorOutputData } from './types';
+import type { EditorOutputData } from './types';
+import type { API, BlockAPI, OutputBlockData } from '@/vendor/editorjs';
+import type { KeyValueMap } from '@/admin/types';
 
 interface BaseEditor {
 	saver: API['saver'];
