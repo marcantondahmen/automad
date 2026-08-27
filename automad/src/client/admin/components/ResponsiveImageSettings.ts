@@ -43,6 +43,7 @@ import {
 	debounce,
 	fire,
 	html,
+	resizeImageUrl,
 	resolveFileUrl,
 	type AspectRatioBreakpoints,
 } from '@/admin/core';
@@ -162,7 +163,7 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 				this.preview,
 				html`
 					<img
-						src="${this.image}"
+						src="${resizeImageUrl(this.image)}"
 						style="aspect-ratio: ${item.aspectRatio}"
 					/>
 					<small>${maxWidth}:${item.aspectRatio}</small>
