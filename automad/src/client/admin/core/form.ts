@@ -61,6 +61,7 @@ import type {
  * The tag names enum for fields.
  */
 export const enum FieldTag {
+	aspectRatioBreakpoints = 'am-aspect-ratio-breakpoints',
 	code = 'am-code-field',
 	color = 'am-color-field',
 	date = 'am-date-field',

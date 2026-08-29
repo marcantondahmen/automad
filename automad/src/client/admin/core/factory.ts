@@ -107,14 +107,14 @@ export const createEditor = (
  * @param [allowModal]
  * @returns the generated field
  */
-export const createField = (
+export const createField = <T extends BaseFieldComponent = BaseFieldComponent>(
 	fieldType: FieldTag,
 	parent: HTMLElement,
 	data: FieldInitData,
 	cls: string[] = [],
 	attributes: KeyValueMap = {},
 	allowModal: boolean = false
-): BaseFieldComponent => {
+): T => {
 	const field = create(
 		fieldType,
 		cls,

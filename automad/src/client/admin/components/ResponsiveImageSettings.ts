@@ -34,22 +34,23 @@
 
 import {
 	App,
-	Attr,
 	CSS,
-	aspectRatioBreakpointsFromString,
-	aspectRatioBreakpointsToString,
+	FieldTag,
 	collectFieldData,
 	create,
+	createField,
 	debounce,
 	fire,
 	html,
 	resizeImageUrl,
 	resolveFileUrl,
+	uniqueId,
 	type AspectRatioBreakpoints,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { FocalPointPickerComponent } from './FocalPointPicker';
 import type { FocalPoint } from '@/admin/types';
+import { AspectRatioBreakpointsFieldComponent } from './Fields/AspectRatioBreakpointsField';
 
 /**
  * A responsive image settings editor component.
@@ -194,26 +195,14 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 			this
 		);
 
-		const inputField = create(
-			'div',
-			[CSS.field],
+		const input = createField<AspectRatioBreakpointsFieldComponent>(
+			FieldTag.aspectRatioBreakpoints,
+			fieldWrapper,
 			{
-				[Attr.error]: App.text('aspectRatioBreakpointsError'),
-			},
-			fieldWrapper
-		);
-
-		const input = create<HTMLInputElement>(
-			'input',
-			[CSS.input, CSS.textMono],
-			{
-				type: 'text',
-				value: aspectRatioBreakpointsToString(this.breakpoints),
-				name: 'breakpointsString',
-				placeholder: '600:1/1 900:2/3',
-				pattern: '([1-9][0-9]+:[0-9.]+/[0-9.]+( |$))*',
-			},
-			inputField
+				value: this.breakpoints,
+				name: 'breakpoints',
+				key: uniqueId(),
+			}
 		);
 
 		const presetsField = create(
@@ -250,21 +239,19 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 			);
 
 			this.listen(button, 'click', () => {
-				input.value = `${input.value} ${p}`.trim();
+				const [maxWidth, aspectRatio] = p.split(':');
+
+				input.value = { ...input.value, [maxWidth]: { aspectRatio } };
 
 				fire('input', input);
 			});
 		});
 
 		this.listen(
-			fieldWrapper,
+			input,
 			'input',
 			debounce(() => {
-				const data = collectFieldData(fieldWrapper);
-
-				this.breakpoints = aspectRatioBreakpointsFromString(
-					data.breakpointsString
-				);
+				this.breakpoints = input.value;
 			}, 200)
 		);
 	}

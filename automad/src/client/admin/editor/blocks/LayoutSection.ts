@@ -35,8 +35,6 @@
 import { API } from '@/vendor/editorjs';
 import {
 	App,
-	aspectRatioBreakpointsFromString,
-	aspectRatioBreakpointsToString,
 	Attr,
 	Bindings,
 	collectFieldData,
@@ -48,7 +46,6 @@ import {
 	CSS,
 	debounce,
 	FieldTag,
-	fire,
 	html,
 	query,
 	queryAll,
@@ -803,33 +800,13 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			App.text('aspectRatioBreakpointsHelp')
 		);
 
-		const breakpointsInput = create(
-			'input',
-			[CSS.input, CSS.validate],
-			{
-				type: 'text',
-				placeholder: '600:1/1 900:2/3',
-				pattern: '([1-9][0-9]+:[0-9.]+/[0-9.]+( |$))*',
-				value: aspectRatioBreakpointsToString(
-					this.data.style.aspectRatioBreakpoints
-				),
-			},
-			create(
-				'div',
-				[CSS.field],
-				{
-					[Attr.error]: App.text('aspectRatioBreakpointsError'),
-				},
-				breakpointsWrapper
-			)
+		field(
+			FieldTag.aspectRatioBreakpoints,
+			'aspectRatioBreakpoints',
+			'aspectRatioBreakpoints',
+			breakpointsWrapper,
+			{}
 		);
-
-		modal.listen(breakpointsInput, 'input', () => {
-			this.data.style.aspectRatioBreakpoints =
-				aspectRatioBreakpointsFromString(breakpointsInput.value);
-
-			fire('change', body);
-		});
 
 		const blendModeId = uniqueId();
 		const blendMode = create(

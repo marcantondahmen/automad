@@ -45,6 +45,7 @@ import './styles/index.less';
 import('./components/Breadcrumbs/BreadcrumbsPage');
 import('./components/Breadcrumbs/BreadcrumbsRoute');
 
+import('./components/Fields/AspectRatioBreakpointsField');
 import('./components/Fields/CodeField');
 import('./components/Fields/ColorField');
 import('./components/Fields/DateField');
