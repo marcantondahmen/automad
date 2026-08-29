@@ -60,7 +60,7 @@ const pickFocalPoint = (event: MouseEvent, img: HTMLElement): FocalPoint => {
 };
 
 /**
- * A responsive image settings editor component.
+ * A focal point picker component.
  *
  * @extends BaseComponent
  */

@@ -74,7 +74,6 @@ export const enum Attr {
 	page = 'am-page',
 	path = 'am-path',
 	publicationState = 'am-publication-state',
-	portal = 'am-portal',
 	right = 'am-right',
 	section = 'am-section',
 	serial = 'am-serial',
