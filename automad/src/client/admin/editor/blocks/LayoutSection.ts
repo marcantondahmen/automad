@@ -938,9 +938,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			inline.push(`--minBlockWidth: ${minBlockWidth};`);
 		}
 
-		if (style.aspectRatio) {
-			inline.push(`--aspect-ratio: ${style.aspectRatio};`);
-		}
+		inline.push(`--aspect-ratio: ${style.aspectRatio || 'auto'};`);
 
 		if (style.backgroundImageFocalPoint) {
 			const { x, y } = style.backgroundImageFocalPoint;
