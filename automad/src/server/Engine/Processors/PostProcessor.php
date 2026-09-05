@@ -39,14 +39,14 @@ use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
-use Automad\Core\FileUtils;
 use Automad\Core\I18n;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

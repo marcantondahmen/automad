@@ -41,8 +41,13 @@ import {
 	PageTrashController,
 	requestAPI,
 } from '@/admin/core';
-import { DeletedPageMetaData } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+
+interface DeletedPageMetaData {
+	title: string;
+	path: string;
+	lastModified: string;
+}
 
 /**
  * Create a card for a deleted page.

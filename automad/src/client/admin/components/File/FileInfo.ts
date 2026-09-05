@@ -43,9 +43,9 @@ import {
 	FileController,
 	html,
 } from '@/admin/core';
-import { File } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
+import type { File } from './types';
 
 /**
  * A file edit modal toggle component.

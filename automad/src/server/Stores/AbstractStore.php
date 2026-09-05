@@ -35,9 +35,9 @@
 
 namespace Automad\Stores;
 
-use Automad\Core\FileSystem;
 use Automad\Core\PublicationState;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

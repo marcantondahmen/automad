@@ -32,9 +32,8 @@
  * See LICENSE.md for license information.
  */
 
+import { BaseLayoutComponent, type Partials } from './BaseLayout';
 import { getTagFromRoute, routes } from '@/admin/core';
-import { Partials } from '@/admin/types';
-import { BaseLayoutComponent } from './BaseLayout';
 import { inPage } from './Templates/InPageLayoutTemplate';
 
 class InPageComponent extends BaseLayoutComponent {

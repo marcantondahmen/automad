@@ -33,7 +33,9 @@
  */
 
 import { create, query, queryAll } from '@/common';
-import { ComponentImplementation, MailInput } from '../types';
+import type { ComponentImplementation } from '../types';
+
+export type MailInput = HTMLInputElement | HTMLTextAreaElement;
 
 const cls = {
 	message: 'am-message',

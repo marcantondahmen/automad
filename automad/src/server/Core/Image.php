@@ -35,6 +35,10 @@
 
 namespace Automad\Core;
 
+use Automad\System\FileSystem;
+use Automad\System\ImageProcessors\GdProcessor;
+use Automad\System\ImageProcessors\ImagickProcessor;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -45,6 +49,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Image {
+	const GD = 'gd';
+	const IMAGICK = 'imagick';
+
 	/**
 	 * The filename of generated image.
 	 */
@@ -58,17 +65,17 @@ class Image {
 	/**
 	 * The height of the source image.
 	 */
-	public float $originalHeight = 0;
+	public int $originalHeight = 0;
 
 	/**
 	 * The width of the source image.
 	 */
-	public float $originalWidth = 0;
+	public int $originalWidth = 0;
 
 	/**
-	 * The given image type.
+	 * The image type.
 	 */
-	public string $type = '';
+	public string $type;
 
 	/**
 	 * The width of the generated image.
@@ -79,16 +86,6 @@ class Image {
 	 * Cropping parameter.
 	 */
 	private bool $crop = false;
-
-	/**
-	 * The pixels to crop the image on the X-axis on both sides.
-	 */
-	private int $cropX = 0;
-
-	/**
-	 * The pixels to crop the image on the Y-axis on both sides.
-	 */
-	private int $cropY = 0;
 
 	/**
 	 * The full file system path to the generated image.
@@ -103,12 +100,12 @@ class Image {
 	/**
 	 * The desired height of the new image. (May not be the resulting width, depending on cropping or original image size)
 	 */
-	private float $requestedHeight = 0;
+	private int $requestedHeight = 0;
 
 	/**
 	 * The disired width of the new image. (May not be the resulting width, depending on cropping or original image size)
 	 */
-	private float $requestedWidth = 0;
+	private int $requestedWidth = 0;
 
 	/**
 	 * The constructor defines the main object properties from the given parameters and initiates the main methods.
@@ -142,11 +139,11 @@ class Image {
 
 		$this->originalWidth = $getimagesize[0];
 		$this->originalHeight = $getimagesize[1];
-
-		$this->requestedWidth = $requestedWidth ? $requestedWidth : $this->originalWidth;
-		$this->requestedHeight = $requestedHeight ? $requestedHeight : $this->originalHeight;
-
 		$this->type = $getimagesize['mime'];
+
+		$this->requestedWidth = self::pixels($requestedWidth ? $requestedWidth : $this->originalWidth);
+		$this->requestedHeight = self::pixels($requestedHeight ? $requestedHeight : $this->originalHeight);
+
 		$this->crop = $crop;
 
 		// Get the possible size for the generated image (based on crop and original size).
@@ -161,6 +158,16 @@ class Image {
 	}
 
 	/**
+	 * Round value to full pixels.
+	 *
+	 * @param float|int|string $value
+	 * @return int
+	 */
+	public static function pixels(int|float|string $value): int {
+		return intval(round(floatval($value)));
+	}
+
+	/**
 	 * Calculate the size and pixels to crop for the generated image.
 	 */
 	private function calculateSize(): void {
@@ -172,152 +179,48 @@ class Image {
 		$requestedAspect = $this->requestedWidth / $this->requestedHeight;
 
 		if ($this->crop) {
-			// Crop image
-
 			if ($originalAspect > $requestedAspect) {
-				if ($this->requestedWidth < $this->originalWidth) {
-					$w = $this->requestedWidth;
-				} else {
-					$w = $this->originalWidth;
-				}
-
-				$h = $w / $requestedAspect;
+				$w = $this->requestedWidth < $this->originalWidth ? $this->requestedWidth : $this->originalWidth;
+				$h = floatval($w) / floatval($requestedAspect);
 
 				if ($h > $this->originalHeight) {
 					$h = $this->originalHeight;
-					$requestedAspect = $w / $h;
 				}
-
-				// crop X
-				$x = (floatval($this->originalWidth) - ($this->originalHeight * $requestedAspect)) / 2.0;
-				$y = 0;
 			} else {
-				if ($this->requestedHeight < $this->originalHeight) {
-					$h = $this->requestedHeight;
-				} else {
-					$h = $this->originalHeight;
-				}
-
-				$w = $h * $requestedAspect;
+				$h = $this->requestedHeight < $this->originalHeight ? $this->requestedHeight : $this->originalHeight;
+				$w = floatval($h) * floatval($requestedAspect);
 
 				if ($w > $this->originalWidth) {
 					$w = $this->originalWidth;
-					$requestedAspect = $w / $h;
 				}
-
-				// crop X
-				$x = 0;
-				$y = (floatval($this->originalHeight) - ($this->originalWidth / $requestedAspect)) / 2.0;
 			}
 		} else {
-			// No cropping
-
-			$x = 0;
-			$y = 0;
-
 			if ($originalAspect > $requestedAspect) {
-				if ($this->requestedWidth < $this->originalWidth) {
-					$w = $this->requestedWidth;
-				} else {
-					$w = $this->originalWidth;
-				}
-
-				$h = $w / $originalAspect;
+				$w = $this->requestedWidth < $this->originalWidth ? $this->requestedWidth : $this->originalWidth;
+				$h = floatval($w) / floatval($originalAspect);
 			} else {
-				if ($this->requestedHeight < $this->originalHeight) {
-					$h = $this->requestedHeight;
-				} else {
-					$h = $this->originalHeight;
-				}
-
-				$w = $h * $originalAspect;
+				$h = $this->requestedHeight < $this->originalHeight ? $this->requestedHeight : $this->originalHeight;
+				$w = floatval($h) * floatval($originalAspect);
 			}
 		}
 
-		$this->width = (int) round($w);
-		$this->height = (int) round($h);
-		$this->cropX = (int) round($x);
-		$this->cropY = (int) round($y);
+		$this->width = self::pixels($w);
+		$this->height = self::pixels($h);
 	}
 
 	/**
 	 * Create a new (resized and cropped) image from the source image and save that image in the cache directory.
 	 */
 	private function createImage(): void {
-		switch ($this->type) {
-			case 'image/jpeg':
-				$src = imagecreatefromjpeg($this->originalFile);
-
-				break;
-			case 'image/gif':
-				$src = imagecreatefromgif($this->originalFile);
-
-				break;
-			case 'image/png':
-				$src = imagecreatefrompng($this->originalFile);
-
-				break;
-			case 'image/webp':
-				$src = imagecreatefromwebp($this->originalFile);
-
-				break;
-			default:
-				$src = false;
-
-				break;
-		}
-
-		if (!$src) {
-			return;
-		}
-
-		$dest = imagecreatetruecolor($this->width, $this->height);
-
-		if (!$dest) {
-			return;
-		}
-
-		imagealphablending($dest, false);
-		imagesavealpha($dest, true);
-		imagecopyresampled(
-			$dest,
-			$src,
-			0,
-			0,
-			$this->cropX,
-			$this->cropY,
-			$this->width,
-			$this->height,
-			(int) round($this->originalWidth - floatval(2 * $this->cropX)),
-			(int) round($this->originalHeight - floatval(2 * $this->cropY))
-		);
-
-		Debug::log($this, 'Saving "' . $this->fileFullPath . '"');
-
-		// Create cache directory, if not existing.
 		FileSystem::makeDir(AM_BASE_DIR . Cache::DIR_IMAGES);
 
-		switch ($this->type) {
-			case 'image/jpeg':
-				imagejpeg($dest, $this->fileFullPath, AM_IMG_JPG_QUALITY);
-
-				break;
-			case 'image/gif':
-				imagegif($dest, $this->fileFullPath);
-
-				break;
-			case 'image/png':
-				imagepng($dest, $this->fileFullPath, AM_IMG_PNG_QUALITY);
-
-				break;
-			case 'image/webp':
-				imagewebp($dest, $this->fileFullPath, AM_IMG_WEBP_QUALITY);
-
-				break;
-		}
-
-		$src = null;
-		$dest = null;
+		$Processor = AM_IMG_PROCESSOR === self::IMAGICK ? new ImagickProcessor() : new GdProcessor();
+		$Processor->resize(
+			$this->originalFile,
+			$this->fileFullPath,
+			$this->width,
+			$this->height
+		);
 
 		chmod($this->fileFullPath, AM_PERM_FILE);
 	}

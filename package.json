@@ -1,6 +1,6 @@
 {
   "name": "automad",
-  "version": "2.0.0-beta.54",
+  "version": "2.0.0-beta.55",
   "description": "Automad",
   "author": "Marc Anton Dahmen",
   "private": true,
@@ -12,7 +12,7 @@
     "build": "npm run prebuild && node esbuild.js",
     "bump-year": "bash bin/bump-year.sh",
     "dev": "bash bin/dev.sh",
-    "docker": "bash docker/run.sh",
+    "dev:docker": "bash bin/dev-docker.sh",
     "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket",
     "mailpit": "docker run -d --restart unless-stopped --name=mailpit -p 8025:8025 -p 1025:1025 axllent/mailpit",
     "phpunit": "bash bin/phpunit.sh",
@@ -21,7 +21,9 @@
     "release": "bash bin/release.sh",
     "server:start": "bash bin/server.sh start",
     "server:stop": "bash bin/server.sh stop",
-    "test": "npm run phpunit && npm run psalm && npm run vitest",
+    "test": "npm run phpunit && npm run psalm && npm run typecheck && npm run vitest",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch",
     "unused": "bash bin/find-unused.sh",
     "vitest": "vitest --run",
     "vitest:watch": "vitest"

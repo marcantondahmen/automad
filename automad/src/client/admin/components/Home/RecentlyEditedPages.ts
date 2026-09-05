@@ -46,8 +46,16 @@ import {
 	resolvePageUrl,
 	routes,
 } from '@/admin/core';
-import { PageRecentlyEditedCardData } from '@/admin/types';
 import { Section } from '@/common';
+
+interface PageRecentlyEditedCardData {
+	title: string;
+	url: string;
+	lastModified: string;
+	private: boolean;
+	thumbnail: string;
+	fileCount: number;
+}
 
 /**
  * A grid of recently edited pages.

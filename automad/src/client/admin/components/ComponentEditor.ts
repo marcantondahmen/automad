@@ -51,9 +51,16 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { ComponentEditorData } from '@/admin/types';
 import { ComponentCollectionFormComponent } from './Forms/ComponentCollectionForm';
 import { EditorFieldComponent } from './Fields/EditorField';
+import type { OutputBlockData } from '@/vendor/editorjs';
+
+export interface ComponentEditorData {
+	id: string;
+	name: string;
+	blocks: OutputBlockData[];
+	collapsed: boolean;
+}
 
 /**
  * A spinner component.

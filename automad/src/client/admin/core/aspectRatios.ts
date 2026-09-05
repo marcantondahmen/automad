@@ -32,7 +32,11 @@
  * See LICENSE.md for license information.
  */
 
-import { AspectRatioBreakpoints } from '@/admin/types';
+export interface AspectRatioBreakpoints {
+	[maxWidth: string]: {
+		aspectRatio: string;
+	};
+}
 
 /**
  * Convert a breakpoints object into the input formatted string.

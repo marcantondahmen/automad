@@ -54,12 +54,23 @@ import {
 	requestAPI,
 	resolveFileUrl,
 	uniqueId,
+	type AspectRatioBreakpoints,
 } from '@/admin/core';
-import { ImageBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { ResponsiveImageSettingsComponent } from '@/admin/components/ResponsiveImageSettings';
 import { TunesMenuConfig } from 'automad-editorjs/types/tools';
 import { DropdownComponent } from '@/admin/components/Dropdown';
+import type { FocalPoint } from '@/admin/types';
+
+interface ImageBlockData {
+	url: string;
+	caption: string;
+	alt: string;
+	link: string;
+	openInNewTab: boolean;
+	breakpoints: AspectRatioBreakpoints;
+	focalPoint: FocalPoint | null;
+}
 
 /**
  * The image block.

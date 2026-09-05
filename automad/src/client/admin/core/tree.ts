@@ -37,8 +37,8 @@ import {
 	SortableTreeNodeData,
 	SortableTreeStyles,
 } from '@/vendor/sortable-tree';
-import { PageMetaData } from '@/admin/types';
 import { App, CSS } from '.';
+import type { PageMetaData } from '@/admin/types';
 
 /**
  * Create the nodes object that is used to build a SortableTree instance.

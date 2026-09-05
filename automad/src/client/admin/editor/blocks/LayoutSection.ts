@@ -35,8 +35,6 @@
 import { API } from '@/vendor/editorjs';
 import {
 	App,
-	aspectRatioBreakpointsFromString,
-	aspectRatioBreakpointsToString,
 	Attr,
 	Bindings,
 	collectFieldData,
@@ -48,25 +46,17 @@ import {
 	CSS,
 	debounce,
 	FieldTag,
-	fire,
 	html,
 	query,
 	queryAll,
 	resolveFileUrl,
 	uniqueId,
+	type AspectRatioBreakpoints,
 } from '@/admin/core';
-import {
-	SectionAlignItemsOption,
-	LayoutSectionBlockData,
-	SectionJustifyContentOption,
-	SectionStyle,
-	SectionToolbarRadioOptions,
-	SelectComponentOption,
-	KeyValueMap,
-} from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
 import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
+import { FocalPointFieldComponent } from '@/admin/components/Fields/FocalPointField';
 import { filterEmptyData, saveEditorBlocks } from '../utils';
 import iconAlignStart from '@/common/svg/flex/align-start.svg';
 import iconAlignCenter from '@/common/svg/flex/align-center.svg';
@@ -80,7 +70,55 @@ import iconJustifyBetween from '@/common/svg/flex/justify-between.svg';
 import iconJustifyEvenly from '@/common/svg/flex/justify-evenly.svg';
 import iconGap from '@/common/svg/flex/gap.svg';
 import iconMin from '@/common/svg/flex/min.svg';
-import { FocalPointFieldComponent } from '@/admin/components/Fields/FocalPointField';
+import type { EditorOutputData } from '../types';
+import type { KeyValueMap, FocalPoint } from '@/admin/types';
+import type { SelectComponentOption } from '@/admin/components/Select';
+
+type SectionToolbarRadioOptions<T extends string> = {
+	[key in T]: { icon: string; tooltip: string };
+};
+
+type SectionJustifyContentOption =
+	| 'start'
+	| 'center'
+	| 'end'
+	| 'space-between'
+	| 'space-evenly'
+	| 'fill-row';
+
+type SectionAlignItemsOption = 'start' | 'center' | 'end' | 'stretch';
+
+type SectionBackgroundBlendMode = (typeof sectionBackgroundBlendModes)[number];
+
+type SectionBorderStyle = (typeof sectionBorderStyles)[number];
+
+interface SectionStyle {
+	aspectRatio?: string;
+	aspectRatioBreakpoints?: AspectRatioBreakpoints;
+	card?: boolean;
+	shadow?: boolean;
+	color?: string;
+	backgroundBlendMode?: SectionBackgroundBlendMode | '';
+	backgroundColor?: string;
+	backgroundImage?: string;
+	backgroundImageFocalPoint?: FocalPoint | null;
+	borderColor?: string;
+	borderWidth?: string;
+	borderRadius?: string;
+	borderStyle?: SectionBorderStyle | '';
+	paddingTop?: string;
+	paddingBottom?: string;
+	overflowHidden?: boolean;
+}
+
+interface LayoutSectionBlockData {
+	content: EditorOutputData;
+	style: SectionStyle;
+	justify: SectionJustifyContentOption;
+	align: SectionAlignItemsOption;
+	gap: string;
+	minBlockWidth: string;
+}
 
 /**
  * The flexbox option for "justify-content".
@@ -762,33 +800,13 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			App.text('aspectRatioBreakpointsHelp')
 		);
 
-		const breakpointsInput = create(
-			'input',
-			[CSS.input, CSS.validate],
-			{
-				type: 'text',
-				placeholder: '600:1/1 900:2/3',
-				pattern: '([1-9][0-9]+:[0-9.]+/[0-9.]+( |$))*',
-				value: aspectRatioBreakpointsToString(
-					this.data.style.aspectRatioBreakpoints
-				),
-			},
-			create(
-				'div',
-				[CSS.field],
-				{
-					[Attr.error]: App.text('aspectRatioBreakpointsError'),
-				},
-				breakpointsWrapper
-			)
+		field(
+			FieldTag.aspectRatioBreakpoints,
+			'aspectRatioBreakpoints',
+			'aspectRatioBreakpoints',
+			breakpointsWrapper,
+			{}
 		);
-
-		modal.listen(breakpointsInput, 'input', () => {
-			this.data.style.aspectRatioBreakpoints =
-				aspectRatioBreakpointsFromString(breakpointsInput.value);
-
-			fire('change', body);
-		});
 
 		const blendModeId = uniqueId();
 		const blendMode = create(
@@ -920,9 +938,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			inline.push(`--minBlockWidth: ${minBlockWidth};`);
 		}
 
-		if (style.aspectRatio) {
-			inline.push(`--aspect-ratio: ${style.aspectRatio};`);
-		}
+		inline.push(`--aspect-ratio: ${style.aspectRatio || 'auto'};`);
 
 		if (style.backgroundImageFocalPoint) {
 			const { x, y } = style.backgroundImageFocalPoint;

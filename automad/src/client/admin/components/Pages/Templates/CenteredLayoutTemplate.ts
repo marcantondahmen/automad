@@ -33,7 +33,7 @@
  */
 
 import { App, Attr, CSS, html } from '@/admin/core';
-import { Partials } from '@/admin/types';
+import type { Partials } from '../BaseLayout';
 
 export const centered = ({ main, variant }: Partials): string => {
 	return html`

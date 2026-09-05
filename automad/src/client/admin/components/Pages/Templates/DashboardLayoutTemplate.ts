@@ -45,8 +45,8 @@ import {
 	SessionController,
 	titleCase,
 } from '@/admin/core';
-import { Partials } from '@/admin/types';
 import { Section } from '@/common';
+import type { Partials } from '../BaseLayout';
 
 export const dashboardLayout = ({ main, publishForm }: Partials) => {
 	return html`
@@ -132,7 +132,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 									class="${CSS.dropdownLink}"
 									${Attr.modal}="#am-about-modal"
 								>
-									<i class="bi bi-info-circle"></i>
+									<i class="bi bi-arrow-up-right-circle"></i>
 									<span>${App.text('aboutAutomad')}</span>
 								</am-modal-toggle>
 								<a
@@ -140,14 +140,14 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 									target="_blank"
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 								>
-									<i class="bi bi-file-earmark-text"></i>
+									<i class="bi bi-globe"></i>
 									<span>${App.text('documentation')}</span>
 								</a>
 								<am-link
 									class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
 									${Attr.target}="${routes.system}?section=${Section.users}"
 								>
-									<i class="bi bi-person-badge"></i>
+									<i class="bi bi-person-fill"></i>
 									<span>${App.text('systemUsers')}</span>
 								</am-link>
 								<span class="${CSS.dropdownLabel}">
@@ -157,7 +157,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 									class="${CSS.dropdownLink}"
 									${Attr.form}="${SessionController.logout}"
 								>
-									<i class="bi bi-box-arrow-right"></i>
+									<i class="bi bi-power"></i>
 									<span> ${App.text('signOut')} </span>
 								</am-submit>
 							</div>
@@ -213,7 +213,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 						${Attr.icon}="asterisk"
 						${Attr.text}="sharedTitle"
 						${Attr.publicationState}="${App.sharedPublicationState}"
-						${(getSlug() as Route) == routes.shared
+						${getSlug() == routes.shared
 							? `
 								${Attr.bind}="publicationState"
 								${Attr.bindTo}="${Attr.publicationState}"
@@ -225,7 +225,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 						${Attr.icon}="boxes"
 						${Attr.text}="componentsTitle"
 						${Attr.publicationState}="${App.componentsPublicationState}"
-						${(getSlug() as Route) == routes.components
+						${getSlug() == routes.components
 							? `
 								${Attr.bind}="publicationState"
 								${Attr.bindTo}="${Attr.publicationState}"
@@ -251,7 +251,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 							class="${CSS.navLink}"
 							${Attr.modal}="#am-about-modal"
 						>
-							<i class="bi bi-info-circle"></i>
+							<i class="bi bi-arrow-up-right-circle"></i>
 							<span>${App.text('aboutAutomad')}</span>
 						</am-modal-toggle>
 					</span>
@@ -260,7 +260,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 							class="${CSS.navLink}"
 							${Attr.form}="${SessionController.logout}"
 						>
-							<i class="bi bi-box-arrow-right"></i>
+							<i class="bi bi-power"></i>
 							<span>
 								${App.text('signOut')} ${App.user.name}
 							</span>
@@ -356,7 +356,7 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 						>
 						<a
 							href="https://automad.org/release-notes"
-							class="${CSS.badge}"
+							class="${CSS.badge} ${CSS.badgeMuted}"
 							target="_blank"
 						>
 							${App.version}

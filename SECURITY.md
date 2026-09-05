@@ -1,17 +1,6 @@
 # Reporting Vulnerabilities
 
-Security should be taken seriously whenever private data and/or the digital distribution of any data is at play. Automad is _no exception_ here.
-
-Whenever you encounter a security vulnerability, please feel free to [report it privately](https://github.com/marcantondahmen/automad/security/advisories/new) and provide the following information:
-
-- A brief description of the vulnerability
-- A use case for an exploit and a valid attack vector
-- All required steps in order to enable an attacker to exploit the vulnerability
-
-> [!IMPORTANT]
-> Please review this document in its entirety before submitting a report. Reports that do not take Automad's architecture and security model into account may be classified as invalid after triage.
-
-Please note that pull-requests for this repository will be ignored as stated in the `README.md`.
+Security should be taken seriously whenever private data and/or the digital distribution of any data is at play. Automad is no exception here. If you believe you have discovered a security vulnerability, please read this document in its entirety before submitting a report. Security vulnerabilities must be [reported privately](https://github.com/marcantondahmen/automad/security/advisories/new). Do not open a public issue.
 
 ---
 
@@ -33,13 +22,33 @@ Please note that pull-requests for this repository will be ignored as stated in 
 
 Unfortunately false positive vulnerability reports pose a substantial threat to cybersecurity since maintainers of open-source projects keep on drowning in reports. This implies that real threats will not get the attention that will be required to handle them properly and with care.
 
-However, _all reported vulnerabilities are reviewed_ and handled with priority as soon as possible.
+Before submitting a security report, you [must read](#architecture) and understand the Automad architecture described below. Reports must be based on an accurate understanding of how Automad works and must respect the security boundaries described in this policy.
 
-Please note that after an initial triage only reports of exploitable vulnerabilities with realistic attack vectors are followed up. Please make sure that you are famliliar with Automad's architecture and fully understand its implications for security as described below.
+A security report must:
+
+- include a reproducible proof of concept (PoC) demonstrating the vulnerability
+- demonstrate that the vulnerability crosses one of the security boundaries described below
+- provide sufficient information to reproduce and verify the issue
+- describe a concrete security impact
+
+The following are not considered security vulnerabilities unless accompanied by a demonstrable violation of a relevant security boundary and concrete security impact:
+
+- issues requiring authenticated administrator access
+- issues that only affect deliberately malicious administrators
+- scanner-generated findings that have not been manually validated
+- CSRF claims where the affected operation is not security-sensitive
+- theoretical XSS without a controllable execution path
+- outdated dependencies without an exploitable path
+- self-XSS (see below)
+
+Reports that do not meet these requirements may be closed without investigation.
+
+> [!IMPORTANT]
+> Repeated submission of low-quality, speculative, or otherwise invalid security reports may result in the reporter being blocked from further reporting or participation in the Automad repository.
 
 ## Architecture
 
-Automad is a _flat-file_ content management system that doesn't have a database. Content is stored on disk in `.json` files. Pages are only rendered and saved as static `.html` files when content has changed. From a security perspective, this architecture has significant advantages over database driven websites.
+Automad is a flat-file content management system that doesn't have a database. Content is stored on disk in `.json` files. Pages are only rendered and saved as static `.html` files when content has changed. From a security perspective, this architecture has significant advantages over database driven websites.
 
 ### Users and Roles
 

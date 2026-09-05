@@ -33,7 +33,7 @@
  */
 
 import DOMPurify from 'dompurify';
-import { KeyValueMap } from '@/admin/types';
+import type { KeyValueMap } from '@/admin/types';
 
 /**
  * A whitelist of custom component attributes.
@@ -74,7 +74,6 @@ export const enum Attr {
 	page = 'am-page',
 	path = 'am-path',
 	publicationState = 'am-publication-state',
-	portal = 'am-portal',
 	right = 'am-right',
 	section = 'am-section',
 	serial = 'am-serial',

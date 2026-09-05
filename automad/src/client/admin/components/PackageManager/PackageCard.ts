@@ -46,8 +46,8 @@ import {
 	PackageManagerController,
 	requestAPI,
 } from '@/admin/core';
-import { Package } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+import type { Package } from './types';
 
 /**
  * Perform a package manager action.

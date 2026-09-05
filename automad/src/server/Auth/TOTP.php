@@ -63,6 +63,7 @@ class TOTP {
 	public static function setup(string $username): array {
 		$issuer = $_SERVER['SERVER_NAME'] ?? '';
 
+		/** @psalm-suppress InternalClass */
 		$TOTP = \OTPHP\TOTP::generate(new InternalClock(), 16);
 		$TOTP = $TOTP->withLabel($username);
 		$TOTP = $TOTP->withIssuer($issuer ? $issuer : 'Automad');

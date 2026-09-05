@@ -39,9 +39,9 @@ use Automad\Admin\Email\InvitationEmail;
 use Automad\Auth\Session;
 use Automad\Auth\User;
 use Automad\Core\Cache;
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
+use Automad\System\FileSystem;
 use Automad\System\Mail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

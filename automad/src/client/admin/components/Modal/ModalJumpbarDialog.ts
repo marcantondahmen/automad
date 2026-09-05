@@ -32,10 +32,20 @@
  * See LICENSE.md for license information.
  */
 
-import { JumpbarItemData, KeyValueMap, PageMetaData } from '@/admin/types';
 import { App, Attr, create, CSS, html, routes } from '@/admin/core';
 import { Section } from '@/common';
 import { AutocompleteComponent } from '../Autocomplete';
+import type { KeyValueMap, PageMetaData } from '@/admin/types';
+
+interface JumpbarItemData {
+	value: string;
+	title: string;
+	icon: string;
+	subtitle?: string;
+	target?: string;
+	external?: string;
+	cls?: string[];
+}
 
 /**
  * Return the jumpbar autocompletion data for the search.

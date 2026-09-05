@@ -44,9 +44,14 @@ import {
 	uniqueId,
 } from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
-import { CodeBlockData } from '@/admin/types';
-import { supportedLanguages } from '@/prism/prism';
+import { CodeLanguage, supportedLanguages } from '@/prism/prism';
 import { BaseBlock } from './BaseBlock';
+
+interface CodeBlockData {
+	code: string;
+	language: CodeLanguage;
+	lineNumbers: boolean;
+}
 
 export class CodeBlock extends BaseBlock<CodeBlockData> {
 	/**

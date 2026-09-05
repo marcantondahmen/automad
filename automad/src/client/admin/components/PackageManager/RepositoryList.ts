@@ -34,11 +34,11 @@
 
 import { BaseComponent } from '@/admin/components/Base';
 import { App, CSS, EventName, requestAPI } from '@/admin/core';
-import { Repository } from '@/admin/types';
 import { create, PackageManagerController } from '@/common';
 import { ComposerAuthComponent } from './ComposerAuth';
 import { AddRepositoryComponent } from './AddRepository';
 import { RepositoryCardComponent } from './RepositoryCard';
+import type { Repository } from './types';
 
 /**
  * The private packages component.

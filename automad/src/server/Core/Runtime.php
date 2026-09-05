@@ -39,6 +39,7 @@ use Automad\Models\Context;
 use Automad\Models\Filelist;
 use Automad\Models\Pagelist;
 use Automad\System\Fields;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

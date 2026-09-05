@@ -33,8 +33,8 @@
  */
 
 import { App } from '@/admin/core';
-import { KeyValueMap } from '@/admin/types';
 import { BaseSelectInline } from './BaseSelectInline';
+import type { KeyValueMap } from '@/admin/types';
 
 export class LineHeightInline extends BaseSelectInline {
 	/**

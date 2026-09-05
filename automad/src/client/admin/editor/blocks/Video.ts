@@ -49,8 +49,16 @@ import {
 	resolveFileUrl,
 	VideoCollectionController,
 } from '@/admin/core';
-import { VideoBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+interface VideoBlockData {
+	url: string;
+	autoplay: boolean;
+	loop: boolean;
+	controls: boolean;
+	muted: boolean;
+	caption: string;
+}
 
 export class VideoBlock extends BaseBlock<VideoBlockData> {
 	/**

@@ -35,8 +35,8 @@
 
 namespace Automad\System\Ai;
 
-use Automad\Core\FileSystem;
 use Automad\Core\Str;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -36,7 +36,6 @@
 namespace Automad\Engine;
 
 use Automad\Core\Automad;
-use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Core\Resolve;
 use Automad\Core\SessionData;
@@ -44,6 +43,7 @@ use Automad\Core\Str;
 use Automad\Engine\Processors\TemplateProcessor;
 use Automad\Models\Selection;
 use Automad\System\Fields;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

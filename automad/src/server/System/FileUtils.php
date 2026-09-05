@@ -33,8 +33,12 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Core;
+namespace Automad\System;
 
+use Automad\Core\Debug;
+use Automad\Core\Parse;
+use Automad\Core\Resolve;
+use Automad\Core\Str;
 use Automad\Models\Page;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -101,7 +105,7 @@ class FileUtils {
 						$files[] = $file;
 					}
 				} elseif ($f = FileSystem::glob(Resolve::filePath($Page->path, $item))) {
-					$f = array_filter($f, '\Automad\Core\FileSystem::isAllowedFileType');
+					$f = array_filter($f, '\Automad\System\FileSystem::isAllowedFileType');
 					$files = array_merge($files, $f);
 				}
 			}

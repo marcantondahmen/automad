@@ -48,8 +48,20 @@ import {
 	routes,
 	SearchController,
 } from '@/admin/core';
-import { FieldResults, FileResults, KeyValueMap } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+import type { KeyValueMap } from '@/admin/types';
+
+interface FieldResults {
+	context: string;
+	field: string;
+	matches: string[];
+}
+
+interface FileResults {
+	fieldResultsArray: FieldResults[];
+	path: string;
+	url: string;
+}
 
 /**
  * Render the inner content for a given field in the results card.

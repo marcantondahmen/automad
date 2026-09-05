@@ -32,26 +32,41 @@
  * See LICENSE.md for license information.
  */
 
-import { KeyValueMap } from '.';
-import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
-import { Binding } from '@/admin/core';
+export * from '@/common/types';
 
-export interface PageRecentlyEditedCardData {
-	title: string;
-	url: string;
-	lastModified: string;
-	private: boolean;
-	thumbnail: string;
-	fileCount: number;
+import type { KeyValueMap } from '@/common';
+
+declare global {
+	const DEVELOPMENT: boolean;
+
+	interface Event {
+		path: string[];
+	}
+
+	interface ParentNode {
+		closest: any;
+	}
+
+	interface Window {
+		DEBUG: boolean;
+	}
 }
 
-export interface PageMainSettingsData {
-	section: SwitcherSectionComponent;
-	url: string;
-	fields: KeyValueMap;
-	template: string;
-	readme: string;
-	shared: KeyValueMap;
+export type InputElement = HTMLInputElement | HTMLTextAreaElement;
+
+export interface FocalPoint {
+	x: number;
+	y: number;
+}
+
+export interface Listener {
+	remove: () => void;
+}
+
+export interface PackageDirectoryItems {
+	pagelist: string[];
+	filelist: string[];
+	snippets: string[];
 }
 
 export interface PageMetaData {
@@ -69,19 +84,26 @@ export interface Pages {
 	[key: string]: PageMetaData;
 }
 
-export interface PageBindings {
-	slugBinding: Binding;
+export type PublicationState = 'draft' | 'published';
+
+export interface ThemeOptions {
+	[key: string]: KeyValueMap;
 }
 
-export interface InPageBindings {
-	inPageReturnUrlBinding: Binding;
-	inPageTitleBinding: Binding;
-	inPageContextUrlBinding: Binding;
-	inPageFieldBinding: Binding;
-}
-
-export interface DeletedPageMetaData {
-	title: string;
+export interface Theme {
+	author: string;
+	description: string;
+	license: string;
+	name: string;
 	path: string;
-	lastModified: string;
+	readme: string;
+	templates: string[];
+	tooltips: KeyValueMap;
+	options: ThemeOptions;
+	labels: KeyValueMap;
+	version?: string;
+}
+
+export interface ThemeCollection {
+	[key: string]: Theme;
 }

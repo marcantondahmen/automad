@@ -91,6 +91,7 @@ class Debug {
 		ini_set('log_errors', 1);
 
 		if (self::$isEnabled) {
+			ini_set('display_errors', '1');
 			error_reporting(E_ALL);
 
 			if (!file_exists(dirname(AM_DEBUG_LOG_PATH))) {

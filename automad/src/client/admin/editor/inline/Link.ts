@@ -44,8 +44,8 @@ import {
 	html,
 	uniqueId,
 } from '@/admin/core';
-import { KeyValueMap } from '@/admin/types';
 import { BaseInline } from './BaseInline';
+import type { KeyValueMap } from '@/admin/types';
 
 /**
  * An inline link tool with autocomplete and target toggle.

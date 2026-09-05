@@ -42,8 +42,8 @@ import {
 	keyCombo,
 	queryAll,
 } from '@/admin/core';
-import { InputElement } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+import type { InputElement } from '@/admin/types';
 
 /**
  * A field and card filter input component.

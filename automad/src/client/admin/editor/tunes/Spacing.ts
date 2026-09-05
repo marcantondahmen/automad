@@ -43,8 +43,14 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import { SpacingTuneData } from '@/admin/types';
 import { BaseModalTune } from './BaseModalTune';
+
+interface SpacingTuneData {
+	top: string;
+	right: string;
+	bottom: string;
+	left: string;
+}
 
 export class SpacingTune extends BaseModalTune<SpacingTuneData> {
 	/**

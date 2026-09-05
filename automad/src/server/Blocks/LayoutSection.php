@@ -142,6 +142,7 @@ class LayoutSection extends AbstractBlock {
 						@container $uniqueName (max-width: {$maxWidth}px) {
 							.{$uniqueName} am-layout-section {
 								aspect-ratio: {$breakpoint['aspectRatio']} !important;
+								overflow: hidden;
 							}	
 						}
 
@@ -152,7 +153,7 @@ class LayoutSection extends AbstractBlock {
 				$html .= "<style>$css</style>";
 			}
 
-			if (!empty($style['overflowHidden'])) {
+			if (!empty($style['overflowHidden']) || !empty($style['aspectRatio'])) {
 				$styles['overflow'] = 'hidden';
 			}
 

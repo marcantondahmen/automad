@@ -35,8 +35,8 @@
 
 namespace Automad\Models;
 
-use Automad\Core\FileSystem;
 use Automad\Core\Image;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

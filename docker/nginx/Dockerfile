@@ -1,21 +1,18 @@
 FROM php:8.4-fpm-alpine
 
 RUN apk add --no-cache \
+	$PHPIZE_DEPS \
+	imagemagick-dev \
     freetype-dev \
-    icu-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libwebp-dev \
     libzip-dev \
-    oniguruma-dev \
-    zip
-
-RUN docker-php-ext-install -j$(nproc) \
-    gd \
-    intl \
-    mbstring \
-    opcache \
-    zip
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+	&& docker-php-ext-install gd zip \
+	&& pecl install imagick \
+	&& docker-php-ext-enable imagick \
+	&& apk del $PHPIZE_DEPS
 
 WORKDIR /app
 

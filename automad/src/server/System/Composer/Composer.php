@@ -36,9 +36,9 @@
 namespace Automad\System\Composer;
 
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\System\Fetch;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -147,14 +147,21 @@ class Composer {
 				throw new \Exception('Error including from PHAR!');
 			}
 
+			/** @psalm-suppress UndefinedClass */
 			$input = new \Symfony\Component\Console\Input\StringInput($command);
+			/** @psalm-suppress UndefinedClass */
 			$output = new \Symfony\Component\Console\Output\BufferedOutput();
+			/** @psalm-suppress UndefinedClass */
 			$application = new \Composer\Console\Application();
 
+			/** @psalm-suppress UndefinedClass */
 			$application->setAutoExit(false);
+			/** @psalm-suppress UndefinedClass */
 			$application->setCatchExceptions(false);
 
+			/** @psalm-suppress UndefinedClass */
 			$exitCode = $application->run($input, $output);
+			/** @psalm-suppress UndefinedClass */
 			$buffer = $output->fetch();
 			Debug::log($buffer, 'Buffer');
 

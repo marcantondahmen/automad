@@ -33,9 +33,9 @@
  */
 
 import { App, getPageURL } from '@/admin/core';
-import { PublishControllers } from '@/admin/types';
 import { KeyValueMap, PageController } from '@/common';
 import { BasePublishFormComponent } from './BasePublishForm';
+import type { PublishControllers } from './types';
 
 /**
  * The page publish button and form for the navbar.

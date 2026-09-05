@@ -32,8 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { Partials } from '@/admin/types';
-import { BaseLayoutComponent } from './BaseLayout';
+import { BaseLayoutComponent, type Partials } from './BaseLayout';
 import { centered } from './Templates/CenteredLayoutTemplate';
 
 /**

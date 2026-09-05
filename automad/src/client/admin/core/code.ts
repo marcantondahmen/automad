@@ -32,10 +32,18 @@
  * See LICENSE.md for license information.
  */
 
-import { CodeEditorData } from '@/admin/types';
 import { create, CSS, debounce, getLogger, html } from '@/admin/core';
-import { Prism, Languages } from '@/prism/prism';
+import { Prism, Languages, CodeLanguage } from '@/prism/prism';
 import { CodeFlask } from '@/vendor/codeflask';
+
+interface CodeEditorData {
+	element: HTMLElement;
+	code: string;
+	language: CodeLanguage;
+	onChange?: (code: string) => void;
+	placeholder?: string;
+	readonly?: boolean;
+}
 
 /**
  * A thin wrapper around CodeFlask.

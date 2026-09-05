@@ -36,7 +36,6 @@
 namespace Automad\System;
 
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Exception;
 use FilesystemIterator;
 use RecursiveCallbackFilterIterator;

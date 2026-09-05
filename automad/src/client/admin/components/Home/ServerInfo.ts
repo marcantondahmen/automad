@@ -81,6 +81,10 @@ class ServerInfoComponent extends BaseComponent {
 					<td>${data.phpSapiName}</td>
 				</tr>
 				<tr>
+					<td>Image Processor</td>
+					<td>${data.imageProcessor}</td>
+				</tr>
+				<tr>
 					<td>Memory Limit</td>
 					<td>${data.memoryLimit}</td>
 				</tr>

@@ -33,9 +33,10 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Core;
+namespace Automad\System;
 
-use Automad\System\Fetch;
+use Automad\Core\Debug;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

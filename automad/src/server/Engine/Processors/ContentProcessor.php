@@ -38,7 +38,6 @@ namespace Automad\Engine\Processors;
 use Automad\Admin\InPage;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
-use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Core\Request;
 use Automad\Core\SessionData;
@@ -47,6 +46,7 @@ use Automad\Engine\Delimiters;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
 use Automad\System\Fields;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

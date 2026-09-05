@@ -33,8 +33,9 @@
  */
 
 import { queryAll } from '@/common';
+import type { ComponentImplementation } from '../types';
 
-export default class TableOfContentsComponent {
+export default class TableOfContentsComponent implements ComponentImplementation {
 	/**
 	 * The main element.
 	 */

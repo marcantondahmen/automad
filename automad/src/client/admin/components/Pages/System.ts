@@ -41,12 +41,8 @@ import {
 	html,
 	routes,
 } from '@/admin/core';
-import {
-	SwitcherDropdownData,
-	SwitcherDropdownItem,
-	SystemSectionData,
-} from '@/admin/types';
 import { Section } from '@/common';
+import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderAiSection } from './Partials/System/Ai';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderDebugSection } from './Partials/System/Debug';
@@ -56,7 +52,20 @@ import { renderLanguageSection } from './Partials/System/Language';
 import { renderUpdateSection } from './Partials/System/Update';
 import { renderUsersSection } from './Partials/System/Users';
 import { renderMailSection } from './Partials/System/Mail';
-import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
+import type {
+	SwitcherDropdownData,
+	SwitcherDropdownItem,
+} from '@/admin/components/Switcher/SwitcherDropdown';
+
+interface SystemSectionData {
+	section: Section;
+	icon: string;
+	title: string;
+	info: string;
+	state: string;
+	render: () => void;
+	narrowIcon?: boolean;
+}
 
 /**
  * The system settings sections data.

@@ -32,8 +32,8 @@
  * See LICENSE.md for license information.
  */
 
-import { AttributeTuneData } from '@/admin/types';
 import { BaseAttributeTune } from './BaseAttributeTune';
+import type { AttributeTuneData } from '../types';
 
 export class IdTune extends BaseAttributeTune {
 	/**

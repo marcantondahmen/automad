@@ -33,12 +33,15 @@
  */
 
 import { API, InlineToolConstructorOptions } from '@/vendor/editorjs';
-import { App, create, query } from '@/admin/core';
-import {
-	KeyValueMap,
-	TextAlignOption,
-	TextAlignSelection,
-} from '@/admin/types';
+import { App, create, type KeyValueMap, query } from '@/admin/core';
+
+type TextAlignOption = 'left' | 'center' | 'right';
+
+interface TextAlignSelection {
+	start: number;
+	end: number;
+	div: HTMLElement;
+}
 
 abstract class BaseTextAlignInline {
 	/**

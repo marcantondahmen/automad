@@ -35,7 +35,6 @@
 
 namespace Automad\System;
 
-use Automad\Core\FileSystem;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\Models\Page;

@@ -42,8 +42,8 @@ import {
 	query,
 	queryAll,
 } from '@/admin/core';
-import { InputElement, Listener } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+import type { InputElement, Listener } from '@/admin/types';
 
 /**
  * A modal component.

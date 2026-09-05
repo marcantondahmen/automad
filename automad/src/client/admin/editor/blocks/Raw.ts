@@ -34,8 +34,11 @@
 
 import { App, Attr, create, CSS, html, query } from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
-import { RawBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+interface RawBlockData {
+	code: string;
+}
 
 export class RawBlock extends BaseBlock<RawBlockData> {
 	/**

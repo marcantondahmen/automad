@@ -48,10 +48,6 @@ import {
 	html,
 	uniqueId,
 } from '@/admin/core';
-import {
-	ImageSlideshowBreakpoints,
-	ImageSlideshowBlockData,
-} from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
 
 /**
@@ -59,7 +55,29 @@ import { BaseBlock } from './BaseBlock';
  *
  * @see {@link docs https://swiperjs.com/swiper-api#param-effect}
  */
-export const sliderEffects = ['slide', 'fade', 'flip'] as const;
+const sliderEffects = ['slide', 'fade', 'flip'] as const;
+
+interface ImageSlideshowBreakpoint {
+	slidesPerView: number;
+}
+
+interface ImageSlideshowBreakpoints {
+	[minWidth: string]: ImageSlideshowBreakpoint;
+}
+
+export interface ImageSlideshowBlockData {
+	files: string[];
+	imageWidthPx: number;
+	imageHeightPx: number;
+	gapPx: number;
+	slidesPerView: number;
+	loop: boolean;
+	autoplay: boolean;
+	effect: (typeof sliderEffects)[number];
+	breakpoints: ImageSlideshowBreakpoints;
+	delay: number;
+	hideControls: boolean;
+}
 
 const breakpointsToString = (
 	breakpoints: ImageSlideshowBreakpoints

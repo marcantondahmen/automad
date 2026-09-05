@@ -37,8 +37,8 @@ namespace Automad\Controllers\API;
 
 use Automad\API\Response;
 use Automad\Core\Automad;
-use Automad\Core\FileSystem;
 use Automad\Models\VideoCollection;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

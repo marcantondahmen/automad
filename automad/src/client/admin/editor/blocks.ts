@@ -32,7 +32,6 @@
  * See LICENSE.md for license information.
  */
 
-import { KeyValueMap } from '../types';
 import { ButtonsBlock } from './blocks/Buttons';
 import { CalloutBlock } from './blocks/Callout';
 import { CodeBlock } from './blocks/Code';
@@ -56,8 +55,9 @@ import { SnippetBlock } from './blocks/Snippet';
 import { TableBlock } from './blocks/Table';
 import { TableOfContentsBlock } from './blocks/TableOfContents';
 import { VideoBlock } from './blocks/Video';
-import { embedServices } from './embedServices';
 import { TeXBlock } from './blocks/TeX';
+import { embedServices } from './embedServices';
+import type { KeyValueMap } from '@/admin/types';
 
 /**
  * The blocks used.

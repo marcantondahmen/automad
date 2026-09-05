@@ -33,8 +33,11 @@
  */
 
 import { setDocumentTitle } from '@/admin/core';
-import { Partials } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+
+export interface Partials {
+	[key: string]: string;
+}
 
 /**
  * The base view component.

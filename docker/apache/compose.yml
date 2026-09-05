@@ -4,7 +4,7 @@ services:
   app:
     build: .
     ports:
-      - 8888:80
+      - 8000:80
     user: ${USER_ID}:${GROUP_ID}
     volumes:
       - ../../:/app

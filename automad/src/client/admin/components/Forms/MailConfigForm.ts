@@ -46,10 +46,19 @@ import {
 	requestAPI,
 	Undo,
 } from '@/admin/core';
-import { MailConfig } from '@/admin/types';
 import { FormComponent } from './Form';
 
-export const transportOptions = ['sendmail', 'smtp'] as const;
+export interface MailConfig {
+	transport: (typeof transportOptions)[number];
+	from: string;
+	fromDefault: string;
+	smtpServer: string;
+	smtpUsername: string;
+	smtpPort: number;
+	smtpPasswordIsSet: boolean;
+}
+
+const transportOptions = ['sendmail', 'smtp'] as const;
 
 /**
  * The mail config component.

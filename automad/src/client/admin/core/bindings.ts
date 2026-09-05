@@ -33,12 +33,14 @@
  */
 
 import { Attr, create, EventName, fire, getLogger, listen, queryAll } from '.';
-import {
-	BindingOptions,
-	InputElement,
-	KeyValueMap,
-	Listener,
-} from '@/admin/types';
+import type { InputElement, KeyValueMap, Listener } from '@/admin/types';
+
+interface BindingOptions {
+	input?: InputElement;
+	modifier?: (value: string) => any;
+	initial?: any;
+	onChange?: (value: string) => void;
+}
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.

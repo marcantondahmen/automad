@@ -36,9 +36,9 @@
 namespace Automad\Controllers;
 
 use Automad\Core\Image;
-use Automad\Core\RemoteFile;
 use Automad\Core\Request;
 use Automad\Core\Str;
+use Automad\System\RemoteFile;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

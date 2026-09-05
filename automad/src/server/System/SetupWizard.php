@@ -35,7 +35,6 @@
 
 namespace Automad\System;
 
-use Automad\Core\FileSystem;
 use Automad\Models\MailConfig;
 use Automad\System\Ai\ProviderCollection;
 

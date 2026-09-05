@@ -34,7 +34,7 @@
 
 import { App, create, CSS, fire, resolveFileUrl } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
-import { FocalPoint } from '../types';
+import type { FocalPoint } from '@/admin/types';
 
 /**
  * Pick the focal point.
@@ -60,7 +60,7 @@ const pickFocalPoint = (event: MouseEvent, img: HTMLElement): FocalPoint => {
 };
 
 /**
- * A responsive image settings editor component.
+ * A focal point picker component.
  *
  * @extends BaseComponent
  */

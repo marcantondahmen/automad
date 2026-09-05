@@ -43,8 +43,8 @@ import {
 	Attr,
 	PageController,
 } from '@/admin/core';
-import { KeyValueMap } from '@/admin/types';
 import { BaseBreadcrumbsComponent } from './BaseBreadcrumbs';
+import type { KeyValueMap } from '@/admin/types';
 
 /**
  * A breadcrumbs nav for a page.

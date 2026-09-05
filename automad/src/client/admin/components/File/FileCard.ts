@@ -33,9 +33,9 @@
  */
 
 import { App, Attr, CSS, html, queryAll } from '@/admin/core';
-import { File } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
 import { FileInfoComponent } from './FileInfo';
+import type { File } from './types';
 
 /**
  * A file card component.
@@ -134,7 +134,7 @@ class FileCardComponent extends BaseComponent {
 					class="${CSS.cardTeaser} ${CSS.cursorPointer}"
 					${Attr.tooltip}="$${file.basename}"
 				>
-					<img src="${file.thumbnail}" />
+					<img src="${file.thumbnail}" loading="lazy" />
 				</am-file-robot>
 			`;
 		}

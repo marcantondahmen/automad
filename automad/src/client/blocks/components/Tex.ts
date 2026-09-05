@@ -32,7 +32,9 @@
  * See LICENSE.md for license information.
  */
 
-export default class TexComponent {
+import type { ComponentImplementation } from '../types';
+
+export default class TexComponent implements ComponentImplementation {
 	/**
 	 * The class constructor.
 	 */

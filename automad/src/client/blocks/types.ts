@@ -32,57 +32,8 @@
  * See LICENSE.md for license information.
  */
 
-import { GalleryBlockData, ImageSlideshowBlockData } from '@/admin/types';
-
 export interface ComponentImplementation {}
 
 export interface ComponentImplementationConstructor {
 	new (element: HTMLElement): ComponentImplementation;
-}
-
-export interface GalleryData {
-	imageSets: {
-		thumb: {
-			image: string;
-			width: number;
-			height: number;
-			preload: string;
-		};
-		large: {
-			image: string;
-			width: number;
-			height: number;
-		};
-		caption: string;
-	}[];
-	settings: Omit<GalleryBlockData, 'files'>;
-}
-
-export type ImageSetData = GalleryData['imageSets'][number];
-
-export type GalleryRow = {
-	width: number;
-	imageSets: ImageSetData[];
-};
-
-export type MailInput = HTMLInputElement | HTMLTextAreaElement;
-
-export interface MasonryItem {
-	element: HTMLElement;
-	rowSpan: number;
-	height: number;
-	thumbHeight: number;
-}
-
-export interface SliderData {
-	imageSets: {
-		imageSet: {
-			image: string;
-			width: number;
-			height: number;
-			preload: string;
-		};
-		caption: string;
-	}[];
-	settings: Omit<ImageSlideshowBlockData, 'files'>;
 }

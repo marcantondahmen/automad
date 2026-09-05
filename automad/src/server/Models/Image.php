@@ -35,12 +35,12 @@
 
 namespace Automad\Models;
 
-use Automad\Core\FileSystem;
-use Automad\Core\FileUtils;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\System\DiskUsage;
+use Automad\System\FileSystem;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -38,7 +38,6 @@ namespace Automad\System;
 use Automad\App;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Automad\Core\Messenger;
 use Automad\Core\Parse;
 use Automad\Core\Str;

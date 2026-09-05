@@ -38,14 +38,14 @@ namespace Automad\Models;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
-use Automad\Core\FileUtils;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\System\DiskUsage;
 use Automad\System\Fetch;
+use Automad\System\FileSystem;
+use Automad\System\FileUtils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

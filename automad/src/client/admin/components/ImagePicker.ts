@@ -44,8 +44,12 @@ import {
 	queryAll,
 	requestAPI,
 } from '@/admin/core';
-import { Image } from '@/admin/types';
 import { BaseComponent } from '@/admin/components/Base';
+
+interface Image {
+	name: string;
+	thumbnail: string;
+}
 
 /**
  * An image picker component.

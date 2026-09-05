@@ -36,13 +36,6 @@ import { EditorConfig } from '@/vendor/editorjs';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { ModalFieldComponent } from '@/admin/components/Modal/ModalField';
 import {
-	EditorOutputData,
-	FieldInitData,
-	FieldSectionCollection,
-	KeyValueMap,
-	SelectComponentOption,
-} from '@/admin/types';
-import {
 	App,
 	Attr,
 	Bindings,
@@ -57,15 +50,24 @@ import {
 	query,
 	uniqueId,
 } from '.';
+import { debounce, queryAll, Section } from '@/common';
 import { PageDataFormComponent } from '@/admin/components/Forms/PageDataForm';
 import { SwitcherSectionComponent } from '@/admin/components/Switcher/SwitcherSection';
 import { FormComponent } from '@/admin/components/Forms/Form';
 import { SharedDataFormComponent } from '@/admin/components/Forms/SharedDataForm';
 import { AutocompleteUrlComponent } from '@/admin/components/AutocompleteUrl';
-import { BaseFieldComponent } from '@/admin/components/Fields/BaseField';
-import { SelectComponent } from '@/admin/components/Select';
+import {
+	BaseFieldComponent,
+	type FieldInitData,
+} from '@/admin/components/Fields/BaseField';
+import {
+	SelectComponent,
+	type SelectComponentOption,
+} from '@/admin/components/Select';
 import { EditorJSComponent } from '@/admin/components/EditorJS';
-import { debounce, queryAll, Section } from '@/common';
+import type { KeyValueMap } from '@/admin/types';
+import type { FieldSectionCollection } from '@/admin/components/Forms/types';
+import type { EditorOutputData } from '@/admin/editor/types';
 
 /**
  * Create a new EditorJSComponent element.
@@ -105,14 +107,14 @@ export const createEditor = (
  * @param [allowModal]
  * @returns the generated field
  */
-export const createField = (
+export const createField = <T extends BaseFieldComponent = BaseFieldComponent>(
 	fieldType: FieldTag,
 	parent: HTMLElement,
 	data: FieldInitData,
 	cls: string[] = [],
 	attributes: KeyValueMap = {},
 	allowModal: boolean = false
-): BaseFieldComponent => {
+): T => {
 	const field = create(
 		fieldType,
 		cls,

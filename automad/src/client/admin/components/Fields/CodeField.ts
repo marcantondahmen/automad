@@ -32,9 +32,14 @@
  * See LICENSE.md for license information.
  */
 
-import { create, CSS, FieldTag, FormDataProviders } from '@/admin/core';
+import {
+	create,
+	CSS,
+	FieldTag,
+	FormDataProviders,
+	type UndoValue,
+} from '@/admin/core';
 import { CodeEditor } from '@/admin/core/code';
-import { UndoValue } from '@/admin/types';
 import { BaseFieldComponent } from './BaseField';
 
 /**

@@ -48,12 +48,15 @@ import {
 	query,
 	uniqueId,
 } from '@/admin/core';
-import {
-	FilelistBlockData,
-	KeyValueMap,
-	SelectComponentOption,
-} from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+import type { KeyValueMap } from '@/admin/types';
+import type { SelectComponentOption } from '@/admin/components/Select';
+
+interface FilelistBlockData {
+	file: string;
+	glob: string;
+	sortOrder: 'asc' | 'desc';
+}
 
 const defaultFile = 'default';
 

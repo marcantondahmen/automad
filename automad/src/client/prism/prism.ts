@@ -101,4 +101,6 @@ const supportedLanguages = [
 
 Prism.languages['automad'] = PrismAutomad;
 
-export { Prism, type Languages, supportedLanguages };
+type CodeLanguage = (typeof supportedLanguages)[number];
+
+export { Prism, type Languages, type CodeLanguage, supportedLanguages };

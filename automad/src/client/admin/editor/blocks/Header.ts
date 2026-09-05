@@ -34,8 +34,12 @@
 
 import { HTMLPasteEvent, TunesMenuConfig } from '@/vendor/editorjs';
 import { App, create, CSS, html, query } from '@/admin/core';
-import { HeaderBlockData } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+interface HeaderBlockData {
+	level: 1 | 2 | 3 | 4 | 5 | 6;
+	text: string;
+}
 
 export class HeaderBlock extends BaseBlock<HeaderBlockData> {
 	/**

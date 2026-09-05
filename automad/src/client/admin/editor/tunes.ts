@@ -32,12 +32,12 @@
  * See LICENSE.md for license information.
  */
 
-import { KeyValueMap } from '../types';
 import { ClassTune } from './tunes/Class';
 import { DuplicateTune } from './tunes/Duplicate';
 import { IdTune } from './tunes/Id';
 import { LayoutTune } from './tunes/Layout';
 import { SpacingTune } from './tunes/Spacing';
+import type { KeyValueMap } from '../types';
 
 /**
  * The base selection of tunes that is used for all blocks.

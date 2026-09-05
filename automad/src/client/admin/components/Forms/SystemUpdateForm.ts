@@ -41,9 +41,10 @@ import {
 	html,
 	query,
 } from '@/admin/core';
-import { KeyValueMap, SystemUpdateResponse } from '@/admin/types';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import { FormComponent } from './Form';
+import type { KeyValueMap } from '@/admin/types';
+import type { SystemUpdateResponse } from '@/admin/components/System/types';
 
 /**
  * The system update form.

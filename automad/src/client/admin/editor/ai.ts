@@ -45,10 +45,15 @@ import {
 	queryAll,
 	requestAPI,
 } from '@/admin/core';
-import { AiRuntimeState, AiTarget } from '@/admin/types/editor/plugins';
 import { BlockToolData } from 'automad-editorjs';
 import { EditorFieldComponent } from '@/admin/components/Fields/EditorField';
 import { EditorAiAssistanceComponent } from '@/admin/components/EditorAiAssistance';
+import type { AiRuntimeState } from './types';
+
+interface AiTarget {
+	text: string;
+	blocks: BlockToolData[];
+}
 
 /**
  * Get all page blocks.

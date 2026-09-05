@@ -48,8 +48,18 @@ import {
 	listen,
 	uniqueId,
 } from '@/admin/core';
-import { GalleryBlockData, GalleryLayout } from '@/admin/types';
 import { BaseBlock } from './BaseBlock';
+
+type GalleryLayout = 'columns' | 'rows' | 'grid';
+
+export interface GalleryBlockData {
+	files: string[];
+	layout: GalleryLayout;
+	columnWidthPx: number;
+	rowHeightPx: number;
+	gapPx: number;
+	fillRectangle: boolean;
+}
 
 export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 	/**

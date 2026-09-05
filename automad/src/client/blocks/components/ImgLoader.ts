@@ -33,6 +33,7 @@
  */
 
 import { create } from '@/common';
+import type { ComponentImplementation } from '../types';
 
 /**
  * A simple image preloader with a blurred background.
@@ -40,7 +41,7 @@ import { create } from '@/common';
  * @example
  * <am-img-loader image="..." preload="..." width="200" height="200"></am-img-loader>
  */
-export default class ImgLoader {
+export default class ImgLoader implements ComponentImplementation {
 	/**
 	 * The class constructor.
 	 */

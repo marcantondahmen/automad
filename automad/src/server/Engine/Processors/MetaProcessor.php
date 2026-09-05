@@ -39,7 +39,6 @@ use Automad\App;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\FileSystem;
 use Automad\Core\I18n;
 use Automad\Core\Resolve;
 use Automad\Core\Str;
@@ -47,6 +46,7 @@ use Automad\Engine\Document\Head;
 use Automad\Models\Page;
 use Automad\Models\Shared;
 use Automad\System\Fields;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

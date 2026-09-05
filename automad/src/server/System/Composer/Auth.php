@@ -35,9 +35,8 @@
 
 namespace Automad\System\Composer;
 
-use Automad\Core\Automad;
 use Automad\Core\Config;
-use Automad\Core\FileSystem;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

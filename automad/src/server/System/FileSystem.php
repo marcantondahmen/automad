@@ -33,8 +33,15 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Core;
+namespace Automad\System;
 
+use Automad\Core\Automad;
+use Automad\Core\Cache;
+use Automad\Core\Debug;
+use Automad\Core\Messenger;
+use Automad\Core\Request;
+use Automad\Core\Str;
+use Automad\Core\Text;
 use Exception;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

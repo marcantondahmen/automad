@@ -34,8 +34,8 @@
 
 import { API, BlockAPI, ToolConfig, TunesMenuConfig } from '@/vendor/editorjs';
 import { createGenericModal, CSS, debounce, fire, query } from '@/admin/core';
-import { BlockTuneConstructorOptions } from '@/admin/types';
 import { filterEmptyData } from '../utils';
+import { BlockTuneConstructorOptions } from '../types';
 
 /**
  * The abstract base modal tune class.

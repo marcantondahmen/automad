@@ -46,9 +46,10 @@ import {
 	SetupWizardController,
 	transition,
 } from '@/admin/core';
-import { SetupWizardStep } from '@/admin/types';
 import { renderAiSection } from '@/admin/components/Pages/Partials/System/Ai';
 import { renderMailSection } from '@/admin/components/Pages/Partials/System/Mail';
+
+type SetupWizardStep = 'ai' | 'mailConfig';
 
 /**
  * The content of each possible step.

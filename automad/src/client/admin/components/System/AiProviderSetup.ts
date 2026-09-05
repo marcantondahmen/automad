@@ -53,7 +53,17 @@ import {
 	requestAPI,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
-import { AiProvider, APIResponse } from '@/admin/types';
+import type { APIResponse } from '@/admin/types';
+
+export interface AiProvider {
+	id: string;
+	name: string;
+	icon: string;
+	model: string;
+	apiKeyHelp: string;
+	website: string;
+	isConfigured: boolean;
+}
 
 /**
  * Format model names for usage as button labels.
