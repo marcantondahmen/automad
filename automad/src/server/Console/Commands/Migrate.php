@@ -123,6 +123,8 @@ class Migrate extends AbstractCommand {
 			$data = $this->dataFile($file);
 			$path = dirname(Str::stripStart($file, "$source/pages"));
 
+			$data['slug'] = trim($path, '/');
+
 			if (!empty($data['theme'])) {
 				$data['theme'] = str_replace('standard/', 'automad/standard-v1/', $data['theme']);
 			}
@@ -139,6 +141,8 @@ class Migrate extends AbstractCommand {
 		$this->removePrefixRecursively(AM_BASE_DIR . AM_DIR_PAGES);
 
 		$count = count($files);
+
+		FileSystem::purgeCache();
 
 		echo PHP_EOL . Console::clr('text', "Migrated $count pages");
 
@@ -219,6 +223,8 @@ class Migrate extends AbstractCommand {
 				$vars[$key] = json_decode($value);
 			}
 		}
+
+		$vars['template'] = str_replace('.txt', '', basename($file));
 
 		return $vars;
 	}
