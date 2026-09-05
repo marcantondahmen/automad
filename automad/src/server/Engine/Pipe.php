@@ -98,7 +98,7 @@ class Pipe {
 		$class = '\\' . str_replace('/', '\\', $function);
 
 		if (!class_exists($class, false)) {
-			$file = strtolower(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $function . '/' . basename($function) . '.php');
+			$file = AM_BASE_DIR . AM_DIR_PACKAGES . strtolower('/' . $function . '/' . basename($function) . '.php');
 
 			if (is_readable($file)) {
 				require_once($file);
