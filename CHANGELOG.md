@@ -1,8 +1,28 @@
 # Changelog
 
-## [v2.0.0-beta.54](https://github.com/marcantondahmen/automad/commit/6fb5e48e2c36957b60b7e58e154d848e2c5a5d78)
+## [v2.0.0-beta.55](https://github.com/marcantondahmen/automad/commit/44671a9d0b14120a462c6929bc76482c9948f69b)
 
-Sun, 16 Aug 2026 17:55:24 +0200
+Sat, 5 Sep 2026 10:44:33 +0200
+
+### New Features
+
+- keep block handles visible on scroll ([918293b65](https://github.com/marcantondahmen/automad/commit/918293b6534d728f42d0f0dbacd788e19fd3dcda))
+- lazy load images in file section ([be1c12a22](https://github.com/marcantondahmen/automad/commit/be1c12a225d70fc7bbfa1df0012ef8cb6b4e8ef6))
+- optimize thumbnails in aspect ratio previews ([de2f84830](https://github.com/marcantondahmen/automad/commit/de2f84830c7d00f72892714689118b1436356c22))
+- process images with imagick if installed in order to preserve image meta data and only use gd as fallback ([4e4f953c4](https://github.com/marcantondahmen/automad/commit/4e4f953c4df458dc03ac16af2861380fba4cd828))
+
+### Bugfixes
+
+- apply overflow hidden to layout sections that have a defined aspect ratio ([f36844bb6](https://github.com/marcantondahmen/automad/commit/f36844bb6162acf1e62adade32cd13810af9371b))
+- fix aspect ratio breakpoints not saving in layout section settings ([a43921aeb](https://github.com/marcantondahmen/automad/commit/a43921aebbc606c17d8c33a2ec48c85a12b4cec4))
+- fix edit toggle animation inside in-page editing dock ([79c05a0a5](https://github.com/marcantondahmen/automad/commit/79c05a0a5a1b2a094e93b79f9e08e113c6acb768))
+- fix layout section overflow and height in block editor when aspect ratio is defined ([1156c7fc7](https://github.com/marcantondahmen/automad/commit/1156c7fc7218c36180e2d10b986e90838ea1b54a))
+- fix minor dashboard color issues ([30fd98b22](https://github.com/marcantondahmen/automad/commit/30fd98b22cda0c187228c7878a1c4f41de817282))
+- remove option to resize images using query string parameters in image block ([9ee20e10d](https://github.com/marcantondahmen/automad/commit/9ee20e10d32781a6913f50c1d7fba9b73b6de29a))
+
+## [v2.0.0-beta.54](https://github.com/marcantondahmen/automad/commit/253fece1a8553443c7a196fa8a1838e9ae5a5b9f)
+
+Sun, 16 Aug 2026 17:58:24 +0200
 
 ### Bugfixes
 
