@@ -1,8 +1,18 @@
 # Changelog
 
-## [v2.0.0-beta.55](https://github.com/marcantondahmen/automad/commit/44671a9d0b14120a462c6929bc76482c9948f69b)
+## [v2.0.0-beta.56](https://github.com/marcantondahmen/automad/commit/26cdec6292955f64b3e59b692edcb8850e2d876f)
 
-Sat, 5 Sep 2026 10:44:33 +0200
+Sat, 5 Sep 2026 21:33:42 +0200
+
+### Bugfixes
+
+- fix loading pipe extensions with a non-lowercase base directory path ([26cdec629](https://github.com/marcantondahmen/automad/commit/26cdec6292955f64b3e59b692edcb8850e2d876f))
+- fix missing slugs and templates in migrate command ([e76da9fdb](https://github.com/marcantondahmen/automad/commit/e76da9fdbf2186fe1d27779b16c8182956246729))
+- fix routes for disabled dashboard ([6c7ac8403](https://github.com/marcantondahmen/automad/commit/6c7ac8403cf1376f81a9ff6453bc9388e3e80e0e))
+
+## [v2.0.0-beta.55](https://github.com/marcantondahmen/automad/commit/73a36f0f0247933ade49c5174d7ee32f62a3b1b0)
+
+Sat, 5 Sep 2026 10:49:36 +0200
 
 ### New Features
 

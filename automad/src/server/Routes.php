@@ -174,6 +174,10 @@ class Routes {
 	 * @param bool $pendingTotp
 	 */
 	private static function registerDashboardRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
+		if (!AM_PAGE_DASHBOARD) {
+			return;
+		}
+
 		$hasAccounts = is_readable(UserCollection::FILE_ACCOUNTS);
 		$setupCompleted = SetupWizard::isCompleted();
 
@@ -245,8 +249,7 @@ class Routes {
 			AM_PAGE_DASHBOARD . '/(login|request-verification-code|set-password)',
 			function () {
 				return Dashboard::render();
-			},
-			AM_PAGE_DASHBOARD
+			}
 		);
 
 		$Router->register(
@@ -261,8 +264,7 @@ class Routes {
 			AM_PAGE_DASHBOARD . '(/.*)?',
 			function () {
 				self::redirectDashboard('/login');
-			},
-			AM_PAGE_DASHBOARD
+			}
 		);
 	}
 
