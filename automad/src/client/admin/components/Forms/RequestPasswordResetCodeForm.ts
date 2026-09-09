@@ -92,8 +92,8 @@ class RequestPasswordResetCodeFormComponent extends FormComponent {
 	 * @async
 	 */
 	protected async processResponse(response: KeyValueMap): Promise<void> {
-		if (response.data?.success) {
-			this.renderSuccess(response.data.username);
+		if (!!response.data?.nameOrEmail) {
+			this.renderSuccess(response.data.nameOrEmail);
 		}
 	}
 
@@ -105,7 +105,7 @@ class RequestPasswordResetCodeFormComponent extends FormComponent {
 			? html`
 					<input
 						type="hidden"
-						name="name-or-email"
+						name="nameOrEmail"
 						value="$${getSearchParam('username')}"
 					/>
 				`
@@ -117,7 +117,7 @@ class RequestPasswordResetCodeFormComponent extends FormComponent {
 					<input
 						type="text"
 						class="${CSS.input}"
-						name="name-or-email"
+						name="nameOrEmail"
 						placeholder="${App.text('usernameOrEmail')}"
 						required
 					/>
@@ -152,13 +152,13 @@ class RequestPasswordResetCodeFormComponent extends FormComponent {
 	/**
 	 * Render the success message.
 	 *
-	 * @param username
+	 * @param nameOrEmail
 	 */
-	private renderSuccess(username: string): void {
+	private renderSuccess(nameOrEmail: string): void {
 		const params = new URLSearchParams(window.location.search);
 
-		if (!!username) {
-			params.set('username', username);
+		if (!!nameOrEmail) {
+			params.set('nameOrEmail', nameOrEmail);
 		}
 
 		const query = params.toString();

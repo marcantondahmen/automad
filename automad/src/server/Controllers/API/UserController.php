@@ -132,18 +132,18 @@ class UserController {
 		$Messenger = new Messenger();
 		$Automad = Automad::fromCache();
 		$sitename = $Automad->Shared->get(Fields::SITENAME);
-
-		// Only one field will be defined, so they can just be concatenated here.
-		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
-
+		$nameOrEmail = trim(Request::post('nameOrEmail'));
 		$User = $UserCollection->getUser($nameOrEmail);
 
-		// Also return success when user doesn't exist.
-		if (!$User || $User->sendPasswordResetCode(Request::post('type'), $sitename, $Messenger)) {
-			return $Response->setData(array('success' => true, 'username' => $User?->name ?? ''));
+		$User?->sendPasswordResetCode(Request::post('type'), $sitename, $Messenger);
+
+		if ($error = $Messenger->getError()) {
+			return $Response->setError($error);
 		}
 
-		return $Response->setError($Messenger->getError());
+		// Always return the submitted username or email in order to avoid
+		// exposing if a user actually exists or not.
+		return $Response->setData(array('nameOrEmail' => $nameOrEmail));
 	}
 
 	/**
@@ -158,7 +158,7 @@ class UserController {
 		$code = trim(Request::post('code'));
 		$newPassword1 = Request::post('password1');
 		$newPassword2 = Request::post('password2');
-		$User = $UserCollection->getUser(Request::post('username'));
+		$User = $UserCollection->getUser(Request::post('nameOrEmail'));
 
 		if (!$User) {
 			return $Response->setError(Text::get('userNotFoundError'));
