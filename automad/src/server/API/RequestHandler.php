@@ -36,11 +36,11 @@
 namespace Automad\API;
 
 use Automad\Auth\Session;
+use Automad\Controllers\API\PublicController;
 use Automad\Core\Debug;
 use Automad\Core\Error;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
-use Automad\Core\Str;
 use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,21 +54,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class RequestHandler {
 	const API_BASE = '/_api';
+	const CONTROLLERS_NAMESPACE = '\\Automad\\Controllers\\API\\';
+	const PUBLIC_CONTROLLERS = array(PublicController::class);
 	const REQUEST_KEY_CSRF = '__csrf__';
 	const REQUEST_KEY_JSON = '__json__';
-
-	/**
-	 * The controller namespace.
-	 */
-	private static string $controllerNamespace = '\\Automad\\Controllers\\API\\';
-
-	/**
-	 * An array of routes that are excluded from CSRF token validation.
-	 */
-	private static array $validationExcluded = array(
-		'SessionController::login',
-		'UserController::resetPassword'
-	);
 
 	/**
 	 * Get the JSON response for a requested route
@@ -76,23 +65,41 @@ class RequestHandler {
 	 * @return string the JSON formatted response
 	 */
 	public static function getResponse(): string {
+		header('Content-Type: application/json; charset=utf-8');
 		Error::setJsonResponseHandler();
 		self::convertJsonPost();
 
-		header('Content-Type: application/json; charset=utf-8');
-
 		$controller = self::routeController(AM_REQUEST);
-
 		[$class, $method] = explode('::', $controller);
 
 		Debug::log($controller, AM_REQUEST);
+
+		if (!in_array(trim($class, '\\'), self::PUBLIC_CONTROLLERS)) {
+			if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+				$Response = new Response();
+				$Response->setCode(405);
+				$Response->setError('Method not allowed');
+
+				return $Response->json();
+			}
+
+			$token = Request::post(self::REQUEST_KEY_CSRF);
+
+			if (empty($token) || !Session::verifyCsrfToken($token)) {
+				$Response = new Response();
+				$Response->setCode(403);
+				$Response->setError('CSRF token mismatch');
+
+				return $Response->json();
+			}
+		}
 
 		if (EditLock::isLocked(
 			Request::post('lockHandle'),
 			Request::post('instanceId')
 		)) {
 			$Response = new Response();
-			$Response->setCode(403);
+			$Response->setCode(409);
 			$Response->setReloadDialog(Text::get('preventDataOverwritingError'));
 
 			return $Response->json();
@@ -107,14 +114,6 @@ class RequestHandler {
 		}
 
 		$Messenger = new Messenger();
-
-		if (!self::validate($controller, $Messenger)) {
-			$Response = new Response();
-			$Response->setCode(403);
-			$Response->setError($Messenger->getError());
-
-			return $Response->json();
-		}
 
 		$Response = call_user_func($controller);
 		$Response->setDebug(Debug::getLog());
@@ -157,34 +156,9 @@ class RequestHandler {
 		$route = str_replace(self::API_BASE . '/', '', $route);
 		[$class, $method] = explode('/', $route);
 
-		$class = self::$controllerNamespace . str_replace(' ', '', ucwords(str_replace('-', ' ', $class))) . 'Controller';
+		$class = self::CONTROLLERS_NAMESPACE . str_replace(' ', '', ucwords(str_replace('-', ' ', $class))) . 'Controller';
 		$method = lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $method))));
 
 		return "$class::$method";
-	}
-
-	/**
-	 * Validate request by checking the CSRF token in case of a post request.
-	 *
-	 * @param string $controller
-	 * @param Messenger $Messenger
-	 * @return bool true if the request is valid
-	 */
-	private static function validate(string $controller, Messenger $Messenger): bool {
-		if (in_array(Str::stripStart($controller, self::$controllerNamespace), self::$validationExcluded)) {
-			return true;
-		}
-
-		if (!empty($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-			$token = Request::post(self::REQUEST_KEY_CSRF);
-
-			if (empty($token) || !Session::verifyCsrfToken($token)) {
-				$Messenger->setError('CSRF token mismatch');
-
-				return false;
-			}
-		}
-
-		return true;
 	}
 }
