@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, getLogger } from '../core';
+import { App, getLogger, sortByKeys } from '../core';
 import { nanoid } from 'nanoid';
 import type { EditorOutputData } from './types';
 import type { API, BlockAPI, OutputBlockData } from '@/vendor/editorjs';
@@ -118,7 +118,7 @@ export const filterEmptyData = <T>(data: T): Partial<T> => {
 		}
 	}
 
-	return filtered;
+	return sortByKeys<Partial<T>>(filtered);
 };
 
 /**
