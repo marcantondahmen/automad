@@ -10,8 +10,8 @@
                         "id": "NgfQ4MU8dWhegIOybTwXPGnySwfz2hHB",
                         "type": "callout",
                         "data": {
-                            "title": "Hey",
-                            "text": "This example component shares content with the one beside it. Changes in the <a href=\"/dashboard/components\">component editor</a> update all instances automatically, and you can place anything here."
+                            "text": "This example component shares content with the one beside it. Changes in the <a href=\"/dashboard/components\">component editor</a> update all instances automatically, and you can place anything here.",
+                            "title": "Hey"
                         },
                         "tunes": []
                     }
@@ -19,7 +19,7 @@
                 "collapsed": false
             }
         ],
-        ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T13:48:42+00:00"
+        ":automadVersion": "2.0.0-beta.56",
+        ":lastPublished": "2026-09-11T17:47:40+00:00"
     }
 }
