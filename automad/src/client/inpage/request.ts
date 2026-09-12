@@ -61,12 +61,11 @@ export const inPageRequest = async (
 	formData.append(RequestKey.csrf, csrf);
 	formData.append(RequestKey.json, JSON.stringify(data));
 
-	const init: RequestInit = {
+	const response = await fetch(`${api}/${controllerRoute(controller)}`, {
 		method: 'POST',
 		body: formData,
-	};
+	});
 
-	const response = await fetch(`${api}/${controllerRoute(controller)}`, init);
 	const responseData = await response.json();
 
 	log(`${controller} ${'<<'}`, responseData);

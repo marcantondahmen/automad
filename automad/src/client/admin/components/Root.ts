@@ -209,11 +209,7 @@ export class RootComponent extends BaseComponent {
 	private async validateSession(): Promise<void> {
 		const stateChangeHandler = async (): Promise<void> => {
 			if (document.visibilityState === 'visible') {
-				const data = await requestAPI(SessionController.validate, {
-					// Send a random key/value pair in order to provide a valid POST request.
-					csrfTokenValidation: 1,
-				});
-
+				const data = await requestAPI(SessionController.validate);
 				const code = data.code || 403;
 
 				if (code === 403) {

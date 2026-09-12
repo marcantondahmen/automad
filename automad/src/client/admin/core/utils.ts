@@ -34,7 +34,7 @@
 
 import { App, Attr, CSS, create, html, listen, query } from '.';
 import { customAlphabet } from 'nanoid';
-import type { Listener } from '@/admin/types';
+import type { KeyValueMap, Listener } from '@/admin/types';
 
 /**
  * Return the basename of a path.
@@ -213,6 +213,20 @@ export const keyCombo = (key: string, callback: Function): Listener => {
  */
 export const setDocumentTitle = (page: string): void => {
 	document.title = `${page} — Automad`;
+};
+
+/**
+ * Sort a key/value map by keys.
+ *
+ * @param data
+ * @returns the data sorted by key
+ */
+export const sortByKeys = <T extends KeyValueMap = KeyValueMap>(data: T): T => {
+	return Object.fromEntries(
+		Object.entries(data as KeyValueMap).sort(([a], [b]) =>
+			a.localeCompare(b)
+		)
+	) as T;
 };
 
 /**

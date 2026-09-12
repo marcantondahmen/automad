@@ -11,8 +11,8 @@
                     "id": "21nt9TMRkGFFUZZxc5mcD92Wjw8hNkab",
                     "type": "paragraph",
                     "data": {
-                        "text": "Layouts define how content flows across your page. Grids and nested sections help you create responsive, balanced designs.",
-                        "large": true
+                        "large": true,
+                        "text": "Layouts define how content flows across your page. Grids and nested sections help you create responsive, balanced designs."
                     },
                     "tunes": {
                         "spacing": {
@@ -24,14 +24,15 @@
                     "id": "dlwOXp7CTsfCedWvN4N2p53tcoBdGpA2",
                     "type": "layoutSection",
                     "data": {
+                        "align": "stretch",
                         "content": {
                             "blocks": [
                                 {
                                     "id": "MxR0ooH9mDG6hLFq42pzrWj4d24JbGvN",
                                     "type": "callout",
                                     "data": {
-                                        "title": "Hey",
-                                        "text": "The simplest way to use <i>layout sections</i> is to split content into <strong>columns</strong>. Each child element gets a width, allowing columns of different sizes."
+                                        "text": "The simplest way to use <i>layout sections</i> is to split content into <strong>columns</strong>. Each child element gets a width, allowing columns of different sizes.",
+                                        "title": "Hey"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -44,58 +45,53 @@
                                     "id": "j8k8UYJrPWWyncqMgxrXoNroGkDV2f_8",
                                     "type": "layoutSection",
                                     "data": {
+                                        "align": "start",
                                         "content": {
                                             "blocks": [
                                                 {
                                                     "id": "TzVutOIW0mSgQRYxp5PJ3JIjCIZChMO9",
                                                     "type": "header",
                                                     "data": {
-                                                        "text": "Columns",
-                                                        "level": 2
+                                                        "level": 2,
+                                                        "text": "Columns"
                                                     },
                                                     "tunes": {
                                                         "layout": {
-                                                            "stretched": false,
-                                                            "width": null
-                                                        },
-                                                        "spacing": null,
-                                                        "className": "",
-                                                        "id": ""
+                                                            "stretched": false
+                                                        }
                                                     }
                                                 }
                                             ]
                                         },
+                                        "justify": "start",
                                         "style": {
                                             "backgroundBlendMode": "normal",
                                             "borderStyle": "none",
                                             "card": true,
                                             "overflowHidden": false,
                                             "shadow": false
-                                        },
-                                        "justify": "start",
-                                        "align": "start"
+                                        }
                                     },
                                     "tunes": {
+                                        "className": "inverted rounded-m",
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/2"
-                                        },
-                                        "className": "inverted rounded-m"
+                                        }
                                     }
                                 }
                             ]
                         },
+                        "gap": "2rem",
+                        "justify": "fill-row",
+                        "minBlockWidth": "20rem",
                         "style": {
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
                             "card": false,
                             "overflowHidden": false,
                             "shadow": false
-                        },
-                        "justify": "fill-row",
-                        "align": "stretch",
-                        "gap": "2rem",
-                        "minBlockWidth": "20rem"
+                        }
                     },
                     "tunes": {
                         "layout": {
@@ -107,8 +103,8 @@
                     "id": "_4mQCxfMh2CxiQTDvhy9aN8no1WItoE-",
                     "type": "header",
                     "data": {
-                        "text": "Nesting Sections",
-                        "level": 2
+                        "level": 2,
+                        "text": "Nesting Sections"
                     },
                     "tunes": []
                 },
@@ -116,8 +112,8 @@
                     "id": "JLGhpspkM4xuI8N2QMCYh-6zQ88bGonU",
                     "type": "paragraph",
                     "data": {
-                        "text": "Layout sections become powerful when <i>nested</i>. The example below shows how nesting can be used to build a <i>bento-style</i> layout.",
-                        "large": false
+                        "large": false,
+                        "text": "Layout sections become powerful when <i>nested</i>. The example below shows how nesting can be used to build a <i>bento-style</i> layout."
                     },
                     "tunes": []
                 },
@@ -125,124 +121,114 @@
                     "id": "PUWpgjC_UWGEhxP9CPDB97EbX0V1wa-d",
                     "type": "layoutSection",
                     "data": {
+                        "align": "stretch",
                         "content": {
                             "blocks": [
                                 {
                                     "id": "gjE3QHc72-T1g2fcgg-I8O4WaI0fwB2Z",
                                     "type": "layoutSection",
                                     "data": {
+                                        "align": "stretch",
                                         "content": {
                                             "blocks": [
                                                 {
                                                     "id": "NgDKLy7Spb1dJ6bD8f_KHh9levpw9p0J",
                                                     "type": "header",
                                                     "data": {
-                                                        "text": "Bento Box",
-                                                        "level": 2
+                                                        "level": 2,
+                                                        "text": "Bento Box"
                                                     },
                                                     "tunes": {
                                                         "layout": {
-                                                            "stretched": false,
-                                                            "width": null
-                                                        },
-                                                        "spacing": null,
-                                                        "className": "",
-                                                        "id": ""
+                                                            "stretched": false
+                                                        }
                                                     }
                                                 },
                                                 {
                                                     "id": "M4VLDSof8FyHGFIMyzbdXrXSbXxOhX3t",
                                                     "type": "paragraph",
                                                     "data": {
-                                                        "text": "The minimum width of elements is defined in the parent layout section. This keeps things <i>responsive</i>.",
-                                                        "large": true
+                                                        "large": true,
+                                                        "text": "The minimum width of elements is defined in the parent layout section. This keeps things <i>responsive</i>."
                                                     },
                                                     "tunes": {
                                                         "layout": {
-                                                            "stretched": false,
-                                                            "width": null
-                                                        },
-                                                        "spacing": null,
-                                                        "className": "",
-                                                        "id": ""
+                                                            "stretched": false
+                                                        }
                                                     }
                                                 }
                                             ]
                                         },
+                                        "gap": "0px",
+                                        "justify": "fill-row",
                                         "style": {
                                             "backgroundBlendMode": "normal",
                                             "borderStyle": "none",
                                             "card": true,
                                             "overflowHidden": false,
                                             "shadow": false
-                                        },
-                                        "justify": "fill-row",
-                                        "align": "stretch",
-                                        "gap": "0px"
+                                        }
                                     },
                                     "tunes": {
+                                        "className": "inverted rounded-m",
                                         "layout": {
                                             "stretched": false,
                                             "width": "1/2"
-                                        },
-                                        "className": "inverted rounded-m"
+                                        }
                                     }
                                 },
                                 {
                                     "id": "m0O9oNIkIrWF2IOAUcJURy0S4ojohXZR",
                                     "type": "layoutSection",
                                     "data": {
+                                        "align": "stretch",
                                         "content": {
                                             "blocks": [
                                                 {
                                                     "id": "fCqUCtXNBCdeHVfg7FZ7x97JEjo1zJ7r",
                                                     "type": "image",
                                                     "data": {
-                                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
-                                                        "openInNewTab": false
+                                                        "openInNewTab": false,
+                                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp"
                                                     },
                                                     "tunes": {
+                                                        "className": "rounded-m",
                                                         "layout": {
                                                             "stretched": false,
                                                             "width": "1/1"
-                                                        },
-                                                        "className": "rounded-m"
+                                                        }
                                                     }
                                                 },
                                                 {
                                                     "id": "S7t_qPypeH3Bsv13RG9yAjfbETVCNJ2c",
                                                     "type": "layoutSection",
                                                     "data": {
+                                                        "align": "stretch",
                                                         "content": {
                                                             "blocks": [
                                                                 {
                                                                     "id": "GbyDPi_x9kB1p7r8QTHisz-64LvbHN2l",
                                                                     "type": "callout",
                                                                     "data": {
-                                                                        "title": "Hey",
-                                                                        "text": "While the top box is just an image, this one is a deeply <i>nested layout section</i>. This allows for fine-grained, isolated control over its styling."
+                                                                        "text": "While the top box is just an image, this one is a deeply <i>nested layout section</i>. This allows for fine-grained, isolated control over its styling.",
+                                                                        "title": "Hey"
                                                                     },
                                                                     "tunes": {
                                                                         "layout": {
-                                                                            "stretched": false,
-                                                                            "width": null
-                                                                        },
-                                                                        "spacing": null,
-                                                                        "className": "",
-                                                                        "id": ""
+                                                                            "stretched": false
+                                                                        }
                                                                     }
                                                                 }
                                                             ]
                                                         },
+                                                        "justify": "fill-row",
                                                         "style": {
                                                             "backgroundBlendMode": "normal",
                                                             "borderStyle": "none",
                                                             "card": false,
                                                             "overflowHidden": false,
                                                             "shadow": false
-                                                        },
-                                                        "justify": "fill-row",
-                                                        "align": "stretch"
+                                                        }
                                                     },
                                                     "tunes": {
                                                         "layout": {
@@ -253,16 +239,15 @@
                                                 }
                                             ]
                                         },
+                                        "gap": "2rem",
+                                        "justify": "fill-row",
                                         "style": {
                                             "backgroundBlendMode": "normal",
                                             "borderStyle": "none",
                                             "card": false,
                                             "overflowHidden": false,
                                             "shadow": false
-                                        },
-                                        "justify": "fill-row",
-                                        "align": "stretch",
-                                        "gap": "2rem"
+                                        }
                                     },
                                     "tunes": {
                                         "layout": {
@@ -273,17 +258,16 @@
                                 }
                             ]
                         },
+                        "gap": "2rem",
+                        "justify": "fill-row",
+                        "minBlockWidth": "20rem",
                         "style": {
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
                             "card": false,
                             "overflowHidden": false,
                             "shadow": false
-                        },
-                        "justify": "fill-row",
-                        "align": "stretch",
-                        "gap": "2rem",
-                        "minBlockWidth": "20rem"
+                        }
                     },
                     "tunes": {
                         "layout": {
@@ -295,8 +279,8 @@
                     "id": "yTpdrR7luxeCoxf1YV7V_KdXP_xcBAVJ",
                     "type": "header",
                     "data": {
-                        "text": "Alignment and Spacing",
-                        "level": 2
+                        "level": 2,
+                        "text": "Alignment and Spacing"
                     },
                     "tunes": []
                 },
@@ -304,8 +288,8 @@
                     "id": "ZuZgXOMDKvQu7V3IU6UGb1-IzrPqdW5F",
                     "type": "paragraph",
                     "data": {
-                        "text": "Alignment and spacing are controlled directly from the section toolbar. You can define gaps and set a minimum child width \u2014 the key to <i>responsive</i> layouts.",
-                        "large": false
+                        "large": false,
+                        "text": "Alignment and spacing are controlled directly from the section toolbar. You can define gaps and set a minimum child width \u2014 the key to <i>responsive</i> layouts."
                     },
                     "tunes": []
                 },
@@ -313,8 +297,8 @@
                     "id": "cad1BRaiscsot27THkxuDZzK5CVjKao6",
                     "type": "paragraph",
                     "data": {
-                        "text": "The example below shows how elements align vertically and horizontally. It starts with the vertical defaults, while horizontal alignment uses the <i>\u201cstretch to fill row\u201d</i> option.",
-                        "large": false
+                        "large": false,
+                        "text": "The example below shows how elements align vertically and horizontally. It starts with the vertical defaults, while horizontal alignment uses the <i>\u201cstretch to fill row\u201d</i> option."
                     },
                     "tunes": []
                 },
@@ -322,14 +306,15 @@
                     "id": "glD-RkJJvs__q3Dt1Vzk8nu7erQzMuAZ",
                     "type": "layoutSection",
                     "data": {
+                        "align": "stretch",
                         "content": {
                             "blocks": [
                                 {
                                     "id": "PJpM-PGolcMAaZcbvR8NCkAiaG-fl0vs",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
-                                        "openInNewTab": false
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -342,8 +327,9 @@
                                     "id": "Erv3TlMN0UEqsmeMWcTkJjBHTOP988X3",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-06.webp",
-                                        "openInNewTab": false
+                                        "caption": "",
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-06.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -356,8 +342,8 @@
                                     "id": "ZPc9xaPNcCfFAOrYYRdsDFKwS_TAOwtU",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
-                                        "openInNewTab": false
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -368,17 +354,16 @@
                                 }
                             ]
                         },
+                        "gap": "2rem",
+                        "justify": "fill-row",
+                        "minBlockWidth": "5rem",
                         "style": {
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
                             "card": false,
                             "overflowHidden": false,
                             "shadow": false
-                        },
-                        "justify": "fill-row",
-                        "align": "stretch",
-                        "gap": "2rem",
-                        "minBlockWidth": "5rem"
+                        }
                     },
                     "tunes": {
                         "layout": {
@@ -390,8 +375,8 @@
                     "id": "uBsZt2x2hbZSBmWf4dYo6kmnzcGxT2jn",
                     "type": "paragraph",
                     "data": {
-                        "text": "Now again a similar example, but this time the children are centered vertically.",
-                        "large": false
+                        "large": false,
+                        "text": "Now again a similar example, but this time the children are centered vertically."
                     },
                     "tunes": []
                 },
@@ -399,14 +384,15 @@
                     "id": "U5PWTqqdod0CDFQZMHphdHxS640GEbg5",
                     "type": "layoutSection",
                     "data": {
+                        "align": "center",
                         "content": {
                             "blocks": [
                                 {
                                     "id": "PJpM-PGolcMAaZcbvR8NCkAiaG-fl0vs",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
-                                        "openInNewTab": false
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -419,8 +405,9 @@
                                     "id": "Erv3TlMN0UEqsmeMWcTkJjBHTOP988X3",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
-                                        "openInNewTab": false
+                                        "caption": "",
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -433,8 +420,8 @@
                                     "id": "S984Y63KNq2KLnDT0q_ZOn1g3z2XcJRw",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
-                                        "openInNewTab": false
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -445,17 +432,16 @@
                                 }
                             ]
                         },
+                        "gap": "2rem",
+                        "justify": "fill-row",
+                        "minBlockWidth": "5rem",
                         "style": {
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
                             "card": false,
                             "overflowHidden": false,
                             "shadow": false
-                        },
-                        "justify": "fill-row",
-                        "align": "center",
-                        "gap": "2rem",
-                        "minBlockWidth": "5rem"
+                        }
                     },
                     "tunes": {
                         "layout": {
@@ -467,8 +453,8 @@
                     "id": "T9iwDkCmRrpanxU6PqfGjSYNYzNo0qa_",
                     "type": "paragraph",
                     "data": {
-                        "text": "Elements can be distributed horizontally in ways other than <i>stretch</i>, for example <i>\"space around\"</i>. They align at the <i>bottom</i> and both have a width of 1/4.",
-                        "large": false
+                        "large": false,
+                        "text": "Elements can be distributed horizontally in ways other than <i>stretch</i>, for example <i>\"space around\"</i>. They align at the <i>bottom</i> and both have a width of 1/4."
                     },
                     "tunes": []
                 },
@@ -476,14 +462,15 @@
                     "id": "cz2iPpSCALe0NBUMyobeSb2wtc5WxXK1",
                     "type": "layoutSection",
                     "data": {
+                        "align": "end",
                         "content": {
                             "blocks": [
                                 {
                                     "id": "PJpM-PGolcMAaZcbvR8NCkAiaG-fl0vs",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
-                                        "openInNewTab": false
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -496,8 +483,9 @@
                                     "id": "Erv3TlMN0UEqsmeMWcTkJjBHTOP988X3",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp",
-                                        "openInNewTab": false
+                                        "caption": "",
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-05.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -510,8 +498,8 @@
                                     "id": "Cu3hhOiBuSKbpjXKNekvOB1030XGcbWJ",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
-                                        "openInNewTab": false
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -522,23 +510,22 @@
                                 }
                             ]
                         },
+                        "gap": "2rem",
+                        "justify": "space-evenly",
+                        "minBlockWidth": "5rem",
                         "style": {
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
                             "card": true,
                             "overflowHidden": false,
                             "shadow": false
-                        },
-                        "justify": "space-evenly",
-                        "align": "end",
-                        "gap": "2rem",
-                        "minBlockWidth": "5rem"
+                        }
                     },
                     "tunes": {
+                        "className": "border rounded-m",
                         "layout": {
                             "stretched": false
-                        },
-                        "className": "border rounded-m"
+                        }
                     }
                 }
             ]
@@ -547,7 +534,7 @@
         "private": false,
         ":created": "2025-12-20T17:27:10+00:00",
         ":lastModified": "2026-08-15T15:27:24+00:00",
-        ":automadVersion": "2.0.0-beta.51",
-        ":lastPublished": "2026-08-15T15:27:27+00:00"
+        ":automadVersion": "2.0.0-beta.56",
+        ":lastPublished": "2026-09-11T17:28:53+00:00"
     }
 }

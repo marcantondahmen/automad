@@ -46,6 +46,7 @@ import {
 	queryAll,
 	routes,
 	Section,
+	sortByKeys,
 	titleCase,
 } from '.';
 import { FormComponent } from '../components/Forms/Form';
@@ -164,7 +165,7 @@ export const collectFieldData = (container: HTMLElement): KeyValueMap => {
 		}
 	);
 
-	return data;
+	return sortByKeys(data);
 };
 
 /**

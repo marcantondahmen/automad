@@ -1,8 +1,21 @@
 # Changelog
 
-## [v2.0.0-beta.56](https://github.com/marcantondahmen/automad/commit/26cdec6292955f64b3e59b692edcb8850e2d876f)
+## [v2.0.0-beta.57](https://github.com/marcantondahmen/automad/commit/5fd1a2defec8d3e80d246177ff9f35fa701ec7dd)
 
-Sat, 5 Sep 2026 21:33:42 +0200
+Fri, 11 Sep 2026 19:49:13 +0200
+
+### New Features
+
+- sort saved data objects by key in order to have deterministic output that produces stable diffs on changes ([7e610d166](https://github.com/marcantondahmen/automad/commit/7e610d16665a126cb75a0ee7755b77821320fc20))
+
+### Bugfixes
+
+- always return submitted name or email in password reset code request form ([8256fb835](https://github.com/marcantondahmen/automad/commit/8256fb835dc47fbaa866c9fc1c261cb52bc90895))
+- only allow post requests to private api routes ([95fcb7862](https://github.com/marcantondahmen/automad/commit/95fcb786262369e367b67d152dec709d4a2a8e30))
+
+## [v2.0.0-beta.56](https://github.com/marcantondahmen/automad/commit/e1f7850199a997155d03e79817f8145d57c8320a)
+
+Sat, 5 Sep 2026 21:35:01 +0200
 
 ### Bugfixes
 

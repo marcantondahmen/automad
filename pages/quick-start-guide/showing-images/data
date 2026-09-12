@@ -11,8 +11,8 @@
                     "id": "raHbgL2O6MiT3ih1zko7fo5nkUdPMQkS",
                     "type": "paragraph",
                     "data": {
-                        "text": "Images can be added individually or in galleries and slideshows. Use them to bring life and clarity to your pages.",
-                        "large": true
+                        "large": true,
+                        "text": "Images can be added individually or in galleries and slideshows. Use them to bring life and clarity to your pages."
                     },
                     "tunes": []
                 },
@@ -20,6 +20,17 @@
                     "id": "Kir0_0K58Wkunb9E0aw5ChcNt1GQtvfa",
                     "type": "imageSlideshow",
                     "data": {
+                        "autoplay": true,
+                        "breakpoints": {
+                            "600": {
+                                "slidesPerView": 2
+                            },
+                            "900": {
+                                "slidesPerView": 3
+                            }
+                        },
+                        "delay": 3000,
+                        "effect": "slide",
                         "files": [
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
@@ -28,28 +39,16 @@
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp"
                         ],
-                        "imageWidthPx": "800",
-                        "imageHeightPx": "1200",
                         "gapPx": "2",
-                        "slidesPerView": "1",
-                        "loop": true,
-                        "autoplay": true,
-                        "effect": "slide",
                         "hideControls": false,
-                        "delay": 3000,
-                        "breakpoints": {
-                            "600": {
-                                "slidesPerView": 2
-                            },
-                            "900": {
-                                "slidesPerView": 3
-                            }
-                        }
+                        "imageHeightPx": "1200",
+                        "imageWidthPx": "800",
+                        "loop": true,
+                        "slidesPerView": "1"
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": true,
-                            "width": null
+                            "stretched": true
                         },
                         "spacing": {
                             "top": "1rem"
@@ -60,6 +59,7 @@
                     "id": "OxDabLYws0peymYDf8ggr1PqFKyY45nZ",
                     "type": "gallery",
                     "data": {
+                        "columnWidthPx": "250",
                         "files": [
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
@@ -73,20 +73,18 @@
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-08.webp"
                         ],
-                        "layout": "columns",
-                        "columnWidthPx": "250",
-                        "rowHeightPx": 250,
+                        "fillRectangle": false,
                         "gapPx": "2",
-                        "fillRectangle": false
+                        "layout": "columns",
+                        "rowHeightPx": 250
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": true,
-                            "width": null
+                            "stretched": true
                         },
                         "spacing": {
-                            "top": "2px",
-                            "bottom": "1rem"
+                            "bottom": "1rem",
+                            "top": "2px"
                         }
                     }
                 },
@@ -94,8 +92,8 @@
                     "id": "IJEDb3wtv2clbNBbksrzheL_4agz8OMR",
                     "type": "paragraph",
                     "data": {
-                        "text": "Galleries support <i>column</i>, <i>row</i>, or <i>grid</i> layouts. This example uses a <i>row-based</i> layout.",
-                        "large": false
+                        "large": false,
+                        "text": "Galleries support <i>column</i>, <i>row</i>, or <i>grid</i> layouts. This example uses a <i>row-based</i> layout."
                     },
                     "tunes": []
                 },
@@ -103,6 +101,7 @@
                     "id": "lIg-5IPVSpyBcw9-2iIYFbJ1IBRU--0G",
                     "type": "gallery",
                     "data": {
+                        "columnWidthPx": "250",
                         "files": [
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
@@ -115,20 +114,18 @@
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-02.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp"
                         ],
-                        "layout": "rows",
-                        "columnWidthPx": "250",
-                        "rowHeightPx": "250",
+                        "fillRectangle": false,
                         "gapPx": "2",
-                        "fillRectangle": false
+                        "layout": "rows",
+                        "rowHeightPx": "250"
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         },
                         "spacing": {
-                            "top": "1rem",
-                            "bottom": "1rem"
+                            "bottom": "1rem",
+                            "top": "1rem"
                         }
                     }
                 },
@@ -136,8 +133,8 @@
                     "id": "WoYal1jKUvdNN4Yk287_TN0ZOcOc4slp",
                     "type": "paragraph",
                     "data": {
-                        "text": "Use the grid layout to arrange images with generous whitespace.",
-                        "large": false
+                        "large": false,
+                        "text": "Use the grid layout to arrange images with generous whitespace."
                     },
                     "tunes": {
                         "spacing": {
@@ -149,6 +146,7 @@
                     "id": "QUdQvjj2T2n-gBPZBaaVQ_b84UxBNPEa",
                     "type": "gallery",
                     "data": {
+                        "columnWidthPx": "175",
                         "files": [
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-07.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-03.webp",
@@ -157,16 +155,14 @@
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-01.webp",
                             "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp"
                         ],
-                        "layout": "grid",
-                        "columnWidthPx": "175",
-                        "rowHeightPx": "275",
+                        "fillRectangle": false,
                         "gapPx": "16",
-                        "fillRectangle": false
+                        "layout": "grid",
+                        "rowHeightPx": "275"
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": false,
-                            "width": null
+                            "stretched": false
                         }
                     }
                 }
@@ -176,7 +172,7 @@
         "private": false,
         ":created": "2025-12-23T17:09:54+00:00",
         ":lastModified": "2025-12-25T16:12:03+00:00",
-        ":automadVersion": "2.0.0-beta.5",
-        ":lastPublished": "2025-12-31T16:50:48+00:00"
+        ":automadVersion": "2.0.0-beta.56",
+        ":lastPublished": "2026-09-11T17:27:46+00:00"
     }
 }

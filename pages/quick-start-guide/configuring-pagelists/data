@@ -11,8 +11,8 @@
                     "id": "yeFFHqhH5jMc0HX0oq9RziSjiAqXp6kP",
                     "type": "paragraph",
                     "data": {
-                        "text": "Pagelists automatically display subsets of pages, like project or product overviews. They keep your content structured without repetition.",
-                        "large": true
+                        "large": true,
+                        "text": "Pagelists automatically display subsets of pages, like project or product overviews. They keep your content structured without repetition."
                     },
                     "tunes": []
                 },
@@ -23,20 +23,16 @@
                         "excludeCurrent": false,
                         "excludeHidden": true,
                         "file": "/automad/standard-lite/blocks/pagelist/grid_image_top.php",
-                        "sortField": ":index",
-                        "sortOrder": "asc",
-                        "type": "all",
-                        "context": "",
-                        "filter": "",
-                        "offset": "0",
                         "limit": "10",
                         "matchUrl": "^(\\/quick|https:\\/\\/automad.org$|\\/$)",
-                        "template": ""
+                        "offset": "0",
+                        "sortField": ":index",
+                        "sortOrder": "asc",
+                        "type": "all"
                     },
                     "tunes": {
                         "layout": {
-                            "stretched": true,
-                            "width": null
+                            "stretched": true
                         },
                         "spacing": {
                             "top": "2rem"
@@ -49,7 +45,7 @@
         "private": false,
         ":created": "2025-12-20T17:28:05+00:00",
         ":lastModified": "2025-12-25T20:49:30+00:00",
-        ":automadVersion": "2.0.0-alpha.53",
-        ":lastPublished": "2025-12-25T20:49:31+00:00"
+        ":automadVersion": "2.0.0-beta.56",
+        ":lastPublished": "2026-09-11T17:29:21+00:00"
     }
 }

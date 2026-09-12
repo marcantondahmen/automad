@@ -152,20 +152,16 @@ export const request = async (
 	data: KeyValueMap = null,
 	signal: AbortSignal = null
 ): Promise<Response> => {
-	const init: RequestInit = { method: 'GET', signal };
+	const formData = new FormData();
 
-	if (data !== null) {
-		const formData = new FormData();
+	formData.append(RequestKey.csrf, getCsrfToken());
+	formData.append(RequestKey.json, JSON.stringify(data || {}));
 
-		formData.append(RequestKey.csrf, getCsrfToken());
-		formData.append(RequestKey.json, JSON.stringify(data));
-
-		init.method = 'POST';
-		init.body = formData;
-		init.headers = {};
-	}
-
-	return fetch(url, init);
+	return fetch(url, {
+		method: 'POST',
+		body: formData,
+		signal,
+	});
 };
 
 /**

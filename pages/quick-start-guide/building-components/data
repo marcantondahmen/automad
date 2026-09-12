@@ -11,8 +11,8 @@
                     "id": "vqEmK6nU6LCYbdyra-vi-Nfzar7SM5iv",
                     "type": "paragraph",
                     "data": {
-                        "text": "Components are sections you can reuse across multiple pages. They maintain consistency and speed up your workflow.",
-                        "large": true
+                        "large": true,
+                        "text": "Components are sections you can reuse across multiple pages. They maintain consistency and speed up your workflow."
                     },
                     "tunes": []
                 },
@@ -20,6 +20,7 @@
                     "id": "iST9TM3hM9mCtLd6oRVwnXG77c3EKm--",
                     "type": "layoutSection",
                     "data": {
+                        "align": "start",
                         "content": {
                             "blocks": [
                                 {
@@ -50,16 +51,15 @@
                                 }
                             ]
                         },
+                        "gap": "2rem",
+                        "justify": "fill-row",
                         "style": {
                             "backgroundBlendMode": "normal",
                             "borderStyle": "none",
                             "card": false,
                             "overflowHidden": false,
                             "shadow": false
-                        },
-                        "justify": "fill-row",
-                        "align": "start",
-                        "gap": "2rem"
+                        }
                     },
                     "tunes": {
                         "layout": {
@@ -76,7 +76,7 @@
         "private": false,
         ":created": "2025-12-20T17:27:34+00:00",
         ":lastModified": "2026-08-15T15:27:39+00:00",
-        ":automadVersion": "2.0.0-beta.51",
-        ":lastPublished": "2026-08-15T15:27:41+00:00"
+        ":automadVersion": "2.0.0-beta.56",
+        ":lastPublished": "2026-09-11T17:29:41+00:00"
     }
 }

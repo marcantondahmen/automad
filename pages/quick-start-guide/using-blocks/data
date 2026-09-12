@@ -1,18 +1,14 @@
 {
     "draft": [],
     "published": {
-        "title": "Using Blocks",
-        "slug": "using-blocks",
-        "selectShowPageInFooter": "primary",
-        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
         "+main": {
             "blocks": [
                 {
                     "id": "8TYstm3qORgMakfLDYdJJXKRptZKBgWN",
                     "type": "paragraph",
                     "data": {
-                        "text": "Blocks are the building units of every page. They can hold text, images, galleries, slideshows, or even other blocks, letting you mix and match to create almost anything.",
-                        "large": true
+                        "large": true,
+                        "text": "Blocks are the building units of every page. They can hold text, images, galleries, slideshows, or even other blocks, letting you mix and match to create almost anything."
                     },
                     "tunes": []
                 },
@@ -20,8 +16,8 @@
                     "id": "Q7zrdn_FJDFYCnPE_EtVj8Zl8UonAsFa",
                     "type": "header",
                     "data": {
-                        "text": "Basic Blocks",
-                        "level": 2
+                        "level": 2,
+                        "text": "Basic Blocks"
                     },
                     "tunes": []
                 },
@@ -29,7 +25,7 @@
                     "id": "CLzB0gFwtr4dmSEO6diHqTEnWlQanYlY",
                     "type": "collapsibleSection",
                     "data": {
-                        "title": "Text and Structure",
+                        "collapsed": true,
                         "content": {
                             "blocks": [
                                 {
@@ -244,7 +240,7 @@
                             ]
                         },
                         "group": "blocks",
-                        "collapsed": true
+                        "title": "Text and Structure"
                     },
                     "tunes": {
                         "layout": {
@@ -256,15 +252,15 @@
                     "id": "SdL7LhcbGLjJX0nWYjIAD_rQ5BgVCIJV",
                     "type": "collapsibleSection",
                     "data": {
-                        "title": "Images and Videos",
+                        "collapsed": true,
                         "content": {
                             "blocks": [
                                 {
                                     "id": "SGvqngLHFooIeaKUFQyGGTznGa5EkaIJ",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Add images and videos uploaded to your site or embedded from external sources.",
-                                        "large": false
+                                        "large": false,
+                                        "text": "Add images and videos uploaded to your site or embedded from external sources."
                                     },
                                     "tunes": {
                                         "layout": {
@@ -276,8 +272,8 @@
                                     "id": "44zJj8Ka3WqX3_AWbw14sCkGRL9zpbZG",
                                     "type": "image",
                                     "data": {
-                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp",
-                                        "openInNewTab": false
+                                        "openInNewTab": false,
+                                        "url": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-09.webp"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -289,8 +285,8 @@
                                     "id": "GG80Uj5Abe2XiKZGSLRkmLZFjsKcn_NF",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Images can include captions and link to other pages.",
-                                        "large": false
+                                        "large": false,
+                                        "text": "Images can include captions and link to other pages."
                                     },
                                     "tunes": {
                                         "layout": {
@@ -302,11 +298,11 @@
                                     "id": "GBtnVZLKcc5OWwGh4LTdUBwNbD2Nicr9",
                                     "type": "video",
                                     "data": {
-                                        "url": "https://cdn.pixabay.com/video/2022/07/14/124140-730515109_large.mp4",
                                         "autoplay": true,
+                                        "controls": true,
                                         "loop": true,
                                         "muted": true,
-                                        "controls": true
+                                        "url": "https://cdn.pixabay.com/video/2022/07/14/124140-730515109_large.mp4"
                                     },
                                     "tunes": {
                                         "layout": {
@@ -318,8 +314,8 @@
                                     "id": "Rg4imjhFPiIfDJBYBkgUo0JwyEFUSPER",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Video settings like autoplay and looping are controlled via the block settings in the top-left corner.",
-                                        "large": false
+                                        "large": false,
+                                        "text": "Video settings like autoplay and looping are controlled via the block settings in the top-left corner."
                                     },
                                     "tunes": {
                                         "layout": {
@@ -341,8 +337,8 @@
                                     "id": "Car9Z9y7pg15pB1tnjQmqBtFjuRpH5VP",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Collections of images can be showcased using masonry or grid galleries, as well as slideshow blocks.",
-                                        "large": false
+                                        "large": false,
+                                        "text": "Collections of images can be showcased using masonry or grid galleries, as well as slideshow blocks."
                                     },
                                     "tunes": {
                                         "layout": {
@@ -354,31 +350,31 @@
                                     "id": "a99yeXNu6d728Wux2bEopMlA3NTK3OZO",
                                     "type": "buttons",
                                     "data": {
-                                        "primaryText": "More about galleries and slideshows",
+                                        "gap": "1rem",
+                                        "justify": "start",
                                         "primaryLink": "/quick-start-guide/showing-images",
-                                        "primaryStyle": [],
                                         "primaryOpenInNewTab": false,
+                                        "primaryStyle": [],
+                                        "primaryText": "More about galleries and slideshows",
+                                        "secondaryOpenInNewTab": true,
                                         "secondaryStyle": {
                                             "borderWidth": "2px",
                                             "borderRadius": "0.5rem",
                                             "paddingHorizontal": "1.5rem",
                                             "paddingVertical": "0.5rem"
-                                        },
-                                        "secondaryOpenInNewTab": true,
-                                        "justify": "start",
-                                        "gap": "1rem"
+                                        }
                                     },
                                     "tunes": {
+                                        "className": "buttons",
                                         "layout": {
                                             "stretched": false
-                                        },
-                                        "className": "buttons"
+                                        }
                                     }
                                 }
                             ]
                         },
                         "group": "blocks",
-                        "collapsed": true
+                        "title": "Images and Videos"
                     },
                     "tunes": {
                         "layout": {
@@ -390,24 +386,20 @@
                     "id": "sQBtcR4pXo9obK2UqB7shsS1V_1pIiz2",
                     "type": "collapsibleSection",
                     "data": {
-                        "title": "Embedded Content",
+                        "collapsed": true,
                         "content": {
                             "blocks": [
                                 {
                                     "id": "_cGtla9flRBHhVkhAlrcIGVWKG1iC-O9",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Automad supports many external platforms. Paste a link to embed videos or streams directly into your page.",
-                                        "large": false
+                                        "large": false,
+                                        "text": "Automad supports many external platforms. Paste a link to embed videos or streams directly into your page."
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -423,12 +415,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -443,12 +431,8 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 },
                                 {
@@ -463,18 +447,14 @@
                                     },
                                     "tunes": {
                                         "layout": {
-                                            "stretched": false,
-                                            "width": null
-                                        },
-                                        "spacing": null,
-                                        "className": "",
-                                        "id": ""
+                                            "stretched": false
+                                        }
                                     }
                                 }
                             ]
                         },
                         "group": "blocks",
-                        "collapsed": true
+                        "title": "Embedded Content"
                     },
                     "tunes": {
                         "layout": {
@@ -486,7 +466,7 @@
                     "id": "hmByZeubB5EdTLFeWtftgmDl_3P2UgRK",
                     "type": "collapsibleSection",
                     "data": {
-                        "title": "Navigation",
+                        "collapsed": true,
                         "content": {
                             "blocks": [
                                 {
@@ -613,7 +593,7 @@
                             ]
                         },
                         "group": "blocks",
-                        "collapsed": true
+                        "title": "Navigation"
                     },
                     "tunes": {
                         "layout": {
@@ -625,15 +605,15 @@
                     "id": "Ym3DtMwQAGe9GSeyq6PaweWACJh-fzJp",
                     "type": "collapsibleSection",
                     "data": {
-                        "title": "Code and Math",
+                        "collapsed": true,
                         "content": {
                             "blocks": [
                                 {
                                     "id": "fhIeVx8WlHjC0NFbx2a1iLfL1C7-MVYK",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Add code snippets with syntax highlighting. Choose a theme per page or globally.",
-                                        "large": false
+                                        "large": false,
+                                        "text": "Add code snippets with syntax highlighting. Choose a theme per page or globally."
                                     },
                                     "tunes": {
                                         "layout": {
@@ -659,8 +639,8 @@
                                     "id": "DCmfLoZbC6JOkA2pdBoAlh06LM7sKWM7",
                                     "type": "paragraph",
                                     "data": {
-                                        "text": "Add basic math with <i>KaTeX</i> for academic purposes.",
-                                        "large": false
+                                        "large": false,
+                                        "text": "Add basic math with <i>KaTeX</i> for academic purposes."
                                     },
                                     "tunes": {
                                         "layout": {
@@ -683,7 +663,7 @@
                             ]
                         },
                         "group": "blocks",
-                        "collapsed": true
+                        "title": "Code and Math"
                     },
                     "tunes": {
                         "layout": {
@@ -695,8 +675,8 @@
                     "id": "WG_Ecq6GJNvh4PlDbGiLKzwvPnJbFy7V",
                     "type": "header",
                     "data": {
-                        "text": "Advanced Types",
-                        "level": 2
+                        "level": 2,
+                        "text": "Advanced Types"
                     },
                     "tunes": []
                 },
@@ -704,18 +684,22 @@
                     "id": "pNHnY1dMuAezRu0Cr_O3YU8fuT7DEQtg",
                     "type": "paragraph",
                     "data": {
-                        "text": "In addition to the basic blocks, Automad provides more advanced types for complex use cases. <a href=\"/quick-start-guide/creating-layouts\">Layout sections</a>, <a href=\"/quick-start-guide/configuring-pagelists\">pagelists</a>, <a href=\"/quick-start-guide/building-components\">components</a>, template language snippets, an email contact form, and raw HTML or Markdown blocks give you greater flexibility and control.",
-                        "large": false
+                        "large": false,
+                        "text": "In addition to the basic blocks, Automad provides more advanced types for complex use cases. <a href=\"/quick-start-guide/creating-layouts\">Layout sections</a>, <a href=\"/quick-start-guide/configuring-pagelists\">pagelists</a>, <a href=\"/quick-start-guide/building-components\">components</a>, template language snippets, an email contact form, and raw HTML or Markdown blocks give you greater flexibility and control."
                     },
                     "tunes": []
                 }
             ]
         },
+        "imagePagelist": "https://media.marcdahmen.de/sample-content/devices/dark-on-light-04.webp",
+        "selectShowPageInFooter": "primary",
+        "slug": "using-blocks",
+        "title": "Using Blocks",
         "template": "page_sidebar",
         "private": false,
         ":created": "2025-12-20T17:26:29+00:00",
-        ":lastModified": "2026-08-15T15:25:24+00:00",
-        ":automadVersion": "2.0.0-beta.51",
-        ":lastPublished": "2026-08-15T15:25:26+00:00"
+        ":lastModified": "2026-09-11T17:18:33+00:00",
+        ":automadVersion": "2.0.0-beta.56",
+        ":lastPublished": "2026-09-11T17:27:20+00:00"
     }
 }
