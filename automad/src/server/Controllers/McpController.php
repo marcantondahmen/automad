@@ -126,6 +126,20 @@ class McpController {
 	}
 
 	/**
+	 * Encode a payload as JSON, set the response code and the JSON content type header.
+	 *
+	 * @param array $payload
+	 * @param int $httpCode
+	 * @return string
+	 */
+	private static function json(array $payload, int $httpCode = 200): string {
+		http_response_code($httpCode);
+		header('Content-Type: application/json; charset=utf-8');
+
+		return strval(json_encode($payload));
+	}
+
+	/**
 	 * Build a JSON-RPC error response.
 	 *
 	 * @param mixed $id
@@ -135,14 +149,11 @@ class McpController {
 	 * @return string
 	 */
 	private static function jsonRpcError(mixed $id, int $code, string $message, int $httpCode = 200): string {
-		http_response_code($httpCode);
-		header('Content-Type: application/json; charset=utf-8');
-
-		return strval(json_encode(array(
+		return self::json(array(
 			'jsonrpc' => '2.0',
 			'id' => $id,
 			'error' => array('code' => $code, 'message' => $message)
-		)));
+		), $httpCode);
 	}
 
 	/**
@@ -153,13 +164,11 @@ class McpController {
 	 * @return string
 	 */
 	private static function jsonRpcResult(mixed $id, array $result): string {
-		header('Content-Type: application/json; charset=utf-8');
-
-		return strval(json_encode(array(
+		return self::json(array(
 			'jsonrpc' => '2.0',
 			'id' => $id,
 			'result' => $result
-		)));
+		));
 	}
 
 	/**
@@ -168,10 +177,8 @@ class McpController {
 	 * @return string
 	 */
 	private static function unauthorized(): string {
-		http_response_code(401);
 		header('WWW-Authenticate: Bearer');
-		header('Content-Type: application/json; charset=utf-8');
 
-		return strval(json_encode(array('error' => 'invalid_token')));
+		return self::json(array('error' => 'invalid_token'), 401);
 	}
 }
