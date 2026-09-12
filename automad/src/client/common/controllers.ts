@@ -106,6 +106,12 @@ export const enum MailConfigController {
 	test = 'MailConfigController::test',
 }
 
+export const enum McpTokenController {
+	addToken = 'McpTokenController::addToken',
+	getTokens = 'McpTokenController::getTokens',
+	revoke = 'McpTokenController::revoke',
+}
+
 export const enum PackageManagerController {
 	addRepository = 'PackageManagerController::addRepository',
 	getOutdated = 'PackageManagerController::getOutdated',

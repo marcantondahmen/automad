@@ -174,6 +174,7 @@ import('./components/System/FeedEnable');
 import('./components/System/FeedFields');
 import('./components/System/I18nEnable');
 import('./components/System/LanguageSelect');
+import('./components/System/McpTokenList');
 import('./components/System/TotpConfig');
 import('./components/System/UserEmail');
 import('./components/System/UserName');

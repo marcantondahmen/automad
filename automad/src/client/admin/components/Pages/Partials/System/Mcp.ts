@@ -26,29 +26,26 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-export const enum Section {
-	ai = 'ai',
-	cache = 'cache',
-	config = 'config',
-	customizations = 'customizations',
-	debug = 'debug',
-	feed = 'feed',
-	files = 'files',
-	i18n = 'i18n',
-	language = 'language',
-	mail = 'mail',
-	mcp = 'mcp',
-	overview = 'overview',
-	packages = 'packages',
-	repositories = 'repositories',
-	settings = 'settings',
-	text = 'text',
-	update = 'update',
-	users = 'users',
-}
+import { App, CSS, html } from '@/admin/core';
+
+/**
+ * Render the MCP section.
+ *
+ * @returns the rendered HTML
+ */
+export const renderMcpSection = (): string => {
+	return html`
+		<div class="${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}">
+			<p>${App.text('systemMcpInfo')}</p>
+			<div class="${CSS.grid}" style="--min: 20rem;">
+				<am-mcp-token-list></am-mcp-token-list>
+			</div>
+		</div>
+	`;
+};

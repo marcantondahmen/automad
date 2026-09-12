@@ -52,6 +52,7 @@ import { renderLanguageSection } from './Partials/System/Language';
 import { renderUpdateSection } from './Partials/System/Update';
 import { renderUsersSection } from './Partials/System/Users';
 import { renderMailSection } from './Partials/System/Mail';
+import { renderMcpSection } from './Partials/System/Mcp';
 import type {
 	SwitcherDropdownData,
 	SwitcherDropdownItem,
@@ -103,6 +104,14 @@ const getSystemSections = (): SystemSectionData[] => {
 			state: '<am-system-ai-assistance-indicator></am-system-ai-assistance-indicator>',
 			render: renderAiSection,
 			narrowIcon: false,
+		},
+		{
+			section: Section.mcp,
+			icon: 'plug',
+			title: App.text('systemMcp'),
+			info: App.text('systemMcpCardInfo'),
+			state: '',
+			render: renderMcpSection,
 		},
 		{
 			section: Section.feed,

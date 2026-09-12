@@ -40,6 +40,7 @@ use Automad\API\RequestHandler;
 use Automad\API\Response;
 use Automad\Auth\Session;
 use Automad\Controllers\ImageController;
+use Automad\Controllers\McpController;
 use Automad\Controllers\PageController;
 use Automad\Core\Cache;
 use Automad\Core\Feed;
@@ -90,6 +91,7 @@ class Routes {
 		self::registerAPIRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerDashboardRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerFeedRoute($Router);
+		self::registerMcpRoute($Router);
 		self::registerPageRoutes($Router);
 
 		self::$registered = $Router->getRoutes();
@@ -293,6 +295,18 @@ class Routes {
 				return $Feed->get();
 			},
 			AM_FEED_ENABLED
+		);
+	}
+
+	/**
+	 * Register the MCP resource route.
+	 *
+	 * @param Router $Router
+	 */
+	private static function registerMcpRoute(Router $Router): void {
+		$Router->register(
+			'/_mcp',
+			array(McpController::class, 'render')
 		);
 	}
 
