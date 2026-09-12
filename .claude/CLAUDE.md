@@ -53,3 +53,13 @@ CI (`.github/workflows/`) does not run lint/build/test on PRs (consistent with t
 - **No component framework/library** (no Lit/Stencil/React) — a custom `BaseComponent` (`automad/src/client/admin/components/Base.ts`, `abstract class extends HTMLElement`) is the base for ~89 native custom elements, registered via a `define`/factory helper (`core/factory.ts`).
 - **Bundler is esbuild** (`esbuild.js` at repo root). Its header comment documents the entry-point convention: `index.ts` files under `automad/src/client/**` are main entry points loaded by PHP pages; files matching `blocks/components/*.ts` are split as dynamically-imported block classes; files matching `vendor/*.ts` are split as separately-hashed vendor chunks. Styles compile through the same esbuild pipeline (`esbuild-sass-plugin`, Less, PostCSS/autoprefixer). Output goes to `automad/dist/build`.
 - **Path alias**: `@/*` → `automad/src/client/*` (`tsconfig.json`; target `es2022`, module `esnext`, `moduleResolution: bundler`, `noImplicitAny: true`).
+
+## Hosting constraints
+
+Automad targets mainstream, budget-friendly shared hosting with a minimal, restricted PHP feature set — this is a hard project requirement, not a nice-to-have. When writing or reviewing server-side PHP:
+
+- **Never rely on `php://input` or any other raw-request-body read.** Many shared hosts disable it, and there is no portable PHP fallback (the old `$HTTP_RAW_POST_DATA` superglobal was removed years ago). Read input via `$_GET`/`$_POST` (`Automad\Core\Request::query()`/`::post()`), which PHP populates natively for query strings and form-urlencoded/multipart POST bodies on every hosting tier. For structured/nested data over POST, use the existing `$_POST['__json__']` field convention (`Automad\API\RequestHandler`) rather than a raw JSON body.
+- Prefer authenticated, dashboard-driven flows (through the existing `/_api` mechanism) over unauthenticated endpoints that expect an external client to POST a raw body, whenever the data could instead originate from the site owner through the dashboard.
+- Don't assume shell/CLI access or `exec`/`proc_open`/`shell_exec`-family functions are available at runtime — the project's own dev tooling reflects this by vendoring `phpunit`/`psalm` as standalone phars instead of requiring global Composer dev installs.
+- Outbound HTTP requests should go through `Automad\System\Fetch`'s cURL wrapper, which defensively checks `curl_init()` for availability rather than assuming the extension is present.
+- Don't assume a specific PHP SAPI — mod_php, PHP-FPM/FastCGI, CGI, LiteSpeed, and FrankenPHP must all work (see the `docker/` folder's multiple server flavors).
