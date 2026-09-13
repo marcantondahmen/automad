@@ -37,6 +37,10 @@ import type { AiProvider } from './AiProviderSetup';
 
 type Enabled = boolean | 0 | 1;
 
+interface AccessTokenSettings {
+	count: number;
+}
+
 interface AiSettings {
 	enabled: boolean;
 	instructions: string;
@@ -67,6 +71,7 @@ export interface User {
 }
 
 export interface SystemSettings {
+	accessTokens: AccessTokenSettings;
 	ai: AiSettings;
 	cache: CacheSettings;
 	debug: DebugSettings;

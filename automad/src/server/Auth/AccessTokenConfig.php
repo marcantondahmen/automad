@@ -129,6 +129,6 @@ class AccessTokenConfig {
 	 * @return string
 	 */
 	private static function getPath(): string {
-		return AM_BASE_DIR . '/config/access-token.auth.php';
+		return AM_BASE_DIR . '/config/tokens.auth.php';
 	}
 }

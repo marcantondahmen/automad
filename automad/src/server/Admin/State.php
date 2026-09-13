@@ -35,6 +35,7 @@
 
 namespace Automad\Admin;
 
+use Automad\Auth\AccessTokenConfig;
 use Automad\Auth\User;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
@@ -92,6 +93,7 @@ class State {
 		$themes = $ThemeCollection->getThemes();
 		$Cache = new Cache();
 		$MailConfig = new MailConfig();
+		$AccessTokenConfig = AccessTokenConfig::load();
 		$Automad->Pagelist->config(array('excludeHidden' => false));
 		$User = User::getCurrent();
 
@@ -112,6 +114,9 @@ class State {
 				'snippets' => PackageCollection::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/'),
 			),
 			'system' => array(
+				'accessTokens' => array(
+					'count' => count($AccessTokenConfig->tokens)
+				),
 				'ai' => array(
 					'enabled' => AM_AI_ASSISTANCE_ENABLED,
 					'instructions' => AM_AI_ASSISTANCE_INSTRUCTIONS,

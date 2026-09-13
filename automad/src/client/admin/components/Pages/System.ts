@@ -106,11 +106,20 @@ const getSystemSections = (): SystemSectionData[] => {
 			narrowIcon: false,
 		},
 		{
+			section: Section.mail,
+			icon: 'envelope-at',
+			title: App.text('systemMail'),
+			info: App.text('systemMailCardInfo'),
+			state: '<am-system-mail-indicator></am-system-mail-indicator>',
+			render: renderMailSection,
+			narrowIcon: false,
+		},
+		{
 			section: Section.accessTokens,
 			icon: 'key',
 			title: App.text('systemAccessTokens'),
 			info: App.text('systemAccessTokensCardInfo'),
-			state: '',
+			state: '<am-access-token-indicator></am-access-token-indicator>',
 			render: renderAccessTokensSection,
 		},
 		{
@@ -120,15 +129,6 @@ const getSystemSections = (): SystemSectionData[] => {
 			info: App.text('systemRssFeedCardInfo'),
 			state: '<am-system-feed-indicator></am-system-feed-indicator>',
 			render: renderFeedSection,
-		},
-		{
-			section: Section.mail,
-			icon: 'envelope-at',
-			title: App.text('systemMail'),
-			info: App.text('systemMailCardInfo'),
-			state: '<am-system-mail-indicator></am-system-mail-indicator>',
-			render: renderMailSection,
-			narrowIcon: false,
 		},
 		{
 			section: Section.i18n,
@@ -259,8 +259,11 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 	private renderOverviewSection(): string {
 		return html`
 			<am-switcher-section name="${Section.overview}">
+				<div class="${CSS.grid}" style="--min: 17rem;">
+					${this.renderOverviewCards(this.sectionData.slice(0, 4))}
+				</div>
 				<div class="${CSS.grid}" style="--min: 13rem;">
-					${this.renderOverviewCards(this.sectionData)}
+					${this.renderOverviewCards(this.sectionData.slice(4, 10))}
 				</div>
 			</am-switcher-section>
 		`;

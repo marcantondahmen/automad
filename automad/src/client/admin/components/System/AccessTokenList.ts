@@ -42,8 +42,10 @@ import {
 	createGenericModal,
 	CSS,
 	dateFormat,
+	EventName,
 	FieldTag,
 	findFormErrorElement,
+	fire,
 	html,
 	notifyFormError,
 	requestAPI,
@@ -121,6 +123,8 @@ class AccessTokenListComponent extends BaseComponent {
 				if (error) {
 					return;
 				}
+
+				fire(EventName.appStateRequireUpdate);
 
 				modal.close();
 				this.render();
@@ -243,6 +247,8 @@ class AccessTokenListComponent extends BaseComponent {
 				await requestAPI(AccessTokenController.revoke, {
 					id: token.id,
 				});
+
+				fire(EventName.appStateRequireUpdate);
 
 				this.render();
 			}
