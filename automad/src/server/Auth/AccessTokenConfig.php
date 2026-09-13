@@ -33,21 +33,21 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai;
+namespace Automad\Auth;
 
 use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The MCP config. Stores the access tokens that are authorized to access this
- * installation over MCP, similar to a collection of personal access tokens.
+ * The access token config. Stores the access tokens issued for this installation,
+ * e.g. for connecting to Automad's MCP server, similar to a collection of personal access tokens.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class McpConfig {
+class AccessTokenConfig {
 	/**
 	 * The issued access tokens.
 	 */
@@ -81,23 +81,23 @@ class McpConfig {
 	/**
 	 * Load the config or create an empty one.
 	 *
-	 * @return McpConfig
+	 * @return AccessTokenConfig
 	 */
-	public static function load(): McpConfig {
+	public static function load(): AccessTokenConfig {
 		$path = self::getPath();
 
 		if (is_readable($path)) {
 			try {
-				$McpConfig = unserialize(trim(strval(file_get_contents($path))));
+				$AccessTokenConfig = unserialize(trim(strval(file_get_contents($path))));
 
-				if ($McpConfig instanceof McpConfig) {
-					return $McpConfig;
+				if ($AccessTokenConfig instanceof AccessTokenConfig) {
+					return $AccessTokenConfig;
 				}
 			} catch (\Throwable $th) {
 			}
 		}
 
-		return new McpConfig();
+		return new AccessTokenConfig();
 	}
 
 	/**
@@ -129,6 +129,6 @@ class McpConfig {
 	 * @return string
 	 */
 	private static function getPath(): string {
-		return AM_BASE_DIR . '/config/mcp.auth.php';
+		return AM_BASE_DIR . '/config/access-token.auth.php';
 	}
 }

@@ -33,6 +33,7 @@
  */
 
 import {
+	AccessTokenController,
 	App,
 	Attr,
 	confirm,
@@ -44,24 +45,23 @@ import {
 	FieldTag,
 	findFormErrorElement,
 	html,
-	McpTokenController,
 	notifyFormError,
 	requestAPI,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
-interface McpToken {
+interface AccessToken {
 	id: string;
 	name: string;
 	createdAt: string;
 }
 
 /**
- * The MCP access token list component.
+ * The access token list component.
  *
  * @extends BaseComponent
  */
-class McpTokenListComponent extends BaseComponent {
+class AccessTokenListComponent extends BaseComponent {
 	/**
 	 * The list container.
 	 */
@@ -78,7 +78,7 @@ class McpTokenListComponent extends BaseComponent {
 			[CSS.button],
 			{},
 			menu,
-			App.text('systemMcpAddToken')
+			App.text('systemAccessTokensAddToken')
 		);
 
 		this.listen(addButton, 'click', this.renderAddTokenModal.bind(this));
@@ -98,21 +98,21 @@ class McpTokenListComponent extends BaseComponent {
 	 */
 	private renderAddTokenModal(): void {
 		const nameInput = createField(FieldTag.input, null, {
-			id: 'am-mcp-token-name',
+			id: 'am-access-token-name',
 			key: 'name',
 			name: 'name',
 			hideLabel: true,
-			placeholder: App.text('systemMcpAddTokenNameLabel'),
+			placeholder: App.text('systemAccessTokensAddTokenNameLabel'),
 			value: '',
 		});
 
 		const { modal, body } = createGenericModal(
-			App.text('systemMcpAddTokenTitle'),
+			App.text('systemAccessTokensAddTokenTitle'),
 			App.text('save'),
 			true,
 			async (modal) => {
 				const { data, error } = await requestAPI(
-					McpTokenController.addToken,
+					AccessTokenController.addToken,
 					{ name: nameInput.query() }
 				);
 
@@ -139,18 +139,24 @@ class McpTokenListComponent extends BaseComponent {
 	/**
 	 * Render a modal showing a newly issued access token. The raw token is only ever
 	 * available here — only its hash is persisted, so it can't be shown again. A Claude
-	 * Code command is shown below it purely as one convenience example, not as the only
-	 * way to connect: any MCP client that supports a static Bearer token header works.
+	 * Code command is shown below it purely as one example — other MCP clients that support
+	 * a static Bearer token header work the same way.
 	 *
 	 * @param accessToken
 	 */
 	private renderTokenCreatedModal(accessToken: string): void {
 		const { modal, body } = createGenericModal(
-			App.text('systemMcpTokenCreatedTitle'),
+			App.text('systemAccessTokensTokenCreatedTitle'),
 			App.text('close')
 		);
 
-		create('p', [], {}, body, App.text('systemMcpTokenCreatedStep1'));
+		create(
+			'p',
+			[],
+			{},
+			body,
+			App.text('systemAccessTokensTokenCreatedStep1')
+		);
 		create('code', [CSS.textMono], {}, body, accessToken);
 
 		const mcpUrl = `${window.location.origin}${App.baseIndex}/_mcp`;
@@ -161,7 +167,7 @@ class McpTokenListComponent extends BaseComponent {
 			[CSS.richText],
 			{},
 			body,
-			App.text('systemMcpTokenCreatedStep2')
+			App.text('systemAccessTokensTokenCreatedStep2')
 		);
 		create('code', [CSS.textMono], {}, body, claudeCommand);
 
@@ -176,8 +182,8 @@ class McpTokenListComponent extends BaseComponent {
 	 * @async
 	 */
 	private async render(): Promise<void> {
-		const { data } = await requestAPI(McpTokenController.getTokens);
-		const tokens = (data?.tokens ?? []) as McpToken[];
+		const { data } = await requestAPI(AccessTokenController.getTokens);
+		const tokens = (data?.tokens ?? []) as AccessToken[];
 
 		this.listContainer.innerHTML = '';
 
@@ -187,7 +193,7 @@ class McpTokenListComponent extends BaseComponent {
 				[CSS.textMuted],
 				{},
 				this.listContainer,
-				App.text('systemMcpTokensEmpty')
+				App.text('systemAccessTokensTokensEmpty')
 			);
 
 			return;
@@ -203,7 +209,7 @@ class McpTokenListComponent extends BaseComponent {
 	 *
 	 * @param token
 	 */
-	private renderToken(token: McpToken): void {
+	private renderToken(token: AccessToken): void {
 		const card = create(
 			'div',
 			[CSS.card],
@@ -225,14 +231,18 @@ class McpTokenListComponent extends BaseComponent {
 		const revoke = create(
 			'span',
 			[CSS.cardDelete],
-			{ [Attr.tooltip]: App.text('systemMcpRevokeToken') },
+			{ [Attr.tooltip]: App.text('systemAccessTokensRevokeToken') },
 			card,
 			'<i class="bi bi-trash3"></i>'
 		);
 
 		this.listen(revoke, 'click', async () => {
-			if (await confirm(App.text('systemMcpRevokeTokenConfirm'))) {
-				await requestAPI(McpTokenController.revoke, { id: token.id });
+			if (
+				await confirm(App.text('systemAccessTokensRevokeTokenConfirm'))
+			) {
+				await requestAPI(AccessTokenController.revoke, {
+					id: token.id,
+				});
 
 				this.render();
 			}
@@ -240,4 +250,4 @@ class McpTokenListComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-mcp-token-list', McpTokenListComponent);
+customElements.define('am-access-token-list', AccessTokenListComponent);

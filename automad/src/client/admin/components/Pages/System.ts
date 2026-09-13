@@ -43,6 +43,7 @@ import {
 } from '@/admin/core';
 import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
+import { renderAccessTokensSection } from './Partials/System/AccessTokens';
 import { renderAiSection } from './Partials/System/Ai';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderDebugSection } from './Partials/System/Debug';
@@ -52,7 +53,6 @@ import { renderLanguageSection } from './Partials/System/Language';
 import { renderUpdateSection } from './Partials/System/Update';
 import { renderUsersSection } from './Partials/System/Users';
 import { renderMailSection } from './Partials/System/Mail';
-import { renderMcpSection } from './Partials/System/Mcp';
 import type {
 	SwitcherDropdownData,
 	SwitcherDropdownItem,
@@ -106,12 +106,12 @@ const getSystemSections = (): SystemSectionData[] => {
 			narrowIcon: false,
 		},
 		{
-			section: Section.mcp,
-			icon: 'plug',
-			title: App.text('systemMcp'),
-			info: App.text('systemMcpCardInfo'),
+			section: Section.accessTokens,
+			icon: 'key',
+			title: App.text('systemAccessTokens'),
+			info: App.text('systemAccessTokensCardInfo'),
 			state: '',
-			render: renderMcpSection,
+			render: renderAccessTokensSection,
 		},
 		{
 			section: Section.feed,

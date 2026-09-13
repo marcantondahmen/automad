@@ -32,6 +32,12 @@
  * See LICENSE.md for license information.
  */
 
+export const enum AccessTokenController {
+	addToken = 'AccessTokenController::addToken',
+	getTokens = 'AccessTokenController::getTokens',
+	revoke = 'AccessTokenController::revoke',
+}
+
 export const enum AiAssistanceController {
 	text = 'AiAssistanceController::text',
 }
@@ -104,12 +110,6 @@ export const enum MailConfigController {
 	save = 'MailConfigController::save',
 	reset = 'MailConfigController::reset',
 	test = 'MailConfigController::test',
-}
-
-export const enum McpTokenController {
-	addToken = 'McpTokenController::addToken',
-	getTokens = 'McpTokenController::getTokens',
-	revoke = 'McpTokenController::revoke',
 }
 
 export const enum PackageManagerController {

@@ -162,6 +162,7 @@ import('./components/Switcher/SwitcherLabel');
 import('./components/Switcher/SwitcherLink');
 import('./components/Switcher/SwitcherSection');
 
+import('./components/System/AccessTokenList');
 import('./components/System/AiAssistanceEnable');
 import('./components/System/AiAssistanceInstructions');
 import('./components/System/AiProviderSetup');
@@ -174,7 +175,6 @@ import('./components/System/FeedEnable');
 import('./components/System/FeedFields');
 import('./components/System/I18nEnable');
 import('./components/System/LanguageSelect');
-import('./components/System/McpTokenList');
 import('./components/System/TotpConfig');
 import('./components/System/UserEmail');
 import('./components/System/UserName');

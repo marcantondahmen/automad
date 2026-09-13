@@ -35,7 +35,7 @@
 
 namespace Automad\Controllers;
 
-use Automad\System\Ai\McpConfig;
+use Automad\Auth\AccessToken;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,15 +53,14 @@ class McpController {
 
 	/**
 	 * Handle a request to the MCP resource endpoint. Requires a valid, previously issued
-	 * Bearer access token (created through the dashboard's MCP system section); returns a
+	 * Bearer access token (created through the dashboard's Access Tokens system section); returns a
 	 * 401 challenge otherwise. Only POST requests carrying a JSON-RPC message are supported;
 	 * server-initiated SSE streams and session termination are not implemented.
 	 *
 	 * @return string
 	 */
 	public static function render(): string {
-		$token = self::getBearerToken();
-		$tokenRecord = $token ? McpConfig::load()->findTokenByHash(hash('sha256', $token)) : null;
+		$tokenRecord = AccessToken::verifyRequest();
 
 		if (!$tokenRecord) {
 			return self::unauthorized();
@@ -103,26 +102,6 @@ class McpController {
 			default:
 				return self::jsonRpcError($id, -32601, 'Method not found');
 		}
-	}
-
-	/**
-	 * Read the Bearer token from the Authorization header.
-	 *
-	 * @return string
-	 */
-	private static function getBearerToken(): string {
-		$header = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-
-		if (!$header && function_exists('getallheaders')) {
-			$headers = getallheaders();
-			$header = $headers['Authorization'] ?? ($headers['authorization'] ?? '');
-		}
-
-		if (preg_match('/Bearer\s+(.+)$/i', strval($header), $matches)) {
-			return trim($matches[1]);
-		}
-
-		return '';
 	}
 
 	/**

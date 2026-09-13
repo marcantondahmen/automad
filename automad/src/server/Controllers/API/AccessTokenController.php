@@ -36,21 +36,22 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
+use Automad\Auth\AccessToken;
+use Automad\Auth\AccessTokenConfig;
 use Automad\Core\Request;
 use Automad\Core\Text;
-use Automad\System\Ai\McpConfig;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The MCP token controller. Used by the dashboard's system section to issue and revoke
- * the bearer access tokens that are authorized to access this installation over MCP.
+ * The access token controller. Used by the dashboard's system section to issue and
+ * revoke access tokens, e.g. for connecting to this installation's MCP server.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class McpTokenController {
+class AccessTokenController {
 	/**
 	 * Issue a new access token and return it. The raw token is only ever available in
 	 * this response — only its hash is persisted, so it can't be recovered afterwards.
@@ -62,21 +63,10 @@ class McpTokenController {
 		$name = trim(strval(Request::post('name')));
 
 		if (empty($name)) {
-			return $Response->setError(Text::get('systemMcpAddTokenValidationError'));
+			return $Response->setError(Text::get('systemAccessTokensAddTokenValidationError'));
 		}
 
-		$accessToken = bin2hex(random_bytes(32));
-
-		$McpConfig = McpConfig::load();
-
-		$McpConfig->addToken(array(
-			'id' => bin2hex(random_bytes(16)),
-			'name' => $name,
-			'tokenHash' => hash('sha256', $accessToken),
-			'createdAt' => time()
-		));
-
-		$McpConfig->save();
+		$accessToken = AccessToken::issue($name);
 
 		return $Response->setData(array('accessToken' => $accessToken));
 	}
@@ -95,7 +85,7 @@ class McpTokenController {
 				'name' => $token['name'],
 				'createdAt' => date('c', $token['createdAt'])
 			);
-		}, McpConfig::load()->tokens);
+		}, AccessTokenConfig::load()->tokens);
 
 		return $Response->setData(array('tokens' => array_values($tokens)));
 	}
@@ -113,9 +103,9 @@ class McpTokenController {
 			return $Response;
 		}
 
-		$McpConfig = McpConfig::load();
-		$McpConfig->removeToken($id);
-		$McpConfig->save();
+		$AccessTokenConfig = AccessTokenConfig::load();
+		$AccessTokenConfig->removeToken($id);
+		$AccessTokenConfig->save();
 
 		return $Response;
 	}
