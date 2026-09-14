@@ -259,13 +259,14 @@ export class LayoutTune extends BaseElementTune<LayoutTuneData> {
 
 		const contentRect = content.getBoundingClientRect();
 		const blockRect = blockHolder.parentElement.getBoundingClientRect();
-		const stickyNavBottom = query(
-			`.${CSS.layoutDashboardSectionSticky}`
-		)?.getBoundingClientRect().bottom;
+		const nav =
+			query(`.${CSS.layoutDashboardSectionSticky}`) ||
+			query(`.${CSS.layoutInPageNavbar}`);
+		const navBottom = nav?.getBoundingClientRect().bottom + 5 || 80;
 
 		const offsetX = Math.round(contentRect.x - blockRect.x);
 		const offsetY = Math.round(
-			Math.max(contentRect.y, stickyNavBottom + 5) - blockRect.y
+			Math.max(contentRect.y, navBottom) - blockRect.y
 		);
 
 		toolbar.setAttribute('style', `--x: ${offsetX}px; --y: ${offsetY}px;`);

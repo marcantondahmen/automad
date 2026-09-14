@@ -57,7 +57,6 @@ class RequestHandler {
 	const CONTROLLERS_NAMESPACE = '\\Automad\\Controllers\\API\\';
 	const PUBLIC_CONTROLLERS = array(PublicController::class);
 	const REQUEST_KEY_CSRF = '__csrf__';
-	const REQUEST_KEY_JSON = '__json__';
 
 	/**
 	 * Get the JSON response for a requested route
@@ -67,7 +66,7 @@ class RequestHandler {
 	public static function getResponse(): string {
 		header('Content-Type: application/json; charset=utf-8');
 		Error::setJsonResponseHandler();
-		self::convertJsonPost();
+		Request::mergePostData();
 
 		$controller = self::routeController(AM_REQUEST);
 		[$class, $method] = explode('::', $controller);
@@ -132,18 +131,6 @@ class RequestHandler {
 		$file = AM_BASE_DIR . '/automad/src/server/' . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
 
 		return is_readable($file);
-	}
-
-	/**
-	 * Parse __json__ field and merged the parsed data back to $_POST.
-	 */
-	private static function convertJsonPost(): void {
-		$json = $_POST[self::REQUEST_KEY_JSON] ?? null;
-
-		if (is_string($json)) {
-			$_POST = array_merge($_POST, json_decode($json, true));
-			unset($_POST[self::REQUEST_KEY_JSON]);
-		}
 	}
 
 	/**

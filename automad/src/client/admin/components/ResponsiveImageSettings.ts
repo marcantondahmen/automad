@@ -36,21 +36,19 @@ import {
 	App,
 	CSS,
 	FieldTag,
-	collectFieldData,
 	create,
 	createField,
 	debounce,
 	fire,
 	html,
 	resizeImageUrl,
-	resolveFileUrl,
 	uniqueId,
 	type AspectRatioBreakpoints,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { FocalPointPickerComponent } from './FocalPointPicker';
-import type { FocalPoint } from '@/admin/types';
 import { AspectRatioBreakpointsFieldComponent } from './Fields/AspectRatioBreakpointsField';
+import type { FocalPoint } from '@/admin/types';
 
 /**
  * A responsive image settings editor component.
@@ -120,7 +118,7 @@ export class ResponsiveImageSettingsComponent extends BaseComponent {
 		breakpoints: AspectRatioBreakpoints,
 		focalPoint: FocalPoint
 	): void {
-		this.image = resolveFileUrl(image);
+		this.image = image;
 
 		// Set private props directly in order to trigger change event
 		// manually and only once without setters.
