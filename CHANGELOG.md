@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.57](https://github.com/marcantondahmen/automad/commit/5fd1a2defec8d3e80d246177ff9f35fa701ec7dd)
+## [v2.0.0-beta.58](https://github.com/marcantondahmen/automad/commit/92bede78e8f4d44e239a7320e0d5e96953ccc421)
 
-Fri, 11 Sep 2026 19:49:13 +0200
+Mon, 14 Sep 2026 20:41:36 +0200
+
+### New Features
+
+- change api request content type to json ([a8eef1718](https://github.com/marcantondahmen/automad/commit/a8eef171890c695f4ff2c9317597789d0231c045))
+
+### Bugfixes
+
+- fix block handle position in in-page edit mode ([2317e2c53](https://github.com/marcantondahmen/automad/commit/2317e2c537f550144a001e6c9bc4e9a00ba2fd50))
+- fix download option not working in file card dropdown ([d3eae49d2](https://github.com/marcantondahmen/automad/commit/d3eae49d2636c2ade4a441572a68dba0e76339f6))
+- fix focal point picker in responsive image settings when installed in a subdirectory ([284993819](https://github.com/marcantondahmen/automad/commit/284993819aa495c350798df9d333e2d83e9c8af4))
+
+## [v2.0.0-beta.57](https://github.com/marcantondahmen/automad/commit/be88dc727a403c6685c0be84a7895124535eda87)
+
+Sat, 12 Sep 2026 17:48:22 +0200
 
 ### New Features
 
