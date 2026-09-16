@@ -40,9 +40,9 @@ use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
-use Automad\Core\PublicationState;
 use Automad\Core\Request;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
 

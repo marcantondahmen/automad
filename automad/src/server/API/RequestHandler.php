@@ -35,7 +35,7 @@
 
 namespace Automad\API;
 
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Controllers\API\PublicController;
 use Automad\Core\Debug;
 use Automad\Core\Error;

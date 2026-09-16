@@ -35,13 +35,13 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
-use Automad\Core\PublicationState;
+use Automad\Stores\PublicationState;
 use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\History\History;

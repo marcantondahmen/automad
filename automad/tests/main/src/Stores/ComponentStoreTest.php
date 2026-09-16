@@ -2,7 +2,6 @@
 
 namespace Automad\Stores;
 
-use Automad\Core\PublicationState;
 use Automad\System\Fields;
 use PHPUnit\Framework\TestCase;
 

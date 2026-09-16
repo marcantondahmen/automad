@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Auth;
+namespace Automad\Auth\Session;
 
 use Automad\App;
 use Automad\Core\Text;

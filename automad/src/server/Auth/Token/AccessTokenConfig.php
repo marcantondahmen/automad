@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Auth;
+namespace Automad\Auth\Token;
 
 use Automad\System\FileSystem;
 
@@ -51,7 +51,7 @@ class AccessTokenConfig {
 	/**
 	 * The current class name of the access token config type.
 	 */
-	private const TYPE = 'Automad\Auth\AccessTokenConfig';
+	private const TYPE = 'Automad\Auth\Token\AccessTokenConfig';
 
 	/**
 	 * The replacement for the access token config type class in a serialized string.

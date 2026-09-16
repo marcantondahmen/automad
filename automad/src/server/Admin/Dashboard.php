@@ -35,7 +35,7 @@
 
 namespace Automad\Admin;
 
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Text;
 use Automad\System\Asset;
 

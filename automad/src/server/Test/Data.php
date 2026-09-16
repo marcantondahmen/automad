@@ -35,8 +35,8 @@
 
 namespace Automad\Test;
 
-use Automad\Core\PublicationState;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

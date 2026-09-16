@@ -2,7 +2,7 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\TestCase;

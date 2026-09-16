@@ -36,10 +36,10 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Auth\LoginRateLimiter;
-use Automad\Auth\PasswordResetCode;
-use Automad\Auth\Session;
-use Automad\Auth\TOTP;
+use Automad\Auth\Session\LoginRateLimiter;
+use Automad\Auth\Session\PasswordResetCode;
+use Automad\Auth\Session\Session;
+use Automad\Auth\Session\Totp;
 use Automad\Auth\User;
 use Automad\Core\Automad;
 use Automad\Core\Messenger;
@@ -195,7 +195,7 @@ class UserController {
 		$Messenger = new Messenger();
 		$code = Request::post('code');
 
-		$confirmed = TOTP::confirmSetup($code, $Messenger);
+		$confirmed = Totp::confirmSetup($code, $Messenger);
 
 		return $Response->setError($Messenger->getError())->setData(array('confirmed' => $confirmed));
 	}
@@ -213,7 +213,7 @@ class UserController {
 			return $Response->setCode(403);
 		}
 
-		$disabled = TOTP::disable($Messenger);
+		$disabled = Totp::disable($Messenger);
 
 		if (!$disabled) {
 			$Response->setError($Messenger->getError())->setCode(500);
@@ -251,7 +251,7 @@ class UserController {
 			return $Response;
 		}
 
-		$Response->setData(TOTP::setup($User->name));
+		$Response->setData(Totp::setup($User->name));
 
 		return $Response;
 	}

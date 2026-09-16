@@ -36,8 +36,8 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Auth\AccessToken;
-use Automad\Auth\AccessTokenConfig;
+use Automad\Auth\Token\AccessToken;
+use Automad\Auth\Token\AccessTokenConfig;
 use Automad\Core\Request;
 use Automad\Core\Text;
 

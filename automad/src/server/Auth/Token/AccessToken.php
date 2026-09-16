@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Auth;
+namespace Automad\Auth\Token;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

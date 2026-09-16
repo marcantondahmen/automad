@@ -35,7 +35,7 @@
 
 namespace Automad\Models\Search;
 
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Models\ComponentCollection;

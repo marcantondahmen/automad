@@ -37,13 +37,13 @@ namespace Automad\Models;
 
 use Automad\API\RequestHandler;
 use Automad\App;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Cache;
 use Automad\Core\Messenger;
-use Automad\Core\PublicationState;
 use Automad\Core\Text;
 use Automad\Core\Value;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

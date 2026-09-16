@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Auth;
+namespace Automad\Auth\Session;
 
 use Automad\Models\UserCollection;
 
@@ -180,7 +180,7 @@ class Session {
 
 		LoginRateLimiter::verifyAccess($username);
 
-		if (TOTP::verify($_SESSION[self::TOTP_LOGIN_SECRET_KEY], $code)) {
+		if (Totp::verify($_SESSION[self::TOTP_LOGIN_SECRET_KEY], $code)) {
 			self::startUserSession($username);
 			self::resetTotpVerification();
 

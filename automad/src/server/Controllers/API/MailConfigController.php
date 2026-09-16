@@ -37,7 +37,7 @@ namespace Automad\Controllers\API;
 
 use Automad\Admin\Email\ConfigurationTestEmail;
 use Automad\API\Response;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Messenger;

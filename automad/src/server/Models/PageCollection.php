@@ -35,7 +35,7 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Debug;
 use Automad\Core\PageIndex;
 use Automad\Core\Sitemap;

@@ -36,7 +36,7 @@
 namespace Automad\Models;
 
 use Automad\Admin\Email\InvitationEmail;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Auth\User;
 use Automad\Core\Cache;
 use Automad\Core\Messenger;

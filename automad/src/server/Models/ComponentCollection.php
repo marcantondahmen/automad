@@ -35,10 +35,10 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Blocks;
-use Automad\Core\PublicationState;
 use Automad\Stores\ComponentStore;
+use Automad\Stores\PublicationState;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

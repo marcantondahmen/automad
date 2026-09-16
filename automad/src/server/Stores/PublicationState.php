@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Core;
+namespace Automad\Stores;
 
 enum PublicationState: string {
 	case DRAFT = 'draft';

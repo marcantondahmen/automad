@@ -39,7 +39,7 @@ use Automad\Console\Argument;
 use Automad\Console\ArgumentCollection;
 use Automad\Console\Console;
 use Automad\Core\PageIndex;
-use Automad\Core\PublicationState;
+use Automad\Stores\PublicationState;
 use Automad\Core\Str;
 use Automad\Stores\DataStore;
 use Automad\System\FileSystem;

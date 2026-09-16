@@ -38,9 +38,9 @@ namespace Automad\Models\Search;
 use Automad\Core\Blocks;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\PublicationState;
 use Automad\Models\ComponentCollection;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -36,7 +36,7 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Automad;
 use Automad\Core\Request;
 use Automad\Core\Text;

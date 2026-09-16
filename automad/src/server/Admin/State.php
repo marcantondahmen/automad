@@ -35,7 +35,7 @@
 
 namespace Automad\Admin;
 
-use Automad\Auth\AccessTokenConfig;
+use Automad\Auth\Token\AccessTokenConfig;
 use Automad\Auth\User;
 use Automad\Core\Automad;
 use Automad\Core\Cache;

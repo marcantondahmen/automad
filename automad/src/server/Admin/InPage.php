@@ -37,7 +37,7 @@ namespace Automad\Admin;
 
 use Automad\API\RequestHandler;
 use Automad\App;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Automad;
 use Automad\Core\Text;
 use Automad\Engine\Document\Body;

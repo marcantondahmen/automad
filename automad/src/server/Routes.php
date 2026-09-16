@@ -38,7 +38,7 @@ namespace Automad;
 use Automad\Admin\Dashboard;
 use Automad\API\RequestHandler;
 use Automad\API\Response;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Controllers\ImageController;
 use Automad\Controllers\McpController;
 use Automad\Controllers\PageController;

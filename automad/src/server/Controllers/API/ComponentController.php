@@ -36,12 +36,12 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Cache;
-use Automad\Core\PublicationState;
 use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Stores\ComponentStore;
+use Automad\Stores\PublicationState;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

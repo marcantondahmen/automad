@@ -1,6 +1,6 @@
 <?php
 
-namespace Automad\Auth;
+namespace Automad\Auth\Token;
 
 use PHPUnit\Framework\TestCase;
 

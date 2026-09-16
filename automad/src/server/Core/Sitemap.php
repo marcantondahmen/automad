@@ -36,7 +36,7 @@
 namespace Automad\Core;
 
 use Automad\API\RequestHandler;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\System\Fields;
 use Automad\System\FileSystem;
 

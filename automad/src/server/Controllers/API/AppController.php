@@ -39,7 +39,7 @@ use Automad\Admin\State;
 use Automad\API\Response;
 use Automad\API\ResponseCache;
 use Automad\App;
-use Automad\Auth\Session;
+use Automad\Auth\Session\Session;
 use Automad\Core\Automad;
 use Automad\Core\Config;
 use Automad\Core\Str;

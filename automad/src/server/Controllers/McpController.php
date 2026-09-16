@@ -35,7 +35,7 @@
 
 namespace Automad\Controllers;
 
-use Automad\Auth\AccessToken;
+use Automad\Auth\Token\AccessToken;
 use Automad\System\Ai\Mcp\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
