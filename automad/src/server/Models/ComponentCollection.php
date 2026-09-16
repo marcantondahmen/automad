@@ -35,7 +35,7 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Blocks;
 use Automad\Stores\ComponentStore;
 use Automad\Stores\PublicationState;
@@ -80,7 +80,7 @@ class ComponentCollection {
 	public function __construct() {
 		$this->ComponentStore = new ComponentStore();
 
-		$state = $this->ComponentStore->getState(empty(Session::getUsername())) ?? array('components' => array());
+		$state = $this->ComponentStore->getState(!Auth::isAuthenticated()) ?? array('components' => array());
 
 		$this->collection = $state['components'];
 		$this->publicationState = $this->ComponentStore->isPublished() ? PublicationState::PUBLISHED->value : PublicationState::DRAFT->value;

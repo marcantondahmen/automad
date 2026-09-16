@@ -35,17 +35,17 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
-use Automad\Stores\PublicationState;
 use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\History\History;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 use Automad\System\Fields;
 use Automad\System\FileSystem;
 
@@ -316,7 +316,7 @@ class Page {
 		int $level
 	): ?Page {
 		$DataStore = new DataStore($path);
-		$data = $DataStore->getState(empty(Session::getUsername()));
+		$data = $DataStore->getState(!Auth::isAuthenticated());
 
 		if (empty($data)) {
 			return null;

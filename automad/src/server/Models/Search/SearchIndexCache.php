@@ -35,7 +35,7 @@
 
 namespace Automad\Models\Search;
 
-use Automad\Auth\Session\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Models\ComponentCollection;
@@ -78,7 +78,7 @@ class SearchIndexCache {
 
 		$Cache = new Cache();
 		$siteMTime = $Cache->getSiteMTime();
-		$path = Session::getUsername() ? SearchIndexCache::FILE_ADMIN : SearchIndexCache::FILE_PUBLIC;
+		$path = Auth::isAuthenticated() ? SearchIndexCache::FILE_ADMIN : SearchIndexCache::FILE_PUBLIC;
 		$indexMTime = is_readable($path) ? intval(filemtime($path)) : 0;
 
 		Debug::log($path, 'Search index caching path');

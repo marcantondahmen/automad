@@ -35,7 +35,7 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Debug;
 use Automad\Core\PageIndex;
 use Automad\Core\Sitemap;
@@ -61,6 +61,11 @@ class PageCollection {
 	private array $collection = array();
 
 	/**
+	 * Include private pages.
+	 */
+	private bool $includePrivate;
+
+	/**
 	 * An array of existing directories within the base directory (/automad, /config, /pages etc.)
 	 */
 	private array $reservedUrls;
@@ -76,11 +81,6 @@ class PageCollection {
 	private array $takenUrls = array();
 
 	/**
-	 * The username of the currently logged in user or an empty string.
-	 */
-	private string $user;
-
-	/**
 	 * The constructor.
 	 *
 	 * @param Shared $Shared
@@ -88,7 +88,7 @@ class PageCollection {
 	public function __construct(Shared $Shared) {
 		$this->Shared = $Shared;
 		$this->reservedUrls = $this->getReservedUrls();
-		$this->user = Session::getUsername();
+		$this->includePrivate = Auth::isAuthenticated();
 
 		$this->collectPages();
 
@@ -129,8 +129,9 @@ class PageCollection {
 			return;
 		}
 
-		// Stop processing of page data and subdirectories if page is private and nobody is logged in.
-		if ($Page->private && !$this->user) {
+		// Stop processing of page data and subdirectories if page is private
+		// and nobody is logged in or no access token was used.
+		if ($Page->private && !$this->includePrivate) {
 			return;
 		}
 

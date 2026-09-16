@@ -36,7 +36,7 @@
 namespace Automad\Controllers\API;
 
 use Automad\API\Response;
-use Automad\Auth\Session\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Cache;
 use Automad\Core\Request;
 use Automad\Core\Text;
@@ -71,7 +71,7 @@ class ComponentController {
 			return $Response->setError(Text::get('componentsSavingError'));
 		}
 
-		$components = $ComponentStore->getState(empty(Session::getUsername())) ?? array();
+		$components = $ComponentStore->getState(!Auth::isAuthenticated()) ?? array();
 
 		return $Response->setData($components);
 	}

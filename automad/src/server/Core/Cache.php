@@ -36,6 +36,7 @@
 namespace Automad\Core;
 
 use Automad\App;
+use Automad\Auth\Auth;
 use Automad\Auth\Session\Session;
 use Automad\System\FileSystem;
 
@@ -145,7 +146,7 @@ class Cache {
 		$this->objectCacheFile = Cache::FILE_OBJECT_CACHE;
 
 		// Disable page caching for in-page edit mode and define ui cache file.
-		if (Session::getUsername()) {
+		if (Auth::isAuthenticated()) {
 			$this->pageCachingIsEnabled = false;
 			Debug::log('Page cache is disabled during editing.');
 			$this->objectCacheFile = Cache::FILE_OBJECT_API_CACHE;

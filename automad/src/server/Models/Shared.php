@@ -37,7 +37,7 @@ namespace Automad\Models;
 
 use Automad\API\RequestHandler;
 use Automad\App;
-use Automad\Auth\Session\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Cache;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
@@ -75,7 +75,7 @@ class Shared {
 		// Merge defaults with settings from file.
 		$this->data = array_merge(
 			$defaults,
-			$DataStore->getState(empty(Session::getUsername())) ?? array()
+			$DataStore->getState(!Auth::isAuthenticated()) ?? array()
 		);
 
 		// Check whether there is a theme defined in the Shared object data.
