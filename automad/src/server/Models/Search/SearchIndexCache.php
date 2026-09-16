@@ -57,13 +57,31 @@ class SearchIndexCache {
 	const FILE_PUBLIC = AM_DIR_TMP . '/index_public';
 
 	/**
+	 * @var ComponentCollection
+	 */
+	private ComponentCollection $ComponentCollection;
+
+	/**
+	 * @var Page[]
+	 */
+	private array $pages;
+
+	/**
+	 * @var Shared
+	 */
+	private Shared $Shared;
+
+	/**
 	 * The index cache constructor only initializes an instance that can be passed around without doing actual intensive work.
 	 *
 	 * @param Page[] $pages
 	 * @param Shared $Shared
 	 * @param ComponentCollection $ComponentCollection
 	 */
-	public function __construct(private array $pages, private Shared $Shared, private ComponentCollection $ComponentCollection) {
+	public function __construct(array $pages, Shared $Shared, ComponentCollection $ComponentCollection) {
+		$this->pages = $pages;
+		$this->Shared = $Shared;
+		$this->ComponentCollection = $ComponentCollection;
 	}
 
 	/**

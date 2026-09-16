@@ -51,12 +51,24 @@ class SearchIndexEntry {
 	public $fields = array();
 
 	/**
+	 * @var string|null
+	 */
+	public string|null $origUrl;
+
+	/**
+	 * @var string|null
+	 */
+	public string|null $path;
+
+	/**
 	 * The constructor method.
 	 *
-	 * @param ?string $origUrl
-	 * @param ?string $path
+	 * @param string|null $origUrl
+	 * @param string|null $path
 	 */
-	public function __construct(public ?string $origUrl, public ?string $path) {
+	public function __construct(string|null $origUrl, string|null $path) {
+		$this->origUrl = $origUrl;
+		$this->path = $path;
 	}
 
 	/**
