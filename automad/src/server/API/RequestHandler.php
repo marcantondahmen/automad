@@ -66,7 +66,7 @@ class RequestHandler {
 	public static function getResponse(): string {
 		header('Content-Type: application/json; charset=utf-8');
 		Error::setJsonResponseHandler();
-		Request::mergePostData();
+		Request::mergeInputStream();
 
 		$controller = self::routeController(AM_REQUEST);
 		[$class, $method] = explode('::', $controller);

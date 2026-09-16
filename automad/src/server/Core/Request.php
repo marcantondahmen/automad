@@ -48,13 +48,16 @@ class Request {
 	/**
 	 * Merge posted JSON formatted data with the $_POST global.
 	 */
-	public static function mergePostData(): void {
+	public static function mergeInputStream(): void {
 		if (!str_starts_with($_SERVER['CONTENT_TYPE'] ?? '', 'application/json')) {
 			return;
 		}
 
 		$data = json_decode(strval(file_get_contents('php://input')), true);
-		$_POST = array_merge($_POST, $data);
+
+		if (!empty($data) && is_array($data)) {
+			$_POST = array_merge($_POST, $data);
+		}
 	}
 
 	/**
