@@ -49,6 +49,16 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class AccessTokenConfig {
 	/**
+	 * The current class name of the access token config type.
+	 */
+	private const TYPE = 'Automad\Auth\AccessTokenConfig';
+
+	/**
+	 * The replacement for the access token config type class in a serialized string.
+	 */
+	private const TYPE_SERIALIZED = 'O:*:"~"';
+
+	/**
 	 * The issued access tokens.
 	 */
 	public array $tokens = array();
@@ -79,7 +89,9 @@ class AccessTokenConfig {
 	}
 
 	/**
-	 * Load the config or create an empty one.
+	 * Load the config or create an empty one. The class name of a previously saved config
+	 * is replaced with the current class name before unserializing, so that a future rename of
+	 * this class doesn't break already saved config files (see save()).
 	 *
 	 * @return AccessTokenConfig
 	 */
@@ -87,8 +99,14 @@ class AccessTokenConfig {
 		$path = self::getPath();
 
 		if (is_readable($path)) {
+			$serialized = str_replace(
+				self::TYPE_SERIALIZED,
+				'O:' . strlen(self::TYPE) . ':"' . self::TYPE . '"',
+				trim(strval(file_get_contents($path)))
+			);
+
 			try {
-				$AccessTokenConfig = unserialize(trim(strval(file_get_contents($path))));
+				$AccessTokenConfig = unserialize($serialized);
 
 				if ($AccessTokenConfig instanceof AccessTokenConfig) {
 					return $AccessTokenConfig;
@@ -115,12 +133,19 @@ class AccessTokenConfig {
 	}
 
 	/**
-	 * Save the config.
+	 * Save the config. The class name is replaced with a placeholder in order to be able to
+	 * refactor this class in the future easily, without breaking already saved config files.
 	 *
 	 * @return bool
 	 */
 	public function save(): bool {
-		return FileSystem::write(self::getPath(), serialize($this));
+		$serialized = str_replace(
+			'O:' . strlen(self::TYPE) . ':"' . self::TYPE . '"',
+			self::TYPE_SERIALIZED,
+			serialize($this)
+		);
+
+		return FileSystem::write(self::getPath(), $serialized);
 	}
 
 	/**
