@@ -39,7 +39,7 @@ use Automad\API\Response;
 use Automad\Core\Cache;
 use Automad\Core\Request;
 use Automad\Core\Text;
-use Automad\System\Ai\ProviderCollection;
+use Automad\System\Ai\Assistance\ProviderCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

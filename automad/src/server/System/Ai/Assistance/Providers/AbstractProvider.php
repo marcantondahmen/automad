@@ -33,12 +33,12 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Providers;
+namespace Automad\System\Ai\Assistance\Providers;
 
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
-use Automad\System\Ai\ProviderConfig;
+use Automad\System\Ai\Assistance\ProviderConfig;
 use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

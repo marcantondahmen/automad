@@ -36,13 +36,13 @@
 namespace Automad\Controllers;
 
 use Automad\Auth\AccessToken;
-use Automad\System\Ai\McpServer;
+use Automad\System\Ai\Mcp\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  * The MCP controller class. Authenticates and gates requests to the MCP resource endpoint,
- * then delegates the actual MCP JSON-RPC protocol handling to McpServer.
+ * then delegates the actual MCP JSON-RPC protocol handling to Automad\System\Ai\Mcp\Server.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -70,8 +70,8 @@ class McpController {
 			return '';
 		}
 
-		$McpServer = new McpServer();
-		$result = $McpServer->handle(strval(file_get_contents('php://input')), getallheaders() ?: array());
+		$Server = new Server();
+		$result = $Server->handle(strval(file_get_contents('php://input')), getallheaders() ?: array());
 
 		http_response_code($result['status']);
 

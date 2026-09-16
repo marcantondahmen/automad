@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai;
+namespace Automad\System\Ai\Mcp;
 
 use Mcp\Server\Transport\BaseTransport;
 use Symfony\Component\Uid\Uuid;
@@ -55,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class McpTransport extends BaseTransport {
+class Transport extends BaseTransport {
 	const SESSION_HEADER = 'Mcp-Session-Id';
 
 	private string|null $immediateResponse = null;

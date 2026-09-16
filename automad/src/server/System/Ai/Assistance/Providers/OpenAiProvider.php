@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Providers;
+namespace Automad\System\Ai\Assistance\Providers;
 
 use Automad\Core\Debug;
 use Automad\Core\Messenger;

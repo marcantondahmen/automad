@@ -33,11 +33,11 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai;
+namespace Automad\System\Ai\Assistance;
 
-use Automad\System\Ai\Providers\AbstractProvider;
-use Automad\System\Ai\Providers\ClaudeProvider;
-use Automad\System\Ai\Providers\OpenAiProvider;
+use Automad\System\Ai\Assistance\Providers\AbstractProvider;
+use Automad\System\Ai\Assistance\Providers\ClaudeProvider;
+use Automad\System\Ai\Assistance\Providers\OpenAiProvider;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
