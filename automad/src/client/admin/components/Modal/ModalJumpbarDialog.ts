@@ -105,7 +105,7 @@ const settingsData = (): JumpbarItemData[] => {
 	const data: JumpbarItemData[] = [
 		item(Section.cache, 'systemCache', 'device-ssd'),
 		item(Section.users, 'systemUsers', 'person-badge'),
-		item(Section.ai, 'systemAi', 'robot'),
+		item(Section.aiAssistance, 'systemAi', 'robot'),
 		item(Section.mcp, 'systemMcp', 'plug'),
 		item(Section.mail, 'systemMail', 'envelope'),
 		item(Section.accessTokens, 'systemAccessTokens', 'key'),
@@ -371,7 +371,7 @@ class ModalJumpbarDialogComponent extends AutocompleteComponent {
 			this.input.value
 		);
 
-		this.maxItems = Math.floor((window.innerHeight - 150) / 46);
+		this.maxItems = Math.floor((window.innerHeight - 50) / 46);
 
 		super.update();
 	}

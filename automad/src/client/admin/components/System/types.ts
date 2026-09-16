@@ -76,7 +76,7 @@ export interface User {
 
 export interface SystemSettings {
 	accessTokens: AccessTokenSettings;
-	ai: AiSettings;
+	aiAssistance: AiSettings;
 	cache: CacheSettings;
 	debug: DebugSettings;
 	feed: FeedSettings;

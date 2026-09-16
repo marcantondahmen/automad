@@ -47,7 +47,7 @@ export class AiAssistance extends BasePlugin {
 	 * The actual plugin implementation.
 	 */
 	protected init(): void {
-		if (!App.system.ai.enabled) {
+		if (!App.system.aiAssistance.enabled) {
 			return;
 		}
 

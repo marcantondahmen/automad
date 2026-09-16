@@ -59,7 +59,7 @@ class SystemAiAssistanceIndicatorComponent extends BaseActivationIndicatorCompon
 	 * The state getter.
 	 */
 	protected get state(): boolean | number {
-		return App.system.ai.enabled;
+		return App.system.aiAssistance.enabled;
 	}
 }
 

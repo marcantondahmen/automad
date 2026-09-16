@@ -137,7 +137,7 @@ export class AiRuntime {
 	 * @static
 	 */
 	static get(): AiRuntime {
-		if (!App.system.ai.enabled) {
+		if (!App.system.aiAssistance.enabled) {
 			return;
 		}
 

@@ -53,11 +53,11 @@ class AiAssistanceEnableComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		const aiAssitanceEnabled = new Binding('aiAssitanceEnabled', {
-			initial: App.system.ai.enabled,
+			initial: App.system.aiAssistance.enabled,
 		});
 
 		this.listen(window, EventName.appStateChange, () => {
-			aiAssitanceEnabled.value = App.system.ai.enabled;
+			aiAssitanceEnabled.value = App.system.aiAssistance.enabled;
 		});
 
 		createField(
@@ -65,7 +65,7 @@ class AiAssistanceEnableComponent extends BaseComponent {
 			this,
 			{
 				key: 'aiAssitanceEnabled',
-				value: App.system.ai.enabled,
+				value: App.system.aiAssistance.enabled,
 				name: 'aiAssitanceEnabled',
 				label: App.text('systemAi'),
 			},

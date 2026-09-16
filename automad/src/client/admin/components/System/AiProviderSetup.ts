@@ -116,7 +116,7 @@ const createValidationBadge = async (
 		badge.innerHTML = html`<i class="${cls} ${CSS.iconFixedWidth}"></i>`;
 	};
 
-	if (App.system.ai.enabled) {
+	if (App.system.aiAssistance.enabled) {
 		setTimeout(validate, 5000);
 	}
 };
@@ -142,11 +142,11 @@ class AiProviderSetupComponent extends BaseComponent {
 	 * Render all provider cards.
 	 */
 	private render(): void {
-		if (!App.system.ai.enabled) {
+		if (!App.system.aiAssistance.enabled) {
 			return;
 		}
 
-		const providers = App.system.ai.providers;
+		const providers = App.system.aiAssistance.providers;
 
 		this.innerHTML = '';
 

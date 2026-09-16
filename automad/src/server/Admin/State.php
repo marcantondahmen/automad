@@ -117,7 +117,7 @@ class State {
 				'accessTokens' => array(
 					'count' => count($AccessTokenConfig->tokens)
 				),
-				'ai' => array(
+				'aiAssistance' => array(
 					'enabled' => AM_AI_ASSISTANCE_ENABLED,
 					'instructions' => AM_AI_ASSISTANCE_INSTRUCTIONS,
 					'activeProviderId' => AM_AI_PROVIDER_ID,

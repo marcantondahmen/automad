@@ -34,7 +34,7 @@
 
 export const enum Section {
 	accessTokens = 'access-tokens',
-	ai = 'ai',
+	aiAssistance = 'ai-assistance',
 	cache = 'cache',
 	config = 'config',
 	customizations = 'customizations',
