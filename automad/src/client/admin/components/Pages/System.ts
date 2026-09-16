@@ -50,6 +50,7 @@ import { renderDebugSection } from './Partials/System/Debug';
 import { renderFeedSection } from './Partials/System/Feed';
 import { renderI18nSection } from './Partials/System/I18n';
 import { renderLanguageSection } from './Partials/System/Language';
+import { renderMcpSection } from './Partials/System/Mcp';
 import { renderUpdateSection } from './Partials/System/Update';
 import { renderUsersSection } from './Partials/System/Users';
 import { renderMailSection } from './Partials/System/Mail';
@@ -104,6 +105,14 @@ const getSystemSections = (): SystemSectionData[] => {
 			state: '<am-system-ai-assistance-indicator></am-system-ai-assistance-indicator>',
 			render: renderAiSection,
 			narrowIcon: false,
+		},
+		{
+			section: Section.mcp,
+			icon: 'plug',
+			title: App.text('systemMcp'),
+			info: App.text('systemMcpCardInfo'),
+			state: '<am-system-mcp-indicator></am-system-mcp-indicator>',
+			render: renderMcpSection,
 		},
 		{
 			section: Section.mail,
@@ -260,10 +269,10 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 		return html`
 			<am-switcher-section name="${Section.overview}">
 				<div class="${CSS.grid}" style="--min: 17rem;">
-					${this.renderOverviewCards(this.sectionData.slice(0, 4))}
+					${this.renderOverviewCards(this.sectionData.slice(0, 2))}
 				</div>
 				<div class="${CSS.grid}" style="--min: 13rem;">
-					${this.renderOverviewCards(this.sectionData.slice(4, 10))}
+					${this.renderOverviewCards(this.sectionData.slice(2))}
 				</div>
 			</am-switcher-section>
 		`;

@@ -64,6 +64,10 @@ interface FeedSettings {
 	fields: string;
 }
 
+interface McpSettings {
+	enabled: Enabled;
+}
+
 export interface User {
 	name: string;
 	email: string;
@@ -78,6 +82,7 @@ export interface SystemSettings {
 	feed: FeedSettings;
 	i18n: Enabled;
 	mail: MailConfig;
+	mcp: McpSettings;
 	translation: string;
 	users: User[];
 	tempDirectory: string;

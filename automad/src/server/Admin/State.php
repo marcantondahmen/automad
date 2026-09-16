@@ -146,6 +146,9 @@ class State {
 					'smtpPort' => $MailConfig->smtpPort,
 					'smtpPasswordIsSet' => strlen($MailConfig->smtpPassword) > 0
 				),
+				'mcp' => array(
+					'enabled' => AM_MCP_SERVER_ENABLED
+				),
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection())
 			),

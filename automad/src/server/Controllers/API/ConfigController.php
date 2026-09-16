@@ -101,6 +101,11 @@ class ConfigController {
 
 				break;
 
+			case 'mcp':
+				$ConfigFile->set('AM_MCP_SERVER_ENABLED', !empty(Request::post('mcpEnabled')));
+
+				break;
+
 			case 'translation':
 				$ConfigFile->set('AM_FILE_UI_TRANSLATION', Request::post('translation'));
 				$Response->setReload(true);

@@ -106,6 +106,7 @@ const settingsData = (): JumpbarItemData[] => {
 		item(Section.cache, 'systemCache', 'device-ssd'),
 		item(Section.users, 'systemUsers', 'person-badge'),
 		item(Section.ai, 'systemAi', 'robot'),
+		item(Section.mcp, 'systemMcp', 'plug'),
 		item(Section.mail, 'systemMail', 'envelope'),
 		item(Section.accessTokens, 'systemAccessTokens', 'key'),
 		item(Section.feed, 'systemRssFeed', 'rss'),

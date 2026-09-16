@@ -306,7 +306,8 @@ class Routes {
 	private static function registerMcpRoute(Router $Router): void {
 		$Router->register(
 			'/_mcp',
-			array(McpController::class, 'render')
+			array(McpController::class, 'render'),
+			AM_MCP_SERVER_ENABLED
 		);
 	}
 
