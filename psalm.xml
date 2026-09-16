@@ -19,6 +19,7 @@
 		<MissingOverrideAttribute errorLevel="suppress" />
 		<MoreSpecificReturnType errorLevel="suppress" />
 		<RiskyTruthyFalsyComparison errorLevel="suppress" />
+		<TooManyTemplateParams errorLevel="suppress" />
 		<UndefinedConstant errorLevel="suppress" />
 		<UnresolvableInclude errorLevel="suppress" />
 		<UnsupportedPropertyReferenceUsage errorLevel="suppress" />
