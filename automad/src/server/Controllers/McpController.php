@@ -36,21 +36,19 @@
 namespace Automad\Controllers;
 
 use Automad\Auth\AccessToken;
+use Automad\System\Ai\McpServer;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The MCP controller class. Implements a minimal MCP (Model Context Protocol) JSON-RPC
- * handshake over the Streamable HTTP transport: `initialize`, `notifications/initialized`,
- * and an empty `tools/list`. Real page CRUD tools are added in later sub-features.
+ * The MCP controller class. Authenticates and gates requests to the MCP resource endpoint,
+ * then delegates the actual MCP JSON-RPC protocol handling to McpServer.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
 class McpController {
-	const PROTOCOL_VERSION = '2025-06-18';
-
 	/**
 	 * Handle a request to the MCP resource endpoint. Requires a valid, previously issued
 	 * Bearer access token (created through the dashboard's Access Tokens system section); returns a
@@ -72,82 +70,16 @@ class McpController {
 			return '';
 		}
 
-		$message = json_decode(strval(file_get_contents('php://input')), true);
+		$McpServer = new McpServer();
+		$result = $McpServer->handle(strval(file_get_contents('php://input')), getallheaders() ?: array());
 
-		if (!is_array($message) || !isset($message['method'])) {
-			return self::jsonRpcError(null, -32700, 'Parse error', 400);
+		http_response_code($result['status']);
+
+		foreach ($result['headers'] as $name => $value) {
+			header("$name: $value");
 		}
 
-		$id = $message['id'] ?? null;
-
-		// A message without an id is a notification, no response is expected.
-		if (!array_key_exists('id', $message)) {
-			http_response_code(202);
-
-			return '';
-		}
-
-		switch ($message['method']) {
-			case 'initialize':
-				return self::jsonRpcResult($id, array(
-					'protocolVersion' => self::PROTOCOL_VERSION,
-					'capabilities' => array('tools' => new \stdClass()),
-					'serverInfo' => array(
-						'name' => 'Automad',
-						'version' => AM_VERSION
-					)
-				));
-			case 'tools/list':
-				return self::jsonRpcResult($id, array('tools' => array()));
-			default:
-				return self::jsonRpcError($id, -32601, 'Method not found');
-		}
-	}
-
-	/**
-	 * Encode a payload as JSON, set the response code and the JSON content type header.
-	 *
-	 * @param array $payload
-	 * @param int $httpCode
-	 * @return string
-	 */
-	private static function json(array $payload, int $httpCode = 200): string {
-		http_response_code($httpCode);
-		header('Content-Type: application/json; charset=utf-8');
-
-		return strval(json_encode($payload));
-	}
-
-	/**
-	 * Build a JSON-RPC error response.
-	 *
-	 * @param mixed $id
-	 * @param int $code
-	 * @param string $message
-	 * @param int $httpCode
-	 * @return string
-	 */
-	private static function jsonRpcError(mixed $id, int $code, string $message, int $httpCode = 200): string {
-		return self::json(array(
-			'jsonrpc' => '2.0',
-			'id' => $id,
-			'error' => array('code' => $code, 'message' => $message)
-		), $httpCode);
-	}
-
-	/**
-	 * Build a JSON-RPC success response.
-	 *
-	 * @param mixed $id
-	 * @param array $result
-	 * @return string
-	 */
-	private static function jsonRpcResult(mixed $id, array $result): string {
-		return self::json(array(
-			'jsonrpc' => '2.0',
-			'id' => $id,
-			'result' => $result
-		));
+		return $result['body'];
 	}
 
 	/**
@@ -156,8 +88,10 @@ class McpController {
 	 * @return string
 	 */
 	private static function unauthorized(): string {
+		http_response_code(401);
 		header('WWW-Authenticate: Bearer');
+		header('Content-Type: application/json; charset=utf-8');
 
-		return self::json(array('error' => 'invalid_token'), 401);
+		return strval(json_encode(array('error' => 'invalid_token')));
 	}
 }
