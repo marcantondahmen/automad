@@ -33,14 +33,15 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp;
+namespace Automad\System\Ai\Mcp\Tools;
 
+use Automad\Core\Str;
 use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The interface for MCP tools. Implementing classes are discovered automatically by
+ * The abstract class for MCP tools. Derived classes are discovered automatically by
  * Automad\System\Ai\Mcp\Provider from the Automad\System\Ai\Mcp\Tools namespace and
  * registered with the MCP server.
  *
@@ -48,20 +49,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-interface Tool {
+abstract class AbstractTool {
 	/**
 	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
 	 *
 	 * @return ToolAnnotations|null
 	 */
-	public function getAnnotations(): ToolAnnotations|null;
+	public function getAnnotations(): ToolAnnotations|null {
+		return null;
+	}
 
 	/**
 	 * The tool's description.
 	 *
-	 * @return string|null
+	 * @return string
 	 */
-	public function getDescription(): string|null;
+	abstract public function getDescription(): string;
 
 	/**
 	 * The tool's main handler. Its parameters are reflected on to derive the tool's input schema
@@ -69,18 +72,21 @@ interface Tool {
 	 *
 	 * @return callable
 	 */
-	public function getHandler(): callable;
+	abstract public function getHandler(): callable;
+
 	/**
 	 * The tool's name, as used by MCP clients to call it.
 	 *
 	 * @return string
 	 */
-	public function getName(): string;
+	public function getName(): string {
+		return Str::sanitize($this->getTitle());
+	}
 
 	/**
 	 * The tool's human-readable title.
 	 *
-	 * @return string|null
+	 * @return string
 	 */
-	public function getTitle(): string|null;
+	abstract public function getTitle(): string;
 }

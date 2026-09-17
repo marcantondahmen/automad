@@ -35,6 +35,8 @@
 
 namespace Automad\System\Ai\Mcp;
 
+use Automad\System\Ai\Mcp\Resources\AbstractResource;
+use Automad\System\Ai\Mcp\Tools\AbstractTool;
 use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -63,11 +65,11 @@ class Provider {
 	/**
 	 * Return all discovered resources.
 	 *
-	 * @return resource[]
+	 * @return AbstractResource[]
 	 */
 	public static function getResources(): array {
 		if (empty(self::$resources)) {
-			self::$resources = self::instantiate(self::discover('Resources', Resource::class));
+			self::$resources = self::instantiate(self::discover('Resources', AbstractResource::class));
 		}
 
 		return self::$resources;
@@ -76,11 +78,11 @@ class Provider {
 	/**
 	 * Return all discovered tools.
 	 *
-	 * @return Tool[]
+	 * @return AbstractTool[]
 	 */
 	public static function getTools(): array {
 		if (empty(self::$tools)) {
-			self::$tools = self::instantiate(self::discover('Tools', Tool::class));
+			self::$tools = self::instantiate(self::discover('Tools', AbstractTool::class));
 		}
 
 		return self::$tools;
