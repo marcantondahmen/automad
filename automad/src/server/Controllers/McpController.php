@@ -58,9 +58,7 @@ class McpController {
 	 * @return string
 	 */
 	public static function render(): string {
-		$tokenRecord = AccessToken::verifyRequest();
-
-		if (!$tokenRecord) {
+		if (!AccessToken::verifyRequest()) {
 			return self::unauthorized();
 		}
 

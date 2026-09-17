@@ -76,9 +76,9 @@ class AccessTokenConfig {
 	 * Find a token by its hash.
 	 *
 	 * @param string $hash
-	 * @return array|null
+	 * @return string|null
 	 */
-	public function findTokenByHash(string $hash): array|null {
+	public function findTokenByHash(string $hash): string|null {
 		foreach ($this->tokens as $token) {
 			if (hash_equals($token['tokenHash'], $hash)) {
 				return $token;

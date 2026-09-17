@@ -74,16 +74,16 @@ class AccessToken {
 	/**
 	 * Verify the Bearer access token carried by the current request.
 	 *
-	 * @return array|null the matching token record, or null if the request doesn't carry a valid token
+	 * @return bool the matching token record, or null if the request doesn't carry a valid token
 	 */
-	public static function verifyRequest(): array|null {
+	public static function verifyRequest(): bool {
 		$token = self::getBearerToken();
 
 		if (!$token) {
-			return null;
+			return false;
 		}
 
-		return AccessTokenConfig::load()->findTokenByHash(hash('sha256', $token));
+		return !empty(AccessTokenConfig::load()->findTokenByHash(hash('sha256', $token)));
 	}
 
 	/**

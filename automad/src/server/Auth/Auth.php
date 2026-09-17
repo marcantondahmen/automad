@@ -59,7 +59,7 @@ class Auth {
 		}
 
 		if (AM_MCP_SERVER_ENABLED) {
-			return (bool) AccessToken::verifyRequest();
+			return AccessToken::verifyRequest();
 		}
 
 		return false;
