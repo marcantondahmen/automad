@@ -82,12 +82,24 @@ class Server {
 		foreach (Provider::getResources() as $Resource) {
 			$Builder->addResource(
 				handler: $Resource->getHandler(),
-				uri: 'automad://' . strval($Resource->getName()),
+				uri: 'automad://' . $Resource->getName(),
 				name: $Resource->getName(),
 				title: $Resource->getTitle(),
 				description: $Resource->getDescription(),
 				mimeType: $Resource->getMimeType(),
 				annotations: $Resource->getAnnotations()
+			);
+		}
+
+		foreach (Provider::getResourceTemplates() as $ResourceTemplate) {
+			$Builder->addResourceTemplate(
+				handler: $ResourceTemplate->getHandler(),
+				uriTemplate: 'automad://' . $ResourceTemplate->getUriTemplate(),
+				name: $ResourceTemplate->getName(),
+				title: $ResourceTemplate->getTitle(),
+				description: $ResourceTemplate->getDescription(),
+				mimeType: $ResourceTemplate->getMimeType(),
+				annotations: $ResourceTemplate->getAnnotations()
 			);
 		}
 

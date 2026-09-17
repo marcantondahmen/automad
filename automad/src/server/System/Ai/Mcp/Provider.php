@@ -36,6 +36,7 @@
 namespace Automad\System\Ai\Mcp;
 
 use Automad\System\Ai\Mcp\Resources\AbstractResource;
+use Automad\System\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
 use Automad\System\Ai\Mcp\Tools\AbstractTool;
 use Automad\System\FileSystem;
 
@@ -58,6 +59,11 @@ class Provider {
 	private static array $resources = array();
 
 	/**
+	 * The array of discovered resource template instances.
+	 */
+	private static array $resourceTemplates = array();
+
+	/**
 	 * The array of discovered tool instances.
 	 */
 	private static array $tools = array();
@@ -73,6 +79,19 @@ class Provider {
 		}
 
 		return self::$resources;
+	}
+
+	/**
+	 * Return all discovered resources.
+	 *
+	 * @return AbstractResourceTemplate[]
+	 */
+	public static function getResourceTemplates(): array {
+		if (empty(self::$resourceTemplates)) {
+			self::$resourceTemplates = self::instantiate(self::discover('ResourceTemplates', AbstractResourceTemplate::class));
+		}
+
+		return self::$resourceTemplates;
 	}
 
 	/**

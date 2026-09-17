@@ -35,50 +35,46 @@
 
 namespace Automad\System\Ai\Mcp\Resources;
 
-use Mcp\Schema\Annotations;
+use Automad\Core\Automad;
+use Automad\Models\PageCollection;
+use Automad\Models\Shared;
+use Automad\System\Ai\Mcp\ResourceId;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract class for MCP resources. Derived classes are discovered automatically by
- * Automad\System\Ai\Mcp\Provider from the Automad\System\Ai\Mcp\Resources namespace and
- * registered with the MCP server.
+ * All pages resource.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractResource {
+class AllPages extends AbstractResource {
 	/**
-	 * The resource's annotations, hinting at its intended audience, priority and last modification.
-	 *
-	 * @return Annotations|null
+	 * @return string
 	 */
-	public function getAnnotations(): Annotations|null {
-		return null;
+	public function getDescription(): string {
+		return 'A collection of all public and private pages. Use the page uri that is associated with a page in order to get the entire page content.';
 	}
 
 	/**
-	 * The resource's description.
-	 *
-	 * @return string
-	 */
-	abstract public function getDescription(): string|null;
-
-	/**
-	 * The resource's main handler, returning its content when read.
-	 *
 	 * @return callable
 	 */
-	abstract public function getHandler(): callable;
+	public function getHandler(): callable {
+		return function () {
+			$pages = array();
+			$PageCollection = new PageCollection(new Shared());
+			$Automad = Automad::fromCache();
 
-	/**
-	 * The resource's MIME type.
-	 *
-	 * @return string
-	 */
-	public function getMimeType(): string {
-		return 'application/json';
+			foreach ($Automad->getPages() as $Page) {
+				$id = ResourceId::encode($Page->origUrl);
+				$uri = "automad://page/$id";
+				$pages[] = array('id' => $id, 'uri' => $uri, 'title' =>  $Page->get(Fields::TITLE), 'url' => $Page->origUrl);
+			}
+
+			return $pages;
+		};
 	}
 
 	/**
@@ -86,12 +82,14 @@ abstract class AbstractResource {
 	 *
 	 * @return string
 	 */
-	abstract public function getName(): string;
+	public function getName(): string {
+		return 'pages';
+	}
 
 	/**
-	 * The resource's human-readable title.
-	 *
 	 * @return string
 	 */
-	abstract public function getTitle(): string;
+	public function getTitle(): string {
+		return 'All pages';
+	}
 }

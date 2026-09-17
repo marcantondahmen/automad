@@ -35,50 +35,37 @@
 
 namespace Automad\System\Ai\Mcp\Resources;
 
-use Mcp\Schema\Annotations;
+use Automad\Core\Automad;
+use Automad\System\Ai\Mcp\ResourceId;
+use Automad\System\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract class for MCP resources. Derived classes are discovered automatically by
- * Automad\System\Ai\Mcp\Provider from the Automad\System\Ai\Mcp\Resources namespace and
- * registered with the MCP server.
+ * The page template.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractResource {
+class Page extends AbstractResourceTemplate {
 	/**
-	 * The resource's annotations, hinting at its intended audience, priority and last modification.
-	 *
-	 * @return Annotations|null
+	 * @return string
 	 */
-	public function getAnnotations(): Annotations|null {
-		return null;
+	public function getDescription(): string {
+		return 'A single page that can be accessed by an URI provided in the automad://pages resource.';
 	}
 
 	/**
-	 * The resource's description.
-	 *
-	 * @return string
-	 */
-	abstract public function getDescription(): string|null;
-
-	/**
-	 * The resource's main handler, returning its content when read.
-	 *
 	 * @return callable
 	 */
-	abstract public function getHandler(): callable;
+	public function getHandler(): callable {
+		return function (string $page_id) {
+			$url = ResourceId::decode($page_id);
+			$Automad = Automad::fromCache();
 
-	/**
-	 * The resource's MIME type.
-	 *
-	 * @return string
-	 */
-	public function getMimeType(): string {
-		return 'application/json';
+			return array_merge(array('id' => $page_id), $Automad->getPage($url)->data ?? array());
+		};
 	}
 
 	/**
@@ -86,12 +73,23 @@ abstract class AbstractResource {
 	 *
 	 * @return string
 	 */
-	abstract public function getName(): string;
+	public function getName(): string {
+		return 'page';
+	}
 
 	/**
-	 * The resource's human-readable title.
+	 * @return string
+	 */
+	public function getTitle(): string {
+		return 'Page';
+	}
+
+	/**
+	 * The template's uri.
 	 *
 	 * @return string
 	 */
-	abstract public function getTitle(): string;
+	public function getUriTemplate(): string {
+		return 'page/{page_id}';
+	}
 }
