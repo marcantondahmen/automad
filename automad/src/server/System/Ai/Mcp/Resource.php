@@ -50,11 +50,32 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 interface Resource {
 	/**
-	 * The resource's URI, as used by MCP clients to read it.
+	 * The resource's annotations, hinting at its intended audience, priority and last modification.
 	 *
-	 * @return string
+	 * @return Annotations|null
 	 */
-	public function getUri(): string;
+	public function getAnnotations(): Annotations|null;
+
+	/**
+	 * The resource's description.
+	 *
+	 * @return string|null
+	 */
+	public function getDescription(): string|null;
+
+	/**
+	 * The resource's main handler, returning its content when read.
+	 *
+	 * @return callable
+	 */
+	public function getHandler(): callable;
+
+	/**
+	 * The resource's MIME type.
+	 *
+	 * @return string|null
+	 */
+	public function getMimeType(): string|null;
 
 	/**
 	 * The resource's name.
@@ -69,32 +90,4 @@ interface Resource {
 	 * @return string|null
 	 */
 	public function getTitle(): string|null;
-
-	/**
-	 * The resource's description.
-	 *
-	 * @return string|null
-	 */
-	public function getDescription(): string|null;
-
-	/**
-	 * The resource's MIME type.
-	 *
-	 * @return string|null
-	 */
-	public function getMimeType(): string|null;
-
-	/**
-	 * The resource's annotations, hinting at its intended audience, priority and last modification.
-	 *
-	 * @return Annotations|null
-	 */
-	public function getAnnotations(): Annotations|null;
-
-	/**
-	 * The resource's main handler, returning its content when read.
-	 *
-	 * @return callable
-	 */
-	public function getHandler(): callable;
 }

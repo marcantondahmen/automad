@@ -50,6 +50,27 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 interface Tool {
 	/**
+	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
+	 *
+	 * @return ToolAnnotations|null
+	 */
+	public function getAnnotations(): ToolAnnotations|null;
+
+	/**
+	 * The tool's description.
+	 *
+	 * @return string|null
+	 */
+	public function getDescription(): string|null;
+
+	/**
+	 * The tool's main handler. Its parameters are reflected on to derive the tool's input schema
+	 * and to map incoming call arguments by name.
+	 *
+	 * @return callable
+	 */
+	public function getHandler(): callable;
+	/**
 	 * The tool's name, as used by MCP clients to call it.
 	 *
 	 * @return string
@@ -62,26 +83,4 @@ interface Tool {
 	 * @return string|null
 	 */
 	public function getTitle(): string|null;
-
-	/**
-	 * The tool's description.
-	 *
-	 * @return string|null
-	 */
-	public function getDescription(): string|null;
-
-	/**
-	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
-	 *
-	 * @return ToolAnnotations|null
-	 */
-	public function getAnnotations(): ToolAnnotations|null;
-
-	/**
-	 * The tool's main handler. Its parameters are reflected on to derive the tool's input schema
-	 * and to map incoming call arguments by name.
-	 *
-	 * @return callable
-	 */
-	public function getHandler(): callable;
 }

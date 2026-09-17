@@ -51,14 +51,27 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Provider {
 	/**
+	 * The array of discovered resource instances.
+	 */
+	private static array $resources = array();
+
+	/**
 	 * The array of discovered tool instances.
 	 */
 	private static array $tools = array();
 
 	/**
-	 * The array of discovered resource instances.
+	 * Return all discovered resources.
+	 *
+	 * @return resource[]
 	 */
-	private static array $resources = array();
+	public static function getResources(): array {
+		if (empty(self::$resources)) {
+			self::$resources = self::instantiate(self::discover('Resources', Resource::class));
+		}
+
+		return self::$resources;
+	}
 
 	/**
 	 * Return all discovered tools.
@@ -71,19 +84,6 @@ class Provider {
 		}
 
 		return self::$tools;
-	}
-
-	/**
-	 * Return all discovered resources.
-	 *
-	 * @return Resource[]
-	 */
-	public static function getResources(): array {
-		if (empty(self::$resources)) {
-			self::$resources = self::instantiate(self::discover('Resources', Resource::class));
-		}
-
-		return self::$resources;
 	}
 
 	/**

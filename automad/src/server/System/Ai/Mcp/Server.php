@@ -82,7 +82,7 @@ class Server {
 		foreach (Provider::getResources() as $Resource) {
 			$Builder->addResource(
 				handler: $Resource->getHandler(),
-				uri: $Resource->getUri(),
+				uri: 'automad://' . strval($Resource->getName()),
 				name: $Resource->getName(),
 				title: $Resource->getTitle(),
 				description: $Resource->getDescription(),
