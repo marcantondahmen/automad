@@ -50,6 +50,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class McpController {
+	const string ROUTE = '/_mcp';
+
 	/**
 	 * Handle a request to the MCP resource endpoint. Requires a valid, previously issued
 	 * Bearer access token (created through the dashboard's Access Tokens system section); returns a
