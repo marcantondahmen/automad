@@ -168,15 +168,6 @@ export class App {
 	}
 
 	/**
-	 * The feed URL.
-	 *
-	 * @static
-	 */
-	static get feedURL(): string {
-		return App.getState('feed');
-	}
-
-	/**
 	 * The files object.
 	 *
 	 * @static

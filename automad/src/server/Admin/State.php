@@ -100,7 +100,6 @@ class State {
 		$data = array(
 			'allowedFileTypes' => FileUtils::allowedFileTypes(),
 			'contentFields' => $this->getContentFields($themes),
-			'feed' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL,
 			'mainTheme' => $Automad->Shared->get(Fields::THEME),
 			'pages' => $Automad->getNavigationMetaData(),
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
@@ -134,7 +133,8 @@ class State {
 				),
 				'feed' => array(
 					'enabled' => AM_FEED_ENABLED,
-					'fields' => Parse::csv(AM_FEED_FIELDS)
+					'fields' => Parse::csv(AM_FEED_FIELDS),
+					'url' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL
 				),
 				'i18n' => AM_I18N_ENABLED,
 				'mail' => array(
@@ -147,7 +147,8 @@ class State {
 					'smtpPasswordIsSet' => strlen($MailConfig->smtpPassword) > 0
 				),
 				'mcp' => array(
-					'enabled' => AM_MCP_SERVER_ENABLED
+					'enabled' => AM_MCP_SERVER_ENABLED,
+					'url' => AM_SERVER . AM_BASE_INDEX . AM_MCP_SERVER_URL,
 				),
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection())

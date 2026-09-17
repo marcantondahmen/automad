@@ -39,13 +39,12 @@ use Automad\Admin\Dashboard;
 use Automad\API\RequestHandler;
 use Automad\API\Response;
 use Automad\Auth\Session\Session;
+use Automad\Controllers\FeedController;
 use Automad\Controllers\ImageController;
 use Automad\Controllers\McpController;
 use Automad\Controllers\PageController;
-use Automad\Core\Cache;
 use Automad\Core\Feed;
 use Automad\Core\I18n;
-use Automad\Core\Parse;
 use Automad\Core\Router;
 use Automad\Models\UserCollection;
 use Automad\System\SetupWizard;
@@ -278,22 +277,7 @@ class Routes {
 	private static function registerFeedRoute(Router $Router): void {
 		$Router->register(
 			AM_FEED_URL,
-			function () {
-				header('Content-Type: application/rss+xml; charset=UTF-8');
-
-				$Cache = new Cache();
-
-				if ($Cache->pageCacheIsApproved()) {
-					return $Cache->readPageFromCache();
-				}
-
-				$Feed = new Feed(
-					$Cache->getAutomad(),
-					Parse::csv(AM_FEED_FIELDS)
-				);
-
-				return $Feed->get();
-			},
+			array(FeedController::class, 'render'),
 			AM_FEED_ENABLED
 		);
 	}
@@ -305,7 +289,7 @@ class Routes {
 	 */
 	private static function registerMcpRoute(Router $Router): void {
 		$Router->register(
-			McpController::ROUTE,
+			AM_MCP_SERVER_URL,
 			array(McpController::class, 'render'),
 			AM_MCP_SERVER_ENABLED
 		);

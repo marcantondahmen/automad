@@ -62,10 +62,12 @@ interface DebugSettings {
 interface FeedSettings {
 	enabled: Enabled;
 	fields: string;
+	url: string;
 }
 
 interface McpSettings {
 	enabled: Enabled;
+	url: string;
 }
 
 export interface User {

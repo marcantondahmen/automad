@@ -74,6 +74,7 @@ class Config {
 		'AM_MAINTENANCE_MODE_ENABLED',
 		'AM_MAINTENANCE_MODE_TEXT',
 		'AM_MCP_SERVER_ENABLED',
+		'AM_MCP_SERVER_URL',
 		'AM_OPEN_BASEDIR_ENABLED',
 		'AM_PASSWORD_MIN_LENGTH',
 		'AM_PASSWORD_REQUIRED_CHARS'
@@ -249,6 +250,7 @@ class Config {
 
 		// MCP server.
 		self::set('AM_MCP_SERVER_ENABLED', true);
+		self::set('AM_MCP_SERVER_URL', '/mcp');
 
 		// The path where rate limiter data is stored.
 		self::set('AM_LOGIN_RATE_LIMITER_PATH', AM_DIR_TMP . '/login_rate_limiter');

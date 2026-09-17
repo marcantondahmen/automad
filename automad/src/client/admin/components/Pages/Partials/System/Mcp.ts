@@ -48,7 +48,7 @@ import { Section } from '@/common';
  * @returns the rendered HTML
  */
 export const renderMcpSection = (): string => {
-	const mcpUrl = `${window.location.origin}${App.baseIndex}/_mcp`;
+	const mcpUrl = App.system.mcp.url;
 
 	return html`
 		<am-form

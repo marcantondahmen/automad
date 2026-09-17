@@ -37,7 +37,6 @@ namespace Automad\Core;
 
 use Automad\API\RequestHandler;
 use Automad\App;
-use Automad\Controllers\McpController;
 use Automad\Engine\Delimiters;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Context;
@@ -285,7 +284,7 @@ class Automad {
 			return $this->getPage('/');
 		}
 
-		if (AM_MCP_SERVER_ENABLED && AM_REQUEST == McpController::ROUTE) {
+		if (AM_MCP_SERVER_ENABLED && AM_REQUEST == AM_MCP_SERVER_URL) {
 			return $this->getPage('/');
 		}
 
