@@ -29,7 +29,8 @@ CI (`.github/workflows/`) does not run lint/build/test on PRs (consistent with t
 
 ## Code conventions
 
-Every new PHP file (`automad/src/server/**`) and every new TS file (`automad/src/client/**`) must start with the project's standard file header — the ASCII-art Automad logo followed by a copyright/license comment block. Copy the exact header from an existing file rather than retyping it, e.g. `automad/src/server/App.php` for PHP or `automad/src/client/admin/index.ts` for TS. For PHP files the header comment comes after the opening `<?php` tag; for TS files it is the first thing in the file. Keep the copyright year range's end year current.
+- When working on PHP files see @.claude/docs/php.md
+- When working on TypeScript files see @.claude/docs/ts.md
 
 ## Architecture
 
