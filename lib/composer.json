@@ -9,7 +9,8 @@
         "nesbot/carbon": "^3.9",
         "spomky-labs/otphp": "^11.4",
         "bacon/bacon-qr-code": "^3.1",
-        "mcp/sdk": "^0.8.1"
+        "mcp/sdk": "^0.8.1",
+        "nyholm/psr7": "^1.8"
     },
     "config": {
         "preferred-install": {

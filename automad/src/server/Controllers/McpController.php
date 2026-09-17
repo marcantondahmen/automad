@@ -37,6 +37,7 @@ namespace Automad\Controllers;
 
 use Automad\Auth\Token\AccessToken;
 use Automad\System\Ai\Mcp\Server;
+use Nyholm\Psr7\Factory\Psr17Factory;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -68,16 +69,31 @@ class McpController {
 			return '';
 		}
 
-		$Server = new Server();
-		$result = $Server->handle(strval(file_get_contents('php://input')), getallheaders() ?: array());
+		$Psr17Factory = new Psr17Factory();
+		$https = strval($_SERVER['HTTPS'] ?? '');
+		$scheme = $https !== '' && $https !== 'off' ? 'https' : 'http';
+		$uri = $scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/');
 
-		http_response_code($result['status']);
+		$Request = $Psr17Factory->createServerRequest('POST', $uri, $_SERVER);
 
-		foreach ($result['headers'] as $name => $value) {
-			header("$name: $value");
+		foreach (getallheaders() ?: array() as $name => $value) {
+			$Request = $Request->withHeader($name, $value);
 		}
 
-		return $result['body'];
+		$Request = $Request->withBody($Psr17Factory->createStream(strval(file_get_contents('php://input'))));
+
+		$Server = new Server();
+		$Response = $Server->handle($Request);
+
+		http_response_code($Response->getStatusCode());
+
+		foreach ($Response->getHeaders() as $name => $values) {
+			foreach ($values as $value) {
+				header("$name: $value", false);
+			}
+		}
+
+		return strval($Response->getBody());
 	}
 
 	/**

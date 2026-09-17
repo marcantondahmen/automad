@@ -38,18 +38,21 @@ namespace Automad\System\Ai\Mcp;
 use Automad\System\FileSystem;
 use Mcp\Server as SdkServer;
 use Mcp\Server\Session\FileSessionStore;
+use Mcp\Server\Transport\StreamableHttpTransport;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  * A thin wrapper around the mcp/sdk package, exposing Automad's MCP server as a single
- * `handle()` method that a controller can call with a raw request body and headers. Internally
- * it drives the SDK's classic MCP protocol (initialize, notifications/initialized, tools/list,
- * tools/call) through Transport, a small transport bridge working with plain strings and
- * arrays instead of PSR-7 objects. Sessions are persisted to disk (Transport::SESSION_HEADER
- * carries the session id), since a classic PHP request doesn't live long enough to keep the
- * session created by "initialize" in memory for the following request. Tools and resources are
- * not registered here directly, but discovered by Automad\System\Ai\Mcp\Provider.
+ * `handle()` method that a controller can call with a PSR-7 server request. Internally it
+ * drives the SDK's classic MCP protocol (initialize, notifications/initialized, tools/list,
+ * tools/call) through the SDK's own StreamableHttpTransport. Sessions are persisted to disk
+ * (StreamableHttpTransport::SESSION_HEADER carries the session id), since a classic PHP
+ * request doesn't live long enough to keep the session created by "initialize" in memory for
+ * the following request. Tools and resources are not registered here directly, but discovered
+ * by Automad\System\Ai\Mcp\Provider.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -92,17 +95,16 @@ class Server {
 	}
 
 	/**
-	 * Handle a raw MCP JSON-RPC request and return a plain response shape (status, body, headers)
-	 * for the controller to translate into an actual HTTP response.
+	 * Handle an MCP JSON-RPC request carried by a PSR-7 server request and return the PSR-7
+	 * response for the controller to emit.
 	 *
-	 * @param string $body
-	 * @param array $headers
-	 * @return array{status: int, body: string, headers: array<string, string>}
+	 * @param ServerRequestInterface $request
+	 * @return ResponseInterface
 	 */
-	public function handle(string $body, array $headers): array {
-		/** @var array{status: int, body: string, headers: array<string, string>} $result */
-		$result = $this->SdkServer->run(new Transport($body, $headers));
+	public function handle(ServerRequestInterface $request): ResponseInterface {
+		/** @var ResponseInterface $response */
+		$response = $this->SdkServer->run(new StreamableHttpTransport($request));
 
-		return $result;
+		return $response;
 	}
 }
