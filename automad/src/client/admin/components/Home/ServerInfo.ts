@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { AppController, html, requestAPI } from '@/admin/core';
+import { AppController, html, requestApi } from '@/admin/core';
 
 /**
  * A server info component.
@@ -52,7 +52,7 @@ class ServerInfoComponent extends BaseComponent {
 	 * Request server info and render modal body.
 	 */
 	private async init(): Promise<void> {
-		const { data } = await requestAPI(AppController.getServerInfo);
+		const { data } = await requestApi(AppController.getServerInfo);
 
 		this.innerHTML = html`
 			<table>

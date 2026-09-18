@@ -46,7 +46,7 @@ import {
 	notifySuccess,
 	query,
 	queryAll,
-	requestAPI,
+	requestApi,
 	createProgressModal,
 	EditLockController,
 	getSlug,
@@ -239,7 +239,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	async connectedCallback(): Promise<void> {
 		if (this.setLock) {
-			await requestAPI(EditLockController.set, {
+			await requestApi(EditLockController.set, {
 				setLockHandle: this.lockHandle,
 				setInstanceId: App.instanceId,
 			});
@@ -375,7 +375,7 @@ export class FormComponent extends BaseComponent {
 				input.classList.remove(CSS.validate);
 			});
 
-			await requestAPI(
+			await requestApi(
 				this.api,
 				this,
 				this.parallel,

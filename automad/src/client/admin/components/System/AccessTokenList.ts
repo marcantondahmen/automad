@@ -48,7 +48,7 @@ import {
 	fire,
 	html,
 	notifyFormError,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
 
@@ -113,7 +113,7 @@ class AccessTokenListComponent extends BaseComponent {
 			App.text('save'),
 			true,
 			async (modal) => {
-				const { data, error } = await requestAPI(
+				const { data, error } = await requestApi(
 					AccessTokenController.addToken,
 					{ name: nameInput.query() }
 				);
@@ -186,7 +186,7 @@ class AccessTokenListComponent extends BaseComponent {
 	 * @async
 	 */
 	private async render(): Promise<void> {
-		const { data } = await requestAPI(AccessTokenController.getTokens);
+		const { data } = await requestApi(AccessTokenController.getTokens);
 		const tokens = (data?.tokens ?? []) as AccessToken[];
 
 		this.listContainer.innerHTML = '';
@@ -244,7 +244,7 @@ class AccessTokenListComponent extends BaseComponent {
 			if (
 				await confirm(App.text('systemAccessTokensRevokeTokenConfirm'))
 			) {
-				await requestAPI(AccessTokenController.revoke, {
+				await requestApi(AccessTokenController.revoke, {
 					id: token.id,
 				});
 

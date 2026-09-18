@@ -41,7 +41,7 @@ import {
 	notifyError,
 	notifySuccess,
 	PackageManagerController,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
@@ -71,7 +71,7 @@ class UpdateAllPackagesComponent extends BaseComponent {
 
 			modal.open();
 
-			const { error, success } = await requestAPI(
+			const { error, success } = await requestApi(
 				PackageManagerController.updateAll
 			);
 

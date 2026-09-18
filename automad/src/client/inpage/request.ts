@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { APIResponse, controllerRoute, InPageController, post } from '@/common';
+import { ApiResponse, controllerRoute, InPageController, post } from '@/common';
 
 /**
  * Make a request to the API from an InPage component.
@@ -48,7 +48,7 @@ export const inPageRequest = async (
 	controller: InPageController,
 	csrf: string,
 	data: { [key: string]: string | boolean }
-): Promise<APIResponse> => {
+): Promise<ApiResponse> => {
 	log(`${controller} ${'>>'}`, data);
 
 	const response = await post(

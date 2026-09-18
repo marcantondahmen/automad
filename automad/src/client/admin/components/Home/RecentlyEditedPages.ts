@@ -41,7 +41,7 @@ import {
 	dateFormat,
 	html,
 	PageCollectionController,
-	requestAPI,
+	requestApi,
 	resolveFileUrl,
 	resolvePageUrl,
 	routes,
@@ -76,7 +76,7 @@ class RecentlyEditedPagesComponent extends BaseComponent {
 	private async init(): Promise<void> {
 		this.innerHTML = '<am-spinner></am-spinner>';
 
-		const { data } = await requestAPI(
+		const { data } = await requestApi(
 			PageCollectionController.getRecentlyEdited
 		);
 

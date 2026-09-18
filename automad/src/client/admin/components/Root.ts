@@ -43,7 +43,7 @@ import {
 	initCheckboxToggles,
 	queryAll,
 	initTooltips,
-	requestAPI,
+	requestApi,
 	Attr,
 	initWindowErrorHandler,
 	fire,
@@ -209,7 +209,7 @@ export class RootComponent extends BaseComponent {
 	private async validateSession(): Promise<void> {
 		const stateChangeHandler = async (): Promise<void> => {
 			if (document.visibilityState === 'visible') {
-				const data = await requestAPI(SessionController.validate);
+				const data = await requestApi(SessionController.validate);
 				const code = data.code || 403;
 
 				if (code === 403) {

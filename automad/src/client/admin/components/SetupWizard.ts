@@ -41,7 +41,7 @@ import {
 	debounce,
 	fire,
 	html,
-	requestAPI,
+	requestApi,
 	routes,
 	SetupWizardController,
 	transition,
@@ -111,7 +111,7 @@ class SetupWizardComponent extends BaseComponent {
 	 * @async
 	 */
 	private async init(): Promise<void> {
-		const { data } = await requestAPI(SetupWizardController.getSteps);
+		const { data } = await requestApi(SetupWizardController.getSteps);
 		const { steps: stepKeys } = data as { steps: SetupWizardStep[] };
 
 		if (stepKeys.length == 0) {
@@ -282,7 +282,7 @@ class SetupWizardComponent extends BaseComponent {
 	 * @async
 	 */
 	private async finish(): Promise<void> {
-		await requestAPI(SetupWizardController.finish, { finish: true });
+		await requestApi(SetupWizardController.finish, { finish: true });
 
 		const base = `${window.location.origin}${App.dashboardURL}/`;
 

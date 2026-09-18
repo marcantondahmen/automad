@@ -50,10 +50,10 @@ import {
 	html,
 	notifyFormError,
 	query,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
-import type { APIResponse } from '@/admin/types';
+import type { ApiResponse } from '@/admin/types';
 
 export interface AiProvider {
 	id: string;
@@ -107,7 +107,7 @@ const createValidationBadge = async (
 	);
 
 	const validate = async () => {
-		const { data } = await requestAPI(controller, { id });
+		const { data } = await requestApi(controller, { id });
 
 		const cls = data?.isValid
 			? `bi bi-check-circle-fill`
@@ -402,7 +402,7 @@ class AiProviderSetupComponent extends BaseComponent {
 
 			const spinner = create('am-spinner', [], {}, body);
 
-			const { data: models, error } = await requestAPI(
+			const { data: models, error } = await requestApi(
 				AiProviderController.getModels,
 				{
 					id: provider.id,
@@ -440,8 +440,8 @@ class AiProviderSetupComponent extends BaseComponent {
 	private async setApiKey(
 		provider: AiProvider,
 		apiKey: string
-	): Promise<APIResponse> {
-		const response = await requestAPI(AiProviderController.setApiKey, {
+	): Promise<ApiResponse> {
+		const response = await requestApi(AiProviderController.setApiKey, {
 			id: provider.id,
 			apiKey,
 		});
@@ -462,8 +462,8 @@ class AiProviderSetupComponent extends BaseComponent {
 	private async setModel(
 		provider: AiProvider,
 		model: string
-	): Promise<APIResponse> {
-		const response = await requestAPI(AiProviderController.setModel, {
+	): Promise<ApiResponse> {
+		const response = await requestApi(AiProviderController.setModel, {
 			id: provider.id,
 			model,
 		});
@@ -481,7 +481,7 @@ class AiProviderSetupComponent extends BaseComponent {
 	 */
 	private async removeConfig(provider: AiProvider): Promise<void> {
 		if (await confirm(App.text('systemAiProviderRemoveConfirm'))) {
-			await requestAPI(AiProviderController.remove, { id: provider.id });
+			await requestApi(AiProviderController.remove, { id: provider.id });
 
 			fire(EventName.appStateRequireUpdate, window);
 		}

@@ -43,7 +43,7 @@ import {
 	FieldTag,
 	html,
 	notifySuccess,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { create, PackageManagerController } from '@/common';
 
@@ -84,7 +84,7 @@ const configModal = (): void => {
 
 		let auth: ComposerAuth = {
 			...defaultAuth,
-			...(await requestAPI(PackageManagerController.getSafeAuth)).data,
+			...(await requestApi(PackageManagerController.getSafeAuth)).data,
 		};
 
 		const github = create(
@@ -166,7 +166,7 @@ const resetAuth = async (): Promise<void> => {
 		return;
 	}
 
-	const { success } = await requestAPI(
+	const { success } = await requestApi(
 		PackageManagerController.resetAuth,
 		{},
 		true

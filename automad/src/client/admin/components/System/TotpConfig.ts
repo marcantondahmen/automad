@@ -45,7 +45,7 @@ import {
 	html,
 	notifyError,
 	notifySuccess,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 
@@ -61,7 +61,7 @@ class TotpConfigComponent extends BaseComponent {
 	 * @async
 	 */
 	async connectedCallback(): Promise<void> {
-		const { data } = await requestAPI(UserController.totpIsConfigured);
+		const { data } = await requestApi(UserController.totpIsConfigured);
 
 		if (data.totpIsConfigured) {
 			await this.disable();
@@ -126,7 +126,7 @@ class TotpConfigComponent extends BaseComponent {
 		setTimeout(async () => {
 			modal.open();
 
-			const { data } = await requestAPI(UserController.totpSetup);
+			const { data } = await requestApi(UserController.totpSetup);
 
 			body.innerHTML = '';
 
@@ -193,7 +193,7 @@ class TotpConfigComponent extends BaseComponent {
 			this.listen(button, 'click', async () => {
 				button.classList.add(CSS.buttonLoading);
 
-				const response = await requestAPI(
+				const response = await requestApi(
 					UserController.totpConfirmSetup,
 					{ code: input.value }
 				);
@@ -253,7 +253,7 @@ class TotpConfigComponent extends BaseComponent {
 
 			disableButton.classList.add(CSS.buttonLoading);
 
-			const response = await requestAPI(UserController.totpDisable, {
+			const response = await requestApi(UserController.totpDisable, {
 				disableTotp: 1,
 			});
 

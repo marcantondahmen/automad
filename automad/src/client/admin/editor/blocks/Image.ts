@@ -51,7 +51,7 @@ import {
 	ImageController,
 	notifyError,
 	query,
-	requestAPI,
+	requestApi,
 	resolveFileUrl,
 	uniqueId,
 	type AspectRatioBreakpoints,
@@ -315,7 +315,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 
 				this.wrapper.innerHTML = '<am-spinner></am-spinner>';
 
-				const { error } = await requestAPI(
+				const { error } = await requestApi(
 					ImageController.save,
 					{
 						url: getPageURL(),

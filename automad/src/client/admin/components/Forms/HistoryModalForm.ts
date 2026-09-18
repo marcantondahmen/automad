@@ -39,7 +39,7 @@ import {
 	CSS,
 	html,
 	query,
-	requestAPI,
+	requestApi,
 	getPageURL,
 	createSelect,
 	Attr,
@@ -113,7 +113,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 	private async init(container: HTMLElement): Promise<void> {
 		container.innerHTML = '<am-spinner></am-spinner>';
 
-		const { data } = await requestAPI(HistoryController.log, {
+		const { data } = await requestApi(HistoryController.log, {
 			url: getPageURL(),
 		});
 

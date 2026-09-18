@@ -33,7 +33,7 @@
  */
 
 import {
-	requestAPI,
+	requestApi,
 	getPageURL,
 	create,
 	routes,
@@ -94,7 +94,7 @@ class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 	 */
 	private async init(container: HTMLElement): Promise<void> {
 		const url = getPageURL();
-		const response = await requestAPI(PageController.breadcrumbs, { url });
+		const response = await requestApi(PageController.breadcrumbs, { url });
 
 		this.render(container, response.data);
 	}

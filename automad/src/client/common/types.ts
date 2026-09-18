@@ -36,7 +36,7 @@ export interface KeyValueMap {
 	[key: string | number]: any;
 }
 
-export interface APIResponse {
+export interface ApiResponse {
 	code: 200 | 403 | 500;
 	data?: KeyValueMap;
 	debug?: KeyValueMap;

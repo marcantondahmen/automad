@@ -41,7 +41,7 @@ import {
 	dateFormat,
 	EventName,
 	KeyValueMap,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { Tooltip } from '@/vendor/tooltip';
 import { BaseComponent } from '../../Base';
@@ -186,7 +186,7 @@ export abstract class BasePublishFormComponent extends BaseComponent {
 	 * Update the publish button.
 	 */
 	async update(): Promise<void> {
-		const { data } = await requestAPI(
+		const { data } = await requestApi(
 			this.controllers().state,
 			this.additionalRequestData()
 		);
