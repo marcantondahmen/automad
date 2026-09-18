@@ -69,8 +69,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Server {
+	/**
+	 * The SDK server instance.
+	 */
 	private SdkServer $SdkServer;
 
+	/**
+	 * The constructor.
+	 */
 	public function __construct() {
 		$host = strval(preg_replace('/^https?:\/\//', '', AM_SERVER . AM_BASE_URL));
 		$name = "Automad ($host)";
