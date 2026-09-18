@@ -53,8 +53,10 @@ class McpController {
 	/**
 	 * Handle a request to the MCP resource endpoint. Requires a valid, previously issued
 	 * Bearer access token (created through the dashboard's Access Tokens system section); returns a
-	 * 401 challenge otherwise. Only POST requests carrying a JSON-RPC message are supported;
-	 * server-initiated SSE streams and session termination are not implemented.
+	 * 401 challenge otherwise. Only POST requests carrying a JSON-RPC message are supported. For
+	 * handshake-era clients, server-initiated SSE streams and explicit session termination (DELETE)
+	 * are not implemented. The modern, stateless era (see Automad\System\Ai\Mcp\Server) has no
+	 * session lifecycle to terminate, so this limitation does not apply to it.
 	 *
 	 * @return string
 	 */
