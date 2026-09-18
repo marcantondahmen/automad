@@ -369,7 +369,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			query('style', this.wrapper) ||
 			create('style', [], {}, this.wrapper);
 
-		const cls = `image-${this.blockAPI.id}`;
+		const cls = `image-${this.blockApi.id}`;
 
 		this.wrapper.classList.add(cls);
 
@@ -433,7 +433,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 			this.data.focalPoint = responsiveSettings.focalPoint;
 
 			this.renderResponsiveStyles();
-			this.blockAPI.dispatchChange();
+			this.blockApi.dispatchChange();
 		});
 
 		setTimeout(() => {
@@ -461,7 +461,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				const data = collectFieldData(modal);
 
 				this.data.alt = data.alt;
-				this.blockAPI.dispatchChange();
+				this.blockApi.dispatchChange();
 			}, 200)
 		);
 
@@ -499,7 +499,7 @@ export class ImageBlock extends BaseBlock<ImageBlockData> {
 				this.data.link = data.link;
 				this.data.openInNewTab = data.newTab ? true : false;
 
-				this.blockAPI.dispatchChange();
+				this.blockApi.dispatchChange();
 			}, 200)
 		);
 

@@ -122,7 +122,7 @@ export class FilelistBlock extends BaseBlock<FilelistBlockData> {
 				this.wrapper,
 				'change input',
 				debounce(() => {
-					this.blockAPI.dispatchChange();
+					this.blockApi.dispatchChange();
 				}, 50)
 			);
 		}
