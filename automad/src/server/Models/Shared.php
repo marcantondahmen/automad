@@ -35,7 +35,7 @@
 
 namespace Automad\Models;
 
-use Automad\API\RequestHandler;
+use Automad\Api\RequestHandler;
 use Automad\App;
 use Automad\Auth\Auth;
 use Automad\Core\Cache;

@@ -33,10 +33,10 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\API;
+namespace Automad\Api;
 
 use Automad\Auth\Session\Session;
-use Automad\Controllers\API\PublicController;
+use Automad\Controllers\Api\PublicController;
 use Automad\Core\Debug;
 use Automad\Core\Error;
 use Automad\Core\Messenger;
@@ -54,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class RequestHandler {
 	const API_BASE = '/_api';
-	const CONTROLLERS_NAMESPACE = '\\Automad\\Controllers\\API\\';
+	const CONTROLLERS_NAMESPACE = '\\Automad\\Controllers\\Api\\';
 	const PUBLIC_CONTROLLERS = array(PublicController::class);
 	const REQUEST_KEY_CSRF = '__csrf__';
 

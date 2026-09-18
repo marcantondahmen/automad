@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\API;
+namespace Automad\Api;
 
 use Automad\System\FileSystem;
 

@@ -35,7 +35,7 @@
 
 namespace Automad\System;
 
-use Automad\API\Response;
+use Automad\Api\Response;
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
 use Automad\System\Composer\Composer;

@@ -35,7 +35,7 @@
 
 namespace Automad\Core;
 
-use Automad\API\Response;
+use Automad\Api\Response;
 use ErrorException;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

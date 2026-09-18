@@ -33,10 +33,10 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\Controllers\Api;
 
 use Automad\Admin\Email\ConfigurationTestEmail;
-use Automad\API\Response;
+use Automad\Api\Response;
 use Automad\Auth\Session\Session;
 use Automad\Core\Automad;
 use Automad\Core\Cache;

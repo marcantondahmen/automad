@@ -36,8 +36,8 @@
 namespace Automad;
 
 use Automad\Admin\Dashboard;
-use Automad\API\RequestHandler;
-use Automad\API\Response;
+use Automad\Api\RequestHandler;
+use Automad\Api\Response;
 use Automad\Auth\Session\Session;
 use Automad\Controllers\FeedController;
 use Automad\Controllers\ImageController;
@@ -64,7 +64,7 @@ class Routes {
 	/**
 	 * Public API routes.
 	 */
-	private static array $publicAPIRoutes =array(
+	private static array $publicApiRoutes =array(
 		'public/.*',
 		'session/login',
 		'session/validate',
@@ -103,7 +103,7 @@ class Routes {
 		$hasPendingTotpVerification = AM_PAGE_DASHBOARD && !empty($_SESSION[Session::TOTP_LOGIN_SECRET_KEY]);
 
 		self::registerResizeRoute($Router, $isAuthenticatedUser);
-		self::registerAPIRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
+		self::registerApiRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerDashboardRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerFeedRoute($Router);
 		self::registerMcpRoute($Router);
@@ -159,7 +159,7 @@ class Routes {
 	 * @param bool $isAuthenticatedUser
 	 * @param bool $pendingTotp
 	 */
-	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
+	private static function registerApiRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
 		$apiBase = RequestHandler::API_BASE;
 
 		$Router->register(
@@ -192,7 +192,7 @@ class Routes {
 		);
 
 		$Router->register(
-			"$apiBase/(" . join('|', self::$publicAPIRoutes) . ')',
+			"$apiBase/(" . join('|', self::$publicApiRoutes) . ')',
 			function () {
 				return RequestHandler::getResponse();
 			},

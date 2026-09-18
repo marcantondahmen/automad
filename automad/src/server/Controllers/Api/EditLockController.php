@@ -33,10 +33,10 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\Controllers\Api;
 
-use Automad\API\EditLock;
-use Automad\API\Response;
+use Automad\Api\EditLock;
+use Automad\Api\Response;
 use Automad\Core\Request;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

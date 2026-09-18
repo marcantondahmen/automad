@@ -33,9 +33,9 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\Controllers\Api;
 
-use Automad\API\Response;
+use Automad\Api\Response;
 use Automad\App;
 use Automad\Core\Messenger;
 use Automad\System\Update;

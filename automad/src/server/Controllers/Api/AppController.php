@@ -33,11 +33,11 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\Controllers\Api;
 
 use Automad\Admin\State;
-use Automad\API\Response;
-use Automad\API\ResponseCache;
+use Automad\Api\Response;
+use Automad\Api\ResponseCache;
 use Automad\App;
 use Automad\Auth\Session\Session;
 use Automad\Core\Automad;

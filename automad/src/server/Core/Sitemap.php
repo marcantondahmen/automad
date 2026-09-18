@@ -35,7 +35,7 @@
 
 namespace Automad\Core;
 
-use Automad\API\RequestHandler;
+use Automad\Api\RequestHandler;
 use Automad\Auth\Auth;
 use Automad\System\Fields;
 use Automad\System\FileSystem;

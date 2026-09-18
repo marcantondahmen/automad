@@ -33,9 +33,9 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\Controllers\Api;
 
-use Automad\API\Response;
+use Automad\Api\Response;
 use Automad\Core\Request;
 use Automad\System\SetupWizard;
 

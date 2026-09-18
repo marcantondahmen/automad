@@ -35,7 +35,7 @@
 
 namespace Automad\Core;
 
-use Automad\API\RequestHandler;
+use Automad\Api\RequestHandler;
 use Automad\App;
 use Automad\Engine\Delimiters;
 use Automad\Models\ComponentCollection;

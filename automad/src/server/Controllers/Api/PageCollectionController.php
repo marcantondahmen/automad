@@ -33,10 +33,10 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Controllers\API;
+namespace Automad\Controllers\Api;
 
-use Automad\API\Response;
-use Automad\API\ResponseCache;
+use Automad\Api\Response;
+use Automad\Api\ResponseCache;
 use Automad\Core\Automad;
 use Automad\Core\Image;
 use Automad\Models\Selection;
