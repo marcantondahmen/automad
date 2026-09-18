@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp;
+namespace Automad\Ai\Mcp;
 
 use Automad\System\FileSystem;
 use Mcp\Schema\Enum\ProtocolVersion;
@@ -62,7 +62,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * modern era is stateless by design and never touches the session store - but it must stay
  * unconditional, since handshake clients depend on it to survive across separate PHP-FPM
  * requests. Tools and resources are not registered here directly, but discovered by
- * Automad\System\Ai\Mcp\Provider.
+ * Automad\Ai\Mcp\Provider.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de

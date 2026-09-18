@@ -35,12 +35,12 @@
 
 namespace Automad\Controllers\Api;
 
+use Automad\Ai\Assistance\ProviderCollection;
 use Automad\Api\Response;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
-use Automad\System\Ai\Assistance\ProviderCollection;
 use Automad\System\ConfigFile;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

@@ -33,60 +33,63 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp\Tools;
+namespace Automad\Ai\Mcp\Resources;
 
-use Automad\Core\Str;
-use Mcp\Schema\ToolAnnotations;
+use Automad\Core\Automad;
+use Automad\Ai\Mcp\ResourceId;
+use Automad\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract class for MCP tools. Derived classes are discovered automatically by
- * Automad\System\Ai\Mcp\Provider from the Automad\System\Ai\Mcp\Tools namespace and
- * registered with the MCP server.
+ * The page template.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractTool {
+class Page extends AbstractResourceTemplate {
 	/**
-	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
-	 *
-	 * @return ToolAnnotations|null
+	 * @return string
 	 */
-	public function getAnnotations(): ToolAnnotations|null {
-		return null;
+	public function getDescription(): string {
+		return 'A single page that can be accessed by an URI provided in the automad://pages resource.';
 	}
 
 	/**
-	 * The tool's description.
-	 *
-	 * @return string
-	 */
-	abstract public function getDescription(): string;
-
-	/**
-	 * The tool's main handler. Its parameters are reflected on to derive the tool's input schema
-	 * and to map incoming call arguments by name.
-	 *
 	 * @return callable
 	 */
-	abstract public function getHandler(): callable;
+	public function getHandler(): callable {
+		return function (string $page_id) {
+			$url = ResourceId::decode($page_id);
+			$Automad = Automad::fromCache();
+
+			return array_merge(array('id' => $page_id), $Automad->getPage($url)->data ?? array());
+		};
+	}
 
 	/**
-	 * The tool's name, as used by MCP clients to call it.
+	 * The resource's name.
 	 *
 	 * @return string
 	 */
 	public function getName(): string {
-		return Str::sanitize($this->getTitle());
+		return 'page';
 	}
 
 	/**
-	 * The tool's human-readable title.
+	 * @return string
+	 */
+	public function getTitle(): string {
+		return 'Page';
+	}
+
+	/**
+	 * The template's uri.
 	 *
 	 * @return string
 	 */
-	abstract public function getTitle(): string;
+	public function getUriTemplate(): string {
+		return 'page/{page_id}';
+	}
 }

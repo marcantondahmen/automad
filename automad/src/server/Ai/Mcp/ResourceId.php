@@ -33,65 +33,37 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp\Resources;
-
-use Mcp\Schema\Annotations;
+namespace Automad\Ai\Mcp;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract class for MCP resources. Derived classes are discovered automatically by
- * Automad\System\Ai\Mcp\Provider from the Automad\System\Ai\Mcp\Resources namespace and
- * registered with the MCP server.
+ * Encodes and decodes page slugs into URL-safe resource ids for use in MCP resource URIs.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractResource {
+class ResourceId {
 	/**
-	 * The resource's annotations, hinting at its intended audience, priority and last modification.
+	 * Decode a URL-safe resource id back into the original page slug.
 	 *
-	 * @return Annotations|null
+	 * @param string $id
+	 * @return string
 	 */
-	public function getAnnotations(): Annotations|null {
-		return null;
+	public static function decode(string $id): string {
+		return base64_decode(
+			strtr($id, '-_', '+/') . str_repeat('=', (4 - strlen($id) % 4) % 4)
+		);
 	}
 
 	/**
-	 * The resource's description.
+	 * Encode a page slug or any other handle into a URL-safe resource id.
 	 *
+	 * @param string $handle
 	 * @return string
 	 */
-	abstract public function getDescription(): string|null;
-
-	/**
-	 * The resource's main handler, returning its content when read.
-	 *
-	 * @return callable
-	 */
-	abstract public function getHandler(): callable;
-
-	/**
-	 * The resource's MIME type.
-	 *
-	 * @return string
-	 */
-	public function getMimeType(): string {
-		return 'application/json';
+	public static function encode(string $handle): string {
+		return rtrim(strtr(base64_encode($handle), '+/', '-_'), '=');
 	}
-
-	/**
-	 * The resource's name.
-	 *
-	 * @return string
-	 */
-	abstract public function getName(): string;
-
-	/**
-	 * The resource's human-readable title.
-	 *
-	 * @return string
-	 */
-	abstract public function getTitle(): string;
 }

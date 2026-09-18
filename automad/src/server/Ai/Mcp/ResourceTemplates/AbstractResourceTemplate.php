@@ -33,63 +33,72 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp\Resources;
+namespace Automad\Ai\Mcp\ResourceTemplates;
 
-use Automad\Core\Automad;
-use Automad\System\Ai\Mcp\ResourceId;
-use Automad\System\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
+use Mcp\Schema\Annotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The page template.
+ * The abstract class for MCP resource templates. Derived classes are discovered automatically by
+ * Automad\Ai\Mcp\Provider from the Automad\Ai\Mcp\ResourceTemplates namespace and
+ * registered with the MCP server.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class Page extends AbstractResourceTemplate {
+abstract class AbstractResourceTemplate {
 	/**
-	 * @return string
+	 * The template's annotations, hinting at its intended audience, priority and last modification.
+	 *
+	 * @return Annotations|null
 	 */
-	public function getDescription(): string {
-		return 'A single page that can be accessed by an URI provided in the automad://pages resource.';
+	public function getAnnotations(): Annotations|null {
+		return null;
 	}
 
 	/**
-	 * @return callable
-	 */
-	public function getHandler(): callable {
-		return function (string $page_id) {
-			$url = ResourceId::decode($page_id);
-			$Automad = Automad::fromCache();
-
-			return array_merge(array('id' => $page_id), $Automad->getPage($url)->data ?? array());
-		};
-	}
-
-	/**
-	 * The resource's name.
+	 * The template's description.
 	 *
 	 * @return string
 	 */
-	public function getName(): string {
-		return 'page';
+	abstract public function getDescription(): string|null;
+
+	/**
+	 * The template's main handler, returning its content when read.
+	 *
+	 * @return callable
+	 */
+	abstract public function getHandler(): callable;
+
+	/**
+	 * The template's MIME type.
+	 *
+	 * @return string
+	 */
+	public function getMimeType(): string {
+		return 'application/json';
 	}
 
 	/**
+	 * The template's name.
+	 *
 	 * @return string
 	 */
-	public function getTitle(): string {
-		return 'Page';
-	}
+	abstract public function getName(): string;
+
+	/**
+	 * The template's human-readable title.
+	 *
+	 * @return string
+	 */
+	abstract public function getTitle(): string;
 
 	/**
 	 * The template's uri.
 	 *
 	 * @return string
 	 */
-	public function getUriTemplate(): string {
-		return 'page/{page_id}';
-	}
+	abstract public function getUriTemplate(): string;
 }

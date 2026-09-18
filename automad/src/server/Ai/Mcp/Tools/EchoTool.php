@@ -33,72 +33,60 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp\ResourceTemplates;
+namespace Automad\Ai\Mcp\Tools;
 
-use Mcp\Schema\Annotations;
+use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract class for MCP resource templates. Derived classes are discovered automatically by
- * Automad\System\Ai\Mcp\Provider from the Automad\System\Ai\Mcp\ResourceTemplates namespace and
- * registered with the MCP server.
+ * An example tool that echoes the given message back, as a starting point for building real tools.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractResourceTemplate {
+class EchoTool extends AbstractTool {
 	/**
-	 * The template's annotations, hinting at its intended audience, priority and last modification.
-	 *
-	 * @return Annotations|null
+	 * @return ToolAnnotations|null
 	 */
-	public function getAnnotations(): Annotations|null {
-		return null;
+	public function getAnnotations(): ToolAnnotations|null {
+		return new ToolAnnotations(
+			readOnlyHint: true,
+			destructiveHint: false,
+			idempotentHint: true,
+			openWorldHint: false
+		);
 	}
 
 	/**
-	 * The template's description.
-	 *
 	 * @return string
 	 */
-	abstract public function getDescription(): string|null;
+	public function getDescription(): string {
+		return 'Example tool that echoes the given message back.';
+	}
 
 	/**
-	 * The template's main handler, returning its content when read.
-	 *
 	 * @return callable
 	 */
-	abstract public function getHandler(): callable;
-
-	/**
-	 * The template's MIME type.
-	 *
-	 * @return string
-	 */
-	public function getMimeType(): string {
-		return 'application/json';
+	public function getHandler(): callable {
+		return $this->handle(...);
 	}
 
 	/**
-	 * The template's name.
-	 *
 	 * @return string
 	 */
-	abstract public function getName(): string;
+	public function getTitle(): string {
+		return 'Echo';
+	}
 
 	/**
-	 * The template's human-readable title.
+	 * Echo the given message back.
 	 *
+	 * @param string $message the message to echo back
 	 * @return string
 	 */
-	abstract public function getTitle(): string;
-
-	/**
-	 * The template's uri.
-	 *
-	 * @return string
-	 */
-	abstract public function getUriTemplate(): string;
+	public function handle(string $message): string {
+		return $message;
+	}
 }

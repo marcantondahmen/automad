@@ -42,7 +42,7 @@ use Automad\Core\Cache;
 use Automad\Core\Parse;
 use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;
-use Automad\System\Ai\Assistance\ProviderCollection;
+use Automad\Ai\Assistance\ProviderCollection;
 use Automad\System\Fields;
 use Automad\System\FileUtils;
 use Automad\System\PackageCollection;

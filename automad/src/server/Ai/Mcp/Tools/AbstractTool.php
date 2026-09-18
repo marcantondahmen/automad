@@ -33,63 +33,60 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp\Resources;
+namespace Automad\Ai\Mcp\Tools;
 
-use Automad\Core\Automad;
-use Automad\Models\PageCollection;
-use Automad\Models\Shared;
-use Automad\System\Ai\Mcp\ResourceId;
-use Automad\System\Fields;
+use Automad\Core\Str;
+use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * All pages resource.
+ * The abstract class for MCP tools. Derived classes are discovered automatically by
+ * Automad\Ai\Mcp\Provider from the Automad\Ai\Mcp\Tools namespace and
+ * registered with the MCP server.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class AllPages extends AbstractResource {
+abstract class AbstractTool {
 	/**
+	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
+	 *
+	 * @return ToolAnnotations|null
+	 */
+	public function getAnnotations(): ToolAnnotations|null {
+		return null;
+	}
+
+	/**
+	 * The tool's description.
+	 *
 	 * @return string
 	 */
-	public function getDescription(): string {
-		return 'A collection of all public and private pages. Use the page uri that is associated with a page in order to get the entire page content.';
-	}
+	abstract public function getDescription(): string;
 
 	/**
+	 * The tool's main handler. Its parameters are reflected on to derive the tool's input schema
+	 * and to map incoming call arguments by name.
+	 *
 	 * @return callable
 	 */
-	public function getHandler(): callable {
-		return function () {
-			$pages = array();
-			$PageCollection = new PageCollection(new Shared());
-			$Automad = Automad::fromCache();
-
-			foreach ($Automad->getPages() as $Page) {
-				$id = ResourceId::encode($Page->origUrl);
-				$uri = "automad://page/$id";
-				$pages[] = array('id' => $id, 'uri' => $uri, 'title' =>  $Page->get(Fields::TITLE), 'url' => $Page->origUrl);
-			}
-
-			return $pages;
-		};
-	}
+	abstract public function getHandler(): callable;
 
 	/**
-	 * The resource's name.
+	 * The tool's name, as used by MCP clients to call it.
 	 *
 	 * @return string
 	 */
 	public function getName(): string {
-		return 'pages';
+		return Str::sanitize($this->getTitle());
 	}
 
 	/**
+	 * The tool's human-readable title.
+	 *
 	 * @return string
 	 */
-	public function getTitle(): string {
-		return 'All pages';
-	}
+	abstract public function getTitle(): string;
 }

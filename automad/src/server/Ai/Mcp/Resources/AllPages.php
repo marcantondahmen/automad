@@ -33,68 +33,63 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Assistance;
+namespace Automad\Ai\Mcp\Resources;
 
-use Automad\System\Ai\Assistance\Providers\AbstractProvider;
-use Automad\System\Ai\Assistance\Providers\ClaudeProvider;
-use Automad\System\Ai\Assistance\Providers\OpenAiProvider;
+use Automad\Core\Automad;
+use Automad\Models\PageCollection;
+use Automad\Models\Shared;
+use Automad\Ai\Mcp\ResourceId;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The provider collection.
+ * All pages resource.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class ProviderCollection {
+class AllPages extends AbstractResource {
 	/**
-	 * The list of providers.
-	 *
-	 * @var array<string, AbstractProvider>
+	 * @return string
 	 */
-	private array $providers;
-
-	/**
-	 * The constructor.
-	 */
-	public function __construct() {
-		$ClaudeProvider = new ClaudeProvider();
-		$OpenAiProvider = new OpenAiProvider();
-
-		$this->providers = array(
-			$ClaudeProvider->getId() => $ClaudeProvider,
-			$OpenAiProvider->getId() => $OpenAiProvider
-		);
+	public function getDescription(): string {
+		return 'A collection of all public and private pages. Use the page uri that is associated with a page in order to get the entire page content.';
 	}
 
 	/**
-	 * Get a provider by its id.
-	 *
-	 * @param string $providerId
-	 * @return AbstractProvider|null
+	 * @return callable
 	 */
-	public function getProvider(string $providerId): AbstractProvider|null {
-		return $this->providers[$providerId] ?? null;
-	}
+	public function getHandler(): callable {
+		return function () {
+			$pages = array();
+			$PageCollection = new PageCollection(new Shared());
+			$Automad = Automad::fromCache();
 
-	/**
-	 * Get publicly exposable details for all providers.
-	 *
-	 * @return array
-	 */
-	public function getPublicDetails(): array {
-		if (!AM_AI_ASSISTANCE_ENABLED) {
-			return array();
-		}
+			foreach ($Automad->getPages() as $Page) {
+				$id = ResourceId::encode($Page->origUrl);
+				$uri = "automad://page/$id";
+				$pages[] = array('id' => $id, 'uri' => $uri, 'title' =>  $Page->get(Fields::TITLE), 'url' => $Page->origUrl);
+			}
 
-		$publicDetails = array();
-
-		foreach ($this->providers as $provider) {
-			$publicDetails[] = $provider->getPublicDetails();
+			return $pages;
 		};
+	}
 
-		return $publicDetails;
+	/**
+	 * The resource's name.
+	 *
+	 * @return string
+	 */
+	public function getName(): string {
+		return 'pages';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTitle(): string {
+		return 'All pages';
 	}
 }

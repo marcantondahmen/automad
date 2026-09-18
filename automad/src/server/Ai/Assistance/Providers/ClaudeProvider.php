@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Assistance\Providers;
+namespace Automad\Ai\Assistance\Providers;
 
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
@@ -43,13 +43,13 @@ use Automad\System\Fetch;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The OpenAi provider class.
+ * The Claude AI provider class.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class OpenAiProvider extends AbstractProvider {
+class ClaudeProvider extends AbstractProvider {
 	/**
 	 * The help text that is shown alongside the API key dialog on setup.
 	 *
@@ -58,8 +58,8 @@ class OpenAiProvider extends AbstractProvider {
 	public function getApiKeyHelp(): string {
 		return str_replace(
 			array('{urlPlatform}', '{urlApiKeys}'),
-			array('https://platform.openai.com/', 'https://platform.openai.com/api-keys'),
-			Text::get('systemAiOpenAiSetupHelp')
+			array('https://platform.claude.com/', 'https://platform.claude.com/settings/workspaces/default/keys'),
+			Text::get('systemAiClaudeSetupHelp')
 		);
 	}
 
@@ -70,8 +70,9 @@ class OpenAiProvider extends AbstractProvider {
 	 */
 	public function getHeaders(): array {
 		return array(
-			"Authorization: Bearer {$this->ProviderConfig->apiKey}",
-			'Content-Type: application/json'
+			'Content-Type: application/json',
+			'anthropic-version: 2023-06-01',
+			"X-Api-Key: {$this->ProviderConfig->apiKey}"
 		);
 	}
 
@@ -81,7 +82,7 @@ class OpenAiProvider extends AbstractProvider {
 	 * @return string
 	 */
 	public function getId(): string {
-		return 'openai';
+		return 'claude';
 	}
 
 	/**
@@ -90,19 +91,19 @@ class OpenAiProvider extends AbstractProvider {
 	 * @return string[]
 	 */
 	public function getSupportedModels(): array {
-		$allModels = $this->requestProviderApi('/models');
+		$response = $this->requestProviderApi('/models');
 
-		$supported = array_filter($allModels['data'], function (array $model) {
-			$id = $model['id'];
+		if (empty($response['data'])) {
+			return array();
+		}
 
-			return (!preg_match('/(chat|image|audio|codex|realtime|search|transcribe|\d{4}-\d{2}-\d{2})/', $id) && str_contains($id, 'gpt-'));
+		$models = $response['data'];
+
+		usort($models, function ($a, $b) {
+			return $b['created_at'] <=> $a['created_at'];
 		});
 
-		usort($supported, function ($a, $b) {
-			return $b['created'] <=> $a['created'];
-		});
-
-		return array_reduce($supported, function ($acc, $model) {
+		return array_reduce($models, function ($acc, $model) {
 			$acc[] = $model['id'];
 
 			return $acc;
@@ -116,7 +117,14 @@ class OpenAiProvider extends AbstractProvider {
 	 * @return bool
 	 */
 	public function validateApiKey(string $apiKey): bool {
-		$response = Fetch::request("{$this->getBaseUrl()}/models", array("Authorization: Bearer {$apiKey}"));
+		$response = Fetch::request(
+			"{$this->getBaseUrl()}/models",
+			array(
+				"X-Api-Key: {$apiKey}",
+				'Content-Type: application/json',
+				'anthropic-version: 2023-06-01',
+			)
+		);
 
 		if (empty($response)) {
 			return false;
@@ -133,7 +141,7 @@ class OpenAiProvider extends AbstractProvider {
 	 * @return string
 	 */
 	protected function getBaseUrl(): string {
-		return 'https://api.openai.com/v1';
+		return 'https://api.anthropic.com/v1';
 	}
 
 	/**
@@ -142,7 +150,7 @@ class OpenAiProvider extends AbstractProvider {
 	 * @return string
 	 */
 	protected function getIcon(): string {
-		return '<i class="bi bi-openai"></i>';
+		return '<i class="bi bi-claude"></i>';
 	}
 
 	/**
@@ -151,7 +159,7 @@ class OpenAiProvider extends AbstractProvider {
 	 * @return string
 	 */
 	protected function getName(): string {
-		return 'OpenAi';
+		return 'Claude';
 	}
 
 	/**
@@ -160,7 +168,7 @@ class OpenAiProvider extends AbstractProvider {
 	 * @return string
 	 */
 	protected function getWebsite(): string {
-		return 'https://openai.com';
+		return 'https://www.anthropic.com';
 	}
 
 	/**
@@ -174,11 +182,18 @@ class OpenAiProvider extends AbstractProvider {
 	 */
 	protected function requestTextApi(string $prompt, string $target, string $context, Messenger $Messenger): string {
 		$response = $this->requestProviderApi(
-			'/responses',
+			'/messages',
 			array(
+				'max_tokens' => 32000,
 				'model' => $this->ProviderConfig->model,
-				'instructions' => $this->getInstructions(),
-				'input' => $this->composePrompt($prompt, $target, $context)
+				'system' => array(array('text' => $this->getInstructions(), 'type' => 'text')),
+				'thinking' => array('type' => 'disabled'),
+				'messages' => array(
+					array(
+						'content' => $this->composePrompt($prompt, $target, $context),
+						'role' => 'user'
+					)
+				)
 			),
 			$Messenger
 		);
@@ -190,25 +205,19 @@ class OpenAiProvider extends AbstractProvider {
 			return '';
 		}
 
-		if (empty($response['output'])) {
+		if (empty($response['content'])) {
 			return '';
 		}
 
 		$text = array();
 
-		foreach ($response['output'] ?? array() as $output) {
-			if (($output['type'] ?? null) !== 'message') {
-				continue;
-			}
-
-			foreach ($output['content'] ?? array() as $content) {
-				if (($content['type'] ?? null) === 'output_text') {
-					$text[] = $content['text'] ?? '';
-				}
+		foreach ($response['content'] ?? array() as $content) {
+			if (($content['type'] ?? null) === 'text') {
+				$text[] = $content['text'] ?? '';
 			}
 		}
 
-		Debug::log($response, 'OpenAI response');
+		Debug::log($response, 'Claude response');
 
 		return implode("\n", $text);
 	}

@@ -33,11 +33,11 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System\Ai\Mcp;
+namespace Automad\Ai\Mcp;
 
-use Automad\System\Ai\Mcp\Resources\AbstractResource;
-use Automad\System\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
-use Automad\System\Ai\Mcp\Tools\AbstractTool;
+use Automad\Ai\Mcp\Resources\AbstractResource;
+use Automad\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
+use Automad\Ai\Mcp\Tools\AbstractTool;
 use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

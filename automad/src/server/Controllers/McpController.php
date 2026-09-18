@@ -35,15 +35,15 @@
 
 namespace Automad\Controllers;
 
+use Automad\Ai\Mcp\Server;
 use Automad\Auth\Token\AccessToken;
-use Automad\System\Ai\Mcp\Server;
 use Nyholm\Psr7\Factory\Psr17Factory;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  * The MCP controller class. Authenticates and gates requests to the MCP resource endpoint,
- * then delegates the actual MCP JSON-RPC protocol handling to Automad\System\Ai\Mcp\Server.
+ * then delegates the actual MCP JSON-RPC protocol handling to Automad\Ai\Mcp\Server.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -55,7 +55,7 @@ class McpController {
 	 * Bearer access token (created through the dashboard's Access Tokens system section); returns a
 	 * 401 challenge otherwise. Only POST requests carrying a JSON-RPC message are supported. For
 	 * handshake-era clients, server-initiated SSE streams and explicit session termination (DELETE)
-	 * are not implemented. The modern, stateless era (see Automad\System\Ai\Mcp\Server) has no
+	 * are not implemented. The modern, stateless era (see Automad\Ai\Mcp\Server) has no
 	 * session lifecycle to terminate, so this limitation does not apply to it.
 	 *
 	 * @return string
