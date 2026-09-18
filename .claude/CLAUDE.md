@@ -24,6 +24,8 @@ Install: `composer install` and `npm install`. Composer packages in `lib/` (Auto
   - Single test file: `npx vitest run automad/src/client/admin/tests/form.test.ts` (add `-t "test name"` to filter by name).
 - There is no ESLint/Stylelint config in this repo. Prettier config is inlined in `package.json` (`trailingComma: es5`) but no script invokes it — use `npx prettier --write <path>` if needed. `.editorconfig` at the root defines tabs/single-quotes/size-4 conventions (JSON files use spaces/size 2).
 - `npm run unused` — finds unused code/assets (`bin/find-unused.sh`).
+- `npm run mcp:inspector` — runs `bin/mcp-inspector.sh`, which launches the MCP Inspector web UI against the local MCP endpoint (`http://localhost:8000/mcp`), authenticating with `AM_MCP_SERVER_TOKEN`/`AM_MCP_INSPECTOR_TOKEN` from `.env`.
+- `npm run mcp:tmp` — runs `bin/mcp-tmp.sh`, which starts a Claude Code session in `/tmp/mcp-test` with a throwaway `.mcp.json` pointing at the local MCP endpoint, to test the Automad MCP server without this repo's own codebase as context.
 
 CI (`.github/workflows/`) does not run lint/build/test on PRs (consistent with the no-PRs policy) — it only builds/publishes dist archives, Docker images, and release notes on tags/manual dispatch.
 
