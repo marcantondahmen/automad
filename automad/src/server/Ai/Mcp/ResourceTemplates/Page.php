@@ -35,9 +35,9 @@
 
 namespace Automad\Ai\Mcp\Resources;
 
-use Automad\Core\Automad;
 use Automad\Ai\Mcp\ResourceId;
 use Automad\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
+use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -49,14 +49,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class ProviderConfig {
 	/**
+	 * The class name used by provider config files saved before the Ai\Assistance refactor.
+	 */
+	private const LEGACY_TYPE = 'Automad\System\Ai\ProviderConfig';
+
+	/**
 	 * The current class name of the provider config type.
 	 */
 	private const TYPE = 'Automad\Ai\Assistance\ProviderConfig';
-
-	/**
-	 * The class name used by provider config files saved before the Ai\Assistance refactor.
-	 */
-	private const LEGACY_TYPE = 'Automad\Ai\ProviderConfig';
 
 	/**
 	 * The replacement for the provider config type class in a serialized string.

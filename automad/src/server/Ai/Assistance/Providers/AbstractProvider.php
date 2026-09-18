@@ -35,10 +35,10 @@
 
 namespace Automad\Ai\Assistance\Providers;
 
+use Automad\Ai\Assistance\ProviderConfig;
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
 use Automad\Core\Str;
-use Automad\Ai\Assistance\ProviderConfig;
 use Automad\System\Fetch;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

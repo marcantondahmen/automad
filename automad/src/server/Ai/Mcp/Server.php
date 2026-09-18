@@ -78,7 +78,7 @@ class Server {
 		$Builder = SdkServer::builder()
 			->setServerInfo($name, AM_VERSION, title: $name)
 			->setSession(new FileSessionStore(FileSystem::getTmpDir() . '/mcp-sessions'))
-			->setModernVersions([ProtocolVersion::V2026_07_28]);
+			->setModernVersions(array(ProtocolVersion::V2026_07_28));
 
 		foreach (Provider::getTools() as $Tool) {
 			$Builder->addTool(

@@ -35,10 +35,10 @@
 
 namespace Automad\Ai\Mcp\Resources;
 
+use Automad\Ai\Mcp\ResourceId;
 use Automad\Core\Automad;
 use Automad\Models\PageCollection;
 use Automad\Models\Shared;
-use Automad\Ai\Mcp\ResourceId;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
