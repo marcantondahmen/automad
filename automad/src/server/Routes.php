@@ -43,10 +43,12 @@ use Automad\Controllers\FeedController;
 use Automad\Controllers\ImageController;
 use Automad\Controllers\McpController;
 use Automad\Controllers\PageController;
+use Automad\Core\Debug;
 use Automad\Core\Feed;
 use Automad\Core\I18n;
 use Automad\Core\Router;
 use Automad\Models\UserCollection;
+use Automad\System\FileSystem;
 use Automad\System\SetupWizard;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,11 +62,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Routes {
 	/**
-	 * An array of reserved routes that can't be used by any page.
-	 */
-	public static array $registered = array();
-
-	/**
 	 * Public API routes.
 	 */
 	private static array $publicAPIRoutes =array(
@@ -76,6 +73,25 @@ class Routes {
 		'user/reset-password',
 		'user-collection/create-first-user'
 	);
+
+	/**
+	 * The array of registered routes.
+	 */
+	private static array $registered = array();
+
+	/**
+	 * The reserved routes that can't be used as page routes.
+	 */
+	private static array $reserved = array();
+
+	/**
+	 * Get the array of reserved routes.
+	 *
+	 * @return array
+	 */
+	public static function getReserved(): array {
+		return self::$reserved;
+	}
 
 	/**
 	 * Register routes to a giver Router.
@@ -94,6 +110,36 @@ class Routes {
 		self::registerPageRoutes($Router);
 
 		self::$registered = $Router->getRoutes();
+		self::$reserved = self::filterReserved(self::$registered);
+
+		Debug::log(self::$registered, 'Registered');
+		Debug::log(self::$reserved, 'Reserved');
+	}
+
+	/**
+	 * Collect the non-page reserved routes
+	 * that can't be used as page URLs.
+	 *
+	 * @param array $routes
+	 * @return array
+	 */
+	private static function filterReserved(array $routes): array {
+		$reservedUrls = array();
+
+		foreach ($routes as $route) {
+			$url = preg_replace('#^(/[\w\-\_]*).*$#i', '$1', $route['route']);
+
+			if ($url != '/') {
+				$reservedUrls[] = $url;
+			}
+		}
+
+		// Get all real directories.
+		foreach (FileSystem::glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
+			$reservedUrls[] = '/' . basename($dir);
+		}
+
+		return array_unique($reservedUrls);
 	}
 
 	/**
