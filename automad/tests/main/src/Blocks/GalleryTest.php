@@ -75,7 +75,7 @@ class GalleryTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Gallery',
 			$search,

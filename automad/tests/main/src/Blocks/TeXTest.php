@@ -59,7 +59,7 @@ class TeXTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'TeX',
 			$search,

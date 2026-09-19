@@ -48,7 +48,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Block {
 	/**
-	 * A test wrapper for block testing.
+	 * A test wrapper for block search and replace testing.
+	 *
+	 * @psalm-suppress InvalidStringClass
 	 *
 	 * @param string $blockClass
 	 * @param string $search
@@ -60,7 +62,7 @@ class Block {
 	 * @param string $expectedString
 	 * @param mixed $Test
 	 */
-	public static function test(
+	public static function testSearchReplace(
 		mixed $Test,
 		string $blockClass,
 		string $search,
@@ -70,7 +72,7 @@ class Block {
 		string $blockJson,
 		string $expectedReplacedJson,
 		string $expectedString
-	) {
+	): void {
 		$Mock = new Mock();
 		$Automad = $Mock->createAutomad();
 		$block = json_decode($blockJson, true);

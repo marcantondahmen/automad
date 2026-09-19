@@ -69,7 +69,7 @@ class EmbedTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Embed',
 			$search,

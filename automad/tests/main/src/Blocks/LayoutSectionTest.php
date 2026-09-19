@@ -227,7 +227,7 @@ class LayoutSectionTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'LayoutSection',
 			$search,
