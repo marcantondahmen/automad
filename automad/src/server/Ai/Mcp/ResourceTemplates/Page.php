@@ -33,11 +33,13 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Ai\Mcp\Resources;
+namespace Automad\Ai\Mcp\ResourceTemplates;
 
 use Automad\Ai\Mcp\ResourceId;
-use Automad\Ai\Mcp\ResourceTemplates\AbstractResourceTemplate;
 use Automad\Core\Automad;
+use Automad\Core\Blocks;
+use Automad\Core\Debug;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -49,6 +51,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Page extends AbstractResourceTemplate {
+	const array IGNORED_FIELDS = array(
+		Fields::AUTOMAD_VERSION,
+	);
+
 	/**
 	 * @return string
 	 */
@@ -61,10 +67,35 @@ class Page extends AbstractResourceTemplate {
 	 */
 	public function getHandler(): callable {
 		return function (string $page_id) {
-			$url = ResourceId::decode($page_id);
 			$Automad = Automad::fromCache();
+			$Page = $Automad->getPage(ResourceId::decode($page_id));
 
-			return array_merge(array('id' => $page_id), $Automad->getPage($url)->data ?? array());
+			if (!$Page) {
+				return array();
+			}
+
+			$data = array(
+				'id' => $page_id
+			);
+
+			foreach ($Page->data as $key => $value) {
+				if (str_starts_with($key, '+')) {
+					$blocks = Blocks::toAgent(
+						$value['blocks'] ?? array(),
+						$Automad->ComponentCollection
+					);
+
+					$data[$key] = array('blocks' => $blocks);
+				} else {
+					if (!in_array($key, Page::IGNORED_FIELDS)) {
+						$data[$key] = $value;
+					}
+				}
+			}
+
+			Debug::log($data, 'Page data');
+
+			return $data;
 		};
 	}
 

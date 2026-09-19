@@ -178,6 +178,21 @@ class Blocks {
 	}
 
 	/**
+	 * Return an array of blocks that are optimized for agents.
+	 *
+	 * @param BlockData[] $blocks
+	 * @param ComponentCollection $ComponentCollection
+	 * @return array
+	 */
+	public static function toAgent(array $blocks, ComponentCollection $ComponentCollection): array {
+		if (empty($blocks)) {
+			return array();
+		}
+
+		return self::convert($blocks, $ComponentCollection, 'toAgent');
+	}
+
+	/**
 	 * Return the string representation of an array of blocks.
 	 *
 	 * @param BlockData[] $blocks
@@ -189,9 +204,23 @@ class Blocks {
 			return '';
 		}
 
-		$blockToString = function (array $block) use ($ComponentCollection): string {
+		$content = self::convert($blocks, $ComponentCollection, 'toString');
+
+		return preg_replace('/\s+/', ' ', join(' ', $content)) ?? '';
+	}
+
+	/**
+	 * Return the converted representation of an array of blocks.
+	 *
+	 * @param BlockData[] $blocks
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $method
+	 * @return array
+	 */
+	private static function convert(array $blocks, ComponentCollection $ComponentCollection, string $method): array {
+		$fn = function (array $block) use ($ComponentCollection, $method): mixed {
 			return call_user_func_array(
-				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::toString',
+				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::' . $method,
 				array($block, $ComponentCollection)
 			);
 		};
@@ -201,12 +230,12 @@ class Blocks {
 		foreach ($blocks as $block) {
 			if (!empty($block['type']) && !empty($block['data'])) {
 				try {
-					$content[] = $blockToString($block);
+					$content[] = $fn($block);
 				} catch (\TypeError $e) {
 					$block = self::unknownBlockHandler($block);
 
 					try {
-						$content[] = $blockToString($block);
+						$content[] = $fn($block);
 					} catch (\Exception $e) {
 					}
 				} catch (\Exception $e) {
@@ -214,7 +243,7 @@ class Blocks {
 			}
 		}
 
-		return preg_replace('/\s+/', ' ', join(' ', $content)) ?? '';
+		return $content;
 	}
 
 	/**

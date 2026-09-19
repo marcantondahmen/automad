@@ -36,10 +36,11 @@
 namespace Automad\Ai\Mcp\Resources;
 
 use Automad\Ai\Mcp\ResourceId;
+use Automad\Ai\Mcp\ResourceTemplates\Page;
 use Automad\Core\Automad;
+use Automad\Core\Blocks;
 use Automad\Models\PageCollection;
 use Automad\Models\Shared;
-use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -55,7 +56,7 @@ class AllPages extends AbstractResource {
 	 * @return string
 	 */
 	public function getDescription(): string {
-		return 'A collection of all public and private pages. Use the page uri that is associated with a page in order to get the entire page content.';
+		return 'A collection of all public and private pages. Use the page uri that is associated with a page in order to get the entire page object including all associated block data.';
 	}
 
 	/**
@@ -70,7 +71,26 @@ class AllPages extends AbstractResource {
 			foreach ($Automad->getPages() as $Page) {
 				$id = ResourceId::encode($Page->origUrl);
 				$uri = "automad://page/$id";
-				$pages[] = array('id' => $id, 'uri' => $uri, 'title' =>  $Page->get(Fields::TITLE), 'url' => $Page->origUrl);
+
+				$data = array(
+					'id' => $id,
+					'uri' => $uri
+				);
+
+				foreach ($Page->data as $key => $value) {
+					if (str_starts_with($key, '+')) {
+						$data[$key] = Blocks::toAgent(
+							$value['blocks'] ?? array(),
+							$Automad->ComponentCollection
+						);
+					} else {
+						if (!in_array($key, Page::IGNORED_FIELDS)) {
+							$data[$key] = $value;
+						}
+					}
+				}
+
+				$pages[] = $data;
 			}
 
 			return $pages;
