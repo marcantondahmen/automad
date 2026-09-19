@@ -223,15 +223,21 @@ class Error {
 	 * Set up the error handler to throw a new exception on error.
 	 */
 	private static function setErrorHandler(): void {
-		set_error_handler(function (int $serverity, string $message, string $file, int $line) {
+		set_error_handler(function (int $severity, string $message, string $file, int $line) {
+			// Respect the `@` error suppression operator by skipping errors that are
+			// not included in the current, temporarily reduced error_reporting() level.
+			if (!(error_reporting() & $severity)) {
+				return false;
+			}
+
 			if (
-				$serverity != E_DEPRECATED &&
-				$serverity != E_USER_DEPRECATED &&
-				$serverity != E_USER_WARNING &&
-				$serverity != E_WARNING &&
-				$serverity != E_NOTICE
+				$severity != E_DEPRECATED &&
+				$severity != E_USER_DEPRECATED &&
+				$severity != E_USER_WARNING &&
+				$severity != E_WARNING &&
+				$severity != E_NOTICE
 			) {
-				throw new ErrorException($message, 0, $serverity, $file, $line);
+				throw new ErrorException($message, 0, $severity, $file, $line);
 			}
 
 			$levels = array(
@@ -242,7 +248,7 @@ class Error {
 				E_NOTICE => '🟡 [NOTICE]'
 			);
 
-			Debug::warn("$message in $file line $line", $levels[$serverity]);
+			Debug::warn("$message in $file line $line", $levels[$severity]);
 		});
 	}
 }
