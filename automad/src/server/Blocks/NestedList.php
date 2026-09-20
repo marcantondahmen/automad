@@ -139,7 +139,7 @@ class NestedList extends AbstractBlock {
 
 		$strings = array();
 
-		foreach ($block['data']['items'] as $item) {
+		foreach (($block['data']['items'] ?? array()) as $item) {
 			$strings[] = $itemToString($item);
 		}
 
