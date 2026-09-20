@@ -99,6 +99,10 @@ class Component extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
+		if (empty($block['data']['id'])) {
+			return '';
+		}
+
 		$component = $ComponentCollection->getComponent($block['data']['id']);
 		$blocks = $component['blocks'] ?? array();
 

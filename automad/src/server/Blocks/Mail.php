@@ -194,10 +194,6 @@ class Mail extends AbstractBlock {
 	 * @return string
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
-		if (!isset($block['data']) || !is_array($block['data'])) {
-			return '';
-		}
-
-		return join(' ', array_map(fn (string $field): string => $block['data'][$field], self::FIELDS));
+		return join(' ', array_map(fn (string $field): string => $block['data'][$field] ?? '', self::FIELDS));
 	}
 }

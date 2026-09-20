@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.58](https://github.com/marcantondahmen/automad/commit/92bede78e8f4d44e239a7320e0d5e96953ccc421)
+## [v2.0.0-beta.59](https://github.com/marcantondahmen/automad/commit/55ca50aaf591a7d70e10f27134e1475d5eb70be8)
 
-Mon, 14 Sep 2026 20:41:36 +0200
+Sun, 20 Sep 2026 09:53:46 +0200
+
+### Bugfixes
+
+- fix search errors with incomplete mail form block ([55ca50aaf](https://github.com/marcantondahmen/automad/commit/55ca50aaf591a7d70e10f27134e1475d5eb70be8))
+
+## [v2.0.0-beta.58](https://github.com/marcantondahmen/automad/commit/1272edbbc54a8b9634fe0759d2a12fdb26a825ce)
+
+Mon, 14 Sep 2026 20:45:02 +0200
 
 ### New Features
 
