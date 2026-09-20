@@ -53,7 +53,7 @@ const services: EmbedServiceData = {
 	imgur: {
 		cls: ['imgur-embed-pub'],
 		script: 'https://s.imgur.com/min/embed.js',
-		getId: (src) => src.replace(/^.+\/imgur.com\//, ''),
+		getId: (src) => src.replace(/^.+\-([a-zA-Z0-9]+)/, '$1'),
 	},
 };
 

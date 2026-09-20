@@ -36,6 +36,7 @@
 namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
+use Automad\Blocks\Utils\Embed as EmbedResolver;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Search\Replacement;
@@ -61,6 +62,18 @@ class Embed extends AbstractBlock {
 	 */
 	public static function render(array $block, Automad $Automad): string {
 		$data = $block['data'];
+		$embedData = EmbedResolver::getEmbedData($data['source'] ?? '');
+
+		if ($embedData === null) {
+			if (empty($data['caption'])) {
+				return '';
+			}
+
+			$attr = Attr::render($block['tunes']);
+
+			return "<am-embed $attr><figure><figcaption>{$data['caption']}</figcaption></figure></am-embed>";
+		}
+
 		$iframeAttr = <<< HTML
 			scrolling="no"
 			frameborder="no"
@@ -80,43 +93,43 @@ class Embed extends AbstractBlock {
 			$iframeType = 'type="iframe"';
 		}
 
-		if ($data['service'] == 'twitter') {
+		if ($embedData['service'] == 'twitter') {
 			$html = <<< HTML
 				<blockquote class="twitter-tweet tw-align-center">
-					<a href="{$data['embed']}" class="am-consent-placeholder"></a>
+					<a href="{$embedData['url']}" class="am-consent-placeholder"></a>
 				</blockquote>
 				<$script $scriptType async src="https://platform.twitter.com/widgets.js" charset="utf-8"></$script>
 			HTML;
-		} elseif ($data['service'] == 'imgur') {
+		} elseif ($embedData['service'] == 'imgur') {
 			/** @var string */
-			$id = preg_replace('/^.*\/imgur.com\//', '', $data['embed']);
+			$id = preg_replace('/^.+?\-([a-zA-Z0-9]+)$/', '$1', $embedData['url']);
 
 			$html = <<< HTML
 				<blockquote class="imgur-embed-pub" data-id="$id">
-					<a href="{$data['embed']}" class="am-consent-placeholder"></a>
+					<a href="{$embedData['url']}" class="am-consent-placeholder"></a>
 				</blockquote>
 				<$script $scriptType async src="https://s.imgur.com/min/embed.js" charset="utf-8"></$script>
 			HTML;
-		} elseif (!empty($data['width'])) {
-			$paddingTop = $data['height'] / $data['width'] * 100;
+		} elseif (!empty($embedData['width'])) {
+			$paddingTop = (float) $embedData['height'] / (float) $embedData['width'] * 100.0;
 
 			$html = <<< HTML
 				<div style="position: relative; padding-top: $paddingTop%;">
 					<$iframe
 						$iframeType
 						$iframeAttr
-						src="{$data['embed']}"
+						src="{$embedData['url']}"
 						style="position: absolute; top: 0; width: 100%; height: 100%;"
 					></$iframe>
 				</div>
 			HTML;
 		} else {
 			$html = <<< HTML
-				<$iframe 
+				<$iframe
 					$iframeType
 					$iframeAttr
-					src="{$data['embed']}"
-					height="{$data['height']}"
+					src="{$embedData['url']}"
+					height="{$embedData['height']}"
 					style="width: 100%;"
 				></$iframe>
 			HTML;
@@ -126,7 +139,7 @@ class Embed extends AbstractBlock {
 			$html .= "<figcaption>{$data['caption']}</figcaption>";
 		}
 
-		$attr = Attr::render($block['tunes'], array('am-embed-' . $data['service']));
+		$attr = Attr::render($block['tunes'], array('am-embed-' . $embedData['service']));
 
 		return "<am-embed $attr><figure>$html</figure></am-embed>";
 	}

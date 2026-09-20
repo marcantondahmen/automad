@@ -208,6 +208,7 @@
 	"emailTestSuccessHeading": "Awesome",
 	"emailTestSuccessSubject": "Mail configuration test",
 	"emailTestSuccessText": "it seems that your email configuration is working correctly.",
+	"embedResolvingError": "The provided URL could not be resolved to a supported embed service!",
 	"enable": "Enable",
 	"extension": "Extension",
 	"feedDisabled": "The RSS feed is disabled",

@@ -1,3 +1,4 @@
+<?php
 /*
  *                    ....
  *                  .:   '':.
@@ -26,53 +27,42 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2025-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-import EditorJS, {
-	API,
-	BlockAPI,
-	BlockTool,
-	BlockToolConstructorOptions,
-	BlockToolData,
-	BlockTune,
-	ConversionConfig,
-	EditorConfig,
-	I18nDictionary,
-	InlineToolConstructorOptions,
-	OutputData,
-	OutputBlockData,
-	ToolConfig,
-} from 'automad-editorjs';
-import type {
-	HTMLPasteEvent,
-	TunesMenuConfig,
-} from 'automad-editorjs/types/tools';
-// @ts-ignore
-import NestedList from '@editorjs/nested-list';
-// @ts-ignore
-import Table from '@editorjs/table';
+namespace Automad\Controllers\Api;
 
-export {
-	API,
-	BlockAPI,
-	BlockTool,
-	BlockToolConstructorOptions,
-	BlockToolData,
-	BlockTune,
-	ConversionConfig,
-	EditorConfig,
-	EditorJS,
-	HTMLPasteEvent,
-	I18nDictionary,
-	InlineToolConstructorOptions,
-	NestedList,
-	OutputBlockData,
-	OutputData,
-	Table,
-	ToolConfig,
-	TunesMenuConfig,
-};
+use Automad\Api\Response;
+use Automad\Blocks\Utils\Embed;
+use Automad\Core\Request;
+use Automad\Core\Text;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+/**
+ * The Embed controller resolves a posted source url into embed data for the embed block.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
+ */
+class EmbedController {
+	/**
+	 * Resolve a posted source url into embed data.
+	 *
+	 * @return Response
+	 */
+	public static function data(): Response {
+		$Response = new Response();
+		$embedData = Embed::getEmbedData(Request::post('source'));
+
+		if ($embedData === null) {
+			return $Response->setError(Text::get('embedResolvingError'));
+		}
+
+		return $Response->setData($embedData);
+	}
+}

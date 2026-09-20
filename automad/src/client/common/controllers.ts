@@ -77,6 +77,10 @@ export const enum EditLockController {
 	set = 'EditLockController::set',
 }
 
+export const enum EmbedController {
+	data = 'EmbedController::data',
+}
+
 export const enum FileCollectionController {
 	list = 'FileCollectionController::list',
 	upload = 'FileCollectionController::upload',
