@@ -422,8 +422,7 @@ class PageController {
 	 * @return string The template filename
 	 */
 	private static function getTemplateNameFromPost(): string {
-		/** @var array<string, string|null> $_POST */
-		return $_POST['theme_template'] ?? '';
+		return Request::post('theme_template');
 	}
 
 	/**
