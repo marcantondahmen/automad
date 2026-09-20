@@ -228,7 +228,11 @@ class Blocks {
 		$content = array();
 
 		foreach ($blocks as $block) {
-			if (!empty($block['type']) && !empty($block['data'])) {
+			if (!empty($block['type'])) {
+				if (empty($block['data'])) {
+					$block['data'] = array();
+				}
+
 				try {
 					$content[] = $fn($block);
 				} catch (\TypeError $e) {
