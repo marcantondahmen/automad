@@ -36,7 +36,7 @@
 namespace Automad\Controllers\Api;
 
 use Automad\Api\Response;
-use Automad\Blocks\Utils\Embed;
+use Automad\Blocks\Utils\EmbedResolver;
 use Automad\Core\Request;
 use Automad\Core\Text;
 
@@ -57,7 +57,7 @@ class EmbedController {
 	 */
 	public static function data(): Response {
 		$Response = new Response();
-		$embedData = Embed::getEmbedData(Request::post('source'));
+		$embedData = EmbedResolver::getEmbedData(Request::post('source'));
 
 		if ($embedData === null) {
 			return $Response->setError(Text::get('embedResolvingError'));

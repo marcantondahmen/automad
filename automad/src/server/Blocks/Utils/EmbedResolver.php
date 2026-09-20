@@ -38,13 +38,13 @@ namespace Automad\Blocks\Utils;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Embed class resolves a 3rd-party source URL into an embeddable URL along with its service name and dimensions.
+ * The EmbedResolver class resolves a 3rd-party source URL into an embeddable URL along with its service name and dimensions.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class Embed {
+class EmbedResolver {
 	/**
 	 * Resolve a source URL against the supported embed services and return its embed url, width, height and preview markup.
 	 *
@@ -183,65 +183,13 @@ class Embed {
 			),
 			// height/width are an aspect ratio (16/9), not pixels.
 			'youtube' => array(
-				'regex' => '~(?:https?://)?(?:www\.)?(?:(?:youtu\.be/)|(?:youtube\.com)/(?:v/|u/\w/|embed/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=\w*)*)~',
+				'regex' => '~(?:https?://)?(?:www\.)?(?:(?:youtu\.be/)|(?:youtube\.com)/(?:v/|u/\w/|embed/|watch)?)(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=\w*)*)~',
 				'embedUrl' => 'https://www.youtube.com/embed/{{ remoteId }}',
 				'width' => 16,
 				'height' => 9,
 				'html' => '<iframe src="{{ source }}" style="width: 100%; aspect-ratio: 16/9;" frameborder="0" allowfullscreen></iframe>',
-				'id' => array(self::class, 'getYoutubeRemoteId'),
+				'id' => fn (array $groups): string => $groups[0] ?? '',
 			),
 		);
-	}
-
-	/**
-	 * Resolves the video id and re-maps a whitelisted set of query params
-	 * (start/end/t/time_continue/list) onto the final remote id string.
-	 *
-	 * @param string[] $groups
-	 * @return string
-	 */
-	private static function getYoutubeRemoteId(array $groups): string {
-		$id = $groups[0] ?? '';
-		$params = $groups[1] ?? '';
-
-		if ($params === '' && $id !== '') {
-			return $id;
-		}
-
-		$paramsMap = array(
-			'start' => 'start',
-			'end' => 'end',
-			't' => 'start',
-			'time_continue' => 'start',
-			'list' => 'list',
-		);
-
-		$parts = array();
-
-		if ($params !== '') {
-			foreach (explode('&', substr($params, 1)) as $pair) {
-				$kv = explode('=', $pair, 2);
-				$key = $kv[0] ?? '';
-				$value = $kv[1] ?? '';
-
-				if ($id === '' && $key === 'v') {
-					$id = $value;
-
-					continue;
-				}
-
-				if (!isset($paramsMap[$key])) {
-					continue;
-				}
-
-				$parts[] = $paramsMap[$key] . '=' . $value;
-			}
-		}
-
-		if ($id === '') {
-			return '';
-		}
-
-		return $id . '?' . implode('&', $parts);
 	}
 }
