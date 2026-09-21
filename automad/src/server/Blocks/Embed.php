@@ -36,7 +36,7 @@
 namespace Automad\Blocks;
 
 use Automad\Blocks\Utils\Attr;
-use Automad\Blocks\Utils\Embed as EmbedResolver;
+use Automad\Blocks\Utils\EmbedResolver;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Search\Replacement;
@@ -62,84 +62,30 @@ class Embed extends AbstractBlock {
 	 */
 	public static function render(array $block, Automad $Automad): string {
 		$data = $block['data'];
-		$embedData = EmbedResolver::getEmbedData($data['source'] ?? '');
+		$embed = EmbedResolver::getEmbedData($data['source'] ?? '');
 
-		if ($embedData === null) {
-			if (empty($data['caption'])) {
-				return '';
-			}
-
-			$attr = Attr::render($block['tunes']);
-
-			return "<am-embed $attr><figure><figcaption>{$data['caption']}</figcaption></figure></am-embed>";
+		if (empty($embed)) {
+			return '';
 		}
 
-		$iframeAttr = <<< HTML
-			scrolling="no"
-			frameborder="no"
-			allowtransparency="true"
-			allowfullscreen="true"
-		HTML;
-
-		$script = 'script';
-		$scriptType = '';
-		$iframe = 'iframe';
-		$iframeType = '';
+		$html = $embed['html'];
+		$service = $embed['service'];
 
 		if (AM_CONSENT_CHECK_ENABLED) {
-			$script = 'am-consent';
-			$scriptType = 'type="script"';
-			$iframe = 'am-consent';
-			$iframeType = 'type="iframe"';
-		}
-
-		if ($embedData['service'] == 'twitter') {
-			$html = <<< HTML
-				<blockquote class="twitter-tweet tw-align-center">
-					<a href="{$embedData['url']}" class="am-consent-placeholder"></a>
-				</blockquote>
-				<$script $scriptType async src="https://platform.twitter.com/widgets.js" charset="utf-8"></$script>
-			HTML;
-		} elseif ($embedData['service'] == 'imgur') {
-			/** @var string */
-			$id = preg_replace('/^.+?\-([a-zA-Z0-9]+)$/', '$1', $embedData['url']);
-
-			$html = <<< HTML
-				<blockquote class="imgur-embed-pub" data-id="$id">
-					<a href="{$embedData['url']}" class="am-consent-placeholder"></a>
-				</blockquote>
-				<$script $scriptType async src="https://s.imgur.com/min/embed.js" charset="utf-8"></$script>
-			HTML;
-		} elseif (!empty($embedData['width'])) {
-			$paddingTop = (float) $embedData['height'] / (float) $embedData['width'] * 100.0;
-
-			$html = <<< HTML
-				<div style="position: relative; padding-top: $paddingTop%;">
-					<$iframe
-						$iframeType
-						$iframeAttr
-						src="{$embedData['url']}"
-						style="position: absolute; top: 0; width: 100%; height: 100%;"
-					></$iframe>
-				</div>
-			HTML;
-		} else {
-			$html = <<< HTML
-				<$iframe
-					$iframeType
-					$iframeAttr
-					src="{$embedData['url']}"
-					height="{$embedData['height']}"
-					style="width: 100%;"
-				></$iframe>
-			HTML;
+			// Only replace either iframe or script tag. Not both since for example the GitHub provider
+			// HTML contains an iframe with a nested script tag that should not be processed.
+			if (str_contains($html, '<iframe')) {
+				$html = str_replace(array('<iframe', '</iframe'), array('<am-consent type="iframe"', '</am-consent'), $html);
+			} else {
+				$html = str_replace(array('<script', '</script'), array('<am-consent type="script"', '</am-consent'), $html);
+			}
 		}
 
 		if (!empty($data['caption'])) {
 			$html .= "<figcaption>{$data['caption']}</figcaption>";
 		}
 
-		$attr = Attr::render($block['tunes'], array('am-embed-' . $embedData['service']));
+		$attr = Attr::render($block['tunes'], array('am-embed-' . $service));
 
 		return "<am-embed $attr><figure>$html</figure></am-embed>";
 	}

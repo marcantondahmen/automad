@@ -39,6 +39,8 @@ import {
 	EmbedController,
 	fire,
 	html,
+	KeyValueMap,
+	query,
 	requestApi,
 } from '@/admin/core';
 import { BaseBlock } from './BaseBlock';
@@ -47,6 +49,25 @@ interface EmbedBlockData {
 	source: string;
 	caption: string;
 }
+
+/**
+ * Handle script tags in injected HTML.
+ *
+ * @param embed
+ */
+const handleScript = (embed: HTMLElement): void => {
+	const script = query('script', embed);
+
+	if (script) {
+		const attributes: KeyValueMap = {};
+
+		for (const attribute of script.attributes) {
+			attributes[attribute.name] = attribute.value;
+		}
+
+		script.replaceWith(create('script', [], { ...attributes }));
+	}
+};
 
 export class EmbedBlock extends BaseBlock<EmbedBlockData> {
 	/**
@@ -168,7 +189,7 @@ export class EmbedBlock extends BaseBlock<EmbedBlockData> {
 			return false;
 		}
 
-		create('div', [], {}, this.wrapper, data.html);
+		handleScript(create('div', [], {}, this.wrapper, data.html));
 
 		this.caption = create(
 			'div',

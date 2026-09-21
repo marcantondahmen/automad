@@ -39,23 +39,32 @@ am-embed {
 		align-items: center;
 		flex-direction: column;
 
-		& > div {
-			margin: -1px;
-			width: 100%;
-		}
-
 		& > blockquote {
 			margin: 0;
 			padding: 0;
 			width: 100%;
 		}
 
-		& div.twitter-tweet {
+		& figcaption {
+			display: flex;
+			width: 100%;
+		}
+
+		& .twitter-tweet {
 			margin: 0 !important;
 			padding: 0;
 			padding-right: 1px;
 			border-radius: 10px;
 			overflow: hidden;
+
+			& a {
+				pointer-events: none;
+				text-decoration: none !important;
+			}
+
+			& am-consent-placeholder {
+				aspect-ratio: 16/9;
+			}
 		}
 	}
 }
