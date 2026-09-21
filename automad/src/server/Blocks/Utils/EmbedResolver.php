@@ -106,13 +106,13 @@ class EmbedResolver {
 			'giphy' => array(
 				'regex' => '~https?://giphy\.com/(?:gifs|videos)/(?:[^/]*\-)?([a-zA-Z0-9]+)$~D',
 				'embedUrl' => 'https://giphy.com/embed/{{ remoteId }}/',
-				'html' => '<iframe src="{{ embedUrl }}" width="600" height="480"></iframe>',
+				'html' => '<iframe src="{{ embedUrl }}" width="600" height="480" style="width: 100%;"></iframe>',
 				'id' => null,
 			),
 			'github' => array(
 				'regex' => '~https?://gist\.github\.com/([^/?&]*)/([^/?&]*)~',
 				'embedUrl' => 'data:text/html;charset=utf-8,<head><base target="_blank"></head><body><script src="https://gist.github.com/{{ remoteId }}"></script></body>',
-				'html' => '<iframe src=\'{{ embedUrl }}\' width="100%" height="500" style="margin: 0 auto;"></iframe>',
+				'html' => '<iframe src=\'{{ embedUrl }}\' width="100%" height="500" style="margin: 0 auto; width: 100%;"></iframe>',
 				'id' => fn (array $groups): string => implode('/', $groups) . '.js',
 			),
 			'imgur' => array(
