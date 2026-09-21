@@ -57,12 +57,12 @@ class EmbedController {
 	 */
 	public static function data(): Response {
 		$Response = new Response();
-		$embedData = EmbedResolver::getEmbedData(Request::post('source'));
+		$html = EmbedResolver::getHtml(Request::post('source'));
 
-		if ($embedData === null) {
+		if ($html === null) {
 			return $Response->setError(Text::get('embedResolvingError'));
 		}
 
-		return $Response->setData($embedData);
+		return $Response->setData(array('html' => $html));
 	}
 }

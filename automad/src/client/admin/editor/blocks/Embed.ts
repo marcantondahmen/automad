@@ -185,7 +185,7 @@ export class EmbedBlock extends BaseBlock<EmbedBlockData> {
 
 		this.wrapper.innerHTML = '';
 
-		if (!data?.service) {
+		if (!data?.html) {
 			return false;
 		}
 

@@ -62,14 +62,11 @@ class Embed extends AbstractBlock {
 	 */
 	public static function render(array $block, Automad $Automad): string {
 		$data = $block['data'];
-		$embed = EmbedResolver::getEmbedData($data['source'] ?? '');
+		$html = EmbedResolver::getHtml($data['source'] ?? '');
 
-		if (empty($embed)) {
+		if (empty($html)) {
 			return '';
 		}
-
-		$html = $embed['html'];
-		$service = $embed['service'];
 
 		if (AM_CONSENT_CHECK_ENABLED) {
 			// Only replace either iframe or script tag. Not both since for example the GitHub provider
@@ -85,7 +82,7 @@ class Embed extends AbstractBlock {
 			$html .= "<figcaption>{$data['caption']}</figcaption>";
 		}
 
-		$attr = Attr::render($block['tunes'], array('am-embed-' . $service));
+		$attr = Attr::render($block['tunes']);
 
 		return "<am-embed $attr><figure>$html</figure></am-embed>";
 	}
