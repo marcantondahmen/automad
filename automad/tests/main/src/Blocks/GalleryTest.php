@@ -65,6 +65,86 @@ class GalleryTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "gallery",
+					"data": {
+						"columnWidthPx": 250,
+						"files": [
+							"image-1.png",
+							"image-2.png"
+						],
+						"fillRectangle": false,
+						"gapPx": 5,
+						"layout": "rows",
+						"rowHeightPx": 250
+					},
+					"tunes": {
+						"layout": {
+							"stretched": false
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "gallery",
+					"data.columnWidthPx": 250,
+					"data.files": [
+						"image-1.png",
+						"image-2.png"
+					],
+					"data.layout": "rows",
+					"data.rowHeightPx": 250
+				}
+				JSON
+			),
+			array(
+				<<< JSON
+				{
+					"id": "2",
+					"type": "gallery",
+					"data": {
+						"columnWidthPx": 250,
+						"files": [
+							"image-1.png",
+							"image-2.png"
+						],
+						"fillRectangle": false,
+						"gapPx": 5,
+						"layout": "columns",
+						"rowHeightPx": 250
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "2",
+					"type": "gallery",
+					"stretched": true,
+					"data.columnWidthPx": 250,
+					"data.files": [
+						"image-1.png",
+						"image-2.png"
+					],
+					"data.layout": "columns",
+					"data.rowHeightPx": 250
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -86,5 +166,13 @@ class GalleryTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Gallery', $blockJson, $expectedAgentJson);
 	}
 }

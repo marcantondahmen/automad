@@ -3,6 +3,7 @@
 namespace Automad\Blocks;
 
 use Automad\Models\Search\Replacement;
+use Automad\Test\Block;
 use Automad\Test\Mock;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -32,6 +33,35 @@ class ComponentTest extends TestCase {
 				JSON,
 				'Component test',
 				'Component test replaced'
+			)
+		);
+	}
+
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "component",
+					"data": {
+						"id": "12345"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "component",
+					"stretched": true,
+					"data.id": "12345"
+				}
+				JSON
 			)
 		);
 	}
@@ -93,5 +123,13 @@ class ComponentTest extends TestCase {
 				$Automad->ComponentCollection
 			)
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Component', $blockJson, $expectedAgentJson);
 	}
 }

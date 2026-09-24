@@ -41,6 +41,32 @@ class HeaderTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "header",
+					"data": {
+						"level": 2,
+						"text": "Heading text"
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "header",
+					"data.level": 2,
+					"data.text": "Heading text"
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -62,5 +88,13 @@ class HeaderTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Header', $blockJson, $expectedAgentJson);
 	}
 }

@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,21 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Paragraph extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			The basic default text block.
+			TXT;
+	}
+
 	/**
 	 * Render a paragraph block.
 	 *
@@ -108,5 +121,27 @@ class Paragraph extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return $block['data']['text'] ?? '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'large' => new AgentFieldSchema(
+				'boolean',
+				<<< TXT
+					If true, the paragraph is rendered with a larger font size.
+					This can be used to make a paragraph stand out and is ideal for sub-heading text.
+					TXT,
+				true
+			),
+			'text' => new AgentFieldSchema(
+				'string',
+				'The actual paragraph text'
+			)
+		);
 	}
 }

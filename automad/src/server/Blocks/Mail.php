@@ -35,7 +35,8 @@
 
 namespace Automad\Blocks;
 
-use Automad\API\Response;
+use Automad\Api\Response;
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Text;
@@ -52,6 +53,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Mail extends AbstractBlock {
@@ -67,6 +69,17 @@ class Mail extends AbstractBlock {
 		'error',
 		'success'
 	);
+
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			An email contact form that handles sending emails from visitors to the site's owner.
+			TXT;
+	}
 
 	/**
 	 * Render a mail form block.
@@ -195,5 +208,24 @@ class Mail extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return join(' ', array_map(fn (string $field): string => $block['data'][$field] ?? '', self::FIELDS));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'labelSend' => new AgentFieldSchema(
+				'string',
+				'Send',
+				true
+			),
+			'to' => new AgentFieldSchema(
+				'string',
+				'user@domain.com'
+			),
+		);
 	}
 }

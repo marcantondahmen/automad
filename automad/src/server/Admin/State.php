@@ -35,6 +35,7 @@
 
 namespace Automad\Admin;
 
+use Automad\Ai\Assistance\ProviderCollection;
 use Automad\Auth\Token\AccessTokenConfig;
 use Automad\Auth\User;
 use Automad\Core\Automad;
@@ -42,7 +43,6 @@ use Automad\Core\Cache;
 use Automad\Core\Parse;
 use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;
-use Automad\Ai\Assistance\ProviderCollection;
 use Automad\System\Fields;
 use Automad\System\FileUtils;
 use Automad\System\PackageCollection;
@@ -108,9 +108,9 @@ class State {
 			'componentsPublicationState' => $Automad->ComponentCollection->getPublicationState(),
 			'components' => $Automad->ComponentCollection->get(),
 			'files' => array(
-				'pagelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
-				'filelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),
-				'snippets' => PackageCollection::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/'),
+				'pagelist' => PackageCollection::getPackagesDirectoryPagelistTemplates(),
+				'filelist' => PackageCollection::getPackagesDirectoryFilelistTemplates(),
+				'snippets' => PackageCollection::getPackagesDirectorySnippets(),
 			),
 			'system' => array(
 				'accessTokens' => array(

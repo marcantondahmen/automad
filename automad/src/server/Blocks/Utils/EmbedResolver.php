@@ -79,6 +79,15 @@ class EmbedResolver {
 	}
 
 	/**
+	 * Return a list of keys of registered services.
+	 *
+	 * @return string[]
+	 */
+	public static function getServiceKeys(): array {
+		return array_keys(self::getServices());
+	}
+
+	/**
 	 * Return the supported embed services table.
 	 *
 	 * @return array<string, array{regex: string, embedUrl: string, html: string, id: (callable(string[]): string)|null}>

@@ -77,6 +77,60 @@ class NestedListTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "nestedList",
+					"data": {
+						"style": "unordered",
+						"items": [
+							{
+								"content": "Item 1",
+								"items": [
+									{
+										"content": "Subitem 1",
+										"items": []
+									},
+									{
+										"content": "Subitem 2",
+										"items": []
+									}
+								]
+							}
+						]
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "nestedList",
+					"data.items": [
+						{
+							"content": "Item 1",
+							"items": [
+								{
+									"content": "Subitem 1",
+									"items": []
+								},
+								{
+									"content": "Subitem 2",
+									"items": []
+								}
+							]
+						}
+					],
+					"data.style": "unordered"
+				}
+				JSON,
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -98,5 +152,13 @@ class NestedListTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'NestedList', $blockJson, $expectedAgentJson);
 	}
 }

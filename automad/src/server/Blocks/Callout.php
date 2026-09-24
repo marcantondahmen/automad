@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Callout extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return 'A callout box that can be used for important notes or alerts.';
+	}
+
 	/**
 	 * Render a callout block.
 	 *
@@ -109,5 +120,23 @@ class Callout extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return trim(($block['data']['title'] ?? '') . ' ' . ($block['data']['text'] ?? ''));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'text' => new AgentFieldSchema(
+				'string',
+				'The main callout text'
+			),
+			'title' => new AgentFieldSchema(
+				'string',
+				'The callout title'
+			)
+		);
 	}
 }

@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Core\Automad;
 use Automad\Engine\Processors\TemplateProcessor;
 use Automad\Models\ComponentCollection;
@@ -48,18 +49,31 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
-class Snippet {
+class Snippet extends AbstractBlock {
 	/**
 	 * This variable tracks whether a snippet is called by another snippet to prevent inifinte recursive loops.
 	 */
 	public static bool $snippetIsRendering = false;
 
 	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			The snippet block can be used to render any Automad template language code 
+			and serves as a flexible option to extend Automad block functionality.
+			TXT;
+	}
+
+	/**
 	 * Render a snippet block.
 	 *
-	 * @param array{id: string, data: array{file: string, snippet: string}} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
@@ -128,5 +142,28 @@ class Snippet {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'file' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The snippet file that should be rendered. 
+					Before selecting a snippet, read the available snippets 
+					from the `automad://snippets` resource. 
+					Use one of the returned snippet files.'
+					TXT
+			),
+			'snippet' => new AgentFieldSchema(
+				'string',
+				'Alternaively to a file, the snippet code can be defined here.'
+			)
+		);
 	}
 }

@@ -89,6 +89,62 @@ class ImageSlideshowTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "imageSlideshow",
+					"data": {
+						"autoplay": false,
+						"breakpoints": {
+							"600": {
+								"slidesPerView": 2
+							},
+							"900": {
+								"slidesPerView": 3
+							}
+						},
+						"delay": 3000,
+						"effect": "slide",
+						"files": [
+							"image-1.png",
+							"image-2.png",
+							"image-3.png"
+						],
+						"gapPx": 0,
+						"hideControls": false,
+						"imageHeightPx": 780,
+						"imageWidthPx": 1200,
+						"loop": true,
+						"slidesPerView": 1
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "imageSlideshow",
+					"stretched": true,
+					"data.files": [
+						"image-1.png",
+						"image-2.png",
+						"image-3.png"
+					],
+					"data.imageHeightPx": 780,
+					"data.imageWidthPx": 1200
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -110,5 +166,13 @@ class ImageSlideshowTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'ImageSlideshow', $blockJson, $expectedAgentJson);
 	}
 }

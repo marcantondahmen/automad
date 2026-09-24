@@ -41,6 +41,58 @@ class ParagraphTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "paragraph",
+					"data": {
+						"large": false,
+						"text": "Test paragraph text"
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "paragraph",
+					"data.text": "Test paragraph text"
+				}
+				JSON,
+			),
+			array(
+				<<< JSON
+				{
+					"id": "2",
+					"type": "paragraph",
+					"data": {
+						"large": true,
+						"text": "Test paragraph text"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": false,
+							"width": "1/2"
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "2",
+					"type": "paragraph",
+					"width": "1/2",
+					"data.large": true,
+					"data.text": "Test paragraph text"
+				}
+				JSON,
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -62,5 +114,13 @@ class ParagraphTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Paragraph', $blockJson, $expectedAgentJson);
 	}
 }

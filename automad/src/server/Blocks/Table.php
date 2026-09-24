@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,21 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Table extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A HTML table block.
+			TXT;
+	}
+
 	/**
 	 * Render a table block.
 	 *
@@ -141,5 +154,34 @@ class Table extends AbstractBlock {
 		}
 
 		return join(' ', $cells);
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'withHeadings' => new AgentFieldSchema(
+				'boolean',
+				'Whether the first row is used as the table heading.',
+				true
+			),
+			'content' => new AgentFieldSchema(
+				'array',
+				'The table rows. Each row must contain the same number of cells.',
+				items: array('type' => 'array', 'items' => array( 'type' => 'string'))
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

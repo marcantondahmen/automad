@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
@@ -53,9 +54,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class ImageSlideshow extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return 'An image slideshow that renders a selection of images in a responsive carousel.';
+	}
+
 	/**
 	 * Render a slider block.
 	 *
@@ -139,5 +150,36 @@ class ImageSlideshow extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return join(' ', $block['data']['files'] ?? array());
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'files' => new AgentFieldSchema(
+				'array',
+				'The array of file URLs or file names.'
+			),
+			'imageHeightPx' => new AgentFieldSchema(
+				'number',
+				'The slideshow image height in pixels.'
+			),
+			'imageWidthPx' => new AgentFieldSchema(
+				'number',
+				'The slideshow image width in pixels.'
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

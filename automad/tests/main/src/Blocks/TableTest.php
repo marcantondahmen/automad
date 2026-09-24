@@ -69,6 +69,54 @@ class TableTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "table",
+					"data": {
+						"withHeadings": false,
+						"content": [
+							[
+								"header a",
+								"header b"
+							],
+							[
+								"row a",
+								"row b"
+							]
+						]
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "table",
+					"stretched": true,
+					"data.content": [
+						[
+							"header a",
+							"header b"
+						],
+						[
+							"row a",
+							"row b"
+						]
+					]
+				}
+				JSON,
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -90,5 +138,13 @@ class TableTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Table', $blockJson, $expectedAgentJson);
 	}
 }

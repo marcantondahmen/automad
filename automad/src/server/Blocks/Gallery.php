@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\Img;
 use Automad\Blocks\Utils\ImgLoaderSet;
@@ -54,9 +55,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Gallery extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return 'A image gallery block that renders a selection of images in a row-layout, a masonry column-layout, or a simple grid. On click, images open up in a lightbox.';
+	}
+
 	/**
 	 * Render a gallery block.
 	 *
@@ -139,5 +150,41 @@ class Gallery extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return join(' ', $block['data']['files'] ?? array());
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'columnWidthPx' => new AgentFieldSchema(
+				'number',
+				'The minimum width in pixels a column should span in the gallery. Only used for "grid" or "columns" layouts.'
+			),
+			'files' => new AgentFieldSchema(
+				'array',
+				'The template that is used to render the filelist.'
+			),
+			'layout' => new AgentFieldSchema(
+				'string',
+				'Possible layout values are: "columns", "rows", and "grid"',
+				enum: array('columns', 'grid', 'rows')
+			),
+			'rowHeightPx' => new AgentFieldSchema(
+				'number',
+				'The minimum width in pixels a row should span in the gallery. Only used for "grid" or "rows" layouts.'
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

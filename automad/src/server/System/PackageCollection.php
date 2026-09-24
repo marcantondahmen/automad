@@ -157,12 +157,21 @@ class PackageCollection {
 	}
 
 	/**
+	 * Get all filelist templates that are installed in the packages directory.
+	 *
+	 * @return array
+	 */
+	public static function getPackagesDirectoryFilelistTemplates(): array {
+		return PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/');
+	}
+
+	/**
 	 * Get all items in the packages directory, optionally filtered by a regex string.
 	 *
 	 * @param string $filter
 	 * @return array A filtered list with all items in the packages directory
 	 */
-	public static function getPackagesDirectoryItems(string $filter = '') {
+	public static function getPackagesDirectoryItems(string $filter = ''): array {
 		if (empty(self::$packageDirectoryItems)) {
 			$packagesDir = AM_BASE_DIR . AM_DIR_PACKAGES;
 
@@ -174,6 +183,24 @@ class PackageCollection {
 		}
 
 		return self::$packageDirectoryItems;
+	}
+
+	/**
+	 * Get all pagelist templates that are installed in the packages directory.
+	 *
+	 * @return array
+	 */
+	public static function getPackagesDirectoryPagelistTemplates(): array {
+		return PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/');
+	}
+
+	/**
+	 * Get all snippets that are installed in the packages directory.
+	 *
+	 * @return array
+	 */
+	public static function getPackagesDirectorySnippets(): array {
+		return PackageCollection::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/');
 	}
 
 	/**

@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Buttons extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return 'A primary and optional secondary button that can be used for call-to-action links.';
+	}
+
 	/**
 	 * Render a buttons block.
 	 *
@@ -127,6 +138,34 @@ class Buttons extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return trim(($block['data']['primaryText'] ?? '') . ' ' . ($block['data']['secondaryText'] ?? ''));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'primaryLink' => new AgentFieldSchema(
+				'string',
+				'The linked external or local absolute URL'
+			),
+			'primaryText' => new AgentFieldSchema(
+				'string',
+				'The label text of the primary button'
+			),
+			'secondaryLink' => new AgentFieldSchema(
+				'string',
+				'The linked external or local absolute URL',
+				true
+			),
+			'secondaryText' => new AgentFieldSchema(
+				'string',
+				'The label text of the secondary button',
+				true
+			)
+		);
 	}
 
 	/**

@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Code extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return 'A code snippet block with syntax highlighting that can be used for code examples or installation instructions.';
+	}
+
 	/**
 	 * Render a code block.
 	 *
@@ -108,5 +119,64 @@ class Code extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return $block['data']['code'] ?? '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'code' => new AgentFieldSchema(
+				'string',
+				'The actual code snippet that is displayed.'
+			),
+			'language' => new AgentFieldSchema(
+				'string',
+				'The programming language of the code snippet that is used for syntax highlighting.',
+				true,
+				array(
+					'apacheconf',
+					'automad',
+					'bash',
+					'basic',
+					'c',
+					'clike',
+					'csharp',
+					'cpp',
+					'css',
+					'go',
+					'graphql',
+					'handlebars',
+					'html',
+					'java',
+					'javascript',
+					'jsx',
+					'latex',
+					'less',
+					'lua',
+					'markdown',
+					'nginx',
+					'none',
+					'php',
+					'powershell',
+					'python',
+					'ruby',
+					'rust',
+					'sass',
+					'sql',
+					'tsx',
+					'typescript',
+					'vim',
+					'yaml',
+				)
+			),
+			'lineNumbers' => new AgentFieldSchema(
+				'boolean',
+				'Defines whether line numbers are displayed for the code snippet.',
+				true
+			)
+		);
 	}
 }

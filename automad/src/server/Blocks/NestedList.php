@@ -35,6 +35,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Ai\Mcp\SchemaReference;
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,6 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class NestedList extends AbstractBlock {
@@ -56,6 +59,17 @@ class NestedList extends AbstractBlock {
 	 * The list type tag
 	 */
 	private static string $tag;
+
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A nested list representing the HTML <ul> element.
+			TXT;
+	}
 
 	/**
 	 * Render a list block.
@@ -144,6 +158,26 @@ class NestedList extends AbstractBlock {
 		}
 
 		return join(' ', $strings);
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'items' => new AgentFieldSchema(
+				'array',
+				'A nested list.',
+				enum: array('$ref' => SchemaReference::NESTED_LIST_ITEM)
+			),
+			'style' => new AgentFieldSchema(
+				'string',
+				'The style of the list',
+				enum: array('ordered', 'unordered')
+			)
+		);
 	}
 
 	/**

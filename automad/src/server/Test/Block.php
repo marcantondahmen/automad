@@ -104,4 +104,37 @@ class Block {
 			)
 		);
 	}
+
+	/**
+	 * A test wrapper for toAgent conversion testing.
+	 *
+	 * @psalm-suppress InvalidStringClass
+	 *
+	 * @param mixed $Test
+	 * @param string $blockClass
+	 * @param string $blockJson
+	 * @param string $expectedAgentJson
+	 */
+	public static function testToAgent(
+		mixed $Test,
+		string $blockClass,
+		string $blockJson,
+		string $expectedAgentJson
+	): void {
+		$Mock = new Mock();
+		$Automad = $Mock->createAutomad();
+		$block = json_decode($blockJson, true);
+		$expectedAgent = json_decode($expectedAgentJson, true);
+		$flags = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES;
+		$class = "\\Automad\\Blocks\\$blockClass";
+
+		/** @disregard */
+		$Test->assertSame(
+			$expectedAgent,
+			$class::toAgent(
+				$block,
+				$Automad->ComponentCollection
+			)
+		);
+	}
 }

@@ -35,6 +35,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Ai\Mcp\SchemaReference;
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
@@ -50,9 +52,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class LayoutSection extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A layout section that serves as a layout wrapper for other blocks inside. 
+			Optionally, blocks can be arranged on a 12 column grid based on a 
+			fractional width of 1/4, 1/3, 1/2, 2/3, 3/4, or 1/1
+			TXT;
+	}
+
 	/**
 	 * Render a section editor block.
 	 *
@@ -235,5 +251,30 @@ class LayoutSection extends AbstractBlock {
 		$blocks = $content['blocks'] ?? array();
 
 		return Blocks::toString($blocks, $ComponentCollection);
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'content' => new AgentFieldSchema(
+				'array',
+				'The child block of the section.',
+				items: array('$ref' => SchemaReference::BLOCK),
+				hasBlocks: true
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

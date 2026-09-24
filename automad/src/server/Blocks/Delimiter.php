@@ -52,6 +52,15 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Delimiter extends AbstractBlock {
 	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return 'A horizontal line that can be used as a visual delimiter between to sections of content.';
+	}
+
+	/**
 	 * Render a delimiter block.
 	 *
 	 * @param BlockData $block
@@ -91,5 +100,14 @@ class Delimiter extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return '';
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

@@ -55,6 +55,76 @@ class EmbedTest extends TestCase {
 				}
 				JSON,
 				'Video caption test'
+			),
+			array(
+				'caption test',
+				'test caption',
+				false,
+				true,
+				<<< JSON
+				{
+					"id": "2",
+					"type": "embed",
+					"data": {
+						"source": "https://www.youtube.com/watch?v=jMyfnN_gu5w",
+						"caption": "Video caption test"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": false,
+							"width": null
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "2",
+					"type": "embed",
+					"data": {
+						"source": "https://www.youtube.com/watch?v=jMyfnN_gu5w",
+						"caption": "Video test caption"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": false,
+							"width": null
+						}
+					}
+				}
+				JSON,
+				'Video caption test'
+			)
+		);
+	}
+
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "embed",
+					"data": {
+						"source": "https://www.youtube.com/watch?v=abcdef",
+						"caption": "Some caption text"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "embed",
+					"stretched": true,
+					"data.source": "https://www.youtube.com/watch?v=abcdef",
+					"data.caption": "Some caption text"
+				}
+				JSON
 			)
 		);
 	}
@@ -80,5 +150,13 @@ class EmbedTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Embed', $blockJson, $expectedAgentJson);
 	}
 }

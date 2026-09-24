@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Str;
@@ -50,9 +51,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Header extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return 'A heading block that represents HTML heading elements <h1> to <h6>.';
+	}
+
 	/**
 	 * Render a header block.
 	 *
@@ -107,5 +118,24 @@ class Header extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return $block['data']['text'] ?? '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return AgentSchema
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'level' => new AgentFieldSchema(
+				'number',
+				'The heading level. Possible values are 1 up to 6.',
+				enum: array(1, 2, 3, 4, 5, 6)
+			),
+			'text' => new AgentFieldSchema(
+				'string',
+				'The actual heading content.'
+			)
+		);
 	}
 }
