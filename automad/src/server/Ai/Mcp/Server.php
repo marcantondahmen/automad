@@ -46,23 +46,9 @@ use Psr\Http\Message\ServerRequestInterface;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A thin wrapper around the mcp/sdk package, exposing Automad's MCP server as a single
- * `handle()` method that a controller can call with a PSR-7 server request. It deliberately
- * serves both MCP protocol eras from this one endpoint: the handshake era (initialize,
- * notifications/initialized, tools/list, tools/call, Mcp-Session-Id) that every real-world MCP
- * client speaks today, and the SDK's stateless "modern era" (SEP-2575, no initialize, per-request
- * `_meta` versioning, server/discover), pinned to the single revision this codebase has been
- * tested against via setModernVersions() rather than left on the SDK's open-ended default. Which
- * era answers a given request is decided per-request by the SDK's own StreamableHttpTransport;
- * Automad does not implement or influence that routing, and both eras are dispatched through the
- * exact same tool/resource/resourceTemplate handlers below - none of them need to be era-aware.
- * Sessions are persisted to disk (StreamableHttpTransport::SESSION_HEADER carries the session
- * id), since a classic PHP request doesn't live long enough to keep the session created by
- * "initialize" in memory for the following request. This is a handshake-era-only concern - the
- * modern era is stateless by design and never touches the session store - but it must stay
- * unconditional, since handshake clients depend on it to survive across separate PHP-FPM
- * requests. Tools and resources are not registered here directly, but discovered by
- * Automad\Ai\Mcp\Provider.
+ * A thin wrapper around the mcp/sdk package.
+ * Tools and resources are not registered here directly,
+ * but discovered by Automad\Ai\Mcp\Provider.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
