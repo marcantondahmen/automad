@@ -66,16 +66,16 @@ class Page extends AbstractResourceTemplate {
 	 * @return callable
 	 */
 	public function getHandler(): callable {
-		return function (string $page_id) {
+		return function (string $id) {
 			$Automad = Automad::fromCache();
-			$Page = $Automad->getPage(ResourceId::decode($page_id));
+			$Page = $Automad->getPage(ResourceId::decode($id));
 
 			if (!$Page) {
 				return array();
 			}
 
 			$data = array(
-				'id' => $page_id
+				'id' => $id
 			);
 
 			foreach ($Page->data as $key => $value) {
@@ -121,6 +121,6 @@ class Page extends AbstractResourceTemplate {
 	 * @return string
 	 */
 	public function getUriTemplate(): string {
-		return 'page/{page_id}';
+		return 'page/{id}';
 	}
 }
