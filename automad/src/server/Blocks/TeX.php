@@ -61,7 +61,9 @@ class TeX extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			The TeX block can be used to render math expressions, formulas, or functions using KaTeX.
+			A block for mathematical notation written in TeX/LaTeX syntax that is rendered using
+			KaTeX. Use it for display-style equations, formulas or functions that stand on their own
+			line.
 			TXT;
 	}
 
@@ -128,7 +130,10 @@ class TeX extends AbstractBlock {
 		return array(
 			'code' => new AgentFieldSchema(
 				'string',
-				'The TeX code.',
+				<<< TXT
+					The math expression in TeX/LaTeX syntax without any surrounding dollar sign delimiters,
+					e.g. E = mc^2.
+					TXT,
 			)
 		);
 	}

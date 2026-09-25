@@ -59,7 +59,12 @@ class Filelist extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A dynamically generated filelist that renders a list of files based on a glob pattern.';
+		return <<< TXT
+			A dynamic list of files that are matched by a glob pattern, e.g. downloadable PDFs or
+			other documents that are attached to a page. Each file is rendered using a filelist
+			template. Read the `automad://templates/filelist` resource before choosing one. Use the
+			"gallery" block to display images visually instead.
+			TXT;
 	}
 
 	/**
@@ -148,19 +153,26 @@ class Filelist extends AbstractBlock {
 			'file' => new AgentFieldSchema(
 				'string',
 				<<< TXT
-					The Automad template used to render each file. 
-					Before selecting a template, read the available file-list templates 
-					from the `automad://templates/filelist` resource. 
-					Use one of the returned template files.'
+					The Automad template that is used to render each file of the list. Before selecting a
+					template, read the available filelist templates from the `automad://templates/filelist`
+					resource and use one of the returned template files.
 					TXT
 			),
 			'glob' => new AgentFieldSchema(
 				'string',
-				'A glob pattern that used to select files that are included in the file list.'
+				<<< TXT
+					One or more comma-separated glob patterns that select the listed files, e.g. "*.pdf" or
+					"*.pdf, *.zip". Patterns are resolved relative to the directory of the current page,
+					unless they start with a slash, in which case they are resolved relative to the Automad
+					base directory.
+					TXT
 			),
 			'sortOrder' => new AgentFieldSchema(
 				'string',
-				'The sorting order. Either "asc" or "desc".',
+				<<< TXT
+					The sort order of the files by their path, either "asc" for ascending or "desc" for
+					descending.
+					TXT,
 				enum: array('asc', 'desc')
 			)
 		);

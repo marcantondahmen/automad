@@ -62,7 +62,10 @@ class Raw extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A raw HTML or markdown block. Markdown content is automatically rendered to valid HTML.
+			Outputs raw HTML or Markdown as is, whereas Markdown is automatically converted to HTML.
+			Use it for custom markup, iframes, third-party widgets or Markdown content that has no
+			matching block type. Prefer dedicated block types such as "paragraph", "header",
+			"nestedList" or "table" whenever one fits, since they remain editable in the dashboard.
 			TXT;
 	}
 
@@ -127,7 +130,10 @@ class Raw extends AbstractBlock {
 		return array(
 			'code' => new AgentFieldSchema(
 				'string',
-				'Raw HTML or Markdown code.'
+				<<< TXT
+					The raw HTML or Markdown code. Markdown is converted to HTML and HTML is output as is
+					without any escaping.
+					TXT
 			)
 		);
 	}

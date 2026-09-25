@@ -60,7 +60,9 @@ class TableOfContents extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A dynamically generated table of contents based on headings found on the page.
+			An automatically generated table of contents that links to all headings ("header" blocks)
+			on the page. It has no content of its own. Place it near the top of long articles or
+			documentation pages.
 			TXT;
 	}
 
@@ -118,7 +120,10 @@ class TableOfContents extends AbstractBlock {
 		return array(
 			'type' => new AgentFieldSchema(
 				'string',
-				'The type list used for the table of contents. Ordered or unordered',
+				<<< TXT
+					The list style of the table of contents. "ordered" renders a numbered list and "unordered"
+					renders a bulleted list. Defaults to "ordered".
+					TXT,
 				true,
 				array('ordered', 'unordered')
 			)

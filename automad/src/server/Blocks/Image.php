@@ -62,7 +62,11 @@ class Image extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A single image block. The image can optionally be used as link as well.';
+		return <<< TXT
+			A single responsive image with alternative text. Use it for a standalone photo,
+			illustration or diagram. For multiple images, use the "gallery" block (grid or masonry
+			layout with lightbox) or the "imageSlideshow" block (carousel) instead.
+			TXT;
 	}
 
 	/**
@@ -214,11 +218,18 @@ class Image extends AbstractBlock {
 		return array(
 			'alt' => new AgentFieldSchema(
 				'string',
-				'The text for the HTML "alt" attribute.'
+				<<< TXT
+					A short description of the image content for screen readers and search engines that is
+					rendered as the HTML "alt" attribute.
+					TXT
 			),
 			'url' => new AgentFieldSchema(
 				'string',
-				'The image URL. This can be a remote URL, just a file name or an absolute path on the same website.'
+				<<< TXT
+					The image source. Either the file name of an image that is attached to the current page, a
+					path that starts with a slash and is relative to the Automad base directory, or a full
+					remote image URL.
+					TXT
 			)
 		);
 	}

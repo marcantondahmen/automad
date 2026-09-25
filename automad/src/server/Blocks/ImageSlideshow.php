@@ -64,7 +64,11 @@ class ImageSlideshow extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'An image slideshow that renders a selection of images in a responsive carousel.';
+		return <<< TXT
+			A responsive carousel or slider that shows a set of images one at a time. Use it for hero
+			sliders or image sequences where space is limited. Use the "gallery" block to show all
+			images at once instead.
+			TXT;
 	}
 
 	/**
@@ -161,15 +165,25 @@ class ImageSlideshow extends AbstractBlock {
 		return array(
 			'files' => new AgentFieldSchema(
 				'array',
-				'The array of file URLs or file names.'
+				<<< TXT
+					The list of images that are shown in the slideshow. Each item is either the file name of
+					an image that is attached to the current page, a path that starts with a slash and is
+					relative to the Automad base directory, or a full remote image URL.
+					TXT
 			),
 			'imageHeightPx' => new AgentFieldSchema(
 				'number',
-				'The slideshow image height in pixels.'
+				<<< TXT
+					The height in pixels that all images are cropped to, e.g. 780. Together with
+					"imageWidthPx" it defines the aspect ratio of the slides.
+					TXT
 			),
 			'imageWidthPx' => new AgentFieldSchema(
 				'number',
-				'The slideshow image width in pixels.'
+				<<< TXT
+					The width in pixels that all images are cropped to, e.g. 1200. Together with
+					"imageHeightPx" it defines the aspect ratio of the slides.
+					TXT
 			)
 		);
 	}

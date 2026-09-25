@@ -60,7 +60,10 @@ class Callout extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A callout box that can be used for important notes or alerts.';
+		return <<< TXT
+			A highlighted box with a title and text that draws attention to important information such
+			as notes, tips, warnings or alerts that should stand out from the surrounding body text.
+			TXT;
 	}
 
 	/**
@@ -131,11 +134,16 @@ class Callout extends AbstractBlock {
 		return array(
 			'text' => new AgentFieldSchema(
 				'string',
-				'The main callout text'
+				<<< TXT
+					The body text of the callout. It supports inline HTML formatting such as <strong>, <i> and
+					<a href="..."> links.
+					TXT
 			),
 			'title' => new AgentFieldSchema(
 				'string',
-				'The callout title'
+				<<< TXT
+					A short headline that summarizes the callout, e.g. "Note", "Tip" or "Warning".
+					TXT
 			)
 		);
 	}

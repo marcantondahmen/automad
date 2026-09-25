@@ -63,8 +63,10 @@ class CollapsibleSection extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A collapsible section block is a wrapper for the HTML details element. 
-			Multiple collapsible sections sharing the same group name can be used for a classic FAQ accordion.
+			An expandable and collapsible container based on the HTML <details> and <summary> elements
+			with a clickable title that reveals nested child blocks. Use it for FAQs, spoilers or
+			optional details. Multiple collapsible sections that share the same "group" name form an
+			accordion where only one section is open at a time.
 			TXT;
 	}
 
@@ -170,25 +172,34 @@ class CollapsibleSection extends AbstractBlock {
 		return array(
 			'collapsed' => new AgentFieldSchema(
 				'boolean',
-				'The state of the collapsible section. If true, the section content is hidden.'
+				<<< TXT
+					The initial state of the section. If true, the content is hidden until a visitor clicks
+					the title. If false, the section is expanded by default.
+					TXT
 			),
 			'content' => new AgentFieldSchema(
 				'array',
-				'The collapsible section main content.',
+				<<< TXT
+					The child blocks that are revealed when the section is expanded. Any block type can be
+					used here.
+					TXT,
 				items: array('$ref' => SchemaReference::BLOCK),
 				hasBlocks: true
 			),
 			'group' => new AgentFieldSchema(
 				'string',
 				<<< TXT
-					The group name that is used to convert multiple collapsible sections into a connected accordion.
-					Sections that share the same name behave like HTML <details> elements that share
-					the same value for thier `name` attribute.
+					The name of an accordion group. Sections that share the same group name behave like HTML
+					<details> elements that share the same value for their "name" attribute, so opening one
+					section closes all others. Use an empty string for an independent section.
 					TXT
 			),
 			'title' => new AgentFieldSchema(
 				'string',
-				'The clickable section title. The title behaves like the HTML <summary> element.'
+				<<< TXT
+					The always visible and clickable title of the section that is rendered as the HTML
+					<summary> element. For FAQs, use the question as title.
+					TXT
 			)
 		);
 	}

@@ -63,9 +63,10 @@ class LayoutSection extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A layout section that serves as a layout wrapper for other blocks inside. 
-			Optionally, blocks can be arranged on a 12 column grid based on a 
-			fractional width of 1/4, 1/3, 1/2, 2/3, 3/4, or 1/1
+			A container that groups other blocks and can arrange them side by side on a 12 column
+			grid. Use it to build multi-column layouts, feature grids, cards or hero sections. Put
+			child blocks into "content" and give each of them a "width" of 1/4, 1/3, 1/2, 2/3, 3/4 or
+			1/1. Sections can be nested and stretched to the full width.
 			TXT;
 	}
 
@@ -262,7 +263,11 @@ class LayoutSection extends AbstractBlock {
 		return array(
 			'content' => new AgentFieldSchema(
 				'array',
-				'The child block of the section.',
+				<<< TXT
+					The child blocks of the section. Set the "width" property of each child block in order to
+					arrange them side by side on the grid, e.g. two blocks with a width of 1/2 form a
+					two-column row.
+					TXT,
 				items: array('$ref' => SchemaReference::BLOCK),
 				hasBlocks: true
 			)

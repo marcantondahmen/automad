@@ -61,7 +61,12 @@ class Header extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A heading block that represents HTML heading elements <h1> to <h6>.';
+		return <<< TXT
+			A section heading that is rendered as an HTML <h1> to <h6> element. Use it to structure
+			the page content into sections. Headings are also used to generate the "tableOfContents"
+			block. Since the page title is usually already rendered as <h1> by the template, headings
+			inside the content should typically start at level 2.
+			TXT;
 	}
 
 	/**
@@ -129,12 +134,17 @@ class Header extends AbstractBlock {
 		return array(
 			'level' => new AgentFieldSchema(
 				'number',
-				'The heading level. Possible values are 1 up to 6.',
+				<<< TXT
+					The heading level from 1 to 6 that is rendered as <h1> to <h6>. Use 2 for main sections
+					and higher levels for subsections without skipping levels.
+					TXT,
 				enum: array(1, 2, 3, 4, 5, 6)
 			),
 			'text' => new AgentFieldSchema(
 				'string',
-				'The actual heading content.'
+				<<< TXT
+					The heading text. It supports inline HTML formatting such as <i> or <a href="..."> links.
+					TXT
 			)
 		);
 	}

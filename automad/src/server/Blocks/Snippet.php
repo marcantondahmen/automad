@@ -65,8 +65,10 @@ class Snippet extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			The snippet block can be used to render any Automad template language code 
-			and serves as a flexible option to extend Automad block functionality.
+			Renders Automad template language code, either from a snippet file or from inline code.
+			Use it to add dynamic, template-driven content that no other block type provides. Read the
+			`automad://snippets` resource to find existing snippet files and prefer those over writing
+			inline template code.
 			TXT;
 	}
 
@@ -154,15 +156,17 @@ class Snippet extends AbstractBlock {
 			'file' => new AgentFieldSchema(
 				'string',
 				<<< TXT
-					The snippet file that should be rendered. 
-					Before selecting a snippet, read the available snippets 
-					from the `automad://snippets` resource. 
-					Use one of the returned snippet files.'
+					The snippet file that is rendered. Before selecting a snippet, read the available snippets
+					from the `automad://snippets` resource and use one of the returned snippet files. Use an
+					empty string when defining inline code in "snippet" instead.
 					TXT
 			),
 			'snippet' => new AgentFieldSchema(
 				'string',
-				'Alternaively to a file, the snippet code can be defined here.'
+				<<< TXT
+					Inline Automad template language code that can be used as an alternative to a snippet
+					file. Use an empty string when a snippet file is selected.
+					TXT
 			)
 		);
 	}

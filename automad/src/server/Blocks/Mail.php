@@ -77,7 +77,9 @@ class Mail extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			An email contact form that handles sending emails from visitors to the site's owner.
+			A contact form that lets visitors send an email with their address, a subject and a
+			message to the given recipient address. Use it on contact pages. Labels and messages fall
+			back to sensible defaults.
 			TXT;
 	}
 
@@ -219,12 +221,17 @@ class Mail extends AbstractBlock {
 		return array(
 			'labelSend' => new AgentFieldSchema(
 				'string',
-				'Send',
+				<<< TXT
+					The label of the submit button. Skip it in order to use the default label.
+					TXT,
 				true
 			),
 			'to' => new AgentFieldSchema(
 				'string',
-				'user@domain.com'
+				<<< TXT
+					The email address of the recipient that receives the form submissions, usually the address
+					of the site owner.
+					TXT
 			),
 		);
 	}

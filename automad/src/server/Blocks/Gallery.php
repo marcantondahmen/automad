@@ -65,7 +65,12 @@ class Gallery extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A image gallery block that renders a selection of images in a row-layout, a masonry column-layout, or a simple grid. On click, images open up in a lightbox.';
+		return <<< TXT
+			A collection of images that is displayed as a masonry column layout, a justified row
+			layout or a uniform grid. Clicking an image opens it in a lightbox. Use it for photo
+			galleries and portfolios. Use the "imageSlideshow" block to show images one at a time in a
+			carousel instead.
+			TXT;
 	}
 
 	/**
@@ -161,20 +166,34 @@ class Gallery extends AbstractBlock {
 		return array(
 			'columnWidthPx' => new AgentFieldSchema(
 				'number',
-				'The minimum width in pixels a column should span in the gallery. Only used for "grid" or "columns" layouts.'
+				<<< TXT
+					The target width of the columns in pixels, e.g. 250. Only used for the "columns" and
+					"grid" layouts.
+					TXT
 			),
 			'files' => new AgentFieldSchema(
 				'array',
-				'The template that is used to render the filelist.'
+				<<< TXT
+					The list of images that are included in the gallery. Each item is either the file name of
+					an image that is attached to the current page, a path that starts with a slash and is
+					relative to the Automad base directory, or a full remote image URL.
+					TXT
 			),
 			'layout' => new AgentFieldSchema(
 				'string',
-				'Possible layout values are: "columns", "rows", and "grid"',
+				<<< TXT
+					The gallery layout. "columns" creates a masonry layout with columns of equal width, "rows"
+					creates justified rows of equal height and "grid" creates a uniform grid of equally sized
+					cells.
+					TXT,
 				enum: array('columns', 'grid', 'rows')
 			),
 			'rowHeightPx' => new AgentFieldSchema(
 				'number',
-				'The minimum width in pixels a row should span in the gallery. Only used for "grid" or "rows" layouts.'
+				<<< TXT
+					The target height of the rows in pixels, e.g. 250. Only used for the "rows" and "grid"
+					layouts.
+					TXT
 			)
 		);
 	}

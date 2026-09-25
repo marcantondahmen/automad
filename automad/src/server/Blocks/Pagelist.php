@@ -60,7 +60,10 @@ class Pagelist extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A dynamically generated list of pages that are renderd based on a selected pagelist template.
+			A dynamic and automatically updated list of page previews, e.g. blog posts, news, projects
+			or the child pages of a section. Pages can be filtered by their relation to a context page
+			(children, siblings or related pages), sorted and limited. Each page is rendered using a
+			pagelist template. Read the `automad://templates/pagelist` resource before choosing one.
 			TXT;
 	}
 
@@ -167,40 +170,52 @@ class Pagelist extends AbstractBlock {
 		return array(
 			'context' => new AgentFieldSchema(
 				'string',
-				'The local page URL as an absolute path.',
+				<<< TXT
+					The URL of the page that is used as reference for the "children" and "siblings" types as
+					an absolute path, e.g. /blog. Skip it in order to use the current page as context.
+					TXT,
 				true
 			),
 			'file' => new AgentFieldSchema(
 				'string',
 				<<< TXT
-					The Automad template used to render each page preview. 
-					Before selecting a template, read the available page-list templates 
-					from the `automad://templates/pagelist` resource. 
-					Use one of the returned template files.'
+					The Automad template that is used to render each page preview. Before selecting a
+					template, read the available pagelist templates from the `automad://templates/pagelist`
+					resource and use one of the returned template files.
 					TXT
 			),
 			'limit' => new AgentFieldSchema(
 				'number',
-				'The maximum amount of pages that are rendered. Skip this in order to render all pages.',
+				<<< TXT
+					The maximum number of pages that are displayed. Defaults to 10 when skipped.
+					TXT,
 				true
 			),
 			'sortField' => new AgentFieldSchema(
 				'string',
-				'The field that is used for sorting.',
+				<<< TXT
+					The field that is used for sorting. ":index" keeps the order of the pages as arranged in
+					the dashboard, "date" sorts by the page date and "title" sorts alphabetically by title.
+					TXT,
 				true,
 				array(':index', 'date', 'title')
 			),
 			'sortOrder' => new AgentFieldSchema(
 				'string',
-				'The sorting order',
+				<<< TXT
+					The sort order, either "asc" for ascending or "desc" for descending. For newest-first
+					listings such as blogs, use "date" with "desc".
+					TXT,
 				true,
 				array('asc', 'desc')
 			),
 			'type' => new AgentFieldSchema(
 				'string',
 				<<< TXT
-					The type of pagelist in term of context, like children, siblings, 
-					or related pages of the context page. Skip this for showing all pages.
+					The relation of the listed pages to the context page. "children" lists the subpages of the
+					context page, "siblings" lists the pages that share the same parent and "related" lists
+					pages that share at least one tag with the current page. Skip it in order to list all
+					pages of the site.
 					TXT,
 				true,
 				array('children', 'siblings', 'related')

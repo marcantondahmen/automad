@@ -61,7 +61,10 @@ class Paragraph extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			The basic default text block.
+			The default block for regular body text. Use it for any running prose. The text supports
+			inline HTML formatting such as <strong>, <i>, <u>, <s>, <code> and <a href="..."> links.
+			Enable "large" for lead or intro text below a heading. Use the "header" block for headings
+			and the "nestedList" block for lists instead of simulating them inside a paragraph.
 			TXT;
 	}
 
@@ -133,14 +136,17 @@ class Paragraph extends AbstractBlock {
 			'large' => new AgentFieldSchema(
 				'boolean',
 				<<< TXT
-					If true, the paragraph is rendered with a larger font size.
-					This can be used to make a paragraph stand out and is ideal for sub-heading text.
+					If true, the paragraph is rendered with a larger font size. This can be used to make a
+					paragraph stand out and is ideal for lead or intro text below a heading.
 					TXT,
 				true
 			),
 			'text' => new AgentFieldSchema(
 				'string',
-				'The actual paragraph text'
+				<<< TXT
+					The paragraph text. It supports inline HTML formatting such as <strong>, <i>, <u>, <s>,
+					<code> and <a href="..."> links, as well as <br> for line breaks.
+					TXT
 			)
 		);
 	}

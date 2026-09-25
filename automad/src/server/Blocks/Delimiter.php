@@ -57,7 +57,10 @@ class Delimiter extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A horizontal line that can be used as a visual delimiter between to sections of content.';
+		return <<< TXT
+			A horizontal line (<hr>) that visually separates two sections of content. This block has
+			no data.
+			TXT;
 	}
 
 	/**

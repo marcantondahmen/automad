@@ -61,7 +61,10 @@ class Table extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A HTML table block.
+			A data table that is rendered as an HTML <table>, optionally using the first row as
+			heading row. Use it for tabular data like comparisons, specifications, schedules or
+			pricing. Tables are not meant for layout purposes, use the "layoutSection" block to
+			arrange content in columns instead.
 			TXT;
 	}
 
@@ -165,12 +168,15 @@ class Table extends AbstractBlock {
 		return array(
 			'withHeadings' => new AgentFieldSchema(
 				'boolean',
-				'Whether the first row is used as the table heading.',
+				'If true, the first row is rendered as the table heading.',
 				true
 			),
 			'content' => new AgentFieldSchema(
 				'array',
-				'The table rows. Each row must contain the same number of cells.',
+				<<< TXT
+					The table rows as an array of rows, where each row is an array of cell strings. All rows
+					must contain the same number of cells. Cells support inline HTML formatting.
+					TXT,
 				items: array('type' => 'array', 'items' => array( 'type' => 'string'))
 			)
 		);

@@ -61,8 +61,12 @@ class Embed extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A wrapper for 3rd-party embedded content such as Twitter posts, YouTube video, or SoundCloud tracks. The following platforms are supported: ' .
-			'CodePen, Dailymotion, Facebook, Giphy, Imgur, Instagram, Mixcloud, Soundcloud, Twitter / X, Vimeo, YouTube';
+		return <<< TXT
+			Embeds content from third-party platforms by URL. The following platforms are supported:
+			CodePen, Dailymotion, Facebook, Giphy, GitHub, Imgur, Instagram, Mixcloud, SoundCloud,
+			Twitter / X, Vimeo and YouTube. Use it for YouTube or Vimeo videos, social media posts
+			or audio tracks. Use the "video" block for self-hosted video files instead.
+			TXT;
 	}
 
 	/**
@@ -146,12 +150,19 @@ class Embed extends AbstractBlock {
 		return array(
 			'source' => new AgentFieldSchema(
 				'string',
-				'The 3rd-party embed provider source URL.',
+				<<< TXT
+					The full URL of the content on the third-party platform, e.g. the URL of a YouTube video,
+					a Vimeo video, a SoundCloud track or a social media post, exactly as it is shown in the
+					browser address bar or share dialog.
+					TXT,
 				enum: EmbedResolver::getServiceKeys()
 			),
 			'caption' => new AgentFieldSchema(
 				'string',
-				'The caption that is desplayed below the embedded element',
+				<<< TXT
+					An optional caption that is displayed below the embedded content. It supports inline HTML
+					formatting.
+					TXT,
 				true
 			)
 		);

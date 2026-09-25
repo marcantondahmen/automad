@@ -60,7 +60,11 @@ class Buttons extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A primary and optional secondary button that can be used for call-to-action links.';
+		return <<< TXT
+			A primary and an optional secondary link button. Use it for call-to-action links such as
+			"Get started", "Contact us" or "Download" that point to local pages or external URLs. Use
+			an <a> link inside a "paragraph" block for plain text links instead.
+			TXT;
 	}
 
 	/**
@@ -149,20 +153,32 @@ class Buttons extends AbstractBlock {
 		return array(
 			'primaryLink' => new AgentFieldSchema(
 				'string',
-				'The linked external or local absolute URL'
+				<<< TXT
+					The target of the primary button. Either the absolute path of a local page, e.g.
+					/about/contact, or a full external URL starting with https://.
+					TXT
 			),
 			'primaryText' => new AgentFieldSchema(
 				'string',
-				'The label text of the primary button'
+				<<< TXT
+					The label of the primary button. Keep it short and action-oriented, e.g. "Get started" or
+					"Contact us".
+					TXT
 			),
 			'secondaryLink' => new AgentFieldSchema(
 				'string',
-				'The linked external or local absolute URL',
+				<<< TXT
+					The target of the optional secondary button. Either the absolute path of a local page or a
+					full external URL. Only used together with "secondaryText".
+					TXT,
 				true
 			),
 			'secondaryText' => new AgentFieldSchema(
 				'string',
-				'The label text of the secondary button',
+				<<< TXT
+					The label of the optional secondary button, typically a less prominent alternative action
+					such as "Learn more". Skip it in order to only render the primary button.
+					TXT,
 				true
 			)
 		);

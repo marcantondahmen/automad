@@ -67,7 +67,8 @@ class NestedList extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A nested list representing the HTML <ul> element.
+			An ordered (<ol>) or unordered (<ul>) list whose items can contain nested sub-lists. Use
+			it for bullet points, numbered steps, feature lists or outlines.
 			TXT;
 	}
 
@@ -169,12 +170,18 @@ class NestedList extends AbstractBlock {
 		return array(
 			'items' => new AgentFieldSchema(
 				'array',
-				'A nested list.',
+				<<< TXT
+					The list items. Each item has a "content" string that supports inline HTML formatting and
+					an optional "items" array that contains a nested sub-list.
+					TXT,
 				enum: array('$ref' => SchemaReference::NESTED_LIST_ITEM)
 			),
 			'style' => new AgentFieldSchema(
 				'string',
-				'The style of the list',
+				<<< TXT
+					The list style. "ordered" renders a numbered <ol> list and "unordered" renders a bulleted
+					<ul> list.
+					TXT,
 				enum: array('ordered', 'unordered')
 			)
 		);

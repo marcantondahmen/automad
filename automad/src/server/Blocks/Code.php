@@ -60,7 +60,12 @@ class Code extends AbstractBlock {
 	 * @return string
 	 */
 	public static function getDescription(): string {
-		return 'A code snippet block with syntax highlighting that can be used for code examples or installation instructions.';
+		return <<< TXT
+			A preformatted code snippet with syntax highlighting and optional line numbers. Use it to
+			display source code, shell commands, configuration files or installation instructions to
+			visitors. The code is only displayed and never executed. Use the "raw" block to output
+			HTML or the "snippet" block to execute Automad template code instead.
+			TXT;
 	}
 
 	/**
@@ -130,11 +135,17 @@ class Code extends AbstractBlock {
 		return array(
 			'code' => new AgentFieldSchema(
 				'string',
-				'The actual code snippet that is displayed.'
+				<<< TXT
+					The code that is displayed as plain text with its line breaks and indentation preserved.
+					Do not escape HTML characters, the code is escaped automatically when rendered.
+					TXT
 			),
 			'language' => new AgentFieldSchema(
 				'string',
-				'The programming language of the code snippet that is used for syntax highlighting.',
+				<<< TXT
+					The language that is used for syntax highlighting. Use "none" for plain text without
+					highlighting.
+					TXT,
 				true,
 				array(
 					'apacheconf',
@@ -174,7 +185,9 @@ class Code extends AbstractBlock {
 			),
 			'lineNumbers' => new AgentFieldSchema(
 				'boolean',
-				'Defines whether line numbers are displayed for the code snippet.',
+				<<< TXT
+					If true, line numbers are displayed next to the code. This is useful for longer snippets.
+					TXT,
 				true
 			)
 		);

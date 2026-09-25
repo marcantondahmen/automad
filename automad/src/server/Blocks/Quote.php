@@ -61,7 +61,8 @@ class Quote extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A blockquote block with caption.
+			A blockquote for citing a person or a source, with the author or source name as caption.
+			Use it for testimonials, citations and pull quotes.
 			TXT;
 	}
 
@@ -132,11 +133,13 @@ class Quote extends AbstractBlock {
 		return array(
 			'text' => new AgentFieldSchema(
 				'string',
-				'The main quote body text.'
+				'The quoted text. It supports inline HTML formatting.'
 			),
 			'caption' => new AgentFieldSchema(
 				'string',
-				'The author name or caption.'
+				<<< TXT
+					The name of the author or the source of the quote, e.g. "Jane Doe, CEO at Example Inc.".
+					TXT
 			)
 		);
 	}

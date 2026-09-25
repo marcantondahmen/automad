@@ -62,7 +62,9 @@ class Video extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A single video block that can be used to embed a video file to page using the HTML <video> element.
+			A self-hosted video file, e.g. an .mp4 or .webm file, that is embedded using the HTML
+			<video> element. For videos that are hosted on YouTube, Vimeo or similar platforms, use
+			the "embed" block instead.
 			TXT;
 	}
 
@@ -144,7 +146,11 @@ class Video extends AbstractBlock {
 		return array(
 			'url' => new AgentFieldSchema(
 				'string',
-				'The video URL.',
+				<<< TXT
+					The URL of the video file, e.g. an .mp4 or .webm file. Either the file name of a video
+					that is attached to the current page, a path that starts with a slash and is relative to
+					the Automad base directory, or a full remote URL.
+					TXT,
 			)
 		);
 	}

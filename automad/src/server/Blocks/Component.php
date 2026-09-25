@@ -61,9 +61,11 @@ class Component extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			A component is a reusable collection of other blocks. 
-			It can be used for content that is composed of multiple blocks and 
-			used in multiple places across a website.
+			A reference to a reusable component, which is a named group of blocks that is managed
+			centrally in the dashboard and shared across multiple pages. Use it to insert the same
+			content, e.g. a newsletter signup, contact information or a promo banner, in several
+			places. Editing the component updates every page that uses it. Only reference existing
+			component IDs.
 			TXT;
 	}
 
@@ -133,7 +135,9 @@ class Component extends AbstractBlock {
 		return array(
 			'id' => new AgentFieldSchema(
 				'string',
-				'The component ID.'
+				<<< TXT
+					The ID of an existing reusable component that is rendered in place of this block.
+					TXT
 			)
 		);
 	}
