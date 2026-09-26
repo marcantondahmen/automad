@@ -273,23 +273,21 @@ class LayoutSectionTest extends TestCase {
 					"id": "1",
 					"type": "layoutSection",
 					"stretched": true,
-					"data.content": {
-						"blocks": [
-							{
-								"id": "2",
-								"type": "paragraph",
-								"width": "1/2",
-								"data.large": true,
-								"data.text": "Column 1"
-							},
-							{
-								"id": "3",
-								"type": "paragraph",
-								"width": "1/2",
-								"data.text": "Column 2"
-							}
-						]
-					}
+					"data.content": [
+						{
+							"id": "2",
+							"type": "paragraph",
+							"width": "1/2",
+							"data.large": true,
+							"data.text": "Column 1"
+						},
+						{
+							"id": "3",
+							"type": "paragraph",
+							"width": "1/2",
+							"data.text": "Column 2"
+						}
+					]
 				}
 				JSON
 			)

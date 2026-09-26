@@ -80,12 +80,10 @@ class Page extends AbstractResourceTemplate {
 
 			foreach ($Page->data as $key => $value) {
 				if (str_starts_with($key, '+')) {
-					$blocks = Blocks::toAgent(
+					$data[$key] = Blocks::toAgent(
 						$value['blocks'] ?? array(),
 						$Automad->ComponentCollection
 					);
-
-					$data[$key] = array('blocks' => $blocks);
 				} else {
 					if (!in_array($key, Page::IGNORED_FIELDS)) {
 						$data[$key] = $value;

@@ -181,15 +181,13 @@ class CollapsibleSectionTest extends TestCase {
 					"type": "collapsibleSection",
 					"stretched": true,
 					"data.collapsed": true,
-					"data.content": {
-						"blocks": [
-							{
-								"id": "2",
-								"type": "paragraph",
-								"data.text": "Collapsible content"
-							}
-						]
-					},
+					"data.content": [
+						{
+							"id": "2",
+							"type": "paragraph",
+							"data.text": "Collapsible content"
+						}
+					],
 					"data.group": "faq",
 					"data.title": "Collapsible Title"
 				}

@@ -288,11 +288,9 @@ abstract class AbstractBlock {
 			default:
 				$key = str_replace('data.', '', $name);
 				$value = $schema->hasBlocks
-					? array(
-						'blocks' => Blocks::toAgent(
-							$block['data']['content']['blocks'] ?? array(),
-							$ComponentCollection
-						)
+					? Blocks::toAgent(
+						$block['data']['content']['blocks'] ?? array(),
+						$ComponentCollection
 					)
 					: ($block['data'][$key] ?? $schema->getDefault());
 		}

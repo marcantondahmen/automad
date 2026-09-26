@@ -139,7 +139,10 @@ class PageSchema {
 							'type'=> 'string'
 						),
 						'items'=> array(
-							'$ref'=> Reference::NESTED_LIST_ITEM
+							'type'=> 'array',
+							'items'=> array(
+								'$ref'=> Reference::NESTED_LIST_ITEM
+							)
 						)
 					),
 					'required'=> array('content'),
