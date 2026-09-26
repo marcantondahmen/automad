@@ -36,6 +36,7 @@
 namespace Automad\Blocks;
 
 use Automad\Blocks\Schema\AgentFieldSchema;
+use Automad\Blocks\Utils\Id;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Models\ComponentCollection;
@@ -75,10 +76,51 @@ abstract class AbstractBlock {
 	 * Convert agent-provided data into the Editor.js block data structure.
 	 *
 	 * @param array $data
-	 * @return array
+	 * @return array|null
 	 */
-	public static function fromAgent(array $data): array {
-		return array();
+	public static function fromAgent(array $data): array|null {
+		if (empty($data['type'])) {
+			return null;
+		}
+
+		$block = array(
+			'id' => $data['id'] ?? Id::generate(),
+			'type' => $data['type'],
+			'data' => array(),
+			'tunes' => array()
+		);
+
+		if (!empty($data['stretched']) || !empty($data['width'])) {
+			$block['tunes']['layout'] = array();
+
+			if (isset($data['stretched'])) {
+				$block['tunes']['layout']['stretched'] =  $data['stretched'] ?? false;
+			}
+
+			if (!empty($data['width'])) {
+				$block['tunes']['layout']['width'] =  $data['width'];
+			}
+		}
+
+		$schema = static::agentDataSchema();
+
+		foreach ($data as $key => $value) {
+			if (str_starts_with($key, 'data.')) {
+				$key = str_replace('data.', '', $key);
+
+				if (isset($schema[$key])) {
+					$fieldSchema = $schema[$key];
+
+					if ($fieldSchema->hasBlocks === true) {
+						$value = array('blocks' => Blocks::fromAgent($value));
+					}
+				}
+
+				$block['data'][$key] = $value;
+			}
+		}
+
+		return $block;
 	}
 
 	/**
@@ -88,10 +130,6 @@ abstract class AbstractBlock {
 	 */
 	public static function getAgentSchema(): array {
 		$properties = array(
-			'type' => new AgentFieldSchema(
-				'string',
-				"The block's type that defines it contents and how it is rendered."
-			),
 			'width' => new AgentFieldSchema(
 				'string',
 				<<< TXT
@@ -177,7 +215,7 @@ abstract class AbstractBlock {
 	 * @return array
 	 */
 	public static function toAgent(array $block, ComponentCollection $ComponentCollection): array {
-		$data = array('id' => $block['id']);
+		$data = array('id' => $block['id'], 'type' => $block['type']);
 
 		foreach (static::getAgentSchema() as $key => $fieldSchema) {
 			$value = self::getAgentValue($fieldSchema, $block, $key, $ComponentCollection);

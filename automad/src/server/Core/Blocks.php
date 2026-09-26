@@ -60,6 +60,32 @@ class Blocks {
 	private static bool $isRendering = false;
 
 	/**
+	 * Return an array of blocks that are converted from agent data.
+	 *
+	 * @param array $agentBlocks
+	 * @return BlockData[]
+	 */
+	public static function fromAgent(array $agentBlocks): array {
+		$blocks = array();
+
+		foreach ($agentBlocks as $agentBlock) {
+			try {
+				$block = call_user_func_array(
+					'\\Automad\\Blocks\\' . ucfirst($agentBlock['type']) . '::fromAgent',
+					array($agentBlock)
+				);
+
+				if ($block) {
+					$blocks[] = $block;
+				}
+			} catch (\Exception $e) {
+			}
+		}
+
+		return $blocks;
+	}
+
+	/**
 	 * Inject block assets into the header of a page.
 	 *
 	 * @param string $str
@@ -79,7 +105,7 @@ class Blocks {
 	/**
 	 * Render blocks created by the EditorJS block editor.
 	 *
-	 * @param array{blocks: array<int, BlockData>} $data
+	 * @param BlockData[] $data
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */

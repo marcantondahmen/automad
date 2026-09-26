@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Ai\Mcp;
+namespace Automad\Ai\Mcp\Schema;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class SchemaReference {
+class Reference {
 	const string BLOCK = '#/$defs/block';
 	const string BLOCK_ID = '#/$defs/blockId';
 	const string NESTED_LIST_ITEM = '#/$defs/nestedListItem';

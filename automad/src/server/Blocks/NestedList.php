@@ -35,7 +35,7 @@
 
 namespace Automad\Blocks;
 
-use Automad\Ai\Mcp\SchemaReference;
+use Automad\Ai\Mcp\Schema\Reference;
 use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
@@ -174,7 +174,7 @@ class NestedList extends AbstractBlock {
 					The list items. Each item has a "content" string that supports inline HTML formatting and
 					an optional "items" array that contains a nested sub-list.
 					TXT,
-				enum: array('$ref' => SchemaReference::NESTED_LIST_ITEM)
+				items: array('$ref' => Reference::NESTED_LIST_ITEM)
 			),
 			'style' => new AgentFieldSchema(
 				'string',

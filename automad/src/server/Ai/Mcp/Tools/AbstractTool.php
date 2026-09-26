@@ -35,7 +35,6 @@
 
 namespace Automad\Ai\Mcp\Tools;
 
-use Automad\Core\Str;
 use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -75,13 +74,18 @@ abstract class AbstractTool {
 	abstract public function getHandler(): callable;
 
 	/**
+	 * The tool's input schema.
+	 *
+	 * @return array
+	 */
+	abstract public function getInputSchema(): array;
+
+	/**
 	 * The tool's name, as used by MCP clients to call it.
 	 *
 	 * @return string
 	 */
-	public function getName(): string {
-		return Str::sanitize($this->getTitle());
-	}
+	abstract public function getName(): string;
 
 	/**
 	 * The tool's human-readable title.

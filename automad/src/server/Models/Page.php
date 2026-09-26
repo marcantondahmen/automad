@@ -173,9 +173,10 @@ class Page {
 	 * @param string $title
 	 * @param string $themeTemplate
 	 * @param bool $isPrivate
+	 * @param array $initialData
 	 * @return Page|null the dashboard URL to the new page
 	 */
-	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate): Page|null {
+	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate, array $initialData = array()): Page|null {
 		$theme = dirname($themeTemplate);
 		$template = basename($themeTemplate);
 
@@ -192,6 +193,7 @@ class Page {
 
 		// Data, also directly append possibly existing suffix to title here.
 		$data = array(
+			...$initialData,
 			Fields::TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
 			Fields::PRIVATE => $isPrivate,
 			Fields::TEMPLATE => $template,

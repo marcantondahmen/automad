@@ -53,6 +53,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
+ *
+ * @see https://php.sdk.modelcontextprotocol.io/
  */
 class Server {
 	/**
@@ -78,6 +80,7 @@ class Server {
 				name: $Tool->getName(),
 				title: $Tool->getTitle(),
 				description: $Tool->getDescription(),
+				inputSchema: $Tool->getInputSchema(),
 				annotations: $Tool->getAnnotations()
 			);
 		}
