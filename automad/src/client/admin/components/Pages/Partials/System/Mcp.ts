@@ -40,7 +40,6 @@ import {
 	EventName,
 	html,
 } from '@/admin/core';
-import { Section } from '@/common';
 
 /**
  * Render the MCP section.
@@ -62,30 +61,30 @@ export const renderMcpSection = (): string => {
 				<p>${App.text('systemMcpInfo')}</p>
 				<am-mcp-enable></am-mcp-enable>
 			</div>
-			<div class="am-mcp-settings">
-				<p>${App.text('systemMcpConnectInfo')}</p>
-				<div class="${CSS.formGroup}">
-					<input
-						class="${CSS.input} ${CSS.flexItemGrow} ${CSS.formGroupItem}"
-						value="${mcpUrl}"
-						disabled
-					/>
-					<am-copy
-						class="${CSS.button} ${CSS.buttonIcon} ${CSS.formGroupItem}"
-						value="${mcpUrl}"
-						${Attr.tooltip}="${App.text('copyUrlClipboard')}"
-					>
-						<i class="bi bi-clipboard"></i>
-					</am-copy>
+			<div
+				class="am-mcp-settings ${CSS.flex} ${CSS.flexColumn} ${CSS.flexGapLarge}"
+			>
+				<div>
+					<p>${App.text('systemMcpConnectInfo')}</p>
+					<div class="${CSS.formGroup}">
+						<input
+							class="${CSS.input} ${CSS.flexItemGrow} ${CSS.formGroupItem}"
+							value="${mcpUrl}"
+							disabled
+						/>
+						<am-copy
+							class="${CSS.button} ${CSS.buttonIcon} ${CSS.formGroupItem}"
+							value="${mcpUrl}"
+							${Attr.tooltip}="${App.text('copyUrlClipboard')}"
+						>
+							<i class="bi bi-clipboard"></i>
+						</am-copy>
+					</div>
 				</div>
-				<p>${App.text('systemMcpConnectExample')}</p>
-				<pre><code>claude mcp add --transport http automad ${mcpUrl} --header "Authorization: Bearer &lt;your-access-token&gt;"</code></pre>
-				<p>
-					${App.text('systemMcpAccessTokensHint')}
-					<am-switcher-link ${Attr.section}="${Section.accessTokens}"
-						>${App.text('systemAccessTokens')}</am-switcher-link
-					>
-				</p>
+				<div>
+					<p>${App.text('systemMcpTokenInfo')}</p>
+					<am-access-token-list></am-access-token-list>
+				</div>
 			</div>
 		</am-form>
 	`;

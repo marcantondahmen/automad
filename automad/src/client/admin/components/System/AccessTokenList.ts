@@ -77,13 +77,15 @@ class AccessTokenListComponent extends BaseComponent {
 
 		const addButton = create(
 			'button',
-			[CSS.button],
+			[CSS.button, CSS.buttonPrimary],
 			{},
 			menu,
-			App.text('systemAccessTokensAddToken')
+			App.text('accessTokensAddToken')
 		);
 
 		this.listen(addButton, 'click', this.renderAddTokenModal.bind(this));
+
+		create('p', [], {}, this, App.text('accessTokensExisting'));
 
 		this.listContainer = create(
 			'div',
@@ -104,12 +106,12 @@ class AccessTokenListComponent extends BaseComponent {
 			key: 'name',
 			name: 'name',
 			hideLabel: true,
-			placeholder: App.text('systemAccessTokensAddTokenNameLabel'),
+			placeholder: App.text('accessTokensAddTokenNameLabel'),
 			value: '',
 		});
 
 		const { modal, body } = createGenericModal(
-			App.text('systemAccessTokensAddTokenTitle'),
+			App.text('accessTokensAddTokenTitle'),
 			App.text('save'),
 			true,
 			async (modal) => {
@@ -150,20 +152,14 @@ class AccessTokenListComponent extends BaseComponent {
 	 */
 	private renderTokenCreatedModal(accessToken: string): void {
 		const { modal, body } = createGenericModal(
-			App.text('systemAccessTokensTokenCreatedTitle'),
+			App.text('accessTokensTokenCreatedTitle'),
 			App.text('close')
 		);
 
-		create(
-			'p',
-			[],
-			{},
-			body,
-			App.text('systemAccessTokensTokenCreatedStep1')
-		);
+		create('p', [], {}, body, App.text('accessTokensTokenCreatedStep1'));
 		create('code', [CSS.textMono], {}, body, accessToken);
 
-		const mcpUrl = `${window.location.origin}${App.baseIndex}/_mcp`;
+		const mcpUrl = App.system.mcp.url;
 		const claudeCommand = `claude mcp add --transport http automad ${mcpUrl} --header "Authorization: Bearer ${accessToken}"`;
 
 		create(
@@ -171,7 +167,7 @@ class AccessTokenListComponent extends BaseComponent {
 			[CSS.richText],
 			{},
 			body,
-			App.text('systemAccessTokensTokenCreatedStep2')
+			App.text('accessTokensTokenCreatedStep2')
 		);
 		create('code', [CSS.textMono], {}, body, claudeCommand);
 
@@ -197,7 +193,7 @@ class AccessTokenListComponent extends BaseComponent {
 				[CSS.textMuted],
 				{},
 				this.listContainer,
-				App.text('systemAccessTokensTokensEmpty')
+				App.text('accessTokensTokensEmpty')
 			);
 
 			return;
@@ -235,15 +231,13 @@ class AccessTokenListComponent extends BaseComponent {
 		const revoke = create(
 			'span',
 			[CSS.cardDelete],
-			{ [Attr.tooltip]: App.text('systemAccessTokensRevokeToken') },
+			{ [Attr.tooltip]: App.text('accessTokensRevokeToken') },
 			card,
 			'<i class="bi bi-trash3"></i>'
 		);
 
 		this.listen(revoke, 'click', async () => {
-			if (
-				await confirm(App.text('systemAccessTokensRevokeTokenConfirm'))
-			) {
+			if (await confirm(App.text('accessTokensRevokeTokenConfirm'))) {
 				await requestApi(AccessTokenController.revoke, {
 					id: token.id,
 				});

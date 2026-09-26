@@ -43,7 +43,6 @@ import {
 } from '@/admin/core';
 import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
-import { renderAccessTokensSection } from './Partials/System/AccessTokens';
 import { renderAiSection } from './Partials/System/Ai';
 import { renderCacheSection } from './Partials/System/Cache';
 import { renderDebugSection } from './Partials/System/Debug';
@@ -122,14 +121,6 @@ const getSystemSections = (): SystemSectionData[] => {
 			state: '<am-system-mail-indicator></am-system-mail-indicator>',
 			render: renderMailSection,
 			narrowIcon: false,
-		},
-		{
-			section: Section.accessTokens,
-			icon: 'key',
-			title: App.text('systemAccessTokens'),
-			info: App.text('systemAccessTokensCardInfo'),
-			state: '<am-access-token-indicator></am-access-token-indicator>',
-			render: renderAccessTokensSection,
 		},
 		{
 			section: Section.feed,
@@ -269,10 +260,10 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 		return html`
 			<am-switcher-section name="${Section.overview}">
 				<div class="${CSS.grid}" style="--min: 17rem;">
-					${this.renderOverviewCards(this.sectionData.slice(0, 2))}
+					${this.renderOverviewCards(this.sectionData.slice(0, 4))}
 				</div>
 				<div class="${CSS.grid}" style="--min: 13rem;">
-					${this.renderOverviewCards(this.sectionData.slice(2))}
+					${this.renderOverviewCards(this.sectionData.slice(4))}
 				</div>
 			</am-switcher-section>
 		`;

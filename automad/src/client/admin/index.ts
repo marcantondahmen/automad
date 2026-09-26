@@ -108,7 +108,6 @@ import('./components/Indicators/Navbar/DebugIndicator');
 import('./components/Indicators/Navbar/OutdatedPackagesIndicator');
 import('./components/Indicators/Navbar/SystemUpdateIndicator');
 import('./components/Indicators/Sidebar/OutdatedPackagesIndicator');
-import('./components/Indicators/System/AccessTokenIndicator');
 import('./components/Indicators/System/AiAssistanceIndicator');
 import('./components/Indicators/System/CacheIndicator');
 import('./components/Indicators/System/DebugIndicator');

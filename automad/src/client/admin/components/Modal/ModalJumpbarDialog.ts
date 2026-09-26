@@ -108,7 +108,6 @@ const settingsData = (): JumpbarItemData[] => {
 		item(Section.aiAssistance, 'systemAi', 'robot'),
 		item(Section.mcp, 'systemMcp', 'plug'),
 		item(Section.mail, 'systemMail', 'envelope'),
-		item(Section.accessTokens, 'systemAccessTokens', 'key'),
 		item(Section.feed, 'systemRssFeed', 'rss'),
 		item(Section.i18n, 'systemI18n', 'globe'),
 		item(Section.language, 'systemLanguage', 'translate'),

@@ -33,7 +33,6 @@
  */
 
 export const enum Section {
-	accessTokens = 'access-tokens',
 	aiAssistance = 'ai-assistance',
 	cache = 'cache',
 	config = 'config',
