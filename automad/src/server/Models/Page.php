@@ -173,9 +173,9 @@ class Page {
 	 * @param string $title
 	 * @param string $themeTemplate
 	 * @param bool $isPrivate
-	 * @return string the dashboard URL to the new page
+	 * @return Page|null the dashboard URL to the new page
 	 */
-	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate): string {
+	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate): Page|null {
 		$theme = dirname($themeTemplate);
 		$template = basename($themeTemplate);
 
@@ -213,25 +213,18 @@ class Page {
 		$DataStore->setState(PublicationState::DRAFT, $data)->save();
 
 		PageIndex::append($Parent->path, $newPagePath);
+		Cache::clear();
 
-		return Page::dashboardUrlByPath($newPagePath);
+		return Page::findByPath($newPagePath);
 	}
 
 	/**
-	 * Return updated view URL based on $path.
+	 * Get the dashboard view for a page.
 	 *
-	 * @param string $path
-	 * @return string The view URL to the new page
+	 * @return string
 	 */
-	public static function dashboardUrlByPath(string $path): string {
-		Cache::clear();
-		$Page = Page::findByPath(rtrim($path, '/') . '/');
-
-		if (!$Page) {
-			return '';
-		}
-
-		return 'page?url=' . urlencode($Page->origUrl);
+	public function dashboardUrl(): string {
+		return 'page?url=' . urlencode($this->origUrl);
 	}
 
 	/**
@@ -252,9 +245,9 @@ class Page {
 	/**
 	 * Duplicate a page.
 	 *
-	 * @return string the new URL
+	 * @return Page|null the new URL
 	 */
-	public function duplicate(): string {
+	public function duplicate(): Page|null {
 		$duplicatePath = $this->path;
 		$suffix = FileSystem::uniquePathSuffix($duplicatePath, '-copy');
 		$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);
@@ -263,7 +256,9 @@ class Page {
 		Page::appendSuffixToTitleAndSlug($duplicatePath, $suffix);
 		PageIndex::append(dirname($duplicatePath), $duplicatePath);
 
-		return Page::dashboardUrlByPath($duplicatePath);
+		Cache::clear();
+
+		return Page::findByPath($duplicatePath);
 	}
 
 	/**
@@ -496,9 +491,9 @@ class Page {
 	/**
 	 * Publish a page.
 	 *
-	 * @return string|null a new path in case the page has moved or null
+	 * @return Page|null a new path in case the page has moved or null
 	 */
-	public function publish(): ?string {
+	public function publish(): Page|null {
 		$DataStore = new DataStore($this->path);
 		$draft = $DataStore->getState(PublicationState::DRAFT);
 
@@ -538,14 +533,7 @@ class Page {
 
 		Cache::clear();
 
-		if (
-			$this->path != $newPagePath ||
-			$newSlug != $slug
-		) {
-			return $newPagePath;
-		}
-
-		return null;
+		return Page::findByPath($newPagePath);
 	}
 
 	/**
@@ -602,7 +590,7 @@ class Page {
 		// Soft reload in order to refresh fields in form.
 		if ($currentTheme != $newTheme || $this->template != $template) {
 			return array(
-				'redirect' => Page::dashboardUrlByPath($this->path)
+				'reload' => true
 			);
 		}
 

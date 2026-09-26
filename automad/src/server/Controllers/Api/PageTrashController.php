@@ -36,6 +36,7 @@
 namespace Automad\Controllers\Api;
 
 use Automad\Api\Response;
+use Automad\Core\Cache;
 use Automad\Core\Request;
 use Automad\Models\Page;
 use Automad\Models\Shared;
@@ -140,6 +141,14 @@ class PageTrashController {
 
 		$newPath = FileSystem::movePageDir($path, '/', basename($path));
 
-		return $Response->setRedirect(Page::dashboardUrlByPath($newPath));
+		Cache::clear();
+
+		$Page = Page::findByPath($newPath);
+
+		if (!$Page) {
+			return $Response;
+		}
+
+		return $Response->setRedirect($Page->dashboardUrl());
 	}
 }

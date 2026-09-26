@@ -92,12 +92,10 @@ class HistoryController {
 		}
 
 		$History = History::get($Page->path);
-		$dashboardUrl = $History->restore($hash, $Page->get(Fields::TITLE), $Messenger);
+		$RestoredPage = $History->restore($hash, $Page->get(Fields::TITLE), $Messenger);
 
-		if ($dashboardUrl) {
-			$Response->setRedirect($dashboardUrl);
-		} else {
-			$Response->setReload(true);
+		if ($RestoredPage) {
+			$Response->setRedirect($RestoredPage->dashboardUrl());
 		}
 
 		return $Response->setError($Messenger->getError());

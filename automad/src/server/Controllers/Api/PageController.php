@@ -93,8 +93,13 @@ class PageController {
 
 		$themeTemplate = self::getTemplateNameFromPost();
 		$isPrivate = (bool) Request::post('private');
+		$Page = Page::add($Parent, $title, $themeTemplate, $isPrivate);
 
-		return $Response->setRedirect(Page::add($Parent, $title, $themeTemplate, $isPrivate));
+		if (!$Page) {
+			return $Response;
+		}
+
+		return $Response->setRedirect($Page->dashboardUrl());
 	}
 
 	/**
@@ -275,7 +280,13 @@ class PageController {
 			return $Response->setError(Text::get('permissionsDeniedError'));
 		}
 
-		return $Response->setRedirect($Page->duplicate());
+		$NewPage = $Page->duplicate();
+
+		if (!$NewPage) {
+			return $Response;
+		}
+
+		return $Response->setRedirect($NewPage->dashboardUrl());
 	}
 
 	/**
@@ -350,7 +361,6 @@ class PageController {
 			$layout
 		);
 
-		$Response->setRedirect(Page::dashboardUrlByPath($newPagePath));
 		Debug::log($Page->path, 'Page');
 		Debug::log($dest->path, 'Destination');
 
@@ -359,7 +369,9 @@ class PageController {
 		$Page = Page::findByPath($newPagePath);
 
 		if ($Page) {
-			$Response->setData(array('url' => $Page->origUrl));
+			$Response
+				->setData(array('url' => $Page->origUrl))
+				->setRedirect($Page->dashboardUrl());
 		}
 
 		return $Response;
@@ -379,14 +391,15 @@ class PageController {
 			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
 		}
 
-		$newPagePath = $Page->publish();
-		$Response->setSuccess(Text::get('publishedSuccessfully'));
+		$PublishedPage = $Page->publish();
 
-		if (!empty($newPagePath)) {
-			return $Response->setRedirect(Page::dashboardUrlByPath($newPagePath));
+		if (!$PublishedPage) {
+			return $Response;
 		}
 
-		return $Response;
+		return $Response
+			->setSuccess(Text::get('publishedSuccessfully'))
+			->setRedirect($PublishedPage->dashboardUrl());
 	}
 
 	/**
@@ -459,8 +472,8 @@ class PageController {
 
 		$result = $Page->save($data, $themeTemplate);
 
-		if (!empty($result['redirect'])) {
-			$Response->setRedirect($result['redirect']);
+		if (!empty($result['reload'])) {
+			$Response->setReload(true);
 		}
 
 		if (!empty($result)) {
