@@ -63,7 +63,7 @@ class AccessTokenController {
 		$name = trim(strval(Request::post('name')));
 
 		if (empty($name)) {
-			return $Response->setError(Text::get('systemAccessTokensAddTokenValidationError'));
+			return $Response->setError(Text::get('accessTokensAddTokenValidationError'));
 		}
 
 		$accessToken = AccessToken::issue($name);
