@@ -89,6 +89,9 @@ class PageCreate extends AbstractTool {
 
 			The `parent`, `title`, and `template` properties are required. Content fields are template-specific 
 			and are provided through the `fields` property.
+
+			Do not add any `<h1>` tag with the page title. The title is already handled by the `title` property
+			and must not be added as part of the `fields` content.
 			TXT;
 	}
 
