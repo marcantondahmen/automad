@@ -59,7 +59,9 @@ class ParagraphTest extends TestCase {
 				{
 					"id": "1",
 					"type": "paragraph",
-					"data.text": "Test paragraph text"
+					"data": {
+						"text": "Test paragraph text"
+					}
 				}
 				JSON,
 			),
@@ -85,8 +87,10 @@ class ParagraphTest extends TestCase {
 					"id": "2",
 					"type": "paragraph",
 					"width": "1/2",
-					"data.large": true,
-					"data.text": "Test paragraph text"
+					"data": {
+						"large": true,
+						"text": "Test paragraph text"
+					}
 				}
 				JSON,
 			)

@@ -59,8 +59,10 @@ class QuoteTest extends TestCase {
 				{
 					"id": "1",
 					"type": "quote",
-					"data.text": "quote text",
-					"data.caption": "caption"
+					"data": {
+						"text": "quote text",
+						"caption": "caption"
+					}
 				}
 				JSON,
 			)

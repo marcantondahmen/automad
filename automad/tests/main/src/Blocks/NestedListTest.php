@@ -109,22 +109,24 @@ class NestedListTest extends TestCase {
 				{
 					"id": "1",
 					"type": "nestedList",
-					"data.items": [
-						{
-							"content": "Item 1",
-							"items": [
-								{
-									"content": "Subitem 1",
-									"items": []
-								},
-								{
-									"content": "Subitem 2",
-									"items": []
-								}
-							]
-						}
-					],
-					"data.style": "unordered"
+					"data": {
+						"items": [
+							{
+								"content": "Item 1",
+								"items": [
+									{
+										"content": "Subitem 1",
+										"items": []
+									},
+									{
+										"content": "Subitem 2",
+										"items": []
+									}
+								]
+							}
+						],
+						"style": "unordered"
+					}
 				}
 				JSON,
 			)

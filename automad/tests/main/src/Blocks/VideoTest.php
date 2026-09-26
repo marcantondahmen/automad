@@ -85,7 +85,9 @@ class VideoTest extends TestCase {
 					"id": "1",
 					"type": "video",
 					"stretched": true,
-					"data.url": "https://filesamples.com/samples/video/mp4/sample_1280x720.mp4"
+					"data": {
+						"url": "https://filesamples.com/samples/video/mp4/sample_1280x720.mp4"
+					}
 				}
 				JSON,
 			)

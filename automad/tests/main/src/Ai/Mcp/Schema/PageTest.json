@@ -162,26 +162,35 @@
                     ],
                     "type": "string"
                 },
-                "data.primaryLink": {
-                    "description": "The target of the primary button. Either the absolute path of a local page, e.g.\n/about/contact, or a full external URL starting with https://.",
-                    "type": "string"
-                },
-                "data.primaryText": {
-                    "description": "The label of the primary button. Keep it short and action-oriented, e.g. \"Get started\" or\n\"Contact us\".",
-                    "type": "string"
-                },
-                "data.secondaryLink": {
-                    "description": "The target of the optional secondary button. Either the absolute path of a local page or a\nfull external URL. Only used together with \"secondaryText\".",
-                    "type": "string"
-                },
-                "data.secondaryText": {
-                    "description": "The label of the optional secondary button, typically a less prominent alternative action\nsuch as \"Learn more\". Skip it in order to only render the primary button.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "primaryLink": {
+                            "description": "The target of the primary button. Either the absolute path of a local page, e.g.\n/about/contact, or a full external URL starting with https://.",
+                            "type": "string"
+                        },
+                        "primaryText": {
+                            "description": "The label of the primary button. Keep it short and action-oriented, e.g. \"Get started\" or\n\"Contact us\".",
+                            "type": "string"
+                        },
+                        "secondaryLink": {
+                            "description": "The target of the optional secondary button. Either the absolute path of a local page or a\nfull external URL. Only used together with \"secondaryText\".",
+                            "type": "string"
+                        },
+                        "secondaryText": {
+                            "description": "The label of the optional secondary button, typically a less prominent alternative action\nsuch as \"Learn more\". Skip it in order to only render the primary button.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "primaryLink",
+                        "primaryText"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.primaryLink",
-                "data.primaryText"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -207,18 +216,27 @@
                     ],
                     "type": "string"
                 },
-                "data.text": {
-                    "description": "The body text of the callout. It supports inline HTML formatting such as <strong>, <i> and\n<a href=\"...\"> links.",
-                    "type": "string"
-                },
-                "data.title": {
-                    "description": "A short headline that summarizes the callout, e.g. \"Note\", \"Tip\" or \"Warning\".",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "text": {
+                            "description": "The body text of the callout. It supports inline HTML formatting such as <strong>, <i> and\n<a href=\"...\"> links.",
+                            "type": "string"
+                        },
+                        "title": {
+                            "description": "A short headline that summarizes the callout, e.g. \"Note\", \"Tip\" or \"Warning\".",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "text",
+                        "title"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.text",
-                "data.title"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -244,56 +262,65 @@
                     ],
                     "type": "string"
                 },
-                "data.code": {
-                    "description": "The code that is displayed as plain text with its line breaks and indentation preserved.\nDo not escape HTML characters, the code is escaped automatically when rendered.",
-                    "type": "string"
-                },
-                "data.language": {
-                    "description": "The language that is used for syntax highlighting. Use \"none\" for plain text without\nhighlighting.",
-                    "enum": [
-                        "apacheconf",
-                        "automad",
-                        "bash",
-                        "basic",
-                        "c",
-                        "clike",
-                        "csharp",
-                        "cpp",
-                        "css",
-                        "go",
-                        "graphql",
-                        "handlebars",
-                        "html",
-                        "java",
-                        "javascript",
-                        "jsx",
-                        "latex",
-                        "less",
-                        "lua",
-                        "markdown",
-                        "nginx",
-                        "none",
-                        "php",
-                        "powershell",
-                        "python",
-                        "ruby",
-                        "rust",
-                        "sass",
-                        "sql",
-                        "tsx",
-                        "typescript",
-                        "vim",
-                        "yaml"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "description": "The code that is displayed as plain text with its line breaks and indentation preserved.\nDo not escape HTML characters, the code is escaped automatically when rendered.",
+                            "type": "string"
+                        },
+                        "language": {
+                            "description": "The language that is used for syntax highlighting. Use \"none\" for plain text without\nhighlighting.",
+                            "enum": [
+                                "apacheconf",
+                                "automad",
+                                "bash",
+                                "basic",
+                                "c",
+                                "clike",
+                                "csharp",
+                                "cpp",
+                                "css",
+                                "go",
+                                "graphql",
+                                "handlebars",
+                                "html",
+                                "java",
+                                "javascript",
+                                "jsx",
+                                "latex",
+                                "less",
+                                "lua",
+                                "markdown",
+                                "nginx",
+                                "none",
+                                "php",
+                                "powershell",
+                                "python",
+                                "ruby",
+                                "rust",
+                                "sass",
+                                "sql",
+                                "tsx",
+                                "typescript",
+                                "vim",
+                                "yaml"
+                            ],
+                            "type": "string"
+                        },
+                        "lineNumbers": {
+                            "description": "If true, line numbers are displayed next to the code. This is useful for longer snippets.",
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "code"
                     ],
-                    "type": "string"
-                },
-                "data.lineNumbers": {
-                    "description": "If true, line numbers are displayed next to the code. This is useful for longer snippets.",
-                    "type": "boolean"
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.code"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -323,31 +350,40 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.collapsed": {
-                    "description": "The initial state of the section. If true, the content is hidden until a visitor clicks\nthe title. If false, the section is expanded by default.",
-                    "type": "boolean"
-                },
-                "data.content": {
-                    "description": "The child blocks that are revealed when the section is expanded. Any block type can be\nused here.",
-                    "items": {
-                        "$ref": "#/$defs/block"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "collapsed": {
+                            "description": "The initial state of the section. If true, the content is hidden until a visitor clicks\nthe title. If false, the section is expanded by default.",
+                            "type": "boolean"
+                        },
+                        "content": {
+                            "description": "The child blocks that are revealed when the section is expanded. Any block type can be\nused here.",
+                            "items": {
+                                "$ref": "#/$defs/block"
+                            },
+                            "type": "array"
+                        },
+                        "group": {
+                            "description": "The name of an accordion group. Sections that share the same group name behave like HTML\n<details> elements that share the same value for their \"name\" attribute, so opening one\nsection closes all others. Use an empty string for an independent section.",
+                            "type": "string"
+                        },
+                        "title": {
+                            "description": "The always visible and clickable title of the section that is rendered as the HTML\n<summary> element. For FAQs, use the question as title.",
+                            "type": "string"
+                        }
                     },
-                    "type": "array"
-                },
-                "data.group": {
-                    "description": "The name of an accordion group. Sections that share the same group name behave like HTML\n<details> elements that share the same value for their \"name\" attribute, so opening one\nsection closes all others. Use an empty string for an independent section.",
-                    "type": "string"
-                },
-                "data.title": {
-                    "description": "The always visible and clickable title of the section that is rendered as the HTML\n<summary> element. For FAQs, use the question as title.",
-                    "type": "string"
+                    "required": [
+                        "collapsed",
+                        "content",
+                        "group",
+                        "title"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.collapsed",
-                "data.content",
-                "data.group",
-                "data.title"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -377,13 +413,22 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.id": {
-                    "description": "The ID of an existing reusable component that is rendered in place of this block.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "The ID of an existing reusable component that is rendered in place of this block.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.id"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -414,7 +459,9 @@
                     "type": "boolean"
                 }
             },
-            "required": [],
+            "required": [
+				"type"
+			],
             "additionalProperties": false
         },
         "embed": {
@@ -443,31 +490,40 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.source": {
-                    "description": "The full URL of the content on the third-party platform, e.g. the URL of a YouTube video,\na Vimeo video, a SoundCloud track or a social media post, exactly as it is shown in the\nbrowser address bar or share dialog.",
-                    "enum": [
-                        "codepen",
-                        "dailymotion",
-                        "facebook",
-                        "giphy",
-                        "github",
-                        "imgur",
-                        "instagram",
-                        "mixcloud",
-                        "soundcloud",
-                        "twitter",
-                        "vimeo",
-                        "youtube"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "source": {
+                            "description": "The full URL of the content on the third-party platform, e.g. the URL of a YouTube video,\na Vimeo video, a SoundCloud track or a social media post, exactly as it is shown in the\nbrowser address bar or share dialog.",
+                            "enum": [
+                                "codepen",
+                                "dailymotion",
+                                "facebook",
+                                "giphy",
+                                "github",
+                                "imgur",
+                                "instagram",
+                                "mixcloud",
+                                "soundcloud",
+                                "twitter",
+                                "vimeo",
+                                "youtube"
+                            ],
+                            "type": "string"
+                        },
+                        "caption": {
+                            "description": "An optional caption that is displayed below the embedded content. It supports inline HTML\nformatting.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "source"
                     ],
-                    "type": "string"
-                },
-                "data.caption": {
-                    "description": "An optional caption that is displayed below the embedded content. It supports inline HTML\nformatting.",
-                    "type": "string"
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.source"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -497,27 +553,36 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.file": {
-                    "description": "The Automad template that is used to render each file of the list. Before selecting a\ntemplate, read the available filelist templates from the `automad://templates/filelist`\nresource and use one of the returned template files.",
-                    "type": "string"
-                },
-                "data.glob": {
-                    "description": "One or more comma-separated glob patterns that select the listed files, e.g. \"*.pdf\" or\n\"*.pdf, *.zip\". Patterns are resolved relative to the directory of the current page,\nunless they start with a slash, in which case they are resolved relative to the Automad\nbase directory.",
-                    "type": "string"
-                },
-                "data.sortOrder": {
-                    "description": "The sort order of the files by their path, either \"asc\" for ascending or \"desc\" for\ndescending.",
-                    "enum": [
-                        "asc",
-                        "desc"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "file": {
+                            "description": "The Automad template that is used to render each file of the list. Before selecting a\ntemplate, read the available filelist templates from the `automad://templates/filelist`\nresource and use one of the returned template files.",
+                            "type": "string"
+                        },
+                        "glob": {
+                            "description": "One or more comma-separated glob patterns that select the listed files, e.g. \"*.pdf\" or\n\"*.pdf, *.zip\". Patterns are resolved relative to the directory of the current page,\nunless they start with a slash, in which case they are resolved relative to the Automad\nbase directory.",
+                            "type": "string"
+                        },
+                        "sortOrder": {
+                            "description": "The sort order of the files by their path, either \"asc\" for ascending or \"desc\" for\ndescending.",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "file",
+                        "glob",
+                        "sortOrder"
                     ],
-                    "type": "string"
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.file",
-                "data.glob",
-                "data.sortOrder"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -547,33 +612,42 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.columnWidthPx": {
-                    "description": "The target width of the columns in pixels, e.g. 250. Only used for the \"columns\" and\n\"grid\" layouts.",
-                    "type": "number"
-                },
-                "data.files": {
-                    "description": "The list of images that are included in the gallery. Each item is either the file name of\nan image that is attached to the current page, a path that starts with a slash and is\nrelative to the Automad base directory, or a full remote image URL.",
-                    "type": "array"
-                },
-                "data.layout": {
-                    "description": "The gallery layout. \"columns\" creates a masonry layout with columns of equal width, \"rows\"\ncreates justified rows of equal height and \"grid\" creates a uniform grid of equally sized\ncells.",
-                    "enum": [
-                        "columns",
-                        "grid",
-                        "rows"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "columnWidthPx": {
+                            "description": "The target width of the columns in pixels, e.g. 250. Only used for the \"columns\" and\n\"grid\" layouts.",
+                            "type": "number"
+                        },
+                        "files": {
+                            "description": "The list of images that are included in the gallery. Each item is either the file name of\nan image that is attached to the current page, a path that starts with a slash and is\nrelative to the Automad base directory, or a full remote image URL.",
+                            "type": "array"
+                        },
+                        "layout": {
+                            "description": "The gallery layout. \"columns\" creates a masonry layout with columns of equal width, \"rows\"\ncreates justified rows of equal height and \"grid\" creates a uniform grid of equally sized\ncells.",
+                            "enum": [
+                                "columns",
+                                "grid",
+                                "rows"
+                            ],
+                            "type": "string"
+                        },
+                        "rowHeightPx": {
+                            "description": "The target height of the rows in pixels, e.g. 250. Only used for the \"rows\" and \"grid\"\nlayouts.",
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "columnWidthPx",
+                        "files",
+                        "layout",
+                        "rowHeightPx"
                     ],
-                    "type": "string"
-                },
-                "data.rowHeightPx": {
-                    "description": "The target height of the rows in pixels, e.g. 250. Only used for the \"rows\" and \"grid\"\nlayouts.",
-                    "type": "number"
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.columnWidthPx",
-                "data.files",
-                "data.layout",
-                "data.rowHeightPx"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -599,26 +673,35 @@
                     ],
                     "type": "string"
                 },
-                "data.level": {
-                    "description": "The heading level from 1 to 6 that is rendered as <h1> to <h6>. Use 2 for main sections\nand higher levels for subsections without skipping levels.",
-                    "enum": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "level": {
+                            "description": "The heading level from 1 to 6 that is rendered as <h1> to <h6>. Use 2 for main sections\nand higher levels for subsections without skipping levels.",
+                            "enum": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6
+                            ],
+                            "type": "number"
+                        },
+                        "text": {
+                            "description": "The heading text. It supports inline HTML formatting such as <i> or <a href=\"...\"> links.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "level",
+                        "text"
                     ],
-                    "type": "number"
-                },
-                "data.text": {
-                    "description": "The heading text. It supports inline HTML formatting such as <i> or <a href=\"...\"> links.",
-                    "type": "string"
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.level",
-                "data.text"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -648,18 +731,27 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.alt": {
-                    "description": "A short description of the image content for screen readers and search engines that is\nrendered as the HTML \"alt\" attribute.",
-                    "type": "string"
-                },
-                "data.url": {
-                    "description": "The image source. Either the file name of an image that is attached to the current page, a\npath that starts with a slash and is relative to the Automad base directory, or a full\nremote image URL.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "alt": {
+                            "description": "A short description of the image content for screen readers and search engines that is\nrendered as the HTML \"alt\" attribute.",
+                            "type": "string"
+                        },
+                        "url": {
+                            "description": "The image source. Either the file name of an image that is attached to the current page, a\npath that starts with a slash and is relative to the Automad base directory, or a full\nremote image URL.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "alt",
+                        "url"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.alt",
-                "data.url"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -689,23 +781,32 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.files": {
-                    "description": "The list of images that are shown in the slideshow. Each item is either the file name of\nan image that is attached to the current page, a path that starts with a slash and is\nrelative to the Automad base directory, or a full remote image URL.",
-                    "type": "array"
-                },
-                "data.imageHeightPx": {
-                    "description": "The height in pixels that all images are cropped to, e.g. 780. Together with\n\"imageWidthPx\" it defines the aspect ratio of the slides.",
-                    "type": "number"
-                },
-                "data.imageWidthPx": {
-                    "description": "The width in pixels that all images are cropped to, e.g. 1200. Together with\n\"imageHeightPx\" it defines the aspect ratio of the slides.",
-                    "type": "number"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "files": {
+                            "description": "The list of images that are shown in the slideshow. Each item is either the file name of\nan image that is attached to the current page, a path that starts with a slash and is\nrelative to the Automad base directory, or a full remote image URL.",
+                            "type": "array"
+                        },
+                        "imageHeightPx": {
+                            "description": "The height in pixels that all images are cropped to, e.g. 780. Together with\n\"imageWidthPx\" it defines the aspect ratio of the slides.",
+                            "type": "number"
+                        },
+                        "imageWidthPx": {
+                            "description": "The width in pixels that all images are cropped to, e.g. 1200. Together with\n\"imageHeightPx\" it defines the aspect ratio of the slides.",
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "files",
+                        "imageHeightPx",
+                        "imageWidthPx"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.files",
-                "data.imageHeightPx",
-                "data.imageWidthPx"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -735,16 +836,25 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.content": {
-                    "description": "The child blocks of the section. Set the \"width\" property of each child block in order to\narrange them side by side on the grid, e.g. two blocks with a width of 1/2 form a\ntwo-column row.",
-                    "items": {
-                        "$ref": "#/$defs/block"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "content": {
+                            "description": "The child blocks of the section. Set the \"width\" property of each child block in order to\narrange them side by side on the grid, e.g. two blocks with a width of 1/2 form a\ntwo-column row.",
+                            "items": {
+                                "$ref": "#/$defs/block"
+                            },
+                            "type": "array"
+                        }
                     },
-                    "type": "array"
+                    "required": [
+                        "content"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.content"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -770,17 +880,26 @@
                     ],
                     "type": "string"
                 },
-                "data.labelSend": {
-                    "description": "The label of the submit button. Skip it in order to use the default label.",
-                    "type": "string"
-                },
-                "data.to": {
-                    "description": "The email address of the recipient that receives the form submissions, usually the address\nof the site owner.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "labelSend": {
+                            "description": "The label of the submit button. Skip it in order to use the default label.",
+                            "type": "string"
+                        },
+                        "to": {
+                            "description": "The email address of the recipient that receives the form submissions, usually the address\nof the site owner.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "to"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.to"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -806,25 +925,34 @@
                     ],
                     "type": "string"
                 },
-                "data.items": {
-                    "description": "The list items. Each item has a \"content\" string that supports inline HTML formatting and\nan optional \"items\" array that contains a nested sub-list.",
-                    "items": {
-                        "$ref": "#/$defs/nestedListItem"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "items": {
+                            "description": "The list items. Each item has a \"content\" string that supports inline HTML formatting and\nan optional \"items\" array that contains a nested sub-list.",
+                            "items": {
+                                "$ref": "#/$defs/nestedListItem"
+                            },
+                            "type": "array"
+                        },
+                        "style": {
+                            "description": "The list style. \"ordered\" renders a numbered <ol> list and \"unordered\" renders a bulleted\n<ul> list.",
+                            "enum": [
+                                "ordered",
+                                "unordered"
+                            ],
+                            "type": "string"
+                        }
                     },
-                    "type": "array"
-                },
-                "data.style": {
-                    "description": "The list style. \"ordered\" renders a numbered <ol> list and \"unordered\" renders a bulleted\n<ul> list.",
-                    "enum": [
-                        "ordered",
-                        "unordered"
+                    "required": [
+                        "items",
+                        "style"
                     ],
-                    "type": "string"
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.items",
-                "data.style"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -854,47 +982,56 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.context": {
-                    "description": "The URL of the page that is used as reference for the \"children\" and \"siblings\" types as\nan absolute path, e.g. /blog. Skip it in order to use the current page as context.",
-                    "type": "string"
-                },
-                "data.file": {
-                    "description": "The Automad template that is used to render each page preview. Before selecting a\ntemplate, read the available pagelist templates from the `automad://templates/pagelist`\nresource and use one of the returned template files.",
-                    "type": "string"
-                },
-                "data.limit": {
-                    "description": "The maximum number of pages that are displayed. Defaults to 10 when skipped.",
-                    "type": "number"
-                },
-                "data.sortField": {
-                    "description": "The field that is used for sorting. \":index\" keeps the order of the pages as arranged in\nthe dashboard, \"date\" sorts by the page date and \"title\" sorts alphabetically by title.",
-                    "enum": [
-                        ":index",
-                        "date",
-                        "title"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "description": "The URL of the page that is used as reference for the \"children\" and \"siblings\" types as\nan absolute path, e.g. /blog. Skip it in order to use the current page as context.",
+                            "type": "string"
+                        },
+                        "file": {
+                            "description": "The Automad template that is used to render each page preview. Before selecting a\ntemplate, read the available pagelist templates from the `automad://templates/pagelist`\nresource and use one of the returned template files.",
+                            "type": "string"
+                        },
+                        "limit": {
+                            "description": "The maximum number of pages that are displayed. Defaults to 10 when skipped.",
+                            "type": "number"
+                        },
+                        "sortField": {
+                            "description": "The field that is used for sorting. \":index\" keeps the order of the pages as arranged in\nthe dashboard, \"date\" sorts by the page date and \"title\" sorts alphabetically by title.",
+                            "enum": [
+                                ":index",
+                                "date",
+                                "title"
+                            ],
+                            "type": "string"
+                        },
+                        "sortOrder": {
+                            "description": "The sort order, either \"asc\" for ascending or \"desc\" for descending. For newest-first\nlistings such as blogs, use \"date\" with \"desc\".",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "The relation of the listed pages to the context page. \"children\" lists the subpages of the\ncontext page, \"siblings\" lists the pages that share the same parent and \"related\" lists\npages that share at least one tag with the current page. Skip it in order to list all\npages of the site.",
+                            "enum": [
+                                "children",
+                                "siblings",
+                                "related"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "file"
                     ],
-                    "type": "string"
-                },
-                "data.sortOrder": {
-                    "description": "The sort order, either \"asc\" for ascending or \"desc\" for descending. For newest-first\nlistings such as blogs, use \"date\" with \"desc\".",
-                    "enum": [
-                        "asc",
-                        "desc"
-                    ],
-                    "type": "string"
-                },
-                "data.type": {
-                    "description": "The relation of the listed pages to the context page. \"children\" lists the subpages of the\ncontext page, \"siblings\" lists the pages that share the same parent and \"related\" lists\npages that share at least one tag with the current page. Skip it in order to list all\npages of the site.",
-                    "enum": [
-                        "children",
-                        "siblings",
-                        "related"
-                    ],
-                    "type": "string"
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.file"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -920,17 +1057,26 @@
                     ],
                     "type": "string"
                 },
-                "data.large": {
-                    "description": "If true, the paragraph is rendered with a larger font size. This can be used to make a\nparagraph stand out and is ideal for lead or intro text below a heading.",
-                    "type": "boolean"
-                },
-                "data.text": {
-                    "description": "The paragraph text. It supports inline HTML formatting such as <strong>, <i>, <u>, <s>,\n<code> and <a href=\"...\"> links, as well as <br> for line breaks.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "large": {
+                            "description": "If true, the paragraph is rendered with a larger font size. This can be used to make a\nparagraph stand out and is ideal for lead or intro text below a heading.",
+                            "type": "boolean"
+                        },
+                        "text": {
+                            "description": "The paragraph text. It supports inline HTML formatting such as <strong>, <i>, <u>, <s>,\n<code> and <a href=\"...\"> links, as well as <br> for line breaks.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "text"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.text"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -956,18 +1102,27 @@
                     ],
                     "type": "string"
                 },
-                "data.text": {
-                    "description": "The quoted text. It supports inline HTML formatting.",
-                    "type": "string"
-                },
-                "data.caption": {
-                    "description": "The name of the author or the source of the quote, e.g. \"Jane Doe, CEO at Example Inc.\".",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "text": {
+                            "description": "The quoted text. It supports inline HTML formatting.",
+                            "type": "string"
+                        },
+                        "caption": {
+                            "description": "The name of the author or the source of the quote, e.g. \"Jane Doe, CEO at Example Inc.\".",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "text",
+                        "caption"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.text",
-                "data.caption"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -997,13 +1152,22 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.code": {
-                    "description": "The raw HTML or Markdown code. Markdown is converted to HTML and HTML is output as is\nwithout any escaping.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "description": "The raw HTML or Markdown code. Markdown is converted to HTML and HTML is output as is\nwithout any escaping.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "code"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.code"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -1029,18 +1193,27 @@
                     ],
                     "type": "string"
                 },
-                "data.file": {
-                    "description": "The snippet file that is rendered. Before selecting a snippet, read the available snippets\nfrom the `automad://snippets` resource and use one of the returned snippet files. Use an\nempty string when defining inline code in \"snippet\" instead.",
-                    "type": "string"
-                },
-                "data.snippet": {
-                    "description": "Inline Automad template language code that can be used as an alternative to a snippet\nfile. Use an empty string when a snippet file is selected.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "file": {
+                            "description": "The snippet file that is rendered. Before selecting a snippet, read the available snippets\nfrom the `automad://snippets` resource and use one of the returned snippet files. Use an\nempty string when defining inline code in \"snippet\" instead.",
+                            "type": "string"
+                        },
+                        "snippet": {
+                            "description": "Inline Automad template language code that can be used as an alternative to a snippet\nfile. Use an empty string when a snippet file is selected.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "file",
+                        "snippet"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.file",
-                "data.snippet"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -1070,23 +1243,32 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.withHeadings": {
-                    "description": "If true, the first row is rendered as the table heading.",
-                    "type": "boolean"
-                },
-                "data.content": {
-                    "description": "The table rows as an array of rows, where each row is an array of cell strings. All rows\nmust contain the same number of cells. Cells support inline HTML formatting.",
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "withHeadings": {
+                            "description": "If true, the first row is rendered as the table heading.",
+                            "type": "boolean"
+                        },
+                        "content": {
+                            "description": "The table rows as an array of rows, where each row is an array of cell strings. All rows\nmust contain the same number of cells. Cells support inline HTML formatting.",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "array"
                         }
                     },
-                    "type": "array"
+                    "required": [
+                        "content"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.content"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -1112,16 +1294,25 @@
                     ],
                     "type": "string"
                 },
-                "data.type": {
-                    "description": "The list style of the table of contents. \"ordered\" renders a numbered list and \"unordered\"\nrenders a bulleted list. Defaults to \"ordered\".",
-                    "enum": [
-                        "ordered",
-                        "unordered"
-                    ],
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "description": "The list style of the table of contents. \"ordered\" renders a numbered list and \"unordered\"\nrenders a bulleted list. Defaults to \"ordered\".",
+                            "enum": [
+                                "ordered",
+                                "unordered"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [],
+                    "additionalProperties": false
                 }
             },
-            "required": [],
+            "required": [
+				"type"
+			],
             "additionalProperties": false
         },
         "teX": {
@@ -1150,13 +1341,22 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.code": {
-                    "description": "The math expression in TeX/LaTeX syntax without any surrounding dollar sign delimiters,\ne.g. E = mc^2.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "description": "The math expression in TeX/LaTeX syntax without any surrounding dollar sign delimiters,\ne.g. E = mc^2.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "code"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.code"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -1186,13 +1386,22 @@
                     "description": "If true the section will be stretched to the full width.",
                     "type": "boolean"
                 },
-                "data.url": {
-                    "description": "The URL of the video file, e.g. an .mp4 or .webm file. Either the file name of a video\nthat is attached to the current page, a path that starts with a slash and is relative to\nthe Automad base directory, or a full remote URL.",
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "description": "The URL of the video file, e.g. an .mp4 or .webm file. Either the file name of a video\nthat is attached to the current page, a path that starts with a slash and is relative to\nthe Automad base directory, or a full remote URL.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url"
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
-                "data.url"
+                "type"
             ],
             "additionalProperties": false
         }

@@ -88,8 +88,10 @@ class CalloutTest extends TestCase {
 				{
 					"id": "1",
 					"type": "callout",
-					"data.text": "Callout text",
-					"data.title": "Important"
+					"data": {
+						"text": "Callout text",
+						"title": "Important"
+					}
 				}
 				JSON
 			)

@@ -70,9 +70,11 @@ class CodeTest extends TestCase {
 				{
 					"id": "1",
 					"type": "code",
-					"data.code": "Some code",
-					"data.language": "php",
-					"data.lineNumbers": true
+					"data": {
+						"code": "Some code",
+						"language": "php",
+						"lineNumbers": true
+					}
 				}
 				JSON
 			)

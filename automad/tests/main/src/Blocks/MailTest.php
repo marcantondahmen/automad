@@ -75,8 +75,10 @@ class MailTest extends TestCase {
 				{
 					"id": "1",
 					"type": "mail",
-					"data.labelSend": "Send",
-					"data.to": "user@domain.com"
+					"data": {
+						"labelSend": "Send",
+						"to": "user@domain.com"
+					}
 				}
 				JSON,
 			)

@@ -121,8 +121,10 @@ class EmbedTest extends TestCase {
 					"id": "1",
 					"type": "embed",
 					"stretched": true,
-					"data.source": "https://www.youtube.com/watch?v=abcdef",
-					"data.caption": "Some caption text"
+					"data": {
+						"source": "https://www.youtube.com/watch?v=abcdef",
+						"caption": "Some caption text"
+					}
 				}
 				JSON
 			)

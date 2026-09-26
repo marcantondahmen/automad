@@ -132,13 +132,15 @@ class ImageSlideshowTest extends TestCase {
 					"id": "1",
 					"type": "imageSlideshow",
 					"stretched": true,
-					"data.files": [
-						"image-1.png",
-						"image-2.png",
-						"image-3.png"
-					],
-					"data.imageHeightPx": 780,
-					"data.imageWidthPx": 1200
+					"data": {
+						"files": [
+							"image-1.png",
+							"image-2.png",
+							"image-3.png"
+						],
+						"imageHeightPx": 780,
+						"imageWidthPx": 1200
+					}
 				}
 				JSON
 			)

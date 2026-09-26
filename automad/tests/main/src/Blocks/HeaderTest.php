@@ -59,8 +59,10 @@ class HeaderTest extends TestCase {
 				{
 					"id": "1",
 					"type": "header",
-					"data.level": 2,
-					"data.text": "Heading text"
+					"data": {
+						"level": 2,
+						"text": "Heading text"
+					}
 				}
 				JSON
 			)

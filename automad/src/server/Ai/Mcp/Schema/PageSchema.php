@@ -78,7 +78,7 @@ class PageSchema {
 					'type' => array('const' => $type),
 					...$blockClass::getAgentSchema()
 				),
-				'required' => $blockClass::getRequiredFromAgentSchema(),
+				'required' => array('type'),
 				'additionalProperties' => false
 			);
 

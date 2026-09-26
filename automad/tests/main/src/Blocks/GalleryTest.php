@@ -94,13 +94,15 @@ class GalleryTest extends TestCase {
 				{
 					"id": "1",
 					"type": "gallery",
-					"data.columnWidthPx": 250,
-					"data.files": [
-						"image-1.png",
-						"image-2.png"
-					],
-					"data.layout": "rows",
-					"data.rowHeightPx": 250
+					"data": {
+						"columnWidthPx": 250,
+						"files": [
+							"image-1.png",
+							"image-2.png"
+						],
+						"layout": "rows",
+						"rowHeightPx": 250
+					}
 				}
 				JSON
 			),
@@ -132,13 +134,15 @@ class GalleryTest extends TestCase {
 					"id": "2",
 					"type": "gallery",
 					"stretched": true,
-					"data.columnWidthPx": 250,
-					"data.files": [
-						"image-1.png",
-						"image-2.png"
-					],
-					"data.layout": "columns",
-					"data.rowHeightPx": 250
+					"data": {
+						"columnWidthPx": 250,
+						"files": [
+							"image-1.png",
+							"image-2.png"
+						],
+						"layout": "columns",
+						"rowHeightPx": 250
+					}
 				}
 				JSON
 			)

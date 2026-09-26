@@ -180,16 +180,20 @@ class CollapsibleSectionTest extends TestCase {
 					"id": "1",
 					"type": "collapsibleSection",
 					"stretched": true,
-					"data.collapsed": true,
-					"data.content": [
-						{
-							"id": "2",
-							"type": "paragraph",
-							"data.text": "Collapsible content"
-						}
-					],
-					"data.group": "faq",
-					"data.title": "Collapsible Title"
+					"data": {
+						"collapsed": true,
+						"content": [
+							{
+								"id": "2",
+								"type": "paragraph",
+								"data": {
+									"text": "Collapsible content"
+								}
+							}
+						],
+						"group": "faq",
+						"title": "Collapsible Title"
+					}
 				}
 				JSON
 			)

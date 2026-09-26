@@ -101,16 +101,18 @@ class TableTest extends TestCase {
 					"id": "1",
 					"type": "table",
 					"stretched": true,
-					"data.content": [
-						[
-							"header a",
-							"header b"
-						],
-						[
-							"row a",
-							"row b"
+					"data": {
+						"content": [
+							[
+								"header a",
+								"header b"
+							],
+							[
+								"row a",
+								"row b"
+							]
 						]
-					]
+					}
 				}
 				JSON,
 			)

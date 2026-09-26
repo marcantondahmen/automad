@@ -104,20 +104,16 @@ abstract class AbstractBlock {
 
 		$schema = static::agentDataSchema();
 
-		foreach ($data as $key => $value) {
-			if (str_starts_with($key, 'data.')) {
-				$key = str_replace('data.', '', $key);
+		foreach (($data['data'] ?? array()) as $key => $value) {
+			if (isset($schema[$key])) {
+				$fieldSchema = $schema[$key];
 
-				if (isset($schema[$key])) {
-					$fieldSchema = $schema[$key];
-
-					if ($fieldSchema->hasBlocks === true) {
-						$value = array('blocks' => Blocks::fromAgent($value));
-					}
+				if ($fieldSchema->hasBlocks === true) {
+					$value = array('blocks' => Blocks::fromAgent($value));
 				}
-
-				$block['data'][$key] = $value;
 			}
+
+			$block['data'][$key] = $value;
 		}
 
 		return $block;
@@ -150,9 +146,22 @@ abstract class AbstractBlock {
 			);
 		}
 
-		foreach (static::agentDataSchema() as $key => $fieldSchema) {
-			/** @var AgentFieldSchema */
-			$properties["data.$key"] = $fieldSchema;
+		$dataSchema = static::agentDataSchema();
+
+		if (!empty($dataSchema)) {
+			$dataProperties = array();
+
+			foreach ($dataSchema as $key => $fieldSchema) {
+				/** @var AgentFieldSchema */
+				$dataProperties[$key] = $fieldSchema;
+			}
+
+			$properties['data'] = array(
+				'type' => 'object',
+				'properties' => $dataProperties,
+				'required' => static::getRequiredFromAgentDataSchema(),
+				'additionalProperties' => false
+			);
 		}
 
 		return $properties;
@@ -162,23 +171,6 @@ abstract class AbstractBlock {
 	 * The block description.
 	 */
 	abstract public static function getDescription(): string;
-
-	/**
-	 * Get the properties that are required for a block.
-	 *
-	 * @return string[]
-	 */
-	public static function getRequiredFromAgentSchema(): array {
-		$required = array();
-
-		foreach (static::getAgentSchema() as $key => $prop) {
-			if (!$prop->optional) {
-				$required[] = $key;
-			}
-		}
-
-		return $required;
-	}
 
 	/**
 	 * Render a paragraph block.
@@ -217,12 +209,32 @@ abstract class AbstractBlock {
 	public static function toAgent(array $block, ComponentCollection $ComponentCollection): array {
 		$data = array('id' => $block['id'], 'type' => $block['type']);
 
-		foreach (static::getAgentSchema() as $key => $fieldSchema) {
+		$width = $block['tunes']['layout']['width'] ?? '';
+
+		if ($width) {
+			$data['width'] = $width;
+		}
+
+		if (static::isStretchable()) {
+			$stretched = $block['tunes']['layout']['stretched'] ?? false;
+
+			if ($stretched) {
+				$data['stretched'] = $stretched;
+			}
+		}
+
+		$dataValues = array();
+
+		foreach (static::agentDataSchema() as $key => $fieldSchema) {
 			$value = self::getAgentValue($fieldSchema, $block, $key, $ComponentCollection);
 
 			if (!is_null($value)) {
-				$data[$key] = $value;
+				$dataValues[$key] = $value;
 			}
+		}
+
+		if (!empty($dataValues)) {
+			$data['data'] = $dataValues;
 		}
 
 		return $data;
@@ -260,45 +272,39 @@ abstract class AbstractBlock {
 	 *
 	 * @param AgentFieldSchema $schema
 	 * @param BlockData $block
-	 * @param string $name
+	 * @param string $key
 	 * @param ComponentCollection $ComponentCollection
 	 * @return mixed
 	 */
-	private static function getAgentValue(AgentFieldSchema $schema, array $block, string $name, ComponentCollection $ComponentCollection): mixed {
-		$value = $schema->getDefault();
-
-		switch ($name) {
-			case ('id'):
-				$value = $block['id'];
-
-				break;
-			case ('type'):
-				$value = $block['type'];
-
-				break;
-			case ('width'):
-				$value = $block['tunes']['layout']['width'] ?? '';
-
-				break;
-			case ('stretched'):
-				$value = $block['tunes']['layout']['stretched'] ?? false;
-
-				break;
-
-			default:
-				$key = str_replace('data.', '', $name);
-				$value = $schema->hasBlocks
-					? Blocks::toAgent(
-						$block['data']['content']['blocks'] ?? array(),
-						$ComponentCollection
-					)
-					: ($block['data'][$key] ?? $schema->getDefault());
-		}
+	private static function getAgentValue(AgentFieldSchema $schema, array $block, string $key, ComponentCollection $ComponentCollection): mixed {
+		$value = $schema->hasBlocks
+			? Blocks::toAgent(
+				$block['data']['content']['blocks'] ?? array(),
+				$ComponentCollection
+			)
+			: ($block['data'][$key] ?? $schema->getDefault());
 
 		if (!$value) {
 			$value = null;
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Get the properties that are required for a block.
+	 *
+	 * @return string[]
+	 */
+	private static function getRequiredFromAgentDataSchema(): array {
+		$required = array();
+
+		foreach (static::agentDataSchema() as $key => $prop) {
+			if (!$prop->optional) {
+				$required[] = $key;
+			}
+		}
+
+		return $required;
 	}
 }

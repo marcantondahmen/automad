@@ -59,7 +59,9 @@ class ComponentTest extends TestCase {
 					"id": "1",
 					"type": "component",
 					"stretched": true,
-					"data.id": "12345"
+					"data": {
+						"id": "12345"
+					}
 				}
 				JSON
 			)

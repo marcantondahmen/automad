@@ -80,8 +80,10 @@ class ImageTest extends TestCase {
 					"id": "1",
 					"type": "image",
 					"stretched": true,
-					"data.alt": "Alt text",
-					"data.url": "image.webp"
+					"data": {
+						"alt": "Alt text",
+						"url": "image.webp"
+					}
 				}
 				JSON
 			)

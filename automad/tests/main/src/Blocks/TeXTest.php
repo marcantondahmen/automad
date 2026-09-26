@@ -71,7 +71,9 @@ class TeXTest extends TestCase {
 					"id": "1",
 					"type": "teX",
 					"stretched": true,
-					"data.code": "tex"
+					"data": {
+						"code": "tex"
+					}
 				}
 				JSON,
 			)

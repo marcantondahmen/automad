@@ -41,13 +41,17 @@ class BlocksTest extends TestCase {
 					{
 						"id": "1",
 						"type": "paragraph",
-						"data.text": "Test paragraph text"
+						"data": {
+							"text": "Test paragraph text"
+						}
 					},
 					{
 						"id": "2",
 						"type": "buttons",
-						"data.primaryLink": "https://domain.com",
-						"data.primaryText": "First Button"
+						"data": {
+							"primaryLink": "https://domain.com",
+							"primaryText": "First Button"
+						}
 					}
 				]
 				JSON,

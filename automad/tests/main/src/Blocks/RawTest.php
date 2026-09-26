@@ -66,7 +66,9 @@ class RawTest extends TestCase {
 				{
 					"id": "1",
 					"type": "raw",
-					"data.code": "raw"
+					"data": {
+						"code": "raw"
+					}
 				}
 				JSON,
 			)
