@@ -106,14 +106,10 @@ class InPageController {
 			return $Response;
 		}
 
-		$newPagePath = $Page->publish();
+		$Page = $Page->publish();
 
-		if (!empty($newPagePath)) {
-			$Page = Page::findByPath($newPagePath);
-
-			if ($Page) {
-				return $Response->setRedirect(AM_BASE_INDEX . $Page->origUrl);
-			}
+		if ($Page) {
+			return $Response->setRedirect(AM_BASE_INDEX . $Page->origUrl);
 		}
 
 		return $Response;
