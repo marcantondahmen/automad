@@ -231,6 +231,8 @@ export class FormComponent extends BaseComponent {
 	private get lockHandle(): string {
 		const url = getPageURL();
 
+		// See also automad/src/server/Ai/Mcp/Tools/PageUpdate.php
+		// in order to match the lockHandle style.
 		return !!url ? `page-${url}` : getSlug();
 	}
 

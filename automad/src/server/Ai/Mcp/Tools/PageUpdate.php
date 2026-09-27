@@ -37,6 +37,7 @@ namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
+use Automad\Api\EditLock;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Cache;
@@ -119,6 +120,10 @@ class PageUpdate extends AbstractTool {
 			$Page->save($data, $template);
 
 			Cache::clear();
+
+			// See also automad/src/client/admin/components/Forms/Form.ts
+			// in order to match the lock handle style.
+			EditLock::set("page-$id", 'mcp');
 
 			return $data;
 		};
