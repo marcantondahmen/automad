@@ -154,6 +154,6 @@ class PageCreate extends AbstractTool {
 	 * @return string
 	 */
 	public function getTitle(): string {
-		return 'Page / Create';
+		return 'Page: Create';
 	}
 }

@@ -108,6 +108,6 @@ class TemplatesPage extends AbstractResource {
 	 * @return string
 	 */
 	public function getTitle(): string {
-		return 'Templates / Page';
+		return 'Templates: Page';
 	}
 }

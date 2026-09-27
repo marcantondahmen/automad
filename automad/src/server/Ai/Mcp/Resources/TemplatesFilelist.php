@@ -81,6 +81,6 @@ class TemplatesFilelist extends AbstractResource {
 	 * @return string
 	 */
 	public function getTitle(): string {
-		return 'Templates / Filelist';
+		return 'Templates: Filelist';
 	}
 }

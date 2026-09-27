@@ -81,6 +81,6 @@ class TemplatesPagelist extends AbstractResource {
 	 * @return string
 	 */
 	public function getTitle(): string {
-		return 'Templates / Pagelist';
+		return 'Templates: Pagelist';
 	}
 }
