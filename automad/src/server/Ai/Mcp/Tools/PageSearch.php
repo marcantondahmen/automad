@@ -43,7 +43,7 @@ use Mcp\Schema\ToolAnnotations;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The search tool.
+ * The page search tool.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -145,7 +145,7 @@ class PageSearch extends AbstractTool {
 	 * @return string
 	 */
 	public function getName(): string {
-		return 'page/search';
+		return 'page_search';
 	}
 
 	/**
