@@ -90,8 +90,8 @@ class PageSchema {
 
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
-			'title' => 'Automad Page',
-			'description' => 'A complete Automad page schema with metadata and template-defined content fields.',
+			'title' => 'Automad Page Creation Schema',
+			'description' => 'A complete Automad page creation schema with metadata and template-defined content fields.',
 			'type' => 'object',
 			'properties' => array(
 				'parent' => array(
