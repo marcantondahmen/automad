@@ -391,15 +391,20 @@ class PageController {
 			return $Response->setError(Text::get('pageNotFoundError'))->setReload(true);
 		}
 
+		$path = $Page->path;
 		$PublishedPage = $Page->publish();
 
 		if (!$PublishedPage) {
 			return $Response;
 		}
 
-		return $Response
-			->setSuccess(Text::get('publishedSuccessfully'))
-			->setRedirect($PublishedPage->dashboardUrl());
+		$newPath = $PublishedPage->path;
+
+		if ($path != $newPath) {
+			$Response->setRedirect($PublishedPage->dashboardUrl());
+		}
+
+		return $Response->setSuccess(Text::get('publishedSuccessfully'));
 	}
 
 	/**
