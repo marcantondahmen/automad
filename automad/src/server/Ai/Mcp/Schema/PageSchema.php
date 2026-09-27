@@ -115,7 +115,7 @@ class PageSchema {
 				),
 				'fields' => array(
 					'type'=> 'object',
-					'description'=> 'Content for the +... fields provided by the selected template.',
+					'description'=> 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
 					'additionalProperties'=> array(
 						'type'=> 'array',
 						'items'=> array(
