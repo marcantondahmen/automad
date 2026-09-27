@@ -78,7 +78,7 @@ class PageDelete extends AbstractTool {
 			The `url` property is required and represents the local absolute page URL path
 			like for example `/about` or `/work/projects`.
 
-			If the user does not specify a valid `url` property value, use the `page/search` tool 
+			If the user does not specify a valid `url` property value, use the `page_search` tool 
 			and select the page that should be the deleted and ask the user for confirmation before 
 			performing the actual deletion.
 			TXT;
