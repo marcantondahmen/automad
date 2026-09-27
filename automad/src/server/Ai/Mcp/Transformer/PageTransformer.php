@@ -91,6 +91,10 @@ class PageTransformer {
 			}
 		}
 
+		if ($data[Fields::URL] == $data[Fields::ORIG_URL]) {
+			unset($data[Fields::URL]);
+		}
+
 		return $data;
 	}
 }
