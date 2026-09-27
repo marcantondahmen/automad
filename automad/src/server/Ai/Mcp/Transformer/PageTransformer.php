@@ -35,7 +35,6 @@
 
 namespace Automad\Ai\Mcp\Transformer;
 
-use Automad\Ai\Mcp\ResourceId;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Models\Page;
@@ -73,21 +72,15 @@ class PageTransformer {
 	 * Transform a page object into an agent optimized representation.
 	 *
 	 * @param Page $Page
-	 * @param string|null $id
 	 * @return array
 	 */
-	public function toAgent(Page $Page, string|null $id = null): array {
-		$id = $id ?? ResourceId::encode($Page->origUrl);
-		$uri = "automad://page/$id";
-
-		$data = array(
-			'id' => $id,
-			'uri' => $uri
-		);
+	public function toAgent(Page $Page): array {
+		// Inject an alias for the origUrl called `id` that can be easily referred to.
+		$data = array('id' => $Page->origUrl, 'fields' => array());
 
 		foreach ($Page->data as $key => $value) {
 			if (str_starts_with($key, '+')) {
-				$data[$key] = Blocks::toAgent(
+				$data['fields'][$key] = Blocks::toAgent(
 					$value['blocks'] ?? array(),
 					$this->Automad->ComponentCollection
 				);
