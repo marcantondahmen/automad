@@ -35,12 +35,8 @@
 
 namespace Automad\Ai\Mcp\Resources;
 
-use Automad\Ai\Mcp\ResourceId;
-use Automad\Ai\Mcp\ResourceTemplates\Page;
+use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
-use Automad\Core\Blocks;
-use Automad\Models\PageCollection;
-use Automad\Models\Shared;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -65,32 +61,11 @@ class Pages extends AbstractResource {
 	public function getHandler(): callable {
 		return function () {
 			$pages = array();
-			$PageCollection = new PageCollection(new Shared());
 			$Automad = Automad::fromCache();
+			$PageTransformer = new PageTransformer($Automad);
 
 			foreach ($Automad->getPages() as $Page) {
-				$id = ResourceId::encode($Page->origUrl);
-				$uri = "automad://page/$id";
-
-				$data = array(
-					'id' => $id,
-					'uri' => $uri
-				);
-
-				foreach ($Page->data as $key => $value) {
-					if (str_starts_with($key, '+')) {
-						$data[$key] = Blocks::toAgent(
-							$value['blocks'] ?? array(),
-							$Automad->ComponentCollection
-						);
-					} else {
-						if (!in_array($key, Page::IGNORED_FIELDS)) {
-							$data[$key] = $value;
-						}
-					}
-				}
-
-				$pages[] = $data;
+				$pages[] = $PageTransformer->toAgent($Page);
 			}
 
 			return $pages;

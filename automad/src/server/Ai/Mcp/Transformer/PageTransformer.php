@@ -33,73 +33,71 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Ai\Mcp\ResourceTemplates;
+namespace Automad\Ai\Mcp\Transformer;
 
 use Automad\Ai\Mcp\ResourceId;
-use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
-use Automad\Core\Debug;
+use Automad\Core\Blocks;
+use Automad\Models\Page;
+use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The page template.
+ * The tranformer class for page objects.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class Page extends AbstractResourceTemplate {
+class PageTransformer {
+	const array IGNORED_FIELDS = array(
+		Fields::AUTOMAD_VERSION,
+	);
+
 	/**
-	 * @return string
+	 * The Automad instance.
 	 */
-	public function getDescription(): string {
-		return 'A single page that can be accessed by an URI provided in the automad://pages resource.';
+	private Automad $Automad;
+
+	/**
+	 * The constructor.
+	 *
+	 * @param Automad $Automad
+	 */
+	public function __construct(Automad $Automad) {
+		$this->Automad = $Automad;
 	}
 
 	/**
-	 * @return callable
+	 * Transform a page object into an agent optimized representation.
+	 *
+	 * @param Page $Page
+	 * @param string|null $id
+	 * @return array
 	 */
-	public function getHandler(): callable {
-		return function (string $id) {
-			$Automad = Automad::fromCache();
-			$Page = $Automad->getPage(ResourceId::decode($id));
+	public function toAgent(Page $Page, string|null $id = null): array {
+		$id = $id ?? ResourceId::encode($Page->origUrl);
+		$uri = "automad://page/$id";
 
-			if (!$Page) {
-				return array();
+		$data = array(
+			'id' => $id,
+			'uri' => $uri
+		);
+
+		foreach ($Page->data as $key => $value) {
+			if (str_starts_with($key, '+')) {
+				$data[$key] = Blocks::toAgent(
+					$value['blocks'] ?? array(),
+					$this->Automad->ComponentCollection
+				);
+			} else {
+				if (!in_array($key, PageTransformer::IGNORED_FIELDS)) {
+					$data[$key] = $value;
+				}
 			}
+		}
 
-			$PageTransformer = new PageTransformer($Automad);
-			$data = $PageTransformer->toAgent($Page, $id);
-
-			Debug::log($data, 'Page data');
-
-			return $data;
-		};
-	}
-
-	/**
-	 * The resource's name.
-	 *
-	 * @return string
-	 */
-	public function getName(): string {
-		return 'page';
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTitle(): string {
-		return 'Page';
-	}
-
-	/**
-	 * The template's uri.
-	 *
-	 * @return string
-	 */
-	public function getUriTemplate(): string {
-		return 'page/{id}';
+		return $data;
 	}
 }
