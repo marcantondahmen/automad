@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Api\EditLock;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Models\Page;
@@ -92,19 +93,23 @@ class PageDelete extends AbstractTool {
 	 */
 	public function getHandler(): callable {
 		return function (
-			string $url,
+			string $id,
 		) {
 			$Automad = Automad::fromCache();
-			$Page = $Automad->getPage($url);
+			$Page = $Automad->getPage($id);
 
 			if (!$Page) {
-				throw new ToolCallException('Page "$url" not found.');
+				throw new ToolCallException("Page $id not found.");
 			}
 
 			$Page->delete();
 			Cache::clear();
 
-			return "The page $url was deleted successfully.";
+			// See also automad/src/client/admin/components/Forms/Form.ts
+			// in order to match the lock handle style.
+			EditLock::set("page-$id", 'mcp');
+
+			return "The page $id was deleted successfully.";
 		};
 	}
 

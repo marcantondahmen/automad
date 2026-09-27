@@ -111,11 +111,34 @@ class PageSchema {
 			'description' => 'A complete Automad page deletion schema',
 			'type' => 'object',
 			'properties' => array(
-				'url' => array(
+				'id' => array(
 					'type' => 'string',
 					'description' => <<< TXT
-						The local absolute URL path of the page like 
-						for example `/about`.
+						The ID is the local absolute URL path of the page like 
+						for example `/about` or `/work/project`.
+						TXT
+				)
+			)
+		);
+	}
+
+	/**
+	 * The page search schema.
+	 *
+	 * @return array
+	 */
+	public static function search(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Search Schema',
+			'description' => 'A input schema for searching an Automad website.',
+			'type' => 'object',
+			'properties' => array(
+				'search' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The search string. Can be multiple words. 
+						More words will narrow down the search results.
 						TXT
 				)
 			)

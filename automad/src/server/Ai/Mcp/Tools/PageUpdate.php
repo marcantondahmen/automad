@@ -106,7 +106,7 @@ class PageUpdate extends AbstractTool {
 			$Page = $Automad->getPage($id);
 
 			if (!$Page) {
-				throw new ToolCallException('Page "$id" not found.');
+				throw new ToolCallException("Page [$id] not found.");
 			}
 
 			$data = $PageTransformer->toAgent($Page);

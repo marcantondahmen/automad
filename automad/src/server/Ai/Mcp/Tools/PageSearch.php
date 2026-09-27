@@ -35,6 +35,7 @@
 
 namespace Automad\Ai\Mcp\Tools;
 
+use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Models\Page;
@@ -122,21 +123,7 @@ class PageSearch extends AbstractTool {
 	 * @return array
 	 */
 	public function getInputSchema(): array {
-		return array(
-			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
-			'title' => 'Automad Search Schema',
-			'description' => 'A input schema for searching an Automad website.',
-			'type' => 'object',
-			'properties' => array(
-				'search' => array(
-					'type' => 'string',
-					'description' => <<< TXT
-						The search string. Can be multiple words. 
-						More words will narrow down the search results.
-						TXT
-				)
-			)
-		);
+		return PageSchema::search();
 	}
 
 	/**

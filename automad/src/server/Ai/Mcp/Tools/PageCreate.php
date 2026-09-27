@@ -113,7 +113,7 @@ class PageCreate extends AbstractTool {
 			$Parent = $Automad->getPage($parent);
 
 			if (!$Parent) {
-				throw new ToolCallException('Parent page "$parent" not found.');
+				throw new ToolCallException("Parent page [$parent] not found.");
 			}
 
 			$data = array();

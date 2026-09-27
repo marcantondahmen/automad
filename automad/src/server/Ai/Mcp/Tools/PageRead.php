@@ -92,7 +92,7 @@ class PageRead extends AbstractTool {
 			$Page = $Automad->getPage($id);
 
 			if (!$Page) {
-				throw new ToolCallException('Page "$id" not found.');
+				throw new ToolCallException("Page [$id] not found.");
 			}
 
 			return $PageTransformer->toAgent($Page);
