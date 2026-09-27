@@ -48,6 +48,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class PageSchema {
+	const string BLOCK = '#/$defs/block';
+	const string BLOCK_ID = '#/$defs/blockId';
+	const string NESTED_LIST_ITEM = '#/$defs/nestedListItem';
+
 	/**
 	 * Generate the input schema for creating a page.
 	 *

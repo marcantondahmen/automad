@@ -35,7 +35,7 @@
 
 namespace Automad\Blocks;
 
-use Automad\Ai\Mcp\Schema\Reference;
+use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
@@ -268,7 +268,7 @@ class LayoutSection extends AbstractBlock {
 					arrange them side by side on the grid, e.g. two blocks with a width of 1/2 form a
 					two-column row.
 					TXT,
-				items: array('$ref' => Reference::BLOCK),
+				items: array('$ref' => PageSchema::BLOCK),
 				hasBlocks: true
 			)
 		);

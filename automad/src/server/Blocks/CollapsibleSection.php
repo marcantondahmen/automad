@@ -35,7 +35,7 @@
 
 namespace Automad\Blocks;
 
-use Automad\Ai\Mcp\Schema\Reference;
+use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
@@ -183,7 +183,7 @@ class CollapsibleSection extends AbstractBlock {
 					The child blocks that are revealed when the section is expanded. Any block type can be
 					used here.
 					TXT,
-				items: array('$ref' => Reference::BLOCK),
+				items: array('$ref' => PageSchema::BLOCK),
 				hasBlocks: true
 			),
 			'group' => new AgentFieldSchema(
