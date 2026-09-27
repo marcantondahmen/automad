@@ -155,4 +155,27 @@ class PageSchema {
 			)
 		);
 	}
+
+	/**
+	 * The page deletion schema.
+	 *
+	 * @return array
+	 */
+	public static function delete(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Deletion Schema',
+			'description' => 'A complete Automad page deletion schema',
+			'type' => 'object',
+			'properties' => array(
+				'url' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The local absolute URL path of the page like 
+						for example `/about`.
+						TXT
+				)
+			)
+		);
+	}
 }
