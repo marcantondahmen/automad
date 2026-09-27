@@ -215,7 +215,7 @@ class Mail extends AbstractBlock {
 	/**
 	 * The collection of data fields that are passed on too the schema.
 	 *
-	 * @return AgentSchema
+	 * @return array<string, AgentFieldSchema>
 	 */
 	protected static function agentDataSchema(): array {
 		return array(
