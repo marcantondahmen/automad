@@ -190,7 +190,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -236,7 +237,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -320,7 +322,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -383,7 +386,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -428,7 +432,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -523,7 +528,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -582,7 +588,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -647,7 +654,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -701,7 +709,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -751,7 +760,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -806,7 +816,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -854,7 +865,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -899,7 +911,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -952,7 +965,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1031,7 +1045,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1076,7 +1091,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1122,7 +1138,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1167,7 +1184,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1213,7 +1231,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1268,7 +1287,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1311,7 +1331,8 @@
                 }
             },
             "required": [
-				"type"
+				"type",
+				"data"
 			],
             "additionalProperties": false
         },
@@ -1356,7 +1377,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         },
@@ -1401,7 +1423,8 @@
                 }
             },
             "required": [
-                "type"
+                "type",
+				"data"
             ],
             "additionalProperties": false
         }

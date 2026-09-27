@@ -70,6 +70,9 @@ class PageSchema {
 		foreach ($blockClasses as $blockClass) {
 			$type = lcfirst(basename(str_replace('\\', '/', $blockClass)));
 
+			$blockSchema = $blockClass::getAgentSchema();
+			$required = array('type', ...(empty($blockSchema['data']) ? array() : array('data')));
+
 			$blocks[$type] = array(
 				'type' => 'object',
 				'description' => $blockClass::getDescription(),
@@ -78,7 +81,7 @@ class PageSchema {
 					'type' => array('const' => $type),
 					...$blockClass::getAgentSchema()
 				),
-				'required' => array('type'),
+				'required' => $required,
 				'additionalProperties' => false
 			);
 

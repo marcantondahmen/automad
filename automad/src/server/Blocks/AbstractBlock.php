@@ -69,7 +69,16 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *		tunes: Tunes
  *	}
  *
- * @psalm-type AgentSchema = array<string, AgentFieldSchema>
+ * @psalm-type AgentSchema = array{
+ *		width: AgentFieldSchema,
+ *		stretched?: AgentFieldSchema,
+ *		data?: array{
+ *			type: 'object',
+ *			properties: array<string, AgentFieldSchema>,
+ *			required: string[],
+ *			additionalProperties: false
+ *		}
+ *	}
  */
 abstract class AbstractBlock {
 	/**
@@ -149,16 +158,9 @@ abstract class AbstractBlock {
 		$dataSchema = static::agentDataSchema();
 
 		if (!empty($dataSchema)) {
-			$dataProperties = array();
-
-			foreach ($dataSchema as $key => $fieldSchema) {
-				/** @var AgentFieldSchema */
-				$dataProperties[$key] = $fieldSchema;
-			}
-
 			$properties['data'] = array(
 				'type' => 'object',
-				'properties' => $dataProperties,
+				'properties' => $dataSchema,
 				'required' => static::getRequiredFromAgentDataSchema(),
 				'additionalProperties' => false
 			);
@@ -252,7 +254,7 @@ abstract class AbstractBlock {
 	/**
 	 * The collection of data fields that are passed on too the schema.
 	 *
-	 * @return AgentSchema
+	 * @return array<string, AgentFieldSchema>
 	 */
 	protected static function agentDataSchema(): array {
 		return array();
