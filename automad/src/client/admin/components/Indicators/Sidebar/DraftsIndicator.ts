@@ -22,64 +22,60 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
- * Copyright (c) 2022-2026 by Marc Anton Dahmen
+ * Copyright (c) 2021-2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-.am-e-badge {
-	--text: var(--am-clr-text-badge);
-	--bg: var(--am-clr-background-badge);
+import {
+	CSS,
+	DraftCollectionController,
+	EventName,
+	html,
+	requestApi,
+} from '@/admin/core';
+import { BaseComponent } from '@/admin/components/Base';
 
-	box-sizing: border-box;
-	min-width: 28px;
-	max-width: 100%;
-	padding: 0 9px;
-	font-size: 11px;
-	border-radius: 100px;
-	color: var(--text);
-	background-color: var(--bg);
-	border: 1px solid transparent;
-	font-weight: 720;
-	overflow: hidden;
+/**
+ * A drafts count component.
+ *
+ * @extends BaseComponent
+ */
+class SidebarDraftsIndicatorComponent extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		this.init();
 
-	&,
-	& > * {
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		gap: 4px;
-		line-height: 19px !important;
-		height: 21px;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		this.listen(
+			window,
+			`${EventName.appStateChange} ${EventName.contentSaved} ${EventName.contentPublished}`,
+			this.init.bind(this)
+		);
 	}
 
-	&:has(> .bi:first-child) {
-		padding-left: 6px;
-	}
+	/**
+	 * Render the state element.
+	 *
+	 * @async
+	 */
+	private async init(): Promise<void> {
+		const { data } = await requestApi(DraftCollectionController.get);
+		const count = data?.drafts?.length;
 
-	[class*='--danger'] & {
-		--text: var(--am-clr-background-danger);
-		--bg: var(--am-clr-text-danger);
-	}
+		this.classList.toggle(CSS.badge, count > 0);
 
-	&--muted {
-		--text: var(--am-clr-text-muted);
-		--bg: var(--am-clr-background-faded);
-		border: @am-border;
-
-		a& {
-			transition: color 0.2s;
-		}
-
-		a&:hover {
-			--text: var(--am-clr-text-paragraph);
-		}
+		this.innerHTML = count ? count : '';
 	}
 }
+
+customElements.define(
+	'am-sidebar-drafts-indicator',
+	SidebarDraftsIndicatorComponent
+);

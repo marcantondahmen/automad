@@ -38,6 +38,13 @@ import {
 	SharedController,
 } from '@/common';
 
+export interface Draft {
+	url: string;
+	title: string;
+	lastModified: string;
+	lastPublished: string | null;
+}
+
 type PublishController =
 	| PageController
 	| SharedController

@@ -35,6 +35,7 @@
 export const routes = {
 	components: 'components',
 	createUser: 'create-user',
+	drafts: 'drafts',
 	home: 'home',
 	inpage: 'inpage',
 	login: 'login',

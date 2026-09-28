@@ -233,6 +233,12 @@ export const dashboardLayout = ({ main, publishForm }: Partials) => {
 							: ''}
 					></am-nav-item>
 					<am-nav-item
+						${Attr.page}="${routes.drafts}"
+						${Attr.icon}="file-earmark-post"
+						${Attr.text}="draftsTitle"
+						${Attr.badge}="am-sidebar-drafts-indicator"
+					></am-nav-item>
+					<am-nav-item
 						${Attr.page}="${routes.packages}"
 						${Attr.icon}="box-seam"
 						${Attr.text}="packagesTitle"

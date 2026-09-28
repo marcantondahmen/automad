@@ -132,6 +132,11 @@ export const enum PackageManagerController {
 	updateAll = 'PackageManagerController::updateAll',
 }
 
+export const enum DraftCollectionController {
+	get = 'DraftCollectionController::get',
+	publishAll = 'DraftCollectionController::publishAll',
+}
+
 export const enum PageController {
 	add = 'PageController::add',
 	breadcrumbs = 'PageController::breadcrumbs',

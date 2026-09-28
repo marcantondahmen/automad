@@ -153,6 +153,23 @@ const componentsData = (): JumpbarItemData[] => {
 };
 
 /**
+ * Return the jumpbar autocompletion data for drafts.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
+const draftsData = (): JumpbarItemData[] => {
+	return [
+		{
+			target: routes.drafts,
+			value: App.text('draftsTitle'),
+			title: App.text('draftsTitle'),
+			icon: 'file-earmark-post',
+			cls: [CSS.modalJumpbarDivider],
+		},
+	];
+};
+
+/**
  * Return the jumpbar autocompletion data for the packages page.
  *
  * @returns the jumpbar autocompletion data array
@@ -237,6 +254,7 @@ const jumpbarData = (): JumpbarItemData[] => {
 		settingsData(),
 		sharedData(),
 		componentsData(),
+		draftsData(),
 		packagesData(),
 		trashData(),
 		pagesData()
