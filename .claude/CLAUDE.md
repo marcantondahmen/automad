@@ -31,8 +31,8 @@ CI (`.github/workflows/`) does not run lint/build/test on PRs (consistent with t
 
 ## Code conventions
 
-- When working on PHP files see @.claude/docs/php.md
-- When working on TypeScript files see @.claude/docs/ts.md
+- When working on backend PHP files see @.claude/docs/php.md
+- When working on frontend TypeScript files see @.claude/docs/ts.md
 
 ## Architecture
 
