@@ -66,7 +66,7 @@ export class DraftCardComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(CSS.card);
+		this.classList.add(CSS.card, CSS.cardHover);
 	}
 
 	/**
@@ -78,17 +78,16 @@ export class DraftCardComponent extends BaseComponent {
 		this.innerHTML = html`
 			<am-link
 				${Attr.target}="${routes.page}?url=${draft.url}"
-				class="${CSS.cardIcon}"
+				title="${draft.title}"
 			>
-				<i class="bi bi-file-earmark-post"></i>
+				<div class="${CSS.cardIcon}">
+					<i class="bi bi-file-earmark-post"></i>
+				</div>
+				<div class="${CSS.cardTitle}">${draft.title}</div>
+				<div class="${CSS.cardBody}">
+					${dateFormat(draft.lastModified)}
+				</div>
 			</am-link>
-			<am-link
-				${Attr.target}="${routes.page}?url=${draft.url}"
-				class="${CSS.cardTitle}"
-			>
-				${draft.title}
-			</am-link>
-			<div class="${CSS.cardBody}">${dateFormat(draft.lastModified)}</div>
 			<div class="${CSS.cardButtons}"></div>
 		`;
 
