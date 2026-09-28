@@ -83,20 +83,26 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 abstract class AbstractBlock {
 	/**
 	 * Convert agent-provided data into the Editor.js block data structure.
+	 * Exsisting block data that is not exposed to MCP will be merged
+	 * with incoming updates.
 	 *
 	 * @param array $data
-	 * @return array|null
+	 * @param BlockData|null $savedBlock
+	 * @return BlockData|null
 	 */
-	public static function fromAgent(array $data): array|null {
+	public static function fromAgent(array $data, ?array $savedBlock = null): array|null {
 		if (empty($data['type'])) {
 			return null;
 		}
 
+		$savedBlock = $savedBlock ?? array();
+
+		/** @var BlockData */
 		$block = array(
 			'id' => $data['id'] ?? Id::generate(),
 			'type' => $data['type'],
-			'data' => array(),
-			'tunes' => array()
+			'data' => $savedBlock['data'] ?? array(),
+			'tunes' => $savedBlock['tunes'] ?? array()
 		);
 
 		if (!empty($data['stretched']) || !empty($data['width'])) {
@@ -118,7 +124,9 @@ abstract class AbstractBlock {
 				$fieldSchema = $schema[$key];
 
 				if ($fieldSchema->hasBlocks === true) {
-					$value = array('blocks' => Blocks::fromAgent($value));
+					$savedChildren = $savedBlock['data']['content']['blocks'] ?? array();
+
+					$value = array('blocks' => Blocks::fromAgent($value, $savedChildren));
 				}
 			}
 

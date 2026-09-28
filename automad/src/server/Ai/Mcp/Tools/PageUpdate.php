@@ -41,6 +41,7 @@ use Automad\Api\EditLock;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Cache;
+use Automad\Core\Value;
 use Automad\Models\Page;
 use Automad\System\Fields;
 use Mcp\Exception\ToolCallException;
@@ -114,7 +115,16 @@ class PageUpdate extends AbstractTool {
 			$data[Fields::TAGS] = join(', ', $tags);
 
 			foreach ($fields as $key => $blocks) {
-				$data[$key] = array('blocks' => Blocks::fromAgent($blocks));
+				$originalBlocks = array();
+
+				if (array_key_exists($key, $Page->data)) {
+					// Forward existing blocks from data store for merging tunes
+					// and other complex details that are not exposed to MCP.
+					$originalField = Value::asEditorArray($Page->data[$key]);
+					$originalBlocks = $originalField['blocks'] ?? array();
+				}
+
+				$data[$key] = array('blocks' => Blocks::fromAgent($blocks, $originalBlocks));
 			}
 
 			$Page->save($data, $template);
@@ -125,7 +135,7 @@ class PageUpdate extends AbstractTool {
 			// in order to match the lock handle style.
 			EditLock::set("page-$id", 'mcp');
 
-			return $data;
+			return Page::fromCache($id);
 		};
 	}
 

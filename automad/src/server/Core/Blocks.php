@@ -63,16 +63,30 @@ class Blocks {
 	 * Return an array of blocks that are converted from agent data.
 	 *
 	 * @param array $agentBlocks
+	 * @param BlockData[] $savedBlocks
 	 * @return BlockData[]
 	 */
-	public static function fromAgent(array $agentBlocks): array {
+	public static function fromAgent(array $agentBlocks, array $savedBlocks = array()): array {
 		$blocks = array();
+		$savedBlocksMap = array();
+
+		foreach ($savedBlocks as $saved) {
+			if ($saved['id']) {
+				$savedBlocksMap[$saved['id']] = $saved;
+			}
+		}
 
 		foreach ($agentBlocks as $agentBlock) {
+			$savedBlock = null;
+
+			if (!empty($agentBlock['id']) && $savedBlocks) {
+				$savedBlock = $savedBlocksMap[$agentBlock['id']] ?? null;
+			}
+
 			try {
 				$block = call_user_func_array(
 					'\\Automad\\Blocks\\' . ucfirst($agentBlock['type']) . '::fromAgent',
-					array($agentBlock)
+					array($agentBlock, $savedBlock)
 				);
 
 				if ($block) {
