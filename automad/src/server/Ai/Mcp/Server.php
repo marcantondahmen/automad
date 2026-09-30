@@ -97,18 +97,6 @@ class Server {
 			);
 		}
 
-		foreach (Provider::getResourceTemplates() as $ResourceTemplate) {
-			$Builder->addResourceTemplate(
-				handler: $ResourceTemplate->getHandler(),
-				uriTemplate: 'automad://' . $ResourceTemplate->getUriTemplate(),
-				name: $ResourceTemplate->getName(),
-				title: $ResourceTemplate->getTitle(),
-				description: $ResourceTemplate->getDescription(),
-				mimeType: $ResourceTemplate->getMimeType(),
-				annotations: $ResourceTemplate->getAnnotations()
-			);
-		}
-
 		$this->SdkServer = $Builder->build();
 	}
 
