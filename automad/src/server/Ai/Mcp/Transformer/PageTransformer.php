@@ -50,8 +50,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class PageTransformer {
-	const array IGNORED_FIELDS = array(
-		Fields::AUTOMAD_VERSION,
+	const array INCLUDED_FIELDS = array(
+		Fields::TIME_CREATED,
+		Fields::TIME_LAST_MODIFIED
 	);
 
 	/**
@@ -72,20 +73,21 @@ class PageTransformer {
 	 * Transform a page object into an agent optimized representation.
 	 *
 	 * @param Page $Page
+	 * @param bool $excludeBlocks
 	 * @return array
 	 */
 	public function toAgent(Page $Page): array {
 		// Inject an alias for the origUrl called `id` that can be easily referred to.
-		$data = array('id' => $Page->origUrl, 'fields' => array());
+		$data = array('id' => $Page->origUrl, '__CONTENT__' => array());
 
 		foreach ($Page->data as $key => $value) {
 			if (str_starts_with($key, '+')) {
-				$data['fields'][$key] = Blocks::toAgent(
+				$data['__CONTENT__'][$key] = Blocks::toAgent(
 					$value['blocks'] ?? array(),
 					$this->Automad->ComponentCollection
 				);
 			} else {
-				if (!in_array($key, PageTransformer::IGNORED_FIELDS)) {
+				if (in_array($key, PageTransformer::INCLUDED_FIELDS) || !str_starts_with($key, ':')) {
 					$data[$key] = $value;
 				}
 			}

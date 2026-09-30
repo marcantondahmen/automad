@@ -83,7 +83,7 @@ class PageSchema {
 						'type'=> 'string'
 					)
 				),
-				'fields' => array(
+				'__CONTENT__' => array(
 					'type'=> 'object',
 					'description'=> 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
 					'additionalProperties'=> array(
@@ -176,7 +176,7 @@ class PageSchema {
 						'type'=> 'string'
 					)
 				),
-				'fields' => array(
+				'__CONTENT__' => array(
 					'type'=> 'object',
 					'description'=> 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
 					'additionalProperties'=> array(

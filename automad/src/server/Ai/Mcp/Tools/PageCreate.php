@@ -107,7 +107,7 @@ class PageCreate extends AbstractTool {
 			string $title,
 			string $template,
 			array $tags = array(),
-			array $fields = array()
+			array $__CONTENT__ = array()
 		) {
 			$Automad = Automad::fromCache();
 			$Parent = $Automad->getPage($parent);
@@ -118,7 +118,7 @@ class PageCreate extends AbstractTool {
 
 			$data = array();
 
-			foreach ($fields as $key => $blocks) {
+			foreach ($__CONTENT__ as $key => $blocks) {
 				$data[$key] = array('blocks' => Blocks::fromAgent($blocks));
 			}
 

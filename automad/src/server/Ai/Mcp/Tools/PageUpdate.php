@@ -40,7 +40,6 @@ use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Api\EditLock;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
-use Automad\Core\Cache;
 use Automad\Core\Value;
 use Automad\Models\Page;
 use Automad\System\Fields;
@@ -84,7 +83,9 @@ class PageUpdate extends AbstractTool {
 			   If the user does not provide a valid page ID, use the `page_search` tool
 			   to get find the page that should be updated and use the page ID in the 
 			   results.
-			2. Update the page content according to the given input schema.
+			2. Update the page content according to the given input schema. 
+			   Only update content, blocks and fields that actually require an update
+			   and leave the rest of the page untouched.	
 			TXT;
 	}
 
@@ -100,7 +101,7 @@ class PageUpdate extends AbstractTool {
 			string $title,
 			string $template,
 			array $tags = array(),
-			array $fields = array()
+			array $__CONTENT__ = array()
 		) {
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
@@ -110,11 +111,15 @@ class PageUpdate extends AbstractTool {
 				throw new ToolCallException("Page [$id] not found.");
 			}
 
-			$data = $PageTransformer->toAgent($Page);
+			$data = array_intersect_key(
+				$PageTransformer->toAgent($Page),
+				array_flip(array('__CONTENT__'))
+			);
+
 			$data[Fields::TITLE] = $title;
 			$data[Fields::TAGS] = join(', ', $tags);
 
-			foreach ($fields as $key => $blocks) {
+			foreach ($__CONTENT__ as $key => $blocks) {
 				$originalBlocks = array();
 
 				if (array_key_exists($key, $Page->data)) {
@@ -129,13 +134,17 @@ class PageUpdate extends AbstractTool {
 
 			$Page->save($data, $template);
 
-			Cache::clear();
-
 			// See also automad/src/client/admin/components/Forms/Form.ts
 			// in order to match the lock handle style.
 			EditLock::set("page-$id", 'mcp');
 
-			return Page::fromCache($id);
+			$Page = Page::fromCache($id);
+
+			if (!$Page) {
+				throw new ToolCallException("Page [$id] cound not be updated.");
+			}
+
+			return $PageTransformer->toAgent($Page);
 		};
 	}
 
