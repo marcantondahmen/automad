@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class PageTransformerTest extends TestCase {
-	public static function dataForTestToAgentIsSame() {
+	public static function dataForTestToAgentEquals() {
 		return array(
 			array(
 				'page',
@@ -18,7 +18,7 @@ class PageTransformerTest extends TestCase {
 		);
 	}
 
-	public static function dataForTestUpdateFromAgentIsSame() {
+	public static function dataForTestUpdateFromAgentEquals() {
 		return array(
 			array(
 				'page',
@@ -28,8 +28,8 @@ class PageTransformerTest extends TestCase {
 		);
 	}
 
-	#[DataProvider('dataForTestToAgentIsSame')]
-	public function testToAgentIsSame(string $filePage, string $fileAgent) {
+	#[DataProvider('dataForTestToAgentEquals')]
+	public function testToAgentEquals(string $filePage, string $fileAgent) {
 		$dir = __DIR__ . '/PageTransformer/toAgent';
 		$Automad = (new Mock())->createAutomad();
 		$data = FileSystem::readJson($dir . "/$filePage.json", true);
@@ -43,8 +43,8 @@ class PageTransformerTest extends TestCase {
 		);
 	}
 
-	#[DataProvider('dataForTestUpdateFromAgentIsSame')]
-	public function testUpdateFromAgentIsSame(string $filePage, string $fileAgent, string $fileUpdated) {
+	#[DataProvider('dataForTestUpdateFromAgentEquals')]
+	public function testUpdateFromAgentEquals(string $filePage, string $fileAgent, string $fileUpdated) {
 		$dir = __DIR__ . '/PageTransformer/updateFromAgent';
 		$Automad = (new Mock())->createAutomad();
 		$data = FileSystem::readJson($dir . "/$filePage.json", true);
