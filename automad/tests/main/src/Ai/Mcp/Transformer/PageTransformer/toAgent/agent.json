@@ -1,0 +1,64 @@
+{
+	"id": "/mcp-test",
+	"__CONTENT__": {
+		"+main": [
+			{
+				"id": "OwZgnSLZEvOX",
+				"type": "paragraph",
+				"data": {
+					"large": true,
+					"text": "Large Paragraph"
+				}
+			},
+			{
+				"id": "58CAI47u7pIv",
+				"type": "layoutSection",
+				"stretched": true,
+				"data": {
+					"content": [
+						{
+							"id": "bZkcUwBBebqu",
+							"type": "image",
+							"width": "1/2",
+							"data": {
+								"alt": "Alt text 1",
+								"url": "image-1.webp"
+							}
+						},
+						{
+							"id": "svQbS3qtKcFr",
+							"type": "image",
+							"width": "1/2",
+							"data": {
+								"alt": "Alt text 2",
+								"url": "image-2.webp"
+							}
+						}
+					]
+				}
+			},
+			{
+				"id": "85XyRCvkV0K6",
+				"type": "header",
+				"data": {
+					"level": 2,
+					"text": "Heading"
+				}
+			},
+			{
+				"id": "Zjn0zgsE6OQ1",
+				"type": "paragraph",
+				"data": {
+					"text": "Small paragraph"
+				}
+			}
+		]
+	},
+	"hidden": false,
+	"private": true,
+	"template": "page_full_width_centered",
+	"slug": "mcp-test",
+	"title": "MCP Test",
+	":created": "2026-09-30T14:58:11+00:00",
+	":lastModified": "2026-09-30T15:13:59+00:00"
+}

@@ -37,6 +37,7 @@ namespace Automad\Ai\Mcp\Transformer;
 
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
+use Automad\Core\Value;
 use Automad\Models\Page;
 use Automad\System\Fields;
 
@@ -93,8 +94,56 @@ class PageTransformer {
 			}
 		}
 
-		if ($data[Fields::URL] == $data[Fields::ORIG_URL]) {
+		if (($data[Fields::URL] ?? '') == $Page->origUrl || empty($data[Fields::URL])) {
 			unset($data[Fields::URL]);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Update a page with transformed incoming agent data.
+	 *
+	 * @param Page $Page
+	 * @param string $id
+	 * @param string $title
+	 * @param string $template
+	 * @param array $tags
+	 * @param array $__CONTENT__
+	 * @return array
+	 */
+	public function updateFromAgent(
+		Page $Page,
+		string $id,
+		string $title,
+		string $template,
+		array $tags = array(),
+		array $__CONTENT__ = array()
+	): array {
+		$data = array_filter(
+			$Page->data,
+			fn ($value, $key): bool => (in_array($key, PageTransformer::INCLUDED_FIELDS) || preg_match('/^[a-z]/i', $key)) && !empty($value),
+			ARRAY_FILTER_USE_BOTH
+		);
+
+		if (($data[Fields::URL] ?? '') == $Page->origUrl || empty($data[Fields::URL])) {
+			unset($data[Fields::URL]);
+		}
+
+		$data[Fields::TITLE] = $title;
+		$data[Fields::TAGS] = join(', ', $tags);
+
+		foreach ($__CONTENT__ as $key => $blocks) {
+			$originalBlocks = array();
+
+			if (array_key_exists($key, $Page->data)) {
+				// Forward existing blocks from data store for merging tunes
+				// and other complex details that are not exposed to MCP.
+				$originalField = Value::asEditorArray($Page->data[$key]);
+				$originalBlocks = $originalField['blocks'] ?? array();
+			}
+
+			$data[$key] = array('blocks' => Blocks::fromAgent($blocks, $originalBlocks));
 		}
 
 		return $data;

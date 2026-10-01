@@ -39,10 +39,7 @@ use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Api\EditLock;
 use Automad\Core\Automad;
-use Automad\Core\Blocks;
-use Automad\Core\Value;
 use Automad\Models\Page;
-use Automad\System\Fields;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -111,26 +108,14 @@ class PageUpdate extends AbstractTool {
 				throw new ToolCallException("Page [$id] not found.");
 			}
 
-			$data = array_intersect_key(
-				$PageTransformer->toAgent($Page),
-				array_flip(array('__CONTENT__'))
+			$data = $PageTransformer->updateFromAgent(
+				$Page,
+				$id,
+				$title,
+				$template,
+				$tags,
+				$__CONTENT__
 			);
-
-			$data[Fields::TITLE] = $title;
-			$data[Fields::TAGS] = join(', ', $tags);
-
-			foreach ($__CONTENT__ as $key => $blocks) {
-				$originalBlocks = array();
-
-				if (array_key_exists($key, $Page->data)) {
-					// Forward existing blocks from data store for merging tunes
-					// and other complex details that are not exposed to MCP.
-					$originalField = Value::asEditorArray($Page->data[$key]);
-					$originalBlocks = $originalField['blocks'] ?? array();
-				}
-
-				$data[$key] = array('blocks' => Blocks::fromAgent($blocks, $originalBlocks));
-			}
 
 			$Page->save($data, $template);
 
