@@ -69,10 +69,16 @@
 				"id": "85XyRCvkV0K6",
 				"type": "header",
 				"data": {
-					"level": 2,
+					"level": 3,
 					"text": "Heading Update"
 				},
-				"tunes": []
+				"tunes": {
+					"className": "test-class",
+					"id": "test-id",
+					"spacing": {
+						"top": "2rem"
+					}
+				}
 			},
 			{
 				"id": "Zjn0zgsE6OQ1",

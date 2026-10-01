@@ -71,7 +71,13 @@
 					"level": 2,
 					"text": "Heading"
 				},
-				"tunes": []
+				"tunes": {
+					"className": "test-class",
+					"id": "test-id",
+					"spacing": {
+						"top": "2rem"
+					}
+				}
 			},
 			{
 				"id": "Zjn0zgsE6OQ1",
