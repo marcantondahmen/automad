@@ -36,7 +36,6 @@
 namespace Automad\Controllers;
 
 use Automad\Ai\Mcp\Server;
-use Automad\Auth\Token\AccessToken;
 use Nyholm\Psr7\Factory\Psr17Factory;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,20 +50,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class McpController {
 	/**
-	 * Handle a request to the MCP resource endpoint. Requires a valid, previously issued
-	 * Bearer access token (created through the dashboard's Access Tokens system section); returns a
-	 * 401 challenge otherwise. Only POST requests carrying a JSON-RPC message are supported. For
-	 * handshake-era clients, server-initiated SSE streams and explicit session termination (DELETE)
-	 * are not implemented. The modern, stateless era (see Automad\Ai\Mcp\Server) has no
-	 * session lifecycle to terminate, so this limitation does not apply to it.
+	 * Handle a request to the MCP resource endpoint.
 	 *
 	 * @return string
 	 */
 	public static function render(): string {
-		if (!AccessToken::verifyRequest()) {
-			return self::unauthorized();
-		}
-
 		if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 			http_response_code(405);
 
@@ -96,18 +86,5 @@ class McpController {
 		}
 
 		return strval($Response->getBody());
-	}
-
-	/**
-	 * Return a 401 response challenging the client to authenticate.
-	 *
-	 * @return string
-	 */
-	private static function unauthorized(): string {
-		http_response_code(401);
-		header('WWW-Authenticate: Bearer');
-		header('Content-Type: application/json; charset=utf-8');
-
-		return strval(json_encode(array('error' => 'invalid_token')));
 	}
 }

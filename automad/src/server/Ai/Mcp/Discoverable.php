@@ -33,63 +33,23 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Ai\Mcp\Resources;
-
-use Automad\System\PackageCollection;
+namespace Automad\Ai\Mcp;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The pagelist templates resource.
+ * The Discoverable interface defines required properties and methods
+ * for tools and resources that are discovered by the Provider.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class TemplatesPagelist extends AbstractResource {
-	/**
-	 * @return string
-	 */
-	public function getDescription(): string {
-		return 'A list of available pagelist templates.';
-	}
-
-	/**
-	 * @return callable
-	 */
-	public function getHandler(): callable {
-		return function () {
-			return array_map(function ($file) {
-				return array(
-					'file' => $file,
-					'source' => preg_replace('/\<#.*?#\>/s', '', strval(file_get_contents(AM_BASE_DIR . AM_DIR_PACKAGES . $file)))
-				);
-			}, PackageCollection::getPackagesDirectoryPagelistTemplates());
-		};
-	}
-
-	/**
-	 * The resource's name.
-	 *
-	 * @return string
-	 */
-	public function getName(): string {
-		return 'templates/pagelist';
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTitle(): string {
-		return 'Templates: Pagelist';
-	}
-
+interface Discoverable {
 	/**
 	 * Return true in order to make tool or resource private.
 	 *
 	 * @return bool
 	 */
-	public static function requiresAuth(): bool {
-		return true;
-	}
+	public static function requiresAuth(): bool;
 }

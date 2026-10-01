@@ -83,4 +83,13 @@ class Snippets extends AbstractResource {
 	public function getTitle(): string {
 		return 'Snippets';
 	}
+
+	/**
+	 * Return true in order to make tool or resource private.
+	 *
+	 * @return bool
+	 */
+	public static function requiresAuth(): bool {
+		return true;
+	}
 }

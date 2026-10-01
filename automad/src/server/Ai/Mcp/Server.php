@@ -35,6 +35,7 @@
 
 namespace Automad\Ai\Mcp;
 
+use Automad\Auth\Token\AccessToken;
 use Automad\System\FileSystem;
 use Mcp\Schema\Enum\ProtocolVersion;
 use Mcp\Server as SdkServer;
@@ -68,13 +69,14 @@ class Server {
 	public function __construct() {
 		$host = strval(preg_replace('/^https?:\/\//', '', AM_SERVER . AM_BASE_URL));
 		$name = "Automad ($host)";
+		$isAuthenticated = AccessToken::verifyRequest();
 
 		$Builder = SdkServer::builder()
 			->setServerInfo($name, AM_VERSION, title: $name)
 			->setSession(new FileSessionStore(FileSystem::getTmpDir() . '/mcp-sessions'))
 			->setModernVersions(array(ProtocolVersion::V2026_07_28));
 
-		foreach (Provider::getTools() as $Tool) {
+		foreach (Provider::getTools($isAuthenticated) as $Tool) {
 			$Builder->addTool(
 				handler: $Tool->getHandler(),
 				name: $Tool->getName(),
@@ -85,7 +87,7 @@ class Server {
 			);
 		}
 
-		foreach (Provider::getResources() as $Resource) {
+		foreach (Provider::getResources($isAuthenticated) as $Resource) {
 			$Builder->addResource(
 				handler: $Resource->getHandler(),
 				uri: 'automad://' . $Resource->getName(),

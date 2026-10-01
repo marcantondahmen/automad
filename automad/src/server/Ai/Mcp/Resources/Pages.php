@@ -87,4 +87,13 @@ class Pages extends AbstractResource {
 	public function getTitle(): string {
 		return 'All pages';
 	}
+
+	/**
+	 * Return true in order to make tool or resource private.
+	 *
+	 * @return bool
+	 */
+	public static function requiresAuth(): bool {
+		return false;
+	}
 }

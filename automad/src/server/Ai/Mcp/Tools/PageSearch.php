@@ -143,4 +143,13 @@ class PageSearch extends AbstractTool {
 	public function getTitle(): string {
 		return 'Page: Search';
 	}
+
+	/**
+	 * Return true in order to make tool or resource private.
+	 *
+	 * @return bool
+	 */
+	public static function requiresAuth(): bool {
+		return false;
+	}
 }

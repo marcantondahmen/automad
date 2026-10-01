@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  * Discovers MCP tools and resources. Similar to Automad\Engine\FeatureProvider, this class finds
  * classes by including all files in the Tools and Resources subdirectories and then filtering the
- * declared classes by the Tool/Resource interface they implement, instead of requiring the tools
+ * declared classes by the Tool/Resource abstractClass they implement, instead of requiring the tools
  * and resources themselves to be manually registered or annotated with attributes.
  *
  * @author Marc Anton Dahmen
@@ -65,11 +65,12 @@ class Provider {
 	/**
 	 * Return all discovered resources.
 	 *
+	 * @param bool $isAuthenticated
 	 * @return AbstractResource[]
 	 */
-	public static function getResources(): array {
+	public static function getResources(bool $isAuthenticated): array {
 		if (empty(self::$resources)) {
-			self::$resources = self::instantiate(self::discover('Resources', AbstractResource::class));
+			self::$resources = self::instantiate(self::discover('Resources', AbstractResource::class, $isAuthenticated));
 		}
 
 		return self::$resources;
@@ -78,33 +79,41 @@ class Provider {
 	/**
 	 * Return all discovered tools.
 	 *
+	 * @param bool $isAuthenticated
 	 * @return AbstractTool[]
 	 */
-	public static function getTools(): array {
+	public static function getTools(bool $isAuthenticated): array {
 		if (empty(self::$tools)) {
-			self::$tools = self::instantiate(self::discover('Tools', AbstractTool::class));
+			self::$tools = self::instantiate(self::discover('Tools', AbstractTool::class, $isAuthenticated));
 		}
 
 		return self::$tools;
 	}
 
 	/**
-	 * Find all classes in the given subdirectory that implement the given interface.
+	 * Find all classes in the given subdirectory that implement the Discoverable interface.
 	 *
 	 * @param string $dir
-	 * @param string $interface
+	 * @param bool $isAuthenticated
+	 * @param string $abstractClass
 	 * @return array
 	 */
-	private static function discover(string $dir, string $interface): array {
+	private static function discover(string $dir, string $abstractClass, bool $isAuthenticated): array {
 		$files = FileSystem::glob(__DIR__ . "/$dir/*.php");
 
 		foreach ($files as $file) {
 			require_once $file;
 		}
 
-		return array_filter(get_declared_classes(), function ($class) use ($interface) {
-			return is_subclass_of($class, $interface);
+		$classes = array_filter(get_declared_classes(), function ($class) use ($abstractClass) {
+			return is_subclass_of($class, Discoverable::class) && is_subclass_of($class, $abstractClass);
 		});
+
+		if ($isAuthenticated) {
+			return $classes;
+		}
+
+		return array_filter($classes, fn ($class) => !$class::requiresAuth());
 	}
 
 	/**

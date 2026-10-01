@@ -35,6 +35,7 @@
 
 namespace Automad\Ai\Mcp\Resources;
 
+use Automad\Ai\Mcp\Discoverable;
 use Mcp\Schema\Annotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -48,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractResource {
+abstract class AbstractResource implements Discoverable {
 	/**
 	 * The resource's annotations, hinting at its intended audience, priority and last modification.
 	 *

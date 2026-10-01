@@ -35,6 +35,7 @@
 
 namespace Automad\Ai\Mcp\Tools;
 
+use Automad\Ai\Mcp\Discoverable;
 use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -48,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractTool {
+abstract class AbstractTool implements Discoverable {
 	/**
 	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
 	 *

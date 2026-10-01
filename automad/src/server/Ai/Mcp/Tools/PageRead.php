@@ -138,4 +138,13 @@ class PageRead extends AbstractTool {
 	public function getTitle(): string {
 		return 'Page: Read';
 	}
+
+	/**
+	 * Return true in order to make tool or resource private.
+	 *
+	 * @return bool
+	 */
+	public static function requiresAuth(): bool {
+		return false;
+	}
 }

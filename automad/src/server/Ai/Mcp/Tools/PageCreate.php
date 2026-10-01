@@ -156,4 +156,13 @@ class PageCreate extends AbstractTool {
 	public function getTitle(): string {
 		return 'Page: Create';
 	}
+
+	/**
+	 * Return true in order to make tool or resource private.
+	 *
+	 * @return bool
+	 */
+	public static function requiresAuth(): bool {
+		return true;
+	}
 }
