@@ -104,8 +104,8 @@ class State {
 			'pages' => $Automad->getNavigationMetaData(),
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
-			'sharedPublicationState' => $Automad->Shared->get(Fields::PUBLICATION_STATE),
-			'componentsPublicationState' => $Automad->ComponentCollection->getPublicationState(),
+			'sharedPublicationState' => $Automad->Shared->publicationState,
+			'componentsPublicationState' => $Automad->ComponentCollection->publicationState,
 			'components' => $Automad->ComponentCollection->get(),
 			'files' => array(
 				'pagelist' => PackageCollection::getPackagesDirectoryPagelistTemplates(),

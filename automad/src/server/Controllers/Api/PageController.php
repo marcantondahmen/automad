@@ -246,7 +246,12 @@ class PageController {
 		}
 
 		$DataStore = new DataStore($Page->path);
-		$DataStore->setState(PublicationState::DRAFT, array())->save();
+
+		if (empty($DataStore->getState(PublicationState::PUBLISHED))) {
+			$Page->delete();
+		} else {
+			$DataStore->setState(PublicationState::DRAFT, array())->save();
+		}
 
 		Cache::clear();
 

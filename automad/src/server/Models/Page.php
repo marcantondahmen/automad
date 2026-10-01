@@ -559,11 +559,7 @@ class Page {
 
 		$private = !empty($data[Fields::PRIVATE]);
 		$data[Fields::PRIVATE] = $private;
-
-		$now = date(DataStore::DATE_FORMAT);
-
-		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
-		$data[Fields::TIME_LAST_MODIFIED] = $now;
+		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? date(DataStore::DATE_FORMAT);
 
 		$slug = $data[Fields::SLUG] ?? '';
 		$newSlug = $slug;

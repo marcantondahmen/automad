@@ -122,6 +122,18 @@ abstract class AbstractStore {
 	 *
 	 * @return string
 	 */
+	public function lastModified(): string {
+		$state = $this->isPublished() ? PublicationState::PUBLISHED : PublicationState::DRAFT;
+		$data = $this->getState($state);
+
+		return $data[Fields::TIME_LAST_MODIFIED] ?? '';
+	}
+
+	/**
+	 * Return the last publication date.
+	 *
+	 * @return string
+	 */
 	public function lastPublished(): string {
 		$published = $this->getState(PublicationState::PUBLISHED);
 
@@ -156,6 +168,7 @@ abstract class AbstractStore {
 		} else {
 			$state = $this->isPublished() ? PublicationState::PUBLISHED : PublicationState::DRAFT;
 			$this->data[$state->value][Fields::AUTOMAD_VERSION] = AM_VERSION;
+			$this->data[$state->value][Fields::TIME_LAST_MODIFIED] = date(self::DATE_FORMAT);
 		}
 
 		$success = FileSystem::writeJson($this->file, $this->data);

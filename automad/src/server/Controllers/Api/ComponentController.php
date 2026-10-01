@@ -116,7 +116,6 @@ class ComponentController {
 	 */
 	public static function publish(): Response {
 		$Response = new Response();
-
 		$ComponentStore = new ComponentStore();
 
 		if ($ComponentStore->publish()) {

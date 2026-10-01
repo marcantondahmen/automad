@@ -39,13 +39,43 @@ import {
 	create,
 	CSS,
 	dateFormat,
+	DraftCollectionController,
 	EventName,
 	html,
-	PageController,
 	routes,
 } from '@/admin/core';
 import type { FormComponent } from '@/admin/components/Forms/Form';
-import { Draft } from './types';
+import { Draft, DraftType } from './types';
+
+const icons: { [key in DraftType]: string } = {
+	page: 'file-earmark-post',
+	shared: 'asterisk',
+	components: 'boxes',
+} as const;
+
+const getTarget: { [key in DraftType]: (draft: Draft) => string } = {
+	page: (draft) => `${routes.page}?url=${draft.url}`,
+	shared: () => routes.shared,
+	components: () => routes.components,
+} as const;
+
+const getTitle: { [key in DraftType]: (draft: Draft) => string } = {
+	page: (draft) => draft.title,
+	shared: () => App.text('sharedTitle'),
+	components: () => App.text('componentsTitle'),
+} as const;
+
+const publishController: { [key in DraftType]: DraftCollectionController } = {
+	page: DraftCollectionController.publishPage,
+	shared: DraftCollectionController.publishShared,
+	components: DraftCollectionController.publishComponents,
+} as const;
+
+const discardController: { [key in DraftType]: DraftCollectionController } = {
+	page: DraftCollectionController.discardPage,
+	shared: DraftCollectionController.discardShared,
+	components: DraftCollectionController.discardComponents,
+} as const;
 
 /**
  * A card representing a single page with unpublished draft changes.
@@ -58,6 +88,9 @@ export class DraftCardComponent extends BaseComponent {
 	 */
 	static TAG_NAME = 'am-draft-card';
 
+	/**
+	 * Set data to initialize and render.
+	 */
 	set data(draft: Draft) {
 		this.render(draft);
 	}
@@ -75,17 +108,22 @@ export class DraftCardComponent extends BaseComponent {
 	 * @param draft
 	 */
 	private render(draft: Draft): void {
+		const icon = icons[draft.type];
+		const target = getTarget[draft.type](draft);
+		const title = getTitle[draft.type](draft);
+
 		this.innerHTML = html`
-			<am-link
-				${Attr.target}="${routes.page}?url=${draft.url}"
-				title="${draft.title}"
-			>
-				<div class="${CSS.cardIcon}">
-					<i class="bi bi-file-earmark-post"></i>
+			<am-link ${Attr.target}="${target}" title="${draft.title}">
+				<div
+					class="${CSS.cardIcon} ${draft.type == 'page'
+						? CSS.cardIconNarrow
+						: ''}"
+				>
+					<i class="bi bi-${icon}"></i>
 				</div>
-				<div class="${CSS.cardTitle}">${draft.title}</div>
+				<div class="${CSS.cardTitle}">${title}</div>
 				<div class="${CSS.cardBody}">
-					${dateFormat(draft.lastModified)}
+					${draft.lastModified ? dateFormat(draft.lastModified) : ''}
 				</div>
 			</am-link>
 			<div class="${CSS.cardButtons}"></div>
@@ -99,7 +137,7 @@ export class DraftCardComponent extends BaseComponent {
 			'am-form',
 			[],
 			{
-				[Attr.api]: PageController.publish,
+				[Attr.api]: publishController[draft.type],
 				[Attr.event]: EventName.appStateRequireUpdate,
 			},
 			buttons
@@ -109,21 +147,20 @@ export class DraftCardComponent extends BaseComponent {
 
 		create('am-submit', [], {}, publishForm, App.text('publish'));
 
-		if (draft.lastPublished) {
-			const discardForm = create<FormComponent>(
-				'am-form',
-				[],
-				{
-					[Attr.api]: PageController.discardDraft,
-					[Attr.confirm]: App.text('discardDraftConfirm'),
-					[Attr.event]: EventName.appStateRequireUpdate,
-				},
-				buttons
-			);
+		const discardForm = create<FormComponent>(
+			'am-form',
+			[],
+			{
+				[Attr.api]: discardController[draft.type],
+				[Attr.confirm]: App.text('discardDraftConfirm'),
+				[Attr.event]: EventName.appStateRequireUpdate,
+			},
+			buttons
+		);
 
-			discardForm.additionalData = { url: draft.url };
-			create('am-submit', [], {}, discardForm, App.text('discard'));
-		}
+		discardForm.additionalData = { url: draft.url };
+
+		create('am-submit', [], {}, discardForm, App.text('discard'));
 	}
 }
 

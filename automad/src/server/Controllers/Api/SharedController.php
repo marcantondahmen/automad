@@ -41,6 +41,7 @@ use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Messenger;
 use Automad\Core\Request;
+use Automad\Core\Text;
 use Automad\Stores\DataStore;
 use Automad\Stores\PublicationState;
 use Automad\System\Fields;
@@ -143,14 +144,12 @@ class SharedController {
 	 */
 	public static function publish(): Response {
 		$Response = new Response();
-		$Messenger = new Messenger();
 		$Automad = Automad::fromCache();
-		$Shared = $Automad->Shared;
 
-		$Shared->publish($Messenger);
-		$Response->setError($Messenger->getError());
-		$Response->setSuccess($Messenger->getSuccess());
+		if ($Automad->Shared->publish()) {
+			return $Response->setSuccess(Text::get('publishedSuccessfully'));
+		}
 
-		return $Response;
+		return $Response->setError(Text::get('publishError'));
 	}
 }

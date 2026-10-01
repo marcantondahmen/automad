@@ -133,8 +133,14 @@ export const enum PackageManagerController {
 }
 
 export const enum DraftCollectionController {
+	discardComponents = 'DraftCollectionController::discardComponents',
+	discardPage = 'DraftCollectionController::discardPage',
+	discardShared = 'DraftCollectionController::discardShared',
 	get = 'DraftCollectionController::get',
 	publishAll = 'DraftCollectionController::publishAll',
+	publishComponents = 'DraftCollectionController::publishComponents',
+	publishPage = 'DraftCollectionController::publishPage',
+	publishShared = 'DraftCollectionController::publishShared',
 }
 
 export const enum PageController {
