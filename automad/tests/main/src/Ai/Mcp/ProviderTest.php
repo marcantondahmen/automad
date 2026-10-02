@@ -28,7 +28,7 @@ class ProviderTest extends TestCase {
 		/** @disregard */
 		$this->assertSame(
 			join(', ', array_map(fn ($Tool) => $Tool->getName(), Provider::getTools(true))),
-			'page_create, page_delete, page_move, page_read, page_reorder_children, page_search, page_tree, page_update'
+			'page_create, page_delete, page_duplicate, page_move, page_publish, page_read, page_reorder_children, page_search, page_tree, page_update'
 		);
 
 		/** @disregard */
