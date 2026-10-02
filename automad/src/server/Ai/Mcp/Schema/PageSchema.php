@@ -124,6 +124,35 @@ class PageSchema {
 	}
 
 	/**
+	 * The page move schema.
+	 *
+	 * @return array
+	 */
+	public static function move(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Move Schema',
+			'description' => 'A input schema for moving a page to another location on an Automad website.',
+			'type' => 'object',
+			'properties' => array(
+				'id' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The `id` of the page that will be moved.
+						TXT
+				),
+				'target' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The target page `id` where the page will be moved to.
+						TXT
+				)
+			),
+			'required' => array('id', 'target')
+		);
+	}
+
+	/**
 	 * The page read schema.
 	 *
 	 * @return array
