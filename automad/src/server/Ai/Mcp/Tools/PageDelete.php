@@ -99,7 +99,7 @@ class PageDelete extends AbstractTool {
 			$Page = $Automad->getPage($id);
 
 			if (!$Page) {
-				throw new ToolCallException("Page $id not found.");
+				throw new ToolCallException("Page [$id] not found.");
 			}
 
 			$Page->delete();
@@ -109,7 +109,7 @@ class PageDelete extends AbstractTool {
 			// in order to match the lock handle style.
 			EditLock::set("page-$id", 'mcp');
 
-			return "The page $id was deleted successfully.";
+			return "The page [$id] was deleted successfully.";
 		};
 	}
 

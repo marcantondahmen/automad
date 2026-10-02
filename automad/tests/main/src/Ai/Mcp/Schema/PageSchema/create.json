@@ -355,7 +355,7 @@
 					"type": "object",
 					"properties": {
 						"id": {
-							"description": "The ID of an existing reusable component that is rendered in place of this block.",
+							"description": "The ID of an existing reusable component that is rendered in place of this block.\nUse the `automad://components` resource to get a list of existing components.",
 							"type": "string"
 						}
 					},

@@ -95,8 +95,28 @@ class PageTree extends AbstractTool {
 			string $id = '/',
 			int $depth = 10
 		) {
+			if (!trim($id)) {
+				$id = '/';
+			}
+
 			$Automad = Automad::fromCache();
-			$pages = $Automad->getPages();
+			$Automad->Pagelist->config(array(
+				'context' => false,
+				'currentLanguageOnly' => false,
+				'excludeCurrent' => false,
+				'excludeHidden' => false,
+				'filter' => false,
+				'limit' => null,
+				'match' => false,
+				'offset' => 0,
+				'page' => false,
+				'search' => false,
+				'sort' => Fields::PAGE_INDEX . ' asc',
+				'template' => false,
+				'type' => false
+			));
+
+			$pages = $Automad->Pagelist->getPages(true);
 			$Start = $Automad->getPage($id);
 
 			if (!$Start) {
