@@ -2,6 +2,7 @@
 	"id": "/mcp-test",
 	"parent": "/",
 	"url": "http://localhost/mcp-test",
+	"publicationState": "published",
 	"content": {
 		"+main": "Large Paragraph image-1.webp Alt text 1 image-2.webp Alt text 2 Heading Small paragraph"
 	},
