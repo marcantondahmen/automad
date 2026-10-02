@@ -25,7 +25,7 @@
 		},
 		"content": {
 			"type": "object",
-			"description": "Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!",
+			"description": "Content for the +... fields (+main, +hero, etc.) provided by the selected template. \nCritical: all content fields start with a `+` symbol! Do not remove that `+` symbol!",
 			"additionalProperties": {
 				"type": "array",
 				"items": {
@@ -169,8 +169,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["primaryLink", "primaryText"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["primaryLink", "primaryText"]
 				}
 			},
 			"required": ["type", "data"],
@@ -203,8 +203,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["text", "title"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["text", "title"]
 				}
 			},
 			"required": ["type", "data"],
@@ -276,8 +276,8 @@
 							"type": "boolean"
 						}
 					},
-					"required": ["code"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["code"]
 				}
 			},
 			"required": ["type", "data"],
@@ -325,8 +325,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["collapsed", "content", "group", "title"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["content", "title"]
 				}
 			},
 			"required": ["type", "data"],
@@ -359,8 +359,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["id"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["id"]
 				}
 			},
 			"required": ["type", "data"],
@@ -434,8 +434,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["source"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["source"]
 				}
 			},
 			"required": ["type", "data"],
@@ -477,8 +477,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["file", "glob", "sortOrder"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["file", "glob", "sortOrder"]
 				}
 			},
 			"required": ["type", "data"],
@@ -512,6 +512,9 @@
 						},
 						"files": {
 							"description": "The list of images that are included in the gallery. Each item is either the file name of\nan image that is attached to the current page, a path that starts with a slash and is\nrelative to the Automad base directory, or a full remote image URL.",
+							"items": {
+								"type": "string"
+							},
 							"type": "array"
 						},
 						"layout": {
@@ -524,13 +527,8 @@
 							"type": "number"
 						}
 					},
-					"required": [
-						"columnWidthPx",
-						"files",
-						"layout",
-						"rowHeightPx"
-					],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["files"]
 				}
 			},
 			"required": ["type", "data"],
@@ -564,8 +562,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["level", "text"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["level", "text"]
 				}
 			},
 			"required": ["type", "data"],
@@ -602,8 +600,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["alt", "url"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["alt", "url"]
 				}
 			},
 			"required": ["type", "data"],
@@ -633,6 +631,9 @@
 					"properties": {
 						"files": {
 							"description": "The list of images that are shown in the slideshow. Each item is either the file name of\nan image that is attached to the current page, a path that starts with a slash and is\nrelative to the Automad base directory, or a full remote image URL.",
+							"items": {
+								"type": "string"
+							},
 							"type": "array"
 						},
 						"imageHeightPx": {
@@ -644,8 +645,8 @@
 							"type": "number"
 						}
 					},
-					"required": ["files", "imageHeightPx", "imageWidthPx"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["files", "imageHeightPx", "imageWidthPx"]
 				}
 			},
 			"required": ["type", "data"],
@@ -681,8 +682,8 @@
 							"type": "array"
 						}
 					},
-					"required": ["content"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["content"]
 				}
 			},
 			"required": ["type", "data"],
@@ -715,8 +716,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["to"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["to"]
 				}
 			},
 			"required": ["type", "data"],
@@ -753,8 +754,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["items", "style"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["items", "style"]
 				}
 			},
 			"required": ["type", "data"],
@@ -810,8 +811,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["file"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["file"]
 				}
 			},
 			"required": ["type", "data"],
@@ -844,8 +845,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["text"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["text"]
 				}
 			},
 			"required": ["type", "data"],
@@ -878,8 +879,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["text", "caption"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["text", "caption"]
 				}
 			},
 			"required": ["type", "data"],
@@ -912,8 +913,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["code"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["code"]
 				}
 			},
 			"required": ["type", "data"],
@@ -946,7 +947,6 @@
 							"type": "string"
 						}
 					},
-					"required": ["file", "snippet"],
 					"additionalProperties": false
 				}
 			},
@@ -990,8 +990,8 @@
 							"type": "array"
 						}
 					},
-					"required": ["content"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["content"]
 				}
 			},
 			"required": ["type", "data"],
@@ -1021,7 +1021,6 @@
 							"type": "string"
 						}
 					},
-					"required": [],
 					"additionalProperties": false
 				}
 			},
@@ -1055,8 +1054,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["code"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["code"]
 				}
 			},
 			"required": ["type", "data"],
@@ -1089,8 +1088,8 @@
 							"type": "string"
 						}
 					},
-					"required": ["url"],
-					"additionalProperties": false
+					"additionalProperties": false,
+					"required": ["url"]
 				}
 			},
 			"required": ["type", "data"],

@@ -39,6 +39,7 @@ use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Models\Page;
+use Automad\System\Fields;
 use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -78,6 +79,12 @@ class PageSearch extends AbstractTool {
 			Multiple keywords will narrow down the search.
 			Only pages that contain all keywords will be 
 			included in the search results.
+
+			The search results are sorted by search hit count 
+			in descending order.
+
+			Use the `page_read` tool in order to get the 
+			full content for a specific page.
 			TXT;
 	}
 
@@ -89,7 +96,8 @@ class PageSearch extends AbstractTool {
 	 */
 	public function getHandler(): callable {
 		return function (
-			string $search
+			string $search,
+			string|null $scopeId = null
 		) {
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
@@ -110,10 +118,29 @@ class PageSearch extends AbstractTool {
 				'type' => false
 			));
 
-			return array_map(
-				fn (Page $Page) => $PageTransformer->toAgent($Page),
+			$results = array_map(
+				fn (Page $Page) => array(
+					'id' => $Page->origUrl,
+					'title' => $Page->get(Fields::TITLE),
+					'context' => html_entity_decode(strip_tags($Page->get(Fields::SEARCH_RESULTS_CONTEXT))),
+					'hitCount' => intval($Page->get(Fields::SEARCH_RESULTS_COUNT)),
+					'lastModified' => $Page->get(Fields::TIME_LAST_MODIFIED),
+					'template' => $Page->get(Fields::TEMPLATE),
+					'parent' => $Page->parentUrl
+				),
 				$Automad->Pagelist->getPages(true)
 			);
+
+			if ($scopeId) {
+				$results = array_filter(
+					$results,
+					fn ($result) => preg_match('#^' . preg_quote($scopeId, '#') . '/#', $result['id'])
+				);
+			}
+
+			usort($results, fn ($a, $b) => ($a > $b) ? 1 : -1);
+
+			return $results;
 		};
 	}
 

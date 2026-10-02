@@ -159,14 +159,16 @@ class Snippet extends AbstractBlock {
 					The snippet file that is rendered. Before selecting a snippet, read the available snippets
 					from the `automad://snippets` resource and use one of the returned snippet files. Use an
 					empty string when defining inline code in "snippet" instead.
-					TXT
+					TXT,
+				optional: true
 			),
 			'snippet' => new AgentFieldSchema(
 				'string',
 				<<< TXT
 					Inline Automad template language code that can be used as an alternative to a snippet
 					file. Use an empty string when a snippet file is selected.
-					TXT
+					TXT,
+				optional: true
 			)
 		);
 	}

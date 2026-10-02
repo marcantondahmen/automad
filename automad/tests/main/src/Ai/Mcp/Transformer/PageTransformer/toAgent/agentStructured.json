@@ -1,5 +1,6 @@
 {
 	"id": "/mcp-test",
+	"parent": "/",
 	"url": "http://localhost/mcp-test",
 	"content": {
 		"+main": [

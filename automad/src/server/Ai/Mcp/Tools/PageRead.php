@@ -35,6 +35,7 @@
 
 namespace Automad\Ai\Mcp\Tools;
 
+use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Mcp\Exception\ToolCallException;
@@ -73,7 +74,19 @@ class PageRead extends AbstractTool {
 		return <<< TXT
 			Read a page by providing its ID (the local URL path).
 
-			For example: `/about` or `/work/projects`.
+			The `content` field contains the main page content.
+			The `meta` field contains additional mets data and settings
+			such as the template, last modification date, the url etc.
+
+			Example: page_read {"id": "/about", "format": "structured"} returns
+			{
+			  "id": "/about", 
+			  "parent": "/", 
+			  "url": "...",
+			  "content": {"+main": [ ...blocks with id, type, data... ]},
+			  "meta": {"template": "page_sidebar", "title": "About", ":lastModified": "..."}
+			}
+			Use "text" only for reading; it returns plain text per field and cannot be passed to `page_update`.
 			TXT;
 	}
 
@@ -85,17 +98,19 @@ class PageRead extends AbstractTool {
 	 */
 	public function getHandler(): callable {
 		return function (
-			string $id
+			string $id,
+			string $format = 'structured'
 		) {
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
 			$Page = $Automad->getPage($id);
+			$toString = $format !== 'structured';
 
 			if (!$Page) {
 				throw new ToolCallException("Page [$id] not found.");
 			}
 
-			return $PageTransformer->toAgent($Page);
+			return $PageTransformer->toAgent($Page, $toString);
 		};
 	}
 
@@ -105,20 +120,7 @@ class PageRead extends AbstractTool {
 	 * @return array
 	 */
 	public function getInputSchema(): array {
-		return array(
-			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
-			'title' => 'Automad Read Page Schema',
-			'description' => 'A input schema for reading a single page on an Automad website.',
-			'type' => 'object',
-			'properties' => array(
-				'id' => array(
-					'type' => 'string',
-					'description' => <<< TXT
-						The ID is the local absolute URL path of the page such as `/about` or `/work/project` for example.
-						TXT
-				)
-			)
-		);
+		return PageSchema::read();
 	}
 
 	/**

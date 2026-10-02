@@ -75,8 +75,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *		data?: array{
  *			type: 'object',
  *			properties: array<string, AgentFieldSchema>,
- *			required: string[],
- *			additionalProperties: false
+ *			additionalProperties: false,
+ *			required?: string[]
  *		}
  *	}
  */
@@ -166,12 +166,17 @@ abstract class AbstractBlock {
 		$dataSchema = static::agentDataSchema();
 
 		if (!empty($dataSchema)) {
+			$required = static::getRequiredFromAgentDataSchema();
+
 			$properties['data'] = array(
 				'type' => 'object',
 				'properties' => $dataSchema,
-				'required' => static::getRequiredFromAgentDataSchema(),
 				'additionalProperties' => false
 			);
+
+			if (!empty($required)) {
+				$properties['data']['required'] = $required;
+			}
 		}
 
 		return $properties;

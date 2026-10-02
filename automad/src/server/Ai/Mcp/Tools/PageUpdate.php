@@ -74,16 +74,47 @@ class PageUpdate extends AbstractTool {
 	 */
 	public function getDescription(): string {
 		return <<< TXT
-			Update a page.
-
-			1. Use the `page_read` tool in order to get the current state of the page.
-			   If the user does not provide a valid page ID, use the `page_search` tool
-			   to get find the page that should be updated and use the page ID in the 
-			   results.
-			2. Update the page content according to the given input schema. 
-			   Only update content, blocks and fields that actually require an update
-			   and leave the rest of the page untouched.	
-			TXT;
+            Update a page.
+             
+            1. Use the `page_read` tool in order to get the current state of the page.
+               If the user does not provide a valid page ID, use the `page_search` tool
+               to find the page that should be updated and use the page ID in the 
+               results. In this context of retrieving page data that serves as 
+               basis for the actual update, the `format` property of the `page_read` 
+               tool must be `structured`.
+            2. Update the page `content` according to the given input schema. 
+               Use the full structured output of the `page_read` tool as basis for 
+               modifications and try to keep block IDs stable when possible.
+               The fields inside `content` will replace the existing page content.
+               Leaving out a field from `content` will also remove it on the existing page.
+                
+            Example: change the text of one paragraph on /about and add a new block at the end,
+            leaving everything else untouched.
+                
+            1. Read the page with `page_read` and `format: "structured"`. The `+main` field contains:
+               [
+                 {"id": "b1", "type": "header",    "data": {"level": 2, "text": "Team"}},
+                 {"id": "b2", "type": "paragraph", "data": {"text": "Old text."}}
+               ]
+                
+            2. Send the complete array for every content field you change. Existing blocks keep
+               their `id`; a new block has no `id`:
+               {
+                 "id": "/about",
+                 "content": {
+                   "+main": [
+                     {"id": "b1", "type": "header",    "data": {"level": 2, "text": "Team"}},
+                     {"id": "b2", "type": "paragraph", "data": {"text": "New text."}},
+                     {"type": "paragraph", "data": {"text": "A new paragraph."}}
+                   ]
+                 }
+               }
+               
+            - Leaving title, tags or template empty will also clear those fields on the existing page.
+            - Content fields you leave out of `content` are deleted.
+            - Blocks missing from a field's array are deleted.
+            - The order of the array is the order on the page.
+            TXT;
 	}
 
 	/**

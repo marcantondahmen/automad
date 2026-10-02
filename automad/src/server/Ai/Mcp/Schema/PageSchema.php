@@ -108,7 +108,7 @@ class PageSchema {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Deletion Schema',
-			'description' => 'A complete Automad page deletion schema',
+			'description' => 'The Automad page deletion input schema.',
 			'type' => 'object',
 			'properties' => array(
 				'id' => array(
@@ -118,7 +118,51 @@ class PageSchema {
 						for example `/about` or `/work/project`.
 						TXT
 				)
-			)
+			),
+			'required' => array('id')
+		);
+	}
+
+	/**
+	 * The page read schema.
+	 *
+	 * @return array
+	 */
+	public static function read(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Read Page Schema',
+			'description' => <<< TXT
+				A input schema for reading a single page on an Automad website.
+
+				The `id` is required. 
+			
+				Whenever this tool is used to retrieve page content for the `page_update`
+				tool, the `format` property must be `structured`.
+				TXT,
+			'type' => 'object',
+			'properties' => array(
+				'id' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The ID is the local absolute URL path of the page such as `/about` or `/work/project` for example.
+						TXT
+				),
+				'format' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The output format.  
+
+						`text` returns a lossy plain-text rendering of each content field, without block IDs or types. 
+						Use it for reading and summarizing only; it must not be used as input for `page_update`.
+					
+						To edit a page, read it with `structured` and pass that data to `page_update`.
+						TXT,
+					'enum' => array('structured', 'text'),
+					'default' => 'structured'
+				)
+			),
+			'required' => array('id')
 		);
 	}
 
@@ -139,6 +183,53 @@ class PageSchema {
 					'description' => <<< TXT
 						The search string. Can be multiple words. 
 						More words will narrow down the search results.
+						TXT
+				),
+				'scopeId' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						An optional scope for the search.
+						When used, results will only include pages below the given scope.
+						TXT
+				)
+			),
+			'required' => array('search')
+		);
+	}
+
+	/**
+	 * The page tree schema.
+	 *
+	 * @return array
+	 */
+	public static function tree(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Tree Schema',
+			'description' => <<< TXT
+				A input schema for retrieving the full or partial hierarchical structure of an Automad website.'
+
+				The `id` property can be optionally used to start the tree at a specific page instead of the 
+				homepage ("/"). Any existing page `id` can be used here.
+
+				The `depth` property can be used to limit the returned tree to a given depth.
+				TXT,
+			'type' => 'object',
+			'properties' => array(
+				'id' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The ID is the local absolute URL path of the page such as `/about` or `/work/project` 
+						that is used a starting point for the tree. The returned tree will only include pages
+						below the given page.
+
+						The default is '/' (the homepage).
+						TXT
+				),
+				'depth' => array(
+					'type' => 'integer',
+					'description' => <<< TXT
+						The depth of the retuned tree relative to its starting level.
 						TXT
 				)
 			)
@@ -178,7 +269,10 @@ class PageSchema {
 				),
 				'content' => array(
 					'type' => 'object',
-					'description' => 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
+					'description' => <<< TXT
+						Content for the +... fields (+main, +hero, etc.) provided by the selected template. 
+						Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!
+						TXT,
 					'additionalProperties' => array(
 						'type' => 'array',
 						'items' => array(

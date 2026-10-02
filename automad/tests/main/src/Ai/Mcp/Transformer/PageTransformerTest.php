@@ -13,7 +13,13 @@ class PageTransformerTest extends TestCase {
 		return array(
 			array(
 				'page',
-				'agent'
+				'agentStructured',
+				false
+			),
+			array(
+				'page',
+				'agentText',
+				true
 			),
 		);
 	}
@@ -29,7 +35,7 @@ class PageTransformerTest extends TestCase {
 	}
 
 	#[DataProvider('dataForTestToAgentEquals')]
-	public function testToAgentEquals(string $filePage, string $fileAgent) {
+	public function testToAgentEquals(string $filePage, string $fileAgent, bool $toString) {
 		$dir = __DIR__ . '/PageTransformer/toAgent';
 		$Automad = (new Mock())->createAutomad();
 		$data = FileSystem::readJson($dir . "/$filePage.json", true);
@@ -38,7 +44,7 @@ class PageTransformerTest extends TestCase {
 
 		/** @disregard */
 		$this->assertEquals(
-			json_encode($PageTransformer->toAgent($Page), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+			json_encode($PageTransformer->toAgent($Page, $toString), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
 			json_encode(FileSystem::readJson($dir . "/$fileAgent.json", true), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
 		);
 	}

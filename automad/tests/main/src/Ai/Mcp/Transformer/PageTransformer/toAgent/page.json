@@ -87,6 +87,7 @@
 	"title": "MCP Test",
 	"template": "page_full_width_centered",
 	"url": "/mcp-test",
+	":parent": "/",
 	":origUrl": "/mcp-test",
 	":created": "2026-09-30T14:58:11+00:00",
 	":lastModified": "2026-09-30T15:13:59+00:00",

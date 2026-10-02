@@ -175,7 +175,8 @@ class CollapsibleSection extends AbstractBlock {
 				<<< TXT
 					The initial state of the section. If true, the content is hidden until a visitor clicks
 					the title. If false, the section is expanded by default.
-					TXT
+					TXT,
+				optional: true
 			),
 			'content' => new AgentFieldSchema(
 				'array',
@@ -192,7 +193,8 @@ class CollapsibleSection extends AbstractBlock {
 					The name of an accordion group. Sections that share the same group name behave like HTML
 					<details> elements that share the same value for their "name" attribute, so opening one
 					section closes all others. Use an empty string for an independent section.
-					TXT
+					TXT,
+				optional: true
 			),
 			'title' => new AgentFieldSchema(
 				'string',

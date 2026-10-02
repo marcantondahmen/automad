@@ -37,22 +37,21 @@ namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Core\Automad;
-use Automad\Core\Blocks;
-use Automad\Core\Cache;
 use Automad\Models\Page;
+use Automad\System\Fields;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The page create tool.
+ * The page tree tool.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class PageCreate extends AbstractTool {
+class PageTree extends AbstractTool {
 	/**
 	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
 	 *
@@ -60,9 +59,9 @@ class PageCreate extends AbstractTool {
 	 */
 	public function getAnnotations(): ToolAnnotations|null {
 		return new ToolAnnotations(
-			readOnlyHint: false,
+			readOnlyHint: true,
 			destructiveHint: false,
-			idempotentHint: false,
+			idempotentHint: true,
 			openWorldHint: false
 		);
 	}
@@ -74,37 +73,15 @@ class PageCreate extends AbstractTool {
 	 */
 	public function getDescription(): string {
 		return <<< TXT
-            Create a new Automad page.
+			The hierarchical structure of the website. 
 
-            Before creating the page:
+			Use this resource to understand how pages are organized and how they relate to each other. 
+			Each node represents a page and contains its ID and child pages. 
 
-            1. Read the `page_tree` tool and select the page that should be the parent that 
-               contains the new page. Use the `url` property of that parent page for the `parent` field.
-            2. Read the `automad://templates/page` resource and select an appropriate installed template.
-            3. Inspect the selected template's available content fields and their descriptions.
-            4. Place the page's primary content in the field that is intended for the main content. 
-               Use other fields such as hero or footer only when appropriate.
-            5. Use only fields provided by the selected template.
-            6. Use the available block types defined by the input schema to construct the page content.
+			Use this tool also to efficiently get a list of sub-pages for a specific page.
 
-            The `parent`, `title`, and `template` properties are required. Content fields are template-specific 
-            and are provided through the `fields` property.
-
-            Do not add any `<h1>` tag with the page title. The title is already handled by the `title` property
-            and must not be added as part of the `fields` content.
-
-            Example: create a page "Team" below /about with one heading and one paragraph.
-            {
-              "parent": "/about",
-              "title": "Team",
-              "template": "page_sidebar",
-              "content": {
-                "+main": [
-                  {"type": "paragraph", "data": {"text": "Meet the people behind the project."}}
-                ]
-              }
-            }
-            TXT;
+			Use the `page_read` tool to retrieve the full content of a specific page.
+			TXT;
 	}
 
 	/**
@@ -115,29 +92,47 @@ class PageCreate extends AbstractTool {
 	 */
 	public function getHandler(): callable {
 		return function (
-			string $parent,
-			string $title,
-			string $template,
-			array $tags = array(),
-			array $content = array()
+			string $id = '/',
+			int $depth = 10
 		) {
 			$Automad = Automad::fromCache();
-			$Parent = $Automad->getPage($parent);
+			$pages = $Automad->getPages();
+			$Start = $Automad->getPage($id);
 
-			if (!$Parent) {
-				throw new ToolCallException("Parent page [$parent] not found.");
+			if (!$Start) {
+				throw new ToolCallException("Page [$id] not found.");
 			}
 
-			$data = array_map(
-				fn ($blocks): array => array('blocks' => Blocks::fromAgent($blocks)),
-				$content
-			);
+			$maxLevel = intval($Start->get(Fields::LEVEL)) + $depth;
 
-			$Page = Page::add($Parent, $title, $template, true, $data);
+			$branch = function (Page $Parent) use ($pages, $maxLevel, &$branch): array {
+				unset($pages[$Parent->origUrl]);
 
-			Cache::clear();
+				$data = array(
+					'id' => $Parent->origUrl,
+					'title' => $Parent->get(Fields::TITLE),
+					'last_modified' => $Parent->get(Fields::TIME_LAST_MODIFIED),
+					'template' => $Parent->get(Fields::TEMPLATE)
+				);
 
-			return $Page;
+				if (intval($Parent->get(Fields::LEVEL)) < $maxLevel) {
+					$children = array();
+
+					foreach ($pages as $Page) {
+						if ($Page->parentUrl === $Parent->origUrl) {
+							$children[] = $branch($Page);
+						}
+					}
+
+					if (!empty($children)) {
+						$data['children'] = $children;
+					}
+				}
+
+				return $data;
+			};
+
+			return $branch($Start);
 		};
 	}
 
@@ -147,7 +142,7 @@ class PageCreate extends AbstractTool {
 	 * @return array
 	 */
 	public function getInputSchema(): array {
-		return PageSchema::create();
+		return PageSchema::tree();
 	}
 
 	/**
@@ -156,7 +151,7 @@ class PageCreate extends AbstractTool {
 	 * @return string
 	 */
 	public function getName(): string {
-		return 'page_create';
+		return 'page_tree';
 	}
 
 	/**
@@ -165,7 +160,7 @@ class PageCreate extends AbstractTool {
 	 * @return string
 	 */
 	public function getTitle(): string {
-		return 'Page: Create';
+		return 'Page: Tree';
 	}
 
 	/**
@@ -174,6 +169,6 @@ class PageCreate extends AbstractTool {
 	 * @return bool
 	 */
 	public static function requiresAuth(): bool {
-		return true;
+		return false;
 	}
 }

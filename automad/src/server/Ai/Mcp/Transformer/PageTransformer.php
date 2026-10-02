@@ -74,16 +74,24 @@ class PageTransformer {
 	 * Transform a page object into an agent optimized representation.
 	 *
 	 * @param Page $Page
-	 * @param bool $excludeBlocks
+	 * @param bool $blocksToString
 	 * @return array
 	 */
-	public function toAgent(Page $Page): array {
+	public function toAgent(Page $Page, bool $blocksToString = false): array {
 		// Inject an alias for the origUrl called `id` that can be easily referred to.
-		$data = array('id' => $Page->origUrl, 'url' => AM_SERVER . $Page->origUrl, 'content' => array(), 'meta' => array());
+		$data = array(
+			'id' => $Page->origUrl,
+			'parent' => $Page->parentUrl,
+			'url' => AM_SERVER . $Page->origUrl,
+			'content' => array(),
+			'meta' => array()
+		);
+
+		$transform = $blocksToString ? 'toString' : 'toAgent';
 
 		foreach ($Page->data as $key => $value) {
 			if (str_starts_with($key, '+')) {
-				$data['content'][$key] = Blocks::toAgent(
+				$data['content'][$key] = Blocks::$transform(
 					$value['blocks'] ?? array(),
 					$this->Automad->ComponentCollection
 				);

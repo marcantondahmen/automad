@@ -169,7 +169,8 @@ class Gallery extends AbstractBlock {
 				<<< TXT
 					The target width of the columns in pixels, e.g. 250. Only used for the "columns" and
 					"grid" layouts.
-					TXT
+					TXT,
+				optional: true
 			),
 			'files' => new AgentFieldSchema(
 				'array',
@@ -177,7 +178,8 @@ class Gallery extends AbstractBlock {
 					The list of images that are included in the gallery. Each item is either the file name of
 					an image that is attached to the current page, a path that starts with a slash and is
 					relative to the Automad base directory, or a full remote image URL.
-					TXT
+					TXT,
+				items: array('type' => 'string')
 			),
 			'layout' => new AgentFieldSchema(
 				'string',
@@ -186,6 +188,7 @@ class Gallery extends AbstractBlock {
 					creates justified rows of equal height and "grid" creates a uniform grid of equally sized
 					cells.
 					TXT,
+				optional: true,
 				enum: array('columns', 'grid', 'rows')
 			),
 			'rowHeightPx' => new AgentFieldSchema(
@@ -193,7 +196,8 @@ class Gallery extends AbstractBlock {
 				<<< TXT
 					The target height of the rows in pixels, e.g. 250. Only used for the "rows" and "grid"
 					layouts.
-					TXT
+					TXT,
+				optional: true
 			)
 		);
 	}

@@ -28,13 +28,13 @@ class ProviderTest extends TestCase {
 		/** @disregard */
 		$this->assertSame(
 			join(', ', array_map(fn ($Tool) => $Tool->getName(), Provider::getTools(true))),
-			'page_create, page_delete, page_read, page_search, page_update'
+			'page_create, page_delete, page_read, page_search, page_tree, page_update'
 		);
 
 		/** @disregard */
 		$this->assertSame(
 			join(', ', array_map(fn ($Resource) => $Resource->getName(), Provider::getResources(true))),
-			'pages, snippets, templates/filelist, templates/page, templates/pagelist'
+			'snippets, templates/filelist, templates/page, templates/pagelist'
 		);
 	}
 
@@ -42,13 +42,13 @@ class ProviderTest extends TestCase {
 		/** @disregard */
 		$this->assertSame(
 			join(', ', array_map(fn ($Tool) => $Tool->getName(), Provider::getTools(false))),
-			'page_read, page_search'
+			'page_read, page_search, page_tree'
 		);
 
 		/** @disregard */
 		$this->assertSame(
 			join(', ', array_map(fn ($Resource) => $Resource->getName(), Provider::getResources(false))),
-			'pages'
+			''
 		);
 	}
 }

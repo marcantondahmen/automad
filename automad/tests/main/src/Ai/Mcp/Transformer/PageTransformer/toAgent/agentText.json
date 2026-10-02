@@ -1,0 +1,17 @@
+{
+	"id": "/mcp-test",
+	"parent": "/",
+	"url": "http://localhost/mcp-test",
+	"content": {
+		"+main": "Large Paragraph image-1.webp Alt text 1 image-2.webp Alt text 2 Heading Small paragraph"
+	},
+	"meta": {
+		"private": true,
+		"template": "page_full_width_centered",
+		"url": "/mcp-test",
+		"slug": "mcp-test",
+		"title": "MCP Test",
+		":created": "2026-09-30T14:58:11+00:00",
+		":lastModified": "2026-09-30T15:13:59+00:00"
+	}
+}

@@ -169,7 +169,8 @@ class ImageSlideshow extends AbstractBlock {
 					The list of images that are shown in the slideshow. Each item is either the file name of
 					an image that is attached to the current page, a path that starts with a slash and is
 					relative to the Automad base directory, or a full remote image URL.
-					TXT
+					TXT,
+				items: array('type' => 'string')
 			),
 			'imageHeightPx' => new AgentFieldSchema(
 				'number',
