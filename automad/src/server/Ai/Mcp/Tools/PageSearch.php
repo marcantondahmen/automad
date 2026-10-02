@@ -126,7 +126,8 @@ class PageSearch extends AbstractTool {
 					'hitCount' => intval($Page->get(Fields::SEARCH_RESULTS_COUNT)),
 					'lastModified' => $Page->get(Fields::TIME_LAST_MODIFIED),
 					'template' => $Page->get(Fields::TEMPLATE),
-					'parent' => $Page->parentUrl
+					'parent' => $Page->parentUrl,
+					'publicationState' => $Page->isPublished() ? 'published' : 'draft'
 				),
 				$Automad->Pagelist->getPages(true)
 			);

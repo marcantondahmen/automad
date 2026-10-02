@@ -120,7 +120,7 @@ class DraftCollectionController {
 		}
 
 		foreach ($Automad->getPages() as $Page) {
-			if ($Page->get(Fields::PUBLICATION_STATE) === PublicationState::DRAFT->value) {
+			if (!$Page->isPublished()) {
 				$DataStore = new DataStore($Page->path);
 
 				/** @var Draft */
@@ -163,7 +163,7 @@ class DraftCollectionController {
 		}
 
 		foreach ($Automad->getPages() as $Page) {
-			if ($Page->get(Fields::PUBLICATION_STATE) === PublicationState::DRAFT->value) {
+			if (!$Page->isPublished()) {
 				if (!$Page->publish()) {
 					return $Response->setError(Text::get('publishError'));
 				}

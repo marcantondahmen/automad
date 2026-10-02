@@ -147,15 +147,18 @@ class Embed extends AbstractBlock {
 	 * @return array<string, AgentFieldSchema>
 	 */
 	protected static function agentDataSchema(): array {
+		$services = join(', ', EmbedResolver::getServiceKeys());
+
 		return array(
 			'source' => new AgentFieldSchema(
 				'string',
 				<<< TXT
 					The full URL of the content on the third-party platform, e.g. the URL of a YouTube video,
 					a Vimeo video, a SoundCloud track or a social media post, exactly as it is shown in the
-					browser address bar or share dialog.
+					browser address bar or share dialog. URLs of the following services are allowed:
+
+					$services
 					TXT,
-				enum: EmbedResolver::getServiceKeys()
 			),
 			'caption' => new AgentFieldSchema(
 				'string',

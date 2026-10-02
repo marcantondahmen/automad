@@ -412,21 +412,7 @@
 					"type": "object",
 					"properties": {
 						"source": {
-							"description": "The full URL of the content on the third-party platform, e.g. the URL of a YouTube video,\na Vimeo video, a SoundCloud track or a social media post, exactly as it is shown in the\nbrowser address bar or share dialog.",
-							"enum": [
-								"codepen",
-								"dailymotion",
-								"facebook",
-								"giphy",
-								"github",
-								"imgur",
-								"instagram",
-								"mixcloud",
-								"soundcloud",
-								"twitter",
-								"vimeo",
-								"youtube"
-							],
+							"description": "The full URL of the content on the third-party platform, e.g. the URL of a YouTube video,\na Vimeo video, a SoundCloud track or a social media post, exactly as it is shown in the\nbrowser address bar or share dialog. URLs of the following services are allowed:\n\ncodepen, dailymotion, facebook, giphy, github, imgur, instagram, mixcloud, soundcloud, twitter, vimeo, youtube",
 							"type": "string"
 						},
 						"caption": {

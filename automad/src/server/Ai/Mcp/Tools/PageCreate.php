@@ -88,10 +88,10 @@ class PageCreate extends AbstractTool {
 			6. Use the available block types defined by the input schema to construct the page content.
 
 			The `parent`, `title`, and `template` properties are required. Content fields are template-specific 
-			and are provided through the `fields` property.
+			and are provided through the `content` property.
 
 			Do not add any `<h1>` tag with the page title. The title is already handled by the `title` property
-			and must not be added as part of the `fields` content.
+			and must not be added as part of the `content` content.
 
 			Example: create a page "Team" below /about with one heading and one paragraph.
 			{

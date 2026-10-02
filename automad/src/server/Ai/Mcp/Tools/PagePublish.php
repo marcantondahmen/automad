@@ -107,7 +107,7 @@ class PagePublish extends AbstractTool {
 	 * @return array
 	 */
 	public function getInputSchema(): array {
-		return PageSchema::duplicate();
+		return PageSchema::publish();
 	}
 
 	/**

@@ -83,6 +83,7 @@ class PageTransformer {
 			'id' => $Page->origUrl,
 			'parent' => $Page->parentUrl,
 			'url' => AM_SERVER . $Page->origUrl,
+			'publicationState' => $Page->isPublished() ? 'published' : 'draft',
 			'content' => array(),
 			'meta' => array()
 		);

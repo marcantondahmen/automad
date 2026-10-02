@@ -132,7 +132,8 @@ class PageTree extends AbstractTool {
 					'id' => $Parent->origUrl,
 					'title' => $Parent->get(Fields::TITLE),
 					'last_modified' => $Parent->get(Fields::TIME_LAST_MODIFIED),
-					'template' => $Parent->get(Fields::TEMPLATE)
+					'template' => $Parent->get(Fields::TEMPLATE),
+					'publicationState' => $Parent->isPublished() ? 'published' : 'draft'
 				);
 
 				if (intval($Parent->get(Fields::LEVEL)) < $maxLevel) {

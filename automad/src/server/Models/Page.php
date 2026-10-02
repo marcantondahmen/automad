@@ -449,6 +449,15 @@ class Page {
 	}
 
 	/**
+	 * Test whether a page is published or a draft.
+	 *
+	 * @return bool
+	 */
+	public function isPublished(): bool {
+		return $this->data[Fields::PUBLICATION_STATE] !== PublicationState::DRAFT->value;
+	}
+
+	/**
 	 * Move a page directory and update all related links.
 	 *
 	 * @param string $destParentPath
