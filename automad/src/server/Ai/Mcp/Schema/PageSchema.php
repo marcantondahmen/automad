@@ -124,6 +124,29 @@ class PageSchema {
 	}
 
 	/**
+	 * The page duplication schema.
+	 *
+	 * @return array
+	 */
+	public static function duplicate(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Duplication Schema',
+			'description' => 'The Automad page duplication input schema.',
+			'type' => 'object',
+			'properties' => array(
+				'id' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The ID is the page that will be duplicated.
+						TXT
+				)
+			),
+			'required' => array('id')
+		);
+	}
+
+	/**
 	 * The page move schema.
 	 *
 	 * @return array
