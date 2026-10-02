@@ -16,6 +16,19 @@
 			"type": "string",
 			"description": "The template used by the page."
 		},
+		"date": {
+			"type": "string",
+			"format": "date-time",
+			"description": "The page date in the ISO 8601 date-time format like for example `2025-09-26T15:46`"
+		},
+		"private": {
+			"type": "boolean",
+			"description": "Whether the page should be keept private and not accessible without authentication."
+		},
+		"hidden": {
+			"type": "boolean",
+			"description": "Whether the page should be hidden from page lists and navigation."
+		},
 		"tags": {
 			"type": "array",
 			"description": "Optional tags assigned to the page.",

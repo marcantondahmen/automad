@@ -2,7 +2,11 @@
 	"id": "/mcp-test",
 	"parent": "/",
 	"url": "http://localhost/mcp-test",
+	"title": "MCP Test",
+	"date": "2026-09-30T15:13:59+00:00",
 	"publicationState": "published",
+	"private": true,
+	"hidden": false,
 	"content": {
 		"+main": [
 			{
@@ -58,11 +62,8 @@
 		]
 	},
 	"meta": {
-		"private": true,
 		"template": "page_full_width_centered",
-		"url": "/mcp-test",
 		"slug": "mcp-test",
-		"title": "MCP Test",
 		":created": "2026-09-30T14:58:11+00:00",
 		":lastModified": "2026-09-30T15:13:59+00:00"
 	}

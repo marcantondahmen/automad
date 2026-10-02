@@ -1,8 +1,10 @@
 {
 	"private": true,
+	"hidden": true,
 	"slug": "mcp-test",
 	"template": "page_full_width_centered",
 	"title": "MCP Test",
+	"date": "2026-09-30T15:13:59+00:00",
 	"+main": {
 		"blocks": [
 			{

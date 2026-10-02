@@ -61,6 +61,9 @@ class PageTransformerTest extends TestCase {
 			$Page,
 			$agentData['title'],
 			$agentData['template'],
+			$agentData['date'],
+			$agentData['private'],
+			$agentData['hidden'],
 			$agentData['tags'],
 			$agentData['content']
 		);

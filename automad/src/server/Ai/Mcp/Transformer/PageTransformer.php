@@ -84,6 +84,7 @@ class PageTransformer {
 			'parent' => $Page->parentUrl,
 			'url' => AM_SERVER . $Page->origUrl,
 			'title' => $Page->get(Fields::TITLE),
+			'date' => $Page->get(Fields::DATE),
 			'publicationState' => $Page->isPublished() ? 'published' : 'draft',
 			'private' => $Page->private,
 			'hidden' => $Page->hidden,
@@ -92,7 +93,7 @@ class PageTransformer {
 		);
 
 		$transform = $blocksToString ? 'toString' : 'toAgent';
-		$excludeFromMeta = array(Fields::HIDDEN, Fields::PRIVATE, Fields::URL, Fields::TITLE);
+		$excludeFromMeta = array(Fields::HIDDEN, Fields::PRIVATE, Fields::URL, Fields::TITLE, Fields::DATE);
 
 		foreach ($Page->data as $key => $value) {
 			if (str_starts_with($key, '+')) {
@@ -152,6 +153,8 @@ class PageTransformer {
 		$data[Fields::PRIVATE] = $private;
 		$data[Fields::HIDDEN] = $hidden;
 		$data[Fields::TAGS] = join(', ', $tags);
+
+		$data = array_filter($data, fn ($value) => !empty($value));
 
 		foreach ($content as $key => $blocks) {
 			$originalBlocks = array();
