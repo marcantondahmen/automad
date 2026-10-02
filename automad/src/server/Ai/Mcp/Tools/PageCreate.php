@@ -74,37 +74,37 @@ class PageCreate extends AbstractTool {
 	 */
 	public function getDescription(): string {
 		return <<< TXT
-            Create a new Automad page.
+			Create a new Automad page.
 
-            Before creating the page:
+			Before creating the page:
 
-            1. Read the `page_tree` tool and select the page that should be the parent that 
-               contains the new page. Use the `url` property of that parent page for the `parent` field.
-            2. Read the `automad://templates/page` resource and select an appropriate installed template.
-            3. Inspect the selected template's available content fields and their descriptions.
-            4. Place the page's primary content in the field that is intended for the main content. 
-               Use other fields such as hero or footer only when appropriate.
-            5. Use only fields provided by the selected template.
-            6. Use the available block types defined by the input schema to construct the page content.
+			1. Read the `page_tree` tool and select the page that should be the parent that 
+			   contains the new page. Use the `url` property of that parent page for the `parent` field.
+			2. Read the `automad://templates/page` resource and select an appropriate installed template.
+			3. Inspect the selected template's available content fields and their descriptions.
+			4. Place the page's primary content in the field that is intended for the main content. 
+			   Use other fields such as hero or footer only when appropriate.
+			5. Use only fields provided by the selected template.
+			6. Use the available block types defined by the input schema to construct the page content.
 
-            The `parent`, `title`, and `template` properties are required. Content fields are template-specific 
-            and are provided through the `fields` property.
+			The `parent`, `title`, and `template` properties are required. Content fields are template-specific 
+			and are provided through the `fields` property.
 
-            Do not add any `<h1>` tag with the page title. The title is already handled by the `title` property
-            and must not be added as part of the `fields` content.
+			Do not add any `<h1>` tag with the page title. The title is already handled by the `title` property
+			and must not be added as part of the `fields` content.
 
-            Example: create a page "Team" below /about with one heading and one paragraph.
-            {
-              "parent": "/about",
-              "title": "Team",
-              "template": "page_sidebar",
-              "content": {
-                "+main": [
-                  {"type": "paragraph", "data": {"text": "Meet the people behind the project."}}
-                ]
-              }
-            }
-            TXT;
+			Example: create a page "Team" below /about with one heading and one paragraph.
+			{
+				"parent": "/about",
+				"title": "Team",
+				"template": "page_sidebar",
+				"content": {
+					"+main": [
+						{"type": "paragraph", "data": {"text": "Meet the people behind the project."}}
+					]
+				}
+			}
+			TXT;
 	}
 
 	/**
