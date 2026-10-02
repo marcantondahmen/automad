@@ -60,7 +60,7 @@ class PagePublish extends AbstractTool {
 		return new ToolAnnotations(
 			readOnlyHint: false,
 			destructiveHint: true,
-			idempotentHint: false,
+			idempotentHint: true,
 			openWorldHint: false
 		);
 	}

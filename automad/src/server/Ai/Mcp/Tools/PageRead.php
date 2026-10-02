@@ -77,7 +77,7 @@ class PageRead extends AbstractTool {
 
 			The `content` field contains the main page content.
 		
-			The `meta` field contains additional mets data and settings
+			The `meta` field contains additional meta data and settings
 			such as the template, last modification date, the url etc.
 		
 			The `files` field contains all files that are attached to the page.

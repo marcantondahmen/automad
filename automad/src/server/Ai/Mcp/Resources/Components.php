@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Resources;
 
 use Automad\Core\Blocks;
+use Automad\Core\Str;
 use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,8 +57,7 @@ class Components extends AbstractResource {
 			A list of available components.
 
 			Use the component `id` in order to reference a component in the `page_create` and `page_update` tools.
-			`blocks` contains the actual structured data of the component.
-			`preview` contains simplified string representation of all contained blocks.
+			`content` contains simplified string representation of all contained blocks.
 			TXT;
 	}
 
@@ -73,8 +73,7 @@ class Components extends AbstractResource {
 					return array(
 						'id' => $component['id'],
 						'name' => $component['name'],
-						'blocks' => Blocks::toAgent($component['blocks'] ?? array(), $ComponentCollection),
-						'preview' => html_entity_decode(strip_tags(Blocks::toString($component['blocks'] ?? array(), $ComponentCollection)))
+						'content' => Str::shorten(html_entity_decode(strip_tags(Blocks::toString($component['blocks'] ?? array(), $ComponentCollection))), 500)
 					);
 				},
 				$ComponentCollection->get()

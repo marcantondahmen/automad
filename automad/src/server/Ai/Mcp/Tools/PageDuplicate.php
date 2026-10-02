@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Models\Page;
@@ -80,6 +81,8 @@ class PageDuplicate extends AbstractTool {
 
 			Note that this tool only duplicates the page itself. 
 			Children will not be duplicated. This operation is not recursive.
+
+			This tool returns the duplicated page data.
 			TXT;
 	}
 
@@ -95,6 +98,7 @@ class PageDuplicate extends AbstractTool {
 		) {
 			$Automad = Automad::fromCache();
 			$Page = $Automad->getPage($id);
+			$PageTransformer = new PageTransformer($Automad);
 
 			if (!$Page) {
 				throw new ToolCallException("Page [$id] not found.");
@@ -103,7 +107,11 @@ class PageDuplicate extends AbstractTool {
 			$New = $Page->duplicate();
 			Cache::clear();
 
-			return $New;
+			if (!$New) {
+				throw new ToolCallException("Page [$id] was not duplicated.");
+			}
+
+			return $PageTransformer->toAgent($New, true);
 		};
 	}
 

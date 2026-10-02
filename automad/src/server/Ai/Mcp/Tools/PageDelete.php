@@ -40,8 +40,13 @@ use Automad\Api\EditLock;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Models\Page;
+use Automad\System\Fields;
+use Mcp\Exception\ClientException;
 use Mcp\Exception\ToolCallException;
+use Mcp\Schema\Elicitation\BooleanSchemaDefinition;
+use Mcp\Schema\Elicitation\ElicitationSchema;
 use Mcp\Schema\ToolAnnotations;
+use Mcp\Server\ClientGateway;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -79,9 +84,11 @@ class PageDelete extends AbstractTool {
 			The `id` property represents the local absolute page URL path
 			like for example `/about` or `/work/projects`.
 
-			If the user does not specify a valid `id` property value, use the `page_search` tool 
-			and select the page that should be the deleted and ask the user for confirmation before 
-			performing the actual deletion.
+			If the user does not specify a valid `id` property value, use the `page_search` tool
+			and select the page that should be the deleted.
+
+			The user is asked to confirm the deletion by the client before the page is actually deleted.
+			Clients that are not able to ask for confirmation can not delete pages.
 			TXT;
 	}
 
@@ -94,6 +101,7 @@ class PageDelete extends AbstractTool {
 	public function getHandler(): callable {
 		return function (
 			string $id,
+			ClientGateway $Client,
 		) {
 			$Automad = Automad::fromCache();
 			$Page = $Automad->getPage($id);
@@ -101,6 +109,11 @@ class PageDelete extends AbstractTool {
 			if (!$Page) {
 				throw new ToolCallException("Page [$id] not found.");
 			}
+
+			// The confirmation must happen before any side effect, since handlers
+			// are executed again from the top when a client answers an elicitation
+			// on a stateless protocol revision.
+			self::confirm($Client, $Page, $id);
 
 			$Page->delete();
 			Cache::clear();
@@ -147,5 +160,42 @@ class PageDelete extends AbstractTool {
 	 */
 	public static function requiresAuth(): bool {
 		return true;
+	}
+
+	/**
+	 * Ask the user to confirm the deletion by sending an elicitation request to the client.
+	 * Fails closed, which means that the deletion is only allowed when the user explicitly accepted.
+	 *
+	 * @param ClientGateway $Client
+	 * @param Page $Page
+	 * @param string $id
+	 * @throws ToolCallException when the deletion was not confirmed
+	 */
+	private static function confirm(ClientGateway $Client, Page $Page, string $id): void {
+		if (!$Client->supportsElicitation()) {
+			throw new ToolCallException(
+				"The connected MCP client does not support confirmation requests, so the page [$id] was not deleted."
+			);
+		}
+
+		$title = strval($Page->get(Fields::TITLE));
+		$Schema = new ElicitationSchema(
+			array('confirm' => new BooleanSchemaDefinition('Delete page', 'Delete the page and all of its subpages.', false)),
+			array('confirm')
+		);
+
+		try {
+			$Result = $Client->elicit(
+				"Delete the page \"$title\" [$id] including all of its subpages?",
+				$Schema,
+				key: 'confirm_delete'
+			);
+		} catch (ClientException $e) {
+			throw new ToolCallException("Could not get a confirmation for deleting the page [$id]: " . $e->getMessage());
+		}
+
+		if (!$Result->isAccepted() || ($Result->content['confirm'] ?? false) !== true) {
+			throw new ToolCallException("The deletion of the page [$id] was not confirmed by the user.");
+		}
 	}
 }

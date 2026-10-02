@@ -75,7 +75,7 @@ class PageTree extends AbstractTool {
 		return <<< TXT
 			The hierarchical structure of the website. 
 
-			Use this resource to understand how pages are organized and how they relate to each other. 
+			Use this tool to understand how pages are organized and how they relate to each other. 
 			Each node represents a page and contains its ID and child pages. 
 
 			Use this tool also to efficiently get a list of sub-pages for a specific page.

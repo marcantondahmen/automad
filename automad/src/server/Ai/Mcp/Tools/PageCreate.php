@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Cache;
@@ -104,6 +105,8 @@ class PageCreate extends AbstractTool {
 					]
 				}
 			}
+
+			This tool returns the newly created page data.
 			TXT;
 	}
 
@@ -123,6 +126,7 @@ class PageCreate extends AbstractTool {
 		) {
 			$Automad = Automad::fromCache();
 			$Parent = $Automad->getPage($parent);
+			$PageTransformer = new PageTransformer($Automad);
 
 			if (!$Parent) {
 				throw new ToolCallException("Parent page [$parent] not found.");
@@ -135,9 +139,13 @@ class PageCreate extends AbstractTool {
 
 			$Page = Page::add($Parent, $title, $template, true, $data);
 
+			if (!$Page) {
+				throw new ToolCallException('The new page was not created.');
+			}
+
 			Cache::clear();
 
-			return $Page;
+			return $PageTransformer->toAgent($Page, true);
 		};
 	}
 
