@@ -38,6 +38,7 @@ namespace Automad\Ai\Mcp\Tools;
 use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
+use Automad\System\FileUtils;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -75,8 +76,13 @@ class PageRead extends AbstractTool {
 			Read a page by providing its ID (the local URL path).
 
 			The `content` field contains the main page content.
+		
 			The `meta` field contains additional mets data and settings
 			such as the template, last modification date, the url etc.
+		
+			The `files` field contains all files that are attached to the page.
+			Those files can be linked as is in image or gallery blocks, all
+			paths are resolved automatically by the render engine.
 
 			Example: page_read {"id": "/about", "format": "structured"} returns
 			{
@@ -110,7 +116,13 @@ class PageRead extends AbstractTool {
 				throw new ToolCallException("Page [$id] not found.");
 			}
 
-			return $PageTransformer->toAgent($Page, $toString);
+			$data = $PageTransformer->toAgent($Page, $toString);
+			$data['files'] = array_map(
+				fn ($file) => basename($file),
+				FileUtils::fileDeclaration('*.*', $Page, true)
+			);
+
+			return $data;
 		};
 	}
 
