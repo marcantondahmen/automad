@@ -83,12 +83,16 @@ class PageTransformer {
 			'id' => $Page->origUrl,
 			'parent' => $Page->parentUrl,
 			'url' => AM_SERVER . $Page->origUrl,
+			'title' => $Page->get(Fields::TITLE),
 			'publicationState' => $Page->isPublished() ? 'published' : 'draft',
+			'private' => $Page->private,
+			'hidden' => $Page->hidden,
 			'content' => array(),
 			'meta' => array()
 		);
 
 		$transform = $blocksToString ? 'toString' : 'toAgent';
+		$excludeFromMeta = array(Fields::HIDDEN, Fields::PRIVATE, Fields::URL, Fields::TITLE);
 
 		foreach ($Page->data as $key => $value) {
 			if (str_starts_with($key, '+')) {
@@ -97,7 +101,11 @@ class PageTransformer {
 					$this->Automad->ComponentCollection
 				);
 			} else {
-				if ((in_array($key, PageTransformer::INCLUDED_FIELDS) || preg_match('/^[a-z]/i', $key)) && !empty($value)) {
+				if ((
+					in_array($key, PageTransformer::INCLUDED_FIELDS) ||
+						preg_match('/^[a-z]/i', $key)
+				) && !empty($value) && !in_array($key, $excludeFromMeta)
+				) {
 					$data['meta'][$key] = $value;
 				}
 			}
@@ -112,6 +120,9 @@ class PageTransformer {
 	 * @param Page $Page
 	 * @param string $title
 	 * @param string $template
+	 * @param string $date
+	 * @param bool $private
+	 * @param bool $hidden
 	 * @param array $tags
 	 * @param array $content
 	 * @return array
@@ -120,6 +131,9 @@ class PageTransformer {
 		Page $Page,
 		string $title,
 		string $template,
+		string $date = '',
+		bool $private = false,
+		bool $hidden = false,
 		array $tags = array(),
 		array $content = array()
 	): array {
@@ -134,6 +148,9 @@ class PageTransformer {
 		}
 
 		$data[Fields::TITLE] = $title;
+		$data[Fields::DATE] = $date;
+		$data[Fields::PRIVATE] = $private;
+		$data[Fields::HIDDEN] = $hidden;
 		$data[Fields::TAGS] = join(', ', $tags);
 
 		foreach ($content as $key => $blocks) {

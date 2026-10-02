@@ -41,6 +41,7 @@ use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Cache;
 use Automad\Models\Page;
+use Automad\System\Fields;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -121,6 +122,9 @@ class PageCreate extends AbstractTool {
 			string $parent,
 			string $title,
 			string $template,
+			string $date = '',
+			bool $private = false,
+			bool $hidden = false,
 			array $tags = array(),
 			array $content = array()
 		) {
@@ -137,7 +141,10 @@ class PageCreate extends AbstractTool {
 				$content
 			);
 
-			$Page = Page::add($Parent, $title, $template, true, $data);
+			$data[Fields::DATE] = $date;
+			$data[Fields::HIDDEN] = $hidden;
+
+			$Page = Page::add($Parent, $title, $template, $private, $data);
 
 			if (!$Page) {
 				throw new ToolCallException('The new page was not created.');

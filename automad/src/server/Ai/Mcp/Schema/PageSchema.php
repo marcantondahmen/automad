@@ -72,29 +72,42 @@ class PageSchema {
 					'type' => 'string',
 					'description' => 'The title of the page.'
 				),
-				'template'=> array(
+				'template' => array(
 					'type' => 'string',
 					'description' => 'The template used by the page.'
 				),
-				'tags'=> array(
-					'type'=> 'array',
+				'date' => array(
+					'type' => 'string',
+					'format' => 'date-time',
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2025-09-26T15:46`'
+				),
+				'private' => array(
+					'type' => 'boolean',
+					'description' => 'Whether the page should be keept private and not accessible without authentication.'
+				),
+				'hidden' => array(
+					'type' => 'boolean',
+					'description' => 'Whether the page should be hidden from page lists and navigation.'
+				),
+				'tags' => array(
+					'type' => 'array',
 					'description'=> 'Optional tags assigned to the page.',
 					'items'=> array(
 						'type'=> 'string'
 					)
 				),
 				'content' => array(
-					'type'=> 'object',
+					'type' => 'object',
 					'description'=> 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
-					'additionalProperties'=> array(
-						'type'=> 'array',
-						'items'=> array(
-							'$ref'=> PageSchema::BLOCK
+					'additionalProperties' => array(
+						'type' => 'array',
+						'items' => array(
+							'$ref' => PageSchema::BLOCK
 						)
 					)
 				)
 			),
-			'required'=> array('parent', 'title', 'template'),
+			'required' => array('parent', 'title', 'template'),
 			...self::blockDefs()
 		);
 	}
@@ -369,6 +382,19 @@ class PageSchema {
 				'template'=> array(
 					'type' => 'string',
 					'description' => 'The template used by the page.'
+				),
+				'date' => array(
+					'type' => 'string',
+					'format' => 'date-time',
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2025-09-26T15:46`'
+				),
+				'private' => array(
+					'type' => 'boolean',
+					'description' => 'Whether the page should be keept private and not accessible without authentication.'
+				),
+				'hidden' => array(
+					'type' => 'boolean',
+					'description' => 'Whether the page should be hidden from page lists and navigation.'
 				),
 				'tags'=> array(
 					'type' => 'array',

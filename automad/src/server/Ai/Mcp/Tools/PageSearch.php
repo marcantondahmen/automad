@@ -85,6 +85,11 @@ class PageSearch extends AbstractTool {
 
 			Use the `page_read` tool in order to get the 
 			full content for a specific page.
+
+			The following fields control the visiblity of a page:
+			- `publicationState`: `draft` or `published`, unpublished changes can only be viewed by admins
+			- `private`: if true, the page can only be viewed by admins, independet from `publicationState`
+			- `hidden`: if true, the page is publicly accessible but hidden in page lists and navigations
 			TXT;
 	}
 
@@ -127,7 +132,9 @@ class PageSearch extends AbstractTool {
 					'lastModified' => $Page->get(Fields::TIME_LAST_MODIFIED),
 					'template' => $Page->get(Fields::TEMPLATE),
 					'parent' => $Page->parentUrl,
-					'publicationState' => $Page->isPublished() ? 'published' : 'draft'
+					'publicationState' => $Page->isPublished() ? 'published' : 'draft',
+					'private' => $Page->private,
+					'hidden' => $Page->hidden
 				),
 				$Automad->Pagelist->getPages(true)
 			);

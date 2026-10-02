@@ -128,6 +128,9 @@ class PageUpdate extends AbstractTool {
 			string $id,
 			string $title,
 			string $template,
+			string $date = '',
+			bool $private = false,
+			bool $hidden = false,
 			array $tags = array(),
 			array $content = array()
 		) {
@@ -143,6 +146,9 @@ class PageUpdate extends AbstractTool {
 				$Page,
 				$title,
 				$template,
+				$date,
+				$private,
+				$hidden,
 				$tags,
 				$content
 			);

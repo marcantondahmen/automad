@@ -84,6 +84,11 @@ class PageRead extends AbstractTool {
 			Those files can be linked as is in image or gallery blocks, all
 			paths are resolved automatically by the render engine.
 
+			The following fields control the visiblity of a page:
+			- `publicationState`: `draft` or `published`, unpublished changes can only be viewed by admins
+			- `private`: if true, the page can only be viewed by admins, independet from `publicationState`
+			- `hidden`: if true, the page is publicly accessible but hidden in page lists and navigations
+
 			Example: page_read {"id": "/about", "format": "structured"} returns
 			{
 				"id": "/about", 

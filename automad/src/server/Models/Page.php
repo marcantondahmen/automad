@@ -191,23 +191,23 @@ class Page {
 		$suffix = FileSystem::uniquePathSuffix($newPagePath);
 		$newPagePath = FileSystem::appendSuffixToPath($newPagePath, $suffix);
 
+		// Set date.
+		$now = date(DataStore::DATE_FORMAT);
+
 		// Data, also directly append possibly existing suffix to title here.
 		$data = array(
-			...$initialData,
 			Fields::TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
 			Fields::PRIVATE => $isPrivate,
 			Fields::TEMPLATE => $template,
-			Fields::SLUG => basename($newPagePath)
+			Fields::SLUG => basename($newPagePath),
+			Fields::DATE => $now,
+			...$initialData,
 		);
 
 		if ($theme != '.') {
 			$data[Fields::THEME] = $theme;
 		}
 
-		// Set date.
-		$now = date(DataStore::DATE_FORMAT);
-
-		$data[Fields::DATE] = $now;
 		$data[Fields::TIME_CREATED] = $now;
 		$data[Fields::TIME_LAST_MODIFIED] = $now;
 
