@@ -196,6 +196,41 @@ class PageSchema {
 	}
 
 	/**
+	 * The page reorder schema.
+	 *
+	 * @return array
+	 */
+	public static function reorderChildren(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Reorder Schema',
+			'description' => 'A input schema for reordering sub-pages for a given parent page by an ordered list of page IDs.',
+			'type' => 'object',
+			'properties' => array(
+				'parent' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The `id` of the parent page where sub-pages will be reordered.
+						TXT
+				),
+				'order' => array(
+					'type' => 'array',
+					'items' => array(
+						'type' => 'string'
+					),
+					'description' => <<< TXT
+						The reordered list of page ID basenames.
+						Critical: page IDs are basically absolute URLs. 
+						The ordered list must only contain basenames (without any slashes) 
+						page IDs. A page with the ID `/work/project-1` becomes just `project-1`. 
+						TXT
+				)
+			),
+			'required' => array('parent', 'order')
+		);
+	}
+
+	/**
 	 * The page search schema.
 	 *
 	 * @return array
