@@ -329,14 +329,21 @@ class Routes {
 	}
 
 	/**
-	 * Register the MCP resource route.
+	 * Register the MCP resource route and its server card route
+	 * (including the `/.well-known/mcp.json` alias).
 	 *
 	 * @param Router $Router
 	 */
 	private static function registerMcpRoute(Router $Router): void {
 		$Router->register(
 			AM_MCP_SERVER_URL,
-			array(McpController::class, 'render'),
+			array(McpController::class, 'handleRequest'),
+			AM_MCP_SERVER_ENABLED
+		);
+
+		$Router->register(
+			'/\.well-known/mcp(/server-card)?\.json',
+			array(McpController::class, 'serverCard'),
 			AM_MCP_SERVER_ENABLED
 		);
 	}
