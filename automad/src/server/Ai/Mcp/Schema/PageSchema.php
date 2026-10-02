@@ -176,6 +176,29 @@ class PageSchema {
 	}
 
 	/**
+	 * The page publish schema.
+	 *
+	 * @return array
+	 */
+	public static function publish(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Publication Schema',
+			'description' => 'The Automad page publication input schema.',
+			'type' => 'object',
+			'properties' => array(
+				'id' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						The ID is the page that will be published.
+						TXT
+				)
+			),
+			'required' => array('id')
+		);
+	}
+
+	/**
 	 * The page read schema.
 	 *
 	 * @return array
