@@ -36,7 +36,6 @@
 namespace Automad\Ai\Mcp;
 
 use Automad\Auth\Token\AccessToken;
-use Automad\System\FileSystem;
 use Mcp\Schema\Enum\ProtocolVersion;
 use Mcp\Server as SdkServer;
 use Mcp\Server\Session\FileSessionStore;
@@ -136,7 +135,7 @@ class Server {
 	 * @return FileSessionStore
 	 */
 	private static function createSessionStore(bool $isAuthenticated): FileSessionStore {
-		$dir = FileSystem::getTmpDir() . '/mcp-sessions/' . ($isAuthenticated ? 'auth' : 'public');
+		$dir = AM_DIR_TMP . '/mcp-sessions/' . ($isAuthenticated ? 'admin' : 'public');
 		$ttl = $isAuthenticated ? self::SESSION_TTL_AUTHENTICATED : self::SESSION_TTL_PUBLIC;
 
 		return new FileSessionStore($dir, $ttl);
