@@ -98,7 +98,7 @@ class PageUpdate extends AbstractTool {
 			string $title,
 			string $template,
 			array $tags = array(),
-			array $__CONTENT__ = array()
+			array $content = array()
 		) {
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
@@ -110,11 +110,10 @@ class PageUpdate extends AbstractTool {
 
 			$data = $PageTransformer->updateFromAgent(
 				$Page,
-				$id,
 				$title,
 				$template,
 				$tags,
-				$__CONTENT__
+				$content
 			);
 
 			$Page->save($data, $template);

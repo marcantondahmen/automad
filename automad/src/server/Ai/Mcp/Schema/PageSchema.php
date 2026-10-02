@@ -83,7 +83,7 @@ class PageSchema {
 						'type'=> 'string'
 					)
 				),
-				'__CONTENT__' => array(
+				'content' => array(
 					'type'=> 'object',
 					'description'=> 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
 					'additionalProperties'=> array(
@@ -170,19 +170,19 @@ class PageSchema {
 					'description' => 'The template used by the page.'
 				),
 				'tags'=> array(
-					'type'=> 'array',
-					'description'=> 'Optional tags assigned to the page.',
-					'items'=> array(
-						'type'=> 'string'
+					'type' => 'array',
+					'description' => 'Optional tags assigned to the page.',
+					'items' => array(
+						'type' => 'string'
 					)
 				),
-				'__CONTENT__' => array(
-					'type'=> 'object',
-					'description'=> 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
-					'additionalProperties'=> array(
-						'type'=> 'array',
-						'items'=> array(
-							'$ref'=> PageSchema::BLOCK
+				'content' => array(
+					'type' => 'object',
+					'description' => 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
+					'additionalProperties' => array(
+						'type' => 'array',
+						'items' => array(
+							'$ref' => PageSchema::BLOCK
 						)
 					)
 				)

@@ -47,18 +47,16 @@ class PageTransformerTest extends TestCase {
 	public function testUpdateFromAgentEquals(string $filePage, string $fileAgent, string $fileUpdated) {
 		$dir = __DIR__ . '/PageTransformer/updateFromAgent';
 		$Automad = (new Mock())->createAutomad();
-		$data = FileSystem::readJson($dir . "/$filePage.json", true);
-		$Page = new Page($data, $Automad->Shared);
+		$Page = new Page(FileSystem::readJson($dir . "/$filePage.json", true), $Automad->Shared);
 		$PageTransformer = new PageTransformer($Automad);
-		$agentData = FileSystem::readJson($dir . "/$fileAgent.json");
+		$agentData = FileSystem::readJson($dir . "/$fileAgent.json", true);
 
 		$updated = $PageTransformer->updateFromAgent(
 			$Page,
-			$agentData['id'],
 			$agentData['title'],
 			$agentData['template'],
 			$agentData['tags'],
-			$agentData['__CONTENT__']
+			$agentData['content']
 		);
 
 		/** @disregard */

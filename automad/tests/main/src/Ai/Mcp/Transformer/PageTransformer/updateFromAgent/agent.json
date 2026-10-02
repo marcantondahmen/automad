@@ -3,7 +3,7 @@
 	"title": "MCP Test",
 	"template": "page_full_width_centered",
 	"tags": [],
-	"__CONTENT__": {
+	"content": {
 		"+main": [
 			{
 				"id": "OwZgnSLZEvOX",

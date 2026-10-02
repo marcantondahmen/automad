@@ -79,23 +79,19 @@ class PageTransformer {
 	 */
 	public function toAgent(Page $Page): array {
 		// Inject an alias for the origUrl called `id` that can be easily referred to.
-		$data = array('id' => $Page->origUrl, '__CONTENT__' => array());
+		$data = array('id' => $Page->origUrl, 'url' => AM_SERVER . $Page->origUrl, 'content' => array(), 'meta' => array());
 
 		foreach ($Page->data as $key => $value) {
 			if (str_starts_with($key, '+')) {
-				$data['__CONTENT__'][$key] = Blocks::toAgent(
+				$data['content'][$key] = Blocks::toAgent(
 					$value['blocks'] ?? array(),
 					$this->Automad->ComponentCollection
 				);
 			} else {
-				if (in_array($key, PageTransformer::INCLUDED_FIELDS) || !str_starts_with($key, ':')) {
-					$data[$key] = $value;
+				if ((in_array($key, PageTransformer::INCLUDED_FIELDS) || preg_match('/^[a-z]/i', $key)) && !empty($value)) {
+					$data['meta'][$key] = $value;
 				}
 			}
-		}
-
-		if (($data[Fields::URL] ?? '') == $Page->origUrl || empty($data[Fields::URL])) {
-			unset($data[Fields::URL]);
 		}
 
 		return $data;
@@ -105,20 +101,18 @@ class PageTransformer {
 	 * Update a page with transformed incoming agent data.
 	 *
 	 * @param Page $Page
-	 * @param string $id
 	 * @param string $title
 	 * @param string $template
 	 * @param array $tags
-	 * @param array $__CONTENT__
+	 * @param array $content
 	 * @return array
 	 */
 	public function updateFromAgent(
 		Page $Page,
-		string $id,
 		string $title,
 		string $template,
 		array $tags = array(),
-		array $__CONTENT__ = array()
+		array $content = array()
 	): array {
 		$data = array_filter(
 			$Page->data,
@@ -133,7 +127,7 @@ class PageTransformer {
 		$data[Fields::TITLE] = $title;
 		$data[Fields::TAGS] = join(', ', $tags);
 
-		foreach ($__CONTENT__ as $key => $blocks) {
+		foreach ($content as $key => $blocks) {
 			$originalBlocks = array();
 
 			if (array_key_exists($key, $Page->data)) {

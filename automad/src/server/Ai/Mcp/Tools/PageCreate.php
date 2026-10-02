@@ -107,7 +107,7 @@ class PageCreate extends AbstractTool {
 			string $title,
 			string $template,
 			array $tags = array(),
-			array $__CONTENT__ = array()
+			array $content = array()
 		) {
 			$Automad = Automad::fromCache();
 			$Parent = $Automad->getPage($parent);
@@ -116,11 +116,10 @@ class PageCreate extends AbstractTool {
 				throw new ToolCallException("Parent page [$parent] not found.");
 			}
 
-			$data = array();
-
-			foreach ($__CONTENT__ as $key => $blocks) {
-				$data[$key] = array('blocks' => Blocks::fromAgent($blocks));
-			}
+			$data = array_map(
+				fn ($blocks): array => array('blocks' => Blocks::fromAgent($blocks)),
+				$content
+			);
 
 			$Page = Page::add($Parent, $title, $template, true, $data);
 
