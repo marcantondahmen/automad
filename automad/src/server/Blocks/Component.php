@@ -137,6 +137,7 @@ class Component extends AbstractBlock {
 				'string',
 				<<< TXT
 					The ID of an existing reusable component that is rendered in place of this block.
+					Use the `automad://components` resource to get a list of existing components.
 					TXT
 			)
 		);
