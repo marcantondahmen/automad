@@ -59,6 +59,16 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Server {
 	/**
+	 * The session lifetime in seconds for authenticated clients.
+	 */
+	private const SESSION_TTL_AUTHENTICATED = 3600;
+
+	/**
+	 * The session lifetime in seconds for unauthenticated clients.
+	 */
+	private const SESSION_TTL_PUBLIC = 300;
+
+	/**
 	 * The SDK server instance.
 	 */
 	private SdkServer $SdkServer;
@@ -73,7 +83,7 @@ class Server {
 
 		$Builder = SdkServer::builder()
 			->setServerInfo($name, AM_VERSION, title: $name)
-			->setSession(new FileSessionStore(FileSystem::getTmpDir() . '/mcp-sessions'))
+			->setSession(self::createSessionStore($isAuthenticated))
 			->setModernVersions(array(ProtocolVersion::V2026_07_28));
 
 		foreach (Provider::getTools($isAuthenticated) as $Tool) {
@@ -114,5 +124,21 @@ class Server {
 		$response = $this->SdkServer->run(new StreamableHttpTransport($request));
 
 		return $response;
+	}
+
+	/**
+	 * Create the session store for the current authentication state. Authenticated and unauthenticated
+	 * clients never share a store, so that short-lived public sessions can't evict authenticated ones
+	 * and a session ID is only valid for the authentication state it was created under. This means that
+	 * a client has to initialize a new session after a token was revoked or added.
+	 *
+	 * @param bool $isAuthenticated
+	 * @return FileSessionStore
+	 */
+	private static function createSessionStore(bool $isAuthenticated): FileSessionStore {
+		$dir = FileSystem::getTmpDir() . '/mcp-sessions/' . ($isAuthenticated ? 'auth' : 'public');
+		$ttl = $isAuthenticated ? self::SESSION_TTL_AUTHENTICATED : self::SESSION_TTL_PUBLIC;
+
+		return new FileSessionStore($dir, $ttl);
 	}
 }

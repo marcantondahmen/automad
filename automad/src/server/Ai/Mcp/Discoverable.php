@@ -49,6 +49,12 @@ interface Discoverable {
 	/**
 	 * Return true in order to make tool or resource private.
 	 *
+	 * The Provider is the one and only place where this is enforced: private tools and resources
+	 * are not discovered for unauthenticated requests and are therefore never registered with the
+	 * MCP server, which makes their handlers unreachable. Handlers must not check authentication
+	 * on their own. The method is intentionally required so that every new tool or resource has
+	 * to choose explicitly.
+	 *
 	 * @return bool
 	 */
 	public static function requiresAuth(): bool;

@@ -52,7 +52,7 @@ class Pages extends AbstractResource {
 	 * @return string
 	 */
 	public function getDescription(): string {
-		return 'A collection of all public and private pages. Use the page uri that is associated with a page in order to get the entire page object including all associated block data.';
+		return 'A collection of all pages that are visible to the caller. Authenticated clients also receive private pages and drafts. Use the page uri that is associated with a page in order to get the entire page object including all associated block data.';
 	}
 
 	/**

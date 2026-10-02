@@ -53,27 +53,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Provider {
 	/**
-	 * The array of discovered resource instances.
-	 */
-	private static array $resources = array();
-
-	/**
-	 * The array of discovered tool instances.
-	 */
-	private static array $tools = array();
-
-	/**
 	 * Return all discovered resources.
 	 *
 	 * @param bool $isAuthenticated
 	 * @return AbstractResource[]
 	 */
 	public static function getResources(bool $isAuthenticated): array {
-		if (empty(self::$resources)) {
-			self::$resources = self::instantiate(self::discover('Resources', AbstractResource::class, $isAuthenticated));
-		}
-
-		return self::$resources;
+		return self::instantiate(self::discover('Resources', AbstractResource::class, $isAuthenticated));
 	}
 
 	/**
@@ -83,11 +69,7 @@ class Provider {
 	 * @return AbstractTool[]
 	 */
 	public static function getTools(bool $isAuthenticated): array {
-		if (empty(self::$tools)) {
-			self::$tools = self::instantiate(self::discover('Tools', AbstractTool::class, $isAuthenticated));
-		}
-
-		return self::$tools;
+		return self::instantiate(self::discover('Tools', AbstractTool::class, $isAuthenticated));
 	}
 
 	/**

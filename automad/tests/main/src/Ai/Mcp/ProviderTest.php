@@ -2,11 +2,28 @@
 
 namespace Automad\Ai\Mcp;
 
-use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\TestCase;
 
-#[RunTestsInSeparateProcesses]
 class ProviderTest extends TestCase {
+	public function testPrivateIsNeverPublic() {
+		$publicTools = array_map(fn ($Tool) => $Tool::class, Provider::getTools(false));
+		$publicResources = array_map(fn ($Resource) => $Resource::class, Provider::getResources(false));
+
+		foreach (Provider::getTools(true) as $Tool) {
+			if ($Tool::requiresAuth()) {
+				/** @disregard */
+				$this->assertNotContains($Tool::class, $publicTools);
+			}
+		}
+
+		foreach (Provider::getResources(true) as $Resource) {
+			if ($Resource::requiresAuth()) {
+				/** @disregard */
+				$this->assertNotContains($Resource::class, $publicResources);
+			}
+		}
+	}
+
 	public function testPrivateIsSame() {
 		/** @disregard */
 		$this->assertSame(
