@@ -154,7 +154,11 @@ class PageCreate extends AbstractTool {
 				$content
 			);
 
-			$data[Fields::DATE] = $date;
+			// An empty date would override the default date that is the current time.
+			if ($date !== '') {
+				$data[Fields::DATE] = $date;
+			}
+
 			$data[Fields::HIDDEN] = $hidden;
 			$data[Fields::TAGS] = join(', ', $tags);
 
@@ -166,7 +170,7 @@ class PageCreate extends AbstractTool {
 
 			Cache::clear();
 
-			return $PageTransformer->toAgent($Page, true);
+			return $PageTransformer->toAgent($Page);
 		};
 	}
 

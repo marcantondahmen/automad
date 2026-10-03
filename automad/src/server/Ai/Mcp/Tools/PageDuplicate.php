@@ -61,7 +61,7 @@ class PageDuplicate extends AbstractTool {
 	public function getAnnotations(): ToolAnnotations|null {
 		return new ToolAnnotations(
 			readOnlyHint: false,
-			destructiveHint: true,
+			destructiveHint: false,
 			idempotentHint: false,
 			openWorldHint: false
 		);
@@ -111,7 +111,7 @@ class PageDuplicate extends AbstractTool {
 				throw new ToolCallException("Page [$id] was not duplicated.");
 			}
 
-			return $PageTransformer->toAgent($New, true);
+			return $PageTransformer->toAgent($New);
 		};
 	}
 

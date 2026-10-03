@@ -78,14 +78,21 @@ class CardTest extends TestCase {
 
 		/** @disregard */
 		$this->assertSame(1, substr_count($html, '<style>'));
+		// The favicons are the only external references, all styles are inlined.
 		/** @disregard */
-		$this->assertStringNotContainsString('<link', $html);
+		$this->assertSame(2, substr_count($html, '<link'));
+		/** @disregard */
+		$this->assertStringNotContainsString('rel="stylesheet"', $html);
+		/** @disregard */
+		$this->assertStringContainsString('rel="icon"', $html);
+		/** @disregard */
+		$this->assertStringContainsString('rel="alternate icon"', $html);
 		/** @disregard */
 		$this->assertStringNotContainsString('<script', $html);
 		/** @disregard */
 		$this->assertStringNotContainsString('<img', $html);
 		/** @disregard */
-		$this->assertStringContainsString('font-family: ui-monospace', $html);
+		$this->assertStringContainsString('font-family:ui-monospace', $html);
 	}
 
 	public function testJsonMatchesCard() {
