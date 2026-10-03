@@ -85,15 +85,6 @@ class ComponentList extends AbstractTool {
 	}
 
 	/**
-	 * The tool's input schema.
-	 *
-	 * @return array
-	 */
-	public function getInputSchema(): array {
-		return array();
-	}
-
-	/**
 	 * The tool's name.
 	 *
 	 * @return string

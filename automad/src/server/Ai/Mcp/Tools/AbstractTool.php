@@ -77,9 +77,11 @@ abstract class AbstractTool implements Discoverable {
 	/**
 	 * The tool's input schema.
 	 *
-	 * @return array
+	 * @return array|null
 	 */
-	abstract public function getInputSchema(): array;
+	public function getInputSchema(): array|null {
+		return null;
+	}
 
 	/**
 	 * The tool's name, as used by MCP clients to call it.

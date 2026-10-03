@@ -104,9 +104,9 @@ class PagePublish extends AbstractTool {
 	/**
 	 * The tool's input schema.
 	 *
-	 * @return array
+	 * @return array|null
 	 */
-	public function getInputSchema(): array {
+	public function getInputSchema(): array|null {
 		return PageSchema::publish();
 	}
 
