@@ -155,7 +155,7 @@ class Filelist extends AbstractBlock {
 				<<< TXT
 					The Automad template that is used to render each file of the list. Before selecting a
 					template, read the available filelist templates from the `filelist_template_list`
-					resource and use one of the returned template files.
+					tool and use one of the returned template files.
 					TXT
 			),
 			'glob' => new AgentFieldSchema(

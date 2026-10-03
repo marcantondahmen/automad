@@ -99,11 +99,11 @@ class PageTemplateList extends AbstractTool {
 	}
 
 	/**
-	 * the tool's input schema.
+	 * The tool's input schema.
 	 *
 	 * @return array
 	 */
-	public function getinputschema(): array {
+	public function getInputSchema(): array {
 		return array();
 	}
 
@@ -124,7 +124,7 @@ class PageTemplateList extends AbstractTool {
 	}
 
 	/**
-	 * Return true in order to make tool or resource private.
+	 * Return true in order to make the tool private.
 	 *
 	 * @return bool
 	 */

@@ -194,7 +194,7 @@ class PageTree extends AbstractTool {
 	}
 
 	/**
-	 * Return true in order to make tool or resource private.
+	 * Return true in order to make the tool private.
 	 *
 	 * @return bool
 	 */

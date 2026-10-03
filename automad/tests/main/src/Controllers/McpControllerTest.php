@@ -16,9 +16,9 @@ class McpControllerTest extends TestCase {
 	public function testServerCardCapabilities() {
 		$card = McpController::getServerCard();
 
-		$this->assertSame(array('tools', 'resources'), array_keys($card['capabilities']));
+		$this->assertSame(array('tools'), array_keys($card['capabilities']));
 		$this->assertSame(array('dynamic'), $card['tools']);
-		$this->assertSame(array('dynamic'), $card['resources']);
+		$this->assertArrayNotHasKey('resources', $card);
 		$this->assertArrayNotHasKey('prompts', $card);
 	}
 

@@ -41,10 +41,10 @@ use Automad\System\FileSystem;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * Discovers MCP tools and resources. Similar to Automad\Engine\FeatureProvider, this class finds
- * classes by including all files in the Tools and Resources subdirectories and then filtering the
- * declared classes by the Tool/Resource abstractClass they implement, instead of requiring the tools
- * and resources themselves to be manually registered or annotated with attributes.
+ * Discovers MCP tools. Similar to Automad\Engine\FeatureProvider, this class finds
+ * classes by including all files in the Tools subdirectory and then filtering the
+ * declared classes by the AbstractTool class they extend, instead of requiring the tools
+ * themselves to be manually registered or annotated with attributes.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -62,12 +62,13 @@ class Provider {
 	}
 
 	/**
-	 * Find all classes in the given subdirectory that implement the Discoverable interface.
+	 * Find all classes in the given subdirectory that implement the Discoverable interface and extend
+	 * the given abstract class. Private classes are skipped for unauthenticated requests.
 	 *
 	 * @param string $dir
-	 * @param bool $isAuthenticated
 	 * @param string $abstractClass
-	 * @return array
+	 * @param bool $isAuthenticated
+	 * @return class-string[]
 	 */
 	private static function discover(string $dir, string $abstractClass, bool $isAuthenticated): array {
 		$files = FileSystem::glob(__DIR__ . "/$dir/*.php");

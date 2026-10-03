@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  * A thin wrapper around the mcp/sdk package.
- * Tools and resources are not registered here directly,
+ * Tools are not registered here directly,
  * but discovered by Automad\Ai\Mcp\Provider.
  *
  * @author Marc Anton Dahmen

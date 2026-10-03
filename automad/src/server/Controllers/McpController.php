@@ -42,7 +42,7 @@ use Nyholm\Psr7\Factory\Psr17Factory;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The MCP controller class. Authenticates and gates requests to the MCP resource endpoint,
+ * The MCP controller class. Authenticates and gates requests to the MCP endpoint,
  * then delegates the actual MCP JSON-RPC protocol handling to Automad\Ai\Mcp\Server.
  * Also serves the server card that makes the MCP endpoint discoverable by MCP clients.
  *
@@ -74,20 +74,18 @@ class McpController {
 				'endpoint' => AM_BASE_URL . AM_MCP_SERVER_URL
 			),
 			'capabilities' => array(
-				'tools' => new \stdClass(),
-				'resources' => new \stdClass()
+				'tools' => new \stdClass()
 			),
 			'authentication' => array(
 				'required' => false,
 				'schemes' => array('bearer')
 			),
-			'tools' => array('dynamic'),
-			'resources' => array('dynamic')
+			'tools' => array('dynamic')
 		);
 	}
 
 	/**
-	 * Handle a request to the MCP resource endpoint.
+	 * Handle a request to the MCP endpoint.
 	 *
 	 * @return string
 	 */

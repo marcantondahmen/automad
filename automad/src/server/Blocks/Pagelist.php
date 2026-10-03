@@ -181,7 +181,7 @@ class Pagelist extends AbstractBlock {
 				<<< TXT
 					The Automad template that is used to render each page preview. Before selecting a
 					template, read the available pagelist templates from the `pagelist_template_list`
-					resource and use one of the returned template files.
+					tool and use one of the returned template files.
 					TXT
 			),
 			'limit' => new AgentFieldSchema(
