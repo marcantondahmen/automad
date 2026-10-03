@@ -40,6 +40,7 @@ use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Api\EditLock;
 use Automad\Core\Automad;
 use Automad\Models\Page;
+use Automad\System\Fields;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -85,8 +86,8 @@ class PageUpdate extends AbstractTool {
 			2. Update the page `content` according to the given input schema. 
 			   Use the full structured output of the `page_read` tool as basis for 
 			   modifications and try to keep block IDs stable when possible.
-			   The fields inside `content` will replace the existing page content.
-			   Leaving out a field from `content` will also remove it on the existing page.
+			   Each field inside `content` replaces the existing field with the same name.
+			   Fields that are not part of `content` are kept as they are.
 				
 			Example: change the text of one paragraph on /about and add a new block at the end,
 			leaving everything else untouched.
@@ -110,9 +111,12 @@ class PageUpdate extends AbstractTool {
 					}
 				}
 			   
-			- Leaving title, tags or template empty or omitting those entirely
-			  will also clear those fields on the existing page.
-			- Content fields you leave out of `content` are deleted.
+			- Only the `id` is required. Properties that are omitted or `null` keep their
+			  current value on the existing page.
+			- Use an empty value in order to clear a property: `date` as an empty string,
+			  `private` or `hidden` as `false` and `tags` as an empty array.
+			  The `title` can not be cleared.
+			- Send an empty array for a content field in order to remove all of its blocks.
 			- Blocks missing from a field's array are deleted.
 			- The order of the array is the order on the page.
 
@@ -132,14 +136,14 @@ class PageUpdate extends AbstractTool {
 	public function getHandler(): callable {
 		return function (
 			string $id,
-			string $title,
-			string $template,
-			string $theme,
-			string $date = '',
-			bool $private = false,
-			bool $hidden = false,
-			array $tags = array(),
-			array $content = array()
+			?string $title = null,
+			?string $template = null,
+			?string $theme = null,
+			?string $date = null,
+			?bool $private = null,
+			?bool $hidden = null,
+			?array $tags = null,
+			?array $content = null
 		) {
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
@@ -161,7 +165,7 @@ class PageUpdate extends AbstractTool {
 				$content
 			);
 
-			$Page->save($data, $template);
+			$Page->save($data, $data[Fields::TEMPLATE] ?? '');
 
 			// See also automad/src/client/admin/components/Forms/Form.ts
 			// in order to match the lock handle style.

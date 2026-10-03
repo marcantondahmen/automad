@@ -383,42 +383,44 @@ class PageSchema {
 					'description' => 'The ID of the page that will be updated.'
 				),
 				'title' => array(
-					'type' => 'string',
-					'description' => 'The title of the page.'
+					'type' => array('string', 'null'),
+					'description' => 'The title of the page. Skip it in order to keep the current title.'
 				),
 				'template' => array(
-					'type' => 'string',
-					'description' => 'The template used by the page. Use the `page_templates` tool to get a list of available templates.'
+					'type' => array('string', 'null'),
+					'description' => 'The template used by the page. Use the `page_template_list` tool to get a list of available templates. Skip it in order to keep the current template.'
 				),
 				'theme' => array(
-					'type' => 'string',
-					'description' => 'The theme that belongs to the selected `template` used by the page.'
+					'type' => array('string', 'null'),
+					'description' => 'The theme that belongs to the selected `template` used by the page. Skip it in order to keep the current theme.'
 				),
 				'date' => array(
-					'type' => 'string',
+					'type' => array('string', 'null'),
 					'format' => 'date-time',
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`.'
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to keep the current date.'
 				),
 				'private' => array(
-					'type' => 'boolean',
-					'description' => 'Whether the page should be kept private and not accessible without authentication.'
+					'type' => array('boolean', 'null'),
+					'description' => 'Whether the page should be kept private and not accessible without authentication. Skip it in order to keep the current state.'
 				),
 				'hidden' => array(
-					'type' => 'boolean',
-					'description' => 'Whether the page should be hidden from page lists and navigation.'
+					'type' => array('boolean', 'null'),
+					'description' => 'Whether the page should be hidden from page lists and navigation. Skip it in order to keep the current state.'
 				),
 				'tags' => array(
-					'type' => 'array',
-					'description' => 'Optional tags assigned to the page.',
+					'type' => array('array', 'null'),
+					'description' => 'Optional tags assigned to the page. Skip it in order to keep the current tags or use an empty array in order to remove all tags.',
 					'items' => array(
 						'type' => 'string'
 					)
 				),
 				'content' => array(
-					'type' => 'object',
+					'type' => array('object', 'null'),
 					'description' => <<< TXT
-						Content for the +... fields (+main, +hero, etc.) provided by the selected template. 
+						Content for the +... fields (+main, +hero, etc.) provided by the selected template.
 						Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!
+						Fields that are not part of `content` are kept as they are. Use an empty array
+						in order to remove all blocks of a field.
 						TXT,
 					'propertyNames' => array(
 						'pattern' => '^\\+.+$'
@@ -431,7 +433,7 @@ class PageSchema {
 					)
 				)
 			),
-			'required'=> array('id', 'title', 'template', 'theme'),
+			'required'=> array('id'),
 			...self::blockDefs()
 		);
 	}

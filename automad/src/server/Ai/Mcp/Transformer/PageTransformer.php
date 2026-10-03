@@ -140,31 +140,35 @@ class PageTransformer {
 	/**
 	 * Update a page with transformed incoming agent data.
 	 *
+	 * All values are optional. A value that is `null` keeps the current value of the page.
+	 * An explicit empty value (`''`, `false` or `[]`) clears the related field, except for the title.
+	 * Only content fields that are part of `$content` are replaced, all other content fields are kept.
+	 *
 	 * @param Page $Page
-	 * @param string $title
-	 * @param string $template
-	 * @param string $theme
-	 * @param string $date
-	 * @param bool $private
-	 * @param bool $hidden
-	 * @param array $tags
-	 * @param array $content
+	 * @param string|null $title
+	 * @param string|null $template
+	 * @param string|null $theme
+	 * @param string|null $date
+	 * @param bool|null $private
+	 * @param bool|null $hidden
+	 * @param array|null $tags
+	 * @param array|null $content
 	 * @return array
 	 */
 	public function updateFromAgent(
 		Page $Page,
-		string $title,
-		string $template,
-		string $theme,
-		string $date = '',
-		bool $private = false,
-		bool $hidden = false,
-		array $tags = array(),
-		array $content = array()
+		?string $title = null,
+		?string $template = null,
+		?string $theme = null,
+		?string $date = null,
+		?bool $private = null,
+		?bool $hidden = null,
+		?array $tags = null,
+		?array $content = null
 	): array {
 		$data = array_filter(
 			$Page->data,
-			fn ($value, $key): bool => (in_array($key, PageTransformer::INCLUDED_FIELDS) || preg_match('/^[a-z]/i', $key)) && !empty($value),
+			fn ($value, $key): bool => (in_array($key, PageTransformer::INCLUDED_FIELDS) || preg_match('/^[^:]/', $key)) && !empty($value),
 			ARRAY_FILTER_USE_BOTH
 		);
 
@@ -172,17 +176,38 @@ class PageTransformer {
 			unset($data[Fields::URL]);
 		}
 
-		$data[Fields::TITLE] = $title;
-		$data[Fields::DATE] = $date;
-		$data[Fields::TEMPLATE] = $template;
-		$data[Fields::THEME] = $theme;
-		$data[Fields::PRIVATE] = $private;
-		$data[Fields::HIDDEN] = $hidden;
-		$data[Fields::TAGS] = join(', ', $tags);
+		// A page must always keep a title, therefore an empty title is ignored.
+		if (!empty($title)) {
+			$data[Fields::TITLE] = $title;
+		}
+
+		if ($template !== null) {
+			$data[Fields::TEMPLATE] = $template;
+		}
+
+		if ($theme !== null) {
+			$data[Fields::THEME] = $theme;
+		}
+
+		if ($date !== null) {
+			$data[Fields::DATE] = $date;
+		}
+
+		if ($private !== null) {
+			$data[Fields::PRIVATE] = $private;
+		}
+
+		if ($hidden !== null) {
+			$data[Fields::HIDDEN] = $hidden;
+		}
+
+		if ($tags !== null) {
+			$data[Fields::TAGS] = join(', ', $tags);
+		}
 
 		$data = array_filter($data, fn ($value) => !empty($value));
 
-		foreach ($content as $key => $blocks) {
+		foreach ($content ?? array() as $key => $blocks) {
 			$originalBlocks = array();
 
 			if (array_key_exists($key, $Page->data)) {
