@@ -105,16 +105,23 @@ abstract class AbstractBlock {
 			'tunes' => $savedBlock['tunes'] ?? array()
 		);
 
-		if (!empty($data['stretched']) || !empty($data['width'])) {
-			$block['tunes']['layout'] = array();
+		// The layout is always rebuilt from the incoming data, since `toAgent()` only exposes
+		// `stretched` and `width` when they are set. Omitting them has to clear the saved layout.
+		// All other tunes that are not exposed to agents are kept as they are.
+		$layout = array();
 
-			if (isset($data['stretched'])) {
-				$block['tunes']['layout']['stretched'] =  $data['stretched'] ?? false;
-			}
+		if (!empty($data['stretched'])) {
+			$layout['stretched'] = true;
+		}
 
-			if (!empty($data['width'])) {
-				$block['tunes']['layout']['width'] =  $data['width'];
-			}
+		if (!empty($data['width'])) {
+			$layout['width'] = $data['width'];
+		}
+
+		if (!empty($layout)) {
+			$block['tunes']['layout'] = $layout;
+		} else {
+			unset($block['tunes']['layout']);
 		}
 
 		$schema = static::agentDataSchema();
