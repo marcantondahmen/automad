@@ -445,7 +445,7 @@
 		},
 		"filelist": {
 			"type": "object",
-			"description": "A dynamic list of files that are matched by a glob pattern, e.g. downloadable PDFs or\nother documents that are attached to a page. Each file is rendered using a filelist\ntemplate. Read the `automad://templates/filelist` resource before choosing one. Use the\n\"gallery\" block to display images visually instead.",
+			"description": "A dynamic list of files that are matched by a glob pattern, e.g. downloadable PDFs or\nother documents that are attached to a page. Each file is rendered using a filelist\ntemplate. Read the `filelist_template_list` tool before choosing one. Use the\n\"gallery\" block to display images visually instead.",
 			"properties": {
 				"id": {
 					"$ref": "#/$defs/blockId"
@@ -466,7 +466,7 @@
 					"type": "object",
 					"properties": {
 						"file": {
-							"description": "The Automad template that is used to render each file of the list. Before selecting a\ntemplate, read the available filelist templates from the `automad://templates/filelist`\nresource and use one of the returned template files.",
+							"description": "The Automad template that is used to render each file of the list. Before selecting a\ntemplate, read the available filelist templates from the `filelist_template_list`\nresource and use one of the returned template files.",
 							"type": "string"
 						},
 						"glob": {
@@ -765,7 +765,7 @@
 		},
 		"pagelist": {
 			"type": "object",
-			"description": "A dynamic and automatically updated list of page previews, e.g. blog posts, news, projects\nor the child pages of a section. Pages can be filtered by their relation to a context page\n(children, siblings or related pages), sorted and limited. Each page is rendered using a\npagelist template. Read the `automad://templates/pagelist` resource before choosing one.",
+			"description": "A dynamic and automatically updated list of page previews, e.g. blog posts, news, projects\nor the child pages of a section. Pages can be filtered by their relation to a context page\n(children, siblings or related pages), sorted and limited. Each page is rendered using a\npagelist template. Read the `pagelist_template_list` tool before choosing one.",
 			"properties": {
 				"id": {
 					"$ref": "#/$defs/blockId"
@@ -790,7 +790,7 @@
 							"type": "string"
 						},
 						"file": {
-							"description": "The Automad template that is used to render each page preview. Before selecting a\ntemplate, read the available pagelist templates from the `automad://templates/pagelist`\nresource and use one of the returned template files.",
+							"description": "The Automad template that is used to render each page preview. Before selecting a\ntemplate, read the available pagelist templates from the `pagelist_template_list`\nresource and use one of the returned template files.",
 							"type": "string"
 						},
 						"limit": {

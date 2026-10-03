@@ -67,7 +67,7 @@ class Snippet extends AbstractBlock {
 		return <<< TXT
 			Renders Automad template language code, either from a snippet file or from inline code.
 			Use it to add dynamic, template-driven content that no other block type provides. Read the
-			`automad://snippets` resource to find existing snippet files and prefer those over writing
+			`snippet_list` tool to find existing snippet files and prefer those over writing
 			inline template code.
 			TXT;
 	}
@@ -157,7 +157,7 @@ class Snippet extends AbstractBlock {
 				'string',
 				<<< TXT
 					The snippet file that is rendered. Before selecting a snippet, read the available snippets
-					from the `automad://snippets` resource and use one of the returned snippet files. Use an
+					from the `snippet_list` tool and use one of the returned snippet files. Use an
 					empty string when defining inline code in "snippet" instead.
 					TXT,
 				optional: true

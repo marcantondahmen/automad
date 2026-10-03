@@ -33,7 +33,7 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\Ai\Mcp\Resources;
+namespace Automad\Ai\Mcp\Tools;
 
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
@@ -41,13 +41,13 @@ use Automad\System\ThemeCollection;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The page templates resource.
+ * The page template list tool.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class TemplatesPage extends AbstractResource {
+class PageTemplateList extends AbstractTool {
 	/**
 	 * @return string
 	 */
@@ -56,6 +56,9 @@ class TemplatesPage extends AbstractResource {
 	}
 
 	/**
+	 * The tool's main handler. Its parameters are reflected on to derive the tool's input schema
+	 * and to map incoming call arguments by name.
+	 *
 	 * @return callable
 	 */
 	public function getHandler(): callable {
@@ -96,19 +99,28 @@ class TemplatesPage extends AbstractResource {
 	}
 
 	/**
-	 * The resource's name.
+	 * the tool's input schema.
+	 *
+	 * @return array
+	 */
+	public function getinputschema(): array {
+		return array();
+	}
+
+	/**
+	 * The tool's name.
 	 *
 	 * @return string
 	 */
 	public function getName(): string {
-		return 'templates/page';
+		return 'page_template_list';
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getTitle(): string {
-		return 'Templates: Page';
+		return 'Page: Template List';
 	}
 
 	/**

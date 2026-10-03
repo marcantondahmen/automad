@@ -62,7 +62,7 @@ class Filelist extends AbstractBlock {
 		return <<< TXT
 			A dynamic list of files that are matched by a glob pattern, e.g. downloadable PDFs or
 			other documents that are attached to a page. Each file is rendered using a filelist
-			template. Read the `automad://templates/filelist` resource before choosing one. Use the
+			template. Read the `filelist_template_list` tool before choosing one. Use the
 			"gallery" block to display images visually instead.
 			TXT;
 	}
@@ -154,7 +154,7 @@ class Filelist extends AbstractBlock {
 				'string',
 				<<< TXT
 					The Automad template that is used to render each file of the list. Before selecting a
-					template, read the available filelist templates from the `automad://templates/filelist`
+					template, read the available filelist templates from the `filelist_template_list`
 					resource and use one of the returned template files.
 					TXT
 			),

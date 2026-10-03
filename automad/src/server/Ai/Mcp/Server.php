@@ -96,18 +96,6 @@ class Server {
 			);
 		}
 
-		foreach (Provider::getResources($isAuthenticated) as $Resource) {
-			$Builder->addResource(
-				handler: $Resource->getHandler(),
-				uri: 'automad://' . $Resource->getName(),
-				name: $Resource->getName(),
-				title: $Resource->getTitle(),
-				description: $Resource->getDescription(),
-				mimeType: $Resource->getMimeType(),
-				annotations: $Resource->getAnnotations()
-			);
-		}
-
 		$this->SdkServer = $Builder->build();
 	}
 

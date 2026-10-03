@@ -35,64 +35,74 @@
 
 namespace Automad\Ai\Mcp\Resources;
 
-use Automad\Ai\Mcp\Discoverable;
-use Mcp\Schema\Annotations;
+use Automad\Ai\Mcp\Tools\AbstractTool;
+use Automad\System\PackageCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract class for MCP resources. Derived classes are discovered automatically by
- * Automad\Ai\Mcp\Provider from the Automad\Ai\Mcp\Resources namespace and
- * registered with the MCP server.
+ * The filelist template list tool.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-abstract class AbstractResource implements Discoverable {
+class FilelistTemplateList extends AbstractTool {
 	/**
-	 * The resource's annotations, hinting at its intended audience, priority and last modification.
-	 *
-	 * @return Annotations|null
+	 * @return string
 	 */
-	public function getAnnotations(): Annotations|null {
-		return null;
+	public function getDescription(): string {
+		return 'A list of available filelist templates.';
 	}
 
 	/**
-	 * The resource's description.
-	 *
-	 * @return string
-	 */
-	abstract public function getDescription(): string|null;
-
-	/**
-	 * The resource's main handler, returning its content when read.
+	 * The tool's main handler. Its parameters are reflected on to derive the tool's input schema
+	 * and to map incoming call arguments by name.
 	 *
 	 * @return callable
 	 */
-	abstract public function getHandler(): callable;
-
-	/**
-	 * The resource's MIME type.
-	 *
-	 * @return string
-	 */
-	public function getMimeType(): string {
-		return 'application/json';
+	public function getHandler(): callable {
+		return function () {
+			return array_map(function ($file) {
+				return array(
+					'file' => $file,
+					'source' => preg_replace('/\<#.*?#\>/s', '', strval(file_get_contents(AM_BASE_DIR . AM_DIR_PACKAGES . $file)))
+				);
+			}, PackageCollection::getPackagesDirectoryFilelistTemplates());
+		};
 	}
 
 	/**
-	 * The resource's name.
+	 * the tool's input schema.
 	 *
-	 * @return string
+	 * @return array
 	 */
-	abstract public function getName(): string;
+	public function getinputschema(): array {
+		return array();
+	}
 
 	/**
-	 * The resource's human-readable title.
+	 * The tool's name.
 	 *
 	 * @return string
 	 */
-	abstract public function getTitle(): string;
+	public function getName(): string {
+		return 'filelist_template_list';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTitle(): string {
+		return 'Filelist: Template List';
+	}
+
+	/**
+	 * Return true in order to make tool or resource private.
+	 *
+	 * @return bool
+	 */
+	public static function requiresAuth(): bool {
+		return true;
+	}
 }

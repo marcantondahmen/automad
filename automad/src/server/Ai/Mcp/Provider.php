@@ -35,7 +35,6 @@
 
 namespace Automad\Ai\Mcp;
 
-use Automad\Ai\Mcp\Resources\AbstractResource;
 use Automad\Ai\Mcp\Tools\AbstractTool;
 use Automad\System\FileSystem;
 
@@ -52,16 +51,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class Provider {
-	/**
-	 * Return all discovered resources.
-	 *
-	 * @param bool $isAuthenticated
-	 * @return AbstractResource[]
-	 */
-	public static function getResources(bool $isAuthenticated): array {
-		return self::instantiate(self::discover('Resources', AbstractResource::class, $isAuthenticated));
-	}
-
 	/**
 	 * Return all discovered tools.
 	 *
