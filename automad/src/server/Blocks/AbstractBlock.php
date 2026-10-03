@@ -306,7 +306,10 @@ abstract class AbstractBlock {
 			)
 			: ($block['data'][$key] ?? $schema->getDefault());
 
-		if (!$value) {
+		// Empty values of optional fields are skipped in order to keep the output small.
+		// Required fields always have to be part of the output, even when they are empty,
+		// since the agent output must be valid input for the update schema, where those fields are required.
+		if (!$value && $schema->optional) {
 			$value = null;
 		}
 

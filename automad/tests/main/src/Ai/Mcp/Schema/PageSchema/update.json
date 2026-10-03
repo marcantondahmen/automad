@@ -48,10 +48,14 @@
 					"format": "date-time"
 				},
 				{
+					"type": "string",
+					"enum": [""]
+				},
+				{
 					"type": "null"
 				}
 			],
-			"description": "The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to keep the current date."
+			"description": "The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to keep the current date or use an empty string in order to remove the date."
 		},
 		"private": {
 			"anyOf": [
@@ -1012,7 +1016,7 @@
 					"additionalProperties": false
 				}
 			},
-			"required": ["type", "data"],
+			"required": ["type"],
 			"additionalProperties": false
 		},
 		"table": {
@@ -1086,7 +1090,7 @@
 					"additionalProperties": false
 				}
 			},
-			"required": ["type", "data"],
+			"required": ["type"],
 			"additionalProperties": false
 		},
 		"teX": {

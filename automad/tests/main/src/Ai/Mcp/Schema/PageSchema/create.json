@@ -956,7 +956,7 @@
 					"additionalProperties": false
 				}
 			},
-			"required": ["type", "data"],
+			"required": ["type"],
 			"additionalProperties": false
 		},
 		"table": {
@@ -1030,7 +1030,7 @@
 					"additionalProperties": false
 				}
 			},
-			"required": ["type", "data"],
+			"required": ["type"],
 			"additionalProperties": false
 		},
 		"teX": {

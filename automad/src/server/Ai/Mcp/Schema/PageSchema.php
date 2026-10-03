@@ -406,9 +406,10 @@ class PageSchema {
 				'date' => array(
 					'anyOf' => array(
 						array('type' => 'string', 'format' => 'date-time'),
+						array('type' => 'string', 'enum' => array('')),
 						array('type' => 'null')
 					),
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to keep the current date.'
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to keep the current date or use an empty string in order to remove the date.'
 				),
 				'private' => array(
 					'anyOf' => array(
@@ -488,7 +489,9 @@ class PageSchema {
 			$type = lcfirst(basename(str_replace('\\', '/', $blockClass)));
 
 			$blockSchema = $blockClass::getAgentSchema();
-			$required = array('type', ...(empty($blockSchema['data']) ? array() : array('data')));
+			// The data property is only required when it contains required fields.
+			// Blocks where all fields are optional can be sent without any data.
+			$required = array('type', ...(empty($blockSchema['data']['required']) ? array() : array('data')));
 
 			$blocks[$type] = array(
 				'type' => 'object',

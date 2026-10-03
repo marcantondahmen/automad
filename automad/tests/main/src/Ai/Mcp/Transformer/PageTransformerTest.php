@@ -2,14 +2,28 @@
 
 namespace Automad\Ai\Mcp\Transformer;
 
+use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Blocks\AbstractBlock;
+use Automad\Core\Blocks;
 use Automad\Models\Page;
 use Automad\System\Fields;
 use Automad\System\FileSystem;
 use Automad\Test\Mock;
+use Opis\JsonSchema\Errors\ErrorFormatter;
+use Opis\JsonSchema\Validator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class PageTransformerTest extends TestCase {
+	/**
+	 * Realistic minimum for fields that can't be empty in order to be a meaningful block.
+	 */
+	const array STORED_DATA = array(
+		'filelist' => array('sortOrder' => 'asc'),
+		'header' => array('level' => 2),
+		'nestedList' => array('style' => 'unordered')
+	);
+
 	public static function dataForTestToAgentEquals() {
 		return array(
 			array(
@@ -32,6 +46,69 @@ class PageTransformerTest extends TestCase {
 				'agent',
 				'updated'
 			),
+		);
+	}
+
+	public function testBlockWithoutDataIsValidUpdateInput() {
+		$Automad = (new Mock())->createAutomad();
+
+		// Make sure that all block classes are loaded.
+		PageSchema::update();
+
+		$classes = array_filter(
+			get_declared_classes(),
+			fn (string $class): bool => is_subclass_of($class, AbstractBlock::class) && !(new \ReflectionClass($class))->isAbstract()
+		);
+
+		/** @disregard */
+		$this->assertNotEmpty($classes);
+
+		$invalid = array();
+
+		foreach ($classes as $class) {
+			$type = lcfirst(basename(str_replace('\\', '/', $class)));
+			$stored = array(
+				'id' => 'block-' . $type,
+				'type' => $type,
+				'data' => self::STORED_DATA[$type] ?? array(),
+				'tunes' => array()
+			);
+
+			$error = $this->validate(
+				array('id' => '/test', 'content' => array('+main' => Blocks::toAgent(array($stored), $Automad->ComponentCollection)))
+			);
+
+			if ($error !== null) {
+				$invalid[$type] = $error;
+			}
+		}
+
+		/** @disregard */
+		$this->assertSame(array(), $invalid, 'Block types with output that is not valid input for the update schema.');
+	}
+
+	public function testPageIsValidUpdateInput() {
+		$Automad = (new Mock())->createAutomad();
+		$data = FileSystem::readJson(__DIR__ . '/PageTransformer/toAgent/page.json', true);
+		$Page = new Page($data, $Automad->Shared);
+
+		/** @disregard */
+		$this->assertValidUpdateInput(
+			(new PageTransformer($Automad))->toAgent($Page),
+			'page fixture'
+		);
+	}
+
+	public function testPageWithoutDateIsValidUpdateInput() {
+		$Automad = (new Mock())->createAutomad();
+		$data = FileSystem::readJson(__DIR__ . '/PageTransformer/toAgent/page.json', true);
+		$data['date'] = '';
+		$Page = new Page($data, $Automad->Shared);
+
+		/** @disregard */
+		$this->assertValidUpdateInput(
+			(new PageTransformer($Automad))->toAgent($Page),
+			'page without date'
 		);
 	}
 
@@ -168,6 +245,20 @@ class PageTransformerTest extends TestCase {
 	}
 
 	/**
+	 * Validate the data against the update schema.
+	 *
+	 * @param array $data
+	 * @param string $label
+	 */
+	private function assertValidUpdateInput(array $data, string $label): void {
+		/** @disregard */
+		$this->assertNull(
+			$this->validate($data),
+			"The output for the $label is not valid input for the update schema."
+		);
+	}
+
+	/**
 	 * Create a page from the update fixture that is private, hidden, dated, tagged
 	 * and has an additional `+hero` content field.
 	 *
@@ -189,5 +280,36 @@ class PageTransformerTest extends TestCase {
 		);
 
 		return new Page($data, $Automad->Shared);
+	}
+
+	/**
+	 * Validate the data against the update schema and return the first
+	 * detailed errors or null when the data is valid.
+	 *
+	 * @param array $data
+	 * @return string|null
+	 */
+	private function validate(array $data): ?string {
+		$schema = json_decode(json_encode(PageSchema::update(), JSON_UNESCAPED_SLASHES));
+		$result = (new Validator())->validate(json_decode(json_encode($data)), $schema);
+
+		if ($result->isValid() || !$result->error()) {
+			return null;
+		}
+
+		// The leaf errors are the ones that explain what is wrong,
+		// all other messages only describe the `oneOf` branches.
+		$errors = (new ErrorFormatter())->format($result->error(), true);
+		$messages = array();
+
+		foreach ($errors as $path => $list) {
+			foreach ($list as $message) {
+				if (!str_contains($message, 'must match $ref') && !str_contains($message, 'should match')) {
+					$messages[] = "$path: $message";
+				}
+			}
+		}
+
+		return join(' | ', array_slice(array_unique($messages), 0, 6)) ?: 'invalid';
 	}
 }
