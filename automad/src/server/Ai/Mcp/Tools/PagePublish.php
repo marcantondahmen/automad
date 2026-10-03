@@ -36,8 +36,8 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
-use Automad\Models\Page;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -74,9 +74,15 @@ class PagePublish extends AbstractTool {
 		return <<< TXT
 			Publish an Automad page.
 
-			All content edits are saved as draft first. 
+			All content edits are saved as draft first.
 			In order to make them publicly available, a page must
 			be published.
+
+			The tool returns the basic data of the published page.
+			Note that publishing a page whose title was changed also changes its
+			`id` and `url`, because the slug is updated on publish. In that case the
+			response contains the new `id` and the old one as `previousId`.
+			Use the new `id` for all further calls.
 			TXT;
 	}
 
@@ -97,7 +103,20 @@ class PagePublish extends AbstractTool {
 				throw new ToolCallException("Page [$id] not found.");
 			}
 
-			return $Page->publish();
+			$Published = $Page->publish();
+
+			if (!$Published) {
+				throw new ToolCallException("Page [$id] could not be published.");
+			}
+
+			$data = (new PageTransformer($Automad))->baseData($Published);
+
+			// Publishing a page that has a new title also changes its ID and URL.
+			if ($data['id'] !== $id) {
+				$data['previousId'] = $id;
+			}
+
+			return $data;
 		};
 	}
 
