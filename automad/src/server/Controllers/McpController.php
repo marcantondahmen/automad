@@ -36,7 +36,6 @@
 namespace Automad\Controllers;
 
 use Automad\Ai\Mcp\Server;
-use Automad\Core\Str;
 use Nyholm\Psr7\Factory\Psr17Factory;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -58,15 +57,13 @@ class McpController {
 	 * @return array
 	 */
 	public static function getServerCard(): array {
-		$host = strval(preg_replace('#^https?://#i', '', strval(AM_SERVER)));
-
 		return array(
 			'$schema' => 'https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json',
 			'version' => '1.0',
 			'protocolVersion' => '2025-11-25',
 			'serverInfo' => array(
-				'name' => 'automad-' . Str::sanitize($host, true),
-				'title' => "Automad ($host)",
+				'name' => Server::getName(),
+				'title' => Server::getTitle(),
 				'version' => AM_VERSION
 			),
 			'transport' => array(
