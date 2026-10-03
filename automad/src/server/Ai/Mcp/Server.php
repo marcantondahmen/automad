@@ -35,14 +35,19 @@
 
 namespace Automad\Ai\Mcp;
 
+use Automad\Ai\Mcp\Validator\InputValidator;
 use Automad\Auth\Token\AccessToken;
 use Automad\Core\Str;
+use Mcp\Capability\Registry;
+use Mcp\Capability\Registry\ReferenceHandler;
 use Mcp\Schema\Enum\ProtocolVersion;
 use Mcp\Server as SdkServer;
+use Mcp\Server\Handler\Request\CallToolHandler;
 use Mcp\Server\Session\FileSessionStore;
 use Mcp\Server\Transport\StreamableHttpTransport;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\NullLogger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -79,10 +84,22 @@ class Server {
 	public function __construct() {
 		$isAuthenticated = AccessToken::verifyRequest();
 
+		// The registry is shared with a custom tool call handler that validates the tool arguments
+		// with a validator that reports errors that are readable for agents.
+		// Request handlers that are added to the builder take precedence over the built-in ones.
+		$Registry = new Registry();
+
 		$Builder = SdkServer::builder()
 			->setServerInfo(Server::getName(), AM_VERSION, title: Server::getTitle())
 			->setSession(self::createSessionStore($isAuthenticated))
-			->setModernVersions(array(ProtocolVersion::V2026_07_28));
+			->setModernVersions(array(ProtocolVersion::V2026_07_28))
+			->setRegistry($Registry)
+			->addRequestHandler(new CallToolHandler(
+				$Registry,
+				new ReferenceHandler(),
+				new NullLogger(),
+				new InputValidator()
+			));
 
 		foreach (Provider::getTools($isAuthenticated) as $Tool) {
 			$Builder->addTool(
