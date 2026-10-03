@@ -35,6 +35,7 @@
 
 namespace Automad\Controllers;
 
+use Automad\Ai\Mcp\Card;
 use Automad\Ai\Mcp\Server;
 use Nyholm\Psr7\Factory\Psr17Factory;
 
@@ -43,7 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  * The MCP controller class. Authenticates and gates requests to the MCP endpoint,
  * then delegates the actual MCP JSON-RPC protocol handling to Automad\Ai\Mcp\Server.
- * Also serves the server card that makes the MCP endpoint discoverable by MCP clients.
+ * Also serves the server card that makes the MCP endpoint discoverable by MCP clients and
+ * a human readable version of it for browsers requesting the MCP endpoint.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -51,46 +53,15 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class McpController {
 	/**
-	 * Build the server card as described in SEP-1649.
-	 *
-	 * @see https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1649
-	 * @return array
-	 */
-	public static function getServerCard(): array {
-		return array(
-			'$schema' => 'https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json',
-			'version' => '1.0',
-			'protocolVersion' => '2025-11-25',
-			'serverInfo' => array(
-				'name' => Server::getName(),
-				'title' => Server::getTitle(),
-				'version' => AM_VERSION
-			),
-			'transport' => array(
-				'type' => 'streamable-http',
-				'endpoint' => AM_BASE_URL . AM_MCP_SERVER_URL
-			),
-			'capabilities' => array(
-				'tools' => new \stdClass()
-			),
-			'authentication' => array(
-				'required' => false,
-				'schemes' => array('bearer')
-			),
-			'tools' => array('dynamic')
-		);
-	}
-
-	/**
 	 * Handle a request to the MCP endpoint.
 	 *
 	 * @return string
 	 */
 	public static function handleRequest(): string {
-		if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
-			http_response_code(405);
+		$method = $_SERVER['REQUEST_METHOD'] ?? '';
 
-			return '';
+		if ($method !== 'POST') {
+			return self::handleNonPostRequest($method);
 		}
 
 		$Psr17Factory = new Psr17Factory();
@@ -146,6 +117,33 @@ class McpController {
 		header('Content-Type: application/json');
 		header('Cache-Control: public, max-age=3600');
 
-		return strval(json_encode(self::getServerCard(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+		return Card::json();
+	}
+
+	/**
+	 * Handle a non-POST request to the MCP endpoint. Browsers get the human readable server card,
+	 * everything else (including clients asking for a server-sent event stream that is not offered)
+	 * gets a 405 response.
+	 *
+	 * @param string $method
+	 * @return string
+	 */
+	private static function handleNonPostRequest(string $method): string {
+		$accept = strtolower($_SERVER['HTTP_ACCEPT'] ?? '');
+
+		if (
+			in_array($method, array('GET', 'HEAD'), true) &&
+			str_contains($accept, 'text/html') &&
+			!str_contains($accept, 'text/event-stream')
+		) {
+			header('Content-Type: text/html; charset=utf-8');
+
+			return $method === 'HEAD' ? '' : Card::html();
+		}
+
+		header('Allow: POST');
+		http_response_code(405);
+
+		return '';
 	}
 }

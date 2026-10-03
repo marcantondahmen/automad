@@ -82,6 +82,16 @@ export const renderMcpSection = (): string => {
 					</div>
 				</div>
 				<div>
+					<p>${App.text('systemMcpServerCardInfo')}</p>
+					<a
+						href="${mcpUrl}"
+						class="${CSS.button}"
+						target="_blank"
+					>
+						${App.text('systemMcpServerCard')}
+					</a>
+				</div>
+				<div>
 					<p>${App.text('systemMcpTokenInfo')}</p>
 					<am-access-token-list></am-access-token-list>
 				</div>

@@ -611,6 +611,8 @@
 	"systemMcpCardInfo": "Allow AI agents and MCP clients to read and manage content on this site",
 	"systemMcpConnectInfo": "The MCP server is available at the following URL. Use this URL when configuring your MCP client to connect to Automad.",
 	"systemMcpInfo": "Automad includes a built-in MCP server that allows AI agents and other MCP-compatible clients to read and manage pages and content on this site over the Model Context Protocol.",
+	"systemMcpServerCard": "Server Card",
+	"systemMcpServerCardInfo": "Open the server card of the MCP server in your browser. It describes how to connect an MCP client to this site and lists all details of the server, such as its endpoint, protocol version and authentication.",
 	"systemMcpTokenInfo": "To connect an MCP client to Automad, an access token is required to authenticate the connection to the MCP server. Generate a token below and provide it to your MCP client when setting up the connection. Keep the token private, as anyone who has access to it may be able to interact with Automad through the MCP server.",
 	"systemRssFeed": "RSS Feed",
 	"systemRssFeedCardInfo": "Enable and configure the RSS feed for your site",
