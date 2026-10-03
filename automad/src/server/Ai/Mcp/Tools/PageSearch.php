@@ -40,6 +40,7 @@ use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Models\Page;
 use Automad\System\Fields;
+use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -52,6 +53,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class PageSearch extends AbstractTool {
+	/**
+	 * The maximum number of results.
+	 */
+	const int LIMIT = 50;
+
 	/**
 	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
 	 *
@@ -80,8 +86,10 @@ class PageSearch extends AbstractTool {
 			Only pages that contain all keywords will be 
 			included in the search results.
 
-			The search results are sorted by search hit count 
-			in descending order.
+			The search results are sorted by search hit count
+			in descending order. Use the optional `scopeId` in order to only search below
+			a given page. The scope page itself is not part of the results.
+			The homepage `/` as scope searches the whole site.
 
 			Use the `page_read` tool in order to get the 
 			full content for a specific page.
@@ -108,6 +116,16 @@ class PageSearch extends AbstractTool {
 		) {
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
+			$scope = rtrim(trim((string) $scopeId), '/');
+
+			if ($scope !== '' && !$Automad->getPage($scope)) {
+				throw new ToolCallException("Scope page [$scopeId] not found.");
+			}
+
+			// Only pages below the scope page are matched. The homepage as scope matches all pages.
+			$match = $scope === '' ? false : json_encode(array(
+				Fields::ORIG_URL => '~^' . preg_quote($scope, '~') . '/~'
+			));
 
 			$Automad->Pagelist->config(array(
 				'context' => false,
@@ -115,35 +133,24 @@ class PageSearch extends AbstractTool {
 				'excludeCurrent' => false,
 				'excludeHidden' => false,
 				'filter' => false,
-				'limit' => 50,
-				'match' => false,
+				'limit' => PageSearch::LIMIT,
+				'match' => $match,
 				'offset' => 0,
 				'page' => false,
 				'search' => $search,
-				'sort' => false,
+				'sort' => Fields::SEARCH_RESULTS_COUNT . ' desc',
 				'template' => false,
 				'type' => false
 			));
 
-			$results = array_map(
+			return array_values(array_map(
 				fn (Page $Page) => array(
 					...$PageTransformer->baseData($Page),
 					'context' => html_entity_decode(strip_tags($Page->get(Fields::SEARCH_RESULTS_CONTEXT))),
 					'hitCount' => intval($Page->get(Fields::SEARCH_RESULTS_COUNT))
 				),
-				$Automad->Pagelist->getPages(true)
-			);
-
-			if ($scopeId) {
-				$results = array_filter(
-					$results,
-					fn ($result) => preg_match('#^' . preg_quote($scopeId, '#') . '/#', $result['id'])
-				);
-			}
-
-			usort($results, fn ($a, $b) => ($a > $b) ? 1 : -1);
-
-			return $results;
+				$Automad->Pagelist->getPages()
+			));
 		};
 	}
 
