@@ -91,13 +91,20 @@ class PageRead extends AbstractTool {
 
 			Example: page_read {"id": "/about", "format": "structured"} returns
 			{
-				"id": "/about", 
-				"parent": "/", 
-				"url": "...",
+				"id": "/about",
+				"parent": "/",
+				"url": "http://domain.com/",
+				"title": "About Me",
+				"date": "",
+				"publicationState": "published",
+				"private": false,
+				"hidden": false,
+				"tags": ["..."]
 				"content": {"+main": [ ...blocks with id, type, data... ]},
 				"meta": {"template": "page_sidebar", "title": "About", ":lastModified": "..."}
 			}
-			Use "text" only for reading; it returns plain text per field and cannot be passed to `page_update`.
+
+			Use "text" output `format` only for reading; it returns plain text per field and cannot be passed to `page_update`.
 			TXT;
 	}
 

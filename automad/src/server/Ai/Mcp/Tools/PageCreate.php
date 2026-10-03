@@ -82,7 +82,7 @@ class PageCreate extends AbstractTool {
 
 			1. Use the `page_tree` tool and select the page that should be the parent that 
 			   contains the new page. Use the `id` property of that parent page for the `parent` field.
-			2. Use the `page_template_list` tool and select an appropriate installed template.
+			2. Use the `page_template_list` tool and select an appropriate installed `template` and the related `theme`.
 			3. Inspect the selected template's available content fields and their descriptions.
 			4. Place the page's primary content in the field that is intended for the main content. 
 			   Use other fields such as hero or footer only when appropriate.
@@ -127,6 +127,7 @@ class PageCreate extends AbstractTool {
 			string $parent,
 			string $title,
 			string $template,
+			string $theme,
 			string $date = '',
 			bool $private = false,
 			bool $hidden = false,
@@ -148,8 +149,9 @@ class PageCreate extends AbstractTool {
 
 			$data[Fields::DATE] = $date;
 			$data[Fields::HIDDEN] = $hidden;
+			$data[Fields::TAGS] = join(', ', $tags);
 
-			$Page = Page::add($Parent, $title, $template, $private, $data);
+			$Page = Page::add($Parent, $title, "$theme/$template", $private, $data);
 
 			if (!$Page) {
 				throw new ToolCallException('The new page was not created.');

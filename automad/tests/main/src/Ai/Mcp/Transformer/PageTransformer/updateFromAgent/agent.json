@@ -2,6 +2,7 @@
 	"id": "/mcp-test",
 	"title": "MCP Test",
 	"template": "page_full_width_centered",
+	"theme": "",
 	"date": "2026-09-30T15:13:59+00:00",
 	"private": false,
 	"hidden": true,

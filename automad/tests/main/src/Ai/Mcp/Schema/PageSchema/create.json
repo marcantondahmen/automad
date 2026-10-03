@@ -14,7 +14,11 @@
 		},
 		"template": {
 			"type": "string",
-			"description": "The template used by the page."
+			"description": "The template used by the page. Use the `page_templates` tool to get a list of available templates."
+		},
+		"theme": {
+			"type": "string",
+			"description": "The theme that belongs to the selected `template` used by the page."
 		},
 		"date": {
 			"type": "string",
@@ -50,7 +54,7 @@
 			}
 		}
 	},
-	"required": ["parent", "title", "template"],
+	"required": ["parent", "title", "template", "theme"],
 	"$defs": {
 		"block": {
 			"description": "An Automad content block.",

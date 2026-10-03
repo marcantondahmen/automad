@@ -1,12 +1,15 @@
 {
 	"id": "/mcp-test",
-	"parent": "/",
 	"url": "http://localhost/mcp-test",
 	"title": "MCP Test",
-	"date": "2026-09-30T15:13:59+00:00",
+	"parent": "/",
+	"lastModified": "2026-09-30T15:13:59+00:00",
+	"template": "page_full_width_centered",
 	"publicationState": "published",
 	"private": true,
 	"hidden": false,
+	"tags": [],
+	"date": "2026-09-30T15:13:59+00:00",
 	"content": {
 		"+main": "Large Paragraph image-1.webp Alt text 1 image-2.webp Alt text 2 Heading Small paragraph"
 	},

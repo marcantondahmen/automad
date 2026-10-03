@@ -71,6 +71,27 @@ class PageTransformer {
 	}
 
 	/**
+	 * Return the common base meta data for a page.
+	 *
+	 * @param $Page
+	 * @return array
+	 */
+	public function baseData(Page $Page): array {
+		return array(
+			'id' => $Page->origUrl,
+			'url' => AM_SERVER . $Page->origUrl,
+			'title' => $Page->get(Fields::TITLE),
+			'parent' => $Page->parentUrl,
+			'lastModified' => $Page->get(Fields::TIME_LAST_MODIFIED),
+			'template' => $Page->get(Fields::TEMPLATE),
+			'publicationState' => $Page->isPublished() ? 'published' : 'draft',
+			'private' => $Page->private,
+			'hidden' => $Page->hidden,
+			'tags' => $Page->tags
+		);
+	}
+
+	/**
 	 * Transform a page object into an agent optimized representation.
 	 *
 	 * @param Page $Page
@@ -80,20 +101,21 @@ class PageTransformer {
 	public function toAgent(Page $Page, bool $blocksToString = false): array {
 		// Inject an alias for the origUrl called `id` that can be easily referred to.
 		$data = array(
-			'id' => $Page->origUrl,
-			'parent' => $Page->parentUrl,
-			'url' => AM_SERVER . $Page->origUrl,
-			'title' => $Page->get(Fields::TITLE),
+			...$this->baseData($Page),
 			'date' => $Page->get(Fields::DATE),
-			'publicationState' => $Page->isPublished() ? 'published' : 'draft',
-			'private' => $Page->private,
-			'hidden' => $Page->hidden,
 			'content' => array(),
 			'meta' => array()
 		);
 
 		$transform = $blocksToString ? 'toString' : 'toAgent';
-		$excludeFromMeta = array(Fields::HIDDEN, Fields::PRIVATE, Fields::URL, Fields::TITLE, Fields::DATE);
+		$excludeFromMeta = array(
+			Fields::HIDDEN,
+			Fields::PRIVATE,
+			Fields::URL,
+			Fields::TITLE,
+			Fields::DATE,
+			Fields::TAGS
+		);
 
 		foreach ($Page->data as $key => $value) {
 			if (str_starts_with($key, '+')) {
@@ -121,6 +143,7 @@ class PageTransformer {
 	 * @param Page $Page
 	 * @param string $title
 	 * @param string $template
+	 * @param string $theme
 	 * @param string $date
 	 * @param bool $private
 	 * @param bool $hidden
@@ -132,6 +155,7 @@ class PageTransformer {
 		Page $Page,
 		string $title,
 		string $template,
+		string $theme,
 		string $date = '',
 		bool $private = false,
 		bool $hidden = false,
@@ -150,6 +174,8 @@ class PageTransformer {
 
 		$data[Fields::TITLE] = $title;
 		$data[Fields::DATE] = $date;
+		$data[Fields::TEMPLATE] = $template;
+		$data[Fields::THEME] = $theme;
 		$data[Fields::PRIVATE] = $private;
 		$data[Fields::HIDDEN] = $hidden;
 		$data[Fields::TAGS] = join(', ', $tags);

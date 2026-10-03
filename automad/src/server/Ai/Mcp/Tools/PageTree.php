@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Models\Page;
 use Automad\System\Fields;
@@ -130,20 +131,13 @@ class PageTree extends AbstractTool {
 				throw new ToolCallException("Page [$id] not found.");
 			}
 
+			$PageTransformer = new PageTransformer($Automad);
 			$maxLevel = intval($Start->get(Fields::LEVEL)) + $depth;
 
-			$branch = function (Page $Parent) use ($pages, $maxLevel, &$branch): array {
+			$branch = function (Page $Parent) use ($pages, $maxLevel, $PageTransformer, &$branch): array {
 				unset($pages[$Parent->origUrl]);
 
-				$data = array(
-					'id' => $Parent->origUrl,
-					'title' => $Parent->get(Fields::TITLE),
-					'last_modified' => $Parent->get(Fields::TIME_LAST_MODIFIED),
-					'template' => $Parent->get(Fields::TEMPLATE),
-					'publicationState' => $Parent->isPublished() ? 'published' : 'draft',
-					'private' => $Parent->private,
-					'hidden' => $Parent->hidden
-				);
+				$data = $PageTransformer->baseData($Parent);
 
 				if (intval($Parent->get(Fields::LEVEL)) < $maxLevel) {
 					$children = array();

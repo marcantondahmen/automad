@@ -127,16 +127,9 @@ class PageSearch extends AbstractTool {
 
 			$results = array_map(
 				fn (Page $Page) => array(
-					'id' => $Page->origUrl,
-					'title' => $Page->get(Fields::TITLE),
+					...$PageTransformer->baseData($Page),
 					'context' => html_entity_decode(strip_tags($Page->get(Fields::SEARCH_RESULTS_CONTEXT))),
-					'hitCount' => intval($Page->get(Fields::SEARCH_RESULTS_COUNT)),
-					'lastModified' => $Page->get(Fields::TIME_LAST_MODIFIED),
-					'template' => $Page->get(Fields::TEMPLATE),
-					'parent' => $Page->parentUrl,
-					'publicationState' => $Page->isPublished() ? 'published' : 'draft',
-					'private' => $Page->private,
-					'hidden' => $Page->hidden
+					'hitCount' => intval($Page->get(Fields::SEARCH_RESULTS_COUNT))
 				),
 				$Automad->Pagelist->getPages(true)
 			);

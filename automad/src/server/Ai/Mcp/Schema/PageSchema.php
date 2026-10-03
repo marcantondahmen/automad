@@ -74,7 +74,11 @@ class PageSchema {
 				),
 				'template' => array(
 					'type' => 'string',
-					'description' => 'The template used by the page.'
+					'description' => 'The template used by the page. Use the `page_templates` tool to get a list of available templates.'
+				),
+				'theme' => array(
+					'type' => 'string',
+					'description' => 'The theme that belongs to the selected `template` used by the page.'
 				),
 				'date' => array(
 					'type' => 'string',
@@ -110,7 +114,7 @@ class PageSchema {
 					)
 				)
 			),
-			'required' => array('parent', 'title', 'template'),
+			'required' => array('parent', 'title', 'template', 'theme'),
 			...self::blockDefs()
 		);
 	}
@@ -384,7 +388,11 @@ class PageSchema {
 				),
 				'template' => array(
 					'type' => 'string',
-					'description' => 'The template used by the page.'
+					'description' => 'The template used by the page. Use the `page_templates` tool to get a list of available templates.'
+				),
+				'theme' => array(
+					'type' => 'string',
+					'description' => 'The theme that belongs to the selected `template` used by the page.'
 				),
 				'date' => array(
 					'type' => 'string',
@@ -423,7 +431,7 @@ class PageSchema {
 					)
 				)
 			),
-			'required'=> array('id', 'title', 'template'),
+			'required'=> array('id', 'title', 'template', 'theme'),
 			...self::blockDefs()
 		);
 	}
