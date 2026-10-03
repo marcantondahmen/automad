@@ -37,10 +37,12 @@ namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
+use Automad\Ai\Mcp\Validator\TemplateValidator;
 use Automad\Api\EditLock;
 use Automad\Core\Automad;
 use Automad\Models\Page;
 use Automad\System\Fields;
+use Automad\System\ThemeCollection;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -151,6 +153,15 @@ class PageUpdate extends AbstractTool {
 
 			if (!$Page) {
 				throw new ToolCallException("Page [$id] not found.");
+			}
+
+			// Only validate when the combination is actually changed in order to not
+			// block updates of pages that already use a template that is not available anymore.
+			if ($theme !== null || $template !== null) {
+				TemplateValidator::fromThemeCollection(new ThemeCollection())->assertValid(
+					$theme ?? strval($Page->get(Fields::THEME)),
+					$template ?? strval($Page->get(Fields::TEMPLATE))
+				);
 			}
 
 			$data = $PageTransformer->updateFromAgent(

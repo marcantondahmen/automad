@@ -37,11 +37,13 @@ namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
+use Automad\Ai\Mcp\Validator\TemplateValidator;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Cache;
 use Automad\Models\Page;
 use Automad\System\Fields;
+use Automad\System\ThemeCollection;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -103,6 +105,7 @@ class PageCreate extends AbstractTool {
 				"parent": "/about",
 				"title": "Team",
 				"template": "page_sidebar",
+				"theme": "automad/standard-lite",
 				"content": {
 					"+main": [
 						{"type": "paragraph", "data": {"text": "Meet the people behind the project."}}
@@ -143,6 +146,8 @@ class PageCreate extends AbstractTool {
 			if (!$Parent) {
 				throw new ToolCallException("Parent page [$parent] not found.");
 			}
+
+			TemplateValidator::fromThemeCollection(new ThemeCollection())->assertValid($theme, $template);
 
 			$data = array_map(
 				fn ($blocks): array => array('blocks' => Blocks::fromAgent($blocks)),

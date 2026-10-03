@@ -14,7 +14,7 @@
 		},
 		"template": {
 			"type": "string",
-			"description": "The template used by the page. Use the `page_templates` tool to get a list of available templates."
+			"description": "The template used by the page. Use the `page_template_list` tool to get a list of available templates."
 		},
 		"theme": {
 			"type": "string",
