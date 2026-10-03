@@ -36,10 +36,11 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageTransformer;
+use Automad\Ai\Mcp\Validator\PageStructureValidator;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Models\Page;
-use Automad\System\Fields;
 use Mcp\Exception\ToolCallException;
 use Mcp\Schema\ToolAnnotations;
 
@@ -95,7 +96,13 @@ class PageMove extends AbstractTool {
 			back to the first level under the homepage. The new URL
 			will be /project after moving.
 
-			Critical: The homepage with ID `/` must not be moved.
+			Critical: The homepage with ID `/` must not be moved. A page also can not be moved
+			into itself or one of its own sub-pages, or below the parent it already has.
+
+			The tool returns the basic data of the moved page. Moving a page changes its `id` and `url`.
+			The new `id` is returned together with the old one as `previousId`. Use the new `id`
+			for all further calls. In case the target already contains a page with the same name,
+			a suffix is appended to the name of the moved page.
 			TXT;
 	}
 
@@ -122,10 +129,29 @@ class PageMove extends AbstractTool {
 				throw new ToolCallException("Target page [$target] not found.");
 			}
 
-			$Page->moveDirAndUpdateLinks($TargetPage->path, $Page->get(Fields::SLUG));
+			(new PageStructureValidator())->assertMovable(
+				$Page->origUrl,
+				$Page->path,
+				$Page->parentUrl,
+				$TargetPage->origUrl,
+				$TargetPage->path
+			);
+
+			// Use the name of the current directory as slug like the dashboard does. The slug field
+			// can already contain the slug of a changed title that is not yet published.
+			$newPath = $Page->moveDirAndUpdateLinks($TargetPage->path, basename($Page->path));
 			Cache::clear();
 
-			return "The page [$id] was moved successfully.";
+			$MovedPage = Page::findByPath($newPath);
+
+			if (!$MovedPage) {
+				throw new ToolCallException("The page [$id] could not be moved.");
+			}
+
+			return array(
+				...(new PageTransformer($Automad))->baseData($MovedPage),
+				'previousId' => $id
+			);
 		};
 	}
 

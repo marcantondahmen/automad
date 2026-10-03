@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Validator\PageStructureValidator;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\PageIndex;
@@ -102,8 +103,9 @@ class PageReorderChildren extends AbstractTool {
 				"order": ["sub-page", "another-page"]	
 			}
 
-			Note that missing pages will be appended to the list on render time. 
-			Make sure the list always contains all children.
+			Only existing sub-pages of the parent are allowed, unknown names are rejected.
+			Duplicates are ignored. Sub-pages that are missing in the list are appended in their
+			current order. The tool returns the effective order of all sub-pages.
 			TXT;
 	}
 
@@ -125,7 +127,21 @@ class PageReorderChildren extends AbstractTool {
 				throw new ToolCallException("Page [$parent] not found.");
 			}
 
-			$newOrder = PageIndex::write($Parent->path, $order);
+			// The pages are collected in their current order, parents are always followed by their children.
+			$children = array();
+
+			foreach ($Automad->getPages() as $Page) {
+				if ($Page->parentUrl === $Parent->origUrl) {
+					$children[] = basename($Page->path);
+				}
+			}
+
+			$newOrder = (new PageStructureValidator())->resolveOrder($Parent->origUrl, $children, $order);
+
+			if (!PageIndex::write($Parent->path, $newOrder) && !empty($newOrder)) {
+				throw new ToolCallException("The new order for [$parent] could not be saved.");
+			}
+
 			Cache::clear();
 
 			return $newOrder;
