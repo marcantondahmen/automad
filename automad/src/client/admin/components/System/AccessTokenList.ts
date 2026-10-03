@@ -55,6 +55,8 @@ import { BaseComponent } from '../Base';
 interface AccessToken {
 	id: string;
 	name: string;
+	description: string;
+	preview: string;
 	createdAt: string;
 }
 
@@ -110,6 +112,15 @@ class AccessTokenListComponent extends BaseComponent {
 			value: '',
 		});
 
+		const descriptionInput = createField(FieldTag.input, null, {
+			id: 'am-access-token-description',
+			key: 'description',
+			name: 'description',
+			hideLabel: true,
+			placeholder: App.text('accessTokensAddTokenDescriptionLabel'),
+			value: '',
+		});
+
 		const { modal, body } = createGenericModal(
 			App.text('accessTokensAddTokenTitle'),
 			App.text('save'),
@@ -117,7 +128,10 @@ class AccessTokenListComponent extends BaseComponent {
 			async (modal) => {
 				const { data, error } = await requestApi(
 					AccessTokenController.addToken,
-					{ name: nameInput.query() }
+					{
+						name: nameInput.query(),
+						description: descriptionInput.query(),
+					}
 				);
 
 				notifyFormError(error || '', findFormErrorElement(modal));
@@ -136,6 +150,7 @@ class AccessTokenListComponent extends BaseComponent {
 
 		create('am-form-error', [], {}, body);
 		body.appendChild(nameInput);
+		body.appendChild(descriptionInput);
 
 		setTimeout(() => {
 			modal.open();
@@ -220,9 +235,19 @@ class AccessTokenListComponent extends BaseComponent {
 					<span class="${CSS.cardIcon}"
 						><i class="bi bi-key"></i
 					></span>
-					<div class="${CSS.cardTitle}">${token.name}</div>
-					<div class="${CSS.cardBody} ${CSS.textMuted}">
-						${dateFormat(token.createdAt)}
+					<div class="${CSS.cardTitle}">$${token.name}</div>
+					<div class="${CSS.cardBody} ${CSS.flexGap}">
+						${token.description
+							? html`<div>$${token.description}</div>`
+							: ''}
+						<div>
+							<span
+								class="${CSS.badge} ${CSS.badgeMuted} ${CSS.textMono}"
+							>
+								$${token.preview}*****
+							</span>
+							${dateFormat(token.createdAt)}
+						</div>
 					</div>
 				</div>
 			`

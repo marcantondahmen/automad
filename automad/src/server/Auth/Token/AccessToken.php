@@ -48,20 +48,36 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class AccessToken {
 	/**
+	 * The prefix that makes issued tokens recognizable as Automad access tokens.
+	 */
+	private const PREFIX = 'am_';
+
+	/**
+	 * The number of leading token characters (including the prefix) that are stored
+	 * as a non-secret preview in order to identify a token. Keep this short, since every
+	 * additional character reveals more of the actual secret.
+	 */
+	private const PREVIEW_LENGTH = 6;
+
+	/**
 	 * Issue a new access token and persist its hash. The raw token is only ever
-	 * returned here — only its hash is persisted, so it can't be recovered afterwards.
+	 * returned here — only its hash and a short, non-secret preview are persisted,
+	 * so it can't be recovered afterwards.
 	 *
 	 * @param string $name
+	 * @param string $description
 	 * @return string
 	 */
-	public static function issue(string $name): string {
-		$accessToken = bin2hex(random_bytes(32));
+	public static function issue(string $name, string $description = ''): string {
+		$accessToken = self::PREFIX . bin2hex(random_bytes(32));
 
 		$AccessTokenConfig = AccessTokenConfig::load();
 
 		$AccessTokenConfig->addToken(array(
 			'id' => bin2hex(random_bytes(16)),
 			'name' => $name,
+			'description' => $description,
+			'preview' => substr($accessToken, 0, self::PREVIEW_LENGTH),
 			'tokenHash' => hash('sha256', $accessToken),
 			'createdAt' => time()
 		));

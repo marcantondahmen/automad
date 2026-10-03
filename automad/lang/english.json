@@ -2,6 +2,7 @@
 	"__lang__": "en",
 	"aboutAutomad": "About Automad",
 	"accessTokensAddToken": "Add token",
+	"accessTokensAddTokenDescriptionLabel": "Description (optional)",
 	"accessTokensAddTokenNameLabel": "Name",
 	"accessTokensAddTokenTitle": "Add Access Token",
 	"accessTokensAddTokenValidationError": "Please provide a name.",

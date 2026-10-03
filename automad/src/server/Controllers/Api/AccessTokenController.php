@@ -39,6 +39,7 @@ use Automad\Api\Response;
 use Automad\Auth\Token\AccessToken;
 use Automad\Auth\Token\AccessTokenConfig;
 use Automad\Core\Request;
+use Automad\Core\Str;
 use Automad\Core\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -66,13 +67,15 @@ class AccessTokenController {
 			return $Response->setError(Text::get('accessTokensAddTokenValidationError'));
 		}
 
-		$accessToken = AccessToken::issue($name);
+		$description = Str::shorten(Request::post('description'), 120);
+		$accessToken = AccessToken::issue($name, $description);
 
 		return $Response->setData(array('accessToken' => $accessToken));
 	}
 
 	/**
-	 * Get the list of issued tokens, without exposing any token hashes.
+	 * Get the list of issued tokens, without exposing any token hashes. Tokens that were
+	 * issued before descriptions and previews were introduced don't have those fields.
 	 *
 	 * @return Response
 	 */
@@ -83,6 +86,8 @@ class AccessTokenController {
 			return array(
 				'id' => $token['id'],
 				'name' => $token['name'],
+				'description' => $token['description'] ?? '',
+				'preview' => $token['preview'] ?? '',
 				'createdAt' => date('c', $token['createdAt'])
 			);
 		}, AccessTokenConfig::load()->tokens);
