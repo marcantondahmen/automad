@@ -119,7 +119,7 @@ class PageMove extends AbstractTool {
 			}
 
 			if (!$TargetPage) {
-				throw new ToolCallException("Target page [$target]	not found.");
+				throw new ToolCallException("Target page [$target] not found.");
 			}
 
 			$Page->moveDirAndUpdateLinks($TargetPage->path, $Page->get(Fields::SLUG));

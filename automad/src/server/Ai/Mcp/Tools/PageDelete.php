@@ -85,10 +85,10 @@ class PageDelete extends AbstractTool {
 			like for example `/about` or `/work/projects`.
 
 			If the user does not specify a valid `id` property value, use the `page_search` tool
-			and select the page that should be the deleted.
+			and select the page that should be deleted.
 
 			The user is asked to confirm the deletion by the client before the page is actually deleted.
-			Clients that are not able to ask for confirmation can not delete pages.
+			Clients that are not able to ask for confirmation cannot delete pages.
 			TXT;
 	}
 

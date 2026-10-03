@@ -62,7 +62,7 @@ class Raw extends AbstractBlock {
 	 */
 	public static function getDescription(): string {
 		return <<< TXT
-			Outputs raw HTML or Markdown as is, whereas Markdown is automatically converted to HTML.
+			Outputs raw HTML as is. Markdown is automatically converted to HTML.
 			Use it for custom markup, iframes, third-party widgets or Markdown content that has no
 			matching block type. Prefer dedicated block types such as "paragraph", "header",
 			"nestedList" or "table" whenever one fits, since they remain editable in the dashboard.

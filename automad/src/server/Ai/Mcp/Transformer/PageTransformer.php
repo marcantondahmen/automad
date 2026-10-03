@@ -44,7 +44,7 @@ use Automad\System\Fields;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The tranformer class for page objects.
+ * The transformer class for page objects.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de

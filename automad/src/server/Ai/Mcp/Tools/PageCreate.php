@@ -80,8 +80,8 @@ class PageCreate extends AbstractTool {
 
 			Before creating the page:
 
-			1. Read the `page_tree` tool and select the page that should be the parent that 
-			   contains the new page. Use the `url` property of that parent page for the `parent` field.
+			1. Use the `page_tree` tool and select the page that should be the parent that 
+			   contains the new page. Use the `id` property of that parent page for the `parent` field.
 			2. Read the `automad://templates/page` resource and select an appropriate installed template.
 			3. Inspect the selected template's available content fields and their descriptions.
 			4. Place the page's primary content in the field that is intended for the main content. 
@@ -93,9 +93,10 @@ class PageCreate extends AbstractTool {
 			and are provided through the `content` property.
 
 			Do not add any `<h1>` tag with the page title. The title is already handled by the `title` property
-			and must not be added as part of the `content` content.
+			and must not be added as part of the `content` field.
 
-			Example: create a page "Team" below /about with one heading and one paragraph.
+			Example: create a page "Team" below /about with one heading and one paragraph. The 
+			heading will be automatically created with the `title`. 
 			{
 				"parent": "/about",
 				"title": "Team",

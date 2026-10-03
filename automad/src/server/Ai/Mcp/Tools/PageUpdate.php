@@ -79,7 +79,7 @@ class PageUpdate extends AbstractTool {
 			1. Use the `page_read` tool in order to get the current state of the page.
 			   If the user does not provide a valid page ID, use the `page_search` tool
 			   to find the page that should be updated and use the page ID in the 
-			   results. In this context of retrieving page data that serves as 
+			   results. In the context of retrieving page data that serves as 
 			   basis for the actual update, the `format` property of the `page_read` 
 			   tool must be `structured`.
 			2. Update the page `content` according to the given input schema. 
@@ -110,7 +110,7 @@ class PageUpdate extends AbstractTool {
 					}
 				}
 			   
-			- Leaving title, tags or template empty or omitting those entirly 
+			- Leaving title, tags or template empty or omitting those entirely
 			  will also clear those fields on the existing page.
 			- Content fields you leave out of `content` are deleted.
 			- Blocks missing from a field's array are deleted.
@@ -168,7 +168,7 @@ class PageUpdate extends AbstractTool {
 			$Page = Page::fromCache($id);
 
 			if (!$Page) {
-				throw new ToolCallException("Page [$id] cound not be updated.");
+				throw new ToolCallException("Page [$id] could not be updated.");
 			}
 
 			return $PageTransformer->toAgent($Page);

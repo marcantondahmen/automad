@@ -79,7 +79,7 @@ class PageSchema {
 				'date' => array(
 					'type' => 'string',
 					'format' => 'date-time',
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`'
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`.'
 				),
 				'private' => array(
 					'type' => 'boolean',
@@ -171,7 +171,7 @@ class PageSchema {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Move Schema',
-			'description' => 'A input schema for moving a page to another location on an Automad website.',
+			'description' => 'An input schema for moving a page to another location on an Automad website.',
 			'type' => 'object',
 			'properties' => array(
 				'id' => array(
@@ -222,9 +222,9 @@ class PageSchema {
 	public static function read(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
-			'title' => 'Automad Read Page Schema',
+			'title' => 'Automad Page Read Schema',
 			'description' => <<< TXT
-				A input schema for reading a single page on an Automad website.
+				An input schema for reading a single page on an Automad website.
 
 				The `id` is required. 
 			
@@ -266,7 +266,7 @@ class PageSchema {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Reorder Schema',
-			'description' => 'A input schema for reordering sub-pages for a given parent page by an ordered list of page IDs.',
+			'description' => 'An input schema for reordering sub-pages for a given parent page by an ordered list of page IDs.',
 			'type' => 'object',
 			'properties' => array(
 				'parent' => array(
@@ -283,8 +283,8 @@ class PageSchema {
 					'description' => <<< TXT
 						The reordered list of page ID basenames.
 						Critical: page IDs are basically absolute URLs. 
-						The ordered list must only contain basenames (without any slashes) 
-						page IDs. A page with the ID `/work/project-1` becomes just `project-1`. 
+						The ordered list must only contain page ID basenames (without any slashes).
+						A page with the ID `/work/project-1` becomes just `project-1`. 
 						TXT
 				)
 			),
@@ -300,8 +300,8 @@ class PageSchema {
 	public static function search(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
-			'title' => 'Automad Search Schema',
-			'description' => 'A input schema for searching an Automad website.',
+			'title' => 'Automad Page Search Schema',
+			'description' => 'An input schema for searching an Automad website.',
 			'type' => 'object',
 			'properties' => array(
 				'search' => array(
@@ -333,7 +333,7 @@ class PageSchema {
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Tree Schema',
 			'description' => <<< TXT
-				A input schema for retrieving the full or partial hierarchical structure of an Automad website.
+				An input schema for retrieving the full or partial hierarchical structure of an Automad website.
 
 				The `id` property can be optionally used to start the tree at a specific page instead of the 
 				homepage ("/"). Any existing page `id` can be used here.
@@ -346,7 +346,7 @@ class PageSchema {
 					'type' => 'string',
 					'description' => <<< TXT
 						The ID is the local absolute URL path of the page such as `/about` or `/work/project` 
-						that is used a starting point for the tree. The returned tree will only include pages
+						that is used as a starting point for the tree. The returned tree will only include pages
 						below the given page.
 
 						The default is '/' (the homepage).
@@ -363,7 +363,7 @@ class PageSchema {
 	}
 
 	/**
-	 * Generate the input schema for creating a page.
+	 * Generate the input schema for updating a page.
 	 *
 	 * @return array
 	 */
@@ -389,7 +389,7 @@ class PageSchema {
 				'date' => array(
 					'type' => 'string',
 					'format' => 'date-time',
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`'
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`.'
 				),
 				'private' => array(
 					'type' => 'boolean',

@@ -19,7 +19,7 @@
 		"date": {
 			"type": "string",
 			"format": "date-time",
-			"description": "The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`"
+			"description": "The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`."
 		},
 		"private": {
 			"type": "boolean",
@@ -371,7 +371,7 @@
 					"type": "object",
 					"properties": {
 						"id": {
-							"description": "The ID of an existing reusable component that is rendered in place of this block.\nUse the `automad://components` resource to get a list of existing components.",
+							"description": "The ID of an existing reusable component that is rendered in place of this block.\nUse the `component_list` tool to get a list of existing components.",
 							"type": "string"
 						}
 					},
@@ -890,7 +890,7 @@
 		},
 		"raw": {
 			"type": "object",
-			"description": "Outputs raw HTML or Markdown as is, whereas Markdown is automatically converted to HTML.\nUse it for custom markup, iframes, third-party widgets or Markdown content that has no\nmatching block type. Prefer dedicated block types such as \"paragraph\", \"header\",\n\"nestedList\" or \"table\" whenever one fits, since they remain editable in the dashboard.",
+			"description": "Outputs raw HTML as is. Markdown is automatically converted to HTML.\nUse it for custom markup, iframes, third-party widgets or Markdown content that has no\nmatching block type. Prefer dedicated block types such as \"paragraph\", \"header\",\n\"nestedList\" or \"table\" whenever one fits, since they remain editable in the dashboard.",
 			"properties": {
 				"id": {
 					"$ref": "#/$defs/blockId"
@@ -924,7 +924,7 @@
 		},
 		"snippet": {
 			"type": "object",
-			"description": "Renders Automad template language code, either from a snippet file or from inline code.\nUse it to add dynamic, template-driven content that no other block type provides. Read the\n`automad://snippets` resource to find existing snippet files and prefer those over writing\ninline template code.",
+			"description": "Renders Automad template language code, either from a snippet file or from inline code.\nUse it to add dynamic, template-driven content that no other block type provides. Read the\n`snippet_list` tool to find existing snippet files and prefer those over writing\ninline template code.",
 			"properties": {
 				"id": {
 					"$ref": "#/$defs/blockId"
@@ -941,7 +941,7 @@
 					"type": "object",
 					"properties": {
 						"file": {
-							"description": "The snippet file that is rendered. Before selecting a snippet, read the available snippets\nfrom the `automad://snippets` resource and use one of the returned snippet files. Use an\nempty string when defining inline code in \"snippet\" instead.",
+							"description": "The snippet file that is rendered. Before selecting a snippet, read the available snippets\nfrom the `snippet_list` tool and use one of the returned snippet files. Use an\nempty string when defining inline code in \"snippet\" instead.",
 							"type": "string"
 						},
 						"snippet": {
