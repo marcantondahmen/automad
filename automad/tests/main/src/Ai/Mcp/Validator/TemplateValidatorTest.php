@@ -27,25 +27,23 @@ class TemplateValidatorTest extends TestCase {
 
 	#[DataProvider('dataForTestInvalidCombinationThrows')]
 	public function testInvalidCombinationThrows(string $theme, string $template, string $message) {
+		/** @disregard */
 		$this->expectException(ToolCallException::class);
+		/** @disregard */
 		$this->expectExceptionMessage($message);
 
 		$this->createValidator()->assertValid($theme, $template);
 	}
 
-	#[DataProvider('dataForTestValidCombinationPasses')]
-	public function testValidCombinationPasses(string $theme, string $template) {
-		$this->createValidator()->assertValid($theme, $template);
-
-		$this->addToAssertionCount(1);
-	}
-
 	public function testUnknownTemplateMessageListsAvailableTemplates() {
 		try {
 			$this->createValidator()->assertValid('vendor/theme-a', 'nope');
+			/** @disregard */
 			$this->fail('Expected exception was not thrown.');
 		} catch (ToolCallException $e) {
+			/** @disregard */
 			$this->assertStringContainsString('`page`, `sidebar`', $e->getMessage());
+			/** @disregard */
 			$this->assertStringNotContainsString('theme-b', $e->getMessage());
 		}
 	}
@@ -53,10 +51,20 @@ class TemplateValidatorTest extends TestCase {
 	public function testUnknownThemeMessageListsAvailableThemes() {
 		try {
 			$this->createValidator()->assertValid('wrong/theme', 'page');
+			/** @disregard */
 			$this->fail('Expected exception was not thrown.');
 		} catch (ToolCallException $e) {
+			/** @disregard */
 			$this->assertStringContainsString('`vendor/theme-a`, `vendor/theme-b`', $e->getMessage());
 		}
+	}
+
+	#[DataProvider('dataForTestValidCombinationPasses')]
+	public function testValidCombinationPasses(string $theme, string $template) {
+		$this->createValidator()->assertValid($theme, $template);
+
+		/** @disregard */
+		$this->addToAssertionCount(1);
 	}
 
 	private function createValidator(): TemplateValidator {
