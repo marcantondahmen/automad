@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\System\PackageCollection;
+use Mcp\Schema\ToolAnnotations;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -47,6 +48,20 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class PagelistTemplateList extends AbstractTool {
+	/**
+	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
+	 *
+	 * @return ToolAnnotations|null
+	 */
+	public function getAnnotations(): ToolAnnotations|null {
+		return new ToolAnnotations(
+			readOnlyHint: true,
+			destructiveHint: false,
+			idempotentHint: true,
+			openWorldHint: false
+		);
+	}
+
 	/**
 	 * @return string
 	 */
