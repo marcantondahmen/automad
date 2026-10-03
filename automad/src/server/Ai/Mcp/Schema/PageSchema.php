@@ -79,11 +79,11 @@ class PageSchema {
 				'date' => array(
 					'type' => 'string',
 					'format' => 'date-time',
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2025-09-26T15:46`'
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`'
 				),
 				'private' => array(
 					'type' => 'boolean',
-					'description' => 'Whether the page should be keept private and not accessible without authentication.'
+					'description' => 'Whether the page should be kept private and not accessible without authentication.'
 				),
 				'hidden' => array(
 					'type' => 'boolean',
@@ -99,6 +99,9 @@ class PageSchema {
 				'content' => array(
 					'type' => 'object',
 					'description'=> 'Content for the +... fields (+main, +hero, etc.) provided by the selected template. Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!',
+					'propertyNames' => array(
+						'pattern' => '^\\+.+$'
+					),
 					'additionalProperties' => array(
 						'type' => 'array',
 						'items' => array(
@@ -330,7 +333,7 @@ class PageSchema {
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Tree Schema',
 			'description' => <<< TXT
-				A input schema for retrieving the full or partial hierarchical structure of an Automad website.'
+				A input schema for retrieving the full or partial hierarchical structure of an Automad website.
 
 				The `id` property can be optionally used to start the tree at a specific page instead of the 
 				homepage ("/"). Any existing page `id` can be used here.
@@ -352,7 +355,7 @@ class PageSchema {
 				'depth' => array(
 					'type' => 'integer',
 					'description' => <<< TXT
-						The depth of the retuned tree relative to its starting level.
+						The depth of the returned tree relative to its starting level.
 						TXT
 				)
 			)
@@ -375,28 +378,28 @@ class PageSchema {
 					'type' => 'string',
 					'description' => 'The ID of the page that will be updated.'
 				),
-				'title' =>array(
+				'title' => array(
 					'type' => 'string',
 					'description' => 'The title of the page.'
 				),
-				'template'=> array(
+				'template' => array(
 					'type' => 'string',
 					'description' => 'The template used by the page.'
 				),
 				'date' => array(
 					'type' => 'string',
 					'format' => 'date-time',
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2025-09-26T15:46`'
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`'
 				),
 				'private' => array(
 					'type' => 'boolean',
-					'description' => 'Whether the page should be keept private and not accessible without authentication.'
+					'description' => 'Whether the page should be kept private and not accessible without authentication.'
 				),
 				'hidden' => array(
 					'type' => 'boolean',
 					'description' => 'Whether the page should be hidden from page lists and navigation.'
 				),
-				'tags'=> array(
+				'tags' => array(
 					'type' => 'array',
 					'description' => 'Optional tags assigned to the page.',
 					'items' => array(
@@ -409,6 +412,9 @@ class PageSchema {
 						Content for the +... fields (+main, +hero, etc.) provided by the selected template. 
 						Critical: all content fields start with a `+` symbol! Do not remove that `+` symbol!
 						TXT,
+					'propertyNames' => array(
+						'pattern' => '^\\+.+$'
+					),
 					'additionalProperties' => array(
 						'type' => 'array',
 						'items' => array(
@@ -417,7 +423,7 @@ class PageSchema {
 					)
 				)
 			),
-			'required'=> array('id'),
+			'required'=> array('id', 'title', 'template'),
 			...self::blockDefs()
 		);
 	}

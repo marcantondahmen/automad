@@ -201,7 +201,7 @@ export class RootComponent extends BaseComponent {
 	}
 
 	/**
-	 * Verify the CSRF token on visiblity state change (change tab) in order
+	 * Verify the CSRF token on visibility state change (change tab) in order
 	 * to make sure that the token is updated also between mutliple sessions while a tab is still open.
 	 *
 	 * @async

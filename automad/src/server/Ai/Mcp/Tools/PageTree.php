@@ -80,12 +80,14 @@ class PageTree extends AbstractTool {
 
 			Use this tool also to efficiently get a list of sub-pages for a specific page.
 
-			The following fields control the visiblity of a page:
+			The following fields control the visibility of a page:
 			- `publicationState`: `draft` or `published`, unpublished changes can only be viewed by admins
-			- `private`: if true, the page can only be viewed by admins, independet from `publicationState`
+			- `private`: if true, the page can only be viewed by admins, independent from `publicationState`
 			- `hidden`: if true, the page is publicly accessible but hidden in page lists and navigations
 
 			Use the `page_read` tool to retrieve the full content of a specific page.
+
+			The default depth is 10.
 			TXT;
 	}
 

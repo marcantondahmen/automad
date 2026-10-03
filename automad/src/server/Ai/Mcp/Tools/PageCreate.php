@@ -107,6 +107,10 @@ class PageCreate extends AbstractTool {
 				}
 			}
 
+			New pages are saved as drafts. Use the `page_publish` tool in order to make a page
+			publicly visible. This step allows the user to review a new page before going live.
+			Ask the user for confirmation before publishing a new page.
+
 			This tool returns the newly created page data.
 			TXT;
 	}

@@ -19,11 +19,11 @@
 		"date": {
 			"type": "string",
 			"format": "date-time",
-			"description": "The page date in the ISO 8601 date-time format like for example `2025-09-26T15:46`"
+			"description": "The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`"
 		},
 		"private": {
 			"type": "boolean",
-			"description": "Whether the page should be keept private and not accessible without authentication."
+			"description": "Whether the page should be kept private and not accessible without authentication."
 		},
 		"hidden": {
 			"type": "boolean",
@@ -39,6 +39,9 @@
 		"content": {
 			"type": "object",
 			"description": "Content for the +... fields (+main, +hero, etc.) provided by the selected template. \nCritical: all content fields start with a `+` symbol! Do not remove that `+` symbol!",
+			"propertyNames": {
+				"pattern": "^\\+.+$"
+			},
 			"additionalProperties": {
 				"type": "array",
 				"items": {
@@ -47,7 +50,7 @@
 			}
 		}
 	},
-	"required": ["id"],
+	"required": ["id", "title", "template"],
 	"$defs": {
 		"block": {
 			"description": "An Automad content block.",
@@ -339,7 +342,7 @@
 						}
 					},
 					"additionalProperties": false,
-					"required": ["content", "title"]
+					"required": ["content", "group", "title"]
 				}
 			},
 			"required": ["type", "data"],

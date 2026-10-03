@@ -101,6 +101,9 @@ class PageReorderChildren extends AbstractTool {
 				"parent": "/parent-page",
 				"order": ["sub-page", "another-page"]	
 			}
+
+			Note that missinge pages will be appended to the list on render time. 
+			Make sure the list always contains all children.
 			TXT;
 	}
 

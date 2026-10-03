@@ -110,10 +110,16 @@ class PageUpdate extends AbstractTool {
 					}
 				}
 			   
-			- Leaving title, tags or template empty will also clear those fields on the existing page.
+			- Leaving title, tags or template empty or omitting those entirly 
+			  will also clear those fields on the existing page.
 			- Content fields you leave out of `content` are deleted.
 			- Blocks missing from a field's array are deleted.
 			- The order of the array is the order on the page.
+
+			Note that updates will be saved as drafts. A page must be published first using
+			the `page_publish` tool in order to make changes publicly visible. This step allows
+			the user to review the changes before going live. 
+			Ask the user first before publishing a page.
 			TXT;
 	}
 

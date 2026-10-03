@@ -76,14 +76,26 @@ class PageMove extends AbstractTool {
 		return <<< TXT
 			Move an Automad page to a new parent.
 
-			Example: 
+			Example 1: 
 			{
-				"id": "/page",
+				"id": "/project",
 				"target": "/work"	
 			}
 
-			This will move the page with the ID /page into /work.
-			Its new URL will be /work/page after the move.
+			This will move the page with the ID /project into /work.
+			Its new URL will be /work/project after the move.
+
+			Example 2: 
+			{
+				"id": "/work/project",
+				"target": "/"	
+			}
+
+			This will move the page "project" with the ID /work/project
+			back to the first level under the homepage. The new URL
+			will be /project after moving.
+
+			Critical: The homepage with ID `/` must not be moved.
 			TXT;
 	}
 

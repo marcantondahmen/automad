@@ -86,10 +86,12 @@ class PageSearch extends AbstractTool {
 			Use the `page_read` tool in order to get the 
 			full content for a specific page.
 
-			The following fields control the visiblity of a page:
+			The following fields control the visibility of a page:
 			- `publicationState`: `draft` or `published`, unpublished changes can only be viewed by admins
-			- `private`: if true, the page can only be viewed by admins, independet from `publicationState`
+			- `private`: if true, the page can only be viewed by admins, independent from `publicationState`
 			- `hidden`: if true, the page is publicly accessible but hidden in page lists and navigations
+
+			The result limit is 50 pages.
 			TXT;
 	}
 
@@ -113,7 +115,7 @@ class PageSearch extends AbstractTool {
 				'excludeCurrent' => false,
 				'excludeHidden' => false,
 				'filter' => false,
-				'limit' => null,
+				'limit' => 50,
 				'match' => false,
 				'offset' => 0,
 				'page' => false,

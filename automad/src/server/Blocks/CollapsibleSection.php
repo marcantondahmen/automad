@@ -193,8 +193,7 @@ class CollapsibleSection extends AbstractBlock {
 					The name of an accordion group. Sections that share the same group name behave like HTML
 					<details> elements that share the same value for their "name" attribute, so opening one
 					section closes all others. Use an empty string for an independent section.
-					TXT,
-				optional: true
+					TXT
 			),
 			'title' => new AgentFieldSchema(
 				'string',
