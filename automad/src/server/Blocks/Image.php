@@ -228,7 +228,8 @@ class Image extends AbstractBlock {
 				<<< TXT
 					The image source. Either the file name of an image that is attached to the current page, a
 					path that starts with a slash and is relative to the Automad base directory, or a full
-					remote image URL.
+					remote image URL. In order to use an image from a URL, import it to the page first using
+					the `file_import` tool and use the returned `link`.
 					TXT
 			)
 		);

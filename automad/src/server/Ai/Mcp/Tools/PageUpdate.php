@@ -91,6 +91,12 @@ class PageUpdate extends AbstractTool {
 			   Each field inside `content` replaces the existing field with the same name.
 			   Fields that are not part of `content` are kept as they are.
 				
+			Images that should be displayed in `image`, `gallery` or `imageSlideshow` blocks and that are
+			not attached to the page yet must be imported first. Use the `file_import` tool with the
+			`id` of the page and use the returned `link` as `url` of an `image` block or as item of the `files`
+			list of a `gallery` or `imageSlideshow` block. Remote image URLs can also be linked directly,
+			but those images are not imported into the page.
+
 			Example: change the text of one paragraph on /about and add a new block at the end,
 			leaving everything else untouched.
 				

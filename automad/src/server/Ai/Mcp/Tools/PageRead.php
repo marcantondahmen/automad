@@ -83,6 +83,7 @@ class PageRead extends AbstractTool {
 			The `files` field contains all files that are attached to the page.
 			Those files can be linked as is in image or gallery blocks, all
 			paths are resolved automatically by the render engine.
+			Use the `file_import` tool in order to attach new files from a URL.
 
 			The following fields control the visibility of a page:
 			- `publicationState`: `draft` or `published`, unpublished changes can only be viewed by admins

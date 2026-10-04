@@ -177,7 +177,9 @@ class Gallery extends AbstractBlock {
 				<<< TXT
 					The list of images that are included in the gallery. Each item is either the file name of
 					an image that is attached to the current page, a path that starts with a slash and is
-					relative to the Automad base directory, or a full remote image URL.
+					relative to the Automad base directory, or a full remote image URL. In order to use images
+					from URLs, import them to the page first using the `file_import` tool and use the
+					returned `link` values.
 					TXT,
 				items: array('type' => 'string')
 			),

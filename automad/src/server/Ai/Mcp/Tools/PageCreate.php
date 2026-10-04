@@ -113,6 +113,13 @@ class PageCreate extends AbstractTool {
 				}
 			}
 
+			Images that should be displayed in `image`, `gallery` or `imageSlideshow` blocks and that are not
+			attached to a page yet can not be linked by file name when creating the page, since the page
+			does not exist yet. Create the page first, then use the `file_import` tool with the `id` of the
+			new page for each image and finally use the `page_update` tool in order to set the returned `link`
+			values in the blocks. Remote image URLs can also be linked directly, but those images are not
+			imported into the page.
+
 			New pages are saved as drafts. Use the `page_publish` tool in order to make a page
 			publicly visible. This step allows the user to review a new page before going live.
 			Ask the user for confirmation before publishing a new page.

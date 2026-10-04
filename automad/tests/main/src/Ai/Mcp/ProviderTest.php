@@ -22,6 +22,7 @@ class ProviderTest extends TestCase {
 			array_values(array_map(fn ($Tool) => $Tool->getName(), Provider::getTools(true))),
 			array(
 				'component_list',
+				'file_import',
 				'filelist_template_list',
 				'page_create',
 				'page_delete',
