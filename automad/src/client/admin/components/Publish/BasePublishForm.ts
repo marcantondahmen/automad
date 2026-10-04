@@ -44,8 +44,8 @@ import {
 	requestApi,
 } from '@/admin/core';
 import { Tooltip } from '@/vendor/tooltip';
-import { BaseComponent } from '../../Base';
-import { SubmitComponent } from '../Submit';
+import { BaseComponent } from '../Base';
+import { SubmitComponent } from '../Forms/Submit';
 import type { PublishControllers } from './types';
 
 const enable = (button: SubmitComponent): void => {

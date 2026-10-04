@@ -42,7 +42,7 @@ import {
 	html,
 	routes,
 } from '@/admin/core';
-import { DraftCardComponent } from '@/admin/components/Forms/Publish/DraftCard';
+import { DraftCardComponent } from '@/admin/components/Publish/DraftCard';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 
 /**

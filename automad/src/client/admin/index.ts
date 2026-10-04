@@ -81,10 +81,6 @@ import('./components/File/Upload');
 import('./components/Forms/FileCollection/Delete');
 import('./components/Forms/FileCollection/Move');
 import('./components/Forms/FileCollection/ListForm');
-import('./components/Forms/Publish/ComponentPublishForm');
-import('./components/Forms/Publish/DraftList');
-import('./components/Forms/Publish/PagePublishForm');
-import('./components/Forms/Publish/SharedPublishForm');
 import('./components/Forms/ComponentCollectionForm');
 import('./components/Forms/CreateUserForm');
 import('./components/Forms/DeleteUsersForm');
@@ -156,6 +152,11 @@ import('./components/Pages/Shared');
 import('./components/Pages/System');
 import('./components/Pages/Trash');
 import('./components/Pages/VerifyTotp');
+
+import('./components/Publish/ComponentPublishForm');
+import('./components/Publish/DraftList');
+import('./components/Publish/PagePublishForm');
+import('./components/Publish/SharedPublishForm');
 
 import('./components/Sidebar/Sidebar');
 import('./components/Sidebar/SidebarToggle');
