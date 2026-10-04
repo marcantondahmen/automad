@@ -251,13 +251,13 @@ const renderMenu = (): string => {
 					</am-dropdown>
 				</am-switcher>
 				<am-filter placeholder="filterContent"></am-filter>
-				<a
-					href="${App.baseIndex}${getPageURL()}"
+				<am-preview
+					${Attr.url}="${getPageURL()}"
 					class="${CSS.displaySmallNone} ${CSS.menuItem} ${CSS.menuItemIcon}"
-					${Attr.tooltip}="${App.text('inPageEdit')}"
+					${Attr.tooltip}="${App.text('preview')}"
 				>
 					<i class="bi bi-eye"></i>
-				</a>
+				</am-preview>
 				${renderDropdown()}
 			</div>
 		</section>

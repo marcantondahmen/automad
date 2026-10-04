@@ -1,0 +1,102 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+
+am-preview {
+	cursor: pointer;
+}
+
+.am-c-preview {
+	&__actions {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-left: auto;
+		margin-right: 1rem;
+	}
+
+	&__group {
+		display: flex;
+		align-items: center;
+		gap: 2px;
+	}
+
+	&__button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-width: 2.5rem;
+		height: 2.5rem;
+		padding: 0 0.5rem;
+		color: var(--am-clr-text);
+		font-size: 0.85rem;
+		cursor: pointer;
+		border-radius: 0.25rem;
+		transition:
+			color 0.2s,
+			background-color 0.2s;
+
+		&:hover {
+			color: var(--am-clr-text);
+			background-color: var(--am-clr-background-faded);
+		}
+
+		&--active {
+			color: var(--am-clr-text-selected);
+			background-color: var(--am-clr-background-selected);
+		}
+
+		& .bi {
+			font-size: 1rem;
+		}
+	}
+
+	&__viewport {
+		--am-preview-scale: 0.5;
+		position: relative;
+		height: 70vh;
+		overflow: hidden;
+		background-color: #fff;
+		border: @am-border;
+		border-radius: 0.25rem;
+	}
+
+	&__frame {
+		display: block;
+		width: calc(100% / var(--am-preview-scale));
+		height: calc(100% / var(--am-preview-scale));
+		border: none;
+		transform: scale(var(--am-preview-scale));
+		transform-origin: top left;
+	}
+}

@@ -372,6 +372,13 @@ export const enum CSS {
 	platformSelectIcon = 'am-f-platform-select__icon',
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
 
+	previewActions = 'am-c-preview__actions',
+	previewButton = 'am-c-preview__button',
+	previewButtonActive = 'am-c-preview__button--active',
+	previewFrame = 'am-c-preview__frame',
+	previewGroup = 'am-c-preview__group',
+	previewViewport = 'am-c-preview__viewport',
+
 	richText = 'am-e-rich-text',
 
 	responsiveImageSettings = 'am-c-responsive-image-settings',

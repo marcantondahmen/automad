@@ -53,8 +53,15 @@ const icons: { [key in DraftType]: string } = {
 	components: 'boxes',
 } as const;
 
+// Pages are previewed in a modal, all other draft types link to the dashboard.
+const triggers: { [key in DraftType]: { tag: string; attribute: string } } = {
+	page: { tag: 'am-preview', attribute: Attr.url },
+	shared: { tag: 'am-link', attribute: Attr.target },
+	components: { tag: 'am-link', attribute: Attr.target },
+} as const;
+
 const getTarget: { [key in DraftType]: (draft: Draft) => string } = {
-	page: (draft) => `${routes.page}?url=${draft.url}`,
+	page: (draft) => draft.url,
 	shared: () => routes.shared,
 	components: () => routes.components,
 } as const;
@@ -111,9 +118,10 @@ export class DraftCardComponent extends BaseComponent {
 		const icon = icons[draft.type];
 		const target = getTarget[draft.type](draft);
 		const title = getTitle[draft.type](draft);
+		const { tag, attribute } = triggers[draft.type];
 
 		this.innerHTML = html`
-			<am-link ${Attr.target}="${target}" title="${draft.title}">
+			<${tag} ${attribute}="${target}" title="${draft.title}">
 				<div
 					class="${CSS.cardIcon} ${draft.type == 'page'
 						? CSS.cardIconNarrow
@@ -125,7 +133,7 @@ export class DraftCardComponent extends BaseComponent {
 				<div class="${CSS.cardBody}">
 					${draft.lastModified ? dateFormat(draft.lastModified) : ''}
 				</div>
-			</am-link>
+			</${tag}>
 			<div class="${CSS.cardButtons}"></div>
 		`;
 
