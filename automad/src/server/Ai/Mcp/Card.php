@@ -35,7 +35,6 @@
 
 namespace Automad\Ai\Mcp;
 
-use Automad\Engine\Document\Minify;
 use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -110,8 +109,10 @@ class Card {
 		$font = self::FONT_STACK;
 
 		$cliSnippet = self::escape(
-			'claude mcp add --transport http ' . $card['serverInfo']['name'] . ' ' . AM_SERVER . $card['transport']['endpoint'] .
-			' --header "Authorization: Bearer <token>"'
+			'claude mcp add --transport http \ ' . "\n  " .
+				$card['serverInfo']['name'] . " \ \n  " .
+				AM_SERVER . $card['transport']['endpoint'] . " \ \n  " .
+				'--header "Authorization: Bearer <token>"'
 		);
 
 		$jsonSnippet = self::escape(
@@ -130,126 +131,7 @@ class Card {
 		);
 
 		$favicons = Asset::favicons();
-		$css = Minify::css(<<< CSS
-			:root {
-				--bg: #ffffff;
-				--bg-code: hsl(240 7% 97%);
-				--color: hsl(240 7% 21%);
-				--color-muted: hsl(240 6% 56%);
-				--border: hsl(240 7% 91%);
-				--link: hsl(240 7% 32%);
-
-				color-scheme: light dark;
-			}
-
-			@media (prefers-color-scheme: dark) {
-				:root {
-					--bg: hsl(220 9% 7%);
-					--bg-code: hsl(220 9% 9%);
-					--color: hsl(220 9% 96%);
-					--color-muted: hsl(220 9% 62%);
-					--border: hsl(220 9% 14%);
-					--link: hsl(220 9% 76%);
-				}
-			}
-
-			* {
-				box-sizing: border-box;
-				scrollbar-width: thin;
-				scrollbar-color: hsl(from var(--color-muted) h s l / 0.4)
-					transparent;
-			}
-
-			body {
-				margin: 0;
-				padding: 2rem 1rem;
-				background: var(--bg);
-				color: var(--color);
-				font-family: $font;
-				font-size: 15px;
-				line-height: 1.6;
-			}
-
-
-			main {
-				max-width: 44rem;
-				margin: 0 auto;
-			}
-
-			h1 {
-				margin: 0 0 0.25rem;
-				font-size: 1.5rem;
-				line-height: 1.3;
-				font-weight: medium;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-			}
-
-			h2 {
-				margin: 2rem 0 0.5rem;
-				padding-bottom: 0.25rem;
-				border-bottom: 1px solid var(--border);
-				font-size: 1rem;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-			}
-
-			p {
-				margin: 0.5rem 0;
-			}
-
-			a {
-				color: var(--link);
-				text-underline-offset: 3px;
-			}
-
-			.muted {
-				color: var(--color-muted);
-			}
-
-			dl {
-				display: grid;
-				grid-template-columns: max-content 1fr;
-				gap: 0.25rem 1.5rem;
-				margin: 0;
-			}
-
-			dt {
-				color: var(--color-muted);
-			}
-
-			dd {
-				margin: 0;
-				overflow-wrap: anywhere;
-			}
-
-			pre {
-				margin: 0.5rem 0;
-				padding: 1rem 1.25rem;
-				overflow-x: auto;
-				color: var(--color-muted);
-				background: var(--bg-code);
-				border: 1px solid var(--border);
-				border-radius: 6px;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-			}
-
-			code {
-				font-family: inherit;
-			}
-
-			@media (max-width: 30rem) {
-				dl {
-					grid-template-columns: 1fr;
-					gap: 0;
-				}
-
-				dd {
-					margin-bottom: 0.5rem;
-				}
-			}
-			CSS);
+		$styles = Asset::css('dist/build/mcp/index.css');
 
 		return <<< HTML
 			<!DOCTYPE html>
@@ -258,19 +140,22 @@ class Card {
 					<meta charset="utf-8">
 					<meta name="viewport" content="width=device-width, initial-scale=1">
 					<meta name="robots" content="noindex">
-					<title>$title</title>
+					<title>MCP Server | Automad</title>
 					$favicons
-					<style>$css</style>
+					$styles
 				</head>
 				<body>
 					<main>
-						<h1>$title</h1>
-						<p class="muted">MCP server card</p>
+						<h1>MCP Server</h1>
+						<div>
+							<span class="badge"><span>●</span> $title</span>
+						</div>
 						<p>
 							This is a Model Context Protocol (MCP) endpoint.
 							It is meant to be used by an MCP client and not by a web browser.
 						</p>
 
+						<hr>
 						<h2>Server</h2>
 						<dl>
 							<dt>name</dt>
@@ -287,6 +172,7 @@ class Card {
 							<dd>tools</dd>
 						</dl>
 
+						<hr>
 						<h2>Authentication</h2>
 						<p>
 							Public tools are available without authentication.
@@ -295,12 +181,14 @@ class Card {
 							Access tokens can be created in the dashboard.
 						</p>
 
+						<hr>
 						<h2>Connect</h2>
 						<p>Add the server to Claude Code:</p>
 						<pre><code>$cliSnippet</code></pre>
 						<p>Or add it to the <code>.mcp.json</code> of a project:</p>
 						<pre><code>$jsonSnippet</code></pre>
 
+						<hr>
 						<h2>Server card</h2>
 						<p><a href="$jsonUrl">$jsonUrl</a></p>
 					</main>
