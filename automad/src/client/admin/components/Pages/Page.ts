@@ -253,6 +253,7 @@ const renderMenu = (): string => {
 				<am-filter placeholder="filterContent"></am-filter>
 				<am-preview
 					${Attr.url}="${getPageURL()}"
+					${Attr.text}="$${App.pages[getPageURL()]?.title ?? ''}"
 					class="${CSS.displaySmallNone} ${CSS.menuItem} ${CSS.menuItemIcon}"
 					${Attr.tooltip}="${App.text('preview')}"
 				>

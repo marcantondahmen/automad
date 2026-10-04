@@ -121,7 +121,11 @@ export class DraftCardComponent extends BaseComponent {
 		const { tag, attribute } = triggers[draft.type];
 
 		this.innerHTML = html`
-			<${tag} ${attribute}="${target}" title="${draft.title}">
+			<${tag}
+				${attribute}="${target}"
+				${Attr.text}="$${draft.title ?? ''}"
+				title="${draft.title}"
+			>
 				<div
 					class="${CSS.cardIcon} ${draft.type == 'page'
 						? CSS.cardIconNarrow

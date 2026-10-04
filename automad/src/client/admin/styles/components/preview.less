@@ -40,40 +40,44 @@ am-preview {
 	&__actions {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		gap: @am-flex-gap;
 		margin-left: auto;
-		margin-right: 1rem;
+		margin-right: 0.5rem;
+		max-height: 1rem;
 	}
 
 	&__group {
 		display: flex;
 		align-items: center;
 		gap: 2px;
+		padding: 2px;
+		margin-right: 0.4rem;
+		border: @am-form-border;
+		border-radius: calc(@am-form-radius + 2px);
 	}
 
 	&__button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		min-width: 2.5rem;
-		height: 2.5rem;
-		padding: 0 0.5rem;
+		height: 2.5em;
+		padding: 0 1em;
 		color: var(--am-clr-text);
-		font-size: 0.85rem;
+		font-size: @am-small-font-size;
+		font-weight: @am-small-font-weight;
 		cursor: pointer;
-		border-radius: 0.25rem;
+		border-radius: @am-form-radius;
 		transition:
 			color 0.2s,
 			background-color 0.2s;
 
 		&:hover {
-			color: var(--am-clr-text);
-			background-color: var(--am-clr-background-faded);
+			color: var(--am-clr-text-hover);
 		}
 
 		&--active {
 			color: var(--am-clr-text-selected);
-			background-color: var(--am-clr-background-selected);
+			background-color: var(--am-clr-background-selected) !important;
 		}
 
 		& .bi {
@@ -83,12 +87,33 @@ am-preview {
 
 	&__viewport {
 		--am-preview-scale: 0.5;
+		--size: 2rem;
 		position: relative;
-		height: 70vh;
+		height: 76vh;
 		overflow: hidden;
-		background-color: #fff;
-		border: @am-border;
-		border-radius: 0.25rem;
+
+		@media (min-height: 850px) {
+			height: 82vh;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			box-sizing: border-box;
+			width: var(--size);
+			height: var(--size);
+			margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+			border: 2px solid;
+			border-left-color: transparent;
+			border-radius: 100%;
+			animation: 0.8s linear 0s infinite spinner;
+		}
+
+		&--loaded:before {
+			display: none;
+		}
 	}
 
 	&__frame {
@@ -98,5 +123,6 @@ am-preview {
 		border: none;
 		transform: scale(var(--am-preview-scale));
 		transform-origin: top left;
+		overflow: hidden;
 	}
 }

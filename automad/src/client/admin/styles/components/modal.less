@@ -75,6 +75,10 @@
 			0 5.2rem 5rem -4.7rem var(--am-shadow);
 		transition: top 0.2s;
 
+		&--extra-large {
+			max-width: 96rem;
+		}
+
 		&--large {
 			max-width: 70rem;
 		}
@@ -123,6 +127,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		gap: @am-flex-gap;
 		color: var(--am-clr-text);
 		border-bottom: @am-border;
 	}

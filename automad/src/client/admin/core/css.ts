@@ -321,6 +321,7 @@ export const enum CSS {
 
 	modal = 'am-c-modal',
 	modalDialog = 'am-c-modal__dialog',
+	modalDialogExtraLarge = 'am-c-modal__dialog--extra-large',
 	modalDialogLarge = 'am-c-modal__dialog--large',
 	modalDialogSmall = 'am-c-modal__dialog--small',
 	modalDialogTotp = 'am-c-modal__dialog--totp',
@@ -378,6 +379,7 @@ export const enum CSS {
 	previewFrame = 'am-c-preview__frame',
 	previewGroup = 'am-c-preview__group',
 	previewViewport = 'am-c-preview__viewport',
+	previewViewportLoaded = 'am-c-preview__viewport--loaded',
 
 	richText = 'am-e-rich-text',
 
