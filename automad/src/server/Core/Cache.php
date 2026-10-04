@@ -117,13 +117,6 @@ class Cache {
 	/**
 	 * The constructor checks whether caching is enabled for the current request and
 	 * determines the $pageCacheFile to make it available within the instance.
-	 *
-	 * In case of any submitted data (get or post), caching will be disabled to make sure
-	 * that possible modifications of the session data array will always be reflected
-	 * in the cache. Note that caching of such submitted data (get or post) would possibly
-	 * only update the session data array for the requesting user. All other user could therefore
-	 * not trigger any updates to their sessions, because the request is already cached and
-	 * the template would not be parsed again.
 	 */
 	public function __construct() {
 		if (!AM_CACHE_ENABLED) {
