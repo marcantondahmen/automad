@@ -39,6 +39,7 @@ use Automad\Api\RequestHandler;
 use Automad\App;
 use Automad\Auth\Session\Session;
 use Automad\Core\Automad;
+use Automad\Core\Request;
 use Automad\Core\Text;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
@@ -57,6 +58,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class InPage {
+	const string PREVIEW_ONLY_PARAM = 'preview-only';
+
 	/**
 	 * This regex matches the "{{@open:$data@}}$value{{@close:$data@}}" string that temporary
 	 * wraps values in encoded fields that are later converted into webcomponents.
@@ -95,7 +98,7 @@ class InPage {
 			return $str;
 		}
 
-		if (Session::getUsername()) {
+		if (Session::getUsername() && InPage::isNotPreview()) {
 			$this->validateTemplate($str);
 
 			$str = $this->injectAssets($str);
@@ -131,7 +134,7 @@ class InPage {
 		}
 
 		// Only inject button if $key is no runtime var, a user is logged in and has editing enabled.
-		if (preg_match('/^(\+|\w)/', $field) && Session::inPageEditingIsEnabled()) {
+		if (preg_match('/^(\+|\w)/', $field) && Session::inPageEditingIsEnabled() && InPage::isNotPreview()) {
 			$data = base64_encode(
 				strval(
 					json_encode(array(
@@ -215,6 +218,15 @@ class InPage {
 			HTML;
 
 		return Body::append($str, $html);
+	}
+
+	/**
+	 * Checks whether in-page editing is enabled for the current request.
+	 *
+	 * @return bool
+	 */
+	private static function isNotPreview(): bool {
+		return !Request::query(self::PREVIEW_ONLY_PARAM);
 	}
 
 	/**
