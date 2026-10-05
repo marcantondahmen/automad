@@ -26,43 +26,20 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * Copyright (c) 2026 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * See LICENSE.md for license information.
  */
 
-.am-c-spinner {
-	--size: 1.25rem;
-	position: relative;
-	display: inline-block;
-	margin-right: 0.65rem;
-	width: var(--size);
-	height: var(--size);
+@am-animation--spinner: am-animation--spinner;
 
-	&:before {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: var(--size);
-		height: var(--size);
-		border-radius: var(--size);
-		border: 2px solid;
-		border-left-color: transparent;
-		animation: 0.8s linear 0s infinite @am-animation--spinner;
+@keyframes @am-animation--spinner {
+	0% {
+		transform: rotate(0deg);
 	}
 
-	body > & {
-		position: fixed;
-		margin: 0;
-		bottom: 18px;
-		right: 7px;
-	}
-
-	.am-e-button & {
-		--size: 1.1em;
-		margin: 0;
+	100% {
+		transform: rotate(360deg);
 	}
 }

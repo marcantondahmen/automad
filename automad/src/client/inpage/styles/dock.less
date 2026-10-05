@@ -127,7 +127,7 @@
 				background-color: hsl(214 100% 58%);
 				mix-blend-mode: screen;
 				animation: 1.15s ease-in-out alternate infinite
-					dock-toggle-highlight;
+					@am-animation--dock-toggle-highlight;
 			}
 		}
 	}
@@ -156,7 +156,9 @@
 	}
 }
 
-@keyframes dock-toggle-highlight {
+@am-animation--dock-toggle-highlight: am-animation--dock-toggle-highlight;
+
+@keyframes @am-animation--dock-toggle-highlight {
 	0% {
 		transform: scale3d(0.93, 0.95, 1);
 	}
