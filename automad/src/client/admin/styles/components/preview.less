@@ -86,7 +86,7 @@ am-preview {
 	}
 
 	&__viewport {
-		--am-preview-scale: 0.5;
+		--am-preview-scale: 1;
 		--size: 2rem;
 		position: relative;
 		height: 76vh;
@@ -108,7 +108,7 @@ am-preview {
 			border: 2px solid;
 			border-left-color: transparent;
 			border-radius: 100%;
-			animation: 0.8s linear 0s infinite spinner;
+			animation: 0.8s linear 0s infinite preview-spinner;
 		}
 
 		&--loaded:before {
@@ -124,5 +124,15 @@ am-preview {
 		transform: scale(var(--am-preview-scale));
 		transform-origin: top left;
 		overflow: hidden;
+	}
+}
+
+@keyframes preview-spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
 	}
 }
