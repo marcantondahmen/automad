@@ -107,7 +107,7 @@ export abstract class BaseComponent extends HTMLElement {
 	 * @param [selector] - the sector to be used as filter
 	 */
 	listen(
-		element: HTMLElement | Document | Window,
+		element: EventTarget,
 		eventNamesString: string,
 		callback: (event: Event) => void,
 		selector: string = ''

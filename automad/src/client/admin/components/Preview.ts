@@ -49,13 +49,15 @@ const PREVIEW_ONLY_PARAM = 'preview-only';
 const SCALES = [50, 75, 100] as const;
 const NON_VISUAL_TAGS = ['SCRIPT', 'STYLE', 'LINK', 'TEMPLATE'];
 const NOTIFICATION_DURATION = 3000;
-const BLOCKED_CURSOR_CSS = `
-	a[href]:not([href^="#"]),
-	a[href]:not([href^="#"]) *,
-	[type="submit"] {
-		cursor: not-allowed !important;
-	}
-`;
+
+/**
+ * The parts of the Navigation API's `NavigateEvent` that are used here
+ * (not yet part of the TypeScript DOM typings).
+ */
+interface NavigateEventLike extends Event {
+	hashChange: boolean;
+	destination: { sameDocument: boolean };
+}
 
 /**
  * Get the initial scale based on the current window width.
@@ -101,24 +103,36 @@ const getPageBackground = (doc: Document | null): string | null => {
 };
 
 /**
- * Prevent any navigation inside of the preview document, such as following
- * links (also to the dashboard) or submitting forms. Links to anchors on the
- * same page are still allowed. The user is informed about blocked navigation
- * using a notification and a "not-allowed" cursor on affected elements.
+ * Prevent any navigation inside of the preview frame, such as following links
+ * (also to the dashboard) or submitting forms. Navigation to anchors on the
+ * same page is still allowed. The user is informed using a notification
+ * whenever a navigation was actually blocked.
  *
- * @param doc
+ * The navigation is cancelled by the `navigate` event of the Navigation API, so
+ * links that are handled by the page itself, like gallery items, are not
+ * affected. In browsers without that API, clicks on links and form submits are
+ * blocked instead.
+ *
+ * @param frame
+ * @param modal - the modal that owns the listeners and removes them on destroy
  */
-const blockNavigation = (doc: Document | null): void => {
-	if (!doc) {
+const blockNavigation = (
+	frame: HTMLIFrameElement,
+	modal: ModalComponent
+): void => {
+	const win = frame.contentWindow as
+		| (Window & { navigation?: EventTarget })
+		| null;
+	const doc = frame.contentDocument;
+
+	if (!win || !doc) {
 		return;
 	}
 
 	let lastNotified = 0;
 
-	const block = (event: Event): void => {
+	const notifyBlocked = (): void => {
 		const now = Date.now();
-
-		event.preventDefault();
 
 		// Avoid stacking notifications on repeated clicks.
 		if (now - lastNotified > NOTIFICATION_DURATION) {
@@ -130,6 +144,26 @@ const blockNavigation = (doc: Document | null): void => {
 		}
 	};
 
+	if (win.navigation) {
+		modal.listen(win.navigation, 'navigate', (event) => {
+			const { hashChange, destination } = event as NavigateEventLike;
+
+			if (hashChange || destination.sameDocument || !event.cancelable) {
+				return;
+			}
+
+			event.preventDefault();
+			notifyBlocked();
+		});
+
+		return;
+	}
+
+	const block = (event: Event): void => {
+		event.preventDefault();
+		notifyBlocked();
+	};
+
 	const blockLink = (event: Event): void => {
 		const link = (event.target as Element).closest?.('a[href]');
 
@@ -138,15 +172,8 @@ const blockNavigation = (doc: Document | null): void => {
 		}
 	};
 
-	const style = doc.createElement('style');
-
-	style.textContent = BLOCKED_CURSOR_CSS;
-	doc.head?.appendChild(style);
-
-	// Use the capture phase to run before any handler of the page itself.
-	doc.addEventListener('click', blockLink, true);
-	doc.addEventListener('auxclick', blockLink, true);
-	doc.addEventListener('submit', block, true);
+	modal.listen(doc, 'click auxclick', blockLink);
+	modal.listen(doc, 'submit', block);
 };
 
 /**
@@ -229,11 +256,11 @@ class PreviewComponent extends BaseComponent {
 
 		// Block navigation and match the page background. The latter falls back
 		// to transparent in case the page background can't be read.
-		this.listen(frame, 'load', () => {
+		modal.listen(frame, 'load', () => {
 			viewport.classList.add(CSS.previewViewportLoaded);
 
 			try {
-				blockNavigation(frame.contentDocument);
+				blockNavigation(frame, modal);
 
 				viewport.style.backgroundColor =
 					getPageBackground(frame.contentDocument) ?? '';
@@ -292,7 +319,7 @@ class PreviewComponent extends BaseComponent {
 				`${scale}%`
 			);
 
-			this.listen(button, 'click', () => {
+			modal.listen(button, 'click', () => {
 				this.setScale(viewport, scale);
 			});
 		});
@@ -324,7 +351,7 @@ class PreviewComponent extends BaseComponent {
 			// This listener has to be registered before the link is connected,
 			// since the modal has to release the navigation lock before the link
 			// handles the click.
-			this.listen(edit, 'click', () => {
+			modal.listen(edit, 'click', () => {
 				modal.close();
 			});
 
