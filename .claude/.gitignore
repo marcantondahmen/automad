@@ -1,0 +1,7 @@
+*
+
+!.gitignore
+!CLAUDE.md
+!setting.json
+!docs
+!docs/*

@@ -379,7 +379,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 						const blocks = await saveEditorBlocks(api);
 
 						this.data.content = { blocks };
-						this.blockAPI.dispatchChange();
+						this.blockApi.dispatchChange();
 					},
 				},
 				true,
@@ -555,7 +555,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			const { justify } = collectFieldData(wrapper);
 
 			this.data.justify = justify as SectionJustifyContentOption;
-			this.blockAPI.dispatchChange();
+			this.blockApi.dispatchChange();
 
 			toggleActiveRadio(wrapper);
 		});
@@ -591,7 +591,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			const { align } = collectFieldData(wrapper);
 
 			this.data.align = align as SectionAlignItemsOption;
-			this.blockAPI.dispatchChange();
+			this.blockApi.dispatchChange();
 
 			toggleActiveRadio(wrapper);
 		});
@@ -630,7 +630,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 
 		this.listen(input, 'change', () => {
 			this.data[key] = input.value;
-			this.blockAPI.dispatchChange();
+			this.blockApi.dispatchChange();
 		});
 	}
 
@@ -866,7 +866,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 			debounce(() => {
 				this.data.style = collectFieldData(body);
 				this.setStyle();
-				this.blockAPI.dispatchChange();
+				this.blockApi.dispatchChange();
 
 				focalPointField.image = this.data.style?.backgroundImage;
 			})
@@ -954,7 +954,7 @@ export class LayoutSectionBlock extends BaseBlock<LayoutSectionBlockData> {
 	 * Render the local style tag with the responsive settings.
 	 */
 	private renderAspectRatioStyles(): void {
-		const unique = `section-${this.blockAPI.id}`;
+		const unique = `section-${this.blockApi.id}`;
 		const styleWrapper =
 			query(`style#${unique}`, this.wrapper) ||
 			create('style', [], { id: unique }, this.wrapper);

@@ -44,7 +44,7 @@ import {
 	html,
 	notifyError,
 	notifySuccess,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { create, PackageManagerController } from '@/common';
 import { BaseComponent } from '../Base';
@@ -185,7 +185,7 @@ export class RepositoryCardComponent extends BaseComponent {
 
 			progress.open();
 
-			const { error, success } = await requestAPI(
+			const { error, success } = await requestApi(
 				PackageManagerController.updateRepository,
 				{ name: data.name }
 			);

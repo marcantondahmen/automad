@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Str;
@@ -50,9 +51,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Header extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A section heading that is rendered as an HTML <h1> to <h6> element. Use it to structure
+			the page content into sections. Headings are also used to generate the "tableOfContents"
+			block. Since the page title is usually already rendered as <h1> by the template, headings
+			inside the content should typically start at level 2.
+			TXT;
+	}
+
 	/**
 	 * Render a header block.
 	 *
@@ -107,5 +123,29 @@ class Header extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return $block['data']['text'] ?? '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'level' => new AgentFieldSchema(
+				'number',
+				<<< TXT
+					The heading level from 1 to 6 that is rendered as <h1> to <h6>. Use 2 for main sections
+					and higher levels for subsections without skipping levels.
+					TXT,
+				enum: array(1, 2, 3, 4, 5, 6)
+			),
+			'text' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The heading text. It supports inline HTML formatting such as <i> or <a href="..."> links.
+					TXT
+			)
+		);
 	}
 }

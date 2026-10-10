@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\Img;
 use Automad\Blocks\Utils\ImgLoaderSet;
@@ -54,9 +55,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Gallery extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A collection of images that is displayed as a masonry column layout, a justified row
+			layout or a uniform grid. Clicking an image opens it in a lightbox. Use it for photo
+			galleries and portfolios. Use the "imageSlideshow" block to show images one at a time in a
+			carousel instead.
+			TXT;
+	}
+
 	/**
 	 * Render a gallery block.
 	 *
@@ -139,5 +155,61 @@ class Gallery extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return join(' ', $block['data']['files'] ?? array());
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'columnWidthPx' => new AgentFieldSchema(
+				'number',
+				<<< TXT
+					The target width of the columns in pixels, e.g. 250. Only used for the "columns" and
+					"grid" layouts.
+					TXT,
+				optional: true
+			),
+			'files' => new AgentFieldSchema(
+				'array',
+				<<< TXT
+					The list of images that are included in the gallery. Each item is either the file name of
+					an image that is attached to the current page, a path that starts with a slash and is
+					relative to the Automad base directory, or a full remote image URL. In order to use images
+					from URLs, import them to the page first using the `file_import` tool and use the
+					returned `link` values.
+					TXT,
+				items: array('type' => 'string')
+			),
+			'layout' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The gallery layout. "columns" creates a masonry layout with columns of equal width, "rows"
+					creates justified rows of equal height and "grid" creates a uniform grid of equally sized
+					cells.
+					TXT,
+				optional: true,
+				enum: array('columns', 'grid', 'rows')
+			),
+			'rowHeightPx' => new AgentFieldSchema(
+				'number',
+				<<< TXT
+					The target height of the rows in pixels, e.g. 250. Only used for the "rows" and "grid"
+					layouts.
+					TXT,
+				optional: true
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

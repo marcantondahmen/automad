@@ -33,7 +33,7 @@
  */
 
 export const enum Section {
-	ai = 'ai',
+	aiAssistance = 'ai-assistance',
 	cache = 'cache',
 	config = 'config',
 	customizations = 'customizations',
@@ -43,6 +43,7 @@ export const enum Section {
 	i18n = 'i18n',
 	language = 'language',
 	mail = 'mail',
+	mcp = 'mcp',
 	overview = 'overview',
 	packages = 'packages',
 	repositories = 'repositories',

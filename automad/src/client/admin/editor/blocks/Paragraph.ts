@@ -191,7 +191,7 @@ export class ParagraphBlock extends BaseBlock<ParagraphBlockData> {
 	 */
 	merge(data: ParagraphBlockData): void {
 		const div = query('[contenteditable]', this.wrapper);
-		const index = this.api.blocks.getBlockIndex(this.blockAPI.id);
+		const index = this.api.blocks.getBlockIndex(this.blockApi.id);
 
 		div.innerHTML = `${div.innerHTML}${data.text}`;
 

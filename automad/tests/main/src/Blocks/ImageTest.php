@@ -57,6 +57,39 @@ class ImageTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "image",
+					"data": {
+						"alt": "Alt text",
+						"url": "image.webp"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "image",
+					"stretched": true,
+					"data": {
+						"alt": "Alt text",
+						"url": "image.webp"
+					}
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -67,7 +100,7 @@ class ImageTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Image',
 			$search,
@@ -78,5 +111,13 @@ class ImageTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Image', $blockJson, $expectedAgentJson);
 	}
 }

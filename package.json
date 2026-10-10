@@ -13,8 +13,11 @@
     "bump-year": "bash bin/bump-year.sh",
     "dev": "bash bin/dev.sh",
     "dev:docker": "bash bin/dev-docker.sh",
-    "inbucket": "docker run -d --name inbucket -p 9000:9000 -p 2500:2500 -p 1100:1100 inbucket/inbucket",
+    "log:clear": "php automad/console log:clear",
+    "log:watch": "tail -n +1 -F $(php automad/console log:path)",
     "mailpit": "docker run -d --restart unless-stopped --name=mailpit -p 8025:8025 -p 1025:1025 axllent/mailpit",
+    "mcp:inspector": "bash bin/mcp-inspector.sh",
+    "mcp:tmp": "bash bin/mcp-tmp.sh",
     "phpunit": "bash bin/phpunit.sh",
     "prebuild": "bash bin/prebuild.sh",
     "psalm": "bash bin/psalm.sh",
@@ -29,7 +32,6 @@
     "vitest:watch": "vitest"
   },
   "devDependencies": {
-    "@editorjs/embed": "^2.7.6",
     "@editorjs/nested-list": "^1.3.0",
     "@editorjs/table": "^2.2.2",
     "@expo-google-fonts/inter": "^0.2.3",

@@ -1,0 +1,98 @@
+{
+	"+main": {
+		"blocks": [
+			{
+				"id": "OwZgnSLZEvOX",
+				"type": "paragraph",
+				"data": {
+					"large": true,
+					"text": "Large Paragraph"
+				},
+				"tunes": []
+			},
+			{
+				"id": "58CAI47u7pIv",
+				"type": "layoutSection",
+				"data": {
+					"align": "stretch",
+					"content": {
+						"blocks": [
+							{
+								"id": "bZkcUwBBebqu",
+								"type": "image",
+								"data": {
+									"alt": "Alt text 1",
+									"openInNewTab": false,
+									"url": "image-1.webp"
+								},
+								"tunes": {
+									"layout": {
+										"stretched": false,
+										"width": "1/2"
+									}
+								}
+							},
+							{
+								"id": "svQbS3qtKcFr",
+								"type": "image",
+								"data": {
+									"alt": "Alt text 2",
+									"openInNewTab": false,
+									"url": "image-2.webp"
+								},
+								"tunes": {
+									"layout": {
+										"stretched": false,
+										"width": "1/2"
+									}
+								}
+							}
+						]
+					},
+					"gap": "4px",
+					"justify": "fill-row"
+				},
+				"tunes": {
+					"layout": {
+						"stretched": true
+					},
+					"spacing": {
+						"bottom": "2rem",
+						"top": "2rem"
+					}
+				}
+			},
+			{
+				"id": "85XyRCvkV0K6",
+				"type": "header",
+				"data": {
+					"level": 2,
+					"text": "Heading"
+				},
+				"tunes": []
+			},
+			{
+				"id": "Zjn0zgsE6OQ1",
+				"type": "paragraph",
+				"data": {
+					"large": false,
+					"text": "Small paragraph"
+				},
+				"tunes": []
+			}
+		]
+	},
+	"private": true,
+	"slug": "mcp-test",
+	"title": "MCP Test",
+	"date": "2026-09-30T15:13:59+00:00",
+	"template": "page_full_width_centered",
+	"url": "/mcp-test",
+	":publicationState": "published",
+	":parent": "/",
+	":origUrl": "/mcp-test",
+	":created": "2026-09-30T14:58:11+00:00",
+	":lastModified": "2026-09-30T15:13:59+00:00",
+	":automadVersion": "2.0.0-beta.59",
+	":lastPublished": "2026-09-30T15:13:59+00:00"
+}

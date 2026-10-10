@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -48,9 +49,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Filelist extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A dynamic list of files that are matched by a glob pattern, e.g. downloadable PDFs or
+			other documents that are attached to a page. Each file is rendered using a filelist
+			template. Read the `filelist_template_list` tool before choosing one. Use the
+			"gallery" block to display images visually instead.
+			TXT;
+	}
+
 	/**
 	 * Render a filelist block.
 	 *
@@ -78,9 +94,16 @@ class Filelist extends AbstractBlock {
 		$html = Snippet::render(
 			array(
 				'id' => '',
+				'type' => '',
 				'data' => array(
 					'file' => $file,
 					'snippet' => ''
+				),
+				'tunes' => array(
+					'id' => '',
+					'className' => '',
+					'layout' => null,
+					'spacing'=> array()
 				)
 			),
 			$Automad
@@ -118,5 +141,49 @@ class Filelist extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'file' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The Automad template that is used to render each file of the list. Before selecting a
+					template, read the available filelist templates from the `filelist_template_list`
+					tool and use one of the returned template files.
+					TXT
+			),
+			'glob' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					One or more comma-separated glob patterns that select the listed files, e.g. "*.pdf" or
+					"*.pdf, *.zip". Patterns are resolved relative to the directory of the current page,
+					unless they start with a slash, in which case they are resolved relative to the Automad
+					base directory.
+					TXT
+			),
+			'sortOrder' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The sort order of the files by their path, either "asc" for ascending or "desc" for
+					descending.
+					TXT,
+				enum: array('asc', 'desc')
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

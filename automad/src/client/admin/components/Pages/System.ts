@@ -49,6 +49,7 @@ import { renderDebugSection } from './Partials/System/Debug';
 import { renderFeedSection } from './Partials/System/Feed';
 import { renderI18nSection } from './Partials/System/I18n';
 import { renderLanguageSection } from './Partials/System/Language';
+import { renderMcpSection } from './Partials/System/Mcp';
 import { renderUpdateSection } from './Partials/System/Update';
 import { renderUsersSection } from './Partials/System/Users';
 import { renderMailSection } from './Partials/System/Mail';
@@ -96,7 +97,7 @@ const getSystemSections = (): SystemSectionData[] => {
 			narrowIcon: true,
 		},
 		{
-			section: Section.ai,
+			section: Section.aiAssistance,
 			icon: 'robot',
 			title: App.text('systemAi'),
 			info: App.text('systemAiCardInfo'),
@@ -105,12 +106,12 @@ const getSystemSections = (): SystemSectionData[] => {
 			narrowIcon: false,
 		},
 		{
-			section: Section.feed,
-			icon: 'rss',
-			title: App.text('systemRssFeed'),
-			info: App.text('systemRssFeedCardInfo'),
-			state: '<am-system-feed-indicator></am-system-feed-indicator>',
-			render: renderFeedSection,
+			section: Section.mcp,
+			icon: 'plug',
+			title: App.text('systemMcp'),
+			info: App.text('systemMcpCardInfo'),
+			state: '<am-system-mcp-indicator></am-system-mcp-indicator>',
+			render: renderMcpSection,
 		},
 		{
 			section: Section.mail,
@@ -120,6 +121,14 @@ const getSystemSections = (): SystemSectionData[] => {
 			state: '<am-system-mail-indicator></am-system-mail-indicator>',
 			render: renderMailSection,
 			narrowIcon: false,
+		},
+		{
+			section: Section.feed,
+			icon: 'rss',
+			title: App.text('systemRssFeed'),
+			info: App.text('systemRssFeedCardInfo'),
+			state: '<am-system-feed-indicator></am-system-feed-indicator>',
+			render: renderFeedSection,
 		},
 		{
 			section: Section.i18n,
@@ -250,8 +259,11 @@ export class SystemComponent extends BaseDashboardLayoutComponent {
 	private renderOverviewSection(): string {
 		return html`
 			<am-switcher-section name="${Section.overview}">
+				<div class="${CSS.grid}" style="--min: 17rem;">
+					${this.renderOverviewCards(this.sectionData.slice(0, 4))}
+				</div>
 				<div class="${CSS.grid}" style="--min: 13rem;">
-					${this.renderOverviewCards(this.sectionData)}
+					${this.renderOverviewCards(this.sectionData.slice(4))}
 				</div>
 			</am-switcher-section>
 		`;

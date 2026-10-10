@@ -123,6 +123,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		gap: @am-flex-gap;
 		color: var(--am-clr-text);
 		border-bottom: @am-border;
 	}
@@ -177,7 +178,7 @@
 				border-radius: @size;
 				border: 0.2rem solid var(--am-clr-text-active);
 				border-left-color: transparent;
-				animation: 1.5s linear 0s infinite modal-spinner;
+				animation: 1.5s linear 0s infinite @am-animation--spinner;
 			}
 		}
 
@@ -287,15 +288,5 @@
 		&:hover {
 			color: var(--am-clr-text-hover);
 		}
-	}
-}
-
-@keyframes modal-spinner {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	100% {
-		transform: rotate(360deg);
 	}
 }

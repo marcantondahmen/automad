@@ -35,8 +35,8 @@
 
 namespace Automad\System;
 
+use Automad\Ai\Assistance\ProviderCollection;
 use Automad\Models\MailConfig;
-use Automad\System\Ai\ProviderCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

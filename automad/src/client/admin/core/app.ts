@@ -43,7 +43,7 @@ import {
 	listen,
 	PackageManagerController,
 	query,
-	requestAPI,
+	requestApi,
 	setSearchParam,
 	State,
 	SystemController,
@@ -99,7 +99,7 @@ export class App {
 	private static latestLockId: number = 0;
 
 	/**
-	 * The API base url.
+	 * The Api base url.
 	 *
 	 * @static
 	 */
@@ -165,15 +165,6 @@ export class App {
 	 */
 	static get dashboardURL(): string {
 		return App.getState('dashboard');
-	}
-
-	/**
-	 * The feed URL.
-	 *
-	 * @static
-	 */
-	static get feedURL(): string {
-		return App.getState('feed');
 	}
 
 	/**
@@ -362,7 +353,7 @@ export class App {
 
 		getLogger().log('App instance ID', App.instanceId);
 
-		const { data } = await requestAPI(AppController.bootstrap);
+		const { data } = await requestApi(AppController.bootstrap);
 		const state = State.getInstance();
 
 		state.bootstrap(root, data);
@@ -381,7 +372,7 @@ export class App {
 	 * @static
 	 */
 	static async updateState(): Promise<void> {
-		const response = await requestAPI(
+		const response = await requestApi(
 			AppController.updateState,
 			null,
 			false
@@ -474,7 +465,7 @@ export class App {
 	 * Check for system updates.
 	 */
 	static async checkForSystemUpdate(): Promise<void> {
-		const response = await requestAPI(
+		const response = await requestApi(
 			SystemController.checkForUpdate,
 			null,
 			true,
@@ -494,7 +485,7 @@ export class App {
 	 * Check for outdated packages.
 	 */
 	static async checkForOutdatedPackages(): Promise<void> {
-		const { data } = await requestAPI(
+		const { data } = await requestApi(
 			PackageManagerController.getOutdated,
 			null,
 			true,

@@ -46,7 +46,7 @@ import {
 	notifySuccess,
 	query,
 	queryAll,
-	requestAPI,
+	requestApi,
 	createProgressModal,
 	EditLockController,
 	getSlug,
@@ -231,6 +231,8 @@ export class FormComponent extends BaseComponent {
 	private get lockHandle(): string {
 		const url = getPageURL();
 
+		// See also automad/src/server/Ai/Mcp/Tools/PageUpdate.php
+		// in order to match the lockHandle style.
 		return !!url ? `page-${url}` : getSlug();
 	}
 
@@ -239,7 +241,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	async connectedCallback(): Promise<void> {
 		if (this.setLock) {
-			await requestAPI(EditLockController.set, {
+			await requestApi(EditLockController.set, {
 				setLockHandle: this.lockHandle,
 				setInstanceId: App.instanceId,
 			});
@@ -375,7 +377,7 @@ export class FormComponent extends BaseComponent {
 				input.classList.remove(CSS.validate);
 			});
 
-			await requestAPI(
+			await requestApi(
 				this.api,
 				this,
 				this.parallel,

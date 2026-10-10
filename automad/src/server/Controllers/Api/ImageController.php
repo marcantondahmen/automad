@@ -1,0 +1,85 @@
+<?php
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021-2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+
+namespace Automad\Controllers\Api;
+
+use Automad\Api\Response;
+use Automad\Core\Automad;
+use Automad\Core\Messenger;
+use Automad\Core\Request;
+use Automad\Core\Text;
+use Automad\Models\Image;
+use Automad\System\DiskUsage;
+use Automad\System\FileSystem;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+/**
+ * The Image controller.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
+ */
+class ImageController {
+	/**
+	 * Save an image that was modified in FileRobot.
+	 *
+	 * @return Response the response object
+	 */
+	public static function save(): Response {
+		$Response = new Response();
+
+		if (DiskUsage::quotaExceeded()) {
+			return $Response->setError(Text::get('diskQuotaExceeded'))->setCode(403);
+		}
+
+		$Messenger = new Messenger();
+		$Automad = Automad::fromCache();
+		$path = FileSystem::getPathByPostUrl($Automad);
+
+		Image::save(
+			$path,
+			Request::post('name'),
+			Request::post('extension'),
+			Request::post('imageBase64'),
+			$Messenger
+		);
+
+		return $Response
+			->setError($Messenger->getError())
+			->setCode($Messenger->getError() ? 406 : 200);
+	}
+}

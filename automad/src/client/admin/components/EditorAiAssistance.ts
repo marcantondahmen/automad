@@ -57,7 +57,9 @@ import type { SelectComponentOption } from './Select';
 const openSettings = (): void => {
 	const base = `${window.location.origin}${App.dashboardURL}/`;
 
-	App.root.setView(new URL(`${routes.system}?section=${Section.ai}`, base));
+	App.root.setView(
+		new URL(`${routes.system}?section=${Section.aiAssistance}`, base)
+	);
 };
 
 /**
@@ -99,11 +101,12 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 			CSS.displaySmallNone
 		);
 
-		const providers: SelectComponentOption[] = App.system.ai.providers
-			.filter((p: AiProvider) => p.isConfigured)
-			.map((p: AiProvider) => {
-				return { value: p.id, text: p.name };
-			});
+		const providers: SelectComponentOption[] =
+			App.system.aiAssistance.providers
+				.filter((p: AiProvider) => p.isConfigured)
+				.map((p: AiProvider) => {
+					return { value: p.id, text: p.name };
+				});
 
 		const details = create(
 			'details',
@@ -191,7 +194,7 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 
 		const select = createSelect(
 			providers,
-			App.system.ai.activeProviderId || `${providers[0].value}`,
+			App.system.aiAssistance.activeProviderId || `${providers[0].value}`,
 			footer,
 			null,
 			null,

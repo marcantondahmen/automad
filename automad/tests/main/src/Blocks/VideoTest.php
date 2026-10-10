@@ -59,6 +59,41 @@ class VideoTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "video",
+					"data": {
+						"autoplay": false,
+						"controls": true,
+						"loop": false,
+						"muted": false,
+						"url": "https://filesamples.com/samples/video/mp4/sample_1280x720.mp4"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "video",
+					"stretched": true,
+					"data": {
+						"url": "https://filesamples.com/samples/video/mp4/sample_1280x720.mp4"
+					}
+				}
+				JSON,
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -69,7 +104,7 @@ class VideoTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Video',
 			$search,
@@ -80,5 +115,13 @@ class VideoTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Video', $blockJson, $expectedAgentJson);
 	}
 }

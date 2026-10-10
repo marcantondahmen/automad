@@ -226,7 +226,7 @@ export class ComponentBlock extends BaseBlock<ComponentBlockData> {
 		this.listen(modal, EventName.modalClose, () => {
 			if (!this.data.id) {
 				this.api.blocks.delete(
-					this.api.blocks.getBlockIndex(this.blockAPI.id)
+					this.api.blocks.getBlockIndex(this.blockApi.id)
 				);
 
 				return;

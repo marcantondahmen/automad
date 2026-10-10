@@ -42,7 +42,7 @@ import {
 	html,
 	ImageCollectionController,
 	queryAll,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
@@ -134,7 +134,7 @@ class ImagePickerComponent extends BaseComponent {
 			this.wrapper ??
 			create('div', [], {}, this, '<am-spinner></am-spinner>');
 
-		const { data } = await requestAPI(ImageCollectionController.list, {
+		const { data } = await requestApi(ImageCollectionController.list, {
 			url: this.elementAttributes[Attr.page] || '',
 		});
 

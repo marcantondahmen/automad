@@ -1,6 +1,6 @@
 <?php
 
-namespace Automad\Controllers\API;
+namespace Automad\Controllers\Api;
 
 use Automad\Models\UserCollection;
 use Automad\System\FileSystem;

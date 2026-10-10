@@ -45,7 +45,7 @@ import {
 	getPageURL,
 	html,
 	query,
-	requestAPI,
+	requestApi,
 	resolveFileUrl,
 	VideoCollectionController,
 } from '@/admin/core';
@@ -299,7 +299,7 @@ export class VideoBlock extends BaseBlock<VideoBlockData> {
 		const field = create('div', [CSS.field], {}, body);
 
 		const render = async () => {
-			const { data } = await requestAPI(VideoCollectionController.list, {
+			const { data } = await requestApi(VideoCollectionController.list, {
 				url,
 			});
 

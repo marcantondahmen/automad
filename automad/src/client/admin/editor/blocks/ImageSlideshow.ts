@@ -227,7 +227,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			if (!this.readOnly) {
 				this.listen(collection, 'change', () => {
 					this.data.files = collection.images;
-					this.blockAPI.dispatchChange();
+					this.blockApi.dispatchChange();
 				});
 			}
 		}, 0);
@@ -267,7 +267,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 		});
 
 		this.listen(modal, EventName.modalClose, () => {
-			this.blockAPI.dispatchChange();
+			this.blockApi.dispatchChange();
 		});
 	}
 

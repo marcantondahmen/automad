@@ -35,6 +35,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,6 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class NestedList extends AbstractBlock {
@@ -56,6 +59,18 @@ class NestedList extends AbstractBlock {
 	 * The list type tag
 	 */
 	private static string $tag;
+
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			An ordered (<ol>) or unordered (<ul>) list whose items can contain nested sub-lists. Use
+			it for bullet points, numbered steps, feature lists or outlines.
+			TXT;
+	}
 
 	/**
 	 * Render a list block.
@@ -144,6 +159,32 @@ class NestedList extends AbstractBlock {
 		}
 
 		return join(' ', $strings);
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'items' => new AgentFieldSchema(
+				'array',
+				<<< TXT
+					The list items. Each item has a "content" string that supports inline HTML formatting and
+					an optional "items" array that contains a nested sub-list.
+					TXT,
+				items: array('$ref' => PageSchema::NESTED_LIST_ITEM)
+			),
+			'style' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The list style. "ordered" renders a numbered <ol> list and "unordered" renders a bulleted
+					<ul> list.
+					TXT,
+				enum: array('ordered', 'unordered')
+			)
+		);
 	}
 
 	/**

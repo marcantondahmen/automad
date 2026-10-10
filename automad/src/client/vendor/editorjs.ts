@@ -55,8 +55,6 @@ import type {
 import NestedList from '@editorjs/nested-list';
 // @ts-ignore
 import Table from '@editorjs/table';
-// @ts-ignore
-import Embed from '@editorjs/embed';
 
 export {
 	API,
@@ -68,7 +66,6 @@ export {
 	ConversionConfig,
 	EditorConfig,
 	EditorJS,
-	Embed,
 	HTMLPasteEvent,
 	I18nDictionary,
 	InlineToolConstructorOptions,

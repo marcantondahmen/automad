@@ -217,6 +217,89 @@ class LayoutSectionTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "layoutSection",
+					"data": {
+						"align": "start",
+						"content": {
+							"blocks": [
+								{
+									"id": "2",
+									"type": "paragraph",
+									"data": {
+										"large": true,
+										"text": "Column 1"
+									},
+									"tunes": {
+										"layout": {
+											"stretched": false,
+											"width": "1/2"
+										}
+									}
+								},
+								{
+									"id": "3",
+									"type": "paragraph",
+									"data": {
+										"large": false,
+										"text": "Column 2"
+									},
+									"tunes": {
+										"layout": {
+											"stretched": false,
+											"width": "1/2"
+										}
+									}
+								}
+							]
+						},
+						"justify": "start",
+						"minBlockWidth": "250px"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "layoutSection",
+					"stretched": true,
+					"data": {
+						"content": [
+							{
+								"id": "2",
+								"type": "paragraph",
+								"width": "1/2",
+								"data": {
+									"large": true,
+									"text": "Column 1"
+								}
+							},
+							{
+								"id": "3",
+								"type": "paragraph",
+								"width": "1/2",
+								"data": {
+									"text": "Column 2"
+								}
+							}
+						]
+					}
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -227,7 +310,7 @@ class LayoutSectionTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'LayoutSection',
 			$search,
@@ -238,5 +321,13 @@ class LayoutSectionTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'LayoutSection', $blockJson, $expectedAgentJson);
 	}
 }

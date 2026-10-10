@@ -35,8 +35,8 @@
 
 namespace Automad\Core;
 
-use Automad\API\RequestHandler;
-use Automad\Auth\Session;
+use Automad\Api\RequestHandler;
+use Automad\Auth\Auth;
 use Automad\System\Fields;
 use Automad\System\FileSystem;
 
@@ -56,7 +56,7 @@ class Sitemap {
 	 * @param array $collection
 	 */
 	public function __construct(array $collection) {
-		if (!Session::getUsername()) {
+		if (!Auth::isAuthenticated()) {
 			$this->generate($collection);
 		}
 	}

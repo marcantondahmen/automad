@@ -1,0 +1,94 @@
+{
+	"hidden": true,
+	"template": "page_full_width_centered",
+	"slug": "mcp-test",
+	"title": "MCP Test",
+	"date": "2026-09-30T15:13:59+00:00",
+	"+main": {
+		"blocks": [
+			{
+				"id": "OwZgnSLZEvOX",
+				"type": "paragraph",
+				"data": {
+					"large": true,
+					"text": "Large Paragraph"
+				},
+				"tunes": []
+			},
+			{
+				"id": "58CAI47u7pIv",
+				"type": "layoutSection",
+				"data": {
+					"align": "stretch",
+					"content": {
+						"blocks": [
+							{
+								"id": "bZkcUwBBebqu",
+								"type": "paragraph",
+								"data": {
+									"large": true,
+									"text": "Left side update"
+								},
+								"tunes": {
+									"layout": {
+										"width": "1/2"
+									}
+								}
+							},
+							{
+								"id": "svQbS3qtKcFr",
+								"type": "paragraph",
+								"data": {
+									"large": true,
+									"text": "Right side"
+								},
+								"tunes": {
+									"layout": {
+										"width": "1/2"
+									}
+								}
+							}
+						]
+					},
+					"gap": "4px",
+					"justify": "fill-row"
+				},
+				"tunes": {
+					"layout": {
+						"stretched": true
+					},
+					"spacing": {
+						"bottom": "2rem",
+						"top": "2rem"
+					}
+				}
+			},
+			{
+				"id": "85XyRCvkV0K6",
+				"type": "header",
+				"data": {
+					"level": 3,
+					"text": "Heading Update"
+				},
+				"tunes": {
+					"className": "test-class",
+					"id": "test-id",
+					"spacing": {
+						"top": "2rem"
+					}
+				}
+			},
+			{
+				"id": "Zjn0zgsE6OQ1",
+				"type": "paragraph",
+				"data": {
+					"large": false,
+					"text": "Small paragraph"
+				},
+				"tunes": []
+			}
+		]
+	},
+	":created": "2026-09-30T14:58:11+00:00",
+	":lastModified": "2026-09-30T15:13:59+00:00"
+}

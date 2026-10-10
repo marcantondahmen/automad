@@ -35,7 +35,9 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
+use Automad\Blocks\Utils\EmbedResolver;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
 use Automad\Models\Search\Replacement;
@@ -49,9 +51,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Embed extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			Embeds content from third-party platforms by URL. The following platforms are supported:
+			CodePen, Dailymotion, Facebook, Giphy, GitHub, Imgur, Instagram, Mixcloud, SoundCloud,
+			Twitter / X, Vimeo and YouTube. Use it for YouTube or Vimeo videos, social media posts
+			or audio tracks. Use the "video" block for self-hosted video files instead.
+			TXT;
+	}
+
 	/**
 	 * Render a embed block.
 	 *
@@ -61,72 +78,27 @@ class Embed extends AbstractBlock {
 	 */
 	public static function render(array $block, Automad $Automad): string {
 		$data = $block['data'];
-		$iframeAttr = <<< HTML
-			scrolling="no"
-			frameborder="no"
-			allowtransparency="true"
-			allowfullscreen="true"
-		HTML;
+		$html = EmbedResolver::getHtml($data['source'] ?? '');
 
-		$script = 'script';
-		$scriptType = '';
-		$iframe = 'iframe';
-		$iframeType = '';
-
-		if (AM_CONSENT_CHECK_ENABLED) {
-			$script = 'am-consent';
-			$scriptType = 'type="script"';
-			$iframe = 'am-consent';
-			$iframeType = 'type="iframe"';
+		if (empty($html)) {
+			return '';
 		}
 
-		if ($data['service'] == 'twitter') {
-			$html = <<< HTML
-				<blockquote class="twitter-tweet tw-align-center">
-					<a href="{$data['embed']}" class="am-consent-placeholder"></a>
-				</blockquote>
-				<$script $scriptType async src="https://platform.twitter.com/widgets.js" charset="utf-8"></$script>
-			HTML;
-		} elseif ($data['service'] == 'imgur') {
-			/** @var string */
-			$id = preg_replace('/^.*\/imgur.com\//', '', $data['embed']);
-
-			$html = <<< HTML
-				<blockquote class="imgur-embed-pub" data-id="$id">
-					<a href="{$data['embed']}" class="am-consent-placeholder"></a>
-				</blockquote>
-				<$script $scriptType async src="https://s.imgur.com/min/embed.js" charset="utf-8"></$script>
-			HTML;
-		} elseif (!empty($data['width'])) {
-			$paddingTop = $data['height'] / $data['width'] * 100;
-
-			$html = <<< HTML
-				<div style="position: relative; padding-top: $paddingTop%;">
-					<$iframe
-						$iframeType
-						$iframeAttr
-						src="{$data['embed']}"
-						style="position: absolute; top: 0; width: 100%; height: 100%;"
-					></$iframe>
-				</div>
-			HTML;
-		} else {
-			$html = <<< HTML
-				<$iframe 
-					$iframeType
-					$iframeAttr
-					src="{$data['embed']}"
-					height="{$data['height']}"
-					style="width: 100%;"
-				></$iframe>
-			HTML;
+		if (AM_CONSENT_CHECK_ENABLED) {
+			// Only replace either iframe or script tag. Not both since for example the GitHub provider
+			// HTML contains an iframe with a nested script tag that should not be processed.
+			if (str_contains($html, '<iframe')) {
+				$html = str_replace(array('<iframe', '</iframe'), array('<am-consent type="iframe"', '</am-consent'), $html);
+			} else {
+				$html = str_replace(array('<script', '</script'), array('<am-consent type="script"', '</am-consent'), $html);
+			}
 		}
 
 		if (!empty($data['caption'])) {
 			$html .= "<figcaption>{$data['caption']}</figcaption>";
 		}
 
-		$attr = Attr::render($block['tunes'], array('am-embed-' . $data['service']));
+		$attr = Attr::render($block['tunes']);
 
 		return "<am-embed $attr><figure>$html</figure></am-embed>";
 	}
@@ -167,5 +139,44 @@ class Embed extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return $block['data']['caption'] ?? '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		$services = join(', ', EmbedResolver::getServiceKeys());
+
+		return array(
+			'source' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The full URL of the content on the third-party platform, e.g. the URL of a YouTube video,
+					a Vimeo video, a SoundCloud track or a social media post, exactly as it is shown in the
+					browser address bar or share dialog. URLs of the following services are allowed:
+
+					$services
+					TXT,
+			),
+			'caption' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					An optional caption that is displayed below the embedded content. It supports inline HTML
+					formatting.
+					TXT,
+				true
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

@@ -159,6 +159,8 @@ export const enum CSS {
 
 	editorBlockDelimiter = 'am-c-ed-bl-delimiter',
 
+	editorBlockEmbed = 'am-c-ed-bl-embed',
+
 	editorBlockHeader = 'am-c-ed-bl-header',
 
 	editorBlockImage = 'am-c-ed-bl-image',
@@ -369,6 +371,15 @@ export const enum CSS {
 	platformSelectOption = 'am-f-platform-select__option',
 	platformSelectIcon = 'am-f-platform-select__icon',
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
+
+	previewHeader = 'am-c-preview__header',
+	previewActions = 'am-c-preview__actions',
+	previewButton = 'am-c-preview__button',
+	previewButtonActive = 'am-c-preview__button--active',
+	previewFrame = 'am-c-preview__frame',
+	previewGroup = 'am-c-preview__group',
+	previewViewport = 'am-c-preview__viewport',
+	previewViewportLoaded = 'am-c-preview__viewport--loaded',
 
 	richText = 'am-e-rich-text',
 

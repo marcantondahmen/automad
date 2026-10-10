@@ -32,6 +32,12 @@
  * See LICENSE.md for license information.
  */
 
+export const enum AccessTokenController {
+	addToken = 'AccessTokenController::addToken',
+	getTokens = 'AccessTokenController::getTokens',
+	revoke = 'AccessTokenController::revoke',
+}
+
 export const enum AiAssistanceController {
 	text = 'AiAssistanceController::text',
 }
@@ -69,6 +75,10 @@ export const enum ConfigController {
 
 export const enum EditLockController {
 	set = 'EditLockController::set',
+}
+
+export const enum EmbedController {
+	data = 'EmbedController::data',
 }
 
 export const enum FileCollectionController {
@@ -120,6 +130,17 @@ export const enum PackageManagerController {
 	update = 'PackageManagerController::update',
 	updateRepository = 'PackageManagerController::updateRepository',
 	updateAll = 'PackageManagerController::updateAll',
+}
+
+export const enum DraftCollectionController {
+	discardComponents = 'DraftCollectionController::discardComponents',
+	discardPage = 'DraftCollectionController::discardPage',
+	discardShared = 'DraftCollectionController::discardShared',
+	get = 'DraftCollectionController::get',
+	publishAll = 'DraftCollectionController::publishAll',
+	publishComponents = 'DraftCollectionController::publishComponents',
+	publishPage = 'DraftCollectionController::publishPage',
+	publishShared = 'DraftCollectionController::publishShared',
 }
 
 export const enum PageController {

@@ -115,3 +115,17 @@ export const notifySuccess = (
 		icon: 'check-circle',
 	});
 };
+
+/**
+ * Show a neutral info notification.
+ *
+ * @param message
+ * @param [duration]
+ */
+export const notifyInfo = (message: string, duration: number = 3000): void => {
+	notify({
+		message,
+		duration,
+		icon: 'bell-fill',
+	});
+};

@@ -7,4 +7,4 @@ if [[ ! -f "$PHPUNIT_PHAR" ]]; then
 	chmod +x $PHPUNIT_PHAR
 fi
 
-./$PHPUNIT_PHAR && ./$PHPUNIT_PHAR -c phpunit-i18n.xml
+./$PHPUNIT_PHAR --display-warnings && ./$PHPUNIT_PHAR -c phpunit-i18n.xml --display-warnings

@@ -1,0 +1,140 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022-2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+
+am-syntax {
+	--padding-y: 1.25rem;
+	display: block;
+	margin-top: @am-base-margin-y;
+
+	& .line-numbers .line-numbers-rows {
+		box-sizing: content-box;
+		margin: calc(var(--padding-y) * -1) 0;
+		padding: var(--padding-y) 0;
+		max-height: 100%;
+		width: 2.75rem;
+		overflow: hidden;
+		border-right: @am-border;
+
+		& > span:before {
+			opacity: 0.5;
+			color: var(--am-clr-text-muted);
+		}
+	}
+
+	& div.code-toolbar {
+		position: relative;
+
+		& > .toolbar {
+			position: absolute;
+			z-index: 1;
+			top: 0.65rem !important;
+			right: 0.5rem !important;
+			opacity: 1;
+
+			& .toolbar-item > button {
+				padding: 0.2rem 0.5rem;
+				font-family: @am-base-font-family;
+				font-size: @am-small-font-size;
+				color: var(--am-clr-text-muted);
+				background-color: var(--am-clr-background);
+				border: none;
+				border-radius: @am-form-radius;
+				cursor: pointer;
+
+				&.copy-to-clipboard-button {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 2.8em;
+					width: 2.8em;
+					overflow: hidden;
+					padding: 0;
+					background-color: transparent;
+					cursor: pointer;
+					box-shadow: none;
+					opacity: 0.6;
+					transition: opacity 0.2s;
+
+					& > span {
+						height: 2em;
+						width: 2em;
+						color: var(--am-clr-text-paragraph);
+						background-color: var(--am-clr-text-paragraph);
+						mask: data-uri(
+							'image/svg+xml;charset=UTF-8',
+							'../../common/svg/prism/copy.svg'
+						);
+						mask-repeat: no-repeat no-repeat;
+						mask-position: center center;
+					}
+
+					&[data-copy-state*='success'] > span {
+						mask: data-uri(
+							'image/svg+xml;charset=UTF-8',
+							'../../common/svg/prism/copied.svg'
+						);
+						mask-repeat: no-repeat no-repeat;
+						mask-position: center center;
+					}
+
+					&:hover {
+						opacity: 1;
+					}
+
+					&:focus {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+
+	& pre {
+		position: relative;
+		margin: 0;
+		padding: 1rem var(--padding-y);
+		line-height: 1.65;
+		overflow: hidden;
+		font-family: @am-code-font-family;
+		background-color: var(--am-clr-background-faded);
+		border: @am-card-border;
+		border-radius: @am-card-radius;
+
+		& > code {
+			padding: 0;
+			font-family: @am-code-font-family;
+			background: transparent;
+		}
+	}
+}

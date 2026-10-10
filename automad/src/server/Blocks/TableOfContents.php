@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -48,9 +49,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class TableOfContents extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			An automatically generated table of contents that links to all headings ("header" blocks)
+			on the page. It has no content of its own. Place it near the top of long articles or
+			documentation pages.
+			TXT;
+	}
+
 	/**
 	 * Render a toc block.
 	 *
@@ -94,5 +109,24 @@ class TableOfContents extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'type' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The list style of the table of contents. "ordered" renders a numbered list and "unordered"
+					renders a bulleted list. Defaults to "ordered".
+					TXT,
+				true,
+				array('ordered', 'unordered')
+			)
+		);
 	}
 }

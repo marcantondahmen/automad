@@ -36,17 +36,19 @@
 namespace Automad;
 
 use Automad\Admin\Dashboard;
-use Automad\API\RequestHandler;
-use Automad\API\Response;
-use Automad\Auth\Session;
+use Automad\Api\RequestHandler;
+use Automad\Api\Response;
+use Automad\Auth\Session\Session;
+use Automad\Controllers\FeedController;
 use Automad\Controllers\ImageController;
+use Automad\Controllers\McpController;
 use Automad\Controllers\PageController;
-use Automad\Core\Cache;
+use Automad\Core\Debug;
 use Automad\Core\Feed;
 use Automad\Core\I18n;
-use Automad\Core\Parse;
 use Automad\Core\Router;
 use Automad\Models\UserCollection;
+use Automad\System\FileSystem;
 use Automad\System\SetupWizard;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,14 +62,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Routes {
 	/**
-	 * An array of reserved routes that can't be used by any page.
-	 */
-	public static array $registered = array();
-
-	/**
 	 * Public API routes.
 	 */
-	private static array $publicAPIRoutes =array(
+	private static array $publicApiRoutes =array(
 		'public/.*',
 		'session/login',
 		'session/validate',
@@ -76,6 +73,25 @@ class Routes {
 		'user/reset-password',
 		'user-collection/create-first-user'
 	);
+
+	/**
+	 * The array of registered routes.
+	 */
+	private static array $registered = array();
+
+	/**
+	 * The reserved routes that can't be used as page routes.
+	 */
+	private static array $reserved = array();
+
+	/**
+	 * Get the array of reserved routes.
+	 *
+	 * @return array
+	 */
+	public static function getReserved(): array {
+		return self::$reserved;
+	}
 
 	/**
 	 * Register routes to a giver Router.
@@ -87,12 +103,43 @@ class Routes {
 		$hasPendingTotpVerification = AM_PAGE_DASHBOARD && !empty($_SESSION[Session::TOTP_LOGIN_SECRET_KEY]);
 
 		self::registerResizeRoute($Router, $isAuthenticatedUser);
-		self::registerAPIRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
+		self::registerApiRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerDashboardRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerFeedRoute($Router);
+		self::registerMcpRoute($Router);
 		self::registerPageRoutes($Router);
 
 		self::$registered = $Router->getRoutes();
+		self::$reserved = self::filterReserved(self::$registered);
+
+		Debug::log(self::$registered, 'Registered');
+		Debug::log(self::$reserved, 'Reserved');
+	}
+
+	/**
+	 * Collect the non-page reserved routes
+	 * that can't be used as page URLs.
+	 *
+	 * @param array $routes
+	 * @return array
+	 */
+	private static function filterReserved(array $routes): array {
+		$reservedUrls = array();
+
+		foreach ($routes as $route) {
+			$url = preg_replace('#^(/[\w\-\_]*).*$#i', '$1', $route['route']);
+
+			if ($url != '/') {
+				$reservedUrls[] = $url;
+			}
+		}
+
+		// Get all real directories.
+		foreach (FileSystem::glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
+			$reservedUrls[] = '/' . basename($dir);
+		}
+
+		return array_unique($reservedUrls);
 	}
 
 	/**
@@ -112,7 +159,7 @@ class Routes {
 	 * @param bool $isAuthenticatedUser
 	 * @param bool $pendingTotp
 	 */
-	private static function registerAPIRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
+	private static function registerApiRoutes(Router $Router, bool $isAuthenticatedUser, bool $pendingTotp): void {
 		$apiBase = RequestHandler::API_BASE;
 
 		$Router->register(
@@ -145,7 +192,7 @@ class Routes {
 		);
 
 		$Router->register(
-			"$apiBase/(" . join('|', self::$publicAPIRoutes) . ')',
+			"$apiBase/(" . join('|', self::$publicApiRoutes) . ')',
 			function () {
 				return RequestHandler::getResponse();
 			},
@@ -276,23 +323,28 @@ class Routes {
 	private static function registerFeedRoute(Router $Router): void {
 		$Router->register(
 			AM_FEED_URL,
-			function () {
-				header('Content-Type: application/rss+xml; charset=UTF-8');
-
-				$Cache = new Cache();
-
-				if ($Cache->pageCacheIsApproved()) {
-					return $Cache->readPageFromCache();
-				}
-
-				$Feed = new Feed(
-					$Cache->getAutomad(),
-					Parse::csv(AM_FEED_FIELDS)
-				);
-
-				return $Feed->get();
-			},
+			array(FeedController::class, 'render'),
 			AM_FEED_ENABLED
+		);
+	}
+
+	/**
+	 * Register the MCP resource route and its server card route
+	 * (including the `/.well-known/mcp.json` alias).
+	 *
+	 * @param Router $Router
+	 */
+	private static function registerMcpRoute(Router $Router): void {
+		$Router->register(
+			AM_MCP_SERVER_URL,
+			array(McpController::class, 'handleRequest'),
+			AM_MCP_SERVER_ENABLED
+		);
+
+		$Router->register(
+			'/\.well-known/mcp(/server-card)?\.json',
+			array(McpController::class, 'serverCard'),
+			AM_MCP_SERVER_ENABLED
 		);
 	}
 

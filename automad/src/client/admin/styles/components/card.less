@@ -247,6 +247,21 @@
 		border-bottom-left-radius: calc(@am-card-radius - 1px);
 		border-bottom-right-radius: calc(@am-card-radius - 1px);
 
+		& am-form {
+			display: flex;
+			justify-content: stretch;
+			align-items: stretch;
+			width: 100%;
+
+			& am-submit {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-grow: 1;
+				margin: 0 -@am-card-padding;
+			}
+		}
+
 		& > * {
 			flex: 1;
 			min-width: 0;

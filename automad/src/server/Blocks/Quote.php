@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Quote extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A blockquote for citing a person or a source, with the author or source name as caption.
+			Use it for testimonials, citations and pull quotes.
+			TXT;
+	}
+
 	/**
 	 * Render a quote block.
 	 *
@@ -108,5 +122,25 @@ class Quote extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return trim(($block['data']['text'] ?? '') . ' ' . ($block['data']['caption'] ?? ''));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'text' => new AgentFieldSchema(
+				'string',
+				'The quoted text. It supports inline HTML formatting.'
+			),
+			'caption' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The name of the author or the source of the quote, e.g. "Jane Doe, CEO at Example Inc.".
+					TXT
+			)
+		);
 	}
 }

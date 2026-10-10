@@ -35,7 +35,7 @@
 
 namespace Automad\Core;
 
-use Automad\API\RequestHandler;
+use Automad\Api\RequestHandler;
 use Automad\App;
 use Automad\Engine\Delimiters;
 use Automad\Models\ComponentCollection;
@@ -46,6 +46,7 @@ use Automad\Models\PageCollection;
 use Automad\Models\Pagelist;
 use Automad\Models\Search\SearchIndexCache;
 use Automad\Models\Shared;
+use Automad\Routes;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -280,7 +281,9 @@ class Automad {
 			return $this->getPage(Request::post('url'));
 		}
 
-		if (AM_FEED_ENABLED && AM_REQUEST == AM_FEED_URL) {
+		if (in_array(AM_REQUEST, Routes::getReserved())) {
+			Debug::log(AM_REQUEST, 'This is a reserved route. Set current page to "/"');
+
 			return $this->getPage('/');
 		}
 

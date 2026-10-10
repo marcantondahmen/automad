@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '@/admin/components/Base';
-import { App, CSS, EventName, requestAPI } from '@/admin/core';
+import { App, CSS, EventName, requestApi } from '@/admin/core';
 import { create, PackageManagerController } from '@/common';
 import { ComposerAuthComponent } from './ComposerAuth';
 import { AddRepositoryComponent } from './AddRepository';
@@ -91,7 +91,7 @@ class RepositoryListComponent extends BaseComponent {
 	 */
 	private async renderList(): Promise<void> {
 		const repos = ((
-			await requestAPI(PackageManagerController.getRepositoryCollection)
+			await requestApi(PackageManagerController.getRepositoryCollection)
 		)?.data ?? []) as Repository[];
 
 		this.listContainer.innerHTML = '';

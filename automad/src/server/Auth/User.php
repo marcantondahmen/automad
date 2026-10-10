@@ -37,6 +37,8 @@ namespace Automad\Auth;
 
 use Automad\Admin\Email\AccountRecoveryEmail;
 use Automad\Admin\Email\AccountSetupEmail;
+use Automad\Auth\Session\PasswordResetCode;
+use Automad\Auth\Session\Session;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
 use Automad\Models\UserCollection;

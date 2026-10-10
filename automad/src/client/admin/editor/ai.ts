@@ -43,7 +43,7 @@ import {
 	getLogger,
 	query,
 	queryAll,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BlockToolData } from 'automad-editorjs';
 import { EditorFieldComponent } from '@/admin/components/Fields/EditorField';
@@ -137,7 +137,7 @@ export class AiRuntime {
 	 * @static
 	 */
 	static get(): AiRuntime {
-		if (!App.system.ai.enabled) {
+		if (!App.system.aiAssistance.enabled) {
 			return;
 		}
 
@@ -162,7 +162,7 @@ export class AiRuntime {
 
 		const lockId = App.addNavigationLock();
 
-		const { data, error } = await requestAPI(
+		const { data, error } = await requestApi(
 			AiAssistanceController.text,
 			{
 				providerId,

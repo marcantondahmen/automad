@@ -90,7 +90,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 	/**
 	 * The block API.
 	 */
-	protected blockAPI: BlockAPI;
+	protected blockApi: BlockAPI;
 
 	/**
 	 * The wrapper element.
@@ -122,7 +122,7 @@ export abstract class BaseBlock<DataType extends object> implements BlockTool {
 		this.api = api;
 		this.data = this.prepareData(data || ({} as DataType));
 		this.config = config;
-		this.blockAPI = block;
+		this.blockApi = block;
 		this.readOnly = readOnly;
 		this.wrapper = create('div', ['cdx-block']);
 	}

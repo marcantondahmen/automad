@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Callout extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A highlighted box with a title and text that draws attention to important information such
+			as notes, tips, warnings or alerts that should stand out from the surrounding body text.
+			TXT;
+	}
+
 	/**
 	 * Render a callout block.
 	 *
@@ -109,5 +123,28 @@ class Callout extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return trim(($block['data']['title'] ?? '') . ' ' . ($block['data']['text'] ?? ''));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'text' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The body text of the callout. It supports inline HTML formatting such as <strong>, <i> and
+					<a href="..."> links.
+					TXT
+			),
+			'title' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					A short headline that summarizes the callout, e.g. "Note", "Tip" or "Warning".
+					TXT
+			)
+		);
 	}
 }

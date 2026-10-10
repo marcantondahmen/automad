@@ -51,7 +51,7 @@ am-root:not([class]) {
 		border-radius: var(--size);
 		border: 3px solid;
 		border-left-color: transparent;
-		animation: 0.8s linear 0s infinite root-preload;
+		animation: 0.8s linear 0s infinite @am-animation--spinner;
 	}
 }
 
@@ -85,15 +85,5 @@ am-root:not([class]) {
 		& * {
 			cursor: progress !important;
 		}
-	}
-}
-
-@keyframes root-preload {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	100% {
-		transform: rotate(360deg);
 	}
 }

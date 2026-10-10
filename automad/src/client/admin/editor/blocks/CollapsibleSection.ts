@@ -232,7 +232,7 @@ export class CollapsibleSectionBlock extends BaseBlock<CollapsibleSectionBlockDa
 						const blocks = await saveEditorBlocks(api);
 
 						this.data.content = { blocks };
-						this.blockAPI.dispatchChange();
+						this.blockApi.dispatchChange();
 					},
 				},
 				true,

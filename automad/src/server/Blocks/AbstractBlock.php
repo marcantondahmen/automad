@@ -35,7 +35,10 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
+use Automad\Blocks\Utils\Id;
 use Automad\Core\Automad;
+use Automad\Core\Blocks;
 use Automad\Models\ComponentCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -65,8 +68,132 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *		data: array,
  *		tunes: Tunes
  *	}
+ *
+ * @psalm-type AgentSchema = array{
+ *		width: AgentFieldSchema,
+ *		stretched?: AgentFieldSchema,
+ *		data?: array{
+ *			type: 'object',
+ *			properties: array<string, AgentFieldSchema>,
+ *			additionalProperties: false,
+ *			required?: string[]
+ *		}
+ *	}
  */
 abstract class AbstractBlock {
+	/**
+	 * Convert agent-provided data into the Editor.js block data structure.
+	 * Exsisting block data that is not exposed to MCP will be merged
+	 * with incoming updates.
+	 *
+	 * @param array $data
+	 * @param BlockData|null $savedBlock
+	 * @return BlockData|null
+	 */
+	public static function fromAgent(array $data, ?array $savedBlock = null): array|null {
+		if (empty($data['type'])) {
+			return null;
+		}
+
+		$savedBlock = $savedBlock ?? array();
+
+		/** @var BlockData */
+		$block = array(
+			'id' => $data['id'] ?? Id::generate(),
+			'type' => $data['type'],
+			'data' => $savedBlock['data'] ?? array(),
+			'tunes' => $savedBlock['tunes'] ?? array()
+		);
+
+		// The layout is always rebuilt from the incoming data, since `toAgent()` only exposes
+		// `stretched` and `width` when they are set. Omitting them has to clear the saved layout.
+		// All other tunes that are not exposed to agents are kept as they are.
+		$layout = array();
+
+		if (!empty($data['stretched'])) {
+			$layout['stretched'] = true;
+		}
+
+		if (!empty($data['width'])) {
+			$layout['width'] = $data['width'];
+		}
+
+		if (!empty($layout)) {
+			$block['tunes']['layout'] = $layout;
+		} else {
+			unset($block['tunes']['layout']);
+		}
+
+		$schema = static::agentDataSchema();
+
+		foreach (($data['data'] ?? array()) as $key => $value) {
+			if (isset($schema[$key])) {
+				$fieldSchema = $schema[$key];
+
+				if ($fieldSchema->hasBlocks === true) {
+					$savedChildren = $savedBlock['data']['content']['blocks'] ?? array();
+
+					$value = array('blocks' => Blocks::fromAgent($value, $savedChildren));
+				}
+			}
+
+			$block['data'][$key] = $value;
+		}
+
+		return $block;
+	}
+
+	/**
+	 * Return the JSON schema describing the block's data shape for AI agents.
+	 *
+	 * @return AgentSchema
+	 */
+	public static function getAgentSchema(): array {
+		$properties = array(
+			'width' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The block width as a fraction in the form of 1/2. 
+					This property is only used when the block is located inside a layoutSection block.
+					Skip this in order to use the default theme defined width.
+					TXT,
+				true,
+				array('1/4', '1/3', '1/2', '2/3', '3/4', '1/1')
+			)
+		);
+
+		if (static::isStretchable()) {
+			$properties['stretched'] = new AgentFieldSchema(
+				'boolean',
+				'If true the section will be stretched to the full width.',
+				true
+			);
+		}
+
+		$dataSchema = static::agentDataSchema();
+
+		if (!empty($dataSchema)) {
+			$required = static::getRequiredFromAgentDataSchema();
+
+			$properties['data'] = array(
+				'type' => 'object',
+				'properties' => $dataSchema,
+				'additionalProperties' => false
+			);
+
+			if (!empty($required)) {
+				$properties['data']['required'] = $required;
+			}
+		}
+
+		return $properties;
+	}
+
+	/**
+	 * The block description.
+	 */
+	abstract public static function getDescription(): string;
+
 	/**
 	 * Render a paragraph block.
 	 *
@@ -95,6 +222,47 @@ abstract class AbstractBlock {
 	): array;
 
 	/**
+	 * Convert block data into an agent-optimized representation.
+	 *
+	 * @param BlockData $block
+	 * @param ComponentCollection $ComponentCollection
+	 * @return array
+	 */
+	public static function toAgent(array $block, ComponentCollection $ComponentCollection): array {
+		$data = array('id' => $block['id'], 'type' => $block['type']);
+
+		$width = $block['tunes']['layout']['width'] ?? '';
+
+		if ($width) {
+			$data['width'] = $width;
+		}
+
+		if (static::isStretchable()) {
+			$stretched = $block['tunes']['layout']['stretched'] ?? false;
+
+			if ($stretched) {
+				$data['stretched'] = $stretched;
+			}
+		}
+
+		$dataValues = array();
+
+		foreach (static::agentDataSchema() as $key => $fieldSchema) {
+			$value = self::getAgentValue($fieldSchema, $block, $key, $ComponentCollection);
+
+			if (!is_null($value)) {
+				$dataValues[$key] = $value;
+			}
+		}
+
+		if (!empty($dataValues)) {
+			$data['data'] = $dataValues;
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Return a searchable string representation of a block.
 	 *
 	 * @param BlockData $block
@@ -102,4 +270,66 @@ abstract class AbstractBlock {
 	 * @return string
 	 */
 	abstract public static function toString(array $block, ComponentCollection $ComponentCollection): string;
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array();
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return false;
+	}
+
+	/**
+	 * Get a block value by name according to schema.
+	 *
+	 * @param AgentFieldSchema $schema
+	 * @param BlockData $block
+	 * @param string $key
+	 * @param ComponentCollection $ComponentCollection
+	 * @return mixed
+	 */
+	private static function getAgentValue(AgentFieldSchema $schema, array $block, string $key, ComponentCollection $ComponentCollection): mixed {
+		$value = $schema->hasBlocks
+			? Blocks::toAgent(
+				$block['data']['content']['blocks'] ?? array(),
+				$ComponentCollection
+			)
+			: ($block['data'][$key] ?? $schema->getDefault());
+
+		// Empty values of optional fields are skipped in order to keep the output small.
+		// Required fields always have to be part of the output, even when they are empty,
+		// since the agent output must be valid input for the update schema, where those fields are required.
+		if (!$value && $schema->optional) {
+			$value = null;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Get the properties that are required for a block.
+	 *
+	 * @return string[]
+	 */
+	private static function getRequiredFromAgentDataSchema(): array {
+		$required = array();
+
+		foreach (static::agentDataSchema() as $key => $prop) {
+			if (!$prop->optional) {
+				$required[] = $key;
+			}
+		}
+
+		return $required;
+	}
 }

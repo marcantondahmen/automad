@@ -339,7 +339,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 				};
 
 				this.updateLayout();
-				this.blockAPI.dispatchChange();
+				this.blockApi.dispatchChange();
 			}, 50)
 		);
 	}
@@ -452,7 +452,7 @@ export class ButtonsBlock extends BaseBlock<ButtonsBlockData> {
 			};
 
 			this.renderButton(button);
-			this.blockAPI.dispatchChange();
+			this.blockApi.dispatchChange();
 		});
 	}
 

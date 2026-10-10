@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
@@ -53,9 +54,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class ImageSlideshow extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A responsive carousel or slider that shows a set of images one at a time. Use it for hero
+			sliders or image sequences where space is limited. Use the "gallery" block to show all
+			images at once instead.
+			TXT;
+	}
+
 	/**
 	 * Render a slider block.
 	 *
@@ -139,5 +154,49 @@ class ImageSlideshow extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return join(' ', $block['data']['files'] ?? array());
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'files' => new AgentFieldSchema(
+				'array',
+				<<< TXT
+					The list of images that are shown in the slideshow. Each item is either the file name of
+					an image that is attached to the current page, a path that starts with a slash and is
+					relative to the Automad base directory, or a full remote image URL. In order to use images
+					from URLs, import them to the page first using the `file_import` tool and use the
+					returned `link` values.
+					TXT,
+				items: array('type' => 'string')
+			),
+			'imageHeightPx' => new AgentFieldSchema(
+				'number',
+				<<< TXT
+					The height in pixels that all images are cropped to, e.g. 780. Together with
+					"imageWidthPx" it defines the aspect ratio of the slides.
+					TXT
+			),
+			'imageWidthPx' => new AgentFieldSchema(
+				'number',
+				<<< TXT
+					The width in pixels that all images are cropped to, e.g. 1200. Together with
+					"imageHeightPx" it defines the aspect ratio of the slides.
+					TXT
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }
