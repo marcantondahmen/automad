@@ -96,6 +96,10 @@ class PageCreate extends AbstractTool {
 
 			`templates` belong to `themes` and always go together. Use the `page_template_list` tool to find templates and their themes.
 
+			The `tags` field is used to tag a page with some common labels. Pages that share tags are considered "related". 
+			Use the `tag_list` tool to get a list of all existing tags that are used across pages. Always try to reuse
+			existing tags before as values here and only use new tags if no similar tag can be found.
+
 			Do not add any `<h1>` tag with the page title. The title is already handled by the `title` property
 			and must not be added as part of the `content` field.
 

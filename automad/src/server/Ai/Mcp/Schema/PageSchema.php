@@ -328,6 +328,36 @@ class PageSchema {
 	}
 
 	/**
+	 * The page search by tag schema.
+	 *
+	 * @return array
+	 */
+	public static function searchByTag(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Search by Tag Schema',
+			'description' => 'An input schema for searching for page by tag on an Automad website.',
+			'type' => 'object',
+			'properties' => array(
+				'tag' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						A single tag. Use the `tag_list` tool to get a list of all used tags. 
+						TXT
+				),
+				'scopeId' => array(
+					'type' => 'string',
+					'description' => <<< TXT
+						An optional scope for the search.
+						When used, results will only include pages below the given scope.
+						TXT
+				)
+			),
+			'required' => array('search')
+		);
+	}
+
+	/**
 	 * The page tree schema.
 	 *
 	 * @return array
