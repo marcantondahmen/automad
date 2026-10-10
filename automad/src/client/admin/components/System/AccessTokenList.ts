@@ -48,9 +48,11 @@ import {
 	fire,
 	html,
 	notifyFormError,
+	query,
 	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '../Base';
+import { mcpConnectCmd, mcpConnectJson } from '../Pages/Partials/System/Mcp';
 
 interface AccessToken {
 	id: string;
@@ -103,27 +105,27 @@ class AccessTokenListComponent extends BaseComponent {
 	 * Render the modal used to issue a new access token.
 	 */
 	private renderAddTokenModal(): void {
-		const nameInput = createField(FieldTag.input, null, {
+		const inputs = create('div');
+
+		const nameInput = createField(FieldTag.input, inputs, {
 			id: 'am-access-token-name',
 			key: 'name',
 			name: 'name',
-			hideLabel: true,
-			placeholder: App.text('accessTokensAddTokenNameLabel'),
+			label: App.text('accessTokensAddTokenNameLabel'),
 			value: '',
 		});
 
-		const descriptionInput = createField(FieldTag.input, null, {
+		const descriptionInput = createField(FieldTag.input, inputs, {
 			id: 'am-access-token-description',
 			key: 'description',
 			name: 'description',
-			hideLabel: true,
-			placeholder: App.text('accessTokensAddTokenDescriptionLabel'),
+			label: App.text('accessTokensAddTokenDescriptionLabel'),
 			value: '',
 		});
 
 		const { modal, body } = createGenericModal(
 			App.text('accessTokensAddTokenTitle'),
-			App.text('save'),
+			App.text('accessTokensTokenCreateButton'),
 			true,
 			async (modal) => {
 				const { data, error } = await requestApi(
@@ -149,8 +151,7 @@ class AccessTokenListComponent extends BaseComponent {
 		);
 
 		create('am-form-error', [], {}, body);
-		body.appendChild(nameInput);
-		body.appendChild(descriptionInput);
+		body.appendChild(inputs);
 
 		setTimeout(() => {
 			modal.open();
@@ -171,20 +172,61 @@ class AccessTokenListComponent extends BaseComponent {
 			App.text('close')
 		);
 
-		create('p', [], {}, body, App.text('accessTokensTokenCreatedStep1'));
-		create('code', [CSS.textMono], {}, body, accessToken);
-
-		const mcpUrl = App.system.mcp.url;
-		const claudeCommand = `claude mcp add --transport http automad ${mcpUrl} --header "Authorization: Bearer ${accessToken}"`;
+		query(`.${CSS.modalDialog}`, modal)?.classList.add(
+			CSS.modalDialogLarge
+		);
 
 		create(
-			'span',
+			'div',
 			[CSS.richText],
 			{},
 			body,
-			App.text('accessTokensTokenCreatedStep2')
+			App.text('accessTokensTokenCreatedCopy')
 		);
-		create('code', [CSS.textMono], {}, body, claudeCommand);
+		create('am-syntax', [], {}, body, accessToken);
+
+		create('hr', [], {}, body);
+
+		const cmd = create('div', [], {}, body);
+
+		create(
+			'p',
+			[CSS.richText],
+			{},
+			cmd,
+			App.text('accessTokensTokenCreatedConnectCmd')
+		);
+
+		create(
+			'am-syntax',
+			[],
+			{},
+			cmd,
+			mcpConnectCmd(App.system.mcp.name, App.system.mcp.url, accessToken)
+		);
+
+		create('hr', [], {}, body);
+
+		const json = create('div', [], {}, body);
+
+		create(
+			'p',
+			[CSS.richText],
+			{},
+			json,
+			App.text('accessTokensTokenCreatedConnectJson').replace(
+				'{}',
+				'<code>.mcp.json</code>'
+			)
+		);
+
+		create(
+			'am-syntax',
+			[],
+			{ [Attr.lang]: 'json' },
+			json,
+			mcpConnectJson(App.system.mcp.name, App.system.mcp.url, accessToken)
+		);
 
 		setTimeout(() => {
 			modal.open();

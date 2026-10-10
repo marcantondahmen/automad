@@ -42,6 +42,57 @@ import {
 } from '@/admin/core';
 
 /**
+ * Render the connection command.
+ *
+ * @param name
+ * @param mcpUrl
+ * @param [token]
+ * @returns the rendered command
+ */
+export const mcpConnectCmd = (
+	name: string,
+	mcpUrl: string,
+	token: string = '<token>'
+) => {
+	const indent = ' '.repeat(2);
+
+	return [
+		'claude mcp add --transport http \\',
+		`${indent}${name} \\`,
+		`${indent}${mcpUrl} \\`,
+		`${indent}--header "Authorization: Bearer ${token}"`,
+	].join('\n');
+};
+
+/**
+ * Render the connection JSON.
+ *
+ * @param name
+ * @param mcpUrl
+ * @param [token]
+ * @returns the rendered JSON
+ */
+export const mcpConnectJson = (
+	name: string,
+	mcpUrl: string,
+	token: string = '<token>'
+) => {
+	return JSON.stringify(
+		{
+			mcpServers: {
+				[name]: {
+					type: 'http',
+					url: mcpUrl,
+					headers: { Authorization: `Bearer ${token}` },
+				},
+			},
+		},
+		null,
+		2
+	);
+};
+
+/**
  * Render the MCP section.
  *
  * @returns the rendered HTML
@@ -49,29 +100,8 @@ import {
 export const renderMcpSection = (): string => {
 	const { name, url: mcpUrl, serverCardUrl } = App.system.mcp;
 
-	// Whitespace inside of string literals is collapsed in production builds.
-	const indent = ' '.repeat(2);
-
-	const cliSnippet = [
-		'claude mcp add --transport http \\',
-		`${indent}${name} \\`,
-		`${indent}${mcpUrl} \\`,
-		`${indent}--header "Authorization: Bearer <token>"`,
-	].join('\n');
-
-	const jsonSnippet = JSON.stringify(
-		{
-			mcpServers: {
-				[name]: {
-					type: 'http',
-					url: mcpUrl,
-					headers: { Authorization: 'Bearer <token>' },
-				},
-			},
-		},
-		null,
-		2
-	);
+	const cliSnippet = mcpConnectCmd(name, mcpUrl);
+	const jsonSnippet = mcpConnectJson(name, mcpUrl);
 
 	return html`
 		<am-form

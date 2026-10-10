@@ -55,28 +55,39 @@ class SyntaxComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		// Zero-width spaces are added by the html template function when escaping slashes.
-		const code = (this.textContent || '').replace(/​/g, '').trim();
-		const requested = this.getAttribute(Attr.lang) as CodeLanguage;
-		const language = supportedLanguages.includes(requested)
-			? requested
-			: 'none';
-		const multiline = code.includes('\n');
+		setTimeout(() => {
+			// Zero-width spaces are added by the html template function when escaping slashes.
+			const code = (this.textContent || '').replace(/​/g, '').trim();
+			const requested = (this.getAttribute(Attr.lang) ||
+				'none') as CodeLanguage;
+			const language = supportedLanguages.includes(requested)
+				? requested
+				: 'none';
+			const multiline = code.includes('\n');
 
-		this.innerHTML = '';
+			this.innerHTML = '';
 
-		const pre = create(
-			'pre',
-			[`language-${language}`, ...(multiline ? ['line-numbers'] : [])],
-			{},
-			this
-		);
+			const pre = create(
+				'pre',
+				[
+					`language-${language}`,
+					...(multiline ? ['line-numbers'] : []),
+				],
+				{},
+				this
+			);
 
-		const codeElement = create('code', [`language-${language}`], {}, pre);
+			const codeElement = create(
+				'code',
+				[`language-${language}`],
+				{},
+				pre
+			);
 
-		codeElement.textContent = code;
+			codeElement.textContent = code;
 
-		Prism.highlightElement(codeElement);
+			Prism.highlightElement(codeElement);
+		}, 0);
 	}
 }
 
