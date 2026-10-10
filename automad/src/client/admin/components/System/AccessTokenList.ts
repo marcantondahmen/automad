@@ -91,8 +91,8 @@ class AccessTokenListComponent extends BaseComponent {
 
 		this.listContainer = create(
 			'div',
-			[CSS.grid],
-			{ style: '--min: 20rem;' },
+			[CSS.flex, CSS.flexColumn, CSS.flexGap],
+			{},
 			this
 		);
 
@@ -232,21 +232,29 @@ class AccessTokenListComponent extends BaseComponent {
 			this.listContainer,
 			html`
 				<div class="${CSS.flexItemGrow}">
-					<span class="${CSS.cardIcon}"
-						><i class="bi bi-key"></i
-					></span>
-					<div class="${CSS.cardTitle}">$${token.name}</div>
-					<div class="${CSS.cardBody} ${CSS.flexGap}">
-						${token.description
-							? html`<div>$${token.description}</div>`
-							: ''}
-						<div>
+					<div class="${CSS.cardTitle}">
+						<div
+							class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
+						>
+							<i class="bi bi-key"></i>
+							<span>$${token.name}</span>
+							<small class="${CSS.textMuted}">
+								$${token.description}
+							</small>
+						</div>
+					</div>
+					<div class="${CSS.cardBody}">
+						<div
+							class="${CSS.flex} ${CSS.flexGap} ${CSS.flexAlignCenter}"
+						>
 							<span
 								class="${CSS.badge} ${CSS.badgeMuted} ${CSS.textMono}"
 							>
 								$${token.preview}*****
 							</span>
-							${dateFormat(token.createdAt)}
+							<span class="${CSS.textMuted}">
+								${dateFormat(token.createdAt)}
+							</span>
 						</div>
 					</div>
 				</div>

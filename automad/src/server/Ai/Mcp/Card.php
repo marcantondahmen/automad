@@ -58,7 +58,7 @@ class Card {
 	/**
 	 * The path of the JSON server card.
 	 */
-	private const JSON_PATH = '/.well-known/mcp/server-card.json';
+	public const JSON_PATH = '/.well-known/mcp/server-card.json';
 
 	/**
 	 * Build the server card data.

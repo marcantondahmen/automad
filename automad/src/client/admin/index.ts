@@ -217,4 +217,5 @@ import('./components/Root');
 import('./components/Select');
 import('./components/SetupWizard');
 import('./components/Spinner');
+import('./components/Syntax');
 import('./components/UndoButtons');

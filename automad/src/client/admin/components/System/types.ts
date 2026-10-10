@@ -67,7 +67,9 @@ interface FeedSettings {
 
 interface McpSettings {
 	enabled: Enabled;
+	name: string;
 	url: string;
+	serverCardUrl: string;
 }
 
 export interface User {

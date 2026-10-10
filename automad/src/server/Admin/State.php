@@ -36,6 +36,8 @@
 namespace Automad\Admin;
 
 use Automad\Ai\Assistance\ProviderCollection;
+use Automad\Ai\Mcp\Card;
+use Automad\Ai\Mcp\Server;
 use Automad\Auth\Token\AccessTokenConfig;
 use Automad\Auth\User;
 use Automad\Core\Automad;
@@ -148,7 +150,9 @@ class State {
 				),
 				'mcp' => array(
 					'enabled' => AM_MCP_SERVER_ENABLED,
-					'url' => AM_SERVER . AM_BASE_INDEX . AM_MCP_SERVER_URL,
+					'name' => Server::getName(),
+					'serverCardUrl' => AM_SERVER . AM_BASE_INDEX . Card::JSON_PATH,
+					'url' => AM_SERVER . AM_BASE_INDEX . AM_MCP_SERVER_URL
 				),
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection())
