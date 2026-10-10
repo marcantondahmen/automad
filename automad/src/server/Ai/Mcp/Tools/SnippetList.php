@@ -66,7 +66,7 @@ class SnippetList extends AbstractTool {
 	 * @return string
 	 */
 	public function getDescription(): string {
-		return 'A list of available snippets.';
+		return 'A list of available snippets. Returns an object with a `snippets` array.';
 	}
 
 	/**
@@ -77,13 +77,47 @@ class SnippetList extends AbstractTool {
 	 */
 	public function getHandler(): callable {
 		return function () {
-			return array_map(function ($file) {
+			$snippets = array_map(function ($file) {
 				return array(
 					'file' => $file,
 					'source' => preg_replace('/\<#.*?#\>/s', '', strval(file_get_contents(AM_BASE_DIR . AM_DIR_PACKAGES . $file)))
 				);
 			}, PackageCollection::getPackagesDirectorySnippets());
+
+			return array('snippets' => $snippets);
 		};
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return array(
+			'type' => 'object',
+			'properties' => array(
+				'snippets' => array(
+					'type' => 'array',
+					'description' => 'The installed snippets.',
+					'items' => array(
+						'type' => 'object',
+						'properties' => array(
+							'file' => array(
+								'type' => 'string',
+								'description' => 'The path of the file relative to the packages directory.'
+							),
+							'source' => array(
+								'type' => 'string',
+								'description' => 'The source code of the file.'
+							)
+						),
+						'required' => array('file', 'source')
+					)
+				)
+			),
+			'required' => array('snippets')
+		);
 	}
 
 	/**

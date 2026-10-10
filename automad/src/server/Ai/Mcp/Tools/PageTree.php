@@ -166,7 +166,16 @@ class PageTree extends AbstractTool {
 	 * @return array|null
 	 */
 	public function getInputSchema(): array|null {
-		return PageSchema::tree();
+		return PageSchema::inputTree();
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return PageSchema::outputTree();
 	}
 
 	/**

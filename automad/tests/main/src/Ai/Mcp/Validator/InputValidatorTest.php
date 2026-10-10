@@ -167,6 +167,6 @@ class InputValidatorTest extends TestCase {
 	 * @return array
 	 */
 	private function validate(array $data): array {
-		return (new InputValidator())->validateAgainstJsonSchema($data, PageSchema::update());
+		return (new InputValidator())->validateAgainstJsonSchema($data, PageSchema::inputUpdate());
 	}
 }

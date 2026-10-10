@@ -95,7 +95,7 @@ class PageSearchByTag extends AbstractTool {
 			- `private`: if true, the page can only be viewed by admins, independent from `publicationState`
 			- `hidden`: if true, the page is publicly accessible but hidden in page lists and navigations
 
-			The result limit is 200 pages.
+			The result limit is 200 pages. Returns an object with a `pages` array.
 			TXT;
 	}
 
@@ -139,10 +139,12 @@ class PageSearchByTag extends AbstractTool {
 				'type' => false
 			));
 
-			return array_values(array_map(
-				fn (Page $Page) => $PageTransformer->baseData($Page),
-				$Automad->Pagelist->getPages()
-			));
+			return array(
+				'pages' => array_values(array_map(
+					fn (Page $Page) => $PageTransformer->baseData($Page),
+					$Automad->Pagelist->getPages()
+				))
+			);
 		};
 	}
 
@@ -152,7 +154,16 @@ class PageSearchByTag extends AbstractTool {
 	 * @return array|null
 	 */
 	public function getInputSchema(): array|null {
-		return PageSchema::searchByTag();
+		return PageSchema::inputSearchByTag();
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return PageSchema::outputSearchByTag();
 	}
 
 	/**

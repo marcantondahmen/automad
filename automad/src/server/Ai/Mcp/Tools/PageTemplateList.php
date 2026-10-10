@@ -67,7 +67,7 @@ class PageTemplateList extends AbstractTool {
 	 * @return string
 	 */
 	public function getDescription(): string {
-		return 'A list of available page templates.';
+		return 'A list of available page templates. Returns an object with a `templates` array.';
 	}
 
 	/**
@@ -109,8 +109,46 @@ class PageTemplateList extends AbstractTool {
 				}
 			}
 
-			return $templates;
+			return array('templates' => $templates);
 		};
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return array(
+			'type' => 'object',
+			'properties' => array(
+				'templates' => array(
+					'type' => 'array',
+					'description' => 'The available page templates.',
+					'items' => array(
+						'type' => 'object',
+						'properties' => array(
+							'template' => array('type' => 'string'),
+							'theme' => array('type' => 'string'),
+							'fields' => array(
+								'type' => 'array',
+								'items' => array(
+									'type' => 'object',
+									'properties' => array(
+										'field' => array('type' => 'string'),
+										'description' => array('type' => 'string')
+									),
+									'required' => array('field', 'description')
+								)
+							),
+							'description' => array('type' => 'string')
+						),
+						'required' => array('template', 'theme', 'fields', 'description')
+					)
+				)
+			),
+			'required' => array('templates')
+		);
 	}
 
 	/**

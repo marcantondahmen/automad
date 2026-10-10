@@ -84,6 +84,17 @@ abstract class AbstractTool implements Discoverable {
 	}
 
 	/**
+	 * The tool's output schema that describes the structured content of the tool's result.
+	 * Note that the root of the schema must be an object schema, which means that handlers returning
+	 * a list have to wrap that list in an object.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return null;
+	}
+
+	/**
 	 * The tool's name, as used by MCP clients to call it.
 	 *
 	 * @return string

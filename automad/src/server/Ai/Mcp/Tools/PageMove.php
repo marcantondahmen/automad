@@ -161,7 +161,16 @@ class PageMove extends AbstractTool {
 	 * @return array|null
 	 */
 	public function getInputSchema(): array|null {
-		return PageSchema::move();
+		return PageSchema::inputMove();
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return PageSchema::outputMove();
 	}
 
 	/**

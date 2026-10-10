@@ -57,7 +57,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function create(): array {
+	public static function inputCreate(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Creation Schema',
@@ -124,7 +124,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function delete(): array {
+	public static function inputDelete(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Deletion Schema',
@@ -148,7 +148,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function duplicate(): array {
+	public static function inputDuplicate(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Duplication Schema',
@@ -171,7 +171,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function move(): array {
+	public static function inputMove(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Move Schema',
@@ -200,7 +200,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function publish(): array {
+	public static function inputPublish(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Publication Schema',
@@ -223,7 +223,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function read(): array {
+	public static function inputRead(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Read Schema',
@@ -266,7 +266,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function reorderChildren(): array {
+	public static function inputReorderChildren(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Reorder Schema',
@@ -301,7 +301,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function search(): array {
+	public static function inputSearch(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Search Schema',
@@ -332,7 +332,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function searchByTag(): array {
+	public static function inputSearchByTag(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Search by Tag Schema',
@@ -353,7 +353,7 @@ class PageSchema {
 						TXT
 				)
 			),
-			'required' => array('search')
+			'required' => array('tag')
 		);
 	}
 
@@ -362,7 +362,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function tree(): array {
+	public static function inputTree(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Tree Schema',
@@ -401,7 +401,7 @@ class PageSchema {
 	 *
 	 * @return array
 	 */
-	public static function update(): array {
+	public static function inputUpdate(): array {
 		return array(
 			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
 			'title' => 'Automad Page Update Schema',
@@ -497,6 +497,210 @@ class PageSchema {
 	}
 
 	/**
+	 * The output schema of a created page.
+	 *
+	 * @return array
+	 */
+	public static function outputCreate(): array {
+		return self::outputPage('Automad Page Creation Output Schema', 'The newly created page.');
+	}
+
+	/**
+	 * The output schema of a duplicated page.
+	 *
+	 * @return array
+	 */
+	public static function outputDuplicate(): array {
+		return self::outputPage('Automad Page Duplication Output Schema', 'The duplicate of the page.');
+	}
+
+	/**
+	 * The output schema of a moved page.
+	 *
+	 * @return array
+	 */
+	public static function outputMove(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Move Output Schema',
+			'description' => 'The moved page.',
+			'type' => 'object',
+			'properties' => array(
+				...self::pageBaseProperties(),
+				'previousId' => array(
+					'type' => 'string',
+					'description' => 'The ID of the page before it was moved.'
+				)
+			),
+			'required' => array('id', 'previousId')
+		);
+	}
+
+	/**
+	 * The output schema of a published page.
+	 *
+	 * @return array
+	 */
+	public static function outputPublish(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Publication Output Schema',
+			'description' => 'The published page.',
+			'type' => 'object',
+			'properties' => array(
+				...self::pageBaseProperties(),
+				'previousId' => array(
+					'type' => 'string',
+					'description' => 'The previous ID of the page. Only present when publishing changed the ID of the page.'
+				)
+			),
+			'required' => array('id')
+		);
+	}
+
+	/**
+	 * The output schema of a read page.
+	 *
+	 * @return array
+	 */
+	public static function outputRead(): array {
+		$schema = self::outputPage('Automad Page Read Output Schema', 'The requested page.');
+
+		// The `text` format returns a plain text representation instead of blocks for each field.
+		$schema['properties']['content']['anyOf'][0]['additionalProperties'] = array(
+			'anyOf' => array(
+				array(
+					'type' => 'array',
+					'items' => array('type' => 'object')
+				),
+				array('type' => 'string')
+			)
+		);
+
+		$schema['properties']['files'] = array(
+			'type' => 'array',
+			'description' => 'The basenames of all files that are uploaded to the page.',
+			'items' => array('type' => 'string')
+		);
+
+		return $schema;
+	}
+
+	/**
+	 * The output schema of the reordered sub-pages.
+	 *
+	 * @return array
+	 */
+	public static function outputReorderChildren(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Reorder Output Schema',
+			'description' => 'The new order of the sub-pages.',
+			'type' => 'object',
+			'properties' => array(
+				'order' => array(
+					'type' => 'array',
+					'description' => 'The ordered list of page ID basenames.',
+					'items' => array('type' => 'string')
+				)
+			),
+			'required' => array('order')
+		);
+	}
+
+	/**
+	 * The output schema of the page search.
+	 *
+	 * @return array
+	 */
+	public static function outputSearch(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Search Output Schema',
+			'description' => 'The pages that match the search string, sorted by the number of hits.',
+			'type' => 'object',
+			'properties' => array(
+				'pages' => array(
+					'type' => 'array',
+					'items' => array(
+						'type' => 'object',
+						'properties' => array(
+							...self::pageBaseProperties(),
+							'context' => array(
+								'type' => 'string',
+								'description' => 'A text excerpt that shows the search string in context.'
+							),
+							'hitCount' => array(
+								'type' => 'integer',
+								'description' => 'The number of times the search string was found on the page.'
+							)
+						),
+						'required' => array('id', 'context', 'hitCount')
+					)
+				)
+			),
+			'required' => array('pages')
+		);
+	}
+
+	/**
+	 * The output schema of the page search by tag.
+	 *
+	 * @return array
+	 */
+	public static function outputSearchByTag(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Search by Tag Output Schema',
+			'description' => 'The pages that are tagged with the given tag.',
+			'type' => 'object',
+			'properties' => array(
+				'pages' => array(
+					'type' => 'array',
+					'items' => array(
+						'type' => 'object',
+						'properties' => self::pageBaseProperties(),
+						'required' => array('id')
+					)
+				)
+			),
+			'required' => array('pages')
+		);
+	}
+
+	/**
+	 * The output schema of the page tree.
+	 *
+	 * @return array
+	 */
+	public static function outputTree(): array {
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => 'Automad Page Tree Output Schema',
+			'description' => 'The starting page of the tree with its nested sub-pages.',
+			'type' => 'object',
+			'properties' => array(
+				...self::pageBaseProperties(),
+				'children' => array(
+					'type' => 'array',
+					'description' => 'The sub-pages. Not present for pages without sub-pages or beyond the requested depth.',
+					'items' => array('$ref' => '#')
+				)
+			),
+			'required' => array('id')
+		);
+	}
+
+	/**
+	 * The output schema of an updated page.
+	 *
+	 * @return array
+	 */
+	public static function outputUpdate(): array {
+		return self::outputPage('Automad Page Update Output Schema', 'The updated page.');
+	}
+
+	/**
 	 * The blocks schema.
 	 *
 	 * @return array
@@ -567,6 +771,97 @@ class PageSchema {
 				),
 				...$blocks
 			)
+		);
+	}
+
+	/**
+	 * The shared properties of a page that are returned by every tool that returns pages.
+	 *
+	 * @return array
+	 */
+	private static function pageBaseProperties(): array {
+		return array(
+			'id' => array(
+				'type' => 'string',
+				'description' => 'The ID is the local absolute URL path of the page like for example `/about` or `/work/project`.'
+			),
+			'url' => array(
+				'type' => 'string',
+				'description' => 'The full URL of the page.'
+			),
+			'title' => array('type' => 'string'),
+			'parent' => array(
+				'type' => 'string',
+				'description' => 'The ID of the parent page.'
+			),
+			'lastModified' => array(
+				'type' => 'string',
+				'description' => 'The date and time of the last modification.'
+			),
+			'template' => array(
+				'type' => 'string',
+				'description' => 'The template used by the page.'
+			),
+			'publicationState' => array(
+				'type' => 'string',
+				'enum' => array('published', 'draft')
+			),
+			'private' => array('type' => 'boolean'),
+			'hidden' => array('type' => 'boolean'),
+			'tags' => array(
+				'type' => 'array',
+				'items' => array('type' => 'string')
+			)
+		);
+	}
+
+	/**
+	 * The output schema of a single page including its content.
+	 *
+	 * @param string $title
+	 * @param string $description
+	 * @return array
+	 */
+	private static function outputPage(string $title, string $description): array {
+		// Empty maps are serialized as an empty JSON array, since PHP does not distinguish between both.
+		$emptyList = array('type' => 'array', 'maxItems' => 0);
+
+		return array(
+			'$schema' => 'https://json-schema.org/draft/2020-12/schema',
+			'title' => $title,
+			'description' => $description,
+			'type' => 'object',
+			'properties' => array(
+				...self::pageBaseProperties(),
+				'date' => array(
+					'type' => 'string',
+					'description' => 'The page date in the ISO 8601 date-time format. Empty when the page has no date.'
+				),
+				'content' => array(
+					'description' => <<< TXT
+						The blocks for each content field (+main, +hero, etc.) of the page.
+						The block structure is the same as the one that is used as input for the `page_create` and `page_update` tools.
+						TXT,
+					'anyOf' => array(
+						array(
+							'type' => 'object',
+							'additionalProperties' => array(
+								'type' => 'array',
+								'items' => array('type' => 'object')
+							)
+						),
+						$emptyList
+					)
+				),
+				'meta' => array(
+					'description' => 'Additional non-empty data fields of the page.',
+					'anyOf' => array(
+						array('type' => 'object'),
+						$emptyList
+					)
+				)
+			),
+			'required' => array('id', 'content', 'meta')
 		);
 	}
 }

@@ -71,6 +71,8 @@ class ComponentList extends AbstractTool {
 		return <<< TXT
 			A list of available components.
 
+			Returns an object with a `components` array.
+
 			Use the component `id` in order to reference a component in the `page_create` and `page_update` tools.
 			`content` contains a simplified string representation of all contained blocks.
 			TXT;
@@ -86,7 +88,7 @@ class ComponentList extends AbstractTool {
 		return function () {
 			$ComponentCollection = new ComponentCollection();
 
-			return array_map(
+			$components = array_map(
 				function (array $component) use ($ComponentCollection): array {
 					return array(
 						'id' => $component['id'],
@@ -96,7 +98,39 @@ class ComponentList extends AbstractTool {
 				},
 				$ComponentCollection->get()
 			);
+
+			return array('components' => $components);
 		};
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return array(
+			'type' => 'object',
+			'properties' => array(
+				'components' => array(
+					'type' => 'array',
+					'description' => 'The available components.',
+					'items' => array(
+						'type' => 'object',
+						'properties' => array(
+							'id' => array('type' => 'string'),
+							'name' => array('type' => 'string'),
+							'content' => array(
+								'type' => 'string',
+								'description' => 'A shortened plain text representation of the component content.'
+							)
+						),
+						'required' => array('id', 'name', 'content')
+					)
+				)
+			),
+			'required' => array('components')
+		);
 	}
 
 	/**

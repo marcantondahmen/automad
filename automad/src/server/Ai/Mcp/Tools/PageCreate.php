@@ -191,7 +191,16 @@ class PageCreate extends AbstractTool {
 	 * @return array|null
 	 */
 	public function getInputSchema(): array|null {
-		return PageSchema::create();
+		return PageSchema::inputCreate();
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return PageSchema::outputCreate();
 	}
 
 	/**

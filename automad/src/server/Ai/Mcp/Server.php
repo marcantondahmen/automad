@@ -108,6 +108,7 @@ class Server {
 				title: $Tool->getTitle(),
 				description: $Tool->getDescription(),
 				inputSchema: $Tool->getInputSchema(),
+				outputSchema: $Tool->getOutputSchema(),
 				annotations: $Tool->getAnnotations()
 			);
 		}

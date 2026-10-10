@@ -53,7 +53,7 @@ class PageTransformerTest extends TestCase {
 		$Automad = (new Mock())->createAutomad();
 
 		// Make sure that all block classes are loaded.
-		PageSchema::update();
+		PageSchema::inputUpdate();
 
 		$classes = array_filter(
 			get_declared_classes(),
@@ -290,7 +290,7 @@ class PageTransformerTest extends TestCase {
 	 * @return string|null
 	 */
 	private function validate(array $data): ?string {
-		$schema = json_decode(json_encode(PageSchema::update(), JSON_UNESCAPED_SLASHES));
+		$schema = json_decode(json_encode(PageSchema::inputUpdate(), JSON_UNESCAPED_SLASHES));
 		$result = (new Validator())->validate(json_decode(json_encode($data)), $schema);
 
 		if ($result->isValid() || !$result->error()) {

@@ -66,7 +66,7 @@ class PagelistTemplateList extends AbstractTool {
 	 * @return string
 	 */
 	public function getDescription(): string {
-		return 'A list of available pagelist templates.';
+		return 'A list of available pagelist templates. Returns an object with a `templates` array.';
 	}
 
 	/**
@@ -77,13 +77,47 @@ class PagelistTemplateList extends AbstractTool {
 	 */
 	public function getHandler(): callable {
 		return function () {
-			return array_map(function ($file) {
+			$templates = array_map(function ($file) {
 				return array(
 					'file' => $file,
 					'source' => preg_replace('/\<#.*?#\>/s', '', strval(file_get_contents(AM_BASE_DIR . AM_DIR_PACKAGES . $file)))
 				);
 			}, PackageCollection::getPackagesDirectoryPagelistTemplates());
+
+			return array('templates' => $templates);
 		};
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return array(
+			'type' => 'object',
+			'properties' => array(
+				'templates' => array(
+					'type' => 'array',
+					'description' => 'The installed pagelist templates.',
+					'items' => array(
+						'type' => 'object',
+						'properties' => array(
+							'file' => array(
+								'type' => 'string',
+								'description' => 'The path of the file relative to the packages directory.'
+							),
+							'source' => array(
+								'type' => 'string',
+								'description' => 'The source code of the file.'
+							)
+						),
+						'required' => array('file', 'source')
+					)
+				)
+			),
+			'required' => array('templates')
+		);
 	}
 
 	/**

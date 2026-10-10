@@ -72,6 +72,8 @@ class TagList extends AbstractTool {
 		return <<< TXT
 			The list of all tags that are used on pages on this Automad site.
 
+			Returns an object with a `tags` array.
+
 			Use one of the tags in this list as input for the `page_search_by_tag` tool.
 			TXT;
 	}
@@ -102,8 +104,27 @@ class TagList extends AbstractTool {
 				'type' => false
 			));
 
-			return $Automad->Pagelist->getTags();
+			return array('tags' => $Automad->Pagelist->getTags());
 		};
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return array(
+			'type' => 'object',
+			'properties' => array(
+				'tags' => array(
+					'type' => 'array',
+					'description' => 'All tags in alphabetical order.',
+					'items' => array('type' => 'string')
+				)
+			),
+			'required' => array('tags')
+		);
 	}
 
 	/**

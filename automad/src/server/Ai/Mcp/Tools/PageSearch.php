@@ -99,7 +99,7 @@ class PageSearch extends AbstractTool {
 			- `private`: if true, the page can only be viewed by admins, independent from `publicationState`
 			- `hidden`: if true, the page is publicly accessible but hidden in page lists and navigations
 
-			The result limit is 50 pages.
+			The result limit is 50 pages. Returns an object with a `pages` array.
 			TXT;
 	}
 
@@ -143,14 +143,16 @@ class PageSearch extends AbstractTool {
 				'type' => false
 			));
 
-			return array_values(array_map(
-				fn (Page $Page) => array(
-					...$PageTransformer->baseData($Page),
-					'context' => html_entity_decode(strip_tags($Page->get(Fields::SEARCH_RESULTS_CONTEXT))),
-					'hitCount' => intval($Page->get(Fields::SEARCH_RESULTS_COUNT))
-				),
-				$Automad->Pagelist->getPages()
-			));
+			return array(
+				'pages' => array_values(array_map(
+					fn (Page $Page) => array(
+						...$PageTransformer->baseData($Page),
+						'context' => html_entity_decode(strip_tags($Page->get(Fields::SEARCH_RESULTS_CONTEXT))),
+						'hitCount' => intval($Page->get(Fields::SEARCH_RESULTS_COUNT))
+					),
+					$Automad->Pagelist->getPages()
+				))
+			);
 		};
 	}
 
@@ -160,7 +162,16 @@ class PageSearch extends AbstractTool {
 	 * @return array|null
 	 */
 	public function getInputSchema(): array|null {
-		return PageSchema::search();
+		return PageSchema::inputSearch();
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return PageSchema::outputSearch();
 	}
 
 	/**

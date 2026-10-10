@@ -166,6 +166,23 @@ class FileImport extends AbstractTool {
 	}
 
 	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return array(
+			'type' => 'object',
+			'properties' => array(
+				'file' => array('type' => 'string'),
+				'link' => array('type' => 'string'),
+				'page' => array('type' => 'string')
+			),
+			'required' => array('file', 'link', 'page')
+		);
+	}
+
+	/**
 	 * The tool's name, as used by MCP clients to call it.
 	 *
 	 * @return string

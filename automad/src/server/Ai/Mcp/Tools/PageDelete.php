@@ -132,7 +132,7 @@ class PageDelete extends AbstractTool {
 	 * @return array|null
 	 */
 	public function getInputSchema(): array|null {
-		return PageSchema::delete();
+		return PageSchema::inputDelete();
 	}
 
 	/**

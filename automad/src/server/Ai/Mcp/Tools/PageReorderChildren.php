@@ -105,7 +105,7 @@ class PageReorderChildren extends AbstractTool {
 
 			Only existing sub-pages of the parent are allowed, unknown names are rejected.
 			Duplicates are ignored. Sub-pages that are missing in the list are appended in their
-			current order. The tool returns the effective order of all sub-pages.
+			current order. The tool returns an object with an `order` array that contains the effective order of all sub-pages.
 			TXT;
 	}
 
@@ -144,7 +144,7 @@ class PageReorderChildren extends AbstractTool {
 
 			Cache::clear();
 
-			return $newOrder;
+			return array('order' => $newOrder);
 		};
 	}
 
@@ -154,7 +154,16 @@ class PageReorderChildren extends AbstractTool {
 	 * @return array|null
 	 */
 	public function getInputSchema(): array|null {
-		return PageSchema::reorderChildren();
+		return PageSchema::inputReorderChildren();
+	}
+
+	/**
+	 * The tool's output schema.
+	 *
+	 * @return array|null
+	 */
+	public function getOutputSchema(): array|null {
+		return PageSchema::outputReorderChildren();
 	}
 
 	/**
