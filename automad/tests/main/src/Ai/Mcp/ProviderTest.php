@@ -32,11 +32,13 @@ class ProviderTest extends TestCase {
 				'page_read',
 				'page_reorder_children',
 				'page_search',
+				'page_search_by_tag',
 				'page_template_list',
 				'page_tree',
 				'page_update',
 				'pagelist_template_list',
-				'snippet_list'
+				'snippet_list',
+				'tag_list'
 			)
 		);
 	}
@@ -45,7 +47,7 @@ class ProviderTest extends TestCase {
 		/** @disregard */
 		$this->assertSame(
 			array_values(array_map(fn ($Tool) => $Tool->getName(), Provider::getTools(false))),
-			array('page_read', 'page_search', 'page_tree')
+			array('page_read', 'page_search', 'page_search_by_tag', 'page_tree', 'tag_list')
 		);
 	}
 }

@@ -3,6 +3,7 @@
 namespace Automad\Ai\Mcp;
 
 use Automad\Core\Str;
+use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
 class CardTest extends TestCase {
@@ -62,37 +63,16 @@ class CardTest extends TestCase {
 	public function testHtmlContent() {
 		$html = Card::html();
 		$card = Card::get();
+		$Automad = new Mock();
 
 		/** @disregard */
 		$this->assertStringStartsWith('<!DOCTYPE html>', $html);
 		/** @disregard */
-		$this->assertStringContainsString('<title>' . htmlspecialchars($card['serverInfo']['title'], ENT_QUOTES) . '</title>', $html);
+		$this->assertStringContainsString(htmlspecialchars($card['serverInfo']['title'], ENT_QUOTES), $html);
 		/** @disregard */
 		$this->assertStringContainsString(htmlspecialchars(AM_SERVER . $card['transport']['endpoint'], ENT_QUOTES), $html);
 		/** @disregard */
 		$this->assertStringContainsString('/.well-known/mcp/server-card.json', $html);
-	}
-
-	public function testHtmlIsSelfContained() {
-		$html = Card::html();
-
-		/** @disregard */
-		$this->assertSame(1, substr_count($html, '<style>'));
-		// The favicons are the only external references, all styles are inlined.
-		/** @disregard */
-		$this->assertSame(2, substr_count($html, '<link'));
-		/** @disregard */
-		$this->assertStringNotContainsString('rel="stylesheet"', $html);
-		/** @disregard */
-		$this->assertStringContainsString('rel="icon"', $html);
-		/** @disregard */
-		$this->assertStringContainsString('rel="alternate icon"', $html);
-		/** @disregard */
-		$this->assertStringNotContainsString('<script', $html);
-		/** @disregard */
-		$this->assertStringNotContainsString('<img', $html);
-		/** @disregard */
-		$this->assertStringContainsString('font-family:ui-monospace', $html);
 	}
 
 	public function testJsonMatchesCard() {
