@@ -38,7 +38,6 @@ import {
 	create,
 	CSS,
 	getSlug,
-	html,
 	notifyInfo,
 	routes,
 } from '@/admin/core';
@@ -237,15 +236,20 @@ class PreviewComponent extends BaseComponent {
 
 		const dialog = create(
 			'am-modal-dialog',
-			[CSS.modalDialogExtraLarge, CSS.overflowHidden],
+			[CSS.modalDialogFullscreen, CSS.overflowHidden],
 			{},
 			modal
 		);
 
 		// The header is populated before it is connected, since the close button
 		// is appended on connect and has to be the last item.
-		const header = create('am-modal-header');
-		const viewport = create('div', [CSS.previewViewport], {}, dialog);
+		const header = create('div', [CSS.previewHeader]);
+		const viewport = create(
+			'div',
+			[CSS.previewViewport, CSS.flexItemGrow],
+			{},
+			dialog
+		);
 
 		const frame = create<HTMLIFrameElement>(
 			'iframe',
@@ -262,10 +266,10 @@ class PreviewComponent extends BaseComponent {
 			try {
 				blockNavigation(frame, modal);
 
-				viewport.style.backgroundColor =
+				frame.style.backgroundColor =
 					getPageBackground(frame.contentDocument) ?? '';
 			} catch {
-				viewport.style.backgroundColor = '';
+				frame.style.backgroundColor = '';
 			}
 		});
 
@@ -333,7 +337,7 @@ class PreviewComponent extends BaseComponent {
 				[Attr.tooltip]: App.text('openInNewTab'),
 			},
 			actions,
-			html`<i class="bi bi-fullscreen"></i>`
+			'<i class="bi bi-window-stack"></i>'
 		);
 
 		if (getSlug() !== routes.page) {
@@ -342,10 +346,10 @@ class PreviewComponent extends BaseComponent {
 				[CSS.previewButton],
 				{
 					[Attr.target]: `${routes.page}?url=${encodeURIComponent(url)}`,
-					[Attr.tooltip]: App.text('edit'),
+					[Attr.tooltip]: App.text('fieldsSettings'),
 				},
 				null,
-				html`<i class="bi bi-pencil"></i>`
+				'<i class="bi bi-ui-checks"></i>'
 			);
 
 			// This listener has to be registered before the link is connected,
@@ -357,6 +361,13 @@ class PreviewComponent extends BaseComponent {
 
 			actions.appendChild(edit);
 		}
+
+		create(
+			'am-modal-close',
+			[CSS.modalClose, CSS.previewButton],
+			{},
+			actions
+		);
 	}
 
 	/**

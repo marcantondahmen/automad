@@ -37,10 +37,18 @@ am-preview {
 }
 
 .am-c-preview {
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: @am-flex-gap;
+		padding: @am-modal-padding;
+		padding-right: 4px;
+	}
+
 	&__actions {
 		display: flex;
 		align-items: center;
-		gap: @am-flex-gap;
 		margin-left: auto;
 		margin-right: 0.5rem;
 		max-height: 1rem;
@@ -51,7 +59,7 @@ am-preview {
 		align-items: center;
 		gap: 2px;
 		padding: 2px;
-		margin-right: 0.4rem;
+		margin-right: 0.75rem;
 		border: @am-form-border;
 		border-radius: calc(@am-form-radius + 2px);
 	}
@@ -61,7 +69,8 @@ am-preview {
 		justify-content: center;
 		align-items: center;
 		height: 2.5em;
-		padding: 0 1em;
+		min-width: 2.5rem;
+		padding: 0 0.75em;
 		color: var(--am-clr-text);
 		font-size: @am-small-font-size;
 		font-weight: @am-small-font-weight;
@@ -81,7 +90,7 @@ am-preview {
 		}
 
 		& .bi {
-			font-size: 1rem;
+			font-size: 1.15rem;
 		}
 	}
 
@@ -89,8 +98,8 @@ am-preview {
 		--am-preview-scale: 1;
 		--size: 2rem;
 		position: relative;
-		height: 76vh;
 		overflow: hidden;
+		padding: 0 4px 1rem 1rem;
 
 		@media (min-height: 850px) {
 			height: 82vh;
@@ -120,7 +129,8 @@ am-preview {
 		display: block;
 		width: calc(100% / var(--am-preview-scale));
 		height: calc(100% / var(--am-preview-scale));
-		border: none;
+		border: @am-border;
+		border-radius: @am-card-radius;
 		transform: scale(var(--am-preview-scale));
 		transform-origin: top left;
 		overflow: hidden;

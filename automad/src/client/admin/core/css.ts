@@ -321,7 +321,6 @@ export const enum CSS {
 
 	modal = 'am-c-modal',
 	modalDialog = 'am-c-modal__dialog',
-	modalDialogExtraLarge = 'am-c-modal__dialog--extra-large',
 	modalDialogLarge = 'am-c-modal__dialog--large',
 	modalDialogSmall = 'am-c-modal__dialog--small',
 	modalDialogTotp = 'am-c-modal__dialog--totp',
@@ -373,6 +372,7 @@ export const enum CSS {
 	platformSelectIcon = 'am-f-platform-select__icon',
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
 
+	previewHeader = 'am-c-preview__header',
 	previewActions = 'am-c-preview__actions',
 	previewButton = 'am-c-preview__button',
 	previewButtonActive = 'am-c-preview__button--active',
