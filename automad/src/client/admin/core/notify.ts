@@ -126,6 +126,6 @@ export const notifyInfo = (message: string, duration: number = 3000): void => {
 	notify({
 		message,
 		duration,
-		icon: 'bell-fill',
+		icon: 'app-indicator',
 	});
 };
