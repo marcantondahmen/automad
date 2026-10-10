@@ -4,6 +4,7 @@
 
 # https://modelcontextprotocol.io/docs/2026-07-28/tools/inspector/web
 export MCP_INSPECTOR_API_TOKEN=$AM_MCP_INSPECTOR_TOKEN
+export MCP_AUTO_OPEN_ENABLED=false
 
 npx @modelcontextprotocol/inspector --web \
 	--transport http \
