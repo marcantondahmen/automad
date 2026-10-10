@@ -128,6 +128,12 @@ class PageUpdate extends AbstractTool {
 			- Blocks missing from a field's array are deleted.
 			- The order of the array is the order on the page.
 
+			The `tags` field is used to tag a page with some common labels. Pages that share tags are considered "related".
+			The `tags` array replaces all current tags of the page, so include the tags that should be kept.
+			Use the `tag_list` tool to get a list of all existing tags that are used across pages. Always reuse
+			existing tags as values here when possible, since only an identical tag makes pages related. Only use
+			new tags if no similar existing tag can be found.
+
 			Note that updates will be saved as drafts. A page must be published first using
 			the `page_publish` tool in order to make changes publicly visible. This step allows
 			the user to review the changes before going live. 
