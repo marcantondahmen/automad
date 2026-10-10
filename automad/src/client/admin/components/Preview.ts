@@ -337,7 +337,7 @@ class PreviewComponent extends BaseComponent {
 				[Attr.tooltip]: App.text('openInNewTab'),
 			},
 			actions,
-			'<i class="bi bi-window-stack"></i>'
+			'<i class="bi bi-fullscreen"></i>'
 		);
 
 		if (getSlug() !== routes.page) {
@@ -364,9 +364,10 @@ class PreviewComponent extends BaseComponent {
 
 		create(
 			'am-modal-close',
-			[CSS.modalClose, CSS.previewButton],
+			[CSS.previewButton],
 			{},
-			actions
+			actions,
+			'<i class="bi bi-x-lg"></i>'
 		);
 	}
 
