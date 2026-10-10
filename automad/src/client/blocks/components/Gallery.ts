@@ -39,9 +39,9 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
 // @ts-ignore
 import ObjectPosition from '@vovayatsyuk/photoswipe-object-position';
-import arrowPrevSVG from '@/blocks/svg/arrowPrev.svg';
-import arrowNextSVG from '@/blocks/svg/arrowNext.svg';
-import closeSVG from '@/blocks/svg/close.svg';
+import arrowPrevSVG from '@/common/svg/blocks/arrowPrev.svg';
+import arrowNextSVG from '@/common/svg/blocks/arrowNext.svg';
+import closeSVG from '@/common/svg/blocks/close.svg';
 import type { GalleryBlockData } from '@/admin/editor/blocks/Gallery';
 import type { ComponentImplementation } from '../types';
 
