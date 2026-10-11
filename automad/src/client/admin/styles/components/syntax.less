@@ -58,19 +58,21 @@ am-syntax {
 		& > .toolbar {
 			position: absolute;
 			z-index: 1;
-			top: 0.65rem !important;
-			right: 0.5rem !important;
+			top: 0.775rem !important;
+			right: 0.85rem !important;
 			opacity: 1;
 
 			& .toolbar-item > button {
-				padding: 0.2rem 0.5rem;
 				font-family: @am-base-font-family;
 				font-size: @am-small-font-size;
-				color: var(--am-clr-text-muted);
-				background-color: var(--am-clr-background);
-				border: none;
+				color: var(--am-clr-text-paragraph);
+				background-color: var(--am-clr-background-faded);
+				border: @am-border;
 				border-radius: @am-form-radius;
+				overflow: hidden;
 				cursor: pointer;
+				box-shadow: none;
+				transition: background-color 0.2s;
 
 				&.copy-to-clipboard-button {
 					display: flex;
@@ -78,13 +80,7 @@ am-syntax {
 					align-items: center;
 					height: 2.8em;
 					width: 2.8em;
-					overflow: hidden;
 					padding: 0;
-					background-color: transparent;
-					cursor: pointer;
-					box-shadow: none;
-					opacity: 0.6;
-					transition: opacity 0.2s;
 
 					& > span {
 						height: 2em;
@@ -108,24 +104,21 @@ am-syntax {
 						mask-position: center center;
 					}
 
+					&:focus,
 					&:hover {
-						opacity: 1;
-					}
-
-					&:focus {
-						opacity: 1;
+						background-color: var(--am-clr-background);
 					}
 				}
 			}
 		}
 	}
 
-	& pre {
+	& pre[class*='language-'] {
 		position: relative;
 		margin: 0;
 		padding: 1rem var(--padding-y);
 		line-height: 1.65;
-		overflow: hidden;
+		overflow: auto;
 		font-family: @am-code-font-family;
 		background-color: var(--am-clr-background-faded);
 		border: @am-card-border;
@@ -134,7 +127,7 @@ am-syntax {
 		& > code {
 			padding: 0;
 			font-family: @am-code-font-family;
-			background: transparent;
+			background-color: transparent;
 		}
 	}
 }
