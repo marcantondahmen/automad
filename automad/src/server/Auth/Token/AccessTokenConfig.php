@@ -96,13 +96,13 @@ class AccessTokenConfig {
 	 * @return AccessTokenConfig
 	 */
 	public static function load(): AccessTokenConfig {
-		$path = self::getPath();
+		$contents = FileSystem::readPhpString(self::getPath());
 
-		if (is_readable($path)) {
+		if (!is_null($contents)) {
 			$serialized = str_replace(
 				self::TYPE_SERIALIZED,
 				'O:' . strlen(self::TYPE) . ':"' . self::TYPE . '"',
-				trim(strval(file_get_contents($path)))
+				$contents
 			);
 
 			try {
@@ -145,7 +145,7 @@ class AccessTokenConfig {
 			serialize($this)
 		);
 
-		return FileSystem::write(self::getPath(), $serialized);
+		return FileSystem::writePhpString(self::getPath(), $serialized);
 	}
 
 	/**

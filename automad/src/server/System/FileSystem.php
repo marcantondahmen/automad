@@ -439,6 +439,34 @@ class FileSystem {
 	}
 
 	/**
+	 * Read a string that was saved as PHP file using writePhpString().
+	 * Legacy files that only contain the raw string without any PHP code are
+	 * migrated to the PHP format on the fly in order to not expose their content
+	 * when being accessed directly.
+	 *
+	 * @see writePhpString()
+	 * @param string $file
+	 * @return string|null
+	 */
+	public static function readPhpString(string $file): string|null {
+		if (!is_readable($file)) {
+			return null;
+		}
+
+		$content = trim(strval(file_get_contents($file)));
+
+		if (!str_starts_with($content, '<?php')) {
+			self::writePhpString($file, $content);
+
+			return $content;
+		}
+
+		$data = include $file;
+
+		return is_string($data) ? $data : null;
+	}
+
+	/**
 	 * Renames a file and its caption (if existing).
 	 *
 	 * @param string $oldFile
@@ -587,6 +615,30 @@ class FileSystem {
 	 */
 	public static function writeJson(string $file, array $data): bool {
 		return self::write($file, strval(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
+	}
+
+	/**
+	 * Save a string as PHP file that returns the string when being included.
+	 * The file has to be a PHP file for security reasons. When trying to access the file directly
+	 * via the browser, it gets executed instead of revealing any of its content.
+	 *
+	 * @see readPhpString()
+	 * @param string $file
+	 * @param string $data
+	 * @return bool
+	 */
+	public static function writePhpString(string $file, string $data): bool {
+		$php = "<?php\ndefined('AUTOMAD') or die();\nreturn " . var_export($data, true) . ";\n";
+
+		if (!self::write($file, $php)) {
+			return false;
+		}
+
+		if (function_exists('opcache_invalidate')) {
+			opcache_invalidate($file, true);
+		}
+
+		return true;
 	}
 
 	/**

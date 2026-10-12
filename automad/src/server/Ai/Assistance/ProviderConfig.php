@@ -109,9 +109,9 @@ class ProviderConfig {
 	 * @return ProviderConfig|null
 	 */
 	public static function load(string $providerId): ProviderConfig|null {
-		$path = self::getPath($providerId);
+		$contents = FileSystem::readPhpString(self::getPath($providerId));
 
-		if (!is_readable($path)) {
+		if (is_null($contents)) {
 			return null;
 		}
 
@@ -121,7 +121,7 @@ class ProviderConfig {
 				'O:' . strlen(self::LEGACY_TYPE) . ':"' . self::LEGACY_TYPE . '"'
 			),
 			'O:' . strlen(self::TYPE) . ':"' . self::TYPE . '"',
-			trim(strval(file_get_contents($path)))
+			$contents
 		);
 
 		try {
@@ -146,7 +146,7 @@ class ProviderConfig {
 			serialize($this)
 		);
 
-		return FileSystem::write(static::getPath($this->providerId), $serialized);
+		return FileSystem::writePhpString(static::getPath($this->providerId), $serialized);
 	}
 
 	/**
