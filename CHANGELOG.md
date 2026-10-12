@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.61](https://github.com/marcantondahmen/automad/commit/fda88aeb2fd7281a3faf30f9d904218bb1331929)
+## [v2.0.0-beta.62](https://github.com/marcantondahmen/automad/commit/db60d91ab064c60e61bd0ecb3c36379a70105127)
 
-Mon, 12 Oct 2026 19:56:47 +0200
+Mon, 12 Oct 2026 20:21:25 +0200
+
+### Bugfixes
+
+- add version to response cache hash ([db60d91ab](https://github.com/marcantondahmen/automad/commit/db60d91ab064c60e61bd0ecb3c36379a70105127))
+
+## [v2.0.0-beta.61](https://github.com/marcantondahmen/automad/commit/be0fddb458b13077fd97a1fbd8794d621a59fc1a)
+
+Mon, 12 Oct 2026 19:58:08 +0200
 
 ### Bugfixes
 

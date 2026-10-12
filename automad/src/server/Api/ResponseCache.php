@@ -74,7 +74,7 @@ class ResponseCache {
 
 		$Cache = new Cache();
 		$siteMTime = $Cache->getSiteMTime();
-		$hash = sha1(serialize($_GET) . serialize($_POST) . serialize($_SESSION));
+		$hash = sha1(AM_VERSION . serialize($_GET) . serialize($_POST) . serialize($_SESSION));
 		$path = strtolower(AM_DIR_TMP . AM_REQUEST . '/' . $hash);
 		$responseMTime = is_readable($path) ? intval(filemtime($path)) : 0;
 
