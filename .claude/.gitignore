@@ -2,6 +2,6 @@
 
 !.gitignore
 !CLAUDE.md
-!setting.json
+!settings.json
 !docs
 !docs/*
