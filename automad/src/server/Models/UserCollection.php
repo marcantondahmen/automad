@@ -248,17 +248,7 @@ class UserCollection {
 	 * @return string the PHP code
 	 */
 	public function generatePHP(): string {
-		ksort($this->users);
-
-		// The actual class name is replaced with a placeholder in order
-		// to be able to refactor the type class in the future easily.
-		$serialized = str_replace(
-			'O:' . strlen($this->userType) . ':"' . $this->userType . '"',
-			$this->userTypeSerialized,
-			serialize($this->users)
-		);
-
-		return "<?php\ndefined('AUTOMAD') or die();\nreturn '" . $serialized . "';";
+		return FileSystem::encodePhpString($this->serializeUsers());
 	}
 
 	/**
@@ -304,14 +294,10 @@ class UserCollection {
 	 * @return bool true on success
 	 */
 	public function save(Messenger $Messenger): bool {
-		if (!FileSystem::write(UserCollection::FILE_ACCOUNTS, $this->generatePHP())) {
+		if (!FileSystem::writePhpString(UserCollection::FILE_ACCOUNTS, $this->serializeUsers())) {
 			$Messenger->setError(Text::get('permissionsDeniedError'));
 
 			return false;
-		}
-
-		if (function_exists('opcache_invalidate')) {
-			opcache_invalidate(UserCollection::FILE_ACCOUNTS, true);
 		}
 
 		Cache::clear();
@@ -377,20 +363,37 @@ class UserCollection {
 	 * @return array The registered accounts
 	 */
 	private function load(): array {
-		if (!is_readable(UserCollection::FILE_ACCOUNTS)) {
+		$contents = FileSystem::readPhpString(UserCollection::FILE_ACCOUNTS);
+
+		if (is_null($contents)) {
 			return array();
 		}
 
-		$contents = include UserCollection::FILE_ACCOUNTS;
-
-		/** @var string */
 		$serialized = str_replace(
 			$this->userTypeSerialized,
 			'O:' . strlen($this->userType) . ':"' . $this->userType . '"',
 			$contents
 		);
 
-		return unserialize($serialized);
+		$users = unserialize($serialized);
+
+		return is_array($users) ? $users : array();
+	}
+
+	/**
+	 * Serialize the sorted users array. The actual class name is replaced with a placeholder
+	 * in order to be able to refactor the type class in the future easily.
+	 *
+	 * @return string the serialized users array
+	 */
+	private function serializeUsers(): string {
+		ksort($this->users);
+
+		return str_replace(
+			'O:' . strlen($this->userType) . ':"' . $this->userType . '"',
+			$this->userTypeSerialized,
+			serialize($this->users)
+		);
 	}
 
 	/**

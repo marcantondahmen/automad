@@ -137,6 +137,18 @@ class FileSystem {
 	}
 
 	/**
+	 * Generate the PHP code that returns the given string when being included.
+	 * The string is safely escaped using var_export().
+	 *
+	 * @see writePhpString()
+	 * @param string $data
+	 * @return string the PHP code
+	 */
+	public static function encodePhpString(string $data): string {
+		return "<?php\ndefined('AUTOMAD') or die();\nreturn " . var_export($data, true) . ";\n";
+	}
+
+	/**
 	 * Get the full file system path for the given path.
 	 *
 	 * @param string $path
@@ -628,9 +640,7 @@ class FileSystem {
 	 * @return bool
 	 */
 	public static function writePhpString(string $file, string $data): bool {
-		$php = "<?php\ndefined('AUTOMAD') or die();\nreturn " . var_export($data, true) . ";\n";
-
-		if (!self::write($file, $php)) {
+		if (!self::write($file, self::encodePhpString($data))) {
 			return false;
 		}
 
