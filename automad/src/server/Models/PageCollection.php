@@ -35,8 +35,7 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session;
-use Automad\Core\Debug;
+use Automad\Auth\Auth;
 use Automad\Core\PageIndex;
 use Automad\Core\Sitemap;
 use Automad\Core\Str;
@@ -61,9 +60,9 @@ class PageCollection {
 	private array $collection = array();
 
 	/**
-	 * An array of existing directories within the base directory (/automad, /config, /pages etc.)
+	 * Include private pages.
 	 */
-	private array $reservedUrls;
+	private bool $includePrivate;
 
 	/**
 	 * Automad's Shared object.
@@ -76,19 +75,13 @@ class PageCollection {
 	private array $takenUrls = array();
 
 	/**
-	 * The username of the currently logged in user or an empty string.
-	 */
-	private string $user;
-
-	/**
 	 * The constructor.
 	 *
 	 * @param Shared $Shared
 	 */
 	public function __construct(Shared $Shared) {
 		$this->Shared = $Shared;
-		$this->reservedUrls = $this->getReservedUrls();
-		$this->user = Session::getUsername();
+		$this->includePrivate = Auth::isAuthenticated();
 
 		$this->collectPages();
 
@@ -129,8 +122,9 @@ class PageCollection {
 			return;
 		}
 
-		// Stop processing of page data and subdirectories if page is private and nobody is logged in.
-		if ($Page->private && !$this->user) {
+		// Stop processing of page data and subdirectories if page is private
+		// and nobody is logged in or no access token was used.
+		if ($Page->private && !$this->includePrivate) {
 			return;
 		}
 
@@ -169,32 +163,6 @@ class PageCollection {
 	}
 
 	/**
-	 * Get the list of taken URLs that can't be used as page URLs.
-	 */
-	private function getReservedUrls(): array {
-		$reservedUrls = array();
-
-		foreach (Routes::$registered as $route) {
-			$url = preg_replace('#^(/[\w\-\_]*).*$#i', '$1', $route['route']);
-
-			if ($url != '/') {
-				$reservedUrls[] = $url;
-			}
-		}
-
-		// Get all real directories.
-		foreach (FileSystem::glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
-			$reservedUrls[] = '/' . basename($dir);
-		}
-
-		$reservedUrls = array_unique($reservedUrls);
-
-		Debug::log($reservedUrls);
-
-		return $reservedUrls;
-	}
-
-	/**
 	 * Builds an URL out of the parent URL and the actual file system folder name.
 	 *
 	 * @param string $parentUrl
@@ -205,7 +173,7 @@ class PageCollection {
 		$url = '/' . ltrim($parentUrl . '/' . Str::slug($slug), '/');
 
 		// Merge reserved URLs with already used URLs in the collection.
-		$takenUrls = array_merge($this->reservedUrls, $this->takenUrls);
+		$takenUrls = array_merge(Routes::getReserved(), $this->takenUrls);
 
 		// check if url already exists
 		if (in_array($url, $takenUrls)) {

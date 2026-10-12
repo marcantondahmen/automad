@@ -53,11 +53,12 @@ class AiAssistanceInstructionsComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		const aiAssitanceInstructions = new Binding('aiAssitanceInstructions', {
-			initial: App.system.ai.instructions,
+			initial: App.system.aiAssistance.instructions,
 		});
 
 		this.listen(window, EventName.appStateChange, () => {
-			aiAssitanceInstructions.value = App.system.ai.instructions;
+			aiAssitanceInstructions.value =
+				App.system.aiAssistance.instructions;
 		});
 
 		createField(
@@ -65,7 +66,7 @@ class AiAssistanceInstructionsComponent extends BaseComponent {
 			this,
 			{
 				key: 'aiAssitanceInstructions',
-				value: App.system.ai.instructions,
+				value: App.system.aiAssistance.instructions,
 				name: 'aiAssitanceInstructions',
 				hideLabel: true,
 				placeholder:

@@ -35,6 +35,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
@@ -50,9 +52,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class LayoutSection extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A container that groups other blocks and can arrange them side by side on a 12 column
+			grid. Use it to build multi-column layouts, feature grids, cards or hero sections. Put
+			child blocks into "content" and give each of them a "width" of 1/4, 1/3, 1/2, 2/3, 3/4 or
+			1/1. Sections can be nested and stretched to the full width.
+			TXT;
+	}
+
 	/**
 	 * Render a section editor block.
 	 *
@@ -235,5 +252,34 @@ class LayoutSection extends AbstractBlock {
 		$blocks = $content['blocks'] ?? array();
 
 		return Blocks::toString($blocks, $ComponentCollection);
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'content' => new AgentFieldSchema(
+				'array',
+				<<< TXT
+					The child blocks of the section. Set the "width" property of each child block in order to
+					arrange them side by side on the grid, e.g. two blocks with a width of 1/2 form a
+					two-column row.
+					TXT,
+				items: array('$ref' => PageSchema::BLOCK),
+				hasBlocks: true
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

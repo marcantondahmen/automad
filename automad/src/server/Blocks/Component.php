@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
@@ -49,9 +50,25 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2024-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Component extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A reference to a reusable component, which is a named group of blocks that is managed
+			centrally in the dashboard and shared across multiple pages. Use it to insert the same
+			content, e.g. a newsletter signup, contact information or a promo banner, in several
+			places. Editing the component updates every page that uses it. Only reference existing
+			component IDs.
+			TXT;
+	}
+
 	/**
 	 * Render a component block.
 	 *
@@ -107,5 +124,31 @@ class Component extends AbstractBlock {
 		$blocks = $component['blocks'] ?? array();
 
 		return Blocks::toString($blocks, $ComponentCollection);
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'id' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The ID of an existing reusable component that is rendered in place of this block.
+					Use the `component_list` tool to get a list of existing components.
+					TXT
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

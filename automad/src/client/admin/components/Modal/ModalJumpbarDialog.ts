@@ -105,9 +105,10 @@ const settingsData = (): JumpbarItemData[] => {
 	const data: JumpbarItemData[] = [
 		item(Section.cache, 'systemCache', 'device-ssd'),
 		item(Section.users, 'systemUsers', 'person-badge'),
-		item(Section.ai, 'systemAi', 'robot'),
-		item(Section.feed, 'systemRssFeed', 'rss'),
+		item(Section.aiAssistance, 'systemAi', 'robot'),
+		item(Section.mcp, 'systemMcp', 'plug'),
 		item(Section.mail, 'systemMail', 'envelope'),
+		item(Section.feed, 'systemRssFeed', 'rss'),
 		item(Section.i18n, 'systemI18n', 'globe'),
 		item(Section.language, 'systemLanguage', 'translate'),
 		item(Section.debug, 'systemDebug', 'bug'),
@@ -146,6 +147,23 @@ const componentsData = (): JumpbarItemData[] => {
 			value: App.text('componentsTitle'),
 			title: App.text('componentsTitle'),
 			icon: 'boxes',
+			cls: [CSS.modalJumpbarDivider],
+		},
+	];
+};
+
+/**
+ * Return the jumpbar autocompletion data for drafts.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
+const draftsData = (): JumpbarItemData[] => {
+	return [
+		{
+			target: routes.drafts,
+			value: App.text('draftsTitle'),
+			title: App.text('draftsTitle'),
+			icon: 'file-earmark-post',
 			cls: [CSS.modalJumpbarDivider],
 		},
 	];
@@ -236,6 +254,7 @@ const jumpbarData = (): JumpbarItemData[] => {
 		settingsData(),
 		sharedData(),
 		componentsData(),
+		draftsData(),
 		packagesData(),
 		trashData(),
 		pagesData()

@@ -57,6 +57,34 @@ class MailTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "mail",
+					"data": {
+						"labelSend": "Send",
+						"to": "user@domain.com"
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "mail",
+					"data": {
+						"labelSend": "Send",
+						"to": "user@domain.com"
+					}
+				}
+				JSON,
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -67,7 +95,7 @@ class MailTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Mail',
 			$search,
@@ -78,5 +106,13 @@ class MailTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Mail', $blockJson, $expectedAgentJson);
 	}
 }

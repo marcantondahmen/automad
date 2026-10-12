@@ -48,7 +48,7 @@ import {
 	query,
 } from '.';
 import { FormComponent } from '@/admin/components/Forms/Form';
-import type { KeyValueMap, APIResponse } from '@/admin/types';
+import type { KeyValueMap, ApiResponse } from '@/admin/types';
 
 /**
  * Get the current CSRF token that is stored in the meta tag.
@@ -168,14 +168,14 @@ export const request = async (
  * @returns the Promise
  * @async
  */
-export const requestAPI = async (
+export const requestApi = async (
 	controller: string,
 	dataOrForm: KeyValueMap | FormComponent = null,
 	parallel: boolean = true,
 	callback: Function = null,
 	cancelable: boolean = false,
 	custsomAbortController: AbortController = null
-): Promise<APIResponse> => {
+): Promise<ApiResponse> => {
 	if (!parallel) {
 		// Prevent stacking of non-parallel requests to the same controller over and over again.
 		// Pending requests to a controller will be aborted as soon as a new
@@ -194,7 +194,7 @@ export const requestAPI = async (
 	// non-parallel request was queued. Note that  between queuing a request and the actual time of submission,
 	// form data can change due to bindings.
 	let data = dataOrForm?.formData || dataOrForm;
-	let responseData: APIResponse;
+	let responseData: ApiResponse;
 
 	if (data) {
 		data = transformToTree(data);

@@ -44,7 +44,7 @@ import {
 	getSearchParam,
 	html,
 	queryAll,
-	requestAPI,
+	requestApi,
 	routes,
 	SearchController,
 } from '@/admin/core';
@@ -181,7 +181,7 @@ export class SearchFormComponent extends BaseComponent {
 				replaceData
 			);
 
-			const response = await requestAPI(this.api, data);
+			const response = await requestApi(this.api, data);
 
 			this.createResults(response, resultsContainer);
 		};

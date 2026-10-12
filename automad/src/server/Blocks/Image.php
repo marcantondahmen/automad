@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Blocks\Utils\ImgLoaderSet;
 use Automad\Core\Automad;
@@ -51,9 +52,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Image extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A single responsive image with alternative text. Use it for a standalone photo,
+			illustration or diagram. For multiple images, use the "gallery" block (grid or masonry
+			layout with lightbox) or the "imageSlideshow" block (carousel) instead.
+			TXT;
+	}
+
 	/**
 	 * Render an image block.
 	 *
@@ -192,5 +207,40 @@ class Image extends AbstractBlock {
 		}
 
 		return trim(($block['data']['url'] ?? '') . ' ' . ($block['data']['alt'] ?? '') . ' ' . ($block['data']['caption'] ?? ''));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'alt' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					A short description of the image content for screen readers and search engines that is
+					rendered as the HTML "alt" attribute.
+					TXT
+			),
+			'url' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The image source. Either the file name of an image that is attached to the current page, a
+					path that starts with a slash and is relative to the Automad base directory, or a full
+					remote image URL. In order to use an image from a URL, import it to the page first using
+					the `file_import` tool and use the returned `link`.
+					TXT
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

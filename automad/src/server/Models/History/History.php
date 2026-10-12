@@ -40,11 +40,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 use Automad\Core\Cache;
 use Automad\Core\Messenger;
 use Automad\Core\PageIndex;
-use Automad\Core\PublicationState;
 use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\Models\Page;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 use Automad\System\Fields;
 use Automad\System\FileSystem;
 
@@ -204,13 +204,13 @@ class History {
 	 * @param string $hash
 	 * @param string $title
 	 * @param Messenger $Messenger
-	 * @return string the URL for the restored copy in the dashboard
+	 * @return Page|null the URL for the restored copy in the dashboard
 	 */
-	public function restore(string $hash, string $title, Messenger $Messenger): string {
+	public function restore(string $hash, string $title, Messenger $Messenger): Page|null {
 		if (!array_key_exists($hash, $this->revisions)) {
 			$Messenger->setError(Text::get('pageRevisionNotFound'));
 
-			return '';
+			return null;
 		}
 
 		$revision = $this->revisions[$hash];
@@ -223,7 +223,7 @@ class History {
 
 			Cache::clear();
 
-			return '';
+			return null;
 		}
 
 		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time) ?? '';
@@ -245,7 +245,9 @@ class History {
 
 		Cache::clear();
 
-		return Page::dashboardUrlByPath($duplicatePath);
+		$RestoredPage = Page::findByPath($duplicatePath);
+
+		return $RestoredPage;
 	}
 
 	/**

@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Table extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A data table that is rendered as an HTML <table>, optionally using the first row as
+			heading row. Use it for tabular data like comparisons, specifications, schedules or
+			pricing. Tables are not meant for layout purposes, use the "layoutSection" block to
+			arrange content in columns instead.
+			TXT;
+	}
+
 	/**
 	 * Render a table block.
 	 *
@@ -141,5 +157,37 @@ class Table extends AbstractBlock {
 		}
 
 		return join(' ', $cells);
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'withHeadings' => new AgentFieldSchema(
+				'boolean',
+				'If true, the first row is rendered as the table heading.',
+				true
+			),
+			'content' => new AgentFieldSchema(
+				'array',
+				<<< TXT
+					The table rows as an array of rows, where each row is an array of cell strings. All rows
+					must contain the same number of cells. Cells support inline HTML formatting.
+					TXT,
+				items: array('type' => 'array', 'items' => array( 'type' => 'string'))
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

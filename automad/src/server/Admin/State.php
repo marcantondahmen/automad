@@ -35,13 +35,16 @@
 
 namespace Automad\Admin;
 
+use Automad\Ai\Assistance\ProviderCollection;
+use Automad\Ai\Mcp\Card;
+use Automad\Ai\Mcp\Server;
+use Automad\Auth\Token\AccessTokenConfig;
 use Automad\Auth\User;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Parse;
 use Automad\Models\MailConfig;
 use Automad\Models\UserCollection;
-use Automad\System\Ai\ProviderCollection;
 use Automad\System\Fields;
 use Automad\System\FileUtils;
 use Automad\System\PackageCollection;
@@ -92,27 +95,30 @@ class State {
 		$themes = $ThemeCollection->getThemes();
 		$Cache = new Cache();
 		$MailConfig = new MailConfig();
+		$AccessTokenConfig = AccessTokenConfig::load();
 		$Automad->Pagelist->config(array('excludeHidden' => false));
 		$User = User::getCurrent();
 
 		$data = array(
 			'allowedFileTypes' => FileUtils::allowedFileTypes(),
 			'contentFields' => $this->getContentFields($themes),
-			'feed' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL,
 			'mainTheme' => $Automad->Shared->get(Fields::THEME),
 			'pages' => $Automad->getNavigationMetaData(),
 			'siteMTime' => date(DATE_ATOM, $Cache->getSiteMTime()),
 			'sitename' => $Automad->Shared->get(Fields::SITENAME),
-			'sharedPublicationState' => $Automad->Shared->get(Fields::PUBLICATION_STATE),
-			'componentsPublicationState' => $Automad->ComponentCollection->getPublicationState(),
+			'sharedPublicationState' => $Automad->Shared->publicationState,
+			'componentsPublicationState' => $Automad->ComponentCollection->publicationState,
 			'components' => $Automad->ComponentCollection->get(),
 			'files' => array(
-				'pagelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
-				'filelist' => PackageCollection::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),
-				'snippets' => PackageCollection::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/'),
+				'pagelist' => PackageCollection::getPackagesDirectoryPagelistTemplates(),
+				'filelist' => PackageCollection::getPackagesDirectoryFilelistTemplates(),
+				'snippets' => PackageCollection::getPackagesDirectorySnippets(),
 			),
 			'system' => array(
-				'ai' => array(
+				'accessTokens' => array(
+					'count' => count($AccessTokenConfig->tokens)
+				),
+				'aiAssistance' => array(
 					'enabled' => AM_AI_ASSISTANCE_ENABLED,
 					'instructions' => AM_AI_ASSISTANCE_INSTRUCTIONS,
 					'activeProviderId' => AM_AI_PROVIDER_ID,
@@ -129,7 +135,8 @@ class State {
 				),
 				'feed' => array(
 					'enabled' => AM_FEED_ENABLED,
-					'fields' => Parse::csv(AM_FEED_FIELDS)
+					'fields' => Parse::csv(AM_FEED_FIELDS),
+					'url' => AM_SERVER . AM_BASE_INDEX . AM_FEED_URL
 				),
 				'i18n' => AM_I18N_ENABLED,
 				'mail' => array(
@@ -140,6 +147,12 @@ class State {
 					'smtpUsername' => $MailConfig->smtpUsername,
 					'smtpPort' => $MailConfig->smtpPort,
 					'smtpPasswordIsSet' => strlen($MailConfig->smtpPassword) > 0
+				),
+				'mcp' => array(
+					'enabled' => AM_MCP_SERVER_ENABLED,
+					'name' => Server::getName(),
+					'serverCardUrl' => AM_SERVER . AM_BASE_INDEX . Card::JSON_PATH,
+					'url' => AM_SERVER . AM_BASE_INDEX . AM_MCP_SERVER_URL
 				),
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> array_values($UserCollection->getCollection())

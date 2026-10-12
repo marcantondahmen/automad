@@ -55,7 +55,7 @@ import {
 	PageController,
 	query,
 	queryAll,
-	requestAPI,
+	requestApi,
 	routes,
 } from '@/admin/core';
 import { createSortableTreeNodes, treeStyles } from '@/admin/core/tree';
@@ -165,7 +165,7 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 		const lockId = App.addNavigationLock();
 		const targetPage = newParent.url;
 
-		const data = await requestAPI(PageController.move, {
+		const data = await requestApi(PageController.move, {
 			url,
 			targetPage,
 			layout: JSON.stringify(layout),
@@ -181,7 +181,7 @@ const onChangeFunction: SortableTreeOnChangeFunction = async (
 	const lockId = App.addNavigationLock();
 	const parentPath = newParent.path;
 
-	const data = await requestAPI(PageController.updateIndex, {
+	const data = await requestApi(PageController.updateIndex, {
 		url,
 		parentPath,
 		layout: JSON.stringify(layout),

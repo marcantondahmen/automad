@@ -35,17 +35,17 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\PageIndex;
 use Automad\Core\Parse;
-use Automad\Core\PublicationState;
 use Automad\Core\Str;
 use Automad\Core\Value;
 use Automad\Models\History\History;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 use Automad\System\Fields;
 use Automad\System\FileSystem;
 
@@ -173,9 +173,10 @@ class Page {
 	 * @param string $title
 	 * @param string $themeTemplate
 	 * @param bool $isPrivate
-	 * @return string the dashboard URL to the new page
+	 * @param array $initialData
+	 * @return Page|null the dashboard URL to the new page
 	 */
-	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate): string {
+	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate, array $initialData = array()): Page|null {
 		$theme = dirname($themeTemplate);
 		$template = basename($themeTemplate);
 
@@ -190,22 +191,23 @@ class Page {
 		$suffix = FileSystem::uniquePathSuffix($newPagePath);
 		$newPagePath = FileSystem::appendSuffixToPath($newPagePath, $suffix);
 
+		// Set date.
+		$now = date(DataStore::DATE_FORMAT);
+
 		// Data, also directly append possibly existing suffix to title here.
 		$data = array(
 			Fields::TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
 			Fields::PRIVATE => $isPrivate,
 			Fields::TEMPLATE => $template,
-			Fields::SLUG => basename($newPagePath)
+			Fields::SLUG => basename($newPagePath),
+			Fields::DATE => $now,
+			...$initialData,
 		);
 
 		if ($theme != '.') {
 			$data[Fields::THEME] = $theme;
 		}
 
-		// Set date.
-		$now = date(DataStore::DATE_FORMAT);
-
-		$data[Fields::DATE] = $now;
 		$data[Fields::TIME_CREATED] = $now;
 		$data[Fields::TIME_LAST_MODIFIED] = $now;
 
@@ -213,25 +215,18 @@ class Page {
 		$DataStore->setState(PublicationState::DRAFT, $data)->save();
 
 		PageIndex::append($Parent->path, $newPagePath);
+		Cache::clear();
 
-		return Page::dashboardUrlByPath($newPagePath);
+		return Page::findByPath($newPagePath);
 	}
 
 	/**
-	 * Return updated view URL based on $path.
+	 * Get the dashboard view for a page.
 	 *
-	 * @param string $path
-	 * @return string The view URL to the new page
+	 * @return string
 	 */
-	public static function dashboardUrlByPath(string $path): string {
-		Cache::clear();
-		$Page = Page::findByPath(rtrim($path, '/') . '/');
-
-		if (!$Page) {
-			return '';
-		}
-
-		return 'page?url=' . urlencode($Page->origUrl);
+	public function dashboardUrl(): string {
+		return 'page?url=' . urlencode($this->origUrl);
 	}
 
 	/**
@@ -252,9 +247,9 @@ class Page {
 	/**
 	 * Duplicate a page.
 	 *
-	 * @return string the new URL
+	 * @return Page|null the new URL
 	 */
-	public function duplicate(): string {
+	public function duplicate(): Page|null {
 		$duplicatePath = $this->path;
 		$suffix = FileSystem::uniquePathSuffix($duplicatePath, '-copy');
 		$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);
@@ -263,7 +258,9 @@ class Page {
 		Page::appendSuffixToTitleAndSlug($duplicatePath, $suffix);
 		PageIndex::append(dirname($duplicatePath), $duplicatePath);
 
-		return Page::dashboardUrlByPath($duplicatePath);
+		Cache::clear();
+
+		return Page::findByPath($duplicatePath);
 	}
 
 	/**
@@ -316,7 +313,7 @@ class Page {
 		int $level
 	): ?Page {
 		$DataStore = new DataStore($path);
-		$data = $DataStore->getState(empty(Session::getUsername()));
+		$data = $DataStore->getState(!Auth::isAuthenticated());
 
 		if (empty($data)) {
 			return null;
@@ -452,6 +449,15 @@ class Page {
 	}
 
 	/**
+	 * Test whether a page is published or a draft.
+	 *
+	 * @return bool
+	 */
+	public function isPublished(): bool {
+		return $this->data[Fields::PUBLICATION_STATE] !== PublicationState::DRAFT->value;
+	}
+
+	/**
 	 * Move a page directory and update all related links.
 	 *
 	 * @param string $destParentPath
@@ -496,9 +502,9 @@ class Page {
 	/**
 	 * Publish a page.
 	 *
-	 * @return string|null a new path in case the page has moved or null
+	 * @return Page|null a new path in case the page has moved or null
 	 */
-	public function publish(): ?string {
+	public function publish(): Page|null {
 		$DataStore = new DataStore($this->path);
 		$draft = $DataStore->getState(PublicationState::DRAFT);
 
@@ -538,14 +544,7 @@ class Page {
 
 		Cache::clear();
 
-		if (
-			$this->path != $newPagePath ||
-			$newSlug != $slug
-		) {
-			return $newPagePath;
-		}
-
-		return null;
+		return Page::findByPath($newPagePath);
 	}
 
 	/**
@@ -569,11 +568,7 @@ class Page {
 
 		$private = !empty($data[Fields::PRIVATE]);
 		$data[Fields::PRIVATE] = $private;
-
-		$now = date(DataStore::DATE_FORMAT);
-
-		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? $now;
-		$data[Fields::TIME_LAST_MODIFIED] = $now;
+		$data[Fields::TIME_CREATED] = $this->data[Fields::TIME_CREATED] ?? date(DataStore::DATE_FORMAT);
 
 		$slug = $data[Fields::SLUG] ?? '';
 		$newSlug = $slug;
@@ -602,7 +597,7 @@ class Page {
 		// Soft reload in order to refresh fields in form.
 		if ($currentTheme != $newTheme || $this->template != $template) {
 			return array(
-				'redirect' => Page::dashboardUrlByPath($this->path)
+				'reload' => true
 			);
 		}
 

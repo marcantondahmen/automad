@@ -32,7 +32,14 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, ConfigController, CSS, EventName, html } from '@/admin/core';
+import {
+	App,
+	Attr,
+	ConfigController,
+	CSS,
+	EventName,
+	html,
+} from '@/admin/core';
 
 /**
  * Render the feed section.
@@ -54,20 +61,7 @@ export const renderFeedSection = (): string => {
 			</div>
 			<div id="am-feed-settings">
 				<p>${App.text('systemRssFeedUrl')}</p>
-				<div class="${CSS.formGroup}">
-					<input
-						class="${CSS.input} ${CSS.flexItemGrow} ${CSS.formGroupItem}"
-						value="${App.feedURL}"
-						disabled
-					/>
-					<am-copy
-						class="${CSS.button} ${CSS.buttonIcon} ${CSS.formGroupItem}"
-						value="${App.feedURL}"
-						${Attr.tooltip}="${App.text('copyUrlClipboard')}"
-					>
-						<i class="bi bi-clipboard"></i>
-					</am-copy>
-				</div>
+				<am-syntax ${Attr.lang}="none">$${App.system.feed.url}</am-syntax>
 				<p>${App.text('systemRssFeedFields')}</p>
 				<am-feed-fields></am-feed-fields>
 			</div>

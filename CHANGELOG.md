@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.59](https://github.com/marcantondahmen/automad/commit/55ca50aaf591a7d70e10f27134e1475d5eb70be8)
+## [v2.0.0-beta.60](https://github.com/marcantondahmen/automad/commit/322240fa0550dd6527bd381ab8a996c1b5858f5c)
 
-Sun, 20 Sep 2026 09:53:46 +0200
+Mon, 12 Oct 2026 19:28:34 +0200
+
+### New Features
+
+- add draft preview modals ([4b21d9306](https://github.com/marcantondahmen/automad/commit/4b21d930627f80ba18e20094a9dfefd5a2c51dfd))
+- add mcp server ([0fd50889b](https://github.com/marcantondahmen/automad/commit/0fd50889b04de117ec3d381607d96ccd5e93b599))
+
+### Bugfixes
+
+- fix exposed config files content ([9ba4741dc](https://github.com/marcantondahmen/automad/commit/9ba4741dced90feffa970d285b17a00c47abb588))
+- sanitize server names in meta data and cache directory names ([edda319c1](https://github.com/marcantondahmen/automad/commit/edda319c15e01b3bdf49183033b27226cad1d091))
+
+## [v2.0.0-beta.59](https://github.com/marcantondahmen/automad/commit/dcada3319daa4e00647c2e3022ed9ff89209c533)
+
+Sun, 20 Sep 2026 10:00:20 +0200
 
 ### Bugfixes
 

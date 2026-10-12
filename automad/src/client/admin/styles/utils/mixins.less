@@ -110,7 +110,7 @@
 			var(--am-clr-text-paragraph),
 			var(--am-clr-background-faded)
 		);
-		animation: animatedBorderRotate @speed linear infinite;
+		animation: @speed linear infinite @am-animation--spinner;
 	}
 
 	&:after {
@@ -123,11 +123,5 @@
 		height: calc(100% - @border - @border);
 		background-color: var(--am-clr-background);
 		border-radius: calc(@radius - @border);
-	}
-}
-
-@keyframes animatedBorderRotate {
-	100% {
-		transform: rotate(1turn);
 	}
 }

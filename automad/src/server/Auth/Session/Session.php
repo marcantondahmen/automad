@@ -1,0 +1,218 @@
+<?php
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2016-2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+
+namespace Automad\Auth\Session;
+
+use Automad\Models\UserCollection;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+/**
+ * The Session util class provides all methods related to a user session.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2016-2026 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license See LICENSE.md for license information
+ */
+class Session {
+	const CSRF_TOKEN_KEY = 'csrf';
+	const DATA_KEY = 'data';
+	const I18N_LANG = 'lang';
+	const IN_PAGE_EDITING_ENABLED = 'inPageEditingEnabled';
+	const TOTP_LOGIN_SECRET_KEY = 'totpLoginSecret';
+	const TOTP_LOGIN_USERNAME_KEY = 'totpLoginUsername';
+	const TOTP_SETUP_SECRET_KEY = 'totpSetupSecret';
+	const USERNAME_KEY = 'username';
+
+	/**
+	 * Get the CSRF token for the current session.
+	 *
+	 * @return string the CSRF token stored in the session
+	 */
+	public static function getCsrfToken(): string {
+		return $_SESSION[self::CSRF_TOKEN_KEY] ?? self::createCsrfToken();
+	}
+
+	/**
+	 * Return the currently logged in user.
+	 *
+	 * @return string Username
+	 */
+	public static function getUsername(): string {
+		return $_SESSION[self::USERNAME_KEY] ?? '';
+	}
+
+	/**
+	 * Check whether inPageEditing is enabled.
+	 *
+	 * @return bool
+	 */
+	public static function inPageEditingIsEnabled(): bool {
+		return self::getUsername() && ($_SESSION[self::IN_PAGE_EDITING_ENABLED] ?? 0);
+	}
+
+	/**
+	 * Verify login information based on $_POST.
+	 *
+	 * @param string $nameOrEmail
+	 * @param string $password
+	 * @return bool false on error
+	 */
+	public static function login(string $nameOrEmail, string $password): bool {
+		$UserCollection = new UserCollection();
+		$User = $UserCollection->getUser($nameOrEmail);
+
+		if (empty($User)) {
+			LoginRateLimiter::verifyAccess($nameOrEmail);
+			LoginRateLimiter::registerFailure($nameOrEmail);
+
+			return false;
+		}
+
+		LoginRateLimiter::verifyAccess($User->name);
+
+		if ($User->verifyPassword($password)) {
+			if ($User->totpIsConfigured()) {
+				$User->setPendingTotpVerificationSession();
+			} else {
+				self::startUserSession($User->name);
+			}
+
+			return true;
+		}
+
+		LoginRateLimiter::registerFailure($User->name);
+
+		return false;
+	}
+
+	/**
+	 * Log out user.
+	 *
+	 * @return bool true on success
+	 */
+	public static function logout(): bool {
+		unset($_SESSION);
+		$success = session_destroy();
+
+		if (!isset($_SESSION) && $success) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Reset the pending TOTP verification session variables.
+	 */
+	public static function resetTotpVerification(): void {
+		unset($_SESSION[self::TOTP_LOGIN_SECRET_KEY]);
+		unset($_SESSION[self::TOTP_LOGIN_USERNAME_KEY]);
+	}
+
+	/**
+	 * Toggle inPageEditing in session.
+	 *
+	 * @param bool $isEnabled
+	 */
+	public static function toggleInPageEditing(bool $isEnabled): void {
+		$_SESSION[self::IN_PAGE_EDITING_ENABLED] = $isEnabled;
+	}
+
+	/**
+	 * Verify a given CSRF token.
+	 *
+	 * @param string $token
+	 * @return bool true if the token is valid
+	 */
+	public static function verifyCsrfToken(string $token): bool {
+		if (empty($_SESSION[self::CSRF_TOKEN_KEY])) {
+			return false;
+		}
+
+		return $token === $_SESSION[self::CSRF_TOKEN_KEY];
+	}
+
+	/**
+	 * Verify pending TOTP code in session in order to finish sign-in process.
+	 *
+	 * @param string $code
+	 * @return bool
+	 */
+	public static function verifyTotp(string $code): bool {
+		if (empty($_SESSION[self::TOTP_LOGIN_SECRET_KEY]) || empty($_SESSION[self::TOTP_LOGIN_USERNAME_KEY])) {
+			return false;
+		}
+
+		$username = $_SESSION[self::TOTP_LOGIN_USERNAME_KEY];
+
+		LoginRateLimiter::verifyAccess($username);
+
+		if (Totp::verify($_SESSION[self::TOTP_LOGIN_SECRET_KEY], $code)) {
+			self::startUserSession($username);
+			self::resetTotpVerification();
+
+			return true;
+		}
+
+		LoginRateLimiter::registerFailure($username);
+
+		return false;
+	}
+
+	/**
+	 * Create a CSRF protection token.
+	 *
+	 * @return string the created token
+	 */
+	private static function createCsrfToken(): string {
+		$_SESSION[self::CSRF_TOKEN_KEY] = bin2hex(random_bytes(32));
+
+		return $_SESSION[self::CSRF_TOKEN_KEY];
+	}
+
+	/**
+	 * Start a new authenticated user session.
+	 *
+	 * @param string $username
+	 */
+	private static function startUserSession(string $username): void {
+		session_regenerate_id(true);
+		$_SESSION[self::USERNAME_KEY] = $username;
+		self::createCsrfToken();
+
+		LoginRateLimiter::reset($username);
+	}
+}

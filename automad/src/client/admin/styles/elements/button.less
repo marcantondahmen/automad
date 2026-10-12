@@ -128,7 +128,7 @@
 		border: 2px solid;
 		border-top-color: transparent;
 		border-radius: 1rem;
-		animation: 0.8s linear 0s infinite loading-button-spinner;
+		animation: 0.8s linear 0s infinite @am-animation--spinner;
 		transition: opacity 0.2s;
 		opacity: 0;
 	}
@@ -153,15 +153,5 @@
 		&:after {
 			opacity: 0.65;
 		}
-	}
-}
-
-@keyframes loading-button-spinner {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	100% {
-		transform: rotate(360deg);
 	}
 }

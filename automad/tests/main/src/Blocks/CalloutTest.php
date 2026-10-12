@@ -70,6 +70,34 @@ class CalloutTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "callout",
+					"data": {
+						"text": "Callout text",
+						"title": "Important"
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "callout",
+					"data": {
+						"text": "Callout text",
+						"title": "Important"
+					}
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -80,7 +108,7 @@ class CalloutTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Callout',
 			$search,
@@ -91,5 +119,13 @@ class CalloutTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Callout', $blockJson, $expectedAgentJson);
 	}
 }

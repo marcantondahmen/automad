@@ -33,7 +33,7 @@
  */
 
 import {
-	requestAPI,
+	requestApi,
 	getPageURL,
 	create,
 	routes,
@@ -73,7 +73,7 @@ class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 			[CSS.breadcrumbsItem],
 			{ [Attr.target]: routes.home },
 			container,
-			App.text('dashboardTitle')
+			html`<span>${App.text('dashboardTitle')}</span>`
 		);
 
 		this.init(container);
@@ -94,7 +94,7 @@ class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 	 */
 	private async init(container: HTMLElement): Promise<void> {
 		const url = getPageURL();
-		const response = await requestAPI(PageController.breadcrumbs, { url });
+		const response = await requestApi(PageController.breadcrumbs, { url });
 
 		this.render(container, response.data);
 	}
@@ -125,7 +125,7 @@ class BreadcrumbsPageComponent extends BaseBreadcrumbsComponent {
 					$${page.title}
 				</span>`;
 			} else {
-				link.textContent = page.title;
+				link.innerHTML = html`<span>$${page.title}</span>`;
 			}
 		});
 	}

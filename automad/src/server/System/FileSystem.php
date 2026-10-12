@@ -137,6 +137,18 @@ class FileSystem {
 	}
 
 	/**
+	 * Generate the PHP code that returns the given string when being included.
+	 * The string is safely escaped using var_export().
+	 *
+	 * @see writePhpString()
+	 * @param string $data
+	 * @return string the PHP code
+	 */
+	public static function encodePhpString(string $data): string {
+		return "<?php\ndefined('AUTOMAD') or die();\nreturn " . var_export($data, true) . ";\n";
+	}
+
+	/**
 	 * Get the full file system path for the given path.
 	 *
 	 * @param string $path
@@ -243,25 +255,6 @@ class FileSystem {
 		} else {
 			return AM_BASE_DIR . AM_DIR_SHARED . '/';
 		}
-	}
-
-	/**
-	 * Return the path of the temp dir if it is writable by the webserver.
-	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
-	 * while other locations like '/var/tmp' do not get purged by the system.
-	 * But since '/tmp' is only available on macos and linux,
-	 * sys_get_temp_dir() is used as fallback.
-	 *
-	 * @return string The path to the temp dir
-	 */
-	public static function getSystemTmpDir(): string {
-		$tmp = '/tmp';
-
-		if (is_writable($tmp)) {
-			return $tmp;
-		}
-
-		return rtrim(sys_get_temp_dir(), '/');
 	}
 
 	/**
@@ -458,6 +451,35 @@ class FileSystem {
 	}
 
 	/**
+	 * Read a string that was saved as PHP file using writePhpString().
+	 * The content of legacy files that only contain the raw string without any PHP code
+	 * is returned as is without including the file, since that would print its content.
+	 * Note that this method must never write to the file system, since it is also used to read
+	 * config files during Config::init(), before any permission and debug constants are defined.
+	 * Legacy files are migrated explicitly by a migration step instead.
+	 *
+	 * @see writePhpString()
+	 * @see \Automad\System\Setup\Migrations\ConfigPhpStrings
+	 * @param string $file
+	 * @return string|null
+	 */
+	public static function readPhpString(string $file): string|null {
+		if (!is_readable($file)) {
+			return null;
+		}
+
+		$content = trim(strval(file_get_contents($file)));
+
+		if (!str_starts_with($content, '<?php')) {
+			return $content;
+		}
+
+		$data = include $file;
+
+		return is_string($data) ? $data : null;
+	}
+
+	/**
 	 * Renames a file and its caption (if existing).
 	 *
 	 * @param string $oldFile
@@ -606,5 +628,46 @@ class FileSystem {
 	 */
 	public static function writeJson(string $file, array $data): bool {
 		return self::write($file, strval(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
+	}
+
+	/**
+	 * Save a string as PHP file that returns the string when being included.
+	 * The file has to be a PHP file for security reasons. When trying to access the file directly
+	 * via the browser, it gets executed instead of revealing any of its content.
+	 *
+	 * @see readPhpString()
+	 * @param string $file
+	 * @param string $data
+	 * @return bool
+	 */
+	public static function writePhpString(string $file, string $data): bool {
+		if (!self::write($file, self::encodePhpString($data))) {
+			return false;
+		}
+
+		if (function_exists('opcache_invalidate')) {
+			opcache_invalidate($file, true);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Return the path of the temp dir if it is writable by the webserver.
+	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
+	 * while other locations like '/var/tmp' do not get purged by the system.
+	 * But since '/tmp' is only available on macos and linux,
+	 * sys_get_temp_dir() is used as fallback.
+	 *
+	 * @return string The path to the temp dir
+	 */
+	private static function getSystemTmpDir(): string {
+		$tmp = '/tmp';
+
+		if (@is_writable($tmp)) {
+			return $tmp;
+		}
+
+		return rtrim(sys_get_temp_dir(), '/');
 	}
 }

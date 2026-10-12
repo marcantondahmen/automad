@@ -49,6 +49,37 @@ class TeXTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "teX",
+					"data": {
+						"code": "tex"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "teX",
+					"stretched": true,
+					"data": {
+						"code": "tex"
+					}
+				}
+				JSON,
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -59,7 +90,7 @@ class TeXTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'TeX',
 			$search,
@@ -70,5 +101,13 @@ class TeXTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'TeX', $blockJson, $expectedAgentJson);
 	}
 }

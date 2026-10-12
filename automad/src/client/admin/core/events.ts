@@ -129,7 +129,7 @@ export const fire = (
  * @return listener object
  */
 export const listen = (
-	element: HTMLElement | Document | Window,
+	element: EventTarget,
 	eventNamesString: string,
 	callback: (event: Event) => void,
 	selector: string = ''

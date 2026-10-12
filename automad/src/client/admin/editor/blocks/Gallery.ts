@@ -161,7 +161,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 
 			this.listen(collection, 'change', () => {
 				this.data.files = collection.images;
-				this.blockAPI.dispatchChange();
+				this.blockApi.dispatchChange();
 			});
 		}, 0);
 
@@ -190,7 +190,7 @@ export class GalleryBlock extends BaseBlock<GalleryBlockData> {
 		});
 
 		this.listen(modal, EventName.modalClose, () => {
-			this.blockAPI.dispatchChange();
+			this.blockApi.dispatchChange();
 		});
 	}
 

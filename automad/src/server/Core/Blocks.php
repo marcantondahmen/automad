@@ -60,6 +60,46 @@ class Blocks {
 	private static bool $isRendering = false;
 
 	/**
+	 * Return an array of blocks that are converted from agent data.
+	 *
+	 * @param array $agentBlocks
+	 * @param BlockData[] $savedBlocks
+	 * @return BlockData[]
+	 */
+	public static function fromAgent(array $agentBlocks, array $savedBlocks = array()): array {
+		$blocks = array();
+		$savedBlocksMap = array();
+
+		foreach ($savedBlocks as $saved) {
+			if ($saved['id']) {
+				$savedBlocksMap[$saved['id']] = $saved;
+			}
+		}
+
+		foreach ($agentBlocks as $agentBlock) {
+			$savedBlock = null;
+
+			if (!empty($agentBlock['id']) && $savedBlocks) {
+				$savedBlock = $savedBlocksMap[$agentBlock['id']] ?? null;
+			}
+
+			try {
+				$block = call_user_func_array(
+					'\\Automad\\Blocks\\' . ucfirst($agentBlock['type']) . '::fromAgent',
+					array($agentBlock, $savedBlock)
+				);
+
+				if ($block) {
+					$blocks[] = $block;
+				}
+			} catch (\Exception $e) {
+			}
+		}
+
+		return $blocks;
+	}
+
+	/**
 	 * Inject block assets into the header of a page.
 	 *
 	 * @param string $str
@@ -79,7 +119,7 @@ class Blocks {
 	/**
 	 * Render blocks created by the EditorJS block editor.
 	 *
-	 * @param array{blocks: array<int, BlockData>} $data
+	 * @param BlockData[] $data
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
@@ -178,6 +218,21 @@ class Blocks {
 	}
 
 	/**
+	 * Return an array of blocks that are optimized for agents.
+	 *
+	 * @param BlockData[] $blocks
+	 * @param ComponentCollection $ComponentCollection
+	 * @return array
+	 */
+	public static function toAgent(array $blocks, ComponentCollection $ComponentCollection): array {
+		if (empty($blocks)) {
+			return array();
+		}
+
+		return self::convert($blocks, $ComponentCollection, 'toAgent');
+	}
+
+	/**
 	 * Return the string representation of an array of blocks.
 	 *
 	 * @param BlockData[] $blocks
@@ -189,9 +244,23 @@ class Blocks {
 			return '';
 		}
 
-		$blockToString = function (array $block) use ($ComponentCollection): string {
+		$content = self::convert($blocks, $ComponentCollection, 'toString');
+
+		return preg_replace('/\s+/', ' ', join(' ', $content)) ?? '';
+	}
+
+	/**
+	 * Return the converted representation of an array of blocks.
+	 *
+	 * @param BlockData[] $blocks
+	 * @param ComponentCollection $ComponentCollection
+	 * @param string $method
+	 * @return array
+	 */
+	private static function convert(array $blocks, ComponentCollection $ComponentCollection, string $method): array {
+		$fn = function (array $block) use ($ComponentCollection, $method): mixed {
 			return call_user_func_array(
-				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::toString',
+				'\\Automad\\Blocks\\' . ucfirst($block['type']) . '::' . $method,
 				array($block, $ComponentCollection)
 			);
 		};
@@ -199,14 +268,18 @@ class Blocks {
 		$content = array();
 
 		foreach ($blocks as $block) {
-			if (!empty($block['type']) && !empty($block['data'])) {
+			if (!empty($block['type'])) {
+				if (empty($block['data'])) {
+					$block['data'] = array();
+				}
+
 				try {
-					$content[] = $blockToString($block);
+					$content[] = $fn($block);
 				} catch (\TypeError $e) {
 					$block = self::unknownBlockHandler($block);
 
 					try {
-						$content[] = $blockToString($block);
+						$content[] = $fn($block);
 					} catch (\Exception $e) {
 					}
 				} catch (\Exception $e) {
@@ -214,7 +287,7 @@ class Blocks {
 			}
 		}
 
-		return preg_replace('/\s+/', ' ', join(' ', $content)) ?? '';
+		return $content;
 	}
 
 	/**

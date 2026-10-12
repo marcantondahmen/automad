@@ -35,7 +35,8 @@
 
 namespace Automad\Blocks;
 
-use Automad\API\Response;
+use Automad\Api\Response;
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Text;
@@ -52,6 +53,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Mail extends AbstractBlock {
@@ -67,6 +69,19 @@ class Mail extends AbstractBlock {
 		'error',
 		'success'
 	);
+
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A contact form that lets visitors send an email with their address, a subject and a
+			message to the given recipient address. Use it on contact pages. Labels and messages fall
+			back to sensible defaults.
+			TXT;
+	}
 
 	/**
 	 * Render a mail form block.
@@ -195,5 +210,29 @@ class Mail extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return join(' ', array_map(fn (string $field): string => $block['data'][$field] ?? '', self::FIELDS));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'labelSend' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The label of the submit button. Skip it in order to use the default label.
+					TXT,
+				true
+			),
+			'to' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The email address of the recipient that receives the form submissions, usually the address
+					of the site owner.
+					TXT
+			),
+		);
 	}
 }

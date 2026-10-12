@@ -57,6 +57,69 @@ class ButtonsTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "buttons",
+					"data": {
+						"gap": "1rem",
+						"justify": "start",
+						"primaryLink": "https://domain.com",
+						"primaryOpenInNewTab": true,
+						"primaryText": "First Button",
+						"secondaryOpenInNewTab": true
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "buttons",
+					"data": {
+						"primaryLink": "https://domain.com",
+						"primaryText": "First Button"
+					}
+				}
+				JSON
+			),
+			array(
+				<<< JSON
+				{
+					"id": "2",
+					"type": "buttons",
+					"data": {
+						"gap": "1rem",
+						"justify": "start",
+						"primaryLink": "https://domain.com",
+						"primaryOpenInNewTab": true,
+						"primaryText": "First Button",
+						"secondaryLink": "https://domain.com",
+						"secondaryOpenInNewTab": true,
+						"secondaryText": "Second Button"
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "2",
+					"type": "buttons",
+					"data": {
+						"primaryLink": "https://domain.com",
+						"primaryText": "First Button",
+						"secondaryLink": "https://domain.com",
+						"secondaryText": "Second Button"
+					}
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -67,7 +130,7 @@ class ButtonsTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Buttons',
 			$search,
@@ -78,5 +141,13 @@ class ButtonsTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Buttons', $blockJson, $expectedAgentJson);
 	}
 }

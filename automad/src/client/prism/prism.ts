@@ -45,6 +45,7 @@ import 'prismjs/components/prism-go';
 import 'prismjs/components/prism-handlebars';
 import 'prismjs/components/prism-graphql';
 import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-latex';
 import 'prismjs/components/prism-less';
@@ -79,6 +80,7 @@ const supportedLanguages = [
 	'html',
 	'java',
 	'javascript',
+	'json',
 	'jsx',
 	'latex',
 	'less',

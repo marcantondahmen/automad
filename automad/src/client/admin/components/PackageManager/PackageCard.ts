@@ -44,7 +44,7 @@ import {
 	notifyError,
 	notifySuccess,
 	PackageManagerController,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import type { Package } from './types';
@@ -65,7 +65,7 @@ const performAction = async (
 
 	modal.open();
 
-	const { error, success } = await requestAPI(api, { package: pkg.name });
+	const { error, success } = await requestApi(api, { package: pkg.name });
 
 	if (error) {
 		notifyError(error);

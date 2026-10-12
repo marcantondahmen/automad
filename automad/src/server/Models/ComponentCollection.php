@@ -35,10 +35,10 @@
 
 namespace Automad\Models;
 
-use Automad\Auth\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Blocks;
-use Automad\Core\PublicationState;
 use Automad\Stores\ComponentStore;
+use Automad\Stores\PublicationState;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -58,6 +58,21 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class ComponentCollection {
 	/**
+	 * The last modification date.
+	 */
+	public readonly string $lastModified;
+
+	/**
+	 * The last publication date.
+	 */
+	public readonly string $lastPublished;
+
+	/**
+	 * The publication state.
+	 */
+	public readonly string $publicationState;
+
+	/**
 	 * The collection.
 	 *
 	 * @var array<Component>
@@ -65,25 +80,17 @@ class ComponentCollection {
 	private array $collection;
 
 	/**
-	 * The component store instance.
-	 */
-	private ComponentStore $ComponentStore;
-
-	/**
-	 * The publication state.
-	 */
-	private string $publicationState;
-
-	/**
 	 * The collection constructor.
 	 */
 	public function __construct() {
-		$this->ComponentStore = new ComponentStore();
+		$ComponentStore = new ComponentStore();
 
-		$state = $this->ComponentStore->getState(empty(Session::getUsername())) ?? array('components' => array());
+		$state = $ComponentStore->getState(!Auth::isAuthenticated()) ?? array('components' => array());
 
 		$this->collection = $state['components'];
-		$this->publicationState = $this->ComponentStore->isPublished() ? PublicationState::PUBLISHED->value : PublicationState::DRAFT->value;
+		$this->publicationState = $ComponentStore->isPublished() ? PublicationState::PUBLISHED->value : PublicationState::DRAFT->value;
+		$this->lastPublished = $ComponentStore->lastPublished();
+		$this->lastModified = $ComponentStore->lastModified();
 	}
 
 	/**
@@ -114,15 +121,6 @@ class ComponentCollection {
 	}
 
 	/**
-	 * Return the publication state.
-	 *
-	 * @return string
-	 */
-	public function getPublicationState(): string {
-		return $this->publicationState;
-	}
-
-	/**
 	 * Search and replace inside a component.
 	 *
 	 * @param string $id
@@ -131,8 +129,10 @@ class ComponentCollection {
 	 * @param bool $replaceInPublished
 	 */
 	public function replaceInComponent(string $id, string $searchRegex, string $replace, bool $replaceInPublished): void {
-		$replaceInState = function (PublicationState $PublicationState) use ($id, $searchRegex, $replace, $replaceInPublished): void {
-			$state = $this->ComponentStore->getState($PublicationState);
+		$ComponentStore = new ComponentStore();
+
+		$replaceInState = function (PublicationState $PublicationState) use ($ComponentStore, $id, $searchRegex, $replace, $replaceInPublished): void {
+			$state = $ComponentStore->getState($PublicationState);
 
 			if (empty($state) || empty($state['components'])) {
 				return;
@@ -148,7 +148,7 @@ class ComponentCollection {
 				return $component;
 			}, $state['components']);
 
-			$this->ComponentStore->setState($PublicationState, $state);
+			$ComponentStore->setState($PublicationState, $state);
 		};
 
 		$replaceInState(PublicationState::DRAFT);
@@ -157,7 +157,7 @@ class ComponentCollection {
 			$replaceInState(PublicationState::PUBLISHED);
 		}
 
-		$this->ComponentStore->save();
-		$this->collection = ($this->ComponentStore->getState(PublicationState::DRAFT) ?? array('components' => array()))['components'];
+		$ComponentStore->save();
+		$this->collection = ($ComponentStore->getState(PublicationState::DRAFT) ?? array('components' => array()))['components'];
 	}
 }

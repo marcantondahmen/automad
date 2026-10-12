@@ -43,7 +43,7 @@ import {
 	FieldTag,
 	fire,
 	MailConfigController,
-	requestAPI,
+	requestApi,
 	Undo,
 } from '@/admin/core';
 import { FormComponent } from './Form';
@@ -241,7 +241,7 @@ export class MailConfigFormComponent extends FormComponent {
 		this.listen(sendTestMail, 'click', async () => {
 			await this.submit();
 
-			await requestAPI(MailConfigController.test);
+			await requestApi(MailConfigController.test);
 		});
 
 		this.listen(reset, 'click', async () => {
@@ -249,7 +249,7 @@ export class MailConfigFormComponent extends FormComponent {
 				return;
 			}
 
-			requestAPI(MailConfigController.reset, {}, true, () => {
+			requestApi(MailConfigController.reset, {}, true, () => {
 				fire(EventName.appStateRequireUpdate);
 				Undo.new();
 			});

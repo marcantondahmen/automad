@@ -35,6 +35,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
@@ -50,9 +52,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class CollapsibleSection extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			An expandable and collapsible container based on the HTML <details> and <summary> elements
+			with a clickable title that reveals nested child blocks. Use it for FAQs, spoilers or
+			optional details. Multiple collapsible sections that share the same "group" name form an
+			accordion where only one section is open at a time.
+			TXT;
+	}
+
 	/**
 	 * Render a collapsible section block.
 	 *
@@ -144,5 +161,56 @@ class CollapsibleSection extends AbstractBlock {
 		}
 
 		return trim($title . ' ' . Blocks::toString($blocks, $ComponentCollection));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'collapsed' => new AgentFieldSchema(
+				'boolean',
+				<<< TXT
+					The initial state of the section. If true, the content is hidden until a visitor clicks
+					the title. If false, the section is expanded by default.
+					TXT,
+				optional: true
+			),
+			'content' => new AgentFieldSchema(
+				'array',
+				<<< TXT
+					The child blocks that are revealed when the section is expanded. Any block type can be
+					used here.
+					TXT,
+				items: array('$ref' => PageSchema::BLOCK),
+				hasBlocks: true
+			),
+			'group' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The name of an accordion group. Sections that share the same group name behave like HTML
+					<details> elements that share the same value for their "name" attribute, so opening one
+					section closes all others. Use an empty string for an independent section.
+					TXT
+			),
+			'title' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The always visible and clickable title of the section that is rendered as the HTML
+					<summary> element. For FAQs, use the question as title.
+					TXT
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

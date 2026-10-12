@@ -41,7 +41,7 @@ import {
 	html,
 	notifyError,
 	PackageManagerController,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { PackageCardComponent } from './PackageCard';
@@ -54,7 +54,7 @@ import type { Package } from './types';
  * @returns the list of package objects
  */
 const getPackages = async (): Promise<Package[]> => {
-	const { data, error } = await requestAPI(
+	const { data, error } = await requestApi(
 		PackageManagerController.getPackageCollection
 	);
 

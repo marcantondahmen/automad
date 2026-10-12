@@ -51,6 +51,36 @@ class CodeTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "code",
+					"data": {
+						"code": "Some code",
+						"language": "php",
+						"lineNumbers": true
+					},
+					"tunes": []
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "code",
+					"data": {
+						"code": "Some code",
+						"language": "php",
+						"lineNumbers": true
+					}
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -61,7 +91,7 @@ class CodeTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'Code',
 			$search,
@@ -72,5 +102,13 @@ class CodeTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'Code', $blockJson, $expectedAgentJson);
 	}
 }

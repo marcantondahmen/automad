@@ -32,6 +32,12 @@
  * See LICENSE.md for license information.
  */
 
+export const enum AccessTokenController {
+	addToken = 'AccessTokenController::addToken',
+	getTokens = 'AccessTokenController::getTokens',
+	revoke = 'AccessTokenController::revoke',
+}
+
 export const enum AiAssistanceController {
 	text = 'AiAssistanceController::text',
 }
@@ -69,6 +75,10 @@ export const enum ConfigController {
 
 export const enum EditLockController {
 	set = 'EditLockController::set',
+}
+
+export const enum EmbedController {
+	data = 'EmbedController::data',
 }
 
 export const enum FileCollectionController {
@@ -122,6 +132,17 @@ export const enum PackageManagerController {
 	updateAll = 'PackageManagerController::updateAll',
 }
 
+export const enum DraftCollectionController {
+	discardComponents = 'DraftCollectionController::discardComponents',
+	discardPage = 'DraftCollectionController::discardPage',
+	discardShared = 'DraftCollectionController::discardShared',
+	get = 'DraftCollectionController::get',
+	publishAll = 'DraftCollectionController::publishAll',
+	publishComponents = 'DraftCollectionController::publishComponents',
+	publishPage = 'DraftCollectionController::publishPage',
+	publishShared = 'DraftCollectionController::publishShared',
+}
+
 export const enum PageController {
 	add = 'PageController::add',
 	breadcrumbs = 'PageController::breadcrumbs',
@@ -165,9 +186,9 @@ export const enum SharedController {
 	discardDraft = 'SharedController::discardDraft',
 }
 
-export const enum SetupWizardController {
-	getSteps = 'SetupWizardController::getSteps',
-	finish = 'SetupWizardController::finish',
+export const enum SetupController {
+	start = 'SetupController::start',
+	finish = 'SetupController::finish',
 }
 
 export const enum SystemController {

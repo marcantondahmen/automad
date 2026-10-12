@@ -33,7 +33,6 @@
  */
 
 import { App, getLogger, sortByKeys } from '../core';
-import { nanoid } from 'nanoid';
 import type { EditorOutputData } from './types';
 import type { API, BlockAPI, OutputBlockData } from '@/vendor/editorjs';
 import type { KeyValueMap } from '@/admin/types';
@@ -163,7 +162,7 @@ export const insertBlock = async (
 		index,
 		true,
 		false,
-		nanoid(32),
+		undefined,
 		blockData.tunes
 	);
 

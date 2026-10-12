@@ -1,0 +1,192 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+
+@import '../../common/styles/index.less';
+
+@am-base-font-family: 'InterVariable', Inter, 'Helvetica Neue', ui-sans-serif,
+	system-ui, sans-serif;
+@am-code-font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular,
+	Menlo, Monaco, Consolas, monospace;
+
+:root {
+	.theme-light;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		.theme-dark;
+	}
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: hsl(from var(--am-clr-text-muted) h s l / 0.4) transparent;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+	min-height: 100%;
+	font-family: @am-base-font-family;
+	font-size: 15px;
+	font-weight: 430;
+	line-height: 1.6;
+	color: var(--am-clr-text);
+	background-color: var(--am-clr-background);
+}
+
+html {
+	interpolate-size: allow-keywords;
+	scrollbar-gutter: stable;
+}
+
+body {
+	margin: 0;
+	padding: 4rem 1.5rem;
+}
+
+main {
+	max-width: 44rem;
+	margin: 0 auto;
+}
+
+h1 {
+	margin: 0 0 2rem 0;
+	font-size: 3.5rem;
+	line-height: 1.3;
+	font-weight: 760;
+	letter-spacing: -0.01em;
+}
+
+h2 {
+	margin: 0 0 1.5rem 0;
+	font-size: 1.65rem;
+	line-height: 1.4;
+	font-weight: 720;
+	letter-spacing: -0.01em;
+}
+
+p {
+	margin: 1.5rem 0;
+	text-wrap: pretty;
+	color: var(--am-clr-text-paragraph);
+}
+
+a {
+	color: inherit;
+	text-underline-offset: 3px;
+}
+
+dl {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 0.25rem 2rem;
+	margin: 0;
+	padding: 1.25rem 1.5rem;
+	color: var(--am-clr-text-paragraph);
+	font-family: @am-code-font-family;
+	border: 1px dashed var(--am-clr-border);
+	border-radius: 0.75rem;
+	background-color: var(--am-clr-background-faded);
+}
+
+dt {
+	color: var(--am-clr-text-muted);
+}
+
+dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+pre {
+	margin: 1.5rem 0;
+	padding: 1.25rem 1.5rem;
+	overflow-x: auto;
+	color: var(--am-clr-text-paragraph);
+	border: 1px dashed var(--am-clr-border);
+	border-radius: 0.75rem;
+	background-color: var(--am-clr-background-faded);
+}
+
+code {
+	font-family: @am-code-font-family;
+	font-weight: 460;
+}
+
+hr {
+	margin: 2rem 0 1.5rem 0;
+	border: none;
+	border-bottom: 1px dashed var(--am-clr-border);
+}
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
+	padding: 0.3em 0.8em;
+	color: var(--am-clr-text-paragraph);
+	border: 1px solid var(--am-clr-border);
+	border-radius: 3rem;
+	background-color: var(--am-clr-background-faded);
+	font-weight: 500;
+}
+
+@media (max-width: 30rem) {
+	html,
+	body {
+		font-size: 14px;
+	}
+
+	body {
+		padding: 3rem 1.5rem;
+	}
+
+	h1 {
+		margin: 0 0 2rem 0;
+		font-size: 3rem;
+		line-height: 1.4;
+		font-weight: 740;
+		letter-spacing: -0.01em;
+	}
+
+	dl {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	dd + dt {
+		margin-top: 1rem;
+	}
+}

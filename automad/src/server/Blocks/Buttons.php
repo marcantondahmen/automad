@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -49,9 +50,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Buttons extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A primary and an optional secondary link button. Use it for call-to-action links such as
+			"Get started", "Contact us" or "Download" that point to local pages or external URLs. Use
+			an <a> link inside a "paragraph" block for plain text links instead.
+			TXT;
+	}
+
 	/**
 	 * Render a buttons block.
 	 *
@@ -127,6 +142,46 @@ class Buttons extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return trim(($block['data']['primaryText'] ?? '') . ' ' . ($block['data']['secondaryText'] ?? ''));
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'primaryLink' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The target of the primary button. Either the absolute path of a local page, e.g.
+					/about/contact, or a full external URL starting with https://.
+					TXT
+			),
+			'primaryText' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The label of the primary button. Keep it short and action-oriented, e.g. "Get started" or
+					"Contact us".
+					TXT
+			),
+			'secondaryLink' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The target of the optional secondary button. Either the absolute path of a local page or a
+					full external URL. Only used together with "secondaryText".
+					TXT,
+				true
+			),
+			'secondaryText' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The label of the optional secondary button, typically a less prominent alternative action
+					such as "Learn more". Skip it in order to only render the primary button.
+					TXT,
+				true
+			)
+		);
 	}
 
 	/**

@@ -39,7 +39,7 @@ import {
 	CSS,
 	html,
 	PageTrashController,
-	requestAPI,
+	requestApi,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
@@ -143,7 +143,7 @@ export class TrashFormComponent extends BaseComponent {
 	async init(): Promise<void> {
 		this.innerHTML = '';
 
-		const { data } = await requestAPI(PageTrashController.list);
+		const { data } = await requestApi(PageTrashController.list);
 		const container = create(
 			'div',
 			[CSS.flex, CSS.flexColumn, CSS.flexGap],

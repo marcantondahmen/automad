@@ -82,7 +82,7 @@ class Auth {
 			return new Auth();
 		}
 
-		$unserialized = unserialize(strval(file_get_contents(self::FILE)));
+		$unserialized = unserialize(strval(FileSystem::readPhpString(self::FILE)));
 
 		if ($unserialized instanceof Auth) {
 			return $unserialized;
@@ -123,7 +123,7 @@ class Auth {
 	 * @return bool
 	 */
 	public function save(): bool {
-		return FileSystem::write(self::FILE, serialize($this));
+		return FileSystem::writePhpString(self::FILE, serialize($this));
 	}
 
 	/**

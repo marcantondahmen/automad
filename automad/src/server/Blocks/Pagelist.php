@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Models\ComponentCollection;
@@ -48,9 +49,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Pagelist extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			A dynamic and automatically updated list of page previews, e.g. blog posts, news, projects
+			or the child pages of a section. Pages can be filtered by their relation to a context page
+			(children, siblings or related pages), sorted and limited. Each page is rendered using a
+			pagelist template. Read the `pagelist_template_list` tool before choosing one.
+			TXT;
+	}
+
 	/**
 	 * Render a pagelist block.
 	 *
@@ -96,9 +112,16 @@ class Pagelist extends AbstractBlock {
 		$html = Snippet::render(
 			array(
 				'id' => '',
+				'type' => '',
 				'data' => array(
 					'file' => $file,
 					'snippet' => ''
+				),
+				'tunes' => array(
+					'id' => '',
+					'className' => '',
+					'layout' => null,
+					'spacing'=> array()
 				)
 			),
 			$Automad
@@ -136,5 +159,76 @@ class Pagelist extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'context' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The URL of the page that is used as reference for the "children" and "siblings" types as
+					an absolute path, e.g. /blog. Skip it in order to use the current page as context.
+					TXT,
+				true
+			),
+			'file' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The Automad template that is used to render each page preview. Before selecting a
+					template, read the available pagelist templates from the `pagelist_template_list`
+					tool and use one of the returned template files.
+					TXT
+			),
+			'limit' => new AgentFieldSchema(
+				'number',
+				<<< TXT
+					The maximum number of pages that are displayed. Defaults to 10 when skipped.
+					TXT,
+				true
+			),
+			'sortField' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The field that is used for sorting. ":index" keeps the order of the pages as arranged in
+					the dashboard, "date" sorts by the page date and "title" sorts alphabetically by title.
+					TXT,
+				true,
+				array(':index', 'date', 'title')
+			),
+			'sortOrder' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The sort order, either "asc" for ascending or "desc" for descending. For newest-first
+					listings such as blogs, use "date" with "desc".
+					TXT,
+				true,
+				array('asc', 'desc')
+			),
+			'type' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The relation of the listed pages to the context page. "children" lists the subpages of the
+					context page, "siblings" lists the pages that share the same parent and "related" lists
+					pages that share at least one tag with the current page. Skip it in order to list all
+					pages of the site.
+					TXT,
+				true,
+				array('children', 'siblings', 'related')
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

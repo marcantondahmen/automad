@@ -79,23 +79,18 @@ class ConfigFile {
 	}
 
 	/**
-	 * Read configuration overrides as JSON string form PHP or JSON file
-	 * and decode the returned string. Note that now the configuration is stored in
-	 * PHP files instead of JSON files to make it less easy to access from outside.
+	 * Read configuration overrides as JSON string from a PHP file and decode the returned string.
+	 * Note that the configuration is stored in PHP files that return the JSON string
+	 * in order to not expose any settings when being accessed directly.
+	 * Older config files using a nowdoc instead of a simple string are still supported.
 	 *
+	 * @see FileSystem::readPhpString()
 	 * @param string $name
 	 * @return array The configuration array
 	 */
 	public static function read(string $name = ''): array {
-		$json = false;
-		$file = self::getConfigPath($name);
-
 		try {
-			if (is_readable($file)) {
-				ob_start();
-				$json = require $file;
-				ob_clean();
-			}
+			$json = FileSystem::readPhpString(self::getConfigPath($name));
 
 			if ($json) {
 				$config = json_decode($json, true);
@@ -139,19 +134,11 @@ class ConfigFile {
 	public function write(): bool {
 		ksort($this->data);
 
-		$json = json_encode($this->data, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-		// Note that instead of heredoc, nowdoc is used to generate the returned JSON
-		// in order to handle multiline strings correctly.
-		$content = "<?php return <<< 'JSON'\r\n$json\r\nJSON;\r\n";
+		$json = strval(json_encode($this->data, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
 		$file = ConfigFile::getConfigPath($this->name);
-		$success = FileSystem::write($file, $content);
 
 		Debug::log($file);
 
-		if ($success && function_exists('opcache_invalidate')) {
-			opcache_invalidate($file, true);
-		}
-
-		return $success;
+		return FileSystem::writePhpString($file, $json);
 	}
 }

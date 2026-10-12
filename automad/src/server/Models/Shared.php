@@ -35,15 +35,15 @@
 
 namespace Automad\Models;
 
-use Automad\API\RequestHandler;
+use Automad\Api\RequestHandler;
 use Automad\App;
-use Automad\Auth\Session;
+use Automad\Auth\Auth;
 use Automad\Core\Cache;
 use Automad\Core\Messenger;
-use Automad\Core\PublicationState;
 use Automad\Core\Text;
 use Automad\Core\Value;
 use Automad\Stores\DataStore;
+use Automad\Stores\PublicationState;
 use Automad\System\Fields;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,6 +62,21 @@ class Shared {
 	public array $data = array();
 
 	/**
+	 * The last modification date.
+	 */
+	public readonly string $lastModified;
+
+	/**
+	 * The last publication date.
+	 */
+	public readonly string $lastPublished;
+
+	/**
+	 * The publication state.
+	 */
+	public readonly string $publicationState;
+
+	/**
 	 * Parse the shared data file.
 	 */
 	public function __construct() {
@@ -75,8 +90,12 @@ class Shared {
 		// Merge defaults with settings from file.
 		$this->data = array_merge(
 			$defaults,
-			$DataStore->getState(empty(Session::getUsername())) ?? array()
+			$DataStore->getState(!Auth::isAuthenticated()) ?? array()
 		);
+
+		$this->publicationState = $DataStore->isPublished() ? PublicationState::PUBLISHED->value : PublicationState::DRAFT->value;
+		$this->lastPublished = $DataStore->lastPublished();
+		$this->lastModified = $DataStore->lastModified();
 
 		// Check whether there is a theme defined in the Shared object data.
 		if (!$this->get(Fields::THEME) && strpos(AM_REQUEST, RequestHandler::API_BASE) !== 0) {
@@ -112,9 +131,9 @@ class Shared {
 	/**
 	 * Publish shared settings.
 	 *
-	 * @param Messenger $Messenger
+	 * @return bool
 	 */
-	public function publish(Messenger $Messenger): void {
+	public function publish(): bool {
 		$DataStore = new DataStore();
 		$published = $DataStore->getState(PublicationState::PUBLISHED) ?? array();
 		$draft = $DataStore->getState(PublicationState::DRAFT) ?? array();
@@ -125,14 +144,12 @@ class Shared {
 		$draftSitename = $draft[Fields::SITENAME] ?? '';
 
 		if (!$DataStore->publish()) {
-			$Messenger->setError(Text::get('error_permission'));
-
-			return;
+			return false;
 		}
 
-		$Messenger->setSuccess(Text::get('publishedSuccessfully'));
-
 		Cache::clear();
+
+		return true;
 	}
 
 	/**

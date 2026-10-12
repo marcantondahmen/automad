@@ -37,6 +37,10 @@ import type { AiProvider } from './AiProviderSetup';
 
 type Enabled = boolean | 0 | 1;
 
+interface AccessTokenSettings {
+	count: number;
+}
+
 interface AiSettings {
 	enabled: boolean;
 	instructions: string;
@@ -58,6 +62,14 @@ interface DebugSettings {
 interface FeedSettings {
 	enabled: Enabled;
 	fields: string;
+	url: string;
+}
+
+interface McpSettings {
+	enabled: Enabled;
+	name: string;
+	url: string;
+	serverCardUrl: string;
 }
 
 export interface User {
@@ -67,12 +79,14 @@ export interface User {
 }
 
 export interface SystemSettings {
-	ai: AiSettings;
+	accessTokens: AccessTokenSettings;
+	aiAssistance: AiSettings;
 	cache: CacheSettings;
 	debug: DebugSettings;
 	feed: FeedSettings;
 	i18n: Enabled;
 	mail: MailConfig;
+	mcp: McpSettings;
 	translation: string;
 	users: User[];
 	tempDirectory: string;

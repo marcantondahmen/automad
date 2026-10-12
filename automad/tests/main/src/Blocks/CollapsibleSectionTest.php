@@ -139,6 +139,67 @@ class CollapsibleSectionTest extends TestCase {
 		);
 	}
 
+	public static function dataForTestToAgentIsSame() {
+		return array(
+			array(
+				<<< JSON
+				{
+					"id": "1",
+					"type": "collapsibleSection",
+					"data": {
+						"collapsed": true,
+						"content": {
+							"blocks": [
+								{
+									"id": "2",
+									"type": "paragraph",
+									"data": {
+										"large": false,
+										"text": "Collapsible content"
+									},
+									"tunes": {
+										"layout": {
+											"stretched": false
+										}
+									}
+								}
+							]
+						},
+						"group": "faq",
+						"title": "Collapsible Title"
+					},
+					"tunes": {
+						"layout": {
+							"stretched": true
+						}
+					}
+				}
+				JSON,
+				<<< JSON
+				{
+					"id": "1",
+					"type": "collapsibleSection",
+					"stretched": true,
+					"data": {
+						"collapsed": true,
+						"content": [
+							{
+								"id": "2",
+								"type": "paragraph",
+								"data": {
+									"text": "Collapsible content"
+								}
+							}
+						],
+						"group": "faq",
+						"title": "Collapsible Title"
+					}
+				}
+				JSON
+			)
+		);
+	}
+
 	#[DataProvider('dataForTestSearchAndReplaceIsSame')]
 	public function testSearchAndReplaceIsSame(
 		string $search,
@@ -149,7 +210,7 @@ class CollapsibleSectionTest extends TestCase {
 		string $expectedReplacedJson,
 		string $expectedString
 	) {
-		Block::test(
+		Block::testSearchReplace(
 			$this,
 			'CollapsibleSection',
 			$search,
@@ -160,5 +221,13 @@ class CollapsibleSectionTest extends TestCase {
 			$expectedReplacedJson,
 			$expectedString
 		);
+	}
+
+	#[DataProvider('dataForTestToAgentIsSame')]
+	public function testToAgentIsSame(
+		string $blockJson,
+		string $expectedAgentJson
+	) {
+		Block::testToAgent($this, 'CollapsibleSection', $blockJson, $expectedAgentJson);
 	}
 }

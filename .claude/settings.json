@@ -1,0 +1,22 @@
+{
+	"permissions": {
+		"allow": [],
+		"deny": [
+			"Bash(git *)",
+			"Read(.env)",
+			"Read(.env.*)",
+			"Read(config/*.php)"
+		],
+		"defaultMode": "plan",
+		"blockReadsOutsideWorkingDirectories": true
+	},
+	"sandbox": {
+		"enabled": true,
+		"failIfUnavailable": true,
+		"autoAllowBashIfSandboxed": false,
+		"allowUnsandboxedCommands": false,
+		"filesystem": {
+			"denyRead": [".env", ".env.*", "./config/*.php"]
+		}
+	}
+}

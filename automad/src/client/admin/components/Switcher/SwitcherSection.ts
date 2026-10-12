@@ -67,7 +67,7 @@ export class SwitcherSectionComponent extends BaseComponent {
 	}
 
 	/**
-	 * Toggle the section visiblity based on the query string.
+	 * Toggle the section visibility based on the query string.
 	 */
 	toggle(): void {
 		this.classList.toggle(

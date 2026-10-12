@@ -134,13 +134,13 @@ class File {
 	 * @param string $importUrl
 	 * @param string $pageUrl
 	 * @param Messenger $Messenger
-	 * @return bool true on success
+	 * @return string the final file name of the imported file or an empty string in case of an error
 	 */
-	public static function import(string $importUrl, string $pageUrl, Messenger $Messenger): bool {
+	public static function import(string $importUrl, string $pageUrl, Messenger $Messenger): string {
 		if (!$importUrl) {
 			$Messenger->setError(Text::get('missingUrlError'));
 
-			return false;
+			return '';
 		}
 
 		// Resolve local URLs.
@@ -155,7 +155,7 @@ class File {
 		if (empty($data)) {
 			$Messenger->setError(Text::get('importFailedError'));
 
-			return false;
+			return '';
 		}
 
 		$fileName = Str::slug(preg_replace('/\?.*/', '', basename($importUrl)) ?? '');
@@ -165,7 +165,9 @@ class File {
 			$Page = $Automad->getPage($pageUrl);
 
 			if (!$Page) {
-				return false;
+				$Messenger->setError(Text::get('pageNotFoundError'));
+
+				return '';
 			}
 
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
@@ -182,16 +184,18 @@ class File {
 
 			if (FileSystem::isAllowedFileType($newPath)) {
 				if (!FileSystem::renameMedia($path, $newPath, $Messenger)) {
-					return false;
+					return '';
 				}
-			} else {
-				unlink($path);
-				$Messenger->setError(Text::get('unsupportedFileTypeError'));
 
-				return false;
+				return basename($newPath);
 			}
+
+			unlink($path);
+			$Messenger->setError(Text::get('unsupportedFileTypeError'));
+
+			return '';
 		}
 
-		return true;
+		return basename($path);
 	}
 }

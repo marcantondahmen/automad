@@ -41,9 +41,9 @@ import {
 	debounce,
 	fire,
 	html,
-	requestAPI,
+	requestApi,
 	routes,
-	SetupWizardController,
+	SetupController,
 	transition,
 } from '@/admin/core';
 import { renderAiSection } from '@/admin/components/Pages/Partials/System/Ai';
@@ -111,7 +111,7 @@ class SetupWizardComponent extends BaseComponent {
 	 * @async
 	 */
 	private async init(): Promise<void> {
-		const { data } = await requestAPI(SetupWizardController.getSteps);
+		const { data } = await requestApi(SetupController.start);
 		const { steps: stepKeys } = data as { steps: SetupWizardStep[] };
 
 		if (stepKeys.length == 0) {
@@ -282,7 +282,7 @@ class SetupWizardComponent extends BaseComponent {
 	 * @async
 	 */
 	private async finish(): Promise<void> {
-		await requestAPI(SetupWizardController.finish, { finish: true });
+		await requestApi(SetupController.finish, { finish: true });
 
 		const base = `${window.location.origin}${App.dashboardURL}/`;
 

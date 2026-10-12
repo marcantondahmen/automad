@@ -89,6 +89,7 @@ export const renderUsersSection = (): string => {
 			</div>
 		</am-form>
 
+		<hr />
 		<h2>${App.text('systemUsersChangePasswordHeading')}</h2>
 		<p>${App.text('systemUsersChangePasswordText')}</p>
 		<am-modal-toggle
@@ -98,6 +99,7 @@ export const renderUsersSection = (): string => {
 			<span> ${App.text('systemUsersChangePassword')} </span>
 		</am-modal-toggle>
 
+		<hr />
 		<h2 class="${CSS.flex} ${CSS.flexGap}">
 			${App.text('systemUsersTotpHeading')}
 			<am-user-totp-configured-indicator></am-user-totp-configured-indicator>
@@ -105,6 +107,7 @@ export const renderUsersSection = (): string => {
 		<p>${App.text('systemUsersTotpText')}</p>
 		<am-totp-config></am-totp-config>
 
+		<hr />
 		<h2>${App.text('systemUsersCollaborateHeading')}</h2>
 		<p>${App.text('systemUsersCollaborateText')}</p>
 		<span class="${CSS.flex} ${CSS.flexGap} ${CSS.flexWrap}">

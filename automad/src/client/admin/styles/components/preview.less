@@ -1,0 +1,137 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2026 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * See LICENSE.md for license information.
+ */
+
+am-preview {
+	cursor: pointer;
+}
+
+.am-c-preview {
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: @am-flex-gap;
+		padding: @am-modal-padding;
+		padding-right: 0;
+	}
+
+	&__actions {
+		display: flex;
+		align-items: center;
+		margin-left: auto;
+		max-height: 1rem;
+	}
+
+	&__group {
+		display: flex;
+		align-items: center;
+		gap: 2px;
+		padding: 2px;
+		margin-right: 1rem;
+		border: @am-form-border;
+		border-radius: calc(@am-form-radius + 2px);
+	}
+
+	&__button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 2.5em;
+		min-width: 2.75rem;
+		padding: 0 0.75em;
+		color: var(--am-clr-text);
+		font-size: @am-small-font-size;
+		font-weight: @am-small-font-weight;
+		cursor: pointer;
+		border-radius: @am-form-radius;
+		transition:
+			color 0.2s,
+			background-color 0.2s;
+
+		&:hover {
+			color: var(--am-clr-text-hover);
+		}
+
+		&--active {
+			color: var(--am-clr-text-selected);
+			background-color: var(--am-clr-background-selected) !important;
+		}
+
+		& .bi {
+			font-size: 1rem;
+		}
+	}
+
+	&__viewport {
+		--am-preview-scale: 1;
+		--size: 2rem;
+		position: relative;
+		overflow: hidden;
+		padding: 0 4px 1rem 1rem;
+
+		@media (min-height: 850px) {
+			height: 82vh;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			box-sizing: border-box;
+			width: var(--size);
+			height: var(--size);
+			margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+			border: 2px solid;
+			border-left-color: transparent;
+			border-radius: 100%;
+			animation: 0.8s linear 0s infinite @am-animation--spinner;
+		}
+
+		&--loaded:before {
+			display: none;
+		}
+	}
+
+	&__frame {
+		display: block;
+		width: calc(100% / var(--am-preview-scale));
+		height: calc(100% / var(--am-preview-scale));
+		border: @am-border;
+		border-radius: @am-card-radius;
+		transform: scale(var(--am-preview-scale));
+		transform-origin: top left;
+		overflow: hidden;
+	}
+}

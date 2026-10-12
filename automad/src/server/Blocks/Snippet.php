@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Core\Automad;
 use Automad\Engine\Processors\TemplateProcessor;
 use Automad\Models\ComponentCollection;
@@ -48,18 +49,33 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
-class Snippet {
+class Snippet extends AbstractBlock {
 	/**
 	 * This variable tracks whether a snippet is called by another snippet to prevent inifinte recursive loops.
 	 */
 	public static bool $snippetIsRendering = false;
 
 	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			Renders Automad template language code, either from a snippet file or from inline code.
+			Use it to add dynamic, template-driven content that no other block type provides. Read the
+			`snippet_list` tool to find existing snippet files and prefer those over writing
+			inline template code.
+			TXT;
+	}
+
+	/**
 	 * Render a snippet block.
 	 *
-	 * @param array{id: string, data: array{file: string, snippet: string}} $block
+	 * @param BlockData $block
 	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
@@ -128,5 +144,32 @@ class Snippet {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'file' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The snippet file that is rendered. Before selecting a snippet, read the available snippets
+					from the `snippet_list` tool and use one of the returned snippet files. Use an
+					empty string when defining inline code in "snippet" instead.
+					TXT,
+				optional: true
+			),
+			'snippet' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					Inline Automad template language code that can be used as an alternative to a snippet
+					file. Use an empty string when a snippet file is selected.
+					TXT,
+				optional: true
+			)
+		);
 	}
 }

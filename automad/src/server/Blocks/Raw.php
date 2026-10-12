@@ -35,6 +35,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Blocks\Schema\AgentFieldSchema;
 use Automad\Blocks\Utils\Attr;
 use Automad\Core\Automad;
 use Automad\Core\Str;
@@ -50,9 +51,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  *
+ * @psalm-import-type AgentSchema from AbstractBlock
  * @psalm-import-type BlockData from AbstractBlock
  */
 class Raw extends AbstractBlock {
+	/**
+	 * The block description.
+	 *
+	 * @return string
+	 */
+	public static function getDescription(): string {
+		return <<< TXT
+			Outputs raw HTML as is. Markdown is automatically converted to HTML.
+			Use it for custom markup, iframes, third-party widgets or Markdown content that has no
+			matching block type. Prefer dedicated block types such as "paragraph", "header",
+			"nestedList" or "table" whenever one fits, since they remain editable in the dashboard.
+			TXT;
+	}
+
 	/**
 	 * Render a raw block.
 	 *
@@ -103,5 +119,31 @@ class Raw extends AbstractBlock {
 	 */
 	public static function toString(array $block, ComponentCollection $ComponentCollection): string {
 		return $block['data']['code'] ?? '';
+	}
+
+	/**
+	 * The collection of data fields that are passed on too the schema.
+	 *
+	 * @return array<string, AgentFieldSchema>
+	 */
+	protected static function agentDataSchema(): array {
+		return array(
+			'code' => new AgentFieldSchema(
+				'string',
+				<<< TXT
+					The raw HTML or Markdown code. Markdown is converted to HTML and HTML is output as is
+					without any escaping.
+					TXT
+			)
+		);
+	}
+
+	/**
+	 * Defines whether a block can be stretched.
+	 *
+	 * @return bool
+	 */
+	protected static function isStretchable(): bool {
+		return true;
 	}
 }

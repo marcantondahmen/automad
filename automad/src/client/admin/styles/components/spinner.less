@@ -51,7 +51,7 @@
 		border-radius: var(--size);
 		border: 2px solid;
 		border-left-color: transparent;
-		animation: 0.8s linear 0s infinite spinner;
+		animation: 0.8s linear 0s infinite @am-animation--spinner;
 	}
 
 	body > & {
@@ -64,15 +64,5 @@
 	.am-e-button & {
 		--size: 1.1em;
 		margin: 0;
-	}
-}
-
-@keyframes spinner {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	100% {
-		transform: rotate(360deg);
 	}
 }

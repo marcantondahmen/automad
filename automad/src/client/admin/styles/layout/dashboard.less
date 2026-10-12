@@ -145,6 +145,7 @@
 
 	&__section {
 		display: grid;
+		grid-template-columns: minmax(0, 1fr);
 
 		@media (min-width: @am-breakpoint-medium) {
 			grid-template-columns: minmax(@am-main-width, auto) minmax(
