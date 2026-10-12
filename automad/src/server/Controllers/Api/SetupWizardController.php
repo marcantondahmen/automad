@@ -65,12 +65,15 @@ class SetupWizardController {
 	}
 
 	/**
-	 * Get a list of required setup steps.
+	 * Run one-time migrations and get a list of required setup steps.
+	 * Note that this is always the first request when the wizard is started after updates.
 	 *
 	 * @return Response
 	 */
 	public static function getSteps(): Response {
 		$Response = new Response();
+
+		SetupWizard::migrate();
 
 		return $Response->setData(array('steps' => SetupWizard::getSteps()));
 	}

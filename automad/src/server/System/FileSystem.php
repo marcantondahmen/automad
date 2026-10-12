@@ -382,6 +382,34 @@ class FileSystem {
 	}
 
 	/**
+	 * Migrate all legacy PHP files in a directory that only contain a raw string without any PHP code
+	 * to the format of writePhpString() in order to not expose their content when being accessed directly.
+	 * Files that already contain PHP code are not touched.
+	 *
+	 * @see writePhpString()
+	 * @param string $dir
+	 * @return string[] the list of migrated files
+	 */
+	public static function migratePhpStrings(string $dir): array {
+		$migrated = array();
+
+		foreach (self::glob(rtrim($dir, '/') . '/*.php') as $file) {
+			$content = trim(strval(file_get_contents($file)));
+
+			if (str_starts_with($content, '<?php')) {
+				continue;
+			}
+
+			if (self::writePhpString($file, $content)) {
+				$migrated[] = $file;
+				Debug::log($file, 'Migrated');
+			}
+		}
+
+		return $migrated;
+	}
+
+	/**
 	 * Move a directory to a new location.
 	 *
 	 * @param string $oldPath
@@ -452,11 +480,14 @@ class FileSystem {
 
 	/**
 	 * Read a string that was saved as PHP file using writePhpString().
-	 * Legacy files that only contain the raw string without any PHP code are
-	 * migrated to the PHP format on the fly in order to not expose their content
-	 * when being accessed directly.
+	 * The content of legacy files that only contain the raw string without any PHP code
+	 * is returned as is without including the file, since that would print its content.
+	 * Note that this method must never write to the file system, since it is also used to read
+	 * config files during Config::init(), before any permission and debug constants are defined.
+	 * Legacy files are migrated explicitly using migratePhpStrings() instead.
 	 *
 	 * @see writePhpString()
+	 * @see migratePhpStrings()
 	 * @param string $file
 	 * @return string|null
 	 */
@@ -468,8 +499,6 @@ class FileSystem {
 		$content = trim(strval(file_get_contents($file)));
 
 		if (!str_starts_with($content, '<?php')) {
-			self::writePhpString($file, $content);
-
 			return $content;
 		}
 

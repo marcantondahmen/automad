@@ -94,4 +94,16 @@ class SetupWizard {
 	public static function isCompleted(): bool {
 		return is_readable(self::COMPLETED_FILE);
 	}
+
+	/**
+	 * Run one-time migrations. Since the wizard is started again after every update,
+	 * this is the place to migrate data that was saved by older versions.
+	 * Note that legacy config files are not migrated when being read,
+	 * since config files are read during Config::init(), before any permission constants are defined.
+	 *
+	 * @see FileSystem::migratePhpStrings()
+	 */
+	public static function migrate(): void {
+		FileSystem::migratePhpStrings(AM_BASE_DIR . '/config');
+	}
 }
