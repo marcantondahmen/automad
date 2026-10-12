@@ -33,60 +33,42 @@
  * See LICENSE.md for license information.
  */
 
-namespace Automad\System;
+namespace Automad\System\Setup;
 
-use Automad\Ai\Assistance\ProviderCollection;
-use Automad\Models\MailConfig;
+use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The setup wizard class.
+ * The setup is the one-time process that runs after a fresh install and after every update.
+ * It consists of the migration of data that was saved by older versions and the interactive wizard
+ * that asks for missing settings.
  *
+ * Note that the marker file that indicates whether the setup was already completed
+ * is located inside the /automad directory in order to be removed on updates.
+ * This way, the setup is started on the first login as well as after every update.
+ * Also note that legacy config files are not migrated when being read,
+ * since config files are read during Config::init(), before any permission constants are defined.
+ *
+ * @see Migration
+ * @see Wizard
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
  */
-class SetupWizard {
-	/**
-	 * Note that the file marker that indicates if a wizard was already completed
-	 * is located inside the /automad directory in order to be removed on updates.
-	 * This way, the wizard is started if needed also after updates as well as
-	 * on the first login.
-	 */
-	const COMPLETED_FILE = AM_BASE_DIR . '/automad/.wizard-completed';
+class Setup {
+	const COMPLETED_FILE = AM_BASE_DIR . '/automad/.setup-completed';
 
 	/**
-	 * Save the wizard completed file.
+	 * Save the setup completed file.
 	 */
 	public static function finish(): void {
 		FileSystem::write(self::COMPLETED_FILE, '');
 	}
 
 	/**
-	 * Get the required items to complete the first setup.
-	 *
-	 * @return array
-	 */
-	public static function getSteps(): array {
-		$ProviderCollection = new ProviderCollection();
-		$providers = array_filter($ProviderCollection->getPublicDetails(), fn (array $provider): bool => $provider['isConfigured']);
-		$items = array();
-
-		if (!is_readable(ConfigFile::getConfigPath(MailConfig::CONFIG_NAME))) {
-			$items[] = 'mailConfig';
-		}
-
-		if (empty($providers) && AM_AI_ASSISTANCE_ENABLED) {
-			$items[] = 'ai';
-		}
-
-		return $items;
-	}
-
-	/**
 	 * This function checks for existence of the COMPLETED_FILE inside the /automad
-	 * directory. This file is created when the wizard is completed and will be removed
+	 * directory. This file is created when the setup is completed and will be removed
 	 * on system updates.
 	 *
 	 * @return bool
@@ -96,14 +78,13 @@ class SetupWizard {
 	}
 
 	/**
-	 * Run one-time migrations. Since the wizard is started again after every update,
-	 * this is the place to migrate data that was saved by older versions.
-	 * Note that legacy config files are not migrated when being read,
-	 * since config files are read during Config::init(), before any permission constants are defined.
+	 * Start the setup by running all migrations and return the required wizard steps.
 	 *
-	 * @see FileSystem::migratePhpStrings()
+	 * @return array the required wizard steps
 	 */
-	public static function migrate(): void {
-		FileSystem::migratePhpStrings(AM_BASE_DIR . '/config');
+	public static function start(): array {
+		(new Migration())->run();
+
+		return Wizard::getSteps();
 	}
 }

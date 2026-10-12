@@ -186,9 +186,9 @@ export const enum SharedController {
 	discardDraft = 'SharedController::discardDraft',
 }
 
-export const enum SetupWizardController {
-	getSteps = 'SetupWizardController::getSteps',
-	finish = 'SetupWizardController::finish',
+export const enum SetupController {
+	start = 'SetupController::start',
+	finish = 'SetupController::finish',
 }
 
 export const enum SystemController {

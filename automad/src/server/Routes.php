@@ -49,7 +49,7 @@ use Automad\Core\I18n;
 use Automad\Core\Router;
 use Automad\Models\UserCollection;
 use Automad\System\FileSystem;
-use Automad\System\SetupWizard;
+use Automad\System\Setup\Setup;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -226,7 +226,7 @@ class Routes {
 		}
 
 		$hasAccounts = is_readable(UserCollection::FILE_ACCOUNTS);
-		$setupCompleted = SetupWizard::isCompleted();
+		$setupCompleted = Setup::isCompleted();
 
 		$Router->register(
 			AM_PAGE_DASHBOARD . '/setup',
