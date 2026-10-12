@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.60](https://github.com/marcantondahmen/automad/commit/322240fa0550dd6527bd381ab8a996c1b5858f5c)
+## [v2.0.0-beta.61](https://github.com/marcantondahmen/automad/commit/fda88aeb2fd7281a3faf30f9d904218bb1331929)
 
-Mon, 12 Oct 2026 19:28:34 +0200
+Mon, 12 Oct 2026 19:56:47 +0200
+
+### Bugfixes
+
+- pin composer platform to php 8.2 ([fda88aeb2](https://github.com/marcantondahmen/automad/commit/fda88aeb2fd7281a3faf30f9d904218bb1331929))
+
+## [v2.0.0-beta.60](https://github.com/marcantondahmen/automad/commit/12d9864e6fddabc6b76760eaeb77c41eb16ade0f)
+
+Mon, 12 Oct 2026 19:33:19 +0200
 
 ### New Features
 
