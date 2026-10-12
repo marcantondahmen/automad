@@ -2,6 +2,7 @@
     "name": "automad/lib",
     "description": "Automad dependencies",
     "require": {
+        "php": ">=8.2",
         "michelf/php-markdown": "^2.0",
         "symfony/mailer": "^7.0",
         "automad/language-packs": "dev-master",
@@ -14,6 +15,9 @@
         "hidehalo/nanoid-php": "^2.0"
     },
     "config": {
+        "platform": {
+            "php": "8.2.0"
+        },
         "preferred-install": {
             "*": "dist"
         },
