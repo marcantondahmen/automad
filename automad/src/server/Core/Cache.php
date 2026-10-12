@@ -495,7 +495,8 @@ class Cache {
 		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
 		$server = $_SERVER['HTTP_X_FORWARDED_SERVER'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''));
 		$port = $_SERVER['SERVER_PORT'] ?? '80';
-		$file = Cache::DIR_PAGES . '/' . $server . '_' . $port . AM_BASE_URL . $route . '/page' . $suffix;
+		$sanitized = trim(strval(preg_replace('/[^\w.]+/', '-', $server . ':' . $port)), '.-');
+		$file = Cache::DIR_PAGES . '/' . $sanitized . AM_BASE_URL . $route . '/page' . $suffix;
 
 		Debug::log($file);
 
