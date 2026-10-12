@@ -160,7 +160,7 @@ class Server {
 	 * @return FileSessionStore
 	 */
 	private static function createSessionStore(bool $isAuthenticated): FileSessionStore {
-		$dir = AM_DIR_TMP . '/mcp-sessions/' . ($isAuthenticated ? 'admin' : 'public');
+		$dir = AM_DIR_TMP . '/mcp_sessions/' . ($isAuthenticated ? 'admin' : 'public');
 		$ttl = $isAuthenticated ? self::SESSION_TTL_AUTHENTICATED : self::SESSION_TTL_PUBLIC;
 
 		return new FileSessionStore($dir, $ttl);
