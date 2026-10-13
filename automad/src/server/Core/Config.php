@@ -175,7 +175,14 @@ class Config {
 		// First define permsissions and temp directory since they are required for logging.
 		self::set('AM_PERM_DIR', 0755);
 		self::set('AM_PERM_FILE', 0644);
-		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
+
+		// Note that self::set() can't be used alone here, since its arguments are evaluated before it checks
+		// whether the constant is defined. FileSystem::getTmpDir() would then always create and verify the default
+		// system temp directory and throw in case it can't be made private, e.g. because another user on a shared
+		// host created it first, even if a custom AM_DIR_TMP is configured to avoid exactly that.
+		if (!defined('AM_DIR_TMP')) {
+			self::set('AM_DIR_TMP', FileSystem::getTmpDir());
+		}
 
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);

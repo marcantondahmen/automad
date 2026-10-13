@@ -273,7 +273,21 @@ class FileSystem {
 		try {
 			self::makeDir($dir);
 		} catch (\Throwable $th) {
-			throw new Exception('The system temp directory is not writable &mdash; please define <code>AM_TMP_DIR</code>.');
+			throw new Exception('The system temp directory is not writable &mdash; please define <code>AM_DIR_TMP</code>.');
+		}
+
+		// The temp directory contains non-public data and must only be accessible by the PHP user.
+		// Since only the owner can change permissions, a directory that was created by another user
+		// can't be made private and is refused. Windows doesn't support Unix permissions.
+		if (PHP_OS_FAMILY !== 'Windows') {
+			if ((intval(fileperms($dir)) & 0777) !== 0700) {
+				@chmod($dir, 0700);
+				clearstatcache();
+			}
+
+			if ((intval(fileperms($dir)) & 0777) !== 0700 || !is_writable($dir)) {
+				throw new Exception('The system temp directory can\'t be made private &mdash; please define <code>AM_DIR_TMP</code>.');
+			}
 		}
 
 		return $dir;
