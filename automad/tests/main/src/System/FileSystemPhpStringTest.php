@@ -6,13 +6,35 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FileSystemPhpStringTest extends TestCase {
+	private array $env;
+
 	private string $file;
 
 	protected function setUp(): void {
+		$this->env = array();
+
+		foreach (array(Encryption::ENV_KEY, Encryption::ENV_KEY_FILE) as $name) {
+			$this->env[$name] = array(getenv($name), $_SERVER[$name] ?? null);
+			putenv($name);
+			unset($_SERVER[$name]);
+		}
+
+		Encryption::loadKey();
+
 		$this->file = FileSystem::getTmpDir() . '/php-string-test-' . uniqid() . '.php';
 	}
 
 	protected function tearDown(): void {
+		foreach ($this->env as $name => list($env, $server)) {
+			putenv($env === false ? $name : "$name=$env");
+
+			if ($server !== null) {
+				$_SERVER[$name] = $server;
+			}
+		}
+
+		Encryption::loadKey();
+
 		if (is_file($this->file)) {
 			unlink($this->file);
 		}
@@ -82,5 +104,50 @@ class FileSystemPhpStringTest extends TestCase {
 		$this->assertSame($value, $data);
 		/** @disregard */
 		$this->assertSame('', $output);
+	}
+
+	#[DataProvider('dataForTestWriteAndRead')]
+	public function testWriteAndReadEncrypted(string $value) {
+		putenv(Encryption::ENV_KEY . '=' . str_repeat('a', Encryption::KEY_MIN_LENGTH));
+		Encryption::loadKey();
+
+		/** @disregard */
+		$this->assertTrue(FileSystem::writePhpString($this->file, $value, true));
+
+		$contents = strval(file_get_contents($this->file));
+
+		/** @disregard */
+		$this->assertStringStartsWith("<?php\ndefined('AUTOMAD') or die();\nreturn '" . Encryption::PREFIX, $contents);
+
+		if ($value) {
+			/** @disregard */
+			$this->assertStringNotContainsString(var_export($value, true), $contents);
+		}
+
+		ob_start();
+		$data = FileSystem::readPhpString($this->file);
+		$output = ob_get_clean();
+
+		/** @disregard */
+		$this->assertSame($value, $data);
+		/** @disregard */
+		$this->assertSame('', $output);
+
+		putenv(Encryption::ENV_KEY);
+		Encryption::loadKey();
+
+		/** @disregard */
+		$this->assertNull(FileSystem::readPhpString($this->file));
+	}
+
+	public function testWriteEncryptedWithoutKeyIsPlainText() {
+		$value = 'O:*:"~":1:{s:6:"apiKey";s:6:"secret";}';
+
+		/** @disregard */
+		$this->assertTrue(FileSystem::writePhpString($this->file, $value, true));
+		/** @disregard */
+		$this->assertSame(FileSystem::encodePhpString($value), file_get_contents($this->file));
+		/** @disregard */
+		$this->assertSame($value, FileSystem::readPhpString($this->file));
 	}
 }

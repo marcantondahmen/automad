@@ -39,4 +39,32 @@ class ConfigPhpStringsTest extends TestCase {
 		array_map('unlink', FileSystem::glob("$dir/*.php"));
 		rmdir($dir);
 	}
+
+	public function testUnreadableFileIsNotOverwritten() {
+		$dir = FileSystem::getTmpDir() . '/php-string-migration-test-' . uniqid();
+		$file = "$dir/unreadable.php";
+
+		FileSystem::makeDir($dir);
+		file_put_contents($file, 'secret');
+		chmod($file, 0200);
+
+		if (is_readable($file)) {
+			unlink($file);
+			rmdir($dir);
+			/** @disregard */
+			$this->markTestSkipped('File permissions are not enforced for the current user.');
+		}
+
+		$Migration = new ConfigPhpStrings($dir);
+		$Migration->run();
+		chmod($file, 0644);
+
+		/** @disregard */
+		$this->assertSame(array(), $Migration->getMigrated());
+		/** @disregard */
+		$this->assertSame('secret', file_get_contents($file));
+
+		unlink($file);
+		rmdir($dir);
+	}
 }

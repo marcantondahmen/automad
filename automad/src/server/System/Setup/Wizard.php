@@ -60,7 +60,7 @@ class Wizard {
 		$providers = array_filter($ProviderCollection->getPublicDetails(), fn (array $provider): bool => $provider['isConfigured']);
 		$steps = array();
 
-		if (!is_readable(ConfigFile::getConfigPath(MailConfig::CONFIG_NAME))) {
+		if (empty(ConfigFile::read(MailConfig::CONFIG_NAME))) {
 			$steps[] = 'mailConfig';
 		}
 

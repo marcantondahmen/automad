@@ -37,6 +37,7 @@ namespace Automad\Core;
 
 use Automad\Models\MailConfig;
 use Automad\System\ConfigFile;
+use Automad\System\Encryption;
 use Automad\System\FileSystem;
 use Automad\System\Server;
 
@@ -92,12 +93,67 @@ class Config {
 	public static array $envKeys = array();
 
 	/**
+	 * Cast an environment variable value. The strings "true" and "false" (case-insensitive)
+	 * are cast to booleans and numeric strings are cast to floats. Other values are not modified.
+	 *
+	 * @param string $value
+	 * @return bool|float|string
+	 */
+	public static function castEnvValue(string $value): bool|float|string {
+		$lower = strtolower($value);
+
+		if ($lower === 'true' || $lower === 'false') {
+			return $lower === 'true';
+		}
+
+		if (is_numeric($value)) {
+			return floatval($value);
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Initialize the main config by merging all available sources.
 	 */
 	public static function init(): void {
 		self::fromEnv();
+		// Load the encryption key after the .env file has been parsed and before reading config files.
+		// That also makes sure, that the key file is read before the open_basedir restriction is applied.
+		Encryption::loadKey();
 		self::fromFile();
 		self::fromDefaults();
+	}
+
+	/**
+	 * Parse the content of an .env file. The raw scanner mode is used in order to take all values
+	 * literally. That way, values can contain characters like "=", "!" or "&" without breaking
+	 * the entire file and are never expanded to constants or interpolated. Like in a shell,
+	 * one pair of surrounding double or single quotes is removed.
+	 *
+	 * @param string $content
+	 * @return array<string, string>
+	 */
+	public static function parseEnv(string $content): array {
+		$env = @parse_ini_string($content, false, INI_SCANNER_RAW);
+
+		if (!is_array($env)) {
+			return array();
+		}
+
+		$parsed = array();
+
+		foreach ($env as $key => $value) {
+			$value = strval($value);
+
+			if (strlen($value) >= 2 && str_starts_with($value, "'") && str_ends_with($value, "'")) {
+				$value = substr($value, 1, -1);
+			}
+
+			$parsed[strval($key)] = $value;
+		}
+
+		return $parsed;
 	}
 
 	/**
@@ -119,7 +175,14 @@ class Config {
 		// First define permsissions and temp directory since they are required for logging.
 		self::set('AM_PERM_DIR', 0755);
 		self::set('AM_PERM_FILE', 0644);
-		self::set('AM_DIR_TMP', FileSystem::getTmpDir());
+
+		// Note that self::set() can't be used alone here, since its arguments are evaluated before it checks
+		// whether the constant is defined. FileSystem::getTmpDir() would then always create and verify the default
+		// system temp directory and throw in case it can't be made private, e.g. because another user on a shared
+		// host created it first, even if a custom AM_DIR_TMP is configured to avoid exactly that.
+		if (!defined('AM_DIR_TMP')) {
+			self::set('AM_DIR_TMP', FileSystem::getTmpDir());
+		}
 
 		// Define debugging already here to be available when parsing the request.
 		self::set('AM_DEBUG_ENABLED', false);
@@ -258,29 +321,25 @@ class Config {
 
 	/**
 	 * Merge settings that can be defined as environment variables with config.
+	 * Note that the .env file is only meant for development.
+	 *
+	 * @see parseEnv()
+	 * @see castEnvValue()
 	 */
 	private static function fromEnv(): void {
 		$envFile = AM_BASE_DIR . '/.env';
 
 		if (is_readable($envFile)) {
-			$env = parse_ini_file($envFile);
-
-			if (!empty($env)) {
-				foreach ($env as $key => $value) {
-					putenv("$key=$value");
-				}
+			foreach (self::parseEnv(strval(file_get_contents($envFile))) as $key => $value) {
+				putenv("$key=$value");
 			}
 		}
 
 		foreach (self::ENV_VARS as $key) {
-			$value = getenv($key);
+			$value = strval(getenv($key));
 
-			if (strlen(strval($value))) {
-				if (is_numeric($value)) {
-					$value = floatval($value);
-				}
-
-				self::set($key, $value);
+			if (strlen($value)) {
+				self::set($key, self::castEnvValue($value));
 				self::$envKeys[] = $key;
 			}
 		}

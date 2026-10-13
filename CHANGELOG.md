@@ -1,8 +1,25 @@
 # Changelog
 
-## [v2.0.0-beta.62](https://github.com/marcantondahmen/automad/commit/db60d91ab064c60e61bd0ecb3c36379a70105127)
+## [v2.0.0-beta.63](https://github.com/marcantondahmen/automad/commit/4984d4d4d5a6a903c48436ff959b453e5b64f27f)
 
-Mon, 12 Oct 2026 20:21:25 +0200
+Tue, 13 Oct 2026 21:43:53 +0200
+
+### New Features
+
+- add console command to run migrations manually ([3f361b06a](https://github.com/marcantondahmen/automad/commit/3f361b06a6b70ff090460909b562765f86b21e43))
+- add optional encryption for php config files that contain secrets as additional layer of protection ([9ce9af3f6](https://github.com/marcantondahmen/automad/commit/9ce9af3f6f4496b25a455ba83631f0b11a2a9f4d))
+
+### Bugfixes
+
+- check final file path against allowed extensions list ([e1eefa7c1](https://github.com/marcantondahmen/automad/commit/e1eefa7c152417b4e611bee4351306847eb78e98))
+- detect image type before saving on import ([ac91c26a8](https://github.com/marcantondahmen/automad/commit/ac91c26a8d977a5c56c91b60ae40f933fcc4e09f))
+- fix sanitization of server name constant ([e747c8655](https://github.com/marcantondahmen/automad/commit/e747c865599a01f686b978de529ead5dbb24a129))
+- make tmp dir not readable for other users ([4984d4d4d](https://github.com/marcantondahmen/automad/commit/4984d4d4d5a6a903c48436ff959b453e5b64f27f))
+- only allow http and https protocols in fetch calls ([e275f763d](https://github.com/marcantondahmen/automad/commit/e275f763d0b09886ce682d4ab64e42803384c74f))
+
+## [v2.0.0-beta.62](https://github.com/marcantondahmen/automad/commit/45addf8e3af8393b1d735635597d6786cfd2f0d1)
+
+Mon, 12 Oct 2026 20:23:33 +0200
 
 ### Bugfixes
 

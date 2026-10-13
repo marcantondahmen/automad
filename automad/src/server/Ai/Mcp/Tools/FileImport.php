@@ -127,8 +127,8 @@ class FileImport extends AbstractTool {
 			string $url,
 			string $page = ''
 		) {
-			// Fetch does not restrict protocols, so only allow remote URLs here in order
-			// to prevent reading local files using for example file:// URLs.
+			// Fetch only allows http(s) anyway, but reject other URLs early
+			// in order to return a clear error message to the client.
 			if (!preg_match('#^https?://#i', $url)) {
 				throw new ToolCallException('The `url` must be a full remote URL starting with http:// or https://.');
 			}

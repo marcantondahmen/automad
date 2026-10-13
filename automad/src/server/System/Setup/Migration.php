@@ -38,6 +38,7 @@ namespace Automad\System\Setup;
 use Automad\Core\Debug;
 use Automad\System\Setup\Migrations\AbstractMigration;
 use Automad\System\Setup\Migrations\ConfigPhpStrings;
+use Automad\System\Setup\Migrations\EncryptConfigFiles;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -67,21 +68,30 @@ class Migration {
 	 */
 	public function __construct(?array $migrations = null) {
 		$this->migrations = $migrations ?? array(
-			new ConfigPhpStrings(AM_BASE_DIR . '/config')
+			new ConfigPhpStrings(AM_BASE_DIR . '/config'),
+			new EncryptConfigFiles(AM_BASE_DIR . '/config')
 		);
 	}
 
 	/**
-	 * Run all migrations.
+	 * Run all migrations and return the results.
+	 *
+	 * @return array<string, string|null> the error messages of all migrations by name, null on success
 	 */
-	public function run(): void {
+	public function run(): array {
+		$results = array();
+
 		foreach ($this->migrations as $Migration) {
 			try {
 				$Migration->run();
+				$results[$Migration->getName()] = null;
 				Debug::log($Migration->getName(), 'Migration completed');
 			} catch (\Throwable $th) {
+				$results[$Migration->getName()] = $th->getMessage();
 				Debug::log($th->getMessage(), 'Migration failed: ' . $Migration->getName());
 			}
 		}
+
+		return $results;
 	}
 }

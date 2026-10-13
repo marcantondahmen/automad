@@ -62,7 +62,11 @@ class Image {
 	 * @param Messenger $Messenger
 	 */
 	public static function save(string $path, string $name, string $extension, string $base64, Messenger $Messenger): void {
-		if (!in_array($extension, FileUtils::allowedFileTypes())) {
+		$name = $path . Str::slug($name) . '.' . $extension;
+
+		// The exact match prevents path segments in the posted extension,
+		// the check of the final file name applies the denied file types.
+		if (!in_array($extension, FileUtils::allowedFileTypes(), true) || !FileSystem::isAllowedFileType($name)) {
 			$Messenger->setError(
 				Text::get('unsupportedFileTypeError') . ' "' . $extension . '"'
 			);
@@ -72,8 +76,6 @@ class Image {
 
 		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64) ?? '';
 		$data = base64_decode($data);
-
-		$name = $path . Str::slug($name) . '.' . $extension;
 
 		if (FileSystem::write($name, $data) === false) {
 			$Messenger->setError(Text::get('couldNotSaveError') . ' ' . $name);

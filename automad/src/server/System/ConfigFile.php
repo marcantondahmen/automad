@@ -127,8 +127,10 @@ class ConfigFile {
 	}
 
 	/**
-	 * Write the config file.
+	 * Write the config file. All named configs such as "config.mail.php" are encrypted
+	 * in case encryption is enabled, while the main "config.php" always stays editable.
 	 *
+	 * @see Encryption
 	 * @return bool
 	 */
 	public function write(): bool {
@@ -139,6 +141,6 @@ class ConfigFile {
 
 		Debug::log($file);
 
-		return FileSystem::writePhpString($file, $json);
+		return FileSystem::writePhpString($file, $json, $this->name !== '');
 	}
 }

@@ -98,7 +98,14 @@ class ConfigPhpStrings extends AbstractMigration {
 		$this->migrated = array();
 
 		foreach (FileSystem::glob($this->dir . '/*.php') as $file) {
-			$content = trim(strval(file_get_contents($file)));
+			$content = @file_get_contents($file);
+
+			// Never overwrite files that can't be read.
+			if ($content === false) {
+				continue;
+			}
+
+			$content = trim($content);
 
 			if (str_starts_with($content, '<?php')) {
 				continue;
