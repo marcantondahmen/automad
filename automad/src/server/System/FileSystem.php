@@ -54,6 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class FileSystem {
+	const FILE_TYPES_DENIED = array('phar', 'php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phps', 'pht', 'phtml');
 	const FILE_TYPES_IMAGE = array('jpg', 'jpeg', 'gif', 'png', 'webp');
 	const FILE_TYPES_VIDEO = array('mp4', 'webm');
 
@@ -324,6 +325,8 @@ class FileSystem {
 	 * Tests if a string is a file name with an allowed file extension.
 	 *
 	 * Basically a possibly existing file extension is checked against the array of allowed file extensions.
+	 * Executable PHP extensions are always denied, even when they are added to the allowed file types.
+	 * Note that file names have to be checked after slugging, since slugging can truncate the extension.
 	 *
 	 * "/url/file.jpg" will return true, "/url/file" or "/url/file.something" will return false.
 	 *
@@ -339,6 +342,10 @@ class FileSystem {
 
 		// Possible extension
 		$extension = strtolower(pathinfo($str, PATHINFO_EXTENSION));
+
+		if (in_array($extension, self::FILE_TYPES_DENIED)) {
+			return false;
+		}
 
 		if (in_array($extension, FileUtils::allowedFileTypes())) {
 			return true;

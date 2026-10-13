@@ -199,10 +199,13 @@ class FileCollection {
 			return;
 		}
 
-		if (!FileSystem::isAllowedFileType($chunk->name)) {
+		// Check the final file name, since slugging can truncate the extension.
+		$fileName = Str::slug($chunk->name);
+
+		if (!FileSystem::isAllowedFileType($fileName)) {
 			$Messenger->setError(
 				Text::get('unsupportedFileTypeError') . ' "' .
-				FileSystem::getExtension($chunk->name) . '"'
+				FileSystem::getExtension($fileName) . '"'
 			);
 
 			return;
@@ -238,7 +241,7 @@ class FileCollection {
 		}
 
 		if (intval($chunk->dztotalchunkcount) - 1 === intval($chunk->dzchunkindex)) {
-			$target = $path . Str::slug($chunk->name);
+			$target = $path . $fileName;
 
 			rename($cache, $target);
 			Cache::clear();
