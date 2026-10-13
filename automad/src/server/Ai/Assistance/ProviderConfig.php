@@ -146,7 +146,7 @@ class ProviderConfig {
 			serialize($this)
 		);
 
-		return FileSystem::writePhpString(static::getPath($this->providerId), $serialized);
+		return FileSystem::writePhpString(static::getPath($this->providerId), $serialized, true);
 	}
 
 	/**

@@ -145,7 +145,7 @@ class AccessTokenConfig {
 			serialize($this)
 		);
 
-		return FileSystem::writePhpString(self::getPath(), $serialized);
+		return FileSystem::writePhpString(self::getPath(), $serialized, true);
 	}
 
 	/**

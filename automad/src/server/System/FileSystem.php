@@ -139,12 +139,20 @@ class FileSystem {
 	/**
 	 * Generate the PHP code that returns the given string when being included.
 	 * The string is safely escaped using var_export().
+	 * Optionally the string is encrypted in case encryption is enabled.
+	 * Otherwise it is stored as plain text.
 	 *
 	 * @see writePhpString()
+	 * @see Encryption
 	 * @param string $data
+	 * @param bool $encrypt
 	 * @return string the PHP code
 	 */
-	public static function encodePhpString(string $data): string {
+	public static function encodePhpString(string $data, bool $encrypt = false): string {
+		if ($encrypt) {
+			$data = Encryption::encrypt($data) ?? $data;
+		}
+
 		return "<?php\ndefined('AUTOMAD') or die();\nreturn " . var_export($data, true) . ";\n";
 	}
 
@@ -452,6 +460,7 @@ class FileSystem {
 
 	/**
 	 * Read a string that was saved as PHP file using writePhpString().
+	 * Encrypted strings are decrypted, null is returned in case decryption fails.
 	 * The content of legacy files that only contain the raw string without any PHP code
 	 * is returned as is without including the file, since that would print its content.
 	 * Note that this method must never write to the file system, since it is also used to read
@@ -459,6 +468,7 @@ class FileSystem {
 	 * Legacy files are migrated explicitly by a migration step instead.
 	 *
 	 * @see writePhpString()
+	 * @see Encryption
 	 * @see \Automad\System\Setup\Migrations\ConfigPhpStrings
 	 * @param string $file
 	 * @return string|null
@@ -476,7 +486,15 @@ class FileSystem {
 
 		$data = include $file;
 
-		return is_string($data) ? $data : null;
+		if (!is_string($data)) {
+			return null;
+		}
+
+		if (Encryption::isEncrypted($data)) {
+			return Encryption::decrypt($data);
+		}
+
+		return $data;
 	}
 
 	/**
@@ -634,14 +652,18 @@ class FileSystem {
 	 * Save a string as PHP file that returns the string when being included.
 	 * The file has to be a PHP file for security reasons. When trying to access the file directly
 	 * via the browser, it gets executed instead of revealing any of its content.
+	 * Secrets should be saved with $encrypt set to true in order to be encrypted
+	 * in case encryption is enabled.
 	 *
 	 * @see readPhpString()
+	 * @see Encryption
 	 * @param string $file
 	 * @param string $data
+	 * @param bool $encrypt
 	 * @return bool
 	 */
-	public static function writePhpString(string $file, string $data): bool {
-		if (!self::write($file, self::encodePhpString($data))) {
+	public static function writePhpString(string $file, string $data, bool $encrypt = false): bool {
+		if (!self::write($file, self::encodePhpString($data, $encrypt))) {
 			return false;
 		}
 

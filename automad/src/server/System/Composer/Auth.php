@@ -123,7 +123,7 @@ class Auth {
 	 * @return bool
 	 */
 	public function save(): bool {
-		return FileSystem::writePhpString(self::FILE, serialize($this));
+		return FileSystem::writePhpString(self::FILE, serialize($this), true);
 	}
 
 	/**

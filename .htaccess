@@ -1,6 +1,26 @@
 # --- AUTOMAD --- #
 
 
+# Encrypt secrets such as mail, AI provider and Composer credentials that are stored in /config.
+# Generate a random key of at least 32 characters, for example with "openssl rand -hex 32".
+# The recommended way is to save the key to a plain text file outside of the document root
+# and to uncomment the AM_ENCRYPTION_KEY_FILE line below. Relative paths are resolved
+# against the Automad base directory. Alternatively, the key can be set directly using
+# AM_ENCRYPTION_KEY, which takes precedence in case both are set.
+
+# Existing files are encrypted when being saved the next time, after the next update
+# or when running "php automad/console migrate" with the variable exported in the shell.
+# Note that changing or removing the key requires entering all those credentials again.
+# See docs/encrypting-secrets.md in the Automad repository for more information.
+
+#<IfModule mod_env.c>
+#	SetEnv AM_ENCRYPTION_KEY_FILE "../automad.key"
+#	SetEnv AM_ENCRYPTION_KEY "your-random-key"
+#</IfModule>
+
+
+
+
 <IfModule mod_rewrite.c>
 
 
@@ -21,14 +41,14 @@
 
 Options -Indexes
 
-# To enable Pretty URLs just keep this file in the base folder. 
+# To enable Pretty URLs just keep this file in the base folder.
 # (next to the automad folder and the index.php)
-# As long as you keep these files all togehter, you can even move 
-# the whole installation into a subfolder. It does not need to 
-# be the root folder of your site and this file does not need to 
+# As long as you keep these files all togehter, you can even move
+# the whole installation into a subfolder. It does not need to
+# be the root folder of your site and this file does not need to
 # be reconfigured in any case.
 
-RewriteEngine On 
+RewriteEngine On
 
 # Do not modify the RewriteBase, even when running automad from a subfolder.
 # The correct rewriting will be figured out automatically.
@@ -49,11 +69,11 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # To keep the app portable (can be moved around without configuration),
-# the full path for the actual rewriting has to be determined, 
+# the full path for the actual rewriting has to be determined,
 # since the RewriteBase stays always '/'.
 
-# To make that possible, the following RewriteCond is a dummy condition 
-# which is always true and is only used to figure out the base url 
+# To make that possible, the following RewriteCond is a dummy condition
+# which is always true and is only used to figure out the base url
 # by using back-references. (http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html)
 
 # Note: The RewriteRule is checked before (!) its RewriteConds. That actually
@@ -61,26 +81,26 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # For example the full URL is: www.yoursite.com/page/path
 
-# '$1': 		Page path starting from your base url, taken from the ^(.*)$ 
-#			in the RewriteRule ( page/path )
-# '#':			Separator
-# '%{REQUEST_URI}':	The actual requested full URL ( www.yoursite.com/page/path )	 
-# '([^#]*)':		The string (here the value of $1) 
-#			up to the separator ( page/path )
-# '#':			Separator again
-# '(.*)':		The requested URL without the page path ( www.yoursite.com )
-# '\1$':		The string up to the separator again ( /page/path )
+# '$1':             Page path starting from your base url, taken from the ^(.*)$
+#                   in the RewriteRule ( page/path )
+# '#':              Separator
+# '%{REQUEST_URI}': The actual requested full URL ( www.yoursite.com/page/path )
+# '([^#]*)':        The string (here the value of $1)
+#                   up to the separator ( page/path )
+# '#':              Separator again
+# '(.*)':           The requested URL without the page path ( www.yoursite.com )
+# '\1$':            The string up to the separator again ( /page/path )
 RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 
-# Everything after the base url (virtual page path) will be redirected to 
-# the second match "%2" from the above condition: 
+# Everything after the base url (virtual page path) will be redirected to
+# the second match "%2" from the above condition:
 # ( www.yoursite.com ) + "index.php?/" + page/path
 RewriteRule ^(.*)$ %2index.php?/$1 [QSA,L]
 
 
 
 
-# Redirect blocked files to the 404 page. 
+# Redirect blocked files to the 404 page.
 
 # Redirect package thumbnails.
 RewriteCond %{REQUEST_FILENAME} /cache/packages/.*/thumbnail [OR]
@@ -88,18 +108,18 @@ RewriteCond %{REQUEST_FILENAME} /cache/packages/.*/thumbnail [OR]
 # Redirect src files.
 RewriteCond %{REQUEST_FILENAME} /(packages|vendor)/.*\.(ts|less|php|md|sh|xml|json|lock)$ [OR,NC]
 RewriteCond %{REQUEST_FILENAME} /vendor/.*(readme|license) [OR,NC]
-RewriteCond %{REQUEST_FILENAME} /(package|package-lock|composer)\.(json|lock)$ [OR] 
+RewriteCond %{REQUEST_FILENAME} /(package|package-lock|composer)\.(json|lock)$ [OR]
 
 # Redirect data files.
-RewriteCond %{REQUEST_FILENAME} /data$ [OR] 
-RewriteCond %{REQUEST_FILENAME} /index$ [OR] 
-RewriteCond %{REQUEST_FILENAME} /\.history$ [OR] 
+RewriteCond %{REQUEST_FILENAME} /data$ [OR]
+RewriteCond %{REQUEST_FILENAME} /index$ [OR]
+RewriteCond %{REQUEST_FILENAME} /\.history$ [OR]
 
 # Redirect trash.
-RewriteCond %{REQUEST_FILENAME} /\.trash/ [OR] 
+RewriteCond %{REQUEST_FILENAME} /\.trash/ [OR]
 
-# Redirect system files 
-RewriteCond %{REQUEST_FILENAME} \.DS_Store$ [OR,NC] 
+# Redirect system files
+RewriteCond %{REQUEST_FILENAME} \.DS_Store$ [OR,NC]
 
 # Redirect all subdirectories.
 RewriteCond %{REQUEST_FILENAME} -d

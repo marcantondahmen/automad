@@ -43,9 +43,11 @@ class MigrationTest extends TestCase {
 			}
 		};
 
-		(new Migration(array($Failing, $Passing)))->run();
+		$results = (new Migration(array($Failing, $Passing)))->run();
 
 		/** @disregard */
 		$this->assertSame(array('failing', 'passing'), $log->getArrayCopy());
+		/** @disregard */
+		$this->assertSame(array('failing' => 'Migration failed', 'passing' => null), $results);
 	}
 }

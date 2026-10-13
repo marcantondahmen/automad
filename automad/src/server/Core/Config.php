@@ -92,12 +92,64 @@ class Config {
 	public static array $envKeys = array();
 
 	/**
+	 * Cast an environment variable value. The strings "true" and "false" (case-insensitive)
+	 * are cast to booleans and numeric strings are cast to floats. Other values are not modified.
+	 *
+	 * @param string $value
+	 * @return bool|float|string
+	 */
+	public static function castEnvValue(string $value): bool|float|string {
+		$lower = strtolower($value);
+
+		if ($lower === 'true' || $lower === 'false') {
+			return $lower === 'true';
+		}
+
+		if (is_numeric($value)) {
+			return floatval($value);
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Initialize the main config by merging all available sources.
 	 */
 	public static function init(): void {
 		self::fromEnv();
 		self::fromFile();
 		self::fromDefaults();
+	}
+
+	/**
+	 * Parse the content of an .env file. The raw scanner mode is used in order to take all values
+	 * literally. That way, values can contain characters like "=", "!" or "&" without breaking
+	 * the entire file and are never expanded to constants or interpolated. Like in a shell,
+	 * one pair of surrounding double or single quotes is removed.
+	 *
+	 * @param string $content
+	 * @return array<string, string>
+	 */
+	public static function parseEnv(string $content): array {
+		$env = @parse_ini_string($content, false, INI_SCANNER_RAW);
+
+		if (!is_array($env)) {
+			return array();
+		}
+
+		$parsed = array();
+
+		foreach ($env as $key => $value) {
+			$value = strval($value);
+
+			if (strlen($value) >= 2 && str_starts_with($value, "'") && str_ends_with($value, "'")) {
+				$value = substr($value, 1, -1);
+			}
+
+			$parsed[strval($key)] = $value;
+		}
+
+		return $parsed;
 	}
 
 	/**
@@ -258,29 +310,25 @@ class Config {
 
 	/**
 	 * Merge settings that can be defined as environment variables with config.
+	 * Note that the .env file is only meant for development.
+	 *
+	 * @see parseEnv()
+	 * @see castEnvValue()
 	 */
 	private static function fromEnv(): void {
 		$envFile = AM_BASE_DIR . '/.env';
 
 		if (is_readable($envFile)) {
-			$env = parse_ini_file($envFile);
-
-			if (!empty($env)) {
-				foreach ($env as $key => $value) {
-					putenv("$key=$value");
-				}
+			foreach (self::parseEnv(strval(file_get_contents($envFile))) as $key => $value) {
+				putenv("$key=$value");
 			}
 		}
 
 		foreach (self::ENV_VARS as $key) {
-			$value = getenv($key);
+			$value = strval(getenv($key));
 
-			if (strlen(strval($value))) {
-				if (is_numeric($value)) {
-					$value = floatval($value);
-				}
-
-				self::set($key, $value);
+			if (strlen($value)) {
+				self::set($key, self::castEnvValue($value));
 				self::$envKeys[] = $key;
 			}
 		}
