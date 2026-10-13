@@ -13,9 +13,9 @@ Automad keeps track of a completed setup using the marker file `automad/.setup-c
 
 ## Available Migrations
 
-| Migration            | Description                                                                                                              |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Config PHP strings   | Converts legacy files in `config` that only contain a plain string into PHP files that don't expose their content.        |
+| Migration            | Description                                                                                                                             |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Config PHP strings   | Converts legacy files in `config` that only contain a plain string into PHP files that don't expose their content.                      |
 | Encrypt config files | Encrypts files in `config` that contain secrets in case an encryption key is provided. See [Encrypting Secrets](encrypting-secrets.md). |
 
 Every migration only changes data that was not migrated yet. It is therefore safe to run all migrations multiple times. A failing migration is logged in the debug log and doesn't stop the remaining migrations.
@@ -35,7 +35,7 @@ Alternatively, deleting the marker file `automad/.setup-completed` restarts the 
 > [!NOTE]
 > The `migrate` command used to import content from Automad version 1 in earlier releases. That command is now called `import:v1`.
 
-## For Developers
+## Development
 
 - Migrations are classes extending `Automad\System\Setup\Migrations\AbstractMigration` in `automad/src/server/System/Setup/Migrations/` and implement `getName()` and `run()`.
 - New migrations must be **appended** to the list in the constructor of `Automad\System\Setup\Migration`. There is no automatic discovery, since the order matters.

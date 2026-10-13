@@ -6,13 +6,13 @@ Encryption is optional and disabled by default. It is enabled automatically as s
 
 ## What is Encrypted
 
-| File                       | Content                          | Encrypted |
-| -------------------------- | -------------------------------- | --------- |
-| `config/config.mail.php`   | Mail server settings             | Yes       |
-| `config/ai.*.php`          | AI provider API keys             | Yes       |
-| `config/composer.auth.php` | Composer authentication          | Yes       |
-| `config/tokens.auth.php`   | Hashes of MCP access tokens      | Yes       |
-| `config/config.php`        | Main configuration               | No        |
+| File                       | Content                           | Encrypted |
+| -------------------------- | --------------------------------- | --------- |
+| `config/config.mail.php`   | Mail server settings              | Yes       |
+| `config/ai.*.php`          | AI provider API keys              | Yes       |
+| `config/composer.auth.php` | Composer authentication           | Yes       |
+| `config/tokens.auth.php`   | Hashes of MCP access tokens       | Yes       |
+| `config/config.php`        | Main configuration                | No        |
 | `config/accounts.php`      | User accounts and password hashes | No        |
 
 The main configuration stays unencrypted in order to be editable manually. User accounts are not encrypted on purpose, since a lost key would otherwise lock out all users. They only contain password hashes anyway.
@@ -100,7 +100,7 @@ Keep this in mind when moving a site to another server and make sure to also mov
 
 Encryption protects secrets in leaked files. It doesn't protect against an attacker that is able to execute code on the server or read the server's environment, since Automad itself must be able to read the key.
 
-## For Developers
+## Development
 
 - Secrets are written with `FileSystem::writePhpString($file, $data, true)` and read with `FileSystem::readPhpString()`, which decrypts transparently and returns `null` in case decryption fails. Readers must treat `null` as "not configured". Without a key, the `true` flag has no effect and the data is stored as plain text.
 - Objects are stored using `Automad\System\SerializedFile` with the `$encrypt` constructor argument set to `true`. It takes care of encryption, rename-safe serialization and restricting unserialization to the expected class.
