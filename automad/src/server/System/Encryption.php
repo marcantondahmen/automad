@@ -46,6 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * against the base directory, allowing for storing the key file outside of the document root.
  * The variables can be defined in the server environment, using SetEnv in .htaccess
  * or in the .env file during development.
+ * The key is resolved only once during Config::init() and then kept in memory, since the key file
+ * may not be readable anymore after the open_basedir restriction has been applied.
  * Note that the key is never defined as a constant in order to not leak it.
  *
  * @see FileSystem::writePhpString()
@@ -101,9 +103,14 @@ class Encryption {
 	private const TAG_LENGTH = 16;
 
 	/**
-	 * Whether the cipher is supported by the system.
+	 * Whether the key has already been loaded.
 	 */
-	private static ?bool $isSupported = null;
+	private static bool $isLoaded = false;
+
+	/**
+	 * The derived key or null in case encryption is not available.
+	 */
+	private static ?string $key = null;
 
 	/**
 	 * Decrypt a string that was encrypted using encrypt().
@@ -183,6 +190,35 @@ class Encryption {
 	}
 
 	/**
+	 * Resolve the key from the environment and keep the derived key in memory.
+	 * This method is called once during Config::init() in order to read the key file
+	 * before the open_basedir restriction is applied. It must be called again after changing
+	 * the environment, for example in tests.
+	 * Note that loading the key must never write or log anything,
+	 * since it is also used to read config files during Config::init().
+	 */
+	public static function loadKey(): void {
+		self::$isLoaded = true;
+		self::$key = null;
+
+		if (!function_exists('openssl_encrypt') || !in_array(self::CIPHER, openssl_get_cipher_methods())) {
+			return;
+		}
+
+		$value = self::getEnv(self::ENV_KEY);
+
+		if ($value === '') {
+			$value = self::readKeyFile(self::getEnv(self::ENV_KEY_FILE));
+		}
+
+		if (strlen($value) < self::KEY_MIN_LENGTH) {
+			return;
+		}
+
+		self::$key = hash_hkdf('sha256', $value, 32, self::HKDF_INFO);
+	}
+
+	/**
 	 * Get the value of an environment variable. Variables are also looked up in $_SERVER,
 	 * since FastCGI setups may only expose variables defined with SetEnv in .htaccess there,
 	 * optionally with a "REDIRECT_" prefix after rewriting.
@@ -202,38 +238,23 @@ class Encryption {
 
 	/**
 	 * Get the derived key or null in case encryption is not available.
-	 * Note that reading the key must never write or log anything,
-	 * since it is also used to read config files during Config::init().
+	 * The key is loaded in case it hasn't been loaded before.
 	 *
+	 * @see loadKey()
 	 * @return string|null
 	 */
 	private static function getKey(): ?string {
-		if (self::$isSupported === null) {
-			self::$isSupported = function_exists('openssl_encrypt') &&
-				in_array(self::CIPHER, openssl_get_cipher_methods());
+		if (!self::$isLoaded) {
+			self::loadKey();
 		}
 
-		if (!self::$isSupported) {
-			return null;
-		}
-
-		$value = self::getEnv(self::ENV_KEY);
-
-		if ($value === '') {
-			$value = self::readKeyFile(self::getEnv(self::ENV_KEY_FILE));
-		}
-
-		if (strlen($value) < self::KEY_MIN_LENGTH) {
-			return null;
-		}
-
-		return hash_hkdf('sha256', $value, 32, self::HKDF_INFO);
+		return self::$key;
 	}
 
 	/**
 	 * Read the key from a file. Relative paths are resolved against the base directory.
 	 * Errors are suppressed, since reading outside of the document root
-	 * may be restricted by open_basedir on shared hosting.
+	 * may be restricted by an open_basedir restriction of the hosting provider.
 	 *
 	 * @param string $path
 	 * @return string the key or an empty string

@@ -26,6 +26,8 @@ class SerializedFileTest extends TestCase {
 			unset($_SERVER[$name]);
 		}
 
+		Encryption::loadKey();
+
 		$this->file = FileSystem::getTmpDir() . '/serialized-file-test-' . uniqid() . '.php';
 	}
 
@@ -37,6 +39,8 @@ class SerializedFileTest extends TestCase {
 				$_SERVER[$name] = $server;
 			}
 		}
+
+		Encryption::loadKey();
 
 		if (is_file($this->file)) {
 			unlink($this->file);
@@ -74,6 +78,7 @@ class SerializedFileTest extends TestCase {
 
 	public function testEncrypted() {
 		putenv(Encryption::ENV_KEY . '=' . str_repeat('a', Encryption::KEY_MIN_LENGTH));
+		Encryption::loadKey();
 
 		$SerializedFile = new SerializedFile($this->file, SerializedFileFixture::class, true);
 		$SerializedFile->write(new SerializedFileFixture('secret'));
@@ -87,6 +92,7 @@ class SerializedFileTest extends TestCase {
 		$this->assertEquals(new SerializedFileFixture('secret'), $SerializedFile->read());
 
 		putenv(Encryption::ENV_KEY);
+		Encryption::loadKey();
 
 		/** @disregard */
 		$this->assertNull($SerializedFile->read());
@@ -94,6 +100,7 @@ class SerializedFileTest extends TestCase {
 
 	public function testNotEncryptedWithKey() {
 		putenv(Encryption::ENV_KEY . '=' . str_repeat('a', Encryption::KEY_MIN_LENGTH));
+		Encryption::loadKey();
 
 		$SerializedFile = new SerializedFile($this->file, SerializedFileFixture::class);
 		$SerializedFile->write(new SerializedFileFixture('secret'));

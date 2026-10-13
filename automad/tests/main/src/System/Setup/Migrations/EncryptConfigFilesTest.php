@@ -20,6 +20,8 @@ class EncryptConfigFilesTest extends TestCase {
 			unset($_SERVER[$name]);
 		}
 
+		Encryption::loadKey();
+
 		$this->dir = FileSystem::getTmpDir() . '/encrypt-config-files-test-' . uniqid();
 		FileSystem::makeDir($this->dir);
 	}
@@ -32,6 +34,8 @@ class EncryptConfigFilesTest extends TestCase {
 				$_SERVER[$name] = $server;
 			}
 		}
+
+		Encryption::loadKey();
 
 		array_map('unlink', FileSystem::glob($this->dir . '/*.php'));
 		rmdir($this->dir);
@@ -56,6 +60,7 @@ class EncryptConfigFilesTest extends TestCase {
 		$this->assertSame($snapshot, $this->snapshot());
 
 		putenv(Encryption::ENV_KEY . '=' . str_repeat('a', Encryption::KEY_MIN_LENGTH));
+		Encryption::loadKey();
 		$Migration->run();
 		$migrated = array_map('basename', $Migration->getMigrated());
 		sort($migrated);

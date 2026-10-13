@@ -18,6 +18,9 @@ class FileSystemPhpStringTest extends TestCase {
 			putenv($name);
 			unset($_SERVER[$name]);
 		}
+
+		Encryption::loadKey();
+
 		$this->file = FileSystem::getTmpDir() . '/php-string-test-' . uniqid() . '.php';
 	}
 
@@ -29,6 +32,8 @@ class FileSystemPhpStringTest extends TestCase {
 				$_SERVER[$name] = $server;
 			}
 		}
+
+		Encryption::loadKey();
 
 		if (is_file($this->file)) {
 			unlink($this->file);
@@ -104,6 +109,7 @@ class FileSystemPhpStringTest extends TestCase {
 	#[DataProvider('dataForTestWriteAndRead')]
 	public function testWriteAndReadEncrypted(string $value) {
 		putenv(Encryption::ENV_KEY . '=' . str_repeat('a', Encryption::KEY_MIN_LENGTH));
+		Encryption::loadKey();
 
 		/** @disregard */
 		$this->assertTrue(FileSystem::writePhpString($this->file, $value, true));
@@ -128,6 +134,7 @@ class FileSystemPhpStringTest extends TestCase {
 		$this->assertSame('', $output);
 
 		putenv(Encryption::ENV_KEY);
+		Encryption::loadKey();
 
 		/** @disregard */
 		$this->assertNull(FileSystem::readPhpString($this->file));

@@ -39,7 +39,7 @@ In case both are set, `AM_ENCRYPTION_KEY` takes precedence.
 Using a key file is recommended, since only the path to the key is part of the server configuration. That way the key is not exposed in case the server configuration, for example a `.htaccess` file, leaks or is committed to a repository. The key file should be stored outside of the document root whenever possible and must be readable by the web server. Relative paths are resolved against the Automad base directory — the directory that contains the `index.php` file. A path like `../automad.key` therefore points to a file next to the document root and keeps working when the site is moved together with that file.
 
 > [!NOTE]
-> Some shared hosting providers restrict PHP from reading files outside of the document root by using `open_basedir`. In case the key file can't be read, encryption stays disabled.
+> The key file is read before Automad applies its own `open_basedir` restriction (`AM_OPEN_BASEDIR_ENABLED`), so that restriction doesn't affect it. However, some shared hosting providers restrict PHP from reading files outside of the document root by using `open_basedir` as well. In case the key file can't be read, encryption stays disabled.
 
 ### Apache and LiteSpeed
 
@@ -47,7 +47,7 @@ The `.htaccess` file that ships with Automad already contains a commented exampl
 
 ```apache
 <IfModule mod_env.c>
-	SetEnv AM_ENCRYPTION_KEY_FILE "../automad.key"
+    SetEnv AM_ENCRYPTION_KEY_FILE "../automad.key"
 </IfModule>
 ```
 
@@ -65,7 +65,7 @@ Use the `env` subdirective of `php_fastcgi` (Caddy) or `php_server` (FrankenPHP)
 
 ```caddyfile
 php_fastcgi php:9000 {
-	env AM_ENCRYPTION_KEY_FILE /var/www/automad.key
+    env AM_ENCRYPTION_KEY_FILE /var/www/automad.key
 }
 ```
 
@@ -105,6 +105,6 @@ Encryption protects secrets in leaked files. It doesn't protect against an attac
 - Secrets are written with `FileSystem::writePhpString($file, $data, true)` and read with `FileSystem::readPhpString()`, which decrypts transparently and returns `null` in case decryption fails. Readers must treat `null` as "not configured". Without a key, the `true` flag has no effect and the data is stored as plain text.
 - Objects are stored using `Automad\System\SerializedFile` with the `$encrypt` constructor argument set to `true`. It takes care of encryption, rename-safe serialization and restricting unserialization to the expected class.
 - Encryption is implemented in `Automad\System\Encryption` using AES-256-GCM (`openssl_encrypt`). Encrypted strings are prefixed with `amenc:v1:`, which makes detecting encrypted content a simple string comparison. The actual key is derived from the provided key using HKDF.
-- The key is read directly from `getenv()` and `$_SERVER` (including the `REDIRECT_` prefix that Apache adds after rewriting) and must never be defined as a constant.
+- The key is read from `getenv()` and `$_SERVER` (including the `REDIRECT_` prefix that Apache adds after rewriting) and must never be defined as a constant. It is resolved only once by `Encryption::loadKey()` during `Config::init()` — after the `.env` file has been parsed, before config files are read and before `open_basedir` is applied — and is then kept in memory. Tests that change the environment must call `Encryption::loadKey()` again.
 - Reading the key and decrypting must never write or log anything, since config files are already read during `Config::init()`.
 - When adding a new file that contains secrets, also add its name to `EncryptConfigFiles::PATTERNS` in `automad/src/server/System/Setup/Migrations/EncryptConfigFiles.php`, so that existing installations encrypt it on the next update. Never add `config.php` or `accounts.php`.

@@ -37,6 +37,7 @@ namespace Automad\Core;
 
 use Automad\Models\MailConfig;
 use Automad\System\ConfigFile;
+use Automad\System\Encryption;
 use Automad\System\FileSystem;
 use Automad\System\Server;
 
@@ -117,6 +118,9 @@ class Config {
 	 */
 	public static function init(): void {
 		self::fromEnv();
+		// Load the encryption key after the .env file has been parsed and before reading config files.
+		// That also makes sure, that the key file is read before the open_basedir restriction is applied.
+		Encryption::loadKey();
 		self::fromFile();
 		self::fromDefaults();
 	}
