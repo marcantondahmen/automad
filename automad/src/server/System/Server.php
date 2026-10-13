@@ -73,7 +73,7 @@ class Server {
 		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
 		$host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['HTTP_HOST'] ?? '');
 
-		return $protocol . '://' . strval(preg_replace('#[^\w:/.]#', '', strip_tags($host)));
+		return $protocol . '://' . strval(preg_replace('/[^\w:._\-]/', '', strip_tags($host)));
 	}
 
 	/**
