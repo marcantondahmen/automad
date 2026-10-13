@@ -205,7 +205,27 @@ class FileSystem {
 	}
 
 	/**
-	 * 	Get file extension for images based on mime types.
+	 * Get file extension for images based on the MIME type of the given image data.
+	 *
+	 * @param string $data
+	 * @return string The extension or an empty string
+	 */
+	public static function getImageExtensionFromData(string $data): string {
+		if (!$data) {
+			return '';
+		}
+
+		$getimagesize = getimagesizefromstring($data);
+
+		if (!$getimagesize) {
+			return '';
+		}
+
+		return self::getImageExtensionByMimeType($getimagesize['mime']);
+	}
+
+	/**
+	 * Get file extension for images based on mime types.
 	 *
 	 * @param string $file
 	 * @return string The extension or an empty string
@@ -218,32 +238,7 @@ class FileSystem {
 				return '';
 			}
 
-			$type = $getimagesize['mime'];
-
-			switch ($type) {
-				case 'image/jpeg':
-					$extension = '.jpg';
-
-					break;
-				case 'image/gif':
-					$extension = '.gif';
-
-					break;
-				case 'image/png':
-					$extension = '.png';
-
-					break;
-				case 'image/webp':
-					$extension = '.webp';
-
-					break;
-				default:
-					$extension = '';
-
-					break;
-			}
-
-			return $extension;
+			return self::getImageExtensionByMimeType($getimagesize['mime']);
 		} catch (\Exception $e) {
 			return '';
 		}
@@ -679,6 +674,22 @@ class FileSystem {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Map an image MIME type to a file extension.
+	 *
+	 * @param string $mimeType
+	 * @return string The extension or an empty string
+	 */
+	private static function getImageExtensionByMimeType(string $mimeType): string {
+		return match ($mimeType) {
+			'image/jpeg' => '.jpg',
+			'image/gif' => '.gif',
+			'image/png' => '.png',
+			'image/webp' => '.webp',
+			default => ''
+		};
 	}
 
 	/**
