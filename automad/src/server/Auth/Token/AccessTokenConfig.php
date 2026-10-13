@@ -35,7 +35,7 @@
 
 namespace Automad\Auth\Token;
 
-use Automad\System\FileSystem;
+use Automad\System\SerializedFile;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -48,16 +48,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class AccessTokenConfig {
-	/**
-	 * The current class name of the access token config type.
-	 */
-	private const TYPE = 'Automad\Auth\Token\AccessTokenConfig';
-
-	/**
-	 * The replacement for the access token config type class in a serialized string.
-	 */
-	private const TYPE_SERIALIZED = 'O:*:"~"';
-
 	/**
 	 * The issued access tokens.
 	 */
@@ -89,33 +79,14 @@ class AccessTokenConfig {
 	}
 
 	/**
-	 * Load the config or create an empty one. The class name of a previously saved config
-	 * is replaced with the current class name before unserializing, so that a future rename of
-	 * this class doesn't break already saved config files (see save()).
+	 * Load the config or create an empty one.
 	 *
 	 * @return AccessTokenConfig
 	 */
 	public static function load(): AccessTokenConfig {
-		$contents = FileSystem::readPhpString(self::getPath());
+		$AccessTokenConfig = self::getFile()->read();
 
-		if (!is_null($contents)) {
-			$serialized = str_replace(
-				self::TYPE_SERIALIZED,
-				'O:' . strlen(self::TYPE) . ':"' . self::TYPE . '"',
-				$contents
-			);
-
-			try {
-				$AccessTokenConfig = unserialize($serialized);
-
-				if ($AccessTokenConfig instanceof AccessTokenConfig) {
-					return $AccessTokenConfig;
-				}
-			} catch (\Throwable $th) {
-			}
-		}
-
-		return new AccessTokenConfig();
+		return $AccessTokenConfig instanceof self ? $AccessTokenConfig : new AccessTokenConfig();
 	}
 
 	/**
@@ -133,27 +104,21 @@ class AccessTokenConfig {
 	}
 
 	/**
-	 * Save the config. The class name is replaced with a placeholder in order to be able to
-	 * refactor this class in the future easily, without breaking already saved config files.
+	 * Save the config.
 	 *
 	 * @return bool
 	 */
 	public function save(): bool {
-		$serialized = str_replace(
-			'O:' . strlen(self::TYPE) . ':"' . self::TYPE . '"',
-			self::TYPE_SERIALIZED,
-			serialize($this)
-		);
-
-		return FileSystem::writePhpString(self::getPath(), $serialized, true);
+		return self::getFile()->write($this);
 	}
 
 	/**
-	 * Get the path to the config file.
+	 * Get the encrypted serialized config file.
 	 *
-	 * @return string
+	 * @see SerializedFile
+	 * @return SerializedFile
 	 */
-	private static function getPath(): string {
-		return AM_BASE_DIR . '/config/tokens.auth.php';
+	private static function getFile(): SerializedFile {
+		return new SerializedFile(AM_BASE_DIR . '/config/tokens.auth.php', self::class, true);
 	}
 }

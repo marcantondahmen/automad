@@ -103,6 +103,7 @@ Encryption protects secrets in leaked files. It doesn't protect against an attac
 ## For Developers
 
 - Secrets are written with `FileSystem::writePhpString($file, $data, true)` and read with `FileSystem::readPhpString()`, which decrypts transparently and returns `null` in case decryption fails. Readers must treat `null` as "not configured". Without a key, the `true` flag has no effect and the data is stored as plain text.
+- Objects are stored using `Automad\System\SerializedFile` with the `$encrypt` constructor argument set to `true`. It takes care of encryption, rename-safe serialization and restricting unserialization to the expected class.
 - Encryption is implemented in `Automad\System\Encryption` using AES-256-GCM (`openssl_encrypt`). Encrypted strings are prefixed with `amenc:v1:`, which makes detecting encrypted content a simple string comparison. The actual key is derived from the provided key using HKDF.
 - The key is read directly from `getenv()` and `$_SERVER` (including the `REDIRECT_` prefix that Apache adds after rewriting) and must never be defined as a constant.
 - Reading the key and decrypting must never write or log anything, since config files are already read during `Config::init()`.

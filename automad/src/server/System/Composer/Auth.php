@@ -36,7 +36,7 @@
 namespace Automad\System\Composer;
 
 use Automad\Core\Config;
-use Automad\System\FileSystem;
+use Automad\System\SerializedFile;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -78,17 +78,9 @@ class Auth {
 	 * Read the config file and create a fresh instance.
 	 */
 	public static function get(): Auth {
-		if (!is_readable(self::FILE)) {
-			return new Auth();
-		}
+		$Auth = self::getFile()->read();
 
-		$unserialized = unserialize(strval(FileSystem::readPhpString(self::FILE)));
-
-		if ($unserialized instanceof Auth) {
-			return $unserialized;
-		}
-
-		return new Auth();
+		return $Auth instanceof self ? $Auth : new Auth();
 	}
 
 	/**
@@ -110,11 +102,7 @@ class Auth {
 	 * @return bool
 	 */
 	public static function reset(): bool {
-		if (is_readable(self::FILE)) {
-			return unlink(self::FILE);
-		}
-
-		return true;
+		return self::getFile()->delete();
 	}
 
 	/**
@@ -123,7 +111,7 @@ class Auth {
 	 * @return bool
 	 */
 	public function save(): bool {
-		return FileSystem::writePhpString(self::FILE, serialize($this), true);
+		return self::getFile()->write($this);
 	}
 
 	/**
@@ -147,5 +135,15 @@ class Auth {
 		$json = strval(json_encode($data));
 
 		putenv("COMPOSER_AUTH=$json");
+	}
+
+	/**
+	 * Get the encrypted serialized config file.
+	 *
+	 * @see SerializedFile
+	 * @return SerializedFile
+	 */
+	private static function getFile(): SerializedFile {
+		return new SerializedFile(self::FILE, self::class, true);
 	}
 }
