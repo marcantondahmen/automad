@@ -37,6 +37,10 @@ CI (`.github/workflows/`) does not run lint/build/test on PRs (consistent with t
 - When working on backend PHP files see @.claude/docs/php.md
 - When working on frontend TypeScript files see @.claude/docs/ts.md
 
+## Security model
+
+Before triaging, reviewing or fixing anything security-related, read `SECURITY.md` at the repo root. Automad has only two principals: visitors (no account) and admins (all equal, no roles, fully trusted — they can install Composer packages, change configuration and add JavaScript). A finding is a vulnerability only if it crosses a security boundary (e.g. unauthenticated visitor → data or actions, visitor → admin, co-tenant on shared hosting → this install's files); issues that require admin access are not vulnerabilities and are at most optional hardening — never add complexity or break admin workflows for them. MCP access tokens are issued by an admin and are admin-delegated. For each finding, state who can reach it before proposing a fix.
+
 ## Architecture
 
 ### Backend (PHP, `automad/src/server/`)

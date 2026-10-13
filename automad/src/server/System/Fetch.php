@@ -46,6 +46,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Fetch {
 	/**
+	 * Only allow HTTP and HTTPS for requests and redirects in order to prevent
+	 * reading local files or talking to other services using file://, gopher:// etc.
+	 */
+	const PROTOCOLS = CURLPROTO_HTTP | CURLPROTO_HTTPS;
+
+	/**
 	 * Download a file.
 	 *
 	 * @param string $url
@@ -66,6 +72,8 @@ class Fetch {
 			CURLOPT_FILE => $fp,
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_FRESH_CONNECT => 1,
+			CURLOPT_PROTOCOLS => self::PROTOCOLS,
+			CURLOPT_REDIR_PROTOCOLS => self::PROTOCOLS,
 			CURLOPT_URL => $url
 		);
 
@@ -106,6 +114,8 @@ class Fetch {
 			CURLOPT_TIMEOUT => 300,
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_FRESH_CONNECT => 1,
+			CURLOPT_PROTOCOLS => self::PROTOCOLS,
+			CURLOPT_REDIR_PROTOCOLS => self::PROTOCOLS,
 			CURLOPT_URL => $url
 		);
 
