@@ -588,8 +588,8 @@ class FileSystem {
 
 			if (!@rename($item, $dest)) {
 				if (function_exists('exec')) {
-					$item = '"' . $item . '"';
-					$dest = '"' . $dest . '"';
+					$item = escapeshellarg($item);
+					$dest = escapeshellarg($dest);
 
 					if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 						$cmd = "move $item $dest";

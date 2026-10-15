@@ -68,12 +68,13 @@ class Package {
 	}
 
 	/**
-	 * Check whether a package name matches the filter regex in the config.
+	 * Check whether a package name is a valid Composer package name and matches the filter regex in the config.
 	 *
 	 * @param string $name
 	 * @return bool
 	 */
 	public static function isValidPackageName(string $name): bool {
-		return preg_match('#' . AM_PACKAGE_FILTER_REGEX . '#', $name) == 1;
+		return preg_match('#^[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9](([_.]|-{1,2})?[a-z0-9]+)*$#', $name) == 1
+			&& preg_match('#' . AM_PACKAGE_FILTER_REGEX . '#', $name) == 1;
 	}
 }
