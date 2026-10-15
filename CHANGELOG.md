@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.64](https://github.com/marcantondahmen/automad/commit/82b6343c4649f1f29ecebd5f4c0c3c41f8d19129)
+## [v2.0.0-beta.65](https://github.com/marcantondahmen/automad/commit/a6d39b68b4126714a968200c29e00a57a712e6d9)
 
-Thu, 15 Oct 2026 13:53:59 +0200
+Thu, 15 Oct 2026 20:53:15 +0200
+
+### Bugfixes
+
+- fix failing ai provider checks during system updates ([a6d39b68b](https://github.com/marcantondahmen/automad/commit/a6d39b68b4126714a968200c29e00a57a712e6d9))
+
+## [v2.0.0-beta.64](https://github.com/marcantondahmen/automad/commit/12a9fe935594bd42a73c75f6f8c5f8698102e612)
+
+Thu, 15 Oct 2026 20:25:45 +0200
 
 ### New Features
 
