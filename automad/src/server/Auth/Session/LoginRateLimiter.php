@@ -80,6 +80,7 @@ class LoginRateLimiter {
 
 		$data['attempts'] = $attempts;
 
+		self::prune();
 		self::write($file, $data);
 	}
 
@@ -134,6 +135,21 @@ class LoginRateLimiter {
 		$hash = sha1($username);
 
 		return AM_LOGIN_RATE_LIMITER_PATH . "/$hash.json";
+	}
+
+	/**
+	 * Delete files that haven't been changed for longer than the block time and window,
+	 * since they can't block anyone anymore. This keeps failed attempts for
+	 * unknown usernames from piling up.
+	 */
+	private static function prune(): void {
+		$expired = time() - max(self::BLOCK_TIME, self::WINDOW);
+
+		foreach (FileSystem::glob(AM_LOGIN_RATE_LIMITER_PATH . '/*.json') as $file) {
+			if (filemtime($file) < $expired) {
+				unlink($file);
+			}
+		}
 	}
 
 	/**
