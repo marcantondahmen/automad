@@ -71,6 +71,10 @@ class PackageManagerController {
 		$repositoryUrl = rtrim(Request::post('repositoryUrl'), '/');
 		$platform = Request::post('platform');
 
+		if (!Package::isValidPackageName($name) || !preg_match('#^[\w.][\w./-]*$#', $branch)) {
+			return $Response->setError(Text::get('invalidFormError'));
+		}
+
 		RepositoryCollection::add($name, $repositoryUrl, $branch, $platform, $Messenger);
 
 		if ($Messenger->getError()) {
@@ -180,7 +184,7 @@ class PackageManagerController {
 		$Response = new Response();
 		$package = Request::post('package');
 
-		if (!$package) {
+		if (!Package::isValidPackageName($package)) {
 			return $Response;
 		}
 
@@ -213,7 +217,7 @@ class PackageManagerController {
 		$Response = new Response();
 		$name = Request::post('name');
 
-		if (!$name) {
+		if (!Package::isValidPackageName($name)) {
 			return $Response;
 		}
 
@@ -356,7 +360,7 @@ class PackageManagerController {
 		$Response = new Response();
 		$name = Request::post('name');
 
-		if (!$name) {
+		if (!Package::isValidPackageName($name)) {
 			return $Response;
 		}
 

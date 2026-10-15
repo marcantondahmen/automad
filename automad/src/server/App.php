@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class App {
-	const VERSION = '2.0.0-beta.63';
+	const VERSION = '2.0.0-beta.64';
 
 	/**
 	 * Required PHP version.
@@ -90,12 +90,12 @@ class App {
 		Config::init();
 		Debug::setup();
 
+		$this->startSession();
 		$this->setOpenBaseDir();
 
 		define('AM_REQUEST', Request::page());
 
 		$this->prepareCache();
-		$this->startSession();
 
 		$output = $this->render(AM_REQUEST);
 
@@ -198,7 +198,13 @@ class App {
 	 */
 	private function startSession(): void {
 		session_name('Automad-' . md5(AM_BASE_DIR . AM_SESSION_COOKIE_SALT));
-		session_set_cookie_params(0, AM_BASE_URL ?: '/', '', false, true);
+		session_set_cookie_params(array(
+			'lifetime' => 0,
+			'path' => AM_BASE_URL ?: '/',
+			'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off',
+			'httponly' => true,
+			'samesite' => 'Lax'
+		));
 		session_start();
 	}
 }

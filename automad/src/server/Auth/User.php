@@ -271,9 +271,7 @@ class User {
 	 * @return bool true if the password is verified
 	 */
 	public function verifyPassword(string $password): bool {
-		$hash = $this->passwordHash;
-
-		return ($hash === crypt($password, $hash));
+		return password_verify($password, $this->passwordHash);
 	}
 
 	/**
@@ -294,8 +292,6 @@ class User {
 	 * @return string Hashed/salted password
 	 */
 	private function hash(string $password): string {
-		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
-
-		return crypt($password, $salt);
+		return password_hash($password, PASSWORD_DEFAULT);
 	}
 }

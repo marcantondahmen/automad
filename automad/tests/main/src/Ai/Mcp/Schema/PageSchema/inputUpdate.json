@@ -6,7 +6,7 @@
 	"properties": {
 		"id": {
 			"type": "string",
-			"description": "The ID of the page that will be updated."
+			"description": "The ID of the page that will be updated. The full page URL like `https://domain.com/work/project` can be used as well."
 		},
 		"title": {
 			"anyOf": [

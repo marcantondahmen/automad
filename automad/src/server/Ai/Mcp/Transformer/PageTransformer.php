@@ -79,7 +79,7 @@ class PageTransformer {
 	public function baseData(Page $Page): array {
 		return array(
 			'id' => $Page->origUrl,
-			'url' => AM_SERVER . $Page->origUrl,
+			'url' => AM_SERVER . AM_BASE_INDEX . $Page->origUrl,
 			'title' => $Page->get(Fields::TITLE),
 			'parent' => $Page->parentUrl,
 			'lastModified' => $Page->get(Fields::TIME_LAST_MODIFIED),

@@ -135,7 +135,9 @@ class UserController {
 		$nameOrEmail = trim(Request::post('nameOrEmail'));
 		$User = $UserCollection->getUser($nameOrEmail);
 
-		$User?->sendPasswordResetCode(Request::post('type'), $sitename, $Messenger);
+		if ($User && !PasswordResetCode::isThrottled($User->name)) {
+			$User->sendPasswordResetCode(Request::post('type'), $sitename, $Messenger);
+		}
 
 		if ($error = $Messenger->getError()) {
 			return $Response->setError($error);
@@ -160,16 +162,14 @@ class UserController {
 		$newPassword2 = Request::post('password2');
 		$User = $UserCollection->getUser(Request::post('nameOrEmail'));
 
-		if (!$User) {
-			return $Response->setError(Text::get('userNotFoundError'));
-		}
-
-		if (empty($code)) {
-			return $Response->setError(Text::get('passwordResetCodeInvalidError'));
-		}
-
 		if (empty($newPassword1) || empty($newPassword2) || !self::verifyPasswordRequirements($newPassword1)) {
 			return $Response->setError(self::generatePasswordRequirementsError());
+		}
+
+		// Return the same error for unknown users and invalid codes in order to avoid
+		// exposing if a user actually exists or not.
+		if (!$User || empty($code)) {
+			return $Response->setError(Text::get('passwordResetCodeInvalidError'));
 		}
 
 		if (

@@ -211,6 +211,7 @@ class Config {
 		self::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
 
 		// An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
+		// It also pins the host of the URLs in the sitemap.xml, which otherwise is taken from the request that rebuilds the cache.
 		self::set('AM_BASE_SITEMAP', '');
 
 		// Session cookie name salt that can be used to trigger a sign-out-all.

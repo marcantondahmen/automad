@@ -49,8 +49,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The workflow:
  *
  * 1.
- * A virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO, the QUERY_STRING and the SERVER_NAME.
- * To keep the whole site portable, the SERVER_NAME within the path is very important, to make sure, that all links/URLs are relative to the correct root directory.
+ * A virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO, the QUERY_STRING and the host (AM_SERVER).
+ * To keep the whole site portable, the host within the path is very important, to make sure, that all absolute links/URLs point to the requested host.
  * ("sub.domain.com/" and "www.domain.com/sub" will return different root relative URLs > "/" and "/sub", but may host the same site > each will get its own /cache/directory)
  *
  * 2.
@@ -489,13 +489,10 @@ class Cache {
 			Debug::log($parameters, "Parameters hash $hash");
 		}
 
-		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name.
-		// The actual server name is then already part of the AM_BASE_URL.
-		// For example: https://someproxy.com/domain.com/baseurl
-		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
-		$server = $_SERVER['HTTP_X_FORWARDED_SERVER'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''));
-		$port = $_SERVER['SERVER_PORT'] ?? '80';
-		$sanitized = trim(strval(preg_replace('/[^\w.]+/', '-', $server . ':' . $port)), '.-');
+		// Use the host of AM_SERVER, since it is part of the rendered output (canonical URL, feed links ...).
+		// Otherwise a request with a forged Host or X-Forwarded-Host header could poison the cache for all visitors.
+		$host = strval(preg_replace('/^https?:\/\//', '', strval(AM_SERVER)));
+		$sanitized = trim(strval(preg_replace('/[^\w.]+/', '-', $host)), '.-');
 		$file = Cache::DIR_PAGES . '/' . $sanitized . AM_BASE_URL . $route . '/page' . $suffix;
 
 		Debug::log($file);

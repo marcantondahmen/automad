@@ -66,7 +66,7 @@ class PageSchema {
 			'properties' => array(
 				'parent' => array(
 					'type' => 'string',
-					'description' => 'The path of the parent page.'
+					'description' => 'The path of the parent page. The full page URL like `https://domain.com/work` can be used as well.'
 				),
 				'title' =>array(
 					'type' => 'string',
@@ -134,8 +134,9 @@ class PageSchema {
 				'id' => array(
 					'type' => 'string',
 					'description' => <<< TXT
-						The ID is the local absolute URL path of the page like 
+						The ID is the local absolute URL path of the page like
 						for example `/about` or `/work/project`.
+						The full page URL like `https://domain.com/work/project` can be used as well.
 						TXT
 				)
 			),
@@ -159,6 +160,7 @@ class PageSchema {
 					'type' => 'string',
 					'description' => <<< TXT
 						The ID is the page that will be duplicated.
+						The full page URL like `https://domain.com/work/project` can be used as well.
 						TXT
 				)
 			),
@@ -182,12 +184,14 @@ class PageSchema {
 					'type' => 'string',
 					'description' => <<< TXT
 						The `id` of the page that will be moved.
+						The full page URL like `https://domain.com/work/project` can be used as well.
 						TXT
 				),
 				'target' => array(
 					'type' => 'string',
 					'description' => <<< TXT
 						The target page `id` where the page will be moved to.
+						The full page URL like `https://domain.com/work` can be used as well.
 						TXT
 				)
 			),
@@ -211,6 +215,7 @@ class PageSchema {
 					'type' => 'string',
 					'description' => <<< TXT
 						The ID is the page that will be published.
+						The full page URL like `https://domain.com/work/project` can be used as well.
 						TXT
 				)
 			),
@@ -241,6 +246,7 @@ class PageSchema {
 					'type' => 'string',
 					'description' => <<< TXT
 						The ID is the local absolute URL path of the page such as `/about` or `/work/project` for example.
+						The full page URL like `https://domain.com/work/project` can be used as well.
 						TXT
 				),
 				'format' => array(
@@ -277,6 +283,7 @@ class PageSchema {
 					'type' => 'string',
 					'description' => <<< TXT
 						The `id` of the parent page where sub-pages will be reordered.
+						The full page URL like `https://domain.com/work` can be used as well.
 						TXT
 				),
 				'order' => array(
@@ -320,6 +327,7 @@ class PageSchema {
 					'description' => <<< TXT
 						An optional scope for the search.
 						When used, results will only include pages below the given scope.
+						The full page URL like `https://domain.com/work` can be used as well.
 						TXT
 				)
 			),
@@ -350,6 +358,7 @@ class PageSchema {
 					'description' => <<< TXT
 						An optional scope for the search.
 						When used, results will only include pages below the given scope.
+						The full page URL like `https://domain.com/work` can be used as well.
 						TXT
 				)
 			),
@@ -381,7 +390,7 @@ class PageSchema {
 					'description' => <<< TXT
 						The ID is the local absolute URL path of the page such as `/about` or `/work/project` 
 						that is used as a starting point for the tree. The returned tree will only include pages
-						below the given page.
+						below the given page. The full page URL like `https://domain.com/work` can be used as well.
 
 						The default is '/' (the homepage).
 						TXT
@@ -410,7 +419,7 @@ class PageSchema {
 			'properties' => array(
 				'id' => array(
 					'type' => 'string',
-					'description' => 'The ID of the page that will be updated.'
+					'description' => 'The ID of the page that will be updated. The full page URL like `https://domain.com/work/project` can be used as well.'
 				),
 				'title' => array(
 					'anyOf' => array(

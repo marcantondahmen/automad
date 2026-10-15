@@ -101,7 +101,12 @@ class PublicController {
 				return $content;
 			},
 			$Pagelist->getPages()
-		) : $Pagelist->getPages();
+		) : array_map(
+			function (Page $Page) {
+				return $Page->data;
+			},
+			$Pagelist->getPages()
+		);
 
 		$items = array_map(function ($item) {
 			if (!empty($item[Fields::URL])) {

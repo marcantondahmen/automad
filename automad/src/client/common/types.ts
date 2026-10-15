@@ -43,9 +43,9 @@ export interface ApiResponse {
 	error?: string;
 	exception?: {
 		message: string;
-		file: string;
-		line: string;
-		trace: string;
+		file?: string;
+		line?: string;
+		trace?: string;
 	};
 	redirect?: URL;
 	reload?: boolean;

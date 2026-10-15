@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Ai\Mcp\Validator\PageStructureValidator;
 use Automad\Core\Automad;
 use Automad\Core\Cache;
@@ -120,6 +121,7 @@ class PageReorderChildren extends AbstractTool {
 			string $parent,
 			array $order
 		) {
+			$parent = (new PageIdTransformer())->fromInput($parent);
 			$Automad = Automad::fromCache();
 			$Parent = $Automad->getPage($parent);
 

@@ -123,7 +123,7 @@ class Request {
 
 		// Remove trailing slash from URL to keep relative links consistent.
 		if (substr($request, -1) == '/' && $request != '/') {
-			header('Location: ' . AM_BASE_INDEX . rtrim($request, '/'), false, 301);
+			header('Location: ' . self::trailingSlashRedirect($request), false, 301);
 			die;
 		}
 
@@ -163,5 +163,17 @@ class Request {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Return the URL to redirect a request with a trailing slash to.
+	 * Leading slashes, backslashes and whitespace are stripped, since browsers treat "//host",
+	 * "/\host" and "/<tab>/host" as scheme-relative URLs pointing to another host.
+	 *
+	 * @param string $request
+	 * @return string The local redirect URL
+	 */
+	public static function trailingSlashRedirect(string $request): string {
+		return AM_BASE_INDEX . '/' . rtrim(ltrim($request, "/\\ \t\n\r\0\x0B"), '/');
 	}
 }

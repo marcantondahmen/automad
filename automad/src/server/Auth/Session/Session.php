@@ -35,6 +35,7 @@
 
 namespace Automad\Auth\Session;
 
+use Automad\Core\Messenger;
 use Automad\Models\UserCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -96,6 +97,9 @@ class Session {
 
 		if (empty($User)) {
 			LoginRateLimiter::verifyAccess($nameOrEmail);
+			// Hash the password with the same algorithm and cost as user password hashes
+			// in order to keep the login timing independent of whether a user exists.
+			password_hash($password, PASSWORD_DEFAULT);
 			LoginRateLimiter::registerFailure($nameOrEmail);
 
 			return false;
@@ -104,7 +108,14 @@ class Session {
 		LoginRateLimiter::verifyAccess($User->name);
 
 		if ($User->verifyPassword($password)) {
+			// Migrate outdated hashes, such as legacy crypt() hashes, to the current default.
+			if (password_needs_rehash($User->getPasswordHash(), PASSWORD_DEFAULT)) {
+				$User->setPasswordHash($password);
+				$UserCollection->save(new Messenger());
+			}
+
 			if ($User->totpIsConfigured()) {
+				session_regenerate_id(true);
 				$User->setPendingTotpVerificationSession();
 			} else {
 				self::startUserSession($User->name);
@@ -162,7 +173,7 @@ class Session {
 			return false;
 		}
 
-		return $token === $_SESSION[self::CSRF_TOKEN_KEY];
+		return hash_equals($_SESSION[self::CSRF_TOKEN_KEY], $token);
 	}
 
 	/**

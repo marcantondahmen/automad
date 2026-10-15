@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Ai\Mcp\Validator\TemplateValidator;
 use Automad\Api\EditLock;
@@ -159,6 +160,7 @@ class PageUpdate extends AbstractTool {
 			?array $tags = null,
 			?array $content = null
 		) {
+			$id = (new PageIdTransformer())->fromInput($id);
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
 			$Page = $Automad->getPage($id);

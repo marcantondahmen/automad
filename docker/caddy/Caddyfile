@@ -5,6 +5,23 @@
 localhost:80 {
 	root * /app
 
+	# Mirror the blocked files of the .htaccess files. Like in the .htaccess, only existing files are blocked,
+	# so that page URLs such as "/blog/data" are still passed on to Automad.
+	@denied {
+		file
+		path_regexp (?i)^/(config|lib)/|^/automad/(console$|src/|lang/)|/(data|index)$|/\.|^/cache/packages/.*/thumbnail|/(packages|vendor)/.*\.(ts|less|md|sh|xml|json|lock)$|/vendor/.*(readme|license)|/(package|package-lock|composer)\.(json|lock)$
+	}
+
+	respond @denied 404
+
+	# Only the front controller is executed.
+	@php {
+		path *.php
+		not path /index.php
+	}
+
+	respond @php 404
+
 	php_fastcgi php:9000
 	file_server
 	encode gzip zstd
