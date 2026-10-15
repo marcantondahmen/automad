@@ -52,7 +52,9 @@ import {
 	query,
 	requestApi,
 } from '@/admin/core';
+import { Section } from '@/common';
 import { BaseComponent } from '../Base';
+import { getActiveSection } from '../Switcher/Switcher';
 import type { ApiResponse } from '@/admin/types';
 
 export interface AiProvider {
@@ -117,7 +119,13 @@ const createValidationBadge = async (
 	};
 
 	if (App.system.aiAssistance.enabled) {
-		setTimeout(validate, 5000);
+		setTimeout(() => {
+			// Only validate when the AI section is actually visible in order to prevent
+			// requests in the background while other sections are used, e.g. during updates.
+			if (getActiveSection() === Section.aiAssistance) {
+				validate();
+			}
+		}, 500);
 	}
 };
 
@@ -136,6 +144,7 @@ class AiProviderSetupComponent extends BaseComponent {
 		this.render();
 
 		this.listen(window, EventName.appStateChange, this.render.bind(this));
+		this.listen(window, EventName.switcherChange, this.render.bind(this));
 	}
 
 	/**
