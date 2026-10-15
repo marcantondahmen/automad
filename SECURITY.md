@@ -11,6 +11,7 @@ Security should be taken seriously whenever private data and/or the digital dist
 - [Quality of Reports](#quality-of-reports)
 - [Architecture](#architecture)
   - [Users and Roles](#users-and-roles)
+  - [Access Tokens](#access-tokens)
   - [Sessions](#sessions)
 - [Implications for Security](#implications-for-security)
   - [XSS](#xss)
@@ -56,6 +57,12 @@ Automad only knows two types of users &mdash; _visitors_ and _admins_. Only admi
 
 Only admins have actual user accounts on an Automad installation. They all share the same privileges. Usually there is only a single admin but it is possible to add additional ones via invitations. Visitors have no user account.
 
+### Access Tokens
+
+Admins can issue access tokens in the dashboard, for example in order to connect AI agents to the Automad MCP server. A token is only shown once and only a hash of it is stored on the server. Requests that are authenticated with a token act on behalf of the admin that issued it and have the same privileges &mdash; including creating and editing content and snippets, which are template code.
+
+Access tokens must therefore be treated like admin credentials and can be revoked at any time in the dashboard. Reports that require a valid access token are considered to require authenticated administrator access.
+
 ### Sessions
 
 On every visit of an Automad site, a session is created on the server for both types of users &mdash; visitors as well as admins. On the client, a cookie is created that only contains the session id in order to identify a session. The session id and also the cookie itself don't contain any personal data or any data that can be used in order to identify an actual person.
@@ -90,6 +97,8 @@ In Automad this kind of attacks are technically not possible due to the nature o
 As previously described, only admins can create, update or delete content. Please note that this also includes the ability to install templates and modify them. An admin is allowed to add executable JavaScript code to a site. It cannot be stressed enough that this ability itself doesn't pose a threat and also is fundamentally different to the nature of an XSS attack. Admins are by design privileged users that on one hand must understand their responsibility and on the other hand need the necessary freedom to actually keep a site running. This concept is not new and applies to almost every system that is connected to the internet.
 
 Therefore the only type of user that can act as a malicious party are admins. Since visitors have no session data on the server or inside of the cookie, even a hacked admin account can't steal relevant data. This alone renders XSS attacks useless.
+
+For the same reason, the template engine outputs content without escaping it, since all content is authored by admins. Query string parameters that are used in templates such as `@{ ?search }` are escaped. Theme developers that access request data directly in PHP code are responsible for escaping it themselves.
 
 ### CSRF
 
