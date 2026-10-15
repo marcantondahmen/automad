@@ -1,8 +1,27 @@
 # Changelog
 
-## [v2.0.0-beta.63](https://github.com/marcantondahmen/automad/commit/4984d4d4d5a6a903c48436ff959b453e5b64f27f)
+## [v2.0.0-beta.64](https://github.com/marcantondahmen/automad/commit/82b6343c4649f1f29ecebd5f4c0c3c41f8d19129)
 
-Tue, 13 Oct 2026 21:43:53 +0200
+Thu, 15 Oct 2026 13:53:59 +0200
+
+### New Features
+
+- accept full page urls as ids when using mcp tools ([82b6343c4](https://github.com/marcantondahmen/automad/commit/82b6343c4649f1f29ecebd5f4c0c3c41f8d19129))
+- automatically prune rate limiter entries ([3afdd3d07](https://github.com/marcantondahmen/automad/commit/3afdd3d0799245fe3ae6491b2ea535151dcc7170))
+- implement open redirect normalization ([08679505c](https://github.com/marcantondahmen/automad/commit/08679505c4327c7be4adb26b8dd82f289229cd61))
+- improve docker setups ([385df3a82](https://github.com/marcantondahmen/automad/commit/385df3a829b472713affd676ca78dc6031a99ee0))
+- limit sending of account recovery emails to one per minute per user ([361618c7f](https://github.com/marcantondahmen/automad/commit/361618c7f1288bfd53bd72d727115b526ec75cef))
+
+### Bugfixes
+
+- fix password reset enumeration and timing differences ([9435fbb10](https://github.com/marcantondahmen/automad/commit/9435fbb1007ab6aa5e51515db9ff37eebcb3d0ae))
+- hide error trace from visitors ([dc854689f](https://github.com/marcantondahmen/automad/commit/dc854689f90b4ab4a675f64ae8191b40adcf826a))
+- migrate password hashing ([e71e3a6a1](https://github.com/marcantondahmen/automad/commit/e71e3a6a1009f1f990783599808d9264e1f86927))
+- several small security improvements ([c565550eb](https://github.com/marcantondahmen/automad/commit/c565550eb3cacc04cf857465f34385c7937c667c))
+
+## [v2.0.0-beta.63](https://github.com/marcantondahmen/automad/commit/00a2330edfc10819744825798280f868a64972fa)
+
+Tue, 13 Oct 2026 21:47:17 +0200
 
 ### New Features
 
