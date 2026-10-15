@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Ai\Mcp\Validator\TemplateValidator;
 use Automad\Core\Automad;
@@ -151,6 +152,7 @@ class PageCreate extends AbstractTool {
 			array $tags = array(),
 			array $content = array()
 		) {
+			$parent = (new PageIdTransformer())->fromInput($parent);
 			$Automad = Automad::fromCache();
 			$Parent = $Automad->getPage($parent);
 			$PageTransformer = new PageTransformer($Automad);

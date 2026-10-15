@@ -69,6 +69,7 @@ class FileSchema {
 					'description' => <<< TXT
 						The ID of the page the file is imported to. The ID is the local absolute URL
 						path of the page like for example `/about` or `/work/project`.
+						The full page URL like `https://domain.com/work/project` can be used as well.
 						If omitted, the file is imported to the shared files.
 						TXT
 				)

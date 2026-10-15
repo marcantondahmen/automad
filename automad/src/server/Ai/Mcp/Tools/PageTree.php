@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Models\Page;
@@ -103,6 +104,8 @@ class PageTree extends AbstractTool {
 			string $id = '/',
 			int $depth = 10
 		) {
+			$id = (new PageIdTransformer())->fromInput($id);
+
 			if (!trim($id)) {
 				$id = '/';
 			}

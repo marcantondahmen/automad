@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\FileSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Core\Automad;
 use Automad\Core\Messenger;
 use Automad\Core\Text;
@@ -132,6 +133,8 @@ class FileImport extends AbstractTool {
 			if (!preg_match('#^https?://#i', $url)) {
 				throw new ToolCallException('The `url` must be a full remote URL starting with http:// or https://.');
 			}
+
+			$page = (new PageIdTransformer())->fromInput($page);
 
 			if (DiskUsage::quotaExceeded()) {
 				throw new ToolCallException(Text::get('diskQuotaExceeded'));

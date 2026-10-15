@@ -1,6 +1,6 @@
 {
 	"id": "/mcp-test",
-	"url": "http://localhost/mcp-test",
+	"url": "http://localhost/index.php/mcp-test",
 	"title": "MCP Test",
 	"parent": "/",
 	"lastModified": "2026-09-30T15:13:59+00:00",

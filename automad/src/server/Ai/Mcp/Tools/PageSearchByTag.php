@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\Models\Page;
@@ -112,7 +113,7 @@ class PageSearchByTag extends AbstractTool {
 		) {
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
-			$scope = rtrim(trim((string) $scopeId), '/');
+			$scope = rtrim(trim((new PageIdTransformer())->fromInput((string) $scopeId)), '/');
 
 			if ($scope !== '' && !$Automad->getPage($scope)) {
 				throw new ToolCallException("Scope page [$scopeId] not found.");

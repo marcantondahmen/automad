@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Core\Automad;
 use Automad\System\FileUtils;
@@ -73,7 +74,7 @@ class PageRead extends AbstractTool {
 	 */
 	public function getDescription(): string {
 		return <<< TXT
-			Read a page by providing its ID (the local URL path).
+			Read a page by providing its ID (the local URL path) or its full URL.
 
 			The `content` field contains the main page content.
 		
@@ -120,6 +121,7 @@ class PageRead extends AbstractTool {
 			string $id,
 			string $format = 'structured'
 		) {
+			$id = (new PageIdTransformer())->fromInput($id);
 			$Automad = Automad::fromCache();
 			$PageTransformer = new PageTransformer($Automad);
 			$Page = $Automad->getPage($id);

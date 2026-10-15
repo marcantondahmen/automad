@@ -6,7 +6,7 @@
 	"properties": {
 		"parent": {
 			"type": "string",
-			"description": "The path of the parent page."
+			"description": "The path of the parent page. The full page URL like `https://domain.com/work` can be used as well."
 		},
 		"title": {
 			"type": "string",

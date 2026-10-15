@@ -36,6 +36,7 @@
 namespace Automad\Ai\Mcp\Tools;
 
 use Automad\Ai\Mcp\Schema\PageSchema;
+use Automad\Ai\Mcp\Transformer\PageIdTransformer;
 use Automad\Ai\Mcp\Transformer\PageTransformer;
 use Automad\Ai\Mcp\Validator\PageStructureValidator;
 use Automad\Core\Automad;
@@ -117,6 +118,9 @@ class PageMove extends AbstractTool {
 			string $id,
 			string $target
 		) {
+			$PageIdTransformer = new PageIdTransformer();
+			$id = $PageIdTransformer->fromInput($id);
+			$target = $PageIdTransformer->fromInput($target);
 			$Automad = Automad::fromCache();
 			$Page = $Automad->getPage($id);
 			$TargetPage = $Automad->getPage($target);
