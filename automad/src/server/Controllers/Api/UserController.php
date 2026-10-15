@@ -135,7 +135,9 @@ class UserController {
 		$nameOrEmail = trim(Request::post('nameOrEmail'));
 		$User = $UserCollection->getUser($nameOrEmail);
 
-		$User?->sendPasswordResetCode(Request::post('type'), $sitename, $Messenger);
+		if ($User && !PasswordResetCode::isThrottled($User->name)) {
+			$User->sendPasswordResetCode(Request::post('type'), $sitename, $Messenger);
+		}
 
 		if ($error = $Messenger->getError()) {
 			return $Response->setError($error);

@@ -52,6 +52,7 @@ class PasswordResetCode {
 	const CODE_DIR = AM_DIR_TMP . '/password_reset_codes';
 	const LIFETIME = 600;
 	const MAX_ATTEMPTS = 5;
+	const RESEND_DELAY = 60;
 
 	/**
 	 * The number of failed attempts.
@@ -98,6 +99,22 @@ class PasswordResetCode {
 		}
 
 		return $code;
+	}
+
+	/**
+	 * Test whether a code for a given user has been created less than RESEND_DELAY seconds ago.
+	 *
+	 * @param string $username
+	 * @return bool
+	 */
+	public static function isThrottled(string $username): bool {
+		$PasswordResetCode = self::read($username);
+
+		if (is_null($PasswordResetCode)) {
+			return false;
+		}
+
+		return $PasswordResetCode->expires - self::LIFETIME + self::RESEND_DELAY > time();
 	}
 
 	/**
