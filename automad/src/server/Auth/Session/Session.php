@@ -96,6 +96,10 @@ class Session {
 
 		if (empty($User)) {
 			LoginRateLimiter::verifyAccess($nameOrEmail);
+			// Verify the password against a dummy bcrypt hash with the same cost as user password hashes
+			// in order to keep the login timing independent of whether a user exists. The "$2y$10$" prefix
+			// (algorithm and cost) is required, the rest is just placeholder characters.
+			password_verify($password, '$2y$10$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 			LoginRateLimiter::registerFailure($nameOrEmail);
 
 			return false;
