@@ -6,16 +6,16 @@ Encryption is optional and disabled by default. It is enabled automatically as s
 
 ## What is Encrypted
 
-| File                       | Content                           | Encrypted |
-| -------------------------- | --------------------------------- | --------- |
-| `config/config.mail.php`   | Mail server settings              | Yes       |
-| `config/ai.*.php`          | AI provider API keys              | Yes       |
-| `config/composer.auth.php` | Composer authentication           | Yes       |
-| `config/tokens.auth.php`   | Hashes of MCP access tokens       | Yes       |
-| `config/config.php`        | Main configuration                | No        |
-| `config/accounts.php`      | User accounts and password hashes | No        |
+| File                       | Content                                         | Encrypted |
+| -------------------------- | ----------------------------------------------- | --------- |
+| `config/config.mail.php`   | Mail server settings                            | Yes       |
+| `config/ai.*.php`          | AI provider API keys                            | Yes       |
+| `config/composer.auth.php` | Composer authentication                         | Yes       |
+| `config/tokens.auth.php`   | Hashes of MCP access tokens                     | Yes       |
+| `config/config.php`        | Main configuration                              | No        |
+| `config/accounts.php`      | User accounts, password hashes and TOTP secrets | No        |
 
-The main configuration stays unencrypted in order to be editable manually. User accounts are not encrypted on purpose, since a lost key would otherwise lock out all users. They only contain password hashes anyway.
+The main configuration stays unencrypted so that it can be edited manually. User accounts are not encrypted on purpose, since a lost key would otherwise lock out all users. Note that besides the password hashes, this file also contains the TOTP secrets of users that have two-factor authentication enabled, in plain text. In case the file leaks, the second factor of those accounts must be considered compromised, while the passwords themselves are still protected by their hashes. Affected users should then change their passwords and set up two-factor authentication again.
 
 ## Creating a Key
 
