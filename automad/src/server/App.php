@@ -90,12 +90,12 @@ class App {
 		Config::init();
 		Debug::setup();
 
+		$this->startSession();
 		$this->setOpenBaseDir();
 
 		define('AM_REQUEST', Request::page());
 
 		$this->prepareCache();
-		$this->startSession();
 
 		$output = $this->render(AM_REQUEST);
 

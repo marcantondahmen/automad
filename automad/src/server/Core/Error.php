@@ -36,6 +36,7 @@
 namespace Automad\Core;
 
 use Automad\Api\Response;
+use Automad\Auth\Auth;
 use ErrorException;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -66,14 +67,17 @@ class Error {
 				} else {
 					http_response_code(500);
 
-					$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
-					$line = $error->getLine();
+					$details = '';
+					$trace = null;
 
-					self::printError(
-						$error->getMessage(),
-						"In file $file<br>on line $line",
-						$error->getTrace()
-					);
+					if (self::showDetails()) {
+						$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
+						$line = $error->getLine();
+						$details = "In file $file<br>on line $line";
+						$trace = $error->getTrace();
+					}
+
+					self::printError(str_replace(AM_BASE_DIR, '', $error->getMessage()), $details, $trace);
 				}
 
 				exit(1);
@@ -94,15 +98,15 @@ class Error {
 				if ($error instanceof AbortSignal) {
 					$Response->setError($error->getMessage())->setCode($error->getCode());
 				} else {
-					$file = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
-					$line = $error->getLine();
+					$exception = array('message' => str_replace(AM_BASE_DIR, '', $error->getMessage()));
 
-					$Response->setException(array(
-						'message' => $error->getMessage(),
-						'file' => $error->getFile(),
-						'line' => $error->getLine(),
-						'trace' => $error->getTrace()
-					))->setCode(500);
+					if (self::showDetails()) {
+						$exception['file'] = preg_replace('#^' . AM_BASE_DIR . '#i', '', $error->getFile());
+						$exception['line'] = $error->getLine();
+						$exception['trace'] = $error->getTrace();
+					}
+
+					$Response->setException($exception)->setCode(500);
 				}
 
 				exit($Response->json());
@@ -118,6 +122,7 @@ class Error {
 	 * @param array|null $trace
 	 */
 	private static function printError(string $message, string $details, ?array $trace = null): void {
+		$message = htmlspecialchars($message);
 		$code = '';
 
 		if ($trace) {
@@ -217,6 +222,17 @@ class Error {
 				</body>
 			</html>
 			HTML;
+	}
+
+	/**
+	 * Only show file, line and stack trace when debugging is enabled or the request is authenticated.
+	 * The session check prevents loading the Auth class for errors that occur before the session is started.
+	 *
+	 * @return bool
+	 */
+	private static function showDetails(): bool {
+		return (defined('AM_DEBUG_ENABLED') && AM_DEBUG_ENABLED) ||
+			(session_status() === PHP_SESSION_ACTIVE && Auth::isAuthenticated());
 	}
 
 	/**
