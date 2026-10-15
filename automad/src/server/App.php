@@ -198,7 +198,13 @@ class App {
 	 */
 	private function startSession(): void {
 		session_name('Automad-' . md5(AM_BASE_DIR . AM_SESSION_COOKIE_SALT));
-		session_set_cookie_params(0, AM_BASE_URL ?: '/', '', false, true);
+		session_set_cookie_params(array(
+			'lifetime' => 0,
+			'path' => AM_BASE_URL ?: '/',
+			'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off',
+			'httponly' => true,
+			'samesite' => 'Lax'
+		));
 		session_start();
 	}
 }

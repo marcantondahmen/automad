@@ -115,6 +115,7 @@ class Session {
 			}
 
 			if ($User->totpIsConfigured()) {
+				session_regenerate_id(true);
 				$User->setPendingTotpVerificationSession();
 			} else {
 				self::startUserSession($User->name);
@@ -172,7 +173,7 @@ class Session {
 			return false;
 		}
 
-		return $token === $_SESSION[self::CSRF_TOKEN_KEY];
+		return hash_equals($_SESSION[self::CSRF_TOKEN_KEY], $token);
 	}
 
 	/**

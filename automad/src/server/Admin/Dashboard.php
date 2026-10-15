@@ -55,6 +55,10 @@ class Dashboard {
 	 * @return string the rendered HTML
 	 */
 	public static function render() {
+		// Prevent clickjacking by never allowing the dashboard to be framed.
+		header('X-Frame-Options: DENY');
+		header("Content-Security-Policy: frame-ancestors 'none'");
+
 		$fn = function (mixed $expression): string {
 			return $expression;
 		};
