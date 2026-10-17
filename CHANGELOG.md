@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.65](https://github.com/marcantondahmen/automad/commit/a6d39b68b4126714a968200c29e00a57a712e6d9)
+## [v2.0.0-beta.66](https://github.com/marcantondahmen/automad/commit/1deb17282ec9b9cceb0c25a23775cbcae5b3cca0)
 
-Thu, 15 Oct 2026 20:53:15 +0200
+Sat, 17 Oct 2026 11:49:16 +0200
+
+### Bugfixes
+
+- fix public mcp access ([1deb17282](https://github.com/marcantondahmen/automad/commit/1deb17282ec9b9cceb0c25a23775cbcae5b3cca0))
+
+## [v2.0.0-beta.65](https://github.com/marcantondahmen/automad/commit/e455f527bb4efcf1c015c7f190e5d275c0963f7a)
+
+Thu, 15 Oct 2026 20:58:00 +0200
 
 ### Bugfixes
 
