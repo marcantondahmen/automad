@@ -44,6 +44,7 @@ use Mcp\Schema\Enum\ProtocolVersion;
 use Mcp\Server as SdkServer;
 use Mcp\Server\Handler\Request\CallToolHandler;
 use Mcp\Server\Session\FileSessionStore;
+use Mcp\Server\Transport\Http\Middleware\CorsMiddleware;
 use Mcp\Server\Transport\StreamableHttpTransport;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -144,8 +145,13 @@ class Server {
 	 * @return ResponseInterface
 	 */
 	public function handle(ServerRequestInterface $request): ResponseInterface {
+		// The SDK's default DNS rebinding protection only allows localhost hosts and would reject
+		// every request to a real deployment. Private tools are protected by access tokens instead.
 		/** @var ResponseInterface $response */
-		$response = $this->SdkServer->run(new StreamableHttpTransport($request));
+		$response = $this->SdkServer->run(new StreamableHttpTransport(
+			$request,
+			middleware: array(new CorsMiddleware())
+		));
 
 		return $response;
 	}
