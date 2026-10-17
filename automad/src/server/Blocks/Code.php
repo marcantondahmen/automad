@@ -163,6 +163,7 @@ class Code extends AbstractBlock {
 					'html',
 					'java',
 					'javascript',
+					'json',
 					'jsx',
 					'latex',
 					'less',

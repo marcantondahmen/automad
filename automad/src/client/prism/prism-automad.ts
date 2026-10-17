@@ -68,7 +68,11 @@ const common = {
  * @see {@link tokens https://prismjs.com/tokens.html}
  * @see {@link api https://prismjs.com/docs/}
  */
-export const PrismAutomad = Prism.languages.insertBefore('html', 'tag', {
+// Extend a copy of the markup grammar, since insertBefore() modifies the grammar in place and
+// would otherwise also change the html/markup grammar that is used by markup-templating (php).
+Prism.languages.automad = Prism.languages.extend('markup', {});
+
+export const PrismAutomad = Prism.languages.insertBefore('automad', 'tag', {
 	comment: {
 		pattern: /<#.+?#>/s,
 	},
