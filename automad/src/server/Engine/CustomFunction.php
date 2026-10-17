@@ -50,7 +50,7 @@ class CustomFunction {
 	/**
 	 * The custom function registry.
 	 */
-	private static $registry = array();
+	private static array $registry = array();
 
 	/**
 	 * Register a custom function.
