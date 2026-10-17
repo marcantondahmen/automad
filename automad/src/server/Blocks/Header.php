@@ -82,7 +82,7 @@ class Header extends AbstractBlock {
 		}
 
 		$attr = Attr::render($block['tunes']);
-		$text =	htmlspecialchars_decode($block['data']['text']);
+		$text =	$block['data']['text'];
 
 		return "<h{$block['data']['level']} $attr>$text</h{$block['data']['level']}>";
 	}
