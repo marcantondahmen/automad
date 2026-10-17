@@ -337,7 +337,7 @@ class PreviewComponent extends BaseComponent {
 				[Attr.tooltip]: App.text('openInNewTab'),
 			},
 			actions,
-			'<i class="bi bi-fullscreen"></i>'
+			'<i class="bi bi-box-arrow-up-right"></i>'
 		);
 
 		if (getSlug() !== routes.page) {
@@ -346,10 +346,10 @@ class PreviewComponent extends BaseComponent {
 				[CSS.previewButton],
 				{
 					[Attr.target]: `${routes.page}?url=${encodeURIComponent(url)}`,
-					[Attr.tooltip]: App.text('fieldsSettings'),
+					[Attr.tooltip]: App.text('edit'),
 				},
 				null,
-				'<i class="bi bi-ui-checks"></i>'
+				'<i class="bi bi-pencil-fill"></i>'
 			);
 
 			// This listener has to be registered before the link is connected,
