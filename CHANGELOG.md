@@ -1,8 +1,18 @@
 # Changelog
 
-## [v2.0.0-beta.66](https://github.com/marcantondahmen/automad/commit/1deb17282ec9b9cceb0c25a23775cbcae5b3cca0)
+## [v2.0.0-beta.67](https://github.com/marcantondahmen/automad/commit/6bf3bd93b963588f4d9dd267930b98954a17829e)
 
-Sat, 17 Oct 2026 11:49:16 +0200
+Sat, 17 Oct 2026 20:20:30 +0200
+
+### Bugfixes
+
+- fix automad prism grammar issue with php code snippets ([3671e12f8](https://github.com/marcantondahmen/automad/commit/3671e12f89c079c67d031486058f609d6f0ac099))
+- fix missing json language in code block agent schema ([6bf3bd93b](https://github.com/marcantondahmen/automad/commit/6bf3bd93b963588f4d9dd267930b98954a17829e))
+- improve preview ui ([dae25cc6f](https://github.com/marcantondahmen/automad/commit/dae25cc6f5987a78ff2037f7ed550f5d045503f3))
+
+## [v2.0.0-beta.66](https://github.com/marcantondahmen/automad/commit/83c24fd94a588f6ed5b8c6cbe382a0eb1248d1a1)
+
+Sat, 17 Oct 2026 11:50:35 +0200
 
 ### Bugfixes
 
