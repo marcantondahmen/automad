@@ -155,6 +155,21 @@ class PageTransformerTest extends TestCase {
 		$this->assertSame($Page->data['+hero'], $updated['+hero']);
 	}
 
+	public function testUpdateFromAgentClearsFalseDateAndTheme() {
+		$PageTransformer = new PageTransformer((new Mock())->createAutomad());
+		$Page = $this->createPageWithMetaData();
+		$Page->data[Fields::THEME] = 'automad/standard-lite';
+
+		$updated = $PageTransformer->updateFromAgent($Page, theme: false, date: false);
+
+		/** @disregard */
+		$this->assertArrayNotHasKey(Fields::DATE, $updated);
+		/** @disregard */
+		$this->assertArrayNotHasKey(Fields::THEME, $updated);
+		/** @disregard */
+		$this->assertSame('page_full_width_centered', $updated[Fields::TEMPLATE]);
+	}
+
 	public function testUpdateFromAgentClearsOnlyListedContentField() {
 		$PageTransformer = new PageTransformer((new Mock())->createAutomad());
 		$Page = $this->createPageWithMetaData();

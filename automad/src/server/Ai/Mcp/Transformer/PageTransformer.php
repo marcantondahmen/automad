@@ -147,8 +147,8 @@ class PageTransformer {
 	 * @param Page $Page
 	 * @param string|null $title
 	 * @param string|null $template
-	 * @param string|null $theme
-	 * @param string|null $date
+	 * @param string|false|null $theme
+	 * @param string|false|null $date
 	 * @param bool|null $private
 	 * @param bool|null $hidden
 	 * @param array|null $tags
@@ -159,8 +159,8 @@ class PageTransformer {
 		Page $Page,
 		?string $title = null,
 		?string $template = null,
-		?string $theme = null,
-		?string $date = null,
+		string|false|null $theme = null,
+		string|false|null $date = null,
 		?bool $private = null,
 		?bool $hidden = null,
 		?array $tags = null,

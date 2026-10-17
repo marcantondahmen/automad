@@ -146,7 +146,7 @@ class PageCreate extends AbstractTool {
 			string $title,
 			string $template,
 			string $theme,
-			string $date = '',
+			string|false $date = '',
 			bool $private = false,
 			bool $hidden = false,
 			array $tags = array(),
@@ -169,7 +169,10 @@ class PageCreate extends AbstractTool {
 			);
 
 			// An empty date would override the default date that is the current time.
-			if ($date !== '') {
+			// Only an explicit `false` creates a page without a date.
+			if ($date === false) {
+				$data[Fields::DATE] = '';
+			} elseif ($date !== '') {
 				$data[Fields::DATE] = $date;
 			}
 

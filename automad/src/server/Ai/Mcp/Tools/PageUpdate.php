@@ -122,9 +122,9 @@ class PageUpdate extends AbstractTool {
 			   
 			- Only the `id` is required. Properties that are omitted or `null` keep their
 			  current value on the existing page.
-			- Use an empty value in order to clear a property: `date` as an empty string,
-			  `private` or `hidden` as `false` and `tags` as an empty array.
-			  The `title` can not be cleared.
+			- Use an empty value in order to clear a property: `date`, `theme`, `private` or
+			  `hidden` as `false` and `tags` as an empty array. Removing the `theme` falls back
+			  to the shared theme. The `title` can not be cleared.
 			- Send an empty array for a content field in order to remove all of its blocks.
 			- Blocks missing from a field's array are deleted.
 			- The order of the array is the order on the page.
@@ -153,8 +153,8 @@ class PageUpdate extends AbstractTool {
 			string $id,
 			?string $title = null,
 			?string $template = null,
-			?string $theme = null,
-			?string $date = null,
+			string|false|null $theme = null,
+			string|false|null $date = null,
 			?bool $private = null,
 			?bool $hidden = null,
 			?array $tags = null,
@@ -172,8 +172,11 @@ class PageUpdate extends AbstractTool {
 			// Only validate when the combination is actually changed in order to not
 			// block updates of pages that already use a template that is not available anymore.
 			if ($theme !== null || $template !== null) {
+				// Removing the theme of a page falls back to the shared theme.
+				$validatedTheme = $theme === false ? strval($Automad->Shared->get(Fields::THEME)) : $theme;
+
 				TemplateValidator::fromThemeCollection(new ThemeCollection())->assertValid(
-					$theme ?? strval($Page->get(Fields::THEME)),
+					$validatedTheme ?? strval($Page->get(Fields::THEME)),
 					$template ?? strval($Page->get(Fields::TEMPLATE))
 				);
 			}

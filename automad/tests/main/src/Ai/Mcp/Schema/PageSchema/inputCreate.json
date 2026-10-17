@@ -21,9 +21,17 @@
 			"description": "The theme that belongs to the selected `template` used by the page."
 		},
 		"date": {
-			"type": "string",
-			"format": "date-time",
-			"description": "The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`."
+			"anyOf": [
+				{
+					"type": "string",
+					"format": "date-time"
+				},
+				{
+					"type": "boolean",
+					"enum": [false]
+				}
+			],
+			"description": "The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to use the current time or use `false` in order to create the page without a date."
 		},
 		"private": {
 			"type": "boolean",
