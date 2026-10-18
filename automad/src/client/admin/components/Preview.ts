@@ -35,13 +35,18 @@
 import {
 	App,
 	Attr,
+	Bindings,
 	create,
 	CSS,
+	DraftCollectionController,
+	EventName,
 	getSlug,
 	notifyInfo,
+	PageController,
 	routes,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
+import type { FormComponent } from '@/admin/components/Forms/Form';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 
 const PREVIEW_ONLY_PARAM = 'preview-only';
@@ -340,7 +345,9 @@ class PreviewComponent extends BaseComponent {
 			'<i class="bi bi-box-arrow-up-right"></i>'
 		);
 
-		if (getSlug() !== routes.page) {
+		const isPageRoute = getSlug() === routes.page;
+
+		if (!isPageRoute) {
 			const edit = create(
 				'am-link',
 				[CSS.previewButton],
@@ -360,6 +367,38 @@ class PreviewComponent extends BaseComponent {
 			});
 
 			actions.appendChild(edit);
+		}
+
+		// The form closes the modal after the page has been published successfully.
+		const publishForm = create<FormComponent>(
+			'am-form',
+			[],
+			{
+				[Attr.api]: isPageRoute
+					? PageController.publish
+					: DraftCollectionController.publishPage,
+				[Attr.event]: isPageRoute
+					? EventName.contentPublished
+					: EventName.appStateRequireUpdate,
+			},
+			actions
+		);
+
+		publishForm.additionalData = { url };
+
+		const publish = create(
+			'am-submit',
+			[CSS.previewButton],
+			{ [Attr.tooltip]: App.text('publish') },
+			publishForm,
+			'<i class="bi bi-check-circle"></i>'
+		);
+
+		if (
+			isPageRoute &&
+			Bindings.get('publicationState')?.value === 'published'
+		) {
+			publish.setAttribute('disabled', '');
 		}
 
 		create(

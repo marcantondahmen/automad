@@ -88,6 +88,11 @@ am-preview {
 			background-color: var(--am-clr-background-selected) !important;
 		}
 
+		&[disabled] {
+			pointer-events: none;
+			color: var(--am-clr-text-muted);
+		}
+
 		& .bi {
 			font-size: 1rem;
 		}
