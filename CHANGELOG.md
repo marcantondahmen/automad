@@ -1,8 +1,22 @@
 # Changelog
 
-## [v2.0.0-beta.67](https://github.com/marcantondahmen/automad/commit/6bf3bd93b963588f4d9dd267930b98954a17829e)
+## [v2.0.0-beta.68](https://github.com/marcantondahmen/automad/commit/91ecee3645552904870b840956ca7cdf99c9acdf)
 
-Sat, 17 Oct 2026 20:20:30 +0200
+Sun, 18 Oct 2026 11:55:20 +0200
+
+### New Features
+
+- add option to publish a draft from the preview dialog ([ca4e88116](https://github.com/marcantondahmen/automad/commit/ca4e881168ab31e8f6483f180f23a4eb08012ede))
+
+### Bugfixes
+
+- add option to mcp tools to clear page dates and themes ([7c79f9a11](https://github.com/marcantondahmen/automad/commit/7c79f9a11b090c407e0762b1a1aebbbc76a4c2aa))
+- fix escape key not working in previews when user has clicked elements inside iframe ([91ecee364](https://github.com/marcantondahmen/automad/commit/91ecee3645552904870b840956ca7cdf99c9acdf))
+- remove decoding of html special chars in header, list, and paragraph blocks ([d6f81b15c](https://github.com/marcantondahmen/automad/commit/d6f81b15c502481edcfae42a988e05ca859af51b))
+
+## [v2.0.0-beta.67](https://github.com/marcantondahmen/automad/commit/63fb36c8cdac6c71ef69b550ad45ec2d7a8e68db)
+
+Sat, 17 Oct 2026 20:21:45 +0200
 
 ### Bugfixes
 
