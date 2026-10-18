@@ -181,6 +181,33 @@ const blockNavigation = (
 };
 
 /**
+ * Close the modal when Escape is pressed while the preview frame has focus,
+ * since key events inside the frame don't reach the modal's own listener.
+ * Escape is ignored in case the page already handled it.
+ *
+ * @param frame
+ * @param modal - the modal that owns the listener and removes it on destroy
+ */
+const closeOnEscape = (
+	frame: HTMLIFrameElement,
+	modal: ModalComponent
+): void => {
+	const win = frame.contentWindow;
+
+	if (!win) {
+		return;
+	}
+
+	modal.listen(win, 'keydown', (event) => {
+		const { key, defaultPrevented } = event as KeyboardEvent;
+
+		if (modal.isOpen && key === 'Escape' && !defaultPrevented) {
+			modal.close();
+		}
+	});
+};
+
+/**
  * A trigger component that opens a modal with a scaled preview of a public page.
  * The scale is controlled from within the modal. It initially is 100% in windows
  * wider than 1350px and 75% otherwise.
@@ -270,6 +297,7 @@ class PreviewComponent extends BaseComponent {
 
 			try {
 				blockNavigation(frame, modal);
+				closeOnEscape(frame, modal);
 
 				frame.style.backgroundColor =
 					getPageBackground(frame.contentDocument) ?? '';
