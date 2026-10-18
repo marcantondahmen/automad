@@ -255,7 +255,7 @@ abstract class AbstractProvider {
 		}
 
 		if (!empty($rulesArray)) {
-			$rules = trim(join('\n- ', $rulesArray));
+			$rules = '- ' . join("\n- ", $rulesArray);
 			$rules = <<<TEXT
 				
 				---
