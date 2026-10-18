@@ -77,7 +77,7 @@ class Paragraph extends AbstractBlock {
 	 */
 	public static function render(array $block, Automad $Automad): string {
 		$classes = array();
-		$text = htmlspecialchars_decode($block['data']['text']);
+		$text = $block['data']['text'];
 
 		if (!empty($block['data']['large'])) {
 			$classes[] = 'am-paragraph-large';

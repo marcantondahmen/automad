@@ -206,10 +206,12 @@ export class AiRuntime {
 			await contentManager.insertBlocks(output);
 		}
 
+		const { component } = this.state;
+
 		this.setState(null);
 
 		setTimeout(() => {
-			fire('input', this.state.component);
+			fire('input', component);
 		}, 200);
 
 		return true;

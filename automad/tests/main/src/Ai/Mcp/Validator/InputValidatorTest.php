@@ -34,6 +34,13 @@ class InputValidatorTest extends TestCase {
 		$this->assertSame('Missing required properties: `type`.', $errors[0]['message']);
 	}
 
+	public function testFalseIsValidForClearableProperties() {
+		/** @disregard */
+		$this->assertSame(array(), $this->validate(array('id' => '/test', 'date' => false, 'theme' => false)));
+		/** @disregard */
+		$this->assertNotEmpty($this->validate(array('id' => '/test', 'date' => true)));
+	}
+
 	public function testInvalidDateIsReportedOnce() {
 		$errors = $this->validate(array('id' => '/test', 'date' => 'not-a-date'));
 

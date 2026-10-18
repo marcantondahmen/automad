@@ -202,7 +202,7 @@ class NestedList extends AbstractBlock {
 		$html = "<$tag>";
 
 		foreach ($items as $item) {
-			$content = htmlspecialchars_decode($item['content']);
+			$content = $item['content'];
 			$children = self::renderItems($item['items']);
 			$html .= "<li><span>$content</span>$children</li>";
 		}

@@ -95,6 +95,10 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		if (!App.system.aiAssistance.enabled) {
+			return;
+		}
+
 		this.classList.add(
 			CSS.editorAiAssistance,
 			CSS.editorAiAssistanceHidden,
@@ -355,7 +359,7 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 	 * @param state
 	 */
 	private toggleUi(state: boolean): void {
-		AiRuntime.get().toggleSelectionHighlighting(!state);
+		AiRuntime.get()?.toggleSelectionHighlighting(!state);
 
 		this.classList.toggle(CSS.editorAiAssistanceHidden, state);
 	}
@@ -364,7 +368,7 @@ export class EditorAiAssistanceComponent extends BaseComponent {
 	 * Remove all window event listeners when disconnecting.
 	 */
 	disconnectedCallback(): void {
-		AiRuntime.get().destroy();
+		AiRuntime.get()?.destroy();
 
 		super.disconnectedCallback();
 	}

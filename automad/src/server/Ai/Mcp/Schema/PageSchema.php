@@ -81,9 +81,11 @@ class PageSchema {
 					'description' => 'The theme that belongs to the selected `template` used by the page.'
 				),
 				'date' => array(
-					'type' => 'string',
-					'format' => 'date-time',
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`.'
+					'anyOf' => array(
+						array('type' => 'string', 'format' => 'date-time'),
+						array('type' => 'boolean', 'enum' => array(false))
+					),
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to use the current time or use `false` in order to create the page without a date.'
 				),
 				'private' => array(
 					'type' => 'boolean',
@@ -438,17 +440,19 @@ class PageSchema {
 				'theme' => array(
 					'anyOf' => array(
 						array('type' => 'string'),
+						array('type' => 'boolean', 'enum' => array(false)),
 						array('type' => 'null')
 					),
-					'description' => 'The theme that belongs to the selected `template` used by the page. Skip it in order to keep the current theme.'
+					'description' => 'The theme that belongs to the selected `template` used by the page. Skip it in order to keep the current theme or use `false` in order to remove a page specific theme and use the shared theme instead.'
 				),
 				'date' => array(
 					'anyOf' => array(
 						array('type' => 'string', 'format' => 'date-time'),
 						array('type' => 'string', 'enum' => array('')),
+						array('type' => 'boolean', 'enum' => array(false)),
 						array('type' => 'null')
 					),
-					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to keep the current date or use an empty string in order to remove the date.'
+					'description' => 'The page date in the ISO 8601 date-time format like for example `2026-10-02T08:03:25+00:00`. Skip it in order to keep the current date or use `false` in order to remove the date.'
 				),
 				'private' => array(
 					'anyOf' => array(
