@@ -32,7 +32,7 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, CSS, html } from '@/admin/core';
+import { App, Attr, CSS, html, htmlSpecialChars } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 
 /**
@@ -69,7 +69,7 @@ class AlertComponent extends BaseComponent {
 			<div class="${CSS.alertIcon}">
 				<i class="bi bi-${icon || 'fire'}"></i>
 			</div>
-			<div class="${CSS.alertText}">${App.text(text) || text}</div>
+			<div class="${CSS.alertText}">${App.text(text) || htmlSpecialChars(text)}</div>
 		`;
 	}
 }

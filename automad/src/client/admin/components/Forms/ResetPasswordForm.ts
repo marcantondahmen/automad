@@ -170,7 +170,7 @@ class ResetPasswordFormComponent extends FormComponent {
 			<input
 				type="hidden"
 				name="nameOrEmail"
-				value="${getSearchParam('nameOrEmail')}"
+				value="$${getSearchParam('nameOrEmail')}"
 			/>
 		`;
 	}
