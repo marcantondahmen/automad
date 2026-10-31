@@ -58,7 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class InPage {
-	const string PREVIEW_ONLY_PARAM = 'preview-only';
+	const PREVIEW_ONLY_PARAM = 'preview-only';
 
 	/**
 	 * This regex matches the "{{@open:$data@}}$value{{@close:$data@}}" string that temporary

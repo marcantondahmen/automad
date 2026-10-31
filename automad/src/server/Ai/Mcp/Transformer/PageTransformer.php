@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class PageTransformer {
-	const array INCLUDED_FIELDS = array(
+	const INCLUDED_FIELDS = array(
 		Fields::TIME_CREATED,
 		Fields::TIME_LAST_MODIFIED
 	);

@@ -18,7 +18,7 @@ class PageTransformerTest extends TestCase {
 	/**
 	 * Realistic minimum for fields that can't be empty in order to be a meaningful block.
 	 */
-	const array STORED_DATA = array(
+	const STORED_DATA = array(
 		'filelist' => array('sortOrder' => 'asc'),
 		'header' => array('level' => 2),
 		'nestedList' => array('style' => 'unordered')

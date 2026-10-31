@@ -57,7 +57,7 @@ class PageSearch extends AbstractTool {
 	/**
 	 * The maximum number of results.
 	 */
-	const int LIMIT = 50;
+	const LIMIT = 50;
 
 	/**
 	 * The tool's behavioral hints for clients (read-only, destructive, idempotent, open-world).
