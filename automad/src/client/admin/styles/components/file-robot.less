@@ -370,6 +370,11 @@
 	overflow: hidden !important;
 }
 
+.am-ui .FIE_root svg {
+	color: inherit !important;
+	opacity: 0.8;
+}
+
 .am-ui .FIE_tools-bar svg {
 	width: 20px !important;
 	height: 20px !important;
@@ -377,6 +382,33 @@
 	opacity: 0.8;
 }
 
+.am-ui .FIE_tools-bar button {
+	color: inherit !important;
+	background-color: inherit !important;
+
+	& svg {
+		width: 12px !important;
+		height: 12px !important;
+	}
+}
+
+.am-ui .SfxMenu-root > .SfxMenuItem-wrapper > .SfxMenuItem-root svg {
+	color: var(--am-clr-text) !important;
+}
+
 .am-ui table.SfxColorPicker-bar {
 	table-layout: fixed;
+}
+
+.am-ui .SfxPopper-root {
+	padding: 4px 0;
+	overflow: hidden;
+	background-color: var(--am-clr-background);
+	border: @am-form-border;
+	border-radius: @am-form-radius;
+	box-shadow: @am-shadow;
+
+	& .SfxMenuItem-root:hover {
+		background-color: var(--am-clr-background-faded) !important;
+	}
 }
