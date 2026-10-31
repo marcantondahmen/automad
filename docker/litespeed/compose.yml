@@ -12,4 +12,4 @@ services:
       - 8000:8088
     volumes:
       - ../../:/app
-      - ../php.ini:/usr/local/lsws/lsphp84/etc/php/8.4/litespeed/php.ini:ro
+      - ../php.ini:/usr/local/lsws/lsphp85/etc/php/8.5/litespeed/php.ini:ro
