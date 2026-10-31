@@ -146,7 +146,7 @@ export class InPageFormComponent extends FormComponent {
 
 		this.bindings = {
 			inPageReturnUrlBinding: new Binding('inPageReturnUrl', {
-				initial: this.page,
+				initial: /^\/(?![\/\\])/.test(this.page ?? '') ? this.page : '/',
 				modifier: (url: string) => `${App.baseIndex}${url}`,
 			}),
 			inPageTitleBinding: new Binding('inPageTitle', {

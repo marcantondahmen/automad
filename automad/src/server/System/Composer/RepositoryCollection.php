@@ -49,6 +49,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2025-2026 by Marc Anton Dahmen - https://marcdahmen.de
  * @license See LICENSE.md for license information
+ *
+ * @psalm-import-type Commit from AbstractAdapter
  */
 class RepositoryCollection {
 	/**
@@ -124,6 +126,39 @@ class RepositoryCollection {
 		}, $config['repositories']);
 
 		return array_filter($repos, function ($repo) { return !empty($repo); });
+	}
+
+	/**
+	 * Get the latest commit of a registered repository package.
+	 * Returns null in case the repository can't be accessed, e.g. due to an invalid auth token.
+	 *
+	 * @param string $name
+	 * @return Commit|null
+	 */
+	public static function getLatestCommit(string $name): array|null {
+		$config = Composer::readConfig();
+
+		foreach ($config['repositories'] ?? array() as $repo) {
+			$package = $repo['package'] ?? array();
+
+			if (($package['name'] ?? '') !== $name || !isset($package['platform'], $package['repositoryUrl'], $package['branch'])) {
+				continue;
+			}
+
+			$RepositoryAdapter = self::getRepositoryAdapter(
+				$package['platform'],
+				$name,
+				$package['repositoryUrl'],
+				$package['branch'],
+				new Messenger()
+			);
+
+			$commit = $RepositoryAdapter->getLatestCommit($package['repositoryUrl'], $package['branch']);
+
+			return $commit['hash'] ? $commit : null;
+		}
+
+		return null;
 	}
 
 	/**

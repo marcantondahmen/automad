@@ -60,6 +60,8 @@ class Error {
 
 		set_exception_handler(
 			function ($error) {
+				self::discardOutput();
+
 				if ($error instanceof AbortSignal) {
 					http_response_code($error->getCode());
 
@@ -93,6 +95,8 @@ class Error {
 
 		set_exception_handler(
 			function ($error) {
+				self::discardOutput();
+
 				$Response = new Response();
 
 				if ($error instanceof AbortSignal) {
@@ -112,6 +116,17 @@ class Error {
 				exit($Response->json());
 			}
 		);
+	}
+
+	/**
+	 * Discard all output that has been buffered so far.
+	 */
+	private static function discardOutput(): void {
+		while (ob_get_level() > 0) {
+			if (!@ob_end_clean()) {
+				break;
+			}
+		}
 	}
 
 	/**

@@ -368,7 +368,7 @@ export class PageDataFormComponent extends FormComponent {
 				${Attr.icon}="x-circle"
 				${Attr.text}="${App.text(
 					'pageNotFoundError'
-				)} ⟶ ${getPageURL()}"
+				)} ⟶ $${getPageURL()}"
 			></am-alert>
 		`;
 	}

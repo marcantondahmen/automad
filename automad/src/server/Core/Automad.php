@@ -128,21 +128,29 @@ class Automad {
 	/**
 	 * Define properties to be cached.
 	 *
-	 * @return array $itemsToCache
+	 * @return array
 	 */
-	public function __sleep(): array {
-		$itemsToCache = array('pages', 'Shared', 'ComponentCollection');
-		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
+	public function __serialize(): array {
+		Debug::log('Preparing Automad object for serialization');
 
-		return $itemsToCache;
+		return array(
+			'pages' => $this->pages,
+			'Shared' => $this->Shared,
+			'ComponentCollection' => $this->ComponentCollection
+		);
 	}
 
 	/**
-	 * Set new Context after being restored from cache.
+	 * Restore cached properties and set a new context.
+	 *
+	 * @param array $data
 	 */
-	public function __wakeup(): void {
+	public function __unserialize(array $data): void {
 		Debug::log('Automad object was unserialized');
 
+		$this->pages = $data['pages'];
+		$this->Shared = $data['Shared'];
+		$this->ComponentCollection = $data['ComponentCollection'];
 		$this->init();
 	}
 

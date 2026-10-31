@@ -15,7 +15,7 @@ A flat-file content management system and template engine.
 - [Documentation](https://automad.org)
 - [Live Demo](https://try.automad.org)
 - [Changelog](https://github.com/marcantondahmen/automad/blob/-/CHANGELOG.md)
-- [Discussion](https://automad.org/discuss)
+- [Discussion](https://automad.org/community)
 
 ## Live Demo
 
@@ -34,7 +34,7 @@ The fastest way to get Automad up and running is to use [Composer](https://packa
 composer create-project automad/automad . v2.x-dev
 ```
 
-Follow this [guide](https://automad.org/version-2#getting-started) to finish the installation and get started quickly.
+Follow this [guide](https://automad.org/getting-started#composer) to finish the installation and get started quickly.
 
 ### Docker
 
@@ -69,7 +69,7 @@ Take a look at the [documentation](https://automad.org) to get started with Auto
 
 ## Community
 
-Join the community, ask questions or start a discussion on the Automad [discussion platform](https://automad.org/discuss).
+Join the community, ask questions or start a discussion on the Automad [discussion platform](https://automad.org/community).
 
 ## Contributing
 

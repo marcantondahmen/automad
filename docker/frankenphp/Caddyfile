@@ -12,7 +12,15 @@ localhost:80 {
 	# so that page URLs such as "/blog/data" are still passed on to Automad.
 	@denied {
 		file
-		path_regexp (?i)^/(config|lib)/|^/automad/(console$|src/|lang/)|/(data|index)$|/\.|^/cache/packages/.*/thumbnail|/(packages|vendor)/.*\.(ts|less|md|sh|xml|json|lock)$|/vendor/.*(readme|license)|/(package|package-lock|composer)\.(json|lock)$
+		expression <<CEL
+			path_regexp(r'(?i)^/(config|lib)/')
+			|| path_regexp(r'(?i)^/automad/(console$|src/|lang/)')
+			|| path_regexp(r'(?i)/(data|index)$')
+			|| path_regexp(r'(?i)/\.')
+			|| path_regexp(r'(?i)/(packages|vendor)/.*\.(ts|less|md|sh|xml|json|lock)$')
+			|| path_regexp(r'(?i)/vendor/.*(readme|license)')
+			|| path_regexp(r'(?i)/(package|package-lock|composer)\.(json|lock)$')
+			CEL
 	}
 
 	respond @denied 404

@@ -133,7 +133,7 @@ class RequestPasswordResetCodeFormComponent extends FormComponent {
 				<input
 					type="hidden"
 					name="type"
-					value="${getSearchParam('type')}"
+					value="${isInvite() ? 'invitation' : ''}"
 				/>
 				${inputInvite}
 				<div class="${CSS.cardForm}">

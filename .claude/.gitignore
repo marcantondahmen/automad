@@ -5,3 +5,5 @@
 !settings.json
 !docs
 !docs/*
+!skills
+!skills/**/*

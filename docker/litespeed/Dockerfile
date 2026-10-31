@@ -1,4 +1,4 @@
-FROM litespeedtech/openlitespeed:1.8.4-lsphp84
+FROM litespeedtech/openlitespeed:1.8.4-lsphp85
 
 ARG UID=1000
 

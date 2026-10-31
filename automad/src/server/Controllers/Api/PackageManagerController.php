@@ -364,6 +364,10 @@ class PackageManagerController {
 			return $Response;
 		}
 
+		if (!RepositoryCollection::getLatestCommit($name)) {
+			return $Response->setError(Text::get('repositoryAccessError'));
+		}
+
 		$Composer = new Composer();
 		$Messenger = new Messenger();
 		$ref = RepositoryCollection::getPackageBranch($name);

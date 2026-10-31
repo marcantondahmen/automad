@@ -50,6 +50,16 @@ import { BaseComponent } from '@/admin/components/Base';
 import type { Package } from './types';
 
 /**
+ * Only allow http(s) URLs from the package registry and encode double quotes
+ * so that the value can't break out of an href attribute.
+ *
+ * @param url
+ * @returns the safe URL or an empty string
+ */
+const safeUrl = (url: string): string =>
+	/^https?:\/\//i.test(url ?? '') ? url.replace(/"/g, '%22') : '';
+
+/**
  * Perform a package manager action.
  *
  * @param pkg
@@ -119,7 +129,7 @@ export class PackageCardComponent extends BaseComponent {
 					<i class="bi bi-three-dots"></i>
 					<div class="${CSS.dropdownItems}">
 						<a
-							href="${pkg.documentation}"
+							href="${safeUrl(pkg.documentation)}"
 							class="${CSS.dropdownLink}"
 							target="_blank"
 						>
@@ -131,7 +141,7 @@ export class PackageCardComponent extends BaseComponent {
 							></am-icon-text>
 						</a>
 						<a
-							href="${pkg.repository}"
+							href="${safeUrl(pkg.repository)}"
 							class="${CSS.dropdownLink}"
 							target="_blank"
 						>
@@ -141,7 +151,7 @@ export class PackageCardComponent extends BaseComponent {
 							></am-icon-text>
 						</a>
 						<a
-							href="${pkg.issues}"
+							href="${safeUrl(pkg.issues)}"
 							class="${CSS.dropdownLink}"
 							target="_blank"
 						>
