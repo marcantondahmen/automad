@@ -13,7 +13,7 @@ Note: per the project README, **pull requests to this repository are not accepte
 Install: `composer install` and `npm install`. Composer packages in `lib/` (Automad's own runtime deps, declared in `lib/composer.json`) must also be installed via `composer install --working-dir=lib`.
 
 - `npm run dev` — local dev: starts the PHP built-in server (`bin/server.sh`, `0.0.0.0:8000`) and esbuild in watch mode (`bin/dev.sh`).
-- `npm run dev:docker` — same, but serves PHP via Docker (pick a flavor — apache/caddy/frankenphp/litespeed/nginx — under `docker/`) instead of the PHP built-in server.
+- `npm run dev:docker` — same, but serves PHP via Docker (pick a flavor — apache/caddy/frankenphp/litespeed/nginx, plus apache-php82 for testing against the minimum supported PHP 8.2 and apache-php86 for PHP 8.6 — under `docker/`) instead of the PHP built-in server.
 - `npm run build` — production build: `bin/prebuild.sh` (clears `automad/dist/build`, copies Prism/font assets) then `node esbuild.js` (minified).
 - `npm test` — runs everything: `phpunit && psalm && typecheck && vitest` (in that order).
 - `npm run phpunit` — runs `bin/phpunit.sh`, which runs both PHPUnit suites: `./phpunit-12.5.4.phar` (main, config `phpunit.xml`) then `./phpunit-12.5.4.phar -c phpunit-i18n.xml` (i18n). The phar is auto-downloaded if missing. Main tests live in `automad/tests/main/src/**/*Test.php`; i18n tests in `automad/tests/i18n/src/**/*Test.php`.
