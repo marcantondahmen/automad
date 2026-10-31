@@ -102,9 +102,6 @@ RewriteRule ^(.*)$ %2index.php?/$1 [QSA,L]
 
 # Redirect blocked files to the 404 page.
 
-# Redirect package thumbnails.
-RewriteCond %{REQUEST_FILENAME} /cache/packages/.*/thumbnail [OR]
-
 # Redirect src files.
 RewriteCond %{REQUEST_FILENAME} /(packages|vendor)/.*\.(ts|less|php|md|sh|xml|json|lock)$ [OR,NC]
 RewriteCond %{REQUEST_FILENAME} /vendor/.*(readme|license) [OR,NC]
