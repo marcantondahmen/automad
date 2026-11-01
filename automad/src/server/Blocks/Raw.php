@@ -77,7 +77,7 @@ class Raw extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(array $block, Automad $Automad): string {
-		$html = Str::markdown($block['data']['code']);
+		$html = Str::markdown($block['data']['code'] ?? '');
 		$attr = Attr::render($block['tunes']);
 
 		return "<am-raw $attr>$html</am-raw>";
