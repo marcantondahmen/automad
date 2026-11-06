@@ -35,9 +35,12 @@
 
 namespace Automad\Controllers;
 
+use Automad\App;
+use Automad\Auth\Auth;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\I18n;
+use Automad\Core\Request;
 use Automad\Engine\View;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -50,6 +53,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license See LICENSE.md for license information
  */
 class PageController {
+	const REVISION_PARAM = 'revision';
+
 	/**
 	 * Render a public page.
 	 *
@@ -66,6 +71,14 @@ class PageController {
 		$Automad = $Cache->getAutomad();
 
 		$I18n->apply($Automad);
+
+		if (($hash = strval(Request::query(PageController::REVISION_PARAM))) && Auth::isAuthenticated()) {
+			$Page = $Automad->Context->get();
+
+			if (!$Page->checkout($hash)) {
+				App::exit('Revision not found', "The revision $hash for the page [$Page->origUrl] not found!");
+			}
+		}
 
 		$View = new View($Automad);
 		$output = $View->render();

@@ -176,6 +176,16 @@ class History {
 	}
 
 	/**
+	 * Get a revision by hash.
+	 *
+	 * @param string $hash
+	 * @return Revision|null
+	 */
+	public function getRevision(string $hash): Revision|null {
+		return $this->revisions[$hash] ?? null;
+	}
+
+	/**
 	 * Get the commit log.
 	 *
 	 * @return array
@@ -207,13 +217,13 @@ class History {
 	 * @return Page|null the URL for the restored copy in the dashboard
 	 */
 	public function restore(string $hash, string $title, Messenger $Messenger): Page|null {
-		if (!array_key_exists($hash, $this->revisions)) {
+		$revision = $this->getRevision($hash);
+
+		if (is_null($revision)) {
 			$Messenger->setError(Text::get('pageRevisionNotFound'));
 
 			return null;
 		}
-
-		$revision = $this->revisions[$hash];
 
 		if ($this->pagePath === '/') {
 			$DataStore = new DataStore($this->pagePath);
