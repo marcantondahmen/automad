@@ -63,7 +63,7 @@ class MailAddressProcessor {
 
 	/**
 	 * Obfuscate all stand-alone eMail addresses matched in $str.
-	 * Addresses in links are ignored.
+	 * Addresses in links and pre elements are ignored.
 	 *
 	 * @param string $str
 	 * @return string The processed string
@@ -140,11 +140,16 @@ class MailAddressProcessor {
 	private function processBody(array $matches): string {
 		$regexEmail = '[~\w_\.\+\-]+@[\w\.\-]+\.[a-zA-Z]{2,}(\?[\w%&=_-]+)?';
 
+		// Syntax highlighters read code as plain text, which would drop the tags added by addTags().
+		// (*FAIL) and (*SKIP) are PCRE backtracking control verbs: (*FAIL) forces the match of a pre element
+		// to fail and (*SKIP) makes the next attempt start after it.
+		$skipPre ='<pre\b[^>]*>.*?<\/pre>(*SKIP)(*FAIL)|';
+
 		/** @var string */
 		$body = $matches[0] ?? '';
 
 		$body = preg_replace_callback(
-			'/href="mailto:(' . $regexEmail . ')"/is',
+			'/' . $skipPre . 'href="mailto:(' . $regexEmail . ')"/is',
 			function ($matches) {
 				$key = $this->generateKey($matches[1]);
 				$encoded = $this->encrypt($matches[1], $key);
@@ -156,7 +161,7 @@ class MailAddressProcessor {
 		) ?? '';
 
 		$body = preg_replace_callback(
-			'/(<a\b[^>]*>.+?<\/a>|(' . $regexEmail . '))/is',
+			'/' . $skipPre . '(<a\b[^>]*>.+?<\/a>|(' . $regexEmail . '))/is',
 			function ($matches) {
 				if (empty($matches[2])) {
 					return $matches[0];
@@ -173,7 +178,7 @@ class MailAddressProcessor {
 		) ?? '';
 
 		$body = preg_replace_callback(
-			'/' . $regexEmail . '/',
+			'/' . $skipPre . $regexEmail . '/is',
 			function ($matches) {
 				$this->hasMail = true;
 
