@@ -80,14 +80,14 @@ class PreviewDraftComponent extends BasePreviewComponent {
 	/**
 	 * Render the header actions.
 	 *
-	 * @param actions
+	 * @param wrapper
 	 * @param modal
 	 * @param frame
 	 * @param url
 	 * @async
 	 */
 	protected async renderActions(
-		actions: HTMLElement,
+		wrapper: HTMLElement,
 		modal: ModalComponent,
 		frame: HTMLIFrameElement,
 		url: string
@@ -100,7 +100,7 @@ class PreviewDraftComponent extends BasePreviewComponent {
 				target: '_blank',
 				[Attr.tooltip]: App.text('openInNewTab'),
 			},
-			actions,
+			wrapper,
 			'<i class="bi bi-box-arrow-up-right"></i>'
 		);
 
@@ -125,7 +125,7 @@ class PreviewDraftComponent extends BasePreviewComponent {
 				modal.close();
 			});
 
-			actions.appendChild(edit);
+			wrapper.appendChild(edit);
 		}
 
 		// The form closes the modal after the page has been published successfully.
@@ -140,7 +140,7 @@ class PreviewDraftComponent extends BasePreviewComponent {
 					? EventName.contentPublished
 					: EventName.appStateRequireUpdate,
 			},
-			actions
+			wrapper
 		);
 
 		publishForm.additionalData = { url };

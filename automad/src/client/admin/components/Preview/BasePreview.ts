@@ -32,7 +32,14 @@
  * See LICENSE.md for license information.
  */
 
-import { App, Attr, create, CSS, notifyInfo } from '@/admin/core';
+import {
+	App,
+	Attr,
+	create,
+	CSS,
+	getComponentTargetContainer,
+	notifyInfo,
+} from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 
@@ -219,10 +226,14 @@ export abstract class BasePreviewComponent extends BaseComponent {
 				return;
 			}
 
-			const modal = this.createModal(
-				url,
-				this.elementAttributes[Attr.text]
+			const modal = create<ModalComponent>(
+				ModalComponent.TAG_NAME,
+				[],
+				{ [Attr.destroy]: '' },
+				getComponentTargetContainer()
 			);
+
+			this.createDialog(modal, url, this.elementAttributes[Attr.text]);
 
 			setTimeout(() => {
 				modal.open();
@@ -236,25 +247,34 @@ export abstract class BasePreviewComponent extends BaseComponent {
 	 * @param url
 	 * @param title
 	 * @returns the created modal component
+	 * @async
 	 */
-	private createModal(url: string, title: string): ModalComponent {
-		const modal = create<ModalComponent>(
-			'am-modal',
-			[],
-			{ [Attr.destroy]: '' },
-			document.body
-		);
-
-		const dialog = create(
+	private async createDialog(
+		modal: ModalComponent,
+		url: string,
+		title: string
+	): Promise<ModalComponent> {
+		const dialog = create<HTMLElement>(
 			'am-modal-dialog',
 			[CSS.modalDialogFullscreen, CSS.overflowHidden],
 			{},
 			modal
 		);
 
-		// The header is populated before it is connected, since the close button
-		// is appended on connect and has to be the last item.
-		const header = create('div', [CSS.previewHeader]);
+		const header = create('div', [CSS.previewHeader], {}, dialog);
+
+		create(
+			'am-icon-text',
+			[],
+			{
+				[Attr.icon]: 'file-earmark-post',
+				[Attr.text]: title || App.text('preview'),
+			},
+			header
+		);
+
+		const actions = create('div', [CSS.previewActions], {}, header);
+
 		const viewport = create(
 			'div',
 			[CSS.previewViewport, CSS.flexItemGrow],
@@ -265,9 +285,15 @@ export abstract class BasePreviewComponent extends BaseComponent {
 		const frame = create<HTMLIFrameElement>(
 			'iframe',
 			[CSS.previewFrame],
-			{ src: this.getPreviewSrc(url) },
-			viewport
+			{}
 		);
+
+		await this.renderBaseActions(actions, modal, viewport, frame, url);
+
+		this.setScale(viewport, getInitialScale());
+
+		viewport.append(frame);
+		frame.src = this.getPreviewSrc(url);
 
 		// Block navigation and match the page background. The latter falls back
 		// to transparent in case the page background can't be read.
@@ -285,23 +311,6 @@ export abstract class BasePreviewComponent extends BaseComponent {
 			}
 		});
 
-		create(
-			'am-icon-text',
-			[],
-			{
-				[Attr.icon]: 'file-earmark-post',
-				[Attr.text]: title || App.text('preview'),
-			},
-			header
-		);
-
-		const actions = create('div', [CSS.previewActions], {}, header);
-
-		this.renderBaseActions(actions, modal, viewport, frame, url);
-		dialog.prepend(header);
-
-		this.setScale(viewport, getInitialScale());
-
 		return modal;
 	}
 
@@ -313,14 +322,15 @@ export abstract class BasePreviewComponent extends BaseComponent {
 	 * @param viewport
 	 * @param frame
 	 * @param url
+	 * @async
 	 */
-	protected renderBaseActions(
+	protected async renderBaseActions(
 		actions: HTMLElement,
 		modal: ModalComponent,
 		viewport: HTMLElement,
 		frame: HTMLIFrameElement,
 		url: string
-	): void {
+	): Promise<void> {
 		const scales = create(
 			'div',
 			[CSS.previewGroup, CSS.displaySmallNone],
@@ -342,7 +352,7 @@ export abstract class BasePreviewComponent extends BaseComponent {
 			});
 		});
 
-		this.renderActions(actions, modal, frame, url);
+		const wrapper = create('div', [CSS.previewActions], {}, actions);
 
 		create(
 			'am-modal-close',
@@ -351,6 +361,8 @@ export abstract class BasePreviewComponent extends BaseComponent {
 			actions,
 			'<i class="bi bi-x-lg"></i>'
 		);
+
+		await this.renderActions(wrapper, modal, frame, url);
 	}
 
 	/**
@@ -377,7 +389,7 @@ export abstract class BasePreviewComponent extends BaseComponent {
 	/**
 	 * Render the header actions.
 	 *
-	 * @param actions
+	 * @param wrapper
 	 * @param modal
 	 * @param viewport
 	 * @param frame
@@ -385,7 +397,7 @@ export abstract class BasePreviewComponent extends BaseComponent {
 	 * @async
 	 */
 	protected abstract renderActions(
-		actions: HTMLElement,
+		wrapper: HTMLElement,
 		modal: ModalComponent,
 		frame: HTMLIFrameElement,
 		url: string
