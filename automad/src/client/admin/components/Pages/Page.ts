@@ -43,8 +43,8 @@ import {
 	PageController,
 	routes,
 } from '@/admin/core';
-import { HistoryModalFormComponent } from '@/admin/components/Forms/HistoryModalForm';
 import { Section } from '@/common';
+import { CheckoutRevisionComponent } from '@/admin/components/CheckoutRevision';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 
@@ -53,7 +53,7 @@ const renderBreadcrumbs = (): string => {
 };
 
 const renderHistoryModal = (): string => {
-	return html`<am-history-modal-form></am-history-modal-form>`;
+	return html`<am-checkout-revision></am-checkout-revision>`;
 };
 
 const renderMovePageModal = (): string => {
@@ -156,7 +156,7 @@ const renderDropdown = (): string => {
 			<div class="${CSS.dropdownItems}">
 				<am-modal-toggle
 					class="${CSS.dropdownLink}"
-					${Attr.modal}="#${HistoryModalFormComponent.MODAL_ID}"
+					${Attr.modal}="#${CheckoutRevisionComponent.MODAL_ID}"
 				>
 					<am-icon-text
 						${Attr.icon}="clock-history"

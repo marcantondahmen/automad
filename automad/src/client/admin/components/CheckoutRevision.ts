@@ -50,13 +50,13 @@ import { BaseComponent } from '@/admin/components/Base';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 import type { SelectComponentOption } from '@/admin/components/Select';
 
-export class HistoryModalFormComponent extends BaseComponent {
+export class CheckoutRevisionComponent extends BaseComponent {
 	/**
 	 * The modal id.
 	 *
 	 * @static
 	 */
-	static MODAL_ID = 'am-history-modal';
+	static MODAL_ID = 'am-checkout-revision-modal';
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -73,7 +73,7 @@ export class HistoryModalFormComponent extends BaseComponent {
 		const modal = create(
 			ModalComponent.TAG_NAME,
 			[],
-			{ id: HistoryModalFormComponent.MODAL_ID },
+			{ id: CheckoutRevisionComponent.MODAL_ID },
 			this,
 			html`
 				<am-form
@@ -147,4 +147,4 @@ export class HistoryModalFormComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-history-modal-form', HistoryModalFormComponent);
+customElements.define('am-checkout-revision', CheckoutRevisionComponent);
