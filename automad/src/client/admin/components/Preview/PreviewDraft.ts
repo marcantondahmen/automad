@@ -52,8 +52,6 @@ const PREVIEW_ONLY_PARAM = 'preview-only';
 
 /**
  * A trigger component that opens a modal with a scaled preview of a public page.
- * The scale is controlled from within the modal. It initially is 100% in windows
- * wider than 1350px and 75% otherwise.
  *
  * @example
  * <am-preview-draft ${Attr.url}="/path/to/page" ${Attr.text}="Page title">

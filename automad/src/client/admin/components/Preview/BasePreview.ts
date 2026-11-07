@@ -201,7 +201,9 @@ const closeOnEscape = (
 };
 
 /**
- * The base preview modal component.
+ * A base trigger component that opens a modal with a scaled preview of defined page state.
+ * The scale is controlled from within the modal. It initially is 100% in windows
+ * wider than 1350px and 75% otherwise.
  *
  * @extends BaseComponent
  */
