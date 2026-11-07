@@ -44,16 +44,11 @@ import {
 	routes,
 } from '@/admin/core';
 import { Section } from '@/common';
-import { CheckoutRevisionComponent } from '@/admin/components/CheckoutRevision';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 
 const renderBreadcrumbs = (): string => {
 	return html`<am-breadcrumbs-page></am-breadcrumbs-page>`;
-};
-
-const renderHistoryModal = (): string => {
-	return html`<am-checkout-revision></am-checkout-revision>`;
 };
 
 const renderMovePageModal = (): string => {
@@ -91,6 +86,7 @@ const renderMovePageModal = (): string => {
 };
 
 const renderDropdown = (): string => {
+	const pageUrl = getPageURL();
 	let subpageItems = '';
 
 	if (getPageURL() != '/') {
@@ -119,7 +115,7 @@ const renderDropdown = (): string => {
 			</am-modal-toggle>
 			<am-copy
 				class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
-				value="${getPageURL()}"
+				value="${pageUrl}"
 			>
 				<am-icon-text
 					${Attr.icon}="clipboard-plus"
@@ -154,18 +150,19 @@ const renderDropdown = (): string => {
 				</span>
 			</span>
 			<div class="${CSS.dropdownItems}">
-				<am-modal-toggle
+				<am-preview-checkout
 					class="${CSS.dropdownLink}"
-					${Attr.modal}="#${CheckoutRevisionComponent.MODAL_ID}"
+					${Attr.url}="${App.baseIndex}${pageUrl}"
+					${Attr.text}="${pageUrl}"
 				>
 					<am-icon-text
 						${Attr.icon}="clock-history"
 						${Attr.text}="${App.text('pageHistory')}"
 					></am-icon-text>
-				</am-modal-toggle>
+				</am-preview-checkout>
 				<span class="${CSS.dropdownDivider}"></span>
 				<a
-					href="${App.baseIndex}${getPageURL()}"
+					href="${App.baseIndex}${pageUrl}"
 					class="${CSS.dropdownLink}"
 				>
 					<am-icon-text
@@ -369,7 +366,6 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 				</div>
 			</section>
 			${renderMovePageModal()}${renderFileImportModal()}
-			${renderHistoryModal()}
 		`;
 	}
 

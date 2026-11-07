@@ -62,33 +62,21 @@ const PREVIEW_ONLY_PARAM = 'preview-only';
  */
 class PreviewDraftComponent extends BasePreviewComponent {
 	/**
-	 * Get the iframe source that hides the in-page UI.
+	 * Initialize the preview.
 	 *
 	 * @param url
-	 * @returns the source URL
-	 */
-	protected getPreviewSrc(url: string): string {
-		const src = new URL(`${App.baseIndex}${url}`, window.location.origin);
-
-		src.searchParams.set(PREVIEW_ONLY_PARAM, '1');
-
-		return src.toString();
-	}
-
-	/**
-	 * Render the header actions.
-	 *
-	 * @param wrapper
 	 * @param modal
+	 * @param actions
+	 * @param viewport
 	 * @param frame
-	 * @param url
 	 * @async
 	 */
-	protected async renderActions(
-		wrapper: HTMLElement,
+	protected async init(
+		url: string,
 		modal: ModalComponent,
-		frame: HTMLIFrameElement,
-		url: string
+		actions: HTMLElement,
+		viewport: HTMLElement,
+		frame: HTMLIFrameElement
 	): Promise<void> {
 		create(
 			'a',
@@ -98,7 +86,7 @@ class PreviewDraftComponent extends BasePreviewComponent {
 				target: '_blank',
 				[Attr.tooltip]: App.text('openInNewTab'),
 			},
-			wrapper,
+			actions,
 			'<i class="bi bi-box-arrow-up-right"></i>'
 		);
 
@@ -123,7 +111,7 @@ class PreviewDraftComponent extends BasePreviewComponent {
 				modal.close();
 			});
 
-			wrapper.appendChild(edit);
+			actions.appendChild(edit);
 		}
 
 		// The form closes the modal after the page has been published successfully.
@@ -138,7 +126,7 @@ class PreviewDraftComponent extends BasePreviewComponent {
 					? EventName.contentPublished
 					: EventName.appStateRequireUpdate,
 			},
-			wrapper
+			actions
 		);
 
 		publishForm.additionalData = { url };
@@ -157,6 +145,20 @@ class PreviewDraftComponent extends BasePreviewComponent {
 		) {
 			publish.setAttribute('disabled', '');
 		}
+
+		const src = new URL(`${App.baseIndex}${url}`, window.location.origin);
+
+		src.searchParams.set(PREVIEW_ONLY_PARAM, '1');
+		frame.src = src.toString();
+	}
+
+	/**
+	 * The header icon.
+	 *
+	 * @returns the icon name
+	 */
+	protected getIcon(): string {
+		return 'file-earmark-post';
 	}
 }
 

@@ -42,6 +42,7 @@
 		gap: @am-flex-gap;
 		padding: @am-modal-padding;
 		padding-right: 0;
+		height: @am-navbar-height;
 	}
 
 	&__actions {
@@ -49,12 +50,17 @@
 		align-items: center;
 		margin-left: auto;
 		max-height: 1rem;
+
+		& am-form {
+			margin-right: 0.4rem;
+		}
 	}
 
 	&__group {
 		display: flex;
-		align-items: center;
+		align-items: stretch;
 		gap: 2px;
+		height: @am-form-height;
 		padding: 2px;
 		margin-right: 1rem;
 		border: @am-form-border;
@@ -65,12 +71,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 2.5em;
 		min-width: 2.5rem;
 		padding: 0 0.75em;
 		color: var(--am-clr-text);
-		font-size: @am-small-font-size;
-		font-weight: @am-small-font-weight;
 		cursor: pointer;
 		border-radius: @am-form-radius;
 		transition:
@@ -98,7 +101,7 @@
 
 	&__viewport {
 		--am-preview-scale: 1;
-		--size: 2rem;
+		--size: 2.5rem;
 		position: relative;
 		overflow: hidden;
 		padding: 0 4px 1rem 1rem;
@@ -116,7 +119,7 @@
 			width: var(--size);
 			height: var(--size);
 			margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
-			border: 2px solid;
+			border: 3px solid var(--am-clr-text-muted);
 			border-left-color: transparent;
 			border-radius: 100%;
 			animation: 0.8s linear 0s infinite @am-animation--spinner;
@@ -136,5 +139,14 @@
 		transform: scale(var(--am-preview-scale));
 		transform-origin: top left;
 		overflow: hidden;
+		opacity: 0;
+	}
+
+	&__viewport--loaded &__frame {
+		opacity: 1;
+	}
+
+	&__header am-select {
+		width: 18rem;
 	}
 }

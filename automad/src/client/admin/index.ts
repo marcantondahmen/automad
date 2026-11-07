@@ -191,7 +191,6 @@ import('./components/Alert');
 import('./components/Autocomplete');
 import('./components/AutocompleteUrl');
 import('./components/Checkbox');
-import('./components/CheckoutRevision');
 import('./components/ComponentEditor');
 import('./components/Copy');
 import('./components/CustomIconCheckbox');

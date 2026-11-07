@@ -53,6 +53,7 @@ const NOTIFICATION_DURATION = 3000;
  */
 interface NavigateEventLike extends Event {
 	hashChange: boolean;
+	sourceElement: Element;
 	destination: { sameDocument: boolean };
 }
 
@@ -143,9 +144,15 @@ const blockNavigation = (
 
 	if (win.navigation) {
 		modal.listen(win.navigation, 'navigate', (event) => {
-			const { hashChange, destination } = event as NavigateEventLike;
+			const { hashChange, destination, sourceElement } =
+				event as NavigateEventLike;
 
-			if (hashChange || destination.sameDocument || !event.cancelable) {
+			if (
+				hashChange ||
+				destination.sameDocument ||
+				!sourceElement ||
+				!event.cancelable
+			) {
 				return;
 			}
 
@@ -269,14 +276,11 @@ export abstract class BasePreviewComponent extends BaseComponent {
 			'am-icon-text',
 			[],
 			{
-				[Attr.icon]:
-					this.elementAttributes[Attr.icon] || 'file-earmark-post',
+				[Attr.icon]: this.getIcon(),
 				[Attr.text]: title || App.text('preview'),
 			},
 			header
 		);
-
-		const actions = create('div', [CSS.previewActions], {}, header);
 
 		const viewport = create(
 			'div',
@@ -285,18 +289,19 @@ export abstract class BasePreviewComponent extends BaseComponent {
 			dialog
 		);
 
+		const actions = this.renderActions(header, modal, viewport);
+
 		const frame = create<HTMLIFrameElement>(
 			'iframe',
 			[CSS.previewFrame],
 			{}
 		);
 
-		await this.renderBaseActions(actions, modal, viewport, frame, url);
-
-		this.setScale(viewport, getInitialScale());
+		await this.init(url, modal, actions, viewport, frame);
 
 		viewport.append(frame);
-		frame.src = this.getPreviewSrc(url);
+
+		this.setScale(viewport, getInitialScale());
 
 		// Block navigation and match the page background. The latter falls back
 		// to transparent in case the page background can't be read.
@@ -320,20 +325,18 @@ export abstract class BasePreviewComponent extends BaseComponent {
 	/**
 	 * Render the main header actions section.
 	 *
-	 * @param actions
+	 * @param header
 	 * @param modal
 	 * @param viewport
-	 * @param frame
-	 * @param url
 	 * @async
 	 */
-	protected async renderBaseActions(
-		actions: HTMLElement,
+	private renderActions(
+		header: HTMLElement,
 		modal: ModalComponent,
-		viewport: HTMLElement,
-		frame: HTMLIFrameElement,
-		url: string
-	): Promise<void> {
+		viewport: HTMLElement
+	): HTMLElement {
+		const actions = create('div', [CSS.previewActions], {}, header);
+
 		const scales = create(
 			'div',
 			[CSS.previewGroup, CSS.displaySmallNone],
@@ -365,7 +368,7 @@ export abstract class BasePreviewComponent extends BaseComponent {
 			'<i class="bi bi-x-lg"></i>'
 		);
 
-		await this.renderActions(wrapper, modal, frame, url);
+		return wrapper;
 	}
 
 	/**
@@ -390,27 +393,27 @@ export abstract class BasePreviewComponent extends BaseComponent {
 	}
 
 	/**
-	 * Render the header actions.
+	 * Initialize the preview.
 	 *
-	 * @param wrapper
+	 * @param url
 	 * @param modal
+	 * @param actions
 	 * @param viewport
 	 * @param frame
-	 * @param url
 	 * @async
 	 */
-	protected abstract renderActions(
-		wrapper: HTMLElement,
+	protected abstract init(
+		url: string,
 		modal: ModalComponent,
-		frame: HTMLIFrameElement,
-		url: string
+		actions: HTMLElement,
+		viewport: HTMLElement,
+		frame: HTMLIFrameElement
 	): Promise<void>;
 
 	/**
-	 * Get the iframe source that hides the in-page UI.
+	 * The header icon.
 	 *
-	 * @param url
-	 * @returns the source URL
+	 * @returns the icon name
 	 */
-	protected abstract getPreviewSrc(url: string): string;
+	protected abstract getIcon(): string;
 }
