@@ -630,8 +630,6 @@
 	"systemRssFeedFieldsInfoUsed": "Move elements into this area in order to add them to the RSS feed",
 	"systemRssFeedInfo": "When the RSS feed option is enabled, Automad will automatically generate an RSS feed document and publish it under the URL that is displayed below in order to allow users to follow your newest posts.",
 	"systemRssFeedUrl": "The RSS feed will be available under the following link. You can add it to your navigation by adding a new page and using the URL below as value for the redirect field.",
-	"systemSyntaxCopied": "Copied!",
-	"systemSyntaxCopyError": "Press Ctrl+C to copy",
 	"systemTitle": "System Settings",
 	"systemUpToDate": "Automad is up to date",
 	"systemUpdate": "Update",
