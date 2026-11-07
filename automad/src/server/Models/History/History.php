@@ -39,13 +39,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 use Automad\Core\Cache;
 use Automad\Core\Messenger;
-use Automad\Core\PageIndex;
-use Automad\Core\Str;
 use Automad\Core\Text;
 use Automad\Models\Page;
 use Automad\Stores\DataStore;
 use Automad\Stores\PublicationState;
-use Automad\System\Fields;
 use Automad\System\FileSystem;
 
 /**
@@ -214,50 +211,25 @@ class History {
 	 * @param string $hash
 	 * @param string $title
 	 * @param Messenger $Messenger
-	 * @return Page|null the URL for the restored copy in the dashboard
+	 * @return bool
 	 */
-	public function restore(string $hash, string $title, Messenger $Messenger): Page|null {
+	public function restore(string $hash, string $title, Messenger $Messenger): bool {
 		$revision = $this->getRevision($hash);
 
 		if (is_null($revision)) {
 			$Messenger->setError(Text::get('pageRevisionNotFound'));
 
-			return null;
+			return false;
 		}
 
-		if ($this->pagePath === '/') {
-			$DataStore = new DataStore($this->pagePath);
-			$DataStore->setState(PublicationState::DRAFT, $revision->data)->save();
+		$DataStore = new DataStore($this->pagePath);
+		$DataStore->setState(PublicationState::DRAFT, $revision->data)->save();
 
-			$this->commit($revision->data);
-
-			Cache::clear();
-
-			return null;
-		}
-
-		$time = preg_replace('/\+\d\d\:\d\d/', '', $revision->time) ?? '';
-		/** @var string */
-		$time = str_replace('T', ', ', $time);
-
-		$restoredTitle = $title . ' (' . $time . ')';
-		$duplicatePath = dirname($this->pagePath) . '/' . Str::slug($restoredTitle, true);
-		$duplicatePath .= FileSystem::uniquePathSuffix($duplicatePath) . '/';
-		$data = array_merge($revision->data, array(Fields::TITLE => $restoredTitle));
-
-		FileSystem::copyPageFiles($this->pagePath, $duplicatePath);
-		PageIndex::append(dirname($duplicatePath), $duplicatePath);
-
-		$DataStore = new DataStore($duplicatePath);
-		$DataStore->setState(PublicationState::PUBLISHED, array())
-				  ->setState(PublicationState::DRAFT, $data)
-				  ->save();
+		$this->commit($revision->data);
 
 		Cache::clear();
 
-		$RestoredPage = Page::findByPath($duplicatePath);
-
-		return $RestoredPage;
+		return true;
 	}
 
 	/**
