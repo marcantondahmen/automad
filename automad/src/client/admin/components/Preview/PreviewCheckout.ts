@@ -123,7 +123,6 @@ class PreviewCheckoutComponent extends BasePreviewComponent {
 			{
 				[Attr.api]: HistoryController.restore,
 				[Attr.confirm]: App.text('pageHistoryRestoreConfirm'),
-				[Attr.tooltip]: App.text('pageHistoryRestoreTooltip'),
 			},
 			actions
 		);
@@ -141,7 +140,7 @@ class PreviewCheckoutComponent extends BasePreviewComponent {
 		create(
 			'am-submit',
 			[CSS.formGroupItem, CSS.button],
-			{},
+			{ [Attr.tooltip]: App.text('pageHistoryRestoreTooltip') },
 			form,
 			App.text('pageHistoryRestore')
 		);
