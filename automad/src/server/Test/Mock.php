@@ -178,6 +178,22 @@ class Mock {
 					Data::load('/blocks')
 				),
 				$Shared
+			),
+			'/history' => new Page(
+				array_merge(
+					array(
+						'url' => '/history',
+						':path' => '/history/',
+						':origUrl' => '/history',
+						':parent' => '/',
+						'theme' => $theme,
+						'template' => $template,
+						':level' => 1,
+						':index' => '1.4'
+					),
+					Data::load('/history')
+				),
+				$Shared
 			)
 		);
 	}

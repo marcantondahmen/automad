@@ -319,7 +319,9 @@ class History {
 	 */
 	private static function unserialize(string $serialized): History | bool {
 		if (function_exists('gzcompress') && function_exists('gzuncompress')) {
-			return unserialize(strval(gzuncompress($serialized)));
+			if ($unserialized = @unserialize(strval(gzuncompress($serialized)))) {
+				return $unserialized;
+			}
 		}
 
 		return unserialize($serialized);

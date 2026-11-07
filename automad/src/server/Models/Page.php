@@ -227,6 +227,10 @@ class Page {
 	 * @return bool true on success
 	 */
 	public function checkout(string $hash): bool {
+		if (!Auth::isAuthenticated()) {
+			return false;
+		}
+
 		$History = History::get($this->path);
 		$Revision = $History->getRevision($hash);
 

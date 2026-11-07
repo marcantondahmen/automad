@@ -36,7 +36,6 @@
 namespace Automad\Controllers;
 
 use Automad\App;
-use Automad\Auth\Auth;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\I18n;
@@ -72,7 +71,7 @@ class PageController {
 
 		$I18n->apply($Automad);
 
-		if (($hash = strval(Request::query(PageController::REVISION_PARAM))) && Auth::isAuthenticated()) {
+		if ($hash = strval(Request::query(PageController::REVISION_PARAM))) {
 			$Page = $Automad->Context->get();
 
 			if (!$Page->checkout($hash)) {
