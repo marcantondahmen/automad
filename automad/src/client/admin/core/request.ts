@@ -41,6 +41,7 @@ import {
 	EventName,
 	findFormErrorElement,
 	fire,
+	getComponentTargetContainer,
 	getLogger,
 	listen,
 	notifyFormError,
@@ -366,7 +367,7 @@ class PendingRequests {
 	 */
 	static add() {
 		if (!query('am-spinner')) {
-			create('am-spinner', [], {}, document.body);
+			create('am-spinner', [], {}, getComponentTargetContainer());
 		}
 
 		this.count++;

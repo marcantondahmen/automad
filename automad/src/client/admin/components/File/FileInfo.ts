@@ -41,6 +41,7 @@ import {
 	EventName,
 	FieldTag,
 	FileController,
+	getComponentTargetContainer,
 	html,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
@@ -86,7 +87,7 @@ export class FileInfoComponent extends BaseComponent {
 			'am-modal',
 			[],
 			{ [Attr.destroy]: '' },
-			document.body
+			getComponentTargetContainer()
 		);
 
 		modal.innerHTML = this.renderModal(file);
