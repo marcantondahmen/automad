@@ -53,8 +53,7 @@ const NOTIFICATION_DURATION = 3000;
  */
 interface NavigateEventLike extends Event {
 	hashChange: boolean;
-	sourceElement: Element;
-	destination: { sameDocument: boolean };
+	destination: { sameDocument: boolean; url: string };
 }
 
 /**
@@ -103,8 +102,10 @@ const getPageBackground = (doc: Document | null): string | null => {
 /**
  * Prevent any navigation inside of the preview frame, such as following links
  * (also to the dashboard) or submitting forms. Navigation to anchors on the
- * same page is still allowed. The user is informed using a notification
- * whenever a navigation was actually blocked.
+ * same page is still allowed, as well as navigation to the URL that is assigned
+ * to the frame's `src` attribute by the dashboard, like changing a revision.
+ * The user is informed using a notification whenever a navigation was actually
+ * blocked.
  *
  * The navigation is cancelled by the `navigate` event of the Navigation API, so
  * links that are handled by the page itself, like gallery items, are not
@@ -144,13 +145,12 @@ const blockNavigation = (
 
 	if (win.navigation) {
 		modal.listen(win.navigation, 'navigate', (event) => {
-			const { hashChange, destination, sourceElement } =
-				event as NavigateEventLike;
+			const { hashChange, destination } = event as NavigateEventLike;
 
 			if (
 				hashChange ||
 				destination.sameDocument ||
-				!sourceElement ||
+				destination.url === frame.src ||
 				!event.cancelable
 			) {
 				return;
