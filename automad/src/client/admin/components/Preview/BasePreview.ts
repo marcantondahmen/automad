@@ -214,7 +214,7 @@ export abstract class BasePreviewComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return [Attr.url, Attr.text];
+		return [Attr.url, Attr.text, Attr.icon];
 	}
 
 	/**
@@ -269,7 +269,8 @@ export abstract class BasePreviewComponent extends BaseComponent {
 			'am-icon-text',
 			[],
 			{
-				[Attr.icon]: 'file-earmark-post',
+				[Attr.icon]:
+					this.elementAttributes[Attr.icon] || 'file-earmark-post',
 				[Attr.text]: title || App.text('preview'),
 			},
 			header
