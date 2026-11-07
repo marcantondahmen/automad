@@ -64,6 +64,8 @@ class ViewTest extends TestCase {
 									git config user.email test@test.com
 								</code></pre>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a>
+								<input type="email" placeholder="test@test.com">
+								<textarea placeholder="test@test.com"></textarea>
 							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,
@@ -171,6 +173,8 @@ class ViewTest extends TestCase {
 									git config user.email test@test.com
 								</code></pre>
 								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a>
+								<input type="email" placeholder="test@test.com">
+								<textarea placeholder="test@test.com"></textarea>
 							{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,
