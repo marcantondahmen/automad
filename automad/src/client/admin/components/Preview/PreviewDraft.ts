@@ -78,40 +78,26 @@ class PreviewDraftComponent extends BasePreviewComponent {
 		viewport: HTMLElement,
 		frame: HTMLIFrameElement
 	): Promise<void> {
-		create(
-			'a',
-			[CSS.previewButton],
-			{
-				href: `${App.baseIndex}${url}`,
-				target: '_blank',
-				[Attr.tooltip]: App.text('openInNewTab'),
-			},
-			actions,
-			'<i class="bi bi-box-arrow-up-right"></i>'
-		);
-
 		const isPageRoute = getSlug() === routes.page;
+		const group = create('div', [CSS.formGroup], {}, actions);
 
 		if (!isPageRoute) {
 			const edit = create(
-				'am-link',
-				[CSS.previewButton],
-				{
-					[Attr.target]: `${routes.page}?url=${encodeURIComponent(url)}`,
-					[Attr.tooltip]: App.text('edit'),
-				},
-				null,
-				'<i class="bi bi-pencil-fill"></i>'
+				'am-modal-close',
+				[CSS.button, CSS.formGroupItem],
+				{},
+				group,
+				App.text('edit')
 			);
 
-			// This listener has to be registered before the link is connected,
-			// since the modal has to release the navigation lock before the link
-			// handles the click.
 			modal.listen(edit, 'click', () => {
-				modal.close();
+				App.root.setView(
+					new URL(
+						`${routes.page}?url=${encodeURIComponent(url)}`,
+						`${window.location.origin}${App.dashboardURL}/`
+					)
+				);
 			});
-
-			actions.appendChild(edit);
 		}
 
 		// The form closes the modal after the page has been published successfully.
@@ -126,17 +112,17 @@ class PreviewDraftComponent extends BasePreviewComponent {
 					? EventName.contentPublished
 					: EventName.appStateRequireUpdate,
 			},
-			actions
+			group
 		);
 
 		publishForm.additionalData = { url };
 
 		const publish = create(
 			'am-submit',
-			[CSS.previewButton],
-			{ [Attr.tooltip]: App.text('publish') },
+			[CSS.button, CSS.formGroupItem],
+			{},
 			publishForm,
-			'<i class="bi bi-check-circle"></i>'
+			App.text('publish')
 		);
 
 		if (

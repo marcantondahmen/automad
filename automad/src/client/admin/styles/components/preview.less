@@ -41,30 +41,26 @@
 		align-items: center;
 		gap: @am-flex-gap;
 		padding: @am-modal-padding;
-		padding-right: 0;
+		padding-right: calc(@am-modal-padding - 0.285rem);
 		height: @am-navbar-height;
+		border-bottom: @am-border;
 	}
 
 	&__actions {
 		display: flex;
 		align-items: center;
+		gap: @am-flex-gap;
 		margin-left: auto;
 		max-height: 1rem;
-
-		& .am-f-group {
-			margin-right: 0.6rem;
-		}
 	}
 
 	&__group {
 		display: flex;
 		align-items: stretch;
-		gap: 2px;
 		height: @am-form-height;
-		padding: 2px;
-		margin-right: 1rem;
 		border: @am-form-border;
-		border-radius: calc(@am-form-radius + 2px);
+		border-radius: @am-form-radius;
+		overflow: hidden;
 	}
 
 	&__button {
@@ -72,10 +68,9 @@
 		justify-content: center;
 		align-items: center;
 		min-width: 2.5rem;
-		padding: 0 0.75em;
+		padding: 0 @am-form-padding-x;
 		color: var(--am-clr-text);
 		cursor: pointer;
-		border-radius: @am-form-radius;
 		transition:
 			color 0.2s,
 			background-color 0.2s;
@@ -104,7 +99,6 @@
 		--size: 2.5rem;
 		position: relative;
 		overflow: hidden;
-		padding: 0 4px 1rem 1rem;
 
 		@media (min-height: 850px) {
 			height: 82vh;
@@ -128,16 +122,19 @@
 		&--loaded:before {
 			display: none;
 		}
+
+		html:has(&) {
+			scrollbar-gutter: auto !important;
+		}
 	}
 
 	&__frame {
 		display: block;
 		width: calc(100% / var(--am-preview-scale));
 		height: calc(100% / var(--am-preview-scale));
-		border: @am-border;
-		border-radius: @am-card-radius;
 		transform: scale(var(--am-preview-scale));
 		transform-origin: top left;
+		border: none;
 		overflow: hidden;
 		opacity: 0;
 	}
