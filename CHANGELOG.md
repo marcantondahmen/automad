@@ -1,8 +1,25 @@
 # Changelog
 
-## [v2.0.0-beta.69](https://github.com/marcantondahmen/automad/commit/1b67ec9e98f6aad0c8c47fba7e9fd340149e78c9)
+## [v2.0.0-beta.70](https://github.com/marcantondahmen/automad/commit/05ea67df17be93de4e589afb99c503bf4587bda7)
 
-Sat, 31 Oct 2026 19:45:40 +0100
+Sun, 8 Nov 2026 14:41:05 +0100
+
+### New Features
+
+- add option to render page revisions ([c53b23e14](https://github.com/marcantondahmen/automad/commit/c53b23e14c0e8717519e559f18c4aedfbc8f4cfc))
+- add revision previews for page history ([6f578a7c1](https://github.com/marcantondahmen/automad/commit/6f578a7c1cf9d13e0cb51a5b052a3e29891b736b))
+- improve preview ui ([3cb43c07a](https://github.com/marcantondahmen/automad/commit/3cb43c07aab629c01a7c5333a97a84cf48bb8802))
+
+### Bugfixes
+
+- fix email address rendering in code blocks ([b0ef28733](https://github.com/marcantondahmen/automad/commit/b0ef2873301c84303c5cfda285ba3d76bfb14dc3))
+- fix render error when raw block is empty ([70c105767](https://github.com/marcantondahmen/automad/commit/70c105767d9a865a5ef7f974cfcf50f1cea0f1f6))
+- remove image slideshow breakpoint defaults ([f52f4e051](https://github.com/marcantondahmen/automad/commit/f52f4e051495bca5be9f0ccf0ca5a77e253b46c4))
+- skip email address obfuscation inside input and textarea placeholders ([d117cda63](https://github.com/marcantondahmen/automad/commit/d117cda63c302404a50114cbcffaa7238f62cf9e))
+
+## [v2.0.0-beta.69](https://github.com/marcantondahmen/automad/commit/db67b09c92d6ef9fdad6784b03d87bf44dc4f6fc)
+
+Sat, 31 Oct 2026 19:53:26 +0100
 
 ### New Features
 
