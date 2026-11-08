@@ -67,7 +67,8 @@
 
 	&__item {
 		&:focus,
-		&:active {
+		&:active,
+		&:has(:focus) {
 			position: relative;
 			z-index: 2;
 		}

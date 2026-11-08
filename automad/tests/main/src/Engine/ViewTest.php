@@ -55,6 +55,20 @@ class ViewTest extends TestCase {
 							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,
+			'email_03' => <<< HTML
+						<html lang="en">
+							<head>{$metaTags}
+							{$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head>
+							<body>
+								<pre class="line-numbers"><code>
+									git config user.email test@test.com
+								</code></pre>
+								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a>
+								<input type="email" placeholder="test@test.com">
+								<textarea placeholder="test@test.com"></textarea>
+							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
+						</html>
+						HTML,
 			'resolve_01' => <<< HTML
 						<html lang="en">
 							<head>{$metaTags}{$assets->inPageCSS}{$assets->inPageJS}{$custom->head}</head>
@@ -147,6 +161,20 @@ class ViewTest extends TestCase {
 									<span></span>
 									test<span class="am-at"></span>test<span class="am-dot"></span>com
 								</a>
+							{$assets->mailJS}{$custom->bodyEnd}</body>
+						</html>
+						HTML,
+			'email_03' => <<< HTML
+						<html lang="en">
+							<head>{$metaTags}
+							{$assets->mailCSS}{$custom->head}</head>
+							<body>
+								<pre class="line-numbers"><code>
+									git config user.email test@test.com
+								</code></pre>
+								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a>
+								<input type="email" placeholder="test@test.com">
+								<textarea placeholder="test@test.com"></textarea>
 							{$assets->mailJS}{$custom->bodyEnd}</body>
 						</html>
 						HTML,

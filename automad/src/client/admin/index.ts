@@ -86,7 +86,6 @@ import('./components/Forms/CreateUserForm');
 import('./components/Forms/DeleteUsersForm');
 import('./components/Forms/Form');
 import('./components/Forms/FormError');
-import('./components/Forms/HistoryModalForm');
 import('./components/Forms/InPageForm');
 import('./components/Forms/MailConfigForm');
 import('./components/Forms/PageDataForm');
@@ -153,6 +152,9 @@ import('./components/Pages/System');
 import('./components/Pages/Trash');
 import('./components/Pages/VerifyTotp');
 
+import('./components/Preview/PreviewCheckout');
+import('./components/Preview/PreviewDraft');
+
 import('./components/Publish/ComponentPublishForm');
 import('./components/Publish/DraftList');
 import('./components/Publish/PagePublishForm');
@@ -211,7 +213,6 @@ import('./components/NavItem');
 import('./components/NavTree');
 import('./components/NumberUnitInput');
 import('./components/PageSelectTree');
-import('./components/Preview');
 import('./components/ResponsiveImageSettings');
 import('./components/Root');
 import('./components/Select');

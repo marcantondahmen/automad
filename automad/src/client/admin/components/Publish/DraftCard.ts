@@ -55,7 +55,7 @@ const icons: { [key in DraftType]: string } = {
 
 // Pages are previewed in a modal, all other draft types link to the dashboard.
 const triggers: { [key in DraftType]: { tag: string; attribute: string } } = {
-	page: { tag: 'am-preview', attribute: Attr.url },
+	page: { tag: 'am-preview-draft', attribute: Attr.url },
 	shared: { tag: 'am-link', attribute: Attr.target },
 	components: { tag: 'am-link', attribute: Attr.target },
 } as const;
@@ -127,9 +127,7 @@ export class DraftCardComponent extends BaseComponent {
 				title="${draft.title}"
 			>
 				<div
-					class="${CSS.cardIcon} ${draft.type == 'page'
-						? CSS.cardIconNarrow
-						: ''}"
+					class="${CSS.cardIcon} ${draft.type == 'page' ? CSS.cardIconNarrow : ''}"
 				>
 					<i class="bi bi-${icon}"></i>
 				</div>

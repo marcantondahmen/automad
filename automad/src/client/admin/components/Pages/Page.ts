@@ -43,17 +43,12 @@ import {
 	PageController,
 	routes,
 } from '@/admin/core';
-import { HistoryModalFormComponent } from '@/admin/components/Forms/HistoryModalForm';
 import { Section } from '@/common';
 import { BaseDashboardLayoutComponent } from './BaseDashboardLayout';
 import { renderFileImportModal } from './Partials/FileImportModal';
 
 const renderBreadcrumbs = (): string => {
 	return html`<am-breadcrumbs-page></am-breadcrumbs-page>`;
-};
-
-const renderHistoryModal = (): string => {
-	return html`<am-history-modal-form></am-history-modal-form>`;
 };
 
 const renderMovePageModal = (): string => {
@@ -91,6 +86,7 @@ const renderMovePageModal = (): string => {
 };
 
 const renderDropdown = (): string => {
+	const pageUrl = getPageURL();
 	let subpageItems = '';
 
 	if (getPageURL() != '/') {
@@ -119,7 +115,7 @@ const renderDropdown = (): string => {
 			</am-modal-toggle>
 			<am-copy
 				class="${CSS.dropdownLink} ${CSS.dropdownDivider}"
-				value="${getPageURL()}"
+				value="${pageUrl}"
 			>
 				<am-icon-text
 					${Attr.icon}="clipboard-plus"
@@ -154,18 +150,19 @@ const renderDropdown = (): string => {
 				</span>
 			</span>
 			<div class="${CSS.dropdownItems}">
-				<am-modal-toggle
+				<am-preview-checkout
 					class="${CSS.dropdownLink}"
-					${Attr.modal}="#${HistoryModalFormComponent.MODAL_ID}"
+					${Attr.url}="${App.baseIndex}${pageUrl}"
+					${Attr.text}="${pageUrl}"
 				>
 					<am-icon-text
 						${Attr.icon}="clock-history"
 						${Attr.text}="${App.text('pageHistory')}"
 					></am-icon-text>
-				</am-modal-toggle>
+				</am-preview-checkout>
 				<span class="${CSS.dropdownDivider}"></span>
 				<a
-					href="${App.baseIndex}${getPageURL()}"
+					href="${App.baseIndex}${pageUrl}"
 					class="${CSS.dropdownLink}"
 				>
 					<am-icon-text
@@ -251,14 +248,14 @@ const renderMenu = (): string => {
 					</am-dropdown>
 				</am-switcher>
 				<am-filter placeholder="filterContent"></am-filter>
-				<am-preview
+				<am-preview-draft
 					${Attr.url}="${getPageURL()}"
 					${Attr.text}="$${App.pages[getPageURL()]?.title ?? ''}"
 					class="${CSS.displaySmallNone} ${CSS.menuItem} ${CSS.menuItemIcon}"
 					${Attr.tooltip}="${App.text('preview')}"
 				>
 					<i class="bi bi-eye"></i>
-				</am-preview>
+				</am-preview-draft>
 				${renderDropdown()}
 			</div>
 		</section>
@@ -369,7 +366,6 @@ export class PageComponent extends BaseDashboardLayoutComponent {
 				</div>
 			</section>
 			${renderMovePageModal()}${renderFileImportModal()}
-			${renderHistoryModal()}
 		`;
 	}
 

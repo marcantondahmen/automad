@@ -1,0 +1,13 @@
+{
+    "draft": {
+        "hidden": true,
+        "metaTitle": "History Changed",
+        "slug": "history",
+        "title": "History",
+        "template": "page_full_width_centered",
+        "private": false,
+        ":created": "2026-11-06T11:51:33+00:00",
+        ":automadVersion": "2.0.0-beta.69",
+        ":lastModified": "2026-11-06T11:53:22+00:00"
+    }
+}

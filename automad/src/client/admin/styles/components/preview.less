@@ -32,49 +32,45 @@
  * See LICENSE.md for license information.
  */
 
-am-preview {
-	cursor: zoom-in;
-}
-
 .am-c-preview {
+	cursor: zoom-in;
+
 	&__header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		gap: @am-flex-gap;
 		padding: @am-modal-padding;
-		padding-right: 0;
+		padding-right: calc(@am-modal-padding - 0.285rem);
+		height: @am-navbar-height;
+		border-bottom: @am-border;
 	}
 
 	&__actions {
 		display: flex;
 		align-items: center;
+		gap: @am-flex-gap;
 		margin-left: auto;
 		max-height: 1rem;
 	}
 
 	&__group {
 		display: flex;
-		align-items: center;
-		gap: 2px;
-		padding: 2px;
-		margin-right: 1rem;
+		align-items: stretch;
+		height: @am-form-height;
 		border: @am-form-border;
-		border-radius: calc(@am-form-radius + 2px);
+		border-radius: @am-form-radius;
+		overflow: hidden;
 	}
 
 	&__button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 2.5em;
 		min-width: 2.5rem;
-		padding: 0 0.75em;
+		padding: 0 @am-form-padding-x;
 		color: var(--am-clr-text);
-		font-size: @am-small-font-size;
-		font-weight: @am-small-font-weight;
 		cursor: pointer;
-		border-radius: @am-form-radius;
 		transition:
 			color 0.2s,
 			background-color 0.2s;
@@ -100,14 +96,9 @@ am-preview {
 
 	&__viewport {
 		--am-preview-scale: 1;
-		--size: 2rem;
+		--size: 2.5rem;
 		position: relative;
 		overflow: hidden;
-		padding: 0 4px 1rem 1rem;
-
-		@media (min-height: 850px) {
-			height: 82vh;
-		}
 
 		&:before {
 			content: '';
@@ -118,7 +109,7 @@ am-preview {
 			width: var(--size);
 			height: var(--size);
 			margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
-			border: 2px solid;
+			border: 3px solid var(--am-clr-text-muted);
 			border-left-color: transparent;
 			border-radius: 100%;
 			animation: 0.8s linear 0s infinite @am-animation--spinner;
@@ -127,16 +118,28 @@ am-preview {
 		&--loaded:before {
 			display: none;
 		}
+
+		html:has(&) {
+			scrollbar-gutter: auto !important;
+		}
 	}
 
 	&__frame {
 		display: block;
 		width: calc(100% / var(--am-preview-scale));
 		height: calc(100% / var(--am-preview-scale));
-		border: @am-border;
-		border-radius: @am-card-radius;
 		transform: scale(var(--am-preview-scale));
 		transform-origin: top left;
+		border: none;
 		overflow: hidden;
+		opacity: 0;
+	}
+
+	&__viewport--loaded &__frame {
+		opacity: 1;
+	}
+
+	&__header am-select {
+		width: 18rem;
 	}
 }

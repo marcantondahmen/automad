@@ -35,21 +35,14 @@
 import {
 	App,
 	Attr,
-	Bindings,
 	create,
 	CSS,
-	DraftCollectionController,
-	EventName,
-	getSlug,
+	getComponentTargetContainer,
 	notifyInfo,
-	PageController,
-	routes,
 } from '@/admin/core';
 import { BaseComponent } from '@/admin/components/Base';
-import type { FormComponent } from '@/admin/components/Forms/Form';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
 
-const PREVIEW_ONLY_PARAM = 'preview-only';
 const SCALES = [50, 75, 100] as const;
 const NON_VISUAL_TAGS = ['SCRIPT', 'STYLE', 'LINK', 'TEMPLATE'];
 const NOTIFICATION_DURATION = 3000;
@@ -60,7 +53,7 @@ const NOTIFICATION_DURATION = 3000;
  */
 interface NavigateEventLike extends Event {
 	hashChange: boolean;
-	destination: { sameDocument: boolean };
+	destination: { sameDocument: boolean; url: string };
 }
 
 /**
@@ -109,8 +102,10 @@ const getPageBackground = (doc: Document | null): string | null => {
 /**
  * Prevent any navigation inside of the preview frame, such as following links
  * (also to the dashboard) or submitting forms. Navigation to anchors on the
- * same page is still allowed. The user is informed using a notification
- * whenever a navigation was actually blocked.
+ * same page is still allowed, as well as navigation to the URL that is assigned
+ * to the frame's `src` attribute by the dashboard, like changing a revision.
+ * The user is informed using a notification whenever a navigation was actually
+ * blocked.
  *
  * The navigation is cancelled by the `navigate` event of the Navigation API, so
  * links that are handled by the page itself, like gallery items, are not
@@ -152,7 +147,12 @@ const blockNavigation = (
 		modal.listen(win.navigation, 'navigate', (event) => {
 			const { hashChange, destination } = event as NavigateEventLike;
 
-			if (hashChange || destination.sameDocument || !event.cancelable) {
+			if (
+				hashChange ||
+				destination.sameDocument ||
+				destination.url === frame.src ||
+				!event.cancelable
+			) {
 				return;
 			}
 
@@ -208,25 +208,20 @@ const closeOnEscape = (
 };
 
 /**
- * A trigger component that opens a modal with a scaled preview of a public page.
+ * A base trigger component that opens a modal with a scaled preview of defined page state.
  * The scale is controlled from within the modal. It initially is 100% in windows
  * wider than 1350px and 75% otherwise.
  *
- * @example
- * <am-preview ${Attr.url}="/path/to/page" ${Attr.text}="Page title">
- *     <i class="bi bi-eye"></i>
- * </am-preview>
- *
  * @extends BaseComponent
  */
-class PreviewComponent extends BaseComponent {
+export abstract class BasePreviewComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return [Attr.url, Attr.text];
+		return [Attr.url, Attr.text, Attr.icon];
 	}
 
 	/**
@@ -240,10 +235,14 @@ class PreviewComponent extends BaseComponent {
 				return;
 			}
 
-			const modal = this.createModal(
-				url,
-				this.elementAttributes[Attr.text]
+			const modal = create<ModalComponent>(
+				ModalComponent.TAG_NAME,
+				[],
+				{ [Attr.destroy]: '' },
+				getComponentTargetContainer()
 			);
+
+			this.createDialog(modal, url, this.elementAttributes[Attr.text]);
 
 			setTimeout(() => {
 				modal.open();
@@ -257,25 +256,32 @@ class PreviewComponent extends BaseComponent {
 	 * @param url
 	 * @param title
 	 * @returns the created modal component
+	 * @async
 	 */
-	private createModal(url: string, title: string): ModalComponent {
-		const modal = create<ModalComponent>(
-			'am-modal',
-			[],
-			{ [Attr.destroy]: '' },
-			document.body
-		);
-
-		const dialog = create(
+	private async createDialog(
+		modal: ModalComponent,
+		url: string,
+		title: string
+	): Promise<ModalComponent> {
+		const dialog = create<HTMLElement>(
 			'am-modal-dialog',
 			[CSS.modalDialogFullscreen, CSS.overflowHidden],
 			{},
 			modal
 		);
 
-		// The header is populated before it is connected, since the close button
-		// is appended on connect and has to be the last item.
-		const header = create('div', [CSS.previewHeader]);
+		const header = create('div', [CSS.previewHeader], {}, dialog);
+
+		create(
+			'am-icon-text',
+			[],
+			{
+				[Attr.icon]: this.getIcon(),
+				[Attr.text]: title || App.text('preview'),
+			},
+			header
+		);
+
 		const viewport = create(
 			'div',
 			[CSS.previewViewport, CSS.flexItemGrow],
@@ -283,12 +289,19 @@ class PreviewComponent extends BaseComponent {
 			dialog
 		);
 
+		const actions = this.renderActions(header, modal, viewport);
+
 		const frame = create<HTMLIFrameElement>(
 			'iframe',
 			[CSS.previewFrame],
-			{ src: this.getPreviewSrc(url) },
-			viewport
+			{}
 		);
+
+		await this.init(url, modal, actions, viewport, frame);
+
+		viewport.append(frame);
+
+		this.setScale(viewport, getInitialScale());
 
 		// Block navigation and match the page background. The latter falls back
 		// to transparent in case the page background can't be read.
@@ -306,40 +319,24 @@ class PreviewComponent extends BaseComponent {
 			}
 		});
 
-		create(
-			'am-icon-text',
-			[],
-			{
-				[Attr.icon]: 'file-earmark-post',
-				[Attr.text]: title || App.text('preview'),
-			},
-			header
-		);
-
-		const actions = create('div', [CSS.previewActions], {}, header);
-
-		this.renderActions(actions, modal, viewport, url);
-		dialog.prepend(header);
-
-		this.setScale(viewport, getInitialScale());
-
 		return modal;
 	}
 
 	/**
-	 * Render the header actions.
+	 * Render the main header actions section.
 	 *
-	 * @param actions
+	 * @param header
 	 * @param modal
 	 * @param viewport
-	 * @param url
+	 * @async
 	 */
 	private renderActions(
-		actions: HTMLElement,
+		header: HTMLElement,
 		modal: ModalComponent,
-		viewport: HTMLElement,
-		url: string
-	): void {
+		viewport: HTMLElement
+	): HTMLElement {
+		const actions = create('div', [CSS.previewActions], {}, header);
+
 		const scales = create(
 			'div',
 			[CSS.previewGroup, CSS.displaySmallNone],
@@ -361,73 +358,7 @@ class PreviewComponent extends BaseComponent {
 			});
 		});
 
-		create(
-			'a',
-			[CSS.previewButton],
-			{
-				href: `${App.baseIndex}${url}`,
-				target: '_blank',
-				[Attr.tooltip]: App.text('openInNewTab'),
-			},
-			actions,
-			'<i class="bi bi-box-arrow-up-right"></i>'
-		);
-
-		const isPageRoute = getSlug() === routes.page;
-
-		if (!isPageRoute) {
-			const edit = create(
-				'am-link',
-				[CSS.previewButton],
-				{
-					[Attr.target]: `${routes.page}?url=${encodeURIComponent(url)}`,
-					[Attr.tooltip]: App.text('edit'),
-				},
-				null,
-				'<i class="bi bi-pencil-fill"></i>'
-			);
-
-			// This listener has to be registered before the link is connected,
-			// since the modal has to release the navigation lock before the link
-			// handles the click.
-			modal.listen(edit, 'click', () => {
-				modal.close();
-			});
-
-			actions.appendChild(edit);
-		}
-
-		// The form closes the modal after the page has been published successfully.
-		const publishForm = create<FormComponent>(
-			'am-form',
-			[],
-			{
-				[Attr.api]: isPageRoute
-					? PageController.publish
-					: DraftCollectionController.publishPage,
-				[Attr.event]: isPageRoute
-					? EventName.contentPublished
-					: EventName.appStateRequireUpdate,
-			},
-			actions
-		);
-
-		publishForm.additionalData = { url };
-
-		const publish = create(
-			'am-submit',
-			[CSS.previewButton],
-			{ [Attr.tooltip]: App.text('publish') },
-			publishForm,
-			'<i class="bi bi-check-circle"></i>'
-		);
-
-		if (
-			isPageRoute &&
-			Bindings.get('publicationState')?.value === 'published'
-		) {
-			publish.setAttribute('disabled', '');
-		}
+		const wrapper = create('div', [CSS.previewActions], {}, actions);
 
 		create(
 			'am-modal-close',
@@ -436,20 +367,8 @@ class PreviewComponent extends BaseComponent {
 			actions,
 			'<i class="bi bi-x-lg"></i>'
 		);
-	}
 
-	/**
-	 * Get the iframe source that hides the in-page UI.
-	 *
-	 * @param url
-	 * @returns the source URL
-	 */
-	private getPreviewSrc(url: string): string {
-		const src = new URL(`${App.baseIndex}${url}`, window.location.origin);
-
-		src.searchParams.set(PREVIEW_ONLY_PARAM, '1');
-
-		return src.toString();
+		return wrapper;
 	}
 
 	/**
@@ -472,6 +391,29 @@ class PreviewComponent extends BaseComponent {
 				);
 			});
 	}
-}
 
-customElements.define('am-preview', PreviewComponent);
+	/**
+	 * Initialize the preview.
+	 *
+	 * @param url
+	 * @param modal
+	 * @param actions
+	 * @param viewport
+	 * @param frame
+	 * @async
+	 */
+	protected abstract init(
+		url: string,
+		modal: ModalComponent,
+		actions: HTMLElement,
+		viewport: HTMLElement,
+		frame: HTMLIFrameElement
+	): Promise<void>;
+
+	/**
+	 * The header icon.
+	 *
+	 * @returns the icon name
+	 */
+	protected abstract getIcon(): string;
+}

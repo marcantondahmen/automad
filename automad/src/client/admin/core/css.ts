@@ -59,6 +59,7 @@ export const enum CSS {
 	buttonPrimary = 'am-e-button--primary',
 	buttonIcon = 'am-e-button--icon',
 	buttonLoading = 'am-e-button--loading',
+	buttonOutline = 'am-e-button--outline',
 
 	card = 'am-c-card',
 	cardHover = 'am-c-card--hover',
@@ -372,6 +373,7 @@ export const enum CSS {
 	platformSelectIcon = 'am-f-platform-select__icon',
 	platformSelectActiveIcon = 'am-f-platform-select__active-icon',
 
+	preview = 'am-c-preview',
 	previewHeader = 'am-c-preview__header',
 	previewActions = 'am-c-preview__actions',
 	previewButton = 'am-c-preview__button',

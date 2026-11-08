@@ -42,6 +42,7 @@ import {
 	CSS,
 	EventName,
 	fire,
+	getComponentTargetContainer,
 	ImageController,
 } from '@/admin/core';
 import { ModalComponent } from '@/admin/components/Modal/Modal';
@@ -91,7 +92,7 @@ class FileRobotComponent extends BaseComponent {
 			'am-modal',
 			[],
 			{ [Attr.destroy]: '', [Attr.noEsc]: '' },
-			document.body
+			getComponentTargetContainer()
 		);
 
 		const dialog = create(

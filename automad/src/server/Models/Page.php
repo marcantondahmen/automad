@@ -221,6 +221,41 @@ class Page {
 	}
 
 	/**
+	 * Checkout a revision for a given hash from the page history.
+	 *
+	 * @param string $hash
+	 * @return bool true on success
+	 */
+	public function checkout(string $hash): bool {
+		if (!Auth::isAuthenticated()) {
+			return false;
+		}
+
+		$History = History::get($this->path);
+		$Revision = $History->getRevision($hash);
+
+		if (!$Revision) {
+			return false;
+		}
+
+		$meta = array_intersect_key(
+			$this->data,
+			array_flip(
+				array(
+					Fields::PATH,
+					Fields::URL,
+					Fields::PAGE_INDEX,
+					Fields::PARENT
+				)
+			)
+		);
+
+		$this->data = array_merge($Revision->data, $meta);
+
+		return true;
+	}
+
+	/**
 	 * Get the dashboard view for a page.
 	 *
 	 * @return string

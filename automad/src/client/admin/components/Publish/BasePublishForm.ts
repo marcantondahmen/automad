@@ -143,7 +143,7 @@ export abstract class BasePublishFormComponent extends BaseComponent {
 
 		this.publishButton = create(
 			'am-submit',
-			[CSS.button],
+			[CSS.button, CSS.buttonOutline],
 			{ disabled: '' },
 			publishForm,
 			App.text('publish')

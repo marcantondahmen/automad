@@ -163,14 +163,7 @@ export class ImageSlideshowBlock extends BaseBlock<ImageSlideshowBlockData> {
 			effect: data.effect ?? 'slide',
 			hideControls: data.hideControls ?? false,
 			delay: data.delay ?? 3000,
-			breakpoints: data.breakpoints ?? {
-				600: {
-					slidesPerView: 2,
-				},
-				900: {
-					slidesPerView: 3,
-				},
-			},
+			breakpoints: data.breakpoints ?? {},
 		};
 	}
 
