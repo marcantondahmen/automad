@@ -47,6 +47,8 @@ const SCALES = [50, 75, 100] as const;
 const NON_VISUAL_TAGS = ['SCRIPT', 'STYLE', 'LINK', 'TEMPLATE'];
 const NOTIFICATION_DURATION = 3000;
 
+export const PREVIEW_ONLY_PARAM = 'preview-only';
+
 /**
  * The parts of the Navigation API's `NavigateEvent` that are used here
  * (not yet part of the TypeScript DOM typings).

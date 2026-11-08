@@ -44,11 +44,9 @@ import {
 	PageController,
 	routes,
 } from '@/admin/core';
-import { BasePreviewComponent } from './BasePreview';
+import { BasePreviewComponent, PREVIEW_ONLY_PARAM } from './BasePreview';
 import { ModalComponent } from '../Modal/Modal';
 import { FormComponent } from '../Forms/Form';
-
-const PREVIEW_ONLY_PARAM = 'preview-only';
 
 /**
  * A trigger component that opens a modal with a scaled preview of a public page.
