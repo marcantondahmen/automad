@@ -61,7 +61,7 @@ export const inPage = ({ main }: Partials): string => {
 								class="${CSS.displaySmallNone}"
 							></am-undo-buttons>
 							<am-submit
-								class="${CSS.button}"
+								class="${CSS.button} ${CSS.buttonOutline}"
 								${Attr.form}="${InPageController.edit}"
 								disabled
 							>

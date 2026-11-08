@@ -97,6 +97,12 @@
 		--border-hover: var(--am-clr-background-primary-hover);
 	}
 
+	&--outline {
+		&:not([disabled]) {
+			border-color: var(--am-clr-border-active);
+		}
+	}
+
 	&--icon {
 		width: @am-form-height;
 		min-width: @am-form-height;

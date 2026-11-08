@@ -59,6 +59,7 @@ export const enum CSS {
 	buttonPrimary = 'am-e-button--primary',
 	buttonIcon = 'am-e-button--icon',
 	buttonLoading = 'am-e-button--loading',
+	buttonOutline = 'am-e-button--outline',
 
 	card = 'am-c-card',
 	cardHover = 'am-c-card--hover',
