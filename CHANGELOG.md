@@ -1,8 +1,16 @@
 # Changelog
 
-## [v2.0.0-beta.70](https://github.com/marcantondahmen/automad/commit/05ea67df17be93de4e589afb99c503bf4587bda7)
+## [v2.0.0-beta.71](https://github.com/marcantondahmen/automad/commit/e169a0bf75fb9ae8f0156ba0a5a1061b53d60299)
 
-Sun, 8 Nov 2026 14:41:05 +0100
+Sun, 8 Nov 2026 16:51:35 +0100
+
+### Bugfixes
+
+- hide in-page dock in checkout previews ([e169a0bf7](https://github.com/marcantondahmen/automad/commit/e169a0bf75fb9ae8f0156ba0a5a1061b53d60299))
+
+## [v2.0.0-beta.70](https://github.com/marcantondahmen/automad/commit/4d6e8689ad2951faf89c20f2fa1fa272d3b90a0f)
+
+Sun, 8 Nov 2026 14:45:21 +0100
 
 ### New Features
 
