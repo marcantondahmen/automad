@@ -68,7 +68,7 @@ const systemInfo = (): string => {
 			</div>
 			<div class="${CSS.displaySmall}">
 				<a href="${App.baseIndex || '/'}" class="${CSS.button}">
-					${App.text('inPageEdit')}
+					${App.text('viewSite')}
 				</a>
 			</div>
 			<div class="${CSS.formGroup} ${CSS.displaySmallNone}">
@@ -76,7 +76,7 @@ const systemInfo = (): string => {
 					href="${App.baseIndex || '/'}"
 					class="${CSS.button} ${CSS.formGroupItem}"
 				>
-					${App.text('inPageEdit')}
+					${App.text('viewSite')}
 				</a>
 				<am-modal-toggle
 					${Attr.modal}="#am-server-info-modal"
