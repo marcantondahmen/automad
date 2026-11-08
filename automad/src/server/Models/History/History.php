@@ -134,14 +134,14 @@ class History {
 
 		$this->revisions[$Revision->hash] = $Revision;
 
+		$this->everyFiveMinutes[date('Y-m-d-H-') . sprintf('%02d', intdiv(intval(date('i')), 5) * 5)] = $Revision->hash;
 		$this->everyFiveMinutes = $this->sliceRevisions($this->everyFiveMinutes);
-		$this->everyFiveMinutes[date('Y-m-d-H-') . strval(intval(round(intval(date('i')) / 5)) * 5)] = $Revision->hash;
-		$this->hourly = $this->sliceRevisions($this->hourly);
 		$this->hourly[date('Y-m-d-H')] = $Revision->hash;
-		$this->daily = $this->sliceRevisions($this->daily);
+		$this->hourly = $this->sliceRevisions($this->hourly);
 		$this->daily[date('Y-m-d')] = $Revision->hash;
-		$this->monthly = $this->sliceRevisions($this->monthly);
+		$this->daily = $this->sliceRevisions($this->daily);
 		$this->monthly[date('Y-m')] = $Revision->hash;
+		$this->monthly = $this->sliceRevisions($this->monthly);
 
 		$this->garbageCollectRevisions();
 
