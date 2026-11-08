@@ -43,7 +43,7 @@ import {
 	HistoryController,
 	requestApi,
 } from '@/admin/core';
-import { BasePreviewComponent } from './BasePreview';
+import { BasePreviewComponent, PREVIEW_ONLY_PARAM } from './BasePreview';
 import { ModalComponent } from '../Modal/Modal';
 import { SelectComponentOption } from '../Select';
 
@@ -154,6 +154,7 @@ class PreviewCheckoutComponent extends BasePreviewComponent {
 			);
 
 			src.searchParams.set(REVISION_PARAM, revisionSelect.value);
+			src.searchParams.set(PREVIEW_ONLY_PARAM, '1');
 			frame.src = src.toString();
 		};
 
