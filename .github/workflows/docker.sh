@@ -7,6 +7,7 @@ distDir=$baseDir/dist
 dockerDir=$baseDir/docker
 dockerLiteSpeedDir=$baseDir/docker-litespeed
 name=automad/automad
+platforms=linux/amd64,linux/arm64
 
 echo '---------------------------------------------------------------------------'
 echo "Cloning dist repository ..."
@@ -27,13 +28,15 @@ echo "Cloning LiteSpeed docker repository ..."
 	git clone https://github.com/automadcms/automad-docker-litespeed.git $dockerLiteSpeedDir
 	cd $dockerLiteSpeedDir
 
-	echo "Building LiteSpeed image ..."
+	echo "Building and pushing LiteSpeed image ..."
 
-	docker build \
+	docker buildx build \
+		--platform $platforms \
 		--build-arg version=$version \
 		-t $name:${version}-litespeed \
 		-t $name:${major}-litespeed \
-		-t $name:latest-litespeed .
+		-t $name:latest-litespeed \
+		--push .
 )
 
 echo '---------------------------------------------------------------------------'
@@ -43,23 +46,13 @@ echo "Cloning Nginx docker repository ..."
 	git clone https://github.com/automadcms/automad-docker.git $dockerDir
 	cd $dockerDir
 
-	echo "Building Nginx image ..."
+	echo "Building and pushing Nginx image ..."
 
-	docker build \
+	docker buildx build \
+		--platform $platforms \
 		--build-arg version=$version \
 		-t $name:$version \
 		-t $name:$major \
-		-t $name:latest .
+		-t $name:latest \
+		--push .
 )
-
-docker images
-
-echo '---------------------------------------------------------------------------'
-echo "Pushing ..."
-
-docker push $name:${version}-litespeed
-docker push $name:${major}-litespeed
-docker push $name:latest-litespeed
-docker push $name:$version
-docker push $name:$major
-docker push $name:latest
