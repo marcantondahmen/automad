@@ -166,8 +166,8 @@ const renderDropdown = (): string => {
 					class="${CSS.dropdownLink}"
 				>
 					<am-icon-text
-						${Attr.icon}="pencil"
-						${Attr.text}="${App.text('inPageEdit')}"
+						${Attr.icon}="window-desktop"
+						${Attr.text}="${App.text('viewPage')}"
 					></am-icon-text>
 				</a>
 				${subpageItems}

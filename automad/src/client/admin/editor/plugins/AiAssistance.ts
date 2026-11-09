@@ -66,10 +66,7 @@ export class AiAssistance extends BasePlugin {
 					target.closest(EditorJSComponent.TAG_NAME) ===
 						this.component
 				) {
-					const sel = window.getSelection();
-					const selectedRange = sel.rangeCount
-						? sel.getRangeAt(0).cloneRange()
-						: null;
+					const selectedRange = this.getEditableRange();
 
 					const runtimeState: AiRuntimeState = {
 						plugin: this,
@@ -78,8 +75,9 @@ export class AiAssistance extends BasePlugin {
 							this.editor.blockSelection.selectedBlocks,
 						selectedRange,
 						selectionDisplay: selectedRange?.toString() || '',
-						lastFocusedBlockIndex:
-							this.editor.blocks.getCurrentBlockIndex(),
+						lastFocusedBlockIndex: target.closest('.ce-block')
+							? this.editor.blocks.getCurrentBlockIndex()
+							: -1,
 					};
 
 					if (runtimeState.selectedBlocks.length > 0) {
@@ -93,5 +91,42 @@ export class AiAssistance extends BasePlugin {
 				}
 			})
 		);
+	}
+
+	/**
+	 * Get the current selection range, but only in case it is located
+	 * within a single editable element of a block of this editor.
+	 * Ranges that extend to other UI elements such as field labels are ignored.
+	 *
+	 * @return the range or null
+	 */
+	private getEditableRange(): Range | null {
+		const sel = window.getSelection();
+
+		if (!sel.rangeCount) {
+			return null;
+		}
+
+		const range = sel.getRangeAt(0);
+
+		const getEditable = (node: Node): HTMLElement | null => {
+			const element =
+				node instanceof HTMLElement ? node : node.parentElement;
+
+			return element?.closest('[contenteditable="true"]') ?? null;
+		};
+
+		const editable = getEditable(range.startContainer);
+
+		if (
+			!editable ||
+			editable !== getEditable(range.endContainer) ||
+			!editable.closest('.ce-block') ||
+			editable.closest(EditorJSComponent.TAG_NAME) !== this.component
+		) {
+			return null;
+		}
+
+		return range.cloneRange();
 	}
 }

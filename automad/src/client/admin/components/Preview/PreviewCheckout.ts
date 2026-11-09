@@ -81,7 +81,7 @@ class PreviewCheckoutComponent extends BasePreviewComponent {
 			url: getPageURL(),
 		});
 
-		if (!data) {
+		if ((data?.length || 0) < 2) {
 			const alert = create(
 				'div',
 				[CSS.previewViewport, CSS.previewViewportLoaded],

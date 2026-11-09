@@ -73,8 +73,8 @@ const inPageData = (): JumpbarItemData[] => {
 	return [
 		{
 			external: App.baseIndex || '/',
-			value: App.text('inPageEdit'),
-			title: App.text('inPageEdit'),
+			value: App.text('viewSite'),
+			title: App.text('viewSite'),
 			icon: 'window-desktop',
 			cls: [CSS.modalJumpbarDivider],
 		},
