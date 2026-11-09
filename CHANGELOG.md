@@ -1,8 +1,19 @@
 # Changelog
 
-## [v2.0.0-beta.71](https://github.com/marcantondahmen/automad/commit/e169a0bf75fb9ae8f0156ba0a5a1061b53d60299)
+## [v2.0.0-beta.72](https://github.com/marcantondahmen/automad/commit/0a27d6105ad99cf5d5fe043e778d222c2461d79a)
 
-Sun, 8 Nov 2026 16:51:35 +0100
+Mon, 9 Nov 2026 20:21:06 +0100
+
+### Bugfixes
+
+- add support for running docker containers in colima on macos ([0114451f1](https://github.com/marcantondahmen/automad/commit/0114451f1403d431990483c8c2db2ffbc082bf20))
+- fix selections in ai assistant ([fd98d69b5](https://github.com/marcantondahmen/automad/commit/fd98d69b527bec38e600618cf83e5aa551677850))
+- fix slicing and sorting of revisions in page history ([ade979323](https://github.com/marcantondahmen/automad/commit/ade9793234db07d3540bd3519e81109fa87e7bcc))
+- show alert in revision checkout preview if a page has less than two revisions ([786f62c83](https://github.com/marcantondahmen/automad/commit/786f62c83cc4fb50af918ec0311aad5ac00b165f))
+
+## [v2.0.0-beta.71](https://github.com/marcantondahmen/automad/commit/446f25e3ebcd602a9ad6203e9ba64cf721253c11)
+
+Sun, 8 Nov 2026 16:53:03 +0100
 
 ### Bugfixes
 
