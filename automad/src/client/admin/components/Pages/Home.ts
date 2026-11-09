@@ -82,13 +82,15 @@ const systemInfo = (): string => {
 					${Attr.modal}="#am-server-info-modal"
 					class="${CSS.button} ${CSS.formGroupItem}"
 				>
-					${App.text('serverInfo')}
+					${App.text('serverInfoButton')}
 				</am-modal-toggle>
 			</div>
 		</div>
 		<am-modal id="am-server-info-modal">
 			<am-modal-dialog>
-				<am-modal-header>${App.text('serverInfo')}</am-modal-header>
+				<am-modal-header
+					>${App.text('serverInfoTitle')}</am-modal-header
+				>
 				<am-modal-body>
 					<am-server-info></am-server-info>
 				</am-modal-body>
