@@ -208,7 +208,14 @@ export class AiRuntime {
 
 		const { component } = this.state;
 
-		this.setState(null);
+		this.setState({
+			...this.state,
+			selectedBlocks: [],
+			selectedRange: null,
+			selectionDisplay: '',
+			lastFocusedBlockIndex:
+				component.editor.blocks.getCurrentBlockIndex(),
+		});
 
 		setTimeout(() => {
 			fire('input', component);
@@ -349,17 +356,16 @@ class AiContentManager {
 	 * @async
 	 */
 	async insertBlocks(content: string): Promise<void> {
-		if (this.state.lastFocusedBlockIndex !== null) {
-			this.state.component.editor.caret.setToBlock(
-				this.state.lastFocusedBlockIndex
-			);
-		} else {
-			this.state.component.editor.caret.setToLastBlock();
-		}
+		const { blocks, caret, paste } = this.state.component.editor;
+		const index =
+			this.state.lastFocusedBlockIndex >= 0
+				? this.state.lastFocusedBlockIndex + 1
+				: blocks.getBlocksCount();
 
-		this.state.component.editor.blocks.insert();
+		blocks.insert(undefined, undefined, undefined, index);
+		caret.setToBlock(index);
 
-		await this.state.component.editor.paste.processText(content, true);
+		await paste.processText(content, true);
 	}
 
 	/**
