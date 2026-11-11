@@ -1,6 +1,6 @@
 # Reporting Vulnerabilities
 
-Security should be taken seriously whenever private data and/or the digital distribution of any data is at play. Automad is no exception here. If you believe you have discovered a security vulnerability, please read this document in its entirety before submitting a report. Security vulnerabilities must be [reported privately](https://github.com/marcantondahmen/automad/security/advisories/new). Do not open a public issue.
+Security should be taken seriously whenever private data and/or the digital distribution of any data is at play. Automad is no exception here. If you believe you have discovered a security vulnerability, please read this document in its entirety before submitting a report. Security vulnerabilities must be [reported privately](https://automad.org/get-in-touch). Do not open a public issue.
 
 ---
 

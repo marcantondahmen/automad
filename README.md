@@ -81,7 +81,7 @@ In case you are interested in contributing, the following types of contribution 
 - Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
 - Giving feedback and helping to grow a [community](https://github.com/orgs/automadcms/discussions)
 - Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
-- Reporting [security vulnerabilities](https://github.com/marcantondahmen/automad/security)
+- Reporting [security vulnerabilities](https://github.com/marcantondahmen/automad/security/policy)
 
 ## Text Editors Plugins
 
