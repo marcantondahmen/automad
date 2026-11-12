@@ -10,6 +10,7 @@ localhost:80 {
 
 	# Mirror the blocked files of the .htaccess files. Like in the .htaccess, only existing files are blocked,
 	# so that page URLs such as "/blog/data" are still passed on to Automad.
+	# Blocked files are rewritten to "/_", which never exists, so that Automad renders its 404 page.
 	@denied {
 		file
 		expression <<CEL
@@ -23,7 +24,7 @@ localhost:80 {
 			CEL
 	}
 
-	respond @denied 404
+	rewrite @denied /index.php?/_
 
 	# Only the front controller is executed.
 	@php {
