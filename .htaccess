@@ -111,6 +111,7 @@ RewriteCond %{REQUEST_FILENAME} /(package|package-lock|composer)\.(json|lock)$ [
 RewriteCond %{REQUEST_FILENAME} /data$ [OR]
 RewriteCond %{REQUEST_FILENAME} /index$ [OR]
 RewriteCond %{REQUEST_FILENAME} /\.history$ [OR]
+RewriteCond %{REQUEST_FILENAME} /shared/components$ [OR]
 
 # Redirect trash.
 RewriteCond %{REQUEST_FILENAME} /\.trash/ [OR]
@@ -125,7 +126,7 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 
 # Redirect to "_" which will display the 404 page.
-RewriteRule ^(.*)$ %2index.php/_ [L]
+RewriteRule ^(.*)$ %2index.php?/_ [QSA,L]
 
 
 

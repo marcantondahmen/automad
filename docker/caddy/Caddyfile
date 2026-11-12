@@ -14,6 +14,7 @@ localhost:80 {
 			path_regexp(r'(?i)^/(config|lib)/')
 			|| path_regexp(r'(?i)^/automad/(console$|src/|lang/)')
 			|| path_regexp(r'(?i)/(data|index)$')
+			|| path_regexp(r'(?i)/shared/components$')
 			|| path_regexp(r'(?i)/\.')
 			|| path_regexp(r'(?i)/(packages|vendor)/.*\.(ts|less|md|sh|xml|json|lock)$')
 			|| path_regexp(r'(?i)/vendor/.*(readme|license)')
