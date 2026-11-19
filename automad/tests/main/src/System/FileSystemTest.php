@@ -21,4 +21,13 @@ class FileSystemTest extends TestCase {
 		/** @disregard */
 		$this->assertSame(0700, fileperms($dir) & 0777);
 	}
+
+	public function testTmpDirHasNoSharedParent() {
+		$dir = FileSystem::getTmpDir();
+
+		/** @disregard */
+		$this->assertStringStartsWith('automad-', basename($dir));
+		/** @disregard */
+		$this->assertContains(dirname($dir), array('/tmp', rtrim(sys_get_temp_dir(), '/')));
+	}
 }

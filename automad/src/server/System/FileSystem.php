@@ -268,7 +268,11 @@ class FileSystem {
 	 * @return string the generated path
 	 */
 	public static function getTmpDir(): string {
-		$dir = self::getSystemTmpDir() . '/automad/' . basename(AM_BASE_DIR) . '-' . sha1(AM_BASE_DIR);
+		// The directory is created directly inside the system temp directory instead of a shared parent.
+		// Since the system temp directory is sticky, only its owner can rename or delete the directory.
+		// A parent that is shared between installations would be owned by the first user that created it,
+		// who could then swap the directories of other users.
+		$dir = self::getSystemTmpDir() . '/automad-' . basename(AM_BASE_DIR) . '-' . sha1(AM_BASE_DIR);
 
 		try {
 			self::makeDir($dir);
@@ -278,8 +282,13 @@ class FileSystem {
 
 		// The temp directory contains non-public data and must only be accessible by the PHP user.
 		// Since only the owner can change permissions, a directory that was created by another user
-		// can't be made private and is refused. Windows doesn't support Unix permissions.
+		// can't be made private and is refused. The same applies to symlinks that could point to any
+		// other directory. Windows doesn't support Unix permissions.
 		if (PHP_OS_FAMILY !== 'Windows') {
+			if (is_link($dir)) {
+				throw new Exception('The system temp directory can\'t be made private &mdash; please define <code>AM_DIR_TMP</code>.');
+			}
+
 			if ((intval(fileperms($dir)) & 0777) !== 0700) {
 				@chmod($dir, 0700);
 				clearstatcache();
