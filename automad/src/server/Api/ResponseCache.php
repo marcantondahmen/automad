@@ -75,7 +75,9 @@ class ResponseCache {
 		$Cache = new Cache();
 		$siteMTime = $Cache->getSiteMTime();
 		$hash = sha1(AM_VERSION . serialize($_GET) . serialize($_POST) . serialize($_SESSION));
-		$path = strtolower(AM_DIR_TMP . AM_REQUEST . '/' . $hash);
+		// Only lowercase the request, since lowercasing the temp directory as well would move the cache
+		// out of the private directory in case its path contains uppercase characters.
+		$path = AM_DIR_TMP . strtolower(AM_REQUEST) . '/' . $hash;
 		$responseMTime = is_readable($path) ? intval(filemtime($path)) : 0;
 
 		Debug::log($path, 'Response caching path');
