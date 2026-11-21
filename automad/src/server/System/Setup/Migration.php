@@ -39,6 +39,7 @@ use Automad\Core\Debug;
 use Automad\System\Setup\Migrations\AbstractMigration;
 use Automad\System\Setup\Migrations\ConfigPhpStrings;
 use Automad\System\Setup\Migrations\EncryptConfigFiles;
+use Automad\System\Setup\Migrations\RemoveStaticSitemap;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -69,7 +70,8 @@ class Migration {
 	public function __construct(?array $migrations = null) {
 		$this->migrations = $migrations ?? array(
 			new ConfigPhpStrings(AM_BASE_DIR . '/config'),
-			new EncryptConfigFiles(AM_BASE_DIR . '/config')
+			new EncryptConfigFiles(AM_BASE_DIR . '/config'),
+			new RemoveStaticSitemap(AM_BASE_DIR)
 		);
 	}
 
