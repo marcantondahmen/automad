@@ -37,7 +37,6 @@ namespace Automad\Models;
 
 use Automad\Auth\Auth;
 use Automad\Core\PageIndex;
-use Automad\Core\Sitemap;
 use Automad\Core\Str;
 use Automad\Routes;
 use Automad\System\FileSystem;
@@ -84,8 +83,6 @@ class PageCollection {
 		$this->includePrivate = Auth::isAuthenticated();
 
 		$this->collectPages();
-
-		new Sitemap($this->collection);
 	}
 
 	/**

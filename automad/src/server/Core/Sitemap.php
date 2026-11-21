@@ -36,14 +36,15 @@
 namespace Automad\Core;
 
 use Automad\Api\RequestHandler;
-use Automad\Auth\Auth;
+use Automad\Models\Page;
 use Automad\System\Fields;
-use Automad\System\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Sitemap class handles the generating process for a site's sitemap.xml.
+ * The Sitemap class generates the content of a site's sitemap.xml and robots.txt.
+ * Both are generated on request in order to always use the host of the actual request
+ * and to not persist any request data on disk.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2014-2026 by Marc Anton Dahmen - https://marcdahmen.de
@@ -51,58 +52,53 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Sitemap {
 	/**
-	 * The constructor verifies, whether sitemap.xml can be written and initiates the generating process.
+	 * Generate the robots.txt.
 	 *
-	 * @param array $collection
+	 * @return string
 	 */
-	public function __construct(array $collection) {
-		if (!Auth::isAuthenticated()) {
-			$this->generate($collection);
-		}
-	}
-
-	/**
-	 * Generate the XML for the sitemap and write sitemap.xml.
-	 *
-	 * @param array $collection
-	 */
-	private function generate(array $collection): void {
-		if (!$base = AM_BASE_SITEMAP) {
-			$base = AM_SERVER . AM_BASE_INDEX;
-		}
-
-		$sitemap = AM_BASE_DIR . '/sitemap.xml';
-		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' .
-				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-
-		foreach ($collection as $Page) {
-			// Only include "real" URLs and not aliases.
-			if ($Page->url === $Page->get(Fields::ORIG_URL)) {
-				$xml .= "<url><loc>{$base}{$Page->url}</loc></url>";
-			}
-		}
-
-		$xml .= '</urlset>';
-
-		if (FileSystem::write($sitemap, $xml)) {
-			Debug::log($sitemap, 'Successfully generated');
-		}
-
-		$server = AM_SERVER;
-		$robots = AM_BASE_DIR . '/robots.txt';
+	public function getRobots(): string {
+		$sitemap = $this->getBase() . '/sitemap.xml';
 		$dashboard = AM_PAGE_DASHBOARD;
 		$api = RequestHandler::API_BASE;
-		$txt = <<< TXT
+
+		return <<< TXT
 			User-agent: *
 			Disallow: $dashboard/*
 			Disallow: $api/*
 			Allow: /
 
-			Sitemap: $server/sitemap.xml
+			Sitemap: $sitemap
 			TXT;
+	}
 
-		if (FileSystem::write($robots, $txt)) {
-			Debug::log($robots, 'Successfully generated');
+	/**
+	 * Generate the sitemap.xml for all public pages of a collection.
+	 *
+	 * @param array<Page> $collection
+	 * @return string
+	 */
+	public function getXml(array $collection): string {
+		$base = $this->getBase();
+		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' .
+				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+		foreach ($collection as $Page) {
+			// Only include "real" URLs and not aliases and skip private pages
+			// that are part of the collection for authenticated users.
+			if ($Page->url === $Page->get(Fields::ORIG_URL) && !$Page->private) {
+				$xml .= "<url><loc>{$base}{$Page->url}</loc></url>";
+			}
 		}
+
+		return $xml . '</urlset>';
+	}
+
+	/**
+	 * Get the base URL for all URLs in the sitemap.xml and robots.txt.
+	 *
+	 * @return string
+	 */
+	private function getBase(): string {
+		return AM_BASE_SITEMAP ?: AM_SERVER . AM_BASE_INDEX;
 	}
 }

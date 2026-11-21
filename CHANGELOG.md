@@ -1,8 +1,18 @@
 # Changelog
 
-## [v2.0.0-beta.72](https://github.com/marcantondahmen/automad/commit/0a27d6105ad99cf5d5fe043e778d222c2461d79a)
+## [v2.0.0-beta.73](https://github.com/marcantondahmen/automad/commit/1df2e6c9ec3a6c9b440fa036bd533ef4e72f25c8)
 
-Mon, 9 Nov 2026 20:21:06 +0100
+Sat, 21 Nov 2026 13:42:12 +0100
+
+### Bugfixes
+
+- fix host header injection in sitemap.xml and robots.txt generation ([1df2e6c9e](https://github.com/marcantondahmen/automad/commit/1df2e6c9ec3a6c9b440fa036bd533ef4e72f25c8))
+- fix possibility that co-tenants can read or write tmp files when they own the parent directory ([827d2c749](https://github.com/marcantondahmen/automad/commit/827d2c7491606f3ba0c4ba3a4deb69a849831c4f))
+- fix response cache path for tmp dirs that contain uppercase characters ([ee86ff295](https://github.com/marcantondahmen/automad/commit/ee86ff295cff1b9ddb2a789f585c27cf383a0851))
+
+## [v2.0.0-beta.72](https://github.com/marcantondahmen/automad/commit/255f44a71f33d8e795a40a36d88f395926a93b9a)
+
+Mon, 9 Nov 2026 20:26:46 +0100
 
 ### Bugfixes
 

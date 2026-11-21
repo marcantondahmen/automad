@@ -211,7 +211,9 @@ class PasswordResetCode {
 
 		if ($contents = file_get_contents($path)) {
 			try {
-				return unserialize($contents);
+				$PasswordResetCode = unserialize($contents, array('allowed_classes' => array(PasswordResetCode::class)));
+
+				return $PasswordResetCode instanceof PasswordResetCode ? $PasswordResetCode : null;
 			} catch (\Throwable $th) {
 				self::reset($username);
 			}

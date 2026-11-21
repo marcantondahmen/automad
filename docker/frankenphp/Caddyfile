@@ -10,12 +10,14 @@ localhost:80 {
 
 	# Mirror the blocked files of the .htaccess files. Like in the .htaccess, only existing files are blocked,
 	# so that page URLs such as "/blog/data" are still passed on to Automad.
+	# Blocked files are rewritten to "/_", which never exists, so that Automad renders its 404 page.
 	@denied {
 		file
 		expression <<CEL
 			path_regexp(r'(?i)^/(config|lib)/')
 			|| path_regexp(r'(?i)^/automad/(console$|src/|lang/)')
 			|| path_regexp(r'(?i)/(data|index)$')
+			|| path_regexp(r'(?i)/shared/components$')
 			|| path_regexp(r'(?i)/\.')
 			|| path_regexp(r'(?i)/(packages|vendor)/.*\.(ts|less|md|sh|xml|json|lock)$')
 			|| path_regexp(r'(?i)/vendor/.*(readme|license)')
@@ -23,7 +25,7 @@ localhost:80 {
 			CEL
 	}
 
-	respond @denied 404
+	rewrite @denied /index.php?/_
 
 	# Only the front controller is executed.
 	@php {

@@ -38,7 +38,7 @@ Follow this [guide](https://automad.org/getting-started#composer) to finish the 
 
 ### Docker
 
-It is also possible to run Automad in a [Docker](https://github.com/automadcms/automad-docker) container including **Nginx** and **PHP 8.3**.
+It is also possible to run Automad in a [Docker](https://github.com/automadcms/automad-docker) container including **Nginx** and **PHP**.
 
 ```bash
 docker run -dp 80:80 -v ./app:/app --name mysite automad/automad:v2
@@ -81,7 +81,7 @@ In case you are interested in contributing, the following types of contribution 
 - Improving [language packs](https://github.com/automadcms/automad-language-packs) by fixing translation errors or adding new languages
 - Giving feedback and helping to grow a [community](https://github.com/orgs/automadcms/discussions)
 - Reporting bugs or requesting features at [GitHub](https://github.com/marcantondahmen/automad/issues)
-- Reporting [security vulnerabilities](https://github.com/marcantondahmen/automad/security)
+- Reporting [security vulnerabilities](https://github.com/marcantondahmen/automad/security/policy)
 
 ## Text Editors Plugins
 

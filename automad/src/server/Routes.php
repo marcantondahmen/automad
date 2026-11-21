@@ -43,6 +43,7 @@ use Automad\Controllers\FeedController;
 use Automad\Controllers\ImageController;
 use Automad\Controllers\McpController;
 use Automad\Controllers\PageController;
+use Automad\Controllers\SitemapController;
 use Automad\Core\Debug;
 use Automad\Core\Feed;
 use Automad\Core\I18n;
@@ -106,6 +107,7 @@ class Routes {
 		self::registerApiRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerDashboardRoutes($Router, $isAuthenticatedUser, $hasPendingTotpVerification);
 		self::registerFeedRoute($Router);
+		self::registerSitemapRoutes($Router);
 		self::registerMcpRoute($Router);
 		self::registerPageRoutes($Router);
 
@@ -127,7 +129,9 @@ class Routes {
 		$reservedUrls = array();
 
 		foreach ($routes as $route) {
-			$url = preg_replace('#^(/[\w\-\_]*).*$#i', '$1', $route['route']);
+			// Escaped file extensions like in "/sitemap\.xml" are kept as part of the reserved URL.
+			$url = preg_replace('#^(/(?:[\w\-]+(?:\\\\\.\w+)?)?).*$#i', '$1', strval($route['route']));
+			$url = str_replace('\.', '.', strval($url));
 
 			if ($url != '/') {
 				$reservedUrls[] = $url;
@@ -380,6 +384,23 @@ class Routes {
 			'/_resize',
 			array(ImageController::class, 'resize'),
 			$isAuthenticatedUser
+		);
+	}
+
+	/**
+	 * Register the sitemap.xml and robots.txt routes.
+	 *
+	 * @param Router $Router
+	 */
+	private static function registerSitemapRoutes(Router $Router): void {
+		$Router->register(
+			'/sitemap\.xml',
+			array(SitemapController::class, 'sitemap')
+		);
+
+		$Router->register(
+			'/robots\.txt',
+			array(SitemapController::class, 'robots')
 		);
 	}
 }
