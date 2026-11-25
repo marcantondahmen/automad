@@ -20,72 +20,26 @@ class ViewTest extends TestCase {
 		$pagesDir = AM_DIR_PAGES;
 		$csrf = Session::getCsrfToken();
 		$dock = <<< HTML
-			<am-inpage-dock
-				csrf="$csrf"
-				api="/index.php/_api"
-				dashboard="/index.php/dashboard"
-				url="/page"
-				state="draft"
-				labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22fieldsCustomizations%22%3A%22Customizations%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22publish%22%3A%22Publish%22%2C%22inPageEditEnable%22%3A%22Enable%20Editing%22%2C%22inPageEditDisable%22%3A%22Disable%20Editing%22%7D"
-				editing="1"
-			></am-inpage-dock>
+			<am-inpage-dock csrf="$csrf" api="/index.php/_api" dashboard="/index.php/dashboard" url="/page" state="draft" labels="%7B%22fieldsSettings%22%3A%22Settings%22%2C%22fieldsContent%22%3A%22Content%22%2C%22fieldsCustomizations%22%3A%22Customizations%22%2C%22uploadedFiles%22%3A%22Files%22%2C%22publish%22%3A%22Publish%22%2C%22inPageEditEnable%22%3A%22Enable%20Editing%22%2C%22inPageEditDisable%22%3A%22Disable%20Editing%22%7D" editing="1"></am-inpage-dock>
 			HTML;
 
 		$templates = array(
 			'email_01' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}
-							{$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head>
-							<body>
-								<a href="#">test</a>
-								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
-								<a href="#">test</a>
-							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags} {$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head> <body> <a href="#">test</a> <a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a> <a href="#">test</a> $dock{$assets->mailJS}{$custom->bodyEnd}</body> </html>
 						HTML,
 			'email_02' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}
-							{$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head>
-							<body>
-								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
-									<span></span>
-									test<span class="am-at"></span>test<span class="am-dot"></span>com
-								</a>
-							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags} {$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head> <body> <a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421"> <span></span> test<span class="am-at"></span>test<span class="am-dot"></span>com </a> $dock{$assets->mailJS}{$custom->bodyEnd}</body> </html>
 						HTML,
 			'email_03' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}
-							{$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head>
-							<body>
-								<pre class="line-numbers"><code>
+						<html lang="en"> <head>{$metaTags} {$assets->inPageCSS}{$assets->inPageJS}{$assets->mailCSS}{$custom->head}</head> <body> <pre class="line-numbers"><code>
 									git config user.email test@test.com
-								</code></pre>
-								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a>
-								<input type="email" placeholder="test@test.com">
-								<textarea placeholder="test@test.com"></textarea>
-							$dock{$assets->mailJS}{$custom->bodyEnd}</body>
-						</html>
+								</code></pre> <a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a> <input type="email" placeholder="test@test.com"> <textarea placeholder="test@test.com"></textarea> $dock{$assets->mailJS}{$custom->bodyEnd}</body> </html>
 						HTML,
 			'resolve_01' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}{$assets->inPageCSS}{$assets->inPageJS}{$custom->head}</head>
-							<body>
-								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
-								<a href="/index.php/page/test">Test</a>
-							$dock{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags}{$assets->inPageCSS}{$assets->inPageJS}{$custom->head}</head> <body> <img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w"> <a href="/index.php/page/test">Test</a> $dock{$custom->bodyEnd}</body> </html>
 						HTML,
 			'resolve_02' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}{$assets->inPageCSS}{$assets->inPageJS}{$custom->head}</head>
-							<body>
-								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
-								<a href="/index.php/page/test">Test</a>
-							$dock{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags}{$assets->inPageCSS}{$assets->inPageJS}{$custom->head}</head> <body> <img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w"> <a href="/index.php/page/test">Test</a> $dock{$custom->bodyEnd}</body> </html>
 						HTML
 		);
 
@@ -108,33 +62,15 @@ class ViewTest extends TestCase {
 
 		$templates = array(
 			'block_assets_01' => <<<HTML
-						<html lang="en">
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
-							{$custom->head}</head>
-							<body>
-								<div class="am-block some-class">Test</div>
-							{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS} {$custom->head}</head> <body> <div class="am-block some-class">Test</div> {$custom->bodyEnd}</body> </html>
 						HTML,
 			'block_assets_02' => <<<HTML
-						<html lang="en">
-							<head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS}
-							{$custom->head}</head>
-							<body>
-								<div class="some-class am-block">Test</div>
-							{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags}{$assets->blocksCSS}{$assets->blocksJS} {$custom->head}</head> <body> <div class="some-class am-block">Test</div> {$custom->bodyEnd}</body> </html>
 						HTML,
 			'comments_01' => 'Page',
 			'components_01' => '<div class="am-block"><p class="am-block">Component test</p></div>',
 			'consent_check_01' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}{$assets->consentCSS}{$assets->consentJS}
-							{$custom->head}</head>
-							<body>
-								<am-consent type="script">Y29uc29sZS5sb2coJ0hlbGxvJyk7</am-consent>
-							{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags}{$assets->consentCSS}{$assets->consentJS} {$custom->head}</head> <body> <am-consent type="script">Y29uc29sZS5sb2coJ0hlbGxvJyk7</am-consent> {$custom->bodyEnd}</body> </html>
 						HTML,
 			'custom_function_01' => '{"text":"Hello"}',
 			'custom_function_02' => 'Hello',
@@ -142,51 +78,19 @@ class ViewTest extends TestCase {
 			'custom_function_04' => 'derived',
 			'custom_function_05' => 'derived by user',
 			'email_01' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}
-							{$assets->mailCSS}{$custom->head}</head>
-							<body>
-								<a href="#">test</a>
-								<a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a>
-								<a href="#">test</a>
-							{$assets->mailJS}{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags} {$assets->mailCSS}{$custom->head}</head> <body> <a href="#">test</a> <a href="#" data-eml="N2UzMDA3ZWRDAEBEHkMAF0NIR1VDQyUQUhZHHkRSFhAaEVZDRBkGC1o=" data-key="7e3007ed">test<span class="am-dot"></span>test-test<span class="am-at"></span>test<span class="am-dot"></span>test-test<span class="am-dot"></span>com</a> <a href="#">test</a> {$assets->mailJS}{$custom->bodyEnd}</body> </html>
 						HTML,
 			'email_02' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}
-							{$assets->mailCSS}{$custom->head}</head>
-							<body>
-								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">
-									<span></span>
-									test<span class="am-at"></span>test<span class="am-dot"></span>com
-								</a>
-							{$assets->mailJS}{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags} {$assets->mailCSS}{$custom->head}</head> <body> <a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421"> <span></span> test<span class="am-at"></span>test<span class="am-dot"></span>com </a> {$assets->mailJS}{$custom->bodyEnd}</body> </html>
 						HTML,
 			'email_03' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}
-							{$assets->mailCSS}{$custom->head}</head>
-							<body>
-								<pre class="line-numbers"><code>
+						<html lang="en"> <head>{$metaTags} {$assets->mailCSS}{$custom->head}</head> <body> <pre class="line-numbers"><code>
 									git config user.email test@test.com
-								</code></pre>
-								<a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a>
-								<input type="email" placeholder="test@test.com">
-								<textarea placeholder="test@test.com"></textarea>
-							{$assets->mailJS}{$custom->bodyEnd}</body>
-						</html>
+								</code></pre> <a href="#" data-eml="YjY0MmI0MjEWU0dGIkBXQhYYV10P" data-key="b642b421">test<span class="am-at"></span>test<span class="am-dot"></span>com</a> <input type="email" placeholder="test@test.com"> <textarea placeholder="test@test.com"></textarea> {$assets->mailJS}{$custom->bodyEnd}</body> </html>
 						HTML,
 			'extension_01' => 'Test',
 			'extension_02' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}
-							{$assets->extensionCSS}{$assets->extensionJS}{$custom->head}</head>
-							<body>
-								Asset Test
-							{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags} {$assets->extensionCSS}{$assets->extensionJS}{$custom->head}</head> <body> Asset Test {$custom->bodyEnd}</body> </html>
 						HTML,
 			'falsy' => '0//false/0/1',
 			'find_first_image_01' => '/shared/image.png',
@@ -229,22 +133,10 @@ class ViewTest extends TestCase {
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'resolve_01' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}{$custom->head}</head>
-							<body>
-								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
-								<a href="/index.php/page/test">Test</a>
-							{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags}{$custom->head}</head> <body> <img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w"> <a href="/index.php/page/test">Test</a> {$custom->bodyEnd}</body> </html>
 						HTML,
 			'resolve_02' => <<< HTML
-						<html lang="en">
-							<head>{$metaTags}{$custom->head}</head>
-							<body>
-								<img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w">
-								<a href="/index.php/page/test">Test</a>
-							{$custom->bodyEnd}</body>
-						</html>
+						<html lang="en"> <head>{$metaTags}{$custom->head}</head> <body> <img src="$pagesDir/page-slug/image.jpg" srcset="$pagesDir/page-slug/image.jpg 500w, $pagesDir/page-slug/image_large.jpg 1200w"> <a href="/index.php/page/test">Test</a> {$custom->bodyEnd}</body> </html>
 						HTML,
 			'runtime_01' => '1. /automad/tests/main/data/page-slug/empty.css',
 			'session_01' => 'Session Test',

@@ -44,6 +44,7 @@ use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Document\Body;
 use Automad\Engine\Document\Head;
+use Automad\Engine\Document\Minify;
 use Automad\System\Fields;
 use Automad\System\FileSystem;
 use Automad\System\FileUtils;
@@ -110,7 +111,8 @@ class PostProcessor {
 		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 
-		return $output;
+		// Keep the output readable for debugging.
+		return AM_DEBUG_ENABLED ? $output : Minify::html($output);
 	}
 
 	/**
